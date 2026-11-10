@@ -1,0 +1,7 @@
+title: Kolmogorov complexity
+area: randomness
+level: Intermediate
+order: 1
+status: planned
+prerequisites: [fundamentals]
+summary: The length of the shortest description of a string, prefix-free machines, and incompressibility.

@@ -1,0 +1,7 @@
+title: Computable ordinals
+area: higher
+level: Advanced
+order: 1
+status: planned
+prerequisites: [arithmetic-hierarchy]
+summary: Well-orders, ordinal notations and the Church–Kleene ordinal ω₁ᶜᵏ.

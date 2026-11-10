@@ -1,0 +1,19 @@
+title: Fundamentals of computability
+area: computability
+level: Introductory
+order: 3
+prerequisites: [models-of-computation, countability]
+summary: Programs as numbers, the universal machine, the halting problem, c.e. sets and Kleene's recursion theorem.
+description: >
+  The basic results of computability theory, based on an acceptable numbering of
+  the partial computable functions: universal function, SMN theorem, halting
+  problem, computably enumerable sets, Kleene's recursion theorem and Rice's
+  theorem.
+objectives:
+  - Use the notation Φₑ(x)↓ fluently
+  - Apply the SMN theorem and the universal program
+  - Prove that the halting problem is undecidable
+  - Characterize computably enumerable sets in several ways
+  - Use Kleene's fixed point theorem to build self-referential programs
+  - Prove Rice's theorem
+lessons: [programs-as-numbers, universal-program-smn, halting-problem, ce-sets, fixed-point, rice-theorem]

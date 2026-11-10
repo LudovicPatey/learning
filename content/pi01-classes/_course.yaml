@@ -1,0 +1,7 @@
+title: Π⁰₁ classes
+area: computability
+level: Intermediate
+order: 7
+status: planned
+prerequisites: [turing-degrees]
+summary: Computable trees, König's lemma, PA degrees and the low basis theorem.

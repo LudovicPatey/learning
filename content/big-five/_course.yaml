@@ -1,0 +1,7 @@
+title: The Big Five
+area: reverse-math
+level: Advanced
+order: 2
+status: planned
+prerequisites: [second-order-arithmetic, pi01-classes]
+summary: WKL₀, ACA₀, ATR₀ and Π¹₁-CA₀ — and the theorems equivalent to each.

@@ -1,0 +1,37 @@
+title: Models of computation
+area: computability
+level: Introductory
+order: 1
+summary: Turing machines, register machines, partial recursive functions and the λ-calculus, and the equivalence of these models.
+description: >
+  The classical formalizations of the notion of computable function. The course
+  defines Turing machines, unlimited register machines, LOOP and WHILE programs,
+  primitive and partial recursive functions and the λ-calculus, develops each
+  model far enough to program non-trivial functions in it, and proves that all
+  of them compute the same partial functions. It closes with Kleene's normal form
+  theorem and a discussion of the Church–Turing thesis. Primitive recursive
+  coding of finite sequences, introduced along the way, is used throughout the
+  rest of the curriculum.
+objectives:
+  - State precisely the definitions of each model, including input and output conventions
+  - Write and verify Turing machines, URM programs and WHILE programs for simple functions
+  - Prove that a function is primitive recursive using the standard closure properties
+  - Code finite sequences of integers primitive recursively
+  - Prove that the Ackermann function is not primitive recursive
+  - Characterize the primitive recursive functions as the LOOP-computable functions
+  - Define arithmetic, data structures and recursion in the pure λ-calculus
+  - Prove the equivalence of the models and Kleene's normal form theorem
+lessons:
+  - what-is-an-algorithm
+  - turing-machines
+  - programming-turing-machines
+  - register-machines
+  - primitive-recursion
+  - coding-sequences
+  - ackermann-function
+  - mu-recursion
+  - while-programs
+  - lambda-calculus
+  - lambda-definability
+  - equivalence-of-models
+  - church-turing-thesis

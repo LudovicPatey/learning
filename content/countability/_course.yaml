@@ -1,0 +1,15 @@
+title: Countability and diagonalization
+area: computability
+level: Introductory
+order: 2
+summary: Cardinality of infinite sets, the Cantor–Bernstein theorem, countable sets and diagonalization.
+description: >
+  Comparison of infinite sets by injections and bijections, the Cantor–Bernstein
+  theorem, countable sets, and Cantor's diagonal argument, which is a central
+  proof technique of computability theory.
+objectives:
+  - Compare infinite sets using injections and bijections
+  - Prove the Cantor–Bernstein theorem
+  - Show that ℕ × ℕ, ℚ and the finite strings are countable
+  - Run a diagonal argument to show that 2^ℕ is uncountable
+lessons: [equipotence, cantor-bernstein, countable-sets, diagonal-argument]

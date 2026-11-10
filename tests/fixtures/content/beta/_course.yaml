@@ -1,0 +1,6 @@
+title: Beta
+area: logic
+order: 2
+prerequisites: [alpha]
+summary: Second test course.
+lessons: [three]

@@ -1,0 +1,7 @@
+title: Second-order arithmetic
+area: reverse-math
+level: Intermediate
+order: 1
+status: planned
+prerequisites: [arithmetic-hierarchy]
+summary: The language and models of second-order arithmetic, and the base system RCA₀.

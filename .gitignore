@@ -1,0 +1,13 @@
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+data/*.db*
+.env
+.env.local
+.DS_Store
+.env*.local
+coverage/
+
+# Sources of the reference book (Monin & Patey): kept locally, not versioned.
+external-data/

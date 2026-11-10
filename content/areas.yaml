@@ -1,0 +1,16 @@
+- id: computability
+  title: Computability theory
+  description: What can be computed, what cannot, and how unsolvable problems compare.
+  color: "#4f46e5"
+- id: randomness
+  title: Algorithmic randomness
+  description: Randomness of individual infinite sequences, through tests, compressibility and betting.
+  color: "#0d9488"
+- id: reverse-math
+  title: Reverse mathematics
+  description: Which axioms are needed to prove the theorems of ordinary mathematics?
+  color: "#d97706"
+- id: higher
+  title: Higher computability
+  description: Computability along computable ordinals, and beyond the arithmetic.
+  color: "#db2777"

@@ -1,0 +1,7 @@
+title: Oracles and Turing degrees
+area: computability
+level: Intermediate
+order: 4
+status: planned
+prerequisites: [fundamentals]
+summary: Computing relative to an oracle, Turing reducibility, the jump operator and limit computability.

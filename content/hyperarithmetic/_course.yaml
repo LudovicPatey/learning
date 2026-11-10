@@ -1,0 +1,7 @@
+title: Hyperarithmetic sets
+area: higher
+level: Advanced
+order: 2
+status: planned
+prerequisites: [computable-ordinals]
+summary: Iterating the jump along computable ordinals, and Π¹₁ sets.

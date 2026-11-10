@@ -1,0 +1,76 @@
+// KaTeX versions of the macros from the book's preamble (computabiliy.tex),
+// so that LaTeX math can be pasted from the book sources unchanged.
+export const katexMacros: Record<string, string> = {
+  // Number sets
+  "\\nat": "\\mathbb{N}",
+  "\\NN": "\\mathbb{N}",
+  "\\ZZ": "\\mathbb{Z}",
+  "\\QQ": "\\mathbb{Q}",
+  "\\RR": "\\mathbb{R}",
+  "\\CC": "\\mathbb{C}",
+  // Strings and spaces
+  "\\bstr": "2^{<\\mathbb{N}}",
+  "\\str": "\\mathbb{N}^{<\\mathbb{N}}",
+  "\\cs": "2^{\\mathbb{N}}",
+  "\\bs": "\\mathbb{N}^{\\mathbb{N}}",
+  "\\cat": "{}^\\frown",
+  "\\uh": "\\!\\upharpoonright",
+  "\\rest": "\\!\\upharpoonright_{#1}",
+  "\\rrest": "\\!\\upharpoonleft_{#1}",
+  // Computations
+  "\\converge": "\\!\\!\\downarrow",
+  "\\diverge": "\\!\\!\\uparrow",
+  "\\halt": "\\emptyset",
+  "\\hp": "\\emptyset",
+  "\\Tur": "\\mathrm{T}",
+  "\\wck": "\\omega_1^{\\mathrm{ck}}",
+  "\\dom": "\\operatorname{dom}",
+  "\\use": "\\operatorname{use}",
+  "\\stem": "\\operatorname{stem}",
+  "\\suc": "\\operatorname{succ}",
+  "\\force": "\\Vdash",
+  "\\nforce": "\\nVdash",
+  "\\symdiff": "\\mathbin{\\vartriangle}",
+  "\\notinn": "\\notin",
+  "\\sucht": ":",
+  "\\seq": "\\{#1\\}",
+  "\\Then": "\\,\\Longrightarrow\\,",
+  "\\cond": "\\left\\{\\begin{array}{ll} #1 \\end{array}\\right.",
+  "\\s": "\\sigma",
+  "\\demi": "\\kern0.5pt",
+  "\\zemi": "\\kern-0.5pt",
+  "\\pnt": ".",
+  "\\virg": ",",
+  "\\dotminus": "\\mathbin{\\dot{-}}",
+  // Calligraphic letters
+  "\\A": "\\mathcal{A}", "\\B": "\\mathcal{B}", "\\C": "\\mathcal{C}", "\\D": "\\mathcal{D}",
+  "\\E": "\\mathcal{E}", "\\F": "\\mathcal{F}", "\\G": "\\mathcal{G}", "\\I": "\\mathcal{I}",
+  "\\M": "\\mathcal{M}", "\\N": "\\mathcal{N}", "\\O": "\\mathcal{O}", "\\Q": "\\mathcal{Q}",
+  "\\R": "\\mathcal{R}", "\\T": "\\mathcal{T}", "\\U": "\\mathcal{U}", "\\V": "\\mathcal{V}",
+  "\\W": "\\mathcal{W}", "\\X": "\\mathcal{X}",
+  // Degrees
+  "\\abf": "\\mathbf{a}", "\\bbf": "\\mathbf{b}", "\\cbf": "\\mathbf{c}", "\\dbf": "\\mathbf{d}",
+  "\\obf": "\\mathbf{0}",
+  // Reverse mathematics
+  "\\RCA": "\\mathsf{RCA}",
+  "\\ACA": "\\mathsf{ACA}",
+  "\\WKL": "\\mathsf{WKL}",
+  "\\WWKL": "\\mathsf{WWKL}",
+  "\\ATR": "\\mathsf{ATR}",
+  "\\PIOOCA": "\\Pi^1_1\\text{-}\\mathsf{CA}",
+  "\\RT": "\\mathsf{RT}",
+  "\\COH": "\\mathsf{COH}",
+  "\\SRT": "\\mathsf{SRT}",
+  "\\ADS": "\\mathsf{ADS}",
+  "\\EM": "\\mathsf{EM}",
+  "\\ISig": "\\mathsf{I}\\Sigma^0",
+  "\\IPi": "\\mathsf{I}\\Pi^0",
+  "\\BSig": "\\mathsf{B}\\Sigma^0",
+  "\\PA": "\\mathsf{PA}",
+  "\\PRA": "\\mathsf{PRA}",
+};
+
+/** KaTeX mutates the macro table on \gdef, so always hand it a fresh copy. */
+export function macros(): Record<string, string> {
+  return { ...katexMacros };
+}

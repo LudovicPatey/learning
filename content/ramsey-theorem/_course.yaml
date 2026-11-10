@@ -1,0 +1,7 @@
+title: Ramsey's theorem for pairs
+area: reverse-math
+level: Advanced
+order: 3
+status: planned
+prerequisites: [big-five]
+summary: The computability-theoretic analysis of Ramsey's theorem, cohesiveness and stable colorings.
