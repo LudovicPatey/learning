@@ -2,12 +2,19 @@ title: Cohen genericity
 area: computability
 level: Advanced
 order: 8
-status: planned
 prerequisites: [turing-degrees, arithmetic-hierarchy]
-summary: Effective forcing with finite strings; n-generic sets, their degrees and their jumps.
+summary: Effective forcing with finite strings; weakly generic and n-generic sets, their degrees and their jumps.
 description: >
-  Cohen forcing in its effective form: forcing conditions as finite strings,
-  the forcing relation for arithmetic formulas, n-generic and weakly n-generic
-  sets, and the computational properties of generic sets — their jumps, the
-  cones they avoid, and the typical behavior of sets in the sense of Baire
-  category.
+  Cohen forcing in its effective form: dense sets of strings and Baire category,
+  weakly 1-generic sets and Kurtz's characterization of the hyperimmune degrees,
+  forcing of Σ⁰₁ properties and the degrees of 1-generic sets, coding into generic
+  sets (the Posner–Robinson and Friedberg jump inversion theorems), and n-generic
+  sets with their jumps.
+objectives:
+  - Relate genericity for countable families of dense sets to co-meager classes
+  - Prove Kurtz's theorem on weakly 1-generic sets and hyperimmune degrees
+  - Use forcing with strings to decide Σ⁰₁ and Σ⁰ₙ properties
+  - Show that 1-generic sets compute no DNC function and avoid cones
+  - Prove the Posner–Robinson and Friedberg jump inversion theorems
+  - Compute the jumps of n-generic sets
+lessons: [baire-category, weak-genericity, one-genericity, posner-robinson, n-genericity]

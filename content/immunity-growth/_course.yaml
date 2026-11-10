@@ -2,11 +2,19 @@ title: Immunity and growth of functions
 area: computability
 level: Advanced
 order: 9
-status: planned
 prerequisites: [turing-degrees, pi01-classes]
-summary: Immune and hyperimmune sets, dominating and diagonally non-computable functions, and the degrees they define.
+summary: Immune and hyperimmune sets, computably dominated degrees, diagonally non-computable functions, and dominant functions.
 description: >
-  Weakness and strength measured by the growth of functions: immune and
-  hyperimmune sets, hyperimmune degrees and the Miller–Martin theorem,
-  dominating functions and Martin's characterization of high degrees, and
-  diagonally non-computable functions.
+  Weakness and strength measured by the growth of functions: immune, hyperimmune
+  and hypersimple sets, computably dominated degrees and truth-table reducibility,
+  diagonally non-computable and fixed-point free functions with Arslanov's
+  completeness criterion, and Martin's characterization of the high degrees by
+  dominant functions.
+objectives:
+  - Characterize hyperimmune sets by the growth of their principal functions
+  - Construct hypersimple sets in every non-zero c.e. degree
+  - Build computably dominated sets with function trees
+  - Relate computable domination to truth-table reducibility
+  - Prove the equivalence of DNC, fixed-point free and effectively immune degrees
+  - Prove Arslanov's completeness criterion and Martin's domination theorem
+lessons: [immune-sets, computably-dominated, dnc-functions, domination]
