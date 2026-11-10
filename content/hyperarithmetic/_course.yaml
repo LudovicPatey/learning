@@ -2,6 +2,17 @@ title: Hyperarithmetic sets
 area: higher
 level: Advanced
 order: 2
-status: planned
 prerequisites: [computable-ordinals]
-summary: Iterating the jump along computable ordinals, and Π¹₁ sets.
+summary: Iterating the jump along computable ordinals, Kleene's theorem Δ¹₁ = HYP, and Σ¹₁ classes.
+description: >
+  The hyperarithmetic sets, obtained by iterating the Turing jump along Kleene's
+  notations: the H-sets and Spector's uniqueness theorem, the uniform Δ¹₁
+  definitions of the H-sets, Kleene's theorem that the hyperarithmetic sets are
+  exactly the Δ¹₁ sets, computable trees without hyperarithmetic paths, the
+  Kleene basis theorem, and Harrison's pseudo-well-orderings.
+objectives:
+  - Define the H-sets and the hyperarithmetic sets
+  - Show that the H-sets are uniformly Δ¹₁ along O
+  - Prove Kleene's theorem using Spector's boundedness theorem
+  - Build computable trees without hyperarithmetic paths and Harrison orders
+lessons: [h-sets, kleene-theorem, sigma11-classes]

@@ -2,6 +2,18 @@ title: Computable ordinals
 area: higher
 level: Advanced
 order: 1
-status: planned
-prerequisites: [arithmetic-hierarchy]
-summary: Well-orders, ordinal notations and the Church–Kleene ordinal ω₁ᶜᵏ.
+prerequisites: [arithmetic-hierarchy, fundamentals]
+summary: Well-orders, ordinal notations, the Church–Kleene ordinal ω₁ᶜᵏ, well-founded trees and Π¹₁ sets.
+description: >
+  The ordinals that can be described effectively: well-orderings and ordinals,
+  computable well-orderings and Kleene's system of notations O, the
+  Markwald–Kleene theorem, well-founded trees and the Kleene–Brouwer ordering,
+  the normal form and completeness of Π¹₁ sets, and Spector's boundedness
+  theorem.
+objectives:
+  - Manipulate well-orderings, ordinals and transfinite recursion
+  - Define Kleene's O and compute with notations using the recursion theorem
+  - Prove that constructive and computable ordinals coincide
+  - Prove the normal form theorem for Π¹₁ sets and the Π¹₁-completeness of WO
+  - Prove and apply Spector's boundedness theorem
+lessons: [ordinals, kleene-o, trees-and-pi11]
