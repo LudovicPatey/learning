@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getCatalog } from "@/lib/content";
 import { LessonPage } from "@/components/pages/LessonPage";
 
-export const dynamicParams = false;
+// Unknown parameters are rendered on demand and answered with a 404 by the page.
 
 export function generateStaticParams() {
   return [...getCatalog().lessons.values()].map((l) => ({ course: l.course, lesson: l.slug }));

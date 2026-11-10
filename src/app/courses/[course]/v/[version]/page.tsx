@@ -3,7 +3,7 @@ import { getCourse } from "@/lib/content";
 import { allVersions } from "@/lib/versions";
 import { CoursePage } from "@/components/pages/CoursePage";
 
-export const dynamicParams = false;
+// Unknown parameters are rendered on demand and answered with a 404 by the page.
 
 export function generateStaticParams() {
   return allVersions().map((v) => ({ course: v.course, version: v.version }));

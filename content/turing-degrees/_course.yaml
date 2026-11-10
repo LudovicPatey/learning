@@ -2,6 +2,19 @@ title: Oracles and Turing degrees
 area: computability
 level: Intermediate
 order: 4
-status: planned
 prerequisites: [fundamentals]
-summary: Computing relative to an oracle, Turing reducibility, the jump operator and limit computability.
+summary: Computation relative to an oracle, Turing reducibility and degrees, the jump, limit computability, the finite extension method, and low and high sets.
+description: >
+  Oracle machines and the use principle, Turing reducibility and the upper
+  semilattice of Turing degrees, the Turing jump and its iterates, Shoenfield's
+  limit lemma and the sets computable in the halting problem, constructions by
+  finite extensions (incomparable degrees, cone avoidance, 1-generic sets), and
+  the low and high sets.
+objectives:
+  - Define computations relative to an oracle, and use the use principle
+  - Relativize the results of the course on fundamentals, uniformly in the oracle
+  - Prove the basic properties of the Turing jump
+  - Characterize the sets computable in the halting problem by limit approximations
+  - Build sets with prescribed properties by finite extensions
+  - Construct non-computable low sets and incomplete high sets
+lessons: [oracle-computation, turing-reducibility, turing-jump, limit-computability, finite-extensions, low-and-high]
