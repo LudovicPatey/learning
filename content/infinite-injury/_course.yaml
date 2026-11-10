@@ -1,0 +1,21 @@
+title: Infinite injury priority arguments
+area: computability
+level: Advanced
+order: 11
+prerequisites: [ce-degrees, arithmetic-hierarchy]
+summary: Minimal pairs of c.e. degrees and a high incomplete c.e. degree, by priority arguments on trees of strategies.
+description: >
+  Finite injury arguments fail when a requirement must act infinitely often.
+  The course presents the infinite injury method on two theorems: the
+  minimal pair theorem of Lachlan and Yates, with Posner's trick and the
+  preservation of agreement between expansionary stages, and Sacks' theorem
+  that there is a high incomplete c.e. degree, in which the infinitary
+  strategies enumerate infinitely many numbers. Both constructions are
+  organized on a tree of strategies and verified along the true path.
+objectives:
+  - Reduce the minimal pair requirements to one functional with Posner's trick
+  - Prove that agreement is preserved when only one side changes between expansionary stages
+  - Define a tree of strategies, its priority order and its true path
+  - Verify an infinite injury construction along the true path
+  - Build a high incomplete c.e. set by coding Inf into its columns
+lessons: [minimal-pairs, trees-of-strategies, high-incomplete]
