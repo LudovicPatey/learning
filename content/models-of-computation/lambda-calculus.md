@@ -93,6 +93,8 @@ What is $(\lambda x.\, x\, y)[z/x]$?
 
   $x$ is bound in this term: there is no free occurrence to replace.
 - [ ] $\lambda x.\, z\, y$.
+
+  The variable $x$ is bound in $\lambda x.\, x\, y$, and substitution only replaces free occurrences; the term is unchanged.
 - [ ] $\lambda x.\, x\, z$.
 
   Only free occurrences of $x$ are replaced, and $y$ is not affected at all.
@@ -177,6 +179,8 @@ Why does the proof go through parallel reduction rather than proving the diamond
 
   For instance, in $(\lambda x.\, x\, x)(\mathsf{I}\, y)$, contracting the outer redex yields two copies of $\mathsf{I}\, y$.
 - [ ] Because $\to_\beta$ is not compatible with abstraction.
+
+  $\to_\beta$ is compatible with abstraction by definition: it is the compatible closure of the contraction of redexes.
 - [ ] Because $\to_\beta$ is not transitive.
 
   Non-transitivity is irrelevant; the issue is duplication.
@@ -204,7 +208,11 @@ What does applicative order do on $\mathsf{K}\, \mathsf{I}\, \Omega$?
 
   Normal order reduces $\mathsf{K}\, \mathsf{I}\, \Omega \to (\lambda y.\, \mathsf{I})\, \Omega \to \mathsf{I}$ in two steps.
 - [ ] It returns $\mathsf{I}$.
+
+  $\mathsf K\, \mathsf I\, \Omega$ has the normal form $\mathsf I$, reached in normal order; applicative order never gets there, since it first reduces $\Omega$.
 - [ ] It returns $\Omega$.
+
+  $\Omega$ is the argument that is discarded by $\mathsf K\, \mathsf I$; no strategy returns it, and applicative order does not terminate.
 :::
 
 :::remark[η-conversion]

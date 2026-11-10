@@ -67,6 +67,8 @@ In the satisfaction of $\mathcal R_e$, why is the position $x$ chosen as $|\tau_
 
   At positions below $|\tau_n|$, the bit of $B$ is already fixed, and $\Phi^A_e(x)$ may agree with it.
 - [ ] Because $\Phi^A_e$ is only defined at $|\tau_n|$.
+
+  $\Phi^A_e$ is a partial function defined on any inputs; the position is chosen because $B$ is still free there.
 - [ ] To make the construction computable.
 
   The choice of $x$ is computable in any case; the point is the freedom on $B(x)$.

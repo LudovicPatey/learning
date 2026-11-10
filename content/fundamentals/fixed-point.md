@@ -50,6 +50,8 @@ Where does the proof use that $f$ is total?
 
   If $f$ were partial, the same argument shows: if $f(e)\converge$, then $\Phi_{f(e)} = \Phi_e$, for $e = d(v)$.
 - [ ] To show that $d$ is total.
+
+  $d$ is obtained from the SMN theorem alone and does not involve $f$; it is total whatever $f$ is.
 - [ ] To apply the SMN theorem.
 
   SMN applies to all partial computable functions.
@@ -65,6 +67,8 @@ Which index is the fixed point?
 
   $\Phi_v = f \circ d$ is a total function with values indices, unrelated in general to $\Phi_{f(v)}$.
 - [ ] $f(v)$.
+
+  $f(v)$ is the image of $v$, which is in general unrelated to the function $\Phi_v = f \circ d$; the fixed point is $d(v)$.
 :::
 
 :::corollary{#cor-self-reference}

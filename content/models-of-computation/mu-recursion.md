@@ -155,6 +155,8 @@ How many applications of the minimization operator are needed to define any part
 
 - [x] One.
 - [ ] As many as in some given definition of the function.
+
+  The normal form theorem gives a single minimization for every partial recursive function, whatever the number used in a given definition.
 - [ ] None, since $T_k$ and $U$ are primitive recursive.
 
   Without minimization only total functions can be defined.

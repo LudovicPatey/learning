@@ -181,6 +181,8 @@ Why is it useful that $S^m_n$ is computable rather than only $X$-computable?
 
   An $X$-computable function may well be total.
 - [ ] It makes no difference.
+
+  It matters when computations relative to different oracles are compared, for instance to show that the jump is monotone.
 :::
 
 ## Oracles that are functions

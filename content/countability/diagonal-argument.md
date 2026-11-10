@@ -58,6 +58,8 @@ Can the argument be defeated by adding $Y$ to the list, for instance as $X'_0 = 
 
   The argument applies to every list, so no modification of a list can make it complete.
 - [ ] Yes, which shows that $\cs$ is countable.
+
+  The new list is again a sequence of elements of $\cs$, and the theorem produces an element missing from it; no list is complete.
 - [ ] Only if $Y$ is equal to some $X_n$.
 
   By construction it is equal to none of them.
@@ -160,6 +162,8 @@ How does this proof relate to the diagonal argument, when $A = \nat$?
 
   $D$ is the sequence $Y$ of the diagonal argument, seen as a set.
 - [ ] $D$ corresponds to the first row of the table.
+
+  $D$ corresponds to the diagonal sequence $Y$, built from all the rows, not to any single row.
 - [ ] They are unrelated arguments; the second uses the axiom of choice.
 
   Neither proof uses the axiom of choice: $D$ is defined explicitly from $f$.

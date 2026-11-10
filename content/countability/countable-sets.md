@@ -146,11 +146,17 @@ Why does the proof list the pairs diagonal by diagonal rather than row by row, $
 What is $\langle 0, 3 \rangle$?
 
 - [ ] $3$
+
+  $3 = \langle 2, 0 \rangle$ is the position of the first pair of the diagonal $x + y = 2$.
 - [ ] $6$
+
+  $6 = \langle 3, 0 \rangle$ is the first pair of the diagonal $x + y = 3$; the pair $(0, 3)$ is the last one.
 - [x] $9$
 
   The diagonal $x + y = 3$ starts at position $3 \cdot 4/2 = 6$ and lists $(3,0), (2,1), (1,2), (0,3)$ at positions $6, 7, 8, 9$.
 - [ ] $10$
+
+  $10 = \langle 4, 0 \rangle$ is the first pair of the next diagonal.
 :::
 
 :::corollary{#cor-product-countable}

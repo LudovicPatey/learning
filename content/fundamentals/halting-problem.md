@@ -44,6 +44,8 @@ Where is the hypothesis "$\emptyset'$ is computable" used?
   Every partial computable function has an index. The issue is whether $D$ is partial computable with the required behavior.
 - [ ] It is not used.
 
+  It is used: without it, the test in $D$ could diverge, and $D$ would not halt on the inputs $x$ with $\Phi_x(x)\diverge$.
+
 ---
 
 Why is the equivalence $\Phi_d(x)\converge \iff \Phi_x(x)\diverge$ applied with $x = d$?

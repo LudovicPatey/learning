@@ -113,6 +113,8 @@ Is the set $X \cup Y$ an upper bound of $\deg_T(X)$ and $\deg_T(Y)$?
 
   The join keeps the two sets apart, on the even and odd positions.
 - [ ] Yes, and it is Turing equivalent to $X \oplus Y$.
+
+  $X \cup Y$ need not compute $X$ or $Y$, and for $Y = \nat \setminus X$ it is computable, while $X \oplus Y \equiv_T X$.
 :::
 
 ## Relative enumerability

@@ -128,6 +128,8 @@ The proof of :ref{#prop-pr-cases} evaluates every $g_i(\vec x)$, including those
 
   This ensures that the sum has a single non-zero term, but it does not prevent the other terms from being undefined.
 - [ ] Because multiplication by $0$ is not primitive recursive.
+
+  Multiplication is primitive recursive, and so is multiplication by $0$; the point is that all the $g_i(\vec x)$ are defined.
 :::
 
 ## Bounded sums, products and quantifiers
@@ -188,6 +190,8 @@ In the proof of :ref{#prop-pr-bounded-mu}, what does the term of the sum indexed
 
   That would be $\chi_P(\vec x, v)$; summing it would count the witnesses, not locate the first one.
 - [ ] That $v$ is the least witness.
+
+  The term indexed by $v$ is $1$ for every $v$ below the least witness, not only at the least witness; the sum counts these $v$.
 
 ---
 

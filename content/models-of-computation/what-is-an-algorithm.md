@@ -134,6 +134,8 @@ In the injectivity part of the proof, why is it important that $y \leq n$?
 
   That is used in the surjectivity part, when defining $x = n - y$.
 - [ ] It is not used.
+
+  It is used: it gives $T(n) \leq z < T(n+1)$, which is what determines $n$ from $z$.
 :::
 
 Iterating the pairing function codes tuples of any fixed length: $\langle x_1, x_2, x_3 \rangle = \langle x_1, \langle x_2, x_3 \rangle \rangle$, and in general $\langle x_1, \dots, x_{k+1} \rangle = \langle x_1, \langle x_2, \dots, x_{k+1} \rangle \rangle$. For each $k \geq 1$ this gives a bijection $\nat^k \to \nat$. Finite sequences of arbitrary length require a little more care, since the length must be recoverable from the code; this is done in the lesson :ref{to="models-of-computation/coding-sequences"}.

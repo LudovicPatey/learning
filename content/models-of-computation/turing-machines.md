@@ -154,6 +154,8 @@ Suppose we had represented $x$ by $x$ ones instead of $x + 1$. What would go wro
 
   For instance, the inputs $(1)$, $(1, 0)$ and $(1, 0, 0)$ would all give the tape with a single $1$ on cell $0$, and $(0, 0)$ would give the blank tape. A machine scanning the tape could not tell where the input ends.
 - [ ] Nothing: unary with $x$ ones works equally well for several arguments.
+
+  With $x$ ones, the number $0$ would be written as an empty block, and inputs such as $(1)$ and $(1, 0)$ would give the same tape.
 - [ ] The successor machine would no longer be correct.
 
   The successor machine can be adapted; the issue is the representation of tuples.

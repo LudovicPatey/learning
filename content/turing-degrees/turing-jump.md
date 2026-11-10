@@ -60,6 +60,8 @@ In item 2, why must the function $f$ be computable, and not only $X$-computable?
 
   The relativized SMN theorem provides such an $f$, since it never consults the oracle.
 - [ ] Because $X$-computable functions are not total.
+
+  An $X$-computable function may well be total; the point is uniformity in $X$ and the one-one reduction.
 - [ ] It does not matter: an $X$-computable reduction would give the same results.
 
   An $X$-computable reduction would show $W^X_a \leq_T X'$, but not $W^X_a \leq_1 X'$, and the uniformity in $X$ would be lost.

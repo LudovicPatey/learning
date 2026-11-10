@@ -38,6 +38,8 @@ Pick all.
 - [x] B
 - [ ] C
 
+  Not C.
+
 Discussion text.
 :::
 

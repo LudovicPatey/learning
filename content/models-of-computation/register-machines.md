@@ -113,6 +113,8 @@ What does the following program compute, with input $x$ in $R_1$?
 
   The program does not halt on $x \neq 0$.
 - [ ] The identity.
+
+  For $x \neq 0$, the jump $J(1, 2, 3)$ fails since $R_2 = 0$, and $J(1, 1, 1)$ returns to $I_1$ forever: the program diverges.
 :::
 
 ::::exercise{difficulty=1 #ex-urm-pred}
@@ -167,6 +169,8 @@ Why must $P$ be in standard form for :ref{#lem-urm-concat} to hold?
 
   Register conflicts are a separate issue, dealt with below.
 - [ ] Because $Q$ must start with a jump.
+
+  $Q$ is arbitrary; the condition concerns how $P$ halts, not how $Q$ starts.
 :::
 
 To run a program on arguments located in arbitrary registers, and to place its result in a chosen register, we use the following notation. Let $P$ be a program in standard form computing a $k$-ary function, and let $\ell_1, \dots, \ell_k, \ell$ be registers with indices greater than $\rho(P)$ and $k$. We write $P[\ell_1, \dots, \ell_k \to \ell]$ for the program
@@ -210,6 +214,8 @@ Why are the inputs first saved in registers $R_{N+1}, \dots, R_{N+k}$, with $N \
 
 - [x] Running $G_1$ may modify the registers $R_1, \dots, R_{\rho(G_1)}$, including those holding the input; the saved copy is out of reach of every $G_i$, so it is still available to compute $g_2(\vec x), \dots, g_m(\vec x)$.
 - [ ] Because URM programs cannot read registers with small indices.
+
+  URM programs can read every register; the issue is that running $G_1$ may overwrite the registers holding the input.
 - [ ] To make the program halt when some $g_i(\vec x)$ diverges.
 
   The program does not halt in that case, whatever the registers used.

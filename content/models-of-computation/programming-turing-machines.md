@@ -55,7 +55,11 @@ How many steps does the first phase take, as a function of $n = x + 1$?
 
   The machine is quadratic. Unary arithmetic on Turing machines is slow, but computability ignores running time.
 - [ ] Of the order of $n$.
+
+  Each of the $n$ rounds crosses about $2n$ cells, so the total is quadratic, not linear.
 - [ ] Of the order of $2^n$.
+
+  The number of rounds is $n$ and each costs $O(n)$ steps; nothing is exponential.
 :::
 
 ## Translation invariance
@@ -161,7 +165,11 @@ If $M$ halts after $t$ steps, roughly how many steps does $N$ take?
 
 - [x] $O(t^2)$, since after $t$ steps the visited zone has length $O(t)$ and each simulated step costs a constant number of sweeps over it.
 - [ ] $O(t)$.
+
+  Each simulated step may require a sweep over the whole visited zone, of length $O(t)$, so the cost is not constant per step.
 - [ ] $O(2^t)$.
+
+  The visited zone grows at most linearly, so each simulated step costs $O(t)$, for $O(t^2)$ in total.
 :::
 
 ## Other variants

@@ -40,6 +40,8 @@ Why is the left part of the tape stored in reverse order?
 
 - [x] So that a move of the head only modifies the fronts of the two sequences: moving right transfers the front of $r$ to the front of $\ell$, and moving left does the converse. Both are expressed with $\mathrm{cons}$, $\mathrm{hd}$ and $\mathrm{tl}$.
 - [ ] Because sequence codes can only be read backwards.
+
+  Every entry of a sequence code is accessible by a primitive recursive projection; the order is chosen so that a move changes only the first entries.
 - [ ] To make the coding injective.
 
   The coding is not injective anyway, because of trailing blanks.
@@ -126,6 +128,8 @@ Why does $s$ code the whole computation, rather than just the number of steps $t
 
   With $s = t$, the output would be $\mathrm{Out}(\mathrm{Conf}(e, \vec x, t))$, a function of $e$, $\vec x$ and $t$; Kleene's formulation asks for a single function $U$ of $s$.
 - [ ] Because the number of steps is not primitive recursive.
+
+  The point is not the complexity of the number of steps: the number of steps alone does not determine the output, while the code of the whole computation contains the final configuration.
 - [ ] To guarantee that the search terminates.
 
   Termination depends only on whether the machine halts.
@@ -185,6 +189,8 @@ The diagonal argument of the lesson on the Ackermann function showed that the ev
 
   It can be: the argument yields information, namely that $\Phi(e_0, e_0)\diverge$.
 - [ ] Because $\Phi$ has two arguments.
+
+  The number of arguments plays no role: the argument restricts $\Phi$ to the diagonal $(e, e)$ in any case.
 :::
 
 ## Exercises

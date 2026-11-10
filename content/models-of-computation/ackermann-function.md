@@ -189,6 +189,8 @@ Why does the same argument not show that some total computable function is not c
 
   There are countably many programs, so countably many computable functions.
 - [ ] Because $d$ grows too fast.
+
+  The growth of $d$ is irrelevant: the obstacle is that the enumeration $\Phi_n$ contains partial functions, for which $\Phi_n(n) + 1$ may be undefined.
 :::
 
 Thus unbounded loops are necessary to compute all total computable functions — and with unbounded loops comes the possibility of non-termination. The next lesson adds unbounded search to the primitive recursive functions.

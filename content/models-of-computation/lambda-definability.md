@@ -64,6 +64,8 @@ What does $\mathsf{plus}\, \overline 1$ reduce to?
   $\mathsf{plus}\, \overline 1$ still expects an argument.
 - [ ] It has no normal form.
 
+  $\mathsf{plus}\, \overline 1$ is a partial application, which reduces to a normal form equivalent to the successor.
+
 ---
 
 In the definition of $\mathsf{mult}$, what is the role of $\overline n\, f$?
@@ -73,6 +75,8 @@ In the definition of $\mathsf{mult}$, what is the role of $\overline n\, f$?
 
   There is no multiplication of functions; $\overline n\, f$ is iteration.
 - [ ] It applies $f$ to $n$.
+
+  Numerals are applied to functions, not functions to numerals: $\overline n\, f$ is the $n$-fold composition of $f$.
 :::
 
 ## Booleans, conditionals and pairs
@@ -119,7 +123,11 @@ What does $\Phi^3(\mathsf{pair}\, \overline 0\, \overline 0)$ reduce to?
 
   The pairs are $(0, 0) \mapsto (0, 1) \mapsto (1, 2) \mapsto (2, 3)$.
 - [ ] $\mathsf{pair}\, \overline 3\, \overline 3$.
+
+  $\Phi$ sends $\mathsf{pair}\, a\, b$ to $\mathsf{pair}\, b\, (b + 1)$, so the two components always differ by one after the first step.
 - [ ] $\mathsf{pair}\, \overline 2\, \overline 2$.
+
+  The two components differ by one after each application of $\Phi$: three steps from $(0, 0)$ give $(0, 1)$, $(1, 2)$, $(2, 3)$.
 
 ---
 
@@ -224,7 +232,11 @@ Why is the naive term $\lambda \vec x.\, H\,(G_1\, \vec x) \cdots (G_m\, \vec x)
 
   Normal order reduction is "lazy": it never evaluates arguments that are not used.
 - [ ] Because application is not associative.
+
+  Application associates to the left by convention; the problem is the evaluation of arguments, not the bracketing.
 - [ ] Because $H$ may not be in normal form.
+
+  Being in normal form is not the issue; the problem is that the naive term may ignore a divergent argument.
 :::
 
 :::theorem{#thm-lambda-definable-recursive}

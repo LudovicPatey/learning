@@ -167,6 +167,20 @@ describe("rendering", () => {
   });
 });
 
+describe("quiz validation", () => {
+  it("warns about wrong options without an explanation", async () => {
+    const file = path.join(process.env.CONTENT_DIR!, "alpha/one.md");
+    fs.writeFileSync(file, fs.readFileSync(file, "utf8").replace("  Not this.\n", ""));
+    const r = (await renderLesson("alpha/one"))!;
+    expect(r.warnings).toContain("Quiz question 1: wrong option 2 has no explanation");
+  });
+
+  it("accepts correct options whose text is their own justification", async () => {
+    const r = (await renderLesson("alpha/one"))!;
+    expect(r.warnings).toEqual([]);
+  });
+});
+
 describe("caching", () => {
   it("reuses the catalog while the content is unchanged", () => {
     expect(getCatalog()).toBe(getCatalog());

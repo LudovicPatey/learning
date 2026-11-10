@@ -21,7 +21,7 @@ The book sources in `external-data/` (Monin & Patey, *Computability theory*) set
 ### Comprehension questions (quizzes)
 
 - They are **collapsed by default** and must never interrupt the reading flow. Place a `:::quiz[title]` block right after the proof it tests.
-- Questions target **one step of an argument** (where a hypothesis is used, why a function is total), not recall. Every option, right or wrong, has a justification.
+- Questions target **one step of an argument** (where a hypothesis is used, why a function is total), not recall. Every option, right or wrong, has a justification. A wrong option without an indented explanation is reported by `npm run check-content`; a correct option may carry its justification in its own text.
 
 ### Typography (book quality)
 

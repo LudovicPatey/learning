@@ -515,8 +515,12 @@ function transformQuiz(node: any, index: number, ctx: Ctx) {
       const list = g[li];
       const correctCount = list.children.filter((it: any) => it.checked === true).length;
       if (correctCount === 0) ctx.warnings.push(`Quiz question ${qi + 1}: no option is marked correct with [x]`);
-      const options = list.children.map((it: any) => {
+      const options = list.children.map((it: any, oi: number) => {
         const [first, ...rest] = it.children;
+        // Every option needs a justification; correct options may carry it in their own text.
+        if (it.checked !== true && rest.length === 0) {
+          ctx.warnings.push(`Quiz question ${qi + 1}: wrong option ${oi + 1} has no explanation`);
+        }
         return block("div", ["quiz-option"], [block("div", ["quiz-option-text"], first ? [first] : []), block("div", ["quiz-option-expl"], rest)], {
           dataCorrect: it.checked === true ? "true" : "false",
         });

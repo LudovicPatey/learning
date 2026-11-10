@@ -67,6 +67,8 @@ What is the value of $X_0$ after running $X_0 \mathbin{:=} 0 ;\ \mathtt{LOOP}\ X
   It would with $\mathtt{WHILE}\ X_1 \neq 0$; LOOP programs always terminate.
 - [ ] $6$.
 
+  The number of iterations of $\mathtt{LOOP}\ X_1$ is fixed when the loop is entered, here $3$; modifying $X_1$ in the body does not change it.
+
 ---
 
 In the predecessor program, why is the assignment $X_0 \mathbin{:=} X_2$ placed **before** $X_2 \mathbin{:=} X_2 + 1$ in the body?
@@ -76,6 +78,8 @@ In the predecessor program, why is the assignment $X_0 \mathbin{:=} X_2$ placed 
 
   In the other order, $X_0$ would equal $n$ after $n$ iterations: the program would compute the identity.
 - [ ] To make the program terminate on input $0$.
+
+  LOOP programs always terminate; the order of the assignments determines the value computed, not termination.
 :::
 
 ## LOOP programs compute the primitive recursive functions
@@ -132,7 +136,11 @@ Why does the proof work with codes of the whole state rather than with the value
 
   This is where the coding of finite sequences is used.
 - [ ] Because primitive recursive functions cannot take several arguments.
+
+  Primitive recursive functions take any fixed number of arguments; the issue is that a primitive recursion iterates a single value.
 - [ ] To make the semantics deterministic.
+
+  The semantics is deterministic in any case; coding the state is what turns the iteration into a primitive recursion.
 :::
 
 ## WHILE programs compute the partial recursive functions
@@ -180,6 +188,8 @@ Which instruction is responsible for the possibility of non-termination of WHILE
 
   The number of iterations of a $\mathtt{LOOP}$ is fixed on entry.
 - [ ] Sequential composition.
+
+  A sequential composition of terminating programs terminates; only unbounded iteration can run forever.
 :::
 
 :::corollary{#cor-one-while}

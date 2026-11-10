@@ -68,6 +68,8 @@ In (4 ⇒ 1), what does the search $\mu n\ [\Phi_i(\pi_0(n))[\pi_1(n)]\converge 
 
   Searching over arguments $y$ only, by computing $\Phi_i(0), \Phi_i(1), \dots$, could get stuck on a divergent computation.
 - [ ] Indices of programs computing $x$.
+
+  The search ranges over arguments and stages of the fixed function $\Phi_i$; indices of other programs play no role.
 - [ ] Stages at which $x$ enters $W_i$.
 
   This would describe the domain of $\Phi_i$, not its range.
@@ -111,6 +113,8 @@ In item 3, where is it used that the approximation $(R_s)$ is **increasing**?
 
   This only uses the uniform computability of the approximation and bounded quantification.
 - [ ] It is not used.
+
+  Without monotonicity, the instances confirmed at different stages might not all hold at a common stage, and the equivalence would fail.
 
 ---
 
