@@ -2,6 +2,19 @@ title: Kolmogorov complexity
 area: randomness
 level: Intermediate
 order: 1
-status: planned
 prerequisites: [fundamentals]
-summary: The length of the shortest description of a string, prefix-free machines, and incompressibility.
+summary: The length of the shortest description of a string, prefix-free machines, the coding theorem, and Chaitin's halting probability.
+description: >
+  The information content of finite strings measured by the length of their
+  shortest descriptions: the invariance theorem, incompressible strings and the
+  non-computability of complexity, the complexity of initial segments of infinite
+  sequences, prefix-free machines and the complexity K, the KC theorem, the coding
+  theorem, and the halting probability Ω.
+objectives:
+  - Define plain and prefix-free complexity and prove the invariance theorems
+  - Use counting arguments to show that most strings are incompressible
+  - Explain why plain complexity cannot define random sequences
+  - Build prefix-free machines with the KC theorem
+  - Relate K to output probabilities through the coding theorem
+  - Prove that Ω is Turing complete and has incompressible prefixes
+lessons: [plain-complexity, initial-segments, prefix-free-complexity, coding-theorem]
