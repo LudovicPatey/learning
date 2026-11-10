@@ -2,12 +2,12 @@
 
 An online course platform for computability theory and related fields (algorithmic randomness, reverse mathematics, higher computability).
 
-- **Small courses.** Each course is a short series of lessons on one topic (e.g. *Models of computation*), with prerequisite courses shown on a course map.
+- **Small courses.** Each course is a short series of lessons on one topic (e.g. *Models of computation*). Main courses are organized in learning tracks (`content/tracks.yaml`), each shown as a dependency graph on the home page; specialized courses are listed in the searchable catalogue only.
 - **Small lessons.** Each lesson is one Markdown file covering one idea, with explicit prerequisites.
 - **Check-up questions right after proofs.** Multiple-choice questions that test one step of the argument, with an explanation for every option.
 - **Reader suggestions.** Readers select any passage, sign in with ORCID, and leave a typed suggestion (typo, unclear, mathematical error, …). Maintainers can resolve or decline them.
 
-The book sources in `external-data/` served as a reference for the level of detail. Available courses: *Models of computation*, *Countability and diagonalization*, *Fundamentals of computability*; ten more are listed as planned so the course map shows the full path.
+The book sources in `external-data/` served as a reference for the level of detail. The computability track is written; the other tracks and the specialized courses are listed as planned.
 
 ## Running it
 
@@ -30,6 +30,7 @@ Comments and users are stored in SQLite (`data/app.db`, created automatically).
 
 ```
 content/areas.yaml               # research areas (name, colour)
+content/tracks.yaml              # learning tracks (ordered core courses)
 content/<course>/_course.yaml    # one course: title, area, level, prerequisites, objectives, ordered lessons
 content/<course>/<slug>.md       # one lesson
 ```

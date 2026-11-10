@@ -31,6 +31,7 @@ import type { Root as MdRoot } from "mdast";
 import type { Root as HRoot, Element as HElement, ElementContent, RootContent } from "hast";
 import { macros } from "./katex-macros.ts";
 import { contentDir, versionDir } from "./versions.ts";
+import { parseTracks, trackOfCourse, type Track } from "./tracks.ts";
 
 // ---------------------------------------------------------------- types
 
@@ -69,6 +70,8 @@ export type Course = {
   objectives: string[];
   authors: string[];
   lessons: string[]; // slugs, in order
+  /** The main track the course belongs to, or undefined for a specialized course. */
+  track?: string;
 };
 
 export type QuizOption = { html: string; correct: boolean; explanationHtml: string };
@@ -109,6 +112,8 @@ type Catalog = {
   lessons: Map<string, LessonMeta>;
   labels: Map<string, Label>;
   warnings: string[];
+  /** Main learning tracks (content/tracks.yaml). */
+  tracks: Track[];
   /** Fingerprint of the content files this catalog was built from. */
   fingerprint: string;
 };
@@ -336,7 +341,13 @@ function buildCatalog(sel?: VersionSel): Catalog {
       if (!lessons.has(p)) warnings.push(`${l.id}: unknown prerequisite "${p}"`);
     }
   }
-  return { areas, courses, lessons, labels, warnings, fingerprint: contentFingerprint(sel) };
+  const tracksFile = path.join(root, "tracks.yaml");
+  const tracks = fs.existsSync(tracksFile)
+    ? parseTracks(YAML.parse(fs.readFileSync(tracksFile, "utf8")), ids, new Set(areas.map((a) => a.id)), warnings)
+    : [];
+  const trackOf = trackOfCourse(tracks);
+  for (const c of courses) c.track = trackOf.get(c.id);
+  return { areas, courses, lessons, labels, warnings, tracks, fingerprint: contentFingerprint(sel) };
 }
 
 // Caching. Every cache is keyed by a fingerprint of the content files (paths,
@@ -381,6 +392,10 @@ export function getCatalog(sel?: VersionSel): Catalog {
 
 export function getCourse(id: string, sel?: VersionSel) {
   return getCatalog(sel).courses.find((c) => c.id === id);
+}
+
+export function getTrack(id: string | undefined) {
+  return id ? getCatalog().tracks.find((t) => t.id === id) : undefined;
 }
 
 export function getArea(id: string) {

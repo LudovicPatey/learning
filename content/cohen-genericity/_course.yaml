@@ -1,0 +1,13 @@
+title: Cohen genericity
+area: computability
+level: Advanced
+order: 8
+status: planned
+prerequisites: [turing-degrees, arithmetic-hierarchy]
+summary: Effective forcing with finite strings; n-generic sets, their degrees and their jumps.
+description: >
+  Cohen forcing in its effective form: forcing conditions as finite strings,
+  the forcing relation for arithmetic formulas, n-generic and weakly n-generic
+  sets, and the computational properties of generic sets — their jumps, the
+  cones they avoid, and the typical behavior of sets in the sense of Baire
+  category.

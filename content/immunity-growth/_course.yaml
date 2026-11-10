@@ -1,0 +1,12 @@
+title: Immunity and growth of functions
+area: computability
+level: Advanced
+order: 9
+status: planned
+prerequisites: [turing-degrees, pi01-classes]
+summary: Immune and hyperimmune sets, dominating and diagonally non-computable functions, and the degrees they define.
+description: >
+  Weakness and strength measured by the growth of functions: immune and
+  hyperimmune sets, hyperimmune degrees and the Miller–Martin theorem,
+  dominating functions and Martin's characterization of high degrees, and
+  diagonally non-computable functions.

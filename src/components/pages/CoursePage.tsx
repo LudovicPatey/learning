@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { courseHref, courseLessons, courseStats, getArea, getCourse, lessonHref, nextCourses, type VersionSel } from "@/lib/content";
+import { courseHref, courseLessons, courseStats, getArea, getCourse, getTrack, lessonHref, nextCourses, type VersionSel } from "@/lib/content";
 import { hasVersion, listVersions } from "@/lib/versions";
 import { CourseProgressCard, StepDot } from "@/components/progress-ui";
 import { renderMathText } from "@/components/math-text";
@@ -47,6 +47,8 @@ export async function CoursePage({ id, version }: { id: string; version?: string
               <Link href="/courses">Courses</Link>
               <span>/</span>
               <span className="area-chip">{area?.title}</span>
+              <span>/</span>
+              <span>{getTrack(getCourse(id)?.track)?.title ?? "Specialized course"}</span>
             </nav>
             <h1>{course.title}</h1>
             <p className="lead">{course.summary}</p>

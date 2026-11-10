@@ -17,6 +17,7 @@ The book sources in `external-data/` (Monin & Patey, *Computability theory*) set
 - **Mathematical correctness first.** Every statement, proof, quiz answer and explanation must be checked. When a result is admitted without proof, say so explicitly and give a reference.
 - **American spelling** (formalize, behavior), en dashes for ranges (1931–1936), em dashes without surrounding hyphens.
 - **Small courses, small lessons.** A course is a short series of lessons on one topic; a lesson treats one notion or theorem (25–45 minutes of reading for the detailed courses). Prerequisites are explicit, at both levels.
+- **Tracks and specialized courses.** `content/tracks.yaml` lists the main learning tracks, each an ordered sequence of core courses in one area. The home page shows one dependency graph per track, with only the edges inside the track; prerequisites on other tracks are shown as "Builds on". A course in no track is a **specialized course**: it appears in the searchable catalogue (`/courses`) and on course pages, never in the graphs. Keep tracks short enough to be readable; add new advanced topics as specialized courses unless they belong to a main sequence.
 
 ### Comprehension questions (quizzes)
 
@@ -50,10 +51,12 @@ The book sources in `external-data/` (Monin & Patey, *Computability theory*) set
 | Path | Role |
 | --- | --- |
 | `content/areas.yaml` | Research areas (title, color) |
+| `content/tracks.yaml` | Main learning tracks: ordered core courses; other courses are specialized |
 | `content/<course>/_course.yaml` | Course metadata: title, area, level, prerequisites, objectives, authors, ordered lessons |
 | `content/<course>/<slug>.md` | One lesson: YAML frontmatter + Markdown with math and directives |
 | `content/_versions/<course>/` | Released versions (immutable) and `versions.yaml` |
 | `src/lib/content.ts` | Catalog loading, Markdown → HTML pipeline (remark/rehype), numbering, references, quizzes, previews |
+| `src/lib/tracks.ts` | Tracks: parsing, per-track dependency graphs, catalogue search (pure, tested) |
 | `src/lib/versions.ts`, `release.ts` | Versions: listing and comparing (site); creating releases (CLI only) |
 | `src/lib/citation.ts` | BibTeX and citation keys |
 | `src/lib/katex-macros.ts` | LaTeX macros available in lessons (from the book's preamble) |

@@ -1,0 +1,5 @@
+- id: main
+  title: Main track
+  area: logic
+  description: The core sequence.
+  courses: [alpha]

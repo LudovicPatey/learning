@@ -1,0 +1,31 @@
+# Main learning tracks. Each track is a sequence of core courses in one area,
+# displayed as a dependency graph on the home page. Courses that appear in no
+# track are specialized courses: they are listed in the catalogue only.
+# Prerequisites on courses of other tracks are shown as "Builds on".
+- id: computability
+  title: Computability theory
+  area: computability
+  description: >
+    From the models of computation to the structure of the Turing degrees: the
+    common basis of the other tracks.
+  courses: [models-of-computation, countability, fundamentals, turing-degrees, arithmetic-hierarchy, ce-degrees, pi01-classes]
+- id: randomness
+  title: Algorithmic randomness
+  area: randomness
+  description: >
+    Randomness of individual infinite sequences, through tests, incompressibility
+    and betting strategies.
+  courses: [kolmogorov-complexity, martin-lof-randomness]
+- id: reverse-math
+  title: Reverse mathematics
+  area: reverse-math
+  description: >
+    The axioms needed to prove theorems of ordinary mathematics, measured over a
+    weak base theory.
+  courses: [second-order-arithmetic, big-five, ramsey-theorem]
+- id: higher
+  title: Higher computability
+  area: higher
+  description: >
+    Computability along the computable ordinals, beyond the arithmetic sets.
+  courses: [computable-ordinals, hyperarithmetic]

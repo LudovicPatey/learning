@@ -30,8 +30,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <span className="brand-name">{SITE_NAME}</span>
             </Link>
             <nav className="site-nav">
-              <Link href="/courses">Courses</Link>
-              <Link href="/#map">Course map</Link>
+              <Link href="/courses">Catalogue</Link>
+              <Link href="/#map">Tracks</Link>
             </nav>
             <ThemeToggle />
             <UserMenu />

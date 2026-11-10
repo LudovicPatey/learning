@@ -79,6 +79,7 @@ export function CourseMap({ courses, areas }: { courses: MapCourse[]; areas: Map
 
   return (
     <div>
+      {areas.length > 1 && (
       <div className="map-toolbar" role="group" aria-label="Filter by area">
         <button className="chip" aria-pressed={area === null} onClick={() => setArea(null)}>
           All areas
@@ -89,6 +90,7 @@ export function CourseMap({ courses, areas }: { courses: MapCourse[]; areas: Map
           </button>
         ))}
       </div>
+      )}
       <div className="map-scroll">
         <div
           ref={boxRef}

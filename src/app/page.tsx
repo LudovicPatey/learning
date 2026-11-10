@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { courseDepths, courseStats, getCatalog, renderLesson } from "@/lib/content";
-import { CourseMap, type MapCourse } from "@/components/CourseMap";
+import { courseStats, getCatalog, renderLesson } from "@/lib/content";
+import { trackGraph } from "@/lib/tracks";
+import type { MapCourse } from "@/components/CourseMap";
+import { TrackMaps, type TrackView } from "@/components/TrackMaps";
 import { TuringTape } from "@/components/TuringTape";
 import { Quiz } from "@/components/Quiz";
 import { renderMathText } from "@/components/math-text";
@@ -8,29 +10,48 @@ import { renderMathText } from "@/components/math-text";
 const SAMPLE_LESSON = "fundamentals/halting-problem";
 
 export default async function Home() {
-  const { areas, courses, lessons } = getCatalog();
-  const depth = courseDepths();
+  const { areas, courses, lessons, tracks } = getCatalog();
   const color = new Map(areas.map((a) => [a.id, a.color]));
+  const byId = new Map(courses.map((c) => [c.id, c]));
+  const trackTitle = new Map(tracks.map((t) => [t.id, t.title]));
 
-  const mapCourses: MapCourse[] = courses.map((c) => {
-    const s = courseStats(c.id);
+  const trackViews: TrackView[] = tracks.map((t) => {
+    const g = trackGraph(t, courses);
+    const inTrack = new Set(t.courses);
+    const mapCourses: MapCourse[] = t.courses.map((id) => {
+      const c = byId.get(id)!;
+      const s = courseStats(id);
+      return {
+        id,
+        title: c.title,
+        summary: c.summary,
+        area: c.area,
+        color: color.get(c.area) ?? "#4f46e5",
+        status: c.status,
+        depth: g.depth.get(id) ?? 0,
+        lessons: s.lessons,
+        minutes: s.minutes,
+        prerequisites: c.prerequisites.filter((p) => inTrack.has(p)),
+      };
+    });
     return {
-      id: c.id,
-      title: c.title,
-      summary: c.summary,
-      area: c.area,
-      color: color.get(c.area) ?? "#4f46e5",
-      status: c.status,
-      depth: depth.get(c.id) ?? 0,
-      lessons: s.lessons,
-      minutes: s.minutes,
-      prerequisites: c.prerequisites,
+      id: t.id,
+      title: t.title,
+      description: t.description,
+      color: color.get(t.area) ?? "#4f46e5",
+      courses: mapCourses,
+      external: g.external.map((id) => {
+        const c = byId.get(id)!;
+        return { id, title: c.title, trackTitle: c.track ? trackTitle.get(c.track) : undefined };
+      }),
     };
   });
+  const specializedCount = courses.filter((c) => !c.track).length;
 
   const available = courses.filter((c) => c.status === "available");
   const totalQuestions = [...lessons.values()].reduce((s, l) => s + l.quizCount, 0);
-  const firstCourse = available.find((c) => (depth.get(c.id) ?? 0) === 0) ?? available[0];
+  const firstTrack = tracks[0];
+  const firstCourse = (firstTrack && byId.get(firstTrack.courses[0])) ?? available[0];
 
   const sample = await renderLesson(SAMPLE_LESSON);
   const sampleQuiz = sample?.segments.find((s) => s.type === "quiz");
@@ -79,13 +100,14 @@ export default async function Home() {
       <div className="page">
         <section id="map" className="section" style={{ marginTop: 24 }}>
           <div className="section-head">
-            <h2>Courses and prerequisites</h2>
+            <h2>Learning tracks</h2>
             <p>
-              Each course consists of a few lessons on a single topic. Arrows indicate prerequisites; hovering over a course highlights
-              the courses it depends on and those depending on it. Courses in preparation have a dashed border.
+              Each track is a main sequence of short courses. Arrows indicate prerequisites within the track; hovering over a course
+              highlights the courses it depends on and those depending on it. Courses in preparation have a dashed border. All
+              courses, including specialized ones, are listed in the <Link href="/courses">catalogue</Link>.
             </p>
           </div>
-          <CourseMap courses={mapCourses} areas={areas.map((a) => ({ id: a.id, title: a.title, color: a.color }))} />
+          <TrackMaps tracks={trackViews} specializedCount={specializedCount} />
         </section>
 
         {sampleQuiz && sampleQuiz.type === "quiz" && (
