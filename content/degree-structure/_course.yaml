@@ -1,0 +1,18 @@
+title: Structure of the Turing degrees
+area: computability
+level: Advanced
+order: 10
+prerequisites: [turing-degrees, immunity-growth]
+summary: Exact pairs, embeddings of partial orders, and minimal degrees.
+description: >
+  The global structure of the Turing degrees as a partial order: the upper
+  semilattice structure and its failure to be a lattice through Spector's exact
+  pairs, the embedding of every countable partial order using independent
+  columns of a 1-generic set, antichains of size continuum, and Spector's
+  construction of minimal degrees by forcing with function trees.
+objectives:
+  - Prove that every countable ideal of degrees has an exact pair
+  - Deduce that the degrees do not form a lattice
+  - Embed every countable partial order into the degrees below 0′
+  - Build a minimal degree with splitting trees
+lessons: [exact-pairs, embeddings, minimal-degrees]

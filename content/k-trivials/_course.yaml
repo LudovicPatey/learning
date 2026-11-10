@@ -1,0 +1,20 @@
+title: K-trivial sets
+area: randomness
+level: Advanced
+order: 3
+prerequisites: [martin-lof-randomness, ce-degrees]
+summary: Sets of minimal prefix-free complexity, cost functions, and their coincidence with the sets that are low for randomness.
+description: >
+  The sets whose initial segments have the complexity of their lengths:
+  Chaitin's counting theorem and the Δ⁰₂-ness of K-trivial sets, closure under
+  join, Solovay functions, cost functions and Solovay's construction of a
+  non-computable K-trivial set, lowness for K and for Martin-Löf randomness,
+  bases for randomness and the hungry sets theorem, and the coincidence of all
+  these notions.
+objectives:
+  - Prove that there are countably many K-trivial sets, all Δ⁰₂
+  - Build a simple K-trivial set with the standard cost function
+  - Relate lowness for K, lowness for randomness and bases for randomness
+  - Prove the hungry sets theorem
+  - Derive the ideal structure of the K-trivial sets from the main theorem
+lessons: [k-trivial-sets, cost-functions, lowness]
