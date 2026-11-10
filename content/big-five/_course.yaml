@@ -2,6 +2,18 @@ title: The Big Five
 area: reverse-math
 level: Advanced
 order: 2
-status: planned
 prerequisites: [second-order-arithmetic, pi01-classes]
-summary: WKL₀, ACA₀, ATR₀ and Π¹₁-CA₀ — and the theorems equivalent to each.
+summary: ACA₀, WKL₀, ATR₀ and Π¹₁-CA₀, their ω-models, and the theorems equivalent to each.
+description: >
+  The systems of the Big Five beyond the base theory: arithmetic comprehension
+  and its equivalents (Turing jumps, ranges of injections, monotone convergence,
+  König's lemma), weak König's lemma with Scott ideals, Σ⁰₁ separation and the
+  Heine–Borel theorem, and a survey of arithmetic transfinite recursion and
+  Π¹₁ comprehension.
+objectives:
+  - Prove the main equivalent forms of ACA₀ and characterize its ω-models
+  - Show that König's lemma and monotone convergence are equivalent to ACA₀
+  - Characterize the ω-models of WKL₀ and separate WKL₀ from ACA₀
+  - Prove the equivalence of WKL₀ with Σ⁰₁ separation and the Heine–Borel theorem
+  - Define ATR₀ and Π¹₁-CA₀ and state their main equivalents
+lessons: [aca0, wkl0, atr0-pi11ca0]

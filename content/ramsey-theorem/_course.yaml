@@ -2,6 +2,19 @@ title: Ramsey's theorem for pairs
 area: reverse-math
 level: Advanced
 order: 3
-status: planned
 prerequisites: [big-five]
-summary: The computability-theoretic analysis of Ramsey's theorem, cohesiveness and stable colorings.
+summary: The computability-theoretic analysis of Ramsey's theorem, cohesiveness and stable colorings, and Seetapun's theorem.
+description: >
+  Ramsey's theorem as a case study beyond the Big Five: Jockusch's bounds on
+  the complexity of homogeneous sets and the equivalence of Ramsey's theorem
+  for triples with ACA₀, the decomposition of Ramsey's theorem for pairs into
+  cohesiveness and stable Ramsey's theorem, and Seetapun's theorem, proved
+  through cone avoidance for Mathias forcing and the forcing of Dzhafarov and
+  Jockusch.
+objectives:
+  - Build pre-homogeneous sets with the Erdős–Radó tree
+  - Prove Jockusch's upper and lower bounds for homogeneous sets
+  - Show that Ramsey's theorem for triples is equivalent to ACA₀
+  - Decompose Ramsey's theorem for pairs into COH and SRT²₂
+  - Prove Seetapun's theorem by cone avoidance
+lessons: [jockusch, cohesiveness, seetapun]
