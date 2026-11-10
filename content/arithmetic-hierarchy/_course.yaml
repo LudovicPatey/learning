@@ -2,6 +2,19 @@ title: The arithmetic hierarchy
 area: computability
 level: Intermediate
 order: 5
-status: planned
 prerequisites: [turing-degrees]
-summary: Classifying sets by the quantifier complexity of their definitions, and Post's theorem linking it to the jump.
+summary: Classifying sets by the quantifier complexity of their definitions, Post's theorem linking it to the jump, the classification of index sets, arithmetic definability, and codes for sets.
+description: >
+  The Σ⁰ₙ, Π⁰ₙ and Δ⁰ₙ sets and their closure properties; Post's theorem,
+  which identifies the levels of the hierarchy with the sets c.e. or computable
+  in the iterated jumps; the classification of the basic index sets; the
+  equivalence between the arithmetic hierarchy and definability in the
+  language of arithmetic, with Tarski's theorem and the first incompleteness
+  theorem; and the kinds of indices used to describe sets.
+objectives:
+  - Place a set in the arithmetic hierarchy by writing a definition and counting quantifier alternations
+  - Prove Post's theorem and deduce that the hierarchy is strict
+  - Prove completeness results for index sets by many-one reductions
+  - Express computations by formulas of arithmetic with Gödel's β-function
+  - Choose the appropriate kind of index for a set, and know which conversions are not uniform
+lessons: [sigma-pi-sets, post-theorem, index-sets, arithmetic-definability, codes]
