@@ -2558,6 +2558,10 @@ pre {
   stroke: var(--subtle);
   fill: none;
 }
+.fig .muted-fill {
+  fill: var(--subtle);
+  stroke: none;
+}
 .fig .axis {
   stroke: var(--border-strong);
   stroke-width: 1;

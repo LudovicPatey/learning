@@ -2,14 +2,19 @@ title: Countability and diagonalization
 area: computability
 level: Introductory
 order: 2
-summary: Cardinality of infinite sets, the Cantor–Bernstein theorem, countable sets and diagonalization.
+summary: Comparison of infinite sets, the Cantor–Bernstein theorem, countable sets, the diagonal argument and the continuum, with their first applications to computation.
 description: >
-  Comparison of infinite sets by injections and bijections, the Cantor–Bernstein
-  theorem, countable sets, and Cantor's diagonal argument, which is a central
-  proof technique of computability theory.
+  Comparison of sets by injections and bijections, the Cantor–Bernstein theorem,
+  countable sets, Cantor's diagonal argument and the cardinality of the
+  continuum. The last lesson applies diagonalization to computation: counting
+  arguments, effective diagonalization, the halting set, and constructions by
+  finite extension. It uses the universal function of the course on models of
+  computation; the first five lessons have no prerequisite.
 objectives:
-  - Compare infinite sets using injections and bijections
-  - Prove the Cantor–Bernstein theorem
-  - Show that ℕ × ℕ, ℚ and the finite strings are countable
-  - Run a diagonal argument to show that 2^ℕ is uncountable
-lessons: [equipotence, cantor-bernstein, countable-sets, diagonal-argument]
+  - Compare infinite sets using injections, surjections and bijections
+  - Prove the Cantor–Bernstein theorem and describe the bijection explicitly
+  - Show that the sets built from integers by finite means are countable, noting where the axiom of choice is used
+  - Run a diagonal argument in its general form, and apply it to binary sequences, integer sequences, power sets and real numbers
+  - Show that the sets of binary sequences, of integer sequences, of real numbers and of real sequences are equipotent
+  - Diagonalize effectively, and build sets by finite extension
+lessons: [equipotence, cantor-bernstein, countable-sets, diagonal-argument, continuum, diagonalization-and-computation]
