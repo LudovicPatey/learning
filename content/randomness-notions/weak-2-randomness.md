@@ -1,0 +1,103 @@
+---
+title: Weak 2-randomness
+summary: Sequences avoiding every null Π⁰₂ class; 2-randomness implies weak 2-randomness, which implies Martin-Löf randomness, both strictly; no universal test; the theorem of Downey, Nies, Weber and Yu that a random sequence is weakly 2-random exactly when it computes no non-computable c.e. set.
+duration: 30
+prerequisites: [relative-randomness]
+---
+
+A Martin-Löf test describes a null $\Pi^0_2$ class $\bigcap_n \mathcal U_n$ whose measures converge to $0$ at a computable rate. Dropping the condition on the rate gives a stronger notion: a sequence is **weakly 2-random** if it avoids every null $\Pi^0_2$ class. The notion lies strictly between Martin-Löf randomness and 2-randomness, and has a striking characterization in terms of computational power: a random sequence is weakly 2-random exactly when it computes no non-computable c.e. set.
+
+## Definition and position
+
+:::definition{#def-weak-2-random}
+A sequence is **weakly 2-random** if it belongs to no null $\Pi^0_2$ class, that is, to no class $\bigcap_n \mathcal U_n$ with $(\mathcal U_n)$ uniformly $\Sigma^0_1$ and $\lambda(\bigcap_n \mathcal U_n) = 0$.
+:::
+
+Replacing $\mathcal U_n$ by $\mathcal U_0 \cap \cdots \cap \mathcal U_n$, one may assume the classes decreasing, so that $\lambda(\mathcal U_n)$ tends to $0$.
+
+:::proposition{#prop-weak-2-position}
+1. Every 2-random sequence is weakly 2-random, and every weakly 2-random sequence is Martin-Löf random.
+2. No $\Delta^0_2$ sequence is weakly 2-random. In particular $\Omega$ is random but not weakly 2-random.
+3. There is no universal test for weak 2-randomness: no single null $\Pi^0_2$ class contains every sequence that is not weakly 2-random.
+:::
+
+:::proof{of=prop-weak-2-position}
+1. A Martin-Löf test describes a null $\Pi^0_2$ class. Let $\bigcap_n \mathcal U_n$ be null, with decreasing $\mathcal U_n$. The relation $\lambda(\mathcal U_n) < 2^{-k}$ is $\Pi^0_1$, since $\lambda(\mathcal U_n)$ is left-c.e. uniformly in $n$; so $\emptyset'$ computes, for each $k$, some $n_k$ with $\lambda(\mathcal U_{n_k}) < 2^{-k}$. The classes $\mathcal U_{n_k}$ form a Martin-Löf test relative to $\emptyset'$ containing $\bigcap_n \mathcal U_n$.
+2. Let $A = \lim_s A_s$ with $(A_s)$ computable. The classes $\mathcal U_{\langle n, t \rangle} = \bigcup_{s > t} [A_s \uh n]$ are uniformly $\Sigma^0_1$, and their intersection is $\{ A \}$: a sequence $X$ in all of them agrees, for every $n$, with $A_s \uh n$ for infinitely many $s$, hence with $A \uh n$. This is a null $\Pi^0_2$ class containing $A$.
+3. Let $\bigcap_n \mathcal U_n$ be null. Some $\mathcal U_n$ has measure less than $1$, so its complement is a non-empty $\Pi^0_1$ class, whose leftmost member is $\Delta^0_2$. By (2), it is not weakly 2-random, yet it is outside $\bigcap_n \mathcal U_n$.
+:::
+
+## The Downey–Nies–Weber–Yu theorem
+
+:::theorem[Downey, Nies, Weber, Yu]{#thm-dnwy}
+For a Martin-Löf random sequence $Z$, the following are equivalent:
+
+1. $Z$ is not weakly 2-random;
+2. $Z$ computes a non-computable c.e. set;
+3. $Z$ computes a non-computable $\Delta^0_2$ set.
+:::
+
+:::proof{of=thm-dnwy}
+(2 ⇒ 3) Every c.e. set is $\Delta^0_2$.
+
+(3 ⇒ 1) Let $A = \lim_s A_s$ be non-computable and $\Delta^0_2$, with $\Phi^Z = A$. The classes $\mathcal U_{\langle n, t \rangle} = \bigcup_{s > t} \{ X : \Phi^X \uh n = A_s \uh n \}$ are uniformly $\Sigma^0_1$, and, as in :ref{#prop-weak-2-position} (2), their intersection is $\{ X : \Phi^X = A \}$, which is null by Sacks's theorem (:ref{#thm-sacks}). It contains $Z$.
+
+(1 ⇒ 2) Let $Z \in \bigcap_n \mathcal U_n$, a null $\Pi^0_2$ class with decreasing $\mathcal U_n$. We enumerate a set $A$, together with classes $\mathcal V_e$. At stage $t$, for each $e \leq t$ such that no element has been enumerated for $e$ and $W_{e,t} \cap A_t = \emptyset$, if there is $n \in W_{e,t}$ with $n > 2e$ and $\lambda(\mathcal U_{n,t}) < 2^{-e}$, enumerate the least such $n$ into $A$, and let $\mathcal V_e = \mathcal U_{n,t}$, the finite approximation of $\mathcal U_n$ at stage $t$.
+
+*$A$ is simple, hence not computable.* Each $e$ enumerates at most one element, larger than $2e$, so $A$ has infinite complement. If $W_e$ is infinite, it contains $n > 2e$ with $\lambda(\mathcal U_n) < 2^{-e}$, since these measures tend to $0$, and then $\lambda(\mathcal U_{n,t}) < 2^{-e}$ for every $t$; so $e$ eventually acts and $A$ meets $W_e$.
+
+*$Z$ computes $A$.* The classes $\mathcal V_e$ are clopen, uniformly c.e. in $e$, with $\lambda(\mathcal V_e) < 2^{-e}$: a Solovay test. Since $Z$ is random, $Z$ belongs to $\mathcal V_e$ for finitely many $e$ only (:ref{#thm-solovay}), and these $e$ enumerate finitely many elements. Let $m$ exceed them. For $n \geq m$, if $n$ enters $A$ at stage $t$, then $Z \notin \mathcal U_{n,t}$. To decide whether $n \geq m$ belongs to $A$, search for the least stage $t$ with $Z \in \mathcal U_{n,t}$, which exists since $Z \in \mathcal U_n$; then $n \in A$ if and only if $n \in A_t$, since $\mathcal U_{n,t}$ increases with $t$.
+:::
+
+The construction makes the enumeration of $n$ into $A$ costly for $Z$: it can only happen while $Z$ is still outside $\mathcal U_n$, and the Solovay test charges each such enumeration with the measure of the current approximation. The theorem is a template for the analysis of randomness through cost: compare the construction of K-trivial sets by cost functions.
+
+:::quiz[the DNWY theorem]
+In (1 ⇒ 2) of :ref{#thm-dnwy}, why does $Z$ belong to only finitely many classes $\mathcal V_e$?
+
+- [x] Because they form a Solovay test, with $\lambda(\mathcal V_e) < 2^{-e}$, and $Z$ is Martin-Löf random.
+- [ ] Because $Z$ belongs to every $\mathcal U_n$.
+
+  This is why $Z$ eventually enters each $\mathcal U_n$; finiteness comes from the Solovay test.
+- [ ] Because $A$ is simple.
+
+  Simplicity concerns the complement of $A$; the classes $\mathcal V_e$ are controlled by measure.
+
+---
+
+Why does the search for the least $t$ with $Z \in \mathcal U_{n,t}$ terminate?
+
+- [x] Because $Z$ belongs to the open class $\mathcal U_n$, so some prefix of $Z$ is enumerated into it at a finite stage.
+- [ ] Because $\mathcal U_n$ has positive measure.
+
+  Positive measure does not imply that $Z$ belongs to it; the hypothesis $Z \in \bigcap_n \mathcal U_n$ does.
+- [ ] Because $n \in A$.
+
+  The search is used to decide whether $n \in A$; it terminates in both cases.
+:::
+
+Item (3) says that, for random sequences, weak 2-randomness amounts to forming a **minimal pair** with $\emptyset'$: every set computable both in $Z$ and in $\emptyset'$ is computable. This formulation is due to Hirschfeldt and Miller.
+
+## Exercises
+
+::::exercise{difficulty=1}
+Show that a weakly 2-random sequence is not computable in $\emptyset'$, and that a 2-random sequence computes no non-computable c.e. set.
+
+:::solution
+A set computable in $\emptyset'$ is $\Delta^0_2$, hence not weakly 2-random by :ref{#prop-weak-2-position} (2). A 2-random sequence is weakly 2-random and random, so by :ref{#thm-dnwy} it computes no non-computable c.e. set.
+:::
+::::
+
+::::exercise{difficulty=2}
+Show that there is a weakly 2-random sequence that is not 2-random.
+
+:::solution
+By :ref{#cor-mlr-structure} (3), there is a random sequence $Z$ that is computably dominated. It computes no non-computable c.e. set $A$: the settling function $m(x) = \min \{ s : A_s \cap \{0, \dots, x\} = A \cap \{0, \dots, x\} \}$ is computable in $A$, hence in $Z$, so there are a computable function $g$ and a number $x_0$ with $m(x) \leq g(x)$ for $x \geq x_0$. Then $x \in A \iff x \in A_{g(x)}$ for $x \geq x_0$, which makes $A$ computable. By :ref{#thm-dnwy}, $Z$ is weakly 2-random. By Kurtz's theorem, every 2-random sequence has hyperimmune degree, that is, is not computably dominated; so $Z$ is not 2-random. Kurtz's theorem is admitted, as stated in the previous lesson.
+:::
+::::
+
+## Notes and references
+
+Weak 2-randomness was introduced by Gaifman and Snir (1982) and studied by Kurtz (1981). Downey, Nies, Weber and Yu (2006) proved the characterization of this lesson, and Hirschfeldt and Miller the equivalence with forming a minimal pair with $\emptyset'$.
+
+- R. Downey, A. Nies, R. Weber and L. Yu, *Lowness and Π⁰₂ nullsets*, Journal of Symbolic Logic 71 (2006), 1044–1052.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 7.2.

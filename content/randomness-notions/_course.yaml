@@ -1,0 +1,18 @@
+title: Notions of randomness
+area: randomness
+level: Advanced
+order: 4
+prerequisites: [martin-lof-randomness, immunity-growth]
+summary: Relative randomness and van Lambalgen's theorem, 2-randomness and weak 2-randomness, Schnorr and Kurtz randomness.
+description: >
+  Randomness notions around Martin-Löf randomness: randomness relative to an
+  oracle and van Lambalgen's theorem, 2-randomness, weak 2-randomness and the
+  theorem of Downey, Nies, Weber and Yu, and the weaker notions of Schnorr and
+  Kurtz, which collapse onto Martin-Löf randomness in computably dominated
+  degrees.
+objectives:
+  - Prove van Lambalgen's theorem and derive the incomparability of random halves
+  - Place weak 2-randomness between 2-randomness and Martin-Löf randomness
+  - Characterize weakly 2-random sequences among random ones by their computational power
+  - Compare Schnorr and Kurtz randomness with Martin-Löf randomness
+lessons: [relative-randomness, weak-2-randomness, schnorr-kurtz]
