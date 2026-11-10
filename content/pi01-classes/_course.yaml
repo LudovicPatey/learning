@@ -2,6 +2,21 @@ title: Π⁰₁ classes
 area: computability
 level: Intermediate
 order: 7
-status: planned
-prerequisites: [turing-degrees]
-summary: Computable trees, König's lemma, PA degrees and the low basis theorem.
+prerequisites: [turing-degrees, arithmetic-hierarchy]
+summary: Computable trees, König's lemma, computable members of Π⁰₁ classes, the low, computably dominated and cone avoidance basis theorems, PA degrees, and finitely branching trees.
+description: >
+  The Π⁰₁ classes are the sets of paths through computable binary trees, and
+  describe the solutions of many problems with conditions refutable in finite
+  time. The course studies the topology of Cantor space and weak König's
+  lemma, which members of Π⁰₁ classes must be computable, the basis theorems
+  of Jockusch and Soare, the PA degrees, which compute members of all
+  non-empty Π⁰₁ classes, and the strength of König's lemma for finitely
+  branching trees.
+objectives:
+  - Describe Π⁰₁ classes by computable trees, co-c.e. trees and Σ⁰₁ complements
+  - Prove weak König's lemma and use compactness to decide emptiness of Π⁰₁ classes
+  - Show that isolated members of Π⁰₁ classes are computable
+  - Prove the low, computably dominated and cone avoidance basis theorems
+  - Characterize the PA degrees, and relate them to completions of Peano arithmetic
+  - Determine the strength of König's lemma for finitely branching trees
+lessons: [trees-and-classes, computable-members, basis-theorems, pa-degrees, finitely-branching-trees]
