@@ -236,3 +236,11 @@ Prove the substitution lemma: if $x \neq y$ and $x \notin \mathrm{FV}(L)$, then 
 By induction on $M$, using the variable convention. If $M = x$, both sides are $N[L/y]$. If $M = y$, the left side is $L$ and the right side is $L[N[L/y]/x] = L$ since $x \notin \mathrm{FV}(L)$. If $M$ is another variable, both sides are $M$. Applications follow directly from the induction hypothesis. If $M = \lambda z.\, M_1$ with $z$ distinct from $x, y$ and not free in $N, L$, both sides push the substitutions inside the abstraction and the induction hypothesis applies.
 :::
 ::::
+
+## Notes and references
+
+The λ-calculus was introduced by Church in the early 1930s as part of a foundational system that turned out to be inconsistent; the pure calculus survived. The confluence theorem is due to Church and Rosser; the proof by parallel reduction is due to Tait and Martin-Löf. Barendregt's monograph is the standard reference.
+
+- A. Church, J. B. Rosser, *Some properties of conversion*, Transactions of the American Mathematical Society 39 (1936), 472–482.
+- H. B. Curry, R. Feys, *Combinatory Logic*, volume I, North-Holland, 1958, for the standardization theorem.
+- H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, North-Holland, 1984.

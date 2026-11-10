@@ -192,3 +192,10 @@ Describe a $2$-tape machine computing $(x, y) \mapsto x \cdot y$, and estimate i
 Copy $\ulcorner y \urcorner$ to tape $2$ and erase it from tape $1$, together with the first $1$ of $\ulcorner x \urcorner$ and of the copy, so that tape $1$ holds $x$ ones and tape $2$ holds $y$ ones. Write the output on a third zone of tape $2$, to the right of a separator: for each $1$ of tape $1$, erase it and append a copy of the block of tape $2$ to the output zone by scanning the block once. Finally add one $1$ for the unary convention and move the result to tape $1$. Each of the $x$ rounds costs $O(x + y + xy)$ steps (the head must travel back and forth), so the total is $O(x^2 y)$ steps.
 :::
 ::::
+
+## Notes and references
+
+The simulation of multi-tape machines by single-tape machines, with a quadratic slowdown, is due to Hartmanis and Stearns, who used it in the foundational paper of complexity theory. The study of such simulations and of their cost belongs to complexity theory, where the robustness of the class of polynomial-time computable functions plays the role that the robustness of the computable functions plays here.
+
+- J. Hartmanis, R. E. Stearns, *On the computational complexity of algorithms*, Transactions of the American Mathematical Society 117 (1965), 285–306.
+- M. Sipser, *Introduction to the Theory of Computation*, 3rd edition, Cengage, 2012, chapter 3.

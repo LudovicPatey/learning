@@ -221,3 +221,10 @@ Show that WHILE programs and URM programs compute the same partial functions.
 A WHILE program can be compiled into a URM program by translating each construct into a block of instructions with jumps: assignments directly (the decrement-free instruction set suffices), sequences by concatenation, $\mathtt{LOOP}$ by a counter compared with a saved copy of the loop variable, and $\mathtt{WHILE}$ by a test against a register holding $0$ at the beginning of the block and an unconditional jump at its end; inputs and outputs are moved between $X_0$ and $R_1$. Conversely, a URM program $I_1, \dots, I_s$ is simulated by a WHILE program with a variable $\mathrm{PC}$ holding the index of the next instruction: $\mathrm{PC} \mathbin{:=} 1$; while $\mathrm{PC} \leq s$, execute the instruction of index $\mathrm{PC}$ — a finite case distinction on $\mathrm{PC}$, implemented with LOOP conditionals — and update $\mathrm{PC}$. This uses a single $\mathtt{WHILE}$ loop.
 :::
 ::::
+
+## Notes and references
+
+LOOP programs and the characterization of the primitive recursive functions are due to Meyer and Ritchie, who also related the nesting depth of loops to the Grzegorczyk hierarchy. The elimination of jumps in favour of structured control flow is the subject of the Böhm–Jacopini theorem.
+
+- A. R. Meyer, D. M. Ritchie, *The complexity of loop programs*, Proceedings of the 22nd ACM National Conference (1967), 465–469.
+- C. Böhm, G. Jacopini, *Flow diagrams, Turing machines and languages with only two formation rules*, Communications of the ACM 9 (1966), 366–371.

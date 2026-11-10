@@ -202,3 +202,10 @@ Show that every Turing-computable partial function is computed by infinitely man
 Adding to a machine states that are never entered does not change its computations, so each computable function has infinitely many machines. Up to renaming, a machine is determined by finitely many data — the numbers of states and symbols, and the table of $\delta$ — so it can be described by a finite string over a finite alphabet, and there are countably many machines; hence countably many computable functions. The set of total functions $\nat \to \nat$ is uncountable (by a diagonal argument, see :ref{to="countability/diagonal-argument"}), so some total function is not computable.
 :::
 ::::
+
+## Notes and references
+
+Turing's machines (1936) differ from ours in inessential details: they compute infinite binary sequences rather than functions, and halting plays no role. Post introduced an almost identical model independently in the same year. The conventions used here — unary notation with $x+1$ strokes and a standard final configuration — follow Boolos, Burgess and Jeffrey.
+
+- E. L. Post, *Finite combinatory processes — formulation 1*, Journal of Symbolic Logic 1 (1936), 103–105.
+- G. Boolos, J. Burgess, R. Jeffrey, *Computability and Logic*, 5th edition, Cambridge University Press, 2007.

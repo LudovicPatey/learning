@@ -259,3 +259,11 @@ Prove that the URM-computable functions are closed under definition by cases: if
 Let $C$ compute the characteristic function of $P$. Save the input in fresh registers, run $C$ on it with output in a fresh register $R_c$, and use $J(c, z, \cdot)$, where $R_z$ is a fresh register containing $0$, to branch to a block computing $f_2$ on the saved input; otherwise continue with a block computing $f_1$ on the saved input, followed by an unconditional jump past the other block. Correctness follows from :ref{#lem-urm-subroutine} and :ref{#lem-urm-concat}.
 :::
 ::::
+
+## Notes and references
+
+Register machines were introduced around 1960 in several variants, by Melzak, Lambek, Minsky, and Shepherdson and Sturgis. The URM and its notation follow Cutland's textbook, which develops the whole of elementary computability theory on this model.
+
+- J. C. Shepherdson, H. E. Sturgis, *Computability of recursive functions*, Journal of the ACM 10 (1963), 217–255.
+- M. Minsky, *Computation: Finite and Infinite Machines*, Prentice-Hall, 1967.
+- N. Cutland, *Computability: An Introduction to Recursive Function Theory*, Cambridge University Press, 1980.

@@ -157,3 +157,11 @@ Show that $\langle x, y \rangle \geq x$ and $\langle x, y \rangle \geq y$ for al
 $\langle x, y \rangle = T(x+y) + y$. Since $T(n) \geq n$, we get $\langle x, y \rangle \geq x + y + y \geq y$, and $\langle x, y \rangle \geq T(x) \geq x$. Equality $\langle x, y\rangle = x$ forces $y = 0$ and $T(x) = x$, i.e. $x \in \{0, 1\}$. Equality $\langle x, y \rangle = y$ forces $T(x+y) = 0$, i.e. $x = y = 0$.
 :::
 ::::
+
+## Notes and references
+
+The Entscheidungsproblem is formulated in Hilbert and Ackermann's textbook *Grundzüge der theoretischen Logik* (Springer, 1928). Its negative solution was obtained independently by Church and by Turing in 1936. The quadratic polynomial bijections $\nat^2 \to \nat$ were determined by Fueter and Pólya (1923): up to the exchange of coordinates, Cantor's pairing function is the only one.
+
+- A. Church, *An unsolvable problem of elementary number theory*, American Journal of Mathematics 58 (1936), 345–363.
+- A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society (2) 42 (1936), 230–265.
+- R. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, chapter 1, for a historical account.

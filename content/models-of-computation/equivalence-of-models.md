@@ -212,3 +212,11 @@ Show that there is a total computable function $g : \nat^2 \to \nat$ such that t
 Code derivations of unary primitive recursive functions by integers, mapping non-codes to a fixed derivation of $Z$. Each derivation can be translated computably into a Turing machine computing the same function; let $t(e)$ be the code of the machine obtained from the derivation $e$. Then $g(e, x) = \Phi(t(e), x)$ is computable and total, since primitive recursive functions are total. If $g$ were primitive recursive, so would be $x \mapsto g(x, x) + 1$, which differs from every $g(e, \cdot)$ at $e$.
 :::
 ::::
+
+## Notes and references
+
+Turing proved the equivalence of his machines with λ-definability in an appendix to his 1936 paper, and Kleene the equivalence of λ-definability with general recursiveness. The predicate $T$ of the normal form theorem is often called *Kleene's $T$-predicate*. The arithmetization of computations given here follows the treatment of register and Turing machines in Cutland's and Odifreddi's textbooks.
+
+- S. C. Kleene, *General recursive functions of natural numbers*, Mathematische Annalen 112 (1936), 727–742.
+- N. Cutland, *Computability: An Introduction to Recursive Function Theory*, Cambridge University Press, 1980.
+- P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989, chapter I.

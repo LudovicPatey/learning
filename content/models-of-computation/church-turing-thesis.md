@@ -81,7 +81,7 @@ This usage is safe because of the equivalence theorem: the reader may choose the
 
 From the next course on, we adopt this practice. A function is **computable** if it is computed by some program, described in pseudo-code; we fix an enumeration $\Phi_0, \Phi_1, \Phi_2, \dots$ of the partial computable functions, given by the universal function of the previous lesson, and study its properties. The first question addressed is the one that motivated the whole enterprise: which problems are **not** computable? This is the starting point of the lesson :ref{to="fundamentals/programs-as-numbers"}.
 
-## Further reading
+## Notes and references
 
 - A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society, 1936.
 - S. C. Kleene, *Introduction to Metamathematics*, 1952, chapters XI–XIII.

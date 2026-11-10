@@ -1380,7 +1380,18 @@ pre {
   margin-bottom: 0;
 }
 
-/* theorem-like statements: tinted panel with an accent bar; italic text */
+/*
+ * Statements and proofs.
+ * A statement is a lightly tinted block with a coloured bar on the left. A proof
+ * has no frame: it continues the same left "spine" as a thin rule, so it reads
+ * as attached to the statement it proves. Questions on a proof hang below it,
+ * aligned with its text.
+ */
+.env {
+  --spine: var(--border-strong);
+  --pad: 1.15em;
+  position: relative;
+}
 .env-theorem,
 .env-lemma,
 .env-proposition,
@@ -1401,12 +1412,12 @@ pre {
 .env-conjecture,
 .env-definition,
 .env-notation {
-  position: relative;
-  padding: 0.85em 1.15em 0.9em 1.25em;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--env) 5%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--env) 16%, var(--border));
-  box-shadow: inset 3px 0 0 var(--env);
+  --spine: var(--env);
+  --head-top: 0.8em;
+  padding: 0.8em var(--pad) 0.85em calc(var(--pad) + 2px);
+  border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, var(--env) 4.5%, transparent);
+  box-shadow: inset 2.5px 0 0 var(--env);
 }
 .env-theorem .env-label,
 .env-lemma .env-label,
@@ -1431,85 +1442,43 @@ pre {
 .env-proposition .katex,
 .env-corollary .katex,
 .env-fact .katex,
-.env-conjecture .katex {
+.env-conjecture .katex,
+.env li::marker {
   font-style: normal;
 }
-
-/* remark-like: italic head, upright body, no frame */
-.env-remark .env-label,
-.env-example .env-label,
-.env-question .env-label {
-  font-weight: 600;
-  font-style: italic;
-}
-.env-remark,
-.env-example,
-.env-question {
-  padding-left: 1.15em;
-  border-left: 2px solid var(--border-strong);
+.env-title {
+  color: var(--fg-2);
 }
 
-/* exercises */
-.env-exercise {
-  padding: 0.9em 1.15em;
-  border-radius: 8px;
-  background: var(--surface);
-  border: 1px solid color-mix(in srgb, var(--env-ex) 28%, var(--border));
-  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--env-ex) 70%, transparent);
-}
-.env-exercise .env-label {
-  color: var(--env-ex);
-}
-
-/* proofs: a panel of their own, attached below the statement they prove */
+/* proofs */
 .env-proof {
-  --env: var(--border-strong);
-  position: relative;
-  padding: 0.8em 1.15em 0.85em 1.25em;
-  border-radius: 8px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: inset 3px 0 0 var(--env);
-  font-size: 0.985em;
+  --spine: color-mix(in srgb, var(--fg) 22%, transparent);
+  padding: 0.1em 0 0.1em calc(var(--pad) + 2px);
+  border-left: 1px solid var(--spine);
+  margin-left: 0;
 }
 .env-proof .env-label {
   font-style: italic;
-  font-weight: 650;
+  font-weight: 600;
   color: var(--fg-2);
 }
 .env-proof .env-label a {
   font-style: italic;
 }
-:is(.env-theorem, .env-lemma, .env-proposition, .env-corollary, .env-fact, .env-conjecture, .env-definition):has(+ .env-proof) {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+/* attached to the preceding statement: the spine continues in its colour */
+:is(.env-theorem, .env-lemma, .env-proposition, .env-corollary, .env-fact, .env-conjecture, .env-definition, .env-notation):has(+ .env-proof) {
   margin-bottom: 0;
+  border-bottom-right-radius: 0;
 }
 :is(.env-theorem, .env-lemma, .env-proposition, .env-corollary, .env-fact, .env-conjecture) + .env-proof {
-  --env: color-mix(in srgb, var(--env-thm) 45%, transparent);
+  --spine: color-mix(in srgb, var(--env-thm) 38%, transparent);
   margin-top: 0;
-  border-top: 1px dashed color-mix(in srgb, var(--env-thm) 22%, var(--border));
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  padding-top: 0.9em;
 }
-.env-definition + .env-proof {
-  --env: color-mix(in srgb, var(--env-def) 45%, transparent);
+:is(.env-definition, .env-notation) + .env-proof {
+  --spine: color-mix(in srgb, var(--env-def) 38%, transparent);
   margin-top: 0;
-  border-top: 1px dashed var(--border);
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-/* questions on a proof hang below it */
-.segment:has(+ .quiz) > .env-proof:last-child {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  margin-bottom: 0;
-}
-.segment:has(> .env-proof:last-child) + .quiz {
-  margin-top: 0;
-  border-top: none;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  padding-top: 0.9em;
 }
 .env-proof > :last-child::after {
   content: "\220E";
@@ -1524,17 +1493,57 @@ pre {
 .env-proof > ul:last-child::after {
   content: none;
 }
-.env-proof > .katex-display:last-child,
-.env-proof > ol:last-child,
-.env-proof > ul:last-child {
-  margin-bottom: 1.1em;
+.env-proof:has(> .katex-display:last-child, > ol:last-child, > ul:last-child) {
+  padding-bottom: 1.4em;
 }
 .env-proof:has(> .katex-display:last-child, > ol:last-child, > ul:last-child)::after {
   content: "\220E";
   position: absolute;
-  right: 1.15em;
-  bottom: 0.7em;
+  right: 0;
+  bottom: 0.2em;
   color: var(--muted);
+}
+
+/* questions on a proof: aligned with the proof text, on the same spine */
+.segment:has(> .env-proof:last-child) + .quiz {
+  margin-top: 0.5em;
+  margin-left: calc(var(--pad, 1.15em) + 2px);
+}
+
+/* remark-like: italic head, upright body, plain */
+.env-remark .env-label,
+.env-example .env-label,
+.env-question .env-label {
+  font-weight: 600;
+  font-style: italic;
+}
+.env-remark,
+.env-example,
+.env-question {
+  padding-left: calc(var(--pad) + 2px);
+  border-left: 1px solid var(--border-strong);
+}
+
+/* exercises */
+.env-exercise {
+  --spine: var(--env-ex);
+  --head-top: 0.8em;
+  padding: 0.8em var(--pad) 0.85em calc(var(--pad) + 2px);
+  border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, var(--env-ex) 4.5%, transparent);
+  box-shadow: inset 2.5px 0 0 color-mix(in srgb, var(--env-ex) 75%, transparent);
+}
+.env-exercise .env-label {
+  color: var(--env-ex);
+}
+
+/* permalink to a statement, in the left margin */
+.env-anchor {
+  position: absolute;
+  left: -1.5em;
+  top: var(--head-top, 0.1em);
+  width: 1.2em;
+  text-align: center;
 }
 
 .env-aside {
@@ -2150,7 +2159,6 @@ pre {
 }
 
 .env-anchor {
-  margin-left: 6px;
   color: var(--subtle);
   font-weight: 500;
   text-decoration: none;
@@ -2166,18 +2174,13 @@ pre {
 }
 @keyframes target-flash {
   0%,
-  30% {
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 35%, transparent);
-  }
-  100% {
-    box-shadow: 0 0 0 0 transparent;
+  35% {
+    background-color: color-mix(in srgb, var(--accent) 14%, transparent);
   }
 }
 .env:target {
-  animation: target-flash 1.8s ease-out;
-  border-radius: 14px;
+  animation: target-flash 2s ease-out;
 }
-
 .ref-preview {
   position: absolute;
   z-index: 45;
@@ -2585,4 +2588,39 @@ pre {
   margin: 0.8em auto 0;
   text-align: center;
   line-height: 1.5;
+}
+
+/* Narrow screens: justification next to unbreakable formulas leaves wide gaps. */
+@media (max-width: 640px) {
+  .lesson-body p,
+  .lesson-body li,
+  .lesson-body .quiz-stem,
+  .lesson-body .quiz-expl,
+  .lesson-body .quiz-discussion {
+    text-align: left;
+  }
+  .env {
+    --pad: 0.85em;
+  }
+  .env-anchor {
+    display: none;
+  }
+}
+
+/* "Notes and references" sections: bibliography style */
+.lesson-body h2#notes-and-references ~ p {
+  font-size: 0.95em;
+  color: var(--fg-2);
+}
+.lesson-body h2#notes-and-references ~ ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: 0.9em;
+  color: var(--fg-2);
+}
+.lesson-body h2#notes-and-references ~ ul > li {
+  padding-left: 1.6em;
+  text-indent: -1.6em;
+  text-align: left;
+  margin: 0.35em 0;
 }

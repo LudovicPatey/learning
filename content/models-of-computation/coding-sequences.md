@@ -188,3 +188,10 @@ Define a bijective coding of finite sequences: show that the function $\langle\!
 By induction on $z$: $z = 0$ codes only the empty sequence, and $z \geq 1$ codes exactly the sequences with first element $\pi_0(z - 1)$ followed by the sequence coded by $\pi_1(z - 1) < z$; this gives existence and uniqueness. The length satisfies $\mathrm{lh}(0) = 0$ and $\mathrm{lh}(z) = 1 + \mathrm{lh}(\pi_1(z - 1))$ for $z \geq 1$, a course-of-values recursion since $\pi_1(z - 1) < z$; the projections are obtained similarly. By :ref{#thm-course-of-values}, they are primitive recursive.
 :::
 ::::
+
+## Notes and references
+
+The β-function lemma appears in Gödel's incompleteness paper of 1931, where it is used to express definitions by recursion in the language of arithmetic. Coding finite sequences by prime powers is also due to Gödel. Course-of-values recursion is treated in detail in Péter's monograph.
+
+- K. Gödel, *Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I*, Monatshefte für Mathematik und Physik 38 (1931), 173–198.
+- S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952.

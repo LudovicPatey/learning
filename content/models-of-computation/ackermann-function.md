@@ -222,3 +222,11 @@ A computation of $A(x, y)$ can be recorded as a finite set of triples $(x', y', 
 Call a finite set $T$ of triples **closed** if for each $(x', y', z') \in T$, the equations defining $A(x', y')$ are witnessed in $T$: if $x' = 0$ then $z' = y' + 1$; if $x' > 0$, $y' = 0$ then $(x' - 1, 1, z') \in T$; if $x', y' > 0$ then there is $w$ with $(x', y' - 1, w) \in T$ and $(x' - 1, w, z') \in T$. By induction along $<_{\mathrm{lex}}$, every triple in a closed set is in $G$; conversely, the set of triples occurring in the evaluation of $A(x, y)$ is closed and contains $(x, y, A(x, y))$. All triples occurring in that evaluation have components at most $z = A(x, y)$, by monotonicity. Coding $T$ as a sequence of triples, the code is bounded by a primitive recursive function of $z$, and $G(x, y, z)$ holds iff there is a closed $T$ with code below this bound containing $(x, y, z)$: a bounded search over a primitive recursive predicate.
 :::
 ::::
+
+## Notes and references
+
+Ackermann's original function had three arguments; the two-argument version used here is due to Péter. The majorization argument follows the standard textbook proof. The stratification of the primitive recursive functions by growth rate leads to the Grzegorczyk hierarchy.
+
+- W. Ackermann, *Zum Hilbertschen Aufbau der reellen Zahlen*, Mathematische Annalen 99 (1928), 118–133.
+- R. Péter, *Konstruktion nichtrekursiver Funktionen*, Mathematische Annalen 111 (1935), 42–60.
+- A. Grzegorczyk, *Some classes of recursive functions*, Rozprawy Matematyczne 4 (1953).

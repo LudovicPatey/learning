@@ -94,7 +94,7 @@ $$
 $$
 :::
 
-A boolean selects one of its two arguments: $\mathsf{true}\, M\, N \twoheadrightarrow_\beta M$ and $\mathsf{false}\, M\, N \twoheadrightarrow_\beta N$. Hence "$\mathtt{if}\ B\ \mathtt{then}\ M\ \mathtt{else}\ N$" is simply $B\, M\, N$. The term $\mathsf{iszero}\, \overline n$ iterates the constant function $\lambda z.\, \mathsf{false}$ $n$ times on $\mathsf{true}$: it reduces to $\mathsf{true}$ if $n = 0$ and to $\mathsf{false}$ otherwise. Pairs store two terms: $\mathsf{fst}\,(\mathsf{pair}\, M\, N) \twoheadrightarrow_\beta M$ and $\mathsf{snd}\,(\mathsf{pair}\, M\, N) \twoheadrightarrow_\beta N$.
+A boolean selects one of its two arguments: $\mathsf{true}\, M\, N \twoheadrightarrow_\beta M$ and $\mathsf{false}\, M\, N \twoheadrightarrow_\beta N$. Hence “$\mathtt{if}\ B\ \mathtt{then}\ M\ \mathtt{else}\ N$” is simply $B\, M\, N$. The term $\mathsf{iszero}\, \overline n$ iterates the constant function $\lambda z.\, \mathsf{false}$ $n$ times on $\mathsf{true}$: it reduces to $\mathsf{true}$ if $n = 0$ and to $\mathsf{false}$ otherwise. Pairs store two terms: $\mathsf{fst}\,(\mathsf{pair}\, M\, N) \twoheadrightarrow_\beta M$ and $\mathsf{snd}\,(\mathsf{pair}\, M\, N) \twoheadrightarrow_\beta N$.
 
 ## The predecessor
 
@@ -202,7 +202,7 @@ $$
 & \big(H\,(G_1\, \vec x) \cdots (G_m\, \vec x)\big)
 \end{aligned}
 $$
-behaves as the naive term when all $G_i\, \vec{\overline x}$ reduce to numerals, since the prefix reduces to $\mathsf I \cdots \mathsf I$. To make the converse precise — that the term has no normal form when some $G_i\, \vec{\overline x}$ has none — one needs a stronger invariant than "has no normal form", namely **unsolvability**; it is preserved by the constructions above. We refer to Barendregt, *The Lambda Calculus*, §8.4, for the details.
+behaves as the naive term when all $G_i\, \vec{\overline x}$ reduce to numerals, since the prefix reduces to $\mathsf I \cdots \mathsf I$. To make the converse precise — that the term has no normal form when some $G_i\, \vec{\overline x}$ has none — one needs a stronger invariant than "has no normal form", namely **unsolvability**; it is preserved by the constructions above. We refer to Barendregt, *The Lambda Calculus*, for the details.
 :::
 
 :::quiz[λ-definability of recursive functions]
@@ -266,3 +266,11 @@ Show that $\mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta \overline 6$ und
 Write $\mathsf{fact} = \mathsf{Y}\, F$. By the fixed point property, $\mathsf{fact}\, \overline 3 =_\beta F\, \mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta (\mathsf{iszero}\, \overline 3)\, \overline 1\, (\mathsf{mult}\, \overline 3\, (\mathsf{fact}\,(\mathsf{pred}\, \overline 3)))$, which reduces to $\mathsf{mult}\, \overline 3\, (\mathsf{fact}\, \overline 2)$; continuing down to $\mathsf{fact}\, \overline 0 \twoheadrightarrow_\beta \overline 1$ gives $\overline 6$. Normal order contracts the conditional before evaluating the recursive call. Applicative order would first try to normalize the argument $\mathsf{Y}\, F$, whose reduction $\mathsf{Y}\, F \to W\, W \to F\,(W\, W) \to F\,(F\,(W\, W)) \to \cdots$ never terminates.
 :::
 ::::
+
+## Notes and references
+
+The definability of the predecessor was found by Kleene in 1932, and the equivalence between λ-definability and general recursiveness was proved by Kleene in 1936. The combinator $\Theta$ is due to Turing (1937).
+
+- S. C. Kleene, *λ-definability and recursiveness*, Duke Mathematical Journal 2 (1936), 340–353.
+- A. M. Turing, *The p-function in λ-K-conversion*, Journal of Symbolic Logic 2 (1937), 164.
+- H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, North-Holland, 1984.

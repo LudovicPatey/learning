@@ -267,3 +267,11 @@ Show that if $f : \nat \to \nat$ is primitive recursive and strictly increasing,
 If $f$ is strictly increasing, then $f(z) \geq z$, so $y \in \operatorname{im} f \iff \exists z \leq y\ f(z) = y$, a bounded quantification. Without monotonicity this fails in general: there are primitive recursive functions whose range is not even computable. Fix a code $a$ of a program which halts on input $a$, and let $f(\langle e, t \rangle) = e$ if the program of code $e$ halts on input $e$ within $t$ steps, and $f(\langle e, t \rangle) = a$ otherwise. Step-bounded simulation is primitive recursive (see the lesson :ref{to="models-of-computation/equivalence-of-models"}), so $f$ is primitive recursive, and its range is the halting set $\{e : \Phi_e(e)\converge\}$, which is not computable (see the course on fundamentals).
 :::
 ::::
+
+## Notes and references
+
+Definitions by recursion go back to Dedekind (1888) and Skolem (1923). Gödel used the primitive recursive functions — he called them *recursive* — to arithmetize syntax in his incompleteness theorem; the modern name is due to Kleene. Rózsa Péter's monograph is the classical reference on the subject.
+
+- K. Gödel, *Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I*, Monatshefte für Mathematik und Physik 38 (1931), 173–198.
+- R. Péter, *Rekursive Funktionen*, Akadémiai Kiadó, 1951.
+- P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989, chapter I.

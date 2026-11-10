@@ -185,3 +185,10 @@ Let $f(x) \simeq \mu y\, [g(x, y) = 0]$ for a partial recursive $g$. Is it true 
 It is false in general: we always have $\dom f \subseteq \{x : \exists y\ g(x, y) = 0\}$, but the converse fails when $g(x, z)$ diverges for some $z$ smaller than every zero. For example, let $g(x, y) \simeq \mu z\, [z + \overline{\mathrm{sg}}(y) = 0]$. For $y \geq 1$, $\overline{\mathrm{sg}}(y) = 0$ and $g(x, y) = 0$; for $y = 0$, the search $\mu z\, [z + 1 = 0]$ diverges. Then $\exists y\ g(x, y) = 0$ holds for all $x$, but $f$ is nowhere defined, since the search for $f(x)$ is stuck at $y = 0$.
 :::
 ::::
+
+## Notes and references
+
+The general recursive functions were defined by Gödel in 1934, following a suggestion of Herbrand, through systems of equations. Kleene gave the characterization by minimization and proved the normal form theorem in 1936.
+
+- S. C. Kleene, *General recursive functions of natural numbers*, Mathematische Annalen 112 (1936), 727–742.
+- S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952, chapters XI–XII.
