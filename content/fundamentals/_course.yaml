@@ -3,17 +3,19 @@ area: computability
 level: Introductory
 order: 3
 prerequisites: [models-of-computation, countability]
-summary: Programs as numbers, the universal machine, the halting problem, c.e. sets and Kleene's recursion theorem.
+summary: The enumeration of the partial computable functions, the universal function and the SMN theorem, the halting problem and reductions, c.e. sets, Kleene's fixed point theorem and Rice's theorem.
 description: >
-  The basic results of computability theory, based on an acceptable numbering of
-  the partial computable functions: universal function, SMN theorem, halting
-  problem, computably enumerable sets, Kleene's recursion theorem and Rice's
-  theorem.
+  The basic theory of the partial computable functions, built on the
+  enumeration Φₑ given by Kleene's normal form: approximation by stages, the
+  universal function, the SMN theorem and acceptable numberings, the
+  undecidability of the halting problem and many-one reductions, computably
+  enumerable sets and the m-completeness of the halting set, Kleene's fixed
+  point theorem, and the theorems of Rice and Rice–Shapiro.
 objectives:
-  - Use the notation Φₑ(x)↓ fluently
-  - Apply the SMN theorem and the universal program
-  - Prove that the halting problem is undecidable
-  - Characterize computably enumerable sets in several ways
+  - Use the notation Φₑ(x)↓ and the approximation by stages fluently
+  - Apply the universal function and the SMN theorem, in particular in its parameter form
+  - Prove that the halting problem is undecidable, and reduce it to other problems
+  - Characterize the computably enumerable sets in several ways, and use their closure properties
   - Use Kleene's fixed point theorem to build self-referential programs
-  - Prove Rice's theorem
+  - Prove Rice's theorem, and decide which index sets are computably enumerable
 lessons: [programs-as-numbers, universal-program-smn, halting-problem, ce-sets, fixed-point, rice-theorem]

@@ -1,83 +1,180 @@
 ---
 title: Programs as numbers
-summary: Coding of programs by integers, the notation Φₑ, and computable sets.
-duration: 15
-prerequisites: [models-of-computation/church-turing-thesis]
+summary: The enumeration Φₑ of the partial computable functions, its approximation by stages, and computable sets and relations.
+duration: 35
+prerequisites: [models-of-computation/equivalence-of-models]
 ---
 
-Thanks to the Church–Turing thesis, we can stop writing Turing machines. From now on an algorithm is described in pseudo-code, and a function is **computable** if some such algorithm computes it. But we keep one essential feature of the formal models: programs are finite objects, so they can be **numbered**.
+The course on models of computation ends with an enumeration of all partial computable functions: machines are coded by integers, and the function computed by the machine of code $e$ is obtained from $e$ by a single unbounded search (:ref{#thm-kleene-normal-form-proof}). The whole of computability theory is built on this enumeration. This lesson fixes it once and for all, together with its approximation by stages, and sets up the notions of computable set and computable relation. From now on, algorithms are described in words or pseudo-code, following the practice explained in :ref{to="models-of-computation/church-turing-thesis"}.
 
-## Numbering programs
+## The enumeration
 
-Fix a programming language. A program is a finite string of characters; read in binary, this string is a natural number. We say that $e$ is the **code** (or **index**) of the program. Numbers that do not encode a syntactically valid program are declared to code the program that loops forever on every input, so every $e \in \nat$ is the code of some program.
+Recall that $T_k(e, \vec x, s)$ is the primitive recursive predicate "$s$ codes the complete computation of the machine of code $e$ on input $\vec x = (x_1, \dots, x_k)$", that for given $e$ and $\vec x$ at most one $s$ satisfies it, and that $U(s)$ is the primitive recursive function reading the output on the last configuration of the computation coded by $s$. Integers that do not code a machine are treated as coding a fixed machine that never halts, so that every integer is the code of a machine.
 
 :::notation{#not-phi-e}
-$\Phi_e$ denotes the partial function computed by the program of code $e$. For an input $x$:
+For $e \in \nat$ and $k \geq 1$, $\Phi^{(k)}_e$ is the $k$-ary partial function
+$$
+\Phi^{(k)}_e(\vec x) \simeq U\big(\mu s\ T_k(e, \vec x, s)\big),
+$$
+computed by the machine of code $e$. The integer $e$ is an **index** of $\Phi^{(k)}_e$. The superscript is omitted when the number of arguments is clear, and $\Phi_e$ stands for $\Phi^{(1)}_e$. For an input $\vec x$:
 
-- $\Phi_e(x)\converge$ means the computation halts; $\Phi_e(x)\diverge$ means it runs forever;
-- $\Phi_e(x)\converge = y$ means it halts with output $y$;
-- $\Phi_e(x)[t]\converge$ means it halts **within $t$ steps**.
+- $\Phi_e(\vec x)\converge$ means that the computation halts in a standard configuration, so that $\Phi_e(\vec x)$ is defined; $\Phi_e(\vec x)\diverge$ means that it is undefined;
+- $\Phi_e(\vec x)\converge = y$ means that it is defined, with value $y$.
 :::
 
-The list $\Phi_0, \Phi_1, \Phi_2, \dots$ contains every partial computable function — in fact each one infinitely often, since adding useless instructions changes the code but not the function.
+By :ref{#cor-universal-function}, the sequence $\Phi_0, \Phi_1, \Phi_2, \dots$ contains every unary partial computable function, and the map $(e, \vec x) \mapsto \Phi_e(\vec x)$ is itself partial computable. These two facts — every partial computable function has an index, and the enumeration is computable — are the only properties of the enumeration used in most of the theory. The next lesson adds a third one, the SMN theorem.
 
 :::notation{#not-kleene-equality}
-For partial functions, $f(x) = g(x)$ means: either both sides are defined and equal, or both are undefined.
+As in the course on models of computation (:ref{#not-kleene-eq}), $\alpha \simeq \beta$ between two expressions denoting possibly undefined values means: either both are defined and equal, or both are undefined. For partial functions, $f = g$ means $f(\vec x) \simeq g(\vec x)$ for every $\vec x$: the two functions have the same domain and agree on it.
 :::
 
-## Running a program for a while
+The **domain** of a partial function $f$ is $\mathrm{dom}(f) = \{ \vec x : f(\vec x)\converge \}$, and its **graph** is $\{ (\vec x, y) : f(\vec x)\converge = y \}$. A partial function is **total** if its domain is the set of all inputs.
 
-Two facts about the step-bounded notation are used constantly:
+## Approximation by stages
 
+The computation of $\Phi_e(x)$ can be followed for a while. The following definition makes this precise, with conventions that make the approximations finite objects.
+
+:::definition{#def-stage}
+For $e, x, s \in \nat$, let
 $$
-\Phi_e(x)\converge \iff \exists t\ \ \Phi_e(x)[t]\converge, \qquad \Phi_e(x)[t]\converge \implies \Phi_e(x)[s]\converge \text{ for every } s \geq t.
+\Phi_e(x)[s] \simeq \begin{cases} U(t) & \text{if } e, x < s \text{ and } T_1(e, x, t) \text{ for some } t < s,\\ \text{undefined} & \text{otherwise.}\end{cases}
 $$
+We say that $\Phi_e(x)$ **converges at stage $s$** when $\Phi_e(x)[s]\converge$. The same notation is used for several arguments, with $T_k$ in place of $T_1$.
+:::
 
-The key point: for fixed $e$, $x$ and $t$, whether $\Phi_e(x)[t]\converge$ is **decidable** — just run the program for $t$ steps. What is not decidable, as we will soon prove, is whether $\Phi_e(x)\converge$, because no bound on $t$ is known in advance.
+Since a computation of $t$ steps has a code larger than $t$, convergence at stage $s$ implies that the computation halts in fewer than $s$ steps. The precise relation between stages and steps is irrelevant: what matters is the following.
 
-:::quiz
+:::proposition{#prop-stage-properties}
+1. The relation $\Phi_e(x)[s]\converge = y$, of the variables $e, x, s, y$, is primitive recursive. In particular, given $e$, $x$ and $s$, one can decide whether $\Phi_e(x)[s]\converge$, and compute its value if so.
+2. If $\Phi_e(x)[s]\converge = y$ and $s' \geq s$, then $\Phi_e(x)[s']\converge = y$.
+3. $\Phi_e(x)\converge = y$ if and only if $\Phi_e(x)[s]\converge = y$ for some $s$.
+:::
+
+:::proof{of=prop-stage-properties}
+1. $\Phi_e(x)[s]\converge = y$ holds if and only if $e < s \wedge x < s \wedge \exists t < s\, \big(T_1(e, x, t) \wedge U(t) = y\big)$. This is obtained from primitive recursive predicates by Boolean operations and a bounded quantifier, hence it is primitive recursive (:ref{#cor-pr-bounded-quantifiers}). The value, when defined, is $U(\mu t < s\ T_1(e, x, t))$, a bounded minimization.
+2. The witness $t < s$ is also smaller than $s'$, and the conditions $e, x < s$ are preserved.
+3. If $\Phi_e(x)\converge = y$, let $t$ be the code of the computation; then $T_1(e, x, t)$ and $U(t) = y$, so $\Phi_e(x)[s]\converge = y$ for $s = \max(e, x, t) + 1$. Conversely, if $\Phi_e(x)[s]\converge = y$ with witness $t$, then $t$ is the unique $t$ with $T_1(e, x, t)$, so $\mu s\, T_1(e, x, s) = t$ and $\Phi_e(x) = U(t) = y$.
+:::
+
+The contrast between items 1 and 3 is the central phenomenon of the theory. Convergence at a given stage is decidable; convergence is the existence of a stage, a question with an unbounded quantifier, and it is not decidable, as the lesson on the halting problem shows. Divergence is never confirmed at a finite stage: $\Phi_e(x)\diverge$ means $\Phi_e(x)[s]\diverge$ for **every** $s$.
+
+:::quiz[approximation by stages]
 Which statements hold for all $e$ and $x$?
 
-- [x] If $\Phi_e(x)[100]\converge$ then $\Phi_e(x)[1000]\converge$.
-- [ ] If $\Phi_e(x)[t]\diverge$ for every $t \leq 10^9$, then $\Phi_e(x)\diverge$.
+- [x] If $\Phi_e(x)[100]\converge$, then $\Phi_e(x)[1000]\converge$, with the same value.
 
-  The program might halt at step $10^9 + 1$. No finite simulation can certify divergence.
-- [x] $\Phi_e(x)\diverge$ if and only if $\Phi_e(x)[t]\diverge$ for every $t$.
-- [ ] If $\Phi_e(x)\converge$ then $\Phi_e(x)[x]\converge$.
+  This is item 2 of :ref{#prop-stage-properties}.
+- [ ] If $\Phi_e(x)[s]\diverge$ for every $s \leq 10^9$, then $\Phi_e(x)\diverge$.
 
-  Nothing bounds the running time in terms of the input.
+  The computation may converge at stage $10^9 + 1$. No finite amount of simulation establishes divergence.
+- [x] $\Phi_e(x)\diverge$ if and only if $\Phi_e(x)[s]\diverge$ for every $s$.
+
+  This is the negation of item 3.
+- [ ] If $\Phi_e(x)\converge$, then $\Phi_e(x)[x + 1]\converge$.
+
+  Nothing bounds the stage of convergence in terms of the input. For $x = 0$ and $e \geq 1$, already the condition $e < s$ fails at stage $1$; and in any case the computation may be arbitrarily long.
 
 ---
 
-Let $e$ be the code of: *on input $n$, try $r = 0, 1, 2, \dots$ and return the first $r$ with $r \cdot r = n$*. Which statements are true?
+Why does the definition of $\Phi_e(x)[s]$ require $e, x < s$?
+
+- [x] So that, for each $e$ and $s$, only finitely many $x$ converge at stage $s$, namely some $x < s$.
+
+  This convention makes the stage-$s$ approximation of the domain a finite set, given explicitly; it is used constantly in constructions.
+- [ ] To make the relation $\Phi_e(x)[s]\converge$ decidable.
+
+  The relation $\exists t < s\ T_1(e, x, t)$ is already decidable without this condition.
+- [ ] To ensure that $\Phi_e(x)[s]\converge$ implies $\Phi_e(x)\converge$.
+
+  This holds with or without the condition.
+:::
+
+## Computable sets and relations
+
+:::definition{#def-computable-set}
+A relation $R \subseteq \nat^k$ is **computable** (or **decidable**) if its characteristic function, equal to $1$ on $R$ and $0$ outside, is computable: there is an $e$ such that $\Phi^{(k)}_e$ is total and $\Phi^{(k)}_e(\vec x) = 1$ if $\vec x \in R$, $\Phi^{(k)}_e(\vec x) = 0$ otherwise. For $k = 1$ one speaks of computable **sets**.
+:::
+
+Computable sets were called *recursive* in older texts, after the partial recursive functions, and the expressions *recursion theory* and *recursive set* are still used. We freely identify a relation $R \subseteq \nat^k$ with the set $\{ \langle x_1, \dots, x_k \rangle : \vec x \in R \}$, obtained through the pairing function; one is computable if and only if the other is.
+
+:::proposition{#prop-computable-closure}
+1. The computable relations are closed under complement, finite union and finite intersection, and under substitution of total computable functions: if $R \subseteq \nat^m$ is computable and $g_1, \dots, g_m : \nat^k \to \nat$ are total computable, then $\{ \vec x : (g_1(\vec x), \dots, g_m(\vec x)) \in R \}$ is computable.
+2. They are closed under bounded quantification: if $R \subseteq \nat^{k+1}$ is computable, so are $\{ (\vec x, y) : \exists z < y\ R(\vec x, z) \}$ and $\{ (\vec x, y) : \forall z < y\ R(\vec x, z) \}$.
+3. Definition by cases: if $R_1, \dots, R_n$ are computable relations partitioning $\nat^k$ and $g_1, \dots, g_n$ are partial computable, then $f(\vec x) \simeq g_i(\vec x)$ for $\vec x \in R_i$ defines a partial computable function.
+4. Unbounded search: if $R \subseteq \nat^{k+1}$ is computable, then $f(\vec x) \simeq \mu y\, R(\vec x, y)$ is partial computable, and total if for every $\vec x$ there is some $y$ with $R(\vec x, y)$.
+:::
+
+:::proof{of=prop-computable-closure}
+By :ref{#thm-equivalence-models}, the computable partial functions are the partial recursive functions, which contain the primitive recursive functions and are closed under composition, primitive recursion and minimization. Let $\chi_R$ denote the characteristic function of $R$.
+
+1. $\chi_{\nat^k \setminus R} = 1 \dotminus \chi_R$, $\chi_{R \cap S} = \chi_R \cdot \chi_S$, and unions are complements of intersections of complements. Substitution is composition: the characteristic function of the new relation is $\chi_R(g_1(\vec x), \dots, g_m(\vec x))$, which is total.
+2. The function $(\vec x, y) \mapsto \sum_{z < y} \chi_R(\vec x, z)$ is defined by primitive recursion from $\chi_R$, hence computable, and $\exists z < y\ R(\vec x, z)$ holds exactly when it is non-zero. The bounded universal quantifier is the complement of a bounded existential quantifier applied to the complement.
+3. On input $\vec x$, compute $\chi_{R_1}(\vec x), \dots, \chi_{R_n}(\vec x)$, which are all defined, find the unique $i$ with $\vec x \in R_i$, and compute $g_i(\vec x)$. Only the branch that applies is evaluated, so the result is undefined exactly when $g_i(\vec x)$ is.
+4. $f(\vec x) \simeq \mu y\, [1 \dotminus \chi_R(\vec x, y) = 0]$ is a minimization of a total computable function. It is defined exactly when some $y$ satisfies $R(\vec x, y)$.
+:::
+
+In item 3, the evaluation of only one branch matters: in the primitive recursive definition by cases of the course on models of computation, all branches are computed, which is harmless for total functions but not for partial ones.
+
+:::quiz[closure properties]
+Let $R \subseteq \nat^2$ be computable. Which of the following are computable relations?
+
+- [x] $\{ (x, y) : \exists z < x + y\ R(x, z) \}$.
+
+  A bounded quantifier, with a bound given by a total computable function of the variables: substitute $x + y$ for the bound.
+- [ ] $\{ x : \exists z\ R(x, z) \}$, in general.
+
+  The unbounded search $\mu z\, R(x, z)$ gives a program that halts exactly on this set, but no program that says "no". Sets of this form are the computably enumerable sets of a later lesson; some of them are not computable.
+- [x] $\{ x : R(x, x) \text{ and not } R(x, 2x) \}$.
+
+  Substitution and Boolean operations.
+
+---
+
+Let $e$ be an index of the following algorithm: on input $n$, try $r = 0, 1, 2, \dots$ and return the first $r$ with $r^2 = n$. Which statements are true?
 
 - [x] The domain of $\Phi_e$ is the set of perfect squares.
+
+  The search succeeds exactly when $n$ is a square.
 - [x] $\Phi_e(49)\converge = 7$.
 - [ ] $\Phi_e$ is total, since $\lfloor \sqrt n \rfloor$ is defined for every $n$.
 
-  $\lfloor\sqrt n\rfloor$ is computable, but by a **different** program. $\Phi_e(50)\diverge$.
+  The function $n \mapsto \lfloor \sqrt n \rfloor$ is total computable, but it is computed by other programs. $\Phi_e(50)\diverge$: this program computes a different, partial, function.
 :::
 
-## Computable sets
+## Uniformity
 
-:::definition{#def-computable-set}
-A set $A \subseteq \nat$ is **computable** (or *decidable*) if its characteristic function is computable: there is an $e$ such that $\Phi_e$ is total, $\Phi_e(x) = 1$ for $x \in A$, and $\Phi_e(x) = 0$ for $x \notin A$.
+A typical statement of computability theory asserts that some object is obtained **uniformly** from others: for instance, "the set $A_x$ is computable, uniformly in $x$" means that the relation $\{ (x, y) : y \in A_x \}$ is computable, and not only that each $A_x$ is computable. The difference is essential. Each set $A_x = \{ 0 \}$ if $x \in \emptyset'$ and $A_x = \emptyset$ otherwise is finite, hence computable; but the relation $y \in A_x$ is not, since $x \in \emptyset'$ if and only if $0 \in A_x$, and $\emptyset'$ is not computable. Similarly, an index $e$ "obtained uniformly in $x$" is the value of a total computable function of $x$.
+
+## Exercises
+
+::::exercise{difficulty=1}
+Let $f : \nat \to \nat$ be total. Show that $f$ is computable if and only if its graph is computable.
+
+:::solution
+If $f$ is computable, $f(x) = y$ is decided by computing $f(x)$ and comparing with $y$. Conversely, if the graph $G$ is computable, then $f(x) = \mu y\ G(x, y)$, a search that terminates since $f$ is total; it is computable by :ref{#prop-computable-closure}.
 :::
+::::
 
-The same definition applies to subsets of $\nat^k$, which are often called **predicates**. Computable sets are closed under complement, finite union and intersection, and **bounded** quantification: if $A \subseteq \nat^2$ is computable, so is $\{(x, y) : \exists z < y\ (x, z) \in A\}$, by a `for` loop over $z < y$. Unbounded quantification $\exists z$ would require an unbounded search, which may never stop — this asymmetry will lead us to c.e. sets.
+::::exercise{difficulty=1}
+Show that the set $\{ e : \Phi_e(0)[e]\converge \}$ is computable, while the function $s \mapsto |\{ e < s : \Phi_e(e)[s]\converge \}|$ is total computable.
 
-:::quiz
-A program halts with output $1$ when $x \in A$, and **runs forever** when $x \notin A$. What can we conclude?
-
-- [ ] $A$ is computable.
-
-  The program never answers "no", so it does not decide $A$.
-- [x] Nothing yet about whether $A$ is computable.
-
-  Such sets are called *computably enumerable*. Some are computable, some are not.
-- [ ] $A$ is not computable.
-
-  Some other program might decide $A$.
+:::solution
+Both follow from item 1 of :ref{#prop-stage-properties}. The first set is defined by substituting $(e, 0, e)$ in a primitive recursive relation. The function is $\sum_{e < s} \chi(e, s)$, where $\chi(e, s)$ is the characteristic function of the primitive recursive relation $\Phi_e(e)[s]\converge$; it is primitive recursive.
 :::
+::::
 
-Historically, computable sets were called *recursive*, after the partial recursive functions; the expressions *recursion theory* and *recursive set* are still in use.
+::::exercise{difficulty=2}
+Show that a partial computable function with a computable domain has a total computable extension. Show by an example that a partial computable function may have a total computable extension and a non-computable domain.
+
+:::solution
+If $D = \mathrm{dom}(f)$ is computable, let $g(x) \simeq f(x)$ for $x \in D$ and $g(x) = 0$ for $x \notin D$, a definition by cases (:ref{#prop-computable-closure}); $g$ is total since $f(x)\converge$ for $x \in D$. For the converse, consider the partial function defined by $f(e) \simeq 0$ if $\Phi_e(e)\converge$, undefined otherwise. It is partial computable, its domain $\emptyset'$ is not computable, and the constant function $0$ is a total computable extension.
+:::
+::::
+
+## Notes and references
+
+The enumeration of the partial recursive functions by indices, and the normal form theorem on which it rests, are due to Kleene (1936, 1938). The notation $\Phi_e$ follows Soare's textbook; Rogers writes $\varphi_e$. The approximation by stages and its conventions are standard in modern texts, where they are the basis of all constructions by stages.
+
+- S. C. Kleene, *General recursive functions of natural numbers*, Mathematische Annalen 112 (1936), 727–742.
+- H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.

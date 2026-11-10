@@ -103,7 +103,7 @@ export default async function Home() {
                   className="try-context"
                   dangerouslySetInnerHTML={{
                     __html: renderMathText(
-                      "Suppose that a total computable function $h$ decides $\\emptyset' = \\{e : \\Phi_e(e)\\converge\\}$. Let $D$ be the program which, on input $x$, loops forever if $h(x) = 1$ and halts otherwise, and let $d$ be a code of $D$.\n\nThen $\\Phi_d(x)\\converge \\iff \\Phi_x(x)\\diverge$ for every $x$, and taking $x = d$ yields a contradiction.",
+                      "Suppose that $\\emptyset' = \\{e : \\Phi_e(e)\\converge\\}$ is computable. Let $D$ be the algorithm which, on input $x$, decides whether $x \\in \\emptyset'$, enters an infinite loop if so, and halts with output $0$ otherwise; let $d$ be an index of $D$.\n\nThen $\\Phi_d(x)\\converge \\iff \\Phi_x(x)\\diverge$ for every $x$, and taking $x = d$ yields a contradiction.",
                     ),
                   }}
                 />
