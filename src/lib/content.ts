@@ -109,6 +109,8 @@ type Catalog = {
   lessons: Map<string, LessonMeta>;
   labels: Map<string, Label>;
   warnings: string[];
+  /** Fingerprint of the content files this catalog was built from. */
+  fingerprint: string;
 };
 
 // ---------------------------------------------------------------- environments
@@ -334,17 +336,47 @@ function buildCatalog(sel?: VersionSel): Catalog {
       if (!lessons.has(p)) warnings.push(`${l.id}: unknown prerequisite "${p}"`);
     }
   }
-  return { areas, courses, lessons, labels, warnings };
+  return { areas, courses, lessons, labels, warnings, fingerprint: contentFingerprint(sel) };
 }
 
-const catalogCache = new Map<string, Catalog>();
+// Caching. Every cache is keyed by a fingerprint of the content files (paths,
+// sizes and modification times), so an edited lesson is picked up on the next
+// request while unchanged content is never parsed twice. Computing the
+// fingerprint costs one stat per file.
 const selKey = (sel?: VersionSel) => `${contentDir()}|${sel ? `${sel.course}@${sel.version}` : "current"}`;
 
+function fingerprintDir(dir: string, out: string[]) {
+  if (!fs.existsSync(dir)) return;
+  for (const d of fs.readdirSync(dir, { withFileTypes: true })) {
+    if (d.name.startsWith(".")) continue;
+    const p = path.join(dir, d.name);
+    if (d.isDirectory()) {
+      if (d.name !== "_versions") fingerprintDir(p, out);
+    } else if (/\.(md|ya?ml)$/.test(d.name)) {
+      const st = fs.statSync(p);
+      out.push(`${p}:${st.size}:${st.mtimeMs}`);
+    }
+  }
+}
+
+/** Fingerprint of the files a catalog depends on. Exported for tests. */
+export function contentFingerprint(sel?: VersionSel): string {
+  const out: string[] = [];
+  fingerprintDir(contentDir(), out);
+  if (sel) fingerprintDir(versionDir(sel.course, sel.version), out);
+  return crypto.createHash("sha1").update(out.join("|")).digest("hex");
+}
+
+const catalogCache = new Map<string, { fp: string; catalog: Catalog }>();
+
 export function getCatalog(sel?: VersionSel): Catalog {
-  // In development and tests, re-read on every call so authors see edits immediately.
   const key = selKey(sel);
-  if (process.env.NODE_ENV !== "production" || !catalogCache.has(key)) catalogCache.set(key, buildCatalog(sel));
-  return catalogCache.get(key)!;
+  const fp = contentFingerprint(sel);
+  const hit = catalogCache.get(key);
+  if (hit?.fp === fp) return hit.catalog;
+  const catalog = buildCatalog(sel);
+  catalogCache.set(key, { fp, catalog });
+  return catalog;
 }
 
 export function getCourse(id: string, sel?: VersionSel) {
@@ -649,30 +681,43 @@ async function renderTree(id: string, sel?: VersionSel) {
   return { meta, source, ctx, tree };
 }
 
-// Rendered HTML of every labelled statement, rebuilt only when a lesson file changes.
-const previewCache = new Map<string, { key: string; map: Map<string, string> }>();
+// Rendered trees, cached per lesson for a given state of the content.
+const treeCache = new Map<string, { fp: string; value: Promise<Awaited<ReturnType<typeof renderTree>>> }>();
 
-async function statementPreviews(sel?: VersionSel): Promise<Map<string, string>> {
-  const { lessons, labels } = getCatalog(sel);
-  const key = [...lessons.values()].map((l) => `${l.file}:${fs.statSync(l.file).mtimeMs}`).join("|");
-  const cached = previewCache.get(selKey(sel));
-  if (cached?.key === key) return cached.map;
+function cachedTree(id: string, sel?: VersionSel) {
+  const fp = getCatalog(sel).fingerprint;
+  const key = `${selKey(sel)}|${id}`;
+  const hit = treeCache.get(key);
+  if (hit?.fp === fp) return hit.value;
+  const value = renderTree(id, sel);
+  treeCache.set(key, { fp, value });
+  value.catch(() => treeCache.delete(key));
+  return value;
+}
+
+/** Rendered HTML of the labelled statements of one lesson. */
+const previewCache = new Map<string, { fp: string; map: Map<string, string> }>();
+
+async function lessonStatements(lessonId: string, sel?: VersionSel): Promise<Map<string, string>> {
+  const { labels, fingerprint } = getCatalog(sel);
+  const key = `${selKey(sel)}|${lessonId}`;
+  const hit = previewCache.get(key);
+  if (hit?.fp === fingerprint) return hit.map;
   const map = new Map<string, string>();
-  for (const id of lessons.keys()) {
-    const r = await renderTree(id, sel);
-    if (!r) continue;
+  const r = await cachedTree(lessonId, sel);
+  if (r) {
     visit(r.tree, "element", (el: any) => {
       const anchor = el.properties?.id;
       if (anchor && labels.has(String(anchor)) && hasClass(el, "env")) map.set(String(anchor), toHtml(el));
     });
   }
-  previewCache.set(selKey(sel), { key, map });
+  previewCache.set(key, { fp: fingerprint, map });
   return map;
 }
 
 /** Render a lesson of the working copy, or of a released version when `sel` is given. */
 export async function renderLesson(id: string, sel?: VersionSel): Promise<RenderedLesson | null> {
-  const r = await renderTree(id, sel);
+  const r = await cachedTree(id, sel);
   if (!r) return null;
   const { meta, source, ctx, tree } = r;
   const catalog = ctx.catalog;
@@ -716,11 +761,10 @@ export function contentHash(source: string): string {
 
 async function refPreviewsFor(ctx: Ctx, catalog: Catalog): Promise<Record<string, RefPreview>> {
   if (!ctx.refs.size) return {};
-  const all = await statementPreviews(ctx.sel);
   const out: Record<string, RefPreview> = {};
   for (const id of ctx.refs) {
-    const html = all.get(id);
     const lab = catalog.labels.get(id);
+    const html = lab && (await lessonStatements(lab.lessonId, ctx.sel)).get(id);
     const lesson = lab && catalog.lessons.get(lab.lessonId);
     if (!html || !lesson) continue;
     out[id] = {

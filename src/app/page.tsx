@@ -88,35 +88,6 @@ export default async function Home() {
           <CourseMap courses={mapCourses} areas={areas.map((a) => ({ id: a.id, title: a.title, color: a.color }))} />
         </section>
 
-        <section id="how" className="section">
-          <div className="section-head">
-            <h2>Organization of the notes</h2>
-          </div>
-          <div className="feature-grid">
-            <div className="feature">
-              <h3>Lessons</h3>
-              <p>
-                Each lesson treats one notion or theorem and states the lessons it depends on. Cross-references point to the exact
-                statement used, including across courses; hovering over a reference displays the statement.
-              </p>
-            </div>
-            <div className="feature">
-              <h3>Comprehension questions</h3>
-              <p>
-                Multiple-choice questions follow the main proofs. They address specific steps of the argument, such as where a
-                hypothesis is used, and every option comes with a justification.
-              </p>
-            </div>
-            <div className="feature">
-              <h3>Corrections</h3>
-              <p>
-                Readers can annotate any passage, including formulas, to report an error or an unclear argument. Remarks are signed
-                with an ORCID iD and reviewed by the maintainers.
-              </p>
-            </div>
-          </div>
-        </section>
-
         {sampleQuiz && sampleQuiz.type === "quiz" && (
           <section className="section">
             <div className="try-grid">

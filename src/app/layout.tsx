@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav className="site-nav">
               <Link href="/courses">Courses</Link>
               <Link href="/#map">Course map</Link>
-              <Link href="/#how">About</Link>
+              <Link href="/#map">Course map</Link>
             </nav>
             <ThemeToggle />
             <UserMenu />

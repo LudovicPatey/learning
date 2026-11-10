@@ -1,3 +1,5 @@
+import fs from "node:fs";
+import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
 import { useFixtureContent, stripTags } from "./helpers";
 import {
@@ -162,5 +164,37 @@ describe("rendering", () => {
     const b = await html("alpha/one");
     expect(a.contentHash).toMatch(/^[0-9a-f]{16}$/);
     expect(a.contentHash).toBe(b.contentHash);
+  });
+});
+
+describe("caching", () => {
+  it("reuses the catalog while the content is unchanged", () => {
+    expect(getCatalog()).toBe(getCatalog());
+  });
+
+  it("picks up edits to a lesson and to the course metadata", async () => {
+    const root = process.env.CONTENT_DIR!;
+    const body = async () => (await html("alpha/one")).segments.map((s) => (s.type === "html" ? s.html : "")).join("");
+    expect(stripTags(await body())).not.toContain("Freshly edited");
+    const file = path.join(root, "alpha/one.md");
+    fs.writeFileSync(file, fs.readFileSync(file, "utf8") + "\nFreshly edited paragraph.\n");
+    expect(stripTags(await body())).toContain("Freshly edited");
+
+    const yaml = path.join(root, "alpha/_course.yaml");
+    fs.writeFileSync(yaml, fs.readFileSync(yaml, "utf8").replace(/^title: .*$/m, "title: Renamed course"));
+    expect(getCourse("alpha")?.title).toBe("Renamed course");
+  });
+
+  it("updates reference previews when the referenced statement changes", async () => {
+    const root = process.env.CONTENT_DIR!;
+    const preview = async () => Object.values((await renderLesson("alpha/one"))!.refPreviews).map((p) => p.html).join("");
+    const first = await preview();
+    expect(first).not.toBe("");
+    const file = path.join(root, "alpha/two.md");
+    const src = fs.readFileSync(file, "utf8");
+    const changed = src.replace(/(:::lemma[^\n]*\n)/, "$1Additional hypothesis zeta. ");
+    expect(changed).not.toBe(src);
+    fs.writeFileSync(file, changed);
+    expect(stripTags(await preview())).toContain("Additional hypothesis zeta");
   });
 });
