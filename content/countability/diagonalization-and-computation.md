@@ -2,7 +2,7 @@
 title: Diagonalization and computation
 summary: Counting arguments; effective diagonalization against uniformly computable sequences; partial functions and the halting set; diagonalization by requirements.
 duration: 40
-prerequisites: [continuum, models-of-computation/equivalence-of-models]
+prerequisites: [continuum, models-of-computation/equivalence-of-models, models-of-computation/ackermann-function]
 ---
 
 This lesson connects the previous ones with computation. Counting shows that almost all functions are not computable, but it exhibits none. Diagonalization does better: applied to an enumeration that is itself computable, it produces a function that is computable, and escapes the enumeration. Applied to the enumeration $\Phi_0, \Phi_1, \Phi_2, \dots$ of all partial computable functions, it does not produce a contradiction, but a point of divergence, and from there the undecidability of the halting problem. The last section presents diagonalization as the satisfaction of a list of requirements, the form in which it is used in the rest of computability theory.
