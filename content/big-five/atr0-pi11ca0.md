@@ -11,9 +11,9 @@ The last two systems of the Big Five go beyond the arithmetic sets. $\mathsf{ATR
 
 A **countable linear order** is coded by a set $W \subseteq \nat \times \nat$ whose field $F_W = \{ i : (i, i) \in W \}$ is linearly ordered by $i \leq_W j \iff (i, j) \in W$. It is a **well-ordering** if every non-empty subset of its field has a $\leq_W$-least element; in second-order arithmetic, this is expressed by
 $$
-\mathrm{WO}(W) \equiv \forall X\, \big(\exists i \in F_W\ i \in X \rightarrow \exists i \in X\ \forall j \in X\ i \leq_W j\big),
+\mathrm{WO}(W) \equiv \forall X \subseteq F_W\, \big(\exists i\ i \in X \rightarrow \exists i \in X\ \forall j \in X\ i \leq_W j\big),
 $$
-a $\Pi^1_1$ formula. Equivalently, over $\mathsf{ACA}_0$, there is no infinite descending sequence in $F_W$.
+a $\Pi^1_1$ formula, where $X \subseteq F_W$ abbreviates the arithmetic formula $\forall i\, (i \in X \rightarrow i \in F_W)$. Equivalently, over $\mathsf{ACA}_0$, there is no infinite descending sequence in $F_W$.
 
 For a set $H$ and $j \in F_W$, write $H^{[j]}$ for the column $\{ n : \langle j, n \rangle \in H \}$ and $H^{[<j]} = \{ \langle i, n \rangle \in H : i <_W j \}$.
 
@@ -21,23 +21,23 @@ For a set $H$ and $j \in F_W$, write $H^{[j]}$ for the column $\{ n : \langle j,
 Let $\theta(n, j, Y)$ be an arithmetic formula, possibly with other parameters. A set $H$ is a **$\theta$-hierarchy along** $W$ if $H^{[j]} = \{ n : \theta(n, j, H^{[<j]}) \}$ for every $j \in F_W$, and $H$ has no elements outside the columns of $F_W$. **Arithmetic transfinite recursion** is the scheme: for every well-ordering $W$, there is a $\theta$-hierarchy along $W$. $\mathsf{ATR}_0$ is $\mathsf{ACA}_0$ together with this scheme.
 :::
 
-The typical instance is the **jump hierarchy**: with $\theta(n, j, Y) \equiv n \in Y'$, the column $j$ is the jump of the join of the previous columns, and the hierarchy iterates the Turing jump along $W$. Along $\omega$, it gives $\emptyset^{(\omega)}$, which does not exist in $\mathrm{ARITH}$; so $\mathsf{ACA}_0$ does not prove $\mathsf{ATR}_0$.
+The typical instance is the **jump hierarchy**: with $\theta(n, j, Y) \equiv n \in Y'$, the column $j$ is the jump of the join of the previous columns, and the hierarchy iterates the Turing jump along $W$. Along $\omega$, its column $j$ is Turing equivalent to $\emptyset^{(j+1)}$, so the hierarchy is Turing equivalent to $\emptyset^{(\omega)}$ and does not exist in $\mathrm{ARITH}$; so $\mathsf{ACA}_0$ does not prove $\mathsf{ATR}_0$.
 
 :::definition{#def-pi11-ca0}
 $\Pi^1_1\text{-}\mathsf{CA}_0$ is $\mathsf{ACA}_0$ together with the comprehension scheme for $\Pi^1_1$ formulas.
 :::
 
-Comprehension for $\Pi^1_1$ formulas gives comprehension for $\Sigma^1_1$ formulas, by complementation. Over $\mathsf{ACA}_0$, $\Pi^1_1\text{-}\mathsf{CA}_0$ proves $\mathsf{ATR}_0$; the hierarchy along a well-ordering is obtained as the unique set satisfying a $\Pi^1_1$ condition. We admit this implication (Simpson, Section V.1).
+Comprehension for $\Pi^1_1$ formulas gives comprehension for $\Sigma^1_1$ formulas, by complementation. $\Pi^1_1\text{-}\mathsf{CA}_0$ proves $\mathsf{ATR}_0$. We sketch the argument and admit the details (Simpson, Section V.1). Let $W$ be a well-ordering and, for $j \in F_W$, call a $\theta$-hierarchy along the initial segment $\{ i : i <_W j \}$ a hierarchy *below* $j$. Two hierarchies below $j$ are equal: otherwise the set of $i$ where their columns differ, which exists by arithmetic comprehension, would have a $<_W$-least element, at which the two columns are defined by $\theta$ from the same previous columns. By $\Sigma^1_1$ comprehension, the set $J$ of $j \in F_W$ having a hierarchy below $j$ exists. If $F_W \setminus J$ were non-empty, its least element $j$ would have hierarchies below every $i <_W j$, unique and therefore compatible, and the set $\{ \langle i, n \rangle : i <_W j \wedge \exists Y\, (Y \text{ is a hierarchy below } i \wedge \theta(n, i, Y)) \}$, which exists by $\Sigma^1_1$ comprehension, would be a hierarchy below $j$. So $J = F_W$, and the same $\Sigma^1_1$ definition without the bound $i <_W j$ gives a $\theta$-hierarchy along $W$. The second exercise below is the case of the jump hierarchy along $\omega$.
 
 ## Π¹₁ comprehension and trees
 
 A tree $T \subseteq \nat^{<\nat}$ is **ill-founded** if it has an infinite path, and **well-founded** otherwise. Having a path is a $\Sigma^1_1$ property of $T$. Conversely, every $\Sigma^1_1$ property is of this form.
 
 :::fact[Kleene normal form]{#fact-kleene-normal-form}
-For every $\Sigma^1_1$ formula $\varphi(n)$, possibly with parameters, $\mathsf{ACA}_0$ proves that there is a sequence of trees $(T_n)$, arithmetic in the parameters and uniformly in $n$, such that $\varphi(n)$ holds if and only if $T_n$ is ill-founded.
+For every $\Sigma^1_1$ formula $\varphi(n)$, possibly with parameters, there is a sequence of trees $(T_n)$ in $\nat^{<\nat}$, defined from the parameters by a $\Delta^0_1$ formula, uniformly in $n$, such that $\mathsf{ACA}_0$ proves: for every $n$, $\varphi(n)$ holds if and only if $T_n$ is ill-founded.
 :::
 
-The proof introduces Skolem functions for the arithmetic matrix of $\varphi$, and codes the matrix together with the witnesses into a tree of finite approximations; it is admitted here (Simpson, Lemma V.1.4). In the higher computability track, the same normal form, without second-order arithmetic, shows that the $\Sigma^1_1$ sets are the projections of $\Pi^0_1$ classes.
+The proof introduces Skolem functions for the arithmetic matrix of $\varphi$, which exist by arithmetic comprehension, and codes the set witnessing $\varphi$ together with these functions into a tree of finite approximations; it is admitted here (Simpson, Lemma V.1.4). In the higher computability track, the same normal form, without second-order arithmetic, shows that the $\Sigma^1_1$ sets are the projections of $\Pi^0_1$ classes.
 
 :::theorem{#thm-pi11-trees}
 Over $\mathsf{ACA}_0$, $\Pi^1_1\text{-}\mathsf{CA}_0$ is equivalent to the statement: for every sequence of trees $(T_n)$ in $\nat^{<\nat}$, the set $\{ n : T_n \text{ is ill-founded} \}$ exists.
@@ -46,10 +46,10 @@ Over $\mathsf{ACA}_0$, $\Pi^1_1\text{-}\mathsf{CA}_0$ is equivalent to the state
 :::proof{of=thm-pi11-trees}
 ($\Rightarrow$) The set is defined by the $\Sigma^1_1$ formula "$T_n$ has a path", and exists by $\Sigma^1_1$ comprehension, a consequence of $\Pi^1_1$ comprehension.
 
-($\Leftarrow$) Let $\psi(n)$ be $\Pi^1_1$; then $\neg \psi(n)$ is equivalent to a $\Sigma^1_1$ formula. By :ref{#fact-kleene-normal-form}, there is a sequence of trees $(T_n)$, which exists by arithmetic comprehension, such that $\neg \psi(n)$ if and only if $T_n$ is ill-founded. The set $I = \{ n : T_n \text{ is ill-founded} \}$ exists by hypothesis, and $\{ n : \psi(n) \} = \nat \setminus I$ exists by $\Delta^0_1$ comprehension.
+($\Leftarrow$) Let $\psi(n)$ be $\Pi^1_1$; then $\neg \psi(n)$ is equivalent to a $\Sigma^1_1$ formula. By :ref{#fact-kleene-normal-form}, there is a sequence of trees $(T_n)$, which exists by $\Delta^0_1$ comprehension, such that $\neg \psi(n)$ if and only if $T_n$ is ill-founded. The set $I = \{ n : T_n \text{ is ill-founded} \}$ exists by hypothesis, and $\{ n : \psi(n) \} = \nat \setminus I$ exists by $\Delta^0_1$ comprehension.
 :::
 
-In computability-theoretic terms, the set of indices of computable ill-founded trees is $\Sigma^1_1$-complete; its complement is Kleene's $\mathcal O$, up to a computable transformation. An ω-model of $\Pi^1_1\text{-}\mathsf{CA}_0$ is therefore closed under the **hyperjump**, the map sending $X$ to the set of indices of $X$-computable well-founded trees.
+In computability-theoretic terms, the set of indices of computable ill-founded trees is $\Sigma^1_1$-complete, and its complement is many-one equivalent to Kleene's $\mathcal O$. The **hyperjump** of $X$ is the set of indices of $X$-computable well-founded trees. An ω-model $\mathcal M$ of $\Pi^1_1\text{-}\mathsf{CA}_0$ contains, for each $X \in \mathcal M$, the set of indices of $X$-computable trees with no path in $\mathcal M$. When $\mathcal M$ is a **β-model**, that is, when every tree of $\mathcal M$ with a path has a path in $\mathcal M$, this set is the hyperjump of $X$, and $\mathcal M$ is closed under the hyperjump. An arbitrary ω-model of $\Pi^1_1\text{-}\mathsf{CA}_0$ need not be: the intersection of all of them is the class $\mathrm{HYP}$ of hyperarithmetic sets, which does not contain $\mathcal O$, a result of Gandy, Kreisel and Tait that we admit (Simpson, Chapter VIII).
 
 :::quiz[Π¹₁ comprehension]
 Why is the statement of :ref{#thm-pi11-trees} about **sequences** of trees rather than single trees?
@@ -66,7 +66,10 @@ Why is the statement of :ref{#thm-pi11-trees} about **sequences** of trees rathe
 
 In the direction ($\Leftarrow$), where is arithmetic comprehension used?
 
-- [x] To form the sequence of trees given by the normal form, which is arithmetic in the parameters rather than computable.
+- [x] In the normal form, to prove that $\neg \psi(n)$ implies that $T_n$ is ill-founded: the Skolem functions for the arithmetic matrix, which form a path of $T_n$ together with the witnessing set, exist by arithmetic comprehension.
+- [ ] To form the sequence of trees.
+
+  The trees are defined from the parameters by a $\Delta^0_1$ formula, uniformly in $n$; they exist by $\Delta^0_1$ comprehension.
 - [ ] To decide whether each tree is well-founded.
 
   This is a $\Pi^1_1$ question, answered by the hypothesis, not by arithmetic comprehension.
@@ -84,13 +87,13 @@ The following equivalences over $\mathsf{RCA}_0$ are due to Friedman, Simpson, S
 | $\mathsf{ATR}_0$ | any two countable well-orderings are comparable (Friedman); every uncountable closed subset of $\mathbb R$ has a perfect subset; $\Sigma^1_1$ separation; Lusin's separation theorem; Ulm's theorem for countable reduced abelian $p$-groups (Chapter V) |
 | $\Pi^1_1\text{-}\mathsf{CA}_0$ | the Cantor–Bendixson theorem: every closed subset of $\mathbb R$ is the union of a perfect set and a countable set; every countable abelian group is the direct sum of a divisible group and a reduced group; every tree in $\nat^{<\nat}$ has a perfect kernel (Chapter VI) |
 
-The ω-models of these systems are studied with the tools of higher computability. The class $\mathrm{HYP}$ of hyperarithmetic sets is the intersection of all ω-models of $\mathsf{ATR}_0$, but is not itself a model: there are computable linear orders that have no hyperarithmetic descending sequence but are not well-orderings, the **pseudo-well-orderings**, and they prevent $\mathrm{HYP}$ from satisfying arithmetic transfinite recursion. Consequently $\mathsf{ATR}_0$ has no least ω-model. These results are proved in the course on hyperarithmetic sets.
+The ω-models of these systems are studied with the tools of higher computability. The class $\mathrm{HYP}$ is also the intersection of all ω-models of $\mathsf{ATR}_0$, but is not itself a model: there are computable linear orders that have no hyperarithmetic descending sequence but are not well-orderings, the **pseudo-well-orderings**, and they prevent $\mathrm{HYP}$ from satisfying arithmetic transfinite recursion. Consequently $\mathsf{ATR}_0$ has no least ω-model. The failure of arithmetic transfinite recursion in $\mathrm{HYP}$ is discussed in the course on hyperarithmetic sets (:ref{to="hyperarithmetic/sigma11-classes"}); we admit these results (Simpson, Chapter VIII).
 
 The five systems are linearly ordered by strength:
 $$
 \mathsf{RCA}_0 \subsetneq \mathsf{WKL}_0 \subsetneq \mathsf{ACA}_0 \subsetneq \mathsf{ATR}_0 \subsetneq \Pi^1_1\text{-}\mathsf{CA}_0,
 $$
-where each inclusion is strict. The first three separations were proved in this course with ω-models: $\mathrm{REC}$, a Scott ideal of low sets, and $\mathrm{ARITH}$. The last one holds because $\Pi^1_1\text{-}\mathsf{CA}_0$ proves the existence of an ω-model of $\mathsf{ATR}_0$, hence the consistency of $\mathsf{ATR}_0$; we admit it (Simpson, Section VII.2).
+where each inclusion is strict. The first three separations were proved with ω-models: $\mathrm{REC}$ (:ref{#cor-rca-not-wkl}), a Scott ideal of low sets (:ref{#thm-low-scott}), and $\mathrm{ARITH}$. The last one holds because $\Pi^1_1\text{-}\mathsf{CA}_0$ proves the existence of an ω-model of $\mathsf{ATR}_0$, hence the consistency of $\mathsf{ATR}_0$; we admit it (Simpson, Section VII.2).
 
 ## Exercises
 

@@ -29,7 +29,7 @@ A **Scott ideal** is a Turing ideal $\mathcal I$ such that every infinite binary
 2. ($\Rightarrow$) Given $X \in \mathcal I$, the $X$-computable tree whose paths are the $\{0, 1\}$-valued functions DNC relative to $X$ belongs to $\mathcal I$ and is infinite, so it has a path $Y \in \mathcal I$, which is PA relative to $X$. ($\Leftarrow$) Let $T \in \mathcal I$ be an infinite binary tree, and $Y \in \mathcal I$ PA relative to $T$. By the relativization of :ref{#thm-pa-characterization}, $Y$ computes a path of $T$, which belongs to $\mathcal I$.
 :::
 
-$\mathrm{REC}$ is not a Scott ideal (:ref{#cor-rca-not-wkl}), so $\mathsf{RCA}_0$ does not prove $\mathsf{WKL}_0$. A jump ideal is a Scott ideal, since $X'$ computes a path through every infinite $X$-computable binary tree, the leftmost one; so $\mathsf{ACA}_0$ proves $\mathsf{WKL}_0$, as also follows from :ref{#thm-konig-aca}. The converse fails.
+$\mathrm{REC}$ is not a Scott ideal (:ref{#cor-rca-not-wkl}), so $\mathsf{RCA}_0$ does not prove $\mathsf{WKL}_0$. $\mathsf{ACA}_0$ proves $\mathsf{WKL}_0$, since $\mathsf{WKL}$ is a special case of König's lemma (:ref{#thm-konig-aca}). Correspondingly, a jump ideal is a Scott ideal, since $X'$ computes a path through every infinite $X$-computable binary tree, the leftmost one. The converse fails.
 
 :::theorem{#thm-low-scott}
 There is a Scott ideal all of whose members are low. Consequently $\mathsf{WKL}_0$ does not prove $\mathsf{ACA}_0$.
@@ -46,10 +46,10 @@ The proof is typical of separations in reverse mathematics: one closes a model u
 :::quiz[models of WKL₀]
 In the proof of :ref{#thm-low-scott}, why is $(Z_n \oplus P_n)' \leq_T Z_n'$ required rather than $P_n$ low?
 
-- [x] Because the lowness must be preserved along the whole sequence: $Z_{n+1}$ is the join of $Z_n$ and $P_n$, and it is the jump of this join that must stay below $\emptyset'$.
+- [x] Because the join of two low sets need not be low: $Z_{n+1}$ is the join of $Z_n$ and $P_n$, and it is the jump of this join that must stay below $\emptyset'$.
 - [ ] Because $P_n$ cannot be low.
 
-  It can, for $n = 0$; for larger $n$ it must be low relative to $Z_n$, which is what the condition expresses.
+  It is low: $P_n' \leq_T (Z_n \oplus P_n)' \leq_T Z_n' \leq_T \emptyset'$. The lowness of $P_n$ alone would not suffice, since the join of two low sets need not be low.
 - [ ] Because $Z_n$ is not low.
 
   Every $Z_n$ is low, by the inductive use of this condition.
@@ -164,7 +164,8 @@ The statement follows from $\Sigma^0_1$ separation with $\varphi(n) \equiv \exis
 
 ## Notes and references
 
-Friedman (1976) identified $\mathsf{WKL}_0$ and proved the equivalence with the Heine–Borel theorem. The characterization of its ω-models by Scott ideals goes back to Scott (1962). Harrington's conservation theorem is unpublished; Simpson's monograph presents it, and Sieg proved the conservation over primitive recursive arithmetic.
+Friedman (1976) identified $\mathsf{WKL}_0$ and proved the equivalence with the Heine–Borel theorem. The characterization of its ω-models by Scott ideals goes back to Scott (1962). Harrington's conservation theorem is unpublished; Simpson's monograph presents it. The $\Pi^0_2$ conservation over primitive recursive arithmetic is due to Friedman; Sieg gave a proof-theoretic proof.
 
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Chapter IV.
+- H. Friedman, *Systems of second order arithmetic with restricted induction*, abstracts, Journal of Symbolic Logic 41 (1976), 557–559.
 - W. Sieg, *Fragments of arithmetic*, Annals of Pure and Applied Logic 28 (1985), 33–71.

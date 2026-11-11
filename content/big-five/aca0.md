@@ -59,7 +59,7 @@ In (4 ⇒ 2) of :ref{#thm-aca-equivalents}, why are the values $2n + 1$ only tak
   Computability holds whether or not the least witness is used; the restriction ensures injectivity.
 - [ ] Because only the least witness makes $\varphi(n)$ true.
 
-  Every witness makes $\varphi(n)$ true; the choice of one is a matter of counting.
+  Every witness makes $\varphi(n)$ true; using only the least one ensures that the value $2n + 1$ is taken once.
 
 ---
 
@@ -83,7 +83,14 @@ Over $\mathsf{RCA}_0$, $\mathsf{ACA}_0$ is equivalent to the monotone convergenc
 :::proof{of=thm-monotone-aca}
 ($\Rightarrow$) Rescaling, we may assume $0 \leq x_n \leq 1$. By arithmetic comprehension, the set $S$ of rationals $q$ such that $x_n > q$ for some $n$ exists. For each $k$, let $q_k$ be the largest number of the form $j 2^{-k}$, with $-1 \leq j \leq 2^k$, that belongs to $S$; it exists since $-2^{-k} < x_0$, and the sequence $(q_k)$ exists by $\Delta^0_1$ comprehension relative to $S$. Some $x_n$ exceeds $q_k$, and no $x_n$ exceeds $q_k + 2^{-k}$: either $q_k + 2^{-k} \notin S$, or $q_k = 1$. For $k \leq l$, $q_k \leq q_l$, since $q_k$ is also of the form $j 2^{-l}$, and $q_l < q_k + 2^{-k}$, since some $x_n$ exceeds $q_l$. So $x = (q_k)$ is a real, with $q_k \leq x \leq q_k + 2^{-k}$. It is the limit: every $x_n$ satisfies $x_n \leq q_k + 2^{-k} \leq x + 2^{-k}$ for all $k$, hence $x_n \leq x$; and for each $k$ some $x_n > q_k \geq x - 2^{-k}$, so $x - x_m < 2^{-k}$ for all $m \geq n$, since the sequence is non-decreasing.
 
-($\Leftarrow$) We prove (4) of :ref{#thm-aca-equivalents}. Let $f$ be injective, and $x_n = \sum_{i \leq n} 2^{-f(i)-1}$, as in :ref{#prop-specker}. It is non-decreasing and bounded by $1$; let $x$ be its limit. For each $m$, there is $n$ with $x - x_n < 2^{-m-1}$, and then $m$ is in the range of $f$ if and only if $m = f(i)$ for some $i \leq n$: an $i > n$ with $f(i) = m$ would give $x - x_n \geq 2^{-m-1}$. The function $m \mapsto n_m$, the least such $n$, is defined by a search whose termination is guaranteed, and the condition $x - x_n < 2^{-m-1}$ is $\Sigma^0_1$ in $x$; so the range is $\Delta^0_1$ in $f$ and $x$: $m \in \mathrm{ran}(f)$ if and only if $\exists i \leq n_m\ f(i) = m$, if and only if $\forall i\ (f(i) = m \rightarrow i \leq n_m)$. It exists by $\Delta^0_1$ comprehension.
+($\Leftarrow$) We prove (4) of :ref{#thm-aca-equivalents}. Let $f$ be injective, and $x_n = \sum_{i \leq n} 2^{-f(i)-1}$, as in :ref{#prop-specker}. It is non-decreasing and bounded by $1$; let $x$ be its limit. For each $m$, there is $n$ with $x - x_n < 2^{-m-1}$, and then $m$ is in the range of $f$ if and only if $m = f(i)$ for some $i \leq n$: an $i > n$ with $f(i) = m$ would give $x - x_n \geq x_i - x_n \geq 2^{-m-1}$. The condition $x - x_n < 2^{-m-1}$ is $\Sigma^0_1$ in $x$ and $(x_n)$. Hence
+$$
+\begin{aligned}
+m \in \mathrm{ran}(f) &\iff \exists n\, \big(x - x_n < 2^{-m-1} \wedge \exists i \leq n\ f(i) = m\big), \\
+m \notin \mathrm{ran}(f) &\iff \exists n\, \big(x - x_n < 2^{-m-1} \wedge \forall i \leq n\ f(i) \neq m\big),
+\end{aligned}
+$$
+two $\Sigma^0_1$ formulas. In both lines, the left-to-right direction holds with any $n$ such that $x - x_n < 2^{-m-1}$, by the observation above for the first line; the right-to-left direction is immediate for the first line and is the observation above for the second. So the range exists by $\Delta^0_1$ comprehension.
 :::
 
 ## König's lemma
@@ -100,7 +107,7 @@ Over $\mathsf{RCA}_0$, $\mathsf{ACA}_0$ is equivalent to König's lemma.
 ($\Leftarrow$) We prove (4) of :ref{#thm-aca-equivalents}. Let $f$ be injective. Let $T$ be the set of sequences $\sigma \in \nat^{<\nat}$ such that, for every $m < |\sigma|$, either $\sigma(m) = i + 1$ with $f(i) = m$, or $\sigma(m) = 0$ and $f(i) \neq m$ for every $i < |\sigma|$. It is a tree, defined by a bounded formula, and each node has at most two immediate successors, since $f$ is injective. It is infinite: for each $n$, the sequence $\sigma$ of length $n$ with $\sigma(m) = i + 1$ if $f(i) = m$ for some $i < n$, and $\sigma(m) = 0$ otherwise, belongs to $T$. Let $P$ be a path. If $P(m) = i + 1$, then $f(i) = m$. If $P(m) = 0$, then $f(i) \neq m$ for every $i$, since $P \uh n \in T$ for every $n > i$. So $\mathrm{ran}(f) = \{ m : P(m) \neq 0 \}$, which exists by $\Delta^0_1$ comprehension.
 :::
 
-The tree in the reversal is finitely branching, but the bound on the number of successors of a node, $\sigma(m) \leq i + 1$ with $f(i) = m$, is not computable. For trees with a computable bound, or binary trees, the strength drops to weak König's lemma.
+The tree in the reversal has at most two immediate successors at each node, but their values are not bounded by a function computable from $f$: the successors of a node $\sigma$ of length $m$ are among $\sigma 0$ and $\sigma (i + 1)$ with $f(i) = m$. For trees with a computable bound, or binary trees, the strength drops to weak König's lemma.
 
 :::quiz[König's lemma]
 In the reversal of :ref{#thm-konig-aca}, why does a path $P$ with $P(m) = 0$ guarantee that $m$ is not in the range of $f$?
@@ -140,7 +147,7 @@ The condition on $Y$ is expressed by the arithmetic formula $\forall e\, (e \not
 The Bolzano–Weierstrass theorem states that every sequence of reals in $[0, 1]$ has a subsequence converging to some real. Show that it is equivalent to $\mathsf{ACA}_0$ over $\mathsf{RCA}_0$.
 
 :::solution
-($\Rightarrow$) With arithmetic comprehension relative to the sequence, define nested closed dyadic intervals $J_0 = [0, 1] \supseteq J_1 \supseteq \cdots$, with $J_k$ of length $2^{-k}$ containing $x_n$ for infinitely many $n$: take the left half of $J_k$ if it contains infinitely many terms, an arithmetic property, and the right half otherwise. By a search, choose $n_0 < n_1 < \cdots$ such that $x_{n_k}$ lies within $2^{-k}$ of $J_k$, a $\Sigma^0_1$ condition satisfied by infinitely many indices. The left endpoints of the $J_k$ form a real $x$, and $|x_{n_k} - x| \leq 2^{-k+2}$, so the subsequence converges to $x$.
+($\Rightarrow$) With arithmetic comprehension relative to the sequence, define nested closed dyadic intervals $J_0 = [0, 1] \supseteq J_1 \supseteq \cdots$, with $J_k$ of length $2^{-k}$ containing $x_n$ for infinitely many $n$: take the left half of $J_k$ if it contains infinitely many terms, an arithmetic property, and the right half otherwise. By a search, choose $n_0 < n_1 < \cdots$ such that $x_{n_k}$ lies within $2^{-k}$ of $J_k$, a $\Sigma^0_1$ condition satisfied by infinitely many indices. The left endpoints of the $J_k$ form a real $x$, which lies in every $J_k$; since $J_k$ has length $2^{-k}$, $|x_{n_k} - x| < 2^{-k+1}$, so the subsequence converges to $x$.
 
 ($\Leftarrow$) We prove the monotone convergence theorem and apply :ref{#thm-monotone-aca}. Let $(x_n)$ be non-decreasing, rescaled into $[0, 1]$, and let $(x_{n_k})$ converge to $x$. Every $x_m$ satisfies $x_m \leq x$: otherwise, all terms $x_{n_k}$ with $n_k \geq m$ would be at least $x_m > x$, and could not converge to $x$. Given $\varepsilon > 0$, choose $k$ with $x - x_{n_k} < \varepsilon$; then $0 \leq x - x_m < \varepsilon$ for every $m \geq n_k$. So $x$ is the limit of the whole sequence.
 :::
