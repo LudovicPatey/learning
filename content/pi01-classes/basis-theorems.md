@@ -2,10 +2,10 @@
 title: Basis theorems
 summary: The low basis theorem, the computably dominated basis theorem and the cone avoidance basis theorem, proved by forcing with Π⁰₁ classes.
 duration: 45
-prerequisites: [computable-members, turing-degrees/low-and-high]
+prerequisites: [computable-members, turing-degrees/low-and-high, turing-degrees/limit-computability]
 ---
 
-A class $\mathcal B$ of sets is a **basis** for the $\Pi^0_1$ classes if every non-empty $\Pi^0_1$ class has a member in $\mathcal B$. The Kreisel basis theorem says that the sets computable in $\emptyset'$ form a basis. This lesson proves three much finer basis theorems, due to Jockusch and Soare: every non-empty $\Pi^0_1$ class has a low member, a member that computes only slow-growing functions, and a member avoiding any given non-computable set. The three proofs share a method. A member is built as the intersection of a decreasing sequence of non-empty $\Pi^0_1$ classes, each class settling one requirement for all its members at once. This is the finite extension method of the course on Turing degrees, with $\Pi^0_1$ classes in place of strings as conditions; it is a form of **forcing with $\Pi^0_1$ classes**.
+A class $\mathcal B$ of sets is a **basis** for the $\Pi^0_1$ classes if every non-empty $\Pi^0_1$ class has a member in $\mathcal B$. The Kreisel basis theorem says that the sets computable in $\emptyset'$ form a basis. This lesson proves three finer basis theorems, due to Jockusch and Soare: every non-empty $\Pi^0_1$ class has a low member, a member all of whose total computable functions are dominated by computable functions, and a member that does not compute a given non-computable set. The three proofs share a method. A member is built as the intersection of a decreasing sequence of non-empty $\Pi^0_1$ classes, each class settling one requirement for all its members at once. This is the finite extension method of the course on Turing degrees, with $\Pi^0_1$ classes in place of strings as conditions; it is a form of **forcing with $\Pi^0_1$ classes**.
 
 The construction relies on two facts. A decreasing sequence of non-empty closed classes has a non-empty intersection (:ref{#prop-cantor-compact}). The emptiness of a $\Pi^0_1$ class is a $\Sigma^0_1$ property of its index (:ref{#prop-pi01-emptiness}).
 
@@ -18,7 +18,7 @@ Every non-empty $\Pi^0_1$ class has a low member.
 :::proof{of=thm-low-basis}
 Let $\mathcal P$ be a non-empty $\Pi^0_1$ class. We define, with the oracle $\emptyset'$, a decreasing sequence of non-empty $\Pi^0_1$ classes $\mathcal P_0 = \mathcal P \supseteq \mathcal P_1 \supseteq \cdots$, given by indices, and a set $J$.
 
-Given $\mathcal P_e$, let $\mathcal Q_e = \mathcal P_e \cap \{ X : \Phi^X_e(e)\diverge \}$. It is a $\Pi^0_1$ class, with an index computable from that of $\mathcal P_e$ and from $e$ (:ref{#prop-pi01-equivalent} and the first exercise of :ref{to="pi01-classes/trees-and-classes"}). Ask $\emptyset'$ whether $\mathcal Q_e$ is empty, a $\Sigma^0_1$ question.
+Given $\mathcal P_e$, let $\mathcal Q_e = \mathcal P_e \cap \{ X : \Phi^X_e(e)\diverge \}$. It is a $\Pi^0_1$ class, with an index computable from that of $\mathcal P_e$ and from $e$ (:ref{#prop-pi01-equivalent} and :ref{#ex-pi01-intersection-union}). Ask $\emptyset'$ whether $\mathcal Q_e$ is empty, a $\Sigma^0_1$ question.
 
 - If $\mathcal Q_e \neq \emptyset$, let $\mathcal P_{e+1} = \mathcal Q_e$ and $J(e) = 0$. Every $X \in \mathcal P_{e+1}$ satisfies $\Phi^X_e(e)\diverge$.
 - If $\mathcal Q_e = \emptyset$, let $\mathcal P_{e+1} = \mathcal P_e$ and $J(e) = 1$. Every $X \in \mathcal P_{e+1}$ satisfies $\Phi^X_e(e)\converge$.
@@ -26,10 +26,14 @@ Given $\mathcal P_e$, let $\mathcal Q_e = \mathcal P_e \cap \{ X : \Phi^X_e(e)\d
 The classes are non-empty, so their intersection contains some $X$. For every $e$, $X \in \mathcal P_{e+1}$, so $X'(e) = J(e)$. The set $J$ is computable in $\emptyset'$, by the construction, so $X' = J \leq_T \emptyset'$.
 :::
 
-The construction computes, with $\emptyset'$, the jump of **every** member of $\bigcap_e \mathcal P_e$. It is uniform: from an index of $\mathcal P$, one computes an index $j$ with $\Phi^{\emptyset'}_j = X'$, that is, a lowness index of the member (:ref{#prop-no-lowness-index}).
+The construction computes, with $\emptyset'$, the jump of **every** member of $\bigcap_e \mathcal P_e$. It is uniform: from an index of $\mathcal P$, one computes an index $j$ with $\Phi^{\emptyset'}_j = X'$, that is, a lowness index of every member of $\bigcap_e \mathcal P_e$ (see :ref{to="arithmetic-hierarchy/codes"}). By :ref{#prop-no-lowness-index}, such an index cannot in general be computed from a $\Delta^0_2$ index of a low set.
 
 :::corollary{#cor-low-noncomputable-member}
 Every non-empty $\Pi^0_1$ class without computable member, such as $\mathrm{DNC}_2$, has a non-computable low member.
+:::
+
+:::proof{of=cor-low-noncomputable-member}
+By :ref{#thm-low-basis}, the class has a low member, which is not computable since the class has no computable member.
 :::
 
 :::quiz[the low basis theorem]
@@ -64,7 +68,7 @@ Why do all members of $\mathcal P_{e+1}$ satisfy $\Phi^X_e(e)\converge$ when $\m
 A set $X$ is **computably dominated**, or **hyperimmune-free**, if every total $X$-computable function $f$ is dominated by a computable function $g$: $f(n) \leq g(n)$ for every $n$.
 :::
 
-Computable sets are computably dominated. A computably dominated set computes no fast-growing function. In particular, a non-computable $\Delta^0_2$ set is never computably dominated: it computes its computation function (:ref{#thm-computation-function}), and a computable function dominating it would compute the set.
+Computable sets are computably dominated. A non-computable $\Delta^0_2$ set $A$ is never computably dominated: by :ref{#thm-computation-function}, $A$ computes the computation function of a $\Delta^0_2$ approximation of $A$, and every function dominating it computes $A$, so a computable function dominating it would make $A$ computable.
 
 :::lemma{#lem-uniform-bound}
 Let $T$ be a computable tree, and $\Phi_e$ a functional such that $\Phi^X_e$ is total for every $X \in [T]$. Then there is a computable function $g$ with $\Phi^X_e(n) \leq g(n)$ for every $X \in [T]$ and every $n$.

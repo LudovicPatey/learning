@@ -26,7 +26,7 @@ For every set $X$, the following are equivalent:
 :::proof{of=thm-pa-characterization}
 (1 ⇒ 2) Let $f \leq_T X$ be a member of $\mathrm{DNC}_2$, and $A$, $B$ disjoint c.e. sets. By the parameter form of SMN, there is a computable $q$ such that the program $q(n)$, on any input, enumerates $A$ and $B$, outputs $0$ if $n$ appears in $A$, and $1$ if $n$ appears in $B$; it diverges if $n$ belongs to neither. So $\Phi_{q(n)}(q(n)) = 0$ if $n \in A$, $= 1$ if $n \in B$, and diverges otherwise. Let $C = \{ n : f(q(n)) = 1 \}$, computable in $X$. If $n \in A$, then $f(q(n)) \neq 0$, so $n \in C$; if $n \in B$, then $f(q(n)) \neq 1$, so $n \notin C$.
 
-(2 ⇒ 3) Let $\mathcal P = [T]$ be non-empty, with $T$ computable. For a string $\sigma$, non-extendibility of $\sigma 0$ and of $\sigma 1$ are $\Sigma^0_1$ properties (:ref{#prop-pi01-emptiness}); fix enumerations of them by stages. Let $A$ be the set of strings $\sigma$ such that the non-extendibility of $\sigma 0$ is confirmed at a stage at which that of $\sigma 1$ has not been confirmed earlier, and $B$ the set of strings such that the non-extendibility of $\sigma 1$ is confirmed strictly before that of $\sigma 0$. These sets are c.e. and disjoint, so $X$ computes a set $C$ separating them. Define $\sigma_0 = \varepsilon$ and $\sigma_{n+1} = \sigma_n 1$ if $\sigma_n \in C$, $\sigma_{n+1} = \sigma_n 0$ otherwise. We show by induction that $\sigma_n$ is extendible. If $\sigma_n$ is extendible, at least one of its successors is. If both are, so is $\sigma_{n+1}$. If only $\sigma_n 1$ is, then the non-extendibility of $\sigma_n 0$ is confirmed at some stage and that of $\sigma_n 1$ never, so $\sigma_n \in A \subseteq C$ and $\sigma_{n+1} = \sigma_n 1$. If only $\sigma_n 0$ is, then $\sigma_n \in B$, so $\sigma_n \notin C$ and $\sigma_{n+1} = \sigma_n 0$. Hence the sequence $\bigcup_n \sigma_n$, computable in $C$ and so in $X$, is a member of $\mathcal P$.
+(2 ⇒ 3) Let $\mathcal P = [T]$ be non-empty, with $T$ computable. For a string $\sigma$, non-extendibility of $\sigma 0$ and of $\sigma 1$ are $\Sigma^0_1$ properties (:ref{#prop-pi01-emptiness}); fix enumerations of them by stages. Let $A$ be the set of strings $\sigma$ such that the non-extendibility of $\sigma 0$ is confirmed at some stage $s$ and that of $\sigma 1$ is not confirmed at any stage $t < s$, and $B$ the set of strings $\sigma$ such that the non-extendibility of $\sigma 1$ is confirmed at some stage $s$ and that of $\sigma 0$ is not confirmed at any stage $t \leq s$. These sets are c.e. and disjoint, so $X$ computes a set $C$ separating them. Define $\sigma_0 = \varepsilon$ and $\sigma_{n+1} = \sigma_n 1$ if $\sigma_n \in C$, $\sigma_{n+1} = \sigma_n 0$ otherwise. We show by induction that $\sigma_n$ is extendible. If $\sigma_n$ is extendible, at least one of its successors is. If both are, so is $\sigma_{n+1}$. If only $\sigma_n 1$ is, then the non-extendibility of $\sigma_n 0$ is confirmed at some stage and that of $\sigma_n 1$ never, so $\sigma_n \in A \subseteq C$ and $\sigma_{n+1} = \sigma_n 1$. If only $\sigma_n 0$ is, then $\sigma_n \in B$, so $\sigma_n \notin C$ and $\sigma_{n+1} = \sigma_n 0$. Hence the sequence $\bigcup_n \sigma_n$, computable in $C$ and so in $X$, is a member of $\mathcal P$.
 
 (3 ⇒ 1) $\mathrm{DNC}_2$ is a non-empty $\Pi^0_1$ class (:ref{#thm-dnc2-no-computable}).
 :::
@@ -69,7 +69,7 @@ In (2 ⇒ 3), what happens at a node $\sigma_n$ both of whose successors are ext
 Apply :ref{#thm-low-basis}, :ref{#thm-dominated-basis} and :ref{#thm-cone-avoidance-basis} to the non-empty $\Pi^0_1$ class $\mathrm{DNC}_2$, all of whose members are PA.
 :::
 
-So the ability to compute a member of every non-empty $\Pi^0_1$ class does not require much computational power in other respects: a low PA set has the same jump as a computable set, and it computes a solution to every problem with a $\Pi^0_1$ set of solutions. On the other hand, a PA set is never computable, and every PA set computes a non-computable set of each of the forms provided by the basis theorems.
+So the ability to compute a member of every non-empty $\Pi^0_1$ class does not require much computational power in other respects: a low PA set has the same jump as a computable set, and it computes a solution to every problem with a $\Pi^0_1$ set of solutions. On the other hand, a PA set is never computable, since it computes a member of $\mathrm{DNC}_2$.
 
 :::quiz[low PA sets]
 A low PA set $X$ computes a member of every non-empty $\Pi^0_1$ class. Does it follow that every non-empty $\Pi^0_1$ class has a low member?
@@ -118,7 +118,7 @@ Conversely, let $\psi(e) \simeq 1 - \Phi_e(e)$ when $\Phi_e(e)\converge \in \{0,
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{difficulty=2 #ex-pa-relative}
 A set $Y$ is **PA relative to $X$** if it computes a function $f : \nat \to \{0, 1\}$ with $f(e) \neq \Phi^X_e(e)$ whenever $\Phi^X_e(e)\converge$. Show that if $Y$ is PA relative to $X$, then $X \leq_T Y$.
 
 :::solution

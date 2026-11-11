@@ -9,7 +9,7 @@ Many problems of mathematics ask for an infinite object satisfying conditions th
 
 ## Binary trees
 
-We use the notation for strings of :ref{to="turing-degrees/oracle-computation"}: $\sigma \preceq \tau$ is the prefix relation, $|\sigma|$ the length, $[\sigma]$ the cylinder of the sequences extending $\sigma$, and $2^n$ the set of strings of length $n$.
+We use the notation for strings of :ref{to="turing-degrees/oracle-computation"}: $\sigma \preceq \tau$ is the prefix relation, $|\sigma|$ the length, and $[\sigma]$ the cylinder of the sequences extending $\sigma$. We also write $2^n$ for the set of strings of length $n$, and $2^{\leq n}$ for the set of strings of length at most $n$.
 
 :::definition{#def-binary-tree}
 A **binary tree** is a set $T \subseteq \bstr$ closed under prefixes: if $\tau \in T$ and $\sigma \preceq \tau$, then $\sigma \in T$. Its elements are **nodes**. A **path** through $T$ is a sequence $X \in \cs$ all of whose prefixes belong to $T$; the class of paths is written $[T]$. A node $\sigma \in T$ is **extendible** if $[\sigma] \cap [T] \neq \emptyset$, that is, if some path goes through it.
@@ -115,14 +115,14 @@ All steps transform indices by computable functions.
 :::
 
 :::proposition{#prop-pi01-emptiness}
-Given an index of a computable tree $T$, the property $[T] = \emptyset$ is $\Sigma^0_1$: $[T] = \emptyset$ if and only if $T$ has no node of some length $n$. Consequently, the set of indices of empty $\Pi^0_1$ classes is c.e., and the extendible nodes of a computable tree form a co-c.e. set.
+Given an index of a computable tree $T$, the property $[T] = \emptyset$ is $\Sigma^0_1$: $[T] = \emptyset$ if and only if $T$ has no node of some length $n$. Consequently, the set of $e$ such that $\{ X : \Phi^X_e(0)\diverge \} = \emptyset$ is c.e., and the extendible nodes of a computable tree form a co-c.e. set.
 :::
 
 :::proof{of=prop-pi01-emptiness}
-By :ref{#lem-weak-konig}, $[T] = \emptyset$ if and only if $T$ is finite, if and only if some length $n$ has no node in $T$, since $T$ is closed under prefixes. For a given $n$, this is decided by testing the $2^n$ strings of length $n$. A node $\sigma$ is not extendible if and only if the computable tree $\{ \tau \in T : \tau \preceq \sigma \text{ or } \sigma \preceq \tau \}$ has no path, which is a $\Sigma^0_1$ condition, uniformly in $\sigma$.
+By :ref{#lem-weak-konig}, $[T] = \emptyset$ if and only if $T$ is finite, if and only if some length $n$ has no node in $T$, since $T$ is closed under prefixes. For a given $n$, this is decided by testing the $2^n$ strings of length $n$. For the class $\{ X : \Phi^X_e(0)\diverge \}$, the tree $\{ \sigma : \forall \tau \preceq \sigma\ \Phi^\tau_e(0)[|\tau|]\diverge \}$ of :ref{#prop-pi01-equivalent} is computable, uniformly in $e$, so its emptiness is a $\Sigma^0_1$ property of $e$. (By contrast, the set of $e$ such that $\Phi_e$ is the characteristic function of a tree without paths is not c.e.: the set of indices of total functions reduces to it.) A node $\sigma$ is not extendible if and only if the computable tree $\{ \tau \in T : \tau \preceq \sigma \text{ or } \sigma \preceq \tau \}$ has no path, which is a $\Sigma^0_1$ condition, uniformly in $\sigma$.
 :::
 
-This is a remarkable consequence of compactness: emptiness of a $\Pi^0_1$ class, a priori a $\Pi^0_2$ property, is in fact $\Sigma^0_1$. The non-emptiness of a $\Pi^0_1$ class, which asks for an infinite path, is witnessed by finite information only negatively: one learns that a class is empty, never that it is non-empty.
+This is a consequence of compactness: emptiness of a $\Pi^0_1$ class, a priori a statement about all sequences $X$, is in fact $\Sigma^0_1$. Non-emptiness, which asks for an infinite path, is accordingly a $\Pi^0_1$ property: a finite amount of computation can show that a class is empty, never that it is non-empty.
 
 :::quiz[Π⁰₁ classes]
 Why is the emptiness of $[T]$, for a computable tree $T$, a $\Sigma^0_1$ property?
@@ -141,7 +141,7 @@ Which of these classes are $\Pi^0_1$?
 
 - [ ] $\{ X : X \subseteq \emptyset' \}$.
 
-  The class is closed, but not $\Pi^0_1$: a string $0^n 1$ has a cylinder disjoint from the class if and only if $n \notin \emptyset'$, and by the second exercise the set of such $n$, the complement of $\emptyset'$, would then be c.e.
+  The class is closed, but not $\Pi^0_1$: a string $0^n 1$ has a cylinder disjoint from the class if and only if $n \notin \emptyset'$, and by :ref{#ex-pi01-disjoint-cylinders} the set of such $n$, the complement of $\emptyset'$, would then be c.e.
 - [x] $\{ X : X \cap \emptyset' = \emptyset \}$.
 
   $X \cap \emptyset' \neq \emptyset$ is the $\Sigma^0_1$ condition "some $n$ enters $\emptyset'$ with $X(n) = 1$".
@@ -152,7 +152,7 @@ Which of these classes are $\Pi^0_1$?
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{difficulty=1 #ex-pi01-intersection-union}
 Show that the intersection of two $\Pi^0_1$ classes, and the union of two $\Pi^0_1$ classes, are $\Pi^0_1$ classes, uniformly in indices.
 
 :::solution
@@ -160,7 +160,7 @@ If $\mathcal P = [S]$ and $\mathcal Q = [T]$ with $S$ and $T$ computable trees, 
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{difficulty=2 #ex-pi01-disjoint-cylinders}
 Show that a class $\mathcal P \subseteq \cs$ is $\Pi^0_1$ if and only if the set of strings $\sigma$ with $[\sigma] \cap \mathcal P = \emptyset$ is c.e., and $\mathcal P$ is closed.
 
 :::solution

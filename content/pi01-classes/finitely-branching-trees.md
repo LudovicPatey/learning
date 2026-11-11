@@ -19,7 +19,7 @@ Every infinite finitely branching tree has a path.
 Call a node **large** if infinitely many nodes of $T$ extend it. The root is large. If $\sigma$ is large, then since the nodes extending $\sigma$, other than $\sigma$, extend one of its finitely many successors, one successor is large. Define $P(n)$ as the least $v$ such that $(P \uh n)\, v$ is large. By induction every prefix of $P$ is large, hence in $T$.
 :::
 
-The hypothesis of finite branching is necessary: the tree $\{ \sigma : \sigma(i) \geq |\sigma| \text{ for all } i < |\sigma| \}$ is infinite and has no path (see :ref{#lem-weak-konig}).
+The hypothesis of finite branching is necessary: the tree $\{ \sigma : \sigma(i) \geq |\sigma| \text{ for all } i < |\sigma| \}$ is infinite and has no path (see the quiz after :ref{#lem-weak-konig}).
 
 ## Coding into binary trees
 
@@ -27,7 +27,7 @@ We code a sequence of integers by a binary sequence, writing each value in unary
 $$
 c(\sigma) = 1^{\sigma(0)}\, 0\, 1^{\sigma(1)}\, 0 \cdots 1^{\sigma(n-1)}\, 0, \qquad c(P) = 1^{P(0)}\, 0\, 1^{P(1)}\, 0 \cdots
 $$
-The map $c$ is a computable bijection from $\nat^\nat$ onto the sequences with infinitely many zeros, and $P \equiv_T c(P)$, uniformly (see :ref{#prop-baire-cantor}).
+This is the coding of :ref{#prop-baire-cantor}. The map $c$ is a bijection from $\nat^\nat$ onto the sequences with infinitely many zeros, and $P \equiv_T c(P)$, uniformly: each bit of $c(P)$ is computed from finitely many values of $P$, and $P(n)$ is the length of the $n$-th block of ones of $c(P)$.
 
 :::proposition{#prop-finitely-branching-coding}
 Let $T \subseteq \nat^{<\nat}$ be a computable finitely branching tree, and let $S$ be the set of binary strings that are prefixes of some $c(\sigma)$ with $\sigma \in T$.
@@ -101,13 +101,13 @@ A low set does not compute $\emptyset'$ (:ref{#prop-low-basic}). Take a low PA s
 The tree has as simple a shape as a binary tree: each node has at most two successors. What makes it harder is the lack of information about the successors: given a node, no algorithm bounds the values of its successors. The bound is computable in $\emptyset'$, which leads to the following characterization.
 
 :::theorem{#thm-konig-strength}
-A set $X$ computes a path through every infinite computable finitely branching tree if and only if $X$ is PA relative to $\emptyset'$.
+A set $X$ computes a path through every infinite computable finitely branching tree if and only if $X$ is PA relative to $\emptyset'$ (:ref{#ex-pa-relative}).
 :::
 
 :::proof{of=thm-konig-strength}
 ($\Leftarrow$) Let $T$ be an infinite computable finitely branching tree. The binary tree $S$ of :ref{#prop-finitely-branching-coding} is c.e., hence computable in $\emptyset'$, and $[S] = c([T])$ is non-empty. So $[S]$ is a non-empty $\Pi^0_1(\emptyset')$ class, and $X$, being PA relative to $\emptyset'$, computes a member $c(P)$, by :ref{#thm-pa-characterization} relativized to $\emptyset'$. Then $X$ computes $P$.
 
-($\Rightarrow$) By the same characterization relativized, it suffices to show that $X$ computes a member of every non-empty $\Pi^0_1(\emptyset')$ class $[U]$, with $U$ a binary tree computable in $\emptyset'$. By the limit lemma, $U$ has a $\Delta^0_2$ approximation $(U_s)$; replacing $U_s$ by the set of strings of length at most $s$ all of whose prefixes are in $U_s$, we may assume that each $U_s$ is a tree contained in $2^{\leq s}$, and it is still an approximation of $U$. Let $V = \bigcup_s U_s$.
+($\Rightarrow$) By the same characterization relativized, it suffices to show that $X$ computes a member of every non-empty $\Pi^0_1(\emptyset')$ class $[U]$, with $U$ a binary tree computable in $\emptyset'$. By the limit lemma (:ref{#thm-limit-lemma}), $U$ has a $\Delta^0_2$ approximation $(U_s)$; replacing $U_s$ by the set of strings of length at most $s$ all of whose prefixes are in $U_s$, we may assume that each $U_s$ is a tree contained in $2^{\leq s}$, and it is still an approximation of $U$. Let $V = \bigcup_s U_s$.
 
 *$[V] = [U]$.* Since $U \subseteq V$, $[U] \subseteq [V]$. Let $Y \in [V]$ and $m \in \nat$. For each $t \geq m$, $Y \uh t$ belongs to some $U_s$, with $s \geq t$ since $U_s \subseteq 2^{\leq s}$, and then $Y \uh m \in U_s$. So $Y \uh m \in U_s$ for infinitely many $s$, hence $Y \uh m \in U$, as $(U_s)$ converges.
 
@@ -132,7 +132,7 @@ $\emptyset''$ is PA relative to $\emptyset'$: the function $f(e) = 1$ if $\Phi^{
 Show that if $X$ is PA relative to $\emptyset'$, then $X$ computes $\emptyset'$.
 
 :::solution
-By the second exercise of :ref{to="pi01-classes/pa-degrees"} relativized to $\emptyset'$, a set that is PA relative to $\emptyset'$ computes $\emptyset'$. Alternatively, $X$ computes a path through the tree of :ref{#thm-finitely-branching-jump}, by :ref{#thm-konig-strength}, and this path computes $\emptyset'$.
+By :ref{#ex-pa-relative}, applied with $\emptyset'$ in place of $X$, a set that is PA relative to $\emptyset'$ computes $\emptyset'$. Alternatively, $X$ computes a path through the tree of :ref{#thm-finitely-branching-jump}, by :ref{#thm-konig-strength}, and this path computes $\emptyset'$.
 :::
 ::::
 

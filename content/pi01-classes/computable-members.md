@@ -5,7 +5,7 @@ duration: 35
 prerequisites: [trees-and-classes]
 ---
 
-A non-empty $\Pi^0_1$ class always has a member computable in $\emptyset'$: follow the leftmost extendible node, which $\emptyset'$ can recognize. Does it always have a computable member? This lesson shows that the answer depends on the topology of the class. Isolated members are computable, so countable classes have computable members. But there are non-empty $\Pi^0_1$ classes without computable members, and these classes are necessarily large: they contain a copy of Cantor space.
+A non-empty $\Pi^0_1$ class always has a member computable in $\emptyset'$: follow the leftmost extendible node, which $\emptyset'$ can recognize. Whether it has a computable member depends on the topology of the class. Isolated members are computable, so countable classes have computable members. But there are non-empty $\Pi^0_1$ classes without computable members, and these classes are necessarily large: they contain a copy of Cantor space.
 
 ## The leftmost path
 
@@ -91,7 +91,7 @@ A set $X$ satisfies $X(e) \neq \Phi_e(e)$ for all $e$ with $\Phi_e(e)\converge$ 
 Suppose $X \in \mathrm{DNC}_2$ is computable, and let $c$ be an index of its characteristic function, so that $\Phi_c$ is total with values in $\{0, 1\}$. Then $\Phi_c(c)\converge = X(c)$, contradicting $X(c) \neq \Phi_c(c)$.
 :::
 
-By :ref{#cor-countable-computable}, the class $\mathrm{DNC}_2$ is perfect and has continuum many members, none of them computable. The class plays a central role in the next lessons: its members are exactly the $\{0, 1\}$-valued functions that escape every computable function on the diagonal, and their degrees are the **PA degrees**.
+By :ref{#cor-countable-computable}, the class $\mathrm{DNC}_2$ is perfect and has continuum many members, none of them computable. The class plays a central role in the next lessons: its members are the $\{0, 1\}$-valued diagonally non-computable functions, and the sets that compute one of them are the sets of **PA degree** (:ref{#def-pa-degree}).
 
 :::quiz[the class DNC₂]
 Why is the class $\mathrm{DNC}_2$ non-empty, although none of its members is computable?
@@ -121,14 +121,17 @@ The class $\{ X : \emptyset' \subseteq X \}$ is $\Pi^0_1$: $X$ is outside it if 
 Let $(T_e)$ be an enumeration of the computable trees, given by indices. Show that the set of $e$ such that $[T_e]$ has a computable member is $\Sigma^0_3$.
 
 :::solution
-$[T_e]$ has a computable member if and only if there is $i$ such that $\Phi_i$ is total with values in $\{0, 1\}$, and every prefix of the sequence $\Phi_i$ belongs to $T_e$. The first condition is $\Pi^0_2$. Given it, the second is equivalent to "for all $n$ and $s$, if $\Phi_i(0), \dots, \Phi_i(n-1)$ converge at stage $s$, the string they form belongs to $T_e$", which is $\Pi^0_1$. So the condition on $(e, i)$ is $\Pi^0_2$, and its projection over $i$ is $\Sigma^0_3$.
+$[T_e]$ has a computable member if and only if there is $i$ such that $\Phi_i$ is total with values in $\{0, 1\}$, and every prefix of the sequence $\Phi_i$ belongs to $T_e$. The first condition is $\Pi^0_2$. Given it, the second is equivalent to "for all $n$ and $s$, if $\Phi_i(0), \dots, \Phi_i(n-1)$ converge at stage $s$, the string they form belongs to $T_e$". Membership of a string in $T_e$ is decidable, but as a relation in $e$ it is $\Sigma^0_1$ (some computation of the characteristic function of $T_e$ outputs $1$), so this condition is $\Pi^0_2$. So the condition on $(e, i)$ is $\Pi^0_2$, and its projection over $i$ is $\Sigma^0_3$.
 :::
 ::::
 
 ## Notes and references
 
-The basis theorem for $\emptyset'$ is due to Kreisel (1953). The computability of isolated members and the study of the Cantor–Bendixson rank of $\Pi^0_1$ classes go back to Cenzer, Clote, Smith, Soare and Wainer (1986). Kleene constructed the first non-empty $\Pi^0_1$ class without computable member.
+The basis theorem for $\emptyset'$ is due to Kreisel (1953). The analysis of $\Pi^0_1$ classes by the Cantor–Bendixson derivative, which removes isolated members, goes back to Kreisel (1959); the members of countable $\Pi^0_1$ classes were studied in detail by Cenzer, Clote, Smith, Soare and Wainer (1986). Kleene (1952) constructed the first computable infinite binary tree without computable path.
 
 - G. Kreisel, *A variant to Hilbert's theory of the foundations of arithmetic*, British Journal for the Philosophy of Science 4 (1953), 107–129.
+- G. Kreisel, *Analysis of the Cantor–Bendixson theorem by means of the analytic hierarchy*, Bulletin de l'Académie Polonaise des Sciences, Série des Sciences Mathématiques, Astronomiques et Physiques 7 (1959), 621–626.
+- S. C. Kleene, *Recursive functions and intuitionistic mathematics*, in *Proceedings of the International Congress of Mathematicians, Cambridge, Massachusetts, 1950*, Volume 1, American Mathematical Society, 1952, 679–685.
+- D. Cenzer, P. Clote, R. L. Smith, R. I. Soare and S. S. Wainer, *Members of countable Π⁰₁ classes*, Annals of Pure and Applied Logic 31 (1986), 145–163.
 - C. G. Jockusch and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
 - D. Cenzer and J. B. Remmel, *Π⁰₁ classes in mathematics*, in *Handbook of Recursive Mathematics*, Volume 2, Studies in Logic 139, North-Holland, 1998, 623–821.
