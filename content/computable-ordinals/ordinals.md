@@ -101,7 +101,7 @@ Since there are only countably many algorithms, only countably many countable or
 Show that every ordinal $\alpha$ can be written uniquely as $\alpha = \lambda + n$ with $\lambda$ zero or a limit ordinal and $n \in \nat$.
 
 :::solution
-Let $\lambda$ be the largest ordinal $\leq \alpha$ that is zero or a limit; it exists since the supremum of limit ordinals below or equal to $\alpha$ is zero or a limit. The ordinals between $\lambda$ and $\alpha$ are successors, $\lambda + 1, \lambda + 2, \dots$; if infinitely many were needed, $\lambda + \omega \leq \alpha$ would be a larger limit. So $\alpha = \lambda + n$ for some $n$. Uniqueness: if $\lambda + n = \lambda' + n'$ with $\lambda < \lambda'$, then $\lambda' \leq \lambda + n$ would be a limit of the form $\lambda + k$, $k \leq n$, which is a successor unless $k = 0$; so $\lambda = \lambda'$, and $n = n'$ by cancellation.
+Let $\lambda$ be the largest ordinal $\leq \alpha$ that is zero or a limit; it exists since the supremum of limit ordinals below or equal to $\alpha$ is zero or a limit. If $\lambda + n \leq \alpha$ for every $n \in \nat$, then $\lambda + \omega = \sup_n (\lambda + n) \leq \alpha$ would be a limit larger than $\lambda$. So there is a least $n$ with $\lambda + (n + 1) > \alpha$; then $\lambda + n \leq \alpha < (\lambda + n) + 1$, and $\alpha = \lambda + n$, since no ordinal lies strictly between $\beta$ and $\beta + 1$. Uniqueness: if $\lambda + n = \lambda' + n'$ with $\lambda < \lambda'$, then $\lambda' \leq \lambda + n$ would be a limit of the form $\lambda + k$, $k \leq n$, which is a successor unless $k = 0$; so $\lambda = \lambda'$, and $n = n'$ by cancellation.
 :::
 ::::
 
