@@ -15,7 +15,7 @@ Rational numbers are coded by numbers through a computable bijection between $\n
 In $\mathsf{RCA}_0$, a **real number** is a sequence of rationals $x = (q_k)_{k \in \nat}$ such that $|q_k - q_l| \leq 2^{-k}$ for all $k \leq l$. Two reals $x = (q_k)$ and $y = (p_k)$ are **equal**, $x =_{\mathbb R} y$, if $|q_k - p_k| \leq 2^{-k+1}$ for all $k$, and $x < y$ if $q_k + 2^{-k+1} < p_k$ for some $k$.
 :::
 
-The sequence $(q_k)$ represents its limit, and the fixed rate of convergence $2^{-k}$ makes the relation $x < y$ a $\Sigma^0_1$ property, and equality a $\Pi^0_1$ property. Equality is not decidable: no algorithm decides whether two given reals are equal, a phenomenon that will recur. The sum, product and absolute value of reals are defined termwise, with an adjustment of indices for the product, and $\mathsf{RCA}_0$ proves that the reals form an ordered field. A **sequence of reals** is a double sequence $(q_{n,k})$ such that each $(q_{n,k})_k$ is a real.
+The sequence $(q_k)$ represents its limit, and the fixed rate of convergence $2^{-k}$ makes the relation $x < y$ a $\Sigma^0_1$ property, and equality a $\Pi^0_1$ property. Equality is not decidable: no algorithm decides whether two given reals are equal, a phenomenon that will recur. The sum, product and absolute value of reals are defined termwise, with an adjustment of indices so that the rate $2^{-k}$ is preserved (for instance $x + y = (q_{k+1} + p_{k+1})_k$), and $\mathsf{RCA}_0$ proves that the reals form an ordered field. A **sequence of reals** is a double sequence $(q_{n,k})$ such that each $(q_{n,k})_k$ is a real.
 
 Without the rate of convergence, a Cauchy sequence of rationals would still determine a limit, but the order would no longer be $\Sigma^0_1$, and the limit of a computable Cauchy sequence need not be a computable real: a Specker sequence, constructed below, is an example.
 
@@ -26,9 +26,12 @@ $\mathsf{RCA}_0$ proves: if $(x_n)$ is a sequence of reals and $|x_n - x_m| \leq
 :::proof{of=prop-rca-complete}
 Write $x_n = (q_{n,k})_k$, and let $p_k = q_{k+2, k+2}$; the sequence $(p_k)$ exists by $\Delta^0_1$ comprehension. For $k \leq l$,
 $$
-|p_k - p_l| \leq |q_{k+2,k+2} - x_{k+2}| + |x_{k+2} - x_{l+2}| + |x_{l+2} - q_{l+2,l+2}| \leq 2^{-k-2} + 2^{-k-2} + 2^{-l-2} \leq 2^{-k},
+\begin{aligned}
+|p_k - p_l| &\leq |q_{k+2,k+2} - x_{k+2}| + |x_{k+2} - x_{l+2}| + |x_{l+2} - q_{l+2,l+2}| \\
+&\leq 2^{-k-2} + 2^{-k-2} + 2^{-l-2} \leq 2^{-k},
+\end{aligned}
 $$
-where the middle term uses the hypothesis, so $x = (p_k)$ is a real. For each $n$ and $k \geq n$, $|x_n - p_k| \leq |x_n - x_{k+2}| + |x_{k+2} - q_{k+2,k+2}| \leq 2^{-n} + 2^{-k-2}$; letting $k$ grow, $|x_n - x| \leq 2^{-n}$.
+where the outer terms use $|q_j - y| \leq 2^{-j}$ for a real $y = (q_j)$, and the middle term uses the hypothesis; so $x = (p_k)$ is a real. For each $n$ and $k \geq n$, $|x_n - p_k| \leq |x_n - x_{k+2}| + |x_{k+2} - q_{k+2,k+2}| \leq 2^{-n} + 2^{-k-2}$, and $|p_k - x| \leq 2^{-k}$, so $|x_n - x| \leq 2^{-n} + 2^{-k-2} + 2^{-k}$ for every $k \geq n$, that is, $|x_n - x| \leq 2^{-n}$.
 :::
 
 The rate $2^{-n}$ plays the role of a modulus of convergence: the limit is computed from the sequence. Without a modulus, the existence of the limit requires more than $\mathsf{RCA}_0$.
@@ -46,7 +49,9 @@ In $\mathsf{RCA}_0$, a **code** for a continuous function $f : [0, 1] \to \mathb
 The value $f(x)$ is the unique real $y$ such that $|y - b| \leq s$ for every $(a, r, b, s) \in \Phi$ with $|x - a| < r$.
 :::
 
-A quadruple $(a, r, b, s)$ asserts that $f$ maps the interval $(a - r, a + r)$ into $[b - s, b + s]$. Consistency makes these assertions compatible, and totality makes them precise enough at every point. $\mathsf{RCA}_0$ proves that $f(x)$ exists, uniformly in $x$, by searching for quadruples with smaller and smaller $s$, and that $f$ is continuous in the usual $\varepsilon$-$\delta$ sense. We admit these verifications (Simpson, Section II.6). Every continuous function on $[0, 1]$ has a code, and the codes of computable functions can be chosen computable.
+A quadruple $(a, r, b, s)$ asserts that $f$ maps the interval $(a - r, a + r)$ into $[b - s, b + s]$. Consistency makes these assertions compatible, and totality makes them precise enough at every point. $\mathsf{RCA}_0$ proves that $f(x)$ exists, uniformly in $x$. Let $x = (x_t)_t$ be a real in $[0, 1]$. For each $k$, take the first pair $\langle j, t \rangle$ such that $j$ codes a quadruple $(a_k, r_k, b_k, s_k) \in \Phi$ with $s_k < 2^{-k-2}$ and $|x_t - a_k| + 2^{-t} < r_k$. This condition is bounded in $\Phi$ and $x$, it implies $|x - a_k| < r_k$, and some pair satisfies it by totality; so the sequence $(a_k, r_k, b_k, s_k)_k$ exists by $\Delta^0_1$ comprehension. The two intervals around $a_k$ and $a_l$ contain $x$, so consistency gives $|b_k - b_l| \leq s_k + s_l \leq 2^{-k-1}$ for $k \leq l$, and $y = (b_k)$ is a real. If $(a, r, b, s) \in \Phi$ and $|x - a| < r$, then $|b - b_k| \leq s + 2^{-k-2}$ by consistency, and $|b_k - y| \leq 2^{-k}$, so $|y - b| \leq s$; uniqueness follows from totality. The function $f$ is continuous: given $x$ and $\varepsilon > 0$, take $(a, r, b, s) \in \Phi$ with $|x - a| < r$ and $s < \varepsilon / 2$, and $\delta = r - |x - a|$; then $|f(x) - f(x')| \leq 2s < \varepsilon$ whenever $|x' - x| < \delta$. Simpson (Section II.6) uses a variant of this definition for arbitrary complete separable metric spaces.
+
+Every continuous function on $[0, 1]$ has a code, and the codes of computable functions can be chosen computable.
 
 ## The intermediate value theorem
 
@@ -62,7 +67,7 @@ Define rationals $a_0 = 0$, $b_0 = 1$, and, with $c_n = (a_n + b_n)/2$, $(a_{n+1
 Suppose $f(x) > 0$. By continuity, there is $\delta > 0$ with $f(y) > 0$ for every $y \in [0, 1]$ with $|y - x| < \delta$. For $n$ with $2^{-n} < \delta$, $|a_n - x| \leq 2^{-n} < \delta$, so $f(a_n) > 0$, a contradiction. Symmetrically, $f(x) < 0$ contradicts $f(b_n) > 0$. Since the order of the reals is total, $f(x) = 0$.
 :::
 
-The proof is not uniform: it distinguishes whether $f$ vanishes at a rational, a $\Sigma^0_1$ question that cannot be decided effectively. This is harmless in $\mathsf{RCA}_0$, which reasons classically, but shows that the zero cannot be computed from $f$ in general. The finer analysis of such uniformity questions is the subject of Weihrauch reducibility.
+The proof is not uniform: it distinguishes whether $f$ vanishes at a rational, a $\Sigma^0_2$ question ("$f(q) = 0$" is $\Pi^0_1$) that cannot be decided effectively. This is harmless in $\mathsf{RCA}_0$, which reasons classically. Applied in the ω-model $\mathrm{REC}$, the theorem shows that every computable $f$ with $f(0) < 0 < f(1)$ has a computable zero; but no single procedure computes a zero from every code of such an $f$. Such uniformity questions are the subject of Weihrauch reducibility (:ref{to="reducibilities/weihrauch"}).
 
 :::quiz[the intermediate value theorem]
 In the proof of :ref{#thm-ivt-rca}, why is the case of a rational zero treated separately?
@@ -99,10 +104,10 @@ There is a computable non-decreasing sequence of rationals in $[0, 1]$ whose lim
 :::proof{of=prop-specker}
 Let $f$ be a computable injective function with range $\emptyset'$, and $x_n = \sum_{i \leq n} 2^{-f(i) - 1}$. The sequence is computable, non-decreasing, bounded by $\sum_m 2^{-m-1} = 1$, and converges to $x = \sum_{m \in \emptyset'} 2^{-m-1}$. If $x$ were computable, given $m$ one could compute $n$ such that $x - x_n < 2^{-m-1}$; then $m \in \emptyset'$ if and only if $m = f(i)$ for some $i \leq n$, since a later $f(i) = m$ would add $2^{-m-1}$ to the remaining sum. So $\emptyset'$ would be computable.
 
-In $\mathrm{REC}$, the sequence $(x_n)$ exists, is bounded and non-decreasing, by absoluteness, but has no limit in the model, since a limit in $\mathrm{REC}$ would be a computable real equal to $x$. So the monotone convergence theorem fails in the ω-model $\mathrm{REC}$ of $\mathsf{RCA}_0$.
+In $\mathrm{REC}$, the sequence $(x_n)$ exists, and it is bounded and non-decreasing by absoluteness. It has no limit in the model: "$y$ is the limit of $(x_n)$" is arithmetic, so a limit $y \in \mathrm{REC}$ would be a computable real equal to $x$. So the monotone convergence theorem fails in the ω-model $\mathrm{REC}$ of $\mathsf{RCA}_0$.
 :::
 
-The same construction, carried out relative to an arbitrary set, shows that the monotone convergence theorem implies the existence of the ranges of injective functions, and thus arithmetic comprehension; this is proved in the course on the Big Five.
+A computable non-decreasing bounded sequence of rationals whose limit is not computable is called a **Specker sequence**. The same construction, carried out for an arbitrary injective function, shows that the monotone convergence theorem implies the existence of the ranges of injective functions, and thus arithmetic comprehension (:ref{#thm-monotone-aca}).
 
 ## Exercises
 
@@ -110,15 +115,19 @@ The same construction, carried out relative to an arbitrary set, shows that the 
 Show that $\mathsf{RCA}_0$ proves that every continuous function $f : [0, 1] \to \mathbb R$ with $f(0) < c < f(1)$ takes the value $c$, for every real $c$.
 
 :::solution
-The function $g(x) = f(x) - c$ is continuous, and a code for it is obtained from a code for $f$ and the real $c$ by $\Delta^0_1$ comprehension: replace each quadruple $(a, r, b, s)$ by $(a, r, b - q, s + 2^{-k+1})$ for the rational approximations $q = c_k$ of $c$, for all $k$. Then $g(0) < 0 < g(1)$, and :ref{#thm-ivt-rca} gives $x$ with $g(x) = 0$, that is, $f(x) = c$.
+Repeat the proof of :ref{#thm-ivt-rca} with $c$ in place of $0$. Let $\Phi$ be the code of $f$. For a rational $q \in [0, 1]$, $f(q) < c$ holds if and only if there is $(a, r, b, s) \in \Phi$ with $|q - a| < r$ and $b + s < c$: such a quadruple gives $f(q) \leq b + s < c$, and conversely, if $f(q) < c$, a quadruple with $|q - a| < r$ and $s < (c - f(q))/2$ satisfies $b + s \leq f(q) + 2s < c$. So "$f(q) < c$" is $\Sigma^0_1$ in $q$, $\Phi$ and $c$, and so is "$f(q) > c$". If $f(q) = c$ for some rational $q \in [0, 1]$, we are done. Otherwise the set $N = \{ q : f(q) < c \}$ exists by $\Delta^0_1$ comprehension, and the bisection and the final argument are unchanged.
+
+Reducing to :ref{#thm-ivt-rca} through $g = f - c$ needs a code for $g$. The natural candidate, the set of quadruples $(a, r, b - c_k, s + 2^{-k+1})$ for $(a, r, b, s) \in \Phi$ and $c = (c_k)$, is defined by a $\Sigma^0_1$ formula, with an unbounded search for $k$, so $\Delta^0_1$ comprehension does not apply to it directly; the direct argument avoids this.
 :::
 ::::
 
 ::::exercise{difficulty=2}
-Show that the limit of a Specker sequence can be chosen to be $\Omega$, Chaitin's halting probability, and that every left-c.e. real is the limit of a computable non-decreasing sequence of rationals.
+A real $x$ is **left-c.e.** if the set of rationals $q < x$ is c.e. Show that $x$ is left-c.e. if and only if it is the limit of a computable non-decreasing sequence of rationals. Deduce that every non-computable left-c.e. real, such as Chaitin's halting probability $\Omega$ (:ref{#thm-omega}), is the limit of a Specker sequence.
 
 :::solution
-By definition, a left-c.e. real is the limit of a computable non-decreasing sequence of rationals. Chaitin's $\Omega$ is left-c.e., as the limit of the computable non-decreasing sequence $\Omega_s$, and it is not computable, since it computes $\emptyset'$. So $(\Omega_s)$ is a Specker sequence with limit $\Omega$.
+If $x$ is the limit of a computable non-decreasing sequence $(x_n)$ of rationals, then $q < x$ if and only if $q < x_n$ for some $n$: each $x_n$ is at most $x$, and if $q < x$, then $x_n > q$ for $n$ large. This is a c.e. condition on $q$. Conversely, let $q_0, q_1, \dots$ be a computable enumeration of the non-empty c.e. set $L = \{ q : q < x \}$, and $x_n = \max_{i \leq n} q_i$. The sequence $(x_n)$ is computable, non-decreasing and bounded by $x$; for $\varepsilon > 0$, some rational of $(x - \varepsilon, x)$ belongs to $L$, so $x_n > x - \varepsilon$ for $n$ large. Hence $x_n \to x$.
+
+If $x$ is moreover not computable, such a sequence, bounded by any rational above $x$, is a Specker sequence. The real $\Omega$ is the limit of the computable non-decreasing sequence $(\Omega_s)$ of rationals, and it is not computable, since $\Omega \equiv_T \emptyset'$ (:ref{#thm-omega}).
 :::
 ::::
 

@@ -5,7 +5,7 @@ duration: 35
 prerequisites: [arithmetic-hierarchy/arithmetic-definability]
 ---
 
-Reverse mathematics asks which set-existence axioms are needed to prove a given theorem of ordinary mathematics. The framework, proposed by Friedman (1975) and developed by Simpson, is **second-order arithmetic**: a theory of natural numbers and sets of natural numbers. Countable objects of analysis, algebra and combinatorics (real numbers, continuous functions on the reals, countable groups, colorings of pairs) can be coded by sets of numbers, so that their theorems become statements of second-order arithmetic. One then works in a weak **base theory** and proves equivalences between theorems and axioms. The surprising empirical fact is that most theorems are equivalent to one of five systems, the **Big Five**.
+Reverse mathematics asks which set-existence axioms are needed to prove a given theorem of ordinary mathematics. The framework, proposed by Friedman (1975) and developed by Simpson, is **second-order arithmetic**: a theory of natural numbers and sets of natural numbers. Countable objects of analysis, algebra and combinatorics (real numbers, continuous functions on the reals, countable groups, colorings of pairs) can be coded by sets of numbers, so that their theorems become statements of second-order arithmetic. One then works in a weak **base theory** and proves equivalences between theorems and axioms. An empirical observation is that most of the theorems studied so far are either provable in the base theory or equivalent over it to one of four stronger systems; together with the base theory, these form the **Big Five**.
 
 This lesson fixes the language, the axioms and the models. Throughout, the reader is assumed to know the language of first-order arithmetic and the arithmetic hierarchy (:ref{to="arithmetic-hierarchy/arithmetic-definability"}).
 
@@ -73,13 +73,13 @@ In particular $\mathsf Z_2$ proves the induction scheme for all formulas.
 An **$\mathcal L_2$-structure** is a tuple $\mathcal M = (M, \mathcal S, +^{\mathcal M}, \cdot^{\mathcal M}, <^{\mathcal M}, 0^{\mathcal M}, 1^{\mathcal M})$ where $M$ is a non-empty set, the **first-order part**, $\mathcal S \subseteq \mathcal P(M)$ is the **second-order part**, $+^{\mathcal M}, \cdot^{\mathcal M}$ are binary operations on $M$, $<^{\mathcal M}$ is a binary relation on $M$, and $0^{\mathcal M}, 1^{\mathcal M} \in M$. Number variables range over $M$, set variables over $\mathcal S$, and $\in$ is interpreted as membership.
 :::
 
-Satisfaction $\mathcal M \models \varphi$ is defined as usual, the set quantifiers ranging over $\mathcal S$ only. Such structures are **Henkin structures**; a structure with $\mathcal S = \mathcal P(M)$ is a **full** structure. With Henkin semantics, the logic of $\mathcal L_2$ is essentially first-order logic with two sorts, and enjoys the completeness theorem: a sentence is provable in a theory $T$ if and only if it holds in every model of $T$. We admit this result (see Simpson, *Subsystems of Second Order Arithmetic*, Section II.8). In particular, to show that $T$ does not prove $\varphi$, it suffices to exhibit a model of $T$ in which $\varphi$ fails.
+Satisfaction $\mathcal M \models \varphi$ is defined as usual, the set quantifiers ranging over $\mathcal S$ only. Such structures are **Henkin structures**; a structure with $\mathcal S = \mathcal P(M)$ is a **full** structure. With Henkin semantics, the logic of $\mathcal L_2$ is essentially first-order logic with two sorts, and enjoys the completeness theorem: a sentence is provable in a theory $T$ if and only if it holds in every model of $T$. We admit this result: it is the completeness theorem for many-sorted first-order logic, which reduces to the one-sorted case by adding a unary predicate for each sort (see Simpson, *Subsystems of Second Order Arithmetic*, Section I.2, for $\mathcal L_2$-structures). In particular, to show that $T$ does not prove $\varphi$, it suffices to exhibit a model of $T$ in which $\varphi$ fails.
 
 :::definition{#def-omega-model}
 An **ω-model** is a structure whose first-order part is $\nat$ with the usual operations and order. It is determined by its second-order part $\mathcal S \subseteq \mathcal P(\nat)$, and we identify the two.
 :::
 
-The structure $\mathcal P(\nat)$ is the intended model of $\mathsf Z_2$. Models that are not ω-models have **non-standard** numbers; they satisfy the same axioms, and are unavoidable for statements about induction, but most separations between the systems of this track are obtained with ω-models.
+The structure $\mathcal P(\nat)$ is the intended model of $\mathsf Z_2$. A model whose first-order part is not isomorphic to $\nat$ contains **non-standard** numbers. Such models are needed to separate systems that differ only by their induction axioms, since every ω-model satisfies full induction (:ref{#prop-omega-absolute}); most separations between the systems of this track are nevertheless obtained with ω-models.
 
 :::proposition{#prop-omega-absolute}
 Let $\mathcal S \subseteq \mathcal P(\nat)$ be an ω-model.
@@ -113,7 +113,7 @@ Let $\mathcal S$ be an ω-model containing a set $A$. Why does $\mathcal S$ sati
 - [x] Because "$\forall m\, \exists n > m\ n \in A$" is arithmetic, and arithmetic formulas are absolute for ω-models.
 - [ ] Because $\mathcal S$ contains all finite sets.
 
-  The statement concerns $A$ itself; absoluteness is what matters.
+  An ω-model need not contain all finite sets, and none is involved: the statement quantifies over numbers only, and its truth in $\mathcal S$ is that of an arithmetic formula with parameter $A$.
 - [ ] Because infinite sets are not definable in $\mathcal L_2$.
 
   Infiniteness is definable by an arithmetic formula.
@@ -121,7 +121,7 @@ Let $\mathcal S$ be an ω-model containing a set $A$. Why does $\mathcal S$ sati
 
 ## The program
 
-A subsystem $T$ of $\mathsf Z_2$ **proves** a statement $\varphi$ if $\varphi$ is derivable from the axioms of $T$. Two statements $\varphi$ and $\psi$ are **equivalent over** $T$ if $T$ proves $\varphi \leftrightarrow \psi$. The typical result of reverse mathematics has the form: a theorem $\varphi$ of ordinary mathematics, suitably coded, is provable in a system $S$, and conversely $\varphi$ implies the axioms of $S$ over the base theory $\mathsf{RCA}_0$. Since $\varphi$ proves the axioms, the axioms are necessary for its proof: hence the name *reverse* mathematics.
+A subsystem $T$ of $\mathsf Z_2$ **proves** a statement $\varphi$ if $\varphi$ is derivable from the axioms of $T$. Two statements $\varphi$ and $\psi$ are **equivalent over** $T$ if $T$ proves $\varphi \leftrightarrow \psi$. The typical result of reverse mathematics has the form: a theorem $\varphi$ of ordinary mathematics, suitably coded, is provable in a system $S$, and conversely $\varphi$ implies the axioms of $S$ over the base theory $\mathsf{RCA}_0$. Since $\varphi$ implies the axioms of $S$ over $\mathsf{RCA}_0$, these axioms are necessary to prove $\varphi$ over $\mathsf{RCA}_0$. The axioms are proved from the theorem: hence the name *reverse* mathematics.
 
 The five systems of the Big Five are, in increasing strength:
 
@@ -133,7 +133,7 @@ The five systems of the Big Five are, in increasing strength:
 | $\mathsf{ATR}_0$ | arithmetic transfinite recursion | hyperarithmetic sets |
 | $\Pi^1_1\text{-}\mathsf{CA}_0$ | $\Pi^1_1$ comprehension | the hyperjump |
 
-The next lesson introduces $\mathsf{RCA}_0$; the others are the subject of the course on the Big Five. Ramsey's theorem for pairs, studied in the last course of the track, is a famous exception to the Big Five phenomenon.
+The next lesson introduces $\mathsf{RCA}_0$; the others are the subject of the course on the Big Five. Ramsey's theorem for pairs, studied in the last course of the track, is the main exception to the Big Five phenomenon.
 
 ## Exercises
 
