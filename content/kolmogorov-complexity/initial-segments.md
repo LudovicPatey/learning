@@ -27,7 +27,7 @@ For a sequence $X$, the following are equivalent:
 3. $C(X \uh n) \leq^+ \log n$, for $n \geq 1$.
 :::
 
-The implications (1 ⇒ 2 ⇒ 3) follow from :ref{#prop-computable-segments} and $C(n) \leq^+ \log n$. For (3 ⇒ 1), see the book of Downey and Hirschfeldt, Section 3.4, or Li and Vitányi, Section 2.3. An exercise below shows that $\log n$ cannot be replaced by $2 \log n$: the characteristic sequence of a c.e. set satisfies $C(A \uh n) \leq^+ 2 \log n$.
+The implications (1 ⇒ 2 ⇒ 3) follow from :ref{#prop-computable-segments} and $C(n) \leq^+ \log n$. For (3 ⇒ 1), see the book of Downey and Hirschfeldt, Section 3.4. An exercise below shows that $\log n$ cannot be replaced by $2 \log n$: the characteristic sequence of a c.e. set satisfies $C(A \uh n) \leq^+ 2 \log n$.
 
 ## Oscillation
 
@@ -91,7 +91,7 @@ The function $\mu$ is non-decreasing by definition, and unbounded since $\{ m : 
 Let $h(k)$ be the least $x$ with $\varphi(x) > k$; it is total computable, since $\varphi$ is unbounded. By :ref{#prop-c-basic}, there is $c$ with $C(h(k)) \leq \log (k + 1) + c$ for every $k$. Let $n \geq h(0)$, and let $k$ be such that $h(k) \leq n < h(k+1)$; it exists since $h$ is non-decreasing and unbounded. Then $\varphi(n) > k$, since $n \geq h(k)$, and $h(k+1) \geq n$, so $\mu(n) \leq C(h(k+1)) \leq \log(k + 2) + c$. For $n$ large, $k$ is large, and $\log(k + 2) + c < k < \varphi(n)$.
 :::
 
-In particular, $C(n)$ is small for infinitely many $n$ in a range where $\log n$ is large: $C(2^{2^j}) \leq^+ \log j$, for instance. The function $\mu$ is a typical example of a function that tends to infinity, but slower than every computable function tending to infinity; it is computable in $\emptyset'$.
+For instance, $C(n)$ is small for infinitely many $n$ in a range where $\log n$ is large: $C(2^{2^j}) \leq^+ C(j) \leq^+ \log j$ for $j \geq 1$. The function $\mu$ is a typical example of a function that tends to infinity, but slower than every computable function tending to infinity; it is computable in $\emptyset'$, since $\mu(n) < v$ holds if and only if some string of length less than $v$ is a $U$-description of a number $m \geq n$, a c.e. condition.
 
 :::quiz[the lower envelope]
 In the proof of :ref{#thm-c-envelope}, why does the number $h(k+1)$ have small complexity?

@@ -5,7 +5,7 @@ duration: 40
 prerequisites: [initial-segments]
 ---
 
-The defects of plain complexity, the logarithmic cost of pairs and the oscillation of initial segments, have a common cause: a description of length $\ell$ conveys, besides its bits, the number $\ell$. Levin and Chaitin proposed to restrict descriptions to **self-delimiting** ones: a machine reads its input bit by bit and decides by itself when to stop reading, so that no description is a proper prefix of another. The resulting complexity $K$ is a few bits larger than $C$, but it behaves well with respect to concatenation, and it gives a definition of random sequences.
+The defects of plain complexity, the logarithmic cost of pairs and the oscillation of initial segments, have a common cause: a description of length $\ell$ conveys, besides its bits, the number $\ell$. Levin and Chaitin proposed to restrict descriptions to **self-delimiting** ones: a machine reads its input bit by bit and decides by itself when to stop reading, so that no description is a proper prefix of another. The resulting complexity $K$ exceeds $C$ by at most a logarithmic term, but it behaves well with respect to concatenation, and it gives a definition of random sequences.
 
 ## Prefix-free machines
 
@@ -35,7 +35,7 @@ The set of accepted strings is prefix-free, by construction, and it is the domai
 Let $U(0^e 1 \tau) = \hat M_e(\tau)$. The domain of $U$ is the union of the sets $0^e 1\, \mathrm{dom}(\hat M_e)$, which are prefix-free and pairwise incomparable for different $e$; so $U$ is prefix-free. If $M = M_e$ is prefix-free, $K_U(\sigma) \leq K_M(\sigma) + e + 1$.
 :::
 
-We fix such a machine $U$ and write $K(\sigma) = K_U(\sigma)$, the **prefix-free complexity** of $\sigma$. As for $C$, statements of the form $f \leq^+ g$ about $K$ do not depend on the choice of $U$, and $K(n)$ denotes the complexity of the string associated with $n$. The proofs of :ref{#prop-c-basic} (2) and of :ref{#thm-c-not-computable} carry over: $K(f(\sigma)) \leq^+ K(\sigma)$ for partial computable $f$, since the machine $\tau \mapsto f(U(\tau))$ has the same domain as $U$; $K$ is not computable and is approximable from above.
+We fix such a machine $U$ and write $K(\sigma) = K_U(\sigma)$, the **prefix-free complexity** of $\sigma$. As for $C$, statements of the form $f \leq^+ g$ about $K$ do not depend on the choice of $U$, and $K(n)$ denotes the complexity of the string associated with $n$. The proofs of :ref{#prop-c-basic} (2) and of :ref{#thm-c-not-computable} carry over: $K(f(\sigma)) \leq^+ K(\sigma)$ for partial computable $f$, since the domain of the machine $\tau \mapsto f(U(\tau))$ is contained in that of $U$, hence prefix-free; $K$ is not computable; and $K$ is approximable from above, with the computable bound $K(\sigma) \leq 2|\sigma| + d$, given by the prefix-free machine $\bar\rho\, 01 \mapsto \rho$, in place of $C(\sigma) \leq |\sigma| + d$.
 
 :::quiz[prefix-free machines]
 In the proof of :ref{#thm-optimal-prefix-free}, why does $\hat M_e$ enumerate the whole domain of $M_e$, instead of only checking the computations on its own input $\sigma$ and on the prefixes of $\sigma$?
@@ -56,14 +56,14 @@ In the proof of :ref{#thm-optimal-prefix-free}, why does $\hat M_e$ enumerate th
 :::proposition{#prop-k-basic}
 1. $K(\langle \sigma, \tau \rangle) \leq^+ K(\sigma) + K(\tau)$.
 2. $K(\sigma) \leq^+ |\sigma| + K(|\sigma|)$, and $K(\sigma) \leq^+ |\sigma| + 2 \log |\sigma|$ for $|\sigma| \geq 2$.
-3. $C(\sigma) \leq^+ K(\sigma)$, and $K(\sigma) \leq^+ C(\sigma) + K(C(\sigma)) \leq^+ C(\sigma) + 2 \log C(\sigma)$.
+3. $C(\sigma) \leq^+ K(\sigma)$, and $K(\sigma) \leq^+ C(\sigma) + K(C(\sigma)) \leq^+ C(\sigma) + 2 \log C(\sigma)$, where $\log 0$ is read as $0$.
 4. $\sum_\sigma 2^{-K(\sigma)} \leq 1$.
 :::
 
 :::proof{of=prop-k-basic}
 1. Let $M$ be the machine that, on input $\alpha$, searches for a decomposition $\alpha = \alpha_0 \alpha_1$ with $\alpha_0, \alpha_1$ in the domain of $U$, and outputs $\langle U(\alpha_0), U(\alpha_1) \rangle$. The decomposition is unique when it exists, since the domain of $U$ is prefix-free; it is found by enumerating the domain of $U$ and testing the prefixes of $\alpha$. The domain of $M$ is prefix-free: if $\alpha_0\alpha_1$ and $\alpha_0'\alpha_1'$ are both in it and comparable, then $\alpha_0$ and $\alpha_0'$ are comparable elements of the domain of $U$, hence equal, and then $\alpha_1$ and $\alpha_1'$ are comparable, hence equal. Concatenating shortest descriptions of $\sigma$ and $\tau$ gives $K_M(\langle \sigma, \tau \rangle) \leq K(\sigma) + K(\tau)$.
 2. The machine that, on input $\alpha_0 \alpha_1$ with $\alpha_0$ in the domain of $U$ and $|\alpha_1| = U(\alpha_0)$, read as a number, outputs $\alpha_1$, is prefix-free, by the same argument as in 1. It gives the first inequality. For the second, $K(n) \leq^+ 2 \log n$ for $n \geq 2$: the prefix-free machine $\bar\rho\, 01 \mapsto \rho$ describes the string $\rho$ associated with $n$ with $2|\rho| + 2$ bits.
-3. $U$ is a machine, so $C \leq^+ K_U = K$. For the second inequality, let $M$ be the machine that, on input $\alpha_0 \alpha_1$ with $\alpha_0$ in the domain of $U$ and $|\alpha_1| = U(\alpha_0)$, outputs $V(\alpha_1)$, where $V$ is the optimal plain machine defining $C$. It is prefix-free, and a shortest $U$-description of the number $C(\sigma)$ followed by a shortest $V$-description of $\sigma$ is an $M$-description of $\sigma$.
+3. $U$ is a machine, so $C \leq^+ K_U = K$. For the second inequality, let $M$ be the machine that, on input $\alpha_0 \alpha_1$ with $\alpha_0$ in the domain of $U$ and $|\alpha_1| = U(\alpha_0)$, outputs $V(\alpha_1)$, where $V$ is the optimal plain machine defining $C$. It is prefix-free, and a shortest $U$-description of the number $C(\sigma)$ followed by a shortest $V$-description of $\sigma$ is an $M$-description of $\sigma$. The last inequality follows from the bound $K(n) \leq^+ 2 \log n$ of 2, the finitely many strings with $C(\sigma) \leq 1$ being absorbed in the constant.
 4. The shortest $U$-descriptions of distinct strings are distinct elements of the domain of $U$, so the sum is at most the weight of the domain of $U$, which is at most $1$ by :ref{#prop-kraft}.
 :::
 
@@ -77,7 +77,7 @@ For every $c$ there is a string $\sigma$ with $K(\sigma) > |\sigma| + c$. More p
 For the first statement: if $K(\sigma) \leq |\sigma| + c$ for every $\sigma$, then $\sum_{|\sigma| = n} 2^{-K(\sigma)} \geq 2^{-c}$ for every $n$, and the sum over all lengths diverges, contradicting :ref{#prop-k-basic} (4). The second statement is proved in the next lesson (:ref{#thm-k-counting}).
 :::
 
-Since $K(n)$ is unbounded, the maximal complexity of a string of length $n$ is $n + K(n) + O(1)$, by :ref{#prop-k-basic} (2) and the corollary. The term $K(n)$ is the cost of self-delimitation: a prefix-free description of $\sigma$ must also determine where it ends, which requires information about $|\sigma|$.
+By :ref{#prop-k-basic} (2) and the corollary, the maximal complexity of a string of length $n$ is $n + K(n) + O(1)$, and it exceeds $n$ by an unbounded amount, since $K(n)$ is unbounded. The term $K(n)$ is the cost of self-delimitation: a prefix-free description of $\sigma$ must also determine where it ends, which requires information about $|\sigma|$.
 
 :::quiz[properties of K]
 In the proof of :ref{#prop-k-basic} (1), where is the prefix-freeness of $U$ used?
@@ -105,7 +105,7 @@ Why does $\sum_\sigma 2^{-C(\sigma)}$ diverge?
 
 ## Prefix-free complexity of initial segments
 
-The oscillation of :ref{#thm-oscillation} disappears for $K$: the machine in its proof, $\alpha \mapsto \beta\alpha$, is not prefix-free, since it accepts every string. In the next course, a sequence $X$ is called **random** when $K(X \uh n) \geq n - c$ for some constant $c$ and every $n$. Such sequences exist, and in fact almost every sequence, in the sense of the uniform measure, is random. Computable sequences are far from random, since $K(X \uh n) \leq^+ K(n) \leq^+ 2 \log n$.
+The proof of :ref{#thm-oscillation} does not carry over to $K$: the machine in its proof, $\alpha \mapsto \beta\alpha$, is not prefix-free, since it accepts every string. In the next course, a sequence $X$ is called **random** when $K(X \uh n) \geq n - c$ for some constant $c$ and every $n$. That course proves that such sequences exist, and in fact that almost every sequence, in the sense of the uniform measure, is random; the next lesson gives an example, Chaitin's number $\Omega$. Computable sequences are far from random, since $K(X \uh n) \leq^+ K(n) \leq^+ 2 \log n$.
 
 :::proposition{#prop-k-segments-computable}
 If $X$ is computable, then $K(X \uh n) =^+ K(n)$.
@@ -123,7 +123,7 @@ Unlike the case of $C$, the converse fails: there are non-computable sequences w
 Show that $K(\sigma\tau) \leq^+ K(\sigma) + K(\tau)$. Show that $K$ is not monotone up to a constant on numbers: there are pairs $n_j \leq m_j$ with $K(m_j) - K(n_j)$ tending to $-\infty$.
 
 :::solution
-The first inequality follows from :ref{#prop-k-basic} (1), since $\langle \sigma, \tau \rangle \mapsto \sigma\tau$ is computable. For the second, let $n_j$ be a number whose associated string $\sigma$ has length $j$ and satisfies $K(\sigma) \geq j + K(j) - d \geq j - d$, by :ref{#cor-k-above-length}. Such numbers lie between $2^j - 1$ and $2^{j+1} - 2$. Let $m_j = 2^{j+1}$, computable from $j$, so that $K(m_j) \leq^+ K(j) \leq^+ 2 \log j$ for $j \geq 2$. Then $K(m_j) - K(n_j) \leq 2 \log j - j + O(1)$ tends to $-\infty$.
+The first inequality follows from :ref{#prop-k-basic} (1), since $\langle \sigma, \tau \rangle \mapsto \sigma\tau$ is computable. For the second, let $n_j$ be a number whose associated string $\sigma$ has length $j$ and satisfies $C(\sigma) \geq j$, by :ref{#prop-incompressible-count}; then $K(\sigma) \geq j - d$ for a constant $d$, by :ref{#prop-k-basic} (3). Such numbers lie between $2^j - 1$ and $2^{j+1} - 2$. Let $m_j = 2^{j+1}$, computable from $j$, so that $K(m_j) \leq^+ K(j) \leq^+ 2 \log j$ for $j \geq 2$. Then $K(m_j) - K(n_j) \leq 2 \log j - j + O(1)$ tends to $-\infty$.
 :::
 ::::
 

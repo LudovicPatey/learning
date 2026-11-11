@@ -43,7 +43,7 @@ The free strings record the unused part of Cantor space as a union of disjoint c
 
 ## The characterization of K
 
-A function $f : \bstr \to \nat$ is **approximable from above**, or **right-c.e.**, if there is a computable function $(s, \sigma) \mapsto f_s(\sigma)$, non-increasing in $s$, with $\lim_s f_s(\sigma) = f(\sigma)$. By :ref{#prop-k-basic} (4), $K$ is right-c.e. and satisfies $\sum_\sigma 2^{-K(\sigma)} \leq 1$.
+A function $f : \bstr \to \nat$ is **approximable from above**, or **right-c.e.**, if there is a computable function $(s, \sigma) \mapsto f_s(\sigma)$, non-increasing in $s$, with $\lim_s f_s(\sigma) = f(\sigma)$. As noted after :ref{#thm-optimal-prefix-free}, $K$ is right-c.e., and by :ref{#prop-k-basic} (4) it satisfies $\sum_\sigma 2^{-K(\sigma)} \leq 1$.
 
 :::theorem{#thm-k-minimal}
 If $f : \bstr \to \nat$ is right-c.e. and $\sum_\sigma 2^{-f(\sigma)} \leq 1$, then $K \leq^+ f$. So $K$ is, up to an additive constant, the least right-c.e. function satisfying the Kraft inequality.
@@ -56,7 +56,7 @@ Let $(f_s)$ be an approximation from above. Enumerate the request $(\sigma, f_0(
 :::quiz[the KC theorem]
 In the proof of :ref{#thm-kc}, why is the **longest** free string of length at most $\ell_s$ chosen?
 
-- [x] To preserve invariant 2: the new free strings have the lengths between $|\rho| + 1$ and $\ell_s$, and no free string has such a length only if $\rho$ is the longest one below $\ell_s$.
+- [x] To preserve invariant 2: the new free strings have the lengths between $|\rho| + 1$ and $\ell_s$, and no other free string has such a length precisely because $\rho$ is the longest free string of length at most $\ell_s$.
 - [ ] To make the machine prefix-free.
 
   Any free string of length at most $\ell_s$ would keep the domain prefix-free; the choice matters for invariant 2.
@@ -114,29 +114,29 @@ $$
 $$
 :::
 
-By :ref{#prop-kraft}, $\Omega \leq 1$, and $\Omega > 0$ since $U$ has a non-empty domain. We identify $\Omega$ with its binary expansion $\omega = \omega_0 \omega_1 \cdots$, so that $\Omega = \sum_i \omega_i 2^{-i-1}$; if $\Omega$ is a dyadic rational, we take the expansion ending with zeros. The rationals $\Omega_s = \sum \{ 2^{-|\tau|} : |\tau| \leq s,\ U(\tau)[s]\converge \}$ form a computable non-decreasing sequence with limit $\Omega$: $\Omega$ is **left-c.e.**
+By :ref{#prop-kraft}, $\Omega \leq 1$, and $\Omega > 0$ since $U$ has a non-empty domain. The theorem below shows that $\Omega$ is irrational, so $0 < \Omega < 1$ and $\Omega$ has a unique binary expansion $\omega = \omega_0 \omega_1 \cdots$, with $\Omega = \sum_i \omega_i 2^{-i-1}$; we identify $\Omega$ with the sequence $\omega$. The rationals $\Omega_s = \sum \{ 2^{-|\tau|} : |\tau| \leq s,\ U(\tau)[s]\converge \}$ form a computable non-decreasing sequence with limit $\Omega$: $\Omega$ is **left-c.e.**
 
 :::theorem[Chaitin]{#thm-omega}
 1. $\Omega \equiv_T \emptyset'$.
-2. $\Omega$ is not a dyadic rational, and for every $n$, the prefix $\omega \uh n$ determines, uniformly in $n$, the set of strings of length at most $n$ in the domain of $U$.
+2. $\Omega$ is irrational, and for every $n$, the prefix $\omega \uh n$ determines, uniformly in $n$, the set of strings of length at most $n$ in the domain of $U$.
 3. There is a constant $c$ with $K(\omega \uh n) \geq n - c$ for every $n$.
 :::
 
 :::proof{of=thm-omega}
 *Settled stages.* If $\Omega - \Omega_s < 2^{-n}$ and $s \geq n$, then every string $\tau$ of length at most $n$ in the domain of $U$ satisfies $U(\tau)[s]\converge$: otherwise $\tau$ is not counted in $\Omega_s$, and $\Omega \geq \Omega_s + 2^{-|\tau|} \geq \Omega_s + 2^{-n}$. So the strings of length at most $n$ in the domain of $U$ are those that converge by stage $s$.
 
-*The domain of $U$ computes $\emptyset'$.* Let $M$ be the prefix-free machine with $M(1^e 0) = 0^s$, where $s$ is the least stage with $\Phi_e(e)[s]\converge$, and $M$ undefined elsewhere. Let $d$ be such that $K \leq K_M + d$. If $\Phi_e(e)$ converges at stage $s$, then $K(0^s) \leq e + 1 + d$. With the domain of $U$ as an oracle, compute the outputs of the strings of length at most $e + 1 + d$ in the domain, and let $t$ be the largest number with $0^t$ among them. Then $\Phi_e(e)\converge$ if and only if $\Phi_e(e)[t]\converge$.
+*The domain of $U$ computes $\emptyset'$.* Let $M$ be the prefix-free machine with $M(1^e 0) = 0^s$, where $s$ is the least stage with $\Phi_e(e)[s]\converge$, and $M$ undefined elsewhere. Let $d$ be such that $K \leq K_M + d$. If $\Phi_e(e)$ converges at stage $s$, then $K(0^s) \leq e + 1 + d$. With the domain of $U$ as an oracle, compute the outputs of the strings of length at most $e + 1 + d$ in the domain, and let $t$ be the largest number with $0^t$ among them ($t = 0$ if there is none). Then $\Phi_e(e)\converge$ if and only if $\Phi_e(e)[t]\converge$.
 
-*$\omega$ computes the domain of $U$.* Given $n$, search with oracle $\omega$ for $s \geq n$ and $k$ such that $0.\omega_0 \cdots \omega_{k-1} + 2^{-k} \leq \Omega_s + 2^{-n-1}$. If they are found, then $\Omega \leq 0.\omega_0 \cdots \omega_{k-1} + 2^{-k} \leq \Omega_s + 2^{-n-1}$, so $\Omega - \Omega_s < 2^{-n}$ and $s$ is settled for $n$. The search terminates: take $s \geq n$ with $\Omega - \Omega_s < 2^{-n-1}$, and then $k$ large enough that $2^{-k} < \Omega_s + 2^{-n-1} - \Omega$, using $0.\omega_0 \cdots \omega_{k-1} \leq \Omega$.
+*$\Omega$ is irrational.* If $\Omega$ were rational, then, given $n$, the search for a stage $s \geq n$ with $\Omega - \Omega_s < 2^{-n}$ would be effective, since $\Omega$ and $\Omega_s$ are rationals, and it terminates since $\Omega_s$ tends to $\Omega$. By the first paragraph, the domain of $U$ would be computable, and so would be $\emptyset'$, which is not the case.
 
-*$\Omega$ is not a dyadic rational, and $\omega \leq_T \emptyset'$.* If $\Omega$ were a dyadic rational, $\omega$ would be computable, and so would be the domain of $U$, which computes $\emptyset'$. So $\Omega$ is not a dyadic rational. For a dyadic rational $q$, $q < \Omega$ holds if and only if $\Omega_s > q$ for some $s$, a $\Sigma^0_1$ condition, and $q \neq \Omega$. The prefix $\omega \uh k$ is the binary expansion of the largest $q = j 2^{-k}$ with $q < \Omega$, so $\emptyset'$ computes $\omega$. This proves 1.
+*Prefixes of $\omega$.* Let $q = 0.\omega_0 \cdots \omega_{n-1}$. Since $\Omega$ is irrational, $q < \Omega < q + 2^{-n}$. Search for $s \geq n$ with $\Omega_s > q$; it exists, and then $\Omega - \Omega_s < 2^{-n}$, so $s$ is settled for $n$. This procedure only uses $\omega \uh n$, which proves 2. In particular $\omega$ computes the domain of $U$, hence $\emptyset'$.
 
-*Prefixes of $\omega$.* Let $q = 0.\omega_0 \cdots \omega_{n-1}$. Since $\Omega$ is not a dyadic rational, $q < \Omega < q + 2^{-n}$. Search for $s \geq n$ with $\Omega_s > q$; it exists, and then $\Omega - \Omega_s < 2^{-n}$, so $s$ is settled for $n$. This procedure only uses $\omega \uh n$, which proves 2.
+*$\omega \leq_T \emptyset'$.* For a dyadic rational $q$, $q < \Omega$ holds if and only if $\Omega_s > q$ for some $s$, a c.e. condition, so $\emptyset'$ decides it; and $q \neq \Omega$, since $\Omega$ is irrational. The prefix $\omega \uh k$ is the binary expansion of the largest $q = j 2^{-k}$ with $q < \Omega$, so $\emptyset'$ computes $\omega$. This proves 1.
 
 *Incompressibility.* Let $N$ be the machine that, on input $\tau$, computes $\rho = U(\tau)$ and $n = |\rho|$, runs the procedure of 2 as if $\rho$ were $\omega \uh n$, obtaining a stage $s$ if the search terminates, lists the outputs of the strings of length at most $n$ that converge by stage $s$, and outputs the first string, in the length-lexicographic order, that is not in this list. The domain of $N$ is contained in that of $U$, so $N$ is prefix-free. If $U(\tau) = \omega \uh n$, the list contains every string $\sigma$ with $K(\sigma) \leq n$, by 2, so $N(\tau)$ has complexity larger than $n$. Let $c$ be such that $K \leq K_N + c$, and let $\tau$ be a shortest description of $\omega \uh n$. Then $n < K(N(\tau)) \leq |\tau| + c = K(\omega \uh n) + c$.
 :::
 
-Statement 3 says that $\omega$ is random in the sense announced in the previous lesson. The first $n$ bits of $\Omega$ solve the halting problem for all programs of length at most $n$, and yet they cannot be compressed: the information they contain is maximal, and inaccessible to any algorithm.
+Statement 3 says that $\omega$ is random in the sense announced in the previous lesson. The first $n$ bits of $\Omega$ solve the halting problem for all programs of length at most $n$, and yet they cannot be compressed: up to a constant, no prefix-free description of them is shorter than $n$.
 
 :::quiz[Chaitin's Ω]
 Why does a stage $s$ with $\Omega - \Omega_s < 2^{-n}$ settle the halting of all programs of length at most $n$?
