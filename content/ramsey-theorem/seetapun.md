@@ -5,7 +5,7 @@ duration: 45
 prerequisites: [cohesiveness]
 ---
 
-By Jockusch's bounds, some computable colorings of pairs have no homogeneous set computable in $\emptyset'$, while every computable coloring of triples can force its homogeneous sets to compute $\emptyset'$. Seetapun (1995) showed that pairs behave differently: for every non-computable set $C$, every computable coloring of pairs has an infinite homogeneous set that does not compute $C$. In particular, Ramsey's theorem for pairs does not imply $\mathsf{ACA}_0$. We follow the proof of Dzhafarov and Jockusch (2009), which goes through the decomposition of the previous lesson: cohesive sets can avoid cones, and the infinite pigeonhole principle avoids cones for **arbitrary** instances.
+By Jockusch's bounds, some computable colorings of pairs have no homogeneous set computable in $\emptyset'$, while some computable coloring of triples forces all its infinite homogeneous sets to compute $\emptyset'$. Seetapun (1995) showed that pairs behave differently: for every non-computable set $C$, every computable coloring of pairs has an infinite homogeneous set that does not compute $C$. In particular, Ramsey's theorem for pairs does not imply $\mathsf{ACA}_0$. We follow the proof of Dzhafarov and Jockusch (2009), which goes through the decomposition of the previous lesson: cohesive sets can avoid cones, and the infinite pigeonhole principle avoids cones for **arbitrary** instances.
 
 Throughout, a set is identified with its characteristic sequence, and a finite string $\sigma$ with the finite set $\{ n < |\sigma| : \sigma(n) = 1 \}$.
 
@@ -90,18 +90,18 @@ We build two sets $G^0 \subseteq A^0$ and $G^1 \subseteq A^1$ simultaneously, wi
 
 *Infinity.* Given a condition and $i < 2$, the set $X \cap A^i$ is infinite: otherwise $X$ minus finitely many elements would be an infinite subset of $A^{1-i}$ in $\mathcal I$, contradicting (H). Let $n \in X \cap A^i$, extend $\sigma_i$ by zeros and then $1$ at position $n$, and replace $X$ by $X \setminus \{0, \dots, n\}$.
 
-*The requirement $\mathcal R_{e_0, e_1}$: $\Phi^{Z \oplus G^0}_{e_0} \neq C$ or $\Phi^{Z \oplus G^1}_{e_1} \neq C$.* Fix a condition $c = (\sigma_0, \sigma_1, X)$. For $x \in \nat$ and $v < 2$, say that $c$ **answers** $(x, v)$ if for every partition $\nat = Z^0 \sqcup Z^1$, there are $i < 2$ and a string $\tau$ compatible with $(\sigma_i, X \cap Z^i)$ with $\Phi^{Z \oplus \tau}_{e_i}(x)\converge = v$.
+*The requirement $\mathcal R_{e_0, e_1}$: $\Phi^{Z \oplus G^0}_{e_0} \neq C$ or $\Phi^{Z \oplus G^1}_{e_1} \neq C$.* Fix a condition $c = (\sigma_0, \sigma_1, X)$. For $x \in \nat$ and $v < 2$, say that $c$ **answers** $(x, v)$ if for every partition $\nat = U^0 \sqcup U^1$, there are $i < 2$ and a string $\tau$ compatible with $(\sigma_i, X \cap U^i)$ (compatibility is defined as for Mathias conditions, even if $X \cap U^i$ is finite) with $\Phi^{Z \oplus \tau}_{e_i}(x)\converge = v$.
 
-The set of partitions, coded as $Z^0$, for which this fails is a $\Pi^0_1(Z \oplus X)$ class: failure means that every $\tau$ compatible with $(\sigma_i, X \cap Z^i)$, for both $i$, gives no convergent computation with value $v$, and each instance of this condition involves finitely many bits of $Z^0$. By compactness, $c$ answers $(x, v)$ if and only if this class is empty, a $\Sigma^0_1(Z \oplus X)$ property of $(x, v)$. Let $W$ be the set of pairs answered by $c$; it is c.e. in $Z \oplus X$, a member of $\mathcal I$.
+The set of partitions, coded as $U^0$, for which this fails is a $\Pi^0_1(Z \oplus X)$ class: failure means that every $\tau$ compatible with $(\sigma_i, X \cap U^i)$, for both $i$, gives no convergent computation with value $v$, and each instance of this condition involves finitely many bits of $U^0$. By compactness, $c$ answers $(x, v)$ if and only if this class is empty, a $\Sigma^0_1(Z \oplus X)$ property of $(x, v)$. Let $W$ be the set of pairs answered by $c$; it is c.e. in $Z \oplus X$, which is a member of $\mathcal I$.
 
 1. If $(x, 1 - C(x)) \in W$ for some $x$: apply the definition to the partition $(A^0, A^1)$. There are $i$ and $\tau$ compatible with $(\sigma_i, X \cap A^i)$ with $\Phi^{Z \oplus \tau}_{e_i}(x)\converge = 1 - C(x)$. The new elements of $\tau$ lie in $A^i$. Replacing $\sigma_i$ by $\tau$ and $X$ by $X \setminus \{0, \dots, |\tau|\}$ gives an extension forcing $\Phi^{Z \oplus G^i}_{e_i}(x) \neq C(x)$.
-2. If $(x, C(x)) \notin W$ for some $x$: the $\Pi^0_1(Z \oplus X)$ class of partitions witnessing it is non-empty, and since $\mathcal I$ is a Scott ideal containing $Z \oplus X$, it has a member $Z^0 \in \mathcal I$, with $Z^1 = \overline{Z^0}$. For some $i$, $X \cap Z^i$ is infinite; it belongs to $\mathcal I$. The condition $(\sigma_0, \sigma_1, X \cap Z^i)$ extends $c$, and every $G^i$ satisfying $(\sigma_i, X \cap Z^i)$ has $\Phi^{Z \oplus G^i}_{e_i}(x) \neq C(x)$, divergent or different: a convergent computation with value $C(x)$ would come from a compatible string.
+2. If $(x, C(x)) \notin W$ for some $x$: the $\Pi^0_1(Z \oplus X)$ class of partitions witnessing it is non-empty, and since $\mathcal I$ is a Scott ideal containing $Z \oplus X$, it has a member $U^0 \in \mathcal I$, with $U^1 = \overline{U^0}$. For some $i$, $X \cap U^i$ is infinite; it belongs to $\mathcal I$. The condition $(\sigma_0, \sigma_1, X \cap U^i)$ extends $c$, and every $G^i$ satisfying $(\sigma_i, X \cap U^i)$ has $\Phi^{Z \oplus G^i}_{e_i}(x) \neq C(x)$, divergent or different: a convergent computation with value $C(x)$ would come from a compatible string.
 3. Otherwise, every $x$ has some $v$ with $(x, v) \in W$, and only $v = C(x)$ occurs. Then $C$ is computable in $Z \oplus X \in \mathcal I$, by enumerating $W$: so $C \in \mathcal I$, a contradiction.
 
 *Conclusion.* Build a sequence of conditions that handles infinity for both sides and every requirement $\mathcal R_{e_0, e_1}$ in turn, and let $G^0$, $G^1$ be the limits. Both are infinite, $G^i \subseteq A^i$, and every requirement holds. If $\Phi^{Z \oplus G^0}_{e_0} = C$ for some $e_0$, then $\Phi^{Z \oplus G^1}_{e_1} \neq C$ for every $e_1$, so $C \not\leq_T Z \oplus G^1$. Otherwise $C \not\leq_T Z \oplus G^0$. Either $H = G^0$ or $H = G^1$ works.
 :::
 
-The heart of the proof is the **disjunctive question**: instead of asking whether some extension inside $A^i$ forces a convergence, which is too complex since $A$ is arbitrary, one asks whether every partition of $\nat$ allows a convergence on one side. A positive answer applies in particular to $(A^0, A^1)$; a negative answer is witnessed by a partition in the Scott ideal, and the reservoir is shrunk to a side of this partition. The reservoir is then a common solution to two instances of the pigeonhole principle.
+The heart of the proof is the **disjunctive question**: instead of asking whether some extension inside $A^i$ forces a convergence, which is too complex since $A$ is arbitrary, one asks whether every partition of $\nat$ allows a convergence on one side. A positive answer applies in particular to $(A^0, A^1)$; a negative answer is witnessed by a partition in the Scott ideal, and the reservoir is shrunk to a side of this partition. The new reservoir is thus a solution, in $\mathcal I$, of the instance $U^0$ of the pigeonhole principle, and (H) ensures that it still meets both $A^0$ and $A^1$ infinitely often.
 
 :::quiz[the Dzhafarov–Jockusch forcing]
 Why is the question "does every partition allow a convergence on one side" used, rather than "does some extension inside $A^i$ give a convergence"?
@@ -118,7 +118,7 @@ Why is the question "does every partition allow a convergence on one side" used,
 
 Where is it used that $\mathcal I$ is a Scott ideal?
 
-- [x] In case 2, to find a partition in $\mathcal I$ witnessing the negative answer, so that the new reservoir $X \cap Z^i$ remains in $\mathcal I$.
+- [x] In case 2, to find a partition in $\mathcal I$ witnessing the negative answer, so that the new reservoir $X \cap U^i$ remains in $\mathcal I$.
 - [ ] To ensure that $A$ belongs to $\mathcal I$.
 
   $A$ is arbitrary and usually not in $\mathcal I$.
@@ -134,7 +134,7 @@ Let $Z$ be a set and $C \not\leq_T Z$. Every $Z$-computable coloring $f : [\nat]
 :::
 
 :::proof{of=thm-seetapun}
-The sequence $R_x = \{ y : f(\{ x, y \}) = 1 \}$ is $Z$-computable. By :ref{#thm-coh-cone-avoidance}, it has a cohesive set $G$ with $C \not\leq_T Z \oplus G$. Let $p$ enumerate $G$ in increasing order, and $g(\{ i, j \}) = f(\{ p(i), p(j) \})$; it is a stable coloring (:ref{#thm-rt22-decomposition}), computable in $Z \oplus G$. By :ref{#thm-dj-cone-avoidance} relativized to $Z \oplus G$, applied to the limit set $A_g$, there is an infinite set $K$ contained in $A_g$ or in its complement with $C \not\leq_T Z \oplus G \oplus K$. By :ref{#prop-srt-d22} (2), $g \oplus K$ computes an infinite homogeneous set $L$ for $g$, and $H = p[L]$ is homogeneous for $f$, computable in $Z \oplus G \oplus K$. So $C \not\leq_T Z \oplus H$.
+The sequence $R_x = \{ y : f(\{ x, y \}) = 1 \}$ is $Z$-computable. By :ref{#thm-coh-cone-avoidance}, it has a cohesive set $G$ with $C \not\leq_T Z \oplus G$. Let $p$ enumerate $G$ in increasing order, and $g(\{ i, j \}) = f(\{ p(i), p(j) \})$; it is a stable coloring (:ref{#thm-rt22-decomposition}), computable in $Z \oplus G$. By :ref{#thm-dj-cone-avoidance} with $Z \oplus G$ in place of $Z$, applied to the limit set $A_g$, there is an infinite set $K$ contained in $A_g$ or in its complement with $C \not\leq_T Z \oplus G \oplus K$. By :ref{#prop-srt-d22} (2), $g \oplus K$ computes an infinite homogeneous set $L$ for $g$, and $H = p[L]$ is homogeneous for $f$, computable in $Z \oplus G \oplus K$. So $C \not\leq_T Z \oplus H$.
 :::
 
 :::corollary[Seetapun]{#cor-rt22-not-aca}
@@ -147,7 +147,7 @@ Build sets $Z_0 = \emptyset \leq_T Z_1 \leq_T \cdots$ with $\emptyset' \not\leq_
 The class $\mathcal I = \{ X : \exists n\ X \leq_T Z_n \}$ is a Turing ideal not containing $\emptyset'$. Every coloring in $\mathcal I$ is $\Phi^{Z_m}_e$ for some $e, m$, and is handled at some stage, so it has a homogeneous set in $\mathcal I$. By absoluteness, $\mathcal I$ satisfies $\mathsf{RT}^2_2$, and it is not a jump ideal.
 :::
 
-Together with :ref{#cor-wkl-not-rt22}, Seetapun's theorem shows that $\mathsf{RT}^2_2$ escapes the Big Five: it lies strictly below $\mathsf{ACA}_0$ and is not provable in $\mathsf{WKL}_0$. Liu (2012) proved that it does not imply $\mathsf{WKL}_0$ either, by showing that the infinite pigeonhole principle avoids PA degrees in the sense of :ref{#thm-dj-cone-avoidance}; this is admitted here. Ramsey's theorem for pairs is the first and most studied of a large family of combinatorial principles, the **reverse mathematics zoo**, whose members are mostly incomparable with the Big Five.
+Together with :ref{#cor-wkl-not-rt22}, Seetapun's theorem shows that $\mathsf{RT}^2_2$ escapes the Big Five: it lies strictly below $\mathsf{ACA}_0$ and is not provable in $\mathsf{WKL}_0$. Liu (2012) proved that it does not imply $\mathsf{WKL}_0$ either, by showing that the infinite pigeonhole principle avoids PA degrees in the sense of :ref{#thm-dj-cone-avoidance}; this is admitted here. Ramsey's theorem for pairs is the first and most studied of a large family of combinatorial principles, the **reverse mathematics zoo**, many of which lie strictly below $\mathsf{ACA}_0$ without being equivalent to any of the Big Five.
 
 ## Exercises
 

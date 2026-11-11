@@ -1,6 +1,6 @@
 ---
 title: Cohesiveness and stable colorings
-summary: Cohesive sets; stable colorings of pairs and their limit sets; Ramsey's theorem for pairs decomposes into the cohesiveness principle and stable Ramsey's theorem; stable Ramsey's theorem is the statement that every Δ⁰₂ set has an infinite subset in it or in its complement.
+summary: Cohesive sets; stable colorings of pairs and their limit sets; Ramsey's theorem for pairs decomposes into the cohesiveness principle and stable Ramsey's theorem; stable Ramsey's theorem is equivalent to the statement that every Δ⁰₂ set has an infinite subset in it or in its complement.
 duration: 35
 prerequisites: [jockusch]
 ---
@@ -25,7 +25,7 @@ Every sequence $\vec R$ has an $\vec R$-cohesive set computable in $\vec R''$.
 Define sets $X_0 = \nat$ and $X_{i+1} = X_i \cap R_i$ if this set is infinite, and $X_{i+1} = X_i \cap \overline{R_i}$ otherwise. By induction, each $X_i$ is infinite, and an index of $X_i$ as an $\vec R$-computable set is obtained from the previous choices. Each choice asks whether an $\vec R$-computable set is infinite, a $\Pi^0_2(\vec R)$ question, answered by $\vec R''$. Let $c_i$ be the least element of $X_{i+1}$ larger than $c_{i-1}$, and $C = \{ c_0 < c_1 < \cdots \}$. For each $i$, all $c_j$ with $j \geq i$ belong to $X_{j+1} \subseteq X_{i+1}$, which is contained in $R_i$ or in $\overline{R_i}$. So $C$ is cohesive, and $\vec R''$-computable.
 :::
 
-Much better bounds hold. Jockusch and Stephan (1993) showed that the degrees of r-cohesive sets are exactly the degrees whose jump is PA relative to $\emptyset'$, and Cholak, Jockusch and Slaman showed that every computable sequence has a cohesive set $C$ with $C' \leq_T P$ for any given $P$ PA relative to $\emptyset'$. In particular, cohesive sets for computable sequences can be **low₂**: $C'' \leq_T \emptyset''$. We admit these results.
+Much better bounds hold. Jockusch and Stephan (1993) showed that a set computes a cohesive set for every computable sequence if and only if its jump is PA relative to $\emptyset'$, and Cholak, Jockusch and Slaman showed that every computable sequence has a cohesive set $C$ with $C' \leq_T P$ for any given $P$ PA relative to $\emptyset'$. In particular, cohesive sets for computable sequences can be **low₂**: $C'' \leq_T \emptyset''$. We admit these results.
 
 ## Stable colorings
 
@@ -45,7 +45,7 @@ Let $x \in C$. Since $C \subseteq^* R_x$ or $C \subseteq^* \overline{R_x}$, $f(\
 For the second statement, let $f$ be a coloring, and let $C$ be cohesive for the sequence $(R_x)$, which exists by $\Delta^0_1$ comprehension. Let $p$ be the increasing enumeration of $C$, and $g(\{ i, j \}) = f(\{ p(i), p(j) \})$; it is stable by the first part. By $\mathsf{SRT}^2_2$, $g$ has an infinite homogeneous set $H$, and $p[H] \subseteq C$ is homogeneous for $f$.
 :::
 
-The converse holds as well: $\mathsf{RT}^2_2$ implies $\mathsf{COH}$ over $\mathsf{RCA}_0$, by a theorem of Cholak, Jockusch and Slaman, with a correction by Mileti; we admit it (Hirschfeldt, *Slicing the Truth*, Section 6.4). So $\mathsf{RT}^2_2$ is equivalent to $\mathsf{SRT}^2_2 + \mathsf{COH}$. Chong, Slaman and Yang (2014) showed that $\mathsf{SRT}^2_2$ is strictly weaker than $\mathsf{RT}^2_2$, using non-standard models; on ω-models, the separation was obtained by Monin and Patey (2021).
+The converse holds as well: $\mathsf{RT}^2_2$ implies $\mathsf{COH}$ over $\mathsf{RCA}_0$, by a theorem of Cholak, Jockusch and Slaman, with a correction by Mileti; we admit it (Hirschfeldt, *Slicing the Truth*, Chapter 6). So $\mathsf{RT}^2_2$ is equivalent to $\mathsf{SRT}^2_2 + \mathsf{COH}$. Chong, Slaman and Yang (2014) showed that $\mathsf{SRT}^2_2$ is strictly weaker than $\mathsf{RT}^2_2$, using non-standard models; on ω-models, the separation was obtained by Monin and Patey (2021).
 
 :::quiz[the decomposition]
 In the proof of :ref{#thm-rt22-decomposition}, why is the restriction of $f$ to a cohesive set stable?

@@ -5,7 +5,7 @@ duration: 45
 prerequisites: [big-five/wkl0]
 ---
 
-Ramsey's theorem states that every finite coloring of the $n$-element subsets of $\nat$ has an infinite set on which the coloring is constant. Jockusch (1972) determined how complex such sets must be for computable colorings: homogeneous sets can be found computably in any degree PA over $\obf^{(n-1)}$, but not, in general, at the level $\Sigma^0_n$. For $n \geq 3$, this makes Ramsey's theorem equivalent to $\mathsf{ACA}_0$. For pairs, the analysis leaves a gap, which the rest of the course explores.
+Ramsey's theorem states that every finite coloring of the $n$-element subsets of $\nat$ has an infinite set on which the coloring is constant. Jockusch (1972) determined how complex such sets must be for computable colorings: homogeneous sets can be found computably in any degree PA over $\obf^{(n-1)}$, but not, in general and for $n \geq 2$, at the level $\Sigma^0_n$. For $n \geq 3$, this makes Ramsey's theorem equivalent to $\mathsf{ACA}_0$. For pairs, the analysis leaves a gap, which the rest of the course explores.
 
 ## Statements
 
@@ -54,7 +54,7 @@ We build $T$ by inserting the numbers $0, 1, 2, \dots$ one at a time. The first 
 
 *Paths are pre-homogeneous.* Let $P$ be an infinite path, $j < j'$, $a = P(j)$ and $b = P(j')$. When $b$ was inserted, it descended along $P \uh j'$, hence moved from $P \uh j$ to $P \uh (j + 1) = (P \uh j)\, a$, so $a$ and $b$ have the same pattern over $P \uh j$. For $x_1 < \cdots < x_n$ in the range of $P$, at positions $m_1 < \cdots < m_n$, and $y = P(j)$, $y' = P(j')$ with $m_n < j < j'$, this gives $f(\{ x_1, \dots, x_n, y \}) = f(\{ x_1, \dots, x_n, y' \})$.
 
-*Computing a path.* The number of successors of each node is bounded, but their values are not: whether $\sigma$ has a successor above a given number is a $\Sigma^0_1(f)$ question. With $f'$, one computes, for each node, the finite list of its successors. Coding each successor by its rank in this list, the paths of $T$ correspond, computably in $f'$, to the paths of an $f'$-computable tree in $\prod_\sigma k^{\binom{|\sigma|}{n}}$, a $\Pi^0_1(f')$ class after coding into Cantor space. It is non-empty by König's lemma. A set PA relative to $f'$ computes a member of it (:ref{#thm-pa-characterization}, relativized), and it computes $f'$ itself, so it computes a path of $T$.
+*Computing a path.* The number of successors of each node is bounded, but their values are not: whether $\sigma$ has a successor above a given number is a $\Sigma^0_1(f)$ question. With $f'$, one computes, for each node, the finite list of its successors. Coding each successor by its rank in this list, the paths of $T$ correspond, computably in $f'$, to the paths of an $f'$-computable tree in $\prod_\sigma k^{\binom{|\sigma|}{n}}$, a $\Pi^0_1(f')$ class after coding into Cantor space. It is non-empty by König's lemma. A set PA relative to $f'$ computes a member of it (:ref{#thm-pa-characterization}, relativized), and it computes $f'$ itself (second exercise of :ref{to="pi01-classes/pa-degrees"}, relativized to $f'$), so it computes a path of $T$.
 :::
 
 :::theorem[Jockusch]{#thm-jockusch-upper}
@@ -66,12 +66,12 @@ By induction on $n$, for all colorings $f$ simultaneously. For $n = 1$, $f$ itse
 
 For $n = 2$, let $P$ be PA relative to $f'$. By :ref{#prop-erdos-rado-tree}, $P$ computes an infinite pre-homogeneous set $X$, the induced coloring $g$ of $[X]^1$ is computable in $P$, and so is a homogeneous set for $g$, which is homogeneous for $f$.
 
-For $n + 1$ with $n \geq 2$, let $P_1$ be PA relative to $f^{(n)}$. By the low basis theorem relativized to $f'$, there is $P_0$ PA relative to $f'$ with $P_0' \leq_T f''$; then $P_0^{(n-1)} \leq_T f^{(n)}$, since $n - 1 \geq 1$. $P_0$ computes an infinite pre-homogeneous set $X$ and the induced coloring $g$ of $[X]^n$, so $g^{(n-1)} \leq_T P_0^{(n-1)} \leq_T f^{(n)}$, and $P_1$ is PA relative to $g^{(n-1)}$. By the induction hypothesis, applied to $g$ transported to $[\nat]^n$ through the enumeration of $X$, $P_1$ computes an infinite homogeneous set for $g$, which is homogeneous for $f$.
+For $n + 1$ with $n \geq 2$, let $P_1$ be PA relative to $f^{(n)}$. By the low basis theorem relativized to $f'$, there is $P_0$ PA relative to $f'$ with $P_0' \leq_T f''$; then $P_0^{(n-1)} \leq_T f^{(n)}$, since $n - 1 \geq 1$. $P_0$ computes an infinite pre-homogeneous set $X$ and the induced coloring $g$ of $[X]^n$, so $g^{(n-1)} \leq_T P_0^{(n-1)} \leq_T f^{(n)}$, and $P_1$ is PA relative to $g^{(n-1)}$. By the induction hypothesis, applied to $g$ transported to $[\nat]^n$ through the enumeration of $X$, $P_1$ computes an infinite homogeneous set for the transported coloring; its image under the enumeration of $X$ is computable in $P_1$, since $X \leq_T P_0 \leq_T f'' \leq_T P_1$, and it is homogeneous for $g$, hence for $f$.
 
 For the last statement, $\emptyset^{(n)}$ is PA relative to $\emptyset^{(n-1)}$: it computes a $\{0, 1\}$-valued function DNC relative to $\emptyset^{(n-1)}$.
 :::
 
-Jockusch proved more precisely that every computable coloring of $[\nat]^n$ has a $\Pi^0_n$ infinite homogeneous set; the construction for pairs is a finite injury argument relative to $\emptyset'$, which we do not reproduce (see Hirschfeldt, *Slicing the Truth*, Section 6.2).
+Jockusch proved more precisely that every computable coloring of $[\nat]^n$ has a $\Pi^0_n$ infinite homogeneous set. For pairs, one builds an infinite pre-homogeneous sequence and the set of its elements of a given limit color so that both are $\Pi^0_2$; we do not reproduce the construction (Jockusch 1972; Hirschfeldt, *Slicing the Truth*, Chapter 6).
 
 :::quiz[the Erdős–Radó tree]
 In the proof of :ref{#prop-erdos-rado-tree}, why is $f'$ needed to compute a path, although the tree is $f$-computable and finitely branching?
@@ -136,7 +136,7 @@ For every $\emptyset'$-computable coloring $h : [\nat]^n \to k$, there is a comp
 :::
 
 :::proof{of=lem-limit-coloring}
-By the limit lemma, $h(\{ x_1, \dots, x_n \}) = \lim_t f(\{ x_1, \dots, x_n, t \})$ for a computable $f$. Let $H$ be infinite and homogeneous for $f$ with color $i$. For $x_1 < \cdots < x_n$ in $H$, take $t \in H$ large enough that $f(\{ x_1, \dots, x_n, t \}) = h(\{ x_1, \dots, x_n \})$; this value is $i$.
+By the limit lemma, $h(\{ x_1, \dots, x_n \}) = \lim_t f(\{ x_1, \dots, x_n, t \})$ for a computable function $f$ defined for $x_1 < \cdots < x_n < t$; replacing the values outside $k$ by $0$, which does not change the limit, $f$ is a coloring $[\nat]^{n+1} \to k$. Let $H$ be infinite and homogeneous for $f$ with color $i$. For $x_1 < \cdots < x_n$ in $H$, take $t \in H$ large enough that $f(\{ x_1, \dots, x_n, t \}) = h(\{ x_1, \dots, x_n \})$; this value is $i$.
 :::
 
 :::proposition[Jockusch]{#prop-rt32-jump}
@@ -154,11 +154,11 @@ For every standard $n \geq 3$, $\mathsf{RT}^n_2$ is equivalent to $\mathsf{ACA}_
 :::
 
 :::proof{of=thm-rt3-aca}
-*$\mathsf{ACA}_0$ proves $\mathsf{RT}^n_k$*, by induction on $n$ in the metatheory. The case $n = 1$ is :ref{#prop-rt-basic}. Given $f : [\nat]^{n+1} \to k$, the Erdős–Radó tree exists by $\Delta^0_1$ comprehension, and $\mathsf{RCA}_0$ proves that it is infinite and finitely branching. By König's lemma (:ref{#thm-konig-aca}), it has a path, which is pre-homogeneous. The induction hypothesis, with :ref{#prop-rt-basic} (2), gives a homogeneous set for the induced coloring.
+*$\mathsf{ACA}_0$ proves $\mathsf{RT}^n_k$*, by induction on $n$ in the metatheory. The case $n = 1$ is :ref{#prop-rt-basic}. Given $f : [\nat]^{n+1} \to k$, the Erdős–Radó tree exists by $\Delta^0_1$ comprehension, and $\mathsf{RCA}_0$ proves that it is infinite and finitely branching. By König's lemma (:ref{#thm-konig-aca}), it has a path, which is pre-homogeneous. The induction hypothesis, with :ref{#prop-rt-basic} (2), whose proof applies to any number of colors, gives a homogeneous set for the induced coloring.
 
-*$\mathsf{RT}^3_2$ implies $\mathsf{ACA}_0$.* We prove that $X'$ exists, using :ref{#thm-aca-equivalents}. Define $f(\{ x, s, t \}) = 1$ for $x < s < t$ if every $e < x$ satisfies $\Phi^X_e(e)[s]\converge \leftrightarrow \Phi^X_e(e)[t]\converge$, and $0$ otherwise. Let $H$ be infinite and homogeneous. Its color is $1$: for $x \in H$, among $2^x + 1$ elements of $H$ above $x$, two have the same pattern of convergence for the indices $e < x$, by the finite pigeonhole principle, provable in $\mathsf{RCA}_0$. For each $e$, let $x_e$ be the least element of $H$ above $e$ and $s_e$ the least element of $H$ above $x_e$. If $\Phi^X_e(e)[t]\converge$ for some $t$, take $t \in H$ above $s_e$; then $f(\{ x_e, s_e, t \}) = 1$ gives $\Phi^X_e(e)[s_e]\converge$. So $X' = \{ e : \Phi^X_e(e)[s_e]\converge \}$, which exists by $\Delta^0_1$ comprehension relative to $X \oplus H$.
+*$\mathsf{RT}^3_2$ implies $\mathsf{ACA}_0$.* We prove that $X'$ exists, using :ref{#thm-aca-equivalents}. Define $f(\{ x, s, t \}) = 1$ for $x < s < t$ if every $e < x$ satisfies $\Phi^X_e(e)[s]\converge \leftrightarrow \Phi^X_e(e)[t]\converge$, and $0$ otherwise. Let $H$ be infinite and homogeneous. Its color is $1$: for $x \in H$, among $2^x + 1$ elements of $H$ above $x$, two have the same pattern of convergence for the indices $e < x$, by the finite pigeonhole principle, provable in $\mathsf{RCA}_0$. For each $e$, let $x_e$ be the least element of $H$ above $e$ and $s_e$ the least element of $H$ above $x_e$. If $\Phi^X_e(e)[t_0]\converge$ for some $t_0$, take $t \in H$ above $s_e$ and $t_0$, so that $\Phi^X_e(e)[t]\converge$; then $f(\{ x_e, s_e, t \}) = 1$ gives $\Phi^X_e(e)[s_e]\converge$. So $X' = \{ e : \Phi^X_e(e)[s_e]\converge \}$, which exists by $\Delta^0_1$ comprehension relative to $X \oplus H$.
 
-For $n \geq 3$, $\mathsf{RT}^n_2$ implies $\mathsf{RT}^3_2$: a coloring $f$ of triples induces the coloring $\{ x_1, \dots, x_n \} \mapsto f(\{ x_1, x_2, x_3 \})$ of $n$-tuples, with the same homogeneous sets.
+For $n \geq 3$, $\mathsf{RT}^n_2$ implies $\mathsf{RT}^3_2$: a coloring $f$ of triples induces the coloring $\{ x_1, \dots, x_n \} \mapsto f(\{ x_1, x_2, x_3 \})$ of $n$-tuples, with the same infinite homogeneous sets.
 :::
 
 :::corollary{#cor-wkl-not-rt22}
