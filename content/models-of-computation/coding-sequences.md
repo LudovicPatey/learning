@@ -177,7 +177,7 @@ Bound the code of the sorted sequence in terms of $s$, and search for it.
 :::
 
 :::solution
-The sorted sequence has the same length $n$ and the same entries, so its code is at most $\prod_{i < n} p_i^{M + 1}$ where $M = \max_i (s)'_i$, a primitive recursive function $b(s)$ of $s$. The sorted code is $\mu t \leq b(s)\ \big(\mathrm{Seq}(t) \wedge \mathrm{lh}(t) = \mathrm{lh}(s) \wedge t \text{ is non-decreasing} \wedge \forall v \leq M\ \#_v(t) = \#_v(s)\big)$, where $\#_v(s) = \sum_{i < \mathrm{lh}(s)} \chi_=((s)'_i, v)$ counts the occurrences of $v$. All of this is primitive recursive.
+The sorted sequence has the same length $n$ and the same entries, so its code is at most $\prod_{i < n} p_i^{M + 1}$ where $M = \max_i (s)'_i$, a primitive recursive function $b(s)$ of $s$. The sorted code is $\mu t < b(s) + 1\ \big(\mathrm{Seq}(t) \wedge \mathrm{lh}(t) = \mathrm{lh}(s) \wedge t \text{ is non-decreasing} \wedge \forall v \leq M\ \#_v(t) = \#_v(s)\big)$, where $\#_v(s) = \sum_{i < \mathrm{lh}(s)} \chi_=((s)'_i, v)$ counts the occurrences of $v$. All of this is primitive recursive.
 :::
 ::::
 
@@ -185,7 +185,7 @@ The sorted sequence has the same length $n$ and the same entries, so its code is
 Define a bijective coding of finite sequences: show that the function $\langle\!\langle \cdot \rangle\!\rangle$ given by $\langle\!\langle \, \rangle\!\rangle = 0$ and $\langle\!\langle a_0, \dots, a_{n} \rangle\!\rangle = 1 + \langle a_0, \langle\!\langle a_1, \dots, a_n \rangle\!\rangle \rangle$ is a bijection between finite sequences and $\nat$, and that its length and projection functions are primitive recursive.
 
 :::solution
-By induction on $z$: $z = 0$ codes only the empty sequence, and $z \geq 1$ codes exactly the sequences with first element $\pi_0(z - 1)$ followed by the sequence coded by $\pi_1(z - 1) < z$; this gives existence and uniqueness. The length satisfies $\mathrm{lh}(0) = 0$ and $\mathrm{lh}(z) = 1 + \mathrm{lh}(\pi_1(z - 1))$ for $z \geq 1$, a course-of-values recursion since $\pi_1(z - 1) < z$; the projections are obtained similarly. By :ref{#thm-course-of-values}, they are primitive recursive.
+By induction on $z$: $z = 0$ codes only the empty sequence, and $z \geq 1$ codes exactly the sequences with first element $\pi_0(z - 1)$ followed by a sequence coded by $\pi_1(z - 1)$, which is smaller than $z$ since $\langle x, y \rangle \geq y$; by the induction hypothesis there is exactly one such sequence, which gives existence and uniqueness. The length satisfies $\mathrm{lh}(0) = 0$ and $\mathrm{lh}(z) = 1 + \mathrm{lh}(\pi_1(z - 1))$ for $z \geq 1$, a course-of-values recursion since $\pi_1(z - 1) < z$; by :ref{#thm-course-of-values}, $\mathrm{lh}$ is primitive recursive. For the projections, the parameter changes along the recursion, so it is simpler to iterate the tail: let $\mathrm{tl}(z, 0) = z$ and $\mathrm{tl}(z, i + 1) = \pi_1(\mathrm{tl}(z, i) \dotminus 1)$, a primitive recursion on $i$. If $z$ codes $(a_0, \dots, a_n)$ and $i \leq n$, then $\mathrm{tl}(z, i)$ codes $(a_i, \dots, a_n)$, so $a_i = \pi_0(\mathrm{tl}(z, i) \dotminus 1)$.
 :::
 ::::
 

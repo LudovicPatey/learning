@@ -31,13 +31,13 @@ Why does the definition require $g(\vec x, z)\converge$ for all $z < y$, rather 
 
 - [x] Because the search evaluates $g(\vec x, 0), g(\vec x, 1), \dots$ in order: if some $g(\vec x, z)$ with $z$ smaller than the least zero diverges, the search never gets past $z$.
 
-  With the other definition, minimization would not preserve computability. Let $g(x, 0) \simeq 0$ if the program of code $x$ halts on input $x$, undefined otherwise, and $g(x, y) = 0$ for $y \geq 1$. Then $g$ is partial computable, and "the least zero of $g(x, \cdot)$" is $0$ or $1$ according to whether the program $x$ halts on $x$: it would decide the halting problem, which is impossible (see the course on fundamentals).
+  With the other definition, minimization would not preserve computability. Let $g(x, 0) \simeq 0$ if the program of code $x$ halts on input $x$, undefined otherwise, and $g(x, y) = 0$ for $y \geq 1$. Then $g$ is partial computable, and "the least zero of $g(x, \cdot)$" is $0$ or $1$ according to whether the program $x$ halts on $x$: it would decide the halting problem, which is impossible (see the lesson :ref{to="fundamentals/halting-problem"}).
 - [ ] To ensure that $f$ is total.
 
   $f$ may be undefined, for instance when $g(\vec x, \cdot)$ has no zero.
-- [ ] It makes no difference when $g$ is total.
+- [ ] It is needed already when $g$ is total, to make $f(\vec x)$ the least zero of $g(\vec x, \cdot)$.
 
-  This is true, but the definition is for partial $g$, and there it matters.
+  When $g$ is total, the condition $g(\vec x, z)\converge$ holds automatically and the two definitions agree; the requirement only matters for partial $g$.
 :::
 
 ## Partial recursive functions
@@ -51,7 +51,7 @@ The schemes of composition and primitive recursion extend to partial functions, 
 The class of **partial recursive** functions is the smallest class of partial functions $\nat^k \rightharpoonup \nat$ ($k \geq 1$) containing the basic functions $Z$, $S$, $p^k_i$, and closed under composition, primitive recursion and minimization. A partial recursive function which is total is called a **(total) recursive** function. A predicate is **recursive** if its characteristic function is recursive.
 :::
 
-The terminology varies: *partial recursive* is also called *partial computable*, and *recursive* is also called *computable*, the modern usage preferred in the following courses. In Kleene's original work, the total functions obtained from Herbrand–Gödel systems of equations were called *general recursive*; the class is the same.
+The terminology varies: *partial recursive* is also called *partial computable*, and *recursive* is also called *computable*, the modern usage preferred in the following courses. In Kleene's original work, the total functions obtained from Herbrand–Gödel systems of equations were called *general recursive*; Kleene proved that they are exactly the total partial recursive functions.
 
 :::proposition{#prop-partial-recursive-computable}
 Every partial recursive function is computable: there is an algorithm which, on input $\vec x$, terminates with output $f(\vec x)$ if $f(\vec x)\converge$, and does not terminate otherwise.
@@ -115,7 +115,7 @@ Kleene originally defined the total recursive functions using minimization only 
 A total function $g : \nat^{k+1} \to \nat$ is **regular** if for every $\vec x$ there is $y$ with $g(\vec x, y) = 0$.
 :::
 
-Minimization applied to a regular total function yields a total function. Let $\mathcal{R}$ be the smallest class of **total** functions containing the basic functions and closed under composition, primitive recursion and regular minimization. Clearly every function of $\mathcal{R}$ is recursive. The converse — every total partial recursive function belongs to $\mathcal{R}$ — is not obvious: a partial recursive definition of a total function may use partial functions in intermediate steps. It is a consequence of the normal form theorem below.
+Minimization applied to a regular total function yields a total function. Let $\mathcal{R}$ be the smallest class of **total** functions containing the basic functions and closed under composition, primitive recursion and regular minimization. Every function of $\mathcal{R}$ is recursive, since regular minimization is a special case of minimization. The converse — every total partial recursive function belongs to $\mathcal{R}$ — is not obvious: a partial recursive definition of a total function may use partial functions in intermediate steps. It is a consequence of the normal form theorem below.
 
 ## Kleene's normal form
 
@@ -151,7 +151,7 @@ In $f(\vec x) \simeq U(\mu s\, T_k(e, \vec x, s))$, which part makes $f$ partial
 
 ---
 
-How many applications of the minimization operator are needed to define any partial recursive function, according to the theorem?
+According to the theorem, how many applications of the minimization operator suffice to define an arbitrary partial recursive function?
 
 - [x] One.
 - [ ] As many as in some given definition of the function.
@@ -168,7 +168,7 @@ How many applications of the minimization operator are needed to define any part
 Show that the recursive predicates are closed under the boolean connectives and bounded quantification, and that the recursive functions are closed under bounded minimization over recursive predicates.
 
 :::solution
-The proofs given for primitive recursive predicates and functions in the lesson :ref{to="models-of-computation/primitive-recursion"} only use composition and primitive recursion applied to the characteristic functions, which are total. They apply verbatim to recursive predicates.
+The total recursive functions contain the primitive recursive functions and are closed under composition and primitive recursion, since these operations preserve totality. The proofs given for primitive recursive predicates and functions in the lesson :ref{to="models-of-computation/primitive-recursion"} only use these closure properties, applied to characteristic functions, which are total. They therefore apply verbatim to recursive predicates and functions.
 :::
 ::::
 

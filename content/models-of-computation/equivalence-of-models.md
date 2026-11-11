@@ -9,7 +9,7 @@ We have met five definitions of computable partial function. Some equivalences a
 
 - WHILE-computable $\iff$ partial recursive (:ref{#thm-while-partial-recursive});
 - partial recursive $\iff$ λ-definable (:ref{#thm-recursive-lambda-definable} and :ref{#thm-lambda-definable-recursive});
-- WHILE-computable $\iff$ URM-computable (last exercise of the lesson on WHILE programs).
+- WHILE-computable $\implies$ URM-computable (:ref{#prop-while-urm}); the converse follows from the other implications below, and is also the last exercise of the lesson on WHILE programs.
 
 It remains to connect Turing machines to the other models. In this lesson we prove that every Turing-computable function is partial recursive, by **arithmetizing** the computations of Turing machines, and that every URM-computable function is Turing-computable, by simulation. Along the way we obtain Kleene's normal form theorem and a universal partial recursive function.
 
@@ -116,9 +116,9 @@ Consequently every partial recursive function $f$ can be written $f(\vec x) \sim
 :::
 
 :::proof{of=thm-kleene-normal-form-proof}
-Let $T_k(e, \vec x, s)$ state that $s$ codes the **whole computation**: $s = [c_0, \dots, c_t]$ with $c_0 = \mathrm{Init}(\vec x)$, $c_{i+1} = \mathrm{Next}(e, c_i)$ for $i < t$, $c_t$ halting and standard, and $c_i$ not halting for $i < t$. This is a conjunction of bounded quantifications over $i < \mathrm{lh}(s)$, hence primitive recursive. Such an $s$ is unique, since the computation is deterministic. Let $U(s) = \mathrm{Out}((s)'_{\mathrm{lh}(s) - 1})$, the output read on the last configuration.
+Let $T_k(e, \vec x, s)$ state that $s$ codes the **whole computation**: $s = [c_0, \dots, c_t]$ with $c_0 = \mathrm{Init}(\vec x)$, $c_{i+1} = \mathrm{Next}(e, c_i)$ for $i < t$, $c_t$ halting and standard, and $c_i$ not halting for $i < t$. This is a conjunction of bounded quantifications over $i < \mathrm{lh}(s)$, hence primitive recursive. Such an $s$ is unique: $c_0$ is fixed, each $c_{i+1}$ is determined by $c_i$, and $t$ is the first index of a halting configuration. Let $U(s) = \mathrm{Out}((s)'_{\mathrm{lh}(s) - 1})$, the output read on the last configuration.
 
-If the machine $e$ halts on $\vec x$ in a standard configuration, $\mu s\, T_k(e, \vec x, s)$ is the code of its computation and $U$ returns the output. Otherwise no $s$ satisfies $T_k$, and the search diverges. The last statement follows once we know that every partial recursive function is Turing-computable, which is proved in the next section.
+If the machine $e$ halts on $\vec x$ in a standard configuration, $\mu s\, T_k(e, \vec x, s)$ is the code of its computation and $U$ returns the output. Otherwise no $s$ satisfies $T_k$, and the search diverges. The last statement follows once we know that every partial recursive function is Turing-computable. This is the chain of implications (4) ⇒ (3) ⇒ (2) ⇒ (1) of the last section, whose proof does not use the normal form theorem.
 :::
 
 :::quiz[the normal form theorem]
@@ -142,17 +142,17 @@ Every URM-computable partial function is Turing-computable.
 :::
 
 :::proof{of=prop-urm-tm}
-Let $P = I_1, \dots, I_s$ compute $f : \nat^k \rightharpoonup \nat$, and let $\rho = \max(\rho(P), k)$. We build a multi-tape Turing machine $N$ with $\rho + 1$ tapes: tape $0$ holds the input and output, and tape $n$, for $1 \leq n \leq \rho$, holds the content of $R_n$ in unary, as $\ulcorner R_n \urcorner$ starting at the head position. The index of the current instruction is stored in the finite control of $N$.
+Let $P = I_1, \dots, I_s$ compute $f : \nat^k \rightharpoonup \nat$, and let $\rho = \max(\rho(P), k)$. We build a multi-tape Turing machine $N$ with $\rho + 1$ tapes, following the conventions of :ref{#def-multitape}: tape $1$ holds the input and output, and tape $n + 1$, for $1 \leq n \leq \rho$, holds the content of $R_n$ in unary, as $\ulcorner R_n \urcorner$ starting at the head position. The index of the current instruction is stored in the finite control of $N$.
 
-1. *Initialization.* $N$ reads the input $\ulcorner x_1 \urcorner \sqcup \cdots \sqcup \ulcorner x_k \urcorner$ on tape $0$ and copies each block to the corresponding tape; the other register tapes receive $\ulcorner 0 \urcorner$.
+1. *Initialization.* $N$ reads the input $\ulcorner x_1 \urcorner \sqcup \cdots \sqcup \ulcorner x_k \urcorner$ on tape $1$ and copies the $n$-th block to tape $n + 1$; the other register tapes receive $\ulcorner 0 \urcorner$.
 2. *Simulation.* For each instruction, $N$ has a group of states:
-   - $Z(n)$: erase tape $n$ and write a single $1$;
-   - $S(n)$: append a $1$ at the end of the block on tape $n$, and return;
-   - $T(m, n)$: erase tape $n$ and copy the block of tape $m$ onto it;
-   - $J(m, n, q)$: scan the blocks of tapes $m$ and $n$ simultaneously from left to right; they have equal length iff both heads reach a blank at the same time. Return the heads, and enter the group of instruction $q$ or $i + 1$ accordingly.
+   - $Z(n)$: erase tape $n + 1$ and write a single $1$;
+   - $S(n)$: append a $1$ at the end of the block on tape $n + 1$, and return;
+   - $T(m, n)$: erase tape $n + 1$ and copy the block of tape $m + 1$ onto it;
+   - $J(m, n, q)$: scan the blocks of tapes $m + 1$ and $n + 1$ simultaneously from left to right; they have equal length iff both heads reach a blank at the same time. Return the heads, and enter the group of instruction $q$ or $i + 1$ accordingly.
 
    When the current index exceeds $s$, the simulation ends.
-3. *Output.* $N$ erases tape $0$, copies the block of tape $1$ onto it, and halts on its first cell.
+3. *Output.* $N$ erases tape $1$, copies the block of tape $2$ (the register $R_1$) onto it, and halts with head $1$ on its first cell.
 
 By induction on the number of steps of $P$, after the simulation of $j$ instructions, the tapes of $N$ represent the registers of $P$ after $j$ steps. Hence $N$ computes $f$. By :ref{#thm-multitape-simulation}, so does some single-tape machine.
 :::
@@ -163,13 +163,13 @@ We can now complete the proof of :ref{#thm-equivalence-models}. The following im
 $$
 (1) \Longrightarrow (4) \Longrightarrow (3) \Longrightarrow (2) \Longrightarrow (1), \qquad (4) \Longleftrightarrow (5).
 $$
-Indeed, (1) ⇒ (4) is :ref{#prop-tm-partial-recursive}; (4) ⇒ (3) is :ref{#thm-while-partial-recursive}; (3) ⇒ (2) is the compilation of WHILE programs into URM programs; (2) ⇒ (1) is :ref{#prop-urm-tm}; and (4) ⇔ (5) was proved in the previous lesson. All five classes coincide.
+Indeed, (1) ⇒ (4) is :ref{#prop-tm-partial-recursive}; (4) ⇒ (3) is :ref{#thm-while-partial-recursive}; (3) ⇒ (2) is :ref{#prop-while-urm}; (2) ⇒ (1) is :ref{#prop-urm-tm}; and (4) ⇔ (5) was proved in the previous lesson. All five classes coincide.
 
 From now on, we call these functions the **partial computable** functions, and their total members the **computable** functions.
 
 ## The universal function
 
-The normal form theorem has a remarkable consequence: a single partial computable function evaluates all the others.
+A consequence of the normal form theorem is that a single partial computable function evaluates all the others.
 
 :::corollary[Universal function]{#cor-universal-function}
 The function $\Phi(e, \vec x) \simeq U(\mu s\, T_k(e, \vec x, s))$ is partial computable, and for every partial computable $f : \nat^k \rightharpoonup \nat$ there is $e$ with $f(\vec x) \simeq \Phi(e, \vec x)$ for all $\vec x$. In particular, there is a **universal Turing machine**, which on input $(e, \vec x)$ simulates the machine coded by $e$ on $\vec x$.
@@ -179,7 +179,7 @@ The function $\Phi(e, \vec x) \simeq U(\mu s\, T_k(e, \vec x, s))$ is partial co
 $\Phi$ is partial recursive, as it is obtained from primitive recursive functions by one minimization and one composition. By the equivalence, it is computed by some Turing machine. The second statement is :ref{#thm-kleene-normal-form-proof}.
 :::
 
-Writing $\Phi_e(\vec x) \simeq \Phi(e, \vec x)$, the sequence $\Phi_0, \Phi_1, \Phi_2, \dots$ is an enumeration of all partial computable functions. Its study is the subject of the course on fundamentals, which starts from this enumeration.
+Writing $\Phi_e(\vec x) \simeq \Phi(e, \vec x)$, the sequence $\Phi_0, \Phi_1, \Phi_2, \dots$ is an enumeration of all partial computable functions. Its study is the subject of the course on the fundamentals of computability, starting with the lesson :ref{to="fundamentals/programs-as-numbers"}.
 
 :::quiz[the universal function]
 The diagonal argument of the lesson on the Ackermann function showed that the evaluation function of the primitive recursive functions is not primitive recursive. Why does the same argument not show that $\Phi$ is not partial computable?
@@ -204,10 +204,10 @@ For a single argument, the code of $1^{x+1}$ is $\prod_{i \leq x} p_i^{2}$ (each
 ::::
 
 ::::exercise{difficulty=2}
-Using the normal form theorem, show that the predicate $H(e, x, t)$: "the machine of code $e$ halts on input $x$ within $t$ steps" is primitive recursive, and that $\{(e, x) : \exists t\ H(e, x, t)\}$ is the domain of the universal function.
+Using the uniform step function of the normal form theorem, show that the predicate $H(e, x, t)$: "the machine of code $e$ halts on input $x$ within $t$ steps, in a standard final configuration" is primitive recursive, and that $\{(e, x) : \exists t\ H(e, x, t)\}$ is the domain of the universal function.
 
 :::solution
-$H(e, x, t) \iff \exists t' \leq t\ \mathrm{Halt}(\mathrm{Conf}(e, x, t'))$, where $\mathrm{Conf}(e, x, t)$ is the uniform version of the iteration function, primitive recursive in $e, x, t$. If one requires halting in a standard configuration, add $\mathrm{Std}$. The machine halts (in a standard configuration) on $x$ iff some $t$ satisfies $H$, iff $\mu s\, T_1(e, x, s)$ converges, iff $(e, x) \in \dom \Phi$.
+Let $\mathrm{Conf}(e, x, t)$ be the uniform version of the iteration function, defined by primitive recursion from $\mathrm{Next}(e, c)$, hence primitive recursive in $e, x, t$. Since $\mathrm{Next}$ fixes halting configurations, $H(e, x, t) \iff \mathrm{Halt}(\mathrm{Conf}(e, x, t)) \wedge \mathrm{Std}(\mathrm{Conf}(e, x, t))$, a primitive recursive predicate. The machine halts on $x$ in a standard configuration iff some $t$ satisfies $H$, iff some $s$ satisfies $T_1(e, x, s)$, iff $\mu s\, T_1(e, x, s)$ converges, iff $(e, x) \in \dom \Phi$ (as $U$ is total).
 :::
 ::::
 
@@ -221,8 +221,9 @@ Code derivations of unary primitive recursive functions by integers, mapping non
 
 ## Notes and references
 
-Turing proved the equivalence of his machines with λ-definability in an appendix to his 1936 paper, and Kleene the equivalence of λ-definability with general recursiveness. The predicate $T$ of the normal form theorem is often called *Kleene's $T$-predicate*. The arithmetization of computations given here follows the treatment of register and Turing machines in Cutland's and Odifreddi's textbooks.
+Turing sketched in an appendix to his 1936 paper that the λ-definable functions are computable by his machines, and proved the equivalence of the two notions in 1937; Kleene proved the equivalence of λ-definability with general recursiveness in 1936. The predicate $T$ of the normal form theorem is often called *Kleene's $T$-predicate*. The arithmetization of computations given here follows the treatment of register and Turing machines in Cutland's and Odifreddi's textbooks.
 
 - S. C. Kleene, *General recursive functions of natural numbers*, Mathematische Annalen 112 (1936), 727–742.
+- A. M. Turing, *Computability and λ-definability*, Journal of Symbolic Logic 2 (1937), 153–163.
 - N. Cutland, *Computability: An Introduction to Recursive Function Theory*, Cambridge University Press, 1980.
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989, chapter I.

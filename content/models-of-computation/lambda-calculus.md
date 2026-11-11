@@ -5,7 +5,7 @@ duration: 40
 prerequisites: [what-is-an-algorithm]
 ---
 
-Church's λ-calculus (1932–1936) takes a radically different view of computation. There are no machines and no numbers: the only objects are **functions**, and the only operations are forming a function by abstracting over a variable, and applying a function to an argument. Computation is the simplification of expressions by substituting arguments for variables. The λ-calculus is the theoretical basis of functional programming languages and of the proofs-as-programs correspondence in logic.
+Church's λ-calculus (1932–1936) takes a different view of computation. There are no machines and no numbers: the only objects are **functions**, and the only operations are forming a function by abstracting over a variable, and applying a function to an argument. Computation is the simplification of expressions by substituting arguments for variables. The λ-calculus is the theoretical basis of functional programming languages and of the proofs-as-programs correspondence in logic.
 
 In the λ-calculus, functions take functions as arguments and return functions. Numbers, booleans and data structures must therefore be **encoded** as functions; this is the subject of the next lesson. Here we study the calculus itself.
 
@@ -55,7 +55,7 @@ For instance $\mathrm{FV}(\lambda x.\, x\, y) = \{y\}$, and $\mathsf{I}, \mathsf
 Substituting a term $N$ for a variable $x$ must not change the meaning of the free variables of $N$. In $\lambda y.\, x$, substituting $y$ for $x$ naively would give $\lambda y.\, y$, the identity, whereas $\lambda y.\, x$ is a constant function. The bound variable must be renamed first.
 
 :::definition{#def-substitution}
-The **substitution** $M[N/x]$ of $N$ for the free occurrences of $x$ in $M$ is defined by induction on $M$:
+The **substitution** $M[N/x]$ of $N$ for the free occurrences of $x$ in $M$ is defined by induction on the size of $M$ (renaming a bound variable does not change the size):
 
 - $x[N/x] = N$, and $y[N/x] = y$ for $y \neq x$;
 - $(M_1\, M_2)[N/x] = M_1[N/x]\ M_2[N/x]$;
@@ -118,7 +118,7 @@ A term is in **β-normal form** if it contains no β-redex. A term $M$ **has a n
 Examples:
 
 1. $\mathsf{I}\, M \to_\beta M$, and $\mathsf{K}\, M\, N \to_\beta (\lambda y.\, M)\, N \to_\beta M$ (with $y \notin \mathrm{FV}(M)$).
-2. $\mathsf{S}\, \mathsf{K}\, \mathsf{K} \twoheadrightarrow_\beta \lambda z.\, \mathsf{K}\, z\, (\mathsf{K}\, z) \to_\beta \lambda z.\, z = \mathsf{I}$.
+2. $\mathsf{S}\, \mathsf{K}\, \mathsf{K} \twoheadrightarrow_\beta \lambda z.\, \mathsf{K}\, z\, (\mathsf{K}\, z) \twoheadrightarrow_\beta \lambda z.\, z = \mathsf{I}$ (see the first exercise for the individual steps).
 3. $\Omega = (\lambda x.\, x\, x)(\lambda x.\, x\, x) \to_\beta (\lambda x.\, x\, x)(\lambda x.\, x\, x) = \Omega$. The only reduction sequence from $\Omega$ is infinite, and $\Omega$ has no normal form: it is the λ-calculus analogue of a non-terminating computation.
 4. $(\lambda x.\, y)\, \Omega$ reduces to the normal form $y$ by contracting the outer redex, but also reduces to itself by contracting $\Omega$. Some reduction sequences from this term are infinite, although it has a normal form.
 
@@ -138,7 +138,7 @@ We sketch the proof of Tait and Martin-Löf. The one-step relation $\to_\beta$ i
 - if $M \Rightarrow M'$ and $N \Rightarrow N'$ then $M\, N \Rightarrow M'\, N'$;
 - if $M \Rightarrow M'$ and $N \Rightarrow N'$ then $(\lambda x.\, M)\, N \Rightarrow M'[N'/x]$.
 
-Intuitively, $M \Rightarrow M'$ contracts any set of redexes present in $M$, simultaneously. One checks that ${\to_\beta} \subseteq {\Rightarrow} \subseteq {\twoheadrightarrow_\beta}$, so the reflexive transitive closure of $\Rightarrow$ is $\twoheadrightarrow_\beta$. The key lemma, proved by induction on the derivation of $M \Rightarrow M'$, is that $M \Rightarrow M'$ and $N \Rightarrow N'$ imply $M[N/x] \Rightarrow M'[N'/x]$. From it one deduces the **diamond property**: if $M \Rightarrow N_1$ and $M \Rightarrow N_2$, then $N_1 \Rightarrow P$ and $N_2 \Rightarrow P$ for some $P$ — in fact one can take for $P$ the term $M^*$ obtained by contracting all redexes of $M$. A relation with the diamond property has a confluent transitive closure, by a "tiling" argument: given two sequences of $\Rightarrow$-steps from $M$, complete the grid of diamonds.
+Intuitively, $M \Rightarrow M'$ contracts any set of redexes present in $M$, simultaneously. One checks that ${\to_\beta} \subseteq {\Rightarrow} \subseteq {\twoheadrightarrow_\beta}$, so the reflexive transitive closure of $\Rightarrow$ is $\twoheadrightarrow_\beta$. The key lemma, proved by induction on the derivation of $M \Rightarrow M'$, is that $M \Rightarrow M'$ and $N \Rightarrow N'$ imply $M[N/x] \Rightarrow M'[N'/x]$. From it one deduces the **diamond property**: if $M \Rightarrow N_1$ and $M \Rightarrow N_2$, then $N_1 \Rightarrow P$ and $N_2 \Rightarrow P$ for some $P$ — in fact one can take for $P$ the term $M^*$ obtained by contracting all redexes of $M$. A relation with the diamond property has a confluent transitive closure, by a "tiling" argument: given two sequences of $\Rightarrow$-steps from $M$, complete the grid of diamonds. The details are in Barendregt's monograph (chapter 3).
 :::
 
 :::figure[Confluence: two reduction sequences from $M$ can always be completed, by further reductions, to a common term $P$.]
@@ -199,7 +199,7 @@ On $(\lambda x.\, y)\, \Omega$, normal order terminates immediately with $y$, wh
 If a term has a normal form, the normal order reduction sequence starting from it is finite and ends with this normal form.
 :::
 
-We admit this theorem. It shows that normal order is a **deterministic algorithm** computing normal forms whenever they exist: a λ-term is evaluated like a program, which runs forever exactly when the term has no normal form.
+We admit this theorem; a proof is in Curry and Feys, or in Barendregt's monograph (chapter 13). It shows that normal order is a **deterministic algorithm** computing normal forms whenever they exist: a λ-term is evaluated like a program, which runs forever exactly when the term has no normal form.
 
 :::quiz[reduction strategies]
 What does applicative order do on $\mathsf{K}\, \mathsf{I}\, \Omega$?

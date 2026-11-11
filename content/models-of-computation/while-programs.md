@@ -91,7 +91,7 @@ A function is LOOP-computable if and only if it is primitive recursive.
 We prove the two directions separately. In the first direction, programs for subfunctions are combined using **fresh** auxiliary variables, so that they do not interfere with each other.
 
 :::proof{of=thm-loop-pr}
-**Primitive recursive ⇒ LOOP.** We show by induction on a derivation of $f : \nat^k \to \nat$ that for all distinct indices $o, i_1, \dots, i_k$ there is a LOOP program, written $X_o \mathbin{:=} f(X_{i_1}, \dots, X_{i_k})$, which sets $X_o$ to $f(\sigma(i_1), \dots, \sigma(i_k))$ and modifies no variable other than $X_o$ and a finite set of auxiliary variables, which may be chosen disjoint from any given finite set of indices.
+**Primitive recursive ⇒ LOOP.** We show by induction on a derivation of $f : \nat^k \to \nat$ that for all distinct indices $o, i_1, \dots, i_k$ there is a LOOP program, written $X_o \mathbin{:=} f(X_{i_1}, \dots, X_{i_k})$, which, started in any state $\sigma$, sets $X_o$ to $f(\sigma(i_1), \dots, \sigma(i_k))$ and modifies no variable other than $X_o$ and a finite set of auxiliary variables, which may be chosen disjoint from any given finite set of indices.
 
 - Basic functions: $X_o \mathbin{:=} 0$, then $X_o \mathbin{:=} X_{i_1} ; X_o \mathbin{:=} X_o + 1$, and $X_o \mathbin{:=} X_{i_j}$.
 - Composition $f = h \circ (g_1, \dots, g_m)$: choose fresh $Y_1, \dots, Y_m$, and run $Y_1 \mathbin{:=} g_1(\vec X) ; \dots ; Y_m \mathbin{:=} g_m(\vec X) ; X_o \mathbin{:=} h(Y_1, \dots, Y_m)$, with auxiliary variables of each subprogram chosen disjoint from $X_o$, $\vec X$, $\vec Y$.
@@ -104,11 +104,11 @@ $$
 & \mathtt{END} ;\ X_o \mathbin{:=} V.
 \end{aligned}
 $$
-By induction on the number of iterations, after $j$ iterations $C = j$ and $V = f(\vec x, j)$. (Writing $V \mathbin{:=} h(\vec X, C, V)$ is allowed: the program for $h$ reads $V$ and writes into a fresh variable, which is then copied into $V$.)
+By induction on the number of iterations, after $j$ iterations $C = j$ and $V = f(\vec x, j)$. For $k = 0$, where $g$ is a constant $a$, the first assignment is $V \mathbin{:=} 0$ followed by $a$ instructions $V \mathbin{:=} V + 1$. The subprograms never rely on the initial values of their auxiliary variables, since each of these is assigned before being read; this is why they can be run repeatedly inside the loop. (Writing $V \mathbin{:=} h(\vec X, C, V)$ is allowed: the program for $h$ reads $V$ and writes into a fresh variable, which is then copied into $V$.)
 
 The function $f$ itself is computed by $X_0 \mathbin{:=} f(X_1, \dots, X_k)$, whose auxiliary variables are chosen distinct from $X_0, \dots, X_k$.
 
-**LOOP ⇒ primitive recursive.** Let $P$ be a LOOP program and let $m$ be larger than the indices of all variables occurring in $P$. Variables of index $\geq m$ are not modified by $P$ and do not influence its effect on the others. We code the relevant part of a state by the sequence code $s = [\sigma(0), \dots, \sigma(m-1)]$ of the lesson :ref{to="models-of-computation/coding-sequences"}, and define $F_P(s)$ as the code of the state reached from $s$. We show by induction on subprograms $Q$ of $P$ that $F_Q$ is primitive recursive (on codes of length $m$):
+**LOOP ⇒ primitive recursive.** Let $P$ be a LOOP program computing $f : \nat^k \to \nat$, and let $m$ be larger than $k$ and than the indices of all variables occurring in $P$. Variables of index $\geq m$ are not modified by $P$ and do not influence its effect on the others. We code the relevant part of a state by the sequence code $s = [\sigma(0), \dots, \sigma(m-1)]$ of the lesson :ref{to="models-of-computation/coding-sequences"}, and define $F_P(s)$ as the code of the state reached from $s$. We show by induction on subprograms $Q$ of $P$ that $F_Q$ is primitive recursive (on codes of length $m$):
 
 - assignments: $F_{X_i := 0}(s) = \mathrm{set}(s, i, 0)$, $F_{X_i := X_i + 1}(s) = \mathrm{set}(s, i, (s)'_i + 1)$, $F_{X_i := X_j}(s) = \mathrm{set}(s, i, (s)'_j)$;
 - sequence: $F_{Q ; R} = F_R \circ F_Q$;
@@ -169,9 +169,9 @@ By the definition of minimization, the search succeeds at $n$ exactly when $G(s,
 :::
 
 :::quiz[WHILE and minimization]
-In the translation of $\mathtt{WHILE}$, why does the clause "$g(\vec x, z)$ defined for all $z < y$" in the definition of $\mu$ fit the semantics of loops?
+In the program for minimization, why does the clause "$g(\vec x, z)$ defined for all $z < y$" in the definition of $\mu$ match the behavior of the program?
 
-- [x] If the $m$-th iteration of the body does not terminate, the loop is stuck there, even if a later iterate would have produced $X_i = 0$; the definition of $\mu$ is stuck in the same way.
+- [x] The program computes $g(\vec x, 0), g(\vec x, 1), \dots$ in order. If some $g(\vec x, z)$ diverges before a zero is found, the program never terminates, even if $g(\vec x, y) = 0$ for some larger $y$; the definition of $\mu$ makes $f(\vec x)$ undefined in exactly this case.
 - [ ] Because WHILE programs are total.
 
   WHILE programs may not terminate.
@@ -197,10 +197,29 @@ Every WHILE program is equivalent, for the computation of functions, to a WHILE 
 :::
 
 :::proof{of=cor-one-while}
-The function computed by the program is partial recursive. By Kleene's normal form (:ref{#thm-kleene-normal-form}), it can be written $U(\mu s\, T_k(e, \vec x, s))$ with $U$ and $T_k$ primitive recursive. By :ref{#thm-loop-pr}, $U$ and $\chi_{T_k}$ are computed by LOOP programs, and the construction above for the minimization uses one $\mathtt{WHILE}$ instruction.
+The function computed by the program is partial recursive. By Kleene's normal form (:ref{#thm-kleene-normal-form}, proved in the lesson :ref{to="models-of-computation/equivalence-of-models"} without using this corollary), it can be written $U(\mu s\, T_k(e, \vec x, s))$ with $U$ and $T_k$ primitive recursive. By :ref{#thm-loop-pr}, $U$ and $\chi_{T_k}$ are computed by LOOP programs, and the construction above for the minimization uses one $\mathtt{WHILE}$ instruction.
 :::
 
-This is a version of the **Böhm–Jacopini theorem** (1966): every program with jumps can be rewritten with structured control flow, and a single unbounded loop suffices.
+This is related to the **Böhm–Jacopini theorem** (1966): every flow diagram can be rewritten using only sequencing, conditionals and while loops, at the cost of auxiliary variables. The form in which a single while loop suffices is the "folk" version of this theorem discussed by Harel (1980).
+
+## WHILE programs and register machines
+
+:::proposition{#prop-while-urm}
+Every WHILE-computable partial function is URM-computable.
+:::
+
+:::proof{of=prop-while-urm}
+Let $P$ compute $f : \nat^k \rightharpoonup \nat$, and let $m$ be larger than $k$ and than the indices of all variables of $P$. The variable $X_i$, for $i < m$, is represented by the register $R_{i+2}$; the register $R_1$ is kept equal to $0$ and serves for unconditional jumps $J(1, 1, q)$ and for tests against $0$. Each occurrence of a $\mathtt{LOOP}$ instruction in $P$ receives two registers $R_a, R_b$ of its own, with indices larger than $m + 1$. For each subprogram $Q$ of $P$ we define a URM program $Q^*$ in standard form, by induction on $Q$; let $t$ denote the length of the translation of the body.
+
+- $(X_i \mathbin{:=} 0)^* = Z(i+2)$, $(X_i \mathbin{:=} X_i + 1)^* = S(i+2)$, $(X_i \mathbin{:=} X_j)^* = T(j+2, i+2)$.
+- $(Q ; Q')^*$ is the concatenation $Q^* Q'^*$ of :ref{#def-urm-concat}.
+- $(\mathtt{WHILE}\ X_i \neq 0\ \mathtt{DO}\ Q\ \mathtt{END})^*$ is $J(i+2, 1, t+3)$, followed by $Q^*$ with all jump targets increased by $1$, followed by $J(1, 1, 1)$.
+- $(\mathtt{LOOP}\ X_i\ \mathtt{DO}\ Q\ \mathtt{END})^*$, with the registers $R_a, R_b$ of this occurrence, is $T(i+2, a)$, $Z(b)$, $J(a, b, t+6)$, followed by $Q^*$ with all jump targets increased by $3$, followed by $S(b)$, $J(1, 1, 3)$.
+
+In each case the jump targets are at most the length plus one, so $Q^*$ is in standard form. We show by induction on $Q$: if $Q^*$ is started at its first instruction in a register state $r$ with $r(1) = 0$ and $r(i+2) = \sigma(i)$ for all $i < m$, then $Q^*$ halts if and only if $[\![Q]\!](\sigma)\converge$, and in that case it halts in a state $r'$ with $r'(1) = 0$ and $r'(i+2) = [\![Q]\!](\sigma)(i)$ for all $i < m$. Assignments are immediate, and sequences follow from :ref{#lem-urm-concat}. For a $\mathtt{WHILE}$ instruction, by induction on $n$, the program reaches its first instruction for the $(n+1)$-th time if and only if $[\![Q]\!]^n(\sigma)\converge$ and $[\![Q]\!]^j(\sigma)(i) \neq 0$ for all $j < n$, and then the registers represent $[\![Q]\!]^n(\sigma)$; since $R_1 = 0$, the first jump exits exactly when the represented value of $X_i$ is $0$, as in :ref{#def-loop-while-semantics}. For a $\mathtt{LOOP}$ instruction, $R_a$ holds the value of $X_i$ on entry and is not modified by $Q^*$, which only uses the registers of the occurrences inside $Q$; by induction on $j$, the test $J(a, b, \cdot)$ is reached for the $(j+1)$-th time with $R_b = j$ and the registers representing $[\![Q]\!]^j(\sigma)$, so the program exits after $\sigma(i)$ iterations.
+
+The program for $f$ consists of $T(k, k+2), T(k-1, k+1), \dots, T(1, 3)$, which move the input to the registers of $X_1, \dots, X_k$ (in decreasing order, so that no input is overwritten before it is copied), then $Z(1)$, $Z(2)$, then $P^*$, then $T(2, 1)$. After the first part, $R_1 = 0$ and $R_{i+2}$ holds $\sigma_{\vec x}(i)$ for every $i < m$, and the registers of the $\mathtt{LOOP}$ occurrences hold $0$ (they are not used before being set anyway). By the claim, the program halts if and only if $f(\vec x)\converge$, and then $R_1$ contains $[\![P]\!](\sigma_{\vec x})(0) = f(\vec x)$.
+:::
 
 ## Exercises
 
@@ -220,21 +239,22 @@ $\mathrm{sg}(x)$: $X_0 \mathbin{:=} 0 ;\ \mathtt{LOOP}\ X_1\ \mathtt{DO}\ X_0 \m
 Show that the functions computed by LOOP programs of **nesting depth** at most $1$ (no $\mathtt{LOOP}$ inside a $\mathtt{LOOP}$) are bounded by linear functions: for each such program computing $f$ there are $a, b$ with $f(\vec x) \leq a \cdot |\vec x| + b$. Deduce that multiplication requires nesting depth at least $2$.
 
 :::solution
-Consider a state $\sigma$ and let $M = \max_i \sigma(i)$. Each assignment increases the maximum of the values by at most $1$. A loop-free program with $c$ instructions therefore maps a state of maximum $M$ to one of maximum at most $M + c$. A loop $\mathtt{LOOP}\ X_i\ \mathtt{DO}\ Q\ \mathtt{END}$ with loop-free $Q$, entered in a state of maximum $M'$, runs at most $M'$ times, so the maximum becomes at most $M' + cM'$. A sequence of $\ell$ such instructions multiplies the maximum by at most a constant and adds a constant. Hence $f(\vec x) \leq a |\vec x| + b$. Multiplication is not linearly bounded ($x \cdot x$), so it needs nested loops. (This is the beginning of the **Grzegorczyk hierarchy**, which stratifies the primitive recursive functions by loop depth.)
+Consider a state $\sigma$ and let $M = \max_i \sigma(i)$. Each assignment increases the maximum of the values by at most $1$. A loop-free program with $c$ instructions therefore maps a state of maximum $M$ to one of maximum at most $M + c$. A loop $\mathtt{LOOP}\ X_i\ \mathtt{DO}\ Q\ \mathtt{END}$ with loop-free $Q$, entered in a state of maximum $M'$, runs at most $M'$ times, so the maximum becomes at most $M' + cM'$. A sequence of $\ell$ such instructions multiplies the maximum by at most a constant and adds a constant. Hence $f(\vec x) \leq a |\vec x| + b$. Multiplication is not linearly bounded ($x \cdot x$), so it needs nested loops. (Meyer and Ritchie studied the classes $\mathcal{L}_n$ of functions computed by LOOP programs of nesting depth at most $n$. For $n \geq 2$, $\mathcal{L}_n$ is the level $\mathcal{E}^{n+1}$ of the **Grzegorczyk hierarchy**, which stratifies the primitive recursive functions by growth rate.)
 :::
 ::::
 
 ::::exercise{difficulty=2}
-Show that WHILE programs and URM programs compute the same partial functions.
+Show directly, without using partial recursive functions, that every URM-computable partial function is WHILE-computable, by a WHILE program with a single $\mathtt{WHILE}$ instruction. (The converse is :ref{#prop-while-urm}.)
 
 :::solution
-A WHILE program can be compiled into a URM program by translating each construct into a block of instructions with jumps: assignments directly (the decrement-free instruction set suffices), sequences by concatenation, $\mathtt{LOOP}$ by a counter compared with a saved copy of the loop variable, and $\mathtt{WHILE}$ by a test against a register holding $0$ at the beginning of the block and an unconditional jump at its end; inputs and outputs are moved between $X_0$ and $R_1$. Conversely, a URM program $I_1, \dots, I_s$ is simulated by a WHILE program with a variable $\mathrm{PC}$ holding the index of the next instruction: $\mathrm{PC} \mathbin{:=} 1$; while $\mathrm{PC} \leq s$, execute the instruction of index $\mathrm{PC}$ — a finite case distinction on $\mathrm{PC}$, implemented with LOOP conditionals — and update $\mathrm{PC}$. This uses a single $\mathtt{WHILE}$ loop.
+Let $I_1, \dots, I_s$ compute $f : \nat^k \rightharpoonup \nat$, and let $\rho$ be the largest of $k$ and the register indices of the program. Represent $R_n$ by $X_n$ for $1 \leq n \leq \rho$, and use fresh variables $\mathrm{PC}$ (the index of the next instruction) and $H$. The program is: $\mathrm{PC} \mathbin{:=} 1$; $H \mathbin{:=} \chi_{\leq}(\mathrm{PC}, s)$; $\mathtt{WHILE}\ H \neq 0\ \mathtt{DO}\ B\ \mathtt{END}$; $X_0 \mathbin{:=} X_1$. The body $B$ executes the instruction of index $\mathrm{PC}$ and updates $\mathrm{PC}$: it first copies $\mathrm{PC}$ into a fresh variable $\mathrm{PC}'$, then performs a sequence of $s$ conditionals "if $\mathrm{PC}' = j$ then execute $I_j$", where $Z(n)$, $S(n)$, $T(m, n)$ become $X_n \mathbin{:=} 0$, $X_n \mathbin{:=} X_n + 1$, $X_n \mathbin{:=} X_m$ followed by $\mathrm{PC} \mathbin{:=} \mathrm{PC} + 1$, and $J(m, n, q)$ sets $\mathrm{PC}$ to $q$ if $X_m = X_n$ and to $j + 1$ otherwise. Since the conditionals test $\mathrm{PC}'$, which is not modified, exactly one of them applies in each pass (when $H \neq 0$, $1 \leq \mathrm{PC} \leq s$). At the end of $B$, $H \mathbin{:=} \chi_{\leq}(\mathrm{PC}, s)$. Equality tests, $\chi_\leq$ and the conditionals are LOOP-definable, by :ref{#thm-loop-pr} and the conditional of the section on programming in LOOP. By induction on the number of steps, after $n$ passes through $B$ the variables $\mathrm{PC}, X_1, \dots, X_\rho$ hold the configuration of the URM after $n$ steps, so the loop terminates exactly when the URM halts, with $f(\vec x)$ in $X_1$.
 :::
 ::::
 
 ## Notes and references
 
-LOOP programs and the characterization of the primitive recursive functions are due to Meyer and Ritchie, who also related the nesting depth of loops to the Grzegorczyk hierarchy. The elimination of jumps in favour of structured control flow is the subject of the Böhm–Jacopini theorem.
+LOOP programs and the characterization of the primitive recursive functions are due to Meyer and Ritchie, who also related the nesting depth of loops to the Grzegorczyk hierarchy. The elimination of jumps in favor of structured control flow is the subject of the Böhm–Jacopini theorem; Harel discusses its folk versions and their history.
 
 - A. R. Meyer, D. M. Ritchie, *The complexity of loop programs*, Proceedings of the 22nd ACM National Conference (1967), 465–469.
 - C. Böhm, G. Jacopini, *Flow diagrams, Turing machines and languages with only two formation rules*, Communications of the ACM 9 (1966), 366–371.
+- D. Harel, *On folk theorems*, Communications of the ACM 23 (1980), 379–389.

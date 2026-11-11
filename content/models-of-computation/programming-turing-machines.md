@@ -51,7 +51,7 @@ Why does the machine need the marker $Y$, rather than appending $1$s directly?
 
 How many steps does the first phase take, as a function of $n = x + 1$?
 
-- [x] Of the order of $n^2$: round $j$ crosses about $2(n - j) + 2j = 2n$ cells, twice.
+- [x] Of the order of $n^2$: in round $j$ the head goes from cell $j$ to cell $n + j$ and back, about $2n$ steps, and there are $n$ rounds.
 
   The machine is quadratic. Unary arithmetic on Turing machines is slow, but computability ignores running time.
 - [ ] Of the order of $n$.
@@ -85,7 +85,7 @@ Let $M$ and $N$ be Turing machines computing $f : \nat \rightharpoonup \nat$ and
 :::proof{of=prop-tm-composition}
 By :ref{#ex-tm-clean-halt} below, we may assume that every halting computation of $M$ on an input $\ulcorner x \urcorner$ ends in a standard final configuration.
 
-Rename the states of $N$ so that they are disjoint from those of $M$, and take the union of the alphabets. The machine $M ; N$ has the states of both machines, initial state $q_0^M$, halting state $q_h^N$, and the transitions of both machines, except that every transition of $M$ entering $q_h^M$ is redirected to $q_0^N$. Entries for symbols of one machine absent from the alphabet of the other are set arbitrarily; they are never used, since $M$ only sees its own symbols, and $N$ is started on a tape containing only $\sqcup$ and $1$.
+Rename the states of $N$ so that they are disjoint from those of $M$, and take the union of the alphabets. The machine $M ; N$ has the states of both machines, initial state $q_0^M$, halting state $q_h^N$, and the transitions of both machines, except that every transition of $M$ entering $q_h^M$ is redirected to $q_0^N$. The state $q_h^M$ is no longer entered; its transitions, now required since it is not the halting state of $M ; N$, are set arbitrarily. Entries for symbols of one machine absent from the alphabet of the other are set arbitrarily; they are never used, since $M$ only sees its own symbols, and $N$ is started on a tape containing only $\sqcup$ and $1$.
 
 On input $x$, the machine $M ; N$ first behaves like $M$. If $f(x)\diverge$, then $M$ does not halt, and neither does $M ; N$. If $f(x)\converge = y$, then $M ; N$ enters $q_0^N$ with a tape containing exactly $\ulcorner y \urcorner$, starting at the head position $h$. This is the initial configuration of $N$ on input $y$, translated by $h$. By :ref{#lem-tm-translation}, the remaining computation is the translation by $h$ of the computation of $N$ on input $y$. Since translations preserve standard final configurations, $M ; N$ halts in a standard final configuration with output $g(y)$ if $g(y)\converge$, and otherwise it does not. Hence $M ; N$ computes $g \circ f$.
 :::
@@ -125,7 +125,7 @@ A **$k$-tape Turing machine** is defined as in :ref{#def-turing-machine}, except
 $$
 \delta : (Q \setminus \{q_h\}) \times \Gamma^k \to Q \times \Gamma^k \times \{L, S, R\}^k,
 $$
-where $S$ means that the head stays in place. A configuration consists of a state, $k$ tapes and $k$ head positions. By convention the input is written on tape $1$, the other tapes are initially blank, and the output is read on tape $1$.
+where $S$ means that the head stays in place. A configuration consists of a state, $k$ tapes and $k$ head positions. By convention all heads start on cell $0$, the input is written on tape $1$ as in :ref{#def-tm-computes}, the other tapes are initially blank, and the output is read on tape $1$: the machine computes $y$ if it halts with tape $1$ and head $1$ in a standard final configuration with output $y$, whatever the contents of the other tapes.
 :::
 
 Multi-tape machines are much easier to program. For instance, a $2$-tape machine can copy its input to tape $2$ in a single left-to-right pass.
@@ -141,9 +141,9 @@ Every partial function computed by a $k$-tape Turing machine is computed by a $1
 :::proof{of=thm-multitape-simulation}
 Let $M$ be a $k$-tape machine with alphabet $\Gamma$. The idea is to store the $k$ tapes on $k$ **tracks** of a single tape. Let the new alphabet be $\Gamma \cup (\Gamma \times \{0, 1\})^k$: a cell of the simulating machine $N$ contains either a symbol of $\Gamma$, or a $k$-tuple of pairs $(a_i, m_i)$ where $a_i$ is the content of the corresponding cell of tape $i$ and $m_i = 1$ indicates that the head of tape $i$ is at this cell. This alphabet is finite.
 
-$N$ first converts its input into this format: it replaces each input symbol $a$ by $((a, m), (\sqcup, m), \dots, (\sqcup, m))$, where $m = 1$ on cell $0$ and $m = 0$ elsewhere. Then $N$ simulates each step of $M$ as follows. The state of $M$ is stored in the state of $N$. $N$ sweeps over the zone of the tape visited so far, from left to right, and collects in its state the symbols under the $k$ marked heads; there are finitely many possibilities, so they can be stored in the state. Knowing the state of $M$ and the scanned symbols, $N$ determines the transition of $M$. It then sweeps back from right to left, updating the symbol under each marked head and moving each mark by one cell according to the transition. When $N$ meets a cell containing a plain symbol of $\Gamma$ — that is, a part of the tape not yet visited — it first converts it to the track format. When $M$ halts, $N$ converts the tape back, keeping only track $1$, moves the head to the position of head $1$, and halts.
+$N$ first converts cell $0$ into this format: it replaces the symbol $a$ there by $((a, 1), (\sqcup, 1), \dots, (\sqcup, 1))$, since all heads of $M$ start on cell $0$. Then $N$ simulates each step of $M$ as follows. The state of $M$ is stored in the state of $N$. $N$ sweeps over the zone of the tape visited so far, from left to right, and collects in its state the symbols under the $k$ marked heads; there are finitely many possibilities, so they can be stored in the state. Knowing the state of $M$ and the scanned symbols, $N$ determines the transition of $M$. It then sweeps back from right to left, updating the symbol under each marked head and moving each mark by one cell according to the transition. When a mark must move onto a cell containing a plain symbol $a$ of $\Gamma$ — a cell that no head has visited yet — $N$ first replaces it by $((a, 0), (\sqcup, 0), \dots, (\sqcup, 0))$; this is the correct content, since an unvisited cell of tape $1$ still holds its input symbol and an unvisited cell of another tape is blank. Since all heads start on cell $0$ and move by one cell at a time, the converted cells always form an interval containing $0$, bordered by plain symbols, so $N$ recognizes the ends of the zone it must sweep. When $M$ halts, $N$ converts the tape back, keeping only track $1$, moves the head to the position of head $1$, and halts.
 
-By induction on the number of steps, after the simulation of $t$ steps of $M$, the tracks of $N$ contain the tapes of $M$ after $t$ steps, with the heads correctly marked. Hence $N$ computes the same function as $M$. (To ensure that $N$ halts in a standard configuration exactly when $M$ does, one proceeds as in :ref{#ex-tm-clean-halt}.)
+By induction on the number of steps, after the simulation of $t$ steps of $M$, the tracks of $N$ contain the tapes of $M$ after $t$ steps, with the heads correctly marked, and the cells outside the converted zone hold the unvisited part of tape $1$. Hence, if $M$ halts, the final tape and head position of $N$ are those of tape $1$ of $M$, so $N$ halts in a standard final configuration exactly when $M$ does, with the same output; and if $M$ does not halt, neither does $N$.
 :::
 
 :::quiz[the multi-tape simulation]
@@ -151,7 +151,7 @@ Why can the symbols under the $k$ heads be "stored in the state" of $N$ during a
 
 - [x] There are only $|\Gamma|^k$ possible tuples of scanned symbols, so $N$ can have one copy of its sweeping states for each tuple collected so far, together with the current state of $M$.
 
-  This keeps the set of states of $N$ finite: it is roughly $|Q| \cdot (|\Gamma| + 1)^k$ times larger than that of $M$.
+  This keeps the set of states of $N$ finite: a sweeping state records a state of $M$ and, for each head, either the symbol already collected or the fact that it has not been met yet, so there are about $|Q| \cdot (|\Gamma| + 1)^k$ of them.
 - [ ] Because $N$ has $k$ tapes as well.
 
   $N$ has a single tape.
@@ -197,7 +197,7 @@ Erase the input from left to right, alternating between two states $e$ (even num
 Describe a $2$-tape machine computing $(x, y) \mapsto x \cdot y$, and estimate its number of steps.
 
 :::solution
-Copy $\ulcorner y \urcorner$ to tape $2$ and erase it from tape $1$, together with the first $1$ of $\ulcorner x \urcorner$ and of the copy, so that tape $1$ holds $x$ ones and tape $2$ holds $y$ ones. Write the output on a third zone of tape $2$, to the right of a separator: for each $1$ of tape $1$, erase it and append a copy of the block of tape $2$ to the output zone by scanning the block once. Finally add one $1$ for the unary convention and move the result to tape $1$. Each of the $x$ rounds costs $O(x + y + xy)$ steps (the head must travel back and forth), so the total is $O(x^2 y)$ steps.
+Use an auxiliary symbol $\#$ and a marker $X$. First copy $\ulcorner y \urcorner$ to tape $2$ without its last $1$, starting on cell $0$, erasing it from tape $1$, and replace the last $1$ of $\ulcorner x \urcorner$ (cell $x$) by $\#$. Now tape $1$ holds $1^x \#$ on cells $0, \dots, x$, tape $2$ holds $y$ ones on cells $0, \dots, y - 1$, and the output will be built on tape $1$ from cell $x + 1$ on. Each round starts with head $1$ on the leftmost $1$ of the first block and head $2$ on cell $0$: replace this $1$ by $X$, move head $1$ right past $\#$ to the first blank after the output zone, then move both heads right together while head $2$ reads $1$, writing a $1$ with head $1$ at each step; finally return head $2$ to cell $0$, and head $1$ left to the rightmost $X$ and one cell further right. When head $1$ starts a round on $\#$, all $x$ rounds are done and the output zone holds $xy$ ones: append one more $1$ (unary convention), go back to cell $-1$, and move right erasing the $X$s and $\#$, halting on cell $x + 1$, the first cell of $\ulcorner xy \urcorner$. The contents of tape $2$ do not matter. The first phase takes $O(x + y)$ steps, and each round $O(x + y + xy)$ steps, since head $1$ crosses the output zone twice; the total is $O(x^2(y + 1) + y)$ steps.
 :::
 ::::
 

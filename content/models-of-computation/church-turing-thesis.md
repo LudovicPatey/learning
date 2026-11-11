@@ -42,7 +42,7 @@ Turing did not only propose a model; he argued that any computation carried out 
 2. **Locality.** In a single step, the computer can only change symbols that are observed, and can only shift attention to symbols within a bounded distance of those observed.
 3. **Determinacy.** The action taken depends only on the current state of mind and the observed symbols.
 
-Under these constraints, a step of computation can be decomposed into elementary steps of a Turing machine: the two-dimensional sheet of paper can be replaced by a one-dimensional tape, and observing a bounded region can be simulated by moving the head back and forth. Turing concludes that machines with a single head on a single tape are as powerful as human computers.
+Under these constraints, a step of computation can be decomposed into elementary steps of a Turing machine: the two-dimensional sheet of paper can be replaced by a one-dimensional tape, and observing a bounded region can be simulated by moving the head back and forth. Turing concludes that machines with a single head on a single tape compute everything that a human computer can compute.
 
 In 1980, Gandy isolated principles under which a **discrete deterministic mechanical device**, possibly acting in parallel on many parts, is equivalent to a Turing machine. His principles include a bound on the propagation speed of causal effects, and the requirement that the state of the device be built from finitely many parts of bounded complexity. Sieg later refined this analysis into an axiomatic presentation of computability.
 
@@ -70,7 +70,7 @@ Quantum computers can be simulated by Turing machines, possibly with exponential
   It computes no new functions.
 - [ ] Quantum computation proves the extended thesis.
 
-  Exponential slowdown is exactly what the extended thesis forbids.
+  A simulation with exponential slowdown gives no support to the extended thesis, which requires a polynomial overhead.
 :::
 
 ## Using the thesis in proofs
@@ -79,13 +79,14 @@ In practice, computability theorists rarely write Turing machines. To show that 
 
 This usage is safe because of the equivalence theorem: the reader may choose the most convenient model for the formalization. WHILE programs and the closure properties of partial recursive functions make the translation routine for any algorithm described precisely. In this sense the thesis is not an assumption of the theory: every theorem proved "by Church's thesis" can in principle be proved formally.
 
-From the next course on, we adopt this practice. A function is **computable** if it is computed by some program, described in pseudo-code; we fix an enumeration $\Phi_0, \Phi_1, \Phi_2, \dots$ of the partial computable functions, given by the universal function of the previous lesson, and study its properties. The first question addressed is the one that motivated the whole enterprise: which problems are **not** computable? This is the starting point of the lesson :ref{to="fundamentals/programs-as-numbers"}.
+In the following courses, we adopt this practice. A function is **computable** if it is computed by some program, described in pseudo-code; we fix an enumeration $\Phi_0, \Phi_1, \Phi_2, \dots$ of the partial computable functions, given by the universal function of the previous lesson, and study its properties. The first question addressed is the one that motivated the whole enterprise: the existence of problems that are **not** computable. This is the starting point of the lesson :ref{to="fundamentals/programs-as-numbers"}.
 
 ## Notes and references
 
-- A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society, 1936.
+- A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society (2) 42 (1936), 230–265.
 - S. C. Kleene, *Introduction to Metamathematics*, 1952, chapters XI–XIII.
-- R. Gandy, *Church's thesis and principles for mechanisms*, in The Kleene Symposium, 1980.
+- R. Gandy, *Church's thesis and principles for mechanisms*, in J. Barwise, H. J. Keisler, K. Kunen (eds.), The Kleene Symposium, North-Holland, 1980, 123–148.
+- W. Sieg, *On computability*, in A. Irvine (ed.), Philosophy of Mathematics, Handbook of the Philosophy of Science, Elsevier, 2009, 535–630.
 - R. Soare, *Turing Computability: Theory and Applications*, 2016, chapters 1 and 3.
 - N. Cutland, *Computability: An Introduction to Recursive Function Theory*, 1980, for register machines.
 - H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, 1984, for the λ-calculus.

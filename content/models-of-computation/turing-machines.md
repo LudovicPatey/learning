@@ -75,7 +75,7 @@ Let $M_S$ be the machine with states $\{q_0, q_1, q_h\}$, alphabet $\{\sqcup, 1\
 | $q_0$ | $(q_0, 1, R)$ | $(q_1, 1, L)$ |
 | $q_1$ | $(q_1, 1, L)$ | $(q_h, \sqcup, R)$ |
 
-:::figure[State diagram of $M_S$. An edge labelled $a / b, D$ from $q$ to $q'$ means $\delta(q, a) = (q', b, D)$; the halting state is circled twice.]
+:::figure[State diagram of $M_S$. An edge labeled $a / b, D$ from $q$ to $q'$ means $\delta(q, a) = (q', b, D)$; the halting state is circled twice.]
 <svg class="fig" viewBox="0 0 540 175" width="540" role="img" aria-label="State diagram of the successor machine"><defs><marker id="ah-succ" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><line x1="40" y1="110" x2="92" y2="110" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-succ)"/><text x="44" y="102" class="label">start</text><circle cx="120" cy="110" r="26" class="state"/><text x="120" y="115" text-anchor="middle" class="math" font-size="17">q<tspan class="mrm" font-size="10" dy="4">0</tspan></text><circle cx="300" cy="110" r="26" class="state"/><text x="300" y="115" text-anchor="middle" class="math" font-size="17">q<tspan class="mrm" font-size="10" dy="4">1</tspan></text><circle cx="460" cy="110" r="26" class="state"/><circle cx="460" cy="110" r="21" class="state-inner"/><text x="460" y="115" text-anchor="middle" class="math" font-size="17">q<tspan class="mrm" font-size="10" dy="4">h</tspan></text><line x1="147" y1="110" x2="272" y2="110" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-succ)"/><text x="209.5" y="101" text-anchor="middle" class="mrm" font-size="15">⊔ / 1, L</text><line x1="327" y1="110" x2="432" y2="110" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-succ)"/><text x="379.5" y="101" text-anchor="middle" class="mrm" font-size="15">⊔ / ⊔, R</text><path d="M108,87 C80,28 160,28 132,86" class="ink-stroke" fill="none" stroke-width="1.4" marker-end="url(#ah-succ)"/><text x="120" y="38" text-anchor="middle" class="mrm" font-size="15">1 / 1, R</text><path d="M288,87 C260,28 340,28 312,86" class="ink-stroke" fill="none" stroke-width="1.4" marker-end="url(#ah-succ)"/><text x="300" y="38" text-anchor="middle" class="mrm" font-size="15">1 / 1, L</text></svg>
 :::
 
@@ -132,19 +132,21 @@ $M_+$ computes addition: $\varphi^{(2)}_{M_+}(x, y) = x + y$ for all $x, y$.
 :::
 
 :::proof{of=prop-tm-addition}
-The initial tape has $1$s on the cells $0, \dots, x$ and $x + 2, \dots, x + y + 2$, and a blank on cell $x + 1$. In state $q_0$ the head moves right to cell $x + 1$, writes $1$ there and moves to cell $x + 2$ in state $q_1$. Now the tape contains $1$s exactly on $0, \dots, x + y + 2$. In state $q_1$ the head moves right to cell $x + y + 3$, which is blank, and moves back to cell $x + y + 2$ in state $q_2$. It erases this cell and moves to cell $x + y + 1$ in state $q_3$. Since $x + y + 1 \geq 1$, this cell contains $1$; it is erased and the head moves to cell $x + y$ in state $q_4$. The tape now contains $1$s exactly on $0, \dots, x + y$. As in the previous proof, $q_4$ runs left to cell $-1$, and the machine halts with the head on cell $0$. The final configuration is standard with output $x + y$.
+The initial tape has $1$s on the cells $0, \dots, x$ and $x + 2, \dots, x + y + 2$, and a blank on cell $x + 1$. In state $q_0$ the head moves right to cell $x + 1$, writes $1$ there and moves to cell $x + 2$ in state $q_1$. Now the tape contains $1$s exactly on $0, \dots, x + y + 2$. In state $q_1$ the head moves right to cell $x + y + 3$, which is blank, and moves back to cell $x + y + 2$ in state $q_2$. It erases this cell and moves to cell $x + y + 1$ in state $q_3$. Since $0 \leq x + y + 1 < x + y + 2$, this cell belongs to the block written in the first phase and has not been erased, so it contains $1$; it is erased and the head moves to cell $x + y$ in state $q_4$. The tape now contains $1$s exactly on $0, \dots, x + y$. As in the previous proof, $q_4$ runs left to cell $-1$, and the machine halts with the head on cell $0$. The final configuration is standard with output $x + y$.
 :::
 
 :::quiz[the addition machine]
-In the proof, where is the inequality $x + y + 1 \geq 1$ used?
+In the proof, why does cell $x + y + 1$ contain a $1$ when the machine enters state $q_3$?
 
-- [x] To know that cell $x + y + 1$ still contains a $1$ when the machine enters state $q_3$, so that the transition $\delta(q_3, 1)$ applies.
-- [ ] To ensure that the machine halts in state $q_4$.
+- [x] After the first phase the cells $0, \dots, x + y + 2$ all contain $1$, and since then only cell $x + y + 2$ has been erased.
 
-  Termination of the last phase only uses that the block of $1$s is finite.
-- [ ] To guarantee that the separator cell $x + 1$ is blank.
+  This is what makes the transition $\delta(q_3, 1)$ apply, rather than $\delta(q_3, \sqcup)$.
+- [ ] Because cell $x + y + 1$ belongs to the block $\ulcorner y \urcorner$ of the input.
 
-  That is part of the input convention.
+  Not when $y = 0$: then cell $x + y + 1 = x + 1$ is the separator, which was blank in the input and contains $1$ only because the first phase wrote it.
+- [ ] Because the input convention puts a $1$ on every cell between $0$ and $x + y + 2$.
+
+  The separator, cell $x + 1$, is blank in the input; it is the first phase that fills it.
 
 ---
 
@@ -207,7 +209,8 @@ Adding to a machine states that are never entered does not change its computatio
 
 ## Notes and references
 
-Turing's machines (1936) differ from ours in inessential details: they compute infinite binary sequences rather than functions, and halting plays no role. Post introduced an almost identical model independently in the same year. The conventions used here — unary notation with $x+1$ strokes and a standard final configuration — follow Boolos, Burgess and Jeffrey.
+Turing's machines (1936) differ from ours in inessential details: they compute infinite binary sequences rather than functions, and halting plays no role. Post introduced an almost identical model independently in the same year. The representation of $x$ by $x + 1$ strokes is that of Kleene (*Introduction to Metamathematics*, §67); the requirement of a standard final configuration, with the output alone on the tape and the head on its first cell, is close to the conventions of Boolos, Burgess and Jeffrey.
 
 - E. L. Post, *Finite combinatory processes — formulation 1*, Journal of Symbolic Logic 1 (1936), 103–105.
+- S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952.
 - G. Boolos, J. Burgess, R. Jeffrey, *Computability and Logic*, 5th edition, Cambridge University Press, 2007.

@@ -214,7 +214,7 @@ With bounded minimization at hand, most functions of elementary number theory ar
 - **Divisibility.** $y \mid x \iff \exists q \leq x\ (q \cdot y = x)$.
 - **Primality.** $\mathrm{Prime}(x) \iff x \geq 2 \wedge \forall y < x\ (y \mid x \rightarrow y \leq 1)$.
 - **Integer square root.** $\lfloor \sqrt x \rfloor = \mu r < x + 1\ \big((r+1)^2 > x\big)$.
-- **Cantor pairing.** $\langle x, y \rangle = \lfloor (x + y)(x + y + 1) / 2 \rfloor + y$, and its inverses $\pi_0(z) = \mu x \leq z\ \exists y \leq z\ \langle x, y \rangle = z$ and similarly for $\pi_1$.
+- **Cantor pairing.** $\langle x, y \rangle = \lfloor (x + y)(x + y + 1) / 2 \rfloor + y$, and its inverses $\pi_0(z) = \mu x < z + 1\ \exists y \leq z\ \langle x, y \rangle = z$ and similarly for $\pi_1$.
 
 :::proposition{#prop-pr-primes}
 The function $n \mapsto p_n$, where $p_0 = 2, p_1 = 3, p_2 = 5, \dots$ is the increasing enumeration of the primes, is primitive recursive.
@@ -252,7 +252,7 @@ which is primitive recursive. These exponents are the basis of the coding of fin
 Show that $\gcd(x, y)$ and $\mathrm{lcm}(x, y)$ are primitive recursive.
 
 :::solution
-$\gcd(x, y) = \mu d \leq x + y\ \big(d \mid x \wedge d \mid y \wedge \forall e \leq x + y\ (e \mid x \wedge e \mid y \rightarrow e \leq d)\big)$, which is correct for $(x, y) \neq (0, 0)$; set $\gcd(0, 0) = 0$ by cases. For $x, y \geq 1$, $\mathrm{lcm}(x, y) = \lfloor xy / \gcd(x, y) \rfloor$, and $\mathrm{lcm}(x, y) = 0$ if $x = 0$ or $y = 0$.
+$\gcd(x, y) = \mu d < x + y + 1\ \big(d \mid x \wedge d \mid y \wedge \forall e \leq x + y\ (e \mid x \wedge e \mid y \rightarrow e \leq d)\big)$, which is correct for $(x, y) \neq (0, 0)$; set $\gcd(0, 0) = 0$ by cases. For $x, y \geq 1$, $\mathrm{lcm}(x, y) = \lfloor xy / \gcd(x, y) \rfloor$, and $\mathrm{lcm}(x, y) = 0$ if $x = 0$ or $y = 0$.
 :::
 ::::
 
@@ -268,7 +268,7 @@ Let $F(\vec x, y) = \langle f_1(\vec x, y), f_2(\vec x, y) \rangle$. Then $F(\ve
 Show that if $f : \nat \to \nat$ is primitive recursive and strictly increasing, then its range is a primitive recursive set. Is it true for every primitive recursive $f$?
 
 :::solution
-If $f$ is strictly increasing, then $f(z) \geq z$, so $y \in \operatorname{im} f \iff \exists z \leq y\ f(z) = y$, a bounded quantification. Without monotonicity this fails in general: there are primitive recursive functions whose range is not even computable. Fix a code $a$ of a program which halts on input $a$, and let $f(\langle e, t \rangle) = e$ if the program of code $e$ halts on input $e$ within $t$ steps, and $f(\langle e, t \rangle) = a$ otherwise. Step-bounded simulation is primitive recursive (see the lesson :ref{to="models-of-computation/equivalence-of-models"}), so $f$ is primitive recursive, and its range is the halting set $\{e : \Phi_e(e)\converge\}$, which is not computable (see the course on fundamentals).
+If $f$ is strictly increasing, then $f(z) \geq z$, so $y \in \operatorname{im} f \iff \exists z \leq y\ f(z) = y$, a bounded quantification. Without monotonicity this fails in general: there are primitive recursive functions whose range is not even computable. Fix a coding of Turing machines by integers in which every integer codes a machine, and a code $a$ of a machine which halts on input $a$. Let $f(\langle e, t \rangle) = e$ if the machine of code $e$ halts on input $e$ within $t$ steps, and $f(\langle e, t \rangle) = a$ otherwise. Step-bounded simulation is primitive recursive (see the lesson :ref{to="models-of-computation/equivalence-of-models"}), so $f$ is primitive recursive, and its range is the halting set $\{e : \text{the machine of code } e \text{ halts on input } e\}$, which is not computable (see the lesson :ref{to="fundamentals/halting-problem"}).
 :::
 ::::
 

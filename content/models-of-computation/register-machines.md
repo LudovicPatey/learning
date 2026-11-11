@@ -5,7 +5,7 @@ duration: 35
 prerequisites: [what-is-an-algorithm]
 ---
 
-Turing machines access their memory sequentially, one cell at a time. **Register machines** instead have a memory made of registers, each holding a natural number, accessed directly by their index. Several variants were introduced around 1960 by Melzak, Lambek, Minsky, and Shepherdson and Sturgis. We use the **unlimited register machine** (URM) of Shepherdson and Sturgis, in the form popularized by Cutland's textbook. Its instruction set is minimal, which makes proofs about it short, and close to an assembly language, which makes it easy to program.
+Turing machines access their memory sequentially, one cell at a time. **Register machines** instead have a memory made of registers, each holding a natural number, accessed directly by their index. Several variants were introduced around 1960 by Melzak, Lambek, Minsky, and Shepherdson and Sturgis. We use the **unlimited register machine** (URM) of Shepherdson and Sturgis, in the form popularized by Cutland's textbook. Its instruction set is small, which makes proofs about it short, and close to an assembly language, which makes it easy to program.
 
 ## Definition
 
@@ -254,7 +254,7 @@ Write a URM program computing the function $\mathrm{sg}(x)$, equal to $0$ if $x 
 Consider the variant of the URM without the transfer instruction $T(m, n)$. Show that it computes the same functions.
 
 :::solution
-For $m \neq n$, the instruction $T(m, n)$ can be simulated with $Z$, $S$ and $J$ using a fresh register $R_c$ as a counter: $Z(n)$, $Z(c)$, then the loop "if $R_c = R_m$, exit; $S(n)$; $S(c)$; go back", the backward jump being $J(c, c, \cdot)$. The case $m = n$ is a no-op. Replacing each $T$ instruction by such a block, and shifting all jump targets accordingly, gives an equivalent program without $T$.
+For $m \neq n$, the instruction $T(m, n)$ can be simulated with $Z$, $S$ and $J$ using as a counter a register $R_c$ with $c > \rho(P)$, where $P$ is the program being transformed: $Z(n)$, $Z(c)$, then the loop "if $R_c = R_m$, exit; $S(n)$; $S(c)$; go back", the backward jump being $J(c, c, \cdot)$. The case $m = n$ is a no-op. Replacing each $T$ instruction by such a block, and shifting all jump targets accordingly, gives a program without $T$ whose computations follow those of $P$ on the registers $R_1, \dots, R_{\rho(P)}$. Since $c > \rho(P) \geq 1$, the output register $R_1$ is never used as the counter, so both programs compute the same functions; the initial content of $R_c$, possibly an input, is irrelevant because $R_c$ is zeroed before each use and is not mentioned by $P$.
 :::
 ::::
 

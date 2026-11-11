@@ -5,7 +5,7 @@ duration: 40
 prerequisites: [coding-sequences]
 ---
 
-The primitive recursive functions are total and computable. Are they all the total computable functions? In 1928 Ackermann, a student of Hilbert, gave a negative answer by exhibiting a function defined by a nested recursion on two variables, which grows faster than every primitive recursive function. We use the simplified version due to Rózsa Péter (1935).
+The primitive recursive functions are total and computable. They are not all the total computable functions: in 1928 Ackermann, a student of Hilbert, exhibited a function defined by a nested recursion on two variables, which grows faster than every primitive recursive function. We use the two-argument version introduced by Rózsa Péter (1935), in the simplified form given by Raphael Robinson (1948).
 
 ## Definition and computability
 
@@ -34,7 +34,7 @@ and $A(4, y) + 3$ is a tower of $y + 3$ twos: $A(4, 2) = 2^{65536} - 3$.
 - if $z_{r-1} > 0$ and $z_r = 0$, replace them by $z_{r-1} - 1, 1$;
 - if $z_{r-1} > 0$ and $z_r > 0$, replace them by $z_{r-1} - 1, z_{r-1}, z_r - 1$.
 
-Each step preserves the value of the represented expression. Termination follows from the well-foundedness argument above: the steps of the algorithm are the nodes of the evaluation tree of $A(x, y)$, which is finite since it is finitely branching and has no infinite branch. When one element remains, it is $A(x, y)$. Using the coding of the previous lesson, the stack is a single integer and each step is a primitive recursive operation on it; only the number of steps is not bounded in advance.
+Each step preserves the value of the represented expression. For termination, we show by induction along $<_{\mathrm{lex}}$ that for every pair $(x, y)$ and every list $\vec u$, the algorithm transforms the stack $[\vec u, x, y]$ into $[\vec u, A(x, y)]$ in finitely many steps, without touching $\vec u$ before that. If $x = 0$, one step suffices. If $x > 0$ and $y = 0$, one step gives $[\vec u, x - 1, 1]$, and the induction hypothesis applies to $(x - 1, 1)$. If $x, y > 0$, one step gives $[\vec u, x - 1, x, y - 1]$; the induction hypothesis for $(x, y - 1)$, with the list $\vec u, x - 1$, leads to $[\vec u, x - 1, A(x, y - 1)]$, and the induction hypothesis for $(x - 1, A(x, y - 1))$ leads to $[\vec u, A(x - 1, A(x, y - 1))] = [\vec u, A(x, y)]$. With $\vec u$ empty, the algorithm started on $[x, y]$ stops with the single element $A(x, y)$. Using the coding of the previous lesson, the stack is a single integer and each step is a primitive recursive operation on it; only the number of steps is not bounded in advance.
 
 ## Monotonicity
 
@@ -88,7 +88,7 @@ Which step of the chain of inequalities in :ref{#lem-ack-nesting} uses the defin
 
 ## Majorization
 
-For $\vec x = (x_1, \dots, x_k)$ we write $|\vec x| = \max(x_1, \dots, x_k)$.
+For $\vec x = (x_1, \dots, x_k)$ we write $|\vec x| = \max(x_1, \dots, x_k)$, with $|\vec x| = 0$ for the empty tuple ($k = 0$).
 
 :::theorem[Majorization]{#thm-ack-majorization}
 For every primitive recursive function $f : \nat^k \to \nat$ there is $n \in \nat$ such that $f(\vec x) < A(n, |\vec x|)$ for all $\vec x$.
@@ -104,7 +104,7 @@ $$
 f(\vec x) < A\big(n, \max_i g_i(\vec x)\big) < A\big(n, A(n, |\vec x|)\big) < A(2n + 2, |\vec x|).
 $$
 
-*Primitive recursion.* Let $f(\vec x, 0) = g(\vec x)$ and $f(\vec x, y + 1) = h(\vec x, y, f(\vec x, y))$, with $g$ and $h$ bounded by $n$. We first show by induction on $y$ that
+*Primitive recursion.* Let $f(\vec x, 0) = g(\vec x)$ and $f(\vec x, y + 1) = h(\vec x, y, f(\vec x, y))$, with $g$ and $h$ bounded by $n$. When $\vec x$ is empty ($k = 0$), $g$ is replaced by a constant $a$, and we choose $n$ such that moreover $a < A(n, 0)$; this is possible since $A(n, 0) \geq A(0, 0) + n = n + 1$ by item 4 of :ref{#lem-ack-monotone}. We first show by induction on $y$ that
 $$
 f(\vec x, y) < A(n + 1, |\vec x| + y). \qquad (\ast)
 $$
@@ -151,7 +151,7 @@ The function $a(n) = A(n, n)$ is total and computable, but not primitive recursi
 If $a$ were primitive recursive, by :ref{#thm-ack-majorization} there would be $m$ such that $a(n) < A(m, n)$ for all $n$. For $n = m$, this gives $A(m, m) < A(m, m)$, a contradiction. If $A$ were primitive recursive, so would be $a = A \circ (p^1_1, p^1_1)$.
 :::
 
-The argument is a diagonalization: $a$ escapes each function $A(m, \cdot)$ at the point $m$. The majorization theorem says more: every primitive recursive function is eventually dominated by $a$, since $f(x) < A(m, x) \leq A(x, x)$ for $x \geq m$.
+The argument is a diagonalization: $a$ escapes each function $A(m, \cdot)$ at the point $m$. The majorization theorem says more: every unary primitive recursive function $f$ is eventually dominated by $a$, since $f(x) < A(m, x) \leq A(x, x)$ for $x \geq m$.
 
 ## A diagonal argument
 
@@ -182,15 +182,15 @@ The function $(n, x) \mapsto f_n(x)$ is total and computable. What does the theo
 
 Why does the same argument not show that some total computable function is not computable?
 
-- [x] There is no computable enumeration of exactly the total computable functions. An enumeration of all programs contains programs that do not halt, and for those, $d(n) = \Phi_n(n) + 1$ is undefined.
+- [x] There is no computable enumeration of exactly the total computable functions. An enumeration of all programs contains programs that do not halt, and if the $n$-th program does not halt on input $n$, then "its output on $n$, plus one" is undefined.
 
-  This obstacle is made precise in the course on fundamentals, with the halting problem.
+  This obstacle is made precise in the lesson :ref{to="fundamentals/halting-problem"}.
 - [ ] Because the total computable functions are uncountable.
 
   There are countably many programs, so countably many computable functions.
 - [ ] Because $d$ grows too fast.
 
-  The growth of $d$ is irrelevant: the obstacle is that the enumeration $\Phi_n$ contains partial functions, for which $\Phi_n(n) + 1$ may be undefined.
+  The growth of $d$ is irrelevant: the obstacle is that the enumeration of all programs contains programs computing partial functions, on which the diagonal value may be undefined.
 :::
 
 Thus unbounded loops are necessary to compute all total computable functions — and with unbounded loops comes the possibility of non-termination. The next lesson adds unbounded search to the primitive recursive functions.
@@ -221,14 +221,15 @@ A computation of $A(x, y)$ can be recorded as a finite set of triples $(x', y', 
 :::
 
 :::solution
-Call a finite set $T$ of triples **closed** if for each $(x', y', z') \in T$, the equations defining $A(x', y')$ are witnessed in $T$: if $x' = 0$ then $z' = y' + 1$; if $x' > 0$, $y' = 0$ then $(x' - 1, 1, z') \in T$; if $x', y' > 0$ then there is $w$ with $(x', y' - 1, w) \in T$ and $(x' - 1, w, z') \in T$. By induction along $<_{\mathrm{lex}}$, every triple in a closed set is in $G$; conversely, the set of triples occurring in the evaluation of $A(x, y)$ is closed and contains $(x, y, A(x, y))$. All triples occurring in that evaluation have components at most $z = A(x, y)$, by monotonicity. Coding $T$ as a sequence of triples, the code is bounded by a primitive recursive function of $z$, and $G(x, y, z)$ holds iff there is a closed $T$ with code below this bound containing $(x, y, z)$: a bounded search over a primitive recursive predicate.
+Call a finite set $T$ of triples **closed** if for each $(x', y', z') \in T$, the equations defining $A(x', y')$ are witnessed in $T$: if $x' = 0$ then $z' = y' + 1$; if $x' > 0$, $y' = 0$ then $(x' - 1, 1, z') \in T$; if $x', y' > 0$ then there is $w$ with $(x', y' - 1, w) \in T$ and $(x' - 1, w, z') \in T$. By induction along $<_{\mathrm{lex}}$, every triple in a closed set is in $G$; conversely, the set of triples occurring in the evaluation of $A(x, y)$ is closed and contains $(x, y, A(x, y))$. All triples occurring in that evaluation have components at most $z = A(x, y)$. Indeed, the evaluation of $A(x', y')$ only calls $A(x' - 1, 1)$, $A(x', y' - 1)$ and $A(x' - 1, A(x', y' - 1))$, whose values are at most $A(x', y')$ by the defining equations and :ref{#lem-ack-monotone}; so all values $z'$ occurring are at most $z$. For a triple $(x', y', z')$, $y' < A(x', y') = z'$ by item 1, and $x' < A(0, y') + x' \leq A(x', y') = z'$ by item 4 applied $x'$ times. Coding $T$ as a sequence of triples without repetition, its length is at most $(z + 1)^3$ and its entries are codes of triples with components at most $z$, so the code is bounded by a primitive recursive function of $z$, and $G(x, y, z)$ holds iff there is a closed $T$ with code below this bound containing $(x, y, z)$: a bounded search over a primitive recursive predicate.
 :::
 ::::
 
 ## Notes and references
 
-Ackermann's original function had three arguments; the two-argument version used here is due to Péter. The majorization argument follows the standard textbook proof. The stratification of the primitive recursive functions by growth rate leads to the Grzegorczyk hierarchy.
+Ackermann's original function had three arguments; the two-argument version used here is due to Péter, in the form given by Robinson. The majorization argument follows the standard textbook proof. The stratification of the primitive recursive functions by growth rate leads to the Grzegorczyk hierarchy.
 
 - W. Ackermann, *Zum Hilbertschen Aufbau der reellen Zahlen*, Mathematische Annalen 99 (1928), 118–133.
 - R. Péter, *Konstruktion nichtrekursiver Funktionen*, Mathematische Annalen 111 (1935), 42–60.
+- R. M. Robinson, *Recursion and double recursion*, Bulletin of the American Mathematical Society 54 (1948), 987–993.
 - A. Grzegorczyk, *Some classes of recursive functions*, Rozprawy Matematyczne 4 (1953).

@@ -64,7 +64,7 @@ What does $\mathsf{plus}\, \overline 1$ reduce to?
   $\mathsf{plus}\, \overline 1$ still expects an argument.
 - [ ] It has no normal form.
 
-  $\mathsf{plus}\, \overline 1$ is a partial application, which reduces to a normal form equivalent to the successor.
+  $\mathsf{plus}\, \overline 1$ is a partial application, which reduces to the normal form $\mathsf{succ}$.
 
 ---
 
@@ -102,7 +102,7 @@ A boolean selects one of its two arguments: $\mathsf{true}\, M\, N \twoheadright
 
 ## The predecessor
 
-Numerals iterate; they offer no direct way to "undo" an application of $f$. Church himself was for a while unsure whether the predecessor was λ-definable. Kleene found the following solution in 1932: iterate on pairs, keeping the previous value.
+Numerals iterate; they offer no direct way to "undo" an application of $f$. Church himself was for a while unsure whether the predecessor was λ-definable. Kleene found a solution in 1932, based on the following idea: iterate on pairs, keeping the previous value.
 
 :::proposition[Kleene]{#prop-lambda-pred}
 Let $\Phi = \lambda p.\, \mathsf{pair}\,(\mathsf{snd}\, p)\,(\mathsf{succ}\,(\mathsf{snd}\, p))$ and
@@ -182,9 +182,13 @@ Every partial recursive function is λ-definable.
 :::
 
 :::proof{of=thm-recursive-lambda-definable}
-By induction on the definition of $f$. We give the constructions and indicate the main difficulty.
+We first treat the total recursive functions, which is Kleene's 1936 theorem, and then reduce the partial case to it with the normal form theorem.
+
+**Total functions.** By :ref{#cor-regular-mu}, every total recursive function has a derivation from the basic functions by composition, primitive recursion and minimization of regular functions, in which all the functions are total. We show by induction on such a derivation that each of its functions $f : \nat^k \to \nat$ is λ-defined by some term $F$; since $f$ is total, this means $F\, \overline{n_1} \cdots \overline{n_k} \twoheadrightarrow_\beta \overline{f(\vec n)}$ for all $\vec n$. Below, $\vec{\overline n}$ stands for $\overline{n_1} \cdots \overline{n_k}$.
 
 *Basic functions.* $Z$ is λ-defined by $\lambda n.\, \overline 0$, $S$ by $\mathsf{succ}$, and $p^k_i$ by $\lambda x_1 \cdots x_k.\, x_i$.
+
+*Composition.* If $H, G_1, \dots, G_m$ λ-define $h, g_1, \dots, g_m$, then $F = \lambda \vec x.\, H\,(G_1\, \vec x) \cdots (G_m\, \vec x)$ satisfies $F\, \vec{\overline n} \twoheadrightarrow_\beta H\, \overline{g_1(\vec n)} \cdots \overline{g_m(\vec n)} \twoheadrightarrow_\beta \overline{f(\vec n)}$.
 
 *Primitive recursion.* If $G$ and $H$ λ-define $g$ and $h$, then $f(\vec x, y)$ is λ-defined by iterating on pairs (counter, value), as for the predecessor:
 $$
@@ -193,28 +197,26 @@ F = \lambda \vec x\, y.\, \mathsf{snd}\,\Big(y\ & \big(\lambda p.\, \mathsf{pair
 & (\mathsf{pair}\, \overline 0\,(G\, \vec x))\Big).
 \end{aligned}
 $$
+Let $\Psi$ be the term $\lambda p.\, \cdots$ above with $\vec{\overline n}$ substituted for $\vec x$. By induction on $j$, $\Psi^j(\mathsf{pair}\, \overline 0\,(G\, \vec{\overline n}))$ reduces to $\mathsf{pair}\, \overline j\, \overline{f(\vec n, j)}$: for $j = 0$ because $G\, \vec{\overline n} \twoheadrightarrow_\beta \overline{g(\vec n)}$, and for $j + 1$ because $\Psi\,(\mathsf{pair}\, \overline j\, \overline v) \twoheadrightarrow_\beta \mathsf{pair}\, \overline{j + 1}\, \overline{h(\vec n, j, v)}$. Since $\overline y\, \Psi\, A \twoheadrightarrow_\beta \Psi^y(A)$, taking the second component gives $F\, \vec{\overline n}\, \overline y \twoheadrightarrow_\beta \overline{f(\vec n, y)}$. (For $k = 0$, $G\, \vec x$ is replaced by the numeral of the constant.)
 
-*Minimization.* If $G$ λ-defines $g$, let
+*Regular minimization.* Let $f(\vec x) = \mu z\, [g(\vec x, z) = 0]$ with $g$ total and regular, λ-defined by $G$. With Turing's combinator, let
 $$
 \begin{gathered}
-\mathsf{search} = \mathsf{Y}\,\big(\lambda s\, \vec x\, z.\, (\mathsf{iszero}\,(G\, \vec x\, z))\; z\; (s\, \vec x\,(\mathsf{succ}\, z))\big), \\
+\mathsf{search} = \Theta\,\big(\lambda s\, \vec x\, z.\, (\mathsf{iszero}\,(G\, \vec x\, z))\; z\; (s\, \vec x\,(\mathsf{succ}\, z))\big), \\
 F = \lambda \vec x.\, \mathsf{search}\, \vec x\, \overline 0.
 \end{gathered}
 $$
-The term $\mathsf{search}\, \vec{\overline{x}}\, \overline z$ tests whether $g(\vec x, z) = 0$, returns $\overline z$ if so, and otherwise calls itself on $z + 1$. Normal order reduction performs exactly the search $\mu z\, [g(\vec x, z) = 0]$.
+By :ref{#thm-lambda-fixed-point}, $\mathsf{search}\, \vec{\overline n}\, \overline z \twoheadrightarrow_\beta (\mathsf{iszero}\,(G\, \vec{\overline n}\, \overline z))\; \overline z\; (\mathsf{search}\, \vec{\overline n}\,(\mathsf{succ}\, \overline z))$. If $g(\vec n, z) = 0$, this reduces to $\overline z$; otherwise it reduces to $\mathsf{search}\, \vec{\overline n}\,(\mathsf{succ}\, \overline z)$, hence to $\mathsf{search}\, \vec{\overline n}\, \overline{z + 1}$. By induction, $F\, \vec{\overline n} \twoheadrightarrow_\beta \mathsf{search}\, \vec{\overline n}\, \overline z$ for every $z \leq z_0 = f(\vec n)$, which exists by regularity, and finally $F\, \vec{\overline n} \twoheadrightarrow_\beta \overline{z_0}$.
 
-*Composition*, $f(\vec x) \simeq h(g_1(\vec x), \dots, g_m(\vec x))$, is the delicate case for partial functions. The naive term $\lambda \vec x.\, H\,(G_1\, \vec x) \cdots (G_m\, \vec x)$ may have a normal form even if some $g_i(\vec x)$ diverges, when $H$ discards its argument — whereas $f(\vec x)$ must then be undefined. One forces the evaluation of the arguments using the fact that $\overline n\, \mathsf I\, \mathsf I \twoheadrightarrow_\beta \mathsf I$ for every numeral: the term
+**Partial functions.** For partial functions the constructions above are not adequate as they stand. For instance, the term for composition may have a normal form even if some $g_i(\vec x)$ diverges, when $H$ discards its argument — whereas $f(\vec x)$ must then be undefined. The normal form theorem avoids this problem: by :ref{#thm-kleene-normal-form}, proved in the lesson :ref{to="models-of-computation/equivalence-of-models"} by arithmetization of Turing machines (without using the λ-calculus), $f(\vec x) \simeq U(\mu s\, [g(\vec x, s) = 0])$ where $g(\vec x, s) = \overline{\mathrm{sg}}(\chi_{T_k}(e, \vec x, s))$ and $U$ are primitive recursive. Let $G$ and $U'$ λ-define $g$ and $U$, let $\mathsf{search}$ be built from $G$ as above, and let
 $$
-\begin{aligned}
-\lambda \vec x.\ & (G_1\, \vec x\, \mathsf I\, \mathsf I) \cdots (G_m\, \vec x\, \mathsf I\, \mathsf I) \\
-& \big(H\,(G_1\, \vec x) \cdots (G_m\, \vec x)\big)
-\end{aligned}
+F = \lambda \vec x.\, (\mathsf{search}\, \vec x\, \overline 0)\, \mathsf I\, \mathsf I\, \big(U'\,(\mathsf{search}\, \vec x\, \overline 0)\big).
 $$
-behaves as the naive term when all $G_i\, \vec{\overline x}$ reduce to numerals, since the prefix reduces to $\mathsf I \cdots \mathsf I$. To make the converse precise — that the term has no normal form when some $G_i\, \vec{\overline x}$ has none — one needs a stronger invariant than "has no normal form", namely **unsolvability**; it is preserved by the constructions above. We refer to Barendregt, *The Lambda Calculus*, for the details.
+If $f(\vec n)\converge$, the search succeeds at some $s_0$: then $\mathsf{search}\, \vec{\overline n}\, \overline 0 \twoheadrightarrow_\beta \overline{s_0}$ as in the total case, $\overline{s_0}\, \mathsf I\, \mathsf I \twoheadrightarrow_\beta \mathsf I^{s_0}(\mathsf I) \twoheadrightarrow_\beta \mathsf I$, and $F\, \vec{\overline n} \twoheadrightarrow_\beta \mathsf I\,\big(U'\, \overline{s_0}\big) \twoheadrightarrow_\beta \overline{U(s_0)} = \overline{f(\vec n)}$. If $f(\vec n)\diverge$, it remains to show that $F\, \vec{\overline n}$ has no normal form; by confluence, it suffices to show this for its reduct $(\mathsf{search}\, \vec{\overline n}\, \overline 0)\, \mathsf I\, \mathsf I\, (U'\,(\mathsf{search}\, \vec{\overline n}\, \overline 0))$. Here $\mathsf{search}\, \vec{\overline n}\, \overline 0$ reduces to $\mathsf{search}\, \vec{\overline n}\, \overline z$ for every $z$, and one shows that it has no **head normal form**: it reduces to no term of the form $\lambda y_1 \cdots y_j.\, y\, M_1 \cdots M_r$ (one says that it is **unsolvable**). Moreover, if $M$ has no head normal form, then neither has $M\, P_1 \cdots P_r$, which therefore has no normal form. We admit these two facts about head normal forms; they are proved in Barendregt's monograph, in the chapters on solvability and on the representation of computable functions, where this construction is carried out in detail.
 :::
 
 :::quiz[λ-definability of recursive functions]
-In the minimization case, why must the recursion be implemented with a fixed-point combinator rather than with a numeral iteration, as for primitive recursion?
+In the case of regular minimization, why must the recursion be implemented with a fixed-point combinator rather than with a numeral iteration, as for primitive recursion?
 
 - [x] The number of steps of the search is not known in advance, so no numeral can be used to iterate it; a fixed point allows unbounded recursion.
 - [ ] Because numerals cannot be compared with $\overline 0$.
@@ -230,7 +232,7 @@ Why is the naive term $\lambda \vec x.\, H\,(G_1\, \vec x) \cdots (G_m\, \vec x)
 
 - [x] If $H$ ignores its first argument and $g_1(\vec x)$ diverges, the naive term may still reduce to a numeral, while by our conventions $f(\vec x)$ is undefined.
 
-  Normal order reduction is "lazy": it never evaluates arguments that are not used.
+  β-reduction does not have to evaluate an argument that is discarded: normal order reduction, in particular, never does.
 - [ ] Because application is not associative.
 
   Application associates to the left by convention; the problem is the evaluation of arguments, not the bracketing.
@@ -244,14 +246,14 @@ Every λ-definable partial function is partial recursive.
 :::
 
 :::proof{of=thm-lambda-definable-recursive}
-Code λ-terms by integers, for instance using de Bruijn indices to avoid α-equivalence issues and the sequence coding of the lesson :ref{to="models-of-computation/coding-sequences"}. The following are primitive recursive on codes: substitution, the predicate "$M$ is in normal form", the function computing the result of one normal order step, its $t$-th iterate $N(M, t)$, the code of $\overline n$ as a function of $n$, and the predicate "$M$ is a numeral" together with the extraction of its value. If $F$ λ-defines $f$, let $M_{\vec n}$ be the code of $F\, \overline{n_1} \cdots \overline{n_k}$; then
+Code λ-terms by integers, for instance using de Bruijn indices to avoid α-equivalence issues and the sequence coding of the lesson :ref{to="models-of-computation/coding-sequences"}. The following are primitive recursive on codes (we omit the routine verifications): substitution, the predicate "$M$ is in normal form", the function computing the result of one normal order step, its $t$-th iterate $N(M, t)$, the code of $\overline n$ as a function of $n$, and the predicate "$M$ is a numeral" together with the extraction of its value. If $F$ λ-defines $f$, let $M_{\vec n}$ be the code of $F\, \overline{n_1} \cdots \overline{n_k}$; then
 $$
 f(\vec n) \simeq \mathrm{val}\big(N(M_{\vec n},\ \mu t\, [N(M_{\vec n}, t) \text{ is in normal form}])\big).
 $$
 By :ref{#thm-normal-order}, the search terminates exactly when $F\, \overline{n_1} \cdots \overline{n_k}$ has a normal form, which is then $\overline{f(\vec n)}$.
 :::
 
-Together with the previous lessons, this shows that λ-definability coincides with Turing computability, a fact established by Kleene and Turing in 1936. It was this equivalence that turned Church's proposal — identifying effective computability with λ-definability — into a widely accepted thesis.
+Thus λ-definability coincides with partial recursiveness, and the next lesson shows that both coincide with Turing computability. These equivalences were established by Kleene (1936) and Turing (1936–1937). Together with Turing's analysis of mechanical computation, they turned Church's proposal — identifying effective computability with λ-definability — into a widely accepted thesis (see the lesson :ref{to="models-of-computation/church-turing-thesis"}).
 
 ## Exercises
 
@@ -275,13 +277,13 @@ $\mathsf{minus} = \lambda m n.\, n\, \mathsf{pred}\, m$ iterates the predecessor
 Show that $\mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta \overline 6$ under normal order reduction, and explain what goes wrong with applicative order.
 
 :::solution
-Write $\mathsf{fact} = \mathsf{Y}\, F$. By the fixed point property, $\mathsf{fact}\, \overline 3 =_\beta F\, \mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta (\mathsf{iszero}\, \overline 3)\, \overline 1\, (\mathsf{mult}\, \overline 3\, (\mathsf{fact}\,(\mathsf{pred}\, \overline 3)))$, which reduces to $\mathsf{mult}\, \overline 3\, (\mathsf{fact}\, \overline 2)$; continuing down to $\mathsf{fact}\, \overline 0 \twoheadrightarrow_\beta \overline 1$ gives $\overline 6$. Normal order contracts the conditional before evaluating the recursive call. Applicative order would first try to normalize the argument $\mathsf{Y}\, F$, whose reduction $\mathsf{Y}\, F \to W\, W \to F\,(W\, W) \to F\,(F\,(W\, W)) \to \cdots$ never terminates.
+Write $\mathsf{fact} = \mathsf{Y}\, F$. By the fixed point property, $\mathsf{fact}\, \overline 3 =_\beta F\, \mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta (\mathsf{iszero}\, \overline 3)\, \overline 1\, (\mathsf{mult}\, \overline 3\, (\mathsf{fact}\,(\mathsf{pred}\, \overline 3)))$, which reduces to $\mathsf{mult}\, \overline 3\, (\mathsf{fact}\, \overline 2)$; continuing down to $\mathsf{fact}\, \overline 0 =_\beta \overline 1$ gives $\mathsf{fact}\, \overline 3 =_\beta \overline 6$. Since $\overline 6$ is a normal form, $\mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta \overline 6$ by :ref{#cor-unique-normal-form}, and normal order reaches it by :ref{#thm-normal-order}. Normal order contracts the conditional before evaluating the recursive call. Applicative order would first try to normalize the subterm $\mathsf{Y}\, F$, whose reduction $\mathsf{Y}\, F \to W\, W \to F\,(W\, W) \to F\,(F\,(W\, W)) \to \cdots$ never terminates.
 :::
 ::::
 
 ## Notes and references
 
-The definability of the predecessor was found by Kleene in 1932, and the equivalence between λ-definability and general recursiveness was proved by Kleene in 1936. The combinator $\Theta$ is due to Turing (1937).
+The definability of the predecessor was found by Kleene in 1932, and the equivalence between λ-definability and general recursiveness (for total functions) was proved by Kleene in 1936. The combinator $\Theta$ is due to Turing (1937).
 
 - S. C. Kleene, *λ-definability and recursiveness*, Duke Mathematical Journal 2 (1936), 340–353.
 - A. M. Turing, *The p-function in λ-K-conversion*, Journal of Symbolic Logic 2 (1937), 164.
