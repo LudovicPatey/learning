@@ -2,7 +2,7 @@
 title: Diagonally non-computable functions
 summary: DNC and fixed-point free functions compute each other; the DNC degrees are the degrees of effectively immune sets; Arslanov's completeness criterion shows that a c.e. set computing a DNC function is complete.
 duration: 45
-prerequisites: [immune-sets, fundamentals/fixed-point]
+prerequisites: [immune-sets, fundamentals/fixed-point, pi01-classes/pa-degrees, ce-degrees/low-simple-set]
 ---
 
 The fixed point theorem says that every computable transformation of programs has a fixed point, up to the function computed. A function that transforms every program into one computing a different function cannot be computable; this lesson studies the degrees of such **fixed-point free** functions. They coincide with the degrees of **diagonally non-computable** functions, which differ from the diagonal $e \mapsto \Phi_e(e)$ wherever it is defined, and with the degrees of **effectively immune** sets. Arslanov's completeness criterion then shows that among c.e. sets, only the complete ones have this power.
@@ -110,7 +110,7 @@ By SMN, there is a total computable function $r$ such that the program $r(n, x)$
 
 With oracle $A$, compute for each $n$ the least stage $s(n)$ such that $\Phi^{A_s}_i(p(n))[s]$ converges, with use $u$, and $A_s \uh u = A \uh u$, for $s = s(n)$. Such a stage exists, since $f(p(n))$ is defined and $A_s \uh u$ eventually equals $A \uh u$; and the condition is decided by $A$. Since $A$ is c.e., $A_t \uh u = A \uh u$ for every $t \geq s(n)$, so the same computation gives $f_t(p(n)) = f(p(n))$ for every $t \geq s(n)$.
 
-We claim that $n \in \emptyset'$ if and only if $n \in \emptyset'_{s(n)}$, which shows $\emptyset' \leq_T A$. Suppose that $n \in \emptyset'$, and let $t$ be the least stage with $n \in \emptyset'_t$. If $t > s(n)$, then the program $r(n, p(n))$ runs $\Phi_{f_t(p(n))} = \Phi_{f(p(n))}$, so $\Phi_{p(n)} = \Phi_{r(n, p(n))} = \Phi_{f(p(n))}$, contradicting the fact that $f$ is fixed-point free. So $t \leq s(n)$, and $n \in \emptyset'_{s(n)}$.
+We claim that $n \in \emptyset'$ if and only if $n \in \emptyset'_{s(n)}$, which shows $\emptyset' \leq_T A$. Suppose that $n \in \emptyset'$, and let $t$ be the least stage with $n \in \emptyset'_t$. If $t > s(n)$, then the program $r(n, p(n))$ runs $\Phi_{f_t(p(n))} = \Phi_{f(p(n))}$, so $\Phi_{p(n)} = \Phi_{r(n, p(n))} = \Phi_{f(p(n))}$, contradicting the fact that $f$ is fixed-point free. So $t \leq s(n)$, and $n \in \emptyset'_{s(n)}$, since $\emptyset'_t \subseteq \emptyset'_{s(n)}$. Conversely, $\emptyset'_{s(n)} \subseteq \emptyset'$.
 :::
 
 The program $p(n)$ waits for $n$ to enter $\emptyset'$ and then copies the program that the current approximation of $f$ assigns to it. If $n$ entered $\emptyset'$ after the approximation of $f(p(n))$ has settled, $p(n)$ would be a fixed point of $f$. So, once $A$ knows that the approximation has settled, the entry of $n$ into $\emptyset'$ is already decided. The c.e. hypothesis is necessary: there are low PA sets (:ref{#cor-pa-basis}), which compute DNC functions without computing $\emptyset'$.

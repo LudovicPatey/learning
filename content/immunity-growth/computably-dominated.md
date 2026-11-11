@@ -5,7 +5,7 @@ duration: 45
 prerequisites: [immune-sets, pi01-classes/basis-theorems]
 ---
 
-A set is **computably dominated** (:ref{#def-computably-dominated}), or **hyperimmune-free**, if every function it computes is dominated by a computable function. By :ref{#cor-hyperimmune-degree}, these are exactly the sets that are not of hyperimmune degree. Computable sets are computably dominated, and no non-computable $\Delta^0_2$ set is (:ref{#thm-computation-function}). The computably dominated basis theorem (:ref{#thm-dominated-basis}) gave non-computable examples inside $\Pi^0_1$ classes. This lesson gives a second construction, by **function trees**, which does not use $\Pi^0_1$ classes, and then shows that below a computably dominated set, Turing reducibility coincides with the much more restrictive **truth-table reducibility**.
+A set is **computably dominated** (:ref{#def-computably-dominated}), or **hyperimmune-free**, if every function it computes is dominated by a computable function. By :ref{#def-hyperimmune-fn}, these are exactly the sets that are not of hyperimmune degree. Computable sets are computably dominated, and no non-computable $\Delta^0_2$ set is (:ref{#thm-computation-function}). The computably dominated basis theorem (:ref{#thm-dominated-basis}) gave non-computable examples inside $\Pi^0_1$ classes. This lesson gives a second construction, by **function trees**, which does not use $\Pi^0_1$ classes, and then shows that below a computably dominated set, Turing reducibility coincides with the much more restrictive **truth-table reducibility**.
 
 Being computably dominated is closed downward under Turing reducibility: if $Y \leq_T X$, every $Y$-computable function is $X$-computable.
 
@@ -19,9 +19,9 @@ $$
 The strings $T(\rho)$ are the **nodes** of $T$. A set $X$ is a **path** of $T$ if infinitely many prefixes of $X$ are nodes of $T$; $[T]$ denotes the class of paths. An f-tree $S$ is a **subtree** of $T$ if every node of $S$ is a node of $T$.
 :::
 
-For every $\rho$, the nodes $T(\rho 0)$ and $T(\rho 1)$ strictly extend $T(\rho)$ and are incompatible: neither $\rho 0 \preceq \rho 1$ nor $\rho 1 \preceq \rho 0$, so neither node extends the other. If $S$ is a subtree of $T$, then $[S] \subseteq [T]$, directly from the definition of paths. For every $\rho$, the function $\mu \mapsto T(\rho \mu)$ is a subtree of $T$, computable if $T$ is, whose nodes all extend $T(\rho)$; we call it the **full subtree above** $T(\rho)$.
+For every $\rho$, the nodes $T(\rho 0)$ and $T(\rho 1)$ strictly extend $T(\rho)$ (they extend it since $\rho \preceq \rho i$, and differ from it since $\rho i \not\preceq \rho$) and are incompatible: neither $\rho 0 \preceq \rho 1$ nor $\rho 1 \preceq \rho 0$, so neither node extends the other. If $S$ is a subtree of $T$, then $[S] \subseteq [T]$, directly from the definition of paths. For every $\rho$, the function $\mu \mapsto T(\rho \mu)$ is a subtree of $T$, computable if $T$ is, whose nodes all extend $T(\rho)$; we call it the **full subtree above** $T(\rho)$.
 
-If $X \in [T]$ and $T(\rho_1) \prec T(\rho_2) \prec \cdots$ are the nodes of $T$ that are prefixes of $X$, then $\rho_1 \prec \rho_2 \prec \cdots$ by the definition, so for every $n$ some string $\rho$ of length $n$ has $T(\rho) \prec X$. The identity $T(\rho) = \rho$ is a computable f-tree whose paths are all sets.
+If $X \in [T]$ and $T(\rho_1) \prec T(\rho_2) \prec \cdots$ are the nodes of $T$ that are prefixes of $X$, then $\rho_1 \prec \rho_2 \prec \cdots$ by the definition (the inclusions are strict since $T$ is injective: $T(\rho) = T(\mu)$ gives $\rho \preceq \mu$ and $\mu \preceq \rho$). So for every $n$, if $\rho_i$ has length at least $n$ and $\rho$ is its prefix of length $n$, then $T(\rho) \preceq T(\rho_i) \prec X$. The identity $T(\rho) = \rho$ is a computable f-tree whose paths are all sets.
 
 :::lemma{#lem-ftree-noncomputable}
 Let $T$ be a computable f-tree and $e \in \nat$. There is a computable subtree $S$ of $T$ such that $\Phi_e \neq X$ for every $X \in [S]$.
@@ -125,9 +125,9 @@ In the proof of ($\Leftarrow$) in :ref{#prop-tt-total}, where is the totality of
 - [ ] To show that $\Phi^X_e = Y$.
 
   This is a hypothesis, independent of the behavior on other oracles.
-- [ ] To make the search for $\ell(n)$ computable.
+- [ ] To make each step of the search for $\ell(n)$ effective.
 
-  The search is computable in any case; totality on every oracle is what makes it terminate.
+  Each step checks finitely many strings and is effective in any case; totality on every oracle is what makes the search terminate.
 
 ---
 
@@ -166,4 +166,5 @@ Computably dominated degrees were introduced by Miller and Martin (1968), who co
 
 - W. Miller and D. A. Martin, *The degrees of hyperimmune sets*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 14 (1968), 159–166.
 - C. Spector, *On degrees of recursive unsolvability*, Annals of Mathematics 64 (1956), 581–592.
+- E. L. Post, *Recursively enumerable sets of positive integers and their decision problems*, Bulletin of the American Mathematical Society 50 (1944), 284–316.
 - C. G. Jockusch, *Relationships between reducibilities*, Transactions of the American Mathematical Society 142 (1969), 229–237.

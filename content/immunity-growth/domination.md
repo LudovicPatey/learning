@@ -22,7 +22,7 @@ A set $A$ is high if and only if it computes a dominant function.
 :::
 
 :::proof{of=thm-martin-domination}
-($\Rightarrow$) Since $A$ is high, $\mathrm{Tot} \leq_T \emptyset'' \leq_T A'$. By the limit lemma relative to $A$, there is an $A$-computable function $a(e, s)$ with $\lim_s a(e, s) = \mathrm{Tot}(e)$ for every $e$. Define $g(x)$ as follows. For each $e \leq x$, search for the least $s \geq x$ such that $\Phi_e(x)[s]\converge$ or $a(e, s) = 0$. The search terminates: if $\Phi_e$ is total, $\Phi_e(x)$ converges at some stage; otherwise $a(e, s) = 0$ for all large $s$. Let $v_e = \Phi_e(x)$ if the search ended with $\Phi_e(x)[s]\converge$, and $v_e = 0$ otherwise. Let $g(x) = \sum_{e \leq x} v_e$. It is $A$-computable.
+($\Rightarrow$) Since $A$ is high, $\mathrm{Tot} \leq_T \emptyset'' \leq_T A'$. By the limit lemma relative to $A$ (:ref{#thm-limit-lemma}), there is an $A$-computable function $a(e, s)$ with $\lim_s a(e, s) = \mathrm{Tot}(e)$ for every $e$. Define $g(x)$ as follows. For each $e \leq x$, search for the least $s \geq x$ such that $\Phi_e(x)[s]\converge$ or $a(e, s) = 0$. The search terminates: if $\Phi_e$ is total, $\Phi_e(x)$ converges at some stage; otherwise $a(e, s) = 0$ for all large $s$. Let $v_e = \Phi_e(x)$ if the search ended with $\Phi_e(x)[s]\converge$, and $v_e = 0$ otherwise. Let $g(x) = \sum_{e \leq x} v_e$. It is $A$-computable.
 
 Let $\Phi_e$ be total. Let $s_0$ be such that $a(e, s) = 1$ for all $s \geq s_0$. For $x \geq \max(e, s_0)$, the search for $e$ starts at $s \geq x \geq s_0$, never meets $a(e, s) = 0$, and ends with the convergence of $\Phi_e(x)$; so $v_e = \Phi_e(x)$ and $g(x) \geq \Phi_e(x)$. Hence $g$ eventually dominates $\Phi_e$.
 
@@ -30,7 +30,7 @@ Let $\Phi_e$ be total. Let $s_0$ be such that $a(e, s) = 1$ for all $s \geq s_0$
 $$
 e \in \mathrm{Tot} \iff \exists k\ \big[\ \forall x \geq k\ \ \Phi_e(x)[g(x)]\converge \ \text{ and } \ \forall x < k\ \ \Phi_e(x)\converge\ \big].
 $$
-If $e \in \mathrm{Tot}$, take $k$ such that $t_e(x) \leq g(x)$ for $x \geq k$. Conversely, the right-hand side states that $\Phi_e$ converges on every input. Inside the brackets, the first condition is $\Pi^0_1(A)$ and the second is $\Sigma^0_1$, so $\mathrm{Tot}$ is $\Sigma^0_2(A)$. It is also $\Pi^0_2$, hence $\Pi^0_2(A)$. So $\mathrm{Tot}$ is $\Delta^0_2(A)$, that is, computable in $A'$ by Post's theorem relative to $A$. Hence $\emptyset'' \leq_T A'$.
+If $e \in \mathrm{Tot}$, take $k$ such that $t_e(x) \leq g(x)$ for $x \geq k$. Conversely, the right-hand side states that $\Phi_e$ converges on every input. Inside the brackets, the first condition is $\Pi^0_1(A)$ and the second is $\Sigma^0_1$, so $\mathrm{Tot}$ is $\Sigma^0_2(A)$. It is also $\Pi^0_2$, hence $\Pi^0_2(A)$. So $\mathrm{Tot}$ is $\Delta^0_2(A)$, that is, computable in $A'$ by Post's theorem relative to $A$ (:ref{#thm-post}). Hence $\emptyset'' \leq_T A'$.
 :::
 
 :::corollary{#cor-high-hyperimmune}
@@ -65,13 +65,13 @@ In ($\Leftarrow$), why is the clause "$\forall x < k\ \Phi_e(x)\converge$" neede
 
 ## Lists of computable functions
 
-A high set can list the computable functions. Fix a dominant $g \leq_T A$. For each $e$, let $\psi_e(x) = \Phi_e(x)$ if $\Phi_e(x)[g(x)]\converge$, and $\psi_e(x) = 0$ otherwise. The sequence $(\psi_e)$ is uniformly $A$-computable and consists of total functions. If $\Phi_e$ is total, then $\psi_e$ equals $\Phi_e$ except at finitely many inputs; so the list of all finite modifications of the functions $\psi_e$, which is uniformly $A$-computable, contains every computable function. It may also contain non-computable functions, obtained from partial functions $\Phi_e$. Jockusch proved that high sets can list exactly the computable functions; we admit this.
+A high set can list the computable functions. Fix a dominant $g \leq_T A$. For each $e$, let $\psi_e(x) = \Phi_e(x)$ if $\Phi_e(x)[g(x)]\converge$, and $\psi_e(x) = 0$ otherwise. The sequence $(\psi_e)$ is uniformly $A$-computable and consists of total functions. If $\Phi_e$ is total, then $\psi_e$ equals $\Phi_e$ except at finitely many inputs; so the list of all finite modifications of the functions $\psi_e$, which is uniformly $A$-computable, contains every computable function. It may also contain non-computable functions, obtained from partial functions $\Phi_e$. Jockusch proved that high sets can list exactly the computable sets, and that this property characterizes the high sets; we admit this result.
 
 :::theorem[Jockusch]{#thm-jockusch-lists}
 A set $A$ is high if and only if there is a uniformly $A$-computable sequence of sets $(X_n)$ whose members are exactly the computable sets.
 :::
 
-The direction from a list to highness is the difficult one; a proof is in Soare's book. The easier analogues are the object of an exercise below.
+Both directions need more than the argument above; we refer to Jockusch (1972) for the proof. An easier analogue, with lists that contain every computable function and possibly other functions, is the object of an exercise below.
 
 ## Maximal sets
 
@@ -107,7 +107,7 @@ A set $X$ computes a function that is almost everywhere different from every com
 So there is $m_0$ with $k(m) \neq \Phi_m(m)$ for all $m \geq m_0$. Let $k'(m) = k(m)$ for $m \geq m_0$, and for $m < m_0$, let $k'(m) = \Phi_m(m) + 1$ if $\Phi_m(m)\converge$, and $k'(m) = 0$ otherwise. This modification involves finitely many values, so $k' \leq_T X$, and $k'$ is DNC.
 :::
 
-Each alternative of the theorem occurs without the other. There are PA sets that are computably dominated (:ref{#cor-pa-basis}), hence DNC and not high. There are high sets computing no DNC function, for instance high 1-generic sets, constructed in the course on Cohen genericity.
+Each alternative of the theorem occurs without the other. There are PA sets that are computably dominated (:ref{#cor-pa-basis}), hence DNC and not high. There are high sets computing no DNC function, for instance high 1-generic sets (:ref{#cor-high-not-dnc}).
 
 :::quiz[high or DNC]
 In ($\Leftarrow$), why does the DNC case use the function $h$ of :ref{#thm-dnc-effectively-immune} rather than a DNC function directly?
@@ -116,9 +116,9 @@ In ($\Leftarrow$), why does the DNC case use the function $h$ of :ref{#thm-dnc-e
 - [ ] Because a DNC function may be partial.
 
   DNC functions are total by definition.
-- [ ] Because a DNC function differs from $\Phi_e$ at the input $e$ only, and nothing is known at other inputs.
+- [ ] Because $h$ is computable, unlike a DNC function.
 
-  This is the reason to avoid several values at each input, but it does not explain the choice of $h$: the point is that $h$ provides that avoidance uniformly.
+  $h$ is only $X$-computable. No computable function has property (2) of :ref{#thm-dnc-effectively-immune}, since by that theorem it would yield a computable DNC function.
 
 ---
 

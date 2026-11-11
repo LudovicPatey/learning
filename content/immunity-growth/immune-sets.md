@@ -106,7 +106,7 @@ Let $A$ be an infinite c.e. set, enumerated without repetition by a computable f
 :::proof{of=thm-deficiency-set}
 The set $B$ is c.e.: $s \in B$ as soon as a later stage $t$ with $a(t) < a(s)$ is found.
 
-*Non-deficient stages.* If $s_0 < s_1 < \cdots$ are the non-deficient stages, then $a(s_0) < a(s_1) < \cdots$, since $s_{i+1}$ comes after $s_i$ and $s_i$ is non-deficient. As $a$ is injective with values in $\nat$, $a(s_n) \geq n$. The complement of $B$ is infinite: for every $s$, the minimum of $\{ a(t) : t \geq s \}$ is attained at a unique stage $t_0 \geq s$, which is non-deficient.
+*Non-deficient stages.* If $s_0 < s_1 < \cdots$ are the non-deficient stages, then $a(s_0) < a(s_1) < \cdots$, since $s_{i+1}$ comes after $s_i$ and $s_i$ is non-deficient. A strictly increasing sequence of natural numbers satisfies $a(s_n) \geq n$. The complement of $B$ is infinite: for every $s$, the minimum of $\{ a(t) : t \geq s \}$ is attained at a unique stage $t_0 \geq s$, which is non-deficient.
 
 *Key property.* If $s$ is non-deficient and $x \leq a(s)$, then $x \in A$ if and only if $x = a(t)$ for some $t \leq s$. Indeed, an element enumerated after $s$ is larger than $a(s)$.
 
@@ -121,7 +121,7 @@ The set $B$ is c.e.: $s \in B$ as soon as a later stage $t$ with $a(t) < a(s)$ i
 Every non-computable c.e. set is Turing equivalent to a hypersimple set. In particular, every non-zero c.e. degree is hyperimmune.
 :::
 
-A non-computable c.e. set is infinite, so the theorem applies. The second statement also follows from :ref{#thm-computation-function}, since c.e. sets are $\Delta^0_2$. Hypersimple sets are simple, since hyperimmune sets are immune. They are not complete for truth-table reducibility, a result of Post admitted here; but they can be Turing complete, as the corollary shows for the deficiency set of $\emptyset'$.
+A non-computable c.e. set is infinite, so the theorem applies. The second statement also follows from :ref{#thm-computation-function}, since c.e. sets are $\Delta^0_2$. Hypersimple sets are simple, since hyperimmune sets are immune. They are not complete for truth-table reducibility (:ref{#def-tt}), a result of Post (1944) admitted here; but they can be Turing complete, as the corollary shows for the deficiency set of $\emptyset'$.
 
 :::quiz[deficiency sets]
 Why are the values $a(s_0) < a(s_1) < \cdots$ of the non-deficient stages strictly increasing?

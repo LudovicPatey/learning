@@ -2,7 +2,7 @@ title: Immunity and growth of functions
 area: computability
 level: Advanced
 order: 9
-prerequisites: [turing-degrees, pi01-classes]
+prerequisites: [turing-degrees, ce-degrees, pi01-classes]
 summary: Immune and hyperimmune sets, computably dominated degrees, diagonally non-computable functions, and dominant functions.
 description: >
   Weakness and strength measured by the growth of functions: immune, hyperimmune
