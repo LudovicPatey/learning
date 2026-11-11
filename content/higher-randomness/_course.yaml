@@ -1,0 +1,21 @@
+title: Higher randomness
+area: randomness
+level: Advanced
+order: 5
+prerequisites: [martin-lof-randomness, descriptive-set-theory]
+summary: Randomness with respect to hyperarithmetic and Π¹₁ null classes, the Sacks–Tanaka theorem and its consequences.
+description: >
+  Randomness notions obtained by replacing computability with hyperarithmetic
+  definability: Δ¹₁-randomness, Martin-Löf tests with Π¹₁ components and
+  their universal test, and Π¹₁-randomness, with no classical analogue. The
+  course proves the characterization of Π¹₁-randomness by Chong, Nies and
+  Yu, the coincidence of Σ¹₁- and Δ¹₁-randomness, and the null cone theorem
+  for hyperarithmetic reducibility, from clearly stated facts on the measure
+  of Δ¹₁ classes and the Sacks–Tanaka theorem.
+objectives:
+  - Define Δ¹₁-randomness, Π¹₁-Martin-Löf randomness and Π¹₁-randomness, and compare them
+  - Build a universal higher Martin-Löf test by trimming along ordinal stages
+  - Characterize Π¹₁-randomness through the Church–Kleene ordinal of a sequence
+  - Prove that null Σ¹₁ classes are covered by null Δ¹₁ classes
+  - Prove that the upper hyperarithmetic cone of a non-hyperarithmetic set is null
+lessons: [higher-tests, pi11-randomness, hyperdegrees]
