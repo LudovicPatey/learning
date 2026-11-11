@@ -22,7 +22,7 @@ Every weakly 2-random sequence is Martin-Löf random; every Martin-Löf random s
 The first implication is :ref{#prop-weak-2-position} (1), and the second holds since Schnorr tests are Martin-Löf tests. For the third, let $\mathcal P = [T]$ be a null $\Pi^0_1$ class, with $T$ computable. By the second exercise of :ref{to="martin-lof-randomness/measure"}, there are finite sets $F_n$, computable from $n$, with $\mathcal P \subseteq [F_n]^{\prec}$ and $\lambda([F_n]^{\prec}) \leq 2^{-n}$. The measures of these clopen classes are rationals computed from $F_n$, so $([F_n]^{\prec})$ is a Schnorr test, and it captures every member of $\mathcal P$.
 :::
 
-The law of large numbers holds for Schnorr random sequences: the test of :ref{#prop-large-numbers} consists of classes $\bigcup_{m \geq n} [C_m]^{\prec}$ whose measures are computable, since the tail $\sum_{m \geq M} 2^{-m} |C_m|$ is bounded by a computable function tending to $0$, and a computable subsequence of components can be chosen with bounds $2^{-n}$. Kurtz random sequences need not satisfy it.
+The law of large numbers holds for Schnorr random sequences. The proof of :ref{#prop-large-numbers} uses, for a fixed rational $\varepsilon > 0$, the classes $\mathcal V_n = \bigcup_{m > n} [C_m]^{\prec}$, and the number $a = e^{-2\varepsilon^2} < 1$. Their measures are computable: the measure of the clopen class $\bigcup_{n < m \leq M} [C_m]^{\prec}$ is a rational computable from $n$ and $M$, and it differs from $\lambda(\mathcal V_n)$ by at most the tail $\sum_{m > M} 2^{-m} |C_m| \leq 2a^{M+1}/(1-a)$, which tends to $0$ computably. The subsequence $(\mathcal V_{m_n})_n$ built in :ref{#lem-test-bound} is then a Schnorr test, and it captures every sequence whose frequencies of ones deviate from $\frac12$ by more than $\varepsilon$ infinitely often. Kurtz random sequences need not satisfy it.
 
 :::proposition{#prop-generic-kurtz}
 Every weakly 1-generic sequence is Kurtz random, and no weakly 1-generic sequence is Schnorr random.
@@ -80,7 +80,7 @@ Where is the computable domination of $Z$ used?
 Show that every computably dominated Martin-Löf random sequence is weakly 2-random, and that no computably dominated sequence is 2-random.
 
 :::solution
-A computably dominated random sequence computes no non-computable c.e. set, as shown in the exercises of the previous lesson, so it is weakly 2-random by :ref{#thm-dnwy}. By Kurtz's theorem, admitted in :ref{to="randomness-notions/relative-randomness"}, 2-random sequences have hyperimmune degree, so they are not computably dominated.
+A computably dominated random sequence computes no non-computable c.e. set, as shown in the second exercise of :ref{to="randomness-notions/weak-2-randomness"}, so it is weakly 2-random by :ref{#thm-dnwy}. By Kurtz's theorem, admitted in :ref{to="randomness-notions/relative-randomness"}, 2-random sequences have hyperimmune degree, so they are not computably dominated.
 :::
 ::::
 
@@ -88,14 +88,15 @@ A computably dominated random sequence computes no non-computable c.e. set, as s
 Show that there is a Kurtz random sequence computable in $\emptyset'$ that is not Martin-Löf random.
 
 :::solution
-By :ref{#prop-1-generic}, there is a 1-generic set $G \leq_T \emptyset'$. It is weakly 1-generic, hence Kurtz random by :ref{#prop-generic-kurtz}, and not Schnorr random, hence not Martin-Löf random.
+By :ref{#prop-1-generic}, there is a 1-generic set $G \leq_T \emptyset'$. It is weakly 1-generic, since a dense set of strings has no string without an extension in it, hence Kurtz random by :ref{#prop-generic-kurtz}, and not Schnorr random, hence not Martin-Löf random.
 :::
 ::::
 
 ## Notes and references
 
-Schnorr (1971) introduced his notion in a critique of Martin-Löf's definition, and characterized it by martingales with computable rates of success. Kurtz (1981) introduced weak randomness. Nies, Stephan and Terwijn (2005) proved the collapse in hyperimmune-free degrees and the relation with highness. Downey and Hirschfeldt's book contains the full hierarchy, including computable randomness, defined by computable martingales.
+Schnorr (1971) introduced his notion in a critique of Martin-Löf's definition, and characterized it by martingales with computable rates of success. Kurtz (1981) introduced weak randomness. Nies, Stephan and Terwijn (2005) proved the collapse in computably dominated (hyperimmune-free) degrees and the relation with highness. Downey and Hirschfeldt's book contains the full hierarchy, including computable randomness, defined by computable martingales.
 
+- S. A. Kurtz, *Randomness and genericity in the degrees of unsolvability*, PhD thesis, University of Illinois, 1981.
 - C.-P. Schnorr, *Zufälligkeit und Wahrscheinlichkeit*, Lecture Notes in Mathematics 218, Springer, 1971.
 - A. Nies, F. Stephan and S. A. Terwijn, *Randomness, relativization and Turing degrees*, Journal of Symbolic Logic 70 (2005), 515–535.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Chapter 7.

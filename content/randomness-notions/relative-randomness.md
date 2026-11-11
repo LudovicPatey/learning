@@ -5,12 +5,12 @@ duration: 35
 prerequisites: [martin-lof-randomness/levin-schnorr]
 ---
 
-Randomness relative to an oracle $X$ asks a sequence to pass all tests that $X$ can enumerate. The stronger the oracle, the fewer random sequences. Van Lambalgen's theorem describes how relative randomness interacts with the join: a sequence $A \oplus B$ is random if and only if $A$ is random and $B$ is random relative to $A$. The theorem has strong consequences for the degrees of random sequences, and it shows that randomness relative to $\emptyset'$, called 2-randomness, behaves well.
+Randomness relative to an oracle $X$ asks a sequence to pass all tests that $X$ can enumerate. The stronger the oracle, the fewer random sequences. Van Lambalgen's theorem describes how relative randomness interacts with the join: a sequence $A \oplus B$ is random if and only if $A$ is random and $B$ is random relative to $A$. The theorem has consequences for the Turing degrees of random sequences, and it characterizes randomness relative to $\emptyset'$, called 2-randomness, in terms of Chaitin's $\Omega$.
 
 ## Relative randomness
 
 :::definition{#def-relative-ml}
-Let $X$ be a set. A **Martin-Löf test relative to $X$** is a sequence of classes $(\mathcal U_n)$, uniformly $\Sigma^0_1(X)$, with $\lambda(\mathcal U_n) \leq 2^{-n}$. A sequence is **Martin-Löf random relative to $X$**, or **$X$-random**, if it passes every such test. The class of $X$-random sequences is written $\mathrm{MLR}^X$. A sequence is **$n$-random** if it is random relative to $\emptyset^{(n-1)}$.
+Let $X$ be a set. A **Martin-Löf test relative to $X$** is a sequence of classes $(\mathcal U_n)$, uniformly $\Sigma^0_1(X)$, with $\lambda(\mathcal U_n) \leq 2^{-n}$. A sequence is **Martin-Löf random relative to $X$**, or **$X$-random**, if it passes every such test. The class of $X$-random sequences is written $\mathrm{MLR}^X$. For $n \geq 1$, a sequence is **$n$-random** if it is random relative to $\emptyset^{(n-1)}$; the 1-random sequences are the Martin-Löf random ones.
 :::
 
 All results of the course on Martin-Löf randomness relativize: there is a universal test relative to $X$, $\mathrm{MLR}^X$ is conull, and $Z \in \mathrm{MLR}^X$ if and only if $K^X(Z \uh n) \geq n - O(1)$, where $K^X$ is prefix-free complexity relative to $X$. If $Y \leq_T X$, every test relative to $Y$ is a test relative to $X$, so $\mathrm{MLR}^X \subseteq \mathrm{MLR}^Y$.
@@ -32,12 +32,14 @@ For all sets $A$ and $B$, $A \oplus B$ is Martin-Löf random if and only if $A$ 
 :::
 
 :::proof{of=thm-van-lambalgen}
+We prove both directions by contraposition.
+
 ($\Rightarrow$) Suppose $A$ is captured by a test $(\mathcal U_n)$. Then $A \oplus B$ belongs to the classes $\{ X \oplus Y : X \in \mathcal U_n \}$, which are uniformly $\Sigma^0_1$ with the same measures; so $A \oplus B$ is not random. Suppose $B$ is captured by a test relative to $A$; by trimming, we may assume it is given by an oracle machine $X \mapsto (\mathcal V^X_n)$ with $\lambda(\mathcal V^X_n) \leq 2^{-n}$ for every $X$. Let $\mathcal W_n = \{ X \oplus Y : Y \in \mathcal V^X_n \}$, uniformly $\Sigma^0_1$. By :ref{#fact-fubini}, $\lambda(\mathcal W_n) = \int \lambda(\mathcal V^X_n)\, dX \leq 2^{-n}$, and $A \oplus B \in \bigcap_n \mathcal W_n$.
 
 ($\Leftarrow$) Suppose $A \oplus B \in \bigcap_n \mathcal U_n$ for a Martin-Löf test $(\mathcal U_n)$, and $A$ random. For each $n$, let $\mathcal V^X_n = (\mathcal U_{2n})_X = \{ Y : X \oplus Y \in \mathcal U_{2n} \}$, and $\mathcal S_n = \{ X : \lambda(\mathcal V^X_n) > 2^{-n} \}$. The classes $\mathcal S_n$ are uniformly $\Sigma^0_1$, and $\lambda(\mathcal S_n) \leq 2^{-2n} / 2^{-n} = 2^{-n}$ by :ref{#fact-fubini}. So $(\mathcal S_n)$ is a Solovay test, and since $A$ is random, $A \notin \mathcal S_n$ for all $n \geq N$, for some $N$ (:ref{#thm-solovay}). For $n \geq N$, $\lambda(\mathcal V^A_n) \leq 2^{-n}$, so $(\mathcal V^A_{n+N})_n$ is a Martin-Löf test relative to $A$. It captures $B$, since $A \oplus B \in \mathcal U_{2n}$ for every $n$. So $B$ is not random relative to $A$.
 :::
 
-The theorem is symmetric in a non-obvious way: $A \oplus B$ is random if and only if $B \oplus A$ is, so $A$ is random and $B$ is $A$-random if and only if $B$ is random and $A$ is $B$-random. Random sequences are **mutually random** in this sense.
+The statement of the theorem is not symmetric in $A$ and $B$, but its consequences are: $A \oplus B$ is random if and only if $B \oplus A$ is (second exercise below), so $A$ is random and $B$ is $A$-random if and only if $B$ is random and $A$ is $B$-random. Two sequences $A$ and $B$ with this property, that is, such that $A \oplus B$ is random, are called **mutually random**.
 
 :::quiz[van Lambalgen's theorem]
 In the direction ($\Leftarrow$) of :ref{#thm-van-lambalgen}, why is the randomness of $A$ needed?
@@ -75,7 +77,7 @@ Why is $\mathcal U_{2n}$ used to define $\mathcal V^X_n$, rather than $\mathcal 
 
 ## 2-randomness
 
-The 2-random sequences avoid every null class that is effectively null relative to $\emptyset'$. They are much less powerful than arbitrary random sequences: by :ref{#cor-van-lambalgen} (2), a 2-random sequence does not compute $\emptyset'$, whereas $\Omega$ is random and computes it. Kurtz (1981) showed that every 2-random sequence has hyperimmune degree, and Kautz (1991) that every 2-random sequence $A$ satisfies $A' \equiv_T A \oplus \emptyset'$; we admit both results. Miller (2004) and Nies, Stephan and Terwijn (2005) characterized 2-randomness by plain complexity: $A$ is 2-random if and only if $C(A \uh n) \geq n - O(1)$ for infinitely many $n$.
+The 2-random sequences avoid every class captured by a Martin-Löf test relative to $\emptyset'$. They are computationally weaker than arbitrary random sequences: by :ref{#cor-van-lambalgen} (2), a 2-random sequence does not compute $\emptyset'$, whereas $\Omega$ is random and computes it. Kurtz (1981) showed that every 2-random sequence has hyperimmune degree, and Kautz (1991) that every 2-random sequence $A$ satisfies $A' \equiv_T A \oplus \emptyset'$; we admit both results. Miller (2004) and Nies, Stephan and Terwijn (2005) characterized 2-randomness by plain complexity: $A$ is 2-random if and only if $C(A \uh n) \geq n - O(1)$ for infinitely many $n$.
 
 ## Exercises
 
@@ -101,5 +103,6 @@ Van Lambalgen proved his theorem in his thesis (1987). The theorem fails for som
 
 - M. van Lambalgen, *Random sequences*, PhD thesis, University of Amsterdam, 1987.
 - S. A. Kurtz, *Randomness and genericity in the degrees of unsolvability*, PhD thesis, University of Illinois, 1981.
+- S. M. Kautz, *Degrees of random sets*, PhD thesis, Cornell University, 1991.
 - J. S. Miller, *Every 2-random real is Kolmogorov random*, Journal of Symbolic Logic 69 (2004), 907–913.
 - A. Nies, F. Stephan and S. A. Terwijn, *Randomness, relativization and Turing degrees*, Journal of Symbolic Logic 70 (2005), 515–535.
