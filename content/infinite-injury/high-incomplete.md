@@ -5,7 +5,7 @@ duration: 40
 prerequisites: [trees-of-strategies, arithmetic-hierarchy/index-sets, turing-degrees/low-and-high]
 ---
 
-A set $H$ is high if $H' \geq_T \emptyset''$. The course on oracles built a high set that does not compute $\emptyset'$ by finite extensions with oracle $\emptyset''$; that set is not c.e. Sacks proved in 1963 that there is a high **c.e.** set that is not complete. The strategies coding $\emptyset''$ into the jump of $H$ must enumerate infinitely many numbers into $H$ when they guess correctly that some $W_e$ is infinite, and the strategies keeping $H$ incomplete must survive these enumerations. In the minimal pair construction, the infinitary strategies enumerated nothing; here they act infinitely often, and the tree arranges that their actions avoid the computations protected below them.
+A set $H$ is high if $H' \geq_T \emptyset''$. The course on oracles built a high set that does not compute $\emptyset'$, by a forcing construction whose conditions fix finitely many columns to their limit values (:ref{#thm-high-cone-avoidance}); that set is not c.e. Sacks proved in 1963 that there is a high **c.e.** set that is not complete. The strategies coding $\emptyset''$ into the jump of $H$ must enumerate infinitely many numbers into $H$ when they guess correctly that some $W_e$ is infinite, and the strategies keeping $H$ incomplete must survive these enumerations. In the minimal pair construction, the infinitary strategies enumerated nothing; here they act infinitely often, and the tree arranges that their actions avoid the computations protected below them.
 
 :::theorem[Sacks]{#thm-high-incomplete}
 There are c.e. sets $H$ and $C$ such that $H$ is high and $C \not\leq_T H$.
@@ -23,7 +23,10 @@ Let $H$ and $C$ be as in the theorem. Since $H$ is c.e., $H \leq_T \emptyset'$, 
 
 Write $H^{[e]} = \{ y : \langle e, y \rangle \in H \}$ for the column $e$ of $H$. The requirements are
 $$
-\mathcal G_e : H^{[e]} \text{ is cofinite if } W_e \text{ is infinite, and finite if } W_e \text{ is finite}; \qquad \mathcal P_i : \Phi^H_i \neq C.
+\begin{gathered}
+\mathcal G_e : H^{[e]} \text{ is cofinite if } W_e \text{ is infinite, and finite if } W_e \text{ is finite}; \\
+\mathcal P_i : \Phi^H_i \neq C.
+\end{gathered}
 $$
 
 :::lemma{#lem-hi-coding-suffices}
@@ -70,7 +73,7 @@ Every requirement $\mathcal G_e$ holds.
 :::
 
 :::proof{of=lem-hi-coding}
-*$W_e$ finite.* Let $m = |W_e|$, and $s_0$ a stage with $|W_{e,s_0}| = m$. A $\mathcal G_e$-node is expansionary only when its record is less than $m$, and its record then becomes $m$. A record defined at a stage $s \geq s_0$ is equal to $m$. So after $s_0$, the only $\mathcal G_e$-nodes that can be expansionary are those visited before $s_0$ with a record defined before $s_0$ and kept since, and each of them is expansionary at most once after $s_0$. Finitely many nodes are visited before $s_0$, so there are finitely many expansionary stages of $\mathcal G_e$-nodes in total. Each of them enumerates finitely many numbers, and only these stages enumerate into the column $e$, which is therefore finite.
+*$W_e$ finite.* Let $m = |W_e|$, and $s_0$ a stage with $|W_{e,s_0}| = m$. Records never exceed $m$. A $\mathcal G_e$-node is expansionary at a stage $s \geq s_0$ only when its record is less than $m$, and its record then becomes $m$. A record defined at a stage $s \geq s_0$ is equal to $m$. So after $s_0$, the only $\mathcal G_e$-nodes that can be expansionary are those visited before $s_0$ with a record defined before $s_0$ and kept since, and each of them is expansionary at most once after $s_0$. Finitely many nodes are visited before $s_0$, so there are finitely many expansionary stages of $\mathcal G_e$-nodes in total. Each of them enumerates finitely many numbers, and only these stages enumerate into the column $e$, which is therefore finite.
 
 *$W_e$ infinite.* Let $\alpha = P \uh 2e$. By :ref{#lem-hi-true-path}, let $s_1$ be a stage after which $\alpha$ is never initialized and no stage satisfies $\sigma_s <_L \alpha$. After $s_1$, the record of $\alpha$ is defined at the first visit, and since $|W_{e,s}| \to \infty$ and $\alpha$ is visited infinitely often, there are infinitely many $\alpha$-expansionary stages.
 
@@ -121,15 +124,15 @@ In case 4 of the proof of :ref{#lem-hi-preservation}, why does $\alpha$ not enum
 
 ---
 
-Why does a $\mathcal G_e$-node only become expansionary when $W_e$ has grown beyond its record, rather than whenever $W_e$ has grown since its last visit?
+Why is the first visit of a $\mathcal G_e$-node after an initialization not expansionary, unlike the first visit of an $\mathcal N$-node in the minimal pair construction?
 
-- [x] So that, when $W_e$ is finite, the infinitely many $\mathcal G_e$-nodes of the tree are expansionary only finitely often in total: a node whose record is set after $W_e$ has stopped growing is never expansionary.
+- [x] Because a $\mathcal G_e$-node may be initialized and visited again infinitely often; if each such first visit were expansionary, it could enumerate numbers into the column $e$ at infinitely many stages, and make the column infinite even when $W_e$ is finite. With records, a node whose record is set after $W_e$ has stopped growing is never expansionary.
 - [ ] To make the construction computable.
 
-  Both definitions are computable.
+  Both versions are computable.
 - [ ] So that the column $e$ is cofinite when $W_e$ is infinite.
 
-  Cofiniteness only uses the node on the true path, for which both definitions give infinitely many expansionary stages.
+  Cofiniteness only uses the node on the true path, which has infinitely many expansionary stages in both versions.
 
 ---
 
@@ -150,7 +153,7 @@ The c.e. degrees have been studied intensively with these methods and their elab
 
 - **Density** (Sacks, 1964). Between any two c.e. degrees $\abf < \bbf$ there is a c.e. degree $\cbf$ with $\abf < \cbf < \bbf$. The proof combines the Sacks preservation strategy with coding, in an infinite injury argument.
 - **No diamond with top $\mathbf 0'$** (Lachlan, 1966). There are no c.e. degrees $\abf$ and $\bbf$ forming a minimal pair with $\abf \vee \bbf = \mathbf 0'$.
-- **Cappable degrees** (Ambos-Spies, Jockusch, Shore, Soare, 1984). A non-zero c.e. degree is **cappable** if it belongs to a minimal pair of c.e. degrees. A co-infinite c.e. set $A$ is **promptly simple** if there are a c.e. approximation $(A_s)$ and a computable function $p$ such that, for every $e$ with $W_e$ infinite, some $x$ enters $W_e$ at a stage $s$ and belongs to $A_{p(s)}$. A non-zero c.e. degree is non-cappable if and only if it contains a promptly simple set. The non-cappable degrees form a filter, and the cappable degrees an ideal, of the c.e. degrees.
+- **Cappable degrees** (Ambos-Spies, Jockusch, Shore, Soare, 1984). A non-zero c.e. degree is **cappable** if it belongs to a minimal pair of c.e. degrees. A co-infinite c.e. set $A$ is **promptly simple** if there are a c.e. approximation $(A_s)$ and a computable function $p$ such that, for every $e$ with $W_e$ infinite, some $x$ enters $W_e$ at a stage $s$ and belongs to $A_{p(s)}$. A non-zero c.e. degree is non-cappable if and only if it contains a promptly simple set. The non-cappable degrees form a filter of the c.e. degrees, and the cappable degrees, together with $\obf$, form an ideal.
 
 ## Exercises
 

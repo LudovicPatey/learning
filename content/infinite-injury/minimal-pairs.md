@@ -13,7 +13,7 @@ The Friedberg–Muchnik theorem gives two c.e. degrees that are incomparable. Th
 Two degrees $\abf, \bbf > \obf$ form a **minimal pair** if every degree $\cbf$ with $\cbf \leq \abf$ and $\cbf \leq \bbf$ is $\obf$. Equivalently, every set computable both in a set of degree $\abf$ and in a set of degree $\bbf$ is computable.
 :::
 
-By Spector's theorem on exact pairs, the Turing degrees do not form a lattice, but the two degrees of a minimal pair have a meet, namely $\obf$. The difficulty of the theorem below is that both degrees must be c.e.
+The Turing degrees do not form a lattice (:ref{#cor-not-lattice}), but the two degrees of a minimal pair have a meet, namely $\obf$. The difficulty of the theorem below is that both degrees must be c.e.
 
 :::theorem[Lachlan, Yates]{#thm-minimal-pair}
 There are c.e. sets $A$ and $B$ whose degrees form a minimal pair.
@@ -21,7 +21,10 @@ There are c.e. sets $A$ and $B$ whose degrees form a minimal pair.
 
 The proof occupies this lesson and the next. The requirements are
 $$
-\mathcal R_e : W_e \neq \overline A, \qquad \mathcal S_e : W_e \neq \overline B, \qquad \mathcal N_e : \Phi^A_e = \Phi^B_e \text{ total} \implies \Phi^A_e \text{ computable}.
+\begin{gathered}
+\mathcal R_e : W_e \neq \overline A, \qquad \mathcal S_e : W_e \neq \overline B, \\
+\mathcal N_e : \Phi^A_e = \Phi^B_e \text{ total} \implies \Phi^A_e \text{ computable}.
+\end{gathered}
 $$
 The requirements $\mathcal R_e$ and $\mathcal S_e$ make $A$ and $B$ non-computable, as in the construction of a simple set: $\overline A$ is not c.e. The requirements $\mathcal N_e$ concern a single index $e$ for both oracles. The reason this suffices is the following observation.
 
@@ -103,7 +106,7 @@ In the proof of :ref{#lem-pair-module}, why does the value on the side that chan
 
 ---
 
-Why is condition 2 required at every pair of consecutive stages, and not only for the side that is restrained at the start?
+Why must condition 2 hold between every two consecutive stages of the sequence, and not only between some of them?
 
 - [x] Because the chain of equalities passes from one side to the other at each step: if both sides changed below $s_{j-1}$ between $s_{j-1}$ and $s_j$, both computations could change their values while still agreeing with each other.
 
@@ -138,7 +141,7 @@ Why must the version of $\mathcal R_d$ guessing the outcome $\mathrm f$ choose f
 - [x] So that its enumerations between two expansionary stages are above the uses of the computations examined at the earlier one, and do not count against condition 2 of :ref{#lem-pair-module}.
 - [ ] So that $\mathcal R_d$ is met.
 
-  Any follower outside $A$ would meet $\mathcal R_d$ once enumerated or once it fails to appear in $W_d$; the size matters for $\mathcal N_e$.
+  Any follower serves $\mathcal R_d$: either it appears in $W_d$ and is enumerated into $A$, or it never appears in $W_d$ and stays outside $A$. The size matters for $\mathcal N_e$.
 - [ ] Because followers must be fresh in every priority argument.
 
   Freshness is a tool; here its purpose is precisely to protect the computations seen by $\mathcal N_e$.
@@ -170,7 +173,7 @@ If $\abf \leq \bbf$, then $\abf$ is a common lower bound of $\abf$ and $\bbf$, s
 Replace condition 2 of :ref{#lem-pair-module} by the stronger condition $B_t \uh s_k = B_{s_k} \uh s_k$ for every $t \geq s_k$ and every $k$, which corresponds to a permanent restraint on $B$ at expansionary stages. Show that the conclusion of the lemma still holds, and that $B$ is then computable. Explain why this rules out a strategy for $\mathcal N_e$ that always restrains the same side.
 
 :::solution
-The stronger condition implies condition 2 with $X = B$, so the lemma applies. Since $l(e, s_k) \geq k$ and $l(e, s_k) \leq s_k$, the stages $s_k$ tend to infinity. For every $x$, choose $k$ with $s_k > x$; then $B(x) = B_{s_k}(x)$, since $B$ does not change below $s_k$ after stage $s_k$. The sequence $(s_k)$ is computable, so $B$ is computable. In the construction, if $\mathcal N_e$ has outcome $\infty$ and always restrains $B$, the requirements $\mathcal S_d$ of lower priority can only enumerate finitely many elements below each $s_k$, and in fact none after $s_k$; $B$ would be computable, so some $\mathcal S_d$ would fail. The outcome $\infty$ does occur, for instance for an index $e$ such that $\Phi^X_e$ is the constant function $0$ for every oracle $X$.
+The stronger condition implies condition 2 with $X = B$, so the lemma applies. Since $l(e, s_k) \geq k$ and $l(e, s_k) \leq s_k$, the stages $s_k$ tend to infinity. For every $x$, choose $k$ with $s_k > x$; then $B(x) = B_{s_k}(x)$, since $B$ does not change below $s_k$ after stage $s_k$. The sequence $(s_k)$ is computable, so $B$ is computable. In the construction, if $\mathcal N_e$ has outcome $\infty$ and always restrains $B$, no requirement $\mathcal S_d$ of lower priority could enumerate a number below $s_k$ after stage $s_k$; $B$ would be computable, so some $\mathcal S_d$ would fail. The outcome $\infty$ does occur, for instance for an index $e$ such that $\Phi^X_e$ is the constant function $0$ for every oracle $X$.
 :::
 ::::
 
