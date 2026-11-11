@@ -104,7 +104,7 @@ Question?
 :::
 ```
 
-Figures: inline SVG inside `:::figure[caption]` (no blank lines inside the SVG). Use the `fig` class on `<svg>` and the classes `cell`, `head-cell`, `state`, `node`, `accent-fill`, `accent-stroke`, `ink-stroke`, `muted-stroke`, `math` (KaTeX italic font), `mrm` (KaTeX roman), `label` — never hard-coded colors — so that figures work in dark mode. Markers need unique ids per figure.
+Figures: inline SVG inside `:::figure[caption]` (no blank lines inside the SVG). Use the `fig` class on `<svg>` and the classes `cell`, `head-cell`, `state`, `node`, `accent-fill`, `soft-fill`, `muted-fill`, `accent-stroke`, `ink-stroke`, `muted-stroke`, `math` (KaTeX italic font), `mrm` (KaTeX roman), `label` — never hard-coded colors — so that figures work in dark mode. Markers need unique ids per figure.
 
 Kinds: `definition theorem lemma proposition corollary fact example remark notation exercise question conjecture` (numbered), `proof solution hint aside figure quiz`. Nest a solution in an exercise with a four-colon outer fence (`::::exercise`). Long displayed formulas must be split with `aligned` or `gathered` so they fit the measure.
 
