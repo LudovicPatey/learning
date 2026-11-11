@@ -60,7 +60,7 @@ The diagonal function $g(n) = f_n(n) + 1$ of :ref{#ex-diagonal-instances} is def
 A sequence $(f_e)_{e \in \nat}$ of total functions $\nat \to \nat$ is **uniformly computable** if the function $(e, x) \mapsto f_e(x)$ is computable. A sequence of sets is uniformly computable if the sequence of their characteristic functions is.
 :::
 
-Each function of a uniformly computable sequence is computable, but the converse fails: being uniformly computable means that a single algorithm computes $f_e(x)$ from $e$ and $x$, not only that each $f_e$ has an algorithm of its own.
+Each function of a uniformly computable sequence is computable, but the converse fails: being uniformly computable means that a single algorithm computes $f_e(x)$ from $e$ and $x$, not only that each $f_e$ has an algorithm of its own. For instance, let $f_e$ be the constant function with value $1$ if $e \in \emptyset'$ and $0$ otherwise, where $\emptyset'$ is the halting set of :ref{#cor-halting-diagonal} below. Each $f_e$ is constant, hence computable, but $e \mapsto f_e(0)$ is the characteristic function of $\emptyset'$, which is not computable.
 
 :::theorem{#thm-effective-diagonal}
 If $(f_e)$ is a uniformly computable sequence of total functions, then the function $g(n) = f_n(n) + 1$ is total computable and differs from every $f_e$. Consequently, there is no uniformly computable sequence containing all total computable functions.
@@ -70,7 +70,7 @@ If $(f_e)$ is a uniformly computable sequence of total functions, then the funct
 The function $g$ is obtained by composing the computable function $(e, x) \mapsto f_e(x)$ with $n \mapsto (n, n)$ and with the successor, so it is computable; it is total since each $f_e$ is. It differs from every $f_e$ by :ref{#prop-diagonal-general}. If a uniformly computable sequence contained all total computable functions, it would contain $g$.
 :::
 
-The primitive recursive functions form a uniformly computable sequence $(f_e)$: enumerate the derivations and evaluate them. This is the content of :ref{#thm-pr-diagonal}, which therefore yields a total computable function that is not primitive recursive. The theorem shows that the total computable functions themselves cannot be enumerated in this way. The obstacle is identified by the following consequence.
+The primitive recursive functions form a uniformly computable sequence $(f_e)$: enumerate the derivations and evaluate them. This is the argument of :ref{#thm-pr-diagonal}, which yields a total computable function that is not primitive recursive. The theorem shows that the total computable functions themselves cannot be enumerated in this way. The obstacle is identified by the following consequence.
 
 :::corollary{#cor-tot-not-computable}
 The set $\mathrm{Tot} = \{ e \in \nat : \Phi_e \text{ is total} \}$ is not computable.
@@ -199,7 +199,7 @@ For every sequence $(X_n)$ in $\cs$, there is $Y \in \cs$ that differs from ever
 :::proof{of=prop-infinitely-different}
 For $e = \langle n, k \rangle$, let $R_e$ be the requirement "$Y(m) \neq X_n(m)$ for some $m \geq k$". Given $\sigma$, extend it by zeros to a string $\sigma'$ of length at least $k$, and let $\tau = \sigma' i$ with $i = 1 - X_n(|\sigma'|)$; every $Y \succ \tau$ differs from $X_n$ at the position $|\sigma'| \geq k$. By :ref{#lem-finite-extension}, some $Y$ satisfies all $R_{\langle n, k \rangle}$, that is, differs from each $X_n$ beyond every $k$.
 
-If $(X_n)$ is uniformly computable, use the explicit extension above instead of a search in an enumeration: $\sigma_{e+1}$ is obtained from $\sigma_e$ by padding with zeros to length $k$ and appending one bit, all computable from $\sigma_e$ and $e = \langle n, k \rangle$. Then $e \mapsto \sigma_e$ is computable, and so is $Y$, since $Y(m)$ is the $m$-th bit of $\sigma_{m+1}$, which has length at least $m + 1$.
+If $(X_n)$ is uniformly computable, use the explicit extension above instead of a search in an enumeration: $\sigma_{e+1}$ is obtained from $\sigma_e$ by padding with zeros to length $\max(k, |\sigma_e|)$ and appending the bit $1 - X_n(\ell)$, where $\ell = \max(k, |\sigma_e|)$; both steps are computable from $\sigma_e$ and $e = \langle n, k \rangle$. Then $e \mapsto \sigma_e$ is computable, and so is $Y$, since $Y(m)$ is the $m$-th bit of $\sigma_{m+1}$, which has length at least $m + 1$.
 :::
 
 The requirements of this proposition never interfere: once a requirement is satisfied, it remains satisfied whatever is done afterwards. Requirements of this kind can be handled one after the other, by finite extensions. The method was introduced by Kleene and Post to build Turing degrees with prescribed properties, and it is the elementary case of **forcing**. When requirements conflict, so that satisfying one may later injure another, one needs the **priority method**, which is the main technique of the theory of computably enumerable sets.
@@ -259,7 +259,7 @@ Let $S$ be computable, and let $c$ be a code of its characteristic function, so 
 ::::
 
 ::::exercise{difficulty=2}
-Using :ref{#prop-ce-range}, show that $\mathrm{Tot}$ is not even computably enumerable.
+Using :ref{#prop-ce-range} of the course on fundamentals, where computably enumerable sets are defined, show that $\mathrm{Tot}$ is not even computably enumerable.
 
 :::solution
 $\mathrm{Tot}$ is infinite. If it were computably enumerable, there would be an injective total computable $f$ with $f(\nat) = \mathrm{Tot}$. Then $f_n(x) = \Phi(f(n), x)$ defines a uniformly computable sequence of total functions containing every total computable function, contradicting :ref{#thm-effective-diagonal}. The proof of :ref{#cor-tot-not-computable} is the special case where $f$ is the principal function.
@@ -270,11 +270,11 @@ $\mathrm{Tot}$ is infinite. If it were computably enumerable, there would be an 
 Show that there is a set $Y$ such that neither $Y$ nor its complement contains an infinite computable set.
 
 :::hint
-For each $e$ such that $\Phi_e$ is the characteristic function of an infinite set $W$, the requirement is: $W \not\subseteq Y$ and $W \not\subseteq \nat \setminus Y$. Satisfy it by a finite extension.
+For each infinite computable set $C$, the requirement is: $C \not\subseteq Y$ and $C \not\subseteq \nat \setminus Y$. Satisfy it by a finite extension.
 :::
 
 :::solution
-The infinite computable sets form a countably infinite set, by :ref{#prop-countably-many-computable}; let $W_0, W_1, \dots$ be an enumeration of them. Requirement $R_{2n}$: $Y(m) = 0$ for some $m \in W_n$; requirement $R_{2n+1}$: $Y(m) = 1$ for some $m \in W_n$. Given $\sigma$, since $W_n$ is infinite there is $m \in W_n$ with $m \geq |\sigma|$; extend $\sigma$ by zeros to length $m$, then append the required bit. Every $Y$ extending the result satisfies the requirement. By :ref{#lem-finite-extension}, some $Y$ satisfies all requirements: each infinite computable set meets both $Y$ and its complement, so it is contained in neither. Such a set is called **bi-immune**.
+The infinite computable sets form a countably infinite set, by :ref{#prop-countably-many-computable} and :ref{#cor-subset-countable} (it contains the sets $\nat \setminus \underline n$); let $C_0, C_1, \dots$ be an enumeration of them. Requirement $R_{2n}$: $Y(m) = 0$ for some $m \in C_n$; requirement $R_{2n+1}$: $Y(m) = 1$ for some $m \in C_n$. Given $\sigma$, since $C_n$ is infinite there is $m \in C_n$ with $m \geq |\sigma|$; extend $\sigma$ by zeros to length $m$, then append the required bit. Every $Y$ extending the result satisfies the requirement. By :ref{#lem-finite-extension}, some $Y$ satisfies all requirements: each infinite computable set meets both $Y$ and its complement, so it is contained in neither. Such a set is called **bi-immune**.
 :::
 ::::
 

@@ -54,9 +54,9 @@ Why is the separator $0$ needed in the coding $c(f)$ of :ref{#prop-baire-cantor}
 - [x] Without separators, $1^{f(0)} 1^{f(1)} \cdots$ is $111\cdots$ for every $f$ with infinitely many non-zero values, so the coding would not be injective.
 
   The zeros mark where each value ends.
-- [ ] To make $c(f)$ an infinite sequence.
+- [ ] To make $c(f)$ contain infinitely many ones.
 
-  $c(f)$ would be infinite without separators as soon as $f$ has infinitely many non-zero values; the problem is injectivity.
+  It need not: for the zero function, $c(f) = 000\cdots$. The separators give infinitely many zeros, not ones.
 - [ ] To make $c$ surjective.
 
   The coding with separators is not surjective either: sequences with finitely many zeros are missed.
@@ -83,7 +83,7 @@ The sets $\cs$, $\mathcal P(\nat)$, $\nat^\nat$, $[0, 1]$ and $\mathbb R$ are pa
 :::
 
 :::proof{of=thm-continuum}
-We have $|\mathcal P(\nat)| = |\cs|$ by characteristic functions, $|\nat^\nat| = |\cs|$ by :ref{#prop-baire-cantor}, and $[0,1)$, $[0,1]$ and $\mathbb R$ are pairwise equipotent by an exercise of the lesson on the Cantor–Bernstein theorem. It remains to show $|\cs| = |[0, 1)|$, and we give two injections.
+We have $|\mathcal P(\nat)| = |\cs|$ by characteristic functions, $|\nat^\nat| = |\cs|$ by :ref{#prop-baire-cantor}, and $[0,1)$, $[0,1]$ and $\mathbb R$ are pairwise equipotent by :ref{#ex-intervals-equipotent}. It remains to show $|\cs| = |[0, 1)|$, and we give two injections.
 
 *From $\cs$ to $[0, 1)$.* Let $t(X) = \sum_{n} X(n)\, 3^{-(n+1)}$, which lies in $[0, \tfrac12]$. If $X \neq Y$, let $n$ be the least position where they differ, say $X(n) = 0$ and $Y(n) = 1$. Then
 $$
@@ -120,7 +120,7 @@ $|\mathbb R \times \mathbb R| = |\mathbb R^\nat| = |\mathbb R|$, and $|\mathbb C
 Fix a bijection $\beta : \mathbb R \to \cs$, given by the theorem. Then $(x, y) \mapsto \beta(x) \oplus \beta(y)$ and $(x_n)_n \mapsto \bigoplus_n \beta(x_n)$ are bijections onto $\cs$, by :ref{#prop-cantor-powers}. Finally $\mathbb C$ is in bijection with $\mathbb R \times \mathbb R$.
 :::
 
-Cantor found this result in 1877, and wrote to Dedekind that he could see it but did not believe it: the plane has no more points than the line. The bijection cannot be continuous, as dimension theory shows, but cardinality ignores topology.
+Cantor found this result in 1877, and wrote to Dedekind that he could see it but did not believe it: the plane has no more points than the line. No such bijection is a homeomorphism, by Brouwer's theorem on the invariance of dimension (1911), which we admit; cardinality ignores topology.
 
 ## Removing a countable set
 
@@ -224,4 +224,5 @@ The equipotence of the line and the plane is in Cantor's paper of 1878, after an
 - K. Gödel, *The consistency of the axiom of choice and of the generalized continuum-hypothesis*, Proceedings of the National Academy of Sciences 24 (1938), 556–557.
 - P. J. Cohen, *The independence of the continuum hypothesis*, Proceedings of the National Academy of Sciences 50 (1963), 1143–1148.
 - K. Kunen, *Set Theory: An Introduction to Independence Proofs*, North-Holland, 1980.
+- T. Jech, *Set Theory*, 3rd millennium edition, Springer, 2003.
 - A. S. Kechris, *Classical Descriptive Set Theory*, Graduate Texts in Mathematics 156, Springer, 1995.

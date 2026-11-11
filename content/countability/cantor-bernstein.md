@@ -79,7 +79,7 @@ In the surjectivity part, why is $y \in C$ in some $C_{m+1}$ rather than in $C_0
   No surjectivity of $f$ is assumed.
 - [ ] Because the sets $C_n$ are increasing.
 
-  They are not increasing; they are pairwise disjoint.
+  They need not be increasing: they are pairwise disjoint (see the exercises), and the proof uses no monotonicity.
 :::
 
 :::example{#ex-cb-interval}
@@ -87,7 +87,7 @@ Let $A = [0, 1]$, $B = [0, 1) \subseteq A$ and $f(x) = x/2$, an injection of $A$
 $$
 h(x) = \begin{cases} x / 2 & \text{if } x = 2^{-n} \text{ for some } n \in \nat,\\ x & \text{otherwise.} \end{cases}
 $$
-It shifts the sequence $1, \tfrac12, \tfrac14, \dots$ by one step, which frees the point $1$, and fixes every other point. This is the device of the first exercise of the previous lesson, applied to a copy of $\nat$ inside $[0, 1]$.
+It shifts the sequence $1, \tfrac12, \tfrac14, \dots$ by one step, which frees the point $1$, and fixes every other point. This is the device of :ref{#ex-add-point}, applied to a copy of $\nat$ inside $[0, 1]$.
 :::
 
 ## The theorem
@@ -180,7 +180,7 @@ Let $A = B = \nat$, $f(n) = n + 1$ and $g(n) = n + 1$. What is $\varphi$?
 
 The proof of Cantor–Bernstein uses only definitions by induction and set formation: it is a theorem of ZF, set theory without the axiom of choice. Two related statements behave differently.
 
-- *Surjections in both directions.* If there are surjections $A \to B$ and $B \to A$, are $A$ and $B$ equipotent? With the axiom of choice, yes: each surjection has a right inverse, which is an injection in the opposite direction (:ref{#rem-right-inverse-choice}), and Cantor–Bernstein applies. Without choice, this is not provable in ZF.
+- *Surjections in both directions.* If there are surjections $A \to B$ and $B \to A$, are $A$ and $B$ equipotent? With the axiom of choice, yes: each surjection has a right inverse, which is an injection in the opposite direction (:ref{#rem-right-inverse-choice}), and Cantor–Bernstein applies. Without choice, this is not provable in ZF, if ZF is consistent; we admit this independence result (see Jech's monograph on the axiom of choice).
 - *Comparability.* For any two sets $A$ and $B$, is $|A| \leq |B|$ or $|B| \leq |A|$? Zermelo's well-ordering theorem shows that this follows from the axiom of choice, and Hartogs showed in 1915 that, conversely, comparability implies the axiom of choice. We admit both results.
 
 In this course, the sets compared are mostly sets of integers, finite objects, sequences and real numbers, for which explicit injections are available, and no use of choice is needed except where stated.
@@ -195,11 +195,11 @@ The map $n \mapsto (n, 0)$ is an injection $\nat \to \nat \times \nat$. Converse
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-intervals-equipotent difficulty=1}
 Show that $[0, 1]$, $[0, 1)$, $(0, 1)$ and $\mathbb R$ are pairwise equipotent.
 
 :::solution
-We have $(0, 1) \subseteq [0, 1) \subseteq [0, 1] \subseteq \mathbb R$, and $|(0, 1)| = |\mathbb R|$ by the example of the previous lesson. By the second part of :ref{#cor-mutually-subpotent}, applied twice, all four sets are equipotent.
+We have $(0, 1) \subseteq [0, 1) \subseteq [0, 1] \subseteq \mathbb R$, and $|(0, 1)| = |\mathbb R|$ by :ref{#ex-equipotent-sets}. By the second part of :ref{#cor-mutually-subpotent}, applied twice, all four sets are equipotent.
 :::
 ::::
 

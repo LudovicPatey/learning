@@ -48,7 +48,7 @@ Why is $Y$ made to differ from $X_n$ at position $n$, rather than at a single po
   Every entry $X_n(m)$ is defined.
 - [ ] It does not matter; any fixed position would do.
 
-  A single bit can only defeat the rows that agree at that position.
+  A single bit $Y(k)$ differs only from the rows $X_m$ with $X_m(k) \neq Y(k)$; the rows that agree with $Y$ at position $k$ are not defeated.
 
 ---
 
@@ -105,7 +105,7 @@ If there is a surjection from $A$ onto $B^A$, then every function $\delta : B \t
 Let $e \mapsto F_e$ be a surjection from $A$ onto $B^A$, and let $F(e, a) = F_e(a)$. If $\delta$ had no fixed point, the function $g$ of :ref{#prop-diagonal-general} would differ from every $F_e$, contradicting surjectivity.
 :::
 
-If $B$ has at least two elements $b_0 \neq b_1$, the map exchanging $b_0$ and $b_1$ and fixing every other element has no fixed point, so there is no surjection from $A$ onto $B^A$. The fixed point form is not a curiosity: Kleene's fixed point theorem in the course on fundamentals (:ref{#thm-fixed-point}) has the same structure, with a numbering of partial computable functions in place of the surjection, and with the conclusion that every computable transformation of programs has a fixed point.
+If $B$ has at least two elements $b_0 \neq b_1$, the map exchanging $b_0$ and $b_1$ and fixing every other element has no fixed point, so there is no surjection from $A$ onto $B^A$. The fixed point form is not a curiosity: Kleene's fixed point theorem in the course on fundamentals (:ref{#thm-fixed-point}) has the same structure, with a numbering of partial computable functions in place of the surjection, and with the conclusion that every total computable transformation $f$ of programs has a fixed point up to the function computed: $\Phi_{f(e)} = \Phi_e$ for some $e$.
 
 :::example{#ex-diagonal-instances}
 1. $A = \nat$, $B = \{0, 1\}$, $\delta(b) = 1 - b$, and $F(n, m) = X_n(m)$ gives :ref{#thm-cantor-diagonal}.
@@ -195,7 +195,7 @@ The diagonal argument gives a short proof of Cantor's first uncountability theor
 $$
 d_k(x) = \lfloor 10^k x \rfloor - 10 \lfloor 10^{k-1} x \rfloor \in \{0, 1, \dots, 9\}
 $$
-be the $k$-th decimal digit of $x$, in the expansion that does not end with infinitely many $9$s.
+be the $k$-th decimal digit of the fractional part $x - \lfloor x \rfloor$, in the expansion that does not end with infinitely many $9$s.
 
 :::theorem[Cantor]{#thm-reals-uncountable}
 The set $\mathbb R$ is uncountable: for every sequence $(x_n)_{n \in \nat}$ of real numbers, the number
@@ -206,7 +206,7 @@ is different from every $x_n$.
 :::
 
 :::proof{of=thm-reals-uncountable}
-We first show $d_{k}(r) = c_{k-1}$ for every $k \geq 1$. Write
+We first show $d_{k}(r) = c_{k-1}$ for every $k \geq 1$. For every $k \geq 0$, write
 $$
 10^k r = \sum_{n < k} c_n \, 10^{k-1-n} + t_k, \qquad t_k = \sum_{n \geq k} c_n \, 10^{k-1-n}.
 $$
@@ -215,12 +215,12 @@ The first sum is an integer $N_k$, and since every $c_n$ lies in $\{4, 5\}$, the
 Now if $r = x_n$, then $d_{n+1}(x_n) = d_{n+1}(r) = c_n$, which contradicts the definition of $c_n$, chosen different from $d_{n+1}(x_n)$.
 :::
 
-The digits $4$ and $5$ are chosen so that $r$ has a unique decimal expansion: an expansion of $r$ ending with $0$s or $9$s cannot arise. With the digits $0$ and $1$ instead, the argument could produce $r = 0.0999\cdots$ while the list contains $0.1$, written $0.1000\cdots$.
+The digits $4$ and $5$ are chosen so that the tail $t_k$ stays below $1$, which makes $0.c_0c_1c_2\cdots$ the expansion of $r$ that does not end with $9$s; any two digits other than $9$ would do as well. The digit $9$ must be avoided: a rule that only requires $c_n \neq d_{n+1}(x_n)$ could produce $c_0 = 0$ and $c_n = 9$ for all $n \geq 1$, so that $r = 0.0999\cdots = 0.1$, while $x_0 = 0.1$ has $d_1(x_0) = 1 \neq c_0$.
 
 :::quiz[the uncountability of the reals]
 In the proof, where is it used that $c_n \in \{4, 5\}$, rather than merely $c_n \neq d_{n+1}(x_n)$?
 
-- [x] To get $0 < t_k < 1$, so that $\lfloor 10^k r \rfloor$ is the integer formed by the first $k$ digits $c_0, \dots, c_{k-1}$.
+- [x] To get $t_k < 1$, so that $\lfloor 10^k r \rfloor$ is the integer formed by the first $k$ digits $c_0, \dots, c_{k-1}$.
 
   With arbitrary digits, $t_k$ could equal $1$ (for digits all equal to $9$), and the digits $d_k(r)$ would no longer be the $c_{k-1}$.
 - [ ] To ensure $r \in (0, 1)$.

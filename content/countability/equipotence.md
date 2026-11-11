@@ -99,7 +99,7 @@ Which of these functions show that $\nat$ and the set $E = \{0, 2, 4, \dots\}$ a
   It is the inverse of $n \mapsto 2n$, hence a bijection. A bijection in either direction suffices, by symmetry.
 - [ ] $n \mapsto 4n$, from $\nat$ to $E$.
 
-  It is injective but not surjective, since $2 \neq 4n$ for every $n$. It only shows that $E$ is at least as large as $\nat$, in the sense of the last section.
+  It is injective but not surjective, since $2 \neq 4n$ for every $n$. It only shows that $E$ is at least as large as $\nat$, in the sense of :ref{#def-subpotent}.
 :::
 
 ## Finite sets
@@ -207,7 +207,7 @@ For arbitrary $A$, the same statement holds under the axiom of choice (:ref{#rem
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-add-point difficulty=1}
 Let $b \notin A$. Show that if $|\nat| \leq |A|$, then $|A \cup \{b\}| = |A|$.
 
 :::solution
@@ -215,7 +215,7 @@ Let $i : \nat \to A$ be an injection. Define $h : A \cup \{b\} \to A$ by $h(b) =
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-subset-finite difficulty=1}
 Show that every subset of a finite set is finite.
 
 :::solution

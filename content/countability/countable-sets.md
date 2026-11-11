@@ -24,7 +24,7 @@ is a strictly increasing bijection, which enumerates $S$ in increasing order.
 :::
 
 :::proof{of=lem-subsets-of-n}
-The minima exist. Indeed $S \neq \emptyset$; and if $S$ had no element greater than $p_S(n)$, then $S \subseteq \underline{p_S(n) + 1}$ would be finite, as a subset of a finite set (see the exercises of the first lesson). By construction $p_S$ is strictly increasing, hence injective, and by induction $p_S(n) \geq n$ for all $n$.
+The minima exist. Indeed $S \neq \emptyset$; and if $S$ had no element greater than $p_S(n)$, then $S \subseteq \underline{p_S(n) + 1}$ would be finite, as a subset of a finite set (:ref{#ex-subset-finite}). By construction $p_S$ is strictly increasing, hence injective, and by induction $p_S(n) \geq n$ for all $n$.
 
 For surjectivity, let $s \in S$. The values $p_S(0) < p_S(1) < \dots$ are unbounded since $p_S(n) \geq n$, so there is a least $n$ with $p_S(n) \geq s$. If $n = 0$, then $s \geq \min S = p_S(0)$ gives $s = p_S(0)$. If $n > 0$, then $p_S(n-1) < s \leq p_S(n)$, and $p_S(n)$ is by definition the least element of $S$ above $p_S(n-1)$, so $p_S(n) \leq s$, hence $s = p_S(n)$.
 :::
@@ -56,7 +56,7 @@ Characterization 3 is the one used most often: a non-empty set is countable when
 
 :::proof{of=cor-subset-countable}
 1. If $B \subseteq A$ and $i : A \to \nat$ is injective, the restriction of $i$ to $B$ is injective.
-2. If $A$ is countable and non-empty and $s : \nat \to A$ is surjective, then $f \circ s$ is a surjection from $\nat$ onto $f(A)$.
+2. Let $f$ be a function defined on a countable set $A$. If $A = \emptyset$, then $f(A) = \emptyset$. Otherwise, if $s : \nat \to A$ is surjective, then $f \circ s$ is a surjection from $\nat$ onto $f(A)$.
 :::
 
 :::quiz[the principal function of a set of integers]
@@ -97,7 +97,7 @@ Every infinite set $A$ satisfies $|\nat| \leq |A|$.
 We define an injection $a : \nat \to A$ by induction. Pick $a_0 \in A$, which exists since $\emptyset$ is finite. Having chosen pairwise distinct $a_0, \dots, a_n$, the set $\{a_0, \dots, a_n\}$ is finite, so it is not $A$; pick $a_{n+1} \in A \setminus \{a_0, \dots, a_n\}$. The elements $a_n$ are pairwise distinct by construction.
 :::
 
-This proof makes infinitely many arbitrary choices, one at each step, each depending on the previous ones. It uses the **axiom of dependent choice**, a weak form of the axiom of choice, and cannot be carried out in ZF alone: it is consistent with ZF that some infinite set of real numbers has no countably infinite subset. When $A$ comes with an injection into $\nat$ or with a linear order in which every non-empty subset has a least element, one can take $a_{n+1}$ to be the least element of $A \setminus \{a_0, \dots, a_n\}$, and no choice is needed; this is what :ref{#lem-subsets-of-n} does.
+This proof makes infinitely many arbitrary choices, one at each step, each depending on the previous ones. It uses the **axiom of dependent choice**, a weak form of the axiom of choice, and cannot be carried out in ZF alone: it is consistent with ZF that some infinite set of real numbers has no countably infinite subset (we admit this result of Cohen; a proof is in Jech's monograph on the axiom of choice). When $A$ comes with an injection into $\nat$ or with a linear order in which every non-empty subset has a least element, one can take $a_{n+1}$ to be the least element of $A \setminus \{a_0, \dots, a_n\}$, and no choice is needed; this is what :ref{#lem-subsets-of-n} does.
 
 :::corollary{#cor-countably-infinite-minimal}
 An infinite set is countable if and only if it is equipotent to each of its infinite subsets.
@@ -183,7 +183,7 @@ Let $(A_n)_{n \in \nat}$ be a sequence of sets, and let $(s_n)_{n \in \nat}$ be 
 :::
 
 :::proof{of=prop-countable-union}
-The map $\langle n, m \rangle \mapsto s_n(m)$ is a surjection from $\nat$ onto $\bigcup_n A_n$: every element of $A_n$ is some $s_n(m)$. For a finite union $A_0 \cup \dots \cup A_k$ of non-empty countable sets, fix surjections $s_0, \dots, s_k$ and let $s_n = s_k$ for $n > k$; the empty sets can be discarded.
+The map $\langle n, m \rangle \mapsto s_n(m)$ is a surjection from $\nat$ onto $\bigcup_n A_n$: every element of $A_n$ is some $s_n(m)$. For a finite union $A_0 \cup \dots \cup A_k$ of non-empty countable sets, fix surjections $s_0, \dots, s_k$ and let $A_n = A_k$ and $s_n = s_k$ for $n > k$, which does not change the union; the empty sets can be discarded beforehand.
 :::
 
 The hypothesis provides the enumerations $s_n$ along with the sets. The statement "a countable union of countable sets is countable", without given enumerations, requires choosing one enumeration of each $A_n$ among infinitely many possibilities. It is a consequence of the axiom of countable choice, and it is not provable in ZF: Feferman and Lévy showed that it is consistent with ZF that $\mathbb R$ is a countable union of countable sets. We admit this result. In practice, as in the examples below, the sets come with natural enumerations, and the proposition applies directly.
@@ -268,7 +268,7 @@ Let $S = \{ n : s(n) \neq s(m) \text{ for all } m < n \}$ be the set of position
 Show that the set of eventually periodic sequences $X : \nat \to \{0, 1\}$ is countable. (A sequence is **eventually periodic** if there are $n_0$ and $p \geq 1$ such that $X(n + p) = X(n)$ for all $n \geq n_0$.)
 
 :::solution
-An eventually periodic sequence is determined by two strings $u$ and $v$ over $\{0, 1\}$, with $v$ non-empty: its first $n_0$ values $u$, followed by $v$ repeated forever. So there is a surjection from a subset of $\{0, 1\}^* \times \{0, 1\}^*$, which is countable by :ref{#prop-strings-countable} and :ref{#cor-product-countable}, onto the set of eventually periodic sequences.
+An eventually periodic sequence is determined by two strings $u$ and $v$ over $\{0, 1\}$, with $v$ non-empty: its first $n_0$ values $u$, followed by $v$ repeated forever. So there is a surjection from a subset of $\{0, 1\}^* \times \{0, 1\}^*$, which is countable by :ref{#prop-strings-countable} and :ref{#cor-product-countable}, onto the set of eventually periodic sequences, which is therefore countable by :ref{#cor-subset-countable}.
 :::
 ::::
 
