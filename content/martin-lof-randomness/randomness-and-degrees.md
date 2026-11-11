@@ -139,7 +139,7 @@ Every Martin-Löf random sequence computes a DNC function. Consequently, the cla
 :::
 
 :::proof{of=cor-random-dnc}
-Let $Z$ be random. By :ref{#thm-levin-schnorr}, there is $c$ with $K(Z \uh m) \geq m - c$ for every $m$. The function $f(n) = Z \uh (n + c)$ is $Z$-computable and satisfies $K(f(n)) \geq n$, so $Z$ computes a DNC function by :ref{#thm-dnc-complexity}. The class MLR is conull (:ref{#cor-mlr-structure}). A 1-generic set computes no DNC function (:ref{#thm-generic-not-dnc}), hence no random sequence.
+Let $Z$ be random. By :ref{#thm-levin-schnorr}, there is $c$ with $K(Z \uh m) \geq m - c$ for every $m$. The function $f(n) = Z \uh (n + c)$ is $Z$-computable and satisfies $K(f(n)) \geq n$, so $Z$ computes a DNC function by :ref{#thm-dnc-complexity}. The class MLR is conull (:ref{#cor-mlr-structure}). A 1-generic set computes no DNC function, by a theorem of Demuth and Kučera proved in the course on Cohen genericity (:ref{#thm-generic-not-dnc}); hence it computes no random sequence.
 :::
 
 The two notions of typicality, by measure and by category, are thus incompatible in the Turing degrees: no random sequence is computable from a 1-generic set. By Kučera–Gács, every 1-generic set is computable from a random sequence.
@@ -168,7 +168,7 @@ In the proof of :ref{#cor-random-dnc}, why is $Z \uh (n + c)$ used rather than $
   $c$ is a fixed constant; no computation of it is needed.
 :::
 
-The converse fails: there are DNC functions that compute no random sequence (Ambos-Spies, Kjos-Hanssen, Lempp, Slaman, 2004). Greenberg and Miller (2009) showed that a set computes a DNC function if and only if it computes an infinite subset of a random sequence; this is admitted here. A random sequence computes a $\{0, 1\}$-valued DNC function only if it computes $\emptyset'$, by a theorem of Stephan (2006), also admitted.
+The converse fails: there are DNC functions that compute no random sequence (Ambos-Spies, Kjos-Hanssen, Lempp, Slaman, 2004). A set computes a DNC function if and only if it computes an infinite subset of a random sequence, by results of Kjos-Hanssen (2009) and of Greenberg and Miller (2009); this is admitted here. A random sequence computes a $\{0, 1\}$-valued DNC function only if it computes $\emptyset'$, by a theorem of Stephan (2006), also admitted.
 
 ## Exercises
 
@@ -204,5 +204,6 @@ Sacks's theorem is from his monograph *Degrees of Unsolvability* (1963); de Leeu
 - A. Kučera, *Measure, Π⁰₁-classes and complete extensions of PA*, in: Recursion Theory Week, Lecture Notes in Mathematics 1141, Springer, 1985, 245–259.
 - P. Gács, *Every sequence is reducible to a random one*, Information and Control 70 (1986), 186–192.
 - B. Kjos-Hanssen, W. Merkle and F. Stephan, *Kolmogorov complexity and the recursion theorem*, Transactions of the American Mathematical Society 363 (2011), 5465–5480.
+- B. Kjos-Hanssen, *Infinite subsets of random sets of integers*, Mathematical Research Letters 16 (2009), 103–110.
 - N. Greenberg and J. S. Miller, *Lowness for Kurtz randomness*, Journal of Symbolic Logic 74 (2009), 665–678.
 - F. Stephan, *Martin-Löf random and PA-complete sets*, in: Logic Colloquium '02, Lecture Notes in Logic 27, 2006, 342–348.

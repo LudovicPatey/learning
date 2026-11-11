@@ -40,7 +40,7 @@ From an index of a c.e. set of strings $W$, one computes an index of a c.e. pref
 :::
 
 :::proof{of=lem-prefix-free-generator}
-Enumerate $W$ as $\sigma_0, \sigma_1, \dots$, and build $W'$ as an increasing union of finite prefix-free sets $W'_s$, with $W'_0 = \emptyset$ and $[W'_s]^{\prec} = [\{ \sigma_i : i < s \}]^{\prec}$. At stage $s$, let $L$ be the maximum of $|\sigma_s|$ and of the lengths of the elements of $W'_s$, and let $W'_{s+1}$ be $W'_s$ together with every string $\tau \succeq \sigma_s$ of length $L$ that has no prefix in $W'_s$.
+Enumerate $W$ as $\sigma_0, \sigma_1, \dots$ (if $W$ is finite, possibly empty, the stages after the last element of $W$ add nothing), and build $W'$ as an increasing union of finite prefix-free sets $W'_s$, with $W'_0 = \emptyset$ and $[W'_s]^{\prec} = [\{ \sigma_i : i < s \}]^{\prec}$. At stage $s$, let $L$ be the maximum of $|\sigma_s|$ and of the lengths of the elements of $W'_s$, and let $W'_{s+1}$ be $W'_s$ together with every string $\tau \succeq \sigma_s$ of length $L$ that has no prefix in $W'_s$.
 
 A new string $\tau$ has no prefix in $W'_s$, and no element of $W'_s$ properly extends it, since these elements have length at most $L = |\tau|$; distinct new strings have the same length, so they are incomparable. Hence $W'_{s+1}$ is prefix-free. Every new string extends $\sigma_s$, so $[W'_{s+1}]^{\prec} \subseteq [\{ \sigma_i : i \leq s \}]^{\prec}$. Conversely, let $X \succ \sigma_s$; if $X \uh L$ has no prefix in $W'_s$, it is one of the new strings, so in every case $X \in [W'_{s+1}]^{\prec}$. The construction is effective and uniform in an index of $W$.
 :::
@@ -117,7 +117,7 @@ Let $\mathcal B$ be a Borel class with $\lambda(\mathcal B) > 0$. For every $\va
 :::
 
 :::proof{of=lem-density}
-By outer regularity, there is an open class $\mathcal U \supseteq \mathcal B$ with $\lambda(\mathcal U) < \lambda(\mathcal B) / (1 - \varepsilon)$, a number larger than $\lambda(\mathcal B)$. Write $\mathcal U = [W]^{\prec}$ with $W$ prefix-free. The classes $\mathcal B \cap [\sigma]$, $\sigma \in W$, are pairwise disjoint with union $\mathcal B$. If $\lambda(\mathcal B \mid \sigma) \leq 1 - \varepsilon$ for every $\sigma \in W$, then
+If $\varepsilon \geq 1$, the empty string works, since $\lambda(\mathcal B) > 0$; so assume $\varepsilon < 1$. By outer regularity, there is an open class $\mathcal U \supseteq \mathcal B$ with $\lambda(\mathcal U) < \lambda(\mathcal B) / (1 - \varepsilon)$, a number larger than $\lambda(\mathcal B)$. Write $\mathcal U = [W]^{\prec}$ with $W$ prefix-free. The classes $\mathcal B \cap [\sigma]$, $\sigma \in W$, are pairwise disjoint with union $\mathcal B$. If $\lambda(\mathcal B \mid \sigma) \leq 1 - \varepsilon$ for every $\sigma \in W$, then
 $$
 \lambda(\mathcal B) = \sum_{\sigma \in W} \lambda(\mathcal B \cap [\sigma]) \leq (1 - \varepsilon) \sum_{\sigma \in W} 2^{-|\sigma|} = (1 - \varepsilon)\, \lambda(\mathcal U) < \lambda(\mathcal B),
 $$
