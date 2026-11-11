@@ -8,7 +8,7 @@ prerequisites: [one-genericity]
 Genericity is usually a tool for building sets with few computational abilities. Combined with **coding**, it also produces sets with prescribed strength. The idea is to build a 1-generic set $G$ that carries a given set $Z$ in its bits, in such a way that the coding can be read back with the help of an arbitrary non-computable set $A$. The resulting theorem, due in this form to Jockusch and Shore, has two classical consequences: the Posner–Robinson theorem, which says that every non-computable set joins with some set to compute the jump of the latter, and Friedberg's jump inversion theorem, admitted in the course on Turing degrees, which says that every degree above $\obf'$ is a jump.
 
 :::theorem[Jockusch–Shore]{#thm-jockusch-shore}
-Let $A$ and $Z$ be sets, with $A$ not computable. There is a 1-generic set $G$ such that $Z \leq_T A \oplus G$ and $G \leq_T A \oplus Z \oplus \emptyset'$.
+Let $A$ and $Z$ be sets, with $A$ not computable. There is a 1-generic set $G$ such that $Z \leq_T A \oplus G$, $Z \leq_T G \oplus \emptyset'$, and $G \leq_T A \oplus Z \oplus \emptyset'$.
 :::
 
 ## The construction
@@ -30,9 +30,11 @@ It is c.e. Since $A$ is not c.e., $A \neq D_e$; so there is $m$ with either $m \
 *$G \leq_T A \oplus Z \oplus \emptyset'$.* The bit $Z(e)$ is read from $Z$. The membership $m \in D_e$ is a c.e. question, answered by $\emptyset'$, and $m \in A$ is answered by $A$; so the least $m$ is found. In the first case, the first extension enumerated into $W_e$ is found by a computable search. So the sequence $(\sigma_e)$ is computable in $A \oplus Z \oplus \emptyset'$.
 
 *$Z \leq_T A \oplus G$.* We compute the sequence $(\sigma_e)$ from $A \oplus G$, by induction. Suppose $\sigma_e$ is known. The bit of $G$ following $\sigma_e$ is $Z(e)$. Then read the number $m$ of zeros that follow, up to the next $1$; by construction it is the number chosen at step $e$. If $m \in A$, step $e$ was in the second case, and $\sigma_{e+1} = \sigma_e\, Z(e)\, 0^m\, 1$. If $m \notin A$, step $e$ was in the first case, so $m \in D_e$, and $\sigma_{e+1}$ is the first extension of $\sigma_e\, Z(e)\, 0^m\, 1$ enumerated into $W_e$, found by a computable search, which terminates. Hence $A \oplus G$ computes every bit $Z(e)$.
+
+*$Z \leq_T G \oplus \emptyset'$.* The same decoding works with $\emptyset'$ in place of $A$: given $\sigma_e$, $Z(e)$ and $m$ are read from $G$ as above, and $\emptyset'$ decides whether $m \in D_e$, a c.e. question about $(e, \sigma_e, Z(e), m)$. If $m \in D_e$, step $e$ was in the first case, since in the second case $m \notin D_e$; otherwise it was in the second case. In both cases $\sigma_{e+1}$ is then obtained as before.
 :::
 
-The decoding uses $A$ for a single question at each step: is $m$ in $A$? The construction chose $m$ precisely so that the answer distinguishes the two cases, which is possible because $A$ is not c.e. A c.e. set $A$ could coincide with $D_e$, leaving no such $m$.
+The decoding from $A \oplus G$ uses $A$ for a single question at each step: is $m$ in $A$? The construction chose $m$ precisely so that the answer distinguishes the two cases, which is possible because $A$ is not c.e. A c.e. set $A$ could coincide with $D_e$, leaving no such $m$.
 
 :::quiz[the Jockusch–Shore construction]
 Why does the construction need $A$ not to be c.e., rather than only non-computable?
@@ -63,11 +65,11 @@ When decoding, why does $m \notin A$ imply that step $e$ was in the first case?
 ## Consequences
 
 :::corollary[Posner–Robinson]{#cor-posner-robinson}
-For every non-computable set $A$, there is a set $G$ with $A \oplus G \geq_T G'$. If moreover $A \leq_T \emptyset'$, then $A \oplus G \equiv_T G'$.
+For every non-computable set $A$, there is a 1-generic set $G$ with $A \oplus G \equiv_T G' \equiv_T G \oplus \emptyset'$.
 :::
 
 :::proof{of=cor-posner-robinson}
-Apply :ref{#thm-jockusch-shore} with $Z = \emptyset'$: $G$ is 1-generic, $\emptyset' \leq_T A \oplus G$, and $G \leq_T A \oplus \emptyset'$. Since $G$ is 1-generic, $G' \leq_T G \oplus \emptyset'$ (:ref{#thm-generic-low}), and $G \oplus \emptyset' \leq_T A \oplus G$. If $A \leq_T \emptyset'$, then $A \leq_T \emptyset' \leq_T G'$ and $G \leq_T G'$, so $A \oplus G \leq_T G'$.
+Apply :ref{#thm-jockusch-shore} with $Z = A \oplus \emptyset'$: $G$ is 1-generic, $A \oplus \emptyset' \leq_T A \oplus G$, and $A \oplus \emptyset' \leq_T G \oplus \emptyset'$. Since $G$ is 1-generic, $G' \equiv_T G \oplus \emptyset'$ (:ref{#thm-generic-low}, with $G \oplus \emptyset' \leq_T G'$ for every set). From $\emptyset' \leq_T A \oplus G$ we get $G \oplus \emptyset' \leq_T A \oplus G$. From $A \leq_T G \oplus \emptyset'$ we get $A \oplus G \leq_T G \oplus \emptyset'$. Hence $A \oplus G \equiv_T G \oplus \emptyset' \equiv_T G'$.
 :::
 
 So every non-computable set, however weak, bridges the gap between some set and its jump. For a low non-computable $A$, this gives a set $G$ with $A \oplus G \equiv_T G' \geq_T \emptyset'$ while $A$ alone is far from $\emptyset'$.
@@ -88,7 +90,7 @@ There is a high set that computes no DNC function; in particular, a high set tha
 By :ref{#cor-jump-inversion} with $Z = \emptyset''$, there is a 1-generic $G$ with $G' \equiv_T \emptyset''$, so $G$ is high. By :ref{#thm-generic-not-dnc}, $G$ computes no DNC function; since $\emptyset'$ computes one, $G$ does not compute $\emptyset'$.
 :::
 
-This gives a second construction of high incomplete sets, after :ref{#cor-high-incomplete}; the generic set obtained is even computable in $\emptyset''$.
+This gives a second construction of high incomplete sets, after :ref{#cor-high-incomplete}; the set obtained here is moreover 1-generic and computable in $\emptyset''$.
 
 ## Exercises
 

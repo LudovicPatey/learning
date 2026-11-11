@@ -57,7 +57,7 @@ Which properties hold for all sufficiently generic sets?
 
 ## Meager and co-meager classes
 
-Dense sets of strings correspond to dense open classes. A class $\mathcal B \subseteq \cs$ is **dense** if it meets every cylinder. For a set of strings $D$, write $[D]^{\prec} = \bigcup_{\sigma \in D} [\sigma]$ (:ref{#def-open-closed}).
+Dense sets of strings correspond to dense open classes. Recall that a class $\mathcal U \subseteq \cs$ is **open** if it is a union of cylinders, and **closed** if its complement is open; for a set of strings $D$, write $[D]^{\prec} = \bigcup_{\sigma \in D} [\sigma]$ (:ref{#def-open-closed}). A class $\mathcal B \subseteq \cs$ is **dense** if it meets every cylinder.
 
 :::lemma{#lem-dense-open}
 1. If $D$ is a dense set of strings, then $[D]^{\prec}$ is a dense open class, and a set meets $D$ if and only if it belongs to $[D]^{\prec}$.
@@ -66,14 +66,14 @@ Dense sets of strings correspond to dense open classes. A class $\mathcal B \sub
 
 :::proof{of=lem-dense-open}
 1. A set belongs to $[D]^{\prec}$ exactly when one of its prefixes is in $D$. For a cylinder $[\sigma]$, an extension $\tau \in D$ of $\sigma$ gives $[\tau] \subseteq [\sigma] \cap [D]^{\prec}$.
-2. An open class is the union of the cylinders it contains, so $[D]^{\prec} = \mathcal U$. Given $\sigma$, the class $\mathcal U \cap [\sigma]$ is a non-empty open class, so it contains a cylinder $[\tau]$; replacing $\tau$ by a longer string if necessary, $\tau \succeq \sigma$, and $\tau \in D$.
+2. An open class is the union of the cylinders it contains, so $[D]^{\prec} = \mathcal U$. Given $\sigma$, the class $\mathcal U \cap [\sigma]$ is non-empty, since $\mathcal U$ is dense, and open, so it contains a cylinder $[\tau]$. Then $[\tau] \subseteq [\sigma]$ gives $\tau \succeq \sigma$, and $[\tau] \subseteq \mathcal U$ gives $\tau \in D$.
 :::
 
 :::definition{#def-meager}
 A class is **nowhere dense** if its closure has empty interior, that is, if every cylinder $[\sigma]$ contains a cylinder $[\tau]$ disjoint from the class. A class is **meager** if it is contained in a countable union of nowhere dense classes, and **co-meager** if its complement is meager.
 :::
 
-Equivalently, a class is co-meager if and only if it contains a countable intersection of dense open classes: the complement of a nowhere dense class contains a dense open class, namely the union of the cylinders disjoint from it. By :ref{#lem-dense-open}, this gives the link with genericity.
+Equivalently, a class is co-meager if and only if it contains a countable intersection of dense open classes: the complement of a nowhere dense class contains a dense open class, namely the union of the cylinders disjoint from it; conversely, the complement of a dense open class is nowhere dense, since every cylinder contains a cylinder included in the dense open class. By :ref{#lem-dense-open}, this gives the link with genericity.
 
 :::proposition{#prop-generic-comeager}
 A property holds for all sufficiently generic sets if and only if the class of sets with the property is co-meager.
@@ -95,7 +95,7 @@ Every co-meager class $\mathcal B \subseteq \cs$ meets every cylinder. More prec
 Let $\bigcap_n \mathcal U_n \subseteq \mathcal B$ with $\mathcal U_n$ dense open, and let $D_n = \{ \tau : [\tau] \subseteq \mathcal U_n \}$, dense by :ref{#lem-dense-open}. Fix an enumeration of $\bstr$. Define strings $\sigma_\rho$ for $\rho \in \bstr$: let $\sigma_\varepsilon = \sigma$, and for $i \in \{0, 1\}$, let $\sigma_{\rho i}$ be the first extension of $\sigma_\rho\, i$ in $D_{|\rho|}$. The strings $\sigma_{\rho 0}$ and $\sigma_{\rho 1}$ are incompatible, since they extend $\sigma_\rho 0$ and $\sigma_\rho 1$. For $X \in \cs$, let $G_X$ be the sequence extending every $\sigma_{X \uh n}$; it meets every $D_n$, through $\sigma_{X \uh (n+1)}$, so $G_X \in \bigcap_n \mathcal U_n$, and it extends $\sigma$. Different $X$ give different $G_X$, by the incompatibility of the splitting strings.
 :::
 
-The theorem expresses that co-meager classes are large, and meager classes small, in a topological sense. This notion of size is independent of measure: there are meager classes of measure $1$ and co-meager classes of measure $0$, as shown in the course on algorithmic randomness. In the rest of this course, "typical" means "sufficiently generic", that is, belonging to a co-meager class.
+The theorem expresses that co-meager classes are large, and meager classes small, in a topological sense. This notion of size is independent of measure: by the strong law of large numbers (admitted here), the class of sets of asymptotic density $\tfrac12$ has measure $1$, and it is meager by :ref{#exr-density-meager}; its complement is a co-meager class of measure $0$. In the rest of this course, "typical" means "sufficiently generic", that is, belonging to a co-meager class.
 
 :::quiz[the Baire category theorem]
 In the proof of :ref{#thm-baire-category}, why does $\sigma_{\rho i}$ extend $\sigma_\rho\, i$, and not only $\sigma_\rho$?
@@ -133,7 +133,7 @@ The class of computable sets is countable, hence meager. By :ref{#thm-cone-avoid
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#exr-density-meager difficulty=2}
 For a set $X$ and $n \geq 1$, let $\delta_n(X) = |X \cap \{0, \dots, n-1\}| / n$. Show that for every sufficiently generic set $G$, $\limsup_n \delta_n(G) = 1$ and $\liminf_n \delta_n(G) = 0$. Deduce that the class of sets with asymptotic density $\tfrac12$ is meager.
 
 :::solution

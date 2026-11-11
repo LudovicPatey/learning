@@ -37,7 +37,7 @@ Let $G$ be 1-generic. For every $\Sigma^0_1$ property $P$, $G$ has a prefix that
 With $W$ as above, $G$ meets $W \cup W^\perp$. If a prefix of $G$ is in $W$, it forces $P$; if a prefix avoids $W$, it forces $\neg P$ by :ref{#prop-force-sigma1}. A property forced by a prefix of $G$ holds for $G$, so $G$ satisfies $P$ exactly in the first case.
 :::
 
-The theorem is the reason why 1-generic sets are **generalized low** (:ref{#thm-generic-low}): to decide whether $e \in G'$, it suffices to find a prefix of $G$ that forces "$\Phi^G_e(e)\converge$" or its negation, and both forcing relations are decided by $\emptyset'$, the second being co-c.e.
+The theorem is the reason why 1-generic sets are **generalized low** (:ref{#thm-generic-low}): to decide whether $e \in G'$, it suffices to find a prefix of $G$ that belongs to $\{ \sigma : \Phi^\sigma_e(e)\converge \}$ or avoids it, and both relations are decided by $\emptyset'$, the first being c.e. and the second co-c.e.
 
 :::quiz[forcing Σ⁰₁ properties]
 Why does a string $\sigma$ that avoids $W = \{ \sigma : \Phi^\sigma_e(0)\converge \}$ force the divergence of $\Phi^G_e(0)$?
@@ -95,7 +95,7 @@ Why does the proof need the fixed point theorem?
 - [x] So that the program $e_\sigma$ can search for a computation of $\Phi_i$ at its own index $e_\sigma$, and output its value, making its diagonal value $\Phi_{e_\sigma}(e_\sigma)$ agree with $\Phi^{\tau_\sigma}_i$.
 - [ ] To make the function $\sigma \mapsto e_\sigma$ total.
 
-  Totality comes from the fixed point theorem with parameters, but the essential point is the self-reference.
+  Any computable function of $\sigma$ is total; what the fixed point theorem provides is that the program $e_\sigma$ can refer to its own index.
 - [ ] To show that $W$ is c.e.
 
   Once the indices are fixed, the enumeration of $W$ is an ordinary dovetailed search.
@@ -133,7 +133,7 @@ The following classes are meager:
 4. Let $G$ be 1-generic relative to $\emptyset''$. Then $G$ is 1-generic, so $G' \equiv_T G \oplus \emptyset'$ (:ref{#thm-generic-low} and the exercises of that lesson). By :ref{#thm-generic-cone} with $C = \emptyset''$ and $Z = \emptyset'$, since $\emptyset'' \not\leq_T \emptyset'$ and $G$ is 1-generic relative to $\emptyset'' \equiv_T \emptyset'' \oplus \emptyset'$, we get $\emptyset'' \not\leq_T G \oplus \emptyset' \equiv_T G'$. So $G$ is not high.
 :::
 
-Items 2 and 3 show that typical sets in the sense of category are neither DNC nor computably dominated. The comparison with measure is instructive: in the course on algorithmic randomness, almost every set in the sense of measure is shown to compute a DNC function.
+Items 2 and 3 show that typical sets in the sense of category compute no DNC function and are not computably dominated. In the sense of measure the situation is different: in the course on algorithmic randomness, almost every set in the sense of measure is shown to compute a DNC function.
 
 ## Exercises
 

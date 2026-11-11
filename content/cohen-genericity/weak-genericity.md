@@ -23,7 +23,7 @@ There are countably many c.e. sets of strings, so weakly 1-generic sets exist, a
 A function $f : \nat \to \nat$ is **hyperimmune** if no computable function dominates it, that is, for every computable $g$ there is $n$ with $f(n) > g(n)$. A set has **hyperimmune degree** if it computes a hyperimmune function.
 :::
 
-Equivalently, a set has hyperimmune degree if and only if it is not computably dominated (:ref{#def-computably-dominated}). A hyperimmune function exceeds every computable function at infinitely many points: if $f(n) \leq g(n)$ for all $n \geq n_0$, a finite modification of $g$ dominates $f$ everywhere. These functions and the corresponding sets are studied in the course on immunity and growth of functions (:ref{to="immunity-growth/immune-sets"}). Every non-computable $\Delta^0_2$ set has hyperimmune degree, since it computes its computation function, which no computable function dominates (:ref{#thm-computation-function}).
+Equivalently, a set has hyperimmune degree if and only if it is not **computably dominated**, that is, if some total function it computes is dominated by no computable function (:ref{#def-computably-dominated}). A hyperimmune function exceeds every computable function at infinitely many points: if $f(n) \leq g(n)$ for all $n \geq n_0$, a finite modification of $g$ dominates $f$ everywhere. These functions and the corresponding sets are studied in the course on immunity and growth of functions (:ref{to="immunity-growth/immune-sets"}). Every non-computable $\Delta^0_2$ set has hyperimmune degree, since it computes its computation function, which no computable function dominates (:ref{#thm-computation-function}).
 
 ## Kurtz's theorem
 
@@ -40,7 +40,7 @@ For every set $X$, the following are equivalent:
 
 (2 ⇒ 1) If $h$ equals every computable function infinitely often, then $h + 1$ exceeds every computable function at some point.
 
-(1 ⇒ 3) Let $f \leq_T X$ be hyperimmune. We build $G$ with oracle $f$, one bit per stage: at stage $s$, the prefix $\sigma_s = G \uh s$ is known. Say that $e$ is **met** at stage $s$ if some prefix of $\sigma_s$ belongs to $W_e[f(s)]$; once met, $e$ stays met. The construction may have a **target**: a pair $(\tau, e)$ with $\tau \succeq \sigma_s$ and $\tau \in W_e$.
+(1 ⇒ 3) Let $f \leq_T X$ be hyperimmune. We build $G$ with oracle $f$, one bit per stage: at stage $s$, the prefix $\sigma_s = G \uh s$ is known. Say that $e$ is **met** at stage $s$ if some prefix of $\sigma_s$ belongs to $W_e[f(t)]$ for some $t \leq s$; once met, $e$ stays met, since $\sigma_s \prec \sigma_{s+1}$. The construction may have a **target**: a pair $(\tau, e)$ with $\tau \succeq \sigma_s$ and $\tau \in W_e$.
 
 *Stage $s$.* Look for the least $e \leq s$ such that $e$ is not met at stage $s$ and some $\tau \succeq \sigma_s$ belongs to $W_e[f(s)]$. If there is one, and there is no current target or the current target has an index larger than $e$, make $(\tau, e)$ the current target, for the first such $\tau$. Then let $G(s)$ be the bit of the current target at position $s$ if the target is longer than $s$, and $0$ otherwise. When the target is a prefix of $\sigma_{s+1}$, it is achieved, $e$ is met, and there is no current target.
 
@@ -48,7 +48,7 @@ The construction is computable in $f$, so $G \leq_T X$. We show that $G$ meets e
 
 *Each index sets a target finitely often.* An index $e$ sets a target only when it is not met; its target is then copied bit by bit, and is achieved unless it is replaced by a target of smaller index. By induction on $e$: if the indices smaller than $e$ set targets finitely often, then after they stop and their last targets are achieved or replaced, any target of $e$ is achieved, after which $e$ is met and never sets a target again.
 
-*Dense sets are met.* Suppose $W_e$ is dense and $e$ is never met. Let $s_0 \geq e$ be a stage after which no index smaller than $e$ sets a target and none of their targets is current. If at some stage $s \geq s_0$ some $\tau \succeq \sigma_s$ belonged to $W_e[f(s)]$, then $e$ would be the least index with a candidate, would set a target, and this target would be achieved, so $e$ would be met. Hence, for every $s \geq s_0$, no extension of $\sigma_s$ belongs to $W_e[f(s)]$. Now let $g(s)$ be the least $t$ such that every string of length $s$ has an extension in $W_e[t]$; $g$ is computable and total, since $W_e$ is dense and there are finitely many strings of length $s$. Since $\sigma_s$ has length $s$, the previous observation gives $f(s) < g(s)$ for all $s \geq s_0$, so a finite modification of $g$ dominates $f$, contradicting the hyperimmunity of $f$.
+*Dense sets are met.* Suppose $W_e$ is dense and $e$ is never met. Let $s_0 \geq e$ be a stage after which no index smaller than $e$ sets a target and none of their targets is current. If at some stage $s \geq s_0$ some $\tau \succeq \sigma_s$ belonged to $W_e[f(s)]$, then $e$ would be the least index with a candidate (a smaller index with a candidate would set a target at stage $s$, since no target of smaller index is current), $e$ would set a target unless its own target is current, and this target would be achieved, so $e$ would be met. Hence, for every $s \geq s_0$, no extension of $\sigma_s$ belongs to $W_e[f(s)]$. Now let $g(s)$ be the least $t$ such that every string of length $s$ has an extension in $W_e[t]$; $g$ is computable and total, since $W_e$ is dense and there are finitely many strings of length $s$. Since $\sigma_s$ has length $s$, the previous observation gives $f(s) < g(s)$ for all $s \geq s_0$, so a finite modification of $g$ dominates $f$, contradicting the hyperimmunity of $f$.
 :::
 
 The construction of (1 ⇒ 3) is a finite injury argument without restraints: an index may lose its target to an index of smaller code, but only finitely often. The hyperimmune function $f$ serves as a bound on the search for extensions: a dense c.e. set that is never met would provide a computable bound on $f$.
@@ -117,13 +117,13 @@ For a set of strings $W$, let $\bar W = \{ \bar\sigma : \sigma \in W \}$, where 
 Show that the principal function $p_G$ of a weakly 1-generic set $G$ is hyperimmune.
 
 :::solution
-Let $f$ be computable. The set $D = \{ \sigma\, 0^{f(|\sigma|) + 1} : \sigma \in \bstr \}$ is dense and computable, so $G$ has a prefix $\sigma\, 0^{f(n) + 1}$, with $n = |\sigma|$. At most $n$ elements of $G$ lie below $n$, so the elements of index $0, \dots, n$ in increasing order cannot all lie below $n$, and $p_G(n) \geq n$. No element of $G$ lies in the interval $[n, n + f(n)]$, so $p_G(n) \geq n + f(n) + 1 > f(n)$. Hence no computable function dominates $p_G$.
+Recall from the proof of :ref{#thm-kurtz} that $G$ is infinite, so $p_G(n)$, the $n$-th element of $G$ in increasing order (counting from $0$), is defined for every $n$. Let $f$ be computable. The set $D = \{ \sigma\, 0^{f(|\sigma|) + 1} : \sigma \in \bstr \}$ is dense and computable, so $G$ has a prefix $\sigma\, 0^{f(n) + 1}$, with $n = |\sigma|$. At most $n$ elements of $G$ lie below $n$, so the elements of index $0, \dots, n$ in increasing order cannot all lie below $n$, and $p_G(n) \geq n$. No element of $G$ lies in the interval $[n, n + f(n)]$, so $p_G(n) \geq n + f(n) + 1 > f(n)$. Hence no computable function dominates $p_G$.
 :::
 ::::
 
 ## Notes and references
 
-Weakly 1-generic sets and the equivalence with hyperimmune degrees are due to Kurtz (1981), in his thesis on randomness and genericity; the presentation of (1 ⇒ 3) by one bit per stage follows the standard modern proofs. Andrews, Gerdes and Miller showed that the analogy between weak genericity and escaping functions breaks down from the level of weak 3-genericity. Downey and Hirschfeldt's book treats these notions in detail.
+Weakly 1-generic sets and the equivalence with hyperimmune degrees are due to Kurtz (1981), in his thesis on randomness and genericity; the presentation of (1 ⇒ 3) by one bit per stage follows the standard modern proofs. At the next level, Andrews, Gerdes and Miller showed that a set computes a weakly 2-generic set if and only if it computes a function dominated by no $\Delta^0_2$ function. Downey and Hirschfeldt's book treats these notions in detail.
 
 - S. A. Kurtz, *Randomness and genericity in the degrees of unsolvability*, PhD thesis, University of Illinois at Urbana-Champaign, 1981.
 - U. Andrews, P. Gerdes and J. S. Miller, *The degrees of bi-hyperhyperimmune sets*, Annals of Pure and Applied Logic 165 (2014), 803–811.
