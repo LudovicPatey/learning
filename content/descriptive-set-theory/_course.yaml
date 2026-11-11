@@ -1,0 +1,22 @@
+title: Effective descriptive set theory
+area: higher
+level: Advanced
+order: 3
+prerequisites: [hyperarithmetic]
+summary: Norms on Π¹₁ sets, the reduction and separation properties, Kreisel's uniformization, and the effective perfect set theorem for Σ¹₁ classes.
+description: >
+  The Π¹₁ sets behave like c.e. sets enumerated along the computable
+  ordinals. The course compares the stages at which elements enter a Π¹₁
+  set by comparing ranks of well-founded trees, and deduces the reduction
+  property for Π¹₁ sets, Kleene's separation theorem for Σ¹₁ sets, Kreisel's
+  uniformization theorem and the selection of hyperarithmetic functions. It
+  ends with Harrison's effective perfect set theorem: countable Σ¹₁ classes
+  consist of hyperarithmetic sets.
+objectives:
+  - Compare ranks of trees by strictly monotone maps
+  - Prove that the stage comparison relations of a Π¹₁ set are Π¹₁
+  - Prove the reduction property for Π¹₁ sets and separation for Σ¹₁ sets
+  - Uniformize Π¹₁ relations on numbers and select hyperarithmetic functions
+  - Describe a Π¹₁ set as the union of its hyperarithmetic stages
+  - Prove that countable Σ¹₁ classes consist of hyperarithmetic sets
+lessons: [norms, uniformization, perfect-sets]
