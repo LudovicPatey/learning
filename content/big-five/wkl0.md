@@ -140,7 +140,7 @@ The ternary coding avoids a difficulty of binary expansions: in $[0, 1]$, the dy
 
 ## Conservation and other equivalents
 
-$\mathsf{WKL}_0$ proves no new arithmetic sentence: by a theorem of Harrington, every $\Pi^1_1$ sentence provable in $\mathsf{WKL}_0$ is provable in $\mathsf{RCA}_0$. The proof combines the low basis theorem with a forcing argument over non-standard models, and is admitted here (Simpson, Section IX.2). So compactness arguments, though non-constructive, do not increase the arithmetic consequences of the base theory; $\mathsf{WKL}_0$ is moreover $\Pi^0_2$-conservative over primitive recursive arithmetic, a partial realization of Hilbert's program.
+$\mathsf{WKL}_0$ proves no new arithmetic sentence: by a theorem of Harrington, every $\Pi^1_1$ sentence provable in $\mathsf{WKL}_0$ is provable in $\mathsf{RCA}_0$. The proof uses a forcing argument over non-standard models; it is given in the specialized course on induction and conservation (:ref{to="induction-conservation/harrington"}). So compactness arguments, though non-constructive, do not increase the arithmetic consequences of the base theory; $\mathsf{WKL}_0$ is moreover $\Pi^0_2$-conservative over primitive recursive arithmetic, a partial realization of Hilbert's program.
 
 The following are also equivalent to $\mathsf{WKL}_0$ over $\mathsf{RCA}_0$ (Simpson, Chapter IV): every continuous function on $[0, 1]$ is bounded; every continuous function on $[0, 1]$ attains its maximum; Gödel's completeness theorem for countable languages; every countable commutative ring has a prime ideal; Brouwer's fixed point theorem; the Hahn–Banach theorem for separable Banach spaces.
 

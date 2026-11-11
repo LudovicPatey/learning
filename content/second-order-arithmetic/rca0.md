@@ -85,7 +85,7 @@ Why does an unprovability result obtained with $\mathrm{REC}$ hold for $\mathsf{
 
 ## The role of induction
 
-In ω-models, induction is free. In general models, the restriction to $\Sigma^0_1$ induction has real consequences: there are models of $\mathsf{RCA}_0$ in which $\Sigma^0_2$ induction fails, and statements of combinatorics, such as the infinite pigeonhole principle for arbitrarily many colors, are equivalent over $\mathsf{RCA}_0$ to forms of induction or bounding. These phenomena require non-standard models, and are studied in Hájek and Pudlák's monograph. The first-order part of $\mathsf{RCA}_0$ is exactly the arithmetic theory $\mathrm{I}\Sigma_1$: every arithmetic sentence provable in $\mathsf{RCA}_0$ is provable from the basic axioms and $\Sigma_1$ induction (Friedman); we admit this conservation result.
+In ω-models, induction is free. In general models, the restriction to $\Sigma^0_1$ induction has real consequences: there are models of $\mathsf{RCA}_0$ in which $\Sigma^0_2$ induction fails, and statements of combinatorics, such as the infinite pigeonhole principle for arbitrarily many colors, are equivalent over $\mathsf{RCA}_0$ to forms of induction or bounding. These phenomena require non-standard models, and are studied in Hájek and Pudlák's monograph. The first-order part of $\mathsf{RCA}_0$ is exactly the arithmetic theory $\mathrm{I}\Sigma_1$: every arithmetic sentence provable in $\mathsf{RCA}_0$ is provable from the basic axioms and $\Sigma_1$ induction (Friedman). These results are proved in the specialized course on induction and conservation (:ref{to="induction-conservation/first-order-parts"}).
 
 ## Exercises
 
