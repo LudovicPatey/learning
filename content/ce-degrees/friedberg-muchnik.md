@@ -16,7 +16,7 @@ There is a c.e. set $A$ with $\emptyset <_T A <_T \emptyset'$. This solves Post'
 :::
 
 :::proof{of=cor-post-problem}
-Let $A$ and $B$ be as in the theorem. If $A$ were computable, it would be computable from $B$. If $\emptyset' \leq_T A$, then $B \leq_T \emptyset' \leq_T A$, since every c.e. set is computable in $\emptyset'$. Both are excluded.
+Let $A$ and $B$ be as in the theorem. If $A$ were computable, it would be computable from $B$, contradicting $A \not\leq_T B$. If $\emptyset' \leq_T A$, then $B \leq_T \emptyset' \leq_T A$, since every c.e. set is computable in $\emptyset'$, contradicting $B \not\leq_T A$. And $A \leq_T \emptyset'$ since $A$ is c.e.
 :::
 
 ## The requirements
@@ -59,7 +59,7 @@ Suppose $\mathcal R_{2e}$ acts at stage $s + 1$ with witness $x$, through a comp
 :::
 
 :::proof{of=lem-fm-preservation}
-The numbers enumerated into $A$ after stage $s$ are witnesses of requirements $\mathcal R_j$ with $j$ odd, at the stages where they act. No $\mathcal R_j$ with $j < 2e$ acts after stage $s + 1$, since it would initialize $\mathcal R_{2e}$. Every $\mathcal R_j$ with $j > 2e$ is initialized at stage $s + 1$, so any witness it uses afterwards was chosen fresh after stage $s + 1$, and is greater than $s$. The use satisfies $u \leq s$, since the computation converges at stage $s$ (its code is smaller than $s$, and it reads only cells below its number of steps). So no number below $u$ enters $A$ after stage $s$, and by the use principle $\Phi^A_e(x) = \Phi^{A_s}_e(x) = 0$, while $x \in B$.
+The numbers enumerated into $A$ after stage $s$ are witnesses of requirements $\mathcal R_j$ with $j$ odd, at the stages where they act. No $\mathcal R_j$ with $j < 2e$ acts after stage $s + 1$, since it would initialize $\mathcal R_{2e}$. Every $\mathcal R_j$ with $j > 2e$ is initialized at stage $s + 1$, so any witness it uses afterwards was chosen fresh at stage $s + 1$ or later, and is greater than $s$. The use satisfies $u \leq s$, since the computation converges at stage $s$ (its code is smaller than $s$, and it reads only cells below its number of steps). So no number below $u$ enters $A$ after stage $s$, and by the use principle $\Phi^A_e(x) = \Phi^{A_s}_e(x) = 0$, while $x \in B$.
 :::
 
 :::lemma{#lem-fm-finite-injury}
@@ -67,11 +67,11 @@ Every requirement acts only finitely often, is initialized only finitely often, 
 :::
 
 :::proof{of=lem-fm-finite-injury}
-By induction on $i$. Suppose every $\mathcal R_j$ with $j < i$ acts only finitely often, and let $s_0 \geq i$ be a stage after which none of them acts. A requirement is only initialized by the action of a requirement of higher priority, so $\mathcal R_i$ is not initialized after stage $s_0$. It has a witness $x$ from stage $s_0 + 1$ on, which never changes. After stage $s_0$, $\mathcal R_i$ acts at most once, since acting marks it as satisfied and the mark can only be removed by an initialization. So $\mathcal R_i$ acts finitely often. Say $i = 2e$; the odd case is symmetric.
+By induction on $i$. Suppose every $\mathcal R_j$ with $j < i$ acts only finitely often, and let $s_0 \geq i$ be a stage after which none of them acts. A requirement is only initialized by the action of a requirement of higher priority, so $\mathcal R_i$ is not initialized after stage $s_0$, and it is initialized only finitely often. Let $t \leq s_0$ be the last stage at which $\mathcal R_i$ is initialized, or $t = 0$ if it never is. From the end of stage $s_0 + 1$ on, $\mathcal R_i$ has a witness $x$ (it receives one at the latest at stage $s_0 + 1$, since $i \leq s_0$), which never changes. After stage $t$, $\mathcal R_i$ acts at most once, since acting marks it as satisfied and the mark can only be removed by an initialization. So $\mathcal R_i$ acts finitely often. Say $i = 2e$; the odd case is symmetric.
 
-If $\mathcal R_i$ acts after stage $s_0$, it is satisfied by :ref{#lem-fm-preservation}.
+If $\mathcal R_i$ acts after stage $t$, it acts with the witness $x$ and is never initialized afterwards, so it is satisfied by :ref{#lem-fm-preservation}.
 
-If $\mathcal R_i$ does not act after stage $s_0$, then $x \notin B$, since only $\mathcal R_i$ enumerates $x$. Suppose $\Phi^A_e(x)\converge = 0$, with use $u$. For all sufficiently large $s$, $A_s \uh u = A \uh u$ and the computation converges at stage $s$, so $\Phi^{A_s}_e(x)[s]\converge = 0$ by the use principle, and $\mathcal R_i$ requires attention at stage $s + 1$. No $\mathcal R_j$ with $j < i$ requires attention at a stage after $s_0$, since the least requirement requiring attention acts, and they do not act. So $\mathcal R_i$ would act, a contradiction. Hence $\Phi^A_e(x) \neq 0 = B(x)$, and $\mathcal R_i$ is satisfied.
+If $\mathcal R_i$ does not act after stage $t$, then $x \notin B$, since only $\mathcal R_i$ enumerates $x$, and $\mathcal R_i$ is never marked as satisfied after stage $t$ (the mark is removed at an initialization, and is absent at the start). Suppose $\Phi^A_e(x)\converge = 0$, with use $u$. For all sufficiently large $s$, $A_s \uh u = A \uh u$ and the computation converges at stage $s$, so $\Phi^{A_s}_e(x)[s]\converge = 0$ by the use principle, and, for $s \geq s_0$, $\mathcal R_i$ requires attention at stage $s + 1$. No $\mathcal R_j$ with $j < i$ requires attention at a stage after $s_0$, since the least requirement requiring attention acts, and they do not act. So $\mathcal R_i$ would act, a contradiction. Hence $\Phi^A_e(x) \neq 0 = B(x)$, and $\mathcal R_i$ is satisfied.
 :::
 
 :::proof{of=thm-friedberg-muchnik}
@@ -88,7 +88,7 @@ Why are witnesses chosen fresh, larger than every number mentioned so far?
   Freshness implements the restraints without recording them: the uses are smaller than the stage at which they are found.
 - [ ] To make $A$ and $B$ infinite.
 
-  $A$ and $B$ may well be finite or infinite; what matters is that the restraints are respected.
+  Freshness plays no role in the size of $A$ and $B$; what it ensures is that the restraints are respected.
 - [ ] To make the construction computable.
 
   Any computable choice of witnesses keeps the construction computable.
@@ -136,7 +136,7 @@ Let $a_i$ and $n_i$ be the numbers of actions and initializations of $\mathcal R
 Show that there is a uniformly c.e. sequence of sets $(A_n)_{n \in \nat}$ such that $A_n \not\leq_T A_m$ for all $n \neq m$.
 
 :::solution
-Use the requirements $\mathcal R_{\langle e, n, m \rangle} : \Phi^{A_m}_e \neq A_n$, for $n \neq m$, ordered by their index. The strategy for $\mathcal R_{\langle e, n, m \rangle}$ has a witness $x$ for $A_n$, waits for $\Phi^{A_{m,s}}_e(x)[s]\converge = 0$, and then enumerates $x$ into $A_n$, initializing all requirements of lower priority. The verification is the same as for :ref{#thm-friedberg-muchnik}: after an action, the numbers entering $A_m$ are witnesses of requirements that are either of higher priority, and then act only finitely often, or of lower priority, and then are fresh. The construction is uniform in $n$, so the sequence is uniformly c.e.
+Use the requirements $\mathcal R_{\langle e, n, m \rangle} : \Phi^{A_m}_e \neq A_n$, for $n \neq m$, ordered by their index. The strategy for $\mathcal R_{\langle e, n, m \rangle}$ has a witness $x$ for $A_n$, waits for $\Phi^{A_{m,s}}_e(x)[s]\converge = 0$, and then enumerates $x$ into $A_n$, initializing all requirements of lower priority. The verification is the same as for :ref{#thm-friedberg-muchnik}: after an action, the numbers entering $A_m$ are witnesses of requirements that are either of higher priority, and then act only finitely often, or of lower priority, and then are fresh. The construction builds all the sets $A_n$ simultaneously and is computable, so the relation $x \in A_n$ is c.e. in $(n, x)$: the sequence is uniformly c.e.
 :::
 ::::
 

@@ -13,7 +13,7 @@ Let $A$ and $B$ be c.e. sets, with $B$ not computable. There are disjoint c.e. s
 
 ## Length of agreement
 
-If $A$ is finite, take $A_0 = A$ and $A_1 = \emptyset$, which are computable, so that neither computes $B$. Assume from now on that $A$ is infinite, and fix a computable injective enumeration $a_0, a_1, a_2, \dots$ of $A$ (:ref{#prop-ce-range}) and a c.e. approximation $(B_s)$ of $B$. We build $A_0$ and $A_1$ by putting each $a_s$ into one of them at stage $s + 1$; so $A_{i,s}$ is the part of $A_i$ built at the end of stage $s$, and $A_0 \cup A_1 = A$, $A_0 \cap A_1 = \emptyset$. The requirements are, for every $e$ and $i \in \{0, 1\}$,
+If $A$ is finite, take $A_0 = A$ and $A_1 = \emptyset$, which are computable, so that neither computes $B$. Assume from now on that $A$ is infinite, and fix a computable injective enumeration $a_0, a_1, a_2, \dots$ of $A$ (:ref{#prop-ce-range}) and a c.e. approximation $(B_s)$ of $B$. We build $A_0$ and $A_1$ by putting each $a_s$ into one of them at stage $s + 1$; so $A_{i,s}$ is the part of $A_i$ built at the end of stage $s$, with $A_{0,0} = A_{1,0} = \emptyset$, and $A_0 \cup A_1 = A$, $A_0 \cap A_1 = \emptyset$. The requirements are, for every $e$ and $i \in \{0, 1\}$,
 $$
 \mathcal R_{e,i} : \Phi^{A_i}_e \neq B,
 $$
@@ -26,7 +26,7 @@ For $e$, $i$ and $s$:
 2. the **restraint** $r(e, i, s)$ is the largest use $\use^{A_{i,s}}_e(x)$ of a computation $\Phi^{A_{i,s}}_e(x)[s]$ that converges, for $x \leq l(e, i, s)$; it is $0$ if there is none.
 :::
 
-The restraint protects the computations below the length of agreement, **and** the computation at the length of agreement itself, if it converges. At that point the computation disagrees with $B_s$, or $B$ has just changed there. Protecting it is what makes the strategy work, as the proof of the main lemma shows.
+The restraint protects the computations below the length of agreement, **and** the computation at the length of agreement itself, if it converges. At that point a convergent computation disagrees with $B_s$, typically because an element has just entered $B$ there. Protecting it is what makes the strategy work, as the proof of the main lemma shows.
 
 ## The construction
 
@@ -49,7 +49,7 @@ For every $e$ and $i$, writing $k = \langle e, i \rangle$:
 :::proof{of=lem-sacks-main}
 By induction on $k$. Suppose the three statements hold for all codes smaller than $k$, and let $R$ bound the restraints of all requirements of higher priority, at all stages.
 
-*Item 1.* Suppose $\mathcal R_{e,i}$ is injured at stage $s + 1$. Then $a_s \leq r(e, i, s)$, so the pair of smallest code whose restraint is at least $a_s$ has code at most $k$; since $a_s$ goes into $A_i$, this pair is some $\langle e', 1 - i \rangle$, of code smaller than $k$. So $a_s \leq r(e', 1 - i, s) \leq R$. Since the enumeration is injective, this happens for finitely many $s$. Let $s_0$ be a stage after the last injury, and after the last enumeration of a number at most $R$.
+*Item 1.* Suppose $\mathcal R_{e,i}$ is injured at stage $s + 1$, with $s \geq k$ (there are finitely many earlier stages). Then $a_s \leq r(e, i, s)$ and $k \leq s$, so the pair of smallest code at most $s$ whose restraint is at least $a_s$ has code at most $k$; since $a_s$ goes into $A_i$, this pair is some $\langle e', 1 - i \rangle$, of code smaller than $k$. So $a_s \leq r(e', 1 - i, s) \leq R$. Since the enumeration is injective, this happens for finitely many $s$. Let $s_0$ be a stage after the last injury, and after the last enumeration of a number at most $R$.
 
 *Preservation.* For $s \geq s_0$, no number at most $r(e, i, s)$ enters $A_i$ at stage $s + 1$. So every computation $\Phi^{A_{i,s}}_e(x)[s]$ with $x \leq l(e, i, s)$ that converges also converges at stage $s + 1$, with the same value and use.
 
@@ -118,8 +118,9 @@ In item 1, why does an injury of $\mathcal R_{e,i}$ involve a requirement of hig
 :::
 
 :::proof{of=cor-splitting-post}
-2. Apply :ref{#thm-sacks-splitting} with $B = A$. Then $A_i \leq_T A$ and $A \not\leq_T A_i$. Since $x \in A$ if and only if $x \in A_0$ or $x \in A_1$, we have $A \leq_T A_0 \oplus A_1$. If $A_0 \leq_T A_1$, then $A \leq_T A_0 \oplus A_1 \leq_T A_1$, a contradiction; so $A_0 \not\leq_T A_1$, symmetrically $A_1 \not\leq_T A_0$, and in particular neither $A_i$ is computable.
-1. Item 2 with $A = \emptyset'$.
+We prove item 2 first. Apply :ref{#thm-sacks-splitting} with $B = A$. Then $A_i \leq_T A$ and $A \not\leq_T A_i$. Since $x \in A$ if and only if $x \in A_0$ or $x \in A_1$, we have $A \leq_T A_0 \oplus A_1$. If $A_0 \leq_T A_1$, then $A \leq_T A_0 \oplus A_1 \leq_T A_1$, a contradiction; so $A_0 \not\leq_T A_1$, symmetrically $A_1 \not\leq_T A_0$, and in particular neither $A_i$ is computable.
+
+Item 1 is item 2 with $A = \emptyset'$.
 :::
 
 :::corollary{#cor-no-minimal-ce}
@@ -130,7 +131,7 @@ There is no minimal non-computable c.e. degree: below every non-computable c.e. 
 Let $A \in \abf$ be c.e., and $A_0, A_1$ as in :ref{#cor-splitting-post}. Then $\deg_T(A_0)$ is strictly between $\obf$ and $\abf$. Moreover $A_0 \oplus A_1 \equiv_T A$: one direction was shown above, and $A_0, A_1 \leq_T A$ gives the other.
 :::
 
-By contrast, Spector showed that there are **minimal** degrees, that is, non-zero degrees with only $\obf$ below them, but none of them is c.e., by the corollary. The structure of the c.e. degrees is much richer than these results show. Sacks proved in 1964 that the c.e. degrees are **dense**: between any two c.e. degrees $\abf < \bbf$ there is a third. Lachlan and Yates proved independently in 1966 that there are **minimal pairs**: non-computable c.e. degrees $\abf$ and $\bbf$ whose only common lower bound is $\obf$. Both proofs use the **infinite injury** method, in which some requirements act infinitely often and the construction is organized along a tree of strategies. We admit these results.
+By contrast, Spector showed that there are **minimal** degrees, that is, non-zero degrees with only $\obf$ below them, but none of them is c.e., by the corollary. The structure of the c.e. degrees is much richer than these results show. Sacks proved in 1964 that the c.e. degrees are **dense**: between any two c.e. degrees $\abf < \bbf$ there is a third. Lachlan and Yates proved independently in 1966 that there are **minimal pairs**: non-computable c.e. degrees $\abf$ and $\bbf$ whose only common lower bound is $\obf$. Both are proved by the **infinite injury** method, in which some requirements act infinitely often; in modern presentations the construction is organized along a tree of strategies. We admit these results here; minimal pairs are constructed in :ref{to="infinite-injury/minimal-pairs"}.
 
 ## Exercises
 
@@ -154,6 +155,7 @@ Item 2 fails. When the least number $q$ entering $B$ after stage $s$ enters, the
 
 The splitting theorem is due to Sacks (1963), who also introduced the preservation strategy. The density theorem is due to Sacks (1964); minimal pairs of c.e. degrees are due to Lachlan (1966) and Yates (1966); minimal degrees to Spector (1956). Soare's book of 1987 presents all these results, and the tree method for infinite injury arguments.
 
+- C. Spector, *On degrees of recursive unsolvability*, Annals of Mathematics 64 (1956), 581–592.
 - G. E. Sacks, *On the degrees less than 0′*, Annals of Mathematics 77 (1963), 211–231.
 - G. E. Sacks, *The recursively enumerable degrees are dense*, Annals of Mathematics 80 (1964), 300–312.
 - A. H. Lachlan, *Lower bounds for pairs of recursively enumerable degrees*, Proceedings of the London Mathematical Society (3) 16 (1966), 537–569.

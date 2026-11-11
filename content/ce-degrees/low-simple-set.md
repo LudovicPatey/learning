@@ -157,7 +157,7 @@ By induction along the priority order, each $\mathcal N_{e,i}$ is injured finite
 
 ## Notes and references
 
-The construction follows Soare's textbook, where low simple sets and the terminology of positive and negative requirements and restraints are developed systematically. The splitting of the second exercise is a weak form of the Sacks splitting theorem of the next lesson.
+The construction follows Soare's textbook, where low simple sets and the terminology of positive and negative requirements and restraints are developed systematically. The splitting of the second exercise uses the same rule for placing elements as the Sacks splitting theorem of the next lesson.
 
 - R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.

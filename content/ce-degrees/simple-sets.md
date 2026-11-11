@@ -5,7 +5,7 @@ duration: 35
 prerequisites: [turing-degrees/turing-reducibility, arithmetic-hierarchy/index-sets]
 ---
 
-In 1944, Post observed that all the c.e. sets that arise naturally — the halting set, the set of theorems of arithmetic, the solvable Diophantine equations — are either computable or Turing equivalent to $\emptyset'$. He asked whether this is always the case.
+In 1944, Post observed that all the non-computable c.e. sets known at the time — the halting set, the set of theorems of a sufficiently strong computably axiomatized theory such as Peano arithmetic — are Turing equivalent to $\emptyset'$. He asked whether this is always the case.
 
 :::definition{#def-post-problem}
 **Post's problem** asks whether there is a c.e. set $A$ with $\emptyset <_T A <_T \emptyset'$, that is, a c.e. set which is neither computable nor Turing complete.
@@ -26,7 +26,7 @@ There is a simple set.
 :::
 
 :::proof{of=thm-post-simple}
-For each $e$, let $x_e$ be the first element $x > 2e$ that appears in the enumeration of $W_e$, if there is one: the element $x$ of the least pair $\langle x, s \rangle$ with $x > 2e$ and $x \in W_e[s]$. Let $S = \{ x_e : x_e \text{ is defined} \}$.
+For each $e$, let $x_e$ be an element $x > 2e$ of $W_e$ found by a fixed search, if there is one: the element $x$ of the least pair $\langle x, s \rangle$ (for the pairing function) with $x > 2e$ and $x \in W_e[s]$; $x_e$ is undefined if $W_e$ has no element greater than $2e$. Let $S = \{ x_e : x_e \text{ is defined} \}$.
 
 *$S$ is c.e.* The relation "$x_e$ is defined and equal to $x$" is c.e., since it is witnessed by a finite search; $S$ is its projection.
 
@@ -42,7 +42,7 @@ Why does the construction require $x_e > 2e$, rather than taking the first eleme
 
 - [x] To keep the complement of $S$ infinite: with this bound, $S$ contains at most $n$ of the numbers $0, \dots, 2n$.
 
-  Without a bound, every $W_e$ could contribute a small element, and $S$ could be cofinite, for instance if $W_e = \{ e \}$ for many $e$.
+  Without a bound, every number $n$ is the chosen element of any index $e$ with $W_e = \{ n \}$, so $S$ would be all of $\nat$.
 - [ ] To make $S$ c.e.
 
   $S$ would be c.e. with any computable choice of the element.
@@ -105,7 +105,7 @@ No simple set is many-one complete. In particular, Post's simple set is a c.e. s
 If $A$ is m-complete, the complement of $A$ is productive by :ref{#prop-productive-reduction}, hence contains an infinite c.e. subset by :ref{#lem-productive-infinite}, so $A$ is not simple.
 :::
 
-The converse of :ref{#prop-productive-reduction} also holds: Myhill showed in 1955 that the creative sets are exactly the m-complete c.e. sets, and that any two creative sets are computably isomorphic. We admit this.
+The converse of the second statement of :ref{#prop-productive-reduction} also holds: Myhill showed in 1955 that the creative sets are exactly the m-complete c.e. sets, and that any two creative sets are computably isomorphic. We admit this (Myhill 1955; see also Soare's book of 1987).
 
 :::quiz[creative sets]
 In the proof of :ref{#lem-productive-infinite}, why is the productive function applied to indices of finite sets that grow along the construction?
@@ -130,7 +130,7 @@ Does :ref{#thm-simple-not-complete} solve Post's problem?
   Post's problem asks about Turing reducibility. It was solved by the priority method.
 :::
 
-Post introduced stronger thinness properties, such as **hypersimplicity**, and showed that hypersimple sets are not complete for truth-table reducibility, a reducibility between many-one and Turing. But no property of this kind ensures Turing incompleteness: Dekker showed that every non-computable c.e. degree contains a hypersimple set, and the program in its original form could not succeed. We admit these results.
+Post introduced stronger thinness properties, such as **hypersimplicity**, and showed that hypersimple sets are not complete for truth-table reducibility, a reducibility between many-one and Turing. But the thinness properties Post considered do not ensure Turing incompleteness: Dekker showed that every non-computable c.e. degree contains a hypersimple set (Dekker 1954), so that Post's program in its original form could not succeed. We admit these results; see Odifreddi's book or Soare's book of 1987.
 
 ## Exercises
 
@@ -163,5 +163,8 @@ $W_e$ is simple if and only if its complement is infinite and $\forall i\ (W_i \
 Post's problem, simple sets and the program of finding thinness properties of complements are in Post's paper of 1944, which also introduced creative sets. Productive sets are due to Dekker (1955), and the characterization of creative sets as m-complete sets to Myhill (1955). Odifreddi's book gives a detailed history of Post's program.
 
 - E. L. Post, *Recursively enumerable sets of positive integers and their decision problems*, Bulletin of the American Mathematical Society 50 (1944), 284–316.
+- J. C. E. Dekker, *A theorem on hypersimple sets*, Proceedings of the American Mathematical Society 5 (1954), 791–796.
+- J. C. E. Dekker, *Productive sets*, Transactions of the American Mathematical Society 78 (1955), 129–149.
 - J. Myhill, *Creative sets*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 1 (1955), 97–108.
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989.
+- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987.
