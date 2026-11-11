@@ -101,7 +101,7 @@ For all $X$ and $Y$, $\deg_T(X \oplus Y)$ is the least upper bound of $\deg_T(X)
 $X(n) = (X \oplus Y)(2n)$ and $Y(n) = (X \oplus Y)(2n + 1)$, so $X$ and $Y$ are computable from $X \oplus Y$. If $X = \Phi^Z_a$ and $Y = \Phi^Z_b$, then $X \oplus Y$ is computed from $Z$ by: on input $m$, if $m = 2n$, compute $\Phi^Z_a(n)$; if $m = 2n + 1$, compute $\Phi^Z_b(n)$. So every upper bound of $\deg_T(X)$ and $\deg_T(Y)$ is above $\deg_T(X \oplus Y)$. The least upper bound depends only on the degrees, so $\abf \vee \bbf$ is well defined.
 :::
 
-The degrees do not form a lattice: there are pairs of degrees without a greatest lower bound, and no strictly increasing sequence of degrees has a least upper bound. These results go back to Kleene and Post (1954) and Spector (1956); we admit them.
+The degrees do not form a lattice: there are pairs of degrees without a greatest lower bound, and no strictly increasing sequence of degrees has a least upper bound. These results go back to Kleene and Post (1954) and Spector (1956); we admit them here, and they are proved in the specialized course on the structure of the Turing degrees (:ref{#cor-not-lattice}).
 
 :::quiz[the join]
 Is the set $X \cup Y$ an upper bound of $\deg_T(X)$ and $\deg_T(Y)$?
