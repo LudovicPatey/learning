@@ -55,7 +55,7 @@ For every $n \in M$, the set $D_n$ of trees $S \in \mathbb P$ with exactly one s
 :::
 
 :::proof{of=lem-harrington-unique}
-Let $S \in \mathbb P$. For each string $\sigma$ of length $n$, the tree $S^\sigma = \{ \tau \in S : \tau \preceq \sigma \vee \sigma \preceq \tau \}$ belongs to $\mathcal S$ by $\Delta^0_1$ comprehension, and has at most one string of length $n$. Suppose that none of them is $\mathcal M$-infinite: every $\sigma$ of length $n$ has some $m$ such that $S^\sigma$ has no string of length $m$. This is a bounded quantification of a $\Sigma^0_1$ formula, so by $\mathsf B\Sigma^0_1$, which holds in $\mathcal M$, there is a common bound $m^*$, which we may take at least $n$. Then $S$ has no string $\rho$ of length $m^*$, since $\rho$ would belong to $S^{\rho \uh n}$. This contradicts the $\mathcal M$-infiniteness of $S$.
+Let $S \in \mathbb P$. For each string $\sigma$ of length $n$, the tree $S^\sigma = \{ \tau \in S : \tau \preceq \sigma \vee \sigma \preceq \tau \}$ belongs to $\mathcal S$ by $\Delta^0_1$ comprehension, and has at most one string of length $n$. Suppose that none of them is $\mathcal M$-infinite: every $\sigma$ of length $n$ has some $m$ such that $S^\sigma$ has no string of length $m$. This is a bounded quantification of a $\Sigma^0_1$ formula, so by $\mathsf B\Sigma^0_1$, which holds in $\mathcal M$, there is $m^*$, which we may take at least $n$, such that every $S^\sigma$ has no string of some length $m < m^*$; since $S^\sigma$ is closed under prefixes, it has no string of length $m^*$ either. Then $S$ has no string $\rho$ of length $m^*$, since $\rho$ would belong to $S^{\rho \uh n}$. This contradicts the $\mathcal M$-infiniteness of $S$. So some $S^\sigma$ is $\mathcal M$-infinite; it belongs to $\mathbb P$, and its only string of length $n$ is $\sigma$, so it belongs to $D_n$.
 :::
 
 The second family of dense sets decides, with a single condition, a $\Sigma^0_1$ formula at all the numbers below a given bound $b$, which may be non-standard. For $S \in \mathbb P$, a bounded formula $H$ and $a \in M$, let
@@ -80,15 +80,15 @@ It belongs to $\mathcal S$ by $\Delta^0_1$ comprehension, and it is a tree, sinc
 :::
 
 :::quiz[deciding with one condition]
-Why is the least number principle needed in the proof of :ref{#lem-harrington-decide}, rather than a sequence of extensions deciding $F(a, G)$ for $a = 0, 1, 2, \dots$ one at a time?
+Why must a single condition decide $F(a, G)$ for all $a < b$ at once, as in :ref{#lem-harrington-decide}, rather than each $a$ being decided by its own extension along the construction?
 
-- [x] Because $b$ may be non-standard: there may be infinitely many $a < b$, and a sequence of extensions indexed by them is not available; a single condition must decide all of them, and the least element of $U$ provides it.
+- [x] The proof of :ref{#lem-harrington-induction} needs one tree $S \in \mathcal S$ with $F(a, G) \leftrightarrow \Phi_S(a)$ for every $a \leq b$, so that induction in $\mathcal M$ applies to the single $\Sigma^0_1$ formula $\Phi_S$; when $b$ is non-standard, conditions chosen separately for infinitely many $a$ give no formula over $\mathcal M$. The lexicographically least element of $U$ provides such an $S$.
 - [ ] Because a single $a$ cannot be decided.
 
-  A single $a$ is easily decided, by restricting to the subtree avoiding $H$, if it is infinite.
-- [ ] Because $U$ is $\Sigma^0_1$.
+  A single $a$ is decided by restricting to the subtree avoiding $H(a, \cdot)$, if it is $\mathcal M$-infinite, and by $S$ itself otherwise.
+- [ ] Because the family of dense sets must be countable.
 
-  $U$ is $\Pi^0_1$; this is why $\mathsf L\Pi^0_1$ is the relevant principle.
+  It would be countable in any case: $M$ is countable, so the dense sets deciding one $a \in M$ at a time form a countable family.
 
 ---
 
@@ -128,14 +128,14 @@ Every set of $\mathcal S$, and $G$, is defined by a bounded formula, so belongs 
 :::
 
 :::proof{of=thm-harrington}
-Let $\mathcal M_0$ be a countable model of $\mathsf{RCA}_0$. We build countable ω-extensions $\mathcal M_0 \subseteq \mathcal M_1 \subseteq \cdots$, all models of $\mathsf{RCA}_0$, as follows. Fix a bijection $i \mapsto (i_0, i_1)$ from $\nat$ to $\nat^2$ with $i_0 \leq i$. At step $i$, consider the $i_1$-th set of $\mathcal M_{i_0}$, in a fixed enumeration of its sets. If it is an $\mathcal M_i$-infinite tree $T$, let $\mathcal M_{i+1} = \mathcal M_i[G]$ for a path $G$ through $T$ given by the construction above, applied to $\mathcal M_i$; otherwise let $\mathcal M_{i+1} = \mathcal M_i$. By :ref{#lem-harrington-extension}, every $\mathcal M_{i+1}$ is a countable model of $\mathsf{RCA}_0$.
+Let $\mathcal M_0$ be a countable model of $\mathsf{RCA}_0$. We build countable ω-extensions $\mathcal M_0 \subseteq \mathcal M_1 \subseteq \cdots$, all models of $\mathsf{RCA}_0$, as follows. Fix a bijection $i \mapsto (i_0, i_1)$ from $\nat$ to $\nat^2$ with $i_0 \leq i$. At step $i$, consider the $i_1$-th set of $\mathcal M_{i_0}$, in a fixed enumeration of its sets. If it is an $\mathcal M_i$-infinite tree $T$, let $\mathcal M_{i+1} = \mathcal M_i[G]$ for a path $G$ through $T$ given by the construction above, applied to $\mathcal M_i$; otherwise let $\mathcal M_{i+1} = \mathcal M_i$. By :ref{#lem-harrington-extension}, every $\mathcal M_{i+1}$ is a model of $\mathsf{RCA}_0$; it is countable, since its sets are defined by formulas with parameters in the countable structure $\mathcal M_i \cup \{ G \}$.
 
 Let $\mathcal N$ be the union: same first-order part, and the union of the second-order parts. Every instance of the axioms of $\mathsf{RCA}_0$ in $\mathcal N$ has finitely many set parameters, all in some $\mathcal M_i$, and is arithmetic apart from the conclusion of comprehension; it holds in $\mathcal M_i$, with the same meaning, and the set given by comprehension in $\mathcal M_i$ belongs to $\mathcal N$. So $\mathcal N \models \mathsf{RCA}_0$. If $T \in \mathcal N$ is an infinite tree in the sense of $\mathcal N$, it is the $i_1$-th set of some $\mathcal M_{i_0}$, and it is infinite in the sense of $\mathcal M_i$ at step $i$, since this is arithmetic; so a path through $T$ was added at step $i$, and it belongs to $\mathcal N$. So $\mathcal N \models \mathsf{WKL}_0$.
 :::
 
 ## Consequences
 
-By :ref{#thm-harrington}, $\mathsf{WKL}_0$ and $\mathsf{RCA}_0$ prove the same arithmetic sentences, and even the same $\Pi^1_1$ sentences. Compactness arguments in analysis, such as the boundedness of continuous functions on $[0, 1]$ or Gödel's completeness theorem, therefore have no consequences for the natural numbers beyond $\mathrm I\Sigma_1$. Since $\mathrm I\Sigma_1$ is $\Pi_2$-conservative over primitive recursive arithmetic, these are finitistically justified in Hilbert's sense, a partial realization of Hilbert's program emphasized by Simpson.
+By :ref{#thm-harrington}, $\mathsf{WKL}_0$ and $\mathsf{RCA}_0$ prove the same arithmetic sentences, and even the same $\Pi^1_1$ sentences. Compactness arguments in analysis, such as the boundedness of continuous functions on $[0, 1]$ or Gödel's completeness theorem, therefore have no consequences for the natural numbers beyond $\mathrm I\Sigma_1$. Since $\mathrm I\Sigma_1$ is $\Pi_2$-conservative over primitive recursive arithmetic, every $\Pi_2$ sentence of $\mathcal L_1$ provable in $\mathsf{WKL}_0$ is provable in primitive recursive arithmetic, a system regarded as finitistic in Hilbert's sense; Simpson presents this as a partial realization of Hilbert's program.
 
 The theorem does not extend to $\Pi^1_2$ sentences: $\mathsf{WKL}$ itself is $\Pi^1_2$.
 

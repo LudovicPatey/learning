@@ -39,7 +39,7 @@ Let $n \geq 1$. Over $\mathsf I\Delta^0_0 + \mathsf B\Sigma^0_n$:
 :::
 
 :::proof{of=lem-collection-closure}
-Item 2 follows from item 1 by negation, since the negation of a $\Sigma^0_n$ formula is logically equivalent to a $\Pi^0_n$ formula. It suffices to treat one operation at a time. By renaming bound variables, $\exists y\, \alpha \wedge \exists z\, \beta$ is equivalent to $\exists y\, \exists z\, (\alpha \wedge \beta)$, and similarly for $\vee$; $\exists x < t\ \exists y\, \alpha$ is equivalent to $\exists y\ \exists x < t\ \alpha$; and an existential quantifier merges with the first block. The only non-trivial case is the bounded universal quantifier. We proceed by induction on $n$.
+Item 2 follows from item 1 by negation, since the negation of a $\Sigma^0_n$ formula is logically equivalent to a $\Pi^0_n$ formula. It suffices to treat one operation at a time. By renaming bound variables, $\exists y\, \alpha \wedge \exists z\, \beta$ is equivalent to $\exists y\, \exists z\, (\alpha \wedge \beta)$, and similarly for $\vee$; $\exists x < t\ \exists y\, \alpha$ is equivalent to $\exists y\ \exists x < t\ \alpha$; and an existential quantifier merges with the first block. We may also assume that the first block of a $\Sigma^0_n$ formula consists of a single quantifier: $\exists y_1\, \exists y_2\, \alpha$ is equivalent to $\exists w\ \exists y_1 < w\ \exists y_2 < w\ \alpha$, and $\exists y_1 < w\ \exists y_2 < w\ \alpha$, with $\alpha \in \Pi^0_{n-1}$, is bounded if $n = 1$ and equivalent to a $\Pi^0_{n-1}$ formula by item 2 for $n - 1$ if $n \geq 2$, in the induction below. The only non-trivial case is the bounded universal quantifier. We proceed by induction on $n$.
 
 For $n = 1$, let $\varphi = \exists y\, \delta(x, y)$ with $\delta$ bounded. Then $\forall x < t\ \exists y\ \delta$ implies $\exists b\ \forall x < t\ \exists y < b\ \delta$ by $\mathsf B\Sigma^0_1$, and the converse is logical. The second formula is $\Sigma^0_1$.
 
@@ -89,15 +89,15 @@ The formula $\forall x < c\ \exists w < b\ \chi$ is equivalent to a $\Pi^0_{n-1}
 :::
 
 :::quiz[induction implies collection]
-In the proof of :ref{#thm-induction-collection}, why is the induction carried out on $c$, the number of indices $x$ already handled, rather than directly on the conclusion?
+In the proof of :ref{#thm-induction-collection}, why does the formula $\theta(c)$ carry the hypothesis $c \leq a$?
 
-- [x] Because the conclusion "$\exists b\ \forall x < a\ \exists y < b\ \varphi$" is a statement about a fixed $a$; the induction proves it for every initial segment $\{ x : x < c \}$, extending the bound one index at a time.
-- [ ] Because $a$ may be standard.
+- [x] The induction step needs a witness $w_0$ with $\chi(c, w_0)$, and the hypothesis $\forall x < a\ \exists w\ \chi(x, w)$ provides one only for $c < a$; without the guard, the step from $c$ to $c + 1$ could fail for $c \geq a$.
+- [ ] To make $\theta$ equivalent to a $\Sigma^0_n$ formula.
 
-  The argument is needed precisely when $a$ is non-standard; for standard $a$, finitely many applications of logic suffice.
-- [ ] Because $\varphi$ is $\Pi^0_n$.
+  The guard is a bounded formula; the formula without it has the same complexity.
+- [ ] Because $\mathsf I\Sigma^0_n$ only gives induction up to a fixed bound.
 
-  $\varphi$ is $\Sigma^0_n$; its complexity determines the complexity of $\theta$.
+  $\mathsf I\Sigma^0_n$ gives $\forall c\ \theta(c)$ for the formula as written; the bound $a$ comes from the instance of collection, not from the induction scheme.
 
 ---
 
@@ -137,7 +137,7 @@ For every $n \geq 1$, $\mathsf I\Delta^0_0 + \mathsf B\Sigma^0_{n+1}$ proves $\m
 :::
 
 :::proof{of=thm-collection-induction}
-By induction on $n$. Assume $\mathsf B\Sigma^0_{n+1}$; it contains $\mathsf B\Sigma^0_n$ and $\mathsf B\Sigma^0_{n-1}$ when $n \geq 2$, so by the induction hypothesis $\mathsf I\Sigma^0_{n-1}$ holds when $n \geq 2$, hence also $\mathsf I\Pi^0_{n-1}$ by :ref{#thm-isigma-ipi}.
+By induction on $n$. Assume $\mathsf B\Sigma^0_{n+1}$; it contains $\mathsf B\Sigma^0_n$ and $\mathsf B\Sigma^0_{n-1}$. When $n \geq 2$, the induction hypothesis (the theorem for $n - 1$, applied to $\mathsf B\Sigma^0_n$) gives $\mathsf I\Sigma^0_{n-1}$, hence also $\mathsf I\Pi^0_{n-1}$ by :ref{#thm-isigma-ipi}.
 
 Let $\varphi(x) \equiv \exists y\, \psi(x, y)$ with $\psi \in \Pi^0_{n-1}$, suppose $\varphi(0)$ and $\forall x\, (\varphi(x) \rightarrow \varphi(x+1))$, and fix $a$. For every $x \leq a$ there is $u$ with $\forall y\, \neg \psi(x, y) \vee \psi(x + 1, u)$. This formula is equivalent to a $\Pi^0_n$ formula, hence is $\Sigma^0_{n+1}$, and $\mathsf B\Sigma^0_{n+1}$ gives a bound $b_0$. Let $y_0$ be such that $\psi(0, y_0)$, and $b = \max(b_0, y_0 + 1)$. Then for every $x < a$,
 $$
@@ -156,7 +156,7 @@ We obtain the hierarchy, for every $n \geq 1$, over $\mathsf I\Delta^0_0$:
 $$
 \mathsf I\Sigma^0_{n+1} \;\Rightarrow\; \mathsf B\Sigma^0_{n+1} \;\Rightarrow\; \mathsf I\Sigma^0_n \;\Rightarrow\; \mathsf B\Sigma^0_n.
 $$
-Paris and Kirby showed that none of these implications reverses: there are models of $\mathsf I\Sigma^0_n$ in which $\mathsf B\Sigma^0_{n+1}$ fails, and models of $\mathsf B\Sigma^0_{n+1}$ in which $\mathsf I\Sigma^0_{n+1}$ fails. The constructions use non-standard models of arithmetic and are admitted here (Hájek and Pudlák, Chapter IV). Slaman proved that $\mathsf B\Sigma^0_n$ is equivalent to induction for $\Delta^0_n$ formulas, over $\mathsf I\Delta^0_0$ with the totality of exponentiation.
+Paris and Kirby showed that none of these implications reverses: for every $n \geq 1$, there are models of $\mathsf I\Sigma^0_n$ in which $\mathsf B\Sigma^0_{n+1}$ fails, and models of $\mathsf B\Sigma^0_n$ in which $\mathsf I\Sigma^0_n$ fails. The constructions use non-standard models of arithmetic and are admitted here (Hájek and Pudlák, Chapter IV). Slaman proved that $\mathsf B\Sigma^0_n$ is equivalent to induction for $\Delta^0_n$ formulas, over $\mathsf I\Delta^0_0$ with the totality of exponentiation.
 
 :::quiz[collection implies induction]
 In the proof of :ref{#thm-collection-induction}, why is the formula $\theta$ of lower complexity than $\varphi$?
@@ -184,7 +184,7 @@ Why is the witness $y_0$ for $\varphi(0)$ added to the bound?
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-bsigma-bpi difficulty=1}
 Show that, over $\mathsf I\Delta^0_0$, $\mathsf B\Sigma^0_{n+1}$ is equivalent to $\mathsf B\Pi^0_n$ for every $n \geq 1$.
 
 :::solution
@@ -192,7 +192,7 @@ Every $\Pi^0_n$ formula is $\Sigma^0_{n+1}$, so $\mathsf B\Sigma^0_{n+1}$ implie
 $$
 \psi'(x, w) \equiv \forall u \leq w\ \forall v \leq w\ (w = \langle u, v \rangle \rightarrow \psi(x, u, v)).
 $$
-Since every $w$ is the pair of unique $u, v \leq w$, $\psi'(x, w)$ holds if and only if $\psi(x, u, v)$ for the components of $w$. Moving the bounded quantifiers and the bounded hypothesis inside the first universal block of $\psi$, $\psi'$ is equivalent to a $\Pi^0_n$ formula. Now $\forall x < a\ \exists w\ \psi'(x, w)$, so $\mathsf B\Pi^0_n$ gives $b$ with $\forall x < a\ \exists w < b\ \psi'(x, w)$. If $w = \langle u, v \rangle < b$, then $u \leq w < b$ and $\varphi(x, u)$. So $\forall x < a\ \exists y < b\ \varphi(x, y)$.
+Since every $w$ is the pair of unique $u, v \leq w$, $\psi'(x, w)$ holds if and only if $\psi(x, u, v)$ for the components of $w$. Since exactly one pair $(u, v)$ satisfies $w = \langle u, v \rangle$, the prefix $\forall u \leq w\ \forall v \leq w\ (w = \langle u, v \rangle \rightarrow \cdot)$ amounts to substituting the components of $w$, and commutes with every quantifier of $\psi$: moving it down to the bounded matrix of $\psi$, $\psi'$ is equivalent to a $\Pi^0_n$ formula, without any use of collection. Now $\forall x < a\ \exists w\ \psi'(x, w)$, so $\mathsf B\Pi^0_n$ gives $b$ with $\forall x < a\ \exists w < b\ \psi'(x, w)$. If $w = \langle u, v \rangle < b$, then $u \leq w < b$ and $\varphi(x, u)$. So $\forall x < a\ \exists y < b\ \varphi(x, y)$.
 :::
 ::::
 
@@ -209,6 +209,7 @@ Let $\varphi \in \Sigma^0_n$ satisfy the hypothesis, and fix $z$. Let $\theta(x)
 The hierarchy of induction and collection schemes is due to Paris and Kirby (1978), building on Parsons (1970), who showed that $\mathrm I\Sigma_1$ proves the same $\Pi_2$ sentences as primitive recursive arithmetic. Hájek and Pudlák's monograph is the standard reference; Kaye's book gives a model-theoretic introduction.
 
 - J. B. Paris and L. A. S. Kirby, *Σₙ-collection schemas in arithmetic*, in Logic Colloquium '77, North-Holland, 1978, 199–209.
+- C. Parsons, *On a number theoretic choice schema and its relation to induction*, in Intuitionism and Proof Theory, North-Holland, 1970, 459–473.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I.2 and Chapter IV.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991, Chapters 2 and 10.
 - T. A. Slaman, *Σₙ-bounding and Δₙ-induction*, Proceedings of the American Mathematical Society 132 (2004), 2449–2456.
