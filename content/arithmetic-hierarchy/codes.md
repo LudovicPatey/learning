@@ -2,7 +2,7 @@
 title: Codes for sets
 summary: Indices of computable, c.e., finite and low sets; the information each kind of index provides, and fixed point arguments showing what cannot be recovered uniformly.
 duration: 35
-prerequisites: [post-theorem, fundamentals/fixed-point]
+prerequisites: [post-theorem, fundamentals/fixed-point, turing-degrees/low-and-high]
 ---
 
 Constructions in computability theory manipulate sets through finite descriptions: an index of a program computing the set, or enumerating it, or deciding it relative to $\emptyset'$. The same set has descriptions of several kinds, and they carry different amounts of information. An index of the characteristic function of a computable set tells more than an index of an enumeration of it; the list of the elements of a finite set tells more than an index of its characteristic function. This lesson defines the usual kinds of indices and proves, by fixed point arguments, that the passage from the poorer to the richer kinds is not uniform. Choosing the right kind of index is often the first decision in a construction.

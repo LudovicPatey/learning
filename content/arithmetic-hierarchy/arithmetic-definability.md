@@ -68,7 +68,7 @@ A relation is $\Sigma_1$-definable if and only if it is c.e. Every computable re
 :::
 
 :::proof{of=cor-sigma1-ce}
-A $\Sigma_1$-definable relation is the projection of a relation defined by a bounded formula, which is computable by :ref{#lem-bounded-computable}; so it is c.e. Conversely, by :ref{#thm-kleene-normal-form-proof}, $x \in W_e$ if and only if $\exists s\ T(e, x, s)$, with $T$ primitive recursive. If $\chi$ is the characteristic function of $T$, then $T(e, x, s) \iff \chi(e, x, s) = 1$, and the graph of $\chi$ is $\Sigma_1$-definable by :ref{#thm-pr-sigma1}; so $W_e$ is $\Sigma_1$-definable. A computable relation and its complement are c.e., which gives the second statement.
+A $\Sigma_1$-definable relation is the projection of a relation defined by a bounded formula, which is computable by :ref{#lem-bounded-computable}; so it is c.e. Conversely, by :ref{#thm-kleene-normal-form-proof}, $x \in W_e$ if and only if $\exists s\ T_1(e, x, s)$, with $T_1$ primitive recursive. If $\chi$ is the characteristic function of $T_1$, then $T_1(e, x, s) \iff \chi(e, x, s) = 1$, and the graph of $\chi$ is $\Sigma_1$-definable by :ref{#thm-pr-sigma1}; so $W_e$ is $\Sigma_1$-definable. For a c.e. relation of arity $k$, the same argument applies with $T_k$, since a c.e. relation is the domain of a partial computable function of $k$ arguments. A computable relation and its complement are c.e., which gives the second statement.
 :::
 
 :::quiz[computations are Σ₁-definable]
@@ -104,9 +104,9 @@ A relation is definable in arithmetic if and only if it is arithmetic. More prec
 :::
 
 :::proof{of=thm-definable-arithmetic}
-If $A$ is $\Sigma^0_n$, then $\vec x \in A \iff \exists y_1\, \forall y_2 \cdots Q y_n\ R(\vec x, \vec y)$ with $R$ computable, and $R$ is defined both by a $\Sigma_1$ formula and by the negation of one (:ref{#cor-sigma1-ce}); choosing the first when $Q$ is $\exists$ and the second when $Q$ is $\forall$, and contracting the last quantifier with the formula, gives a definition of the stated form.
+If $A$ is $\Sigma^0_n$, then $\vec x \in A \iff \exists y_1\, \forall y_2 \cdots Q y_n\ R(\vec x, \vec y)$ with $R$ computable, and $R$ is defined both by a $\Sigma_1$ formula and by the negation of one (:ref{#cor-sigma1-ce}); choosing the first when $Q$ is $\exists$ ($n$ odd) and the second when $Q$ is $\forall$ ($n$ even) gives a definition of the stated form. Conversely, in a formula of the stated form, $\varphi$ defines a $\Sigma^0_1$ relation when $n$ is odd and a $\Pi^0_1$ relation when $n$ is even (:ref{#cor-sigma1-ce}). Then $Q y_n\ \varphi$ defines a relation of the same class, by :ref{#prop-hierarchy-closure}, and each of the $n - 1$ remaining quantifiers, of the kind opposite to the one after it, raises the level by one: $\forall y$ in front of a $\Sigma^0_k$ relation gives a $\Pi^0_{k+1}$ relation, and $\exists y$ in front of a $\Pi^0_k$ relation a $\Sigma^0_{k+1}$ relation. The relation defined is therefore $\Sigma^0_n$.
 
-Conversely, the relations defined by formulas are arithmetic, by induction on formulas. Atomic formulas define computable relations. The arithmetic relations are closed under complement, since $\Sigma^0_n$ and $\Pi^0_n$ are complements of each other and $\Pi^0_n \subseteq \Sigma^0_{n+1}$; under finite unions and intersections, since a $\Sigma^0_m$ and a $\Sigma^0_n$ relation are both $\Sigma^0_{\max(m, n)}$; and under quantification, since $\exists y$ applied to a $\Sigma^0_n$ relation gives a $\Sigma^0_n$ relation, and $\forall y$ applied to a $\Sigma^0_n$ relation gives a $\Pi^0_{n+1}$ relation (:ref{#prop-hierarchy-closure}).
+For the first statement, it remains to show that every definable relation is arithmetic, by induction on formulas. Atomic formulas define computable relations. The arithmetic relations are closed under complement, since $\Sigma^0_n$ and $\Pi^0_n$ are complements of each other and $\Pi^0_n \subseteq \Sigma^0_{n+1}$; under finite unions and intersections, since a $\Sigma^0_m$ and a $\Sigma^0_n$ relation are both $\Sigma^0_{\max(m, n)}$; and under quantification, since $\exists y$ applied to a $\Sigma^0_n$ relation gives a $\Sigma^0_n$ relation, and $\forall y$ applied to a $\Sigma^0_n$ relation gives a $\Pi^0_{n+1}$ relation (:ref{#prop-hierarchy-closure}).
 :::
 
 ## Truth is not arithmetic
@@ -118,10 +118,10 @@ The set $\mathrm{True} = \{ \ulcorner \varphi \urcorner : \varphi \text{ is a se
 :::
 
 :::proof{of=thm-tarski}
-Every arithmetic set $A$ is many-one reducible to $\mathrm{True}$: if $\varphi(x)$ defines $A$, then $n \in A \iff \ulcorner \varphi(\bar n) \urcorner \in \mathrm{True}$, and $n \mapsto \ulcorner \varphi(\bar n) \urcorner$ is computable. Suppose $\mathrm{True}$ is $\Sigma^0_n$. The set $\emptyset^{(n+1)}$ is arithmetic, so it reduces to $\mathrm{True}$, and it would be $\Sigma^0_n$ by :ref{#prop-sigma1-delta1}. But $\Sigma^0_n \subseteq \Pi^0_{n+1}$, and $\emptyset^{(n+1)}$ is not $\Pi^0_{n+1}$ (:ref{#cor-hierarchy-strict}). The second statement follows by :ref{#thm-definable-arithmetic}.
+Every arithmetic set $A$ is many-one reducible to $\mathrm{True}$: by :ref{#thm-definable-arithmetic}, some formula $\varphi(x)$ defines $A$, and $n \in A \iff \ulcorner \varphi(\bar n) \urcorner \in \mathrm{True}$, and $n \mapsto \ulcorner \varphi(\bar n) \urcorner$ is computable. Suppose $\mathrm{True}$ is $\Sigma^0_n$. The set $\emptyset^{(n+1)}$ is arithmetic, so it reduces to $\mathrm{True}$, and it would be $\Sigma^0_n$ by :ref{#prop-sigma1-delta1}. But $\Sigma^0_n \subseteq \Pi^0_{n+1}$, and $\emptyset^{(n+1)}$ is not $\Pi^0_{n+1}$ (:ref{#cor-hierarchy-strict}). The second statement follows by :ref{#thm-definable-arithmetic}.
 :::
 
-The set $\mathrm{True}$ is in fact Turing equivalent to $\emptyset^{(\omega)} = \{ \langle n, x \rangle : x \in \emptyset^{(n)} \}$, the uniform join of all the finite jumps: deciding the truth of a sentence with $n$ quantifier alternations requires $\emptyset^{(n)}$, uniformly in $n$. We admit this refinement; it is the starting point of the hyperarithmetic hierarchy, which continues the jump along computable ordinals.
+The set $\mathrm{True}$ is in fact Turing equivalent to $\emptyset^{(\omega)} = \{ \langle n, x \rangle : x \in \emptyset^{(n)} \}$, the uniform join of all the finite jumps: the truth of a prenex sentence with $n$ blocks of quantifiers can be decided with the oracle $\emptyset^{(n)}$, uniformly in $n$, and conversely $\emptyset^{(n)}$ is reducible to $\mathrm{True}$, uniformly in $n$. We admit this refinement (see Rogers' book); it is the starting point of the hyperarithmetic hierarchy, which continues the jump along computable ordinals.
 
 :::corollary[First incompleteness theorem]{#cor-incompleteness}
 Let $T$ be a set of sentences true in $\nat$ whose set of theorems is c.e. Then some true sentence is not a theorem of $T$.
@@ -131,7 +131,7 @@ Let $T$ be a set of sentences true in $\nat$ whose set of theorems is c.e. Then 
 The set of theorems of $T$ is c.e., hence $\Sigma^0_1$, and it is contained in $\mathrm{True}$, since the theorems of a set of true sentences are true. If it were equal to $\mathrm{True}$, then $\mathrm{True}$ would be $\Sigma^0_1$, contradicting :ref{#thm-tarski}.
 :::
 
-For a theory given by a computable set of axioms, the set of theorems is c.e., since proofs are finite objects whose correctness is decidable; we admit this, which belongs to a course on logic. Gödel's original theorem is stronger in two respects: it only assumes the consistency of $T$ (or its $\omega$-consistency), not its truth, and it produces an explicit unprovable sentence.
+For a theory given by a computable set of axioms, the set of theorems is c.e., since proofs are finite objects whose correctness is decidable; we admit this, which belongs to a course on logic. Gödel's original theorem is stronger in two respects: for theories that contain a weak fragment of arithmetic, it assumes only the $\omega$-consistency of $T$, not its truth (Rosser (1936) weakened this hypothesis to consistency), and it produces an explicit unprovable sentence.
 
 :::quiz[Tarski and Gödel]
 Why does the proof of :ref{#thm-tarski} use the set $\emptyset^{(n+1)}$ rather than $\emptyset^{(n)}$?
@@ -193,3 +193,5 @@ The β-function and the representation of recursive functions in arithmetic are 
 - A. Tarski, *Der Wahrheitsbegriff in den formalisierten Sprachen*, Studia Philosophica 1 (1936), 261–405.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991.
 - C. Smoryński, *Logical Number Theory I*, Springer, 1991.
+- J. B. Rosser, *Extensions of some theorems of Gödel and Church*, Journal of Symbolic Logic 1 (1936), 87–91.
+- H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.

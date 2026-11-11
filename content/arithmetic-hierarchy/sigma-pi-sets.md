@@ -49,7 +49,7 @@ Let $n \geq 1$.
 :::proof{of=prop-hierarchy-basic}
 1. The negation of $\exists y_1\ \forall y_2 \cdots R$ is $\forall y_1\ \exists y_2 \cdots \neg R$, and the complement of a computable relation is computable.
 2. Add a dummy quantifier: if $\vec x \in A \iff \exists y_1 \cdots Q y_n\ R$, then $\vec x \in A \iff \forall y_0\ \exists y_1 \cdots Q y_n\ R$ and $\vec x \in A \iff \exists y_1 \cdots Q y_n\ Q' y_{n+1}\ R$, where $R$ does not depend on $y_0$ or $y_{n+1}$. The first form is $\Pi^0_{n+1}$, the second $\Sigma^0_{n+1}$. The case of $\Pi^0_n$ relations is symmetric.
-3. The pairing function is a bijection, so $\exists y_1 \exists y_2$ ranges over the same pairs as $\exists z$ with $(y_1, y_2) = (\pi_0(z), \pi_1(z))$. Substituting the computable functions $\pi_0, \pi_1$ in a computable relation gives a computable relation, so merging two adjacent quantifiers of the same kind does not change the level. Repeating this merges each block into a single quantifier.
+3. The pairing function is a bijection, so $\exists y_1 \exists y_2$ ranges over the same pairs as $\exists z$ with $(y_1, y_2) = (\pi_0(z), \pi_1(z))$. The relation $P(\vec x, \pi_0(z), \pi_1(z))$ is $\Pi^0_{n-1}$: substitute $\pi_0(z), \pi_1(z)$ for $y_1, y_2$ in the computable relation of a normal form of $P$, which gives a computable relation, since $\pi_0$ and $\pi_1$ are computable. So merging two adjacent quantifiers of the same kind does not change the level. Applying this to the quantifiers of a prefix over a computable relation, which may stand anywhere in the prefix, merges each block into a single quantifier.
 :::
 
 :::quiz[normal forms]
@@ -71,9 +71,9 @@ Why is every $\Pi^0_1$ set also $\Sigma^0_2$?
 - [ ] Because every $\Pi^0_1$ set is c.e.
 
   The complement of the halting set is $\Pi^0_1$ and not c.e.
-- [ ] Because $\Pi^0_1$ sets are computable in $\emptyset'$.
+- [ ] Because the universal quantifier can be turned into an existential one by pairing.
 
-  This is true, but the statement is about forms of definitions, and follows directly from adding a quantifier.
+  Pairing merges adjacent quantifiers of the same kind; it never changes a universal quantifier into an existential one.
 :::
 
 ## Closure properties
@@ -202,3 +202,4 @@ The arithmetic hierarchy was introduced independently by Kleene (1943) and Mosto
 - S. C. Kleene, *Recursive predicates and quantifiers*, Transactions of the American Mathematical Society 53 (1943), 41–73.
 - A. Mostowski, *On definable sets of positive integers*, Fundamenta Mathematicae 34 (1947), 81–112.
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
+- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987.

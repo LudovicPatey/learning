@@ -88,13 +88,13 @@ So all the inclusions $\Delta^0_n \subsetneq \Sigma^0_n, \Pi^0_n \subsetneq \Del
 :::corollary{#cor-delta2-limit}
 1. A set is $\Delta^0_2$ if and only if it is computable in $\emptyset'$, if and only if it is limit computable.
 2. A set is arithmetic if and only if it is computable in $\emptyset^{(n)}$ for some $n$.
-3. The class of $\Delta^0_n$ sets is closed under Turing reducibility, for every $n \geq 1$; the classes $\Sigma^0_n$ and $\Pi^0_n$ are not.
+3. For every $n \geq 1$, the class of $\Delta^0_n$ sets is closed downward under Turing reducibility: if $A \leq_T B$ and $B$ is $\Delta^0_n$, then $A$ is $\Delta^0_n$. The classes $\Sigma^0_n$ and $\Pi^0_n$ are not.
 :::
 
 :::proof{of=cor-delta2-limit}
 1. Item 2 of the theorem for $n = 1$, and Shoenfield's limit lemma (:ref{#thm-limit-lemma}).
 2. A $\Sigma^0_n$ set is $\Delta^0_{n+1}$, hence computable in $\emptyset^{(n)}$; conversely a set computable in $\emptyset^{(n)}$ is $\Delta^0_{n+1}$.
-3. $\Delta^0_n$ is the class of sets computable in $\emptyset^{(n-1)}$, which is closed downward under $\leq_T$. The set $\nat \setminus \emptyset^{(n)}$ is Turing equivalent to the $\Sigma^0_n$ set $\emptyset^{(n)}$, but is not $\Sigma^0_n$.
+3. $\Delta^0_n$ is the class of sets computable in $\emptyset^{(n-1)}$, which is closed downward under $\leq_T$. The set $\nat \setminus \emptyset^{(n)}$ is Turing equivalent to the $\Sigma^0_n$ set $\emptyset^{(n)}$, but is not $\Sigma^0_n$ (:ref{#cor-hierarchy-strict}); symmetrically, $\emptyset^{(n)}$ is Turing equivalent to the $\Pi^0_n$ set $\nat \setminus \emptyset^{(n)}$, but is not $\Pi^0_n$.
 :::
 
 The name "$\Delta^0_2$ approximation" used in the course on Turing degrees is thus justified: the sets with such approximations are exactly the $\Delta^0_2$ sets.
@@ -152,7 +152,7 @@ If $X \leq_T Y$, then $X' \leq_1 Y'$ by :ref{#thm-jump}. Conversely, let $h$ be 
 Show that a set $A$ is $\Sigma^0_2$ if and only if $A = \{ x : \exists y\ \forall z \geq y\ \ g(x, z) = 1 \}$ for some total computable function $g : \nat^2 \to \{0, 1\}$.
 
 :::solution
-A set of this form is $\Sigma^0_2$. Conversely, let $A = \{ x : \exists y\ \forall z\ R(x, y, z) \}$ with $R$ computable. Define $g(x, s) = 1$ if there is $y < s$ such that $R(x, y, z)$ holds for all $z < s$, and in addition the least such $y$ is the same as at stage $s - 1$; and $g(x, s) = 0$ otherwise. If $x \in A$, let $y_0$ be the least $y$ with $\forall z\ R(x, y, z)$; every $y < y_0$ eventually fails at some $z$, so from some stage on the least candidate below $s$ is $y_0$, and $g(x, s) = 1$ for all large $s$. If $x \notin A$, every candidate $y$ eventually fails, so the least candidate changes infinitely often, or there is no candidate, and $g(x, s) = 0$ for infinitely many $s$.
+A set of this form is $\Sigma^0_2$. Conversely, let $A = \{ x : \exists y\ \forall z\ R(x, y, z) \}$ with $R$ computable. Define $g(x, s) = 1$ if there is $y < s$ such that $R(x, y, z)$ holds for all $z < s$, and in addition the least such $y$ is the same as at stage $s - 1$; and $g(x, s) = 0$ otherwise. If $x \in A$, let $y_0$ be the least $y$ with $\forall z\ R(x, y, z)$; every $y < y_0$ eventually fails at some $z$, so from some stage on the least candidate below $s$ is $y_0$, and $g(x, s) = 1$ for all large $s$. If $x \notin A$, every $y$ eventually fails, and a $y$ that has failed is never a candidate again. So each $y$ is the least candidate at only finitely many stages, and for infinitely many $s$ either there is no candidate at stage $s$ or the least candidate differs from the one at stage $s - 1$; at these stages $g(x, s) = 0$.
 :::
 ::::
 

@@ -79,7 +79,7 @@ The numbers not in $V_x$ at stage $s$, in increasing order, are called the **mar
 Hence $x \in A \iff h(x) \in \mathrm{Cof}$.
 :::
 
-The construction is a first example of a **marker argument**: each $n$ may, when it acts, destroy all markers beyond the $n$-th one. An $n$ that acts infinitely often eventually destroys all markers beyond the $n$-th; if every $n$ acts finitely often, each marker settles. Arguments of this kind, with priorities between the actors, are the subject of the course on Post's problem.
+The construction is a first example of a **marker argument**: each $n$ may, when it acts, destroy all the markers below the current stage except the first $n$. If some $n$ acts infinitely often, at most $n$ markers survive; if every $n$ acts finitely often, each marker settles. Arguments of this kind, with priorities between the actors, are the subject of the course on Post's problem.
 
 :::quiz[the marker argument]
 Why does an action of $n$ keep the first $n$ markers instead of removing all of them?
@@ -122,7 +122,7 @@ The following table collects the classification of the basic index sets. The set
 | $\mathrm{Cof}$ | $\exists n\ \forall x > n\ \ x \in W_e$ | $\Sigma^0_3$ |
 | $\mathrm{Rec} = \{ e : W_e \text{ computable} \}$ (admitted) | see :ref{to="arithmetic-hierarchy/sigma-pi-sets"} | $\Sigma^0_3$ |
 
-The completeness of $\mathrm{Rec}$ requires a more elaborate construction; a proof is in Soare's book.
+The completeness of $\mathrm{Rec}$ requires a more elaborate construction, which we admit; a proof is in Soare's *Recursively Enumerable Sets and Degrees*, Chapter IV, Section 3.
 
 ## Exercises
 
