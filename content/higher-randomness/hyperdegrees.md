@@ -2,7 +2,7 @@
 title: Randomness and hyperarithmetic reducibility
 summary: Hyperarithmetic reducibility; the higher analogue of Sacks' theorem, that the upper hyperarithmetic cone of a non-hyperarithmetic set is null; the hierarchy of higher randomness notions and its relation with arithmetic randomness.
 duration: 30
-prerequisites: [pi11-randomness, martin-lof-randomness/measure]
+prerequisites: [pi11-randomness, martin-lof-randomness/measure, martin-lof-randomness/randomness-and-degrees]
 ---
 
 Sacks' theorem (:ref{#thm-sacks}) says that a non-computable set is computed by almost no sequence. Its proof decides each bit of the set by a majority vote over a cone of positive measure, which is a computable process when the measures can be approximated. In the higher setting, the measures of $\Delta^1_1$ classes are hyperarithmetic, and the same vote, combined with the Sacks–Tanaka theorem, shows that a non-hyperarithmetic set is hyperarithmetically computed by almost no sequence. The lesson ends with the hierarchy of the notions of the course.
@@ -79,7 +79,7 @@ Combining the lessons of this course:
 $$
 \Pi^1_1\text{-random} \;\Rightarrow\; \Pi^1_1\text{-Martin-Löf random} \;\Rightarrow\; \Delta^1_1\text{-random} \;\Leftrightarrow\; \Sigma^1_1\text{-random} \;\Rightarrow\; n\text{-random for every } n.
 $$
-None of the implications reverses. For the last one, see the first exercise. The separation of $\Delta^1_1$-randomness from $\Pi^1_1$-Martin-Löf randomness is due to Hjorth and Nies, and the separation of $\Pi^1_1$-Martin-Löf randomness from $\Pi^1_1$-randomness to Hjorth and Nies and to Chong, Nies and Yu; both are admitted. The lowness properties of these notions were studied by Chong, Nies and Yu, Hjorth and Nies, Bienvenu, Greenberg and Monin, and Greenberg and Monin. For instance, Hjorth and Nies showed that the sets that are low for $\Pi^1_1$-Martin-Löf randomness are exactly the hyperarithmetic sets, and Greenberg and Monin that if $A$ is not hyperarithmetic, some $\Pi^1_1$-random sequence is not $\Pi^1_1$-Martin-Löf random relative to $A$; we admit these results.
+None of the one-way implications reverses. For the last one, see the first exercise. The separation of $\Delta^1_1$-randomness from $\Pi^1_1$-Martin-Löf randomness is due to Hjorth and Nies, and the separation of $\Pi^1_1$-Martin-Löf randomness from $\Pi^1_1$-randomness to Hjorth and Nies and to Chong, Nies and Yu; both are admitted. The lowness properties of these notions were studied by Chong, Nies and Yu, Hjorth and Nies, Bienvenu, Greenberg and Monin, and Greenberg and Monin. For instance, Hjorth and Nies showed that the sets that are low for $\Pi^1_1$-Martin-Löf randomness are exactly the hyperarithmetic sets, and Greenberg and Monin that if $A$ is not hyperarithmetic, some $\Pi^1_1$-random sequence is not $\Pi^1_1$-Martin-Löf random relative to $A$; we admit these results.
 
 ## Exercises
 
@@ -92,7 +92,7 @@ By :ref{#cor-omega-random} relativized to $Z = \emptyset^{(\omega)}$, the sequen
 ::::
 
 ::::exercise{difficulty=2}
-Let $Z$ be any set. Show that there is a $\Pi^1_1$-random sequence $Y$ such that no set $X$ with $X \leq_h Z$ and $X \leq_h Y$ is non-hyperarithmetic.
+Let $Z$ be any set. Show that there is a $\Pi^1_1$-random sequence $Y$ such that every set $X$ with $X \leq_h Z$ and $X \leq_h Y$ is hyperarithmetic.
 
 :::solution
 The sets $X \leq_h Z$ are countably many: each is computable in some $H^Z_b$ with $b \in \mathcal O^Z$, and there are countably many notations and functionals. Apply :ref{#cor-higher-null-cone} to the non-hyperarithmetic ones: almost every $Y$ is $\Pi^1_1$-random and hyperarithmetically computes none of them. Any such $Y$ works.

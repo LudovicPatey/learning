@@ -10,7 +10,7 @@ description: >
   their universal test, and Π¹₁-randomness, with no classical analogue. The
   course proves the characterization of Π¹₁-randomness by Chong, Nies and
   Yu, the coincidence of Σ¹₁- and Δ¹₁-randomness, and the null cone theorem
-  for hyperarithmetic reducibility, from clearly stated facts on the measure
+  for hyperarithmetic reducibility, from explicitly admitted facts on the measure
   of Δ¹₁ classes and the Sacks–Tanaka theorem.
 objectives:
   - Define Δ¹₁-randomness, Π¹₁-Martin-Löf randomness and Π¹₁-randomness, and compare them
