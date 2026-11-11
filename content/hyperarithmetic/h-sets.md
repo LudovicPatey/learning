@@ -5,7 +5,7 @@ duration: 35
 prerequisites: [computable-ordinals/kleene-o]
 ---
 
-The arithmetic sets are the sets computable in some finite jump $\emptyset^{(n)}$. To go further, one iterates the jump transfinitely: $\emptyset^{(\omega)} = \bigoplus_n \emptyset^{(n)}$, then $\emptyset^{(\omega + 1)} = (\emptyset^{(\omega)})'$, and so on. At limit stages, the iteration needs to know a sequence converging to the limit, which is exactly what a notation in $\mathcal O$ provides. The resulting sets $H_a$ are the **H-sets**, and the sets computable in some $H_a$ are the **hyperarithmetic** sets. Remarkably, the degree of $H_a$ depends only on the ordinal $|a|$, not on the notation.
+The arithmetic sets are the sets computable in some finite jump $\emptyset^{(n)}$. To go further, one iterates the jump transfinitely: $\emptyset^{(\omega)} = \bigoplus_n \emptyset^{(n)}$, then $\emptyset^{(\omega + 1)} = (\emptyset^{(\omega)})'$, and so on. At limit stages, the iteration needs to know a sequence converging to the limit, which is exactly what a notation in $\mathcal O$ provides. The resulting sets $H_a$ are the **H-sets**, and the sets computable in some $H_a$ are the **hyperarithmetic** sets. By a theorem of Spector, the Turing degree of $H_a$ depends only on the ordinal $|a|$, not on the notation.
 
 ## The H-sets
 
@@ -29,7 +29,7 @@ Let $a \in \mathcal O$.
 
 :::proof{of=prop-h-sets-basic}
 1. By induction on $a$. If $a = 2^c$, then $b = c$ or $b <_{\mathcal O} c$; in the first case $H_b' = H_a$, in the second $H_b' \leq_T H_c \leq_T H_c' = H_a$ by the induction hypothesis. If $a = 3 \cdot 5^e$ and $b <_{\mathcal O} a$, then $b <_{\mathcal O} \Phi_e(n)$ for some $n$, so $2^b \leq_{\mathcal O} \Phi_e(n) <_{\mathcal O} a$: one checks by induction on $c \in \mathcal O$ that $b <_{\mathcal O} c$ implies $2^b \leq_{\mathcal O} c$. Then $H_b' = H_{2^b} = \{ v : \langle 2^b, v \rangle \in H_a \}$ is computable in $H_a$, as a column of $H_a$.
-2. The only notation of $n$ is $2^{2^{\cdots^1}}$ with $n$ exponentiations, and the first case follows by induction. A notation of $\omega$ is $a = 3 \cdot 5^e$ with $|\Phi_e(m)| = k_m$ finite and increasing; the notations below $a$ are the notations of the finite ordinals, one for each $k$, and $H_a$ has columns $\emptyset^{(k)}$, indexed by these notations. The map from $k$ to the notation of $k$ is computable, so $H_a \equiv_T \emptyset^{(\omega)}$.
+2. The only notation of $n$ is $2^{2^{\cdots^1}}$ with $n$ exponentiations, and the first case follows by induction. A notation of $\omega$ is $a = 3 \cdot 5^e$ with $|\Phi_e(m)| = k_m$ finite and increasing; the notations below $a$ are the notations of the finite ordinals, one for each $k$, and $H_a$ has columns $\emptyset^{(k)}$, indexed by these notations. The map from $k$ to the notation of $k$ is computable and injective, and its range is decidable; so the column of $H_a$ indexed by the notation of $k$ is $\emptyset^{(k)}$, and each of $H_a$ and $\emptyset^{(\omega)}$ computes the other.
 3. By (1), $H_b' \leq_T H_a$, so $H_a \leq_T H_b$ would give $H_b' \leq_T H_b$, contradicting :ref{#thm-jump}.
 :::
 
@@ -69,7 +69,7 @@ If $a, b \in \mathcal O$ and $|a| \leq |b|$, then $H_a \leq_T H_b$. In particula
 
 The proof compares the two notations by effective transfinite recursion: one builds, computably in $H_b$, an embedding of the notations below $a$ into those below $b$, which requires deciding questions about $\mathcal O$ that are answered by the H-sets themselves. It is admitted here; see Sacks, *Higher Recursion Theory*, Section II.1, or Ash and Knight, *Computable Structures and the Hyperarithmetical Hierarchy*, Chapter 5.
 
-By the theorem, for every computable ordinal $\alpha$, the degree $\obf^{(\alpha)} = \deg_T(H_a)$, for any $a$ with $|a| = \alpha$, is well defined. For finite $\alpha$ it is the degree of $\emptyset^{(\alpha)}$, and the map $\alpha \mapsto \obf^{(\alpha)}$ is strictly increasing on $\omega_1^{\mathrm{CK}}$.
+By the theorem, for every computable ordinal $\alpha$, the degree $\obf^{(\alpha)} = \deg_T(H_a)$, for any $a$ with $|a| = \alpha$, is well defined. For finite $\alpha$ it is the degree of $\emptyset^{(\alpha)}$, and the map $\alpha \mapsto \obf^{(\alpha)}$ is strictly increasing on $\omega_1^{\mathrm{CK}}$: if $\alpha < \beta = |b|$, some $c <_{\mathcal O} b$ has $|c| = \alpha$, by :ref{#prop-kleene-o-basic} (1), and $H_b \not\leq_T H_c$ by :ref{#prop-h-sets-basic} (3).
 
 ## Hyperarithmetic sets
 
@@ -78,14 +78,14 @@ A set is **hyperarithmetic** if it is computable in $H_a$ for some $a \in \mathc
 :::
 
 :::proposition{#prop-hyp-ideal}
-$\mathrm{HYP}$ is a jump ideal containing every arithmetic set, and it is countable. For every hyperarithmetic set $X$, there is a hyperarithmetic set not computable in $X$.
+$\mathrm{HYP}$ is a **jump ideal**: it is closed under $\oplus$, under the jump, and downward under $\leq_T$. It contains every arithmetic set, and it is countable. For every hyperarithmetic set $X$, there is a hyperarithmetic set not computable in $X$.
 :::
 
 :::proof{of=prop-hyp-ideal}
-If $X \leq_T H_a$ and $Y \leq_T H_b$, let $c$ be a notation for $\max(|a|, |b|)$, which is $a$ or $b$; by :ref{#thm-spector-uniqueness}, $X \oplus Y \leq_T H_c$. Closure under $\leq_T$ is clear, and $X' \leq_T H_a' = H_{2^a}$. The arithmetic sets are computable in the sets $H_a$ with $|a|$ finite. There are countably many notations. Finally $H_a' \not\leq_T H_a$.
+If $X \leq_T H_a$ and $Y \leq_T H_b$, let $c$ be a notation for $\max(|a|, |b|)$, which is $a$ or $b$; by :ref{#thm-spector-uniqueness}, $X \oplus Y \leq_T H_c$. Closure under $\leq_T$ is clear, and $X' \leq_T H_a' = H_{2^a}$. Every arithmetic set is computable in some $\emptyset^{(n)}$, by Post's theorem (:ref{#thm-post}), hence in $H_a$ for the notation $a$ of $n$. There are countably many notations, and each $H_a$ computes countably many sets. Finally, if $X \leq_T H_a$, then $H_{2^a} = H_a'$ is not computable in $X$, since $H_a' \not\leq_T H_a$.
 :::
 
-The jump ideal $\mathrm{HYP}$ is much larger than $\mathrm{ARITH}$, but it is not closed under all definable operations: $\mathcal O$ itself, which is $\Pi^1_1$, is not hyperarithmetic, since it computes every $H_a$, uniformly in $a$. The next lesson identifies the hyperarithmetic sets with the $\Delta^1_1$ sets.
+The jump ideal $\mathrm{HYP}$ contains $\emptyset^{(\omega)}$ and many other sets that are not arithmetic, but it does not contain every set definable with a quantifier over sets: $\mathcal O$ itself, which is $\Pi^1_1$, is not hyperarithmetic, since it computes every $H_a$ (first exercise below). The next lesson identifies the hyperarithmetic sets with the $\Delta^1_1$ sets.
 
 ## Exercises
 
@@ -98,10 +98,12 @@ By the next lesson, each $H_a$ is $\Pi^1_1$, and every $\Pi^1_1$ set is many-one
 ::::
 
 ::::exercise{difficulty=2}
-Let $a$ be a notation for $\omega \cdot 2$. Describe $H_a$ up to Turing equivalence in terms of $\emptyset^{(\omega)}$, and show that a set is computable in $H_a$ if and only if it is arithmetic in $\emptyset^{(\omega)}$.
+Let $a$ be a notation for $\omega \cdot 2$. Describe $H_a$ up to Turing equivalence in terms of $\emptyset^{(\omega)}$. Show that a set is arithmetic in $\emptyset^{(\omega)}$ if and only if it is computable in $H_b$ for some $b \in \mathcal O$ with $|b| < \omega \cdot 2$, and that $H_a$ is not arithmetic in $\emptyset^{(\omega)}$.
 
 :::solution
-By :ref{#thm-spector-uniqueness}, $H_a \equiv_T \bigoplus_n (\emptyset^{(\omega)})^{(n)} = (\emptyset^{(\omega)})^{(\omega)}$, the ω-jump of $\emptyset^{(\omega)}$, using a notation for $\omega \cdot 2$ whose fundamental sequence is $\omega + n$. A set computable in it is computable in some $(\emptyset^{(\omega)})^{(n)}$, hence arithmetic in $\emptyset^{(\omega)}$, by Post's theorem relativized. Conversely, a set arithmetic in $\emptyset^{(\omega)}$ is computable in some finite jump of $\emptyset^{(\omega)}$, hence in $H_a$.
+Write $X^{(\omega)} = \bigoplus_n X^{(n)}$. Let $c$ be a notation for $\omega$, and $c_n$ the notation for $\omega + n$ obtained from $c$ by $n$ applications of $x \mapsto 2^x$; then $H_{c_n} = (H_c)^{(n)}$. Let $d = 3 \cdot 5^e$ with $\Phi_e(n) = c_{n+1}$, a notation for $\omega \cdot 2$. The notations below $d$ are the notations of the finite ordinals, $c$, and the $c_n$; this set is decidable, the columns of $H_d$ indexed by finite notations are computable in $H_c$ uniformly, and the column indexed by $c_n$ is $(H_c)^{(n)}$. Since $H_c \equiv_T \emptyset^{(\omega)}$ by :ref{#prop-h-sets-basic} (2), and the jump preserves Turing equivalence uniformly, $H_d \equiv_T \bigoplus_n (\emptyset^{(\omega)})^{(n)} = (\emptyset^{(\omega)})^{(\omega)}$. By :ref{#thm-spector-uniqueness}, $H_a \equiv_T H_d$.
+
+By Post's theorem relativized, a set is arithmetic in $\emptyset^{(\omega)}$ if and only if it is computable in $(\emptyset^{(\omega)})^{(n)} \equiv_T H_{c_n}$ for some $n$. The notations $b$ with $|b| < \omega \cdot 2$ are those of the ordinals $k$ and $\omega + n$, and by :ref{#thm-spector-uniqueness} each $H_b$ is Turing equivalent to some $H_{c_n}$ or computable in $H_c$. Finally $H_a \geq_T (H_{c_n})'$ for every $n$, so $H_a$ is computable in no $(\emptyset^{(\omega)})^{(n)}$: it is not arithmetic in $\emptyset^{(\omega)}$.
 :::
 ::::
 

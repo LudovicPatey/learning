@@ -38,7 +38,9 @@ By :ref{#lem-h-sequence-unique}, for $a \in \mathcal O$,
 $$
 v \in H_a \iff \forall Y\, (Y \text{ is an H-sequence along } a \rightarrow v \in Y^{[a]}) \iff \exists Y\, (Y \text{ is an H-sequence along } a \wedge v \in Y^{[a]}).
 $$
-The relation $a \in \mathcal O$ is $\Pi^1_1$, and the conjunction with the first form is $\Pi^1_1$; the same holds with $v \notin Y^{[a]}$. For a fixed $a \in \mathcal O$, the two forms show that $H_a$ is $\Pi^1_1$ and $\Sigma^1_1$. A set computable in a $\Delta^1_1$ set is $\Delta^1_1$, since it is defined from it by $\Sigma^0_1$ and $\Pi^0_1$ formulas.
+The relation $a \in \mathcal O$ is $\Pi^1_1$, and the conjunction with the first form is $\Pi^1_1$; the same holds with $v \notin Y^{[a]}$. For a fixed $a \in \mathcal O$, the two forms show that $H_a$ is $\Pi^1_1$ and $\Sigma^1_1$.
+
+Finally, let $X = \Phi^A_e$ with $A$ a $\Delta^1_1$ set. Then $n \in X$ if and only if there is a string $\sigma$ with $\Phi^\sigma_e(n)\converge = 1$ and $\sigma(i) = A(i)$ for every $i < |\sigma|$, and $n \notin X$ if and only if the same holds with $0$ in place of $1$. The condition $\sigma(i) = A(i)$ for all $i < |\sigma|$ is a bounded conjunction of statements $i \in A$ and $i \notin A$, each of them $\Sigma^1_1$ and $\Pi^1_1$. The classes $\Sigma^1_1$ and $\Pi^1_1$ are closed under conjunction, disjunction and number quantifiers: a universal number quantifier commutes with a universal set quantifier, and an existential number quantifier is absorbed as in the third case of the proof of :ref{#thm-pi11-normal-form}. So $X$ and its complement are $\Sigma^1_1$, that is, $X$ is $\Delta^1_1$.
 :::
 
 The uniform version gives a useful closure property: a quantifier over hyperarithmetic sets does not increase the complexity of a $\Pi^1_1$ formula.
@@ -52,7 +54,7 @@ A hyperarithmetic set is $\Phi^{H_a}_e$ for some $a \in \mathcal O$ and some $e$
 $$
 \forall Y\, \big(Y \text{ is an H-sequence along } a \rightarrow (\Phi^{Y^{[a]}}_e \text{ is total and } \{0,1\}\text{-valued} \wedge \psi(n, \Phi^{Y^{[a]}}_e))\big).
 $$
-The bracket is arithmetic in $Y$, so the whole formula is $\Pi^1_1$: an existential number quantifier in front of a $\Pi^1_1$ formula gives a $\Pi^1_1$ formula.
+The bracket is arithmetic in $Y$, so the whole formula is $\Pi^1_1$: an existential number quantifier in front of a $\Pi^1_1$ formula gives a $\Pi^1_1$ formula, by the closure properties recalled in the proof of :ref{#prop-h-delta11}.
 :::
 
 :::quiz[H-sequences]
@@ -75,14 +77,14 @@ The converse inclusion requires a computation of well-foundedness by H-sets, up 
 For every computable ordinal $\alpha$, the set $\mathrm{WF}_{< \alpha}$ of indices of computable trees that are well-founded of rank less than $\alpha$ is hyperarithmetic.
 :::
 
-The proof is by effective transfinite recursion on a notation for $\alpha$. A tree has rank at most $\beta + 1$ if and only if all the subtrees above its one-element sequences have rank at most $\beta$, a $\Pi^0_1$ condition relative to the set of trees of rank at most $\beta$; at limits, a $\Pi^0_2$ condition relative to the sets for smaller ranks. So each step costs at most two jumps, and the sets of trees of rank at most $|a|$ are computable in H-sets $H_b$ with $|b| \leq |a| \cdot 2 + 2$, uniformly. We admit the details; see Sacks, *Higher Recursion Theory*, Section II.1.
+The proof is by effective transfinite recursion on a notation for $\alpha$. A tree $T$ has rank at most $\beta + 1$ if and only if $T_{\langle n \rangle}$ has rank at most $\beta$ for every $n$ with $\langle n \rangle \in T$, a $\Pi^0_1$ condition relative to the set of indices of trees of rank at most $\beta$; for a limit $\lambda$ with fundamental sequence $(\lambda_k)$, it has rank at most $\lambda$ if and only if for every $n$ there is $k$ such that $T_{\langle n \rangle}$ has rank at most $\lambda_k$, a $\Pi^0_2$ condition relative to the sets for the ranks $\lambda_k$. Each step thus costs at most two jumps, and the set of indices of trees of rank at most $|a|$ is computable in $H_b$ for some $b \in \mathcal O$ with $|b| \leq |a| \cdot 2 + 2$, by reductions computed from $a$. Then $\mathrm{WF}_{<\alpha}$ is the set for the rank $\beta$ if $\alpha = \beta + 1$, and the union of the sets for the ranks $\alpha_k$ if $\alpha$ is a limit with fundamental sequence $(\alpha_k)$. Making the uniformity precise requires effective transfinite recursion, and we admit the details; see Sacks, *Higher Recursion Theory*, Section II.1.
 
 :::theorem[Kleene]{#thm-kleene-delta11}
 A set of numbers is $\Delta^1_1$ if and only if it is hyperarithmetic.
 :::
 
 :::proof{of=thm-kleene-delta11}
-Hyperarithmetic sets are $\Delta^1_1$ by :ref{#prop-h-delta11}. Conversely, let $A$ be $\Delta^1_1$. By the normal form theorem (:ref{#thm-pi11-normal-form}), there is a computable function $n \mapsto t(n)$ such that $n \in A$ if and only if $t(n)$ is an index of a well-founded computable tree. The set $S = \{ t(n) : n \in A \}$ is $\Sigma^1_1$, since $A$ is $\Sigma^1_1$ and $t$ is computable, and it consists of indices of well-founded trees. By the boundedness theorem in the form of the first exercise of :ref{to="computable-ordinals/trees-and-pi11"}, there is a computable ordinal $\alpha$ bounding the ranks of the trees in $S$. Then $n \in A$ if and only if $t(n) \in \mathrm{WF}_{< \alpha}$: if $n \in A$, the rank of $t(n)$ is less than $\alpha$; if $n \notin A$, the tree $t(n)$ is not well-founded. So $A$ is computable in $\mathrm{WF}_{<\alpha}$, which is hyperarithmetic by :ref{#lem-wf-rank-hyp}.
+Hyperarithmetic sets are $\Delta^1_1$ by :ref{#prop-h-delta11}. Conversely, let $A$ be $\Delta^1_1$. By the normal form theorem (:ref{#thm-pi11-normal-form}), there is a computable function $n \mapsto t(n)$ such that $n \in A$ if and only if $t(n)$ is an index of a well-founded computable tree. The set $S = \{ t(n) : n \in A \}$ is $\Sigma^1_1$, since $m \in S$ if and only if $\exists n\, (t(n) = m \wedge n \in A)$ with $A$ a $\Sigma^1_1$ set, and it consists of indices of well-founded trees. By the boundedness theorem in the form of the first exercise of :ref{to="computable-ordinals/trees-and-pi11"} (stated there for c.e. indices of trees, which are computed from the indices $t(n)$ by a computable function), the ranks of the trees in $S$ have a supremum $\gamma < \omega_1^{\mathrm{CK}}$. Let $\alpha = \gamma + 1$, a computable ordinal greater than all these ranks. Then $n \in A$ if and only if $t(n) \in \mathrm{WF}_{< \alpha}$: if $n \in A$, the rank of $t(n)$ is less than $\alpha$; if $n \notin A$, the tree $t(n)$ is not well-founded. So $A$ is computable in $\mathrm{WF}_{<\alpha}$, which is hyperarithmetic by :ref{#lem-wf-rank-hyp}.
 :::
 
 The proof is a template for many results: a $\Delta^1_1$ property is $\Pi^1_1$ with a $\Sigma^1_1$ bound on the ordinals involved, and below a computable ordinal, everything is hyperarithmetic. The theorem relativizes: the $\Delta^1_1(X)$ sets are the sets computable in $H^X_a$ for some $a \in \mathcal O^X$, the H-sets relative to $X$.
@@ -106,9 +108,9 @@ Why does the proof fail for $\mathcal O$, which is $\Pi^1_1$?
 - [ ] Because the normal form does not apply to $\mathcal O$.
 
   It applies to every $\Pi^1_1$ set.
-- [ ] Because $\mathcal O$ is finite.
+- [ ] Because the trees $t(n)$, $n \in \mathcal O$, have ranks that are not computable ordinals.
 
-  $\mathcal O$ is infinite.
+  Each of them is a computable well-founded tree, so its rank is a computable ordinal; what fails is a common bound below $\omega_1^{\mathrm{CK}}$.
 :::
 
 ## Exercises
@@ -117,7 +119,7 @@ Why does the proof fail for $\mathcal O$, which is $\Pi^1_1$?
 Show that if $S \subseteq \mathcal O$ is $\Sigma^1_1$, then $\sup \{ |a| : a \in S \} < \omega_1^{\mathrm{CK}}$. Deduce that $\mathcal O$ is not $\Sigma^1_1$.
 
 :::solution
-By :ref{#prop-constructive-computable}, a computable function maps each $a \in \mathcal O$ to an index of a well-ordering of type $|a|$, through the c.e. well-ordering of the notations below $a$; this transformation is computable on all numbers. The image of $S$ is a $\Sigma^1_1$ subset of $\mathrm{WO}$, so its types are bounded below $\omega_1^{\mathrm{CK}}$ by :ref{#thm-boundedness}. Since $\mathcal O$ contains notations for all computable ordinals, it cannot be $\Sigma^1_1$.
+By :ref{#prop-kleene-o-basic} (2), the relation $\{ (b, c) : R(b, a) \wedge R(c, a) \wedge (b = c \vee R(b, c)) \}$ is c.e., uniformly in $a$, and for $a \in \mathcal O$ it is the order $\leq_{\mathcal O}$ on the notations below $a$, a well-ordering of type $|a|$. Placing a copy of $\omega$ before it gives a c.e. well-ordering of type $\omega + |a|$ with an infinite field, and the proof of :ref{#prop-computable-ordinals-basic} (3) turns it into a computable well-ordering of $\nat$ of the same type. This gives a computable function $g$, total on all numbers, such that $g(a) \in \mathrm{WO}$ and $|g(a)| = \omega + |a|$ for $a \in \mathcal O$. The set $g(S) = \{ m : \exists a\, (g(a) = m \wedge a \in S) \}$ is a $\Sigma^1_1$ subset of $\mathrm{WO}$, so by :ref{#thm-boundedness} there is $\gamma < \omega_1^{\mathrm{CK}}$ with $\omega + |a| \leq \gamma$, hence $|a| \leq \gamma$, for every $a \in S$. Since $\mathcal O$ contains notations for all computable ordinals, it cannot be $\Sigma^1_1$.
 :::
 ::::
 

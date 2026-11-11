@@ -2,10 +2,10 @@
 title: Σ¹₁ classes and pseudo-well-orderings
 summary: Σ¹₁ classes as projections of closed sets of Baire space; a computable tree with paths but no hyperarithmetic path; the Kleene basis theorem; Harrison's computable linear orders that are ill-founded but have no hyperarithmetic descending sequence; consequences for reverse mathematics.
 duration: 35
-prerequisites: [kleene-theorem]
+prerequisites: [kleene-theorem, pi01-classes/computable-members]
 ---
 
-In Cantor space, every non-empty $\Pi^0_1$ class has a low member. In Baire space, the situation changes completely: a computable tree on $\nat$ may have paths, none of them hyperarithmetic. The classes of sets definable by an existential set quantifier, the $\Sigma^1_1$ classes, are the projections of such trees, and their members can be very complex. This lesson proves the existence of computable trees without hyperarithmetic paths, the Kleene basis theorem, and the existence of **pseudo-well-orderings**: computable linear orders that look well-ordered to the hyperarithmetic sets. These objects explain why the hyperarithmetic sets do not form a model of $\mathsf{ATR}_0$.
+In Cantor space, every non-empty $\Pi^0_1$ class has a low member. In Baire space, the situation changes completely: a computable tree on $\nat$ may have paths, none of them hyperarithmetic. The classes of sets definable by an existential set quantifier, the $\Sigma^1_1$ classes, are the projections of the sets of paths of such trees, and their members can be very complex. This lesson proves the existence of computable trees without hyperarithmetic paths, the Kleene basis theorem, and the existence of **pseudo-well-orderings**: computable linear orders that look well-ordered to the hyperarithmetic sets. These objects explain why the hyperarithmetic sets do not form a model of $\mathsf{ATR}_0$.
 
 ## Σ¹₁ classes
 
@@ -22,14 +22,14 @@ There is a computable tree $T \subseteq \nat^{<\nat}$ that has a path but no hyp
 :::
 
 :::proof{of=thm-no-hyp-path}
-Suppose that every computable tree with a path has a hyperarithmetic path. Then for every index $i$ of a computable tree,
+Suppose that every computable tree with a path has a hyperarithmetic path, a function $f$ being identified with its graph, which is hyperarithmetic if and only if $f$ is. Then for every index $i$ of a computable tree $T_i$,
 $$
-i \notin \mathrm{WF} \iff \exists X \in \mathrm{HYP}\ (X \text{ is a path of } T_i),
+i \notin \mathrm{WF} \iff \exists X \in \mathrm{HYP}\ (X \text{ is the graph of a path of } T_i),
 $$
-and the right-hand side is $\Pi^1_1$ by :ref{#cor-hyp-quantifier}. So the complement of $\mathrm{WF}$ would be $\Pi^1_1$, and $\mathrm{WF}$ would be $\Sigma^1_1$, contradicting :ref{#prop-pi11-not-sigma11}.
+and the right-hand side is $\Pi^1_1$ by :ref{#cor-hyp-quantifier}, the formula in parentheses being arithmetic. Being an index of a computable tree is an arithmetic property of $i$, so the complement of $\mathrm{WF}$, which consists of the other numbers and of the indices of trees with a path, would be $\Pi^1_1$. Then $\mathrm{WF}$ would be $\Sigma^1_1$, contradicting :ref{#prop-pi11-not-sigma11}.
 :::
 
-Hence the hyperarithmetic sets are not a basis for $\Sigma^1_1$ classes, nor even for the projections of $\Pi^0_1$ classes of Baire space. The difference with Cantor space comes from compactness: a computable binary tree has a leftmost path computable in $\emptyset'$, because the extendible nodes form a $\Pi^0_1$ set; for a tree on $\nat$, extendibility is $\Sigma^1_1$.
+Hence the hyperarithmetic sets are not a basis for the $\Sigma^1_1$ classes, nor even for the sets of paths of computable trees on $\nat$, the $\Pi^0_1$ classes of Baire space. The difference with Cantor space comes from compactness: a computable binary tree with a path has a leftmost path computable in $\emptyset'$ (:ref{#prop-leftmost-path}), because the extendible nodes form a $\Pi^0_1$ set; for a tree on $\nat$, extendibility is $\Sigma^1_1$.
 
 :::theorem[Kleene basis theorem]{#thm-kleene-basis}
 Every non-empty $\Sigma^1_1$ class has a member computable in $\mathcal O$.
@@ -39,7 +39,7 @@ Every non-empty $\Sigma^1_1$ class has a member computable in $\mathcal O$.
 Let $S$ be a computable tree of pairs whose projection is the class. Let $E$ be the set of nodes $(\sigma, \tau) \in S$ above which $S$ has a path; it is $\Sigma^1_1$, so its complement is $\Pi^1_1$ and many-one reducible to $\mathcal O$, which is $\Pi^1_1$-complete (admitted in :ref{to="computable-ordinals/trees-and-pi11"}). So $E \leq_T \mathcal O$. The root belongs to $E$. Define a path by choosing at each step the first immediate successor, in the order of codes, that belongs to $E$; one exists, since a path through the current node passes through one of its successors. The resulting path $(X, f)$ is computable in $E$, hence in $\mathcal O$, and $X$ belongs to the class.
 :::
 
-The bound is optimal in a strong sense: by :ref{#thm-no-hyp-path}, no hyperarithmetic degree suffices. Gandy (1960) refined the theorem: every non-empty $\Sigma^1_1$ class has a member $X$ with $\omega_1^X = \omega_1^{\mathrm{CK}}$ that does not hyperarithmetically compute $\mathcal O$. This **Gandy basis theorem** is the analogue of the low basis theorem, with $\omega_1^X = \omega_1^{\mathrm{CK}}$ playing the role of lowness; it is admitted here (Sacks, *Higher Recursion Theory*, Section III.1).
+By :ref{#thm-no-hyp-path}, $\mathcal O$ cannot be replaced by a hyperarithmetic set. Gandy (1960) refined the theorem: every non-empty $\Sigma^1_1$ class has a member $X$ with $\omega_1^X = \omega_1^{\mathrm{CK}}$. Such an $X$ does not compute $\mathcal O$, since $\omega_1^{\mathcal O} > \omega_1^{\mathrm{CK}}$ (:ref{to="computable-ordinals/kleene-o"}, relativization). This **Gandy basis theorem** is the analogue of the low basis theorem, with $\omega_1^X = \omega_1^{\mathrm{CK}}$ playing the role of lowness; it is admitted here (Sacks, *Higher Recursion Theory*, Section III.1).
 
 :::quiz[trees without hyperarithmetic paths]
 In the proof of :ref{#thm-no-hyp-path}, why would the hypothesis make $\mathrm{WF}$ a $\Sigma^1_1$ set?
@@ -74,12 +74,12 @@ There is a computable linear order that is not a well-ordering but has no hypera
 :::proof{of=thm-harrison}
 Let $T$ be the tree of :ref{#thm-no-hyp-path}, and $L$ the Kleene–Brouwer ordering on $T$, a computable linear order. Since $T$ has a path, $L$ is not a well-ordering (:ref{#thm-kleene-brouwer}).
 
-Let $D = (\sigma_j)$ be a descending sequence in $L$; we show that $D'$ computes a path of $T$. If $\sigma_{j+1} <_{\mathrm{KB}} \sigma_j$, then $\sigma_{j+1}$ extends $\sigma_j$ or lies to its left, so whenever both are defined at position $0$, $\sigma_{j+1}(0) \leq \sigma_j(0)$. The root appears at most once, so from some point on all $\sigma_j$ are non-empty, and their first values form a non-increasing sequence, eventually constant equal to some $p(0)$. From that point on, all $\sigma_j$ begin with $p(0)$; the sequence $\langle p(0) \rangle$ appears at most once, after which all $\sigma_j$ have length at least $2$, and the same argument applies to their second values, which are eventually constant equal to some $p(1)$; and so on. Each $p \uh k$ is a prefix of some $\sigma_j \in T$, so $p$ is a path of $T$. The limit of a non-increasing sequence of numbers computable in $D$ is computable in $D'$, uniformly, so $p \leq_T D'$.
+Let $D = (\sigma_j)$ be a descending sequence in $L$; we show that $D'$ computes a path of $T$. If $\sigma_{j+1} <_{\mathrm{KB}} \sigma_j$, then $\sigma_{j+1}$ extends $\sigma_j$ or lies to its left, so whenever both are defined at position $0$, $\sigma_{j+1}(0) \leq \sigma_j(0)$. The root appears at most once, so from some point on all $\sigma_j$ are non-empty, and their first values form a non-increasing sequence, eventually constant equal to some $p(0)$. From that point on, all $\sigma_j$ begin with $p(0)$; the sequence $\langle p(0) \rangle$ appears at most once, after which all $\sigma_j$ have length at least $2$, and the same argument applies to their second values, which are eventually constant equal to some $p(1)$; and so on. Each $p \uh k$ is a prefix of some $\sigma_j \in T$, so $p$ is a path of $T$. The limit of a non-increasing sequence of numbers computable in $D$ is computable in $D'$, uniformly: starting from any term, ask $D'$ whether a later term is smaller, and move to it until the answer is negative. Applying this to the values at position $k$, from a stage after which all $\sigma_j$ extend $p \uh k$ and are different from it, gives $p(k)$ and such a stage for $k + 1$; so $p \leq_T D'$.
 
 If $D$ were hyperarithmetic, so would be $D'$ and $p$, contradicting the choice of $T$.
 :::
 
-Such an order is a **pseudo-well-ordering**, or **Harrison order**. Harrison showed that its order type is $\omega_1^{\mathrm{CK}} \cdot (1 + \eta) + \rho$, where $\eta$ is the type of the rationals and $\rho < \omega_1^{\mathrm{CK}}$: an initial well-ordered part of length $\omega_1^{\mathrm{CK}}$, followed by densely many copies of it; we admit this description.
+Such an order is a **pseudo-well-ordering**, or **Harrison order**. Harrison showed that its order type is $\omega_1^{\mathrm{CK}} \cdot (1 + \eta) + \rho$, where $\eta$ is the type of the rationals and $\rho < \omega_1^{\mathrm{CK}}$: an initial well-ordered part of length $\omega_1^{\mathrm{CK}}$, followed by copies of $\omega_1^{\mathrm{CK}}$ indexed by a dense order without endpoints, and a final segment of type $\rho$; we admit this description.
 
 :::quiz[Harrison orders]
 In the proof of :ref{#thm-harrison}, why are the first values $\sigma_j(0)$ eventually constant?
@@ -95,7 +95,11 @@ In the proof of :ref{#thm-harrison}, why are the first values $\sigma_j(0)$ even
 
 ## Consequences for reverse mathematics
 
-In the ω-model $\mathrm{HYP}$, a Harrison order $L$ satisfies the arithmetic definition of being a linear order, and it has no descending sequence in the model; so $\mathrm{HYP}$ believes that $L$ is a well-ordering. Statements about well-orderings that hold in $\mathcal P(\nat)$ may then fail in $\mathrm{HYP}$. For instance, a jump hierarchy along $L$, as in the definition of $\mathsf{ATR}_0$, would compute all the sets $H_a$ along the well-ordered initial part of $L$, of length $\omega_1^{\mathrm{CK}}$, hence every hyperarithmetic set; no hyperarithmetic set does that, by the exercises of the previous lesson. With the description of the type of $L$, this shows that $\mathrm{HYP}$ is not an ω-model of $\mathsf{ATR}_0$, as stated in the course on the Big Five; we admit the details (Simpson, *Subsystems of Second Order Arithmetic*, Section VIII.3).
+In the ω-model $\mathrm{HYP}$, a Harrison order $L$ satisfies the arithmetic definition of being a linear order, and it has no descending sequence in the model; so $\mathrm{HYP}$ believes that $L$ is a well-ordering. Statements about well-orderings that hold in $\mathcal P(\nat)$ may then fail in $\mathrm{HYP}$.
+
+The well-founded part $W$ of $L$, the set of elements $x$ such that $L$ restricted to $\{ y : y <_L x \}$ is a well-ordering, has type exactly $\omega_1^{\mathrm{CK}}$, without the admitted description. Each such restriction is a computable well-ordering, so the type is at most $\omega_1^{\mathrm{CK}}$. If it were some $\alpha < \omega_1^{\mathrm{CK}}$, then $x \in W$ if and only if the restriction of $L$ below $x$ embeds into a fixed computable well-ordering of type $\alpha$, a $\Sigma^1_1$ condition; $W$, which is $\Pi^1_1$, would be $\Delta^1_1$, hence hyperarithmetic by :ref{#thm-kleene-delta11}. The complement of $W$ is non-empty, since $L$ is not a well-ordering, and has no $L$-least element; choosing repeatedly the element of least code below the previous one gives a descending sequence computable in the complement of $W$, which is hyperarithmetic, a contradiction.
+
+Now a jump hierarchy along $L$, as in the definition of $\mathsf{ATR}_0$, would compute, through its columns along the initial part $W$ of type $\omega_1^{\mathrm{CK}}$, every set $H_a$ with $a \in \mathcal O$, hence every hyperarithmetic set; no hyperarithmetic set does that, by :ref{#prop-hyp-ideal}. This shows that $\mathrm{HYP}$ is not an ω-model of $\mathsf{ATR}_0$, as stated in :ref{to="big-five/atr0-pi11ca0"}; we admit the comparison between jump hierarchies along computable well-orderings and the H-sets (Simpson, *Subsystems of Second Order Arithmetic*, Section VIII.3).
 
 ## Exercises
 
