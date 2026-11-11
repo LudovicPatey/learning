@@ -2,7 +2,7 @@
 title: Embedding partial orders
 summary: The columns of a 1-generic set are computably independent; a computable partial order contains a copy of every countable partial order; hence every countable partial order embeds into the Turing degrees below 0′; there is an antichain of continuum many degrees.
 duration: 35
-prerequisites: [exact-pairs, turing-degrees/low-and-high]
+prerequisites: [exact-pairs, turing-degrees/finite-extensions]
 ---
 
 Kleene and Post showed that every finite partial order embeds into the Turing degrees. The method extends to every countable partial order: the degrees contain a copy of each of them, already below $\obf'$. The proof combines two ingredients of independent interest. The first is a sequence of sets none of which is computable from the others, obtained from the columns of a 1-generic set. The second is a computable partial order that contains a copy of every countable partial order. The lesson ends with an antichain of continuum many degrees.
@@ -78,7 +78,7 @@ y \prec s \iff y \preceq a \text{ for some } a \in L, \qquad s \prec y \iff b \p
 $$
 for $y < s$, and $s$ is incomparable with the other elements. Otherwise $s$ is incomparable with all $y < s$.
 
-*The order remains a partial order.* Let $D$ and $E$ be the sets of elements below and above $s$. $D$ is closed downward and $E$ upward. They are disjoint: $b \preceq y \preceq a$ with $a \in L$, $b \in V$ would give $b \preceq a \preceq b$, so $a = b \in L \cap V$. Transitivity through $s$ holds: if $y \prec s \prec z$, then $y \preceq a \preceq b \preceq z$ for some $a \in L$, $b \in V$, so $y \preceq z$, and $y \neq z$ since $D \cap E = \emptyset$.
+*The order remains a partial order.* Let $D$ and $E$ be the sets of elements below and above $s$. $D$ is closed downward and $E$ upward. They are disjoint: $b \preceq y \preceq a$ with $a \in L$, $b \in V$ would give $b \preceq a$, while $a \preceq b$ by consistency, so $a = b \in L \cap V$. Transitivity through $s$ holds: if $y \prec s \prec z$, then $y \preceq a \preceq b \preceq z$ for some $a \in L$, $b \in V$, so $y \preceq z$, and $y \neq z$ since $D \cap E = \emptyset$.
 
 *The new element realizes the triple.* For $a \in F$, $a \prec s$ if and only if $a \preceq a'$ for some $a' \in L$, if and only if $a \in L$, since $L$ is closed downward in $F$. Similarly $s \prec a$ if and only if $a \in V$.
 
@@ -142,7 +142,7 @@ There is a family $(X_Z)_{Z \in \cs}$ of sets such that $X_Z$ and $X_{Z'}$ are T
 :::proof{of=thm-continuum-antichain}
 We define strings $\sigma_\rho$, for $\rho \in \bstr$, with $\sigma_{\rho 0}$ and $\sigma_{\rho 1}$ incomparable extensions of $\sigma_\rho$, and set $X_Z = \bigcup_n \sigma_{Z \uh n}$.
 
-Let $\sigma_\varepsilon = \varepsilon$. Suppose that $\sigma_\rho$ is defined for all $\rho$ of length $n$. We modify these finitely many strings by finitely many extension steps, one for each $e < n$ and each ordered pair $(\rho, \rho')$ of distinct strings of length $n$. In the step for $(e, \rho, \rho')$, let $x = |\sigma_{\rho'}|$. If some $\tau \succeq \sigma_\rho$ has $\Phi^\tau_e(x)\converge = v$, replace $\sigma_\rho$ by $\tau$ and $\sigma_{\rho'}$ by $\sigma_{\rho'} (1 - v)$. Otherwise leave the strings unchanged; then $\Phi^Y_e(x)\diverge$ for every $Y \succeq \sigma_\rho$, by the use principle. In both cases, $\Phi^Y_e \neq X$ for all $Y \succeq \sigma_\rho$ and $X \succeq \sigma_{\rho'}$, and this remains true after further extensions. After all steps, let $\sigma_{\rho 0}$ and $\sigma_{\rho 1}$ be the final strings for $\rho$ followed by $0$ and by $1$.
+Let $\sigma_\varepsilon = \varepsilon$. Suppose that $\sigma_\rho$ is defined for all $\rho$ of length $n$. We modify these finitely many strings by finitely many extension steps, one for each $e < n$ and each ordered pair $(\rho, \rho')$ of distinct strings of length $n$. In the step for $(e, \rho, \rho')$, let $x = |\sigma_{\rho'}|$. If some $\tau \succeq \sigma_\rho$ has $\Phi^\tau_e(x)\converge = v$, replace $\sigma_\rho$ by $\tau$ and $\sigma_{\rho'}$ by $\sigma_{\rho'} b$, where $b \in \{0, 1\}$ is a bit different from $v$. Otherwise leave the strings unchanged; then $\Phi^Y_e(x)\diverge$ for every $Y \succeq \sigma_\rho$, by the use principle. In both cases, $\Phi^Y_e \neq X$ for all $Y \succeq \sigma_\rho$ and $X \succeq \sigma_{\rho'}$, and this remains true after further extensions. After all steps, let $\sigma_{\rho 0}$ and $\sigma_{\rho 1}$ be the final strings for $\rho$ followed by $0$ and by $1$.
 
 Let $Z \neq Z'$, and $e \in \nat$. For $n > e$ larger than the first position where $Z$ and $Z'$ differ, $\rho = Z \uh n$ and $\rho' = Z' \uh n$ are distinct, and the step for $(e, \rho, \rho')$ ensures $\Phi^{X_Z}_e \neq X_{Z'}$. So $X_{Z'} \not\leq_T X_Z$, and symmetrically.
 :::
@@ -159,7 +159,7 @@ If $S \subseteq S'$, then $G_S$ is obtained from $G_{S'}$ by erasing the columns
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{difficulty=1 #ex-generic-not-minimal}
 Show that no 1-generic set has minimal degree: if $G$ is 1-generic, there is a set $Y$ with $\obf < \deg_T(Y) < \deg_T(G)$.
 
 :::solution

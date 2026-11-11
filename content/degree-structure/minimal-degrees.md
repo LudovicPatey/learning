@@ -1,11 +1,11 @@
 ---
 title: Minimal degrees
-summary: Splitting trees; Spector's theorem that there is a minimal Turing degree, computable in 0″; minimal covers; minimal degrees are neither c.e., 1-generic nor PA.
+summary: Splitting trees give a set of minimal Turing degree computable in 0″ (Spector) and a minimal cover of every degree; no c.e. or 1-generic degree is minimal, and no non-empty Π⁰₁ class consists of sets of minimal degree.
 duration: 40
-prerequisites: [embeddings, immunity-growth/computably-dominated]
+prerequisites: [embeddings, immunity-growth/computably-dominated, ce-degrees/sacks-splitting]
 ---
 
-By the embedding theorem, the degrees contain every countable partial order, and the interval below a 1-generic degree is already rich. One may ask whether every non-zero degree bounds another non-zero degree. Spector showed that it does not: there are **minimal** degrees, immediately above $\obf$. The proof is a construction by computable function trees, a method called **Sacks forcing** or **forcing with perfect trees**, which differs from the finite extension method: the conditions are trees rather than strings, so that a single condition can decide whether a functional computes the generic set back.
+By the embedding theorem, the degrees contain every countable partial order, and the interval below a 1-generic degree is already rich. One may ask whether below every non-zero degree there is a degree strictly between it and $\obf$. Spector showed that this fails: there are **minimal** degrees, immediately above $\obf$. The proof is a construction by computable function trees, a method called **Sacks forcing** or **forcing with perfect trees**, which differs from the finite extension method: the conditions are trees rather than strings, so that a single condition can decide whether a functional computes the generic set back.
 
 We use the function trees of :ref{#def-function-tree}: total functions $T : \bstr \to \bstr$ with $\rho \preceq \mu \iff T(\rho) \preceq T(\mu)$, with paths $[T]$, subtrees, and full subtrees above a node. If $X \in [T]$, then for every $n$ some $\rho$ of length $n$ has $T(\rho) \prec X$.
 
@@ -40,7 +40,7 @@ Let $T$ be a computable f-tree, $e \in \nat$, and $X \in [T]$ such that $\Phi^X_
 
 :::proof{of=lem-splitting-consequences}
 1. To compute $\Phi^X_e(x)$, search for a node $\sigma$ of $T$ with $\Phi^\sigma_e(x)\converge$ and output its value. A long enough prefix of $X$ that is a node of $T$ has a convergent computation, so the search terminates. Two nodes of $T$ do not form an $e$-split, so the value found is the value given by the prefixes of $X$, which is $\Phi^X_e(x)$.
-2. Let $Y = \Phi^X_e$. We compute, with oracle $Y$, strings $\mu_0 \prec \mu_1 \prec \cdots$ with $|\mu_n| = n$ and $T(\mu_n) \prec X$. Let $\mu_0 = \varepsilon$. Given $\mu_n$, the nodes $T(\mu_n 0)$ and $T(\mu_n 1)$ form an $e$-split; find, by a search, an $x$ with $\Phi^{T(\mu_n 0)}_e(x)\converge \neq \Phi^{T(\mu_n 1)}_e(x)\converge$. One of the two nodes is a prefix of $X$, and its computation gives $Y(x)$ by the use principle; so exactly one of the two values equals $Y(x)$, and we let $\mu_{n+1} = \mu_n i$ for the corresponding $i$. Then $T(\mu_{n+1}) \prec X$. The nodes $T(\mu_n)$ have increasing lengths, so $X$ is computed from $Y$.
+2. Let $Y = \Phi^X_e$. We compute, with oracle $Y$, strings $\mu_0 \prec \mu_1 \prec \cdots$ with $|\mu_n| = n$ and $T(\mu_n) \prec X$. Let $\mu_0 = \varepsilon$. Given $\mu_n$, the nodes $T(\mu_n 0)$ and $T(\mu_n 1)$ form an $e$-split; find, by a search, an $x$ with $\Phi^{T(\mu_n 0)}_e(x)\converge \neq \Phi^{T(\mu_n 1)}_e(x)\converge$. One of the two nodes is a prefix of $X$: since $X$ is a path, some node $T(\rho) \prec X$ is longer than $T(\mu_n)$; then $T(\mu_n) \prec T(\rho)$, so $\mu_n \prec \rho$, and $\rho \succeq \mu_n i$ for some $i$, which gives $T(\mu_n i) \preceq T(\rho) \prec X$. The computation of this node gives $Y(x)$, by the use principle; so exactly one of the two values equals $Y(x)$, and we let $\mu_{n+1} = \mu_n i$ for the corresponding $i$. Then $T(\mu_{n+1}) \prec X$. The nodes $T(\mu_n)$ have increasing lengths, so $X$ is computed from $Y$.
 :::
 
 On an $e$-splitting tree, the functional $\Phi_e$ distinguishes the two branches at every node, so its output tells which branch a path follows. On a tree avoiding $e$-splits, all paths give compatible outputs, which can be found by searching the tree.
@@ -87,7 +87,7 @@ Let $X$ be the union of the roots $T_k(\varepsilon)$. As in the proof of :ref{#t
 *$X \leq_T \emptyset''$.* Indices of the trees can be computed with $\emptyset''$. At the odd steps, one must decide whether $\Phi_e(i)\converge = T(0)(i)$, a $\Sigma^0_1$ question. At the even steps, one must decide which case of :ref{#lem-splitting-dichotomy} holds and find $\nu$ in Case 1. The relation "$T(\rho)$ and $T(\rho')$ form an $e$-split" is $\Sigma^0_1$, uniformly in an index of the computable tree $T$, so "no two extensions above $T(\nu)$ form an $e$-split" is $\Pi^0_1$, and the existence of such a $\nu$ is $\Sigma^0_2$; $\emptyset''$ decides it and finds the least $\nu$. The roots, hence $X$, are computable from the sequence of indices.
 :::
 
-The two lemmas on f-trees, for non-computability and for splitting, play the role of the dense sets of the finite extension method. The essential difference is that a tree decides, for all its paths at once, whether $\Phi_e$ loses information or not. With strings as conditions, this is impossible: by :ref{#thm-generic-independent} and the exercise of the previous lesson, a 1-generic set never has minimal degree.
+The two lemmas on f-trees, for non-computability and for splitting, play the role of the dense sets of the finite extension method. The essential difference is that a tree decides, for all its paths at once, whether $\Phi_e$ loses information or not. With strings as conditions, genericity has the opposite effect: by :ref{#thm-generic-independent} and :ref{#ex-generic-not-minimal}, a 1-generic set never has minimal degree.
 
 :::quiz[Spector's theorem]
 In the proof of :ref{#thm-minimal-degree}, why is $\emptyset''$ needed rather than $\emptyset'$?
@@ -102,7 +102,7 @@ In the proof of :ref{#thm-minimal-degree}, why is $\emptyset''$ needed rather th
 
 ---
 
-Why does the construction not make $\Phi^X_e$ partial when neither case is convenient?
+Unlike the construction of a computably dominated set in :ref{#thm-martin-miller-ftrees}, the proof of :ref{#thm-minimal-degree} never forces $\Phi^X_e$ to be partial. Why is this not needed?
 
 - [x] Because it does not need to: the dichotomy applies whatever $\Phi_e$ does, and the conclusions of :ref{#lem-splitting-consequences} concern only the paths on which $\Phi_e$ is total.
 - [ ] Because $\Phi^X_e$ is always total.
@@ -110,7 +110,7 @@ Why does the construction not make $\Phi^X_e$ partial when neither case is conve
   It may be partial, in which case it defines no set and nothing is required.
 - [ ] Because partiality cannot be forced with trees.
 
-  It can, as in :ref{#lem-ftree-domination}; it is simply not needed here.
+  It can, as in :ref{#lem-ftree-domination}, but it is not needed here.
 :::
 
 Sacks (1961) improved the bound: there is a minimal degree below $\obf'$. The construction uses partial computable trees and a full approximation argument, and is admitted here; see Lerman's monograph. By contrast, no c.e. degree is minimal (:ref{#cor-no-minimal-ce}), and Yates (1970) showed that every non-zero c.e. degree bounds a minimal degree.
@@ -132,7 +132,7 @@ Let $B = X$. Then $A \leq_T B$, and $B \not\leq_T A$. If $A \leq_T C \leq_T B$ w
 :::quiz[minimal covers]
 In the proof of :ref{#thm-minimal-cover}, why must every path of the initial tree compute $A$?
 
-- [x] Because the splitting case only gives $X \leq_T Y \oplus A$; to conclude $X \leq_T Y$ for $Y \geq_T A$, one needs $A \leq_T X$, and to have a cover, $B$ must be above $A$.
+- [x] So that $B = X$ lies above $A$: then every $C$ with $A \leq_T C \leq_T B$ is of the form $\Phi^X_e$, and the relativized dichotomy gives $C \leq_T A$ or $X \leq_T C \oplus A \equiv_T C$.
 - [ ] Because otherwise the trees would not be $A$-computable.
 
   The trees are $A$-computable by construction; the coding of $A$ ensures that $B$ lies above $A$.
@@ -155,7 +155,7 @@ Let $\mathcal P = [T]$ be non-empty, with $T$ computable, and $X$ its leftmost p
 Show that there are continuum many minimal degrees.
 
 :::hint
-Modify the construction as in the last exercise of the lesson on computably dominated sets: at each step, choose between the two subtrees above $T(0)$ and $T(1)$ according to a bit of a parameter $Z \in \cs$.
+Modify the construction as in the last exercise of :ref{to="immunity-growth/computably-dominated"}: at each step, choose between the two subtrees above $T(0)$ and $T(1)$ according to a bit of a parameter $Z \in \cs$.
 :::
 
 :::solution
@@ -165,7 +165,7 @@ Fix the subtrees given by the lemmas, choosing the least witness in Case 1, so t
 
 ## Notes and references
 
-Spector (1956) proved the existence of minimal degrees with uniform trees; Shoenfield observed that arbitrary computable f-trees suffice. Sacks (1961) built a minimal degree below $\obf'$, and Yates (1970) and Cooper (1972) below every non-zero c.e. degree. Lachlan and Lebeuf (1976) showed that every countable upper semilattice with least element is isomorphic to an initial segment of $\mathcal D$, so that the theory of initial segments is very rich. No PA degree is minimal, and Kumabe and Lewis (2009) built a minimal degree that computes a DNC function.
+Spector (1956) proved the existence of minimal degrees; the presentation by computable function trees used here is the standard modern one (see Lerman's monograph). Sacks (1961) built a minimal degree below $\obf'$, and Yates (1970) and Cooper (1972) below every non-zero c.e. degree. Lachlan and Lebeuf (1976) showed that every countable upper semilattice with least element is isomorphic to an initial segment of $\mathcal D$, so that the theory of initial segments is very rich. No PA degree is minimal, by results of the courses on $\Pi^0_1$ classes and on randomness: a PA degree $\abf$ computes a member $Z = Z_0 \oplus Z_1$ of the non-empty $\Pi^0_1$ class of sets avoiding the first component of a universal Martin-Löf test, so $Z$ is random; its halves $Z_0$ and $Z_1$ are Turing incomparable (:ref{#cor-van-lambalgen}), so $\obf < \deg_T(Z_0) < \deg_T(Z) \leq \abf$, and $\abf$ is not minimal. Kumabe and Lewis (2009) built a minimal degree that computes a DNC function.
 
 - C. Spector, *On degrees of recursive unsolvability*, Annals of Mathematics 64 (1956), 581–592.
 - G. E. Sacks, *A minimal degree less than 0′*, Bulletin of the American Mathematical Society 67 (1961), 416–419.

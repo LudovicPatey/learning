@@ -2,7 +2,7 @@ title: Structure of the Turing degrees
 area: computability
 level: Advanced
 order: 10
-prerequisites: [turing-degrees, immunity-growth]
+prerequisites: [turing-degrees, ce-degrees, immunity-growth]
 summary: Exact pairs, embeddings of partial orders, and minimal degrees.
 description: >
   The global structure of the Turing degrees as a partial order: the upper
