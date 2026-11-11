@@ -44,6 +44,7 @@ The book sources in `external-data/` (Monin & Patey, *Computability theory*) set
 - **Every change comes with tests.** Run `npm run verify` (type-check, unit tests, content check) before considering a task done. New library code gets unit tests in `tests/`; bugs get a regression test.
 - Keep library code (`src/lib/`) free of React and framework code where possible, so it stays testable.
 - Do not add dependencies without need. Pin exact behavior-sensitive packages (KaTeX).
+- The live site is a static export served by PHP hosting (`docs/DEPLOY.md`): pages must not use request-time data, and every change to the API (`src/app/api/`) must be made to its PHP version (`deploy/api/`) as well.
 - Security: user-written text is rendered only through `renderMathText` (escapes HTML, KaTeX with `trust: false`). Lesson content is trusted (it comes from the repository). Mutating API routes check `sameOrigin` and the session.
 
 ## Architecture
@@ -60,7 +61,9 @@ The book sources in `external-data/` (Monin & Patey, *Computability theory*) set
 | `src/lib/versions.ts`, `release.ts` | Versions: listing and comparing (site); creating releases (CLI only) |
 | `src/lib/citation.ts` | BibTeX and citation keys |
 | `src/lib/katex-macros.ts` | LaTeX macros available in lessons (from the book's preamble) |
-| `src/lib/db.ts`, `auth.ts`, `orcid.ts`, `comments.ts` | SQLite storage, sessions, ORCID OAuth, reader remarks |
+| `src/lib/db.ts`, `auth.ts`, `orcid.ts`, `comments.ts` | SQLite storage, sessions, ORCID OAuth, reader remarks (development server) |
+| `deploy/api/` | The same API in PHP, for the live site on PHP hosting; keep it in step with `src/app/api/` (`tests/php-api.test.ts`) |
+| `src/lib/deploy.ts`, `scripts/build-static.ts`, `scripts/deploy.ts` | Static export and upload to the web hosting: `docs/DEPLOY.md` |
 | `src/components/pages/` | Lesson and course pages, shared by current and released versions |
 | `src/components/LessonView.tsx`, `anchoring.ts`, `CommentsPanel.tsx` | Reading view, text-anchored remarks |
 | `src/app/globals.css` | All styles (design tokens at the top, light and dark) |
@@ -114,4 +117,7 @@ npm test               # unit tests only
 npm run check-content  # validates all lessons (broken references, malformed quizzes)
 npm run release -- models-of-computation 1.1 "Corrections in lesson 7"
 npm run build
+npm run build:static          # static site for the web hosting, in out/; npm run preview:static serves it
+npm run deploy -- --dry-run   # build the static site (out/) and list what would be uploaded
+npm run deploy                # upload it to the web hosting (docs/DEPLOY.md)
 ```

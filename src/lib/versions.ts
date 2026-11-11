@@ -59,6 +59,15 @@ export function hasVersion(course: string, version: string, root = contentDir())
 }
 
 /** All (course, version) pairs, for static generation. */
+/**
+ * generateStaticParams() for routes indexed by released versions. A static export
+ * (STATIC_EXPORT=1) refuses a dynamic route without pages, so when there is no
+ * version yet it gets one placeholder, which the page answers with a 404.
+ */
+export function withExportPlaceholder<T extends Record<string, string>>(params: T[], placeholder: T): T[] {
+  return params.length === 0 && process.env.STATIC_EXPORT === "1" ? [placeholder] : params;
+}
+
 export function allVersions(root = contentDir()): { course: string; version: string }[] {
   const base = versionsRoot(root);
   if (!fs.existsSync(base)) return [];

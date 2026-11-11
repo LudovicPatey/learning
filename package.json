@@ -5,6 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static": "node --experimental-strip-types --no-warnings scripts/build-static.ts",
+    "preview:static": "php -S 127.0.0.1:8137 -t out deploy/preview-router.php",
+    "deploy": "node --experimental-strip-types --no-warnings scripts/deploy.ts",
     "start": "next start",
     "check-content": "node --experimental-strip-types --no-warnings scripts/check-content.ts",
     "typecheck": "tsc --noEmit",

@@ -11,3 +11,7 @@ coverage/
 
 # Sources of the reference book (Monin & Patey): kept locally, not versioned.
 external-data/
+
+# Static build for the web hosting, and local deployment settings (docs/DEPLOY.md)
+out/
+cache/

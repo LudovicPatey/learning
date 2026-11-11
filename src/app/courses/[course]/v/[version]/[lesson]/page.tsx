@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
 import { getCatalog } from "@/lib/content";
-import { allVersions } from "@/lib/versions";
+import { allVersions, withExportPlaceholder } from "@/lib/versions";
 import { LessonPage } from "@/components/pages/LessonPage";
 
 // Unknown parameters are rendered on demand and answered with a 404 by the page.
 
 export function generateStaticParams() {
-  return allVersions().flatMap(({ course, version }) =>
-    [...getCatalog({ course, version }).lessons.values()]
-      .filter((l) => l.course === course)
-      .map((l) => ({ course, version, lesson: l.slug })),
+  return withExportPlaceholder(
+    allVersions().flatMap(({ course, version }) =>
+      [...getCatalog({ course, version }).lessons.values()]
+        .filter((l) => l.course === course)
+        .map((l) => ({ course, version, lesson: l.slug })),
+    ),
+    { course: "none", version: "none", lesson: "none" },
   );
 }
 

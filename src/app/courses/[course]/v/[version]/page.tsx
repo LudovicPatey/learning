@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { getCourse } from "@/lib/content";
-import { allVersions } from "@/lib/versions";
+import { allVersions, withExportPlaceholder } from "@/lib/versions";
 import { CoursePage } from "@/components/pages/CoursePage";
 
 // Unknown parameters are rendered on demand and answered with a 404 by the page.
 
 export function generateStaticParams() {
-  return allVersions().map((v) => ({ course: v.course, version: v.version }));
+  return withExportPlaceholder(
+    allVersions().map((v) => ({ course: v.course, version: v.version })),
+    { course: "none", version: "none" },
+  );
 }
 
 export async function generateMetadata({ params }: PageProps<"/courses/[course]/v/[version]">): Promise<Metadata> {

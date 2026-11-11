@@ -155,9 +155,15 @@ A suggestion stores the selected text plus ~32 characters of context on each sid
 | `src/lib/content.ts` | Catalog loading, Markdown → HTML pipeline, numbering, references, quiz extraction |
 | `src/lib/katex-macros.ts` | Book macros for KaTeX |
 | `src/lib/db.ts`, `comments.ts`, `auth.ts`, `orcid.ts` | SQLite schema, comments, sessions, ORCID OAuth |
-| `src/app/api/…` | Sign-in/out and comments API |
+| `src/app/api/…` | Sign-in/out and comments API (development server) |
+| `deploy/api/` | The same API in PHP, for the live site |
+| `scripts/build-static.ts`, `scripts/deploy.ts` | Static export and deployment: [docs/DEPLOY.md](docs/DEPLOY.md) |
 | `src/components/LessonView.tsx`, `CommentsPanel.tsx`, `anchoring.ts` | Selection, highlights, suggestion threads |
 | `src/components/Quiz.tsx`, `progress.ts` | Check-up questions; progress kept in the browser |
+
+## Deployment
+
+The live site is a static export served by PHP web hosting, with a PHP version of the remarks API. `npm run deploy` builds it and uploads what changed over SFTP; see [docs/DEPLOY.md](docs/DEPLOY.md).
 
 ## Next steps
 

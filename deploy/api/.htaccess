@@ -1,0 +1,12 @@
+# Remarks server (docs/DEPLOY.md): index.php is the only entry point; it serves
+# every URL under /api/ (the routes of the Next.js API, src/app/api/).
+Options -Indexes
+<FilesMatch "^(lib|config|config\.example)\.php$|\.json$">
+  Require all denied
+</FilesMatch>
+RewriteEngine On
+# pass the Authorization header to PHP (admin export) on Apache with CGI/FastCGI
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [L,QSA]
