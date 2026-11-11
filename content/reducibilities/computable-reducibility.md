@@ -20,13 +20,13 @@ Let $\mathsf P$ and $\mathsf Q$ be problems.
 Strong reducibility forbids the use of the original instance in the second step: all the information needed must be coded in the solutions of $\mathsf Q$. Both relations are preorders, and $\mathsf P \leq_{sc} \mathsf Q$ implies $\mathsf P \leq_c \mathsf Q$.
 
 :::proposition{#prop-c-omega}
-If $\mathsf P \leq_c \mathsf Q$, then $\mathsf P \leq_\omega \mathsf Q$. A problem is computably true if and only if $\mathsf P \leq_c \mathsf{Id}$, if and only if every Turing ideal satisfies it.
+If $\mathsf P \leq_c \mathsf Q$, then $\mathsf P \leq_\omega \mathsf Q$. A problem $\mathsf P$ is computably true if and only if $\mathsf P \leq_c \mathsf{Id}$, if and only if every Turing ideal satisfies it.
 :::
 
 :::proof{of=prop-c-omega}
 Let $\mathcal I \models \mathsf Q$ and $X \in \mathcal I$ an instance of $\mathsf P$. The instance $\widetilde X \leq_T X$ belongs to $\mathcal I$, so it has a solution $\widetilde Y \in \mathcal I$; then $X \oplus \widetilde Y \in \mathcal I$ computes a solution to $X$, which belongs to $\mathcal I$.
 
-If $\mathsf P$ is computably true, take $\widetilde X = X$ as an instance of $\mathsf{Id}$. Conversely, if $\mathsf P \leq_c \mathsf{Id}$, the only solution to $\widetilde X$ is $\widetilde X \leq_T X$, so $X$ computes a solution. If every Turing ideal satisfies $\mathsf P$, so does $\{ Y : Y \leq_T X \}$, so $X$ computes a solution; the converse is clear.
+If $\mathsf P$ is computably true, take $\widetilde X = X$ as an instance of $\mathsf{Id}$. Conversely, if $\mathsf P \leq_c \mathsf{Id}$, the only solution to $\widetilde X$ is $\widetilde X \leq_T X$, so $X$ computes a solution. If every Turing ideal satisfies $\mathsf P$, so does $\{ Y : Y \leq_T X \}$, so $X$ computes a solution. Conversely, if $\mathsf P$ is computably true, every instance in a Turing ideal computes a solution, which belongs to the ideal.
 :::
 
 For instance, $\mathsf{RT}^1_2$ is computably true: one of the two color classes is infinite, and it is computable from the coloring. The game of the previous lesson refines into a hierarchy: write $\mathsf P \leq^n_\omega \mathsf Q$ if Player 2 has a strategy in $G(\mathsf Q \rightarrow \mathsf P)$ that wins within $n + 1$ rounds, that is, after at most $n$ instances of $\mathsf Q$. Then $\mathsf P \leq^0_\omega \mathsf Q$ means that $\mathsf P$ is computably true, and $\mathsf P \leq_c \mathsf Q$ implies $\mathsf P \leq^1_\omega \mathsf Q$, with equivalence when $\mathsf Q$ has a computable instance.
@@ -41,7 +41,7 @@ Player 2 plays $T$, then $T'$, and receives $T''$, which computes a path through
 No set is PA relative to itself, since it would compute a function that differs from every function it computes; so by :ref{#thm-konig-strength} there is an infinite computable finitely branching tree $T$ without $\emptyset'$-computable path. Every instance $\widetilde X \leq_T T$ of $\mathsf J$ is computable, so its solution $\widetilde X'$ is computable in $\emptyset'$, and $T \oplus \widetilde X' \leq_T \emptyset'$ computes no path through $T$.
 :::
 
-So computable reducibility is strictly finer than ω-reducibility. It is also incomparable with provability over $\mathsf{RCA}_0$: a proof may use the hypothesis several times, and a computable reduction may use reductions that $\mathsf{RCA}_0$ cannot prove total. In practice, many implications over $\mathsf{RCA}_0$ are proved by computable reductions that formalize in $\mathsf{RCA}_0$.
+So computable reducibility is strictly finer than ω-reducibility. It is also incomparable with provability over $\mathsf{RCA}_0$: a proof may use the hypothesis several times, and a computable reduction may rely on properties of the standard natural numbers, such as instances of induction, that $\mathsf{RCA}_0$ does not prove. In practice, many implications over $\mathsf{RCA}_0$ are proved by computable reductions that formalize in $\mathsf{RCA}_0$.
 
 :::quiz[computable reducibility]
 In the proof of :ref{#prop-kl-not-c-j}, why does a single instance of $\mathsf J$ not suffice?
@@ -49,7 +49,7 @@ In the proof of :ref{#prop-kl-not-c-j}, why does a single instance of $\mathsf J
 - [x] Because the instance must be computable from the computable tree $T$, so it is computable, and its jump is computable in $\emptyset'$, which computes no path through $T$.
 - [ ] Because $\mathsf J$ has a unique solution.
 
-  Uniqueness is not the issue: the unique solution is simply not powerful enough.
+  Uniqueness is not the issue: the unique solution $\widetilde X'$ is computable in $\emptyset'$, which is not enough.
 - [ ] Because $T$ has no computable path.
 
   Many trees without computable paths have paths computable in $\emptyset'$; $T$ was chosen to have none.
@@ -66,7 +66,7 @@ Let $A$ be a set and $P$ a set that computes $A$ and is PA relative to $A$. Ther
 :::proof{of=thm-scott-pa}
 For a set $Z$, let $D^Z$ be the class of $\{0, 1\}$-valued functions $g$ with $g(e) \neq \Phi^Z_e(e)$ whenever $\Phi^Z_e(e)$ converges; it is a non-empty $\Pi^0_1(Z)$ class, uniformly in $Z$. Let $\mathcal C$ be the class of sequences $(X_i)_{i \in \nat}$, coded as $\bigoplus_i X_i$, such that $X_0 = A$ and, for every $i$, $X_{i+1} \in D^{Z_i}$, where $Z_i = X_0 \oplus \cdots \oplus X_i$. It is a $\Pi^0_1(A)$ class, non-empty since each $D^{Z_i}$ is non-empty. Since $P$ computes $A$ and is PA relative to $A$, it computes a member $(X_i)$ of $\mathcal C$, by :ref{#thm-pa-characterization} relativized to $A$; and every $Z_i$ is computable in $P$.
 
-Let $\mathcal I = \{ Y : \exists i\ Y \leq_T Z_i \}$, a Turing ideal containing $A$, with all members computable in $P$. The set $Z_{i+1} = Z_i \oplus X_{i+1}$ computes $Z_i$ and a $\{0, 1\}$-valued function that is diagonally non-computable relative to $Z_i$, so it is PA relative to $Z_i$, by :ref{#thm-pa-characterization} relativized to $Z_i$. Hence every member $Y \leq_T Z_i$ of $\mathcal I$ has a member $Z_{i+1}$ of $\mathcal I$ that is PA relative to it, and $\mathcal I$ is a Scott ideal by :ref{#prop-wkl-scott}.
+Let $\mathcal I = \{ Y : \exists i\ Y \leq_T Z_i \}$, a Turing ideal containing $A$, with all members computable in $P$. The set $Z_{i+1} = Z_i \oplus X_{i+1}$ computes $Z_i$ and a $\{0, 1\}$-valued function that is diagonally non-computable relative to $Z_i$, so it is PA relative to $Z_i$, by :ref{#thm-pa-characterization} relativized to $Z_i$; hence it is PA relative to every $Y \leq_T Z_i$, since every non-empty $\Pi^0_1(Y)$ class is a $\Pi^0_1(Z_i)$ class. So every member $Y \leq_T Z_i$ of $\mathcal I$ has a member $Z_{i+1}$ of $\mathcal I$ that is PA relative to it, and $\mathcal I$ is a Scott ideal by :ref{#prop-wkl-scott}.
 :::
 
 The sets $Z_i$ are used rather than the $X_i$: a function that is diagonally non-computable relative to $Z$ need not compute $Z$, and the join ensures that the sequence increases.
@@ -82,7 +82,7 @@ One direction is :ref{#prop-c-omega}. Suppose $\mathsf P \leq_\omega \mathsf{WKL
 :::quiz[Scott ideals]
 Why does the proof of :ref{#thm-scott-pa} use the joins $Z_i$, rather than requiring $X_{i+1}$ to be diagonally non-computable relative to $X_i$?
 
-- [x] Because a function diagonally non-computable relative to $X_i$ need not compute $X_i$, so the classes of sets computable in the $X_i$ would not increase, and their union would not be a Turing ideal.
+- [x] Because a function diagonally non-computable relative to $X_i$ need not compute $X_i$, so the classes of sets computable in the $X_i$ need not increase, and their union need not be a Turing ideal.
 - [ ] Because $D^{X_i}$ may be empty.
 
   Each such class is non-empty.
@@ -145,7 +145,7 @@ Let $\mathsf P \leq_c \mathsf Q \leq_c \mathsf R$, and $X$ an instance of $\math
 Show that $\mathsf{RT}^2_2 \not\leq_c \mathsf{WKL}$, and that $\mathsf{WKL} \not\leq_c \mathsf{RT}^1_2$.
 
 :::solution
-By :ref{#thm-wkl-omega-c}, $\mathsf{RT}^2_2 \leq_c \mathsf{WKL}$ would give $\mathsf{RT}^2_2 \leq_\omega \mathsf{WKL}$, which fails by the first exercise of the previous lesson. For the second statement, $\mathsf{RT}^1_2$ is computably true, so $\mathsf{WKL} \leq_c \mathsf{RT}^1_2$ would make $\mathsf{WKL}$ computably true, by transitivity and :ref{#prop-c-omega}. But there is an infinite computable binary tree without computable path (:ref{#thm-dnc2-no-computable}).
+By :ref{#thm-wkl-omega-c}, $\mathsf{RT}^2_2 \leq_c \mathsf{WKL}$ would give $\mathsf{RT}^2_2 \leq_\omega \mathsf{WKL}$, which fails by :ref{#ex-wkl-kl-rt22}. For the second statement, $\mathsf{RT}^1_2$ is computably true, so $\mathsf{WKL} \leq_c \mathsf{RT}^1_2$ would make $\mathsf{WKL}$ computably true, by transitivity and :ref{#prop-c-omega}. But there is an infinite computable binary tree without computable path (:ref{#thm-dnc2-no-computable}).
 :::
 ::::
 

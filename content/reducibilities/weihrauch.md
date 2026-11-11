@@ -24,7 +24,7 @@ $$
 \mathsf P \leq_{sW} \mathsf Q \;\Rightarrow\; \mathsf P \leq_{sc} \mathsf Q \;\Rightarrow\; \mathsf P \leq_c \mathsf Q.
 \end{gathered}
 $$
-As for computable reducibility, $\mathsf P$ is uniformly true if and only if $\mathsf P \leq_W \mathsf{Id}$: given $\Phi$, take $\Psi^{X \oplus Y} = \Phi^X$; given $\Phi$ and $\Psi$, the functional $X \mapsto \Psi^{X \oplus \Phi^X}$ solves $\mathsf P$.
+As for computable reducibility, $\mathsf P$ is uniformly true if and only if $\mathsf P \leq_W \mathsf{Id}$: given $\Phi$, take the identity as forward functional and $\Psi^{X \oplus Y} = \Phi^X$; given $\Phi$ and $\Psi$, the functional $X \mapsto \Psi^{X \oplus \Phi^X}$ solves $\mathsf P$.
 
 :::proposition{#prop-rt12-not-uniform}
 $\mathsf{RT}^1_2$ is computably true but not uniformly true. Consequently, $\mathsf{RT}^1_2 \leq_c \mathsf{RT}^1_1$ but $\mathsf{RT}^1_2 \not\leq_W \mathsf{RT}^1_1$.
@@ -62,7 +62,7 @@ Why does the computable reduction of $\mathsf{RT}^1_2$ to $\mathsf{RT}^1_1$ not 
 
 ## The omniscience principles
 
-The following problems, from constructive mathematics, have instances in $\{0, 1\}^\nat$ and solutions in $\{ 0, 1 \}$, coded as sets.
+The following problems, from constructive mathematics, have instances in $\{0, 1\}^\nat$ and solutions in $\{ 0, 1 \}$, coded as sets: $0$ by $\emptyset$ and $1$ by $\{ 0 \}$, so that a solution is read from the first bit of its code.
 
 :::definition{#def-lpo-llpo}
 1. The **limited principle of omniscience** $\mathsf{LPO}$: an instance is a sequence $p \in \{0, 1\}^\nat$; its solution is $1$ if $p(n) = 1$ for some $n$, and $0$ otherwise.
@@ -78,7 +78,7 @@ $\mathsf{LLPO} \leq_W \mathsf{LPO}$, and $\mathsf{LLPO}$ is not uniformly true.
 :::proof{of=prop-llpo-lpo}
 Let $\Phi^p = p$, and let $\Psi^{p \oplus i}$ output $0$ if $i = 0$; if $i = 1$, it searches for $n$ with $p(n) = 1$ and outputs $1$ if $n$ is even and $0$ if $n$ is odd. If $p$ has no $1$, both values are solutions; if $p(n) = 1$, the search terminates, and the output has the parity opposite to $n$, as required.
 
-Suppose that $\Phi^p$ is a solution for every instance $p$. Let $i = \Phi^{0^\infty}$, computed with use $u$. Let $p_0$ and $p_1$ be the sequences with a single $1$, at positions $2u$ and $2u + 1$ respectively. Both agree with $0^\infty$ below $u$, so $\Phi^{p_0} = \Phi^{p_1} = i$. But the only solution to $p_0$ is $1$, and the only solution to $p_1$ is $0$.
+Suppose that $\Phi^p$ is a solution for every instance $p$. Let $i = \Phi^{0^\infty}(0)$, the bit that determines the solution, and $u$ the use of this computation. Let $p_0$ and $p_1$ be the sequences with a single $1$, at positions $2u$ and $2u + 1$ respectively. Both agree with $0^\infty$ below $u$, so $\Phi^{p_0}(0) = \Phi^{p_1}(0) = i$, and $\Phi^{p_0}$ and $\Phi^{p_1}$ both code the solution $i$. But the only solution to $p_0$ is $1$, and the only solution to $p_1$ is $0$.
 :::
 
 ## Parallelization
@@ -86,6 +86,8 @@ Suppose that $\Phi^p$ is a solution for every instance $p$. Let $i = \Phi^{0^\in
 :::definition{#def-parallelization}
 The **parallelization** of a problem $\mathsf P$ is the problem $\widehat{\mathsf P}$ whose instances are the sequences $\bigoplus_n X_n$ of instances of $\mathsf P$, and whose solutions are the sequences $\bigoplus_n Y_n$ with $Y_n$ a solution to $X_n$ for every $n$.
 :::
+
+When the solutions of $\mathsf P$ are numbers in $\{ 0, 1 \}$, as for $\mathsf{LPO}$ and $\mathsf{LLPO}$, a solution $\bigoplus_n Y_n$ to $\widehat{\mathsf P}$ is identified with the set $\{ n : Y_n = \{ 0 \} \}$, the sequence of the values of the solutions. Each of the two codings is computable from the other, uniformly, so the identification does not affect Weihrauch reducibility.
 
 If $\mathsf P \leq_W \mathsf Q$ via $\Phi$ and $\Psi$, then $\widehat{\mathsf P} \leq_W \widehat{\mathsf Q}$ via the functionals applying $\Phi$ and $\Psi$ to each coordinate. So parallelization is an operation on Weihrauch degrees. It turns the omniscience principles into familiar problems.
 
@@ -119,7 +121,7 @@ $\mathsf{LPO} \not\leq_W \mathsf{LLPO}$. So $\mathsf{LLPO} <_W \mathsf{LPO}$.
 If $\mathsf{LPO} \leq_W \mathsf{LLPO}$, then $\widehat{\mathsf{LPO}} \leq_W \widehat{\mathsf{LLPO}}$, so $\mathsf J \leq_W \mathsf{WKL}$ by :ref{#thm-jump-lpo} and :ref{#thm-wkl-llpo}. This would give $\mathsf J \leq_\omega \mathsf{WKL}$, which fails by :ref{#cor-wkl-not-j}.
 :::
 
-The proof transfers a separation of ω-reducibility, obtained from the cone avoidance basis theorem, to a separation between problems with finite solutions, where computability-theoretic arguments do not apply directly. Parallelization thus connects the uniform world of Weihrauch reducibility with the non-uniform world of Turing degrees.
+The proof transfers a separation of ω-reducibility, obtained from the cone avoidance basis theorem, to a separation between two computably true problems, which ω-reducibility and computable reducibility do not distinguish. Parallelization thus connects the uniform world of Weihrauch reducibility with the non-uniform world of Turing degrees.
 
 :::quiz[parallelization]
 In the proof that $\mathsf{WKL} \leq_W \widehat{\mathsf{LLPO}}$, why is the instance $q_\sigma$ defined from the first stage at which a successor dies, rather than from the extendibility of the successors?
@@ -136,7 +138,7 @@ In the proof that $\mathsf{WKL} \leq_W \widehat{\mathsf{LLPO}}$, why is the inst
 
 Why does :ref{#cor-lpo-not-llpo} pass through the parallelizations?
 
-- [x] Because $\mathsf{LPO}$ and $\mathsf{LLPO}$ are computably true, so no computability-theoretic argument separates them directly; their parallelizations are $\mathsf J$ and $\mathsf{WKL}$, which are separated by the cone avoidance basis theorem.
+- [x] Because $\mathsf{LPO}$ and $\mathsf{LLPO}$ are computably true, so ω-reducibility and computable reducibility do not separate them; their parallelizations are $\mathsf J$ and $\mathsf{WKL}$, which are separated in ω-models by the cone avoidance basis theorem.
 - [ ] Because Weihrauch reducibility is only defined for parallel problems.
 
   It is defined for all problems.
@@ -173,9 +175,10 @@ An instance $X_1 \oplus \cdots \oplus X_n$ of $\mathsf P^n$ computes each $X_i$,
 
 ## Notes and references
 
-Weihrauch reducibility comes from computable analysis, where it was developed by Weihrauch, Brattka, Gherardi and Pauly; the monograph chapter of Brattka, Gherardi and Pauly is a survey. Gherardi and Marcone (2009), Dorais, Dzhafarov, Hirst, Mileti and Shafer (2016), Brattka and Rakotoniaina (2017) and Hirschfeldt and Jockusch (2016) developed its use for combinatorial principles.
+Weihrauch reducibility comes from computable analysis, where it was developed by Weihrauch, Brattka, Gherardi and Pauly; the handbook chapter of Brattka, Gherardi and Pauly is a survey. Gherardi and Marcone (2009), Dorais, Dzhafarov, Hirst, Mileti and Shafer (2016), Brattka and Rakotoniaina (2017) and Hirschfeldt and Jockusch (2016) developed its use for combinatorial principles.
 
 - V. Brattka, G. Gherardi and A. Pauly, *Weihrauch complexity in computable analysis*, in Handbook of Computability and Complexity in Analysis, Springer, 2021, 367–417.
 - G. Gherardi and A. Marcone, *How incomputable is the separable Hahn–Banach theorem?*, Notre Dame Journal of Formal Logic 50 (2009), 393–425.
 - V. Brattka and T. Rakotoniaina, *On the uniform computational content of Ramsey's theorem*, Journal of Symbolic Logic 82 (2017), 1278–1316.
 - F. G. Dorais, D. D. Dzhafarov, J. L. Hirst, J. R. Mileti and P. Shafer, *On uniform relationships between combinatorial problems*, Transactions of the American Mathematical Society 368 (2016), 1321–1359.
+- D. R. Hirschfeldt and C. G. Jockusch, *On notions of computability-theoretic reduction between Π¹₂ principles*, Journal of Mathematical Logic 16 (2016), 1650002.

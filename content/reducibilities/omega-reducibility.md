@@ -2,7 +2,7 @@
 title: Problems and ω-reducibility
 summary: Theorems of the form "every instance has a solution" seen as problems; Turing ideals satisfying a problem and ω-reducibility; König's lemma and the jump; weakness properties and their preservation, the standard method for separations; the game characterization of ω-reducibility.
 duration: 40
-prerequisites: [big-five/wkl0, pi01-classes/finitely-branching-trees]
+prerequisites: [big-five/wkl0, pi01-classes/finitely-branching-trees, ramsey-theorem/seetapun]
 ---
 
 Most theorems studied in reverse mathematics have the form $\forall X\, (F(X) \rightarrow \exists Y\, G(X, Y))$ with $F$ and $G$ arithmetic: every infinite binary tree has a path, every coloring of pairs has an infinite homogeneous set. Such a theorem can be seen as a **problem**: its **instances** are the sets $X$ with $F(X)$, and the **solutions** to $X$ are the sets $Y$ with $G(X, Y)$. Comparing theorems over $\mathsf{RCA}_0$ in ω-models amounts to comparing the computational power of their solutions. This course studies three reducibilities between problems, of increasing precision: ω-reducibility, computable reducibility and Weihrauch reducibility.
@@ -25,7 +25,7 @@ Numbers, finite sequences, functions, trees and sequences of sets are coded by s
 A Turing ideal $\mathcal I$ **satisfies** a problem $\mathsf P$, written $\mathcal I \models \mathsf P$, if every instance of $\mathsf P$ in $\mathcal I$ has a solution in $\mathcal I$.
 :::
 
-When $\mathsf P$ comes from a theorem $\forall X\, (F(X) \rightarrow \exists Y\, G(X, Y))$ with $F, G$ arithmetic, $\mathcal I \models \mathsf P$ exactly when the ω-model $\mathcal I$ satisfies the theorem, by absoluteness of arithmetic formulas (:ref{#prop-omega-absolute}). For instance, the Turing ideals satisfying $\mathsf J$ are the jump ideals, and those satisfying $\mathsf{WKL}$ are the Scott ideals (:ref{#prop-wkl-scott}).
+When $\mathsf P$ comes from a theorem $\forall X\, (F(X) \rightarrow \exists Y\, G(X, Y))$ with $F, G$ arithmetic, $\mathcal I \models \mathsf P$ exactly when the ω-model $\mathcal I$ satisfies the theorem, by absoluteness of arithmetic formulas (:ref{#prop-omega-absolute}). For instance, the Turing ideals satisfying $\mathsf J$ are the jump ideals, and those satisfying $\mathsf{WKL}$ are the Scott ideals (:ref{#def-scott-ideal}).
 
 :::definition{#def-omega-reducible}
 A problem $\mathsf P$ is **ω-reducible** to a problem $\mathsf Q$, written $\mathsf P \leq_\omega \mathsf Q$, if every Turing ideal satisfying $\mathsf Q$ satisfies $\mathsf P$.
@@ -55,7 +55,7 @@ To show $\mathsf P \not\leq_\omega \mathsf Q$, one builds a Turing ideal that sa
 A **weakness property** is a class $\mathcal W \subseteq \mathcal P(\nat)$ closed downwards under Turing reducibility: if $X \in \mathcal W$ and $Y \leq_T X$, then $Y \in \mathcal W$. A problem $\mathsf Q$ **preserves** $\mathcal W$ if for every $Z \in \mathcal W$ and every instance $X \leq_T Z$ of $\mathsf Q$, there is a solution $Y$ to $X$ with $Z \oplus Y \in \mathcal W$.
 :::
 
-Examples of weakness properties are the low sets, the computably dominated sets, the sets that do not compute a given set $C$, and the class of sets computable in a given set. By the low basis theorem relativized, $\mathsf{WKL}$ preserves the class of low sets, as in the proof of :ref{#thm-low-scott}; by the cone avoidance basis theorem (:ref{#thm-cone-avoidance-basis}), it preserves $\{ Z : C \not\leq_T Z \}$ for every $C$.
+Examples of weakness properties are the low sets, the computably dominated sets, the sets that do not compute a given set $C$, and the class of sets computable in a given set. By the low basis theorem (:ref{#thm-low-basis}) relativized to a low set $Z$, every infinite $Z$-computable binary tree has a path $Y$ with $(Z \oplus Y)' \leq_T Z' \leq_T \emptyset'$, so $\mathsf{WKL}$ preserves the class of low sets, as in the proof of :ref{#thm-low-scott}; by the cone avoidance basis theorem (:ref{#thm-cone-avoidance-basis}), it preserves $\{ Z : C \not\leq_T Z \}$ for every $C$.
 
 :::lemma{#lem-preservation-ideal}
 If $\mathsf Q$ preserves $\mathcal W$, then for every $X \in \mathcal W$ there is a Turing ideal $\mathcal I \subseteq \mathcal W$ containing $X$ and satisfying $\mathsf Q$.
@@ -80,7 +80,7 @@ $\mathsf J \not\leq_\omega \mathsf{WKL}$, $\mathsf{KL} \not\leq_\omega \mathsf{W
 :::
 
 :::proof{of=cor-wkl-not-j}
-Let $\mathcal W = \{ Z : \emptyset' \not\leq_T Z \}$. The problem $\mathsf{WKL}$ preserves $\mathcal W$ by the cone avoidance basis theorem, relativized to $Z$. The problem $\mathsf J$ does not: $\emptyset \in \mathcal W$ is an instance whose only solution is $\emptyset'$. By :ref{#prop-kl-j}, $\mathsf{KL} \equiv_\omega \mathsf J$, so $\mathsf{KL} \not\leq_\omega \mathsf{WKL}$ too. The problem $\mathsf{RT}^2_2$ preserves the class $\{ Z : C \not\leq_T Z \}$ for every non-computable $C$, by Seetapun's theorem in its relativized form (:ref{#thm-seetapun}).
+Let $\mathcal W = \{ Z : \emptyset' \not\leq_T Z \}$. The problem $\mathsf{WKL}$ preserves $\mathcal W$ by the cone avoidance basis theorem, relativized to $Z$. The problem $\mathsf J$ does not: $\emptyset \in \mathcal W$ is an instance whose only solution is $\emptyset'$, and $\emptyset \oplus \emptyset' \notin \mathcal W$. So $\mathsf J \not\leq_\omega \mathsf{WKL}$ by :ref{#thm-preservation-separation}. By :ref{#prop-kl-j}, $\mathsf{KL} \equiv_\omega \mathsf J$, so $\mathsf{KL} \not\leq_\omega \mathsf{WKL}$ too. The problem $\mathsf{RT}^2_2$ preserves $\mathcal W$ by Seetapun's theorem (:ref{#thm-seetapun}) with $C = \emptyset'$: for every $Z \in \mathcal W$, every $Z$-computable coloring of pairs has an infinite homogeneous set $H$ with $\emptyset' \not\leq_T Z \oplus H$. So $\mathsf J \not\leq_\omega \mathsf{RT}^2_2$, again by :ref{#thm-preservation-separation}.
 :::
 
 The property used here is **cone avoidance**: a problem $\mathsf Q$ avoids cones if, for every $Z$ and every $C \not\leq_T Z$, every $Z$-computable instance has a solution $Y$ with $C \not\leq_T Z \oplus Y$. Downey, Greenberg, Harrison-Trainor, Patey and Turetsky (2022) showed that a problem that avoids one cone at a time also avoids countably many cones simultaneously; we admit this result.
@@ -88,10 +88,10 @@ The property used here is **cone avoidance**: a problem $\mathsf Q$ avoids cones
 :::quiz[preservation]
 In the proof of :ref{#lem-preservation-ideal}, why is each instance $\Phi^{Z_p}_e$ handled at a step $n \geq p$?
 
-- [x] Because the solution is added to $Z_n$, which must compute the instance for preservation to apply; this requires $Z_p \leq_T Z_n$, that is, $p \leq n$.
+- [x] Because the solution is added to $Z_n$, which must compute the instance for preservation to apply; $Z_p \leq_T Z_n$ holds when $p \leq n$, since the sequence is increasing.
 - [ ] Because the instances must be handled in increasing order.
 
-  The order is a bookkeeping device; what matters is that each pair $(p, e)$ is handled at some step after $p$.
+  The order is a bookkeeping device; what matters is that each pair $(p, e)$ is handled at some step $n \geq p$.
 - [ ] Because $\Phi^{Z_p}_e$ may be partial.
 
   Partial functions are skipped; the condition $p \leq n$ concerns the total ones.
@@ -133,11 +133,11 @@ The game makes the number of applications of $\mathsf Q$ visible: in the reducti
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-wkl-kl-rt22 difficulty=1}
 Show that $\mathsf{WKL} \leq_\omega \mathsf{KL}$ but $\mathsf{KL} \not\leq_\omega \mathsf{WKL}$, and that $\mathsf{RT}^2_2 \not\leq_\omega \mathsf{WKL}$.
 
 :::solution
-A Turing ideal satisfying $\mathsf{KL}$ is a jump ideal by :ref{#prop-kl-j}, so it satisfies $\mathsf{WKL}$. The second statement is :ref{#cor-wkl-not-j}. For the third, $\mathsf{WKL}$ preserves the class of low sets; by :ref{#thm-jockusch-no-delta2}, there is a computable instance of $\mathsf{RT}^2_2$ without $\Delta^0_2$ solution, in particular without low solution, so $\mathsf{RT}^2_2$ does not preserve lowness. Apply :ref{#thm-preservation-separation}.
+A Turing ideal satisfying $\mathsf{KL}$ is a jump ideal by :ref{#prop-kl-j}, since $\mathsf J \leq_\omega \mathsf{KL}$, so it satisfies $\mathsf{WKL}$, since $\mathsf{WKL} \leq_\omega \mathsf J$. The second statement is :ref{#cor-wkl-not-j}. For the third, $\mathsf{WKL}$ preserves the class of low sets; by :ref{#thm-jockusch-no-delta2}, there is a computable instance of $\mathsf{RT}^2_2$ without $\Delta^0_2$ solution, in particular without low solution; taking $Z = \emptyset$, which is low, $\mathsf{RT}^2_2$ does not preserve lowness. Apply :ref{#thm-preservation-separation}.
 :::
 ::::
 
