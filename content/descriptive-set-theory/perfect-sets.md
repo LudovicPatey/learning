@@ -5,7 +5,7 @@ duration: 30
 prerequisites: [norms, hyperarithmetic/sigma11-classes]
 ---
 
-Classical descriptive set theory proves that an analytic subset of the reals is either countable or contains a perfect closed subset, hence has the cardinality of the continuum: analytic sets satisfy the continuum hypothesis. The effective version, due to Harrison, identifies the countable $\Sigma^1_1$ classes: their members are all hyperarithmetic. A $\Sigma^1_1$ class that contains a single non-hyperarithmetic set contains continuum many.
+Classical descriptive set theory proves that an analytic subset of the reals is either countable or contains a perfect closed subset, hence has the cardinality of the continuum: analytic sets satisfy the continuum hypothesis. The effective version, due to Harrison, identifies the countable $\Sigma^1_1$ classes: their members are all hyperarithmetic. A $\Sigma^1_1$ class with at least one non-hyperarithmetic member has continuum many members.
 
 ## Σ¹₁ singletons
 
@@ -25,7 +25,7 @@ In particular, the class of non-hyperarithmetic sets is $\Sigma^1_1$. By contras
 
 ## The effective perfect set theorem
 
-A class $\mathcal P \subseteq \cs$ is **perfect** if it is closed and has no isolated point. A non-empty perfect class has the cardinality of the continuum: it contains the image of an injective continuous map from $\cs$, as the proof below shows in our case.
+Recall that a class $\mathcal P \subseteq \cs$ is **perfect** if it is non-empty, closed and has no isolated member (:ref{#def-isolated}). A perfect class has the cardinality of the continuum (:ref{#thm-perfect-continuum}); in the proof below, this is seen directly, since the perfect class is the image of an injective continuous map from $\cs$.
 
 :::theorem[Harrison]{#thm-effective-perfect-set}
 If a $\Sigma^1_1$ class $\mathcal A$ has a member that is not hyperarithmetic, then $\mathcal A$ contains a non-empty perfect closed class. In particular, $\mathcal A$ has the cardinality of the continuum.
@@ -48,10 +48,10 @@ Let $\mathcal B = \mathcal A \setminus \mathrm{HYP}$. It is a non-empty $\Sigma^
 
 :::proof{of=cor-countable-sigma11}
 1. This is the contrapositive of :ref{#thm-effective-perfect-set}.
-2. The class of graphs of the paths of $T$ is $\Sigma^1_1$, and in bijection with the set of paths; a path is hyperarithmetic if and only if its graph is. Apply item 1.
+2. The class of graphs of the paths of $T$ is arithmetic, hence $\Sigma^1_1$, and in bijection with the set of paths; a path is hyperarithmetic if and only if its graph is. Item 1 gives the first statement. For the second, the class of graphs has a non-hyperarithmetic member, so it has the cardinality of the continuum by :ref{#thm-effective-perfect-set}.
 :::
 
-The construction is not effective: choosing good pairs requires deciding a $\Sigma^1_1$ property. It can be carried out with the oracle $\mathcal O$, which gives a perfect subclass computable in $\mathcal O$. Since $\Pi^0_1$ classes are $\Sigma^1_1$, the corollary applies to them: all members of a countable $\Pi^0_1$ class are hyperarithmetic. This complements :ref{#cor-countable-computable}, which only gives a computable member.
+The construction is not effective: choosing good pairs requires deciding a $\Sigma^1_1$ property. It can be carried out with the oracle $\mathcal O$: the set of good pairs is $\Sigma^1_1$, so its complement is many-one reducible to $\mathcal O$, and choosing at each step the first suitable pairs $u_{s0}, u_{s1}$ in a fixed enumeration makes the map $Z \mapsto X_Z$ computable in $\mathcal O$. Since $\Pi^0_1$ classes are $\Sigma^1_1$, the corollary applies to them: all members of a countable $\Pi^0_1$ class are hyperarithmetic. This complements :ref{#cor-countable-computable}, which only gives a computable member.
 
 :::quiz[the perfect set theorem]
 In the splitting step of :ref{#thm-effective-perfect-set}, why does $\mathcal B_u$ have at least two members?
@@ -83,7 +83,7 @@ Why is the class $\mathcal A \setminus \mathrm{HYP}$ used, rather than $\mathcal
 Show that a $\Sigma^1_1$ class is countable if and only if all its members are hyperarithmetic. Let $S_e$ be the computable tree of pairs with index $e$, and $\mathcal A_e$ the projection of its paths. Show that $\{ e : \mathcal A_e \text{ is countable} \}$ is $\Pi^1_1$.
 
 :::solution
-The class $\mathrm{HYP}$ is countable, since every hyperarithmetic set is computable in some $H_a$ by some functional. With :ref{#cor-countable-sigma11}, a $\Sigma^1_1$ class is countable if and only if it is included in $\mathrm{HYP}$. So $\mathcal A_e$ is countable if and only if $\forall X\, \forall f\, ((X, f) \text{ is a path of } S_e \rightarrow X \in \mathrm{HYP})$. Being a path is arithmetic, and $X \in \mathrm{HYP}$ is $\Pi^1_1$ by :ref{#prop-sigma11-singleton}, so the whole formula is $\Pi^1_1$.
+The class $\mathrm{HYP}$ is countable (:ref{#prop-hyp-ideal}), since every hyperarithmetic set is computable in some $H_a$ by some functional. With :ref{#cor-countable-sigma11}, a $\Sigma^1_1$ class is countable if and only if it is included in $\mathrm{HYP}$. So, for an index $e$ of a tree of pairs, $\mathcal A_e$ is countable if and only if $\forall X\, \forall f\, ((X, f) \text{ is a path of } S_e \rightarrow X \in \mathrm{HYP})$. Being an index of a computable tree of pairs and being a path are arithmetic, and $X \in \mathrm{HYP}$ is $\Pi^1_1$ by :ref{#prop-sigma11-singleton}, so the whole formula is $\Pi^1_1$.
 :::
 ::::
 

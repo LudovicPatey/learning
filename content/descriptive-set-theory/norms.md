@@ -35,7 +35,7 @@ since $\rho(T)$ is the supremum of the ordinals $\rho(T_{\langle n \rangle}) + 1
 
 ## Stage comparison
 
-Fix a $\Pi^1_1$ set $A$ and a uniformly computable sequence of trees $(T_n)$, containing the empty sequence, with $n \in A$ if and only if $T_n$ is well-founded. Let $\rho_n = \rho(T_n)$: for $n \in A$, it is a computable ordinal, the **stage** at which $n$ enters $A$, and $\rho_n = \infty$ for $n \notin A$. The map $n \mapsto \rho_n$ on $A$ is a **$\Pi^1_1$ norm** on $A$.
+Fix a $\Pi^1_1$ set $A$ and a uniformly computable sequence of trees $(T_n)$, containing the empty sequence, with $n \in A$ if and only if $T_n$ is well-founded. Let $\rho_n = \rho(T_n)$: for $n \in A$, it is a computable ordinal, since the Kleene–Brouwer ordering of $T_n$ is a computable well-ordering of type at least $\rho_n$ (:ref{#thm-kleene-brouwer}); it is the **stage** at which $n$ enters $A$. For $n \notin A$, $\rho_n = \infty$. The map $n \mapsto \rho_n$ on $A$ is called a **$\Pi^1_1$ norm** on $A$: by the next theorem, the comparison of stages is a $\Pi^1_1$ relation.
 
 :::theorem{#thm-stage-comparison}
 The relations
@@ -79,6 +79,8 @@ In the proof of :ref{#thm-stage-comparison}, why is $n \leq^* m$ written as the 
 Why is the hypothesis $n \in A$ part of the definition of $n \leq^* m$?
 
 - [x] Because the formula for $\rho_m < \rho_n$ by the subtrees $(T_n)_{\langle k \rangle}$ is only correct when $T_n$ is well-founded; when both trees are ill-founded, it would wrongly assert $\infty < \infty$.
+
+  Without the hypothesis, the relation $\rho_n \leq \rho_m$ is not $\Pi^1_1$ in general: for a fixed $n_0 \notin A$, the set $\{ m : \rho_{n_0} \leq \rho_m \}$ is $\overline A$, which is $\Pi^1_1$ only if $A$ is $\Delta^1_1$.
 - [ ] Because $\rho_n$ is not defined for $n \notin A$.
 
   It is defined, and equal to $\infty$.

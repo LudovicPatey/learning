@@ -29,7 +29,7 @@ Every total function $f : \nat \to \nat$ whose graph is $\Pi^1_1$ is hyperarithm
 If $f$ is total, then $f(n) \neq m$ if and only if $\exists k\ (k \neq m \wedge f(n) = k)$, which is $\Pi^1_1$. So the graph is $\Delta^1_1$, hence hyperarithmetic by Kleene's theorem (:ref{#thm-kleene-delta11}), and so is $f$, computable from its graph. The second statement follows from :ref{#thm-kreisel-uniformization}.
 :::
 
-The same argument for c.e. sets shows that a total function with a c.e. graph is computable. The selection principle fails for $\Sigma^1_1$ relations. Let $Y_0$ and $Y_1$ be disjoint $\Pi^1_1$ sets without $\Delta^1_1$ separation (second exercise of the previous lesson), and let $R(n, 0)$ hold if $n \notin Y_0$ and $R(n, 1)$ hold if $n \notin Y_1$. This relation is $\Sigma^1_1$, and every $n$ has a value. If $f$ were a hyperarithmetic function with $R(n, f(n))$ for every $n$, the set $\{ n : f(n) = 1 \}$ would be $\Delta^1_1$, would contain $Y_0$ and be disjoint from $Y_1$.
+The same argument for c.e. sets shows that a total function with a c.e. graph is computable. The selection principle fails for $\Sigma^1_1$ relations. Let $Y_0$ and $Y_1$ be disjoint $\Pi^1_1$ sets without $\Delta^1_1$ separation (second exercise of the previous lesson), and let $R(n, 0)$ hold if $n \notin Y_0$ and $R(n, 1)$ hold if $n \notin Y_1$. This relation is $\Sigma^1_1$, and every $n$ has a value. If $f$ were a hyperarithmetic function with $R(n, f(n))$ for every $n$, then $f$ would take only the values $0$ and $1$, and the set $\{ n : f(n) = 1 \}$ would be $\Delta^1_1$, would contain $Y_0$ (where $R(n, 0)$ fails) and be disjoint from $Y_1$ (where $R(n, 1)$ fails): a $\Delta^1_1$ separation, which does not exist.
 
 :::quiz[uniformization]
 In the proof of :ref{#thm-kreisel-uniformization}, why is the least stage used before the least number $m$?
@@ -57,7 +57,7 @@ In :ref{#cor-total-pi11}, where is the totality of $f$ used?
 
 ## Stages from below
 
-For $\alpha \leq \omega_1^{\mathrm{CK}}$, let $A_{< \alpha} = \{ n : \rho_n < \alpha \}$ be the set of elements of $A$ that enter before stage $\alpha$.
+Let $A$ be a $\Pi^1_1$ set with stages $\rho_n = \rho(T_n)$ as in the previous lesson. For $\alpha \leq \omega_1^{\mathrm{CK}}$, let $A_{< \alpha} = \{ n : \rho_n < \alpha \}$ be the set of elements of $A$ that enter before stage $\alpha$.
 
 :::theorem{#thm-pi11-stages}
 Let $A$ be a $\Pi^1_1$ set, with stages given by uniformly computable trees $(T_n)$.
@@ -70,10 +70,10 @@ Let $A$ be a $\Pi^1_1$ set, with stages given by uniformly computable trees $(T_
 :::proof{of=thm-pi11-stages}
 1. A computable well-founded tree has a computable Kleene–Brouwer ordering, which is a well-ordering of type at least its rank (:ref{#thm-kleene-brouwer}); so its rank is less than $\omega_1^{\mathrm{CK}}$.
 2. Let $t(n)$ be an index of $T_n$, computable from $n$. Then $n \in A_{< \alpha}$ if and only if $t(n) \in \mathrm{WF}_{< \alpha}$, which is hyperarithmetic by :ref{#lem-wf-rank-hyp}.
-3. If $A = A_{< \alpha}$, it is hyperarithmetic by item 2, hence $\Delta^1_1$. Conversely, if $A$ is $\Delta^1_1$, then $\{ t(n) : n \in A \}$ is a $\Sigma^1_1$ set of indices of computable well-founded trees. By the boundedness theorem, in the form used in the proof of :ref{#thm-kleene-delta11}, their ranks are bounded by some computable ordinal $\alpha$, and $A = A_{< \alpha}$.
+3. If $A = A_{< \alpha}$, it is hyperarithmetic by item 2, hence $\Delta^1_1$. Conversely, if $A$ is $\Delta^1_1$, then $\{ t(n) : n \in A \}$ is a $\Sigma^1_1$ set of indices of computable well-founded trees. By the boundedness theorem, in the form used in the proof of :ref{#thm-kleene-delta11}, their ranks have a supremum $\gamma < \omega_1^{\mathrm{CK}}$. With $\alpha = \gamma + 1$, a computable ordinal, every $n \in A$ has $\rho_n < \alpha$, and $A = A_{< \alpha}$.
 :::
 
-A $\Pi^1_1$ set that is not hyperarithmetic, such as $\mathcal O$ or $\mathrm{WF}$, thus receives new elements at cofinally many stages below $\omega_1^{\mathrm{CK}}$, while each initial part of its enumeration is hyperarithmetic. This is the analogue of the fact that a c.e. set is the union of the finite sets $A_s$, and is computable when the enumeration can be bounded. The analogy has a precise form: the $\Pi^1_1$ sets are exactly the sets that are $\Sigma_1$-definable over the structure $L_{\omega_1^{\mathrm{CK}}}$ of constructible sets of rank less than $\omega_1^{\mathrm{CK}}$, and the hyperarithmetic sets are the subsets of $\nat$ that belong to it. We admit these characterizations, which are the starting point of $\alpha$-recursion theory (Sacks, *Higher Recursion Theory*, Chapter VII).
+A $\Pi^1_1$ set that is not hyperarithmetic, such as $\mathcal O$ or $\mathrm{WF}$, thus receives new elements at cofinally many stages below $\omega_1^{\mathrm{CK}}$, while each initial part of its enumeration is hyperarithmetic. This is the analogue of the fact that a c.e. set is the union of the finite sets $A_s$, and is computable when the enumeration can be bounded. The analogy has a precise form: the $\Pi^1_1$ sets are exactly the sets that are $\Sigma_1$-definable over the level $L_{\omega_1^{\mathrm{CK}}}$ of Gödel's constructible hierarchy, and the hyperarithmetic sets are the subsets of $\nat$ that belong to it. We admit these characterizations, which are the starting point of $\alpha$-recursion theory (Sacks, *Higher Recursion Theory*, Chapter VII).
 
 :::quiz[stages]
 In item 3 of :ref{#thm-pi11-stages}, where is the hypothesis that $A$ is $\Sigma^1_1$ used?
