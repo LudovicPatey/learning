@@ -33,10 +33,10 @@ For all $X, Y \in \cs$:
 
 :::proof{of=thm-jump}
 1. $X' = \{ e : \exists s\ \Phi^X_e(e)[s]\converge \}$, and the relation $\Phi^X_e(e)[s]\converge$ is $X$-computable by :ref{#prop-oracle-stages}.
-2. By the parameter form of the relativized SMN theorem (:ref{#thm-relativized-smn}), there is a computable $f$ such that $\Phi^Z_{f(x)}(y) \simeq \Phi^Z_a(x)$ for every $Z$, $x$ and $y$: the machine $f(x)$ ignores its input and runs $\Phi_a$ on $x$, with the same oracle. By the padding lemma, $f$ can be taken injective (as in the exercises of :ref{to="fundamentals/universal-program-smn"}). Then $x \in W^X_a \iff \Phi^X_a(x)\converge \iff \Phi^X_{f(x)}(f(x))\converge \iff f(x) \in X'$.
+2. By the parameter form of the relativized SMN theorem (:ref{#thm-relativized-smn}), there is a computable $f$ such that $\Phi^Z_{f(x)}(y) \simeq \Phi^Z_a(x)$ for every $Z$, $x$ and $y$: the machine $f(x)$ ignores its input and runs $\Phi_a$ on $x$, with the same oracle. By the padding lemma (:ref{#lem-padding}), whose proof applies to oracle machines without change, $f$ can be taken injective, as in the exercises of :ref{to="fundamentals/universal-program-smn"}. Then $x \in W^X_a \iff \Phi^X_a(x)\converge \iff \Phi^X_{f(x)}(f(x))\converge \iff f(x) \in X'$.
 3. $X$ is $X$-c.e., since it is $X$-computable; apply item 2.
 4. This is the relativization of :ref{#thm-halting}. Suppose $X' = \Phi^X_c$. The oracle machine which, on input $x$, computes $\Phi^X_c(x)$ and enters an infinite loop if the result is $1$, and halts otherwise, has an index $d$, and $\Phi^X_d(x)\converge \iff x \notin X'$ for every $x$. For $x = d$, this gives $\Phi^X_d(d)\converge \iff \Phi^X_d(d)\diverge$.
-5. Let $X = \Phi^Y_b$. The set $X'$ is $Y$-c.e.: $e \in X'$ if and only if $\Phi^X_e(e)\converge$, and by :ref{#prop-turing-preorder} there is a computable $c$ with $\Phi^Y_{c(e, b)} = \Phi^X_e$ when $\Phi^Y_b = X$; so $e \in X' \iff \Phi^Y_{c(e, b)}(e)\converge$, and the map $e \mapsto \Phi^Y_{c(e, b)}(e)$ is $Y$-computable. By item 2 relative to $Y$, $X' \leq_1 Y'$.
+5. Let $X = \Phi^Y_b$. The set $X'$ is $Y$-c.e.: $e \in X'$ if and only if $\Phi^X_e(e)\converge$, and by item 2 of :ref{#prop-turing-preorder} there is a computable $c$ with $\Phi^Y_{c(b, e)} = \Phi^X_e$ as partial functions, since $\Phi^Y_b = X$; so $e \in X' \iff \Phi^Y_{c(b, e)}(e)\converge$, and $X'$ is the domain of the $Y$-computable partial function $e \mapsto \Phi^Y_{c(b, e)}(e)$. By item 2 relative to $Y$, $X' \leq_1 Y'$.
 :::
 
 :::corollary{#cor-jump-degrees}
@@ -103,7 +103,7 @@ The halting set is the archetype of a complete set, but not all complete sets lo
 The double jump locates some of the undecidable index sets of the course on fundamentals.
 
 :::proposition{#prop-tot-double-jump}
-The sets $\mathrm{Tot} = \{ e : \Phi_e \text{ is total} \}$, $\mathrm{Inf} = \{ e : W_e \text{ is infinite} \}$ and $\mathrm{Fin} = \nat \setminus \mathrm{Inf}$ are computable in $\emptyset''$. Their complements are $\emptyset'$-c.e., in the case of $\mathrm{Tot}$ and $\mathrm{Inf}$.
+The sets $\mathrm{Tot} = \{ e : \Phi_e \text{ is total} \}$, $\mathrm{Inf} = \{ e : W_e \text{ is infinite} \}$ and $\mathrm{Fin} = \nat \setminus \mathrm{Inf}$ are computable in $\emptyset''$. The complements of $\mathrm{Tot}$ and $\mathrm{Inf}$ are $\emptyset'$-c.e.
 :::
 
 :::proof{of=prop-tot-double-jump}
@@ -151,7 +151,7 @@ Since $X, Y \leq_T X \oplus Y$, monotonicity gives $X', Y' \leq_T (X \oplus Y)'$
 ::::
 
 ::::exercise{difficulty=2}
-Show that $\{ e : W_e = \emptyset \}$ and $\{ e : W_e \text{ is finite} \}$ are computable in $\emptyset'$ and in $\emptyset''$ respectively, and that the first is not computable in $\emptyset$.
+Show that $\{ e : W_e = \emptyset \}$ and $\{ e : W_e \text{ is finite} \}$ are computable in $\emptyset'$ and in $\emptyset''$ respectively, and that the first is not computable.
 
 :::solution
 $W_e \neq \emptyset$ if and only if $\exists x \exists s\ \Phi_e(x)[s]\converge$, a c.e. condition, so the first set is the complement of a c.e. set, computable in $\emptyset'$. It is not computable, by :ref{#thm-rice}. The second set is $\mathrm{Fin}$, computable in $\emptyset''$ by :ref{#prop-tot-double-jump}.

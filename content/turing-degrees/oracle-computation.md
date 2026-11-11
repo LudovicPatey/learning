@@ -40,7 +40,7 @@ An oracle machine computes, for each oracle $X$, a partial function $\nat^k \rig
 For $e, k \in \nat$, the **Turing functional** $\Phi_e$ is the map which sends an oracle $X$ to the partial function $\Phi^X_e : \nat^k \rightharpoonup \nat$ computed by the oracle machine of code $e$ with oracle $X$. We also write $\Phi_e(X, \vec x)$ for $\Phi_e^X(\vec x)$.
 :::
 
-The notation is consistent with the course on fundamentals once a convention is fixed: from now on, $\Phi_e$ denotes the functional of index $e$, and the partial computable functions of that course are the functions $\Phi^{\emptyset}_e$, or $\Phi^X_e$ for any computable $X$ (see the exercises). Since every ordinary machine is an oracle machine, every partial computable function is $\Phi^X_e$ for some $e$ and every $X$.
+The notation is consistent with the course on fundamentals once a convention is fixed: from now on, $\Phi_e$ denotes the functional of index $e$, and when no oracle is written, $\Phi_e(x)$ stands for $\Phi^{\emptyset}_e(x)$, $\Phi_e(x)[s]$ for $\Phi^{\emptyset}_e(x)[s]$ (defined below) and $W_e$ for $\dom(\Phi^{\emptyset}_e)$. The partial computable functions of that course are exactly the functions $\Phi^{\emptyset}_e$, or $\Phi^X_e$ for any computable $X$ (see the exercises), although a function need not have the same indices in the two enumerations. Since every ordinary machine is an oracle machine, every partial computable function is $\Phi^X_e$ for some $e$ and every $X$.
 
 :::example{#ex-oracle-domination}
 Let $X$ be an infinite set whose principal function $p_X$ (:ref{#lem-subsets-of-n}) grows fast enough that $\Phi_e(e)\converge$ implies $\Phi_e(e)[p_X(e)]\converge$, for every $e$. Then there is an oracle machine computing $\emptyset'$ with oracle $X$: on input $e$, read the oracle until its $e$-th element $p_X(e)$ is found, then run $\Phi_e(e)$ for $p_X(e)$ stages, and answer $1$ if and only if it has converged. Fast-growing sets can thus compute the halting set; this phenomenon is studied in the lesson on limit computability.
@@ -223,7 +223,7 @@ Fix $x$, and let $T_x$ be the set of strings $\sigma$ such that $\Phi^{\tau}_e(x
 
 ## Notes and references
 
-Oracle machines were introduced by Turing in his thesis (1939), in the study of ordinal logics. Post (1944, 1948) and Kleene and Post (1954) made relative computability the central notion of the theory. The model with an oracle tape follows Rogers' and Soare's textbooks; models with query states give the same notion of relative computability.
+Oracle machines were introduced by Turing in his Princeton thesis, published in 1939, in the study of ordinal logics. Post (1944, 1948) and Kleene and Post (1954) made relative computability the central notion of the theory. The model with an oracle tape follows Rogers' and Soare's textbooks; models with query states give the same notion of relative computability.
 
 - A. M. Turing, *Systems of logic based on ordinals*, Proceedings of the London Mathematical Society (2) 45 (1939), 161–228.
 - S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.

@@ -115,7 +115,7 @@ beyond $\sigma$, the columns $x < m$ are fixed to their limit value. A condition
 2. There is $x$ such that no extension $(\tau, m)$ of $(\sigma, m)$ has $\Phi^\tau_e(x)\converge$. Then every $X \in [\sigma, m]$ satisfies $\Phi^X_e(x)\diverge$: otherwise $\Phi^{X \uh k}_e(x)\converge$ for some $k \geq |\sigma|$, and $(X \uh k, m)$ is an extension of $(\sigma, m)$, since $X \in [\sigma, m]$. Take $\tau = \sigma$.
 3. Neither case holds. Then $C$ is computable: to compute $C(x)$, search for $\tau$ such that $(\tau, m)$ extends $(\sigma, m)$ and $\Phi^\tau_e(x)\converge$, and output the value. The search terminates since case 2 fails, and the value is $C(x)$ since case 1 fails. The search is computable, since the extension relation with second component $m$ is. This contradicts the hypothesis on $C$.
 
-*Verification.* Every $\mathcal S_e$ is forced, so $C \not\leq_T A$. Fix $x$. For $e > x$, we have $m_e > x$, and every position $\langle x, y \rangle \geq |\sigma_{x+1}|$ is assigned the value $\emptyset''(x)$ by the construction. Hence $A(\langle x, y \rangle) = \emptyset''(x)$ for all but finitely many $y$. The sets $A_y = \{ x : A(\langle x, y \rangle) = 1 \}$ form an $A$-computable $\Delta^0_2$ approximation of $\emptyset''$, so $\emptyset'' \leq_T A'$ by :ref{#thm-limit-lemma} relativized to $A$.
+*Verification.* Each condition of the construction extends the previous ones, and $A$ belongs to every $[\sigma_e, m_e]$: a position $\langle x, y \rangle \geq |\sigma_e|$ with $x < m_e$ lies below $|\sigma_k|$ for some $k > e$, and the bit placed there respects the column constraint of every condition in force, all of which fix column $x$ to $\emptyset''(x)$. So $A \in [\tau, m_e]$ for the condition $(\tau, m_e)$ chosen at step $e$, every $\mathcal S_e$ is satisfied, and $C \not\leq_T A$. Fix $x$. For $e > x$, we have $m_e > x$, and every position $\langle x, y \rangle \geq |\sigma_{x+1}|$ is assigned the value $\emptyset''(x)$ by the construction. Hence $A(\langle x, y \rangle) = \emptyset''(x)$ for all but finitely many $y$. The sets $A_y = \{ x : A(\langle x, y \rangle) = 1 \}$ form an $A$-computable $\Delta^0_2$ approximation of $\emptyset''$, so $\emptyset'' \leq_T A'$ by :ref{#thm-limit-lemma} relativized to $A$.
 :::
 
 :::corollary{#cor-high-incomplete}
@@ -183,9 +183,9 @@ Repeat the proof of :ref{#thm-high-cone-avoidance} with $B$ in place of $\emptys
 
 ## Notes and references
 
-Low and high sets were introduced by Soare and by Cooper in the early 1970s, together with the hierarchies of low$_n$ and high$_n$ sets. The theorem on 1-generic sets is due to Jockusch (1980). The jump inversion theorem is due to Friedberg (1957), and the existence of high incomplete c.e. sets to Sacks (1963).
+The hierarchies of low$_n$ and high$_n$ sets were introduced by Soare and by Cooper in the early 1970s; high degrees had been studied before by Martin (1966), who characterized them by dominant functions. The theorem on 1-generic sets is due to Jockusch (1980). The jump inversion theorem is due to Friedberg (1957), and the existence of high incomplete c.e. sets to Sacks (1963).
 
 - R. M. Friedberg, *A criterion for completeness of degrees of unsolvability*, Journal of Symbolic Logic 22 (1957), 159–160.
-- G. E. Sacks, *Degrees of Unsolvability*, Annals of Mathematics Studies 55, Princeton University Press, 1963.
+- G. E. Sacks, *Recursive enumerability and the jump operator*, Transactions of the American Mathematical Society 108 (1963), 223–239.
 - C. G. Jockusch, *Degrees of generic sets*, in *Recursion Theory: its Generalisations and Applications*, London Mathematical Society Lecture Note Series 45, Cambridge University Press, 1980, 110–139.
 - R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987.

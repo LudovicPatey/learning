@@ -184,7 +184,7 @@ Choose representatives $X_n \in \dbf_n$, and let $Z = \bigoplus_n X_n$, defined 
 Show that there is a sequence $(A_n)_{n \in \nat}$ of sets, uniformly computable in $\emptyset'$, such that $A_n \not\leq_T A_m$ for all $n \neq m$.
 
 :::solution
-Build all the sets at once by finite extensions of finite tuples of strings: at step $t$, strings $\sigma_{0,t}, \dots, \sigma_{t,t}$ approximate $A_0, \dots, A_t$. Requirements: $\Phi^{A_m}_e \neq A_n$ for all $e$ and $n \neq m$, listed in a sequence of order type $\omega$. To satisfy $\Phi^{A_m}_e \neq A_n$, let $x = |\sigma_{n,t}|$; if some $\rho \succeq \sigma_{m,t}$ has $\Phi^\rho_e(x)\converge = i$, extend $\sigma_{m,t}$ to $\rho$ and $\sigma_{n,t}$ by the bit $1 - i$ (or $0$); otherwise do nothing. Then extend every string by one bit and start a new string for $A_{t+1}$. As in :ref{#thm-kleene-post}, each step is computable in $\emptyset'$, so the sequence is uniformly computable in $\emptyset'$.
+Build all the sets at once by finite extensions of finite tuples of strings: at step $t$, strings $\sigma_{0,t}, \dots, \sigma_{t,t}$ approximate $A_0, \dots, A_t$. Requirements: $\Phi^{A_m}_e \neq A_n$ for all $e$ and $n \neq m$; at step $t$, treat the requirement with $\langle e, n, m \rangle = t$, if $n \neq m$ (otherwise do nothing), which only involves sets already started, since $n, m \leq \langle e, n, m \rangle$. To satisfy $\Phi^{A_m}_e \neq A_n$, let $x = |\sigma_{n,t}|$; if some $\rho \succeq \sigma_{m,t}$ has $\Phi^\rho_e(x)\converge = i$, extend $\sigma_{m,t}$ to $\rho$ and $\sigma_{n,t}$ by the bit $1 - i$ (or $0$); otherwise do nothing. Then extend every string by one bit and start a new string for $A_{t+1}$. As in :ref{#thm-kleene-post}, the case distinction is a c.e. question and each step is computable in $\emptyset'$. Since every string grows at each step after it is started, $A_n(k)$ is computed with oracle $\emptyset'$ by running the construction until the string for $A_n$ has length greater than $k$, uniformly in $n$ and $k$.
 :::
 ::::
 
@@ -198,7 +198,7 @@ Let $\bar\sigma$ be the string obtained from $\sigma$ by flipping all its bits; 
 
 ## Notes and references
 
-The incomparable degrees below $\obf'$ are due to Kleene and Post (1954), who introduced the finite extension method. The cone avoidance theorem is folklore; it is a special case of results of Sacks on the measure and category of cones. 1-generic sets were introduced by Jockusch (1980), following Feferman's adaptation of Cohen's forcing to arithmetic (1965); they are studied in the course on effective forcing.
+The incomparable degrees below $\obf'$ are due to Kleene and Post (1954), who introduced the finite extension method. The cone avoidance theorem is folklore; it also follows from results of Sacks on the measure and category of upper cones. 1-generic sets were introduced by Jockusch (1980), following Feferman's adaptation of Cohen's forcing to arithmetic (1965); they are studied in the course on Cohen genericity.
 
 - S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.
 - C. G. Jockusch, *Degrees of generic sets*, in *Recursion Theory: its Generalisations and Applications*, London Mathematical Society Lecture Note Series 45, Cambridge University Press, 1980, 110–139.

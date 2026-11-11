@@ -124,7 +124,7 @@ Let $f$ dominate $c$. For each $x$, let $M(x)$ be the largest $y \leq x$ such th
 To decide whether $n \in A$ with oracle $f$, search for $x$ with $M(x) > n$, which exists by Claim 2, and answer $A_x(n)$, which is correct by Claim 1.
 :::
 
-The condition $c(x) \geq x$ in the definition of the computation function is necessary: it guarantees that the stages $x \leq t \leq f(x)$ include a correct stage.
+The condition $c(x) \geq x$ in the definition of the computation function is used in Claim 1: it guarantees that the stages $x \leq t \leq f(x)$ include a correct stage.
 
 :::quiz[the Martin–Miller theorem]
 In Claim 1, where is the hypothesis that $f$ dominates $c$ used?

@@ -15,13 +15,13 @@ Let $X, Y \in \cs$. The set $X$ is **Turing reducible** to $Y$, written $X \leq_
 
 :::proposition{#prop-turing-preorder}
 1. $\leq_T$ is reflexive and transitive.
-2. Transitivity is uniform: there is a computable function $c$ such that, if $\Phi^Y_a = X$ and $\Phi^X_b = Z$, then $\Phi^Y_{c(a, b)} = Z$.
+2. Transitivity is uniform: there is a computable function $c$ such that, if $\Phi^Y_a = X$, then $\Phi^Y_{c(a, b)} = \Phi^X_b$ as partial functions, for every $b$. In particular, if moreover $\Phi^X_b = Z$, then $\Phi^Y_{c(a, b)} = Z$.
 3. If $A \leq_m B$, then $A \leq_T B$. Moreover $X \leq_T \nat \setminus X$, and every computable set is reducible to every set.
 :::
 
 :::proof{of=prop-turing-preorder}
 1. Reflexivity: the machine that copies the bit $X(n)$ from its oracle tape computes $X$ with oracle $X$. Transitivity follows from item 2.
-2. Let $\Phi^{c(a, b)}$ be the following oracle machine. On input $n$, with oracle $Y$, it runs the machine $b$ on input $n$, but whenever the machine $b$ needs the bit of its oracle at cell $k$, it computes $\Phi^Y_a(k)$ and uses the result. With $\Phi^Y_a = X$, every requested bit is computed correctly and the simulation follows the computation of $\Phi^X_b(n)$, which converges to $Z(n)$. Formally, the machine searches for $t$ and a string $\sigma$ such that $\Phi^Y_a(k)\converge = \sigma(k)$ for all $k < |\sigma|$, and $t$ codes a halting computation of $b$ on $n$ with oracle $\sigma$, then outputs its result. If $\Phi^Y_a = X$, the strings $\sigma$ found are prefixes of $X$, so by :ref{#prop-oracle-stages} the output is $\Phi^X_b(n) = Z(n)$; and such a pair exists, namely the computation with oracle $X$ and $\sigma = X \uh u$ for $u$ its use. The machine does not depend on $Y$, and its code is obtained computably from $a$ and $b$.
+2. Let $\Phi^{c(a, b)}$ be the following oracle machine. On input $n$, with oracle $Y$, it runs the machine $b$ on input $n$, but whenever the machine $b$ needs the bit of its oracle at cell $k$, it computes $\Phi^Y_a(k)$ and uses the result. With $\Phi^Y_a = X$, every requested bit is computed correctly and the simulation follows the computation of $\Phi^X_b(n)$. Formally, the machine searches for $t$ and a string $\sigma$ such that $\Phi^Y_a(k)\converge = \sigma(k)$ for all $k < |\sigma|$, and $t$ codes a halting computation of $b$ on $n$ with oracle $\sigma$, then outputs its result. If $\Phi^Y_a = X$, the strings $\sigma$ found are prefixes of $X$. If $\Phi^X_b(n)\converge$, such a pair exists, namely the computation with oracle $X$ and $\sigma = X \uh u$ for $u$ its use, and by :ref{#prop-oracle-stages} any pair found gives the output $\Phi^X_b(n)$. If $\Phi^X_b(n)\diverge$, no pair exists, since a halting computation with oracle $\sigma \prec X$ would give $\Phi^X_b(n)\converge$ by the same proposition; so the search diverges. The machine does not depend on $Y$, and its code is obtained computably from $a$ and $b$.
 3. If $f$ is a many-one reduction of $A$ to $B$, then $A(n) = B(f(n))$, computed by evaluating $f(n)$ and reading the oracle. The complement is computed by reading the bit and flipping it. A computable set is computed by a machine that ignores its oracle.
 :::
 
@@ -48,9 +48,9 @@ Many-one reducibility implies Turing reducibility. Which statement shows that th
 - [ ] $\emptyset' \leq_T \emptyset'$.
 
   This holds for both reducibilities.
-- [ ] Every computable set is Turing reducible to $\emptyset$.
+- [ ] Every computable set is Turing reducible to $\emptyset'$.
 
-  It is also many-one reducible to every set other than $\emptyset$ and $\nat$; this does not separate the two notions.
+  It is also many-one reducible to $\emptyset'$, as to every set other than $\emptyset$ and $\nat$; this does not separate the two notions.
 :::
 
 ## Turing degrees
@@ -59,7 +59,7 @@ Many-one reducibility implies Turing reducibility. Which statement shows that th
 Two sets $X$ and $Y$ are **Turing equivalent**, written $X \equiv_T Y$, if $X \leq_T Y$ and $Y \leq_T X$. The **Turing degree** of $X$ is its equivalence class $\deg_T(X) = \{ Y : Y \equiv_T X \}$. The set of Turing degrees is $\mathcal D$, ordered by $\deg_T(X) \leq \deg_T(Y)$ if and only if $X \leq_T Y$.
 :::
 
-The order on degrees is well defined, since $X \equiv_T X'$ and $Y \equiv_T Y'$ imply that $X \leq_T Y$ if and only if $X' \leq_T Y'$, by transitivity. It is a partial order on $\mathcal D$. Degrees are written in bold: $\abf, \bbf, \dbf, \dots$. The least degree is $\obf$, the degree of the computable sets.
+The order on degrees is well defined, since $X \equiv_T X_1$ and $Y \equiv_T Y_1$ imply that $X \leq_T Y$ if and only if $X_1 \leq_T Y_1$, by transitivity. It is a partial order on $\mathcal D$. Degrees are written in bold: $\abf, \bbf, \dbf, \dots$. The least degree is $\obf$, the degree of the computable sets.
 
 :::proposition{#prop-degree-countable}
 1. For every $Y$, the **lower cone** $\{ X : X \leq_T Y \}$ is countable.
@@ -73,7 +73,7 @@ The order on degrees is well defined, since $X \equiv_T X'$ and $Y \equiv_T Y'$ 
 3. Let $Z(\langle e, n \rangle) = 1 - \Phi^{Y_n}_e(\langle e, n \rangle)$ if this value is defined and in $\{0, 1\}$, and $Z(\langle e, n \rangle) = 0$ otherwise. If $Z = \Phi^{Y_n}_e$, then $\Phi^{Y_n}_e(\langle e, n \rangle)\converge = Z(\langle e, n \rangle) \in \{0, 1\}$, and by definition $Z(\langle e, n \rangle) = 1 - Z(\langle e, n \rangle)$, a contradiction. For the second statement, given a sequence of degrees $(\dbf_n)$, apply this to a sequence of representatives $Y_n \in \dbf_n$; the degree of $Z$ is none of the $\dbf_n$, since otherwise $Z \leq_T Y_n$. The last statement is item 1.
 :::
 
-The choice of representatives in item 3 uses the axiom of countable choice. With the axiom of choice, $\mathcal D$ has the cardinality of the continuum, as a set of countable classes partitioning $\cs$. The finite extension method of a later lesson gives, without choice, a family of continuum many pairwise incomparable degrees.
+The choice of representatives in item 3 uses the axiom of countable choice. With the axiom of choice, $\mathcal D$ has the cardinality of the continuum, as a set of countable classes partitioning $\cs$. Without choice, a refinement of the finite extension method of a later lesson, which builds a perfect tree of strings instead of a single sequence, gives an explicit family of continuum many pairwise incomparable degrees; the exercises of that lesson treat the case of countably many.
 
 :::quiz[the size of degrees]
 In item 3, why is $Z$ defined by a diagonal argument indexed by pairs $\langle e, n \rangle$?
