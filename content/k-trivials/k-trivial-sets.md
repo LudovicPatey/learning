@@ -2,7 +2,7 @@
 title: K-trivial sets
 summary: Sets whose initial segments are as simple as their lengths; Chaitin's counting theorem shows that there are countably many K-trivial sets, all of them Δ⁰₂; closure under join; Solovay functions and a characterization of K-triviality by a computable bound.
 duration: 40
-prerequisites: [martin-lof-randomness/levin-schnorr, pi01-classes/computable-members]
+prerequisites: [martin-lof-randomness/levin-schnorr, kolmogorov-complexity/coding-theorem, pi01-classes/computable-members]
 ---
 
 By the Levin–Schnorr theorem, a sequence is random when the complexity $K(X \uh n)$ of its initial segments is as large as possible, namely at least $n - O(1)$. This course studies the other extreme: the sets $A$ for which $K(A \uh n)$ is as small as possible. A computable set has $K(A \uh n) =^+ K(n)$ (:ref{#prop-k-segments-computable}): its initial segments contain no more information than their lengths. For plain complexity, the analogous condition characterizes the computable sets (:ref{#thm-chaitin-computable}). For prefix-free complexity it does not: the next lesson builds non-computable sets with the same complexity as computable ones. These **K-trivial** sets coincide with several notions of computational weakness relative to randomness, which is the subject of the last lesson.
@@ -15,7 +15,7 @@ Throughout, $K$ is the prefix-free complexity defined by an optimal prefix-free 
 A set $A$ is **K-trivial** if there is a constant $b$ with $K(A \uh n) \leq K(n) + b$ for every $n$. We then say that $A$ is K-trivial **with constant** $b$.
 :::
 
-The opposite inequality $K(n) \leq^+ K(A \uh n)$ holds for every set, since $n = |A \uh n|$ is computed from $A \uh n$. By the Levin–Schnorr theorem, a K-trivial set is far from random: $K(A \uh n) \leq^+ K(n) \leq^+ 2 \log n$.
+The opposite inequality $K(n) \leq^+ K(A \uh n)$ holds for every set, since $n = |A \uh n|$ is computed from $A \uh n$. A K-trivial set is far from random: $K(A \uh n) \leq^+ K(n) \leq^+ 2 \log n$ for $n \geq 2$, by :ref{#prop-k-basic} (2), whereas a random sequence $X$ satisfies $K(X \uh n) \geq n - O(1)$ by the Levin–Schnorr theorem.
 
 :::proposition{#prop-k-trivial-basic}
 1. Every computable set is K-trivial.
@@ -90,7 +90,7 @@ Let $M$ be the machine that, on input $\tau \beta \gamma$ with $\tau$ in the dom
 $$
 K((A \oplus B) \uh 2n) \leq^+ K(n) + 2k.
 $$
-For an arbitrary length $m$, the string $(A \oplus B) \uh m$ is obtained by truncating $(A \oplus B) \uh 2n$ with $n = \lceil m/2 \rceil$, and $K(\lceil m/2 \rceil) \leq^+ K(m)$. So $K((A \oplus B) \uh m) \leq^+ K(m)$.
+For an arbitrary length $m$, let $n = \lceil m/2 \rceil$. The string $(A \oplus B) \uh m$ is $(A \oplus B) \uh 2n$ if $m$ is even, and this string with its last bit removed if $m$ is odd; both operations are computable and do not require knowing $m$, so $K((A \oplus B) \uh m) \leq^+ K((A \oplus B) \uh 2n)$. Since $n$ is computed from $m$, $K(n) \leq^+ K(m)$. So $K((A \oplus B) \uh m) \leq^+ K(m)$.
 :::
 
 The direct estimate $K(\langle \sigma, \sigma' \rangle) \leq^+ K(\sigma) + K(\sigma')$ only gives $2K(n)$; the proof avoids describing $n$ twice. Closure under Turing reducibility, the other half of the statement that the K-trivial sets form an ideal, is much harder; it is a consequence of the main theorem of the last lesson.
@@ -136,7 +136,7 @@ Let $g(m) = |\tau|$ if $m = \langle \tau, n, t \rangle$ and $t$ is the least sta
 :::proof{of=prop-solovay-function}
 The function $g$ is computable, since it is decidable whether $U(\tau)$ converges for the first time at stage $t$ with output $n$.
 
-*$K \leq^+ g$.* In the second case, $K(m) \leq^+ 2 \log m$ by :ref{#prop-k-basic} (2). In the first case, let $M$ be the machine that, on input $\tau$, waits for the least stage $t$ with $U(\tau)[t]\converge$ and outputs $\langle \tau, U(\tau), t \rangle$. It has the domain of $U$, so it is prefix-free, and $K(m) \leq^+ |\tau| = g(m)$.
+*$K \leq^+ g$.* In the second case, let $\ell = \lfloor \log(m+1) \rfloor$ be the length of the string associated with $m$. By :ref{#prop-k-basic} (2), $K(m) \leq^+ \ell + 2 \log \ell \leq^+ 2\ell + 2 = g(m)$. In the first case, let $M$ be the machine that, on input $\tau$, waits for the least stage $t$ with $U(\tau)[t]\converge$ and outputs $\langle \tau, U(\tau), t \rangle$. It has the domain of $U$, so it is prefix-free, and $K(m) \leq^+ |\tau| = g(m)$.
 
 *$g \leq^+ K$ infinitely often.* Let $\tau$ be a shortest description of $n$, $t$ its stage of convergence and $m = \langle \tau, n, t \rangle$. Then $g(m) = |\tau| = K(n)$, and $K(n) \leq^+ K(m)$ since $n$ is computed from $m$. There is one such $m$ for each $n$, so infinitely many.
 :::
@@ -153,7 +153,7 @@ Let $g$ be the Solovay function of :ref{#prop-solovay-function}. A set $A$ is K-
 ($\Leftarrow$) Let $c$ be such that $K(A \uh m) \leq g(m) + c$ for every $m$. Given $n$, let $\tau$ be a shortest description of $n$, $t$ its stage of convergence, and $m = \langle \tau, n, t \rangle \geq n$. Then $K(A \uh m) \leq g(m) + c = K(n) + c$. The string $A \uh n$ is computed from $A \uh m$ by truncation to the length $n$, and $n$ is computed from $m$; so $K(A \uh n) \leq^+ K(A \uh m) \leq^+ K(n)$, with a constant independent of $n$.
 :::
 
-Since $g$ is computable and $K$ is approximable from above, the strings $\sigma$ with $K(\sigma \uh m) \leq g(m) + c$ for every $m \leq |\sigma|$ form a c.e. tree, whose paths are exactly the sets satisfying the bound of the proposition with constant $c$; they are all K-trivial. Nies used such trees to show that every K-trivial set is computable from a c.e. K-trivial set; this theorem is admitted here (see Nies, *Computability and Randomness*, Section 5.3).
+Since $g$ is computable and $K$ is approximable from above, the strings $\sigma$ with $K(\sigma \uh m) \leq g(m) + c$ for every $m \leq |\sigma|$ form a c.e. tree, whose paths are exactly the sets satisfying the bound of the proposition with constant $c$; they are all K-trivial. Nies proved that every K-trivial set is computable from a c.e. K-trivial set, with the cost function method and the golden run construction mentioned in the last lesson; the c.e. trees above give another proof, based on the fact that a K-trivial set is an isolated path of such a tree. This theorem is admitted here (see Nies, *Lowness properties and randomness*, 2005, and Nies, *Computability and Randomness*, Chapter 5).
 
 ## Exercises
 
@@ -161,7 +161,7 @@ Since $g$ is computable and $K$ is approximable from above, the strings $\sigma$
 Show that if $A$ is K-trivial and $f$ is a computable strictly increasing function, then the set $B = \{ n : f(n) \in A \}$ is K-trivial.
 
 :::solution
-For $n \geq 1$, the string $B \uh n$ is computed from $A \uh (f(n-1) + 1)$, by reading the bits at positions $f(0), \dots, f(n-1)$. Let $h(0) = 0$ and $h(n) = f(n-1) + 1$ for $n \geq 1$, a computable function. Then $K(B \uh n) \leq^+ K(A \uh h(n)) \leq^+ K(h(n)) \leq^+ K(n)$, since $h(n)$ is computed from $n$.
+For $n \geq 1$, the string $B \uh n$ is computed from $A \uh (f(n-1) + 1)$, by reading the bits at positions $f(0), \dots, f(n-1)$. Let $h(0) = 0$ and $h(n) = f(n-1) + 1$ for $n \geq 1$, a computable strictly increasing function. Given the string $A \uh h(n)$, one computes its length $h(n)$, then $n$ as the unique number with this image under $h$, then $B \uh n$; so $K(B \uh n) \leq^+ K(A \uh h(n))$. Hence $K(B \uh n) \leq^+ K(A \uh h(n)) \leq^+ K(h(n)) \leq^+ K(n)$, since $h(n)$ is computed from $n$.
 :::
 ::::
 
@@ -175,9 +175,11 @@ A random set satisfies $K(Z \uh n) \geq n - O(1)$, whereas a K-trivial set satis
 
 ## Notes and references
 
-K-triviality was introduced by Chaitin (1977), who proved :ref{#cor-k-trivial-delta2} and asked whether K-trivial sets are computable. Solovay answered negatively in unpublished notes (1975), with the construction of the next lesson. The closure under join is due to Downey, Hirschfeldt, Nies and Stephan (2003). Solovay functions were studied by Bienvenu and Downey (2009), and Bienvenu, Merkle and Nies (2011) showed that every Solovay function can replace $K$ in the definition of K-triviality.
+K-trivial sets appear in the work of Chaitin (1977), who proved :ref{#cor-k-trivial-delta2}, and in Solovay's unpublished manuscript (1975), which contains the construction of a non-computable K-trivial set given in the next lesson. The closure under join is due to Downey, Hirschfeldt, Nies and Stephan (2003). Solovay functions were studied by Bienvenu and Downey (2009), and Bienvenu, Merkle and Nies (2011) showed that every Solovay function can replace $K$ in the definition of K-triviality.
 
 - G. J. Chaitin, *Algorithmic information theory*, IBM Journal of Research and Development 21 (1977), 350–359.
 - R. G. Downey, D. R. Hirschfeldt, A. Nies and F. Stephan, *Trivial reals*, in: Proceedings of the 7th and 8th Asian Logic Conferences, 2003, 103–131.
 - L. Bienvenu and R. Downey, *Kolmogorov complexity and Solovay functions*, STACS 2009, 147–158.
+- L. Bienvenu, W. Merkle and A. Nies, *Solovay functions and K-triviality*, STACS 2011.
+- A. Nies, *Lowness properties and randomness*, Advances in Mathematics 197 (2005), 274–305.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009.

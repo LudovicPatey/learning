@@ -39,7 +39,7 @@ enumerate the request $(A_s \uh n, K_s(n) + d)$; for $n = s$, which was not cons
 
 *Weight.* Split the requests into two kinds. A request at stage $s$ for $n$ with $A_s \uh n = A_{s-1} \uh n$ is caused by a new value of $K_s(n)$. The values $K_s(n)$, for fixed $n$, are pairwise distinct at these stages and at least $K(n)$, so these requests weigh at most $\sum_n \sum_{k \geq K(n)} 2^{-k-d} = 2^{1-d} \sum_n 2^{-K(n)} \leq 2^{1-d}$. A request at stage $s$ for $n$ with $A_s \uh n \neq A_{s-1} \uh n$ has $x_{s-1} < n \leq s$; the requests of this kind at stage $s$ weigh at most $2^{-d} c_K(x_{s-1}, s)$, and in total at most $2^{-d} S$. So $R$ is a bounded request set.
 
-*Descriptions.* Fix $n$, and let $s \geq n$ be the last stage with $s = n$, or $A_s \uh n \neq A_{s-1} \uh n$, or $K_s(n) < K_{s-1}(n)$; it exists since $A \uh n$ and $K_s(n)$ change finitely often. At this stage, $A_s \uh n = A \uh n$ and $K_s(n) = K(n) < \infty$: the stage at which $K_t(n)$ becomes finite counts as a change, so it is at most $s$. So the request $(A \uh n, K(n) + d)$ is enumerated at stage $s$. By the KC theorem (:ref{#thm-kc}), $K(A \uh n) \leq K(n) + d + O(1)$.
+*Descriptions.* Fix $n$, and let $s \geq n$ be the last stage with $s = n$, or $A_s \uh n \neq A_{s-1} \uh n$, or $K_s(n) < K_{s-1}(n)$; it exists since $A \uh n$ and $K_s(n)$ change finitely often. At this stage, $A_s \uh n = A \uh n$ and $K_s(n) = K(n) < \infty$, since neither changes after $s$. Moreover $s \geq 1$, since $K_0(n) = \infty$: no computation halts at stage $0$. So the request $(A \uh n, K(n) + d)$ is enumerated at stage $s$. By the KC theorem (:ref{#thm-kc}), $K(A \uh n) \leq K(n) + d + O(1)$.
 :::
 
 A request is enumerated for the current prefix whenever the information about $n$ or about $A \uh n$ improves. The first kind of request costs at most what $U$ itself spends on describing numbers. The second kind is the price of changes of $A$, which is what the cost function bounds.
@@ -142,7 +142,7 @@ Distinct $s$ give distinct $t$, since the intervals $[f(s), f(s+1))$ are disjoin
 
 ## Notes and references
 
-Solovay's construction appears in his unpublished manuscript (1975). The cost function formulation is due to Nies, who developed the general theory of cost functions; Downey, Hirschfeldt, Nies and Stephan (2003) gave an influential exposition of the construction.
+Solovay's construction appears in his unpublished manuscript (1975). The cost function formulation is due to Nies, who developed the general theory of cost functions; Downey, Hirschfeldt, Nies and Stephan (2003) gave a published account of the construction.
 
 - R. M. Solovay, *Draft of a paper (or series of papers) on Chaitin's work*, unpublished manuscript, IBM Thomas J. Watson Research Center, 1975.
 - A. Nies, *Lowness properties and randomness*, Advances in Mathematics 197 (2005), 274–305.

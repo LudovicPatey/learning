@@ -128,7 +128,7 @@ The converse of :ref{#prop-lowness-implications} (1) is the central theorem on K
 Every K-trivial set is low for K.
 :::
 
-The proof, known as the **golden run** construction, is a priority argument of considerable length, and is admitted here; see Nies (2005), or Nies, *Computability and Randomness*, Section 5.4, and Downey and Hirschfeldt, *Algorithmic Randomness and Complexity*, Chapter 11. A later proof, through the characterization of the K-trivial sets as the sets computable from some incomplete random sequence, is due to Bienvenu, Day, Greenberg, Kučera, Miller, Nies and Turetsky (2014). Granting the theorem, the following consequences are immediate.
+The proof, known as the **golden run** construction, is a priority argument of considerable length, and is admitted here; see Nies (2005), or Nies, *Computability and Randomness*, Section 5.4, and Downey and Hirschfeldt, *Algorithmic Randomness and Complexity*, Chapter 11. Another proof, which avoids the golden run, goes through the theorem of Bienvenu, Day, Greenberg, Kučera, Miller, Nies and Turetsky (2014) that every c.e. K-trivial set is computable from a Martin-Löf random sequence that does not compute $\emptyset'$; it also uses :ref{#thm-hungry-sets} and the c.e. trees of :ref{to="k-trivials/k-trivial-sets"}. Granting the theorem, the following consequences are immediate.
 
 :::corollary{#cor-ktrivial-equivalent}
 For a set $A$, the following are equivalent:
@@ -157,9 +157,9 @@ For $e \in A'$, the use of the computation $\Phi^A_e(e)$ gives a prefix of $A$ w
 :::
 
 :::solution
-Let $A$ be low for K; it is K-trivial, hence $\Delta^0_2$. Let $g$ be the partial $A$-computable function with $g(e) = A \uh u$ when $\Phi^A_e(e)\converge$ with use $u$. Then $K^A(g(e)) \leq^+ K(e) \leq^+ 2 \log e$, and since $A$ is low for K, there is $c$ with $K(g(e)) \leq 2 \log e + c$ for every $e \in A'$, for $e \geq 2$.
+Let $A$ be low for K; it is K-trivial, hence $\Delta^0_2$. Let $g$ be the partial $A$-computable function with $g(e) = A \uh u$ when $\Phi^A_e(e)\converge$ with use $u$. Then $K^A(g(e)) \leq^+ K^A(e) \leq^+ K(e)$ for $e \in A'$, since $g$ is computable in $A$. By :ref{#prop-k-basic} (2), $K(e) \leq^+ 2 \lfloor \log(e+1) \rfloor$. Since $A$ is low for K, there is $c$ with $K(g(e)) \leq h(e)$ for every $e \in A'$, where $h(e) = 2 \lfloor \log(e+1) \rfloor + c$ is computable.
 
-With oracle $\emptyset'$, decide $e \in A'$ as follows: for each string $\sigma$ of length at most $2 \log e + c$, decide whether $U(\sigma)$ converges; if it does, with output $\rho$, decide whether $\rho \prec A$, which is possible since $A \leq_T \emptyset'$, and whether $\Phi^\rho_e(e)\converge$, a $\Sigma^0_1$ question. Answer yes if some $\sigma$ passes all three tests. If $e \in A'$, then a shortest description of $g(e)$ passes them. Conversely, if $\rho \prec A$ and $\Phi^\rho_e(e)\converge$, then $\Phi^A_e(e)\converge$ by the use principle. So $A' \leq_T \emptyset'$.
+With oracle $\emptyset'$, decide $e \in A'$ as follows: for each string $\sigma$ of length at most $h(e)$, decide whether $U(\sigma)$ converges; if it does, with output $\rho$, decide whether $\rho \prec A$, which is possible since $A \leq_T \emptyset'$, and whether $\Phi^\rho_e(e)\converge$, a $\Sigma^0_1$ question. Answer yes if some $\sigma$ passes all three tests. If $e \in A'$, then a shortest description of $g(e)$ passes them. Conversely, if $\rho \prec A$ and $\Phi^\rho_e(e)\converge$, then $\Phi^A_e(e)\converge$ by the use principle. So $A' \leq_T \emptyset'$.
 
 A complete set $A$ has $A' \equiv_T \emptyset''$, which is not computable in $\emptyset'$; so a K-trivial set, which is low for K by :ref{#thm-ktrivial-lowk}, is not complete.
 :::
@@ -175,9 +175,10 @@ By :ref{#thm-hungry-sets}, $A$ is low for K, and by the first exercise it is low
 
 ## Notes and references
 
-Lowness for Martin-Löf randomness was introduced by Zambella (1990) and Kučera and Terwijn (1999), who built a non-computable c.e. set low for randomness. Lowness for K is due to Muchnik, who built a non-computable c.e. set low for K. Nies (2005) proved that low for K and low for randomness coincide, and, with Hirschfeldt, that both coincide with K-triviality. The notion of base for randomness and the hungry sets argument are due to Kučera (1993) and to Hirschfeldt, Nies and Stephan (2007).
+Lowness for Martin-Löf randomness was studied by Zambella (1990) and by Kučera and Terwijn (1999); the latter built a non-computable c.e. set low for randomness. Lowness for K is due to Muchnik, who built a non-computable c.e. set low for K. Nies (2005) proved that low for K and low for randomness coincide, and, with Hirschfeldt, that both coincide with K-triviality. The notion of base for randomness and the hungry sets argument are due respectively to Kučera (1993) and to Hirschfeldt, Nies and Stephan (2007).
 
 - A. Nies, *Lowness properties and randomness*, Advances in Mathematics 197 (2005), 274–305.
 - D. R. Hirschfeldt, A. Nies and F. Stephan, *Using random sets as oracles*, Journal of the London Mathematical Society 75 (2007), 610–622.
+- A. Kučera, *On relative randomness*, Annals of Pure and Applied Logic 63 (1993), 61–67.
 - A. Kučera and S. A. Terwijn, *Lowness for the class of random sets*, Journal of Symbolic Logic 64 (1999), 1396–1402.
 - L. Bienvenu, A. R. Day, N. Greenberg, A. Kučera, J. S. Miller, A. Nies and D. Turetsky, *Computing K-trivial sets by incomplete random sets*, Bulletin of Symbolic Logic 20 (2014), 80–90.
