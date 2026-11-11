@@ -2,7 +2,7 @@
 title: Kleene's fixed point theorem
 summary: Every total computable transformation of indices has a fixed point up to the function computed; the version with parameters; self-referential programs and applications.
 duration: 40
-prerequisites: [universal-program-smn]
+prerequisites: [universal-program-smn, ce-sets]
 ---
 
 Kleene's fixed point theorem, also called the **recursion theorem**, states that every total computable transformation of indices has a fixed point, in the sense that some index and its image compute the same function. Its main use is to build programs that refer to their own index: one may define a program by a description that mentions its own index, and the theorem guarantees that such a program exists. This device is used throughout computability theory, from Rice's theorem to the constructions of the theory of c.e. degrees.
@@ -130,7 +130,7 @@ For every total computable $f : \nat^2 \to \nat$, there is a total computable $n
 :::proof{of=thm-fixed-point-parameters}
 Follow the proof of :ref{#thm-fixed-point}, uniformly in $y$. Let $d$ be as in that proof. By :ref{#cor-smn-parameters} applied to $(y, m) \mapsto f(y, d(m))$, there is a total computable $v$ with $\Phi_{v(y)}(m) = f(y, d(m))$ for all $y$ and $m$. Let $n(y) = d(v(y))$. Since $\Phi_{v(y)}$ is total,
 $$
-\Phi_{n(y)} = \Phi_{d(v(y))} = \Phi_{\Phi_{v(y)}(v(y))} = \Phi_{f(y, d(v(y)))} = \Phi_{f(y, n(y))}. \qquad
+\Phi_{n(y)} = \Phi_{d(v(y))} = \Phi_{\Phi_{v(y)}(v(y))} = \Phi_{f(y, d(v(y)))} = \Phi_{f(y, n(y))}.
 $$
 :::
 
@@ -139,7 +139,7 @@ Every total computable $f$ has infinitely many fixed points: for every $k$, ther
 :::
 
 :::proof{of=prop-infinitely-many-fixed-points}
-The finitely many functions $\Phi_0, \dots, \Phi_{k-1}$ are not all the partial computable functions, so there is an index $c$ with $\Phi_c \neq \Phi_i$ for every $i < k$. Let $g(x) = c$ for $x < k$ and $g(x) = f(x)$ for $x \geq k$; $g$ is total computable, the finite case distinction being computable. Let $e$ be a fixed point of $g$. If $e < k$, then $\Phi_e = \Phi_{g(e)} = \Phi_c$, contradicting the choice of $c$. So $e \geq k$, and $\Phi_e = \Phi_{g(e)} = \Phi_{f(e)}$.
+The finitely many functions $\Phi_0, \dots, \Phi_{k-1}$ are not all the partial computable functions, since the constant functions are infinitely many and pairwise distinct, so there is an index $c$ with $\Phi_c \neq \Phi_i$ for every $i < k$. Let $g(x) = c$ for $x < k$ and $g(x) = f(x)$ for $x \geq k$; $g$ is total computable, the finite case distinction being computable. Let $e$ be a fixed point of $g$. If $e < k$, then $\Phi_e = \Phi_{g(e)} = \Phi_c$, contradicting the choice of $c$. So $e \geq k$, and $\Phi_e = \Phi_{g(e)} = \Phi_{f(e)}$.
 :::
 
 The proof uses the index $c$ as a fixed number; it need not be found by an algorithm, since only the computability of $g$ matters, and $g$ is computable for every value of the constant $c$.
@@ -166,7 +166,7 @@ The fixed point theorem gives short proofs of results that otherwise require exp
 :::
 
 :::proof{of=prop-halting-via-fixed-point}
-1. Suppose $\emptyset'$ computable. By :ref{#cor-self-reference}, there is $e$ such that $\Phi_e(x) \simeq 0$ if $e \notin \emptyset'$, and $\Phi_e(x)$ is undefined if $e \in \emptyset'$; the definition is uniform in $e$, since membership in $\emptyset'$ is decided by an algorithm. If $e \in \emptyset'$, then $\Phi_e(e)\diverge$, so $e \notin \emptyset'$; if $e \notin \emptyset'$, then $\Phi_e(e) = 0$, so $e \in \emptyset'$. Both cases are contradictory.
+1. Suppose $\emptyset'$ is computable. By :ref{#cor-self-reference}, there is $e$ such that $\Phi_e(x) \simeq 0$ if $e \notin \emptyset'$, and $\Phi_e(x)$ is undefined if $e \in \emptyset'$; the definition is uniform in $e$, since membership in $\emptyset'$ is decided by an algorithm. If $e \in \emptyset'$, then $\Phi_e(e)\diverge$, so $e \notin \emptyset'$; if $e \notin \emptyset'$, then $\Phi_e(e) = 0$, so $e \in \emptyset'$. Both cases are contradictory.
 2. Let $P = \{ e : \Phi_e = \Phi_a \}$, suppose it computable, and fix $b$ with $\Phi_b \neq \Phi_a$, for instance an index of a function differing from $\Phi_a$ at $0$. Let $f(x) = b$ if $x \in P$ and $f(x) = a$ otherwise, a total computable function. For a fixed point $e$ of $f$: if $e \in P$ then $\Phi_e = \Phi_{f(e)} = \Phi_b \neq \Phi_a$, so $e \notin P$; if $e \notin P$ then $\Phi_e = \Phi_a$, so $e \in P$.
 :::
 
@@ -204,9 +204,9 @@ Let $A$ be an infinite c.e. set of minimal indices, and $h$ a total computable f
 
 ## Notes and references
 
-The fixed point theorem was proved by Kleene in 1938, in a paper on notations for ordinals, where it is used to define functions by effective transfinite recursion. Rogers formulated the version for transformations of indices given here. The result on minimal indices is usually attributed to Blum (1967), in the context of machine-independent complexity theory. Moschovakis gives a survey of the many uses of the theorem.
+The fixed point theorem was proved by Kleene in 1938, in a paper on notations for ordinals, where it is used to define functions by effective transfinite recursion. Rogers formulated the version for transformations of indices given here. The result on minimal indices is usually attributed to Blum (1967), in a paper on the size of programs. Moschovakis gives a survey of the many uses of the theorem.
 
 - S. C. Kleene, *On notation for ordinal numbers*, Journal of Symbolic Logic 3 (1938), 150–155.
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
-- M. Blum, *A machine-independent theory of the complexity of recursive functions*, Journal of the ACM 14 (1967), 322–336.
+- M. Blum, *On the size of machines*, Information and Control 11 (1967), 257–265.
 - Y. N. Moschovakis, *Kleene's amazing second recursion theorem*, Bulletin of Symbolic Logic 16 (2010), 189–239.

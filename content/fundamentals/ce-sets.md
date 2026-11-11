@@ -244,7 +244,7 @@ so $f$ reduces $B$ to $\emptyset'$.
 :::
 
 :::proof{of=cor-tot-not-ce}
-1. If $\emptyset' \leq_m A$, every c.e. set reduces to $A$ by transitivity. The three sets are c.e., and $\emptyset'$ reduces to them by :ref{#prop-halting-variants}.
+1. If $A$ is m-complete, then $\emptyset' \leq_m A$ since $\emptyset'$ is c.e. (:ref{#thm-halting-ce}). Conversely, if $\emptyset' \leq_m A$, every c.e. set reduces to $\emptyset'$ by :ref{#thm-halting-complete}, hence to $A$ by transitivity. The three sets are c.e., since $\langle e, x \rangle \in H \iff \exists s\ \Phi_e(x)[s]\converge$ and $W_e \neq \emptyset \iff \exists n\ \Phi_e(\pi_0(n))[\pi_1(n)]\converge$, and $\emptyset'$ reduces to them by :ref{#prop-halting-variants}.
 2. By :ref{#prop-halting-variants}, $\nat \setminus \emptyset' \leq_m \mathrm{Tot}$, and $\emptyset' \leq_m \mathrm{Tot}$, which gives $\nat \setminus \emptyset' \leq_m \nat \setminus \mathrm{Tot}$. If $\mathrm{Tot}$ or its complement were c.e., then $\nat \setminus \emptyset'$ would be c.e. by :ref{#prop-ce-downward}, contradicting :ref{#thm-halting-ce}.
 :::
 
@@ -294,17 +294,17 @@ Fix c.e. approximations $(A_s)$ and $(B_s)$. For $x \in A \cup B$, let $s_x$ be 
 Show that the set $\{ e : W_e \text{ is infinite} \}$ is neither c.e. nor co-c.e.
 
 :::hint
-Use the two reductions of the last exercise of the previous lesson.
+Use the two reductions of :ref{#ex-inf-reductions}.
 :::
 
 :::solution
-By the previous lesson, $\emptyset'$ and $\nat \setminus \emptyset'$ both reduce to this set. As in the proof of :ref{#cor-tot-not-ce}, if the set or its complement were c.e., then $\nat \setminus \emptyset'$ would be c.e.
+By :ref{#ex-inf-reductions}, $\emptyset'$ and $\nat \setminus \emptyset'$ both reduce to this set. As in the proof of :ref{#cor-tot-not-ce}, if the set or its complement were c.e., then $\nat \setminus \emptyset'$ would be c.e.
 :::
 ::::
 
 ## Notes and references
 
-Computably enumerable sets were introduced by Kleene and by Post in the late 1930s; Post's paper of 1944 made them a subject of study in their own right, introduced many-one and one-one reducibility, the notion of complete set, and simple sets. The selection theorem is due to Kleene. Soare's textbook is the standard reference for the theory of c.e. sets.
+Computably enumerable sets were introduced in the 1930s, in the work of Church, Kleene and Post on recursive functions; Post's paper of 1944 made them a subject of study in their own right, introduced many-one and one-one reducibility, the notion of complete set, and simple sets. The selection theorem is due to Kleene. Soare's textbook is the standard reference for the theory of c.e. sets.
 
 - E. L. Post, *Recursively enumerable sets of positive integers and their decision problems*, Bulletin of the American Mathematical Society 50 (1944), 284–316.
 - S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952.

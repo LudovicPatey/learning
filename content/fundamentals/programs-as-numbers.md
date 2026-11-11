@@ -53,7 +53,7 @@ Since a computation of $t$ steps has a code larger than $t$, convergence at stag
 :::proof{of=prop-stage-properties}
 1. $\Phi_e(x)[s]\converge = y$ holds if and only if $e < s \wedge x < s \wedge \exists t < s\, \big(T_1(e, x, t) \wedge U(t) = y\big)$. This is obtained from primitive recursive predicates by Boolean operations and a bounded quantifier, hence it is primitive recursive (:ref{#cor-pr-bounded-quantifiers}). The value, when defined, is $U(\mu t < s\ T_1(e, x, t))$, a bounded minimization.
 2. The witness $t < s$ is also smaller than $s'$, and the conditions $e, x < s$ are preserved.
-3. If $\Phi_e(x)\converge = y$, let $t$ be the code of the computation; then $T_1(e, x, t)$ and $U(t) = y$, so $\Phi_e(x)[s]\converge = y$ for $s = \max(e, x, t) + 1$. Conversely, if $\Phi_e(x)[s]\converge = y$ with witness $t$, then $t$ is the unique $t$ with $T_1(e, x, t)$, so $\mu s\, T_1(e, x, s) = t$ and $\Phi_e(x) = U(t) = y$.
+3. If $\Phi_e(x)\converge = y$, let $t$ be the code of the computation; then $T_1(e, x, t)$ and $U(t) = y$, so $\Phi_e(x)[s]\converge = y$ for $s = \max(e, x, t) + 1$. Conversely, if $\Phi_e(x)[s]\converge = y$ with witness $t$, then $t$ is the unique $t$ with $T_1(e, x, t)$, so $\mu u\, T_1(e, x, u) = t$ and $\Phi_e(x) = U(t) = y$.
 :::
 
 The contrast between items 1 and 3 is the central phenomenon of the theory. Convergence at a given stage is decidable; convergence is the existence of a stage, a question with an unbounded quantifier, and it is not decidable, as the lesson on the halting problem shows. Divergence is never confirmed at a finite stage: $\Phi_e(x)\diverge$ means $\Phi_e(x)[s]\diverge$ for **every** $s$.
@@ -78,9 +78,9 @@ Which statements hold for all $e$ and $x$?
 
 Why does the definition of $\Phi_e(x)[s]$ require $e, x < s$?
 
-- [x] So that, for each $e$ and $s$, only finitely many $x$ converge at stage $s$, namely some $x < s$.
+- [x] So that at stage $s$ only the pairs $(e, x)$ with $e, x < s$ can have converged: what has happened by stage $s$ is a finite amount of information, with an explicit bound.
 
-  This convention makes the stage-$s$ approximation of the domain a finite set, given explicitly; it is used constantly in constructions.
+  Without the condition, a bound on the inputs that have converged by stage $s$ would depend on the details of the coding of computations; with it, the bound is explicit. It is used constantly in constructions.
 - [ ] To make the relation $\Phi_e(x)[s]\converge$ decidable.
 
   The relation $\exists t < s\ T_1(e, x, t)$ is already decidable without this condition.
@@ -143,7 +143,7 @@ Let $e$ be an index of the following algorithm: on input $n$, try $r = 0, 1, 2, 
 
 ## Uniformity
 
-A typical statement of computability theory asserts that some object is obtained **uniformly** from others: for instance, "the set $A_x$ is computable, uniformly in $x$" means that the relation $\{ (x, y) : y \in A_x \}$ is computable, and not only that each $A_x$ is computable. The difference is essential. Each set $A_x = \{ 0 \}$ if $x \in \emptyset'$ and $A_x = \emptyset$ otherwise is finite, hence computable; but the relation $y \in A_x$ is not, since $x \in \emptyset'$ if and only if $0 \in A_x$, and $\emptyset'$ is not computable. Similarly, an index $e$ "obtained uniformly in $x$" is the value of a total computable function of $x$.
+A typical statement of computability theory asserts that some object is obtained **uniformly** from others: for instance, "the set $A_x$ is computable, uniformly in $x$" means that the relation $\{ (x, y) : y \in A_x \}$ is computable, and not only that each $A_x$ is computable. The difference is essential. Let $\emptyset' = \{ e : \Phi_e(e)\converge \}$ be the halting set, which is not computable (:ref{#thm-halting}, in the lesson on the halting problem). Each set $A_x = \{ 0 \}$ if $x \in \emptyset'$ and $A_x = \emptyset$ otherwise is finite, hence computable; but the relation $y \in A_x$ is not, since $x \in \emptyset'$ if and only if $0 \in A_x$. Similarly, an index $e$ "obtained uniformly in $x$" is the value of a total computable function of $x$.
 
 ## Exercises
 
@@ -156,7 +156,7 @@ If $f$ is computable, $f(x) = y$ is decided by computing $f(x)$ and comparing wi
 ::::
 
 ::::exercise{difficulty=1}
-Show that the set $\{ e : \Phi_e(0)[e]\converge \}$ is computable, while the function $s \mapsto |\{ e < s : \Phi_e(e)[s]\converge \}|$ is total computable.
+Show that the set $\{ e : \Phi_e(0)[e]\converge \}$ is computable, and that the function $s \mapsto |\{ e < s : \Phi_e(e)[s]\converge \}|$ is total computable.
 
 :::solution
 Both follow from item 1 of :ref{#prop-stage-properties}. The first set is defined by substituting $(e, 0, e)$ in a primitive recursive relation. The function is $\sum_{e < s} \chi(e, s)$, where $\chi(e, s)$ is the characteristic function of the primitive recursive relation $\Phi_e(e)[s]\converge$; it is primitive recursive.
@@ -167,7 +167,7 @@ Both follow from item 1 of :ref{#prop-stage-properties}. The first set is define
 Show that a partial computable function with a computable domain has a total computable extension. Show by an example that a partial computable function may have a total computable extension and a non-computable domain.
 
 :::solution
-If $D = \mathrm{dom}(f)$ is computable, let $g(x) \simeq f(x)$ for $x \in D$ and $g(x) = 0$ for $x \notin D$, a definition by cases (:ref{#prop-computable-closure}); $g$ is total since $f(x)\converge$ for $x \in D$. For the converse, consider the partial function defined by $f(e) \simeq 0$ if $\Phi_e(e)\converge$, undefined otherwise. It is partial computable, its domain $\emptyset'$ is not computable, and the constant function $0$ is a total computable extension.
+If $D = \mathrm{dom}(f)$ is computable, let $g(x) \simeq f(x)$ for $x \in D$ and $g(x) = 0$ for $x \notin D$, a definition by cases (:ref{#prop-computable-closure}); $g$ is total since $f(x)\converge$ for $x \in D$. For the converse, consider the partial function defined by $f(e) \simeq 0$ if $\Phi_e(e)\converge$, undefined otherwise. It is partial computable, its domain $\emptyset'$ is not computable (:ref{#thm-halting}), and the constant function $0$ is a total computable extension.
 :::
 ::::
 
@@ -176,5 +176,6 @@ If $D = \mathrm{dom}(f)$ is computable, let $g(x) \simeq f(x)$ for $x \in D$ and
 The enumeration of the partial recursive functions by indices, and the normal form theorem on which it rests, are due to Kleene (1936, 1938). The notation $\Phi_e$ follows Soare's textbook; Rogers writes $\varphi_e$. The approximation by stages and its conventions are standard in modern texts, where they are the basis of all constructions by stages.
 
 - S. C. Kleene, *General recursive functions of natural numbers*, Mathematische Annalen 112 (1936), 727–742.
+- S. C. Kleene, *On notation for ordinal numbers*, Journal of Symbolic Logic 3 (1938), 150–155.
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.

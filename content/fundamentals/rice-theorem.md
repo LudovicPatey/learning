@@ -71,7 +71,7 @@ Where is the computability of $P$ used?
 The fixed point proof shows that $P$ is not computable, but not how difficult it is. A reduction gives more information.
 
 :::proposition{#prop-rice-reduction}
-Let $P$ be a non-trivial index set, and let $z$ be an index of the nowhere defined function. If $z \notin P$, then $\emptyset' \leq_m P$. If $z \in P$, then $\emptyset' \leq_m \nat \setminus P$.
+Let $P$ be a non-trivial index set, and let $z$ be an index of the nowhere defined function (since $P$ is an index set, whether $z \in P$ does not depend on the choice of $z$). If $z \notin P$, then $\emptyset' \leq_m P$. If $z \in P$, then $\emptyset' \leq_m \nat \setminus P$.
 :::
 
 :::proof{of=prop-rice-reduction}
@@ -114,7 +114,7 @@ In both cases, we reduce $\nat \setminus \emptyset'$ to $P$, which is impossible
 2. Suppose $f \in \mathcal C$ and no finite $\theta \subseteq f$ is in $\mathcal C$. Let $h$ be total computable such that $\Phi_{h(e)}(x) \simeq f(x)$ if $\Phi_e(e)[x]\diverge$, and $\Phi_{h(e)}(x)$ is undefined otherwise. If $e \notin \emptyset'$, then $\Phi_{h(e)} = f \in \mathcal C$. If $e \in \emptyset'$, let $s$ be the least stage with $\Phi_e(e)[s]\converge$; then $\Phi_{h(e)}$ is the restriction of $f$ to $\{0, \dots, s - 1\}$, a finite function contained in $f$, hence not in $\mathcal C$. So $h$ reduces $\nat \setminus \emptyset'$ to $P$.
 :::
 
-The converse also holds, with a suitable formulation: $P$ is c.e. if and only if $\mathcal C$ is the class of partial computable functions extending some member of a c.e. list of finite functions (given by canonical codes). We admit this sufficiency part, which is proved in Rogers' and Odifreddi's books.
+The converse also holds, with a suitable formulation: $P$ is c.e. if and only if $\mathcal C$ is the class of partial computable functions extending some member of a c.e. list of finite functions (given by canonical codes). We admit this sufficiency part, which is proved in Rogers' and Odifreddi's books (in the sections on index sets and the Rice–Shapiro theorem).
 
 :::corollary{#cor-rice-shapiro-examples}
 The following index sets are not c.e.: $\mathrm{Tot}$; $\{ e : W_e \text{ is infinite} \}$; $\{ e : W_e \text{ is finite} \}$; $\{ e : W_e = \emptyset \}$; $\{ e : \Phi_e = \Phi_a \}$ for any index $a$ of a total function.
@@ -183,6 +183,8 @@ It is an index set. Monotonicity fails: the nowhere defined function has the com
 Rice's theorem appeared in 1953, in a paper on classes of c.e. sets; Rice and Shapiro characterized independently, in 1956, the classes of c.e. sets whose index sets are c.e. The analogous result for partial computable functions is the Myhill–Shepherdson theorem (1955), which states that effective operations on partial computable functions are continuous, in the sense that their values depend on finite information.
 
 - H. G. Rice, *Classes of recursively enumerable sets and their decision problems*, Transactions of the American Mathematical Society 74 (1953), 358–366.
+- H. G. Rice, *On completely recursively enumerable classes and their key arrays*, Journal of Symbolic Logic 21 (1956), 304–308.
 - N. Shapiro, *Degrees of computability*, Transactions of the American Mathematical Society 82 (1956), 281–299.
 - J. Myhill and J. C. Shepherdson, *Effective operations on partial recursive functions*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 1 (1955), 310–317.
+- H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989.

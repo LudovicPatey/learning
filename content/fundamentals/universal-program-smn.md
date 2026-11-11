@@ -2,7 +2,7 @@
 title: The universal function and the SMN theorem
 summary: The universal partial computable function, the SMN theorem and its use with parameters, the padding lemma, and acceptable numberings.
 duration: 40
-prerequisites: [programs-as-numbers]
+prerequisites: [programs-as-numbers, countability/diagonalization-and-computation]
 ---
 
 Two properties of the enumeration $(\Phi_e)$ make it the right framework for computability theory. The first is that it is itself computable: a single algorithm evaluates $\Phi_e(x)$ from $e$ and $x$. The second is that indices can be manipulated computably: from an index of a function of two arguments and a value $x$ of the first argument, one can compute an index of the function of the second argument obtained by fixing $x$. The first property is the **universal function theorem**, the second is the **SMN theorem**. Together they allow one to treat programs as data, which is what the rest of the course does.
@@ -175,7 +175,7 @@ The numbering $(\Phi_e)$ is acceptable. If $(\psi_e)$ is acceptable, there is a 
 For $(\Phi_e)$, take the universal function and $t$ the identity. Let $(\psi_e)$ be acceptable. By :ref{#cor-smn-parameters} applied to $(e, x) \mapsto \psi_e(x)$, there is a total computable $r$ with $\Phi_{r(e)}(x) \simeq \psi_e(x)$. For SMN, apply :ref{#cor-smn-parameters} to $(\langle e, x \rangle, y) \mapsto \psi_e(\langle x, y \rangle)$, giving a total computable $s$ with $\Phi_{s(\langle e, x \rangle)}(y) \simeq \psi_e(\langle x, y \rangle)$, and let $\sigma(e, x) = t(s(\langle e, x \rangle))$.
 :::
 
-Rogers proved that any two acceptable numberings differ by a computable permutation of the indices: if $(\psi_e)$ is acceptable, there is a computable bijection $\pi : \nat \to \nat$ with $\psi_e = \Phi_{\pi(e)}$. We admit this **isomorphism theorem**. It shows that every result of this course that is stated in terms of indices holds for every acceptable numbering. Not every numbering is acceptable: Friedberg constructed a numbering satisfying the first condition in which each partial computable function appears **exactly once**. By the padding lemma, such a numbering cannot be acceptable.
+Rogers proved that any two acceptable numberings differ by a computable permutation of the indices: if $(\psi_e)$ is acceptable, there is a computable bijection $\pi : \nat \to \nat$ with $\psi_e = \Phi_{\pi(e)}$. We admit this **isomorphism theorem**, proved in Rogers' paper of 1958 cited below; its proof is a computable back-and-forth argument using the padding lemma. It shows that every result of this course that is stated in terms of indices holds for every acceptable numbering. Not every numbering is acceptable: Friedberg constructed a numbering satisfying the first condition in which each partial computable function appears **exactly once**. Such a numbering cannot be acceptable: by the isomorphism theorem, the indices of a function in an acceptable numbering are in bijection with its indices in $(\Phi_e)$, which are infinitely many by :ref{#cor-infinitely-many-indices}.
 
 ## Exercises
 

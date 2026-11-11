@@ -2,7 +2,7 @@
 title: The halting problem
 summary: Undecidability of the halting problem; many-one reductions; undecidability of totality and of halting on a fixed input.
 duration: 35
-prerequisites: [universal-program-smn, countability/diagonal-argument]
+prerequisites: [universal-program-smn, countability/diagonalization-and-computation]
 ---
 
 This lesson proves that the halting problem is not computable, and introduces the main tool for transferring undecidability from one problem to another: many-one reductions. With them, the undecidability of the halting problem propagates to many other questions about programs — halting on a fixed input, totality, emptiness of the domain — and, outside computability theory, to problems of number theory, group theory and logic.
@@ -161,7 +161,7 @@ Reductions from the halting problem show that many natural mathematical problems
 
 - **The Entscheidungsproblem.** The set of (codes of) valid formulas of first-order logic is not computable (Church, Turing, 1936). Later work showed that a language with a single binary relation symbol suffices.
 - **The word problem for groups.** There is a finitely presented group for which the set of words equal to the identity is not computable (Novikov, 1955; Boone, 1959).
-- **Hilbert's tenth problem.** The set of polynomial equations with integer coefficients having a solution in integers is not computable (Matiyasevich, 1970, completing work of Davis, Putnam and Robinson). More precisely, every computably enumerable set is Diophantine, and therefore $\emptyset'$ reduces to the solvability of Diophantine equations.
+- **Hilbert's tenth problem.** The set of polynomial equations with integer coefficients having a solution in integers is not computable (Matiyasevich, 1970, completing work of Davis, Putnam and Robinson). More precisely, every computably enumerable set (in the sense of the next lesson) is Diophantine, and therefore $\emptyset'$ reduces to the solvability of Diophantine equations.
 
 ## Exercises
 
@@ -181,7 +181,7 @@ Let $g$ be total computable with $\Phi_{g(e)}(y) \simeq 0$ if $\Phi_e(e)\converg
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{difficulty=2 #ex-inf-reductions}
 Let $\mathrm{Inf} = \{ e : \mathrm{dom}(\Phi_e) \text{ is infinite} \}$. Show that $\emptyset' \leq_m \mathrm{Inf}$ and $\nat \setminus \emptyset' \leq_m \mathrm{Inf}$.
 
 :::solution
@@ -191,10 +191,11 @@ The reduction $e \mapsto z(e, e)$ of :ref{#prop-halting-variants} sends $e \in \
 
 ## Notes and references
 
-Turing proved in 1936 that no machine decides whether a given machine is circle-free, and deduced the unsolvability of the Entscheidungsproblem; Church obtained the latter independently with the λ-calculus. Many-one reducibility was introduced by Post in 1944, in the paper that founded the study of computably enumerable sets and their degrees. Davis' book on Hilbert's tenth problem and Lyndon and Schupp's on combinatorial group theory present the undecidability results listed above.
+Turing proved in 1936 that no machine decides whether a given machine is circle-free, and deduced the unsolvability of the Entscheidungsproblem; Church obtained the latter independently with the λ-calculus. Many-one reducibility was introduced by Post in 1944, in the paper that founded the study of computably enumerable sets and their degrees. Davis' survey and Matiyasevich's book on Hilbert's tenth problem, and Lyndon and Schupp's book on combinatorial group theory, present the undecidability results listed above.
 
 - A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society (2) 42 (1936), 230–265.
 - A. Church, *A note on the Entscheidungsproblem*, Journal of Symbolic Logic 1 (1936), 40–41.
 - E. L. Post, *Recursively enumerable sets of positive integers and their decision problems*, Bulletin of the American Mathematical Society 50 (1944), 284–316.
 - M. Davis, *Hilbert's tenth problem is unsolvable*, American Mathematical Monthly 80 (1973), 233–269.
 - Y. V. Matiyasevich, *Hilbert's Tenth Problem*, MIT Press, 1993.
+- R. C. Lyndon and P. E. Schupp, *Combinatorial Group Theory*, Springer, 1977.
