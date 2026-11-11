@@ -1,0 +1,23 @@
+title: Reducibilities between problems
+area: reverse-math
+level: Advanced
+order: 5
+prerequisites: [big-five, ramsey-theorem]
+summary: Theorems as problems, compared by ω-reducibility, computable reducibility and Weihrauch reducibility.
+description: >
+  A Π¹₂ theorem can be seen as a problem whose instances must be given
+  solutions. The course compares problems by three reducibilities of
+  increasing precision: ω-reducibility, the computational counterpart of
+  implication over RCA₀ in ω-models, with weakness properties and reduction
+  games; computable reducibility, which allows a single application of the
+  stronger problem, with Scott's theorem and cylinders; and Weihrauch
+  reducibility, which requires uniformity, with the omniscience principles
+  and parallelization.
+objectives:
+  - Formulate theorems as problems and compare them with ω-reducibility
+  - Separate problems by preservation of weakness properties
+  - Characterize ω-reducibility by reduction games
+  - Distinguish computable and strong computable reducibility, and use cylinders
+  - Prove that ω-reducibility and computable reducibility to WKL coincide
+  - Prove non-reducibility results for Weihrauch reducibility by continuity and parallelization
+lessons: [omega-reducibility, computable-reducibility, weihrauch]
