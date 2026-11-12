@@ -1,0 +1,33 @@
+title: Compactness avoidance
+area: computability
+level: Advanced
+order: 15
+prerequisites: [avoidance, martin-lof-randomness]
+summary: How to show that a theorem does not use compactness; PA avoidance and merging forcing questions, Liu's lemma and weak merging, the Ramsey-type weak König lemma, Liu's theorem that Ramsey's theorem for pairs does not imply weak König's lemma, and the finer notions of constant-bound trace and DNC avoidance.
+description: >
+  A theorem whose proof avoids compactness should have computable instances
+  with solutions that are not of PA degree. The course defines PA avoidance
+  for problems and proves it with forcing questions that can force two
+  negative answers at once (merging). It weakens this property to weak
+  merging, where only two of several negative answers can be merged, and
+  proves Liu's combinatorial lemma on finite valuations that makes this
+  sufficient. It introduces the Ramsey-type weak König lemma, implied by
+  Ramsey's theorem for pairs, and proves Liu's theorem that it admits PA
+  avoidance, by forcing with partitions that split instead of choosing a
+  member of a Π⁰₁ class. It deduces that the pigeonhole principle admits
+  strong PA avoidance and that Ramsey's theorem for pairs admits PA
+  avoidance, so that it does not imply weak König's lemma. It then shows
+  that weak weak König's lemma admits strong PA avoidance, introduces the
+  avoidance of constant-bound traces of closed classes, which separates
+  Ramsey's theorem for pairs from weak weak König's lemma, characterizes the
+  DNC degrees by homogeneous sets for classes of positive measure, and
+  compares cone, PA, trace and DNC avoidance.
+objectives:
+  - Define PA avoidance and strong PA avoidance for problems, and use them to build ω-models without PA sets
+  - Prove PA avoidance from a merging forcing question whose answers are Σ⁰₁ relative to the condition, and derive that PA avoidance implies cone avoidance
+  - State and prove Liu's lemma on finite valuations, and use it to prove PA avoidance from weakly merging and disjunctive questions
+  - Define the Ramsey-type weak König lemma, relate it to WKL and RT²₂, and prove that it admits PA avoidance by forcing with splitting partitions
+  - Prove Liu's theorem that RT²₂ admits PA avoidance, and deduce that RT²₂ does not imply WKL₀
+  - Prove that WWKL admits strong PA avoidance, and use constant-bound traces of closed classes and Liu's lemma for blocks to compare it with RT²₂
+  - Characterize the DNC degrees by homogeneous sets for Π⁰₁ classes of positive measure, prove DNC avoidance and preservation of immunity from countably merging questions, and compare the avoidance properties
+lessons: [pa-avoidance, weak-merging, ramsey-type-wkl, partition-forcing, liu-theorem, measure-and-closed-classes, dnc-avoidance]
