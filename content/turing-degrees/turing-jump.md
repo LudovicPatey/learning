@@ -1,11 +1,13 @@
 ---
 title: The Turing jump
 summary: The jump of a set, its completeness for relatively c.e. sets, its strict increase and monotonicity, the iterated jumps, and the position of totality and finiteness below the double jump.
-duration: 35
-prerequisites: [turing-reducibility]
+duration: 40
+prerequisites: [turing-reducibility, fundamentals/complete-sets]
 ---
 
 Relativizing the halting set to an oracle $X$ gives the **jump** $X'$ of $X$: the halting problem for machines with oracle $X$. It is strictly more powerful than $X$, and it depends only on the degree of $X$. Iterating it gives a strictly increasing sequence of degrees $\obf < \obf' < \obf'' < \cdots$, along which many natural problems can be located: the halting problem is at the first level, totality and finiteness of domains at the second. The jump is the main tool for measuring the complexity of sets, and the arithmetic hierarchy is its definability counterpart.
+
+The proofs of this lesson are relativizations of the proofs about the halting set: diagonalization shows that $X'$ is not $X$-computable, and the SMN theorem shows that every $X$-c.e. set reduces to $X'$. What is new is that the relativized proofs are uniform in the oracle, and uniformity is what allows one to compare the jumps of different sets.
 
 ## Definition
 
@@ -18,6 +20,12 @@ We write $X'' = (X')'$, and in general $X^{(0)} = X$ and $X^{(n+1)} = (X^{(n)})'
 :::
 
 In particular $\emptyset' = \{ e : \Phi^\emptyset_e(e)\converge \}$, defined with oracle machines. The halting set of the course on fundamentals, defined with ordinary machines, is many-one equivalent to it, since both are m-complete among the c.e. sets (:ref{#thm-halting-complete} and the theorem below). From now on $\emptyset'$ denotes the jump of $\emptyset$.
+
+:::example{#ex-jumps}
+1. If $X$ is computable, then $X' \equiv_T \emptyset'$: this is a special case of item 5 of the theorem below, and can be seen directly, since a machine with a computable oracle can be replaced by an ordinary machine.
+2. The relativized halting problem $K^X = \{ \langle e, x \rangle : \Phi^X_e(x)\converge \}$ is $X$-c.e., and $X' = \{ e : \langle e, e \rangle \in K^X \}$; conversely, $K^X$ reduces to $X'$ by item 2 of the theorem below. So $X' \equiv_1 K^X$, and either set may serve as the jump.
+3. $\emptyset''$ is the halting problem for machines with oracle $\emptyset'$: it answers questions of the form "does this computation, which may itself consult the halting problem, terminate?".
+:::
 
 ## Properties of the jump
 
@@ -51,7 +59,7 @@ where $\obf^{(n)} = \deg_T(\emptyset^{(n)})$, and $\emptyset^{(n)} \leq_T X^{(n)
 By item 5, $X \equiv_T Y$ implies $X' \equiv_T Y'$, so the jump is well defined on degrees and monotone. By items 3 and 4, $\dbf < \dbf'$. Finally $\emptyset \leq_T X$ for every $X$, and monotonicity gives $\emptyset^{(n)} \leq_T X^{(n)}$ by induction.
 :::
 
-The jump is not injective on degrees: the lesson on low and high sets constructs a non-computable set $A$ with $A' \equiv_T \emptyset'$.
+The jump is not injective on degrees: the lesson on low and high sets constructs a non-computable set $A$ with $A' \equiv_T \emptyset'$. In particular the converse of item 5 fails for Turing reducibility: $A' \leq_T \emptyset'$ while $A \not\leq_T \emptyset$. For one-one reducibility the converse holds (see the exercises): $X \leq_T Y$ if and only if $X' \leq_1 Y'$. A one-one reduction between jumps carries more information than a Turing reduction, because it preserves the distinction between the sets that are c.e. relative to an oracle and their complements.
 
 :::quiz[the properties of the jump]
 In item 2, why must the function $f$ be computable, and not only $X$-computable?
@@ -118,6 +126,10 @@ The first is the projection of an $\emptyset'$-computable relation, hence $\empt
 
 In fact $\mathrm{Tot}$, $\mathrm{Inf}$ and $\mathrm{Fin}$ are all Turing equivalent to $\emptyset''$; this is proved in the course on the arithmetic hierarchy, where these sets are shown to be complete at the second level. Since none of them is computable in $\emptyset'$, they are strictly harder than the halting problem.
 
+:::figure[The first jumps. Each degree $\obf^{(n+1)}$ is strictly above $\obf^{(n)}$. The sets computable in $\emptyset'$ include the c.e. sets; the lesson on finite extensions builds sets strictly between $\obf$ and $\obf'$ that are not c.e.]
+<svg class="fig" viewBox="0 0 600 300" width="600" role="img" aria-label="The degrees 0, 0 prime, 0 double prime and 0 triple prime on a vertical axis, with the sets located at each level"><line x1="120" y1="12" x2="120" y2="280" class="axis"/><circle cx="120" cy="270" r="5" class="node"/><text x="106" y="276" text-anchor="end" class="mrm" font-size="17" font-weight="700">0<tspan font-weight="400"></tspan></text><text x="136" y="274" class="label">computable sets</text><circle cx="120" cy="180" r="5" class="node"/><text x="106" y="186" text-anchor="end" class="mrm" font-size="17" font-weight="700">0<tspan font-weight="400">′</tspan></text><text x="136" y="184" class="label">∅′ and the Turing complete c.e. sets</text><circle cx="120" cy="90" r="5" class="node"/><text x="106" y="96" text-anchor="end" class="mrm" font-size="17" font-weight="700">0<tspan font-weight="400">″</tspan></text><text x="136" y="94" class="label">Tot, Inf, Fin</text><circle cx="120" cy="20" r="5" class="node"/><text x="106" y="26" text-anchor="end" class="mrm" font-size="17" font-weight="700">0<tspan font-weight="400">‴</tspan></text><text x="136" y="24" class="label">⋯</text><path d="M430,272 L438,272 L438,178 L430,178" class="accent-stroke" stroke-width="1.3"/><text x="444" y="222" class="label">computable</text><text x="444" y="238" class="label">in ∅′</text><path d="M510,272 L518,272 L518,88 L510,88" class="accent-stroke" stroke-width="1.3"/><text x="524" y="126" class="label">computable</text><text x="524" y="142" class="label">in ∅″</text><text x="136" y="220" class="label">strictly between: the Kleene–Post sets,</text><text x="136" y="236" class="label">the non-computable low sets</text></svg>
+:::
+
 :::quiz[locating index sets]
 Why is the relation "$\forall x > n\ \ x \notin W_e$" computable in $\emptyset'$?
 
@@ -151,6 +163,14 @@ Since $X, Y \leq_T X \oplus Y$, monotonicity gives $X', Y' \leq_T (X \oplus Y)'$
 ::::
 
 ::::exercise{difficulty=2}
+Show that $X \leq_T Y$ if and only if $X' \leq_1 Y'$.
+
+:::solution
+One direction is item 5 of :ref{#thm-jump}. Conversely, suppose $X' \leq_1 Y'$ via $h$. By item 2 of :ref{#thm-jump}, applied to $X$ and to its complement, which are both $X$-c.e., there are computable injective $f_0$, $f_1$ with $x \in X \iff f_0(x) \in X'$ and $x \notin X \iff f_1(x) \in X'$. Then $x \in X \iff h(f_0(x)) \in Y'$ and $x \notin X \iff h(f_1(x)) \in Y'$, so $X$ and its complement are many-one reducible to the $Y$-c.e. set $Y'$, hence $Y$-c.e., and $X$ is $Y$-computable by :ref{#ex-relativized-complementation}.
+:::
+::::
+
+::::exercise{difficulty=2}
 Show that $\{ e : W_e = \emptyset \}$ and $\{ e : W_e \text{ is finite} \}$ are computable in $\emptyset'$ and in $\emptyset''$ respectively, and that the first is not computable.
 
 :::solution
@@ -160,7 +180,12 @@ $W_e \neq \emptyset$ if and only if $\exists x \exists s\ \Phi_e(x)[s]\converge$
 
 ## Notes and references
 
-The jump operator was introduced by Kleene and Post (1954), who proved its basic properties. Soare's textbooks present the jump together with the arithmetic hierarchy.
+The jump operator was introduced by Kleene and Post (1954), who proved its basic properties. The theorem of this lesson, with the converse of item 5 for one-one reducibility, is the Jump Theorem 3.4.3 of Soare (2016); see also Downey and Hirschfeldt (2010, §2.4), Nies (2009, §1.2), and the section on the Turing jump of Monin and Patey. Soare's textbooks present the jump together with the arithmetic hierarchy.
+
+The jump is degree invariant: $X \equiv_T Y$ implies $X' \equiv_T Y'$. **Martin's conjecture**, formulated in set theory with the axiom of determinacy, says that the jump and its transfinite iterates are the canonical examples of such operations: every degree-invariant function $f$ is either constant on a cone of degrees or satisfies $X \leq_T f(X)$ on a cone, and the functions of the second kind are prewellordered by the relation "$f(X) \leq_T g(X)$ on a cone", the successor of $f$ being $X \mapsto f(X)'$. The conjecture is open in general. Steel (1982) and Slaman and Steel (1988) proved it for uniformly degree-invariant functions, and Lutz and Siskind (preprint, 2023) proved its first part for order-preserving functions. These results place the jump, rather than any other operator, at the center of the theory of degrees.
 
 - S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.
-- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §3.4.
+- J. R. Steel, *A classification of jump operators*, Journal of Symbolic Logic 47 (1982), 347–358.
+- T. A. Slaman and J. R. Steel, *Definable functions on degrees*, in *Cabal Seminar 81–85*, Lecture Notes in Mathematics 1333, Springer, 1988, 37–55.
+- P. Lutz and B. Siskind, *Part 1 of Martin's conjecture for order-preserving and measure-preserving functions*, arXiv:2305.19646, 2023.

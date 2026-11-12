@@ -1,11 +1,13 @@
 ---
 title: Computation relative to an oracle
-summary: Oracle machines, Turing functionals, computations with finite oracles and the use principle; relativization of the universal function and of the SMN theorem.
-duration: 40
+summary: Oracle machines and Turing functionals; computations with finite oracles, stages and the use principle.
+duration: 55
 prerequisites: [fundamentals/ce-sets]
 ---
 
-A non-computable set can be seen as an unsolvable problem. To compare unsolvable problems with one another, Turing introduced in 1939 machines that may consult an **oracle**: a set $X \subseteq \nat$, given as an infinite external resource, which the machine may query at any time for the value of $X(n)$. A set is then computable *relative to* $X$ if some oracle machine decides it with oracle $X$. This lesson defines oracle computations, proves the property that makes them manageable — a halting computation consults only finitely many bits of the oracle — and shows that the basic results of the course on fundamentals hold relative to any oracle.
+A non-computable set can be seen as an unsolvable problem. To compare unsolvable problems with one another, Turing introduced in 1939 machines that may consult an **oracle**: a set $X \subseteq \nat$, given as an infinite external resource, which the machine may query at any time for the value of $X(n)$. A set is then computable *relative to* $X$ if some oracle machine decides it with oracle $X$. This lesson defines oracle computations and proves the property that makes them manageable. The next lesson shows that the results of the course on fundamentals hold relative to any oracle.
+
+An algorithm cannot survey an infinite oracle, but a halting computation lasts finitely many steps and reads finitely many of its bits; everything about the computation can be read off a prefix of the oracle. This remark, the **use principle**, underlies every construction of this course.
 
 ## Strings and sequences
 
@@ -16,7 +18,7 @@ We use the notation of :ref{#def-cantor-space}. A **string** is an element $\sig
 - $\sigma \tau$ and $\sigma i$ denote concatenations, for $i \in \{0, 1\}$, and $X \uh n = X(0) \cdots X(n-1)$;
 - $[\sigma] = \{ X \in \cs : \sigma \prec X \}$ is the **cylinder** of $\sigma$.
 
-Strings are coded by integers in a fixed computable way, so that the usual operations on them are primitive recursive. Sets of integers are identified with elements of $\cs$.
+Strings are coded by integers in a fixed computable way, so that the usual operations on them are primitive recursive. Sets of integers are identified with elements of $\cs$. For instance, if $X$ is the set of even numbers, then $X \uh 5 = 10101$; the strings $10$ and $101$ are compatible, the strings $10$ and $11$ are not, and $[10]$ is the set of all $Y$ with $0 \in Y$ and $1 \notin Y$.
 
 ## Oracle machines
 
@@ -40,7 +42,14 @@ An oracle machine computes, for each oracle $X$, a partial function $\nat^k \rig
 For $e, k \in \nat$, the **Turing functional** $\Phi_e$ is the map which sends an oracle $X$ to the partial function $\Phi^X_e : \nat^k \rightharpoonup \nat$ computed by the oracle machine of code $e$ with oracle $X$. We also write $\Phi_e(X, \vec x)$ for $\Phi_e^X(\vec x)$.
 :::
 
-The notation is consistent with the course on fundamentals once a convention is fixed: from now on, $\Phi_e$ denotes the functional of index $e$, and when no oracle is written, $\Phi_e(x)$ stands for $\Phi^{\emptyset}_e(x)$, $\Phi_e(x)[s]$ for $\Phi^{\emptyset}_e(x)[s]$ (defined below) and $W_e$ for $\dom(\Phi^{\emptyset}_e)$. The partial computable functions of that course are exactly the functions $\Phi^{\emptyset}_e$, or $\Phi^X_e$ for any computable $X$ (see the exercises), although a function need not have the same indices in the two enumerations. Since every ordinary machine is an oracle machine, every partial computable function is $\Phi^X_e$ for some $e$ and every $X$.
+The notation is consistent with the course on fundamentals once a convention is fixed: from now on, $\Phi_e$ denotes the functional of index $e$, and when no oracle is written, $\Phi_e(x)$ stands for $\Phi^{\emptyset}_e(x)$, $\Phi_e(x)[s]$ for $\Phi^{\emptyset}_e(x)[s]$ (defined below) and $W_e$ for $\dom(\Phi^{\emptyset}_e)$. The partial computable functions of that course are exactly the functions $\Phi^{\emptyset}_e$, or $\Phi^X_e$ for any computable $X$ (see the exercises of the next lesson), although a function need not have the same indices in the two enumerations. Since every ordinary machine is an oracle machine, every partial computable function is $\Phi^X_e$ for some $e$ and every $X$.
+
+A single functional behaves differently on different oracles, and the domain of $\Phi^X_e$ depends on $X$ in general.
+
+:::example{#ex-functionals}
+1. The machine which, on input $n$, moves its oracle head to cell $2n$ and outputs the bit it reads computes the functional $X \mapsto (n \mapsto X(2n))$. It is total for every oracle.
+2. The machine which, on input $n$, moves its oracle head to cell $n + 1$ and then to the right until it reads a $1$, and outputs the position of that cell, computes $n \mapsto \min \{ m > n : m \in X \}$. With an infinite oracle it is total; with a finite oracle $X$ it diverges on every $n \geq \max X$, and on every $n$ if $X = \emptyset$. The same machine thus computes a total function with some oracles and a partial one with others.
+:::
 
 :::example{#ex-oracle-domination}
 Let $X$ be an infinite set whose principal function $p_X$ (:ref{#lem-subsets-of-n}) grows fast enough that $\Phi_e(e)\converge$ implies $\Phi_e(e)[p_X(e)]\converge$, for every $e$. Then there is an oracle machine computing $\emptyset'$ with oracle $X$: on input $e$, read the oracle until its $e$-th element $p_X(e)$ is found, then run $\Phi_e(e)$ for $p_X(e)$ stages, and answer $1$ if and only if it has converged. Fast-growing sets can thus compute the halting set; this phenomenon is studied in the lesson on limit computability.
@@ -48,7 +57,7 @@ Let $X$ be an infinite set whose principal function $p_X$ (:ref{#lem-subsets-of-
 
 ## Computations with finite oracles
 
-A halting computation is finite, so it reads only finitely many cells of the oracle. This is the basis of everything that follows. For a string $\sigma$, the computation **with oracle $\sigma$** is the computation of the machine in which the oracle tape contains $\sigma(k)$ on the cells $k < |\sigma|$; it is considered **undefined** as soon as the oracle head reaches a cell $k \geq |\sigma|$.
+A halting computation is finite, so it reads only finitely many cells of the oracle. To exploit this, we give a meaning to computations with a finite string as oracle. For a string $\sigma$, the computation **with oracle $\sigma$** is the computation of the machine in which the oracle tape contains $\sigma(k)$ on the cells $k < |\sigma|$; it is considered **undefined** as soon as the oracle head reaches a cell $k \geq |\sigma|$. A computation with oracle $\sigma$ thus either halts having read only bits of $\sigma$, or runs forever within $\sigma$, or stops being defined because it asks for a bit that $\sigma$ does not provide.
 
 :::definition{#def-finite-oracle}
 For $\sigma \in \bstr$, $e, x, s \in \nat$:
@@ -57,6 +66,8 @@ For $\sigma \in \bstr$, $e, x, s \in \nat$:
 2. $\Phi^\sigma_e(x)[s]\converge = y$ means that moreover $e, x < s$ and the code of this computation is smaller than $s$;
 3. for $X \in \cs$, $\Phi^X_e(x)[s] \simeq \Phi^{X \uh s}_e(x)[s]$.
 :::
+
+Item 3 is the convention that at stage $s$ only the first $s$ bits of the oracle are available. Write $\Psi$ for the functional of the machine of item 2 of :ref{#ex-functionals}. Then $\Psi^{\sigma}(0)\converge = 2$ for $\sigma = 101$, a prefix of the set of even numbers, while the computation with oracle $\sigma = 10$ is undefined: it reaches cell $2$, beyond the end of the string.
 
 As in :ref{#thm-kleene-normal-form-proof}, the relation "$t$ codes a halting computation of the machine $e$ on input $x$ with oracle $\sigma$" is primitive recursive in $(\sigma, e, x, t)$: configurations now include the position of the oracle head, and each step consults one bit of $\sigma$, available since $\sigma$ is part of the data. A computation of code $t$ has fewer than $t$ steps, and the oracle head moves at most one cell per step, so it reads only cells $k < t$.
 
@@ -72,9 +83,15 @@ As in :ref{#thm-kleene-normal-form-proof}, the relation "$t$ codes a halting com
 3. If $\Phi^X_e(x)\converge = y$, let $t$ be the code of the computation with oracle $X$. It reads only cells $k < t$, so it is also the computation with oracle $X \uh t$, and $\Phi^X_e(x)[s]\converge = y$ for $s = \max(e, x, t) + 1$, since $X \uh t \preceq X \uh s$. If $\Phi^X_e(x)[s]\converge = y$, then $\sigma = X \uh s$ works. Finally, if $\Phi^\sigma_e(x)\converge = y$ with $\sigma \prec X$, the computation with oracle $X$ performs the same steps, by the argument of item 2.
 :::
 
+Item 3 is the form in which the proposition is used most often: convergence with an infinite oracle is a $\Sigma^0_1$ property of the oracle, witnessed by a prefix and a halting computation. Divergence is not witnessed in this way. That asymmetry reappears in every finite extension argument of this course, where convergence is secured by fixing a prefix, and divergence by showing that no prefix makes the computation converge.
+
+## The use principle
+
 :::definition{#def-use}
 If $\Phi^X_e(x)\converge$, the **use** of the computation, written $\use^X_e(x)$, is $1$ plus the largest cell read by the oracle head during the computation (the head reads cell $0$ initially, so the use is at least $1$).
 :::
+
+For the machine of item 2 of :ref{#ex-functionals}, with $X$ the set of even numbers, the computation on input $3$ reads the cells $0, 1, \dots, 4$ and outputs $4$; its use is $5$. In general the use of that machine on input $n$ is $1 + \min \{ m > n : m \in X \}$, which is not bounded by any function of $n$ alone: the use depends on the oracle.
 
 :::theorem[Use principle]{#thm-use-principle}
 If $\Phi^X_e(x)\converge = y$ with use $u$, then $\Phi^Y_e(x)\converge = y$, with the same use, for every $Y$ such that $Y \uh u = X \uh u$. In particular $\Phi^{X \uh u}_e(x)\converge = y$.
@@ -84,7 +101,7 @@ If $\Phi^X_e(x)\converge = y$ with use $u$, then $\Phi^Y_e(x)\converge = y$, wit
 By induction on the number of steps, the computations with oracles $X$ and $Y$ pass through the same configurations: the oracle head stays within the cells $k < u$ during the computation with oracle $X$, and there $X$ and $Y$ agree, so each step reads the same oracle bit. Hence the computation with oracle $Y$ halts after the same number of steps, with the same output, and reads the same cells. The last statement is the same argument with the finite oracle $X \uh u$, of length $u$.
 :::
 
-The use principle says that the value of a convergent computation depends only on a finite part of the oracle. In topological terms, which are developed in the course on $\Pi^0_1$ classes, the partial map $X \mapsto \Phi^X_e(x)$ is **continuous** on its domain, for the product topology on $\cs$: if $\Phi^X_e(x)\converge = y$, then $\Phi^Y_e(x)\converge = y$ on the whole open neighborhood $[X \uh u]$ of $X$.
+The use principle says that the value of a convergent computation depends only on a finite part of the oracle. In topological terms, which are developed in the course on $\Pi^0_1$ classes, the partial map $X \mapsto \Phi^X_e(x)$ is **continuous** on its domain, for the product topology on $\cs$: if $\Phi^X_e(x)\converge = y$, then $\Phi^Y_e(x)\converge = y$ on the whole open neighborhood $[X \uh u]$ of $X$. Consequently, a function on $\cs$ that is not continuous, such as the map sending $X$ to $1$ if $X$ is finite and to $0$ otherwise, is not computed by any functional.
 
 :::quiz[the use principle]
 Why do the cells read during a computation form an initial segment $\{0, \dots, u-1\}$ of the oracle tape?
@@ -122,88 +139,29 @@ Which statement is the content of item 3 of :ref{#prop-oracle-stages}?
 - [ ] Convergence with oracle $X$ is decidable from $X$.
 
   Convergence is witnessed at a finite stage, but divergence is not; deciding convergence with oracle $X$ is the jump of $X$, studied in a later lesson.
-:::
-
-## Relativization
-
-:::definition{#def-relative-computability}
-Let $X \in \cs$. A partial function is **$X$-computable**, or **computable in $X$**, if it is $\Phi^X_e$ for some $e$. A set is $X$-computable if its characteristic function is. A set is **$X$-computably enumerable**, or **$X$-c.e.**, if it is the domain of an $X$-computable partial function; we write $W^X_e = \dom(\Phi^X_e)$.
-:::
-
-Every argument of the course on fundamentals is an algorithm, or a construction of algorithms, and remains valid if all machines are given access to the same oracle $X$. This **relativization** yields, for each theorem, a version relative to $X$, obtained by replacing *computable* with *$X$-computable* and $\Phi_e$ with $\Phi^X_e$ throughout. For instance, relative to $X$, the c.e. sets are characterized as in :ref{#thm-ce-characterizations}, a set is $X$-computable if and only if it and its complement are $X$-c.e., and the fixed point theorem holds for $X$-computable transformations of indices. Two results deserve to be stated explicitly, because their relativized form is **uniform**: the objects they provide do not depend on $X$.
-
-:::theorem[Relativized universal function]{#thm-relativized-universal}
-There is an index $u$ such that $\Phi^X_u(e, x) \simeq \Phi^X_e(x)$ for every $X$, $e$ and $x$.
-:::
-
-:::proof{of=thm-relativized-universal}
-By :ref{#prop-oracle-stages}, $\Phi^X_e(x) \simeq U\big(\mu t\ T(X \uh t, e, x, t)\big)$, where $T(\sigma, e, x, t)$ is the primitive recursive relation "$t$ codes a halting computation of $e$ on $x$ with oracle $\sigma$". An oracle machine computes this expression: on input $(e, x)$, for $t = 0, 1, 2, \dots$, it reads $X \uh t$ on its oracle tape, and tests the relation. The same machine works for every oracle.
-:::
-
-:::theorem[Relativized SMN theorem]{#thm-relativized-smn}
-For all $m, n \geq 1$, the primitive recursive function $S^m_n$ of :ref{#thm-smn} satisfies, for every oracle $X$,
-$$
-\Phi^X_{S^m_n(e, \vec x)}(\vec y) \simeq \Phi^X_e(\vec x, \vec y).
-$$
-:::
-
-:::proof{of=thm-relativized-smn}
-The construction of :ref{#thm-smn} prepends to the machine $e$ a machine writing $\vec x$ on the work tape, without touching the oracle head. The resulting oracle machine first writes $\vec x$, then behaves as the machine $e$, with the same oracle; this does not depend on the oracle.
-:::
-
-The function $S^m_n$ is computable, not merely $X$-computable: it manipulates codes of machines and never consults the oracle. Uniformity of this kind is used repeatedly, for instance to show that the jump is monotone. In proofs, we use the parameter form: if $f(X, x, \vec y)$ is computed by an oracle machine, there is a computable $s$ with $\Phi^X_{s(x)}(\vec y) \simeq f(X, x, \vec y)$ for every $X$.
-
-:::remark[Relativization in complexity theory]{#rem-relativization}
-Almost all proofs of computability theory relativize. In complexity theory, this is a limitation: Baker, Gill and Solovay constructed oracles $A$ and $B$ with $\mathrm{P}^A = \mathrm{NP}^A$ and $\mathrm{P}^B \neq \mathrm{NP}^B$, so no relativizing argument can settle the question $\mathrm P = \mathrm{NP}$. We admit this result.
-:::
-
-:::quiz[relativization]
-What is the relativization to $X$ of the statement "the halting set $\emptyset'$ is not computable"?
-
-- [x] The set $\{ e : \Phi^X_e(e)\converge \}$ is not $X$-computable.
-
-  The definition of the halting set involves machines, and must itself be relativized.
-- [ ] The set $\emptyset'$ is not $X$-computable.
-
-  This is false for $X = \emptyset'$. Relativization replaces every machine by an oracle machine, including those in the definition of $\emptyset'$.
-- [ ] The set $\emptyset'$ is not computable, for every $X$.
-
-  This does not involve $X$ at all.
 
 ---
 
-Why is it useful that $S^m_n$ is computable rather than only $X$-computable?
+Why is the map $F(X) = 1$ if $X$ is finite, $F(X) = 0$ otherwise, not computed by any functional?
 
-- [x] Because the same function then works for all oracles at once, which allows comparing computations relative to different oracles.
+- [x] If $\Phi^X_e(0) = F(X)$ for every $X$, the computation with oracle $\emptyset$ outputs $1$ with some use $u$; the infinite set $Y = \{ n : n \geq u \}$ agrees with $\emptyset$ below $u$, so $\Phi^Y_e(0) = 1$, while $F(Y) = 0$.
 
-  For instance, a reduction between relativized halting sets $X'$ and $Y'$ must not depend on the oracle.
-- [ ] Because $X$-computable functions are not total.
+  The use principle forbids a functional from distinguishing two oracles that agree on the cells it reads.
+- [ ] Because the set of finite sets is countable.
 
-  An $X$-computable function may well be total.
-- [ ] It makes no difference.
+  Countability plays no role: what matters is that finiteness cannot be detected from a prefix.
+- [ ] Because $F$ takes only two values.
 
-  It matters when computations relative to different oracles are compared, for instance to show that the jump is monotone.
+  Many computable maps take only two values, for instance $X \mapsto X(0)$.
 :::
-
-## Oracles that are functions
-
-A function $f : \nat \to \nat$ can also serve as an oracle, through its graph: let $G_f = \{ \langle x, y \rangle : f(x) = y \}$, a subset of $\nat$. A machine with oracle $G_f$ can compute $f(x)$ by searching for the $y$ with $\langle x, y \rangle \in G_f$; conversely, a machine that can compute $f$ can decide $G_f$. We say that a set or a function is **$f$-computable** if it is $G_f$-computable. Computing with an oracle $f$ is therefore computing with the ability to evaluate $f$ at any point.
 
 ## Exercises
-
-::::exercise{difficulty=1}
-Show that if $X$ is computable, then the $X$-computable partial functions are exactly the partial computable functions.
-
-:::solution
-A partial computable function is computed by a machine that ignores its oracle. Conversely, let $X = \Phi_c$ be computable and let $f = \Phi^X_e$. Replace each consultation of the oracle tape at cell $k$ by a computation of $\Phi_c(k)$; more precisely, $f(x) \simeq U(\mu t\ T(\sigma_t, e, x, t))$ where $\sigma_t = \Phi_c(0) \cdots \Phi_c(t-1)$ is computable from $t$. This expression is partial computable.
-:::
-::::
 
 ::::exercise{difficulty=1}
 Show that the partial function $(X, e, x) \mapsto \use^X_e(x)$ is computed by an oracle machine: there is $v$ with $\Phi^X_v(e, x) \simeq \use^X_e(x)$ for every $X$, $e$ and $x$.
 
 :::solution
-On input $(e, x)$ with oracle $X$, search for the least $t$ with $T(X \uh t, e, x, t)$, as in :ref{#thm-relativized-universal}; the computation coded by $t$ is then known, and the use is $1$ plus the largest oracle head position appearing in its configurations. If $\Phi^X_e(x)\diverge$, the search diverges, as it should.
+Let $T(\sigma, e, x, t)$ be the primitive recursive relation "$t$ codes a halting computation of $e$ on $x$ with oracle $\sigma$". On input $(e, x)$ with oracle $X$, for $t = 0, 1, 2, \dots$, read $X \uh t$ on the oracle tape and test $T(X \uh t, e, x, t)$. By :ref{#prop-oracle-stages}, the search terminates if and only if $\Phi^X_e(x)\converge$, and then $t$ codes the computation with oracle $X$, since that computation reads only cells below its code. The use is $1$ plus the largest oracle head position appearing in the configurations coded by $t$, which is computed from $t$. If $\Phi^X_e(x)\diverge$, the search diverges, as it should.
 :::
 ::::
 
@@ -223,9 +181,9 @@ Fix $x$, and let $T_x$ be the set of strings $\sigma$ such that $\Phi^{\tau}_e(x
 
 ## Notes and references
 
-Oracle machines were introduced by Turing in his Princeton thesis, published in 1939, in the study of ordinal logics. Post (1944, 1948) and Kleene and Post (1954) made relative computability the central notion of the theory. The model with an oracle tape follows Rogers' and Soare's textbooks; models with query states give the same notion of relative computability.
+Oracle machines were introduced by Turing in his Princeton thesis, published in 1939, in the study of ordinal logics. Post (1944, 1948) and Kleene and Post (1954) made relative computability the central notion of the theory; the paper of Kleene and Post set out the properties of oracle computations, the use principle among them (Soare 2016, §6.1). The model with an oracle tape follows Soare's textbook (Definition 3.2.1); models with query states give the same notion of relative computability. Conventions on the use differ by one: Soare defines it as the largest cell read, Downey and Hirschfeldt, like this course, as $1$ plus the largest cell read. The use principle is Theorem 3.3.9 of Soare (2016) and Proposition 2.4.1 of Downey and Hirschfeldt (2010); Monin and Patey treat oracle computations and the use property in the chapter on Turing degrees.
 
 - A. M. Turing, *Systems of logic based on ordinals*, Proceedings of the London Mathematical Society (2) 45 (1939), 161–228.
 - S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.
-- T. Baker, J. Gill and R. Solovay, *Relativizations of the P =? NP question*, SIAM Journal on Computing 4 (1975), 431–442.
-- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §§3.1–3.3.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.4.

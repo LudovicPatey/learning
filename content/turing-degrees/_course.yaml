@@ -17,4 +17,4 @@ objectives:
   - Characterize the sets computable in the halting problem by limit approximations
   - Build sets with prescribed properties by finite extensions
   - Construct non-computable low sets and incomplete high sets
-lessons: [oracle-computation, turing-reducibility, turing-jump, limit-computability, finite-extensions, low-and-high]
+lessons: [oracle-computation, relativization, turing-reducibility, turing-jump, limit-computability, finite-extensions, low-and-high]

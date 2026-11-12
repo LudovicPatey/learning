@@ -1,8 +1,8 @@
 ---
 title: The finite extension method
 summary: Constructions by finite extensions; the Kleene–Post theorem on incomparable degrees below 0′; avoiding the cone above a non-computable set; 1-generic sets.
-duration: 45
-prerequisites: [turing-jump, countability/diagonalization-and-computation]
+duration: 55
+prerequisites: [turing-jump, countability/requirements]
 ---
 
 Many questions about the Turing degrees ask for a set that is neither too strong nor too weak: a set that does not compute some given set, but that is not computable either. Such sets are built by **finite extensions**: the set is determined by an increasing sequence of strings, and each requirement it must satisfy is secured by a finite piece of information. This method appeared in the course on countability (:ref{#lem-finite-extension}); here it is applied to requirements about oracle computations, where the use principle makes it work. The constructions answer the first questions about the structure of the degrees: the order is not linear, and there are degrees strictly between $\obf$ and $\obf'$.
@@ -25,7 +25,7 @@ Let $(D_n)_{n \in \nat}$ be a sequence of dense sets. Then some $X$ meets every 
 Let $h$ be any function with $h(n, \sigma) \succeq \sigma$ and $h(n, \sigma) \in D_n$ for all $n$ and $\sigma$; for the first statement, take $h(n, \sigma)$ to be the first extension of $\sigma$ in $D_n$, in a fixed computable enumeration of $\bstr$. Define $\sigma_0 = \varepsilon$ and $\sigma_{n+1} = h(n, \sigma_n)\, 0$. The strings $\sigma_0 \prec \sigma_1 \prec \cdots$ have strictly increasing lengths, and determine a unique $X$ with $\sigma_n \prec X$ for every $n$. Since $h(n, \sigma_n) \prec X$ belongs to $D_n$, $X$ meets $D_n$. If $h$ is $Z$-computable, so is the sequence $(\sigma_n)$, and $X(k)$ is the bit at position $k$ of $\sigma_{k+1}$, whose length exceeds $k$; so $X \leq_T Z$.
 :::
 
-The appended bit $0$ ensures that the lengths increase; it does no harm, since a string extending a member of $D_n$ still forces what that member forces.
+The appended bit $0$ ensures that the lengths increase; it does no harm, since a string extending a member of $D_n$ still forces what that member forces. The lemma isolates the combinatorial core of the method; in each application below, the work consists in showing that the relevant sets of strings are dense, and in measuring how much oracle is needed to find extensions in them.
 
 ## Incomparable degrees
 
@@ -48,6 +48,10 @@ We define pairs of strings $(\sigma_n, \tau_n)$ with $\sigma_n \preceq \sigma_{n
 - Otherwise, set $\sigma_{n+1} = \sigma_n$ and $\tau_{n+1} = \tau_n$. For every $A \succ \sigma_n$, $\Phi^A_e(x)\diverge$: a convergent computation would converge already with a prefix of $A$ extending $\sigma_n$ (:ref{#prop-oracle-stages}).
 
 In both cases, $\mathcal R_e$ holds for every pair of sets extending $(\sigma_{n+1}, \tau_{n+1})$, and therefore for $(A, B)$. The requirements $\mathcal S_e$ are satisfied symmetrically.
+
+:::figure[The first steps of the Kleene–Post construction, in the case where every search succeeds. At step $\mathcal R_0$, the string for $A$ is extended until $\Phi_0$ converges at the first free position $x$ of $B$, and $B(x)$ is set to the opposite value; at step $\mathcal S_0$ the roles are exchanged. Each step ends by appending $0$ to both strings.]
+<svg class="fig" viewBox="0 0 520 200" width="520" role="img" aria-label="The first three steps of the Kleene–Post construction: each step extends one string by a search and the other by one diagonal bit"><defs><marker id="ah-kp" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><text x="64" y="58" text-anchor="end" class="math" font-size="17">A</text><rect x="80" y="40" width="26" height="26" class="cell head-cell"/><rect x="106" y="40" width="26" height="26" class="cell head-cell"/><rect x="132" y="40" width="26" height="26" class="cell head-cell"/><rect x="158" y="40" width="26" height="26" class="cell head-cell"/><text x="132.0" y="30" text-anchor="middle" class="math muted" font-size="15">R<tspan class="mrm" font-size="10" dy="4">0</tspan></text><rect x="184" y="40" width="26" height="26" class="cell"/><text x="197.0" y="58" text-anchor="middle" class="mrm muted" font-size="14">0</text><rect x="210" y="40" width="26" height="26" class="cell"/><rect x="214" y="44" width="18" height="18" class="accent-fill" opacity="0.85"/><text x="223.0" y="30" text-anchor="middle" class="math muted" font-size="15">S<tspan class="mrm" font-size="10" dy="4">0</tspan></text><rect x="236" y="40" width="26" height="26" class="cell"/><text x="249.0" y="58" text-anchor="middle" class="mrm muted" font-size="14">0</text><rect x="262" y="40" width="26" height="26" class="cell head-cell"/><rect x="288" y="40" width="26" height="26" class="cell head-cell"/><rect x="314" y="40" width="26" height="26" class="cell head-cell"/><text x="301.0" y="30" text-anchor="middle" class="math muted" font-size="15">R<tspan class="mrm" font-size="10" dy="4">1</tspan></text><rect x="340" y="40" width="26" height="26" class="cell"/><text x="353.0" y="58" text-anchor="middle" class="mrm muted" font-size="14">0</text><text x="374" y="58" class="mrm muted" font-size="15">⋯</text><text x="64" y="138" text-anchor="end" class="math" font-size="17">B</text><rect x="80" y="120" width="26" height="26" class="cell"/><rect x="84" y="124" width="18" height="18" class="accent-fill" opacity="0.85"/><text x="93.0" y="166" text-anchor="middle" class="math muted" font-size="15">R<tspan class="mrm" font-size="10" dy="4">0</tspan></text><rect x="106" y="120" width="26" height="26" class="cell"/><text x="119.0" y="138" text-anchor="middle" class="mrm muted" font-size="14">0</text><rect x="132" y="120" width="26" height="26" class="cell head-cell"/><rect x="158" y="120" width="26" height="26" class="cell head-cell"/><rect x="184" y="120" width="26" height="26" class="cell head-cell"/><rect x="210" y="120" width="26" height="26" class="cell head-cell"/><rect x="236" y="120" width="26" height="26" class="cell head-cell"/><text x="197.0" y="166" text-anchor="middle" class="math muted" font-size="15">S<tspan class="mrm" font-size="10" dy="4">0</tspan></text><rect x="262" y="120" width="26" height="26" class="cell"/><text x="275.0" y="138" text-anchor="middle" class="mrm muted" font-size="14">0</text><rect x="288" y="120" width="26" height="26" class="cell"/><rect x="292" y="124" width="18" height="18" class="accent-fill" opacity="0.85"/><text x="301.0" y="166" text-anchor="middle" class="math muted" font-size="15">R<tspan class="mrm" font-size="10" dy="4">1</tspan></text><rect x="314" y="120" width="26" height="26" class="cell"/><text x="327.0" y="138" text-anchor="middle" class="mrm muted" font-size="14">0</text><text x="348" y="138" class="mrm muted" font-size="15">⋯</text><path d="M132.0,66 C132.0,96 93.0,90 93.0,118" class="ink-stroke" stroke-width="1.2" marker-end="url(#ah-kp)"/><path d="M197.0,118 C197.0,90 223.0,96 223.0,68" class="ink-stroke" stroke-width="1.2" marker-end="url(#ah-kp)"/><rect x="300" y="176" width="14" height="14" class="cell head-cell"/><text x="320" y="187" class="label">extension found by search</text><rect x="80" y="176" width="14" height="14" class="cell"/><rect x="83" y="179" width="8" height="8" class="accent-fill"/><text x="100" y="187" class="label">diagonal bit</text><text x="190" y="187" class="label">0: padding</text></svg>
+:::
 
 *Effectivity.* The only non-computable step is the case distinction, the question "is there $\sigma \succeq \sigma_n$ with $\Phi^\sigma_e(x)\converge$?". It is a c.e. question about $(e, x, \sigma_n)$, so $\emptyset'$ answers it; and in the first case, the string $\sigma$ is then found by a computable search. So the whole sequence of pairs is computable in $\emptyset'$, and so are $A$ and $B$.
 :::
@@ -122,6 +126,8 @@ Let $\sigma$ be a string, and suppose that no extension of $\sigma$ belongs to $
 By :ref{#lem-meet-dense}, some $B$ meets every $D_e$, and then $C \not\leq_T B$. To ensure also $B \not\leq_T A$, add the dense sets $E_e = \{ \tau : \exists x < |\tau|\ \ \Phi^A_e(x)\converge \neq \tau(x) \} \cup \{ \tau : \exists x < |\tau|\ \ \Phi^A_e(x)\diverge \}$: given $\sigma$, let $x = |\sigma|$; if $\Phi^A_e(x)\converge = i$, the string $\sigma\, (1 - i)$ belongs to $E_e$ (with $1 - i$ replaced by $0$ if $i \notin \{0, 1\}$), and otherwise $\sigma 0$ does. A set meeting every $E_e$ is not computable in $A$.
 :::
 
+The hypothesis on $C$ cannot be dropped: if $C$ is computable, say $C = \Phi_e^X$ for every $X$ with a machine $e$ that ignores its oracle, then no string belongs to $D_e$, and every set computes $C$.
+
 Taking $A = C$ gives a set $B$ incomparable with $C$. So every non-computable degree is incomparable with some degree; in particular no degree other than $\obf$ is comparable with all degrees.
 
 :::quiz[cone avoidance]
@@ -156,7 +162,11 @@ The sets built by the most general finite extension arguments share a common pro
 A set $G$ is **1-generic** if for every c.e. set of strings $W$, there is a prefix $\sigma \prec G$ such that either $\sigma \in W$, or no extension of $\sigma$ belongs to $W$.
 :::
 
-In words: for every c.e. property of strings, $G$ either meets it, or has a prefix beyond which it can never be met. Equivalently, $G$ meets the dense set $W \cup \{ \sigma : \text{no extension of } \sigma \text{ is in } W \}$ for every c.e. $W$.
+In words: for every c.e. property of strings, $G$ either meets it, or has a prefix beyond which it can never be met. Equivalently, $G$ meets the dense set $W \cup \{ \sigma : \text{no extension of } \sigma \text{ is in } W \}$ for every c.e. $W$. The definition does not require $W$ to be dense; when $W$ is dense, the second alternative is impossible, and $G$ meets $W$.
+
+:::example{#ex-1-generic}
+For each $n$, the set $W_n$ of strings containing $n$ consecutive $1$s is computable and dense, so every 1-generic set contains $n$ consecutive integers, for every $n$. Likewise it contains $n$ consecutive non-elements. In particular the set of even numbers is not 1-generic, and neither is any set whose elements are spread out in a computable pattern. A 1-generic set looks typical from the point of view of c.e. properties of its prefixes.
+:::
 
 :::proposition{#prop-1-generic}
 1. There is a 1-generic set computable in $\emptyset'$.
@@ -198,8 +208,10 @@ Let $\bar\sigma$ be the string obtained from $\sigma$ by flipping all its bits; 
 
 ## Notes and references
 
-The incomparable degrees below $\obf'$ are due to Kleene and Post (1954), who introduced the finite extension method. The cone avoidance theorem is folklore; it also follows from results of Sacks on the measure and category of upper cones. 1-generic sets were introduced by Jockusch (1980), following Feferman's adaptation of Cohen's forcing to arithmetic (1965); they are studied in the course on Cohen genericity.
+The incomparable degrees below $\obf'$ are due to Kleene and Post (1954), who introduced the finite extension method (Soare 2016, Theorem 6.1.1; Downey and Hirschfeldt 2010, Theorem 2.10.2; Nies 2009, §1.6). The cone avoidance theorem is folklore; Soare (2016, Theorem 6.2.6) gives the case $A = C$, with the additional bound $B \leq_T C'$. The density of the sets $D_e$ says that the upper cone of a non-computable set is meager, as the course on Cohen genericity explains; the cone is also null, by a theorem of Sacks (1963), which also follows from earlier work of de Leeuw, Moore, Shannon and Shapiro (1956) (Downey and Hirschfeldt 2010, §8.12). 1-generic sets were introduced by Jockusch (1980), following Feferman's adaptation of Cohen's forcing to arithmetic (1965); they are studied in the course on Cohen genericity (Soare 2016, §6.3; Downey and Hirschfeldt 2010, §2.24).
 
 - S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.
 - C. G. Jockusch, *Degrees of generic sets*, in *Recursion Theory: its Generalisations and Applications*, London Mathematical Society Lecture Note Series 45, Cambridge University Press, 1980, 110–139.
 - S. Feferman, *Some applications of the notions of forcing and generic sets*, Fundamenta Mathematicae 56 (1965), 325–345.
+- G. E. Sacks, *Degrees of Unsolvability*, Annals of Mathematics Studies 55, Princeton University Press, 1963.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §§6.1–6.3.
