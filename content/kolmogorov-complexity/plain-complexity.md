@@ -1,15 +1,15 @@
 ---
 title: Plain Kolmogorov complexity
-summary: The complexity of a string is the length of its shortest description by an optimal machine; the invariance theorem; incompressible strings; the complexity function is not computable but is approximable from above.
-duration: 40
+summary: The complexity of a string is the length of its shortest description by an optimal machine; the invariance theorem; most strings are incompressible; the complexity of pairs.
+duration: 45
 prerequisites: [fundamentals/ce-sets]
 ---
 
-The string $0000\cdots0$ of length one million can be described in a few words, while a typical string obtained by tossing a coin one million times seems to admit no description shorter than itself. Kolmogorov complexity makes this distinction precise: the complexity of a string is the length of its shortest description, where descriptions are inputs of an algorithm that reconstructs the string. The definition depends on the algorithm, but only up to an additive constant, provided that the algorithm is optimal. This lesson sets up the definition, proves that most strings are incompressible, and shows that the complexity function is not computable.
+The string $0000\cdots0$ of length one million can be described in a few words, while a typical string obtained by tossing a coin one million times seems to admit no description shorter than itself. Kolmogorov complexity makes this distinction precise: the complexity of a string is the length of its shortest description, where descriptions are inputs of an algorithm that reconstructs the string. The definition depends on the algorithm, but only up to an additive constant, provided that the algorithm is optimal. This lesson sets up the definition, proves that most strings are incompressible, and shows that the complexity of a pair is not bounded by the sum of the complexities of its components. The next lesson shows that the complexity function is not computable.
 
 ## Conventions
 
-We work with binary strings $\bstr$. Natural numbers are identified with strings through the **length-lexicographic** enumeration $\varepsilon, 0, 1, 00, 01, 10, 11, 000, \dots$: the number $n$ is the $n$-th string in this list, counting from $0$. The string associated with $n$ has length $\lfloor \log(n + 1) \rfloor$, where $\log$ denotes the logarithm in base $2$. The number of strings of length less than $n$ is $2^n - 1$.
+We work with binary strings $\bstr$. Natural numbers are identified with strings through the **length-lexicographic** enumeration $\varepsilon, 0, 1, 00, 01, 10, 11, 000, \dots$: the number $n$ is the $n$-th string in this list, counting from $0$. The string associated with $n$ has length $\lfloor \log(n + 1) \rfloor$, where $\log$ denotes the logarithm in base $2$. The number of strings of length less than $n$ is $2^n - 1$. The **binary representation** of a number, which is used occasionally, is a different coding; it is always named as such.
 
 We fix a computable bijection $\langle \cdot, \cdot \rangle : \bstr \times \bstr \to \bstr$ for coding pairs. All partial computable functions between countable sets of finite objects are understood through these codings.
 
@@ -23,13 +23,15 @@ $$
 with $C_M(\sigma) = \infty$ if $\sigma$ has no $M$-description.
 :::
 
-For instance, the identity machine gives $C_M(\sigma) = |\sigma|$, and the machine $\tau \mapsto 0^{n}$, where $n$ is the number coded by $\tau$, describes $0^n$ with about $\log n$ bits. A machine that compresses some strings well may compress others badly; the following notion selects the machines that are optimal up to a constant.
+For instance, the identity machine gives $C_M(\sigma) = |\sigma|$, and the machine $\tau \mapsto 0^{n}$, where $n$ is the number coded by $\tau$, describes $0^n$ with about $\log n$ bits. The machine $\tau \mapsto 0^{2^{2^n}}$, with $n$ again the number coded by $\tau$, compresses even more: the string $0^{2^{2^n}}$ has a description of length about $\log n$. A machine that compresses some strings well may compress others badly. A single machine can even describe any one given string with the empty description: for a fixed $\sigma$, the machine $M_\sigma$ with $M_\sigma(\varepsilon) = \sigma$ gives $C_{M_\sigma}(\sigma) = 0$. So no machine is better than all others without an additive cost, and the right notion is optimality up to a constant depending on the machine compared.
 
 We write $f \leq^+ g$ if there is a constant $c$ such that $f(x) \leq g(x) + c$ for every $x$, and $f =^+ g$ if $f \leq^+ g$ and $g \leq^+ f$.
 
 :::definition{#def-optimal-machine}
 A machine $U$ is **optimal**, or **universal**, if for every machine $M$ there is a constant $c_M$ with $C_U(\sigma) \leq C_M(\sigma) + c_M$ for every string $\sigma$, that is, $C_U \leq^+ C_M$.
 :::
+
+The idea of the next proof is that a universal machine can simulate any machine $M_e$ once it knows the index $e$. A description for the universal machine is therefore an index followed by an $M_e$-description. The index must be written so that the machine can tell where it ends, and its length is the constant $c_M$.
 
 :::theorem[Invariance theorem; Solomonoff, Kolmogorov]{#thm-invariance}
 There is an optimal machine. If $U$ and $V$ are optimal, then $C_U =^+ C_V$.
@@ -41,7 +43,7 @@ Let $(M_e)$ be an enumeration of the machines, with $M_e(\tau) = \Phi_e(\tau)$ t
 If $U$ and $V$ are optimal, then $C_U \leq^+ C_V$ by optimality of $U$ applied to the machine $V$, and symmetrically.
 :::
 
-We fix an optimal machine $U$ once and for all, and write $C(\sigma) = C_U(\sigma)$, the **(plain) Kolmogorov complexity** of $\sigma$. By the invariance theorem, the statements of the form $f \leq^+ g$ involving $C$ do not depend on this choice. For a number $n$, $C(n)$ is the complexity of the string associated with $n$.
+We fix an optimal machine $U$ once and for all, and write $C(\sigma) = C_U(\sigma)$, the **(plain) Kolmogorov complexity** of $\sigma$. By the invariance theorem, the statements of the form $f \leq^+ g$ involving $C$ do not depend on this choice. A statement about the value of $C$ at a particular string, such as $C(0101) = 3$, depends on $U$ and has no intrinsic meaning: the theory is asymptotic. For a number $n$, $C(n)$ is the complexity of the string associated with $n$.
 
 :::proposition{#prop-c-basic}
 1. $C(\sigma) \leq^+ |\sigma|$.
@@ -55,13 +57,15 @@ We fix an optimal machine $U$ once and for all, and write $C(\sigma) = C_U(\sigm
 3. The first inequality is 1, since the string associated with $n$ has length $\lfloor \log(n+1) \rfloor \leq \log n + 1$. The second is 2 with $f(\sigma) = |\sigma|$.
 :::
 
-The second item says that an algorithm cannot create information: the complexity of the output of a computation is bounded by the complexity of its input, up to a constant depending only on the algorithm.
+The second item says that an algorithm cannot create information: the complexity of the output of a computation is bounded by the complexity of its input, up to a constant depending only on the algorithm. If $f$ is a computable bijection, the inequality holds in both directions, so $C(f(\sigma)) =^+ C(\sigma)$; this is why the choice of the codings of numbers and pairs does not matter.
 
 ## Incompressible strings
 
 :::definition{#def-incompressible}
 A string $\sigma$ is **$c$-incompressible** if $C(\sigma) \geq |\sigma| - c$.
 :::
+
+For instance, for every $c$, the string $0^n$ is not $c$-incompressible when $n$ is large enough, since $C(0^n) \leq^+ \log n$ by :ref{#ex-compressible-strings} below, and $\log n + O(1) < n - c$ for large $n$. The proposition below shows that, on the contrary, most strings are incompressible. Its proof is the **counting argument**, the basic technique of the subject: there are fewer short descriptions than strings.
 
 :::proposition{#prop-incompressible-count}
 For every $n$ and $c$, fewer than $2^{n-c}$ strings $\sigma$ satisfy $C(\sigma) < n - c$. In particular, for every $n$ there is a string of length $n$ with $C(\sigma) \geq n$, and at least $2^n - 2^{n-c}$ strings of length $n$ are $c$-incompressible.
@@ -71,7 +75,7 @@ For every $n$ and $c$, fewer than $2^{n-c}$ strings $\sigma$ satisfy $C(\sigma) 
 A string $\sigma$ with $C(\sigma) < n - c$ has a description of length less than $n - c$, and distinct strings have distinct descriptions, since $U$ is a function. There are $2^{n-c} - 1$ strings of length less than $n - c$.
 :::
 
-So at least half of the strings of each length are $1$-incompressible, and the proportion of strings of length $n$ that can be compressed by more than $c$ bits, that is, with $C(\sigma) < n - c$, is less than $2^{-c}$. Incompressibility is the first formal approximation of randomness for finite strings: a string with a regularity that an algorithm can exploit is compressible.
+So at least half of the strings of each length are $1$-incompressible, and the proportion of strings of length $n$ that can be compressed by more than $c$ bits, that is, with $C(\sigma) < n - c$, is less than $2^{-c}$. Incompressibility is the first formal approximation of randomness for finite strings: a string with a regularity that an algorithm can exploit is compressible. The proof does not exhibit an incompressible string, and the next lesson shows that no algorithm can produce infinitely many of them.
 
 :::example{#ex-compressible-strings}
 1. $C(0^n) =^+ C(n) \leq^+ \log n$ for $n \geq 1$: item 2 of :ref{#prop-c-basic}, applied to the computable function $n \mapsto 0^n$, gives $C(0^n) \leq^+ C(n)$, and item 3 gives $C(n) = C(|0^n|) \leq^+ C(0^n)$.
@@ -79,19 +83,7 @@ So at least half of the strings of each length are $1$-incompressible, and the p
 3. Let $\sigma$ be a string of length $n$ containing exactly $k$ ones. It is determined by $n$, $k$ and its rank among the $\binom{n}{k}$ strings of length $n$ with $k$ ones. When $k \leq n/4$, the number $\log \binom{n}{k}$ is at most $n h(1/4) < 0.82\, n$, where $h(p) = -p \log p - (1 - p) \log (1 - p)$ is the binary entropy function, and $\sigma$ is compressible by a linear number of bits for large $n$. For the bound, let $p = k/n$ with $0 < k \leq n/4$: the term of index $k$ in the binomial expansion of $(p + (1 - p))^n = 1$ gives $\binom{n}{k} p^k (1 - p)^{n - k} \leq 1$, that is, $\log \binom{n}{k} \leq n h(p)$, and $h(p) \leq h(1/4)$ since $h$ is increasing on $[0, 1/2]$. The triple is coded with a logarithmic overhead by the technique of :ref{#prop-c-pairs} below.
 :::
 
-## Pairs
-
-The complexity of a pair is not bounded by the sum of the complexities. A description of $\sigma$ followed by a description of $\tau$ does not tell where the first one ends. The length of the first description has to be coded as well.
-
-:::proposition{#prop-c-pairs}
-$C(\langle \sigma, \tau \rangle) \leq^+ C(\sigma) + C(\tau) + 2 \log C(\sigma)$, where $\log 0$ is read as $0$.
-:::
-
-:::proof{of=prop-c-pairs}
-For a string $\rho = \rho_0 \cdots \rho_{k-1}$, let $\bar\rho = \rho_0 \rho_0 \rho_1 \rho_1 \cdots \rho_{k-1} \rho_{k-1}$. A string of the form $\bar\rho\, 01\, \alpha$ determines $\rho$ and $\alpha$: read pairs of bits until the first pair $01$. Let $M$ be the machine that, on an input of the form $\bar\rho\, 01\, \alpha$, interprets $\rho$ as a number $\ell$, splits $\alpha = \alpha_0 \alpha_1$ with $|\alpha_0| = \ell$, and outputs $\langle U(\alpha_0), U(\alpha_1) \rangle$. If $\alpha_0$ and $\alpha_1$ are shortest descriptions of $\sigma$ and $\tau$, and $\rho$ is the string of the number $|\alpha_0| = C(\sigma)$, the input has length $2|\rho| + 2 + C(\sigma) + C(\tau)$, and $|\rho| \leq \log C(\sigma) + 1$. Conclude by optimality of $U$.
-:::
-
-The logarithmic term cannot be replaced by a constant. Fix $n \geq 1$. There are $(n + 1) 2^n$ pairs $(\sigma, \tau)$ with $|\sigma| + |\tau| = n$, and their codes $\langle \sigma, \tau \rangle$ are distinct. By the argument of :ref{#prop-incompressible-count}, fewer than $2^{n + \lfloor \log n \rfloor} \leq n 2^n$ strings have complexity less than $n + \lfloor \log n \rfloor$, so one of these pairs satisfies $C(\langle \sigma, \tau \rangle) \geq n + \lfloor \log n \rfloor$. With $d$ such that $C(\rho) \leq |\rho| + d$ for every $\rho$, this pair also satisfies $C(\sigma) + C(\tau) \leq n + 2d$, so the difference is at least $\lfloor \log n \rfloor - 2d$, which is unbounded. This defect motivates the prefix-free complexity of a later lesson.
+The third example says that an incompressible string satisfies a weak form of the law of large numbers: its proportion of ones cannot stay below $1/4$ for large $n$. Statistical regularities of random strings are obtained in this way, as consequences of incompressibility.
 
 :::quiz[the invariance theorem and its consequences]
 In the proof of :ref{#thm-invariance}, why are descriptions for $U$ of the form $0^e 1 \tau$, rather than $e\tau$ with $e$ written in binary?
@@ -108,7 +100,7 @@ In the proof of :ref{#thm-invariance}, why are descriptions for $U$ of the form 
 
 Why does :ref{#prop-incompressible-count} not exhibit a particular incompressible string?
 
-- [x] It is a counting argument: it shows that the strings of small complexity are few, without saying which strings they are, and no algorithm can list incompressible strings, as the next section shows.
+- [x] It is a counting argument: it shows that the strings of small complexity are few, without saying which strings they are; the next lesson shows that no algorithm can list infinitely many incompressible strings.
 - [ ] Because incompressible strings of length $n$ exist only for large $n$.
 
   They exist for every $n$, including $n = 0$: $C(\varepsilon) \geq 0$.
@@ -117,84 +109,67 @@ Why does :ref{#prop-incompressible-count} not exhibit a particular incompressibl
   The argument is finite counting.
 :::
 
-## Non-computability
+## Pairs
 
-:::theorem{#thm-c-not-computable}
-1. The function $C$ is not computable. More precisely, if $g : \bstr \to \nat$ is a partial computable function such that $g(\sigma) \leq C(\sigma)$ for every $\sigma$ in its domain, then $g$ is bounded.
-2. The function $C$ is **approximable from above**: there is a computable function $(s, \sigma) \mapsto C_s(\sigma)$, non-increasing in $s$, with $\lim_s C_s(\sigma) = C(\sigma)$.
+The complexity of a pair is not bounded by the sum of the complexities. A description of $\sigma$ followed by a description of $\tau$ does not tell where the first one ends. The length of the first description has to be coded as well, in a form that indicates its own end: each of its bits is doubled, and the pair $01$, which cannot occur at an odd position of a doubled string, marks the end.
+
+:::figure[A description of $\langle \sigma, \tau \rangle$ for the machine of the proof below. The number $\ell = C(\sigma)$, written with each bit doubled and followed by $01$, tells where the shortest description $\alpha_0$ of $\sigma$ ends and the shortest description $\alpha_1$ of $\tau$ begins.]
+<svg class="fig" viewBox="0 0 600 170" width="600" role="img" aria-label="An input of the machine of the pair proposition: the length of the first description written with doubled bits, the separator 01, then the two descriptions"><rect x="20" y="60" width="160" height="30" class="cell"/><text x="100.0" y="80" text-anchor="middle" class="math" font-size="16">ρ</text><line x1="94.0" y1="66" x2="106.0" y2="66" class="ink-stroke" stroke-width="1"/><rect x="180" y="60" width="34" height="30" class="cell head-cell"/><text x="197.0" y="80" text-anchor="middle" class="math" font-size="16">01</text><rect x="214" y="60" width="150" height="30" class="cell"/><text x="289.0" y="80" text-anchor="middle" class="math" font-size="16">α₀</text><rect x="364" y="60" width="190" height="30" class="cell"/><text x="459.0" y="80" text-anchor="middle" class="math" font-size="16">α₁</text><path d="M21.0,46.0 L21.0,52.0 L179.0,52.0 L179.0,46.0" class="ink-stroke" stroke-width="1.1"/><text x="100.0" y="38" text-anchor="middle" class="label">ℓ = |α₀|, bits doubled</text><path d="M215.0,46.0 L215.0,52.0 L363.0,52.0 L363.0,46.0" class="ink-stroke" stroke-width="1.1"/><text x="289.0" y="38" text-anchor="middle" class="label">shortest description of σ</text><path d="M365.0,46.0 L365.0,52.0 L553.0,52.0 L553.0,46.0" class="ink-stroke" stroke-width="1.1"/><text x="459.0" y="38" text-anchor="middle" class="label">shortest description of τ</text><path d="M21.0,104.0 L21.0,98.0 L179.0,98.0 L179.0,104.0" class="muted-stroke" stroke-width="1.1"/><text x="100.0" y="116" text-anchor="middle" class="label">≈ 2 log C(σ) bits</text><path d="M215.0,130.0 L215.0,124.0 L553.0,124.0 L553.0,130.0" class="muted-stroke" stroke-width="1.1"/><text x="384.0" y="142" text-anchor="middle" class="label">C(σ) + C(τ) bits, split after the first ℓ</text></svg>
 :::
 
-:::proof{of=thm-c-not-computable}
-1. Suppose that $g$ is unbounded on its domain. Let $f(n)$ be the first string $\sigma$ found, in an enumeration of the domain of $g$, with $g(\sigma) > n$. Then $f$ is total computable, and $C(f(n)) \geq g(f(n)) > n$. By :ref{#prop-c-basic}, $C(f(n)) \leq^+ C(n) \leq^+ \log n$. So $n < \log n + c$ for some constant $c$ and every $n \geq 1$, which fails for large $n$. If $C$ were computable, it would be such a function $g$, and it is unbounded by :ref{#prop-incompressible-count}.
-2. Let $d$ be a constant with $C(\sigma) \leq |\sigma| + d$ for every $\sigma$. Let $C_s(\sigma)$ be the least length of a string $\tau$ with $|\tau| \leq |\sigma| + d$ and $U(\tau)[s]\converge = \sigma$, or $|\sigma| + d$ if there is none. It is computable, non-increasing in $s$, and equal to $C(\sigma)$ from the stage at which a shortest description converges.
+:::proposition{#prop-c-pairs}
+$C(\langle \sigma, \tau \rangle) \leq^+ C(\sigma) + C(\tau) + 2 \log C(\sigma)$, where $\log 0$ is read as $0$.
 :::
 
-The proof formalizes the **Berry paradox**, "the least number that cannot be defined in fewer than twenty words": the first string of complexity larger than $n$ has a description of length about $\log n$. Statement 1 says more than non-computability: no algorithm certifies that strings have large complexity, except for finitely many values. This is a form of Gödel's incompleteness theorem, due to Chaitin. Let $T$ be a theory with a c.e. set of axioms that proves only true statements of the form "$C(\sigma) > n$". Searching through the proofs of $T$ enumerates the set $S$ of pairs $(\sigma, n)$ such that $T$ proves "$C(\sigma) > n$". If $S$ contained pairs with arbitrarily large second coordinate, the function $f(m)$, the first $\sigma$ found such that $(\sigma, n) \in S$ for some $n > m$, would be total computable with $C(f(m)) > m$, and the argument of 1 would give a contradiction. So there is a number $n_0$ such that $T$ proves no statement "$C(\sigma) > n$" with $n \geq n_0$, although all but finitely many strings satisfy $C(\sigma) > n_0$.
+:::proof{of=prop-c-pairs}
+For a string $\rho = \rho_0 \cdots \rho_{k-1}$, let $\bar\rho = \rho_0 \rho_0 \rho_1 \rho_1 \cdots \rho_{k-1} \rho_{k-1}$. A string of the form $\bar\rho\, 01\, \alpha$ determines $\rho$ and $\alpha$: read pairs of bits until the first pair $01$. Let $M$ be the machine that, on an input of the form $\bar\rho\, 01\, \alpha$, interprets $\rho$ as a number $\ell$, splits $\alpha = \alpha_0 \alpha_1$ with $|\alpha_0| = \ell$, and outputs $\langle U(\alpha_0), U(\alpha_1) \rangle$. If $\alpha_0$ and $\alpha_1$ are shortest descriptions of $\sigma$ and $\tau$, and $\rho$ is the string of the number $|\alpha_0| = C(\sigma)$, the input has length $2|\rho| + 2 + C(\sigma) + C(\tau)$, and $|\rho| \leq \log C(\sigma) + 1$. Conclude by optimality of $U$.
+:::
 
-The approximation from above makes $C$ computable in $\emptyset'$: $C(\sigma)$ is the value of $C_s(\sigma)$ at the first stage $s$ such that no description shorter than $C_s(\sigma)$ ever converges, and whether a given $s$ has this property is the negation of a c.e. condition, which $\emptyset'$ decides. Conversely, $C$ computes $\emptyset'$: this is the second exercise below, after a first exercise that proves the same for the domain of $U$.
+The logarithmic term cannot be replaced by a constant. Fix $n \geq 1$. There are $(n + 1) 2^n$ pairs $(\sigma, \tau)$ with $|\sigma| + |\tau| = n$, and their codes $\langle \sigma, \tau \rangle$ are distinct. By the argument of :ref{#prop-incompressible-count}, fewer than $2^{n + \lfloor \log n \rfloor} \leq n 2^n$ strings have complexity less than $n + \lfloor \log n \rfloor$, so one of these pairs satisfies $C(\langle \sigma, \tau \rangle) \geq n + \lfloor \log n \rfloor$. With $d$ such that $C(\rho) \leq |\rho| + d$ for every $\rho$, this pair also satisfies $C(\sigma) + C(\tau) \leq n + 2d$, so the difference is at least $\lfloor \log n \rfloor - 2d$, which is unbounded. This defect is the starting point of the prefix-free complexity of a later lesson.
 
-:::quiz[non-computability of C]
-In the proof of :ref{#thm-c-not-computable} (1), where is the hypothesis $g \leq C$ used?
+:::quiz[the complexity of pairs]
+In the proof of :ref{#prop-c-pairs}, why is the length of $\alpha_0$ coded, and not the length of $\alpha_1$?
 
-- [x] To deduce $C(f(n)) > n$ from the choice of $f(n)$, which satisfies $g(f(n)) > n$.
-- [ ] To show that $f$ is computable.
+- [x] Either would do: the total length of the input is available to the machine, so knowing one of the two lengths determines the other. Coding $|\alpha_0| = C(\sigma)$ gives the bound with $2 \log C(\sigma)$.
 
-  $f$ is computable because $g$ is partial computable with unbounded values on its domain; the inequality is not needed for this.
-- [ ] To show that $C(f(n)) \leq^+ \log n$.
+  Coding $|\alpha_1|$ instead gives the symmetric bound with $2 \log C(\tau)$.
+- [ ] Because $\alpha_1$ is the last block, so its length need not be known.
 
-  This bound comes from the computability of $f$, by :ref{#prop-c-basic}.
+  Knowing where $\alpha_1$ ends is not enough: the machine must know where it begins, which is the same information as $|\alpha_0|$.
+- [ ] Because $C(\sigma) \leq C(\tau)$.
 
----
-
-Why is $C$ approximable from above, and not from below?
-
-- [x] Because the discovery of a new description can only decrease the current upper bound, while the absence of a short description is never confirmed at a finite stage.
-- [ ] Because $C(\sigma) \leq |\sigma| + d$.
-
-  This bound only provides a starting value for the approximation.
-- [ ] Because $U$ is total.
-
-  $U$ is partial, which is exactly why short descriptions may appear late.
+  No such assumption is made; the bound holds for all pairs.
 :::
 
 ## Exercises
 
 ::::exercise{difficulty=1}
-Let $X$ be the set of strings $\sigma$ such that $U(\sigma)$ converges. Show that $\emptyset' \leq_T X$.
+Show that shortest descriptions are incompressible: there is a constant $b$ such that, if $\tau$ is a shortest $U$-description of some string, then $C(\tau) \geq |\tau| - b$.
 
 :::solution
-Let $M$ be the machine with $M(0^e) = 0^s$, where $s$ is the least stage with $\Phi_e(e)[s]\converge$, and $M$ undefined elsewhere. Let $d$ be such that $C \leq C_M + d$. If $\Phi_e(e)$ converges at stage $s$, then $C(0^s) \leq e + d$. With oracle $X$, list the strings $\tau$ of length at most $e + d$ such that $U(\tau)$ converges, compute their outputs, and let $t$ be the largest number such that $0^t$ is one of them ($t = 0$ if there is none). Then $\Phi_e(e)$ converges if and only if $\Phi_e(e)[t]\converge$.
+Let $M$ be the machine $\rho \mapsto U(U(\rho))$, and let $c_M$ be such that $C \leq C_M + c_M$. Let $\tau$ be a shortest $U$-description of $\sigma$, so that $|\tau| = C(\sigma)$, and let $\rho$ be a shortest $U$-description of $\tau$. Then $M(\rho) = \sigma$, so $C(\sigma) \leq |\rho| + c_M = C(\tau) + c_M$. Hence $C(\tau) \geq |\tau| - c_M$, and $b = c_M$ works.
 :::
 ::::
 
 ::::exercise{difficulty=2}
-Show that $\emptyset' \leq_T C$, where $C$ is used as an oracle through its graph.
+Show that $C(\sigma\tau) \leq^+ C(\sigma) + C(\tau) + 2 \log \log C(\sigma) + \log C(\sigma)$ for strings with $C(\sigma) \geq 4$.
 
 :::hint
-Adapt the previous solution: when $\Phi_e(e)$ converges at stage $s$, describe with about $e$ bits a string of length $2e$ that has no short description converging by stage $s$.
+Code the number $\ell = C(\sigma)$ by its string $\rho$ preceded by the length of $\rho$ written with doubled bits.
 :::
 
 :::solution
-Let $M$ be the machine defined on the strings $0^e$ as follows: search for the least $s$ with $\Phi_e(e)[s]\converge$, and output the first string $\sigma$ of length $2e$, in the lexicographic order, such that $U(\tau)[s] \converge = \sigma$ for no $\tau$ of length less than $2e$. Such a string exists, since fewer than $2^{2e}$ strings are outputs of strings of length less than $2e$. Let $d$ be such that $C \leq C_M + d$, and let $e > d$.
-
-With oracle $C$, compute the finite set $S$ of strings $\sigma$ of length $2e$ with $C(\sigma) < 2e$, and then a stage $t$ such that every $\sigma \in S$ satisfies $U(\tau)[t]\converge = \sigma$ for some $\tau$ of length less than $2e$; the search for $t$ terminates, since every element of $S$ has such a description. If $\Phi_e(e)$ converges at stage $s$, the string $\sigma = M(0^e)$ satisfies $C(\sigma) \leq e + d < 2e$, so $\sigma \in S$, and no description of $\sigma$ of length less than $2e$ converges by stage $s$; hence $s < t$. So $\Phi_e(e)\converge$ if and only if $\Phi_e(e)[t]\converge$. The finitely many $e \leq d$ are handled by a finite table.
-:::
-::::
-
-::::exercise{difficulty=1}
-Fix $c$. Show that the set $R_c = \{ \sigma : C(\sigma) \geq |\sigma| - c \}$ of $c$-incompressible strings is immune: it is infinite and has no infinite c.e. subset.
-
-:::solution
-$R_c$ contains a string of each length by :ref{#prop-incompressible-count}, so it is infinite. If $W \subseteq R_c$ were an infinite c.e. set, the partial computable function $g(\sigma) = \max(|\sigma| - c, 0)$ with domain $W$ would satisfy $g \leq C$ on its domain, and it would be unbounded, since $W$ contains strings of arbitrary length. This contradicts :ref{#thm-c-not-computable}.
+Let $\rho$ be the string associated with $\ell = C(\sigma)$ and $\lambda$ the string associated with the number $|\rho|$. The input $\bar\lambda\, 01\, \rho\, \alpha_0 \alpha_1$, with $\alpha_0, \alpha_1$ shortest descriptions of $\sigma$ and $\tau$, determines $\lambda$ by the end mark, then $\rho$, of known length $|\rho|$, then $\ell$ and the split of the rest. The machine that decodes it and outputs $U(\alpha_0) U(\alpha_1)$ gives $C(\sigma\tau) \leq^+ 2|\lambda| + |\rho| + C(\sigma) + C(\tau)$, with $|\rho| \leq \log \ell + 1$ and $|\lambda| \leq \log(\log \ell + 2) \leq \log \log \ell + 1$ for $\ell \geq 4$.
 :::
 ::::
 
 ## Notes and references
 
-Solomonoff (1960–1964), Kolmogorov (1965) and Chaitin (1966) introduced the complexity of strings independently, with different motivations: inductive inference, the definition of information and randomness, and the length of programs. Chaitin's form of the incompleteness theorem dates from 1974. Kummer (1996) proved that the set of compressible strings $\{ \sigma : C(\sigma) < |\sigma| \}$ is truth-table complete, a stronger form of the second exercise. Li and Vitányi's book is the standard reference on Kolmogorov complexity.
+Solomonoff (1960–1964), Kolmogorov (1965) and Chaitin (1966) introduced the complexity of strings independently, with different motivations: inductive inference, the definition of information and randomness, and the length of programs. The invariance theorem is due to Solomonoff and Kolmogorov. The pair bound and the counting argument are standard (Downey–Hirschfeldt, Propositions 3.1.3 and 3.1.5); the incompressibility of shortest descriptions is Exercise 2.1.3 of Nies's book. Li and Vitányi's book is the standard reference on Kolmogorov complexity and its applications; Shen, Uspensky and Vereshchagin give a textbook account in the tradition of the Moscow school.
 
 - A. N. Kolmogorov, *Three approaches to the quantitative definition of information*, Problems of Information Transmission 1 (1965), 1–7.
 - R. J. Solomonoff, *A formal theory of inductive inference I*, Information and Control 7 (1964), 1–22.
-- G. J. Chaitin, *Information-theoretic limitations of formal systems*, Journal of the ACM 21 (1974), 403–424.
-- M. Kummer, *On the complexity of random strings*, STACS 96, Lecture Notes in Computer Science 1046, Springer, 1996, 25–36.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 3.1.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 2.1.
 - M. Li and P. Vitányi, *An Introduction to Kolmogorov Complexity and Its Applications*, 4th edition, Springer, 2019.
+- A. Shen, V. A. Uspensky and N. Vereshchagin, *Kolmogorov Complexity and Algorithmic Randomness*, Mathematical Surveys and Monographs 220, American Mathematical Society, 2017.
