@@ -187,3 +187,5 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
   - New specialized courses planned: effective forcing, and computable analysis.
 - **2026-11-12.** `kolmogorov-complexity` now builds on `turing-degrees`, since it proves
   that C and Ω are Turing equivalent to ∅′.
+- **2026-11-12.** `cohen-genericity` now builds on `immunity-growth` (hyperimmune
+  and DNC functions, computably dominated sets).
