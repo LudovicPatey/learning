@@ -1,7 +1,7 @@
 ---
 title: A low simple set
 summary: A c.e. set that is simple and low, built by finite injury; preservation of computations by restraints; a second solution to Post's problem.
-duration: 40
+duration: 45
 prerequisites: [friedberg-muchnik, turing-degrees/low-and-high]
 ---
 
@@ -30,6 +30,10 @@ $$
 $$
 The **positive** requirements $\mathcal P_e$ make the complement of $A$ meet every infinite c.e. set; together with a counting argument that keeps the complement infinite, they make $A$ simple. The **negative** requirements $\mathcal N_e$ ensure lowness, as shown in the verification: they say that a computation $\Phi^A_e(e)$ that keeps appearing during the construction must eventually be preserved.
 
+*Why lowness takes this form.* By the limit lemma, $A$ is low as soon as $A'$ has a computable approximation. The natural guess for $A'(e)$ at stage $s$ is whether $\Phi^{A_s}_e(e)[s]$ converges. This guess has a limit unless the computation appears and disappears infinitely often, each disappearance being caused by a number entering $A$ below its use. The requirement $\mathcal N_e$ excludes this behavior: if the computation appears infinitely often, some appearance is never destroyed. A requirement of this kind cannot be satisfied by acting once, as $\mathcal P_e$ is; it is satisfied by **restraining** $A$, that is, by keeping numbers out of it.
+
+*The strategies.* The strategy of $\mathcal P_e$ is Post's: wait for an element of $W_e$ that is greater than $2e$, and enumerate it. The strategy of $\mathcal N_e$ is to forbid, while $\Phi^{A_s}_e(e)[s]$ converges, the enumeration of numbers below its use. The two conflict when the only available elements of $W_e$ lie below the use. Priority decides who yields.
+
 The priority order is $\mathcal N_0 > \mathcal P_0 > \mathcal N_1 > \mathcal P_1 > \cdots$: the requirement $\mathcal P_e$ must respect the restraints of $\mathcal N_0, \dots, \mathcal N_e$, and may ignore those of $\mathcal N_{e+1}, \mathcal N_{e+2}, \dots$.
 
 :::definition{#def-restraint-function}
@@ -37,6 +41,8 @@ The **restraint** of $\mathcal N_e$ at stage $s$ is $r(e, s) = \use^{A_s}_e(e)$ 
 :::
 
 Since computations converging at stage $s$ have use at most $s$, the restraint is at most $s$, and it is computable from $e$ and $s$.
+
+The restraint need not be monotone in $s$. Suppose that at stage $s$ the computation $\Phi^{A_s}_e(e)[s]$ converges with use $5$, so that $r(e, s) = 5$, and that a requirement of higher priority enumerates $3$ into $A$ at stage $s + 1$. The computation may then diverge with oracle $A_{s+1}$, and $r(e, s + 1) = 0$, until a new computation, possibly with a larger use, appears. Following Soare, one may picture $r(e, s)$ as a **wall** built by $\mathcal N_e$ over the numbers $0, \dots, r(e, s)$, which positive requirements of lower priority may not cross.
 
 ## The construction
 
@@ -49,6 +55,12 @@ $$
 If some $\mathcal P_e$ requires attention, take the least such $e$, and enumerate into $A$ the least $x$ satisfying the condition. We say that $\mathcal P_e$ **acts**. Otherwise, $A_{s+1} = A_s$.
 
 The construction is computable, so $A$ is c.e. Once $\mathcal P_e$ has acted, $W_e \cap A \neq \emptyset$, so it never requires attention again: **each positive requirement acts at most once**.
+
+:::figure[One stage of the construction, with hypothetical restraints. The requirement $\mathcal P_2$ looks for an element of $W_2[s]$ beyond the bound $2 \cdot 2 = 4$ and beyond the walls $r(0, s)$, $r(1, s)$, $r(2, s)$ of the negative requirements of higher priority (the vertical bar). It enumerates $14$. This number lies below the wall of $\mathcal N_3$, which has lower priority: $\mathcal N_3$ is injured, and its computation may be destroyed.]
+<svg class="fig" viewBox="0 0 590 236" width="590" role="img" aria-label="The restraints of the negative requirements as walls: P_2 enumerates an element of W_2 beyond the walls of N_0, N_1, N_2 and beyond 4, possibly injuring N_3"><text x="80" y="26" text-anchor="middle" class="mrm muted" font-size="11">0</text><line x1="80" y1="32" x2="80" y2="184" class="axis" stroke-dasharray="2 4"/><text x="155" y="26" text-anchor="middle" class="mrm muted" font-size="11">5</text><line x1="155" y1="32" x2="155" y2="184" class="axis" stroke-dasharray="2 4"/><text x="230" y="26" text-anchor="middle" class="mrm muted" font-size="11">10</text><line x1="230" y1="32" x2="230" y2="184" class="axis" stroke-dasharray="2 4"/><text x="305" y="26" text-anchor="middle" class="mrm muted" font-size="11">15</text><line x1="305" y1="32" x2="305" y2="184" class="axis" stroke-dasharray="2 4"/><text x="380" y="26" text-anchor="middle" class="mrm muted" font-size="11">20</text><line x1="380" y1="32" x2="380" y2="184" class="axis" stroke-dasharray="2 4"/><text x="455" y="26" text-anchor="middle" class="mrm muted" font-size="11">25</text><line x1="455" y1="32" x2="455" y2="184" class="axis" stroke-dasharray="2 4"/><text x="530" y="26" text-anchor="middle" class="mrm muted" font-size="11">30</text><line x1="530" y1="32" x2="530" y2="184" class="axis" stroke-dasharray="2 4"/><text x="50" y="54" text-anchor="middle" class="math" font-size="16">N<tspan class="mrm" font-size="10" dy="4">0</tspan></text><rect x="80" y="42" width="75" height="14" class="soft-fill accent-stroke" stroke-width="1"/><text x="161" y="54" class="label">r = 5</text><text x="50" y="84" text-anchor="middle" class="math" font-size="16">N<tspan class="mrm" font-size="10" dy="4">1</tspan></text><text x="84" y="84" class="label">r = 0 (no computation)</text><text x="50" y="114" text-anchor="middle" class="math" font-size="16">N<tspan class="mrm" font-size="10" dy="4">2</tspan></text><rect x="80" y="102" width="180" height="14" class="soft-fill accent-stroke" stroke-width="1"/><text x="266" y="114" class="label">r = 12</text><text x="50" y="144" text-anchor="middle" class="math" font-size="16">N<tspan class="mrm" font-size="10" dy="4">3</tspan></text><rect x="80" y="132" width="330" height="14" class="muted-fill" stroke-width="1"/><text x="416" y="144" class="label">r = 22</text><text x="50" y="174" text-anchor="middle" class="math" font-size="16">W<tspan class="mrm" font-size="10" dy="4">2</tspan></text><line x1="80" y1="169" x2="530" y2="169" class="axis"/><circle cx="110" cy="169" r="4" class="ink-fill"/><circle cx="215" cy="169" r="4" class="ink-fill"/><circle cx="290" cy="169" r="6" class="accent-fill"/><circle cx="455" cy="169" r="4" class="ink-fill"/><line x1="260" y1="34" x2="260" y2="184" class="accent-stroke" stroke-width="2"/><text x="80" y="196" class="label"><tspan class="math" font-size="14">P</tspan><tspan class="mrm" font-size="9" dy="3">2</tspan><tspan dy="-3"> enumerates the least element of </tspan><tspan class="math" font-size="14">W</tspan><tspan class="mrm" font-size="9" dy="3">2</tspan><tspan dy="-3"> beyond 4 and beyond the walls of </tspan><tspan class="math" font-size="14">N</tspan><tspan class="mrm" font-size="9" dy="3">0</tspan><tspan dy="-3">, </tspan><tspan class="math" font-size="14">N</tspan><tspan class="mrm" font-size="9" dy="3">1</tspan><tspan dy="-3">, </tspan><tspan class="math" font-size="14">N</tspan><tspan class="mrm" font-size="9" dy="3">2</tspan><tspan dy="-3">;</tspan></text><text x="80" y="214" class="label">the wall of <tspan class="math" font-size="14">N</tspan><tspan class="mrm" font-size="9" dy="3">3</tspan><tspan dy="-3">, of lower priority, is ignored, and </tspan><tspan class="math" font-size="14">N</tspan><tspan class="mrm" font-size="9" dy="3">3</tspan><tspan dy="-3"> is injured</tspan></text></svg>
+:::
+
+Unlike the Friedberg–Muchnik construction, this one does not initialize requirements and does not choose fresh witnesses: the positive requirements read the restraints directly. Both devices achieve the same end, that a requirement is only injured by requirements of higher priority.
 
 ## Verification
 
@@ -138,6 +150,8 @@ Show that for every $e$, the value $g(e, s)$ changes at most $2e + 1$ times as $
 
 :::solution
 Between two consecutive injuries of $\mathcal N_e$, and after the last one, the argument of :ref{#lem-low-negative} shows that once $\Phi^{A_s}_e(e)[s]$ converges, it keeps converging until the next injury. So on each of these intervals, $g(e, \cdot)$ changes at most once from $0$ to $1$, and it can change from $1$ to $0$ only at an injury. There are at most $e$ injuries, hence at most $e + 1$ intervals, and at most $(e + 1) + e = 2e + 1$ changes. The function $g$ itself is such an approximation of $A'$.
+
+A set whose jump has an approximation with a computably bounded number of changes is called **superlow**; equivalently, $A' \leq_{tt} \emptyset'$ (Nies 2009, Definition 1.5.3 and Theorem 1.6.5). So the low simple set of the lesson is superlow.
 :::
 ::::
 
@@ -152,12 +166,16 @@ Enumerate $C$ one element at a time, and put each element into one of the two se
 If $C$ is finite, take $C_0 = C$ and $C_1 = \emptyset$. Otherwise, let $c_0, c_1, \dots$ be a computable injective enumeration of $C$. For $i \in \{0, 1\}$ and every $e$, let $\mathcal N_{e,i}$ be the requirement $\mathcal N_e$ for the set $C_i$, with restraint $r(e, i, s)$ defined as above with $C_{i,s}$ in place of $A_s$, and order them as $\mathcal N_{0,0} > \mathcal N_{0,1} > \mathcal N_{1,0} > \cdots$. At stage $s + 1$, consider $c_s$: if some $\mathcal N_{e,i}$ has $c_s \leq r(e, i, s)$, take the one of highest priority and put $c_s$ into $C_{1-i}$; otherwise put $c_s$ into $C_0$.
 
 By induction along the priority order, each $\mathcal N_{e,i}$ is injured finitely often. Suppose the restraints of all requirements of higher priority converge, with maximum limit $R$, from stage $s_0$ on. After $s_0$, an injury of $\mathcal N_{e,i}$ puts $c_s \leq r(e, i, s)$ into $C_i$, which by the rule only happens if a requirement $\mathcal N_{e', 1-i}$ of higher priority has $c_s \leq r(e', 1-i, s) \leq R$. Only finitely many elements of $C$ are at most $R$, and each is enumerated once, so $\mathcal N_{e,i}$ is injured finitely often. Then, as in :ref{#lem-low-negative}, its restraint converges and $\lim_s g_i(e, s) = C_i'(e)$. So both sets are low, they are disjoint, and their union is $C$.
+
+The number of injuries of $\mathcal N_{e,i}$ depends on the limits of restraints of higher priority, and is not bounded in advance, unlike in :ref{#lem-low-negative}. This cannot be avoided in general: Bickford and Mills showed that $\emptyset'$ is not the disjoint union of two superlow c.e. sets (see Nies 2009, the remarks after Exercise 1.6.10).
 :::
 ::::
 
 ## Notes and references
 
-The construction follows Soare's textbook, where low simple sets and the terminology of positive and negative requirements and restraints are developed systematically. The splitting of the second exercise uses the same rule for placing elements as the Sacks splitting theorem of the next lesson.
+Downey and Hirschfeldt attribute the existence of a non-computable low c.e. set to Friedberg (Theorem 2.11.2 of their book, with a construction by fresh followers and initialization). The construction of this lesson, with the terminology of positive and negative requirements and of restraints as walls, follows Soare's book of 2016, Section 7.2 (Theorem 7.2.1; Section 7.2.5 for the walls). Nies proves the same result as Theorem 1.6.4 and observes that the set is superlow (Theorem 1.6.5); his Exercise 1.6.10 is the second exercise above. Monin and Patey build a low c.e. set by the same method, and give the low simple set and the splitting into two low sets as exercises, in their chapter on the priority method and c.e. degrees. The splitting of the second exercise uses the same rule for placing elements as the Sacks splitting theorem of the next lesson.
 
-- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010.
+- B. Monin and L. Patey, *Computability theory*, chapter *Priority method and c.e. degrees*.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.

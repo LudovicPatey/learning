@@ -3,18 +3,21 @@ area: computability
 level: Advanced
 order: 6
 prerequisites: [turing-degrees, arithmetic-hierarchy]
-summary: Simple and creative sets, the Friedberg–Muchnik theorem, a low simple set, and the Sacks splitting theorem, by finite injury priority arguments.
+summary: Simple and creative sets, the Friedberg–Muchnik theorem, a low simple set, the Sacks splitting theorem and cone avoidance, by finite injury priority arguments.
 description: >
   Post's problem asks for a c.e. set that is neither computable nor complete.
   The course presents Post's simple sets and why they are not many-one
-  complete, then the finite injury priority method in three constructions:
-  two incomparable c.e. sets (Friedberg–Muchnik), a low simple set, and the
-  Sacks splitting theorem with its preservation strategy, with consequences
-  for the structure of the c.e. degrees.
+  complete, then the finite injury priority method in four constructions:
+  two incomparable c.e. sets (Friedberg–Muchnik), a low simple set, the
+  Sacks splitting theorem with its preservation strategy, and a simple set
+  avoiding the upper cone of a given non-computable c.e. set. It ends with
+  consequences for the structure of the c.e. degrees: no minimal c.e.
+  degree, and every non-zero c.e. degree is the join of two low ones.
 objectives:
   - Construct a simple set, and show that simple sets are not many-one complete
   - Organize a construction by requirements, priorities, witnesses and initialization
   - Verify a finite injury argument by induction along the priority order
   - Preserve computations with restraints, and prove lowness through the limit lemma
   - Use the length of agreement and Sacks' preservation strategy
-lessons: [simple-sets, friedberg-muchnik, low-simple-set, sacks-splitting]
+  - Combine strategies of different kinds, and distinguish bounded from unbounded finite injury
+lessons: [simple-sets, friedberg-muchnik, low-simple-set, sacks-splitting, cone-avoidance]
