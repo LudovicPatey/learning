@@ -1,11 +1,11 @@
 ---
 title: Weihrauch reducibility
-summary: Uniform computable reductions; uniformly true problems, and the pigeonhole principle as a problem that is computably but not uniformly true; the omniscience principles LPO and LLPO; parallelization, the jump as parallel LPO and weak König's lemma as parallel LLPO.
-duration: 40
-prerequisites: [computable-reducibility]
+summary: Uniform computable reductions; problems that uniformly admit computable solutions, and the pigeonhole principle as a problem that admits computable solutions but not uniformly; continuity arguments; the omniscience principles LPO and LLPO.
+duration: 45
+prerequisites: [wkl-reductions]
 ---
 
-A computable reduction may depend on the instance in a non-uniform way: the proof that $\mathsf{RT}^1_2$ is computably true chooses a color class that is infinite, a choice that cannot be made by an algorithm reading the coloring. **Weihrauch reducibility** requires the reduction to be given by two fixed Turing functionals, one transforming the instance and one transforming the solution back. It was introduced by Weihrauch in computable analysis in the 1980s, and Gherardi and Marcone (2009) brought it to reverse mathematics, where it measures the uniform content of proofs.
+A computable reduction may depend on the instance in a non-uniform way: the proof that $\mathsf{RT}^1_2$ admits computable solutions chooses a color class that is infinite, a choice that cannot be made by an algorithm reading the coloring. **Weihrauch reducibility** requires the reduction to be given by two fixed Turing functionals, one transforming the instance and one transforming the solution back. It was introduced by Weihrauch in computable analysis at the end of the 1980s, and first appeared in two technical reports of 1992. Gherardi and Marcone (2009), and independently Dorais, Dzhafarov, Hirst, Mileti and Shafer (2016), brought it to reverse mathematics, where it measures the uniform content of proofs.
 
 ## Definitions
 
@@ -14,27 +14,46 @@ Let $\mathsf P$ and $\mathsf Q$ be problems.
 
 1. $\mathsf P$ is **Weihrauch reducible** to $\mathsf Q$, written $\mathsf P \leq_W \mathsf Q$, if there are Turing functionals $\Phi$ and $\Psi$ such that, for every instance $X$ of $\mathsf P$, $\Phi^X$ is an instance of $\mathsf Q$, and for every solution $\widetilde Y$ to $\Phi^X$, $\Psi^{X \oplus \widetilde Y}$ is a solution to $X$.
 2. $\mathsf P$ is **strongly Weihrauch reducible** to $\mathsf Q$, written $\mathsf P \leq_{sW} \mathsf Q$, if moreover $\Psi$ only uses $\widetilde Y$: $\Psi^{\widetilde Y}$ is a solution to $X$.
-3. $\mathsf P$ is **uniformly true** if there is a Turing functional $\Phi$ such that $\Phi^X$ is a solution to $X$ for every instance $X$.
+3. $\mathsf P$ **uniformly admits computable solutions** if there is a Turing functional $\Phi$ such that $\Phi^X$ is a solution to $X$ for every instance $X$.
 :::
 
-In item 1, $\Phi^X$ and $\Psi^{X \oplus \widetilde Y}$ are required to be total, as characteristic functions of sets. Weihrauch reducibility implies computable reducibility, and strong Weihrauch reducibility implies strong computable reducibility. Together with the previous lessons, we have the implications
-$$
-\begin{gathered}
-\mathsf P \leq_{sW} \mathsf Q \;\Rightarrow\; \mathsf P \leq_W \mathsf Q \;\Rightarrow\; \mathsf P \leq_c \mathsf Q \;\Rightarrow\; \mathsf P \leq_\omega \mathsf Q, \\
-\mathsf P \leq_{sW} \mathsf Q \;\Rightarrow\; \mathsf P \leq_{sc} \mathsf Q \;\Rightarrow\; \mathsf P \leq_c \mathsf Q.
-\end{gathered}
-$$
-As for computable reducibility, $\mathsf P$ is uniformly true if and only if $\mathsf P \leq_W \mathsf{Id}$: given $\Phi$, take the identity as forward functional and $\Psi^{X \oplus Y} = \Phi^X$; given $\Phi$ and $\Psi$, the functional $X \mapsto \Psi^{X \oplus \Phi^X}$ solves $\mathsf P$.
+In item 1, $\Phi^X$ and $\Psi^{X \oplus \widetilde Y}$ are required to be total, as characteristic functions of sets. The functional $\Phi$ is the **forward** functional and $\Psi$ the **backward** functional. We write $\mathsf P \equiv_W \mathsf Q$ if $\mathsf P \leq_W \mathsf Q$ and $\mathsf Q \leq_W \mathsf P$; the equivalence classes are the **Weihrauch degrees**.
+
+:::figure[Weihrauch and strong Weihrauch reductions of $\mathsf P$ to $\mathsf Q$. They have the shape of the computable reductions of the previous lesson, with the two computations given by functionals $\Phi$ and $\Psi$ that do not depend on $X$.]
+<svg class="fig" viewBox="0 0 660 262" width="660" role="img" aria-label="Diagrams of a Weihrauch reduction and of a strong Weihrauch reduction of P to Q, with forward functional Phi and backward functional Psi"><defs><marker id="ah-wred" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker><marker id="ah-wreda" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="accent-fill"/></marker></defs><text x="90" y="34" text-anchor="middle" class="math" font-size="18">P</text><text x="250" y="34" text-anchor="middle" class="math" font-size="18">Q</text><text x="170.0" y="250" text-anchor="middle" class="math" font-size="16">P<tspan class="mrm" dx="5">≤</tspan><tspan class="mrm" font-size="11" dy="4">W</tspan><tspan dx="5" dy="-4">Q</tspan></text><rect x="68" y="50" width="44" height="30" rx="6" class="cell"/><text x="90" y="71" text-anchor="middle" class="math" font-size="17">X</text><rect x="228" y="50" width="44" height="30" rx="6" class="cell"/><text x="250" y="71" text-anchor="middle" class="math" font-size="17">X̃</text><rect x="228" y="180" width="44" height="30" rx="6" class="cell"/><text x="250" y="201" text-anchor="middle" class="math" font-size="17">Ỹ</text><rect x="68" y="180" width="44" height="30" rx="6" class="head-cell"/><text x="90" y="201" text-anchor="middle" class="math" font-size="17">Y</text><line x1="114" y1="65" x2="224" y2="65" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-wred)"/><text x="170.0" y="57" text-anchor="middle" class="label">X̃ = Φ(X)</text><line x1="250" y1="82" x2="250" y2="177" class="muted-stroke" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ah-wred)"/><line x1="90" y1="82" x2="90" y2="177" class="muted-stroke" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ah-wred)"/><text x="258" y="133.0" text-anchor="start" class="label">any solution</text><text x="82" y="133.0" text-anchor="end" class="label">a solution</text><line x1="226" y1="195" x2="116" y2="195" class="accent-stroke" stroke-width="1.6" marker-end="url(#ah-wred)"/><text x="170.0" y="224" text-anchor="middle" class="label">Y = Ψ(X ⊕ Ỹ)</text><path d="M108,82 C160,120 170,160 150,191" class="accent-stroke" stroke-width="1.2" stroke-dasharray="2 3" marker-end="url(#ah-wreda)"/><text x="170" y="132" text-anchor="start" class="label">X is used</text><text x="410" y="34" text-anchor="middle" class="math" font-size="18">P</text><text x="570" y="34" text-anchor="middle" class="math" font-size="18">Q</text><text x="490.0" y="250" text-anchor="middle" class="math" font-size="16">P<tspan class="mrm" dx="5">≤</tspan><tspan class="mrm" font-size="11" dy="4">sW</tspan><tspan dx="5" dy="-4">Q</tspan></text><rect x="388" y="50" width="44" height="30" rx="6" class="cell"/><text x="410" y="71" text-anchor="middle" class="math" font-size="17">X</text><rect x="548" y="50" width="44" height="30" rx="6" class="cell"/><text x="570" y="71" text-anchor="middle" class="math" font-size="17">X̃</text><rect x="548" y="180" width="44" height="30" rx="6" class="cell"/><text x="570" y="201" text-anchor="middle" class="math" font-size="17">Ỹ</text><rect x="388" y="180" width="44" height="30" rx="6" class="head-cell"/><text x="410" y="201" text-anchor="middle" class="math" font-size="17">Y</text><line x1="434" y1="65" x2="544" y2="65" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-wred)"/><text x="490.0" y="57" text-anchor="middle" class="label">X̃ = Φ(X)</text><line x1="570" y1="82" x2="570" y2="177" class="muted-stroke" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ah-wred)"/><line x1="410" y1="82" x2="410" y2="177" class="muted-stroke" stroke-width="1.3" stroke-dasharray="5 4" marker-end="url(#ah-wred)"/><text x="578" y="133.0" text-anchor="start" class="label">any solution</text><text x="402" y="133.0" text-anchor="end" class="label">a solution</text><line x1="546" y1="195" x2="436" y2="195" class="accent-stroke" stroke-width="1.6" marker-end="url(#ah-wred)"/><text x="490.0" y="224" text-anchor="middle" class="label">Y = Ψ(Ỹ)</text></svg>
+:::
+
+Weihrauch reducibility implies computable reducibility, and strong Weihrauch reducibility implies strong computable reducibility. Together with the previous lessons, we have the following implications. Dzhafarov and Mummert show that no other implication holds in general (their Figure 4.6).
+
+:::figure[Implications between the reducibilities of the course. An arrow from one reducibility to another means that if $\mathsf P$ is reducible to $\mathsf Q$ in the first sense, it is reducible in the second.]
+<svg class="fig" viewBox="0 0 600 170" width="600" role="img" aria-label="Implications between the reducibilities: strong Weihrauch implies Weihrauch and strong computable; each of these implies computable reducibility, which implies omega-reducibility"><defs><marker id="ah-impl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><rect x="38" y="67" width="64" height="32" rx="6" class="head-cell"/><text x="70" y="89" text-anchor="middle" class="mrm" font-size="17">≤<tspan font-size="12" dy="4">sW</tspan></text><rect x="198" y="17" width="64" height="32" rx="6" class="cell"/><text x="230" y="39" text-anchor="middle" class="mrm" font-size="17">≤<tspan font-size="12" dy="4">W</tspan></text><rect x="198" y="117" width="64" height="32" rx="6" class="cell"/><text x="230" y="139" text-anchor="middle" class="mrm" font-size="17">≤<tspan font-size="12" dy="4">sc</tspan></text><rect x="358" y="67" width="64" height="32" rx="6" class="cell"/><text x="390" y="89" text-anchor="middle" class="mrm" font-size="17">≤<tspan font-size="12" dy="4">c</tspan></text><rect x="498" y="67" width="64" height="32" rx="6" class="cell"/><text x="530" y="89" text-anchor="middle" class="mrm" font-size="17">≤<tspan font-size="12" dy="4">ω</tspan></text><line x1="104.4" y1="79.0" x2="193.7" y2="41.6" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-impl)"/><line x1="104.4" y1="91.0" x2="193.7" y2="128.4" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-impl)"/><line x1="264.4" y1="41.0" x2="353.7" y2="78.4" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-impl)"/><line x1="264.4" y1="129.0" x2="353.7" y2="91.6" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-impl)"/><line x1="426.0" y1="85.0" x2="492.0" y2="85.0" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-impl)"/><text x="230" y="12" text-anchor="middle" class="label">uniform</text><text x="230" y="168" text-anchor="middle" class="label">strong: the backward step does not use the instance</text></svg>
+:::
+
+As for computable reducibility, $\mathsf P$ uniformly admits computable solutions if and only if $\mathsf P \leq_W \mathsf{Id}$: given $\Phi$, take the identity as forward functional and $\Psi^{X \oplus Y} = \Phi^X$; given $\Phi$ and $\Psi$, the functional $X \mapsto \Psi^{X \oplus \Phi^X}$ solves $\mathsf P$. Some examples:
+
+- $\mathsf{WKL} \leq_{sW} \mathsf{KL}$, with both functionals the identity.
+- $\mathsf{Id} \leq_W \mathsf{RT}^1_2$: the forward functional outputs the constant coloring $0$, whatever the instance, and the backward functional outputs $X$, read from $X \oplus \widetilde Y$. But $\mathsf{Id} \not\leq_{sc} \mathsf{RT}^1_2$ (previous lesson), so $\mathsf{Id} \not\leq_{sW} \mathsf{RT}^1_2$.
+- $\mathsf J \times \mathsf J \leq_W \mathsf J$: the forward functional is the identity, and the jump $(X_0 \oplus X_1)'$ computes $X_0' \oplus X_1'$, uniformly. Two instances of the jump given at the same time cost a single application.
+
+## Uniformity and continuity
 
 :::proposition{#prop-rt12-not-uniform}
-$\mathsf{RT}^1_2$ is computably true but not uniformly true. Consequently, $\mathsf{RT}^1_2 \leq_c \mathsf{RT}^1_1$ but $\mathsf{RT}^1_2 \not\leq_W \mathsf{RT}^1_1$.
+$\mathsf{RT}^1_2$ admits computable solutions, but not uniformly. Consequently, $\mathsf{RT}^1_2 \leq_c \mathsf{RT}^1_1$ but $\mathsf{RT}^1_2 \not\leq_W \mathsf{RT}^1_1$.
 :::
+
+The idea of the proof: to output an element $x$, a functional reads only finitely many values of the coloring. Whatever it outputs, the coloring can be changed beyond what was read, so that the color of $x$ becomes the color used finitely often.
 
 :::proof{of=prop-rt12-not-uniform}
-A coloring $f : \nat \to 2$ computes both color classes, and one of them is infinite. Suppose that $\Phi^f$ is an infinite homogeneous set for every $f$. Let $f_0$ be the constant coloring $0$. The set $\Phi^{f_0}$ is infinite; take $x \in \Phi^{f_0}$, and let $u$ be the use of the computation $\Phi^{f_0}(x) = 1$. Let $v = \max(u, x + 1)$ and $f_1$ the coloring with $f_1(n) = 0$ for $n < v$ and $f_1(n) = 1$ for $n \geq v$. Since $f_1$ agrees with $f_0$ below $u$, we have $x \in \Phi^{f_1}$, and $f_1(x) = 0$. A homogeneous set for $f_1$ containing $x$ has color $0$, so it is included in $\{ 0, \dots, v - 1 \}$ and is finite: a contradiction. The problem $\mathsf{RT}^1_1$ is uniformly true, with $\Phi^f = \nat$, and a problem Weihrauch reducible to a uniformly true problem is uniformly true; this gives the consequence.
+A coloring $f : \nat \to 2$ computes both color classes, and one of them is infinite. Suppose that $\Phi^f$ is an infinite homogeneous set for every $f$. Let $f_0$ be the constant coloring $0$. The set $\Phi^{f_0}$ is infinite; take $x \in \Phi^{f_0}$, and let $u$ be the use of the computation $\Phi^{f_0}(x) = 1$. Let $v = \max(u, x + 1)$ and $f_1$ the coloring with $f_1(n) = 0$ for $n < v$ and $f_1(n) = 1$ for $n \geq v$. Since $f_1$ agrees with $f_0$ below $u$, we have $x \in \Phi^{f_1}$, and $f_1(x) = 0$. A homogeneous set for $f_1$ containing $x$ has color $0$, so it is included in $\{ 0, \dots, v - 1 \}$ and is finite: a contradiction. The problem $\mathsf{RT}^1_1$ uniformly admits computable solutions, with $\Phi^f = \nat$, and a problem Weihrauch reducible to such a problem uniformly admits computable solutions; this gives the consequence.
 :::
 
-The argument is a **continuity argument**: a functional decides each bit of its output from a finite part of its input, so it cannot wait for information that is only available in the limit. Most proofs of non-reducibility in the Weihrauch degrees have this form. Brattka and Rakotoniaina, and independently Hirschfeldt and Jockusch, showed more generally that $\mathsf{RT}^1_{k+1} \not\leq_W \mathsf{RT}^1_k$ for every $k \geq 1$; we admit this result. Likewise, the intermediate value theorem is not uniformly true, although every computable instance has a computable solution (:ref{#thm-ivt-rca}): the computation of a root must decide, from a finite approximation of the function, near which root to look.
+:::figure[The two colorings of the proof of :ref{#prop-rt12-not-uniform}, with $u = 5$ and $x = 7$, so that $v = 8$. The computation that puts $x$ into $\Phi^{f_0}$ reads only $f_0 \uh u$, which $f_1$ shares.]
+<svg class="fig" viewBox="0 0 600 214" width="600" role="img" aria-label="The colorings f0 and f1 of the proof: they agree below the use u, so the functional puts x in both outputs, but x has color 0 for f1, which is 1 from v on"><defs><marker id="ah-cont" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="accent-fill"/></marker></defs><text x="86" y="61" text-anchor="middle" class="math" font-size="17">f₀</text><rect x="110" y="40" width="30" height="30" class="cell"/><text x="125.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="140" y="40" width="30" height="30" class="cell"/><text x="155.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="170" y="40" width="30" height="30" class="cell"/><text x="185.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="200" y="40" width="30" height="30" class="cell"/><text x="215.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="230" y="40" width="30" height="30" class="cell"/><text x="245.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="260" y="40" width="30" height="30" class="cell"/><text x="275.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="290" y="40" width="30" height="30" class="cell"/><text x="305.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="320" y="40" width="30" height="30" class="cell"/><text x="335.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="350" y="40" width="30" height="30" class="cell"/><text x="365.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="380" y="40" width="30" height="30" class="cell"/><text x="395.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="410" y="40" width="30" height="30" class="cell"/><text x="425.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="440" y="40" width="30" height="30" class="cell"/><text x="455.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="470" y="40" width="30" height="30" class="cell"/><text x="485.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="500" y="40" width="30" height="30" class="cell"/><text x="515.0" y="61" text-anchor="middle" class="mrm" font-size="15">0</text><text x="538" y="61" class="mrm muted" font-size="16">⋯</text><text x="86" y="125" text-anchor="middle" class="math" font-size="17">f₁</text><rect x="110" y="104" width="30" height="30" class="cell"/><text x="125.0" y="125" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="140" y="104" width="30" height="30" class="cell"/><text x="155.0" y="125" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="170" y="104" width="30" height="30" class="cell"/><text x="185.0" y="125" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="200" y="104" width="30" height="30" class="cell"/><text x="215.0" y="125" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="230" y="104" width="30" height="30" class="cell"/><text x="245.0" y="125" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="260" y="104" width="30" height="30" class="cell"/><text x="275.0" y="125" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="290" y="104" width="30" height="30" class="cell"/><text x="305.0" y="125" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="320" y="104" width="30" height="30" class="cell"/><text x="335.0" y="125" text-anchor="middle" class="mrm" font-size="15">0</text><rect x="350" y="104" width="30" height="30" class="cell head-cell"/><text x="365.0" y="125" text-anchor="middle" class="mrm" font-size="15">1</text><rect x="380" y="104" width="30" height="30" class="cell head-cell"/><text x="395.0" y="125" text-anchor="middle" class="mrm" font-size="15">1</text><rect x="410" y="104" width="30" height="30" class="cell head-cell"/><text x="425.0" y="125" text-anchor="middle" class="mrm" font-size="15">1</text><rect x="440" y="104" width="30" height="30" class="cell head-cell"/><text x="455.0" y="125" text-anchor="middle" class="mrm" font-size="15">1</text><rect x="470" y="104" width="30" height="30" class="cell head-cell"/><text x="485.0" y="125" text-anchor="middle" class="mrm" font-size="15">1</text><rect x="500" y="104" width="30" height="30" class="cell head-cell"/><text x="515.0" y="125" text-anchor="middle" class="mrm" font-size="15">1</text><text x="538" y="125" class="mrm muted" font-size="16">⋯</text><text x="125.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">0</text><text x="155.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">1</text><text x="185.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">2</text><text x="215.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">3</text><text x="245.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">4</text><text x="275.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">5</text><text x="305.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">6</text><text x="335.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">7</text><text x="365.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">8</text><text x="395.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">9</text><text x="425.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">10</text><text x="455.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">11</text><text x="485.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">12</text><text x="515.0" y="34" text-anchor="middle" class="mrm muted" font-size="11">13</text><path d="M112,78 L112,86 L258,86 L258,78" class="accent-stroke" stroke-width="1.4"/><text x="110" y="99" dx="0" text-anchor="start" class="label">use u: read by the computation Φ(x) = 1</text><circle cx="335.0" cy="55" r="13" class="accent-stroke" stroke-width="1.6"/><circle cx="335.0" cy="119" r="13" class="accent-stroke" stroke-width="1.6"/><text x="335.0" y="14" text-anchor="middle" class="label">x</text><line x1="350" y1="96" x2="350" y2="146" class="ink-stroke" stroke-width="1.4"/><text x="350" y="160" text-anchor="middle" class="label">v</text><text x="300" y="184" text-anchor="middle" class="label">f₀ is constant 0, and x ∈ Φ(f₀); f₁ agrees with f₀ below v ≥ u, so x ∈ Φ(f₁),</text><text x="300" y="202" text-anchor="middle" class="label">but the only color with infinitely many elements is 1, while f₁(x) = 0</text></svg>
+:::
+
+The argument is a **continuity argument**: a functional decides each bit of its output from a finite part of its input, so it cannot wait for information that is only available in the limit. In topological terms, a functional induces a continuous map on Cantor space, and the proof exhibits a discontinuity that every solution map must have. Most proofs of non-reducibility in the Weihrauch degrees have this form, often combined with a diagonalization against all pairs of functionals; it replaces the computability-theoretic arguments of the previous lessons, which cannot separate problems that admit computable solutions.
+
+Dorais, Dzhafarov, Hirst, Mileti and Shafer, Hirschfeldt and Jockusch, and Brattka and Rakotoniaina showed more generally that $\mathsf{RT}^1_{k+1} \not\leq_W \mathsf{RT}^1_k$ for every $k \geq 1$; we admit this result. Likewise, the intermediate value theorem does not uniformly admit computable solutions, although every computable instance has a computable solution (:ref{#thm-ivt-rca}): a proof must decide, from finite approximations of the function, whether it vanishes at a rational point, and near which root to look.
 
 :::quiz[uniformity]
 In the proof of :ref{#prop-rt12-not-uniform}, why can $\Phi^{f_1}$ not avoid the element $x$?
@@ -62,17 +81,17 @@ Why does the computable reduction of $\mathsf{RT}^1_2$ to $\mathsf{RT}^1_1$ not 
 
 ## The omniscience principles
 
-The following problems, from constructive mathematics, have instances in $\{0, 1\}^\nat$ and solutions in $\{ 0, 1 \}$, coded as sets: $0$ by $\emptyset$ and $1$ by $\{ 0 \}$, so that a solution is read from the first bit of its code.
+The following problems come from constructive mathematics, where the corresponding statements are not provable: they assert that certain questions about an infinite sequence can be decided. They have instances in $\{0, 1\}^\nat$ and solutions in $\{ 0, 1 \}$, coded as sets: $0$ by $\emptyset$ and $1$ by $\{ 0 \}$, so that a solution is read from the first bit of its code.
 
 :::definition{#def-lpo-llpo}
 1. The **limited principle of omniscience** $\mathsf{LPO}$: an instance is a sequence $p \in \{0, 1\}^\nat$; its solution is $1$ if $p(n) = 1$ for some $n$, and $0$ otherwise.
 2. The **lesser limited principle of omniscience** $\mathsf{LLPO}$: an instance is a sequence $p \in \{0, 1\}^\nat$ with $p(n) = 1$ for at most one $n$; its solutions are the $i \in \{ 0, 1 \}$ such that $p(2m + i) = 0$ for every $m$.
 :::
 
-An instance of $\mathsf{LLPO}$ has one solution if it contains a $1$, at a position of parity opposite to the solution, and two solutions otherwise. Both problems are computably true, since their solutions are numbers; their content is entirely about uniformity.
+$\mathsf{LPO}$ decides a $\Sigma^0_1$ question about its instance. $\mathsf{LLPO}$ answers a weaker question: given two $\Pi^0_1$ statements, "no $1$ at an even position" and "no $1$ at an odd position", at least one of which is true, it names a true one. For example, the sequence with a single $1$ at position $5$ has the unique solution $0$, and the sequence $0^\infty$ has the two solutions $0$ and $1$. In general, an instance of $\mathsf{LLPO}$ has one solution if it contains a $1$, at a position of parity opposite to the solution, and two solutions otherwise. Both problems admit computable solutions, since their solutions are numbers; their content is entirely about uniformity.
 
 :::proposition{#prop-llpo-lpo}
-$\mathsf{LLPO} \leq_W \mathsf{LPO}$, and $\mathsf{LLPO}$ is not uniformly true.
+$\mathsf{LLPO} \leq_W \mathsf{LPO}$, and $\mathsf{LLPO}$ does not uniformly admit computable solutions.
 :::
 
 :::proof{of=prop-llpo-lpo}
@@ -81,71 +100,7 @@ Let $\Phi^p = p$, and let $\Psi^{p \oplus i}$ output $0$ if $i = 0$; if $i = 1$,
 Suppose that $\Phi^p$ is a solution for every instance $p$. Let $i = \Phi^{0^\infty}(0)$, the bit that determines the solution, and $u$ the use of this computation. Let $p_0$ and $p_1$ be the sequences with a single $1$, at positions $2u$ and $2u + 1$ respectively. Both agree with $0^\infty$ below $u$, so $\Phi^{p_0}(0) = \Phi^{p_1}(0) = i$, and $\Phi^{p_0}$ and $\Phi^{p_1}$ both code the solution $i$. But the only solution to $p_0$ is $1$, and the only solution to $p_1$ is $0$.
 :::
 
-## Parallelization
-
-:::definition{#def-parallelization}
-The **parallelization** of a problem $\mathsf P$ is the problem $\widehat{\mathsf P}$ whose instances are the sequences $\bigoplus_n X_n$ of instances of $\mathsf P$, and whose solutions are the sequences $\bigoplus_n Y_n$ with $Y_n$ a solution to $X_n$ for every $n$.
-:::
-
-When the solutions of $\mathsf P$ are numbers in $\{ 0, 1 \}$, as for $\mathsf{LPO}$ and $\mathsf{LLPO}$, a solution $\bigoplus_n Y_n$ to $\widehat{\mathsf P}$ is identified with the set $\{ n : Y_n = \{ 0 \} \}$, the sequence of the values of the solutions. Each of the two codings is computable from the other, uniformly, so the identification does not affect Weihrauch reducibility.
-
-If $\mathsf P \leq_W \mathsf Q$ via $\Phi$ and $\Psi$, then $\widehat{\mathsf P} \leq_W \widehat{\mathsf Q}$ via the functionals applying $\Phi$ and $\Psi$ to each coordinate. So parallelization is an operation on Weihrauch degrees. It turns the omniscience principles into familiar problems.
-
-:::theorem{#thm-jump-lpo}
-$\mathsf J \equiv_W \widehat{\mathsf{LPO}}$.
-:::
-
-:::proof{of=thm-jump-lpo}
-($\mathsf J \leq_W \widehat{\mathsf{LPO}}$) Given $X$, let $\Phi^X = \bigoplus_e p_e$, with $p_e(s) = 1$ if $\Phi^X_e(e)[s]\converge$ and $0$ otherwise. The solution to $p_e$ is $1$ exactly when $e \in X'$, so the solution to $\Phi^X$ is $X'$, and $\Psi^{X \oplus Y} = Y$.
-
-($\widehat{\mathsf{LPO}} \leq_W \mathsf J$) Let $\Phi$ be the identity. By the parameter theorem, uniformly in the oracle, there is a computable function $g$ such that for every $Z = \bigoplus_n p_n$, $\Phi^Z_{g(n)}(g(n))$ converges if and only if $p_n(s) = 1$ for some $s$. Let $\Psi^{Z \oplus Y}$ be the sequence whose $n$-th term is $Y(g(n))$. For $Y = Z'$, this is the sequence of solutions to the $p_n$.
-:::
-
-:::theorem{#thm-wkl-llpo}
-$\mathsf{WKL} \equiv_W \widehat{\mathsf{LLPO}}$.
-:::
-
-:::proof{of=thm-wkl-llpo}
-($\widehat{\mathsf{LLPO}} \leq_W \mathsf{WKL}$) Given $\bigoplus_n p_n$, let $T$ be the tree of strings $\sigma$ such that $p_n(2m + \sigma(n)) = 0$ for all $n, m$ with $n < |\sigma|$ and $2m + \sigma(n) < |\sigma|$. It is computable uniformly in the instance. It is infinite, since a sequence of solutions to the $p_n$ gives strings of every length in $T$, and its paths are exactly the sequences of solutions. So $\Psi^{X \oplus Y} = Y$ works.
-
-($\mathsf{WKL} \leq_W \widehat{\mathsf{LLPO}}$) Let $T$ be an infinite binary tree. For a string $\sigma$ and $i < 2$, say that $\sigma^\frown i$ **dies at stage $s$** if $T$ has no extension of $\sigma^\frown i$ of length $|\sigma| + 1 + s$. Let $q_\sigma(2s + i) = 1$ if $s$ is the least stage at which one of $\sigma^\frown 0$, $\sigma^\frown 1$ dies, and $i$ is the least $j$ such that $\sigma^\frown j$ dies at $s$; all other values are $0$. Then $q_\sigma$ has at most one $1$, and $\Phi^T = \bigoplus_\sigma q_\sigma$, indexed by a computable enumeration of strings, is an instance of $\widehat{\mathsf{LLPO}}$.
-
-Let $\bigoplus_\sigma i_\sigma$ be a solution. If $\sigma$ is **extendible**, that is, has extensions in $T$ of every length, then $\sigma^\frown i_\sigma$ is extendible. Indeed, one of the two successors is extendible. If one of them dies, $q_\sigma$ has a $1$ at $2s + i$ for the first one found dead, and $i_\sigma \neq i$, so $\sigma^\frown i_\sigma$ is the other successor, which does not die at the stage $s$; since $\sigma$ is extendible and $\sigma^\frown i$ is not, $\sigma^\frown i_\sigma$ is extendible. If none dies, both successors are extendible. Let $\Psi^{T \oplus Y}$ be the path $\rho_0 = \varepsilon$, $\rho_{k+1} = \rho_k {}^\frown i_{\rho_k}$. The empty string is extendible since $T$ is infinite, so every $\rho_k$ is extendible, and the limit is a path through $T$.
-:::
-
-:::corollary{#cor-lpo-not-llpo}
-$\mathsf{LPO} \not\leq_W \mathsf{LLPO}$. So $\mathsf{LLPO} <_W \mathsf{LPO}$.
-:::
-
-:::proof{of=cor-lpo-not-llpo}
-If $\mathsf{LPO} \leq_W \mathsf{LLPO}$, then $\widehat{\mathsf{LPO}} \leq_W \widehat{\mathsf{LLPO}}$, so $\mathsf J \leq_W \mathsf{WKL}$ by :ref{#thm-jump-lpo} and :ref{#thm-wkl-llpo}. This would give $\mathsf J \leq_\omega \mathsf{WKL}$, which fails by :ref{#cor-wkl-not-j}.
-:::
-
-The proof transfers a separation of ω-reducibility, obtained from the cone avoidance basis theorem, to a separation between two computably true problems, which ω-reducibility and computable reducibility do not distinguish. Parallelization thus connects the uniform world of Weihrauch reducibility with the non-uniform world of Turing degrees.
-
-:::quiz[parallelization]
-In the proof that $\mathsf{WKL} \leq_W \widehat{\mathsf{LLPO}}$, why is the instance $q_\sigma$ defined from the first stage at which a successor dies, rather than from the extendibility of the successors?
-
-- [x] Because extendibility is a $\Pi^0_1$ property of the tree, not computable from it, while the instance must be computed uniformly; the first death is found by a search, and $\mathsf{LLPO}$ only needs to avoid the side found dead.
-- [ ] Because both successors may die.
-
-  If $\sigma$ is extendible, at most one successor dies; the definition handles the other cases arbitrarily.
-- [ ] Because $\mathsf{LLPO}$ instances must have exactly one $1$.
-
-  They may have none, in which case both answers are solutions.
-
----
-
-Why does :ref{#cor-lpo-not-llpo} pass through the parallelizations?
-
-- [x] Because $\mathsf{LPO}$ and $\mathsf{LLPO}$ are computably true, so ω-reducibility and computable reducibility do not separate them; their parallelizations are $\mathsf J$ and $\mathsf{WKL}$, which are separated in ω-models by the cone avoidance basis theorem.
-- [ ] Because Weihrauch reducibility is only defined for parallel problems.
-
-  It is defined for all problems.
-- [ ] Because $\mathsf{LLPO}$ has two solutions on some instances.
-
-  Multiple solutions are allowed in all reducibilities.
-:::
+The backward functional of the first part uses the instance: it searches $p$ for its $1$. The first exercise gives a strong reduction. The converse reduction fails, $\mathsf{LPO} \not\leq_W \mathsf{LLPO}$; the third exercise proves it by a continuity argument, and the next lesson derives it from the separation of the jump from weak König's lemma.
 
 ## Exercises
 
@@ -158,27 +113,29 @@ Let $\Phi^p$ be the sequence $q$ with $q(n) = 1$ if $p(2m) = 1$ for some $2m \le
 ::::
 
 ::::exercise{difficulty=1}
-Show that if $\mathsf P$ is uniformly true, then $\widehat{\mathsf P}$ is uniformly true. Deduce from :ref{#thm-wkl-llpo} a second proof that $\mathsf{LLPO}$ is not uniformly true.
+Let $\mathsf{KL}_b$ be the bounded version of König's lemma of the last exercise of :ref{to="reducibilities/computable-reducibility"}, whose instances are pairs $(T, h)$ of an infinite finitely branching tree and a bound on its successors. Show that $\mathsf{KL}_b \leq_W \mathsf J$.
 
 :::solution
-If $\Phi^X$ solves $\mathsf P$, then the functional $\bigoplus_n X_n \mapsto \bigoplus_n \Phi^{X_n}$ solves $\widehat{\mathsf P}$. If $\mathsf{LLPO}$ were uniformly true, $\widehat{\mathsf{LLPO}}$ would be uniformly true, hence computably true, and so would $\mathsf{WKL} \leq_W \widehat{\mathsf{LLPO}}$. But some computable infinite binary tree has no computable path (:ref{#thm-dnc2-no-computable}).
+Let $\Phi^{T \oplus h} = T \oplus h$. Whether a node $\sigma$ has an extension in $T$ of length $|\sigma| + n$ is decided by inspecting the finitely many strings of that length extending $\sigma$ whose values are bounded by $h$; so the set of extendible nodes is $\Pi^0_1(T \oplus h)$, with an index independent of $T$ and $h$, and it is computable in $(T \oplus h)'$, uniformly. Let $\Psi$ compute from $(T \oplus h)'$ the path that starts at the root, which is extendible, and always moves to the least extendible successor. The search for that successor terminates, since an extendible node has an extendible successor.
 :::
 ::::
 
 ::::exercise{difficulty=2}
-For a problem $\mathsf P$ and $n \geq 1$, let $\mathsf P^n$ be the product of $n$ copies of $\mathsf P$. Show that if $\mathsf P$ is computably true, so is $\mathsf P^n$, and that $\mathsf J \not\leq_c \mathsf Q$ for every computably true problem $\mathsf Q$. Deduce that $\widehat{\mathsf{LPO}} \not\leq_W \mathsf{LPO}^n$ for every $n$: finitely many applications of $\mathsf{LPO}$ do not suffice.
+Show directly that $\mathsf{LPO} \not\leq_W \mathsf{LLPO}$. Suppose that $\Phi$ and $\Psi$ witness the reduction, and let $q = \Phi^{0^\infty}$. Consider separately the case where $q$ has no $1$ and the case where it has one.
 
 :::solution
-An instance $X_1 \oplus \cdots \oplus X_n$ of $\mathsf P^n$ computes each $X_i$, hence a solution $Y_i$ to each, hence $Y_1 \oplus \cdots \oplus Y_n$. If $\mathsf J \leq_c \mathsf Q$ with $\mathsf Q$ computably true, then for every $X$, the instance $\widetilde X \leq_T X$ has a solution $\widetilde Y \leq_T \widetilde X$, and $X \oplus \widetilde Y \leq_T X$ computes $X'$, which is impossible. Since $\mathsf{LPO}$ is computably true, so is $\mathsf{LPO}^n$; and $\widehat{\mathsf{LPO}} \leq_W \mathsf{LPO}^n$ would give $\mathsf J \leq_c \mathsf{LPO}^n$ by :ref{#thm-jump-lpo}.
+For every solution $i$ to $q$, $\Psi^{0^\infty \oplus i}$ codes $0$, the solution to $0^\infty$; let $u$ be larger than the uses of the computations $\Psi^{0^\infty \oplus i}(0)$ for these $i$. If $q$ has no $1$, let $p$ have a single $1$, at position $u$. The instance $\Phi^p$ of $\mathsf{LLPO}$ has at most one $1$, so one of $0$ and $1$ is a solution to it, say $i$; it is also a solution to $q$. Since $p \oplus i$ agrees with $0^\infty \oplus i$ below $u$, $\Psi^{p \oplus i}(0) = 0$, while the solution to $p$ is $1$. If $q(n) = 1$, let $m \geq u$ be such that $\Phi^{0^\infty}(n) = 1$ with use at most $m$, and let $p$ have a single $1$, at position $m$. Then $\Phi^p(n) = 1$, so $\Phi^p$ has its only $1$ at position $n$, and has the same unique solution $i$ as $q$. Again $\Psi^{p \oplus i}(0) = 0$, while the solution to $p$ is $1$.
 :::
 ::::
 
 ## Notes and references
 
-Weihrauch reducibility comes from computable analysis, where it was developed by Weihrauch, Brattka, Gherardi and Pauly; the handbook chapter of Brattka, Gherardi and Pauly is a survey. Gherardi and Marcone (2009), Dorais, Dzhafarov, Hirst, Mileti and Shafer (2016), Brattka and Rakotoniaina (2017) and Hirschfeldt and Jockusch (2016) developed its use for combinatorial principles.
+Weihrauch reducibility was introduced by Weihrauch in the late 1980s, in two technical reports of 1992, and studied by his students; Brattka, Gherardi and Pauly survey its history and the theory of the Weihrauch degrees. Gherardi and Marcone (2009) defined it for arbitrary problems and proposed it as a uniform version of reverse mathematics; Dorais, Dzhafarov, Hirst, Mileti and Shafer (2016) and Hirschfeldt and Jockusch (2016) developed it for combinatorial principles. Hirschfeldt, *Slicing the Truth*, Section 2.2, calls it uniform reducibility. Dzhafarov and Mummert treat uniformity in Section 3.7, with the intermediate value theorem (Proposition 3.7.4), and Weihrauch reducibility and its strong form in Sections 4.3 and 4.4; the non-reductions between the $\mathsf{RT}^1_k$ are their Proposition 4.3.7. That $\mathsf{LLPO} <_W \mathsf{LPO}$ is due to Weihrauch (1992); see Brattka, Gherardi and Pauly, Proposition 7.17.
 
+- K. Weihrauch, *The TTE-interpretation of three hierarchies of omniscience principles*, Informatik Berichte 130, FernUniversität Hagen, 1992.
 - V. Brattka, G. Gherardi and A. Pauly, *Weihrauch complexity in computable analysis*, in Handbook of Computability and Complexity in Analysis, Springer, 2021, 367–417.
 - G. Gherardi and A. Marcone, *How incomputable is the separable Hahn–Banach theorem?*, Notre Dame Journal of Formal Logic 50 (2009), 393–425.
-- V. Brattka and T. Rakotoniaina, *On the uniform computational content of Ramsey's theorem*, Journal of Symbolic Logic 82 (2017), 1278–1316.
 - F. G. Dorais, D. D. Dzhafarov, J. L. Hirst, J. R. Mileti and P. Shafer, *On uniform relationships between combinatorial problems*, Transactions of the American Mathematical Society 368 (2016), 1321–1359.
+- V. Brattka and T. Rakotoniaina, *On the uniform computational content of Ramsey's theorem*, Journal of Symbolic Logic 82 (2017), 1278–1316.
 - D. R. Hirschfeldt and C. G. Jockusch, *On notions of computability-theoretic reduction between Π¹₂ principles*, Journal of Mathematical Logic 16 (2016), 1650002.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.7, 4.3 and 4.4.
