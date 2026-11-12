@@ -74,7 +74,8 @@ areas.
 - **Computable structure theory.** It is not covered by the reference books of the
   platform, and would be a track of its own.
 
-**Specialized course added on 2026-11-12.**
+**Course added on 2026-11-12** (specialized at first; since 2026-11-13 the first course of
+the track "Lowness and avoidance").
 - **Effective forcing**: the forcing relation in general, its
   definability, forcing with trees (Sacks and Jockusch–Soare forcing), and the forcing
   question (Monin–Patey). It unifies techniques that are now spread over the Cohen
@@ -168,6 +169,172 @@ incompressibility, effective null sets, and betting strategies — and their equ
 - α-recursion theory and admissible ordinals beyond ω₁ᶜᵏ (Sacks, Parts C–D). They are a
   research topic of their own.
 
+## Models of arithmetic
+
+**Objective.** The model theory of first-order arithmetic and of its fragments. After the
+track, a student can work in non-standard models of fragments of PA, relate the axioms of
+induction and collection to the structure of cuts and end extensions, construct models
+with prescribed properties (end extensions, recursively saturated models, satisfaction
+classes), and prove the independence of combinatorial statements by indicators. The
+track is the first-order counterpart of the reverse mathematics track: its last courses
+are the tools behind the conservation results of that track.
+
+**Techniques.**
+- Coding finite sets and sequences inside weak theories;
+- overspill and underspill;
+- partial truth definitions;
+- the arithmetized completeness theorem;
+- definable types and ultrapowers;
+- recursive saturation and back-and-forth;
+- indicators.
+
+**Literature compared.**
+- Wong, *Model theory of arithmetic* (lecture notes, NUS and KGRC Vienna). It is a course of
+  fifteen lectures:
+  - the arithmetic hierarchy, collection, the weak König lemma in cuts, the arithmetized
+    completeness theorem;
+  - semiregular cuts, end and cofinal extensions;
+  - recursive saturation and back-and-forth;
+  - MacDowell–Specker, strongly definable and minimal types;
+  - preservation, arithmetic with a top, satisfaction classes, forcing in arithmetic.
+- Hájek–Pudlák, *Metamathematics of First-Order Arithmetic* (1998):
+  - Part I: fragments, partial truth definitions, recursion theory and logic in fragments;
+  - Part II: Ramsey-type independence, Paris–Harrington, α-large sets;
+  - Part III: self-reference, definable cuts, interpretability;
+  - Part IV: models of fragments, arithmetic with a top, indicators;
+  - Part V: bounded arithmetic.
+- Kaye, *Models of Peano Arithmetic* (1991), and Kossak–Schmerl, *The Structure of Models of
+  Peano Arithmetic* (2006), not available locally.
+
+**Courses, in order.**
+1. **`fragments-of-arithmetic`.**
+   - PA⁻ and the arithmetic hierarchy in models; IΔ₀ and exponentiation;
+   - coding of finite sets and sequences in IΔ₀ + exp;
+   - induction, least number principle and collection (IΣₙ, LΣₙ, BΣₙ); the theorems of
+     Parsons and Paris–Kirby;
+   - partial truth definitions and the finite axiomatizability of IΣₙ;
+   - (Hájek–Pudlák I.1–I.2; Wong 1–2.)
+2. **`cuts-and-extensions`.**
+   - Cuts, overspill and underspill;
+   - the standard system and Scott sets: the weak König lemma in cuts (Scott);
+   - Tennenbaum's theorem;
+   - end and cofinal extensions, and the preservation of formulas;
+   - Friedman's and Paris–Kirby's characterizations of collection by end extensions;
+   - semiregular and regular cuts;
+   - (Wong 3–6; Hájek–Pudlák IV.1.)
+3. **`end-extensions`.**
+   - The arithmetized completeness theorem and the low basis theorem in IΣ₁;
+   - elementary end extensions of models of PA (MacDowell–Specker);
+   - definable and strongly definable types, Gaifman's minimal types and their
+     consequences;
+   - (Wong 4, 9–11; Hájek–Pudlák I.3–I.4, IV.1.)
+4. **`recursive-saturation`.**
+   - Recursively saturated models and their existence (Barwise–Ressayre);
+   - back-and-forth, and Friedman's embedding theorem;
+   - automorphisms (Smoryński, Kossak–Kotlarski);
+   - satisfaction classes (Kotlarski–Krajewski–Lachlan, Lachlan);
+   - (Wong 7–8, 12, 14.)
+5. **`independence`.**
+   - Indicators and the method of Paris and Kirby;
+   - the Paris–Harrington principle and its unprovability in PA;
+   - α-large sets and their growth;
+   - arithmetic with a top;
+   - (Hájek–Pudlák II, IV.2–IV.3; Wong 13.)
+
+**Relations with other tracks.**
+- The course `induction-conservation` (reverse mathematics track) treats induction and
+  collection for second-order schemes and the conservation theorems of Friedman and
+  Harrington. It also contains Harrington's forcing in arithmetic, the last lecture of
+  Wong. The new track cites it rather than duplicating it, and that course points to the
+  first-order development here.
+- The track assumes first-order logic: completeness and compactness, and Gödel's
+  incompleteness theorems, as in Wong's prerequisites.
+
+**Excluded, with reasons.**
+- **Bounded arithmetic and complexity** (Hájek–Pudlák V). A topic of its own; a possible
+  specialized course.
+- **Self-reference, definable cuts and interpretability** (Hájek–Pudlák III). A possible
+  specialized course.
+- **Lattices of elementary substructures and other topics of Kossak–Schmerl.** Research
+  topics beyond the scope of a first track.
+
+## Lowness and avoidance
+
+**Objective.** The separation of mathematical problems by preservation properties:
+- cone avoidance, lowness, PA avoidance and their variants;
+- the forcing question as the tool to establish them;
+- control of the first and second jumps of generic sets.
+
+After the track, a student can read current research articles on the reverse
+mathematics of Ramsey-type theorems.
+
+**Techniques.**
+- The forcing question and its definability;
+- compactness and merging of forcing questions;
+- Mathias forcing and its variants;
+- first-jump control (lowness, low₂ constructions);
+- second-jump control (jump cone avoidance, non-high and jump-PA avoidance).
+
+**Literature compared.**
+- Patey, *Lowness and avoidance* (monograph, in `external-data/lowness-avoidance/`):
+  - first jump control: cone avoidance, lowness, compactness avoidance, custom properties,
+    conservation theorems, forcing design;
+  - higher jump control: jump cone avoidance, jump compactness avoidance, higher jump cone
+    avoidance.
+- Hirschfeldt, *Slicing the Truth*, Chapter 6, and Dzhafarov–Mummert, Chapters 7–9, for the
+  combinatorial principles.
+- The research articles behind each chapter (Seetapun; Cholak–Jockusch–Slaman; Liu;
+  Monin–Patey).
+
+**Courses, in order.**
+1. **`effective-forcing`** (existing course, written 2026-11-12): notions of forcing, the
+   forcing relation, Cohen forcing and tree forcings, Sacks forcing, the forcing question,
+   Mathias forcing. It becomes the first course of the track.
+2. **`avoidance`.** Cone avoidance through the forcing question:
+   - first examples;
+   - Seetapun's theorem;
+   - preservation of non-Σ⁰₁ definitions and of hyperimmunities.
+3. **`lowness`.** First-jump control:
+   - indices and coded Turing ideals;
+   - the low basis theorem revisited;
+   - weak preservation;
+   - beyond ∅′;
+   - low₂ solutions to RT²₂ (Cholak–Jockusch–Slaman).
+4. **`compactness-avoidance`.**
+   - PA avoidance and weak merging;
+   - Ramsey-type weak König's lemma;
+   - Liu's theorem (RT²₂ does not imply WKL);
+   - randomness, closed classes and DNC avoidance.
+5. **`separation-design`.**
+   - Separations by custom properties (immunity and variants, the Erdős–Moser theorem,
+     ADS and CAC);
+   - the design of a notion of forcing (Erdős–Moser, free set theorem).
+6. **`jump-cone-avoidance`.** Second-jump control:
+   - use and first-jump control;
+   - WKL, COH and partition regularity;
+   - the pigeonhole principle: every instance has a solution of non-high degree
+     (Monin–Patey).
+7. **`jump-compactness-avoidance`.**
+   - Jump PA avoidance;
+   - Mathias forcing and COH, product largeness;
+   - every Δ⁰₂ set has an infinite subset in it or its complement whose jump is not PA
+     over ∅′ (Monin–Patey).
+
+**Relations with other tracks.**
+- The track builds on the reverse mathematics track:
+  - `ramsey-theorem`, whose lessons on cone avoidance and Seetapun's theorem are the first
+    examples here;
+  - `reducibilities`, for preservation and ω-models;
+  - `pi01-classes` and `immunity-growth`, for basis theorems, PA and DNC degrees.
+- Results proved elsewhere are cited.
+
+**Excluded, with reasons.**
+- **Higher jump cone avoidance** (hyperarithmetic jump control). It needs the higher
+  computability track; a possible specialized course.
+- **Conservation theorems** (the isomorphism theorem for WKL, conservation over BΣ₂).
+  These belong with `induction-conservation` and the models of arithmetic track; a possible
+  specialized course.
+
 ## Computable analysis (specialized course, written 2026-11-12)
 
 Weihrauch's book is the reference. The platform needs one specialized course:
@@ -205,3 +372,6 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
   leaves out: relative randomness and van Lambalgen's theorem, 2-randomness and weak
   2-randomness, and Kurtz randomness against computable domination. Its overlap with
   `martingales` is replaced by citations.
+- **2026-11-13.** Two new tracks designed: models of arithmetic (after Wong's lecture
+  notes and Hájek–Pudlák) and lowness and avoidance (after Patey's monograph). The
+  specialized course `effective-forcing` becomes the first course of the second.

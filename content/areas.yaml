@@ -8,9 +8,13 @@
   color: "#0d9488"
 - id: reverse-math
   title: Reverse mathematics
-  description: Which axioms are needed to prove the theorems of ordinary mathematics?
+  description: The axioms needed to prove the theorems of ordinary mathematics.
   color: "#d97706"
 - id: higher
   title: Higher computability
   description: Computability along computable ordinals, and beyond the arithmetic.
   color: "#db2777"
+- id: arithmetic
+  title: Models of arithmetic
+  description: Fragments of Peano arithmetic, their models, and the independence of combinatorial statements.
+  color: "#15803d"
