@@ -130,6 +130,8 @@ For every solution $i$ to $q$, $\Psi^{0^\infty \oplus i}$ codes $0$, the solutio
 
 ## Notes and references
 
+The Weihrauch degrees of theorems of analysis — the intermediate value theorem, the maximum of a continuous function, monotone convergence — are determined in the course on computable analysis (:ref{#thm-ivt-llpo-wkl}, :ref{to="computable-analysis/maximum-and-limits"}).
+
 Weihrauch reducibility was introduced by Weihrauch in the late 1980s, in two technical reports of 1992, and studied by his students; Brattka, Gherardi and Pauly survey its history and the theory of the Weihrauch degrees. Gherardi and Marcone (2009) defined it for arbitrary problems and proposed it as a uniform version of reverse mathematics; Dorais, Dzhafarov, Hirst, Mileti and Shafer (2016) and Hirschfeldt and Jockusch (2016) developed it for combinatorial principles. Hirschfeldt, *Slicing the Truth*, Section 2.2, calls it uniform reducibility. Dzhafarov and Mummert treat uniformity in Section 3.7, with the intermediate value theorem (Proposition 3.7.4), and Weihrauch reducibility and its strong form in Sections 4.3 and 4.4; the non-reductions between the $\mathsf{RT}^1_k$ are their Proposition 4.3.7. That $\mathsf{LLPO} <_W \mathsf{LPO}$ is due to Weihrauch (1992); see Brattka, Gherardi and Pauly, Proposition 7.17.
 
 - K. Weihrauch, *The TTE-interpretation of three hierarchies of omniscience principles*, Informatik Berichte 130, FernUniversität Hagen, 1992.

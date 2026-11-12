@@ -1,0 +1,28 @@
+title: Computable analysis
+area: computability
+level: Advanced
+order: 12
+prerequisites: [pi01-classes, second-order-arithmetic, reducibilities]
+summary: Computation on real numbers, continuous functions and closed sets through names; computable functions are continuous; the Weihrauch degrees of the intermediate value theorem, the maximum and monotone convergence.
+description: >
+  Computable analysis studies which operations of analysis can be carried out
+  by algorithms. Real numbers, continuous functions and closed sets are given
+  by names in Baire space, and computable functions on names are continuous.
+  The course compares representations of the reals, shows that computable
+  real functions are continuous and that the arithmetic operations, limits
+  with a known rate, the maximum value and the integral are computable, and
+  introduces computable metric spaces and closed sets given by negative
+  information. It then classifies classical theorems by Weihrauch
+  reducibility: closed choice and the maximum are equivalent to weak König's
+  lemma, the intermediate value theorem lies between LLPO and weak König's
+  lemma and is equivalent to the Brouwer fixed point theorem in dimension one,
+  and the monotone convergence theorem is equivalent to the jump.
+objectives:
+  - Compute with names on Baire space, and prove non-computability by continuity arguments
+  - Compare representations of the reals, and explain why decimal expansions are inadequate
+  - Prove that computable real functions are continuous, and compute the arithmetic operations and effective limits
+  - Use the effective compactness of the unit interval to compute moduli of continuity and maximum values
+  - Work with computable metric spaces and with closed sets given by negative information
+  - Classify the maximum, the intermediate value theorem, the Brouwer fixed point theorem in dimension one and the monotone convergence theorem in the Weihrauch degrees
+  - Compare these classifications with the reverse mathematics of the same theorems
+lessons: [type-two-computability, representations, real-functions, continuous-functions, closed-sets-and-choice, intermediate-value-theorem, maximum-and-limits]

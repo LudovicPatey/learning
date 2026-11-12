@@ -100,6 +100,8 @@ If $x$ is moreover not computable, such a sequence, bounded by any rational abov
 
 ## Notes and references
 
+The representation of reals by fast Cauchy sequences used here is the Cauchy representation of computable analysis, where it is compared with other representations, such as decimal expansions (:ref{to="computable-analysis/representations"}).
+
 The coding of reals follows Simpson, Section II.4 (Definition II.4.4), and Dzhafarov–Mummert, Sections 10.1–10.2. Completeness for sequences with a modulus, :ref{#prop-rca-complete}, is Dzhafarov–Mummert, Exercise 10.9.2; Simpson proves the related nested interval completeness, Theorem II.4.8. Specker (1949) constructed computable monotone bounded sequences without computable limit, one of the first results of computable analysis; the construction is Simpson's Example II.4.7, and the equivalence of monotone convergence with $\mathsf{ACA}_0$ is Simpson, Theorem III.2.2, and Dzhafarov–Mummert, Theorem 10.2.4. Hirst (2007) compares the representations of reals by fast Cauchy sequences, decimal expansions and Dedekind cuts in reverse mathematics: single reals can be converted in $\mathsf{RCA}_0$, while converting sequences of reals between some representations requires $\mathsf{WKL}_0$ or $\mathsf{ACA}_0$. Computable analysis studies the reals under these codings; see Weihrauch's book.
 
 - E. Specker, *Nicht konstruktiv beweisbare Sätze der Analysis*, Journal of Symbolic Logic 14 (1949), 145–158.

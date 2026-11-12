@@ -168,7 +168,7 @@ incompressibility, effective null sets, and betting strategies — and their equ
 - α-recursion theory and admissible ordinals beyond ω₁ᶜᵏ (Sacks, Parts C–D). They are a
   research topic of their own.
 
-## Computable analysis (planned, specialized course)
+## Computable analysis (specialized course, written 2026-11-12)
 
 Weihrauch's book is the reference. The platform needs one specialized course:
 - computable reals and their representations;
@@ -197,3 +197,7 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
 - **2026-11-12.** Core course `martingales` written and added to the randomness track:
   betting strategies, Ville's theorem, Schnorr's theorem, computable randomness, Schnorr
   randomness and the hierarchy of randomness notions.
+- **2026-11-12.** Specialized course `computable-analysis` written: type-2 computability,
+  representations, computable real functions, continuous functions and closed sets, and
+  the Weihrauch degrees of the intermediate value theorem, the maximum and monotone
+  convergence.

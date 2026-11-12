@@ -104,6 +104,8 @@ Without the index, the natural candidate would be the set of quadruples $(a, r, 
 
 ## Notes and references
 
+The computable content of the intermediate value theorem — which instances have computable zeros, and how hard it is to find a zero uniformly — is studied in the course on computable analysis (:ref{#thm-ivt-not-computable}, :ref{#thm-ivt-llpo-wkl}).
+
 The coding of continuous functions follows Simpson, Section II.6: Definition II.6.1, and Theorem II.6.6, the intermediate value theorem, with the same proof. Dzhafarov–Mummert, Sections 10.3–10.4, give the same development, with :ref{#lem-value-sigma1} as their Lemma 10.3.7 and the intermediate value theorem as their Theorem 10.4.1; their Proposition 3.7.4 shows that the theorem does not admit uniformly computable solutions. Its Weihrauch degree was determined by Brattka and Gherardi (2011); see also Dzhafarov–Mummert, Theorem 10.4.3.
 
 - V. Brattka and G. Gherardi, *Effective choice and boundedness principles in computable analysis*, Bulletin of Symbolic Logic 17 (2011), 73–117.
