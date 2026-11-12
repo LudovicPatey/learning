@@ -1,11 +1,13 @@
 ---
 title: K-trivial sets
-summary: Sets whose initial segments are as simple as their lengths; Chaitin's counting theorem shows that there are countably many K-trivial sets, all of them Δ⁰₂; closure under join; Solovay functions and a characterization of K-triviality by a computable bound.
-duration: 40
+summary: Sets whose initial segments are as simple as their lengths; Chaitin's counting theorem shows that there are countably many K-trivial sets, all of them Δ⁰₂; closure under join.
+duration: 45
 prerequisites: [martin-lof-randomness/levin-schnorr, kolmogorov-complexity/coding-theorem, pi01-classes/computable-members]
 ---
 
-By the Levin–Schnorr theorem, a sequence is random when the complexity $K(X \uh n)$ of its initial segments is as large as possible, namely at least $n - O(1)$. This course studies the other extreme: the sets $A$ for which $K(A \uh n)$ is as small as possible. A computable set has $K(A \uh n) =^+ K(n)$ (:ref{#prop-k-segments-computable}): its initial segments contain no more information than their lengths. For plain complexity, the analogous condition characterizes the computable sets (:ref{#thm-chaitin-computable}). For prefix-free complexity it does not: the next lesson builds non-computable sets with the same complexity as computable ones. These **K-trivial** sets coincide with several notions of computational weakness relative to randomness, which is the subject of the last lesson.
+By the Levin–Schnorr theorem, a sequence is random when the complexity $K(X \uh n)$ of its initial segments is as large as possible, namely at least $n - O(1)$. This course studies the other extreme: the sets $A$ for which $K(A \uh n)$ is as small as possible. A computable set has $K(A \uh n) =^+ K(n)$ (:ref{#prop-k-segments-computable}): its initial segments contain no more information than their lengths. For plain complexity, the analogous condition characterizes the computable sets (:ref{#thm-chaitin-computable}). For prefix-free complexity it does not: the lesson on cost functions builds non-computable sets with the same complexity as computable ones. These **K-trivial** sets coincide with several notions of computational weakness relative to randomness, which is the subject of the last three lessons.
+
+This lesson proves what can be obtained from the definition by counting descriptions: there are few K-trivial sets with a given constant, so they are all computable in $\emptyset'$; and the join of two K-trivial sets is K-trivial, by a description that pays for the common length only once.
 
 Throughout, $K$ is the prefix-free complexity defined by an optimal prefix-free machine $U$, $\leq^+$ is inequality up to an additive constant, and a number $n$ is identified with the string associated with it, so that $K(n)$ is defined.
 
@@ -15,7 +17,15 @@ Throughout, $K$ is the prefix-free complexity defined by an optimal prefix-free 
 A set $A$ is **K-trivial** if there is a constant $b$ with $K(A \uh n) \leq K(n) + b$ for every $n$. We then say that $A$ is K-trivial **with constant** $b$.
 :::
 
-The opposite inequality $K(n) \leq^+ K(A \uh n)$ holds for every set, since $n = |A \uh n|$ is computed from $A \uh n$. A K-trivial set is far from random: $K(A \uh n) \leq^+ K(n) \leq^+ 2 \log n$ for $n \geq 2$, by :ref{#prop-k-basic} (2), whereas a random sequence $X$ satisfies $K(X \uh n) \geq n - O(1)$ by the Levin–Schnorr theorem.
+The opposite inequality $K(n) \leq^+ K(A \uh n)$ holds for every set, since $n = |A \uh n|$ is computed from $A \uh n$. So a K-trivial set is one for which $K(A \uh n) =^+ K(n)$: describing the first $n$ bits of $A$ costs no more than describing the number $n$. The function $K(n)$ is far from monotone: $K(2^k) \leq^+ K(k) \leq^+ 2 \log k$, whereas most numbers below $2^k$ have complexity at least $k - O(1)$, by counting descriptions. The definition asks that $A \uh n$ be simple exactly when $n$ is, and not only that $K(A \uh n)$ be small.
+
+A K-trivial set is far from random: $K(A \uh n) \leq^+ K(n) \leq^+ 2 \log n$ for $n \geq 2$, by :ref{#prop-k-basic} (2), whereas a random sequence $X$ satisfies $K(X \uh n) \geq n - O(1)$ by the Levin–Schnorr theorem.
+
+:::example{#ex-k-trivial}
+1. Every computable set is K-trivial, by :ref{#prop-k-segments-computable}.
+2. Chaitin's number $\Omega$ is not K-trivial: $K(\Omega \uh n) \geq n - c$ by :ref{#thm-omega}, and $n - c > 2\log n + O(1)$ for large $n$. Like a K-trivial set, $\Omega$ is computable in $\emptyset'$; the two notions are at opposite ends of the $\Delta^0_2$ sets.
+3. Sets of small complexity need not be K-trivial. Let $X$ be random and $A = \{ 2^i : i \in X \}$. The prefix $A \uh n$ is computed from $n$ and $X \uh \ell$, where $\ell$ is the number of powers of $2$ below $n$, so $K(A \uh n) \leq^+ K(n) + \ell + 2 \log \ell \leq^+ 4 \log n$ by :ref{#prop-k-basic} (1) and (2), since $\ell \leq \log n + 1$. But $A$ is not K-trivial, as an exercise of the next lesson shows.
+:::
 
 :::proposition{#prop-k-trivial-basic}
 1. Every computable set is K-trivial.
@@ -29,7 +39,7 @@ The opposite inequality $K(n) \leq^+ K(A \uh n)$ holds for every set, since $n =
 
 ## Chaitin's counting theorem
 
-The number of strings of length $n$ with complexity close to $K(n)$ is bounded independently of $n$.
+The number of strings of length $n$ with complexity close to $K(n)$ is bounded independently of $n$. The idea is that a description of a string $\sigma$ of length $n$ is also a description of $n$, by composition with the length function. If many strings of length $n$ had descriptions of length about $K(n)$, then $n$ would have many descriptions of that length, and its algorithmic probability would be larger than $2^{-K(n)}$ by more than a constant factor, which the coding theorem forbids.
 
 :::theorem[Chaitin]{#thm-k-trivial-count}
 There is a constant $c$ such that for all $n$ and $b$, fewer than $2^{b+c}$ strings $\sigma$ of length $n$ satisfy $K(\sigma) \leq K(n) + b$.
@@ -39,7 +49,7 @@ There is a constant $c$ such that for all $n$ and $b$, fewer than $2^{b+c}$ stri
 Let $M$ be the prefix-free machine $\tau \mapsto |U(\tau)|$, with the same domain as $U$. By the coding theorem (:ref{#thm-coding}), there is $c$ with $P_M(n) < 2^{c - K(n)}$ for every $n$; enlarging $c$ makes the inequality strict. Let $N$ be the number of strings $\sigma$ of length $n$ with $K(\sigma) \leq K(n) + b$. A shortest description of each of them is a description of $n$ for $M$, of length at most $K(n) + b$, and these descriptions are distinct. So $N\, 2^{-K(n) - b} \leq P_M(n) < 2^{c - K(n)}$, and $N < 2^{b + c}$.
 :::
 
-:::corollary[Chaitin]{#cor-k-trivial-delta2}
+:::corollary[Chaitin; Zambella]{#cor-k-trivial-delta2}
 For every $b$, there are fewer than $2^{b+c}$ sets that are K-trivial with constant $b$, with $c$ as in :ref{#thm-k-trivial-count}. In particular, there are countably many K-trivial sets, and every K-trivial set is $\Delta^0_2$.
 :::
 
@@ -49,7 +59,11 @@ If $A_0, \dots, A_{N-1}$ are distinct sets that are K-trivial with constant $b$,
 The function $K$ is computable in $\emptyset'$, since $K(\sigma) \leq k$ is a $\Sigma^0_1$ property of $(\sigma, k)$. So the set $T_b$ of strings $\sigma$ with $K(\sigma \uh m) \leq K(m) + b$ for every $m \leq |\sigma|$ is a tree computable in $\emptyset'$, and its paths are the sets that are K-trivial with constant $b$. The class $[T_b]$ is finite, so each of its members is isolated. By :ref{#prop-isolated-computable} relativized to $\emptyset'$, each member of $[T_b]$ is computable in $\emptyset'$.
 :::
 
-The same argument, applied to $C$ in place of $K$, is the first step of the proof of Chaitin's theorem on plain complexity; there, a further argument shows that the members of the corresponding tree are computable. For $K$ no such argument exists, since non-computable K-trivial sets exist.
+:::figure[The shape of the tree $T_b$. Each level has fewer than $2^{b+c}$ nodes, by the counting theorem, so $T_b$ has fewer than $2^{b+c}$ paths. Below the dashed line the paths are separated: a node there extends to at most one path, and $\emptyset'$, which decides membership in $T_b$, can follow a path by discarding the nodes whose subtree is finite.]
+<svg class="fig" viewBox="0 0 600 320" width="600" role="img" aria-label="A tree with at most three nodes at each level, two infinite paths that separate at level 4, and a branch through 1 that dies at level 5"><line x1="225.0" y1="22" x2="122.5" y2="56" class="accent-stroke" stroke-width="2"/><line x1="225.0" y1="22" x2="327.5" y2="56" class="ink-stroke" stroke-width="1.1"/><line x1="122.5" y1="56" x2="71.2" y2="90" class="accent-stroke" stroke-width="2"/><line x1="327.5" y1="56" x2="276.2" y2="90" class="ink-stroke" stroke-width="1.1"/><line x1="71.2" y1="90" x2="96.9" y2="124" class="accent-stroke" stroke-width="2"/><line x1="276.2" y1="90" x2="250.6" y2="124" class="ink-stroke" stroke-width="1.1"/><line x1="96.9" y1="124" x2="84.1" y2="158" class="accent-stroke" stroke-width="2"/><line x1="96.9" y1="124" x2="109.7" y2="158" class="accent-stroke" stroke-width="2"/><line x1="250.6" y1="124" x2="263.4" y2="158" class="ink-stroke" stroke-width="1.1"/><line x1="84.1" y1="158" x2="90.5" y2="192" class="accent-stroke" stroke-width="2"/><line x1="109.7" y1="158" x2="103.3" y2="192" class="accent-stroke" stroke-width="2"/><line x1="263.4" y1="158" x2="257.0" y2="192" class="ink-stroke" stroke-width="1.1"/><line x1="90.5" y1="192" x2="93.7" y2="226" class="accent-stroke" stroke-width="2"/><line x1="103.3" y1="192" x2="106.5" y2="226" class="accent-stroke" stroke-width="2"/><line x1="93.7" y1="226" x2="92.1" y2="260" class="accent-stroke" stroke-width="2"/><line x1="106.5" y1="226" x2="104.9" y2="260" class="accent-stroke" stroke-width="2"/><circle cx="225.0" cy="22" r="4" class="accent-fill"/><circle cx="122.5" cy="56" r="4" class="accent-fill"/><circle cx="327.5" cy="56" r="4" class="ink-fill"/><circle cx="71.2" cy="90" r="4" class="accent-fill"/><circle cx="276.2" cy="90" r="4" class="ink-fill"/><circle cx="96.9" cy="124" r="4" class="accent-fill"/><circle cx="250.6" cy="124" r="4" class="ink-fill"/><circle cx="84.1" cy="158" r="4" class="accent-fill"/><circle cx="109.7" cy="158" r="4" class="accent-fill"/><circle cx="263.4" cy="158" r="4" class="ink-fill"/><circle cx="90.5" cy="192" r="4" class="accent-fill"/><circle cx="103.3" cy="192" r="4" class="accent-fill"/><circle cx="257.0" cy="192" r="4" class="ink-fill"/><line x1="250.0" y1="201" x2="264.0" y2="201" class="ink-stroke" stroke-width="1.4"/><circle cx="93.7" cy="226" r="4" class="accent-fill"/><circle cx="106.5" cy="226" r="4" class="accent-fill"/><circle cx="92.1" cy="260" r="4" class="accent-fill"/><circle cx="104.9" cy="260" r="4" class="accent-fill"/><text x="92.1" y="282" text-anchor="middle" class="mrm" font-size="13">⋮</text><text x="104.9" y="282" text-anchor="middle" class="mrm" font-size="13">⋮</text><text x="470" y="26" class="label">level 0: 1 node</text><text x="470" y="60" class="label">level 1: 2 nodes</text><text x="470" y="94" class="label">level 2: 2 nodes</text><text x="470" y="128" class="label">level 3: 2 nodes</text><text x="470" y="162" class="label">level 4: 3 nodes</text><text x="470" y="196" class="label">level 5: 3 nodes</text><text x="470" y="230" class="label">level 6: 2 nodes</text><text x="470" y="264" class="label">level 7: 2 nodes</text><line x1="20" y1="141" x2="590" y2="141" class="muted-stroke" stroke-width="1" stroke-dasharray="4 3"/><text x="20" y="304" class="label">accent: the two infinite paths; bars: nodes without successors</text></svg>
+:::
+
+The tree $T_b$ may have nodes without infinite extensions, and $\emptyset'$ cannot recognize them in general; the argument of :ref{#prop-isolated-computable} only uses that the number of paths is finite. The same argument, applied to $C$ in place of $K$, is the first step of the proof of Chaitin's theorem on plain complexity; there, a further argument shows that the members of the corresponding tree are computable. For $K$ no such argument exists, since non-computable K-trivial sets exist. Both parts of the proof use the counting theorem as a compactness principle: a constant bound on the width of a tree turns a property of all initial segments into a finite set of candidates.
 
 :::quiz[the counting theorem]
 In the proof of :ref{#thm-k-trivial-count}, why is the machine $M = |U|$ prefix-free?
@@ -72,12 +86,12 @@ In the proof of :ref{#cor-k-trivial-delta2}, why is each member of $[T_b]$ isola
   Computability of the tree does not make its paths isolated; finiteness does.
 - [ ] Because K-trivial sets are computable.
 
-  Some K-trivial sets are not computable, as shown in the next lesson.
+  Some K-trivial sets are not computable, as shown in the lesson on cost functions.
 :::
 
 ## Closure under join
 
-The counting theorem allows one to describe $A \uh n$ by a shortest description of $n$ followed by a bounded amount of information.
+The counting theorem allows one to describe $A \uh n$ by a shortest description of $n$ followed by a bounded amount of information: the position of $A \uh n$ in an enumeration of the fewer than $2^{b+c}$ candidates.
 
 :::proposition{#prop-k-trivial-join}
 If $A$ and $B$ are K-trivial, then $A \oplus B$ is K-trivial.
@@ -93,7 +107,7 @@ $$
 For an arbitrary length $m$, let $n = \lceil m/2 \rceil$. The string $(A \oplus B) \uh m$ is $(A \oplus B) \uh 2n$ if $m$ is even, and this string with its last bit removed if $m$ is odd; both operations are computable and do not require knowing $m$, so $K((A \oplus B) \uh m) \leq^+ K((A \oplus B) \uh 2n)$. Since $n$ is computed from $m$, $K(n) \leq^+ K(m)$. So $K((A \oplus B) \uh m) \leq^+ K(m)$.
 :::
 
-The direct estimate $K(\langle \sigma, \sigma' \rangle) \leq^+ K(\sigma) + K(\sigma')$ only gives $2K(n)$; the proof avoids describing $n$ twice. Closure under Turing reducibility, the other half of the statement that the K-trivial sets form an ideal, is much harder; it is a consequence of the main theorem of the last lesson.
+The direct estimate $K(\langle \sigma, \sigma' \rangle) \leq^+ K(\sigma) + K(\sigma')$ only gives $2K(n)$; the proof avoids describing $n$ twice. Closure under weak truth-table reducibility is proved in the next lesson. Closure under Turing reducibility, the other half of the statement that the K-trivial sets form an ideal, is much harder; it is a consequence of the main theorem of the last lesson.
 
 :::quiz[closure under join]
 In the proof of :ref{#prop-k-trivial-join}, why is the list $S_\tau$ enumerated rather than computed?
@@ -119,67 +133,38 @@ Why are the indices $\beta$ and $\gamma$ written with exactly $k$ bits?
   $k = b + c$ is a constant, independent of $n$.
 :::
 
-## Solovay functions
-
-The function $K$ is not computable, but some computable functions bound it from above and agree with it, up to a constant, infinitely often.
-
-:::definition{#def-solovay-function}
-A **Solovay function** is a computable function $g : \nat \to \nat$ such that $K(m) \leq^+ g(m)$ for every $m$, and $g(m) \leq^+ K(m)$ for infinitely many $m$.
-:::
-
-Fix a computable bijection $\langle \tau, n, t \rangle$ between $\bstr \times \nat \times \nat$ and $\nat$, with $\langle \tau, n, t \rangle \geq n$.
-
-:::proposition[Solovay]{#prop-solovay-function}
-Let $g(m) = |\tau|$ if $m = \langle \tau, n, t \rangle$ and $t$ is the least stage with $U(\tau)[t]\converge = n$, and $g(m) = 2\lfloor \log(m+1) \rfloor + 2$ otherwise. Then $g$ is a Solovay function. Moreover, if $\tau$ is a shortest description of $n$ and $m = \langle \tau, n, t \rangle$ is as in the first case, then $g(m) = K(n)$.
-:::
-
-:::proof{of=prop-solovay-function}
-The function $g$ is computable, since it is decidable whether $U(\tau)$ converges for the first time at stage $t$ with output $n$.
-
-*$K \leq^+ g$.* In the second case, let $\ell = \lfloor \log(m+1) \rfloor$ be the length of the string associated with $m$. By :ref{#prop-k-basic} (2), $K(m) \leq^+ \ell + 2 \log \ell \leq^+ 2\ell + 2 = g(m)$. In the first case, let $M$ be the machine that, on input $\tau$, waits for the least stage $t$ with $U(\tau)[t]\converge$ and outputs $\langle \tau, U(\tau), t \rangle$. It has the domain of $U$, so it is prefix-free, and $K(m) \leq^+ |\tau| = g(m)$.
-
-*$g \leq^+ K$ infinitely often.* Let $\tau$ be a shortest description of $n$, $t$ its stage of convergence and $m = \langle \tau, n, t \rangle$. Then $g(m) = |\tau| = K(n)$, and $K(n) \leq^+ K(m)$ since $n$ is computed from $m$. There is one such $m$ for each $n$, so infinitely many.
-:::
-
-A Solovay function is a computable substitute for $K$ along infinitely many arguments. Bienvenu and Downey observed that it can replace $K(n)$ in the definition of K-triviality.
-
-:::proposition[Bienvenu, Downey]{#prop-solovay-ktrivial}
-Let $g$ be the Solovay function of :ref{#prop-solovay-function}. A set $A$ is K-trivial if and only if $K(A \uh m) \leq^+ g(m)$ for every $m$.
-:::
-
-:::proof{of=prop-solovay-ktrivial}
-($\Rightarrow$) $K(A \uh m) \leq^+ K(m) \leq^+ g(m)$.
-
-($\Leftarrow$) Let $c$ be such that $K(A \uh m) \leq g(m) + c$ for every $m$. Given $n$, let $\tau$ be a shortest description of $n$, $t$ its stage of convergence, and $m = \langle \tau, n, t \rangle \geq n$. Then $K(A \uh m) \leq g(m) + c = K(n) + c$. The string $A \uh n$ is computed from $A \uh m$ by truncation to the length $n$, and $n$ is computed from $m$; so $K(A \uh n) \leq^+ K(A \uh m) \leq^+ K(n)$, with a constant independent of $n$.
-:::
-
-Since $g$ is computable and $K$ is approximable from above, the strings $\sigma$ with $K(\sigma \uh m) \leq g(m) + c$ for every $m \leq |\sigma|$ form a c.e. tree, whose paths are exactly the sets satisfying the bound of the proposition with constant $c$; they are all K-trivial. Nies proved that every K-trivial set is computable from a c.e. K-trivial set, with the cost function method and the golden run construction mentioned in the last lesson; the c.e. trees above give another proof, based on the fact that a K-trivial set is an isolated path of such a tree. This theorem is admitted here (see Nies, *Lowness properties and randomness*, 2005, and Nies, *Computability and Randomness*, Chapter 5).
-
 ## Exercises
 
 ::::exercise{difficulty=1}
-Show that if $A$ is K-trivial and $f$ is a computable strictly increasing function, then the set $B = \{ n : f(n) \in A \}$ is K-trivial.
+Let $S$ be an infinite computable set, and suppose that $K(A \uh n) \leq K(n) + b$ for every $n \in S$. Show that $A$ is K-trivial.
 
 :::solution
-For $n \geq 1$, the string $B \uh n$ is computed from $A \uh (f(n-1) + 1)$, by reading the bits at positions $f(0), \dots, f(n-1)$. Let $h(0) = 0$ and $h(n) = f(n-1) + 1$ for $n \geq 1$, a computable strictly increasing function. Given the string $A \uh h(n)$, one computes its length $h(n)$, then $n$ as the unique number with this image under $h$, then $B \uh n$; so $K(B \uh n) \leq^+ K(A \uh h(n))$. Hence $K(B \uh n) \leq^+ K(A \uh h(n)) \leq^+ K(h(n)) \leq^+ K(n)$, since $h(n)$ is computed from $n$.
+Let $h(n)$ be the $n$-th element of $S$ in increasing order; $h$ is computable and strictly increasing, so $h(n) \geq n$. Given $A \uh h(n)$, one computes its length $h(n)$, then $n$, then $A \uh n$ by truncation; so $K(A \uh n) \leq^+ K(A \uh h(n))$. Hence $K(A \uh n) \leq^+ K(A \uh h(n)) \leq K(h(n)) + b \leq^+ K(n)$, since $h(n)$ is computed from $n$.
 :::
 ::::
 
-::::exercise{difficulty=1}
-Show that no K-trivial set is Martin-Löf random, and that if $A$ is K-trivial and $Z$ is random, then $A \oplus Z$ is not K-trivial.
+::::exercise{difficulty=2}
+Show that there is a constant $c'$ such that for every large enough $b$, at least $2^{b - 2 \log b - c'}$ sets are K-trivial with constant $b$. Compare with :ref{#cor-k-trivial-delta2}.
+
+:::hint
+For a string $\sigma$, consider the finite set $\sigma 0^\infty$, and bound its constant of K-triviality by $K(\sigma)$.
+:::
 
 :::solution
-A random set satisfies $K(Z \uh n) \geq n - O(1)$, whereas a K-trivial set satisfies $K(A \uh n) \leq^+ 2 \log n$; so no set is both. If $A \oplus Z$ were K-trivial, then $Z$ would be K-trivial as well: $Z = \{ n : 2n + 1 \in A \oplus Z \}$, and the first exercise applies with $f(n) = 2n + 1$. This contradicts the first statement.
+The prefix of length $n$ of $\sigma 0^\infty$ is computed from $\langle \sigma, n \rangle$: it is $\sigma \uh n$ if $n \leq |\sigma|$, and $\sigma 0^{n - |\sigma|}$ otherwise. By :ref{#prop-k-basic} (1), there is $r$ with $K((\sigma 0^\infty) \uh n) \leq K(\sigma) + K(n) + r$ for all $\sigma$ and $n$, so $\sigma 0^\infty$ is K-trivial with constant $K(\sigma) + r$. By :ref{#prop-k-basic} (2), there is $r'$ with $K(\sigma) \leq |\sigma| + 2 \log |\sigma| + r'$ for $|\sigma| \geq 2$. Let $\ell = b - \lceil 2 \log b \rceil - r - r'$. For $b$ large enough, $\ell \geq 2$ and $\ell + 2 \log \ell + r' + r \leq b$, so the $2^\ell$ sets $\sigma 0^\infty$ with $|\sigma| = \ell$ are K-trivial with constant $b$, and they are pairwise distinct. So there are at least $2^{b - 2 \log b - r - r' - 1}$ of them. The upper bound of :ref{#cor-k-trivial-delta2} is $2^{b + c}$: the number of sets that are K-trivial with constant $b$ is $2^{b - O(\log b)}$.
 :::
 ::::
 
 ## Notes and references
 
-K-trivial sets appear in the work of Chaitin (1977), who proved :ref{#cor-k-trivial-delta2}, and in Solovay's unpublished manuscript (1975), which contains the construction of a non-computable K-trivial set given in the next lesson. The closure under join is due to Downey, Hirschfeldt, Nies and Stephan (2003). Solovay functions were studied by Bienvenu and Downey (2009), and Bienvenu, Merkle and Nies (2011) showed that every Solovay function can replace $K$ in the definition of K-triviality.
+Chaitin (1975) proved the counting theorem for prefix-free complexity, in the form "at most $2^{n - r + O(1)}$ strings of length $n$ have $K(\sigma) \leq n + K(n) - r$", of which :ref{#thm-k-trivial-count} is the case $r = n - b$. Chaitin (1977) proved that K-trivial sets are $\Delta^0_2$; Nies attributes this result, and the finiteness of the classes $[T_b]$, to Chaitin (1976), while Downey and Hirschfeldt attribute the bound $O(2^b)$ on the number of sets that are K-trivial with constant $b$ to Zambella (1990). The lower bound of the second exercise and the finer estimates of the function $b \mapsto |[T_b]|$ are due to Downey, Miller and Yu (Downey and Hirschfeldt, Section 11.1.4). A non-computable K-trivial set was first built by Solovay (1975), in an unpublished manuscript; the lesson on cost functions gives the cost function form of the construction. The closure under join is due to Downey, Hirschfeldt, Nies and Stephan (2003).
 
-- G. J. Chaitin, *Algorithmic information theory*, IBM Journal of Research and Development 21 (1977), 350–359.
+The basic facts of the lesson are in Nies, *Computability and Randomness*, Section 5.2 (Definition 5.2.1, Theorems 5.2.4 and 5.2.17), with the counting theorem as Theorem 2.2.26, and in Downey and Hirschfeldt, *Algorithmic Randomness and Complexity*, Section 11.1 (Theorems 11.1.1 and 11.1.3, Proposition 11.1.4, Theorems 11.1.10 and 11.1.11), with the counting theorem as Theorem 3.7.6.
+
+- G. J. Chaitin, *A theory of program size formally identical to information theory*, Journal of the ACM 22 (1975), 329–340.
+- G. J. Chaitin, *Information-theoretic characterizations of recursive infinite strings*, Theoretical Computer Science 2 (1976), 45–48.
+- G. J. Chaitin, *Algorithmic information theory*, IBM Journal of Research and Development 21 (1977), 350–359, 496.
+- D. Zambella, *On sequences with simple initial segments*, ILLC Technical Report ML-1990-05, University of Amsterdam, 1990.
 - R. G. Downey, D. R. Hirschfeldt, A. Nies and F. Stephan, *Trivial reals*, in: Proceedings of the 7th and 8th Asian Logic Conferences, 2003, 103–131.
-- L. Bienvenu and R. Downey, *Kolmogorov complexity and Solovay functions*, STACS 2009, 147–158.
-- L. Bienvenu, W. Merkle and A. Nies, *Solovay functions and K-triviality*, STACS 2011.
-- A. Nies, *Lowness properties and randomness*, Advances in Mathematics 197 (2005), 274–305.
-- A. Nies, *Computability and Randomness*, Oxford University Press, 2009.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 2.2 and 5.2.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 3.7 and 11.1.
