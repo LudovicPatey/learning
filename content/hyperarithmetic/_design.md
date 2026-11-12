@@ -94,8 +94,9 @@ The higher randomness course and the reverse mathematics track (big-five, ATR₀
   it directly, which avoids the effective Borel codes.
 - **Prove the rank lemma** (`lem-wf-rank-hyp`, previously admitted with a sketch whose
   ordinal bound "|a|·2+2" was not justified). With c.e. trees T^i (prefix closure of W_i)
-  the recursion is clean and gives the uniform version that `higher-randomness`
-  uses ("made uniform by effective transfinite recursion"). Kleene's theorem is now
+  the recursion is clean and gives a uniform version (`lem-rank-sets`). Since its
+  revision of 2026-11-12, `higher-randomness` no longer uses it: it obtains the uniform
+  Δ¹₁ definitions it needs from rank comparison. Kleene's theorem is now
   fully proved, modulo the Π¹₁-completeness of O, which is used only in exercises and in
   the Kleene basis theorem.
 - **Enderton–Putnam instead of an admitted comparison.** The old proof that HYP is not

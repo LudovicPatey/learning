@@ -6,16 +6,21 @@ prerequisites: [martin-lof-randomness, descriptive-set-theory]
 summary: Randomness with respect to hyperarithmetic and Π¹₁ null classes, the Sacks–Tanaka theorem and its consequences.
 description: >
   Randomness notions obtained by replacing computability with hyperarithmetic
-  definability: Δ¹₁-randomness, Martin-Löf tests with Π¹₁ components and
-  their universal test, and Π¹₁-randomness, with no classical analogue. The
-  course proves the characterization of Π¹₁-randomness by Chong, Nies and
-  Yu, the coincidence of Σ¹₁- and Δ¹₁-randomness, and the null cone theorem
-  for hyperarithmetic reducibility, from explicitly admitted facts on the measure
-  of Δ¹₁ classes and the Sacks–Tanaka theorem.
+  definability. The course first describes Π¹₁ classes as unions of stages
+  along the countable ordinals, proves that the stages below ω₁ᶜᵏ are Δ¹₁ and
+  that Π¹₁ classes are measurable (Lusin), and admits that measures of Δ¹₁
+  classes are hyperarithmetic. It then studies Δ¹₁-randomness, Martin-Löf
+  tests with Π¹₁ components and their universal test, and Π¹₁-randomness, with
+  no classical analogue. It proves the Sacks–Tanaka theorem that almost no
+  sequence collapses ω₁ᶜᵏ, the characterization of Π¹₁-randomness by Stern and
+  by Chong, Nies and Yu, the largest null Π¹₁ class, the coincidence of Σ¹₁- and
+  Δ¹₁-randomness, and the null cone theorem for hyperarithmetic reducibility.
 objectives:
+  - Describe a Π¹₁ class by its stages, and prove that the stages below ω₁ᶜᵏ are exactly the Δ¹₁ classes
+  - Prove that Π¹₁ classes are measurable
   - Define Δ¹₁-randomness, Π¹₁-Martin-Löf randomness and Π¹₁-randomness, and compare them
   - Build a universal higher Martin-Löf test by trimming along ordinal stages
-  - Characterize Π¹₁-randomness through the Church–Kleene ordinal of a sequence
-  - Prove that null Σ¹₁ classes are covered by null Δ¹₁ classes
-  - Prove that the upper hyperarithmetic cone of a non-hyperarithmetic set is null
-lessons: [higher-tests, pi11-randomness, hyperdegrees]
+  - Prove the Sacks–Tanaka theorem by selection and boundedness
+  - Characterize Π¹₁-randomness through the Church–Kleene ordinal of a sequence, and build the largest null Π¹₁ class
+  - Prove that null Σ¹₁ classes are covered by null Δ¹₁ classes, and that the upper hyperarithmetic cone of a non-hyperarithmetic set is null
+lessons: [pi11-classes, pi11-measure, higher-tests, sacks-tanaka, pi11-randomness, hyperdegrees]
