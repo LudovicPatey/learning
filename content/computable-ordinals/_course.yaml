@@ -3,17 +3,20 @@ area: higher
 level: Advanced
 order: 1
 prerequisites: [arithmetic-hierarchy, fundamentals]
-summary: Well-orders, ordinal notations, the Church–Kleene ordinal ω₁ᶜᵏ, well-founded trees and Π¹₁ sets.
+summary: Well-orders, ordinal notations, the Church–Kleene ordinal ω₁ᶜᵏ, well-founded trees, Π¹₁ sets and Spector's boundedness theorem.
 description: >
   The ordinals that can be described effectively: well-orderings and ordinals,
-  computable well-orderings and Kleene's system of notations O, the
-  Markwald–Kleene theorem, well-founded trees and the Kleene–Brouwer ordering,
-  the normal form and completeness of Π¹₁ sets, and Spector's boundedness
-  theorem.
+  computable well-orderings and the Church–Kleene ordinal, Kleene's system of
+  notations O and effective transfinite recursion, the Markwald–Kleene theorem,
+  well-founded trees and the Kleene–Brouwer ordering, the normal form of Π¹₁
+  sets and the Π¹₁-completeness of well-ordering and of O, and Spector's
+  boundedness theorem with its first applications.
 objectives:
   - Manipulate well-orderings, ordinals and transfinite recursion
-  - Define Kleene's O and compute with notations using the recursion theorem
+  - Work with computable well-orderings and know what an index does and does not reveal
+  - Define Kleene's O and compute with notations by effective transfinite recursion
   - Prove that constructive and computable ordinals coincide
-  - Prove the normal form theorem for Π¹₁ sets and the Π¹₁-completeness of WO
+  - Relate well-founded trees, their ranks and the Kleene–Brouwer ordering
+  - Prove the normal form theorem for Π¹₁ sets and the Π¹₁-completeness of WO and of O
   - Prove and apply Spector's boundedness theorem
-lessons: [ordinals, kleene-o, trees-and-pi11]
+lessons: [ordinals, computable-well-orderings, kleene-o, markwald, well-founded-trees, trees-and-pi11, boundedness]

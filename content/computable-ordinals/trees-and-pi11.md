@@ -1,45 +1,11 @@
 ---
-title: Well-founded trees and Π¹₁ sets
-summary: Well-founded trees and their ranks; the Kleene–Brouwer ordering; the normal form of Π¹₁ sets as sets of indices of well-founded trees; the Π¹₁-completeness of well-foundedness and well-ordering; Π¹₁ is not Σ¹₁; Spector's boundedness theorem.
+title: Π¹₁ sets and Kleene's O
+summary: The analytic sets Π¹₁ and Σ¹₁, Kleene's normal form by well-founded trees, and the Π¹₁-completeness of well-foundedness, of well-ordering and of Kleene's O.
 duration: 45
-prerequisites: [kleene-o]
+prerequisites: [well-founded-trees, markwald]
 ---
 
-The arithmetic hierarchy classifies sets defined by quantifiers over numbers. Quantifying over sets or functions gives the **analytic** hierarchy, whose first level, the $\Pi^1_1$ sets, is the central object of higher computability. This lesson shows that the $\Pi^1_1$ sets are exactly the sets $\{ n : T_n \text{ is well-founded} \}$ for uniformly computable sequences of trees $(T_n)$, that being a well-ordering is a complete $\Pi^1_1$ property, and that the $\Sigma^1_1$ sets of well-orderings have bounded order types. The last result, Spector's boundedness theorem, is the main tool of the next course.
-
-## Trees on ℕ and their ranks
-
-A **tree** $T \subseteq \nat^{<\nat}$ is a set of finite sequences of numbers closed under prefixes. A **path** of $T$ is a function $f \in \nat^\nat$ all of whose prefixes belong to $T$. The tree is **well-founded** if it has no path. For $\sigma \in T$, write $T_\sigma = \{ \tau : \sigma\tau \in T \}$.
-
-:::definition{#def-tree-rank}
-The **rank** of a well-founded tree is defined by transfinite recursion: $\mathrm{rk}(T) = \sup \{ \mathrm{rk}(T_{\langle n \rangle}) + 1 : \langle n \rangle \in T \}$, and $\mathrm{rk}(\emptyset) = 0$.
-:::
-
-The recursion is legitimate because the relation "$\tau$ properly extends $\sigma$", restricted to a well-founded tree, has no infinite increasing chains. The rank of a well-founded tree is a countable ordinal, and every countable ordinal is the rank of some well-founded tree. A tree with a path has no rank.
-
-The **Kleene–Brouwer ordering** on $\nat^{<\nat}$ is defined by $\sigma <_{\mathrm{KB}} \tau$ if $\sigma$ properly extends $\tau$, or if $\sigma(i) < \tau(i)$ at the first position $i$ where they differ. It is a computable linear order: extensions come before their prefixes, and incomparable sequences are compared lexicographically.
-
-:::theorem{#thm-kleene-brouwer}
-A tree $T$ is well-founded if and only if $<_{\mathrm{KB}}$ restricted to $T$ is a well-ordering. In that case, its order type is at least $\mathrm{rk}(T)$.
-:::
-
-:::proof{of=thm-kleene-brouwer}
-If $T$ has a path $f$, then $f \uh 0 >_{\mathrm{KB}} f \uh 1 >_{\mathrm{KB}} \cdots$ is a descending sequence.
-
-Suppose $T$ well-founded; we prove by induction on $\mathrm{rk}(T)$ that $(T, <_{\mathrm{KB}})$ is a well-ordering of type at least $\mathrm{rk}(T)$. If $T$ is empty, both are $0$. Otherwise, the nodes of $T$ other than the root are the sequences $\langle n \rangle \tau$ with $\tau \in T_{\langle n \rangle}$, and the ordering compares first the initial numbers $n$, then the sequences $\tau$ by the Kleene–Brouwer ordering; the root comes last. So $(T, <_{\mathrm{KB}})$ is the ordered sum of the orderings $(T_{\langle n \rangle}, <_{\mathrm{KB}})$ for $n = 0, 1, 2, \dots$ with $\langle n \rangle \in T$, followed by one element. Each summand is a well-ordering of type at least $\mathrm{rk}(T_{\langle n \rangle})$, by the induction hypothesis, and an ordered sum of well-orderings indexed by a well-ordering is a well-ordering. Its type is at least $\mathrm{rk}(T_{\langle n \rangle}) + 1$ for every $n$, hence at least $\mathrm{rk}(T)$.
-:::
-
-:::quiz[the Kleene–Brouwer ordering]
-Why do extensions come **before** their prefixes in the Kleene–Brouwer ordering?
-
-- [x] So that a path, which gives longer and longer prefixes, yields a descending sequence; with the opposite convention, a path would give an increasing sequence, compatible with well-ordering.
-- [ ] So that the ordering is computable.
-
-  Both conventions give computable orderings; the choice matters for well-foundedness.
-- [ ] So that the root is the least element.
-
-  With this convention the root is the largest element.
-:::
+The arithmetic hierarchy classifies sets defined by quantifiers over numbers. Quantifying over sets or functions gives the **analytic** hierarchy, whose first level, the $\Pi^1_1$ sets, is the central object of higher computability. This lesson shows that the $\Pi^1_1$ sets are exactly the sets $\{ n : T_n \text{ is well-founded} \}$ for uniformly computable sequences of trees $(T_n)$, so that well-foundedness, well-ordering and membership in Kleene's $\mathcal O$ are complete $\Pi^1_1$ properties. The next lesson separates $\Pi^1_1$ from $\Sigma^1_1$. The proofs combine the normal form of arithmetic formulas, the Kleene–Brouwer ordering of the previous lesson, and effective transfinite recursion on trees.
 
 ## Π¹₁ sets and their normal form
 
@@ -47,7 +13,7 @@ Why do extensions come **before** their prefixes in the Kleene–Brouwer orderin
 A set $A \subseteq \nat$ is **$\Pi^1_1$** if there is an arithmetic formula $\varphi(n, X)$ such that $n \in A \iff \forall X \subseteq \nat\ \varphi(n, X)$. It is **$\Sigma^1_1$** if its complement is $\Pi^1_1$, and **$\Delta^1_1$** if it is both.
 :::
 
-Quantifiers over functions $f \in \nat^\nat$ can be used instead of quantifiers over sets, by coding a function by its graph; the class is the same. Every arithmetic set is $\Delta^1_1$. Relativized to an oracle $Y$, one obtains the $\Pi^1_1(Y)$ sets.
+Quantifiers over functions $f \in \nat^\nat$ can be used instead of quantifiers over sets, by coding a function by its graph; the class is the same. Every arithmetic set is $\Delta^1_1$. Relativized to an oracle $Y$, one obtains the $\Pi^1_1(Y)$ sets. The set $\mathrm{WO}$ of :ref{#def-wo} is $\Pi^1_1$: $e \in \mathrm{WO}$ if and only if $e$ is an index of a computable linear order, an arithmetic condition, and every function $f$ fails to be a descending sequence of $L_e$.
 
 :::theorem[Kleene normal form]{#thm-pi11-normal-form}
 A set $A$ is $\Pi^1_1$ if and only if there is a uniformly computable sequence of trees $(T_n)$ such that $n \in A$ if and only if $T_n$ is well-founded.
@@ -75,98 +41,87 @@ Let $\mathrm{WF}$ be the set of indices of computable trees that are well-founde
 Both definitions are $\Pi^1_1$: "for every $f$, $f$ is not a path", and "for every $f$, $f$ is not a descending sequence", together with the arithmetic conditions of being a tree or a linear order. If $A$ is $\Pi^1_1$, the normal form gives a computable function $n \mapsto$ an index of $T_n$, reducing $A$ to $\mathrm{WF}$. Composing with the computable map sending an index of a tree to an index of its Kleene–Brouwer ordering reduces $A$ to $\mathrm{WO}$, by :ref{#thm-kleene-brouwer}.
 :::
 
-The set $\mathcal O$ of notations is also $\Pi^1_1$: it is the least set closed under the three rules of :ref{#def-kleene-o}, so $a \in \mathcal O$ if and only if $a$ belongs to every set that is closed under the rules, together with a relation playing the role of $<_{\mathcal O}$; this is a $\Pi^1_1$ condition. It is also $\Pi^1_1$-complete, a result we admit (Sacks, *Higher Recursion Theory*, Section I.5).
+## Kleene's O is Π¹₁-complete
 
-## Π¹₁ is not Σ¹₁
+Since $\mathcal O$ is defined as the least set closed under rules, membership in $\mathcal O$ is a universal statement over sets: a number is a notation if it belongs to every set closed under the rules. This is the general reason why inductive definitions produce $\Pi^1_1$ sets.
 
-:::proposition{#prop-pi11-not-sigma11}
-There is a $\Pi^1_1$ set that is not $\Sigma^1_1$. In particular $\mathrm{WF}$ and $\mathrm{WO}$ are not $\Sigma^1_1$.
+:::proposition{#prop-o-pi11}
+The set $\mathcal O$ is $\Pi^1_1$.
 :::
 
-:::proof{of=prop-pi11-not-sigma11}
-For each $e$ and $n$, let $T_{e,n}$ be the set of sequences $\sigma$ such that no prefix $\tau \preceq \sigma$ satisfies $\Phi_e(\langle n, \tau \rangle)[|\sigma|]\converge = 0$. It is a tree, computable uniformly in $e$ and $n$, even when $\Phi_e$ is partial. Let $(T_n)$ be given by :ref{#thm-pi11-normal-form} for a $\Pi^1_1$ set $A$, with $T_n = \{ \sigma : \neg R(n, \tau) \text{ for all } \tau \preceq \sigma \}$, and let $\Phi_e$ compute the characteristic function of $R$, with value $0$ when $R$ holds. A path of $T_n$ is a path of $T_{e,n}$. Conversely, if $f$ is a path of $T_{e,n}$, then for each $k$ the computation $\Phi_e(\langle n, f \uh k \rangle)$ converges at some stage $s$, and $f \uh m \in T_{e,n}$ for $m \geq \max(s, k)$ shows that $R(n, f \uh k)$ fails; so $f$ is a path of $T_n$. Hence $T_{e,n}$ is well-founded if and only if $T_n$ is, and $U = \{ \langle e, n \rangle : T_{e,n} \text{ is well-founded} \}$ is a $\Pi^1_1$ set whose sections $U_e = \{ n : \langle e, n \rangle \in U \}$ include all the $\Pi^1_1$ sets.
+:::proof{of=prop-o-pi11}
+Call a pair $(X, Y)$, with $X \subseteq \nat$ and $Y \subseteq \nat \times \nat$, **closed** if $1 \in X$; if $x \in X$, then $2^x \in X$, $(x, 2^x) \in Y$, and $(z, 2^x) \in Y$ whenever $(z, x) \in Y$; and if $\Phi_e$ is total, $\Phi_e(n) \in X$ and $(\Phi_e(n), \Phi_e(n+1)) \in Y$ for every $n$, then $3 \cdot 5^e \in X$ and $(z, 3 \cdot 5^e) \in Y$ whenever $(z, \Phi_e(n)) \in Y$ for some $n$. Being closed is an arithmetic property of $(X, Y)$. We show that $a \in \mathcal O$ if and only if $a \in X$ for every closed pair $(X, Y)$, a $\Pi^1_1$ condition.
 
-Suppose that $U$ were $\Sigma^1_1$. Then its complement would be $\Pi^1_1$, and so would be $D = \{ n : \langle n, n \rangle \notin U \}$, its preimage under the computable map $n \mapsto \langle n, n \rangle$; hence $D = U_e$ for some $e$; then $e \in D \iff \langle e, e \rangle \notin U \iff e \notin U_e = D$, a contradiction. So $U$ is not $\Sigma^1_1$. Since $U$ reduces to $\mathrm{WF}$ and $\mathrm{WO}$, these are not $\Sigma^1_1$ either: $\Sigma^1_1$ sets are closed under computable preimages.
+The pair $(\mathcal O, <_{\mathcal O})$ is closed, which gives the direction from right to left. Conversely, let $(X, Y)$ be closed, and let $\mathcal O'$ be the set of $a \in \mathcal O$ such that $a \in X$ and $(b, a) \in Y$ for every $b <_{\mathcal O} a$. Then $\mathcal O'$ satisfies the rules of :ref{#def-kleene-o}: for the limit rule, if all $\Phi_e(n)$ are in $\mathcal O'$ and $\Phi_e(n) <_{\mathcal O} \Phi_e(n+1)$, then $(\Phi_e(n), \Phi_e(n+1)) \in Y$, so $3 \cdot 5^e \in X$; and every $b <_{\mathcal O} 3 \cdot 5^e$ satisfies $b <_{\mathcal O} \Phi_e(n)$ for some $n$, so $(b, \Phi_e(n)) \in Y$ and $(b, 3 \cdot 5^e) \in Y$. The successor rule is similar. By minimality, $\mathcal O \subseteq \mathcal O' \subseteq X$.
 :::
 
-## Spector's boundedness theorem
+Conversely, every $\Pi^1_1$ set reduces to $\mathcal O$. By the normal form theorem it suffices to send a computable tree $T$ to a number that is a notation exactly when $T$ is well-founded. The natural idea is to assign to each node $\sigma$ a notation above the notations of its immediate successors $\sigma m \in T$, by effective transfinite recursion on the tree, as in the proof of :ref{#thm-markwald}. Two points need care. The notations of the successors must be combined into an increasing sequence, as required by the limit rule; and when $T$ has a path, the number assigned to the root must fail to be a notation. Both are handled by building the notation of the subtree above $\sigma m$ **on top of** the notations already used for $\sigma 0, \dots, \sigma (m - 1)$: the sequence is then increasing by construction, and a notation for the root can be decomposed, by :ref{#lem-o-inversion}, into notations for the nodes along any path, with decreasing ordinals.
 
-For an index $e$ of a computable linear order, write $L_e$ for this order; for $e \in \mathrm{WO}$, its order type $|L_e|$ is a computable ordinal.
-
-:::theorem[Spector]{#thm-boundedness}
-If $A \subseteq \mathrm{WO}$ is $\Sigma^1_1$, then $\sup \{ |L_e| : e \in A \} < \omega_1^{\mathrm{CK}}$.
+:::theorem[Kleene]{#thm-o-complete}
+The set $\mathcal O$ is $\Pi^1_1$-complete: for every $\Pi^1_1$ set $A$, there is a total computable function $f$ such that $n \in A$ if and only if $f(n) \in \mathcal O$.
 :::
 
-:::proof{of=thm-boundedness}
-The supremum is at most $\omega_1^{\mathrm{CK}}$; suppose that it is equal to $\omega_1^{\mathrm{CK}}$. Then for every index $e$,
+:::proof{of=thm-o-complete}
+By :ref{#thm-pi11-normal-form}, let $(T_n)$ be a uniformly computable sequence of trees with $n \in A$ if and only if $T_n$ is well-founded. By the recursion theorem (:ref{#cor-self-reference}) and the SMN theorem, there is a total computable function $F(n, b, \sigma)$, of a number $n$, a number $b$ and a sequence $\sigma$, such that $F(n, b, \sigma) = 3 \cdot 5^{j}$, where $j$ is an index, computed from $n$, $b$, $\sigma$ and an index of $F$, of the function $m \mapsto c_m$ defined by
 $$
-\begin{aligned}
-e \in \mathrm{WO} \iff{} & L_e \text{ is a linear order and } \exists d\, \big(d \in A \wedge \exists h\ \\
-& (h \text{ is an order-preserving injection from } L_e \text{ into } L_d)\big).
-\end{aligned}
+c_0 = 2^b, \qquad c_{m+1} = \begin{cases} 2^{F(n, c_m, \sigma m)} & \text{if } \sigma m \in T_n, \\ 2^{c_m} & \text{otherwise.} \end{cases}
 $$
-If $e \in \mathrm{WO}$, then $|L_e| < \omega_1^{\mathrm{CK}}$, so some $d \in A$ has $|L_d| \geq |L_e|$, and $L_e$ embeds into $L_d$ by the comparison theorem (:ref{#thm-wo-comparison}). Conversely, a linear order that embeds into a well-ordering is a well-ordering, since a descending sequence would be mapped to a descending sequence. The right-hand side is $\Sigma^1_1$: "$d \in A$" is $\Sigma^1_1$, "$h$ is an order-preserving injection" is arithmetic, and existential quantifiers combine. So $\mathrm{WO}$ would be $\Sigma^1_1$, contradicting :ref{#prop-pi11-not-sigma11}.
+The function $F$ is total, since it only computes an index, and the function $m \mapsto c_m$ is then total as well. Let $f(n) = F(n, 1, \langle \rangle)$. Fix $n$ and write $T = T_n$ and $F(b, \sigma) = F(n, b, \sigma)$.
+
+*Claim 1. If $T_\sigma$ is well-founded, then for every $b \in \mathcal O$, $F(b, \sigma) \in \mathcal O$ and $b <_{\mathcal O} F(b, \sigma)$.* By induction on $\mathrm{rk}(T_\sigma)$, for all $b$ at once. Let $(c_m)$ be the sequence of $F(b, \sigma) = 3 \cdot 5^j$. We show by induction on $m$ that $c_m \in \mathcal O$ and $c_m <_{\mathcal O} c_{m+1}$. First, $c_0 = 2^b \in \mathcal O$. If $\sigma m \in T$, then $T_{\sigma m}$ has rank less than $\mathrm{rk}(T_\sigma)$, and the induction hypothesis applied to the base $c_m$ gives $F(c_m, \sigma m) \in \mathcal O$ with $c_m <_{\mathcal O} F(c_m, \sigma m) <_{\mathcal O} c_{m+1}$. Otherwise $c_{m+1} = 2^{c_m}$ and $c_m <_{\mathcal O} c_{m+1}$. So $3 \cdot 5^j \in \mathcal O$, and $b <_{\mathcal O} c_0 <_{\mathcal O} 3 \cdot 5^j$.
+
+*Claim 2. If $F(b, \sigma) \in \mathcal O$ and $\sigma m \in T$, then $F(b', \sigma m) \in \mathcal O$ and $|F(b', \sigma m)| < |F(b, \sigma)|$ for some $b'$.* Let $F(b, \sigma) = 3 \cdot 5^j$ with sequence $(c_m)$. By :ref{#lem-o-inversion}, every $c_k$ is in $\mathcal O$ and $c_{m+1} <_{\mathcal O} 3 \cdot 5^j$. Now $c_{m+1} = 2^{F(c_m, \sigma m)}$ with $F(c_m, \sigma m) \neq 0$, so $F(c_m, \sigma m) \in \mathcal O$ by inversion again, and $F(c_m, \sigma m) <_{\mathcal O} c_{m+1} <_{\mathcal O} 3 \cdot 5^j$. Take $b' = c_m$.
+
+If $n \in A$, then $T$ is well-founded, and $f(n) \in \mathcal O$ by Claim 1 with $b = 1$ and $\sigma = \langle \rangle$. If $n \notin A$, let $g$ be a path of $T$, and suppose $f(n) \in \mathcal O$. Applying Claim 2 along $g$, with $b'$ given explicitly by its proof, defines numbers $b_0 = 1, b_1, b_2, \dots$ such that $F(b_k, g \uh k) \in \mathcal O$ and $|F(b_{k+1}, g \uh (k+1))| < |F(b_k, g \uh k)|$ for every $k$: an infinite descending sequence of ordinals, which is impossible. So $f(n) \notin \mathcal O$.
 :::
 
-:::corollary{#cor-boundedness}
-1. For every computable ordinal $\alpha$, the set $\mathrm{WO}_{< \alpha}$ of indices $e \in \mathrm{WO}$ with $|L_e| < \alpha$ is $\Delta^1_1$.
-2. The set $\mathcal O$ is not $\Sigma^1_1$.
+:::figure[The notation $F(b, \sigma)$ of the proof. The chain $c_0, c_1, c_2, \dots$ starts just above $b$; when $\sigma k \in T$, the notation of the subtree above $\sigma k$ is built on top of $c_k$, and $c_{k+1}$ is its successor. The limit of the chain is $F(b, \sigma)$.]
+<svg class="fig" viewBox="0 0 600 222" width="600" role="img" aria-label="The notation F(b, sigma) is the limit of a chain c0, c1, c2 starting above b; each step builds the notation of a subtree on top of the previous element of the chain"><defs><marker id="co-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="muted-fill"/></marker><marker id="co-red-acc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="accent-fill"/></marker></defs><line x1="46" y1="120" x2="103" y2="120" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-red)"/><line x1="116" y1="120" x2="243" y2="120" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-red)"/><line x1="256" y1="120" x2="383" y2="120" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-red)"/><line x1="396" y1="120" x2="460" y2="120" class="ink-stroke" stroke-width="1.3" stroke-dasharray="4 3"/><circle cx="40" cy="120" r="4.5" class="ink-fill"/><text x="40.0" y="146.0" text-anchor="middle" class="math" font-size="16">b</text><circle cx="110" cy="120" r="4.5" class="ink-fill"/><text x="110.0" y="146.0" text-anchor="middle" class="math" font-size="16"><tspan class="math">c</tspan><tspan class="math" font-size="11" dy="4">0</tspan></text><circle cx="250" cy="120" r="4.5" class="ink-fill"/><text x="250.0" y="146.0" text-anchor="middle" class="math" font-size="16"><tspan class="math">c</tspan><tspan class="math" font-size="11" dy="4">1</tspan></text><circle cx="390" cy="120" r="4.5" class="ink-fill"/><text x="390.0" y="146.0" text-anchor="middle" class="math" font-size="16"><tspan class="math">c</tspan><tspan class="math" font-size="11" dy="4">2</tspan></text><circle cx="540" cy="120" r="5.5" class="accent-fill"/><text x="540.0" y="146.0" text-anchor="middle" class="math" font-size="16">F(b, σ)</text><text x="500.0" y="125.0" text-anchor="middle" class="mrm muted" font-size="16">⋯</text><path d="M114,112 Q150.0,50 174.0,62" class="accent-stroke" stroke-width="1.3" marker-end="url(#co-red-acc)"/><circle cx="180.0" cy="64" r="4" class="accent-fill"/><path d="M186.0,66 Q220.0,80 244,111" class="muted-stroke" stroke-width="1.2" marker-end="url(#co-red)"/><text x="180.0" y="50" text-anchor="middle" font-size="14"><tspan class="math">F</tspan><tspan class="mrm">(</tspan><tspan class="math">c</tspan><tspan class="math" font-size="9" dy="4">0</tspan><tspan class="mrm" dy="-4">, </tspan><tspan class="math">σ</tspan><tspan class="mrm">0)</tspan></text><path d="M254,112 Q290.0,50 314.0,62" class="accent-stroke" stroke-width="1.3" marker-end="url(#co-red-acc)"/><circle cx="320.0" cy="64" r="4" class="accent-fill"/><path d="M326.0,66 Q360.0,80 384,111" class="muted-stroke" stroke-width="1.2" marker-end="url(#co-red)"/><text x="320.0" y="50" text-anchor="middle" font-size="14"><tspan class="math">F</tspan><tspan class="mrm">(</tspan><tspan class="math">c</tspan><tspan class="math" font-size="9" dy="4">1</tspan><tspan class="mrm" dy="-4">, </tspan><tspan class="math">σ</tspan><tspan class="mrm">1)</tspan></text><text x="40.0" y="186.0" text-anchor="start" class="label" font-size="12">For σk ∈ T, the notation of the subtree above σk is built on top of c<tspan font-size="9" dy="3">k</tspan><tspan dy="-3"> </tspan>, and c<tspan font-size="9" dy="3">k+1</tspan><tspan dy="-3"> </tspan> is its successor;</text><text x="40.0" y="204.0" text-anchor="start" class="label" font-size="12">for σk ∉ T, c<tspan font-size="9" dy="3">k+1</tspan><tspan dy="-3"> </tspan> is the successor of c<tspan font-size="9" dy="3">k</tspan><tspan dy="-3"> </tspan>.</text></svg>
 :::
 
-:::proof{of=cor-boundedness}
-1. Let $d$ be an index of a computable well-ordering of type $\alpha$. Then $e \in \mathrm{WO}_{<\alpha}$ if and only if $L_e$ is a linear order that embeds into a proper initial segment of $L_d$, a $\Sigma^1_1$ condition; and if and only if $e \in \mathrm{WO}$ and $L_d$ does not embed into $L_e$, a $\Pi^1_1$ condition, since "$L_d$ embeds into $L_e$" is $\Sigma^1_1$.
-2. Let $f$ be the total computable function of :ref{#prop-constructive-computable}, which maps every $a \in \mathcal O$ to an index of a computable well-ordering of type $|a|$. If $\mathcal O$ were $\Sigma^1_1$, then $\{ e : \exists a\, (a \in \mathcal O \wedge f(a) = e) \}$ would be a $\Sigma^1_1$ subset of $\mathrm{WO}$ containing well-orderings of every computable type, by :ref{#cor-constructive-computable}. This contradicts :ref{#thm-boundedness}.
-:::
+:::quiz[the reduction to O]
+Why is the notation of the subtree above $\sigma m$ built on top of $c_m$, instead of being computed independently and added to $c_m$ with $+_{\mathcal O}$?
 
-:::quiz[the boundedness theorem]
-In the proof of :ref{#thm-boundedness}, why does the unboundedness of $A$ make $\mathrm{WO}$ a $\Sigma^1_1$ set?
+- [x] Because then $c_m <_{\mathcal O} c_{m+1}$ follows from Claim 1, and in the ill-founded case $F(c_m, \sigma m)$ is recovered from $c_{m+1}$ by inversion alone. With a sum, one would need to show that $a +_{\mathcal O} x \in \mathcal O$ implies $x \in \mathcal O$, which does not follow from :ref{#lem-notation-sum}.
+- [ ] Because $+_{\mathcal O}$ is not computable.
 
-- [x] Because a computable linear order is then a well-ordering exactly when it embeds into some member of $A$, and this is expressed with existential quantifiers over a number, a function, and the $\Sigma^1_1$ condition $d \in A$.
-- [ ] Because $A$ is equal to $\mathrm{WO}$.
+  It is total computable (:ref{#lem-notation-sum}).
+- [ ] Because otherwise the function $F$ would not be total.
 
-  $A$ may be much smaller than $\mathrm{WO}$; it only needs to contain arbitrarily long well-orderings.
-- [ ] Because every well-ordering is computable.
-
-  This is false, since $\omega_1^{\mathrm{CK}}$ is not computable, and it is not needed: only the well-orderings with an index in $\mathrm{WO}$ are concerned.
+  Totality holds in both versions: $F$ only computes an index.
 
 ---
 
-Why is "embedding into a well-ordering" enough to guarantee well-foundedness?
+In the ill-founded case, where is the path $g$ used?
 
-- [x] Because an order-preserving map sends a descending sequence to a descending sequence, and the target has none.
-- [ ] Because the embedding is computable.
+- [x] To choose, at each node $g \uh k$, the successor $g \uh (k+1) \in T$ to which Claim 2 applies; following it forever gives the descending sequence of ordinals.
+- [ ] To show that $F$ is total.
 
-  The embedding is an arbitrary function; only order preservation is used.
-- [ ] Because both orders are computable.
+  Totality does not depend on the tree.
+- [ ] To compute $f(n)$.
 
-  Computability plays no role in this step.
+  $f(n) = F(n, 1, \langle \rangle)$ does not depend on the paths of $T_n$.
 :::
+
+The theorem relativizes uniformly: $\mathcal O^X$ is $\Pi^1_1(X)$-complete for every $X$. Together with :ref{#cor-pi11-complete}, it shows that $\mathrm{WF}$, $\mathrm{WO}$ and $\mathcal O$ are many-one reducible to one another: they are three presentations of the same complete $\Pi^1_1$ set. In the course on hyperarithmetic sets, $\mathcal O$ plays for $\Pi^1_1$ sets the role that $\emptyset'$ plays for c.e. sets.
 
 ## Exercises
 
 ::::exercise{difficulty=1}
-Show that the set of indices $e$ such that $W_e$, viewed as a set of sequences, is a well-founded tree is $\Pi^1_1$, and that every $\Sigma^1_1$ set of such indices has ranks bounded below $\omega_1^{\mathrm{CK}}$.
+Show that a set $A \subseteq \nat$ is $\Pi^1_1$ if and only if $A \leq_m \mathcal O$, and that the same holds with $\mathrm{WO}$ or $\mathrm{WF}$ in place of $\mathcal O$.
 
 :::solution
-"$W_e$ is closed under prefixes" is arithmetic and "no function is a path of $W_e$" is $\Pi^1_1$. For the bound, the Kleene–Brouwer ordering restricted to $W_e$ is a c.e. linear order, uniformly in $e$; preceded by a copy of $\omega$, it has an infinite field, and :ref{#prop-computable-ordinals-basic} (3) gives a total computable function $f$ such that $f(e)$ is an index of a computable linear order isomorphic to $\omega + (W_e, <_{\mathrm{KB}})$. If $W_e$ is a well-founded tree, then $f(e) \in \mathrm{WO}$ and $|L_{f(e)}| \geq \mathrm{rk}(W_e)$, by :ref{#thm-kleene-brouwer}. The image under $f$ of a $\Sigma^1_1$ set $B$ of such indices, $\{ d : \exists e\, (e \in B \wedge f(e) = d) \}$, is a $\Sigma^1_1$ subset of $\mathrm{WO}$, so its types, and hence the ranks of the trees $W_e$, $e \in B$, are bounded below $\omega_1^{\mathrm{CK}}$ by :ref{#thm-boundedness}.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that $\omega_1^{\mathrm{CK}}$ is the supremum of the ranks of the computable well-founded trees, and that some computable tree has a path but no computable path.
-
-:::solution
-A computable well-founded tree has computable Kleene–Brouwer ordering, of type at least its rank, so its rank is computable. Conversely, a computable well-ordering $L$ of type $\alpha$ gives the computable tree of finite $L$-descending sequences, which is well-founded, of rank at least $\alpha$: by induction, the subtree above a one-element sequence $\langle x \rangle$ has rank at least the type of the initial segment below $x$.
-
-For the second statement, let $T$ be the set of $\sigma \in 2^{<\nat}$ such that $\sigma(e) \neq \Phi_e(e)$ for every $e < |\sigma|$ with $\Phi_e(e)[|\sigma|]\converge$. It is a computable tree, and its paths are the $\{0,1\}$-valued functions $f$ with $f(e) \neq \Phi_e(e)$ whenever $\Phi_e(e)\converge$. It has a path, for instance $f(e) = 1$ if $\Phi_e(e)\converge = 0$ and $f(e) = 0$ otherwise. No path $f$ is computable: if $f = \Phi_e$, then $\Phi_e(e)\converge = f(e)$, a contradiction. (This is the tree of :ref{#thm-dnc2-no-computable}.)
+If $A \leq_m \mathcal O$ by a computable $f$, then $n \in A \iff f(n) \in \mathcal O$, and substituting $f(n)$ into the $\Pi^1_1$ definition of $\mathcal O$ (:ref{#prop-o-pi11}) gives a $\Pi^1_1$ definition of $A$, since "$m = f(n)$" is arithmetic. The converse is :ref{#thm-o-complete}. The same argument applies to $\mathrm{WO}$ and $\mathrm{WF}$, which are $\Pi^1_1$, with :ref{#cor-pi11-complete} for the converse.
 :::
 ::::
 
 ## Notes and references
 
-Kleene (1955) introduced the analytic hierarchy and proved the normal form theorem; the use of well-founded trees is due to Lusin and Sierpiński in descriptive set theory, and to Brouwer for the ordering. Spector (1955) proved the boundedness theorem. Moschovakis's *Descriptive Set Theory* presents the effective theory in the general setting of Polish spaces.
+Kleene (1955) introduced the analytic hierarchy and proved the normal form theorem; the $\Pi^1_1$-completeness of $\mathcal O$ is also due to Kleene (1955, second paper on the forms of predicates). Simpson proves the normal form theorem in Lemma V.1.4 and the reduction of $\Pi^1_1$ formulas to well-orderings in Lemma V.1.8. Monin and Patey prove that $\mathcal O^X$ is $\Pi^1_1(X)$ and $\Pi^1_1(X)$-complete in the section *The Π¹₁ sets and the well-orders* of their chapter *Beyond hyperarithmetic*; their reduction composes the Kleene–Brouwer ordering with the Markwald–Kleene map, and leaves to the reader the verification that an ill-founded tree is sent outside $\mathcal O$. The reduction given here builds notations on top of one another to make that verification immediate. Nies states the $\Pi^1_1$-completeness of $\mathcal O$ in Section 9.1. Moschovakis's *Descriptive Set Theory* presents the effective theory in the general setting of Polish spaces.
 
 - S. C. Kleene, *Arithmetical predicates and function quantifiers*, Transactions of the American Mathematical Society 79 (1955), 312–340.
-- C. Spector, *Recursive well-orderings*, Journal of Symbolic Logic 20 (1955), 151–163.
+- S. C. Kleene, *On the forms of the predicates in the theory of constructive ordinals (second paper)*, American Journal of Mathematics 77 (1955), 405–428.
+- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section V.1.
+- B. Monin and L. Patey, *Computability theory*, chapter *Beyond hyperarithmetic*, section *The Π¹₁ sets and the well-orders*.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 9.1.
 - Y. N. Moschovakis, *Descriptive Set Theory*, 2nd edition, American Mathematical Society, 2009.
-- G. E. Sacks, *Higher Recursion Theory*, Springer, 1990.

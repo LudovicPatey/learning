@@ -1,35 +1,11 @@
 ---
-title: Computable ordinals and Kleene's O
-summary: Computable well-orderings and the Church–Kleene ordinal; Kleene's system of notations O; addition of notations by the recursion theorem; the Markwald–Kleene theorem that the constructive ordinals are exactly the computable ones; relativization.
-duration: 40
-prerequisites: [ordinals, fundamentals/fixed-point]
+title: Kleene's O
+summary: Kleene's system of notations O, its partial order and the inversion principle, the computable well-orderings of the notations below a given one, and addition of notations by effective transfinite recursion.
+duration: 45
+prerequisites: [computable-well-orderings, fundamentals/fixed-point]
 ---
 
-Only countably many ordinals can be described by an algorithm. There are two natural ways of doing so. In Cantor's spirit, an ordinal is **computable** if it is the order type of a computable well-ordering of numbers. In von Neumann's spirit, an ordinal is **constructive** if it has a **notation**: a number that tells whether the ordinal is zero, a successor or a limit, and in the last two cases gives notations for its predecessor or for a sequence converging to it. Kleene's system $\mathcal O$ of notations makes the second idea precise. The two notions define the same ordinals, whose supremum is the Church–Kleene ordinal $\omega_1^{\mathrm{CK}}$.
-
-## Computable well-orderings
-
-:::definition{#def-computable-ordinal}
-An ordinal $\alpha$ is **computable** if it is the order type of a computable relation $R \subseteq \nat \times \nat$ that well-orders its field $F = \{ x : (x, x) \in R \}$: $R \subseteq F \times F$, and $(x, y) \in R$ means $x \leq_R y$. The same convention defines c.e. well-orderings and, without the well-foundedness condition, computable and c.e. linear orders.
-:::
-
-:::proposition{#prop-computable-ordinals-basic}
-1. If $\alpha$ is computable and $\beta < \alpha$, then $\beta$ is computable.
-2. If $\alpha$ and $\beta$ are computable, so are $\alpha + \beta$ and $\alpha \cdot \beta$.
-3. From an index of a c.e. linear order with infinite field, one computes an index of a computable linear order of $\nat$ isomorphic to it. In particular, the order type of every c.e. well-ordering is computable.
-:::
-
-:::proof{of=prop-computable-ordinals-basic}
-1. If $\beta < \alpha = |R|$, then $\beta$ is the type of the initial segment of $R$ below some element $a$, defined by the computable relation $\{ (x, y) \in R : (y, a) \in R,\ y \neq a \}$.
-2. Represent $\alpha + \beta$ on the disjoint union of the fields, coded by $\langle 0, x \rangle$ and $\langle 1, y \rangle$, with all elements of the first copy below those of the second; and $\alpha \cdot \beta$ on pairs $\langle x, y \rangle$ ordered by comparing $y$ first and then $x$ (the anti-lexicographic order).
-3. Let $R$ be a c.e. linear order of its field $F = \{ x : (x, x) \in R \}$, which is c.e. If $F$ is infinite, let $f(n)$ be the $n$-th element of $F$ in order of enumeration, repetitions omitted: $f$ is a computable bijection from $\nat$ onto $F$, and $S = \{ (m, n) : (f(m), f(n)) \in R \}$ is a c.e. linear order of $\nat$ isomorphic to $R$. It is computable: for $m \neq n$, exactly one of $(m, n)$ and $(n, m)$ belongs to $S$, so $S$ is decided by waiting until one of them is enumerated. This procedure is uniform in an index of $R$. If $R$ is a well-ordering with finite field, its type is finite, hence computable.
-:::
-
-:::definition{#def-omega1ck}
-The **Church–Kleene ordinal** $\omega_1^{\mathrm{CK}}$ is the least ordinal that is not computable.
-:::
-
-By (1), the computable ordinals are exactly the ordinals below $\omega_1^{\mathrm{CK}}$. There are countably many computable relations, so $\omega_1^{\mathrm{CK}}$ is countable. By (2), it is a limit ordinal, closed under addition and multiplication. One can show that it is also closed under exponentiation, a fact we do not use; the first exercise shows that $\varepsilon_0$ is computable.
+A computable well-ordering determines an ordinal, but hides how this ordinal is built: by :ref{#prop-wo-not-transparent}, one cannot decide from an index whether the type is a successor. Kleene's notations make the construction explicit. A notation is a number that says whether the ordinal is zero, a successor or a limit; for a successor, it contains a notation of the predecessor, and for a limit, a program enumerating notations of an increasing sequence converging to it. Functions on ordinals can then be defined by recursion on notations, with the recursion theorem providing the self-reference. This lesson defines the set $\mathcal O$ of notations, shows that every ordinal with a notation is computable, and introduces this **effective transfinite recursion** with the addition of notations. The next lesson uses it to prove the converse, due to Markwald and Kleene.
 
 ## Kleene's O
 
@@ -45,6 +21,26 @@ An ordinal is **constructive** if it is $|a|$ for some $a \in \mathcal O$.
 
 A notation tells which case applies, by its prime factorization, and gives the predecessor or a fundamental sequence. The cases are exclusive on $\mathcal O$: $1 = 2^0$, but $0 \notin \mathcal O$, so $1$ is not of the form $2^a$ with $a \in \mathcal O$. A finite ordinal $n$ has exactly one notation, obtained from $1$ by $n$ applications of $a \mapsto 2^a$, but every infinite constructive ordinal has infinitely many: a limit has one for each program of each of its fundamental sequences, and $\lambda + n$ has one for each notation of $\lambda$. The relation $<_{\mathcal O}$ is a partial order on $\mathcal O$ with $b <_{\mathcal O} a \Rightarrow |b| < |a|$, but two notations of the same ordinal on different branches are incomparable.
 
+:::example{#ex-notations}
+The notations of $0, 1, 2, 3$ are $1$, $2 = 2^1$, $4 = 2^2$ and $16 = 2^4$. Let $e$ be an index of the total computable function $n \mapsto$ (the notation of $n$), obtained by iterating $a \mapsto 2^a$ from $1$. Its values are in $\mathcal O$ and $<_{\mathcal O}$-increasing, so $3 \cdot 5^e \in \mathcal O$ is a notation of $\omega$, and $2^{3 \cdot 5^e}$ is a notation of $\omega + 1$. If $e' \neq e$ is another index of the same function, then $3 \cdot 5^{e'}$ is another notation of $\omega$. The notations below each of them are the finite ones, so neither is below the other, nor below a successor of the other. Iterating $a \mapsto 2^a$ from $3 \cdot 5^e$ gives a computable $<_{\mathcal O}$-increasing sequence, whose limit is a notation of $\omega \cdot 2$.
+:::
+
+:::figure[The beginning of $\mathcal O$. Arrows point from a notation to its successor. The notations of the finite ordinals form a single chain; above it, $\mathcal O$ branches, with one branch for each notation of $\omega$. Notations on different branches are incomparable for $<_{\mathcal O}$.]
+<svg class="fig" viewBox="0 0 600 214" width="600" role="img" aria-label="Kleene's O near omega: the chain of notations of the finite ordinals, and two notations of omega on different branches, each with its successors"><defs><marker id="co-otree" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="muted-fill"/></marker></defs><circle cx="40" cy="120" r="4" class="ink-fill"/><text x="40" y="144" text-anchor="middle" class="mrm" font-size="15">1</text><circle cx="100" cy="120" r="4" class="ink-fill"/><text x="100" y="144" text-anchor="middle" class="mrm" font-size="15">2</text><circle cx="160" cy="120" r="4" class="ink-fill"/><text x="160" y="144" text-anchor="middle" class="mrm" font-size="15"><tspan class="mrm">2</tspan><tspan font-size="10" dy="-7">2</tspan></text><circle cx="220" cy="120" r="4" class="ink-fill"/><text x="220" y="144" text-anchor="middle" class="mrm" font-size="15"><tspan class="mrm">2</tspan><tspan font-size="10" dy="-7">4</tspan></text><line x1="46" y1="120" x2="93" y2="120" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-otree)"/><line x1="106" y1="120" x2="153" y2="120" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-otree)"/><line x1="166" y1="120" x2="213" y2="120" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-otree)"/><text x="262.0" y="125.0" text-anchor="middle" class="mrm muted" font-size="16">⋯</text><line x1="282" y1="120" x2="322" y2="58" class="muted-stroke" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#co-otree)"/><circle cx="330" cy="52" r="5" class="accent-fill"/><text x="330" y="40" text-anchor="middle" font-size="15"><tspan class="mrm">3·5</tspan><tspan class="math" font-size="10" dy="-7">e</tspan></text><line x1="337" y1="52" x2="413" y2="52" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-otree)"/><circle cx="420" cy="52" r="4" class="ink-fill"/><line x1="427" y1="52" x2="503" y2="52" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-otree)"/><circle cx="510" cy="52" r="4" class="ink-fill"/><text x="560.0" y="57.0" text-anchor="middle" class="mrm muted" font-size="16">⋯</text><text x="420.0" y="40.0" text-anchor="middle" class="label" font-size="12">|·| = ω + 1</text><text x="510.0" y="40.0" text-anchor="middle" class="label" font-size="12">|·| = ω + 2</text><line x1="282" y1="120" x2="322" y2="182" class="muted-stroke" stroke-width="1.2" stroke-dasharray="4 3" marker-end="url(#co-otree)"/><circle cx="330" cy="188" r="5" class="accent-fill"/><text x="330" y="214" text-anchor="middle" font-size="15"><tspan class="mrm">3·5</tspan><tspan class="math" font-size="10" dy="-7">e′</tspan></text><line x1="337" y1="188" x2="413" y2="188" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-otree)"/><circle cx="420" cy="188" r="4" class="ink-fill"/><line x1="427" y1="188" x2="503" y2="188" class="ink-stroke" stroke-width="1.3" marker-end="url(#co-otree)"/><circle cx="510" cy="188" r="4" class="ink-fill"/><text x="560.0" y="193.0" text-anchor="middle" class="mrm muted" font-size="16">⋯</text><text x="420.0" y="176.0" text-anchor="middle" class="label" font-size="12">|·| = ω + 1</text><text x="510.0" y="176.0" text-anchor="middle" class="label" font-size="12">|·| = ω + 2</text><text x="130.0" y="98.0" text-anchor="middle" class="label" font-size="12">notations of 0, 1, 2, 3</text><text x="332.0" y="125.0" text-anchor="start" class="label" font-size="12">incomparable</text></svg>
+:::
+
+Since $\mathcal O$ is defined as the least set closed under three rules, each of its elements comes from one of the rules. This **inversion** principle is used in every proof that a number is not a notation.
+
+:::lemma[Inversion]{#lem-o-inversion}
+1. $0 \notin \mathcal O$, and if $a \neq 0$ and $2^a \in \mathcal O$, then $a \in \mathcal O$.
+2. If $3 \cdot 5^e \in \mathcal O$, then $\Phi_e$ is total, and $\Phi_e(n) \in \mathcal O$ and $\Phi_e(n) <_{\mathcal O} \Phi_e(n+1)$ for every $n$.
+3. If $a \in \mathcal O$ and $b <_{\mathcal O} a$, then $b \in \mathcal O$ and $|b| < |a|$.
+:::
+
+:::proof{of=lem-o-inversion}
+Let $\mathcal O^*$ be the set of $a \in \mathcal O$ such that $a = 1$, or $a = 2^c$ for some $c \in \mathcal O$, or $a = 3 \cdot 5^e$ for some $e$ satisfying the conclusion of (2), and such that every $b <_{\mathcal O} a$ is in $\mathcal O$ and satisfies $|b| < |a|$. Then $\mathcal O^*$, with the restriction of $<_{\mathcal O}$, satisfies the three rules of :ref{#def-kleene-o}: $1 \in \mathcal O^*$; if $a \in \mathcal O^*$, then $2^a = 2^c$ with $c = a \in \mathcal O$, and the elements below $2^a$ are $a$ and the elements below $a$, of ordinals at most $|a| < |a| + 1$; the limit rule is checked in the same way, using $|\Phi_e(n)| < |\Phi_e(n+1)| \leq \sup_m |\Phi_e(m)|$. By minimality, $\mathcal O \subseteq \mathcal O^*$. Now $0$ is neither $1$, nor a power of $2$, nor of the form $3 \cdot 5^e$, so $0 \notin \mathcal O$. If $a \neq 0$, then $2^a \neq 1$ and $2^a$ is not of the form $3 \cdot 5^e$; so if $2^a \in \mathcal O = \mathcal O^*$, then $2^a = 2^c$ with $c \in \mathcal O$, and $c = a$. Items (2) and (3) are part of the definition of $\mathcal O^*$, by unique factorization.
+:::
+
 :::proposition{#prop-kleene-o-basic}
 1. For $a \in \mathcal O$, the set $\{ b : b <_{\mathcal O} a \}$ is well-ordered by $<_{\mathcal O}$, with order type $|a|$, and $\{ |b| : b <_{\mathcal O} a \} = |a|$. In particular the constructive ordinals are closed downward.
 2. There is a c.e. relation $R$ such that for every $a \in \mathcal O$ and every $b$, $b <_{\mathcal O} a$ if and only if $(b, a) \in R$.
@@ -55,7 +51,7 @@ A notation tells which case applies, by its prime factorization, and gives the p
 2. Let $R$ be the least relation containing, for every $a \geq 1$, the pair $(a, 2^a)$ and the pairs $(b, 2^a)$ with $(b, a) \in R$, and containing $(b, 3 \cdot 5^e)$ whenever $\Phi_e(n)\converge$ and $(b, \Phi_e(n)) \in R$ or $b = \Phi_e(n)$, for some $n$. It is generated by c.e. rules, so it is c.e. By induction on $a \in \mathcal O$, $R(\cdot, a)$ is $\{ b : b <_{\mathcal O} a \}$; the restriction $a \geq 1$ ensures that $R(\cdot, 1)$ is empty.
 :::
 
-The relation $<_{\mathcal O}$ is therefore c.e. on each initial segment, uniformly in a notation of its upper bound. The set $\mathcal O$ itself is not c.e., nor even arithmetic: the next lesson shows that it is $\Pi^1_1$ but not $\Sigma^1_1$ (:ref{#cor-boundedness}).
+The relation $<_{\mathcal O}$ is therefore c.e. on each initial segment, uniformly in a notation of its upper bound. The set $\mathcal O$ itself is not c.e., nor even arithmetic: the lesson on $\Pi^1_1$ sets shows that it is $\Pi^1_1$-complete (:ref{#thm-o-complete}), hence not $\Sigma^1_1$.
 
 ## From notations to well-orderings and back
 
@@ -64,12 +60,12 @@ Every constructive ordinal is computable. Moreover, there is a total computable 
 :::
 
 :::proof{of=prop-constructive-computable}
-Let $R$ be the c.e. relation of :ref{#prop-kleene-o-basic} (2), and let $S_a$ be the set of pairs $(b, c)$ with $(b, a) \in R$, $(c, a) \in R$, and $b = c$ or $(b, c) \in R$. It is c.e., uniformly in $a$. For $a \in \mathcal O$, every $c <_{\mathcal O} a$ is in $\mathcal O$, so $S_a$ is the order $\leq_{\mathcal O}$ on $\{ b : b <_{\mathcal O} a \}$, a well-ordering of type $|a|$ by :ref{#prop-kleene-o-basic} (1).
+Let $R$ be the c.e. relation of :ref{#prop-kleene-o-basic} (2), and let $S_a$ be the set of pairs $(b, c)$ with $(b, a) \in R$, $(c, a) \in R$, and $b = c$ or $(b, c) \in R$. It is c.e., uniformly in $a$. For $a \in \mathcal O$, every $c <_{\mathcal O} a$ is in $\mathcal O$ (:ref{#lem-o-inversion}), so $S_a$ is the order $\leq_{\mathcal O}$ on $\{ b : b <_{\mathcal O} a \}$, a well-ordering of type $|a|$ by :ref{#prop-kleene-o-basic} (1).
 
 It is decidable whether $a$ is one of the notations $1, 2^1, 2^{2^1}, \dots$ of the finite ordinals; if it is the notation of $n$, output a fixed index of the usual order on $\{ 0, \dots, n - 1 \}$. Otherwise, if $a \in \mathcal O$, the sequence $a, a_1, a_2, \dots$ with $a = 2^{a_1}$, $a_1 = 2^{a_2}$, … reaches a notation $3 \cdot 5^e \leq_{\mathcal O} a$, so $|a| \geq \omega$ and $S_a$ has an infinite field; output the index given by :ref{#prop-computable-ordinals-basic} (3) for $S_a$. This function is total computable, and its value on $a \in \mathcal O$ is an index of a computable well-ordering of type $|a|$.
 :::
 
-The converse requires arithmetic on notations, defined by the recursion theorem.
+The converse requires arithmetic on notations. Addition is the first example of **effective transfinite recursion**. Classically, $\alpha + \beta$ is defined by recursion on $\beta$, with three cases. On notations, the three cases are recognized from the prime factorization of $b$, and the recursion is carried out by a program that calls itself, which the recursion theorem allows. Two features recur in every later use of the method. First, the program is total without any assumption on its input: in the limit case it does not evaluate the fundamental sequence, it only computes an index of a new sequence. Second, the properties of the output (being a notation, having the right ordinal) are proved separately, by induction on the notation $b$.
 
 :::lemma{#lem-notation-sum}
 There is a total computable function $+_{\mathcal O}$ such that for all $a, b \in \mathcal O$, $a +_{\mathcal O} b \in \mathcal O$, $|a +_{\mathcal O} b| = |a| + |b|$, $a \leq_{\mathcal O} a +_{\mathcal O} b$, $a <_{\mathcal O} a +_{\mathcal O} b$ when $b \neq 1$, and $a +_{\mathcal O} c <_{\mathcal O} a +_{\mathcal O} b$ whenever $c <_{\mathcal O} b$.
@@ -89,55 +85,19 @@ where $h(a, e)$ is an index of the function $n \mapsto a +_{\mathcal O} \Phi_e(n
 The properties are proved by induction on $b \in \mathcal O$. For $b = 1$ they are immediate. For $b = 2^c$ with $c \in \mathcal O$, the notation $a +_{\mathcal O} b = 2^{a +_{\mathcal O} c}$ belongs to $\mathcal O$, with $|a +_{\mathcal O} b| = |a| + |c| + 1 = |a| + |b|$, and $a \leq_{\mathcal O} a +_{\mathcal O} c <_{\mathcal O} a +_{\mathcal O} b$; if $d <_{\mathcal O} b$, then $d \leq_{\mathcal O} c$, so $a +_{\mathcal O} d \leq_{\mathcal O} a +_{\mathcal O} c <_{\mathcal O} a +_{\mathcal O} b$. For $b = 3 \cdot 5^e$, the terms $a +_{\mathcal O} \Phi_e(n)$ are in $\mathcal O$, and $a +_{\mathcal O} \Phi_e(n) <_{\mathcal O} a +_{\mathcal O} \Phi_e(n+1)$ by the last property for $\Phi_e(n+1)$; so $a +_{\mathcal O} b \in \mathcal O$, and $|a +_{\mathcal O} b| = \sup_n (|a| + |\Phi_e(n)|) = |a| + |b|$, since addition is continuous in its right argument. If $d <_{\mathcal O} b$, then $d <_{\mathcal O} \Phi_e(n)$ for some $n$, and $a +_{\mathcal O} d <_{\mathcal O} a +_{\mathcal O} \Phi_e(n) <_{\mathcal O} a +_{\mathcal O} b$. Finally $a \leq_{\mathcal O} a +_{\mathcal O} \Phi_e(0) <_{\mathcal O} a +_{\mathcal O} b$.
 :::
 
-:::lemma{#lem-notation-sup}
-There is a total computable function $u$ such that if $W_e \subseteq \mathcal O$, then $u(e) \in \mathcal O$ and $|u(e)| \geq |c|$ for every $c \in W_e$.
+:::quiz[effective transfinite recursion]
+Why is the function $+_{\mathcal O}$ total, even on numbers $b$ that are not notations?
+
+- [x] Each call on $b = 2^c$ makes one call on the smaller number $c$, and a call on $b = 3 \cdot 5^e$ only computes an index $h(a, e)$, without running $\Phi_e$; so every computation terminates, by induction on $b$ as a number.
+- [ ] Because the recursion theorem always produces total functions.
+
+  It produces a fixed point of the defining equations, which may be partial: the equation $\Phi_e(x) \simeq \Phi_e(x) + 1$ has only the nowhere defined solution.
+- [ ] Because the induction on $b \in \mathcal O$ shows that $a +_{\mathcal O} b$ is a notation.
+
+  That induction concerns only notations $b$, and assumes that the values are defined. Totality is proved separately, for all numbers.
 :::
 
-:::proof{of=lem-notation-sup}
-Let $d_n$ be the sum, with $+_{\mathcal O}$ in the order of enumeration, of the elements of $W_{e,n}$, and $d_n = 1$ if $W_{e,n}$ is empty. Let $c_0 = 1$ and $c_{n+1} = c_n +_{\mathcal O} 2^{d_n}$. Then $c_n <_{\mathcal O} c_{n+1}$ by :ref{#lem-notation-sum}, the function $n \mapsto c_n$ is total computable with an index computed from $e$, and $u(e) = 3 \cdot 5^{(\text{this index})}$ belongs to $\mathcal O$ when $W_e \subseteq \mathcal O$. Every $c \in W_e$ is in some $W_{e,n}$, and $|c_{n+1}| \geq |d_n| \geq |c|$, since $|x +_{\mathcal O} y| = |x| + |y| \geq |y|$.
-:::
-
-:::theorem[Markwald, Kleene]{#thm-markwald}
-Every computable ordinal is constructive: from an index of a computable well-ordering $R$, one computes $a \in \mathcal O$ with $|a| \geq |R|$.
-:::
-
-:::proof{of=thm-markwald}
-By the recursion theorem (:ref{#cor-self-reference}), there is a total computable function $g$ such that $g(x) = u(i_x)$, where $i_x$ is an index of the c.e. set $\{ 2^{g(y)} : y <_R x \}$, computed from $x$ and an index of $g$. We show by induction along the well-ordering $R$ that $g(x) \in \mathcal O$ and $|g(x)| \geq |R_{<x}|$, the type of the initial segment below $x$. If this holds for all $y <_R x$, then $W_{i_x} \subseteq \mathcal O$, and by :ref{#lem-notation-sup}, $g(x) \in \mathcal O$ and $|g(x)| \geq |g(y)| + 1 \geq |R_{<y}| + 1$ for all $y <_R x$; the supremum of the right-hand side is $|R_{<x}|$. Finally $a = u(i)$, with $i$ an index of $\{ 2^{g(x)} : x \text{ in the field of } R \}$, satisfies $|a| \geq |R|$. Since the constructive ordinals are closed downward, $|R|$ is constructive.
-:::
-
-:::corollary{#cor-constructive-computable}
-The constructive ordinals are exactly the computable ordinals, that is, the ordinals below $\omega_1^{\mathrm{CK}}$.
-:::
-
-The two conversions are uniform, but the second one only gives an upper bound $|a| \geq |R|$. An exact uniform conversion is impossible (see the exercises): a notation contains more information than a well-ordering, namely the decomposition of the ordinal into successor and limit steps.
-
-:::quiz[notations]
-In the proof of :ref{#thm-markwald}, why does the set $W_{i_x}$ contain $2^{g(y)}$ rather than $g(y)$?
-
-- [x] To obtain $|g(x)| \geq |g(y)| + 1$ for $y <_R x$, which is needed to reach the type $|R_{<x}| = \sup_{y <_R x} (|R_{<y}| + 1)$.
-- [ ] Because $g(y)$ might not belong to $\mathcal O$.
-
-  By the induction hypothesis, $g(y) \in \mathcal O$; the successor is needed for the inequality.
-- [ ] To make the set $W_{i_x}$ infinite.
-
-  The set may be finite; the function $u$ handles finite sets.
-
----
-
-Why does the definition of $g$ not require deciding whether $R$ is a well-ordering?
-
-- [x] Because $g$ is total for every $R$, by the recursion theorem; the well-ordering hypothesis is used only in the proof that its values are notations.
-- [ ] Because every computable linear order is a well-ordering.
-
-  Many computable linear orders, such as the order of $\mathbb Q$, are not well-orderings.
-- [ ] Because $u$ checks that its input is a subset of $\mathcal O$.
-
-  $u$ checks nothing; its output is a notation only when the input set consists of notations.
-:::
-
-## Relativization
-
-All definitions relativize to an oracle $X$: an ordinal is **$X$-computable** if it is the type of an $X$-computable well-ordering, $\mathcal O^X$ is defined with $\Phi^X_e$ in place of $\Phi_e$, and the results of this lesson hold relative to $X$. The least non-$X$-computable ordinal is written $\omega_1^X$. It is countable for every $X$, and every countable ordinal is $X$-computable for some $X$, namely for a set coding a well-ordering of that type; so $\omega_1$ is the supremum of the ordinals $\omega_1^X$. One has $\omega_1^X = \omega_1^{\mathrm{CK}}$ for many non-computable $X$, for instance every arithmetic $X$, and $\omega_1^X > \omega_1^{\mathrm{CK}}$ for $X = \mathcal O$. Both facts rely on the next lesson. If $X$ is arithmetic and $W$ is an $X$-computable well-ordering of type at least $\omega_1^{\mathrm{CK}}$, then a computable linear order is a well-ordering if and only if it embeds into $W$, a $\Sigma^1_1$ condition since $X$ is arithmetic; this contradicts :ref{#prop-pi11-not-sigma11}. For $\mathcal O$, the set $\mathrm{WO}$ of indices of computable well-orderings is $\Pi^1_1$, hence computable in $\mathcal O$ by the $\Pi^1_1$-completeness of $\mathcal O$ (admitted in the next lesson), and the well-orderings with indices $e \in \mathrm{WO}$, placed one after the other in increasing order of $e$, form an $\mathcal O$-computable well-ordering of type at least $\omega_1^{\mathrm{CK}}$.
+The sum of notations is the tool of the next lesson, which proves the converse of :ref{#prop-constructive-computable}. Its uses in the course on hyperarithmetic sets follow the same pattern: a program defined by the recursion theorem, total by construction, whose values are shown to be correct by induction on notations.
 
 ## Exercises
 
@@ -151,20 +111,10 @@ Let $x_0 = p(2^1)$, a notation for $\omega$, and $x_{n+1} = x_n +_{\mathcal O} p
 :::
 ::::
 
-::::exercise{difficulty=2}
-Show that there is a total computable function $f$ such that $f(n)$ is an index of a computable well-ordering of type $\omega + 1$ if $n \in \emptyset'$, and of type $\omega$ otherwise. Deduce that no partial computable function maps every index of a computable well-ordering to a notation for its exact order type.
-
-:::solution
-Call a number $x$ **special** if $n$ enters $\emptyset'$ exactly at stage $x$ of a fixed enumeration; whether $x$ is special is decidable, and there is at most one special number. Let $f(n)$ be an index of the order on $\nat$ in which a special number, if there is one, is the largest element, and the other numbers are ordered as usual. It is computable, uniformly in $n$. Its type is $\omega + 1$ if $n \in \emptyset'$, and $\omega$ otherwise.
-
-Suppose that $h$ maps indices of well-orderings to notations of their exact types. Then $h(f(n))$ is a notation for $\omega$ or for $\omega + 1$, and a notation for $\omega + 1$ has the form $2^c$, while a notation for $\omega$ has the form $3 \cdot 5^e$. So $n \in \emptyset'$ if and only if $h(f(n))$ is a power of $2$, which would make $\emptyset'$ computable.
-:::
-::::
-
 ## Notes and references
 
-Church and Kleene (1936–1938) introduced constructive ordinals and the system $\mathcal O$; Markwald (1954) proved that computable and constructive ordinals coincide. Sacks's monograph is the standard reference for higher computability theory.
+Church and Kleene (1936–1938) introduced constructive ordinals and the system $\mathcal O$. The recursion theorem first appeared in Kleene's paper of 1938 on notations, where it serves effective transfinite recursions such as the addition of notations. Monin and Patey define $\mathcal O$, the addition of notations and the conversion of notations into well-orderings in the section *Effective ordinals* of their chapter on transfinite numbers, and draw the partial order $<_{\mathcal O}$ in their motivating section on Kleene's $\mathcal O$. Sacks's monograph is the standard reference for higher computability theory.
 
 - S. C. Kleene, *On notation for ordinal numbers*, Journal of Symbolic Logic 3 (1938), 150–155.
-- H. Rogers, Jr., *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967, Chapter 11.
+- B. Monin and L. Patey, *Computability theory*, chapter *Transfinite numbers*, sections *Kleene's O* and *Effective ordinals*.
 - G. E. Sacks, *Higher Recursion Theory*, Perspectives in Mathematical Logic, Springer, 1990.
