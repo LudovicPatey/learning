@@ -15,7 +15,7 @@ objectives:
   - Use the notation Φₑ(x)↓ and the approximation by stages fluently
   - Apply the universal function and the SMN theorem, in particular in its parameter form
   - Prove that the halting problem is undecidable, and reduce it to other problems
-  - Characterize the computably enumerable sets in several ways, and use their closure properties
+  - Characterize the computably enumerable sets in several ways, and prove their closure properties by dovetailing
   - Use Kleene's fixed point theorem to build self-referential programs
-  - Prove Rice's theorem, and decide which index sets are computably enumerable
-lessons: [programs-as-numbers, universal-program-smn, halting-problem, ce-sets, fixed-point, rice-theorem]
+  - Prove Rice's theorem, and decide which index sets are computably enumerable by the Rice–Shapiro theorem
+lessons: [programs-as-numbers, universal-program-smn, halting-problem, ce-sets, complete-sets, fixed-point, rice-theorem, rice-shapiro]

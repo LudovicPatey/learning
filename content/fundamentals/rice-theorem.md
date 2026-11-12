@@ -1,11 +1,11 @@
 ---
 title: Rice's theorem
-summary: Non-trivial index sets are not computable; the halting set reduces to them; c.e. index sets are monotone and determined by finite information.
-duration: 40
-prerequisites: [fixed-point, ce-sets]
+summary: Non-trivial index sets are not computable, and the halting set or its complement many-one reduces to each of them.
+duration: 30
+prerequisites: [fixed-point, complete-sets]
 ---
 
-The halting problem is one undecidable question about programs. Rice's theorem shows that it is typical: no question about the **function computed** by a program can be decided from its index, except the trivial ones. This lesson proves the theorem twice, by the fixed point theorem and by a reduction from the halting set, and then determines which questions about the function computed can at least be **confirmed**, that is, which index sets are computably enumerable.
+The halting problem is one undecidable question about programs. Rice's theorem shows that it is typical: no question about the **function computed** by a program can be decided from its index, except the trivial ones. This lesson proves the theorem twice, by the fixed point theorem and by a reduction from the halting set. The second proof gives more: the halting set, or its complement, many-one reduces to every non-trivial index set. The next lesson determines which questions about the function computed can at least be **confirmed**, that is, which index sets are computably enumerable.
 
 ## Index sets
 
@@ -39,6 +39,8 @@ Which of these sets are index sets?
 :::theorem[Rice]{#thm-rice}
 No non-trivial index set is computable.
 :::
+
+Both hypotheses are needed. The trivial index sets $\emptyset$ and $\nat$ are computable. The set $\{ e : e < 100 \}$ is computable and neither empty nor everything, but it is not an index set (:ref{#ex-index-sets}). The proof is an application of the fixed point theorem in the pattern of :ref{#prop-halting-via-fixed-point}: if $P$ were computable, the transformation sending every index to a fixed index on the other side of $P$ would be computable, and it cannot have a fixed point.
 
 :::proof{of=thm-rice}
 Let $P$ be a non-trivial index set, and suppose it is computable. Fix $a \in P$ and $b \notin P$, and let $f(x) = b$ if $x \in P$, $f(x) = a$ if $x \notin P$. Since $P$ is computable, $f$ is total computable. By :ref{#thm-fixed-point}, there is $e$ with $\Phi_{f(e)} = \Phi_e$, so that $e \in P \iff f(e) \in P$, as $P$ is an index set. But by construction $f(e) \in P \iff e \notin P$. This is a contradiction.
@@ -84,6 +86,12 @@ the program $g(e)$ first computes $\Phi_e(e)$, and if this halts, computes $\Phi
 
 This gives a second proof of :ref{#thm-rice}, since $\emptyset'$ is not computable. It also shows that every non-trivial index set not containing the indices of the nowhere defined function is at least as hard as the halting set; if it is c.e., it is m-complete.
 
+:::example{#ex-rice-reductions}
+1. $P = \{ e : \Phi_e(0)\converge = 42 \}$ does not contain the indices of the nowhere defined function, so $\emptyset' \leq_m P$. Since $P$ is c.e. ($e \in P \iff \exists s\ \Phi_e(0)[s]\converge = 42$), it is m-complete.
+2. $P = \{ e : W_e = \emptyset \}$ contains them, so $\emptyset' \leq_m \nat \setminus P = \{ e : W_e \neq \emptyset \}$, as found directly in :ref{#prop-halting-variants}.
+3. $\mathrm{Tot}$ does not contain them, so $\emptyset' \leq_m \mathrm{Tot}$. The proposition says nothing about $\nat \setminus \emptyset' \leq_m \mathrm{Tot}$, which also holds (:ref{#prop-halting-variants}): it only gives the reduction that the position of the nowhere defined function forces.
+:::
+
 :::quiz[the reduction]
 In the proof of :ref{#prop-rice-reduction}, why must $z \notin P$ be assumed?
 
@@ -96,61 +104,9 @@ In the proof of :ref{#prop-rice-reduction}, why must $z \notin P$ be assumed?
   $P$ can be non-trivial and contain $z$, for instance $P = \{ e : W_e = \emptyset \}$.
 :::
 
-## Which index sets are c.e.
-
-Some non-trivial index sets are c.e., for instance $\{ e : \Phi_e(3)\converge \}$ and $\{ e : W_e \neq \emptyset \}$; others are not, such as $\mathrm{Tot}$ (:ref{#cor-tot-not-ce}). The following theorem gives two necessary conditions. For partial functions, write $\theta \subseteq f$ if $f$ extends $\theta$, that is, $\theta(x)\converge = y$ implies $f(x)\converge = y$.
-
-:::theorem[Rice–Shapiro, necessity]{#thm-rice-shapiro}
-Let $\mathcal C$ be a class of unary partial computable functions such that $P = \{ e : \Phi_e \in \mathcal C \}$ is c.e. Then:
-
-1. *(monotonicity)* if $f \in \mathcal C$ and $g$ is partial computable with $f \subseteq g$, then $g \in \mathcal C$;
-2. *(finiteness)* if $f \in \mathcal C$, then some finite function $\theta \subseteq f$ belongs to $\mathcal C$.
-:::
-
-:::proof{of=thm-rice-shapiro}
-In both cases, we reduce $\nat \setminus \emptyset'$ to $P$, which is impossible since $\nat \setminus \emptyset'$ is not c.e. (:ref{#thm-halting-ce}) while $P$ is (:ref{#prop-ce-downward}).
-
-1. Suppose $f \in \mathcal C$, $f \subseteq g$, $g$ partial computable and $g \notin \mathcal C$. By :ref{#cor-smn-parameters}, there is a total computable $h$ such that the program $h(e)$, on input $x$, runs the computations of $f(x)$ and of $\Phi_e(e)$ in parallel, stage by stage: if $f(x)$ converges first (or at the same stage), it outputs $f(x)$; if $\Phi_e(e)$ converges first, it computes and outputs $g(x)$. If $e \notin \emptyset'$, the second case never occurs and $\Phi_{h(e)} = f \in \mathcal C$. If $e \in \emptyset'$, then $\Phi_{h(e)} = g$: on $x \in \mathrm{dom}(f)$, both cases give $f(x) = g(x)$; on $x \notin \mathrm{dom}(f)$, only the second case can occur, and gives $g(x)$. So $\Phi_{h(e)} \notin \mathcal C$, and $h$ reduces $\nat \setminus \emptyset'$ to $P$.
-2. Suppose $f \in \mathcal C$ and no finite $\theta \subseteq f$ is in $\mathcal C$. Let $h$ be total computable such that $\Phi_{h(e)}(x) \simeq f(x)$ if $\Phi_e(e)[x]\diverge$, and $\Phi_{h(e)}(x)$ is undefined otherwise. If $e \notin \emptyset'$, then $\Phi_{h(e)} = f \in \mathcal C$. If $e \in \emptyset'$, let $s$ be the least stage with $\Phi_e(e)[s]\converge$; then $\Phi_{h(e)}$ is the restriction of $f$ to $\{0, \dots, s - 1\}$, a finite function contained in $f$, hence not in $\mathcal C$. So $h$ reduces $\nat \setminus \emptyset'$ to $P$.
-:::
-
-The converse also holds, with a suitable formulation: $P$ is c.e. if and only if $\mathcal C$ is the class of partial computable functions extending some member of a c.e. list of finite functions (given by canonical codes). We admit this sufficiency part, which is proved in Rogers' and Odifreddi's books (in the sections on index sets and the Rice–Shapiro theorem).
-
-:::corollary{#cor-rice-shapiro-examples}
-The following index sets are not c.e.: $\mathrm{Tot}$; $\{ e : W_e \text{ is infinite} \}$; $\{ e : W_e \text{ is finite} \}$; $\{ e : W_e = \emptyset \}$; $\{ e : \Phi_e = \Phi_a \}$ for any index $a$ of a total function.
-:::
-
-:::proof{of=cor-rice-shapiro-examples}
-For $\mathrm{Tot}$, $\{ e : W_e \text{ infinite} \}$ and $\{ e : \Phi_e = \Phi_a \}$ with $\Phi_a$ total, finiteness fails: these classes contain an infinite function, total or with infinite domain, but no finite function. For $\{ e : W_e \text{ finite} \}$ and $\{ e : W_e = \emptyset \}$, monotonicity fails: the nowhere defined function belongs to the class, and its extension the constant function $0$ does not.
-:::
-
-:::quiz[Rice–Shapiro]
-In part 1 of the proof, why are the computations of $f(x)$ and $\Phi_e(e)$ run in parallel, rather than computing $\Phi_e(e)$ first?
-
-- [x] If $e \notin \emptyset'$, the program must still compute $f$; waiting for $\Phi_e(e)$ would make it diverge everywhere.
-- [ ] To make $h$ total.
-
-  $h$ is total by SMN, whatever the program described.
-- [ ] Because $f$ is total.
-
-  $f$ is not assumed total.
-
----
-
-The set $\{ e : W_e \neq \emptyset \}$ is c.e. How does it satisfy the two conditions?
-
-- [x] A function with non-empty domain has a one-point subfunction with non-empty domain, and every extension of it has non-empty domain.
-- [ ] It does not satisfy them, which shows that the conditions are not necessary.
-
-  The conditions are necessary: they hold for every c.e. index set.
-- [ ] Only finiteness holds.
-
-  Monotonicity holds too: extending a function enlarges its domain.
-:::
-
 ## Consequences
 
-Rice's theorem is a limitation on the automatic analysis of programs. Whether a program meets a behavioral specification — computes a given function, halts on all inputs, never outputs $0$ — is undecidable in general. In practice, program analysis tools either restrict the programs considered, or accept answers that may be inconclusive. The theorem is about **decidability** only. Questions of the form "does the program ever do this?" are often c.e., while questions about all inputs, such as totality, are typically not even c.e. Measuring their exact difficulty is the purpose of the arithmetic hierarchy, the subject of a later course.
+Rice's theorem is a limitation on the automatic analysis of programs. Whether a program meets a behavioral specification — computes a given function, halts on all inputs, never outputs $0$ — is undecidable in general. In practice, program analysis tools either restrict the programs considered, or accept answers that may be inconclusive. The theorem is about **decidability** only. Questions of the form "does the program ever do this?" are often c.e., while questions about all inputs, such as totality, are typically not even c.e.; the next lesson characterizes the c.e. index sets. Measuring their exact difficulty is the purpose of the arithmetic hierarchy, the subject of a later course.
 
 ## Exercises
 
@@ -162,29 +118,18 @@ Fix an index $z$ of the nowhere defined function. If equality were decidable, th
 :::
 ::::
 
-::::exercise{difficulty=1}
-Is $\{ e : \Phi_e(0)\converge \text{ and } \Phi_e(1)\diverge \}$ c.e.?
-
-:::solution
-No. It is an index set, and monotonicity fails: the function defined only at $0$ belongs to the class, and its extension defined at $0$ and $1$ does not. By :ref{#thm-rice-shapiro}, the set is not c.e.
-:::
-::::
-
 ::::exercise{difficulty=2}
-Show that $\{ e : W_e \text{ is computable} \}$ is not c.e.
+Let $P$ be a non-trivial index set. Show that $P$ and $\nat \setminus P$ cannot both be c.e. Deduce that if $P$ is c.e., the indices of the nowhere defined function are not in $P$.
 
 :::solution
-It is an index set. Monotonicity fails: the nowhere defined function has the computable domain $\emptyset$, while its extension $g(x) \simeq 0$ if $x \in \emptyset'$, undefined otherwise, is partial computable with domain $\emptyset'$, which is not computable. By :ref{#thm-rice-shapiro}, the set is not c.e.
+If both were c.e., $P$ would be computable by :ref{#prop-computable-iff-ce-coce}, contradicting :ref{#thm-rice}. If $P$ is c.e. and contains an index $z$ of the nowhere defined function, then $\emptyset' \leq_m \nat \setminus P$ by :ref{#prop-rice-reduction}, that is, $\nat \setminus \emptyset' \leq_m P$ by item 2 of :ref{#prop-many-one}; so $\nat \setminus \emptyset'$ would be c.e. by :ref{#prop-ce-downward}, contradicting :ref{#thm-halting-ce}.
 :::
 ::::
 
 ## Notes and references
 
-Rice's theorem appeared in 1953, in a paper on classes of c.e. sets; Rice and Shapiro characterized independently, in 1956, the classes of c.e. sets whose index sets are c.e. The analogous result for partial computable functions is the Myhill–Shepherdson theorem (1955), which states that effective operations on partial computable functions are continuous, in the sense that their values depend on finite information.
+Rice's theorem appeared in 1953, in a paper on classes of c.e. sets. In Soare's textbook, the reduction of :ref{#prop-rice-reduction} is the index set theorem (Theorem 1.6.13), Rice's theorem is Corollary 1.6.14, and the proof by the fixed point theorem is Exercise 2.2.10. Monin and Patey present Rice's theorem in their chapter on the arithmetic hierarchy, and derive it from the fixed point theorem in an exercise of their chapter on the foundations of computability.
 
 - H. G. Rice, *Classes of recursively enumerable sets and their decision problems*, Transactions of the American Mathematical Society 74 (1953), 358–366.
-- H. G. Rice, *On completely recursively enumerable classes and their key arrays*, Journal of Symbolic Logic 21 (1956), 304–308.
-- N. Shapiro, *Degrees of computability*, Transactions of the American Mathematical Society 82 (1956), 281–299.
-- J. Myhill and J. C. Shepherdson, *Effective operations on partial recursive functions*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 1 (1955), 310–317.
-- H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
-- P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 1.6.3 and 2.2.
+- B. Monin and L. Patey, *Computability theory*, chapter *Arithmetic hierarchy*, section *Rice's theorem*.
