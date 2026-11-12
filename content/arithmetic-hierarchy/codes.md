@@ -1,7 +1,7 @@
 ---
 title: Codes for sets
 summary: Indices of computable, c.e., finite and low sets; the information each kind of index provides, and fixed point arguments showing what cannot be recovered uniformly.
-duration: 35
+duration: 45
 prerequisites: [post-theorem, fundamentals/fixed-point, turing-degrees/low-and-high]
 ---
 
@@ -16,7 +16,15 @@ Constructions in computability theory manipulate sets through finite description
 4. More generally, a **$\Delta^0_{n+1}$ index** of $A$ is an $e$ such that $\Phi^{\emptyset^{(n)}}_e$ is the characteristic function of $A$, and a **$\Sigma^0_{n+1}$ index** is an $e$ with $W^{\emptyset^{(n)}}_e = A$.
 :::
 
-By :ref{#thm-post}, a set has a $\Sigma^0_{n+1}$ index if and only if it is $\Sigma^0_{n+1}$, and a $\Delta^0_{n+1}$ index if and only if it is $\Delta^0_{n+1}$. Every integer is a $\Sigma^0_1$ index of some set, but not every integer is a $\Delta^0_1$ index: the set of $\Delta^0_1$ indices is $\Pi^0_2$-complete (see the exercises). The notion of uniformity of the course on fundamentals can be expressed with indices.
+:::example{#ex-index-kinds}
+1. The finite set $\{0, 2\}$ has canonical index $2^0 + 2^2 = 5$, so $D_5 = \{0, 2\}$; the empty set is $D_0$.
+2. Let $a$ be an index of the program that outputs $1$ on $0$ and $2$, and $0$ elsewhere, and $b$ an index of the program that halts on $0$ and $2$ and runs forever elsewhere. Then $a$ is a $\Delta^0_1$ index and $b$ a $\Sigma^0_1$ index of $D_5$, and $a$ is not a $\Sigma^0_1$ index of $D_5$, since $W_a = \nat$.
+3. Every index $e$ of a program that halts on no input is a $\Sigma^0_1$ index of $\emptyset$, and is not a $\Delta^0_1$ index of any set.
+:::
+
+The three kinds of index describe $D_5$ with decreasing information. From the canonical index $5$ one reads off the elements of $D_5$, and in particular that it has two elements and that $2$ is the largest. From $a$ one can decide membership of any given number, but not determine the size of the set, since one never knows whether a larger element remains. From $b$ one can only confirm membership, by waiting for the program to halt.
+
+By :ref{#thm-post}, a set has a $\Sigma^0_{n+1}$ index if and only if it is $\Sigma^0_{n+1}$, and a $\Delta^0_{n+1}$ index if and only if it is $\Delta^0_{n+1}$. Conventions differ between books. Soare (Definition 4.2.4) defines a $\Sigma_n$ index of $B$, for $n \geq 1$, as an index of a one-one reduction of $B$ to $\emptyset^{(n)}$, and a $\Delta_n$ index as a pair formed of a $\Sigma_n$ index of $B$ and a $\Sigma_n$ index of its complement. The definitions above follow Monin and Patey. Every integer is a $\Sigma^0_1$ index of some set, but not every integer is a $\Delta^0_1$ index: the set of $\Delta^0_1$ indices is $\Pi^0_2$-complete (see the exercises). The notion of uniformity of the course on fundamentals can be expressed with indices.
 
 :::proposition{#prop-uniform-indices}
 A sequence $(A_n)_{n \in \nat}$ of sets is uniformly computable if and only if there is a computable function $h$ such that $h(n)$ is a $\Delta^0_1$ index of $A_n$ for every $n$. Similarly, $(A_n)$ is uniformly c.e., that is, $\{ (n, x) : x \in A_n \}$ is c.e., if and only if $A_n = W_{h(n)}$ for some computable $h$.
@@ -36,7 +44,11 @@ $x \in D_n$ if and only if the binary digit of $n$ at position $x$ is $1$, that 
 
 ## What cannot be recovered
 
-The converse passages are not uniform. The proofs all have the same structure: a program, built with the fixed point theorem, waits for the alleged conversion procedure to answer about the program itself, and then behaves so as to make the answer wrong.
+The converse passages are not uniform. The proofs all have the same structure: a program, built with the fixed point theorem, waits for the alleged conversion procedure to answer about the program itself, and then behaves so as to make the answer wrong. This is the **diagonalization by self-reference** of the course on fundamentals, used there to prove Rice's theorem. Two points need care. The program must belong to the class on which the conversion is assumed to work, whatever the conversion does, so that its answer is guaranteed; and the program can only react to an answer after it has appeared, so its behavior before that point must already be acceptable.
+
+:::figure[Conversions between kinds of indices. A solid arrow is a computable function that converts an index of one kind into an index of the other kind for the same set; a dashed arrow is a conversion that no partial computable function performs (:ref{#prop-no-size-from-delta}, :ref{#prop-no-delta-from-sigma} and :ref{#prop-no-lowness-index}).]
+<svg class="fig" viewBox="0 0 600 205" width="600" role="img" aria-label="Conversions between kinds of indices: computable in one direction, not uniform in the other"><defs><marker id="ah-idx" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="muted-fill"/></marker></defs><rect x="7.0" y="30.0" width="136" height="40" rx="8" class="node"/><rect x="232.0" y="30.0" width="136" height="40" rx="8" class="node"/><rect x="457.0" y="30.0" width="136" height="40" rx="8" class="node"/><rect x="119.0" y="125.0" width="136" height="40" rx="8" class="node"/><rect x="344.0" y="125.0" width="136" height="40" rx="8" class="node"/><text x="75" y="55" text-anchor="middle" font-size="14">canonical index</text><text x="300" y="56" text-anchor="middle" font-size="17"><tspan class="mrm">Δ</tspan><tspan class="mrm" font-size="11" dy="-7">0</tspan><tspan class="mrm" font-size="11" dx="-6" dy="12">1</tspan><tspan font-size="14" dx="5" dy="-5">index</tspan></text><text x="525" y="56" text-anchor="middle" font-size="17"><tspan class="mrm">Σ</tspan><tspan class="mrm" font-size="11" dy="-7">0</tspan><tspan class="mrm" font-size="11" dx="-6" dy="12">1</tspan><tspan font-size="14" dx="5" dy="-5">index</tspan></text><text x="187" y="150" text-anchor="middle" font-size="14">lowness index</text><text x="412" y="151" text-anchor="middle" font-size="17"><tspan class="mrm">Δ</tspan><tspan class="mrm" font-size="11" dy="-7">0</tspan><tspan class="mrm" font-size="11" dx="-6" dy="12">2</tspan><tspan font-size="14" dx="5" dy="-5">index</tspan></text><line x1="146.0" y1="41" x2="227.0" y2="41" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-idx)"/><text x="186.5" y="35" text-anchor="middle" class="label">computable</text><line x1="229.0" y1="59" x2="148.0" y2="59" class="muted-stroke" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ah-idx)"/><text x="188.5" y="74" text-anchor="middle" class="label">not uniform</text><line x1="371.0" y1="41" x2="452.0" y2="41" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-idx)"/><text x="411.5" y="35" text-anchor="middle" class="label">computable</text><line x1="454.0" y1="59" x2="373.0" y2="59" class="muted-stroke" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ah-idx)"/><text x="413.5" y="74" text-anchor="middle" class="label">not uniform</text><line x1="258.0" y1="136" x2="339.0" y2="136" class="ink-stroke" stroke-width="1.3" marker-end="url(#ah-idx)"/><text x="298.5" y="130" text-anchor="middle" class="label">computable</text><line x1="341.0" y1="154" x2="260.0" y2="154" class="muted-stroke" stroke-width="1.3" stroke-dasharray="4 3" marker-end="url(#ah-idx)"/><text x="300.5" y="169" text-anchor="middle" class="label">not uniform</text><text x="300.0" y="199" text-anchor="middle" class="label">solid: a computable conversion; dashed: no partial computable conversion exists</text></svg>
+:::
 
 :::proposition{#prop-no-delta-from-sigma}
 There is no partial computable function $f$ such that, for every $e$ with $W_e$ computable, $f(e)\converge$ and $f(e)$ is a $\Delta^0_1$ index of $W_e$.
@@ -140,7 +152,9 @@ Suppose $f$ exists. By :ref{#cor-self-reference}, there is $e$ such that $\Phi_e
 
 ## Notes and references
 
-Canonical indices of finite sets are standard since Rogers' book. Lowness indices are used systematically in the constructions of low sets and low degrees, for instance in the proofs of the low basis theorem and of the Sacks splitting theorem; the examples of this lesson follow the presentation in Monin and Patey's book. Soare's textbook discusses the various kinds of indices.
+Canonical indices of finite sets are standard since Rogers' book; Nies calls them strong indices. Soare's *Turing Computability*, Section 2.3, studies the indices of finite and computable sets with a different terminology: what is called here a $\Delta^0_1$ index is his $\Delta_0$ index, or characteristic index, and his $\Delta_1$ index of $A$ is a pair formed of a $\Sigma_1$ index of $A$ and one of its complement. :ref{#prop-no-delta-from-sigma} is his Nonconversion Theorem 2.3.3, with the same proof, and :ref{#prop-no-size-from-delta} is equivalent to his Theorem 2.3.7 by his Exercise 2.3.13. The $\Sigma_n$ and $\Delta_n$ indices of higher levels are in his Definition 4.2.4. Lowness indices are used systematically in the constructions of low sets, for instance in the proofs of the low basis theorem and of the Sacks splitting theorem. The definitions and the two fixed point arguments for finite sets and lowness indices follow the section on arithmetic codes of Monin and Patey's book.
 
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
-- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 2.3 and 4.2.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.1.
+- B. Monin and L. Patey, *Computability theory*, chapter *Arithmetic hierarchy*, section *Arithmetic codes*.

@@ -1,7 +1,7 @@
 ---
 title: Arithmetic definability
 summary: The arithmetic sets are the sets definable in the language of arithmetic; Σ₁-definable means c.e.; truth in ℕ is not arithmetic, and the first incompleteness theorem.
-duration: 40
+duration: 50
 prerequisites: [post-theorem, models-of-computation/coding-sequences]
 ---
 
@@ -42,6 +42,8 @@ where $\exists \vec y < b$ abbreviates $\exists y_1 < b \cdots \exists y_m < b$.
 The equivalences are equivalences **in $\nat$**: the formulas are not syntactically $\Sigma_1$, but they define the same relations as $\Sigma_1$ formulas. This is all that matters for definability.
 
 ## Computations are Σ₁-definable
+
+A terminating computation is a finite object, and checking that a given finite object is a correct computation only requires looking at its finitely many steps. So "the computation of $f(\vec x)$ ends with the value $y$" should be expressible as "there exists a finite sequence $c$ such that $c$ is a correct computation of $f(\vec x)$ ending with $y$", with an existential quantifier over $c$ followed by a check in which every quantifier is bounded by $c$. The difficulty is that the language has no symbol for finite sequences, only $0$, $S$, $+$, $\cdot$ and $<$. Gödel's β-function solves it: finite sequences of any length are coded by pairs of numbers, and the decoding is defined by a bounded formula. The proof below applies this idea to primitive recursive functions, by induction on their definition; the normal form theorem then reduces arbitrary computations to them.
 
 :::theorem{#thm-pr-sigma1}
 For every primitive recursive function $f : \nat^k \to \nat$, the graph $\{ (\vec x, y) : f(\vec x) = y \}$ is $\Sigma_1$-definable.
@@ -187,7 +189,7 @@ The truth of a bounded sentence is decidable, uniformly in its code, by evaluati
 
 ## Notes and references
 
-The β-function and the representation of recursive functions in arithmetic are due to Gödel (1931). The undefinability of truth is due to Tarski (1933, published in German in 1936). The equivalence between definability and the arithmetic hierarchy is due to Kleene (1943) and Mostowski (1947). Smoryński's book and Kaye's book on models of Peano arithmetic give detailed treatments.
+The β-function and the representation of recursive functions in arithmetic are due to Gödel (1931). The undefinability of truth is due to Tarski (1933, published in German in 1936). The equivalence between definability and the arithmetic hierarchy is due to Kleene (1943) and Mostowski (1947). Smoryński's book and Kaye's book on models of Peano arithmetic give detailed treatments; the definability of computable relations is Theorem 3.3 in Kaye's book, as cited by Nies (Section 1.4). Monin and Patey prove the representation of primitive recursive functions with the β-function in the section on Gödel's incompleteness theorems of their chapter *Formal interlude*, where the hierarchy of formulas is also compared with the arithmetic hierarchy.
 
 - K. Gödel, *Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I*, Monatshefte für Mathematik und Physik 38 (1931), 173–198.
 - A. Tarski, *Der Wahrheitsbegriff in den formalisierten Sprachen*, Studia Philosophica 1 (1936), 261–405.
@@ -195,3 +197,5 @@ The β-function and the representation of recursive functions in arithmetic are 
 - C. Smoryński, *Logical Number Theory I*, Springer, 1991.
 - J. B. Rosser, *Extensions of some theorems of Gödel and Church*, Journal of Symbolic Logic 1 (1936), 87–91.
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.4.
+- B. Monin and L. Patey, *Computability theory*, chapter *Formal interlude*.

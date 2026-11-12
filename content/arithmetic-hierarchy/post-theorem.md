@@ -71,6 +71,14 @@ In particular, $\emptyset^{(n)}$ is $\Sigma^0_n$-complete, the $\Sigma^0_{n+1}$ 
 3. $X^{(n)} = (X^{(n-1)})'$ is $X^{(n-1)}$-c.e., hence $\Sigma^0_n(X)$ by item 1. Every $\Sigma^0_n(X)$ set is $X^{(n-1)}$-c.e. by item 1, hence one-one reducible to $(X^{(n-1)})' = X^{(n)}$ by :ref{#thm-jump}.
 :::
 
+The induction in item 1 is a typical use of **relativization**: the lemma is proved once for an arbitrary oracle $Y$, and then applied to $Y = X^{(n)}$. This is why the statement is proved for all oracles $X$ simultaneously, even if one is only interested in $X = \emptyset$. The first levels read as follows.
+
+| $n$ | $\Sigma^0_{n+1}$ sets | $\Delta^0_{n+1}$ sets | $\Sigma^0_{n+1}$-complete set |
+| --- | --- | --- | --- |
+| $0$ | c.e. | computable | $\emptyset'$ |
+| $1$ | c.e. in $\emptyset'$ | computable in $\emptyset'$ | $\emptyset''$ |
+| $2$ | c.e. in $\emptyset''$ | computable in $\emptyset''$ | $\emptyset'''$ |
+
 :::corollary{#cor-hierarchy-strict}
 For every $n \geq 1$:
 
@@ -156,10 +164,27 @@ A set of this form is $\Sigma^0_2$. Conversely, let $A = \{ x : \exists y\ \fora
 :::
 ::::
 
+::::exercise{difficulty=2}
+This exercise proves the strictness of the hierarchy by a direct diagonal argument, without the jump. Let $n \geq 1$.
+
+1. Show that there is a $\Sigma^0_n$ relation $U_n \subseteq \nat^2$ that is **universal**: for every $\Sigma^0_n$ set $A$ there is $e$ with $A = \{ x : (e, x) \in U_n \}$.
+2. Deduce that $\{ x : (x, x) \notin U_n \}$ is $\Pi^0_n$ and not $\Sigma^0_n$.
+
+:::solution
+1. By induction on $n$. For $n = 1$, let $U_1 = \{ (e, x) : x \in W_e \}$, which is c.e. and universal for the c.e. sets. Suppose $U_n$ is built, and let $U_{n+1} = \{ (e, x) : \exists y\ (e, \langle x, y \rangle) \notin U_n \}$, which is $\Sigma^0_{n+1}$. If $A = \{ x : \exists y\ P(x, y) \}$ with $P$ in $\Pi^0_n$, the set $\{ \langle x, y \rangle : \neg P(x, y) \}$ is $\Sigma^0_n$, so it is $\{ z : (e, z) \in U_n \}$ for some $e$; then $A = \{ x : (e, x) \in U_{n+1} \}$.
+2. The set $D = \{ x : (x, x) \notin U_n \}$ is $\Pi^0_n$ by substitution and complementation. If $D$ were $\Sigma^0_n$, then $D = \{ x : (e, x) \in U_n \}$ for some $e$, and $e \in D \iff (e, e) \in U_n \iff e \notin D$, a contradiction.
+
+This is Cantor's diagonal argument, as in the proof that $\emptyset'$ is not computable, applied at each level of the hierarchy.
+:::
+::::
+
 ## Notes and references
 
-The theorem is due to Post, announced in 1948, and its proof is in Kleene's *Introduction to Metamathematics*. Its modern formulation in terms of the jump follows Kleene and Post (1954). The characterization of $\Sigma^0_2$ sets in the last exercise is the starting point of the use of "infinitely often" and "cofinitely often" conditions in constructions below $\emptyset''$.
+The theorem is due to Post, who announced it in 1948. The jump and the use principle, on which :ref{#lem-sigma2-jump} rests, were developed by Kleene and Post (1954). Soare's *Turing Computability* gives the theorem as Theorem 4.2.2, with the hierarchy theorem as Corollary 4.2.3 and the relativized form as Theorem 4.4.2; Downey and Hirschfeldt give it as Theorem 2.6.4, and Nies as Theorem 1.4.13. These books prove it, as here, by an induction in which the use principle accounts for one quantifier; Monin and Patey first prove that $\emptyset^{(n)}$ is $\Sigma^0_n$-complete, and deduce the rest. The characterization of $\Sigma^0_2$ sets in the third exercise is close to Nies, Proposition 1.4.17; it is the starting point of the use of "infinitely often" and "cofinitely often" conditions in constructions below $\emptyset''$.
 
 - E. L. Post, *Degrees of recursive unsolvability (preliminary report)*, Bulletin of the American Mathematical Society 54 (1948), 641–642.
-- S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952.
 - S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 4.2 and 4.4.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.6.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.4.
+- B. Monin and L. Patey, *Computability theory*, chapter *Arithmetic hierarchy*.

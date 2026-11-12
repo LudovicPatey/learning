@@ -1,11 +1,13 @@
 ---
 title: Σ⁰ₙ and Π⁰ₙ sets
 summary: The arithmetic hierarchy defined by alternations of quantifiers over computable relations; normal forms, closure properties, relativization and many-one reductions.
-duration: 35
-prerequisites: [turing-degrees/turing-jump]
+duration: 50
+prerequisites: [turing-degrees/turing-jump, fundamentals/complete-sets]
 ---
 
 The c.e. sets are the sets defined by an existential quantifier over a computable relation (:ref{#thm-ce-characterizations}). Allowing more quantifiers, alternating between $\exists$ and $\forall$, gives a classification of sets by the complexity of their definitions: the **arithmetic hierarchy**, due to Kleene and Mostowski. The set $\mathrm{Tot}$ of indices of total functions, for instance, is defined by "$\forall x\ \exists s$, the computation $\Phi_e(x)$ converges at stage $s$": a universal quantifier followed by an existential one, over a computable relation. This lesson defines the hierarchy and establishes the closure properties used to place sets in it. The next lesson relates it to the Turing jump.
+
+A quantifier over $\nat$ in front of a computable relation can be read as an unbounded search. A $\Sigma^0_1$ statement $\exists y\ R(x, y)$ is confirmed after finitely many steps when it is true, but is never refuted. A $\Pi^0_2$ statement $\forall y\ \exists z\ R(x, y, z)$ asks that infinitely many such searches all succeed: no finite amount of computation confirms it or refutes it. Each new alternation adds one level of this kind of uncertainty; Post's theorem, in the next lesson, makes this precise by showing that each alternation costs exactly one jump.
 
 ## Definition
 
@@ -106,7 +108,17 @@ From left to right, choose for each of the finitely many $z < w$ a witness $y_z$
 Existential quantification: $\exists u\ \exists y\ P(\vec x, u, y)$ is contracted to a single quantifier. The $\Pi^0_{n+1}$ case follows by complementation.
 :::
 
-The equivalence used for the bounded universal quantifier is called **collection**: finitely many witnesses can be bounded by a single number. It fails for unbounded quantifiers, which is why $\forall z\ \exists y$ cannot in general be rewritten as $\exists v\ \forall z$.
+The equivalence used for the bounded universal quantifier is called **collection**: finitely many witnesses can be bounded by a single number. It fails for unbounded quantifiers, which is why $\forall z\ \exists y$ cannot in general be rewritten as $\exists v\ \forall z$. Soare proves the same closure by another route: the finitely many witnesses $y_z$, $z < w$, are coded by a single finite sequence $\sigma$, and $\forall z < w\ \exists y\ P$ becomes $\exists \sigma\ \forall z < w\ P(\vec x, z, \sigma(z))$.
+
+Together with item 3 of :ref{#prop-hierarchy-basic}, these closure properties justify the method of **quantifier counting**, used throughout the course: write a definition of the set from relations already placed in the hierarchy, using connectives, bounded quantifiers and unbounded quantifiers; move the unbounded quantifiers to the front; and count the blocks.
+
+:::example{#ex-inclusion-pi2}
+The relation $\{ (a, b) : W_a \subseteq W_b \}$ is $\Pi^0_2$. Indeed,
+$$
+W_a \subseteq W_b \iff \forall x\ \big( x \notin W_a \vee x \in W_b \big) \iff \forall x\ \big( \forall s\ \Phi_a(x)[s]\diverge \ \vee\ \exists t\ \Phi_b(x)[t]\converge \big).
+$$
+The disjunction is of a $\Pi^0_1$ and a $\Sigma^0_1$ relation, both $\Pi^0_2$ (item 2 of :ref{#prop-hierarchy-basic}), so it is $\Pi^0_2$ by closure under unions, and so is its universal closure. Explicitly, the prefix $\forall x\ [\forall s \vee \exists t]$ becomes $\forall x\ \forall s\ \exists t$, a $\Pi^0_2$ prefix. Consequently $\{ (a, b) : W_a = W_b \}$ is $\Pi^0_2$, as an intersection of two $\Pi^0_2$ relations, and the set $\{ e : W_e = \nat \}$ is $\Pi^0_2$, by substitution of a fixed index of $\nat$.
+:::
 
 :::quiz[the closure properties]
 In the collection equivalence, why must the quantifier $\forall z < w$ be bounded?
@@ -197,9 +209,12 @@ Then $W_e$ is computable if and only if $\exists i\ \forall x\ E(e, i, x)$: if $
 
 ## Notes and references
 
-The arithmetic hierarchy was introduced independently by Kleene (1943) and Mostowski (1947). The notation $\Sigma^0_n$, $\Pi^0_n$ is due to Addison, by analogy with the Borel hierarchy of descriptive set theory, of which it is the effective counterpart. Rogers' and Soare's textbooks treat the hierarchy in detail.
+The arithmetic hierarchy was introduced independently by Kleene (1943) and Mostowski (1947). The notation $\Sigma^0_n$, $\Pi^0_n$ brings out the analogy with the Borel hierarchy of descriptive set theory, of which the arithmetic hierarchy is the effective counterpart. Soare's *Turing Computability*, Section 4.1, treats the definition and the closure properties (Theorem 4.1.4) and places $\mathrm{Fin}$, $\mathrm{Cof}$ and $\mathrm{Rec}$ by quantifier counting; the inclusion relation of :ref{#ex-inclusion-pi2} is his Proposition 4.1.7. Shorter treatments are in Downey and Hirschfeldt, Section 2.5, and Nies, Section 1.4. Monin and Patey present the closure properties in terms of uniform unions and intersections.
 
 - S. C. Kleene, *Recursive predicates and quantifiers*, Transactions of the American Mathematical Society 53 (1943), 41–73.
 - A. Mostowski, *On definable sets of positive integers*, Fundamenta Mathematicae 34 (1947), 81–112.
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
-- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Section 4.1.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.5.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.4.
+- B. Monin and L. Patey, *Computability theory*, chapter *Arithmetic hierarchy*.
