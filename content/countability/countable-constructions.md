@@ -2,7 +2,7 @@
 title: Countable constructions
 summary: Products, countable unions with given enumerations and finite strings over countable sets are countable; so are the finite sets of integers, the rationals and the algebraic numbers.
 duration: 40
-prerequisites: [countable-sets]
+prerequisites: [countable-sets, models-of-computation/what-is-an-algorithm]
 ---
 
 The previous lesson reduced countability to the existence of a listing, possibly with repetitions. This lesson shows that the sets built from integers by finite means — pairs, tuples, finite sequences, finite sets, rational and algebraic numbers — are countable, by exhibiting such listings. Two ideas recur: **dovetailing**, which merges infinitely many infinite lists into one, and **coding** by integers, which replaces a finite object by a number from which it can be recovered. Both are used constantly in computability theory, where every finite object is identified with a code. The one place where the axiom of choice threatens to enter, countable unions, is singled out.
