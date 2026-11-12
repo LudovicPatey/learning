@@ -1,0 +1,30 @@
+title: Jump cone avoidance and second-jump control
+area: computability
+level: Advanced
+order: 17
+prerequisites: [lowness, avoidance, effective-forcing, ramsey-theorem]
+summary: Control of the second jump of solutions; jump cone avoidance and non-high solutions; forcing questions for Σ⁰₂ sentences and the complexity of the partial order; cohesive sets avoiding a cone and a jump cone; largeness, partition regularity and cohesive classes; every set has an infinite subset of itself or of its complement that is not high (Monin–Patey).
+description: >
+  Second-jump control builds solutions to a problem whose jump avoids a given
+  cone, and in particular solutions that are not high. The course defines jump
+  cone avoidance for problems, shows that weakly low bases give it, and reduces
+  strong jump cone avoidance to Δ⁰₃ instances. It lifts forcing questions from
+  Σ⁰₁ to Σ⁰₂ sentences by quantifying over extensions, locates the cost in the
+  complexity of the partial order, and proves the abstract jump cone avoidance
+  theorem, with Wang's theorem on paths of Π⁰₁ classes avoiding a cone and a jump
+  cone at once. It restricts Mathias forcing to the reservoirs given by one path
+  of decisions to build cohesive sets with the same two properties. It then
+  develops partition regular and large classes, intersections of Σ⁰₁ classes over
+  a coded Scott ideal and the complexity of their largeness, cohesive classes and
+  their partition regular cores, and uses them to prove the theorem of Monin and
+  Patey that the pigeonhole principle admits strong jump cone avoidance: every set
+  has an infinite subset, of itself or of its complement, that is not high.
+objectives:
+  - Define jump cone avoidance and its strong version, relate them to non-high solutions and to weakly low bases, and reduce strong jump cone avoidance to Δ⁰₃ instances
+  - Explain why a Π⁰₂ sentence is forced by density, lift a forcing question from Σ⁰₁ to Σ⁰₂ sentences, and compute its complexity from that of the partial order
+  - Prove jump cone avoidance from a forcing question for Σ⁰₂ sentences with answers Σ⁰₁ relative to the condition, and combine cone and jump cone avoidance for WKL
+  - Explain why computable Mathias forcing produces high sets, and restrict its reservoirs along a path of decisions to build cohesive sets avoiding a cone and a jump cone
+  - Use partition regular and large classes, the largest partition regular subclass, and compute the complexity of largeness for intersections of Σ⁰₁ classes over a coded Scott ideal
+  - Define cohesive classes, prove their compatibility property and the partition regularity of their cores, and compute a cohesive class with a set PA relative to the jump of the code
+  - Prove that every set has an infinite subset, of itself or of its complement, whose jump avoids a given cone, with promises for Π⁰₂ sentences, a disjunctive question and a question on one side
+lessons: [jump-cones, sigma2-questions, cohesiveness-second-jump, largeness, cohesive-classes, pigeonhole-forcing, pigeons-non-high]
