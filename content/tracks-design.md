@@ -207,7 +207,13 @@ are the tools behind the conservation results of that track.
   Peano Arithmetic* (2006), not available locally.
 
 **Courses, in order.**
-1. **`fragments-of-arithmetic`.**
+(On 2026-11-13 the first planned course was split in two, because its lessons ran to
+50–65 minutes: `fragments-of-arithmetic`, with the first-order hierarchy of induction and
+collection proved, so that the track does not depend on the second-order course
+`induction-conservation`; and `truth-and-provability`, with the provably total functions
+of IΣ₁, partial truth definitions and finite axiomatizability. The track has six courses.)
+
+1. **`fragments-of-arithmetic`** and **`truth-and-provability`**.
    - PA⁻ and the arithmetic hierarchy in models; IΔ₀ and exponentiation;
    - coding of finite sets and sequences in IΔ₀ + exp;
    - induction, least number principle and collection (IΣₙ, LΣₙ, BΣₙ); the theorems of
@@ -375,3 +381,6 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
 - **2026-11-13.** Two new tracks designed: models of arithmetic (after Wong's lecture
   notes and Hájek–Pudlák) and lowness and avoidance (after Patey's monograph). The
   specialized course `effective-forcing` becomes the first course of the second.
+- **2026-11-13.** Courses `fragments-of-arithmetic` and `truth-and-provability` written
+  (track models of arithmetic); `avoidance` and `lowness` written (track lowness and
+  avoidance).

@@ -1,0 +1,22 @@
+title: Truth definitions and provability in fragments
+area: arithmetic
+level: Intermediate
+order: 2
+prerequisites: [fragments-of-arithmetic]
+summary: Provably total functions of IΣ₁, satisfaction for bounded formulas, the partial truth definitions Sat_Σₙ, the finite axiomatizability of IΣₙ, and the properness of the arithmetic hierarchy in every model of IΣ₁.
+description: >
+  The second course of the track on models of arithmetic. It shows that IΣ₁
+  proves the totality of every primitive recursive function, together with its
+  recursion equations, and states the converse due to Parsons, Mints and
+  Takeuti; it constructs, inside IΣ₁, satisfaction for bounded formulas through
+  finite tables and the partial truth definitions Sat_Σₙ with their Tarski
+  conditions; and it deduces that IΣₙ is finitely axiomatizable for n ≥ 1, that
+  Peano arithmetic is not axiomatized by sentences of bounded complexity, and
+  that the arithmetic hierarchy is proper in every model of IΣ₁.
+objectives:
+  - Prove that every primitive recursive function is provably total in IΣ₁, and state the converse
+  - Carry out definitions by course-of-values recursion inside IΣ₁
+  - Construct satisfaction for bounded formulas through finite tables, and prove that it is Δ₁ in IΣ₁
+  - Construct the partial truth definitions Sat_Σₙ and prove Tarski's conditions for them in IΣ₁
+  - Prove that IΣₙ is finitely axiomatizable for n ≥ 1, and that the arithmetic hierarchy is proper in every model of IΣ₁
+lessons: [provably-total, bounded-satisfaction, truth-definitions, finite-axiomatizability]

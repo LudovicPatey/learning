@@ -38,3 +38,11 @@
     question as the main tool: cone avoidance, lowness, compactness avoidance, and the
     control of the first and second jumps.
   courses: [effective-forcing, avoidance, lowness]
+- id: arithmetic
+  title: Models of arithmetic
+  area: arithmetic
+  description: >
+    Fragments of Peano arithmetic and their models: induction and collection, truth
+    definitions, cuts and end extensions, recursive saturation, and the independence of
+    combinatorial statements.
+  courses: [fragments-of-arithmetic, truth-and-provability]

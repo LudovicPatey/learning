@@ -1,0 +1,27 @@
+title: Fragments of arithmetic
+area: arithmetic
+level: Intermediate
+order: 1
+prerequisites: [arithmetic-hierarchy]
+summary: The base theory PA⁻ and its non-standard models, bounded induction, cuts and Parikh's theorem, exponentiation, the hierarchy of induction, least number and collection schemes, definable cuts and overspill, and the coding of finite sets and sequences, with the characterization of induction and collection by coded sets.
+description: >
+  The first course of the track on models of arithmetic. It assumes first-order
+  logic: the completeness and compactness theorems, and Gödel's incompleteness
+  theorems. The course sets up the base theory PA⁻ and the classes of bounded,
+  Σₙ and Πₙ formulas in arbitrary models, with the absoluteness of bounded
+  formulas between a model and its end extensions; studies bounded induction,
+  the order type of its non-standard models, cuts that are models, Parikh's
+  theorem and the fact that bounded induction does not prove the totality of
+  exponentiation; proves the hierarchy of induction, least number and
+  collection schemes (Parsons, Paris and Kirby) and its reading through
+  definable cuts and overspill; and codes finite sets and sequences in bounded
+  induction with exponentiation, in which Σₙ induction and Σₙ₊₁ collection
+  become comprehension for bounded Σₙ and Δₙ₊₁ sets.
+objectives:
+  - Work in non-standard models of PA⁻ and of bounded induction, and use the absoluteness of bounded formulas for end extensions
+  - Prove Parikh's theorem by a cut argument, and deduce that bounded induction does not prove exponentiation
+  - Prove the implications between induction, least number and collection schemes, using collection to absorb bounded quantifiers
+  - Characterize Σₙ induction by definable cuts, and use overspill and underspill
+  - Code finite sets and sequences in IΔ₀ + exp, and prove comprehension for bounded formulas
+  - Characterize Σₙ induction and Σₙ₊₁ collection by coded bounded sets
+lessons: [pa-minus, bounded-induction, parikh, induction-collection, definable-cuts, coding, coded-sets]
