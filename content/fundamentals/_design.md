@@ -111,7 +111,7 @@ introduces approximation by stages and dovetailing, used without comment afterwa
   - the recursion theorem with partial $f$ (Soare 2.2.7) — mentioned in a quiz only;
   - the Myhill–Shepherdson and Kreisel–Lacombe–Shoenfield theorems — cited, not proved; they belong
     to a course on effective operations or computable analysis;
-  - Arslanov's completeness criterion — in `immunity-growth/dnc-functions`.
+  - Arslanov's completeness criterion — in `immunity-growth/arslanov`.
 
 ## 6. Comparison with the literature
 

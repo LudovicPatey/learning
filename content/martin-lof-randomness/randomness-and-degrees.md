@@ -2,7 +2,7 @@
 title: Randomness and Turing degrees
 summary: Sacks's theorem that upper cones of non-computable sets are null; the Kučera–Gács theorem that every set is computable from a random sequence; random sequences compute DNC functions, and DNC degrees are characterized by complexity.
 duration: 40
-prerequisites: [levin-schnorr, immunity-growth/dnc-functions]
+prerequisites: [levin-schnorr, immunity-growth/dnc-functions, immunity-growth/arslanov]
 ---
 
 Random sequences are typical with respect to measure, and one may ask what they can compute. Two results point in opposite directions. Sacks's theorem says that a non-computable set is computed by a null class of oracles only: a sequence chosen at random computes it with probability $0$. The Kučera–Gács theorem says that every set is nevertheless computed by some Martin-Löf random sequence. The lesson ends with a computational property shared by all random sequences: they compute diagonally non-computable functions.
