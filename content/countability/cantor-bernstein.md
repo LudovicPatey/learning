@@ -1,11 +1,11 @@
 ---
 title: The Cantor–Bernstein theorem
 summary: Two sets each injecting into the other are equipotent; explicit form of the bijection; the role of the axiom of choice.
-duration: 35
+duration: 50
 prerequisites: [equipotence]
 ---
 
-Subpotence is reflexive and transitive (:ref{#prop-subpotent-transitive}). This lesson proves that it is also antisymmetric: from an injection of $A$ into $B$ and an injection of $B$ into $A$, one can build a bijection between $A$ and $B$. The proof is constructive in the sense that it defines the bijection explicitly from the two injections, without any use of the axiom of choice. It is also a useful tool in practice: exhibiting two injections is often much easier than exhibiting a bijection.
+Subpotence is reflexive and transitive (:ref{#prop-subpotent-transitive}). This lesson proves that it is also antisymmetric: from an injection of $A$ into $B$ and an injection of $B$ into $A$, one can build a bijection between $A$ and $B$. The proof defines the bijection explicitly from the two injections, without any use of the axiom of choice. It is also a useful tool in practice: exhibiting two injections is often much easier than exhibiting a bijection.
 
 ## The key lemma
 
@@ -96,6 +96,8 @@ It shifts the sequence $1, \tfrac12, \tfrac14, \dots$ by one step, which frees t
 If $f : A \to B$ and $g : B \to A$ are injections, then there is a bijection between $A$ and $B$.
 :::
 
+The idea is to transport $B$ inside $A$ through $g$: the copy $g(B)$ is a subset of $A$, and composing $f$ with $g$ gives an injection of $A$ into this copy. The lemma then applies inside $A$.
+
 :::proof{of=thm-cantor-bernstein}
 Let $A' = g(B) \subseteq A$. The map $g \circ f$ is an injection from $A$ into $A'$, so by :ref{#lem-injection-subset} there is a bijection $h : A \to A'$. The map $g$, seen as a function from $B$ to $A'$, is a bijection; so $g^{-1} \circ h : A \to B$ is a bijection.
 :::
@@ -121,6 +123,8 @@ If $|A| \leq |B|$ and $|B| \leq |A|$, then $|A| = |B|$. Consequently, if $A \sub
 :::proof{of=cor-mutually-subpotent}
 The first statement is a reformulation of :ref{#thm-cantor-bernstein}. For the second, the inclusion gives $|B| \leq |C|$, and $|C| = |A| \leq |B|$ gives $|C| \leq |B|$.
 :::
+
+The theorem concerns sets without structure, and its analogue fails for ordered sets or topological spaces. The intervals $[0, 1]$ and $(0, 1)$ each embed into the other by increasing continuous maps, the inclusion and $x \mapsto (x + 1)/3$, but they are neither order-isomorphic nor homeomorphic: $[0, 1]$ has a least element and is compact, and $(0, 1)$ has neither property. Accordingly, the bijections produced by the lemma are not monotone in general; in :ref{#ex-cb-interval}, $h(1) = \tfrac12 < h(0.9) = 0.9$.
 
 The second statement is often used in the following form: to show that a set $B$ has the same cardinality as a set $C$, find a subset of $B$ equipotent to $C$, and an injection of $B$ into $C$.
 
@@ -183,6 +187,8 @@ The proof of Cantor–Bernstein uses only definitions by induction and set forma
 - *Surjections in both directions.* If there are surjections $A \to B$ and $B \to A$, are $A$ and $B$ equipotent? With the axiom of choice, yes: each surjection has a right inverse, which is an injection in the opposite direction (:ref{#rem-right-inverse-choice}), and Cantor–Bernstein applies. Without choice, this is not provable in ZF, if ZF is consistent; we admit this independence result (see Jech's monograph on the axiom of choice).
 - *Comparability.* For any two sets $A$ and $B$, is $|A| \leq |B|$ or $|B| \leq |A|$? Zermelo's well-ordering theorem shows that this follows from the axiom of choice, and Hartogs showed in 1915 that, conversely, comparability implies the axiom of choice. We admit both results.
 
+The proof does use classical logic: the definition of $h$ distinguishes the case $x \in C$ from the case $x \notin C$, and membership in $C$ asks whether the ancestry of $x$ stops in $A \setminus g(B)$, after a number of steps for which no bound is given. This use of the law of excluded middle is unavoidable: Pradic and Brown showed that, in constructive set theory, the Cantor–Bernstein theorem implies the law of excluded middle. Computability theory has its own analogue, Myhill's isomorphism theorem: if $f, g : \nat \to \nat$ are computable injections and $A, B \subseteq \nat$ satisfy $x \in A \iff f(x) \in B$ and $y \in B \iff g(y) \in A$ for all $x, y$, then some computable permutation $\pi$ of $\nat$ satisfies $\pi(A) = B$. Its proof is not the one above, but a back-and-forth construction which follows the chains only as far as needed (see Soare, Theorem 1.7.4).
+
 In this course, the sets compared are mostly sets of integers, finite objects, sequences and real numbers, for which explicit injections are available, and no use of choice is needed except where stated.
 
 ## Exercises
@@ -221,9 +227,12 @@ For $n \geq 1$, $C_n \subseteq f(A) \subseteq B$, so $C_n$ is disjoint from $C_0
 
 ## Notes and references
 
-The theorem was stated by Cantor, who could prove it only using the comparability of cardinals. Dedekind found a proof in 1887 but did not publish it. Schröder published a proof in 1898 that turned out to contain a gap, and the first published correct proof, by Felix Bernstein, appeared in Borel's *Leçons sur la théorie des fonctions* (1898). The proof by chains is due to Julius König. Hartogs' theorem on comparability is proved in Jech's monograph.
+The theorem was stated by Cantor, who could prove it only using the comparability of cardinals. Dedekind found a proof in 1887 but did not publish it. Schröder published a proof in 1898 that turned out to contain a gap, and the first published correct proof, by Felix Bernstein, appeared in Borel's *Leçons sur la théorie des fonctions* (1898). The proof by chains is due to Julius König. Hartogs' theorem on comparability is proved in Jech's monograph. Monin and Patey (chapter *Cantor's infinity*, section *Cantor–Bernstein's theorem*) give the proof by the lemma on subsets, with a figure similar to the first one above. The necessity of the law of excluded middle is the result of Pradic and Brown.
 
 - E. Borel, *Leçons sur la théorie des fonctions*, Gauthier-Villars, Paris, 1898, Note I.
 - J. König, *Sur la théorie des ensembles*, Comptes rendus de l'Académie des sciences 143 (1906), 110–112.
 - F. Hartogs, *Über das Problem der Wohlordnung*, Mathematische Annalen 76 (1915), 438–443.
 - T. Jech, *The Axiom of Choice*, North-Holland, 1973.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.7.
+- C. Pradic and C. E. Brown, *Cantor–Bernstein implies excluded middle*, preprint, arXiv:1904.09193, 2019.
+- B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.

@@ -1,8 +1,8 @@
 ---
 title: The diagonal argument
 summary: Cantor space; uncountability of the sets of binary sequences, of integer sequences, of power sets and of ℝ by diagonalization; a general form of the argument.
-duration: 40
-prerequisites: [countable-sets]
+duration: 55
+prerequisites: [countable-constructions]
 ---
 
 In 1891, Cantor gave a short proof that no sequence of infinite binary sequences contains all of them. The method, called **diagonalization**, is the most frequently used argument in computability theory: it shows that the halting problem is undecidable, that there are total computable functions which are not primitive recursive, and, in more elaborate forms, it underlies most constructions of non-computable sets. This lesson presents the argument, isolates its general form, and derives the uncountability of $2^\nat$, $\nat^\nat$, $\mathcal P(A)$ and $\mathbb R$.
@@ -13,7 +13,7 @@ In 1891, Cantor gave a short proof that no sequence of infinite binary sequences
 **Cantor space** is the set $\cs$ of infinite binary sequences, that is, of functions $X : \nat \to \{0, 1\}$. For $X \in \cs$ and $n \in \nat$, the value $X(n)$ is the **$n$-th bit** of $X$, and one writes $X = X(0)\,X(1)\,X(2) \cdots$.
 :::
 
-A sequence $X \in \cs$ and the set $\{ n : X(n) = 1 \} \subseteq \nat$ determine each other: the map $X \mapsto \{ n : X(n) = 1 \}$ is a bijection from $\cs$ onto $\mathcal P(\nat)$, whose inverse sends a set to its **characteristic function**. In computability theory the two points of view are used interchangeably: the same letter $X$ denotes a subset of $\nat$ and its characteristic function, so that $n \in X$ if and only if $X(n) = 1$.
+A sequence $X \in \cs$ and the set $\{ n : X(n) = 1 \} \subseteq \nat$ determine each other: the map $X \mapsto \{ n : X(n) = 1 \}$ is a bijection from $\cs$ onto $\mathcal P(\nat)$, whose inverse sends a set to its **characteristic function**. In computability theory the two points of view are used interchangeably: the same letter $X$ denotes a subset of $\nat$ and its characteristic function, so that $n \in X$ if and only if $X(n) = 1$. For instance, the set of even numbers is the sequence $1010\cdots$, the set of primes is $0011010100\cdots$, and the finite sets are the sequences with finitely many ones.
 
 Finite binary strings are written $\sigma, \tau, \dots$; the set of finite binary strings is $2^{<\nat}$, the length of $\sigma$ is $|\sigma|$, and $X \upharpoonright n = X(0) \cdots X(n-1)$ is the **prefix** of length $n$ of $X$. By :ref{#prop-strings-countable}, $2^{<\nat}$ is countable.
 
@@ -267,9 +267,12 @@ Let $M = \cs \setminus \{ X_n : n \in \nat \}$. It is non-empty by :ref{#thm-can
 
 ## Notes and references
 
-The diagonal argument appears in Cantor's note of 1891, where it is applied to binary sequences and then to the power set of an arbitrary set. The 1874 proof of the uncountability of $\mathbb R$ uses nested intervals. The general form of the diagonal lemma and its fixed point reading are due to Lawvere, in the setting of cartesian closed categories; Yanofsky gives an elementary account, with applications to the paradoxes and to incompleteness. Russell communicated his paradox to Frege in a letter of 1902, and published it in the *Principles of Mathematics*.
+Monin and Patey (chapter *Cantor's infinity*, section *Cantor's diagonal argument*) prove the uncountability of $\mathbb R$ directly on decimal expansions, and Cantor's theorem on power sets as here. The diagonal argument appears in Cantor's note of 1891, where it is applied to binary sequences and then to the power set of an arbitrary set. The 1874 proof of the uncountability of $\mathbb R$ uses nested intervals; Gray discusses it and the misconception that it is non-constructive. Normann and Sanders study the statement "there is no injection from $[0, 1]$ to $\nat$", for arbitrary, possibly discontinuous, functions, in higher-order arithmetic: although the diagonal argument applied to sequences of reals is elementary, this statement is not provable from the comprehension axioms of the system $\mathsf Z_2^\omega$. The general form of the diagonal lemma and its fixed point reading are due to Lawvere, in the setting of cartesian closed categories; Yanofsky gives an elementary account, with applications to the paradoxes and to incompleteness. Russell communicated his paradox to Frege in a letter of 1902, and published it in the *Principles of Mathematics*.
 
 - G. Cantor, *Über eine elementare Frage der Mannigfaltigkeitslehre*, Jahresbericht der Deutschen Mathematiker-Vereinigung 1 (1891), 75–78.
 - F. W. Lawvere, *Diagonal arguments and cartesian closed categories*, in *Category Theory, Homology Theory and their Applications II*, Lecture Notes in Mathematics 92, Springer, 1969, 134–145.
 - N. S. Yanofsky, *A universal approach to self-referential paradoxes, incompleteness and fixed points*, Bulletin of Symbolic Logic 9 (2003), 362–386.
 - B. Russell, *The Principles of Mathematics*, Cambridge University Press, 1903.
+- R. Gray, *Georg Cantor and transcendental numbers*, American Mathematical Monthly 101 (1994), 819–832.
+- D. Normann and S. Sanders, *On the uncountability of $\mathbb R$*, Journal of Symbolic Logic 87 (2022), 1474–1521.
+- B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.

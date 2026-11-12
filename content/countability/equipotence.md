@@ -1,7 +1,7 @@
 ---
 title: Equipotence and subpotence
 summary: Comparison of sets by bijections and injections; finite sets and the pigeonhole principle.
-duration: 35
+duration: 55
 ---
 
 In the *Dialogues Concerning Two New Sciences* (1638), Galileo observes that every integer is the root of exactly one square and every square has exactly one root, so that there should be as many squares as integers; yet the squares form a proper part of the integers, so that there should be fewer of them. He concludes that the attributes "equal", "greater" and "smaller" do not apply to infinite quantities.
@@ -18,6 +18,10 @@ A function $f : A \to B$ is
 1. **injective** if for all $a, a' \in A$, $a \neq a'$ implies $f(a) \neq f(a')$;
 2. **surjective** if $f(A) = B$, that is, every $b \in B$ is of the form $f(a)$;
 3. **bijective** if it is both injective and surjective.
+:::
+
+:::example{#ex-injective-surjective}
+On $\nat$, the map $n \mapsto 2n$ is injective and not surjective, since odd numbers are not reached; the map $n \mapsto \lfloor n/2 \rfloor$ is surjective and not injective, since $0$ and $1$ have the same image; the identity is bijective. The properties depend on the codomain: $n \mapsto 2n$, seen as a map from $\nat$ to the set of even numbers, is bijective.
 :::
 
 A composition of injections is an injection, and a composition of surjections is a surjection: if $f : A \to B$ and $g : B \to C$ are surjective and $c \in C$, pick $b$ with $g(b) = c$, then $a$ with $f(a) = b$. Hence a composition of bijections is a bijection.
@@ -116,6 +120,8 @@ That $n$ is determined by $A$ — the number of elements of $A$ — is a consequ
 For all $m > n$, there is no injection from $\underline m$ into $\underline n$.
 :::
 
+Think of the elements of $\underline m$ as pigeons and those of $\underline n$ as holes, an injection placing each pigeon in a hole of its own. The proof is by induction on the number of holes: remove the last hole, together with the pigeon it contains, if any, and apply the induction hypothesis to the remaining pigeons and holes. For this, the remaining pigeons must form an initial segment $\underline{m-1}$, which holds when the pigeon removed is the last one; an exchange of two pigeons arranges this.
+
 :::proof{of=lem-pigeonhole}
 By induction on $n$. For $n = 0$: since $m > 0$, the set $\underline m$ contains $0$, and there is no function at all from a non-empty set into $\underline 0 = \emptyset$.
 
@@ -203,7 +209,7 @@ If $A \subseteq \nat$ and $f : A \to B$ is surjective, then $|B| \leq |A|$.
 For $b \in B$, the set $f^{-1}(\{b\})$ is a non-empty set of integers; let $g(b)$ be its least element. Then $f(g(b)) = b$, so $g$ has a left inverse and is injective by :ref{#lem-inverses}.
 :::
 
-For arbitrary $A$, the same statement holds under the axiom of choice (:ref{#rem-right-inverse-choice}). Two questions remain. Is $\leq$ antisymmetric, that is, do $|A| \leq |B|$ and $|B| \leq |A|$ imply $|A| = |B|$? This is the Cantor–Bernstein theorem of the next lesson. Is there a pair of infinite sets with $|A| < |B|$? This is Cantor's diagonal argument, three lessons ahead.
+For arbitrary $A$, the same statement holds under the axiom of choice (:ref{#rem-right-inverse-choice}). Two questions remain. Is $\leq$ antisymmetric, that is, do $|A| \leq |B|$ and $|B| \leq |A|$ imply $|A| = |B|$? This is the Cantor–Bernstein theorem of the next lesson. Is there a pair of infinite sets with $|A| < |B|$? This is Cantor's diagonal argument, in the lesson of that name.
 
 ## Exercises
 
@@ -233,9 +239,10 @@ If $f$ were injective and not surjective, then $f$ would be a bijection from $A$
 
 ## Notes and references
 
-The passage on squares and roots is in the First Day of Galileo's *Discorsi* (1638). Cantor introduced the comparison of sets by one-to-one correspondences in his papers of 1874 and 1878, under the name *Mächtigkeit* (power); the term "equipotent" derives from it. Dedekind defined infinite sets as those equipotent to a proper subset in *Was sind und was sollen die Zahlen?* (1888). For a systematic treatment of cardinality in axiomatic set theory, see Hrbacek and Jech.
+Monin and Patey (chapter *Cantor's infinity*, section *Equipotence and subpotence*) introduce equipotence through the same passage of Galileo. The passage on squares and roots is in the First Day of Galileo's *Discorsi* (1638). Cantor introduced the comparison of sets by one-to-one correspondences in his papers of 1874 and 1878, under the name *Mächtigkeit* (power); the term "equipotent" derives from it. Dedekind defined infinite sets as those equipotent to a proper subset in *Was sind und was sollen die Zahlen?* (1888). For a systematic treatment of cardinality in axiomatic set theory, see Hrbacek and Jech.
 
 - G. Galilei, *Discorsi e dimostrazioni matematiche intorno a due nuove scienze*, Leiden, 1638.
 - G. Cantor, *Ein Beitrag zur Mannigfaltigkeitslehre*, Journal für die reine und angewandte Mathematik 84 (1878), 242–258.
 - R. Dedekind, *Was sind und was sollen die Zahlen?*, Vieweg, Braunschweig, 1888.
 - K. Hrbacek and T. Jech, *Introduction to Set Theory*, 3rd edition, Marcel Dekker, 1999.
+- B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.

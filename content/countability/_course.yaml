@@ -6,10 +6,10 @@ summary: Comparison of infinite sets, the Cantor–Bernstein theorem, countable 
 description: >
   Comparison of sets by injections and bijections, the Cantor–Bernstein theorem,
   countable sets, Cantor's diagonal argument and the cardinality of the
-  continuum. The last lesson applies diagonalization to computation: counting
-  arguments, effective diagonalization, the halting set, and constructions by
-  finite extension. It uses the universal function of the course on models of
-  computation; the first five lessons have no prerequisite.
+  continuum. The last two lessons apply diagonalization to computation:
+  counting arguments, effective diagonalization, the halting set, and
+  constructions by finite extension. They use the universal function of the
+  course on models of computation; the first six lessons use no other course.
 objectives:
   - Compare infinite sets using injections, surjections and bijections
   - Prove the Cantor–Bernstein theorem and describe the bijection explicitly
@@ -17,4 +17,4 @@ objectives:
   - Run a diagonal argument in its general form, and apply it to binary sequences, integer sequences, power sets and real numbers
   - Show that the sets of binary sequences, of integer sequences, of real numbers and of real sequences are equipotent
   - Diagonalize effectively, and build sets by finite extension
-lessons: [equipotence, cantor-bernstein, countable-sets, diagonal-argument, continuum, diagonalization-and-computation]
+lessons: [equipotence, cantor-bernstein, countable-sets, countable-constructions, diagonal-argument, continuum, diagonalization-and-computation, requirements]

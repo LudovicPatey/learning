@@ -1,11 +1,11 @@
 ---
 title: Diagonalization and computation
-summary: Counting arguments; effective diagonalization against uniformly computable sequences; partial functions and the halting set; diagonalization by requirements.
+summary: Counting arguments; effective diagonalization against uniformly computable sequences; partial functions and the halting set.
 duration: 40
 prerequisites: [continuum, models-of-computation/equivalence-of-models, models-of-computation/ackermann-function]
 ---
 
-This lesson connects the previous ones with computation. Counting shows that almost all functions are not computable, but it exhibits none. Diagonalization does better: applied to an enumeration that is itself computable, it produces a function that is computable, and escapes the enumeration. Applied to the enumeration $\Phi_0, \Phi_1, \Phi_2, \dots$ of all partial computable functions, it does not produce a contradiction, but a point of divergence, and from there the undecidability of the halting problem. The last section presents diagonalization as the satisfaction of a list of requirements, the form in which it is used in the rest of computability theory.
+This lesson connects the previous ones with computation. Counting shows that almost all functions are not computable, but it exhibits none. Diagonalization does better: applied to an enumeration that is itself computable, it produces a function that is computable, and escapes the enumeration. Applied to the enumeration $\Phi_0, \Phi_1, \Phi_2, \dots$ of all partial computable functions, it does not produce a contradiction, but a point of divergence, and from there the undecidability of the halting problem. The next lesson presents diagonalization as the satisfaction of a list of requirements, the form in which it is used in the rest of computability theory.
 
 We use the notation of the course on models of computation: $\Phi_e$ is the partial function computed by the program of code $e$, and $\Phi(e, x) \simeq \Phi_e(x)$ is partial computable (:ref{#cor-universal-function}). We write $\Phi_e(x)\converge$ when the computation halts and $\Phi_e(x)\diverge$ otherwise.
 
@@ -114,7 +114,7 @@ Where does the proof use the hypothesis that $\mathrm{Tot}$ is computable?
 
 ## Partial functions
 
-The enumeration $\Phi_0, \Phi_1, \dots$ of the partial computable functions is uniformly computable in the sense that $\Phi$ is partial computable. What happens when one diagonalizes against it?
+The previous section shows that three wishes are incompatible: a list $(f_e)$ (1) containing all computable functions, (2) uniformly computable, and (3) consisting of total functions. The diagonal function $g(n) = f_n(n) + 1$ would be computable by (2), total by (3), and missing from the list, against (1). The theory of computation keeps (1) and (2), which make a universal machine possible, and gives up (3). The enumeration $\Phi_0, \Phi_1, \dots$ of the partial computable functions is uniformly computable in the sense that $\Phi$ is partial computable. What happens when one diagonalizes against it?
 
 :::proposition{#prop-diagonal-partial}
 The partial function $d(e) \simeq \Phi_e(e) + 1$ is partial computable. If $c$ is a code of $d$, that is, $d = \Phi_c$, then $\Phi_c(c)\diverge$.
@@ -122,6 +122,10 @@ The partial function $d(e) \simeq \Phi_e(e) + 1$ is partial computable. If $c$ i
 
 :::proof{of=prop-diagonal-partial}
 $d$ is obtained by composing $\Phi$, which is partial computable, with $e \mapsto (e, e)$ and with the successor; it is defined exactly when $\Phi_e(e)\converge$. If $d = \Phi_c$ and $\Phi_c(c)\converge$, then $\Phi_c(c) = d(c) = \Phi_c(c) + 1$, which is impossible. So $\Phi_c(c)\diverge$.
+:::
+
+:::figure[The values $\Phi_e(x)$ as an infinite table, with $\uparrow$ for divergence. The function $d$ adds $1$ to each diagonal entry and diverges where the diagonal diverges. It is itself a row, $\Phi_c$, and the only way for this row to escape the contradiction is the divergent entry at $(c, c)$.]
+<svg class="fig" viewBox="0 0 400 290" width="400" role="img" aria-label="A table of values of partial computable functions, some undefined; the row of the diagonal function d has an undefined entry on the diagonal"><text x="107.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">0</text><text x="141.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">1</text><text x="175.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">2</text><text x="209.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">3</text><text x="243.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">4</text><text x="277.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">⋯</text><text x="311.0" y="24" text-anchor="middle" class="math muted" font-size="13">c</text><text x="50" y="56" text-anchor="middle" class="mrm" font-size="16">Φ<tspan class="mrm" font-size="10" dy="4">0</tspan></text><rect x="90" y="34" width="34" height="34" class="cell head-cell"/><text x="107.0" y="56" text-anchor="middle" class="mrm" font-size="15">2</text><rect x="124" y="34" width="34" height="34" class="cell"/><text x="141.0" y="56" text-anchor="middle" class="mrm muted" font-size="15">↑</text><rect x="158" y="34" width="34" height="34" class="cell"/><text x="175.0" y="56" text-anchor="middle" class="mrm muted" font-size="15">0</text><rect x="192" y="34" width="34" height="34" class="cell"/><text x="209.0" y="56" text-anchor="middle" class="mrm muted" font-size="15">5</text><rect x="226" y="34" width="34" height="34" class="cell"/><text x="243.0" y="56" text-anchor="middle" class="mrm muted" font-size="15">1</text><text x="277.0" y="56" text-anchor="middle" class="mrm muted" font-size="15">⋯</text><rect x="294" y="34" width="34" height="34" class="cell"/><text x="311.0" y="56" text-anchor="middle" class="mrm muted" font-size="15">3</text><text x="50" y="90" text-anchor="middle" class="mrm" font-size="16">Φ<tspan class="mrm" font-size="10" dy="4">1</tspan></text><rect x="90" y="68" width="34" height="34" class="cell"/><text x="107.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">0</text><rect x="124" y="68" width="34" height="34" class="cell head-cell"/><text x="141.0" y="90" text-anchor="middle" class="mrm" font-size="15">↑</text><rect x="158" y="68" width="34" height="34" class="cell"/><text x="175.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">4</text><rect x="192" y="68" width="34" height="34" class="cell"/><text x="209.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">↑</text><rect x="226" y="68" width="34" height="34" class="cell"/><text x="243.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">2</text><text x="277.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">⋯</text><rect x="294" y="68" width="34" height="34" class="cell"/><text x="311.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">↑</text><text x="50" y="124" text-anchor="middle" class="mrm" font-size="16">Φ<tspan class="mrm" font-size="10" dy="4">2</tspan></text><rect x="90" y="102" width="34" height="34" class="cell"/><text x="107.0" y="124" text-anchor="middle" class="mrm muted" font-size="15">1</text><rect x="124" y="102" width="34" height="34" class="cell"/><text x="141.0" y="124" text-anchor="middle" class="mrm muted" font-size="15">1</text><rect x="158" y="102" width="34" height="34" class="cell head-cell"/><text x="175.0" y="124" text-anchor="middle" class="mrm" font-size="15">7</text><rect x="192" y="102" width="34" height="34" class="cell"/><text x="209.0" y="124" text-anchor="middle" class="mrm muted" font-size="15">0</text><rect x="226" y="102" width="34" height="34" class="cell"/><text x="243.0" y="124" text-anchor="middle" class="mrm muted" font-size="15">0</text><text x="277.0" y="124" text-anchor="middle" class="mrm muted" font-size="15">⋯</text><rect x="294" y="102" width="34" height="34" class="cell"/><text x="311.0" y="124" text-anchor="middle" class="mrm muted" font-size="15">0</text><text x="50" y="158" text-anchor="middle" class="mrm" font-size="16">Φ<tspan class="mrm" font-size="10" dy="4">3</tspan></text><rect x="90" y="136" width="34" height="34" class="cell"/><text x="107.0" y="158" text-anchor="middle" class="mrm muted" font-size="15">↑</text><rect x="124" y="136" width="34" height="34" class="cell"/><text x="141.0" y="158" text-anchor="middle" class="mrm muted" font-size="15">6</text><rect x="158" y="136" width="34" height="34" class="cell"/><text x="175.0" y="158" text-anchor="middle" class="mrm muted" font-size="15">2</text><rect x="192" y="136" width="34" height="34" class="cell head-cell"/><text x="209.0" y="158" text-anchor="middle" class="mrm" font-size="15">↑</text><rect x="226" y="136" width="34" height="34" class="cell"/><text x="243.0" y="158" text-anchor="middle" class="mrm muted" font-size="15">3</text><text x="277.0" y="158" text-anchor="middle" class="mrm muted" font-size="15">⋯</text><rect x="294" y="136" width="34" height="34" class="cell"/><text x="311.0" y="158" text-anchor="middle" class="mrm muted" font-size="15">2</text><text x="50" y="192" text-anchor="middle" class="mrm" font-size="16">Φ<tspan class="mrm" font-size="10" dy="4">4</tspan></text><rect x="90" y="170" width="34" height="34" class="cell"/><text x="107.0" y="192" text-anchor="middle" class="mrm muted" font-size="15">4</text><rect x="124" y="170" width="34" height="34" class="cell"/><text x="141.0" y="192" text-anchor="middle" class="mrm muted" font-size="15">0</text><rect x="158" y="170" width="34" height="34" class="cell"/><text x="175.0" y="192" text-anchor="middle" class="mrm muted" font-size="15">0</text><rect x="192" y="170" width="34" height="34" class="cell"/><text x="209.0" y="192" text-anchor="middle" class="mrm muted" font-size="15">1</text><rect x="226" y="170" width="34" height="34" class="cell head-cell"/><text x="243.0" y="192" text-anchor="middle" class="mrm" font-size="15">0</text><text x="277.0" y="192" text-anchor="middle" class="mrm muted" font-size="15">⋯</text><rect x="294" y="170" width="34" height="34" class="cell"/><text x="311.0" y="192" text-anchor="middle" class="mrm muted" font-size="15">↑</text><text x="175.0" y="224" text-anchor="middle" class="mrm muted" font-size="15">⋮</text><text x="50" y="260" text-anchor="middle" class="mrm" font-size="16">Φ<tspan class="math" font-size="11" dy="4">c</tspan><tspan dy="-4"> = </tspan><tspan class="math">d</tspan></text><rect x="90" y="238" width="34" height="34" class="cell"/><text x="107.0" y="260" text-anchor="middle" class="mrm muted" font-size="15">3</text><rect x="124" y="238" width="34" height="34" class="cell"/><text x="141.0" y="260" text-anchor="middle" class="mrm muted" font-size="15">↑</text><rect x="158" y="238" width="34" height="34" class="cell"/><text x="175.0" y="260" text-anchor="middle" class="mrm muted" font-size="15">8</text><rect x="192" y="238" width="34" height="34" class="cell"/><text x="209.0" y="260" text-anchor="middle" class="mrm muted" font-size="15">↑</text><rect x="226" y="238" width="34" height="34" class="cell"/><text x="243.0" y="260" text-anchor="middle" class="mrm muted" font-size="15">1</text><text x="277.0" y="260" text-anchor="middle" class="mrm muted" font-size="15">⋯</text><rect x="294" y="238" width="34" height="34" class="cell head-cell"/><text x="311.0" y="260" text-anchor="middle" class="mrm" font-size="15">↑</text></svg>
 :::
 
 So the diagonal argument does not fail: it determines a point, $c$, where the enumerated function $d = \Phi_c$ must be undefined. The partial functions escape diagonalization by being undefined at the diagonal point. This is why an enumeration of all partial computable functions can be computable, while an enumeration of all total computable functions cannot.
@@ -172,66 +176,6 @@ Why is the function $h$ of :ref{#cor-halting-diagonal} total, given that $\Phi_e
   It takes the value $0$ only outside $\emptyset'$.
 :::
 
-## Diagonalization by requirements
-
-In the diagonal argument, the sequence $Y$ is built to satisfy infinitely many conditions, $Y \neq X_n$ for each $n$, each of which can be secured by fixing a single bit. Constructions in computability theory are usually organized in this way: one lists **requirements** $R_0, R_1, R_2, \dots$, and builds the desired object by finite approximations, ensuring each requirement at its turn.
-
-For strings $\sigma, \tau \in 2^{<\nat}$, write $\sigma \preceq \tau$ if $\sigma$ is a prefix of $\tau$, and $\sigma \prec X$ if $\sigma$ is a prefix of $X \in \cs$. A requirement is a property of elements of $\cs$, that is, a subset $R \subseteq \cs$.
-
-:::lemma[Finite extension]{#lem-finite-extension}
-Let $(R_e)_{e \in \nat}$ be a sequence of requirements such that for every $e$ and every $\sigma \in 2^{<\nat}$, there is $\tau \succeq \sigma$ such that every $X \succ \tau$ satisfies $R_e$. Then there is $Y \in \cs$ satisfying every $R_e$.
-:::
-
-:::proof{of=lem-finite-extension}
-Fix an enumeration $\rho_0, \rho_1, \dots$ of $2^{<\nat}$, given by :ref{#prop-strings-countable}. If $\tau$ is as in the hypothesis, so is every extension of $\tau$; in particular there is such a $\tau$ with $|\tau| > |\sigma|$. Define $\sigma_0$ as the empty string and $\sigma_{e+1}$ as the first $\rho_i$ such that $\rho_i \succeq \sigma_e$, $|\rho_i| > |\sigma_e|$, and every $X \succ \rho_i$ satisfies $R_e$. The strings $\sigma_0 \preceq \sigma_1 \preceq \cdots$ have strictly increasing lengths, so there is a unique $Y \in \cs$ with $\sigma_e \prec Y$ for every $e$: its $n$-th bit is the $n$-th bit of any $\sigma_e$ of length greater than $n$. Since $\sigma_{e+1} \prec Y$, $Y$ satisfies $R_e$.
-:::
-
-Choosing $\sigma_{e+1}$ as the first suitable string in a fixed enumeration avoids any use of the axiom of choice, and makes the construction explicit.
-
-:::example{#ex-finite-extension-diagonal}
-Let $(X_n)$ be a sequence in $\cs$, and $R_n = \{ Y : Y \neq X_n \}$. Given $\sigma$, the string $\tau = \sigma \, i$ with $i = 1 - X_n(|\sigma|)$ satisfies the hypothesis: every $Y \succ \tau$ differs from $X_n$ at position $|\sigma|$. This is the diagonal argument, except that the position at which $X_n$ is defeated is now chosen by the construction rather than fixed in advance.
-:::
-
-:::proposition{#prop-infinitely-different}
-For every sequence $(X_n)$ in $\cs$, there is $Y \in \cs$ that differs from every $X_n$ at infinitely many positions. If $(X_n)$ is uniformly computable, $Y$ can be taken computable.
-:::
-
-:::proof{of=prop-infinitely-different}
-For $e = \langle n, k \rangle$, let $R_e$ be the requirement "$Y(m) \neq X_n(m)$ for some $m \geq k$". Given $\sigma$, extend it by zeros to a string $\sigma'$ of length at least $k$, and let $\tau = \sigma' i$ with $i = 1 - X_n(|\sigma'|)$; every $Y \succ \tau$ differs from $X_n$ at the position $|\sigma'| \geq k$. By :ref{#lem-finite-extension}, some $Y$ satisfies all $R_{\langle n, k \rangle}$, that is, differs from each $X_n$ beyond every $k$.
-
-If $(X_n)$ is uniformly computable, use the explicit extension above instead of a search in an enumeration: $\sigma_{e+1}$ is obtained from $\sigma_e$ by padding with zeros to length $\max(k, |\sigma_e|)$ and appending the bit $1 - X_n(\ell)$, where $\ell = \max(k, |\sigma_e|)$; both steps are computable from $\sigma_e$ and $e = \langle n, k \rangle$. Then $e \mapsto \sigma_e$ is computable, and so is $Y$, since $Y(m)$ is the $m$-th bit of $\sigma_{m+1}$, which has length at least $m + 1$.
-:::
-
-The requirements of this proposition never interfere: once a requirement is satisfied, it remains satisfied whatever is done afterwards. Requirements of this kind can be handled one after the other, by finite extensions. The method was introduced by Kleene and Post to build Turing degrees with prescribed properties, and it is the elementary case of **forcing**. When requirements conflict, so that satisfying one may later injure another, one needs the **priority method**, which is the main technique of the theory of computably enumerable sets.
-
-:::quiz[the finite extension lemma]
-Why does the proof of :ref{#lem-finite-extension} require $|\sigma_{e+1}| > |\sigma_e|$?
-
-- [x] To ensure that the lengths tend to infinity, so that the strings $\sigma_e$ determine a whole infinite sequence $Y$.
-
-  Without it, the construction could stall on a single finite string, which determines no element of $\cs$.
-- [ ] To ensure that $\sigma_{e+1}$ extends $\sigma_e$.
-
-  This is required separately, by $\rho_i \succeq \sigma_e$.
-- [ ] To ensure that $Y$ satisfies $R_e$.
-
-  That is ensured by the choice of $\sigma_{e+1}$ among the strings all of whose extensions satisfy $R_e$.
-
----
-
-In the computable part of :ref{#prop-infinitely-different}, why is the explicit extension used rather than the search of the lemma?
-
-- [x] The search tests the condition "every $X \succ \rho_i$ satisfies $R_e$", a property of infinitely many sequences, which is not in general decidable.
-
-  The explicit extension computes a suitable string directly, so the whole construction is an algorithm.
-- [ ] Because the lemma uses the axiom of choice.
-
-  It does not: it uses a fixed enumeration of strings.
-- [ ] Because the search may not terminate.
-
-  It always terminates, by the hypothesis of the lemma; the problem is that its steps may not be computable.
-:::
-
 ## Exercises
 
 ::::exercise{difficulty=1}
@@ -242,7 +186,7 @@ If $h$ is total computable and dominates every total computable function, it dom
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-no-uniform-computable-sets difficulty=1}
 Show that there is no uniformly computable sequence $(X_n)$ of sets containing every computable set.
 
 :::solution
@@ -266,24 +210,12 @@ $\mathrm{Tot}$ is infinite. If it were computably enumerable, there would be an 
 :::
 ::::
 
-::::exercise{difficulty=3}
-Show that there is a set $Y$ such that neither $Y$ nor its complement contains an infinite computable set.
-
-:::hint
-For each infinite computable set $C$, the requirement is: $C \not\subseteq Y$ and $C \not\subseteq \nat \setminus Y$. Satisfy it by a finite extension.
-:::
-
-:::solution
-The infinite computable sets form a countably infinite set, by :ref{#prop-countably-many-computable} and :ref{#cor-subset-countable} (it contains the sets $\nat \setminus \underline n$); let $C_0, C_1, \dots$ be an enumeration of them. Requirement $R_{2n}$: $Y(m) = 0$ for some $m \in C_n$; requirement $R_{2n+1}$: $Y(m) = 1$ for some $m \in C_n$. Given $\sigma$, since $C_n$ is infinite there is $m \in C_n$ with $m \geq |\sigma|$; extend $\sigma$ by zeros to length $m$, then append the required bit. Every $Y$ extending the result satisfies the requirement. By :ref{#lem-finite-extension}, some $Y$ satisfies all requirements: each infinite computable set meets both $Y$ and its complement, so it is contained in neither. Such a set is called **bi-immune**.
-:::
-::::
-
 ## Notes and references
 
-The undecidability of the halting problem is due to Turing (1936), in the form that no machine decides whether a given machine is circle-free, that is, prints infinitely many digits. The finite extension method is due to Kleene and Post (1954), and the priority method to Friedberg and Muchnik (1956–1957). Rogers' and Soare's textbooks present diagonalization as the basic method of computability theory; Odifreddi gives a historical account of the many forms of the argument.
+The undecidability of the halting problem is due to Turing (1936), in the form that no machine decides whether a given machine is circle-free, that is, prints infinitely many digits. The incompatibility of the three requirements on a list of computable functions, and the resulting need for partial functions, is explained in Soare's textbook (§1.1.2); Monin and Patey (chapter *Cantor's infinity*, section *Non-computable reals*) give the counting argument. Rogers' and Soare's textbooks present diagonalization as the basic method of computability theory; Odifreddi gives a historical account of the many forms of the argument.
 
 - A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society (2) 42 (1936), 230–265.
-- S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989.
-- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.1.2.
+- B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.

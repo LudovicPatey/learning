@@ -225,5 +225,127 @@ s.append(f'<text x="{R}" y="12" text-anchor="middle" class="mrm muted" font-size
 s.append('</svg>')
 out['cantor-set'] = ''.join(s)
 
+# ---------------------------------------------------------------- countable sets: first occurrences
+lst = ['a', 'b', 'a', 'c', 'b', 'd', 'a', 'e', 'c', 'f']
+elems = ['a', 'b', 'c', 'd', 'e', 'f']
+c, x0, yc = 40, 80, 40
+first = {}
+for i, a in enumerate(lst):
+    first.setdefault(a, i)
+s = ['<svg class="fig" viewBox="0 0 520 200" width="520" role="img" aria-label="A listing with repetitions; the first occurrence of each element is shaded and each element points to it">',
+     '<defs>' + marker('ah-fo') + '</defs>']
+s.append(f'<text x="{x0 - 14}" y="{yc - 12}" text-anchor="end" class="math" font-size="16">n</text>')
+s.append(f'<text x="{x0 - 14}" y="{yc + 26}" text-anchor="end" class="math" font-size="16">s<tspan class="mrm">(</tspan>n<tspan class="mrm">)</tspan></text>')
+for i, a in enumerate(lst):
+    fo = first[a] == i
+    s.append(f'<text x="{x0 + c*i + c/2}" y="{yc - 12}" text-anchor="middle" class="mrm muted" font-size="12">{i}</text>')
+    s.append(f'<rect x="{x0 + c*i}" y="{yc}" width="{c}" height="{c}" class="{"cell head-cell" if fo else "cell"}"/>')
+    s.append(f'<text x="{x0 + c*i + c/2}" y="{yc + 26}" text-anchor="middle" class="math{"" if fo else " muted"}" font-size="17">{a}</text>')
+s.append(f'<text x="{x0 + c*len(lst) + 8}" y="{yc + 26}" class="mrm muted" font-size="16">⋯</text>')
+yn = 160
+s.append(f'<text x="{x0 - 14}" y="{yn + 6}" text-anchor="end" class="math" font-size="16">A</text>')
+for k, a in enumerate(elems):
+    xn = x0 + 20 + 72 * k
+    xt = x0 + c * first[a] + c / 2
+    s.append(f'<circle cx="{xn}" cy="{yn}" r="14" class="node"/>')
+    s.append(f'<text x="{xn}" y="{yn + 6}" text-anchor="middle" class="math" font-size="17">{a}</text>')
+    x1_, y1_, x2_, y2_ = seg(xn, yn, xt, yc + c, 15, 3)
+    s.append(f'<line x1="{x1_:.1f}" y1="{y1_:.1f}" x2="{x2_:.1f}" y2="{y2_:.1f}" class="accent-stroke" stroke-width="1.3" marker-end="url(#ah-fo)"/>')
+s.append(f'<text x="{x0 + 20 + 72*(len(elems) - 1) + 26}" y="{yn + 6}" class="mrm muted" font-size="16">⋯</text>')
+s.append('</svg>')
+out['first-occurrences'] = ''.join(s)
+
+# ---------------------------------------------------------------- continuum: the join
+X, Y = '1011', '0010'
+c = 34
+s = ['<svg class="fig" viewBox="0 0 470 200" width="470" role="img" aria-label="The bits of X go to the even positions and the bits of Y to the odd positions of the join">']
+xr, yX, yY, yZ = 120, 20, 146, 84
+s.append(f'<text x="60" y="{yX + 23}" text-anchor="middle" class="math" font-size="16">X</text>')
+s.append(f'<text x="60" y="{yY + 23}" text-anchor="middle" class="math" font-size="16">Y</text>')
+s.append(f'<text x="60" y="{yZ + 23}" text-anchor="middle" class="math" font-size="16">X<tspan class="mrm"> ⊕ </tspan>Y</text>')
+zx0 = 110
+for n in range(4):
+    xa = xr + 2 * c * n + c / 2
+    for (row, yrow, shade, pos) in ((X, yX, True, 2 * n), (Y, yY, False, 2 * n + 1)):
+        s.append(f'<rect x="{xa - c/2}" y="{yrow}" width="{c}" height="{c}" class="{"cell head-cell" if shade else "cell"}"/>')
+        s.append(f'<text x="{xa}" y="{yrow + 23}" text-anchor="middle" class="mrm" font-size="16">{row[n]}</text>')
+        zx = zx0 + c * pos + c / 2
+        if shade:
+            s.append(f'<line x1="{xa}" y1="{yrow + c}" x2="{zx}" y2="{yZ}" class="muted-stroke" stroke-width="1.1"/>')
+        else:
+            s.append(f'<line x1="{xa}" y1="{yrow}" x2="{zx}" y2="{yZ + c}" class="muted-stroke" stroke-width="1.1"/>')
+for pos in range(8):
+    b = X[pos // 2] if pos % 2 == 0 else Y[pos // 2]
+    zx = zx0 + c * pos
+    s.append(f'<rect x="{zx}" y="{yZ}" width="{c}" height="{c}" class="{"cell head-cell" if pos % 2 == 0 else "cell"}"/>')
+    s.append(f'<text x="{zx + c/2}" y="{yZ + 23}" text-anchor="middle" class="mrm" font-size="16">{b}</text>')
+    s.append(f'<text x="{zx + c - 4}" y="{yZ + c - 3}" text-anchor="end" class="mrm muted" font-size="8.5">{pos}</text>')
+s.append(f'<text x="{zx0 + 8*c + 8}" y="{yZ + 23}" class="mrm muted" font-size="16">⋯</text>')
+s.append(f'<text x="{xr + 8*c - c/2 + 8}" y="{yX + 23}" class="mrm muted" font-size="16">⋯</text>')
+s.append(f'<text x="{xr + 8*c - c/2 + 8}" y="{yY + 23}" class="mrm muted" font-size="16">⋯</text>')
+s.append('</svg>')
+out['join'] = ''.join(s)
+
+# ---------------------------------------------------------------- diagonalization and computation: the partial table
+U = '↑'
+rows = [['2', U, '0', '5', '1', '3'], ['0', U, '4', U, '2', U], ['1', '1', '7', '0', '0', '0'],
+        [U, '6', '2', U, '3', '2'], ['4', '0', '0', '1', '0', U]]
+d = [str(int(r[i]) + 1) if r[i] != U else U for i, r in enumerate(rows)]
+rowc = d + [U]
+c, x0, y0 = 34, 90, 34
+cols = [0, 1, 2, 3, 4, None, 'c']
+def colx(j):
+    return x0 + c * j
+s = ['<svg class="fig" viewBox="0 0 400 290" width="400" role="img" aria-label="A table of values of partial computable functions, some undefined; the row of the diagonal function d has an undefined entry on the diagonal">']
+for j, h in enumerate(cols):
+    if h is None:
+        s.append(f'<text x="{colx(j) + c/2}" y="{y0 - 10}" text-anchor="middle" class="mrm muted" font-size="13">⋯</text>')
+    else:
+        s.append(f'<text x="{colx(j) + c/2}" y="{y0 - 10}" text-anchor="middle" class="{"math" if h == "c" else "mrm"} muted" font-size="13">{h}</text>')
+def drow(y, label, vals, diag):
+    s.append(label)
+    for j, h in enumerate(cols):
+        if h is None:
+            s.append(f'<text x="{colx(j) + c/2}" y="{y + 22}" text-anchor="middle" class="mrm muted" font-size="15">⋯</text>')
+            continue
+        v = vals[j if j < 5 else 5]
+        hd = (j == diag)
+        s.append(f'<rect x="{colx(j)}" y="{y}" width="{c}" height="{c}" class="{"cell head-cell" if hd else "cell"}"/>')
+        s.append(f'<text x="{colx(j) + c/2}" y="{y + 22}" text-anchor="middle" class="mrm{"" if hd else " muted"}" font-size="15">{v}</text>')
+for i, r in enumerate(rows):
+    y = y0 + c * i
+    drow(y, sub('Φ', str(i), 50, y + 22, 16, cls='mrm'), r, i)
+yd = y0 + c * 5
+s.append(f'<text x="{colx(2) + c/2}" y="{yd + 20}" text-anchor="middle" class="mrm muted" font-size="15">⋮</text>')
+yc_ = yd + 34
+s.append(f'<text x="50" y="{yc_ + 22}" text-anchor="middle" class="mrm" font-size="16">Φ<tspan class="math" font-size="11" dy="4">c</tspan><tspan dy="-4"> = </tspan><tspan class="math">d</tspan></text>')
+drow(yc_, '', rowc, 6)
+s.append('</svg>')
+out['partial-table'] = ''.join(s)
+
+# ---------------------------------------------------------------- finite extensions: the stages
+blocks = ['01', '100', '1', '0110']
+c, x0, y0 = 28, 70, 18
+s = ['<svg class="fig" viewBox="0 0 520 210" width="520" role="img" aria-label="Successive strings of a finite extension construction, each extending the previous one by a block">']
+pre = ''
+for k, b in enumerate(blocks):
+    y = y0 + 40 * k
+    s.append(sub('σ', str(k + 1), 34, y + 19, 16, cls='mrm'))
+    for i, ch in enumerate(pre + b):
+        new = i >= len(pre)
+        s.append(f'<rect x="{x0 + c*i}" y="{y}" width="{c}" height="{c}" class="{"cell head-cell" if new else "cell"}"/>')
+        s.append(f'<text x="{x0 + c*i + c/2}" y="{y + 19}" text-anchor="middle" class="mrm{"" if new else " muted"}" font-size="14">{ch}</text>')
+    pre += b
+    s.append(f'<text x="{x0 + c*len(pre) + 12}" y="{y + 19}" class="label">secures</text>')
+    s.append(sub('R', str(k), x0 + c*len(pre) + 66, y + 19, 15, anchor='start'))
+y = y0 + 40 * len(blocks)
+s.append(f'<text x="34" y="{y + 19}" text-anchor="middle" class="math" font-size="16">Y</text>')
+for i, ch in enumerate(pre):
+    s.append(f'<rect x="{x0 + c*i}" y="{y}" width="{c}" height="{c}" class="cell"/>')
+    s.append(f'<text x="{x0 + c*i + c/2}" y="{y + 19}" text-anchor="middle" class="mrm" font-size="14">{ch}</text>')
+s.append(f'<text x="{x0 + c*len(pre) + 10}" y="{y + 19}" class="mrm muted" font-size="15">⋯</text>')
+s.append('</svg>')
+out['finite-extension'] = ''.join(s)
+
 json.dump(out, open(sys.argv[1], 'w'))
 print('\n'.join(f'{k}: {len(v)} chars' for k, v in out.items()))

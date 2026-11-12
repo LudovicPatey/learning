@@ -1,7 +1,7 @@
 ---
 title: The cardinality of the continuum
 summary: The sets of binary sequences, of integer sequences, of real numbers and of real sequences are equipotent; removing a countable set does not change their cardinality; the continuum hypothesis.
-duration: 35
+duration: 50
 prerequisites: [diagonal-argument]
 ---
 
@@ -36,6 +36,10 @@ The map $c$ is a bijection from $\nat^\nat$ onto the set of sequences with infin
 :::definition{#def-join}
 1. The **join** of $X, Y \in \cs$ is the sequence $X \oplus Y$ defined by $(X \oplus Y)(2n) = X(n)$ and $(X \oplus Y)(2n+1) = Y(n)$.
 2. The **coding** of a sequence $(X_n)_{n \in \nat}$ of elements of $\cs$ is the sequence $\bigoplus_n X_n$ defined by $\big(\bigoplus_n X_n\big)(\langle n, m \rangle) = X_n(m)$, where $\langle \cdot, \cdot \rangle$ is Cantor's pairing function.
+:::
+
+:::figure[The join $X \oplus Y$ interleaves the bits of $X$, at the even positions (shaded), with the bits of $Y$, at the odd positions. Small numbers are positions in $X \oplus Y$.]
+<svg class="fig" viewBox="0 0 470 200" width="470" role="img" aria-label="The bits of X go to the even positions and the bits of Y to the odd positions of the join"><text x="60" y="43" text-anchor="middle" class="math" font-size="16">X</text><text x="60" y="169" text-anchor="middle" class="math" font-size="16">Y</text><text x="60" y="107" text-anchor="middle" class="math" font-size="16">X<tspan class="mrm"> ⊕ </tspan>Y</text><rect x="120.0" y="20" width="34" height="34" class="cell head-cell"/><text x="137.0" y="43" text-anchor="middle" class="mrm" font-size="16">1</text><line x1="137.0" y1="54" x2="127.0" y2="84" class="muted-stroke" stroke-width="1.1"/><rect x="120.0" y="146" width="34" height="34" class="cell"/><text x="137.0" y="169" text-anchor="middle" class="mrm" font-size="16">0</text><line x1="137.0" y1="146" x2="161.0" y2="118" class="muted-stroke" stroke-width="1.1"/><rect x="188.0" y="20" width="34" height="34" class="cell head-cell"/><text x="205.0" y="43" text-anchor="middle" class="mrm" font-size="16">0</text><line x1="205.0" y1="54" x2="195.0" y2="84" class="muted-stroke" stroke-width="1.1"/><rect x="188.0" y="146" width="34" height="34" class="cell"/><text x="205.0" y="169" text-anchor="middle" class="mrm" font-size="16">0</text><line x1="205.0" y1="146" x2="229.0" y2="118" class="muted-stroke" stroke-width="1.1"/><rect x="256.0" y="20" width="34" height="34" class="cell head-cell"/><text x="273.0" y="43" text-anchor="middle" class="mrm" font-size="16">1</text><line x1="273.0" y1="54" x2="263.0" y2="84" class="muted-stroke" stroke-width="1.1"/><rect x="256.0" y="146" width="34" height="34" class="cell"/><text x="273.0" y="169" text-anchor="middle" class="mrm" font-size="16">1</text><line x1="273.0" y1="146" x2="297.0" y2="118" class="muted-stroke" stroke-width="1.1"/><rect x="324.0" y="20" width="34" height="34" class="cell head-cell"/><text x="341.0" y="43" text-anchor="middle" class="mrm" font-size="16">1</text><line x1="341.0" y1="54" x2="331.0" y2="84" class="muted-stroke" stroke-width="1.1"/><rect x="324.0" y="146" width="34" height="34" class="cell"/><text x="341.0" y="169" text-anchor="middle" class="mrm" font-size="16">0</text><line x1="341.0" y1="146" x2="365.0" y2="118" class="muted-stroke" stroke-width="1.1"/><rect x="110" y="84" width="34" height="34" class="cell head-cell"/><text x="127.0" y="107" text-anchor="middle" class="mrm" font-size="16">1</text><text x="140" y="115" text-anchor="end" class="mrm muted" font-size="8.5">0</text><rect x="144" y="84" width="34" height="34" class="cell"/><text x="161.0" y="107" text-anchor="middle" class="mrm" font-size="16">0</text><text x="174" y="115" text-anchor="end" class="mrm muted" font-size="8.5">1</text><rect x="178" y="84" width="34" height="34" class="cell head-cell"/><text x="195.0" y="107" text-anchor="middle" class="mrm" font-size="16">0</text><text x="208" y="115" text-anchor="end" class="mrm muted" font-size="8.5">2</text><rect x="212" y="84" width="34" height="34" class="cell"/><text x="229.0" y="107" text-anchor="middle" class="mrm" font-size="16">0</text><text x="242" y="115" text-anchor="end" class="mrm muted" font-size="8.5">3</text><rect x="246" y="84" width="34" height="34" class="cell head-cell"/><text x="263.0" y="107" text-anchor="middle" class="mrm" font-size="16">1</text><text x="276" y="115" text-anchor="end" class="mrm muted" font-size="8.5">4</text><rect x="280" y="84" width="34" height="34" class="cell"/><text x="297.0" y="107" text-anchor="middle" class="mrm" font-size="16">1</text><text x="310" y="115" text-anchor="end" class="mrm muted" font-size="8.5">5</text><rect x="314" y="84" width="34" height="34" class="cell head-cell"/><text x="331.0" y="107" text-anchor="middle" class="mrm" font-size="16">1</text><text x="344" y="115" text-anchor="end" class="mrm muted" font-size="8.5">6</text><rect x="348" y="84" width="34" height="34" class="cell"/><text x="365.0" y="107" text-anchor="middle" class="mrm" font-size="16">0</text><text x="378" y="115" text-anchor="end" class="mrm muted" font-size="8.5">7</text><text x="390" y="107" class="mrm muted" font-size="16">⋯</text><text x="383.0" y="43" class="mrm muted" font-size="16">⋯</text><text x="383.0" y="169" class="mrm muted" font-size="16">⋯</text></svg>
 :::
 
 :::proposition{#prop-cantor-powers}
@@ -128,6 +132,8 @@ Cantor found this result in 1877, and wrote to Dedekind that he could see it but
 If $M \subseteq \cs$ is countable, then $|\cs \setminus M| = |\cs|$. The same holds for $\mathbb R$ and every set of the cardinality of the continuum.
 :::
 
+A countable set is small compared with $\cs$, but removing it can destroy the obvious bijections. The proof avoids this by finding inside $\cs \setminus M$ a whole copy of $\cs$, and then applies Cantor–Bernstein. To find room for the copy, it uses the bijection $\cs \times \cs \to \cs$: the countable set $M$ meets only countably many of the "columns" $\{X\} \times \cs$, and there are uncountably many columns.
+
 :::proof{of=prop-cocountable}
 Through the bijection of :ref{#prop-cantor-powers}, we may work in $\cs \times \cs$, with $M$ a countable subset of it. The set $M_0 = \{ X : (X, Y) \in M \text{ for some } Y \}$ of first coordinates is countable, as an image of $M$ (:ref{#cor-subset-countable}). By :ref{#thm-cantor-diagonal}, there is $X_0 \notin M_0$. Then $Y \mapsto (X_0, Y)$ is an injection of $\cs$ into $(\cs \times \cs) \setminus M$. The inclusion is an injection in the other direction, and :ref{#thm-cantor-bernstein} concludes. The last sentence follows by transporting through a bijection.
 :::
@@ -218,7 +224,7 @@ The set $M$ of sequences with finitely many zeros is countably infinite: each of
 
 ## Notes and references
 
-The equipotence of the line and the plane is in Cantor's paper of 1878, after an exchange of letters with Dedekind in 1877. The continuum hypothesis is formulated in the same paper. Gödel's and Cohen's results are presented in Kunen's and Jech's textbooks on set theory; the perfect set property for closed, Borel and analytic sets is in Kechris' book.
+Monin and Patey (chapter *Cantor's infinity*, section *Cantor space*) prove $|\cs| = |[0, 1]| = |\mathbb R|$ with the same two injections, base $3$ and binary expansions, and describe the Cantor set. The equipotence of the line and the plane is in Cantor's paper of 1878, after an exchange of letters with Dedekind in 1877. The continuum hypothesis is formulated in the same paper. Gödel's and Cohen's results are presented in Kunen's and Jech's textbooks on set theory; the perfect set property for closed, Borel and analytic sets is in Kechris' book.
 
 - G. Cantor, *Ein Beitrag zur Mannigfaltigkeitslehre*, Journal für die reine und angewandte Mathematik 84 (1878), 242–258.
 - K. Gödel, *The consistency of the axiom of choice and of the generalized continuum-hypothesis*, Proceedings of the National Academy of Sciences 24 (1938), 556–557.
@@ -226,3 +232,4 @@ The equipotence of the line and the plane is in Cantor's paper of 1878, after an
 - K. Kunen, *Set Theory: An Introduction to Independence Proofs*, North-Holland, 1980.
 - T. Jech, *Set Theory*, 3rd millennium edition, Springer, 2003.
 - A. S. Kechris, *Classical Descriptive Set Theory*, Graduate Texts in Mathematics 156, Springer, 1995.
+- B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.
