@@ -3,16 +3,22 @@ area: higher
 level: Advanced
 order: 2
 prerequisites: [computable-ordinals]
-summary: Iterating the jump along computable ordinals, Kleene's theorem Δ¹₁ = HYP, and Σ¹₁ classes.
+summary: Iterating the jump along computable ordinals, Spector's uniqueness theorem, Kleene's theorem Δ¹₁ = HYP, Σ¹₁ classes and pseudo-well-orderings.
 description: >
   The hyperarithmetic sets, obtained by iterating the Turing jump along Kleene's
-  notations: the H-sets and Spector's uniqueness theorem, the uniform Δ¹₁
-  definitions of the H-sets, Kleene's theorem that the hyperarithmetic sets are
-  exactly the Δ¹₁ sets, computable trees without hyperarithmetic paths, the
-  Kleene basis theorem, and Harrison's pseudo-well-orderings.
+  notations: the H-sets and effective transfinite recursion, the comparison of
+  notations by H-sets and Spector's uniqueness theorem, the uniform Δ¹₁
+  definitions of the H-sets, the computation of ranks of trees by H-sets,
+  Kleene's theorem that the hyperarithmetic sets are exactly the Δ¹₁ sets,
+  computable trees without hyperarithmetic paths, the Kleene basis theorem,
+  Harrison's pseudo-well-orderings, and the Enderton–Putnam theorem on
+  descending sequences of jumps, with the consequence that HYP is not a model
+  of ATR₀.
 objectives:
-  - Define the H-sets and the hyperarithmetic sets
-  - Show that the H-sets are uniformly Δ¹₁ along O
+  - Define the H-sets and the hyperarithmetic sets, and compute with them by effective transfinite recursion
+  - Prove Spector's uniqueness theorem
+  - Show that the H-sets are uniformly Δ¹₁ along O and compute ranks of trees by H-sets
   - Prove Kleene's theorem using Spector's boundedness theorem
   - Build computable trees without hyperarithmetic paths and Harrison orders
-lessons: [h-sets, kleene-theorem, sigma11-classes]
+  - Show that descending sequences of jumps compute every hyperarithmetic set
+lessons: [h-sets, spector-uniqueness, kleene-theorem, sigma11-classes, pseudo-well-orderings]

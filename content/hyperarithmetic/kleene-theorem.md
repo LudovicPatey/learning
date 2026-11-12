@@ -1,11 +1,11 @@
 ---
 title: The hyperarithmetic sets are the Δ¹₁ sets
-summary: The H-sets are uniformly Δ¹₁ along O; quantification over hyperarithmetic sets is Π¹₁; Kleene's theorem that a set is hyperarithmetic if and only if it is Δ¹₁, through Spector's boundedness theorem.
-duration: 35
-prerequisites: [h-sets, computable-ordinals/trees-and-pi11]
+summary: The H-sets are uniformly Δ¹₁ along O; quantification over hyperarithmetic sets is Π¹₁; H-sets compute the sets of trees of bounded rank; Kleene's theorem that a set is hyperarithmetic if and only if it is Δ¹₁, through Spector's boundedness theorem.
+duration: 50
+prerequisites: [spector-uniqueness, computable-ordinals/markwald, computable-ordinals/trees-and-pi11, computable-ordinals/boundedness]
 ---
 
-The computable sets are the sets that are both $\Sigma^0_1$ and $\Pi^0_1$. One level up in the analytic hierarchy, Kleene proved the analogous statement for the $\Delta^1_1$ sets: they are exactly the hyperarithmetic sets, built from below by iterating the jump along computable ordinals. The analogy between $\Pi^1_1$ and c.e. sets, and between $\Delta^1_1$ and computable sets, runs through the whole theory, with $\omega_1^{\mathrm{CK}}$ playing the role of $\omega$. This lesson proves Kleene's theorem; one step, the computation of the ranks of trees by H-sets, is admitted.
+The computable sets are the sets that are both $\Sigma^0_1$ and $\Pi^0_1$. One level up in the analytic hierarchy, Kleene proved the analogous statement for the $\Delta^1_1$ sets: they are exactly the hyperarithmetic sets, built from below by iterating the jump along computable ordinals. The analogy between $\Pi^1_1$ and c.e. sets, and between $\Delta^1_1$ and computable sets, runs through the whole theory, with $\omega_1^{\mathrm{CK}}$ playing the role of $\omega$. The two inclusions have different flavors. That hyperarithmetic sets are $\Delta^1_1$ is a matter of definability: $H_a$ is the unique set satisfying an arithmetic description along $a$, and "the unique $Y$ such that" can be expressed both with $\exists Y$ and with $\forall Y$. The converse needs an ordinal bound: a $\Pi^1_1$ set is a set of indices of well-founded trees, and when it is also $\Sigma^1_1$, Spector's boundedness theorem bounds the ranks of these trees below $\omega_1^{\mathrm{CK}}$; below a fixed computable ordinal, well-foundedness is decided by an H-set.
 
 ## The H-sets are Δ¹₁
 
@@ -71,20 +71,61 @@ In :ref{#prop-h-delta11}, why is the hypothesis $a \in \mathcal O$ needed to obt
 
 ## Kleene's theorem
 
-The converse inclusion requires a computation of well-foundedness by H-sets, up to a fixed rank.
+The converse inclusion requires a computation of well-foundedness by H-sets, up to a fixed rank. For uniformity, it is convenient to work with c.e. trees. For a number $i$, let $T^i$ be the set of prefixes of the elements of $W_i$, viewed as a set of sequences: it is a c.e. tree, uniformly in $i$, and every c.e. tree is $T^i$ for some $i$. There is a total computable function $s$ such that $T^{s(i, n)} = (T^i)_{\langle n \rangle} = \{ \tau : \langle n \rangle \tau \in T^i \}$, and the relation $\langle n \rangle \in T^i$ is c.e. For $x \in \mathcal O$, let
+$$
+\mathrm{Rk}_{<x} = \{ i : T^i \text{ is well-founded and } \mathrm{rk}(T^i) < |x| \}.
+$$
+
+The computation follows the definition of the rank (:ref{#def-tree-rank}), illustrated in :ref{#fig-tree-ranks}: a tree has rank at most $\beta$ if and only if each of its subtrees $T_{\langle n \rangle}$ has rank less than $\beta$. One quantifier over $n$ is added at each successor step, and one existential quantifier over the fundamental sequence at each limit step; the H-sets absorb both.
+
+:::figure[A well-founded tree; each node $\sigma$ is labeled with the rank of the subtree $T_\sigma$ above it. The tree has rank $4$, the label of the root $\varepsilon$, and it has rank less than $\beta + 1$ exactly when each subtree $T_{\langle n \rangle}$ has rank less than $\beta$.]{#fig-tree-ranks}
+<svg class="fig" viewBox="0 0 600 300" width="600" role="img" aria-label="A finite well-founded tree; each node is labeled with its rank, the supremum of the ranks of its children plus one"><line x1="300" y1="30" x2="120" y2="90" class="ink-stroke" stroke-width="1.2"/><line x1="300" y1="30" x2="300" y2="90" class="ink-stroke" stroke-width="1.2"/><line x1="300" y1="30" x2="480" y2="90" class="ink-stroke" stroke-width="1.2"/><line x1="300" y1="90" x2="250" y2="150" class="ink-stroke" stroke-width="1.2"/><line x1="300" y1="90" x2="350" y2="150" class="ink-stroke" stroke-width="1.2"/><line x1="480" y1="90" x2="480" y2="150" class="ink-stroke" stroke-width="1.2"/><line x1="350" y1="150" x2="350" y2="210" class="ink-stroke" stroke-width="1.2"/><line x1="480" y1="150" x2="430" y2="210" class="ink-stroke" stroke-width="1.2"/><line x1="480" y1="150" x2="530" y2="210" class="ink-stroke" stroke-width="1.2"/><line x1="530" y1="210" x2="530" y2="270" class="ink-stroke" stroke-width="1.2"/><circle cx="300" cy="30" r="4.5" class="accent-fill"/><text x="310" y="24" class="mrm" font-size="13">4</text><circle cx="120" cy="90" r="4.5" class="ink-fill"/><text x="130" y="84" class="mrm" font-size="13">0</text><circle cx="300" cy="90" r="4.5" class="ink-fill"/><text x="310" y="84" class="mrm" font-size="13">2</text><circle cx="480" cy="90" r="4.5" class="ink-fill"/><text x="490" y="84" class="mrm" font-size="13">3</text><circle cx="250" cy="150" r="4.5" class="ink-fill"/><text x="260" y="144" class="mrm" font-size="13">0</text><circle cx="350" cy="150" r="4.5" class="ink-fill"/><text x="360" y="144" class="mrm" font-size="13">1</text><circle cx="480" cy="150" r="4.5" class="ink-fill"/><text x="490" y="144" class="mrm" font-size="13">2</text><circle cx="350" cy="210" r="4.5" class="ink-fill"/><text x="360" y="204" class="mrm" font-size="13">0</text><circle cx="430" cy="210" r="4.5" class="ink-fill"/><text x="440" y="204" class="mrm" font-size="13">0</text><circle cx="530" cy="210" r="4.5" class="ink-fill"/><text x="540" y="204" class="mrm" font-size="13">1</text><circle cx="530" cy="270" r="4.5" class="ink-fill"/><text x="540" y="264" class="mrm" font-size="13">0</text><text x="288" y="34" text-anchor="end" class="mrm" font-size="13">ε</text><text x="40" y="270" class="label">leaves have rank 0;</text><text x="40" y="286" class="label">a node has rank sup(rank of child + 1)</text></svg>
+:::
+
+:::lemma[Spector]{#lem-rank-sets}
+There is an oracle procedure $\Xi$ such that for every $x \in \mathcal O$ and every $i$, the computation $\Xi^{H_{2^x}}(x, i)$ halts, with output $1$ if $i \in \mathrm{Rk}_{<x}$ and $0$ otherwise. In other words, $\mathrm{Rk}_{<x} \leq_T H_{2^x}$, uniformly in $x$.
+:::
+
+:::proof{of=lem-rank-sets}
+By effective transfinite recursion (:ref{to="h-sets"}), by cases on $x$, the oracle $X$ being $H_{2^x} = H_x'$; as in the proof of :ref{#lem-notations-below}, the sets $H_x$, and $H_{2^b}$ when $x = 2^b$, are computed from $X$ by :ref{#prop-h-sets-uniform}.
+
+1. $x = 1$. Output $0$: no tree has rank less than $0$.
+2. $x = 2^b$ with $b \geq 1$. A tree $T$ is well-founded of rank less than $|b| + 1$ if and only if, for every $n$ with $\langle n \rangle \in T$, the tree $T_{\langle n \rangle}$ is well-founded of rank less than $|b|$: if $T$ is well-founded, then $\mathrm{rk}(T) \leq |b|$ if and only if $\mathrm{rk}(T_{\langle n \rangle}) + 1 \leq |b|$ for every such $n$; and $T$ is well-founded if and only if all the trees $T_{\langle n \rangle}$ are. So
+   $$
+   i \in \mathrm{Rk}_{<x} \iff \forall n\ \big(\langle n \rangle \notin T^i \vee s(i, n) \in \mathrm{Rk}_{<b}\big).
+   $$
+   The relation $\langle n \rangle \notin T^i$ is decided by $\emptyset'$, and $s(i, n) \in \mathrm{Rk}_{<b}$ by $\Xi^{H_{2^b}}(b, s(i, n))$; both oracles are computable in $H_{2^b}$ (:ref{#prop-h-sets-uniform}, with $2^b \neq 1$). The condition is $\Pi^0_1(H_{2^b})$, and it is answered by $H_{2^b}' = X$.
+3. $x = 3 \cdot 5^f$. Since $|x| = \sup_m |x_m|$, a tree has rank less than $|x|$ if and only if it has rank less than $|x_m|$ for some $m$. So $i \in \mathrm{Rk}_{<x}$ if and only if $\exists m\ \Xi^{H_{2^{x_m}}}(x_m, i) = 1$, where $H_{2^{x_m}}$ is a column of $H_x$. This is a $\Sigma^0_1(H_x)$ condition, answered by $H_x' = X$.
+
+By induction on $x \in \mathcal O$, the computation halts with the correct output, the recursive calls being made at $b$ and at the $x_m$, which are below $x$.
+:::
 
 :::lemma{#lem-wf-rank-hyp}
 For every computable ordinal $\alpha$, the set $\mathrm{WF}_{< \alpha}$ of indices of computable trees that are well-founded of rank less than $\alpha$ is hyperarithmetic.
 :::
 
-The proof is by effective transfinite recursion on a notation for $\alpha$. A tree $T$ has rank at most $\beta + 1$ if and only if $T_{\langle n \rangle}$ has rank at most $\beta$ for every $n$ with $\langle n \rangle \in T$, a $\Pi^0_1$ condition relative to the set of indices of trees of rank at most $\beta$; for a limit $\lambda$ with fundamental sequence $(\lambda_k)$, it has rank at most $\lambda$ if and only if for every $n$ there is $k$ such that $T_{\langle n \rangle}$ has rank at most $\lambda_k$, a $\Pi^0_2$ condition relative to the sets for the ranks $\lambda_k$. Each step thus costs at most two jumps, and the set of indices of trees of rank at most $|a|$ is computable in $H_b$ for some $b \in \mathcal O$ with $|b| \leq |a| \cdot 2 + 2$, by reductions computed from $a$. Then $\mathrm{WF}_{<\alpha}$ is the set for the rank $\beta$ if $\alpha = \beta + 1$, and the union of the sets for the ranks $\alpha_k$ if $\alpha$ is a limit with fundamental sequence $(\alpha_k)$. Making the uniformity precise requires effective transfinite recursion, and we admit the details; see Sacks, *Higher Recursion Theory*, Section II.1.
+:::proof{of=lem-wf-rank-hyp}
+Let $x$ be a notation of $\alpha$ (:ref{#cor-constructive-computable}), and let $g$ be a total computable function with $W_{g(i)} = \{ \sigma : \Phi_i(\sigma)\converge = 1 \}$. If $i$ is an index of a computable tree, this tree is $T^{g(i)}$. So $\mathrm{WF}_{<\alpha}$ is the set of $i$ that are indices of computable trees, a $\Pi^0_2$ condition decided by $\emptyset''$, and such that $g(i) \in \mathrm{Rk}_{<x}$, decided by $H_{2^x}$ (:ref{#lem-rank-sets}). Both oracles are hyperarithmetic, and so is their join (:ref{#prop-hyp-ideal}).
+:::
+
+:::quiz[ranks and H-sets]
+In case 2 of the proof of :ref{#lem-rank-sets}, why is the condition answered by $H_{2^b}'$ rather than by $H_{2^b}$?
+
+- [x] Because it contains an unbounded universal quantifier over the immediate successors $\langle n \rangle$ of the root: a tree on $\nat$ may be infinitely branching, and checking all its subtrees is a $\Pi^0_1$ question relative to $H_{2^b}$.
+- [ ] Because the relation $\langle n \rangle \in T^i$ is only c.e.
+
+  This relation is decided by $\emptyset' \leq_T H_{2^b}$; the jump is needed for the quantifier over $n$.
+- [ ] Because the rank of $T^i$ might be a limit ordinal.
+
+  In case 2, the bound $|b| + 1$ is a successor; the trees considered have rank at most $|b|$, whatever its form.
+:::
 
 :::theorem[Kleene]{#thm-kleene-delta11}
 A set of numbers is $\Delta^1_1$ if and only if it is hyperarithmetic.
 :::
 
 :::proof{of=thm-kleene-delta11}
-Hyperarithmetic sets are $\Delta^1_1$ by :ref{#prop-h-delta11}. Conversely, let $A$ be $\Delta^1_1$. By the normal form theorem (:ref{#thm-pi11-normal-form}), there is a computable function $n \mapsto t(n)$ such that $n \in A$ if and only if $t(n)$ is an index of a well-founded computable tree. The set $S = \{ t(n) : n \in A \}$ is $\Sigma^1_1$, since $m \in S$ if and only if $\exists n\, (t(n) = m \wedge n \in A)$ with $A$ a $\Sigma^1_1$ set, and it consists of indices of well-founded trees. By the boundedness theorem in the form of the first exercise of :ref{to="computable-ordinals/trees-and-pi11"} (stated there for c.e. indices of trees, which are computed from the indices $t(n)$ by a computable function), the ranks of the trees in $S$ have a supremum $\gamma < \omega_1^{\mathrm{CK}}$. Let $\alpha = \gamma + 1$, a computable ordinal greater than all these ranks. Then $n \in A$ if and only if $t(n) \in \mathrm{WF}_{< \alpha}$: if $n \in A$, the rank of $t(n)$ is less than $\alpha$; if $n \notin A$, the tree $t(n)$ is not well-founded. So $A$ is computable in $\mathrm{WF}_{<\alpha}$, which is hyperarithmetic by :ref{#lem-wf-rank-hyp}.
+Hyperarithmetic sets are $\Delta^1_1$ by :ref{#prop-h-delta11}. Conversely, let $A$ be $\Delta^1_1$. By the normal form theorem (:ref{#thm-pi11-normal-form}), there is a computable function $n \mapsto t(n)$ such that $n \in A$ if and only if $t(n)$ is an index of a well-founded computable tree. The set $S = \{ t(n) : n \in A \}$ is $\Sigma^1_1$, since $m \in S$ if and only if $\exists n\, (t(n) = m \wedge n \in A)$ with $A$ a $\Sigma^1_1$ set, and it consists of indices of well-founded trees. By the boundedness theorem in the form of :ref{#ex-tree-boundedness} (stated there for c.e. indices of trees, which are computed from the indices $t(n)$ by a computable function), the ranks of the trees in $S$ have a supremum $\gamma < \omega_1^{\mathrm{CK}}$. Let $\alpha = \gamma + 1$, a computable ordinal greater than all these ranks. Then $n \in A$ if and only if $t(n) \in \mathrm{WF}_{< \alpha}$: if $n \in A$, the rank of $t(n)$ is less than $\alpha$; if $n \notin A$, the tree $t(n)$ is not well-founded. So $A$ is computable in $\mathrm{WF}_{<\alpha}$, which is hyperarithmetic by :ref{#lem-wf-rank-hyp}.
 :::
 
 The proof is a template for many results: a $\Delta^1_1$ property is $\Pi^1_1$ with a $\Sigma^1_1$ bound on the ordinals involved, and below a computable ordinal, everything is hyperarithmetic. The theorem relativizes: the $\Delta^1_1(X)$ sets are the sets computable in $H^X_a$ for some $a \in \mathcal O^X$, the H-sets relative to $X$.
@@ -133,8 +174,11 @@ If $A \leq_T H_a$ computed every hyperarithmetic set, it would compute $H_{2^a} 
 
 ## Notes and references
 
-Kleene (1955) proved that the $\Delta^1_1$ sets are exactly the hyperarithmetic sets; the classical counterpart in descriptive set theory is Suslin's theorem that the Borel sets are the sets that are both analytic and co-analytic, which is why the result is often called the **Suslin–Kleene theorem**. Spector's boundedness theorem gives the proof presented here.
+Kleene (1955) proved that the $\Delta^1_1$ sets are exactly the hyperarithmetic sets; the classical counterpart in descriptive set theory is Suslin's theorem that the Borel sets are the sets that are both analytic and co-analytic, which is why the result is often called the **Suslin–Kleene theorem**. Spector's boundedness theorem gives the proof presented here, and Spector (1955) also proved the computation of ranks by H-sets (:ref{#lem-rank-sets}), which we prove as in Monin and Patey. The H-sequences of :ref{#def-h-sequence} play the role of the formula $H(a, X, Y)$ in Simpson's proof of the theorem in $\mathsf{ACA}_0$ (Theorem VIII.3.19), which also uses the boundedness of $\Sigma^1_1$ sets of well-orderings. The converse of :ref{#cor-hyp-quantifier}, that every $\Pi^1_1$ set has this form, is the theorem of Spector and Gandy on hyperarithmetic quantifiers (Simpson, notes to Section VIII.3 and Theorem VIII.3.27).
 
 - S. C. Kleene, *Hierarchies of number-theoretic predicates*, Bulletin of the American Mathematical Society 61 (1955), 193–213.
+- C. Spector, *Recursive well-orderings*, Journal of Symbolic Logic 20 (1955), 151–163.
+- B. Monin and L. Patey, *Computability theory*, chapters "Hyperarithmetic sets" and "Beyond hyperarithmetic".
+- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section VIII.3.
 - G. E. Sacks, *Higher Recursion Theory*, Springer, 1990.
 - Y. N. Moschovakis, *Descriptive Set Theory*, 2nd edition, American Mathematical Society, 2009.
