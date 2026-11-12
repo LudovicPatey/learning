@@ -1,11 +1,13 @@
 ---
 title: Diagonally non-computable functions
-summary: DNC and fixed-point free functions compute each other; the DNC degrees are the degrees of effectively immune sets; Arslanov's completeness criterion shows that a c.e. set computing a DNC function is complete.
+summary: DNC and fixed-point free functions compute each other, and the DNC degrees are the degrees of effectively immune sets; DNC functions avoid every c.e. set of known bounded size.
 duration: 45
-prerequisites: [immune-sets, fundamentals/fixed-point, pi01-classes/pa-degrees, ce-degrees/low-simple-set]
+prerequisites: [immune-sets, fundamentals/fixed-point, pi01-classes/pa-degrees]
 ---
 
-The fixed point theorem says that every computable transformation of programs has a fixed point, up to the function computed. A function that transforms every program into one computing a different function cannot be computable; this lesson studies the degrees of such **fixed-point free** functions. They coincide with the degrees of **diagonally non-computable** functions, which differ from the diagonal $e \mapsto \Phi_e(e)$ wherever it is defined, and with the degrees of **effectively immune** sets. Arslanov's completeness criterion then shows that among c.e. sets, only the complete ones have this power.
+The fixed point theorem says that every computable transformation of programs has a fixed point, up to the function computed. A function that transforms every program into one computing a different function cannot be computable; this lesson studies the degrees of such **fixed-point free** functions. They coincide with the degrees of **diagonally non-computable** functions, which differ from the diagonal $e \mapsto \Phi_e(e)$ wherever it is defined, and with the degrees of **effectively immune** sets.
+
+A DNC function has to avoid one value at each input, the value $\Phi_e(e)$, without knowing whether it is defined. The central result of the lesson shows that this weak ability can be amplified: a DNC function computes a function that avoids, at each input, any finite c.e. set whose size is bounded in advance. This amplified form is the one used in applications, in :ref{to="immunity-growth/arslanov"} and :ref{to="immunity-growth/high-or-dnc"} and in the course on algorithmic randomness.
 
 ## DNC and fixed-point free functions
 
@@ -14,6 +16,8 @@ A total function $f : \nat \to \nat$ is **diagonally non-computable**, or **DNC*
 :::
 
 No DNC function is computable: if $f = \Phi_e$ were total, then $\Phi_e(e)\converge = f(e)$. The set $\emptyset'$ computes a DNC function, namely $f(e) = \Phi_e(e) + 1$ if $e \in \emptyset'$ and $f(e) = 0$ otherwise. The PA sets compute $\{0, 1\}$-valued DNC functions (:ref{#def-pa-degree}). No fixed-point free function is computable, by the fixed point theorem (:ref{#thm-fixed-point}).
+
+Both directions of the next theorem rest on the same device: a program, obtained by SMN, whose behavior on its own index, or whose index, encodes the value to be avoided. A function that refutes the program then refutes the value.
 
 :::theorem[Jockusch, Lerman, Soare, Solovay]{#thm-dnc-fpf}
 A set $X$ computes a DNC function if and only if it computes a fixed-point free function.
@@ -35,6 +39,10 @@ An infinite set $A$ is **effectively immune** if there is a total computable fun
 
 An effectively immune set is immune: an infinite c.e. subset $W_e$ would have more than $q(e)$ elements. Effective immunity requires that a c.e. subset of $A$ reveals, through its index, a bound on its size.
 
+:::example{#ex-post-effectively-simple}
+Post's simple set $S$ (:ref{#thm-post-simple}) is effectively simple. If $W_e \subseteq \nat \setminus S$, then $W_e$ has no element larger than $2e$: otherwise the element $x_e$ of the construction is defined, and $x_e \in W_e \cap S$. So $|W_e| \leq 2e + 1$, and $q(e) = 2e + 1$ witnesses effective immunity. By contrast, the complement of a low simple set is not effectively immune (:ref{#cor-arslanov}).
+:::
+
 :::theorem{#thm-dnc-effectively-immune}
 For every set $X$, the following are equivalent:
 
@@ -42,6 +50,8 @@ For every set $X$, the following are equivalent:
 2. $X$ computes a function $h : \nat^2 \to \nat$ such that $h(e, n) \notin W_e$ whenever $|W_e| \leq n$;
 3. $X$ computes an effectively immune set.
 :::
+
+Statement (2) strengthens DNC: $h(e, n)$ avoids the c.e. set $W_e$ whenever it has at most $n$ elements, while a DNC function avoids the set $\{ \Phi_e(e) \}$, of size at most one. In (1 ⇒ 2), $n$ values are needed, and they are obtained by applying a DNC function to $n$ programs, each predicting one coordinate of an element of $W_e$. In (2 ⇒ 3), the effectively immune set is built greedily: each new element is chosen, with $h$, outside a finite c.e. set that collects all the dangers known so far. In (3 ⇒ 1), a large finite subset of an effectively immune set gives a program that cannot be a fixed point.
 
 :::proof{of=thm-dnc-effectively-immune}
 Let $\langle k_0, \dots, k_{n-1} \rangle$ denote a computable bijection between $\nat^n$ and $\nat$, uniform in $n \geq 1$.
@@ -95,63 +105,12 @@ In (2 ⇒ 3), why does the set $W_v$ contain all the numbers $y \leq x_{s-1}$?
   This case uses only that $D_{\gamma(s)}$ has $s + 1$ elements and does not contain $x_s$.
 :::
 
-## Arslanov's completeness criterion
+## Bounded DNC functions
 
-The halting set computes a DNC function. Arslanov showed that it is the only c.e. degree with this property.
+The PA degrees are the degrees of $\{0, 1\}$-valued DNC functions (:ref{#def-pa-degree}). More generally, for a non-decreasing computable function $b \geq 2$, a DNC function $f$ with $f(n) < b(n)$ for every $n$ is a $\mathrm{DNC}_b$ function. The $\mathrm{DNC}_b$ functions are the paths of a computable, computably bounded tree. Two results, admitted here, describe the role of the bound.
 
-:::theorem[Arslanov's completeness criterion]{#thm-arslanov}
-A c.e. set $A$ is Turing complete if and only if it computes a DNC function.
-:::
-
-:::proof{of=thm-arslanov}
-If $A \equiv_T \emptyset'$, it computes a DNC function. Conversely, let $A$ be c.e., with a c.e. approximation $(A_s)$, and suppose that $A$ computes a DNC function. By :ref{#thm-dnc-fpf}, there is a functional $\Phi_i$ such that $f = \Phi^A_i$ is total and fixed-point free. Let $f_s(x) = \Phi^{A_s}_i(x)[s]$ if this computation converges, and $f_s(x) = 0$ otherwise; the function $(s, x) \mapsto f_s(x)$ is computable. Let $\emptyset'_t$ be the set of $n \leq t$ with $\Phi_n(n)[t]\converge$.
-
-By SMN, there is a total computable function $r$ such that the program $r(n, x)$, on input $m$, searches for the least $t$ with $n \in \emptyset'_t$ and, if it finds one, runs $\Phi_{f_t(x)}(m)$. By the fixed point theorem with parameters (:ref{#thm-fixed-point-parameters}), there is a total computable function $p$ with $\Phi_{p(n)} = \Phi_{r(n, p(n))}$ for every $n$.
-
-With oracle $A$, compute for each $n$ the least stage $s(n)$ such that $\Phi^{A_s}_i(p(n))[s]$ converges, with use $u$, and $A_s \uh u = A \uh u$, for $s = s(n)$. Such a stage exists, since $f(p(n))$ is defined and $A_s \uh u$ eventually equals $A \uh u$; and the condition is decided by $A$. Since $A$ is c.e., $A_t \uh u = A \uh u$ for every $t \geq s(n)$, so the same computation gives $f_t(p(n)) = f(p(n))$ for every $t \geq s(n)$.
-
-We claim that $n \in \emptyset'$ if and only if $n \in \emptyset'_{s(n)}$, which shows $\emptyset' \leq_T A$. Suppose that $n \in \emptyset'$, and let $t$ be the least stage with $n \in \emptyset'_t$. If $t > s(n)$, then the program $r(n, p(n))$ runs $\Phi_{f_t(p(n))} = \Phi_{f(p(n))}$, so $\Phi_{p(n)} = \Phi_{r(n, p(n))} = \Phi_{f(p(n))}$, contradicting the fact that $f$ is fixed-point free. So $t \leq s(n)$, and $n \in \emptyset'_{s(n)}$, since $\emptyset'_t \subseteq \emptyset'_{s(n)}$. Conversely, $\emptyset'_{s(n)} \subseteq \emptyset'$.
-:::
-
-The program $p(n)$ waits for $n$ to enter $\emptyset'$ and then copies the program that the current approximation of $f$ assigns to it. If $n$ entered $\emptyset'$ after the approximation of $f(p(n))$ has settled, $p(n)$ would be a fixed point of $f$. So, once $A$ knows that the approximation has settled, the entry of $n$ into $\emptyset'$ is already decided. The c.e. hypothesis is necessary: there are low PA sets (:ref{#cor-pa-basis}), which compute DNC functions without computing $\emptyset'$.
-
-:::corollary{#cor-arslanov}
-1. A c.e. set of PA degree is Turing complete.
-2. (Martin) Every effectively simple set is Turing complete.
-3. The complement of a low simple set is immune but not effectively immune.
-:::
-
-:::proof{of=cor-arslanov}
-1. A PA set computes a DNC function.
-2. If $A$ is effectively simple, then $A$ computes its complement, which is effectively immune; by :ref{#thm-dnc-effectively-immune}, $A$ computes a DNC function, and :ref{#thm-arslanov} applies.
-3. A low simple set exists (:ref{#thm-low-simple}). Its complement is immune; if it were effectively immune, the set would be complete by 2, hence not low.
-:::
-
-:::quiz[Arslanov's completeness criterion]
-Where is the hypothesis that $A$ is c.e. used in the proof of :ref{#thm-arslanov}?
-
-- [x] To know that once $A_s \uh u$ agrees with $A \uh u$, it agrees at every later stage, so that $f_t(p(n)) = f(p(n))$ for all $t \geq s(n)$, and to recognize such a stage with oracle $A$.
-
-  For a general $\Delta^0_2$ approximation, $A_t \uh u$ may change again after being correct.
-- [ ] To apply the fixed point theorem with parameters.
-
-  The fixed point theorem is applied to a computable function $r$, independently of $A$.
-- [ ] To make $f$ total.
-
-  $f = \Phi^A_i$ is total by hypothesis.
-
----
-
-Why does the program $r(n, x)$ use the stage $t$ at which $n$ enters $\emptyset'$, rather than the true value $f(x)$?
-
-- [x] Because a program cannot use the oracle $A$; it can only compute the approximation $f_t$ at a stage it finds by itself.
-- [ ] Because $f(x)$ may be undefined.
-
-  $f$ is total.
-- [ ] Because the fixed point theorem requires the program to halt.
-
-  The fixed point theorem applies to all programs, halting or not.
-:::
+- *Constant bounds.* For every $k \geq 2$, a $\mathrm{DNC}_k$ function computes a $\mathrm{DNC}_2$ function, so the sets computing a DNC function with a constant bound are exactly the PA sets (Jockusch 1989; Nies 2009, Exercise 4.3.5).
+- *Growing bounds.* For every computable bound $b$, there is a larger computable bound $b'$ and a set computing a $\mathrm{DNC}_{b'}$ function but no $\mathrm{DNC}_b$ function (Ambos-Spies, Kjos-Hanssen, Lempp and Slaman 2004). The DNC degrees are therefore stratified by the growth of the bound, from the PA degrees to the DNC degrees with no computable bound.
 
 ## Exercises
 
@@ -182,9 +141,12 @@ The limit $X$ is computable in $\emptyset''$, is not computable, and computes no
 
 ## Notes and references
 
-Arslanov (1981) proved the completeness criterion, in the form of fixed-point free functions; Martin (1966) had proved that effectively simple sets are complete. The equivalence between DNC and fixed-point free functions is due to Jockusch, Lerman, Soare and Solovay (1989), and the characterization through effectively immune sets to Jockusch. In the course on algorithmic randomness, DNC functions reappear through the complexity of the initial segments of a set.
+Fixed-point free functions were studied by Arslanov, whose completeness criterion is the subject of :ref{to="immunity-growth/arslanov"}. The equivalence between DNC and fixed-point free functions is due to Jockusch, Lerman, Soare and Solovay (1989); see Downey and Hirschfeldt (2010, Theorem 2.22.1), Nies (2009, Proposition 4.1.4), and Soare (2016, Exercise 5.4.5), who attributes it to Jockusch. The implication from effective immunity to fixed-point free functions is the argument of Martin's proof that effectively simple sets are complete (Martin 1966; Nies 2009, Proposition 4.1.13). The equivalence of the three conditions of :ref{#thm-dnc-effectively-immune} is presented by Monin and Patey in the section *DNC functions* of their chapter *Immunity and function growth*. In the course on algorithmic randomness, DNC functions reappear through the complexity of the initial segments of a set.
 
-- M. M. Arslanov, *Some generalizations of a fixed-point theorem*, Soviet Mathematics (Izvestiya VUZ. Matematika) 25 (1981), 1–10.
 - D. A. Martin, *Completeness, the recursion theorem and effectively simple sets*, Proceedings of the American Mathematical Society 17 (1966), 838–842.
 - C. G. Jockusch, M. Lerman, R. I. Soare and R. M. Solovay, *Recursively enumerable sets modulo iterated jumps and extensions of Arslanov's completeness criterion*, Journal of Symbolic Logic 54 (1989), 1288–1323.
 - C. G. Jockusch, *Degrees of functions with no fixed points*, in *Logic, Methodology and Philosophy of Science VIII*, North-Holland, 1989, 191–201.
+- K. Ambos-Spies, B. Kjos-Hanssen, S. Lempp and T. A. Slaman, *Comparing DNR and WWKL*, Journal of Symbolic Logic 69 (2004), 1089–1104.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.22.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 4.1.
+- B. Monin and L. Patey, *Computability theory*, chapter *Immunity and function growth*.
