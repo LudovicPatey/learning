@@ -1,7 +1,7 @@
 ---
 title: Finitely branching trees
 summary: Trees of sequences of integers; König's lemma; computably bounded trees behave like binary trees; a computable finitely branching tree whose paths all compute ∅′; the strength needed for König's lemma.
-duration: 35
+duration: 40
 prerequisites: [pa-degrees]
 ---
 
@@ -10,6 +10,8 @@ Binary trees model problems with two choices at each step. Many problems have mo
 ## Trees of integers
 
 Write $\nat^{<\nat}$ for the set of finite sequences of integers, with the same notation as for binary strings, and $\nat^\nat$ for **Baire space**, the set of infinite sequences of integers. A **tree** is a subset $T \subseteq \nat^{<\nat}$ closed under prefixes, and a **path** through $T$ is a sequence $P \in \nat^\nat$ all of whose prefixes belong to $T$. A tree is **finitely branching** if every node $\sigma \in T$ has finitely many immediate successors $\sigma v \in T$. It is **computably bounded** if there is a computable function $g$ with $\sigma(n) < g(n)$ for every $\sigma \in T$ and $n < |\sigma|$.
+
+For example, the set of strings $\sigma$ with $\sigma(n) \leq n$ for all $n < |\sigma|$ is a computably bounded tree, with $g(n) = n + 1$. The tree $\{ \varepsilon \} \cup \{ \langle m \rangle : m \in \nat \}$ of strings of length at most $1$ is infinite and not finitely branching, and it has no path. A computable finitely branching tree need not be computably bounded: in the tree of :ref{#thm-finitely-branching-jump} below, the values at position $n$ depend on the stage at which $n$ enters $\emptyset'$.
 
 :::lemma[König's lemma]{#lem-konig}
 Every infinite finitely branching tree has a path.
@@ -78,6 +80,8 @@ Where is it used that $T$ is finitely branching, in :ref{#prop-finitely-branchin
 
 ## Unbounded branching
 
+For a computably bounded tree, an algorithm knows in advance which values may occur at each position, and the binary coding below exploits this. Without a computable bound, the values of the successors of a node can carry information, such as the stage at which a number enters $\emptyset'$, and a path must then decode this information.
+
 :::theorem{#thm-finitely-branching-jump}
 There is a computable finitely branching tree $T$, in which every node has at most two successors, with exactly one path, and this path computes $\emptyset'$.
 :::
@@ -88,6 +92,10 @@ Let $\emptyset'_s = \{ e : \Phi_e(e)[s]\converge \}$, and for $n \in \emptyset'$
 $T$ is computable: each condition is decidable. It is closed under prefixes, since $n \notin \emptyset'_{|\sigma|}$ implies $n \notin \emptyset'_{|\tau|}$ for $\tau \preceq \sigma$. Each node has at most two successors, since at position $n$ only the values $\langle 0, 0 \rangle$ and $\langle 1, s_n \rangle$ are possible.
 
 The sequence $P$ with $P(n) = \langle 1, s_n \rangle$ for $n \in \emptyset'$ and $P(n) = \langle 0, 0 \rangle$ for $n \notin \emptyset'$ is a path: every prefix satisfies the conditions. Conversely, let $Q$ be a path. If $Q(n) = \langle 1, s \rangle$, then $n \in \emptyset'$. If $Q(n) = \langle 0, 0 \rangle$, then $n \notin \emptyset'_\ell$ for every $\ell > n$, so $n \notin \emptyset'$. Hence $Q = P$, and $\emptyset'(n)$ is the first component of $P(n)$.
+:::
+
+:::figure[The beginning of the tree of :ref{#thm-finitely-branching-jump}, for an enumeration in which, among $0, \dots, 4$, only $1$ and $3$ enter $\emptyset'$, at stages $3$ and $6$. At a position $n \in \emptyset'$, the wrong guess $\langle 0, 0 \rangle$ survives until length $s_n$ and then has no extension; the unique path guesses correctly everywhere. Strings of integers are drawn as in a binary tree, each edge labeled by the value it adds.]
+<svg class="fig" viewBox="0 0 600 300" width="600" role="img" aria-label="A computable tree with two successors at most per node and a single path, which computes the halting set"><line x1="200.0" y1="24" x2="200.0" y2="72" class="accent-stroke" stroke-width="2.2"/><text x="208.0" y="52.0" class="mrm" font-size="12">⟨0, 0⟩</text><line x1="200.0" y1="72" x2="130.0" y2="120" class="ink-stroke" stroke-width="1.2"/><text x="157.0" y="100.0" text-anchor="end" class="mrm" font-size="12">⟨0, 0⟩</text><line x1="200.0" y1="72" x2="270.0" y2="120" class="accent-stroke" stroke-width="2.2"/><text x="243.0" y="100.0" text-anchor="start" class="mrm" font-size="12">⟨1, 3⟩</text><line x1="270.0" y1="120" x2="270.0" y2="168" class="accent-stroke" stroke-width="2.2"/><text x="278.0" y="148.0" class="mrm" font-size="12">⟨0, 0⟩</text><line x1="270.0" y1="168" x2="200.0" y2="216" class="ink-stroke" stroke-width="1.2"/><text x="227.0" y="196.0" text-anchor="end" class="mrm" font-size="12">⟨0, 0⟩</text><line x1="270.0" y1="168" x2="340.0" y2="216" class="accent-stroke" stroke-width="2.2"/><text x="313.0" y="196.0" text-anchor="start" class="mrm" font-size="12">⟨1, 6⟩</text><line x1="200.0" y1="216" x2="200.0" y2="264" class="ink-stroke" stroke-width="1.2"/><line x1="340.0" y1="216" x2="340.0" y2="264" class="accent-stroke" stroke-width="2.2"/><text x="348.0" y="244.0" class="mrm" font-size="12">⟨0, 0⟩</text><circle cx="200.0" cy="24" r="4" class="accent-fill"/><circle cx="200.0" cy="72" r="4" class="accent-fill"/><circle cx="130.0" cy="120" r="4" class="ink-fill"/><line x1="123.0" y1="130" x2="137.0" y2="130" class="ink-stroke" stroke-width="1.4"/><text x="130.0" y="146" text-anchor="middle" class="label">no successor:</text><text x="130.0" y="160" text-anchor="middle" class="label">1 enters at stage 3</text><circle cx="270.0" cy="120" r="4" class="accent-fill"/><circle cx="270.0" cy="168" r="4" class="accent-fill"/><circle cx="200.0" cy="216" r="4" class="ink-fill"/><circle cx="340.0" cy="216" r="4" class="accent-fill"/><circle cx="200.0" cy="264" r="4" class="ink-fill"/><circle cx="340.0" cy="264" r="4" class="accent-fill"/><text x="200.0" y="284" text-anchor="middle" class="label">no successor at length 6:</text><text x="200.0" y="298" text-anchor="middle" class="label">3 enters at stage 6</text><text x="340.0" y="284" text-anchor="middle" class="mrm" font-size="12">⋮</text><text x="352.0" y="286" class="label">the path P</text><text x="210.0" y="20" class="mrm" font-size="13">ε</text><text x="470" y="52" class="label">position 0</text><text x="470" y="100" class="label">position 1 ∈ ∅′</text><text x="470" y="148" class="label">position 2</text><text x="470" y="196" class="label">position 3 ∈ ∅′</text><text x="470" y="244" class="label">position 4</text></svg>
 :::
 
 :::corollary{#cor-pa-not-enough}
@@ -138,8 +146,10 @@ By :ref{#ex-pa-relative}, applied with $\emptyset'$ in place of $X$, a set that 
 
 ## Notes and references
 
-König's lemma is due to Kőnig (1927). The coding of computably bounded trees and the analysis of finitely branching trees are standard; Jockusch and Soare (1972) and Simpson's book on reverse mathematics treat these questions, the latter in the setting of second-order arithmetic.
+König's lemma is due to Kőnig (1927). The coding of computably bounded trees into binary trees goes back to Jockusch and Soare (1972); Hirschfeldt, *Slicing the Truth*, Exercise 3.25, credits it to their two papers. :ref{#thm-finitely-branching-jump} is stated as a known result by Jockusch, Lewis and Remmel (1991), who also proved the direction ($\Rightarrow$) of :ref{#thm-konig-strength}, in the form of a computable finitely branching tree for every $\emptyset'$-computable binary tree, with the same degrees of paths; Hirschfeldt presents both as Exercises 3.24 and 3.27, and the direction ($\Leftarrow$) as a relativization of Exercise 3.25. The construction of :ref{#thm-finitely-branching-jump} is the computability-theoretic content of Simpson's Theorem III.7.2, which shows that König's lemma for trees in which each node has at most two successors implies arithmetical comprehension over $\mathsf{RCA}_0$; the tree used there codes the range of a one-to-one function in the same way. In reverse mathematics, König's lemma is equivalent to $\mathsf{ACA}_0$ (Simpson, Section III.7) and weak König's lemma defines $\mathsf{WKL}_0$ (Simpson, Chapter IV).
 
 - D. Kőnig, *Über eine Schlussweise aus dem Endlichen ins Unendliche*, Acta Scientiarum Mathematicarum (Szeged) 3 (1927), 121–130.
 - C. G. Jockusch and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
-- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009.
+- C. G. Jockusch, A. Lewis and J. B. Remmel, *Π⁰₁-classes and Rado's selection principle*, Journal of Symbolic Logic 56 (1991), 684–693.
+- D. R. Hirschfeldt, *Slicing the Truth*, Lecture Notes Series of the Institute for Mathematical Sciences, National University of Singapore, 28, World Scientific, 2015, Section 3.2.
+- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section III.7 and Chapter IV.
