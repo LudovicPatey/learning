@@ -11,12 +11,14 @@ description: >
   property for Π¹₁ sets, Kleene's separation theorem for Σ¹₁ sets, Kreisel's
   uniformization theorem and the selection of hyperarithmetic functions. It
   ends with Harrison's effective perfect set theorem: countable Σ¹₁ classes
-  consist of hyperarithmetic sets.
+  consist of hyperarithmetic sets, while a Π¹₁ singleton need not be
+  hyperarithmetic.
 objectives:
   - Compare ranks of trees by strictly monotone maps
   - Prove that the stage comparison relations of a Π¹₁ set are Π¹₁
   - Prove the reduction property for Π¹₁ sets and separation for Σ¹₁ sets
   - Uniformize Π¹₁ relations on numbers and select hyperarithmetic functions
   - Describe a Π¹₁ set as the union of its hyperarithmetic stages
-  - Prove that countable Σ¹₁ classes consist of hyperarithmetic sets
-lessons: [norms, uniformization, perfect-sets]
+  - Prove that countable Σ¹₁ classes consist of hyperarithmetic sets, and contrast with Π¹₁ singletons
+  - Recognize the techniques: rank comparison, stage comparison, boundedness, splitting constructions
+lessons: [norms, reduction, uniformization, perfect-sets]
