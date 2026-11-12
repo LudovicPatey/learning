@@ -1,7 +1,7 @@
 ---
 title: Register machines
 summary: Unlimited register machines (URM), their operational semantics, examples, concatenation of programs, and closure of URM-computable functions under composition.
-duration: 35
+duration: 45
 prerequisites: [what-is-an-algorithm]
 ---
 
@@ -147,6 +147,8 @@ To build complex programs from simpler ones, we need to run one program after an
 A program $P = I_1, \dots, I_s$ is in **standard form** if every jump $J(m, n, q)$ of $P$ satisfies $q \leq s + 1$. We write $\rho(P)$ for the largest register index mentioned in $P$.
 :::
 
+The addition and multiplication programs above are in standard form: their jumps go to instructions of the program or, for the halting jump $J(2, 3, 5)$ of the addition program, to $I_{s+1}$. The program $J(1, 1, 7), S(1)$ is not: it halts at once by jumping to $I_7$, far beyond its end.
+
 Every program $P$ is equivalent to a program in standard form, obtained by replacing every jump $J(m, n, q)$ with $q > s + 1$ by $J(m, n, s + 1)$: the computations are the same, and when $P$ halts, the standard form program halts in the configuration $(s + 1, r)$ with the same registers.
 
 :::definition{#def-urm-concat}
@@ -189,6 +191,8 @@ Since the $\ell_i$ are larger than $\rho(P)$ and $k$, the zeroing instructions d
 
 ## Closure under composition
 
+To compute $h(g_1(\vec x), \dots, g_m(\vec x))$, one runs the programs for $g_1, \dots, g_m$ in turn, then the program for $h$. The obstacle is interference: each program uses the low registers as scratch space, so running $G_1$ may destroy the input that $G_2$ needs, and running $G_2$ may destroy the value computed by $G_1$. The solution is to keep the input and the intermediate values in registers beyond the reach of all the programs involved, and to call each program as a subroutine.
+
 :::theorem{#thm-urm-composition}
 Let $g_1, \dots, g_m : \nat^k \rightharpoonup \nat$ and $h : \nat^m \rightharpoonup \nat$ be URM-computable. Then the partial function
 $$
@@ -198,7 +202,7 @@ is URM-computable.
 :::
 
 :::proof{of=thm-urm-composition}
-Let $G_1, \dots, G_m, H$ be programs in standard form computing $g_1, \dots, g_m, h$. Let $N$ be larger than $k$, $m$ and the numbers $\rho(G_i)$, $\rho(H)$. We use the registers $R_{N+1}, \dots, R_{N+k}$ to save the input, and $R_{N+k+1}, \dots, R_{N+k+m}$ to store the values $g_i(\vec x)$. Consider the program
+Let $G_1, \dots, G_m, H$ be programs in standard form computing $g_1, \dots, g_m, h$. Let $N$ be larger than $k$, $m$ and the numbers $\rho(G_i)$, $\rho(H)$. We use the registers $R_{N+1}, \dots, R_{N+k}$ to save the input, and $R_{N+k+1}, \dots, R_{N+k+m}$ to store the values $g_i(\vec x)$, as in the figure below. Consider the program
 $$
 \begin{aligned}
 & T(1, N{+}1),\ \dots,\ T(k, N{+}k), \\
@@ -207,6 +211,10 @@ $$
 \end{aligned}
 $$
 (The last block copies its result into $R_1$; the definition of $P[\dots \to \ell]$ is adapted in the obvious way when $\ell = 1$.) By :ref{#lem-urm-subroutine} and :ref{#lem-urm-concat}, if all $g_i(\vec x)$ converge, the program successively stores $g_1(\vec x), \dots, g_m(\vec x)$ in $R_{N+k+1}, \dots, R_{N+k+m}$ — the saved input being left unchanged — and then runs $H$ on these values, halting with $f(\vec x)$ in $R_1$ if $h$ converges, and not halting otherwise. If some $g_i(\vec x)$ diverges, the program does not halt, in accordance with the convention that $f(\vec x)\diverge$ in that case.
+:::
+
+:::figure[The registers in the proof of :ref{#thm-urm-composition}. The programs $G_i$ and $H$ mention only registers of index at most $N$; the saved input and the values $g_i(\vec x)$ lie above, and are written only by the transfers added around the subroutines.]
+<svg class="fig" viewBox="0 0 610 150" width="610" role="img" aria-label="Registers used in the proof: scratch registers, saved input, values of the g_i"><rect x="14" y="40" width="46" height="38" rx="2" class="cell"/><text x="37.0" y="64.0" text-anchor="middle" font-size="16"><tspan class="math">R</tspan><tspan class="mrm" font-size="10" dy="4">1</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect x="64" y="40" width="46" height="38" rx="2" class="cell"/><text x="87.0" y="64.0" text-anchor="middle" font-size="16"><tspan class="math">R</tspan><tspan class="mrm" font-size="10" dy="4">2</tspan><tspan class="mrm" dy="-4"> </tspan></text><text x="131.0" y="64.0" text-anchor="middle" class="mrm muted" font-size="16">⋯</text><rect x="152" y="40" width="46" height="38" rx="2" class="cell"/><text x="175.0" y="64.0" text-anchor="middle" font-size="16"><tspan class="math">R</tspan><tspan class="math" font-size="10" dy="4">N</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect x="202" y="40" width="62" height="38" rx="2" class="cell"/><text x="233.0" y="64.0" text-anchor="middle" font-size="16"><tspan class="math">R</tspan><tspan class="math" font-size="10" dy="4">N</tspan><tspan class="mrm" font-size="10">+1</tspan><tspan class="mrm" dy="-4"> </tspan></text><text x="285.0" y="64.0" text-anchor="middle" class="mrm muted" font-size="16">⋯</text><rect x="306" y="40" width="62" height="38" rx="2" class="cell"/><text x="337.0" y="64.0" text-anchor="middle" font-size="16"><tspan class="math">R</tspan><tspan class="math" font-size="10" dy="4">N</tspan><tspan class="mrm" font-size="10">+</tspan><tspan class="math" font-size="10">k</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect x="372" y="40" width="78" height="38" rx="2" class="cell"/><text x="411.0" y="64.0" text-anchor="middle" font-size="16"><tspan class="math">R</tspan><tspan class="math" font-size="10" dy="4">N</tspan><tspan class="mrm" font-size="10">+</tspan><tspan class="math" font-size="10">k</tspan><tspan class="mrm" font-size="10">+1</tspan><tspan class="mrm" dy="-4"> </tspan></text><text x="471.0" y="64.0" text-anchor="middle" class="mrm muted" font-size="16">⋯</text><rect x="492" y="40" width="82" height="38" rx="2" class="cell"/><text x="533.0" y="64.0" text-anchor="middle" font-size="16"><tspan class="math">R</tspan><tspan class="math" font-size="10" dy="4">N</tspan><tspan class="mrm" font-size="10">+</tspan><tspan class="math" font-size="10">k</tspan><tspan class="mrm" font-size="10">+</tspan><tspan class="math" font-size="10">m</tspan><tspan class="mrm" dy="-4"> </tspan></text><path d="M14,86 L14,92 L198,92 L198,86" class="muted-stroke" fill="none" stroke-width="1.2"/><text x="106.0" y="110" text-anchor="middle" class="label">the only registers that</text><text x="106.0" y="126" text-anchor="middle" font-size="14"><tspan class="math">G</tspan><tspan class="math" font-size="9" dy="4">i</tspan><tspan class="mrm" dy="-4"> </tspan><tspan class="mrm"> and </tspan><tspan class="math">H</tspan><tspan class="mrm"> mention</tspan></text><path d="M202,86 L202,92 L368,92 L368,86" class="muted-stroke" fill="none" stroke-width="1.2"/><text x="285.0" y="110" text-anchor="middle" class="label">saved input</text><text x="285.0" y="126" text-anchor="middle" font-size="14"><tspan class="math">x</tspan><tspan class="mrm" font-size="9" dy="4">1</tspan><tspan class="mrm" dy="-4"> </tspan><tspan class="mrm">, …, </tspan><tspan class="math">x</tspan><tspan class="math" font-size="9" dy="4">k</tspan><tspan class="mrm" dy="-4"> </tspan></text><path d="M372,86 L372,92 L574,92 L574,86" class="muted-stroke" fill="none" stroke-width="1.2"/><text x="473.0" y="110" text-anchor="middle" class="label">values of</text><text x="473.0" y="126" text-anchor="middle" font-size="14"><tspan class="math">g</tspan><tspan class="mrm" font-size="9" dy="4">1</tspan><tspan class="mrm" dy="-4"> </tspan><tspan class="mrm">, …, </tspan><tspan class="math">g</tspan><tspan class="math" font-size="9" dy="4">m</tspan><tspan class="mrm" dy="-4"> </tspan></text><text x="285.0" y="28" text-anchor="middle" class="label">not modified after the first transfers</text></svg>
 :::
 
 :::quiz[closure under composition]
@@ -232,9 +240,9 @@ Suppose $g_1(\vec x)\diverge$ but $h$ is a constant function. What does the prog
 
 ## Goto programs and assembly languages
 
-The URM is a minimal example of a **goto program**: a numbered list of elementary instructions together with conditional jumps. Processors execute programs of this kind. Other common instruction sets, for instance with a decrement instruction $R_n \leftarrow R_n \dotminus 1$ and a test "if $R_n = 0$ go to $q$", lead to the same class of computable functions; this is a simple exercise in simulating one instruction set by another.
+The URM is a minimal example of a **goto program**: a numbered list of elementary instructions together with conditional jumps. Processors execute programs of this kind. Other common instruction sets, for instance with a decrement instruction $R_n \leftarrow R_n \dotminus 1$ and a test "if $R_n = 0$ go to $q$", lead to the same class of computable functions. The proof is a **simulation**, the technique of the lesson :ref{to="models-of-computation/multitape-machines"}: each instruction of one set is replaced by a block of instructions of the other, using auxiliary registers that the program does not mention, and jump targets are renumbered. The second exercise below is an instance, and :ref{#ex-urm-pred} shows how to decrement without a decrement instruction.
 
-In the lesson :ref{to="models-of-computation/while-programs"} we consider **structured** programs, with `for` and `while` loops instead of jumps. They are more convenient to write, and the distinction between the two kinds of loops gives a characterization of the primitive recursive functions.
+In the lessons :ref{to="models-of-computation/loop-programs"} and :ref{to="models-of-computation/while-programs"} we consider **structured** programs, with `for` and `while` loops instead of jumps. They are more convenient to write, and the distinction between the two kinds of loops gives a characterization of the primitive recursive functions.
 
 ## Exercises
 

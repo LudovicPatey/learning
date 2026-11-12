@@ -1,7 +1,7 @@
 ---
 title: The Church–Turing thesis
 summary: Formulation and status of the Church–Turing thesis, Turing's analysis of human computation, Gandy's principles, physical and complexity-theoretic variants, and the use of the thesis in proofs.
-duration: 25
+duration: 30
 prerequisites: [equivalence-of-models]
 ---
 
@@ -17,7 +17,7 @@ One direction is uncontroversial: every Turing machine describes an effective pr
 
 The thesis is not a mathematical theorem, since one of its terms — "effective procedure" — is informal. It is a claim about the adequacy of a definition, of the same nature as the claim that the ε-δ definition captures continuity. Such claims cannot be proved, but they can be supported by arguments, and they could in principle be refuted by exhibiting an evidently effective procedure computing a non-Turing-computable function.
 
-Church proposed the identification of effective calculability with λ-definability, and then with general recursiveness, in 1934–1936. Gödel was initially not convinced, precisely because no argument showed that these definitions exhausted all effective procedures. It was Turing's paper of 1936 that convinced him, and most of the community.
+Church proposed the identification of effective calculability with λ-definability, and then with general recursiveness, in 1934–1936. Gödel was initially not convinced, precisely because no argument showed that these definitions exhausted all effective procedures. It was Turing's paper of 1936 that convinced him, and most of the community. The name *Church's thesis* is due to Kleene (1952, §62); since the argument that made it convincing is Turing's, Soare and others prefer to speak of *Turing's thesis* for the version about Turing machines.
 
 :::quiz[the status of the thesis]
 Which of the following would refute the Church–Turing thesis?
@@ -42,16 +42,33 @@ Turing did not only propose a model; he argued that any computation carried out 
 2. **Locality.** In a single step, the computer can only change symbols that are observed, and can only shift attention to symbols within a bounded distance of those observed.
 3. **Determinacy.** The action taken depends only on the current state of mind and the observed symbols.
 
-Under these constraints, a step of computation can be decomposed into elementary steps of a Turing machine: the two-dimensional sheet of paper can be replaced by a one-dimensional tape, and observing a bounded region can be simulated by moving the head back and forth. Turing concludes that machines with a single head on a single tape compute everything that a human computer can compute.
+Under these constraints, a step of computation can be decomposed into elementary steps of a Turing machine: the two-dimensional sheet of paper can be replaced by a one-dimensional tape, and observing a bounded region can be simulated by moving the head back and forth. Turing concludes that machines with a single head on a single tape compute everything that a human computer can compute. The constraints are where the argument can be discussed: once they are granted, the reduction to Turing machines is a mathematical argument, of the same kind as the simulations of this course. Gandy went as far as to say that Turing's analysis proves a theorem (quoted by Soare, 2016, §17.3.4).
+
+:::quiz[Turing's analysis]
+In Turing's analysis, what justifies the use of a finite alphabet?
+
+- [x] The boundedness constraint: a human can only distinguish finitely many symbols in a bounded region, since symbols that differ arbitrarily little could not be told apart.
+- [ ] The determinacy constraint.
+
+  Determinacy concerns how the next action is chosen, not how many symbols there are.
+- [ ] The locality constraint.
+
+  Locality bounds where the computer can look and write in one step, not the number of distinct symbols.
+- [ ] The finiteness of the tape.
+
+  The tape is unbounded: Turing's machines model a computer with unlimited paper.
+:::
 
 In 1980, Gandy isolated principles under which a **discrete deterministic mechanical device**, possibly acting in parallel on many parts, is equivalent to a Turing machine. His principles include a bound on the propagation speed of causal effects, and the requirement that the state of the device be built from finitely many parts of bounded complexity. Sieg later refined this analysis into an axiomatic presentation of computability.
+
+A related line of work axiomatizes the notion of **algorithm** itself, rather than of computing agent. Gurevich (2000) characterized sequential algorithms, through three postulates on states and steps, as the sequential abstract state machines. Dershowitz and Gurevich (2008) added a postulate requiring the initial states to contain only basic operations given in advance, and proved from these postulates that every algorithm on the integers computes a partial recursive function. Such results do not prove the thesis outright: they move the informal content into the postulates, which must in turn be accepted as a correct description of algorithms. They make explicit, however, which properties of mechanical computation the thesis depends on.
 
 ## Evidence
 
 The thesis is supported by three kinds of evidence.
 
 - **Convergence of definitions.** Every proposed formalization of computability has turned out to be equivalent to Turing computability: recursive functions, λ-calculus, Turing machines, Post systems, Markov algorithms, register machines, cellular automata, and all general-purpose programming languages. Their starting intuitions are very different, which makes the convergence significant.
-- **Conceptual analysis.** Turing's and Gandy's arguments derive the thesis from explicit, plausible properties of mechanical computation.
+- **Conceptual analysis.** The arguments of Turing, Gandy, Sieg, and Dershowitz and Gurevich derive the thesis from explicit, plausible properties of mechanical computation.
 - **Absence of counterexamples.** No algorithm computing a non-Turing-computable function has been found in ninety years of intensive use of algorithms.
 
 ## Variants
@@ -59,7 +76,7 @@ The thesis is supported by three kinds of evidence.
 Several stronger statements are sometimes called the Church–Turing thesis. They should be distinguished from the thesis above.
 
 - **The physical Church–Turing thesis.** Every function computable by a physical system is Turing-computable. This is a statement about the laws of physics, not about mechanical procedures. It is open; proposed counterexamples rely on idealizations such as infinitely precise real numbers or supertasks, whose physical realizability is doubtful.
-- **The extended (complexity-theoretic) thesis.** Every reasonable model of computation can be simulated by a Turing machine with at most polynomial overhead in time. This is a statement about efficiency. Quantum computing is widely believed to violate it — Shor's algorithm factors integers in polynomial time, which is not known to be possible classically — while it does not violate the Church–Turing thesis: quantum computers compute exactly the Turing-computable functions.
+- **The extended (complexity-theoretic) thesis.** Every reasonable model of computation can be simulated by a Turing machine with at most polynomial overhead in time. This is a statement about efficiency. Quantum computing is widely believed to violate it — Shor's algorithm factors integers in polynomial time, which is not known to be possible classically — while it does not violate the Church–Turing thesis: quantum computers compute exactly the Turing-computable functions. For the λ-calculus, the question whether counting β-steps is a reasonable measure of time remained open for a long time, since a single step may duplicate a large term; Accattoli and Dal Lago (2016) showed that the number of steps of normal order reduction to normal form is a reasonable cost measure, polynomially related to the time of Turing machines, by an implementation with sharing of subterms.
 
 :::quiz[variants of the thesis]
 Quantum computers can be simulated by Turing machines, possibly with exponential slowdown. What does this imply?
@@ -84,9 +101,12 @@ In the following courses, we adopt this practice. A function is **computable** i
 ## Notes and references
 
 - A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society (2) 42 (1936), 230–265.
-- S. C. Kleene, *Introduction to Metamathematics*, 1952, chapters XI–XIII.
+- S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952, §62 (Church's thesis).
 - R. Gandy, *Church's thesis and principles for mechanisms*, in J. Barwise, H. J. Keisler, K. Kunen (eds.), The Kleene Symposium, North-Holland, 1980, 123–148.
 - W. Sieg, *On computability*, in A. Irvine (ed.), Philosophy of Mathematics, Handbook of the Philosophy of Science, Elsevier, 2009, 535–630.
-- R. Soare, *Turing Computability: Theory and Applications*, 2016, chapters 1 and 3.
-- N. Cutland, *Computability: An Introduction to Recursive Function Theory*, 1980, for register machines.
-- H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, 1984, for the λ-calculus.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.1 and §§17.2–17.3, for the history of the thesis and Turing's analysis.
+- B. Monin, L. Patey, *Computability theory*, chapter "Church–Turing thesis", for the thesis and its proper use.
+- Y. Gurevich, *Sequential abstract-state machines capture sequential algorithms*, ACM Transactions on Computational Logic 1 (2000), 77–111.
+- N. Dershowitz, Y. Gurevich, *A natural axiomatization of computability and proof of Church's thesis*, Bulletin of Symbolic Logic 14 (2008), 299–350.
+- P. W. Shor, *Polynomial-time algorithms for prime factorization and discrete logarithms on a quantum computer*, SIAM Journal on Computing 26 (1997), 1484–1509.
+- B. Accattoli, U. Dal Lago, *(Leftmost-outermost) beta reduction is invariant, indeed*, Logical Methods in Computer Science 12 (2016), 1:4.

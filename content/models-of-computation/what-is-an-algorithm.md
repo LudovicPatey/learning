@@ -1,7 +1,7 @@
 ---
 title: Algorithms and partial functions
 summary: Historical motivation for a formal notion of computability, partial functions and their notation, and the coding of finite objects by integers.
-duration: 30
+duration: 35
 ---
 
 ## The Entscheidungsproblem
@@ -19,6 +19,8 @@ Several definitions were proposed between 1931 and 1936:
 Church (1936) and Turing (1936) independently gave a negative solution to the Entscheidungsproblem. The three classes of functions were quickly proved to coincide. Turing's analysis of what a human computer can do was decisive in convincing the community — including Gödel — that the definition was the right one.
 
 Note that the first electronic computers were built a decade later. The notion being formalized is that of a function computable *by a human* following a finite set of instructions mechanically, with unlimited paper and time.
+
+This course presents five of these formalizations — Turing machines, register machines, primitive and partial recursive functions, structured programs, and the λ-calculus — develops each far enough to program in it, and proves that they all define the same class of partial functions. The present lesson fixes the conventions shared by all of them: partial functions, and the coding of finite objects by integers.
 
 ## Features of an algorithm
 
@@ -56,7 +58,13 @@ Throughout the course, $\nat = \{0, 1, 2, \dots\}$, and $\vec x$ abbreviates a t
 A **partial function** $f : \nat^k \rightharpoonup \nat$ is a function from a subset $\dom f \subseteq \nat^k$, its **domain**, to $\nat$. We write $f(\vec x)\converge$ ("$f$ converges on $\vec x$") if $\vec x \in \dom f$, and $f(\vec x)\diverge$ ("$f$ diverges on $\vec x$") otherwise. We write $f(\vec x)\converge = y$ when $\vec x \in \dom f$ and $f(\vec x) = y$. A partial function is **total** if $\dom f = \nat^k$.
 :::
 
-Total functions are particular partial functions. The image of $f$ is $\operatorname{im} f = \{ f(\vec x) : \vec x \in \dom f \}$. The **empty function**, with empty domain, is denoted $\emptyset$ when no confusion is possible.
+Total functions are particular partial functions. Some examples:
+
+- subtraction $(x, y) \mapsto x - y$, defined exactly when $x \geq y$, is a partial function $\nat^2 \rightharpoonup \nat$ which is not total;
+- the search for the least $n > x$ such that $n$ and $n + 2$ are both prime defines a partial function $t$; it is total if and only if the twin prime conjecture holds, so whether a function given by an algorithm is total may be a hard question;
+- a procedure which, on input $x$, searches for a $y$ with $y + x + 1 = 0$ never stops, and defines the empty function.
+
+The image of $f$ is $\operatorname{im} f = \{ f(\vec x) : \vec x \in \dom f \}$. The **empty function**, with empty domain, is denoted $\emptyset$ when no confusion is possible.
 
 When partial functions are composed, an expression may be undefined. We adopt the following convention: an expression built from partial functions is defined only if all its subexpressions are defined. For instance, $g(f(x))\converge$ requires $f(x)\converge$ and $g$ to converge on the value $f(x)$. In particular, $0 \cdot f(x)$ is **undefined** when $f(x)\diverge$: we never evaluate an expression "lazily".
 
@@ -140,7 +148,17 @@ In the injectivity part of the proof, why is it important that $y \leq n$?
 
 Iterating the pairing function codes tuples of any fixed length: $\langle x_1, x_2, x_3 \rangle = \langle x_1, \langle x_2, x_3 \rangle \rangle$, and in general $\langle x_1, \dots, x_{k+1} \rangle = \langle x_1, \langle x_2, \dots, x_{k+1} \rangle \rangle$. For each $k \geq 1$ this gives a bijection $\nat^k \to \nat$. Finite sequences of arbitrary length require a little more care, since the length must be recoverable from the code; this is done in the lesson :ref{to="models-of-computation/coding-sequences"}.
 
-Strings over a finite alphabet $\{a_1, \dots, a_m\}$ are coded by reading them as numerals in base $m$ with digits $1, \dots, m$ (*bijective numeration*): the string $a_{i_1} \cdots a_{i_\ell}$ is coded by $\sum_{j=1}^{\ell} i_j\, m^{\ell - j}$, which defines a bijection between strings and $\nat$, the empty string being coded by $0$. Programs, being strings, are coded the same way. With these codings, a function on finite objects is called computable if the corresponding function on codes is.
+Strings over a finite alphabet $\{a_1, \dots, a_m\}$ are coded by reading them as numerals in base $m$ with digits $1, \dots, m$ (*bijective numeration*): the string $a_{i_1} \cdots a_{i_\ell}$ is coded by $\sum_{j=1}^{\ell} i_j\, m^{\ell - j}$, which defines a bijection between strings and $\nat$, the empty string being coded by $0$.
+
+:::example{#ex-bijective-numeration}
+Over the alphabet $\{a, b\}$ ($m = 2$, with $a$ as digit $1$ and $b$ as digit $2$), the strings in order of their codes are
+$$
+\varepsilon \mapsto 0,\quad a \mapsto 1,\quad b \mapsto 2,\quad aa \mapsto 3,\quad ab \mapsto 4,\quad ba \mapsto 5,\quad bb \mapsto 6,\quad aaa \mapsto 7.
+$$
+The strings are listed by length, and in alphabetical order within each length. The digits start at $1$ rather than $0$ for the same reason as in the next lesson's unary notation: with ordinary base-$m$ numerals and $a$ as digit $0$, the strings $b$, $ab$ and $aab$ would all denote the same number, and the coding would not be injective.
+:::
+
+Programs, being strings, are coded the same way. With these codings, a function on finite objects is called computable if the corresponding function on codes is. Coding finite objects by integers, and operations on them by functions on integers, is the first instance of **arithmetization**, the technique behind Gödel's incompleteness theorem. It returns in the lesson :ref{to="models-of-computation/coding-sequences"}, and in the lesson :ref{to="models-of-computation/equivalence-of-models"}, where computations themselves are coded.
 
 ## Exercises
 
@@ -148,7 +166,7 @@ Strings over a finite alphabet $\{a_1, \dots, a_m\}$ are coded by reading them a
 Show that the function $\nat^2 \to \nat$, $(x, y) \mapsto 2^x (2y + 1) - 1$ is a bijection. Compare it with Cantor's pairing function: which one is more economical, in the sense of the size of $\langle x, x \rangle$ as a function of $x$?
 
 :::solution
-Every integer $z \geq 1$ is uniquely of the form $2^x \cdot m$ with $m$ odd, that is $m = 2y + 1$. So $(x, y) \mapsto 2^x(2y+1)$ is a bijection from $\nat^2$ onto $\nat \setminus \{0\}$, and subtracting $1$ gives a bijection onto $\nat$. On the diagonal, $2^x(2x+1) - 1$ grows exponentially, whereas $\langle x, x \rangle = x(2x+1) + x$ is quadratic. Cantor's pairing is a polynomial bijection; by a theorem of Fueter and Pólya, it is, up to exchanging the coordinates, the only quadratic polynomial bijection from $\nat^2$ to $\nat$.
+Every integer $z \geq 1$ is uniquely of the form $2^x \cdot m$ with $m$ odd, that is $m = 2y + 1$. So $(x, y) \mapsto 2^x(2y+1)$ is a bijection from $\nat^2$ onto $\nat \setminus \{0\}$, and subtracting $1$ gives a bijection onto $\nat$. On the diagonal, $2^x(2x+1) - 1$ grows exponentially, whereas $\langle x, x \rangle = x(2x+1) + x$ is quadratic. Cantor's pairing is a polynomial bijection; by a theorem of Fueter and Pólya, it is, up to exchanging the coordinates, the only quadratic polynomial bijection from $\nat^2$ to $\nat$. Lew and Rosenberg showed that there is no polynomial bijection of degree $3$ or $4$; whether one exists in higher degree is open.
 :::
 ::::
 
@@ -162,8 +180,12 @@ $\langle x, y \rangle = T(x+y) + y$. Since $T(n) \geq n$, we get $\langle x, y \
 
 ## Notes and references
 
-The Entscheidungsproblem is formulated in Hilbert and Ackermann's textbook *Grundzüge der theoretischen Logik* (Springer, 1928). Its negative solution was obtained independently by Church and by Turing in 1936. The quadratic polynomial bijections $\nat^2 \to \nat$ were determined by Fueter and Pólya (1923): up to the exchange of coordinates, Cantor's pairing function is the only one.
+The Entscheidungsproblem is formulated in Hilbert and Ackermann's textbook *Grundzüge der theoretischen Logik* (Springer, 1928). Its negative solution was obtained independently by Church and by Turing in 1936. Soare gives a historical account of the period, from Hilbert's programs to Turing's analysis, and of Gödel's reservations about the first proposed definitions. The quadratic polynomial bijections $\nat^2 \to \nat$ were determined by Fueter and Pólya (1923) with analytic methods: up to the exchange of coordinates, Cantor's pairing function is the only one. Vsemirnov (2001) gave an elementary proof, using only quadratic reciprocity and Dirichlet's theorem on primes in arithmetic progressions; Nathanson's expository article presents it, and states the open question of higher degrees.
 
 - A. Church, *An unsolvable problem of elementary number theory*, American Journal of Mathematics 58 (1936), 345–363.
 - A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society (2) 42 (1936), 230–265.
-- R. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, chapter 1, for a historical account.
+- R. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.1 and Chapter 17 (§§17.1–17.3).
+- R. Fueter, G. Pólya, *Rationale Abzählung der Gitterpunkte*, Vierteljahrsschrift der Naturforschenden Gesellschaft in Zürich 58 (1923), 380–386.
+- J. S. Lew, A. L. Rosenberg, *Polynomial indexing of integer lattice-points. II. Nonexistence results for higher-degree polynomials*, Journal of Number Theory 10 (1978), 215–243.
+- M. A. Vsemirnov, *Two elementary proofs of the Fueter–Pólya theorem on pairing polynomials*, Algebra i Analiz 13 (2001), no. 5, 1–15; English translation in St. Petersburg Mathematical Journal 13 (2002), 705–715.
+- M. B. Nathanson, *Cantor polynomials and the Fueter–Pólya theorem*, American Mathematical Monthly 123 (2016), 1001–1012.

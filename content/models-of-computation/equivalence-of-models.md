@@ -1,8 +1,8 @@
 ---
 title: Equivalence of the models
 summary: Arithmetization of Turing machines, proof of Kleene's normal form theorem, simulation of register machines by Turing machines, and the universal partial recursive function.
-duration: 45
-prerequisites: [while-programs, lambda-definability, programming-turing-machines]
+duration: 50
+prerequisites: [while-programs, lambda-definability, multitape-machines]
 ---
 
 We have met five definitions of computable partial function. Some equivalences are already proved:
@@ -23,6 +23,12 @@ For a partial function $f : \nat^k \rightharpoonup \nat$, the following are equi
 5. $f$ is λ-definable.
 :::
 
+:::figure[The implications proved in this course. The cycle through (1), (4), (3) and (2) is completed in this lesson; the equivalence of (4) and (5) is proved in the lesson on λ-definability.]
+<svg class="fig" viewBox="0 0 660 260" width="660" role="img" aria-label="Implications between the five models of computation"><defs><marker id="ah-eqv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><rect class="node" x="25.0" y="31.0" width="150" height="38" rx="8"/><text x="100" y="55" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(1) Turing machines</text><rect class="node" x="295.0" y="31.0" width="150" height="38" rx="8"/><text x="370" y="55" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(4) partial recursive</text><rect class="node" x="295.0" y="191.0" width="150" height="38" rx="8"/><text x="370" y="215" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(3) WHILE programs</text><rect class="node" x="25.0" y="191.0" width="150" height="38" rx="8"/><text x="100" y="215" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(2) register machines</text><rect class="node" x="520.0" y="31.0" width="120" height="38" rx="8"/><text x="580" y="55" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(5) λ-terms</text><line x1="177.0" y1="50.0" x2="292.0" y2="50.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="235" y="40" text-anchor="middle" class="label">arithmetization</text><line x1="370.0" y1="71.0" x2="370.0" y2="188.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="380" y="134" text-anchor="start" class="label">compilation</text><line x1="293.0" y1="210.0" x2="178.0" y2="210.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="235" y="200" text-anchor="middle" class="label">translation</text><line x1="100.0" y1="189.0" x2="100.0" y2="72.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="90" y="134" text-anchor="end" class="label">simulation</text><line x1="447.0" y1="42.0" x2="517.0" y2="42.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="482" y="32" text-anchor="middle" class="label">definability</text><line x1="518.0" y1="58.0" x2="448.0" y2="58.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="482" y="82" text-anchor="middle" class="label">normal order</text></svg>
+:::
+
+The two new proofs use the two techniques that recur in every comparison of models. A **simulation** represents the data of one model in another, here registers on tapes, and replaces each instruction by a block of instructions. An **arithmetization** codes the configurations of a machine by integers, so that one step of the machine becomes a primitive recursive function on codes; the only part of a computation that is not primitive recursive is the search for the number of steps. This idea, from Gödel's coding of formulas in 1931, gives Kleene's normal form theorem, and through it the universal function on which the course :ref{to="fundamentals/programs-as-numbers"} is built.
+
 ## Arithmetization of Turing machines
 
 Fix a Turing machine $M$. Without loss of generality its states are $0, 1, \dots, m$ with initial state $0$ and halting state $1$, and its alphabet is $\{0, 1, \dots, a\}$, where $0$ stands for the blank $\sqcup$ and $1$ for the symbol $1$. We use the sequence coding $[\ldots]$ of the lesson :ref{to="models-of-computation/coding-sequences"}, with the primitive recursive operations $\mathrm{lh}$, $(s)'_i$, concatenation $*$, and
@@ -33,7 +39,13 @@ Fix a Turing machine $M$. Without loss of generality its states are $0, 1, \dots
 
 These are primitive recursive; for instance $\mathrm{tl}(s) = \prod_{i + 1 < \mathrm{lh}(s)} p_i^{(s)_{i+1}}$.
 
-**Coding configurations.** A configuration $(q, \tau, h)$ is coded by a triple $\langle q, \ell, r \rangle$ where $r$ is the code of the sequence $\tau(h), \tau(h+1), \dots, \tau(h + j)$ and $\ell$ is the code of $\tau(h-1), \tau(h-2), \dots, \tau(h - i)$, for some $i, j$ large enough that all non-blank cells are covered. The left part is stored **in reverse order**, so that the cells adjacent to the head are at the front of both sequences. Several codes represent the same configuration, differing by trailing blanks; this causes no problem, since all functions below treat a missing cell as a blank, via $\mathrm{hd}$.
+**Coding configurations.** A configuration $(q, \tau, h)$ is coded by a triple $\langle q, \ell, r \rangle$ where $r$ is the code of the sequence $\tau(h), \tau(h+1), \dots, \tau(h + j)$ and $\ell$ is the code of $\tau(h-1), \tau(h-2), \dots, \tau(h - i)$, for some $i, j$ large enough that all non-blank cells are covered. The left part is stored **in reverse order**, so that the cells adjacent to the head are at the front of both sequences.
+
+:::figure[A configuration with the head on the cell containing $d$, coded by the sequences $\ell$ and $r$. Both sequences are read from the head outwards, so a move of the head only changes their first entries.]
+<svg class="fig" viewBox="0 0 520 190" width="520" role="img" aria-label="A tape split at the head into a reversed left part and a right part"><defs><marker id="ah-conf" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><text x="46" y="69" class="mrm muted" font-size="18">⋯</text><rect class="cell" x="70" y="40" width="46" height="46" rx="3"/><text x="93.0" y="69" text-anchor="middle" class="math muted" font-size="18">⊔</text><rect class="cell" x="116" y="40" width="46" height="46" rx="3"/><text x="139.0" y="69" text-anchor="middle" class="math" font-size="18">a</text><rect class="cell" x="162" y="40" width="46" height="46" rx="3"/><text x="185.0" y="69" text-anchor="middle" class="math" font-size="18">b</text><rect class="cell" x="208" y="40" width="46" height="46" rx="3"/><text x="231.0" y="69" text-anchor="middle" class="math" font-size="18">c</text><rect class="cell head-cell" x="254" y="40" width="46" height="46" rx="3"/><text x="277.0" y="69" text-anchor="middle" class="math" font-size="18">d</text><rect class="cell" x="300" y="40" width="46" height="46" rx="3"/><text x="323.0" y="69" text-anchor="middle" class="math" font-size="18">e</text><rect class="cell" x="346" y="40" width="46" height="46" rx="3"/><text x="369.0" y="69" text-anchor="middle" class="math" font-size="18">f</text><rect class="cell" x="392" y="40" width="46" height="46" rx="3"/><text x="415.0" y="69" text-anchor="middle" class="math muted" font-size="18">⊔</text><text x="446" y="69" class="mrm muted" font-size="18">⋯</text><path d="M269.0,20 L285.0,20 L277.0,34 z" class="accent-fill"/><text x="277.0" y="14" text-anchor="middle" class="label">head</text><line x1="250.0" y1="116.0" x2="122.0" y2="116.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-conf)"/><text x="185.0" y="146" text-anchor="middle" class="math" font-size="17">ℓ <tspan class="mrm">= [</tspan>c<tspan class="mrm">, </tspan>b<tspan class="mrm">, </tspan>a<tspan class="mrm">]</tspan></text><line x1="258.0" y1="116.0" x2="386.0" y2="116.0" class="accent-stroke" stroke-width="1.4" marker-end="url(#ah-conf)"/><text x="323.0" y="146" text-anchor="middle" class="math" font-size="17">r <tspan class="mrm">= [</tspan>d<tspan class="mrm">, </tspan>e<tspan class="mrm">, </tspan>f<tspan class="mrm">]</tspan></text></svg>
+:::
+
+Several codes represent the same configuration, differing by trailing blanks; this causes no problem, since all functions below treat a missing cell as a blank, via $\mathrm{hd}$.
 
 :::quiz[coding configurations]
 Why is the left part of the tape stored in reverse order?
@@ -142,7 +154,7 @@ Every URM-computable partial function is Turing-computable.
 :::
 
 :::proof{of=prop-urm-tm}
-Let $P = I_1, \dots, I_s$ compute $f : \nat^k \rightharpoonup \nat$, and let $\rho = \max(\rho(P), k)$. We build a multi-tape Turing machine $N$ with $\rho + 1$ tapes, following the conventions of :ref{#def-multitape}: tape $1$ holds the input and output, and tape $n + 1$, for $1 \leq n \leq \rho$, holds the content of $R_n$ in unary, as $\ulcorner R_n \urcorner$ starting at the head position. The index of the current instruction is stored in the finite control of $N$.
+Let $P = I_1, \dots, I_s$ compute $f : \nat^k \rightharpoonup \nat$, and let $\rho = \max(\rho(P), k)$. We build a multi-tape Turing machine $N$ with $\rho + 1$ tapes, following the conventions of :ref{#def-multitape}: tape $1$ holds the input and the output, all heads start on cell $0$, the other tapes are initially blank, and during the simulation tape $n + 1$, for $1 \leq n \leq \rho$, holds the content of $R_n$ in unary, as $\ulcorner R_n \urcorner$ starting at the head position. The index of the current instruction is stored in the finite control of $N$.
 
 1. *Initialization.* $N$ reads the input $\ulcorner x_1 \urcorner \sqcup \cdots \sqcup \ulcorner x_k \urcorner$ on tape $1$ and copies the $n$-th block to tape $n + 1$; the other register tapes receive $\ulcorner 0 \urcorner$.
 2. *Simulation.* For each instruction, $N$ has a group of states:
@@ -221,9 +233,11 @@ Code derivations of unary primitive recursive functions by integers, mapping non
 
 ## Notes and references
 
-Turing sketched in an appendix to his 1936 paper that the λ-definable functions are computable by his machines, and proved the equivalence of the two notions in 1937; Kleene proved the equivalence of λ-definability with general recursiveness in 1936. The predicate $T$ of the normal form theorem is often called *Kleene's $T$-predicate*. The arithmetization of computations given here follows the treatment of register and Turing machines in Cutland's and Odifreddi's textbooks.
+Turing sketched in an appendix to his 1936 paper that the λ-definable functions are computable by his machines, and proved the equivalence of the two notions in 1937; Kleene proved the equivalence of λ-definability with general recursiveness in 1936. The predicate $T$ of the normal form theorem is often called *Kleene's $T$-predicate*. The arithmetization of computations given here follows the treatment of register and Turing machines in Cutland's and Odifreddi's textbooks. Soare (2016, §§1.5.2–1.5.3) codes Turing configurations as finite sequences of symbols and derives the enumeration theorem and the universal machine; Monin and Patey (chapter "Church–Turing thesis", subsection "Computable functions are recursive") arithmetize register machines instead, with a single minimization over the computation time.
 
 - S. C. Kleene, *General recursive functions of natural numbers*, Mathematische Annalen 112 (1936), 727–742.
 - A. M. Turing, *Computability and λ-definability*, Journal of Symbolic Logic 2 (1937), 153–163.
 - N. Cutland, *Computability: An Introduction to Recursive Function Theory*, Cambridge University Press, 1980.
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989, chapter I.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.5.
+- B. Monin, L. Patey, *Computability theory*, chapter "Church–Turing thesis".

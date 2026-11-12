@@ -1,7 +1,7 @@
 ---
 title: Coding finite sequences
 summary: Primitive recursive coding of finite sequences of integers, operations on codes, course-of-values recursion, and Gödel's β-function.
-duration: 35
+duration: 30
 prerequisites: [primitive-recursion]
 ---
 
@@ -20,6 +20,8 @@ $$
 $$
 The empty sequence has code $[\,] = 1$.
 :::
+
+For instance, $[1, 0, 2] = 2^{2} \cdot 3^{1} \cdot 5^{3} = 1500$, and conversely $1500$ is decoded by factoring it: the exponents $2, 1, 3$ of $p_0, p_1, p_2$ give the entries $1, 0, 2$, and the first prime with exponent $0$, here $p_3 = 7$, gives the length $3$.
 
 By the uniqueness of prime factorizations, the coding is injective. The exponents are shifted by one so that a sequence ending with zeros, such as $(5, 0)$, has a different code from $(5)$: indeed $[5] = 2^6$ while $[5, 0] = 2^6 \cdot 3$. The coding is not surjective — $0$, $3$ or $10$ are not codes — but the set of codes is primitive recursive.
 
@@ -73,13 +75,17 @@ Which sequences have codes $12$ and $18$, if any?
 
 ## Course-of-values recursion
 
-Primitive recursion defines $f(\vec x, y + 1)$ from the single previous value $f(\vec x, y)$. Many natural definitions use **all** previous values — the Fibonacci sequence uses two of them, and the definition of the code of a formula uses the codes of all its subformulas. Sequence coding reduces such definitions to primitive recursion.
+Primitive recursion defines $f(\vec x, y + 1)$ from the single previous value $f(\vec x, y)$. Many natural definitions use **all** previous values — the Fibonacci sequence uses two of them, and the definition of the code of a formula uses the codes of all its subformulas. Sequence coding reduces such definitions to primitive recursion: instead of $f$, one computes by primitive recursion the function which returns the code of the whole list of values computed so far, as in the figure below.
 
 :::definition{#def-course-of-values}
 For $f : \nat^{k+1} \to \nat$, its **course-of-values** function is
 $$
 \bar f(\vec x, y) = [f(\vec x, 0), f(\vec x, 1), \dots, f(\vec x, y - 1)].
 $$
+:::
+
+:::figure[Course-of-values recursion, with the parameters $\vec x$ omitted. The values $f(0), \dots, f(y-1)$ are packed into one integer $\bar f(y)$; the function $h$ computes $f(y)$ from it, and the new value is appended to the code, giving $\bar f(y + 1)$. The passage from $\bar f(y)$ to $\bar f(y+1)$ is a primitive recursion.]
+<svg class="fig" viewBox="0 0 560 170" width="560" role="img" aria-label="The values f(0) to f(y-1) are packed into one code, from which h computes f(y), which is appended"><defs><marker id="ah-cov" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><rect x="20" y="50" width="70" height="32" rx="2" class="cell"/><text x="55.0" y="72" text-anchor="middle" font-size="15"><tspan class="math">f</tspan><tspan class="mrm">(0)</tspan></text><rect x="94" y="50" width="70" height="32" rx="2" class="cell"/><text x="129.0" y="72" text-anchor="middle" font-size="15"><tspan class="math">f</tspan><tspan class="mrm">(1)</tspan></text><text x="188" y="72" text-anchor="middle" class="mrm muted" font-size="16">⋯</text><rect x="208" y="50" width="96" height="32" rx="2" class="cell"/><text x="256.0" y="72" text-anchor="middle" font-size="15"><tspan class="math">f</tspan><tspan class="mrm">(</tspan><tspan class="math">y</tspan><tspan class="mrm"> − 1)</tspan></text><rect x="314" y="50" width="70" height="32" rx="2" class="cell head-cell"/><text x="349" y="72" text-anchor="middle" font-size="15"><tspan class="math">f</tspan><tspan class="mrm">(</tspan><tspan class="math">y</tspan><tspan class="mrm">)</tspan></text><path d="M20,42 L20,36 L304,36 L304,42" class="accent-stroke" fill="none" stroke-width="1.3"/><text x="164.0" y="28" text-anchor="middle" class="label">one integer: the code of all previous values</text><rect x="190" y="112" width="120" height="32" rx="8" class="soft-fill accent-stroke" stroke-width="1.3"/><text x="250" y="134" text-anchor="middle" font-size="15"><tspan class="math">h</tspan><tspan class="mrm">(</tspan><tspan class="math">y</tspan><tspan class="mrm">, ·)</tspan></text><path d="M164.0,86 L230,108" class="ink-stroke" fill="none" stroke-width="1.3" marker-end="url(#ah-cov)"/><path d="M312,128 C338,132 349,112 349,88" class="ink-stroke" fill="none" stroke-width="1.3" marker-end="url(#ah-cov)"/><text x="392" y="64" class="label">appended to</text><text x="392" y="80" class="label">the code</text></svg>
 :::
 
 :::theorem[Course-of-values recursion]{#thm-course-of-values}
@@ -117,7 +123,7 @@ As an example, the Fibonacci sequence satisfies $\mathrm{fib}(y) = h(y, \overlin
 
 ## Gödel's β-function
 
-The prime power coding uses exponentiation. In the proof of the incompleteness theorems, Gödel needed to code sequences using only addition and multiplication, because these are the only operations of the language of arithmetic. His solution relies on the Chinese remainder theorem.
+The prime power coding uses exponentiation. In the proof of the incompleteness theorems, Gödel needed to code sequences using only addition and multiplication, because these are the only operations of the language of arithmetic. His solution relies on the Chinese remainder theorem: a sequence $a_0, \dots, a_{n-1}$ is stored as the remainders of a single number $c$ modulo $n$ pairwise coprime moduli, each larger than the corresponding $a_i$. The moduli themselves must be described by a single parameter $d$, and the moduli $1 + (i + 1) d$ are pairwise coprime for a suitable $d$.
 
 :::definition{#def-beta}
 **Gödel's β-function** is $\beta(c, d, i) = c \bmod \big(1 + (i + 1) d\big)$.
@@ -131,6 +137,10 @@ For every finite sequence $a_0, \dots, a_{n-1}$ of integers there exist $c, d$ s
 Let $m = \max(n, a_0, \dots, a_{n-1})$ and $d = m!$. We claim that the moduli $u_i = 1 + (i+1)d$, for $i < n$, are pairwise coprime. Suppose that a prime $q$ divides $u_i$ and $u_j$ with $i < j < n$. Then $q$ divides $u_j - u_i = (j - i) d$, so $q$ divides $j - i$ or $d$. Since $1 \leq j - i \leq n \leq m$, the integer $j - i$ divides $m! = d$; in both cases $q$ divides $d$. But then $q$ divides $u_i - (i+1)d = 1$, which is absurd.
 
 By the Chinese remainder theorem there is $c$ such that $c \equiv a_i \pmod{u_i}$ for all $i < n$. Since $a_i \leq m \leq d < u_i$, the remainder of $c$ modulo $u_i$ is exactly $a_i$, that is $\beta(c, d, i) = a_i$.
+:::
+
+:::example{#ex-beta}
+For the sequence $(2, 0, 1)$, the proof takes $m = 3$ and $d = 3! = 6$, hence the moduli $u_0 = 7$, $u_1 = 13$, $u_2 = 19$. The least $c$ with $c \equiv 2 \pmod 7$, $c \equiv 0 \pmod{13}$ and $c \equiv 1 \pmod{19}$ is $c = 1521 = 13 \cdot 117$; indeed $1521 = 7 \cdot 217 + 2 = 19 \cdot 80 + 1$. So $\beta(1521, 6, i)$ equals $2, 0, 1$ for $i = 0, 1, 2$. The factorial is a convenient choice, not always the smallest one: here $d = 1$ fails, since the remainder modulo $u_0 = 2$ cannot be $2$, but $d = 2$, with the pairwise coprime moduli $3, 5, 7$, works.
 :::
 
 :::quiz[the β-function lemma]
@@ -191,7 +201,9 @@ By induction on $z$: $z = 0$ codes only the empty sequence, and $z \geq 1$ codes
 
 ## Notes and references
 
-The β-function lemma appears in Gödel's incompleteness paper of 1931, where it is used to express definitions by recursion in the language of arithmetic. Coding finite sequences by prime powers is also due to Gödel. Course-of-values recursion is treated in detail in Péter's monograph.
+The β-function lemma appears in Gödel's incompleteness paper of 1931, where it is used to express definitions by recursion in the language of arithmetic. Coding finite sequences by prime powers is also due to Gödel, and was used by Kleene to number derivations and computations (Soare, §17.2.2). Course-of-values recursion is treated in detail in Péter's monograph.
 
+- R. Péter, *Rekursive Funktionen*, Akadémiai Kiadó, 1951.
+- R. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §17.2.2.
 - K. Gödel, *Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I*, Monatshefte für Mathematik und Physik 38 (1931), 173–198.
 - S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952.

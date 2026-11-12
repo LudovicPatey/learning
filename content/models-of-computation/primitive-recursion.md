@@ -1,7 +1,7 @@
 ---
 title: Primitive recursive functions
 summary: Definition of the primitive recursive functions and predicates, and their closure under definition by cases, bounded sums and products, bounded quantification and bounded minimization.
-duration: 45
+duration: 35
 prerequisites: [what-is-an-algorithm]
 ---
 
@@ -29,7 +29,7 @@ $$
 For $k = 0$, the scheme reads $f(0) = a$ and $f(y + 1) = h(y, f(y))$, for a constant $a \in \nat$.
 :::
 
-By induction on $y$, the equations of the recursion scheme define a unique total function $f$.
+By induction on $y$, the equations of the recursion scheme define a unique total function $f$. In programming terms, primitive recursion is a `for` loop: to compute $f(\vec x, y)$, start from $g(\vec x)$ and apply $h$ exactly $y$ times, the number of iterations being known before the loop starts. Two features of the scheme matter below: the recursion is on **one** argument, and the parameters $\vec x$ stay **fixed** along the recursion.
 
 :::definition{#def-primitive-recursive}
 The class of **primitive recursive** functions is the smallest class of functions $\nat^k \to \nat$ ($k \geq 1$) containing the basic functions and closed under composition and primitive recursion.
@@ -42,7 +42,7 @@ Every primitive recursive function is total and computable.
 :::
 
 :::proof{of=prop-pr-total-computable}
-By induction on derivations. Basic functions are total and computable. If $g_1, \dots, g_m$ and $h$ are, so is their composition: compute the values $g_i(\vec x)$, then $h$ on them. If $g$ and $h$ are, then $f(\vec x, y)$ is computed by the loop: $v \leftarrow g(\vec x)$; for $z = 0, \dots, y - 1$, $v \leftarrow h(\vec x, z, v)$; return $v$. This loop is executed exactly $y$ times, so it terminates.
+By **induction on derivations**: we show that the property holds for the basic functions and is preserved by the two schemes. This technique is used for every general statement about the primitive recursive functions in this course: the majorization theorem of the lesson :ref{to="models-of-computation/ackermann-function"}, the translation into LOOP programs of the lesson :ref{to="models-of-computation/loop-programs"}, and the λ-definability theorem. Basic functions are total and computable. If $g_1, \dots, g_m$ and $h$ are, so is their composition: compute the values $g_i(\vec x)$, then $h$ on them. If $g$ and $h$ are, then $f(\vec x, y)$ is computed by the loop: $v \leftarrow g(\vec x)$; for $z = 0, \dots, y - 1$, $v \leftarrow h(\vec x, z, v)$; return $v$. This loop is executed exactly $y$ times, so it terminates.
 :::
 
 Derivations are finite objects, so there are countably many primitive recursive functions, and their derivations can be effectively listed. This remark is the starting point of the proof, in the lesson :ref{to="models-of-computation/ackermann-function"}, that not every total computable function is primitive recursive.
@@ -70,6 +70,8 @@ From now on we write definitions informally, as systems of equations, and leave 
 - **sign functions:** $\mathrm{sg}(x) = 1 \dotminus (1 \dotminus x)$, equal to $0$ if $x = 0$ and $1$ otherwise, and $\overline{\mathrm{sg}}(x) = 1 \dotminus x$.
 - **distance:** $|x - y| = (x \dotminus y) + (y \dotminus x)$; also $\min(x, y) = x \dotminus (x \dotminus y)$ and $\max(x, y) = x + (y \dotminus x)$.
 
+Each of these definitions abbreviates a derivation. For instance, truncated subtraction is a recursion on $y$ with $g = p^1_1$ and $h = \mathrm{pred} \circ p^3_3$, and $\mathrm{pred}$ is itself a recursion with $k = 0$, $a = 0$ and $h = p^2_1$. Writing all the details once is instructive; the figure after the following quiz does it for multiplication.
+
 :::quiz[the recursion scheme]
 Multiplication is defined by $x \cdot 0 = 0$ and $x \cdot (y + 1) = x \cdot y + x$. Which function $h$ is used in the recursion scheme?
 
@@ -92,6 +94,10 @@ Which identity defines truncated subtraction from the predecessor?
 - [ ] $(x + 1) \dotminus y = S(x \dotminus y)$
 
   False for $x < y$; moreover the recursion is on the wrong variable.
+:::
+
+:::figure[A derivation of multiplication, drawn as a tree: each node is obtained from its children by the scheme written next to it, and the leaves are basic functions. Here $x \cdot y$ is the recursion with $g = Z$ and $h = {+} \circ (p^3_3, p^3_1)$, that is $h(x, y, z) = z + x$, and $x + y$ is the recursion with $g = p^1_1$ and $h = S \circ p^3_3$.]
+<svg class="fig" viewBox="0 0 600 395" width="600" role="img" aria-label="Derivation tree of multiplication: each node is obtained from its children by composition or primitive recursion"><line x1="290" y1="50" x2="170" y2="100" class="muted-stroke" stroke-width="1.3"/><line x1="290" y1="50" x2="400" y2="100" class="muted-stroke" stroke-width="1.3"/><line x1="400" y1="130" x2="260" y2="180" class="muted-stroke" stroke-width="1.3"/><line x1="400" y1="130" x2="420" y2="180" class="muted-stroke" stroke-width="1.3"/><line x1="400" y1="130" x2="520" y2="180" class="muted-stroke" stroke-width="1.3"/><line x1="260" y1="210" x2="180" y2="260" class="muted-stroke" stroke-width="1.3"/><line x1="260" y1="210" x2="340" y2="260" class="muted-stroke" stroke-width="1.3"/><line x1="340" y1="290" x2="290" y2="340" class="muted-stroke" stroke-width="1.3"/><line x1="340" y1="290" x2="390" y2="340" class="muted-stroke" stroke-width="1.3"/><rect x="248" y="20" width="84" height="30" rx="6" class="soft-fill accent-stroke" stroke-width="1.2"/><text x="290" y="41" text-anchor="middle" font-size="16"><tspan class="math">x</tspan><tspan class="mrm"> · </tspan><tspan class="math">y</tspan></text><text x="338" y="40" text-anchor="start" class="label">primitive recursion</text><rect x="128" y="100" width="84" height="30" rx="6" class="cell" stroke-width="1.2"/><text x="170" y="121" text-anchor="middle" font-size="16"><tspan class="math">Z</tspan></text><rect x="358" y="100" width="84" height="30" rx="6" class="soft-fill accent-stroke" stroke-width="1.2"/><text x="400" y="121" text-anchor="middle" font-size="16"><tspan class="math">z</tspan><tspan class="mrm"> + </tspan><tspan class="math">x</tspan></text><text x="448" y="120" text-anchor="start" class="label">composition</text><rect x="218" y="180" width="84" height="30" rx="6" class="soft-fill accent-stroke" stroke-width="1.2"/><text x="260" y="201" text-anchor="middle" font-size="16"><tspan class="math">x</tspan><tspan class="mrm"> + </tspan><tspan class="math">y</tspan></text><text x="212" y="200" text-anchor="end" class="label">primitive recursion</text><rect x="378" y="180" width="84" height="30" rx="6" class="cell" stroke-width="1.2"/><text x="420" y="201" text-anchor="middle" font-size="16"><tspan class="math">p</tspan><tspan class="mrm" font-size="10" dy="-7">3</tspan><tspan class="mrm" font-size="10" dx="-5.5" dy="11">3</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect x="478" y="180" width="84" height="30" rx="6" class="cell" stroke-width="1.2"/><text x="520" y="201" text-anchor="middle" font-size="16"><tspan class="math">p</tspan><tspan class="mrm" font-size="10" dy="-7">3</tspan><tspan class="mrm" font-size="10" dx="-5.5" dy="11">1</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect x="138" y="260" width="84" height="30" rx="6" class="cell" stroke-width="1.2"/><text x="180" y="281" text-anchor="middle" font-size="16"><tspan class="math">p</tspan><tspan class="mrm" font-size="10" dy="-7">1</tspan><tspan class="mrm" font-size="10" dx="-5.5" dy="11">1</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect x="298" y="260" width="84" height="30" rx="6" class="soft-fill accent-stroke" stroke-width="1.2"/><text x="340" y="281" text-anchor="middle" font-size="16"><tspan class="math">S</tspan><tspan class="mrm"> ∘ </tspan><tspan class="math">p</tspan><tspan class="mrm" font-size="10" dy="-7">3</tspan><tspan class="mrm" font-size="10" dx="-5.5" dy="11">3</tspan><tspan class="mrm" dy="-4"> </tspan></text><text x="388" y="280" text-anchor="start" class="label">composition</text><rect x="248" y="340" width="84" height="30" rx="6" class="cell" stroke-width="1.2"/><text x="290" y="361" text-anchor="middle" font-size="16"><tspan class="math">S</tspan></text><rect x="348" y="340" width="84" height="30" rx="6" class="cell" stroke-width="1.2"/><text x="390" y="361" text-anchor="middle" font-size="16"><tspan class="math">p</tspan><tspan class="mrm" font-size="10" dy="-7">3</tspan><tspan class="mrm" font-size="10" dx="-5.5" dy="11">3</tspan><tspan class="mrm" dy="-4"> </tspan></text></svg>
 :::
 
 ## Predicates
@@ -274,8 +280,11 @@ If $f$ is strictly increasing, then $f(z) \geq z$, so $y \in \operatorname{im} f
 
 ## Notes and references
 
-Definitions by recursion go back to Dedekind (1888) and Skolem (1923). Gödel used the primitive recursive functions — he called them *recursive* — to arithmetize syntax in his incompleteness theorem; the modern name is due to Kleene. Rózsa Péter's monograph is the classical reference on the subject.
+Definitions by recursion go back to Dedekind (1888) and Skolem (1923). Gödel used the primitive recursive functions — he called them *recursive* — to arithmetize syntax in his incompleteness theorem; the modern name is due to Kleene (1936), whose presentation of the schemes has become standard. Soare gives a short history (§§17.2.1–17.2.2), and Downey and Hirschfeldt a summary (§2.8). Rózsa Péter's monograph is the classical reference on the subject.
 
+- S. C. Kleene, *General recursive functions of natural numbers*, Mathematische Annalen 112 (1936), 727–742.
+- R. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §§17.2.1–17.2.3.
+- R. Downey, D. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.8.
 - K. Gödel, *Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I*, Monatshefte für Mathematik und Physik 38 (1931), 173–198.
 - R. Péter, *Rekursive Funktionen*, Akadémiai Kiadó, 1951.
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989, chapter I.

@@ -1,11 +1,11 @@
 ---
 title: Programming Turing machines
-summary: Auxiliary symbols, sequential composition of machines, translation invariance, multi-tape machines and their simulation by single-tape machines.
-duration: 40
+summary: Auxiliary symbols used as markers, translation invariance, and the sequential composition of machines.
+duration: 30
 prerequisites: [turing-machines]
 ---
 
-Writing Turing machines directly is laborious, but a few techniques make it systematic. This lesson presents them and proves that several natural extensions of the model compute no new functions.
+Writing Turing machines directly is laborious, but a few techniques make it systematic: auxiliary symbols used as markers, the observation that a machine only depends on relative positions, and the composition of machines. This lesson presents them on examples; the next one uses them to show that richer models of machines compute no new functions.
 
 ## Auxiliary symbols: a doubling machine
 
@@ -24,12 +24,16 @@ The machine works in two phases. In the first phase, it repeatedly replaces the 
 
 Entries marked — are never used; to make $\delta$ total, set them to $(q_h, \sqcup, R)$, say.
 
+:::figure[The doubling machine on input $2$ ($n = 3$): the tape at the beginning of each round $j$, in state $q_0$ with the head on cell $j$, and the final configuration. The invariant of the proof below is the tape $X^j 1^{n-j} Y^j$.]
+<svg class="fig" viewBox="0 0 400 244" width="400" role="img" aria-label="Tape of the doubling machine at the start of each round, and at the end"><text x="138.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">0</text><text x="174.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">1</text><text x="210.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">2</text><text x="246.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">3</text><text x="282.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">4</text><text x="318.0" y="24" text-anchor="middle" class="mrm muted" font-size="13">5</text><text x="20" y="57.0" text-anchor="start" font-size="15"><tspan class="math">j</tspan><tspan class="mrm"> = 0</tspan></text><text x="88" y="57.0" text-anchor="middle" font-size="16"><tspan class="math">q</tspan><tspan class="mrm" font-size="10" dy="4">0</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect class="cell head-cell" x="120" y="36" width="36" height="32" rx="2"/><text x="138.0" y="58.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="156" y="36" width="36" height="32" rx="2"/><text x="174.0" y="58.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="192" y="36" width="36" height="32" rx="2"/><text x="210.0" y="58.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="228" y="36" width="36" height="32" rx="2"/><text x="246.0" y="58.0" text-anchor="middle" class="mrm muted" font-size="16">⊔</text><rect class="cell" x="264" y="36" width="36" height="32" rx="2"/><text x="282.0" y="58.0" text-anchor="middle" class="mrm muted" font-size="16">⊔</text><rect class="cell" x="300" y="36" width="36" height="32" rx="2"/><text x="318.0" y="58.0" text-anchor="middle" class="mrm muted" font-size="16">⊔</text><text x="20" y="97.0" text-anchor="start" font-size="15"><tspan class="math">j</tspan><tspan class="mrm"> = 1</tspan></text><text x="88" y="97.0" text-anchor="middle" font-size="16"><tspan class="math">q</tspan><tspan class="mrm" font-size="10" dy="4">0</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect class="cell" x="120" y="76" width="36" height="32" rx="2"/><text x="138.0" y="98.0" text-anchor="middle" class="mrm" font-size="16">X</text><rect class="cell head-cell" x="156" y="76" width="36" height="32" rx="2"/><text x="174.0" y="98.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="192" y="76" width="36" height="32" rx="2"/><text x="210.0" y="98.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="228" y="76" width="36" height="32" rx="2"/><text x="246.0" y="98.0" text-anchor="middle" class="mrm" font-size="16">Y</text><rect class="cell" x="264" y="76" width="36" height="32" rx="2"/><text x="282.0" y="98.0" text-anchor="middle" class="mrm muted" font-size="16">⊔</text><rect class="cell" x="300" y="76" width="36" height="32" rx="2"/><text x="318.0" y="98.0" text-anchor="middle" class="mrm muted" font-size="16">⊔</text><text x="20" y="137.0" text-anchor="start" font-size="15"><tspan class="math">j</tspan><tspan class="mrm"> = 2</tspan></text><text x="88" y="137.0" text-anchor="middle" font-size="16"><tspan class="math">q</tspan><tspan class="mrm" font-size="10" dy="4">0</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect class="cell" x="120" y="116" width="36" height="32" rx="2"/><text x="138.0" y="138.0" text-anchor="middle" class="mrm" font-size="16">X</text><rect class="cell" x="156" y="116" width="36" height="32" rx="2"/><text x="174.0" y="138.0" text-anchor="middle" class="mrm" font-size="16">X</text><rect class="cell head-cell" x="192" y="116" width="36" height="32" rx="2"/><text x="210.0" y="138.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="228" y="116" width="36" height="32" rx="2"/><text x="246.0" y="138.0" text-anchor="middle" class="mrm" font-size="16">Y</text><rect class="cell" x="264" y="116" width="36" height="32" rx="2"/><text x="282.0" y="138.0" text-anchor="middle" class="mrm" font-size="16">Y</text><rect class="cell" x="300" y="116" width="36" height="32" rx="2"/><text x="318.0" y="138.0" text-anchor="middle" class="mrm muted" font-size="16">⊔</text><text x="20" y="177.0" text-anchor="start" font-size="15"><tspan class="math">j</tspan><tspan class="mrm"> = 3</tspan></text><text x="88" y="177.0" text-anchor="middle" font-size="16"><tspan class="math">q</tspan><tspan class="mrm" font-size="10" dy="4">0</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect class="cell" x="120" y="156" width="36" height="32" rx="2"/><text x="138.0" y="178.0" text-anchor="middle" class="mrm" font-size="16">X</text><rect class="cell" x="156" y="156" width="36" height="32" rx="2"/><text x="174.0" y="178.0" text-anchor="middle" class="mrm" font-size="16">X</text><rect class="cell" x="192" y="156" width="36" height="32" rx="2"/><text x="210.0" y="178.0" text-anchor="middle" class="mrm" font-size="16">X</text><rect class="cell head-cell" x="228" y="156" width="36" height="32" rx="2"/><text x="246.0" y="178.0" text-anchor="middle" class="mrm" font-size="16">Y</text><rect class="cell" x="264" y="156" width="36" height="32" rx="2"/><text x="282.0" y="178.0" text-anchor="middle" class="mrm" font-size="16">Y</text><rect class="cell" x="300" y="156" width="36" height="32" rx="2"/><text x="318.0" y="178.0" text-anchor="middle" class="mrm" font-size="16">Y</text><line x1="20" y1="191" x2="396" y2="191" class="axis"/><text x="20" y="217.0" class="label">halt</text><text x="88" y="217.0" text-anchor="middle" font-size="16"><tspan class="math">q</tspan><tspan class="mrm" font-size="10" dy="4">h</tspan><tspan class="mrm" dy="-4"> </tspan></text><rect class="cell head-cell" x="120" y="196" width="36" height="32" rx="2"/><text x="138.0" y="218.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="156" y="196" width="36" height="32" rx="2"/><text x="174.0" y="218.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="192" y="196" width="36" height="32" rx="2"/><text x="210.0" y="218.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="228" y="196" width="36" height="32" rx="2"/><text x="246.0" y="218.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="264" y="196" width="36" height="32" rx="2"/><text x="282.0" y="218.0" text-anchor="middle" class="mrm" font-size="16">1</text><rect class="cell" x="300" y="196" width="36" height="32" rx="2"/><text x="318.0" y="218.0" text-anchor="middle" class="mrm muted" font-size="16">⊔</text></svg>
+:::
+
 :::proposition{#prop-tm-doubling}
 This machine computes $x \mapsto 2x$.
 :::
 
 :::proof{of=prop-tm-doubling}
-Let $n = x + 1$. We show by induction on $j \in \{0, \dots, n\}$ that the machine reaches the configuration in state $q_0$ with tape $X^j 1^{n-j} Y^j$ written from cell $0$ and the head on cell $j$. For $j = 0$ this is the initial configuration. Suppose it holds for some $j < n$. Cell $j$ contains $1$: the machine writes $X$ and enters $q_1$, which moves right across $1^{n-j-1} Y^j$ to the first blank, at cell $n + j$, writes $Y$ there, and enters $q_2$. In state $q_2$ the head moves left across $Y$s and $1$s until it reaches the $X$ on cell $j$, and enters $q_0$ on cell $j + 1$. The tape is now $X^{j+1} 1^{n-j-1} Y^{j+1}$, as required.
+The proof follows the method of the previous lesson: state an **invariant**, a description of the configuration at the beginning of each round, and check by induction on the rounds that it is preserved. Let $n = x + 1$. We show by induction on $j \in \{0, \dots, n\}$ that the machine reaches the configuration in state $q_0$ with tape $X^j 1^{n-j} Y^j$ written from cell $0$ and the head on cell $j$. For $j = 0$ this is the initial configuration. Suppose it holds for some $j < n$. Cell $j$ contains $1$: the machine writes $X$ and enters $q_1$, which moves right across $1^{n-j-1} Y^j$ to the first blank, at cell $n + j$, writes $Y$ there, and enters $q_2$. In state $q_2$ the head moves left across $Y$s and $1$s until it reaches the $X$ on cell $j$, and enters $q_0$ on cell $j + 1$. The tape is now $X^{j+1} 1^{n-j-1} Y^{j+1}$, as required.
 
 For $j = n$, the tape is $X^n Y^n$ and the head scans the first $Y$, on cell $n$, in state $q_0$. The machine writes $1$ and enters $q_3$, which turns the remaining $Y$s into $1$s and reaches the blank on cell $2n$. It then erases cell $2n - 1$, which contains $1$, and enters $q_5$ on cell $2n - 2$. Note that $2n - 2 \geq 0$. State $q_5$ moves left, turning $1$s and $X$s into $1$s, down to cell $-1$, and halts on cell $0$. The final tape is $1^{2n - 1}$ on cells $0, \dots, 2n - 2$, that is $\ulcorner 2x \urcorner$.
 :::
@@ -64,7 +68,7 @@ How many steps does the first phase take, as a function of $n = x + 1$?
 
 ## Translation invariance
 
-The behavior of a machine depends only on the relative position of the head and the symbols. Formally, for a tape $\tau$ and $d \in \mathbb{Z}$, let $\tau^{+d}$ be the translated tape $\tau^{+d}(i) = \tau(i - d)$.
+The behavior of a machine depends only on the relative position of the head and the symbols. This is needed as soon as machines are combined: a machine which halts leaves its output wherever its head happens to be, and the next machine must be able to start from there as if from cell $0$. Formally, for a tape $\tau$ and $d \in \mathbb{Z}$, let $\tau^{+d}$ be the translated tape $\tau^{+d}(i) = \tau(i - d)$.
 
 :::lemma{#lem-tm-translation}
 If $(q, \tau, h) \vdash (q', \tau', h')$, then $(q, \tau^{+d}, h + d) \vdash (q', \tau'^{+d}, h' + d)$ for every $d \in \mathbb{Z}$. Consequently, the computation from a translated configuration is the translation of the original computation, and halts after the same number of steps.
@@ -76,7 +80,7 @@ The symbol scanned in the translated configuration is $\tau^{+d}(h + d) = \tau(h
 
 ## Sequential composition
 
-The standard final configuration of a machine is, up to translation, an initial configuration on the output. This allows us to run machines one after the other.
+The standard final configuration of a machine is, up to translation, an initial configuration on the output. This allows us to run machines one after the other: the only change needed is to replace the halting state of the first machine by the initial state of the second.
 
 :::proposition{#prop-tm-composition}
 Let $M$ and $N$ be Turing machines computing $f : \nat \rightharpoonup \nat$ and $g : \nat \rightharpoonup \nat$. There is a Turing machine $M ; N$ computing $g \circ f$.
@@ -116,73 +120,6 @@ In the proof of :ref{#prop-tm-composition}, what is :ref{#lem-tm-translation} us
   Renaming states is a syntactic operation; it has nothing to do with tapes.
 :::
 
-## Multi-tape machines
-
-A natural extension gives the machine several tapes, each with its own head.
-
-:::definition{#def-multitape}
-A **$k$-tape Turing machine** is defined as in :ref{#def-turing-machine}, except that the transition function has the form
-$$
-\delta : (Q \setminus \{q_h\}) \times \Gamma^k \to Q \times \Gamma^k \times \{L, S, R\}^k,
-$$
-where $S$ means that the head stays in place. A configuration consists of a state, $k$ tapes and $k$ head positions. By convention all heads start on cell $0$, the input is written on tape $1$ as in :ref{#def-tm-computes}, the other tapes are initially blank, and the output is read on tape $1$: the machine computes $y$ if it halts with tape $1$ and head $1$ in a standard final configuration with output $y$, whatever the contents of the other tapes.
-:::
-
-Multi-tape machines are much easier to program. For instance, a $2$-tape machine can copy its input to tape $2$ in a single left-to-right pass.
-
-:::figure[The simulation of a $3$-tape machine: each cell of the single tape stores one cell of every tape, together with a mark telling whether the corresponding head is there.]
-<svg class="fig" viewBox="0 0 600 205" width="600" role="img" aria-label="Three tapes encoded as three tracks of one tape"><defs><marker id="ah-tracks" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><text x="8" y="54" class="label">tape 1</text><rect x="60" y="34" width="30" height="30" rx="2" class="cell"/><text x="75.0" y="54" text-anchor="middle" class="mrm" font-size="15">a</text><rect x="90" y="34" width="30" height="30" rx="2" class="cell"/><text x="105.0" y="54" text-anchor="middle" class="mrm" font-size="15">b</text><rect x="120" y="34" width="30" height="30" rx="2" class="cell head-cell"/><text x="135.0" y="54" text-anchor="middle" class="mrm" font-size="15">b</text><rect x="150" y="34" width="30" height="30" rx="2" class="cell"/><text x="165.0" y="54" text-anchor="middle" class="mrm" font-size="15">a</text><rect x="180" y="34" width="30" height="30" rx="2" class="cell"/><text x="195.0" y="54" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="210" y="34" width="30" height="30" rx="2" class="cell"/><text x="225.0" y="54" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><path d="M129.0,21 L141.0,21 L135.0,31 z" class="accent-fill"/><text x="8" y="110" class="label">tape 2</text><rect x="60" y="90" width="30" height="30" rx="2" class="cell"/><text x="75.0" y="110" text-anchor="middle" class="mrm" font-size="15">1</text><rect x="90" y="90" width="30" height="30" rx="2" class="cell head-cell"/><text x="105.0" y="110" text-anchor="middle" class="mrm" font-size="15">1</text><rect x="120" y="90" width="30" height="30" rx="2" class="cell"/><text x="135.0" y="110" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="150" y="90" width="30" height="30" rx="2" class="cell"/><text x="165.0" y="110" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="180" y="90" width="30" height="30" rx="2" class="cell"/><text x="195.0" y="110" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="210" y="90" width="30" height="30" rx="2" class="cell"/><text x="225.0" y="110" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><path d="M99.0,77 L111.0,77 L105.0,87 z" class="accent-fill"/><text x="8" y="166" class="label">tape 3</text><rect x="60" y="146" width="30" height="30" rx="2" class="cell"/><text x="75.0" y="166" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="90" y="146" width="30" height="30" rx="2" class="cell"/><text x="105.0" y="166" text-anchor="middle" class="mrm" font-size="15">c</text><rect x="120" y="146" width="30" height="30" rx="2" class="cell"/><text x="135.0" y="166" text-anchor="middle" class="mrm" font-size="15">c</text><rect x="150" y="146" width="30" height="30" rx="2" class="cell"/><text x="165.0" y="166" text-anchor="middle" class="mrm" font-size="15">c</text><rect x="180" y="146" width="30" height="30" rx="2" class="cell head-cell"/><text x="195.0" y="166" text-anchor="middle" class="mrm" font-size="15">c</text><rect x="210" y="146" width="30" height="30" rx="2" class="cell"/><text x="225.0" y="166" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><path d="M189.0,133 L201.0,133 L195.0,143 z" class="accent-fill"/><line x1="255" y1="104" x2="315" y2="104" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-tracks)"/><text x="335" y="22" class="label">one tape, three tracks</text><rect x="335" y="34" width="44" height="34" class="cell"/><text x="357.0" y="56" text-anchor="middle" class="mrm" font-size="15">a</text><rect x="335" y="68" width="44" height="34" class="cell"/><text x="357.0" y="90" text-anchor="middle" class="mrm" font-size="15">1</text><rect x="335" y="102" width="44" height="34" class="cell"/><text x="357.0" y="124" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="335" y="34" width="44" height="102" class="track-outline"/><rect x="379" y="34" width="44" height="34" class="cell"/><text x="401.0" y="56" text-anchor="middle" class="mrm" font-size="15">b</text><rect x="379" y="68" width="44" height="34" class="cell head-cell"/><text x="401.0" y="90" text-anchor="middle" class="mrm" font-size="15">1</text><rect x="379" y="102" width="44" height="34" class="cell"/><text x="401.0" y="124" text-anchor="middle" class="mrm" font-size="15">c</text><rect x="379" y="34" width="44" height="102" class="track-outline"/><rect x="423" y="34" width="44" height="34" class="cell head-cell"/><text x="445.0" y="56" text-anchor="middle" class="mrm" font-size="15">b</text><rect x="423" y="68" width="44" height="34" class="cell"/><text x="445.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="423" y="102" width="44" height="34" class="cell"/><text x="445.0" y="124" text-anchor="middle" class="mrm" font-size="15">c</text><rect x="423" y="34" width="44" height="102" class="track-outline"/><rect x="467" y="34" width="44" height="34" class="cell"/><text x="489.0" y="56" text-anchor="middle" class="mrm" font-size="15">a</text><rect x="467" y="68" width="44" height="34" class="cell"/><text x="489.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="467" y="102" width="44" height="34" class="cell"/><text x="489.0" y="124" text-anchor="middle" class="mrm" font-size="15">c</text><rect x="467" y="34" width="44" height="102" class="track-outline"/><rect x="511" y="34" width="44" height="34" class="cell"/><text x="533.0" y="56" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="511" y="68" width="44" height="34" class="cell"/><text x="533.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="511" y="102" width="44" height="34" class="cell head-cell"/><text x="533.0" y="124" text-anchor="middle" class="mrm" font-size="15">c</text><rect x="511" y="34" width="44" height="102" class="track-outline"/><rect x="555" y="34" width="44" height="34" class="cell"/><text x="577.0" y="56" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="555" y="68" width="44" height="34" class="cell"/><text x="577.0" y="90" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="555" y="102" width="44" height="34" class="cell"/><text x="577.0" y="124" text-anchor="middle" class="mrm muted" font-size="15">⊔</text><rect x="555" y="34" width="44" height="102" class="track-outline"/><text x="335" y="160" class="label">a shaded cell carries the head mark of its track</text></svg>
-:::
-
-:::theorem{#thm-multitape-simulation}
-Every partial function computed by a $k$-tape Turing machine is computed by a $1$-tape Turing machine.
-:::
-
-:::proof{of=thm-multitape-simulation}
-Let $M$ be a $k$-tape machine with alphabet $\Gamma$. The idea is to store the $k$ tapes on $k$ **tracks** of a single tape. Let the new alphabet be $\Gamma \cup (\Gamma \times \{0, 1\})^k$: a cell of the simulating machine $N$ contains either a symbol of $\Gamma$, or a $k$-tuple of pairs $(a_i, m_i)$ where $a_i$ is the content of the corresponding cell of tape $i$ and $m_i = 1$ indicates that the head of tape $i$ is at this cell. This alphabet is finite.
-
-$N$ first converts cell $0$ into this format: it replaces the symbol $a$ there by $((a, 1), (\sqcup, 1), \dots, (\sqcup, 1))$, since all heads of $M$ start on cell $0$. Then $N$ simulates each step of $M$ as follows. The state of $M$ is stored in the state of $N$. $N$ sweeps over the zone of the tape visited so far, from left to right, and collects in its state the symbols under the $k$ marked heads; there are finitely many possibilities, so they can be stored in the state. Knowing the state of $M$ and the scanned symbols, $N$ determines the transition of $M$. It then sweeps back from right to left, updating the symbol under each marked head and moving each mark by one cell according to the transition. When a mark must move onto a cell containing a plain symbol $a$ of $\Gamma$ — a cell that no head has visited yet — $N$ first replaces it by $((a, 0), (\sqcup, 0), \dots, (\sqcup, 0))$; this is the correct content, since an unvisited cell of tape $1$ still holds its input symbol and an unvisited cell of another tape is blank. Since all heads start on cell $0$ and move by one cell at a time, the converted cells always form an interval containing $0$, bordered by plain symbols, so $N$ recognizes the ends of the zone it must sweep. When $M$ halts, $N$ converts the tape back, keeping only track $1$, moves the head to the position of head $1$, and halts.
-
-By induction on the number of steps, after the simulation of $t$ steps of $M$, the tracks of $N$ contain the tapes of $M$ after $t$ steps, with the heads correctly marked, and the cells outside the converted zone hold the unvisited part of tape $1$. Hence, if $M$ halts, the final tape and head position of $N$ are those of tape $1$ of $M$, so $N$ halts in a standard final configuration exactly when $M$ does, with the same output; and if $M$ does not halt, neither does $N$.
-:::
-
-:::quiz[the multi-tape simulation]
-Why can the symbols under the $k$ heads be "stored in the state" of $N$ during a sweep?
-
-- [x] There are only $|\Gamma|^k$ possible tuples of scanned symbols, so $N$ can have one copy of its sweeping states for each tuple collected so far, together with the current state of $M$.
-
-  This keeps the set of states of $N$ finite: a sweeping state records a state of $M$ and, for each head, either the symbol already collected or the fact that it has not been met yet, so there are about $|Q| \cdot (|\Gamma| + 1)^k$ of them.
-- [ ] Because $N$ has $k$ tapes as well.
-
-  $N$ has a single tape.
-- [ ] Because the heads of $M$ are always on the same cell.
-
-  The heads of $M$ move independently.
-
----
-
-If $M$ halts after $t$ steps, roughly how many steps does $N$ take?
-
-- [x] $O(t^2)$, since after $t$ steps the visited zone has length $O(t)$ and each simulated step costs a constant number of sweeps over it.
-- [ ] $O(t)$.
-
-  Each simulated step may require a sweep over the whole visited zone, of length $O(t)$, so the cost is not constant per step.
-- [ ] $O(2^t)$.
-
-  The visited zone grows at most linearly, so each simulated step costs $O(t)$, for $O(t^2)$ in total.
-:::
-
-## Other variants
-
-The same method — encode the richer structure on one tape, simulate step by step — shows that the following variants compute exactly the Turing-computable functions:
-
-- machines whose tape is infinite only to the right (fold the two-way tape on itself, using two tracks);
-- machines with a two-dimensional tape (store the finite non-blank region row by row);
-- machines with the alphabet $\{\sqcup, 1\}$ only (encode each symbol of a larger alphabet by a fixed-length block of $\sqcup$ and $1$);
-- **non-deterministic** machines, where $\delta$ is a relation, and a function value is accepted if *some* computation produces it, provided the function is well defined (simulate all computations in breadth-first order, using a third tape).
-
-Some care is needed with the input and output conventions in each case, but no new idea.
-
 ## Exercises
 
 ::::exercise{difficulty=1}
@@ -193,17 +130,11 @@ Erase the input from left to right, alternating between two states $e$ (even num
 :::
 ::::
 
-::::exercise{difficulty=2}
-Describe a $2$-tape machine computing $(x, y) \mapsto x \cdot y$, and estimate its number of steps.
-
-:::solution
-Use an auxiliary symbol $\#$ and a marker $X$. First copy $\ulcorner y \urcorner$ to tape $2$ without its last $1$, starting on cell $0$, erasing it from tape $1$, and replace the last $1$ of $\ulcorner x \urcorner$ (cell $x$) by $\#$. Now tape $1$ holds $1^x \#$ on cells $0, \dots, x$, tape $2$ holds $y$ ones on cells $0, \dots, y - 1$, and the output will be built on tape $1$ from cell $x + 1$ on. Each round starts with head $1$ on the leftmost $1$ of the first block and head $2$ on cell $0$: replace this $1$ by $X$, move head $1$ right past $\#$ to the first blank after the output zone, then move both heads right together while head $2$ reads $1$, writing a $1$ with head $1$ at each step; finally return head $2$ to cell $0$, and head $1$ left to the rightmost $X$ and one cell further right. When head $1$ starts a round on $\#$, all $x$ rounds are done and the output zone holds $xy$ ones: append one more $1$ (unary convention), go back to cell $-1$, and move right erasing the $X$s and $\#$, halting on cell $x + 1$, the first cell of $\ulcorner xy \urcorner$. The contents of tape $2$ do not matter. The first phase takes $O(x + y)$ steps, and each round $O(x + y + xy)$ steps, since head $1$ crosses the output zone twice; the total is $O(x^2(y + 1) + y)$ steps.
-:::
-::::
 
 ## Notes and references
 
-The simulation of multi-tape machines by single-tape machines, with a quadratic slowdown, is due to Hartmanis and Stearns, who used it in the foundational paper of complexity theory. The study of such simulations and of their cost belongs to complexity theory, where the robustness of the class of polynomial-time computable functions plays the role that the robustness of the computable functions plays here.
+Markers, subroutines and the composition of machines go back to Turing's paper of 1936, which builds its universal machine from "skeleton tables" that play the role of subroutines. Soare (§1.4) and Boolos, Burgess and Jeffrey (chapter 3) give further exercises in programming Turing machines.
 
-- J. Hartmanis, R. E. Stearns, *On the computational complexity of algorithms*, Transactions of the American Mathematical Society 117 (1965), 285–306.
-- M. Sipser, *Introduction to the Theory of Computation*, 3rd edition, Cengage, 2012, chapter 3.
+- A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society (2) 42 (1936), 230–265.
+- R. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.4.
+- G. Boolos, J. Burgess, R. Jeffrey, *Computability and Logic*, 5th edition, Cambridge University Press, 2007, chapter 3.

@@ -7,7 +7,7 @@ prerequisites: [what-is-an-algorithm]
 
 Church's λ-calculus (1932–1936) takes a different view of computation. There are no machines and no numbers: the only objects are **functions**, and the only operations are forming a function by abstracting over a variable, and applying a function to an argument. Computation is the simplification of expressions by substituting arguments for variables. The λ-calculus is the theoretical basis of functional programming languages and of the proofs-as-programs correspondence in logic.
 
-In the λ-calculus, functions take functions as arguments and return functions. Numbers, booleans and data structures must therefore be **encoded** as functions; this is the subject of the next lesson. Here we study the calculus itself.
+In the λ-calculus, functions take functions as arguments and return functions. Numbers, booleans and data structures must therefore be **encoded** as functions; this is the subject of the next lesson. Here we study the calculus itself: terms, substitution, β-reduction, and the two results that make β-reduction usable as a model of computation. The **Church–Rosser theorem** says that the order in which redexes are contracted does not affect the final result; the **standardization theorem** says that one fixed order, normal order, finds this result whenever it exists. Head reduction, the tool used to show that a term has no normal form, is introduced in the lesson :ref{to="models-of-computation/lambda-definability"}.
 
 ## Terms
 
@@ -66,6 +66,16 @@ The **substitution** $M[N/x]$ of $N$ for the free occurrences of $x$ in $M$ is d
 
 The last clause renames the bound variable $y$ to avoid **capturing** the free $y$ of $N$.
 
+:::lemma[Substitution lemma]{#lem-substitution}
+If $x \neq y$ and $x \notin \mathrm{FV}(L)$, then $M[N/x][L/y] = M[L/y][N[L/y]/x]$.
+:::
+
+:::proof{of=lem-substitution}
+By induction on $M$, choosing bound variables of $M$ distinct from $x$, $y$ and from the free variables of $N$ and $L$ (renaming does not change the size). If $M = x$, both sides are $N[L/y]$. If $M = y$, the left side is $L$ and the right side is $L[N[L/y]/x] = L$, since $x \notin \mathrm{FV}(L)$. If $M$ is another variable, both sides are $M$. Applications follow directly from the induction hypothesis. If $M = \lambda z.\, M_1$, both sides push the substitutions inside the abstraction, and the induction hypothesis applies to $M_1$.
+:::
+
+The lemma says that two substitutions can be exchanged, provided the second one is also applied to the term substituted by the first. It is used whenever a reduction is combined with a substitution, as in the proof of the Church–Rosser theorem and in the study of head reduction in the lesson :ref{to="models-of-computation/lambda-definability"}.
+
 :::definition{#def-alpha}
 Two terms are **α-equivalent** if one is obtained from the other by renaming bound variables, that is, by replacing subterms $\lambda y.\, M$ by $\lambda z.\, M[z/y]$ with $z \notin \mathrm{FV}(M)$.
 :::
@@ -122,6 +132,10 @@ Examples:
 3. $\Omega = (\lambda x.\, x\, x)(\lambda x.\, x\, x) \to_\beta (\lambda x.\, x\, x)(\lambda x.\, x\, x) = \Omega$. The only reduction sequence from $\Omega$ is infinite, and $\Omega$ has no normal form: it is the λ-calculus analogue of a non-terminating computation.
 4. $(\lambda x.\, y)\, \Omega$ reduces to the normal form $y$ by contracting the outer redex, but also reduces to itself by contracting $\Omega$. Some reduction sequences from this term are infinite, although it has a normal form.
 
+:::figure[The two one-step reductions of $(\lambda x.\, y)\, \Omega$. Contracting $\Omega$ gives the same term again; contracting the outer redex gives the normal form $y$.]
+<svg class="fig" viewBox="0 0 460 150" width="460" role="img" aria-label="The two reductions of the term (λx.y)Ω"><defs><marker id="ah-kom" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><rect class="node" x="72" y="74" width="116" height="40" rx="8"/><text x="130" y="101" text-anchor="middle" class="math" font-size="19"><tspan class="mrm">(</tspan>λx<tspan class="mrm">.</tspan>y<tspan class="mrm">)</tspan><tspan class="mrm">Ω</tspan></text><rect class="node" x="350" y="74" width="50" height="40" rx="8"/><text x="375" y="101" text-anchor="middle" class="math" font-size="19">y</text><line x1="188.0" y1="94.0" x2="347.0" y2="94.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-kom)"/><text x="269.0" y="84" text-anchor="middle" class="label">contract the outer redex</text><path d="M108,73 C80,11 180,11 152,71" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-kom)"/><text x="130" y="20" text-anchor="middle" class="label">contract Ω</text></svg>
+:::
+
 ## Confluence
 
 A term may contain several redexes, so reduction is not deterministic. The fundamental theorem of the λ-calculus states that the choices do not matter for the final result.
@@ -138,7 +152,7 @@ We sketch the proof of Tait and Martin-Löf. The one-step relation $\to_\beta$ i
 - if $M \Rightarrow M'$ and $N \Rightarrow N'$ then $M\, N \Rightarrow M'\, N'$;
 - if $M \Rightarrow M'$ and $N \Rightarrow N'$ then $(\lambda x.\, M)\, N \Rightarrow M'[N'/x]$.
 
-Intuitively, $M \Rightarrow M'$ contracts any set of redexes present in $M$, simultaneously. One checks that ${\to_\beta} \subseteq {\Rightarrow} \subseteq {\twoheadrightarrow_\beta}$, so the reflexive transitive closure of $\Rightarrow$ is $\twoheadrightarrow_\beta$. The key lemma, proved by induction on the derivation of $M \Rightarrow M'$, is that $M \Rightarrow M'$ and $N \Rightarrow N'$ imply $M[N/x] \Rightarrow M'[N'/x]$. From it one deduces the **diamond property**: if $M \Rightarrow N_1$ and $M \Rightarrow N_2$, then $N_1 \Rightarrow P$ and $N_2 \Rightarrow P$ for some $P$ — in fact one can take for $P$ the term $M^*$ obtained by contracting all redexes of $M$. A relation with the diamond property has a confluent transitive closure, by a "tiling" argument: given two sequences of $\Rightarrow$-steps from $M$, complete the grid of diamonds. The details are in Barendregt's monograph (chapter 3).
+Intuitively, $M \Rightarrow M'$ contracts any set of redexes present in $M$, simultaneously. One checks that ${\to_\beta} \subseteq {\Rightarrow} \subseteq {\twoheadrightarrow_\beta}$, so the reflexive transitive closure of $\Rightarrow$ is $\twoheadrightarrow_\beta$. The key lemma, proved by induction on the derivation of $M \Rightarrow M'$ with the substitution lemma (:ref{#lem-substitution}) in the case of a contracted redex, is that $M \Rightarrow M'$ and $N \Rightarrow N'$ imply $M[N/x] \Rightarrow M'[N'/x]$. From it one deduces the **diamond property**: if $M \Rightarrow N_1$ and $M \Rightarrow N_2$, then $N_1 \Rightarrow P$ and $N_2 \Rightarrow P$ for some $P$. Following Takahashi, one can take for $P$ the term $M^*$ obtained by contracting all redexes of $M$, and prove by induction on $M$ the stronger **triangle property**: $M \Rightarrow N$ implies $N \Rightarrow M^*$. A relation with the diamond property has a confluent transitive closure, by a "tiling" argument: given two sequences of $\Rightarrow$-steps from $M$, complete the grid of diamonds. The details are in Barendregt's monograph and in Takahashi's paper.
 :::
 
 :::figure[Confluence: two reduction sequences from $M$ can always be completed, by further reductions, to a common term $P$.]
@@ -199,7 +213,7 @@ On $(\lambda x.\, y)\, \Omega$, normal order terminates immediately with $y$, wh
 If a term has a normal form, the normal order reduction sequence starting from it is finite and ends with this normal form.
 :::
 
-We admit this theorem; a proof is in Curry and Feys, or in Barendregt's monograph (chapter 13). It shows that normal order is a **deterministic algorithm** computing normal forms whenever they exist: a λ-term is evaluated like a program, which runs forever exactly when the term has no normal form.
+We admit this theorem; proofs are in Curry and Feys and in Barendregt's monograph, and Takahashi gives a short proof with parallel reduction. It shows that normal order is a **deterministic algorithm** computing normal forms whenever they exist: a λ-term is evaluated like a program, which runs forever exactly when the term has no normal form.
 
 :::quiz[reduction strategies]
 What does applicative order do on $\mathsf{K}\, \mathsf{I}\, \Omega$?
@@ -237,18 +251,12 @@ Let $W = \lambda x.\, x\, x\, x$. Then $W\, W \to_\beta W\, W\, W \to_\beta W\, 
 :::
 ::::
 
-::::exercise{difficulty=2}
-Prove the substitution lemma: if $x \neq y$ and $x \notin \mathrm{FV}(L)$, then $M[N/x][L/y] = M[L/y][N[L/y]/x]$.
-
-:::solution
-By induction on $M$, using the variable convention. If $M = x$, both sides are $N[L/y]$. If $M = y$, the left side is $L$ and the right side is $L[N[L/y]/x] = L$ since $x \notin \mathrm{FV}(L)$. If $M$ is another variable, both sides are $M$. Applications follow directly from the induction hypothesis. If $M = \lambda z.\, M_1$ with $z$ distinct from $x, y$ and not free in $N, L$, both sides push the substitutions inside the abstraction and the induction hypothesis applies.
-:::
-::::
-
 ## Notes and references
 
-The λ-calculus was introduced by Church in the early 1930s as part of a foundational system that turned out to be inconsistent; the pure calculus survived. The confluence theorem is due to Church and Rosser; the proof by parallel reduction is due to Tait and Martin-Löf. Barendregt's monograph is the standard reference.
+The λ-calculus was introduced by Church in the early 1930s as part of a foundational system that turned out to be inconsistent; the pure calculus survived. The confluence theorem is due to Church and Rosser; the proof by parallel reduction is due to Tait and Martin-Löf, and its simplification by the term $M^*$ to Takahashi, who also proves the standardization theorem with parallel reductions. Barendregt's monograph is the standard reference; Hindley and Seldin give an introduction at the level of this lesson.
 
 - A. Church, J. B. Rosser, *Some properties of conversion*, Transactions of the American Mathematical Society 39 (1936), 472–482.
 - H. B. Curry, R. Feys, *Combinatory Logic*, volume I, North-Holland, 1958, for the standardization theorem.
 - H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, North-Holland, 1984.
+- M. Takahashi, *Parallel reductions in λ-calculus*, Information and Computation 118 (1995), 120–127.
+- J. R. Hindley, J. P. Seldin, *Lambda-Calculus and Combinators: An Introduction*, Cambridge University Press, 2008.

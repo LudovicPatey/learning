@@ -1,11 +1,13 @@
 ---
 title: The Ackermann function
 summary: A total computable function which is not primitive recursive. Monotonicity properties, the majorization theorem, and a diagonal argument.
-duration: 40
+duration: 45
 prerequisites: [coding-sequences]
 ---
 
 The primitive recursive functions are total and computable. They are not all the total computable functions: in 1928 Ackermann, a student of Hilbert, exhibited a function defined by a nested recursion on two variables, which grows faster than every primitive recursive function. We use the two-argument version introduced by Rózsa Péter (1935), in the simplified form given by Raphael Robinson (1948).
+
+The lesson proves that this function is not primitive recursive in two ways, which illustrate two techniques used throughout computability theory. The first is a **growth argument**: every primitive recursive function is bounded by one row $A(n, \cdot)$ of the Ackermann function, and the diagonal $n \mapsto A(n, n)$ escapes every row. The second is a **diagonalization** over an effective list of all primitive recursive functions, which needs no estimate at all.
 
 ## Definition and computability
 
@@ -26,7 +28,17 @@ The first rows are easy to compute (see the exercises):
 $$
 A(1, y) = y + 2, \qquad A(2, y) = 2y + 3, \qquad A(3, y) = 2^{y+3} - 3,
 $$
-and $A(4, y) + 3$ is a tower of $y + 3$ twos: $A(4, 2) = 2^{65536} - 3$.
+and $A(4, y) + 3$ is a tower of $y + 3$ twos: $A(4, 2) = 2^{65536} - 3$. The table gives the first values.
+
+| | $y = 0$ | $y = 1$ | $y = 2$ | $y = 3$ | $y = 4$ |
+| --- | --- | --- | --- | --- | --- |
+| $A(0, y)$ | $1$ | $2$ | $3$ | $4$ | $5$ |
+| $A(1, y)$ | $2$ | $3$ | $4$ | $5$ | $6$ |
+| $A(2, y)$ | $3$ | $5$ | $7$ | $9$ | $11$ |
+| $A(3, y)$ | $5$ | $13$ | $29$ | $61$ | $125$ |
+| $A(4, y)$ | $13$ | $65533$ | $2^{65536} - 3$ | $2^{2^{65536}} - 3$ | |
+
+Each row is obtained by iterating the previous one: by the last two equations, $A(x + 1, y) = A(x, \cdot)^{y+1}(1)$, the $(y+1)$-fold iterate of the row $x$ applied to $1$. Addition iterates the successor, multiplication iterates addition, exponentiation iterates multiplication; the rows of $A$ continue this sequence through all finite levels, up to small shifts of the argument and of the value.
 
 **$A$ is computable.** The equations can be used as rewriting rules. Represent the current state of the computation by a stack of integers $[z_1, \dots, z_r]$, standing for the expression $A(z_1, A(z_2, \dots A(z_{r-1}, z_r) \dots))$. Start with $[x, y]$ and, while the stack has at least two elements, rewrite its last two elements $z_{r-1}, z_r$:
 
@@ -35,6 +47,14 @@ and $A(4, y) + 3$ is a tower of $y + 3$ twos: $A(4, 2) = 2^{65536} - 3$.
 - if $z_{r-1} > 0$ and $z_r > 0$, replace them by $z_{r-1} - 1, z_{r-1}, z_r - 1$.
 
 Each step preserves the value of the represented expression. For termination, we show by induction along $<_{\mathrm{lex}}$ that for every pair $(x, y)$ and every list $\vec u$, the algorithm transforms the stack $[\vec u, x, y]$ into $[\vec u, A(x, y)]$ in finitely many steps, without touching $\vec u$ before that. If $x = 0$, one step suffices. If $x > 0$ and $y = 0$, one step gives $[\vec u, x - 1, 1]$, and the induction hypothesis applies to $(x - 1, 1)$. If $x, y > 0$, one step gives $[\vec u, x - 1, x, y - 1]$; the induction hypothesis for $(x, y - 1)$, with the list $\vec u, x - 1$, leads to $[\vec u, x - 1, A(x, y - 1)]$, and the induction hypothesis for $(x - 1, A(x, y - 1))$ leads to $[\vec u, A(x - 1, A(x, y - 1))] = [\vec u, A(x, y)]$. With $\vec u$ empty, the algorithm started on $[x, y]$ stops with the single element $A(x, y)$. Using the coding of the previous lesson, the stack is a single integer and each step is a primitive recursive operation on it; only the number of steps is not bounded in advance.
+
+:::example{#ex-ack-stack}
+The computation of $A(1, 1)$ goes through the stacks
+$$
+[1, 1] \to [0, 1, 0] \to [0, 0, 1] \to [0, 2] \to [3],
+$$
+applying successively the third, second, first and first rules. So $A(1, 1) = 3$. The stack grows when a row of index $x > 0$ is unfolded, and shrinks when the row $0$ is reached.
+:::
 
 ## Monotonicity
 
@@ -87,6 +107,8 @@ Which step of the chain of inequalities in :ref{#lem-ack-nesting} uses the defin
 :::
 
 ## Majorization
+
+The idea of the majorization theorem is that each scheme of definition can only raise the growth rate by a bounded number of rows. A composition $h(g(\vec x))$ of two functions bounded by the row $n$ is bounded by the row $n$ applied twice, hence by a row of index about $2n$ (:ref{#lem-ack-nesting}). A primitive recursion iterates a function bounded by the row $n$, and iterating a row gives the next row. Since a derivation uses finitely many schemes, every primitive recursive function stays below some fixed row. The proof is an induction on derivations, the technique used in the lesson :ref{to="models-of-computation/primitive-recursion"} to show that primitive recursive functions are total.
 
 For $\vec x = (x_1, \dots, x_k)$ we write $|\vec x| = \max(x_1, \dots, x_k)$, with $|\vec x| = 0$ for the empty tuple ($k = 0$).
 
@@ -151,11 +173,11 @@ The function $a(n) = A(n, n)$ is total and computable, but not primitive recursi
 If $a$ were primitive recursive, by :ref{#thm-ack-majorization} there would be $m$ such that $a(n) < A(m, n)$ for all $n$. For $n = m$, this gives $A(m, m) < A(m, m)$, a contradiction. If $A$ were primitive recursive, so would be $a = A \circ (p^1_1, p^1_1)$.
 :::
 
-The argument is a diagonalization: $a$ escapes each function $A(m, \cdot)$ at the point $m$. The majorization theorem says more: every unary primitive recursive function $f$ is eventually dominated by $a$, since $f(x) < A(m, x) \leq A(x, x)$ for $x \geq m$.
+The argument is a **diagonalization**: $a$ escapes each function $A(m, \cdot)$ at the point $m$. Each hypothesis of the argument is used: majorization by a single row is what makes one diagonal point enough, and the fact that the rows are indexed by integers is what allows the diagonal $n \mapsto A(n, n)$ to be formed. The majorization theorem says more: every unary primitive recursive function $f$ is eventually dominated by $a$, since $f(x) < A(m, x) \leq A(x, x)$ for $x \geq m$.
 
 ## A diagonal argument
 
-The same conclusion can be obtained without any growth estimate, by a direct diagonalization over derivations. Derivations of unary primitive recursive functions are finite objects; fix a computable coding of them by integers, and let $f_0, f_1, f_2, \dots$ be the list of the functions they define (the integers that do not code derivations being assigned the zero function, say).
+The same conclusion can be obtained without any growth estimate, by a direct diagonalization over derivations. This is the argument of Cantor's theorem, applied to an effective list instead of an arbitrary one; it returns in the course :ref{to="countability/diagonalization-and-computation"} and in the proof that the halting problem is undecidable. Derivations of unary primitive recursive functions are finite objects; fix a computable coding of them by integers, and let $f_0, f_1, f_2, \dots$ be the list of the functions they define (the integers that do not code derivations being assigned the zero function, say).
 
 :::theorem{#thm-pr-diagonal}
 The function $d(n) = f_n(n) + 1$ is total and computable, but not primitive recursive.
@@ -227,9 +249,11 @@ Call a finite set $T$ of triples **closed** if for each $(x', y', z') \in T$, th
 
 ## Notes and references
 
-Ackermann's original function had three arguments; the two-argument version used here is due to Péter, in the form given by Robinson. The majorization argument follows the standard textbook proof. The stratification of the primitive recursive functions by growth rate leads to the Grzegorczyk hierarchy.
+Ackermann's original function had three arguments and generalized the sequence addition, multiplication, exponentiation; the two-argument version used here is due to Péter, in the form given by Robinson. The majorization argument follows the standard textbook proof; Soare (2016, §17.2.3) states it for Hermes' variant of the function, with the bound $A(c, x_1 + \dots + x_n)$. Monin and Patey (chapter "Church–Turing thesis", subsection on the Ackermann function) compute the function with a stack, as above, and prove the majorization in an exercise following Cori and Lascar. The stratification of the primitive recursive functions by growth rate leads to the Grzegorczyk hierarchy.
 
 - W. Ackermann, *Zum Hilbertschen Aufbau der reellen Zahlen*, Mathematische Annalen 99 (1928), 118–133.
 - R. Péter, *Konstruktion nichtrekursiver Funktionen*, Mathematische Annalen 111 (1935), 42–60.
 - R. M. Robinson, *Recursion and double recursion*, Bulletin of the American Mathematical Society 54 (1948), 987–993.
 - A. Grzegorczyk, *Some classes of recursive functions*, Rozprawy Matematyczne 4 (1953).
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §17.2.3.
+- B. Monin, L. Patey, *Computability theory*, chapter "Church–Turing thesis".

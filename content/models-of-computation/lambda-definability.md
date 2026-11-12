@@ -1,178 +1,72 @@
 ---
-title: Computing with λ-terms
-summary: Church numerals, arithmetic, booleans and pairs in the pure λ-calculus, Kleene's predecessor, fixed-point combinators, and the λ-definability of the partial recursive functions.
-duration: 45
-prerequisites: [lambda-calculus, mu-recursion]
+title: λ-definability of the partial recursive functions
+summary: Head reduction, and the theorem that the λ-definable partial functions are exactly the partial recursive functions.
+duration: 40
+prerequisites: [lambda-programming, mu-recursion]
 ---
 
-The pure λ-calculus has no built-in data. To compute functions on integers, we represent integers, booleans and pairs by λ-terms in normal form, and operations on them by terms which reduce correctly when applied to these representations.
+The previous lesson represented integers, booleans and pairs by λ-terms, and gave the tools to program iteration and unbounded recursion. This lesson proves that the λ-definable partial functions (:ref{#def-lambda-definable}) are exactly the partial recursive functions. One direction follows the inductive definition of the partial recursive functions, as for LOOP and WHILE programs. For partial functions one must also show that a term has **no** normal form when the function is undefined; this is done by following its head reduction, introduced in the first section. The other direction codes λ-terms by integers and searches for the normal form along normal order reduction.
 
-## Church numerals and arithmetic
+## Head reduction
 
-:::definition{#def-church-numerals}
-For $n \in \nat$, the **Church numeral** $\overline{n}$ is the term
+Normal order finds the normal form of a term when there is one, but it does not tell us when there is none. To show that a term has no normal form, it is often enough to follow only the redex at the head of the term. This section gives the two facts about head reduction used for the λ-definability of partial functions.
+
+:::definition{#def-head-normal-form}
+Every term can be written uniquely as $\lambda x_1 \cdots x_n.\, H\, R_1 \cdots R_m$, with $n, m \geq 0$, where either $H$ is a variable, or $H$ is an abstraction and $m \geq 1$. In the first case the term is in **head normal form**. In the second case the redex $H\, R_1$ is the **head redex** of the term, and contracting it is a **head step**, written $\to_h$:
 $$
-\overline{n} = \lambda f x.\, f^n(x), \qquad\text{where } f^0(x) = x \text{ and } f^{n+1}(x) = f\,(f^n(x)).
+\lambda \vec x.\, (\lambda y.\, P)\, R_1\, R_2 \cdots R_m \to_h \lambda \vec x.\, P[R_1/y]\, R_2 \cdots R_m.
 $$
-Thus $\overline{0} = \lambda f x.\, x$, $\overline{1} = \lambda f x.\, f\, x$, $\overline{2} = \lambda f x.\, f\,(f\, x)$.
+The **head reduction** of a term is the sequence of head steps starting from it; it stops at a head normal form, and may be infinite. We write $\twoheadrightarrow_h$ for a finite sequence of head steps.
 :::
 
-The numeral $\overline n$ is the operation "iterate $n$ times": $\overline{n}\, F\, A \twoheadrightarrow_\beta F^n(A)$ for all terms $F, A$. Numerals are distinct normal forms, so by :ref{#cor-unique-normal-form} they are pairwise not β-convertible.
+For instance, $\mathsf{K}\, \mathsf{I}\, \Omega \to_h (\lambda y.\, \mathsf{I})\, \Omega \to_h \mathsf{I}$; the head reduction of $\Omega$ is $\Omega \to_h \Omega \to_h \cdots$; and $\lambda x.\, x\, \Omega$ is in head normal form, although it has no normal form (its only reduct is itself). Every normal form is a head normal form, since it contains no redex.
 
-:::definition{#def-lambda-definable}
-A partial function $f : \nat^k \rightharpoonup \nat$ is **λ-definable** if there is a term $F$ such that for all $\vec n = (n_1, \dots, n_k)$:
-
-- if $f(\vec n)\converge$, then $F\, \overline{n_1} \cdots \overline{n_k} \twoheadrightarrow_\beta \overline{f(\vec n)}$;
-- if $f(\vec n)\diverge$, then $F\, \overline{n_1} \cdots \overline{n_k}$ has no normal form.
+:::lemma{#lem-head-normal-order}
+If a term has a normal form, its head reduction is finite. Equivalently, a term whose head reduction is infinite has no normal form.
 :::
 
-By Church–Rosser, the first condition determines $f(\vec n)$ uniquely.
-
-:::proposition{#prop-church-arithmetic}
-The following terms λ-define the successor, addition, multiplication and exponentiation:
-$$
-\begin{gathered}
-\mathsf{succ} = \lambda n f x.\, f\,(n\, f\, x), \\
-\mathsf{plus} = \lambda m n f x.\, m\, f\,(n\, f\, x), \\
-\mathsf{mult} = \lambda m n f.\, m\,(n\, f), \\
-\mathsf{exp} = \lambda m n.\, n\,(\mathsf{mult}\, m)\, \overline 1.
-\end{gathered}
-$$
-Here $\mathsf{exp}\, \overline m\, \overline n \twoheadrightarrow_\beta \overline{m^n}$.
+:::proof{of=lem-head-normal-order}
+Let $M = \lambda \vec x.\, (\lambda y.\, P)\, R_1 \cdots R_m$ be a term which is not in head normal form. The abstractions $\lambda x_i$ are not applied to anything, so they belong to no redex, and the λ of the head redex is the leftmost λ of $M$ which belongs to a redex. Hence the head redex is the leftmost outermost redex, and the normal order step from $M$ is a head step. So the normal order reduction sequence from a term coincides with its head reduction as long as no head normal form is reached. If $M$ has a normal form, then by :ref{#thm-normal-order} its normal order reduction sequence is finite and ends with a normal form, which is a head normal form. Hence the head reduction of $M$ reaches a head normal form after finitely many steps.
 :::
 
-:::proof{of=prop-church-arithmetic}
-$\mathsf{succ}\, \overline n \to_\beta \lambda f x.\, f\,(\overline n\, f\, x) \twoheadrightarrow_\beta \lambda f x.\, f\,(f^n(x)) = \overline{n+1}$.
+:::quiz[head reduction]
+The term $\lambda x.\, x\, \Omega$ is in head normal form. What does this example show about :ref{#lem-head-normal-order}?
 
-$\mathsf{plus}\, \overline m\, \overline n \twoheadrightarrow_\beta \lambda f x.\, \overline m\, f\,(\overline n\, f\, x) \twoheadrightarrow_\beta \lambda f x.\, f^m(f^n(x)) = \overline{m + n}$.
+- [x] Its converse fails: a term with a finite head reduction need not have a normal form.
 
-$\mathsf{mult}\, \overline m\, \overline n \twoheadrightarrow_\beta \lambda f.\, \overline m\,(\overline n\, f)$. Now $\overline n\, f \twoheadrightarrow_\beta \lambda x.\, f^n(x)$, and iterating this function $m$ times gives $\lambda x.\, f^{mn}(x)$ after reduction; so the result is $\lambda f x.\, f^{mn}(x) = \overline{mn}$.
+  Its head reduction has length $0$, while every reduct of $\lambda x.\, x\, \Omega$ is the term itself, which contains the redex of $\Omega$.
+- [ ] It contradicts the lemma.
 
-$\mathsf{exp}\, \overline m\, \overline n \twoheadrightarrow_\beta \overline n\,(\mathsf{mult}\, \overline m)\, \overline 1 \twoheadrightarrow_\beta (\mathsf{mult}\, \overline m)^n(\overline 1)$, which reduces to $\overline{m^n}$ by induction on $n$, using the case of multiplication.
+  The lemma assumes that the term has a normal form, which is not the case here.
+- [ ] It shows that $\lambda x.\, x\, \Omega$ has a normal form.
 
-The shorter term $\lambda m n.\, n\, m$ also works for $n \geq 1$, but $\overline 0\, \overline m \twoheadrightarrow_\beta \lambda x.\, x$, which is not $\overline 1 = \lambda f x.\, f\, x$ (the two are only η-convertible).
+  Contracting the redex inside $\Omega$ gives the same term, and there is no other redex: no reduct is in normal form.
 :::
 
-:::quiz[Church numerals]
-What does $\mathsf{plus}\, \overline 1$ reduce to?
+The second fact describes head reduction inside a larger term: in an application $M\, N$, the head reduction first follows that of $M$, until $M$ has become an abstraction.
 
-- [x] $\mathsf{succ}$.
-
-  $\mathsf{plus}\, \overline 1 \twoheadrightarrow_\beta \lambda n f x.\, \overline 1\, f\,(n\, f\, x) \twoheadrightarrow_\beta \lambda n f x.\, f\,(n\, f\, x) = \mathsf{succ}$.
-- [ ] $\overline 1$.
-
-  $\mathsf{plus}\, \overline 1$ still expects an argument.
-- [ ] It has no normal form.
-
-  $\mathsf{plus}\, \overline 1$ is a partial application, which reduces to the normal form $\mathsf{succ}$.
-
----
-
-In the definition of $\mathsf{mult}$, what is the role of $\overline n\, f$?
-
-- [x] It is the $n$-fold iterate of $f$; iterating it $m$ times iterates $f$ exactly $mn$ times.
-- [ ] It multiplies $f$ by $n$.
-
-  There is no multiplication of functions; $\overline n\, f$ is iteration.
-- [ ] It applies $f$ to $n$.
-
-  Numerals are applied to functions, not functions to numerals: $\overline n\, f$ is the $n$-fold composition of $f$.
+:::lemma[Head reduction in context]{#lem-head-context}
+1. If $M \to_h M'$, then $M[N/x] \to_h M'[N/x]$.
+2. If $M \twoheadrightarrow_h M'$ and $M'$ is not an abstraction, then $M\, N \twoheadrightarrow_h M'\, N$.
+3. If $M \twoheadrightarrow_h \lambda x.\, B$, then $M\, N \twoheadrightarrow_h B[N/x]$.
 :::
 
-## Booleans, conditionals and pairs
-
-:::definition{#def-lambda-booleans}
-$$
-\begin{gathered}
-\mathsf{true} = \lambda x y.\, x, \\
-\mathsf{false} = \lambda x y.\, y, \\
-\mathsf{iszero} = \lambda n.\, n\,(\lambda z.\, \mathsf{false})\, \mathsf{true},
-\end{gathered}
-$$
-$$
-\begin{gathered}
-\mathsf{pair} = \lambda a b f.\, f\, a\, b, \\
-\mathsf{fst} = \lambda p.\, p\, \mathsf{true}, \\
-\mathsf{snd} = \lambda p.\, p\, \mathsf{false}.
-\end{gathered}
-$$
+:::proof{of=lem-head-context}
+1. Write $M = \lambda \vec y.\, (\lambda z.\, P)\, R_1\, \vec R$, with bound variables distinct from $x$ and not free in $N$. Then $M[N/x] = \lambda \vec y.\, (\lambda z.\, P[N/x])\, R_1[N/x]\, \vec R[N/x]$, whose head step gives $\lambda \vec y.\, P[N/x][R_1[N/x]/z]\, \vec R[N/x]$. By :ref{#lem-substitution}, $P[N/x][R_1[N/x]/z] = P[R_1/z][N/x]$, so the result is $M'[N/x]$.
+2. Two observations. First, a head step does not remove a leading abstraction: if $\lambda y.\, B$ is not in head normal form, its head redex lies in $B$, and its head step gives $\lambda y.\, B'$ with $B \to_h B'$. Hence if some term of the sequence from $M$ to $M'$ were an abstraction, all later terms would be, including $M'$; so none is. Second, a term $K$ which is not an abstraction and not in head normal form has the form $(\lambda z.\, P)\, R_1 \cdots R_m$ with $m \geq 1$; then $K\, N = (\lambda z.\, P)\, R_1 \cdots R_m\, N$ has the same head redex, so $K \to_h K'$ implies $K\, N \to_h K'\, N$. Applying this to each step gives the claim.
+3. Let $M = M_0 \to_h M_1 \to_h \cdots \to_h M_r = \lambda x.\, B$, and let $i$ be the least index such that $M_i$ is an abstraction, say $M_i = \lambda x.\, B_i$. By the first observation in 2, $B_i \twoheadrightarrow_h B$. By the second observation, applied to $M_0, \dots, M_{i-1}$, which are not abstractions, $M\, N \twoheadrightarrow_h M_i\, N$. Then $M_i\, N = (\lambda x.\, B_i)\, N \to_h B_i[N/x]$, and by 1, $B_i[N/x] \twoheadrightarrow_h B[N/x]$.
 :::
 
-A boolean selects one of its two arguments: $\mathsf{true}\, M\, N \twoheadrightarrow_\beta M$ and $\mathsf{false}\, M\, N \twoheadrightarrow_\beta N$. Hence “$\mathtt{if}\ B\ \mathtt{then}\ M\ \mathtt{else}\ N$” is simply $B\, M\, N$. The term $\mathsf{iszero}\, \overline n$ iterates the constant function $\lambda z.\, \mathsf{false}$ $n$ times on $\mathsf{true}$: it reduces to $\mathsf{true}$ if $n = 0$ and to $\mathsf{false}$ otherwise. Pairs store two terms: $\mathsf{fst}\,(\mathsf{pair}\, M\, N) \twoheadrightarrow_\beta M$ and $\mathsf{snd}\,(\mathsf{pair}\, M\, N) \twoheadrightarrow_\beta N$.
+## Numerals in head position
 
-## The predecessor
+The following lemma describes the head reduction of a term which computes a numeral. It is what allows one to follow the head reduction of a term that tests the value of a numeral, as the conditional $\mathsf{iszero}$ does.
 
-Numerals iterate; they offer no direct way to "undo" an application of $f$. Church himself was for a while unsure whether the predecessor was λ-definable. Kleene found a solution in 1932, based on the following idea: iterate on pairs, keeping the previous value.
-
-:::proposition[Kleene]{#prop-lambda-pred}
-Let $\Phi = \lambda p.\, \mathsf{pair}\,(\mathsf{snd}\, p)\,(\mathsf{succ}\,(\mathsf{snd}\, p))$ and
-$$
-\mathsf{pred} = \lambda n.\, \mathsf{fst}\,\big(n\, \Phi\, (\mathsf{pair}\, \overline 0\, \overline 0)\big).
-$$
-Then $\mathsf{pred}\, \overline 0 \twoheadrightarrow_\beta \overline 0$ and $\mathsf{pred}\, \overline{n + 1} \twoheadrightarrow_\beta \overline n$.
+:::lemma{#lem-numeral-head}
+Let $M \twoheadrightarrow_\beta \overline n$. Then the head reduction of $M$ is finite, and it ends with a term of the form $\lambda f x.\, x$ if $n = 0$, and of the form $\lambda f x.\, f\, N$, for some term $N$, if $n \geq 1$.
 :::
 
-:::proof{of=prop-lambda-pred}
-By induction on $n$, $\Phi^n(\mathsf{pair}\, \overline 0\, \overline 0)$ reduces to $\mathsf{pair}\, \overline{n \dotminus 1}\, \overline{n}$: this holds for $n = 0$, and $\Phi$ applied to $\mathsf{pair}\, \overline{a}\, \overline{n}$ reduces to $\mathsf{pair}\, \overline{n}\, \overline{n + 1}$. Since $\overline n\, \Phi\, A \twoheadrightarrow_\beta \Phi^n(A)$, the result follows by taking the first component.
-:::
-
-:::quiz[the predecessor]
-What does $\Phi^3(\mathsf{pair}\, \overline 0\, \overline 0)$ reduce to?
-
-- [x] $\mathsf{pair}\, \overline 2\, \overline 3$.
-
-  The pairs are $(0, 0) \mapsto (0, 1) \mapsto (1, 2) \mapsto (2, 3)$.
-- [ ] $\mathsf{pair}\, \overline 3\, \overline 3$.
-
-  $\Phi$ sends $\mathsf{pair}\, a\, b$ to $\mathsf{pair}\, b\, (b + 1)$, so the two components always differ by one after the first step.
-- [ ] $\mathsf{pair}\, \overline 2\, \overline 2$.
-
-  The two components differ by one after each application of $\Phi$: three steps from $(0, 0)$ give $(0, 1)$, $(1, 2)$, $(2, 3)$.
-
----
-
-Why is the predecessor harder to define than the successor with Church numerals?
-
-- [x] A numeral can only apply a function a given number of times; computing $n - 1$ from the $n$-fold iteration requires recovering information that iteration does not directly provide, hence the pairing trick.
-- [ ] Because the predecessor is not primitive recursive.
-
-  It is primitive recursive.
-- [ ] Because $\overline 0$ has no predecessor.
-
-  The convention $0 \dotminus 1 = 0$ handles this case.
-:::
-
-## Fixed-point combinators
-
-The λ-calculus has no names: a term cannot refer to itself. Recursion is nonetheless available, thanks to fixed-point combinators.
-
-:::theorem[Fixed point theorem for the λ-calculus]{#thm-lambda-fixed-point}
-Let $\mathsf{Y} = \lambda f.\, (\lambda x.\, f\,(x\, x))\,(\lambda x.\, f\,(x\, x))$. For every term $F$, $\mathsf{Y}\, F =_\beta F\,(\mathsf{Y}\, F)$. Moreover, Turing's combinator $\Theta = (\lambda x y.\, y\,(x\, x\, y))\,(\lambda x y.\, y\,(x\, x\, y))$ satisfies the stronger property $\Theta\, F \twoheadrightarrow_\beta F\,(\Theta\, F)$.
-:::
-
-:::proof{of=thm-lambda-fixed-point}
-Let $W = \lambda x.\, F\,(x\, x)$. Then $\mathsf{Y}\, F \to_\beta W\, W \to_\beta F\,(W\, W)$, and also $F\,(\mathsf{Y}\, F) \to_\beta F\,(W\, W)$; so both sides reduce to $F\,(W\, W)$. For $\Theta$, let $A = \lambda x y.\, y\,(x\, x\, y)$, so that $\Theta = A\, A$; then $\Theta\, F = A\, A\, F \to_\beta (\lambda y.\, y\,(A\, A\, y))\, F \to_\beta F\,(A\, A\, F) = F\,(\Theta\, F)$.
-:::
-
-Fixed points allow recursive definitions. To obtain a term $G$ with $G\, x =_\beta M[G/g]$ — a function defined in terms of itself — take $G = \mathsf{Y}\,(\lambda g x.\, M)$. For instance, the factorial is
-$$
-\begin{aligned}
-\mathsf{fact} = \mathsf{Y}\,\big(\lambda g n.\ & (\mathsf{iszero}\, n) \\
-& \overline 1 \\
-& (\mathsf{mult}\, n\, (g\, (\mathsf{pred}\, n)))\big).
-\end{aligned}
-$$
-
-:::quiz[fixed-point combinators]
-In the proof for $\mathsf Y$, why do we only obtain $\mathsf{Y}\, F =_\beta F\,(\mathsf{Y}\, F)$, and not a reduction $\mathsf{Y}\, F \twoheadrightarrow_\beta F\,(\mathsf{Y}\, F)$?
-
-- [x] $\mathsf{Y}\, F$ reduces to $F\,(W\, W)$, in which $W\, W$ is not syntactically $\mathsf{Y}\, F$; the two terms only have a common reduct.
-- [ ] Because $\mathsf{Y}\, F$ has no normal form.
-
-  This is true for many $F$, but it is not the reason.
-- [ ] Because β-reduction is not confluent.
-
-  It is confluent (Church–Rosser).
+:::proof{of=lem-numeral-head}
+By :ref{#lem-head-normal-order}, the head reduction of $M$ ends with a head normal form $H = \lambda y_1 \cdots y_j.\, y\, M_1 \cdots M_m$. Since head steps are β-reduction steps, $M \twoheadrightarrow_\beta H$, and by the Church–Rosser theorem $H$ and $\overline n$ have a common reduct, which is $\overline n$ itself since $\overline n$ is in normal form. As $y$ is a variable, every redex of $H$ lies inside some $M_i$; hence every reduct of $H$ has the form $\lambda y_1 \cdots y_j.\, y\, M'_1 \cdots M'_m$, with the same $j$, $y$ and $m$. Comparing with $\overline n = \lambda f x.\, f^n(x)$: $j = 2$, and either $n = 0$, $y$ is the second bound variable and $m = 0$, or $n \geq 1$, $y$ is the first bound variable and $m = 1$.
 :::
 
 ## λ-definability of the partial recursive functions
@@ -212,7 +106,23 @@ By :ref{#thm-lambda-fixed-point}, $\mathsf{search}\, \vec{\overline n}\, \overli
 $$
 F = \lambda \vec x.\, (\mathsf{search}\, \vec x\, \overline 0)\, \mathsf I\, \mathsf I\, \big(U'\,(\mathsf{search}\, \vec x\, \overline 0)\big).
 $$
-If $f(\vec n)\converge$, the search succeeds at some $s_0$: then $\mathsf{search}\, \vec{\overline n}\, \overline 0 \twoheadrightarrow_\beta \overline{s_0}$ as in the total case, $\overline{s_0}\, \mathsf I\, \mathsf I \twoheadrightarrow_\beta \mathsf I^{s_0}(\mathsf I) \twoheadrightarrow_\beta \mathsf I$, and $F\, \vec{\overline n} \twoheadrightarrow_\beta \mathsf I\,\big(U'\, \overline{s_0}\big) \twoheadrightarrow_\beta \overline{U(s_0)} = \overline{f(\vec n)}$. If $f(\vec n)\diverge$, it remains to show that $F\, \vec{\overline n}$ has no normal form; by confluence, it suffices to show this for its reduct $(\mathsf{search}\, \vec{\overline n}\, \overline 0)\, \mathsf I\, \mathsf I\, (U'\,(\mathsf{search}\, \vec{\overline n}\, \overline 0))$. Here $\mathsf{search}\, \vec{\overline n}\, \overline 0$ reduces to $\mathsf{search}\, \vec{\overline n}\, \overline z$ for every $z$, and one shows that it has no **head normal form**: it reduces to no term of the form $\lambda y_1 \cdots y_j.\, y\, M_1 \cdots M_r$ (one says that it is **unsolvable**). Moreover, if $M$ has no head normal form, then neither has $M\, P_1 \cdots P_r$, which therefore has no normal form. We admit these two facts about head normal forms; they are proved in Barendregt's monograph, in the chapters on solvability and on the representation of computable functions, where this construction is carried out in detail.
+If $f(\vec n)\converge$, the search succeeds at some $s_0$: then $\mathsf{search}\, \vec{\overline n}\, \overline 0 \twoheadrightarrow_\beta \overline{s_0}$ as in the total case, $\overline{s_0}\, \mathsf I\, \mathsf I \twoheadrightarrow_\beta \mathsf I^{s_0}(\mathsf I) \twoheadrightarrow_\beta \mathsf I$, and $F\, \vec{\overline n} \twoheadrightarrow_\beta \mathsf I\,\big(U'\, \overline{s_0}\big) \twoheadrightarrow_\beta \overline{U(s_0)} = \overline{f(\vec n)}$. If $f(\vec n)\diverge$, then $T_k(e, \vec n, s)$ fails for every $s$, so $g(\vec n, s) = 1$ for every $s$. We show that the head reduction of $F\, \vec{\overline n}$ is infinite; by :ref{#lem-head-normal-order}, $F\, \vec{\overline n}$ then has no normal form.
+
+Write $\mathsf{search} = \Theta\, A$ with $A = \lambda s\, \vec x\, z.\, (\mathsf{iszero}\,(G\, \vec x\, z))\; z\; (s\, \vec x\,(\mathsf{succ}\, z))$, and $\Theta = Q\, Q$ with $Q = \lambda x y.\, y\,(x\, x\, y)$. The first $k$ head steps from $F\, \vec{\overline n}$ substitute the arguments and give $\Theta\, A\, \vec{\overline n}\, \overline 0\, \mathsf I\, \mathsf I\, (U'\,(\mathsf{search}\, \vec{\overline n}\, \overline 0))$. It suffices to show that for every term $t$ such that $t \twoheadrightarrow_\beta \overline z$ for some $z$, and all terms $\vec R$,
+$$
+\Theta\, A\, \vec{\overline n}\, t\, \vec R \twoheadrightarrow_h \Theta\, A\, \vec{\overline n}\, (\mathsf{succ}\, t)\, \vec R \quad \text{in at least one step.}
+$$
+Indeed $\mathsf{succ}\, t \twoheadrightarrow_\beta \overline{z + 1}$, so the claim applies again, and the head reduction never stops.
+
+The head reduction of $\Theta\, A\, \vec{\overline n}\, t\, \vec R$ unfolds the fixed point, $Q\, Q\, A \cdots \to_h (\lambda y.\, y\,(Q\, Q\, y))\, A \cdots \to_h A\,(\Theta\, A) \cdots$, then substitutes the arguments of $A$ and unfolds $\mathsf{iszero} = \lambda m.\, m\,(\lambda w.\, \mathsf{false})\, \mathsf{true}$. It reaches
+$$
+M\, (\lambda w.\, \mathsf{false})\, \mathsf{true}\; t\; T\, \vec R, \qquad \text{where } M = G\, \vec{\overline n}\, t \text{ and } T = \Theta\, A\, \vec{\overline n}\,(\mathsf{succ}\, t).
+$$
+Now $M \twoheadrightarrow_\beta G\, \vec{\overline n}\, \overline z \twoheadrightarrow_\beta \overline 1$, so by :ref{#lem-numeral-head}, $M \twoheadrightarrow_h \lambda f x.\, f\, N$ for some $N$. By :ref{#lem-head-context} (3), applied twice, $M\, (\lambda w.\, \mathsf{false})\, \mathsf{true} \twoheadrightarrow_h (\lambda w.\, \mathsf{false})\, N'$, where $N'$ is obtained from $N$ by substitution. This term is not an abstraction, so by :ref{#lem-head-context} (2),
+$$
+M\, (\lambda w.\, \mathsf{false})\, \mathsf{true}\; t\; T\, \vec R \twoheadrightarrow_h (\lambda w.\, \mathsf{false})\, N'\, t\, T\, \vec R \to_h \mathsf{false}\; t\; T\, \vec R \to_h (\lambda y.\, y)\, T\, \vec R \to_h T\, \vec R,
+$$
+which proves the claim. (With $\vec R$ empty, the argument shows that the head reduction of $\mathsf{search}\, \vec{\overline n}\, \overline 0$ is infinite. Barendregt's monograph calls such terms **unsolvable** and develops their theory; the proof above only needs the two lemmas on head reduction.)
 :::
 
 :::quiz[λ-definability of recursive functions]
@@ -255,36 +165,10 @@ By :ref{#thm-normal-order}, the search terminates exactly when $F\, \overline{n_
 
 Thus λ-definability coincides with partial recursiveness, and the next lesson shows that both coincide with Turing computability. These equivalences were established by Kleene (1936) and Turing (1936–1937). Together with Turing's analysis of mechanical computation, they turned Church's proposal — identifying effective computability with λ-definability — into a widely accepted thesis (see the lesson :ref{to="models-of-computation/church-turing-thesis"}).
 
-## Exercises
-
-::::exercise{difficulty=1}
-Define λ-terms $\mathsf{and}$, $\mathsf{or}$ and $\mathsf{not}$ on the booleans $\mathsf{true}$, $\mathsf{false}$, and check them.
-
-:::solution
-$\mathsf{not} = \lambda b.\, b\, \mathsf{false}\, \mathsf{true}$, $\mathsf{and} = \lambda a b.\, a\, b\, \mathsf{false}$, $\mathsf{or} = \lambda a b.\, a\, \mathsf{true}\, b$. For instance $\mathsf{and}\, \mathsf{true}\, B \twoheadrightarrow_\beta \mathsf{true}\, B\, \mathsf{false} \twoheadrightarrow_\beta B$ and $\mathsf{and}\, \mathsf{false}\, B \twoheadrightarrow_\beta \mathsf{false}$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Define truncated subtraction $\mathsf{minus}$ and the equality test $\mathsf{eq}$ on numerals.
-
-:::solution
-$\mathsf{minus} = \lambda m n.\, n\, \mathsf{pred}\, m$ iterates the predecessor $n$ times on $m$. Then $\mathsf{leq} = \lambda m n.\, \mathsf{iszero}\,(\mathsf{minus}\, m\, n)$ and $\mathsf{eq} = \lambda m n.\, \mathsf{and}\,(\mathsf{leq}\, m\, n)\,(\mathsf{leq}\, n\, m)$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that $\mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta \overline 6$ under normal order reduction, and explain what goes wrong with applicative order.
-
-:::solution
-Write $\mathsf{fact} = \mathsf{Y}\, F$. By the fixed point property, $\mathsf{fact}\, \overline 3 =_\beta F\, \mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta (\mathsf{iszero}\, \overline 3)\, \overline 1\, (\mathsf{mult}\, \overline 3\, (\mathsf{fact}\,(\mathsf{pred}\, \overline 3)))$, which reduces to $\mathsf{mult}\, \overline 3\, (\mathsf{fact}\, \overline 2)$; continuing down to $\mathsf{fact}\, \overline 0 =_\beta \overline 1$ gives $\mathsf{fact}\, \overline 3 =_\beta \overline 6$. Since $\overline 6$ is a normal form, $\mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta \overline 6$ by :ref{#cor-unique-normal-form}, and normal order reaches it by :ref{#thm-normal-order}. Normal order contracts the conditional before evaluating the recursive call. Applicative order would first try to normalize the subterm $\mathsf{Y}\, F$, whose reduction $\mathsf{Y}\, F \to W\, W \to F\,(W\, W) \to F\,(F\,(W\, W)) \to \cdots$ never terminates.
-:::
-::::
-
 ## Notes and references
 
-The definability of the predecessor was found by Kleene in 1932, and the equivalence between λ-definability and general recursiveness (for total functions) was proved by Kleene in 1936. The combinator $\Theta$ is due to Turing (1937).
+The equivalence between λ-definability and general recursiveness (for total functions) was proved by Kleene in 1936. The treatment of partial functions through head normal forms and unsolvable terms follows Barendregt's monograph; the proof given here uses only the standardization theorem (:ref{#thm-normal-order}) and the lemmas on head reduction of this lesson.
 
 - S. C. Kleene, *λ-definability and recursiveness*, Duke Mathematical Journal 2 (1936), 340–353.
-- A. M. Turing, *The p-function in λ-K-conversion*, Journal of Symbolic Logic 2 (1937), 164.
 - H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, North-Holland, 1984.
+- J. R. Hindley, J. P. Seldin, *Lambda-Calculus and Combinators: An Introduction*, Cambridge University Press, 2008.

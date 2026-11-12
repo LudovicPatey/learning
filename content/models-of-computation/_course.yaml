@@ -15,23 +15,28 @@ description: >
 objectives:
   - State precisely the definitions of each model, including input and output conventions
   - Write and verify Turing machines, URM programs and WHILE programs for simple functions
+  - Simulate one model of computation in another, such as multi-tape machines by single-tape machines
   - Prove that a function is primitive recursive using the standard closure properties
   - Code finite sequences of integers primitive recursively
   - Prove that the Ackermann function is not primitive recursive
   - Characterize the primitive recursive functions as the LOOP-computable functions
   - Define arithmetic, data structures and recursion in the pure λ-calculus
+  - Prove that the WHILE-computable and the λ-definable functions are exactly the partial recursive functions
   - Prove the equivalence of the models and Kleene's normal form theorem
 lessons:
   - what-is-an-algorithm
   - turing-machines
   - programming-turing-machines
+  - multitape-machines
   - register-machines
   - primitive-recursion
   - coding-sequences
   - ackermann-function
   - mu-recursion
+  - loop-programs
   - while-programs
   - lambda-calculus
+  - lambda-programming
   - lambda-definability
   - equivalence-of-models
   - church-turing-thesis
