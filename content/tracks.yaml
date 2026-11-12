@@ -30,3 +30,11 @@
   description: >
     Computability along the computable ordinals, beyond the arithmetic sets.
   courses: [computable-ordinals, hyperarithmetic, descriptive-set-theory]
+- id: avoidance
+  title: Lowness and avoidance
+  area: computability
+  description: >
+    Separating mathematical problems by preservation properties, with the forcing
+    question as the main tool: cone avoidance, lowness, compactness avoidance, and the
+    control of the first and second jumps.
+  courses: [effective-forcing, avoidance]

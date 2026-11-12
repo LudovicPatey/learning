@@ -1,0 +1,29 @@
+title: Cone avoidance and the forcing question
+area: computability
+level: Advanced
+order: 13
+prerequisites: [effective-forcing, ramsey-theorem, reducibilities]
+summary: Separation of problems by preservation properties; cone avoidance, preservation of non-Σ⁰₁ definitions and of hyperimmunities, proved with forcing questions; Seetapun's theorem by a disjunctive forcing question.
+description: >
+  The general method of separating problems by preservation of a weakness
+  property, developed for the first-jump properties. The course defines cone
+  avoidance and strong cone avoidance for problems, and relates them to
+  ω-models and to the preservation of weakness properties. It isolates the
+  three-case argument behind every proof of cone avoidance in the forcing
+  question, with answers of complexity Σ⁰₁ relative to the condition; shows that
+  every set is Δ⁰₂ relative to a set avoiding a given cone; proves strong cone
+  avoidance for cohesiveness; introduces disjunctive forcing questions for
+  problems with several sides, and proves Seetapun's theorem directly with
+  them. It then studies the preservation of non-Σ⁰₁ definitions and of
+  hyperimmunities, their equivalence with cone avoidance, and their proofs by
+  forcing questions for weak König's lemma, cohesiveness, the pigeonhole
+  principle and Ramsey's theorem for pairs.
+objectives:
+  - Define cone avoidance and strong cone avoidance for problems, and use them to build ω-models and prove non-reductions
+  - Explain why avoidance properties are relativized, and use relativization to combine problems
+  - Recognize the three-case argument in a proof of cone avoidance, and state it as a property of a forcing question
+  - Design a forcing question whose answers are Σ⁰₁ relative to the condition, using over-approximation and compactness
+  - Prove that every set is Δ⁰₂ relative to a set avoiding a given cone, and that cohesiveness admits strong cone avoidance
+  - Use disjunctive forcing questions and Lachlan's disjunction, and prove Seetapun's theorem directly
+  - Prove preservation of non-Σ⁰₁ definitions and of hyperimmunities for WKL, COH, RT¹₂ and RT²₂, and relate both properties to cone avoidance
+lessons: [avoidance-properties, forcing-question-method, disjunctive-question, seetapun-forcing, non-sigma1-definitions, hyperimmunities]
