@@ -10,12 +10,14 @@ description: >
   minimal pair theorem of Lachlan and Yates, with Posner's trick and the
   preservation of agreement between expansionary stages, and Sacks' theorem
   that there is a high incomplete c.e. degree, in which the infinitary
-  strategies enumerate infinitely many numbers. Both constructions are
-  organized on a tree of strategies and verified along the true path.
+  strategies enumerate infinitely many numbers and a finite injury
+  construction provably fails. Both constructions are organized on a tree
+  of strategies and verified along the true path.
 objectives:
   - Reduce the minimal pair requirements to one functional with Posner's trick
   - Prove that agreement is preserved when only one side changes between expansionary stages
+  - Explain why strategies of lower priority must guess the outcome of an infinitary strategy
   - Define a tree of strategies, its priority order and its true path
-  - Verify an infinite injury construction along the true path
-  - Build a high incomplete c.e. set by coding Inf into its columns
-lessons: [minimal-pairs, trees-of-strategies, high-incomplete]
+  - Verify an infinite injury construction along the true path, by a case analysis on the position of the acting node
+  - Build a high incomplete c.e. set by coding Inf into its columns, and explain why finite injury does not suffice
+lessons: [minimal-pairs, trees-of-strategies, minimal-pair-verification, high-incomplete, high-incomplete-verification]

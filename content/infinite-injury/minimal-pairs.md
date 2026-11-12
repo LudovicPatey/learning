@@ -1,11 +1,13 @@
 ---
 title: Minimal pairs and the preservation of agreement
-summary: Minimal pairs of degrees; Posner's trick, which reduces the meet requirements to one functional; expansionary stages and the lemma that agreement is preserved when only one side changes between them; why the resulting strategy causes infinite injury.
-duration: 35
+summary: Minimal pairs of degrees; Posner's trick, which reduces the meet requirements to one functional; length of agreement and expansionary stages; the lemma that agreement is preserved when only one side changes between consecutive expansionary stages.
+duration: 45
 prerequisites: [ce-degrees/sacks-splitting]
 ---
 
-The Friedberg–Muchnik theorem gives two c.e. degrees that are incomparable. The **minimal pair theorem** of Lachlan and Yates gives two non-computable c.e. degrees whose only common lower bound is $\obf$. Each requirement of this construction asks that a set computed by both $A$ and $B$ be computable, and its natural strategy acts infinitely often when the hypothesis of the requirement holds. A requirement of lower priority may then be injured infinitely often: this is the **infinite injury** method. This lesson isolates the strategy for one requirement and proves its main lemma. The next lesson combines the strategies on a tree.
+The Friedberg–Muchnik theorem gives two c.e. degrees that are incomparable. The **minimal pair theorem** of Lachlan and Yates gives two non-computable c.e. degrees whose only common lower bound is $\obf$. Each requirement of this construction asks that a set computed by both $A$ and $B$ be computable, and its natural strategy acts infinitely often when the hypothesis of the requirement holds. A requirement of lower priority may then be injured infinitely often: this is the **infinite injury** method. This lesson proves the main lemma on which the strategy for one requirement rests. The next lesson describes the strategy, explains why the strategies of lower priority must guess its outcome, and organizes these guesses on a tree of strategies; the third one defines the true path and verifies the construction.
+
+The construction reuses the tools of finite injury arguments: requirements ordered by priority, fresh followers and initialization, as in the Friedberg–Muchnik theorem (:ref{#thm-friedberg-muchnik}), and the length of agreement of Sacks' preservation strategy (:ref{#def-length-agreement}). What changes is that a strategy may act, or constrain the others, at infinitely many stages.
 
 ## Minimal pairs
 
@@ -13,7 +15,7 @@ The Friedberg–Muchnik theorem gives two c.e. degrees that are incomparable. Th
 Two degrees $\abf, \bbf > \obf$ form a **minimal pair** if every degree $\cbf$ with $\cbf \leq \abf$ and $\cbf \leq \bbf$ is $\obf$. Equivalently, every set computable both in a set of degree $\abf$ and in a set of degree $\bbf$ is computable.
 :::
 
-The Turing degrees do not form a lattice (:ref{#cor-not-lattice}), but the two degrees of a minimal pair have a meet, namely $\obf$. The difficulty of the theorem below is that both degrees must be c.e.
+The Turing degrees do not form a lattice, as the course on the structure of the Turing degrees shows (:ref{#cor-not-lattice}), but the two degrees of a minimal pair have a meet, namely $\obf$. The difficulty of the theorem below is that both degrees must be c.e.
 
 :::theorem[Lachlan, Yates]{#thm-minimal-pair}
 There are c.e. sets $A$ and $B$ whose degrees form a minimal pair.
@@ -38,6 +40,8 @@ Let $C = \Phi^A_i = \Phi^B_j$, and fix $n$ with $A(n) \neq B(n)$. There is an in
 
 The index $e$ depends on $n$, $A(n)$, $i$ and $j$, and is not computed by the construction; it only serves in the verification. In the construction of :ref{#thm-minimal-pair}, $A$ and $B$ will be disjoint and $A$ non-empty, so $A \neq B$.
 
+The hypothesis $A \neq B$ is used to find $n$, but the conclusion of the lemma also holds when $A = B$: every set $C \leq_T A$ is then of the form $\Phi^A_e = \Phi^B_e$ with both sides total, and $\mathcal N_e$ shows that $C$ is computable. What the trick provides is a single index that works for both oracles at once, so that the construction only has to consider one functional per requirement.
+
 ## Length of agreement and expansionary stages
 
 Fix c.e. approximations $(A_s)$ and $(B_s)$. Recall that $\Phi^{A_s}_e(y)[s]\converge$ implies that the use of the computation is at most $s$, so that the computation depends only on $A_s \uh s$.
@@ -48,6 +52,15 @@ Fix c.e. approximations $(A_s)$ and $(B_s)$. Recall that $\Phi^{A_s}_e(y)[s]\con
 :::
 
 The set $Q$ is the set of stages at which the strategy for $\mathcal N_e$ is run; in the tree construction, it is the set of stages at which a node is visited. The first stage of $Q$ is expansionary.
+
+:::example{#ex-expansionary}
+Suppose that $A$ and $B$ are disjoint and that some number $a$ belongs to $A$, as in the construction below.
+
+1. Let $e$ be an index such that $\Phi^X_e(y) = X(y)$ for every oracle $X$ and every $y$. From the stage at which $a$ enters $A$ on, $A_s(a) = 1 \neq 0 = B_s(a)$, so $l(e, s) \leq a$. The expansionary stages after that stage have strictly increasing lengths of agreement, all at most $a$, so there are at most $a + 1$ of them. Whatever $Q$ is, there are finitely many expansionary stages.
+2. Let $e$ be an index such that $\Phi^X_e(y) = 0$ for every $X$ and $y$, by a computation that does not query the oracle. Then $\Phi^A_e = \Phi^B_e$ is total, and by :ref{#prop-agreement-unbounded} below, every infinite $Q$ has infinitely many expansionary stages, whatever $A$ and $B$ are.
+
+In the first case $\mathcal N_e$ holds because the hypothesis fails; in the second, it holds because the common function is computable, and the strategy must nevertheless deal with infinitely many expansionary stages.
+:::
 
 :::proposition{#prop-agreement-unbounded}
 If $\Phi^A_e = \Phi^B_e$ is total, then $\lim_s l(e, s) = \infty$. In particular, every infinite set of stages $Q$ has infinitely many expansionary stages.
@@ -89,6 +102,10 @@ $$
 $$
 The computation on the $B$ side may have been destroyed between $s_{j-1}$ and $s_j$, and replaced by a different computation with a different use, but its value is forced by the agreement at stage $s_j$, which is new information obtained because $s_j$ is expansionary. This is why condition 1 cannot be dropped.
 
+:::figure[The proof of :ref{#lem-pair-module}. At each stage $s_k$ of the sequence, the computations on the two sides agree below the length of agreement. Between $s_k$ and $s_{k+1}$, one side is unchanged below $s_k$, so its computations at $s_k$ survive until $s_{k+1}$, where the agreement transfers their values to the other side. The value $\Delta(y)$ follows the highlighted zigzag path. Which side is preserved may change from one interval to the next.]
+<svg class="fig" viewBox="0 0 590 230" width="590" role="img" aria-label="Four expansionary stages; at each of them the computations on the A side and on the B side agree; between two consecutive stages one side is unchanged below the earlier stage, and the common value is carried along a zigzag path"><defs><marker id="ii-agr-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="accent-fill"/></marker></defs><text x="30" y="55" class="label">A side</text><text x="30" y="130" class="label">B side</text><line x1="119" y1="50" x2="221" y2="50" class="accent-stroke" stroke-width="2.4" marker-end="url(#ii-agr-arrow)"/><line x1="119" y1="125" x2="221" y2="125" class="muted-stroke" stroke-width="1.3" stroke-dasharray="4 4"/><line x1="239" y1="50" x2="341" y2="50" class="muted-stroke" stroke-width="1.3" stroke-dasharray="4 4"/><line x1="239" y1="125" x2="341" y2="125" class="accent-stroke" stroke-width="2.4" marker-end="url(#ii-agr-arrow)"/><line x1="359" y1="50" x2="461" y2="50" class="accent-stroke" stroke-width="2.4" marker-end="url(#ii-agr-arrow)"/><line x1="359" y1="125" x2="461" y2="125" class="muted-stroke" stroke-width="1.3" stroke-dasharray="4 4"/><line x1="108" y1="59" x2="108" y2="116" class="accent-stroke" stroke-width="1.6"/><line x1="112" y1="59" x2="112" y2="116" class="accent-stroke" stroke-width="1.6"/><circle cx="110" cy="50" r="6" class="node"/><circle cx="110" cy="125" r="6" class="node"/><text x="110" y="159" text-anchor="middle" class="math" font-size="15">s<tspan class="mrm" font-size="10" dy="4">0</tspan></text><line x1="110" y1="137" x2="110" y2="143" class="axis"/><line x1="228" y1="59" x2="228" y2="116" class="accent-stroke" stroke-width="1.6"/><line x1="232" y1="59" x2="232" y2="116" class="accent-stroke" stroke-width="1.6"/><circle cx="230" cy="50" r="6" class="node"/><circle cx="230" cy="125" r="6" class="node"/><text x="230" y="159" text-anchor="middle" class="math" font-size="15">s<tspan class="mrm" font-size="10" dy="4">1</tspan></text><line x1="230" y1="137" x2="230" y2="143" class="axis"/><line x1="348" y1="59" x2="348" y2="116" class="accent-stroke" stroke-width="1.6"/><line x1="352" y1="59" x2="352" y2="116" class="accent-stroke" stroke-width="1.6"/><circle cx="350" cy="50" r="6" class="node"/><circle cx="350" cy="125" r="6" class="node"/><text x="350" y="159" text-anchor="middle" class="math" font-size="15">s<tspan class="mrm" font-size="10" dy="4">2</tspan></text><line x1="350" y1="137" x2="350" y2="143" class="axis"/><line x1="468" y1="59" x2="468" y2="116" class="accent-stroke" stroke-width="1.6"/><line x1="472" y1="59" x2="472" y2="116" class="accent-stroke" stroke-width="1.6"/><circle cx="470" cy="50" r="6" class="node"/><circle cx="470" cy="125" r="6" class="node"/><text x="470" y="159" text-anchor="middle" class="math" font-size="15">s<tspan class="mrm" font-size="10" dy="4">3</tspan></text><line x1="470" y1="137" x2="470" y2="143" class="axis"/><line x1="80" y1="140" x2="510" y2="140" class="axis"/><text x="516" y="144" class="label">stages</text><line x1="40" y1="191" x2="80" y2="191" class="accent-stroke" stroke-width="2.4"/><text x="88" y="195" class="label">unchanged below the earlier stage</text><line x1="310" y1="191" x2="350" y2="191" class="muted-stroke" stroke-width="1.3" stroke-dasharray="4 4"/><text x="358" y="195" class="label">may change</text><line x1="38" y1="213" x2="38" y2="227" class="accent-stroke" stroke-width="1.6"/><line x1="42" y1="213" x2="42" y2="227" class="accent-stroke" stroke-width="1.6"/><text x="52" y="224" class="label">agreement at an expansionary stage</text></svg>
+:::
+
 :::corollary{#cor-pair-module}
 If, in addition, $\Phi^A_e = \Phi^B_e$ is total, then it is computable: it equals $\Delta$.
 :::
@@ -119,46 +136,6 @@ Why must condition 2 hold between every two consecutive stages of the sequence, 
   Condition 1 is about the length of agreement; condition 2 is about the oracles.
 :::
 
-## The strategy and its two outcomes
-
-The strategy for $\mathcal N_e$ is now the following: it is run at a set $Q$ of stages and computes the expansionary stages for $Q$. It enumerates nothing and imposes no explicit restraint. Instead, it constrains how the requirements below it act, so that condition 2 of :ref{#lem-pair-module} holds between consecutive expansionary stages. It has two possible **outcomes**:
-
-- **$\infty$**: there are infinitely many expansionary stages;
-- **$\mathrm f$**: there are finitely many expansionary stages. By :ref{#prop-agreement-unbounded}, $\Phi^A_e = \Phi^B_e$ is then not total, and $\mathcal N_e$ holds trivially, provided $Q$ is infinite.
-
-Consider a requirement $\mathcal R_d$ of lower priority. It acts by enumerating a follower $x$ into $A$ once $x$ appears in $W_d$. Two strategies are possible.
-
-1. *If the outcome of $\mathcal N_e$ is $\infty$:* act only at expansionary stages, immediately after $\mathcal N_e$ has found the new expansionary stage. Then an action changes $A$ at stage $s_k$, after the computations of stage $s_k$ have been examined; if at most one element enters $A \cup B$ below $s_k$ between $s_k$ and $s_{k+1}$, condition 2 holds. Since there are infinitely many expansionary stages, $\mathcal R_d$ gets infinitely many opportunities to act.
-2. *If the outcome is $\mathrm f$:* act at any stage, after the last expansionary stage. The strategy of $\mathcal N_e$ imposes nothing after that stage. With strategy 1, $\mathcal R_d$ would wait forever.
-
-The construction cannot know which outcome holds: the outcome $\infty$ is a $\Pi^0_2$ property. It runs both versions of $\mathcal R_d$, one guessing each outcome. The version guessing $\mathrm f$ is **initialized** at every expansionary stage, and chooses its followers larger than the last expansionary stage, so that its actions never destroy computations examined by $\mathcal N_e$ at that stage. If the outcome is $\infty$, this version is initialized infinitely often and may act infinitely often: it is injured infinitely often, which is harmless, since the other version meets $\mathcal R_d$.
-
-The same splitting is needed for the requirements $\mathcal N_{e'}$ of lower priority, since the stages at which they are run, and thus their own expansionary stages, depend on the outcome of $\mathcal N_e$. Iterating the case distinction gives a **tree of strategies**, one level per requirement, and one branch for each guess about the outcomes of the requirements above. The next lesson defines it precisely.
-
-:::quiz[guessing outcomes]
-Why must the version of $\mathcal R_d$ guessing the outcome $\mathrm f$ choose followers larger than the last expansionary stage?
-
-- [x] So that its enumerations between two expansionary stages are above the uses of the computations examined at the earlier one, and do not count against condition 2 of :ref{#lem-pair-module}.
-- [ ] So that $\mathcal R_d$ is met.
-
-  Any follower serves $\mathcal R_d$: either it appears in $W_d$ and is enumerated into $A$, or it never appears in $W_d$ and stays outside $A$. The size matters for $\mathcal N_e$.
-- [ ] Because followers must be fresh in every priority argument.
-
-  Freshness is a tool; here its purpose is precisely to protect the computations seen by $\mathcal N_e$.
-
----
-
-Why can the construction not simply determine the outcome of $\mathcal N_e$ and use the corresponding strategy for $\mathcal R_d$?
-
-- [x] Because the outcome $\infty$, "there are infinitely many expansionary stages", is a $\Pi^0_2$ property, not decidable during a computable construction.
-- [ ] Because the outcome changes during the construction.
-
-  The outcome is a property of the whole construction; what changes is the current guess about it.
-- [ ] Because $\mathcal N_e$ has more than two outcomes.
-
-  It has exactly two.
-:::
-
 ## Exercises
 
 ::::exercise{difficulty=1}
@@ -173,14 +150,16 @@ If $\abf \leq \bbf$, then $\abf$ is a common lower bound of $\abf$ and $\bbf$, s
 Replace condition 2 of :ref{#lem-pair-module} by the stronger condition $B_t \uh s_k = B_{s_k} \uh s_k$ for every $t \geq s_k$ and every $k$, which corresponds to a permanent restraint on $B$ at expansionary stages. Show that the conclusion of the lemma still holds, and that $B$ is then computable. Explain why this rules out a strategy for $\mathcal N_e$ that always restrains the same side.
 
 :::solution
-The stronger condition implies condition 2 with $X = B$, so the lemma applies. Since $l(e, s_k) \geq k$ and $l(e, s_k) \leq s_k$, the stages $s_k$ tend to infinity. For every $x$, choose $k$ with $s_k > x$; then $B(x) = B_{s_k}(x)$, since $B$ does not change below $s_k$ after stage $s_k$. The sequence $(s_k)$ is computable, so $B$ is computable. In the construction, if $\mathcal N_e$ has outcome $\infty$ and always restrains $B$, no requirement $\mathcal S_d$ of lower priority could enumerate a number below $s_k$ after stage $s_k$; $B$ would be computable, so some $\mathcal S_d$ would fail. The outcome $\infty$ does occur, for instance for an index $e$ such that $\Phi^X_e$ is the constant function $0$ for every oracle $X$.
+The stronger condition implies condition 2 with $X = B$, so the lemma applies. Since $l(e, s_k) \geq k$ and $l(e, s_k) \leq s_k$, the stages $s_k$ tend to infinity. For every $x$, choose $k$ with $s_k > x$; then $B(x) = B_{s_k}(x)$, since $B$ does not change below $s_k$ after stage $s_k$. The sequence $(s_k)$ is computable, so $B$ is computable. In the construction, if $\mathcal N_e$ has infinitely many expansionary stages and always restrains $B$, no requirement $\mathcal S_d$ of lower priority could enumerate a number below $s_k$ after stage $s_k$; $B$ would be computable, so some $\mathcal S_d$ would fail. This case does occur, for instance for an index $e$ such that $\Phi^X_e$ is the constant function $0$ for every oracle $X$.
 :::
 ::::
 
 ## Notes and references
 
-Lachlan (1966) and Yates (1966) proved the minimal pair theorem independently. Posner's observation that one index suffices is reported by Soare. The formulation of the strategy by expansionary stages, and the preservation lemma :ref{#lem-pair-module}, in which only one side needs to be preserved at a time, follow Soare's book; Monin and Patey present an equivalent version in which the strategy restrains $A$ and $B$ alternately.
+Lachlan (1966) and Yates (1966) proved the minimal pair theorem independently. The observation that one index suffices is known as Posner's trick (Downey–Hirschfeldt, §2.14.2). Monin and Patey, and the informal description of Downey and Hirschfeldt, present the strategy with explicit restraints placed alternately on $A$ and on $B$ at consecutive expansionary stages. The formulation adopted here, in which no restraint is imposed and the tree only ensures that one side changes between consecutive expansionary stages, is the one used in the verification of Downey and Hirschfeldt (proof of their Lemma 2.14.5); the preservation lemma :ref{#lem-pair-module} isolates it as a statement about a sequence of stages.
 
 - A. H. Lachlan, *Lower bounds for pairs of recursively enumerable degrees*, Proceedings of the London Mathematical Society (3) 16 (1966), 537–569.
 - C. E. M. Yates, *A minimal pair of recursively enumerable degrees*, Journal of Symbolic Logic 31 (1966), 159–168.
-- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapter IX.
+- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapter IX (the minimal pair theorem is Theorem IX.1.2).
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.14.2.
+- B. Monin and L. Patey, *Computability theory*, chapter *Priority method and c.e. degrees*, section *$\Pi^0_2$ priority method (infinite injury)*.

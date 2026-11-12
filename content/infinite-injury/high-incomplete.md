@@ -1,11 +1,13 @@
 ---
 title: A high incomplete c.e. degree
-summary: Sacks' theorem that some c.e. degree is high but incomplete, by a tree construction in which the infinitary strategies enumerate infinitely many numbers; the columns of the set code which c.e. sets are infinite; further results on the c.e. degrees.
-duration: 40
-prerequisites: [trees-of-strategies, arithmetic-hierarchy/index-sets, turing-degrees/low-and-high]
+summary: Sacks' theorem that some c.e. degree is high but incomplete; the columns of the set code which c.e. sets are infinite; a finite injury construction fails; the tree construction, in which the infinitary strategies enumerate infinitely many numbers, and the coding requirements.
+duration: 55
+prerequisites: [minimal-pair-verification, arithmetic-hierarchy/index-sets, turing-degrees/low-and-high]
 ---
 
 A set $H$ is high if $H' \geq_T \emptyset''$. The course on oracles built a high set that does not compute $\emptyset'$, by a forcing construction whose conditions fix finitely many columns to their limit values (:ref{#thm-high-cone-avoidance}); that set is not c.e. Sacks proved in 1963 that there is a high **c.e.** set that is not complete. The strategies coding $\emptyset''$ into the jump of $H$ must enumerate infinitely many numbers into $H$ when they guess correctly that some $W_e$ is infinite, and the strategies keeping $H$ incomplete must survive these enumerations. In the minimal pair construction, the infinitary strategies enumerated nothing; here they act infinitely often, and the tree arranges that their actions avoid the computations protected below them.
+
+This lesson states the theorem, explains why a finite injury construction cannot prove it, gives the construction on a tree, and verifies the coding requirements. The next lesson verifies the diagonalization requirements.
 
 :::theorem[Sacks]{#thm-high-incomplete}
 There are c.e. sets $H$ and $C$ such that $H$ is high and $C \not\leq_T H$.
@@ -39,7 +41,36 @@ For every $e$, the sequence $y \mapsto H(\langle e, y \rangle)$ is eventually co
 
 The strategy for $\mathcal P_i$ is the Friedberg–Muchnik strategy: choose a fresh follower $x$, wait for $\Phi^H_i(x) = 0$ at some stage, enumerate $x$ into $C$ and restrain $H$ below the use. The strategy for $\mathcal G_e$, when $W_e$ grows, enumerates into $H$ all the numbers of the column $e$ below the current stage, except those restrained by strategies of higher priority. It has two outcomes, $\infty$ if $W_e$ grows infinitely often and $\mathrm f$ otherwise.
 
-A $\mathcal P_i$-strategy below $\mathcal G_e$ with outcome $\infty$ cannot respect the column $e$: it would have to wait for $\mathcal G_e$ to stop, which never happens. The tree solves the conflict by timing. The $\mathcal P_i$-strategy guessing $\infty$ only acts at stages at which $\mathcal G_e$ has just filled its column up to the current stage $s$. The uses of the computations it protects are at most $s$, and from then on, $\mathcal G_e$ only enumerates numbers $\langle e, y \rangle$ with $y \geq s$, which are at least $s$.
+## The obstruction to a finite injury argument
+
+When $W_e$ is infinite, the strategy for $\mathcal G_e$ acts at infinitely many stages, and may enumerate numbers below the restraint of a strategy for $\mathcal P_i$ of lower priority, which a finite injury argument would then initialize. The following proposition shows that this can happen infinitely often.
+
+Consider the **finite injury version** of the construction. There is one strategy per requirement, with the priority order $\mathcal G_0, \mathcal P_0, \mathcal G_1, \mathcal P_1, \dots$, and at each stage $s \geq 1$ the strategies are run in this order, with the current approximation $\tilde H$ of $H$ defined as in the construction below. We only describe the first two strategies, with a c.e. set $V$, given by a computable enumeration $(V_s)$ with $V_0 = \emptyset$, in place of $W_0$, and a Turing functional $\Psi$ in place of $\Phi_0$.
+
+- *$\mathcal G_0$:* if $|V_s| > |V_{s-1}|$, enumerate into $H$ every number $\langle 0, y \rangle$ with $y < s$ that is not yet in $H$.
+- *$\mathcal P_0$:* if it has no follower, it receives a fresh follower. If it has a follower $x$, is not marked satisfied, and $\Psi^{\tilde H}(x)[s]\converge = 0$, it enumerates $x$ into $C$, sets its restraint to $s$, and is marked satisfied. It is **initialized**, losing its follower, its mark and its restraint, whenever $\mathcal G_0$ enumerates a number less than its restraint.
+
+The verification of a finite injury argument uses nothing about $W_0$ and $\Phi_0$ beyond the facts that they are a c.e. set and a Turing functional, so it would apply to $V$ and $\Psi$ as well.
+
+:::proposition{#prop-hi-finite-injury}
+There are a c.e. set $V$ with a computable enumeration $(V_s)$, and a Turing functional $\Psi$ such that $\Psi^X$ is total for every oracle $X$, for which, in the finite injury version, $V$ is infinite and the strategy for $\mathcal P_0$ is initialized at infinitely many stages.
+:::
+
+:::proof{of=prop-hi-finite-injury}
+Let $\Psi^X(x)$ query $X(\langle 0, y \rangle)$ for $y = 0, 1, \dots, x$, then output $0$. The steps of this computation do not depend on the answers of the oracle, so there is a least $n_x$ such that, for every oracle $X$, $\Psi^X(x)[s]$ converges, to $0$, if and only if $s \geq n_x$; the use is $\langle 0, x \rangle + 1$. Define $V$ together with the construction: $V_0 = \emptyset$, and $V_{s+1} = V_s \cup \{ s \}$ if $\mathcal P_0$ acts at stage $s$, $V_{s+1} = V_s$ otherwise. Stage $s + 1$ only uses $V_{s+1}$, which is known at the end of stage $s$, so the whole process is computable and $V$ is c.e.; since the construction is deterministic, running it with the enumeration $(V_s)$ given in advance produces the same stages.
+
+Only $\mathcal G_0$ enumerates numbers of the column $0$ into $H$, and it respects no restraint, since it has the highest priority. We show the following, for a stage $g \geq 1$: if $\mathcal P_0$ receives a follower $x$ at stage $g$, and the column $0$ of $H$ at the end of stage $g$ contains only numbers $\langle 0, y \rangle$ with $y < g$, then $\mathcal P_0$ acts at some stage $s > g$, is initialized at stage $s + 1$, receives a new follower at stage $s + 1$, and the hypothesis holds again for $s + 1$ in place of $g$.
+
+Since the follower is fresh, $x > g$. The set $V$ only grows at the stage after an action of $\mathcal P_0$, and $\mathcal P_0$ does not act at stage $g$. As long as $\mathcal P_0$ has not acted, $V$ does not grow, so $\mathcal G_0$ enumerates nothing and $\mathcal P_0$ keeps $x$. At stage $s = \max(g + 1, n_x)$, the computation $\Psi^{\tilde H}(x)[s]$ converges to $0$ for the first time after stage $g$, and $\mathcal P_0$ acts, with restraint $s$. The use of the computation is at most $s$, so $\langle 0, x \rangle < s$, and since $g < x$, also $\langle 0, g \rangle < s$. At the end of stage $s$, the column $0$ of $H$ still contains only numbers $\langle 0, y \rangle$ with $y < g$, so $\langle 0, g \rangle \notin H_{s+1}$. At stage $s + 1$, $V$ grows, and $\mathcal G_0$ enumerates every $\langle 0, y \rangle$ with $y < s + 1$, among them $\langle 0, g \rangle < s$: the strategy for $\mathcal P_0$ is initialized, then receives a fresh follower at stage $s + 1$, and the column $0$ of $H$ consists of the numbers $\langle 0, y \rangle$ with $y < s + 1$.
+
+At stage $1$, $\mathcal P_0$ receives its first follower and the column $0$ of $H$ is empty, so the hypothesis holds for $g = 1$. By induction, $\mathcal P_0$ acts and is initialized infinitely often, and $V$ is infinite.
+:::
+
+The requirement $\mathcal P_0$ itself is met in this run, since the followers enter $C$ while $\Psi^H$ is the constant function $0$. What fails is the finite injury lemma: the strategy is never left undisturbed, and each initialization destroys the computation on which it acted, since that computation queried $\langle 0, g \rangle$ while this number was out of $H$. A verification by induction along the priority order, as in the Friedberg–Muchnik theorem, is impossible.
+
+## The tree solution
+
+A $\mathcal P_i$-strategy below $\mathcal G_e$ with outcome $\infty$ cannot respect the column $e$: it would have to wait for $\mathcal G_e$ to stop, which never happens. In the proof of :ref{#prop-hi-finite-injury}, $\mathcal P_0$ acts between two growths of $V$, while the numbers $\langle 0, y \rangle$ with $g \leq y < s$ are still missing from $H$. The tree solves the conflict by timing. The $\mathcal P_i$-strategy guessing $\infty$ only acts at stages at which $\mathcal G_e$ has just filled its column up to the current stage $s$. The uses of the computations it protects are at most $s$, and from then on, $\mathcal G_e$ only enumerates numbers $\langle e, y \rangle$ with $y \geq s$, which are at least $s$.
 
 ## The construction
 
@@ -60,9 +91,9 @@ At the end of the stage, initialize every node $\beta$ with $\sigma_s <_L \beta$
 
 The construction is computable, so $H$ and $C$ are c.e. Only $\mathcal G_e$-nodes enumerate into the column $e$ of $H$, and a follower enters $C$ only through the action of its own node. The node visited at stage $s$ after a $\mathcal P$-node that acts at stage $s$ already sees its restraint.
 
-## Verification
+## The true path and the coding requirements
 
-The true path $P$ is defined as in :ref{#def-true-path}, and the proof of :ref{#lem-true-path} applies, with a simpler first case since no stage ends early.
+The true path $P$ is defined as in :ref{#def-true-path}, and the proof of :ref{#lem-true-path} applies, with a simpler first case since no stage ends early (:ref{#ex-hi-true-path}).
 
 :::lemma{#lem-hi-true-path}
 For every $n$, the node $P \uh n$ is visited at infinitely many stages, and $\sigma_s <_L P \uh n$ holds for only finitely many $s$; so $P \uh n$ is initialized finitely often. A $\mathcal P$-node acts at most once between two initializations.
@@ -82,48 +113,7 @@ We show that $R_\alpha$ is eventually constant. The $\mathcal P$-nodes of higher
 Let $y$ be such that $\langle e, y \rangle \geq R$. At an $\alpha$-expansionary stage $s > \max(s_2, y)$, the number $\langle e, y \rangle$ is enumerated into $H$ if it is not already there. The numbers $\langle e, y \rangle < R$ are finitely many, so $H^{[e]}$ is cofinite.
 :::
 
-:::lemma{#lem-hi-preservation}
-Suppose that a $\mathcal P_i$-node $\beta$ acts at stage $s_0$, through a computation $\Phi^{\tilde H}_i(x)[s_0]\converge = 0$, and is never initialized afterwards. Then no number less than $s_0$ enters $H$ after the action of $\beta$. Consequently $\Phi^H_i(x) = 0$.
-:::
-
-:::proof{of=lem-hi-preservation}
-Let a $\mathcal G_e$-node $\alpha$ enumerate a number $z = \langle e, y \rangle$ into $H$ at an $\alpha$-expansionary stage $t \geq s_0$, after the action of $\beta$. We show that $z \geq s_0$. Throughout, $r_\beta = s_0$, since $\beta$ is not initialized.
-
-1. *$\alpha$ has lower priority than $\beta$.* Then $R_\alpha \geq r_\beta = s_0$ at stage $t$, and $z \geq R_\alpha$.
-2. *$\alpha <_L \beta$.* Then $\alpha$ is visited at $t$, so $\sigma_t <_L \beta$ and $\beta$ is initialized at the end of stage $t$: excluded.
-3. *$\alpha^\frown \mathrm f \preceq \beta$.* Since $t$ is $\alpha$-expansionary, $\alpha^\frown \infty \preceq \sigma_t$, so again $\sigma_t <_L \beta$: excluded.
-4. *$\alpha^\frown \infty \preceq \beta$.* Since $\beta$ is visited at $s_0$, so is $\alpha$, with outcome $\infty$: the stage $s_0$ is $\alpha$-expansionary, and $\alpha$ acted before $\beta$, so that $t > s_0$. If $y \geq s_0$, then $z \geq y \geq s_0$. Suppose $y < s_0$. At stage $s_0$, $\alpha$ did not enumerate $z$, and $z$ was not in $H$, so $z < R_\alpha$ at stage $s_0$: some $\mathcal P$-node $\gamma$ of higher priority than $\alpha$ had $z < r_\gamma$. At stage $t$, $z \geq R_\alpha$, so the restraint of $\gamma$ has decreased. A restraint only decreases by initialization, so $\gamma$ was initialized at the end of a stage $v$ with $s_0 \leq v < t$, and $\sigma_v <_L \gamma$. If $\gamma \prec \alpha$, then $\gamma \prec \beta$; if $\gamma <_L \alpha$, then $\gamma <_L \beta$. In both cases $\sigma_v <_L \beta$, and $\beta$ is initialized at the end of stage $v$: excluded.
-
-So no number less than $s_0$ enters $H$ after the action. The computation $\Phi^{\tilde H}_i(x)[s_0]$ has use at most $s_0$, and $H \uh s_0 = \tilde H \uh s_0$, so $\Phi^H_i(x) = 0$ by the use principle.
-:::
-
-Case 4 is where the tree matters. A $\mathcal G_e$-node with outcome $\infty$ on the true path enumerates infinitely many numbers, and injures infinitely often every node to its right; but at the stages at which the nodes below its outcome $\infty$ act, it has just filled its column up to the current stage, and it never comes back below. The only way it could come back is the release of a restraint of higher priority, which also initializes $\beta$.
-
-:::lemma{#lem-hi-diagonal}
-Every requirement $\mathcal P_i$ is met.
-:::
-
-:::proof{of=lem-hi-diagonal}
-Let $\beta = P \uh (2i + 1)$. By :ref{#lem-hi-true-path}, $\beta$ is initialized finitely often and visited infinitely often; after its last initialization, it receives a follower $x$ and keeps it. If $\beta$ acts, then $x \in C$ and $\Phi^H_i(x) = 0$ by :ref{#lem-hi-preservation}. If $\beta$ never acts, then $x \notin C$. Suppose that $\Phi^H_i(x) = 0$, with use $u$. At every large stage $s$, the computation has converged, $s \geq u$, and the current approximation of $H$ agrees with $H$ below $u$, so $\Phi^{\tilde H}_i(x)[s]\converge = 0$ at every large $\beta$-stage, and $\beta$ acts: a contradiction. So $\Phi^H_i(x) \neq 0 = C(x)$. In both cases $\Phi^H_i \neq C$.
-:::
-
-:::proof{of=thm-high-incomplete}
-By :ref{#lem-hi-coding} and :ref{#lem-hi-coding-suffices}, $H$ is high. By :ref{#lem-hi-diagonal}, $C \not\leq_T H$.
-:::
-
-:::quiz[the high incomplete construction]
-In case 4 of the proof of :ref{#lem-hi-preservation}, why does $\alpha$ not enumerate the number $\langle e, y \rangle$ with $y < s_0$ at a later stage?
-
-- [x] Because at stage $s_0$, just before $\beta$ acted, $\alpha$ enumerated every number of its column below $s_0$ that was not restrained; a number left out then can only enter after the release of a restraint of higher priority, which initializes $\beta$.
-- [ ] Because $\alpha$ respects the restraint of $\beta$.
-
-  $\alpha$ has higher priority than $\beta$, and does not respect its restraint.
-- [ ] Because $\alpha$ has finitely many expansionary stages.
-
-  In this case, $\alpha$ may have infinitely many expansionary stages: this is the infinite injury situation.
-
----
-
+:::quiz[the coding requirements]
 Why is the first visit of a $\mathcal G_e$-node after an initialization not expansionary, unlike the first visit of an $\mathcal N$-node in the minimal pair construction?
 
 - [x] Because a $\mathcal G_e$-node may be initialized and visited again infinitely often; if each such first visit were expansionary, it could enumerate numbers into the column $e$ at infinitely many stages, and make the column infinite even when $W_e$ is finite. With records, a node whose record is set after $W_e$ has stopped growing is never expansionary.
@@ -133,54 +123,22 @@ Why is the first visit of a $\mathcal G_e$-node after an initialization not expa
 - [ ] So that the column $e$ is cofinite when $W_e$ is infinite.
 
   Cofiniteness only uses the node on the true path, which has infinitely many expansionary stages in both versions.
-
----
-
-In :ref{#lem-hi-diagonal}, why is the true path used, rather than an arbitrary $\mathcal P_i$-node?
-
-- [x] Because a node on the true path is initialized finitely often and visited infinitely often, so it keeps a follower and gets to act if the computation converges to $0$.
-- [ ] Because only nodes on the true path act.
-
-  Nodes to the right of the true path may act infinitely often.
-- [ ] Because the true path is computable.
-
-  The true path computes $\emptyset''$.
 :::
-
-## Further results
-
-The c.e. degrees have been studied intensively with these methods and their elaborations. We state some of the main results without proof; see Soare's book for all of them.
-
-- **Density** (Sacks, 1964). Between any two c.e. degrees $\abf < \bbf$ there is a c.e. degree $\cbf$ with $\abf < \cbf < \bbf$. The proof combines the Sacks preservation strategy with coding, in an infinite injury argument.
-- **No diamond with top $\mathbf 0'$** (Lachlan, 1966). There are no c.e. degrees $\abf$ and $\bbf$ forming a minimal pair with $\abf \vee \bbf = \mathbf 0'$.
-- **Cappable degrees** (Ambos-Spies, Jockusch, Shore, Soare, 1984). A non-zero c.e. degree is **cappable** if it belongs to a minimal pair of c.e. degrees. A co-infinite c.e. set $A$ is **promptly simple** if there are a c.e. approximation $(A_s)$ and a computable function $p$ such that, for every $e$ with $W_e$ infinite, some $x$ enters $W_e$ at a stage $s$ and belongs to $A_{p(s)}$. A non-zero c.e. degree is non-cappable if and only if it contains a promptly simple set. The non-cappable degrees form a filter of the c.e. degrees, and the cappable degrees, together with $\obf$, form an ideal.
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that the outcome of the $\mathcal G_e$-node on the true path is $\infty$ if and only if $W_e$ is infinite, and deduce that the true path is Turing equivalent to $\emptyset''$.
+::::exercise{difficulty=1 #ex-hi-true-path}
+Prove :ref{#lem-hi-true-path}, following the proof of :ref{#lem-true-path}. Where is it used that no stage ends early?
 
 :::solution
-Let $\alpha = P \uh 2e$. After its last initialization, $\alpha$ keeps its record. If $W_e$ is infinite, there are infinitely many $\alpha$-expansionary stages (proof of :ref{#lem-hi-coding}), and $P(2e) = \infty$. If $W_e$ is finite, the record eventually equals $|W_e|$ and $\alpha$ is no longer expansionary, so $\alpha^\frown \infty$ is visited finitely often and $P(2e) = \mathrm f$. Hence $\mathrm{Inf}(e) = 1$ if and only if $P(2e) = \infty$, and $\emptyset'' \equiv_T \mathrm{Inf} \leq_T P$. As in the previous lesson, $P \leq_T \emptyset''$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Consider the finite injury version of the construction: one strategy per requirement, ordered $\mathcal G_0, \mathcal P_0, \mathcal G_1, \mathcal P_1, \dots$, in which the strategy for $\mathcal G_e$ fills its column below the current stage whenever $W_e$ grows, respecting the restraints of the strategies of higher priority, and a strategy for $\mathcal P_i$ acts at any stage and is initialized whenever a strategy of higher priority enumerates a number below its restraint. Show that the strategy for $\mathcal P_0$ may be injured infinitely often, and identify the case of :ref{#lem-hi-preservation} that has no counterpart.
-
-:::solution
-Suppose that $\Phi^X_0(x)$ converges to $0$ for every oracle $X$ and every $x$, after querying $X$ at $\langle 0, y \rangle$ for every $y < x$, and that $W_0$ is infinite and grows only at stages $t_0 < t_1 < \cdots$ that are far apart. After $t_k$, the strategy for $\mathcal P_0$ has a follower $x > t_k$, since followers are fresh after its last initialization, which happened at or before $t_k$. If $t_{k+1}$ is large enough, the computation $\Phi^H_0(x)$ converges at some stage $s$ with $t_k < s < t_{k+1}$, and $\mathcal P_0$ acts, with a restraint larger than $\langle 0, t_k \rangle$, a number queried by the computation. This number is not in $H$, since $\mathcal G_0$ last filled its column below $t_k$. At stage $t_{k+1}$, $\mathcal G_0$, which has higher priority, enumerates $\langle 0, t_k \rangle$ and injures $\mathcal P_0$. This repeats for every $k$.
-
-Case 4 of :ref{#lem-hi-preservation} fails. On the tree, the node below the outcome $\infty$ of $\alpha$ only acts at $\alpha$-expansionary stages, just after $\alpha$ has filled its column below the current stage; here $\mathcal P_0$ acts between two growths of $W_0$, while the numbers $\langle 0, y \rangle$ with $t_k \leq y < s$ are still missing from $H$.
+A $\mathcal P$-node is marked satisfied when it acts, and only an initialization removes the mark, so it acts at most once between two initializations. The rest is the induction of :ref{#lem-true-path}, in which $\mathcal G$-nodes are treated as the $\mathcal N$-nodes of case 2, with the same proof. The only change is in case 1. In the minimal pair construction, an $\mathcal R$-node that acts ends the stage, so the proof first needs a stage after which the node no longer acts. Here the stage continues after an action, and the current path has length $s$, so at every $\alpha$-stage $s > n + 1$ of a $\mathcal P$-node $\alpha = P \uh n$, the node $\alpha^\frown \mathrm f$ is visited, whether or not $\alpha$ acts. Hence $P(n) = \mathrm f$, and a current path to the left of $\alpha^\frown \mathrm f$ is to the left of $\alpha$.
 :::
 ::::
 
 ## Notes and references
 
-Sacks (1963) proved that every degree c.e. in and above $\mathbf 0'$ is the jump of a c.e. degree, by an infinite injury argument; high incomplete c.e. degrees are the case of $\mathbf 0''$. The construction of this lesson is a tree version of the classical proof, in which the columns of $H$ code $\mathrm{Inf}$; Soare's book gives another proof through the thickness lemma, and observes that the result can also be obtained by two successive finite injury arguments. The characterization of the cappable degrees is due to Ambos-Spies, Jockusch, Shore and Soare (1984).
+Sacks (1963) proved that every degree c.e. in and above $\mathbf 0'$ is the jump of a c.e. degree, by an infinite injury argument; high incomplete c.e. degrees are the case of $\mathbf 0''$. Downey and Hirschfeldt (§2.14.3) prove the existence of a high incomplete c.e. degree in two steps: a c.e. set whose columns are either finite or full according to whether $\Phi_e$ is total, and a c.e. thick subset of it that avoids the cone above a given non-computable c.e. set (a weak form of Shoenfield's thickness lemma), proved on a tree with the same tree and outcomes as here. The construction of this lesson merges the two steps: the columns of $H$ code $\mathrm{Inf}$ directly. The finite injury version of :ref{#prop-hi-finite-injury} is the obstacle described informally by Downey and Hirschfeldt and by Nies.
 
 - G. E. Sacks, *Recursive enumerability and the jump operator*, Transactions of the American Mathematical Society 108 (1963), 223–239.
-- G. E. Sacks, *The recursively enumerable degrees are dense*, Annals of Mathematics 80 (1964), 300–312.
-- K. Ambos-Spies, C. G. Jockusch, R. A. Shore and R. I. Soare, *An algebraic decomposition of the recursively enumerable degrees and the coincidence of several degree classes with the promptly simple degrees*, Transactions of the American Mathematical Society 281 (1984), 109–128.
-- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapters VIII–XIII.
-- S. Lempp, *Priority arguments in computability theory, model theory, and complexity theory*, lecture notes, University of Wisconsin, 2012.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.14.3 and §2.16.
+- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapter VIII (the thickness lemma is Theorem VIII.1.1, Sacks' jump theorem is Theorem VIII.3.1).

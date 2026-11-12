@@ -1,11 +1,57 @@
 ---
-title: Trees of strategies
-summary: The tree of strategies of the minimal pair construction; the priority order, initialization to the right of the current path, and the true path; the verification of the minimal pair theorem.
+title: Guessing on a tree of strategies
+summary: The strategy for a minimal pair requirement and its two outcomes; why the strategies of lower priority must guess the outcome; the tree of strategies, its priority order, and the construction along the current path, with initialization to the right of the current path.
 duration: 45
 prerequisites: [minimal-pairs]
 ---
 
-The previous lesson reduced the minimal pair theorem to requirements $\mathcal N_e$, $\mathcal R_e$ and $\mathcal S_e$, and showed that the strategy for $\mathcal R_d$ below $\mathcal N_e$ depends on the outcome of $\mathcal N_e$, which the construction cannot compute. The **tree method** assigns to each requirement one strategy for each possible guess about the outcomes of the strategies above it. At every stage, the construction computes a current guess, a finite path through the tree, and only runs the strategies along it. The **true path**, the leftmost path visited infinitely often, consists of the strategies whose guesses are correct; the verification shows that they meet their requirements.
+The previous lesson reduced the minimal pair theorem to requirements $\mathcal N_e$, $\mathcal R_e$ and $\mathcal S_e$, and proved that a computation agreed on by both sides keeps its value as long as only one side changes between consecutive expansionary stages (:ref{#lem-pair-module}). This lesson turns the lemma into a strategy for $\mathcal N_e$, shows that the strategies of lower priority must behave differently according to the outcome of this strategy, which the construction cannot compute, and organizes the resulting guesses on a tree. The next lesson verifies the construction.
+
+## The strategy and its two outcomes
+
+The strategy for $\mathcal N_e$ is now the following: it is run at a set $Q$ of stages and computes the expansionary stages for $Q$. It enumerates nothing and imposes no explicit restraint. Instead, it constrains how the requirements below it act, so that condition 2 of :ref{#lem-pair-module} holds between consecutive expansionary stages. It has two possible **outcomes**:
+
+- **$\infty$**: there are infinitely many expansionary stages;
+- **$\mathrm f$**: there are finitely many expansionary stages. By :ref{#prop-agreement-unbounded}, $\Phi^A_e = \Phi^B_e$ is then not total, and $\mathcal N_e$ holds trivially, provided $Q$ is infinite.
+
+Consider a requirement $\mathcal R_d$ of lower priority. It acts by enumerating a follower $x$ into $A$ once $x$ appears in $W_d$. Two strategies are possible.
+
+1. *If the outcome of $\mathcal N_e$ is $\infty$:* act only at expansionary stages, immediately after $\mathcal N_e$ has found the new expansionary stage. Then an action changes $A$ at stage $s_k$, after the computations of stage $s_k$ have been examined; if at most one element enters $A \cup B$ below $s_k$ between $s_k$ and $s_{k+1}$, condition 2 holds. Since there are infinitely many expansionary stages, $\mathcal R_d$ gets infinitely many opportunities to act.
+2. *If the outcome is $\mathrm f$:* act at any stage, after the last expansionary stage. The strategy of $\mathcal N_e$ imposes nothing after that stage. With strategy 1, $\mathcal R_d$ would wait forever.
+
+The construction cannot know which outcome holds: the outcome $\infty$ is a $\Pi^0_2$ property. It runs both versions of $\mathcal R_d$, one guessing each outcome. The version guessing $\mathrm f$ is **initialized** at every expansionary stage, and chooses its followers larger than the last expansionary stage, so that its actions never destroy computations examined by $\mathcal N_e$ at that stage. If the outcome is $\infty$, this version is initialized infinitely often and may act infinitely often: it is injured infinitely often, which is harmless, since the other version meets $\mathcal R_d$.
+
+The same splitting is needed for the requirements $\mathcal N_{e'}$ of lower priority, for a reason of coherence. Suppose that $\mathcal N_{e'}$ computed its expansionary stages among all stages, and that $\mathcal N_e$ and $\mathcal N_{e'}$ both have infinitely many expansionary stages. A requirement $\mathcal R_d$ of lower priority than both, using strategy 1 for both, may only act at stages that are expansionary for both, and the two infinite sets of expansionary stages may be disjoint: $\mathcal R_d$ would never act. So the version of $\mathcal N_{e'}$ that guesses the outcome $\infty$ for $\mathcal N_e$ is run only at the expansionary stages of $\mathcal N_e$. This is why :ref{#def-expansionary} defines the expansionary stages relative to a set $Q$: with $Q$ the set of expansionary stages of $\mathcal N_e$, every expansionary stage of $\mathcal N_{e'}$ is also expansionary for $\mathcal N_e$. Iterating the case distinction gives a **tree of strategies**, one level per requirement, and one branch for each guess about the outcomes of the requirements above. The rest of this lesson defines it precisely.
+
+:::quiz[guessing outcomes]
+Why must the version of $\mathcal R_d$ guessing the outcome $\mathrm f$ choose followers larger than the last expansionary stage?
+
+- [x] So that its enumerations between two expansionary stages are above the uses of the computations examined at the earlier one, and do not count against condition 2 of :ref{#lem-pair-module}.
+- [ ] So that $\mathcal R_d$ is met.
+
+  Any follower serves $\mathcal R_d$: either it appears in $W_d$ and is enumerated into $A$, or it never appears in $W_d$ and stays outside $A$. The size matters for $\mathcal N_e$.
+- [ ] Because followers must be fresh in every priority argument.
+
+  Freshness is a tool; here its purpose is precisely to protect the computations seen by $\mathcal N_e$.
+
+---
+
+Why can the construction not simply determine the outcome of $\mathcal N_e$ and use the corresponding strategy for $\mathcal R_d$?
+
+- [x] Because the outcome $\infty$, "there are infinitely many expansionary stages", is a $\Pi^0_2$ property, not decidable during a computable construction.
+- [ ] Because the outcome changes during the construction.
+
+  The outcome is a property of the whole construction; what changes is the current guess about it.
+- [ ] Because $\mathcal N_e$ has more than two outcomes.
+
+  It has exactly two.
+:::
+
+## The tree method
+
+The **tree method** assigns to each requirement one strategy for each possible guess about the outcomes of the strategies above it. At every stage, the construction computes a current guess, a finite path through the tree, and only runs the strategies along it. The **true path**, the leftmost path visited infinitely often, will consist of the strategies whose guesses are correct; it is defined and studied in the next lesson.
+
+The same organization applies to finite injury arguments: Downey and Hirschfeldt present the Friedberg–Muchnik construction on a binary tree, whose outcomes record whether a strategy has enumerated its follower. There the current guess about each strategy can only move to the left, once, and the true path is computable in $\emptyset'$. In an infinite injury argument the guess about an $\mathcal N$-node moves to the left at each expansionary stage and back to the right in between, and the true path is only computable in $\emptyset''$, as an exercise of the next lesson shows (:ref{#ex-true-path-double-jump}).
 
 ## The tree and the priority order
 
@@ -42,144 +88,35 @@ At the end of the stage, initialize every node $\beta$ with $\sigma_s <_L \beta$
 
 A node $\alpha$ is **visited at stage $s$**, and $s$ is an **$\alpha$-stage**, if $\alpha \prec \sigma_s$, strictly. At each stage, at most one number is enumerated, at the very end, after all the computations of the stage have been examined. The construction is computable, so $A$ and $B$ are c.e. Followers are fresh, so distinct followers are distinct numbers, and a follower enters $A$ or $B$ only through the action of its own node. In particular $A \cap B = \emptyset$.
 
-The initialization rule replaces the explicit restraints of finite injury arguments. A node to the right of the current path has made a guess that the current stage refutes, at least for now: it loses its follower, and the next follower it receives is fresh, hence larger than every use of a computation examined so far.
-
-## The true path
-
-:::definition{#def-true-path}
-The **true path** is the infinite sequence $P \in \Lambda^\nat$ defined by induction: $P(n)$ is the least $o \in \Lambda$ such that $(P \uh n)^\frown o$ is visited at infinitely many stages.
-:::
-
-:::lemma{#lem-true-path}
-For every $n$, the true path is defined at $n$, and the node $\alpha = P \uh n$ satisfies:
-
-1. $\alpha$ is visited at infinitely many stages;
-2. $\sigma_s <_L \alpha$ holds for only finitely many $s$; in particular $\alpha$ is initialized only finitely often;
-3. if $\alpha$ is an $\mathcal R$- or $\mathcal S$-node, it acts only finitely often.
-:::
-
-:::proof{of=lem-true-path}
-By induction on $n$. The root is visited at every stage $s \geq 1$, and no path is to its left.
-
-Suppose that $\alpha = P \uh n$ satisfies items 1 and 2. The node $\alpha$ is initialized only at the end of a stage $s$ with $\sigma_s <_L \alpha$, so it is initialized finitely often. If $\alpha$ is an $\mathcal R$- or $\mathcal S$-node, then between two initializations it acts at most once, since it is then marked satisfied; this gives item 3. Let $s_0$ be a stage after which $\alpha$ never acts, nor is initialized, nor satisfies $\sigma_s <_L \alpha$.
-
-*Case 1: $\alpha$ is an $\mathcal R$- or $\mathcal S$-node.* At every $\alpha$-stage $s > \max(s_0, n + 1)$, $\alpha$ does not act and $\alpha^\frown \mathrm f$ has length less than $s$, so $\alpha^\frown \mathrm f$ is visited. So $P(n) = \mathrm f$, and $\alpha^\frown \mathrm f$ satisfies item 1. A node to the left of $\alpha^\frown \mathrm f$ is to the left of $\alpha$, since no node has the value $\infty$ at position $n$; this gives item 2.
-
-*Case 2: $\alpha$ is an $\mathcal N$-node.* At every $\alpha$-stage $s > n + 1$, $\alpha^\frown o$ is visited, where $o$ is the outcome of $\alpha$ at $s$. If the outcome $\infty$ occurs at infinitely many stages, $P(n) = \infty$, and a path to the left of $\alpha^\frown \infty$ is to the left of $\alpha$. Otherwise, $P(n) = \mathrm f$, the node $\alpha^\frown \mathrm f$ is visited at all $\alpha$-stages after the last $\alpha$-expansionary stage, and a path to the left of $\alpha^\frown \mathrm f$ is either to the left of $\alpha$ or extends $\alpha^\frown \infty$; both happen only finitely often.
-:::
-
-Item 2 is the reason why the priority order puts every node to the left of $\alpha$ above it. A node $\beta$ to the right of the true path may be initialized infinitely often, and act infinitely often, each time with a new follower: if $\beta$ extends $\alpha^\frown \mathrm f$ while the true outcome of $\alpha$ is $\infty$, $\beta$ is initialized at every $\alpha$-expansionary stage. This is the infinite injury. It is harmless, because the requirement of $\beta$ is met by the node of the same level on the true path, and because the actions of $\beta$ only enumerate fresh numbers.
-
-:::quiz[the true path]
-Why is the true path defined with the leftmost outcome visited infinitely often, rather than any outcome visited infinitely often?
-
-- [x] Because the leftmost one is the correct guess: if $\alpha^\frown \infty$ is visited infinitely often, $\alpha$ has infinitely many expansionary stages, while $\alpha^\frown \mathrm f$ may also be visited infinitely often, at the stages between them.
-- [ ] Because only one outcome is visited infinitely often.
-
-  Both outcomes of an $\mathcal N$-node may be visited infinitely often.
-- [ ] Because the leftmost outcome is computable.
-
-  The true path is computable in $\emptyset''$, not computable in general.
-
----
-
-Why must a node to the left of $\alpha$ have higher priority than $\alpha$, rather than lower?
-
-- [x] Because a node to the right of the true path may act infinitely often; if it had higher priority than the nodes of the true path, these could be injured infinitely often.
-- [ ] Because nodes to the left are visited more often.
-
-  Nodes to the left of the true path are visited only finitely often.
-- [ ] Because the tree order must be well-founded.
-
-  The priority order is not well-founded: each of the nodes $\mathrm f$, $\infty\mathrm{fff}$, $\infty\mathrm{ff}\infty\mathrm{fff}$, … has lower priority than the next one.
-:::
-
-## Verification
-
-:::lemma{#lem-mp-positive}
-Every requirement $\mathcal R_e$ and $\mathcal S_e$ is met.
-:::
-
-:::proof{of=lem-mp-positive}
-Let $\beta = P \uh (3e + 1)$, the $\mathcal R_e$-node on the true path. By :ref{#lem-true-path}, $\beta$ is initialized finitely often and visited infinitely often. At its first visit after its last initialization, it receives a follower $x$, which it keeps forever. If $x \in W_e$, at the first $\beta$-stage $s$ with $x \in W_{e,s}$, $\beta$ is not yet marked satisfied, so it acts, and $x \in A \cap W_e$. If $x \notin W_e$, then $\beta$ never enumerates $x$, no other node does, and $x \in \overline A \setminus W_e$. In both cases $W_e \neq \overline A$. The argument for $\mathcal S_e$ is the same.
-:::
-
-The main lemma checks condition 2 of :ref{#lem-pair-module} for the $\mathcal N$-nodes of the true path.
-
-:::lemma{#lem-mp-one-side}
-Let $\alpha = P \uh 3e$, and let $s^*$ be a stage larger than $|\alpha| + 1$ such that, for $s \geq s^*$, $\sigma_s \not<_L \alpha$ and no proper prefix of $\alpha$ acts at stage $s$. If $s^* \leq s < t$ are consecutive $\alpha$-expansionary stages, then $A_t \uh s = A_s \uh s$ or $B_t \uh s = B_s \uh s$.
-:::
-
-:::proof{of=lem-mp-one-side}
-Let $u$ be a stage with $s \leq u < t$ at which some node $\gamma$ acts, so that $\sigma_u = \gamma^\frown \mathrm f$. We consider the position of $\gamma$ relative to $\alpha$.
-
-- $\gamma$ is a proper prefix of $\alpha$, or $\gamma <_L \alpha$: excluded by the choice of $s^*$, since then $\sigma_u <_L \alpha$ in the second case.
-- $\gamma = \alpha$: impossible, since $\mathcal N$-nodes do not act.
-- $\alpha^\frown \infty \preceq \gamma$: then $\alpha$ is visited at $u$ with outcome $\infty$, so $u$ is $\alpha$-expansionary, and $u = s$.
-- $\alpha^\frown \mathrm f \preceq \gamma$ or $\alpha <_L \gamma$: since $s$ is $\alpha$-expansionary, $\alpha^\frown \infty \preceq \sigma_s$, so $\sigma_s <_L \gamma$, and $\gamma$ is initialized at the end of stage $s$. In particular $u > s$, and the follower enumerated by $\gamma$ was received after stage $s$; it is fresh, hence larger than $s$.
-
-So the only number below $s$ that may be enumerated during the stages $s, \dots, t - 1$ is the follower of the node acting at stage $s$, if any. It enters $A$ or $B$, not both, and the other side does not change below $s$.
-:::
-
-:::lemma{#lem-mp-negative}
-Every requirement $\mathcal N_e$ is met.
-:::
-
-:::proof{of=lem-mp-negative}
-Let $\alpha = P \uh 3e$. By :ref{#lem-true-path}, the prefixes of $\alpha$ act finitely often, and $\sigma_s <_L \alpha$ for finitely many $s$; so a stage $s^*$ as in :ref{#lem-mp-one-side} exists, and $\alpha$ is not initialized after $s^*$. Suppose that $\Phi^A_e = \Phi^B_e$ is total. By :ref{#prop-agreement-unbounded}, applied to the infinite set of $\alpha$-stages after the last initialization of $\alpha$, there are infinitely many $\alpha$-expansionary stages. List those larger than $s^*$ as $s_0 < s_1 < \cdots$. The sequence is computable: run the construction and list the $\alpha$-expansionary stages after $s^*$. Condition 1 of :ref{#lem-pair-module} holds since the record increases, and condition 2 by :ref{#lem-mp-one-side}. By :ref{#cor-pair-module}, $\Phi^A_e$ is computable.
-:::
-
-:::proof{of=thm-minimal-pair}
-The sets $A$ and $B$ are c.e. By :ref{#lem-mp-positive}, they are not computable, and $A$ is non-empty: for an index $e$ with $W_e = \nat$, the requirement $\mathcal R_e$ puts a number into $A$. Since $A \cap B = \emptyset$, we have $A \neq B$. By :ref{#lem-mp-negative} and :ref{#lem-posner}, every set computable in both $A$ and $B$ is computable.
-:::
-
-:::quiz[the main lemma]
-In the proof of :ref{#lem-mp-one-side}, why can a node $\gamma$ extending $\alpha^\frown \mathrm f$ not enumerate a small number between two consecutive $\alpha$-expansionary stages?
-
-- [x] Because it is initialized at the end of the first of them, which has outcome $\infty$, so its next follower is fresh, larger than that stage.
-- [ ] Because it has lower priority than $\alpha$.
-
-  Priority alone imposes nothing: $\mathcal N$-nodes impose no restraint. Initialization does the work.
-- [ ] Because it is never visited.
-
-  It is visited at the $\alpha$-stages with outcome $\mathrm f$, which may occur between expansionary stages.
-
----
-
-Why does the stage end when a node acts?
-
-- [x] So that at most one number enters $A \cup B$ at an $\alpha$-expansionary stage; two actions below $\alpha^\frown \infty$ at the same stage could change $A$ and $B$ simultaneously below $s$.
-- [ ] To make the construction computable.
-
-  The construction would be computable in any case.
-- [ ] Because a node that acts initializes all the nodes below it.
-
-  In this construction, initialization only concerns nodes to the right of the current path.
-:::
+In the Friedberg–Muchnik construction, an action initializes every requirement of lower priority. Here, initialization is triggered by the current path, not by actions: a node is initialized when the construction moves to its left. The initialization rule replaces the explicit restraints of finite injury arguments. A node to the right of the current path has made a guess that the current stage refutes, at least for now: it loses its follower, and the next follower it receives is fresh, hence larger than every use of a computation examined so far.
 
 ## Exercises
 
 ::::exercise{difficulty=1}
-Show that the true path is computable in $\emptyset''$.
+Show that the priority order of :ref{#def-strategy-tree} is a strict linear order on $\mathbb T$. Show that a node $\beta$ has infinitely many nodes of higher priority if $\beta(n) = \mathrm f$ for some multiple $n$ of $3$ with $n < |\beta|$, and only its proper prefixes otherwise.
 
 :::solution
-Given $P \uh n$, if it is an $\mathcal N$-node, then $P(n) = \infty$ if and only if $(P \uh n)^\frown \infty$ is visited at infinitely many stages. The set of stages at which a node $\beta$ is visited is computable, uniformly in $\beta$, so it is $W_{g(\beta)}$ for a computable function $g$. Hence $\beta$ is visited at infinitely many stages if and only if $g(\beta) \in \mathrm{Inf}$, which $\emptyset''$ decides (:ref{#prop-tot-double-jump}). If $P \uh n$ is another node, $P(n) = \mathrm f$. By induction on $n$, $\emptyset''$ computes $P$.
-:::
-::::
+Write $\alpha \lhd \beta$ when $\alpha$ has higher priority than $\beta$. No node is a proper prefix of itself or to the left of itself, so $\lhd$ is irreflexive. If $\alpha \neq \beta$ and neither is a prefix of the other, let $n$ be the first position where they differ; since $\Lambda$ has two elements, one of them has the value $\infty$ at $n$ and is to the left of the other. So any two distinct nodes are comparable.
 
-::::exercise{difficulty=2}
-Modify the construction so that $A$ and $B$ are, in addition, simple sets.
+Transitivity: let $\alpha \lhd \beta \lhd \gamma$.
+- If $\alpha \prec \beta \prec \gamma$, then $\alpha \prec \gamma$.
+- If $\alpha \prec \beta$ and $\beta <_L \gamma$, with first difference at $n$: if $|\alpha| \leq n$, then $\alpha \preceq \beta \uh n = \gamma \uh n$, and $\alpha \prec \gamma$ since $|\alpha| \leq n < |\gamma|$; otherwise $\alpha \uh n = \gamma \uh n$ and $\alpha(n) = \beta(n) = \infty \neq \gamma(n)$, so $\alpha <_L \gamma$.
+- If $\alpha <_L \beta$, with first difference at $n$, and $\beta \prec \gamma$, then $\gamma \uh (n + 1) = \beta \uh (n + 1)$, so $\alpha <_L \gamma$.
+- If $\alpha <_L \beta$ at $n$ and $\beta <_L \gamma$ at $m$, then $n \neq m$, since $\beta(n) = \mathrm f$ and $\beta(m) = \infty$. If $n < m$, then $\alpha \uh n = \gamma \uh n$, $\alpha(n) = \infty$ and $\gamma(n) = \beta(n) = \mathrm f$. If $m < n$, then $\alpha \uh m = \gamma \uh m$, $\alpha(m) = \beta(m) = \infty$ and $\gamma(m) = \mathrm f$. In both cases $\alpha <_L \gamma$.
 
-:::solution
-Put $0$ into $A$ at stage $0$, and replace $\mathcal R_e$ by the requirement "if $W_e$ is infinite, then $W_e \cap A \neq \emptyset$". An $\mathcal R_e$-node $\beta$, visited at stage $s$, acts if $W_{e,s} \cap A_s = \emptyset$ and there is $x \in W_{e,s}$ with $x > 2e$ and $x$ larger than the last stage at which $\beta$ was initialized: it enumerates the least such $x$ into $A$, and the stage ends. Treat $\mathcal S_e$ in the same way for $B$, with numbers $x > 2e$ and $x > 0$, so that $0 \in A \setminus B$ and $A \neq B$.
-
-A node $\gamma$ initialized at the end of stage $s$ only enumerates numbers larger than $s$ at its later actions, so :ref{#lem-mp-one-side} still holds, with the same proof; :ref{#lem-mp-negative} and :ref{#lem-posner} then give the minimal pair property. If $W_e$ is infinite, the $\mathcal R_e$-node $\beta$ on the true path, after its last initialization at stage $s_0$, eventually sees an element of $W_e$ larger than $2e$ and $s_0$, and acts at the next $\beta$-stage unless $W_e \cap A \neq \emptyset$ already. Finally, once some element of $W_e$ is in $A$, no $\mathcal R_e$-node acts again, so each $e$ contributes at most one element to $A$, and that element is larger than $2e$. Hence $A \cap \{0, \dots, 2n\}$ has at most $n + 1$ elements, and $\overline A$ is infinite. The same holds for $B$.
+If $\beta(n) = \mathrm f$ with $n$ a multiple of $3$, every node extending $(\beta \uh n)^\frown \infty$ is to the left of $\beta$, and there are infinitely many. Otherwise, a node $\alpha <_L \beta$ would need a position $n$ with $\alpha(n) = \infty$ and $\beta(n) = \mathrm f$; such an $n$ is a multiple of $3$, since the other positions have the value $\mathrm f$ in every node, and there is none. So the nodes of higher priority are the proper prefixes of $\beta$.
 :::
 ::::
 
 ## Notes and references
 
-The tree method was made explicit by Lachlan in the 1970s, and became the standard presentation of infinite injury arguments with Soare's book; earlier proofs organized the same guesses implicitly, through the stages at which restraints are recomputed. Lempp's lecture notes describe the hierarchy of priority arguments: finite injury arguments are $\mathbf 0'$-arguments, since $\emptyset'$ can follow them, the tree arguments of this course are $\mathbf 0''$-arguments, since the true path is computable in $\emptyset''$, and $\mathbf 0'''$-arguments use trees of strategies with more complex interactions.
+Infinite injury arguments were introduced in the 1960s by Sacks, Shoenfield and Yates, without trees. According to Lempp and Lerman, the tree of strategies was introduced by Lachlan (1975), in a $\mathbf 0'''$-argument, developed by Harrington, and popularized by Soare's book. Lempp and Lerman also describe Harrington's classification of priority arguments by the oracle needed to determine how each requirement is satisfied: finite injury arguments are $\mathbf 0'$-arguments, the infinite injury arguments of this course are $\mathbf 0''$-arguments, since the true path is computable in $\emptyset''$, and so on. Downey and Hirschfeldt (§2.14.1) present trees of strategies first on the Friedberg–Muchnik construction, as in the remark of the section on the tree method, and discuss the coherence problem between two $\mathcal N$-requirements in §2.14.2.
 
-- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapters IX and XIV.
-- S. Lempp, *Priority arguments in computability theory, model theory, and complexity theory*, lecture notes, University of Wisconsin, 2012.
+Other presentations exist. Montalbán's true stages replace the guesses along a tree by approximations to the iterated jumps of $\emptyset$, and a stage is $\xi$-true when its approximation to the $\xi$-th jump is correct; the method is designed for iterated priority arguments, in the tradition of Ash's metatheorem, and has been applied in descriptive set theory by Day, Greenberg, Harrison-Trainor and Turetsky. For the $\mathbf 0''$-arguments of this course, trees remain the standard presentation of the textbooks, and we use them.
+
+- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapter IX (minimal pairs) and Chapter XIV (the tree method for $\mathbf 0'''$-arguments).
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.14.1–2.14.2.
+- A. H. Lachlan, *A recursively enumerable degree which will not split over all lesser ones*, Annals of Mathematical Logic 9 (1975), 307–365.
+- S. Lempp and M. Lerman, *A general framework for priority arguments*, Bulletin of Symbolic Logic 1 (1995), 189–201.
+- A. Montalbán, *Priority arguments via true stages*, Journal of Symbolic Logic 79 (2014), 1315–1335.
+- A. Day, N. Greenberg, M. Harrison-Trainor and D. Turetsky, *Iterated priority arguments in descriptive set theory*, Bulletin of Symbolic Logic 30 (2024), 199–226.
