@@ -275,8 +275,8 @@ Checked on 2026-11-12:
 - **Durations.** `schnorr-randomness` has about 2630 words (48 minutes at 55 words per
   minute) and is set to 45, like `martin-lof-randomness/levin-schnorr`; the other lessons
   are within the rule.
-- **Duplication with `randomness-notions/schnorr-kurtz`** (to be resolved there, not
-  here): that lesson defines Schnorr tests (`def-schnorr-kurtz` (2)), proves the
+- **Duplication with `randomness-notions/schnorr-kurtz`** (resolved on 2026-11-12: that
+  lesson now cites this course instead of re-proving): that lesson defines Schnorr tests (`def-schnorr-kurtz` (2)), proves the
   implications Martin-Löf ⇒ Schnorr ⇒ Kurtz (`prop-notions-implications`), the law of large
   numbers for Schnorr randomness, and that weakly 1-generic sets are not Schnorr random
   (`prop-generic-kurtz`), and admits the NST theorem on non-high Schnorr random sets that

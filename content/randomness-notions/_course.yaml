@@ -2,17 +2,20 @@ title: Notions of randomness
 area: randomness
 level: Advanced
 order: 4
-prerequisites: [martin-lof-randomness, immunity-growth]
-summary: Relative randomness and van Lambalgen's theorem, 2-randomness and weak 2-randomness, Schnorr and Kurtz randomness.
+prerequisites: [martin-lof-randomness, immunity-growth, martingales]
+summary: Relative randomness and van Lambalgen's theorem, 2-randomness and weak 2-randomness, and the collapse of Kurtz randomness in computably dominated degrees.
 description: >
-  Randomness notions around Martin-Löf randomness: randomness relative to an
-  oracle and van Lambalgen's theorem, 2-randomness, weak 2-randomness and the
-  theorem of Downey, Nies, Weber and Yu, and the weaker notions of Schnorr and
-  Kurtz, which collapse onto Martin-Löf randomness in computably dominated
-  degrees.
+  Randomness notions around Martin-Löf randomness, beyond the core course on
+  martingales: randomness relative to an oracle and van Lambalgen's theorem,
+  2-randomness, weak 2-randomness and the theorem of Downey, Nies, Weber, Yu,
+  Hirschfeldt and Miller characterizing it among random sequences by
+  computational weakness, and the place of Kurtz randomness, which collapses
+  onto weak 2-randomness in computably dominated degrees and separates from
+  Schnorr randomness in every hyperimmune degree.
 objectives:
-  - Prove van Lambalgen's theorem and derive the incomparability of random halves
-  - Place weak 2-randomness between 2-randomness and Martin-Löf randomness
+  - Prove van Lambalgen's theorem by averaging and Solovay tests, and derive the incomparability of random halves
+  - Characterize 2-randomness by mutual randomness with Chaitin's Ω
+  - Place weak 2-randomness strictly between 2-randomness and Martin-Löf randomness
   - Characterize weakly 2-random sequences among random ones by their computational power
-  - Compare Schnorr and Kurtz randomness with Martin-Löf randomness
+  - Show that computable domination is the dividing line between Kurtz randomness and the stronger notions
 lessons: [relative-randomness, weak-2-randomness, schnorr-kurtz]

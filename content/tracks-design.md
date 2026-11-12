@@ -201,3 +201,7 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
   representations, computable real functions, continuous functions and closed sets, and
   the Weihrauch degrees of the intermediate value theorem, the maximum and monotone
   convergence.
+- **2026-11-12.** `randomness-notions` refocused on what the core course `martingales`
+  leaves out: relative randomness and van Lambalgen's theorem, 2-randomness and weak
+  2-randomness, and Kurtz randomness against computable domination. Its overlap with
+  `martingales` is replaced by citations.
