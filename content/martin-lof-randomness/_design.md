@@ -27,13 +27,14 @@ Kučera–Gács, DNC). The techniques it teaches, in the terms of the track: eff
 arguments, universal tests, and the interplay of randomness and degrees. The specialized
 courses `randomness-notions`, `k-trivials` and `higher-randomness` build on it.
 
-**Left to the martingale course** (planned, written separately): martingales and Ville's
+**Left to the martingale course** (`martingales`, written 2026-11-12): martingales and Ville's
 theorem; c.e. (super)martingales and Schnorr's theorem that ML-randomness is the failure of
 c.e. martingales (Downey–Hirschfeldt 6.3); the savings trick; computable randomness and
 Schnorr randomness via martingales; the martingale proof of Kučera–Gács
 (Downey–Hirschfeldt 8.3.2). This course only mentions Schnorr's characterization in prose
-(notes of `levin-schnorr`) and the martingale proof of Kučera–Gács (notes of
-`randomness-and-degrees`), as forthcoming, without `:ref`.
+(notes of `levin-schnorr`, linking to `thm-schnorr-martingales`) and the martingale proof
+of Kučera–Gács (notes of `randomness-and-degrees`). The martingale course did not include
+that proof after all (lesson budget); it remains a possible addition.
 
 ## 2. Prerequisites assumed
 

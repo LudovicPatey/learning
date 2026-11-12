@@ -171,11 +171,11 @@ For rationals $a < b$, the class of $X$ with $a < 0.X < b$ is a $\Sigma^0_1$ cla
 
 The characterization of randomness by incompressibility was found independently by Levin (1973), with monotone complexity, and Schnorr (1973), with process complexity. The form with prefix-free complexity is credited to Schnorr and was published by Chaitin (1975), who defined randomness by the condition $K(Z \uh n) \geq n - c$ (Downey–Hirschfeldt, Definition 6.1.1 and Theorem 6.2.3; Nies, Theorem 3.2.9). :ref{#cor-k-excess} is due to Chaitin (1987); the ample excess lemma is due to Miller and Yu (2008) (Downey–Hirschfeldt, Theorem 6.6.1 and Corollary 6.6.2; Nies, Proposition 3.2.21 for the corollary). The randomness of $\Omega$ is Downey–Hirschfeldt, Theorem 6.1.3, and Nies, Theorem 3.2.11. The last exercise is due to Rettinger (unpublished; Downey–Hirschfeldt, Theorem 9.2.4; Nies, Proposition 3.2.32), and the second one is a variant of Nies, Proposition 3.2.20.
 
-A third characterization of Martin-Löf randomness, by betting strategies, is due to Schnorr (1971): a sequence is random if and only if no c.e. martingale wins an unbounded capital on it (Downey–Hirschfeldt, Theorem 6.3.4). It is the subject of a forthcoming course of the track, on martingales.
+A third characterization of Martin-Löf randomness, by betting strategies, is due to Schnorr (1971): a sequence is random if and only if no c.e. martingale wins an unbounded capital on it (Downey–Hirschfeldt, Theorem 6.3.4). It is proved in the next course of the track, on martingales (:ref{#thm-schnorr-martingales}).
 
 - L. A. Levin, *On the notion of a random sequence*, Soviet Mathematics Doklady 14 (1973), 1413–1416.
 - C.-P. Schnorr, *Process complexity and effective random tests*, Journal of Computer and System Sciences 7 (1973), 376–388.
-- C.-P. Schnorr, *A unified approach to the definition of random sequences*, Mathematical Systems Theory 5 (1971), 246–258.
+- C.-P. Schnorr, *A unified approach to the definition of a random sequence*, Mathematical Systems Theory 5 (1971), 246–258.
 - G. J. Chaitin, *A theory of program size formally identical to information theory*, Journal of the ACM 22 (1975), 329–340.
 - G. J. Chaitin, *Incompleteness theorems for random reals*, Advances in Applied Mathematics 8 (1987), 119–146.
 - J. S. Miller and L. Yu, *On initial segment complexity and degrees of randomness*, Transactions of the American Mathematical Society 360 (2008), 3193–3210.

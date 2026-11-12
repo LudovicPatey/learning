@@ -194,3 +194,6 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
 - **2026-11-12.** Specialized course `effective-forcing` written: notions of forcing, the
   forcing relation, Cohen and tree forcings, Sacks forcing, the forcing question, and
   Mathias forcing.
+- **2026-11-12.** Core course `martingales` written and added to the randomness track:
+  betting strategies, Ville's theorem, Schnorr's theorem, computable randomness, Schnorr
+  randomness and the hierarchy of randomness notions.

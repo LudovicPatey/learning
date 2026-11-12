@@ -1,0 +1,26 @@
+title: Martingales and randomness
+area: randomness
+level: Intermediate
+order: 3
+prerequisites: [martin-lof-randomness, immunity-growth]
+summary: Randomness through betting strategies, Schnorr's characterization of Martin-Löf randomness, and the weaker notions of computable, Schnorr and Kurtz randomness.
+description: >
+  The third classical approach to randomness, by unpredictability: martingales
+  and supermartingales, Kolmogorov's inequality, Ville's theorem on null classes
+  and the savings trick; c.e. martingales and Schnorr's theorem that a sequence
+  is Martin-Löf random if and only if no c.e. martingale succeeds on it, with
+  universal and optimal strategies; computable randomness and a computably
+  random sequence that is not Martin-Löf random; Schnorr randomness through
+  martingales succeeding at a computable rate, Schnorr tests and total Solovay
+  tests; Kurtz randomness through martingales; the strict hierarchy of the four
+  notions, its collapse outside the high degrees, and the open question of
+  Kolmogorov–Loveland randomness.
+objectives:
+  - Formalize betting strategies as martingales and prove Kolmogorov's inequality
+  - Prove Ville's theorem and apply the savings trick
+  - Prove Schnorr's theorem characterizing Martin-Löf randomness by c.e. martingales, and build an optimal c.e. supermartingale
+  - Prove the basic properties of computable randomness, including the law of large numbers and the convergence of computable martingales
+  - Build a computably random sequence that is not Martin-Löf random by diagonalizing against a combined martingale and compressing the construction
+  - Prove the equivalence of the martingale and test definitions of Schnorr randomness
+  - Characterize Kurtz randomness by martingales, separate the four notions, and show that they collapse outside the high degrees
+lessons: [betting-strategies, ville-theorem, schnorr-theorem, computable-randomness, cr-construction, schnorr-randomness, randomness-hierarchy]

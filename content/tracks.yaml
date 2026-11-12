@@ -16,7 +16,7 @@
   description: >
     Randomness of individual infinite sequences, through tests, incompressibility
     and betting strategies.
-  courses: [kolmogorov-complexity, martin-lof-randomness]
+  courses: [kolmogorov-complexity, martin-lof-randomness, martingales]
 - id: reverse-math
   title: Reverse mathematics
   area: reverse-math
