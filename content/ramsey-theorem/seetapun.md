@@ -1,130 +1,16 @@
 ---
 title: Seetapun's theorem
-summary: Cone avoidance for cohesiveness by Mathias forcing; strong cone avoidance for the infinite pigeonhole principle by the forcing of Dzhafarov and Jockusch; Seetapun's theorem that every computable coloring of pairs has a homogeneous set not computing a given non-computable set; RT²₂ does not imply ACA₀.
-duration: 45
-prerequisites: [cohesiveness]
+summary: Seetapun's theorem that every computable coloring of pairs has a homogeneous set not computing a given non-computable set; RT²₂ does not imply ACA₀; the separation of cohesiveness and stable Ramsey's theorem; further results on the weakness of Ramsey's theorem for pairs.
+duration: 40
+prerequisites: [cone-avoidance, triples]
 ---
 
-By Jockusch's bounds, some computable colorings of pairs have no homogeneous set computable in $\emptyset'$, while some computable coloring of triples forces all its infinite homogeneous sets to compute $\emptyset'$. Seetapun (1995) showed that pairs behave differently: for every non-computable set $C$, every computable coloring of pairs has an infinite homogeneous set that does not compute $C$. In particular, Ramsey's theorem for pairs does not imply $\mathsf{ACA}_0$. We follow the proof of Dzhafarov and Jockusch (2009), which goes through the decomposition of the previous lesson: cohesive sets can avoid cones, and the infinite pigeonhole principle avoids cones for **arbitrary** instances.
+By Jockusch's bounds, some computable colorings of pairs have no homogeneous set computable in $\emptyset'$, while some computable coloring of triples forces all its infinite homogeneous sets to compute $\emptyset'$. Seetapun (1995) showed that pairs behave differently: for every non-computable set $C$, every computable coloring of pairs has an infinite homogeneous set that does not compute $C$. In particular, Ramsey's theorem for pairs does not imply $\mathsf{ACA}_0$.
 
-Throughout, a set is identified with its characteristic sequence, and a finite string $\sigma$ with the finite set $\{ n < |\sigma| : \sigma(n) = 1 \}$.
+We follow the proof of Dzhafarov and Jockusch (2009), which goes through the decomposition of :ref{#cor-rt22-equivalence}. A computable coloring is first made stable by a cohesive set that avoids the cone above $C$ (:ref{#thm-coh-cone-avoidance}). The restricted coloring is then a stable coloring, computable in the cohesive set, and it remains to find an infinite subset of its limit set or of the complement, which is done by strong cone avoidance for the pigeonhole principle (:ref{#thm-dj-cone-avoidance}). The work was done in the previous lesson; this lesson assembles the pieces, builds the ω-model, and places Ramsey's theorem for pairs among the other principles.
 
-## Mathias forcing
-
-:::definition{#def-mathias-condition}
-A **Mathias condition** is a pair $(\sigma, X)$ with $\sigma$ a string and $X$ an infinite set with $\min X \geq |\sigma|$. A string $\tau$ is **compatible** with $(\sigma, X)$ if $\sigma \preceq \tau$ and every $n$ with $|\sigma| \leq n < |\tau|$ and $\tau(n) = 1$ belongs to $X$. A condition $(\tau, Y)$ **extends** $(\sigma, X)$ if $\tau$ is compatible with $(\sigma, X)$ and $Y \subseteq X$. A set $G$ **satisfies** $(\sigma, X)$ if every prefix of $G$ of length at least $|\sigma|$ is compatible with it, that is, $\sigma \prec G$ and $G \setminus \sigma \subseteq X$.
-:::
-
-The string $\sigma$ is the part of $G$ already decided, and the **reservoir** $X$ contains the elements that may still be added. A condition $(\tau, Y)$ extending $(\sigma, X)$ is satisfied only by sets satisfying $(\sigma, X)$.
-
-## Cone avoidance for cohesiveness
-
-:::theorem{#thm-coh-cone-avoidance}
-Let $Z$ be a set and $C \not\leq_T Z$. Every $Z$-computable sequence $\vec R$ has a cohesive set $G$ with $C \not\leq_T Z \oplus G$.
-:::
-
-:::proof{of=thm-coh-cone-avoidance}
-We build a sequence of Mathias conditions $(\sigma_0, X_0) \geq (\sigma_1, X_1) \geq \cdots$, with $(\sigma_0, X_0) = (\varepsilon, \nat)$ and **all reservoirs $Z$-computable**, and let $G = \bigcup_s \sigma_s$, assuming the strings grow unboundedly. Then $G$ satisfies every condition. The steps of the construction handle, in a fixed order, three kinds of tasks.
-
-*Infinity.* Given $(\sigma, X)$, let $n = \min X$, and pass to $(\tau, X \setminus \{0, \dots, n\})$, where $\tau$ extends $\sigma$ by zeros up to position $n$, and $\tau(n) = 1$. The set $G$ then contains $n$.
-
-*Cohesiveness for $R_i$.* One of $X \cap R_i$ and $X \setminus R_i$ is infinite; pass to $(\sigma, Y)$ with $Y$ that set, which is $Z$-computable. Then $G \setminus \sigma \subseteq Y$, so $G \subseteq^* R_i$ or $G \subseteq^* \overline{R_i}$.
-
-*The requirement $\Phi^{Z \oplus G}_e \neq C$.* Given $(\sigma, X)$, consider the following cases.
-
-1. There are $x$ and a string $\tau$ compatible with $(\sigma, X)$ with $\Phi^{Z \oplus \tau}_e(x)\converge \neq C(x)$. Pass to $(\tau, X \setminus \{0, \dots, |\tau|\})$. Every $G$ satisfying it has $\Phi^{Z \oplus G}_e(x) \neq C(x)$, by the use principle.
-2. There is $x$ such that $\Phi^{Z \oplus \tau}_e(x)$ diverges for every $\tau$ compatible with $(\sigma, X)$. Keep $(\sigma, X)$. Every $G$ satisfying it has $\Phi^{Z \oplus G}_e(x)\diverge$: a convergent computation would converge with a prefix of $G$, which is compatible.
-3. Otherwise, for every $x$ some compatible $\tau$ gives a convergent computation, and all such computations give $C(x)$. Then $C \leq_T Z$: given $x$, search, with $Z$ and the $Z$-computable set $X$, for a compatible $\tau$ with $\Phi^{Z \oplus \tau}_e(x)\converge$, and output its value. This case is excluded by hypothesis.
-
-The resulting set $G$ is infinite, cohesive, and satisfies $\Phi^{Z \oplus G}_e \neq C$ for every $e$.
-:::
-
-The reservoirs must stay $Z$-computable for case 3 to give a reduction to $Z$. This is possible because the cohesiveness steps only intersect the reservoir with sets computable in $Z$.
-
-:::quiz[cone avoidance for cohesiveness]
-In the proof of :ref{#thm-coh-cone-avoidance}, why must the reservoirs be $Z$-computable?
-
-- [x] Because in case 3, the search for compatible strings must be carried out with oracle $Z$, to conclude that $C \leq_T Z$, which contradicts the hypothesis.
-- [ ] Because the cohesive set must be $Z$-computable.
-
-  The cohesive set is not $Z$-computable in general; only the reservoirs are.
-- [ ] Because Mathias conditions require computable reservoirs.
-
-  The definition allows arbitrary infinite reservoirs; the restriction is chosen for this proof.
-
----
-
-In case 2, why does keeping the condition unchanged suffice?
-
-- [x] Because every set satisfying the condition has its prefixes compatible with it, so a convergent computation on such a set would give a compatible string with a convergent computation.
-- [ ] Because $C$ is not computable.
-
-  This hypothesis is used in case 3; case 2 holds for every $C$.
-- [ ] Because the construction will later remove $x$ from the reservoir.
-
-  The divergence is already forced; nothing further is needed.
-:::
-
-## Strong cone avoidance for the pigeonhole principle
-
-The infinite pigeonhole principle for two colors asks, given a set $A$, for an infinite subset of $A$ or of $\overline{A}$. When $A$ is computable, $A$ or $\overline A$ itself is a computable solution. When $A$ is arbitrary, a solution may be forced to be complex: some infinite set $A$ has only infinite subsets computing a given set (see the exercises). The theorem of Dzhafarov and Jockusch says that the two sides cannot both be forced.
-
-:::lemma{#lem-scott-cone}
-For every set $Z$ and every $C \not\leq_T Z$, there is a Scott ideal containing $Z$ and not containing $C$.
-:::
-
-:::proof{of=lem-scott-cone}
-Let $Z_0 = Z$, and $Z_{n+1} = Z_n \oplus P_n$ with $P_n$ PA relative to $Z_n$ and $C \not\leq_T Z_n \oplus P_n$, by the cone avoidance basis theorem (:ref{#thm-cone-avoidance-basis}) relativized to $Z_n$. The ideal $\{ X : \exists n\ X \leq_T Z_n \}$ is a Scott ideal by :ref{#prop-wkl-scott}, as in :ref{#thm-low-scott}, and does not contain $C$.
-:::
-
-:::theorem[Dzhafarov, Jockusch]{#thm-dj-cone-avoidance}
-Let $Z$ be a set and $C \not\leq_T Z$. For every set $A$, there is an infinite set $H$ with $H \subseteq A$ or $H \subseteq \overline{A}$, and $C \not\leq_T Z \oplus H$.
-:::
-
-:::proof{of=thm-dj-cone-avoidance}
-Write $A^0 = A$ and $A^1 = \overline{A}$. Let $\mathcal I$ be a Scott ideal containing $Z$ and not $C$ (:ref{#lem-scott-cone}). If some infinite subset $H$ of $A^0$ or of $A^1$ belongs to $\mathcal I$, then $Z \oplus H \in \mathcal I$, so $C \not\leq_T Z \oplus H$, and we are done. Assume from now on:
-
-(H) no infinite subset of $A^0$ or of $A^1$ belongs to $\mathcal I$.
-
-We build two sets $G^0 \subseteq A^0$ and $G^1 \subseteq A^1$ simultaneously, with **conditions** $(\sigma_0, \sigma_1, X)$: $X \in \mathcal I$ is infinite with $\min X \geq |\sigma_0|, |\sigma_1|$, and the finite set $\sigma_i$ is contained in $A^i$, for $i < 2$. A condition $(\tau_0, \tau_1, Y)$ extends $(\sigma_0, \sigma_1, X)$ if each $(\tau_i, Y)$ extends $(\sigma_i, X)$ as Mathias conditions. The sets $G^i$ are the unions of the strings $\sigma_i$ along a sequence of conditions.
-
-*Infinity.* Given a condition and $i < 2$, the set $X \cap A^i$ is infinite: otherwise $X$ minus finitely many elements would be an infinite subset of $A^{1-i}$ in $\mathcal I$, contradicting (H). Let $n \in X \cap A^i$, extend $\sigma_i$ by zeros and then $1$ at position $n$, and replace $X$ by $X \setminus \{0, \dots, n\}$.
-
-*The requirement $\mathcal R_{e_0, e_1}$: $\Phi^{Z \oplus G^0}_{e_0} \neq C$ or $\Phi^{Z \oplus G^1}_{e_1} \neq C$.* Fix a condition $c = (\sigma_0, \sigma_1, X)$. For $x \in \nat$ and $v < 2$, say that $c$ **answers** $(x, v)$ if for every partition $\nat = U^0 \sqcup U^1$, there are $i < 2$ and a string $\tau$ compatible with $(\sigma_i, X \cap U^i)$ (compatibility is defined as for Mathias conditions, even if $X \cap U^i$ is finite) with $\Phi^{Z \oplus \tau}_{e_i}(x)\converge = v$.
-
-The set of partitions, coded as $U^0$, for which this fails is a $\Pi^0_1(Z \oplus X)$ class: failure means that every $\tau$ compatible with $(\sigma_i, X \cap U^i)$, for both $i$, gives no convergent computation with value $v$, and each instance of this condition involves finitely many bits of $U^0$. By compactness, $c$ answers $(x, v)$ if and only if this class is empty, a $\Sigma^0_1(Z \oplus X)$ property of $(x, v)$. Let $W$ be the set of pairs answered by $c$; it is c.e. in $Z \oplus X$, which is a member of $\mathcal I$.
-
-1. If $(x, 1 - C(x)) \in W$ for some $x$: apply the definition to the partition $(A^0, A^1)$. There are $i$ and $\tau$ compatible with $(\sigma_i, X \cap A^i)$ with $\Phi^{Z \oplus \tau}_{e_i}(x)\converge = 1 - C(x)$. The new elements of $\tau$ lie in $A^i$. Replacing $\sigma_i$ by $\tau$ and $X$ by $X \setminus \{0, \dots, |\tau|\}$ gives an extension forcing $\Phi^{Z \oplus G^i}_{e_i}(x) \neq C(x)$.
-2. If $(x, C(x)) \notin W$ for some $x$: the $\Pi^0_1(Z \oplus X)$ class of partitions witnessing it is non-empty, and since $\mathcal I$ is a Scott ideal containing $Z \oplus X$, it has a member $U^0 \in \mathcal I$, with $U^1 = \overline{U^0}$. For some $i$, $X \cap U^i$ is infinite; it belongs to $\mathcal I$. The condition $(\sigma_0, \sigma_1, X \cap U^i)$ extends $c$, and every $G^i$ satisfying $(\sigma_i, X \cap U^i)$ has $\Phi^{Z \oplus G^i}_{e_i}(x) \neq C(x)$, divergent or different: a convergent computation with value $C(x)$ would come from a compatible string.
-3. Otherwise, every $x$ has some $v$ with $(x, v) \in W$, and only $v = C(x)$ occurs. Then $C$ is computable in $Z \oplus X \in \mathcal I$, by enumerating $W$: so $C \in \mathcal I$, a contradiction.
-
-*Conclusion.* Build a sequence of conditions that handles infinity for both sides and every requirement $\mathcal R_{e_0, e_1}$ in turn, and let $G^0$, $G^1$ be the limits. Both are infinite, $G^i \subseteq A^i$, and every requirement holds. If $\Phi^{Z \oplus G^0}_{e_0} = C$ for some $e_0$, then $\Phi^{Z \oplus G^1}_{e_1} \neq C$ for every $e_1$, so $C \not\leq_T Z \oplus G^1$. Otherwise $C \not\leq_T Z \oplus G^0$. Either $H = G^0$ or $H = G^1$ works.
-:::
-
-The heart of the proof is the **disjunctive question**: instead of asking whether some extension inside $A^i$ forces a convergence, which is too complex since $A$ is arbitrary, one asks whether every partition of $\nat$ allows a convergence on one side. A positive answer applies in particular to $(A^0, A^1)$; a negative answer is witnessed by a partition in the Scott ideal, and the reservoir is shrunk to a side of this partition. The new reservoir is thus a solution, in $\mathcal I$, of the instance $U^0$ of the pigeonhole principle, and (H) ensures that it still meets both $A^0$ and $A^1$ infinitely often.
-
-:::quiz[the Dzhafarov–Jockusch forcing]
-Why is the question "does every partition allow a convergence on one side" used, rather than "does some extension inside $A^i$ give a convergence"?
-
-- [x] Because the second question involves the arbitrary set $A$ and has no useful bound on its complexity, whereas the first one is $\Sigma^0_1$ in $Z \oplus X$ by compactness, so case 3 yields $C \leq_T Z \oplus X$.
-- [ ] Because $A$ may be finite.
-
-  $A$ or its complement is infinite; the issue is the complexity of $A$.
-- [ ] Because extensions inside $A^i$ do not exist.
-
-  They exist by (H); the question is how to decide among them effectively.
-
----
-
-Where is it used that $\mathcal I$ is a Scott ideal?
-
-- [x] In case 2, to find a partition in $\mathcal I$ witnessing the negative answer, so that the new reservoir $X \cap U^i$ remains in $\mathcal I$.
-- [ ] To ensure that $A$ belongs to $\mathcal I$.
-
-  $A$ is arbitrary and usually not in $\mathcal I$.
-- [ ] In case 1, to find the string $\tau$.
-
-  In case 1, the string comes from the definition applied to $(A^0, A^1)$.
+:::figure[The structure of the proof of Seetapun's theorem. Each step preserves the property that $C$ is not computable in the sets built so far.]
+<svg class="fig" viewBox="0 0 600 300" width="600" role="img" aria-label="The proof of Seetapun theorem: a cohesive set makes the coloring stable, the pigeonhole principle on its limit set gives a subset, from which a homogeneous set is computed; each step keeps C out of the cone"><defs><marker id="rt-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><rect x="20" y="30" width="340" height="40" rx="6" class="cell"/><text x="190.0" y="55" text-anchor="middle" font-size="13" xml:space="preserve"><tspan class="math">f</tspan><tspan class="mrm">, computable in </tspan><tspan class="math">Z</tspan></text><rect x="20" y="100" width="340" height="40" rx="6" class="cell"/><text x="190.0" y="125" text-anchor="middle" font-size="13" xml:space="preserve"><tspan class="math">G</tspan><tspan class="mrm"> cohesive for (</tspan><tspan class="math">R</tspan><tspan class="math" font-size="9" dy="3">x</tspan><tspan dy="-3">​</tspan><tspan class="mrm">),  </tspan><tspan class="math">C</tspan><tspan class="mrm"> ≰ </tspan><tspan class="math">Z</tspan><tspan class="mrm"> ⊕ </tspan><tspan class="math">G</tspan></text><rect x="20" y="170" width="340" height="40" rx="6" class="cell"/><text x="190.0" y="195" text-anchor="middle" font-size="13" xml:space="preserve"><tspan class="math">K</tspan><tspan class="mrm"> ⊆ </tspan><tspan class="math">A</tspan><tspan class="math" font-size="9" dy="3">g</tspan><tspan dy="-3">​</tspan><tspan class="mrm"> or </tspan><tspan class="math">K</tspan><tspan class="mrm"> ∩ </tspan><tspan class="math">A</tspan><tspan class="math" font-size="9" dy="3">g</tspan><tspan dy="-3">​</tspan><tspan class="mrm"> = ∅,  </tspan><tspan class="math">C</tspan><tspan class="mrm"> ≰ </tspan><tspan class="math">Z</tspan><tspan class="mrm"> ⊕ </tspan><tspan class="math">G</tspan><tspan class="mrm"> ⊕ </tspan><tspan class="math">K</tspan></text><rect x="20" y="240" width="340" height="40" rx="6" class="cell"/><text x="190.0" y="265" text-anchor="middle" font-size="13" xml:space="preserve"><tspan class="math">H</tspan><tspan class="mrm"> homogeneous for </tspan><tspan class="math">f</tspan><tspan class="mrm">,  </tspan><tspan class="math">H</tspan><tspan class="mrm"> ≤</tspan><tspan class="mrm" font-size="9" dy="3">T</tspan><tspan dy="-3">​</tspan><tspan class="mrm"> </tspan><tspan class="math">Z</tspan><tspan class="mrm"> ⊕ </tspan><tspan class="math">G</tspan><tspan class="mrm"> ⊕ </tspan><tspan class="math">K</tspan></text><line x1="190.0" y1="70" x2="190.0" y2="98" class="ink-stroke" stroke-width="1.3" marker-end="url(#rt-arr)"/><text x="202.0" y="89.0" class="label">Mathias forcing: cone avoidance for COH; g = f on pairs of G is stable</text><line x1="190.0" y1="140" x2="190.0" y2="168" class="ink-stroke" stroke-width="1.3" marker-end="url(#rt-arr)"/><text x="202.0" y="159.0" class="label">strong cone avoidance for the pigeonhole principle, on the limit set of g</text><line x1="190.0" y1="210" x2="190.0" y2="238" class="ink-stroke" stroke-width="1.3" marker-end="url(#rt-arr)"/><text x="202.0" y="229.0" class="label">thin out K along the stable coloring g</text></svg>
 :::
 
 ## Seetapun's theorem
@@ -137,6 +23,20 @@ Let $Z$ be a set and $C \not\leq_T Z$. Every $Z$-computable coloring $f : [\nat]
 The sequence $R_x = \{ y : f(\{ x, y \}) = 1 \}$ is $Z$-computable. By :ref{#thm-coh-cone-avoidance}, it has a cohesive set $G$ with $C \not\leq_T Z \oplus G$. Let $p$ enumerate $G$ in increasing order, and $g(\{ i, j \}) = f(\{ p(i), p(j) \})$; it is a stable coloring (:ref{#thm-rt22-decomposition}), computable in $Z \oplus G$. By :ref{#thm-dj-cone-avoidance} with $Z \oplus G$ in place of $Z$, applied to the limit set $A_g$, there is an infinite set $K$ contained in $A_g$ or in its complement with $C \not\leq_T Z \oplus G \oplus K$. By :ref{#prop-srt-d22} (2), $g \oplus K$ computes an infinite homogeneous set $L$ for $g$, and $H = p[L]$ is homogeneous for $f$, computable in $Z \oplus G \oplus K$. So $C \not\leq_T Z \oplus H$.
 :::
 
+:::quiz[the proof of Seetapun's theorem]
+In the proof of :ref{#thm-seetapun}, why is :ref{#thm-dj-cone-avoidance} applied with $Z \oplus G$ in place of $Z$, rather than with $Z$?
+
+- [x] Because the homogeneous set is computed from $K$ together with $g$, which is computable in $Z \oplus G$; the cone must be avoided by $Z \oplus G \oplus K$, not only by $Z \oplus K$.
+- [ ] Because the limit set $A_g$ is computable in $Z \oplus G$.
+
+  It is only $\Delta^0_2(Z \oplus G)$; the theorem of Dzhafarov and Jockusch applies to sets of any complexity.
+- [ ] Because $C \not\leq_T Z$ does not imply $C \not\leq_T Z \oplus G$.
+
+  For this particular $G$ it does, by the choice of $G$; this is what makes the hypothesis of the theorem available with $Z \oplus G$.
+:::
+
+The last step thins $K$ along $g$, which is computable in $Z \oplus G$. This is why the pigeonhole step is applied to the limit set, with the stable coloring kept as a parameter, and not to the stable coloring itself: for stable colorings that are not computable in the sets already built, cone avoidance fails (see the exercises).
+
 :::corollary[Seetapun]{#cor-rt22-not-aca}
 There is an ω-model of $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ not containing $\emptyset'$. Consequently $\mathsf{RT}^2_2$ does not imply $\mathsf{ACA}_0$ over $\mathsf{RCA}_0$.
 :::
@@ -147,7 +47,35 @@ Build sets $Z_0 = \emptyset \leq_T Z_1 \leq_T \cdots$ with $\emptyset' \not\leq_
 The class $\mathcal I = \{ X : \exists n\ X \leq_T Z_n \}$ is a Turing ideal not containing $\emptyset'$. Every coloring in $\mathcal I$ is $\Phi^{Z_m}_e$ for some $e, m$, and is handled at some stage, so it has a homogeneous set in $\mathcal I$. By absoluteness, $\mathcal I$ satisfies $\mathsf{RT}^2_2$, and it is not a jump ideal.
 :::
 
-Together with :ref{#cor-wkl-not-rt22}, Seetapun's theorem shows that $\mathsf{RT}^2_2$ escapes the Big Five: it lies strictly below $\mathsf{ACA}_0$ and is not provable in $\mathsf{WKL}_0$. Liu (2012) proved that it does not imply $\mathsf{WKL}_0$ either, by showing that the infinite pigeonhole principle avoids PA degrees in the sense of :ref{#thm-dj-cone-avoidance}; this is admitted here. Ramsey's theorem for pairs is the first and most studied of a large family of combinatorial principles, the **reverse mathematics zoo**, many of which lie strictly below $\mathsf{ACA}_0$ without being equivalent to any of the Big Five.
+The construction of the ω-model is the standard method for separations in reverse mathematics: a class of sets (here, those not computing $\emptyset'$) that is closed under adding solutions to the instances of the weaker principle, and excludes the stronger one. The course on reducibilities develops it as the **preservation** of a weakness property.
+
+## The place of Ramsey's theorem for pairs
+
+Together with :ref{#cor-wkl-not-rt22}, Seetapun's theorem shows that $\mathsf{RT}^2_2$ escapes the Big Five: it lies strictly below $\mathsf{ACA}_0$ and is not provable in $\mathsf{WKL}_0$. The following results, admitted here, complete the picture.
+
+- **Liu (2012)** proved that $\mathsf{RT}^2_2$ does not imply $\mathsf{WKL}_0$, by showing that the infinite pigeonhole principle avoids PA degrees in the sense of :ref{#thm-dj-cone-avoidance}: for every set $A$, there is an infinite subset of $A$ or of $\overline A$ that is not of PA degree. So $\mathsf{RT}^2_2$ and $\mathsf{WKL}_0$ are incomparable.
+- **Cholak, Jockusch and Slaman (2001)** showed that every computable coloring of pairs has a low₂ infinite homogeneous set, and determined the coding power of $\mathsf{RT}^n_2$ for $n \geq 3$: some homogeneous set avoids any given set not computable in $\emptyset^{(n-2)}$ (see the exercises for $n = 3$).
+- **Monin and Patey (2019)** extended strong cone avoidance up the arithmetic hierarchy: for every set $A$ and every set $C$ that is not $\Delta^0_n$, some infinite subset of $A$ or of $\overline A$ is a set $H$ such that $C$ is not $\Delta^0_n(H)$. In particular every set has an infinite subset, of itself or of its complement, that is not high.
+- **Wang (2014)** and **Cholak and Patey (2020)** studied weakenings of Ramsey's theorem that allow a homogeneous set to use $\ell$ colors instead of one, the **thin set theorems**. For colorings of $n$-tuples with arbitrarily many colors, strong cone avoidance holds exactly when $\ell$ is at least the $n$-th Catalan number.
+
+$\mathsf{RT}^2_2$ is the first and most studied of a large family of combinatorial principles, the **reverse mathematics zoo**, many of which lie strictly below $\mathsf{ACA}_0$ without being equivalent to any of the Big Five. The first-order strength of $\mathsf{RT}^2_2$, that is, which arithmetic statements it proves, is studied in the course on induction and conservation.
+
+## Cohesiveness versus stability
+
+The following table collects bounds on the solutions of **computable** instances. In the middle column, every computable instance has a solution of the given kind; in the last column, some computable instance has no solution of the given kind.
+
+| Principle | Solutions always exist | Solutions may fail to exist |
+| --- | --- | --- |
+| $\mathsf{COH}$ | $\Delta^0_2$; low₂ (:ref{#cor-coh-bounds}) | low (:ref{#prop-coh-no-low}) |
+| $\mathsf{SRT}^2_2$ | $\Delta^0_2$ (:ref{#ex-stable}); low₂ (Cholak, Jockusch, Slaman) | low (Downey, Hirschfeldt, Lempp, Solomon) |
+| $\mathsf{RT}^2_2$ | low₂ (Cholak, Jockusch, Slaman) | $\Delta^0_2$ (:ref{#thm-jockusch-no-delta2}) |
+
+The table does not separate $\mathsf{COH}$ from $\mathsf{SRT}^2_2$, and neither implies the other.
+
+- $\mathsf{COH}$ does not imply $\mathsf{SRT}^2_2$ over $\mathsf{RCA}_0$. There is an ω-model of $\mathsf{COH}$ in which some computable stable coloring has no solution (Hirschfeldt, Jockusch, Kjos-Hanssen, Lempp and Slaman); a proof-theoretic argument also works, since $\mathsf{COH}$ proves no new first-order statement while $\mathsf{SRT}^2_2$ does (see the course on induction and conservation).
+- $\mathsf{SRT}^2_2$ does not imply $\mathsf{COH}$, hence not $\mathsf{RT}^2_2$, over $\mathsf{RCA}_0$. This was a central open problem for over a decade. Chong, Slaman and Yang (2014) solved it with a non-standard model of $\mathsf{SRT}^2_2$ in which every set is low in the sense of the model, and Monin and Patey (2021) found an ω-model, in which no set has a jump PA relative to $\emptyset'$. By :ref{#prop-coh-no-low}, such a model does not satisfy $\mathsf{COH}$. The theorem of Downey, Hirschfeldt, Lempp and Solomon explains why an ω-model of low sets could not work.
+
+So the decomposition is proper: $\mathsf{RT}^2_2$ is the conjunction of two strictly weaker, incomparable principles.
 
 ## Exercises
 
@@ -156,6 +84,22 @@ Show that there is an infinite set $A$ all of whose infinite subsets compute a g
 
 :::solution
 Let $A = \{ \langle C \uh n \rangle : n \in \nat \}$, the set of codes of the prefixes of $C$, with a coding in which longer strings have larger codes. An infinite subset of $A$ contains codes of arbitrarily long prefixes of $C$, so it computes $C$: to find $C(x)$, search for an element coding a string of length larger than $x$. If $C$ is not computable, :ref{#thm-dj-cone-avoidance} with $Z = \emptyset$ gives an infinite subset of $A$ or of $\overline{A}$ that does not compute $C$; it cannot be a subset of $A$, so it is a subset of $\overline{A}$. There is no contradiction: the theorem only guarantees a solution on one of the two sides, without saying which.
+:::
+::::
+
+::::exercise{difficulty=1}
+Show that the coloring $h$ in the proof of :ref{#prop-rt32-jump} is stable, and deduce that :ref{#thm-seetapun} fails for stable colorings that are not computable in $Z$: there is a stable coloring of pairs all of whose infinite homogeneous sets compute $\emptyset'$. Why does this not affect the proof of :ref{#thm-seetapun}?
+
+:::solution
+For each $x$, $h(\{ x, y \}) = 1$ for all $y > m(x)$, so $h$ is stable with limit set $\nat$. The proof of :ref{#prop-rt32-jump} shows that every infinite homogeneous set for $h$ computes $\emptyset'$. In the proof of :ref{#thm-seetapun}, the stable coloring $g$ is computable in $Z \oplus G$, and the pigeonhole principle is applied to its limit set. For $h$, the limit set $\nat$ is its own trivial solution $K = \nat$, and all the difficulty lies in thinning $K$ along $h$, which uses $h$ as an oracle. The decomposition separates the two: the arbitrary instance is only the limit set, while the coloring used for thinning stays in the cone-avoiding class.
+:::
+::::
+
+::::exercise{difficulty=2}
+Let $C$ be a set with $C \not\leq_T \emptyset'$. Show that every computable coloring of $[\nat]^3$ with two colors has an infinite homogeneous set that does not compute $C$. Conclude that :ref{#prop-rt32-jump} is optimal: the sets computed by all infinite homogeneous sets of every computable coloring of triples are computable in $\emptyset'$.
+
+:::solution
+Let $f$ be the coloring. In the proof of :ref{#prop-erdos-rado-tree}, the paths of the Erdős–Radó tree of $f$ are computable, uniformly, from the members of a non-empty $\Pi^0_1(\emptyset')$ class together with $\emptyset'$. By the cone avoidance basis theorem (:ref{#thm-cone-avoidance-basis}) relativized to $\emptyset'$, this class has a member $Q$ with $C \not\leq_T \emptyset' \oplus Q$. So there is an infinite pre-homogeneous set $A \leq_T \emptyset' \oplus Q$, and $C \not\leq_T A$. The induced coloring of $[A]^2$, transported to $[\nat]^2$ by the enumeration $p$ of $A$, is $A$-computable. By :ref{#thm-seetapun} with $Z = A$, it has an infinite homogeneous set $L$ with $C \not\leq_T A \oplus L$. The set $H = p[L]$ is homogeneous for $f$ and computable in $A \oplus L$, so $C \not\leq_T H$. For the conclusion, if every infinite homogeneous set of a computable coloring of triples computes $C$, then $C \leq_T \emptyset'$.
 :::
 ::::
 
@@ -169,9 +113,17 @@ Combine the constructions of :ref{#lem-scott-cone} and :ref{#cor-rt22-not-aca}: 
 
 ## Notes and references
 
-Seetapun's theorem appeared in Seetapun and Slaman (1995); the original proof is a direct forcing argument. The proof given here is due to Dzhafarov and Jockusch (2009), with the cohesiveness step of Cholak, Jockusch and Slaman (2001). Liu's theorem appeared in 2012. The surveys of Hirschfeldt and of Dzhafarov and Mummert describe the reverse mathematics zoo.
+Seetapun's theorem appeared in Seetapun and Slaman (1995); the original proof is a direct forcing argument with finitely many Mathias conditions at once (Dzhafarov–Mummert, §8.3). The proof given here is due to Dzhafarov and Jockusch (2009), with the cohesiveness step of Cholak, Jockusch and Slaman (2001) (Hirschfeldt, §6.7, Corollary 6.64 and Theorem 6.61; Dzhafarov–Mummert, §8.5.1; Monin and Patey, section *Computational weakness of RT²₂*). The failure of strong cone avoidance for stable colorings is Proposition 8.5.5 of Dzhafarov–Mummert. The third exercise is the case $n = 3$ of a theorem of Cholak, Jockusch and Slaman (Hirschfeldt, Theorem 6.65). Liu's theorem is proved in the appendix of Hirschfeldt's book and in Dzhafarov–Mummert, §8.6. The low₂ bounds are Theorems 6.52 and 6.53 of Hirschfeldt, the theorem of Downey, Hirschfeldt, Lempp and Solomon is Theorem 6.37. The history of the problem whether $\mathsf{SRT}^2_2$ implies $\mathsf{RT}^2_2$ is told in Dzhafarov–Mummert, §8.8 (Theorems 8.8.2, 8.8.5 and 8.8.7), which also records the questions that remain open for finer reducibilities, for instance whether $\mathsf{COH}$ is reducible to $\mathsf D^2_2$ by an omniscient computable reduction (Question 8.8.13). The surveys of Hirschfeldt (Chapter 9) and of Dzhafarov and Mummert (Chapter 9) describe the reverse mathematics zoo.
 
 - D. Seetapun and T. A. Slaman, *On the strength of Ramsey's theorem*, Notre Dame Journal of Formal Logic 36 (1995), 570–582.
 - D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
+- P. A. Cholak, C. G. Jockusch, Jr. and T. A. Slaman, *On the strength of Ramsey's theorem for pairs*, Journal of Symbolic Logic 66 (2001), 1–55.
+- R. Downey, D. R. Hirschfeldt, S. Lempp and R. Solomon, *A Δ⁰₂ set with no infinite low subset in either it or its complement*, Journal of Symbolic Logic 66 (2001), 1371–1381.
+- C. T. Chong, T. A. Slaman and Y. Yang, *The metamathematics of stable Ramsey's theorem for pairs*, Journal of the American Mathematical Society 27 (2014), 863–892.
+- B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics 389 (2021), 107903.
 - L. Liu, *RT²₂ does not imply WKL₀*, Journal of Symbolic Logic 77 (2012), 609–620.
+- B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095.
+- W. Wang, *Some logically weak Ramseyan theorems*, Advances in Mathematics 261 (2014), 1–25.
+- P. Cholak and L. Patey, *Thin set theorems and cone avoidance*, Transactions of the American Mathematical Society 373 (2020), 2743–2773.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022.

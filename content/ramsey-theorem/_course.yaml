@@ -15,6 +15,8 @@ objectives:
   - Build pre-homogeneous sets with the Erdős–Radó tree
   - Prove Jockusch's upper and lower bounds for homogeneous sets
   - Show that Ramsey's theorem for triples is equivalent to ACA₀
-  - Decompose Ramsey's theorem for pairs into COH and SRT²₂
-  - Prove Seetapun's theorem by cone avoidance
-lessons: [jockusch, cohesiveness, seetapun]
+  - Characterize the sets computing cohesive sets through a Π⁰₁(∅′) class
+  - Decompose Ramsey's theorem for pairs into COH and SRT²₂, in both directions
+  - Use Mathias forcing to prove cone avoidance and strong cone avoidance
+  - Prove Seetapun's theorem and build ω-models by preservation of cone avoidance
+lessons: [jockusch, triples, cohesiveness, stable-colorings, cone-avoidance, seetapun]

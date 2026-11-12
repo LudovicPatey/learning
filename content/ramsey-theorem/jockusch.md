@@ -1,21 +1,27 @@
 ---
 title: Ramsey's theorem in the arithmetic hierarchy
-summary: Ramsey's theorem for n-tuples; pre-homogeneous sets and the Erdős–Radó tree; every coloring of n-tuples has a homogeneous set computable in any degree PA over its (n−1)-st jump; a computable coloring of pairs without Δ⁰₂ homogeneous set; Ramsey's theorem for triples is equivalent to ACA₀.
-duration: 45
+summary: Ramsey's theorem for n-tuples; pre-homogeneous sets and the Erdős–Radó tree; every coloring of n-tuples has a homogeneous set computable in any degree PA over its (n−1)-st jump.
+duration: 50
 prerequisites: [big-five/wkl0]
 ---
 
-Ramsey's theorem states that every finite coloring of the $n$-element subsets of $\nat$ has an infinite set on which the coloring is constant. Jockusch (1972) determined how complex such sets must be for computable colorings: homogeneous sets can be found computably in any degree PA over $\obf^{(n-1)}$, but not, in general and for $n \geq 2$, at the level $\Sigma^0_n$. For $n \geq 3$, this makes Ramsey's theorem equivalent to $\mathsf{ACA}_0$. For pairs, the analysis leaves a gap, which the rest of the course explores.
+Ramsey's theorem states that every finite coloring of the $n$-element subsets of $\nat$ has an infinite set on which the coloring is constant. Jockusch (1972) determined how complex such sets must be for computable colorings: homogeneous sets can be found computably in any degree PA over $\obf^{(n-1)}$, but not, in general and for $n \geq 2$, at the level $\Sigma^0_n$. This lesson proves the upper bound, through pre-homogeneous sets and a finitely branching tree. The next one proves the lower bound, and shows that for $n \geq 3$ homogeneous sets can be forced to compute $\emptyset'$, which makes Ramsey's theorem for triples equivalent to $\mathsf{ACA}_0$. For pairs, the two bounds leave a gap, which the rest of the course explores.
 
 ## Statements
 
-For a set $X$ and $n \geq 1$, $[X]^n$ is the set of $n$-element subsets of $X$, identified with increasing tuples $x_1 < \cdots < x_n$. A **$k$-coloring** of $[X]^n$ is a function $f : [X]^n \to k = \{ 0, \dots, k-1 \}$. A set $H \subseteq X$ is **homogeneous** for $f$ if $f$ is constant on $[H]^n$.
+For a set $X$ and $n \geq 1$, $[X]^n$ is the set of $n$-element subsets of $X$, identified with increasing tuples $x_1 < \cdots < x_n$. A **$k$-coloring** of $[X]^n$ is a function $f : [X]^n \to k = \{ 0, \dots, k-1 \}$. A set $H \subseteq X$ is **homogeneous** for $f$ if $f$ is constant on $[H]^n$; the constant value is the **color** of $H$ (when $|H| \geq n$).
 
 :::definition{#def-rt}
 $\mathsf{RT}^n_k$ is the statement: every coloring $f : [\nat]^n \to k$ has an infinite homogeneous set.
 :::
 
-In reverse mathematics, colorings and homogeneous sets are sets, and $\mathsf{RT}^n_k$ is a $\Pi^1_2$ statement. In computability theory, one asks how complex homogeneous sets must be relative to $f$. The case $n = 1$ is the **infinite pigeonhole principle**.
+:::example{#ex-rt-colorings}
+1. Let $f(\{ x, y \}) = 1$ if $x$ and $y$ have the same parity, and $0$ otherwise. The even numbers and the odd numbers form infinite homogeneous sets of color $1$. A homogeneous set of color $0$ has at most two elements, since among three numbers two have the same parity. So the color of an infinite homogeneous set cannot be prescribed in advance.
+2. The number of colors must be finite. Let $f(\{ x, y \}) = \min(x, y)$, a coloring of $[\nat]^2$ with infinitely many colors. For $x < y < z$, $f(\{ x, y \}) = x \neq y = f(\{ y, z \})$, so no homogeneous set has three elements.
+3. For $n = 1$, a coloring is a function $f : \nat \to k$, and the theorem says that some color is taken infinitely often. This is the **infinite pigeonhole principle**.
+:::
+
+In reverse mathematics, colorings and homogeneous sets are sets, and $\mathsf{RT}^n_k$ is a $\Pi^1_2$ statement. In computability theory, one asks how complex homogeneous sets must be relative to $f$.
 
 :::proposition{#prop-rt-basic}
 1. $\mathsf{RCA}_0$ proves $\mathsf{RT}^1_k$ for every standard $k$.
@@ -29,17 +35,19 @@ In reverse mathematics, colorings and homogeneous sets are sets, and $\mathsf{RT
 3. By induction on $k$ in the metatheory. Given $f : [\nat]^n \to k + 1$, merge the colors $k - 1$ and $k$, and apply $\mathsf{RT}^n_k$ to obtain an infinite $H$. If its color is less than $k - 1$, $H$ is homogeneous for $f$; otherwise $f$ takes only the values $k - 1$ and $k$ on $[H]^n$, and (2) gives a homogeneous subset.
 :::
 
-The number of colors is irrelevant for provability, as long as it is a fixed standard number; we focus on two colors.
+The number of colors is irrelevant for provability, as long as it is a fixed standard number; we focus on two colors. The induction in (3) is carried out outside $\mathsf{RCA}_0$, one $k$ at a time: whether $\mathsf{RCA}_0$ proves $\forall k\, \mathsf{RT}^1_k$ is a question about induction, answered in the course on induction and conservation.
 
 ## Pre-homogeneous sets and the upper bound
 
-A coloring of $(n+1)$-tuples reduces to a coloring of $n$-tuples on a well-chosen set.
+The classical proof of Ramsey's theorem for $(n+1)$-tuples chooses elements $a_0 < a_1 < \cdots$ one at a time. After $a_i$ is chosen, it applies $\mathsf{RT}^n$ to the coloring $\vec x \mapsto f(\{ a_i \} \cup \vec x)$ of the remaining candidates, and keeps an infinite homogeneous set as the new reservoir of candidates. The color of a tuple then depends only on its least element, and the pigeonhole principle finishes the proof. From the point of view of complexity, this is expensive: each reservoir is obtained by an application of the $n$ case relative to the previous reservoir, and the complexity accumulates along the whole construction (see the exercises for the case of pairs).
+
+The proof of Erdős and Radó reverses the roles. It makes the color of an $(n+1)$-tuple depend only on its **first $n$ elements**, using only applications of the pigeonhole principle, which are organized in a single finitely branching tree. A single application of the $n$ case then finishes the proof.
 
 :::definition{#def-pre-homogeneous}
 A set $X$ is **pre-homogeneous** for $f : [\nat]^{n+1} \to k$ if, for all $x_1 < \cdots < x_n$ in $X$, the color $f(\{ x_1, \dots, x_n, y \})$ is the same for all $y \in X$ with $y > x_n$.
 :::
 
-On an infinite pre-homogeneous set $X$, the coloring $g(\{ x_1, \dots, x_n \}) = f(\{ x_1, \dots, x_n, y \})$, for any $y \in X$ above $x_n$, is well defined and computable in $f \oplus X$, and every set $H \subseteq X$ homogeneous for $g$ is homogeneous for $f$.
+On an infinite pre-homogeneous set $X$, the **induced coloring** $g(\{ x_1, \dots, x_n \}) = f(\{ x_1, \dots, x_n, y \})$, for any $y \in X$ above $x_n$, is well defined and computable in $f \oplus X$, and every set $H \subseteq X$ homogeneous for $g$ is homogeneous for $f$. For instance, for the coloring $f(\{ x, y \}) = 1$ if $\min(x, y)$ is even, and $0$ otherwise, every set is pre-homogeneous, with induced coloring $g(x) = 1$ if $x$ is even; the even numbers form a homogeneous set for $g$, hence for $f$. For the parity coloring of :ref{#ex-rt-colorings}, the set $\{ 0, 1, 2 \}$ is not pre-homogeneous, since $f(\{ 0, 1 \}) = 0 \neq 1 = f(\{ 0, 2 \})$, while the even numbers are. In general a pre-homogeneous set must be built.
 
 :::proposition[Erdős, Radó]{#prop-erdos-rado-tree}
 For every coloring $f : [\nat]^{n+1} \to k$, there is an infinite, finitely branching, $f$-computable tree $T \subseteq \nat^{<\nat}$ of strictly increasing sequences whose infinite paths are pre-homogeneous for $f$. Every set PA relative to $f'$ computes an infinite pre-homogeneous set for $f$.
@@ -57,6 +65,12 @@ We build $T$ by inserting the numbers $0, 1, 2, \dots$ one at a time. The first 
 *Computing a path.* The number of successors of each node is bounded, but their values are not: whether $\sigma$ has a successor above a given number is a $\Sigma^0_1(f)$ question. With $f'$, one computes, for each node, the finite list of its successors. Coding each successor by its rank in this list, the paths of $T$ correspond, computably in $f'$, to the paths of an $f'$-computable tree in $\prod_\sigma k^{\binom{|\sigma|}{n}}$, a $\Pi^0_1(f')$ class after coding into Cantor space. It is non-empty by König's lemma. A set PA relative to $f'$ computes a member of it (:ref{#thm-pa-characterization}, relativized), and it computes $f'$ itself (second exercise of :ref{to="pi01-classes/pa-degrees"}, relativized to $f'$), so it computes a path of $T$.
 :::
 
+:::figure[The Erdős–Radó tree of the coloring of pairs $f(\{ x, y \}) = 1$ if $x + 2$ divides $y$, and $0$ otherwise, after the insertion of $0, \dots, 13$. A node $\sigma a$ is labeled $a$; the digits next to it are its pattern over $\sigma$. For instance, $13$ descends from $0$ to $1$ (pattern $0$), to $5$ (pattern $00$), to $11$ (pattern $000$), and creates a new node, since $11$ has no successor yet. Along the highlighted branch, the color of $\{ x, y \}$ does not depend on the larger element $y$.]
+<svg class="fig" viewBox="0 0 600 330" width="600" role="img" aria-label="The Erdős–Radó tree of a coloring of pairs after the insertion of the numbers 0 to 13"><line x1="300.0" y1="41" x2="132.0" y2="75" class="accent-stroke" stroke-width="2.2"/><line x1="300.0" y1="41" x2="468.0" y2="75" class="ink-stroke" stroke-width="1.2"/><line x1="132.0" y1="97" x2="60.0" y2="131" class="ink-stroke" stroke-width="1.2"/><line x1="132.0" y1="97" x2="204.0" y2="131" class="accent-stroke" stroke-width="2.2"/><line x1="468.0" y1="97" x2="396.0" y2="131" class="ink-stroke" stroke-width="1.2"/><line x1="468.0" y1="97" x2="540.0" y2="131" class="ink-stroke" stroke-width="1.2"/><line x1="60.0" y1="153" x2="60.0" y2="187" class="ink-stroke" stroke-width="1.2"/><line x1="204.0" y1="153" x2="156.0" y2="187" class="ink-stroke" stroke-width="1.2"/><line x1="204.0" y1="153" x2="252.0" y2="187" class="accent-stroke" stroke-width="2.2"/><line x1="396.0" y1="153" x2="348.0" y2="187" class="ink-stroke" stroke-width="1.2"/><line x1="396.0" y1="153" x2="444.0" y2="187" class="ink-stroke" stroke-width="1.2"/><line x1="540.0" y1="153" x2="540.0" y2="187" class="ink-stroke" stroke-width="1.2"/><line x1="252.0" y1="209" x2="252.0" y2="243" class="accent-stroke" stroke-width="2.2"/><circle cx="300.0" cy="30" r="11" class="head-cell"/><text x="300.0" y="35" text-anchor="middle" class="mrm" font-size="13">0</text><circle cx="132.0" cy="86" r="11" class="head-cell"/><text x="132.0" y="91" text-anchor="middle" class="mrm" font-size="13">1</text><text x="147.0" y="78" class="mrm muted" font-size="10">0</text><circle cx="468.0" cy="86" r="11" class="node"/><text x="468.0" y="91" text-anchor="middle" class="mrm" font-size="13">2</text><text x="483.0" y="78" class="mrm muted" font-size="10">1</text><circle cx="60.0" cy="142" r="11" class="node"/><text x="60.0" y="147" text-anchor="middle" class="mrm" font-size="13">3</text><text x="75.0" y="134" class="mrm muted" font-size="10">01</text><circle cx="204.0" cy="142" r="11" class="head-cell"/><text x="204.0" y="147" text-anchor="middle" class="mrm" font-size="13">5</text><text x="219.0" y="134" class="mrm muted" font-size="10">00</text><circle cx="396.0" cy="142" r="11" class="node"/><text x="396.0" y="147" text-anchor="middle" class="mrm" font-size="13">4</text><text x="411.0" y="134" class="mrm muted" font-size="10">11</text><circle cx="540.0" cy="142" r="11" class="node"/><text x="540.0" y="147" text-anchor="middle" class="mrm" font-size="13">6</text><text x="555.0" y="134" class="mrm muted" font-size="10">10</text><circle cx="60.0" cy="198" r="11" class="node"/><text x="60.0" y="203" text-anchor="middle" class="mrm" font-size="13">9</text><text x="75.0" y="190" class="mrm muted" font-size="10">010</text><circle cx="156.0" cy="198" r="11" class="node"/><text x="156.0" y="203" text-anchor="middle" class="mrm" font-size="13">7</text><text x="171.0" y="190" class="mrm muted" font-size="10">001</text><circle cx="252.0" cy="198" r="11" class="head-cell"/><text x="252.0" y="203" text-anchor="middle" class="mrm" font-size="13">11</text><text x="267.0" y="190" class="mrm muted" font-size="10">000</text><circle cx="348.0" cy="198" r="11" class="node"/><text x="348.0" y="203" text-anchor="middle" class="mrm" font-size="13">8</text><text x="363.0" y="190" class="mrm muted" font-size="10">110</text><circle cx="444.0" cy="198" r="11" class="node"/><text x="444.0" y="203" text-anchor="middle" class="mrm" font-size="13">12</text><text x="459.0" y="190" class="mrm muted" font-size="10">111</text><circle cx="540.0" cy="198" r="11" class="node"/><text x="540.0" y="203" text-anchor="middle" class="mrm" font-size="13">10</text><text x="555.0" y="190" class="mrm muted" font-size="10">100</text><circle cx="252.0" cy="254" r="11" class="head-cell"/><text x="252.0" y="259" text-anchor="middle" class="mrm" font-size="13">13</text><text x="267.0" y="246" class="mrm muted" font-size="10">0001</text><text x="60.0" y="226" text-anchor="middle" class="mrm muted" font-size="12">⋮</text><text x="156.0" y="226" text-anchor="middle" class="mrm muted" font-size="12">⋮</text><text x="348.0" y="226" text-anchor="middle" class="mrm muted" font-size="12">⋮</text><text x="444.0" y="226" text-anchor="middle" class="mrm muted" font-size="12">⋮</text><text x="540.0" y="226" text-anchor="middle" class="mrm muted" font-size="12">⋮</text><text x="252.0" y="282" text-anchor="middle" class="mrm muted" font-size="12">⋮</text><text x="20" y="300" class="label">small digits: the pattern of a node over its parent σ, the colors of its pairs with σ(0), σ(1), …</text><text x="20" y="318" class="label">highlighted: the branch 0, 1, 5, 11, 13, pre-homogeneous so far</text></svg>
+:::
+
+The last step of the proof is :ref{#thm-konig-strength} relativized to $f$. The tree is computable and all its paths are good; the only difficulty is that it is finitely branching without a computable bound on the values of the successors, which in general costs one jump (:ref{#thm-finitely-branching-jump}).
+
 :::theorem[Jockusch]{#thm-jockusch-upper}
 For every $n \geq 1$, every coloring $f : [\nat]^n \to k$ has an infinite homogeneous set computable in every set that is PA relative to $f^{(n-1)}$. In particular, every computable coloring of $[\nat]^n$ has an infinite homogeneous set computable in $\emptyset^{(n)}$.
 :::
@@ -71,7 +85,9 @@ For $n + 1$ with $n \geq 2$, let $P_1$ be PA relative to $f^{(n)}$. By the low b
 For the last statement, $\emptyset^{(n)}$ is PA relative to $\emptyset^{(n-1)}$: it computes a $\{0, 1\}$-valued function DNC relative to $\emptyset^{(n-1)}$.
 :::
 
-Jockusch proved more precisely that every computable coloring of $[\nat]^n$ has a $\Pi^0_n$ infinite homogeneous set. For pairs, one builds an infinite pre-homogeneous sequence and the set of its elements of a given limit color so that both are $\Pi^0_2$; we do not reproduce the construction (Jockusch 1972; Hirschfeldt, *Slicing the Truth*, Chapter 6).
+The proof uses two techniques of the course on Π⁰₁ classes: **basis theorems**, here the low basis theorem relativized, to keep the jumps of the intermediate sets under control, and the universality of PA degrees, which allows one oracle to compute a member of every non-empty class at the relevant level.
+
+Jockusch proved more precisely that every computable coloring of $[\nat]^n$ has a $\Pi^0_n$ infinite homogeneous set. For pairs, one builds, computably in $\emptyset'$, an infinite pre-homogeneous set together with the set of its elements of a given limit color so that both are $\Pi^0_2$; we do not reproduce the construction (Jockusch 1972; Dzhafarov–Mummert, Lemma 8.1.2 and Theorem 8.1.1).
 
 :::quiz[the Erdős–Radó tree]
 In the proof of :ref{#prop-erdos-rado-tree}, why is $f'$ needed to compute a path, although the tree is $f$-computable and finitely branching?
@@ -97,101 +113,7 @@ In the proof of :ref{#thm-jockusch-upper}, why is the case $n = 2$ treated separ
   It exists for every $n$.
 :::
 
-## The lower bound
-
-:::theorem[Jockusch]{#thm-jockusch-no-delta2}
-There is a computable coloring $f : [\nat]^2 \to 2$ with no infinite $\Delta^0_2$ homogeneous set, hence no infinite $\Sigma^0_2$ homogeneous set.
-:::
-
-:::proof{of=thm-jockusch-no-delta2}
-For each $e$ and $s$, let $A_{e,s} = \{ x < s : \Phi^{\emptyset'_s}_e(x)[s]\converge = 1 \}$, where $\emptyset'_s$ is the stage $s$ approximation of $\emptyset'$. If $\Phi^{\emptyset'}_e$ is the characteristic function of a set $A$, then for every $x$, $x \in A_{e,s}$ for all large $s$ if $x \in A$, and $x \notin A_{e,s}$ for all large $s$ otherwise. Every $\Delta^0_2$ set is of this form, by the limit lemma.
-
-Define $f(\{ x, s \})$ for $x < s$ at stage $s$: for $e = 0, 1, \dots, s - 1$ in turn, if $A_{e,s}$ has at least $2e + 2$ elements, choose the two least elements $a < b$ of $A_{e,s}$ for which $f(\{ a, s \})$ and $f(\{ b, s \})$ are not yet defined, and set $f(\{ a, s \}) = 0$ and $f(\{ b, s \}) = 1$. Before $e$ acts, at most $2e$ values $f(\{ x, s \})$ have been defined, so the two elements exist. All remaining values $f(\{ x, s \})$ are set to $0$. The coloring is computable.
-
-Let $A = \Phi^{\emptyset'}_e$ be an infinite $\Delta^0_2$ set, and $n$ such that $A \cap \{0, \dots, n-1\}$ has exactly $2e + 2$ elements. For large enough $s \in A$, $A_{e,s} \cap \{0, \dots, n-1\} = A \cap \{0, \dots, n-1\}$. At stage $s$, the $2e + 2$ least elements of $A_{e,s}$ are those of $A$ below $n$, and $e$ chooses two of them, $a$ and $b$, with $f(\{ a, s \}) \neq f(\{ b, s \})$. Since $a, b, s \in A$, $A$ is not homogeneous.
-
-Finally, every infinite $\Sigma^0_2$ set $B = \{ x : \exists y\, \forall z\, R(x, y, z) \}$, with $R$ computable, has an infinite $\Delta^0_2$ subset: with $\emptyset'$, search for pairs $(x, y)$ with $\forall z\, R(x, y, z)$, and keep an increasing sequence of the first coordinates found. A subset of a homogeneous set is homogeneous.
-:::
-
-The two bounds leave a gap at pairs: homogeneous sets for computable colorings can always be found below $\emptyset''$, and sometimes not below $\emptyset'$. What computational power is necessarily carried by every homogeneous set is the subject of the next two lessons.
-
-:::quiz[the lower bound]
-In the proof of :ref{#thm-jockusch-no-delta2}, why does the requirement for $e$ wait until $A_{e,s}$ has at least $2e + 2$ elements?
-
-- [x] Because the requirements $e' < e$ may already have used up to $2e$ elements at stage $s$; with $2e + 2$ elements, two remain available for $e$.
-- [ ] Because $A$ must have at least $2e + 2$ elements to be infinite.
-
-  An infinite set has arbitrarily many elements; the bound is about sharing the stage $s$ among requirements.
-- [ ] To ensure that $f$ is computable.
-
-  $f$ is computable whatever the threshold; the threshold guarantees that two fresh elements exist.
-:::
-
-## Coding the jump into triples
-
-The upper bound for triples is not only a bound on complexity: some computable colorings of triples force all their homogeneous sets to compute $\emptyset'$.
-
-:::lemma{#lem-limit-coloring}
-For every $\emptyset'$-computable coloring $h : [\nat]^n \to k$, there is a computable coloring $f : [\nat]^{n+1} \to k$ such that every infinite homogeneous set for $f$ is homogeneous for $h$.
-:::
-
-:::proof{of=lem-limit-coloring}
-By the limit lemma, $h(\{ x_1, \dots, x_n \}) = \lim_t f(\{ x_1, \dots, x_n, t \})$ for a computable function $f$ defined for $x_1 < \cdots < x_n < t$; replacing the values outside $k$ by $0$, which does not change the limit, $f$ is a coloring $[\nat]^{n+1} \to k$. Let $H$ be infinite and homogeneous for $f$ with color $i$. For $x_1 < \cdots < x_n$ in $H$, take $t \in H$ large enough that $f(\{ x_1, \dots, x_n, t \}) = h(\{ x_1, \dots, x_n \})$; this value is $i$.
-:::
-
-:::proposition[Jockusch]{#prop-rt32-jump}
-There is a computable coloring of $[\nat]^3$ with two colors all of whose infinite homogeneous sets compute $\emptyset'$.
-:::
-
-:::proof{of=prop-rt32-jump}
-Let $m(x)$ be the least $s$ with $\emptyset'_s \cap \{0, \dots, x - 1\} = \emptyset' \cap \{0, \dots, x - 1\}$, a $\emptyset'$-computable function. Let $h(\{ x, y \}) = 1$ if $m(x) < y$ and $0$ otherwise, for $x < y$. An infinite homogeneous set $H$ for $h$ has color $1$: color $0$ would give $m(x) \geq y$ for all $y > x$ in $H$. So for consecutive elements $x < y$ of $H$, $\emptyset' \cap \{0, \dots, x-1\} = \emptyset'_y \cap \{0, \dots, x-1\}$, and $H$ computes $\emptyset'$. Apply :ref{#lem-limit-coloring}.
-:::
-
-## Reverse mathematics
-
-:::theorem[Jockusch, Simpson]{#thm-rt3-aca}
-For every standard $n \geq 3$, $\mathsf{RT}^n_2$ is equivalent to $\mathsf{ACA}_0$ over $\mathsf{RCA}_0$. Moreover $\mathsf{ACA}_0$ proves $\mathsf{RT}^n_k$ for all standard $n$ and $k$.
-:::
-
-:::proof{of=thm-rt3-aca}
-*$\mathsf{ACA}_0$ proves $\mathsf{RT}^n_k$*, by induction on $n$ in the metatheory. The case $n = 1$ is :ref{#prop-rt-basic}. Given $f : [\nat]^{n+1} \to k$, the Erdős–Radó tree exists by $\Delta^0_1$ comprehension, and $\mathsf{RCA}_0$ proves that it is infinite and finitely branching. By König's lemma (:ref{#thm-konig-aca}), it has a path, which is pre-homogeneous. The induction hypothesis, with :ref{#prop-rt-basic} (2), whose proof applies to any number of colors, gives a homogeneous set for the induced coloring.
-
-*$\mathsf{RT}^3_2$ implies $\mathsf{ACA}_0$.* We prove that $X'$ exists, using :ref{#thm-aca-equivalents}. Define $f(\{ x, s, t \}) = 1$ for $x < s < t$ if every $e < x$ satisfies $\Phi^X_e(e)[s]\converge \leftrightarrow \Phi^X_e(e)[t]\converge$, and $0$ otherwise. Let $H$ be infinite and homogeneous. Its color is $1$: for $x \in H$, among $2^x + 1$ elements of $H$ above $x$, two have the same pattern of convergence for the indices $e < x$, by the finite pigeonhole principle, provable in $\mathsf{RCA}_0$. For each $e$, let $x_e$ be the least element of $H$ above $e$ and $s_e$ the least element of $H$ above $x_e$. If $\Phi^X_e(e)[t_0]\converge$ for some $t_0$, take $t \in H$ above $s_e$ and $t_0$, so that $\Phi^X_e(e)[t]\converge$; then $f(\{ x_e, s_e, t \}) = 1$ gives $\Phi^X_e(e)[s_e]\converge$. So $X' = \{ e : \Phi^X_e(e)[s_e]\converge \}$, which exists by $\Delta^0_1$ comprehension relative to $X \oplus H$.
-
-For $n \geq 3$, $\mathsf{RT}^n_2$ implies $\mathsf{RT}^3_2$: a coloring $f$ of triples induces the coloring $\{ x_1, \dots, x_n \} \mapsto f(\{ x_1, x_2, x_3 \})$ of $n$-tuples, with the same infinite homogeneous sets.
-:::
-
-:::corollary{#cor-wkl-not-rt22}
-$\mathsf{WKL}_0$ does not prove $\mathsf{RT}^2_2$.
-:::
-
-:::proof{of=cor-wkl-not-rt22}
-By :ref{#thm-low-scott}, there is an ω-model of $\mathsf{WKL}_0$ consisting of low sets, hence of $\Delta^0_2$ sets. The computable coloring of :ref{#thm-jockusch-no-delta2} belongs to it and has no homogeneous set in it.
-:::
-
-The coloring of :ref{#prop-rt32-jump} has no analogue for pairs: by Seetapun's theorem, proved in the last lesson, every computable coloring of pairs has an infinite homogeneous set that does not compute $\emptyset'$.
-
-:::quiz[RT³₂ and ACA₀]
-In the proof of :ref{#thm-rt3-aca}, why must an infinite homogeneous set for $f$ have color $1$?
-
-- [x] Because for each $x \in H$, the convergence patterns at stages in $H$ take at most $2^x$ values, so two stages $s < t$ in $H$ above $x$ share a pattern, and $f(\{ x, s, t \}) = 1$.
-- [ ] Because $X'$ is infinite.
-
-  The argument does not depend on $X'$; it is a counting argument on patterns.
-- [ ] Because $f$ takes the value $1$ on infinitely many triples.
-
-  Many colorings take both values infinitely often; homogeneity of $H$ together with the counting argument fixes the color.
-:::
-
 ## Exercises
-
-::::exercise{difficulty=1}
-Show that for every $n \geq 2$ there is a computable coloring $f : [\nat]^n \to 2$ with no infinite $\Sigma^0_n$ homogeneous set.
-
-:::solution
-By induction on $n$, relativized to an arbitrary oracle $Z$: there is a $Z$-computable coloring of $[\nat]^n$ with no infinite $\Sigma^0_n(Z)$ homogeneous set. For $n = 2$, this is :ref{#thm-jockusch-no-delta2} relativized. Given the statement for $n$ and every oracle, apply it to $Z'$: there is a $Z'$-computable coloring $h$ of $[\nat]^n$ with no infinite $\Sigma^0_n(Z')$, that is $\Sigma^0_{n+1}(Z)$, homogeneous set. By :ref{#lem-limit-coloring} relativized to $Z$, there is a $Z$-computable coloring of $[\nat]^{n+1}$ whose infinite homogeneous sets are homogeneous for $h$.
-:::
-::::
 
 ::::exercise{difficulty=1}
 Show that every computable coloring $f : [\nat]^2 \to 2$ has an infinite homogeneous set $H$ with $H' \leq_T \emptyset''$.
@@ -201,9 +123,22 @@ By the low basis theorem relativized to $\emptyset'$, there is a set $P$ PA rela
 :::
 ::::
 
+::::exercise{difficulty=2}
+Carry out the classical proof described at the beginning of the second section for a computable coloring $f : [\nat]^2 \to 2$, and show that it produces an infinite homogeneous set computable in $\emptyset''$. Explain why the same proof, for colorings of triples, gives no arithmetic bound.
+
+:::solution
+Let $I_0 = \nat$. Given an infinite computable set $I_i$, let $a_i = \min I_i$ and choose $c_i < 2$ such that $I_{i+1} = \{ y \in I_i : y > a_i,\ f(\{ a_i, y \}) = c_i \}$ is infinite; one of the two values works. Each $I_{i+1}$ is computable, uniformly in the previous choices, and whether a computable set given by an index is infinite is a $\Pi^0_2$ question, answered by $\emptyset''$. So the sequences $(a_i)$ and $(c_i)$ are computable in $\emptyset''$. For $i < j$, $a_j \in I_{i+1}$, so $f(\{ a_i, a_j \}) = c_i$. One of the sets $\{ a_i : c_i = 0 \}$ and $\{ a_i : c_i = 1 \}$ is infinite; it is homogeneous and computable in $\emptyset''$.
+
+For triples, the reservoir $I_{i+1}$ is an infinite homogeneous set for the coloring $\{ y, z \} \mapsto f(\{ a_i, y, z \})$ restricted to $I_i$, which is only $I_i$-computable. The case of pairs relativized to $I_i$ gives $I_{i+1} \leq_T I_i''$, so the bound on $I_i$ grows by two jumps at each step, and the construction of the whole sequence is not bounded by any finite jump.
+:::
+::::
+
 ## Notes and references
 
-Ramsey (1930) proved his theorem as a lemma in a decision procedure for a fragment of first-order logic. Specker (1971) built a computable coloring of pairs without computable infinite homogeneous set, and Jockusch (1972) obtained the bounds of this lesson. Simpson formalized the equivalence with $\mathsf{ACA}_0$. Hirschfeldt's book is the standard reference for the reverse mathematics of combinatorial principles.
+Ramsey (1930) proved his theorem as a lemma in a decision procedure for a fragment of first-order logic. The tree argument is due to Erdős and Radó (1956), and Jockusch (1972) obtained the upper bounds of this lesson. Hirschfeldt compares the three classical proofs of Ramsey's theorem from the point of view of their complexity (*Slicing the Truth*, §6.1; the classical proof, its ∅″ bound for pairs as Exercise 6.4, and a tree proof close to the one above) and proves the upper bounds in §6.2 (Theorems 6.9, 6.20 and 6.21). Dzhafarov and Mummert treat the upper bounds in §8.1, including the $\Pi^0_n$ bound (Theorem 8.1.1). Monin and Patey treat the same material in the section *Ramsey's theorem in the arithmetic hierarchy* of their chapter *Ramsey's theorem*.
 
+- F. P. Ramsey, *On a problem of formal logic*, Proceedings of the London Mathematical Society (2) 30 (1930), 264–286.
+- P. Erdős and R. Rado, *A partition calculus in set theory*, Bulletin of the American Mathematical Society 62 (1956), 427–489.
 - C. G. Jockusch, Jr., *Ramsey's theorem and recursion theory*, Journal of Symbolic Logic 37 (1972), 268–280.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022.
