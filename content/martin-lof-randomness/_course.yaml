@@ -3,19 +3,20 @@ area: randomness
 level: Intermediate
 order: 2
 prerequisites: [kolmogorov-complexity, pi01-classes, immunity-growth]
-summary: Effective null sets, the Levin–Schnorr theorem, and the randomness of Chaitin's Ω.
+summary: Effective null sets, the Levin–Schnorr theorem, and the computational power of random sequences.
 description: >
   Random sequences defined as those avoiding every effectively null class:
   the uniform measure on Cantor space and the measure of effective classes,
-  Martin-Löf and Solovay tests, the universal test, the law of large numbers,
-  the characterization of randomness by prefix-free complexity, the
-  randomness of Ω, Sacks's theorem on upper cones, the Kučera–Gács theorem,
-  and the diagonally non-computable functions computed by random sequences.
+  Martin-Löf tests and the universal test, the law of large numbers and
+  Solovay tests, the characterization of randomness by prefix-free
+  complexity and the randomness of Ω, Sacks's theorem on upper cones, the
+  Kučera–Gács theorem, and the diagonally non-computable functions computed
+  by random sequences.
 objectives:
   - Compute the complexity of the measure of Σ⁰₁ and Π⁰₁ classes
-  - Define Martin-Löf and Solovay tests and build a universal test
-  - Prove that random sequences satisfy the law of large numbers
+  - Define Martin-Löf tests, explain each requirement of the definition, and build a universal test
+  - Prove that random sequences satisfy the law of large numbers, and use Solovay tests to show that a sequence is not random
   - Prove the Levin–Schnorr theorem and the ample excess lemma
-  - Show that upper cones of non-computable sets are null, and that every set is computable from a random sequence
-  - Show that random sequences compute DNC functions
-lessons: [measure, martin-lof-tests, levin-schnorr, randomness-and-degrees]
+  - Prove Sacks's theorem by the majority vote technique, and the Kučera–Gács theorem by coding into a Π⁰₁ class of positive measure
+  - Show that random sequences, and their infinite subsets, compute DNC functions
+lessons: [measure, martin-lof-tests, solovay-tests, levin-schnorr, upper-cones, randomness-and-degrees, random-dnc]

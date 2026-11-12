@@ -2,7 +2,7 @@
 title: Schnorr and Kurtz randomness
 summary: Kurtz randomness, avoiding null Π⁰₁ classes, and Schnorr randomness, passing Martin-Löf tests of computable measure; the implications between the notions; weakly 1-generic sets are Kurtz random but not Schnorr random; in computably dominated degrees, Kurtz randomness implies Martin-Löf randomness.
 duration: 30
-prerequisites: [weak-2-randomness, immunity-growth/immune-sets]
+prerequisites: [weak-2-randomness, immunity-growth/immune-sets, martin-lof-randomness/solovay-tests]
 ---
 
 Martin-Löf randomness requires the measures of the components of a test to be bounded by $2^{-n}$, but not to be known. Schnorr argued that a test whose measures cannot be computed is not fully effective, and proposed to require them to be computable. Weakening further, Kurtz considered the null classes that are closed and effectively given. This lesson compares these notions with Martin-Löf randomness, and shows that they collapse on computably dominated sequences.
@@ -29,7 +29,7 @@ Every weakly 1-generic sequence is Kurtz random, and no weakly 1-generic sequenc
 :::
 
 :::proof{of=prop-generic-kurtz}
-The first statement is the third exercise of :ref{to="martin-lof-randomness/martin-lof-tests"}. For the second, a weakly 1-generic sequence has frequencies of ones at least $\frac{2}{3}$ at infinitely many lengths, by the same exercise, so it fails the law of large numbers, hence a Schnorr test.
+The first statement is :ref{#ex-kurtz}. For the second, a weakly 1-generic sequence has frequencies of ones at least $\frac{2}{3}$ at infinitely many lengths, by the same exercise, so it fails the law of large numbers, hence a Schnorr test.
 :::
 
 The other implications are strict as well. A Schnorr random sequence need not be Martin-Löf random: Nies, Stephan and Terwijn (2005) showed that every high degree contains a Schnorr random sequence that is not Martin-Löf random, and that conversely a Schnorr random sequence that is not high is Martin-Löf random. These results are admitted.

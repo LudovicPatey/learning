@@ -1,13 +1,15 @@
 ---
 title: Martin-Löf tests
-summary: Martin-Löf tests and Martin-Löf random sequences; a universal test; random sequences form a conull Σ⁰₂ class, with low and computably dominated members; random sequences satisfy the law of large numbers; Solovay tests define the same notion.
+summary: Martin-Löf tests and Martin-Löf random sequences; why the definition requires uniformity and an effective rate; a universal test; random sequences form a conull Σ⁰₂ class, with low and computably dominated members.
 duration: 40
 prerequisites: [measure, pi01-classes/basis-theorems]
 ---
 
-A sequence is random if it has no property that can be detected effectively and that only a null class of sequences shares. Martin-Löf (1966) made this precise by requiring the null class to be covered by open classes of measure at most $2^{-n}$, enumerated uniformly in $n$. The rate $2^{-n}$ allows all such tests to be combined into a single one, which is the main technical feature of the definition. This lesson introduces the tests, proves the existence of a universal test, shows that random sequences satisfy the law of large numbers, and gives an equivalent definition due to Solovay.
+A sequence is random if it has no property that can be detected effectively and that only a null class of sequences shares. Martin-Löf (1966) made this precise by requiring the null class to be covered by open classes of measure at most $2^{-n}$, enumerated uniformly in $n$. The rate $2^{-n}$ allows all such tests to be combined into a single one, which is the main technical feature of the definition. This lesson introduces the tests, explains why each part of the definition is needed, and proves the existence of a universal test, from which the first properties of the class of random sequences follow.
 
 ## Tests
+
+The definition follows the practice of statistics. A statistician who wants to reject the hypothesis that a sequence was produced by a fair coin chooses in advance a property of small probability, say at most $2^{-n}$, and rejects the hypothesis if the sequence has it; $2^{-n}$ is the **significance level**. A test in the sense of Martin-Löf is a family of such rejection regions, one for each level, given by a single algorithm. A sequence is random if no test rejects it at every level. The rejection regions are open classes, so that rejection is witnessed by a finite prefix of the sequence.
 
 A sequence of classes $(\mathcal U_n)_{n \in \nat}$ is **uniformly $\Sigma^0_1$** if there is a c.e. set $W \subseteq \nat \times \bstr$ such that $\mathcal U_n = [W^{[n]}]^{\prec}$ for every $n$, where $W^{[n]} = \{ \sigma : (n, \sigma) \in W \}$. An index of $W$ is an **index** of the sequence.
 
@@ -19,8 +21,13 @@ The class $\bigcap_n \mathcal U_n$ captured by a test is a null $\Pi^0_2$ class,
 
 :::example{#ex-ml-tests}
 1. A computable sequence $X$ is not random: $\mathcal U_n = [X \uh n]$ is a Martin-Löf test capturing $X$.
-2. The covers of :ref{#ex-null-classes} are Martin-Löf tests. So a random sequence $X$ has $X(2i) \neq X(2i+1)$ for some $i$, and for every computable infinite set $A$, $X(a) = 1$ for some $a \in A$, hence for infinitely many, applying this to the tails of $A$.
+2. The covers of :ref{#ex-null-classes} are Martin-Löf tests. So a random sequence $X$ has $X(2i) \neq X(2i+1)$ for some $i$, is not a member of $\mathrm{DNC}_2$, and for every computable infinite set $A$, $X(a) = 1$ for some $a \in A$, hence for infinitely many, applying this to the tails of $A$.
 :::
+
+Each requirement of the definition is needed.
+
+- **Uniformity.** If each $\mathcal U_n$ were only required to be $\Sigma^0_1$, with no single algorithm enumerating all of them, every sequence $X$ would be captured: the classes $\mathcal U_n = [X \uh n]$ are clopen, of measure $2^{-n}$, and contain $X$. The cover of a single sequence is always available; what the definition requires is that it be produced by an algorithm.
+- **An effective rate.** If the measures were only required to tend to $0$, without a computable bound, the class captured would still be null, but more sequences would be captured. For example, a $\Delta^0_2$ sequence $X$ is captured by the classes $\mathcal U_n = \{ Y : Y \uh n = X_s \uh n \text{ for some } s \geq n \}$, where $(X_s)$ is a computable approximation of $X$: they are uniformly $\Sigma^0_1$, decrease to $\{ X \}$, and their measures tend to $0$, at a rate that is not computable in general. The resulting notion, **weak 2-randomness**, is strictly stronger than Martin-Löf randomness: Chaitin's $\Omega$ is $\Delta^0_2$, hence not weakly 2-random, and it is Martin-Löf random, as shown in the lesson on the Levin–Schnorr theorem (:ref{#cor-omega-random}). Weak 2-randomness is studied in the course on notions of randomness. With a computable bound, the rate itself does not matter, by :ref{#lem-test-bound} below.
 
 The bound $2^{-n}$ can be replaced by any computable bound tending to $0$.
 
@@ -33,6 +40,8 @@ For each $n$, let $m_n$ be the least $m$ with $q_m \leq 2^{-n}$; it exists since
 :::
 
 ## A universal test
+
+There are countably many tests, and a countable union of null classes is null. The point of the next theorem is that the union can be taken effectively, and that it is again covered by a single test. Two obstacles must be overcome. One cannot decide which c.e. sets define tests, so every c.e. set is first trimmed into a test, in a way that leaves genuine tests unchanged; this is possible because the bound $2^{-n}$ is checked on finite approximations. Then the $e$-th test is used at a level shifted by $e + 1$, so that the measures add up to at most $2^{-n}$, as in the proof that a countable union of null classes is null.
 
 :::theorem[Martin-Löf]{#thm-universal-test}
 There is a Martin-Löf test $(\mathcal U_n)$ such that $\bigcap_n \mathcal U_n$ contains every class captured by a Martin-Löf test. So a sequence is Martin-Löf random if and only if it passes $(\mathcal U_n)$.
@@ -91,90 +100,10 @@ Let $(\mathcal U_n)$ be a universal Martin-Löf test.
 :::proof{of=cor-mlr-structure}
 1. The complement of MLR is $\bigcap_n \mathcal U_n$, which is null.
 2. The complement of a $\Sigma^0_1$ class is a $\Pi^0_1$ class (:ref{#prop-pi01-equivalent}). A sequence outside $\mathcal U_n$ is outside $\bigcap_m \mathcal U_m$, hence random by universality. A sequence is random if and only if it is outside $\bigcap_n \mathcal U_n$, that is, in some $\mathcal P_n$.
-3. $\mathcal P_1$ is a non-empty $\Pi^0_1$ class, since its measure is at least $1/2$. Apply the low basis theorem (:ref{#thm-low-basis}) and the computably dominated basis theorem (:ref{#thm-dominated-basis}).
+3. $\mathcal P_1$ is a non-empty $\Pi^0_1$ class, since its measure is at least $1/2$. Apply the low basis theorem (:ref{#thm-low-basis}) and the computably dominated basis theorem (:ref{#thm-dominated-basis}). Both theorems are proved by forcing with $\Pi^0_1$ classes.
 :::
 
-The two random sequences of (3) are very different. A computably dominated sequence that is not computable is not $\Delta^0_2$ (:ref{#def-computably-dominated}), whereas a low sequence is $\Delta^0_2$. The next lesson shows that Chaitin's $\Omega$ is random, giving a random sequence of the degree of $\emptyset'$.
-
-## The law of large numbers
-
-A random sequence should contain asymptotically as many zeros as ones. This is the law of large numbers, and it follows from a bound on the number of strings with a deviating frequency of ones.
-
-:::fact[Hoeffding's inequality]{#fact-hoeffding}
-For every $\varepsilon > 0$ and $m \geq 1$, the number of strings $\sigma$ of length $m$ with
-$$
-\left| \frac{|\{ i < m : \sigma(i) = 1 \}|}{m} - \frac{1}{2} \right| > \varepsilon
-$$
-is at most $2^{m+1} e^{-2 m \varepsilon^2}$.
-:::
-
-This is a classical estimate of probability theory, admitted here: it is the case of fair coin tosses of the inequality of Hoeffding (1963), and also follows from the Chernoff bound. A weaker bound, sufficient for the argument below, can be obtained from Markov's inequality applied to the fourth moment of the number of ones.
-
-:::proposition{#prop-large-numbers}
-If $X$ is Martin-Löf random, then $\lim_{m} \frac{1}{m} |\{ i < m : X(i) = 1 \}| = \frac{1}{2}$.
-:::
-
-:::proof{of=prop-large-numbers}
-Fix a rational $\varepsilon > 0$, let $C_m$ be the computable set of strings of length $m$ described in :ref{#fact-hoeffding}, and let $\mathcal V_n = \bigcup_{m > n} [C_m]^{\prec}$, a uniformly $\Sigma^0_1$ sequence. Let $a = e^{-2\varepsilon^2} < 1$. By subadditivity,
-$$
-\lambda(\mathcal V_n) \leq \sum_{m > n} 2^{-m} \cdot 2^{m+1} a^m = \frac{2 a^{n+1}}{1 - a}.
-$$
-One computes rationals $q_n$ with $2a^{n+1} / (1 - a) \leq q_n \leq 2a^{n+1} / (1-a) + 2^{-n}$; they tend to $0$. If the frequency of ones in $X \uh m$ differs from $\frac12$ by more than $\varepsilon$ for infinitely many $m$, then $X \in \mathcal V_n$ for every $n$, and $X$ is not random by :ref{#lem-test-bound}. A random $X$ therefore has frequencies eventually within $\varepsilon$ of $\frac12$, for every rational $\varepsilon > 0$.
-:::
-
-The same argument, with Hoeffding's inequality for the independent events "the $i$-th block is $\tau$", each of probability $2^{-k}$, applies to blocks: for a random $X$ and a string $\tau$ of length $k$, the frequency of the occurrences of $\tau$ among the blocks $X(ik) \cdots X(ik + k - 1)$ tends to $2^{-k}$. Since the tails of a random sequence are random (second exercise below), the same holds for the blocks starting at the positions $ik + r$, for each $r < k$; so $\tau$ occurs at a position $i < m$ with frequency tending to $2^{-k}$. Random sequences are therefore **normal** in base $2$ in the sense of Borel.
-
-## Solovay tests
-
-The rate $2^{-n}$ in the definition of tests is convenient for building a universal test, but proving that a given sequence is not random is often easier with a summability condition.
-
-:::definition[Solovay]{#def-solovay-test}
-A **Solovay test** is a uniformly $\Sigma^0_1$ sequence $(\mathcal S_n)$ with $\sum_n \lambda(\mathcal S_n) < \infty$. A sequence $X$ is **captured** by the test if $X \in \mathcal S_n$ for infinitely many $n$.
-:::
-
-By the Borel–Cantelli lemma, the class captured by a Solovay test is null. A Martin-Löf test is a Solovay test, with $\sum_n 2^{-n} = 2$, and a sequence in all its components is in infinitely many. The converse requires an argument.
-
-:::theorem[Solovay]{#thm-solovay}
-A sequence is Martin-Löf random if and only if it is not captured by any Solovay test.
-:::
-
-:::proof{of=thm-solovay}
-($\Leftarrow$) A Martin-Löf test is a Solovay test, and a sequence captured by it as a Martin-Löf test is captured by it as a Solovay test.
-
-($\Rightarrow$) Let $(\mathcal S_n)$ be a Solovay test, and let $d$ be such that $\sum_n \lambda(\mathcal S_n) \leq 2^d$. Let $\mathcal V_k$ be the class of sequences that belong to $\mathcal S_n$ for at least $2^k$ values of $n$. A sequence captured by the Solovay test belongs to every $\mathcal V_k$. We show that $(\mathcal V_{k + d})_k$ is a Martin-Löf test.
-
-Fix an enumeration of the c.e. set defining $(\mathcal S_n)$. For a stage $s$, let $\mathcal S_{n,s}$ be the clopen class generated by the strings enumerated into the $n$-th component by stage $s$, for $n \leq s$, and $\mathcal S_{n,s} = \emptyset$ for $n > s$. Delaying the enumeration of each string $\sigma$ to a stage at least $|\sigma|$ does not change the classes $\mathcal S_n$; so we may assume that the strings enumerated by stage $s$ have length at most $s$. Each $\mathcal S_{n,s}$ is then a union of cylinders $[\tau]$ with $|\tau| = s$. Let $D_s$ be the set of strings $\tau$ of length $s$ such that $[\tau] \subseteq \mathcal S_{n,s}$ for at least $2^k$ values of $n$; it is computable from $s$ and $k$. Counting pairs $(\tau, n)$ with $|\tau| = s$ and $[\tau] \subseteq \mathcal S_{n,s}$ in two ways gives
-$$
-2^k\, |D_s| \leq \sum_{|\tau| = s} |\{ n : [\tau] \subseteq \mathcal S_{n,s} \}| = \sum_{n \leq s} 2^s \lambda(\mathcal S_{n,s}) \leq 2^s \cdot 2^d,
-$$
-so $\lambda([D_s]^{\prec}) \leq 2^{d - k}$. The classes $[D_s]^{\prec}$ increase with $s$, since the classes $\mathcal S_{n,s}$ do. If $X$ belongs to $2^k$ classes $\mathcal S_n$, all these memberships are witnessed at some stage $s$, and then $X \uh s \in D_s$. So $\mathcal V_k = \bigcup_s [D_s]^{\prec}$: it is uniformly $\Sigma^0_1$, and $\lambda(\mathcal V_k) \leq 2^{d-k}$ by continuity. Hence $(\mathcal V_{k+d})_k$ is a Martin-Löf test, and it captures every sequence captured by $(\mathcal S_n)$.
-:::
-
-The counting step is Markov's inequality: the average number of classes $\mathcal S_n$ containing a sequence is $\sum_n \lambda(\mathcal S_n)$, so the sequences belonging to $2^k$ of them have measure at most $2^{-k}$ times this sum.
-
-:::quiz[Solovay tests]
-In the proof of :ref{#thm-solovay}, why is the constant $d$ not required to be computable from the test?
-
-- [x] Because $d$ is a single number: for a fixed $d$, the sequence $(\mathcal V_{k+d})_k$ is uniformly $\Sigma^0_1$, and its existence is all that is needed.
-- [ ] Because the sum $\sum_n \lambda(\mathcal S_n)$ is computable.
-
-  The sum is only left-c.e. in general; the argument does not need its value.
-- [ ] Because $d$ is always $0$.
-
-  The sum of the measures may exceed $1$; $d$ compensates for it.
-
----
-
-Why are the clopen approximations $\mathcal S_{n,s}$ used, rather than the classes $\mathcal S_n$ directly?
-
-- [x] To reduce the measure estimate to a finite count over the strings of length $s$, and to obtain $\mathcal V_k$ as an effective union of clopen classes.
-- [ ] Because the classes $\mathcal S_n$ are not measurable.
-
-  Open classes are Borel, hence measurable.
-- [ ] To make the classes $\mathcal S_n$ pairwise disjoint.
-
-  They overlap in general; the count handles the overlaps.
-:::
+The two random sequences of (3) are very different. A computably dominated sequence that is not computable is not $\Delta^0_2$ (:ref{#def-computably-dominated}), whereas a low sequence is $\Delta^0_2$. The lesson on the Levin–Schnorr theorem shows that Chaitin's $\Omega$ is random, giving a random sequence of the degree of $\emptyset'$ (:ref{#cor-omega-random}).
 
 ## Exercises
 
@@ -186,7 +115,7 @@ Fix $k$, and let $\mathcal V_N$ be the clopen class of sequences none of whose f
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-tails difficulty=1}
 Let $X$ be Martin-Löf random. Show that $\sigma X$ is random for every string $\sigma$, and that the tail $Y = X(1) X(2) \cdots$ is random.
 
 :::solution
@@ -196,23 +125,20 @@ If $\sigma X$ is captured by $(\mathcal U_n)$, then $X$ belongs to every $(\math
 :::
 ::::
 
-::::exercise{difficulty=2}
-A sequence $G$ is **weakly 1-generic** if it meets every dense c.e. set of strings $W$: some prefix of $G$ belongs to $W$. A sequence is **Kurtz random** if it belongs to no null $\Pi^0_1$ class. Show that every Martin-Löf random sequence is Kurtz random, that every weakly 1-generic sequence is Kurtz random, and that no weakly 1-generic sequence is Martin-Löf random.
+::::exercise{difficulty=1}
+Show that no Martin-Löf random sequence, viewed as a set of numbers, is c.e. or co-c.e.
 
 :::solution
-A null $\Pi^0_1$ class $\mathcal P$ is covered by clopen classes $[F_n]^{\prec}$ of measure at most $2^{-n}$, computable from $n$ (second exercise of :ref{to="martin-lof-randomness/measure"}); this is a Martin-Löf test, so random sequences avoid $\mathcal P$.
-
-Let $\mathcal P = [T]$ be null, with $T$ computable. The set $W$ of strings not in $T$ is computable. It is dense: if some $\sigma$ had all its extensions in $T$, then $[\sigma] \subseteq \mathcal P$ and $\lambda(\mathcal P) \geq 2^{-|\sigma|}$. A weakly 1-generic $G$ has a prefix outside $T$, so $G \notin \mathcal P$.
-
-For each $n$, the set $D_n$ of strings $\tau$ of length at least $n$ with at least $\frac{2}{3}|\tau|$ ones is computable and dense: a string $\sigma$ is extended by $\sigma 1^k$ with $k = \max(2|\sigma|, n)$, which has at least $k \geq \frac{2}{3}(|\sigma| + k)$ ones. A weakly 1-generic $G$ meets every $D_n$, so the frequency of ones in $G \uh m$ is at least $\frac{2}{3}$ for infinitely many $m$. By :ref{#prop-large-numbers}, $G$ is not random.
+A finite or cofinite set is computable, hence not random (:ref{#ex-ml-tests}). Let $X$ be infinite and c.e. It has an infinite computable subset $A$: enumerate $X$ and keep each element larger than all the elements kept before. Let $a_0 < a_1 < \cdots$ enumerate $A$, and let $\mathcal U_n$ be the clopen class of the sequences $Y$ with $Y(a_i) = 1$ for $i < n$. It has measure $2^{-n}$, is computable from $n$, and contains $X$; so $(\mathcal U_n)$ is a Martin-Löf test capturing $X$. If $X$ is co-c.e. and coinfinite, apply the same argument to its complement, with $Y(a_i) = 0$: the test obtained is the one of :ref{#ex-null-classes} (2).
 :::
 ::::
 
 ## Notes and references
 
-Martin-Löf (1966) introduced the tests and the universal test; the definition was meant to capture all effective statistical tests, the law of large numbers being the first example. Solovay's equivalent formulation appears in unpublished notes (1975). Kurtz (1981) introduced the randomness notion of the last exercise. Normal numbers were introduced by Borel (1909), who proved that almost every real is normal.
+Martin-Löf (1966) introduced the tests and the universal test; the definition was meant to capture all effective statistical tests at once, the law of large numbers of :ref{to="martin-lof-randomness/solovay-tests"} being the first example. The existence of low and of computably dominated random sequences is an application of the basis theorems of Jockusch and Soare (1972). Weak 2-randomness, mentioned after :ref{#def-ml-test}, was introduced by Kurtz (1981). Downey and Hirschfeldt present Martin-Löf tests and the universal test in Section 6.2 (Definition 6.2.1, Theorem 6.2.5), and low random sets in Section 8.1; Nies does so in Section 3.2 (Definition 3.2.1, Fact 3.2.4, Proposition 3.2.5 for the $\Sigma^0_2$ class).
 
 - P. Martin-Löf, *The definition of random sequences*, Information and Control 9 (1966), 602–619.
-- W. Hoeffding, *Probability inequalities for sums of bounded random variables*, Journal of the American Statistical Association 58 (1963), 13–30.
-- S. A. Kurtz, *Randomness and genericity in the degrees of unsolvability*, PhD thesis, University of Illinois, 1981.
-- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010.
+- C. G. Jockusch and R. I. Soare, *$\Pi^0_1$ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
+- S. A. Kurtz, *Randomness and genericity in the degrees of unsolvability*, PhD thesis, University of Illinois at Urbana–Champaign, 1981.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 6.2 and 8.1.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 3.2.
