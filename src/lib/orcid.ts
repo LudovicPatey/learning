@@ -1,9 +1,10 @@
 // ORCID OAuth 2.0 (three-legged, "/authenticate" scope).
 // Docs: https://info.orcid.org/documentation/integration-guide/
 export function orcidConfig() {
-  const clientId = process.env.ORCID_CLIENT_ID;
-  const clientSecret = process.env.ORCID_CLIENT_SECRET;
-  const base = (process.env.ORCID_BASE_URL ?? "https://orcid.org").replace(/\/$/, "");
+  // trimmed, as in deploy/api/lib.php: stray whitespace in pasted credentials makes ORCID reject them
+  const clientId = process.env.ORCID_CLIENT_ID?.trim();
+  const clientSecret = process.env.ORCID_CLIENT_SECRET?.trim();
+  const base = (process.env.ORCID_BASE_URL ?? "https://orcid.org").trim().replace(/\/$/, "");
   const scope = process.env.ORCID_SCOPE ?? "/authenticate";
   return { clientId, clientSecret, base, scope, enabled: Boolean(clientId && clientSecret) };
 }

@@ -66,6 +66,14 @@ nothing outside `out/` is (in particular not `external-data/`).
 4. Check `https://<site>/api/auth/me`: it answers
    `{"user":null,"orcidConfigured":true,"devLogin":false}`.
 
+If signing in ends with "Could not verify your ORCID iD", ORCID refused the token
+request: the client id or secret is wrong, or the redirect URI registered with ORCID is
+not exactly `https://<site>/api/auth/orcid/callback` for the domain the site is served
+on. The reason given by ORCID is written to the PHP error log of the hosting (OVH
+control panel → Web hosting → Logs), with a line starting with
+`ORCID token exchange failed`. Spaces and line breaks around the credentials in
+`config.php` are ignored.
+
 Remarks and sessions are stored in `learning-data/` next to the site's folder,
 outside the web root (`data_dir` in `config.php` to change it). To download them:
 

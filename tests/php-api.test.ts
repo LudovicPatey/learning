@@ -164,6 +164,17 @@ describe.skipIf(!hasPhp)("PHP remarks server", () => {
     expect(r.json).toMatchObject({ comments: [], users: { [ADMIN]: { name: "Josiah Carberry (dev login)" } } });
   });
 
+  it("trims stray whitespace in the credentials of config.php", () => {
+    const conf = path.join(tmp, "config-spaces.php");
+    fs.writeFileSync(conf, `<?php return ['orcid_client_id' => ' APP-1 ', 'orcid_client_secret' => "secret\\n", 'orcid_base' => 'https://orcid.org/ '];`);
+    const lib = path.join(__dirname, "..", "deploy", "api", "lib.php");
+    const out = spawnSync("php", ["-r", `require ${JSON.stringify(lib)}; echo json_encode([cfg()['orcid_client_id'], cfg()['orcid_client_secret'], cfg()['orcid_base']]);`], {
+      env: { ...process.env, LEARNING_CONFIG: conf },
+      encoding: "utf8",
+    });
+    expect(JSON.parse(out.stdout)).toEqual(["APP-1", "secret", "https://orcid.org"]);
+  });
+
   it("signs out", async () => {
     expect((await call("POST", "/api/auth/logout")).json).toEqual({ ok: true });
     cookie = "";

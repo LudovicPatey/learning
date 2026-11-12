@@ -22,6 +22,12 @@ function cfg(): array {
     'site_url' => '',
     'dev_login' => false,
   ];
+  // Stray spaces or line breaks in credentials pasted into config.php make ORCID
+  // reject the token request; remove them.
+  foreach (['orcid_client_id', 'orcid_client_secret', 'orcid_base', 'admin_token', 'site_url'] as $k) {
+    $c[$k] = trim((string) $c[$k]);
+  }
+  $c['orcid_base'] = rtrim($c['orcid_base'], '/');
   return $c;
 }
 function orcid_configured(): bool {

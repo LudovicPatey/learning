@@ -101,9 +101,10 @@ describe("ORCID", () => {
   });
 
   it("exchanges a code for a validated ORCID iD", async () => {
-    process.env.ORCID_CLIENT_ID = "id";
-    process.env.ORCID_CLIENT_SECRET = "secret";
-    process.env.ORCID_BASE_URL = "https://sandbox.orcid.org/";
+    // stray whitespace in pasted credentials is removed (a trailing line break once broke sign-in)
+    process.env.ORCID_CLIENT_ID = " id";
+    process.env.ORCID_CLIENT_SECRET = "secret\n";
+    process.env.ORCID_BASE_URL = "https://sandbox.orcid.org/ ";
     const fetchMock = vi.fn(async () => new Response(JSON.stringify({ orcid: "0000-0002-1825-009X", name: " Jo " }), { status: 200 }));
     vi.stubGlobal("fetch", fetchMock);
     const res = await exchangeCode("abc", new Request("http://localhost:3000/api/auth/orcid/callback"));
@@ -111,6 +112,7 @@ describe("ORCID", () => {
     const [url, init] = fetchMock.mock.calls[0] as unknown as [string, RequestInit];
     expect(url).toBe("https://sandbox.orcid.org/oauth/token");
     expect(String(init.body)).toContain("redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Forcid%2Fcallback");
+    expect(String(init.body)).toContain("client_id=id&client_secret=secret&");
     vi.unstubAllGlobals();
   });
 

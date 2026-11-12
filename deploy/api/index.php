@@ -72,10 +72,18 @@ if ($route === 'auth/orcid/callback' && $method === 'GET') {
       'redirect_uri' => site_url() . '/api/auth/orcid/callback',
     ]),
   ]);
-  $res = json_decode((string) curl_exec($ch), true);
+  $body = curl_exec($ch);
+  $status = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  $curlError = curl_error($ch);
   curl_close($ch);
+  $res = json_decode((string) $body, true);
   $orcid = (string) ($res['orcid'] ?? '');
-  if (!orcid_valid($orcid)) $failTo('Could not verify your ORCID iD. Please try again.');
+  if (!orcid_valid($orcid)) {
+    // in the hosting's PHP error log: ORCID's answer, never the credentials
+    error_log('ORCID token exchange failed: HTTP ' . $status . ($curlError !== '' ? ', ' . $curlError : '')
+      . ', ' . substr(preg_replace('/\s+/', ' ', (string) $body), 0, 300));
+    $failTo('Could not verify your ORCID iD. Please try again.');
+  }
   // the name is the one public on the ORCID record (the iD when it is private)
   sign_in($orcid, trim((string) ($res['name'] ?? '')) ?: $orcid);
   redirect(site_url() . safe_return_to($saved['returnTo'] ?? null));
