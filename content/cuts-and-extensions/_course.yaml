@@ -1,0 +1,30 @@
+title: Cuts and extensions
+area: arithmetic
+level: Advanced
+order: 3
+prerequisites: [truth-and-provability, second-order-arithmetic, pi01-classes]
+summary: Coded subsets of cuts and the standard system; weak König's lemma in exponential cuts and Scott sets; Tennenbaum's theorem; semiregular and regular cuts; cofinal and end extensions, the preservation of Σₙ formulas, the splitting theorem, and the Friedman–Paris conservation of BΣₙ₊₁ over IΣₙ.
+description: >
+  The third course of the track on models of arithmetic. It assumes first-order
+  logic: the completeness and compactness theorems, and the Tarski–Vaught test.
+  The course studies what a non-standard model knows about its cuts through the
+  numbers it codes: the coded subsets of a cut are closed under Δ⁰₁
+  definability, by an overspill argument, and those of a proper exponential cut
+  satisfy weak König's lemma (Scott), so that the standard system is a Scott
+  set; conversely every countable Scott set is the standard system of a model of
+  Peano arithmetic, and no non-standard model is computable (Tennenbaum). It
+  characterizes semiregular cuts, those whose coded subsets form a model of
+  WKL₀, and compares them with regular cuts (Kirby and Paris). It then turns to
+  extensions of models: a cofinal Σₙ-elementary extension of a model of BΣₙ₊₁
+  is Σₙ₊₂-elementary; Σₙ₊₁ induction is collection for partial functions
+  (Friedman); a proper Σₙ-elementary end extension satisfying IΣₙ forces BΣₙ₊₁
+  (Paris and Kirby); every elementary extension splits into a cofinal part and
+  an end part; and BΣₙ₊₁ is Πₙ₊₂-conservative over IΣₙ (Friedman, Paris).
+objectives:
+  - Evaluate formulas with set parameters in a cut through codes, and prove closure properties of coded subsets by overspill
+  - Prove that the standard system of a non-standard model is a Scott set, and that every countable Scott set is a standard system
+  - Prove Tennenbaum's theorem from the standard system
+  - Prove that semiregular cuts satisfy Σ₁ induction, and characterize them by WKL₀
+  - Use the Tarski–Vaught test level by level, and prove preservation theorems for cofinal extensions
+  - Prove that end extensions give collection, split extensions into cofinal and end parts, and deduce the conservation of BΣₙ₊₁ over IΣₙ
+lessons: [standard-system, weak-konig-cuts, scott-tennenbaum, semiregular-cuts, cofinal-extensions, collection-end-extensions]
