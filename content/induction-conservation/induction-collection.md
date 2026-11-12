@@ -1,15 +1,17 @@
 ---
 title: Induction, collection and least numbers
-summary: The schemes of Σ⁰ₙ and Π⁰ₙ induction, collection and least number principles; closure of the classes Σ⁰ₙ under bounded quantification in the presence of collection; Σ⁰ₙ and Π⁰ₙ induction are equivalent; the hierarchy IΣ⁰ₙ₊₁ ⇒ BΣ⁰ₙ₊₁ ⇒ IΣ⁰ₙ.
-duration: 40
+summary: The schemes of Σ⁰ₙ and Π⁰ₙ induction, collection and least number principles; closure of the classes Σ⁰ₙ under bounded quantification in the presence of collection; Σ⁰ₙ and Π⁰ₙ induction are equivalent; Σ⁰ₙ induction implies Σ⁰ₙ collection and the least number principles.
+duration: 50
 prerequisites: [second-order-arithmetic/rca0]
 ---
 
-In an ω-model, every form of induction holds, because the first-order part is the true $\nat$. In a model with non-standard numbers, induction may fail for complicated formulas: a formula may define a proper initial segment closed under successor, a **cut**, which contains $0$ but not every number. The axioms of $\mathsf{RCA}_0$ only grant induction for $\Sigma^0_1$ formulas, and many principles of ordinary mathematics turn out to be equivalent to forms of induction or of the related **collection** principle. This lesson sets up the hierarchy of these schemes, following Paris and Kirby.
+In an ω-model, every form of induction holds, because the first-order part is the true $\nat$. In a model with non-standard numbers, induction may fail for complicated formulas: a formula may define a proper initial segment closed under successor, a **cut**, which contains $0$ but not every number. The axioms of $\mathsf{RCA}_0$ only grant induction for $\Sigma^0_1$ formulas, and many principles of ordinary mathematics turn out to be equivalent to forms of induction or of the related **collection** principle. This lesson and the next two set up the hierarchy of these schemes, following Paris and Kirby. This lesson proves that $\Sigma^0_n$ induction gives $\Pi^0_n$ induction, $\Sigma^0_n$ collection and the least number principles. The next lesson proves that collection gives induction one level down, and the third one that the resulting hierarchy is strict.
+
+The proofs of this lesson all follow one pattern, which recurs in the whole course: to prove an instance of a scheme, one applies induction to an auxiliary formula, and the work consists in checking that the auxiliary formula still has the complexity allowed by the induction available. The main tool for this check is :ref{#lem-collection-closure}.
 
 ## The schemes
 
-All formulas are formulas of $\mathcal L_2$, with number and set parameters (:ref{#def-l2}); the classes $\Sigma^0_n$ and $\Pi^0_n$ count blocks of quantifiers of the same kind as one.
+All formulas are formulas of $\mathcal L_2$, with number and set parameters (:ref{#def-l2}); the classes $\Sigma^0_n$ and $\Pi^0_n$ count blocks of quantifiers of the same kind as one, and their formulas are in prenex form with a bounded matrix.
 
 :::definition{#def-induction-schemes}
 Let $n \geq 0$ and $\Gamma$ be $\Sigma^0_n$ or $\Pi^0_n$. For every formula $\varphi \in \Gamma$, the universal closures of the following formulas form respectively the schemes $\mathsf I\Gamma$, $\mathsf B\Gamma$ and $\mathsf L\Gamma$:
@@ -23,15 +25,22 @@ The theory $\mathsf I\Delta^0_0$ consists of the basic axioms (:ref{#def-z2}) an
 
 The formula $\varphi$ may contain other free variables, which act as parameters. Collection says that a "finite" family of nonempty sets of witnesses has a common bound; here finite means indexed by the numbers below some $a$, which may be non-standard. In the true $\nat$, every instance of the three schemes holds. All theories in this course extend $\mathsf I\Delta^0_0$, and $\mathsf{RCA}_0$ contains $\mathsf I\Sigma^0_1$.
 
+:::example{#ex-scheme-instances}
+1. Let $\delta(x, y)$ be a bounded formula expressing that $y$ codes the sequence $(2^0, 2^1, \dots, 2^x)$, using the coding of finite sequences of $\mathsf{RCA}_0$. The instance of $\mathsf I\Sigma^0_1$ for $\exists y\ \delta(x, y)$ proves that exponentiation is total: the sequence for $x + 1$ is obtained from the sequence for $x$ by appending one term. By a theorem of Parikh (1971), which we admit, $\mathsf I\Delta^0_0$ does not prove that exponentiation is total: if $\mathsf I\Delta^0_0$ proves $\forall x\ \exists y\ \delta(x, y)$ with $\delta$ bounded, then $y$ can be bounded by a polynomial in $x$, whereas here $y \geq 2^x$. The difference between $\mathsf I\Delta^0_0$ and $\mathsf I\Sigma^0_1$ is thus a difference in the functions that can be proved total.
+2. Let $a$ be a standard number $k$. If $\forall x < k\ \exists y\ \varphi(x, y)$, the basic axioms on $<$ show that the numbers below $k$ are $0, 1, \dots, k - 1$, and the maximum of $k$ witnesses, plus one, is a common bound. So every instance of collection with a standard bound is provable in $\mathsf I\Delta^0_0$, by a proof with $k$ cases. The scheme has content only for non-standard $a$, and only in non-standard models.
+:::
+
 :::fact{#fact-idelta0}
 $\mathsf I\Delta^0_0$ proves the elementary properties of addition, multiplication and order: $<$ is a discrete linear order with least element $0$, every $x \neq 0$ is $y + 1$ for a unique $y$, $x \leq y$ if and only if $x + z = y$ for some $z$, which is then unique, polynomials with non-negative coefficients are monotone, and the pairing function $\langle u, v \rangle = \frac{(u + v)(u + v + 1)}{2} + v$ is a bijection, definable by a bounded formula, with $u, v \leq \langle u, v \rangle$.
 :::
 
-These properties are proved by bounded induction, in the same way as in Peano arithmetic; see Kaye, *Models of Peano Arithmetic*, Chapter 2. We use them freely.
+These properties are proved by bounded induction, in the same way as in Peano arithmetic; see Hájek and Pudlák, *Metamathematics of First-Order Arithmetic*, Chapter I. We use them freely.
+
+## Bounded quantifiers and collection
 
 A formula obtained from $\Sigma^0_n$ formulas by conjunction, disjunction, bounded quantification and existential quantification is not $\Sigma^0_n$ in general, because a bounded universal quantifier cannot be moved across an unbounded existential one. In the true $\nat$, $\forall x < a\ \exists y\ \varphi$ is equivalent to $\exists b\ \forall x < a\ \exists y < b\ \varphi$; this equivalence is exactly an instance of collection.
 
-:::lemma{#lem-collection-closure}
+:::lemma[Parsons]{#lem-collection-closure}
 Let $n \geq 1$. Over $\mathsf I\Delta^0_0 + \mathsf B\Sigma^0_n$:
 
 1. every formula obtained from $\Sigma^0_n$ formulas by $\wedge$, $\vee$, bounded quantifiers $\exists x < t$, $\forall x < t$ and existential quantifiers is provably equivalent to a $\Sigma^0_n$ formula;
@@ -46,11 +55,15 @@ For $n = 1$, let $\varphi = \exists y\, \delta(x, y)$ with $\delta$ bounded. The
 Let $n \geq 1$, assume the lemma for $n$, and assume $\mathsf B\Sigma^0_{n+1}$, which contains $\mathsf B\Sigma^0_n$. A $\Sigma^0_{n+1}$ formula has the form $\exists y\, \psi$ with $\psi \in \Pi^0_n$. Conjunctions and disjunctions of $\Pi^0_n$ formulas, and bounded quantifications of them, are equivalent to $\Pi^0_n$ formulas by item 2 for $n$; so the easy cases above stay within $\Sigma^0_{n+1}$. For the bounded universal quantifier, $\forall x < t\ \exists y\ \psi(x, y)$ is equivalent to $\exists b\ \forall x < t\ \exists y < b\ \psi(x, y)$ by $\mathsf B\Sigma^0_{n+1}$ applied to $\psi$, which is $\Sigma^0_{n+1}$. By item 2 for $n$, $\forall x < t\ \exists y < b\ \psi$ is equivalent to a $\Pi^0_n$ formula, so the whole formula is equivalent to a $\Sigma^0_{n+1}$ formula.
 :::
 
+The lemma is the reason why collection appears at all in this course: whenever an argument puts a bounded quantifier in front of a $\Sigma^0_n$ formula, the result has the expected complexity only in the presence of $\mathsf B\Sigma^0_n$. The results of this lesson show that $\mathsf I\Sigma^0_n$ provides it.
+
 ## Σ⁰ₙ and Π⁰ₙ induction
 
 :::theorem[Paris, Kirby]{#thm-isigma-ipi}
 For every $n \geq 1$, $\mathsf I\Delta^0_0$ proves that $\mathsf I\Sigma^0_n$ and $\mathsf I\Pi^0_n$ are equivalent.
 :::
+
+The idea is to run the induction backwards. To derive a $\Pi^0_n$ instance from $\Sigma^0_n$ induction, assume that $\varphi$ fails at some $a$; the $\Sigma^0_n$ property "$\varphi$ fails at $a - y$" then propagates from $y = 0$ up to $y = a$, and gives a failure at $0$.
 
 :::proof{of=thm-isigma-ipi}
 ($\mathsf I\Sigma^0_n \Rightarrow \mathsf I\Pi^0_n$) Let $\varphi$ be $\Pi^0_n$ with $\varphi(0)$ and $\forall x\, (\varphi(x) \rightarrow \varphi(x+1))$, and suppose that $\neg \varphi(a)$. Let
@@ -66,13 +79,15 @@ $$
 equivalent to a $\Pi^0_n$ formula. Then $\eta(0)$ holds since $\neg \varphi(a)$. Suppose $\eta(y)$ and $y + 1 \leq a$, and let $x + (y + 1) = a$. Then $(x + 1) + y = a$, so $\neg \varphi(x + 1)$, hence $\neg \varphi(x)$. So $\eta(y+1)$. By $\mathsf I\Pi^0_n$, $\eta(a)$ holds, and with $x = 0$ it gives $\neg \varphi(0)$: a contradiction.
 :::
 
-The proof reverses the direction of the induction: the property "$a - y$ fails" is propagated from $y = 0$ up to $y = a$. Both formulas $\theta$ and $\eta$ have the same complexity as the negation of $\varphi$, which is why the trick exchanges $\Sigma^0_n$ and $\Pi^0_n$.
+Both formulas $\theta$ and $\eta$ have the same complexity as the negation of $\varphi$, which is why the trick exchanges $\Sigma^0_n$ and $\Pi^0_n$. The guard $y \leq a$ is needed because the subtraction $a - y$ only makes sense below $a$.
 
 ## Induction implies collection
 
 :::theorem[Paris, Kirby]{#thm-induction-collection}
 For every $n \geq 1$, $\mathsf I\Delta^0_0 + \mathsf I\Sigma^0_n$ proves $\mathsf B\Sigma^0_n$.
 :::
+
+The proof finds the common bound by induction on the size of the family: if the witnesses for $x < c$ are bounded by $b$, those for $x < c + 1$ are bounded by $\max(b, w + 1)$, where $w$ is a witness for $c$. The formula "the witnesses for $x < c$ have a common bound" begins with $\exists b$, so it is $\Sigma^0_n$ provided the bounded quantifier $\forall x < c$ in front of the witness condition can be absorbed; for this the proof uses collection one level down, which is available by induction on $n$.
 
 :::proof{of=thm-induction-collection}
 By induction on $n$. Assume $\mathsf I\Sigma^0_n$, and, if $n \geq 2$, the theorem for $n - 1$, so that $\mathsf B\Sigma^0_{n-1}$ holds and :ref{#lem-collection-closure} applies to $\Pi^0_{n-1}$ formulas.
@@ -128,73 +143,7 @@ For every $n \geq 1$, the schemes $\mathsf I\Sigma^0_n$, $\mathsf I\Pi^0_n$, $\m
 Combined with :ref{#thm-isigma-ipi}, the four schemes are equivalent.
 :::
 
-The least number principle gives the model-theoretic meaning of induction. If $\mathsf I\Sigma^0_n$ fails, some $\Sigma^0_n$ formula $\varphi$ holds at $0$, is preserved by successor, and fails somewhere; the set of numbers below every failure is then a cut, and its complement has no least element. In a model of $\mathsf I\Sigma^0_n$, no $\Sigma^0_n$ or $\Pi^0_n$ formula defines a cut. For instance, in a non-standard model of $\mathsf I\Sigma^0_n$, the standard numbers $\{ 0, 1, 2, \dots \}$ form a cut, so they are not definable by such a formula: if a $\Sigma^0_n$ or $\Pi^0_n$ formula holds for every standard number, it holds for some non-standard number. This is the **overspill** principle.
-
-## Collection implies induction
-
-:::theorem[Paris, Kirby]{#thm-collection-induction}
-For every $n \geq 1$, $\mathsf I\Delta^0_0 + \mathsf B\Sigma^0_{n+1}$ proves $\mathsf I\Sigma^0_n$.
-:::
-
-:::proof{of=thm-collection-induction}
-By induction on $n$. Assume $\mathsf B\Sigma^0_{n+1}$; it contains $\mathsf B\Sigma^0_n$ and $\mathsf B\Sigma^0_{n-1}$. When $n \geq 2$, the induction hypothesis (the theorem for $n - 1$, applied to $\mathsf B\Sigma^0_n$) gives $\mathsf I\Sigma^0_{n-1}$, hence also $\mathsf I\Pi^0_{n-1}$ by :ref{#thm-isigma-ipi}.
-
-Let $\varphi(x) \equiv \exists y\, \psi(x, y)$ with $\psi \in \Pi^0_{n-1}$, suppose $\varphi(0)$ and $\forall x\, (\varphi(x) \rightarrow \varphi(x+1))$, and fix $a$. For every $x \leq a$ there is $u$ with $\forall y\, \neg \psi(x, y) \vee \psi(x + 1, u)$. This formula is equivalent to a $\Pi^0_n$ formula, hence is $\Sigma^0_{n+1}$, and $\mathsf B\Sigma^0_{n+1}$ gives a bound $b_0$. Let $y_0$ be such that $\psi(0, y_0)$, and $b = \max(b_0, y_0 + 1)$. Then for every $x < a$,
-$$
-\exists y < b\ \psi(x, y) \rightarrow \exists u < b\ \psi(x + 1, u).
-$$
-Indeed, if $\psi(x, y)$, the first disjunct fails, so $\psi(x + 1, u)$ for some $u < b_0 \leq b$. Let
-$$
-\theta(x) \equiv x \leq a \rightarrow \exists u < b\ \psi(x, u).
-$$
-For $n = 1$, $\theta$ is bounded; for $n \geq 2$, it is equivalent to a $\Pi^0_{n-1}$ formula by :ref{#lem-collection-closure}. We have $\theta(0)$, since $y_0 < b$, and $\theta(x) \rightarrow \theta(x+1)$ by the display. By $\mathsf I\Delta^0_0$ or $\mathsf I\Pi^0_{n-1}$, $\theta(a)$ holds, so $\varphi(a)$.
-:::
-
-The idea is that collection bounds, uniformly for $x \leq a$, the witnesses needed to pass from $x$ to $x + 1$. Once the witnesses are bounded, the induction becomes an induction on a formula of lower complexity.
-
-We obtain the hierarchy, for every $n \geq 1$, over $\mathsf I\Delta^0_0$:
-$$
-\mathsf I\Sigma^0_{n+1} \;\Rightarrow\; \mathsf B\Sigma^0_{n+1} \;\Rightarrow\; \mathsf I\Sigma^0_n \;\Rightarrow\; \mathsf B\Sigma^0_n.
-$$
-Paris and Kirby showed that none of these implications reverses: for every $n \geq 1$, there are models of $\mathsf I\Sigma^0_n$ in which $\mathsf B\Sigma^0_{n+1}$ fails, and models of $\mathsf B\Sigma^0_n$ in which $\mathsf I\Sigma^0_n$ fails. The constructions use non-standard models of arithmetic and are admitted here (Hájek and Pudlák, Chapter IV). Slaman proved that $\mathsf B\Sigma^0_n$ is equivalent to induction for $\Delta^0_n$ formulas, over $\mathsf I\Delta^0_0$ with the totality of exponentiation.
-
-:::quiz[collection implies induction]
-In the proof of :ref{#thm-collection-induction}, why is the formula $\theta$ of lower complexity than $\varphi$?
-
-- [x] Because the unbounded existential quantifier $\exists y$ of $\varphi$ is replaced by a bounded one, $\exists u < b$, the bound being provided by collection; bounded quantifiers in front of $\Pi^0_{n-1}$ formulas are absorbed.
-- [ ] Because $\theta$ only concerns $x \leq a$.
-
-  The restriction to $x \leq a$ is needed to apply collection, but it does not change the complexity.
-- [ ] Because $\psi$ is bounded.
-
-  $\psi$ is only bounded for $n = 1$.
-
----
-
-Why is the witness $y_0$ for $\varphi(0)$ added to the bound?
-
-- [x] Because collection only bounds the witnesses for the steps from $x$ to $x + 1$; the base case $\theta(0)$ needs a witness for $\varphi(0)$ below $b$.
-- [ ] Because $b_0$ might be $0$.
-
-  Even a positive $b_0$ could be smaller than every witness of $\varphi(0)$.
-- [ ] To make $\theta$ a $\Sigma^0_n$ formula.
-
-  The bound does not affect the complexity.
-:::
-
 ## Exercises
-
-::::exercise{#ex-bsigma-bpi difficulty=1}
-Show that, over $\mathsf I\Delta^0_0$, $\mathsf B\Sigma^0_{n+1}$ is equivalent to $\mathsf B\Pi^0_n$ for every $n \geq 1$.
-
-:::solution
-Every $\Pi^0_n$ formula is $\Sigma^0_{n+1}$, so $\mathsf B\Sigma^0_{n+1}$ implies $\mathsf B\Pi^0_n$. Conversely, assume $\mathsf B\Pi^0_n$, and let $\varphi(x, y) \equiv \exists z\, \psi(x, y, z)$ with $\psi \in \Pi^0_n$, such that $\forall x < a\ \exists y\ \varphi(x, y)$. Using the pairing function of :ref{#fact-idelta0}, let
-$$
-\psi'(x, w) \equiv \forall u \leq w\ \forall v \leq w\ (w = \langle u, v \rangle \rightarrow \psi(x, u, v)).
-$$
-Since every $w$ is the pair of unique $u, v \leq w$, $\psi'(x, w)$ holds if and only if $\psi(x, u, v)$ for the components of $w$. Since exactly one pair $(u, v)$ satisfies $w = \langle u, v \rangle$, the prefix $\forall u \leq w\ \forall v \leq w\ (w = \langle u, v \rangle \rightarrow \cdot)$ amounts to substituting the components of $w$, and commutes with every quantifier of $\psi$: moving it down to the bounded matrix of $\psi$, $\psi'$ is equivalent to a $\Pi^0_n$ formula, without any use of collection. Now $\forall x < a\ \exists w\ \psi'(x, w)$, so $\mathsf B\Pi^0_n$ gives $b$ with $\forall x < a\ \exists w < b\ \psi'(x, w)$. If $w = \langle u, v \rangle < b$, then $u \leq w < b$ and $\varphi(x, u)$. So $\forall x < a\ \exists y < b\ \varphi(x, y)$.
-:::
-::::
 
 ::::exercise{difficulty=1}
 The **strong induction** scheme for a formula $\varphi$ is $\forall x\, ((\forall y < x\ \varphi(y)) \rightarrow \varphi(x)) \rightarrow \forall x\, \varphi(x)$. Show that $\mathsf I\Sigma^0_n$ proves strong induction for $\Sigma^0_n$ formulas, for every $n \geq 1$.
@@ -206,10 +155,11 @@ Let $\varphi \in \Sigma^0_n$ satisfy the hypothesis, and fix $z$. Let $\theta(x)
 
 ## Notes and references
 
-The hierarchy of induction and collection schemes is due to Paris and Kirby (1978), building on Parsons (1970), who showed that $\mathrm I\Sigma_1$ proves the same $\Pi_2$ sentences as primitive recursive arithmetic. Hájek and Pudlák's monograph is the standard reference; Kaye's book gives a model-theoretic introduction.
+The hierarchy of induction and collection schemes is due to Paris and Kirby (1978), building on Parsons (1970), who introduced the collection schemes, proved that collection closes the classes $\Sigma_n$ under bounded quantification, and showed that $\mathrm I\Sigma_1$ proves the same $\Pi_2$ sentences as primitive recursive arithmetic. Dzhafarov and Mummert, Section 6.1, present the same material in the setting of reverse mathematics, with attributions; Hájek and Pudlák's monograph is the standard reference, and Kaye's book gives a model-theoretic introduction. Parikh introduced $\mathsf I\Delta^0_0$ and proved that it does not prove the totality of exponentiation.
 
 - J. B. Paris and L. A. S. Kirby, *Σₙ-collection schemas in arithmetic*, in Logic Colloquium '77, North-Holland, 1978, 199–209.
 - C. Parsons, *On a number theoretic choice schema and its relation to induction*, in Intuitionism and Proof Theory, North-Holland, 1970, 459–473.
-- P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I.2 and Chapter IV.
-- R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991, Chapters 2 and 10.
-- T. A. Slaman, *Σₙ-bounding and Δₙ-induction*, Proceedings of the American Mathematical Society 132 (2004), 2449–2456.
+- R. Parikh, *Existence and feasibility in arithmetic*, Journal of Symbolic Logic 36 (1971), 494–508.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 6.1.
+- P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 2.
+- R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991, chapters *Collection* and *Subsystems of Peano arithmetic*.

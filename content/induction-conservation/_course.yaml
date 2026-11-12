@@ -3,11 +3,12 @@ area: reverse-math
 level: Advanced
 order: 4
 prerequisites: [big-five, ramsey-theorem]
-summary: The hierarchy of induction and collection schemes, the pigeonhole principle and Σ⁰₂ collection, and the conservation theorems of Friedman and Harrington.
+summary: The hierarchy of induction and collection schemes and its strictness, the pigeonhole principle and Σ⁰₂ collection, and the conservation theorems of Friedman and Harrington.
 description: >
   Reverse mathematics in non-standard models. The course sets up the schemes
   of Σ⁰ₙ induction, collection and least numbers and the Paris–Kirby
-  hierarchy between them, proves Hirst's theorem that the infinite pigeonhole
+  hierarchy between them, proves that the hierarchy is strict with models of
+  definable elements, proves Hirst's theorem that the infinite pigeonhole
   principle for arbitrarily many colors is Σ⁰₂ collection, identifies the
   first-order parts of RCA₀ and ACA₀, with the Jockusch–Solovay bound, and
   proves Harrington's theorem that weak König's lemma is Π¹₁-conservative
@@ -15,8 +16,9 @@ description: >
 objectives:
   - Prove the equivalences and implications between induction, collection and least number principles
   - Use collection to keep Σ⁰ₙ formulas closed under bounded quantification
+  - Separate fragments of arithmetic with elementary substructures of definable elements
   - Prove Hirst's equivalence between the pigeonhole principle and Σ⁰₂ collection
   - Build ω-extensions of models of arithmetic from definable sets
   - Prove that RCA₀ and ACA₀ are conservative over IΣ₁ and Peano arithmetic
   - Prove Harrington's conservation theorem by forcing over a non-standard model
-lessons: [induction-collection, pigeonhole, first-order-parts, harrington]
+lessons: [induction-collection, collection-induction, separations, pigeonhole, first-order-parts, forcing-subtrees, harrington]

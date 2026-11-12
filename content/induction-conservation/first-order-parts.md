@@ -1,15 +1,17 @@
 ---
 title: First-order parts and conservation
 summary: Conservative extensions and ω-extensions; ACA₀ is conservative over Peano arithmetic and RCA₀ over IΣ₁ (Friedman), by expanding a model of arithmetic with its definable sets; the Jockusch–Solovay bound on the solutions provided by ACA₀, and the unprovability of ACA₀′.
-duration: 40
-prerequisites: [induction-collection, big-five/aca0]
+duration: 55
+prerequisites: [separations, big-five/aca0]
 ---
 
 A subsystem of second-order arithmetic proves sentences about sets, but also sentences about numbers alone. Its **first-order part** is the set of sentences of first-order arithmetic that it proves. This lesson identifies the first-order parts of $\mathsf{ACA}_0$ and $\mathsf{RCA}_0$: they are Peano arithmetic and $\mathrm I\Sigma_1$. The method is model-theoretic: a model of the first-order theory is expanded into a model of the second-order theory with the same numbers, by adding the sets that are definable in it.
 
 ## Conservative extensions
 
-The language $\mathcal L_1$ of first-order arithmetic is $\mathcal L_2$ without set variables and without $\in$. **Peano arithmetic** $\mathrm{PA}$ consists of the basic axioms and the induction scheme for all formulas of $\mathcal L_1$, and $\mathrm I\Sigma_n$ of the basic axioms and induction for $\Sigma_n$ formulas of $\mathcal L_1$; formulas of $\mathcal L_1$ may contain number parameters only. The results of the first lesson apply to these theories, with the same proofs.
+The intuition is the following. A second-order theory $T$ proves more sentences about sets than a first-order theory $S$, but it may prove the same sentences about numbers. To show this, it suffices to show that the numbers of any model of $S$ can be equipped with sets so as to satisfy $T$: then a counterexample to an arithmetic sentence in a model of $S$ remains a counterexample in a model of $T$. The sets must be chosen so that the axioms of $T$ hold, and the natural choice is the sets that are definable from the numbers, since statements about them reduce to statements about numbers.
+
+The language $\mathcal L_1$ of first-order arithmetic, Peano arithmetic $\mathrm{PA}$ and the fragments $\mathrm I\Sigma_n$ were introduced in the lesson on separations: they are the restrictions of the second-order notions to formulas without set variables.
 
 :::definition{#def-conservative}
 Let $S$ and $T$ be theories, in languages $\mathcal L_S \subseteq \mathcal L_T$, and $\Gamma$ a set of sentences of $\mathcal L_S$. The theory $T$ is **$\Gamma$-conservative** over $S$ if every sentence of $\Gamma$ provable in $T$ is provable in $S$. If $T$ proves every axiom of $S$ and is conservative over $S$ for all sentences of $\mathcal L_S$, then $T$ is a **conservative extension** of $S$, and the theorems of $S$ are the **first-order part** of $T$ when $\mathcal L_S = \mathcal L_1$.
@@ -43,7 +45,7 @@ $\mathsf{ACA}_0$ proves the induction scheme for arithmetic formulas, in particu
 The basic axioms hold since $M$ satisfies them. Let $\varphi(n)$ be an arithmetic formula with set parameters $X_1, \dots, X_k \in \mathcal D$ and number parameters in $M$, and let $\delta_i(u)$ be an $\mathcal L_1$ formula with parameters defining $X_i$ in $M$. Replacing every atomic formula $t \in X_i$ by $\delta_i(t)$ gives an $\mathcal L_1$ formula $\varphi^*$ with parameters in $M$, and for every $n \in M$, $\mathcal N \models \varphi(n)$ if and only if $M \models \varphi^*(n)$, by induction on $\varphi$. So the set defined by $\varphi$ in $\mathcal N$ is defined by $\varphi^*$ in $M$, and belongs to $\mathcal D$: arithmetic comprehension holds. For the same reason, $\Sigma^0_1$ induction in $\mathcal N$ reduces to induction in $M$ for $\varphi^*$, which holds in $\mathrm{PA}$.
 :::
 
-So the arithmetic consequences of arithmetic comprehension are exactly the theorems of Peano arithmetic. The point of the proof is that the sets added are definable from the numbers, so that statements about them translate back into first-order statements.
+For $M = \nat$, the class $\mathcal D$ is the class $\mathrm{ARITH}$ of arithmetic sets, the least ω-model of $\mathsf{ACA}_0$; the proof is the non-standard version of this example. So the arithmetic consequences of arithmetic comprehension are exactly the theorems of Peano arithmetic. The point of the proof is that the sets added are definable from the numbers, so that statements about them translate back into first-order statements.
 
 ## IΣ₁ and RCA₀
 
@@ -71,6 +73,8 @@ $\mathsf{RCA}_0$ proves $\Sigma^0_1$ induction, in particular for formulas of $\
 So $\mathcal N \models \mathsf{RCA}_0$, and :ref{#prop-conservation-method} concludes.
 :::
 
+For $M = \nat$, the $\Delta_1$-definable sets are the computable sets, and $\mathcal N$ is the ω-model $\mathrm{REC}$; in a non-standard model, $\mathcal D$ plays the role of the computable sets. The difference with the case of $\mathsf{ACA}_0$ is that $\Sigma^0_1$ formulas about sets of $\mathcal D$ translate into $\Sigma_1$ formulas of $M$ only up to collection; this is where the hypothesis $\mathrm I\Sigma_1$, rather than a weaker one, is used.
+
 :::quiz[the first-order part of RCA₀]
 In :ref{#lem-delta1-substitution}, why must the atomic formula $t \notin X_i$ be replaced by $\neg \psi_i(t)$ rather than by $\neg \varphi_i(t)$?
 
@@ -95,15 +99,17 @@ Where is $\Sigma_1$ collection in $M$ used in the proof of :ref{#thm-rca0-isigma
   The basic axioms hold because they hold in $M$.
 :::
 
-$\mathsf{RCA}_0$ thus proves exactly the arithmetic sentences of $\mathrm I\Sigma_1$, and in particular, by the theorem of Paris and Kirby recalled in the previous lesson, it does not prove $\mathsf B\Sigma^0_2$. Parsons showed that $\mathrm I\Sigma_1$ proves the same $\Pi_2$ sentences as primitive recursive arithmetic; a $\Pi_2$ sentence $\forall x\, \exists y\, \varphi(x, y)$, with $\varphi$ bounded, provable in $\mathsf{RCA}_0$ therefore has a primitive recursive witness function.
+$\mathsf{RCA}_0$ thus proves exactly the arithmetic sentences of $\mathrm I\Sigma_1$, and in particular, by :ref{#thm-isigma-not-bsigma}, it does not prove $\mathsf B\Sigma^0_2$. Parsons showed that $\mathrm I\Sigma_1$ proves the same $\Pi_2$ sentences as primitive recursive arithmetic; a $\Pi_2$ sentence $\forall x\, \exists y\, \varphi(x, y)$, with $\varphi$ bounded, provable in $\mathsf{RCA}_0$ therefore has a primitive recursive witness function.
 
 ## The Jockusch–Solovay bound
 
-$\mathsf{ACA}_0$ proves, for each standard $k$, that every set has a $k$-th jump. The next theorem shows that its theorems of the form "for every instance, there is a solution" always have solutions of bounded arithmetic complexity. We write $Y \leq_T X^{(k)}$ for the formula "there is $Z$ coding a sequence $Z_0, \dots, Z_k$ with $Z_0 = X$, $Z_{i+1} = Z_i'$ for $i < k$, and $Y \leq_T Z_k$"; in $\mathsf{ACA}_0$ such a $Z$ exists and is unique. We use the formalized version of Post's theorem: $\mathsf{ACA}_0$ proves that every set defined by a $\Sigma^0_k$ formula with set parameter $X$ is computable in $X^{(k)}$. We admit this formalization (Simpson, Section VIII.1).
+$\mathsf{ACA}_0$ proves, for each standard $k$, that every set has a $k$-th jump. The next theorem shows that its theorems of the form "for every instance, there is a solution" always have solutions of bounded arithmetic complexity. We write $Y \leq_T X^{(k)}$ for the formula "there is $Z$ coding a sequence $Z_0, \dots, Z_k$ with $Z_0 = X$, $Z_{i+1} = Z_i'$ for $i < k$, and $Y \leq_T Z_k$"; in $\mathsf{ACA}_0$ such a $Z$ exists and is unique. We use the formalized version of Post's theorem: $\mathsf{ACA}_0$ proves that every set defined by a $\Sigma^0_k$ formula with set parameter $X$ is computable in $X^{(k)}$. We admit this formalization; it is used in the same way by Dzhafarov and Mummert (proofs of Proposition 5.6.6 and Theorem 5.6.7).
 
-:::theorem[Jockusch, Solovay]{#thm-jockusch-solovay}
+:::theorem[Jockusch, Solovay; see Wang]{#thm-jockusch-solovay}
 Let $F(X)$ and $G(X, Y)$ be arithmetic formulas without other free variables. If $\mathsf{ACA}_0$ proves $\forall X\, (F(X) \rightarrow \exists Y\, G(X, Y))$, then there is $k \in \nat$ such that $\mathsf{ACA}_0$ proves $\forall X\, (F(X) \rightarrow \exists Y\, (Y \leq_T X^{(k)} \wedge G(X, Y)))$.
 :::
+
+The idea is a compactness argument: if no fixed number of jumps suffices, a model can be found in which an instance $C$ has no solution computable in any standard jump of $C$; shrinking this model to the sets arithmetic in $C$, each of which is computable in a standard jump of $C$, removes every solution.
 
 :::proof{of=thm-jockusch-solovay}
 Suppose the conclusion fails for every $k$. Add a set constant $C$ to the language, and let $\gamma_k$ be the sentence $\forall Y\, (Y \leq_T C^{(k)} \rightarrow \neg G(C, Y))$. For each $k$, $\mathsf{ACA}_0 + F(C) + \gamma_k$ is consistent. Since $\mathsf{ACA}_0$ proves $\gamma_{k+1} \rightarrow \gamma_k$, every finite subset of $\mathsf{ACA}_0 + F(C) + \{ \gamma_k : k \in \nat \}$ is consistent, so the whole theory has a model $\mathcal M = (M, \mathcal S, C)$ by compactness.
@@ -145,8 +151,11 @@ Let $X \in \mathcal D$, defined in $M$ by a $\Sigma_1$ formula $\varphi$ and a $
 
 ## Notes and references
 
-Friedman announced the conservation results of this lesson in 1976; the proofs are in Simpson's monograph, Section IX.1. The Jockusch–Solovay theorem was observed independently by both authors; the proof presented here was communicated by Jockusch, and appears in a paper of Wang.
+Friedman announced the conservation results of this lesson in 1976; the proofs are in Simpson's monograph, Section IX.1 (Corollary IX.1.11 for $\mathsf{RCA}_0$), and in Dzhafarov and Mummert, Sections 5.9–5.10; Hirschfeldt, Section 7.1, treats conservativity over first-order systems. The Jockusch–Solovay theorem first appeared in print in Wang's book (1981), which gives two proofs communicated by Jockusch and by Solovay; the proof here is Jockusch's, as presented by Dzhafarov and Mummert, Theorem 5.6.7. The system $\mathsf{ACA}_0'$ and the unprovability of it in $\mathsf{ACA}_0$ are Dzhafarov and Mummert, Definition 5.6.5 and Proposition 5.6.6.
 
 - H. Friedman, *Systems of second order arithmetic with restricted induction I, II* (abstracts), Journal of Symbolic Logic 41 (1976), 557–559.
-- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Chapter IX.
+- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section IX.1.
+- H. Wang, *Popular Lectures on Mathematical Logic*, 2nd edition, Van Nostrand Reinhold and Science Press, 1981.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 5.6, 5.9 and 5.10.
+- D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 7.1.
 - C. Parsons, *On a number theoretic choice schema and its relation to induction*, in Intuitionism and Proof Theory, North-Holland, 1970, 459–473.

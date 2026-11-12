@@ -1,8 +1,8 @@
 ---
 title: The pigeonhole principle and Σ⁰₂ collection
-summary: The infinite pigeonhole principle for arbitrarily many colors is equivalent to Σ⁰₂ collection over RCA₀ (Hirst); Ramsey's theorem for pairs implies it; first-order consequences of combinatorial principles.
-duration: 30
-prerequisites: [induction-collection, ramsey-theorem/jockusch]
+summary: The infinite pigeonhole principle for arbitrarily many colors is equivalent to Σ⁰₂ collection over RCA₀ (Hirst); Ramsey's theorem for pairs implies it; what is known of the first-order part of Ramsey's theorem for pairs.
+duration: 35
+prerequisites: [separations, ramsey-theorem/jockusch]
 ---
 
 $\mathsf{RCA}_0$ proves the infinite pigeonhole principle $\mathsf{RT}^1_k$ for every standard number $k$ of colors (:ref{#prop-rt-basic}): the proof is a case analysis on finitely many colors. The statement $\mathsf{RT}^1_{<\infty}$, "for every $k$, every coloring $f : \nat \to k$ has an infinite homogeneous set", quantifies over $k$ inside the theory. In a non-standard model, $k$ may be non-standard, and the case analysis is no longer available. Hirst showed that $\mathsf{RT}^1_{<\infty}$ is exactly $\Sigma^0_2$ collection. A combinatorial principle about sets thus has a purely arithmetic content, and so does every principle that implies it, such as Ramsey's theorem for pairs.
@@ -14,6 +14,8 @@ By :ref{#ex-bsigma-bpi}, $\mathsf B\Sigma^0_2$ is equivalent to $\mathsf B\Pi^0_
 :::theorem[Hirst]{#thm-hirst}
 Over $\mathsf{RCA}_0$, $\mathsf{RT}^1_{<\infty}$ is equivalent to $\mathsf B\Pi^0_1$, hence to $\mathsf B\Sigma^0_2$.
 :::
+
+Both directions translate between colorings and families of witnesses. A coloring $f : \nat \to k$ without infinite color class gives, for each color $x < k$, a $\Pi^0_1$ property "$x$ does not occur after $y$", whose witnesses $y$ collection bounds uniformly, which is absurd. Conversely, given an instance $\forall x < k\ \exists y\ \varphi(x, y)$ of $\mathsf B\Pi^0_1$, a computable approximation $f(t)$ measures, at stage $t$, how far one must search to find witnesses that look correct up to $t$. If $f$ is bounded, the pigeonhole principle gives a value $c$ taken infinitely often, and $c$ is a common bound. If $f$ is unbounded, the pigeonhole principle applied to the color responsible for each increase of $f$ gives a single $x_0$ whose candidate witnesses are all eventually refuted, which contradicts the hypothesis.
 
 :::proof{of=thm-hirst}
 Recall that $\mathsf{RCA}_0$ proves $\mathsf I\Sigma^0_1$, hence $\mathsf B\Sigma^0_1$ by :ref{#thm-induction-collection}.
@@ -30,8 +32,6 @@ It exists: every $x < k$ has some $y$ with $\forall z < t\ \theta(x, y, z)$, a b
 
 *Case 2: $f$ is unbounded.* Since $f(t) - 1$ does not satisfy the condition defining $f(t)$, there is $x < k$ such that $\forall y < f(t) - 1\ \exists z < t\ \neg \theta(x, y, z)$. Let $g(t)$ be the least such $x$; $g : \nat \to k$ exists by $\Delta^0_1$ comprehension. By $\mathsf{RT}^1_k$, there are an infinite set $S$ and $x_0 < k$ with $g(t) = x_0$ for $t \in S$. Let $y$ be any number. Since $f$ is unbounded and non-decreasing, and $S$ is infinite, there is $t \in S$ with $f(t) - 1 > y$, so $\exists z < t\ \neg \theta(x_0, y, z)$. Hence $\forall y\ \neg \varphi(x_0, y)$, contradicting the hypothesis. So case 2 does not occur.
 :::
-
-The function $f$ measures, at stage $t$, how far one must search to find witnesses that look correct up to $t$. Collection says that this search stays bounded; the pigeonhole principle, applied twice, turns an unbounded search into a single color $x_0$ whose witnesses are all eventually refuted.
 
 :::quiz[Hirst's theorem]
 In the direction $\mathsf{RT}^1_{<\infty} \Rightarrow \mathsf B\Pi^0_1$, where is the pigeonhole principle used for a non-standard number of colors?
@@ -59,7 +59,7 @@ Why can $\mathsf{RCA}_0$ not prove $\mathsf{RT}^1_{<\infty}$ by induction on $k$
 
 ## Ramsey's theorem for pairs
 
-:::proposition{#prop-rt22-bsigma2}
+:::proposition[Hirst]{#prop-rt22-bsigma2}
 $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ proves $\mathsf{RT}^1_{<\infty}$, hence $\mathsf B\Sigma^0_2$.
 :::
 
@@ -67,15 +67,16 @@ $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ proves $\mathsf{RT}^1_{<\infty}$, hence $\mat
 Let $f : \nat \to k$. Define $g : [\nat]^2 \to 2$ by $g(\{ x, y \}) = 1$ if $f(x) = f(y)$, and $0$ otherwise; it exists by $\Delta^0_1$ comprehension. Let $H$ be an infinite homogeneous set for $g$. If its color is $1$, then $f$ is constant on $H$, and $H$ is homogeneous for $f$. If its color is $0$, then $f$ is injective on $H$; the first $k + 1$ elements of $H$ form a finite set, which exists in $\mathsf{RCA}_0$, on which $f$ is an injection into $k$. This contradicts the finite pigeonhole principle, which $\mathsf{RCA}_0$ proves by $\Pi^0_1$ induction on $k$. By :ref{#thm-hirst}, $\mathsf B\Sigma^0_2$ follows.
 :::
 
-Every ω-model satisfies $\mathsf B\Sigma^0_2$, since its first-order part is $\nat$. The proposition is therefore invisible in ω-models: it says something about the non-standard models of $\mathsf{RT}^2_2$. By :ref{#thm-collection-induction}, $\mathsf B\Sigma^0_2$ implies $\mathsf I\Sigma^0_1$, which $\mathsf{RCA}_0$ already has; but $\mathsf{RCA}_0$ does not prove $\mathsf B\Sigma^0_2$. Indeed, Paris and Kirby built a model of $\mathrm I\Sigma_1$ in which $\Sigma_2$ collection fails, which may be taken countable by the Löwenheim–Skolem theorem, and the next lesson shows that every countable model of $\mathrm I\Sigma_1$ is the first-order part of a model of $\mathsf{RCA}_0$. Hence $\mathsf{RCA}_0$ does not prove $\mathsf{RT}^1_{<\infty}$.
+Every ω-model satisfies $\mathsf B\Sigma^0_2$, since its first-order part is $\nat$. The proposition is therefore invisible in ω-models: it says something about the non-standard models of $\mathsf{RT}^2_2$. By :ref{#thm-collection-induction}, $\mathsf B\Sigma^0_2$ implies $\mathsf I\Sigma^0_1$, which $\mathsf{RCA}_0$ already has; but $\mathsf{RCA}_0$ does not prove $\mathsf B\Sigma^0_2$. Indeed, :ref{#thm-isigma-not-bsigma} gives a countable model of $\mathrm I\Sigma_1$ in which $\Sigma_2$ collection fails, and the next lesson shows that every countable model of $\mathrm I\Sigma_1$ is the first-order part of a model of $\mathsf{RCA}_0$. Hence $\mathsf{RCA}_0$ does not prove $\mathsf{RT}^1_{<\infty}$.
 
 The first-order strength of $\mathsf{RT}^2_2$ has been studied intensively. We state the main results without proof.
 
 - Cholak, Jockusch and Slaman (2001): $\mathsf{RCA}_0 + \mathsf I\Sigma^0_2 + \mathsf{RT}^2_2$ proves the same $\Pi^1_1$ sentences as $\mathsf{RCA}_0 + \mathsf I\Sigma^0_2$.
-- Chong, Slaman and Yang (2017): $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ does not prove $\mathsf I\Sigma^0_2$.
-- Patey and Yokoyama (2018): $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ proves the same $\Pi^0_3$ sentences as $\mathsf{RCA}_0$. This does not contradict the proposition: since $\mathsf{RCA}_0$ does not prove $\mathsf B\Sigma^0_2$, the scheme $\mathsf B\Sigma^0_2$ is not equivalent over $\mathsf{RCA}_0$ to any set of $\Pi^0_3$ sentences.
+- Chong, Slaman and Yang (2017): $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ does not prove $\mathsf I\Sigma^0_2$. So the first-order part of $\mathsf{RT}^2_2$ lies between $\mathsf B\Sigma^0_2$ and $\mathsf I\Sigma^0_2$ in the hierarchy.
+- Patey and Yokoyama (2018): $\mathsf{WKL}_0 + \mathsf{RT}^2_2$ is conservative over $\mathsf{RCA}_0$ for sentences $\forall X\, \varphi(X)$ with $\varphi \in \Pi^0_3$; in particular it proves the same $\Pi_3$ sentences of $\mathcal L_1$ as $\mathrm I\Sigma_1$. This does not contradict the proposition: since $\mathsf{RCA}_0$ does not prove $\mathsf B\Sigma^0_2$, whose instances are $\Pi_4$ sentences, $\mathsf B\Sigma^0_2$ is not equivalent over $\mathsf{RCA}_0$ to any set of $\Pi^0_3$ sentences.
+- Le Houérou, Levy Patey and Yokoyama (preprint, 2024): $\mathsf{WKL}_0 + \mathsf{RT}^2_2$ is conservative over $\mathsf{RCA}_0 + \mathsf B\Sigma^0_2$ for sentences $\forall X\, \varphi(X)$ with $\varphi \in \Pi^0_4$. In a companion preprint, the same authors show that $\mathsf{RT}^2_2$ is $\Pi^1_1$-conservative over $\mathsf{RCA}_0 + \mathsf B\Sigma^0_2$ extended by the well-foundedness of the ordinal $\varepsilon_0$, improving earlier results of Chong, Slaman and Yang and of Kołodziejczyk and Yokoyama.
 
-Whether $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ proves any arithmetic sentence not provable in $\mathsf{RCA}_0 + \mathsf B\Sigma^0_2$ is a central question of the area.
+So $\mathsf{RT}^2_2$ proves no $\Pi_4$ sentence of $\mathcal L_1$ beyond $\mathrm I\Sigma_1 + \mathrm B\Sigma_2$. Whether it is $\Pi^1_1$-conservative over $\mathsf{RCA}_0 + \mathsf B\Sigma^0_2$, which would make its first-order part exactly $\mathrm I\Sigma_1 + \mathrm B\Sigma_2$, remains open; it is regarded as the main open question on the first-order part of Ramsey's theorem for pairs. Le Houérou, Levy Patey and Yokoyama recall that, by work of Fiori-Carones, Kołodziejczyk, Wong and Yokoyama, this $\Pi^1_1$-conservation is equivalent to conservation for sentences $\forall X\, \varphi(X)$ with $\varphi \in \Pi^0_5$, so the 2024 result leaves one level of the arithmetic hierarchy to be settled.
 
 ## Exercises
 
@@ -97,9 +98,14 @@ By :ref{#thm-hirst}, $\mathsf{RT}^1_{<\infty}$ fails in $\mathcal M$: there are 
 
 ## Notes and references
 
-Hirst proved the equivalence in his thesis (1987). The relation between Ramsey's theorem for pairs and induction was initiated by Cholak, Jockusch and Slaman, and remains an active topic.
+Hirst proved the equivalence of :ref{#thm-hirst} and :ref{#prop-rt22-bsigma2} in his thesis (1987). The proof of :ref{#thm-hirst} given here is close to Hirschfeldt's (*Slicing the Truth*, Theorem 6.81, Section 6.8); Dzhafarov and Mummert treat the theorem in Section 6.5, and Cholak, Jockusch and Slaman strengthened :ref{#prop-rt22-bsigma2} to stable colorings (Hirschfeldt, Theorem 6.82). The relation between Ramsey's theorem for pairs and induction was initiated by Cholak, Jockusch and Slaman, and remains an active topic.
 
 - J. L. Hirst, *Combinatorics in Subsystems of Second Order Arithmetic*, PhD thesis, Pennsylvania State University, 1987.
 - P. A. Cholak, C. G. Jockusch and T. A. Slaman, *On the strength of Ramsey's theorem for pairs*, Journal of Symbolic Logic 66 (2001), 1–55.
 - C. T. Chong, T. A. Slaman and Y. Yang, *The inductive strength of Ramsey's theorem for pairs*, Advances in Mathematics 308 (2017), 121–141.
 - L. Patey and K. Yokoyama, *The proof-theoretic strength of Ramsey's theorem for pairs and two colors*, Advances in Mathematics 330 (2018), 1034–1070.
+- Q. Le Houérou, L. Levy Patey and K. Yokoyama, *Π⁰₄ conservation of Ramsey's theorem for pairs*, preprint, arXiv:2404.18974, 2024.
+- Q. Le Houérou, L. Levy Patey and K. Yokoyama, *Conservation of Ramsey's theorem for pairs and well-foundedness*, preprint, arXiv:2402.11616, 2024.
+- M. Fiori-Carones, L. A. Kołodziejczyk, T. L. Wong and K. Yokoyama, *An isomorphism theorem for models of weak König's lemma without primitive recursion*, Journal of the European Mathematical Society, published online 2024, arXiv:2112.10876.
+- D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 6.8.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 6.5.
