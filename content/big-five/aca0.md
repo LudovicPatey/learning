@@ -1,19 +1,28 @@
 ---
 title: Arithmetic comprehension
-summary: The system ACA₀; it is equivalent to Σ⁰₁ comprehension, to the existence of Turing jumps, and to the existence of ranges of injections; its ω-models are the jump ideals; the monotone convergence theorem and König's lemma are equivalent to ACA₀.
-duration: 40
-prerequisites: [second-order-arithmetic/analysis-in-rca0, pi01-classes/finitely-branching-trees]
+summary: The system ACA₀; it is equivalent to Σ⁰₁ comprehension, to the existence of Turing jumps, and to the existence of ranges of injections; its ω-models are the jump ideals, and ARITH is the least one.
+duration: 35
+prerequisites: [second-order-arithmetic/rca0]
 ---
 
-The system $\mathsf{ACA}_0$ adds to $\mathsf{RCA}_0$ the existence of every set defined by an arithmetic formula. It is the system of the Turing jump: its ω-models are the classes of sets closed under relative computability, join and jump. Many classical theorems are equivalent to it: sequential compactness, the existence of limits of monotone sequences, König's lemma for finitely branching trees, the existence of bases of vector spaces and of maximal ideals in countable rings. The proofs of the reversals share a pattern: the theorem, applied to a well-chosen computable instance, yields the range of an arbitrary injection.
+The system $\mathsf{ACA}_0$ adds to $\mathsf{RCA}_0$ the existence of every set defined by an arithmetic formula. It is the system of the Turing jump: a single application of comprehension to a $\Sigma^0_1$ formula already yields the halting problem relative to any set, and iterating it yields every arithmetic set. Its ω-models are the classes of sets closed under relative computability, join and jump. This lesson proves the equivalent forms of arithmetic comprehension that are used in reversals; the next lesson applies them to theorems of analysis and algebra and to König's lemma.
 
 ## The system and its equivalent forms
 
 :::definition{#def-aca0}
-$\mathsf{ACA}_0$ consists of the axioms of $\mathsf{RCA}_0$ together with the comprehension scheme for arithmetic formulas.
+$\mathsf{ACA}_0$ consists of the axioms of $\mathsf{RCA}_0$ together with the comprehension scheme for arithmetic formulas, possibly with set and number parameters.
 :::
 
 By :ref{#prop-induction-comprehension}, $\mathsf{ACA}_0$ proves the induction scheme for arithmetic formulas.
+
+**Examples.** Each of the following sets exists in $\mathsf{ACA}_0$, by comprehension for the formula given; none of them is computable from the parameters in general.
+
+- The jump $X' = \{ e : \Phi^X_e(e)\converge \}$ of a set $X$: a $\Sigma^0_1$ formula with parameter $X$.
+- The set of nodes of a tree $T \subseteq \nat^{<\nat}$ that have infinitely many extensions in $T$: a $\Pi^0_2$ formula with parameter $T$.
+- The set of indices $e$ such that $\Phi^X_e$ is total: a $\Pi^0_2$ formula.
+- For a sequence of reals $(x_n)$, the set of rationals $q$ such that $q < x_n$ for some $n$: a $\Sigma^0_1$ formula, used to define suprema.
+
+**Intuition for the equivalent forms.** In $\mathsf{RCA}_0$ a $\Sigma^0_1$ formula $\exists k\, \theta(n, k)$ cannot in general be turned into a set, since nothing bounds the search for a witness $k$. Three kinds of objects solve this problem uniformly: a set that answers all such questions at once (the jump), a comprehension axiom for these formulas, and a set that lists the numbers having a witness (the range of a function that enumerates them). The last form is the one used in reversals: it asks only for the range of a single injective function, a very simple object to encode into an instance of a theorem.
 
 :::theorem{#thm-aca-equivalents}
 The following are equivalent over $\mathsf{RCA}_0$:
@@ -34,21 +43,9 @@ The following are equivalent over $\mathsf{RCA}_0$:
 (2 ⇒ 1) We show by induction on $m$ in the metatheory that $\Sigma^0_1$ comprehension proves $\Sigma^0_m$ comprehension. Let $\varphi(n) \equiv \exists k\, \psi(n, k)$ with $\psi$ a $\Pi^0_{m}$ formula. By $\Sigma^0_m$ comprehension applied to $\neg \psi$, which is equivalent to a $\Sigma^0_m$ formula, the set $Y = \{ \langle n, k \rangle : \neg \psi(n, k) \}$ exists. Then $\{ n : \varphi(n) \} = \{ n : \exists k\, \langle n, k \rangle \notin Y \}$ exists by $\Sigma^0_1$ comprehension with parameter $Y$. Every arithmetic formula is equivalent to a $\Sigma^0_m$ formula for some $m$, by the prenex normal form.
 :::
 
-The proof of (2 ⇒ 1) uses $m$ applications of $\Sigma^0_1$ comprehension for a $\Sigma^0_m$ formula. Provability does not count applications: $\mathsf{ACA}_0$ does not distinguish the levels of the arithmetic hierarchy. Finer notions of reducibility between theorems, such as Weihrauch reducibility, do.
+The proof of (2 ⇒ 1) uses $m$ applications of $\Sigma^0_1$ comprehension for a $\Sigma^0_m$ formula, each with the set produced by the previous one as a parameter. This is the formal counterpart of the fact that a $\Sigma^0_m$ set is computable from $\emptyset^{(m)}$, the $m$-th iterate of the jump. Provability does not count applications: $\mathsf{ACA}_0$ does not distinguish the levels of the arithmetic hierarchy. Finer notions of reducibility between theorems, such as Weihrauch reducibility, do.
 
-:::definition{#def-jump-ideal}
-A **jump ideal** is a Turing ideal $\mathcal I$ such that $X' \in \mathcal I$ for every $X \in \mathcal I$.
-:::
-
-:::corollary{#cor-aca-jump-ideal}
-An ω-model satisfies $\mathsf{ACA}_0$ if and only if it is a jump ideal. The class $\mathrm{ARITH}$ of arithmetic sets is the least ω-model of $\mathsf{ACA}_0$.
-:::
-
-:::proof{of=cor-aca-jump-ideal}
-By :ref{#thm-rca-turing-ideal} and :ref{#thm-aca-equivalents} (3), using absoluteness: $Y$ is the jump of $X$ in the model if and only if $Y = X'$. A jump ideal contains $\emptyset^{(n)}$ for every $n$, hence every arithmetic set, and $\mathrm{ARITH}$ is a jump ideal by Post's theorem (:ref{#thm-post}).
-:::
-
-$\mathrm{REC}$ is not a jump ideal, so $\mathsf{RCA}_0$ does not prove $\mathsf{ACA}_0$. The ω-jump $\emptyset^{(\omega)} = \bigoplus_n \emptyset^{(n)}$ is not arithmetic, so $\mathsf{ACA}_0$ does not prove that it exists: the system of the next level, $\mathsf{ATR}_0$, does.
+The coding of (4 ⇒ 2) replaces a set with many witnesses by one with a single witness: only the least witness $k$ of $n$ produces the value $2n + 1$, and the other pairs are sent to even numbers, out of the way. The same device, an enumeration without repetitions, is the starting point of every reversal of the next lesson.
 
 :::quiz[equivalents of ACA₀]
 In (4 ⇒ 2) of :ref{#thm-aca-equivalents}, why are the values $2n + 1$ only taken at the least witness $k$?
@@ -63,6 +60,36 @@ In (4 ⇒ 2) of :ref{#thm-aca-equivalents}, why are the values $2n + 1$ only tak
 
 ---
 
+In (3 ⇒ 2), why is the jump of the join $A = A_1 \oplus \cdots \oplus A_k$ used, rather than the jumps of the $A_i$ separately?
+
+- [x] Because a $\Sigma^0_1$ formula may query several parameters in one search, so it defines a set that is c.e. relative to their join, and this set need not be computable from the separate jumps $A_1', \dots, A_k'$.
+- [ ] Because the jump of a join is the join of the jumps.
+
+  This is false in general: by the Sacks splitting theorem there are low sets $A_1, A_2$ whose join computes $\emptyset'$, so that $(A_1 \oplus A_2)'$ computes $\emptyset''$, while $A_1' \oplus A_2'$ is computable in $\emptyset'$.
+- [ ] Because $\Delta^0_1$ comprehension accepts only one parameter.
+
+  $\Delta^0_1$ comprehension accepts any finite number of parameters; the join is needed for the jump, not for comprehension.
+:::
+
+## ω-models
+
+:::definition{#def-jump-ideal}
+A **jump ideal** is a Turing ideal $\mathcal I$ such that $X' \in \mathcal I$ for every $X \in \mathcal I$.
+:::
+
+**Examples.** For every set $A$, the class $\{ X : X \leq_T A^{(n)} \text{ for some } n \}$ of sets arithmetic in $A$ is a jump ideal. The class $\{ X : X \leq_T \emptyset' \}$ is a Turing ideal, closed under join and Turing reducibility, but not a jump ideal: it contains $\emptyset'$ and not $\emptyset''$. More generally, a jump ideal is never of the form $\{ X : X \leq_T A \}$, since $A' \not\leq_T A$.
+
+:::corollary{#cor-aca-jump-ideal}
+An ω-model satisfies $\mathsf{ACA}_0$ if and only if it is a jump ideal. The class $\mathrm{ARITH}$ of arithmetic sets is the least ω-model of $\mathsf{ACA}_0$.
+:::
+
+:::proof{of=cor-aca-jump-ideal}
+By :ref{#thm-rca-turing-ideal} and :ref{#thm-aca-equivalents} (3), using absoluteness (:ref{#prop-omega-absolute}): $Y$ is the jump of $X$ in the model if and only if $Y = X'$. A jump ideal contains $\emptyset^{(n)}$ for every $n$, hence every arithmetic set, and $\mathrm{ARITH}$ is a jump ideal by Post's theorem (:ref{#thm-post}).
+:::
+
+$\mathrm{REC}$ is not a jump ideal, so $\mathsf{RCA}_0$ does not prove $\mathsf{ACA}_0$. The ω-jump $\emptyset^{(\omega)} = \bigoplus_n \emptyset^{(n)}$ is not arithmetic, so $\mathsf{ACA}_0$ does not prove that it exists: the system of the next level, $\mathsf{ATR}_0$, does. The method of these two separations is the basic one of reverse mathematics: to show that a system does not prove a statement, exhibit an ω-model of the system in which the statement fails, and verify the failure by absoluteness.
+
+:::quiz[ω-models of ACA₀]
 Why does $\mathsf{ACA}_0$ not prove that $\emptyset^{(\omega)}$ exists?
 
 - [x] Because $\mathrm{ARITH}$ is an ω-model of $\mathsf{ACA}_0$ that does not contain $\emptyset^{(\omega)}$, which is not arithmetic.
@@ -72,65 +99,18 @@ Why does $\mathsf{ACA}_0$ not prove that $\emptyset^{(\omega)}$ exists?
 - [ ] Because $\mathsf{ACA}_0$ has only arithmetic induction.
 
   The failure is witnessed in an ω-model, where induction holds fully.
-:::
-
-## Monotone convergence
-
-:::theorem{#thm-monotone-aca}
-Over $\mathsf{RCA}_0$, $\mathsf{ACA}_0$ is equivalent to the monotone convergence theorem: every bounded non-decreasing sequence of reals has a limit.
-:::
-
-:::proof{of=thm-monotone-aca}
-($\Rightarrow$) Rescaling, we may assume $0 \leq x_n \leq 1$. By arithmetic comprehension, the set $S$ of rationals $q$ such that $x_n > q$ for some $n$ exists. For each $k$, let $q_k$ be the largest number of the form $j 2^{-k}$, with $-1 \leq j \leq 2^k$, that belongs to $S$; it exists since $-2^{-k} < x_0$, and the sequence $(q_k)$ exists by $\Delta^0_1$ comprehension relative to $S$. Some $x_n$ exceeds $q_k$, and no $x_n$ exceeds $q_k + 2^{-k}$: either $q_k + 2^{-k} \notin S$, or $q_k = 1$. For $k \leq l$, $q_k \leq q_l$, since $q_k$ is also of the form $j 2^{-l}$, and $q_l < q_k + 2^{-k}$, since some $x_n$ exceeds $q_l$. So $x = (q_k)$ is a real, with $q_k \leq x \leq q_k + 2^{-k}$. It is the limit: every $x_n$ satisfies $x_n \leq q_k + 2^{-k} \leq x + 2^{-k}$ for all $k$, hence $x_n \leq x$; and for each $k$ some $x_n > q_k \geq x - 2^{-k}$, so $x - x_m < 2^{-k}$ for all $m \geq n$, since the sequence is non-decreasing.
-
-($\Leftarrow$) We prove (4) of :ref{#thm-aca-equivalents}. Let $f$ be injective, and $x_n = \sum_{i \leq n} 2^{-f(i)-1}$, as in :ref{#prop-specker}. It is non-decreasing and bounded by $1$; let $x$ be its limit. For each $m$, there is $n$ with $x - x_n < 2^{-m-1}$, and then $m$ is in the range of $f$ if and only if $m = f(i)$ for some $i \leq n$: an $i > n$ with $f(i) = m$ would give $x - x_n \geq x_i - x_n \geq 2^{-m-1}$. The condition $x - x_n < 2^{-m-1}$ is $\Sigma^0_1$ in $x$ and $(x_n)$. Hence
-$$
-\begin{aligned}
-m \in \mathrm{ran}(f) &\iff \exists n\, \big(x - x_n < 2^{-m-1} \wedge \exists i \leq n\ f(i) = m\big), \\
-m \notin \mathrm{ran}(f) &\iff \exists n\, \big(x - x_n < 2^{-m-1} \wedge \forall i \leq n\ f(i) \neq m\big),
-\end{aligned}
-$$
-two $\Sigma^0_1$ formulas. In both lines, the left-to-right direction holds with any $n$ such that $x - x_n < 2^{-m-1}$, by the observation above for the first line; the right-to-left direction is immediate for the first line and is the observation above for the second. So the range exists by $\Delta^0_1$ comprehension.
-:::
-
-## König's lemma
-
-A tree $T \subseteq \nat^{<\nat}$ is **finitely branching** if every node has finitely many immediate successors. **König's lemma** states that every infinite finitely branching tree has an infinite path. Weak König's lemma, the restriction to binary trees, is the subject of the next lesson. The computability-theoretic content of König's lemma was established in :ref{#thm-konig-strength}; the reverse mathematics version is the following.
-
-:::theorem{#thm-konig-aca}
-Over $\mathsf{RCA}_0$, $\mathsf{ACA}_0$ is equivalent to König's lemma.
-:::
-
-:::proof{of=thm-konig-aca}
-($\Rightarrow$) Let $T$ be infinite and finitely branching. By arithmetic comprehension, the set $E$ of nodes of $T$ with infinitely many extensions in $T$ exists. The root belongs to $E$. If $\sigma \in E$, one of its finitely many immediate successors belongs to $E$: otherwise each of them has finitely many extensions, and so would $\sigma$, by arithmetic induction on the number of successors. Define the path $P$ by $P \uh 0 = \varepsilon$ and $P \uh (n+1) = $ the first immediate successor of $P \uh n$ in $E$, in the order of codes; this is a search relative to $T \oplus E$ that terminates, so $P$ exists by $\Delta^0_1$ comprehension.
-
-($\Leftarrow$) We prove (4) of :ref{#thm-aca-equivalents}. Let $f$ be injective. Let $T$ be the set of sequences $\sigma \in \nat^{<\nat}$ such that, for every $m < |\sigma|$, either $\sigma(m) = i + 1$ with $f(i) = m$, or $\sigma(m) = 0$ and $f(i) \neq m$ for every $i < |\sigma|$. It is a tree, defined by a bounded formula, and each node has at most two immediate successors, since $f$ is injective. It is infinite: for each $n$, the sequence $\sigma$ of length $n$ with $\sigma(m) = i + 1$ if $f(i) = m$ for some $i < n$, and $\sigma(m) = 0$ otherwise, belongs to $T$. Let $P$ be a path. If $P(m) = i + 1$, then $f(i) = m$. If $P(m) = 0$, then $f(i) \neq m$ for every $i$, since $P \uh n \in T$ for every $n > i$. So $\mathrm{ran}(f) = \{ m : P(m) \neq 0 \}$, which exists by $\Delta^0_1$ comprehension.
-:::
-
-The tree in the reversal has at most two immediate successors at each node, but their values are not bounded by a function computable from $f$: the successors of a node $\sigma$ of length $m$ are among $\sigma 0$ and $\sigma (i + 1)$ with $f(i) = m$. For trees with a computable bound, or binary trees, the strength drops to weak König's lemma.
-
-:::quiz[König's lemma]
-In the reversal of :ref{#thm-konig-aca}, why does a path $P$ with $P(m) = 0$ guarantee that $m$ is not in the range of $f$?
-
-- [x] Because every prefix $P \uh n$ belongs to $T$, and membership in $T$ with $P(m) = 0$ requires $f(i) \neq m$ for all $i < n$; as $n$ is arbitrary, $f(i) \neq m$ for all $i$.
-- [ ] Because $f$ is injective.
-
-  Injectivity bounds the branching of $T$; the conclusion comes from the infinitely many prefixes of the path.
-- [ ] Because $0$ is the leftmost choice.
-
-  The path need not be leftmost; any path works.
 
 ---
 
-In the forward direction, where is arithmetic comprehension used?
+Why is a jump ideal never of the form $\{ X : X \leq_T A \}$?
 
-- [x] To form the set $E$ of nodes with infinitely many extensions, defined by a $\Pi^0_2$ formula relative to $T$.
-- [ ] To show that $T$ is infinite.
+- [x] Because $A$ would belong to it, hence $A'$ as well, while $A' \not\leq_T A$.
+- [ ] Because a jump ideal is uncountable.
 
-  This is the hypothesis.
-- [ ] To define the path by a search.
+  $\mathrm{ARITH}$ is a countable jump ideal.
+- [ ] Because $\{ X : X \leq_T A \}$ is not closed under join.
 
-  Given $E$, the path is computed by a search, which only requires $\Delta^0_1$ comprehension.
+  It is closed under join: $X, Y \leq_T A$ implies $X \oplus Y \leq_T A$. It fails to be closed under the jump.
 :::
 
 ## Exercises
@@ -143,19 +123,19 @@ The condition on $Y$ is expressed by the arithmetic formula $\forall e\, (e \not
 :::
 ::::
 
-::::exercise{difficulty=2}
-The Bolzano–Weierstrass theorem states that every sequence of reals in $[0, 1]$ has a subsequence converging to some real. Show that it is equivalent to $\mathsf{ACA}_0$ over $\mathsf{RCA}_0$.
+::::exercise{difficulty=1}
+Show that for every set $A$, the class $\mathrm{ARITH}(A)$ of sets arithmetic in $A$, that is, Turing reducible to $A^{(n)}$ for some $n$, is the least ω-model of $\mathsf{ACA}_0$ containing $A$.
 
 :::solution
-($\Rightarrow$) With arithmetic comprehension relative to the sequence, define nested closed dyadic intervals $J_0 = [0, 1] \supseteq J_1 \supseteq \cdots$, with $J_k$ of length $2^{-k}$ containing $x_n$ for infinitely many $n$: take the left half of $J_k$ if it contains infinitely many terms, an arithmetic property, and the right half otherwise. By a search, choose $n_0 < n_1 < \cdots$ such that $x_{n_k}$ lies within $2^{-k}$ of $J_k$, a $\Sigma^0_1$ condition satisfied by infinitely many indices. The left endpoints of the $J_k$ form a real $x$, which lies in every $J_k$; since $J_k$ has length $2^{-k}$, $|x_{n_k} - x| < 2^{-k+1}$, so the subsequence converges to $x$.
-
-($\Leftarrow$) We prove the monotone convergence theorem and apply :ref{#thm-monotone-aca}. Let $(x_n)$ be non-decreasing, rescaled into $[0, 1]$, and let $(x_{n_k})$ converge to $x$. Every $x_m$ satisfies $x_m \leq x$: otherwise, all terms $x_{n_k}$ with $n_k \geq m$ would be at least $x_m > x$, and could not converge to $x$. Given $\varepsilon > 0$, choose $k$ with $x - x_{n_k} < \varepsilon$; then $0 \leq x - x_m < \varepsilon$ for every $m \geq n_k$. So $x$ is the limit of the whole sequence.
+$\mathrm{ARITH}(A)$ contains $A$. It is a Turing ideal: if $X \leq_T A^{(m)}$ and $Y \leq_T A^{(n)}$, then $X \oplus Y \leq_T A^{(\max(m, n))}$, and it is closed downwards under $\leq_T$. It is a jump ideal: if $X \leq_T A^{(n)}$, then $X' \leq_T A^{(n+1)}$, since the jump is monotone with respect to $\leq_T$. By :ref{#cor-aca-jump-ideal}, it is an ω-model of $\mathsf{ACA}_0$. Conversely, a jump ideal containing $A$ contains every $A^{(n)}$, by induction on $n$, and every set computable from one of them.
 :::
 ::::
 
 ## Notes and references
 
-The equivalences of this lesson are in Simpson's monograph, Chapter III, which also covers vector spaces, ideals in countable rings and the Bolzano–Weierstrass theorem. The arithmetic theorems of $\mathsf{ACA}_0$ are exactly those of Peano arithmetic: $\mathsf{ACA}_0$ is conservative over $\mathsf{PA}$, a result we admit (Simpson, Section IX.1).
+The equivalence of (1), (2) and (4) is Simpson, Lemma III.1.3; the characterization of the ω-models and the minimality of $\mathrm{ARITH}$ are in Section VIII.1 (Corollary VIII.1.11). The arithmetic theorems of $\mathsf{ACA}_0$ are exactly those of Peano arithmetic: $\mathsf{ACA}_0$ is conservative over $\mathsf{PA}$, a result we admit (Simpson, Section IX.1, after Friedman 1976); it is discussed in the course on induction and conservation. Dzhafarov and Mummert, Section 5.6.1, and Hirschfeldt, Section 4.3, give the same equivalences.
 
-- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009.
-- H. Friedman, *Systems of second order arithmetic with restricted induction*, abstracts, Journal of Symbolic Logic 41 (1976), 557–559.
+- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Sections III.1, VIII.1 and IX.1.
+- H. Friedman, *Systems of second order arithmetic with restricted induction, I, II*, abstracts, Journal of Symbolic Logic 41 (1976), 557–559.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 5.6.
+- D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Sections 4.3 and 4.5.
