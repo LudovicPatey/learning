@@ -2,13 +2,14 @@
 # displayed as a dependency graph on the home page. Courses that appear in no
 # track are specialized courses: they are listed in the catalogue only.
 # Prerequisites on courses of other tracks are shown as "Builds on".
+# The reasons for the contents of each track are in tracks-design.md.
 - id: computability
   title: Computability theory
   area: computability
   description: >
     From the models of computation to the structure of the Turing degrees: the
     common basis of the other tracks.
-  courses: [models-of-computation, countability, fundamentals, turing-degrees, arithmetic-hierarchy, ce-degrees, pi01-classes]
+  courses: [models-of-computation, countability, fundamentals, turing-degrees, arithmetic-hierarchy, ce-degrees, pi01-classes, immunity-growth]
 - id: randomness
   title: Algorithmic randomness
   area: randomness
@@ -22,10 +23,10 @@
   description: >
     The axioms needed to prove theorems of ordinary mathematics, measured over a
     weak base theory.
-  courses: [second-order-arithmetic, big-five, ramsey-theorem]
+  courses: [second-order-arithmetic, big-five, ramsey-theorem, induction-conservation, reducibilities]
 - id: higher
   title: Higher computability
   area: higher
   description: >
     Computability along the computable ordinals, beyond the arithmetic sets.
-  courses: [computable-ordinals, hyperarithmetic]
+  courses: [computable-ordinals, hyperarithmetic, descriptive-set-theory]

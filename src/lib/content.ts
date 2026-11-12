@@ -298,7 +298,8 @@ function readCourse(
     });
   });
   for (const f of fs.readdirSync(dir)) {
-    if (f.endsWith(".md") && !slugs.includes(f.slice(0, -3))) {
+    // files starting with "_" (the design log _design.md) are notes, not lessons
+    if (f.endsWith(".md") && !f.startsWith("_") && !slugs.includes(f.slice(0, -3))) {
       warnings.push(`${courseId}/${f} is not listed in ${courseId}/_course.yaml`);
     }
   }

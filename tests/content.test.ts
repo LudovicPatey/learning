@@ -66,7 +66,9 @@ describe("catalog", () => {
   });
 
   it("has no catalog warnings for valid fixtures", () => {
+    // alpha/_design.md is a design log: neither a lesson nor a warning
     expect(getCatalog().warnings).toEqual([]);
+    expect([...getCatalog().lessons.keys()].some((id) => id.includes("/_"))).toBe(false);
   });
 
   it("builds lesson URLs", () => {
