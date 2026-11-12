@@ -37,4 +37,4 @@
     Separating mathematical problems by preservation properties, with the forcing
     question as the main tool: cone avoidance, lowness, compactness avoidance, and the
     control of the first and second jumps.
-  courses: [effective-forcing, avoidance]
+  courses: [effective-forcing, avoidance, lowness]

@@ -1,0 +1,29 @@
+title: Lowness and first-jump control
+area: computability
+level: Advanced
+order: 14
+prerequisites: [avoidance, effective-forcing, ramsey-theorem, reducibilities]
+summary: Low solutions to problems; effective forcing of the jump through codes of conditions; low subsets of co-hyperimmune sets; coded Scott ideals; jumps computed by PA degrees over ∅′; the Cholak–Jockusch–Slaman theorem on low₂ solutions of Ramsey's theorem for pairs.
+description: >
+  Lowness is an effectiveness property: a low solution is obtained by building a
+  generic sequence of conditions with the oracle ∅′, deciding the jump of the
+  generic set along the way. The course defines low bases for problems and
+  derives ω-models of low sets and separations; formalizes the effective forcing
+  of the jump through codes of conditions, and revisits the low basis theorem
+  with lowness indices; shows that a question decided by ∅′, not necessarily
+  Σ⁰₁, suffices, with Jockusch's theorem on low subsets of co-hyperimmune Σ⁰₂
+  sets and the Hirschfeldt–Shore theorem on stable linear orders; introduces
+  codes of Scott ideals and their low members; replaces ∅′ by a set PA relative
+  to ∅′ to define weakly low bases, which give low₂ solutions; and proves that
+  cohesiveness, the pigeonhole principle for Δ⁰₂ sets and Ramsey's theorem for
+  pairs admit weakly low bases (Jockusch–Stephan, Cholak–Jockusch–Slaman).
+objectives:
+  - Define low bases for problems, build ω-models of low sets, and use them to separate problems
+  - Explain the difference between genericity properties and effectiveness properties of solutions
+  - Represent conditions by codes and decide the jump of a generic set with an oracle along an effective sequence of conditions
+  - Use lowness indices to iterate the low basis theorem uniformly
+  - Build low sets with a forcing question decided by ∅′ that is not Σ⁰₁, as for co-hyperimmune Σ⁰₂ sets and stable linear orders
+  - Define codes of Turing ideals, build low codes of Scott ideals, and answer questions about their members with ∅′
+  - Use a set PA relative to ∅′ to choose between true Π⁰₂ statements, and define weakly low bases
+  - Prove that COH, the pigeonhole principle for Δ⁰₂ sets and RT²₂ admit weakly low bases, hence low₂ solutions
+lessons: [low-bases, forcing-the-jump, weak-preservation, coded-ideals, beyond-zero-jump, cjs-theorem, ramsey-pairs-low2]
