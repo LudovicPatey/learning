@@ -1,11 +1,13 @@
 ---
 title: Minimal degrees
-summary: Splitting trees give a set of minimal Turing degree computable in 0″ (Spector) and a minimal cover of every degree; no c.e. or 1-generic degree is minimal, and no non-empty Π⁰₁ class consists of sets of minimal degree.
-duration: 40
+summary: Splitting trees give a set of minimal Turing degree computable in 0″ (Spector); the construction is a forcing with computable perfect trees, whose conditions decide for all their paths whether a functional loses information.
+duration: 50
 prerequisites: [embeddings, immunity-growth/computably-dominated, ce-degrees/sacks-splitting]
 ---
 
-By the embedding theorem, the degrees contain every countable partial order, and the interval below a 1-generic degree is already rich. One may ask whether below every non-zero degree there is a degree strictly between it and $\obf$. Spector showed that this fails: there are **minimal** degrees, immediately above $\obf$. The proof is a construction by computable function trees, a method called **Sacks forcing** or **forcing with perfect trees**, which differs from the finite extension method: the conditions are trees rather than strings, so that a single condition can decide whether a functional computes the generic set back.
+By the embedding theorem, the degrees contain every countable partial order, and the interval below a 1-generic degree is already rich. One may ask whether below every non-zero degree there is a degree strictly between it and $\obf$. Spector showed that this fails: there are **minimal** degrees, immediately above $\obf$. This lesson proves his theorem. The next one relativizes the construction, and describes which degrees are not minimal.
+
+The finite extension method cannot produce a minimal degree. A string decides only finitely many bits, and a sufficiently generic set has independent columns, each strictly below the whole set (:ref{#ex-generic-not-minimal}). The proof uses a different kind of condition: a computable **perfect tree**, which keeps a perfect class of candidates and decides a property for all of them at once. The method is called **Sacks forcing**, or **forcing with perfect trees**. It was used in the course on immunity to build a computably dominated set (:ref{#thm-martin-miller-ftrees}); here the property to decide is whether a functional $\Phi_e$ loses information on the paths of the tree, or preserves all of it.
 
 We use the function trees of :ref{#def-function-tree}: total functions $T : \bstr \to \bstr$ with $\rho \preceq \mu \iff T(\rho) \preceq T(\mu)$, with paths $[T]$, subtrees, and full subtrees above a node. If $X \in [T]$, then for every $n$ some $\rho$ of length $n$ has $T(\rho) \prec X$.
 
@@ -13,13 +15,15 @@ We use the function trees of :ref{#def-function-tree}: total functions $T : \bst
 A degree $\dbf$ is **minimal** if $\dbf > \obf$ and there is no degree $\cbf$ with $\obf < \cbf < \dbf$. Equivalently, a set $X$ has minimal degree if it is not computable and every set computable from $X$ is computable or computes $X$.
 :::
 
+The degrees met so far are not minimal. The degree $\obf'$, and more generally every non-zero c.e. degree, bounds a strictly smaller non-zero c.e. degree, by the Sacks splitting theorem (:ref{#cor-no-minimal-ce}). A 1-generic degree bounds the degrees of its columns (:ref{#ex-generic-not-minimal}). For a set $X$ of minimal degree, every reduction $\Phi^X_e$ that is total must either lose all the information of $X$, and be computable, or lose none of it, and compute $X$ back. The construction meets these requirements one at a time, each for all the paths of a tree.
+
 ## Splitting trees
 
 :::definition{#def-e-splitting}
 Two strings $\sigma, \tau$ form an **$e$-split** if $\Phi^\sigma_e(x)\converge \neq \Phi^\tau_e(x)\converge$ for some $x$. An f-tree $T$ is **$e$-splitting** if $T(\rho 0)$ and $T(\rho 1)$ form an $e$-split for every $\rho$. It **avoids $e$-splits** if no two of its nodes form an $e$-split.
 :::
 
-Two strings that form an $e$-split are incomparable, since a computation with an oracle string is preserved by extending the string.
+Two strings that form an $e$-split are incomparable, since a computation with an oracle string is preserved by extending the string. For instance, if $\Phi_e$ is the identity functional, $\Phi^\sigma_e(x) = \sigma(x)$ for $x < |\sigma|$, any two incomparable strings form an $e$-split, and every f-tree is $e$-splitting. If $\Phi^X_e$ ignores its oracle, no two strings form an $e$-split, and every f-tree avoids $e$-splits. A general functional behaves differently on different parts of the tree, and the next lemma finds a subtree on which it behaves uniformly.
 
 :::lemma{#lem-splitting-dichotomy}
 Let $T$ be a computable f-tree and $e \in \nat$. There is a computable subtree $S$ of $T$ that is $e$-splitting or avoids $e$-splits.
@@ -43,7 +47,11 @@ Let $T$ be a computable f-tree, $e \in \nat$, and $X \in [T]$ such that $\Phi^X_
 2. Let $Y = \Phi^X_e$. We compute, with oracle $Y$, strings $\mu_0 \prec \mu_1 \prec \cdots$ with $|\mu_n| = n$ and $T(\mu_n) \prec X$. Let $\mu_0 = \varepsilon$. Given $\mu_n$, the nodes $T(\mu_n 0)$ and $T(\mu_n 1)$ form an $e$-split; find, by a search, an $x$ with $\Phi^{T(\mu_n 0)}_e(x)\converge \neq \Phi^{T(\mu_n 1)}_e(x)\converge$. One of the two nodes is a prefix of $X$: since $X$ is a path, some node $T(\rho) \prec X$ is longer than $T(\mu_n)$; then $T(\mu_n) \prec T(\rho)$, so $\mu_n \prec \rho$, and $\rho \succeq \mu_n i$ for some $i$, which gives $T(\mu_n i) \preceq T(\rho) \prec X$. The computation of this node gives $Y(x)$, by the use principle; so exactly one of the two values equals $Y(x)$, and we let $\mu_{n+1} = \mu_n i$ for the corresponding $i$. Then $T(\mu_{n+1}) \prec X$. The nodes $T(\mu_n)$ have increasing lengths, so $X$ is computed from $Y$.
 :::
 
-On an $e$-splitting tree, the functional $\Phi_e$ distinguishes the two branches at every node, so its output tells which branch a path follows. On a tree avoiding $e$-splits, all paths give compatible outputs, which can be found by searching the tree.
+On an $e$-splitting tree, the functional $\Phi_e$ distinguishes the two branches at every node, so its output tells which branch a path follows. On a tree avoiding $e$-splits, all paths give compatible outputs, which can be found by searching the tree. The search is effective because the tree is computable: this is why the conditions are computable trees, and not arbitrary perfect trees.
+
+:::figure[Left: an $e$-splitting tree. At each node, the two successors give different values of $\Phi_e$ at some input $x$, written next to the edges; knowing $Y = \Phi^X_e$, one follows the edge whose value agrees with $Y$, and recovers the path $X$. Right: a tree avoiding $e$-splits. The outputs of $\Phi_e$ at the nodes, written as strings, are pairwise compatible, so they are all prefixes of a single sequence, which a search through the computable tree computes.]
+<svg class="fig" viewBox="0 0 600 272" width="600" role="img" aria-label="Left: an e-splitting tree; at each node, the two successors give different values of Phi_e at some input, and the values of Y select the branch followed by X. Right: a tree avoiding e-splits; all its nodes give compatible outputs"><line x1="150.0" y1="40" x2="80.0" y2="98" class="accent-stroke" stroke-width="2.2"/><line x1="150.0" y1="40" x2="220.0" y2="98" class="muted-stroke" stroke-width="1.1"/><line x1="80.0" y1="98" x2="45.0" y2="156" class="muted-stroke" stroke-width="1.1"/><line x1="80.0" y1="98" x2="115.0" y2="156" class="accent-stroke" stroke-width="2.2"/><line x1="220.0" y1="98" x2="185.0" y2="156" class="muted-stroke" stroke-width="1.1"/><line x1="220.0" y1="98" x2="255.0" y2="156" class="muted-stroke" stroke-width="1.1"/><line x1="115.0" y1="156" x2="97.5" y2="214" class="muted-stroke" stroke-width="1.1"/><line x1="115.0" y1="156" x2="132.5" y2="214" class="accent-stroke" stroke-width="2.2"/><circle cx="150.0" cy="40" r="4.5" class="node"/><circle cx="80.0" cy="98" r="4.5" class="node"/><circle cx="220.0" cy="98" r="4.5" class="node"/><circle cx="45.0" cy="156" r="4.5" class="node"/><circle cx="115.0" cy="156" r="4.5" class="node"/><circle cx="185.0" cy="156" r="4.5" class="node"/><circle cx="255.0" cy="156" r="4.5" class="node"/><circle cx="97.5" cy="214" r="4.5" class="node"/><circle cx="132.5" cy="214" r="4.5" class="node"/><text x="107.0" y="71.0" text-anchor="end" class="mrm" font-size="11">0</text><text x="193.0" y="71.0" text-anchor="start" class="mrm" font-size="11">1</text><text x="150.0" y="30" text-anchor="middle" class="math" font-size="12">x<tspan class="mrm" font-size="8" dy="4">0</tspan></text><text x="54.5" y="129.0" text-anchor="end" class="mrm" font-size="11">1</text><text x="105.5" y="129.0" text-anchor="start" class="mrm" font-size="11">0</text><text x="80.0" y="88" text-anchor="middle" class="math" font-size="12">x<tspan class="mrm" font-size="8" dy="4">1</tspan></text><text x="98.2" y="187.0" text-anchor="end" class="mrm" font-size="11">0</text><text x="131.8" y="187.0" text-anchor="start" class="mrm" font-size="11">1</text><text x="115.0" y="146" text-anchor="middle" class="math" font-size="12">x<tspan class="mrm" font-size="8" dy="4">2</tspan></text><text x="132.5" y="236" text-anchor="middle" class="math" font-size="13">X</text><text x="150.0" y="16" text-anchor="middle" class="label">e-splitting, with Y = 0, 0, 1 at the three inputs</text><text x="150.0" y="262" text-anchor="middle" class="label">the values of Y choose the branch followed by X</text><line x1="450.0" y1="40" x2="380.0" y2="98" class="ink-stroke" stroke-width="1.1"/><line x1="450.0" y1="40" x2="520.0" y2="98" class="ink-stroke" stroke-width="1.1"/><line x1="380.0" y1="98" x2="345.0" y2="156" class="ink-stroke" stroke-width="1.1"/><line x1="380.0" y1="98" x2="415.0" y2="156" class="ink-stroke" stroke-width="1.1"/><line x1="520.0" y1="98" x2="485.0" y2="156" class="ink-stroke" stroke-width="1.1"/><line x1="520.0" y1="98" x2="555.0" y2="156" class="ink-stroke" stroke-width="1.1"/><line x1="345.0" y1="156" x2="327.5" y2="214" class="ink-stroke" stroke-width="1.1"/><line x1="345.0" y1="156" x2="362.5" y2="214" class="ink-stroke" stroke-width="1.1"/><line x1="415.0" y1="156" x2="397.5" y2="214" class="ink-stroke" stroke-width="1.1"/><line x1="415.0" y1="156" x2="432.5" y2="214" class="ink-stroke" stroke-width="1.1"/><line x1="485.0" y1="156" x2="467.5" y2="214" class="ink-stroke" stroke-width="1.1"/><line x1="485.0" y1="156" x2="502.5" y2="214" class="ink-stroke" stroke-width="1.1"/><line x1="555.0" y1="156" x2="537.5" y2="214" class="ink-stroke" stroke-width="1.1"/><line x1="555.0" y1="156" x2="572.5" y2="214" class="ink-stroke" stroke-width="1.1"/><circle cx="450.0" cy="40" r="4.5" class="node"/><text x="458.0" y="44" class="mrm" font-size="11">0</text><circle cx="380.0" cy="98" r="4.5" class="node"/><text x="388.0" y="102" class="mrm" font-size="11">01</text><circle cx="520.0" cy="98" r="4.5" class="node"/><text x="528.0" y="102" class="mrm" font-size="11">0</text><circle cx="345.0" cy="156" r="4.5" class="node"/><text x="353.0" y="160" class="mrm" font-size="11">011</text><circle cx="415.0" cy="156" r="4.5" class="node"/><text x="423.0" y="160" class="mrm" font-size="11">01</text><circle cx="485.0" cy="156" r="4.5" class="node"/><text x="493.0" y="160" class="mrm" font-size="11">01</text><circle cx="555.0" cy="156" r="4.5" class="node"/><text x="563.0" y="160" class="mrm" font-size="11">011</text><circle cx="327.5" cy="214" r="4.5" class="node"/><text x="327.5" y="232" text-anchor="middle" class="mrm" font-size="10">0110</text><circle cx="362.5" cy="214" r="4.5" class="node"/><text x="362.5" y="232" text-anchor="middle" class="mrm" font-size="10">011</text><circle cx="397.5" cy="214" r="4.5" class="node"/><text x="397.5" y="232" text-anchor="middle" class="mrm" font-size="10">011</text><circle cx="432.5" cy="214" r="4.5" class="node"/><text x="432.5" y="232" text-anchor="middle" class="mrm" font-size="10">0110</text><circle cx="467.5" cy="214" r="4.5" class="node"/><text x="467.5" y="232" text-anchor="middle" class="mrm" font-size="10">011</text><circle cx="502.5" cy="214" r="4.5" class="node"/><text x="502.5" y="232" text-anchor="middle" class="mrm" font-size="10">01</text><circle cx="537.5" cy="214" r="4.5" class="node"/><text x="537.5" y="232" text-anchor="middle" class="mrm" font-size="10">0110</text><circle cx="572.5" cy="214" r="4.5" class="node"/><text x="572.5" y="232" text-anchor="middle" class="mrm" font-size="10">011</text><text x="450.0" y="16" text-anchor="middle" class="label">avoiding e-splits: all outputs are compatible</text><text x="450.0" y="262" text-anchor="middle" class="label">they are prefixes of one computable sequence</text></svg>
+:::
 
 :::quiz[splitting trees]
 In :ref{#lem-splitting-consequences} (2), why does the procedure choose the branch whose computation agrees with $Y(x)$?
@@ -89,6 +97,8 @@ Let $X$ be the union of the roots $T_k(\varepsilon)$. As in the proof of :ref{#t
 
 The two lemmas on f-trees, for non-computability and for splitting, play the role of the dense sets of the finite extension method. The essential difference is that a tree decides, for all its paths at once, whether $\Phi_e$ loses information or not. With strings as conditions, genericity has the opposite effect: by :ref{#thm-generic-independent} and :ref{#ex-generic-not-minimal}, a 1-generic set never has minimal degree.
 
+In the language of forcing, the **conditions** are the computable f-trees, a condition $S$ **extends** $T$ if $S$ is a subtree of $T$, and a set $X$ satisfies a condition if $X \in [T]$. For each $e$, the conditions that are $e$-splitting or avoid $e$-splits form a **dense** family, by :ref{#lem-splitting-dichotomy}: every condition has an extension in it. So do the conditions all of whose paths differ from $\Phi_e$, by :ref{#lem-ftree-noncomputable}. The proof above builds a decreasing sequence of conditions that meets every one of these dense families, and a path of all these conditions has minimal degree. The same scheme, with other dense families, gives the computably dominated sets of :ref{#thm-martin-miller-ftrees}, and both can be met at once (see the exercises).
+
 :::quiz[Spector's theorem]
 In the proof of :ref{#thm-minimal-degree}, why is $\emptyset''$ needed rather than $\emptyset'$?
 
@@ -111,63 +121,39 @@ Unlike the construction of a computably dominated set in :ref{#thm-martin-miller
 - [ ] Because partiality cannot be forced with trees.
 
   It can, as in :ref{#lem-ftree-domination}, but it is not needed here.
-:::
+::
 
-Sacks (1961) improved the bound: there is a minimal degree below $\obf'$. The construction uses partial computable trees and a full approximation argument, and is admitted here; see Lerman's monograph. By contrast, no c.e. degree is minimal (:ref{#cor-no-minimal-ce}), and Yates (1970) showed that every non-zero c.e. degree bounds a minimal degree.
+## Below the halting problem
 
-## Minimal covers
-
-Relativizing Spector's construction gives degrees immediately above any given degree.
-
-:::theorem{#thm-minimal-cover}
-For every set $A$ there is a set $B$ with $A <_T B$ such that no set $C$ satisfies $A <_T C <_T B$. The degree of $B$ is a **minimal cover** of $\deg_T(A)$.
-:::
-
-:::proof{of=thm-minimal-cover}
-Relativize the construction to $A$, with $A$-computable f-trees, and start from the tree $T_0(\rho) = \rho \oplus (A \uh |\rho|)$, which interleaves the bits of $\rho$ with those of $A$; every path of every subtree computes $A$ from its odd bits. The relativized lemmas give $X \in [T_0]$ such that $X \neq \Phi^A_e$ for every $e$, and such that every $Y = \Phi^X_e$ satisfies $Y \leq_T A$ or $X \leq_T Y \oplus A$; in the splitting case, the decoding procedure needs the $A$-computable tree.
-
-Let $B = X$. Then $A \leq_T B$, and $B \not\leq_T A$. If $A \leq_T C \leq_T B$ with $C = \Phi^B_e$, then $C \leq_T A$, or $B \leq_T C \oplus A \equiv_T C$. So there is no $C$ strictly between.
-:::
-
-:::quiz[minimal covers]
-In the proof of :ref{#thm-minimal-cover}, why must every path of the initial tree compute $A$?
-
-- [x] So that $B = X$ lies above $A$: then every $C$ with $A \leq_T C \leq_T B$ is of the form $\Phi^X_e$, and the relativized dichotomy gives $C \leq_T A$ or $X \leq_T C \oplus A \equiv_T C$.
-- [ ] Because otherwise the trees would not be $A$-computable.
-
-  The trees are $A$-computable by construction; the coding of $A$ ensures that $B$ lies above $A$.
-- [ ] Because $A$ must be non-computable.
-
-  $A$ is arbitrary; for computable $A$ the theorem gives a minimal degree.
-:::
+Spector's construction needs $\emptyset''$ to decide which case of :ref{#lem-splitting-dichotomy} holds. Sacks (1961) improved the bound: there is a minimal degree below $\obf'$. The construction uses partial computable trees: the splitting procedure of Case 2 is run without knowing whether it will stall, and a node on which it stalls avoids $e$-splits. With the oracle $\emptyset'$, the construction guesses the case and corrects its guesses finitely often, in the manner of a finite injury argument (Soare, Chapter 13). We admit this result. By contrast, no c.e. degree is minimal (:ref{#cor-no-minimal-ce}), although Yates (1970) and Cooper (1972) showed that every non-zero c.e. degree bounds a minimal degree. Every minimal degree below $\obf'$ is hyperimmune, since no non-computable $\Delta^0_2$ set is computably dominated (:ref{#thm-computation-function}); so minimality does not imply computable domination, although the first exercise below combines the two.
 
 ## Exercises
 
 ::::exercise{difficulty=1}
-Show that there is no non-empty $\Pi^0_1$ class all of whose members have minimal degree.
+Show that there is a set of minimal degree that is computably dominated, computable in $\emptyset''$.
 
 :::solution
-Let $\mathcal P = [T]$ be non-empty, with $T$ computable, and $X$ its leftmost path: for every $n$, $X \uh n$ is the lexicographically least string of length $n$ that is extendible in $T$. Let $L$ be the set of strings $\sigma$ that are lexicographically smaller than $X \uh |\sigma|$. Then $\sigma \in L$ if and only if every string $\tau$ of length $|\sigma|$ with $\tau \leq_{\mathrm{lex}} \sigma$ satisfies $[\tau] \cap \mathcal P = \emptyset$; this is a finite conjunction of $\Sigma^0_1$ conditions (:ref{#prop-pi01-emptiness}), so $L$ is c.e. The set $L$ computes $X$: $X \uh n$ is the least string of length $n$ not in $L$. Conversely $X$ computes $L$. So $X$ has c.e. degree. If $X$ is computable, it does not have minimal degree; otherwise its degree is c.e. and non-zero, hence not minimal by :ref{#cor-no-minimal-ce}.
+Interleave the steps of :ref{#thm-minimal-degree} with those of :ref{#thm-martin-miller-ftrees}: at step $3e + 1$, apply :ref{#lem-ftree-noncomputable}; at step $3e + 2$, apply :ref{#lem-splitting-dichotomy} for $e$; at step $3e + 3$, apply :ref{#lem-ftree-domination} for $e$; after the last two, pass to the full subtree above the node of the new tree indexed by $0$, so that the roots increase. Each step yields a computable subtree of the previous tree, so the union $X$ of the roots lies on all the trees. The verification of each property only uses the tree of the corresponding step, so $X$ is non-computable, of minimal degree, and computably dominated. Each step is decided by $\emptyset''$, as in the two proofs.
 :::
 ::::
 
 ::::exercise{difficulty=2}
-Show that there are continuum many minimal degrees.
-
-:::hint
-Modify the construction as in the last exercise of :ref{to="immunity-growth/computably-dominated"}: at each step, choose between the two subtrees above $T(0)$ and $T(1)$ according to a bit of a parameter $Z \in \cs$.
-:::
+Let $T$ be a computable f-tree that avoids $e$-splits, and let $\Phi^X_e$ be total for some $X \in [T]$. Show that the computable set $\Phi^X_e$ does not depend on $X$ among the paths $X$ of $T$ on which $\Phi_e$ is total.
 
 :::solution
-Fix the subtrees given by the lemmas, choosing the least witness in Case 1, so that each step is determined by the current tree. For $Z \in \cs$, run the construction, but at each even step $2e+2$ pass to the full subtree of $S$ above $S(Z(e))$ instead of $S(0)$. Let $X_Z$ be the union of the roots. As before, $X_Z$ has minimal degree. If $Z$ and $Z'$ first differ at $e$, the constructions coincide up to step $2e + 1$ and produce the same $S$; then $X_Z$ and $X_{Z'}$ extend the incompatible nodes $S(0)$ and $S(1)$, so $X_Z \neq X_{Z'}$. Each degree contains countably many sets, so the continuum many sets $X_Z$ have continuum many degrees.
+Let $X, X' \in [T]$ with $\Phi^X_e$ and $\Phi^{X'}_e$ total, and $x \in \nat$. Long enough prefixes of $X$ and $X'$ that are nodes of $T$ give convergent computations at $x$, with the values $\Phi^X_e(x)$ and $\Phi^{X'}_e(x)$ by the use principle. Two nodes of $T$ do not form an $e$-split, so these values are equal.
 :::
 ::::
 
 ## Notes and references
 
-Spector (1956) proved the existence of minimal degrees; the presentation by computable function trees used here is the standard modern one (see Lerman's monograph). Sacks (1961) built a minimal degree below $\obf'$, and Yates (1970) and Cooper (1972) below every non-zero c.e. degree. Lachlan and Lebeuf (1976) showed that every countable upper semilattice with least element is isomorphic to an initial segment of $\mathcal D$, so that the theory of initial segments is very rich. No PA degree is minimal, by results of the courses on $\Pi^0_1$ classes and on randomness: a PA degree $\abf$ computes a member $Z = Z_0 \oplus Z_1$ of the non-empty $\Pi^0_1$ class of sets avoiding the first component of a universal Martin-Löf test, so $Z$ is random; its halves $Z_0$ and $Z_1$ are Turing incomparable (:ref{#cor-van-lambalgen}), so $\obf < \deg_T(Z_0) < \deg_T(Z) \leq \abf$, and $\abf$ is not minimal. Kumabe and Lewis (2009) built a minimal degree that computes a DNC function.
+Spector (1956) proved the existence of minimal degrees, with a forcing over a restricted class of computable trees, in which all the nodes of a level are extended by the same strings; Shoenfield (1966) observed that arbitrary computable f-trees suffice for minimality, which gives the presentation used here (Downey and Hirschfeldt, Section 2.18, attribute the influential use of trees to Shoenfield's book of 1971). Soare's *Turing Computability* (2016) gives the construction in Chapter 12: e-splitting f-trees in Section 12.1, the two consequences of :ref{#lem-splitting-consequences} as the e-black and e-white Lemmas 12.2.2 and 12.2.3, the splitting procedure in Section 12.3, and the theorem as Theorem 12.5.1; Chapter 13 presents Sacks's minimal degree below $\obf'$. Downey and Hirschfeldt prove Spector's theorem as Theorem 2.18.2, after their construction of a computably dominated set, as in this course. Monin and Patey present it as a theorem on sufficiently generic sets for computable Sacks forcing, in their chapter on the structure of the degrees. Lerman's monograph develops the method for initial segments of $\mathcal D$.
 
 - C. Spector, *On degrees of recursive unsolvability*, Annals of Mathematics 64 (1956), 581–592.
+- J. R. Shoenfield, *A theorem on minimal degrees*, Journal of Symbolic Logic 31 (1966), 539–544.
 - G. E. Sacks, *A minimal degree less than 0′*, Bulletin of the American Mathematical Society 67 (1961), 416–419.
-- M. Lerman, *Degrees of Unsolvability*, Springer, 1983.
-- M. Kumabe and A. E. M. Lewis, *A fixed-point-free minimal degree*, Journal of the London Mathematical Society 80 (2009), 785–797.
+- C. E. M. Yates, *Initial segments of the degrees of unsolvability, Part II: minimal degrees*, Journal of Symbolic Logic 35 (1970), 243–266.
+- S. B. Cooper, *Degrees of unsolvability complementary between recursively enumerable degrees*, Annals of Mathematical Logic 4 (1972), 31–73.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Chapters 12 and 13.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.18.
+- M. Lerman, *Degrees of Unsolvability: Local and Global Theory*, Springer, 1983.

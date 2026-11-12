@@ -3,16 +3,20 @@ area: computability
 level: Advanced
 order: 10
 prerequisites: [turing-degrees, ce-degrees, immunity-growth]
-summary: Exact pairs, embeddings of partial orders, and minimal degrees.
+summary: Exact pairs, embeddings of partial orders, minimal degrees, minimal covers and minimal upper bounds.
 description: >
   The global structure of the Turing degrees as a partial order: the upper
   semilattice structure and its failure to be a lattice through Spector's exact
   pairs, the embedding of every countable partial order using independent
-  columns of a 1-generic set, antichains of size continuum, and Spector's
-  construction of minimal degrees by forcing with function trees.
+  columns of a 1-generic set, antichains of size continuum, Spector's
+  construction of minimal degrees by forcing with computable function trees,
+  and its relativizations: minimal covers, minimal upper bounds of increasing
+  sequences, and the classes of degrees that contain no minimal degree.
 objectives:
   - Prove that every countable ideal of degrees has an exact pair
   - Deduce that the degrees do not form a lattice
   - Embed every countable partial order into the degrees below 0′
-  - Build a minimal degree with splitting trees
-lessons: [exact-pairs, embeddings, minimal-degrees]
+  - Build a minimal degree with splitting trees, and explain the construction as a forcing with perfect trees
+  - Relativize the construction to obtain minimal covers and minimal upper bounds
+  - Show that no c.e., 1-generic or PA degree is minimal
+lessons: [exact-pairs, embeddings, minimal-degrees, minimal-covers]
