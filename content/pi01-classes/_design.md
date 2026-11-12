@@ -109,7 +109,7 @@ the reverse mathematics track (WKL₀ and its ω-models, König's lemma and ACA�
   statement (mentioned after the Kreisel basis theorem), the low antibasis and low₂/proper
   low basis theorems (Soare 9.6–9.7), Π⁰₁ classes of randoms (randomness track), index-set
   complexity of properties of Π⁰₁ classes beyond one exercise, Weihrauch degrees of WKL
-  (reducibilities course), the forcing question (planned course on effective forcing).
+  (reducibilities course), the forcing question (course on effective forcing, written 2026-11-12).
 - **Cone avoidance** is proved directly and also derived from the low and computably
   dominated basis theorems (exercise), so that both arguments are available.
 
@@ -205,7 +205,7 @@ Checked on 2026-11-12:
   arXiv:1612.06219 (2016).** Used to settle the attributions to Kleene (1952) and Kreisel
   (1953).
 - **Monin–Patey, effective forcing chapter.** The forcing-question approach unifies the
-  basis theorems; deferred to the planned effective forcing course (tracks-design.md).
+  basis theorems; deferred to the course on effective forcing (tracks-design.md).
 
 No simpler proof of the basis theorems was found; the presentation by decreasing sequences of
 Π⁰₁ classes remains standard.

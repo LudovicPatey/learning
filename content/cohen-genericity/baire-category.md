@@ -174,6 +174,8 @@ For $k \geq 1$, let $D_k$ be the set of strings $\sigma$ having a prefix $\tau$ 
 
 ## Notes and references
 
+The general notion of forcing, of which Cohen forcing with strings is the first example, is developed in the course on effective forcing (:ref{to="effective-forcing/notions-of-forcing"}).
+
 Baire introduced meager classes, under the name of sets of first category, in his thesis (1899), to study the limits of continuous functions. Cohen invented forcing in 1963 to prove the independence of the continuum hypothesis, and Feferman (1965) adapted it to arithmetic. The systematic use of genericity in computability theory is due to Jockusch (1980). Mazur introduced his game in 1928, and Banach proved the characterization of co-meager classes by winning strategies (Soare 2016, §14.1). Oxtoby's book compares measure and category. The correspondence between dense sets of strings and dense open classes is presented in the same way in Monin and Patey (chapter *Cohen forcing*, section on $\Sigma^0_1$ forcing, the topological approach) and in Soare (2016, §14.1).
 
 - R. Baire, *Sur les fonctions de variables réelles*, Annali di Matematica Pura ed Applicata (3) 3 (1899), 1–123.

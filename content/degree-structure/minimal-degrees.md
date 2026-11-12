@@ -147,6 +147,8 @@ Let $X, X' \in [T]$ with $\Phi^X_e$ and $\Phi^{X'}_e$ total, and $x \in \nat$. L
 
 ## Notes and references
 
+Spector's construction is forcing with perfect trees. The course on effective forcing studies its generic sets: they are computably dominated, of minimal degree (:ref{#prop-sacks-generic}), and not generalized low (:ref{#thm-sacks-not-gl1}).
+
 Spector (1956) proved the existence of minimal degrees, with a forcing over a restricted class of computable trees, in which all the nodes of a level are extended by the same strings; Shoenfield (1966) observed that arbitrary computable f-trees suffice for minimality, which gives the presentation used here (Downey and Hirschfeldt, Section 2.18, attribute the influential use of trees to Shoenfield's book of 1971). Soare's *Turing Computability* (2016) gives the construction in Chapter 12: e-splitting f-trees in Section 12.1, the two consequences of :ref{#lem-splitting-consequences} as the e-black and e-white Lemmas 12.2.2 and 12.2.3, the splitting procedure in Section 12.3, and the theorem as Theorem 12.5.1; Chapter 13 presents Sacks's minimal degree below $\obf'$. Downey and Hirschfeldt prove Spector's theorem as Theorem 2.18.2, after their construction of a computably dominated set, as in this course. Monin and Patey present it as a theorem on sufficiently generic sets for computable Sacks forcing, in their chapter on the structure of the degrees. Lerman's monograph develops the method for initial segments of $\mathcal D$.
 
 - C. Spector, *On degrees of recursive unsolvability*, Annals of Mathematics 64 (1956), 581–592.

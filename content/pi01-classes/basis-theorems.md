@@ -183,6 +183,8 @@ In the construction of :ref{#thm-dominated-basis}, also choose $\sigma_{e+1} = \
 
 ## Notes and references
 
+The constructions of this lesson are instances of forcing with Π⁰₁ classes (Jockusch–Soare forcing). Its forcing relation, and the forcing question used to prove preservation theorems such as cone avoidance, are developed in the course on effective forcing (:ref{to="effective-forcing/forcing-with-trees"}, :ref{to="effective-forcing/forcing-question"}).
+
 The three basis theorems are due to Jockusch and Soare, in *Π⁰₁ classes and degrees of theories* (1972). The derivation of cone avoidance from the first two, as in the first exercise, is given in Hirschfeldt's *Slicing the Truth* (Section 3.1), and Monin and Patey attribute it to him. An earlier form of cone avoidance, with "primitive recursive in" in place of "computable from", is due to Gandy, Kreisel and Tait (1960), according to Hirschfeldt. Forcing with $\Pi^0_1$ classes, also called Jockusch–Soare forcing, is a basic tool in the computability theory of combinatorial principles studied in reverse mathematics; Monin and Patey study it as a forcing notion in their chapter on effective forcing.
 
 The low and computably dominated basis theorems are Theorems 3.7.2 and 9.5.1 in Soare's *Turing Computability*, Theorems 2.19.8 and 2.19.11 in Downey and Hirschfeldt, and Theorems 1.8.37 and 1.8.42 in Nies. Brattka, de Brecht and Pauly (2012) prove a uniform version of the low basis theorem in the framework of Weihrauch reducibility: closed choice on Cantor space, the problem of finding a member of a non-empty closed class given by an enumeration of its complement, is low computable.

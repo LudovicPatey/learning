@@ -1,0 +1,26 @@
+title: Effective forcing
+area: computability
+level: Advanced
+order: 12
+prerequisites: [cohen-genericity, pi01-classes, immunity-growth, degree-structure]
+summary: The general framework of forcing in computability theory; the forcing relation and its definability; forcing with Π⁰₁ classes and perfect trees; the forcing question and preservation properties, with Mathias forcing as an example.
+description: >
+  The constructions by finite extensions, by Π⁰₁ classes, by perfect trees and by
+  Mathias conditions are instances of one method. The course sets up notions of
+  forcing on Cantor space, generic filters and the existence of generic sets, the
+  forcing relation for arithmetic formulas and the theorem relating forcing and truth,
+  the definability of forcing for Cohen forcing and its consequences for the jumps of
+  generic sets, the complexity of forcing with Π⁰₁ classes and with computable perfect
+  trees, the properties of Sacks generic sets, and the forcing question, an abstract interface from which cone avoidance,
+  preservation of hyperimmunity and avoidance of PA degrees follow for any notion of
+  forcing whose question has the right definability.
+objectives:
+  - Describe a construction as a notion of forcing, and identify its conditions, extensions and dense sets
+  - Prove the existence of generic filters, effectively when the dense sets are effectively dense
+  - Define the forcing relation for arithmetic formulas and prove that forcing implies truth for generic sets
+  - Compute the complexity of the forcing relation for Cohen forcing, and deduce bounds on the jumps of generic sets
+  - Compare Cohen, Jockusch–Soare and computable Sacks forcing through the complexity of their conditions and of the forcing of Σ⁰₁ and Σ⁰₂ formulas
+  - Show that Sacks generic sets are computably dominated, of minimal degree and not generalized low
+  - Define a forcing question and use its definability to prove cone avoidance, preservation of hyperimmunity and avoidance of PA degrees
+  - Analyze computable Mathias forcing with these tools, and explain why its generic sets are high
+lessons: [notions-of-forcing, forcing-relation, cohen-forcing, forcing-with-trees, sacks-forcing, forcing-question, mathias-forcing]

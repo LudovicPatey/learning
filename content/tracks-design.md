@@ -74,11 +74,13 @@ areas.
 - **Computable structure theory.** It is not covered by the reference books of the
   platform, and would be a track of its own.
 
-**Planned.**
-- A specialized course **effective forcing**: the forcing relation in general, its
+**Specialized course added on 2026-11-12.**
+- **Effective forcing**: the forcing relation in general, its
   definability, forcing with trees (Sacks and Jockusch–Soare forcing), and the forcing
   question (Monin–Patey). It unifies techniques that are now spread over the Cohen
   genericity, Π⁰₁ classes, minimal degrees and Ramsey courses.
+
+**Planned.**
 - **Mass problems and natural degrees** (Monin–Patey): a specialized course, later.
 
 ## Algorithmic randomness
@@ -189,3 +191,6 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
   that C and Ω are Turing equivalent to ∅′.
 - **2026-11-12.** `cohen-genericity` now builds on `immunity-growth` (hyperimmune
   and DNC functions, computably dominated sets).
+- **2026-11-12.** Specialized course `effective-forcing` written: notions of forcing, the
+  forcing relation, Cohen and tree forcings, Sacks forcing, the forcing question, and
+  Mathias forcing.

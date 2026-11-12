@@ -155,6 +155,8 @@ Run the construction of :ref{#thm-coh-cone-avoidance} with one requirement $\Phi
 
 ## Notes and references
 
+Mathias forcing is studied as a notion of forcing in the course on effective forcing, where cone avoidance for cohesive sets is derived from a forcing question (:ref{#prop-mathias-question}, :ref{#thm-mathias-coh-preservation}), and where it is shown that no such question can preserve Σ⁰₂ properties (:ref{#cor-mathias-no-sigma2}).
+
 Mathias forcing was introduced by Mathias in set theory; its computable version is presented by Hirschfeldt (§6.5, Definition 6.40 and Proposition 6.41) and by Dzhafarov and Mummert (Examples 7.2.5, 7.2.10 and 7.3.9). Cone avoidance for cohesiveness is attributed to Cholak, Jockusch and Slaman (2001) by Dzhafarov and Mummert (Lemma 8.5.6), and to Jockusch and Stephan (1993) by Hirschfeldt (Exercise 6.62). Strong cone avoidance for the pigeonhole principle is due to Dzhafarov and Jockusch (2009) (Hirschfeldt, Lemma 6.63, whose proof uses reservoirs that do not compute $C$ and the cone avoidance basis theorem instead of a Scott ideal; Dzhafarov–Mummert, Lemma 8.5.7). Our presentation with a Scott ideal follows the section *Infinite pigeonhole principle and cone avoidance* of Monin and Patey. The combination of two lists of requirements into disjunctions is called Lachlan's disjunction by Dzhafarov and Mummert (Lemma 8.3.7).
 
 - C. G. Jockusch, Jr. and F. Stephan, *A cohesive set which is not high*, Mathematical Logic Quarterly 39 (1993), 515–530.

@@ -208,6 +208,8 @@ Let $\bar\sigma$ be the string obtained from $\sigma$ by flipping all its bits; 
 
 ## Notes and references
 
+The finite extension method is Cohen forcing with strings; the general notion of forcing is the subject of the course on effective forcing (:ref{to="effective-forcing/notions-of-forcing"}).
+
 The incomparable degrees below $\obf'$ are due to Kleene and Post (1954), who introduced the finite extension method (Soare 2016, Theorem 6.1.1; Downey and Hirschfeldt 2010, Theorem 2.10.2; Nies 2009, §1.6). The cone avoidance theorem is folklore; Soare (2016, Theorem 6.2.6) gives the case $A = C$, with the additional bound $B \leq_T C'$. The density of the sets $D_e$ says that the upper cone of a non-computable set is meager, as the course on Cohen genericity explains; the cone is also null, by a theorem of Sacks (1963), which also follows from earlier work of de Leeuw, Moore, Shannon and Shapiro (1956) (Downey and Hirschfeldt 2010, §8.12). 1-generic sets were introduced by Jockusch (1980), following Feferman's adaptation of Cohen's forcing to arithmetic (1965); they are studied in the course on Cohen genericity (Soare 2016, §6.3; Downey and Hirschfeldt 2010, §2.24).
 
 - S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.

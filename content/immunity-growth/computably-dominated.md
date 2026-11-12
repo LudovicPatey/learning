@@ -148,6 +148,8 @@ Fix, for each computable f-tree and each $e$, the subtree given by the proofs of
 
 ## Notes and references
 
+The construction of a computably dominated set is an instance of forcing with computable perfect trees; generic sets for this forcing are computably dominated and of minimal degree (:ref{#prop-sacks-generic}, in the course on effective forcing).
+
 Computably dominated degrees were introduced by Miller and Martin (1968), who constructed them by forcing with computable perfect trees, a method due to Spector (1956); they also showed that there are continuum many such degrees. The name "hyperimmune-free" is the traditional one; "computably dominated" is used by Nies and Soare, among others (Downey and Hirschfeldt 2010, Section 2.17, footnote). The characterization by truth-table reducibility is due to Jockusch (1969) and, independently and unpublished, to Martin (Downey and Hirschfeldt 2010, Proposition 2.17.7; Soare 2016, Theorem 5.6.4). Monin and Patey give the f-tree construction and the characterization in the section *Computably dominated degrees* of their chapter *Immunity and function growth*.
 
 - W. Miller and D. A. Martin, *The degrees of hyperimmune sets*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 14 (1968), 159–166.

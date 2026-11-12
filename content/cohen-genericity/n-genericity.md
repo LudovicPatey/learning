@@ -153,6 +153,8 @@ The argument shows more generally: if $G$ is 1-generic relative to $Z$ and $C$ i
 
 ## Notes and references
 
+The forcing relation for arithmetic sentences, its definability for Cohen forcing (:ref{#thm-cohen-forcing-definable}) and the equivalence with the definition of n-genericity by dense sets (:ref{#thm-cohen-n-generic}) are treated in the course on effective forcing.
+
 The arithmetic forcing relation was defined by Feferman (1965), and $n$-generic sets were studied systematically by Jockusch (1980), who proved most of the results of this lesson; the computation of the jumps is Theorem 2.24.3 of Downey and Hirschfeldt (2010). Kurtz (1981, 1983) introduced weak $n$-genericity, proved the implications of :ref{#prop-generic-hierarchy} and separated the notions (Downey and Hirschfeldt 2010, Theorems 2.24.11–2.24.14 and Corollary 2.24.20). Monin and Patey develop the forcing relation for arithmetic formulas and derive the same results from it.
 
 - S. Feferman, *Some applications of the notions of forcing and generic sets*, Fundamenta Mathematicae 56 (1965), 325–345.
