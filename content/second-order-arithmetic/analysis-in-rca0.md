@@ -1,66 +1,57 @@
 ---
-title: Mathematics in RCA₀
-summary: Coding real numbers and continuous functions in second-order arithmetic; RCA₀ proves the completeness of the reals for sequences with a modulus of convergence and the intermediate value theorem; Specker sequences show that RCA₀ does not prove the monotone convergence theorem.
+title: Continuous functions in RCA₀
+summary: Codes for continuous functions on [0, 1] and their evaluation in RCA₀; comparisons of values with reals are Σ⁰₁; RCA₀ proves the intermediate value theorem by a non-uniform bisection.
 duration: 35
-prerequisites: [rca0]
+prerequisites: [real-numbers]
 ---
 
-Second-order arithmetic speaks only of numbers and sets of numbers. To formalize analysis, one codes real numbers, sequences of reals and continuous functions by sets of numbers, with codings chosen so that the basic operations are computable. This lesson presents these codings, proves two theorems of analysis in $\mathsf{RCA}_0$, and shows that a third one, the monotone convergence theorem, is not provable there. The latter will turn out to be equivalent to arithmetic comprehension.
+A continuous function on $[0, 1]$ is determined by countable information: approximations of its values on small intervals. This lesson codes continuous functions by sets of such approximations, shows that $\mathsf{RCA}_0$ can evaluate a coded function and compare its values with reals, and proves the intermediate value theorem in $\mathsf{RCA}_0$. The proof is the classical bisection, made computable relative to the code after a case distinction that no algorithm can make: the theorem is provable in $\mathsf{RCA}_0$, but its proof gives no uniform procedure.
 
-## Real numbers
-
-Rational numbers are coded by numbers through a computable bijection between $\nat$ and $\mathbb Q$; in $\mathsf{RCA}_0$ one proves that they form an ordered field with decidable equality and order. Sequences of rationals are coded by sets, a function $f : \nat \to \nat$ being identified with its graph.
-
-:::definition{#def-real-rca}
-In $\mathsf{RCA}_0$, a **real number** is a sequence of rationals $x = (q_k)_{k \in \nat}$ such that $|q_k - q_l| \leq 2^{-k}$ for all $k \leq l$. Two reals $x = (q_k)$ and $y = (p_k)$ are **equal**, $x =_{\mathbb R} y$, if $|q_k - p_k| \leq 2^{-k+1}$ for all $k$, and $x < y$ if $q_k + 2^{-k+1} < p_k$ for some $k$.
-:::
-
-The sequence $(q_k)$ represents its limit, and the fixed rate of convergence $2^{-k}$ makes the relation $x < y$ a $\Sigma^0_1$ property, and equality a $\Pi^0_1$ property. Equality is not decidable: no algorithm decides whether two given reals are equal, a phenomenon that will recur. The sum, product and absolute value of reals are defined termwise, with an adjustment of indices so that the rate $2^{-k}$ is preserved (for instance $x + y = (q_{k+1} + p_{k+1})_k$), and $\mathsf{RCA}_0$ proves that the reals form an ordered field. A **sequence of reals** is a double sequence $(q_{n,k})$ such that each $(q_{n,k})_k$ is a real.
-
-Without the rate of convergence, a Cauchy sequence of rationals would still determine a limit, but the order would no longer be $\Sigma^0_1$, and the limit of a computable Cauchy sequence need not be a computable real: a Specker sequence, constructed below, is an example.
-
-:::proposition{#prop-rca-complete}
-$\mathsf{RCA}_0$ proves: if $(x_n)$ is a sequence of reals and $|x_n - x_m| \leq 2^{-n}$ for all $n \leq m$, then $(x_n)$ converges to a real $x$, that is, $|x_n - x| \leq 2^{-n}$ for every $n$.
-:::
-
-:::proof{of=prop-rca-complete}
-Write $x_n = (q_{n,k})_k$, and let $p_k = q_{k+2, k+2}$; the sequence $(p_k)$ exists by $\Delta^0_1$ comprehension. For $k \leq l$,
-$$
-\begin{aligned}
-|p_k - p_l| &\leq |q_{k+2,k+2} - x_{k+2}| + |x_{k+2} - x_{l+2}| + |x_{l+2} - q_{l+2,l+2}| \\
-&\leq 2^{-k-2} + 2^{-k-2} + 2^{-l-2} \leq 2^{-k},
-\end{aligned}
-$$
-where the outer terms use $|q_j - y| \leq 2^{-j}$ for a real $y = (q_j)$, and the middle term uses the hypothesis; so $x = (p_k)$ is a real. For each $n$ and $k \geq n$, $|x_n - p_k| \leq |x_n - x_{k+2}| + |x_{k+2} - q_{k+2,k+2}| \leq 2^{-n} + 2^{-k-2}$, and $|p_k - x| \leq 2^{-k}$, so $|x_n - x| \leq 2^{-n} + 2^{-k-2} + 2^{-k}$ for every $k \geq n$, that is, $|x_n - x| \leq 2^{-n}$.
-:::
-
-The rate $2^{-n}$ plays the role of a modulus of convergence: the limit is computed from the sequence. Without a modulus, the existence of the limit requires more than $\mathsf{RCA}_0$.
-
-## Continuous functions
-
-A continuous function on $[0, 1]$ is determined by countable information: approximations of its values on small intervals.
+## Codes for continuous functions
 
 :::definition{#def-continuous-code}
-In $\mathsf{RCA}_0$, a **code** for a continuous function $f : [0, 1] \to \mathbb R$ is a set $\Phi$ of quadruples $(a, r, b, s)$ of rationals with $r, s > 0$, such that:
+In $\mathsf{RCA}_0$, a **code** for a continuous function $f : [0, 1] \to \mathbb R$ is a set $\Phi$ of quintuples $(n, a, r, b, s)$, where $n$ is a number and $a, r, b, s$ are rationals with $r, s > 0$. We write $(a, r)\, \Phi\, (b, s)$ for $\exists n\, (n, a, r, b, s) \in \Phi$, and require:
 
-1. *consistency:* if $(a, r, b, s), (a', r', b', s') \in \Phi$ and $|a - a'| < r + r'$, then $|b - b'| \leq s + s'$;
-2. *totality:* for every real $x \in [0, 1]$ and every $\varepsilon > 0$, there is $(a, r, b, s) \in \Phi$ with $|x - a| < r$ and $s < \varepsilon$.
+1. *consistency:* if $(a, r)\, \Phi\, (b, s)$, $(a', r')\, \Phi\, (b', s')$ and $|a - a'| < r + r'$, then $|b - b'| \leq s + s'$;
+2. *totality:* for every real $x \in [0, 1]$ and every $\varepsilon > 0$, there are $a, r, b, s$ with $(a, r)\, \Phi\, (b, s)$, $|x - a| < r$ and $s < \varepsilon$.
 
-The value $f(x)$ is the unique real $y$ such that $|y - b| \leq s$ for every $(a, r, b, s) \in \Phi$ with $|x - a| < r$.
+The value $f(x)$ is the unique real $y$ such that $|y - b| \leq s$ whenever $(a, r)\, \Phi\, (b, s)$ and $|x - a| < r$.
 :::
 
-A quadruple $(a, r, b, s)$ asserts that $f$ maps the interval $(a - r, a + r)$ into $[b - s, b + s]$. Consistency makes these assertions compatible, and totality makes them precise enough at every point. $\mathsf{RCA}_0$ proves that $f(x)$ exists, uniformly in $x$. Let $x = (x_t)_t$ be a real in $[0, 1]$. For each $k$, take the first pair $\langle j, t \rangle$ such that $j$ codes a quadruple $(a_k, r_k, b_k, s_k) \in \Phi$ with $s_k < 2^{-k-2}$ and $|x_t - a_k| + 2^{-t} < r_k$. This condition is bounded in $\Phi$ and $x$, it implies $|x - a_k| < r_k$, and some pair satisfies it by totality; so the sequence $(a_k, r_k, b_k, s_k)_k$ exists by $\Delta^0_1$ comprehension. The two intervals around $a_k$ and $a_l$ contain $x$, so consistency gives $|b_k - b_l| \leq s_k + s_l \leq 2^{-k-1}$ for $k \leq l$, and $y = (b_k)$ is a real. If $(a, r, b, s) \in \Phi$ and $|x - a| < r$, then $|b - b_k| \leq s + 2^{-k-2}$ by consistency, and $|b_k - y| \leq 2^{-k}$, so $|y - b| \leq s$; uniqueness follows from totality. The function $f$ is continuous: given $x$ and $\varepsilon > 0$, take $(a, r, b, s) \in \Phi$ with $|x - a| < r$ and $s < \varepsilon / 2$, and $\delta = r - |x - a|$; then $|f(x) - f(x')| \leq 2s < \varepsilon$ whenever $|x' - x| < \delta$. Simpson (Section II.6) uses a variant of this definition for arbitrary complete separable metric spaces.
+The relation $(a, r)\, \Phi\, (b, s)$ asserts that $f$ maps the interval $(a - r, a + r)$ into $[b - s, b + s]$ (:ref{#fig-function-code}). Consistency makes these assertions compatible, and totality makes them precise enough at every point.
 
-Every continuous function on $[0, 1]$ has a code, and the codes of computable functions can be chosen computable.
+:::figure[The graph of a continuous function and rectangles $(a - r, a + r) \times [b - s, b + s]$ given by a code: the graph never leaves a rectangle across its width. Around a point $x$, totality provides rectangles of arbitrarily small height (in color), which determine $f(x)$.]{#fig-function-code}
+<svg class="fig" viewBox="0 0 600 290" width="600" role="img" aria-label="The graph of a continuous function and rectangles given by quadruples of a code; around a point x, narrower rectangles determine the value f(x)"><line x1="60" y1="113.7" x2="550" y2="113.7" class="axis"/><line x1="70" y1="15" x2="70" y2="250" class="axis"/><line x1="530" y1="109.7" x2="530" y2="117.7" class="axis"/><text x="536" y="131.7" text-anchor="middle" class="mrm" font-size="13">1</text><rect x="79.2" y="151.2" width="92.0" height="65.3" class="muted-stroke" stroke-width="1.1"/><rect x="300.0" y="101.3" width="110.4" height="43.4" class="muted-stroke" stroke-width="1.1"/><rect x="428.8" y="31.0" width="92.0" height="73.8" class="muted-stroke" stroke-width="1.1"/><rect x="180.4" y="130.1" width="110.4" height="33.2" class="accent-stroke" stroke-width="1.5"/><rect x="198.8" y="135.8" width="55.2" height="18.6" class="accent-stroke" stroke-width="1.5"/><rect x="209.5" y="141.0" width="23.0" height="7.9" class="accent-stroke" stroke-width="1.5"/><polyline points="70.0,215.9 72.3,214.4 74.6,212.8 76.9,211.2 79.2,209.7 81.5,208.1 83.8,206.6 86.1,205.0 88.4,203.5 90.7,201.9 93.0,200.4 95.3,198.9 97.6,197.4 99.9,195.9 102.2,194.4 104.5,192.9 106.8,191.4 109.1,190.0 111.4,188.5 113.7,187.1 116.0,185.7 118.3,184.3 120.6,183.0 122.9,181.6 125.2,180.3 127.5,178.9 129.8,177.6 132.1,176.4 134.4,175.1 136.7,173.9 139.0,172.6 141.3,171.4 143.6,170.3 145.9,169.1 148.2,168.0 150.5,166.9 152.8,165.8 155.1,164.7 157.4,163.7 159.7,162.7 162.0,161.7 164.3,160.7 166.6,159.8 168.9,158.9 171.2,158.0 173.5,157.1 175.8,156.3 178.1,155.5 180.4,154.7 182.7,154.0 185.0,153.2 187.3,152.5 189.6,151.8 191.9,151.2 194.2,150.5 196.5,149.9 198.8,149.3 201.1,148.7 203.4,148.2 205.7,147.7 208.0,147.2 210.3,146.7 212.6,146.2 214.9,145.8 217.2,145.4 219.5,145.0 221.8,144.6 224.1,144.2 226.4,143.9 228.7,143.6 231.0,143.3 233.3,143.0 235.6,142.7 237.9,142.4 240.2,142.2 242.5,141.9 244.8,141.7 247.1,141.5 249.4,141.3 251.7,141.1 254.0,140.9 256.3,140.8 258.6,140.6 260.9,140.4 263.2,140.3 265.5,140.1 267.8,140.0 270.1,139.8 272.4,139.7 274.7,139.6 277.0,139.4 279.3,139.3 281.6,139.2 283.9,139.0 286.2,138.9 288.5,138.7 290.8,138.6 293.1,138.4 295.4,138.3 297.7,138.1 300.0,137.9 302.3,137.7 304.6,137.5 306.9,137.3 309.2,137.1 311.5,136.9 313.8,136.6 316.1,136.4 318.4,136.1 320.7,135.8 323.0,135.5 325.3,135.2 327.6,134.9 329.9,134.5 332.2,134.2 334.5,133.8 336.8,133.4 339.1,132.9 341.4,132.5 343.7,132.0 346.0,131.5 348.3,131.0 350.6,130.5 352.9,129.9 355.2,129.3 357.5,128.7 359.8,128.1 362.1,127.5 364.4,126.8 366.7,126.1 369.0,125.4 371.3,124.6 373.6,123.8 375.9,123.0 378.2,122.2 380.5,121.4 382.8,120.5 385.1,119.6 387.4,118.7 389.7,117.7 392.0,116.8 394.3,115.8 396.6,114.7 398.9,113.7 401.2,112.6 403.5,111.5 405.8,110.4 408.1,109.3 410.4,108.1 412.7,106.9 415.0,105.7 417.3,104.5 419.6,103.2 421.9,102.0 424.2,100.7 426.5,99.4 428.8,98.0 431.1,96.7 433.4,95.3 435.7,93.9 438.0,92.5 440.3,91.1 442.6,89.7 444.9,88.2 447.2,86.8 449.5,85.3 451.8,83.8 454.1,82.3 456.4,80.8 458.7,79.3 461.0,77.8 463.3,76.3 465.6,74.7 467.9,73.2 470.2,71.6 472.5,70.1 474.8,68.5 477.1,66.9 479.4,65.4 481.7,63.8 484.0,62.2 486.3,60.7 488.6,59.1 490.9,57.6 493.2,56.0 495.5,54.4 497.8,52.9 500.1,51.3 502.4,49.8 504.7,48.3 507.0,46.7 509.3,45.2 511.6,43.7 513.9,42.2 516.2,40.7 518.5,39.3 520.8,37.8 523.1,36.4 525.4,34.9 527.7,33.5 530.0,32.1" class="ink-stroke" stroke-width="1.8"/><line x1="180.4" y1="163.2" x2="180.4" y2="256" class="muted-stroke" stroke-dasharray="2 3"/><line x1="290.8" y1="163.2" x2="290.8" y2="256" class="muted-stroke" stroke-dasharray="2 3"/><text x="180.4" y="268" text-anchor="middle" class="math" font-size="13">a<tspan class="mrm"> − </tspan>r</text><text x="290.8" y="268" text-anchor="middle" class="math" font-size="13">a<tspan class="mrm"> + </tspan>r</text><line x1="70" y1="130.1" x2="180.4" y2="130.1" class="muted-stroke" stroke-dasharray="2 3"/><line x1="70" y1="163.2" x2="180.4" y2="163.2" class="muted-stroke" stroke-dasharray="2 3"/><text x="64" y="135.1" text-anchor="end" class="math" font-size="13">b<tspan class="mrm"> + </tspan>s</text><text x="64" y="168.2" text-anchor="end" class="math" font-size="13">b<tspan class="mrm"> − </tspan>s</text><line x1="217.2" y1="109.7" x2="217.2" y2="117.7" class="ink-stroke" stroke-width="1.2"/><text x="217.2" y="105.7" text-anchor="middle" class="math" font-size="13">x</text><circle cx="217.2" cy="145.4" r="3.5" class="accent-fill"/><text x="544.0" y="37.1" text-anchor="middle" class="math" font-size="14">f</text></svg>
+:::
+
+The number $n$ plays no role in the meaning of the code; it makes the relation $(a, r)\, \Phi\, (b, s)$ a $\Sigma^0_1$ relation rather than a bounded one. Conversely, for every $\Sigma^0_1$ formula $\exists n\, \theta(n, a, r, b, s)$ with $\theta$ bounded, possibly with parameters, the set $\{ (n, a, r, b, s) : \theta(n, a, r, b, s) \}$ exists by $\Delta^0_1$ comprehension. So a family of rectangles described by a $\Sigma^0_1$ formula yields a code in $\mathsf{RCA}_0$, although the set of these rectangles may not exist; Exercise 1 below uses this. Simpson's Definition II.6.1 has the same index $n$; it requires consistency only for equal pairs $(a, r)$, and adds two closure conditions, under which the two definitions code the same functions.
+
+$\mathsf{RCA}_0$ proves that $f(x)$ exists, uniformly in $x$. Let $x = (x_t)_t$ be a real in $[0, 1]$. For each $k$, take the first pair $\langle j, t \rangle$ such that $j$ codes a quintuple $(n, a_k, r_k, b_k, s_k) \in \Phi$ with $s_k < 2^{-k-2}$ and $|x_t - a_k| + 2^{-t} < r_k$. This condition is bounded in $\Phi$ and $x$, it implies $|x - a_k| < r_k$, and some pair satisfies it by totality; so the sequence $(a_k, r_k, b_k, s_k)_k$ exists by $\Delta^0_1$ comprehension. The two intervals around $a_k$ and $a_l$ contain $x$, so consistency gives $|b_k - b_l| \leq s_k + s_l \leq 2^{-k-1}$ for $k \leq l$, and $y = (b_k)$ is a real. If $(a, r)\, \Phi\, (b, s)$ and $|x - a| < r$, then $|b - b_k| \leq s + 2^{-k-2}$ by consistency, and $|b_k - y| \leq 2^{-k}$, so $|y - b| \leq s$; uniqueness follows from totality. The function $f$ is continuous: given $x$ and $\varepsilon > 0$, take $(a, r)\, \Phi\, (b, s)$ with $|x - a| < r$ and $s < \varepsilon / 2$, and $\delta = r - |x - a|$; then $|f(x) - f(x')| \leq 2s < \varepsilon$ whenever $|x' - x| < \delta$. Simpson (Section II.6) and Dzhafarov–Mummert (Section 10.3) define codes for continuous functions between arbitrary complete separable metric spaces in the same way.
+
+Every continuous function on $[0, 1]$ has a code, and the codes of computable functions can be chosen computable. The values of a coded function are compared with reals by $\Sigma^0_1$ formulas.
+
+:::lemma{#lem-value-sigma1}
+$\mathsf{RCA}_0$ proves: if $\Phi$ codes $f : [0, 1] \to \mathbb R$, $x \in [0, 1]$ and $c$ are reals, then $f(x) < c$ if and only if there are $a, r, b, s$ with $(a, r)\, \Phi\, (b, s)$, $|x - a| < r$ and $b + s < c$. In particular, $f(x) < c$ and, symmetrically, $f(x) > c$ are expressed by $\Sigma^0_1$ formulas with parameters $\Phi$, $x$ and $c$.
+:::
+
+:::proof{of=lem-value-sigma1}
+If $(a, r)\, \Phi\, (b, s)$ with $|x - a| < r$, then $f(x) \leq b + s$ by the definition of the value, so $b + s < c$ gives $f(x) < c$. Conversely, if $f(x) < c$, take a rational $\varepsilon > 0$ with $f(x) + 2\varepsilon < c$, and by totality $(a, r)\, \Phi\, (b, s)$ with $|x - a| < r$ and $s < \varepsilon$. Then $b \leq f(x) + s$, so $b + s \leq f(x) + 2s < c$. The right-hand side is $\Sigma^0_1$: the relation $(a, r)\, \Phi\, (b, s)$ is $\Sigma^0_1$, and so are the strict inequalities between reals.
+:::
 
 ## The intermediate value theorem
+
+The classical proof by bisection keeps an interval $[a_n, b_n]$ with $f(a_n) < 0 < f(b_n)$, and halves it at each step (:ref{#fig-bisection}). To carry it out in $\mathsf{RCA}_0$, the choice of the half must be computable from the code of $f$. Comparing $f$ at a midpoint with $0$ is $\Sigma^0_1$ by :ref{#lem-value-sigma1}, but deciding it needs a $\Pi^0_1$ definition too, which is available only if $f$ does not vanish at the midpoint.
+
+:::figure[Bisection for $f(0) < 0 < f(1)$. At each step the interval $[a_n, b_n]$ is halved, keeping the half on which $f$ changes sign; the intervals shrink to a zero of $f$.]{#fig-bisection}
+<svg class="fig" viewBox="0 0 600 350" width="600" role="img" aria-label="Bisection: the intervals [a_n, b_n] halve at each step and keep f(a_n) below 0 and f(b_n) above 0"><line x1="60" y1="93.3" x2="550" y2="93.3" class="axis"/><line x1="70" y1="15" x2="70" y2="200" class="axis"/><line x1="530" y1="89.3" x2="530" y2="97.3" class="axis"/><text x="64" y="109.3" text-anchor="end" class="mrm" font-size="13">0</text><text x="530" y="111.3" text-anchor="middle" class="mrm" font-size="13">1</text><polyline points="70.0,173.3 72.3,172.1 74.6,170.9 76.9,169.7 79.2,168.4 81.5,167.2 83.8,166.0 86.1,164.8 88.4,163.6 90.7,162.4 93.0,161.2 95.3,160.0 97.6,158.8 99.9,157.6 102.2,156.5 104.5,155.3 106.8,154.2 109.1,153.0 111.4,151.9 113.7,150.8 116.0,149.7 118.3,148.6 120.6,147.5 122.9,146.5 125.2,145.4 127.5,144.4 129.8,143.4 132.1,142.4 134.4,141.4 136.7,140.4 139.0,139.5 141.3,138.5 143.6,137.6 145.9,136.7 148.2,135.8 150.5,134.9 152.8,134.1 155.1,133.3 157.4,132.5 159.7,131.7 162.0,130.9 164.3,130.1 166.6,129.4 168.9,128.7 171.2,128.0 173.5,127.3 175.8,126.7 178.1,126.0 180.4,125.4 182.7,124.8 185.0,124.3 187.3,123.7 189.6,123.2 191.9,122.6 194.2,122.1 196.5,121.7 198.8,121.2 201.1,120.8 203.4,120.3 205.7,119.9 208.0,119.5 210.3,119.1 212.6,118.8 214.9,118.4 217.2,118.1 219.5,117.8 221.8,117.5 224.1,117.2 226.4,117.0 228.7,116.7 231.0,116.5 233.3,116.2 235.6,116.0 237.9,115.8 240.2,115.6 242.5,115.4 244.8,115.3 247.1,115.1 249.4,114.9 251.7,114.8 254.0,114.6 256.3,114.5 258.6,114.4 260.9,114.2 263.2,114.1 265.5,114.0 267.8,113.9 270.1,113.8 272.4,113.7 274.7,113.6 277.0,113.5 279.3,113.4 281.6,113.3 283.9,113.1 286.2,113.0 288.5,112.9 290.8,112.8 293.1,112.7 295.4,112.6 297.7,112.4 300.0,112.3 302.3,112.1 304.6,112.0 306.9,111.8 309.2,111.6 311.5,111.5 313.8,111.3 316.1,111.1 318.4,110.9 320.7,110.6 323.0,110.4 325.3,110.2 327.6,109.9 329.9,109.6 332.2,109.3 334.5,109.0 336.8,108.7 339.1,108.4 341.4,108.0 343.7,107.7 346.0,107.3 348.3,106.9 350.6,106.5 352.9,106.0 355.2,105.6 357.5,105.1 359.8,104.6 362.1,104.1 364.4,103.6 366.7,103.0 369.0,102.5 371.3,101.9 373.6,101.3 375.9,100.6 378.2,100.0 380.5,99.3 382.8,98.6 385.1,97.9 387.4,97.2 389.7,96.5 392.0,95.7 394.3,94.9 396.6,94.1 398.9,93.3 401.2,92.5 403.5,91.6 405.8,90.8 408.1,89.9 410.4,88.9 412.7,88.0 415.0,87.1 417.3,86.1 419.6,85.1 421.9,84.1 424.2,83.1 426.5,82.1 428.8,81.1 431.1,80.0 433.4,78.9 435.7,77.9 438.0,76.8 440.3,75.7 442.6,74.5 444.9,73.4 447.2,72.3 449.5,71.1 451.8,70.0 454.1,68.8 456.4,67.6 458.7,66.4 461.0,65.2 463.3,64.0 465.6,62.8 467.9,61.6 470.2,60.4 472.5,59.2 474.8,58.0 477.1,56.7 479.4,55.5 481.7,54.3 484.0,53.1 486.3,51.8 488.6,50.6 490.9,49.4 493.2,48.2 495.5,46.9 497.8,45.7 500.1,44.5 502.4,43.3 504.7,42.1 507.0,40.9 509.3,39.7 511.6,38.6 513.9,37.4 516.2,36.2 518.5,35.1 520.8,33.9 523.1,32.8 525.4,31.7 527.7,30.6 530.0,29.5" class="ink-stroke" stroke-width="1.8"/><line x1="70.0" y1="222" x2="530.0" y2="222" class="accent-stroke" stroke-width="2.2"/><line x1="70.0" y1="218" x2="70.0" y2="226" class="accent-stroke" stroke-width="1.5"/><line x1="530.0" y1="218" x2="530.0" y2="226" class="accent-stroke" stroke-width="1.5"/><text x="24" y="226" class="math" font-size="13">n<tspan class="mrm"> = 0</tspan></text><circle cx="70.0" cy="173.3" r="3" class="ink-fill"/><circle cx="530.0" cy="29.5" r="3" class="accent-fill"/><line x1="300.0" y1="242" x2="530.0" y2="242" class="accent-stroke" stroke-width="2.2"/><line x1="300.0" y1="238" x2="300.0" y2="246" class="accent-stroke" stroke-width="1.5"/><line x1="530.0" y1="238" x2="530.0" y2="246" class="accent-stroke" stroke-width="1.5"/><text x="24" y="246" class="math" font-size="13">n<tspan class="mrm"> = 1</tspan></text><circle cx="300.0" cy="112.3" r="3" class="ink-fill"/><circle cx="530.0" cy="29.5" r="3" class="accent-fill"/><line x1="300.0" y1="262" x2="415.0" y2="262" class="accent-stroke" stroke-width="2.2"/><line x1="300.0" y1="258" x2="300.0" y2="266" class="accent-stroke" stroke-width="1.5"/><line x1="415.0" y1="258" x2="415.0" y2="266" class="accent-stroke" stroke-width="1.5"/><text x="24" y="266" class="math" font-size="13">n<tspan class="mrm"> = 2</tspan></text><circle cx="300.0" cy="112.3" r="3" class="ink-fill"/><circle cx="415.0" cy="87.1" r="3" class="accent-fill"/><line x1="357.5" y1="282" x2="415.0" y2="282" class="accent-stroke" stroke-width="2.2"/><line x1="357.5" y1="278" x2="357.5" y2="286" class="accent-stroke" stroke-width="1.5"/><line x1="415.0" y1="278" x2="415.0" y2="286" class="accent-stroke" stroke-width="1.5"/><text x="24" y="286" class="math" font-size="13">n<tspan class="mrm"> = 3</tspan></text><circle cx="357.5" cy="105.1" r="3" class="ink-fill"/><circle cx="415.0" cy="87.1" r="3" class="accent-fill"/><line x1="386.2" y1="302" x2="415.0" y2="302" class="accent-stroke" stroke-width="2.2"/><line x1="386.2" y1="298" x2="386.2" y2="306" class="accent-stroke" stroke-width="1.5"/><line x1="415.0" y1="298" x2="415.0" y2="306" class="accent-stroke" stroke-width="1.5"/><text x="24" y="306" class="math" font-size="13">n<tspan class="mrm"> = 4</tspan></text><line x1="386.2" y1="322" x2="400.6" y2="322" class="accent-stroke" stroke-width="2.2"/><line x1="386.2" y1="318" x2="386.2" y2="326" class="accent-stroke" stroke-width="1.5"/><line x1="400.6" y1="318" x2="400.6" y2="326" class="accent-stroke" stroke-width="1.5"/><text x="24" y="326" class="math" font-size="13">n<tspan class="mrm"> = 5</tspan></text><text x="296.0" y="254.0" text-anchor="end" class="math" font-size="13">a<tspan class="mrm" font-size="8" dy="4">2</tspan></text><text x="419.0" y="254.0" text-anchor="start" class="math" font-size="13">b<tspan class="mrm" font-size="8" dy="4">2</tspan></text><text x="507.0" y="28.9" text-anchor="middle" class="math" font-size="14">f</text><circle cx="78" cy="336" r="3" class="ink-fill"/><text x="86" y="340" class="label">left endpoints: </text><text x="180" y="340" class="math" font-size="13">f<tspan class="mrm">(</tspan>a<tspan class="mrm" font-size="9" dy="3">n</tspan><tspan class="mrm" dy="-3">) &lt; 0</tspan></text><circle cx="298" cy="336" r="3" class="accent-fill"/><text x="306" y="340" class="label">right endpoints: </text><text x="408" y="340" class="math" font-size="13">f<tspan class="mrm">(</tspan>b<tspan class="mrm" font-size="9" dy="3">n</tspan><tspan class="mrm" dy="-3">) &gt; 0</tspan></text></svg>
+:::
 
 :::theorem{#thm-ivt-rca}
 $\mathsf{RCA}_0$ proves the intermediate value theorem: if $f : [0, 1] \to \mathbb R$ is continuous with $f(0) < 0 < f(1)$, then $f(x) = 0$ for some $x \in [0, 1]$.
 :::
 
 :::proof{of=thm-ivt-rca}
-If $f(q) = 0$ for some rational $q \in [0, 1]$, we are done. Otherwise, for every rational $q \in [0, 1]$, $f(q) < 0$ or $f(q) > 0$. Both relations are $\Sigma^0_1$ in $q$ and the code of $f$, and since exactly one holds, "$f(q) < 0$" is equivalent to the $\Pi^0_1$ formula "not $f(q) > 0$". By $\Delta^0_1$ comprehension, the set $N$ of rationals $q \in [0, 1]$ with $f(q) < 0$ exists.
+If $f(q) = 0$ for some rational $q \in [0, 1]$, we are done. Otherwise, for every rational $q \in [0, 1]$, $f(q) < 0$ or $f(q) > 0$. Both relations are $\Sigma^0_1$ in $q$ and the code of $f$ (:ref{#lem-value-sigma1}), and since exactly one holds, "$f(q) < 0$" is equivalent to the $\Pi^0_1$ formula "not $f(q) > 0$". By $\Delta^0_1$ comprehension, the set $N$ of rationals $q \in [0, 1]$ with $f(q) < 0$ exists.
 
 Define rationals $a_0 = 0$, $b_0 = 1$, and, with $c_n = (a_n + b_n)/2$, $(a_{n+1}, b_{n+1}) = (c_n, b_n)$ if $c_n \in N$, and $(a_n, c_n)$ otherwise. The sequence is defined by primitive recursion relative to $N$, hence exists in $\mathsf{RCA}_0$, and an induction on the bounded formula expressing the recursion shows that $a_n \leq a_{n+1} < b_{n+1} \leq b_n$, $b_n - a_n = 2^{-n}$, $f(a_n) < 0$ and $f(b_n) > 0$ for every $n$. So $x = (a_n)$ is a real, and $(b_n)$ represents the same real.
 
@@ -93,48 +84,28 @@ Why does the existence of the sequence $(a_n, b_n)$ not require arithmetic compr
   $f$ is an arbitrary continuous function of the model; only computability relative to its code is used.
 :::
 
-## Specker sequences
-
-The monotone convergence theorem states that every bounded non-decreasing sequence of reals converges. It is true in $\mathcal P(\nat)$, but fails in the ω-model $\mathrm{REC}$.
-
-:::proposition[Specker]{#prop-specker}
-There is a computable non-decreasing sequence of rationals in $[0, 1]$ whose limit is not a computable real. Consequently $\mathsf{RCA}_0$ does not prove the monotone convergence theorem.
-:::
-
-:::proof{of=prop-specker}
-Let $f$ be a computable injective function with range $\emptyset'$, and $x_n = \sum_{i \leq n} 2^{-f(i) - 1}$. The sequence is computable, non-decreasing, bounded by $\sum_m 2^{-m-1} = 1$, and converges to $x = \sum_{m \in \emptyset'} 2^{-m-1}$. If $x$ were computable, given $m$ one could compute $n$ such that $x - x_n < 2^{-m-1}$; then $m \in \emptyset'$ if and only if $m = f(i)$ for some $i \leq n$, since a later $f(i) = m$ would add $2^{-m-1}$ to the remaining sum. So $\emptyset'$ would be computable.
-
-In $\mathrm{REC}$, the sequence $(x_n)$ exists, and it is bounded and non-decreasing by absoluteness. It has no limit in the model: "$y$ is the limit of $(x_n)$" is arithmetic, so a limit $y \in \mathrm{REC}$ would be a computable real equal to $x$. So the monotone convergence theorem fails in the ω-model $\mathrm{REC}$ of $\mathsf{RCA}_0$.
-:::
-
-A computable non-decreasing bounded sequence of rationals whose limit is not computable is called a **Specker sequence**. The same construction, carried out for an arbitrary injective function, shows that the monotone convergence theorem implies the existence of the ranges of injective functions, and thus arithmetic comprehension (:ref{#thm-monotone-aca}).
-
 ## Exercises
 
 ::::exercise{difficulty=1}
-Show that $\mathsf{RCA}_0$ proves that every continuous function $f : [0, 1] \to \mathbb R$ with $f(0) < c < f(1)$ takes the value $c$, for every real $c$.
+Show that $\mathsf{RCA}_0$ proves that every continuous function $f : [0, 1] \to \mathbb R$ with $f(0) < c < f(1)$ takes the value $c$, for every real $c$, by producing a code for $f - c$.
 
 :::solution
-Repeat the proof of :ref{#thm-ivt-rca} with $c$ in place of $0$. Let $\Phi$ be the code of $f$. For a rational $q \in [0, 1]$, $f(q) < c$ holds if and only if there is $(a, r, b, s) \in \Phi$ with $|q - a| < r$ and $b + s < c$: such a quadruple gives $f(q) \leq b + s < c$, and conversely, if $f(q) < c$, a quadruple with $|q - a| < r$ and $s < (c - f(q))/2$ satisfies $b + s \leq f(q) + 2s < c$. So "$f(q) < c$" is $\Sigma^0_1$ in $q$, $\Phi$ and $c$, and so is "$f(q) > c$". If $f(q) = c$ for some rational $q \in [0, 1]$, we are done. Otherwise the set $N = \{ q : f(q) < c \}$ exists by $\Delta^0_1$ comprehension, and the bisection and the final argument are unchanged.
+Let $\Phi$ code $f$, and $c = (c_k)$. Let $\Psi$ be the set of quintuples $(\langle n, k \rangle, a, r, b - c_k, s + 2^{-k+1})$ for $(n, a, r, b, s) \in \Phi$ and $k \in \nat$. Membership in $\Psi$ is decided by decoding $\langle n, k \rangle$ and checking membership in $\Phi$, so $\Psi$ exists by $\Delta^0_1$ comprehension; the index of $\Psi$ records the $k$ used. We check that $\Psi$ codes $g = f - c$.
 
-Reducing to :ref{#thm-ivt-rca} through $g = f - c$ needs a code for $g$. The natural candidate, the set of quadruples $(a, r, b - c_k, s + 2^{-k+1})$ for $(a, r, b, s) \in \Phi$ and $c = (c_k)$, is defined by a $\Sigma^0_1$ formula, with an unbounded search for $k$, so $\Delta^0_1$ comprehension does not apply to it directly; the direct argument avoids this.
-:::
-::::
+- *Consistency.* If $(a, r)\, \Phi\, (b, s)$ and $(a', r')\, \Phi\, (b', s')$ with $|a - a'| < r + r'$, then $|(b - c_k) - (b' - c_{k'})| \leq s + s' + |c_k - c_{k'}| \leq s + s' + 2^{-\min(k, k')}$, which is at most $(s + 2^{-k+1}) + (s' + 2^{-k'+1})$.
+- *Totality.* Given $x$ and $\varepsilon > 0$, take $k$ with $2^{-k+1} < \varepsilon / 2$ and $(a, r)\, \Phi\, (b, s)$ with $|x - a| < r$ and $s < \varepsilon / 2$.
+- *Value.* If $(a, r)\, \Phi\, (b, s)$ and $|x - a| < r$, then $|(f(x) - c) - (b - c_k)| \leq s + 2^{-k} \leq s + 2^{-k+1}$, so $f(x) - c$ is the value of $\Psi$ at $x$.
 
-::::exercise{difficulty=2}
-A real $x$ is **left-c.e.** if the set of rationals $q < x$ is c.e. Show that $x$ is left-c.e. if and only if it is the limit of a computable non-decreasing sequence of rationals. Deduce that every non-computable left-c.e. real, such as Chaitin's halting probability $\Omega$ (:ref{#thm-omega}), is the limit of a Specker sequence.
+Then $g(0) < 0 < g(1)$, and :ref{#thm-ivt-rca} gives $x$ with $f(x) - c = 0$.
 
-:::solution
-If $x$ is the limit of a computable non-decreasing sequence $(x_n)$ of rationals, then $q < x$ if and only if $q < x_n$ for some $n$: each $x_n$ is at most $x$, and if $q < x$, then $x_n > q$ for $n$ large. This is a c.e. condition on $q$. Conversely, let $q_0, q_1, \dots$ be a computable enumeration of the non-empty c.e. set $L = \{ q : q < x \}$, and $x_n = \max_{i \leq n} q_i$. The sequence $(x_n)$ is computable, non-decreasing and bounded by $x$; for $\varepsilon > 0$, some rational of $(x - \varepsilon, x)$ belongs to $L$, so $x_n > x - \varepsilon$ for $n$ large. Hence $x_n \to x$.
-
-If $x$ is moreover not computable, such a sequence, bounded by any rational above $x$, is a Specker sequence. The real $\Omega$ is the limit of the computable non-decreasing sequence $(\Omega_s)$ of rationals, and it is not computable, since $\Omega \equiv_T \emptyset'$ (:ref{#thm-omega}).
+Without the index, the natural candidate would be the set of quadruples $(a, r, b', s')$ such that $(a, r, b' + c_k, s' - 2^{-k+1}) \in \Phi$ for some $k$: an unbounded search for $k$, so a $\Sigma^0_1$ definition to which $\Delta^0_1$ comprehension does not apply.
 :::
 ::::
 
 ## Notes and references
 
-The coding of reals and continuous functions follows Simpson's monograph, Sections II.4–II.6. Specker (1949) constructed computable monotone bounded sequences without computable limit, one of the first results of computable analysis. Computable analysis studies the reals and continuous functions under these codings; see Weihrauch's book.
+The coding of continuous functions follows Simpson, Section II.6: Definition II.6.1, and Theorem II.6.6, the intermediate value theorem, with the same proof. Dzhafarov–Mummert, Sections 10.3–10.4, give the same development, with :ref{#lem-value-sigma1} as their Lemma 10.3.7 and the intermediate value theorem as their Theorem 10.4.1; their Proposition 3.7.4 shows that the theorem does not admit uniformly computable solutions. Its Weihrauch degree was determined by Brattka and Gherardi (2011); see also Dzhafarov–Mummert, Theorem 10.4.3.
 
-- E. Specker, *Nicht konstruktiv beweisbare Sätze der Analysis*, Journal of Symbolic Logic 14 (1949), 145–158.
-- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009.
-- K. Weihrauch, *Computable Analysis*, Springer, 2000.
+- V. Brattka and G. Gherardi, *Effective choice and boundedness principles in computable analysis*, Bulletin of Symbolic Logic 17 (2011), 73–117.
+- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section II.6.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.7 and 10.3–10.4.

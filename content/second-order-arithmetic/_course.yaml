@@ -3,17 +3,19 @@ area: reverse-math
 level: Intermediate
 order: 1
 prerequisites: [arithmetic-hierarchy, pi01-classes]
-summary: The language and models of second-order arithmetic, the base system RCA₀, and the formalization of analysis.
+summary: The language and models of second-order arithmetic, the base system RCA₀, non-standard models, and the formalization of analysis.
 description: >
   The framework of reverse mathematics: the two-sorted language of second-order
   arithmetic, its axioms and Henkin models, ω-models and the absoluteness of
   arithmetic formulas, the base theory RCA₀ and its characterization by Turing
-  ideals, and the coding of real numbers and continuous functions, with the
-  intermediate value theorem in RCA₀ and Specker sequences.
+  ideals, non-standard models and overspill, and the coding of real numbers and
+  continuous functions, with Specker sequences and the intermediate value
+  theorem in RCA₀.
 objectives:
   - Read and classify formulas of second-order arithmetic
   - Use ω-models and the completeness theorem to prove unprovability
   - Characterize the ω-models of RCA₀ as Turing ideals
+  - Work in non-standard models of RCA₀ with overspill, and distinguish finite from bounded sets
   - Formalize real numbers and continuous functions in RCA₀
   - Prove the intermediate value theorem in RCA₀ and refute monotone convergence in REC
-lessons: [language-and-models, rca0, analysis-in-rca0]
+lessons: [language-and-models, rca0, nonstandard-models, real-numbers, analysis-in-rca0]

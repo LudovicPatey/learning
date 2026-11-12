@@ -1,11 +1,13 @@
 ---
 title: The base theory RCA₀
 summary: Δ⁰₁ comprehension and Σ⁰₁ induction; consequences of Σ⁰₁ induction; the ω-models of RCA₀ are the Turing ideals; the computable sets form the least ω-model, and non-provability in RCA₀ follows from computability-theoretic constructions.
-duration: 35
+duration: 40
 prerequisites: [language-and-models, pi01-classes/computable-members]
 ---
 
-The base theory of reverse mathematics should be weak enough to leave the interesting theorems unprovable, and strong enough to carry out the codings of mathematical objects. Friedman's choice is $\mathsf{RCA}_0$, for **recursive comprehension axiom**: it asserts the existence of the sets computable from given sets, and allows induction for properties that can be verified by a search. Its ω-models are exactly the classes of sets closed under relative computability and join.
+The base theory of reverse mathematics should be weak enough to leave the interesting theorems unprovable, and strong enough to carry out the codings of mathematical objects. Friedman's choice is $\mathsf{RCA}_0$, for **recursive comprehension axiom**: it asserts the existence of the sets computable from given sets, and allows induction for properties that can be verified by a search. Its ω-models are exactly the classes of sets closed under relative computability and join, the **Turing ideals**.
+
+The resulting picture is the method of the whole track. To show that a theorem is provable in $\mathsf{RCA}_0$, one gives a proof whose constructions are computable relative to the data; to show that it is not, one finds a Turing ideal, usually the computable sets, in which some instance of the theorem has no solution.
 
 ## The system
 
@@ -18,6 +20,12 @@ for $\varphi$ a $\Sigma^0_1$ formula and $\psi$ a $\Pi^0_1$ formula in which $X$
 :::
 
 Being $\Delta^0_1$ is not a syntactic property, so the scheme asks for a $\Sigma^0_1$ and a $\Pi^0_1$ definition and assumes their equivalence. The subscript $0$ records the restriction of induction to $\Sigma^0_1$ formulas. The induction axiom is the instance of $\Sigma^0_1$ induction for the bounded formula $n \in X$, so $\mathsf{RCA}_0$ proves it.
+
+The choice of $\Sigma^0_1$ induction is a compromise. Comprehension for computable sets, with the induction axiom, directly gives induction for $\Delta^0_1$ properties only (:ref{#prop-induction-comprehension}), and this does not suffice to justify definitions by recursion: Hirschfeldt and Shore showed that, over a weaker base, $\Sigma^0_1$ induction is equivalent to the existence of finite sequences defined by iterating a function given by a bounded formula. Induction for more complex formulas, on the other hand, is not needed for most of ordinary mathematics, and without it the first-order consequences of $\mathsf{RCA}_0$ are exactly those of $\Sigma^0_1$ induction (:ref{to="nonstandard-models"}).
+
+:::example{#ex-rca-range}
+$\mathsf{RCA}_0$ proves that a strictly increasing function $f : \nat \to \nat$ has a range. The range is defined by the $\Sigma^0_1$ formula $\exists i\, f(i) = n$. It is also defined by the bounded formula $\exists i \leq n\, f(i) = n$, since $f(i) \geq i$ for every $i$; this inequality is proved by $\Sigma^0_1$ induction on $i$ for the formula $\exists m\, (\langle i, m \rangle \in f \wedge m \geq i)$: $f(0) \geq 0$, and $f(i + 1) > f(i) \geq i$. A bounded formula is both $\Sigma^0_1$ and $\Pi^0_1$, so $\Delta^0_1$ comprehension applies. For an injective function that is not increasing, no bound on $i$ is available, and the range need not exist: this is the subject of :ref{to="big-five/aca0"}.
+:::
 
 Induction for $\Sigma^0_1$ formulas extends to their negations.
 
@@ -35,6 +43,13 @@ The development of arithmetic in $\mathsf{RCA}_0$ follows the usual lines: one d
 
 :::definition{#def-turing-ideal}
 A **Turing ideal** is a non-empty class $\mathcal I \subseteq \mathcal P(\nat)$ such that $X \oplus Y \in \mathcal I$ for all $X, Y \in \mathcal I$, and $Y \in \mathcal I$ whenever $Y \leq_T X \in \mathcal I$.
+:::
+
+:::example{#ex-turing-ideals}
+For every set $A$, the class $\{ X : X \leq_T A \}$ is a Turing ideal, since $X, Y \leq_T A$ implies $X \oplus Y \leq_T A$; for $A$ computable, it is the class $\mathrm{REC}$ of computable sets. The classes of $\Delta^0_2$ sets and of arithmetic sets are Turing ideals. Both closure conditions are needed.
+
+- The class of c.e. sets is closed under join but not downward: the complement of $\emptyset'$ is computable from $\emptyset'$ and is not c.e.
+- If $A$ and $B$ are Turing incomparable, the class $\{ X : X \leq_T A \text{ or } X \leq_T B \}$ is closed downward but not under join: $A \oplus B \leq_T A$ would give $B \leq_T A$.
 :::
 
 :::theorem[Friedman]{#thm-rca-turing-ideal}
@@ -89,7 +104,7 @@ Why does an unprovability result obtained with $\mathrm{REC}$ hold for $\mathsf{
 
 ## The role of induction
 
-In ω-models, induction is free. In general models, the restriction to $\Sigma^0_1$ induction has real consequences: there are models of $\mathsf{RCA}_0$ in which $\Sigma^0_2$ induction fails, and statements of combinatorics, such as the infinite pigeonhole principle for arbitrarily many colors, are equivalent over $\mathsf{RCA}_0$ to forms of induction or bounding. These phenomena require non-standard models, and are studied in Hájek and Pudlák's monograph. The first-order part of $\mathsf{RCA}_0$ is exactly the arithmetic theory $\mathrm{I}\Sigma_1$: every arithmetic sentence provable in $\mathsf{RCA}_0$ is provable from the basic axioms and $\Sigma_1$ induction (Friedman). These results are proved in the specialized course on induction and conservation (:ref{to="induction-conservation/first-order-parts"}).
+In ω-models, induction is free, and all the arguments of this section concern only comprehension. In general models, the restriction to $\Sigma^0_1$ induction has real consequences: some models of $\mathsf{RCA}_0$ fail $\Sigma^0_2$ induction, and some statements of combinatorics are equivalent over $\mathsf{RCA}_0$ to forms of induction or bounding. The next lesson introduces the non-standard models in which these phenomena occur.
 
 ## Exercises
 
@@ -117,8 +132,9 @@ The common bound $s$ is what keeps $\varphi$ in $\Sigma^0_1$: the formula $\fora
 
 ## Notes and references
 
-Friedman introduced $\mathsf{RCA}$ with full induction, and the restricted system $\mathsf{RCA}_0$ appears in Friedman (1976) and in Simpson's work. The conservation of $\mathsf{RCA}_0$ over $\mathrm I\Sigma_1$ is due to Friedman; a proof is in Simpson, Section IX.1.
+Friedman introduced $\mathsf{RCA}_0$ (1976), in an equivalent form based on primitive recursion rather than $\Sigma^0_1$ induction; the present axiomatization is Simpson's (Definition II.1.5). The characterization of its ω-models (:ref{#thm-rca-turing-ideal}) is Simpson, Theorem II.1.7, and Dzhafarov–Mummert, Theorem 5.5.3. The formalization of primitive recursion and the $\Pi^0_1$ induction scheme are in Simpson, Section II.3 (Theorem II.3.4 and Corollary II.3.10, the latter proved there through bounded $\Sigma^0_1$ comprehension, Theorem II.3.9); Dzhafarov–Mummert discuss the choice of $\Sigma^0_1$ induction in their Section 6.6, where the result of Hirschfeldt and Shore is Theorem 6.6.1.
 
 - H. Friedman, *Systems of second order arithmetic with restricted induction, I, II* (abstracts), Journal of Symbolic Logic 41 (1976), 557–559.
-- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Chapters II and IX.
-- P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993.
+- D. R. Hirschfeldt and R. A. Shore, *Combinatorial principles weaker than Ramsey's theorem for pairs*, Journal of Symbolic Logic 72 (2007), 171–206.
+- S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Sections II.1–II.3.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 5.5 and Section 6.6.
