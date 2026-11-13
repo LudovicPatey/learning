@@ -1,0 +1,31 @@
+title: Jump compactness avoidance
+area: computability
+level: Advanced
+order: 18
+prerequisites: [jump-cone-avoidance, compactness-avoidance, lowness, ramsey-theorem, reducibilities]
+summary: Solutions whose jump is not PA relative to the jump of the parameter; why Mathias forcing with one reservoir produces cohesive sets; product largeness and product Mathias forcing; meta-conditions with branches, and the theorem of Monin and Patey that every Δ⁰₂ set has an infinite subset, of itself or of its complement, whose jump is not PA relative to ∅′; an ω-model of stable Ramsey's theorem for pairs that is not a model of Ramsey's theorem for pairs.
+description: >
+  Jump compactness avoidance combines second-jump control with compactness
+  avoidance. The course defines jump PA avoidance for problems and relates it
+  to cohesiveness: a problem with this property does not imply COH on
+  ω-models. It proves jump PA avoidance from a forcing question for Σ⁰₂
+  sentences that merges two negative answers, and shows that Mathias forcing
+  with a single reservoir in a partition regular class cannot have such a
+  question, since its generic sets are cohesive. It introduces large classes of
+  tuples of sets and product Mathias forcing, whose negative answers are merged
+  by duplicating the reservoirs. For the pigeonhole principle, it introduces the
+  index sets of Monin and Patey with their branches and a Ramsey property, the
+  meta-conditions carrying one pair of stems per branch, a question about sets of
+  branches and its weak merging, and forces the requirements with Liu's
+  valuations one jump up. It concludes that stable Ramsey's theorem for pairs
+  admits jump PA avoidance, so that it does not imply cohesiveness, nor Ramsey's
+  theorem for pairs, on ω-models, and discusses jump DNC avoidance.
+objectives:
+  - Define jump PA avoidance and its strong version, and use it to build ω-models without cohesive sets for the Jockusch–Stephan sequence
+  - Prove jump PA avoidance from a merging or weakly merging forcing question for Σ⁰₂ sentences with answers Σ⁰₁ relative to the condition
+  - Explain why Mathias forcing with one reservoir in a partition regular class produces cohesive sets, and why negative answers about Σ⁰₂ sentences cannot be merged with a single large class
+  - Use large classes of tuples of sets, their intersection and cover lemmas, and compute the complexity of their largeness over a low code of a Scott ideal
+  - Define product Mathias forcing, its promises and its Σ⁰₂ question, and merge two negative answers by duplicating the reservoirs
+  - Build the index sets with branches and their Ramsey property, define meta-conditions and valid parts, and prove that some part is always valid
+  - Prove that every Δ⁰₂ set has an infinite subset of itself or of its complement whose jump is not PA relative to ∅′, with weak merging and Liu's valuations one jump up, and deduce that SRT²₂ does not imply COH or RT²₂ on ω-models
+lessons: [jump-pa-avoidance, product-largeness, product-mathias, meta-conditions, meta-questions, delta2-jump-pa, srt22-coh]
