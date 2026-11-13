@@ -7,7 +7,7 @@ An online course platform for computability theory and related fields (algorithm
 - **Check-up questions right after proofs.** Multiple-choice questions that test one step of the argument, with an explanation for every option.
 - **Reader suggestions.** Readers select any passage, sign in with ORCID, and leave a typed suggestion (typo, unclear, mathematical error, …). Maintainers can resolve or decline them.
 
-The book sources in `external-data/` served as a reference for the level of detail. The four tracks (computability, algorithmic randomness, reverse mathematics, higher computability; 19 core courses) and eight specialized courses are written. Each course has a design log, `content/<course>/_design.md`, and the tracks have `content/tracks-design.md`.
+The book sources in `external-data/` served as a reference for the level of detail. Six tracks (computability, algorithmic randomness, reverse mathematics, higher computability, lowness and avoidance, models of arithmetic; 32 core courses) and seven specialized courses are written. Each course has a design log, `content/<course>/_design.md`, and the tracks have `content/tracks-design.md`.
 
 ## Running it
 

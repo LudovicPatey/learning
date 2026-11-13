@@ -4,7 +4,7 @@ This file is the memory of the project. Read it fully before changing anything, 
 
 ## What this project is
 
-**Computability Theory** is an online platform of course notes for **master's students who will do research in mathematical logic**: computability theory first, then algorithmic randomness, reverse mathematics and higher computability. It is a long-term project. Reliability, maintainability and the quality of the mathematics matter more than features.
+**Computability Theory** is an online platform of course notes for **master's students who will do research in mathematical logic**: computability theory first, then algorithmic randomness, reverse mathematics, higher computability, lowness and avoidance (effective forcing), and models of arithmetic. It is a long-term project. Reliability, maintainability and the quality of the mathematics matter more than features.
 
 `external-data/` (git-ignored, copyrighted, never committed or uploaded) holds reference material: the LaTeX sources of Monin & Patey, *Computability theory* (`external-data/monin-patey/`), which set the expected level of precision, and PDFs of Soare (*Turing Computability*, 2016), Downey–Hirschfeldt (*Algorithmic Randomness and Complexity*), Nies (*Computability and Randomness*), Simpson (*Subsystems of Second Order Arithmetic*), Hirschfeldt (*Slicing the Truth*), Dzhafarov–Mummert (*Reverse Mathematics*) and Weihrauch (*Computable Analysis*). Courses are new texts, not transcriptions of these books.
 

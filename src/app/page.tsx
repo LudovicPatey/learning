@@ -65,8 +65,8 @@ export default async function Home() {
             <h1>Computability Theory</h1>
             <p className="lead">
               Lecture notes for master's students in logic, organized as short courses with explicit prerequisites. They cover
-              classical computability theory and its applications to algorithmic randomness, reverse mathematics and higher
-              computability.
+              classical computability theory and its applications to algorithmic randomness, reverse mathematics, higher
+              computability and effective forcing, and the model theory of first-order arithmetic.
             </p>
             <div className="hero-ctas">
               {firstCourse && (
