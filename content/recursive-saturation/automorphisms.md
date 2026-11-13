@@ -1,7 +1,7 @@
 ---
 title: Automorphisms and fixed cuts
 summary: Countable recursively saturated models of PA have non-trivial automorphisms; the largest initial segment fixed pointwise by an automorphism is closed under exponentiation; conversely, every exponential cut of a countable recursively saturated model of PA is the fixed cut of an automorphism (Smoryński), by a back-and-forth argument with bounded types and the pigeonhole principle.
-duration: 40
+duration: 45
 prerequisites: [back-and-forth, cuts-and-extensions/weak-konig-cuts]
 ---
 
@@ -45,7 +45,7 @@ By :ref{#ex-exp-cut-closed}, $\mathrm{I_{fix}}(g)$ is also closed under addition
 
 ## Types over a bounded part of the model
 
-For tuples $\bar r, \bar s$ of the same length and $b \in M$, write $\bar r \equiv_b \bar s$ if $\mathrm{tp}(\bar r, x) = \mathrm{tp}(\bar s, x)$ for every $x < b$. Then $\mathrm{tp}(\bar r) = \mathrm{tp}(\bar s)$, and $\bar r \equiv_{b'} \bar s$ for $b' \leq b$. If an automorphism maps $\bar r$ to $\bar s$ and fixes every element below $b$, then $\bar r \equiv_b \bar s$.
+For tuples $\bar r, \bar s$ of the same length and $b \in M$, write $\bar r \equiv_b \bar s$ if $\mathrm{tp}(\bar r, x) = \mathrm{tp}(\bar s, x)$ for every $x < b$. If $b > 0$, then $\mathrm{tp}(\bar r) = \mathrm{tp}(\bar s)$, and $\bar r \equiv_{b'} \bar s$ for $b' \leq b$. If an automorphism maps $\bar r$ to $\bar s$ and fixes every element below $b$, then $\bar r \equiv_b \bar s$.
 
 :::lemma[Kotlarski; Smoryński; Vencovská]{#lem-aut-extend}
 Let $M$ be recursively saturated, $a \in M$ non-standard, and $\bar r \equiv_{2^{a^2}} \bar s$. For every $r \in M$ there is $s \in M$ with $(\bar r, r) \equiv_a (\bar s, s)$.

@@ -86,7 +86,7 @@ Where is it used that $\Phi$ has finitely many parameters?
   Completeness comes from the choice of each $\varphi_n$.
 :::
 
-For uncountable structures the theorem fails: there are uncountable recursively saturated models of $\mathrm{PA}$ that are not resplendent (Kaye's book). Conversely, Barwise showed that every resplendent structure for a finite language is recursively saturated (Schlipf, 1978), so for countable structures in a finite language, such as models of $\mathrm{PA}$, the two notions coincide.
+For uncountable structures the theorem fails: there are uncountable recursively saturated models of $\mathrm{PA}$ that are not resplendent (see the next lesson). Conversely, Barwise showed that every resplendent structure for a finite language is recursively saturated (Schlipf, 1978), so for countable structures in a finite language, such as models of $\mathrm{PA}$, the two notions coincide.
 
 ## Inductive satisfaction classes for standard formulas
 
@@ -121,7 +121,7 @@ In the direction ($\Leftarrow$) of :ref{#thm-inductive-sat}, which property of $
 - [x] $S$ evaluates the standard formulas of every complexity at once, and induction holds for formulas mentioning $S$, so overspill applies to $\varphi$; no truth definition of $M$ covers all complexities.
 - [ ] $S$ is definable in $M$.
 
-  No partial satisfaction class is definable in $M$, by Tarski's argument.
+  No relation satisfying condition 2 is definable in $M$, by Tarski's argument (exercise below).
 - [ ] $S$ is correct on non-standard formulas.
 
   Nothing is required of $S$ on non-standard codes; the realizer is only checked on standard formulas.

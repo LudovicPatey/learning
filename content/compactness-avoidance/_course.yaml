@@ -30,4 +30,4 @@ objectives:
   - Prove Liu's theorem that RT²₂ admits PA avoidance, and deduce that RT²₂ does not imply WKL₀
   - Prove that WWKL admits strong PA avoidance, and use constant-bound traces of closed classes and Liu's lemma for blocks to compare it with RT²₂
   - Characterize the DNC degrees by homogeneous sets for Π⁰₁ classes of positive measure, prove DNC avoidance and preservation of immunity from countably merging questions, and compare the avoidance properties
-lessons: [pa-avoidance, weak-merging, ramsey-type-wkl, partition-forcing, liu-theorem, measure-and-closed-classes, dnc-avoidance]
+lessons: [pa-avoidance, pa-avoidance-examples, weak-merging, ramsey-type-wkl, partition-forcing, rwkl-pa-avoidance, liu-theorem, measure-and-closed-classes, closed-classes, rwwkl-dnc, dnc-avoidance]

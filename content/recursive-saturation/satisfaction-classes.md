@@ -5,13 +5,13 @@ duration: 45
 prerequisites: [resplendence, truth-and-provability/bounded-satisfaction]
 ---
 
-By Tarski's theorem, no model of arithmetic defines its own satisfaction relation. One can ask instead for an undefinable relation $S$, added to the model, that obeys Tarski's inductive clauses for **all** formulas of the model, including the non-standard ones, which have non-standard length and non-standard subformulas. Such an $S$ is a **full satisfaction class**. On standard formulas it agrees with satisfaction in the model, by induction on formulas in the metatheory; on non-standard formulas the clauses only relate each formula to its immediate subformulas, and nothing forces induction.
+By Tarski's theorem, no model of arithmetic defines its own satisfaction relation. One can ask instead for an undefinable relation $S$, added to the model, that obeys Tarski's inductive clauses for **all** formulas of the model, including the non-standard ones. Such an $S$ is a **full satisfaction class**. On non-standard formulas the clauses only relate each formula to its immediate subformulas, and nothing forces induction.
 
-This lesson proves that every countable recursively saturated model of $\mathrm I\Sigma_1$ carries a full satisfaction class (Kotlarski, Krajewski and Lachlan, 1981). The proof follows Enayat and Visser (2015). Because the clauses are **local**, finitely many of them can always be satisfied at once by a recursion on a finite set of formulas; compactness then gives an elementary extension in which all formulas of the original model are handled, iteration gives a full class on a larger model, and resplendence brings it back to the original model. The consequence for provability is that a full satisfaction class without induction adds nothing to Peano arithmetic. The next lesson proves the converse of the existence theorem.
+This lesson proves that every countable recursively saturated model of $\mathrm I\Sigma_1$ carries a full satisfaction class (Kotlarski, Krajewski and Lachlan, 1981). The proof follows Enayat and Visser (2015). Because the clauses are **local**, finitely many of them can always be satisfied at once by a recursion on a finite set of formulas; compactness then gives an elementary extension in which all formulas of the original model are handled, iteration gives a full class on a larger model, and resplendence brings it back to the original model. The next lesson proves the converse of the existence theorem.
 
 ## Syntax inside a model
 
-Let $M$ be a model of $\mathrm I\Sigma_1$. Formulas are coded as in :ref{#fact-syntax}, with the constructors $=$, $<$, $\neg$, $\wedge$, $\vee$, the bounded quantifiers $\exists v_i < v_j$, $\forall v_i < v_j$, and the unbounded quantifiers $\exists v_i$, $\forall v_i$. Let $\mathrm{Form}(z)$ be the $\Delta_1$ definition of the set of codes of formulas, obtained by course-of-values recursion like those of :ref{#fact-syntax}, and $\mathrm{Form}^M = \{ z \in M : M \models \mathrm{Form}(z) \}$. Its elements below the standard cut are the codes of actual formulas; the others are **non-standard formulas**. Each $z \in \mathrm{Form}^M$ decomposes, in $M$, as an atomic formula or as a constructor applied to its **direct subformulas**, which are smaller. Assignments are numbers $e$, with values $e(i)$, and $\mathrm{Val}(t, e)$ is the value of the term $t$ under $e$ (:ref{#fact-syntax}).
+Let $M$ be a model of $\mathrm I\Sigma_1$. Formulas are coded as in :ref{#fact-syntax}: atomic formulas $s = t$, $s < t$, the connectives $\neg$, $\wedge$, $\vee$, and the quantifiers $\exists v_i$, $\forall v_i$, $\exists v_i < v_j$, $\forall v_i < v_j$. Let $\mathrm{Form}(z)$ be the $\Delta_1$ definition of the set of codes of formulas, obtained by course-of-values recursion like those of :ref{#fact-syntax}, and $\mathrm{Form}^M = \{ z \in M : M \models \mathrm{Form}(z) \}$. Its elements below the standard cut are the codes of actual formulas; the others are **non-standard formulas**. Each $z \in \mathrm{Form}^M$ decomposes, in $M$, as an atomic formula or as a constructor applied to its **direct subformulas**, which are smaller. Assignments are numbers $e$, with values $e(i)$, and $\mathrm{Val}(t, e)$ is the value of the term $t$ under $e$ (:ref{#fact-syntax}).
 
 :::definition[Krajewski; Kotlarski, Krajewski, Lachlan]{#def-sat-class}
 Let $M$ be a model of $\mathrm I\Sigma_1$ and $F \subseteq \mathrm{Form}^M$ a set closed under direct subformulas. An **$F$-satisfaction class** for $M$ is a set $S \subseteq F \times M$ such that, for every $\theta \in F$ and every assignment $e \in M$, with $S(\theta, e)$ for $(\theta, e) \in S$:
@@ -25,12 +25,12 @@ Let $M$ be a model of $\mathrm I\Sigma_1$ and $F \subseteq \mathrm{Form}^M$ a se
 A **full satisfaction class** is a $\mathrm{Form}^M$-satisfaction class.
 :::
 
-The clauses are finitely many, and each is first-order in $\mathcal L_A \cup \{ S \}$: "$S$ is a full satisfaction class" is a single sentence $\tau(S)$. The theory $\mathrm{CT}^-$ is $\mathrm{PA} + \tau(S)$, in which induction is assumed only for formulas of $\mathcal L_A$. The set $F$ need not be definable in $M$, and the satisfaction class is not required to satisfy induction.
+The clauses are finitely many, and each is first-order in $\mathcal L_A \cup \{ S \}$: "$S$ is a full satisfaction class" is a single sentence $\tau(S)$. The theory $\mathrm{CT}^-$ is $\mathrm{PA} + \tau(S)$, in which induction is assumed only for formulas of $\mathcal L_A$. Neither $F$ nor $S$ need be definable, and no induction is required for $S$.
 
 :::example{#ex-sat-classes}
 1. In $\nat$, every formula is standard, and satisfaction in $\nat$ is the only full satisfaction class, by induction on formulas.
 2. In a model $M$, the standard formulas form a set $F$ closed under direct subformulas; $\{ (\ulcorner \theta \urcorner, e) : \theta \text{ standard}, M \models \theta(e) \}$ is the only $F$-satisfaction class, by induction on formulas in the metatheory. So a full satisfaction class agrees with satisfaction in $M$ on standard formulas.
-3. In a model $M$, the set $(\Delta^*_0)^M$ of codes of formulas with variable bounds is closed under direct subformulas, and $\mathrm{Sat}_0$ (:ref{#def-sat0}) defines a $(\Delta^*_0)^M$-satisfaction class for $M$: these are the Tarski conditions of :ref{#thm-sat0}. A non-standard bounded formula is thus evaluated correctly by a definable relation; unbounded quantifiers are what makes full satisfaction classes undefinable.
+3. In a model $M$, the set $(\Delta^*_0)^M$ of codes of formulas with variable bounds is closed under direct subformulas, and $\mathrm{Sat}_0$ (:ref{#def-sat0}) defines a $(\Delta^*_0)^M$-satisfaction class for $M$, by :ref{#thm-sat0}. Unbounded quantifiers are what makes full satisfaction classes undefinable.
 :::
 
 ## The theorem of Enayat and Visser
@@ -39,7 +39,7 @@ The clauses are finitely many, and each is first-order in $\mathcal L_A \cup \{ 
 Let $M$ be a model of $\mathrm I\Sigma_1$, $F_0 \subseteq \mathrm{Form}^M$ closed under direct subformulas, and $S_0$ an $F_0$-satisfaction class for $M$. There are an elementary extension $K \succcurlyeq M$ and a set $S \subseteq \mathrm{Form}^M \times K$ satisfying the clauses of :ref{#def-sat-class} for every $\theta \in \mathrm{Form}^M$ and every assignment $e \in K$ (with $x$ ranging over $K$), such that $S \cap (F_0 \times M) = S_0$.
 :::
 
-So all formulas of $M$ are handled, for all assignments of $K$; the new formulas of $K$ are not.
+All formulas of $M$ are handled, for all assignments of $K$; the new formulas of $K$ are not.
 
 :::proof{of=thm-enayat-visser}
 *The theory.* Add to $\mathcal L_A(M)$ a unary predicate $U_\theta$ for each $\theta \in \mathrm{Form}^M$, to be read as the set of assignments satisfying $\theta$. For each $\theta$, let $\tau_\theta$ be its Tarski clause, written with these predicates: for instance, if $\theta = \exists v_i\, \varphi$, $\tau_\theta$ is $\forall e\, \big( U_\theta(e) \leftrightarrow \exists x\ U_\varphi(e[i := x]) \big)$, and if $\theta$ is $s = t$, $\tau_\theta$ is $\forall e\, (U_\theta(e) \leftrightarrow \mathrm{Val}(s, e) = \mathrm{Val}(t, e))$. Let
@@ -91,14 +91,14 @@ Every countable recursively saturated model of $\mathrm I\Sigma_1$ has a full sa
 :::
 
 :::proof{of=thm-kkl}
-*A chain.* Let $M_0 = M$, $F_0 = \emptyset$ and $S_0 = \emptyset$, an $F_0$-satisfaction class. Given $M_n$ with a $\mathrm{Form}^{M_{n-1}}$-satisfaction class $S_n$ (for $n = 0$, with $\mathrm{Form}^{M_{-1}} = \emptyset$), :ref{#thm-enayat-visser} applied to $M_n$ gives $M_{n+1} \succcurlyeq M_n$ and $S_{n+1} \subseteq \mathrm{Form}^{M_n} \times M_{n+1}$, satisfying the clauses for the formulas of $M_n$ and the assignments of $M_{n+1}$, with $S_{n+1} \cap (\mathrm{Form}^{M_{n-1}} \times M_n) = S_n$. Since $\mathrm{Form}$ is a formula and $M_n \preccurlyeq M_{n+1}$, $\mathrm{Form}^{M_n} = \mathrm{Form}^{M_{n+1}} \cap M_n$.
+*A chain.* Let $M_0 = M$, $F_0 = \emptyset$ and $S_0 = \emptyset$, an $F_0$-satisfaction class. Given $M_n$ with a $\mathrm{Form}^{M_{n-1}}$-satisfaction class $S_n$ (for $n = 0$, with $\mathrm{Form}^{M_{-1}} = \emptyset$), :ref{#thm-enayat-visser} applied to $M_n$ gives $M_{n+1} \succcurlyeq M_n$ and $S_{n+1} \subseteq \mathrm{Form}^{M_n} \times M_{n+1}$, satisfying the clauses for the formulas of $M_n$ and the assignments of $M_{n+1}$, with $S_{n+1} \cap (\mathrm{Form}^{M_{n-1}} \times M_n) = S_n$. By elementarity, $\mathrm{Form}^{M_n} = \mathrm{Form}^{M_{n+1}} \cap M_n$.
 
-*The union.* Let $M_\omega = \bigcup_n M_n$, an elementary extension of $M$, and $S_\omega = \bigcup_n S_n$. For $\theta \in \mathrm{Form}^{M_\omega}$ and $e \in M_\omega$, take $n$ with $\theta \in M_n$ and $e \in M_{n+1}$; by the agreement condition, $S_\omega$ and $S_{m+1}$ have the same pairs $(\varphi, e')$ with $\varphi \in M_m$ and $e' \in M_{m+1}$, for every $m$. The clause of $\theta$ at $e$ holds in $S_{m+1}$ for every $m \geq n$, with witnesses $x$ in $M_{m+1}$; for an existential quantifier, a witness in $M_\omega$ lies in some $M_{m+1}$, and conversely. So $S_\omega$ is a full satisfaction class for $M_\omega$, and $M_\omega \models \mathrm{ElemDiag}(M)$.
+*The union.* Let $M_\omega = \bigcup_n M_n \succcurlyeq M$ and $S_\omega = \bigcup_n S_n$. For $\theta \in \mathrm{Form}^{M_\omega}$ and $e \in M_\omega$, take $n$ with $\theta \in M_n$ and $e \in M_{n+1}$; by the agreement condition, $S_\omega$ and $S_{m+1}$ have the same pairs $(\varphi, e')$ with $\varphi \in M_m$ and $e' \in M_{m+1}$, for every $m$. The clause of $\theta$ at $e$ holds in $S_{m+1}$ for every $m \geq n$, with witnesses $x$ in $M_{m+1}$; for an existential quantifier, a witness in $M_\omega$ lies in some $M_{m+1}$, and conversely. So $S_\omega$ is a full satisfaction class for $M_\omega$, and $M_\omega \models \mathrm{ElemDiag}(M)$.
 
 *Back to $M$.* The sentence $\tau(S)$ is therefore consistent with $\mathrm{ElemDiag}(M)$. By :ref{#thm-barwise-ressayre}, $M$ has an expansion $(M, S) \models \tau(S)$.
 :::
 
-The proof shows the division of labor: compactness and the locality of the clauses give satisfaction classes in extensions; resplendence turns consistency into existence. Countability cannot be dropped: Smith (1989) gives uncountable recursively saturated models of $\mathrm{PA}$ without full satisfaction classes, and Lachlan (1981) an uncountable model of $\mathrm{PA}$ with a full satisfaction class that is not resplendent (both as reported in Wong's Lecture 14).
+Compactness and the locality of the clauses give satisfaction classes in extensions; resplendence turns consistency into existence. The chain and the last step work for every resplendent model of $\mathrm I\Sigma_1$, countable or not. Countability is used only through :ref{#thm-barwise-ressayre}, and cannot be dropped: Smith (1989) gives uncountable recursively saturated models of $\mathrm{PA}$ without full satisfaction classes, which are therefore not resplendent, and Lachlan (1981) an uncountable model of $\mathrm{PA}$ with a full satisfaction class that is not resplendent (both as reported in Wong's Lecture 14).
 
 Full satisfaction classes can be far from truth on non-standard formulas. Let $\delta_1$ be $0 \neq 0$ and $\delta_{m+1}$ be $0 \neq 0 \vee \delta_m$, defined in $M$ for every $m$ by a primitive recursive function. The exercise below shows that some full satisfaction class makes $\delta_a$ true for a non-standard $a$, although each of its disjuncts is false: the clause for $\vee$ only unravels standardly many disjuncts.
 
@@ -110,7 +110,7 @@ $\mathrm{CT}^-$ is conservative over $\mathrm{PA}$: every $\mathcal L_A$-sentenc
 Suppose $\mathrm{PA} \nvdash \sigma$. Then $\mathrm{PA} + \neg \sigma$ has a countable model, which has a countable recursively saturated elementary extension $M$ (:ref{#thm-rs-existence}). By :ref{#thm-kkl}, $M$ has a full satisfaction class $S$, and $(M, S) \models \mathrm{CT}^- + \neg \sigma$. So $\mathrm{CT}^- \nvdash \sigma$.
 :::
 
-Induction for formulas mentioning $S$ changes this: Kotlarski (1986) showed that a full satisfaction class satisfying induction for bounded formulas of $\mathcal L_A \cup \{ S \}$ proves the consistency of $\mathrm{PA}$, as recalled in the next lesson.
+Induction for formulas mentioning $S$ changes this (Kotlarski, 1986): adding to $\mathrm{CT}^-$ induction for bounded formulas of $\mathcal L_A \cup \{ S \}$ gives a theory that proves $\mathrm{Con}(\mathrm{PA})$, as recalled in the next lesson.
 
 ## Exercises
 
@@ -128,8 +128,8 @@ Satisfaction classes for non-standard formulas were introduced by Krajewski (197
 
 - S. Krajewski, *Non-standard satisfaction classes*, in Set Theory and Hierarchy Theory, Lecture Notes in Mathematics 537, Springer, 1976, 121–144.
 - H. Kotlarski, S. Krajewski and A. H. Lachlan, *Construction of satisfaction classes for nonstandard models*, Canadian Mathematical Bulletin 24 (1981), 283–293.
-- A. Enayat and A. Visser, *New constructions of satisfaction classes*, in Unifying the Philosophy of Truth, Logic, Epistemology, and the Unity of Science 36, Springer, 2015.
-- H. Kotlarski, *Full satisfaction classes: a survey*, Notre Dame Journal of Formal Logic 32 (1991).
+- A. Enayat and A. Visser, *New constructions of satisfaction classes*, in T. Achourioti, H. Galinon, J. Martínez Fernández and K. Fujimoto (eds.), Unifying the Philosophy of Truth, Logic, Epistemology, and the Unity of Science 36, Springer, 2015, 321–335.
+- H. Kotlarski, *Full satisfaction classes: a survey*, Notre Dame Journal of Formal Logic 32 (1991), 573–579.
 - H. Kotlarski, *Bounded induction and satisfaction classes*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 32 (1986), 531–544.
 - A. H. Lachlan, *Full satisfaction classes and recursive saturation*, Canadian Mathematical Bulletin 24 (1981), 295–297.
 - S. T. Smith, *Nonstandard definability*, Annals of Pure and Applied Logic 42 (1989), 21–43.

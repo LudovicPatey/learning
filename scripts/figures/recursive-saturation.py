@@ -2,7 +2,7 @@
 # Usage: python3 scripts/figures/recursive-saturation.py out.json
 # Paste each figure into the lesson that uses it (placeholder {{FIG:name}}):
 #   zigzag     -> back-and-forth.md
-#   friedman   -> friedman-embedding.md
+#   friedman   -> friedman-embedding.md (Friedman's embedding theorem)
 #   smorynski  -> automorphisms.md
 #   ranks      -> satisfaction-classes.md
 #   lachlan    -> lachlan.md
@@ -142,7 +142,7 @@ s.append(label(115, y + 50, 'standard indices: Bᵢ = Aᵢ'))
 s.append(cutmark(260, y, 18))
 s.append(mtext(260, y + 40, 'ℕ', 13))
 xs = (360, 420, 480, 540)
-labs = ('A<tspan class="mrm" font-size="10" dy="3">1</tspan>', 'A<tspan class="mrm" font-size="10" dy="3">2</tspan>', '⋯', 'A<tspan class="mrm" font-size="10" dy="3">m</tspan>')
+labs = ('A<tspan class="mrm" font-size="10" dy="3">1</tspan>', 'A<tspan class="mrm" font-size="10" dy="3">2</tspan>', '⋯', 'A<tspan font-size="10" dy="3">m</tspan>')
 idx = ('ν−m+1', '', '', 'ν')
 for x, lb, ix in zip(xs, labs, idx):
     s.append(dot(x, y, 'node', 3.5))

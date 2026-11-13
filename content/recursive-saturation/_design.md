@@ -23,13 +23,16 @@ After the course, a student can:
 
 1. **recursively-saturated-models** (45 min). `def-rs-type`, `ex-rs-types`, `def-rec-sat`; existence (`thm-rs-existence`); models of definable elements are not recursively saturated (`prop-rs-definable`); `def-coded-type`; recursively saturated ⇔ every coded type realized (`thm-rs-coded-types`); realized complete types are coded, Th(M) ∈ SSy(M) (`prop-rs-realized-coded`, `cor-rs-complete-types`).
 2. **back-and-forth** (40 min). `lem-bf-step`; isomorphism theorem (`thm-bf-isomorphism`); homogeneity (`cor-bf-homogeneous`); existence with prescribed theory and standard system (`thm-bf-existence`); classification (`cor-bf-classification`); exercise `ex-bf-elementary-embedding`.
-3. **friedman-embedding** (45 min). Σₙ types coded (`lem-fe-types-coded`); coded Σₙ₊₁ types and bounded Πₙ₊₁ types realized (`lem-fe-realize`); Friedman's characterization of Σₙ₊₁-recursive saturation (`thm-fe-friedman-rs`); Friedman's embedding theorem for IΣ₁ (`thm-fe-friedman`), self-embeddings (`cor-fe-self`).
-4. **automorphisms** (40 min). `ex-rs-same-type` and non-trivial automorphisms; `def-ifix`; fixed cuts are exponential (`prop-ifix-exponential`); `lem-aut-extend`, `lem-aut-move`; Smoryński's theorem (`thm-smorynski`).
+3. **bounded-types** (25 min). Σₙ types coded (`lem-fe-types-coded`); coded Σₙ₊₁ types and bounded Πₙ₊₁ types realized (`lem-fe-realize`); Friedman's characterization of Σₙ₊₁-recursive saturation (`thm-fe-friedman-rs`); exercise: a bound for the witnesses of all true Σ₁ sentences.
+3′. **friedman-embedding** (30 min). Friedman's embedding theorem for IΣ₁ (`thm-fe-friedman`), self-embeddings (`cor-fe-self`), counterexamples, exercise on embeddings below a.
+4. **automorphisms** (45 min). `ex-rs-same-type` and non-trivial automorphisms; `def-ifix`; fixed cuts are exponential (`prop-ifix-exponential`); `lem-aut-extend`, `lem-aut-move`; Smoryński's theorem (`thm-smorynski`).
 5. **resplendence** (45 min). `def-resplendent`, `ex-resplendent`; Craig's trick (`lem-craig`); Barwise–Ressayre (`thm-barwise-ressayre`); `def-inductive-sat`; recursively saturated ⇔ inductive partial satisfaction class (`thm-inductive-sat`); exercise: Tarski's undefinability for partial classes.
 6. **satisfaction-classes** (45 min). `def-sat-class`, `ex-sat-classes`; Enayat–Visser (`thm-enayat-visser`); KKL (`thm-kkl`); conservativity of CT⁻ (`cor-ct-conservative`); exercise: a full class making a false non-standard disjunction true.
-7. **lachlan** (40 min). `lem-lachlan-partition`, `lem-lachlan-step`, `lem-lachlan-values`; Lachlan's theorem (`thm-lachlan`); characterization (`cor-lachlan-characterization`); CT₀ and disjunctive correctness (stated).
+7. **lachlan** (45 min). `lem-lachlan-partition`, `lem-lachlan-step`, `lem-lachlan-values`; Lachlan's theorem (`thm-lachlan`); characterization (`cor-lachlan-characterization`); CT₀ and disjunctive correctness (stated).
 
 ## 4. Proof techniques
+
+In sections 4–8, "lesson 3" is the pair bounded-types and friedman-embedding (split on 2026-11-13), and lessons 4–7 keep their earlier numbers (they are now lessons 5–8).
 
 - **Coding a type by an element** (lesson 1): a coded type becomes a recursive type with the code as an extra parameter. Used in lessons 2–3.
 - **Back-and-forth** in three forms: equality of complete types (lesson 2); Σ₁ facts transferred with witnesses below a fixed d, for initial embeddings (lesson 3); equality of types over the elements below a decreasing bound above a cut (lesson 4).
@@ -50,7 +53,7 @@ After the course, a student can:
 - **Smoryński's theorem**: the inductive condition uses single elements x < b, with pairs ⟨a, c⟩ coded below 2^{a²}; the pigeonhole principle is obtained from the exercise of fragments-of-arithmetic/coding by coding the definable map as a sequence (Wong proves an injective coded pigeonhole principle instead).
 - **Inductive partial satisfaction classes** (Wong 7, exercises (a)–(c)) are a theorem of lesson 5, as the first application of resplendence and as a contrast with full classes.
 - **Lachlan's proof: two corrections to the presentation in Wong 14.4.**
-  1. Wong makes the differences θᵢ ∧ ¬θᵢ₊₁ non-empty by θ′ᵢ₊₁ = θᵢ₊₁ ∧ ∃v′ < v θ′ᵢ(v′); this need not keep the sets non-empty when solutions are bounded. The course uses instead the pairing θ*ᵢ(⟨a, b⟩) ⇔ θᵢ(a) ∧ b ≥ i, which makes every difference non-empty and keeps realizability.
+  1. Wong makes the differences θᵢ ∧ ¬θᵢ₊₁ non-empty by θ′ᵢ₊₁ = θᵢ₊₁ ∧ ∃v′ < v θ′ᵢ(v′). (Polishing pass: this is correct, given Wong's condition (iv) that every θᵢ has infinitely many solutions, since the least element of θ′ᵢ is in the difference; the earlier claim of this log that it fails was wrong. The change is a simplification, not a correction.) The course uses the pairing θ*ᵢ(⟨a, b⟩) ⇔ θᵢ(a) ∧ b ≥ i, which makes every difference non-empty with no case analysis, and tolerates repetitions in the enumeration of p; this matters because the enumeration must be primitive recursive (see 2026-11-13 in the history).
   2. Wong's βᵢ₊₁ uses a flat disjunction ⋁_{k ≤ i} of cases. For non-standard i, after unravelling the case k₀ the remaining disjunction is non-standard, and a full satisfaction class may make it true (the δ pathology), so the claim Bᵢ₊₁ = A_{k₀+1} does not follow. The course nests the cases ("if, else if"): γ_{i,k} = (∃v(βᵢ ∧ α_k) ∧ α_{k+1}) ∨ (¬∃v(βᵢ ∧ α_k) ∧ γ_{i,k+1}); at k₀ the tail is a conjunct of a false conjunction. The contradiction is then derived from lem-lachlan-values without Wong's (†)/(‡) in their stated form.
 - **Assignments** are the total assignments of `truth-and-provability` (numbers read as functions), not Wong's assignments with domain the free variables; Tarski's clauses are adapted to all constructors of the coding (including bounded quantifiers with variable bounds).
 
@@ -80,7 +83,7 @@ Kaye's *Models of PA* (Chapters on recursive saturation, resplendence, automorph
 
 - Lesson 1: Wong Lecture 7 (definitions, existence paragraph), Lecture 8 (Prop 8.1, Remark 8.2, Prop 8.13); Barwise–Schlipf JSL 41 (1976) and Schlipf JSL 43 (1978) from Wong's bibliography.
 - Lesson 2: Wong Theorem 8.3, Remark 8.4; Scott 1962.
-- Lesson 3: Wong Theorem 7.4 (Friedman 1973, LNM 337), Theorem 8.5, Remarks 8.6–8.7; Ressayre 1987 and Dimitracopoulos–Paris 1988 (attribution checked online, bibliographic details from memory).
+- Lesson 3: Wong Theorem 7.4 (Friedman 1973, LNM 337), Theorem 8.5, Remarks 8.6–8.7; Ressayre 1987 and Dimitracopoulos–Paris 1988 (attribution and bibliographic details checked online, 2026-11-13).
 - Lesson 4: Wong Theorem 8.8, Lemmas 8.9–8.10, Theorem 8.11; Smoryński 1982, Kotlarski 1984, Kossak–Kotlarski 1988 (Wong's bibliography).
 - Lesson 5: Wong Theorem 7.6 (Barwise IV.5.7; Ressayre 1977, Theorem 2.3), Craig 1953, Theorem 7.7, further exercises (a)–(c), Theorem 14.5 (Schlipf 1977).
 - Lesson 6: Wong Lecture 14 (definitions, Theorems 14.2–14.3, δ example, remarks on uncountable models: Lachlan 1981 p. 296, Smith 1989); Krajewski 1976; KKL 1981; Enayat–Visser 2015; Kotlarski 1986, 1991.
@@ -94,12 +97,19 @@ Web search, 2026-11-13 (the first attempt on 2026-11-12 failed on a usage limit)
 
 ## 10. Open points
 
-- Bibliographic details of Ressayre 1987, Dimitracopoulos–Paris 1988 and Bahrami–Enayat 2018 (volume, pages) were written from memory and should be checked against the papers; Bahrami–Enayat was removed from the lesson for this reason.
+- Ressayre 1987 (Contemp. Math. 65, 333–358) and Dimitracopoulos–Paris 1988 (Z. Math. Logik 34, 13–17) were checked online on 2026-11-13 (reference list of Enayat–McKenzie, arXiv:2106.08724; publisher records). Bahrami–Enayat 2018 is still not cited (journal details not confirmed).
 - Lachlan's theorem is stated for PA as in the sources; the proof given uses only IΣ₁-level coding, but no source was checked for the weaker statement, so it is not claimed.
 - `thm-bf-existence` has no direct source reference (Kaye and Kossak–Schmerl treat the classification; chapter numbers not checked).
-- The translation φ ↦ φ* of `lem-variable-bounds` is asserted to be primitive recursive (lesson 3); this is clear from its proof but not stated in truth-and-provability. A remark there would help.
+- ~~Primitive recursiveness of φ ↦ φ*~~: closed 2026-11-13; truth-and-provability now has `rem-variable-bounds-pr`, cited in bounded-types.
 - Preservation theorems (Wong 12) are not covered anywhere in the track.
 
 ## 11. History
 
 - **2026-11-12/13.** Course created: 7 lessons (recursively-saturated-models, back-and-forth, friedman-embedding, automorphisms, resplendence, satisfaction-classes, lachlan), figure generator `scripts/figures/recursive-saturation.py` (figures zigzag, friedman, smorynski, ranks, lachlan).
+- **2026-11-13: polishing pass.**
+  - Mathematics. Lachlan (`lem-lachlan-partition`): the enumeration of p was only "computable", but the formulas αₖ, βᵢ, γᵢ,ₖ are evaluated in M at non-standard indices through `thm-pr-provably-total`, which needs a primitive recursive function; the lemma now uses a primitive recursive enumeration with repetitions (Kleene normal form, with a default formula), states that IΣ₁ proves its values are formulas, and the text notes that βᵢ, γᵢ,ₖ are formulas of M, so that S applies. The two corrections of the log (pairing; nested "if, else if") were re-checked: the nested form is a genuine correction of Wong 14.4 (the flat non-standard disjunction may be S-true with false disjuncts); the pairing is a correct simplification, Wong's version being also correct (log corrected above). Lesson 1: false sentence "a realized type is coded only when it is complete, and only in recursively saturated models" replaced; the "converse fails" remark about p_X rephrased; the variable of the code in q renamed w. Lesson automorphisms: ≡_b implies equality of types only for b > 0. Lesson resplendence: a wrong-option justification claimed that no partial satisfaction class is definable (Sat_Σn are); fixed. Lesson friedman-embedding: a "wrong" quiz option was partly correct (realizing q′ uses BΣ₁ through lem-fe-realize); replaced.
+  - Structure. friedman-embedding (2606 words, 47 min) split into bounded-types (1406 words, 25 min) and friedman-embedding (1681 words, 30 min); labels unchanged. recursively-saturated-models (2526 → 2474) and satisfaction-classes (2524 → 2482) trimmed to 45 min. Durations of automorphisms (2338 words) and lachlan (2373) set to 45.
+  - Additions. Introduction of bounded-types (overspill on Sat as the method); exercise on a bound for Σ₁ witnesses; in satisfaction-classes, the observation that the proof of KKL works for every resplendent model, so Smith's models are not resplendent (replaces an unchecked page reference to Kaye in resplendence).
+  - References. Barwise–Schlipf title corrected ("An introduction to recursively saturated and resplendent models"); Enayat–Visser editors and pages 321–335; Kotlarski's survey pages 573–579; Friedman 1973 checked.
+  - Figure lachlan: subscript m in italic (generator changed, figure regenerated); the other figures agree with the generator.
+  - bounded-types cites `rem-variable-bounds-pr` (new in truth-and-provability) for the primitive recursiveness of φ ↦ φ*; open point closed.

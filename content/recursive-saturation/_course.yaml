@@ -34,4 +34,4 @@ objectives:
   - Prove Smoryński's characterization of the cuts fixed pointwise by automorphisms
   - Prove that countable recursively saturated structures are resplendent, and use resplendence to construct expansions
   - Construct full satisfaction classes by the method of Enayat and Visser, and prove Lachlan's theorem
-lessons: [recursively-saturated-models, back-and-forth, friedman-embedding, automorphisms, resplendence, satisfaction-classes, lachlan]
+lessons: [recursively-saturated-models, back-and-forth, bounded-types, friedman-embedding, automorphisms, resplendence, satisfaction-classes, lachlan]

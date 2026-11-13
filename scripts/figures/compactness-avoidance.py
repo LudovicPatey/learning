@@ -2,7 +2,7 @@
 # Usage: python3 scripts/figures/compactness-avoidance.py out.json
 # Paste each figure into the lesson that uses it:
 #   liu-valuations        -> weak-merging.md
-#   splitting             -> ramsey-type-wkl.md
+#   splitting             -> partition-forcing.md
 #   liu-structure         -> liu-theorem.md
 #   avoidance-comparison  -> dnc-avoidance.md
 # The output is deterministic: every loop runs over ordered data.
@@ -57,7 +57,12 @@ for depth in range(3):
             ny = levels[depth + 1]
             nodes[path + (b,)] = (nx, ny)
             s.append(f'<line x1="{x:.1f}" y1="{y + 4}" x2="{nx:.1f}" y2="{ny - 6}" class="ink-stroke" stroke-width="1.1"/>')
-            s.append(f'<text x="{(x + nx) / 2 + (-10 if b == 0 else 10):.1f}" y="{(y + ny) / 2 + 4:.1f}" text-anchor="middle" class="mrm" font-size="12">{b}</text>')
+            # edge label: offset from the midpoint along the upward normal of the edge
+            dx, dy = nx - x, ny - y
+            norm = (dx * dx + dy * dy) ** 0.5
+            ux, uy = (-dy / norm, dx / norm) if b == 0 else (dy / norm, -dx / norm)
+            lx, ly = (x + nx) / 2 + 10 * ux, (y + ny) / 2 + 10 * uy
+            s.append(f'<text x="{lx:.1f}" y="{ly + 4:.1f}" text-anchor="middle" class="mrm" font-size="12">{b}</text>')
     s.append(f'<text x="{X0 - 8}" y="{(levels[depth] + levels[depth + 1]) / 2 + 4:.1f}" text-anchor="end" class="math" font-size="13">{names[depth]}</text>')
 for path, (x, y) in sorted(nodes.items()):
     if len(path) < 3:
@@ -141,26 +146,28 @@ s.append('</svg>')
 out['liu-structure'] = ''.join(s)
 
 # ---------------------------------------------------------------- comparison of avoidance properties
-s = ['<svg class="fig" viewBox="0 0 600 330" width="600" role="img" aria-label="Constant-bound trace avoidance implies PA avoidance, which implies cone avoidance; DNC avoidance implies cone avoidance. WWKL has PA avoidance but not c.b. trace avoidance; WKL has cone avoidance but not PA avoidance; RT22 has c.b. trace avoidance but not DNC avoidance. Finitely merging, merging and countably merging questions give c.b. trace, PA and DNC avoidance and preservation of immunity">']
+s = ['<svg class="fig" viewBox="0 0 600 340" width="600" role="img" aria-label="Constant-bound trace avoidance implies PA avoidance, which implies cone avoidance; DNC avoidance implies cone avoidance. WWKL has PA avoidance but not c.b. trace avoidance; WKL has cone avoidance but not PA avoidance; RT22 has cone avoidance but not DNC avoidance. Finitely merging, merging and countably merging questions give c.b. trace, PA and DNC avoidance; countable merging also gives preservation of immunity">']
 s.append('<defs>' + marker('ca-cmp-arr') + '</defs>')
-s.append(box(330, 20, 160, 40, ['c.b. trace avoidance']))
-s.append(box(330, 120, 160, 40, ['PA avoidance']))
-s.append(box(330, 220, 160, 40, ['cone avoidance']))
-s.append(box(520 - 10, 120, 80, 40, ['DNC', 'avoidance']))
-s.append(box(20, 20, 170, 40, ['finitely merging'], 'cell'))
-s.append(box(20, 120, 170, 40, ['merging'], 'cell'))
-s.append(box(20, 220, 170, 40, ['countably merging'], 'cell'))
-s.append(arrow(410, 62, 410, 116, 'ca-cmp-arr'))
-s.append(arrow(410, 162, 410, 216, 'ca-cmp-arr'))
-s.append(arrow(550, 162, 470, 216, 'ca-cmp-arr'))
-s.append(arrow(192, 40, 326, 40, 'ca-cmp-arr'))
-s.append(arrow(192, 140, 326, 140, 'ca-cmp-arr'))
-s.append('<path d="M192,248 C300,300 520,300 550,164" class="ink-stroke" stroke-width="1.3" fill="none" marker-end="url(#ca-cmp-arr)"/>')
-s.append('<text x="418" y="94" class="label">converse fails: WWKL</text>')
-s.append('<text x="402" y="194" text-anchor="end" class="label">converse fails: WKL</text>')
-s.append('<text x="250" y="312" class="label">also preservation of immunity</text>')
-s.append('<text x="20" y="106" class="label muted">questions (sufficient conditions)</text>')
-s.append('<text x="310" y="80" class="label muted" text-anchor="end">RT²₂: c.b. trace yes, DNC no</text>')
+s.append('<text x="105" y="18" text-anchor="middle" class="label muted">property of the question</text>')
+s.append('<text x="410" y="18" text-anchor="middle" class="label muted">avoidance property</text>')
+s.append(box(20, 30, 170, 40, ['finitely merging'], 'cell'))
+s.append(box(20, 130, 170, 40, ['merging'], 'cell'))
+s.append(box(20, 230, 170, 40, ['countably merging'], 'cell'))
+s.append(box(330, 30, 160, 40, ['c.b. trace avoidance']))
+s.append(box(330, 130, 160, 40, ['PA avoidance']))
+s.append(box(330, 230, 160, 40, ['cone avoidance']))
+s.append(box(510, 130, 80, 40, ['DNC', 'avoidance']))
+s.append(arrow(192, 50, 326, 50, 'ca-cmp-arr'))
+s.append(arrow(192, 150, 326, 150, 'ca-cmp-arr'))
+s.append(arrow(410, 72, 410, 126, 'ca-cmp-arr'))
+s.append(arrow(410, 172, 410, 226, 'ca-cmp-arr'))
+s.append(arrow(530, 172, 472, 228, 'ca-cmp-arr'))
+s.append('<path d="M192,262 C300,330 610,320 584,176" class="ink-stroke" stroke-width="1.3" fill="none" marker-end="url(#ca-cmp-arr)"/>')
+s.append('<text x="418" y="104" class="label">converse fails: WWKL</text>')
+s.append('<text x="402" y="204" text-anchor="end" class="label">converse fails: WKL</text>')
+s.append('<text x="512" y="204" class="label">converse</text>')
+s.append('<text x="512" y="219" class="label">fails: RT²₂</text>')
+s.append('<text x="380" y="330" text-anchor="middle" class="label">countable merging also preserves immunity</text>')
 s.append('</svg>')
 out['avoidance-comparison'] = ''.join(s)
 
