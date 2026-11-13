@@ -1,11 +1,11 @@
 ---
-title: Elementarity, cofinal extensions and strong collection
-summary: Σₙ-elementary substructures and the Tarski–Vaught test level by level; end and cofinal extensions; a cofinal Σₙ-elementary extension of a model of BΣₙ₊₁ is Σₙ₊₂-elementary, and a cofinal Δ₀-elementary extension of a model of PA is elementary; Σₙ₊₁ induction is equivalent to collection for partial functions (Friedman).
-duration: 50
+title: Elementarity and cofinal extensions
+summary: Σₙ-elementary substructures and the Tarski–Vaught test level by level; end and cofinal extensions; a cofinal Σₙ-elementary extension of a model of BΣₙ₊₁ is Σₙ₊₂-elementary, and a cofinal Δ₀-elementary extension of a model of PA is elementary.
+duration: 40
 prerequisites: [fragments-of-arithmetic/coded-sets]
 ---
 
-Every extension of models of arithmetic $M \subseteq K$ can be cut in two at the set of elements of $K$ that lie below some element of $M$. Below this set, $K$ is a **cofinal** extension of $M$: it adds new elements, but none above all of $M$. Above it, $K$ is an **end** extension. The two kinds behave in opposite ways. In an end extension, bounded formulas keep their meaning, so $\Sigma_1$ formulas go up and $\Pi_1$ formulas go down (:ref{#cor-sigma1-upward}). In a cofinal extension, every new element is below an old one, so universal statements of the small model can be checked on bounded pieces; collection in the small model then turns bounded pieces into statements that transfer. This lesson proves this preservation theorem for cofinal extensions, and a form of collection for partial functions that will be needed to split extensions in the next lesson.
+Every extension of models of arithmetic $M \subseteq K$ can be cut in two at the set of elements of $K$ that lie below some element of $M$. Below this set, $K$ is a **cofinal** extension of $M$: it adds new elements, but none above all of $M$. Above it, $K$ is an **end** extension. The two kinds behave in opposite ways. In an end extension, bounded formulas keep their meaning, so $\Sigma_1$ formulas go up and $\Pi_1$ formulas go down (:ref{#cor-sigma1-upward}). In a cofinal extension, every new element is below an old one, so universal statements of the small model can be checked on bounded pieces; collection in the small model then turns bounded pieces into statements that transfer. This lesson sets up elementarity level by level and proves this preservation theorem for cofinal extensions. The next lesson turns to end extensions, and the one after it combines the two kinds of extensions.
 
 ## Elementarity, level by level
 
@@ -36,7 +36,7 @@ Conversely, by induction on $n$, assume the condition for $n$; then $M \preccurl
 Let $M \subseteq K$ be models of $\mathrm{PA}^-$. $K$ is a **cofinal extension** of $M$, written $M \subseteq_{cf} K$, if every element of $K$ is below some element of $M$. The **supremum** of $M$ in $K$ is $\sup_K M = \{ x \in K : x \leq m \text{ for some } m \in M \}$.
 :::
 
-An extension may be neither end nor cofinal. The set $\sup_K M$ is closed under addition and multiplication, since $m + m'$ and $m \cdot m'$ are in $M$; it is an initial segment of $K$ containing $M$, and $M \subseteq_{cf} \sup_K M \subseteq_e K$. The next lesson shows that, under induction hypotheses on $M$, some elementarity survives on both sides of this decomposition.
+An extension may be neither end nor cofinal. The set $\sup_K M$ is closed under addition and multiplication, since $m + m'$ and $m \cdot m'$ are in $M$; it is an initial segment of $K$ containing $M$, and $M \subseteq_{cf} \sup_K M \subseteq_e K$. The splitting theorem (:ref{#thm-splitting}), proved two lessons later, shows that under induction hypotheses on $M$ some elementarity survives on both sides of this decomposition.
 
 ## Preservation in cofinal extensions
 
@@ -51,7 +51,7 @@ Let $n \geq 0$, let $M$ be a model of $\mathrm B\Sigma_{n+1}$, and $K$ an $\math
 
 If $n = 0$, $\theta$ is bounded, and $\mathrm B\Sigma_1$ in $M$, applied after contracting the tuples by pairing, gives $b \in M$ with $M \models \forall \bar x < a\ \exists \bar y < b\ \theta(\bar x, \bar y)$. This is a bounded formula with parameters in $M$, so it holds in $K$.
 
-If $n \geq 1$, then $M \models \mathrm I\Sigma_1$ (:ref{#thm-fo-paris-kirby}), hence $M \models \mathrm{exp}$, and $M \models \mathrm L\Pi_n$ and $\mathrm B\Sigma_n$. Coding tuples by pairing in $M$, let $g(\bar x)$ be, for $\bar x < a$, the least code of a tuple $\bar y$ with $M \models \theta(\bar x, \bar y)$. Its graph is $\Delta_{n+1}$ in $M$: it is the conjunction of a $\Pi_n$ formula and of a bounded universal quantifier in front of a $\Sigma_n$ formula, which is $\Sigma_n$ in $M$ by :ref{#lem-fo-collection-closure}. Collection gives a bound $b$ on the values of $g$, and the set of pairs $\langle \bar x, \bar y \rangle$ with $\bar x < a$ and $\langle \bar y \rangle = g(\bar x)$ is bounded and $\Delta_{n+1}$-definable in $M$, by Parsons' lemma in $\mathrm B\Sigma_{n+1}$, so it is coded by some $s \in M$ (:ref{#thm-collection-coded}). Then $M$ satisfies
+If $n \geq 1$, then $M \models \mathrm I\Sigma_1$ (:ref{#thm-fo-paris-kirby}), hence $M \models \mathrm{exp}$, and $M \models \mathrm L\Pi_n$ and $\mathrm B\Sigma_n$. Coding tuples by pairing in $M$, let $g(\bar x)$ be, for $\bar x < a$, the least code of a tuple $\bar y$ with $M \models \theta(\bar x, \bar y)$. Its graph is $\Delta_{n+1}$ in $M$: it is the conjunction of a $\Pi_n$ formula and of a bounded universal quantifier in front of a $\Sigma_n$ formula, which is $\Sigma_n$ in $M$ by :ref{#lem-fo-collection-closure}. Collection gives a bound $b$ on the values of $g$, and the set of pairs $\langle \bar x, \bar y \rangle$ with $\bar x < a$ and $\langle \bar y \rangle = g(\bar x)$ is bounded, by $\langle a, b \rangle$ for instance, and $\Delta_{n+1}$-definable in $M$, like the graph of $g$, so it is coded by some $s \in M$ (:ref{#thm-collection-coded}). Then $M$ satisfies
 $$
 \begin{gathered}
 \forall \bar x < a\ \exists \bar y < s\ \exists z < s\ \big(z = \langle \bar x, \bar y \rangle \wedge z \in s\big), \\
@@ -98,51 +98,19 @@ Let $M \subseteq_{cf} K$ with $M \preccurlyeq_0 K$.
 
 The bound of item 1 is optimal: Hájek and Pudlák (Remark IV.1.25) show that for every $k \geq 1$ there are $M \models \mathrm B\Sigma_k$ and $K \models \mathrm I\Sigma_1$ with $M \subseteq K$ such that $M$ is not a $\Sigma_{k+2}$-elementary substructure of $\sup_K M$.
 
-## Collection for partial functions
-
-Collection bounds the values of a definable function on $[0, a)$ that is *total* on $[0, a)$. **Strong collection** asks the same for partial functions: whatever subset of $[0, a)$ has witnesses, a single bound $b$ catches a witness for each of its elements. This is stronger, because the set of elements that have a witness may be more complex than its witnesses, and its strength is that of induction one level up.
-
-:::theorem[Friedman]{#thm-strong-collection}
-Let $n \geq 0$. Over $\mathrm I\Delta_0$, $\mathrm I\Sigma_{n+1}$ is equivalent to the **strong $\Pi_n$ collection** scheme: the universal closures of
-$$
-\exists b\ \forall x < a\ \big( \exists y\ \eta(x, y) \rightarrow \exists y < b\ \eta(x, y) \big)
-$$
-for $\eta \in \Pi_n$, with parameters.
-:::
-
-:::proof{of=thm-strong-collection}
-*Induction gives strong collection.* Assume $\mathrm I\Sigma_{n+1}$; it contains $\mathrm I\Sigma_1$, hence $\mathrm{exp}$ (:ref{#prop-isigma1-exp}). By :ref{#thm-friedman-coded}, some $c$ codes $\{ x < a : \exists y\ \eta(x, y) \}$ below $a$. Then $\forall x < a\ \exists y\ (x \notin c \vee \eta(x, y))$: for $x \in c$ a witness exists, and otherwise any $y$ will do. The formula in parentheses is $\Pi_n$, hence $\Sigma_{n+1}$, and $\mathrm B\Sigma_{n+1}$, which $\mathrm I\Sigma_{n+1}$ proves (:ref{#thm-fo-parsons}), gives $b$ with $\forall x < a\ \exists y < b\ (x \notin c \vee \eta(x, y))$. If $x < a$ has a witness, then $x \in c$, and some $y < b$ satisfies $\eta(x, y)$.
-
-*Strong collection gives induction*, by induction on $n$. Strong $\Pi_n$ collection contains strong $\Pi_{n-1}$ collection for $n \geq 1$, so the induction hypothesis gives $\mathrm I\Sigma_n$, hence $\mathrm B\Sigma_n$ if $n \geq 1$; for $n = 0$ we have $\mathrm I\Delta_0$. Let $\varphi(x) \equiv \exists y\ \eta(x, y)$ with $\eta \in \Pi_n$ (after contraction), and assume $\varphi(0)$, $\forall x\, (\varphi(x) \rightarrow \varphi(x + 1))$ and $\neg \varphi(a)$. Strong collection gives $b$ with $\forall x < a + 1\ (\varphi(x) \rightarrow \exists y < b\ \eta(x, y))$. Let $\psi(x) \equiv \exists y < b\ \eta(x, y)$, which is bounded if $n = 0$ and $\Pi_n$ by :ref{#lem-fo-collection-closure} if $n \geq 1$. For $x \leq a$, $\varphi(x) \leftrightarrow \psi(x)$. Apply $\Pi_n$ induction (:ref{#thm-fo-isigma-ipi}), or bounded induction if $n = 0$, to $x \leq a \rightarrow \psi(x)$: it holds at $0$, and if $x + 1 \leq a$ and $\psi(x)$, then $\varphi(x)$, $\varphi(x + 1)$ and $\psi(x + 1)$. So $\psi(a)$, hence $\varphi(a)$, a contradiction.
-:::
-
-:::quiz[strong collection]
-In the proof that induction gives strong collection, why is the set $\{ x < a : \exists y\ \eta(x, y) \}$ coded first, rather than applying collection directly?
-
-- [x] Collection needs a witness for every $x < a$. The formula $\exists y\ \eta(x, y) \rightarrow \eta(x, y)$ would provide one, but it is $\Sigma_{n+1} \rightarrow \Pi_n$, that is, of complexity $\Pi_{n+1} \vee \Pi_n$, too high for $\mathrm B\Sigma_{n+1}$; replacing the hypothesis by the bounded formula $x \in c$ keeps the formula $\Pi_n$.
-- [ ] Because $\mathrm I\Sigma_{n+1}$ does not prove $\mathrm B\Sigma_{n+1}$.
-
-  It does, by Parsons' theorem; the issue is the complexity of the formula to which collection is applied.
-- [ ] To make the bound $b$ smaller than $a$.
-
-  No relation between $b$ and $a$ is claimed.
-:::
-
-The same theorem holds for strong $\Sigma_{n+1}$ collection, by contraction of quantifiers (Wong, Remark 6.5).
-
 ## Exercises
 
 ::::exercise{difficulty=2}
 Let $M \models \mathrm B\Sigma_{n+1}$, $n \geq 0$, and let $K$ be a cofinal extension of $M$ with $M \preccurlyeq_n K$. Show that $K \models \mathrm I\Delta_0$ and that every $\Pi_{n+2}$ sentence true in $M$ is true in $K$. Why does this not show that $K \models \mathrm B\Sigma_{n+1}$?
 
 :::solution
-By :ref{#thm-cofinal-preservation}, $M \preccurlyeq_{n+2} K$. If a $\Pi_{n+2}$ sentence is true in $M$, its negation, a $\Sigma_{n+2}$ sentence, is false in $M$, hence false in $K$. $\mathrm I\Delta_0$ is equivalent to a set of $\Pi_1$ sentences (:ref{#lem-idelta0-pi1}), which are true in $M$ and therefore in $K$. An instance of $\Sigma_{n+1}$ collection, $\forall \bar p\ \forall a\ (\forall x < a\ \exists y\ \varphi \rightarrow \exists b\ \forall x < a\ \exists y < b\ \varphi)$ with $\varphi \in \Sigma_{n+1}$, is in general only a $\Pi_{n+3}$ sentence, beyond the reach of $\Sigma_{n+2}$-elementarity.
+By :ref{#thm-cofinal-preservation}, $M \preccurlyeq_{n+2} K$. If a $\Pi_{n+2}$ sentence is true in $M$, its negation, a $\Sigma_{n+2}$ sentence, is false in $M$, hence false in $K$. $\mathrm I\Delta_0$ is equivalent to a set of $\Pi_1$ sentences (:ref{#lem-idelta0-pi1}), which are true in $M$ and therefore in $K$. An instance of $\Sigma_{n+1}$ collection, $\forall \bar p\ \forall a\ (\forall x < a\ \exists y\ \varphi \rightarrow \exists b\ \forall x < a\ \exists y < b\ \varphi)$ with $\varphi \in \Sigma_{n+1}$, is not a $\Pi_{n+2}$ sentence: its conclusion has the unbounded quantifier $\exists b$ in front of $\forall x < a\ \exists y < b\ \varphi$, which is $\Sigma_{n+1}$ only modulo $\mathrm B\Sigma_{n+1}$ (:ref{#lem-fo-collection-closure}), that is, modulo what is to be proved in $K$. Over $\mathrm I\Delta_0$, $\mathrm B\Sigma_{n+1}$ is axiomatized by $\Pi_{n+3}$ sentences (Hájek and Pudlák, Remark IV.1.21), and $\Sigma_{n+2}$-elementarity transfers $\Pi_{n+3}$ sentences from $K$ down to $M$, not from $M$ up to $K$.
 :::
 ::::
 
 ## Notes and references
 
-The hierarchical Tarski–Vaught test is in Wong's Lecture 6 and in Hájek and Pudlák (Lemma IV.1.19). :ref{#thm-cofinal-preservation} combines Wong's Further exercises (b)–(d) to Lecture 6, where the case $n \geq 1$ is reduced to coding a witness function, and Hájek and Pudlák's Theorem IV.1.24, which proves the form of item 1 of :ref{#cor-cofinal-preservation} for the supremum of a model of $\mathrm B\Sigma_k$ in a model $K \supseteq M$ of $\mathrm I\Sigma_1$, obtaining $\Sigma_0$-elementarity from the MRDP theorem; for $\mathrm{PA}$ (their Remark IV.1.25) this is part of Gaifman's splitting theorem. :ref{#thm-strong-collection} is Wong's Theorem 6.4, attributed there to H. Friedman.
+The hierarchical Tarski–Vaught test is in Wong's Lecture 6 and in Hájek and Pudlák (Lemma IV.1.19). :ref{#thm-cofinal-preservation} combines Wong's Further exercises (b)–(d) to Lecture 6, where the case $n \geq 1$ is reduced to coding a witness function, and Hájek and Pudlák's Theorem IV.1.24, which proves the form of item 1 of :ref{#cor-cofinal-preservation} for the supremum of a model of $\mathrm B\Sigma_k$ in a model $K \supseteq M$ of $\mathrm I\Sigma_1$, obtaining $\Sigma_0$-elementarity from the MRDP theorem; for $\mathrm{PA}$ (their Remark IV.1.25) this is part of Gaifman's splitting theorem.
 
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 6.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 1(c).

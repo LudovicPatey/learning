@@ -27,4 +27,4 @@ objectives:
   - Use partition regular and large classes, the largest partition regular subclass, and compute the complexity of largeness for intersections of Σ⁰₁ classes over a coded Scott ideal
   - Define cohesive classes, prove their compatibility property and the partition regularity of their cores, and compute a cohesive class with a set PA relative to the jump of the code
   - Prove that every set has an infinite subset, of itself or of its complement, whose jump avoids a given cone, with promises for Π⁰₂ sentences, a disjunctive question and a question on one side
-lessons: [jump-cones, sigma2-questions, cohesiveness-second-jump, largeness, cohesive-classes, pigeonhole-forcing, pigeons-non-high]
+lessons: [jump-cones, sigma2-questions, wkl-two-cones, cohesiveness-second-jump, partition-regularity, largeness, cohesive-classes, pigeonhole-forcing, pigeon-questions, pigeons-non-high]

@@ -1,51 +1,19 @@
 ---
-title: Strong cone avoidance and disjunctive questions
-summary: Strong cone avoidance of cohesiveness, with reservoirs that only avoid the cone; disjunctive notions of forcing, which build one set on each side of an instance, and their forcing questions; the abstract disjunctive cone avoidance lemma and Lachlan's disjunction; the Dzhafarov–Jockusch forcing as an example.
-duration: 45
-prerequisites: [forcing-question-method, ramsey-theorem/cone-avoidance]
+title: Disjunctive forcing questions
+summary: Disjunctive notions of forcing, which build one set on each side of an instance, and their forcing questions; the abstract disjunctive cone avoidance lemma and Lachlan's disjunction; the Dzhafarov–Jockusch forcing as an example.
+duration: 35
+prerequisites: [strong-cone-avoidance, ramsey-theorem/cone-avoidance]
 ---
 
-Strong cone avoidance quantifies over arbitrary instances, so the reservoirs of a Mathias-type construction can no longer be kept simple: intersecting a reservoir with an arbitrary set produces an arbitrary set. This lesson shows the two devices that handle arbitrary instances. The first keeps in the reservoirs only the property that is being preserved, as in the proof that cohesiveness admits strong cone avoidance. The second handles problems whose solutions lie on one of several sides: it builds one set on each side, and uses a **disjunctive forcing question**, whose answers yield progress on one side without control on which. The next lesson applies it to Ramsey's theorem for pairs.
+For Ramsey-type problems, a solution must be found on one of several sides: an infinite subset of $A$ or of $\overline A$ for the pigeonhole principle, an infinite set homogeneous for one of the colors for Ramsey's theorem. One cannot know in advance which side will allow a weak solution, and asking about one side only would require knowing the instance. This lesson introduces the tool that handles such problems: one builds a set on each side, and uses a **disjunctive forcing question**, whose answers yield progress on one side without control on which. Lachlan's disjunction then shows that one of the two sets satisfies all the requirements. The next two lessons apply it to Ramsey's theorem for pairs.
 
 As in the previous lesson, a set $Z$ is fixed and the sentences are built with functionals of the oracle $Z \oplus G$.
 
-## Strong cone avoidance of cohesiveness
-
-The first application uses the class $\mathcal M$ of :ref{#def-question-local} in an essential way: the reservoirs are only required to avoid the cone, and their complexity is otherwise arbitrary. Recall that a set $G$ is cohesive for a sequence $\vec R = (R_n)$ if it is infinite and, for each $n$, $G \subseteq^* R_n$ or $G \subseteq^* \overline{R_n}$ (:ref{#def-cohesive}).
-
-:::theorem[Wang]{#thm-coh-strong-cone}
-$\mathsf{COH}$ admits strong cone avoidance: for every set $Z$, every $C \not\leq_T Z$ and every sequence of sets $\vec R$, there is an $\vec R$-cohesive set $G$ with $C \not\leq_T Z \oplus G$.
-:::
-
-:::proof{of=thm-coh-strong-cone}
-*The notion of forcing.* The conditions are the Mathias conditions $(\sigma, X)$ (:ref{#def-mathias-condition}) such that $C \not\leq_T Z \oplus X$, with the order and members of :ref{#ex-forcing-notions}, item 4. Refinement holds as for computable Mathias forcing, since removing finitely many elements from a reservoir does not change its degree. Let $\mathcal M = \{ Z \oplus X : C \not\leq_T Z \oplus X \}$.
-
-*The question.* For a $\Sigma^0_1$ sentence $\varphi$, let $(\sigma, X) \mathrel{?{\vdash}} \varphi$ if some string $\tau$ compatible with $(\sigma, X)$ satisfies $\varphi$, that is, makes the computation converge with oracle $Z \oplus \tau$. The proof of :ref{#prop-mathias-question} shows that this is a forcing question; it does not use the computability of $X$. Compatibility with $(\sigma, X)$ is decidable in $X$, so the relation is $\Sigma^0_1(Z \oplus X)$ with $Z \oplus X \in \mathcal M$. By :ref{#thm-local-cone-avoidance}, every sufficiently generic $G$ satisfies $C \not\leq_T Z \oplus G$.
-
-*Cohesiveness.* Fix $n$ and a condition $(\sigma, X)$. Let $p$ be the enumeration of $X$ in increasing order, and $A = \{ k : p(k) \in R_n \}$. By the Dzhafarov–Jockusch theorem (:ref{#thm-dj-cone-avoidance}) relative to $Z \oplus X$, there is an infinite set $H$, contained in $A$ or in $\overline A$, with $C \not\leq_T Z \oplus X \oplus H$. The set $Y = p[H]$ is an infinite subset of $X$, contained in $R_n$ or in $\overline{R_n}$, and computable in $X \oplus H$; so $C \not\leq_T Z \oplus Y$, and $(\sigma, Y)$ is a condition extending $(\sigma, X)$. All its members $G$ satisfy $G \subseteq^* R_n$ or $G \subseteq^* \overline{R_n}$. So the set of conditions with this property is dense, for each $n$.
-
-*Infinity.* Given $(\sigma, X)$ and $k$, adding to $\sigma$ an element of $X$ above $k$, and removing from $X$ the numbers up to it, gives an extension all of whose members have an element above $k$.
-
-A set generic for all these dense sets is infinite, $\vec R$-cohesive, and does not compute $C$ together with $Z$.
-:::
-
-Strong cone avoidance of cohesiveness contrasts with :ref{#thm-coh-cone-avoidance}, where the sequence is computable in $Z$ and the reservoirs can be kept computable in $Z$. Here the sets $R_n$ are arbitrary, so their intersections with a reservoir are not simple, and the reservoirs are only required to satisfy the property that is being preserved. The step that shrinks a reservoir is an instance of the pigeonhole principle, applied to an arbitrary set: strong cone avoidance of $\mathsf{COH}$ is inherited from strong cone avoidance of $\mathsf{RT}^1_2$. This is the general pattern for Mathias-type notions: the reservoirs are taken in a class defined by the weakness property, and the operations on reservoirs must preserve that class.
-
-:::quiz[strong cone avoidance of cohesiveness]
-Why can the reservoir $X \cap R_n$, or $X \setminus R_n$, not be used directly as the new reservoir in the proof of :ref{#thm-coh-strong-cone}?
-
-- [x] Because $R_n$ is arbitrary, so these sets may compute $C$ together with $Z$, and the new condition would not be a condition.
-- [ ] Because neither of them is infinite.
-
-  One of them is infinite.
-- [ ] Because the question would no longer be a forcing question.
-
-  The question is a forcing question for every Mathias condition; the issue is the class $\mathcal M$.
-:::
-
 ## Disjunctive notions of forcing
 
-For Ramsey-type problems, a solution must be found on one of several sides, and one cannot know in advance which side will allow a weak solution. The proof of the Dzhafarov–Jockusch theorem (:ref{#thm-dj-cone-avoidance}) builds one set on each side and satisfies, for every pair of indices, a disjunction of two requirements; Lachlan's disjunction (:ref{to="ramsey-theorem/cone-avoidance"}) then says that one of the two sets satisfies all its requirements. The disjunctive notions of forcing build pairs of sets by decreasing sequences of conditions. We only need the following structure.
+For Ramsey-type problems, a solution must be found on one of several sides, and one cannot know in advance which side will allow a weak solution. The proof of the Dzhafarov–Jockusch theorem (:ref{#thm-dj-cone-avoidance}) builds one set on each side and satisfies, for every pair of indices, a disjunction of two requirements; Lachlan's disjunction (:ref{to="ramsey-theorem/cone-avoidance"}) then says that one of the two sets satisfies all its requirements. The disjunctive notions of forcing build pairs of sets by decreasing sequences of conditions.
+
+A question about one side cannot have the right complexity. For the pigeonhole principle and a Mathias condition $(\sigma, X)$ building a subset of $A$, the natural question "some string compatible with $(\sigma, X \cap A)$ makes the computation converge" is $\Sigma^0_1(X \oplus A)$, and $A$ is arbitrary. The Dzhafarov–Jockusch argument removes $A$ by **over-approximation**: it asks whether, for **every** partition of $\nat$ into two parts, some side admits such a string, a $\Sigma^0_1(X)$ property by compactness. A positive answer, applied to the partition $(A, \overline A)$, gives progress on one side, but not on a chosen side. We only need the following structure.
 
 :::definition{#def-disjunctive-notion}
 A **disjunctive notion of forcing** consists of a set of conditions with a preorder $\leq$, and, for each condition $c$ and each $i < 2$, a non-empty closed class $[c]_i \subseteq \cs$, the **members of side $i$**, such that $d \leq c$ implies $[d]_i \subseteq [c]_i$. For a sentence $\varphi$ of level $1$ about a set $G$, a condition $c$ **forces $\varphi(G_i)$**, written $c \Vdash \varphi(G_i)$, if every member of side $i$ of $c$ satisfies $\varphi$.
@@ -102,12 +70,12 @@ In the proof of :ref{#lem-disjunctive-construction}, why is it essential that th
   The non-computability of $C$ is used in :ref{#lem-disjunctive-cone}, not here.
 :::
 
-The forcing of Dzhafarov and Jockusch fits this frame. Its conditions are the triples $(\sigma_0, \sigma_1, X)$ of the proof of :ref{#thm-dj-cone-avoidance}, the members of side $i$ are the members of the Mathias condition $(\sigma_i, X)$, and the relation "$c$ answers $(x, v)$" of that proof is the instance, for the sentences $\Phi^{Z \oplus G}_{e_i}(x)\converge = v$, of the disjunctive question: $c \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ if for every partition $\nat = U^0 \sqcup U^1$ there are $i < 2$ and a string $\tau$ compatible with $(\sigma_i, X \cap U^i)$ satisfying $\varphi_i$. The three cases of that proof are the proof of :ref{#lem-disjunctive-cone}, with $\mathcal M$ a Scott ideal not containing $C$.
+The forcing of Dzhafarov and Jockusch fits this frame. Its conditions are the triples $(\sigma_0, \sigma_1, X)$ of the proof of :ref{#thm-dj-cone-avoidance}, the members of side $i$ are the members of the Mathias condition $(\sigma_i, X)$, and the relation "$c$ answers $(x, v)$" of that proof is the instance, for the sentences $\Phi^{Z \oplus G}_{e_i}(x)\converge = v$, of the disjunctive question: $c \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ if for every partition $\nat = U^0 \sqcup U^1$ there are $i < 2$ and a string $\tau$ compatible with $(\sigma_i, X \cap U^i)$ satisfying $\varphi_i$. The three cases of that proof are the proof of :ref{#lem-disjunctive-cone}, with $\mathcal M$ a Scott ideal containing $Z$ and not containing $C$ (:ref{#lem-scott-cone}).
 
 ## Exercises
 
 ::::exercise{difficulty=2}
-Let $A$ be a set. Define a disjunctive notion of forcing for the pigeonhole principle with conditions $(\sigma_0, \sigma_1, X)$, $X \in \mathcal M$ infinite, $\sigma_i \subseteq A^i$ where $A^0 = A$ and $A^1 = \overline A$, the members of side $i$ being those of the Mathias condition $(\sigma_i, X)$. Show that the question of the Dzhafarov–Jockusch proof is a $\Sigma^0_1(\mathcal M)$-preserving disjunctive forcing question, and that :ref{#lem-disjunctive-cone} and :ref{#lem-disjunctive-construction} give :ref{#thm-dj-cone-avoidance}.
+Let $A$ be a set, and $\mathcal M$ a Scott ideal containing $Z$ and not containing $C$. Define a disjunctive notion of forcing for the pigeonhole principle with conditions $(\sigma_0, \sigma_1, X)$, $X \in \mathcal M$ infinite with $\min X \geq |\sigma_0|, |\sigma_1|$, $\sigma_i \subseteq A^i$ where $A^0 = A$ and $A^1 = \overline A$, the members of side $i$ being those of the Mathias condition $(\sigma_i, X)$. Show that the question of the Dzhafarov–Jockusch proof is a $\Sigma^0_1(\mathcal M)$-preserving disjunctive forcing question, and that :ref{#lem-disjunctive-cone} and :ref{#lem-disjunctive-construction} give :ref{#thm-dj-cone-avoidance}.
 
 :::solution
 Let $c \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ if for every set $B$, with $B^0 = B$ and $B^1 = \nat \setminus B$, there are $i < 2$ and a string $\tau$ compatible with $(\sigma_i, X \cap B^i)$ satisfying $\varphi_i$.
@@ -118,7 +86,7 @@ Let $c \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ if for every set 
 
 *Property 2.* The tree has a path in $\mathcal M$; for some $i$, $Y = X \cap B^i$ is infinite, and $(\sigma_0, \sigma_1, Y)$ is a condition. A member of side $i$ satisfying $\varphi_i$ would have a prefix compatible with $(\sigma_i, X \cap B^i)$ satisfying $\varphi_i$, contradicting the choice of $B$.
 
-Under the assumption that no infinite subset of $A$ or $\overline A$ lies in $\mathcal M$, both sides can be extended, as in the proof of :ref{#thm-dj-cone-avoidance}. A sequence of conditions handling infinity and all pairs $(e_0, e_1)$ through :ref{#lem-disjunctive-cone} gives, by :ref{#lem-disjunctive-construction}, an infinite subset of $A$ or of $\overline A$ that does not compute $C$ together with $Z$.
+If some infinite subset $H$ of $A$ or of $\overline A$ lies in $\mathcal M$, then $C \not\leq_T Z \oplus H$ since $Z \oplus H \in \mathcal M$, and $H$ is a solution. Otherwise both sides can be extended, as in the proof of :ref{#thm-dj-cone-avoidance}. A sequence of conditions handling infinity and all pairs $(e_0, e_1)$ through :ref{#lem-disjunctive-cone} gives, by :ref{#lem-disjunctive-construction}, an infinite subset of $A$ or of $\overline A$ that does not compute $C$ together with $Z$.
 :::
 ::::
 
@@ -132,9 +100,8 @@ Let $G_0 = C_1$ and $G_1 = C_0$. For $j = 0$, $\Phi^{G_0}_{e_0} \neq C_0$ for ev
 
 ## Notes and references
 
-Strong cone avoidance of $\mathsf{COH}$ is due to Wang (2014); the proof through Mathias conditions whose reservoirs avoid the cone, using strong cone avoidance of the pigeonhole principle for the density of cohesiveness, follows an exercise of the chapter *Cone avoidance* of Patey's monograph (section *Seetapun's theorem*), which also defines disjunctive forcing questions. Lachlan's disjunction is Lemma 8.3.7 of Dzhafarov and Mummert, and 2-fold Mathias forcing is their Definition 8.3.5. The theorem that avoidance of one cone implies avoidance of countably many cones is Corollary 2.4 of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky (2022).
+Disjunctive forcing questions are defined in the chapter *Cone avoidance* of Patey's monograph (section *Seetapun's theorem*), where the Dzhafarov–Jockusch theorem is proved with them. Lachlan's disjunction is Lemma 8.3.7 of Dzhafarov and Mummert, and 2-fold Mathias forcing is their Definition 8.3.5. The theorem that avoidance of one cone implies avoidance of countably many cones is Corollary 2.4 of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky (2022).
 
-- W. Wang, *Some logically weak Ramseyan theorems*, Advances in Mathematics 261 (2014), 1–25.
 - D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
 - R. Downey, N. Greenberg, M. Harrison-Trainor, L. Patey and D. Turetsky, *Relationships between computability-theoretic properties of problems*, Journal of Symbolic Logic 87 (2022), 47–71; arXiv:1903.04273.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 8.3.

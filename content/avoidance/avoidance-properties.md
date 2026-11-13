@@ -7,7 +7,7 @@ prerequisites: [reducibilities/preservation, ramsey-theorem/seetapun, pi01-class
 
 The computability-theoretic study of a problem $\mathsf P$ (:ref{#def-problem}) asks how complex the solutions of its computable instances must be. Lower bounds are instances all of whose solutions are complex: every infinite path of some computable binary tree is PA, every infinite homogeneous set of some computable coloring of triples computes $\emptyset'$ (:ref{#prop-rt32-jump}). Upper bounds say that every computable instance has a weak solution. The weakest form of strength a problem can have is the ability to **encode** a set: to have a computable instance all of whose solutions compute a fixed non-computable set $C$. A problem that cannot do this for any $C$ admits **cone avoidance**.
 
-This course studies cone avoidance and the related **avoidance properties** systematically. This first lesson fixes the definitions, relates them to the preservation of weakness properties of the course on reducibilities, and collects the examples proved in earlier courses. The next lessons develop the method that proves such properties, the **forcing question**, and apply it to Ramsey's theorem for pairs, to the preservation of non-$\Sigma^0_1$ definitions and to the preservation of hyperimmunities.
+This course studies cone avoidance and the related **avoidance properties** systematically. This first lesson fixes the definitions, relates them to preservation of weakness properties, and collects the examples proved in earlier courses. The next lessons develop the method that proves such properties, the **forcing question**, and apply it to Ramsey's theorem for pairs, to the preservation of non-$\Sigma^0_1$ definitions and to the preservation of hyperimmunities.
 
 ## Cone avoidance
 
@@ -59,12 +59,12 @@ The following table collects what earlier courses prove. The problems are those 
 | --- | --- | --- |
 | $\mathsf{RT}^1_2$ | yes (trivial) | yes, Dzhafarov–Jockusch (:ref{#thm-dj-cone-avoidance}) |
 | $\mathsf{WKL}$ | yes, Jockusch–Soare (:ref{#thm-cone-avoidance-basis}) | no |
-| $\mathsf{COH}$ | yes (:ref{#thm-coh-cone-avoidance}) | yes, Wang (next lesson) |
+| $\mathsf{COH}$ | yes (:ref{#thm-coh-cone-avoidance}) | yes, Wang (:ref{to="avoidance/strong-cone-avoidance"}) |
 | $\mathsf{RT}^2_2$ | yes, Seetapun (:ref{#thm-seetapun}) | no |
 | $\mathsf{RT}^3_2$ | no (:ref{#prop-rt32-jump}) | no |
 | $\mathsf J$ | no | no |
 
-The justifications of the entries not proved elsewhere are short.
+The other entries are justified as follows.
 
 1. **$\mathsf{RT}^1_2$.** A $Z$-computable set $A$ has a $Z$-computable solution, $A$ or $\overline A$, whichever is infinite; and $C \not\leq_T Z \oplus Y$ when $Y \leq_T Z$.
 2. **$\mathsf{WKL}$.** The cone avoidance basis theorem relativized to $Z$ gives, for every infinite $Z$-computable binary tree, a path $Y$ with $C \not\leq_T Z \oplus Y$. Strong cone avoidance fails: for a non-computable set $C$, the tree $\{ C \uh n : n \in \nat \}$ is an infinite binary tree whose only path is $C$; take $Z = \emptyset$.
@@ -89,7 +89,7 @@ Why does the tree $\{ C \uh n : n \in \nat \}$ not contradict cone avoidance for
 
 Why does the coloring $h$ of :ref{#prop-rt32-jump} not contradict Seetapun's theorem?
 
-- [x] Because $h$ is computable in $\emptyset'$ and not computable; Seetapun's theorem with $Z = \emptyset$ is about computable colorings, and with $Z = \emptyset'$ the set $C = \emptyset'$ is computable in $Z$.
+- [x] Because $h$ is not computable: the function $m$ of that proof is computable in $h$, so every $Z$ computing $h$ computes $\emptyset'$, and Seetapun's theorem says nothing about $h$ and the cone above $\emptyset'$.
 - [ ] Because $h$ is a coloring of triples.
 
   $h$ is a coloring of pairs; the coloring of triples of :ref{#prop-rt32-jump} is built from it.
@@ -110,7 +110,7 @@ If $\mathsf P_0$ and $\mathsf P_1$ admit cone avoidance, so does $\mathsf P_0 \t
 Let $C \not\leq_T Z$ and $X_0 \oplus X_1 \leq_T Z$. Cone avoidance of $\mathsf P_0$ gives a solution $Y_0$ to $X_0$ with $C \not\leq_T Z \oplus Y_0$. The instance $X_1$ is computable in $Z \oplus Y_0$, so cone avoidance of $\mathsf P_1$ **relative to $Z \oplus Y_0$** gives a solution $Y_1$ to $X_1$ with $C \not\leq_T Z \oplus Y_0 \oplus Y_1$. The second statement is the third exercise of :ref{to="reducibilities/preservation"}, applied to each weakness property $\mathcal W_C$, with :ref{#prop-cone-avoidance-preservation}.
 :::
 
-The first part of the proof uses cone avoidance of $\mathsf P_1$ with the oracle $Z \oplus Y_0$, which is not computable in general. The first exercise shows that the unrelativized version of the definition does not have this closure property. In the literature, the unrelativized and the relativized versions of a preservation property are sometimes distinguished; every natural problem known to satisfy the unrelativized version satisfies the relativized one, with the same proof relativized. In this course the definitions are always relativized.
+The first part of the proof uses cone avoidance of $\mathsf P_1$ with the oracle $Z \oplus Y_0$, which is not computable in general. The unrelativized definition does not support such arguments: in the first exercise, no Turing ideal satisfying both its problem and $\mathsf{WKL}$ avoids the cone above $\emptyset'$. Every natural problem known to satisfy an unrelativized preservation property satisfies the relativized one, with the same proof; in this course the definitions are always relativized.
 
 :::quiz[relativization]
 In the proof of :ref{#prop-cone-avoidance-product}, why is cone avoidance of $\mathsf P_1$ applied relative to $Z \oplus Y_0$ rather than relative to $Z$?
@@ -130,7 +130,7 @@ In the proof of :ref{#prop-cone-avoidance-product}, why is cone avoidance of $\m
 Let $\mathsf P$ be the problem whose instances are all sets, where the only solution to a computable set is $\emptyset$, and the only solution to a non-computable set $X$ is $X'$. Show that every computable instance of $\mathsf P$ has a solution that computes no non-computable set, that $\mathsf P$ does not admit cone avoidance, and that every Turing ideal satisfying both $\mathsf P$ and $\mathsf{WKL}$ contains $\emptyset'$.
 
 :::solution
-A computable instance has the solution $\emptyset$, which computes only computable sets. For cone avoidance, take a non-computable $Z$, the instance $X = Z$ and $C = Z'$: then $C \not\leq_T Z$, and the only solution $Z'$ computes $C$. Let $\mathcal I$ be a Turing ideal satisfying $\mathsf P$ and $\mathsf{WKL}$. Some infinite computable binary tree has no computable path (:ref{#thm-dnc2-no-computable}), so $\mathcal I$ contains a non-computable set $X$, and then $X' \in \mathcal I$. Since $\emptyset' \leq_T X'$, $\emptyset' \in \mathcal I$. Both problems avoid cones on computable instances, but their product does not: $\mathsf{WKL}$ produces a non-computable set, to which $\mathsf P$ is then applied.
+A computable instance has the solution $\emptyset$, which computes only computable sets. For cone avoidance, take a non-computable $Z$, the instance $X = Z$ and $C = Z'$: then $C \not\leq_T Z$, and the only solution $Z'$ computes $C$. Let $\mathcal I$ be a Turing ideal satisfying $\mathsf P$ and $\mathsf{WKL}$. Some infinite computable binary tree has no computable path (:ref{#thm-dnc2-no-computable}), so $\mathcal I$ contains a non-computable set $X$, and then $X' \in \mathcal I$. Since $\emptyset' \leq_T X'$, $\emptyset' \in \mathcal I$. Both problems avoid cones on computable instances, but no ω-model of both does: $\mathsf{WKL}$ produces a non-computable set, to which $\mathsf P$ is then applied.
 :::
 ::::
 
@@ -152,10 +152,12 @@ The Turing ideal $\mathrm{REC}$ of the computable sets satisfies $\mathsf{RT}^1_
 
 ## Notes and references
 
-The definitions of cone avoidance and strong cone avoidance follow the chapter *Cone avoidance* of Patey's monograph *Lowness and avoidance*, and Dzhafarov and Mummert (Definition 3.6.11 for preservation; Section 8.3 for the cone avoidance of Ramsey's theorem). The name and the systematic study of strong cone avoidance go back to Dzhafarov and Jockusch (2009). The cone avoidance basis theorem is due to Jockusch and Soare (1972), cone avoidance for $\mathsf{COH}$ to Jockusch and Stephan (1993) and Cholak, Jockusch and Slaman (2001), and Seetapun's theorem to Seetapun and Slaman (1995). Downey, Greenberg, Harrison-Trainor, Patey and Turetsky (2022) compare the relativized and unrelativized versions of the preservation properties; they show that the relativized versions of several of them coincide (lesson :ref{to="avoidance/hyperimmunities"}), and that the unrelativized versions do not.
+The definitions of cone avoidance and strong cone avoidance follow the chapter *Cone avoidance* of Patey's monograph *Lowness and avoidance*, and Dzhafarov and Mummert (Definition 3.6.11 for preservation; Section 8.3 for the cone avoidance of Ramsey's theorem). Strong cone avoidance of the pigeonhole principle is due to Dzhafarov and Jockusch (2009). The cone avoidance basis theorem is due to Jockusch and Soare (1972), cone avoidance for $\mathsf{COH}$ to Jockusch and Stephan (1993) and Cholak, Jockusch and Slaman (2001), and Seetapun's theorem to Seetapun and Slaman (1995). Downey, Greenberg, Harrison-Trainor, Patey and Turetsky (2022) compare the relativized and unrelativized versions of the preservation properties; they show that the relativized versions of several of them coincide (lessons :ref{to="avoidance/non-sigma1-definitions"} and :ref{to="avoidance/moduli"}), and that the unrelativized versions do not.
 
 - D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
 - C. G. Jockusch, Jr. and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
+- C. G. Jockusch, Jr. and F. Stephan, *A cohesive set which is not high*, Mathematical Logic Quarterly 39 (1993), 515–530.
+- P. A. Cholak, C. G. Jockusch, Jr. and T. A. Slaman, *On the strength of Ramsey's theorem for pairs*, Journal of Symbolic Logic 66 (2001), 1–55.
 - D. Seetapun and T. A. Slaman, *On the strength of Ramsey's theorem*, Notre Dame Journal of Formal Logic 36 (1995), 570–582.
 - R. Downey, N. Greenberg, M. Harrison-Trainor, L. Patey and D. Turetsky, *Relationships between computability-theoretic properties of problems*, Journal of Symbolic Logic 87 (2022), 47–71; arXiv:1903.04273.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.6, 4.6 and 8.3.

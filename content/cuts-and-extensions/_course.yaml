@@ -12,7 +12,8 @@ description: >
   definability, by an overspill argument, and those of a proper exponential cut
   satisfy weak König's lemma (Scott), so that the standard system is a Scott
   set; conversely every countable Scott set is the standard system of a model of
-  Peano arithmetic, and no non-standard model is computable (Tennenbaum). It
+  Peano arithmetic, and no non-standard model of IΔ₀ + exp has a computable
+  addition (Tennenbaum). It
   characterizes semiregular cuts, those whose coded subsets form a model of
   WKL₀, and compares them with regular cuts (Kirby and Paris). It then turns to
   extensions of models: a cofinal Σₙ-elementary extension of a model of BΣₙ₊₁
@@ -27,4 +28,4 @@ objectives:
   - Prove that semiregular cuts satisfy Σ₁ induction, and characterize them by WKL₀
   - Use the Tarski–Vaught test level by level, and prove preservation theorems for cofinal extensions
   - Prove that end extensions give collection, split extensions into cofinal and end parts, and deduce the conservation of BΣₙ₊₁ over IΣₙ
-lessons: [standard-system, weak-konig-cuts, scott-tennenbaum, semiregular-cuts, cofinal-extensions, collection-end-extensions]
+lessons: [standard-system, weak-konig-cuts, scott-tennenbaum, semiregular-cuts, wkl-regular-cuts, cofinal-extensions, collection-end-extensions, splitting-conservation]

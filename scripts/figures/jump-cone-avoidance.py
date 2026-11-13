@@ -3,7 +3,7 @@
 # Paste each figure into the lesson that uses it:
 #   lifted-question    -> sigma2-questions.md
 #   decision-tree      -> cohesiveness-second-jump.md
-#   partition-regular  -> largeness.md
+#   partition-regular  -> partition-regularity.md
 #   cohesive-choices   -> cohesive-classes.md
 #   pigeon-condition   -> pigeonhole-forcing.md
 #   case-split         -> pigeons-non-high.md
@@ -122,7 +122,7 @@ choices = [0, 1, 0, 0, 1]   # 0: intersect with L(Z_k), 1: with L(complement of 
 SUB = '₀₁₂₃₄₅'
 s = ['<svg class="fig" viewBox="0 0 600 214" width="600" role="img" aria-label="A decreasing sequence of classes U_S0, U_S1, and so on; at step k the class is intersected with L of Z_k or L of the complement of Z_k, the set P choosing a large intersection">']
 s.append('<defs>' + marker('jc-cc-arr', 'muted-fill') + '</defs>')
-BW, GAP, BX = 70, 36, 14
+BW, GAP, BX = 64, 34, 14
 for k in range(len(choices) + 1):
     x = BX + k * (BW + GAP)
     cls = 'head-cell' if k == len(choices) else 'cell'
@@ -135,11 +135,11 @@ for k in range(len(choices) + 1):
         cx = x + BW + GAP / 2
         up_cls = 'label' if side == 0 else 'label muted'
         dn_cls = 'label' if side == 1 else 'label muted'
-        s.append(f'<text x="{cx:.1f}" y="40" text-anchor="middle" class="{up_cls}">𝓛(Z{SUB[k]})</text>')
-        s.append(f'<text x="{cx:.1f}" y="146" text-anchor="middle" class="{dn_cls}">𝓛(Z{SUB[k]}ᶜ)</text>')
+        s.append(f'<text x="{cx:.1f}" y="40" text-anchor="middle" class="{up_cls}">𝓛<tspan font-size="9" dy="3">Z{SUB[k]}</tspan></text>')
+        s.append(f'<text x="{cx:.1f}" y="146" text-anchor="middle" class="{dn_cls}">𝓛<tspan font-size="9" dy="3">Z{SUB[k]}ᶜ</tspan></text>')
         mark_y = 52 if side == 0 else 128
         s.append(f'<circle cx="{cx:.1f}" cy="{mark_y}" r="4" class="accent-fill"/>')
-s.append('<text x="300" y="180" text-anchor="middle" class="label">at each step, P chooses one of the two classes whose intersection with the current class is large (dot)</text>')
+s.append('<text x="300" y="180" text-anchor="middle" class="label">at each step, P chooses a class whose intersection with the current one is large (dot)</text>')
 s.append('<text x="300" y="200" text-anchor="middle" class="label">Zᶜ is the complement of Z; the intersection of the sequence is 𝓜-cohesive</text>')
 s.append('</svg>')
 out['cohesive-choices'] = ''.join(s)

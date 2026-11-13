@@ -1,16 +1,16 @@
 ---
 title: Cohesiveness and restricted reservoirs
-summary: Mathias forcing with arbitrary computable reservoirs produces high sets; restricting the reservoirs to the Boolean combinations chosen along one path of decisions gives a notion of forcing with a Σ⁰₂ question, and cohesive sets that avoid a cone and a jump cone at once.
+summary: Restricting Mathias reservoirs to Boolean combinations along a path of decisions gives cohesive sets avoiding a cone and a jump cone at once.
 duration: 45
 prerequisites: [sigma2-questions, ramsey-theorem/cohesiveness]
 ---
 
-Computable Mathias forcing gives cohesive sets with a good control of the first jump (:ref{#thm-mathias-coh-preservation}), but its sufficiently generic sets are high (:ref{#prop-mathias-dominant}). Two diagnoses of the failure lead to the same remedy.
+Computable Mathias forcing gives cohesive sets with a good control of the first jump (:ref{#thm-mathias-coh-preservation}), but its sufficiently generic sets are high (:ref{#prop-mathias-dominant}). Two diagnoses of the failure lead to one remedy.
 
 - **The reservoirs are too sparse.** The proof of :ref{#prop-mathias-dominant} thins the reservoir to a set whose elements grow faster than a given computable function. The construction of a cohesive set never needs such a thinning: it only splits the reservoir along one of the sets $R_n$, keeping a part that is infinite. If the reservoirs are only the Boolean combinations of the sets $R_n$, they cannot be thinned arbitrarily.
 - **The partial order is too complex.** The lifted question quantifies over all extensions, hence over indices of infinite computable subsets of the reservoir, a $\Pi^0_2$ property (:ref{#ex-lifted-questions}). If the reservoir is determined by a finite amount of information, the quantification becomes a search over finite objects.
 
-The remedy is to keep the reservoirs that the construction of a cohesive set needs and nothing else. Monin and Patey state it as a general principle: to obtain second-jump control, take a notion of forcing with a good first-jump control and restrict its partial order to the conditions that the construction actually uses. This lesson carries this out for cohesiveness. The choice of the Boolean combinations is made in advance, along a path through a tree of decisions; the path must be chosen so as not to help computing the set to be avoided.
+The remedy is to keep the reservoirs that the construction of a cohesive set needs and nothing else. Monin and Patey state it as a general principle: to obtain second-jump control, take a notion of forcing with a good first-jump control and **restrict its partial order** to the conditions that the construction actually uses. The choice of the Boolean combinations is made in advance, along a path through a tree of decisions; the path must be chosen so as not to help computing the set to be avoided.
 
 ## The tree of decisions
 
@@ -40,7 +40,7 @@ The tree $T$ is computable in $\emptyset'$, so its paths form a non-empty $\Pi^0
 Let $P$ be a path of $T$. A **$P$-condition** is a pair $(\sigma, n)$ with $\sigma$ a string and $n \in \nat$. Its members are the sets $G$ with $\sigma \prec G$ and $G \setminus \sigma \subseteq R_{P \uh n}$, where $G \setminus \sigma$ denotes the set of elements of $G$ larger than or equal to $|\sigma|$. A $P$-condition $(\tau, m)$ **extends** $(\sigma, n)$ if $m \geq n$, $\sigma \preceq \tau$, and every $x$ with $|\sigma| \leq x < |\tau|$ and $\tau(x) = 1$ belongs to $R_{P \uh n}$.
 :::
 
-A $P$-condition $(\sigma, n)$ is the computable Mathias condition $(\sigma, R_{P \uh n} \setminus \{0, \dots, |\sigma| - 1\})$, with an infinite reservoir by :ref{#lem-decision-tree}. The members of an extension are members of the condition, since $R_{P \uh m} \subseteq R_{P \uh n}$. The class of members is closed and contains the finite set $\sigma$; the string $\sigma 0^k$ gives an extension $(\sigma 0^k, n)$ whose members have the prefix $\sigma 0^k$, so this is a notion of forcing in the sense of :ref{#def-forcing-notion}. A $P$-condition is a finite object, but deciding whether $(\tau, m)$ extends $(\sigma, n)$ requires the string $P \uh n$; the extension relation is computable in $P$.
+A $P$-condition $(\sigma, n)$ is the computable Mathias condition $(\sigma, R_{P \uh n} \setminus \{0, \dots, |\sigma| - 1\})$, with an infinite reservoir by :ref{#lem-decision-tree}. The members of an extension are members of the condition, since $R_{P \uh m} \subseteq R_{P \uh n}$. The class of members is closed and contains $\sigma$, and a prefix $\tau \succeq \sigma$ of a member gives the extension $(\tau, n)$, whose members extend $\tau$; so this is a notion of forcing (:ref{#def-forcing-notion}). A $P$-condition is a finite object, but the extension relation needs the string $P \uh n$: it is computable in $P$.
 
 :::lemma{#lem-path-questions}
 For a $P$-condition $(\sigma, n)$ and a $\Sigma^0_1$ sentence $\varphi$, let $(\sigma, n) \mathrel{?{\vdash}} \varphi$ if some string $\tau$ with $(\tau, n) \leq (\sigma, n)$ satisfies $\varphi$. Then:
@@ -54,7 +54,7 @@ For a $P$-condition $(\sigma, n)$ and a $\Sigma^0_1$ sentence $\varphi$, let $(\
 2. Lemma :ref{#lem-lifted-question} gives the two properties. For the definability: $(\sigma, n) \mathrel{?{\vdash}} \exists y\ \psi(y)$ if and only if there are $\tau$, $m$ and $k$ such that $(\tau, m) \leq (\sigma, n)$ and $(\tau, m) \mathrel{?{\nvdash}} \neg\psi(k)$. The first clause is computable in $P$. By item 1, the second says that no string $\tau'$ with $(\tau', m) \leq (\tau, m)$ satisfies $\neg\psi(k)$; it is a $\Pi^0_1$ property of $\tau$, $k$ and the string $P \uh m$, uniformly, hence decided by $\emptyset'$ once $P \uh m$ is given. So the lifted question is $\Sigma^0_1(P \oplus \emptyset')$, for every condition.
 :::
 
-The point of item 2 is that the extensions $(\tau, m)$ are finite objects, enumerated with the oracle $P$; the complexity of the partial order is absorbed into the oracle $P \oplus \emptyset'$, instead of adding a quantifier.
+In item 2, the extensions $(\tau, m)$ are finite objects, enumerated with the oracle $P$: the complexity of the partial order is **absorbed into the oracle** $P \oplus \emptyset'$ instead of adding a quantifier.
 
 :::quiz[forcing along a path]
 In item 2 of :ref{#lem-path-questions}, why is the relation $(\tau, m) \mathrel{?{\nvdash}} \neg\psi(k)$ decided by $\emptyset'$ given $P \uh m$, although $m$ ranges over all numbers?
@@ -97,9 +97,9 @@ By the cone avoidance basis theorem (:ref{#thm-cone-avoidance-basis}) relativize
 The four families of dense sets are countable, so a single sufficiently generic $G$ has all the properties.
 :::
 
-The choice of $P$ is not a technicality. A sufficiently generic $G$ satisfies $G \subseteq^* R_{P \uh n}$ for every $n$, and for each $n$ the string $P \uh n$ is the only string $\rho$ of length $n$ with $G \subseteq^* R_\rho$, since the sets $R_\rho$ for distinct $\rho$ of the same length are disjoint. The relation "$G \subseteq^* R_\rho$" is $\Sigma^0_2(G)$, that is, $G'$-c.e., so $G'$ computes $P$: it enumerates the pairs $(\rho, n)$ with $G \subseteq^* R_\rho$ and $|\rho| = n$, and finds exactly one for each $n$. A path $P$ with $D \leq_T P \oplus \emptyset'$ would give $D \leq_T G'$. For the sequence of Jockusch and Stephan (:ref{#prop-coh-no-low}), every path of $T$ is PA relative to $\emptyset'$, and the cone avoidance basis theorem relative to $\emptyset'$ is exactly what is needed to keep the jump of $G$ away from $D$.
+The choice of $P$ is not a technicality. A sufficiently generic $G$ satisfies $G \subseteq^* R_{P \uh n}$ for every $n$, and for each $n$ the string $P \uh n$ is the only string $\rho$ of length $n$ with $G \subseteq^* R_\rho$, since the sets $R_\rho$ for distinct $\rho$ of the same length are disjoint. The relation "$G \subseteq^* R_\rho$" is $\Sigma^0_2(G)$, so $G'$ computes $P$ by enumerating these strings. A path $P$ with $D \leq_T P \oplus \emptyset'$ would give $D \leq_T G'$. For the sequence of Jockusch and Stephan (:ref{#prop-coh-no-low}), every path of $T$ is PA relative to $\emptyset'$ (second exercise).
 
-Compared with the weakly low basis of :ref{#thm-coh-weakly-low}, the theorem adds cone avoidance to jump cone avoidance. A cohesive set $G$ with $G' \leq_T Q$, for $Q$ PA relative to $\emptyset'$ with $D \not\leq_T Q$, satisfies $D \not\leq_T G'$, but its construction gives no control over a non-computable $C \leq_T \emptyset'$, which $Q$ computes.
+Compared with the weakly low basis of :ref{#thm-coh-weakly-low}, the theorem adds cone avoidance to jump cone avoidance, for the reason explained for $\mathsf{WKL}$ in :ref{to="jump-cone-avoidance/wkl-two-cones"}: a cohesive set whose jump is computed by a set $Q$ PA relative to $\emptyset'$ may compute any given $C \leq_T \emptyset'$.
 
 :::quiz[the cohesive set]
 Where is the hypothesis $D \not\leq_T \emptyset'$ used in the proof of :ref{#thm-coh-two-cones}?
@@ -119,7 +119,7 @@ Why does $G'$ compute the path $P$?
 - [x] Because $P \uh n$ is the unique string $\rho$ of length $n$ with $G \subseteq^* R_\rho$, a $\Sigma^0_2(G)$ property; $G'$ enumerates the strings with this property and finds exactly one of each length.
 - [ ] Because $G$ computes $P$.
 
-  $G$ does not compute $P$ in general: $P$ may be PA relative to $\emptyset'$, and $G$ avoids the cone above any given non-computable set.
+  Not in general: for the sequence of the second exercise, $P$ computes $\emptyset'$, and $G$ can be built with $\emptyset' \not\leq_T G$.
 - [ ] Because $P$ is computable in $\emptyset'$.
 
   $P$ is a path of a $\emptyset'$-computable tree, not necessarily $\emptyset'$-computable.
@@ -131,7 +131,7 @@ Why does $G'$ compute the path $P$?
 Let $f$ be a function hyperimmune relative to $P \oplus \emptyset'$. Show that $f$ is hyperimmune relative to $G'$ for every sufficiently generic $G$ for $P$-conditions.
 
 :::solution
-As in the second exercise of :ref{to="jump-cone-avoidance/sigma2-questions"}: write "$\Phi^{G'}_e(m)\converge$" as $\exists \langle k, y \rangle\ \psi_{m,k}(y)$, where $\exists y\ \psi_{m,k}(y)$ expresses "$\Phi^{G'}_e(m)\converge < k$". A positive answer of the lifted question for the first sentence, witnessed by an extension $(\tau, m')$ and $\langle k, y \rangle$, is a positive answer for "$\Phi^{G'}_e(m)\converge < k$" with the same witnesses. Given a condition $c$, the function $g(m)$, the first $k$ found with $c \mathrel{?{\vdash}} \Phi^{G'}_e(m)\converge < k$, is partial computable in $P \oplus \emptyset'$ by item 2 of :ref{#lem-path-questions}. If $g(m)$ is undefined, some extension forces $\Phi^{G'}_e(m)\diverge$; if $g$ is total, $f(m) > g(m)$ for some $m$, and some extension forces $\Phi^{G'}_e(m)\converge < f(m)$. These sets of conditions are dense, and :ref{#thm-forcing-truth} concludes.
+Write the sentences "$\Phi^{G'}_e(m)\converge$" and "$\Phi^{G'}_e(m)\converge < b$" as in the exercise of :ref{to="jump-cone-avoidance/sigma2-questions"}. The lifted question is compact in the same way: a witness $(\tau, m')$ and $\langle k, y \rangle$ for the first sentence is a witness for the second with $b = k + 1$. Given a condition $c$, let $g(m)$ be the first $b$ found with $c \mathrel{?{\vdash}} \Phi^{G'}_e(m)\converge < b$; this partial function is computable in $P \oplus \emptyset'$ by item 2 of :ref{#lem-path-questions}. If $g(m)$ is undefined, some extension forces $\Phi^{G'}_e(m)\diverge$; if $g$ is total, $f(m) > g(m)$ for some $m$, and some extension forces $\Phi^{G'}_e(m)\converge < g(m)$. These sets of conditions are dense, and :ref{#thm-forcing-truth} concludes.
 :::
 ::::
 
@@ -139,13 +139,13 @@ As in the second exercise of :ref{to="jump-cone-avoidance/sigma2-questions"}: wr
 Let $\vec R$ be the sequence of :ref{#prop-coh-no-low}, with $R_e = \{ s : \Phi^{\emptyset'_s}_e(e)[s]\converge = 0 \}$. Show that for every path $P$ of the tree $T$ of :ref{#lem-decision-tree}, the function $1 - P$ is $\{0,1\}$-valued and DNC relative to $\emptyset'$. Deduce, without using :ref{#prop-coh-no-low}, that the jump of every sufficiently generic set for $P$-conditions is PA relative to $\emptyset'$.
 
 :::solution
-By the proof of :ref{#prop-coh-no-low}, $R_e$ is cofinite if $\Phi^{\emptyset'}_e(e)\converge = 0$, and finite if $\Phi^{\emptyset'}_e(e)$ converges to another value. For a path $P$, the set $R_{P \uh (e+1)}$ is infinite by :ref{#lem-decision-tree}. If $\Phi^{\emptyset'}_e(e)\converge = 0$, then $\overline{R_e}$ is finite, so $P(e) = 0$ and $1 - P(e) = 1$. If $\Phi^{\emptyset'}_e(e)\converge = 1$, then $R_e$ is finite, so $P(e) = 1$ and $1 - P(e) = 0$. In both cases $1 - P(e) \neq \Phi^{\emptyset'}_e(e)$, so $1 - P$ is DNC relative to $\emptyset'$, and $P$ is PA relative to $\emptyset'$. A sufficiently generic $G$ satisfies $P \leq_T G'$, as shown after :ref{#thm-coh-two-cones}, and a set computing a set PA relative to $\emptyset'$ is PA relative to $\emptyset'$.
+By the proof of :ref{#prop-coh-no-low}, $R_e$ is cofinite if $\Phi^{\emptyset'}_e(e)\converge = 0$, and finite if $\Phi^{\emptyset'}_e(e)$ converges to another value. For a path $P$, the set $R_{P \uh (e+1)}$ is infinite by :ref{#lem-decision-tree}. If $\Phi^{\emptyset'}_e(e)\converge = 0$, then $\overline{R_e}$ is finite, so $P(e) = 0$ and $1 - P(e) = 1$. If $\Phi^{\emptyset'}_e(e)$ converges to a value $v \neq 0$, then $R_e$ is finite, so $P(e) = 1$ and $1 - P(e) = 0 \neq v$; if it diverges, there is nothing to check. In both cases $1 - P(e) \neq \Phi^{\emptyset'}_e(e)$, so $1 - P$ is DNC relative to $\emptyset'$, and $P$ is PA relative to $\emptyset'$. A sufficiently generic $G$ satisfies $P \leq_T G'$, as shown after :ref{#thm-coh-two-cones}, and a set computing a set PA relative to $\emptyset'$ is PA relative to $\emptyset'$.
 :::
 ::::
 
 ## Notes and references
 
-The two diagnoses of the failure of Mathias forcing, the principle of restricting the partial order to the conditions used by the construction, the forcing along a path of the tree of decisions and :ref{#thm-coh-two-cones} follow the section *Cohesiveness principle* of the chapter *Jump cone avoidance* of Patey's monograph, where the definability of the lifted question is left as an exercise. The monograph also states, as an exercise attributed to Patey (2017), a notion of forcing that chooses the path and builds the cohesive set at the same time, combining $P$-conditions with Jockusch–Soare forcing relative to $\emptyset'$; Patey used such notions to control iterated jumps of cohesive sets. The class of decisions and its relation with the jumps of cohesive sets are due to Jockusch and Stephan (1993); see also Hirschfeldt, Section 6.5.
+The two diagnoses, the principle of restricting the partial order, the forcing along a path and :ref{#thm-coh-two-cones} follow the section *Cohesiveness principle* of the chapter *Jump cone avoidance* of Patey's monograph, where the definability of the lifted question is left as an exercise. The monograph also states, as an exercise attributed to Patey (2017), a notion of forcing that chooses the path and builds the cohesive set at the same time, combining $P$-conditions with Jockusch–Soare forcing relative to $\emptyset'$; Patey used such notions to control iterated jumps of cohesive sets. The class of decisions and its relation with the jumps of cohesive sets are due to Jockusch and Stephan (1993); see also Hirschfeldt, Section 6.5.
 
 - L. Patey, *Controlling iterated jumps of solutions to combinatorial problems*, Computability 6 (2017), 47–78.
 - C. G. Jockusch, Jr. and F. Stephan, *A cohesive set which is not high*, Mathematical Logic Quarterly 39 (1993), 515–530.

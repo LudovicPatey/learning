@@ -26,4 +26,4 @@ objectives:
   - Prove that every set is Δ⁰₂ relative to a set avoiding a given cone, and that cohesiveness admits strong cone avoidance
   - Use disjunctive forcing questions and Lachlan's disjunction, and prove Seetapun's theorem directly
   - Prove preservation of non-Σ⁰₁ definitions and of hyperimmunities for WKL, COH, RT¹₂ and RT²₂, and relate both properties to cone avoidance
-lessons: [avoidance-properties, forcing-question-method, disjunctive-question, seetapun-forcing, non-sigma1-definitions, hyperimmunities]
+lessons: [avoidance-properties, forcing-question-method, strong-cone-avoidance, disjunctive-question, seetapun-conditions, seetapun-forcing, non-sigma1-definitions, moduli, hyperimmunities]

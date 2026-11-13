@@ -2,7 +2,7 @@
 title: Product Mathias forcing
 summary: Mathias conditions with a tuple of reservoirs in a low Scott ideal and a large Δ⁰₂ class of tuples, extended through slices; promises for Π⁰₂ sentences; a Σ⁰₂ question whose positive answers are forced and whose negative answers are promised.
 duration: 40
-prerequisites: [product-largeness, lowness/coded-ideals, jump-cone-avoidance/pigeons-non-high]
+prerequisites: [product-largeness, lowness/coded-ideals, jump-cone-avoidance/pigeons-non-high, jump-cone-avoidance/pigeon-questions]
 ---
 
 This lesson and the next build a forcing of Mathias type with a merging, $\Sigma^0_2$-preserving question for $\Sigma^0_2$ sentences. A condition has a stem, a tuple of reservoirs and a large class of possible future tuples. This lesson defines the conditions, the promises that replace the forcing of $\Pi^0_2$ sentences, and the question; the next one merges two negative answers by duplicating the reservoirs. The theorem obtained is weak, since low sets satisfy it; the notion of forcing is what the rest of the course adapts to the pigeonhole principle.

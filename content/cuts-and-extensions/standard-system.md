@@ -24,7 +24,7 @@ A coded set $\mathrm{Ack}(c)$ is bounded in $M$, by $c$ itself (:ref{#lem-ack-ba
 :::example{#ex-coded-subsets}
 Let $M$ be a model of $\mathrm I\Delta_0 + \mathrm{exp}$ and $I$ a proper cut.
 
-1. Every set $\{ x \in I : M \models \delta(x, \bar p) \}$, with $\delta$ a $\Delta_0$ formula and parameters $\bar p \in M$, belongs to $\mathrm{Cod}(M/I)$: take $a \in M \setminus I$, and a code of $\{ x < a : \delta(x, \bar p) \}$ given by :ref{#thm-delta0-comprehension}. In particular $I$ itself is the trace of a code of $[0, a)$, although $I$ is not definable in $M$ when $M \models \mathrm I\Delta_0$ (:ref{#prop-cuts-induction}).
+1. Every set $\{ x \in I : M \models \delta(x, \bar p) \}$, with $\delta$ a $\Delta_0$ formula and parameters $\bar p \in M$, belongs to $\mathrm{Cod}(M/I)$: take $a \in M \setminus I$, and a code of $\{ x < a : \delta(x, \bar p) \}$ given by :ref{#thm-delta0-comprehension}. In particular $I$ itself is the trace of a code of $[0, a)$, although $I$ is not defined in $M$ by any bounded formula with parameters, since $M \models \mathrm I\Delta_0$ (:ref{#prop-cuts-induction}), nor by any formula at all if $M \models \mathrm{PA}$.
 2. If $M$ is non-standard, every finite set $F \subseteq \nat$ belongs to $\mathrm{SSy}(M)$, coded by the standard number $\sum_{k \in F} 2^k$.
 3. For $M = \nat$ no proper cut exists. If $M$ is non-standard, $\mathrm{SSy}(M)$ is countable when $M$ is, and so it is a small part of $\mathcal P(\nat)$; which sets it contains depends on $M$.
 :::
@@ -126,7 +126,7 @@ The theorem uses $\mathrm{exp}$ only to have codes for bounded sets. It says tha
 Let $M \subseteq_e N$ be models of $\mathrm I\Delta_0 + \mathrm{exp}$, with $M$ non-standard. Show that $\mathrm{SSy}(M) = \mathrm{SSy}(N)$.
 
 :::solution
-Every element of $\nat$ is identified with the same numeral in $M$ and in $N$. If $c \in M$, then for $k \in \nat$, $M \models k \in c$ if and only if $N \models k \in c$, by :ref{#lem-delta0-absolute}; so $\mathrm{SSy}(M) \subseteq \mathrm{SSy}(N)$. Conversely, let $d \in N$ and $a \in M$ non-standard. By :ref{#thm-delta0-comprehension} in $N$, some $c < 2^a$ satisfies $\forall x < a\ (x \in c \leftrightarrow x \in d)$. The power $2^a$ exists in $M$, hence is the same element in $N$ by absoluteness of $\varepsilon$, so $c < 2^a \in M$ and $c \in M$, since $M$ is an initial segment of $N$. For $k \in \nat$, $k < a$, so $k \in \mathrm{Ack}(d)$ if and only if $N \models k \in c$, if and only if $M \models k \in c$. Hence $\mathrm{Ack}(d) \cap \nat = \mathrm{Ack}^M(c) \cap \nat \in \mathrm{SSy}(M)$.
+Every element of $\nat$ is identified with the same numeral in $M$ and in $N$. If $c \in M$, then for $k \in \nat$, $M \models k \in c$ if and only if $N \models k \in c$, by :ref{#lem-delta0-absolute}; so $\mathrm{SSy}(M) \subseteq \mathrm{SSy}(N)$. Conversely, let $d \in N$ and $a \in M$ non-standard. By :ref{#thm-delta0-comprehension} in $N$, some $c < 2^a$ satisfies $\forall x < a\ (x \in c \leftrightarrow x \in d)$. The power $2^a$ exists in $M$, hence is the same element in $N$, by absoluteness of the bounded formula $\varepsilon$ of :ref{#fact-exp} (:ref{#lem-delta0-absolute}), so $c < 2^a \in M$ and $c \in M$, since $M$ is an initial segment of $N$. For $k \in \nat$, $k < a$, so $k \in \mathrm{Ack}(d)$ if and only if $N \models k \in c$, if and only if $M \models k \in c$. Hence $\mathrm{Ack}(d) \cap \nat = \mathrm{Ack}^M(c) \cap \nat \in \mathrm{SSy}(M)$.
 :::
 ::::
 

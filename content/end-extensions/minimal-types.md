@@ -2,7 +2,7 @@
 title: Minimal types and minimal end extensions
 summary: Rare types, realized at most once in each gap, and their syntactic characterization; every model of PA has an unbounded strongly definable rare type, a minimal type; the extension it generates is a minimal elementary end extension.
 duration: 30
-prerequisites: [gaps]
+prerequisites: [gaps, cuts-and-extensions/splitting-conservation]
 ---
 
 By the previous lesson, an extension $M(p / d)$ by an unbounded strongly definable type consists of $M$ and of the gap of $d$. An elementary substructure strictly between $M$ and $M(p)$ could still exist, made of $M$ and a thinner part of the gap. Gaifman's idea is to choose $p$ so that it is realized at most once in each gap. Then every element $c$ of the gap of $d$ determines $d$ as the nearest realization of $p$, and a compactness argument turns "nearest" into "definable from $c$": any elementary substructure that meets the gap contains $d$. The types obtained are **minimal**: they give minimal elementary end extensions. The next lesson shows that they are indiscernible and realizes them along any linear order.

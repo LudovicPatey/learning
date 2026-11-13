@@ -1,106 +1,11 @@
 ---
-title: Partition regularity and largeness
-summary: Partition regular classes generalize the class of infinite sets; large classes contain a largest partition regular subclass; decreasing intersections of large classes are large; for intersections of upward-closed Σ⁰₁ classes over a coded ideal, largeness is Π⁰₁ relative to the jump of the code.
+title: Largeness over a Scott ideal
+summary: Upward closed Σ⁰₁ classes over the members of a coded Scott ideal and their intersections; the largeness of such an intersection is Π⁰₁ relative to the jump of the code; cohesive classes choose a side of every member of the ideal, and are compatible with every Σ⁰₁ class they meet largely.
 duration: 45
-prerequisites: [cohesiveness-second-jump, lowness/coded-ideals, big-five/wkl0]
+prerequisites: [partition-regularity, lowness/coded-ideals, big-five/wkl0]
 ---
 
-The Mathias-type forcing for the pigeonhole principle (:ref{#thm-dj-cone-avoidance}) splits the reservoir along a partition and keeps a part that is infinite. For second-jump control, the previous lesson suggests restricting the reservoirs further, so that they keep enough structure for the questions about $\Pi^0_2$ sentences. For cohesiveness the restriction was a fixed sequence of Boolean combinations. For the pigeonhole principle, the instance is arbitrary, and the restriction is given instead by a class of sets, the **reservoir of reservoirs**: every reservoir of the construction must belong to it, and the class must allow splitting, as the class of infinite sets does.
-
-There is a useful reading in terms of information. A Mathias condition $(\sigma, X)$ gives positive and negative information about the set $G$ under construction through its stem, but only negative information through its reservoir: elements outside $X$ are excluded, and no element of $X$ is guaranteed to enter $G$. $\Sigma^0_1$ properties are positive information and are forced by extending the stem; $\Pi^0_1$ properties are negative information and are forced by shrinking the reservoir. A $\Pi^0_2$ property, $\forall x\ \theta(x)$ with $\theta$ a $\Sigma^0_1$ formula, requires positive information in every future condition, and the only way to guarantee it is to restrict the possible future reservoirs. A class of allowed reservoirs does exactly this. This lesson studies such classes; the next one chooses the right class, and the last two use it.
-
-## Partition regular classes
-
-Classes are classes of subsets of $\nat$. A class $\mathcal A$ is **upward closed** if $X \in \mathcal A$ and $X \subseteq Y$ imply $Y \in \mathcal A$. A **$k$-cover** of a set $X$ is a sequence $Y_0, \dots, Y_{k-1}$ of sets with $X \subseteq Y_0 \cup \dots \cup Y_{k-1}$; it is a **$k$-partition** of $X$ if the sets are pairwise disjoint with union $X$.
-
-:::definition{#def-partition-regular}
-A class $\mathcal P$ is **partition regular** if it is non-empty, upward closed, and for every $X \in \mathcal P$ and every $2$-cover $Y_0, Y_1$ of $X$, some $Y_i$ belongs to $\mathcal P$. It is **non-trivial** if all its members are infinite.
-:::
-
-By induction on $k$, every $k$-cover of a member of a partition regular class has a part in the class: if $X \subseteq Y_0 \cup \dots \cup Y_k$, then $Y_0$ or $Y_1 \cup \dots \cup Y_k$ belongs to $\mathcal P$. Since $\mathcal P$ is non-empty and upward closed, $\nat \in \mathcal P$.
-
-:::example{#ex-partition-regular}
-1. The class of infinite sets is partition regular: this is the infinite pigeonhole principle. It is non-trivial.
-2. For a fixed $n$, the class $\{ X : n \in X \}$ is partition regular, and trivial.
-3. For an infinite set $Z$, the class $\mathcal L_Z = \{ X : X \cap Z \text{ is infinite} \}$ is partition regular and non-trivial: if $X \cap Z$ is infinite and $X \subseteq Y_0 \cup Y_1$, one of $Y_0 \cap Z$ and $Y_1 \cap Z$ is infinite. The class of infinite sets is $\mathcal L_\nat$.
-4. The class of sets of positive upper density, $\limsup_n |X \cap \{0, \dots, n - 1\}| / n > 0$, is partition regular, since the upper density of $Y_0 \cup Y_1$ is at most the sum of the upper densities. So is the class of sets $X$ with $\sum_{n \in X} 1/(n+1) = \infty$.
-5. Let $Z$ be a set and $C \not\leq_T Z$. The class $\mathcal P_C$ of sets $X$ having an infinite subset $H$ with $C \not\leq_T Z \oplus H$ is partition regular. Let $X \in \mathcal P_C$ with witness $H$, enumerated in increasing order by $p_H$, and let $Y_0, Y_1$ cover $X$. By :ref{#thm-dj-cone-avoidance} relative to $Z \oplus H$, the set $\{ k : p_H(k) \in Y_0 \}$ has an infinite subset $K$, of itself or of its complement, with $C \not\leq_T Z \oplus H \oplus K$. The set $p_H[K]$ is infinite, contained in $Y_0$ or in $Y_1$, and computable in $H \oplus K$.
-:::
-
-The last example shows that strong cone avoidance of the pigeonhole principle is a statement of partition regularity. Non-trivial partition regular classes are generalizations of the class of infinite sets. They share its closure properties.
-
-:::lemma{#lem-partition-regular-basic}
-Let $\mathcal P$ be a partition regular class.
-
-1. $\mathcal P$ is non-trivial if and only if it contains no finite set.
-2. If $\mathcal P$ is non-trivial, it is closed under finite changes: if $X \in \mathcal P$ and $Y$ differs from $X$ on finitely many elements, then $Y \in \mathcal P$.
-:::
-
-:::proof{of=lem-partition-regular-basic}
-1. This is the definition.
-2. The sets $X \cap Y$ and $X \setminus Y$ cover $X$, and $X \setminus Y$ is finite, so it is not in $\mathcal P$. So $X \cap Y \in \mathcal P$, and $Y \in \mathcal P$ by upward closure.
-:::
-
-:::figure[A $2$-cover of a member $X$ of a partition regular class $\mathcal P$. The elements of $X$ are split between $Y_0$ and $Y_1$; whatever the split, at least one part belongs to $\mathcal P$. For the class of infinite sets this is the pigeonhole principle; for $\mathcal L_Z$, the part that meets $Z$ infinitely often.]
-<svg class="fig" viewBox="0 0 600 196" width="600" role="img" aria-label="A set X in a partition regular class P, split into two parts Y0 and Y1; at least one of the parts belongs to P"><text x="60.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">0</text><text x="102.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">2</text><text x="144.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">4</text><text x="186.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">6</text><text x="228.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">8</text><text x="270.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">10</text><text x="312.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">12</text><text x="354.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">14</text><text x="396.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">16</text><text x="438.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">18</text><text x="480.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">20</text><text x="522.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">22</text><text x="564.5" y="16" text-anchor="middle" class="mrm muted" font-size="10">24</text><text x="38" y="45" text-anchor="end" class="math" font-size="14">X<tspan class="mrm" font-size="10" dy="3"></tspan></text><line x1="50" y1="40" x2="596" y2="40" class="axis"/><circle cx="81.5" cy="40" r="5" class="ink-fill"/><circle cx="123.5" cy="40" r="5" class="ink-fill"/><circle cx="144.5" cy="40" r="5" class="ink-fill"/><circle cx="186.5" cy="40" r="5" class="ink-fill"/><circle cx="207.5" cy="40" r="5" class="ink-fill"/><circle cx="249.5" cy="40" r="5" class="ink-fill"/><circle cx="270.5" cy="40" r="5" class="ink-fill"/><circle cx="312.5" cy="40" r="5" class="ink-fill"/><circle cx="333.5" cy="40" r="5" class="ink-fill"/><circle cx="375.5" cy="40" r="5" class="ink-fill"/><circle cx="396.5" cy="40" r="5" class="ink-fill"/><circle cx="438.5" cy="40" r="5" class="ink-fill"/><circle cx="459.5" cy="40" r="5" class="ink-fill"/><circle cx="501.5" cy="40" r="5" class="ink-fill"/><circle cx="522.5" cy="40" r="5" class="ink-fill"/><circle cx="564.5" cy="40" r="5" class="ink-fill"/><text x="602" y="45" class="mrm muted" font-size="13">⋯</text><text x="38" y="85" text-anchor="end" class="math" font-size="14">Y<tspan class="mrm" font-size="10" dy="3">₀</tspan></text><line x1="50" y1="80" x2="596" y2="80" class="axis"/><circle cx="81.5" cy="80" r="5" class="accent-fill"/><circle cx="144.5" cy="80" r="5" class="accent-fill"/><circle cx="207.5" cy="80" r="5" class="accent-fill"/><circle cx="249.5" cy="80" r="5" class="accent-fill"/><circle cx="333.5" cy="80" r="5" class="accent-fill"/><circle cx="396.5" cy="80" r="5" class="accent-fill"/><circle cx="501.5" cy="80" r="5" class="accent-fill"/><circle cx="564.5" cy="80" r="5" class="accent-fill"/><text x="602" y="85" class="mrm muted" font-size="13">⋯</text><text x="38" y="125" text-anchor="end" class="math" font-size="14">Y<tspan class="mrm" font-size="10" dy="3">₁</tspan></text><line x1="50" y1="120" x2="596" y2="120" class="axis"/><circle cx="123.5" cy="120" r="5" class="ink-fill"/><circle cx="186.5" cy="120" r="5" class="ink-fill"/><circle cx="270.5" cy="120" r="5" class="ink-fill"/><circle cx="312.5" cy="120" r="5" class="ink-fill"/><circle cx="375.5" cy="120" r="5" class="ink-fill"/><circle cx="438.5" cy="120" r="5" class="ink-fill"/><circle cx="459.5" cy="120" r="5" class="ink-fill"/><circle cx="522.5" cy="120" r="5" class="ink-fill"/><text x="602" y="125" class="mrm muted" font-size="13">⋯</text><text x="300" y="168" text-anchor="middle" class="label">X ∈ 𝒫 and X ⊆ Y₀ ∪ Y₁: then Y₀ ∈ 𝒫 or Y₁ ∈ 𝒫</text><text x="300" y="186" text-anchor="middle" class="label">for the infinite sets: one part is infinite; for 𝓛<tspan font-size="9" dy="3">Z</tspan><tspan dy="-3">: one part meets Z infinitely often</tspan></text></svg>
-:::
-
-## Large classes
-
-An upward closed class containing a partition regular class need not be partition regular. Let $Z$ be infinite and coinfinite. The class $\mathcal L_Z \cup \{ X : X \supseteq \overline Z \}$ contains $\mathcal L_Z$ and the set $\overline Z$, but if $\overline Z$ is split into two infinite parts, neither part meets $Z$ or contains $\overline Z$, so neither belongs to the class. The following notion is preserved by passing to larger upward closed classes.
-
-:::definition{#def-large}
-A class $\mathcal A$ is **large** if it is upward closed and for every $k$ and every $k$-cover $Y_0, \dots, Y_{k-1}$ of $\nat$, some $Y_i$ belongs to $\mathcal A$.
-:::
-
-A large class contains $\nat$, using the $1$-cover. A partition regular class is large, and a large class need not be partition regular, as the class $\mathcal L_Z \cup \{ X : X \supseteq \overline Z \}$ shows. For an upward closed class $\mathcal A$, let
-$$
-\mathcal L(\mathcal A) = \{ X : \text{every finite cover of } X \text{ has a part in } \mathcal A \}.
-$$
-
-:::proposition{#prop-largest-partition-regular}
-Let $\mathcal A$ be a large class. Then $\mathcal L(\mathcal A)$ is a partition regular subclass of $\mathcal A$, and it contains every partition regular subclass of $\mathcal A$. In particular, an upward closed class is large if and only if it contains a partition regular class.
-:::
-
-:::proof{of=prop-largest-partition-regular}
-The class $\mathcal L(\mathcal A)$ is upward closed, since a cover of a superset of $X$ is a cover of $X$. It contains $\nat$, since $\mathcal A$ is large. It is contained in $\mathcal A$, using the $1$-cover of $X$ by itself. Let $X \in \mathcal L(\mathcal A)$ and let $Y_0, Y_1$ cover $X$. Suppose neither $Y_i$ is in $\mathcal L(\mathcal A)$: there are finite covers $(W^i_j)_{j < k_i}$ of $Y_i$ with no part in $\mathcal A$. The sets $W^i_j$, for $i < 2$ and $j < k_i$, form a finite cover of $X$ with no part in $\mathcal A$, which contradicts $X \in \mathcal L(\mathcal A)$. So $\mathcal L(\mathcal A)$ is partition regular.
-
-If $\mathcal P \subseteq \mathcal A$ is partition regular and $X \in \mathcal P$, every finite cover of $X$ has a part in $\mathcal P \subseteq \mathcal A$, so $X \in \mathcal L(\mathcal A)$. Finally, if an upward closed class $\mathcal A$ contains a partition regular class $\mathcal P$, every finite cover of $\nat$ has a part in $\mathcal P$, since $\nat \in \mathcal P$; so $\mathcal A$ is large.
-:::
-
-:::lemma{#lem-decreasing-large}
-If $\mathcal A_0 \supseteq \mathcal A_1 \supseteq \cdots$ are large classes, then $\bigcap_n \mathcal A_n$ is large.
-:::
-
-:::proof{of=lem-decreasing-large}
-The intersection is upward closed. Let $Y_0, \dots, Y_{k-1}$ cover $\nat$, and suppose that no $Y_i$ is in the intersection: for each $i$ there is $n_i$ with $Y_i \notin \mathcal A_{n_i}$. Let $n = \max_i n_i$. Since the sequence decreases, no $Y_i$ belongs to $\mathcal A_n$, which contradicts the largeness of $\mathcal A_n$.
-:::
-
-The lemma is a form of compactness: if an intersection of large classes, taken along an increasing sequence of finite sets of classes, is not large, then one of the finite intersections is not large. It fails for arbitrary intersections of two large classes: $\mathcal L_Z \cap \mathcal L_{\overline Z}$ does not contain $Z$ or $\overline Z$, so it is not large when $Z$ and $\overline Z$ are infinite. Choosing, among several large classes, some whose intersection remains large is the subject of the next lesson.
-
-:::quiz[large classes]
-In the proof of :ref{#prop-largest-partition-regular}, why can the two failing covers be merged into one cover of $X$?
-
-- [x] Because $Y_0 \cup Y_1 \supseteq X$, so the union of a cover of $Y_0$ and a cover of $Y_1$ is a finite cover of $X$; none of its parts is in $\mathcal A$.
-- [ ] Because $\mathcal A$ is partition regular.
-
-  It is only large; the merging shows that $\mathcal L(\mathcal A)$ is partition regular.
-- [ ] Because $Y_0$ and $Y_1$ are disjoint.
-
-  Disjointness is not needed for covers.
-
----
-
-Where is the decreasing hypothesis used in :ref{#lem-decreasing-large}?
-
-- [x] To pass from "$Y_i \notin \mathcal A_{n_i}$ for each $i$" to "$Y_i \notin \mathcal A_n$ for all $i$" with a single $n$, the largest of the $n_i$.
-- [ ] To show that the intersection is upward closed.
-
-  Any intersection of upward closed classes is upward closed.
-- [ ] To show that the intersection contains $\nat$.
-
-  Every large class contains $\nat$; the intersection does too, for any family.
-:::
+The reservoirs of the forcing for the pigeonhole principle will be taken in a partition regular class that is not given by an explicit combinatorial property, but as an intersection of simple classes: upward closed $\Sigma^0_1$ classes relative to the members of a Scott ideal. This lesson studies such intersections. Their largeness is decided one jump above the code of the ideal (:ref{#prop-largeness-complexity}), and an intersection that chooses a side of every member of the ideal, a **cohesive class**, behaves well with respect to further intersections (:ref{#lem-cohesive-compatible}). The next lesson extracts from a cohesive class the partition regular class used by the forcing.
 
 ## Effective classes
 
@@ -162,37 +67,61 @@ In :ref{#prop-largeness-complexity}, why does largeness of $\mathcal U_S$ reduce
   They are only upward closed in general.
 :::
 
-## Exercises
+## Cohesive classes
 
-::::exercise{difficulty=1}
-Show that the union of any family of partition regular classes is partition regular, and that the intersection of two partition regular classes need not be partition regular, nor even large.
+The forcing for the pigeonhole principle will use reservoirs in a fixed partition regular class $\mathcal U$. The class should carry as much positive information as possible: the smaller $\mathcal U$, the fewer the possible reservoirs, and the more the condition says about the future. The natural candidate is a class that is minimal for the effective classes of the previous section: for every $\Sigma^0_1(\mathcal M)$ class $\mathcal V$, either $\mathcal U \subseteq \mathcal V$, or $\mathcal U \cap \mathcal V$ is not large. Such a class can be built greedily, deciding for each $\mathcal V$ in turn whether it can be added to the intersection. Each decision is a $\Pi^0_1$ question relative to the jump of the code, so the greedy construction needs the double jump of the code, which is too much. The difficulty is that two large classes may have a non-large intersection, as $\mathcal L_Z$ and $\mathcal L_{\overline Z}$ do, so the order of the decisions matters.
 
-:::solution
-The union is non-empty and upward closed; if $X$ belongs to a member $\mathcal P$ of the family, every $2$-cover of $X$ has a part in $\mathcal P$, hence in the union. For the intersection, let $Z$ be infinite and coinfinite: $\mathcal L_Z$ and $\mathcal L_{\overline Z}$ are partition regular, but their intersection does not contain $Z$ or $\overline Z$, which cover $\nat$, so it is not large.
+The remedy is to make first, for every member $Z$ of the ideal, the choice between $\mathcal L_Z$ and $\mathcal L_{\overline Z}$. Once these choices are made, the order of all other decisions no longer matters (:ref{#lem-cohesive-compatible}), and a minimal class is determined. The choices can be made by a set PA relative to the jump of the code, one jump below the greedy construction; both facts are proved in :ref{to="jump-cone-avoidance/cohesive-classes"}.
+
+:::definition{#def-cohesive-class}
+A large class $\mathcal A$ is **$\mathcal M$-cohesive** if for every $X \in \mathcal M$, $\mathcal A \subseteq \mathcal L_X$ or $\mathcal A \subseteq \mathcal L_{\overline X}$.
 :::
-::::
 
-::::exercise{difficulty=2}
-Let $\mathcal P$ be a non-trivial partition regular class and $X \in \mathcal P$. Show that $\mathcal P \cap \mathcal L_X$ is large.
+The name comes from cohesive sets. Let $H$ be an infinite set cohesive for the sequence of the members of $\mathcal M$: $H \subseteq^* X$ or $H \subseteq^* \overline X$ for every $X \in \mathcal M$. The class $\mathcal L_H$ is partition regular (:ref{#ex-partition-regular}), hence large. If $H \subseteq^* X$ and $Y \cap H$ is infinite, then $Y \cap X$ is infinite; so $\mathcal L_H \subseteq \mathcal L_X$, and similarly $\mathcal L_H \subseteq \mathcal L_{\overline X}$ if $H \subseteq^* \overline X$. So $\mathcal L_H$ is $\mathcal M$-cohesive. A cohesive class chooses, like a cohesive set, a side of every set of the ideal, but it remains a class of sets, which can contain sets with no such property.
 
-:::solution
-It is upward closed. Let $Y_0, \dots, Y_{k-1}$ cover $\nat$. The sets $Y_i \cap X$ cover $X$, so some $Y_i \cap X$ is in $\mathcal P$. It is infinite, since $\mathcal P$ is non-trivial, so $Y_i \in \mathcal L_X$, and $Y_i \in \mathcal P$ by upward closure. So $Y_i \in \mathcal P \cap \mathcal L_X$.
+For a member $X$ of $\mathcal M$, the two cases are exclusive: if $\mathcal A \subseteq \mathcal L_X \cap \mathcal L_{\overline X}$, then neither $X$ nor $\overline X$ is in $\mathcal A$, which contradicts the largeness of $\mathcal A$. So an $\mathcal M$-cohesive class determines a side of every set of $\mathcal M$, namely the side it contains.
+
+:::lemma{#lem-cohesive-compatible}
+Let $\mathcal U_S$ be $\mathcal M$-cohesive, and let $\mathcal V$, $\mathcal W$ be $\Sigma^0_1(\mathcal M)$ classes such that $\mathcal U_S \cap \mathcal V$ and $\mathcal U_S \cap \mathcal W$ are large. Then $\mathcal U_S \cap \mathcal V \cap \mathcal W$ is large.
 :::
-::::
 
-::::exercise{difficulty=2}
-Let $\mathcal A$ be a large class all of whose members are infinite. Show that $\mathcal L(\mathcal A) = \{ X : \mathcal A \cap \mathcal L_X \text{ is large} \}$.
+:::proof{of=lem-cohesive-compatible}
+Suppose not. By :ref{#prop-largeness-complexity}, applied to the set of pairs $S$ together with indices of $\mathcal V$ and $\mathcal W$, there is a finite $F \subseteq S$ such that $\mathcal U_F \cap \mathcal V \cap \mathcal W$ is not large. This class is an upward closed $\Sigma^0_1(Y)$ class for some $Y \in \mathcal M$. Since it is not large, there are $k$ and a $k$-partition of $\nat$ with no part in it. The $k$-partitions of $\nat$ with this property, coded as functions from $\nat$ to $\{0, \dots, k-1\}$, form a non-empty $\Pi^0_1(Y)$ class, and since $\mathcal M$ is a Scott ideal, it has a member in $\mathcal M$ (:ref{#prop-wkl-scott}). Let $Y_0, \dots, Y_{k-1} \in \mathcal M$ be its parts.
 
-:::solution
-If $X \in \mathcal L(\mathcal A)$, then $\mathcal L(\mathcal A)$ is non-trivial, being contained in $\mathcal A$, and the previous exercise applied to $\mathcal L(\mathcal A)$ shows that $\mathcal L(\mathcal A) \cap \mathcal L_X$ is large; so is the larger class $\mathcal A \cap \mathcal L_X$. Conversely, suppose $\mathcal A \cap \mathcal L_X$ is large, and let $Y_0, \dots, Y_{k-1}$ cover $X$. The sets $Y_0, \dots, Y_{k-1}, \overline X$ cover $\nat$, so one of them is in $\mathcal A \cap \mathcal L_X$. It is not $\overline X$, which is disjoint from $X$. So some $Y_i$ is in $\mathcal A$, and $X \in \mathcal L(\mathcal A)$.
+Since $\mathcal U_S$ is large, some $Y_j$ is in $\mathcal U_S$. Then $\mathcal U_S \not\subseteq \mathcal L_{\overline{Y_j}}$, since $Y_j \cap \overline{Y_j} = \emptyset$; by cohesiveness, $\mathcal U_S \subseteq \mathcal L_{Y_j}$. Now $Y_j \in \mathcal U_S \subseteq \mathcal U_F$ and $Y_j \notin \mathcal U_F \cap \mathcal V \cap \mathcal W$, so $Y_j \notin \mathcal V$ or $Y_j \notin \mathcal W$; say $Y_j \notin \mathcal V$. For $l \neq j$, the set $Y_l$ is disjoint from $Y_j$, so $Y_l \notin \mathcal L_{Y_j} \supseteq \mathcal U_S$. So no part of the partition is in $\mathcal U_S \cap \mathcal V$, which contradicts its largeness.
 :::
-::::
+
+The proof uses the Scott property of $\mathcal M$ to replace an arbitrary witness of non-largeness by one in $\mathcal M$, and cohesiveness to know that the class concentrates on one part of it. Without cohesiveness, the lemma fails. Let $Z \in \mathcal M$ be infinite and coinfinite, $\mathcal V = \{ X : X \cap Z \neq \emptyset \}$ and $\mathcal W = \{ X : X \cap \overline Z \neq \emptyset \}$, two $\Sigma^0_1(Z)$ classes. The class $\mathcal L_\nat$ of infinite sets, an intersection of the $\Sigma^0_1$ classes $\{ X : |X| \geq n \}$, is not $\mathcal M$-cohesive. The classes $\mathcal L_\nat \cap \mathcal V$ and $\mathcal L_\nat \cap \mathcal W$ are large, since they contain the partition regular classes $\mathcal L_Z$ and $\mathcal L_{\overline Z}$, but $\mathcal L_\nat \cap \mathcal V \cap \mathcal W$ contains neither $Z$ nor $\overline Z$, so it is not large.
+
+:::quiz[compatibility]
+In the proof of :ref{#lem-cohesive-compatible}, why is the partition taken in $\mathcal M$?
+
+- [x] Because cohesiveness of $\mathcal U_S$ only gives information about members of $\mathcal M$: it says $\mathcal U_S \subseteq \mathcal L_{Y_j}$ for a part $Y_j \in \mathcal M$, which excludes the other parts from $\mathcal U_S$.
+- [ ] Because the classes $\mathcal V$ and $\mathcal W$ are $\Sigma^0_1(\mathcal M)$.
+
+  This is used to make the class of failing partitions $\Pi^0_1(Y)$ with $Y \in \mathcal M$; the reason for wanting a member in $\mathcal M$ is cohesiveness.
+- [ ] Because $\mathcal M$ is closed under joins.
+
+  Joins are used to see $\mathcal U_F \cap \mathcal V \cap \mathcal W$ as a $\Sigma^0_1(Y)$ class; the choice of the partition uses the Scott property.
+
+---
+
+Why does $Y_j \in \mathcal U_S$ force $\mathcal U_S \subseteq \mathcal L_{Y_j}$, and not $\mathcal L_{\overline{Y_j}}$?
+
+- [x] Because $Y_j \notin \mathcal L_{\overline{Y_j}}$, its intersection with $\overline{Y_j}$ being empty; so $\mathcal U_S \not\subseteq \mathcal L_{\overline{Y_j}}$, and cohesiveness leaves the other case.
+- [ ] Because $Y_j$ is infinite.
+
+  Infinity of $Y_j$ follows, but is not the reason.
+- [ ] Because $\mathcal U_S$ is partition regular.
+
+  The argument uses only largeness and cohesiveness.
+:::
 
 ## Notes and references
 
-Partition regularity is a classical notion of Ramsey theory; its use in computability theory, the notions of large class and of the largest partition regular subclass $\mathcal L(\mathcal A)$, and :ref{#lem-decreasing-large} are due to Monin and Patey (*Pigeons do not jump high*, 2019). The classes $\mathcal U_S$ over a coded Scott ideal and :ref{#prop-largeness-complexity} are from Monin and Patey's work on hyperarithmetical reductions (arXiv 2019). The exercises are from Monin and Patey (2024), where it is proved that non-trivial partition regular classes are not $\mathbf\Sigma^0_2$, that measurable partition regular classes have measure $1$, and that partition regular classes with the Baire property are comeager. The presentation follows the section *Partition regularity* of the chapter *Jump cone avoidance* of Patey's monograph, subsections *Largeness* and *Effective classes*; :ref{#lem-cover-class} makes explicit the compactness argument used there.
+The classes $\mathcal U_S$ over a coded Scott ideal, :ref{#prop-largeness-complexity} and the compatibility lemma are from Monin and Patey's work on hyperarithmetical reductions (arXiv 2019); the notion of $\mathcal M$-cohesive class is due to Le Houérou, Levy Patey and Mimouni (2024). Monin and Patey (2024) prove that no non-trivial partition regular class is $\mathbf\Sigma^0_2$. The presentation follows the subsections *Effective classes*, *$\mathcal M$-minimal classes* and *$\mathcal M$-cohesive classes* of the chapter *Jump cone avoidance* of Patey's monograph; :ref{#lem-cover-class} makes explicit the compactness argument used there.
 
-- B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095.
 - B. Monin and L. Patey, *The weakness of the pigeonhole principle under hyperarithmetical reductions*, arXiv:1905.08425 (2019).
 - B. Monin and L. Patey, *Partition genericity and pigeonhole basis theorems*, Journal of Symbolic Logic 89 (2024), 829–857.
+- Q. Le Houérou, L. Levy Patey and A. Mimouni, *The reverse mathematics of the pigeonhole hierarchy*, arXiv:2407.01236 (2024).
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Partition regularity*.

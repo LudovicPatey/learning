@@ -1,7 +1,7 @@
 ---
 title: Scott sets as standard systems, and Tennenbaum's theorem
 summary: Every countable Scott set is the standard system of a model of Peano arithmetic, built from a chain of completions inside the Scott set (Scott); the Scott set problem; the standard system of a non-standard model contains non-computable sets, and no non-standard model of IΔ₀ + exp has a computable addition (Tennenbaum).
-duration: 40
+duration: 45
 prerequisites: [weak-konig-cuts, pi01-classes/pa-degrees, truth-and-provability/truth-definitions]
 ---
 
@@ -26,7 +26,7 @@ with the bounded formula $x \in y$ of :ref{#def-ack-membership}. A finite part o
 
 *The model.* The union $T_\omega = \bigcup_i T_i$ is a complete consistent theory in $\mathcal L_\omega = \bigcup_i \mathcal L_i$, consistent by compactness. Let $N \models T_\omega$, and let $M$ be the set of elements of $N$ definable without parameters in the language $\mathcal L_\omega$. If $N \models \exists x\ \varphi(x, \bar d)$, with $\bar d$ definable, then the least such $x$, which exists since the reduct of $N$ to $\mathcal L_A$ satisfies the least number principle of $\mathrm{PA}$ for formulas with parameters, is definable. So $M$ contains the interpretations of the constants and, by the Tarski–Vaught test, is an elementary substructure of $N$; its reduct to $\mathcal L_A$ is a model of $T$.
 
-*Its standard system.* For each $i$, the element $c_i^N \in M$ satisfies $\mathrm{Ack}(c_i^N) \cap \nat = X_i$, by the sentences of $S_i$; so $\mathcal X \subseteq \mathrm{SSy}(M)$. Conversely, let $d \in M$ be defined by $\varphi(x)$, an $\mathcal L_j$-formula. For $k \in \nat$, $k \in \mathrm{Ack}(d)$ if and only if $N \models \exists x\, (\varphi(x) \wedge \bar k \in x)$, if and only if this $\mathcal L_j$-sentence belongs to $T_j$, by the completeness of $T_j$. So $\mathrm{Ack}(d) \cap \nat$ is computable in $T_j \in \mathcal X$, and belongs to $\mathcal X$. Hence $\mathrm{SSy}(M) = \mathcal X$; $M$ is non-standard, since $\nat \in \mathcal X$ is not finite.
+*Its standard system.* For each $i$, the element $c_i^N \in M$ satisfies $\mathrm{Ack}(c_i^N) \cap \nat = X_i$, by the sentences of $S_i$. Conversely, let $d \in M$ be defined by $\varphi(x)$, an $\mathcal L_j$-formula. For $k \in \nat$, $k \in \mathrm{Ack}(d)$ if and only if $N \models \exists x\, (\varphi(x) \wedge \bar k \in x)$, if and only if this $\mathcal L_j$-sentence belongs to $T_j$, by the completeness of $T_j$. So $\mathrm{Ack}(d) \cap \nat$ is computable in $T_j \in \mathcal X$, and belongs to $\mathcal X$. So the sets $\mathrm{Ack}(d) \cap \nat$, for $d \in M$, are exactly the members of $\mathcal X$. Since $\mathcal X$ contains the infinite set $\nat$, some element of $M$ has infinitely many standard numbers as Ackermann members, so it is not a standard number (:ref{#lem-ack-basic}): $M$ is non-standard, and $\mathrm{SSy}(M) = \mathcal X$.
 :::
 
 :::quiz[Scott's theorem]
@@ -41,7 +41,7 @@ In the last step of the proof of :ref{#thm-scott-converse}, why is the set coded
   This gives closure properties of $\mathrm{SSy}(M)$, not its inclusion in $\mathcal X$.
 :::
 
-The theorem is the first answer to the **Scott set problem**: is every Scott set the standard system of a model of $\mathrm{PA}$? Knight and Nadel (1982) proved it for Scott sets of cardinality $\aleph_1$, so the answer is positive under the continuum hypothesis. Without it the problem is open; Gitman (2008) obtained a positive answer for the Scott sets she calls proper, under the proper forcing axiom.
+The theorem is the first answer to the **Scott set problem**: is every Scott set the standard system of a model of $\mathrm{PA}$? Knight and Nadel (1982) proved it for Scott sets of cardinality $\aleph_1$, so the answer is positive under the continuum hypothesis. Without it the problem is open; Gitman (2008) obtained a positive answer, under the proper forcing axiom, for the Scott sets she calls proper: those that are arithmetically closed and whose quotient by the ideal of finite sets is a proper partial order.
 
 ## Tennenbaum's theorem
 
@@ -60,7 +60,7 @@ Every countable model is isomorphic to one whose domain is $\nat$; the theorem s
 :::proof{of=thm-tennenbaum}
 Suppose that $+^M$ is computable. Let $C = \mathrm{Ack}(d) \cap \nat \in \mathrm{SSy}(M)$ separate $A_0$ from $A_1$, as above. We show that $C$ is computable, which contradicts :ref{#thm-dnc2-no-computable}: the set $C$ contains $A_0$ and is disjoint from $A_1$, so its characteristic function differs from $\Phi_e(e)$ whenever this converges.
 
-The elements $0^M$ and $1^M$ are fixed numbers, and the value $\bar m^M$ of each numeral is computed by adding $1^M$ to $0^M$, $m$ times. For an element $u$ and $m \in \nat$, the element $\bar m^M \cdot u$ is $u + \cdots + u$, with $m$ terms, also computable from $u$ and $m$. Given $n \in \nat$, let $p = 2^n$. By :ref{#def-ack-membership}, and since the power $2^n$ computed in $M$ is the standard number $\bar p^M$ (:ref{#lem-delta0-absolute}, applied to the bounded formula $\varepsilon$ of :ref{#fact-exp}), $n \in d$ holds in $M$ if and only if the remainder of $d$ in the division by $2p$ is at least $p$. By :ref{#prop-idelta0-basic}, $d = \overline{2p}^M \cdot u + \bar r^M$ for a unique pair $(u, r)$ with $u \in M$ and $r < 2p$; the remainder is a standard number $r$, since it is below a standard number (:ref{#prop-standard-part}). To decide whether $n \in C$, search through all pairs $(u, r)$ with $u \in \nat$ and $r < 2p$ until $d = \overline{2p}^M \cdot u + \bar r^M$, which can be checked with $+^M$; the search terminates, and $n \in C$ if and only if $r \geq p$. So $C$ is computable.
+The elements $0^M$ and $1^M$ are fixed numbers, and the value $\bar m^M$ of each numeral is computed by adding $1^M$ to $0^M$, $m$ times. For an element $u$ and $m \in \nat$, the element $\bar m^M \cdot u$ is $u + \cdots + u$, with $m$ terms, also computable from $u$ and $m$. Given $n \in \nat$, let $p = 2^n$. By :ref{#def-ack-membership}, and since the power $2^n$ computed in $M$ is the standard number $\bar p^M$ (:ref{#lem-delta0-absolute}, applied to the bounded formula $\varepsilon$ of :ref{#fact-exp}), $n \in d$ holds in $M$ if and only if the remainder of $d$ in the division by $2p$ is at least $p$. By :ref{#prop-idelta0-basic}, $d = \overline{2p}^M \cdot u + \bar r^M$ for a unique pair $(u, r)$ with $u \in M$ and $r < 2p$; the remainder is a standard number $r$, since it is below a standard number (:ref{#prop-standard-part}). To decide whether $n \in C$, search through all pairs $(u, r)$, with $u$ an element of the domain $\nat$ of $M$ and $r < 2p$ a natural number, until $d = \overline{2p}^M \cdot u + \bar r^M$, which can be checked with $+^M$; the search terminates, and $n \in C$ if and only if $r \geq p$. So $C$ is computable.
 :::
 
 :::quiz[Tennenbaum's theorem]
@@ -76,6 +76,8 @@ Where does the proof use that $M$ is non-standard?
 :::
 
 Tennenbaum (1959) proved that in a non-standard model of Peano arithmetic neither addition nor multiplication is computable; the case of multiplication codes sets by divisibility by primes instead of binary digits. The proof given here, through the standard system, shows more: if $M \models \mathrm I\Delta_0 + \mathrm{exp}$ is non-standard with domain $\nat$, every set in $\mathrm{SSy}(M)$ is computable in $+^M$, and $\mathrm{SSy}(M)$ contains a set that is not computable.
+
+Some induction is necessary. The model $\mathbb Z[X]^+$ of $\mathrm{PA}^-$ (:ref{#ex-zx-plus}) is non-standard, and it is computable: a polynomial is a finite list of integers, and its sum, product and sign are computed from the lists. Shepherdson (1964) built computable non-standard models even of open induction, in which induction holds for quantifier-free formulas. The proof above uses bounded induction in $M$ twice: for overspill in the separation lemma, and for the codes of bounded sets given by $\mathrm{exp}$.
 
 ## Exercises
 
@@ -99,7 +101,7 @@ Let $T \in \mathrm{SSy}(M)$ be an infinite binary tree. The sets $A_0 = \{ e : \
 
 ## Notes and references
 
-Scott (1962) proved :ref{#thm-scott-converse} for the sets representable in complete extensions of arithmetic; Hájek and Pudlák (bibliographical remarks to Chapter IV) recount that Friedman (1973) introduced the standard system $\mathrm{SSy}(M)$, and that the standard systems are exactly the algebras now called Scott sets. Wong's Lecture 4 proves a related theorem for countable models of $\mathsf{WKL}_0$ by the arithmetized completeness theorem (Scott; Tanaka), which belongs to the next course of the track. Tennenbaum's theorem was announced in an abstract (1959), for models of $\mathrm{PA}$; Kaye's book gives a proof for both addition and multiplication.
+Scott (1962) proved :ref{#thm-scott-converse} for the sets representable in complete extensions of arithmetic; Hájek and Pudlák (bibliographical remarks to Chapter IV) recount that Friedman (1973) introduced the standard system $\mathrm{SSy}(M)$, and that the countable standard systems are exactly the countable Scott sets (Scott algebras, in their terminology); Scott himself studied the sets binumerable in a complete extension of $\mathrm{PA}$, the traces on $\nat$ of the sets definable without parameters. Wong's Lecture 4 proves a related theorem for countable models of $\mathsf{WKL}_0$ by the arithmetized completeness theorem (Scott; Tanaka), which belongs to the next course of the track. Tennenbaum's theorem was announced in an abstract (1959), for models of $\mathrm{PA}$; Kaye's book gives a proof for both addition and multiplication. Shepherdson's computable non-standard model of open induction (1964) is an integer part of a real closed field.
 
 - D. Scott, *Algebras of sets binumerable in complete extensions of arithmetic*, in Recursive Function Theory, Proceedings of Symposia in Pure Mathematics 5, American Mathematical Society, 1962, 117–121.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, bibliographical remarks to Chapter IV.
@@ -107,4 +109,5 @@ Scott (1962) proved :ref{#thm-scott-converse} for the sets representable in comp
 - V. Gitman, *Scott's problem for proper Scott sets*, Journal of Symbolic Logic 73 (2008), 845–860.
 - S. Tennenbaum, *Non-archimedean models for arithmetic*, Notices of the American Mathematical Society 6 (1959), 270.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991.
+- J. C. Shepherdson, *A non-standard model for a free variable fragment of number theory*, Bulletin de l'Académie Polonaise des Sciences, Série des Sciences Mathématiques, Astronomiques et Physiques 12 (1964), 79–86.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 4.

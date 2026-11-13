@@ -2,7 +2,7 @@
 title: PA avoidance
 summary: PA avoidance and strong PA avoidance as properties of problems; ω-models without PA sets; merging forcing questions relative to the condition and the abstract PA avoidance theorem.
 duration: 45
-prerequisites: [avoidance/forcing-question-method, big-five/wkl0]
+prerequisites: [avoidance/strong-cone-avoidance, big-five/wkl0]
 ---
 
 Weak König's lemma is the compactness principle of second-order arithmetic: over $\mathsf{RCA}_0$ it is equivalent to the Heine–Borel theorem for $[0, 1]$, to the completeness theorem for countable languages, and to many other theorems whose proofs use compactness. Its computable content is captured by one class of sets: a Turing ideal is a model of $\mathsf{WKL}_0$ exactly when it contains, for each of its members $X$, a set that is PA relative to $X$ (:ref{#prop-wkl-scott}). A theorem whose proof avoids compactness should therefore have computable instances with solutions that are not PA. This course studies when this is the case, and how to prove it. Its central result is Liu's theorem: every computable coloring of pairs has an infinite homogeneous set that is not PA, so that Ramsey's theorem for pairs does not imply weak König's lemma.

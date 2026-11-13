@@ -28,7 +28,7 @@ The definition is relativized, as for cone avoidance (:ref{#def-cone-avoidance-p
 6. **$\mathsf D^2_2$** (:ref{#def-d22}) does not, although every computable instance has a $\Delta^0_2$ solution: by a theorem of Downey, Hirschfeldt, Lempp and Solomon, admitted in the last lesson, some $\Delta^0_2$ set has no infinite low subset of itself or of its complement.
 :::
 
-Items 4–6 show that the property is not about growth or coding: $\mathsf{COH}$ and $\mathsf{RT}^2_2$ admit cone avoidance, and even strong cone avoidance for $\mathsf{COH}$ (:ref{to="avoidance/disjunctive-question"}). Lowness and cone avoidance are independent properties of problems. The rest of the course shows that $\mathsf{COH}$, $\mathsf D^2_2$ and $\mathsf{RT}^2_2$ nevertheless admit a weakening of low bases, with solutions whose jump is computed by any set PA relative to $\emptyset'$.
+Items 4–6 show that the property is not about growth or coding: $\mathsf{COH}$ and $\mathsf{RT}^2_2$ admit cone avoidance, and even strong cone avoidance for $\mathsf{COH}$ (:ref{to="avoidance/strong-cone-avoidance"}). Lowness and cone avoidance are independent properties of problems. The rest of the course shows that $\mathsf{COH}$, $\mathsf D^2_2$ and $\mathsf{RT}^2_2$ nevertheless admit a weakening of low bases, with solutions whose jump is computed by any set PA relative to $\emptyset'$.
 
 ## Models of low sets
 

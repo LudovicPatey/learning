@@ -71,23 +71,29 @@ preservation along WKL (`lem-scott-preservation`).
 2. **The forcing question as a method** (`forcing-question-method`): the three-case
    argument; the forcing question as a dividing line (figure `dividing-line`);
    over-approximation; Σ⁰₁(ℳ)-preserving questions (`def-question-local`) and the abstract
-   cone avoidance theorem (`thm-local-cone-avoidance`); every set is Δ⁰₂ relative to a set
+   cone avoidance theorem (`thm-local-cone-avoidance`); reservoirs coding C as a
+   counterexample (`ex-coding-reservoir`); exercises: the necessary conditions for a forcing
+   question are not sufficient (`exr-question-converse`).
+3. **Strong cone avoidance** (`strong-cone-avoidance`): every set is Δ⁰₂ relative to a set
    avoiding a cone (`thm-delta2-cone-avoidance`), and strong cone avoidance reduces to Δ⁰₂
-   instances (`cor-strong-delta2`); exercises: the necessary conditions for a forcing
-   question are not sufficient (`exr-question-converse`), high cone-avoiding subsets.
-3. **Strong cone avoidance and disjunctive questions** (`disjunctive-question`): COH admits
-   strong cone avoidance (Wang, `thm-coh-strong-cone`); disjunctive notions of forcing and
-   questions (`def-disjunctive-notion`); the abstract disjunctive lemma
-   (`lem-disjunctive-cone`) and Lachlan's disjunction (`lem-disjunctive-construction`);
-   the Dzhafarov–Jockusch forcing as an instance (text and exercise); exercise: a
-   disjunctive construction avoids one cone at a time.
-4. **Seetapun's theorem by a disjunctive forcing question** (`seetapun-forcing`): Seetapun
-   conditions (`def-seetapun-forcing`, figure `seetapun-condition`), infinity
-   (`lem-seetapun-infinity`), the question over all partitions of the reservoir
-   (`lem-seetapun-question`), the theorem (`thm-seetapun-direct`); comparison with the
-   proof through cohesiveness; exercises: cone-avoiding reservoirs (Seetapun's original
-   setting), stable colorings without thinning.
-5. **Preservation of non-Σ⁰₁ definitions** (`non-sigma1-definitions`): definition
+   instances (`cor-strong-delta2`); COH admits strong cone avoidance (Wang,
+   `thm-coh-strong-cone`); exercises: products, high cone-avoiding subsets.
+4. **Disjunctive forcing questions** (`disjunctive-question`): why a question about one
+   side has the wrong complexity; disjunctive notions of forcing and questions
+   (`def-disjunctive-notion`); the abstract disjunctive lemma (`lem-disjunctive-cone`) and
+   Lachlan's disjunction (`lem-disjunctive-construction`); the Dzhafarov–Jockusch forcing
+   as an instance (text and exercise); exercise: a disjunctive construction avoids one cone
+   at a time.
+5. **Seetapun conditions** (`seetapun-conditions`): Seetapun conditions
+   (`def-seetapun-forcing`), an example where one side cannot be extended
+   (`ex-seetapun-condition`), the invariant (clause 3), infinity (`lem-seetapun-infinity`);
+   exercise: infinitely many reservoir elements are extendible on each side.
+6. **Seetapun's theorem by a disjunctive forcing question** (`seetapun-forcing`): the
+   question over all partitions of the reservoir (`lem-seetapun-question`, figure
+   `seetapun-condition`), the theorem (`thm-seetapun-direct`); comparison with the proof
+   through cohesiveness; exercises: cone-avoiding reservoirs (Seetapun's original setting),
+   stable colorings without thinning.
+7. **Preservation of non-Σ⁰₁ definitions** (`non-sigma1-definitions`): definition
    (`def-preserve-non-sigma1`), examples (`ex-non-sigma1`), implies cone avoidance
    (`prop-non-sigma1-cone`), equivalence admitted (`thm-non-sigma1-equivalence`); abstract
    theorems (`thm-local-non-sigma1`, `lem-disjunctive-non-sigma1`); Scott ideals by
@@ -95,33 +101,38 @@ preservation along WKL (`lem-scott-preservation`).
    (`thm-non-sigma1-examples`); one definition but not two (discussion, results of Patey
    and Wang); exercises: countably many definitions for WKL and COH, c.e. sets, strong
    preservation for COH.
-6. **Preservation of hyperimmunities** (`hyperimmunities`): relative moduli
+8. **Moduli and preservation of hyperimmunity** (`moduli`): relative moduli
    (`def-relative-modulus`), Δ⁰₂ sets have moduli (`lem-delta2-modulus`), moduli and
-   hyperimmunity (`lem-modulus-hyperimmune`); definition (`def-preserve-hyperimmunity`);
-   preservation of hyperimmunity implies cone avoidance (`thm-hyperimmunity-cone`), converse
-   admitted (`thm-hyperimmune-modulus`, `cor-hyperimmunity-equivalence`); compact questions
-   (`thm-local-hyperimmunity`, `def-disjunctive-compact`, `lem-seetapun-compact`); WKL,
-   COH, RT²₂ (`thm-hyperimmunity-examples`); summary figure `avoidance-relations`;
-   exercises: monotone envelopes, WKL and RT³₂, strong preservation for RT¹₂, the
-   unrelativized separation.
+   hyperimmunity (`lem-modulus-hyperimmune`); definition (`def-preserve-hyperimmunity`), a
+   hyperimmune function that is a modulus of no non-computable set; preservation of
+   hyperimmunity implies cone avoidance (`thm-hyperimmunity-cone`), converse admitted
+   (`thm-hyperimmune-modulus`, `cor-hyperimmunity-equivalence`); exercises: monotone
+   envelopes, the unrelativized separation.
+9. **Preservation of hyperimmunity by compact questions** (`hyperimmunities`): compact
+   questions (`thm-local-hyperimmunity`, `def-disjunctive-compact`,
+   `lem-seetapun-compact`); WKL, COH, RT²₂ (`thm-hyperimmunity-examples`); summary figure
+   `avoidance-relations`; exercises: WKL and RT³₂, strong preservation for RT¹₂.
 
 ## 4. Proof techniques
 
+(Lesson numbers after the split of 2026-11-13.)
+
 - **The three-case argument** (cases: wrong value reachable, right value unreachable,
-  otherwise the set is simple): lessons 2–4; the two-case version for definitions in
-  lesson 5; the version with bounds for hyperimmunities in lesson 6.
-- **Forcing questions relative to the condition** (Σ⁰₁(ℳ)-preservation): lessons 2–6.
+  otherwise the set is simple): lessons 2–6; the two-case version for definitions in
+  lesson 7; the version with bounds for hyperimmunities in lesson 9.
+- **Forcing questions relative to the condition** (Σ⁰₁(ℳ)-preservation): lessons 2–9.
 - **Over-approximation** (asking the question for all levels of a tree, all partitions,
-  all instances, so that compactness brings it down to Σ⁰₁): lessons 2–4.
+  all instances, so that compactness brings it down to Σ⁰₁): lessons 2, 4 and 6.
 - **Compactness used twice** (König's lemma for the complexity of the question, Scott
-  ideals or the cone avoidance basis theorem for the witness of a negative answer): lesson 4.
+  ideals or the cone avoidance basis theorem for the witness of a negative answer): lesson 6.
 - **Reservoirs in the class being preserved** (cone-avoiding reservoirs, Scott ideals
-  obtained by preserving the property along WKL): lessons 3–6.
-- **Disjunctive forcing and Lachlan's disjunction**: lessons 3–6.
+  obtained by preserving the property along WKL): lessons 3–9.
+- **Disjunctive forcing and Lachlan's disjunction**: lessons 4–9.
+- **An invariant keeping the stems extendible** (clause 3 of Seetapun conditions): lesson 5.
 - **Thinning by finitely many applications of the pigeonhole principle** to give limit
-  colors to finitely many elements: lesson 4.
-- **Relativization as a tool**: products of problems (lesson 1), making a set Δ⁰₂ by a
-  cone-avoiding set and then using a modulus (lessons 2 and 6).
+  colors to finitely many elements: lesson 6.
+- **Relativization as a tool**: products of problems (lessons 1 and 3), making a set Δ⁰₂ by
+  a cone-avoiding set and then using a modulus (lessons 3 and 8).
 
 ## 5. Choices
 
@@ -151,9 +162,9 @@ preservation along WKL (`lem-scott-preservation`).
   used, for consistency with `ramsey-theorem/cone-avoidance`; the cone-avoiding reservoir
   version is an exercise.
 - **Shoenfield-type theorem.** `turing-degrees` proves the high set avoiding a cone and,
-  in an exercise, the version for an arbitrary set. Lesson 2 restates it relativized as
+  in an exercise, the version for an arbitrary set. Lesson 3 restates it relativized as
   `thm-delta2-cone-avoidance`, proved through the forcing question, since it is used in
-  lessons 2 and 6 (strong cone avoidance reduces to Δ⁰₂ instances; preservation of
+  lessons 3 and 8 (strong cone avoidance reduces to Δ⁰₂ instances; preservation of
   hyperimmunity implies cone avoidance).
 - **Admitted results.** The two converse directions of the theorem of Downey et al.
   (cone avoidance implies preservation of non-Σ⁰₁ definitions, which uses cototal
@@ -161,15 +172,22 @@ preservation along WKL (`lem-scott-preservation`).
   to some set, their Lemma 2.6) are stated without proof, as in the monograph. Solovay's
   characterization of sets with a modulus is mentioned only. The results on several
   definitions and several hyperimmunities (Patey, Wang) are stated with references.
-- **Strong versions.** Strong cone avoidance appears in lessons 1–3; strong preservation
+- **Strong versions.** Strong cone avoidance appears in lessons 1–4; strong preservation
   of definitions and hyperimmunities only for RT¹₂ and COH, in exercises.
-- **Six lessons.** The first plan had five; the lesson on disjunctive questions and
-  Seetapun's theorem exceeded 4000 words and was split, with strong cone avoidance of COH
-  moved from lesson 2 to lesson 3 so that lesson 2 stays within 45 minutes.
+- **Nine lessons.** The first plan had five; the lesson on disjunctive questions and
+  Seetapun's theorem exceeded 4000 words and was split, giving six. In the polishing pass
+  of 2026-11-13, lessons 2, 4 and 6 (about 3000 words each, more than 45 minutes at 55
+  words per minute) were split at natural points: the Δ⁰₂ theorem and strong cone
+  avoidance of COH form lesson 3 (with the reduction of strong cone avoidance to Δ⁰₂
+  instances, so that the lesson is about strong cone avoidance and lesson 4 only about
+  disjunctive questions); the Seetapun conditions and the infinity lemma form lesson 5;
+  moduli and the relation with cone avoidance form lesson 8. Slugs of existing lessons are
+  kept for the half that other courses cite most (`seetapun-forcing` keeps the theorem,
+  `hyperimmunities` the compact questions and examples).
 - **Excluded.**
   - The forcing-design methodology (stems, extendibility, block extendibility, the
     Erdős–Moser and free set theorems; monograph chapter *Forcing design*): it belongs to
-    `separation-design`; lesson 4 points to it.
+    `separation-design`; lesson 6 points to it.
   - PA avoidance and merging (monograph chapter *Compactness avoidance*): it belongs to
     `compactness-avoidance`; `effective-forcing` already has `thm-question-pa`.
   - The exercises of the monograph on COH and Π⁰₁(∅′) classes (Jockusch–Stephan) and on
@@ -186,14 +204,14 @@ preservation along WKL (`lem-scott-preservation`).
 - **Patey, *Lowness and avoidance*, chapter *Cone avoidance*** (main source):
   - *Context and motivation*: lesson 1 (with the proposition on ω-models replaced by a
     citation of `lem-preservation-ideal`);
-  - *First examples*: lesson 2 (Cohen and Π⁰₁ classes cited; the Shoenfield forcing as
+  - *First examples*: lessons 2 and 3 (Cohen and Π⁰₁ classes cited; the Shoenfield forcing as
     `thm-delta2-cone-avoidance`);
   - *Forcing question*: lesson 2 (the dividing-line figure, the Σ⁰₁-preserving theorem in
     the local form);
-  - *Seetapun's theorem*: lessons 3 and 4 (Wang's exercise as `thm-coh-strong-cone`; the
+  - *Seetapun's theorem*: lessons 3–6 (Wang's exercise as `thm-coh-strong-cone`; the
     disjunctive question; the Seetapun–Slaman exercise as `thm-seetapun-direct`);
-  - *Preserving definitions*: lesson 5;
-  - *Preserving hyperimmunities*: lesson 6.
+  - *Preserving definitions*: lesson 7;
+  - *Preserving hyperimmunities*: lessons 8 and 9.
   Differences: the monograph's exercise "a relation is a forcing question iff it answers
   yes on conditions forcing φ and no on conditions forcing ¬φ" is not correct as stated:
   the condition is necessary, but not sufficient (counterexample for Cohen forcing in
@@ -219,41 +237,53 @@ preservation along WKL (`lem-scott-preservation`).
    quizzes on the table and on relativization; the artificial problem as a warning.
 2. `forcing-question-method`: the three-case argument stated before any definition; figure
    `dividing-line` (Jockusch–Soare and Cohen questions as the two extreme positions);
-   over-approximation named; quizzes on the cases and on the graph of C.
-3. `disjunctive-question`: why arbitrary instances force reservoirs to carry the weakness
-   property; COH inherits strong cone avoidance from RT¹₂; disjunctive definitions with
-   quizzes; the two-cones exercise.
-4. `seetapun-forcing`: figure `seetapun-condition` (stems, reservoir, the split below ℓ and
-   the thinned reservoir); quizzes on thinning, on the Scott ideal and on the side;
-   comparison with the decomposition proof.
-5. `non-sigma1-definitions`: Σ⁰₁ versus computable; examples (J, c.e. sets, ∅″); the
+   over-approximation named; the coding reservoir as a counterexample showing why ℳ must
+   avoid the cone; quizzes on the cases and on the graph of C.
+3. `strong-cone-avoidance`: the two difficulties of arbitrary instances (complexity of the
+   instance, complexity of the reservoirs) and the two answers; quizzes on the finite
+   string A↾m and on why reservoirs cannot be intersected with R_n.
+4. `disjunctive-question`: why a one-sided question has the complexity of the instance;
+   over-approximation by partitions; disjunctive definitions with quizzes; the two-cones
+   exercise.
+5. `seetapun-conditions`: the invariant (clause 3) motivated by an explicit coloring where
+   one side is blocked; quiz on where (H) is used.
+6. `seetapun-forcing`: figure `seetapun-condition` (stems, reservoir, the split below ℓ and
+   the thinned reservoir); quizzes on thinning and on the Scott ideal after the lemma, on
+   the side after the theorem; comparison with the decomposition proof.
+7. `non-sigma1-definitions`: Σ⁰₁ versus computable; examples (J, c.e. sets, ∅″); the
    two-case argument; the common scheme of the applications; one definition versus two.
-6. `hyperimmunities`: the duality between coding and growth; moduli; the role of the set W
-   in the relativized argument; compact questions; figure `avoidance-relations`.
+8. `moduli`: the duality between coding and growth; moduli; the role of the set W in the
+   relativized argument; a hyperimmune function that is no modulus.
+9. `hyperimmunities`: compact questions; the scheme of lesson 7 repeated; figure
+   `avoidance-relations`.
 
 Figures are generated by `scripts/figures/avoidance.py` (deterministic).
 
-## 8. Sources, lesson by lesson (checked 2026-11-12)
+## 8. Sources, lesson by lesson (checked 2026-11-12, revised 2026-11-13)
 
 1. Patey, monograph, *Cone avoidance*, §§ Context and motivation, First examples;
    Dzhafarov–Mummert Definition 3.6.11, Section 4.6, Section 8.3; Jockusch–Soare TAMS 173
-   (1972); Dzhafarov–Jockusch JSL 74 (2009); Seetapun–Slaman NDJFL 36 (1995); Downey et al.
-   JSL 87 (2022).
+   (1972); Jockusch–Stephan MLQ 39 (1993); Cholak–Jockusch–Slaman JSL 66 (2001);
+   Dzhafarov–Jockusch JSL 74 (2009); Seetapun–Slaman NDJFL 36 (1995); Downey et al. JSL 87
+   (2022).
 2. Monograph, §§ First examples, Forcing question; Monin–Patey, Adv. Math. 352 (2019),
-   Lemma 2.4 (as stated in the monograph's list of contributions); Downey et al. Lemma 2.8
-   (Patey's version of the Shoenfield forcing); `turing-degrees/low-and-high`.
-3. Wang, Adv. Math. 261 (2014); monograph § Seetapun's theorem (exercise on COH, disjunctive
-   question); Dzhafarov–Mummert Lemma 8.3.7, Definition 8.3.5; Downey et al. Corollary 2.4.
-4. Seetapun–Slaman (1995); Dzhafarov–Mummert §8.3 (Remark 8.3.6, proof of Theorem 8.3.1);
-   monograph exercise *Seetapun and Slaman*; Dzhafarov–Jockusch (2009); Cholak–Jockusch–
-   Slaman JSL 66 (2001).
-5. Wang, JSL 81 (2016), doi:10.1017/jsl.2016.10, arXiv:1408.1465; Patey, Israel J. Math.
-   216 (2016), 905–955; Downey et al. Theorem 2.1, Lemma 2.13, Corollary 2.18; monograph
-   § Preserving definitions.
-6. Downey et al. Lemmas 2.6, 2.9, Corollaries 2.7, 2.10, Theorems 2.11, 2.12, Corollaries
-   3.4, 3.6; Monin–Patey (2019) Lemma 2.6 (per the monograph); Patey, Computability 6
-   (2017), 209–221; Solovay, TAMS 239 (1978); Jockusch–Soare (1972) Theorem 2.4 (as quoted
-   by Downey et al.); monograph § Preserving hyperimmunities.
+   Lemma 2.4 (as stated in the monograph's list of contributions, introduction).
+3. Monograph, § First examples (theorem on Δ⁰₂ descriptions) and the exercise of
+   § Seetapun's theorem on COH; Downey et al. Lemma 2.8 (Patey's version of the Shoenfield
+   forcing); Wang, Adv. Math. 261 (2014); `turing-degrees/low-and-high`.
+4. Monograph § Seetapun's theorem (disjunctive question); Dzhafarov–Mummert Lemma 8.3.7,
+   Definition 8.3.5; Downey et al. Corollary 2.4.
+5–6. Seetapun–Slaman (1995); Dzhafarov–Mummert §8.3 (Definition 8.3.5, Remark 8.3.6, proof
+   of Theorem 8.3.1 with blobs and Seetapun trees, checked on the text); monograph exercise
+   *Seetapun and Slaman*; Dzhafarov–Jockusch (2009); Cholak–Jockusch–Slaman (2001).
+7. Wang, JSL 81 (2016), no. 4 (first page 1531), doi:10.1017/jsl.2016.10, arXiv:1408.1465;
+   Patey, Israel J. Math. 216 (2016), 905–955; Downey et al. Theorem 2.1, Lemma 2.13,
+   Corollary 2.18, Section 1.2; monograph § Preserving definitions.
+8. Downey et al. Lemmas 2.6, 2.8, 2.9, Corollaries 2.7, 2.10, Theorems 2.11, 2.12; Solovay,
+   TAMS 239 (1978); monograph § Preserving hyperimmunities.
+9. Monin–Patey (2019) Lemma 2.6 (per the monograph); Downey et al. Theorem 2.1, Corollaries
+   3.4, 3.6, Section 1.3; Patey, Computability 6 (2017), 209–221; Jockusch–Soare (1972)
+   Theorem 2.4 (as quoted by Downey et al.).
 
 ## 9. Recent literature
 
@@ -261,17 +291,17 @@ Checked on 2026-11-12 (web search and the arXiv text of Downey et al.):
 
 - **Downey, Greenberg, Harrison-Trainor, Patey, Turetsky, *Relationships between
   computability-theoretic properties of problems*** (JSL 87 (2022), arXiv:1903.04273): the
-  equivalences of lesson 6 and the failure of the unrelativized versions; it fixed the
+  equivalences of lessons 7–9 and the failure of the unrelativized versions; it fixed the
   statements of the admitted results, which are garbled in the monograph, and supplied the
   example of the principal function of a Δ¹₁-random set and the unrelativized separation
-  of the last exercise of lesson 6.
+  of the last exercise of lesson 8 (the Δ¹₁-random example is not used, see the open points).
 - **Wang, *The definability strength of combinatorial principles*** (JSL 81 (2016)):
-  preservation of the arithmetic hierarchy; cited in lesson 5. Pages not confirmed; DOI
+  preservation of the arithmetic hierarchy; cited in lesson 7. First page 1531 confirmed, last page not; DOI
   confirmed.
 - **Patey, *Ramsey-like theorems and moduli of computation*** (arXiv:1901.04388): all
   known failures of cone avoidance for Ramsey-like theorems come from instances whose
   solutions dominate moduli; not cited in the lessons (not read in full), a possible
-  addition to lesson 6.
+  addition to lesson 8.
 - No simpler proof of Seetapun's theorem than the two in the platform was found.
 
 ## 10. Open points
@@ -280,17 +310,35 @@ Checked on 2026-11-12 (web search and the arXiv text of Downey et al.):
   contributions; the paper itself was not checked.
 - Solovay (1978) and Jockusch–Soare Theorem 2.4 are cited as quoted by the monograph and by
   Downey et al.
-- The durations of lessons 2, 4 and 6 (45 minutes) are below the raw word count divided by 55
-  (about 3000 words each, a large part of which is mathematics); the same convention as in
-  `effective-forcing`.
+- Theorem 2.11 of Downey et al. (arXiv v1) uses the principal function of a Δ¹₁-random set
+  as a hyperimmune function; a random set has positive density, so its principal function is
+  dominated by a computable function. The example is not used; lesson 8 gives a
+  Δ¹₁-generic set instead. Worth checking against the published version.
+- The forward reference from the table of lesson 1 to strong cone avoidance of COH is a
+  link to lesson 3, not a `:ref` to the label, so that lesson 1 does not depend on lesson 3.
 - A proof of Lemma 2.6 of Downey et al. (every non-decreasing hyperimmune function is a
-  modulus relative to some set) would fit lesson 6; the proof in the arXiv version needs a
+  modulus relative to some set) would fit lesson 8; the proof in the arXiv version needs a
   small correction in its Case 1 (the condition μ should fix column x up to f(x) + 1), so it
   was left admitted.
-- Pointers to add in other courses (not done here, outside the allowed files): see the
-  report.
+- Changes needed in other courses after the split (outside the allowed files):
+  `lowness/low-bases` links to `avoidance/disjunctive-question` for strong cone avoidance of
+  COH, now in `avoidance/strong-cone-avoidance`; `jump-cone-avoidance/jump-cones` and
+  `compactness-avoidance/pa-avoidance` cite `thm-delta2-cone-avoidance` (and `jump-cones`
+  also `cor-strong-delta2`) with the prerequisite `avoidance/forcing-question-method`; the
+  prerequisite should be `avoidance/strong-cone-avoidance`.
 
 ## 11. History
 
 - **2026-11-12.** Course created: six lessons, three figures
   (`scripts/figures/avoidance.py`), design log.
+- **2026-11-13: polishing pass.** Lessons 2, 4 and 6 split (nine lessons, new
+  `strong-cone-avoidance`, `seetapun-conditions`, `moduli`), durations set from the word
+  counts. Corrections: the example of a hyperimmune function that is no modulus (the
+  principal function of a random set is not hyperimmune; replaced by a Δ¹₁-generic set); the
+  unrelativized exercise of lesson 1 is about ω-models, not products; the quiz on the
+  coloring h (every set computing h computes ∅′); the quiz on moduli (not only Δ⁰₂ sets have
+  moduli); the attribution of strong cone avoidance; the statement of the infinity lemma.
+  Additions: example of reservoirs coding C (lesson 2), the motivation of disjunctive
+  questions by the complexity of one-sided questions (lesson 4), an example of a blocked
+  side and an exercise (lesson 5), an exercise on products (lesson 3); quizzes of lesson 6
+  placed after the proofs they test; figure `avoidance-relations` labels Σ⁰₁(ℳ).

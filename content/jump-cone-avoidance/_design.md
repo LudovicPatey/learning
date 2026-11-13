@@ -68,48 +68,48 @@ can cite: `def-jump-cone-avoidance`, `def-lifted-question`, `lem-lifted-question
 
 ## 3. Results, lesson by lesson
 
+(Ten lessons since the polishing pass of 2026-11-13; labels unchanged.)
+
 1. **Jump cone avoidance** (`jump-cones`): `def-jump-cone-avoidance`,
    `prop-jca-not-high`, `ex-jca-problems` (weakly low bases; J; DOM has cone avoidance
-   but not jump cone avoidance; Mathias forcing); the two limits of first-jump control;
-   `thm-delta3-jump-cone` and `cor-strong-jca-delta3` (strong jump cone avoidance reduces
-   to Δ⁰₃ instances); `ex-no-low2-subset` (a set bi-immune relative to ∅'' has no low₂
-   solution). Exercises: products; jump hyperimmunity from weakly low bases; ω-models
-   without high sets and DOM ≰_ω P.
+   but not jump cone avoidance; Mathias forcing); the limits of first-jump control (short);
+   `thm-delta3-jump-cone`, `cor-strong-jca-delta3`; `ex-no-low2-subset`. Exercises:
+   products; jump hyperimmunity from weakly low bases.
 2. **Forcing questions for Σ⁰₂ sentences** (`sigma2-questions`): density;
-   `def-lifted-question`, `lem-lifted-question`; `ex-lifted-questions` (Cohen Σ⁰₂,
-   Mathias Σ⁰₃, Jockusch–Soare Σ⁰₃ as written); figure `lifted-question`;
-   `def-jump-question-local`, `thm-local-jump-cone`; `thm-wkl-two-cones` (Wang).
-   Exercises: primitive recursive trees (second proof of Wang's theorem); jump
+   `def-lifted-question`, `lem-lifted-question`; `ex-lifted-questions`; figure
+   `lifted-question`; `def-jump-question-local`, `thm-local-jump-cone`. Exercise: jump
    hyperimmunity for Cohen generic sets (compactness of the lifted question).
-3. **Cohesiveness and restricted reservoirs** (`cohesiveness-second-jump`): two diagnoses;
-   `lem-decision-tree`, figure `decision-tree`; `def-path-forcing`,
-   `lem-path-questions`; `thm-coh-two-cones`; why P must avoid the cone (G' ≥ P).
-   Exercises: jump hyperimmunity; for the Jockusch–Stephan sequence every path is PA
-   over ∅'.
-4. **Partition regularity and largeness** (`largeness`): positive and negative
-   information; `def-partition-regular`, `ex-partition-regular` (including the class
-   P_C of strong cone avoidance), `lem-partition-regular-basic`, figure
-   `partition-regular`; `def-large`, `prop-largest-partition-regular`,
-   `lem-decreasing-large`; effective classes, `lem-cover-class`,
-   `prop-largeness-complexity`. Exercises: unions and intersections; P ∩ L_X large;
-   L(A) = {X : A ∩ L_X large}.
-5. **Cohesive classes** (`cohesive-classes`): `def-cohesive-class`,
-   `lem-cohesive-compatible`, `def-cohesive-core`, `prop-cohesive-core` (large,
-   minimal, partition regular), uniqueness remark; `lem-large-split`,
-   `thm-cohesive-class`, figure `cohesive-choices`. Exercises: ultrafilter on ℳ; greedy
-   construction of an ℳ-minimal class with (S ⊕ M')'.
-6. **Forcing with a cohesive class** (`pigeonhole-forcing`): statement
-   `thm-pigeons-non-high`; `lem-pigeon-setting` (two ideals); `def-pigeon-condition`,
-   `def-valid-part`, `lem-valid-part`, figure `pigeon-condition`; `def-pigeon-sigma1`,
-   `lem-pigeon-sigma1`. Exercises: finite A; A ∈ ℳ gives the degenerate case.
-7. **Pigeons do not jump high** (`pigeons-non-high`): `def-pigeon-pi2` (promises),
-   `lem-pigeon-promise`; `def-pigeon-disjunctive`, `lem-pigeon-disjunctive`;
-   `def-invalidity-witness`, `def-pigeon-one-side`, `lem-pigeon-one-side`;
-   `lem-pigeon-requirements`; proof of `thm-pigeons-non-high` (cases A and B, general
-   case), figure `case-split`; `cor-pigeons-non-high`. Exercises: jump cone avoidance of
-   RT²₂ via COH and the theorem; jump hyperimmunity for RT¹₂.
+3. **Weak König's lemma and two cones** (`wkl-two-cones`, new): why the basis theorems of
+   level 1 do not combine; `thm-wkl-two-cones` (Wang), Lawton. Exercises: primitive
+   recursive trees (second proof); ω-models without high members (moved from lesson 1),
+   with a Scott ideal variant.
+4. **Cohesiveness and restricted reservoirs** (`cohesiveness-second-jump`): unchanged in
+   content (`lem-decision-tree`, `def-path-forcing`, `lem-path-questions`,
+   `thm-coh-two-cones`).
+5. **Partition regularity and largeness** (`partition-regularity`, new slug): the first
+   two sections of the former `largeness` (`def-partition-regular`, `ex-partition-regular`,
+   `lem-partition-regular-basic`, `def-large`, `prop-largest-partition-regular`,
+   `lem-decreasing-large`), new quiz on item 5 of the examples, the three exercises.
+6. **Largeness over a Scott ideal** (`largeness`, retitled): effective classes
+   (`lem-cover-class`, `U_S`, `prop-largeness-complexity`), then cohesive classes
+   (`def-cohesive-class`, `lem-cohesive-compatible`). The slug `largeness` keeps the
+   definition of `U_S`, which `jump-compactness-avoidance` cites by lesson.
+7. **The core of a cohesive class** (`cohesive-classes`, retitled): `def-cohesive-core`,
+   `prop-cohesive-core`, uniqueness; `lem-large-split`, `thm-cohesive-class`, figure.
+   Exercises: ultrafilter; greedy construction.
+8. **Forcing with a cohesive class** (`pigeonhole-forcing`): `thm-pigeons-non-high`
+   (statement), `lem-pigeon-setting`, conditions, validity, `def-pigeon-sigma1`,
+   `lem-pigeon-sigma1`. The slug keeps compatibility and the classes V_{σ,φ}, cited by
+   `jump-compactness-avoidance`.
+9. **Questions for Σ⁰₂ sentences on two sides** (`pigeon-questions`, new): promises,
+   disjunctive question, witnesses of invalidity, question on one side.
+10. **Pigeons do not jump high** (`pigeons-non-high`): `lem-pigeon-requirements`, proof
+    (cases A and B, general case), figure, `cor-pigeons-non-high`. Exercises: finite A and
+    A ∈ ℳ (moved from lesson 8, as examples of case A); RT²₂; jump hyperimmunity.
 
 ## 4. Proof techniques
+
+(Lesson numbers of the seven-lesson version of 2026-11-12; section 3 gives the current lessons.)
 
 - **The three-case argument one level up** (Σ⁰₂ questions with answers Σ⁰₁ relative to a
   set avoiding the cone): lessons 2, 3, 7.
@@ -186,8 +186,12 @@ can cite: `def-jump-cone-avoidance`, `def-lifted-question`, `lem-lifted-question
   without any validity, and that validity matters only to turn promises into truth. The
   case distinction is made explicit (case A: some condition with an invalid side; case B:
   none).
-- **Seven lessons.** The pigeonhole proof is split into the notion of forcing (lesson 6)
-  and second-jump control (lesson 7), to keep lessons readable.
+- **Ten lessons** (since 2026-11-13). The lessons had 2500–3600 words for a stated 45
+  minutes; they were split at natural points so that every lesson has at most 2475 words
+  (45 minutes at 55 words per minute). The pigeonhole proof now has three lessons: the
+  notion of forcing, the questions for Σ⁰₂ sentences, the construction. Slugs cited by
+  other courses (`sigma2-questions`, `largeness`, `pigeonhole-forcing`,
+  `pigeons-non-high`) keep the material cited from them.
 - **Excluded, with reasons.**
   - Low₃ solutions for Δ⁰₃ sets (Monin–Patey 2019): mentioned only; needs effective
     second-jump control, a further layer.
@@ -233,6 +237,8 @@ can cite: `def-jump-cone-avoidance`, `def-lifted-question`, `lem-lifted-question
 
 ## 7. Pedagogical plan
 
+(Lesson numbers of the seven-lesson version of 2026-11-12; section 3 gives the current lessons.)
+
 1. `jump-cones`: one jump up from cone avoidance; table of examples with DOM as the
    separating example; first-jump control first, and its two limits; the Δ⁰₃ reduction
    locates the difficulty; limits (DHLS, bi-immune relative to ∅''). Quizzes on the
@@ -257,6 +263,8 @@ can cite: `def-jump-cone-avoidance`, `def-lifted-question`, `lem-lifted-question
 Figures are generated by `scripts/figures/jump-cone-avoidance.py` (deterministic).
 
 ## 8. Sources, lesson by lesson (checked 2026-11-12)
+
+(Lesson numbers of the seven-lesson version of 2026-11-12; section 3 gives the current lessons.)
 
 1. Monograph, *Context and motivation*, *Use first-jump control*; Hirschfeldt §2.1, §6.4;
    Cholak–Jockusch–Slaman JSL 66 (2001); Downey–Hirschfeldt–Lempp–Solomon JSL 66 (2001)
@@ -290,8 +298,14 @@ quoted in lesson 4 (no non-trivial Σ⁰₂ partition regular class; measure and
   from the monograph, which cites Hirschfeldt et al. (2008); not checked in that paper.
 - Le Houérou–Levy Patey–Mimouni (arXiv:2407.01236) not read; attributions of
   `thm-cohesive-class` and of the greedy exercise follow the monograph.
-- Durations: lessons have 2600–3600 counted words, mostly mathematics, and are set to 45
-  minutes, the convention of the track; lessons 5 and 7 are at the upper end.
+- Ten lessons, one more than the guideline of about nine; merging would bring lessons
+  above 45 minutes.
+- `jump-compactness-avoidance/jump-pa-avoidance` and `product-mathias` list
+  `sigma2-questions`, `pigeonhole-forcing` and `pigeons-non-high` as prerequisites; the
+  promise (`def-pigeon-pi2`) is now in `pigeon-questions`, reached through
+  `pigeons-non-high`.
+- "The weakness of the pigeonhole principle under hyperarithmetical reductions" is cited
+  as arXiv:1905.08425; a journal version was not confirmed.
 - Strong jump cone avoidance of COH, and whether jump cone avoidance implies cone
   avoidance for natural problems, are not discussed.
 - The combined notion of forcing of Patey (2017) for COH (choice of the path during the
@@ -301,3 +315,18 @@ quoted in lesson 4 (no non-trivial Σ⁰₂ partition regular class; measure and
 
 - **2026-11-12.** Course created: seven lessons, six figures
   (`scripts/figures/jump-cone-avoidance.py`), design log.
+- **2026-11-13: polishing pass.** Split into ten lessons (new: `wkl-two-cones`,
+  `partition-regularity`, `pigeon-questions`; `largeness` and `cohesive-classes`
+  retitled); durations set from word counts. Corrections: primitive recursive tree of the
+  WKL exercise (the stage-s test of the node of length s did not give [S] = [T]); the
+  argument why first-jump control does not combine with cone avoidance (rewritten); the
+  counterexample to compatibility without cohesiveness (L_Z is not Σ⁰₁; replaced by the
+  classes "meets Z", "meets Z̄"); compactness of the lifted question in the hyperimmunity
+  exercises (bounded sentences written so that a witness serves directly); the
+  hyperimmunity exercise of the last lesson (construction of 𝒩 and compactness written
+  out); the DNC case analysis of the Jockusch–Stephan exercise (values ≠ 0, 1); the
+  uniformity needed in the complexity of the lifted question; a quiz justification
+  ("G is far from low"); Hirschfeldt's remark of §6.4 concerns Δ⁰₂ subsets, which the
+  theorem does not give; validity in the monograph is written with U_S, not the core.
+  Figure `cohesive-choices`: subscripts L_Z instead of L(Z) (which denotes the largest
+  partition regular subclass) and width within the view box.

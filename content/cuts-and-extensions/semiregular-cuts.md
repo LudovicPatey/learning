@@ -1,11 +1,11 @@
 ---
-title: Semiregular and regular cuts
-summary: Semiregular cuts, in which no coded function on a bounded domain has values cofinal in the cut; they are closed under addition and multiplication, and with their coded subsets they satisfy Σ⁰₁ induction (Kirby and Paris); a proper cut is semiregular if and only if it is closed under multiplication and its coded subsets form a model of WKL₀; regular cuts and the pigeonhole principle; every regular cut is semiregular.
-duration: 50
+title: Semiregular cuts
+summary: Semiregular cuts, in which no coded function on a bounded domain has values cofinal in the cut; they are closed under addition and multiplication, and with their coded subsets they satisfy Σ⁰₁ induction (Kirby and Paris).
+duration: 30
 prerequisites: [weak-konig-cuts]
 ---
 
-The previous lessons studied the coded subsets of an arbitrary cut. This lesson asks when a cut, with its coded subsets, is itself a model of a reasonable theory. Coded subsets always satisfy $\Delta^0_1$ comprehension, and those of exponential cuts satisfy weak König's lemma; what may fail is induction. Kirby and Paris found the condition that restores it, by analogy with regular cardinals: no coded function with domain bounded in the cut should have values cofinal in the cut. Such cuts are called **semiregular**. They satisfy $\Sigma^0_1$ induction, which makes them a source of models of $\mathrm I\Sigma_1$, and they are exactly the cuts whose coded subsets form a model of $\mathsf{WKL}_0$.
+The previous lessons studied the coded subsets of an arbitrary cut. This lesson asks when a cut, with its coded subsets, is itself a model of a reasonable theory. Coded subsets always satisfy $\Delta^0_1$ comprehension, and those of exponential cuts satisfy weak König's lemma; what may fail is induction. Kirby and Paris found the condition that restores it, by analogy with regular cardinals: no coded function with domain bounded in the cut should have values cofinal in the cut. Such cuts are called **semiregular**. This lesson proves that they satisfy $\Sigma^0_1$ induction, which makes them a source of models of $\mathrm I\Sigma_1$; the next lesson shows that they are exactly the cuts whose coded subsets form a model of $\mathsf{WKL}_0$, and compares them with the regular cuts.
 
 Throughout, $M$ is a model of $\mathrm I\Delta_0 + \mathrm{exp}$, so that finite sequences are coded (:ref{#def-coded-sequence}).
 
@@ -37,7 +37,7 @@ Every semiregular cut $I$ of $M$ is closed under addition and multiplication.
 :::proof{of=lem-semireg-closed}
 Let $a, b \in I$. *Addition.* The function $f(i) = a + i$, for $i < b$, is coded. If $a + b \notin I$, every $y \in I$ with $y \geq a$ is below $a + b$, hence equal to $f(i)$ for some $i < b$; so the values of $f$ in $I$ are cofinal in $I$, contradicting semiregularity.
 
-*Multiplication.* We may assume $a \geq 1$. The function $g(i) = a \cdot i$, for $i < b$, is coded; let $d \in I$ bound its values in $I$. The set of $i < b$ with $a \cdot i < d$ is defined by a bounded formula and contains $0$, so it has a largest element $i_0$. If $i_0 + 1 < b$, then $a (i_0 + 1) = a \cdot i_0 + a$ is in $I$, by closure under addition, since $a \cdot i_0 < d$; it is a value of $g$ in $I$, so it is below $d$, contradicting the maximality of $i_0$. So $i_0 = b - 1$, and $a \cdot b = a \cdot i_0 + a \in I$.
+*Multiplication.* We may assume $a \geq 1$ and $b \geq 1$. The function $g(i) = a \cdot i$, for $i < b$, is coded; let $d \in I$ bound its values in $I$. The set of $i < b$ with $a \cdot i < d$ is defined by a bounded formula and contains $0$, since $g(0) = 0$ is a value in $I$, so it has a largest element $i_0$. If $i_0 + 1 < b$, then $a (i_0 + 1) = a \cdot i_0 + a$ is in $I$, by closure under addition, since $a \cdot i_0 < d$; it is a value of $g$ in $I$, so it is below $d$, contradicting the maximality of $i_0$. So $i_0 = b - 1$, and $a \cdot b = a \cdot i_0 + a \in I$.
 :::
 
 ## Semiregular cuts satisfy Σ⁰₁ induction
@@ -73,46 +73,6 @@ In the proof of :ref{#thm-semireg-isigma1}, why is $f(x)$ defined as the *least*
 
 :::
 
-## The Kirby–Paris characterization
-
-The structure $(I, \mathrm{Cod}(M/I))$ is a natural candidate for a model of $\mathsf{WKL}_0$, the system $\mathsf{RCA}_0$ of :ref{#def-rca0} together with weak König's lemma, stated as: every unbounded binary tree has an unbounded branch. Comprehension comes from :ref{#cor-cod-delta1-ca}, and weak König's lemma from :ref{#thm-scott-wkl-cut} if $I$ is exponential. Semiregularity is exactly what is missing.
-
-:::theorem[Kirby, Paris]{#thm-kirby-paris-wkl}
-Let $I$ be a proper cut of $M$. Then $I$ is semiregular if and only if $I$ is closed under multiplication and $(I, \mathrm{Cod}(M/I)) \models \mathsf{WKL}_0$.
-:::
-
-:::proof{of=thm-kirby-paris-wkl}
-($\Rightarrow$) By :ref{#lem-semireg-closed}, $I$ is closed under addition and multiplication; it satisfies the basic axioms of arithmetic, since it is a model of $\mathrm I\Delta_0$ (:ref{#lem-cut-model}). $\Sigma^0_1$ induction is :ref{#thm-semireg-isigma1}, $\Delta^0_1$ comprehension is :ref{#cor-cod-delta1-ca}, and since $I$ is exponential by :ref{#thm-semireg-isigma1}, weak König's lemma is :ref{#thm-scott-wkl-cut}.
-
-($\Leftarrow$) The first-order part $I$ satisfies $\mathrm I\Sigma_1$, hence $\mathrm{exp}$, and is an exponential cut, as at the end of the proof of :ref{#thm-semireg-isigma1}. Let $f$ be a coded function with domain $a \in I$, given by $s \in M$, and suppose that its values in $I$ are cofinal in $I$. For $y \in M$, let $d_y < 2^a$ code the set $\{ i < a : f(i) < y \}$ (:ref{#thm-delta0-comprehension}); if $y \in I$, then $d_y < 2^a \in I$. The relation $z = d_y$ is defined in $M$ by a bounded formula with the parameters $s$ and $a$, so the set $R$ of pairs $\langle y, z \rangle \in I$ with $z = d_y$ belongs to $\mathrm{Cod}(M/I)$, by :ref{#ex-coded-subsets}. Consider the $\Sigma^0_1$ formula with parameter $R$
-$$
-\varphi(m) \equiv \exists y\ \exists z\ (\langle y, z \rangle \in R \wedge z \geq m).
-$$
-It holds at $m = 0$. Suppose $\varphi(m)$ in $I$, with $z = d_y \geq m$ and $y \in I$. Since the values of $f$ in $I$ are cofinal, some $i < a$ has $y \leq f(i) \in I$; let $y' = f(i) + 1 \in I$. Then $\mathrm{Ack}(d_{y'})$ contains $\mathrm{Ack}(d_y)$ and the element $i \notin \mathrm{Ack}(d_y)$. By :ref{#ex-subset-sum}, $d_{y'} \geq d_y + 1 > m$. As $y' \in I$ and $d_{y'} < 2^a \in I$, the pair $\langle y', d_{y'} \rangle$ belongs to $R$. Thus $\varphi(m + 1)$. By $\Sigma^0_1$ induction, $\varphi(2^a)$ holds: some $d_y \geq 2^a$, a contradiction.
-:::
-
-The second direction uses only $\Sigma^0_1$ induction with set parameters, so the proof shows that a proper cut closed under multiplication is semiregular if and only if $(I, \mathrm{Cod}(M/I))$ satisfies $\Sigma^0_1$ induction. Kirby and Paris used semiregular cuts to construct models of $\mathrm I\Sigma_1$ inside models of stronger theories; the method of indicators, in the last course of the track, refines this to show that $\mathrm I\Sigma_1$ does not prove the totality of fast-growing functions such as the Ackermann function.
-
-## Regular cuts
-
-Semiregularity is a bounding property for coded functions on bounded domains. A stronger property concerns coded colorings of the whole cut with a bounded number of colors.
-
-:::definition[Kirby, Paris]{#def-regular-cut}
-A proper cut $I$ of $M$ closed under addition and multiplication is **regular** if for every $a \in I$ and every function $F : I \to [0, a)$ whose graph $\{ \langle x, F(x) \rangle : x \in I \}$ belongs to $\mathrm{Cod}(M/I)$, there is $j < a$ such that $F^{-1}(j)$ is unbounded in $I$.
-:::
-
-In words: $(I, \mathrm{Cod}(M/I))$ satisfies the infinite pigeonhole principle for a bounded number of colors. The standard cut is regular in every non-standard $M$, by the infinite pigeonhole principle: a coloring of $\nat$ with finitely many colors has an infinite color class.
-
-:::proposition{#prop-regular-semireg}
-Every regular cut is semiregular.
-:::
-
-:::proof{of=prop-regular-semireg}
-Suppose that $I$ is closed under addition and multiplication, as in the definition of regular cuts, and not semiregular: some coded function $f$ with domain $a \in I$ has values cofinal in $I$. For $x \in I$, if some value of $f$ is at most $x$, let $F(x)$ be the least $i < a$ such that $f(i)$ is the largest value of $f$ that is at most $x$; otherwise let $F(x) = 0$. The largest such value exists in $M$, since the set of values of $f$ that are at most $x$ is defined by a bounded formula with the parameter coding $f$. So the graph of $F$ is defined by a bounded formula with parameters, and its restriction to $I$ belongs to $\mathrm{Cod}(M/I)$ by :ref{#ex-coded-subsets}; $F$ maps $I$ into $[0, a)$. Let $j < a$. If $F(x) = j$ for some $x$ in the first case, then $f(j) \leq x$ is in $I$, and by cofinality some $i$ has $f(j) < f(i) \in I$; for every $x \geq f(i)$, the largest value at most $x$ is at least $f(i) > f(j)$, so $F(x) \neq j$. The elements $x$ of the second case are below every value of $f$ in $I$. In both cases $F^{-1}(j)$ is bounded in $I$, and $I$ is not regular.
-:::
-
-The converse fails: Kirby and Paris (1977) built semiregular cuts that are not regular. With their coded subsets, regular cuts are characterized by a collection scheme: by a theorem of Hirst, the infinite pigeonhole principle for arbitrarily many colors is equivalent over $\mathsf{RCA}_0$ to $\Sigma^0_2$ collection (:ref{to="induction-conservation/pigeonhole"}), and accordingly a semiregular cut $I$ is regular if and only if $(I, \mathrm{Cod}(M/I))$ satisfies $\Sigma^0_2$ collection with set parameters (Hájek and Pudlák, Theorem IV.2.21, for short cuts). We admit this characterization.
-
 ## Exercises
 
 ::::exercise{difficulty=1}
@@ -125,8 +85,8 @@ Let $d \in I$ bound the values of $f$ that lie in $I$. For $i < a$, $f(i) \in I$
 
 ## Notes and references
 
-Semiregular and regular cuts were introduced by Kirby and Paris (1977), by analogy with regular cardinals. The definition and :ref{#lem-semireg-closed} follow Wong's Lecture 5 (definition of semiregularity, Lemma 5.8, Example 5.7); :ref{#thm-semireg-isigma1} is the part of Wong's Theorem 5.9 proved there, here with set parameters, and :ref{#thm-kirby-paris-wkl} is Wong's Theorem 5.9 (Kirby and Paris). Hájek and Pudlák treat these cuts in models of arithmetic with a top: semiregular cuts and $\mathrm I\Sigma^*_1$ (Definition IV.2.15, Theorem IV.2.16), regular cuts as $1$-Ramsey cuts (Definition IV.2.19 and the remark after it), :ref{#prop-regular-semireg} (Theorem IV.2.20), and the characterization by collection (Theorem IV.2.21). Wong's Lecture 5 applies semiregular cuts to the unprovability in $\mathrm I\Sigma_1$ of the totality of fast-growing functions.
+Semiregular and regular cuts were introduced by Kirby and Paris (1977), by analogy with regular cardinals. The definition, :ref{#ex-not-semiregular} and :ref{#lem-semireg-closed} follow Wong's Lecture 5 (definition of semiregularity, Example 5.7, Lemma 5.8); :ref{#thm-semireg-isigma1} is the part of Wong's Theorem 5.9 proved there, here with set parameters. Hájek and Pudlák define semiregular cuts in models of arithmetic with a top by strong collection for coded functions, and prove that they are exactly the cuts satisfying $\mathrm I\Sigma^*_1$, induction for $\Sigma_1$ formulas with coded set parameters (Definition IV.2.15, Theorem IV.2.16). Wong's Lecture 5 applies semiregular cuts to the unprovability in $\mathrm I\Sigma_1$ of the totality of fast-growing functions.
 
 - L. A. S. Kirby and J. B. Paris, *Initial segments of models of Peano's axioms*, in Set Theory and Hierarchy Theory V, Lecture Notes in Mathematics 619, Springer, 1977, 211–226.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 5.
-- P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 2(b)–(c).
+- P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 2(b).

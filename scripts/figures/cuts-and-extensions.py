@@ -5,7 +5,7 @@
 #   scott-branch -> weak-konig-cuts.md
 #   semiregular  -> semiregular-cuts.md
 #   cofinal      -> cofinal-extensions.md
-#   splitting    -> collection-end-extensions.md
+#   splitting    -> splitting-conservation.md
 #   underspill   -> collection-end-extensions.md
 # The output is deterministic.
 import json, sys
@@ -139,9 +139,11 @@ out['cofinal'] = ''.join(s)
 s = ['<svg class="fig" viewBox="0 0 600 200" width="600" role="img" aria-label="The splitting theorem: M is cofinal in its supremum in K, which is an initial segment of K">']
 y = 70
 s.append(line(20, y, 580, y))
-for x in (40, 100, 170, 240, 310):
+# M has no largest element: discs of M continue up to the cut, so that every
+# new element of the supremum (circle) lies below some disc.
+for x in (40, 100, 170, 240, 300, 346):
     s.append(dot(x, y, 'accent-fill', 3.5))
-for x in (70, 135, 205, 280, 330):
+for x in (70, 135, 205, 270, 325):
     s.append(dot(x, y, 'node', 3))
 s.append(cutmark(360, y))
 for x in (420, 480, 540):

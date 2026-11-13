@@ -1,8 +1,8 @@
 ---
 title: The forcing question as a method
-summary: The three-case argument behind every proof of cone avoidance; the forcing question as a dividing line between conditions; questions whose answers are Σ⁰₁ relative to the condition; every set is Δ⁰₂ relative to a set avoiding a cone, so that strong cone avoidance reduces to Δ⁰₂ instances.
-duration: 45
-prerequisites: [avoidance-properties, effective-forcing/mathias-forcing, turing-degrees/low-and-high]
+summary: The three-case argument behind every proof of cone avoidance; the forcing question as a dividing line between conditions; forcing questions whose answers are Σ⁰₁ relative to the condition, and the cone avoidance theorem for them.
+duration: 40
+prerequisites: [avoidance-properties, effective-forcing/mathias-forcing]
 ---
 
 The proofs of cone avoidance met so far share one argument. For Cohen forcing (:ref{#thm-cone-avoidance}), for the construction of a high set avoiding a cone (:ref{#thm-high-cone-avoidance}), for Mathias forcing and cohesiveness (:ref{#thm-coh-cone-avoidance}), and in the abstract form of :ref{#cor-question-jump-cone}, a condition $c$ and a functional $\Phi_e$ being given, one considers the set $U$ of pairs $(x, v)$ such that "$\Phi^G_e(x)$ converges to $v$" can be forced below $c$, and distinguishes three cases.
@@ -11,9 +11,9 @@ The proofs of cone avoidance met so far share one argument. For Cohen forcing (:
 2. $U$ misses a right pair $(x, C(x))$: an extension forces that $\Phi^G_e(x)$ does not converge to $C(x)$.
 3. Otherwise $U$ is the graph of $C$, so $C$ is as simple as $U$, which contradicts the hypothesis on $C$.
 
-We call it the **three-case argument**. The first two cases are about forcing and hold for every notion of forcing; only the third depends on the complexity of $U$. This lesson isolates the part that varies, the **forcing question**, in a form adapted to problems, where the complexity of $U$ depends on the condition. It then shows that every set is $\Delta^0_2$ relative to some set avoiding a given cone, and deduces that strong cone avoidance only needs to be checked on $\Delta^0_2$ instances.
+We call it the **three-case argument**. The first two cases are about forcing and hold for every notion of forcing; only the third depends on the complexity of $U$. This lesson isolates the part that varies, the **forcing question**, in a form adapted to problems, where the complexity of $U$ depends on the condition. The next lesson applies it to strong cone avoidance.
 
-Throughout, a set $Z$ is fixed, and formulas are built with functionals of the oracle $Z \oplus G$ (:ref{#ex-forcing-formulas}, item 4). For a functional $\Phi_e$, a number $x$ and a value $v$, "$\Phi^{Z \oplus G}_e(x)\converge = v$" is a $\Sigma^0_1$ sentence, as "$\Phi^G_e(m)\converge < k$" in :ref{to="effective-forcing/forcing-question"}: it is $\Phi^{Z \oplus G}_{a}(x, v)\converge$ for an index $a$ computable from $e$. Its negation says that $\Phi^{Z \oplus G}_e(x)$ diverges or converges to another value.
+Throughout, a set $Z$ is fixed, and formulas are built with functionals of the oracle $Z \oplus G$ (:ref{#ex-forcing-formulas}, item 4). For a functional $\Phi_e$, a number $x$ and a value $v$, "$\Phi^{Z \oplus G}_e(x)\converge = v$" is a $\Sigma^0_1$ sentence, as "$\Phi^G_e(m)\converge < k$" in :ref{to="effective-forcing/compactness-merging"}: it is $\Phi^{Z \oplus G}_{a}(x, v)\converge$ for an index $a$ computable from $e$. Its negation says that $\Phi^{Z \oplus G}_e(x)$ diverges or converges to another value.
 
 ## The forcing question as a dividing line
 
@@ -57,6 +57,14 @@ Let $G$ be generic for the sets $E_e$ (and the sets $S_n$ of :ref{#lem-generic-s
 
 The proof is the one of :ref{#thm-question-preservation} at level $1$, with two differences: the oracle $X$ depends on the condition, and the set compared with the $\Sigma^0_1(X)$ set $U$ is the graph of $C$, so that the hypothesis is on $C$ rather than on $C$ or its complement. Since the conclusion holds for all $e$ at once, the theorem gives more than cone avoidance for one set: the same family of dense sets can be built for countably many sets $C$ at once, and every sufficiently generic set avoids all their cones.
 
+For Cohen forcing relative to $Z$ and $\mathcal M = \{ Z \}$, the set $U$ is the set of pairs $(x, v)$ such that $\Phi^{Z \oplus \tau}_e(x)\converge = v$ for some $\tau \succeq \sigma$, and the theorem is :ref{#thm-cone-avoidance} relativized. The hypothesis on $\mathcal M$ cannot be dropped, as the following example shows.
+
+:::example{#ex-coding-reservoir}
+Let $C$ be a non-computable set, and let $X_C$ be the set of the codes of the prefixes $C \uh n$, $n \in \nat$, for a computable coding of strings by numbers. Every infinite subset $H$ of $X_C$ computes $C$: to compute $C \uh n$, search for an element of $H$ coding a string of length at least $n$, which exists since only finitely many numbers code shorter strings, and take its prefix of length $n$. Consider Mathias forcing with arbitrary infinite reservoirs, and the question of :ref{#prop-mathias-question} relative to $Z = \emptyset$. As in the next lesson, it is a forcing question, and its answers at $(\sigma, X)$ are $\Sigma^0_1(X)$; so it is $\Sigma^0_1(\mathcal M)$-preserving for the class $\mathcal M$ of all sets. The members of the condition $(\varepsilon, X_C)$ are the subsets of $X_C$, and every sufficiently generic set whose filter contains this condition is an infinite subset of $X_C$, hence computes $C$. The proof of :ref{#thm-local-cone-avoidance} breaks down in case 3 at this condition: for the index $e$ of the reduction just described, which only reads finite subsets of $X_C$ and never outputs a wrong value, the set $U$ is the graph of $C$, and it is $\Sigma^0_1(X_C)$ with $C \leq_T X_C$.
+:::
+
+This is why the constructions of the following lessons restrict the reservoirs to a class of sets that do not compute $C$: computable in $Z$, avoiding the cone above $C$ together with $Z$, or members of a Scott ideal that does not contain $C$.
+
 :::quiz[the three-case argument]
 In the proof of :ref{#thm-local-cone-avoidance}, which hypothesis does each case use?
 
@@ -78,51 +86,7 @@ Why does the argument compare $U$ with the graph of $C$ rather than with $C$ its
   Values other than $0$ and $1$ never belong to $U$, which only contains pairs with $v < 2$.
 - [ ] Because $U$ is a set of pairs.
 
-  The comparison with sets of numbers is the subject of :ref{to="avoidance/non-sigma1-definitions"}.
-:::
-
-## Every set is Δ⁰₂ relative to a cone-avoiding set
-
-The first application is the construction of :ref{#thm-high-cone-avoidance}, for an arbitrary set in place of $\emptyset''$, recast as a notion of forcing with a forcing question.
-
-:::theorem{#thm-delta2-cone-avoidance}
-Let $Z$ be a set, $C$ a set with $C \not\leq_T Z$, and $A$ an arbitrary set. There is a set $G$ with $C \not\leq_T Z \oplus G$ and $A \leq_T G'$.
-:::
-
-:::proof{of=thm-delta2-cone-avoidance}
-*The notion of forcing.* The conditions are the pairs $(\sigma, m)$ of a string and a number, with members
-$$
-[\sigma, m] = \{ X \succeq \sigma : X(\langle x, y \rangle) = A(x) \text{ for every } \langle x, y \rangle \geq |\sigma| \text{ with } x < m \},
-$$
-and $(\tau, n) \leq (\sigma, m)$ if $n \geq m$ and $[\tau, n] \subseteq [\sigma, m]$. The class $[\sigma, m]$ is closed and non-empty. Refinement holds: if a member $X$ of $(\sigma, m)$ extends a string $\rho$, then $(X \uh \max(|\sigma|, |\rho|), m)$ is an extension all of whose members extend $\rho$. So this is a notion of forcing (:ref{#def-forcing-notion}). For fixed $m$, the relation "$(\tau, m) \leq (\sigma, m)$" holds if and only if $\sigma \preceq \tau$ and $\tau(\langle x, y \rangle) = A(x)$ for the positions $|\sigma| \leq \langle x, y \rangle < |\tau|$ with $x < m$: it is decidable from the finite string $A \uh m$.
-
-*The question.* For a $\Sigma^0_1$ sentence $\varphi = \Phi^{Z \oplus G}_e(\vec m)\converge$, let $(\sigma, m) \mathrel{?{\vdash}} \varphi$ if $\Phi^{Z \oplus \tau}_e(\vec m)\converge$ for some $\tau$ with $(\tau, m) \leq (\sigma, m)$. If so, every member of $(\tau, m)$ extends $\tau$ and satisfies $\varphi$, by the use principle. If not, $(\sigma, m)$ forces $\neg \varphi$: a member $X$ with $\Phi^{Z \oplus X}_e(\vec m)\converge$ with use $u$ would give $\tau = X \uh \max(u, |\sigma|)$ with $(\tau, m) \leq (\sigma, m)$ and a convergent computation. The relation is $\Sigma^0_1(Z)$, since the search over $\tau$ is decidable once $A \uh m$ is known. So the question is $\Sigma^0_1(\{ Z \})$-preserving.
-
-*Conclusion.* By :ref{#thm-local-cone-avoidance} with $\mathcal M = \{ Z \}$, every sufficiently generic $G$ satisfies $C \not\leq_T Z \oplus G$. For each $k$, the set of conditions $(\sigma, m)$ with $m \geq k$ is dense, since $(\sigma, k)$ extends $(\sigma, m)$ when $k \geq m$. If $G$ is also generic for these sets, then for each $x$ the filter contains some $(\sigma, m)$ with $m > x$, and $G \in [\sigma, m]$, so $G(\langle x, y \rangle) = A(x)$ for all but finitely many $y$. The sets $G_y = \{ x : \langle x, y \rangle \in G \}$ form a $G$-computable approximation of $A$, so $A \leq_T G'$ by the limit lemma relativized to $G$ (:ref{#thm-limit-lemma}).
-:::
-
-The question does not mention $A$ beyond the finite string $A \uh m$, which is why its answers are $\Sigma^0_1(Z)$ although $A$ is arbitrary. Different conditions use different finite strings, so the question is $\Sigma^0_1(Z)$ for each condition, not uniformly in the condition; :ref{#def-question-local} asks for no more. Combinatorially, the theorem says that the complexity of a set is no obstacle to cone avoidance as long as one only asks for the set to be a limit: every set is $\Delta^0_2$ relative to some set that avoids a given cone. This is the link between computational and combinatorial strength announced in the first lesson.
-
-:::corollary{#cor-strong-delta2}
-A problem $\mathsf P$ admits strong cone avoidance if and only if for every set $Z$, every $C \not\leq_T Z$ and every instance $X$ of $\mathsf P$ with $X \leq_T Z'$, there is a solution $Y$ to $X$ with $C \not\leq_T Z \oplus Y$.
-:::
-
-:::proof{of=cor-strong-delta2}
-The forward direction is a special case. Conversely, let $C \not\leq_T Z$ and let $X$ be any instance. By :ref{#thm-delta2-cone-avoidance} with $Z$ and the set $A = X$, there is $G$ with $C \not\leq_T Z \oplus G$ and $X \leq_T G' \leq_T (Z \oplus G)'$. The hypothesis, applied with $Z \oplus G$ in place of $Z$, gives a solution $Y$ with $C \not\leq_T Z \oplus G \oplus Y$, hence $C \not\leq_T Z \oplus Y$.
-:::
-
-In Seetapun's theorem (:ref{#thm-seetapun}), the pigeonhole principle is applied to the limit set of a stable coloring, a set that is $\Delta^0_2$ relative to the sets built so far. By the corollary, requiring the Dzhafarov–Jockusch theorem for such sets only is no weaker than requiring it for all sets.
-
-:::quiz[every set is Δ⁰₂ relative to a cone-avoiding set]
-Why is the question of :ref{#thm-delta2-cone-avoidance} $\Sigma^0_1(Z)$, although the members of the conditions are defined from the arbitrary set $A$?
-
-- [x] Because the extensions $(\tau, m)$ with the same second component only depend on the finite string $A \uh m$, which can be built into the search.
-- [ ] Because $A$ is computable in $Z$.
-
-  $A$ is arbitrary.
-- [ ] Because the question searches through all extensions $(\tau, n)$ with $n \geq m$.
-
-  Extensions with larger $n$ would involve more of $A$; the question only uses those with the same $m$.
+  Pairs can be coded by numbers, so this is only a matter of presentation; what matters is that $U$ records both values, and a $\Sigma^0_1(X)$ set of numbers compared with $C$ itself is the subject of :ref{to="avoidance/non-sigma1-definitions"}.
 :::
 
 ## Exercises
@@ -143,18 +107,9 @@ The two properties hold since forcing is consistent. Let $\varphi$ say that $G$ 
 :::
 ::::
 
-::::exercise{difficulty=2}
-Using :ref{#thm-local-cone-avoidance} and Mathias forcing, show that for every set $Z$, every $C \not\leq_T Z$ and every infinite set $A$ with $C \not\leq_T Z \oplus A$, there is an infinite set $G \subseteq A$ that is **high relative to $Z$**, that is, $(Z \oplus G)' \geq_T Z''$, and such that $C \not\leq_T Z \oplus G$.
-
-:::solution
-Use Mathias forcing with conditions $(\sigma, X)$ such that $X \subseteq A$, $X$ is infinite and $X \leq_T Z \oplus A$. The question of :ref{#prop-mathias-question}, with functionals of the oracle $Z \oplus G$, is a forcing question whatever the reservoir; it is $\Sigma^0_1(Z \oplus X)$, since compatibility with $(\sigma, X)$ is decidable in $X$,, and $C \not\leq_T Z \oplus X$ since $Z \oplus X \leq_T Z \oplus A$; by :ref{#thm-local-cone-avoidance}, $C \not\leq_T Z \oplus G$ for every sufficiently generic $G$. Every condition's members $G$ satisfy $G \setminus \sigma \subseteq A$, and sufficiently generic sets are infinite, so $G \subseteq^* A$; replacing $G$ by $G \cap A$, a finite modification, keeps all properties. For highness, repeat the proof of :ref{#prop-mathias-dominant} with $Z$-computable functions $h$: the thinned reservoir is computable in $X \oplus Z$, hence in $Z \oplus A$. So the principal function of $G$ eventually dominates every $Z$-computable function, and $(Z \oplus G)' \geq_T Z''$ by Martin's theorem relativized to $Z$ (:ref{#thm-martin-domination}).
-:::
-::::
-
 ## Notes and references
 
-The three-case argument and the forcing question as its abstraction follow the chapter *Cone avoidance* of Patey's monograph (sections *First examples* and *Forcing question*), where the dividing line between conditions is drawn as in the figure; the forcing question was introduced by Monin and Patey (2019, Lemma 2.4 for the abstract cone avoidance theorem). The monograph states as an exercise that the two properties of the first exercise characterize forcing questions; :ref{#exr-question-converse} shows that they are necessary but not sufficient in the framework of this course. :ref{#def-question-local} is introduced here to state in one theorem the variants with reservoirs computable in $Z$, avoiding a cone, or belonging to a Scott ideal. :ref{#thm-delta2-cone-avoidance} is the theorem on high sets of :ref{to="turing-degrees/low-and-high"} for an arbitrary set, relativized; in the more general form where a closed class without $Z$-computable member is avoided, Downey, Greenberg, Harrison-Trainor, Patey and Turetsky (2022, Lemma 2.8) attribute it to Patey.
+The three-case argument and the forcing question as its abstraction follow the chapter *Cone avoidance* of Patey's monograph (sections *First examples* and *Forcing question*), where the dividing line between conditions is drawn as in the figure; the forcing question was introduced by Monin and Patey (2019, Lemma 2.4 for the abstract cone avoidance theorem). The monograph states as an exercise that the two properties of the first exercise characterize forcing questions; :ref{#exr-question-converse} shows that they are necessary but not sufficient in the framework of this course. :ref{#def-question-local} is introduced here to state in one theorem the variants with reservoirs computable in $Z$, avoiding a cone, or belonging to a Scott ideal. The example of reservoirs that code $C$ shows why the class $\mathcal M$ must avoid the cone; it is the reason for the restrictions on reservoirs in all later constructions.
 
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095; arXiv:1803.09771.
-- R. Downey, N. Greenberg, M. Harrison-Trainor, L. Patey and D. Turetsky, *Relationships between computability-theoretic properties of problems*, Journal of Symbolic Logic 87 (2022), 47–71; arXiv:1903.04273.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, sections *First examples* and *Forcing question*.

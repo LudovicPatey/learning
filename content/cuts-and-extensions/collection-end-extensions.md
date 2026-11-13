@@ -1,11 +1,11 @@
 ---
-title: End extensions, collection and conservation
-summary: A model with a proper Σₙ-elementary end extension satisfying IΣₙ satisfies BΣₙ₊₁ (Paris and Kirby), and the converse for countable models is stated; every Σₙ₊₁-elementary extension of a model of IΣₙ splits into a Σₙ₊₁-elementary cofinal extension followed by a Σₙ-elementary end extension; every model of IΣₙ has a Σₙ₊₁-elementary cofinal extension satisfying BΣₙ₊₁; BΣₙ₊₁ is Πₙ₊₂-conservative over IΣₙ (Friedman, Paris).
-duration: 45
-prerequisites: [cofinal-extensions]
+title: End extensions and collection
+summary: A model with a proper Σₙ-elementary end extension satisfying IΣₙ satisfies BΣₙ₊₁ (Paris and Kirby), and the converse for countable models is stated; Σₙ₊₁ induction is equivalent to collection for partial functions (Friedman).
+duration: 40
+prerequisites: [cofinal-extensions, fragments-of-arithmetic/definable-cuts]
 ---
 
-Collection is the scheme that end extensions see. If a model $M$ sits as a proper initial segment inside a model $K$, with enough elementarity, then every element of $K$ above $M$ is a common bound, in $K$, for witnesses chosen in $M$; underspill brings such a bound down into $M$, and $M$ satisfies collection. This lesson proves this theorem of Paris and Kirby and combines it with the previous lesson to obtain a conservation theorem: $\mathrm B\Sigma_{n+1}$ proves no more $\Pi_{n+2}$ sentences than $\mathrm I\Sigma_n$. The proof builds, for a model of $\mathrm I\Sigma_n$, an elementary extension, splits it at the supremum of the model, and recognizes the middle model as a model of collection.
+Collection is the scheme that end extensions see. If a model $M$ sits as a proper initial segment inside a model $K$, with enough elementarity, then every element of $K$ above $M$ is a common bound, in $K$, for witnesses chosen in $M$; underspill brings such a bound down into $M$, and $M$ satisfies collection. This lesson proves this theorem of Paris and Kirby and states its converse for countable models. It then proves a strengthening of collection that holds in models of induction, Friedman's **strong collection**, which bounds the witnesses of a partial function; the next lesson uses it to split extensions and to derive a conservation theorem.
 
 ## End extensions give collection
 
@@ -24,7 +24,7 @@ If $n = 0$, $\psi$ is bounded; if $n \geq 1$, $K \models \mathrm B\Sigma_n$ by :
 
 *$\psi$ holds on $K \setminus M$.* Let $b \in K \setminus M$ and $x < a$. Then $x \in M$, since $M$ is an initial segment, so some $y \in M$ satisfies $M \models \varphi(x, y)$; then $K \models \varphi(x, y)$, by $M \preccurlyeq_n K$, and $y < b$.
 
-*Underspill.* Since $K \models \mathrm I\Sigma_n$ and $M$ is a proper cut of $K$, underspill for $\Pi_n$ formulas (exercise of :ref{to="fragments-of-arithmetic/definable-cuts"}, a consequence of :ref{#prop-cuts-induction}) gives $b \in M$ with $K \models \psi(b)$.
+*Underspill.* Since $K \models \mathrm I\Sigma_n$ and $M$ is a proper cut of $K$, underspill for $\Pi_n$ formulas (:ref{#ex-underspill}, a consequence of :ref{#prop-cuts-induction}) gives $b \in M$ with $K \models \psi(b)$.
 
 *Transfer down.* Let $x < a$. Some $y < b$ satisfies $K \models \varphi(x, y)$; then $y \in M$, as $b \in M$, and $M \models \varphi(x, y)$ by $M \preccurlyeq_n K$. So $M \models \forall x < a\ \exists y < b\ \varphi(x, y)$.
 :::
@@ -63,113 +63,58 @@ The converse direction is also due to Paris and Kirby: collection gives elementa
 Let $n \geq 1$ and $M$ a countable model of $\mathrm I\Delta_0$. Then $M \models \mathrm B\Sigma_{n+1}$ if and only if $M$ has a proper $\Sigma_{n+1}$-elementary end extension that satisfies $\mathrm I\Delta_0$.
 :::
 
+The extension is only required to satisfy $\mathrm I\Delta_0$, so the implication from right to left is not an instance of :ref{#thm-end-ext-collection} as proved here, which needs $\mathrm I\Sigma_n$ in $K$. It follows, by induction on $n$, from the stronger theorem of Adamowicz, Clote and Wilkie recalled in the notes, which only needs $\mathrm I\Sigma_{n-1}$ in $K$: if $M$ already satisfies $\mathrm B\Sigma_n$, hence $\mathrm I\Sigma_{n-1}$, then $K$ satisfies $\mathrm I\Sigma_{n-1}$ too, since this theory is axiomatized by $\Pi_{n+1}$ sentences, which go up from $M$ to a $\Sigma_{n+1}$-elementary extension. Hájek and Pudlák give a direct proof (IV.1.56). In the other direction, their construction of the extension needs $n \geq 1$. For $n = 0$, a proper $\Sigma_1$-elementary end extension satisfying $\mathrm I\Delta_0$ already gives $\mathrm B\Sigma_2$ (Hájek and Pudlák, Theorem IV.1.53 (2)), and whether every countable model of $\mathrm B\Sigma_1$ has a proper end extension satisfying $\mathrm I\Delta_0$ is an open problem of Paris (Wong, Question 6.9).
+
 The theory of the extension is not determined by this fact, and the best possible end extensions are the subject of recent work. Clote asked, after Kaufmann, whether every countable model of $\mathrm B\Sigma_{n+2}$ has a proper $\Sigma_{n+2}$-elementary end extension satisfying $\mathrm B\Sigma_{n+1}$; Mengzhou Sun (2025) answered positively.
 
-## The splitting theorem
+## Collection for partial functions
 
-Every extension $M \subseteq K$ factors as $M \subseteq_{cf} \sup_K M \subseteq_e K$ (:ref{#def-cofinal-ext}). When the extension is elementary enough and $M$ satisfies enough induction, each part keeps some elementarity.
+Collection bounds the values of a definable function on $[0, a)$ that is *total* on $[0, a)$. **Strong collection** asks the same for partial functions: whatever subset of $[0, a)$ has witnesses, a single bound $b$ catches a witness for each of its elements. This is stronger, because the set of elements that have a witness may be more complex than its witnesses, and its strength is that of induction one level up.
 
-:::theorem[Splitting]{#thm-splitting}
-Let $n \geq 0$, let $M$ be a model of $\mathrm I\Sigma_n$, and $K$ a structure with $M \preccurlyeq_{n+1} K$. Let $\bar M = \sup_K M$. Then
+:::theorem[Friedman]{#thm-strong-collection}
+Let $n \geq 0$. Over $\mathrm I\Delta_0$, $\mathrm I\Sigma_{n+1}$ is equivalent to the **strong $\Pi_n$ collection** scheme: the universal closures of
 $$
-M \preccurlyeq_{n+1} \bar M, \qquad M \subseteq_{cf} \bar M, \qquad \bar M \preccurlyeq_n K, \qquad \bar M \subseteq_e K.
+\exists b\ \forall x < a\ \big( \exists y\ \eta(x, y) \rightarrow \exists y < b\ \eta(x, y) \big)
 $$
+for $\eta \in \Pi_n$, with parameters.
 :::
 
-The end part is handled by the Tarski–Vaught test. A $\Pi_{n-1}$ property with a witness in $K$ and a parameter $c \in \bar M$ must have a witness in $\bar M$: take $a \in M$ above $c$; strong collection in $M$ gives one bound $b \in M$ for the witnesses of all $x < a$ that have one; this statement transfers to $K$, and then the witness for $c$ in $K$ can be taken below $b$, hence in $\bar M$. Strong collection is needed because some $x < a$ may have no witness.
+:::proof{of=thm-strong-collection}
+*Induction gives strong collection.* Assume $\mathrm I\Sigma_{n+1}$; it contains $\mathrm I\Sigma_1$, hence $\mathrm{exp}$ (:ref{#prop-isigma1-exp}). By :ref{#thm-friedman-coded}, some $c$ codes $\{ x < a : \exists y\ \eta(x, y) \}$ below $a$. Then $\forall x < a\ \exists y\ (x \notin c \vee \eta(x, y))$: for $x \in c$ a witness exists, and otherwise any $y$ will do. The formula in parentheses is $\Pi_n$, hence $\Sigma_{n+1}$, and $\mathrm B\Sigma_{n+1}$, which $\mathrm I\Sigma_{n+1}$ proves (:ref{#thm-fo-parsons}), gives $b$ with $\forall x < a\ \exists y < b\ (x \notin c \vee \eta(x, y))$. If $x < a$ has a witness, then $x \in c$, and some $y < b$ satisfies $\eta(x, y)$.
 
-:::proof{of=thm-splitting}
-As noted after :ref{#def-cofinal-ext}, $\bar M$ is a substructure of $K$, $M \subseteq_{cf} \bar M$ and $\bar M \subseteq_e K$; so $\bar M \preccurlyeq_0 K$ by :ref{#lem-delta0-absolute}.
-
-*$\bar M \preccurlyeq_n K$.* For $n = 0$ this is the previous sentence. Let $n = m + 1$. We apply :ref{#lem-tarski-vaught-n}. Let $\eta(x, \bar y)$ be a $\Pi_m$ formula without parameters, $c \in \bar M$, and suppose $K \models \exists \bar y\ \eta(c, \bar y)$; parameters from $\bar M$ can be gathered into $c$ by pairing, since $\bar M$ is closed under the operations. Take $a \in M$ with $c < a$. By :ref{#thm-strong-collection}, applied in $M \models \mathrm I\Sigma_{m+1}$ after contracting $\bar y$ to one variable, there is $b \in M$ with
-$$
-M \models \forall x < a\ \big( \exists \bar y\ \eta(x, \bar y) \rightarrow \exists \bar y < b\ \eta(x, \bar y) \big).
-$$
-The formula after $\forall x < a$ is the disjunction of a $\Pi_{m+1}$ and a $\Sigma_{m+1}$ formula, so the whole formula is logically $\Pi_{m+2} = \Pi_{n+1}$, with parameters $a, b \in M$. It holds in $K$, by $M \preccurlyeq_{n+1} K$. Since $c < a$ and $K \models \exists \bar y\ \eta(c, \bar y)$, some $\bar y < b$ satisfies $\eta(c, \bar y)$ in $K$, and these elements are in $\bar M$.
-
-*$M \preccurlyeq_{n+1} \bar M$.* For $\Sigma_n$ formulas with parameters in $M$, truth in $M$, in $K$ and in $\bar M$ agree, by $M \preccurlyeq_{n+1} K$ and $\bar M \preccurlyeq_n K$. Let $\eta$ be $\Pi_n$ with parameters in $M$. If $M \models \exists \bar y\ \eta(\bar y)$, a witness in $M$ satisfies $\eta$ in $\bar M$. If $\bar M \models \eta(\bar d)$ with $\bar d \in \bar M$, then $K \models \eta(\bar d)$ by $\bar M \preccurlyeq_n K$, so $K \models \exists \bar y\ \eta(\bar y)$, and $M \models \exists \bar y\ \eta(\bar y)$ by $M \preccurlyeq_{n+1} K$.
+*Strong collection gives induction*, by induction on $n$. Strong $\Pi_n$ collection contains strong $\Pi_{n-1}$ collection for $n \geq 1$, so the induction hypothesis gives $\mathrm I\Sigma_n$, hence $\mathrm B\Sigma_n$ if $n \geq 1$; for $n = 0$ we have $\mathrm I\Delta_0$. Let $\varphi(x) \equiv \exists y\ \eta(x, y)$ with $\eta \in \Pi_n$ (after contraction), and assume $\varphi(0)$, $\forall x\, (\varphi(x) \rightarrow \varphi(x + 1))$ and $\neg \varphi(a)$. Strong collection gives $b$ with $\forall x < a + 1\ (\varphi(x) \rightarrow \exists y < b\ \eta(x, y))$. Let $\psi(x) \equiv \exists y < b\ \eta(x, y)$, which is bounded if $n = 0$ and $\Pi_n$ by :ref{#lem-fo-collection-closure} if $n \geq 1$. For $x \leq a$, $\varphi(x) \leftrightarrow \psi(x)$. Apply $\Pi_n$ induction (:ref{#thm-fo-isigma-ipi}), or bounded induction if $n = 0$, to $x \leq a \rightarrow \psi(x)$: it holds at $0$, and if $x + 1 \leq a$ and $\psi(x)$, then $\varphi(x)$, $\varphi(x + 1)$ and $\psi(x + 1)$. So $\psi(a)$, hence $\varphi(a)$, a contradiction.
 :::
 
-:::figure[The splitting theorem. The supremum $\bar M$ of $M$ in $K$ consists of the elements of $K$ below some element of $M$. $M$ is cofinal in $\bar M$, and $\bar M$ is an initial segment of $K$.]
-<svg class="fig" viewBox="0 0 600 200" width="600" role="img" aria-label="The splitting theorem: M is cofinal in its supremum in K, which is an initial segment of K"><line x1="20.0" y1="70.0" x2="580.0" y2="70.0" class="ink-stroke" stroke-width="1.2"/><circle cx="40.0" cy="70.0" r="3.5" class="accent-fill"/><circle cx="100.0" cy="70.0" r="3.5" class="accent-fill"/><circle cx="170.0" cy="70.0" r="3.5" class="accent-fill"/><circle cx="240.0" cy="70.0" r="3.5" class="accent-fill"/><circle cx="310.0" cy="70.0" r="3.5" class="accent-fill"/><circle cx="70.0" cy="70.0" r="3" class="node"/><circle cx="135.0" cy="70.0" r="3" class="node"/><circle cx="205.0" cy="70.0" r="3" class="node"/><circle cx="280.0" cy="70.0" r="3" class="node"/><circle cx="330.0" cy="70.0" r="3" class="node"/><line x1="360.0" y1="48.0" x2="360.0" y2="92.0" class="accent-stroke" stroke-width="1.6" stroke-dasharray="4 3"/><circle cx="420.0" cy="70.0" r="3" class="node"/><circle cx="480.0" cy="70.0" r="3" class="node"/><circle cx="540.0" cy="70.0" r="3" class="node"/><path d="M22,86 L22,92 L354,92 L354,86" class="muted-stroke" stroke-width="1.2"/><text x="188.0" y="110" text-anchor="middle" class="label">M̄ = sup_K M: below some element of M</text><path d="M22,122 L22,128 L578,128 L578,122" class="muted-stroke" stroke-width="1.2"/><text x="300.0" y="146" text-anchor="middle" class="label">K</text><path d="M366,50 L366,44 L578,44 L578,50" class="muted-stroke" stroke-width="1.2"/><text x="472.0" y="34" text-anchor="middle" class="label">K ∖ M̄: above all of M</text><path d="M22,50 L22,44 L354,44 L354,50" class="muted-stroke" stroke-width="1.2"/><text x="188.0" y="34" text-anchor="middle" class="label">M (discs) is cofinal in M̄</text></svg>
+:::quiz[strong collection]
+In the proof that induction gives strong collection, why is the set $\{ x < a : \exists y\ \eta(x, y) \}$ coded first, rather than applying collection directly?
+
+- [x] Collection needs a witness for every $x < a$. The formula $\exists y\ \eta(x, y) \rightarrow \eta(x, y)$ would provide one, but it is $\Sigma_{n+1} \rightarrow \Pi_n$, that is, of complexity $\Pi_{n+1} \vee \Pi_n$, too high for $\mathrm B\Sigma_{n+1}$; replacing the hypothesis by the bounded formula $x \in c$ keeps the formula $\Pi_n$.
+- [ ] Because $\mathrm I\Sigma_{n+1}$ does not prove $\mathrm B\Sigma_{n+1}$.
+
+  It does, by Parsons' theorem; the issue is the complexity of the formula to which collection is applied.
+- [ ] To make the bound $b$ smaller than $a$.
+
+  No relation between $b$ and $a$ is claimed.
 :::
 
-:::quiz[the splitting theorem]
-In the proof that $\bar M \preccurlyeq_n K$, why is strong collection used instead of collection?
-
-- [x] Some $x < a$ may have no witness for $\eta$; ordinary collection applies only when every $x < a$ has one, while strong collection bounds the witnesses of those $x$ that have one.
-- [ ] Because $M$ does not satisfy $\mathrm B\Sigma_n$.
-
-  $M \models \mathrm I\Sigma_n$, which proves $\mathrm B\Sigma_n$; ordinary collection is available but does not apply to a partial function.
-- [ ] To make the transferred formula $\Pi_{n+1}$.
-
-  The complexity comes from the shape of the implication; strong collection is what makes the implication true in $M$ for a single $b$.
-:::
-
-## Cofinal extensions satisfying collection, and conservation
-
-:::theorem[Friedman, Paris]{#thm-cofinal-bsigma}
-Let $n \geq 0$ and $M$ a model of $\mathrm I\Sigma_n$. There is a model $\bar M$ of $\mathrm B\Sigma_{n+1}$ with $M \subseteq_{cf} \bar M$ and $M \preccurlyeq_{n+1} \bar M$.
-:::
-
-:::proof{of=thm-cofinal-bsigma}
-Let $d$ be a new constant. Every finite part of the elementary diagram of $M$ together with the sentences $d > m$, $m \in M$, is satisfied in $M$ by a large enough element; by compactness there is $K$ with $M \preccurlyeq K$ and an element $d \in K$ above every element of $M$. Then $K \models \mathrm I\Sigma_n$. Let $\bar M = \sup_K M$. By :ref{#thm-splitting}, $M \preccurlyeq_{n+1} \bar M$, $M \subseteq_{cf} \bar M$, $\bar M \preccurlyeq_n K$ and $\bar M \subseteq_e K$, and $\bar M \neq K$ since $d \notin \bar M$. The structure $\bar M$ is a model of $\mathrm{PA}^-$, being a cut of $K$ closed under the operations (:ref{#lem-cut-model}). By :ref{#thm-end-ext-collection}, $\bar M \models \mathrm B\Sigma_{n+1}$.
-:::
-
-The proof shows more: in every $\Sigma_{n+1}$-elementary extension of a model of $\mathrm I\Sigma_n$ in which $M$ is not cofinal, the supremum of $M$ satisfies $\mathrm B\Sigma_{n+1}$.
-
-:::theorem[Friedman, Paris]{#thm-friedman-paris-conservation}
-Let $n \geq 0$. Every $\Pi_{n+2}$ sentence provable in $\mathrm B\Sigma_{n+1}$ is provable in $\mathrm I\Sigma_n$.
-:::
-
-:::proof{of=thm-friedman-paris-conservation}
-Let $\sigma$ be a $\Pi_{n+2}$ sentence not provable in $\mathrm I\Sigma_n$, and $M \models \mathrm I\Sigma_n + \neg \sigma$. The sentence $\neg \sigma$ is $\exists \bar x\ \pi(\bar x)$ with $\pi \in \Pi_{n+1}$; let $\bar c \in M$ with $M \models \pi(\bar c)$. Let $\bar M$ be given by :ref{#thm-cofinal-bsigma}. Then $\bar M \models \pi(\bar c)$, by $M \preccurlyeq_{n+1} \bar M$, so $\bar M$ is a model of $\mathrm B\Sigma_{n+1} + \neg \sigma$, and $\mathrm B\Sigma_{n+1}$ does not prove $\sigma$.
-:::
-
-:::quiz[conservation]
-Why does the proof give conservation for $\Pi_{n+2}$ sentences and not for $\Pi_{n+3}$ sentences?
-
-- [x] The extension $\bar M$ is only $\Sigma_{n+1}$-elementary: it preserves the $\Sigma_{n+2}$ sentence $\neg \sigma$, whose witness is in $M$ and whose matrix is $\Pi_{n+1}$, but not $\Sigma_{n+3}$ sentences in general.
-- [ ] Because the compactness argument only gives a $\Sigma_{n+1}$-elementary extension $K$.
-
-  $K$ is a fully elementary extension of $M$; elementarity is lost when passing to $\bar M$.
-- [ ] Because $\mathrm I\Sigma_n$ is axiomatized by $\Pi_{n+2}$ sentences.
-
-  This is true but plays no role in the argument.
-:::
-
-The conservation theorem is sharp, as the second exercise shows. For $n = 0$ it says that $\mathrm B\Sigma_1$ is $\Pi_2$-conservative over $\mathrm I\Delta_0$; with :ref{#thm-fo-paris-kirby}, $\mathrm B\Sigma_{n+1}$ and $\mathrm I\Sigma_n$ are equiconsistent, since $0 = 1$ is a $\Pi_{n+2}$ sentence. Many proofs are known: Paris's original proof used a hierarchy of cuts, and others use definable ultrapowers, Skolem hulls, or proof theory (Wong, Further comments to Lecture 6).
+The same theorem holds for strong $\Sigma_{n+1}$ collection, as the exercise below shows.
 
 ## Exercises
 
-::::exercise{#ex-sup-elementary difficulty=1}
-Let $M \preccurlyeq K$ be models of $\mathrm{PA}$. Show that $M \preccurlyeq \sup_K M \preccurlyeq K$.
+::::exercise{difficulty=1}
+The **strong $\Sigma_{n+1}$ collection** scheme consists of the universal closures of $\exists b\ \forall x < a\ (\exists y\ \varphi(x, y) \rightarrow \exists y < b\ \varphi(x, y))$ for $\varphi \in \Sigma_{n+1}$. Show that, over $\mathrm I\Delta_0$, it is equivalent to strong $\Pi_n$ collection, hence to $\mathrm I\Sigma_{n+1}$.
 
 :::solution
-For every $n$, $M \models \mathrm I\Sigma_n$ and $M \preccurlyeq_{n+1} K$, so :ref{#thm-splitting} gives $M \preccurlyeq_{n+1} \sup_K M$ and $\sup_K M \preccurlyeq_n K$. Since $n$ is arbitrary, both extensions are elementary.
-:::
-::::
-
-::::exercise{#ex-conservation-sharp difficulty=2}
-Using the strictness of the hierarchy of induction and collection (the lesson :ref{to="fragments-of-arithmetic/induction-collection"}), show that $\mathrm B\Sigma_{n+1}$ is not $\Pi_{n+3}$-conservative over $\mathrm I\Sigma_n$.
-
-:::solution
-By :ref{#ex-fo-bsigma-bpi} for $n \geq 1$, and by contraction of quantifiers for $n = 0$, $\mathrm B\Sigma_{n+1}$ is equivalent over $\mathrm I\Delta_0$ to the collection scheme for $\Pi_n$ formulas. An instance of the latter is the universal closure of
-$$
-\exists x < a\ \forall y\ \neg \varphi(x, y) \;\vee\; \exists b\ \forall x < a\ \exists y < b\ \varphi(x, y), \qquad \varphi \in \Pi_n.
-$$
-The first disjunct is logically $\Sigma_{n+2}$. In the second, $\forall x < a\ \exists y < b\ \varphi$ is bounded if $n = 0$, and equivalent to a $\Pi_n$ formula in $\mathrm B\Sigma_n$, hence in $\mathrm I\Sigma_n$, if $n \geq 1$ (:ref{#lem-fo-collection-closure}); so the second disjunct is $\Sigma_{n+1}$ in $\mathrm I\Sigma_n$. Hence $\mathrm I\Sigma_n$ proves each instance equivalent to a $\Pi_{n+3}$ sentence $\sigma$, which $\mathrm B\Sigma_{n+1}$ proves. If $\mathrm B\Sigma_{n+1}$ were $\Pi_{n+3}$-conservative over $\mathrm I\Sigma_n$, then $\mathrm I\Sigma_n$ would prove every such $\sigma$, hence every instance, and $\mathrm I\Sigma_n$ would prove $\mathrm B\Sigma_{n+1}$. This contradicts the existence of a model of $\mathrm I\Sigma_n$ in which $\mathrm B\Sigma_{n+1}$ fails.
+A $\Pi_n$ formula is $\Sigma_{n+1}$, so strong $\Sigma_{n+1}$ collection implies strong $\Pi_n$ collection. Conversely, let $\varphi(x, y) \equiv \exists z\ \eta(x, y, z)$ with $\eta \in \Pi_n$, a block of quantifiers $\exists z$ being contracted to one by pairing (:ref{#fact-pairing}). Let $\eta'(x, w) \equiv \exists y \leq w\ \exists z \leq w\ (w = \langle y, z \rangle \wedge \eta(x, y, z))$; since the pair $w$ determines $y$ and $z$, $\eta'$ is equivalent in $\mathrm I\Delta_0$ to $\forall y \leq w\ \forall z \leq w\ (w = \langle y, z \rangle \rightarrow \eta(x, y, z)) \wedge \exists y \leq w\ \exists z \leq w\ (w = \langle y, z \rangle)$, a $\Pi_n$ formula logically, as the bounded universal quantifiers merge with the first block of $\eta$. Strong $\Pi_n$ collection for $\eta'$ gives $b$ such that every $x < a$ with $\exists w\ \eta'(x, w)$ has such a $w < b$. If $x < a$ and $\exists y\ \varphi(x, y)$, then $\exists w\ \eta'(x, w)$, so some $w = \langle y, z \rangle < b$ satisfies $\eta(x, y, z)$; since $y \leq w$, $y < b$ and $\varphi(x, y)$. For $n = 0$ the same argument applies with $\eta$ bounded.
 :::
 ::::
 
 ## Notes and references
 
-:ref{#thm-end-ext-collection} is Wong's Theorem 6.3 (Paris and Kirby, 1978; Adamowicz, Clote and Wilkie showed that for $n \geq 1$ the hypothesis on $K$ can be weakened to $\mathrm I\Sigma_{n-1}$) and Lemma IV.1.22 of Hájek and Pudlák. :ref{#fact-end-ext-converse} is Theorem IV.1.53 (1) of Hájek and Pudlák, proved there by a definable ultrapower. The splitting theorem is Wong's, "essentially Kaye", with the proof of Enayat and Mohsenipour that uses :ref{#thm-strong-collection}. :ref{#thm-cofinal-bsigma} is Wong's Theorem 6.6 and Theorem IV.1.61 of Hájek and Pudlák, who prove it by a definable ultrapower; its countable version first appeared in Paris (1980), who reports that Friedman found it independently. :ref{#thm-friedman-paris-conservation} is Wong's Theorem 6.1 and Theorem IV.1.59 of Hájek and Pudlák. The answer to the question of Clote and Kaufmann is in Sun (2025).
+:ref{#thm-end-ext-collection} is Wong's Theorem 6.3 and Lemma IV.1.22 of Hájek and Pudlák (Paris and Kirby, 1978). Wong reports that Adamowicz, Clote and Wilkie showed that for $n \geq 1$ the hypothesis on $K$ can be weakened to $\mathrm I\Sigma_{n-1}$, citing Clote (1985). :ref{#fact-end-ext-converse} is Theorem IV.1.53 (1) of Hájek and Pudlák, proved there by a definable ultrapower (IV.1.56–1.57); the case $n = 0$ is their Theorem IV.1.53 (2). The question of Clote and Kaufmann is Wong's Question 6.11, and Paris's problem on end extensions of models of $\mathrm B\Sigma_1$ is his Question 6.9; the answer to the first is in Sun (2025). :ref{#thm-strong-collection} is Wong's Theorem 6.4, attributed there to H. Friedman, with the remark that $\Pi_n$ may be replaced by $\Sigma_{n+1}$ (Remark 6.5); the proof of the second direction given here, by an induction on the bounded formula $\psi$, replaces Wong's argument.
 
 - J. B. Paris and L. A. S. Kirby, *Σₙ-collection schemas in arithmetic*, in Logic Colloquium '77, North-Holland, 1978, 199–209.
-- J. B. Paris, *A hierarchy of cuts in models of arithmetic*, in Model Theory of Algebra and Arithmetic, Lecture Notes in Mathematics 834, Springer, 1980, 312–337.
-- R. Kaye, *Model-theoretic properties characterizing Peano arithmetic*, Journal of Symbolic Logic 56 (1991), 949–963.
-- A. Enayat and S. Mohsenipour, *Model theory of the regularity and reflection schemes*, Archive for Mathematical Logic 47 (2008), 447–464.
+- P. Clote, *Partition relations in arithmetic*, in Methods in Mathematical Logic, Lecture Notes in Mathematics 1130, Springer, 1985, 32–68.
 - M. Sun, *The Kaufmann–Clote question on end extensions of models of arithmetic and the weak regularity principle*, Journal of Symbolic Logic, 2025 (arXiv:2409.03527).
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 6.
-- P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 1(c)–(f).
+- P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Sections 1(c) and 1(e).

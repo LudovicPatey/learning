@@ -1,113 +1,11 @@
 ---
 title: Pigeons do not jump high
-summary: Second-jump control for the pigeonhole principle; Π⁰₂ sentences forced through the question on stems, true on valid sides; a disjunctive question for Σ⁰₂ sentences when both sides stay valid, and a question on one side, with a witness of invalidity, when one side is lost; every set has an infinite subset, of itself or of its complement, whose jump avoids a given cone, and which is not high.
+summary: The requirements of second-jump control for the pigeonhole principle follow from the three-case argument with the questions on two sides; a case distinction on validity and Lachlan's disjunction give an infinite subset, of the set or of its complement, whose jump avoids a given cone, and which is not high.
 duration: 45
-prerequisites: [pigeonhole-forcing]
+prerequisites: [pigeon-questions]
 ---
 
-This lesson completes the proof of :ref{#thm-pigeons-non-high}. The setting of the previous lesson is fixed: the ideals $\mathcal M \subseteq \mathcal N$, the $\mathcal M$-cohesive class $\mathcal U_S$ with $S \in \mathcal N$, its core $\mathcal U$, the set $A$ with $A_0 = A$ and $A_1 = \overline A$, the conditions $(\sigma_0, \sigma_1, X)$, and the question $\sigma \mathrel{?{\vdash}} \varphi$ for $\Sigma^0_1$ sentences. The construction is a decreasing sequence of conditions, as in :ref{#thm-seetapun-direct}. Three ingredients are added: a syntactic forcing relation for $\Pi^0_2$ sentences, which becomes truth on the sides that stay valid; a disjunctive question for $\Sigma^0_2$ sentences, used when both sides stay valid; and a question on one side, used when the other side has become invalid.
-
-## Forcing Π⁰₂ sentences
-
-A $\Pi^0_2$ sentence has the form $\forall y\ \theta(y)$ with $\theta$ a $\Sigma^0_1$ formula (:ref{#def-forcing-formula}).
-
-:::definition{#def-pigeon-pi2}
-A condition $(\sigma_0, \sigma_1, X)$ **promises** $\forall y\ \theta(y)$ on side $i$ if $\tau \mathrel{?{\vdash}} \theta(m)$ for every $m$ and every string $\tau$ compatible with $(\sigma_i, X)$.
-:::
-
-The promise says that whatever stem on side $i$ the future of the construction chooses, the question about each instance $\theta(m)$ answers positively. It is preserved by extensions: if $(\tau_0, \tau_1, Y)$ extends $(\sigma_0, \sigma_1, X)$, a string compatible with $(\tau_i, Y)$ is compatible with $(\sigma_i, X)$, since $\tau_i$ is compatible with $(\sigma_i, X)$ and $Y \subseteq X$.
-
-:::lemma{#lem-pigeon-promise}
-Let $p$ be a condition promising $\forall y\ \theta(y)$ on side $i$, with side $i$ valid, and let $m \in \nat$. There is an extension of $p$, with the same valid sides, that forces $\theta(m)$ on side $i$.
-:::
-
-:::proof{of=lem-pigeon-promise}
-The stem $\sigma_i$ is compatible with $(\sigma_i, X)$, so $\sigma_i \mathrel{?{\vdash}} \theta(m)$. Apply item 1 of :ref{#lem-pigeon-sigma1}.
-:::
-
-The promise is the density form of forcing a $\Pi^0_2$ sentence (:ref{to="jump-cone-avoidance/sigma2-questions"}), stated through the question rather than through the forcing relation, and it is useful only as long as side $i$ is valid. In a construction where side $i$ stays valid forever, a promise made at some step is kept: each instance $\theta(m)$ is handled at a later step by the lemma.
-
-## The disjunctive question
-
-For a condition $p = (\sigma_0, \sigma_1, X)$ and a set $B$, write $B^0 = X \cap B$ and $B^1 = X \setminus B$: every set $B$ gives a $2$-partition of the reservoir.
-
-:::definition{#def-pigeon-disjunctive}
-Let $p = (\sigma_0, \sigma_1, X)$ be a condition, and $\varphi_0 = \exists y\ \psi_0(y)$, $\varphi_1 = \exists y\ \psi_1(y)$ two $\Sigma^0_2$ sentences, with $\psi_0, \psi_1$ $\Pi^0_1$ formulas. Let $p \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ if for every set $B$ there are $i < 2$, $m \in \nat$ and a string $\tau$ compatible with $(\sigma_i, B^i)$ with $\tau \mathrel{?{\nvdash}} \neg\psi_i(m)$.
-:::
-
-As in the Seetapun forcing (:ref{#lem-seetapun-question}), the question is asked for every partition of the reservoir, so that it does not depend on $A$.
-
-:::lemma{#lem-pigeon-disjunctive}
-Let $p = (\sigma_0, \sigma_1, X)$ be a condition and $\varphi_0, \varphi_1$ as above.
-
-1. If $p \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$, there are $i < 2$ and an extension of $p$ all of whose members of side $i$ satisfy $\varphi_i$.
-2. If $p \mathrel{?{\nvdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$, there are $i < 2$ and an extension of $p$, with the same stems, that promises $\neg\varphi_i = \forall y\ \neg\psi_i(y)$ on side $i$.
-3. The relation $\{ \vec n : p \mathrel{?{\vdash}} \varphi_0(\vec n)(G_0) \vee \varphi_1(\vec n)(G_1) \}$ is $\Sigma^0_1(X \oplus S \oplus M')$, and $X \oplus S \oplus M' \in \mathcal N$.
-:::
-
-:::proof{of=lem-pigeon-disjunctive}
-1. Take $B = A$, so that $B^i = X \cap A_i$. There are $i$, $m$ and $\tau$ compatible with $(\sigma_i, X \cap A_i)$ with $\tau \mathrel{?{\nvdash}} \neg\psi_i(m)$. The new elements of $\tau$ are in $A_i$, so $q = (\tau_0, \tau_1, X \setminus \{0, \dots, |\tau| - 1\})$, with $\tau_i = \tau$ and $\tau_{1-i} = \sigma_{1-i}$, is a condition extending $p$. By item 2 of :ref{#lem-pigeon-sigma1}, applied to $q$, side $i$ and the $\Sigma^0_1$ sentence $\neg\psi_i(m)$, some extension of $q$ forces $\neg\neg\psi_i(m) = \psi_i(m)$ on side $i$. Its members of side $i$ satisfy $\psi_i(m)$, hence $\varphi_i$.
-2. Let $\mathcal C$ be the class of sets $B$ such that for all $i < 2$, $m$ and $\tau$ compatible with $(\sigma_i, B^i)$, $\tau \mathrel{?{\vdash}} \neg\psi_i(m)$. Compatibility of $\tau$ with $(\sigma_i, B^i)$ depends on $X$ and on $B \uh |\tau|$, and the relation $\tau \mathrel{?{\vdash}} \neg\psi_i(m)$ is $\Pi^0_1(S \oplus M')$; so $\mathcal C$ is a $\Pi^0_1(X \oplus S \oplus M')$ class. It is non-empty by hypothesis. Since $\mathcal N$ is a Scott ideal containing $X \oplus S \oplus M'$, $\mathcal C$ has a member $B \in \mathcal N$. The sets $B^0$ and $B^1$ cover $X \in \mathcal U$, so some $B^i$ is in $\mathcal U$; it is in $\mathcal N$ and contained in $X$. The condition $(\sigma_0, \sigma_1, B^i)$ extends $p$, and promises $\forall y\ \neg\psi_i(y)$ on side $i$, by definition of $\mathcal C$.
-3. The question holds if and only if $\mathcal C$ is empty, which is a $\Sigma^0_1(X \oplus S \oplus M')$ property, uniformly in the parameters of the sentences, by :ref{#prop-pi01-emptiness} relativized.
-:::
-
-Item 1 gives a property of all members, and needs no validity. Item 2 gives only a promise, on a side $i$ that is not under control: it is useful only if side $i$ stays valid. When both sides stay valid forever, the disjunctive question is a disjunctive forcing question in the sense of :ref{#def-disjunctive-notion}, one level up.
-
-:::quiz[the disjunctive question]
-In item 2 of :ref{#lem-pigeon-disjunctive}, why is the partition $B$ taken in $\mathcal N$?
-
-- [x] Because the new reservoir $B^i = X \cap B$ or $X \setminus B$ must belong to $\mathcal N$; the Scott property of $\mathcal N$, applied to the $\Pi^0_1(X \oplus S \oplus M')$ class $\mathcal C$, provides such a $B$.
-- [ ] Because $B$ must be in $\mathcal M$ to apply cohesiveness.
-
-  Cohesiveness is not used here; the side is chosen by the partition regularity of $\mathcal U$.
-- [ ] Because $A \in \mathcal N$.
-
-  $A$ is arbitrary and need not belong to $\mathcal N$.
-
----
-
-Why does item 3 need $M'$ and not only $M$?
-
-- [x] Because the inner question $\tau \mathrel{?{\vdash}} \neg\psi_i(m)$ is a largeness property of a class $\mathcal U_S \cap \mathcal V$, which is $\Pi^0_1(S \oplus M')$ by :ref{#prop-largeness-complexity}.
-- [ ] Because $X$ is computable in $M'$.
-
-  $X$ is a member of $\mathcal N$, not necessarily computable in $M'$.
-- [ ] Because compactness requires the jump.
-
-  Compactness, the emptiness of a $\Pi^0_1$ class, is $\Sigma^0_1$ relative to the class's oracle.
-:::
-
-## The question on one side
-
-When side $1 - i$ of a condition is invalid, the disjunctive question may answer with a promise on the wrong side. The following question avoids it, using a witness that side $1 - i$ is invalid.
-
-:::definition{#def-invalidity-witness}
-A **witness of invalidity** of side $j$ of a condition $(\sigma_0, \sigma_1, X)$ is a $\Sigma^0_1(\mathcal M)$ class $\mathcal V$ with $\mathcal U \subseteq \mathcal V$ and $X \cap A_j \notin \mathcal V$.
-:::
-
-If side $j$ is invalid, then $X \cap A_j \notin \mathcal U$, and item 3 of :ref{#prop-cohesive-core} gives a witness. A witness for $p$ is a witness for every extension of $p$, since the sets $Y \cap A_j$ decrease and $\mathcal V$ is upward closed.
-
-:::definition{#def-pigeon-one-side}
-Let $p = (\sigma_0, \sigma_1, X)$ be a condition, $\mathcal V$ a witness of invalidity of side $1 - i$, and $\varphi = \exists y\ \psi(y)$ a $\Sigma^0_2$ sentence. Let $p \mathrel{?{\vdash}}_{\mathcal V} \varphi(G_i)$ if for every set $B$ with $B^{1-i} \notin \mathcal V$ there are $m$ and a string $\tau$ compatible with $(\sigma_i, B^i)$ with $\tau \mathrel{?{\nvdash}} \neg\psi(m)$.
-:::
-
-:::lemma{#lem-pigeon-one-side}
-Let $p$, $\mathcal V$ and $\varphi$ be as in the definition.
-
-1. If $p \mathrel{?{\vdash}}_{\mathcal V} \varphi(G_i)$, there is an extension of $p$ all of whose members of side $i$ satisfy $\varphi$.
-2. If $p \mathrel{?{\nvdash}}_{\mathcal V} \varphi(G_i)$, there is an extension of $p$, with the same stems, that promises $\neg\varphi$ on side $i$.
-3. The relation $\{ \vec n : p \mathrel{?{\vdash}}_{\mathcal V} \varphi(\vec n)(G_i) \}$ is $\Sigma^0_1(Y)$ for some $Y \in \mathcal N$.
-:::
-
-:::proof{of=lem-pigeon-one-side}
-Let $\mathcal V$ be $\Sigma^0_1(W)$ with $W \in \mathcal M$.
-
-1. Take $B = A_0$, so that $B^{1-i} = X \cap A_{1-i}$, which is not in $\mathcal V$. There are $m$ and $\tau$ compatible with $(\sigma_i, X \cap A_i)$ with $\tau \mathrel{?{\nvdash}} \neg\psi(m)$, and the proof of item 1 of :ref{#lem-pigeon-disjunctive} applies.
-2. Let $\mathcal C$ be the class of sets $B$ with $B^{1-i} \notin \mathcal V$ such that $\tau \mathrel{?{\vdash}} \neg\psi(m)$ for all $m$ and all $\tau$ compatible with $(\sigma_i, B^i)$. The condition $B^{1-i} \notin \mathcal V$ is $\Pi^0_1(X \oplus W)$, so $\mathcal C$ is a $\Pi^0_1(X \oplus W \oplus S \oplus M')$ class, non-empty by hypothesis, with a member $B \in \mathcal N$. Now $B^{1-i} \notin \mathcal V \supseteq \mathcal U$, so $B^{1-i} \notin \mathcal U$; as $B^0, B^1$ cover $X \in \mathcal U$, $B^i \in \mathcal U$. The condition $(\sigma_0, \sigma_1, B^i)$ extends $p$ and promises $\neg\varphi$ on side $i$.
-3. The question holds if and only if $\mathcal C$ is empty, a $\Sigma^0_1(Y)$ property for $Y = X \oplus W \oplus S \oplus M' \in \mathcal N$.
-:::
-
-The witness forces the partition to put its large part on side $i$: this is how a question on one side can be answered by a partition, although the partition does not know $A$.
+This lesson completes the proof of :ref{#thm-pigeons-non-high}, with the setting of :ref{to="jump-cone-avoidance/pigeonhole-forcing"} and the questions of :ref{to="jump-cone-avoidance/pigeon-questions"}. The construction is a decreasing sequence of conditions with tasks, as in :ref{#thm-seetapun-direct}. It distinguishes two cases: if some condition has an invalid side, the construction works on the other side alone; otherwise both sides stay valid, and Lachlan's disjunction chooses a side at the end.
 
 ## The proof of the theorem
 
@@ -195,6 +93,22 @@ By :ref{#ex-no-low2-subset}, "not high" cannot be improved to "low₂" for arbit
 
 ## Exercises
 
+::::exercise{difficulty=1}
+Show that if $A$ is finite, side $0$ of every condition is invalid, and side $1$ of every condition is valid.
+
+:::solution
+If $A$ is finite, $X \cap A_0$ is finite, so it is not in $\mathcal U$, whose members are infinite. By item 1 of :ref{#lem-valid-part}, side $1$ is valid.
+:::
+::::
+
+::::exercise{difficulty=2}
+Suppose that $A \in \mathcal M$, for instance $A$ computable. Show that there is $i < 2$ such that side $i$ of every condition is valid and side $1 - i$ of every condition is invalid.
+
+:::solution
+Since $\mathcal U_S$ is $\mathcal M$-cohesive and $A \in \mathcal M$, $\mathcal U_S \subseteq \mathcal L_{A_0}$ or $\mathcal U_S \subseteq \mathcal L_{A_1}$; let $i$ be such that $\mathcal U_S \subseteq \mathcal L_{A_i}$. For every condition with reservoir $X$, the set $X \cap A_{1-i}$ has an empty intersection with $A_i$, so it is not in $\mathcal L_{A_i} \supseteq \mathcal U$: side $1 - i$ is invalid. By item 1 of :ref{#lem-valid-part}, side $i$ is valid. So for simple instances the construction is degenerate: everything happens on one side, as it should, since $A_i$ is then an infinite subset of $A_i$ in $\mathcal M$.
+:::
+::::
+
 ::::exercise{difficulty=2}
 Deduce from :ref{#thm-pigeons-non-high} and :ref{#thm-coh-weakly-low} that $\mathsf{RT}^2_2$ admits jump cone avoidance, without using :ref{#thm-rt22-weakly-low}.
 
@@ -207,13 +121,19 @@ Let $Z$ be a set, $C \not\leq_T Z'$, and $f$ a $Z$-computable coloring of pairs.
 Let $f$ be a function hyperimmune relative to $\emptyset'$. Show that every set $A$ has an infinite subset $H$, of $A$ or of $\overline A$, such that $f$ is hyperimmune relative to $H'$.
 
 :::solution
-Follow the proof of :ref{#thm-pigeons-non-high}, with the requirements "$\Phi^{G'}_e$ does not dominate $f$" in place of "$\Phi^{G'}_e \neq C$". The questions of :ref{#def-pigeon-disjunctive} and :ref{#def-pigeon-one-side} are compact in the sense of the second exercise of :ref{to="jump-cone-avoidance/sigma2-questions"}: writing "$\Phi^{G'}_e(m)\converge$" as $\exists \langle k, y \rangle\ \psi_{m,k}(y)$, where $\exists y\ \psi_{m,k}(y)$ expresses "$\Phi^{G'}_e(m)\converge < k$", the witness $\langle k, y \rangle$ found for a partition $B$ gives a positive answer for the sentence with bound $k$ on that partition, and, the class $\mathcal C$ being empty, compactness of Cantor space shows that finitely many witnesses serve for all partitions; their maximum $k$ gives a positive answer for "$\Phi^{G'}_e(m)\converge < k$". In case A, given a condition, let $g(m)$ be the first bound $k$ found with a positive answer for "$\Phi^{G'}_e(m)\converge < k$"; $g$ is partial computable in a member $Y$ of $\mathcal N$. Choose $\mathcal N$ such that $f$ is hyperimmune relative to every member of $\mathcal N$: build it as in the proof of :ref{#lem-scott-cone}, from $Z_0 = \emptyset'$, with $Z_{n+1} = Z_n \oplus P_n$ for a set $P_n$ PA relative to $Z_n$ such that every $Z_{n+1}$-computable function is dominated by a $Z_n$-computable one, by the computably dominated basis theorem (:ref{#thm-dominated-basis}) relativized to $Z_n$; by induction every member of $\mathcal N$ computes only functions dominated by $\emptyset'$-computable functions, which do not dominate $f$. If $g$ is total, $f(m) > g(m)$ for some $m$, and an extension makes $\Phi^{G'}_e(m) < f(m)$ on side $i$; if $g(m)$ is undefined, the question for "$\Phi^{G'}_e(m)\converge$" is negative, and an extension promises its negation. In case B, the same with pairs $(e_0, e_1)$ and the disjunctive question, the function $g(m)$ bounding both sides, followed by Lachlan's disjunction.
+Follow the proof of :ref{#thm-pigeons-non-high}, with the requirement "$\Phi^{G'}_e$ is partial, or $\Phi^{G'}_e(m) < f(m)$ for some $m$" in place of "$\Phi^{G'}_e \neq C$", and the sentences "$\Phi^{G'}_e(m)\converge$" and "$\Phi^{G'}_e(m)\converge < b$" written as in the exercise of :ref{to="jump-cone-avoidance/sigma2-questions"}.
+
+*Compactness.* The question $\tau \mathrel{?{\vdash}} \varphi$ depends only on the strings satisfying $\varphi$, so for $k < b$ the formulas $\psi^b_m(k, y)$ and $\psi_m(k, y)$ give the same answers. If the question on one side holds for "$\Phi^{G'}_e(m)\converge$", the class $\mathcal C$ of the proof of :ref{#lem-pigeon-one-side} is empty; its complement is covered by open sets, each given by a finite part of $B$ together with a witness $\tau$, $\langle k, y \rangle$, or with a finite part of $B^{1-i}$ in $\mathcal V$. By compactness of Cantor space, finitely many of them suffice, and for $b$ larger than the numbers $k$ involved, the question holds for "$\Phi^{G'}_e(m)\converge < b$". The same holds for the disjunctive question.
+
+*Choice of $\mathcal N$.* Let $Z_0 = \emptyset'$ and $Z_{n+1} = Z_n \oplus P_n$, where $P_n$ is PA relative to $Z_n$ and every $(Z_n \oplus P_n)$-computable function is dominated by a $Z_n$-computable one: apply :ref{#thm-dominated-basis}, relativized to $Z_n$, to the class of $\{0,1\}$-valued functions DNC relative to $Z_n$. The sets computable in some $Z_n$ form a Scott ideal $\mathcal N$ containing $\emptyset'$ (:ref{#prop-wkl-scott}), and by induction every function computable in a member of $\mathcal N$ is dominated by a $\emptyset'$-computable function, so it does not dominate $f$. The rest of :ref{#lem-pigeon-setting} is unchanged, with $S$ computed by $P_0$.
+
+*Requirements.* In case A, given a condition and $e$, let $g(m)$ be the first $b$ found with a positive answer of the question on side $i$ for "$\Phi^{G'}_e(m)\converge < b$"; it is partial computable in a member of $\mathcal N$, by item 3 of :ref{#lem-pigeon-one-side}. If $g(m)$ is undefined, the question for "$\Phi^{G'}_e(m)\converge$" is negative by compactness, and an extension promises $\Phi^{G'}_e(m)\diverge$ on side $i$. If $g$ is total, then $f(m) > g(m)$ for some $m$, and an extension has all its members of side $i$ satisfying $\Phi^{G'}_e(m)\converge < g(m)$. In case B, use pairs $(e_0, e_1)$, the disjunctive question for "$\Phi^{G_0'}_{e_0}(m)\converge < b$" and "$\Phi^{G_1'}_{e_1}(m)\converge < b$", and Lachlan's disjunction. Promises are kept as in the proof, so for the resulting set $H$, no $H'$-computable function dominates $f$.
 :::
 ::::
 
 ## Notes and references
 
-:ref{#thm-pigeons-non-high} and :ref{#cor-pigeons-non-high} are due to Monin and Patey (2019); the same paper proves low₃ solutions for $\Delta^0_3$ sets and gives a simpler proof of Liu's theorem that every set has an infinite subset, of itself or of its complement, of non-PA degree. The proof given here follows the section *Pigeonhole principle* of the chapter *Jump cone avoidance* of Patey's monograph, with the cohesive classes of Le Houérou, Levy Patey and Mimouni (2024): the syntactic relation called a promise here is the monograph's syntactic forcing relation for $\Pi^0_2$ formulas, and the question on one side is its degenerate forcing question. The construction by sequences of conditions with tasks, instead of sufficiently generic filters, and the explicit case distinction are written here. The exercise on hyperimmunity is stated in the monograph, after Monin and Patey (2019).
+:ref{#thm-pigeons-non-high} and :ref{#cor-pigeons-non-high} are due to Monin and Patey (2019); the same paper proves low₃ solutions for $\Delta^0_3$ sets and gives a simpler proof of Liu's theorem that every set has an infinite subset, of itself or of its complement, of non-PA degree. The proof given here follows the section *Pigeonhole principle* of the chapter *Jump cone avoidance* of Patey's monograph, with the cohesive classes of Le Houérou, Levy Patey and Mimouni (2024), including the case distinction on validity. The construction by sequences of conditions with tasks, instead of sufficiently generic filters, is written here, so that promises are turned into truth explicitly. The exercise on hyperimmunity is stated in the monograph, after Monin and Patey (2019).
 
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095; arXiv:1803.09771.
 - B. Monin and L. Patey, *The weakness of the pigeonhole principle under hyperarithmetical reductions*, arXiv:1905.08425 (2019).

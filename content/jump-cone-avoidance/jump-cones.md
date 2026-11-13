@@ -1,13 +1,13 @@
 ---
 title: Jump cone avoidance
-summary: A problem admits jump cone avoidance if its instances have solutions whose jump avoids a given cone; weakly low bases give it for free; jump cone avoidance gives solutions that are not high; strong jump cone avoidance reduces to Δ⁰₃ instances, which is where second-jump control becomes necessary.
+summary: Jump cone avoidance, its relation with weakly low bases and non-high solutions, and the reduction of its strong version to Δ⁰₃ instances.
 duration: 45
-prerequisites: [lowness/ramsey-pairs-low2, effective-forcing/mathias-forcing, avoidance/forcing-question-method, cohen-genericity/posner-robinson, immunity-growth/domination, pi01-classes/basis-theorems]
+prerequisites: [lowness/ramsey-pairs-low2, effective-forcing/mathias-forcing, avoidance/strong-cone-avoidance, cohen-genericity/posner-robinson, immunity-growth/domination, pi01-classes/basis-theorems]
 ---
 
-The previous courses of the track controlled the first jump of the solutions of a problem: cone avoidance says that a solution does not compute a given set, and lowness that its jump is no more complex than $\emptyset'$. This course controls the **second jump**: it builds solutions $Y$ such that $Y'$ does not compute a given set, or, equivalently, such that the set is not $\Delta^0_2(Y)$. The main example is the jump of $\emptyset'$: a solution $Y$ with $\emptyset'' \not\leq_T Y'$ is a solution that is **not high**.
+The previous courses of the track controlled the first jump of solutions: cone avoidance and lowness. This course controls the **second jump**: it builds solutions $Y$ such that $Y'$ does not compute a given set, or, equivalently, such that the set is not $\Delta^0_2(Y)$. The main example is the jump of $\emptyset'$: a solution $Y$ with $\emptyset'' \not\leq_T Y'$ is a solution that is **not high**.
 
-Second-jump control is first-jump control one level up, with the same three-case argument and the same forcing questions, now for $\Sigma^0_2$ sentences. The difficulty is not in the abstract argument but in the design of the notion of forcing: a $\Sigma^0_2$ question quantifies over the extensions of a condition, and is of the right complexity only if the partial order is simple enough. Computable Mathias forcing, the basic tool for combinatorial principles, fails at this level, since its sufficiently generic sets are high (:ref{#prop-mathias-dominant}). The course follows the chapter *Jump cone avoidance* of Patey's monograph. This lesson sets up the definitions, collects the cases that first-jump control already settles, and isolates what remains: the pigeonhole principle for arbitrary sets, the subject of the last three lessons, which prove the theorem of Monin and Patey that every set has an infinite subset, of itself or of its complement, that is not high.
+Second-jump control is first-jump control one level up, with the same three-case argument and the same forcing questions, now for $\Sigma^0_2$ sentences. The difficulty lies in the design of the notion of forcing: a $\Sigma^0_2$ question quantifies over the extensions of a condition, and has the right complexity only if the partial order is simple enough. Computable Mathias forcing fails at this level, since its sufficiently generic sets are high (:ref{#prop-mathias-dominant}). This lesson sets up the definitions, collects the cases that first-jump control settles, and isolates what remains: the pigeonhole principle for arbitrary sets, treated in the last lessons of the course.
 
 ## Jump cone avoidance
 
@@ -17,7 +17,7 @@ By Post's theorem relativized (:ref{#thm-post}), a set $C$ is $\Delta^0_2(Y)$ if
 A problem $\mathsf P$ admits **jump cone avoidance** if for every set $Z$, every set $C$ with $C \not\leq_T Z'$ and every $Z$-computable instance $X$ of $\mathsf P$, there is a solution $Y$ to $X$ with $C \not\leq_T (Z \oplus Y)'$. It admits **strong jump cone avoidance** if the same holds for every instance $X$, computable in $Z$ or not.
 :::
 
-The definition is the one of cone avoidance (:ref{#def-cone-avoidance-problem}) one jump up: the hypothesis $C \not\leq_T Z$ becomes $C \not\leq_T Z'$, and the conclusion $C \not\leq_T Z \oplus Y$ becomes $C \not\leq_T (Z \oplus Y)'$. It is relativized for the same reason: to add solutions one after the other, as in the following exercise on products, and to build ω-models.
+The definition is the one of cone avoidance (:ref{#def-cone-avoidance-problem}) one jump up: the hypothesis $C \not\leq_T Z$ becomes $C \not\leq_T Z'$, and the conclusion $C \not\leq_T Z \oplus Y$ becomes $C \not\leq_T (Z \oplus Y)'$. It is relativized for the same reason: to add solutions one after the other, as in the exercise on products, and to build ω-models.
 
 A set $Y$ is **high relative to $Z$** if $Z'' \leq_T (Z \oplus Y)'$; for $Z = \emptyset$, this is highness (:ref{#def-high}). By Martin's theorem relativized (:ref{#thm-martin-domination}), $Y$ is high relative to $Z$ if and only if $Z \oplus Y$ computes a function that eventually dominates every $Z$-computable function.
 
@@ -36,7 +36,7 @@ Take $C = Z''$. Then $C \not\leq_T Z'$ by the jump theorem relativized (:ref{#th
 4. **Computable Mathias forcing** produces high sets (:ref{#prop-mathias-dominant}); so it cannot be the notion of forcing behind a proof of jump cone avoidance, although it gives cone avoidance for $\mathsf{COH}$.
 :::
 
-Item 3 shows that cone avoidance does not imply jump cone avoidance. Item 4 is the starting point of the third lesson.
+Item 3 shows that cone avoidance does not imply jump cone avoidance. Item 4 is the starting point of :ref{to="jump-cone-avoidance/cohesiveness-second-jump"}.
 
 :::quiz[jump cone avoidance]
 In :ref{#prop-jca-not-high}, why is $C = Z''$ an admissible choice?
@@ -64,11 +64,7 @@ In item 1 of :ref{#ex-jca-problems}, why is the set $P$ chosen by the cone avoid
 
 ## What first-jump control gives
 
-Item 1 of :ref{#ex-jca-problems} says that jump cone avoidance often comes from an effective construction at the first level: a solution whose jump is computed by a set $P$ PA relative to $Z'$ inherits the weakness of $P$. Monin and Patey recommend this route as the first one to try, since second-jump control by forcing is technically much heavier. It has two limitations.
-
-The first is that it does not combine with cone avoidance. For $\mathsf{WKL}$, the low basis theorem gives a path $G$ with $D \not\leq_T G'$ for a given $D \not\leq_T \emptyset'$, and the cone avoidance basis theorem a path with $C \not\leq_T G$ for a given non-computable $C$; but a low path computes no non-computable set $C$ only if $C$ is not computable in any low set, and a path with $G' \leq_T P$ may compute $C \leq_T \emptyset'$, since $P$ computes $\emptyset'$. Obtaining both properties at once is a genuine second-jump argument; it is done in the next lesson for $\mathsf{WKL}$ and in the third for $\mathsf{COH}$.
-
-The second limitation is that weakly low bases concern $Z$-computable instances. For instances that are not computable in $Z$, the solution cannot be built effectively relative to $Z$. The next section measures the gap for strong jump cone avoidance.
+Item 1 of :ref{#ex-jca-problems} says that jump cone avoidance often comes from an effective construction at the first level: a solution whose jump is computed by a set $P$ PA relative to $Z'$ inherits the weakness of $P$. Monin and Patey recommend this route as the first one to try, since second-jump control by forcing is technically much heavier. It has two limitations. It gives no control over the sets that the solution itself computes, so it does not combine jump cone avoidance with cone avoidance; this is treated for $\mathsf{WKL}$ and $\mathsf{COH}$ in :ref{to="jump-cone-avoidance/wkl-two-cones"} and :ref{to="jump-cone-avoidance/cohesiveness-second-jump"}. And weakly low bases concern $Z$-computable instances: for other instances, the solution cannot be built effectively relative to $Z$. The next section measures this gap.
 
 ## Strong jump cone avoidance and Δ⁰₃ instances
 
@@ -90,7 +86,7 @@ A problem $\mathsf P$ admits strong jump cone avoidance if and only if for every
 The forward direction is a special case. Conversely, let $C \not\leq_T Z'$ and let $X$ be any instance. By :ref{#thm-delta3-jump-cone} with $A = X$, there is $G$ with $C \not\leq_T (Z \oplus G)'$ and $X \leq_T (Z \oplus G)''$. The hypothesis, applied with $Z \oplus G$ in place of $Z$, gives a solution $Y$ with $C \not\leq_T (Z \oplus G \oplus Y)'$, hence $C \not\leq_T (Z \oplus Y)'$.
 :::
 
-For the pigeonhole principle, the corollary places the difficulty precisely. Instances computable in $Z'$, that is, $\Delta^0_2(Z)$ sets, are handled by the theorem of Cholak, Jockusch and Slaman: $\mathsf D^2_2$ admits a weakly low basis (:ref{#thm-d22-weakly-low}), hence jump cone avoidance, and its instances relative to $Z$ are the $\Delta^0_2(Z)$ sets. Strong jump cone avoidance requires the same for $\Delta^0_3(Z)$ sets. Such a set is not the limit of a $Z$-computable approximation, and a solution cannot be produced by a first-jump construction relative to a set PA relative to $Z'$: the reservoirs of the Dzhafarov–Jockusch forcing must now be chosen with information about $Z''$. This is what the last three lessons do.
+For the pigeonhole principle, the corollary places the difficulty precisely. The instances computable in $Z'$, that is, the $\Delta^0_2(Z)$ sets, are handled by the theorem of Cholak, Jockusch and Slaman: by :ref{#thm-d22-weakly-low} and item 3 of :ref{#prop-weakly-low-properties}, every $\Delta^0_2(Z)$ set has an infinite subset $Y$, of itself or of its complement, with $C \not\leq_T (Z \oplus Y)'$. Strong jump cone avoidance requires the same for $\Delta^0_3(Z)$ sets. Such a set has in general no $Z$-computable approximation, and the solution cannot be produced by a first-jump construction relative to a set PA relative to $Z'$. This is what the last lessons of the course do.
 
 :::quiz[Δ⁰₃ instances]
 In the proof of :ref{#thm-delta3-jump-cone}, what does jump inversion contribute?
@@ -101,7 +97,7 @@ In the proof of :ref{#thm-delta3-jump-cone}, what does jump inversion contribute
   The avoidance is inherited from $H$; jump inversion only places $Z' \oplus H$ as a jump.
 - [ ] It makes $G$ low.
 
-  $G$ is far from low: its jump computes $Z'$ and $H$.
+  Nothing makes $G$ low: its jump computes $Z' \oplus H$, and its double jump computes $A$, which may be any set.
 
 ---
 
@@ -146,17 +142,9 @@ By the computably dominated basis theorem (:ref{#thm-dominated-basis}) relativiz
 :::
 ::::
 
-::::exercise{difficulty=2}
-Let $\mathsf P$ admit jump cone avoidance. Show that there is a Turing ideal satisfying $\mathsf P$ none of whose members is high. Deduce that $\mathsf{DOM}$ (:ref{#ex-jca-problems}) is not ω-reducible to $\mathsf P$, and that the ideal does not contain $\emptyset'$.
-
-:::solution
-Let $\mathcal W$ be the class of sets $Y$ with $\emptyset'' \not\leq_T Y'$. It is closed downward under Turing reducibility, since $W \leq_T Y$ implies $W' \leq_T Y'$, and it contains $\emptyset$. Let $Z \in \mathcal W$ and $X \leq_T Z$ an instance. The set $C = \emptyset''$ satisfies $C \not\leq_T Z'$, so jump cone avoidance gives a solution $Y$ with $\emptyset'' \not\leq_T (Z \oplus Y)'$, that is, $Z \oplus Y \in \mathcal W$. So $\mathsf P$ preserves $\mathcal W$ (:ref{#def-weakness}), and :ref{#lem-preservation-ideal} gives a Turing ideal $\mathcal I \subseteq \mathcal W$ satisfying $\mathsf P$. The instance $\emptyset \in \mathcal I$ of $\mathsf{DOM}$ has no solution in $\mathcal I$, since a dominant function is high by Martin's theorem, so $\mathcal I$ does not satisfy $\mathsf{DOM}$; an ideal satisfying $\mathsf P$ in which some instance of $\mathsf{DOM}$ has no solution witnesses that $\mathsf{DOM} \not\leq_\omega \mathsf P$. Finally $\emptyset'$ is high, so $\emptyset' \notin \mathcal I$.
-:::
-::::
-
 ## Notes and references
 
-Jump cone avoidance, its strong version, the remark that a weakly low basis gives jump cone avoidance, and the exercise on jump hyperimmunity follow the sections *Context and motivation* and *Use first-jump control* of the chapter *Jump cone avoidance* of Patey's monograph, where the reduction to first-jump control is recommended as the first approach. :ref{#thm-delta3-jump-cone} and :ref{#cor-strong-jca-delta3} are the second-level analogues of :ref{#thm-delta2-cone-avoidance} and :ref{#cor-strong-delta2}, obtained here by combining them with jump inversion. Highness and Martin's domination theorem are presented by Hirschfeldt (Section 2.1, Theorem 2.2), who also records, in Section 6.4, that before the results of this course it was open whether some $\Delta^0_2$ set might have only high $\Delta^0_2$ subsets of itself or its complement. The theorem that every set has an infinite subset, of itself or of its complement, that is not high is due to Monin and Patey (2019); the same paper proves that every $\Delta^0_3$ set has an infinite low₃ subset of itself or of its complement, which is not proved in this course.
+Jump cone avoidance, its strong version, the remark that a weakly low basis gives it, and the exercise on jump hyperimmunity follow the sections *Context and motivation* and *Use first-jump control* of the chapter *Jump cone avoidance* of Patey's monograph. :ref{#thm-delta3-jump-cone} and :ref{#cor-strong-jca-delta3} are the second-level analogues of :ref{#thm-delta2-cone-avoidance} and :ref{#cor-strong-delta2}, obtained here with jump inversion. Highness and Martin's domination theorem are in Hirschfeldt (Section 2.1, Theorem 2.2), who also notes, in Section 6.4, that some set might have only high infinite $\Delta^0_2$ subsets of itself or of its complement; the theorem of this course produces subsets that are not high, but not $\Delta^0_2$ ones. The theorem that every set has an infinite subset, of itself or of its complement, that is not high is due to Monin and Patey (2019); the same paper proves that every $\Delta^0_3$ set has an infinite low₃ subset of itself or of its complement, which is not proved here.
 
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095; arXiv:1803.09771.
 - P. A. Cholak, C. G. Jockusch, Jr. and T. A. Slaman, *On the strength of Ramsey's theorem for pairs*, Journal of Symbolic Logic 66 (2001), 1–55.
