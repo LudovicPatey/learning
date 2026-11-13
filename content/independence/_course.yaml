@@ -1,0 +1,36 @@
+title: Indicators and independence
+area: arithmetic
+level: Advanced
+order: 6
+prerequisites: [cuts-and-extensions, truth-and-provability, ramsey-theorem, big-five, induction-conservation]
+summary: The method of indicators of Paris and Kirby; semiregular cuts in intervals [a, F_ν(a)] and the provably total functions of IΣ₁; the Paris–Harrington principle, its truth and its unprovability in Peano arithmetic through diagonal indiscernibles; α-large sets and fast-growing hierarchies; arithmetic with a top.
+description: >
+  The last course of the track on models of arithmetic. It assumes first-order
+  logic: the completeness and compactness theorems, and Gödel's incompleteness
+  theorems. It proves independence results by building, inside a model of a
+  theory, a cut that is again a model of the theory and is not closed under a
+  given function. A countable model of IΣ₁ contains a semiregular cut between
+  a and F_ν(a) for every non-standard ν (Kirby and Paris); this gives an
+  indicator for IΣ₁, the unprovability in IΣ₁ of the totality of the
+  fast-growing hierarchy, and a proof that every function provably total in
+  IΣ₁ is primitive recursive (Parsons, Mints, Takeuti). The Paris–Harrington
+  principle, which asks for relatively large homogeneous sets, is true and
+  each of its instances of fixed arity is provable in Peano arithmetic, by
+  Ramsey's theorem in ACA₀; relatively large homogeneous sets give
+  min-homogeneous sets for regressive colorings, hence diagonal
+  indiscernibles, whose cut is a model of Peano arithmetic; so relative
+  largeness is an indicator for PA, and PA does not prove the principle
+  (Paris and Harrington). α-large sets measure the growth of the functions
+  involved: the least ω^k-large interval starting at x ends at F_k(x). The
+  course ends with arithmetic with a top, the framework of Paris's finer
+  indicators for the fragments IΣₖ and BΣₖ₊₁.
+objectives:
+  - Formalize a fast-growing hierarchy in IΣ₁ and build a semiregular cut between a and F_ν(a) by a construction by finite extensions
+  - State and prove the main theorem on indicators, and deduce unprovability results and bounds on provably total functions
+  - Prove that the functions provably total in IΣ₁ are primitive recursive
+  - Prove the Paris–Harrington principle from Ramsey's theorem and König's lemma, and its instances of fixed arity in PA
+  - Obtain min-homogeneous sets for regressive colorings and diagonal indiscernibles from relatively large homogeneous sets
+  - Prove that the cut of a sequence of diagonal indiscernibles satisfies PA, and that PA does not prove the Paris–Harrington principle
+  - Compute with α-large sets and relate them to the Schwichtenberg–Wainer hierarchy
+  - Work with initial segments with a top and their coded expansions
+lessons: [fast-growing, indicators, paris-harrington, diagonal-indiscernibles, ph-unprovable, alpha-large, arithmetic-with-top]

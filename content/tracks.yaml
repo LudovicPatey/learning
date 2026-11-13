@@ -45,4 +45,4 @@
     Fragments of Peano arithmetic and their models: induction and collection, truth
     definitions, cuts and end extensions, recursive saturation, and the independence of
     combinatorial statements.
-  courses: [fragments-of-arithmetic, truth-and-provability, cuts-and-extensions]
+  courses: [fragments-of-arithmetic, truth-and-provability, cuts-and-extensions, independence]
