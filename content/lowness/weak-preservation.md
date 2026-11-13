@@ -1,13 +1,13 @@
 ---
 title: Weak preservation
-summary: To build low sets, a forcing question needs only to be decided by ∅′, not to be Σ⁰₁; every Σ⁰₂ set whose complement is hyperimmune has an infinite low subset (Jockusch); every computable stable linear order has a low infinite ascending or descending sequence (Hirschfeldt–Shore).
-duration: 45
+summary: To build low sets, a forcing question needs only to be decided by ∅′, not to be Σ⁰₁; every Σ⁰₂ set whose complement is hyperimmune has an infinite low subset (Jockusch); both hypotheses are needed.
+duration: 40
 prerequisites: [forcing-the-jump, immunity-growth/immune-sets, avoidance/forcing-question-method]
 ---
 
 In cone avoidance, the forcing question must be $\Sigma^0_1$-preserving (:ref{#thm-question-preservation}), or at least $\Sigma^0_1$ relative to a member of a class of weak sets (:ref{#thm-local-cone-avoidance}): the argument compares the set of answers with the graph of the set $C$ to avoid, and needs the set of answers to be c.e. For lowness, the requirement is different. By :ref{#thm-jump-control}, it suffices that $\emptyset'$ decide the question and find the extensions. A relation decided by $\emptyset'$ is $\Delta^0_2$, and need not be $\Sigma^0_1$. Lowness can therefore be obtained with a question that is not $\Sigma^0_1$, a situation that Patey's monograph calls **weak preservation**.
 
-For a combinatorial notion of forcing, a question that is $\Delta^0_2$ without being $\Sigma^0_1$ is unusual: a question built from the combinatorics of the problem is typically $\Sigma^0_1$, or else more complex than $\Delta^0_2$. The examples of this lesson exploit a computability-theoretic hypothesis, the hyperimmunity of a set, to decide between two $\Sigma^0_2$ alternatives, one of which is always true.
+For a combinatorial notion of forcing, a question that is $\Delta^0_2$ without being $\Sigma^0_1$ is unusual: a question built from the combinatorics of the problem is typically $\Sigma^0_1$, or else more complex than $\Delta^0_2$. The example of this lesson, and its application to linear orders in the next lesson, exploit a computability-theoretic hypothesis, the hyperimmunity of a set, to decide between two $\Sigma^0_2$ alternatives, one of which is always true.
 
 ## Low subsets of co-hyperimmune sets
 
@@ -38,7 +38,7 @@ Statement 1 says that there are $\tau \succeq \sigma$ and $s$ with $\Phi^\tau_e(
 
 Suppose that statement 2 fails. Then for every $n$ there is a string $\mu \succeq \sigma 0^n$ with $\Phi^\mu_e(e)\converge$, and a search finds one, $\mu_n$, computably in $n$. Let $F_n$ be the set of elements of $\mu_n$ that are at least $|\sigma| + n$, a finite set whose canonical index is computable from $n$. The string $\mu_n$ extends $\sigma$ and makes the computation converge; if statement 1 also failed, $\mu_n$ would not be a condition, so some element of $\mu_n$ would lie outside $A$. The elements of $\mu_n$ below $|\sigma|$ are those of $\sigma$, which lie in $A$, and those between $|\sigma|$ and $|\sigma| + n$ are absent. So $F_n$ meets $\overline A$, for every $n$.
 
-The sets $F_n$ need not be disjoint, but a computable subsequence is: let $n_0 = 0$ and $n_{k+1} = |\mu_{n_k}|$. Every element of $F_{n_{k+1}}$ is at least $|\sigma| + n_{k+1} > |\mu_{n_k}|$, hence larger than every element of $F_{n_k}$ and of the earlier blocks. So $(F_{n_k})_{k \in \nat}$ is a disjoint strong array, each of whose members meets $\overline A$, contradicting the hyperimmunity of $\overline A$. Hence statement 1 or statement 2 holds.
+The sets $F_n$ need not be disjoint, but a computable subsequence is: let $n_0 = 0$ and $n_{k+1} = |\mu_{n_k}|$. Every element of $F_{n_{k+1}}$ is at least $|\sigma| + n_{k+1} \geq |\mu_{n_k}|$, hence larger than every element of $F_{n_k}$, and, by induction, of the earlier blocks. So $(F_{n_k})_{k \in \nat}$ is a disjoint strong array, each of whose members meets $\overline A$, contradicting the hyperimmunity of $\overline A$. Hence statement 1 or statement 2 holds.
 :::
 
 :::figure[The proof of :ref{#lem-cohyperimmune-dichotomy}. If statement 2 fails, for every $n$ some string $\mu_n \succeq \sigma 0^n$ makes the computation converge. If statement 1 fails too, $\mu_n$ is not a condition, so the block $F_n$ of elements it adds after the zeros meets the complement of $A$. Choosing each $n$ beyond the previous string makes the blocks disjoint, which contradicts hyperimmunity.]
@@ -82,44 +82,7 @@ Where is it used that $A$ is $\Sigma^0_2$?
 
 Both hypotheses are needed. :ref{#ex-no-low-subset} gives a $\Delta^0_2$ set with no infinite low subset, whose complement is not hyperimmune. The first exercise gives a set with hyperimmune complement and no infinite $\Delta^0_2$ subset; it is not $\Sigma^0_2$.
 
-## Stable linear orders
-
-A linear order $\mathcal L = (\nat, <_{\mathcal L})$ is **stable** if every element has finitely many $<_{\mathcal L}$-predecessors or finitely many $<_{\mathcal L}$-successors. Let $A$ be the set of elements with finitely many predecessors, and $A^*$ the set of elements with finitely many successors. An **ascending sequence** is an infinite set on which $<_{\mathcal L}$ agrees with the natural order, and a **descending sequence** an infinite set on which it agrees with the reverse order. $\mathsf{SADS}$ is the problem whose instances are stable linear orders and whose solutions are their ascending and descending sequences.
-
-:::proposition{#prop-stable-order-parts}
-Let $\mathcal L$ be a computable stable linear order.
-1. $\nat = A \sqcup A^*$, every element of $A$ is $<_{\mathcal L}$-below every element of $A^*$, and $A$ and $A^*$ are $\Delta^0_2$.
-2. Every infinite subset $H$ of $A$ computes an ascending sequence contained in $H$, and every infinite subset of $A^*$ computes a descending sequence.
-3. If $A^*$ is infinite and immune, it is hyperimmune; the same holds for $A$.
-:::
-
-:::proof{of=prop-stable-order-parts}
-1. An element has finitely many predecessors or finitely many successors, by stability, and not both, since $\nat$ is infinite. If $x \in A$ and $y \in A^*$ with $y <_{\mathcal L} x$, the infinitely many predecessors of $y$ would be predecessors of $x$; so $x <_{\mathcal L} y$. The relation "$x$ has finitely many predecessors" is $\Sigma^0_2$, as is "$x$ has finitely many successors"; each of $A$ and $A^*$ is $\Sigma^0_2$ with $\Sigma^0_2$ complement, hence $\Delta^0_2$.
-2. Let $h_0$ be the least element of $H$, and $h_{k+1}$ the least element of $H$ larger than $h_k$ in both orders. It exists: $h_k \in A$ has finitely many predecessors, so all but finitely many elements of the infinite set $H$ are $<_{\mathcal L}$-above it. The sequence is $H$-computable. The case of $A^*$ is symmetric.
-3. Let $(F_n)$ be a disjoint strong array each of whose members meets $A^*$. Let $m_n$ be the $<_{\mathcal L}$-largest element of $F_n$; it is $<_{\mathcal L}$-above an element of $A^*$, so it belongs to $A^*$ by item 1. The function $n \mapsto m_n$ is computable and injective, since the sets $F_n$ are disjoint, so its range is an infinite c.e. subset of $A^*$, and $A^*$ is not immune. For $A$, take the $<_{\mathcal L}$-smallest elements.
-:::
-
-:::theorem[Hirschfeldt, Shore]{#thm-sads-low}
-Every computable stable linear order has a low ascending or descending sequence. Consequently $\mathsf{SADS}$ admits a low basis.
-:::
-
-:::proof{of=thm-sads-low}
-Let $\mathcal L$ be a computable stable linear order. If $A$ has an infinite c.e. subset, it has an infinite computable subset (see :ref{#def-immune}), which computes an ascending sequence by item 2 of :ref{#prop-stable-order-parts}; this sequence is computable, hence low. The same holds if $A^*$ has an infinite c.e. subset. Otherwise $A$ and $A^*$ are both immune, which requires them to be infinite. By item 3, $A^*$ is hyperimmune. The set $A$ is $\Delta^0_2$, hence $\Sigma^0_2$, with hyperimmune complement $A^*$; by :ref{#thm-cohyperimmune-low}, it has an infinite low subset $H$, which computes an ascending sequence, low since it is computable in $H$. The proof relativizes to every set $Z$ and every $Z$-computable stable order, with $(H \oplus Z)' \leq_T Z'$, which gives the low basis.
-:::
-
-The theorem is sharp in two directions. Tennenbaum and Denisov built a computable linear order of type $\omega + \omega^*$ with no computable ascending or descending sequence (Hirschfeldt, Theorem 9.11), so the solutions cannot be made computable. And for the problem $\mathsf{ADS}$, in which the order need not be stable, Hirschfeldt and Shore showed that some computable linear order has no low ascending or descending sequence (Hirschfeldt, Exercise 9.6, through Herrmann's partial order). By :ref{#cor-low-basis-separations} and :ref{#thm-sads-low}, $\mathsf{SADS}$ implies neither $\mathsf{COH}$ nor $\mathsf{RT}^2_2$ in ω-models, and by the same argument with the low basis of $\mathsf{WKL}$, $\mathsf{WKL}_0 + \mathsf{SADS}$ has an ω-model of low sets (Hirschfeldt, Section 9.1).
-
-:::quiz[stable linear orders]
-In item 3 of :ref{#prop-stable-order-parts}, why is the $<_{\mathcal L}$-largest element of $F_n$ in $A^*$?
-
-- [x] Because $F_n$ contains an element of $A^*$, the largest element is above it, and $A^*$ is closed upward in $<_{\mathcal L}$ by item 1.
-- [ ] Because $F_n$ is contained in $A^*$.
-
-  $F_n$ only meets $A^*$; it may contain elements of $A$.
-- [ ] Because the sets $F_n$ are disjoint.
-
-  Disjointness makes the elements $m_n$ distinct; it does not place them in $A^*$.
-:::
+The next lesson, :ref{to="lowness/stable-linear-orders"}, applies the theorem to linear orders.
 
 ## Exercises
 
@@ -149,9 +112,7 @@ If $\overline A$ is hyperimmune, apply :ref{#thm-cohyperimmune-low} to $A$, whic
 
 ## Notes and references
 
-:ref{#thm-cohyperimmune-low} is due to Jockusch, and is credited to him by Hirschfeldt, Jockusch, Kjos-Hanssen, Lempp and Slaman (2008); the proof follows the section *Weak preservation* of the chapter *Lowness* of Patey's monograph, from which the term is taken. :ref{#thm-sads-low} is due to Hirschfeldt and Shore (2007); Hirschfeldt presents it as Theorem 9.19, with a direct proof by forcing in Exercise 9.20, and the monograph derives it from Jockusch's theorem, as here. Hyperimmune sets and disjoint strong arrays are studied in :ref{to="immunity-growth/immune-sets"}.
+:ref{#thm-cohyperimmune-low} is due to Jockusch, and is credited to him by Hirschfeldt, Jockusch, Kjos-Hanssen, Lempp and Slaman (2008); the proof follows the section *Weak preservation* of the chapter *Lowness* of Patey's monograph, from which the term is taken. Hyperimmune sets and disjoint strong arrays are studied in :ref{to="immunity-growth/immune-sets"}.
 
 - D. R. Hirschfeldt, C. G. Jockusch, Jr., B. Kjos-Hanssen, S. Lempp and T. A. Slaman, *The strength of some combinatorial principles related to Ramsey's theorem for pairs*, in *Computational Prospects of Infinity, Part II*, World Scientific, 2008, 143–161.
-- D. R. Hirschfeldt and R. A. Shore, *Combinatorial principles weaker than Ramsey's theorem for pairs*, Journal of Symbolic Logic 72 (2007), 171–206.
-- D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 9.1.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Lowness*, section *Weak preservation*.

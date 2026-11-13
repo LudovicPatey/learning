@@ -10,13 +10,13 @@ The two halves of the decomposition of Ramsey's theorem for pairs (:ref{#thm-rt2
 ## Combining the two halves
 
 :::theorem[Cholak, Jockusch, Slaman]{#thm-rt22-weakly-low}
-Let $Z$ be a set, $f : [\nat]^2 \to 2$ a $Z$-computable coloring, and $P$ a set PA relative to $Z'$. There is an infinite homogeneous set $H$ for $f$ with $(H \oplus Z)' \leq_T P$. So $\mathsf{RT}^2_2$ admits a weakly low basis.
+Let $Z$ be a set, $f : [\nat]^2 \to 2$ a $Z$-computable coloring, and $P$ a set PA relative to $Z'$. There is an infinite homogeneous set $H$ for $f$ with $(Z \oplus H)' \leq_T P$. So $\mathsf{RT}^2_2$ admits a weakly low basis.
 :::
 
 :::proof{of=thm-rt22-weakly-low}
 We write the proof for $Z = \emptyset$; it relativizes. By :ref{#lem-pa-between}, there is $Q$ PA relative to $\emptyset'$ such that $P$ is PA relative to $Q$. Let $R_x = \{ y : f(\{ x, y \}) = 1 \}$, a computable sequence. By :ref{#thm-coh-weakly-low}, there is an $\vec R$-cohesive set $C$ with $C' \leq_T Q$. Since $P$ is PA relative to $Q$, it is PA relative to $C'$.
 
-Let $p$ be the increasing enumeration of $C$, and $g(\{ i, j \}) = f(\{ p(i), p(j) \})$. By :ref{#thm-rt22-decomposition}, $g$ is stable; it is computable in $C$. Its limit set $A_g$ is $\Delta^0_2(C)$ by the limit lemma relativized (:ref{#thm-limit-lemma}). By :ref{#thm-d22-weakly-low} relativized to $C$, with the oracle $P$, there is an infinite set $H_0$ contained in $A_g$ or in its complement with $(H_0 \oplus C)' \leq_T P$. By :ref{#prop-srt-d22}, $H_0 \oplus g$ computes an infinite homogeneous set $H_1$ for $g$, and $H_1 \leq_T H_0 \oplus C$. The set $H = p[H_1]$ is homogeneous for $f$, and computable in $H_0 \oplus C$, so $H' \leq_T (H_0 \oplus C)' \leq_T P$.
+Let $p$ be the increasing enumeration of $C$, and $g(\{ i, j \}) = f(\{ p(i), p(j) \})$. By :ref{#thm-rt22-decomposition}, $g$ is stable; it is computable in $C$. Its limit set $A_g$ is $\Delta^0_2(C)$ by the limit lemma relativized (:ref{#thm-limit-lemma}). By :ref{#thm-d22-weakly-low} relativized to $C$, with the oracle $P$, there is an infinite set $H_0$ contained in $A_g$ or in its complement with $(C \oplus H_0)' \leq_T P$. By :ref{#prop-srt-d22}, $g \oplus H_0$ computes an infinite homogeneous set $H_1$ for $g$, and $H_1 \leq_T C \oplus H_0$. The set $H = p[H_1]$ is homogeneous for $f$, and computable in $C \oplus H_0$, so $H' \leq_T (C \oplus H_0)' \leq_T P$.
 :::
 
 :::corollary[Cholak, Jockusch, Slaman]{#cor-rt22-low2}
@@ -69,7 +69,7 @@ By the last exercise of :ref{to="lowness/weak-preservation"}, such a set is neit
 Show that there is an ω-model of $\mathsf{WKL}_0 + \mathsf{RT}^2_2$ consisting of low₂ sets.
 
 :::solution
-$\mathsf{WKL}$ admits a low basis, hence a weakly low basis, and so does $\mathsf{RT}^2_2$ by :ref{#thm-rt22-weakly-low}. By the last exercise of :ref{to="lowness/beyond-zero-jump"}, the product problem, whose instances are pairs of an infinite binary tree and a coloring of pairs, admits a weakly low basis. Apply :ref{#thm-weakly-low-model} to it, with $P$ PA relative to $\emptyset'$ and $P' \leq_T \emptyset''$: the resulting Turing ideal satisfies both problems, since a tree $T$ in the ideal is the first component of the instance $T \oplus c$ of the product, with $c$ a fixed computable coloring, and a coloring $c'$ in the ideal is the second component of $T_0 \oplus c'$, with $T_0$ a fixed computable infinite tree. Its members are low₂.
+$\mathsf{WKL}$ admits a low basis, hence a weakly low basis, and so does $\mathsf{RT}^2_2$ by :ref{#thm-rt22-weakly-low}. By the last exercise of :ref{to="lowness/weakly-low-bases"}, the product problem, whose instances are pairs of an infinite binary tree and a coloring of pairs, admits a weakly low basis. Apply :ref{#thm-weakly-low-model} to it, with $P$ PA relative to $\emptyset'$ and $P' \leq_T \emptyset''$: the resulting Turing ideal satisfies both problems, since a tree $T$ in the ideal is the first component of the instance $T \oplus c$ of the product, with $c$ a fixed computable coloring, and a coloring $c'$ in the ideal is the second component of $T_0 \oplus c'$, with $T_0$ a fixed computable infinite tree. Its members are low₂.
 :::
 ::::
 
@@ -77,7 +77,7 @@ $\mathsf{WKL}$ admits a low basis, hence a weakly low basis, and so does $\maths
 Show by induction on $k \geq 2$ that $\mathsf{RT}^2_k$ admits a weakly low basis.
 
 :::solution
-The case $k = 2$ is :ref{#thm-rt22-weakly-low}. Let $k \geq 3$, $f$ a $Z$-computable coloring of pairs with $k$ colors, and $P$ PA relative to $Z'$. By :ref{#lem-pa-between} relativized, let $Q$ be PA relative to $Z'$ with $P$ PA relative to $Q$. Let $f_0$ be the coloring with $k - 1$ colors obtained by merging the colors $k - 2$ and $k - 1$. By the induction hypothesis with $Q$, there is an infinite set $H_0$ homogeneous for $f_0$ with $(H_0 \oplus Z)' \leq_T Q$. If its color is less than $k - 2$, $H_0$ is homogeneous for $f$ and $(H_0 \oplus Z)' \leq_T P$. Otherwise $f$ takes two values on $[H_0]^2$; transported to $[\nat]^2$ by the enumeration of $H_0$, it is a coloring with two colors computable in $H_0 \oplus Z$. Since $P$ is PA relative to $Q$, which computes $(H_0 \oplus Z)'$, :ref{#thm-rt22-weakly-low} relativized to $H_0 \oplus Z$ gives an infinite homogeneous set, whose image $H \subseteq H_0$ is homogeneous for $f$, with $(H \oplus Z)' \leq_T P$.
+The case $k = 2$ is :ref{#thm-rt22-weakly-low}. Let $k \geq 3$, $f$ a $Z$-computable coloring of pairs with $k$ colors, and $P$ PA relative to $Z'$. By :ref{#lem-pa-between} relativized, let $Q$ be PA relative to $Z'$ with $P$ PA relative to $Q$. Let $f_0$ be the coloring with $k - 1$ colors obtained by merging the colors $k - 2$ and $k - 1$. By the induction hypothesis with $Q$, there is an infinite set $H_0$ homogeneous for $f_0$ with $(Z \oplus H_0)' \leq_T Q$. If its color is less than $k - 2$, $H_0$ is homogeneous for $f$ and $(Z \oplus H_0)' \leq_T P$. Otherwise $f$ takes two values on $[H_0]^2$; transported to $[\nat]^2$ by the enumeration of $H_0$, it is a coloring with two colors computable in $Z \oplus H_0$. Since $P$ is PA relative to $Q$, which computes $(Z \oplus H_0)'$, :ref{#thm-rt22-weakly-low} relativized to $Z \oplus H_0$ gives an infinite homogeneous set, whose image $H \subseteq H_0$ is homogeneous for $f$, with $(Z \oplus H)' \leq_T P$.
 :::
 ::::
 

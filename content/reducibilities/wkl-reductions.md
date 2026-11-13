@@ -2,7 +2,7 @@
 title: Computable reductions to weak König's lemma
 summary: Scott's theorem that every PA degree bounds a Scott ideal; ω-reducibility and computable reducibility to WKL coincide; universal instances; cylinders, and when computable reductions can be made strong.
 duration: 30
-prerequisites: [computable-reducibility]
+prerequisites: [computable-reducibility, pi01-classes/pa-degrees]
 ---
 
 The jump needs to be applied twice to solve König's lemma (:ref{#prop-kl-not-c-j}): a single application of a problem is in general weaker than several. For weak König's lemma, this is not so. A single instance of $\mathsf{WKL}$, well chosen, has solutions that compute a whole Scott ideal, inside which any number of further applications can be carried out. The first part of the lesson proves this; the second asks when the original instance is needed in the backward step of a reduction, and shows that it is not for reductions to $\mathsf{WKL}$.
@@ -25,7 +25,7 @@ For a set $Z$, let $D^Z$ be the class of $\{0, 1\}$-valued functions $g$ with $g
 Let $\mathcal I = \{ Y : \exists i\ Y \leq_T Z_i \}$, a Turing ideal containing $A$, with all members computable in $P$. The set $Z_{i+1} = Z_i \oplus X_{i+1}$ computes $Z_i$ and a $\{0, 1\}$-valued function that is diagonally non-computable relative to $Z_i$, so it is PA relative to $Z_i$, by :ref{#thm-pa-characterization} relativized to $Z_i$; hence it is PA relative to every $Y \leq_T Z_i$, since every non-empty $\Pi^0_1(Y)$ class is a $\Pi^0_1(Z_i)$ class. So every member $Y \leq_T Z_i$ of $\mathcal I$ has a member $Z_{i+1}$ of $\mathcal I$ that is PA relative to it, and $\mathcal I$ is a Scott ideal by :ref{#prop-wkl-scott}.
 :::
 
-The sets $Z_i$ are used rather than the $X_i$: a function that is diagonally non-computable relative to $Z$ need not compute $Z$, and the join ensures that the sequence increases.
+The joins $Z_i$ are not needed for the sequence to increase: a $\{0, 1\}$-valued function that is diagonally non-computable relative to $Z$ computes $Z$, since it is PA relative to $Z$ and $\{Z\}$ is a $\Pi^0_1(Z)$ class (:ref{#ex-pa-relative}). They make the increase explicit and simplify the verification.
 
 :::theorem[Hirschfeldt, Jockusch]{#thm-wkl-omega-c}
 For every problem $\mathsf P$, $\mathsf P \leq_\omega \mathsf{WKL}$ if and only if $\mathsf P \leq_c \mathsf{WKL}$.

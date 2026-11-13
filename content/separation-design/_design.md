@@ -51,7 +51,7 @@ the weakness property, and designing the notion of forcing.
 - `ramsey-theorem`: `thm-seetapun`, `lem-scott-cone`, `prop-rt32-jump`,
   `thm-dj-cone-avoidance`.
 - `turing-degrees`: `thm-limit-lemma`, `cor-complete-domination`.
-- `lowness/weak-preservation`: ascending/descending sequences (definition only).
+- `lowness/stable-linear-orders`: ascending/descending sequences (definition only).
 
 ## 3. Results, lesson by lesson
 
@@ -289,7 +289,7 @@ thin sets. No change to the course.
     `exr-em-l-compatible` labelled (used by the strong cone avoidance exercise). New labels
     carry no `sd-` prefix. Lessons 2, 6, 7 trimmed by a few words to stay at 45 minutes.
   - Consistency: linear orders written <_𝓛 in `ascending-descending`, as in
-    `erdos-moser-separation` and `lowness/weak-preservation`; "satisfies" for strings defined in
+    `erdos-moser-separation` and `lowness/stable-linear-orders`; "satisfies" for strings defined in
     `erdos-moser-design` as in `avoidance/seetapun-forcing`.
   - References: Hirschfeldt sections corrected (EM 9.2.2, CAC 9.1 and 9.2.1); unused LST
     entry removed from lesson 2; Flood–Towsner pages added; Patey's thesis and

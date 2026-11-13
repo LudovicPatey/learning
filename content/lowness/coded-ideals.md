@@ -1,7 +1,7 @@
 ---
 title: Coded Scott ideals
-summary: A set codes a countable family through its columns; no Turing ideal contains its own code; the codes of Scott ideals containing X, with computable indices for joins, reductions and PA sets, form a non-empty Π⁰₁(X) class, so PA sets compute them and low codes exist; questions about the members of a low code are answered by ∅′.
-duration: 45
+summary: A set codes a countable family through its columns; no Turing ideal contains its own code; the codes of Scott ideals containing X, with computable indices for joins, reductions and PA sets, form a non-empty Π⁰₁(X) class, so the sets PA relative to X are exactly those that compute such codes, and low codes exist.
+duration: 40
 prerequisites: [forcing-the-jump, big-five/wkl0, reducibilities/wkl-reductions, pi01-classes/pa-degrees]
 ---
 
@@ -15,7 +15,7 @@ Recall that $\langle \cdot, \cdot \rangle$ is Cantor's pairing function, a compu
 The **join** of a sequence of sets $Z_0, Z_1, \dots$ is the set $\bigoplus_n Z_n = \{ \langle n, x \rangle : x \in Z_n \}$; the set $Z_n$ is its **$n$-th column**. A set $M$ **codes** a countable family $\mathcal M$ if $M = \bigoplus_n Z_n$ and $\mathcal M = \{ Z_n : n \in \nat \}$. An **$M$-index** of a set $X \in \mathcal M$ is an $n$ with $Z_n = X$.
 :::
 
-Every column is computable in $M$, uniformly in its index: $x \in Z_n$ if and only if $\langle n, x \rangle \in M$. So every member of the coded family is computable in $M$. The converse fails, and the family coded by $M$ is never the whole cone below $M$, for Turing ideals.
+Every column is computable in $M$, uniformly in its index: $x \in Z_n$ if and only if $\langle n, x \rangle \in M$. So every member of the coded family is computable in $M$. The converse fails: the family coded by $M$ never contains all the sets computable in $M$.
 
 :::proposition{#prop-no-self-code}
 If $M$ codes a family $\mathcal M = \{ Z_n : n \in \nat \}$, the set $D = \{ n : n \notin Z_n \}$ is computable in $M$ and does not belong to $\mathcal M$. In particular, no Turing ideal contains a set that codes it.
@@ -25,7 +25,7 @@ If $M$ codes a family $\mathcal M = \{ Z_n : n \in \nat \}$, the set $D = \{ n :
 $D$ is computable in $M$, since $n \in D$ if and only if $\langle n, n \rangle \notin M$. If $D = Z_m$, then $m \in D \iff m \notin Z_m \iff m \notin D$, a contradiction. If $\mathcal M$ is a Turing ideal coded by $M \in \mathcal M$, then $D \leq_T M$ belongs to $\mathcal M$, which is impossible.
 :::
 
-So a code of a Turing ideal is strictly more complex than every member. For the ideal of computable sets, a code must enumerate the computable sets, which requires deciding which programs are total; such a code is computable in $\emptyset''$, and every code of this ideal computes a set that is not computable. Scott ideals are different. The next theorem shows that their codes are exactly as complex as PA sets, so that coding a Scott ideal costs no more than one of its members that is PA relative to the others.
+So a code of a Turing ideal is strictly more complex than every member. For the ideal of computable sets, $\emptyset''$ computes a code, since it decides which programs compute total $\{0, 1\}$-valued functions; by the proposition, every code of this ideal computes a set that is not computable. For Scott ideals, the next theorem gives a precise answer: the sets that compute codes of Scott ideals containing $X$ are exactly the sets PA relative to $X$.
 
 ## The Scott class
 
@@ -105,51 +105,10 @@ Let $X$ be a set.
 
 :::proof{of=cor-scott-codes}
 1. A set PA relative to $X$ computes a member of every non-empty $\Pi^0_1(X)$ class, by :ref{#thm-pa-characterization} relativized; apply it to $\mathcal S_X$. Conversely, a member $M$ of $\mathcal S_X$ computes the column $Z_{\mathrm{pa}(0)}$, a $\{0, 1\}$-valued function DNC relative to $Z_0 = X$, so $M$ is PA relative to $X$.
-2. By the low basis theorem relativized to $X$, the non-empty $\Pi^0_1(X)$ class $\mathcal S_X$ has a member $M$ with $(M \oplus X)' \leq_T X'$; since $X = Z_0$ is computable in $M$, this is $M' \leq_T X'$. For $X = \emptyset$, $M$ is low, and every member of the ideal, being computable in $M$, is low.
+2. By the low basis theorem relativized to $X$, the non-empty $\Pi^0_1(X)$ class $\mathcal S_X$ has a member $M$ with $(X \oplus M)' \leq_T X'$; since $X = Z_0$ is computable in $M$, this is $M' \leq_T X'$. For $X = \emptyset$, $M$ is low, and every member of the ideal, being computable in $M$, is low.
 :::
 
-Item 1 is the coded form of :ref{#thm-scott-pa}, and item 2 is Simpson's proof of :ref{#thm-low-scott}: one application of the low basis theorem to the class of codes, instead of countably many applications to the classes of PA sets. The difference matters for what follows. The ideal of :ref{#thm-low-scott} consists of low sets, but its natural code $\bigoplus_n Z_n$ need not be low; the code of item 2 is.
-
-## Questions about the members of a low code
-
-Fix from now on a low code $M = \bigoplus_n Z_n$ of a Scott ideal $\mathcal M$, given by :ref{#cor-scott-codes}. The point of lowness is that $\emptyset'$ answers questions about the members of $\mathcal M$, uniformly in their $M$-indices, as if they were computable sets.
-
-:::proposition{#prop-low-code-questions}
-Let $M = \bigoplus_n Z_n$ be a low set.
-1. If $R(a, \vec y)$ is $\Sigma^0_1(Z_a)$ uniformly in $a$, that is, $R(a, \vec y) \iff \exists s\ Q(Z_a \uh s, a, \vec y, s)$ for a computable relation $Q$, then $R$ is computable in $\emptyset'$.
-2. If $R(a, \vec y)$ is $\Sigma^0_2(Z_a)$ or $\Pi^0_2(Z_a)$ uniformly in $a$, then $R$ is $\Sigma^0_2$ or $\Pi^0_2$, respectively.
-:::
-
-:::proof{of=prop-low-code-questions}
-1. The column $Z_a \uh s$ is computed from $M$ uniformly in $a$, so $R$ is $\Sigma^0_1(M)$, hence computable in $M'$ by Post's theorem relativized, hence in $\emptyset'$ since $M$ is low.
-2. Uniformly in $a$, a $\Sigma^0_2(Z_a)$ relation is $\Sigma^0_2(M)$, that is, $\Sigma^0_1(M')$ by Post's theorem relativized. Since $M' \leq_T \emptyset'$, it is $\Sigma^0_1(\emptyset')$, that is, $\Sigma^0_2$. The case of $\Pi^0_2$ is the complement.
-:::
-
-For instance, given $a$ and an index of a $\Pi^0_1(Z_a)$ class, $\emptyset'$ decides whether the class is empty, by item 1 and :ref{#prop-pi01-emptiness}; and the set of $a$ such that $Z_a$ is infinite, or such that $Z_a \cap Z_b$ is infinite, is $\Pi^0_2$ by item 2. These are exactly the complexities that the codes of computable sets have, as $\Delta^0_1$ indices: from the point of view of $\emptyset'$, the members of a low Scott ideal behave like computable sets. But the ideal $\mathcal M$ is closed under paths of trees, with computable indices (:ref{#lem-scott-paths}), which the computable sets are not. This is what makes it possible, in the last lesson, to run the Dzhafarov–Jockusch forcing effectively.
-
-:::quiz[questions about a low code]
-In item 1 of :ref{#prop-low-code-questions}, why is it important that the relation be uniform in $a$?
-
-- [x] Because a single reduction of $M'$ to $\emptyset'$ must answer the questions for all members at once; uniformity makes $R$ one $\Sigma^0_1(M)$ relation rather than countably many unrelated ones.
-- [ ] Because the members of $\mathcal M$ are not low.
-
-  They are low, being computable in $M$.
-- [ ] Because $\emptyset'$ cannot compute $M$.
-
-  It can, since $M$ is low; the point is that it computes $M'$.
-
----
-
-The members of the ideal of :ref{#thm-low-scott} are low. Why does the last lesson need a low code instead?
-
-- [x] Because the construction must answer questions about all the reservoirs it uses with one oracle, uniformly in their names; lowness of each member separately gives a reduction for each member, with no uniformity.
-- [ ] Because the ideal of :ref{#thm-low-scott} is not a Scott ideal.
-
-  It is a Scott ideal.
-- [ ] Because a low code is computable.
-
-  A code of a Scott ideal is PA, hence not computable.
-:::
+Item 1 is the coded form of :ref{#thm-scott-pa}, and item 2 is Simpson's proof of :ref{#thm-low-scott}: one application of the low basis theorem to the class of codes, instead of countably many applications to the classes of PA sets. The difference matters for what follows. The ideal of :ref{#thm-low-scott} consists of low sets, but its natural code $\bigoplus_n Z_n$ need not be low; the code of item 2 is. The next lesson, :ref{to="lowness/uniform-lowness"}, shows what $\emptyset'$ can answer about the members of an ideal with a low code.
 
 ## Exercises
 
@@ -166,14 +125,6 @@ Let $M$ code a Turing ideal $\mathcal M$ that contains $\emptyset$ and is closed
 
 :::solution
 $\mathcal M$ contains $\emptyset^{(n)}$ for every $n$, and every member of $\mathcal M$ is computable in $M$; every arithmetic set is computable in some $\emptyset^{(n)}$ by Post's theorem. If $M$ were arithmetic, it would be computable in some $\emptyset^{(n)}$, and $\emptyset^{(n+1)}$, which is computable in $M$, would be computable in $\emptyset^{(n)}$, contradicting :ref{#thm-jump}.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $M = \bigoplus_n Z_n$ be a low member of $\mathcal S_\emptyset$. Show that $\emptyset'$ computes a function $g$ such that, for every $a$ and every $t$ such that $\Phi^{Z_a}_t$ is the characteristic function of a binary tree $T$, $g(a, t) = 0$ if $T$ is finite, and otherwise $g(a, t) = 1 + m$ where $m$ is an $M$-index of a path of $T$.
-
-:::solution
-The tree $T$ is finite if and only if it has no node of some length (:ref{#prop-pi01-emptiness}, relativized), a $\Sigma^0_1(Z_a)$ property uniformly in $a$ and $t$. By :ref{#prop-low-code-questions}, $\emptyset'$ decides it. If $T$ is infinite, let $g(a, t) = 1 + p(a, t)$, with $p$ as in :ref{#lem-scott-paths}.
 :::
 ::::
 

@@ -9,11 +9,12 @@ description: >
   generic sequence of conditions with the oracle ∅′, deciding the jump of the
   generic set along the way. The course defines low bases for problems and
   derives ω-models of low sets and separations; formalizes the effective forcing
-  of the jump through codes of conditions, and revisits the low basis theorem
-  with lowness indices; shows that a question decided by ∅′, not necessarily
-  Σ⁰₁, suffices, with Jockusch's theorem on low subsets of co-hyperimmune Σ⁰₂
-  sets and the Hirschfeldt–Shore theorem on stable linear orders; introduces
-  codes of Scott ideals and their low members; replaces ∅′ by a set PA relative
+  of the jump through codes of conditions; shows that a question decided by ∅′,
+  not necessarily Σ⁰₁, suffices, with Jockusch's theorem on low subsets of
+  co-hyperimmune Σ⁰₂ sets and the Hirschfeldt–Shore theorem on stable linear
+  orders; introduces codes of Scott ideals, and compares low codes with
+  lowness indices as ways to answer questions about many low sets uniformly;
+  replaces ∅′ by a set PA relative
   to ∅′ to define weakly low bases, which give low₂ solutions; and proves that
   cohesiveness, the pigeonhole principle for Δ⁰₂ sets and Ramsey's theorem for
   pairs admit weakly low bases (Jockusch–Stephan, Cholak–Jockusch–Slaman).
@@ -26,4 +27,4 @@ objectives:
   - Define codes of Turing ideals, build low codes of Scott ideals, and answer questions about their members with ∅′
   - Use a set PA relative to ∅′ to choose between true Π⁰₂ statements, and define weakly low bases
   - Prove that COH, the pigeonhole principle for Δ⁰₂ sets and RT²₂ admit weakly low bases, hence low₂ solutions
-lessons: [low-bases, forcing-the-jump, weak-preservation, coded-ideals, beyond-zero-jump, cjs-theorem, ramsey-pairs-low2]
+lessons: [low-bases, forcing-the-jump, weak-preservation, stable-linear-orders, coded-ideals, uniform-lowness, weakly-low-bases, beyond-zero-jump, cjs-theorem, ramsey-pairs-low2]

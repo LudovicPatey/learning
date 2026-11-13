@@ -51,7 +51,7 @@ Cone avoidance, PA avoidance and preservation of one hyperimmunity, which both p
 
 ## Ramsey's theorem as a conjunction
 
-Let $\mathcal L = (\nat, <_{\mathcal L})$ be a linear order. As in :ref{to="lowness/weak-preservation"}, an **ascending sequence** is an infinite set on which $<_{\mathcal L}$ agrees with the order of $\nat$, and a **descending sequence** an infinite set on which it agrees with the reverse order. The **ascending–descending sequence principle** $\mathsf{ADS}$ is the problem whose instances are the linear orders on $\nat$ and whose solutions are their ascending and descending sequences; it is studied in :ref{to="separation-design/ascending-descending"}.
+Let $\mathcal L = (\nat, <_{\mathcal L})$ be a linear order. As in :ref{to="lowness/stable-linear-orders"}, an **ascending sequence** is an infinite set on which $<_{\mathcal L}$ agrees with the order of $\nat$, and a **descending sequence** an infinite set on which it agrees with the reverse order. The **ascending–descending sequence principle** $\mathsf{ADS}$ is the problem whose instances are the linear orders on $\nat$ and whose solutions are their ascending and descending sequences; it is studied in :ref{to="separation-design/ascending-descending"}.
 
 :::proposition{#prop-sd-rt22-em-ads}
 A Turing ideal satisfies $\mathsf{RT}^2_2$ if and only if it satisfies $\mathsf{EM}$ and $\mathsf{ADS}$.

@@ -70,54 +70,60 @@ deciding the jump), `thm-scott-class`/`cor-scott-codes`/`prop-low-code-questions
 2. **Forcing the jump effectively** (`forcing-the-jump`): `def-coded-forcing`,
    `def-jump-decision`, `thm-jump-control` (figure `jump-sequence`);
    `prop-jump-decision-examples` (Cohen, Jockusch–Soare, computable Mathias); the
-   obstacle for cohesiveness located in the dense sets, not in the jump;
-   `prop-uniform-low-basis` (low basis theorem with lowness indices). Exercises: lowness
-   indices of reductions; a low set with hyperimmune principal function; computable
-   Sacks forcing.
+   obstacle for cohesiveness located in the dense sets, not in the jump. Exercises: a
+   low set with hyperimmune principal function; computable Sacks forcing.
 3. **Weak preservation** (`weak-preservation`): `ex-no-low-subset` (prefix set of ∅′);
    `thm-cohyperimmune-low` (Jockusch) with `lem-cohyperimmune-dichotomy` (figure
-   `hyperimmune-blocks`); `prop-stable-order-parts`, `thm-sads-low` (Hirschfeldt–Shore).
-   Exercises: the Σ⁰₂ hypothesis is needed (Cohen generic); non-computable low subsets;
-   consequence for the DHLS set.
-4. **Coded Scott ideals** (`coded-ideals`): `def-coded-family`, `prop-no-self-code`;
+   `hyperimmune-blocks`). Exercises: the Σ⁰₂ hypothesis is needed (Cohen generic);
+   non-computable low subsets; consequence for the DHLS set.
+4. **Stable linear orders** (`stable-linear-orders`, new 2026-11-13):
+   `prop-stable-order-parts`, `thm-sads-low` (Hirschfeldt–Shore), sharpness.
+   Exercises: solutions of SADS are the infinite subsets of A and A*; ω-model of
+   WKL₀ + SADS of low sets.
+5. **Coded Scott ideals** (`coded-ideals`): `def-coded-family`, `prop-no-self-code`;
    `thm-scott-class` (explicit Π⁰₁(X) class of codes, index functions join, red, pa;
    figure `scott-code`); `lem-scott-paths`; `cor-scott-codes` (PA sets compute codes; low
-   codes); `prop-low-code-questions`. Exercises: cone-avoiding code; codes of jump ideals;
-   ∅′ names paths in a low code.
-5. **Beyond the halting set** (`beyond-zero-jump`): `lem-pa-choice`,
+   codes). Exercises: cone-avoiding code; codes of jump ideals.
+6. **Uniform lowness** (`uniform-lowness`, new 2026-11-13): lowness indices,
+   `prop-uniform-low-basis`; `prop-low-code-questions`; comparison of lowness indices
+   and low codes (joins). Exercises: `exr-lowness-index-reduction`; ∅′ names paths in a
+   low code.
+7. **Weakly low bases** (`weakly-low-bases`, new 2026-11-13): `lem-pa-choice`,
    `ex-pa-choice-infinite`, `lem-pa-between` (Simpson's density);
-   `def-weakly-low-basis`, `prop-weakly-low-properties` (invariance, low₂, jump cone
-   avoidance), `thm-weakly-low-model`; `thm-coh-weakly-low` (Jockusch–Stephan, forcing
-   proof of CJS), `cor-coh-weakly-not-low`. Exercises: converse of the choice lemma;
-   r-cohesive sets; products.
-6. **The pigeonhole principle for Δ⁰₂ sets** (`cjs-theorem`): `thm-d22-weakly-low`
+   `def-weakly-low-basis`, `ex-weakly-low-problems`, `prop-weakly-low-properties`
+   (invariance, low₂, jump cone avoidance), `thm-weakly-low-model`. Exercises: converse
+   of the choice lemma; products.
+8. **Weakly low cohesive sets** (`beyond-zero-jump`): `thm-coh-weakly-low`
+   (Jockusch–Stephan, forcing proof of CJS), `cor-coh-weakly-not-low`. Exercise:
+   r-cohesive sets.
+9. **The pigeonhole principle for Δ⁰₂ sets** (`cjs-theorem`): `thm-d22-weakly-low`
    (CJS), `lem-d22-infinity`, `lem-d22-decision`; Lachlan's disjunction (figure
    `side-grid`); relativization. Exercise: Hirschfeldt's low reservoirs.
-7. **Low₂ solutions of RT²₂** (`ramsey-pairs-low2`): `thm-rt22-weakly-low`,
+10. **Low₂ solutions of RT²₂** (`ramsey-pairs-low2`): `thm-rt22-weakly-low`,
    `cor-rt22-low2`; `thm-dhls` (admitted). Exercises: WKL₀ + RT²₂ with low₂ sets;
    RT²_k.
 
 ## 4. Proof techniques
 
 - **Codes of conditions** and **effective genericity** (oracle computes each code from
-  the previous one): lessons 2–7.
+  the previous one): lessons 2–10.
 - **Forcing the jump** (decision of Φ^G_e(e) with a recorded bit): lesson 2, used in
-  lessons 3, 5, 6.
+  lessons 3, 8, 9.
 - **Decision on all members versus search for an extension** (Jockusch–Soare versus
   Cohen/Mathias): lesson 2.
 - **Choice between two Σ⁰₂ alternatives, one of which is true** (∅′ searches for a
   witness of either): lesson 3 (hyperimmunity makes the alternatives exhaustive).
 - **Disjoint strong arrays from a failed search** (pushing blocks to infinity): lesson 3.
-- **Self-reference by diagonal on columns** (no ideal contains its code): lesson 4.
+- **Self-reference by diagonal on columns** (no ideal contains its code): lesson 5.
 - **Π⁰₁ class of codes with clauses referring to earlier columns** (non-emptiness by
-  recursion, membership by universal clauses): lesson 4.
-- **Lowness of a code transfers questions about members to ∅′**: lessons 4 and 6.
+  recursion, membership by universal clauses): lesson 5.
+- **Lowness of a code transfers questions about members to ∅′**: lessons 6 and 9.
 - **Choice of a true Π⁰₂ statement by a PA set over ∅′** (separating ∅′-c.e. sets):
-  lessons 5, 6.
-- **Density of PA degrees** to iterate weakly low bases: lessons 5, 7.
+  lessons 7, 8, 9.
+- **Density of PA degrees** to iterate weakly low bases: lessons 7, 10.
 - **Disjunctive forcing over a Scott ideal, effectivized**, and **Lachlan's disjunction**
-  with a non-uniform final side: lesson 6.
-- **Preservation of a weakness property to build ω-models**: lessons 1, 5, 7.
+  with a non-uniform final side: lesson 9.
+- **Preservation of a weakness property to build ω-models**: lessons 1, 4, 7, 10.
 
 ## 5. Choices
 
@@ -126,19 +132,19 @@ deciding the jump), `thm-scott-class`/`cor-scott-codes`/`prop-low-code-questions
     in `arithmetic-hierarchy/codes`: cited, not redone. The monograph's section
     *Indices* is therefore replaced by the codes of conditions (lesson 2).
   - The low basis theorem and its forcing form are in `pi01-classes/basis-theorems` and
-    `effective-forcing/cohen-forcing` (`ex-low-basis-forcing`): lesson 2 revisits it
-    only through the uniform version with lowness indices (`prop-uniform-low-basis`),
+    `effective-forcing/generic-sets` (`ex-low-basis-forcing`): lesson 2 revisits it
+    only through the uniform version with lowness indices (`prop-uniform-low-basis`, now in lesson 6),
     which is new to the platform.
   - Low and high sets, low generic sets: `turing-degrees/low-and-high`, cited.
   - COH: `ramsey-theorem/cohesiveness` proves the low₂ bound through the decision class
-    and Friedberg jump inversion. Lesson 5 gives the direct forcing proof (Cholak,
+    and Friedberg jump inversion. Lesson 8 gives the direct forcing proof (Cholak,
     Jockusch, Slaman), under a new label (`thm-coh-weakly-low`) since it is stated in
     the relativized weakly low form that the course needs, and since it is the warm-up
-    for lesson 6.
+    for lesson 9.
   - Spector's exact pairs (monograph, *Coding ideals*) are in `degree-structure`:
-    mentioned in the notes of lesson 4 only.
+    mentioned in the notes of lesson 5 only.
   - Scott's theorem in the non-coded form (`thm-scott-pa`) and the low Scott ideal
-    (`thm-low-scott`) are cited; lesson 4 gives the coded form.
+    (`thm-low-scott`) are cited; lesson 5 gives the coded form.
 - **The Scott class with explicit clauses.** The monograph uses an enumeration of
   primitive recursive tree functionals and the index ⟨a, b, c⟩, which can refer to
   itself (⟨0,0,0⟩ = 0 would require a column to be PA relative to itself). The course
@@ -149,7 +155,7 @@ deciding the jump), `thm-scott-class`/`cor-scott-codes`/`prop-low-code-questions
 - **The CJS theorem with a low code (monograph) rather than low reservoirs
   (Hirschfeldt, Dzhafarov–Mummert).** The low code fits the track's emphasis on coded
   Turing ideals, and it makes the proof the effective version of the Dzhafarov–Jockusch
-  forcing of `avoidance`. The low reservoir version is an exercise of lesson 6.
+  forcing of `avoidance`. The low reservoir version is an exercise of lesson 9.
 - **Single-jump control only.** The double-jump control proof of CJS is mentioned, not
   given: the track has later courses on second-jump control, and the single-jump proof
   is the stronger statement.
@@ -157,16 +163,23 @@ deciding the jump), `thm-scott-class`/`cor-scott-codes`/`prop-low-code-questions
   admitted, since it is used twice (invariance of weakly low bases, RT²₂).
 - **Choice lemma proved from separating sets** (`lem-pa-choice`), with the converse as
   an exercise.
-- **Seven lessons.** The original plan had six; the final lesson on CJS exceeded 3700
-  words and was split into the D²₂ theorem (lesson 6) and its combination with COH and
-  the limits (lesson 7).
+- **Ten lessons.** The original plan had six; the final lesson on CJS exceeded 3700
+  words and was split into the D²₂ theorem and its combination with COH and the limits.
+  The polishing pass of 2026-11-13 measured the lessons (Markdown body without SVG, 55
+  words per minute) and found five lessons above 45 minutes; it split them at natural
+  points: SADS out of `weak-preservation`; lowness indices (out of `forcing-the-jump`)
+  and questions about low codes (out of `coded-ideals`) into `uniform-lowness`, placed
+  after `coded-ideals`, since both are ways of naming many low sets uniformly; the PA
+  choice and weakly low bases (out of `beyond-zero-jump`) into `weakly-low-bases`,
+  placed before it so that later courses citing `beyond-zero-jump` keep every label in
+  their prerequisites. Labels were kept.
 - **Admitted.** The theorem of Downey, Hirschfeldt, Lempp and Solomon (`thm-dhls`):
   infinite injury priority construction, outside the scope; it is also mentioned in
   `ramsey-theorem/seetapun`. The results of Chong–Slaman–Yang and Monin–Patey are only
   mentioned.
 - **Excluded.**
   - The exercise of the monograph adapting Seetapun's direct forcing to a weakly low
-    basis for RT²₂ (it would duplicate lesson 6 with the Seetapun forcing of
+    basis for RT²₂ (it would duplicate lesson 9 with the Seetapun forcing of
     `avoidance/seetapun-forcing`).
   - Superlowness beyond the remark already in `pi01-classes` (`rem-superlow`).
   - Mileti's theorem (no universal instance of RT²₂/SRT²₂) and the jump-universal
@@ -215,45 +228,51 @@ deciding the jump), `thm-scott-class`/`cor-scott-codes`/`prop-low-code-questions
    failure (J, COH, RT²₂/D²₂); quiz on why lowness over Z; why Δ⁰₂ does not iterate;
    second jump for free.
 2. `forcing-the-jump`: codes as a choice that determines what an oracle can compute;
-   figure `jump-sequence`; quizzes on the recorded bit and on Δ⁰₁ versus Σ⁰₁ indices;
-   the obstacle for COH located in the dense sets; lowness indices and their limits
-   (uniform indices do not make the join low).
+   figure `jump-sequence`; quizzes on the recorded bit, on the role of S_n, on where
+   ∅′ is needed for Mathias forcing; the obstacle for COH located in the dense sets.
 3. `weak-preservation`: counterexample first (prefix set), then the dichotomy with
    figure `hyperimmune-blocks`; quiz on the zeros pushing blocks to infinity; both
-   hypotheses needed; SADS as application, with its sharpness.
-4. `coded-ideals`: diagonal argument; the class of codes with figure `scott-code`;
-   quizzes on the restricted clause and on the order of columns; low code versus ideal
-   of low sets.
-5. `beyond-zero-jump`: PA over ∅′ as "barely more than ∅′"; choice lemma with the
-   DNC analogy; density; weakly low bases and their consequences; COH as the model
-   proof, with quizzes on where P is used.
-6. `cjs-theorem`: the Dzhafarov–Jockusch question effectivized; quizzes on all
+   hypotheses needed.
+4. `stable-linear-orders`: the case distinction that produces hyperimmunity; sharpness.
+5. `coded-ideals`: diagonal argument; the class of codes with figure `scott-code`;
+   quizzes on the restricted clause and on the order of columns.
+6. `uniform-lowness`: lowness indices and their limits (uniform indices do not make the
+   join low); low codes; comparison through joins.
+7. `weakly-low-bases`: PA over ∅′ as "barely more than ∅′"; choice lemma with the DNC
+   analogy; density; examples; consequences.
+8. `beyond-zero-jump`: COH as the model proof, with quizzes on where P is used.
+9. `cjs-theorem`: the Dzhafarov–Jockusch question effectivized; quizzes on all
    partitions, on the Scott property and on the role of P; Lachlan's disjunction with
    figure `side-grid`.
-7. `ramsey-pairs-low2`: combination through the density of PA degrees; quizzes on Q and
-   on relativization; limits.
+10. `ramsey-pairs-low2`: combination through the density of PA degrees; quizzes on Q
+   and on relativization; limits.
 
 Figures are generated by `scripts/figures/lowness.py` (deterministic).
 
-## 8. Sources, lesson by lesson (checked 2026-11-12)
+## 8. Sources, lesson by lesson (checked 2026-11-12, again 2026-11-13)
 
 1. Monograph, *Motivation*; Dzhafarov–Mummert Definition 3.6.2; Hirschfeldt
    Proposition 4.27, Theorem 6.37; Herrmann JSL 66 (2001) 923–934; Jockusch–Soare TAMS
    173 (1972); Downey–Hirschfeldt–Lempp–Solomon JSL 66 (2001) 1371–1381.
-2. Monograph, *Indices*, *Basic constructions*; Hirschfeldt Proposition 2.7, Exercise
-   3.12, proof of Theorem 6.44; Dzhafarov–Mummert Theorem 7.5.6, Lemma 8.5.11.
+2. Monograph, *Indices*, *Basic constructions*; Hirschfeldt Proposition 2.7, proof of
+   Theorem 6.44; Dzhafarov–Mummert Theorem 7.5.6, Lemma 8.5.11 (Claim 1).
 3. Monograph, *Weak preservation*; Hirschfeldt–Jockusch–Kjos-Hanssen–Lempp–Slaman (2008),
-   Computational Prospects of Infinity II, 143–161 (credited with Jockusch's theorem by
-   the monograph); Hirschfeldt–Shore JSL 72 (2007) 171–206; Hirschfeldt Theorem 9.19,
-   Exercises 9.6, 9.20, Theorem 9.11.
-4. Monograph, *Coding ideals*; Scott (1962), Proc. Symp. Pure Math. 5, 117–121; Simpson
+   Computational Prospects of Infinity II, 143–161.
+4. Hirschfeldt–Shore JSL 72 (2007) 171–206; Hirschfeldt Theorems 9.11, 9.19, Exercises
+   9.6, 9.12, 9.20; Dzhafarov–Mummert Theorem 9.2.19; monograph exercise `sads-low`.
+5. Monograph, *Coding ideals*; Scott (1962), Proc. Symp. Pure Math. 5, 117–121; Simpson
    VII.2, VIII.2.
-5. Monograph, *Beyond ∅′*, *Ramsey's theorem for pairs*; Jockusch–Stephan MLQ 39 (1993)
-   515–530; Cholak–Jockusch–Slaman JSL 66 (2001) 1–55; Hirschfeldt Theorems 4.26, 6.44;
-   Dzhafarov–Mummert Theorem 2.8.25, Proposition 2.8.26, Theorem 7.5.15, Lemma 8.5.11.
-6. Monograph, *Ramsey's theorem for pairs*; CJS (2001); Dzhafarov–Jockusch JSL 74 (2009);
+6. Hirschfeldt Exercise 3.12, proof of Theorem 6.57; Dzhafarov–Mummert Lemma 8.5.12;
+   Simpson VIII.2.9, VIII.2.17.
+7. Monograph, *Beyond ∅′*; Hirschfeldt Theorem 4.26, Proposition 4.27, discussion before
+   Theorem 6.44; Dzhafarov–Mummert Theorem 2.8.25, Proposition 2.8.26; Simpson, Handbook
+   of Mathematical Logic (1977) 631–652 (pages as in Dzhafarov–Mummert; Hirschfeldt's
+   bibliography gives other pages).
+8. Jockusch–Stephan MLQ 39 (1993) 515–530; CJS JSL 66 (2001) 1–55; Hirschfeldt Theorem
+   6.44; Dzhafarov–Mummert Theorem 7.5.15, Lemma 8.5.11.
+9. Monograph, *Ramsey's theorem for pairs*; CJS (2001); Dzhafarov–Jockusch JSL 74 (2009);
    Hirschfeldt Theorems 6.52, 6.57; Dzhafarov–Mummert Lemma 8.5.12.
-7. CJS (2001); Hirschfeldt Theorem 6.53, Corollary 6.58, Theorem 6.37;
+10. CJS (2001); Hirschfeldt Theorem 6.53, Corollary 6.58, Theorem 6.37;
    Dzhafarov–Mummert Theorem 8.5.8, Corollary 8.5.9, Theorem 8.5.10; Chong–Slaman–Yang
    JAMS 27 (2014); Monin–Patey Adv. Math. 389 (2021).
 
@@ -273,16 +292,40 @@ Checked on 2026-11-12 (web search):
 ## 10. Open points
 
 - The attribution of `thm-cohyperimmune-low` to Jockusch follows the monograph, which
-  cites Hirschfeldt–Jockusch–Kjos-Hanssen–Lempp–Slaman (2008); the paper was not
-  checked.
-- Durations: lessons 2–6 have 2500–3150 counted words (much of it mathematics) and are
-  set to 45 minutes, the convention of `effective-forcing` and `avoidance`.
+  cites Hirschfeldt–Jockusch–Kjos-Hanssen–Lempp–Slaman (2008); the bibliographic data of
+  the paper were checked (2026-11-13), the attribution inside it was not.
+- Ten lessons, slightly more than the nine suggested; merging any two of the new short
+  lessons (`stable-linear-orders`, `beyond-zero-jump`) with a neighbor would exceed 45
+  minutes.
 - The co-hyperimmune lemma could be stated as an abstract theorem on "∅′-decidable
   forcing questions"; the course keeps it concrete.
 - Hirschfeldt's Exercise 3.12 is stated for low trees; `prop-uniform-low-basis` is the
   equivalent version for trees computable in a low set.
+- Outside the course: `reducibilities/wkl-reductions` says that a {0,1}-valued
+  function DNC relative to Z need not compute Z; it always does (`ex-pa-relative`).
+  `separation-design/erdos-moser-hyperimmunities` links to `lowness/weak-preservation`
+  for ascending sequences, now in `lowness/stable-linear-orders`.
 
 ## 11. History
 
 - **2026-11-12.** Course created: seven lessons, four figures
   (`scripts/figures/lowness.py`), design log.
+- **2026-11-13: polishing pass.** Mathematics: the Mathias quiz of `forcing-the-jump`
+  claimed that a Σ⁰₁ index of the reservoir would not make the question Σ⁰₁ (false:
+  compatibility only needs positive membership), replaced; the quiz on `lem-pa-between`
+  claimed that a {0,1}-valued DNC function relative to X need not compute X (false),
+  replaced; strict inequality in the disjoint-array argument of
+  `lem-cohyperimmune-dichotomy` (fails for σ empty) corrected to ≥; the case analysis of
+  `thm-sads-low` made exhaustive (finite halves); "strictly weaker than RT²₂" in
+  `low-bases` corrected to "does not imply"; the claim that the choice of reservoirs
+  "requires" a PA oracle stated precisely; the description of codes of the ideal of
+  computable sets corrected; Tennenbaum–Denisov reference completed (Exercise 9.12 for
+  type ω + ω*). Figures: `jump-sequence` regenerated to follow the order of the proof
+  (dense set, then decision); `side-grid` viewBox enlarged (last line was clipped).
+  Structure: ten lessons (see Choices), durations set from word counts. Pedagogy:
+  `ex-weakly-low-problems`, comparison of lowness indices and low codes, two SADS
+  exercises.
+  Track conventions applied after the polishing of `effective-forcing`: oracle order
+  Z ⊕ G (base oracle first) throughout; Mathias "stem"; ⊩ and ?⊢ notation, with the
+  Mathias question cited from `prop-mathias-question`; prerequisite
+  `effective-forcing/generic-sets` for effective genericity.

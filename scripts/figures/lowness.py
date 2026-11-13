@@ -21,10 +21,12 @@ def sub(base, index, size=15, cls='math'):
 
 
 # ---------------------------------------------------------------- an effective sequence of conditions
-steps = [('c₀', 'start'), ('c₁', 'prefix'), ('c₂', 'decide e = 0'), ('c₃', 'dense set D₀'),
-         ('c₄', 'prefix'), ('c₅', 'decide e = 1'), ('c₆', 'dense set D₁')]
+# The order of the proof of thm-jump-control: c_{2i+1} meets D_i, c_{2i+2} decides e = i.
+steps = [('c₀', 'start'), ('c₁', 'dense set D₀'), ('c₂', 'decide e = 0'), ('c₃', 'dense set D₁'),
+         ('c₄', 'decide e = 1'), ('c₅', 'dense set D₂'), ('c₆', 'decide e = 2')]
+bits = {'0': '1', '1': '0', '2': '1'}   # an arbitrary record of decisions
 W, GAP, X0 = 66, 16, 18
-s = ['<svg class="fig" viewBox="0 0 600 214" width="600" role="img" aria-label="A decreasing sequence of codes of conditions computed by the oracle A; the steps alternate between prefixes of the generic set, decisions of the jump and dense sets; the decisions are recorded as bits">']
+s = ['<svg class="fig" viewBox="0 0 600 214" width="600" role="img" aria-label="A decreasing sequence of codes of conditions computed by the oracle A; the steps alternate between dense sets, among which the sets fixing prefixes of the generic set, and decisions of the jump; the decisions are recorded as bits">']
 s.append('<defs>' + marker('lw-js-arr', 'muted-fill') + '</defs>')
 for k, (name, role) in enumerate(steps):
     x = X0 + k * (W + GAP)
@@ -36,7 +38,7 @@ for k, (name, role) in enumerate(steps):
         s.append(f'<line x1="{x - GAP + 2}" y1="60" x2="{x - 2}" y2="60" class="muted-stroke" stroke-width="1.2" marker-end="url(#lw-js-arr)"/>')
     if role.startswith('decide'):
         e = role[-1]
-        bit = '1' if e == '0' else '0'
+        bit = bits[e]
         s.append(f'<line x1="{x + W / 2}" y1="108" x2="{x + W / 2}" y2="140" class="accent-stroke" stroke-width="1.2" marker-end="url(#lw-js-arr)"/>')
         s.append(f'<text x="{x + W / 2}" y="158" text-anchor="middle" class="label">bit b = {bit}</text>')
 s.append(f'<text x="300" y="24" text-anchor="middle" class="label">each code is computed by A from the previous one</text>')
@@ -144,7 +146,7 @@ for e0 in range(R):
 for e1 in range(C):
     side[(2, e1)] = 1                # row e0 = 2: always side 1
 X0, Y0, CS = 150, 40, 30
-s = ['<svg class="fig" viewBox="0 0 600 262" width="600" role="img" aria-label="A table of the sides on which the pairs of indices are decided; the row of the index 2 contains only the side 1, so every index of side 1 is decided on side 1">']
+s = ['<svg class="fig" viewBox="0 0 600 282" width="600" role="img" aria-label="A table of the sides on which the pairs of indices are decided; the row of the index 2 contains only the side 1, so every index of side 1 is decided on side 1">']
 s.append(f'<text x="{X0 + C * CS / 2}" y="{Y0 - 22}" text-anchor="middle" class="label">index e₁ of side 1</text>')
 s.append(f'<text x="{X0 - 46}" y="{Y0 + R * CS / 2}" text-anchor="middle" class="label" transform="rotate(-90 {X0 - 46} {Y0 + R * CS / 2})">index e₀ of side 0</text>')
 for e1 in range(C):

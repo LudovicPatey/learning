@@ -1,7 +1,7 @@
 ---
 title: Low bases for problems
 summary: A problem admits a low basis if every instance has a solution that is low relative to the instance; such problems have ω-models consisting of low sets, which separates them from the jump, from cohesiveness and from Ramsey's theorem for pairs; low solutions also control the second jump.
-duration: 40
+duration: 45
 prerequisites: [avoidance/avoidance-properties, effective-forcing/mathias-forcing, reducibilities/preservation, ramsey-theorem/cohesiveness, ramsey-theorem/triples, turing-degrees/low-and-high, arithmetic-hierarchy/post-theorem]
 ---
 
@@ -14,14 +14,14 @@ Effectiveness properties are harder to establish than genericity properties, sin
 Recall that a problem $\mathsf P$ is a class of instances, each with a class of solutions (:ref{#def-problem}).
 
 :::definition{#def-low-basis-problem}
-A problem $\mathsf P$ **admits a low basis** if for every set $Z$ and every $Z$-computable instance $X$ of $\mathsf P$, there is a solution $Y$ to $X$ with $(Y \oplus Z)' \leq_T Z'$. Such a $Y$ is said to be **low relative to $Z$**, or **low over $Z$**.
+A problem $\mathsf P$ **admits a low basis** if for every set $Z$ and every $Z$-computable instance $X$ of $\mathsf P$, there is a solution $Y$ to $X$ with $(Z \oplus Y)' \leq_T Z'$. Such a $Y$ is said to be **low relative to $Z$**, or **low over $Z$**.
 :::
 
-The definition is relativized, as for cone avoidance (:ref{#def-cone-avoidance-problem}). For $Z = \emptyset$, it says that every computable instance has a low solution. Dzhafarov and Mummert say that $\mathsf P$ **admits low solutions** (their Definition 3.6.2). Lowness relative to $Z$ is not the same as lowness of $Y$: the condition $(Y \oplus Z)' \leq_T Z'$ concerns the join, and implies that $Y$ is low only when $Z$ is.
+The definition is relativized, as for cone avoidance (:ref{#def-cone-avoidance-problem}). For $Z = \emptyset$, it says that every computable instance has a low solution. Dzhafarov and Mummert say that $\mathsf P$ **admits low solutions** (their Definition 3.6.2). Lowness relative to $Z$ is not the same as lowness of $Y$: the condition $(Z \oplus Y)' \leq_T Z'$ concerns the join, and implies that $Y$ is low only when $Z$ is.
 
 :::example{#ex-low-basis-problems}
 1. **$\mathsf{WKL}$** admits a low basis: this is the low basis theorem (:ref{#thm-low-basis}) relativized to $Z$, applied to the class of paths of a $Z$-computable infinite binary tree.
-2. **$\mathsf{RT}^1_2$** admits a low basis: a $Z$-computable set $A$ or its complement is an infinite $Z$-computable solution $Y$, and $(Y \oplus Z)' \equiv_T Z'$.
+2. **$\mathsf{RT}^1_2$** admits a low basis: a $Z$-computable set $A$ or its complement is an infinite $Z$-computable solution $Y$, and $(Z \oplus Y)' \equiv_T Z'$.
 3. **The jump $\mathsf J$** does not: the computable instance $\emptyset$ has the only solution $\emptyset'$, which is not low (:ref{#prop-low-basic}).
 4. **$\mathsf{COH}$** does not: some computable sequence of sets has no low cohesive set (:ref{#prop-coh-no-low}).
 5. **$\mathsf{RT}^2_2$** does not: some computable coloring of pairs has no infinite $\Delta^0_2$ homogeneous set (:ref{#thm-jockusch-no-delta2}), and low sets are $\Delta^0_2$.
@@ -32,14 +32,14 @@ Items 4–6 show that the property is not about growth or coding: $\mathsf{COH}$
 
 ## Models of low sets
 
-The relativized definition is what makes low bases iterate. The class of low sets is closed downward under Turing reducibility, but not under joins: there are low sets $A$ and $B$ with $A \oplus B \equiv_T \emptyset'$ (see :ref{to="turing-degrees/low-and-high"}). Adding to a low set $Z$ a solution $Y$ that is low but not low over $Z$ may thus lead out of the low sets. Lowness over $Z$ prevents this: if $(Y \oplus Z)' \leq_T Z'$ and $Z' \leq_T \emptyset'$, then $Z \oplus Y$ is low.
+The relativized definition is what makes low bases iterate. The class of low sets is closed downward under Turing reducibility, but not under joins: there are low sets $A$ and $B$ with $A \oplus B \equiv_T \emptyset'$ (see :ref{to="turing-degrees/low-and-high"}). Adding to a low set $Z$ a solution $Y$ that is low but not low over $Z$ may thus lead out of the low sets. Lowness over $Z$ prevents this: if $(Z \oplus Y)' \leq_T Z'$ and $Z' \leq_T \emptyset'$, then $Z \oplus Y$ is low.
 
 :::theorem{#thm-low-basis-model}
 Let $\mathsf P$ be a problem that admits a low basis. For every low set $Z$, there is a Turing ideal containing $Z$, satisfying $\mathsf P$, all of whose members are low.
 :::
 
 :::proof{of=thm-low-basis-model}
-Let $\mathcal W$ be the class of low sets. It is a weakness property in the sense of :ref{#def-weakness}, since it is closed downward under Turing reducibility (:ref{#prop-low-basic}). The problem $\mathsf P$ preserves $\mathcal W$: let $Z \in \mathcal W$ and let $X \leq_T Z$ be an instance. By the low basis for $\mathsf P$, $X$ has a solution $Y$ with $(Y \oplus Z)' \leq_T Z' \leq_T \emptyset'$, so $Z \oplus Y \in \mathcal W$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W$ containing $Z$ and satisfying $\mathsf P$.
+Let $\mathcal W$ be the class of low sets. It is a weakness property in the sense of :ref{#def-weakness}, since it is closed downward under Turing reducibility (:ref{#prop-low-basic}). The problem $\mathsf P$ preserves $\mathcal W$: let $Z \in \mathcal W$ and let $X \leq_T Z$ be an instance. By the low basis for $\mathsf P$, $X$ has a solution $Y$ with $(Z \oplus Y)' \leq_T Z' \leq_T \emptyset'$, so $Z \oplus Y \in \mathcal W$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W$ containing $Z$ and satisfying $\mathsf P$.
 :::
 
 For $\mathsf P = \mathsf{WKL}$, this is :ref{#thm-low-scott}. When $\mathsf P$ is a $\Pi^1_2$ statement of second-order arithmetic, read as a problem, the ideal is an ω-model of $\mathsf{RCA}_0 + \mathsf P$ consisting of low sets, and in particular of $\Delta^0_2$ sets.
@@ -59,7 +59,7 @@ In the proof of :ref{#thm-low-basis-model}, why would it not suffice that every 
 
 Where is the hypothesis that $Z$ is low used?
 
-- [x] To start the construction inside the class $\mathcal W$ of low sets; lowness of every later set then follows from $(Y \oplus Z)' \leq_T Z' \leq_T \emptyset'$.
+- [x] To start the construction inside the class $\mathcal W$ of low sets; lowness of every later set then follows from $(Z \oplus Y)' \leq_T Z' \leq_T \emptyset'$.
 - [ ] To ensure that the instances of $\mathsf P$ in the ideal are computable.
 
   They are computable in members of the ideal, not computable.
@@ -76,7 +76,7 @@ Let $\mathsf P$ be a problem that admits a low basis. Then $\mathsf J$, $\mathsf
 By the proof of :ref{#thm-low-basis-model}, $\mathsf P$ preserves the class $\mathcal W$ of low sets. Each of the three problems has a computable instance, hence an instance computable in $\emptyset \in \mathcal W$, with no low solution, by items 3–5 of :ref{#ex-low-basis-problems}; so none of them preserves $\mathcal W$. Apply :ref{#thm-preservation-separation}. For the second statement, the ideal of :ref{#thm-low-basis-model} with $Z = \emptyset$ is an ω-model of $\mathsf{RCA}_0 + \mathsf P$ that contains the computable instances and none of their solutions.
 :::
 
-The separation from $\mathsf{RT}^2_2$ is the reason why low bases are useful in the study of Ramsey-type theorems: a problem with a low basis is strictly weaker than $\mathsf{RT}^2_2$ in ω-models, and the same holds for any problem of which some computable instance has no $\Delta^0_2$ solution, such as the chain-antichain principle (Herrmann, 2001). Cone avoidance gives only the separation from $\mathsf{ACA}_0$.
+The separation from $\mathsf{RT}^2_2$ is the reason why low bases are useful in the study of Ramsey-type theorems: a problem with a low basis does not imply $\mathsf{RT}^2_2$ in ω-models, nor any problem of which some computable instance has no $\Delta^0_2$ solution, such as the chain–antichain principle (Herrmann, 2001). Cone avoidance gives only the separation from $\mathsf{ACA}_0$.
 
 The definition uses lowness rather than the weaker property of being $\Delta^0_2$. The reason is that $\Delta^0_2$ solutions do not iterate. The jump $\mathsf J$ has $\Delta^0_2$ solutions relative to its instances: $X'$ is $\Delta^0_2(X)$. But a Turing ideal satisfying $\mathsf J$ contains $\emptyset'$, then $\emptyset''$, and so on: all arithmetic sets. A set $\Delta^0_2$ relative to a $\Delta^0_2$ set is $\Delta^0_3$, not $\Delta^0_2$; a set low relative to a low set is low.
 
@@ -85,25 +85,25 @@ The definition uses lowness rather than the weaker property of being $\Delta^0_2
 A low set does not add anything to the arithmetic hierarchy from the second level on.
 
 :::proposition{#prop-low-second-jump}
-Let $Z$ be a set, and $Y$ a set with $(Y \oplus Z)' \leq_T Z'$. For every $n \geq 2$, every $\Sigma^0_n(Y \oplus Z)$ set is $\Sigma^0_n(Z)$. In particular, if $Y$ is low, every $\Sigma^0_n(Y)$ set is $\Sigma^0_n$ for $n \geq 2$.
+Let $Z$ be a set, and $Y$ a set with $(Z \oplus Y)' \leq_T Z'$. For every $n \geq 2$, every $\Sigma^0_n(Z \oplus Y)$ set is $\Sigma^0_n(Z)$. In particular, if $Y$ is low, every $\Sigma^0_n(Y)$ set is $\Sigma^0_n$ for $n \geq 2$.
 :::
 
 :::proof{of=prop-low-second-jump}
-By Post's theorem relativized (:ref{#thm-post}), a set is $\Sigma^0_n(W)$ if and only if it is $\Sigma^0_{n-1}(W')$, for $n \geq 2$ and every $W$. The class $\Sigma^0_{n-1}(W')$ depends only on the Turing degree of $W'$, and is monotone in it. Since $Z' \leq_T (Y \oplus Z)' \leq_T Z'$, the sets $(Y \oplus Z)'$ and $Z'$ have the same degree, so $\Sigma^0_{n-1}((Y \oplus Z)') = \Sigma^0_{n-1}(Z')$, that is, $\Sigma^0_n(Y \oplus Z) = \Sigma^0_n(Z)$.
+By Post's theorem relativized (:ref{#thm-post}), a set is $\Sigma^0_n(W)$ if and only if it is $\Sigma^0_{n-1}(W')$, for $n \geq 2$ and every $W$. The class $\Sigma^0_{n-1}(W')$ depends only on the Turing degree of $W'$, and is monotone in it. Since $Z' \leq_T (Z \oplus Y)' \leq_T Z'$, the sets $(Z \oplus Y)'$ and $Z'$ have the same degree, so $\Sigma^0_{n-1}((Z \oplus Y)') = \Sigma^0_{n-1}(Z')$, that is, $\Sigma^0_n(Z \oplus Y) = \Sigma^0_n(Z)$.
 :::
 
-Consequently, a problem that admits a low basis has every preservation property of the second and higher levels. For instance, for every $Z$ and every set $C$ that is not $\Sigma^0_2(Z)$, every $Z$-computable instance has a solution $Y$ such that $C$ is not $\Sigma^0_2(Y \oplus Z)$; and if $C \not\leq_T Z'$, then $C \not\leq_T (Y \oplus Z)'$. Properties of this kind, which control the jump of the solution rather than the solution itself, are the subject of the later course on jump cone avoidance; when a problem admits a low basis, they come for free. This is a second reason to prefer a low basis when one exists: controlling the second jump of a generic set directly is much harder than controlling the first one, as the highness of Mathias generic sets shows (:ref{#prop-mathias-dominant}).
+Consequently, a problem that admits a low basis has every preservation property of the second and higher levels. For instance, for every $Z$ and every set $C$ that is not $\Sigma^0_2(Z)$, every $Z$-computable instance has a solution $Y$ such that $C$ is not $\Sigma^0_2(Z \oplus Y)$; and if $C \not\leq_T Z'$, then $C \not\leq_T (Z \oplus Y)'$. Properties of this kind, which control the jump of the solution rather than the solution itself, are the subject of the later course on jump cone avoidance; when a problem admits a low basis, they come for free. This is a second reason to prefer a low basis when one exists: controlling the second jump of a generic set directly is much harder than controlling the first one, as the highness of Mathias generic sets shows (:ref{#prop-mathias-dominant}).
 
 :::quiz[the second jump]
 In the proof of :ref{#prop-low-second-jump}, why does the conclusion fail for $n = 1$?
 
-- [x] Because Post's theorem expresses $\Sigma^0_1(Y \oplus Z)$ through the oracle $Y \oplus Z$ itself, not through its jump; a low set $Y$ can have $\Sigma^0_1(Y)$ sets that are not $\Sigma^0_1$, for instance $Y$ itself when $Y$ is not c.e.
+- [x] Because Post's theorem expresses $\Sigma^0_1(Z \oplus Y)$ through the oracle $Z \oplus Y$ itself, not through its jump; a low set $Y$ can have $\Sigma^0_1(Y)$ sets that are not $\Sigma^0_1$, for instance $Y$ itself when $Y$ is not c.e.
 - [ ] Because low sets are not $\Sigma^0_1$.
 
   Some are, for instance the computable sets and the low c.e. sets.
-- [ ] Because the jump of $Y \oplus Z$ is not computable in $Z'$.
+- [ ] Because the jump of $Z \oplus Y$ is not computable in $Z'$.
 
-  It is, by hypothesis; the issue is at the level of $Y \oplus Z$ itself.
+  It is, by hypothesis; the issue is at the level of $Z \oplus Y$ itself.
 :::
 
 ## Exercises
@@ -112,15 +112,15 @@ In the proof of :ref{#prop-low-second-jump}, why does the conclusion fail for $n
 Let $\mathsf Q$ be the problem whose instances are all sets $X$, where the only solution to a computable $X$ is $\emptyset$, and the only solution to a non-computable $X$ is $X'$. Show that every computable instance of $\mathsf Q$ has a low solution, but that $\mathsf Q$ does not admit a low basis.
 
 :::solution
-A computable instance has the solution $\emptyset$, which is low. Let $Z$ be a non-computable low set, for instance a 1-generic set computable in $\emptyset'$ (:ref{#cor-low-exists}). The instance $Z$ is $Z$-computable, and its only solution is $Y = Z'$. Then $(Y \oplus Z)' \equiv_T Z'' \equiv_T \emptyset''$, while $Z' \equiv_T \emptyset'$, and $\emptyset'' \not\leq_T \emptyset'$. So $Z$ has no solution low over $Z$. The example shows that the unrelativized property is not enough for :ref{#thm-low-basis-model}: the ideal must contain $Z$, and then a solution to the instance $Z$.
+A computable instance has the solution $\emptyset$, which is low. Let $Z$ be a non-computable low set, for instance a 1-generic set computable in $\emptyset'$ (:ref{#cor-low-exists}). The instance $Z$ is $Z$-computable, and its only solution is $Y = Z'$. Then $(Z \oplus Y)' \equiv_T Z'' \equiv_T \emptyset''$, while $Z' \equiv_T \emptyset'$, and $\emptyset'' \not\leq_T \emptyset'$. So $Z$ has no solution low over $Z$. The example shows that the unrelativized property is not enough for :ref{#thm-low-basis-model}: the ideal must contain $Z$, and then a solution to the instance $Z$.
 :::
 ::::
 
 ::::exercise{difficulty=1}
-Let $\mathsf P$ admit a low basis, let $Z$ be a set and $C$ a set with $C \not\leq_T Z'$. Show that every $Z$-computable instance of $\mathsf P$ has a solution $Y$ such that $C$ is not $\Delta^0_2(Y \oplus Z)$.
+Let $\mathsf P$ admit a low basis, let $Z$ be a set and $C$ a set with $C \not\leq_T Z'$. Show that every $Z$-computable instance of $\mathsf P$ has a solution $Y$ such that $C$ is not $\Delta^0_2(Z \oplus Y)$.
 
 :::solution
-Let $Y$ be a solution with $(Y \oplus Z)' \leq_T Z'$. If $C$ were $\Delta^0_2(Y \oplus Z)$, it would be computable in $(Y \oplus Z)'$ by Post's theorem relativized, hence in $Z'$, a contradiction.
+Let $Y$ be a solution with $(Z \oplus Y)' \leq_T Z'$. If $C$ were $\Delta^0_2(Z \oplus Y)$, it would be computable in $(Z \oplus Y)'$ by Post's theorem relativized, hence in $Z'$, a contradiction.
 :::
 ::::
 
