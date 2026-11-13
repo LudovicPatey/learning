@@ -28,4 +28,4 @@ objectives:
   - Define product Mathias forcing, its promises and its Σ⁰₂ question, and merge two negative answers by duplicating the reservoirs
   - Build the index sets with branches and their Ramsey property, define meta-conditions and valid parts, and prove that some part is always valid
   - Prove that every Δ⁰₂ set has an infinite subset of itself or of its complement whose jump is not PA relative to ∅′, with weak merging and Liu's valuations one jump up, and deduce that SRT²₂ does not imply COH or RT²₂ on ω-models
-lessons: [jump-pa-avoidance, product-largeness, product-mathias, meta-conditions, meta-questions, delta2-jump-pa, srt22-coh]
+lessons: [jump-pa-avoidance, merging-level-two, product-largeness, product-mathias, merging-by-duplication, meta-conditions, meta-questions, delta2-jump-pa, srt22-coh]

@@ -47,27 +47,36 @@ depend on `separation-design`.
 
 ## 3. Results, lesson by lesson
 
-1. `jump-pa-avoidance`: `def-jump-pa-avoidance`, `prop-jump-pa-model`,
-   `ex-jump-pa-problems` (low bases yes; COH and RT²₂ no; D²₂ yes, forward pointer),
-   `def-jump-merging`, `thm-jump-pa-merging`, `ex-cohen-jump-pa`,
-   `prop-one-reservoir-cohesive`. Exercise: products of problems.
-2. `product-largeness` (*Merging and product largeness*): failure of merging with evolving
-   classes, `lem-no-two-sides`; index sets, `def-product-large`, `ex-product-large`,
-   `lem-product-decreasing`, `lem-product-intersection` (with absorption: 𝒜 ∩ L_W large ⇒
-   W ∈ 𝒜), `lem-product-cover`, `prop-product-complexity`. Figure `product-cover`.
-3. `product-mathias`: slices, `def-product-condition`, `lem-product-basic`,
-   `def-product-promise`, `lem-product-promise`, `def-product-question`,
-   `lem-product-question`, `lem-product-merging` (figure `product-merging`),
-   `thm-product-mathias`.
-4. `meta-conditions`: `thm-d22-jump-pa` (statement), why a product condition may have no
-   valid side, `def-meta-index`, `lem-branch-ramsey` (figure `meta-index`),
-   `def-meta-condition`, `def-meta-extension`, `def-meta-valid`, `lem-meta-valid`.
-5. `meta-questions`: `def-meta-promise`, `lem-meta-promise`, `def-meta-question`,
+1. `jump-pa-avoidance` (30 min): `def-jump-pa-avoidance`, `prop-jump-pa-model`,
+   `ex-jump-pa-problems` (low bases yes; COH and RT²₂ no; D²₂ yes, forward pointer).
+   Exercises: products of problems; the class of sets with jump not PA over ∅′ is not closed
+   under join (Sacks splitting), hence (Z ⊕ Y)′ in the definition.
+2. `merging-level-two` (40 min): translation χ_{e,x,v}, `def-jump-merging`,
+   `thm-jump-pa-merging`, `ex-cohen-jump-pa`, `prop-one-reservoir-cohesive`, failure of
+   merging with one class (`lem-no-two-sides`) and the idea of products. Exercises: the
+   weakly merging version one level up (restored; the form used in lesson 8); computable
+   Mathias forcing has no merging Σ⁰₂-preserving question.
+3. `product-largeness` (45 min): index sets, `def-product-large`, `ex-product-large`,
+   `lem-product-decreasing`, `lem-product-intersection` (with absorption),
+   `lem-product-cover`, `prop-product-complexity`. Figure `product-cover`. Exercises: two
+   classes of pairs; L(𝒜) is the largest partition regular subclass (restored).
+4. `product-mathias` (40 min): slices, `def-product-condition`, `ex-product-extension`
+   (new), `lem-product-basic`, `def-product-promise`, `lem-product-promise`,
+   `def-product-question`, `lem-product-question`. Exercise: transitivity of extension
+   (restored).
+5. `merging-by-duplication` (35 min): `lem-product-merging` (figure `product-merging`, quiz
+   restored), `thm-product-mathias`; statement of `thm-d22-jump-pa` and why a pair of stems
+   over product reservoirs may have no valid side (example made concrete with the first
+   exercise, R = A computable). Exercise: promising G ∩ R and G \ R infinite.
+6. `meta-conditions` (40 min): `def-meta-index`, `lem-branch-ramsey` (figure `meta-index`),
+   `def-meta-condition`, `ex-meta-level-one` (new), `def-meta-extension`, `def-meta-valid`,
+   `lem-meta-valid`.
+7. `meta-questions` (45 min): `def-meta-promise`, `lem-meta-promise`, `def-meta-question`,
    `lem-meta-question`, `lem-meta-merging` (figure `weak-merging`).
-6. `delta2-jump-pa`: `def-meta-requirement`, `lem-meta-requirement`, the construction by
-   tasks, the tree of valid parts and König's lemma (figure `valid-tree`), proof of
-   `thm-d22-jump-pa` including the relativization.
-7. `srt22-coh`: `cor-srt22-jump-pa`, `thm-srt22-not-coh`, comparison table; jump DNC
+8. `delta2-jump-pa` (45 min): `def-meta-requirement`, `lem-meta-requirement`, the
+   construction by tasks, the tree of valid parts and König's lemma (figure `valid-tree`),
+   proof of `thm-d22-jump-pa` including the relativization.
+9. `srt22-coh` (35 min): `cor-srt22-jump-pa`, `thm-srt22-not-coh`, comparison table; jump DNC
    avoidance `def-jump-dnc-avoidance`, `prop-bi-immune-dnc` (HJKLS), `qu-d22-jump-dnc`.
 
 ## 4. Proof techniques
@@ -91,10 +100,11 @@ depend on `separation-design`.
 - **Scope as in `tracks-design.md`** (jump PA avoidance; Mathias forcing and COH, product
   largeness; the Monin–Patey theorem), with the consequences for SRT²₂ and a short part on
   jump DNC avoidance. Complete proof of the main theorem in lessons 2–6.
-- **Seven lessons at ≤ 2475 counted words** (wc -w, excluding the SVG lines): durations
-  45, 45, 45, 45, 45, 40, 35. To fit, the Mathias/COH discussion is split between lesson 1
-  (cohesive generics) and lesson 2 (failure of merging), and several exercises were cut
-  (abstract weakly merging theorem, transitivity, WKL model, L(𝒜)).
+- **Nine lessons at ≤ 2475 counted words** (body words without the SVG lines; the SVG of each
+  figure is on one line, so the count must skip that line only, not a `/<svg/,/<\/svg>/`
+  range). Durations 30, 40, 45, 40, 35, 40, 45, 45, 35. The polishing pass split the old
+  lessons 1 (definition / merging) and 3 (product conditions / merging by duplication) and
+  restored the cut exercises (weakly merging version, transitivity, L(𝒜)) and a quiz.
 - **No projections.** The monograph equips each branch with the projected class π_I(𝒰).
   Here extensions are defined with slices of tuples, promises and validity are stated on
   the whole class 𝒰^{𝕀_n}_S (the classes 𝒱^I depend only on the coordinates in I), and
@@ -107,8 +117,8 @@ depend on `separation-design`.
   the end by König's lemma on the sets of valid parts (the monograph defines paths through
   a generic filter).
 - **Abstract theorem**: the merging version is proved (the monograph leaves it as an
-  exercise); the weakly merging version is not stated separately, its argument appears in
-  `lem-meta-requirement`.
+  exercise); the weakly merging version is an exercise of `merging-level-two`, and its
+  argument appears again in `lem-meta-requirement`.
 - **WKL with cone avoidance and jump PA avoidance** (monograph, Theorem
   `wkl-cone-and-jump-pa-avoiding`): omitted; low bases already give jump PA avoidance for
   WKL, and the combined statement repeats `thm-wkl-two-cones`.
@@ -157,8 +167,9 @@ depend on `separation-design`.
    relative to ∅′" is used.
 7. Separation, comparison table, jump DNC avoidance and open question.
 
-Figures: `scripts/figures/jump-compactness-avoidance.py` (deterministic), pasted by the
-scratch script `paste_jca.py` (one figure block per lesson 2–6).
+Figures: `scripts/figures/jump-compactness-avoidance.py` (deterministic); one figure in
+each of lessons 3, 5, 6, 7, 8 (the script header gives the target files). Rendered and
+checked on 2026-11-13.
 
 ## 8. Sources, lesson by lesson
 
@@ -179,12 +190,24 @@ were not confirmed online and are not given. No simpler proof of the theorem was
 
 ## 10. Open points
 
+- Strong jump PA avoidance of RT¹₂ (arbitrary instances) is not discussed; status not checked.
+- The monograph's thin-set and rainbow (Miller) exercises are not included.
+
 - Volume/article number of Monin–Patey (Adv. Math. 2021) to be added once checked.
 - Miller's theorem on the rainbow Ramsey theorem is quoted from the monograph, not checked.
-- Whether RT¹₂ admits strong jump PA avoidance is not discussed (not checked).
 - `qu-d22-jump-dnc` is open according to the monograph; not checked against recent work.
 
 ## 11. History
 
 - **2026-11-12.** Course created: seven lessons, five figures
   (`scripts/figures/jump-compactness-avoidance.py`), design log.
+- **2026-11-13: polishing pass.** Split into nine lessons (new `merging-level-two` and
+  `merging-by-duplication`; labels unchanged). Corrections: `ex-product-large` item 2 (only
+  one of the two non-constant functions works); `lem-product-basic` item 2 (the extension is
+  not "of the form of item 1"; explicit stem τ); exercise solution of the R-sentences (the
+  class V contains, not equals, the stated class); `srt22-coh`: jump DNC avoidance does not
+  formally imply jump PA avoidance (both hypothesis and conclusion are stronger); unclosed
+  quiz in `product-mathias`; notation clash (cover vs reservoirs) in `lem-meta-valid` item 2;
+  "valid sides" example made concrete; several quiz explanations sharpened. Figures rendered;
+  combining arrow X⃗ removed from `product-merging` (it does not render in sans fonts).
+  Durations recomputed. Added the Jockusch–Stephan correction (MLQ 43, 1997).

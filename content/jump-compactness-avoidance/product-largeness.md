@@ -1,25 +1,11 @@
 ---
-title: Merging and product largeness
-summary: A single large class cannot keep both halves of a split; large classes of tuples of sets, their intersection and cover lemmas, and the complexity of their largeness over a coded Scott ideal.
+title: Product largeness
+summary: Large classes of tuples of sets, where each coordinate chooses its own part of a cover; the decreasing intersection, intersection and cover lemmas; the complexity of largeness over a coded Scott ideal.
 duration: 45
-prerequisites: [jump-pa-avoidance, jump-cone-avoidance/largeness]
+prerequisites: [merging-level-two, jump-cone-avoidance/largeness, big-five/wkl0]
 ---
 
-By :ref{#prop-one-reservoir-cohesive}, a Mathias-type forcing with one reservoir in a partition regular class produces cohesive sets, so by :ref{#thm-jump-pa-merging} it has no merging $\Sigma^0_2$-preserving question for $\Sigma^0_2$ sentences. This lesson locates the failure of merging, and develops the remedy of Monin and Patey: largeness for classes of tuples of sets, the combinatorial tool of the rest of the course.
-
-## Where merging fails
-
-The proposition :ref{#prop-one-reservoir-cohesive} can be read on the forcing question. Fix a Scott ideal $\mathcal M$ coded by $M$, and use the classes $\mathcal U_S$ of :ref{to="jump-cone-avoidance/largeness"}. Suppose that conditions are triples $(\sigma, X, S)$, where $\mathcal U_S$ is a large class of possible future reservoirs, and that a negative answer about a $\Sigma^0_2$ sentence $\exists y\ \psi(y)$ is witnessed by adding to $S$ the indices of the classes $\mathcal V_{\tau, \neg\psi(m)}$ of :ref{to="jump-cone-avoidance/pigeonhole-forcing"}: every future reservoir must allow, for every $m$, an extension of each possible stem satisfying $\neg\psi(m)$. Take a computable set $R$ and the two sentences "$G \cap R$ is finite" and "$G \setminus R$ is finite". The first is $\exists y\ \psi(y)$ with $\psi(y)$ the $\Pi^0_1$ formula "no element $z \geq y$ of $G$ is in $R$", and the intersection over $m$ of the classes $\mathcal V_{\tau, \neg\psi(m)}$ is the class $\mathcal L_R$ of sets meeting $R$ infinitely often. A negative answer for the first sentence restricts the class to $\mathcal U_S \cap \mathcal L_R$, for the second to $\mathcal U_S \cap \mathcal L_{\overline R}$. Both can be large; their intersection never is.
-
-:::lemma{#lem-no-two-sides}
-For every set $R$, no large class is contained in $\mathcal L_R \cap \mathcal L_{\overline R}$.
-:::
-
-:::proof{of=lem-no-two-sides}
-A large class contains $R$ or $\overline R$, by the $2$-cover $R, \overline R$ of $\nat$; but $R \notin \mathcal L_{\overline R}$ and $\overline R \notin \mathcal L_R$.
-:::
-
-So a single large class can promise that $G \cap R$ is infinite, or that $G \setminus R$ is infinite, but not both: two negative answers cannot be merged, and indeed every generic set is cohesive. The remedy is to keep both classes. Instead of one reservoir in $\mathcal U_S \cap \mathcal L_R \cap \mathcal L_{\overline R}$, the condition keeps a pair of reservoirs $(X_0, X_1)$, and a class of pairs, here $(\mathcal U_S \cap \mathcal L_R) \times (\mathcal U_S \cap \mathcal L_{\overline R})$: the first reservoir will provide elements of $R$ and the second elements of $\overline R$, and the stem may use both. The class of pairs must allow splitting both reservoirs along the same cover, which leads to the following notion.
+The previous lesson showed that a single large class of reservoirs cannot carry two negative answers about $\Sigma^0_2$ sentences (:ref{#lem-no-two-sides}), and proposed to keep several reservoirs and a class of tuples of sets. This lesson develops the corresponding notion of largeness, due to Monin and Patey, which is the combinatorial tool of the rest of the course. The definitions follow :ref{to="jump-cone-avoidance/largeness"}, except that each coordinate of a tuple chooses its own part of a cover.
 
 ## Product largeness
 
@@ -36,7 +22,7 @@ For $I$ a singleton this is :ref{#def-large}. The function $j$ chooses a part of
 
 :::example{#ex-product-large}
 1. If $\mathcal A_\nu$ is a large class of sets for each $\nu \in I$, the product $\{ \vec Y : Y_\nu \in \mathcal A_\nu \text{ for all } \nu \}$ is large: choose $j(\nu)$ for each $\nu$ separately. For instance $\mathcal L_{\vec X}$ is large and non-trivial if all $X_\nu$ are infinite.
-2. Let $R$ be infinite and coinfinite and $I = \{0, 1\}$ (strings of length $1$). The class $\mathcal L_R \times \mathcal L_{\overline R}$ is large. It does not contain $(R, R)$ or $(\overline R, \overline R)$: for the cover $R, \overline R$ of $\nat$, only the non-constant function $j$ works.
+2. Let $R$ be infinite and coinfinite and $I = \{0, 1\}$ (strings of length $1$). The class $\mathcal L_R \times \mathcal L_{\overline R}$ is large. It does not contain $(R, R)$, $(\overline R, \overline R)$ or $(\overline R, R)$: for the cover $Y_0 = R$, $Y_1 = \overline R$ of $\nat$, only the function $j$ with $j(0) = 0$ and $j(1) = 1$ works.
 3. The class of pairs $(Y_0, Y_1)$ such that $Y_0 \cap Y_1$ is infinite is large: a finite cover of $\nat$ has an infinite part $Y_t$, and the constant function $t$ works. The class of pairs such that $Y_0 \cap R$ and $Y_0 \setminus R$ are infinite is upward closed and not large, by :ref{#lem-no-two-sides} applied to the first coordinate.
 :::
 
@@ -70,7 +56,7 @@ Let $\mathcal A$ be a non-trivial large class of $I$-tuples. For every finite co
 Suppose not. For each $j : I \to k$ there is a finite cover $\mathcal Z^j$ of $\nat$ with no function $r$ making the tuple of its parts a member of $\mathcal A \cap \mathcal L_{\vec Y_j}$. Let $Q_0, \dots, Q_{l-1}$ be a common refinement of all the covers $\mathcal Z^j$ and of $Y_0, \dots, Y_{k-1}$. By largeness, some $r : I \to l$ has $\vec Q_r \in \mathcal A$. Each $Q_{r(\nu)}$ is infinite, since $\mathcal A$ is non-trivial, and contained in some $Y_{j(\nu)}$; this defines $j : I \to k$. Each $Q_{r(\nu)}$ is also contained in a part $Z^j_{s(\nu)}$ of $\mathcal Z^j$. By upward closure the tuple $\langle Z^j_{s(\nu)} \rangle$ is in $\mathcal A$, and $Z^j_{s(\nu)}$ contains the infinite subset $Q_{r(\nu)}$ of $Y_{j(\nu)}$, so the tuple is in $\mathcal L_{\vec Y_j}$. This contradicts the choice of $\mathcal Z^j$.
 :::
 
-In the terms of :ref{#prop-largest-partition-regular}, the class $\{ \vec W : \mathcal A \cap \mathcal L_{\vec W} \text{ is large} \}$ is a large subclass of $\mathcal A$, by the two lemmas; it plays the role of the largest partition regular subclass. The cover lemma is how a condition will choose, for each reservoir, a part of a cover while keeping the class large.
+By the two lemmas, the class of tuples $\vec W$ such that $\mathcal A \cap \mathcal L_{\vec W}$ is large is a large subclass of $\mathcal A$; it is the largest partition regular subclass, as in :ref{#prop-largest-partition-regular} (last exercise). The cover lemma is how a condition will choose, for each reservoir, a part of a cover while keeping the class large.
 
 :::quiz[product largeness]
 In the proof of :ref{#lem-product-intersection}, why is the cover refined so that each part is contained in or disjoint from each $X_\nu$ and $W_\nu$?
@@ -117,16 +103,26 @@ If $M$ is low and $S$ is $\Delta^0_2$, the property "$\mathcal U^I_S$ is large" 
 ## Exercises
 
 ::::exercise{difficulty=1}
-Let $R$ be infinite and coinfinite and $I = \{0, 1\}$. Decide whether the following classes of pairs $(Y_0, Y_1)$ are large: (a) $Y_0 \cup Y_1$ is infinite; (b) $Y_0 \cap Y_1 \cap R$ and $Y_0 \cap Y_1 \cap \overline R$ are infinite; (c) $Y_0 \cap R$ and $Y_1 \setminus R$ are infinite.
+Let $R$ be infinite and coinfinite and $I = \{0, 1\}$. Decide whether the following classes of pairs $(Y_0, Y_1)$ are large: (a) $Y_0 \cup Y_1$ is infinite; (b) $Y_0 \cap Y_1 \cap R$ and $Y_0 \cap Y_1 \cap \overline R$ are infinite.
 
 :::solution
-(a) Large: a finite cover of $\nat$ has an infinite part $Y_t$, and the constant function $t$ works. (b) Not large: for the cover $R, \overline R$, each coordinate of $\vec Y_j$ is $R$ or $\overline R$, so $Y_0 \cap Y_1$ is $R$, $\overline R$ or empty, and in each case one of the two intersections is empty. The class is upward closed, so this is the only obstruction to check. (c) Large: it is the product $\mathcal L_R \times \mathcal L_{\overline R}$ of :ref{#ex-product-large}. It contains neither $(R, R)$ nor $(\overline R, \overline R)$.
+(a) Large: a finite cover of $\nat$ has an infinite part $Y_t$, and the constant function $t$ works. (b) Not large: for the cover $R, \overline R$, each coordinate of $\vec Y_j$ is $R$ or $\overline R$, so $Y_0 \cap Y_1$ is $R$, $\overline R$ or empty, and in each case one of the two intersections is empty. Compare with the class of :ref{#ex-product-large}, item 2, which asks for $Y_0 \cap R$ and $Y_1 \setminus R$ to be infinite: there the two conditions are carried by different coordinates.
+:::
+::::
+
+::::exercise{difficulty=2}
+Call a class $\mathcal P$ of $I$-tuples **partition regular** if it is non-empty and upward closed, and for every $\vec X \in \mathcal P$ and every finite cover $Y_0, \dots, Y_{k-1}$ of $\nat$, there is $j : I \to k$ with $\langle X_\nu \cap Y_{j(\nu)} : \nu \in I \rangle \in \mathcal P$. Let $\mathcal A$ be a non-trivial large class of $I$-tuples and $\mathcal L(\mathcal A) = \{ \vec X : \mathcal A \cap \mathcal L_{\vec X} \text{ is large} \}$. Show that $\mathcal L(\mathcal A)$ is a partition regular subclass of $\mathcal A$, and that it contains every partition regular subclass of $\mathcal A$.
+
+:::solution
+$\mathcal L(\mathcal A) \subseteq \mathcal A$ by the last statement of :ref{#lem-product-intersection}, and it is upward closed since $\mathcal L_{\vec X} \subseteq \mathcal L_{\vec Y}$ when $X_\nu \subseteq Y_\nu$ for all $\nu$. It is non-empty, since it contains the tuple with all coordinates $\nat$. Let $\vec X \in \mathcal L(\mathcal A)$ and let $Y_0, \dots, Y_{k-1}$ cover $\nat$. The class $\mathcal A \cap \mathcal L_{\vec X}$ is large and non-trivial, so by :ref{#lem-product-cover} some $j$ makes $\mathcal A \cap \mathcal L_{\vec X} \cap \mathcal L_{\vec Y_j}$ large, and by :ref{#lem-product-intersection}, $\mathcal A \cap \mathcal L_{\langle X_\nu \cap Y_{j(\nu)} \rangle}$ is large: the tuple $\langle X_\nu \cap Y_{j(\nu)} \rangle$ is in $\mathcal L(\mathcal A)$.
+
+Let $\mathcal P \subseteq \mathcal A$ be partition regular and $\vec X \in \mathcal P$. The class $\mathcal A \cap \mathcal L_{\vec X}$ is upward closed. For a cover $Y_0, \dots, Y_{k-1}$ of $\nat$, partition regularity gives $j$ with $\langle X_\nu \cap Y_{j(\nu)} \rangle \in \mathcal P \subseteq \mathcal A$. Its coordinates are infinite, since $\mathcal A$ is non-trivial, so $\vec Y_j$ is in $\mathcal A$ by upward closure and in $\mathcal L_{\vec X}$. So $\mathcal A \cap \mathcal L_{\vec X}$ is large, and $\vec X \in \mathcal L(\mathcal A)$. This is the product version of :ref{#prop-largest-partition-regular}.
 :::
 ::::
 
 ## Notes and references
 
-The analysis of the failure of merging follows the section *Mathias forcing and COH* of the chapter *Jump compactness avoidance* of Patey's monograph. Product largeness and :ref{#lem-product-decreasing}, :ref{#lem-product-intersection} and :ref{#lem-product-cover} are due to Monin and Patey (*SRT²₂ does not imply RT²₂ in ω-models*); the presentation follows the section *Product largeness* of the monograph, where the proof of the cover lemma is given for the class $\mathcal L(\mathcal A)$. The complexity of largeness is the product version of :ref{#prop-largeness-complexity}, with the compactness argument of :ref{#lem-cover-class}.
+Product largeness and :ref{#lem-product-decreasing}, :ref{#lem-product-intersection} and :ref{#lem-product-cover} are due to Monin and Patey (*SRT²₂ does not imply RT²₂ in ω-models*); the presentation follows the section *Product largeness* of the chapter *Jump compactness avoidance* of Patey's monograph, where the cover lemma is proved in the form "$\mathcal L(\mathcal A)$ is large" and the last exercise is stated without proof. The complexity of largeness is the product version of :ref{#prop-largeness-complexity}, with the compactness argument of :ref{#lem-cover-class}.
 
 - B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics (2021); arXiv:1905.08427.
-- L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, sections *Mathias forcing and COH* and *Product largeness*.
+- L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, section *Product largeness*.

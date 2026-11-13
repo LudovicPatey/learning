@@ -83,7 +83,7 @@ Why does item 2 not require any part to be valid?
 
 ## Weak merging
 
-Two negative answers cannot be merged at the same level: duplicating the reservoirs, as in :ref{#lem-product-merging}, doubles every branch, and the duplicated branches are not branches. The index sets $\mathbb I_n$ are designed for the following form of merging.
+Two negative answers cannot simply be merged by duplication, as in :ref{#lem-product-merging}: the index set $\mathbb I_n \cdot \{0, 1\}$ would replace $\mathbb I_{n+1}$, and the sets $I \cdot \{0, 1\}$ for the branches $I$ do not have the Ramsey property of :ref{#lem-branch-ramsey} (first quiz below). The index sets $\mathbb I_n$ are designed for the following form of merging, with $2u_n + 1$ copies and as many negative answers.
 
 :::lemma{#lem-meta-merging}
 Let $c = (\vec \sigma, \vec X, S)$ be a meta-condition of level $n$, $H$ a non-empty set of branches of $\mathbb I_n$ and $i < 2$. Let $\varphi_0, \dots, \varphi_{2u_n}$ be $\Sigma^0_2$ sentences with $c \mathrel{?{\nvdash}}_{H, i} \varphi_a$ for every $a \leq 2u_n$. There is an extension $d$ of $c$ of level $n + 1$ such that for every $I \in H$ and all $a < b \leq 2u_n$, $d$ promises $\neg\varphi_a$ and $\neg\varphi_b$ on the part $(I \cdot \{a, b\}, i)$.
@@ -108,7 +108,7 @@ Why can the lemma not be applied with two negative answers only, at level $n + 1
   It would be large; the problem is the existence of a valid part.
 - [ ] Because two negative answers are always merged at level $n$.
 
-  They are not; this is the failure of merging for products.
+  They are not: merging by duplication does not produce index sets with the Ramsey property, as explained before the lemma.
 
 ---
 

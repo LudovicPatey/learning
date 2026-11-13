@@ -1,7 +1,7 @@
 ---
 title: The pigeonhole principle and jump PA avoidance
 summary: Forcing a requirement on a part of a meta-condition with Liu's valuations one jump up; the number of branches where a requirement is not forced decreases, or becomes zero at the next level; a construction by tasks, a path of valid parts by König's lemma, and the proof that every Δ⁰₂ set has an infinite subset of itself or of its complement whose jump is not PA relative to ∅′.
-duration: 40
+duration: 45
 prerequisites: [meta-questions]
 ---
 
@@ -9,7 +9,7 @@ This lesson completes the proof of :ref{#thm-d22-jump-pa}. The setting of the tw
 
 ## Forcing a requirement on a part
 
-For a finite valuation $h$ (:ref{#def-valuation}) and an index $e$, the sentence "$\Phi^{G'}_e$ is incompatible with $h$", that is, $\Phi^{G'}_e(x)\converge = 1 - h(x)$ for some $x \in \mathrm{dom}\, h$, is equivalent to a $\Sigma^0_2$ sentence $\varphi_{e, h} = \exists y\ \psi_{e, h}(y)$, uniformly in $e$ and the code of $h$: it is the disjunction of the sentences $\chi_{e, x, 1 - h(x)}$ of :ref{to="jump-compactness-avoidance/jump-pa-avoidance"}, written with one existential quantifier. Its negation $\neg\varphi_{e, h}$ says that $\Phi^{G'}_e$ is compatible with $h$. Correctness of valuations is relative to $\emptyset'$: $h$ is correct if $J^{\emptyset'}(x)$ is defined and differs from $h(x)$ for every $x \in \mathrm{dom}\, h$.
+For a finite valuation $h$ (:ref{#def-valuation}) and an index $e$, the sentence "$\Phi^{G'}_e$ is incompatible with $h$", that is, $\Phi^{G'}_e(x)\converge = 1 - h(x)$ for some $x \in \mathrm{dom}\, h$, is equivalent to a $\Sigma^0_2$ sentence $\varphi_{e, h} = \exists y\ \psi_{e, h}(y)$, uniformly in $e$ and the code of $h$: it is the disjunction of the sentences $\chi_{e, x, 1 - h(x)}$ of :ref{to="jump-compactness-avoidance/merging-level-two"}, written with one existential quantifier. Its negation $\neg\varphi_{e, h}$ says that $\Phi^{G'}_e$ is compatible with $h$. Correctness of valuations is relative to $\emptyset'$: $h$ is correct if $J^{\emptyset'}(x)$ is defined and differs from $h(x)$ for every $x \in \mathrm{dom}\, h$.
 
 :::definition{#def-meta-requirement}
 A meta-condition $c$ **forces the requirement $e$** on its part $(I, i)$ if
@@ -34,7 +34,7 @@ For a meta-condition $c$ of level $n$, $i < 2$ and $e$, let $N_e(c, i)$ be the s
 2. Apply item 1 repeatedly with $i = 0$. Each application either decreases $|N_e(\cdot, 0)|$ or makes it empty, so after finitely many steps $N_e(d_0, 0) = \emptyset$. Then apply it with $i = 1$ to get $d_1$ extending $d_0$. Forcing on the parts with $i = 0$ is inherited by $d_1$, so $N_e(d_1, 0) = N_e(d_1, 1) = \emptyset$.
 :::
 
-The lemma is the three-case argument of :ref{#thm-weak-merging-pa}, with $\emptyset'$ in the role of the oracle, and the number of branches as a measure of progress. A positive answer settles one branch without changing the level. A negative answer settles all branches at once, at the next level, where the count starts again from zero. The third case is empty: Liu's lemma says that one of the first two always applies, because $\emptyset'$ is not PA relative to itself.
+The lemma is the three-case argument of :ref{#thm-weak-merging-pa}, one level up as in the first exercise of :ref{to="jump-compactness-avoidance/merging-level-two"}, with $\emptyset'$ in the role of the oracle, and the number of branches as a measure of progress. A positive answer settles one branch without changing the level. A negative answer settles all branches at once, at the next level, where the count starts again from zero. The third case is empty: Liu's lemma says that one of the first two always applies, because $\emptyset'$ is not PA relative to itself.
 
 :::quiz[forcing the requirements]
 In item 1 of :ref{#lem-meta-requirement}, why does a positive answer not give $N_e(d, i) = \emptyset$?
@@ -112,7 +112,7 @@ Where in the proof is the hypothesis that $\emptyset'$ is not PA relative to $\e
 - [x] In :ref{#lem-meta-requirement}, through :ref{#lem-liu-valuations}: the set $U$ of valuations is $\Sigma^0_1(\emptyset')$, and Liu's lemma needs that its oracle is not PA relative to $\emptyset'$.
 - [ ] In the choice of the low code $M$.
 
-  Low codes exist for every Scott ideal construction; no PA hypothesis is used.
+  A Scott ideal with a low code exists by the low basis theorem (:ref{#cor-scott-codes}), without any hypothesis on PA degrees.
 - [ ] In item 1 of :ref{#lem-meta-valid}.
 
   Validity uses only the cover lemma and the Ramsey property of branches.

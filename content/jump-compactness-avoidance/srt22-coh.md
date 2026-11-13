@@ -48,7 +48,7 @@ Which property of the ideal $\mathcal I$ of :ref{#thm-srt22-not-coh} excludes $\
   $\mathsf{RT}^2_2$ does not require such sets: by Seetapun's theorem it admits cone avoidance.
 - [ ] $\mathcal I$ is not a Scott ideal.
 
-  Nothing excludes PA sets with a low jump from $\mathcal I$; $\mathsf{RT}^2_2$ is excluded by cohesiveness.
+  The ideal can be taken to be a Scott ideal (first exercise below), and a Scott ideal can omit $\mathsf{RT}^2_2$; here $\mathsf{RT}^2_2$ is excluded by cohesiveness.
 :::
 
 The following table collects the avoidance properties of the track for four problems, for computable instances relative to $Z$.
@@ -70,7 +70,7 @@ Replacing PA by DNC gives a weaker property, as in :ref{to="compactness-avoidanc
 A problem $\mathsf P$ admits **jump DNC avoidance** if for all $D \leq_T Z$ such that $Z'$ computes no function DNC relative to $D'$, every instance $X \leq_T Z$ has a solution $Y$ such that $(Z \oplus Y)'$ computes no function DNC relative to $D'$. It admits **strong jump DNC avoidance** if this holds for every instance.
 :::
 
-A set PA relative to $D'$ computes a function DNC relative to $D'$, so jump DNC avoidance implies jump PA avoidance. The pigeonhole principle does not admit strong jump DNC avoidance, by a construction of Hirschfeldt, Jockusch, Kjos-Hanssen, Lempp and Slaman.
+A set PA relative to $D'$ computes a function DNC relative to $D'$, so the conclusion of jump DNC avoidance is stronger than that of jump PA avoidance; so is its hypothesis, and neither property implies the other formally. For ω-models the comparison is clear: with $D = Z = \emptyset$, jump DNC avoidance gives, by :ref{#lem-preservation-ideal}, a Turing ideal satisfying the problem in which no jump computes a function DNC relative to $\emptyset'$, and in particular no jump is PA relative to $\emptyset'$. The pigeonhole principle does not admit strong jump DNC avoidance, by a construction of Hirschfeldt, Jockusch, Kjos-Hanssen, Lempp and Slaman.
 
 :::proposition{#prop-bi-immune-dnc}
 For every set $X$ there is a set $A \leq_T X'$ such that for every infinite set $H$ contained in $A$ or in $\overline A$, $H \oplus X$ computes a function DNC relative to $X$.

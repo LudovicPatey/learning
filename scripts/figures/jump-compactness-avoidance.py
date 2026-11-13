@@ -2,7 +2,7 @@
 # Usage: python3 scripts/figures/jump-compactness-avoidance.py out.json
 # Paste each figure into the lesson that uses it:
 #   product-cover     -> product-largeness.md
-#   product-merging   -> product-mathias.md
+#   product-merging   -> merging-by-duplication.md
 #   meta-index        -> meta-conditions.md
 #   weak-merging      -> meta-questions.md
 #   valid-tree        -> delta2-jump-pa.md
@@ -61,10 +61,10 @@ out['product-cover'] = ''.join(s)
 # ---------------------------------------------------------------- product merging
 s = ['<svg class="fig" viewBox="0 0 600 250" width="600" role="img" aria-label="Merging by duplication: a condition with index set I and two negative answers giving classes A_0 and A_1 is extended by a condition with index set I times 0,1 whose slice 0 ranges over A_0 and slice 1 over A_1, with the same stem and copied reservoirs">']
 s.append('<defs>' + marker('jca-pm-arr') + '</defs>')
-s.append(box(200, 10, 200, 52, ['p = (σ, X⃗, S), index set I', 'p ?⊬ φ₀ and p ?⊬ φ₁']))
+s.append(box(200, 10, 200, 52, ['p, reservoirs X, index set I', 'p ?⊬ φ₀ and p ?⊬ φ₁']))
 s.append(box(20, 100, 200, 44, ['𝒜₀ = 𝒜(p, φ₀) large'], cls='node'))
 s.append(box(380, 100, 200, 44, ['𝒜₁ = 𝒜(p, φ₁) large'], cls='node'))
-s.append(box(130, 186, 340, 52, ['q = (σ, X⃗ duplicated, T), index set I·{0, 1}', 'slice 0 ∈ 𝒜₀, slice 1 ∈ 𝒜₁']))
+s.append(box(130, 186, 340, 52, ['q: stem σ, reservoirs X copied twice, index set I·{0, 1}', 'slice 0 ∈ 𝒜₀, slice 1 ∈ 𝒜₁']))
 s.append(arrow(250, 64, 140, 96, 'jca-pm-arr'))
 s.append(arrow(350, 64, 460, 96, 'jca-pm-arr'))
 s.append(arrow(140, 146, 230, 182, 'jca-pm-arr'))
@@ -75,10 +75,10 @@ out['product-merging'] = ''.join(s)
 
 # ---------------------------------------------------------------- meta index sets
 s = ['<svg class="fig" viewBox="0 0 600 220" width="600" role="img" aria-label="The index set I_0 with the single element epsilon, the index set I_1 with elements 0, 1, 2, and its three branches; with the coloring 0 to 0, 1 to 1, 2 to 0, the branch 0, 2 is monochromatic">']
-s.append(text(60, 30, '𝕀₀', 'label'))
+s.append(text(60, 31, '𝕀₀', 'mrm'))
 s.append(f'<circle cx="300" cy="26" r="13" class="state"/>')
 s.append(text(300, 31, 'ε', 'math'))
-s.append(text(60, 100, '𝕀₁', 'label'))
+s.append(text(60, 101, '𝕀₁', 'mrm'))
 col = {0: 0, 1: 1, 2: 0}
 xs = {0: 200, 1: 300, 2: 400}
 for a in (0, 1, 2):
