@@ -33,4 +33,4 @@ objectives:
   - Prove that the cut of a sequence of diagonal indiscernibles satisfies PA, and that PA does not prove the Paris–Harrington principle
   - Compute with α-large sets and relate them to the Schwichtenberg–Wainer hierarchy
   - Work with initial segments with a top and their coded expansions
-lessons: [fast-growing, indicators, paris-harrington, diagonal-indiscernibles, ph-unprovable, alpha-large, arithmetic-with-top]
+lessons: [fast-growing, catching-cuts, indicators, paris-harrington, regressive-colorings, diagonal-indiscernibles, ph-unprovable, alpha-large, arithmetic-with-top]

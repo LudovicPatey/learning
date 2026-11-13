@@ -1,7 +1,7 @@
 # Generates the inline SVG figures of the course Indicators and independence.
 # Usage: python3 scripts/figures/independence.py out.json
 # Paste each figure into the lesson that uses it:
-#   catching      -> fast-growing.md
+#   catching      -> catching-cuts.md
 #   indiscernible -> diagonal-indiscernibles.md
 #   omega-large   -> alpha-large.md
 # The output is deterministic.
@@ -31,41 +31,41 @@ def sub(base, s, cls='math'):
 
 
 # ---------------------------------------------------------------- catching a semiregular cut
-s = ['<svg class="fig" viewBox="0 0 600 250" width="600" role="img" aria-label="Three stages of the construction: the interval from r_k to s_k is divided into r_k pieces by the iterates of F_{nu-1}; the values of the coded function f_k are marked; a piece containing no value becomes the next interval">']
-rows = [(40, 40, 560), (120, 160, 420), (200, 230, 330)]
-names = ['k', 'k+1', 'k+2']
-for (y, x1, x2), nm in zip(rows, names):
+# Each row magnifies the chosen piece of the row above. The pieces are the
+# intervals between consecutive iterates, so their lengths increase; the
+# squares are values of the coded function f_k; the chosen piece contains none.
+s = ['<svg class="fig" viewBox="0 0 600 260" width="600" role="img" aria-label="Three stages of the construction: the interval from r_k to s_k is divided into pieces of increasing length by the iterates of F_{nu-k-1}; the values of the coded function f_k are marked; a piece containing no value is magnified in the next row and becomes the next interval">']
+rows = [
+    # (y, left, right, piece boundaries, values, chosen piece index, name)
+    (40, 40, 560, [40, 62, 90, 126, 172, 232, 310, 410, 560], [50, 76, 150, 270, 450, 520], 6, 'k'),
+    (130, 100, 500, [100, 116, 136, 162, 196, 240, 300, 380, 500], [108, 150, 220, 340, 440], 5, 'k+1'),
+    (220, 180, 420, [], [], None, 'k+2'),
+]
+for idx, (y, x1, x2, cuts, vals, ch, nm) in enumerate(rows):
+    if ch is not None:
+        a, b = cuts[ch], cuts[ch + 1]
+        s.append(f'<rect x="{a}" y="{y - 10}" width="{b - a}" height="20" class="accent-fill" fill-opacity="0.18"/>')
+        ny, nx1, nx2 = rows[idx + 1][0], rows[idx + 1][1], rows[idx + 1][2]
+        s.append(line(a, y + 12, nx1, ny - 12, 'accent-stroke', 1.0, '3 3'))
+        s.append(line(b, y + 12, nx2, ny - 12, 'accent-stroke', 1.0, '3 3'))
     s.append(line(x1, y, x2, y, 'ink-stroke', 1.4))
     s.append(line(x1, y - 7, x1, y + 7, 'ink-stroke', 1.4))
     s.append(line(x2, y - 7, x2, y + 7, 'ink-stroke', 1.4))
     s.append(mtext(x1, y + 24, sub('r', nm), 14))
     s.append(mtext(x2, y + 24, sub('s', nm), 14))
-# pieces of the first interval
-cuts = [40, 70, 110, 160, 230, 330, 420, 560]
-for c in cuts[1:-1]:
-    s.append(line(c, 34, c, 46, 'muted-stroke', 1.2))
-for v in (55, 95, 290, 480, 520):
-    s.append(f'<rect x="{v - 3.5}" y="{36.5}" width="7" height="7" class="muted-fill"/>')
-s.append(f'<rect x="160" y="30" width="260" height="20" class="accent-fill" fill-opacity="0.18"/>')
-s.append(line(160, 52, 160, 112, 'accent-stroke', 1.0, '3 3'))
-s.append(line(420, 52, 420, 112, 'accent-stroke', 1.0, '3 3'))
-# second interval pieces
-cuts2 = [160, 185, 230, 330, 420]
-for c in cuts2[1:-1]:
-    s.append(line(c, 114, c, 126, 'muted-stroke', 1.2))
-for v in (175, 370, 400):
-    s.append(f'<rect x="{v - 3.5}" y="{116.5}" width="7" height="7" class="muted-fill"/>')
-s.append(f'<rect x="230" y="110" width="100" height="20" class="accent-fill" fill-opacity="0.18"/>')
-s.append(line(230, 132, 230, 192, 'accent-stroke', 1.0, '3 3'))
-s.append(line(330, 132, 330, 192, 'accent-stroke', 1.0, '3 3'))
-s.append(label(580, 20, 'squares: values of the coded function', 'end'))
-s.append(label(470, 205, 'I = sup of the r_k', 'start'))
+    for c in cuts[1:-1]:
+        s.append(line(c, y - 6, c, y + 6, 'muted-stroke', 1.2))
+    for v in vals:
+        assert ch is None or not (cuts[ch] <= v < cuts[ch + 1])
+        s.append(f'<rect x="{v - 3.5}" y="{y - 3.5}" width="7" height="7" class="muted-fill"/>')
+s.append(label(580, 16, 'squares: values of the coded function', 'end'))
+s.append(label(580, 250, 'I = sup of the r_k', 'end'))
 s.append('</svg>')
 out['catching'] = ''.join(s)
 
 
 # ---------------------------------------------------------------- diagonal indiscernibles
-s = ['<svg class="fig" viewBox="0 0 600 190" width="600" role="img" aria-label="A set of diagonal indiscernibles h_0 &lt; h_1 &lt; ...; a parameter x below h_i; two increasing tuples above h_i satisfy the same formulas with parameter x; the cut I is the supremum of the h_i with standard index">']
+s = ['<svg class="fig" viewBox="0 0 600 190" width="600" role="img" aria-label="A set of diagonal indiscernibles h_0 &lt; h_1 &lt; ...; a parameter x below h_i; two increasing tuples above h_i satisfy the same formulas with parameter x; the cut I is the supremum of the h_i with standard index, and lies below the h_i with non-standard index">']
 y = 95
 s.append(line(20, y, 580, y))
 s.append(dot(24, y, 'ink-fill', 3))
@@ -77,8 +77,8 @@ for i, x in enumerate(xs):
 s.append('<text x="410" y="99" class="mrm" font-size="14">…</text>')
 s.append(line(450, y - 24, 450, y + 24, 'accent-stroke', 1.6, '4 3'))
 s.append(mtext(450, y - 32, 'I', 14))
-s.append(dot(530, y, 'ink-fill', 3.5))
-s.append(mtext(530, y - 14, 'b', 14))
+s.append(dot(520, y, 'accent-fill', 4))
+s.append(mtext(520, y - 14, sub('h', 'ν'), 14))
 s.append(dot(95, y, 'ink-fill', 3))
 s.append(mtext(95, y + 22, 'x', 14))
 # two tuples
