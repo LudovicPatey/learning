@@ -1,0 +1,37 @@
+title: Recursive saturation
+area: arithmetic
+level: Advanced
+order: 5
+prerequisites: [cuts-and-extensions, truth-and-provability]
+summary: Recursively saturated models of arithmetic, their classification by theory and standard system, Friedman's embedding theorem, automorphisms fixing exponential cuts, resplendence, and full satisfaction classes (Kotlarski, Krajewski, Lachlan).
+description: >
+  The fifth course of the track on models of arithmetic. It assumes
+  first-order logic: completeness, compactness, elementary chains and the
+  Henkin construction. The course defines recursively saturated structures,
+  proves that every countable structure for a recursive language has a
+  countable recursively saturated elementary extension, and characterizes the
+  recursively saturated models of IΔ₀ + exp as those that realize every type
+  coded in their standard system. By back-and-forth, two countable
+  recursively saturated models are isomorphic exactly when they have the same
+  theory and the same standard system, and Scott's construction shows that
+  the countable recursively saturated models of a completion T of PA
+  correspond to the countable Scott sets containing T. Types of bounded
+  complexity are realized by overspill on partial truth definitions, which
+  gives Friedman's characterization of Σₙ₊₁-recursive saturation and his
+  theorem that every countable non-standard model of IΣ₁ is isomorphic to a
+  proper initial segment of itself. The exponential cuts of a countable
+  recursively saturated model of PA are the cuts fixed pointwise by its
+  automorphisms (Smoryński). Countable recursively saturated structures are
+  resplendent (Barwise, Ressayre); with the theorem of Enayat and Visser this
+  gives full satisfaction classes on every countable recursively saturated
+  model (Kotlarski, Krajewski, Lachlan) and the conservativity of CT⁻ over PA,
+  and Lachlan's theorem shows that a non-standard model of PA with a full
+  satisfaction class is recursively saturated.
+objectives:
+  - Define types and recursive saturation, build countable recursively saturated elementary extensions, and use coded types in the standard system
+  - Prove by back-and-forth that countable recursively saturated models are determined by their theory and standard system, and construct such models with prescribed invariants
+  - Realize coded types of bounded complexity by overspill on partial truth definitions, and prove Friedman's embedding theorem
+  - Prove Smoryński's characterization of the cuts fixed pointwise by automorphisms
+  - Prove that countable recursively saturated structures are resplendent, and use resplendence to construct expansions
+  - Construct full satisfaction classes by the method of Enayat and Visser, and prove Lachlan's theorem
+lessons: [recursively-saturated-models, back-and-forth, friedman-embedding, automorphisms, resplendence, satisfaction-classes, lachlan]
