@@ -1,0 +1,35 @@
+title: End extensions of models of PA
+area: arithmetic
+level: Advanced
+order: 4
+prerequisites: [cuts-and-extensions]
+summary: The low basis theorem in IΣ₁ and the arithmetized completeness theorem; end extensions obtained from consistency statements; definable types and conservative extensions; the MacDowell–Specker theorem through Gaifman's strongly definable types; gaps, and minimal types, which give minimal elementary end extensions and models with prescribed automorphism groups.
+description: >
+  The fourth course of the track on models of arithmetic. It assumes
+  first-order logic: the completeness and compactness theorems, the
+  Tarski–Vaught test, and Gödel's incompleteness theorems. The course builds
+  end extensions of a model M of arithmetic by two methods. The first carries
+  out Henkin's proof of the completeness theorem inside M: in a model of IΣ₁,
+  every unbounded Δ₁-definable binary tree has a path whose jump is
+  Δ₂-definable (the low basis theorem), and a theory consistent in M has a
+  model that end extends M. With consistency facts from proof theory, this
+  gives exponential end extensions of models of IΣ₁ and Σₙ-elementary end
+  extensions of models of PA, and also end extensions that are not
+  Σ₁-elementary. The second method adds to a model of PA a realization of a
+  type: a type is definable exactly when the extension is conservative, and
+  conservative extensions are end extensions. A cohesiveness lemma proved
+  inside the model gives Gaifman's strongly definable types and the
+  MacDowell–Specker theorem: every model of PA has a proper elementary end
+  extension. The course then describes these extensions through gaps, proves
+  Gaifman's characterization of strongly definable types by unique extension,
+  and constructs minimal types, which give minimal elementary end extensions,
+  are indiscernible, and produce models of PA with the automorphism group of
+  any linear order.
+objectives:
+  - Prove the low basis theorem inside a model of IΣ₁ with the least admissible guess
+  - Prove the arithmetized completeness theorem, and use it with consistency statements to build end extensions
+  - Relate definable types to conservative extensions, and conservative extensions to end extensions
+  - Prove the MacDowell–Specker theorem through strongly definable types and a cohesiveness lemma inside the model
+  - Describe extensions by strongly definable types through gaps, and characterize these types by unique extension
+  - Construct minimal types, and use them for minimal end extensions, indiscernibles and automorphism groups
+lessons: [low-basis-isigma1, arithmetized-completeness, end-extensions-from-consistency, definable-types, macdowell-specker, gaps, minimal-types]
