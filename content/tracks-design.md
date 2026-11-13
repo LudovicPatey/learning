@@ -247,6 +247,27 @@ of IΣ₁, partial truth definitions and finite axiomatizability. The track has 
    - arithmetic with a top;
    - (Hájek–Pudlák II, IV.2–IV.3; Wong 13.)
 
+**State on 2026-11-13** (after writing and a polishing pass):
+- six courses, 48 lessons, about 30 hours:
+
+  | Course | Lessons |
+  | --- | --- |
+  | `fragments-of-arithmetic` | 9 |
+  | `truth-and-provability` | 5 |
+  | `cuts-and-extensions` | 8 |
+  | `end-extensions` | 9 |
+  | `recursive-saturation` | 8 |
+  | `independence` | 9 |
+
+- **Additions to the plan:** the converse of the Parsons–Mints–Takeuti theorem is proved
+  (`independence`), and `end-extensions` adds a lesson of applications of the arithmetized
+  completeness theorem.
+- **Left out:** the preservation theorems of Wong's Lecture 12, which need the omitting
+  types theorem.
+- **Corrections:** two corrections to the proof of Lachlan's theorem in Wong's notes are
+  recorded in the log of `recursive-saturation`.
+- Each course log lists its open points.
+
 **Relations with other tracks.**
 - The course `induction-conservation` (reverse mathematics track) treats induction and
   collection for second-order schemes and the conservation theorems of Friedman and
@@ -326,6 +347,30 @@ mathematics of Ramsey-type theorems.
    - every Δ⁰₂ set has an infinite subset in it or its complement whose jump is not PA
      over ∅′ (Monin–Patey).
 
+**State on 2026-11-13** (after writing and a polishing pass):
+- seven courses, 66 lessons, about 43 hours:
+
+  | Course | Lessons |
+  | --- | --- |
+  | `effective-forcing` | 9 |
+  | `avoidance` | 9 |
+  | `lowness` | 10 |
+  | `compactness-avoidance` | 11 |
+  | `separation-design` | 8 |
+  | `jump-cone-avoidance` | 10 |
+  | `jump-compactness-avoidance` | 9 |
+
+- **Main theorems proved in full:**
+  - Seetapun's theorem;
+  - Cholak–Jockusch–Slaman (low₂ solutions for RT²₂);
+  - Liu's theorem;
+  - the Erdős–Moser separations;
+  - Monin–Patey on non-high solutions of RT¹₂;
+  - Monin–Patey on Δ⁰₂ sets and jump PA avoidance.
+- **Errata to the monograph:** the courses correct a number of errors in the monograph.
+  Each correction is recorded in the `_design.md` of the course that makes it, under
+  "Choices" or "Comparison with the literature".
+
 **Relations with other tracks.**
 - The track builds on the reverse mathematics track:
   - `ramsey-theorem`, whose lessons on cone avoidance and Seetapun's theorem are the first
@@ -384,3 +429,6 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
 - **2026-11-13.** Courses `fragments-of-arithmetic` and `truth-and-provability` written
   (track models of arithmetic); `avoidance` and `lowness` written (track lowness and
   avoidance).
+- **2026-11-13.** Both new tracks written in full and polished; long lessons split (no
+  lesson exceeds 45 minutes at 55 words per minute); pointers added from the existing
+  courses to the new tracks.
