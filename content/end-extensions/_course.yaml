@@ -32,4 +32,4 @@ objectives:
   - Prove the MacDowell–Specker theorem through strongly definable types and a cohesiveness lemma inside the model
   - Describe extensions by strongly definable types through gaps, and characterize these types by unique extension
   - Construct minimal types, and use them for minimal end extensions, indiscernibles and automorphism groups
-lessons: [low-basis-isigma1, arithmetized-completeness, end-extensions-from-consistency, definable-types, macdowell-specker, gaps, minimal-types]
+lessons: [trees-isigma1, low-basis-isigma1, arithmetized-completeness, end-extensions-from-consistency, definable-types, macdowell-specker, gaps, minimal-types, indiscernible-types]

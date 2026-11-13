@@ -68,9 +68,9 @@ x, y = pos['00']
 s.append(f'<path d="M{x - 6:.1f},{y - 6:.1f} L{x + 6:.1f},{y + 6:.1f} M{x - 6:.1f},{y + 6:.1f} L{x + 6:.1f},{y - 6:.1f}" class="ink-stroke" stroke-width="1.6"/>')
 s.append(label(x - 4, y + 22, 'T₀₀ bounded: rejected'))
 s.append(label(300, 244, 'empty guess: T itself'))
-s.append(label(520, 40, 'c₃ = 010', 'middle'))
-s.append(label(520, 102, 'c₂ = 01', 'middle'))
-s.append(label(520, 164, 'c₁ = 0', 'middle'))
+s.append(label(14, 44, 'c₃ = 010', 'start'))
+s.append(label(14, 106, 'c₂ = 01', 'start'))
+s.append(label(14, 168, 'c₁ = 0', 'start'))
 s.append('</svg>')
 out['guesses'] = ''.join(s)
 
@@ -98,7 +98,7 @@ out['act'] = ''.join(s)
 
 
 # ---------------------------------------------------------------- cohesive sets
-s = ['<svg class="fig" viewBox="0 0 600 200" width="600" role="img" aria-label="Three refinement steps: at each step the current set is split by R_z and an unbounded half is kept; the elements h_0, h_1, h_2 are chosen increasing in the kept halves">']
+s = ['<svg class="fig" viewBox="0 0 600 200" width="600" role="img" aria-label="Two refinement steps: the set S is split by R_0 and then by R_1, and an unbounded half is kept each time; h_0 is chosen in the first kept half, h_1 above it in the second, so h_1 and all later elements lie in R_0 and outside R_1, while h_0 may lie in R_1">']
 rows = [(40, 'S', [(60, 580)]), (90, 'S ∩ R₀', [(60, 140), (230, 330), (420, 580)]),
         (140, 'S ∩ R₀ ∖ R₁', [(100, 140), (260, 330), (470, 580)])]
 for (yy, name, segs) in rows:
@@ -106,13 +106,12 @@ for (yy, name, segs) in rows:
     for (a, b) in segs:
         s.append(line(a, yy, b, yy, 'accent-stroke', 3.0))
     s.append(label(30, yy - 8, name, 'start'))
-s.append(dot(80, 40, 'ink-fill', 4))
-s.append(mtext(80, 30, 'h<tspan class="mrm" font-size="10" dy="3">0</tspan>', 13))
-s.append(dot(250, 90, 'ink-fill', 4))
-s.append(mtext(250, 80, 'h<tspan class="mrm" font-size="10" dy="3">1</tspan>', 13))
-s.append(dot(300, 140, 'ink-fill', 4))
-s.append(mtext(300, 130, 'h<tspan class="mrm" font-size="10" dy="3">2</tspan>', 13))
-s.append(label(300, 180, 'all later elements of H lie in R₀ and outside R₁'))
+s.append(dot(80, 90, 'ink-fill', 4))
+s.append(mtext(80, 80, 'h<tspan class="mrm" font-size="10" dy="3">0</tspan>', 13))
+s.append(dot(280, 140, 'ink-fill', 4))
+s.append(mtext(280, 130, 'h<tspan class="mrm" font-size="10" dy="3">1</tspan>', 13))
+s.append(label(300, 172, 'h₁ and all later elements of H lie in R₀ and outside R₁;'))
+s.append(label(300, 190, 'h₀ lies in R₀ and may lie in R₁'))
 s.append('</svg>')
 out['cohesive'] = ''.join(s)
 
@@ -131,7 +130,7 @@ for x in (290, 380, 440, 500):
     s.append(dot(x, y, 'node', 3))
 s.append(mtext(540, y - 14, 't(d)', 13))
 s.append(line(540, y - 6, 540, y + 6, 'ink-stroke', 1.4))
-s.append(bracket(22, 236, y + 24, 'M: below every Skolem function of d'))
+s.append(bracket(22, 236, y + 24, 'M: t(x) &lt; d for every Skolem t'))
 s.append(bracket(246, 556, y + 24, 'gap(d): c ≤ s(d) and t(c) ≥ d'))
 s.append('</svg>')
 out['gap'] = ''.join(s)
@@ -153,7 +152,7 @@ s.append(mtext(330, y - 14, 'd', 14))
 s.append(dot(540, y, 'node', 4))
 s.append(bracket(240, 470, y - 34, 'gap(d)', up=True))
 s.append(label(410, y + 30, 'no solution of θ in [c, d)'))
-s.append(label(300, 150, 'discs: solutions of θ; d = (min v ≥ c) θ(v)'))
+s.append(label(300, 150, 'v′, d and the last point: solutions of θ; d = (min v ≥ c) θ(v)'))
 s.append('</svg>')
 out['rare'] = ''.join(s)
 

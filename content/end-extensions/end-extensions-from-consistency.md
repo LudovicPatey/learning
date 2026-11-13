@@ -1,7 +1,7 @@
 ---
 title: End extensions from consistency
 summary: Applications of the arithmetized completeness theorem. Every model of IΣ₁ is a proper exponential cut of a model of IΔ₀ + exp; every model of PA has, for each n, a proper Σₙ-elementary end extension satisfying PA; a model of PA + Con(PA) has an end extension satisfying PA + ¬Con(PA), which is not Σ₁-elementary.
-duration: 40
+duration: 45
 prerequisites: [arithmetized-completeness, cuts-and-extensions/collection-end-extensions, truth-and-provability/finite-axiomatizability]
 ---
 
@@ -37,7 +37,7 @@ By :ref{#thm-scott-wkl-cut}, the pair $(M, \mathrm{Cod}(K/M))$ then satisfies we
 
 ## Partially elementary end extensions of models of PA
 
-A model of $\mathrm{PA}$ satisfies the consistency of each finite part of $\mathrm{PA}$, and more: of each $\mathrm I\Sigma_k$ together with all true sentences of bounded complexity. For $n \geq 1$, let $\mathrm{Tr}_{\Sigma_n}$ be the theory of $M$ consisting of the $\Sigma^*_n$ sentences $\sigma$ of $\mathcal L_A$, possibly with numerals, such that $\mathrm{Sat}_{\Sigma_n}(\sigma, 0)$ (:ref{#def-sat-n}). It is $\Sigma_n$-definable in $M$. Let $\mathrm I\Sigma^*_k$ be the theory of $M$ consisting of $\mathrm{PA}^-$ and the induction axioms for $\Sigma^*_j$ formulas, $j \leq k$; it is $\Delta_1$-definable uniformly in $k$, also for non-standard $k$.
+A model of $\mathrm{PA}$ satisfies the consistency of each finite part of $\mathrm{PA}$, and more: of each $\mathrm I\Sigma_k$ together with all true sentences of bounded complexity. For $n \geq 1$, let $\mathrm{Tr}_{\Sigma_n}$ be the set of the $\Sigma^*_n$ sentences $\sigma$ of $M$ in $\mathcal L_A$ such that $\mathrm{Sat}_{\Sigma_n}(\sigma, 0)$ (:ref{#def-sat-n}); their closed terms include the numerals $\bar a$ of all $a \in M$, standard or not. It is $\Sigma_n$-definable in $M$, not $\Delta_1$, and $\mathrm{Con}$ is defined for it as for theories of $M$, with a $\Sigma_n$ formula in place of the $\Delta_1$ definition of the axioms. Let $\mathrm I\Sigma^*_k$ be the theory of $M$ consisting of $\mathrm{PA}^-$ and the induction axioms for $\Sigma^*_j$ formulas, $j \leq k$; it is $\Delta_1$-definable uniformly in $k$, also for non-standard $k$.
 
 :::fact[Reflection]{#fact-ee-reflection}
 Let $n \geq 1$.
@@ -46,7 +46,11 @@ Let $n \geq 1$.
 2. For every standard $\Sigma^*_n$ formula $\varphi(\bar x)$, $\mathrm I\Sigma_1$ proves $\forall \bar a\ \big(\mathrm{Sat}_{\Sigma_n}(\varphi(\bar{\bar a}), 0) \leftrightarrow \varphi(\bar a)\big)$.
 :::
 
-Item 1 follows from Theorem I.4.33 of Hájek and Pudlák, $\mathrm I\Sigma_j \vdash \mathrm{Con}(\mathrm{Tr}_{\Pi_{j+1}})$ for $j \geq 1$, in the way their Corollary I.4.34 derives $\mathrm I\Sigma_{k+1} \vdash \mathrm{Con}(\mathrm I\Sigma_k)$: for $j$ large enough with respect to $k$ and $n$, $\mathrm I\Sigma_j$ proves that every axiom of $\mathrm I\Sigma^*_k$, standard or not, and every sentence of $\mathrm{Tr}_{\Sigma_n}$ is a true $\Pi^*_{j+1}$ sentence, the axioms of $\mathrm I\Sigma^*_k$ being $\Pi^*_{k+2}$. The proof of Theorem I.4.33 interprets the Skolem functions of finitely many true sentences by least witnesses and checks the resulting open theory in the universe. Item 2 is :ref{#cor-snowing} together with the evaluation of numerals.
+Item 1 follows from Theorem I.4.33 of Hájek and Pudlák, $\mathrm I\Sigma_j \vdash \mathrm{Con}(\mathrm{Tr}_{\Pi_{j+1}})$ for $j \geq 1$, in the way their Corollary I.4.34 derives $\mathrm I\Sigma_{k+1} \vdash \mathrm{Con}(\mathrm I\Sigma_k)$. Their $\mathrm{Tr}_{\Pi_{j+1}}$ is the set of all true $\Pi^*_{j+1}$ sentences in the sense of the model, closed terms included, so it contains the sentences with numerals of non-standard elements; their Corollary I.4.34(2) uses this for a single true sentence. For $j = \max(k + 1, n)$, $\mathrm I\Sigma_j$ proves that every axiom of $\mathrm I\Sigma^*_k$, standard or not, is equivalent, by a prenex transformation carried out uniformly in $\mathrm I\Sigma_1$, to a true $\Pi^*_{k+2}$ sentence (the truth of the induction axioms uses induction for $\mathrm{Sat}_{\Sigma_k}$), and that every sentence of $\mathrm{Tr}_{\Sigma_n}$ is a true $\Pi^*_{j+1}$ sentence. The proof of Theorem I.4.33 interprets the Skolem functions of finitely many true sentences by least witnesses and checks the resulting open theory in the universe. Item 2 is :ref{#cor-snowing} together with the evaluation of numerals.
+
+:::remark{#rem-ee-act-relativized}
+With :ref{#rem-ee-low-basis-relativized}, :ref{#thm-ee-act} holds for $M \models \mathrm I\Sigma_{m+1}$ and a theory $T$ that is $\Delta_{m+1}$-definable in $M$, with $H$ now $\Delta_{m+2}$-definable: the facts of logic relativize, a $\Sigma_1$ formula in a $\Delta_{m+1}$-definable set being $\Sigma_{m+1}$. The proof below uses this case with $m = n + 1$.
+:::
 
 :::theorem{#thm-ee-sigma-n-end}
 Let $M \models \mathrm{PA}$ and $n \in \nat$. Then $M$ has a proper end extension $K \models \mathrm{PA}$ with $M \preccurlyeq_n K$.
@@ -100,7 +104,7 @@ Every model $M$ of $\mathrm{PA} + \mathrm{Con}(\mathrm{PA})$ has a proper end ex
 $M$ satisfies $\mathrm{Con}(\mathrm{PA} + \neg \mathrm{Con}(\mathrm{PA}))$, so :ref{#thm-ee-act} gives $K \supseteq_e M$ satisfying every standard sentence of this theory, that is, $K \models \mathrm{PA} + \neg \mathrm{Con}(\mathrm{PA})$. The $\Sigma_1$ sentence $\neg\mathrm{Con}(\mathrm{PA})$ holds in $K$ and fails in $M$; so $M \not\preccurlyeq_1 K$ and $K \neq M$.
 :::
 
-The proof of $0 = 1$ that $K$ contains lies above $M$: no element of $M$ is a proof, since $M \models \mathrm{Con}(\mathrm{PA})$ and $\Delta_0$ properties of elements of $M$ are the same in $M$ and $K$. The extension is $\Sigma_0$-elementary, as every end extension (:ref{#lem-delta0-absolute}), and :ref{#thm-end-ext-collection} with $n = 0$ only says that $M \models \mathrm B\Sigma_1$, which is known. By the same theorem, a proper end extension $K \models \mathrm{PA}$ with $M \preccurlyeq_n K$ for all $n$ would show that $M$ satisfies every $\mathrm B\Sigma_{n+1}$; the next lessons show that every model of $\mathrm{PA}$ has such an extension.
+The proof of $0 = 1$ that $K$ contains lies above $M$: no element of $M$ is a proof, since $M \models \mathrm{Con}(\mathrm{PA})$ and the proof predicate of $\mathrm{PA}$, which is $\Delta_1$, has the same value at elements of $M$ in $M$ and in $K$ (:ref{#cor-sigma1-upward}, applied to its $\Sigma_1$ definition and to that of its negation). The extension is $\Sigma_0$-elementary, as every end extension (:ref{#lem-delta0-absolute}), and :ref{#thm-end-ext-collection} with $n = 0$ only says that $M \models \mathrm B\Sigma_1$, which is known. By the same theorem, a proper end extension $K \models \mathrm{PA}$ with $M \preccurlyeq_n K$ for all $n$ would show that $M$ satisfies every $\mathrm B\Sigma_{n+1}$; the next lessons show that every model of $\mathrm{PA}$ has such an extension.
 
 ## Exercises
 
