@@ -25,12 +25,18 @@ After the course, a student can:
   cone avoidance for iterated jumps, preservation of hyperimmunity, and avoidance of PA
   degrees; analyze computable Mathias forcing with these tools.
 
-**Role.** A specialized course of the computability area (`tracks-design.md`, Computability
-theory, "Planned"). It is the place where the general framework of forcing is explained;
-the courses on Cohen genericity, Π⁰₁ classes, immunity and growth, structure of the Turing
-degrees and Ramsey's theorem use particular cases of it and should point here. It is not in
-a track: the core courses teach each method on its own, and this course unifies them for
-readers going into research on Ramsey-type theorems or degree theory.
+**Role.** First course of the track "Lowness and avoidance" (`tracks-design.md`); it
+was written on 2026-11-12 as a specialized course, before the track existed. It is the place
+where the general framework of forcing is explained; the courses on Cohen genericity, Π⁰₁
+classes, immunity and growth, structure of the Turing degrees and Ramsey's theorem use
+particular cases of it and point here. It fixes for the track: notions of forcing and
+members (`def-forcing-notion`), the conventions for Mathias conditions (stem, reservoir,
+compatible strings, reservoirs in a class ℳ; `ex-forcing-notions` item 4, aligned with
+`ramsey-theorem/def-mathias-condition`), sufficiently generic sets (`def-generic-notion`),
+formulas with oracle Z ⊕ G (`def-forcing-formula`, `ex-forcing-formulas` item 4), the
+strong forcing relation (`def-forcing-relation`), n-generic filters and forcing and truth,
+and forcing questions (`def-forcing-question`, possibly restricted to some levels;
+compactness and merging at level 1).
 
 ## 2. Prerequisites assumed
 
@@ -55,47 +61,52 @@ readers going into research on Ramsey-type theorems or degree theory.
 - Structure of the Turing degrees (lesson `sacks-forcing` only): splitting trees
   (`lem-splitting-dichotomy`, `lem-splitting-consequences`, `thm-minimal-degree`),
   independence of the columns of a 1-generic set (`thm-generic-independent`).
-- Ramsey's theorem: not a prerequisite. Lesson `mathias-forcing` points to
-  `thm-coh-cone-avoidance` and `thm-dj-cone-avoidance` as pointers presented as such.
+- Ramsey's theorem (lesson `mathias-forcing` only, since 2026-11-13): `def-mathias-condition`,
+  `thm-coh-cone-avoidance`, `thm-dj-cone-avoidance`. Lesson 1 restates the Mathias
+  conventions, so that the rest of the course can be read without it.
 
 ## 3. Results, lesson by lesson
 
 1. **Notions of forcing** (`notions-of-forcing`): definition with closed classes of
-   members and refinement (`def-forcing-notion`); four examples (`ex-forcing-notions`);
-   filters, density, genericity (`def-generic-filter`); Rasiowa–Sikorski
-   (`lem-rasiowa-sikorski`); the generic set (`lem-generic-set`); sufficiently generic
-   sets (`def-generic-notion`); density below a condition (`lem-dense-below`); properties
-   of sufficiently generic sets recast from earlier courses (`ex-generic-notions`).
-2. **The forcing relation** (`forcing-relation`): formulas in normal form
-   (`def-forcing-formula`, `ex-forcing-formulas`); forcing (`def-forcing-relation`,
+   members and refinement (`def-forcing-notion`); four examples (`ex-forcing-notions`),
+   with the Mathias conventions of the track; refinement fails for classes of positive
+   measure (`rem-refinement-needed`); filters, density, genericity (`def-generic-filter`);
+   Rasiowa–Sikorski (`lem-rasiowa-sikorski`); the generic set (`lem-generic-set`).
+2. **Sufficiently generic sets** (`generic-sets`, new on 2026-11-13): sufficiently
+   generic sets (`def-generic-notion`); density below a condition (`lem-dense-below`);
+   properties recast from earlier courses (`ex-generic-notions`); effective genericity
+   (`thm-effective-generic`, `ex-low-basis-forcing`); formulas in normal form
+   (`def-forcing-formula`, `ex-forcing-formulas`).
+3. **The forcing relation** (`forcing-relation`): forcing (`def-forcing-relation`,
    `ex-forcing-relation`: Cohen forces "G infinite", Jockusch–Soare forces totality only
    when true on all members, Sacks forces totality with a counterexample member); basic
    properties (`prop-forcing-basic`); n-generic filters (`def-n-generic-notion`); forcing
    and truth (`thm-forcing-truth`); forcing as density (`cor-forcing-density`); weak
    forcing (`exr-weak-forcing`).
-3. **Definability of forcing for Cohen forcing** (`cohen-forcing`): effective generic
-   sequences (`thm-effective-generic`, `ex-low-basis-forcing`); forcing Σ⁰ₙ is Σ⁰ₙ
+4. **Definability of forcing for Cohen forcing** (`cohen-forcing`): forcing Σ⁰ₙ is Σ⁰ₙ
    (`thm-cohen-forcing-definable`); the two notions of n-genericity coincide
    (`thm-cohen-n-generic`); n-generic sets below ∅⁽ⁿ⁾ (second proof of
    `thm-low-generic-exists`); jumps (`cor-cohen-jumps`); preservation of the arithmetic
    hierarchy (`thm-cohen-preservation`) and of non-computability in ∅⁽ⁿ⁾
    (`cor-cohen-jump-cone`).
-4. **Forcing with Π⁰₁ classes and perfect trees** (`forcing-with-trees`): complexity of
+5. **Forcing with Π⁰₁ classes and perfect trees** (`forcing-with-trees`): complexity of
    Jockusch–Soare forcing, including a Π⁰₂-completeness result for forcing a Π⁰₁ sentence
    (`prop-js-complexity`); complexity of computable Sacks forcing
    (`prop-sacks-complexity`); deciding Σ⁰₂ sentences on all members by a Σ⁰₂ question
    (`prop-tree-sigma2`); G″ ≤ G′ ⊕ ∅″ (`thm-tree-gl2`); exercise: low₂ computably
    dominated members (`exr-low2-dominated`).
-5. **Computable Sacks forcing** (`sacks-forcing`): generic sets are non-computable,
+6. **Computable Sacks forcing** (`sacks-forcing`): generic sets are non-computable,
    computably dominated and minimal (`prop-sacks-generic`); not generalized low
    (`thm-sacks-not-gl1`); exercises: computable traceability; failure for Jockusch–Soare.
-6. **The forcing question** (`forcing-question`): definition and Σ⁰ₙ-preservation
-   (`def-forcing-question`); Cohen (`ex-cohen-question`); tree forcings at all levels
-   (`thm-tree-question`); preservation of the hierarchy (`thm-question-preservation`,
-   `cor-question-jump-cone`); compactness and hyperimmunity (`def-question-compact`,
-   `thm-question-hyperimmunity`); merging and PA degrees (`def-question-merging`,
-   `thm-question-pa`); ω-merging and DNC functions (`exr-sacks-dnc`).
-7. **Mathias forcing and preservation** (`mathias-forcing`): the question at level 1
+7. **The forcing question** (`forcing-question`): definition and Σ⁰ₙ-preservation
+   (`def-forcing-question`), questions restricted to some levels; Cohen
+   (`ex-cohen-question`); tree forcings at all levels (`thm-tree-question`); preservation
+   of the hierarchy (`thm-question-preservation`, `cor-question-jump-cone`).
+8. **Compactness and merging** (`compactness-merging`, new on 2026-11-13): compactness and
+   hyperimmunity (`def-question-compact`, `thm-question-hyperimmunity`); merging and PA
+   degrees (`def-question-merging`, `thm-question-pa`); table of the properties of the
+   four questions; ω-merging and DNC functions (`exr-sacks-dnc`).
+9. **Mathias forcing and preservation** (`mathias-forcing`): the question at level 1
    (`prop-mathias-question`); cohesive sets avoiding a cone, preserving hyperimmunity and
    computing no DNC function (`thm-mathias-coh-preservation`); generic sets are high
    (`prop-mathias-dominant`); no Σ⁰₂-preserving question (`cor-mathias-no-sigma2`); the
@@ -153,9 +164,16 @@ readers going into research on Ramsey-type theorems or degree theory.
 - **Split of tree forcings into two lessons.** The material on Jockusch–Soare and Sacks
   forcing exceeded 3400 words; complexity and the level-2 decision form one lesson
   (`forcing-with-trees`), the properties of Sacks generic sets another (`sacks-forcing`).
-- **Effective genericity** is placed in lesson 3 rather than lesson 1, to keep lesson 1
-  within 45 minutes and to put it next to the definability of forcing, which is what
-  makes dense sets effectively dense.
+- **Effective genericity** is placed in lesson 2, with the sufficiently generic sets (it
+  was in the Cohen lesson until 2026-11-13).
+- **Lesson lengths (2026-11-13).** Durations are words/55 rounded to 5, at most 45. Lessons
+  1, 2 and 6 of the first version (2840, 2840 and 2780 words at "45 minutes") were too
+  long. Lesson 1 was split into `notions-of-forcing` and `generic-sets`; the formulas
+  section moved from `forcing-relation` to `generic-sets`; effective genericity moved from
+  `cohen-forcing` to `generic-sets`; `forcing-question` was split into `forcing-question`
+  and `compactness-merging`. Nine lessons in all.
+- **Oracle order Z ⊕ G** in relativized formulas, as in the other courses of the track and
+  in `ramsey-theorem` (it was G ⊕ Z until 2026-11-13).
 - **Results of other courses are cited, not reproved**: the basis theorems, the f-tree
   lemmas, Spector's splitting lemmas, cone avoidance for cohesiveness and the
   Dzhafarov–Jockusch theorem. The course reproves only results whose new proof shows the
@@ -268,19 +286,46 @@ the forcing question and the choice of level-1 compactness and merging.
 
 ## 10. Open points
 
-- Volume and page numbers of *Pigeons do not jump high* and of Patey's Computability paper
-  are cited by DOI only.
+- Volume and page numbers of *Pigeons do not jump high* (Adv. Math. 2019) are not
+  confirmed; it is cited by DOI. Patey's Computability paper is cited by DOI and arXiv
+  number.
 - The levels-n versions of the hyperimmunity and PA theorems are stated without proof;
   a later revision could prove them with formulas "Φ^{G⁽ⁿ⁾}_e(m)↓ < k".
-- Lesson 7 points to `ramsey-theorem` labels (`thm-coh-cone-avoidance`,
-  `thm-dj-cone-avoidance`) without listing the course as a prerequisite; these are
-  pointers to another track, presented as such.
+- `ramsey-theorem` is a course-level prerequisite since 2026-11-13, because of lesson 9
+  (cone avoidance for COH and the Dzhafarov–Jockusch argument); lessons 1–8 do not need it.
+  Lesson 9 points forward to `avoidance` (Σ⁰₁(ℳ)-preservation, disjunctive questions) by
+  lesson links.
 - The theorem that Sacks generic sets are not generalized low is attributed to the
   Monin–Patey book; an original source was not found.
-- `degree-structure` is a course-level prerequisite only because of lesson 5; readers
-  without it can read lessons 1–4 and 6–7.
+- `degree-structure` is a course-level prerequisite only because of lesson 6
+  (`sacks-forcing`).
+- Lessons of the later courses cite this course by lesson link in a few places
+  (`avoidance/forcing-question-method` and `avoidance/hyperimmunities` cite
+  `effective-forcing/forcing-question` for compactness and "Φ^G_e(m)↓ < k", now in
+  `compactness-merging`; `lowness/forcing-the-jump` lists `effective-forcing/cohen-forcing`
+  as a prerequisite for `thm-effective-generic`, now in `generic-sets`). Label references
+  are unaffected.
+- `lowness` writes the oracle as G ⊕ Z in four places; the track uses Z ⊕ G.
 
 ## 11. History
 
 - **2026-11-12.** Course created: seven lessons, three figures
   (`scripts/figures/effective-forcing.py`), design log.
+- **2026-11-13: polishing pass.** The course becomes the first course of the track
+  "Lowness and avoidance". Structure: nine lessons (two new: `generic-sets`,
+  `compactness-merging`); honest durations. Mathematics: f-tree paths justified against
+  `def-function-tree`; precise failure for Jockusch–Soare in the exercise of lesson 2; the
+  case of the empty string in the solution of `exr-weak-forcing`; wrong lesson numbers
+  ("lesson 5" for the forcing question) and the misattributed exercise in the notes of
+  `forcing-with-trees` fixed; questions restricted to some levels allowed in
+  `def-forcing-question`, as used by Mathias forcing and by the later courses; the level-n
+  hyperimmunity remark now requires compactness for Σ⁰ₙ₊₁ sentences (as in Monin–Patey);
+  in `mathias-forcing`, computability of reservoirs is used by preservation, not by
+  property 1. Consistency: Mathias conventions (stem, reservoir, compatible, reservoirs in
+  a class ℳ) introduced in lesson 1, matching `def-mathias-condition`; oracle order Z ⊕ G.
+  Pedagogy: remark on classes of positive measure (refinement is needed), quiz on effective
+  genericity, the named technique "genericity by density", introductions of the new
+  lessons. References: Jockusch 1980 and Spector 1956 added to lesson 1; arXiv number of
+  Patey 2017 confirmed (1501.07709); volume and pages of *Pigeons do not jump high* still
+  unconfirmed (DOI only).
+

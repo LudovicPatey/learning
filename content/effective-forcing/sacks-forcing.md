@@ -1,7 +1,7 @@
 ---
 title: Computable Sacks forcing
 summary: Sufficiently generic sets for computable Sacks forcing are computably dominated and of minimal degree; unlike 1-generic sets, they are not generalized low; traces for the functions they compute.
-duration: 25
+duration: 30
 prerequisites: [forcing-with-trees, degree-structure/minimal-degrees]
 ---
 

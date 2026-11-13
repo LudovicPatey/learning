@@ -1,13 +1,13 @@
 ---
 title: Mathias forcing and preservation
 summary: The forcing question of computable Mathias forcing at level 1; cohesive sets that avoid a cone, preserve a hyperimmune function and are not PA; sufficiently generic sets are high, so there is no Σ⁰₂-preserving forcing question; the disjunctive question of Dzhafarov and Jockusch.
-duration: 35
-prerequisites: [forcing-question, immunity-growth/domination]
+duration: 40
+prerequisites: [compactness-merging, immunity-growth/domination, ramsey-theorem/cone-avoidance]
 ---
 
 Mathias forcing is the main tool for building solutions to combinatorial principles, such as cohesive sets and homogeneous sets for colorings. The course on Ramsey's theorem proved cone avoidance for cohesiveness by a direct argument (:ref{to="ramsey-theorem/cone-avoidance"}). This lesson places that argument in the framework of the forcing question. At level $1$, computable Mathias forcing has a forcing question with all the properties of the previous lesson, which gives at once cohesive sets that avoid a cone, preserve a hyperimmune function and are not PA. At level $2$ the picture changes: sufficiently generic sets are high, and no forcing question can be $\Sigma^0_2$-preserving. The reason is that a reservoir is an infinite set, and questions about infinite sets, such as "is $X \cap R$ infinite?", are $\Pi^0_2$.
 
-Recall the notion of forcing of :ref{#ex-forcing-notions}: conditions $(\sigma, X)$ with $X$ an infinite computable set and $\min X \geq |\sigma|$, given by $\sigma$ and an index of $X$. A string $\tau$ is **compatible** with $(\sigma, X)$ if $\sigma \preceq \tau$ and every $n$ with $|\sigma| \leq n < |\tau|$ and $\tau(n) = 1$ belongs to $X$. The members of $(\sigma, X)$ are the sets all of whose prefixes of length at least $|\sigma|$ are compatible with it.
+Recall the notion of forcing of :ref{#ex-forcing-notions}, item 4: conditions $(\sigma, X)$ with stem $\sigma$ and an infinite computable reservoir $X$ with $\min X \geq |\sigma|$, given by $\sigma$ and an index of $X$. The members of $(\sigma, X)$ are the sets all of whose prefixes of length at least $|\sigma|$ are compatible with it.
 
 ## The forcing question at level 1
 
@@ -27,7 +27,7 @@ For computable Mathias forcing, let $(\sigma, X) \mathrel{?{\vdash}} \Phi^G_e(\v
 *Merging.* If the answer is negative for each sentence of a family of $\Sigma^0_1$ sentences, finite or infinite, the proof of property 2 shows that $(\sigma, X)$ itself forces all their negations.
 :::
 
-The proof of property 1 shows why the reservoirs are required to be computable: the question searches through the strings compatible with the condition, a search that is effective only if membership in the reservoir is.
+The proof of preservation shows why the reservoirs are required to be computable: the question searches through the strings compatible with the condition, a search that is effective only if membership in the reservoir is. Properties 1 and 2 hold for any infinite reservoir; this is what the later courses use, with reservoirs in a class $\mathcal M$ and answers that are $\Sigma^0_1$ relative to the reservoir (:ref{to="avoidance/forcing-question-method"}).
 
 :::theorem{#thm-mathias-coh-preservation}
 Let $\vec R = (R_i)$ be a computable sequence of sets, $C$ a non-computable set, and $f$ a hyperimmune function. There is an $\vec R$-cohesive set $G$ such that $C \not\leq_T G$, $f$ is hyperimmune relative to $G$, and $G$ computes no DNC function; in particular $G$ is not PA.
@@ -37,7 +37,7 @@ Let $\vec R = (R_i)$ be a computable sequence of sets, $C$ a non-computable set,
 Let $G$ be sufficiently generic for computable Mathias forcing. It is infinite and $\vec R$-cohesive by :ref{#ex-generic-notions}. By :ref{#prop-mathias-question}, the forcing question at level $1$ is $\Sigma^0_1$-preserving, compact and $\omega$-merging. So $C \not\leq_T G$ by :ref{#cor-question-jump-cone} with $n = 0$, $f$ is hyperimmune relative to $G$ by :ref{#thm-question-hyperimmunity}, and $G$ computes no DNC function by :ref{#exr-sacks-dnc}. A countable union of countable families of dense sets is countable, so a single sufficiently generic set has all these properties.
 :::
 
-Everything relativizes. For a set $Z$, take reservoirs computable in $Z$ and formulas built from functionals with oracle $G \oplus Z$. For every $Z$-computable sequence $\vec R$, every $C \not\leq_T Z$ and every $f$ hyperimmune relative to $Z$, this gives an $\vec R$-cohesive $G$ with $C \not\leq_T G \oplus Z$, $f$ hyperimmune relative to $G \oplus Z$, and $G \oplus Z$ not PA relative to $Z$. The first property is :ref{#thm-coh-cone-avoidance}, whose three cases are exactly the two answers of the forcing question and the contradiction with $C \not\leq_T Z$.
+Everything relativizes. For a set $Z$, take reservoirs computable in $Z$ and formulas built from functionals with oracle $Z \oplus G$. For every $Z$-computable sequence $\vec R$, every $C \not\leq_T Z$ and every $f$ hyperimmune relative to $Z$, this gives an $\vec R$-cohesive $G$ with $C \not\leq_T Z \oplus G$, $f$ hyperimmune relative to $Z \oplus G$, and $Z \oplus G$ not PA relative to $Z$. The first property is :ref{#thm-coh-cone-avoidance}, whose three cases are exactly the two answers of the forcing question and the contradiction with $C \not\leq_T Z$.
 
 :::quiz[the Mathias forcing question]
 In :ref{#prop-mathias-question}, why does a negative answer give a condition forcing divergence without any extension?
@@ -101,7 +101,7 @@ In the proof of :ref{#prop-mathias-dominant}, why is the new reservoir chosen in
 
 The proof of strong cone avoidance for the pigeonhole principle (:ref{#thm-dj-cone-avoidance}) uses a variant of Mathias forcing whose conditions $(\sigma_0, \sigma_1, X)$ build two sets $G^0 \subseteq A$ and $G^1 \subseteq \overline A$ at once, with reservoirs in a Scott ideal $\mathcal I$, and requirements that are disjunctions: "$\Phi^{G^0}_{e_0} \neq C$ or $\Phi^{G^1}_{e_1} \neq C$". The relation "$c$ answers $(x, v)$" of that proof is a forcing question for these disjunctions: a positive answer, applied to the partition $(A, \overline A)$, gives an extension forcing $\Phi^{G^i}_{e_i}(x)\converge = v$ on one side $i$; a negative answer, witnessed by a partition in $\mathcal I$, gives an extension forcing that $\Phi^{G^i}_{e_i}(x)$ does not converge to $v$, on one side. The question does not mention $A$, and it is $\Sigma^0_1$ relative to $Z \oplus X$, a member of $\mathcal I$. The three cases of that proof are then the argument of :ref{#thm-question-preservation} at level $1$, relative to a member of $\mathcal I$: the set $W$ of answered pairs plays the role of $U$, and it cannot coincide with the graph of $C$, since $C \notin \mathcal I$.
 
-This is the general shape of the forcing questions used for Ramsey-type theorems: the question is asked about all instances of a problem at once, so that its complexity does not depend on the particular instance, and a negative answer is witnessed inside a class of simple sets closed under the operations of the construction.
+The course on avoidance makes this precise as a disjunctive forcing question (:ref{to="avoidance/disjunctive-question"}). This is the general shape of the forcing questions used for Ramsey-type theorems: the question is asked about all instances of a problem at once, so that its complexity does not depend on the particular instance, and a negative answer is witnessed inside a class of simple sets closed under the operations of the construction.
 
 ## Exercises
 
@@ -114,10 +114,10 @@ The computable sets form a countable family, so the dense sets of :ref{#ex-gener
 ::::
 
 ::::exercise{difficulty=2}
-Let $Z$ be a set, $\vec R$ a $Z$-computable sequence and $C \not\leq_T Z$. Using Mathias forcing with $Z$-computable reservoirs, show that there is an $\vec R$-cohesive set $G$ with $C \not\leq_T G \oplus Z$ such that $G$ is high relative to $Z$, that is, $(G \oplus Z)' \geq_T Z''$.
+Let $Z$ be a set, $\vec R$ a $Z$-computable sequence and $C \not\leq_T Z$. Using Mathias forcing with $Z$-computable reservoirs, show that there is an $\vec R$-cohesive set $G$ with $C \not\leq_T Z \oplus G$ such that $G$ is high relative to $Z$, that is, $(Z \oplus G)' \geq_T Z''$.
 
 :::solution
-Conditions are pairs $(\sigma, X)$ with $X$ infinite and $Z$-computable. The question of :ref{#prop-mathias-question}, with functionals of the oracle $G \oplus Z$, is a forcing question; it is $\Sigma^0_1(Z)$-preserving, since compatibility is $Z$-computable. The proofs of :ref{#thm-question-preservation} and :ref{#cor-question-jump-cone} with $n = 0$, relativized to $Z$, give $C \not\leq_T G \oplus Z$ for every sufficiently generic $G$: one of $C$ and $\overline C$ is not $\Sigma^0_1(Z)$, hence not $\Sigma^0_1(G \oplus Z)$. Cohesiveness follows as before, since $X \cap R_i$ and $X \setminus R_i$ are $Z$-computable. The proof of :ref{#prop-mathias-dominant}, for $Z$-computable functions $h$, shows that $p_G$ eventually dominates every $Z$-computable function, and Martin's theorem relativized to $Z$ gives $(G \oplus Z)' \geq_T Z''$.
+Conditions are pairs $(\sigma, X)$ with $X$ infinite and $Z$-computable. The question of :ref{#prop-mathias-question}, with functionals of the oracle $Z \oplus G$, is a forcing question; it is $\Sigma^0_1(Z)$-preserving, since compatibility is $Z$-computable. The proofs of :ref{#thm-question-preservation} and :ref{#cor-question-jump-cone} with $n = 0$, relativized to $Z$, give $C \not\leq_T Z \oplus G$ for every sufficiently generic $G$: one of $C$ and $\overline C$ is not $\Sigma^0_1(Z)$, hence not $\Sigma^0_1(Z \oplus G)$. Cohesiveness follows as before, since $X \cap R_i$ and $X \setminus R_i$ are $Z$-computable. The proof of :ref{#prop-mathias-dominant}, for $Z$-computable functions $h$, shows that $p_G$ eventually dominates every $Z$-computable function, and Martin's theorem relativized to $Z$ gives $(Z \oplus G)' \geq_T Z''$.
 :::
 ::::
 

@@ -1,7 +1,7 @@
 ---
 title: Forcing with Π⁰₁ classes and perfect trees
 summary: The complexity of the conditions and of the forcing of Σ⁰₁ and Π⁰₁ sentences for Jockusch–Soare and computable Sacks forcing; tree forcings decide Σ⁰₂ sentences for all members by a Σ⁰₂ question; their generic sets satisfy G″ ≤ G′ ⊕ ∅″.
-duration: 40
+duration: 45
 prerequisites: [cohen-forcing]
 ---
 
@@ -126,7 +126,7 @@ Use Jockusch–Soare forcing below $\mathcal P$. The dense sets $S_k$ of :ref{#l
 
 ## Notes and references
 
-Forcing with $\Pi^0_1$ classes is the method of Jockusch and Soare (1972); forcing with perfect trees goes back to Spector (1956) and is the computable version of Sacks forcing (Sacks 1971). The complexity of the conditions and of the forcing relation for both notions, the decision of $\Sigma^0_2$ sentences by a $\Sigma^0_2$ question, and the generalized low₂ property of the generic sets are from the chapter *Effective forcing* of Monin and Patey, section *Computational complexity and forcing question*; the hardness result of :ref{#prop-js-complexity} is added here. Dzhafarov and Mummert (Proposition 7.5.8, Corollary 7.5.9) prove that every infinite computable tree has a low₂ path of hyperimmune-free degree, which is the first exercise.
+Forcing with $\Pi^0_1$ classes is the method of Jockusch and Soare (1972); forcing with perfect trees goes back to Spector (1956) and is the computable version of Sacks forcing (Sacks 1971). The complexity of the conditions and of the forcing relation for both notions, the decision of $\Sigma^0_2$ sentences by a $\Sigma^0_2$ question, and the generalized low₂ property of the generic sets are from the chapter *Effective forcing* of Monin and Patey, section *Computational complexity and forcing question*; the hardness result of :ref{#prop-js-complexity} is added here. Dzhafarov and Mummert (Proposition 7.5.8, Corollary 7.5.9) prove that every infinite computable tree has a low₂ path of hyperimmune-free degree, which is :ref{#exr-low2-dominated}.
 
 - C. G. Jockusch and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
 - G. E. Sacks, *Forcing with perfect closed sets*, in *Axiomatic Set Theory*, Proceedings of Symposia in Pure Mathematics 13, Part I, American Mathematical Society, 1971, 331–355.

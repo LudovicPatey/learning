@@ -1,37 +1,15 @@
 ---
 title: The forcing relation
-summary: Arithmetic formulas about the generic set; the forcing relation of a notion of forcing; extension, consistency and density; forcing implies truth for generic sets; n-generic filters; forcing as density.
-duration: 45
-prerequisites: [notions-of-forcing, arithmetic-hierarchy/post-theorem, cohen-genericity/one-genericity]
+summary: The forcing relation of a notion of forcing; extension, consistency and density; forcing implies truth for generic sets; n-generic filters; forcing as density.
+duration: 40
+prerequisites: [generic-sets, arithmetic-hierarchy/post-theorem, cohen-genericity/one-genericity]
 ---
 
-In the previous lesson each property of generic sets was obtained from an ad hoc dense set. The **forcing relation** gives such dense sets uniformly for all properties expressed by arithmetic formulas. A condition $c$ forces a formula $\varphi$, written $c \Vdash \varphi$, if $c$ guarantees that $\varphi$ will hold for the set built, provided the construction continues generically. For formulas with at most one unbounded quantifier this can be required of all members of $c$. For more complex formulas it cannot: in Cohen forcing, no string has only infinite sets as members, yet every sufficiently generic set is infinite. The definition therefore says that $c$ forces a universal statement if no extension of $c$ forces a counterexample. The main theorem of the lesson, that forcing implies truth for generic sets, justifies this choice.
-
-## Formulas about the generic set
-
-We use formulas in a normal form adapted to oracle computations. The letter $G$ stands for the set being built.
-
-:::definition{#def-forcing-formula}
-The **formulas** of level $n \geq 1$, with free number variables $\vec x$, are defined as follows.
-
-1. A **$\Sigma^0_1$ formula** is an expression $\Phi^G_e(\vec x)\converge$, and a **$\Pi^0_1$ formula** an expression $\Phi^G_e(\vec x)\diverge$, where $e$ is an index of a Turing functional.
-2. A **$\Sigma^0_{n+1}$ formula** is an expression $\exists y\ \psi(\vec x, y)$ with $\psi$ a $\Pi^0_n$ formula, and a **$\Pi^0_{n+1}$ formula** an expression $\forall y\ \psi(\vec x, y)$ with $\psi$ a $\Sigma^0_n$ formula.
-
-A **sentence** is a formula whose free variables have been replaced by numbers. For a set $X$, $X \models \varphi$ means that $\varphi$ is true when $G$ is interpreted by $X$. The **negation** $\neg \varphi$ of a formula is the formula of the dual class obtained by exchanging $\converge$ and $\diverge$, and $\exists$ and $\forall$.
-:::
-
-So $\neg \neg \varphi = \varphi$, the negation of a $\Sigma^0_n$ formula is $\Pi^0_n$, and $X \models \neg \varphi$ if and only if $X \not\models \varphi$. Formulas are finite objects and are coded by numbers.
-
-These formulas express all arithmetic properties. Fix a set $X$. By the relativization of :ref{#thm-ce-characterizations}, the $\Sigma^0_1(X)$ relations are the domains of the functionals $\Phi^X_e$; a $\Pi^0_n(X)$ relation is the complement of a $\Sigma^0_n(X)$ relation, and a $\Sigma^0_{n+1}(X)$ relation is a projection of a $\Pi^0_n(X)$ relation (:ref{#def-relativized-hierarchy}). By induction on $n$, a relation $R(\vec x)$ is $\Sigma^0_n(X)$ if and only if $R = \{ \vec m : X \models \varphi(\vec m) \}$ for some $\Sigma^0_n$ formula $\varphi(\vec x)$. Moreover, the proof of Post's theorem (:ref{#thm-post}) is uniform in the oracle, so for each $n \geq 1$ there is a single $\Sigma^0_n$ formula $\theta_n(x)$ such that $m \in X^{(n)} \iff X \models \theta_n(m)$ for every set $X$.
-
-:::example{#ex-forcing-formulas}
-1. "$e \in G'$" is the $\Sigma^0_1$ sentence $\Phi^G_e(e)\converge$.
-2. Let $\Phi_a$ be the functional that on input $x$ searches for $y > x$ with $G(y) = 1$. Then "$G$ is infinite" is the $\Pi^0_2$ sentence $\forall x\ \Phi^G_a(x)\converge$, and "$G$ is finite" is its negation $\exists x\ \Phi^G_a(x)\diverge$.
-3. "$\Phi^G_e$ is total" is the $\Pi^0_2$ sentence $\forall x\ \Phi^G_e(x)\converge$.
-4. Formulas may also be built with functionals of an oracle $G \oplus Z$ for a fixed set $Z$; everything in this course relativizes to such formulas.
-:::
+In the previous lesson each property of generic sets came from an ad hoc dense set. The **forcing relation** gives such dense sets for all arithmetic properties at once. A condition $c$ forces $\varphi$, written $c \Vdash \varphi$, if $c$ guarantees $\varphi$ for the set built, provided the construction continues generically. For formulas with one unbounded quantifier this can be required of all members of $c$; for more complex ones it cannot: no string has only infinite sets as members, yet every sufficiently generic Cohen set is infinite. So $c$ forces a universal statement if no extension of $c$ forces a counterexample. The theorem that forcing implies truth for generic sets justifies this choice.
 
 ## The forcing relation
+
+Formulas, sentences and negations are those of :ref{#def-forcing-formula}.
 
 :::definition{#def-forcing-relation}
 Let $(\mathbb P, \leq, [\cdot])$ be a notion of forcing. The relation $c \Vdash \varphi$, read "$c$ **forces** $\varphi$", between conditions and sentences of level at least $1$ is defined by induction on the level.
@@ -43,15 +21,13 @@ Let $(\mathbb P, \leq, [\cdot])$ be a notion of forcing. The relation $c \Vdash 
 A condition **decides** $\varphi$ if it forces $\varphi$ or $\neg \varphi$.
 :::
 
-At level $1$ the definition is the one used for strings in :ref{#prop-force-sigma1}: the convergence or divergence of a computation is forced if it holds for all members. The existential clause asks for an explicit witness. The universal clause is the only one that refers to extensions: $c$ forces $\forall y\ \psi(y)$ if, however the construction continues below $c$, it never reaches a condition that forces a counterexample.
+At level $1$ this is the forcing of :ref{#prop-force-sigma1}: truth on all members. The existential clause asks for an explicit witness. Only the universal clause refers to extensions: however the construction continues below $c$, it never reaches a condition forcing a counterexample.
 
 :::example{#ex-forcing-relation}
 1. **Cohen forcing.** Every string $\sigma$ forces "$G$ is infinite", $\forall x\ \Phi^G_a(x)\converge$ in the notation of :ref{#ex-forcing-formulas}. Indeed $\tau \Vdash \Phi^G_a(m)\diverge$ would mean that no member of $\tau$ has an element above $m$, which fails for the member $\tau 1 1 \cdots$. But the finite set $\sigma 0 0 \cdots$ is a member of $\sigma$: forcing a $\Pi^0_2$ sentence does not make it true for all members.
 2. **Jockusch–Soare forcing.** A class $\mathcal P$ forces "$\Phi^G_e$ is total" if and only if $\Phi^X_e$ is total for every $X \in \mathcal P$. If $\Phi^X_e(m)\diverge$ for some $X \in \mathcal P$, the non-empty $\Pi^0_1$ class $\mathcal P \cap \{ X : \Phi^X_e(m)\diverge \}$ is an extension forcing $\Phi^G_e(m)\diverge$. Conversely, an extension forcing $\Phi^G_e(m)\diverge$ has a member, which is a member of $\mathcal P$.
 3. **Computable Sacks forcing.** Let $T$ be a computable f-tree, $L = \bigcup_k T(0^k)$ its leftmost path, and $\Phi_e$ the functional such that $\Phi^X_e(x)$ searches for $k$ with $X \uh |T(0^k)| \neq T(0^k)$. Then $\Phi^X_e$ is total if and only if $X \neq L$. No subtree $S$ of $T$ forces $\Phi^G_e(m)\diverge$, since $S$ has paths other than $L$; so $T$ forces "$\Phi^G_e$ is total", although $L$ is a member of $T$ for which it fails. Unlike Jockusch–Soare forcing, a computable perfect tree cannot remove a single path.
 :::
-
-The second example shows a feature of forcing with $\Pi^0_1$ classes that lesson 4 develops: $\Pi^0_2$ sentences of this form are forced only when they hold for all members.
 
 :::proposition{#prop-forcing-basic}
 Let $c$ be a condition and $\varphi$ a sentence of level $n \geq 1$.
@@ -64,7 +40,7 @@ Let $c$ be a condition and $\varphi$ a sentence of level $n \geq 1$.
 
 :::proof{of=prop-forcing-basic}
 1. By induction on $n$. At level $1$, $[d] \subseteq [c]$. If $c \Vdash \psi(m)$, then $d \Vdash \psi(m)$ by induction. If no extension of $c$ forces $\neg \psi(m)$, then neither does any extension of $d$, which is an extension of $c$.
-2. At level $1$, $[c]$ has a member, which satisfies exactly one of $\varphi$ and $\neg \varphi$. At level $n + 1$, one of the two sentences is $\exists y\ \psi(y)$ and the other is $\forall y\ \neg \psi(y)$. If $c \Vdash \psi(m)$, then $d = c$ is an extension of $c$ that forces $\neg \neg \psi(m) = \psi(m)$, so $c$ does not force $\forall y\ \neg \psi(y)$.
+2. At level $1$, a member of $c$ satisfies exactly one of $\varphi$ and $\neg \varphi$. At level $n + 1$, the two sentences are $\exists y\ \psi(y)$ and $\forall y\ \neg \psi(y)$. If $c \Vdash \psi(m)$, then $d = c$ forces $\neg \neg \psi(m) = \psi(m)$, so $c$ does not force $\forall y\ \neg \psi(y)$.
 3. At level $1$, $\varphi$ is $\Phi^G_e(\vec m)\converge$. Suppose some member $X$ of $c$ satisfies $\varphi$, with use $u$. By refinement there is $d \leq c$ with $[d] \subseteq [X \uh u]$, and by the use principle (:ref{#thm-use-principle}) every member of $d$ satisfies $\varphi$; this contradicts the hypothesis. So every member satisfies $\neg \varphi$. At level $n + 1$, $\varphi = \exists y\ \psi(y)$. If some $d \leq c$ forced $\neg \neg \psi(m) = \psi(m)$, it would force $\varphi$. So $c \Vdash \forall y\ \neg \psi(y) = \neg \varphi$.
 4. Since $D_\varphi = D_{\neg \varphi}$, we may assume that $\varphi$ is $\Sigma^0_n$. Given $c$, either some extension of $c$ forces $\varphi$, or $c$ forces $\neg \varphi$ by item 3.
 :::
@@ -117,7 +93,7 @@ Let $F$ be an $n$-generic filter and $\varphi$ a sentence of level $k \leq n$.
 2. One direction is item 1. Conversely, $F$ contains a condition $c$ deciding $\varphi$. If $c \Vdash \neg \varphi$, item 1 applied to $\neg \varphi$, of the same level, gives $G_F \models \neg \varphi$. So if $G_F \models \varphi$, then $c \Vdash \varphi$.
 :::
 
-The proof of item 1 uses genericity only in the universal clause, and only for the sentences $\psi(m)$: a condition forcing $\forall y\ \psi(y)$ leaves open which of its members will be built, but no generic filter through it can choose a counterexample, since choosing one would mean passing through a condition that forces it.
+Genericity is used only in the universal clause: no generic filter through a condition forcing $\forall y\ \psi(y)$ can choose a counterexample, since it would pass through a condition forcing it.
 
 :::quiz[forcing and truth]
 In the proof of :ref{#thm-forcing-truth}, why is the condition $e$ taken as a common extension of $c$ and $d$, rather than $d$ itself?
@@ -143,7 +119,7 @@ Which property of the generic set $G_F$ does the theorem give for a $2$-generic 
   The theorem concerns the generic set, not all members of a condition.
 :::
 
-The forcing relation can also be characterized without reference to the syntax of the formula, by density.
+Forcing can also be characterized by density, without reference to the syntax.
 
 :::corollary{#cor-forcing-density}
 Let $c$ be a condition and $\varphi$ a sentence of level $n$. The following are equivalent:
@@ -158,7 +134,7 @@ Let $c$ be a condition and $\varphi$ a sentence of level $n$. The following are 
 (1 ⇒ 2) Let $d \leq c$. By density, some $e \leq d$ decides $\varphi$. If $e \Vdash \neg \varphi$, an $n$-generic filter containing $e$ contains $c$, since filters are closed upward, and its set satisfies $\neg \varphi$, contradicting 1. So $e \Vdash \varphi$.
 :::
 
-Condition 1 depends only on the class $\{ X : X \models \varphi \}$, not on the formula. Two formulas of level $n$ that define the same class may be forced by different conditions, but they are forced densely below the same conditions. This is the sense in which the syntactic definition of forcing is harmless.
+Condition 1 depends only on the class $\{ X : X \models \varphi \}$: two formulas of level $n$ defining the same class may be forced by different conditions, but are forced densely below the same conditions. In this sense the syntactic definition is harmless.
 
 ## Exercises
 
@@ -178,13 +154,13 @@ If $c \Vdash \varphi$, every extension forces $\varphi$, so the set is dense bel
 
 Let $\varphi$ be $\Pi^0_n$ and suppose $c$ weakly forces it. For $n = 1$, let $\varphi = \Phi^G_e(\vec m)\diverge$, and suppose a member $X$ of $c$ has $\Phi^X_e(\vec m)\converge$ with use $u$. By refinement some $d \leq c$ has all its members extending $X \uh u$, so they all satisfy $\neg \varphi$; an extension of $d$ forcing $\varphi$ would have a member satisfying $\varphi$, in $[d]$. This is a contradiction, so $c \Vdash \varphi$. For $n \geq 2$, let $\varphi = \forall y\ \psi(y)$ and suppose $d \leq c$ forces $\neg \psi(m)$. Some $e \leq d$ forces $\varphi$; it also forces $\neg \psi(m)$ by extension, while $e \Vdash \varphi$ forbids $e$ itself from forcing $\neg \psi(m)$. So $c \Vdash \varphi$.
 
-In the first exercise, the $\Pi^0_2$ sentence $\neg \varphi$ is forced by no extension of the empty string, since every string of length $1$ forces $\varphi$ and extension and consistency forbid both. But the empty string does not force $\neg \neg \varphi = \varphi$.
+In the first exercise, the $\Pi^0_2$ sentence $\neg \varphi$ is forced by no string: a non-empty string extends a string of length $1$, so it forces $\varphi$, and not $\neg \varphi$ by consistency; the empty string does not force $\neg \varphi$, since its extension $0$ forces $\psi(0) = \neg \neg \psi(0)$. But the empty string does not force $\neg \neg \varphi = \varphi$ either.
 :::
 ::::
 
 ## Notes and references
 
-The forcing relation for arithmetic was defined by Feferman (1965), with atomic formulas $n \in G$ at the base and a clause for negation; Downey and Hirschfeldt reproduce this definition for Cohen forcing (Section 2.24, footnote to Definition 2.24.1), and Dzhafarov and Mummert (Section 7.4, Definition 7.4.1, Theorem 7.4.6) give it for arbitrary notions of forcing, with the corresponding theorem on forcing and truth. The definition used here, in which formulas of level $1$ are forced when all members satisfy them, is the syntactic forcing relation of Monin and Patey, chapter *Effective forcing*, section *Forcing relation*; it suits notions of forcing whose conditions are classes. The relation defined in this way is often called **strong forcing**; the weak forcing of :ref{#exr-weak-forcing} is the version common in set theory.
+The forcing relation for arithmetic is due to Feferman (1965), with atomic formulas $n \in G$ at the base and a negation clause; Downey and Hirschfeldt recall it for Cohen forcing (Section 2.24, footnote to Definition 2.24.1), and Dzhafarov and Mummert (Definition 7.4.1, Proposition 7.4.2, Theorem 7.4.6) treat arbitrary notions of forcing. The version used here, with truth on all members at level $1$, is the syntactic forcing relation of Monin and Patey (chapter *Effective forcing*, section *Forcing relation*), suited to conditions that are classes. It is a **strong forcing**; the weak forcing of :ref{#exr-weak-forcing} is the version common in set theory.
 
 - S. Feferman, *Some applications of the notions of forcing and generic sets*, Fundamenta Mathematicae 56 (1965), 325–345.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.24.

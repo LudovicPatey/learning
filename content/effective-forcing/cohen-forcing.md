@@ -1,29 +1,11 @@
 ---
 title: Definability of forcing for Cohen forcing
-summary: Effectively dense sets and effective generic sets; for Cohen forcing, forcing a Σ⁰ₙ formula is a Σ⁰ₙ relation; n-generic filters and n-generic sets; the jumps of generic sets; generic sets preserve the non-Σ⁰ₙ sets and avoid the cones above sets not computable in the n-th jump.
+summary: For Cohen forcing, forcing a Σ⁰ₙ formula is a Σ⁰ₙ relation; n-generic filters and n-generic sets; the jumps of generic sets; generic sets preserve the non-Σ⁰ₙ sets and avoid the cones above sets not computable in the n-th jump.
 duration: 45
-prerequisites: [forcing-relation, cohen-genericity/n-genericity]
+prerequisites: [forcing-relation, generic-sets, cohen-genericity/n-genericity]
 ---
 
-The forcing relation of the previous lesson is defined for every notion of forcing, but its usefulness in computability theory depends on its complexity. If the relation "$c \Vdash \varphi$" is not much more complex than $\varphi$ itself, then questions about a generic set can be answered from questions about conditions, with a known oracle. Cohen forcing is the model case: the conditions are strings, the extension relation is computable, and forcing a $\Sigma^0_n$ sentence is a $\Sigma^0_n$ property of the string. After a general statement on effective generic sets, this lesson proves this fact and derives three consequences: the $n$-generic sets of :ref{#def-relative-genericity} are exactly the sets whose filters are $n$-generic in the sense of the previous lesson; their $n$-th jump is computable from $G \oplus \emptyset^{(n)}$; and sufficiently generic sets do not help to define or compute any set that is not already $\Sigma^0_n$ or computable in $\emptyset^{(n)}$. The last argument is the template for the forcing question of lesson 5.
-
-## Effective genericity
-
-The properties of sufficiently generic sets in :ref{#ex-generic-notions} forget the effectiveness of the constructions they come from. It is recovered by measuring how hard it is to find extensions in the dense sets.
-
-:::theorem{#thm-effective-generic}
-Let $\mathbb P$ be a notion of forcing whose conditions are given by codes, that is, by a partial map from $\nat$ onto $\mathbb P$. Let $A$ be a set, and $D_0, D_1, \dots$ dense sets such that some partial $A$-computable function $h$ satisfies $h(c, i) \leq c$ and $h(c, i) \in D_i$ for every code $c$ and every $i$. Then for every condition $c$ there is an $A$-computable sequence of codes of conditions $c = c_0 \geq c_1 \geq \cdots$ generating a filter that meets every $D_i$.
-:::
-
-:::proof{of=thm-effective-generic}
-Let $c_{i+1} = h(c_i, i)$. The function $h$ is defined on codes of conditions, so the sequence is defined, and computed by iterating $h$.
-:::
-
-The dense sets of such a family are said to be **uniformly $A$-effectively dense**. Whether the set $G_F$ is then computable in $A$ depends on the notion of forcing: one must also extract prefixes of $G_F$ from the conditions.
-
-:::example{#ex-low-basis-forcing}
-The low basis theorem (:ref{#thm-low-basis}) is an instance with $A = \emptyset'$ and Jockusch–Soare forcing, a condition being given by an index of a computable tree. For each $e$, let $D_e$ be the set of classes $\mathcal Q$ such that $\Phi^X_e(e)\converge$ for every member $X$, or $\Phi^X_e(e)\diverge$ for every member. Given $\mathcal Q$, the oracle $\emptyset'$ decides whether $\mathcal Q \cap \{ X : \Phi^X_e(e)\diverge \}$ is empty (:ref{#prop-pi01-emptiness}), and returns this class if it is non-empty, $\mathcal Q$ otherwise. Likewise $\emptyset'$ finds a string $\sigma$ of length $n$ with $\mathcal Q \cap [\sigma] \neq \emptyset$, so the sets $S_n$ are uniformly $\emptyset'$-effectively dense. Along the resulting $\emptyset'$-computable sequence, the prefixes of $G_F$ and the decisions about $\Phi^{G_F}_e(e)$ are computed by $\emptyset'$; so $G_F$ is low.
-:::
+The forcing relation of the previous lesson is defined for every notion of forcing, but its usefulness in computability theory depends on its complexity. If the relation "$c \Vdash \varphi$" is not much more complex than $\varphi$ itself, then questions about a generic set can be answered from questions about conditions, with a known oracle. Cohen forcing is the model case: the conditions are strings, the extension relation is computable, and forcing a $\Sigma^0_n$ sentence is a $\Sigma^0_n$ property of the string. This lesson proves this fact and derives three consequences: the $n$-generic sets of :ref{#def-relative-genericity} are exactly the sets whose filters are $n$-generic in the sense of the previous lesson; their $n$-th jump is computable from $G \oplus \emptyset^{(n)}$; and sufficiently generic sets do not help to define or compute any set that is not already $\Sigma^0_n$ or computable in $\emptyset^{(n)}$. The last argument is the template for the forcing question (:ref{to="effective-forcing/forcing-question"}).
 
 ## The complexity of forcing
 
@@ -183,11 +165,10 @@ For a $\Sigma^0_1$ formula $\varphi(x) = \Phi^G_e(x)\converge$, the set $W_\varp
 
 ## Notes and references
 
-Effective forms of the existence of generic filters are given by Hirschfeldt (Proposition 2.7) and by Dzhafarov and Mummert (Theorem 7.5.6). The definability of the forcing relation for Cohen forcing, and its consequences for the jumps of $n$-generic sets, are due to Jockusch (1980), building on Feferman (1965); Dzhafarov and Mummert present them as Lemma 7.5.10 and Propositions 7.5.11 and 7.5.12. The equivalence between the two definitions of $n$-genericity is credited by Downey and Hirschfeldt to Jockusch and Posner (Section 2.24). The preservation theorem and its corollary are stated for Cohen forcing in the chapter on Cohen genericity of Monin and Patey, and for every notion of forcing with a suitable forcing question in their chapter *Effective forcing*; lesson 5 gives the general form.
+The definability of the forcing relation for Cohen forcing, and its consequences for the jumps of $n$-generic sets, are due to Jockusch (1980), building on Feferman (1965); Dzhafarov and Mummert present them as Lemma 7.5.10 and Propositions 7.5.11 and 7.5.12. The equivalence between the two definitions of $n$-genericity is credited by Downey and Hirschfeldt to Jockusch and Posner (Section 2.24). The preservation theorem and its corollary are stated for Cohen forcing in the chapter on Cohen genericity of Monin and Patey, and for every notion of forcing with a suitable forcing question in their chapter *Effective forcing*; :ref{to="effective-forcing/forcing-question"} gives the general form.
 
 - S. Feferman, *Some applications of the notions of forcing and generic sets*, Fundamenta Mathematicae 56 (1965), 325–345.
 - C. G. Jockusch, *Degrees of generic sets*, in *Recursion Theory: its Generalisations and Applications*, London Mathematical Society Lecture Note Series 45, Cambridge University Press, 1980, 110–139.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.24.
-- D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 2.3.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 7.5.
 - B. Monin and L. Patey, *Computability theory*, chapters *Cohen genericity* and *Effective forcing*.

@@ -1,13 +1,13 @@
 ---
 title: The forcing question
-summary: Forcing questions and their definability; a forcing question for tree forcings at every level; preservation of non-Σ⁰ₙ sets and cone avoidance for the iterated jumps; compactness and preservation of hyperimmunity; merging and avoidance of PA degrees.
-duration: 45
-prerequisites: [sacks-forcing, pi01-classes/pa-degrees, immunity-growth/immune-sets]
+summary: Forcing questions and their definability; a forcing question for tree forcings at every level; preservation of non-Σ⁰ₙ sets and cone avoidance for the iterated jumps.
+duration: 30
+prerequisites: [forcing-with-trees, cohen-forcing]
 ---
 
 The preservation theorem for Cohen forcing (:ref{#thm-cohen-preservation}) used one fact about the forcing relation: for a condition $c$ and a $\Sigma^0_n$ formula $\varphi(x)$, the set of $m$ such that $c$ can be extended to force $\varphi(m)$ is $\Sigma^0_n$. For tree forcings the forcing relation is too complex for this (:ref{#prop-js-complexity}), but the proof of :ref{#thm-tree-gl2} used a substitute at level $2$: a $\Sigma^0_2$ question whose positive answer yields an extension forcing the sentence, and whose negative answer yields an extension forcing its negation.
 
-A **forcing question** is such a substitute, at every level. It isolates what the density arguments of the previous lessons need, and leaves aside how the extensions are found. This lesson defines forcing questions, builds one for tree forcings, and proves three preservation theorems that hold for every notion of forcing whose forcing question has the right properties: preservation of the arithmetic hierarchy and cone avoidance, preservation of hyperimmunity, and avoidance of PA degrees. The method is due to Monin and Patey, and is used to prove that combinatorial principles admit computationally weak solutions.
+A **forcing question** is such a substitute, at every level. It isolates what the density arguments of the previous lessons need, and leaves aside how the extensions are found. This lesson defines forcing questions, builds one for tree forcings, and proves that every notion of forcing with a $\Sigma^0_n$-preserving question preserves the non-$\Sigma^0_n$ sets, hence avoids the cones above the sets not computable in $\emptyset^{(n-1)}$. The next lesson adds two properties of questions, compactness and merging, which give the preservation of hyperimmunity and the avoidance of PA degrees. The method is due to Monin and Patey, and is used to prove that combinatorial principles admit computationally weak solutions.
 
 ## Forcing questions
 
@@ -21,6 +21,8 @@ The question is **$\Sigma^0_n$-preserving** if for every condition $c$ and every
 :::
 
 The question does not decide whether $c$ forces $\varphi$; it tells which of $\varphi$ and $\neg \varphi$ can be forced below $c$, and may answer either way when both can. Every notion of forcing has a forcing question: let $c \mathrel{?{\vdash}} \varphi$ if some extension of $c$ forces $\varphi$; property 2 holds by :ref{#prop-forcing-basic}. The point is definability.
+
+A forcing question may be given only for the $\Sigma^0_n$ sentences of some levels, for instance only for $\Sigma^0_1$ sentences, as for Mathias forcing in :ref{to="effective-forcing/mathias-forcing"}; the definitions and theorems below use a question only at the levels they mention. The later courses of the track, from :ref{to="avoidance/forcing-question-method"} on, use questions of this kind, with $\Sigma^0_1$-preservation relative to a set depending on the condition.
 
 :::example{#ex-cohen-question}
 For Cohen forcing, the relation "$\sigma \mathrel{?{\vdash}} \varphi$ if some $\tau \succeq \sigma$ forces $\varphi$" is a forcing question, and it is $\Sigma^0_n$-preserving for every $n$ by :ref{#thm-cohen-forcing-definable}. At level $1$, $\sigma \mathrel{?{\vdash}} \Phi^G_e(\vec m)\converge$ if and only if $\Phi^\tau_e(\vec m)\converge$ for some $\tau \succeq \sigma$.
@@ -44,14 +46,7 @@ Conditions are given by indices. We define $c \mathrel{?{\vdash}} \varphi$ by in
 3. "$d$ is a condition" is $\Pi^0_1$ or $\Pi^0_2$, "$d \leq c$" is $\Pi^0_2$ or $\Pi^0_1$ (:ref{#prop-js-complexity}, :ref{#prop-sacks-complexity}), and "$d \mathrel{?{\nvdash}} \neg \psi(m)$" is $\Pi^0_k$ by the induction hypothesis. Since $k \geq 2$, the relation $\exists d\ \exists m\ (\Pi^0_k)$ is $\Sigma^0_{k+1}$.
 :::
 
-The step from level $k$ to level $k + 1$ uses only properties 1 and 2 at level $k$ and the fact that conditions and extension are $\Pi^0_2$. The real work is at levels $1$ and $2$, where each notion of forcing needs its own question. The table summarizes the properties of the questions of this lesson and of the next one.
-
-| notion of forcing | $\Sigma^0_1$-preserving | $\Sigma^0_n$-preserving, all $n$ | compact | merging |
-| --- | --- | --- | --- | --- |
-| Cohen | yes | yes | yes | yes |
-| Jockusch–Soare | yes | yes | yes | no |
-| computable Sacks | yes | yes | yes | yes |
-| computable Mathias | yes | no ($n = 2$) | yes | yes |
+The step from level $k$ to level $k + 1$ uses only properties 1 and 2 at level $k$ and the fact that conditions and extension are $\Pi^0_2$. The real work is at levels $1$ and $2$, where each notion of forcing needs its own question.
 
 ## Preservation of the arithmetic hierarchy
 
@@ -103,89 +98,9 @@ In the proof of :ref{#thm-tree-question}, where is it used that being a conditio
   Level $1$ uses the specific descriptions of :ref{#prop-js-complexity} and :ref{#prop-sacks-complexity}.
 :::
 
-## Preservation of hyperimmunity
-
-A function $f$ is **hyperimmune relative to $G$** if no $G$-computable function dominates it (:ref{#def-hyperimmune-fn} relativized). Weakly 1-generic sets compute hyperimmune functions, so Cohen generic sets do not preserve all hyperimmune functions at once; they preserve each one separately. The property needed is that a positive answer about a convergence is witnessed by a finite bound on the value. For a functional $\Phi_e$, let $\Phi_{b(e)}$ be the functional such that $\Phi^G_{b(e)}(m, k)\converge$ if and only if $\Phi^G_e(m)\converge < k$, with $b$ computable; we write "$\Phi^G_e(m)\converge < k$" for this $\Sigma^0_1$ sentence.
-
-:::definition{#def-question-compact}
-A forcing question is **compact** (at level $1$) if for every condition $c$, functional $\Phi_e$ and number $m$, if $c \mathrel{?{\vdash}} \Phi^G_e(m)\converge$, then $c \mathrel{?{\vdash}} \Phi^G_e(m)\converge < k$ for some $k$.
-:::
-
-:::theorem{#thm-question-hyperimmunity}
-Let $\mathbb P$ have a $\Sigma^0_1$-preserving compact forcing question, and let $f$ be a hyperimmune function. For every sufficiently generic set $G$, $f$ is hyperimmune relative to $G$.
-:::
-
-:::proof{of=thm-question-hyperimmunity}
-Fix $e$, and let $E_e$ be the set of conditions $d$ such that $d \Vdash \Phi^G_e(m)\diverge$ for some $m$, or $d \Vdash \Phi^G_e(m)\converge < f(m)$ for some $m$. Given a condition $c$, the set of pairs $(m, k)$ with $c \mathrel{?{\vdash}} \Phi^G_e(m)\converge < k$ is c.e., since the question is $\Sigma^0_1$-preserving. Let $g$ be the partial computable function such that $g(m)$ is the $k$ of the first such pair enumerated with first coordinate $m$.
-
-- If $g(m)$ is undefined for some $m$, then $c \mathrel{?{\nvdash}} \Phi^G_e(m)\converge$ by compactness, so some extension of $c$ forces $\Phi^G_e(m)\diverge$.
-- If $g$ is total, it is computable, so $f(m) > g(m)$ for some $m$, since $f$ is hyperimmune. Some extension of $c$ forces $\Phi^G_e(m)\converge < g(m)$, hence $\Phi^G_e(m)\converge < f(m)$: every member satisfies it.
-
-So $E_e$ is dense. If $G$ is generic for every $E_e$, then for every $e$, $\Phi^G_e$ is partial or $\Phi^G_e(m) < f(m)$ for some $m$, so no $G$-computable function dominates $f$.
-:::
-
-The three questions of the previous section are compact. For Cohen forcing, a string $\tau \succeq \sigma$ with $\Phi^\tau_e(m)\converge = v$ gives $\sigma \mathrel{?{\vdash}} \Phi^G_e(m)\converge < v + 1$; for Sacks forcing, a node does the same. For Jockusch–Soare forcing, if all members of $\mathcal P$ make $\Phi_e(m)$ converge, the computations converge on the strings of $T_{\mathcal P}$ of some length $\ell$, as in :ref{#lem-uniform-bound}, and one more than the largest of their values bounds them all. So for each of these notions and each hyperimmune $f$, every sufficiently generic set preserves the hyperimmunity of $f$. For Jockusch–Soare forcing this gives a **hyperimmunity-preserving basis theorem**: every non-empty $\Pi^0_1$ class has a member relative to which a given hyperimmune function remains hyperimmune. Monin and Patey state the theorem at every level $n$, for questions that are compact and $\Sigma^0_{n+1}$-preserving, with $\emptyset^{(n)}$ and $G^{(n)}$ in place of $\emptyset$ and $G$; the proof is the same.
-
-## Avoiding PA degrees
-
-The last property controls two questions at once. Recall that a set is PA if it computes a $\{0, 1\}$-valued DNC function (:ref{#def-pa-degree}).
-
-:::definition{#def-question-merging}
-A forcing question is **merging** (at level $1$) if for every condition $c$ and all $\Sigma^0_1$ sentences $\varphi_0$ and $\varphi_1$ with $c \mathrel{?{\nvdash}} \varphi_0$ and $c \mathrel{?{\nvdash}} \varphi_1$, some extension of $c$ forces both $\neg \varphi_0$ and $\neg \varphi_1$.
-:::
-
-:::theorem{#thm-question-pa}
-Let $\mathbb P$ have a $\Sigma^0_1$-preserving merging forcing question. Every sufficiently generic set $G$ is not PA.
-:::
-
-:::proof{of=thm-question-pa}
-Fix $e$, and let $E_e$ be the set of conditions $d$ for which there is $i$ such that every member $X$ of $d$ satisfies $\Phi^X_e(i) \notin \{0, 1\}$, the computation diverging or giving another value, or every member satisfies $\Phi^X_e(i)\converge = \Phi_i(i)$, the right-hand side converging. Given a condition $c$, let $g$ be the partial computable function such that $g(i)$ is the first $v \in \{0, 1\}$ found with $c \mathrel{?{\vdash}} \Phi^G_e(i)\converge = v$; it is partial computable since the question is $\Sigma^0_1$-preserving. Let $i$ be an index of $g$, so that $\Phi_i = g$.
-
-- If $g(i)$ is undefined, then $c \mathrel{?{\nvdash}} \Phi^G_e(i)\converge = 0$ and $c \mathrel{?{\nvdash}} \Phi^G_e(i)\converge = 1$, and since the question is merging, some extension of $c$ forces both negations: on its members, $\Phi_e(i)$ does not converge to $0$ or $1$.
-- If $g(i) = v$, then $\Phi_i(i) = v$, and some extension of $c$ forces $\Phi^G_e(i)\converge = v = \Phi_i(i)$.
-
-So $E_e$ is dense. If $G$ is generic for every $E_e$, no $\Phi^G_e$ is a $\{0, 1\}$-valued DNC function, so $G$ is not PA.
-:::
-
-The questions of Cohen and Sacks forcing are merging: if no extension of $\sigma$, or no node of $T$, makes either of two computations converge, the condition itself forces both divergences. Jockusch–Soare forcing has no $\Sigma^0_1$-preserving merging question: below the condition $\mathrm{DNC}_2$, every generic set is PA, so the conclusion of :ref{#thm-question-pa} fails. Here, two classes $\mathcal P \cap \{ X : \neg \varphi_0(X) \}$ and $\mathcal P \cap \{ X : \neg \varphi_1(X) \}$ can both be non-empty and disjoint.
-
-:::quiz[compactness and merging]
-In the proof of :ref{#thm-question-hyperimmunity}, why is compactness needed in the first case?
-
-- [x] To conclude from the absence of any bound $k$ that the question about $\Phi^G_e(m)\converge$ itself is answered negatively, so that property 2 gives an extension forcing divergence.
-- [ ] To show that $g$ is computable.
-
-  $g$ is partial computable by $\Sigma^0_1$-preservation alone.
-- [ ] To find an $m$ with $f(m) > g(m)$.
-
-  That is the hyperimmunity of $f$, in the second case.
-
----
-
-In the proof of :ref{#thm-question-pa}, why is $i$ chosen as an index of $g$ itself?
-
-- [x] So that a positive answer $g(i) = v$ makes the forced value $\Phi^G_e(i) = v$ coincide with $\Phi_i(i)$, which defeats diagonal non-computability at $i$.
-- [ ] So that $g$ is total.
-
-  $g$ may be partial; the case $g(i)$ undefined is handled by merging.
-- [ ] So that $\Phi_i(i)$ diverges.
-
-  If $g(i)$ is defined, $\Phi_i(i)$ converges to it.
-:::
-
-## Exercises
-
-::::exercise{#exr-sacks-dnc difficulty=2}
-Call a forcing question **$\omega$-merging** if whenever $c \mathrel{?{\nvdash}} \varphi_v$ for all $v$ in an infinite computable sequence of $\Sigma^0_1$ sentences $(\varphi_v)$, some extension of $c$ forces every $\neg \varphi_v$. Show that if a $\Sigma^0_1$-preserving forcing question is $\omega$-merging, every sufficiently generic set computes no DNC function, and that the question of Sacks forcing is $\omega$-merging.
-
-:::solution
-Repeat the proof of :ref{#thm-question-pa} with $g(i)$ the first $v \in \nat$ found with $c \mathrel{?{\vdash}} \Phi^G_e(i)\converge = v$. If $g(i)$ is undefined, $c \mathrel{?{\nvdash}} \Phi^G_e(i)\converge = v$ for every $v$, and $\omega$-merging gives an extension forcing all the negations, that is, $\Phi^G_e(i)\diverge$. Otherwise an extension forces $\Phi^G_e(i) = \Phi_i(i)$. So $\Phi^G_e$ is not DNC, for every $e$. For Sacks forcing, $T \mathrel{?{\nvdash}} \varphi_v$ means that no node of $T$ makes the corresponding computation converge, so $T$ forces all the negations at once, by :ref{#prop-sacks-complexity}.
-:::
-::::
-
 ## Notes and references
 
-The forcing question was introduced by Monin and Patey, and appears in several of their papers on the reverse mathematics of Ramsey-type theorems, for instance in *Pigeons do not jump high* (2019), where forcing relations and questions adapted to variants of Mathias forcing are designed to build solutions to the pigeonhole principle that are not high; Patey (2015, arXiv) had used forcing relations with the complexity of the formulas they force to control iterated jumps. The abstract definition and the three preservation theorems of this lesson follow the chapter *Effective forcing* of Monin and Patey, section *Forcing question*, where compactness and merging are called compactness and $\Pi$-merging; the definitions there are given for questions about $\Sigma^0_n$ and $\Pi^0_n$ sentences, and are stated here for $\Sigma^0_1$ sentences only.
+The forcing question was introduced by Monin and Patey, and appears in several of their papers on the reverse mathematics of Ramsey-type theorems, for instance in *Pigeons do not jump high* (2019), where forcing relations and questions adapted to variants of Mathias forcing are designed to build solutions to the pigeonhole principle that are not high; Patey (2015, arXiv) had used forcing relations with the complexity of the formulas they force to control iterated jumps. The abstract definition and the preservation of the arithmetic hierarchy follow the chapter *Effective forcing* of Monin and Patey, section *Forcing question*, where questions are defined for $\Sigma^0_n$ and $\Pi^0_n$ sentences; the version here, for $\Sigma^0_n$ sentences only, suffices for all the applications of the course. The forcing question of Jockusch–Soare forcing at level $1$ is the over-approximation used in the proof of the cone avoidance basis theorem.
 
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics (2019), doi:10.1016/j.aim.2019.06.026; arXiv:1803.09771.
 - L. Patey, *Controlling iterated jumps of solutions to combinatorial problems*, arXiv:1509.05340 (2015).
