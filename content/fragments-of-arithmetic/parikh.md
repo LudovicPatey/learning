@@ -46,7 +46,7 @@ Why must the cut $I$ in the proof be closed under multiplication?
 
 ## Exponentiation
 
-The function $x \mapsto 2^x$ is not a symbol of $\mathcal L_A$, and its natural definition, "there is a sequence $1, 2, 4, \dots, y$ of length $x + 1$", needs a coding of sequences, which is the subject of the lesson on coding. Its graph has a bounded definition, which we admit.
+The function $x \mapsto 2^x$ is not a symbol of $\mathcal L_A$, and its natural definition, "there is a sequence $1, 2, 4, \dots, y$ of length $x + 1$", needs a coding of sequences, and the coding of :ref{to="coding"} itself uses exponentiation. Its graph has a bounded definition, which we admit.
 
 :::fact[Bennett; Paris; Dimitracopoulos]{#fact-exp}
 There is a $\Delta_0$ formula $\varepsilon(x, y)$ such that $\nat \models \varepsilon(x, y)$ if and only if $y = 2^x$, and $\mathrm I\Delta_0$ proves
@@ -55,7 +55,7 @@ There is a $\Delta_0$ formula $\varepsilon(x, y)$ such that $\nat \models \varep
 3. $\varepsilon(x, y) \wedge x' < x \rightarrow \exists y' < y\ \varepsilon(x', y')$.
 :::
 
-We write $y = 2^x$ for $\varepsilon(x, y)$, and say that $2^x$ exists if some $y$ satisfies it. In a model $M$ of $\mathrm I\Delta_0$, the elements $x$ for which $2^x$ exists form an initial segment containing the standard numbers, and the usual laws, such as $x < 2^x$, $2^{x + y} = 2^x \cdot 2^y$ and $x < y \leftrightarrow 2^x < 2^y$, hold whenever the powers involved exist. Each law is proved by a bounded induction in which a power that exists serves as a parameter bounding the others, as in the proof of comprehension in the lesson on coding; see Hájek and Pudlák, Theorem I.1.30. We use these laws without comment.
+We write $y = 2^x$ for $\varepsilon(x, y)$, and say that $2^x$ exists if some $y$ satisfies it. In a model $M$ of $\mathrm I\Delta_0$, the elements $x$ for which $2^x$ exists form an initial segment containing the standard numbers, and the usual laws, such as $x < 2^x$, $2^{x + y} = 2^x \cdot 2^y$ and $x < y \leftrightarrow 2^x < 2^y$, hold whenever the powers involved exist. Each law is proved by a bounded induction in which a power that exists serves as a parameter bounding the others, as in the proof of comprehension for bounded formulas (:ref{to="ackermann-coding"}); see Hájek and Pudlák, Theorem I.1.30. We use these laws without comment.
 
 :::definition{#def-exp}
 The axiom $\mathrm{exp}$ is the $\Pi_2$ sentence $\forall x\ \exists y\ \varepsilon(x, y)$. An **exponential cut** of a model is a cut closed under $x \mapsto 2^x$.
@@ -83,7 +83,7 @@ $\mathrm I\Sigma_1$ proves $\mathrm{exp}$.
 Apply $\Sigma_1$ induction to $\exists y\ \varepsilon(x, y)$: it holds for $x = 0$, with $y = 1$, and if $\varepsilon(x, y)$ then $\varepsilon(x + 1, y + y)$, by :ref{#fact-exp}.
 :::
 
-So the model $I_a$ of the example is a model of $\mathrm I\Delta_0$ in which $\Sigma_1$ induction fails, for the formula $\exists y\ \varepsilon(x, y)$: the set of $x$ for which $2^x$ exists is a $\Sigma_1$-definable proper cut of $I_a$. The theory $\mathrm I\Delta_0 + \mathrm{exp}$, between $\mathrm I\Delta_0$ and $\mathrm I\Sigma_1$, is the setting of the lesson on coding.
+So the model $I_a$ of the example is a model of $\mathrm I\Delta_0$ in which $\Sigma_1$ induction fails, for the formula $\exists y\ \varepsilon(x, y)$: the set of $x$ for which $2^x$ exists is a $\Sigma_1$-definable proper cut of $I_a$. The theory $\mathrm I\Delta_0 + \mathrm{exp}$, between $\mathrm I\Delta_0$ and $\mathrm I\Sigma_1$, is the setting of the coding of finite sets and sequences (:ref{to="ackermann-coding"}).
 
 ## Exercises
 

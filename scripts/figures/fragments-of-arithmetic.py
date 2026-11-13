@@ -1,10 +1,10 @@
 # Generates the inline SVG figures of the course Fragments of arithmetic.
 # Usage: python3 scripts/figures/fragments-of-arithmetic.py out.json
 # Paste each figure into the lesson that uses it:
-#   end-extension   -> pa-minus.md
+#   end-extension   -> bounded-formulas.md
 #   blocks          -> bounded-induction.md
 #   parikh-cut      -> parikh.md
-#   bits            -> coding.md
+#   bits            -> ackermann-coding.md
 #   records         -> coded-sets.md
 # The output is deterministic.
 import json, sys
@@ -131,7 +131,7 @@ f = [3, 7, 2, 9, 4, 5, 11, 6, 8, 3, 7, 5, 6, 4]
 a = len(f) - 1
 theta = [x for x in range(len(f)) if all(f[z] <= f[x] for z in range(x, len(f)))]
 wmin = min(theta)
-s = ['<svg class="fig" viewBox="0 0 600 230" width="600" role="img" aria-label="The values f(x) of the least witness function for x up to a; the points x where f(x) is at least f on the interval from x to a are highlighted; w is the least of them, and b = f(w) bounds f everywhere">']
+s = ['<svg class="fig" viewBox="0 0 600 230" width="600" role="img" aria-label="The values f(x) of the least witness function for x up to a; the points x where f(x) is at least f on the interval from x to a are highlighted; m is the least of them, and b = f(m) bounds f everywhere">']
 X0, Y0, dx, dy = 60, 190, 36, 13
 s.append(f'<line x1="{X0 - 10}" y1="{Y0}" x2="{X0 + dx * a + 24}" y2="{Y0}" class="axis"/>')
 s.append(f'<line x1="{X0 - 10}" y1="{Y0}" x2="{X0 - 10}" y2="{Y0 - dy * 12 - 6}" class="axis"/>')
@@ -145,7 +145,7 @@ for x, v in enumerate(f):
 bw = Y0 - dy * f[wmin]
 s.append(f'<line x1="{X0 - 10}" y1="{bw}" x2="{X0 + dx * a + 24}" y2="{bw}" class="accent-stroke" stroke-width="1.2" stroke-dasharray="4 3"/>')
 s.append(mtext(X0 - 22, bw + 5, 'b', 14))
-s.append(mtext(X0 + dx * wmin, Y0 + 18, 'w', 14))
+s.append(mtext(X0 + dx * wmin, Y0 + 18, 'm', 14))
 s.append(mtext(X0 + dx * a, Y0 + 18, 'a − 1', 14))
 s.append(f'<text x="{X0 - 10}" y="{Y0 + 18}" text-anchor="middle" class="mrm" font-size="13">0</text>')
 s.append(mtext(X0 - 30, Y0 - dy * 12, 'f(x)', 13))

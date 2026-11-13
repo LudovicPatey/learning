@@ -2,7 +2,7 @@
 title: Bounded induction and cuts
 summary: Induction schemes over PA⁻ and the theory IΔ₀; least number principle, division with remainder and pairing in IΔ₀; the order type of countable non-standard models of IΔ₀; cuts; cuts closed under addition and multiplication are models of IΔ₀.
 duration: 40
-prerequisites: [pa-minus]
+prerequisites: [bounded-formulas]
 ---
 
 The algebraic theory $\mathrm{PA}^-$ does not prove that every number is even or odd. Induction for bounded formulas, the weakest form of induction in this course, proves this and the elementary facts of number theory that involve quantities bounded by polynomials. This lesson develops bounded induction far enough to describe the order of its non-standard models, and introduces the central objects of the model theory of arithmetic: **cuts**, initial segments of a model closed under successor. Cuts closed under addition and multiplication are themselves models of bounded induction; the next lesson uses them to show that bounded induction proves nothing beyond polynomial growth.
@@ -45,7 +45,7 @@ Hájek and Pudlák prove this in open induction (Theorem I.1.18). Tuples are cod
 
 ## The order of a non-standard model
 
-Division by two already determines the order of a countable non-standard model of $\mathrm I\Delta_0$. Call two elements $a, b$ of a model $M$ of $\mathrm{PA}^-$ **close** if $a \leq b + k$ and $b \leq a + k$ for some standard $k$. Closeness is an equivalence relation, and its classes, the **blocks**, are convex. The standard part is one block. By the exercise of the previous lesson, every non-standard $a$ has predecessors $a - k$ for all standard $k$; so the block of a non-standard $a$ is $\{ a - k : k \in \nat \} \cup \{ a + k : k \in \nat \}$, ordered like $\mathbb Z$. The blocks are linearly ordered by the order of $M$.
+Division by two already determines the order of a countable non-standard model of $\mathrm I\Delta_0$. Call two elements $a, b$ of a model $M$ of $\mathrm{PA}^-$ **close** if $a \leq b + k$ and $b \leq a + k$ for some standard $k$. Closeness is an equivalence relation, and its classes, the **blocks**, are convex. The standard part is one block. By :ref{#ex-pam-predecessors}, every non-standard $a$ has predecessors $a - k$ for all standard $k$; so the block of a non-standard $a$ is $\{ a - k : k \in \nat \} \cup \{ a + k : k \in \nat \}$, ordered like $\mathbb Z$. The blocks are linearly ordered by the order of $M$.
 
 :::theorem{#thm-order-type}
 Let $M$ be a non-standard model of $\mathrm I\Delta_0$. The set of non-standard blocks of $M$, with the induced order, is a dense linear order without least or greatest element. If $M$ is countable, the order of $M$ is isomorphic to $\nat$ followed by $\mathbb Q$ copies of $\mathbb Z$, the order type written $\nat + \mathbb Z \cdot \mathbb Q$.
@@ -83,7 +83,7 @@ In the proof of :ref{#thm-order-type}, which axiom beyond $\mathrm{PA}^-$ is use
 A **cut** of a model $M$ of $\mathrm{PA}^-$ is a nonempty subset $I \subseteq M$ that is an initial segment ($b < a \in I$ implies $b \in I$) and is closed under successor ($a \in I$ implies $a + 1 \in I$). It is **proper** if $I \neq M$.
 :::
 
-The standard part is a cut of every model of $\mathrm{PA}^-$, proper if the model is non-standard. Induction forbids definable proper cuts: if $\varphi(x, \bar p)$ defines a proper cut, the corresponding instance of induction fails. This is the basic link between induction and cuts, developed in lesson 5. Here we need the converse kind of statement: some cuts are themselves models of bounded induction. For this, we rewrite the axioms of $\mathrm I\Delta_0$ in a form that passes to substructures.
+The standard part is a cut of every model of $\mathrm{PA}^-$, proper if the model is non-standard. Induction forbids definable proper cuts: if $\varphi(x, \bar p)$ defines a proper cut, the corresponding instance of induction fails. This is the basic link between induction and cuts, developed in :ref{to="definable-cuts"}. Here we need the converse kind of statement: some cuts are themselves models of bounded induction. For this, we rewrite the axioms of $\mathrm I\Delta_0$ in a form that passes to substructures.
 
 :::lemma{#lem-idelta0-pi1}
 $\mathrm I\Delta_0$ is equivalent to a set of $\Pi_1$ sentences: every axiom of each is provable from the other.

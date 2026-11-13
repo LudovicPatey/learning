@@ -24,4 +24,4 @@ objectives:
   - Characterize Σₙ induction by definable cuts, and use overspill and underspill
   - Code finite sets and sequences in IΔ₀ + exp, and prove comprehension for bounded formulas
   - Characterize Σₙ induction and Σₙ₊₁ collection by coded bounded sets
-lessons: [pa-minus, bounded-induction, parikh, induction-collection, definable-cuts, coding, coded-sets]
+lessons: [pa-minus, bounded-formulas, bounded-induction, parikh, induction-collection, definable-cuts, ackermann-coding, coding, coded-sets]

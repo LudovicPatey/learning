@@ -1,7 +1,7 @@
 ---
-title: Induction, least numbers and collection
-summary: The schemes IΣₙ, IΠₙ, LΣₙ, LΠₙ and BΣₙ in first-order arithmetic; Σₙ and Πₙ induction are equivalent; collection closes Σₙ and Πₙ under bounded quantification (Parsons); IΣₙ proves BΣₙ (Parsons) and the least number principles; BΣₙ₊₁ proves IΣₙ (Paris and Kirby); the hierarchy and its strictness.
-duration: 50
+title: Induction and collection
+summary: The schemes IΣₙ, IΠₙ, LΣₙ, LΠₙ and BΣₙ in first-order arithmetic; Σₙ and Πₙ induction are equivalent; collection closes Σₙ and Πₙ under bounded quantification (Parsons); IΣₙ proves BΣₙ (Parsons); BΣₙ₊₁ proves IΣₙ (Paris and Kirby); the hierarchy and its strictness.
+duration: 45
 prerequisites: [bounded-induction]
 ---
 
@@ -9,9 +9,9 @@ Bounded induction is too weak to prove that exponentiation is total; $\Sigma_1$ 
 $$
 \mathrm I\Delta_0 \;\Leftarrow\; \mathrm B\Sigma_1 \;\Leftarrow\; \mathrm I\Sigma_1 \;\Leftarrow\; \mathrm B\Sigma_2 \;\Leftarrow\; \mathrm I\Sigma_2 \;\Leftarrow\; \cdots,
 $$
-in which induction and collection alternate, and each $\mathrm I\Sigma_n$ may be replaced by $\mathrm I\Pi_n$, $\mathrm L\Sigma_n$ or $\mathrm L\Pi_n$.
+in which induction and collection alternate, and each $\mathrm I\Sigma_n$ may be replaced by $\mathrm I\Pi_n$, or by the least number principles $\mathrm L\Sigma_n$ and $\mathrm L\Pi_n$ (:ref{to="definable-cuts"}).
 
-All the proofs follow one pattern, already met in lesson 2: an instance of a scheme is proved by applying induction to an auxiliary formula, and the work is to check that this formula belongs to the class for which induction is available. A bounded universal quantifier in front of a $\Sigma_n$ formula is the obstacle, and **collection** is the axiom that removes it. The course on induction and conservation (:ref{to="induction-conservation/induction-collection"}) proves the same results for formulas of second-order arithmetic; the proofs below are written for $\mathcal L_A$ and do not depend on it.
+All the proofs follow one pattern, already met in :ref{to="bounded-induction"}: an instance of a scheme is proved by applying induction to an auxiliary formula, and the work is to check that this formula belongs to the class for which induction is available. A bounded universal quantifier in front of a $\Sigma_n$ formula is the obstacle, and **collection** is the axiom that removes it. The course on induction and conservation (:ref{to="induction-conservation/induction-collection"}) proves the same results for formulas of second-order arithmetic; the proofs below are written for $\mathcal L_A$ and do not depend on it.
 
 ## The schemes
 
@@ -29,7 +29,7 @@ for $\varphi \in \Gamma$. Induction schemes are those of :ref{#def-induction-sch
 
 Collection says that a definable multi-valued function on a bounded domain $[0, a)$ has bounded values. In $\nat$ every instance holds, since $[0, a)$ is finite; for a standard $a$, each instance is provable in $\mathrm I\Delta_0$, by a proof with $a$ cases. In a non-standard model, $a$ may be non-standard, and collection becomes a real axiom. The converse implication of each instance is logically valid.
 
-With the pairing function of :ref{#fact-pairing}, a block of quantifiers of the same kind can be **contracted** to one quantifier without changing the class: if $\varphi(\bar y)$ is $\Pi_n$, then $\exists \bar y\ \varphi(\bar y)$ is equivalent in $\mathrm I\Delta_0$ to $\exists w\ \forall \bar y \leq w\ (w = \langle \bar y \rangle \rightarrow \varphi(\bar y))$, since $w$ determines $\bar y$ and $\bar y \leq w$; and the bounded universal quantifier in front of a $\Pi_n$ formula keeps it $\Pi_n$, logically (lesson 1). So we may assume that every block has one quantifier, and that collection is stated for a single $y$.
+With the pairing function of :ref{#fact-pairing}, a block of quantifiers of the same kind can be **contracted** to one quantifier without changing the class: if $\varphi(\bar y)$ is $\Pi_n$, then $\exists \bar y\ \varphi(\bar y)$ is equivalent in $\mathrm I\Delta_0$ to $\exists w\ \forall \bar y \leq w\ (w = \langle \bar y \rangle \rightarrow \varphi(\bar y))$, since $w$ determines $\bar y$ and $\bar y \leq w$; and the bounded universal quantifier in front of a $\Pi_n$ formula keeps it $\Pi_n$, logically (:ref{to="pa-minus"}). So we may assume that every block has one quantifier, and that collection is stated for a single $y$.
 
 ## Σₙ and Πₙ induction
 
@@ -99,22 +99,6 @@ Why does the proof of :ref{#thm-fo-parsons} for $\Sigma_n$ formulas use $\mathrm
   The conclusion is logical once $\theta(a)$ holds.
 :::
 
-## Least number principles
-
-:::proposition{#prop-fo-least-number}
-For every $n \geq 1$, the theories $\mathrm I\Sigma_n$, $\mathrm I\Pi_n$, $\mathrm L\Sigma_n$ and $\mathrm L\Pi_n$ are equivalent over $\mathrm I\Delta_0$.
-:::
-
-:::proof{of=prop-fo-least-number}
-*$\mathrm L\Pi_n$ implies $\mathrm I\Sigma_n$, and $\mathrm L\Sigma_n$ implies $\mathrm I\Pi_n$.* If induction fails for $\varphi$, with $\neg \varphi(a)$, let $m$ be least with $\neg \varphi(m)$; then $m \neq 0$, $m = m' + 1$ with $\varphi(m')$, hence $\varphi(m)$, a contradiction. The negation of a $\Sigma_n$ formula is $\Pi_n$, and conversely.
-
-*$\mathrm I\Sigma_n$ implies $\mathrm L\Pi_n$.* Let $\varphi$ be $\Pi_n$ with $\varphi(c)$ and no least element. Let $\theta(x) \equiv \forall y < x + 1\ \neg \varphi(y)$; it is $\Sigma_n$ by :ref{#lem-fo-collection-closure}, since $\mathrm I\Sigma_n$ proves $\mathrm B\Sigma_n$ (:ref{#thm-fo-parsons}). If $\varphi(0)$, then $0$ is least; so $\theta(0)$. If $\theta(x)$ and $\varphi(x + 1)$, then $x + 1$ is least; so $\theta(x) \rightarrow \theta(x + 1)$. By induction $\theta(c)$, contradicting $\varphi(c)$.
-
-*$\mathrm I\Pi_n$ implies $\mathrm L\Sigma_n$*, by the same argument for $\varphi \in \Sigma_n$; now $\theta$ is $\Pi_n$ logically, a bounded universal quantifier in front of a $\Pi_n$ formula. With :ref{#thm-fo-isigma-ipi}, the four schemes are equivalent.
-:::
-
-For $n = 0$, the equivalence of $\mathrm I\Delta_0$ and $\mathrm L\Delta_0$ was proved in lesson 2.
-
 ## Collection implies induction
 
 :::theorem[Paris, Kirby]{#thm-fo-paris-kirby}
@@ -155,7 +139,7 @@ Together, for every $n \geq 1$, over $\mathrm I\Delta_0$:
 $$
 \mathrm I\Sigma_{n+1} \;\Rightarrow\; \mathrm B\Sigma_{n+1} \;\Rightarrow\; \mathrm I\Sigma_n \;\Rightarrow\; \mathrm B\Sigma_n,
 $$
-and each $\mathrm I\Sigma_n$ may be replaced by $\mathrm I\Pi_n$, $\mathrm L\Sigma_n$ or $\mathrm L\Pi_n$. None of these implications reverses: for every $n$, there is a model of $\mathrm I\Sigma_n$ in which $\mathrm B\Sigma_{n+1}$ fails, and a model of $\mathrm B\Sigma_{n+1}$ in which $\mathrm I\Sigma_{n+1}$ fails. The first is the model of the $\Sigma_{n+1}$-definable elements of a suitable model of $\mathrm{PA}$, built in the lesson :ref{to="induction-conservation/separations"} of the course on induction and conservation; the second is due to Paris and Kirby (1978), and is admitted there. We use the strictness only in remarks and exercises. Lesson 7 gives a second proof of $\mathrm B\Sigma_{n+1} \Rightarrow \mathrm I\Sigma_n$ in the presence of exponentiation, through coded sets.
+and each $\mathrm I\Sigma_n$ may be replaced by $\mathrm I\Pi_n$, $\mathrm L\Sigma_n$ or $\mathrm L\Pi_n$ (:ref{to="definable-cuts"}). None of these implications reverses: for every $n$, there is a model of $\mathrm I\Sigma_n$ in which $\mathrm B\Sigma_{n+1}$ fails, and a model of $\mathrm B\Sigma_{n+1}$ in which $\mathrm I\Sigma_{n+1}$ fails. The first is the model of the $\Sigma_{n+1}$-definable elements of a suitable model of $\mathrm{PA}$, built in the lesson :ref{to="induction-conservation/separations"} of the course on induction and conservation; the second is due to Lessan and to Paris and Kirby (1978), and is admitted there. We use the strictness only in remarks and exercises. The lesson :ref{to="coded-sets"} gives a second proof of $\mathrm B\Sigma_{n+1} \Rightarrow \mathrm I\Sigma_n$ in the presence of exponentiation, through coded sets.
 
 ## Exercises
 
@@ -167,7 +151,7 @@ Every $\Pi_n$ formula is $\Sigma_{n+1}$, so $\mathrm B\Sigma_{n+1}$ implies $\ma
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-fo-order-induction difficulty=2}
 Show that $\mathrm I\Sigma_n$ proves the **order induction** scheme $\forall x\, \big((\forall y < x\ \varphi(y)) \rightarrow \varphi(x)\big) \rightarrow \forall x\ \varphi(x)$ for $\Sigma_n$ formulas $\varphi$, $n \geq 1$.
 
 :::solution
