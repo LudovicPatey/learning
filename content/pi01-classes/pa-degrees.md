@@ -136,6 +136,8 @@ The proof of :ref{#thm-pa-characterization} relativizes: $Y$ computes a member o
 
 ## Notes and references
 
+Problems whose solutions can avoid PA degrees, and Liu's theorem that Ramsey's theorem for pairs is one of them, are the subject of the course on compactness avoidance (:ref{to="compactness-avoidance/pa-avoidance"}, :ref{to="compactness-avoidance/liu-theorem"}).
+
 The degrees of completions of Peano arithmetic were studied by Scott (1962), who showed that a completion computes a member of every non-empty $\Pi^0_1$ class (the **Scott basis theorem**). Solovay showed, in unpublished work, that the degrees of completions are closed upward, and hence that they are exactly the degrees computing a member of every non-empty $\Pi^0_1$ class. Jockusch and Soare characterized these degrees by separating sets of effectively inseparable pairs, proved the existence of low PA degrees (in *Π⁰₁ classes and degrees of theories*), and showed that c.e. PA degrees are complete (in *Degrees of members of Π⁰₁ classes*). The characterization by $\{0, 1\}$-valued diagonally non-computable functions is credited to Jockusch and Soare and to Solovay by Downey and Hirschfeldt (Theorem 2.22.2). The incompleteness theorem in the form used here is due to Rosser (1936).
 
 Soare's *Turing Computability* treats PA degrees in Chapter 10, Downey and Hirschfeldt in Sections 2.21–2.22, and Hirschfeldt's *Slicing the Truth* in Section 3.1 (Theorems 3.16–3.21).

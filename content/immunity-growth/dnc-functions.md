@@ -141,6 +141,8 @@ The limit $X$ is computable in $\emptyset''$, is not computable, and computes no
 
 ## Notes and references
 
+Problems whose solutions can avoid computing DNC functions are studied in the course on compactness avoidance (:ref{to="compactness-avoidance/dnc-avoidance"}).
+
 Fixed-point free functions were studied by Arslanov, whose completeness criterion is the subject of :ref{to="immunity-growth/arslanov"}. The equivalence between DNC and fixed-point free functions is due to Jockusch, Lerman, Soare and Solovay (1989); see Downey and Hirschfeldt (2010, Theorem 2.22.1), Nies (2009, Proposition 4.1.4), and Soare (2016, Exercise 5.4.5), who attributes it to Jockusch. The implication from effective immunity to fixed-point free functions is the argument of Martin's proof that effectively simple sets are complete (Martin 1966; Nies 2009, Proposition 4.1.13). The equivalence of the three conditions of :ref{#thm-dnc-effectively-immune} is presented by Monin and Patey in the section *DNC functions* of their chapter *Immunity and function growth*. In the course on algorithmic randomness, DNC functions reappear through the complexity of the initial segments of a set.
 
 - D. A. Martin, *Completeness, the recursion theorem and effectively simple sets*, Proceedings of the American Mathematical Society 17 (1966), 838–842.

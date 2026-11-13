@@ -138,6 +138,8 @@ In an ω-model, every element is standard, and $X = \nat$ belongs to $\mathcal S
 
 ## Notes and references
 
+Non-standard models of first-order arithmetic and of its fragments are the subject of the track on models of arithmetic (:ref{to="fragments-of-arithmetic/pa-minus"}).
+
 The categoricity of the second-order Peano axioms is due to Dedekind (1888); :ref{#prop-full-standard} is Dzhafarov–Mummert, Theorem 5.12.2, and their Section 5.12 discusses full semantics. Overspill and underspill are classical in the model theory of arithmetic; Dzhafarov–Mummert, Proposition 6.2.2, state them for arbitrary cuts, and Kaye's book treats them in detail. Finite sets in $\mathsf{RCA}_0$ are coded in Simpson, Section II.2, and the distinction between finite and bounded sets is discussed in Dzhafarov–Mummert, Sections 5.5.2 and 6.2, and Hirschfeldt, Section 4.2. Hirst's theorem is from his thesis (1987) and is Dzhafarov–Mummert, Theorem 6.5.1; the first-order part of $\mathsf{RCA}_0$ is Simpson, Corollary IX.1.11.
 
 - R. Dedekind, *Was sind und was sollen die Zahlen?*, Vieweg, 1888.

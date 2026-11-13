@@ -99,6 +99,8 @@ By :ref{#cor-random-dnc}, $Z$ computes a DNC function, hence so does $A$. By Ars
 
 ## Notes and references
 
+The weak weak König lemma for homogeneous sets and its relation to DNC functions are studied in the course on compactness avoidance (:ref{to="compactness-avoidance/rwwkl-dnc"}).
+
 Kučera (1985) proved that random sequences compute DNC functions; the proof through complexity follows Downey and Hirschfeldt (Theorem 8.8.1). The characterization of DNC degrees by complexity is due to Kjos-Hanssen, Merkle and Stephan (2011; conference version 2006), who state it for plain complexity, in terms of **autocomplex** sets (Downey–Hirschfeldt, Theorem 8.16.4); the version with $K$ given here is proved in the same way (compare Nies, Theorem 4.1.9). The history of the characterization by infinite subsets of random sequences is given by Downey and Hirschfeldt in a footnote to Theorem 8.10.2: Kjos-Hanssen proved the direction of the first exercise, and the converse for DNC functions of slow growth; Greenberg and Miller proved the converse in general; the short proof is due to Miller. Nies proves the direction of the first exercise as Exercise 8.3.6. Stephan's theorem is Downey–Hirschfeldt, Theorem 8.8.4, and the existence of DNC functions computing no random sequence is Theorem 8.10.3.
 
 - A. Kučera, *Measure, Π⁰₁-classes and complete extensions of PA*, in: Recursion Theory Week, Lecture Notes in Mathematics 1141, Springer, 1985, 245–259.

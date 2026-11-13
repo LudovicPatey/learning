@@ -191,6 +191,8 @@ Repeat the proof of :ref{#thm-high-cone-avoidance} with $B$ in place of $\emptys
 
 ## Notes and references
 
+Problems admitting low solutions, and the forcing techniques that produce them, are studied in the course on lowness (:ref{to="lowness/low-bases"}).
+
 The hierarchies of low$_n$ and high$_n$ sets were introduced by Soare and by Cooper in the early 1970s; high degrees had been studied before by Martin (1966), who characterized them by dominant functions (Soare 2016, Theorem 4.5.6). The theorem on 1-generic sets is due to Jockusch (1980) (Downey and Hirschfeldt 2010, Theorem 2.24.3); Soare (2016, §6.3) credits it to Jockusch and Posner and calls the argument forcing the jump. The construction of a high set avoiding a cone follows the section on high degrees of Monin and Patey, where the variant of the last exercise is also given. The jump inversion theorem is due to Friedberg (1957) (Soare 2016, Theorem 6.4.1), and the existence of high incomplete c.e. sets to Sacks (1963), as a consequence of his jump theorem for c.e. degrees. Low and high sets are also treated in Soare (2016, §3.6 and §4.4) and Nies (2009, §1.5).
 
 - R. M. Friedberg, *A criterion for completeness of degrees of unsolvability*, Journal of Symbolic Logic 22 (1957), 159–160.

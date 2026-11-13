@@ -123,6 +123,8 @@ The class $\mathcal C(\vec R)$ has a member computable in $\emptyset''$, the seq
 
 ## Notes and references
 
+The low₂ bound for Ramsey's theorem for pairs is proved in the course on lowness (:ref{to="lowness/cjs-theorem"}); control of the second jump of cohesive sets is studied in the course on jump cone avoidance (:ref{to="jump-cone-avoidance/cohesiveness-second-jump"}).
+
 Cohesive sets were studied by Jockusch and Stephan (1993), who proved :ref{#prop-coh-no-low} and both parts of :ref{#cor-coh-bounds}, the second in the form $C' \leq_T P$ for every $P$ PA relative to $\emptyset'$ (Hirschfeldt, Theorems 6.34, 6.44 and 6.45; Dzhafarov–Mummert, Theorem 8.4.13). The characterization by the class $\mathcal C(\vec R)$, :ref{#prop-coh-decisions} and its converse, is due independently to Brattka and Rakotoniaina and to Patey; our presentation follows the section *Cohesiveness principle* of Monin and Patey. The construction of cohesive sets below $\vec R''$ is classical (Hirschfeldt, §6.4–6.5, Exercise 6.42 and the discussion before it). The decomposition of Ramsey's theorem for pairs, which motivates the principle, is due to Cholak, Jockusch and Slaman (2001).
 
 - C. G. Jockusch, Jr. and F. Stephan, *A cohesive set which is not high*, Mathematical Logic Quarterly 39 (1993), 515–530.

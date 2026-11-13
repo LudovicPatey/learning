@@ -107,6 +107,8 @@ Let $Z \in \mathcal W$ and $X \leq_T Z$ an instance of $\mathsf P$. By :ref{#lem
 
 ## Notes and references
 
+The preservation properties used to separate problems — cone avoidance, PA avoidance, preservation of hyperimmunity, and their variants — are developed systematically in the track on lowness and avoidance (:ref{to="avoidance/avoidance-properties"}).
+
 The method of preservation is standard; Dzhafarov and Mummert state it as Theorem 4.6.13, with the definition of preservation in Section 3.6 (Definition 3.6.11) and its uses for cone avoidance and PA avoidance in Corollaries 4.6.14 and 4.6.15. Its systematic study as a way of comparing problems goes back to Wang and to Patey. The cone avoidance basis theorem used in :ref{#cor-wkl-not-j} is due to Jockusch and Soare (1972), and Seetapun's theorem to Seetapun and Slaman (1995). Downey, Greenberg, Harrison-Trainor, Patey and Turetsky compare the properties of problems defined by preservation.
 
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.6 and 4.6.

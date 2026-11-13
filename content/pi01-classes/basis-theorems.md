@@ -183,6 +183,8 @@ In the construction of :ref{#thm-dominated-basis}, also choose $\sigma_{e+1} = \
 
 ## Notes and references
 
+The proof of the low basis theorem is an instance of first-jump control by forcing; the general method is developed in the course on lowness (:ref{to="lowness/forcing-the-jump"}).
+
 The constructions of this lesson are instances of forcing with Π⁰₁ classes (Jockusch–Soare forcing). Its forcing relation, and the forcing question used to prove preservation theorems such as cone avoidance, are developed in the course on effective forcing (:ref{to="effective-forcing/forcing-with-trees"}, :ref{to="effective-forcing/forcing-question"}).
 
 The three basis theorems are due to Jockusch and Soare, in *Π⁰₁ classes and degrees of theories* (1972). The derivation of cone avoidance from the first two, as in the first exercise, is given in Hirschfeldt's *Slicing the Truth* (Section 3.1), and Monin and Patey attribute it to him. An earlier form of cone avoidance, with "primitive recursive in" in place of "computable from", is due to Gandy, Kreisel and Tait (1960), according to Hirschfeldt. Forcing with $\Pi^0_1$ classes, also called Jockusch–Soare forcing, is a basic tool in the computability theory of combinatorial principles studied in reverse mathematics; Monin and Patey study it as a forcing notion in their chapter on effective forcing.

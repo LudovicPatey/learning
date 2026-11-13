@@ -98,6 +98,8 @@ By :ref{#thm-hirst}, $\mathsf{RT}^1_{<\infty}$ fails in $\mathcal M$: there are 
 
 ## Notes and references
 
+Combinatorial principles that are true but unprovable in PA, such as the Paris–Harrington principle, are studied in the track on models of arithmetic (:ref{to="independence/paris-harrington"}).
+
 Hirst proved the equivalence of :ref{#thm-hirst} and :ref{#prop-rt22-bsigma2} in his thesis (1987). The proof of :ref{#thm-hirst} given here is close to Hirschfeldt's (*Slicing the Truth*, Theorem 6.81, Section 6.8); Dzhafarov and Mummert treat the theorem in Section 6.5, and Cholak, Jockusch and Slaman strengthened :ref{#prop-rt22-bsigma2} to stable colorings (Hirschfeldt, Theorem 6.82). The relation between Ramsey's theorem for pairs and induction was initiated by Cholak, Jockusch and Slaman, and remains an active topic.
 
 - J. L. Hirst, *Combinatorics in Subsystems of Second Order Arithmetic*, PhD thesis, Pennsylvania State University, 1987.

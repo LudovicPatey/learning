@@ -185,6 +185,8 @@ Suppose that every element of $K_1(M)$ is standard; since every standard number 
 
 ## Notes and references
 
+Partial truth definitions, which these separations use, are constructed in the course on truth definitions and provability (:ref{to="truth-and-provability/truth-definitions"}).
+
 The existence of models of $\mathrm I\Sigma_n$ in which $\mathrm B\Sigma_{n+1}$ fails is due to Parsons (1970); the proof by definable elements is that of Paris and Kirby (1978), who also proved that $\mathrm B\Sigma_n$ does not prove $\mathrm I\Sigma_n$. The presentation follows Dzhafarov and Mummert, Section 6.3, with a direct proof that $K_{n+1}(M)$ satisfies $\mathrm I\Sigma_n$.
 
 - C. Parsons, *On a number theoretic choice schema and its relation to induction*, in Intuitionism and Proof Theory, North-Holland, 1970, 459–473.

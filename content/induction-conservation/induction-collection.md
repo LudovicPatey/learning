@@ -155,6 +155,8 @@ Let $\varphi \in \Sigma^0_n$ satisfy the hypothesis, and fix $z$. Let $\theta(x)
 
 ## Notes and references
 
+The first-order counterparts of these schemes, and the hierarchy of induction and collection in models of first-order arithmetic, are developed in the track on models of arithmetic (:ref{to="fragments-of-arithmetic/induction-collection"}).
+
 The hierarchy of induction and collection schemes is due to Paris and Kirby (1978), building on Parsons (1970), who introduced the collection schemes, proved that collection closes the classes $\Sigma_n$ under bounded quantification, and showed that $\mathrm I\Sigma_1$ proves the same $\Pi_2$ sentences as primitive recursive arithmetic. Dzhafarov and Mummert, Section 6.1, present the same material in the setting of reverse mathematics, with attributions; Hájek and Pudlák's monograph is the standard reference, and Kaye's book gives a model-theoretic introduction. Parikh introduced $\mathsf I\Delta^0_0$ and proved that it does not prove the totality of exponentiation.
 
 - J. B. Paris and L. A. S. Kirby, *Σₙ-collection schemas in arithmetic*, in Logic Colloquium '77, North-Holland, 1978, 199–209.

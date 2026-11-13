@@ -122,6 +122,8 @@ Since $T$ is infinite, $g(m) \geq 1$ for every $m$. Code a string $\tau$ bounded
 
 ## Notes and references
 
+Liu's theorem, that Ramsey's theorem for pairs does not imply WKL₀, is proved in the course on compactness avoidance (:ref{to="compactness-avoidance/liu-theorem"}). In the track on models of arithmetic, the weak König lemma holds in the coded sets of every proper exponential cut (:ref{to="cuts-and-extensions/weak-konig-cuts"}), and semiregular cuts are characterized by it (:ref{to="cuts-and-extensions/semiregular-cuts"}).
+
 Friedman (1976) identified $\mathsf{WKL}_0$. The characterization of its countable ω-models goes back to Scott (1962), who showed that they are exactly the classes of sets representable in complete extensions of Peano arithmetic, hence the name Scott systems (Simpson, notes to Section VIII.2). The ω-models of $\mathsf{WKL}_0$, the low model and the fact that $\mathrm{REC}$ is the intersection of all of them are in Simpson, Section VIII.2 (Corollaries VIII.2.18 and VIII.2.27); the basis theorems are due to Jockusch and Soare (1972). Bounded König's lemma, the last exercise, is Simpson, Lemma IV.1.4. Harrington's conservation theorem (1977) is unpublished; Simpson, Section IX.2, presents it. The $\Pi^0_2$ conservation over primitive recursive arithmetic is due to Friedman (1976, unpublished); Sieg (1985) gave a proof-theoretic proof (Simpson, notes to Section IX.3). Hirschfeldt, Sections 4.4–4.5, and Dzhafarov and Mummert, Section 5.6.2, present the same material from the computability-theoretic side.
 
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Sections IV.1, VIII.2, IX.2 and IX.3.

@@ -152,6 +152,8 @@ Suppose $f$ exists. By :ref{#cor-self-reference}, there is $e$ such that $\Phi_e
 
 ## Notes and references
 
+Codes of Turing ideals, and the computation of their members by a low code, are studied in the course on lowness (:ref{to="lowness/coded-ideals"}).
+
 Canonical indices of finite sets are standard since Rogers' book; Nies calls them strong indices. Soare's *Turing Computability*, Section 2.3, studies the indices of finite and computable sets with a different terminology: what is called here a $\Delta^0_1$ index is his $\Delta_0$ index, or characteristic index, and his $\Delta_1$ index of $A$ is a pair formed of a $\Sigma_1$ index of $A$ and one of its complement. :ref{#prop-no-delta-from-sigma} is his Nonconversion Theorem 2.3.3, with the same proof, and :ref{#prop-no-size-from-delta} is equivalent to his Theorem 2.3.7 by his Exercise 2.3.13. The $\Sigma_n$ and $\Delta_n$ indices of higher levels are in his Definition 4.2.4. Lowness indices are used systematically in the constructions of low sets, for instance in the proofs of the low basis theorem and of the Sacks splitting theorem. The definitions and the two fixed point arguments for finite sets and lowness indices follow the section on arithmetic codes of Monin and Patey's book.
 
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.

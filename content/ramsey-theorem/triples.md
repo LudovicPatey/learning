@@ -169,6 +169,8 @@ Assume the statement for $n$, and apply it to $Z'$: there is a $Z'$-computable c
 
 ## Notes and references
 
+A finite variant of Ramsey's theorem, the Paris–Harrington principle, is true and unprovable in PA (:ref{to="independence/paris-harrington"}).
+
 Specker (1971) built a computable coloring of pairs without computable infinite homogeneous set, and Jockusch (1972) improved it to :ref{#thm-jockusch-no-delta2} (Hirschfeldt, Theorem 6.11; Dzhafarov–Mummert, Theorem 8.2.2). Jockusch also proved :ref{#lem-limit-coloring} and :ref{#prop-rt32-jump}, as well as the generalization of the second exercise, in which the coloring has two colors; Hirschfeldt presents them as Theorem 6.13 and Exercise 6.15, Dzhafarov and Mummert as Lemma 8.2.1 and Theorem 8.2.4. Simpson formalized the equivalence with $\mathsf{ACA}_0$ (Simpson, Lemmas III.7.4 and III.7.5 and Theorem III.7.6; Hirschfeldt, Exercise 6.14; Dzhafarov–Mummert, Corollary 8.2.6). Hirschfeldt attributes :ref{#cor-wkl-not-rt22} to Hirst (Corollary 6.12). Hirschfeldt and Jockusch strengthened :ref{#prop-rt32-jump}: some computable coloring of triples has all its infinite pre-homogeneous sets, hence all its infinite homogeneous sets, of PA degree relative to $\emptyset'$ (Hirschfeldt, Theorems 6.16 and 6.17). By contrast, the exact coding power of $\mathsf{RT}^3_2$ is $\emptyset'$: a set $X \not\leq_T \emptyset'$ can be avoided by some homogeneous set of every computable coloring of triples (Cholak, Jockusch and Slaman; see the exercises of the lesson on Seetapun's theorem).
 
 - E. Specker, *Ramsey's theorem does not hold in recursive set theory*, in *Logic Colloquium '69*, North-Holland, 1971, 439–442.
