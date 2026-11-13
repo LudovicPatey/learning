@@ -1,0 +1,37 @@
+title: Custom separations and forcing design
+area: computability
+level: Advanced
+order: 16
+prerequisites: [avoidance, compactness-avoidance, effective-forcing, ramsey-theorem, reducibilities, immunity-growth]
+summary: Separating Ramsey-type problems that the classical avoidance properties do not distinguish, by weakness properties read off their forcing questions; the design of a notion of forcing for a given problem, on the Erdős–Moser and free set theorems.
+description: >
+  Cone avoidance, PA avoidance and preservation of one hyperimmunity hold for
+  Ramsey's theorem for pairs and for most of its consequences, so they cannot
+  separate these problems from each other. The course shows how a separating
+  weakness property is designed for a pair of problems: one runs the
+  three-case argument for the weaker problem, sees what its forcing question
+  can compute when the argument fails, and strengthens immunity just enough.
+  It introduces constant-bound immunity and dependent hyperimmunity, shows
+  that solutions closed under subsets are immune, and reads preservation of
+  hyperimmunity off the forcing question of weak König's lemma. It explains in
+  three steps (extendibility, block extendibility, computational properties)
+  how a notion of forcing is designed, on the Erdős–Moser theorem, and proves
+  that this theorem avoids cones and preserves countably many hyperimmunities
+  while Ramsey's theorem for pairs does not preserve two, so that it does not
+  imply stable Ramsey's theorem for pairs. It proves that the chain–antichain
+  principle preserves constant-bound immunity and the ascending–descending
+  sequence principle preserves dependent hyperimmunity, and builds the
+  separating instances by finite injury arguments: the chain–antichain
+  principle implies neither DNC nor Ramsey's theorem for pairs, and the
+  ascending–descending sequence principle does not imply the stable
+  chain–antichain principle. It ends with the design of a notion of forcing
+  for the free set theorem.
+objectives:
+  - Explain why separations below Ramsey's theorem for pairs need custom weakness properties, and split a separation into a preservation theorem and a separating instance
+  - Define hyperimmunity, constant-bound immunity and dependent hyperimmunity, compare them, and read the property preserved by a problem off the third case of the three-case argument
+  - Design a notion of forcing for a Ramsey-type problem by identifying optional and required structural properties, safe blocks, and the closure properties required of the reservoirs
+  - Prove that the Erdős–Moser theorem avoids cones and preserves countably many hyperimmunities, and that Ramsey's theorem for pairs does not preserve two, and deduce that EM does not imply SRT²₂ and that RT²₂ is EM plus ADS
+  - Prove that CAC preserves constant-bound immunity with a disjunctive question over split triples, and that ADS preserves dependent hyperimmunity with an extremal question
+  - Build by finite injury a constant-bound immune set met by every DNC function and a stable partial order defeating dependent hyperimmunity, and deduce the separations of CAC from DNC and RT²₂, and of ADS from SCAC
+  - Design a notion of forcing for the free set theorem for pairs and prove that it admits cone avoidance
+lessons: [custom-properties, erdos-moser-design, erdos-moser-hyperimmunities, chain-antichain, ascending-descending, separating-instances, free-set-design]
