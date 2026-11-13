@@ -2,10 +2,10 @@
 title: Finite axiomatizability and the hierarchy in models
 summary: Every Σₙ formula is equivalent in IΣ₁ to one with quantifiers bounded by variables, hence to an instance of Sat_Σₙ; for n ≥ 1, IΣₙ is axiomatized by finitely many theorems of IΣ₁ and one instance of induction for Sat_Σₙ; Peano arithmetic is not axiomatized by sentences of bounded complexity (Rabin); in every model of IΣ₁, some Πₙ-definable set is not Σₙ-definable with parameters.
 duration: 45
-prerequisites: [truth-definitions]
+prerequisites: [truth-definitions, induction-conservation/separations]
 ---
 
-Peano arithmetic is axiomatized by infinitely many instances of induction, and no finite set of its theorems axiomatizes it (Ryll-Nardzewski, 1952). Each fragment $\mathrm I\Sigma_n$ is also given by infinitely many instances, one for each $\Sigma_n$ formula. The partial truth definition of the previous lesson collapses this infinity: a single $\Sigma_n$ formula, $\mathrm{Sat}_{\Sigma_n}$, represents all the others, and one instance of induction for it gives induction for every $\Sigma_n$ formula. This lesson draws this consequence and two others: Peano arithmetic is not axiomatized by sentences of bounded quantifier complexity, and the arithmetic hierarchy is proper in every model of $\mathrm I\Sigma_1$, not only in $\nat$.
+Peano arithmetic is axiomatized by infinitely many instances of induction, and no finite set of its theorems axiomatizes it (Ryll-Nardzewski, 1952). Each fragment $\mathrm I\Sigma_n$ is also given by infinitely many instances, one for each $\Sigma_n$ formula. The partial truth definition of the previous lesson collapses this infinity: a single $\Sigma_n$ formula, $\mathrm{Sat}_{\Sigma_n}$, represents all the others, and one instance of induction for it gives induction for every $\Sigma_n$ formula. Two further consequences follow: Peano arithmetic is not axiomatized by sentences of bounded quantifier complexity, and the arithmetic hierarchy is proper in every model of $\mathrm I\Sigma_1$.
 
 ## Induction for formulas with bounds by variables
 
@@ -69,24 +69,24 @@ The finite axiomatizability of $\mathrm I\Delta_0$ is open, and related to quest
 
 ## Consequences for Peano arithmetic
 
-Since $\mathrm{PA}$ is the union of the increasing sequence of theories $\mathrm I\Sigma_n$, each of which is finitely axiomatizable, $\mathrm{PA}$ is finitely axiomatizable if and only if $\mathrm I\Sigma_n$ proves all of $\mathrm{PA}$ for some $n$: a finite axiomatization of $\mathrm{PA}$ is provable from finitely many instances of induction, all in some $\mathrm I\Sigma_n$, and conversely $\mathrm I\Sigma_n$ is finitely axiomatizable. So $\mathrm{PA}$ is finitely axiomatizable if and only if the hierarchy of induction schemes collapses. Ryll-Nardzewski's theorem is thus equivalent to the strictness of the hierarchy, proved by models of definable elements in the lesson :ref{to="induction-conservation/separations"} of the course on induction and conservation. We use the results of that lesson, as a pointer, for a stronger statement.
+Since $\mathrm{PA}$ is the union of the increasing sequence of theories $\mathrm I\Sigma_n$, each of which is finitely axiomatizable, $\mathrm{PA}$ is finitely axiomatizable if and only if $\mathrm I\Sigma_n$ proves all of $\mathrm{PA}$ for some $n$: a finite axiomatization of $\mathrm{PA}$ is provable from finitely many instances of induction, all in some $\mathrm I\Sigma_n$, and conversely $\mathrm I\Sigma_n$ is finitely axiomatizable. So $\mathrm{PA}$ is finitely axiomatizable if and only if the hierarchy of induction schemes collapses. Ryll-Nardzewski's theorem is thus equivalent to the strictness of the hierarchy, proved by models of definable elements in the course on induction and conservation (:ref{#thm-isigma-not-bsigma}). The same models give a stronger statement.
 
 :::theorem[Rabin]{#thm-rabin}
 For every $m \in \nat$, $\mathrm{PA}$ is not equivalent to any set of $\Pi_m$ sentences.
 :::
 
 :::proof{of=thm-rabin}
-Suppose that a set $S$ of $\Pi_m$ sentences is equivalent to $\mathrm{PA}$. Let $M$ be a model of $\mathrm{PA}$ with a non-standard element defined by a bounded formula, and let $K = K_{m+1}(M)$ be the set of its $\Sigma_{m+1}$-definable elements. By the lesson :ref{to="induction-conservation/separations"} of the course on induction and conservation, such an $M$ exists and $K$ is a $\Sigma_{m+1}$-elementary substructure of $M$: $\Sigma_{m+1}$ formulas with parameters in $K$ have the same truth value in $K$ and in $M$. Hence every $\Pi_{m+2}$ sentence $\forall \bar x\ \sigma(\bar x)$ true in $M$, with $\sigma \in \Sigma_{m+1}$, is true in $K$; in particular every sentence of $S$, which is true in $M$ since $M \models \mathrm{PA}$. So $K \models S$, hence $K \models \mathrm{PA}$. But $K$ does not satisfy $\mathrm B\Sigma_{m+1}$, by the main theorem of the same lesson, while $\mathrm{PA}$ proves it: a contradiction.
+Suppose that a set $S$ of $\Pi_m$ sentences is equivalent to $\mathrm{PA}$. Let $M$ be a model of $\mathrm{PA}$ with a non-standard element defined by a bounded formula (:ref{#lem-nonstandard-definable}), and $K = K_{m+1}(M)$ the set of its $\Sigma_{m+1}$-definable elements. By :ref{#lem-kn-elementary}, $K$ is a $\Sigma_{m+1}$-elementary substructure of $M$. Hence every $\Pi_{m+2}$ sentence $\forall \bar x\ \sigma(\bar x)$ true in $M$, with $\sigma \in \Sigma_{m+1}$, is true in $K$; in particular every sentence of $S$, true in $M$ since $M \models \mathrm{PA}$. So $K \models S$, hence $K \models \mathrm{PA}$. But $K$ does not satisfy $\mathrm B\Sigma_{m+1}$, by :ref{#thm-isigma-not-bsigma}, while $\mathrm{PA}$ proves it: a contradiction.
 :::
 
-Every sentence is equivalent to a prenex sentence, hence is $\Pi_m$ for some $m$; the theorem says that no bound on $m$ works for all the axioms. In particular, $\mathrm{PA}$ is not finitely axiomatizable. A finer form of the strictness of the hierarchy, which we do not prove, compares consistency strength: $\mathrm I\Sigma_{n+1}$ proves the consistency of $\mathrm I\Sigma_n$ (Hájek and Pudlák, Corollary I.4.34), so $\mathrm I\Sigma_n$ does not prove $\mathrm I\Sigma_{n+1}$, by Gödel's second theorem applied to $\mathrm I\Sigma_n$. The proof of Hájek and Pudlák uses the partial truth definitions of the previous lesson and the arithmetization of provability.
+Every sentence is equivalent to a prenex sentence, hence is $\Pi_m$ for some $m$; the theorem says that no bound on $m$ works for all the axioms. In particular, $\mathrm{PA}$ is not finitely axiomatizable. A finer form of the strictness of the hierarchy, which we do not prove, compares consistency strength: $\mathrm I\Sigma_{n+1}$ proves the consistency of $\mathrm I\Sigma_n$ (Hájek and Pudlák, Corollary I.4.34), so $\mathrm I\Sigma_n$ does not prove $\mathrm I\Sigma_{n+1}$, by Gödel's second theorem applied to $\mathrm I\Sigma_n$. Its proof uses partial truth definitions and the arithmetization of provability.
 
 ## The hierarchy is proper in every model
 
 In $\nat$, the classes $\Sigma^0_n$ and $\Pi^0_n$ differ (:ref{#cor-hierarchy-strict}). The universal formulas give the same conclusion in every model of $\mathrm I\Sigma_1$, for definability with parameters, by Cantor's diagonal argument.
 
 :::theorem{#thm-hierarchy-proper}
-Let $M$ be a model of $\mathrm I\Sigma_1$ and $n \geq 1$. There is a set $D \subseteq M$, $\Pi_n$-definable in $M$ without parameters, that is not $\Sigma_n$-definable in $M$ with parameters. Consequently, the complement of $D$ is $\Sigma_n$-definable and not $\Pi_n$-definable, and $\Sigma_n$-definability with parameters is strictly weaker than $\Sigma_{n+1}$-definability in $M$.
+Let $M$ be a model of $\mathrm I\Sigma_1$ and $n \geq 1$. There is a set $D \subseteq M$, $\Pi_n$-definable in $M$ without parameters, that is not $\Sigma_n$-definable in $M$ with parameters. Consequently, the complement of $D$ is $\Sigma_n$-definable and not $\Pi_n$-definable, and some $\Sigma_{n+1}$-definable set is not $\Sigma_n$-definable with parameters.
 :::
 
 :::proof{of=thm-hierarchy-proper}
@@ -114,7 +114,7 @@ In the proof of :ref{#thm-hierarchy-proper}, why does $D$ diagonalize over pairs
 
 Where is it used that $M$ satisfies $\mathrm I\Sigma_1$?
 
-- [x] To have, for the formula $\psi$, a standard code $a$ with $\psi(x, y) \leftrightarrow \mathrm{Sat}_{\Sigma_n}(a, \langle x, y \rangle)$ in $M$: the scheme of :ref{#cor-snowing-general} is proved in $\mathrm I\Sigma_1$.
+- [x] To have, for the formula $\psi$, a standard code $a$ with $\psi(x, y) \leftrightarrow \mathrm{Sat}_{\Sigma_n}(a, \langle x, y \rangle)$ in $M$, and to know that $\mathrm{Sat}_{\Sigma_n}$ is $\Sigma_n$, so that $D$ is $\Pi_n$-definable: :ref{#cor-snowing-general} and :ref{#thm-sat-n} are proved in $\mathrm I\Sigma_1$.
 - [ ] To make $D$ nonempty.
 
   Whether $D$ is empty plays no role: the contradiction is obtained at the single element $w = \langle a, c \rangle$.
@@ -123,7 +123,7 @@ Where is it used that $M$ satisfies $\mathrm I\Sigma_1$?
   Decoding pairs only needs $\mathrm I\Delta_0$.
 :::
 
-For $M = \nat$, the theorem gives again that $\Sigma^0_n \neq \Pi^0_n$. In a non-standard model, the statement is about definability with arbitrary parameters, which may be non-standard: no parameter, however large, makes a $\Sigma_n$ formula define $D$.
+For $M = \nat$, the theorem gives again $\Sigma^0_n \neq \Pi^0_n$. In a non-standard model, no parameter, however large, makes a $\Sigma_n$ formula define $D$.
 
 ## Exercises
 
@@ -138,9 +138,11 @@ By :ref{#thm-fo-paris-kirby}, $\mathrm B\Sigma_{n+1}$ proves $\mathrm I\Sigma_n$
 
 ## Notes and references
 
-The finite axiomatizability of $\mathrm I\Sigma_n$ and $\mathrm B\Sigma_{n+1}$, for $n \geq 1$, is Theorem I.2.52 of Hájek and Pudlák, who remark that it is an easy consequence of partial truth definitions and that it is difficult to say who first observed it; their proof is sketched, and the treatment of bounds by variables (:ref{#lem-isigma-star}) is added here. That $\mathrm{PA}$ is not finitely axiomatizable is due to Ryll-Nardzewski (1952), and that it is not axiomatizable by sentences of bounded complexity to Rabin (1961), according to the introduction of Hájek and Pudlák; the proof given here, by models of definable elements, uses the separation of the course on induction and conservation. The provability of $\mathrm{Con}(\mathrm I\Sigma_n)$ in $\mathrm I\Sigma_{n+1}$ is Corollary I.4.34 of Hájek and Pudlák, related there to Leivant (1981) and, for a proof-theoretic proof, Takeuti.
+The finite axiomatizability of $\mathrm I\Sigma_n$ and $\mathrm B\Sigma_{n+1}$, for $n \geq 1$, is Theorem I.2.52 of Hájek and Pudlák, who remark that it is an easy consequence of partial truth definitions and that it is difficult to say who first observed it; their proof is sketched, and the treatment of bounds by variables (:ref{#lem-isigma-star}) is added here. That $\mathrm{PA}$ is not finitely axiomatizable is due to Ryll-Nardzewski (1952), and that it is not axiomatizable by sentences of bounded complexity to Rabin (1961), according to the introduction of Hájek and Pudlák; the proof given here, by models of definable elements, uses the separation of the course on induction and conservation. The provability of $\mathrm{Con}(\mathrm I\Sigma_n)$ in $\mathrm I\Sigma_{n+1}$ is Corollary I.4.34 of Hájek and Pudlák, related there to Leivant (1981); a proof-theoretic proof is in Takeuti (1975).
 
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Introduction, Chapter I, Sections 2(c) and 4.
 - C. Ryll-Nardzewski, *The role of the axiom of induction in elementary arithmetic*, Fundamenta Mathematicae 39 (1952), 239–263.
-- M. O. Rabin, *Non-standard models and independence of the induction axiom*, in Essays on the Foundations of Mathematics, Magnes Press, Jerusalem, 1961, 287–299.
+- M. O. Rabin, *Non-standard models and independence of the induction axiom*, in Essays on the Foundations of Mathematics, dedicated to A. A. Fraenkel, Magnes Press, Jerusalem, and North-Holland, Amsterdam, 1961, 287–299.
+- G. Takeuti, *Proof Theory*, North-Holland, 1975.
+- D. Leivant, *On the proof theory of the modal logic for arithmetic provability*, Journal of Symbolic Logic 46 (1981), 531–538.
 - H. Gaifman and C. Dimitracopoulos, *Fragments of Peano's arithmetic and the MRDP theorem*, in Logic and Algorithmic, Monographies de L'Enseignement Mathématique 30, Genève, 1982, 187–206.

@@ -1,11 +1,11 @@
 ---
 title: Provably total functions of IΣ₁
-summary: Provably total functions of a theory; every primitive recursive function is provably total in IΣ₁, with its recursion equations, and so are the functions defined by course-of-values recursion; the converse, due to Parsons, Mints and Takeuti, is stated; IΣ₁ does not prove the totality of the Ackermann function, and IΣ₂ does.
-duration: 50
-prerequisites: [fragments-of-arithmetic/coding, fragments-of-arithmetic/induction-collection, models-of-computation/ackermann-function]
+summary: Provably total functions of a theory; every primitive recursive function is provably total in IΣ₁, with its recursion equations, and so are the functions defined by course-of-values recursion.
+duration: 40
+prerequisites: [fragments-of-arithmetic/coding, fragments-of-arithmetic/induction-collection, fragments-of-arithmetic/parikh, models-of-computation/primitive-recursion]
 ---
 
-A theory of arithmetic can be measured by the functions it knows to be total. Every total computable function $f$ has a $\Sigma_1$ definition in $\nat$, by :ref{#cor-sigma1-ce} applied to its graph, but a theory may be unable to prove that this definition defines a total function. Parikh's theorem shows that the total functions of $\mathrm I\Delta_0$ with bounded graphs grow at most polynomially. This lesson shows that $\mathrm I\Sigma_1$ proves the totality of every primitive recursive function, and more: it proves their recursion equations, so that the usual recursive definitions of arithmetic, in particular those of syntax used in the next lesson, can be carried out inside $\mathrm I\Sigma_1$. By a theorem of Parsons, Mints and Takeuti, which we state without proof, the primitive recursive functions are exactly the provably total functions of $\mathrm I\Sigma_1$.
+A theory of arithmetic can be measured by the functions it knows to be total. Every total computable function $f$ has a $\Sigma_1$ definition in $\nat$, by :ref{#cor-sigma1-ce} applied to its graph, but a theory may be unable to prove that this definition defines a total function. By Parikh's theorem, a function that $\mathrm I\Delta_0$ proves total through a $\Delta_0$ definition is bounded by a polynomial (first exercise). This lesson shows that $\mathrm I\Sigma_1$ proves the totality of every primitive recursive function, and more: it proves their recursion equations, so that the usual recursive definitions of arithmetic, in particular those of syntax used later in the course, can be carried out inside $\mathrm I\Sigma_1$. The technique is to prove, by $\Sigma_1$ induction, the existence of the **sequence of values** of the function. The next lesson states the converse, due to Parsons, Mints and Takeuti, and shows that $\mathrm I\Sigma_1$ does not prove the totality of the Ackermann function while $\mathrm I\Sigma_2$ does.
 
 ## Provably total functions
 
@@ -30,6 +30,14 @@ $$
 which says that $s$ is the sequence of values $f(\bar x, 0), \dots, f(\bar x, n)$.
 
 The last formula is not literally $\Sigma_1$, because of the bounded quantifier $\forall i < n$ in front of the $\Sigma_1$ formula $\varphi_h$; it is $\Sigma_1$ in $\mathrm I\Sigma_1$, by Parsons' lemma (:ref{#lem-fo-collection-closure}) in $\mathrm B\Sigma_1$, which $\mathrm I\Sigma_1$ proves (:ref{#thm-fo-parsons}). We replace it by an equivalent $\Sigma_1$ formula. In $\nat$, each $\varphi_f$ defines the graph of $f$.
+
+:::example{#ex-pr-addition}
+Addition is obtained by primitive recursion: $x + 0 = x$ and $x + (n + 1) = (x + n) + 1$, with $g(x) = x$ and $h(x, n, w) = w + 1$, the latter a composition of the successor with a projection. After simplifying $\varphi_g$ and $\varphi_h$ by logic, the formula attached to this derivation is
+$$
+\varphi_+(x, n, y) \equiv \exists s\ \big( \mathrm{Seq}(s, n + 1) \wedge (s)_0 = x \wedge \forall i < n\ (s)_{i+1} = (s)_i + 1 \wedge (s)_n = y \big),
+$$
+whose only witness is the sequence $x, x + 1, \dots, x + n$. Here $\forall i < n$ governs a bounded formula, so $\varphi_+$ is already $\Sigma_1$, without Parsons' lemma. The theorem below shows that $\mathrm I\Sigma_1$ proves $\forall x\ \forall n\ \exists! y\ \varphi_+(x, n, y)$ and the two equations; induction on $n$ for the $\Sigma_1$ formula $\varphi_+(x, n, x + n)$ then shows that it holds for all $n$, so that the function defined by $\varphi_+$ is provably equal to the addition of the language. For multiplication, $g(x) = 0$, $h(x, n, w) = w + x$, and $\varphi_h$ is $\varphi_+$ with permuted variables: the bounded quantifier $\forall i < n$ now stands in front of the unbounded $\exists s'$ of $\varphi_+$, and Parsons' lemma is needed.
+:::
 
 :::theorem{#thm-pr-provably-total}
 Every primitive recursive function is provably total in $\mathrm I\Sigma_1$. More precisely, for every derivation of a primitive recursive function $f$, $\mathrm I\Sigma_1$ proves $\forall \bar x\ \exists! y\ \varphi_f(\bar x, y)$, and it proves the equations of the derivation: if $f$ is obtained by primitive recursion from $g$ and $h$, then, writing $f$, $g$ and $h$ for the functions defined by $\varphi_f$, $\varphi_g$ and $\varphi_h$,
@@ -83,24 +91,6 @@ If $f$ is defined by course-of-values recursion from a function $h$ provably tot
 
 The proof is that of the theorem, with the restriction $s \restriction i$ in place of the previous entry. The corollary is the form in which the theorem is used: syntactic notions such as "$z$ is the code of a term" or "the value of the term coded by $t$ under the assignment coded by $e$" are defined by course-of-values recursion on codes, since the codes of subterms are smaller than the code of the term, and the corollary provides $\Delta_1$ definitions of them in $\mathrm I\Sigma_1$ together with proofs of their recursive characterizations.
 
-## The converse, and the Ackermann function
-
-:::theorem[Parsons; Mints; Takeuti]{#thm-pmt}
-A function is provably total in $\mathrm I\Sigma_1$ if and only if it is primitive recursive.
-:::
-
-We admit the converse direction. Parsons (1970) obtained it from his theorem that $\mathrm I\Sigma_1$ proves the same $\Pi_2$ sentences as primitive recursive arithmetic; Mints and Takeuti gave proof-theoretic proofs. A model-theoretic proof, by the method of indicators of Paris and Kirby, is in Hájek and Pudlák (Corollary IV.3.7); it belongs to the last course of this track, on independence results. Its idea is that if $f$ grows faster than every primitive recursive function, then in a non-standard model of $\mathrm I\Sigma_1$, the cut of the elements below $g(a)$, for the primitive recursive functions $g$ and a fixed non-standard $a$, is a model of $\mathrm I\Sigma_1$ that is not closed under $f$, as in the proof of Parikh's theorem.
-
-:::corollary{#cor-ack-isigma1}
-No $\Sigma_1$ definition of the Ackermann function (:ref{#def-ackermann}) is proved by $\mathrm I\Sigma_1$ to define a total function.
-:::
-
-:::proof{of=cor-ack-isigma1}
-By :ref{#thm-pmt}, the Ackermann function would be primitive recursive, contradicting :ref{#cor-ack-not-pr}.
-:::
-
-The corollary depends on the admitted direction of :ref{#thm-pmt}. Its converse is the last exercise: $\mathrm I\Sigma_2$ proves the totality of the Ackermann function, through a $\Pi_2$ induction on the first argument. This is a first instance of the general phenomenon studied at the end of the track: the provably total functions of $\mathrm I\Sigma_{n+1}$ grow strictly faster than those of $\mathrm I\Sigma_n$.
-
 ## Exercises
 
 ::::exercise{difficulty=1}
@@ -119,22 +109,8 @@ By :ref{#thm-pr-provably-total} applied in $I$, the formula $\varphi_f$ defines 
 :::
 ::::
 
-::::exercise{difficulty=3}
-Let $\mathrm{Comp}(c)$ be the bounded formula saying that $c$ codes a finite set of triples $\langle x, y, z \rangle$ such that every triple in $c$ is **justified** in $c$: either $x = 0$ and $z = y + 1$; or $x = x' + 1$, $y = 0$ and $\langle x', 1, z \rangle \in c$; or $x = x' + 1$, $y = y' + 1$ and there is $w$ with $\langle x, y', w \rangle \in c$ and $\langle x', w, z \rangle \in c$. Let $\alpha(x, y, z) \equiv \exists c\ (\mathrm{Comp}(c) \wedge \langle x, y, z \rangle \in c)$. Show that $\alpha$ defines the Ackermann function in $\nat$, that $\mathrm I\Sigma_1$ proves that it defines a partial function, and that $\mathrm I\Sigma_2$ proves that it is total.
-
-:::solution
-*In $\nat$.* Every triple of a computation is correct, by induction on $\langle x, y \rangle$ in the lexicographic order, using the defining equations; conversely, the set of triples used in the evaluation of $A(x, y)$ by the equations is a computation.
-
-*Partial function.* Work in $\mathrm I\Sigma_1$. The union of two computations is a computation, since justifications are preserved when the set is enlarged, and it is coded by :ref{#thm-delta0-comprehension}; so it suffices to show that a single computation $c$ is functional. Suppose not. By the least number principle for bounded formulas, with parameter $c$, let $x$ be least such that $c$ contains two triples $\langle x, y, z \rangle$ and $\langle x, y, z' \rangle$ with $z \neq z'$ for some $y$, and then $y$ least for this $x$. If $x = 0$, then $z = y + 1 = z'$. If $x = x' + 1$ and $y = 0$, then $\langle x', 1, z \rangle$ and $\langle x', 1, z' \rangle$ are in $c$, a conflict at $x' < x$. If $x = x' + 1$ and $y = y' + 1$, the two triples are justified by $w$ and $w'$ with $\langle x, y', w \rangle, \langle x, y', w' \rangle \in c$, so $w = w'$ by the minimality of $y$, and then $\langle x', w, z \rangle$ and $\langle x', w, z' \rangle$ are in $c$, a conflict at $x' < x$. Each case contradicts the choice of $x$ and $y$.
-
-*Totality in $\mathrm I\Sigma_2$.* Apply $\Pi_2$ induction, available by :ref{#thm-fo-isigma-ipi}, to $\tau(x) \equiv \forall y\ \exists z\ \alpha(x, y, z)$. For $x = 0$, the computation $\{ \langle 0, y, y + 1 \rangle \}$ works. Assume $\tau(x)$, and prove $\forall y\ \exists z\ \alpha(x + 1, y, z)$ by $\Sigma_1$ induction on $y$, with $x$ as a parameter, using $\tau(x)$ as a hypothesis. For $y = 0$, take a computation $c$ containing $\langle x, 1, z \rangle$ and add $\langle x + 1, 0, z \rangle$. If $c$ contains $\langle x + 1, y, w \rangle$, take a computation $c'$ containing $\langle x, w, z \rangle$, given by $\tau(x)$, and add $\langle x + 1, y + 1, z \rangle$ to $c \cup c'$. The induction on $y$ is $\Sigma_1$, and the induction on $x$ is for the $\Pi_2$ formula $\tau$.
-:::
-::::
-
 ## Notes and references
 
-The closure of the $\mathrm I\Sigma_1$-provably total functions under primitive recursion is Theorem I.1.54 of Hájek and Pudlák, with the lemma I.1.55 used in the proof above; they remark that course-of-values recursion is treated in the same way, and use it for the arithmetization of syntax (Section I.1(d)). The characterization of the provably total functions of $\mathrm I\Sigma_1$ is due to Parsons (1970), and was reproved by Mints and by Takeuti; Hájek and Pudlák prove it by indicators (Corollary IV.3.7, credited there to Takeuti and Mints). The consistency statement of the example is Gödel's.
+The closure of the $\mathrm I\Sigma_1$-provably total functions under primitive recursion is Theorem I.1.54 of Hájek and Pudlák, with Lemma I.1.55, which contains the sequence-of-values formula used in the proof above; Remark I.1.56 notes that course-of-values recursion is treated in the same way, and Section I.1(d) uses it for the arithmetization of syntax. The example of a formula whose totality is equivalent to a consistency statement rests on Gödel's second incompleteness theorem. The converse of the theorem is discussed in the next lesson.
 
-- C. Parsons, *On a number theoretic choice schema and its relation to induction*, in Intuitionism and Proof Theory, North-Holland, 1970, 459–473.
-- P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 1(c), and Chapter IV, Section 3.
-- G. Takeuti, *Proof Theory*, North-Holland, 1975.
+- P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 1(c).

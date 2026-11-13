@@ -1,7 +1,7 @@
 ---
 title: Partial truth definitions
 summary: The partial truth definitions Sat_Σₙ and Sat_Πₙ, obtained from satisfaction for bounded formulas by quantifying over assignments; their complexity and Tarski's conditions in IΣ₁; every Σₙ formula is equivalent in IΣ₁ to an instance of Sat_Σₙ, through formulas whose quantifiers are bounded by variables.
-duration: 35
+duration: 40
 prerequisites: [bounded-satisfaction]
 ---
 
@@ -16,6 +16,10 @@ Let $\mathrm{Sat}_{\Sigma_0} = \mathrm{Sat}_{\Pi_0} = \mathrm{Sat}_0$. For $n \g
 :::
 
 The relation between $z$, $d$ and $u$ is $\Delta_1$ in $\mathrm I\Sigma_1$, being defined by course-of-values recursion, and "$e'$ agrees with $e$ outside $d$" quantifies over all $i$; it suffices to quantify over $i$ below $\mathrm{lh}(e) + \mathrm{lh}(e')$, beyond which both values are $0$, so it is bounded.
+
+:::example{#ex-sat-n-even}
+Let $\varphi$ be the $\Sigma^*_1$ formula $\exists v_1\ (v_0 = v_1 + v_1)$. Its maximal existential block is $v_1$, so $d$ lists the index $1$, and $u$ is the code of the atomic formula $v_0 = v_1 + v_1$. By definition, $\mathrm{Sat}_{\Sigma_1}(\ulcorner \varphi \urcorner, e)$ holds if and only if some $e'$ that agrees with $e$ except possibly at $1$ satisfies $\mathrm{Sat}_0(u, e')$, that is, $e'(0) = e'(1) + e'(1)$. Since $e'(0) = e(0)$, this says that $e(0)$ is even, the value $e'(1)$ being half of it.
+:::
 
 :::theorem[Partial truth definitions]{#thm-sat-n}
 For every $n \geq 1$:
@@ -36,7 +40,7 @@ In the proof of the Tarski condition for $\exists v_i\ w$, why is the *maximal* 
 - [x] To make the decomposition of $z$ unique, so that the definition does not depend on a choice; the block of $z = \exists v_i\ w$ is then $v_i$ followed by the block of $w$, which is what the proof uses.
 - [ ] Because the matrix $u$ must be bounded.
 
-  The matrix is $\Pi^*_{n-1}$, which for $n \geq 2$ contains unbounded quantifiers.
+  The matrix is $\Pi^*_{n-1}$, which for $n \geq 2$ may contain unbounded quantifiers.
 - [ ] Because $\mathrm{Sat}_{\Sigma_n}$ would otherwise not be $\Sigma_n$.
 
   The complexity does not depend on the length of the block, which is quantified over through $e'$.
@@ -52,7 +56,7 @@ Let $n \geq 1$. For every $\Sigma^*_n$ formula $\varphi$, $\mathrm I\Sigma_1$ pr
 By induction on $\varphi$ in the metatheory, first through the $\Delta^*_0$ formulas, then through the blocks. For atomic formulas, :ref{#fact-syntax} gives $\mathrm{Val}(\ulcorner t \urcorner, e) = t(e)$; the connectives and bounded quantifiers follow from Tarski's conditions for $\mathrm{Sat}_0$, the induction hypothesis being applied to all assignments, in particular to $e[i := u]$. A $\Delta^*_0$ formula is also $\Sigma^*_n$ and $\Pi^*_n$, and the second Tarski condition of :ref{#thm-sat-n}, applied $n$ times, reduces $\mathrm{Sat}_{\Sigma_n}$ to $\mathrm{Sat}_0$ on it. For $\exists v_i\ w$, the condition gives $\mathrm{Sat}_{\Sigma_n}(\ulcorner \exists v_i\ w \urcorner, e) \leftrightarrow \exists x\ \mathrm{Sat}_{\Sigma_n}(\ulcorner w \urcorner, e[i := x])$, and the induction hypothesis for $w$, applied to $e[i := x]$, turns the right-hand side into $\exists x\ w(e[i := x])$, which is $(\exists v_i\ w)(e)$. A formula that does not begin with an unbounded $\exists$ is reduced to $\mathrm{Sat}_{\Pi_{n-1}}$, and the dual argument applies.
 :::
 
-For each $n$, the formula $\mathrm{Sat}_{\Sigma_n}$ is thus a **universal $\Sigma_n$ formula**: in every model $M$ of $\mathrm I\Sigma_1$, every set defined by a $\Sigma^*_n$ formula with parameters $\bar c$ is $\{ x : M \models \mathrm{Sat}_{\Sigma_n}(a, \langle x, \bar c \rangle) \}$ for a standard number $a$, the code of a formula. It is the formalized counterpart of the universal $\Sigma^0_n$ sets of computability. It also applies to non-standard codes $a$, which code no actual formula: in a non-standard model, $\mathrm{Sat}_{\Sigma_n}(a, \cdot)$ is then a $\Sigma_n$-definable set with the parameter $a$, which in general is not defined by any standard formula with standard parameters. Satisfaction for non-standard formulas is a central tool of the later courses of the track.
+For each $n \geq 1$, the formula $\mathrm{Sat}_{\Sigma_n}$ is thus universal for the $\Sigma^*_n$ formulas: in every model $M$ of $\mathrm I\Sigma_1$, every set defined by a $\Sigma^*_n$ formula with parameters $\bar c$ is $\{ x : M \models \mathrm{Sat}_{\Sigma_n}(a, \langle x, \bar c \rangle) \}$ for a standard number $a$, the code of a formula. It is the formalized counterpart of the universal $\Sigma^0_n$ sets of computability. It also applies to non-standard codes $a$, which are not codes of formulas of the metatheory: in a non-standard model, $\mathrm{Sat}_{\Sigma_n}(a, \cdot)$ is then a $\Sigma_n$-definable set with the parameter $a$, which in general is not defined by any standard formula with standard parameters. Satisfaction for non-standard formulas is a central tool of the later courses of the track.
 
 ## Bounds given by terms
 
@@ -75,7 +79,11 @@ With :ref{#cor-snowing}, the lemma gives the general form of Tarski's scheme.
 For every $n \geq 1$ and every $\Sigma_n$ formula $\varphi(v_0, \dots, v_k)$, there is a $\Sigma^*_n$ formula $\varphi^*$ such that $\mathrm I\Sigma_1$ proves $\varphi(\bar v) \leftrightarrow \mathrm{Sat}_{\Sigma_n}(\ulcorner \varphi^* \urcorner, \langle v_0, \dots, v_k \rangle)$; similarly for $\Pi_n$ formulas and $\mathrm{Sat}_{\Pi_n}$.
 :::
 
-So $\mathrm{Sat}_{\Sigma_n}$ is a universal $\Sigma_n$ formula: in a model $M$ of $\mathrm I\Sigma_1$, every $\Sigma_n$-definable set with parameters $\bar c$ is $\{ x : M \models \mathrm{Sat}_{\Sigma_n}(a, \langle x, \bar c \rangle) \}$ for a standard number $a$.
+So $\mathrm{Sat}_{\Sigma_n}$ is a **universal $\Sigma_n$ formula**: in a model $M$ of $\mathrm I\Sigma_1$, every $\Sigma_n$-definable set with parameters $\bar c$ is $\{ x : M \models \mathrm{Sat}_{\Sigma_n}(a, \langle x, \bar c \rangle) \}$ for a standard number $a$, the code of $\varphi^*$.
+
+:::remark{#rem-variable-bounds-pr}
+The translation $\varphi \mapsto \varphi^*$ given by the proof of :ref{#lem-variable-bounds} is primitive recursive on codes. It is defined by recursion on the formula: each clause of the proof builds the code of the translated formula from the codes of the translations of the immediate components, by pairing, by renaming bound variables apart and by choosing new variables. A variable new for a formula with code $z$ can be taken as $v_z$ or $v_{z + 1}$, since every variable $v_i$ occurring in it has $i < z$; renaming is itself a recursion on codes. So $\ulcorner \varphi \urcorner \mapsto \ulcorner \varphi^* \urcorner$ is defined by course-of-values recursion from primitive recursive operations, and it is primitive recursive (:ref{#thm-course-of-values}). By :ref{#cor-course-of-values-provable}, its restriction to the codes of $\Sigma_n$ formulas is represented in $\mathrm I\Sigma_1$ by a provably total function $t_n$ with a $\Delta_1$ graph, and for each standard $\varphi$ the equation $t_n(\ulcorner \varphi \urcorner) = \ulcorner \varphi^* \urcorner$ is a true $\Sigma_1$ sentence, hence provable in $\mathrm{PA}^-$ by :ref{#thm-sigma1-complete}. The equivalence of $\varphi$ and $\varphi^*$, on the other hand, is proved in $\mathrm I\Sigma_1$ only for each standard formula: the lemma is a scheme in the metatheory.
+:::
 
 ## Exercises
 
@@ -90,7 +98,7 @@ In $\nat$, a $\Sigma^*_1$ sentence $\varphi$ is true if and only if $\mathrm{Sat
 
 ## Notes and references
 
-Partial truth definitions were studied by Montague (1959) and, with their use for reflection principles, by Kreisel and Lévy (1968), according to the bibliographical remarks of Hájek and Pudlák. The formulas $\mathrm{Sat}_{\Sigma_n}$ follow Hájek and Pudlák (Definition I.1.74, Theorem I.1.75), and the scheme is their "it's snowing" lemma (Corollary I.1.76).
+Partial truth definitions were studied by Montague (1961) and, with their use for reflection principles, by Kreisel and Lévy (1968), according to the bibliographical remarks of Hájek and Pudlák. The formulas $\mathrm{Sat}_{\Sigma_n}$ follow Hájek and Pudlák (Definition I.1.74, Theorem I.1.75), and the scheme is their "it's snowing" lemma (Corollary I.1.76).
 
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 1(d).
 - R. Montague, *Semantical closure and non-finite axiomatizability I*, in Infinitistic Methods, Pergamon, 1961, 45–69.
