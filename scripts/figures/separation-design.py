@@ -20,9 +20,11 @@ def sub(name, index, x, y, size=14, anchor='middle'):
 
 
 # ---------------------------------------------------------------- an EM condition
-s = ['<svg class="fig" viewBox="0 0 600 250" width="600" role="img" aria-label="An Erdős–Moser condition: four stem elements above a reservoir; each stem element either beats every reservoir element or is beaten by every reservoir element">']
+s = ['<svg class="fig" viewBox="0 0 600 250" width="600" role="img" aria-label="An Erdős–Moser condition: four stem elements above a reservoir; the first two stem elements beat every reservoir element, the last two are beaten by every reservoir element">']
 s.append('<defs>' + marker('sd-em-arr') + '</defs>')
-stem = [(120, 'down'), (220, 'up'), (320, 'down'), (420, 'up')]
+# a1 beats a2 beats a3 beats a4; the elements beating the reservoir must come first in this order,
+# otherwise some a_i, a_j and y form a 3-cycle and property (b) fails
+stem = [(120, 'down'), (220, 'down'), (320, 'up'), (420, 'up')]
 s.append('<text x="40" y="64" class="label">stem σ</text>')
 for k, (x, d) in enumerate(stem):
     s.append(f'<circle cx="{x}" cy="60" r="14" class="state"/>')

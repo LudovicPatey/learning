@@ -68,14 +68,18 @@ the weakness property, and designing the notion of forcing.
    (`lem-sd-em-extension`); step 2, the failure of blocks (`ex-sd-em-block`), limit
    colors and over-approximation, the question over partitions (`lem-sd-em-question`).
    Exercise: L-compatible blocks.
-3. **The Erdős–Moser theorem and several hyperimmunities** (`erdos-moser-hyperimmunities`):
+3. **The Erdős–Moser theorem, cone avoidance and hyperimmunities** (`erdos-moser-hyperimmunities`):
    step 3; EM admits cone avoidance (`thm-sd-em-cone`); preservation of k hyperimmunities
    (`def-sd-k-hyperimmunities`), compactness of the EM question (`lem-sd-em-compact`),
-   EM preserves ω hyperimmunities (`thm-sd-em-hyperimmunities`, Patey); Δ⁰₂
+   EM preserves ω hyperimmunities (`thm-sd-em-hyperimmunities`, Patey). Exercises:
+   WKL preserves ω hyperimmunities (`exr-wkl-hyperimmunities`); strong cone avoidance of
+   EM (`exr-em-strong-cone`, restored 2026-11-13).
+3b. **Separating EM from RT²₂** (`erdos-moser-separation`, new 2026-11-13): Δ⁰₂
    bi-hyperimmune set (`lem-sd-bihyperimmune`); SRT²₂ does not preserve 2
    (`prop-sd-rt22-two`); SRT²₂ ≰_ω EM (`cor-sd-em-not-srt22`, LST); RT²₂ ⇔ EM + ADS on
    Turing ideals (`prop-sd-rt22-em-ads`), ADS ≰_ω EM (`cor-sd-ads-not-em`). Exercise:
-   WKL preserves ω hyperimmunities.
+   RT²₂ preserves 2 among 3 hyperimmunities, RT²₃ not 3 among 3
+   (`exr-rt22-two-among-three`, restored 2026-11-13).
 4. **Partial orders and constant-bound immunity** (`chain-antichain`): CAC; CAC
    conditions with three stems and stem-based forcing (`def-sd-cac-condition`); (H) and
    extension (`lem-sd-cac-extension`); split triples (`def-sd-split-triple`, figure
@@ -120,7 +124,7 @@ the weakness property, and designing the notion of forcing.
 
 ## 5. Choices
 
-- **Seven lessons; strict durations.** At 55 words per minute, 45 minutes is about 2475
+- **Seven lessons, then eight; strict durations.** At 55 words per minute, 45 minutes is about 2475
   words (counted with `wc -w`, figures excluded). A first draft had lessons of 3000–4200
   words; the EM design was split into design (lesson 2) and step 3 + separations (lesson
   3), and the counterexample constructions were grouped in lesson 6, so that every lesson
@@ -172,10 +176,9 @@ the weakness property, and designing the notion of forcing.
 - **Admitted results**: EM ⊢ RWKL (Bienvenu–Patey–Shafer; Flood–Towsner), used in
   `cor-sd-cac-not-dnc`; Wang's and Cholak–Patey's theorems on thin sets (lesson 7, prose).
 - **Excluded.**
-  - Strong cone avoidance of EM (monograph exercise): drafted as an exercise of lesson 2,
-    dropped for length; a possible exercise for a future revision.
-  - Preservation of 2 among 3 hyperimmunities for RT²₂ (Patey): mentioned nowhere after
-    trimming; possible exercise.
+  - (Strong cone avoidance of EM and 2 among 3 hyperimmunities were restored as exercises
+    on 2026-11-13, after the split of lesson 3.) ADS ≤ CAC is proved in the prose of
+    `ascending-descending`; COH preserves immunity is covered by `compactness-avoidance`.
   - Abstract theorems (c.b.-compact questions preserve c.b.-immunity; extremal questions
     preserve dependent hyperimmunity): mentioned in notes of lesson 5 only.
   - Rainbow Ramsey theorem, trapped colorings, FS^n for all n (monograph exercises).
@@ -254,13 +257,40 @@ thin sets. No change to the course.
   strings" could not be verified as stated (a transitive subtournament of that tournament
   gives a stable linear order, whose ascending/descending sequences seem to need SADS); the
   course only cites the theorem as admitted. To check against Bienvenu–Patey–Shafer.
-- Page numbers of Flood–Towsner (MLQ 62 (2016)) not confirmed; pages of CGHJ (LNL 21,
-  104–119) and Cholak–Patey (TAMS 373, 2743–2773) given from memory, to check.
+- (Resolved 2026-11-13.) Flood–Towsner MLQ 62 (2016) 507–529 (web search); CGHJ LNL 21,
+  104–119, and Cholak–Patey TAMS 373 (2020) 2743–2773, checked against the bibliography of
+  Dzhafarov–Mummert; Dzhafarov–Jockusch JSL 74 (2009) 557–578 against the monograph's.
+- Patey, *Partial orders and immunity*: the conference version is in LNCS 9709 (CiE 2016),
+  353–363 (Dzhafarov–Mummert); the course cites the journal version, Computability 7 (2018),
+  323–339 (monograph bibliography).
 - Attribution of `prop-sd-rt22-two` to Patey (2017) is from the monograph's chapter context;
   the theorem environment carries no name.
-- Durations: lessons 1–4, 6, 7 are 2450–2490 words (45 minutes, about 45.3 at most).
+- Durations (2026-11-13): eight lessons, at most 2476 words each (45 minutes); the
+  shortest is `erdos-moser-separation` (about 1790 words, 35 minutes).
 
 ## 11. History
 
 - **2026-11-12.** Course created: seven lessons, three figures
   (`scripts/figures/separation-design.py`), design log.
+- **2026-11-13: polishing pass.**
+  - Corrections: figure `em-condition` showed the pattern down/up/down/up on a transitive stem,
+    which violates (b) (a₂, a₃ and any reservoir element form a 3-cycle); regenerated with
+    down/down/up/up and the caption explains the constraint. `lem-sd-bihyperimmune`: the
+    construction did not guarantee that A is infinite (requirements may only add zeros); each
+    step now adds one element to each side. `prop-sd-coce-cb`: the union of the tail of the
+    array is c.e., not computable. `thm-sd-dnc-cb`: base case k = 0 restated (Ψ_{e,0} is
+    nowhere defined, since members are non-empty), and the use of R_{e,k} made explicit
+    (no member is inside W). `lem-sd-em-question`: "at least two elements in σ". Ψ_{e,k}
+    in `chain-antichain` now requires non-empty sets. Forward claim "ADS has no compactness,
+    as ascending-descending shows" replaced by the correct pointer (ADS ≤ CAC, CAC ⊬ DNC).
+  - Structure: lesson 3 split into `erdos-moser-hyperimmunities` (step 3, cone avoidance,
+    ω hyperimmunities) and `erdos-moser-separation` (instance, SRT²₂ ≰ EM, RT²₂ = EM + ADS);
+    two dropped exercises restored (`exr-em-strong-cone`, `exr-rt22-two-among-three`);
+    `exr-em-l-compatible` labelled (used by the strong cone avoidance exercise). New labels
+    carry no `sd-` prefix. Lessons 2, 6, 7 trimmed by a few words to stay at 45 minutes.
+  - Consistency: linear orders written <_𝓛 in `ascending-descending`, as in
+    `erdos-moser-separation` and `lowness/weak-preservation`; "satisfies" for strings defined in
+    `erdos-moser-design` as in `avoidance/seetapun-forcing`.
+  - References: Hirschfeldt sections corrected (EM 9.2.2, CAC 9.1 and 9.2.1); unused LST
+    entry removed from lesson 2; Flood–Towsner pages added; Patey's thesis and
+    Dzhafarov–Jockusch added where used.

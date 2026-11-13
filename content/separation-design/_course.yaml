@@ -34,4 +34,4 @@ objectives:
   - Prove that CAC preserves constant-bound immunity with a disjunctive question over split triples, and that ADS preserves dependent hyperimmunity with an extremal question
   - Build by finite injury a constant-bound immune set met by every DNC function and a stable partial order defeating dependent hyperimmunity, and deduce the separations of CAC from DNC and RT²₂, and of ADS from SCAC
   - Design a notion of forcing for the free set theorem for pairs and prove that it admits cone avoidance
-lessons: [custom-properties, erdos-moser-design, erdos-moser-hyperimmunities, chain-antichain, ascending-descending, separating-instances, free-set-design]
+lessons: [custom-properties, erdos-moser-design, erdos-moser-hyperimmunities, erdos-moser-separation, chain-antichain, ascending-descending, separating-instances, free-set-design]

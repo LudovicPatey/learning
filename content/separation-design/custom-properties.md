@@ -28,7 +28,7 @@ Let $\mathsf P$ be a problem whose solutions are infinite sets, and $X$ an insta
 If a solution $Y$ had an infinite subset c.e. relative to $Z$, it would have an infinite subset computable in $Z$ (:ref{to="immunity-growth/immune-sets"}), which would be a solution computable in $Z$.
 :::
 
-So the coarsest invariant for a separation is immunity. If $X \leq_T Z$ is an instance of $\mathsf P$ without $Z$-computable solution, and $A$ is any solution, then $A$ is immune relative to $Z$, and the class $\mathcal W_A = \{ W : A \text{ is immune relative to } W \}$ is a weakness property containing $Z$. Keeping such sets immune is the **preservation of immunity** of :ref{#def-preserve-immunity}. It is too strong for problems with any amount of compactness, as the last section shows; the useful properties are strengthenings of immunity, easier to preserve.
+So the coarsest invariant for a separation is immunity. If $X \leq_T Z$ is an instance of $\mathsf P$ without $Z$-computable solution, and $A$ is any solution, then $A$ is immune relative to $Z$, and the class $\mathcal W_A = \{ W : A \text{ is immune relative to } W \}$ is a weakness property containing $Z$. Keeping such sets immune is the **preservation of immunity** of :ref{#def-preserve-immunity}. It is too strong for problems with any amount of compactness, as the analysis of weak König's lemma below shows; the useful properties are strengthenings of immunity, easier to preserve.
 
 ## Strong forms of immunity
 
@@ -49,7 +49,7 @@ A co-c.e. set is immune if and only if it is c.b.-immune.
 :::proof{of=prop-sd-coce-cb}
 A c.b.-immune set is immune. Conversely, let $A$ be co-c.e. and immune, and suppose that $A$ is not c.b.-immune. Let $k$ be least such that some $k$-array $(F_n)$ has $F_n \cap A \neq \emptyset$ for every $n$. Since $A$ is immune, $k \geq 2$. The set $N = \{ n : F_n \not\subseteq A \}$ is c.e., since $\overline A$ is c.e. and the sets $F_n$ are given by canonical indices.
 
-- If $N$ is finite, then $\bigcup_{n > \max N} F_n$ is an infinite computable subset of $A$ (it is infinite since the $F_n$ are disjoint and non-empty), contradicting immunity.
+- If $N$ is finite, then $\bigcup_{n > \max N} F_n$ is an infinite c.e. subset of $A$ (infinite since the $F_n$ are disjoint and non-empty), contradicting immunity.
 - If $N$ is infinite, let $n_0 < n_1 < \cdots$ be an infinite computable subset of $N$. For each $j$, wait for the first element $a_j$ of $F_{n_j}$ enumerated into $\overline A$, and let $F'_j = F_{n_j} \setminus \{ a_j \}$. Then $(F'_j)$ is a $(k-1)$-array, and $F'_j \cap A = F_{n_j} \cap A \neq \emptyset$ since $a_j \notin A$. This contradicts the minimality of $k$.
 :::
 
@@ -88,7 +88,7 @@ Let $A$ be the complement of Post's simple set, and $I_j$ the intervals above, w
 :::
 
 :::quiz[the property preserved by weak König's lemma]
-In the third case of the analysis above, why does a positive answer give a finite set $F_n$ rather than one element?
+In the analysis above, why does a positive answer give a finite set $F_n$ rather than one element?
 
 - [x] Because the question of Jockusch–Soare forcing answers positively when all the nodes of some level make the enumeration produce an element; different nodes may produce different elements, and only the finite set of their outputs is known.
 - [ ] Because $W^{Z \oplus G}_e$ is finite.

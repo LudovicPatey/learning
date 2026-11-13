@@ -94,7 +94,7 @@ Let $\varphi_i(n) = \exists v\ \psi_i(v, n)$, with $\psi_i$ a $\Sigma^0_1$ formu
 A problem $\mathsf P$ admits **preservation of c.b.-immunity** if for every set $Z$, every set $A$ c.b.-immune relative to $Z$ (:ref{#def-sd-cb-immune}) and every instance $X \leq_T Z$, there is a solution $Y$ such that $A$ is c.b.-immune relative to $Z \oplus Y$.
 :::
 
-By :ref{#exr-sd-min-arrays} relativized, the arrays may be replaced by $W$-computable sequences of sets $F_n$ with $|F_n| \leq k$ and $\min F_n > n$. For indices $e$ and $k$, let $\Psi^W_{e,k}(n)$ be $\Phi^W_e(n)$ if this is the canonical index of a set $F$ with $|F| \leq k$ and $\min F > n$, and undefined otherwise.
+By :ref{#exr-sd-min-arrays} relativized, the arrays may be replaced by $W$-computable sequences of sets $F_n$ with $|F_n| \leq k$ and $\min F_n > n$. For indices $e$ and $k$, let $\Psi^W_{e,k}(n)$ be $\Phi^W_e(n)$ if this is the canonical index of a non-empty set $F$ with $|F| \leq k$ and $\min F > n$, and undefined otherwise.
 
 :::theorem[Patey]{#thm-sd-cac-cb}
 $\mathsf{CAC}$ admits preservation of c.b.-immunity. More precisely, for every $Z$, every set $A$ c.b.-immune relative to $Z$ and every $Z$-computable partial order, there is an infinite ascending sequence, descending sequence or antichain $G$ such that $A$ is c.b.-immune relative to $Z \oplus G$.
@@ -127,5 +127,5 @@ The notion of forcing, the split triples and :ref{#thm-sd-cac-cb} are due to Pat
 
 - L. Patey, *Partial orders and immunity in reverse mathematics*, Computability 7 (2018), 323–339.
 - D. R. Hirschfeldt and R. A. Shore, *Combinatorial principles weaker than Ramsey's theorem for pairs*, Journal of Symbolic Logic 72 (2007), 171–206.
-- D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2015, Section 9.1.
+- D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2015, Sections 9.1 and 9.2.1.
 - L. Patey, *Lowness and avoidance*, chapter *Custom properties*, section *Partial orders*.

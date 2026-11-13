@@ -1,11 +1,11 @@
 ---
-title: The Erdős–Moser theorem and several hyperimmunities
-summary: Reservoirs in a Scott ideal; the Erdős–Moser theorem avoids cones and preserves countably many hyperimmunities, Ramsey's theorem for pairs does not preserve two; RT²₂ is EM plus ADS.
+title: The Erdős–Moser theorem, cone avoidance and hyperimmunities
+summary: Reservoirs in a Scott ideal; the Erdős–Moser theorem admits cone avoidance and preservation of countably many hyperimmunities, because its forcing question is not disjunctive.
 duration: 45
-prerequisites: [erdos-moser-design, avoidance/hyperimmunities, turing-degrees/limit-computability]
+prerequisites: [erdos-moser-design, avoidance/hyperimmunities]
 ---
 
-This lesson completes the design of the previous one with its third step, the choice of the reservoirs, and separates $\mathsf{EM}$ from Ramsey's theorem for pairs. The separating property is read off one feature of the question: it is not disjunctive. A construction for Ramsey's theorem for pairs satisfies each requirement on one of two sides that it does not choose, so two families of requirements may end up satisfied on different sides; a construction for $\mathsf{EM}$ satisfies every requirement on the set it builds.
+This lesson completes the design of the previous one with its third step, the choice of the reservoirs, and proves two preservation theorems for $\mathsf{EM}$. The second is read off one feature of the question: it is not disjunctive. A construction for Ramsey's theorem for pairs satisfies each requirement on one of two sides that it does not choose, so two families of requirements may end up satisfied on different sides; a construction for $\mathsf{EM}$ satisfies every requirement on the set it builds. The next lesson turns this difference into a separation.
 
 ## Step 3: computational properties
 
@@ -32,7 +32,7 @@ This is the argument of :ref{#thm-local-cone-avoidance} along a sequence of cond
 Let $1 \leq k \leq \omega$. A problem $\mathsf P$ admits **preservation of $k$ hyperimmunities** if for every set $Z$, every sequence $(h_i)_{i < k}$ of $Z$-hyperimmune functions and every instance $X \leq_T Z$, there is a solution $Y$ such that every $h_i$ is $(Z \oplus Y)$-hyperimmune.
 :::
 
-For $k = 1$ this is :ref{#def-preserve-hyperimmunity}. For a fixed sequence $(h_i)$, the class $\mathcal W_{\vec h}$ of sets $W$ such that every $h_i$ is $W$-hyperimmune is a weakness property, and preservation of $k$ hyperimmunities is the preservation of all these classes. $\mathsf{WKL}$ preserves them for $k = \omega$ (first exercise). By :ref{#thm-hyperimmunity-examples}, $\mathsf{RT}^2_2$ admits preservation of one hyperimmunity. The proof uses a disjunctive question: for a pair of indices, some side $G_i$ satisfies "$\Phi^{Z \oplus G_i}_{e_i}$ does not dominate $h$", and Lachlan's disjunction gives one side satisfying all the requirements. With two functions $h_0$ and $h_1$, the requirements for $h_0$ may be satisfied on side $0$ and those for $h_1$ on side $1$, and nothing forces a common side. For $\mathsf{EM}$ the question is not disjunctive.
+For $k = 1$ this is :ref{#def-preserve-hyperimmunity}. For a fixed sequence $(h_i)$, the class $\mathcal W_{\vec h}$ of sets $W$ such that every $h_i$ is $W$-hyperimmune is a weakness property, and preservation of $k$ hyperimmunities is the preservation of all these classes. $\mathsf{WKL}$ preserves them for $k = \omega$ (:ref{#exr-wkl-hyperimmunities}). By :ref{#thm-hyperimmunity-examples}, $\mathsf{RT}^2_2$ admits preservation of one hyperimmunity. The proof uses a disjunctive question: for a pair of indices, some side $G_i$ satisfies "$\Phi^{Z \oplus G_i}_{e_i}$ does not dominate $h$", and Lachlan's disjunction gives one side satisfying all the requirements. With two functions $h_0$ and $h_1$, the requirements for $h_0$ may be satisfied on side $0$ and those for $h_1$ on side $1$, and nothing forces a common side. For $\mathsf{EM}$ the question is not disjunctive. The next lesson shows that this difference is real: $\mathsf{RT}^2_2$ does not preserve two hyperimmunities.
 
 :::lemma{#lem-sd-em-compact}
 Let $\mathcal M$ be a Scott ideal containing $Z$. The question of :ref{#lem-sd-em-question} is compact: if $c \mathrel{?{\vdash}} \Phi^{Z \oplus G}_e(x)\converge$, there is $k$ with $c \mathrel{?{\vdash}} \Phi^{Z \oplus G}_e(x)\converge < k$.
@@ -47,7 +47,7 @@ $\mathsf{EM}$ admits preservation of $\omega$ hyperimmunities: for every set $Z$
 :::
 
 :::proof{of=thm-sd-em-hyperimmunities}
-By the first exercise and :ref{#lem-scott-preservation}, there is a Scott ideal $\mathcal M$ containing $Z$ such that every $h_i$ is $X$-hyperimmune for every $X \in \mathcal M$. Build a sequence of $\mathsf{EM}$ conditions with reservoirs in $\mathcal M$ as in :ref{#thm-sd-em-cone}, with the growth task and, for each pair $(e, i)$, the following task. Let $c = (\sigma, X)$ be the current condition.
+By :ref{#exr-wkl-hyperimmunities} and :ref{#lem-scott-preservation}, there is a Scott ideal $\mathcal M$ containing $Z$ such that every $h_i$ is $X$-hyperimmune for every $X \in \mathcal M$. Build a sequence of $\mathsf{EM}$ conditions with reservoirs in $\mathcal M$ as in :ref{#thm-sd-em-cone}, with the growth task and, for each pair $(e, i)$, the following task. Let $c = (\sigma, X)$ be the current condition.
 
 - If $c \mathrel{?{\nvdash}} \Phi^{Z \oplus G}_e(x)\converge$ for some $x$, property 2 gives an extension forcing $\Phi^{Z \oplus G}_e(x)\diverge$.
 - Otherwise, by :ref{#lem-sd-em-compact}, for every $x$ there is $k$ with $c \mathrel{?{\vdash}} \Phi^{Z \oplus G}_e(x)\converge < k$. Let $g(x)$ be the first such $k$ found in an enumeration of these pairs computable in $X \oplus Z$; $g$ is total and $(X \oplus Z)$-computable. Since $X \oplus Z \in \mathcal M$, $h_i$ is $(X \oplus Z)$-hyperimmune, so $g(x) < h_i(x)$ for some $x$, and property 1 gives an extension forcing $\Phi^{Z \oplus G}_e(x)\converge < g(x)$.
@@ -79,61 +79,9 @@ Where is the Scott ideal used in the proof of :ref{#thm-sd-em-hyperimmunities}?
   The growth task only needs closure under computability in $X \oplus Z$.
 :::
 
-## Ramsey's theorem for pairs does not preserve two hyperimmunities
-
-The separating instance comes from a $\Delta^0_2$ partition of $\nat$ into two hyperimmune sets, through a stable coloring.
-
-:::lemma{#lem-sd-bihyperimmune}
-There is a $\Delta^0_2$ set $A$ such that $A$ and $\overline A$ are hyperimmune.
-:::
-
-:::proof{of=lem-sd-bihyperimmune}
-Write $A^0 = A$ and $A^1 = \overline A$. We build $A$ by finite extensions with oracle $\emptyset'$, satisfying for each $e$ and $i < 2$ the requirement: if $\Phi_e$ is a disjoint strong array $(F_n)$, then $F_n \cap A^i = \emptyset$ for some $n$. Given the current string $\sigma$, ask $\emptyset'$ whether there is $n$ with $\Phi_e(n)\converge$ and $F_n$ empty or $\min F_n \geq |\sigma|$, a $\Sigma^0_1$ question. If so, extend $\sigma$ so that the elements of $F_n$ are outside $A^i$, the positions in between being set to $0$. If not, $\Phi_e$ is not a disjoint strong array: a total sequence of pairwise disjoint finite sets has only finitely many members meeting $[0, |\sigma|)$. Then add one element to $A$ and one to $\overline A$. The construction is computable in $\emptyset'$, so $A$ is $\Delta^0_2$; $A$ and $\overline A$ are infinite, and every requirement is satisfied.
-:::
-
-:::proposition{#prop-sd-rt22-two}
-There are two hyperimmune functions $h_0, h_1$ and a computable stable coloring $f : [\nat]^2 \to 2$ such that, for each $i < 2$, $h_i$ is not $H$-hyperimmune for any infinite set $H$ homogeneous for $f$ with color $i$. So $\mathsf{RT}^2_2$, and even its restriction $\mathsf{SRT}^2_2$ to stable colorings, does not admit preservation of $2$ hyperimmunities.
-:::
-
-:::proof{of=prop-sd-rt22-two}
-Let $A$ be as in :ref{#lem-sd-bihyperimmune}, with a computable approximation $(A_s)$ (:ref{#thm-limit-lemma}), and let $f(\{ x, y \}) = A_y(x)$ for $x < y$. It is computable and stable, with limit $\lim_y f(\{ x, y \}) = A(x)$. Let $h_1 = p_A$ and $h_0 = p_{\overline A}$, the principal functions; they are hyperimmune by :ref{#thm-hyperimmune-principal}. If $H$ is infinite and homogeneous with color $1$, every $x \in H$ has $f(\{ x, y \}) = 1$ for the infinitely many $y > x$ in $H$, so $A(x) = 1$: $H \subseteq A$. Then $p_H(n) \geq p_A(n)$ for every $n$, and $p_H$, computable in $H$, dominates $h_1$. The case of color $0$ is symmetric.
-:::
-
-:::corollary[Lerman, Solomon, Towsner]{#cor-sd-em-not-srt22}
-$\mathsf{SRT}^2_2 \not\leq_\omega \mathsf{EM}$: there is an ω-model of $\mathsf{RCA}_0 + \mathsf{EM}$ that is not a model of $\mathsf{SRT}^2_2$, hence not of $\mathsf{RT}^2_2$.
-:::
-
-:::proof{of=cor-sd-em-not-srt22}
-Let $h_0, h_1$ be as in :ref{#prop-sd-rt22-two} and $\mathcal W$ the class of sets $W$ such that $h_0$ and $h_1$ are $W$-hyperimmune. By :ref{#thm-sd-em-hyperimmunities}, $\mathsf{EM}$ preserves $\mathcal W$. The set $\emptyset$ belongs to $\mathcal W$ and computes the stable coloring $f$, every solution $H$ of which has $H \notin \mathcal W$. So $\mathsf{SRT}^2_2$ does not preserve $\mathcal W$, and :ref{#thm-preservation-separation} applies.
-:::
-
-Cone avoidance, PA avoidance and preservation of one hyperimmunity, which both problems admit, do not see this separation; it only uses that the question of $\mathsf{RT}^2_2$ chooses its side.
-
-## Ramsey's theorem as a conjunction
-
-Let $\mathcal L = (\nat, <_{\mathcal L})$ be a linear order. As in :ref{to="lowness/weak-preservation"}, an **ascending sequence** is an infinite set on which $<_{\mathcal L}$ agrees with the order of $\nat$, and a **descending sequence** an infinite set on which it agrees with the reverse order. The **ascending–descending sequence principle** $\mathsf{ADS}$ is the problem whose instances are the linear orders on $\nat$ and whose solutions are their ascending and descending sequences; it is studied in :ref{to="separation-design/ascending-descending"}.
-
-:::proposition{#prop-sd-rt22-em-ads}
-A Turing ideal satisfies $\mathsf{RT}^2_2$ if and only if it satisfies $\mathsf{EM}$ and $\mathsf{ADS}$.
-:::
-
-:::proof{of=prop-sd-rt22-em-ads}
-($\Rightarrow$) By :ref{#prop-sd-em-rt22}, and since a linear order $\mathcal L$ computes the coloring with $f(\{ x, y \}) = 1$ if and only if $x <_{\mathcal L} y$, for $x < y$, whose homogeneous sets are ascending (color $1$) or descending (color $0$). ($\Leftarrow$) Let $f$ be a coloring in the ideal, and $T$ the tournament with $T(x, y)$ if and only if $f(\{ x, y \}) = 1$, for $x < y$. Let $H$ be an infinite transitive set in the ideal, $h$ its enumeration in increasing order, and $\mathcal L$ the linear order on $\nat$ with $m <_{\mathcal L} n$ if and only if $T(h(m), h(n))$; it belongs to the ideal. Let $S$ be an ascending or descending sequence of $\mathcal L$ in the ideal. If $S$ is ascending, then for $m < n$ in $S$, $T(h(m), h(n))$ with $h(m) < h(n)$, so $f(\{ h(m), h(n) \}) = 1$; so $h[S]$ is homogeneous with color $1$. If $S$ is descending, $h[S]$ is homogeneous with color $0$.
-:::
-
-:::corollary[Lerman, Solomon, Towsner]{#cor-sd-ads-not-em}
-$\mathsf{ADS} \not\leq_\omega \mathsf{EM}$.
-:::
-
-:::proof{of=cor-sd-ads-not-em}
-Otherwise every Turing ideal satisfying $\mathsf{EM}$ would satisfy $\mathsf{ADS}$, hence $\mathsf{RT}^2_2$ by :ref{#prop-sd-rt22-em-ads}, contradicting :ref{#cor-sd-em-not-srt22}.
-:::
-
-So Ramsey's theorem for pairs splits into a part about transitivity and a part about orders. The first has the compactness of $\mathsf{RT}^2_2$: $\mathsf{EM}$ implies the Ramsey-type weak König lemma, by a theorem of Bienvenu, Patey and Shafer, and of Flood and Towsner, which we admit. The second has none, as :ref{to="separation-design/ascending-descending"} shows.
-
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#exr-wkl-hyperimmunities difficulty=1}
 Let $(h_i)_{i \in \nat}$ be functions that are $Z$-hyperimmune. Show that every infinite $Z$-computable binary tree has a path $P$ such that every $h_i$ is $(Z \oplus P)$-hyperimmune. Deduce that $\mathsf{WKL}$ preserves $\mathcal W_{\vec h}$.
 
 :::solution
@@ -141,13 +89,33 @@ By the computably dominated basis theorem (:ref{#thm-dominated-basis}) relativiz
 :::
 ::::
 
+::::exercise{#exr-em-strong-cone difficulty=3}
+Show that $\mathsf{EM}$ admits strong cone avoidance (:ref{#def-cone-avoidance-problem}): for every set $Z$, every $C \not\leq_T Z$ and every tournament $T$ on $\nat$, not necessarily computable in $Z$, there is an infinite $T$-transitive set $G$ with $C \not\leq_T Z \oplus G$. Use the $\mathsf{EM}$ conditions $(\sigma, X)$ of :ref{#def-sd-em-condition} whose reservoirs satisfy $C \not\leq_T Z \oplus X$, and proceed in five steps.
+
+1. Show with :ref{#thm-dj-cone-avoidance} that every condition has an extension with one more element in the stem.
+2. For a condition $(\sigma, X)$ and a $\Sigma^0_1$ sentence $\varphi$, let $(\sigma, X) \mathrel{?{\vdash}} \varphi$ hold if for every tournament $S$ on $\nat$ and every $g : \nat \to 2$, some string $\tau$ compatible with $(\sigma, X)$ satisfies $\varphi$, and its set $\rho$ of new elements is $S$-transitive and **$g$-compatible**: $S(a, b)$ implies $g(a) \geq g(b)$ for all $a, b \in \rho$. Show that this relation is $\Sigma^0_1(Z \oplus X)$.
+3. Show that if $(\sigma, X) \mathrel{?{\vdash}} \varphi$, some extension forces $\varphi$.
+4. Show with :ref{#thm-cone-avoidance-basis} and :ref{#thm-sd-em-cone} that otherwise some extension forces $\neg \varphi$.
+5. Conclude as in the proof of :ref{#thm-sd-em-cone}.
+
+:::solution
+1. Let $x \in X$, and let $p_X$ enumerate $X$ in increasing order. By :ref{#thm-dj-cone-avoidance} relative to $Z \oplus X$, applied to $\{ n : T(x, p_X(n)) \}$, there is an infinite set $H$, contained in this set or in its complement, with $C \not\leq_T Z \oplus X \oplus H$. The set $Y = \{ p_X(n) : n \in H \} \setminus [0, x]$ is computable in $X \oplus H$, and $x$ beats all its elements or is beaten by all of them. The proof of :ref{#lem-sd-em-extension} shows that $(\sigma \cup \{ x \}, Y)$ is a condition extending $(\sigma, X)$.
+
+2. A pair $(S, g)$ is an element of Cantor space. Whether a string $\tau$ is a witness for $(S, g)$ depends on $X$, on a convergence with oracle $Z \oplus \tau$, and on finitely many bits of $S$ and $g$. So the pairs without a witness form a $\Pi^0_1(Z \oplus X)$ class $\mathcal P$, and the answer is positive if and only if $\mathcal P$ is empty, which is $\Sigma^0_1(Z \oplus X)$ by compactness.
+
+3. By compactness there is $\ell \geq |\sigma|$ such that every pair $(S, g)$ has a witness of length at most $\ell$. Let $F = X \cap [0, \ell)$. Applying the argument of step 1 to each $a \in F$ in turn gives an infinite $Y \subseteq X \setminus [0, \ell)$ with $C \not\leq_T Z \oplus Y$, and $\gamma : F \to 2$ such that each $a \in F$ beats every $y \in Y$ if $\gamma(a) = 1$ and is beaten by every $y \in Y$ if $\gamma(a) = 0$. Take $S = T$ and $g$ extending $\gamma$, and let $\tau$ be a witness, with new elements $\rho \subseteq F$, $T$-transitive and $\gamma$-compatible. Property (a) holds for $(\tau, Y)$ by the choice of $\gamma$. For (b), triples with an element of $\sigma$ are handled as in the proof of :ref{#lem-sd-em-question}; a 3-cycle $\{ a, b, y \}$ with $a, b \in \rho$, $y \in Y$ and $T(a, b)$ would have $T(b, y)$ and $T(y, a)$, so $\gamma(b) = 1 > 0 = \gamma(a)$, against compatibility, as in :ref{#exr-em-l-compatible}. So $(\tau, Y)$ is a condition, and it forces $\varphi$.
+
+4. The class $\mathcal P$ is non-empty. By :ref{#thm-cone-avoidance-basis} relative to $Z \oplus X$, it has a member $(S, g)$ with $C \not\leq_T W$, where $W = Z \oplus X \oplus S \oplus g$. Some $X_i = \{ x \in X : g(x) = i \}$ is infinite, and computable in $W$. By :ref{#thm-sd-em-cone} relative to $W$, applied to the tournament $S$ transported to $\nat$ through the enumeration of $X_i$, there is an infinite $S$-transitive set $Y \subseteq X_i$ with $C \not\leq_T W \oplus Y$. Then $(\sigma, Y)$ is a condition extending $(\sigma, X)$. If a member $G$ satisfied $\varphi$, some initial segment of $G$ would be a string compatible with $(\sigma, Y)$ satisfying $\varphi$, whose new elements lie in $Y$: they are $S$-transitive, and $g$-compatible since $g$ is constant on $Y$. It would be a witness for $(S, g) \in \mathcal P$. So $(\sigma, Y)$ forces $\neg \varphi$.
+
+5. Start from $(\varepsilon, \nat)$ and alternate step 1 with the requirements. For a condition $(\sigma, X)$ and an index $e$, the set of pairs $(x, v)$ with $(\sigma, X) \mathrel{?{\vdash}} \Phi^{Z \oplus G}_e(x)\converge = v$ is $\Sigma^0_1(Z \oplus X)$; it is not the graph of $C$, since $C \not\leq_T Z \oplus X$, and steps 3 and 4 give an extension forcing $\Phi^{Z \oplus G}_e(x) \neq C(x)$ or its divergence for some $x$. The union of the stems is infinite, $T$-transitive, a member of every condition, and does not compute $C$ together with $Z$.
+:::
+::::
+
 ## Notes and references
 
-The separation of $\mathsf{EM}$ from $\mathsf{RT}^2_2$ through preservation of hyperimmunities follows the section *Erdős–Moser theorem* of the chapter *Custom properties* of Patey's monograph, and Patey (2017), who proves :ref{#thm-sd-em-hyperimmunities} and :ref{#prop-sd-rt22-two}; the question with partitions is the one of the monograph's chapter *Custom properties*. The separation itself is due to Lerman, Solomon and Towsner (2013), with an iterated forcing; their result gives an ω-model of $\mathsf{EM}$ that is not a model of $\mathsf{SRT}^2_2$ (Hirschfeldt, *Slicing the Truth*, Theorem 9.31). The decomposition $\mathsf{RT}^2_2 \leftrightarrow \mathsf{EM} \wedge \mathsf{ADS}$ over $\mathsf{RCA}_0$ is Exercise 9.30 of Hirschfeldt, "noted by several people", and is attributed to Montalbán by Bovykin and Weiermann (2017). That $\mathsf{EM}$ implies $\mathsf{RWKL}$ is due to Bienvenu, Patey and Shafer (2017), and independently to Flood and Towsner (2016).
+The design of the reservoirs, cone avoidance and preservation of hyperimmunities for $\mathsf{EM}$ follow the section *Erdős–Moser theorem* of the chapter *Custom properties* of Patey's monograph, and the sections *Core concepts* and *Erdős–Moser theorem* of its chapter *Forcing design*; :ref{#thm-sd-em-hyperimmunities} is due to Patey (2017). The question with partitions is the one of the chapter *Custom properties*. Strong cone avoidance of $\mathsf{EM}$ (:ref{#exr-em-strong-cone}) is an exercise of the chapter *Forcing design*, attributed there to Wang and to Patey; the version with partitions given here follows the same plan.
 
-- L. Patey, *Iterative forcing and hyperimmunity in reverse mathematics*, Computability 6 (2017), 209–221; arXiv:1501.07709.
-- M. Lerman, R. Solomon and H. Towsner, *Separating principles below Ramsey's theorem for pairs*, Journal of Mathematical Logic 13 (2013), 1350007.
-- L. Bienvenu, L. Patey and P. Shafer, *On the logical strengths of partial solutions to mathematical problems*, Transactions of the London Mathematical Society 4 (2017), 30–71.
-- S. Flood and H. Towsner, *Separating principles below WKL₀*, Mathematical Logic Quarterly 62 (2016).
-- D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2015, Section 9.2.
 - L. Patey, *Lowness and avoidance*, chapters *Custom properties* and *Forcing design*.
+- L. Patey, *Iterative forcing and hyperimmunity in reverse mathematics*, Computability 6 (2017), 209–221; arXiv:1501.07709.
+- C. G. Jockusch, Jr. and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
+- D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
