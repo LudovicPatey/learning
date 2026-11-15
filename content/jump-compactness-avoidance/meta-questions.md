@@ -81,6 +81,14 @@ Why does item 2 not require any part to be valid?
   It is applied to all branches of $H$, valid or not.
 :::
 
+::::exercise{#ex-meta-question-monotone difficulty=2 objective="Compare the questions about two sets of branches $H \subseteq H'$, and interpret the comparison."}
+Let $c$ be a meta-condition of level $n$ and $H \subseteq H'$ non-empty sets of branches. Show that $c \mathrel{?{\vdash}}_{H, i} \varphi$ implies $c \mathrel{?{\vdash}}_{H', i} \varphi$, and give an interpretation.
+
+:::solution
+The class $\mathcal A^{H', i}_{c, \varphi}$ is an intersection over more classes than $\mathcal A^{H, i}_{c, \varphi}$, so it is contained in it; a subclass of a non-large class is not large. A negative answer for $H'$ promises $\neg\varphi$ on more parts, which is harder; a positive answer for $H'$ only gives $\varphi$ on some branch of $H'$, which is weaker.
+:::
+::::
+
 ## Weak merging
 
 Two negative answers cannot simply be merged by duplication, as in :ref{#lem-product-merging}: the index set $\mathbb I_n \cdot \{0, 1\}$ would replace $\mathbb I_{n+1}$, and the sets $I \cdot \{0, 1\}$ for the branches $I$ do not have the Ramsey property of :ref{#lem-branch-ramsey} (first quiz below). The index sets $\mathbb I_n$ are designed for the following form of merging, with $2u_n + 1$ copies and as many negative answers.
@@ -123,17 +131,15 @@ In the proof of :ref{#lem-meta-merging}, why are the stems of all branches $I$, 
   It was asked for those in $H$ only.
 :::
 
-## Exercises
+## Notes and references
 
-::::exercise{difficulty=2}
-Let $c$ be a meta-condition of level $n$ and $H \subseteq H'$ non-empty sets of branches. Show that $c \mathrel{?{\vdash}}_{H, i} \varphi$ implies $c \mathrel{?{\vdash}}_{H', i} \varphi$, and give an interpretation.
+The syntactic forcing relation (here: promises) on meta-conditions, the question $\mathrel{?{\vdash}}_H$ and its weak merging are due to Monin and Patey (2021); the presentation follows the section *Pigeonhole principle* of the chapter *Jump compactness avoidance* of Patey's monograph. The monograph states the lemma on promises for the branches seen as conditions with two stems, with an exercise for closure under extension; it is proved here for meta-conditions directly, with slices. In the positive case of the question, the monograph writes $D \subseteq C$ for the new index set where $D \supseteq C$ is meant.
 
-:::solution
-The class $\mathcal A^{H', i}_{c, \varphi}$ is an intersection over more classes than $\mathcal A^{H, i}_{c, \varphi}$, so it is contained in it; a subclass of a non-large class is not large. A negative answer for $H'$ promises $\neg\varphi$ on more parts, which is harder; a positive answer for $H'$ only gives $\varphi$ on some branch of $H'$, which is weaker.
-:::
-::::
+- B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics (2021); arXiv:1905.08427.
+- L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, section *Pigeonhole principle*.
 
-::::exercise{difficulty=2}
+:::::exercises
+::::exercise{#ex-meta-level-zero difficulty=2 objective="Identify the meta-conditions of level $0$ with pairs of product Mathias conditions, and compare the two questions." lessons="product-mathias"}
 Show that for $n = 0$, a meta-condition is a pair of product Mathias conditions $(\sigma_0, \vec X, S)$ and $(\sigma_1, \vec X, S)$ with $I = \{\varepsilon\}$, and that the question $\mathrel{?{\vdash}}_{\{\{\varepsilon\}\}, i}$ differs from that of :ref{#def-product-question} only by the restriction of the stems to $A_i$.
 
 :::solution
@@ -141,9 +147,55 @@ $\mathbb I_0 = \{\varepsilon\}$ has one branch, so $\vec\sigma$ is a pair $(\sig
 :::
 ::::
 
-## Notes and references
+::::exercise{#ex-meta-invalid-promise difficulty=2 objective="See on an example how a negative answer can make a part invalid, and why promises on invalid parts are useless." lessons="meta-conditions"}
+Let $A$ be computable, infinite and coinfinite, $c = (\langle \varepsilon, \varepsilon \rangle, \langle \nat \rangle, S_\infty)$, $H = \{\{\varepsilon\}\}$, and $\varphi$ the sentence "$G \cap A$ is finite", that is, $\exists y\ \psi(y)$ with $\psi(y)$ the formula $\forall z\ (z \geq y \wedge z \in G \rightarrow z \notin A)$.
 
-The syntactic forcing relation (here: promises) on meta-conditions, the question $\mathrel{?{\vdash}}_H$ and its weak merging are due to Monin and Patey (2021); the presentation follows the section *Pigeonhole principle* of the chapter *Jump compactness avoidance* of Patey's monograph. The monograph states the lemma on promises for the branches seen as conditions with two stems, with an exercise for closure under extension; it is proved here for meta-conditions directly, with slices. In the positive case of the question, the monograph writes $D \subseteq C$ for the new index set where $D \supseteq C$ is meant.
+1. Show that $c \mathrel{?{\nvdash}}_{H, 1} \varphi$, and that the extension $d$ given by item 3 of :ref{#lem-meta-question} has the class $\mathcal L_A$.
+2. Show that the part $(\{\varepsilon\}, 1)$ of $d$ is not valid, and that $(\{\varepsilon\}, 0)$ is.
+3. Explain why the promise of $\neg\varphi$ on $(\{\varepsilon\}, 1)$ cannot become true for a set built on this part.
 
-- B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics (2021); arXiv:1905.08427.
-- L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, section *Pigeonhole principle*.
+:::solution
+1. The strings $\tau$ compatible with $(\varepsilon, A_1 \cap \nat)$ are those all of whose elements are in $\overline A$. The formula $\neg\psi(m)$ says that $G$ has an element $z \geq m$ in $A$. A string compatible with $(\tau, Z)$ has its elements below $|\tau|$ in $\tau$, hence outside $A$, and its other elements in $Z$. So $\mathcal V_{\tau, \neg\psi(m)}$ is the class of sets $Z$ with an element of $A$ larger than or equal to $\max(m, |\tau|)$. The intersection of these classes over $m$ and $\tau$ is $\mathcal L_A$, and $\mathcal A^{H, 1}_{c, \varphi} = \mathcal U_{S_\infty} \cap \mathcal L_A = \mathcal L_A$, which is large since $A$ is infinite. So the answer is negative, and $d = (\langle \varepsilon, \varepsilon \rangle, \langle \nat \rangle, S_\infty \cup E)$ has the class $\mathcal L_A$.
+2. The part $(\{\varepsilon\}, 1)$ of $d$ is valid if $\mathcal L_A \cap \mathcal L_{\overline A}$ is large, which fails by :ref{#lem-no-two-sides}. The part $(\{\varepsilon\}, 0)$ is valid, since $\mathcal L_A \cap \mathcal L_A = \mathcal L_A$ is large.
+3. Along a construction, the stems of the part $(\{\varepsilon\}, 1)$ are subsets of $\overline A$, so a set built on this part is a subset of $\overline A$, and $\neg\varphi$, "$G \cap A$ is infinite", is false for it. The promise only says that from every stem inside $\overline A$, the reservoirs of the class allow a continuation meeting $A$; such continuations leave $A_1$. Item 2 of :ref{#lem-meta-promise} needs validity precisely to find a continuation inside $A_1$. Here the negative answer on side $1$ has made this side invalid, and the construction continues on side $0$.
+:::
+::::
+
+::::exercise{#ex-meta-merging-validity difficulty=2 objective="Characterize the valid parts of the meta-condition produced by weak merging in terms of the classes of the negative answers."}
+In the proof of :ref{#lem-meta-merging}, let $I$ be a branch of $\mathbb I_n$, $a < b \leq 2u_n$, $J = I \cdot \{a, b\}$ and $k < 2$. Show that the part $(J, k)$ of $d$ is valid if and only if $\mathcal A_a \cap \mathcal L_{\vec X^{I, k}}$ and $\mathcal A_b \cap \mathcal L_{\vec X^{I, k}}$ are both large.
+
+:::solution
+The tuple $\vec Y^{J, k}$ has the coordinate $X_\nu \cap A_k$ at $\nu a$ and $\nu b$ for $\nu \in I$, and $\nat$ elsewhere. So a tuple $\vec Z$ is in $\mathcal L_{\vec Y^{J, k}}$ if and only if its slices $a$ and $b$ are in $\mathcal L_{\vec X^{I, k}}$ and its other coordinates are infinite. Every member of $\mathcal U^{\mathbb I_{n+1}}_T$ has its slices in the classes $\mathcal A_{a'} \subseteq \mathcal U^{\mathbb I_n}_S$, whose members have infinite coordinates. Hence $\mathcal U^{\mathbb I_{n+1}}_T \cap \mathcal L_{\vec Y^{J, k}}$ is the class of tuples $\vec Z$ with $\vec Z^{(a')} \in \mathcal B_{a'}$ for every $a' \leq 2u_n$, where $\mathcal B_{a'} = \mathcal A_{a'} \cap \mathcal L_{\vec X^{I, k}}$ for $a' \in \{a, b\}$ and $\mathcal B_{a'} = \mathcal A_{a'}$ otherwise.
+
+Such a class, defined slice by slice by upward closed classes, is large if and only if each $\mathcal B_{a'}$ is large. If they are, for a cover choose a function on each slice and put them together. If $\mathcal B_{a'}$ is not large, some finite cover of $\nat$ has no function $j'$ with $\vec Q_{j'} \in \mathcal B_{a'}$; for every function $j$ on $\mathbb I_{n+1}$, the slice $a'$ of $\vec Q_j$ is a tuple $\vec Q_{j'}$ for the function $j'(\nu) = j(\nu a')$, so $\vec Q_j$ is not in the class. Since the classes $\mathcal A_{a'}$ are large, the part $(J, k)$ is valid if and only if $\mathcal B_a$ and $\mathcal B_b$ are large. In words: the new part survives if and only if both negative answers left the side $k$ of $I$ alive.
+:::
+::::
+
+::::exercise{#ex-meta-product-question-differ difficulty=2 objective="See on an example that the question on a part of a meta-condition and the question of product Mathias forcing can give different answers." lessons="product-mathias"}
+Let $A$ be computable, infinite and coinfinite, and $\varphi = \exists y\ \psi(y)$ with $\psi(y)$ the decidable formula "$y \in G$ and $y \notin A$". Let $p = (\varepsilon, \langle \nat \rangle, S_\infty)$ be the product Mathias condition and $c = (\langle \varepsilon, \varepsilon \rangle, \langle \nat \rangle, S_\infty)$ the meta-condition of level $0$. Show that $p \mathrel{?{\vdash}} \varphi$, that $c \mathrel{?{\nvdash}}_{\{\{\varepsilon\}\}, 0} \varphi$ and that $c \mathrel{?{\vdash}}_{\{\{\varepsilon\}\}, 1} \varphi$, and interpret.
+
+:::solution
+A string $\rho$ satisfies $\neg\psi(m)$, that is, "$m \notin G$ or $m \in A$", if $m \in A$, or if $|\rho| > m$ and $\rho(m) = 0$.
+
+For $p$: take $m \in \overline A$ and the string $\tau$ of length $m + 1$ whose only element is $m$, compatible with $(\varepsilon, \nat)$. Every string extending $\tau$ contains $m$, so none satisfies $\neg\psi(m)$, and $\mathcal V_{\tau, \neg\psi(m)} = \emptyset$. So $\mathcal A_{p, \varphi}$ is empty, not large, and $p \mathrel{?{\vdash}} \varphi$. The same string is compatible with $(\varepsilon, A_1 \cap \nat)$, so $c \mathrel{?{\vdash}}_{\{\{\varepsilon\}\}, 1} \varphi$ for the same reason.
+
+For side $0$: let $\tau$ be compatible with $(\varepsilon, A_0 \cap \nat)$, so all its elements are in $A$, and let $m \in \nat$. If $m \in A$, every string satisfies $\neg\psi(m)$. If $m \notin A$, then $m \notin \tau$, and the extension of $\tau$ by zeros up to length $m + 1$, compatible with $(\tau, Z)$ for every $Z$, satisfies $\neg\psi(m)$. So every class $\mathcal V_{\tau, \neg\psi(m)}$ contains every set, $\mathcal A^{\{\{\varepsilon\}\}, 0}_{c, \varphi} = \mathcal U_{S_\infty}$ is large, and the answer is negative.
+
+The sentence says that $G$ meets $\overline A$. It is false for every subset of $A$, the sets that side $0$ builds, and the question on side $0$, which only quantifies over stems inside $A$, sees it. The question of product Mathias forcing ignores $A$ and answers positively, through a stem that side $0$ cannot take.
+:::
+::::
+
+::::exercise{#ex-meta-branch-chosen difficulty=2 objective="See on an example that the branch on which a positive answer is forced is imposed by the witness of non-largeness."}
+Let $R$ be computable, infinite and coinfinite, and let $c$ be the meta-condition of level $1$ with empty stems, reservoirs $X_0 = X_1 = \overline R$ and $X_2 = R$, and class $\mathcal U^{\mathbb I_1}_S = \mathcal L_{\vec X}$. Let $H = \{\{0, 1\}, \{0, 2\}\}$, $i < 2$, and $\varphi$ the sentence "$G \cap R$ is finite", that is, $\exists y\ \psi(y)$ with $\psi(y)$ the formula $\forall z\ (z \geq y \wedge z \in G \rightarrow z \notin R)$.
+
+1. Show that $c \mathrel{?{\vdash}}_{H, i} \varphi$.
+2. Show that all members of the part $(\{0, 1\}, i)$ of $c$ satisfy $\varphi$, but that no extension of $c$ of level $1$ makes all members of the part $(\{0, 2\}, i)$ satisfy $\varphi$.
+
+:::solution
+$c$ is a meta-condition: the reservoirs are computable, the class $\mathcal L_{\vec X}$ is large, non-trivial and $\mathcal U^{\mathbb I_1}_S$ for a computable $S$, and the stems are empty.
+
+1. The empty string is compatible with $(\varepsilon, A_i \cap (X_0 \cup X_1))$. A string compatible with $(\varepsilon, Z_0 \cup Z_1)$ has its elements in $Z_0 \cup Z_1$, so $\mathcal V^{\{0, 1\}}_{\varepsilon, \neg\psi(m)}$ is the class of tuples with an element of $R$ larger than or equal to $m$ in $Z_0 \cup Z_1$. Hence $\mathcal A^{H, i}_{c, \varphi} \subseteq \mathcal L_{\vec X} \cap \{ \vec Z : (Z_0 \cup Z_1) \cap R \text{ is infinite} \}$. This class is not large: for the cover $R, \overline R$ of $\nat$, a tuple $\vec Y_j$ in $\mathcal L_{\vec X}$ has $Y_{j(0)}$ and $Y_{j(1)}$ meeting $\overline R$ infinitely often, so $Y_{j(0)} = Y_{j(1)} = \overline R$, whose union does not meet $R$. So $c \mathrel{?{\vdash}}_{H, i} \varphi$.
+2. A member of $(\{0, 1\}, i)$ in $c$ has all its elements in $X_0 \cup X_1 = \overline R$, so it satisfies $\varphi$. Let $d = (\vec \tau, \vec Y, T)$ of level $1$ extend $c$. Since $K_{1, 1} = \{\varepsilon\}$, item 3 of :ref{#def-meta-extension} gives $\mathcal U^{\mathbb I_1}_T \subseteq \mathcal L_{\vec X}$, and $\vec Y \in \mathcal U^{\mathbb I_1}_T$ by :ref{#lem-product-intersection}; so $Y_2 \cap R$ is infinite. The union of the elements of $\tau^{\{0, 2\}}_i$ and of $Y_2 \cap R$ is a member of the part $(\{0, 2\}, i)$ of $d$, since $\min Y_2 \geq |\tau^{\{0, 2\}}_i|$, and it meets $R$ infinitely often. So item 2 of :ref{#lem-meta-question} can only return the branch $\{0, 1\}$: the branch is the one on which the witness of non-largeness, here the cover $R, \overline R$, defeats all the classes.
+:::
+::::
+:::::

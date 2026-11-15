@@ -68,7 +68,7 @@ The class $\mathcal A$ of well-founded relations of :ref{#ex-class-stages} (2) i
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-measure-countable-stages difficulty=2 objective="Express the measure of a $\Pi^1_1$ class as the supremum of the measures of its stages, using Lusin's theorem."}
 Show that for every $\Pi^1_1$ class $\mathcal A$ and every rational $q < \lambda(\mathcal A)$, there is a countable ordinal $\alpha$ with $\lambda(\mathcal A_\alpha) > q$, and that $\lambda(\mathcal A) = \sup_{\alpha < \omega_1} \lambda(\mathcal A_\alpha)$.
 
 :::solution
@@ -84,3 +84,55 @@ Lusin proved that analytic and co-analytic sets are measurable. The proof given 
 - G. E. Sacks, *Higher Recursion Theory*, Springer, 1990, Chapter IV.
 - G. Hjorth and A. Nies, *Randomness via effective descriptive set theory*, Journal of the London Mathematical Society 75 (2007), 495–508.
 - A. S. Kechris, *Classical Descriptive Set Theory*, Springer, 1995.
+
+:::::exercises
+::::exercise{#ex-measurable-sandwich difficulty=1 objective="Reformulate measurability with an inner and an outer Borel class, and apply it to $\Sigma^1_1$ classes."}
+Show that a class $\mathcal X$ is measurable if and only if there are Borel classes $\mathcal B_1 \subseteq \mathcal X \subseteq \mathcal B_2$ with $\lambda(\mathcal B_2 \setminus \mathcal B_1) = 0$. For a $\Sigma^1_1$ class $\mathcal S$ with complement $\mathcal A^p$, give such classes in terms of the stages of $\mathcal A^p$.
+
+:::solution
+If $\mathcal X$ differs from a Borel class $\mathcal B$ only inside a null Borel class $\mathcal Z$, let $\mathcal B_1 = \mathcal B \setminus \mathcal Z$ and $\mathcal B_2 = \mathcal B \cup \mathcal Z$. A member of $\mathcal B_1$ is in $\mathcal B$ and not in $\mathcal Z$, so it is in $\mathcal X$; a member of $\mathcal X$ is in $\mathcal B$ or in $\mathcal Z$. So $\mathcal B_1 \subseteq \mathcal X \subseteq \mathcal B_2$, and $\mathcal B_2 \setminus \mathcal B_1 \subseteq \mathcal Z$ is null. Conversely, given $\mathcal B_1$ and $\mathcal B_2$, the class $\mathcal X$ differs from $\mathcal B_1$ only inside the null Borel class $\mathcal Z = \mathcal B_2 \setminus \mathcal B_1$: $\mathcal X \setminus \mathcal B_1 \subseteq \mathcal Z$ and $\mathcal B_1 \setminus \mathcal X = \emptyset$.
+
+Let $\beta$ and $\mathcal Z$ be as in the proof of :ref{#thm-lusin} for the index $p$, so that $\mathcal A^p_{\beta + 1} \subseteq \mathcal A^p \subseteq \mathcal A^p_{\beta + 1} \cup \mathcal Z$. Taking complements, $\mathcal B_1 = \cs \setminus (\mathcal A^p_{\beta + 1} \cup \mathcal Z)$ and $\mathcal B_2 = \cs \setminus \mathcal A^p_{\beta + 1}$ are Borel (:ref{#lem-stages-borel}), $\mathcal B_1 \subseteq \mathcal S \subseteq \mathcal B_2$, and $\mathcal B_2 \setminus \mathcal B_1 \subseteq \mathcal Z$.
+:::
+::::
+
+::::exercise{#ex-stage-measure-limits difficulty=1 objective="Check that the measures of the stages are continuous at limit ordinals, and compute them on an open class."}
+1. Show that $\lambda(\mathcal A^p_\lambda) = \sup_{\beta < \lambda} \lambda(\mathcal A^p_\beta)$ for every countable limit ordinal $\lambda$.
+2. In :ref{#ex-class-stages} (1), let $W_s = \{ 0^k 1 : k < s \}$, where $0^k 1$ is the string of $k$ zeros followed by a one. Determine the stage at which each member of $[W]$ enters, and compute $\lambda(\mathcal A_\alpha)$ for every ordinal $\alpha$. At which stages $\alpha$ does $\lambda(\mathcal A_{\alpha + 1}) > \lambda(\mathcal A_\alpha)$ hold?
+
+:::solution
+1. A tree has rank less than $\lambda$ if and only if its rank is less than some $\beta < \lambda$, since $\gamma < \lambda$ implies $\gamma < \gamma + 1 < \lambda$. So $\mathcal A^p_\lambda = \bigcup_{\beta < \lambda} \mathcal A^p_\beta$. Since $\lambda$ is countable, it is the limit of an increasing sequence $(\beta_k)$, and $\mathcal A^p_\lambda$ is the increasing union of the classes $\mathcal A^p_{\beta_k}$. By countable additivity, applied to the disjoint differences, $\lambda(\mathcal A^p_\lambda) = \lim_k \lambda(\mathcal A^p_{\beta_k})$, which is the supremum since the measures of the stages are nondecreasing.
+2. Let $Y \in [0^k 1]$. A string $0^j 1$ is a prefix of $Y$ only for $j = k$, so the least $s$ such that some prefix $Y \uh m$ with $m \leq s$ belongs to $W_s$ is $s = k + 1$. As computed in :ref{#ex-class-stages} (1), $T^Y$ is the tree of sequences of length at most $k$, of rank $k$: $Y$ enters at stage $k$. The sequence $0^\omega$ has no prefix in $W$, and its tree is ill-founded. So $\mathcal A_n = \bigcup_{k < n} [0^k 1]$ has measure $1 - 2^{-n}$ for finite $n$, and $\mathcal A_\alpha = \cs \setminus \{ 0^\omega \}$ has measure $1$ for $\alpha \geq \omega$. The measure increases strictly exactly at the finite stages, and the value at $\omega$ is the limit, as in (1).
+:::
+::::
+
+::::exercise{#ex-null-countable-stages difficulty=1 objective="Characterize the null $\Pi^1_1$ classes by their stages, using Lusin's theorem."}
+Show that a $\Pi^1_1$ class $\mathcal A^p$ is null if and only if all its stages $\mathcal A^p_\alpha$, for $\alpha < \omega_1$, are null.
+
+:::solution
+If $\mathcal A^p$ is null, so are its subclasses $\mathcal A^p_\alpha$, which are Borel by :ref{#lem-stages-borel}. Conversely, by :ref{#thm-lusin}, there is a countable $\beta$ such that $\mathcal A^p \setminus \mathcal A^p_{\beta + 1}$ is included in a null Borel class $\mathcal Z$. If $\mathcal A^p_{\beta + 1}$ is null, then $\mathcal A^p$ is included in the null Borel class $\mathcal A^p_{\beta + 1} \cup \mathcal Z$. The lesson on the Sacks–Tanaka theorem shows that the stages below $\omega_1^{\mathrm{CK}}$ suffice.
+:::
+::::
+
+::::exercise{#ex-delta11-hyp-member difficulty=2 objective="Approximate a $\Delta^1_1$ class from inside by closed classes, and deduce that a $\Delta^1_1$ class of positive measure has a hyperarithmetic member."}
+1. Let $\mathcal D$ be a $\Delta^1_1$ class. Show that there are a hyperarithmetic set $A$ and classes $\mathcal F_k \subseteq \mathcal D$, uniformly $\Pi^0_1(A)$, with $\lambda(\mathcal D \setminus \mathcal F_k) \leq 2^{-k}$ for every $k$.
+2. Deduce that every $\Delta^1_1$ class of positive measure has a hyperarithmetic member.
+
+:::solution
+1. The complement $\cs \setminus \mathcal D$ is $\Delta^1_1$. By :ref{#fact-higher-borel} (2), there are a hyperarithmetic $A$ and sets of strings $W_k$, uniformly c.e. in $A$, with $\cs \setminus \mathcal D \subseteq [W_k]$ and $\lambda([W_k] \setminus (\cs \setminus \mathcal D)) \leq 2^{-k}$. Let $\mathcal F_k = \cs \setminus [W_k]$. It is the class of paths of the tree of strings with no prefix in $W_k$ enumerated within $|\sigma|$ steps, which is $A$-computable uniformly in $k$, so $\mathcal F_k$ is $\Pi^0_1(A)$ uniformly. It is included in $\mathcal D$, and $\mathcal D \setminus \mathcal F_k = \mathcal D \cap [W_k] = [W_k] \setminus (\cs \setminus \mathcal D)$ has measure at most $2^{-k}$.
+2. If $\lambda(\mathcal D) > 0$, choose $k$ with $2^{-k} < \lambda(\mathcal D)$. Then $\lambda(\mathcal F_k) \geq \lambda(\mathcal D) - 2^{-k} > 0$, so $\mathcal F_k$ is a non-empty $\Pi^0_1(A)$ class. Its leftmost member is computable in $A'$ (:ref{#prop-leftmost-path} relativized to $A$), and $A'$ is hyperarithmetic, since $A \leq_T H_a$ with $a \in \mathcal O$ gives $A' \leq_T H_a' = H_{2^a}$. This member belongs to $\mathcal D$.
+
+The lesson on the Sacks–Tanaka theorem extends (2) to $\Pi^1_1$ classes.
+:::
+::::
+
+::::exercise{#ex-lusin-all-nodes difficulty=2 objective="See why the proof of Lusin's theorem controls the ranks of all the nodes, and not only the measures of the stages."}
+Let $p$ be an index such that $T^Y_p = \{ \langle\rangle \}$ if $Y(0) = 0$ and $T^Y_p = \{ \langle\rangle, \langle 0 \rangle, \langle 0, 0 \rangle \}$ if $Y(0) = 1$. Show that $\lambda(\mathcal A^p_2) = \lambda(\mathcal A^p_1)$, but that $\mathcal A^p \setminus \mathcal A^p_2$ is not null. Determine the sets $I_\sigma$ of the proof of :ref{#thm-lusin}, and an ordinal $\beta$ given by the proof.
+
+:::solution
+The first tree has rank $0$, the second rank $2$, and both are well-founded, so $\mathcal A^p = \cs$, $\mathcal A^p_0 = \emptyset$, $\mathcal A^p_1 = \mathcal A^p_2 = [0]$, and $\mathcal A^p_\alpha = \cs$ for $\alpha \geq 3$. So $\lambda(\mathcal A^p_2) = \lambda(\mathcal A^p_1) = \frac12$, while $\mathcal A^p \setminus \mathcal A^p_2 = [1]$ has measure $\frac12$. A stage that adds no measure does not by itself bound the stages at which the remaining sequences enter.
+
+The classes $\mathcal N^\sigma_\alpha$ are: for the root, the stages above; for $\sigma = \langle 0 \rangle$, which belongs to $T^Y_p$ only when $Y(0) = 1$ and then has rank $1$, $\mathcal N^\sigma_\alpha = \emptyset$ for $\alpha \leq 1$ and $[1]$ for $\alpha \geq 2$; for $\sigma = \langle 0, 0 \rangle$, a leaf of the second tree, $\mathcal N^\sigma_0 = \emptyset$ and $\mathcal N^\sigma_\alpha = [1]$ for $\alpha \geq 1$; for every other $\sigma$, $\mathcal N^\sigma_\alpha = \emptyset$. Hence $I_{\langle\rangle} = \{ 0, 2 \}$, $I_{\langle 0 \rangle} = \{ 1 \}$, $I_{\langle 0, 0 \rangle} = \{ 0 \}$, and the other sets $I_\sigma$ are empty. The ordinal $\beta = 1$ avoids $I_{\langle\rangle}$ but not $I_{\langle 0 \rangle}$: the members of $[1]$ have a node of rank exactly $1$, and they form a class of positive measure. The least ordinal in none of the sets is $\beta = 3$, and indeed $\mathcal A^p \setminus \mathcal A^p_4 = \emptyset$.
+:::
+::::
+:::::

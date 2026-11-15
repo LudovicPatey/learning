@@ -1,7 +1,7 @@
 ---
 title: Equivalence of the models
 summary: Arithmetization of Turing machines, proof of Kleene's normal form theorem, simulation of register machines by Turing machines, and the universal partial recursive function.
-duration: 50
+duration: 45
 prerequisites: [while-programs, lambda-definability, multitape-machines]
 ---
 
@@ -9,7 +9,7 @@ We have met five definitions of computable partial function. Some equivalences a
 
 - WHILE-computable $\iff$ partial recursive (:ref{#thm-while-partial-recursive});
 - partial recursive $\iff$ λ-definable (:ref{#thm-recursive-lambda-definable} and :ref{#thm-lambda-definable-recursive});
-- WHILE-computable $\implies$ URM-computable (:ref{#prop-while-urm}); the converse follows from the other implications below, and is also the last exercise of the lesson on WHILE programs.
+- WHILE-computable $\implies$ URM-computable (:ref{#prop-while-urm}); the converse follows from the other implications below, and is also :ref{#ex-while-urm}.
 
 It remains to connect Turing machines to the other models. In this lesson we prove that every Turing-computable function is partial recursive, by **arithmetizing** the computations of Turing machines, and that every URM-computable function is Turing-computable, by simulation. Along the way we obtain Kleene's normal form theorem and a universal partial recursive function.
 
@@ -207,27 +207,11 @@ The diagonal argument of the lesson on the Ackermann function showed that the ev
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that the function $\mathrm{Init}(\vec x)$ is primitive recursive.
-
-:::solution
-For a single argument, the code of $1^{x+1}$ is $\prod_{i \leq x} p_i^{2}$ (each entry $1$ is coded by exponent $2$), a bounded product. The code of a separator $[0]$ is $2$. The code of the whole word is obtained by concatenating these codes with the primitive recursive operation $*$, and $\mathrm{Init}(\vec x) = \langle 0, 1, w_{\vec x} \rangle$, where $1 = [\,]$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-step-bounded-halting difficulty=2 objective="Express halting within a given number of steps by a primitive recursive predicate, using the uniform step function."}
 Using the uniform step function of the normal form theorem, show that the predicate $H(e, x, t)$: "the machine of code $e$ halts on input $x$ within $t$ steps, in a standard final configuration" is primitive recursive, and that $\{(e, x) : \exists t\ H(e, x, t)\}$ is the domain of the universal function.
 
 :::solution
 Let $\mathrm{Conf}(e, x, t)$ be the uniform version of the iteration function, defined by primitive recursion from $\mathrm{Next}(e, c)$, hence primitive recursive in $e, x, t$. Since $\mathrm{Next}$ fixes halting configurations, $H(e, x, t) \iff \mathrm{Halt}(\mathrm{Conf}(e, x, t)) \wedge \mathrm{Std}(\mathrm{Conf}(e, x, t))$, a primitive recursive predicate. The machine halts on $x$ in a standard configuration iff some $t$ satisfies $H$, iff some $s$ satisfies $T_1(e, x, s)$, iff $\mu s\, T_1(e, x, s)$ converges, iff $(e, x) \in \dom \Phi$ (as $U$ is total).
-:::
-::::
-
-::::exercise{difficulty=3}
-Show that there is a total computable function $g : \nat^2 \to \nat$ such that the functions $g(e, \cdot)$ are exactly the primitive recursive functions of one argument, and deduce once more that $g$ is not primitive recursive.
-
-:::solution
-Code derivations of unary primitive recursive functions by integers, mapping non-codes to a fixed derivation of $Z$. Each derivation can be translated computably into a Turing machine computing the same function; let $t(e)$ be the code of the machine obtained from the derivation $e$. Then $g(e, x) = \Phi(t(e), x)$ is computable and total, since primitive recursive functions are total. If $g$ were primitive recursive, so would be $x \mapsto g(x, x) + 1$, which differs from every $g(e, \cdot)$ at $e$.
 :::
 ::::
 
@@ -241,3 +225,77 @@ Turing sketched in an appendix to his 1936 paper that the λ-definable functions
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989, chapter I.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.5.
 - B. Monin, L. Patey, *Computability theory*, chapter "Church–Turing thesis".
+
+:::::exercises
+::::exercise{#ex-init-pr difficulty=1 objective="Check that the initial configuration of a Turing machine is a primitive recursive function of the input."}
+Show that the function $\mathrm{Init}(\vec x)$ is primitive recursive.
+
+:::solution
+For a single argument, the code of $1^{x+1}$ is $\prod_{i \leq x} p_i^{2}$ (each entry $1$ is coded by exponent $2$), a bounded product. The code of a separator $[0]$ is $2$. The code of the whole word is obtained by concatenating these codes with the primitive recursive operation $*$, and $\mathrm{Init}(\vec x) = \langle 0, 1, w_{\vec x} \rangle$, where $1 = [\,]$.
+:::
+::::
+
+::::exercise{#ex-pr-enumeration-universal difficulty=3 objective="Obtain a total computable enumeration of the primitive recursive functions from the universal function, and diagonalize against it."}
+Show that there is a total computable function $g : \nat^2 \to \nat$ such that the functions $g(e, \cdot)$ are exactly the primitive recursive functions of one argument, and deduce once more that $g$ is not primitive recursive.
+
+:::solution
+Code derivations of unary primitive recursive functions by integers, mapping non-codes to a fixed derivation of $Z$. Each derivation can be translated computably into a Turing machine computing the same function; let $t(e)$ be the code of the machine obtained from the derivation $e$. Then $g(e, x) = \Phi(t(e), x)$ is computable and total, since primitive recursive functions are total. If $g$ were primitive recursive, so would be $x \mapsto g(x, x) + 1$, which differs from every $g(e, \cdot)$ at $e$.
+:::
+::::
+
+::::exercise{#ex-tm-conf-example difficulty=1 objective="Compute the codes of the successive configurations of a machine with the step function."}
+Number the states of the successor machine $M_S$ of the lesson :ref{to="models-of-computation/turing-machines"} as $q_0 \mapsto 0$, $q_h \mapsto 1$, $q_1 \mapsto 2$, and its symbols as $\sqcup \mapsto 0$, $1 \mapsto 1$. Compute $\mathrm{Conf}(1, t)$ for $t = 0, \dots, 6$, writing each code as a triple $\langle q, \ell, r \rangle$ of a state and two sequences, and check the result with $\mathrm{Halt}$, $\mathrm{Std}$ and $\mathrm{Out}$.
+
+:::solution
+$\mathrm{Init}(1) = \langle 0, [\,], [1, 1] \rangle$. The transitions used are $\delta(q_0, 1) = (q_0, 1, R)$, $\delta(q_0, \sqcup) = (q_1, 1, L)$, $\delta(q_1, 1) = (q_1, 1, L)$ and $\delta(q_1, \sqcup) = (q_h, \sqcup, R)$. Applying $\mathrm{Next}$:
+
+| $t$ | state | $\ell$ | $r$ | scanned |
+| --- | --- | --- | --- | --- |
+| $0$ | $0$ | $[\,]$ | $[1, 1]$ | $1$ |
+| $1$ | $0$ | $[1]$ | $[1]$ | $1$ |
+| $2$ | $0$ | $[1, 1]$ | $[\,]$ | $0$ |
+| $3$ | $2$ | $[1]$ | $[1, 1]$ | $1$ |
+| $4$ | $2$ | $[\,]$ | $[1, 1, 1]$ | $1$ |
+| $5$ | $2$ | $[\,]$ | $[0, 1, 1, 1]$ | $0$ |
+| $6$ | $1$ | $[0]$ | $[1, 1, 1]$ | |
+
+For instance, from $t = 2$, the scanned symbol is $\mathrm{hd}([\,]) = 0$, the move is $L$, and $\mathrm{Next}$ gives the state $2$, the left part $\mathrm{tl}([1, 1]) = [1]$ and the right part $\mathrm{cons}(1, \mathrm{cons}(1, [\,])) = [1, 1]$. From $t = 4$, $\mathrm{tl}([\,]) = [\,]$ and $\mathrm{hd}([\,]) = 0$: the head moves onto cell $-1$, which was not stored, and a blank is added in front of $r$. At $t = 6$ the state is $1$, so $\mathrm{Halt}$ holds and $\mathrm{Conf}(1, t)$ is constant from then on. $\mathrm{Std}$ holds: $\ell$ contains only blanks and $r$ is $[1, 1, 1]$. $\mathrm{Out}$ gives $3 - 1 = 2$, in agreement with :ref{#prop-tm-successor}, whose proof counts $2x + 4 = 6$ steps.
+:::
+::::
+
+::::exercise{#ex-tm-time-bound-pr difficulty=1 objective="Deduce from the arithmetization that a machine running in primitive recursive time computes a primitive recursive function."}
+Let a Turing machine $M$ compute a total function $f : \nat^k \to \nat$, and suppose that there is a primitive recursive $b$ such that $M$ halts on every input $\vec x$ within $b(\vec x)$ steps. Show that $f$ is primitive recursive.
+
+:::solution
+Since $f$ is total, $M$ halts on every $\vec x$ in a standard final configuration, after $t_0(\vec x) \leq b(\vec x)$ steps. Since $\mathrm{Next}$ fixes halting configurations, $\mathrm{Conf}(\vec x, t) = \mathrm{Conf}(\vec x, t_0(\vec x))$ for all $t \geq t_0(\vec x)$, in particular for $t = b(\vec x)$. Hence $f(\vec x) = \mathrm{Out}(\mathrm{Conf}(\vec x, b(\vec x)))$, a composition of primitive recursive functions: the unbounded search of :ref{#prop-tm-partial-recursive} is replaced by the bound.
+:::
+::::
+
+::::exercise{#ex-nondeterministic-tm difficulty=2 objective="Arithmetize non-deterministic machines to show that they compute only partial recursive functions."}
+A **non-deterministic** machine is defined as in :ref{#def-turing-machine}, except that $\delta$ is a finite relation: a set of quintuples $(q, a, q', b, D)$ with $q \neq q_h$. A configuration may then have several successors, or none, and a computation is any sequence of configurations each of which is a successor of the previous one. Suppose that for every input $\vec x$, all the computations from the initial configuration on $\vec x$ that end in a standard final configuration have the same output. Let $f(\vec x)$ be this output if there is such a computation, and undefined otherwise. Show that $f$ is partial recursive.
+
+:::solution
+For each quintuple $\theta = (q, a, q', b, D)$ of $\delta$, define $\mathrm{Next}_\theta(c)$ as $\mathrm{Next}$ in the lesson, with $q'$, $b$, $D$ given by $\theta$; it is primitive recursive. Let $\mathrm{Succ}(c, c')$ hold if, for some $\theta = (q, a, \dots) \in \delta$, the state of $c$ is $q$, its scanned symbol $\mathrm{hd}(r)$ is $a$, and $c' = \mathrm{Next}_\theta(c)$. This is a finite disjunction of primitive recursive predicates. Let $N(\vec x, s)$ state that $s = [c_0, \dots, c_t]$ with $c_0 = \mathrm{Init}(\vec x)$, $\mathrm{Succ}(c_i, c_{i+1})$ for all $i < t$, and $c_t$ halting and standard. It is primitive recursive, by bounded quantification over $i < \mathrm{lh}(s)$. Let $f'(\vec x) \simeq U(\mu s\, N(\vec x, s))$, with $U$ as in :ref{#thm-kleene-normal-form-proof}; $f'$ is partial recursive.
+
+Every $s$ with $N(\vec x, s)$ codes a computation of the machine on $\vec x$ ending in a standard configuration, and conversely each such computation is coded by some $s$, obtained by coding each successor with $\mathrm{Next}_\theta$. If $f(\vec x)\converge$, such a computation exists, the search terminates, and it finds the code of some such computation, whose output is $f(\vec x)$ by hypothesis: $f'(\vec x) = f(\vec x)$. If $f(\vec x)\diverge$, no $s$ satisfies $N(\vec x, s)$ and the search diverges. Hence $f = f'$ is partial recursive, and by :ref{#thm-equivalence-models} it is computed by an ordinary Turing machine. The search over codes of computations plays the role of the breadth-first simulation of the lesson :ref{to="models-of-computation/multitape-machines"}.
+:::
+::::
+
+::::exercise{#ex-urm-arithmetization difficulty=2 lessons="register-machines" objective="Arithmetize register machines directly, to show that URM-computable functions are partial recursive without Turing machines."}
+Let $P = I_1, \dots, I_s$ be a URM program computing $f : \nat^k \rightharpoonup \nat$, and $\rho = \max(\rho(P), k)$. Code the configuration $(i, r)$ by $\langle i, [r(1), \dots, r(\rho)] \rangle$. Show that the step function on codes is primitive recursive, and deduce that $f$ is partial recursive.
+
+:::solution
+Registers of index $> \rho$ contain $0$ initially and are never mentioned by $P$, so they stay $0$, and the code determines the configuration. For a code $c$, let $i = \pi_0(c)$ and $v = \pi_1(c)$; register $R_n$ is the entry $(v)'_{n-1}$. Define $\mathrm{Next}_P(c) = c$ if $i = 0$ or $i > s$, and otherwise by cases on $i \in \{1, \dots, s\}$, according to the instruction $I_i$:
+
+- $Z(n)$: $\langle i + 1, \mathrm{set}(v, n - 1, 0) \rangle$; $S(n)$: $\langle i + 1, \mathrm{set}(v, n - 1, (v)'_{n-1} + 1) \rangle$;
+- $T(m, n)$: $\langle i + 1, \mathrm{set}(v, n - 1, (v)'_{m-1}) \rangle$;
+- $J(m, n, q)$: $\langle q, v \rangle$ if $(v)'_{m-1} = (v)'_{n-1}$, and $\langle i + 1, v \rangle$ otherwise.
+
+This is a definition by finitely many cases from the primitive recursive operations of :ref{#prop-seq-operations}, so $\mathrm{Next}_P$ is primitive recursive, and by :ref{#def-urm-semantics} it maps the code of a configuration to the code of its successor. Let $\mathrm{Conf}(\vec x, 0) = \langle 1, [x_1, \dots, x_k, 0, \dots, 0] \rangle$ (with $\rho$ entries) and $\mathrm{Conf}(\vec x, t + 1) = \mathrm{Next}_P(\mathrm{Conf}(\vec x, t))$, a primitive recursion. Then
+$$
+f(\vec x) \simeq \Big(\pi_1\big(\mathrm{Conf}(\vec x, \mu t\, [\pi_0(\mathrm{Conf}(\vec x, t)) > s])\big)\Big)'_0 ,
+$$
+since the program halts exactly when the instruction index exceeds $s$, and the output is the content of $R_1$. This is the route followed by Monin and Patey; it gives (2) ⇒ (4) of :ref{#thm-equivalence-models} directly.
+:::
+::::
+:::::

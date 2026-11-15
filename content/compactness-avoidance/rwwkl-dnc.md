@@ -78,9 +78,7 @@ In (2 ⇒ 1), why must the $e + 3$ numbers be distinct?
   The elements of $H$ are distinct anyway; the condition concerns the values of $\Phi_e(e)$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-tuple-lengths difficulty=1 objective="Find which lengths of tuples make the class of the second direction have positive measure."}
 In the proof of (2 ⇒ 1) of :ref{#prop-rwwkl-dnc}, the $e$-th requirement uses tuples of $\ell(e) = e + 3$ distinct numbers. Show that the argument works for every computable function $\ell$ such that $\sum_e 2^{1 - \ell(e)} < 1$, and that it gives no information for $\ell(e) = e + 2$.
 
 :::solution
@@ -90,9 +88,45 @@ The class of the sets constant on $\ell(e)$ given distinct numbers has measure $
 
 ## Notes and references
 
-The equivalence between DNC degrees and homogeneous sets for $\Pi^0_1$ classes of positive measure is due to Bienvenu, Patey and Shafer (2017), who introduced $\mathsf{RWWKL}$, proved its equivalence with the existence of DNC functions over $\mathsf{RCA}_0$, and showed that $\mathsf{RWKL}$ is strictly stronger; Flood and Towsner (2016) separated $\mathsf{RWKL}$ from the existence of DNC functions independently. Flood (2012) had shown that $\mathsf{RWKL}$ implies the existence of DNC functions. The proof given here follows the chapter *Compactness avoidance* of Patey's monograph, section *DNC and compactness*, with tuples of length $e + 3$ in the second direction, where the monograph's $e + 2$ does not give a class of positive measure (exercise above). It uses the characterization of DNC degrees by escaping functions (:ref{#thm-dnc-effectively-immune}), which the monograph attributes to Bienvenu, Patey and Shafer. That a random sequence computes a DNC function, and that some DNC functions compute no random sequence, are in the course on Martin-Löf randomness.
+The equivalence between DNC degrees and homogeneous sets for $\Pi^0_1$ classes of positive measure is due to Bienvenu, Patey and Shafer (2017), who introduced $\mathsf{RWWKL}$, proved its equivalence with the existence of DNC functions over $\mathsf{RCA}_0$, and showed that $\mathsf{RWKL}$ is strictly stronger; Flood and Towsner (2016) separated $\mathsf{RWKL}$ from the existence of DNC functions independently. Flood (2012) had shown that $\mathsf{RWKL}$ implies the existence of DNC functions. The proof given here follows the chapter *Compactness avoidance* of Patey's monograph, section *DNC and compactness*, with tuples of length $e + 3$ in the second direction, where the monograph's $e + 2$ does not give a class of positive measure (:ref{#ex-tuple-lengths}). It uses the characterization of DNC degrees by escaping functions (:ref{#thm-dnc-effectively-immune}), which the monograph attributes to Bienvenu, Patey and Shafer. That a random sequence computes a DNC function, and that some DNC functions compute no random sequence, are in the course on Martin-Löf randomness.
 
 - L. Bienvenu, L. Patey and P. Shafer, *On the logical strengths of partial solutions to mathematical problems*, Transactions of the London Mathematical Society 4 (2017), 30–71; arXiv:1411.5874.
 - S. Flood, *Reverse mathematics and a Ramsey-type König's lemma*, Journal of Symbolic Logic 77 (2012), 1272–1280.
 - S. Flood and H. Towsner, *Separating principles below WKL₀*, Mathematical Logic Quarterly 62 (2016), 507–529; arXiv:1410.4068.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, section *DNC and compactness*.
+
+:::::exercises
+::::exercise[The other color]{#ex-rwwkl-color-zero difficulty=1 objective="Obtain homogeneous sets of color $0$ from the first direction, by passing to complements."}
+Let $X$ compute a DNC function and $\mathcal P$ be a $\Pi^0_1$ class of positive measure. Show that $X$ computes an infinite set $H$ homogeneous for $\mathcal P$ with color $0$.
+
+:::solution
+Let $\overline{\mathcal P} = \{ \nat \setminus Y : Y \in \mathcal P \}$. The map $Y \mapsto \nat \setminus Y$ flips every bit; it sends cylinders to cylinders of the same measure, so it preserves measure, and it sends the paths of a computable tree to the paths of the computable tree of the flipped strings. So $\overline{\mathcal P}$ is a $\Pi^0_1$ class of positive measure, and the proof of (1 ⇒ 2) gives an $X$-computable infinite set $H$ such that every finite subset of $H$ is contained in a member $\nat \setminus Y$ of $\overline{\mathcal P}$. Then every finite subset of $H$ is contained in $Y^{-1}(0)$ for some $Y \in \mathcal P$, so $H$ is homogeneous for $\mathcal P$ with color $0$, and with :ref{#prop-homogeneous-member}, $H \subseteq Y^{-1}(0)$ for a single $Y \in \mathcal P$.
+:::
+::::
+
+::::exercise[RWWKL and DNC, relativized]{#ex-rwwkl-dnc-equivalent difficulty=2 objective="Relativize both directions of the characterization to see that $\mathsf{RWWKL}$ and the existence of DNC functions are computably equivalent as problems."}
+Show that every instance $T$ of $\mathsf{RWWKL}$ has a homogeneous set computable in $f \oplus T$ for every function $f$ that is DNC relative to $T$; and that every set $Z$ computes an instance $T_Z$ of $\mathsf{RWWKL}$ such that every infinite set homogeneous for $T_Z$ computes a function DNC relative to $Z$.
+
+:::solution
+*First part.* The proof of (1 ⇒ 2) relativizes to $T$. The class $[T]$ is $\Pi^0_1(T)$, so the measures $\lambda([T] \cap \mathcal Q_F)$ are right-c.e. relative to $T$, uniformly in $F$, and validity fails in a $\Sigma^0_1(T)$ way. By SMN relativized, there is a computable $a$ with $W^T_{a(F)} = \{ n : n \leq \max F \} \cup \{ n : F \cup \{ n \} \text{ is not valid} \}$, of size at most $b(F)$ when $F$ is valid. The set $f \oplus T$ computes a function DNC relative to $T$, so by :ref{#thm-dnc-effectively-immune} relativized to $T$ it computes $h$ with $h(e, m) \notin W^T_e$ whenever $|W^T_e| \leq m$. The construction of the sets $F_j$ is then computable in $f \oplus T$, and gives a homogeneous set with color $1$.
+
+*Second part.* Let $\mathcal P^Z$ be the class of the proof of (2 ⇒ 1) with $\Phi^Z_e(e)$ in place of $\Phi_e(e)$. Its complement is $\Sigma^0_1(Z)$, of measure at most $\frac12$, so $\mathcal P^Z = [T_Z]$ for a $Z$-computable tree $T_Z$ with $\lambda([T_Z]) \geq \frac12$. If $H$ is infinite and homogeneous for $T_Z$, the function $g(e)$ coding the first $e + 3$ elements of $H$ is computable in $H$, and $g(e) = \Phi^Z_e(e)$ would give a member of $\mathcal P^Z$ constant on these $e + 3$ distinct numbers, as in the proof. So $g$ is DNC relative to $Z$. Together, the two parts say that $\mathsf{RWWKL}$ and the problem of finding a function DNC relative to a given set are computably reducible to each other.
+:::
+::::
+
+::::exercise[No computable member]{#ex-rwwkl-class-no-computable difficulty=2 objective="Use the recursion theorem to show that the class of the second direction has no computable member, although it has measure at least one half."}
+Let $\mathcal P$ be the class of the proof of (2 ⇒ 1) of :ref{#prop-rwwkl-dnc}. Show that $\mathcal P$ has no computable member.
+
+:::solution
+Let $X$ be computable. For each $n$, among the $2n + 5$ numbers $0, \dots, 2n + 4$, one of the two values of $X$ is taken at least $n + 3$ times; let $\psi(n)$ be the code of the first $n + 3$ of these numbers, in increasing order, for the least such value. The function $\psi$ is computable and total. By SMN, there is a computable $g$ with $\Phi_{g(n)}(y) = \psi(n)$ for every $y$, and by the recursion theorem some $e$ satisfies $\Phi_e = \Phi_{g(e)}$. Then $\Phi_e(e) = \psi(e)$ is the code of $e + 3$ distinct numbers on which $X$ is constant, so $X \notin \mathcal P_e$, and $X \notin \mathcal P$. The class nevertheless has measure at least $\frac12$; its members are only required to escape the tuples proposed by the functions $\Phi_e(e)$, and a computable set cannot escape a tuple chosen with knowledge of it.
+:::
+::::
+
+::::exercise[Homogeneous sets are effectively immune]{#ex-homogeneous-effectively-immune difficulty=2 objective="Show with the recursion theorem that the homogeneous sets of the class of the second direction are effectively immune, and recover that they compute DNC functions."}
+Let $\mathcal P$ be the class of the proof of (2 ⇒ 1) of :ref{#prop-rwwkl-dnc}, and $H$ an infinite set homogeneous for $\mathcal P$. Show that $H$ is effectively immune (:ref{#def-effectively-immune}), and deduce (2 ⇒ 1) again.
+
+:::solution
+Let $H$ be homogeneous with color $i$. By SMN, there is a computable function $s$ such that $\Phi_{s(e, j)}(y)$ is, for every $y$, the code of the first $j + 3$ numbers enumerated into $W_e$, and diverges if $W_e$ has fewer than $j + 3$ elements. By the recursion theorem with parameters, there is a computable $g$ with $\Phi_{g(e)} = \Phi_{s(e, g(e))}$ for every $e$. Let $j = g(e)$, and suppose that $W_e \subseteq H$ and $|W_e| \geq j + 3$. Then $\Phi_j(j)$ is the code of $j + 3$ distinct elements of $H$. By :ref{#prop-homogeneous-member}, some $X' \in \mathcal P$ satisfies $H \subseteq X'^{-1}(i)$, so $X'$ is constant on these numbers and $X' \notin \mathcal P_j$, a contradiction. So $|W_e| \leq g(e) + 2$ whenever $W_e \subseteq H$, and $H$ is effectively immune. By :ref{#thm-dnc-effectively-immune}, every set computing $H$ computes a DNC function, which is (2 ⇒ 1) for $X \geq_T H$.
+:::
+::::
+:::::

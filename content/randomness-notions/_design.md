@@ -245,7 +245,60 @@ Checked on 2026-11-12 (web search):
   1-generic set) is quoted, not proved; `cohen-genericity` proves the "computes" version.
   If that course adds the coding version, cite it.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. The
+featured exercises stay in the text, after the material they practice; the further
+exercises are in the collapsed block at the end of each lesson, outside the reading time.
+
+**Featured (two per lesson).**
+
+1. `relative-randomness`: `ex-mutual-symmetry` (after the remark on mutual randomness, which
+   cites it: the symmetric form of van Lambalgen's theorem is used throughout the course)
+   and `ex-omega-random-relative` (after the corollary: 2-randomness as mutual randomness
+   with Ω, used once more). The exercise on halves (`ex-random-halves`) is a direct
+   application and was moved to the further exercises.
+2. `weak-2-randomness`: `ex-w2r-downward` (closure under Turing reduction among random
+   sequences, the first use of the DNWY characterization) and `ex-w2r-not-2-random` (the
+   separation from 2-randomness, cited by `schnorr-kurtz` and by the figure of the six
+   notions). `ex-w2r-delta2-ce` is routine and was moved.
+3. `schnorr-kurtz`: `ex-kurtz-bi-immune` (after the comparison of category and measure:
+   what Kurtz randomness does give) and `ex-kurtz-delta2` (after the collapse corollary: the
+   collapse fails below ∅′). `ex-dominated-dnwy` (a second proof of the collapse from
+   DNWY) was moved.
+
+**Further exercises.**
+
+1. `relative-randomness` (7): halves; the hypotheses of van Lambalgen's theorem and the
+   role of the Solovay test (counterexamples); columns of a random sequence and their
+   independence (computable permutations of positions); the sum modulo 2 of mutually
+   random sequences (a measure-preserving involution); halves of a 2-random sequence
+   (relativized theorem); 3-randomness via Ω relative to ∅′; translates of a 2-random
+   sequence by a Δ⁰₂ set (and failure for 1-randomness).
+2. `weak-2-randomness` (8): Δ⁰₂ and c.e. sets; generalized Martin-Löf tests (normalization
+   and a non-decreasing counterexample); halves of a weakly 2-random sequence (directly and
+   through van Lambalgen); weak 2-randomness implies Kurtz randomness relative to ∅′, and
+   no infinite Σ⁰₂ set inside a weakly 2-random sequence or its complement; computably
+   dominated weakly 2-random members of Π⁰₁ classes of positive measure; Δ⁰₂ random
+   sequences outside any null Π⁰₂ class, and weak 2-randomness is not Σ⁰₂; weak
+   3-randomness implies 2-randomness; the Hirschfeldt–Miller theorem for a uniform union
+   of null Π⁰₂ classes (difficulty 3).
+3. `schnorr-kurtz` (6): the collapse from DNWY; halves of a Kurtz random sequence; Kurtz
+   random sequences that are Δ⁰₂ or not Martin-Löf random lie in hyperimmune degrees;
+   weakly 1-generic sequences have hyperimmune degree, via the collapse; the collapse
+   proved with Solovay tests; no random set is hyperimmune, while weakly 1-generic (hence
+   some Kurtz random) sets are.
+
+**Sources** (checked 2026-11-13 against the text files of the books). Columns: D–H
+Corollary 6.9.6 (randomness of the columns; the independence is the same argument).
+Translates by Δ⁰₂ sets: Nies Exercise 3.6.21. Kurtz randomness relative to ∅′ and Σ⁰₂
+sets: Nies, the remarks before Exercise 3.6.6 and Exercise 3.6.7. Weak 2-randomness not
+Σ⁰₂: the proof of D–H Corollary 7.2.10. Weak 3-randomness: D–H Theorem 7.2.7 (Kurtz).
+Hirschfeldt–Miller: D–H Theorem 7.2.11, with the construction of the lesson instead of
+the restarting markers of D–H. Hyperimmune sets: D–H Theorem 9.14.15 (folklore). The
+other exercises are new or standard consequences of the lessons.
+
+## 12. History
 
 - **2026-11-12: design and pedagogy revision; initial log.**
   - Course: `martingales` added to the prerequisites; description, summary and objectives
@@ -265,3 +318,14 @@ Checked on 2026-11-12 (web search):
     `thm-kurtz-w2r-dominated` (Yu), `cor-dominated-collapse`, `thm-hyperimmune-kurtz`,
     `cor-kurtz-dichotomy`, figure `fig-notions-map`, quiz on the dichotomy, exercise on
     bi-immunity.
+- **2026-11-13: featured and further exercises.**
+  - Labels, objectives and difficulties for the nine existing exercises; two featured
+    exercises per lesson, placed after the material they practice; the others moved to the
+    further exercises; 18 new further exercises (section 11).
+  - Solution of `ex-omega-random-relative` simplified (van Lambalgen's theorem gives the
+    randomness of Ω relative to A directly) and its last remark made explicit.
+  - Positional references to exercises replaced by `:ref`: "second exercise below" and
+    "the previous exercise" (`ex-mutual-symmetry`), "the first exercise of
+    martingales/randomness-hierarchy" (`ex-kurtz-powers`), "the third exercise of
+    weak-2-randomness" (`ex-w2r-not-2-random`, twice).
+  - Durations unchanged (45, 45, 40): the featured exercises are those already in the text.

@@ -1,7 +1,7 @@
 ---
 title: Forcing with Π⁰₁ classes and perfect trees
 summary: The complexity of the conditions and of the forcing of Σ⁰₁ and Π⁰₁ sentences for Jockusch–Soare and computable Sacks forcing; tree forcings decide Σ⁰₂ sentences for all members by a Σ⁰₂ question; their generic sets satisfy G″ ≤ G′ ⊕ ∅″.
-duration: 45
+duration: 40
 prerequisites: [cohen-forcing]
 ---
 
@@ -106,17 +106,7 @@ Why can the same argument not be carried out for Cohen forcing at level $2$?
   It is definable, by :ref{#thm-cohen-forcing-definable}.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that for Jockusch–Soare forcing the relation "$\mathcal P \Vdash \forall y\ \Phi^G_e(y)\converge$" is $\Pi^0_2$, and that for computable Sacks forcing the relation "$T \Vdash \forall y\ \Phi^G_e(y)\converge$" is $\Pi^0_3$, on indices of conditions.
-
-:::solution
-For Jockusch–Soare forcing, by :ref{#ex-forcing-relation} the class forces totality if and only if $\mathcal P \cap \{ X : \Phi^X_e(y)\diverge \} = \emptyset$ for every $y$, which is $\forall y$ applied to a $\Sigma^0_1$ relation. For Sacks forcing, by the universal clause, $T$ forces totality if and only if for every $S$ and every $y$, if $S$ is a condition and $S \leq T$, then $S$ does not force $\Phi^G_e(y)\diverge$. Being a condition is $\Pi^0_2$, extension is $\Pi^0_1$, and forcing divergence is $\Pi^0_1$ (:ref{#prop-sacks-complexity}), so the matrix is a disjunction of a $\Sigma^0_2$, a $\Sigma^0_1$ and a $\Sigma^0_1$ relation, and the whole is $\Pi^0_3$. The complexity of the set of conditions is what raises the level.
-:::
-::::
-
-::::exercise{#exr-low2-dominated difficulty=2}
+::::exercise{#exr-low2-dominated difficulty=2 objective="Combine effective genericity with the decision of $\Sigma^0_2$ sentences to bound the double jump of a computably dominated member."}
 Show that every non-empty $\Pi^0_1$ class $\mathcal P$ has a computably dominated member $G$ with $G'' \leq_T \emptyset''$.
 
 :::solution
@@ -132,3 +122,53 @@ Forcing with $\Pi^0_1$ classes is the method of Jockusch and Soare (1972); forci
 - G. E. Sacks, *Forcing with perfect closed sets*, in *Axiomatic Set Theory*, Proceedings of Symposia in Pure Mathematics 13, Part I, American Mathematical Society, 1971, 331–355.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 7.5.
 - B. Monin and L. Patey, *Computability theory*, chapter *Effective forcing*, sections *Forcing with trees* and *Computational complexity and forcing question*.
+
+:::::exercises
+::::exercise{#ex-tree-totality-complexity difficulty=1 objective="Bound the complexity of forcing totality for the two tree forcings."}
+Show that for Jockusch–Soare forcing the relation "$\mathcal P \Vdash \forall y\ \Phi^G_e(y)\converge$" is $\Pi^0_2$, and that for computable Sacks forcing the relation "$T \Vdash \forall y\ \Phi^G_e(y)\converge$" is $\Pi^0_3$, on indices of conditions.
+
+:::solution
+For Jockusch–Soare forcing, by :ref{#ex-forcing-relation} the class forces totality if and only if $\mathcal P \cap \{ X : \Phi^X_e(y)\diverge \} = \emptyset$ for every $y$, which is $\forall y$ applied to a $\Sigma^0_1$ relation. For Sacks forcing, by the universal clause, $T$ forces totality if and only if for every $S$ and every $y$, if $S$ is a condition and $S \leq T$, then $S$ does not force $\Phi^G_e(y)\diverge$. Being a condition is $\Pi^0_2$, extension is $\Pi^0_1$, and forcing divergence is $\Pi^0_1$ (:ref{#prop-sacks-complexity}), so the matrix is a disjunction of a $\Sigma^0_2$, a $\Sigma^0_1$ and a $\Sigma^0_1$ relation, and the whole is $\Pi^0_3$. The complexity of the set of conditions is what raises the level.
+:::
+::::
+
+::::exercise{#ex-sacks-conditions-complete difficulty=2 objective="Show that the bound on the complexity of computable Sacks conditions is optimal."}
+Show that the set of indices of conditions of computable Sacks forcing, that is, of indices $i$ such that $\Phi_i$ is a total f-tree, is $\Pi^0_2$-complete.
+
+:::solution
+It is $\Pi^0_2$ by :ref{#prop-sacks-complexity}. Let $S = \{ a : \forall x\ \exists y\ R(a, x, y) \}$ be a $\Pi^0_2$ set, with $R$ computable. For each $a$, let $T_a$ be the partial computable function that, on a string $\rho$, searches for $y_0, \dots, y_{|\rho| - 1}$ with $R(a, x, y_x)$ for every $x < |\rho|$, and outputs $\rho$ if the search succeeds. An index $f(a)$ of $T_a$ is computable from $a$. If $a \in S$, every search succeeds, and $T_a$ is the identity tree, a computable f-tree. If $a \notin S$, some $x$ has no witness $y$, and $T_a(\rho)$ is undefined for $|\rho| > x$, so $T_a$ is not total. Hence $a \in S$ if and only if $f(a)$ is an index of a condition, and $f$ is a many-one reduction of $S$ to the set of indices of conditions.
+:::
+::::
+
+::::exercise{#ex-sacks-extension-complete difficulty=2 objective="Show that the extension relation of computable Sacks forcing is not decidable, unlike that of Cohen forcing."}
+Show that there is a computable sequence $(T_a)$ of total computable f-trees such that the identity tree $I$ satisfies $I \leq T_a$ if and only if $a \notin \emptyset'$. Deduce that the relation $S \leq T$ on indices of conditions is $\Pi^0_1$-complete.
+
+:::solution
+For $s \in \nat \cup \{\infty\}$ and a string $\rho$, let $g_s(\rho) = \rho$ if $|\rho| \leq s$, and otherwise let $g_s(\rho)$ consist of $\rho \uh s$ followed by $\rho(s)\, 0\, \rho(s+1)\, 0 \cdots \rho(|\rho| - 1)\, 0$. Let $s_a$ be the stage at which $a$ enters $\emptyset'$, or $\infty$, and $T_a = g_{s_a}$. To compute $T_a(\rho)$, check whether $a$ has entered $\emptyset'$ by stage $|\rho|$; if not, $T_a(\rho) = \rho$, and if so, the stage $s_a \leq |\rho|$ is known and $T_a(\rho) = g_{s_a}(\rho)$. So $T_a$ is total and computable, uniformly in $a$.
+
+Each $g_s$ is an f-tree. If $\rho \preceq \mu$, then $g_s(\rho) \preceq g_s(\mu)$. Conversely, suppose $g_s(\rho) \preceq g_s(\mu)$. If $|\rho| \leq s$, then $g_s(\rho) = \rho$ and the first $\min(s, |\mu|)$ bits of $g_s(\mu)$ are those of $\mu$, so $\rho \preceq \mu$ (if $|\mu| < s$, then $g_s(\mu) = \mu$). If $|\rho| > s$, then $|g_s(\mu)| > s$, so $|\mu| > s$, the first $s$ bits give $\rho \uh s = \mu \uh s$, and the bits at positions $s, s + 2, \dots$ give $\rho(j) = \mu(j)$ for $s \leq j < |\rho|$. So $\rho \preceq \mu$.
+
+If $a \notin \emptyset'$, then $T_a = I$ and $I \leq T_a$. If $a \in \emptyset'$ with $s = s_a$, the string $0^{s+1} 1$ is not a node of $T_a$: the nodes of $T_a$ of length $s + 2$ are the strings $g_s(\rho)$ with $|\rho| = s + 1$, which end with $0$, and no other node has length $s + 2$, since the lengths of nodes are the numbers at most $s$ and the numbers $s + 2k$. So $I \not\leq T_a$.
+
+The relation $S \leq T$ is $\Pi^0_1$ on indices of conditions (:ref{#prop-sacks-complexity}), and the map $a \mapsto (I, T_a)$ reduces the complement of $\emptyset'$, a $\Pi^0_1$-complete set, to it. For Cohen forcing, extension is decidable.
+:::
+::::
+
+::::exercise{#ex-cohen-not-gl2 difficulty=2 objective="See that generalized low₂ is a property of sufficiently generic sets that can fail for 1-generic Cohen sets." lessons="cohen-forcing"}
+Show that some 1-generic set $G$ satisfies $G'' \not\leq_T G' \oplus \emptyset''$, so that :ref{#thm-tree-gl2} fails for 1-generic sets of Cohen forcing. Show that it holds for 2-generic sets.
+
+:::solution
+By :ref{#ex-cohen-jump-inversion-n} with $n = 1$ and $A = \emptyset''$, there is a 1-generic set $G$ with $G' \equiv_T \emptyset''$. Taking jumps, $G'' \equiv_T \emptyset'''$, while $G' \oplus \emptyset'' \equiv_T \emptyset''$. Since $\emptyset''' \not\leq_T \emptyset''$, $G'' \not\leq_T G' \oplus \emptyset''$.
+
+If $G$ is 2-generic, :ref{#cor-cohen-jumps} gives $G'' \leq_T G \oplus \emptyset'' \leq_T G' \oplus \emptyset''$.
+:::
+::::
+
+::::exercise{#ex-tree-generic-not-high difficulty=1 objective="Derive non-highness from the generalized low₂ property."}
+Show that a set $G$ with $G'' \leq_T G' \oplus \emptyset''$ is not high. Deduce that every sufficiently generic set for Jockusch–Soare or computable Sacks forcing is not high.
+
+:::solution
+If $G$ were high, $\emptyset'' \leq_T G'$, so $G'' \leq_T G' \oplus \emptyset'' \equiv_T G'$, which contradicts $G' <_T G''$, the jump of a set being strictly above it. The second statement follows from :ref{#thm-tree-gl2}.
+:::
+::::
+:::::

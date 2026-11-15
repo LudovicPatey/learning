@@ -213,7 +213,70 @@ No simpler proof of Chaitin's theorem or of the KC theorem was found.
 - Possible later additions: conditional complexity and symmetry of information (a
   specialized course), Solovay functions.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a full solution. Featured
+exercises (in the text, after the material they practice) are those that every reader
+should do; the others are in the collapsed block `:::::exercises` at the end of each lesson.
+
+**Featured exercises and why.**
+- plain-complexity: `ex-shortest-incompressible` (composition of machines; reused for $K$).
+- non-computability: `ex-domain-complete`, `ex-c-complete`, placed after `prop-c-degree`,
+  whose proof depends on them.
+- initial-segments: `ex-barzdins` (cited in the text of this lesson and of
+  computable-sequences, shows that $\log n$ is sharp in Chaitin's theorem) and
+  `ex-concatenation` (the oscillation construction applied to concatenation).
+- computable-sequences: `ex-c-trivial-finite` (the counting lemma turned into a bound on
+  sequences).
+- prefix-free-complexity: `ex-k-concatenation` (subadditivity and non-monotonicity of $K$).
+- kc-theorem: `ex-k-computable-bound` (the characterization of $K$ in its typical use).
+- coding-theorem: `ex-k-few-descriptions` (coding theorem versus the counting lemma for $C$).
+
+**Further exercises, lesson by lesson.**
+- plain-complexity: `ex-pair-loglog` (moved); continuity of $C$ (`ex-c-continuity`);
+  optimal machines with padded descriptions and with one description per length
+  (`ex-optimal-padding`, `ex-one-description-per-length`), which show that optimality is a
+  weak condition; runs of zeros in incompressible strings (`ex-runs-of-zeros`).
+- non-computability: `ex-incompressible-immune`, `ex-no-computable-c-approx` (moved);
+  Stephan's $z_m$ (`ex-stephan-zm`); monotonicity in the envelope theorem, with a
+  counterexample (`ex-envelope-monotone`); the compressible strings compute $\emptyset'$
+  (`ex-compressible-complete`); the number of incompressible strings is incompressible
+  (`ex-incompressible-count`); the settling time of $C_s$ dominates every computable function
+  (`ex-settling-time`).
+- initial-segments: uniform $\log n$ deficiency (`ex-uniform-deficiency`); oscillation of
+  $C(X \uh n)$ for computable $X$ (`ex-computable-oscillation`); sparse sequences, an
+  uncountable family with $C(X \uh n) \leq 2 \log n + c$ (`ex-sparse-sequences`);
+  non-computability of $n \mapsto C(X \uh n)$ (`ex-segment-complexity`).
+- computable-sequences: boundedly many shortest descriptions, infinitely many descriptions
+  (`ex-shortest-descriptions-bounded`); a lower bound $2^{d - 2\log d - c}$ matching the
+  counting lemma (`ex-c-trivial-many`); failure of the lemma with $\log n$ in place of $C(n)$
+  (`ex-few-segments-log`); a c.e. tree with a single non-computable path, showing the role of
+  bounded width (`ex-ce-tree-path`).
+- prefix-free-complexity: `ex-k-iterated-log` (moved; statement made precise, solution
+  rewritten); shortest descriptions for $K$ (`ex-k-shortest-incompressible`); maximal
+  prefix-free sets and weight (`ex-maximal-prefix-free`); Kraft's converse for sorted lengths
+  and the need for sorting (`ex-kraft-sorted`); $K - C$ unbounded (`ex-k-minus-c`).
+- kc-theorem: `ex-request-weight` (moved); the construction by hand (`ex-kc-by-hand`); c.e.
+  sets of finite weight (`ex-kc-prefix-free-set`); subadditivity from the characterization
+  (`ex-pairs-by-kc`); the right-c.e. hypothesis is needed (`ex-k-minimal-right-ce`);
+  $\sum f(K(\sigma)) 2^{-K(\sigma)} = \infty$ for every order (`ex-k-order-sum`).
+- coding-theorem: `ex-k-few-strings` (moved); halting probabilities of simple machines and of
+  a c.e. set (`ex-omega-ce-set`); $\Omega$ is not right-c.e. (`ex-omega-not-right-ce`);
+  $\sum_{|\sigma| = n} 2^{-K(\sigma)} =^\times 2^{-K(n)}$ (`ex-length-sum`); left-c.e.
+  semimeasures and the maximality of $2^{-K}$ (`ex-semimeasure-coding`); the settling time of
+  $\Omega_s$ dominates every computable function (`ex-omega-settling`).
+
+**Sources.** Nies 2009, Exercises 2.1.3, 2.1.4, 2.1.5, 2.1.17, 2.1.23 (Stephan), 2.2.10,
+2.2.11, 2.2.22, 2.2.23 and 2.2.27, Example 2.2.5, Proposition 2.1.28 (checked against the
+text of the book); the others are standard facts written for the course.
+
+**Dropped.** Nies 2.1.19 (ii) (a machine compressing one string must expand a string of
+every larger length): as read, it fails for the machine equal to the identity except
+$M(\varepsilon) = 0$; the intended statement probably concerns all lengths up to $n$. Not
+used. A variant of Chaitin's theorem for an infinite computable set of lengths was dropped:
+the tree defined with $C(n)$ in the bound is not c.e.
+
+## 12. History
 
 - **2026-11-12 — design and pedagogy revision.** Design log written. Course split into seven
   lessons: new `non-computability` (from `plain-complexity`, with the lower envelope moved
@@ -227,3 +290,9 @@ No simpler proof of Chaitin's theorem or of the KC theorem was found.
   the hand-written KC figure was replaced. Intuitions, examples, counterexamples and quizzes
   added; references checked against DH, Nies and Monin–Patey; Gács attribution restored
   with its source.
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for
+  all exercises; one or two featured exercises per lesson, moved next to the material they
+  practice (the sections "Exercises" were removed); 31 new further exercises (see section
+  11). `ex-k-iterated-log` restated precisely with a rewritten solution; the solution of
+  `ex-barzdins` no longer cites the next lesson by reference. Durations of initial-segments
+  (30) and computable-sequences (45) recomputed.

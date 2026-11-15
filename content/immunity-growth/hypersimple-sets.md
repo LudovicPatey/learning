@@ -1,7 +1,7 @@
 ---
 title: Hypersimple sets and truth-table reducibility
 summary: Dekker's deficiency sets give a hypersimple set in every non-zero c.e. degree; truth-table reductions are the Turing reductions that are total on every oracle; hypersimple sets can be Turing complete but not truth-table complete.
-duration: 40
+duration: 35
 prerequisites: [immune-sets, pi01-classes/trees-and-classes]
 ---
 
@@ -84,8 +84,16 @@ The function $\theta(n)$ is the **truth table** for the input $n$. Clearly $Y \l
 :::example{#ex-tt-reductions}
 1. If $Y \leq_m X$ via $f$ (:ref{#def-many-one}), then $Y \leq_{tt} X$ with $\ell(n) = f(n) + 1$ and the table that reads the last bit.
 2. The complement of $\emptyset'$ is truth-table reducible to $\emptyset'$, with $\ell(n) = n + 1$ and the table that negates the last bit. It is not many-one reducible to $\emptyset'$, since a set many-one reducible to a c.e. set is c.e. So $\leq_{tt}$ is strictly weaker than $\leq_m$.
-3. The reduction $B \leq_T A$ of :ref{#thm-deficiency-set} is a truth-table reduction in disguise; see the exercises.
+3. The reduction $B \leq_T A$ of :ref{#thm-deficiency-set} is a truth-table reduction in disguise (:ref{#ex-deficiency-tt}).
 :::
+
+::::exercise{#ex-deficiency-tt difficulty=1 objective="Turn the Turing reduction of a deficiency set to the enumerated set into a truth-table reduction."}
+Let $B$ be the deficiency set of an enumeration $a$ of an infinite c.e. set $A$. Show that $B \leq_{tt} A$.
+
+:::solution
+For a stage $s$, let $F_s$ be the finite set of numbers $x < a(s)$ that are not in $\{ a(0), \dots, a(s) \}$; it is computable from $s$. Then $s \in B$ if and only if $F_s \cap A \neq \emptyset$: an element $x < a(s)$ of $A$ that is not among $a(0), \dots, a(s)$ is enumerated at a stage $t > s$, which makes $s$ deficient, and conversely. Let $\ell(s) = a(s)$, and let $\theta(s)$ be the table that outputs $1$ on $\sigma$ of length $a(s)$ if and only if $\sigma(x) = 1$ for some $x \in F_s$.
+:::
+::::
 
 The definition asks for the tables explicitly. The next proposition shows that it is enough that the reduction never diverges, whatever the oracle. The argument is a compactness argument: the oracles form a compact space, so a procedure that halts on every oracle halts within a bounded time on all of them.
 
@@ -119,24 +127,6 @@ Combined with :ref{#cor-ce-hyperimmune}, Post's theorem separates the two reduci
 
 Post's program failed for Turing reducibility: Dekker's theorem gives Turing complete hypersimple sets, and Yates later constructed Turing complete maximal sets, whose complements are as thin as possible among co-infinite c.e. sets.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $B$ be the deficiency set of an enumeration $a$ of an infinite c.e. set $A$. Show that $B \leq_{tt} A$.
-
-:::solution
-For a stage $s$, let $F_s$ be the finite set of numbers $x < a(s)$ that are not in $\{ a(0), \dots, a(s) \}$; it is computable from $s$. Then $s \in B$ if and only if $F_s \cap A \neq \emptyset$: an element $x < a(s)$ of $A$ that is not among $a(0), \dots, a(s)$ is enumerated at a stage $t > s$, which makes $s$ deficient, and conversely. Let $\ell(s) = a(s)$, and let $\theta(s)$ be the table that outputs $1$ on $\sigma$ of length $a(s)$ if and only if $\sigma(x) = 1$ for some $x \in F_s$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that $\leq_{tt}$ is transitive.
-
-:::solution
-Let $Z \leq_{tt} Y$ and $Y \leq_{tt} X$, via functionals $\Psi$ and $\Phi$ that are total on every oracle (:ref{#prop-tt-total}). Modify $\Phi$ so that it outputs $0$ instead of any value outside $\{0, 1\}$; it is still total on every oracle, and still computes $Y$ from $X$. For every oracle $V$, $\Phi^V$ is then the characteristic function of a set, so $\Psi^{\Phi^V}$ is total. The functional $V \mapsto \Psi^{\Phi^V}$ is total on every oracle and computes $Z$ from $X$, so $Z \leq_{tt} X$ by :ref{#prop-tt-total}.
-:::
-::::
-
 ## Notes and references
 
 Post (1944) introduced hypersimple sets and truth-table reducibility, and proved that hypersimple sets are not truth-table complete. Dekker (1954) introduced deficiency sets and proved :ref{#thm-deficiency-set}; Soare states it with the additional fact $B \leq_{tt} A$ (Soare 2016, Theorem 5.3.6). Friedberg and Rogers (1959) introduced weak truth-table reducibility and showed that hypersimple sets are not wtt-complete. Soare attributes the characterization of truth-table reductions as total functionals to Nerode (Soare 2016, Theorem 3.8.5). Yates constructed a complete maximal set in 1965 (Soare 2016, Section 5.7).
@@ -146,3 +136,51 @@ Post (1944) introduced hypersimple sets and truth-table reducibility, and proved
 - R. M. Friedberg and H. Rogers, *Reducibility and completeness for sets of integers*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 5 (1959), 117–125.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 3.8, 5.3 and 5.7.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 4.1.
+
+:::::exercises
+::::exercise{#ex-tt-transitive difficulty=1 objective="Compose truth-table reductions through their characterization by total functionals."}
+Show that $\leq_{tt}$ is transitive.
+
+:::solution
+Let $Z \leq_{tt} Y$ and $Y \leq_{tt} X$, via functionals $\Psi$ and $\Phi$ that are total on every oracle (:ref{#prop-tt-total}). Modify $\Phi$ so that it outputs $0$ instead of any value outside $\{0, 1\}$; it is still total on every oracle, and still computes $Y$ from $X$. For every oracle $V$, $\Phi^V$ is then the characteristic function of a set, so $\Psi^{\Phi^V}$ is total. The functional $V \mapsto \Psi^{\Phi^V}$ is total on every oracle and computes $Z$ from $X$, so $Z \leq_{tt} X$ by :ref{#prop-tt-total}.
+:::
+::::
+
+::::exercise{#ex-hypersimple-superset difficulty=1 objective="Check that hypersimplicity passes to c.e. supersets with infinite complement."}
+Let $A$ be hypersimple, and let $B \supseteq A$ be a c.e. set with infinite complement. Show that $B$ is hypersimple.
+
+:::solution
+The complement $\nat \setminus B$ is infinite and contained in $\nat \setminus A$. If a disjoint strong array $(F_n)$ met $\nat \setminus B$ at every $n$, it would meet $\nat \setminus A$ at every $n$, contradicting the hyperimmunity of $\nat \setminus A$. So $\nat \setminus B$ is hyperimmune, and $B$ is hypersimple.
+:::
+::::
+
+::::exercise{#ex-boolean-tt-jump difficulty=1 objective="Write explicit truth tables for Boolean combinations of c.e. sets."}
+Let $Y$ be obtained from finitely many c.e. sets $V_1, \dots, V_k$ by unions, intersections and complements. Show that $Y \leq_{tt} \emptyset'$. In particular, $B \setminus C \leq_{tt} \emptyset'$ for all c.e. sets $B$ and $C$.
+
+:::solution
+There is a function $\beta : \{0, 1\}^k \to \{0, 1\}$ such that $Y(n) = \beta(V_1(n), \dots, V_k(n))$ for every $n$: it is obtained by induction on the Boolean expression, a union corresponding to a maximum, an intersection to a minimum and a complement to $1 - x$. Since $\emptyset'$ is many-one complete among c.e. sets, there are total computable functions $f_1, \dots, f_k$ with $V_i(n) = \emptyset'(f_i(n))$. Let $\ell(n) = 1 + \max_i f_i(n)$, and let $\theta(n)$ be the table that sends $\sigma$ of length $\ell(n)$ to $\beta(\sigma(f_1(n)), \dots, \sigma(f_k(n)))$. Both are computable, and $Y(n) = \theta(n)(\emptyset' \uh \ell(n))$. For $B \setminus C$, take $\beta(x, y) = \min(x, 1 - y)$.
+:::
+::::
+
+::::exercise{#ex-true-stages-introreducible difficulty=2 objective="Show that every infinite set of non-deficient stages computes the enumerated set, while the deficiency set itself has no such property."}
+Let $A$ be an infinite c.e. set, enumerated without repetition by $a$, and let $B$ be its deficiency set. Show that every infinite set $T \subseteq \nat \setminus B$ computes $A$, hence $B$. Show that if $A$ is not computable, some infinite subset of $B$ does not compute $B$.
+
+:::solution
+Let $s_0 < s_1 < \cdots$ be the non-deficient stages. With oracle $T$, to decide whether $x \in A$, search for an element $s \in T$ with $a(s) \geq x$, by testing $0, 1, 2, \dots$ for membership in $T$. The search terminates: $T$ is an infinite subset of $\{ s_0, s_1, \dots \}$, so it contains some $s_n$ with $n \geq x$, and $a(s_n) \geq n \geq x$, as shown in the proof of :ref{#thm-deficiency-set}. Since $s$ is non-deficient and $x \leq a(s)$, the key property of that proof gives $x \in A$ if and only if $x \in \{ a(t) : t \leq s \}$. So $A \leq_T T$, and $B \leq_T A \leq_T T$ by :ref{#thm-deficiency-set}.
+
+If $A$ is not computable, then $B \equiv_T A$ is not computable. It is infinite, since a finite set is computable, and it is c.e. So it has an infinite computable subset (see :ref{to="immunity-growth/immune-sets"}), which does not compute $B$. A set every infinite subset of which computes it is called **introreducible**: the exercise shows that the complement of a deficiency set is introreducible, and that no non-computable c.e. set is. Adapted from Soare 2016, Exercise 5.3.14.
+:::
+::::
+
+::::exercise{#ex-one-query-tt difficulty=2 objective="Turn a truth-table reduction with a single query between c.e. sets into a many-one reduction, and see where enumerability is used."}
+Say that $Y \leq_{1\text{-}tt} X$ if there are total computable functions $q$ and $\tau$, with $\tau(n) \in \{0, 1, 2, 3\}$, such that for every $n$: $Y(n) = 0$ if $\tau(n) = 0$; $Y(n) = 1$ if $\tau(n) = 1$; $Y(n) = X(q(n))$ if $\tau(n) = 2$; and $Y(n) = 1 - X(q(n))$ if $\tau(n) = 3$. This is a truth-table reduction that reads one bit of the oracle. Let $A$ and $B$ be c.e. sets with $B \neq \emptyset$ and $B \neq \nat$, and suppose that $A \leq_{1\text{-}tt} B$. Show that $A \leq_m B$. Show that the hypothesis that $A$ is c.e. cannot be dropped.
+
+:::solution
+Fix $b_1 \in B$ and $b_0 \notin B$. Define $h(n)$ by cases on $\tau(n)$. If $\tau(n) = 0$, let $h(n) = b_0$; if $\tau(n) = 1$, let $h(n) = b_1$; if $\tau(n) = 2$, let $h(n) = q(n)$. If $\tau(n) = 3$, then $n \in A$ if and only if $q(n) \notin B$, so exactly one of $n \in A$ and $q(n) \in B$ holds. Enumerate $A$ and $B$ simultaneously until $n$ appears in $A$ or $q(n)$ appears in $B$; this happens, and only the true one of the two events can be observed. Let $h(n) = b_1$ in the first case and $h(n) = b_0$ in the second.
+
+The function $h$ is total computable. In each case, $n \in A$ if and only if $h(n) \in B$: this is clear for $\tau(n) \in \{0, 1, 2\}$, and for $\tau(n) = 3$, $n \in A$ gives $h(n) = b_1 \in B$, while $n \notin A$ gives $q(n) \in B$ and $h(n) = b_0 \notin B$. So $A \leq_m B$.
+
+Enumerability is used in the case $\tau(n) = 3$ only. The complement of $\emptyset'$ is $1$-tt reducible to $\emptyset'$, with $q(n) = n$ and $\tau(n) = 3$, but it is not many-one reducible to $\emptyset'$, since it is not c.e. (:ref{#ex-tt-reductions}). Adapted from Soare 2016, Exercise 5.3.16.
+:::
+::::
+:::::

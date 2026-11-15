@@ -97,7 +97,7 @@ The axiom $\mathrm{exp}$ is not needed: the direct proof of :ref{#thm-fo-paris-k
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-exp-not-bsigma1 difficulty=2 objective="Combine the model of $\Sigma_1$-definable elements with the bounded graph of exponentiation to show that $\mathrm I\Delta_0 + \mathrm{exp}$ does not prove $\mathrm B\Sigma_1$."}
 Let $M$ be a model of $\mathrm{PA}$ with a non-standard element defined by a bounded formula, and $K = K_1(M)$ its set of $\Sigma_1$-definable elements, which is a model of $\mathrm I\Delta_0$ in which $\mathrm B\Sigma_1$ fails (lesson :ref{to="induction-conservation/separations"} of the course on induction and conservation). Show that $K \models \mathrm{exp}$. Deduce that $\mathrm I\Delta_0 + \mathrm{exp}$ does not prove $\mathrm B\Sigma_1$.
 
 :::solution
@@ -107,10 +107,52 @@ Let $a \in K$. In $M$, which satisfies $\mathrm{exp}$, the power $2^a$ is the on
 
 ## Notes and references
 
-The characterization of $\Sigma_n$ induction by coded sets is attributed to H. Friedman in Wong's Lecture 2, where the characterization of collection by $\Delta_{n+1}$ sets is called folklore; both are proved in Wong's Lecture 3, whose proof of the second we follow. Hájek and Pudlák prove the forward directions in the form "piecewise coded" (Theorem I.2.7, Lemma I.2.13), and credit the notion to Kossak and the theorem to Clote (1985). The implication $\mathrm B\Sigma_{n+1} \Rightarrow \mathrm I\Sigma_n$ is due to Paris and Kirby (1978). Slaman's theorem is in Slaman (2004); the question whether $\mathrm I\Delta_1$ proves $\mathrm B\Sigma_1$, or $\mathrm L\Delta_1$, without exponentiation, is due to Paris, and remains open according to Wong's notes. Another open problem on collection is whether $\mathrm I\Delta_0 + \neg \mathrm{exp}$ proves $\mathrm B\Sigma_1$, while $\mathrm I\Delta_0 + \mathrm{exp}$ does not, by the exercise; Adamowicz, Kołodziejczyk and Paris (2012) relate it to the existence of truth definitions in models of $\mathrm I\Delta_0 + \neg \mathrm{exp}$, and explain why it has resisted.
+The characterization of $\Sigma_n$ induction by coded sets is attributed to H. Friedman in Wong's Lecture 2, where the characterization of collection by $\Delta_{n+1}$ sets is called folklore; both are proved in Wong's Lecture 3, whose proof of the second we follow. Hájek and Pudlák prove the forward directions in the form "piecewise coded" (Theorem I.2.7, Lemma I.2.13), and credit the notion to Kossak and the theorem to Clote (1985). The implication $\mathrm B\Sigma_{n+1} \Rightarrow \mathrm I\Sigma_n$ is due to Paris and Kirby (1978). Slaman's theorem is in Slaman (2004); the question whether $\mathrm I\Delta_1$ proves $\mathrm B\Sigma_1$, or $\mathrm L\Delta_1$, without exponentiation, is due to Paris, and remains open according to Wong's notes. Another open problem on collection is whether $\mathrm I\Delta_0 + \neg \mathrm{exp}$ proves $\mathrm B\Sigma_1$, while $\mathrm I\Delta_0 + \mathrm{exp}$ does not, by :ref{#ex-exp-not-bsigma1}; Adamowicz, Kołodziejczyk and Paris (2012) relate it to the existence of truth definitions in models of $\mathrm I\Delta_0 + \neg \mathrm{exp}$, and explain why it has resisted.
 
 - J. B. Paris and L. A. S. Kirby, *Σₙ-collection schemas in arithmetic*, in Logic Colloquium '77, North-Holland, 1978, 199–209.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 2(a), and the bibliographical remarks to Chapter I.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lectures 2 and 3.
 - T. A. Slaman, *Σₙ-bounding and Δₙ-induction*, Proceedings of the American Mathematical Society 132 (2004), 2449–2456.
 - Z. Adamowicz, L. A. Kołodziejczyk and J. Paris, *Truth definitions without exponentiation and the Σ₁ collection scheme*, Journal of Symbolic Logic 77 (2012), 649–655.
+
+:::::exercises
+::::exercise{#ex-standard-part-not-coded difficulty=1 objective="Show that the standard part of a non-standard model is not piecewise coded, by a least upper bound argument."}
+Let $M$ be a non-standard model of $\mathrm I\Delta_0 + \mathrm{exp}$. Show that the standard part of $M$ is not piecewise coded. Deduce with :ref{#thm-friedman-coded} that, if $M \models \mathrm I\Sigma_n$, the standard part is not $\Sigma_n$-definable in $M$.
+
+:::solution
+Let $a$ be non-standard, and suppose that $c$ satisfies $\forall x < a\ (x \in c \leftrightarrow x \in \nat)$. The bounded formula $\forall x < a\ (x \in c \rightarrow x \leq u)$, with parameters $a$ and $c$, holds at $u = a$; let $u$ be the least element satisfying it (:ref{#prop-idelta0-basic}). If $u$ is standard, then $u + 1$ is standard and below $a$, so $u + 1 \in c$ and $u + 1 \leq u$, which is false. If $u$ is non-standard, then $u = u' + 1$ with $u'$ non-standard (:ref{#ex-pam-predecessors}); every $x < a$ in $c$ is standard, hence at most $u'$, and $u'$ contradicts the minimality of $u$.
+
+If $M \models \mathrm I\Sigma_n$, every $\Sigma_n$-definable set is piecewise coded by :ref{#thm-friedman-coded}, so the standard part is not $\Sigma_n$-definable. This also follows from :ref{#prop-cuts-induction}, the standard part being a proper cut; the argument above shows more, since it applies to the standard part whether or not it is definable.
+:::
+::::
+
+::::exercise{#ex-piecewise-boolean difficulty=1 objective="Check that piecewise coded sets form a Boolean algebra, and extend Friedman's theorem to Boolean combinations of $\Sigma_n$ sets."}
+Let $M$ be a model of $\mathrm I\Delta_0 + \mathrm{exp}$. Show that the piecewise coded subsets of $M$ are closed under complement, union and intersection. Deduce that if $M \models \mathrm I\Sigma_n$, every Boolean combination of $\Sigma_n$-definable sets, in particular every $\Pi_n$-definable set, is piecewise coded.
+
+:::solution
+Let $S$ and $T$ be piecewise coded and $a \in M$, with $c$ and $d$ coding $S \cap [0, a)$ and $T \cap [0, a)$ below $a$. By :ref{#thm-delta0-comprehension}, applied to the bounded formulas $i \notin c$, $i \in c \vee i \in d$ and $i \in c \wedge i \in d$ with parameters $c$ and $d$, there are codes of $[0, a) \setminus S$, $(S \cup T) \cap [0, a)$ and $(S \cap T) \cap [0, a)$ below $a$. If $M \models \mathrm I\Sigma_n$, every $\Sigma_n$-definable set is piecewise coded by :ref{#thm-friedman-coded}, and so is every Boolean combination of them; a $\Pi_n$-definable set is the complement of a $\Sigma_n$-definable one.
+:::
+::::
+
+::::exercise{#ex-friedman-largest-code difficulty=2 objective="Give a dual proof of Friedman's theorem by the largest code contained in a $\Sigma_n$ set, and see that it uses collection." lessons="definable-cuts"}
+Let $n \geq 1$ and $M \models \mathrm I\Delta_0 + \mathrm{exp} + \mathrm I\Sigma_n$. Let $\theta(x)$ be $\Sigma_n$ with parameters, $a \in M$ and $e = 2^a$. Show that there is a greatest $c < e$ such that every element of $c$ below $a$ satisfies $\theta$, and that this $c$ codes $\{ x < a : \theta(x) \}$ below $a$. Where is collection used?
+
+:::solution
+Let $\psi(c) \equiv c < e \wedge \forall x < a\ (x \notin c \vee \theta(x))$. A bounded universal quantifier stands in front of a $\Sigma_n$ formula, so $\psi$ is $\Sigma_n$ in $M$ by :ref{#lem-fo-collection-closure}, since $M \models \mathrm B\Sigma_n$ by :ref{#thm-fo-parsons}. Let $\upsilon(u) \equiv \forall c < e\ (\neg \psi(c) \vee c \leq u)$, a bounded universal quantifier in front of a $\Pi_n$ formula, hence $\Pi_n$. It holds at $u = e$. By $\mathrm L\Pi_n$ (:ref{#prop-fo-least-number}), there is a least $u$ with $\upsilon(u)$; and $u < e$, since $\upsilon(e - 1)$ holds. We show $\psi(u)$. The code $0$ satisfies $\psi$, so $\psi(u)$ holds if $u = 0$. Otherwise $u = u' + 1$; if $\neg \psi(u)$, every $c < e$ with $\psi(c)$ satisfies $c \leq u$ and $c \neq u$, hence $c \leq u'$, so $\upsilon(u')$, contradicting minimality. So $c_0 = u$ is the greatest $c < e$ with $\psi(c)$.
+
+Suppose that some $x < a$ satisfies $\theta$ and $x \notin c_0$. By :ref{#lem-ack-basic} (item 4), $c_0 + 2^x$ codes the elements of $c_0$ together with $x$; they are all below $a$, so $c_0 + 2^x < e$ by item 3. Then $\psi(c_0 + 2^x)$ and $c_0 + 2^x > c_0$, a contradiction. So $c_0$ codes $\{ x < a : \theta(x) \}$ below $a$.
+
+Collection is used to see that $\psi$ is $\Sigma_n$. The proof of :ref{#thm-friedman-coded} avoids it: the property "$c$ contains the set" is $\Pi_n$ logically.
+:::
+::::
+
+::::exercise{#ex-sigma1-function-sequence difficulty=2 objective="Combine collection, Friedman's theorem and the coding of sequences to list the values of a $\Sigma_1$-definable function in a coded sequence." lessons="coding"}
+Let $M \models \mathrm I\Sigma_1$, and $\gamma(x, y)$ a $\Sigma_1$ formula with parameters such that $M \models \forall x\ \exists! y\ \gamma(x, y)$; write $F(x)$ for the unique $y$. Show that for every $a \in M$ there is a sequence $s$ of length $a$ with $(s)_i = F(i)$ for every $i < a$.
+
+:::solution
+$M$ satisfies $\mathrm{exp}$ by :ref{#prop-isigma1-exp}, so coded sets and sequences are available, and $\mathrm B\Sigma_1$ by :ref{#thm-fo-parsons}. Collection, applied to $\forall x < a\ \exists y\ \gamma(x, y)$, gives $b$ with $F(x) < b$ for every $x < a$. Let $S$ be the set of $z$ such that $\exists i < a\ \exists v < b\ (z = \langle i, v \rangle \wedge \gamma(i, v))$; it is $\Sigma_1$-definable, bounded existential quantifiers in front of a $\Sigma_1$ formula giving a $\Sigma_1$ formula. Its elements are the pairs $\langle i, F(i) \rangle$ with $i < a$, all below $d = \langle a, b \rangle$ by the monotonicity of pairing (:ref{#fact-pairing}). By :ref{#thm-friedman-coded}, some $c$ codes $S$ below $d$, and by :ref{#thm-delta0-comprehension} applied to the formula $z \in c$, some $s < 2^d$ codes $S \cap [0, d) = S$ exactly.
+
+We check :ref{#def-coded-sequence} for $s$ and $\ell = a$. Every element of $s$ is a pair $\langle i, F(i) \rangle$ with $i < a$. For every $i < a$, $\langle i, F(i) \rangle \in s$, and $F(i) \leq \langle i, F(i) \rangle < s$ by :ref{#lem-ack-basic} (item 1). If $\langle i, v \rangle$ and $\langle i, v' \rangle$ belong to $s$, then $\gamma(i, v)$ and $\gamma(i, v')$, so $v = v'$. Hence $\mathrm{Seq}(s, a)$ and $(s)_i = F(i)$.
+:::
+::::
+:::::

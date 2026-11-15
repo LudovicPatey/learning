@@ -116,7 +116,7 @@ On the other hand, there are models of $\mathrm{PA}$ all of whose elementary end
 
 ## Exercises
 
-::::exercise{#ex-ee-cod-def difficulty=2}
+::::exercise{#ex-ee-cod-def difficulty=2 objective="Characterize conservative elementary end extensions by the sets they code."}
 Let $K$ be a proper elementary end extension of $M$. Show that $\mathrm{Def}(M) \cap \mathcal P(M) \subseteq \mathrm{Cod}(K/M)$, and that $K$ is conservative if and only if $\mathrm{Cod}(K/M) \subseteq \mathrm{Def}(M)$.
 
 :::solution
@@ -124,7 +124,7 @@ Let $S \subseteq M$ be defined by $\theta(x, \bar m)$, and $b \in K \setminus M$
 :::
 ::::
 
-::::exercise{#ex-ee-unbounded-nonrealized difficulty=1}
+::::exercise{#ex-ee-unbounded-nonrealized difficulty=1 objective="Combine the two propositions of the lesson to show that a bounded type not realized in $M$ is not definable."}
 Show that a complete $M$-type $p(v)$ that is not realized in $M$ and contains a formula $v < b$ with $b \in M$ is not definable.
 
 :::solution
@@ -141,3 +141,59 @@ Definable types were introduced by Gaifman (1976) in the study of models of $\ma
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 9.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 1(b).
 - R. Kossak and J. H. Schmerl, *The Structure of Models of Peano Arithmetic*, Oxford Logic Guides 50, Clarendon Press, 2006.
+
+:::::exercises
+::::exercise{#ex-ee-type-ultrafilter difficulty=1 objective="Identify complete types with ultrafilters on the algebra of definable sets."}
+Let $M \models \mathrm{PA}$ and let $p(\bar v)$ be a complete $M$-type in $k$ variables.
+
+1. Show that if $\theta \in p$ and $M \models \forall \bar v\ (\theta(\bar v) \rightarrow \varphi(\bar v))$, then $\varphi \in p$, and that $p$ is closed under conjunction.
+2. Show that $\mathcal U_p = \{ \varphi(M) : \varphi \in p \}$, where $\varphi(M) = \{ \bar a \in M^k : M \models \varphi(\bar a) \}$, is an ultrafilter of the Boolean algebra of definable subsets of $M^k$, and that $p \mapsto \mathcal U_p$ is a bijection between complete $M$-types in $k$ variables and these ultrafilters.
+
+:::solution
+1. If $\varphi \notin p$, then $\neg \varphi \in p$ by completeness, and the finite subset $\{ \theta, \neg \varphi \}$ is not satisfied in $M$. If $\theta, \varphi \in p$ and $\theta \wedge \varphi \notin p$, then $\neg(\theta \wedge \varphi) \in p$, and $\{ \theta, \varphi, \neg(\theta \wedge \varphi) \}$ is not satisfied.
+2. If $\varphi(M) \subseteq \psi(M)$ with $\varphi \in p$, then $M \models \forall \bar v\ (\varphi \rightarrow \psi)$, so $\psi \in p$; in particular membership of a set in $\mathcal U_p$ does not depend on the formula chosen to define it. By item 1, $\mathcal U_p$ is closed under finite intersections; it does not contain $\emptyset$, since every formula of $p$ is satisfied in $M$; and for every definable set $\varphi(M)$, $\varphi \in p$ or $\neg\varphi \in p$, so $\varphi(M)$ or its complement is in $\mathcal U_p$. So $\mathcal U_p$ is an ultrafilter. If $p \neq p'$, some $\varphi \in p$ has $\neg \varphi \in p'$, so $\varphi(M) \in \mathcal U_p \setminus \mathcal U_{p'}$. Given an ultrafilter $\mathcal U$, the set $\{ \varphi : \varphi(M) \in \mathcal U \}$ is finitely satisfied, since finite intersections of members of $\mathcal U$ are non-empty, and contains $\varphi$ or $\neg \varphi$ for each $\varphi$; it is a complete type $p$ with $\mathcal U_p = \mathcal U$.
+:::
+::::
+
+::::exercise{#ex-ee-bounded-type-cofinal difficulty=2 objective="Use a bounded type that is not realized to build a proper cofinal elementary extension, and see that it exists only over non-standard models."}
+Let $M \models \mathrm{PA}$.
+
+1. Suppose that $M$ is non-standard and $b \in M$ is non-standard. Show that there is a complete $M$-type $p(v)$ containing $v < b$ and not realized in $M$.
+2. For such $p$, show that $M(p)$ is a proper elementary extension of $M$ in which every element is below some element of $M$.
+3. Show that for $M = \nat$, every complete $\nat$-type that contains a formula $v < b$ is realized in $\nat$.
+
+:::solution
+1. The set $\{ v < b \} \cup \{ v \neq a : a \in M \}$ is finitely satisfied in $M$: finitely many conditions $v \neq a_1, \dots, v \neq a_r$ exclude $r$ elements, and there are infinitely many elements below $b$, all the standard numbers. By compactness, it is realized by some $d$ in an elementary extension of $M$, and $p = \mathrm{tp}(d / M)$ contains $v < b$ and $v \neq a$ for each $a \in M$.
+2. $M(p) = M(p / d) \succcurlyeq M$ by :ref{#lem-ee-mp}, and $d \notin M$. Let $f(d)$ be an element of $M(p)$, with $f$ definable in $M$ (:ref{#lem-ee-mp}). Since $M \models \forall x < b\ \exists y\ (y = f(x))$, collection, which holds in $M$ (:ref{#thm-fo-parsons}), gives $m \in M$ with $M \models \forall x < b\ (f(x) < m)$. This sentence holds in $M(p)$, and $d < b$, so $f(d) < m$.
+3. Let $b = k \in \nat$. Then $\nat \models \forall v\ (v < \bar k \rightarrow \bigvee_{j < k} v = \bar j)$, so the disjunction belongs to $p$ by item 1 of :ref{#ex-ee-type-ultrafilter}. If $v \neq \bar j$ were in $p$ for every $j < k$, the finite set formed by these formulas and the disjunction would not be satisfied in $\nat$. So $v = \bar j \in p$ for some $j$, and $j$ realizes $p$. This agrees with :ref{#prop-standard-part}: every elementary extension of $\nat$ is an end extension.
+:::
+::::
+
+::::exercise{#ex-ee-mp-cardinality difficulty=1 objective="Count the elements of the extension generated by a realization."}
+Let $M \models \mathrm{PA}$ and $p$ a complete $M$-type. Show that $|M(p)| = |M|$.
+
+:::solution
+$M \subseteq M(p)$, and $M$ is infinite. By :ref{#lem-ee-mp}, every element of $M(p)$ is $f(\bar d)$ for a function $f$ definable in $M$ with parameters, given by a formula of $\mathcal L_A$ and a finite tuple of parameters. There are $\aleph_0 \cdot |M| = |M|$ such pairs, so $|M(p)| \leq |M|$.
+:::
+::::
+
+::::exercise{#ex-ee-conservative-chain difficulty=1 objective="Check that conservativity is transitive and passes to elementary substructures."}
+Let $M \subseteq K \subseteq N$ be $\mathcal L_A$-structures.
+
+1. Show that if $M \subseteq K$ and $K \subseteq N$ are conservative, so is $M \subseteq N$.
+2. Show that if $M \subseteq N$ is conservative and $K \preccurlyeq N$, then $M \subseteq K$ is conservative.
+
+:::solution
+1. Let $X \in \mathrm{Def}(N)$, $X \subseteq N^k$. Then $X \cap K^k \in \mathrm{Def}(K)$, so $X \cap M^k = (X \cap K^k) \cap M^k \in \mathrm{Def}(M)$.
+2. Let $X \subseteq K^k$ be defined in $K$ by $\theta(\bar z, \bar b)$, $\bar b \in K$, and let $X'$ be the set defined in $N$ by the same formula. Since $K \preccurlyeq N$, $X' \cap K^k = X$, so $X \cap M^k = X' \cap M^k \in \mathrm{Def}(M)$.
+:::
+::::
+
+::::exercise{#ex-ee-ssy-conservative-standard difficulty=1 objective="Compute the standard system of a conservative elementary extension of the standard model, and contrast it with the types coding a set."}
+Let $K$ be a proper elementary extension of $\nat$. Show that if $K$ is conservative, $\mathrm{SSy}(K)$ is the set of arithmetic sets. Compare with :ref{#ex-ee-coding-type}.
+
+:::solution
+$K$ is non-standard, since it is a proper end extension of $\nat$ (:ref{#prop-standard-part}). If $D \subseteq \nat$ is arithmetic, defined by $\theta(x)$, let $b \in K$ be non-standard; since $K \models \mathrm{PA}$, some $c \in K$ codes $\{ x < b : \theta(x) \}$ (:ref{#thm-friedman-coded}), and for $k \in \nat$, $k < b$ and $K \models \theta(k)$ if and only if $k \in D$, by elementarity. So $D = \mathrm{Ack}(c) \cap \nat \in \mathrm{SSy}(K)$. Conversely, for $c \in K$, $\mathrm{Ack}(c) \cap \nat$ is the trace on $\nat$ of a set definable in $K$, hence definable in $\nat$ by conservativity, that is, arithmetic (:ref{#thm-definable-arithmetic}). In :ref{#ex-ee-coding-type}, $\mathrm{SSy}(\nat(p_X))$ contains the non-arithmetic set $X$, which shows again that $\nat(p_X)$ is not conservative.
+:::
+::::
+:::::

@@ -1,7 +1,7 @@
 ---
 title: Weihrauch reducibility
 summary: Uniform computable reductions; problems that uniformly admit computable solutions, and the pigeonhole principle as a problem that admits computable solutions but not uniformly; continuity arguments; the omniscience principles LPO and LLPO.
-duration: 45
+duration: 40
 prerequisites: [wkl-reductions]
 ---
 
@@ -100,11 +100,11 @@ Let $\Phi^p = p$, and let $\Psi^{p \oplus i}$ output $0$ if $i = 0$; if $i = 1$,
 Suppose that $\Phi^p$ is a solution for every instance $p$. Let $i = \Phi^{0^\infty}(0)$, the bit that determines the solution, and $u$ the use of this computation. Let $p_0$ and $p_1$ be the sequences with a single $1$, at positions $2u$ and $2u + 1$ respectively. Both agree with $0^\infty$ below $u$, so $\Phi^{p_0}(0) = \Phi^{p_1}(0) = i$, and $\Phi^{p_0}$ and $\Phi^{p_1}$ both code the solution $i$. But the only solution to $p_0$ is $1$, and the only solution to $p_1$ is $0$.
 :::
 
-The backward functional of the first part uses the instance: it searches $p$ for its $1$. The first exercise gives a strong reduction. The converse reduction fails, $\mathsf{LPO} \not\leq_W \mathsf{LLPO}$; the third exercise proves it by a continuity argument, and the next lesson derives it from the separation of the jump from weak König's lemma.
+The backward functional of the first part uses the instance: it searches $p$ for its $1$. A strong reduction is given in :ref{#ex-llpo-sw-lpo}. The converse reduction fails, $\mathsf{LPO} \not\leq_W \mathsf{LLPO}$; a continuity argument proves it in :ref{#ex-lpo-not-w-llpo}, and the next lesson derives it from the separation of the jump from weak König's lemma.
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-llpo-sw-lpo difficulty=1 objective="Build a strong Weihrauch reduction by moving the search into the forward functional."}
 Show that $\mathsf{LLPO} \leq_{sW} \mathsf{LPO}$.
 
 :::solution
@@ -112,15 +112,7 @@ Let $\Phi^p$ be the sequence $q$ with $q(n) = 1$ if $p(2m) = 1$ for some $2m \le
 :::
 ::::
 
-::::exercise{difficulty=1}
-Let $\mathsf{KL}_b$ be the bounded version of König's lemma of the last exercise of :ref{to="reducibilities/computable-reducibility"}, whose instances are pairs $(T, h)$ of an infinite finitely branching tree and a bound on its successors. Show that $\mathsf{KL}_b \leq_W \mathsf J$.
-
-:::solution
-Let $\Phi^{T \oplus h} = T \oplus h$. Whether a node $\sigma$ has an extension in $T$ of length $|\sigma| + n$ is decided by inspecting the finitely many strings of that length extending $\sigma$ whose values are bounded by $h$; so the set of extendible nodes is $\Pi^0_1(T \oplus h)$, with an index independent of $T$ and $h$, and it is computable in $(T \oplus h)'$, uniformly. Let $\Psi$ compute from $(T \oplus h)'$ the path that starts at the root, which is extendible, and always moves to the least extendible successor. The search for that successor terminates, since an extendible node has an extendible successor.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-lpo-not-w-llpo difficulty=2 objective="Separate the omniscience principles by a continuity argument against an arbitrary pair of functionals."}
 Show directly that $\mathsf{LPO} \not\leq_W \mathsf{LLPO}$. Suppose that $\Phi$ and $\Psi$ witness the reduction, and let $q = \Phi^{0^\infty}$. Consider separately the case where $q$ has no $1$ and the case where it has one.
 
 :::solution
@@ -141,3 +133,87 @@ Weihrauch reducibility was introduced by Weihrauch in the late 1980s, in two tec
 - V. Brattka and T. Rakotoniaina, *On the uniform computational content of Ramsey's theorem*, Journal of Symbolic Logic 82 (2017), 1278–1316.
 - D. R. Hirschfeldt and C. G. Jockusch, *On notions of computability-theoretic reduction between Π¹₂ principles*, Journal of Mathematical Logic 16 (2016), 1650002.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.7, 4.3 and 4.4.
+
+:::::exercises
+::::exercise{#ex-klb-w-j difficulty=1 objective="Check that the computable reduction of bounded König's lemma to the jump is uniform."}
+Let $\mathsf{KL}_b$ be the bounded version of König's lemma of :ref{#ex-kl-bounded}, whose instances are pairs $(T, h)$ of an infinite finitely branching tree and a bound on its successors. Show that $\mathsf{KL}_b \leq_W \mathsf J$.
+
+:::solution
+Let $\Phi^{T \oplus h} = T \oplus h$. Whether a node $\sigma$ has an extension in $T$ of length $|\sigma| + n$ is decided by inspecting the finitely many strings of that length extending $\sigma$ whose values are bounded by $h$; so the set of extendible nodes is $\Pi^0_1(T \oplus h)$, with an index independent of $T$ and $h$, and it is computable in $(T \oplus h)'$, uniformly. Let $\Psi$ compute from $(T \oplus h)'$ the path that starts at the root, which is extendible, and always moves to the least extendible successor. The search for that successor terminates, since an extendible node has an extendible successor.
+:::
+::::
+
+::::exercise{#ex-w-transitive difficulty=1 objective="Compose Weihrauch reductions by composing their functionals."}
+Show that $\leq_W$ and $\leq_{sW}$ are transitive, by writing the forward and backward functionals of the composed reduction.
+
+:::solution
+Let $\mathsf P \leq_W \mathsf Q$ via $\Phi_1, \Psi_1$ and $\mathsf Q \leq_W \mathsf R$ via $\Phi_2, \Psi_2$. Let $\Phi^X = \Phi_2^{\Phi_1^X}$ and $\Psi^{X \oplus \widehat Y} = \Psi_1^{X \oplus \Psi_2^{\Phi_1^X \oplus \widehat Y}}$; both are Turing functionals, since the oracle of each inner computation is computed uniformly from the given oracle. For an instance $X$ of $\mathsf P$, $\Phi_1^X$ is an instance of $\mathsf Q$, and $\Phi^X$ an instance of $\mathsf R$. If $\widehat Y$ is a solution to $\Phi^X$, then $\Psi_2^{\Phi_1^X \oplus \widehat Y}$ is a solution to $\Phi_1^X$, and $\Psi^{X \oplus \widehat Y}$ a solution to $X$. For strong reductions, take $\Psi^{\widehat Y} = \Psi_1^{\Psi_2^{\widehat Y}}$, with the same verification.
+:::
+::::
+
+::::exercise{#ex-llpo-two-sequences difficulty=1 objective="Check that LLPO can be presented as a choice between two sequences, by strong Weihrauch reductions in both directions."}
+Let $\mathsf{LLPO}'$ be the problem whose instances are the pairs $p_0 \oplus p_1$ of sequences in $\{0, 1\}^\nat$, at most one of which contains a $1$, the solutions being the $i < 2$ such that $p_i = 0^\infty$. Show that $\mathsf{LLPO}' \equiv_{sW} \mathsf{LLPO}$.
+
+:::solution
+($\mathsf{LLPO} \leq_{sW} \mathsf{LLPO}'$) Given $p$, let $p_i(m) = p(2m + i)$. Since $p$ has at most one $1$, at most one of $p_0, p_1$ contains a $1$. The solutions to $p_0 \oplus p_1$ are the $i$ with $p(2m + i) = 0$ for all $m$, which are the solutions to $p$. The backward functional is the identity.
+
+($\mathsf{LLPO}' \leq_{sW} \mathsf{LLPO}$) Given $p_0 \oplus p_1$, let $p(2m + i) = 1$ if $p_i(m) = 1$ and $p_i(m') = 0$ for all $m' < m$, and $p(2m + i) = 0$ otherwise. At most one $p_i$ contains a $1$, and $p$ records only its first $1$, so $p$ has at most one $1$ and is an instance of $\mathsf{LLPO}$. If $p_i = 0^\infty$, then $p(2m + i) = 0$ for all $m$. If $p_i$ contains a $1$, at a least position $m$, then $p(2m + i) = 1$. So the solutions to $p$ are those to $p_0 \oplus p_1$, and the backward functional is again the identity.
+:::
+::::
+
+::::exercise{#ex-rt12-sw-rt22 difficulty=1 objective="Reduce the pigeonhole principle to Ramsey's theorem for pairs uniformly, coding a coloring of points as a coloring of pairs." lessons="computable-reducibility"}
+Show that $\mathsf{RT}^1_2 \leq_{sW} \mathsf{RT}^2_2$, hence $\mathsf{RT}^1_2 \leq_{sc} \mathsf{RT}^2_2$.
+
+:::solution
+Given $f : \nat \to 2$, let $\Phi^f$ be the coloring $g(\{ x, y \}) = f(x)$ for $x < y$. Let $H$ be an infinite homogeneous set for $g$, with color $c$. For every $x \in H$, there is $y \in H$ with $y > x$, since $H$ is infinite, and $f(x) = g(\{ x, y \}) = c$. So $H$ is homogeneous for $f$, and $\Psi^H = H$ works, without access to $f$. A strong Weihrauch reduction is a strong computable reduction.
+:::
+::::
+
+::::exercise{#ex-rt1-unbounded-w difficulty=1 objective="See how the presentation of the number of colors affects Weihrauch reducibility but not computable reducibility."}
+Show that $\mathsf{RT}^1_k \leq_{sW} \mathsf{RT}^1_{<\infty}$ and $\mathsf{RT}^1_{<\infty} \leq_c \mathsf{RT}^1_k$ for every $k \geq 1$. Admitting that $\mathsf{RT}^1_{k+1} \not\leq_W \mathsf{RT}^1_k$, show that $\mathsf{RT}^1_{<\infty} \not\leq_W \mathsf{RT}^1_k$ for every $k$.
+
+:::solution
+Given $f : \nat \to k$, the forward functional outputs the pair $(k, f)$, and the backward functional is the identity: the solutions to both instances are the infinite homogeneous sets for $f$.
+
+$\mathsf{RT}^1_{<\infty}$ admits computable solutions, so $\mathsf{RT}^1_{<\infty} \leq_c \mathsf{Id}$ (:ref{#prop-c-omega}). $\mathsf{RT}^1_k$ has a computable instance, the constant coloring $0$, so $\mathsf{Id} \leq_c \mathsf{RT}^1_k$, and $\mathsf{RT}^1_{<\infty} \leq_c \mathsf{RT}^1_k$ by transitivity (:ref{#ex-c-transitive}).
+
+If $\mathsf{RT}^1_{<\infty} \leq_W \mathsf{RT}^1_k$, then $\mathsf{RT}^1_{k+1} \leq_{sW} \mathsf{RT}^1_{<\infty} \leq_W \mathsf{RT}^1_k$, and $\mathsf{RT}^1_{k+1} \leq_W \mathsf{RT}^1_k$ by :ref{#ex-w-transitive}, a contradiction.
+:::
+::::
+
+::::exercise{#ex-bound-not-uniform difficulty=1 objective="Apply a continuity argument to the problem of finding a bound for a function with finite range."}
+Let $\mathsf B$ be the problem whose instances are the functions $f : \nat \to \nat$ with finite range, the solutions to $f$ being the numbers $k$ with $f(x) < k$ for every $x$. Show that $\mathsf B$ admits computable solutions, but not uniformly.
+
+:::solution
+Every $k$ above the maximum of the finite range is a solution, and a number is computable. Suppose that $\Phi^f$ codes a solution for every instance $f$. Let $f_0$ be the constant function $0$, $k_0$ the solution coded by $\Phi^{f_0}$, and $u$ the use of the computation of the code of $k_0$ from $f_0$ (finitely many bits of the output suffice to determine it). Let $f_1(x) = 0$ for $x < u$ and $f_1(x) = k_0$ for $x \geq u$. It has finite range, and agrees with $f_0$ below $u$, so $\Phi^{f_1}$ codes $k_0$. But $f_1(u) = k_0$, so $k_0$ is not a solution to $f_1$.
+
+Adapted from Dzhafarov and Mummert, Exercise 3.9.2.
+:::
+::::
+
+::::exercise[Two questions to LPO]{#ex-lpo-product difficulty=2 objective="Show by a continuity argument that two parallel questions to LPO cannot be answered by one."}
+Show that $\mathsf{LPO} \times \mathsf{LPO} \not\leq_W \mathsf{LPO}$, where the product has as instances the pairs $p_0 \oplus p_1$ of sequences and as solution the pair of the solutions to $p_0$ and $p_1$. Compare with $\mathsf J \times \mathsf J \leq_W \mathsf J$.
+
+:::solution
+Suppose $\Phi$ and $\Psi$ witness the reduction. For an instance $x$, let $b(x)$ be the solution to the instance $\Phi^x$ of $\mathsf{LPO}$; $\Psi^{x \oplus b(x)}$ must code the pair of solutions to $x$, and only finitely many bits of it determine this pair. Let $z = 0^\infty \oplus 0^\infty$, with solution $(0, 0)$, and $u$ a number such that the computation of these bits by $\Psi^{z \oplus b(z)}$ reads only $z \uh u$ and $b(z)$. For $m \in \nat$, let $e_m$ be the sequence with a single $1$, at position $m$.
+
+Case $b(z) = 1$. Then $\Phi^z(n) = 1$ for some $n$; let $v$ be such that this computation reads only $z \uh v$, and $m \geq \max(u, v)$. The instance $x = e_m \oplus 0^\infty$ agrees with $z$ below $2m \geq \max(u, v)$, so $\Phi^x(n) = 1$, $b(x) = 1$, and $\Psi^{x \oplus 1}$ codes $(0, 0)$, as $\Psi^{z \oplus 1}$ does. But the solution to $x$ is $(1, 0)$.
+
+Case $b(z) = 0$. Let $m \geq u$ and $x_1 = e_m \oplus 0^\infty$, with solution $(1, 0)$. If $b(x_1) = 0$, then $\Psi^{x_1 \oplus 0}$ codes $(0, 0)$, as $\Psi^{z \oplus 0}$ does, since $x_1$ agrees with $z$ below $2m \geq u$: a contradiction. So $b(x_1) = 1$: $\Phi^{x_1}(n) = 1$ for some $n$, by a computation reading only $x_1 \uh v$, and $\Psi^{x_1 \oplus 1}$ codes $(1, 0)$, by computations reading only $x_1 \uh w$ and the bit $1$. Let $m' \geq \max(m + 1, v, w)$ and $x_2 = e_m \oplus e_{m'}$, with solution $(1, 1)$. It agrees with $x_1$ below $2m' + 1 > \max(v, w)$, so $b(x_2) = 1$, and $\Psi^{x_2 \oplus 1}$ codes $(1, 0)$: a contradiction.
+
+For the jump, $(X_0 \oplus X_1)'$ computes $X_0' \oplus X_1'$ uniformly. The difference is that a solution to $\mathsf{LPO}$ carries one bit, and the argument shows that one bit, read after a finite part of the instance, cannot answer two independent questions.
+:::
+::::
+
+::::exercise[Joins and meets]{#ex-w-join-meet difficulty=1 objective="Construct the least upper bound and the greatest lower bound of two problems under Weihrauch reducibility."}
+For problems $\mathsf P$ and $\mathsf Q$, let $\mathsf P \sqcup \mathsf Q$ have as instances the pairs $(0, X)$ with $X$ an instance of $\mathsf P$ and $(1, V)$ with $V$ an instance of $\mathsf Q$, the solutions being the solutions to $X$, respectively $V$. Let $\mathsf P \sqcap \mathsf Q$ have as instances the sets $X \oplus V$ with $X$ an instance of $\mathsf P$ and $V$ an instance of $\mathsf Q$, the solutions being the pairs $(0, Y)$ with $Y$ a solution to $X$ and $(1, W)$ with $W$ a solution to $V$. Show that $\mathsf P \sqcup \mathsf Q$ is a least upper bound of $\mathsf P$ and $\mathsf Q$ for $\leq_W$, and $\mathsf P \sqcap \mathsf Q$ a greatest lower bound.
+
+:::solution
+($\sqcup$) $\mathsf P \leq_W \mathsf P \sqcup \mathsf Q$ via $X \mapsto (0, X)$ and the identity on solutions; similarly for $\mathsf Q$. If $\mathsf P \leq_W \mathsf R$ via $\Phi_0, \Psi_0$ and $\mathsf Q \leq_W \mathsf R$ via $\Phi_1, \Psi_1$, let $\Phi^{(i, X)} = \Phi_i^X$ and $\Psi^{(i, X) \oplus \widetilde Y} = \Psi_i^{X \oplus \widetilde Y}$; the functionals read $i$ from the instance. Then $\mathsf P \sqcup \mathsf Q \leq_W \mathsf R$.
+
+($\sqcap$) $\mathsf P \sqcap \mathsf Q \leq_W \mathsf P$ via $X \oplus V \mapsto X$ and $Y \mapsto (0, Y)$; similarly for $\mathsf Q$. If $\mathsf R \leq_W \mathsf P$ via $\Phi_0, \Psi_0$ and $\mathsf R \leq_W \mathsf Q$ via $\Phi_1, \Psi_1$, let $\Phi^Z = \Phi_0^Z \oplus \Phi_1^Z$, an instance of $\mathsf P \sqcap \mathsf Q$, and $\Psi^{Z \oplus (i, Y)} = \Psi_i^{Z \oplus Y}$. A solution $(i, Y)$ is a solution $Y$ to $\Phi_i^Z$, so the output is a solution to $Z$. Then $\mathsf R \leq_W \mathsf P \sqcap \mathsf Q$.
+
+Adapted from Dzhafarov and Mummert, Exercise 4.8.11, which also treats computable reducibility; the operations are due to Pauly and to Brattka and Gherardi.
+:::
+::::
+:::::

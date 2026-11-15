@@ -53,7 +53,7 @@ We prove both directions by contraposition.
 
 The two directions use the two techniques of effective measure theory met in the course on Martin-Löf randomness: **averaging**, through Fubini's theorem, to merge a uniform family of relative tests into one test; and a **Solovay test** to discard the bad oracles, a step that needs the hypothesis that $A$ is random.
 
-The statement of the theorem is not symmetric in $A$ and $B$, but its consequences are: $A \oplus B$ is random if and only if $B \oplus A$ is (second exercise below), so $A$ is random and $B$ is $A$-random if and only if $B$ is random and $A$ is $B$-random. Two sequences $A$ and $B$ with this property, that is, such that $A \oplus B$ is random, are called **mutually random**.
+The statement of the theorem is not symmetric in $A$ and $B$, but its consequences are: $A \oplus B$ is random if and only if $B \oplus A$ is (:ref{#ex-mutual-symmetry}), so $A$ is random and $B$ is $A$-random if and only if $B$ is random and $A$ is $B$-random. Two sequences $A$ and $B$ with this property, that is, such that $A \oplus B$ is random, are called **mutually random**.
 
 :::quiz[van Lambalgen's theorem]
 In the direction ($\Leftarrow$) of :ref{#thm-van-lambalgen}, why is the randomness of $A$ needed?
@@ -78,6 +78,14 @@ Why is $\mathcal U_{2n}$ used to define $\mathcal V^X_n$, rather than $\mathcal 
 
   Monotonicity is not used.
 :::
+
+::::exercise{#ex-mutual-symmetry difficulty=1 objective="Derive the symmetric form of van Lambalgen's theorem from the measure-preserving exchange of the two halves."}
+Show that if $A$ is random and $B$ is random relative to $A$, then $B$ is random and $A$ is random relative to $B$.
+
+:::solution
+By :ref{#thm-van-lambalgen}, $A \oplus B$ is random. The map $X \oplus Y \mapsto Y \oplus X$ is computable and preserves the measure, so it maps Martin-Löf tests to Martin-Löf tests; hence $B \oplus A$ is random. By :ref{#thm-van-lambalgen} again, $B$ is random and $A$ is random relative to $B$.
+:::
+::::
 
 The proof relativizes to any oracle $Z$: $A \oplus B$ is $Z$-random if and only if $A$ is $Z$-random and $B$ is $(A \oplus Z)$-random. For $Z = \emptyset^{(n-1)}$, this is van Lambalgen's theorem for $n$-randomness, where "$B$ is $n$-random relative to $A$" means random relative to $A \oplus \emptyset^{(n-1)}$.
 
@@ -107,6 +115,14 @@ In the proof of :ref{#cor-van-lambalgen} (2), why does a 2-random $A$ that compu
   They are not, by :ref{#ex-relative-random} (2), but a sequence that computes $\emptyset'$ need not be $\Delta^0_2$.
 :::
 
+::::exercise{#ex-omega-random-relative difficulty=1 objective="Combine the characterization of 2-randomness by $\Omega$ with van Lambalgen's theorem, and show that $\Omega$ is random relative to almost every sequence."}
+Show that if $A$ is 2-random, then $\Omega$ is random relative to $A$. Deduce that $\Omega$ is random relative to almost every sequence.
+
+:::solution
+By :ref{#cor-van-lambalgen} (2), $A \oplus \Omega$ is random, so $\Omega$ is random relative to $A$ by :ref{#thm-van-lambalgen}. The class of 2-random sequences is conull, since it is the class $\mathrm{MLR}^{\emptyset'}$, so $\Omega$ is random relative to almost every sequence. The same conclusion holds for every random sequence $B$ in place of $\Omega$: if $A$ is random relative to $B$, then $B \oplus A$ is random by :ref{#thm-van-lambalgen}, so $A$ is random and $B$ is random relative to $A$ by :ref{#ex-mutual-symmetry}; and $\mathrm{MLR}^B$ is conull.
+:::
+::::
+
 ## 2-randomness
 
 The 2-random sequences avoid every class captured by a Martin-Löf test relative to $\emptyset'$. They are computationally weaker than arbitrary random sequences: by :ref{#cor-van-lambalgen} (2), a 2-random sequence does not compute $\emptyset'$, whereas $\Omega$ is random and computes it. Two further results, admitted here, show that 2-random sequences behave like generic ones. Every 2-random sequence has hyperimmune degree: this is due to Kurtz (1981), who proved more, that a 2-random sequence is c.e. relative to a set strictly below it, and was proved by Kautz (1991) by another method (Nies, Corollary 3.6.15; Downey–Hirschfeldt, Theorem 8.21.2). And every 2-random sequence $A$ is **generalized low**, $A' \equiv_T A \oplus \emptyset'$ (Kautz 1991; Downey–Hirschfeldt, Theorem 8.14.1). Neither property holds for all random sequences: there are computably dominated random sequences (:ref{#cor-mlr-structure} (3)), and $\Omega' \equiv_T \emptyset''$ is not computable in $\Omega \oplus \emptyset' \equiv_T \emptyset'$.
@@ -114,32 +130,6 @@ The 2-random sequences avoid every class captured by a Martin-Löf test relative
 2-randomness has a characterization by plain complexity: $A$ is 2-random if and only if $C(A \uh n) \geq n - O(1)$ for infinitely many $n$. Nies, Stephan and Terwijn (2005) proved both directions; Miller (2004) had independently proved that every 2-random sequence satisfies this condition (Downey–Hirschfeldt, Theorems 6.11.3 and 6.11.6; Nies, Theorem 3.6.10). For prefix-free complexity, the Levin–Schnorr theorem relativized to $\emptyset'$ characterizes 2-randomness by $K^{\emptyset'}(A \uh n) \geq n - O(1)$; the theorem of Miller and Nies–Stephan–Terwijn removes the oracle at the price of an infinitely-often condition.
 
 The next lesson studies a notion strictly between 2-randomness and Martin-Löf randomness, obtained by keeping the tests of complexity $\Pi^0_2$ but dropping the bound on their measures.
-
-## Exercises
-
-::::exercise{difficulty=1}
-Let $Z$ be random, $Z_0 = \{ n : 2n \in Z \}$ and $Z_1 = \{ n : 2n + 1 \in Z \}$. Show that $Z_0$ and $Z_1$ are random, and Turing incomparable.
-
-:::solution
-$Z = Z_0 \oplus Z_1$. By :ref{#thm-van-lambalgen}, $Z_0$ is random and $Z_1$ is random relative to $Z_0$, hence random. By :ref{#cor-van-lambalgen} (1), they are Turing incomparable.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that if $A$ is random and $B$ is random relative to $A$, then $B$ is random and $A$ is random relative to $B$.
-
-:::solution
-By :ref{#thm-van-lambalgen}, $A \oplus B$ is random. The map $X \oplus Y \mapsto Y \oplus X$ is computable and preserves the measure, so it maps Martin-Löf tests to Martin-Löf tests; hence $B \oplus A$ is random. By :ref{#thm-van-lambalgen} again, $B$ is random and $A$ is random relative to $B$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that if $A$ is 2-random, then $\Omega$ is random relative to $A$. Deduce that $\Omega$ is random relative to almost every sequence.
-
-:::solution
-By :ref{#cor-van-lambalgen} (2), $A \oplus \Omega$ is random; by the previous exercise, $\Omega$ is random relative to $A$. The class of 2-random sequences is conull, since it is the class $\mathrm{MLR}^{\emptyset'}$, so $\Omega$ is random relative to almost every sequence. The same argument applies to every random sequence $B$ in place of $\Omega$, with "random relative to $B$" in place of "2-random".
-:::
-::::
 
 ## Notes and references
 
@@ -154,3 +144,79 @@ Van Lambalgen proved his theorem in his thesis (1987). The proofs given here use
 - K. Miyabe and J. Rute, *Van Lambalgen's theorem for uniformly relative Schnorr and computable randomness*, in Proceedings of the 12th Asian Logic Conference, World Scientific, 2013.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 6.8–6.11, 8.11, 8.14 and 8.21.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 3.6.
+
+:::::exercises
+::::exercise{#ex-random-halves difficulty=1 objective="Apply van Lambalgen's theorem and its corollary to the even and odd halves of a random sequence."}
+Let $Z$ be random, $Z_0 = \{ n : 2n \in Z \}$ and $Z_1 = \{ n : 2n + 1 \in Z \}$. Show that $Z_0$ and $Z_1$ are random, and Turing incomparable.
+
+:::solution
+$Z = Z_0 \oplus Z_1$. By :ref{#thm-van-lambalgen}, $Z_0$ is random and $Z_1$ is random relative to $Z_0$, hence random. By :ref{#cor-van-lambalgen} (1), they are Turing incomparable.
+:::
+::::
+
+::::exercise[The hypotheses of van Lambalgen's theorem]{#ex-vl-hypotheses difficulty=1 objective="See on examples why both conditions of van Lambalgen's theorem are needed, and why the proof discards the oracles with large sections."}
+1. Give sets $A$ and $B$ such that $B$ is random relative to $A$ but $A \oplus B$ is not random. Give random sets $A$ and $B$ such that $A \oplus B$ is not random.
+2. Give a Martin-Löf test $(\mathcal U_n)$ and a sequence $A$ such that the section $(\mathcal U_n)_A = \{ Y : A \oplus Y \in \mathcal U_n \}$ is the whole space for every $n$. Explain why this does not contradict the proof of the direction ($\Leftarrow$) of :ref{#thm-van-lambalgen}.
+
+:::solution
+1. Let $A = \emptyset$ and $B$ random. Since $A$ is computable, $\mathrm{MLR}^A = \mathrm{MLR}$ (:ref{#ex-relative-random} (1)), so $B$ is random relative to $A$. But $A$ is not random, so $A \oplus B$ is not random by :ref{#thm-van-lambalgen}. For the second example, let $A = B$ be random. Then $B \leq_T A$, so $B$ is not random relative to $A$ (:ref{#ex-relative-random} (2)), and $A \oplus A$ is not random by :ref{#thm-van-lambalgen}.
+2. Let $\mathcal U_n = \{ X \oplus Y : 0^n \prec X \}$, generated by the strings $\rho$ of length $2n$ with $\rho(2i) = 0$ for every $i < n$. These classes are uniformly $\Sigma^0_1$, and $\lambda(\mathcal U_n) = 2^n \cdot 2^{-2n} = 2^{-n}$. For $A = \emptyset$, the sequence of zeros, $A \oplus Y \in \mathcal U_n$ for every $Y$ and every $n$, so every section at $A$ is the whole space. This is consistent with the proof: there, the oracles $X$ whose sections are too large form the Solovay test $(\mathcal S_n)$, and the randomness of $A$ is used precisely to ensure that $A$ belongs to finitely many $\mathcal S_n$ only. The sequence $\emptyset$ is computable, hence not random, and it belongs to every $\mathcal S_n$.
+:::
+::::
+
+::::exercise[Columns of a random sequence]{#ex-vl-columns difficulty=2 objective="Transport randomness along a computable permutation of the positions, and apply van Lambalgen's theorem to show that the columns of a random sequence are independent."}
+Fix a computable bijection $(i, n) \mapsto \langle i, n \rangle$ from $\nat^2$ to $\nat$. The $i$-th **column** of a sequence $Z$ is the sequence $Z^{[i]}$ with $Z^{[i]}(n) = Z(\langle i, n \rangle)$. Let $Z$ be random.
+
+1. Let $\pi$ be a computable permutation of $\nat$. Show that the sequence $X \circ \pi$, with $(X \circ \pi)(k) = X(\pi(k))$, is random whenever $X$ is.
+2. Show that no column $Z^{[i]}$ is computable in the join of finitely many other columns. In particular, the columns of $Z$ are random and pairwise Turing incomparable.
+
+:::solution
+1. For a string $\tau$, let $[\tau]_\pi$ be the class of the $X$ with $X(\pi(k)) = \tau(k)$ for $k < |\tau|$. It prescribes $|\tau|$ bits at distinct positions, so it is a clopen class of measure $2^{-|\tau|}$, computable from $\tau$, and $X \circ \pi \in [\tau]$ if and only if $X \in [\tau]_\pi$. Suppose that $X \circ \pi$ is captured by a test $(\mathcal U_n)$, and write $\mathcal U_n = [W_n]^{\prec}$ with $W_n$ c.e. prefix-free, uniformly in $n$ (:ref{#lem-prefix-free-generator}). Let $\mathcal V_n = \bigcup_{\tau \in W_n} [\tau]_\pi$. Two incomparable strings differ at some position $k$ below both lengths, so the classes $[\tau]_\pi$, $\tau \in W_n$, are pairwise disjoint, and $\lambda(\mathcal V_n) = \sum_{\tau \in W_n} 2^{-|\tau|} = \lambda(\mathcal U_n) \leq 2^{-n}$. The classes $\mathcal V_n$ are uniformly $\Sigma^0_1$ and contain $X$, so $X$ is not random.
+2. Fix $i$. The set $C = \nat \setminus \{ \langle i, n \rangle : n \in \nat \}$ is computable and infinite; let $c_0 < c_1 < \cdots$ be its elements. Define $\pi(2k) = c_k$ and $\pi(2k+1) = \langle i, k \rangle$: this is a computable permutation of $\nat$, and $Z \circ \pi = Y \oplus Z^{[i]}$, where $Y(k) = Z(c_k)$. By (1), $Y \oplus Z^{[i]}$ is random, so $Z^{[i]}$ is random relative to $Y$ by :ref{#thm-van-lambalgen}, and in particular random. For $j \neq i$, the column $Z^{[j]}$ is computable in $Y$: to compute $Z^{[j]}(n)$, find the $k$ with $c_k = \langle j, n \rangle$ and read $Y(k)$. So the join of finitely many columns other than the $i$-th is computable in $Y$. If $Z^{[i]}$ were computable in this join, it would be computable in $Y$, hence not random relative to $Y$ (:ref{#ex-relative-random} (2)), a contradiction. With a single other column, this gives $Z^{[i]} \not\leq_T Z^{[j]}$ for $i \neq j$.
+
+That the columns of a random sequence are random is Downey–Hirschfeldt, Corollary 6.9.6; the independence is a further consequence of the same argument.
+:::
+::::
+
+::::exercise[Sum modulo 2 of mutually random sequences]{#ex-vl-xor difficulty=2 objective="Transport a Martin-Löf test along a computable measure-preserving involution of pairs, and combine it with van Lambalgen's theorem."}
+For sequences $X$ and $Y$, let $X \mathbin{\triangle} Y$ be the sequence with $(X \mathbin{\triangle} Y)(n) = X(n) + Y(n) \bmod 2$. Let $A$ and $B$ be mutually random, that is, $A \oplus B$ is random. Show that $A \mathbin{\triangle} B$ is random relative to $A$ and relative to $B$. Show that the hypothesis cannot be weakened to the randomness of $A$ and of $B$.
+
+:::solution
+Let $T(X \oplus Y) = X \oplus (X \mathbin{\triangle} Y)$. Then $T \circ T$ is the identity, and for strings $\sigma$ and $\tau$ of the same length, $T$ maps the cylinder $[\sigma \oplus \tau]$ onto the cylinder $[\sigma \oplus (\sigma \mathbin{\triangle} \tau)]$, where $\sigma \mathbin{\triangle} \tau$ is defined bitwise; so $T$ permutes the cylinders of each even length $2m$. Every $\Sigma^0_1$ class is generated by a c.e. set of strings of even length (replace a string of odd length by its two one-bit extensions), and the image of a class $[V]^{\prec}$ with $V$ such a set is $[V']^{\prec}$, where $V'$ is the image of $V$ under the map on strings above. Its measure is that of $[V]^{\prec}$: for each finite part of $V$, refine the cylinders to a common even length $2m$; $T$ permutes the cylinders of length $2m$, so the two finite unions have the same number of them. Hence $T$ maps a Martin-Löf test $(\mathcal U_n)$ to a Martin-Löf test $(T(\mathcal U_n))$.
+
+If $A \oplus (A \mathbin{\triangle} B) = T(A \oplus B)$ were captured by a test $(\mathcal U_n)$, then $A \oplus B = T(T(A \oplus B))$ would be captured by $(T(\mathcal U_n))$. So $A \oplus (A \mathbin{\triangle} B)$ is random, and $A \mathbin{\triangle} B$ is random relative to $A$ by :ref{#thm-van-lambalgen}. By :ref{#ex-mutual-symmetry}, $B \oplus A$ is random too, and the same argument gives that $B \mathbin{\triangle} A = A \mathbin{\triangle} B$ is random relative to $B$.
+
+If $A = B$ is random, then $A$ and $B$ are random, but $A \mathbin{\triangle} B$ is the sequence of zeros, which is not random.
+:::
+::::
+
+::::exercise[Halves of a 2-random sequence]{#ex-2-random-halves difficulty=1 objective="Apply the relativized form of van Lambalgen's theorem to the oracle $\emptyset'$."}
+Let $A \oplus B$ be 2-random. Show that $A$ and $B$ are 2-random, that $B \not\leq_T A \oplus \emptyset'$ and that $A \not\leq_T B \oplus \emptyset'$.
+
+:::solution
+By van Lambalgen's theorem relativized to $\emptyset'$, $A$ is random relative to $\emptyset'$, that is, 2-random, and $B$ is random relative to $A \oplus \emptyset'$. Since $\emptyset' \leq_T A \oplus \emptyset'$, every test relative to $\emptyset'$ is a test relative to $A \oplus \emptyset'$, so $B$ is 2-random. If $B \leq_T A \oplus \emptyset'$, then $B$ is not random relative to $A \oplus \emptyset'$ (:ref{#ex-relative-random} (2)), a contradiction. The exchange of the halves is computable and preserves the measure, so it maps tests relative to $\emptyset'$ to tests relative to $\emptyset'$, as in :ref{#ex-mutual-symmetry}; hence $B \oplus A$ is 2-random, and the same argument gives $A \not\leq_T B \oplus \emptyset'$.
+:::
+::::
+
+::::exercise[3-randomness and the halting probability relative to the jump]{#ex-3-random-omega difficulty=2 objective="Relativize the characterization of 2-randomness by $\Omega$ one jump higher."}
+For a set $X$, let $\Omega^X$ be the halting probability of an optimal prefix-free oracle machine with oracle $X$. Admit the relativizations of :ref{#thm-omega} and :ref{#cor-omega-random}: $\Omega^X \equiv_T X'$, and $\Omega^X$ is random relative to $X$.
+
+1. Show that a sequence $A$ is 3-random if and only if $A \oplus \Omega^{\emptyset'}$ is 2-random.
+2. Show that if $A$ is 3-random, then $\emptyset'' \not\leq_T A \oplus \emptyset'$.
+
+:::solution
+1. By van Lambalgen's theorem relativized to $\emptyset'$, $\Omega^{\emptyset'} \oplus A$ is random relative to $\emptyset'$ if and only if $\Omega^{\emptyset'}$ is random relative to $\emptyset'$, which holds, and $A$ is random relative to $\Omega^{\emptyset'} \oplus \emptyset'$. Since $\Omega^{\emptyset'} \equiv_T \emptyset''$ and $\emptyset' \leq_T \emptyset''$, we have $\Omega^{\emptyset'} \oplus \emptyset' \equiv_T \emptyset''$; oracles of the same degree have the same tests, so the last condition says that $A$ is 3-random. Finally, $\Omega^{\emptyset'} \oplus A$ is 2-random if and only if $A \oplus \Omega^{\emptyset'}$ is, since the exchange of the halves maps tests relative to $\emptyset'$ to tests relative to $\emptyset'$.
+2. Let $A$ be 3-random. By (1), $A \oplus \Omega^{\emptyset'}$ is 2-random, so $\Omega^{\emptyset'} \not\leq_T A \oplus \emptyset'$ by :ref{#ex-2-random-halves}. As $\Omega^{\emptyset'} \equiv_T \emptyset''$, this gives $\emptyset'' \not\leq_T A \oplus \emptyset'$.
+:::
+::::
+
+::::exercise[Translates of a 2-random sequence by a Δ⁰₂ set]{#ex-2-random-xor-delta2 difficulty=1 objective="Use an oracle to transport tests along a measure-preserving map, and see that 2-randomness is preserved by translations that 1-randomness does not survive."}
+With the notation $X \mathbin{\triangle} Y$ of :ref{#ex-vl-xor}, let $D$ be a $\Delta^0_2$ set and $Z$ a 2-random sequence. Show that $Z \mathbin{\triangle} D$ is 2-random. Show that the analogous statement for 1-randomness fails.
+
+:::solution
+For a string $\sigma$, let $\sigma \mathbin{\triangle} D$ be the string of length $|\sigma|$ with $(\sigma \mathbin{\triangle} D)(k) = \sigma(k) + D(k) \bmod 2$; it is computable from $\sigma$ with oracle $\emptyset'$, since $D \leq_T \emptyset'$. The map $\sigma \mapsto \sigma \mathbin{\triangle} D$ preserves lengths and the prefix relation, and is a bijection on the strings of each length. Suppose that $Z \mathbin{\triangle} D$ is captured by a test $(\mathcal U_n)$ relative to $\emptyset'$, and write $\mathcal U_n = [W_n]^{\prec}$ with $W_n$ prefix-free, c.e. in $\emptyset'$ uniformly in $n$ (:ref{#lem-prefix-free-generator} relativized). Let $\mathcal V_n = [\{ \sigma \mathbin{\triangle} D : \sigma \in W_n \}]^{\prec}$. The generating sets are prefix-free and uniformly c.e. in $\emptyset'$, with the same lengths as $W_n$, so $\lambda(\mathcal V_n) = \lambda(\mathcal U_n) \leq 2^{-n}$. If $\sigma \in W_n$ is a prefix of $Z \mathbin{\triangle} D$, then $\sigma \mathbin{\triangle} D$ is a prefix of $Z$. So $(\mathcal V_n)$ is a test relative to $\emptyset'$ capturing $Z$, a contradiction.
+
+For 1-randomness, let $Z = D = \Omega$, which is random and $\Delta^0_2$. Then $Z \mathbin{\triangle} D$ is the sequence of zeros. The argument above fails because the map $\sigma \mapsto \sigma \mathbin{\triangle} \Omega$ is not computable. This is Nies (2009), Exercise 3.6.21.
+:::
+::::
+:::::

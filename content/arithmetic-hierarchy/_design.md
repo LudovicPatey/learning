@@ -214,7 +214,65 @@ levels; it is not used.
 - `index-sets` is now short (25 minutes). It could receive Soare's single reduction
   (Σ⁰₂, Π⁰₂) ≤₁ (Fin, Tot) or a figure of the set V_x.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. The
+featured exercises are in the text, after the material they practice; the others are in the
+block of further exercises at the end of each lesson. The former sections "Exercises" were
+removed; their exercises kept their content (two solutions were completed, see the history).
+
+**Featured exercises, and why.**
+
+1. `sigma-pi-sets`: `ex-small-ce-sets` (the first placements by counting, with a
+   $\Delta^0_2$ conclusion) and `ex-rec-sigma3` (Rec is Σ⁰₃; used by `sigma3-complete`),
+   after the closure properties.
+2. `post-theorem`: `ex-jump-m-reduction` (uses the uniformity of the jump theorem),
+   `ex-sigma2-cofinitely` (the Σ⁰₂ "cofinitely often" form used in later constructions),
+   `ex-hierarchy-universal` (strictness by diagonalization, a second proof).
+3. `index-sets`: `ex-wnat-complete` (cited in the summary table of lesson 4) and
+   `ex-total-constant` (a full classification combining both steps of the method).
+4. `sigma3-complete`: `ex-coinf-inf` (new; reuses the Cof reduction with a join, and
+   classifies Fin ∪ Cof) after the Cof section, and `ex-cof-rec-hard` (new; the two
+   outcomes of the Rec reduction give lower bounds for the low and the incomplete c.e.
+   sets) after the Rec section.
+5. `arithmetic-definability`: `ex-exp-beta` (a direct use of the β-function) after the
+   representation theorem, `ex-true-sigma1` (Σ₁ truth is Σ⁰₁-complete) after Tarski.
+6. `codes`: `ex-delta-indices-complete` (the set of Δ⁰₁ indices, cited in the text) and
+   `ex-no-canonical-from-sigma` (a self-reference argument to imitate).
+
+**Further exercises, lesson by lesson.**
+
+1. `sigma-pi-sets`: countable unions (moved); placing four sets; substitution of partial
+   functions (fails only at Π⁰₁); collection by coded sequences (Soare's route); total
+   functions with Σ⁰ₙ graphs; primitive recursive matrix (Kleene normal form);
+   projection and complementation; computably separable pairs are Σ⁰₃; unique witnesses
+   for Σ⁰ₙ₊₁ sets (difficulty 3).
+2. `post-theorem`: Tot^∅′ is Π⁰₃ (moved); levels relative to ∅⁽ᵐ⁾; closure of the
+   arithmetic sets; ≤ₘ to ∅⁽ⁿ⁾ gives ≤₁; Σ⁰ₙ₊₁ = c.e. in a Σ⁰ₙ or Π⁰ₙ set; double limits
+   for Δ⁰₃.
+3. `index-sets`: Fin not Π⁰₂ and inclusion (moved); direct reductions Inf ↔ Tot; ranges;
+   the single reduction to (N, finite); {e : W_e = {0}} is Δ⁰₂ and neither Σ⁰₁ nor Π⁰₁;
+   Tot^A is Π⁰₂-complete for low A.
+4. `sigma3-complete`: Cof not Π⁰₃ and Tot^∅′ Π⁰₃-complete (moved); a run of the marker
+   construction; two modified constructions that fail; correctness of Soare's one-marker
+   variant; ⊆* and =* are Σ⁰₃-complete.
+5. `arithmetic-definability`: computable = Σ₁ and co-Σ₁ (moved); bounded definitions
+   (divisibility, primes, powers of 2); a β-coding computed by hand; truth for strictly
+   Σₙ sentences is Σ⁰ₙ-complete, with a second proof of Tarski's theorem; unprovable
+   true sentences of the form ¬σ, σ ∈ Σ₁.
+6. `codes`: Δ⁰₁ to Σ⁰₁ indices (moved); computations with canonical indices; pairs of
+   Σ⁰₁ indices versus Δ⁰₁ indices; no uniform maximum of a finite set (by reduction to
+   `prop-no-size-from-delta`); Δ⁰₂ index of a c.e. set from a Σ⁰₁ index; no Σ⁰₁ index
+   from a Δ⁰₂ index (oracle fixed point, difficulty 3).
+
+**Sources.** Soare 2016: Theorem 4.1.4 (coded sequences), Exercises 4.1.12 (separable
+pairs), 4.1.13 and 4.3.14 (⊆*, =*), 4.2.6 (≤ₘ gives ≤₁), Theorem 4.3.2 (single reduction),
+Theorem 4.3.3 (one-marker variant); Soare Exercise 4.1.10 (projection and
+complementation); Nies 2009, Exercise 1.4.25 (iterated limits) and Proposition 1.4.17.
+The other exercises were written for the course. Each borrowed exercise names its source
+in its solution.
+
+## 12. History
 
 - **2026-11-12.** Design and pedagogy revision. Wrote this log. Split `index-sets` into
   `index-sets` (method, second level) and the new lesson `sigma3-complete` (Cof, and Rec
@@ -228,3 +286,12 @@ levels; it is not used.
   References checked against Soare 2016, Downey–Hirschfeldt, Nies and Monin–Patey;
   Soare 1987 section numbers replaced by verified Soare 2016 ones; unverifiable
   attributions removed (see Open points).
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for
+  all exercises; one to three featured exercises per lesson, the others moved to a block
+  of further exercises; 33 new exercises (section 11). The "Exercises" sections were
+  removed; textual references to exercises replaced by `:ref` (`ex-rec-sigma3`,
+  `ex-tot-jump-pi3`, `ex-wnat-complete`, `ex-delta-indices-complete`,
+  `ex-sigma2-cofinitely`, `ex-tot-jump-complete`). Solution completed in
+  `ex-countable-unions` (countability of the arithmetic sets made explicit). Durations
+  recomputed without the further exercises: `sigma-pi-sets` and `arithmetic-definability`
+  45 (were 50), `index-sets` 20 (was 25).

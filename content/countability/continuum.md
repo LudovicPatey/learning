@@ -1,7 +1,7 @@
 ---
 title: The cardinality of the continuum
 summary: The sets of binary sequences, of integer sequences, of real numbers and of real sequences are equipotent; removing a countable set does not change their cardinality; the continuum hypothesis.
-duration: 50
+duration: 45
 prerequisites: [diagonal-argument]
 ---
 
@@ -126,6 +126,14 @@ Fix a bijection $\beta : \mathbb R \to \cs$, given by the theorem. Then $(x, y) 
 
 Cantor found this result in 1877, and wrote to Dedekind that he could see it but did not believe it: the plane has no more points than the line. No such bijection is a homeomorphism, by Brouwer's theorem on the invariance of dimension (1911), which we admit; cardinality ignores topology.
 
+::::exercise{#ex-continuous-functions difficulty=2 objective="Bound the number of continuous functions by their values on the rationals."}
+Show that the set of continuous functions $\mathbb R \to \mathbb R$ has the cardinality of the continuum.
+
+:::solution
+Constant functions give an injection of $\mathbb R$. Conversely, a continuous function is determined by its values on $\mathbb Q$, since every real number is a limit of rational numbers. Fixing a bijection $q : \nat \to \mathbb Q$, the map $f \mapsto (f(q(n)))_n$ is therefore an injection into $\mathbb R^\nat$, which has the cardinality of the continuum by :ref{#cor-continuum-powers}. Conclude by :ref{#thm-cantor-bernstein}.
+:::
+::::
+
 ## Removing a countable set
 
 :::proposition{#prop-cocountable}
@@ -160,6 +168,14 @@ In the proof of :ref{#prop-cocountable}, why does one pass from $\cs$ to $\cs \t
   The diagonal argument is applied to the first coordinates only.
 :::
 
+::::exercise{#ex-infinitely-many-zeros difficulty=2 objective="Remove a countable set from Cantor space by an explicit bijection, making room along a sequence."}
+Give an explicit bijection between $\cs$ and the set of sequences with infinitely many zeros, using the coding $c$ of :ref{#prop-baire-cantor}. Deduce another proof that $|\nat^\nat| = |\cs|$.
+
+:::solution
+The set $M$ of sequences with finitely many zeros is countably infinite: each of them is $\sigma 111\cdots$ for a finite binary string $\sigma$, and there are infinitely many. Let $M_0, M_1, \dots$ be an enumeration of $M$ without repetition. The sequences $E_k = 0^k 1 0 0 0 \cdots$, for $k \in \nat$, are pairwise distinct and have infinitely many zeros. Define $\varphi : \cs \to \cs \setminus M$ by $\varphi(M_k) = E_{2k+1}$, $\varphi(E_k) = E_{2k}$, and $\varphi(X) = X$ for the other sequences. It is injective on each of the three pieces, whose images $\{E_{2k+1}\}$, $\{E_{2k}\}$ and $\cs \setminus (M \cup \{E_k\})$ are disjoint and cover $\cs \setminus M$; so $\varphi$ is a bijection onto the set of sequences with infinitely many zeros. Then $c^{-1} \circ \varphi$ is a bijection from $\cs$ onto $\nat^\nat$.
+:::
+::::
+
 ## Cantor space and the Cantor set
 
 Cantor space and the real line have the same cardinality, but they are different as ordered or topological spaces. In the lexicographic order on $\cs$, defined by $X <_{\mathrm{lex}} Y$ if $X(n) < Y(n)$ at the first position $n$ where $X$ and $Y$ differ, the sequences $0111\cdots$ and $1000\cdots$ have nothing strictly between them, whereas between two real numbers there is always a third. The relevant geometric picture of $\cs$ is a subset of the line.
@@ -188,40 +204,6 @@ The continuum hypothesis can be neither proved nor refuted from the axioms of ZF
 
 For sets of reals with a simple definition, the question has a positive answer. Cantor and Bendixson showed that every uncountable closed subset of $\mathbb R$ contains a copy of the Cantor set, hence has the cardinality of the continuum; this was extended to Borel sets by Alexandrov and Hausdorff, and to analytic sets by Suslin. We admit these results; they are proved in Kechris' book.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that $|\mathcal P(\nat \times \nat)| = |\mathcal P(\nat)|$, and that the set of all binary relations on $\nat$ has the cardinality of the continuum.
-
-:::solution
-A bijection $\nat \times \nat \to \nat$ induces a bijection between the power sets, by taking images. A binary relation on $\nat$ is a subset of $\nat \times \nat$, so the set of relations is $\mathcal P(\nat \times \nat)$, equipotent to $\mathcal P(\nat)$ and hence to $\mathbb R$ by :ref{#thm-continuum}.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that the set of continuous functions $\mathbb R \to \mathbb R$ has the cardinality of the continuum.
-
-:::solution
-Constant functions give an injection of $\mathbb R$. Conversely, a continuous function is determined by its values on $\mathbb Q$, since every real number is a limit of rational numbers. Fixing a bijection $q : \nat \to \mathbb Q$, the map $f \mapsto (f(q(n)))_n$ is therefore an injection into $\mathbb R^\nat$, which has the cardinality of the continuum by :ref{#cor-continuum-powers}. Conclude by :ref{#thm-cantor-bernstein}.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that the set of all functions $\mathbb R \to \mathbb R$ has a cardinality strictly greater than that of $\mathbb R$.
-
-:::solution
-The characteristic functions of subsets of $\mathbb R$ give an injection of $\mathcal P(\mathbb R)$ into the set $\mathbb R^{\mathbb R}$ of all functions. By :ref{#thm-cantor-powerset}, $|\mathbb R| < |\mathcal P(\mathbb R)| \leq |\mathbb R^{\mathbb R}|$. (In fact $|\mathbb R^{\mathbb R}| = |\mathcal P(\mathbb R)|$, since a function is a subset of $\mathbb R \times \mathbb R$, which is equipotent to $\mathbb R$.)
-:::
-::::
-
-::::exercise{difficulty=2}
-Give an explicit bijection between $\cs$ and the set of sequences with infinitely many zeros, using the coding $c$ of :ref{#prop-baire-cantor}. Deduce another proof that $|\nat^\nat| = |\cs|$.
-
-:::solution
-The set $M$ of sequences with finitely many zeros is countably infinite: each of them is $\sigma 111\cdots$ for a finite binary string $\sigma$, and there are infinitely many. Let $M_0, M_1, \dots$ be an enumeration of $M$ without repetition. The sequences $E_k = 0^k 1 0 0 0 \cdots$, for $k \in \nat$, are pairwise distinct and have infinitely many zeros. Define $\varphi : \cs \to \cs \setminus M$ by $\varphi(M_k) = E_{2k+1}$, $\varphi(E_k) = E_{2k}$, and $\varphi(X) = X$ for the other sequences. It is injective on each of the three pieces, whose images $\{E_{2k+1}\}$, $\{E_{2k}\}$ and $\cs \setminus (M \cup \{E_k\})$ are disjoint and cover $\cs \setminus M$; so $\varphi$ is a bijection onto the set of sequences with infinitely many zeros. Then $c^{-1} \circ \varphi$ is a bijection from $\cs$ onto $\nat^\nat$.
-:::
-::::
-
 ## Notes and references
 
 Monin and Patey (chapter *Cantor's infinity*, section *Cantor space*) prove $|\cs| = |[0, 1]| = |\mathbb R|$ with the same two injections, base $3$ and binary expansions, and describe the Cantor set. The equipotence of the line and the plane is in Cantor's paper of 1878, after an exchange of letters with Dedekind in 1877. The continuum hypothesis is formulated in the same paper. Gödel's and Cohen's results are presented in Kunen's and Jech's textbooks on set theory; the perfect set property for closed, Borel and analytic sets is in Kechris' book.
@@ -233,3 +215,75 @@ Monin and Patey (chapter *Cantor's infinity*, section *Cantor space*) prove $|\c
 - T. Jech, *Set Theory*, 3rd millennium edition, Springer, 2003.
 - A. S. Kechris, *Classical Descriptive Set Theory*, Graduate Texts in Mathematics 156, Springer, 1995.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.
+
+:::::exercises
+::::exercise{#ex-binary-relations difficulty=1 objective="Transport a power set along a bijection to count the binary relations on $\nat$."}
+Show that $|\mathcal P(\nat \times \nat)| = |\mathcal P(\nat)|$, and that the set of all binary relations on $\nat$ has the cardinality of the continuum.
+
+:::solution
+A bijection $\nat \times \nat \to \nat$ induces a bijection between the power sets, by taking images. A binary relation on $\nat$ is a subset of $\nat \times \nat$, so the set of relations is $\mathcal P(\nat \times \nat)$, equipotent to $\mathcal P(\nat)$ and hence to $\mathbb R$ by :ref{#thm-continuum}.
+:::
+::::
+
+::::exercise{#ex-all-real-functions difficulty=2 objective="Show with Cantor's theorem that the functions $\mathbb R \to \mathbb R$ outnumber the real numbers."}
+Show that the set of all functions $\mathbb R \to \mathbb R$ has a cardinality strictly greater than that of $\mathbb R$.
+
+:::solution
+The characteristic functions of subsets of $\mathbb R$ give an injection of $\mathcal P(\mathbb R)$ into the set $\mathbb R^{\mathbb R}$ of all functions. By :ref{#thm-cantor-powerset}, $|\mathbb R| < |\mathcal P(\mathbb R)| \leq |\mathbb R^{\mathbb R}|$. (In fact $|\mathbb R^{\mathbb R}| = |\mathcal P(\mathbb R)|$, since a function is a subset of $\mathbb R \times \mathbb R$, which is equipotent to $\mathbb R$.)
+:::
+::::
+
+::::exercise{#ex-join-compute difficulty=1 objective="Compute joins and columns of concrete sets."}
+1. Show that $X \oplus Y = \{ 2n : n \in X \} \cup \{ 2n + 1 : n \in Y \}$, as sets. Compute $\emptyset \oplus \nat$ and $\nat \oplus \emptyset$, and show that $X \oplus Y \subseteq X' \oplus Y'$ if and only if $X \subseteq X'$ and $Y \subseteq Y'$.
+2. Let $Z = \{ \langle n, m \rangle : m \leq n \}$. Determine the sequence $(X_n)$ with $Z = \bigoplus_n X_n$.
+
+:::solution
+1. An even number $2n$ is in $X \oplus Y$ if and only if $(X \oplus Y)(2n) = X(n) = 1$, that is, $n \in X$; an odd number $2n + 1$ is in $X \oplus Y$ if and only if $n \in Y$. This is the description given. So $\emptyset \oplus \nat$ is the set of odd numbers and $\nat \oplus \emptyset$ the set of even numbers. If $X \subseteq X'$ and $Y \subseteq Y'$, the inclusion follows from the description. Conversely, if $X \oplus Y \subseteq X' \oplus Y'$ and $n \in X$, then $2n \in X' \oplus Y'$, and since $2n$ is even, $n \in X'$; similarly for $Y$, with $2n + 1$.
+2. By :ref{#prop-cantor-powers}, $X_n(m) = Z(\langle n, m \rangle)$. Since the pairing function is injective, $\langle n, m \rangle \in Z$ if and only if $m \leq n$. So $X_n = \{0, 1, \dots, n\}$.
+:::
+::::
+
+::::exercise{#ex-convergent-sequences difficulty=1 objective="Locate a set between two sets of the cardinality of the continuum."}
+Show that the set of convergent sequences of real numbers, and the set of eventually constant sequences of real numbers, have the cardinality of the continuum.
+
+:::solution
+The map sending $x$ to the constant sequence $(x, x, \dots)$ is an injection of $\mathbb R$ into each of the two sets, since constant sequences are eventually constant and convergent. Both sets are subsets of $\mathbb R^\nat$, which has the cardinality of the continuum by :ref{#cor-continuum-powers}. Conclude by :ref{#thm-cantor-bernstein}.
+:::
+::::
+
+::::exercise{#ex-open-sets difficulty=2 objective="Code the open sets of reals by sets of pairs of rationals."}
+A set $U \subseteq \mathbb R$ is **open** if for every $x \in U$ there is $\varepsilon > 0$ with $(x - \varepsilon, x + \varepsilon) \subseteq U$. Show that the set of open subsets of $\mathbb R$ has the cardinality of the continuum.
+
+:::solution
+For an open set $U$, let $I(U) = \{ (p, q) \in \mathbb Q^2 : p < q \text{ and } (p, q) \subseteq U \}$. We claim that $U$ is the union of the intervals $(p, q)$ with $(p, q) \in I(U)$. This union is contained in $U$. Conversely, let $x \in U$ and $\varepsilon$ as in the definition; there are rationals $p \in (x - \varepsilon, x)$ and $q \in (x, x + \varepsilon)$, and then $x \in (p, q) \subseteq U$. So $U$ is determined by $I(U)$, and $U \mapsto I(U)$ is an injection into $\mathcal P(\mathbb Q^2)$. Since $\mathbb Q^2$ is countably infinite (:ref{#cor-product-countable}), a bijection $\mathbb Q^2 \to \nat$ induces a bijection $\mathcal P(\mathbb Q^2) \to \mathcal P(\nat)$, and $\mathcal P(\nat)$ has the cardinality of the continuum by :ref{#thm-continuum}.
+
+In the other direction, $x \mapsto \mathbb R \setminus \{x\}$ is an injection of $\mathbb R$ into the open sets: $\mathbb R \setminus \{x\}$ is open, with $\varepsilon = |y - x|$ for $y \neq x$. Conclude by :ref{#thm-cantor-bernstein}.
+:::
+::::
+
+::::exercise{#ex-finite-subsets-reals difficulty=2 objective="Use the order of $\mathbb R$ to code finite sets of reals by sequences, without the axiom of choice."}
+Show that the set $\mathcal P_{\mathrm{fin}}(\mathbb R)$ of finite subsets of $\mathbb R$ has the cardinality of the continuum.
+
+:::solution
+The map $x \mapsto \{x\}$ is an injection of $\mathbb R$ into $\mathcal P_{\mathrm{fin}}(\mathbb R)$. Conversely, a finite set $F \subseteq \mathbb R$ with $k$ elements has a unique increasing enumeration $x_1 < \dots < x_k$ (by induction on $k$, taking the least element first). Map $F$ to the sequence $(k, x_1, \dots, x_k, 0, 0, \dots) \in \mathbb R^\nat$. This map is injective, since $k$ and $x_1, \dots, x_k$ can be read off the sequence, and they determine $F$. As $\mathbb R^\nat$ has the cardinality of the continuum (:ref{#cor-continuum-powers}), :ref{#thm-cantor-bernstein} concludes. The increasing enumeration replaces the choice of an enumeration of each finite set, as for the roots of polynomials in :ref{#ex-algebraic-numbers}.
+:::
+::::
+
+::::exercise{#ex-binary-two-preimages difficulty=2 objective="Analyze the failure of injectivity of the binary coding of Cantor space into $[0, 1]$."}
+For $X \in \cs$, let $s(X) = \sum_n X(n)\, 2^{-(n+1)}$. Show that $s$ is a surjection from $\cs$ onto $[0, 1]$, and that for $X \neq Y$, $s(X) = s(Y)$ holds exactly when $\{X, Y\} = \{ \sigma 0 111 \cdots, \sigma 1 000 \cdots \}$ for some string $\sigma$. Deduce that every $x \in [0, 1]$ has at most two preimages.
+
+:::solution
+*Surjectivity.* We have $s(111 \cdots) = 1$. For $x \in [0, 1)$, the proof of :ref{#thm-continuum} gives $2^{-n} \lfloor 2^n x \rfloor = \sum_{k < n} b(x)(k)\, 2^{-(k+1)}$; as $n \to \infty$, the left side tends to $x$ and the right side to $s(b(x))$, so $s(b(x)) = x$.
+
+*Collisions.* Let $X \neq Y$, let $n$ be the first position where they differ, and say $X(n) = 0$ and $Y(n) = 1$. Then
+$$
+s(Y) - s(X) = 2^{-(n+1)} + \sum_{k > n} \big(Y(k) - X(k)\big)\, 2^{-(k+1)}.
+$$
+Each term of the sum is at least $-2^{-(k+1)}$, and $\sum_{k > n} 2^{-(k+1)} = 2^{-(n+1)}$, so $s(Y) - s(X) \geq 0$, with equality if and only if $Y(k) - X(k) = -1$ for every $k > n$, that is, $X(k) = 1$ and $Y(k) = 0$ for every $k > n$. With $\sigma = X \upharpoonright n$, this says $X = \sigma 0 111 \cdots$ and $Y = \sigma 1 000 \cdots$.
+
+*At most two preimages.* Suppose $X$, $Y$, $Z$ are pairwise distinct with the same image. By the previous step, $X$ ends with infinitely many ones or with infinitely many zeros, not both; say it ends with ones, the other case being symmetric. Then $X = \sigma 0 111 \cdots$, where $\sigma$ is the prefix of $X$ before its last zero, and the previous step applied to the pairs $(X, Y)$ and $(X, Z)$ gives $Y = \sigma 1 000 \cdots = Z$, a contradiction.
+
+This is why the proof of :ref{#thm-continuum} uses base $3$ for the injection of $\cs$ into the reals.
+:::
+::::
+:::::

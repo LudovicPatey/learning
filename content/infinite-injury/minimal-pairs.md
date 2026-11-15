@@ -136,17 +136,7 @@ Why must condition 2 hold between every two consecutive stages of the sequence, 
   Condition 1 is about the length of agreement; condition 2 is about the oracles.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $\abf$ and $\bbf$ be c.e. degrees forming a minimal pair. Show that $\abf$ and $\bbf$ are incomparable and that neither is $\mathbf 0'$. Deduce that the four-element Boolean algebra embeds into the c.e. degrees, preserving the least element, joins and meets.
-
-:::solution
-If $\abf \leq \bbf$, then $\abf$ is a common lower bound of $\abf$ and $\bbf$, so $\abf = \obf$, contradicting the definition. If $\abf = \mathbf 0'$, then $\bbf \leq \mathbf 0' = \abf$, since $\bbf$ is c.e., which was just excluded. The map sending the four elements to $\obf$, $\abf$, $\bbf$ and $\abf \vee \bbf$ is injective, since $\abf$ and $\bbf$ are incomparable and non-zero, and $\abf \vee \bbf$ is the degree of the c.e. set $A \oplus B$. It preserves the order and joins, and the meet of $\abf$ and $\bbf$ is $\obf$; the other meets are between comparable elements.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-mp-one-side-restraint difficulty=2 objective="See why a strategy for $\mathcal N_e$ that always restrains the same side makes that side computable."}
 Replace condition 2 of :ref{#lem-pair-module} by the stronger condition $B_t \uh s_k = B_{s_k} \uh s_k$ for every $t \geq s_k$ and every $k$, which corresponds to a permanent restraint on $B$ at expansionary stages. Show that the conclusion of the lemma still holds, and that $B$ is then computable. Explain why this rules out a strategy for $\mathcal N_e$ that always restrains the same side.
 
 :::solution
@@ -163,3 +153,72 @@ Lachlan (1966) and Yates (1966) proved the minimal pair theorem independently. T
 - R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapter IX (the minimal pair theorem is Theorem IX.1.2).
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.14.2.
 - B. Monin and L. Patey, *Computability theory*, chapter *Priority method and c.e. degrees*, section *$\Pi^0_2$ priority method (infinite injury)*.
+
+:::::exercises
+::::exercise{#ex-mp-boolean-algebra difficulty=1 objective="Derive from the definition of a minimal pair that the four-element Boolean algebra embeds into the c.e. degrees."}
+Let $\abf$ and $\bbf$ be c.e. degrees forming a minimal pair. Show that $\abf$ and $\bbf$ are incomparable and that neither is $\mathbf 0'$. Deduce that the four-element Boolean algebra embeds into the c.e. degrees, preserving the least element, joins and meets.
+
+:::solution
+If $\abf \leq \bbf$, then $\abf$ is a common lower bound of $\abf$ and $\bbf$, so $\abf = \obf$, contradicting the definition. If $\abf = \mathbf 0'$, then $\bbf \leq \mathbf 0' = \abf$, since $\bbf$ is c.e., which was just excluded. The map sending the four elements to $\obf$, $\abf$, $\bbf$ and $\abf \vee \bbf$ is injective, since $\abf$ and $\bbf$ are incomparable and non-zero, and $\abf \vee \bbf$ is the degree of the c.e. set $A \oplus B$. It preserves the order and joins, and the meet of $\abf$ and $\bbf$ is $\obf$; the other meets are between comparable elements.
+:::
+::::
+
+::::exercise{#ex-mp-expansionary-record difficulty=1 objective="Characterize the expansionary stages for a set $Q$ by a record condition, and compare the expansionary stages for two sets of stages."}
+Fix $e$ and a set of stages $Q$, with the notation of :ref{#def-expansionary}.
+
+1. Show that a stage $s \in Q$ is expansionary for $Q$ if and only if $l(e, s) > l(e, t)$ for every $t \in Q$ with $t < s$.
+2. Deduce that if $Q \subseteq Q'$, every stage of $Q$ that is expansionary for $Q'$ is expansionary for $Q$.
+3. Let $E$ be the set of expansionary stages for $Q$. Show that the expansionary stages for $E$ are exactly the elements of $E$, and that $E$ is computable if $Q$ is computable.
+
+:::solution
+1. If $l(e, s) > l(e, t)$ for every $t \in Q$ with $t < s$, this holds in particular for the expansionary stages $t < s$, so $s$ is expansionary. Conversely, let $s$ be expansionary, and $t \in Q$ with $t < s$. The least element of $Q$ is expansionary and at most $t$, so there is a largest expansionary stage $t' \leq t$. The lengths of agreement at the expansionary stages are strictly increasing, since each one exceeds those of the earlier ones. If $t = t'$, then $l(e, t) < l(e, s)$. Otherwise $t$ is not expansionary, so $l(e, t) \leq l(e, t'')$ for some expansionary stage $t'' < t$; then $t'' \leq t'$, and $l(e, t) \leq l(e, t'') \leq l(e, t') < l(e, s)$.
+2. Let $s \in Q$ be expansionary for $Q'$. By item 1 applied to $Q'$, $l(e, s) > l(e, t)$ for every $t \in Q'$ with $t < s$, in particular for every $t \in Q$ with $t < s$. By item 1 applied to $Q$, $s$ is expansionary for $Q$.
+3. An expansionary stage for $E$ belongs to $E$ by definition. Conversely, let $s \in E$. By item 1, $l(e, s) > l(e, t)$ for every $t \in Q$ with $t < s$, hence for every $t \in E$ with $t < s$, and by item 1 applied to $E$, $s$ is expansionary for $E$. If $Q$ is computable, item 1 decides whether $s \in E$: check whether $s \in Q$, and compare $l(e, s)$ with the finitely many values $l(e, t)$, $t \in Q$, $t < s$; the function $l$ is computable, since the computations $\Phi^{A_s}_e(y)[s]$ are decidable.
+:::
+::::
+
+::::exercise{#ex-mp-agreement-converse difficulty=2 objective="Build an example in which the length of agreement is unbounded while the common function is partial."}
+Let $\Psi = \Phi_e$ be the Turing functional such that $\Psi^X(0)$ queries $X(0), X(2), X(4), \dots$ in turn and outputs $0$ as soon as it finds some $k$ with $2k \notin X$, and $\Psi^X(y) = 0$ for $y \geq 1$, by a computation that does not query the oracle. Let $A = B = D$, where $D$ is enumerated as follows: $D_0 = \emptyset$, and if $D_s = \{ 0, 2, \dots, 2k - 2 \}$ and $l(e, s) > k$, then $D_{s+1} = D_s \cup \{ 2k \}$; otherwise $D_{s+1} = D_s$. Show that $D$ is the set of even numbers, that $\Psi^A = \Psi^B$ is not total, and that $l(e, s) > k$ for infinitely many $s$ and every $k$. Which statement of the lesson does this example illustrate?
+
+:::solution
+The enumeration is computable, since $l(e, s)$ is computed from $D_s$ and $s$, so $D$ is c.e., and $D_s$ is always of the form $\{ 0, 2, \dots, 2k - 2 \}$ with $k = |D_s|$.
+
+We show that $D$ receives the number $2k$ for every $k$. Suppose that $D_s = \{ 0, 2, \dots, 2k - 2 \}$ from some stage $s_0$ on, for all $s \geq s_0$. With this oracle, $\Psi(0)$ finds $2k \notin D_{s_0}$ and halts; the computation queries only $X(0), X(2), \dots, X(2k)$, and the oracle does not change after $s_0$, so $\Psi^{D_s}(0)[s]$ converges for every large $s$. The computations $\Psi(y)$, $1 \leq y \leq k$, do not query the oracle and converge at every large stage. Since $A_s = B_s = D_s$, the two sides agree wherever they converge, so $l(e, s) > k$ for every large $s$ (recall that $l(e, s) \leq s$). Then $2k$ enters $D$ at the next stage, a contradiction. Hence $|D_s| \to \infty$, $D$ is the set of even numbers, and each $2k$ enters at the end of a stage $s$ with $l(e, s) > k$; these stages are distinct for distinct $k$, so for every $k$, infinitely many stages have $l(e, s) > k$.
+
+With oracle $D$, the search of $\Psi^D(0)$ never ends, since every even number is in $D$. So $\Psi^A = \Psi^B$ is not total, while $\limsup_s l(e, s) = \infty$. This is the remark after :ref{#prop-agreement-unbounded}: the converse of the proposition fails, because agreements found at some stages can be destroyed later; here each new even number destroys the computation of $\Psi(0)$.
+:::
+::::
+
+::::exercise{#ex-mp-pair-module-hypotheses difficulty=2 objective="Show by counterexamples that neither condition of the preservation lemma can be dropped."}
+Let $A$ and $B$ be finite sets given with enumerations $(A_s)$ and $(B_s)$, which the exercise chooses. Show that the conclusion of :ref{#lem-pair-module} may fail in each of the following cases.
+
+1. The sequence satisfies condition 1, but not condition 2.
+2. The sequence satisfies condition 2, and the lengths $l(e, s_k)$ are unbounded but not increasing.
+
+:::solution
+In both cases we use a functional $\Phi_e$ whose computations on input $y$ query fixed oracle bits and take a number of steps that does not depend on the answers. There is then a least $n_y$ such that, for every oracle $X$, $\Phi^X_e(y)[s]$ converges if and only if $s \geq n_y$; by the convention on uses, $n_y$ is at least the use, which is at least $1$ when the computation queries the oracle. Let $s^* = n_0$.
+
+1. Let $\Phi^X_e(y) = X(0)$ for every $y$, and let $A_s = B_s = \emptyset$ for $s \leq s^*$ and $A_s = B_s = \{ 0 \}$ for $s > s^*$. The two sides always agree when they converge, so $l(e, s)$ is the largest $l \leq s$ with $n_y \leq s$ for all $y < l$, which tends to infinity. Let $s_0 = s^*$, and $s_{k+1}$ the least $s > s_k$ with $l(e, s) > l(e, s_k)$. The sequence is computable and satisfies condition 1, and $l(e, s_0) \geq 1$. Condition 2 fails for $k = 0$: $0 < s_0$, and $0$ enters both $A$ and $B$ between $s_0$ and $s_1$. Now $\Delta(0) = \Phi^{A_{s_0}}_e(0)[s_0] = A_{s_0}(0) = 0$, whereas $\Phi^A_e(0) = A(0) = 1$. So the second item of the conclusion fails, and so does :ref{#cor-pair-module}: $\Phi^A_e = \Phi^B_e$ is the constant function $1$, while $\Delta(0) = 0$.
+
+2. Let $\Phi^X_e(y) = \max(X(0), X(1))$ for every $y$, and $s^* = n_0$ as above. Let $B_s = \emptyset$ for $s \leq s^*$ and $B_s = \{ 1 \}$ after; $A_s = \emptyset$ for $s \leq s^* + 1$ and $A_s = \{ 0 \}$ after. Let $s_0 = s^*$, $s_1 = s^* + 1$, $s_2 = s^* + 2$, and for $k \geq 2$, $s_{k+1}$ the least $s > s_k$ with $l(e, s) > l(e, s_k)$. Between $s_0$ and $s_1$, $A$ does not change; between $s_1$ and $s_2$, $B$ does not change; after $s_2$, neither changes. So condition 2 holds. At $s_0$ both sides compute $0$ at input $0$, so $l(e, s_0) \geq 1$; at $s_1$, $\Phi^{A_{s_1}}_e(0)[s_1] = 0 \neq 1 = \Phi^{B_{s_1}}_e(0)[s_1]$, so $l(e, s_1) = 0$; from $s_2$ on, both sides compute the constant function $1$, so the lengths are unbounded. The least $k$ with $l(e, s_k) > 0$ is $k = 0$, so $\Delta(0) = 0$, whereas $\Phi^A_e(0) = \Phi^B_e(0) = 1$. The value has passed from one side to the other at a stage where the agreement was lost: the side that changed between $s_0$ and $s_1$ was not checked against the other at $s_1$.
+
+In the tree construction, the first case is excluded because at most one number enters $A \cup B$ at each stage, and the second because the sequence used is that of the expansionary stages, whose lengths increase.
+:::
+::::
+
+::::exercise{#ex-mp-posner-pairs difficulty=1 objective="Compare the requirements with one index for both oracles and the requirements with two indices."}
+For indices $i$ and $j$, consider the requirement
+$$
+\mathcal N_{i,j} : \Phi^A_i = \Phi^B_j \text{ total} \implies \Phi^A_i \text{ computable}.
+$$
+Show that, for all sets $A$ and $B$, every requirement $\mathcal N_e$ holds if and only if every requirement $\mathcal N_{i,j}$ holds. Show that :ref{#lem-pair-module} remains true with $\Phi^A_i$ and $\Phi^B_j$ in place of $\Phi^A_e$ and $\Phi^B_e$, the length of agreement being defined accordingly. What does Posner's trick bring to the construction?
+
+:::solution
+$\mathcal N_e$ is $\mathcal N_{e,e}$, so if all $\mathcal N_{i,j}$ hold, all $\mathcal N_e$ hold. Conversely, suppose that all $\mathcal N_e$ hold, and that $C = \Phi^A_i = \Phi^B_j$ is total. Then $C \leq_T A$ and $C \leq_T B$. If $A \neq B$, :ref{#lem-posner} shows that $C$ is computable. If $A = B$, then $\Phi^A_i = \Phi^B_i = C$ is total, and $\mathcal N_i$ shows that $C$ is computable.
+
+The proof of :ref{#lem-pair-module} never uses that the two functionals are the same: it compares a computation on the $A$ side with a computation on the $B$ side through the agreement at the stages $s_k$, and uses monotonicity on the side that does not change. It goes through word for word with $\Phi_i$ on the $A$ side and $\Phi_j$ on the $B$ side.
+
+So the minimal pair construction could be run with the requirements $\mathcal N_{i,j}$ and without :ref{#lem-posner}. Posner's trick only simplifies the bookkeeping: one index per requirement instead of two.
+:::
+::::
+:::::

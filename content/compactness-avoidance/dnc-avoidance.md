@@ -114,21 +114,11 @@ The entries for $\mathsf{COH}$ come from :ref{#thm-coh-pa-avoidance} and its var
 
 Some relations are not settled by the course. DNC avoidance and PA avoidance are both implied by countable merging, but the course does not decide whether DNC avoidance implies PA avoidance for problems: the hypothesis "$Z$ is not DNC relative to $D$" is stronger than "$Z$ is not PA relative to $D$", so the definitions are not directly comparable. Patey's monograph observes that some problems admit DNC avoidance but not preservation of immunity, and asks whether preservation of immunity implies DNC avoidance; we do not know of a published answer.
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-dnc-avoid-rwwkl difficulty=1 objective="Combine DNC avoidance with the characterization of DNC degrees to build ω-models without solutions to an instance of $\mathsf{RWWKL}$."}
 Show that if a problem admits DNC avoidance, it does not imply $\mathsf{RWWKL}$ in ω-models: there is a Turing ideal satisfying it that is not closed under $\mathsf{RWWKL}$.
 
 :::solution
 The class of the sets that are not DNC is a weakness property, preserved by the problem (DNC avoidance with $D = \emptyset$). By :ref{#lem-preservation-ideal}, some Turing ideal satisfying the problem contains no DNC function. By :ref{#prop-rwwkl-dnc} (2 ⇒ 1), it contains no homogeneous set for the computable instance $\mathcal P$ of the proof, so it does not satisfy $\mathsf{RWWKL}$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $I$ be an immune set and $A$ an arbitrary set. Using the forcing of :ref{#thm-delta2-pa-avoidance}, show that there is a set $G$ with $A \leq_T G'$ such that $G$ computes no DNC function and $I$ is immune relative to $G$.
-
-:::solution
-The question of :ref{#thm-delta2-pa-avoidance} is $\Sigma^0_1(\{ \emptyset \})$-preserving with $Z = \emptyset$, and if $(\sigma, m) \mathrel{?{\nvdash}} \varphi(y)$ for every $y \in R$, then $(\sigma, m)$ itself forces every $\neg \varphi(y)$, $y \in R$, as shown in the proof of :ref{#thm-delta2-cone-avoidance}: it is countably merging. By :ref{#thm-countably-merging-dnc} with $D = \emptyset$ and :ref{#thm-countably-merging-immunity} with $\mathcal M = \{ \emptyset \}$, a sufficiently generic $G$ computes no DNC function and keeps $I$ immune. The density argument of that proof gives $A \leq_T G'$. The dense sets of the two theorems and those of the limit can be met by the same generic set, and countably many immune sets can be handled at once in the same way.
 :::
 ::::
 
@@ -138,3 +128,53 @@ DNC avoidance, countably merging questions and preservation of immunity follow t
 
 - L. Liu, *Cone avoiding closed sets*, Transactions of the American Mathematical Society 367 (2015), 1609–1630.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, sections *DNC avoidance* and *Comparing avoidances*.
+
+:::::exercises
+::::exercise[Inverting the jump while preserving immunity]{#ex-delta2-immune-dnc difficulty=2 objective="Apply the two theorems on countably merging questions to the forcing that makes an arbitrary set $\Delta^0_2$."}
+Let $I$ be an immune set and $A$ an arbitrary set. Using the forcing of :ref{#thm-delta2-pa-avoidance}, show that there is a set $G$ with $A \leq_T G'$ such that $G$ computes no DNC function and $I$ is immune relative to $G$.
+
+:::solution
+The question of :ref{#thm-delta2-pa-avoidance} is $\Sigma^0_1(\{ \emptyset \})$-preserving with $Z = \emptyset$, and if $(\sigma, m) \mathrel{?{\nvdash}} \varphi(y)$ for every $y \in R$, then $(\sigma, m)$ itself forces every $\neg \varphi(y)$, $y \in R$, as shown in the proof of :ref{#thm-delta2-cone-avoidance}: it is countably merging. By :ref{#thm-countably-merging-dnc} with $D = \emptyset$ and :ref{#thm-countably-merging-immunity} with $\mathcal M = \{ \emptyset \}$, a sufficiently generic $G$ computes no DNC function and keeps $I$ immune. The density argument of that proof gives $A \leq_T G'$. The dense sets of the two theorems and those of the limit can be met by the same generic set, and countably many immune sets can be handled at once in the same way.
+:::
+::::
+
+::::exercise[Immunity and cones]{#ex-immunity-implies-cone difficulty=1 objective="Show that preservation of immunity implies cone avoidance, with the set of codes of the prefixes of a set."}
+Show that every problem that admits preservation of immunity admits cone avoidance.
+
+:::solution
+Let $C \not\leq_T Z$, $X \leq_T Z$ an instance, and $I = X_C$ the set of the codes of the prefixes of $C$, as in :ref{#ex-coding-reservoir}. If $W$ is an infinite subset of $I$, c.e. relative to $Z$, then $Z$ computes $C$: to compute $C \uh n$, enumerate $W$ until an element coding a string of length at least $n$ appears, which happens since $W$ is infinite and only finitely many numbers code shorter strings. So $I$ is immune relative to $Z$, and preservation of immunity gives a solution $Y$ with $I$ immune relative to $Z \oplus Y$. If $C \leq_T Z \oplus Y$, then $I$ is computable in $Z \oplus Y$ and is an infinite subset of itself, a contradiction. So $C \not\leq_T Z \oplus Y$.
+:::
+::::
+
+::::exercise[Countable, finite and binary merging]{#ex-merging-hierarchy difficulty=1 objective="Compare countable merging, finite merging and merging, and check which form of merging the PA avoidance theorem uses."}
+Show that a countably merging forcing question is finitely merging, and that a finitely merging question has the following property: for every condition $c$, every $\Sigma^0_1$ formula $\varphi(y)$ and all $m_0, m_1$ with $c \mathrel{?{\nvdash}} \varphi(m_0)$ and $c \mathrel{?{\nvdash}} \varphi(m_1)$, some extension of $c$ forces $\neg \varphi(m_0) \wedge \neg \varphi(m_1)$. Show that this property suffices for the proof of :ref{#thm-local-pa-avoidance}.
+
+:::solution
+A finite set $R$ is a set, so the definition of countable merging (:ref{#def-countably-merging}) applies to it, and gives the definition of finite merging. Applying finite merging to $R = \{ m_0, m_1 \}$ gives the property. In the proof of :ref{#thm-local-pa-avoidance}, merging is used in case 2 only, for the two sentences $\Phi^{Z \oplus G}_e(x)\converge = 0$ and $\Phi^{Z \oplus G}_e(x)\converge = 1$. They are the instances $\varphi(0)$ and $\varphi(1)$ of the formula $\varphi(y)$: "$\Phi^{Z \oplus G}_e(x)\converge = y$", with $x$ fixed. So the property, with $m_0 = 0$ and $m_1 = 1$, is what case 2 needs. This is the sense in which countable merging implies finite merging, which implies merging for the sentences used in the proofs, as in the figure.
+:::
+::::
+
+::::exercise[Cohesiveness preserves immunity]{#ex-coh-preserves-immunity difficulty=1 objective="Apply the abstract theorem on immunity to computable Mathias forcing relative to $Z$."}
+Show that $\mathsf{COH}$ admits preservation of immunity.
+
+:::solution
+Let $I$ be immune relative to $Z$ and $\vec R \leq_T Z$. Use Mathias forcing with $Z$-computable reservoirs and the question of :ref{#thm-coh-pa-avoidance}: some string compatible with $(\sigma, X)$ satisfies the sentence. It is $\Sigma^0_1(\mathcal M)$-preserving for the class $\mathcal M$ of the sets computable in $Z$, relative to each of which $I$ is immune. It is countably merging: if no compatible string satisfies $\varphi(m)$ for any $m \in R$, then $(\sigma, X)$ itself forces every $\neg \varphi(m)$, by the use principle. By :ref{#thm-countably-merging-immunity}, $I$ is immune relative to $Z \oplus G$ for every sufficiently generic $G$, and a sufficiently generic $G$ is $\vec R$-cohesive, by the density argument of :ref{#thm-coh-pa-avoidance}.
+:::
+::::
+
+::::exercise[The pigeonhole principle does not strongly avoid DNC degrees]{#ex-rt12-not-strong-dnc difficulty=1 objective="Use the infinite subsets of a random set to show that DNC avoidance of the pigeonhole principle fails for arbitrary instances."}
+Say that a problem admits **strong DNC avoidance** if :ref{#def-dnc-avoidance} holds for every instance, not only for the instances computable in $Z$. Show that $\mathsf{RT}^1_2$ admits DNC avoidance, but not strong DNC avoidance.
+
+:::solution
+A $Z$-computable set $A$ has the solution $A$ or $\overline A$, computable in $Z$, so $Z \oplus Y \equiv_T Z$: $\mathsf{RT}^1_2$ admits DNC avoidance. Let $A$ be Martin-Löf random. Its complement is random too, since flipping all bits maps every Martin-Löf test to a Martin-Löf test. By :ref{#ex-random-subsets-dnc}, every infinite subset of $A$ or of $\overline A$ computes a DNC function. So with $D = Z = \emptyset$, the instance $A$ has no solution $Y$ with $Z \oplus Y$ not DNC. By contrast, $\mathsf{RT}^1_2$ admits strong PA avoidance (:ref{#thm-rt12-strong-pa}): DNC avoidance is the place where randomness, and not only compactness, is detected.
+:::
+::::
+
+::::exercise[Strong DNC avoidance and Δ⁰₂ instances]{#ex-dnc-delta2-strong difficulty=2 objective="Reduce strong DNC avoidance to instances computable in the jump, with the countably merging forcing that makes a set $\Delta^0_2$."}
+With the notion of :ref{#ex-rt12-not-strong-dnc}, show that a problem $\mathsf P$ admits strong DNC avoidance if and only if for all $D \leq_T Z$ with $Z$ not DNC relative to $D$, every instance $X \leq_T Z'$ has a solution $Y$ with $Z \oplus Y$ not DNC relative to $D$.
+
+:::solution
+The forward direction is a special case. Conversely, let $D \leq_T Z$ with $Z$ not DNC relative to $D$, and $X$ an arbitrary instance. Use the forcing of :ref{#thm-delta2-pa-avoidance} with $A = X$. Its question is $\Sigma^0_1(\{ Z \})$-preserving, and countably merging, since a condition with a negative answer for every $\varphi(m)$, $m \in R$, forces all the negations, as in the proof of :ref{#thm-delta2-cone-avoidance}. By :ref{#thm-countably-merging-dnc} with $\mathcal M = \{ Z \}$, every sufficiently generic $G$ has $Z \oplus G$ not DNC relative to $D$, and the density argument gives $X \leq_T G' \leq_T (Z \oplus G)'$. Since $D \leq_T Z \oplus G$, the hypothesis applied to $Z \oplus G$ gives a solution $Y$ with $Z \oplus G \oplus Y$ not DNC relative to $D$, and $Z \oplus Y$ is not DNC relative to $D$ either, since the class of sets DNC relative to $D$ is closed upwards.
+:::
+::::
+:::::

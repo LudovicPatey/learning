@@ -68,6 +68,18 @@ $$
 
 In other words, a property of programs that can be confirmed is a property that is confirmed by finitely many values of the function computed, from a computable list of finite patterns. This is the form taken in computability theory by the principle that computable operations are continuous, which reappears with oracles and in computable analysis.
 
+::::exercise[Rice–Shapiro for c.e. sets]{difficulty=2 #ex-rice-shapiro-sets objective="Derive the Rice–Shapiro conditions for classes of c.e. sets from those for classes of partial computable functions."}
+Let $\mathcal A$ be a class of c.e. sets such that $\{ e : W_e \in \mathcal A \}$ is c.e. Show that if $A \in \mathcal A$ and $B \supseteq A$ is c.e., then $B \in \mathcal A$, and that every $A \in \mathcal A$ has a finite subset in $\mathcal A$.
+
+:::hint
+Apply :ref{#thm-rice-shapiro} to the class of partial computable functions whose domain is in $\mathcal A$.
+:::
+
+:::solution
+Let $\mathcal C = \{ f \text{ partial computable} : \mathrm{dom}(f) \in \mathcal A \}$. Its index set $\{ e : W_e \in \mathcal A \}$ is c.e., so $\mathcal C$ satisfies the two conditions of :ref{#thm-rice-shapiro}. Let $A \in \mathcal A$ and $B \supseteq A$ be c.e. The partial functions $f$ and $g$ equal to $0$ on $A$ and on $B$ respectively, and undefined elsewhere, are partial computable, with $f \in \mathcal C$ and $f \subseteq g$. By monotonicity $g \in \mathcal C$, that is, $B \in \mathcal A$. By finiteness, some finite $\theta \subseteq f$ belongs to $\mathcal C$; its domain is a finite subset of $A$ that belongs to $\mathcal A$.
+:::
+::::
+
 ## Examples
 
 The necessary conditions are the practical tool: to show that an index set is not c.e., exhibit a function of the class with an extension outside it, or an infinite function of the class with no finite part in it.
@@ -80,33 +92,11 @@ The following index sets are not c.e.: $\mathrm{Tot}$; $\{ e : W_e \text{ is inf
 For $\mathrm{Tot}$, $\{ e : W_e \text{ infinite} \}$ and $\{ e : \Phi_e = \Phi_a \}$ with $\Phi_a$ total, finiteness fails: these classes contain an infinite function, total or with infinite domain, but no finite function. For $\{ e : W_e \text{ finite} \}$ and $\{ e : W_e = \emptyset \}$, monotonicity fails: the nowhere defined function belongs to the class, and its extension the constant function $0$ does not.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Is $\{ e : \Phi_e(0)\converge \text{ and } \Phi_e(1)\diverge \}$ c.e.?
-
-:::solution
-No. It is an index set, and monotonicity fails: the function defined only at $0$ belongs to the class, and its extension defined at $0$ and $1$ does not. By :ref{#thm-rice-shapiro}, the set is not c.e.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-computable-domain difficulty=2 objective="Apply the monotonicity condition of the Rice–Shapiro theorem to the class of functions with computable domain."}
 Show that $\{ e : W_e \text{ is computable} \}$ is not c.e.
 
 :::solution
 It is an index set. Monotonicity fails: the nowhere defined function has the computable domain $\emptyset$, while its extension $g(x) \simeq 0$ if $x \in \emptyset'$, undefined otherwise, is partial computable with domain $\emptyset'$, which is not computable. By :ref{#thm-rice-shapiro}, the set is not c.e.
-:::
-::::
-
-::::exercise{difficulty=2 #ex-rice-shapiro-sets}
-(Rice–Shapiro for c.e. sets.) Let $\mathcal A$ be a class of c.e. sets such that $\{ e : W_e \in \mathcal A \}$ is c.e. Show that if $A \in \mathcal A$ and $B \supseteq A$ is c.e., then $B \in \mathcal A$, and that every $A \in \mathcal A$ has a finite subset in $\mathcal A$.
-
-:::hint
-Apply :ref{#thm-rice-shapiro} to the class of partial computable functions whose domain is in $\mathcal A$.
-:::
-
-:::solution
-Let $\mathcal C = \{ f \text{ partial computable} : \mathrm{dom}(f) \in \mathcal A \}$. Its index set $\{ e : W_e \in \mathcal A \}$ is c.e., so $\mathcal C$ satisfies the two conditions of :ref{#thm-rice-shapiro}. Let $A \in \mathcal A$ and $B \supseteq A$ be c.e. The partial functions $f$ and $g$ equal to $0$ on $A$ and on $B$ respectively, and undefined elsewhere, are partial computable, with $f \in \mathcal C$ and $f \subseteq g$. By monotonicity $g \in \mathcal C$, that is, $B \in \mathcal A$. By finiteness, some finite $\theta \subseteq f$ belongs to $\mathcal C$; its domain is a finite subset of $A$ that belongs to $\mathcal A$.
 :::
 ::::
 
@@ -119,3 +109,75 @@ The characterization of the classes of c.e. sets whose index set is c.e. was obt
 - J. Myhill and J. C. Shepherdson, *Effective operations on partial recursive functions*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 1 (1955), 310–317.
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989.
+
+:::::exercises
+::::exercise{#ex-zero-not-one difficulty=1 objective="Show that an index set is not c.e. by exhibiting a failure of monotonicity."}
+Is $\{ e : \Phi_e(0)\converge \text{ and } \Phi_e(1)\diverge \}$ c.e.?
+
+:::solution
+No. It is an index set, and monotonicity fails: the function defined only at $0$ belongs to the class, and its extension defined at $0$ and $1$ does not. By :ref{#thm-rice-shapiro}, the set is not c.e.
+:::
+::::
+
+::::exercise{#ex-rs-which-ce difficulty=1 objective="Decide with the Rice–Shapiro theorem whether an index set is c.e."}
+Which of the following index sets are c.e.?
+
+1. $\{ e : W_e \text{ has at least three elements} \}$.
+2. $\{ e : 0 \text{ is in the range of } \Phi_e \}$.
+3. $\{ e : W_e \text{ contains only even numbers} \}$.
+4. $\{ e : \Phi_e \text{ is injective} \}$.
+5. $\{ e : \text{the range of } \Phi_e \text{ is infinite} \}$.
+
+:::solution
+1. C.e.: $W_e$ has at least three elements if and only if $W_e[s]$ does for some $s$, and the relation "$W_e[s]$ has at least three elements" is computable, since $W_e[s]$ is a finite set computable from $e$ and $s$ (:ref{#prop-stage-properties}).
+2. C.e.: $e$ belongs to it if and only if $\exists x\, \exists s\ \Phi_e(x)[s]\converge = 0$.
+3. Not c.e.: the nowhere defined function belongs to the class, and its extension defined only at $1$, with value $0$, does not. Monotonicity fails.
+4. Not c.e.: the nowhere defined function is injective, and its extension the constant function $0$ is not. Monotonicity fails.
+5. Not c.e.: the identity belongs to the class, and a finite function has a finite range, so no finite function belongs to it. Finiteness fails.
+
+In cases 3 to 5, :ref{#thm-rice-shapiro} concludes.
+:::
+::::
+
+::::exercise{#ex-subfunctions difficulty=1 objective="Apply the monotonicity condition to the class of subfunctions of a fixed function."}
+Let $g$ be a unary partial computable function. Show that $\{ e : \Phi_e \subseteq g \}$ is not c.e.
+
+:::solution
+It is an index set. The nowhere defined function is contained in $g$, so it belongs to the class. Let $h$ be the function defined only at $0$, with $h(0) = g(0) + 1$ if $g(0)\converge$ and $h(0) = 0$ otherwise. In both cases $h$ is a finite function, hence partial computable (we do not need to decide which case holds: $h$ is one of two explicit finite functions), it extends the nowhere defined function, and $h \not\subseteq g$. Monotonicity fails, and the set is not c.e. by :ref{#thm-rice-shapiro}.
+:::
+::::
+
+::::exercise{#ex-rs-not-sufficient difficulty=2 objective="See that monotonicity and finiteness alone do not make an index set c.e."}
+Let $\mathcal C$ be the class of unary partial computable functions $f$ such that $f(x)\converge$ for some $x \notin \emptyset'$. Show that $\mathcal C$ satisfies the monotonicity and finiteness conditions of :ref{#thm-rice-shapiro}, but that its index set $P$ is not c.e. Which hypothesis of :ref{#thm-rice-shapiro-converse} fails?
+
+:::solution
+*Monotonicity.* If $f \in \mathcal C$, with $f(x)\converge$ and $x \notin \emptyset'$, and $f \subseteq g$, then $g(x)\converge$, so $g \in \mathcal C$.
+
+*Finiteness.* With $f$ and $x$ as above, the one-point function $\theta = \{ (x, f(x)) \}$ is finite, contained in $f$, and belongs to $\mathcal C$.
+
+*$P$ is not c.e.* By :ref{#cor-smn-parameters}, there is a total computable $k$ with $\Phi_{k(x)}(y) \simeq 0$ if $y = x$, undefined otherwise. Then $\Phi_{k(x)} \in \mathcal C \iff x \notin \emptyset'$, so $k$ reduces $\nat \setminus \emptyset'$ to $P$. If $P$ were c.e., $\nat \setminus \emptyset'$ would be c.e. by :ref{#prop-ce-downward}, contradicting :ref{#thm-halting-ce}.
+
+By :ref{#thm-rice-shapiro-converse}, there is therefore no **c.e.** set $D$ of codes of finite functions with $f \in \mathcal C \iff \theta_n \subseteq f$ for some $n \in D$. Such sets $D$ exist, for instance the set of codes of all finite functions of $\mathcal C$, but none of them is c.e. The characterization needs both conditions and the effectiveness of the list of finite patterns.
+:::
+::::
+
+::::exercise{#ex-equal-fixed-function difficulty=3 objective="Adapt the two constructions of the proof of the Rice–Shapiro theorem to show that equality with a fixed function is never a c.e. property." lessons="rice-theorem"}
+For an index $a$, let $P_a = \{ e : \Phi_e = \Phi_a \}$.
+
+1. Show that $\nat \setminus \emptyset' \leq_m P_a$ for every $a$, so that $P_a$ is never c.e.
+2. Show that $\emptyset' \leq_m P_a$ if and only if $\Phi_a$ is not the nowhere defined function.
+
+:::solution
+1. In the proof of :ref{#thm-rice-shapiro}, the constructions of the function $h$ do not use the class $\mathcal C$.
+
+   *Case $\Phi_a$ not total.* Fix $x_0 \notin \mathrm{dom}(\Phi_a)$, and let $g(x) \simeq 0$ if $x = x_0$ and $g(x) \simeq \Phi_a(x)$ otherwise. Then $g$ is partial computable, $\Phi_a \subseteq g$ and $g \neq \Phi_a$. Part 1 of the proof, with $f = \Phi_a$ and this $g$, gives a total computable $h$ with $\Phi_{h(e)} = \Phi_a$ if $e \notin \emptyset'$ and $\Phi_{h(e)} = g$ if $e \in \emptyset'$. So $e \notin \emptyset' \iff h(e) \in P_a$.
+
+   *Case $\Phi_a$ total.* Part 2 of the proof, with $f = \Phi_a$, gives a total computable $h$ with $\Phi_{h(e)} = \Phi_a$ if $e \notin \emptyset'$, and $\Phi_{h(e)}$ the restriction of $\Phi_a$ to a finite set if $e \in \emptyset'$; this restriction differs from $\Phi_a$, which has infinite domain. So $e \notin \emptyset' \iff h(e) \in P_a$.
+
+   In both cases $\nat \setminus \emptyset' \leq_m P_a$, and $P_a$ is not c.e., by :ref{#prop-ce-downward} and :ref{#thm-halting-ce}.
+2. $P_a$ is a non-trivial index set: it contains $a$, and not the indices of a function different from $\Phi_a$. If $\Phi_a$ is not the nowhere defined function, the indices $z$ of the nowhere defined function are not in $P_a$, and $\emptyset' \leq_m P_a$ by :ref{#prop-rice-reduction}. If $\Phi_a$ is the nowhere defined function, then $P_a = \{ e : W_e = \emptyset \}$ is co-c.e., since its complement $\{ e : W_e \neq \emptyset \}$ is c.e. (:ref{#cor-tot-not-ce}). If $\emptyset' \leq_m P_a$, then $\nat \setminus \emptyset' \leq_m \nat \setminus P_a$ by item 2 of :ref{#prop-many-one}, and $\nat \setminus \emptyset'$ would be c.e., a contradiction.
+
+This extends the case of a total $\Phi_a$ in :ref{#cor-rice-shapiro-examples}.
+:::
+::::
+:::::

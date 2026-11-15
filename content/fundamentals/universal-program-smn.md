@@ -26,6 +26,14 @@ f(x, y) \simeq \Phi_{x+1}(y + 2) \qquad\text{or}\qquad g(e) \simeq \Phi_e(e) + 1
 $$
 which are partial computable as compositions of the universal function with computable functions. By contrast, no total computable function enumerates the total computable functions (:ref{#thm-effective-diagonal}): the universal function is necessarily partial.
 
+::::exercise{#ex-no-total-refinement difficulty=2 objective="Show by effective diagonalization that no algorithm can replace each program by a total one while preserving the programs that are already total."}
+Show that there is no total computable function $f$ such that, for every $e$, $\Phi_{f(e)}$ is total, and $\Phi_{f(e)} = \Phi_e$ whenever $\Phi_e$ is total.
+
+:::solution
+Suppose $f$ exists. Then $\Phi_{f(0)}, \Phi_{f(1)}, \dots$ is a sequence of total functions, uniformly computable since $(e, x) \mapsto \Phi_{f(e)}(x)$ is partial computable and total. It contains every total computable function $\Phi_e$, as $\Phi_{f(e)}$. This contradicts :ref{#thm-effective-diagonal}.
+:::
+::::
+
 ## The SMN theorem
 
 :::theorem[SMN theorem]{#thm-smn}
@@ -160,6 +168,14 @@ The proof searches for $j \leq n$. Why does some $j \leq n$ satisfy $c(e, j) \ge
   Monotonicity depends on details of the coding that the proof avoids.
 :::
 
+::::exercise{#ex-smn-doubling difficulty=1 objective="Combine the parameter form of the SMN theorem with the padding lemma to obtain an injective transformation of indices."}
+Show that there is a total computable function $g$ such that $\Phi_{g(e)}(x) \simeq 2 \cdot \Phi_e(x)$ for all $e$ and $x$, and that $g$ can be chosen injective.
+
+:::solution
+Apply :ref{#cor-smn-parameters} to $f(e, x) \simeq 2 \cdot \Phi_e(x)$, to get $s$ with $\Phi_{s(e)} = 2 \cdot \Phi_e$. To make it injective, let $g(0) = s(0)$ and $g(e+1) = p(s(e+1), g(e) + 1)$, where $p$ is the padding function. Then $g(e+1) \geq g(e) + 1$, so $g$ is strictly increasing, hence injective, and $\Phi_{g(e)} = \Phi_{s(e)}$.
+:::
+::::
+
 ## Acceptable numberings
 
 The results of this course depend on the enumeration $(\Phi_e)$ only through a few properties. It is useful to know which ones.
@@ -187,24 +203,6 @@ For $(\Phi_e)$, take the universal function and $t$ the identity. Let $(\psi_e)$
 
 Rogers proved that any two acceptable numberings differ by a computable permutation of the indices: if $(\psi_e)$ is acceptable, there is a computable bijection $\pi : \nat \to \nat$ with $\psi_e = \Phi_{\pi(e)}$. We admit this **isomorphism theorem**, proved in Rogers' paper of 1958 cited below; its proof is a computable back-and-forth argument using the padding lemma. It shows that every result of this course that is stated in terms of indices holds for every acceptable numbering. Not every numbering is acceptable: Friedberg constructed a numbering satisfying the first condition in which each partial computable function appears **exactly once**. Such a numbering cannot be acceptable: by the isomorphism theorem, the indices of a function in an acceptable numbering are in bijection with its indices in $(\Phi_e)$, which are infinitely many by :ref{#cor-infinitely-many-indices}.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that there is a total computable function $g$ such that $\Phi_{g(e)}(x) \simeq 2 \cdot \Phi_e(x)$ for all $e$ and $x$, and that $g$ can be chosen injective.
-
-:::solution
-Apply :ref{#cor-smn-parameters} to $f(e, x) \simeq 2 \cdot \Phi_e(x)$, to get $s$ with $\Phi_{s(e)} = 2 \cdot \Phi_e$. To make it injective, let $g(0) = s(0)$ and $g(e+1) = p(s(e+1), g(e) + 1)$, where $p$ is the padding function. Then $g(e+1) \geq g(e) + 1$, so $g$ is strictly increasing, hence injective, and $\Phi_{g(e)} = \Phi_{s(e)}$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that there is no total computable function $f$ such that, for every $e$, $\Phi_{f(e)}$ is total, and $\Phi_{f(e)} = \Phi_e$ whenever $\Phi_e$ is total.
-
-:::solution
-Suppose $f$ exists. Then $\Phi_{f(0)}, \Phi_{f(1)}, \dots$ is a sequence of total functions, uniformly computable since $(e, x) \mapsto \Phi_{f(e)}(x)$ is partial computable and total. It contains every total computable function $\Phi_e$, as $\Phi_{f(e)}$. This contradicts :ref{#thm-effective-diagonal}.
-:::
-::::
-
 ## Notes and references
 
 The universal function is Turing's universal machine (1936), and the SMN theorem is due to Kleene (1938). Acceptable numberings and the isomorphism theorem are due to Rogers (1958); Friedberg's numbering without repetitions appeared the same year. In Soare's textbook, the padding lemma, the enumeration theorem and the SMN theorem are Lemma 1.5.2 and Theorems 1.5.3 and 1.5.5, and Rogers' isomorphism theorem is Theorem 1.7.6, with its proof left as Exercise 1.7.8.
@@ -215,3 +213,53 @@ The universal function is Turing's universal machine (1936), and the SMN theorem
 - R. M. Friedberg, *Three theorems on recursive enumeration*, Journal of Symbolic Logic 23 (1958), 309–316.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 1.5 and 1.7.
 - B. Monin and L. Patey, *Computability theory*, chapter *Foundations of computability*, sections *Universal program*, *SMN theorem* and *Padding lemma*.
+
+:::::exercises
+::::exercise{#ex-smn-swap difficulty=1 objective="Apply the SMN theorem to fix an argument other than the first."}
+Show that there are total computable functions $r$ and $q$ such that for all $e$, $x$ and $y$,
+$$
+\Phi^{(2)}_{r(e)}(x, y) \simeq \Phi^{(2)}_e(y, x) \qquad\text{and}\qquad \Phi_{q(e, y)}(x) \simeq \Phi^{(2)}_e(x, y).
+$$
+
+:::solution
+The function $(e, x, y) \mapsto \Phi^{(2)}_e(y, x)$ is partial computable, by :ref{#thm-universal} with $k = 2$ composed with a permutation of the arguments. By :ref{#cor-smn-parameters} with $n = 2$, there is a primitive recursive $r$ with $\Phi^{(2)}_{r(e)}(x, y) \simeq \Phi^{(2)}_e(y, x)$. Let $q(e, y) = S^1_1(r(e), y)$. By :ref{#thm-smn}, $\Phi_{q(e, y)}(x) \simeq \Phi^{(2)}_{r(e)}(y, x) \simeq \Phi^{(2)}_e(x, y)$.
+:::
+::::
+
+::::exercise{#ex-domain-union-intersection difficulty=1 objective="Compute indices for the intersection and the union of two domains, the union by a simulation in parallel." lessons="programs-as-numbers"}
+Show that there are total computable functions $i$ and $u$ such that for all $a$ and $b$,
+$$
+\mathrm{dom}(\Phi_{i(a, b)}) = \mathrm{dom}(\Phi_a) \cap \mathrm{dom}(\Phi_b) \qquad\text{and}\qquad \mathrm{dom}(\Phi_{u(a, b)}) = \mathrm{dom}(\Phi_a) \cup \mathrm{dom}(\Phi_b).
+$$
+
+:::solution
+Let $F(n, x)$ be computed as follows: compute $\Phi_{\pi_0(n)}(x)$, then $\Phi_{\pi_1(n)}(x)$, and output $0$ if both halt. By the universal function, $F$ is partial computable, and $F(\langle a, b \rangle, x)$ is defined exactly when $x \in \mathrm{dom}(\Phi_a) \cap \mathrm{dom}(\Phi_b)$. By :ref{#cor-smn-parameters} there is a total computable $s$ with $\Phi_{s(n)}(x) \simeq F(n, x)$; let $i(a, b) = s(\langle a, b \rangle)$.
+
+For the union, running the two computations one after the other fails when the first diverges. Let instead $G(n, x) \simeq 0 \cdot \mu t\ [\Phi_{\pi_0(n)}(x)[t]\converge \text{ or } \Phi_{\pi_1(n)}(x)[t]\converge]$. The relation in brackets is computable (:ref{#prop-stage-properties}), so $G$ is partial computable (:ref{#prop-computable-closure}), and by item 3 of :ref{#prop-stage-properties}, $G(\langle a, b \rangle, x)$ is defined exactly when $x \in \mathrm{dom}(\Phi_a) \cup \mathrm{dom}(\Phi_b)$. Let $u(a, b) = s'(\langle a, b \rangle)$, where $s'$ is given by :ref{#cor-smn-parameters} for $G$.
+:::
+::::
+
+::::exercise{#ex-acceptable-smn difficulty=2 objective="Characterize the acceptable numberings as the numberings that can be evaluated and satisfy the SMN theorem."}
+Let $(\psi_e)$ be a numbering of the unary partial computable functions such that $(e, x) \mapsto \psi_e(x)$ is partial computable. Suppose that there is a total computable $\sigma$ with $\psi_{\sigma(e, x)}(y) \simeq \psi_e(\langle x, y \rangle)$ for all $e$, $x$ and $y$. Show that $(\psi_e)$ is acceptable. Together with :ref{#prop-acceptable}, this shows that a numbering satisfying condition 1 of :ref{#def-acceptable} is acceptable if and only if it satisfies the SMN theorem in this form.
+
+:::solution
+The function $n \mapsto \Phi_{\pi_0(n)}(\pi_1(n))$ is unary and partial computable, by :ref{#thm-universal}. Since every unary partial computable function appears in the numbering, there is $u$ with $\psi_u(\langle e, y \rangle) \simeq \Phi_e(y)$ for all $e$ and $y$. Let $t(e) = \sigma(u, e)$, a total computable function. Then
+$$
+\psi_{t(e)}(y) \simeq \psi_u(\langle e, y \rangle) \simeq \Phi_e(y)
+$$
+for all $y$, so $\psi_{t(e)} = \Phi_e$. This is condition 2 of :ref{#def-acceptable}; condition 1 is a hypothesis.
+:::
+::::
+
+::::exercise{#ex-smn-inverse difficulty=2 objective="Combine the SMN theorem with approximation by stages to invert partial computable functions uniformly." lessons="programs-as-numbers"}
+1. Show that there is a total computable $v$ such that, whenever $\Phi_e$ is total, $\Phi_{v(e)}(y) \simeq \mu x\ [\Phi_e(x) = y]$ for every $y$. In particular, if $\Phi_e$ is a bijection of $\nat$, then $\Phi_{v(e)}$ is its inverse.
+2. Give a partial computable $\Phi_e$ and a value $y$ of $\Phi_e$ such that the search "compute $\Phi_e(0), \Phi_e(1), \dots$ in turn and return the first $x$ with $\Phi_e(x) = y$" does not terminate.
+3. Show that there is a total computable $w$ such that for every $e$, $\mathrm{dom}(\Phi_{w(e)})$ is the range of $\Phi_e$, and $\Phi_e(\Phi_{w(e)}(y)) = y$ for every $y$ in this range.
+
+:::solution
+1. The function $F(e, y) \simeq \mu x\ [\Phi_e(x) = y]$ is partial computable: it is the minimization of the partial computable function $(e, y, x) \mapsto |\Phi_e(x) - y|$, obtained from the universal function. Let $v$ be given by :ref{#cor-smn-parameters}. If $\Phi_e$ is total, every value $\Phi_e(x)$ is defined, so the search returns the least $x$ with $\Phi_e(x) = y$ if there is one, and diverges otherwise. If $\Phi_e$ is a bijection, this $x$ is $\Phi_e^{-1}(y)$.
+2. Let $\Phi_e(0)\diverge$ and $\Phi_e(x) = x$ for $x \geq 1$ (the program loops on $0$ and outputs its input otherwise). Then $1$ is a value, but the search starts with $\Phi_e(0)$ and never returns.
+3. Let $G(e, y) \simeq \pi_0\big(\mu n\ [\Phi_e(\pi_0(n))[\pi_1(n)]\converge = y]\big)$. The relation in brackets is computable in $(e, y, n)$ by item 1 of :ref{#prop-stage-properties}, so $G$ is partial computable (:ref{#prop-computable-closure}). By item 3, the search terminates if and only if $\Phi_e(x)\converge = y$ for some $x$, that is, if and only if $y$ is in the range of $\Phi_e$; and then $x = G(e, y)$ satisfies $\Phi_e(x)[s]\converge = y$ for some $s$, hence $\Phi_e(x) = y$. Let $w$ be given by :ref{#cor-smn-parameters} for $G$. The search ranges over pairs of an argument and a stage, so that no divergent computation can block it.
+:::
+::::
+:::::

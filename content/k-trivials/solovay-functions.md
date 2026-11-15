@@ -94,11 +94,11 @@ In the proof of ($\Leftarrow$) in :ref{#prop-solovay-ktrivial}, why is the bound
   The proof does not compare $K(m)$ with $K(n)$; it compares $g(m)$ with $K(n)$.
 :::
 
-The proof of ($\Leftarrow$) uses the tight arguments $m$ only: the bound at $m = \langle \tau, n, t \rangle$ controls the prefix of length $n \leq m$. Since $g$ is computable and $K$ is approximable from above, the strings $\sigma$ with $K(\sigma \uh m) \leq g(m) + c$ for every $m \leq |\sigma|$ form a c.e. tree, whose paths are exactly the sets satisfying the bound of the proposition with constant $c$. These paths are K-trivial with a constant that depends only on $c$, so there are finitely many of them by :ref{#cor-k-trivial-delta2}. A K-trivial set is thus an isolated path of a c.e. tree, where the definition only gives a tree computable in $\emptyset'$. Bienvenu, Downey, Merkle and Nies used this to give an elementary proof that every K-trivial set is computable from a c.e. K-trivial set, namely a set coding a suitable c.e. tree of this kind. Nies had proved the stronger statement with truth-table reducibility, from the converse of :ref{#thm-obey-ktrivial} of the next lesson. Both proofs are admitted here (Bienvenu, Downey, Merkle and Nies 2015, Corollary 4.13; Nies, Corollary 5.5.3).
+The proof of ($\Leftarrow$) uses the tight arguments $m$ only: the bound at $m = \langle \tau, n, t \rangle$ controls the prefix of length $n \leq m$. Since $g$ is computable and $K$ is approximable from above, the strings $\sigma$ with $K(\sigma \uh m) \leq g(m) + c$ for every $m \leq |\sigma|$ form a c.e. tree, whose paths are exactly the sets satisfying the bound of the proposition with constant $c$. These paths are K-trivial with a constant that depends only on $c$, so there are finitely many of them by :ref{#cor-k-trivial-delta2}. A K-trivial set is thus an isolated path of a c.e. tree, where the definition only gives a tree computable in $\emptyset'$. Bienvenu, Downey, Merkle and Nies used this to give an elementary proof that every K-trivial set is computable from a c.e. K-trivial set, namely a set coding a suitable c.e. tree of this kind. Nies had proved the stronger statement with truth-table reducibility, from the characterization of K-triviality by the standard cost function of the next lesson. Both proofs are admitted here (Bienvenu, Downey, Merkle and Nies 2015, Corollary 4.13; Nies, Corollary 5.5.3).
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-ktrivial-not-random difficulty=1 objective="Use the closure under weak truth-table reductions to separate K-trivial sets from random sets and their sparse codings."}
 Show that no K-trivial set is Martin-Löf random, and that if $A$ is K-trivial and $Z$ is random, then neither $A \oplus Z$ nor $\{ 2^i : i \in Z \}$ is K-trivial.
 
 :::solution
@@ -106,17 +106,9 @@ A random set satisfies $K(Z \uh n) \geq n - O(1)$, whereas a K-trivial set satis
 :::
 ::::
 
-::::exercise{difficulty=1}
-Let $g : \nat \to \nat$ be computable. Show that $K \leq^+ g$ if and only if $\sum_m 2^{-g(m)} < \infty$. Deduce that a computable function $g$ is a Solovay function if and only if $\sum_m 2^{-g(m)} < \infty$ and $g(m) \leq^+ K(m)$ for infinitely many $m$.
-
-:::solution
-If $K(m) \leq g(m) + c$ for every $m$, then $\sum_m 2^{-g(m)} \leq 2^c \sum_m 2^{-K(m)} \leq 2^c$, by :ref{#prop-k-basic} (4). Conversely, let $S = \sum_m 2^{-g(m)} < \infty$, and $k$ with $S \leq 2^k$. The requests $(m, g(m) + k)$ form a computable request set of weight $2^{-k} S \leq 1$, so $K(m) \leq^+ g(m) + k$ by the KC theorem (:ref{#thm-kc}). The second statement follows from :ref{#def-solovay-function}.
-:::
-::::
-
 ## Notes and references
 
-Weak truth-table reducibility was introduced by Friedberg and Rogers (1959). The closure of the K-trivial sets under weak truth-table reducibility and the weak truth-table incompleteness of K-trivial sets are in Nies, Proposition 5.2.18. Solovay functions are from Solovay's manuscript (1975); Bienvenu and Downey (2009) proved :ref{#prop-solovay-ktrivial}, with a proof due to Merkle, and Bienvenu, Merkle and Nies showed that every Solovay function, and more generally every right-c.e. function that is an infinitely often tight upper bound for $K$, can replace $K$ in the definition of K-triviality. The journal paper of Bienvenu, Downey, Merkle and Nies (2015) collects these results, with the elementary proof that every K-trivial set is computable from a c.e. K-trivial set (Corollary 4.13). The equivalence of the first exercise is the definition of Solovay functions used by Downey and Hirschfeldt.
+Weak truth-table reducibility was introduced by Friedberg and Rogers (1959). The closure of the K-trivial sets under weak truth-table reducibility and the weak truth-table incompleteness of K-trivial sets are in Nies, Proposition 5.2.18. Solovay functions are from Solovay's manuscript (1975); Bienvenu and Downey (2009) proved :ref{#prop-solovay-ktrivial}, with a proof due to Merkle, and Bienvenu, Merkle and Nies showed that every Solovay function, and more generally every right-c.e. function that is an infinitely often tight upper bound for $K$, can replace $K$ in the definition of K-triviality. The journal paper of Bienvenu, Downey, Merkle and Nies (2015) collects these results, with the elementary proof that every K-trivial set is computable from a c.e. K-trivial set (Corollary 4.13). The equivalence of :ref{#ex-solovay-series} is the definition of Solovay functions used by Downey and Hirschfeldt.
 
 The material is in Nies, *Computability and Randomness*, Section 5.2 (Proposition 5.2.18), and in Downey and Hirschfeldt, *Algorithmic Randomness and Complexity*, Section 3.12 (Theorem 3.12.1, Definition 3.12.3) and Section 11.1.3 (Theorems 11.1.8 and 11.1.9).
 
@@ -126,3 +118,63 @@ The material is in Nies, *Computability and Randomness*, Section 5.2 (Propositio
 - L. Bienvenu, R. Downey, A. Nies and W. Merkle, *Solovay functions and their applications in algorithmic randomness*, Journal of Computer and System Sciences 81 (2015), 1575–1591.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 5.2.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 3.12 and 11.1.
+
+:::::exercises
+::::exercise[Solovay functions and series]{#ex-solovay-series difficulty=1 objective="Characterize the computable upper bounds of $K$ by the convergence of a series."}
+Let $g : \nat \to \nat$ be computable. Show that $K \leq^+ g$ if and only if $\sum_m 2^{-g(m)} < \infty$. Deduce that a computable function $g$ is a Solovay function if and only if $\sum_m 2^{-g(m)} < \infty$ and $g(m) \leq^+ K(m)$ for infinitely many $m$.
+
+:::solution
+If $K(m) \leq g(m) + c$ for every $m$, then $\sum_m 2^{-g(m)} \leq 2^c \sum_m 2^{-K(m)} \leq 2^c$, by :ref{#prop-k-basic} (4). Conversely, let $S = \sum_m 2^{-g(m)} < \infty$, and $k$ with $S \leq 2^k$. The requests $(m, g(m) + k)$ form a computable request set of weight $2^{-k} S \leq 1$, so $K(m) \leq^+ g(m) + k$ by the KC theorem (:ref{#thm-kc}). The second statement follows from :ref{#def-solovay-function}.
+:::
+::::
+
+::::exercise{#ex-ktrivial-wtt-examples difficulty=1 objective="Apply the closure under weak truth-table reductions to sets defined from K-trivial sets."}
+Let $A$ and $B$ be K-trivial. Show that the following sets are K-trivial: $\{ n : 2n \in A \}$; $A \cap R$, for a computable set $R$; $\{ n : n \in A \text{ and } n + 1 \in A \}$; $\{ \langle m, n \rangle : m \in A \text{ and } n \in A \}$, for a computable pairing function with $\langle m, n \rangle \geq m, n$; $A \cap B$ and $A \cup B$.
+
+:::solution
+By :ref{#prop-k-trivial-wtt}, it suffices to give, for each set, a weak truth-table reduction to a K-trivial set. The membership of $n$ in the first set is decided by querying $2n$ in $A$; in the second, by querying $n$ in $A$ and computing $R(n)$; in the third, by querying $n$ and $n + 1$. For the fourth, given $z$, decide whether $z$ is a pair $\langle m, n \rangle$ and, if so, query $m$ and $n$, both at most $z$. The uses are bounded by $2n + 1$, $n + 1$, $n + 2$ and $z + 1$. For the last two, $A \oplus B$ is K-trivial by :ref{#prop-k-trivial-join}, and $n \in A \cap B$, $n \in A \cup B$ are decided by querying $2n$ and $2n + 1$ in $A \oplus B$, with use $2n + 2$.
+:::
+::::
+
+::::exercise{#ex-solovay-min difficulty=1 objective="Combine Solovay functions with other upper bounds of $K$ through the characterization by series."}
+Let $g$ be a Solovay function and $h : \nat \to \nat$ a computable function with $\sum_m 2^{-h(m)} < \infty$. Show that $\min(g, h)$ is a Solovay function. Deduce that there is a Solovay function $f$ with $f(m) \leq 2 \lfloor \log(m+1) \rfloor + 2$ for every $m$, although $2 \lfloor \log(m+1) \rfloor + 2$ is not itself a Solovay function.
+
+:::solution
+By :ref{#ex-solovay-series}, $\sum_m 2^{-g(m)} < \infty$. The function $\min(g, h)$ is computable, and $2^{-\min(g(m), h(m))} \leq 2^{-g(m)} + 2^{-h(m)}$, so $\sum_m 2^{-\min(g(m), h(m))} < \infty$. Moreover $\min(g, h) \leq g$, and $g(m) \leq^+ K(m)$ for infinitely many $m$. By :ref{#ex-solovay-series}, $\min(g, h)$ is a Solovay function.
+
+Let $h(m) = 2 \lfloor \log(m+1) \rfloor + 2$. Since $\lfloor \log(m+1) \rfloor \geq \log(m+1) - 1$, $2^{-h(m)} \leq 2^{-2\log(m+1)} = (m+1)^{-2}$, and the series converges. So $f = \min(g, h)$, for $g$ the Solovay function of :ref{#prop-solovay-function}, has the required properties. The text after :ref{#def-solovay-function} explains why $h$ is not a Solovay function.
+:::
+::::
+
+::::exercise{#ex-solovay-not-everywhere difficulty=1 objective="See why a Solovay function can agree with $K$ only infinitely often, and not everywhere."}
+Show that every computable function $g$ such that $g(m) \leq K(m) + c$ for every $m$, for some constant $c$, is bounded. Deduce that no Solovay function satisfies $g(m) \leq^+ K(m)$ for every $m$.
+
+:::solution
+Suppose that $g$ is unbounded, and let $f(k)$ be the least $m$ with $g(m) > k$; $f$ is total and computable. Then $K(f(k)) \geq g(f(k)) - c > k - c$. On the other hand, $f(k)$ is computed from $k$, so $K(f(k)) \leq^+ K(k) \leq^+ 2 \lfloor \log(k+1) \rfloor + 2$, by the remark after :ref{#def-solovay-function}. For large $k$, $k - c$ exceeds this bound, a contradiction.
+
+A Solovay function $g$ satisfies $K \leq^+ g$, and $K$ is unbounded, since fewer than $2^{k+1}$ strings have complexity at most $k$. So $g$ is unbounded, and by the first part $g(m) \leq^+ K(m)$ fails for some $m$, for every constant. The same argument shows that $C$ has no unbounded computable lower bound.
+:::
+::::
+
+::::exercise[Tightness is needed]{#ex-solovay-tight-needed difficulty=2 objective="Show with a counterexample that the computable bound in the characterization of K-triviality must be tight infinitely often."}
+Let $h(m) = 4 \lfloor \log(m+1) \rfloor + 4$. Show that $K \leq^+ h$, and that there is a set $A$ with $K(A \uh m) \leq^+ h(m)$ for every $m$ that is not K-trivial. Which step of the proof of :ref{#prop-solovay-ktrivial} fails for $h$?
+
+:::solution
+Since $h(m) \geq 4 \log(m+1)$, $\sum_m 2^{-h(m)} \leq \sum_m (m+1)^{-4} < \infty$, and $K \leq^+ h$ by :ref{#ex-solovay-series}.
+
+Let $X$ be random and $A = \{ 2^i : i \in X \}$. By :ref{#ex-k-trivial} (3), $K(A \uh n) \leq^+ 4 \log n$ for $n \geq 2$, and $4 \log n < 4 \lfloor \log(n+1) \rfloor + 4 = h(n)$, since $\log n < \lfloor \log(n+1) \rfloor + 1$. The finitely many lengths $n < 2$ only change the constant, so $K(A \uh m) \leq^+ h(m)$ for every $m$. By :ref{#ex-ktrivial-not-random}, $A$ is not K-trivial.
+
+The direction ($\Rightarrow$) of the proof holds for $h$, since $K \leq^+ h$. The direction ($\Leftarrow$) uses, for each $n$, an argument $m \geq n$, computed from information about $n$, at which the bound equals $K(n)$. The function $h$ has no such arguments: $h(m) \geq 4 \log(m + 1) \geq 4 \log(n + 1)$ for every $m \geq n$, which exceeds $K(n)$ by an unbounded amount, since $K(n) \leq^+ \log n + 2 \log \log n$ for $n \geq 4$.
+:::
+::::
+
+::::exercise{#ex-log-class-not-closed difficulty=1 objective="See why the closure under weak truth-table reductions depends on comparing $K(A \uh n)$ with $K(n)$ rather than with a fixed function of $n$."}
+Let $\mathcal L$ be the class of sets $A$ with $K(A \uh n) \leq^+ 4 \log n$ for $n \geq 2$. Show that $\mathcal L$ contains every K-trivial set, but is not closed downward under weak truth-table reductions. Which step of the proof of :ref{#prop-k-trivial-wtt} fails for $\mathcal L$?
+
+:::solution
+If $A$ is K-trivial, then $K(A \uh n) \leq^+ K(n) \leq^+ 2 \log n$ for $n \geq 2$, by :ref{#prop-k-basic} (2), so $A \in \mathcal L$. Let $X$ be random and $A = \{ 2^i : i \in X \}$; then $A \in \mathcal L$ by :ref{#ex-k-trivial} (3). The set $X$ is weak truth-table reducible to $A$: $i \in X$ if and only if $2^i \in A$, with use $2^i + 1$. But $X \notin \mathcal L$, since $K(X \uh n) \geq n - O(1)$ by the Levin–Schnorr theorem.
+
+The proof of :ref{#prop-k-trivial-wtt} bounds $K(B \uh n)$ by $K(A \uh h(n))$, then uses $K(h(n)) \leq^+ K(n)$ for the computable function $h$. For $\mathcal L$, the bound on $K(A \uh h(n))$ is $4 \log h(n)$, which is not bounded by $4 \log n + O(1)$ when $h$ grows exponentially, as $h(n) \geq 2^{n-1}$ does here. The function $K(n)$ is invariant, up to a constant, under computable changes of the length that can be undone; the function $\log n$ is not.
+:::
+::::
+:::::

@@ -1,7 +1,7 @@
 ---
 title: Equipotence and subpotence
 summary: Comparison of sets by bijections and injections; finite sets and the pigeonhole principle.
-duration: 55
+duration: 45
 ---
 
 In the *Dialogues Concerning Two New Sciences* (1638), Galileo observes that every integer is the root of exactly one square and every square has exactly one root, so that there should be as many squares as integers; yet the squares form a proper part of the integers, so that there should be fewer of them. He concludes that the attributes "equal", "greater" and "smaller" do not apply to infinite quantities.
@@ -167,6 +167,14 @@ In which case of the induction step is the hypothesis $m > n + 1$ used to get $m
   The restriction is an injection $\underline{m-1} \to \underline n$, and the induction hypothesis applies only if $m - 1 > n$.
 :::
 
+::::exercise{#ex-finite-injective-surjective difficulty=2 objective="Show that an injection of a finite set into itself is a bijection, and that this fails for $\nat$."}
+Show that if $A$ is finite and $f : A \to A$ is injective, then $f$ is surjective. Show that this fails for $A = \nat$.
+
+:::solution
+If $f$ were injective and not surjective, then $f$ would be a bijection from $A$ onto the proper subset $f(A) \subsetneq A$, which contradicts :ref{#cor-finite-cardinality}. For $A = \nat$, the successor $n \mapsto n + 1$ is injective and not surjective.
+:::
+::::
+
 ## Subpotence
 
 Intuitively, $B$ is at least as large as $A$ if every element of $A$ can be given its own representative in $B$.
@@ -211,29 +219,11 @@ For $b \in B$, the set $f^{-1}(\{b\})$ is a non-empty set of integers; let $g(b)
 
 For arbitrary $A$, the same statement holds under the axiom of choice (:ref{#rem-right-inverse-choice}). Two questions remain. Is $\leq$ antisymmetric, that is, do $|A| \leq |B|$ and $|B| \leq |A|$ imply $|A| = |B|$? This is the Cantor–Bernstein theorem of the next lesson. Is there a pair of infinite sets with $|A| < |B|$? This is Cantor's diagonal argument, in the lesson of that name.
 
-## Exercises
-
-::::exercise{#ex-add-point difficulty=1}
+::::exercise{#ex-add-point difficulty=1 objective="Make room for one more element in a set that contains a copy of $\nat$, by shifting along the copy."}
 Let $b \notin A$. Show that if $|\nat| \leq |A|$, then $|A \cup \{b\}| = |A|$.
 
 :::solution
 Let $i : \nat \to A$ be an injection. Define $h : A \cup \{b\} \to A$ by $h(b) = i(0)$, $h(i(n)) = i(n+1)$ for $n \in \nat$, and $h(x) = x$ for $x \in A \setminus i(\nat)$. This is well defined since $i$ is injective. It is injective, since it is injective on each of the three pieces $\{b\}$, $i(\nat)$ and $A \setminus i(\nat)$, whose images $\{i(0)\}$, $i(\nat \setminus \{0\})$ and $A \setminus i(\nat)$ are disjoint. It is surjective, since these three images cover $A$.
-:::
-::::
-
-::::exercise{#ex-subset-finite difficulty=1}
-Show that every subset of a finite set is finite.
-
-:::solution
-It suffices to treat subsets $S \subseteq \underline m$, by transporting through a bijection. By induction on $m$: for $m = 0$, $S = \emptyset = \underline 0$. If $S \subseteq \underline{m+1}$, then $S' = S \setminus \{m\} \subseteq \underline m$ is in bijection with some $\underline k$ via some $\beta$, by the induction hypothesis. If $m \notin S$, then $S = S'$. Otherwise, extend $\beta$ by $m \mapsto k$; this is a bijection from $S$ to $\underline{k+1}$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that if $A$ is finite and $f : A \to A$ is injective, then $f$ is surjective. Show that this fails for $A = \nat$.
-
-:::solution
-If $f$ were injective and not surjective, then $f$ would be a bijection from $A$ onto the proper subset $f(A) \subsetneq A$, which contradicts :ref{#cor-finite-cardinality}. For $A = \nat$, the successor $n \mapsto n + 1$ is injective and not surjective.
 :::
 ::::
 
@@ -246,3 +236,59 @@ Monin and Patey (chapter *Cantor's infinity*, section *Equipotence and subpotenc
 - R. Dedekind, *Was sind und was sollen die Zahlen?*, Vieweg, Braunschweig, 1888.
 - K. Hrbacek and T. Jech, *Introduction to Set Theory*, 3rd edition, Marcel Dekker, 1999.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.
+
+:::::exercises
+::::exercise{#ex-subset-finite difficulty=1 objective="Prove by induction that finiteness passes to subsets."}
+Show that every subset of a finite set is finite.
+
+:::solution
+It suffices to treat subsets $S \subseteq \underline m$, by transporting through a bijection. By induction on $m$: for $m = 0$, $S = \emptyset = \underline 0$. If $S \subseteq \underline{m+1}$, then $S' = S \setminus \{m\} \subseteq \underline m$ is in bijection with some $\underline k$ via some $\beta$, by the induction hypothesis. If $m \notin S$, then $S = S'$. Otherwise, extend $\beta$ by $m \mapsto k$; this is a bijection from $S$ to $\underline{k+1}$.
+:::
+::::
+
+::::exercise{#ex-image-preimage difficulty=1 objective="Characterize injectivity and surjectivity through images and preimages."}
+Let $f : A \to B$. Show that $f(f^{-1}(Y)) \subseteq Y$ for every $Y \subseteq B$, with equality for every $Y$ if and only if $f$ is surjective. Show that $X \subseteq f^{-1}(f(X))$ for every $X \subseteq A$, with equality for every $X$ if and only if $f$ is injective.
+
+:::solution
+*First statement.* If $x \in f^{-1}(Y)$, then $f(x) \in Y$, so $f(f^{-1}(Y)) \subseteq Y$. If $f$ is surjective and $y \in Y$, write $y = f(a)$; then $a \in f^{-1}(Y)$, so $y \in f(f^{-1}(Y))$. Conversely, if equality holds for $Y = B$, then $f(A) = f(f^{-1}(B)) = B$, so $f$ is surjective.
+
+*Second statement.* If $a \in X$, then $f(a) \in f(X)$, so $a \in f^{-1}(f(X))$. If $f$ is injective and $a \in f^{-1}(f(X))$, then $f(a) = f(x)$ for some $x \in X$, so $a = x \in X$. Conversely, suppose equality holds for every $X$, and let $f(a) = f(a')$. With $X = \{a\}$, we get $a' \in f^{-1}(\{f(a)\}) = f^{-1}(f(X)) = X$, so $a' = a$.
+:::
+::::
+
+::::exercise{#ex-composition-injective difficulty=1 objective="Determine which factor of a composition inherits injectivity or surjectivity from the composite."}
+Let $f : A \to B$ and $g : B \to C$. Show that if $g \circ f$ is injective, then $f$ is injective, and that if $g \circ f$ is surjective, then $g$ is surjective. Give an example where $g \circ f$ is bijective, $f$ is not surjective and $g$ is not injective.
+
+:::solution
+If $f(a) = f(a')$, then $g(f(a)) = g(f(a'))$, so $a = a'$ by injectivity of $g \circ f$. If $c \in C$, then $c = g(f(a))$ for some $a \in A$, so $c$ is in the image of $g$.
+
+For the example, let $A = C = \{0\}$, $B = \{0, 1\}$, $f(0) = 0$ and $g(0) = g(1) = 0$. Then $g \circ f = \mathrm{id}_{\{0\}}$ is bijective, $f$ misses $1$, and $g$ identifies $0$ and $1$. The first statement, with $C = A$ and $g \circ f = \mathrm{id}_A$, is the converse part of item 1 of :ref{#lem-inverses}.
+:::
+::::
+
+::::exercise{#ex-left-inverses-successor difficulty=1 objective="Describe all one-sided inverses of a map that is injective and not surjective."}
+Let $s : \nat \to \nat$ be the successor, $s(n) = n + 1$. Describe all left inverses of $s$, and show that $s$ has no right inverse.
+
+:::solution
+A function $g : \nat \to \nat$ is a left inverse of $s$ if and only if $g(n + 1) = n$ for every $n$; the value $g(0)$ is unconstrained. So the left inverses of $s$ are the functions $g_k$, for $k \in \nat$, given by $g_k(0) = k$ and $g_k(n + 1) = n$: there are infinitely many of them. This does not contradict the uniqueness in item 3 of :ref{#lem-inverses}, which concerns two-sided inverses. If $h$ were a right inverse, then $s$ would be surjective by item 2 of :ref{#lem-inverses}; but $0$ is not a successor.
+:::
+::::
+
+::::exercise{#ex-finite-product difficulty=1 objective="Count the elements of a product of finite sets by Euclidean division."}
+Let $m, n \in \nat$. Show that $(i, j) \mapsto n i + j$ is a bijection from $\underline m \times \underline n$ onto $\underline{mn}$. Deduce that the product of two finite sets is finite.
+
+:::solution
+If $n = 0$, both sets are empty. Let $n \geq 1$. For $i < m$ and $j < n$, we have $ni + j \leq n(m-1) + (n-1) = mn - 1$, so the map takes values in $\underline{mn}$. By Euclidean division, every $k \in \nat$ is $ni + j$ for exactly one pair $(i, j)$ with $j < n$. If $k < mn$, then $ni \leq k < mn$ gives $i < m$. So every $k \in \underline{mn}$ has exactly one preimage in $\underline m \times \underline n$, and the map is bijective.
+
+If $\alpha : A \to \underline m$ and $\beta : B \to \underline n$ are bijections, then $(a, b) \mapsto n\,\alpha(a) + \beta(b)$ is the composition of the bijection $(a, b) \mapsto (\alpha(a), \beta(b))$ with the bijection above, so it is a bijection from $A \times B$ onto $\underline{mn}$.
+:::
+::::
+
+::::exercise{#ex-surjection-from-finite difficulty=2 objective="Show, without the axiom of choice, that a surjective image of a finite set is finite and has at most as many elements."}
+Let $\alpha : \underline m \to A$ be a bijection and $f : A \to B$ a surjection. Show that $B$ is finite, and that $|B| = |\underline k|$ for some $k \leq m$.
+
+:::solution
+The map $f \circ \alpha : \underline m \to B$ is surjective, and $\underline m \subseteq \nat$. As in :ref{#prop-surjection-subpotent}, let $g(b)$ be the least $i < m$ with $f(\alpha(i)) = b$; then $g : B \to \underline m$ is injective, so $B$ is equipotent to its image $S = g(B) \subseteq \underline m$. By :ref{#ex-subset-finite}, $S$ is finite: $|S| = |\underline k|$ for some $k$, hence $|B| = |\underline k|$. Composing a bijection $\underline k \to B$ with $g$ gives an injection $\underline k \to \underline m$, so $k \leq m$ by :ref{#lem-pigeonhole}. No choice is used: $g$ takes least elements.
+:::
+::::
+:::::

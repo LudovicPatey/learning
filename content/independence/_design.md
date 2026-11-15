@@ -14,7 +14,7 @@ After the course, a student can:
 ## 2. Prerequisites assumed
 
 - First-order logic: compactness, Löwenheim–Skolem; Gödel's theorems only in remarks.
-- fragments-of-arithmetic: `def-cut`, `lem-cut-model`, `lem-delta0-absolute`, `cor-sigma1-upward`, `prop-idelta0-basic`, `fact-pairing`, `fact-exp`, `thm-fo-isigma-ipi`, `lem-fo-collection-closure`, `thm-fo-parsons`, `prop-fo-least-number`, `cor-overspill`, `def-ack-membership`, `def-coded-sequence`, `prop-seq-basic`, the pigeonhole exercise of `coding` (unlabeled, cited by lesson link).
+- fragments-of-arithmetic: `def-cut`, `lem-cut-model`, `lem-delta0-absolute`, `cor-sigma1-upward`, `prop-idelta0-basic`, `fact-pairing`, `fact-exp`, `thm-fo-isigma-ipi`, `lem-fo-collection-closure`, `thm-fo-parsons`, `prop-fo-least-number`, `cor-overspill`, `def-ack-membership`, `def-coded-sequence`, `prop-seq-basic`, `ex-finite-pigeonhole` (lesson `coding`, cited with :ref).
 - truth-and-provability: `def-provably-total`, `thm-pr-provably-total`, `thm-pmt` and `prop-ack-computations` (lesson `ackermann-isigma`, cited for the formalization by finite computations), `def-delta0-star`, `lem-sat-tables`, `cor-snowing`.
 - cuts-and-extensions: `def-semiregular`, `thm-semireg-isigma1` (lesson `semiregular-cuts`), `def-regular-cut` (lesson `wkl-regular-cuts`).
 - models-of-computation / arithmetic-hierarchy: `prop-pr-bounded-mu`, `cor-pr-bounded-quantifiers`, `lem-bounded-computable`, `thm-ack-majorization`.
@@ -23,17 +23,17 @@ After the course, a student can:
 
 ## 3. Results, lesson by lesson
 
-Durations are words of the body (without SVG lines) divided by 55, rounded to a multiple of 5.
+Durations are words of the body (without SVG lines and without the block of further exercises) divided by 55, rounded to a multiple of 5.
 
 1. **fast-growing** (30 min, 1700 words). `def-fgh` ($F_0(x) = x+1$, $F_{k+1}(x) = F_k^{(x)}(x+1)$), `ex-fgh-values`; formalization `fact-fgh-formal` (admitted in its routine details, after `prop-ack-computations`), `lem-fgh-isigma1` (values increase, iterates are coded, totality for standard $k$); `lem-fgh-monotone` (growth in $\nat$, moved here from lesson 3). Exercise: IΣ₂ proves the totality of all $F_k$.
-2. **catching-cuts** (25 min, 1360 words; new, split from lesson 1). `thm-kirby-paris-cut`: a countable $M \models$ IΣ₁ with $a \geq 1$ and $\nu$ non-standard has a semiregular cut containing $a$ and not $F_\nu(a)$; remark that $\nu$ standard is impossible. Figure `catching` (regenerated).
+2. **catching-cuts** (30 min, 1560 words with the featured exercise; new, split from lesson 1). `thm-kirby-paris-cut`: a countable $M \models$ IΣ₁ with $a \geq 1$ and $\nu$ non-standard has a semiregular cut containing $a$ and not $F_\nu(a)$; remark that $\nu$ standard is impossible. Figure `catching` (regenerated).
 3. **indicators** (45 min, 2440 words). `def-indicator` (normalization $x \leq y \wedge c \leq y$); `thm-indicator-main`; `prop-indicator-isigma1`; `cor-isigma1-fgh` (Kirby–Paris); `thm-isigma1-envelope` (proves the converse of `thm-pmt`); `cor-pr-fgh-bound`.
 4. **paris-harrington** (35 min, 1870 words). `def-relatively-large`, `ex-relatively-large`; `thm-ph-true` (ACA₀ ⊢ PH$_n$, hence PA ⊢ PH$_n$); new exercise on $[a, b] \to_* (1)^1_1$; notes with recent work on RT²₂ and α-largeness.
 5. **regressive-colorings** (40 min, 2200 words; new, from the second half of lesson 4 and the first section of the old diagonal-indiscernibles). `def-regressive`; `lem-ph-regressive`; the coloring $f_R$ and `lem-diag-from-regressive`; formalization in IΣ₁; exercise: min-homogeneity cannot be homogeneity.
-6. **diagonal-indiscernibles** (35 min, 2020 words). `def-diagonal-indiscernibles`, `ex-diagonal-indiscernibles` (with an example and a non-example); `lem-diag-growth`; `thm-indiscernible-cut`. Figure `indiscernible` (regenerated: $b$ replaced by $h_\nu$).
+6. **diagonal-indiscernibles** (40 min, 2260 words with the featured exercise). `def-diagonal-indiscernibles`, `ex-diagonal-indiscernibles` (with an example and a non-example); `lem-diag-growth`; `thm-indiscernible-cut`. Figure `indiscernible` (regenerated: $b$ replaced by $h_\nu$).
 7. **ph-unprovable** (35 min, 2030 words). `def-ph-indicator` (with the conjunct $x \leq y$); `thm-ph-indicator`; `cor-ph-unprovable`; `cor-ph-envelope`.
 8. **alpha-large** (40 min, 2320 words). `def-fundamental-sequence`; `def-alpha-large`, `ex-alpha-large`; `lem-large-sum`; `thm-large-fgh`; `cor-omega-omega-large`; `thm-schwichtenberg-wainer` (admitted); Ketonen–Solovay stated. Figure `omega-large`.
-9. **arithmetic-with-top** (40 min, 2330 words). `def-coded-expansion`, `ex-coded-expansion`; `prop-top-truth`; `thm-top-segment` (Paris, admitted); `def-ramsey-cut`; `thm-ramsey-cuts` and `thm-paris-bsigma-indicator` (admitted).
+9. **arithmetic-with-top** (45 min, 2350 words). `def-coded-expansion`, `ex-coded-expansion`; `prop-top-truth`; `thm-top-segment` (Paris, admitted); `def-ramsey-cut`; `thm-ramsey-cuts` and `thm-paris-bsigma-indicator` (admitted).
 
 ## 4. Proof techniques
 
@@ -111,7 +111,37 @@ The first-order strength of Ramsey's theorem for pairs is the main recent applic
 
 These are cited in the notes of lesson 4 (paris-harrington), with a pointer from lesson 8. No recent work was found that changes the classical statements of the course. A future specialized course could treat the first-order part of RT²₂ with these tools.
 
-## 10. Open points
+## 10. Exercises
+
+Every exercise has a label, an objective and a difficulty. Each lesson has a section "Exercises" with its featured exercises, before the notes, and a block of further exercises after the references (outside the reading time).
+
+**Featured exercises** (the ones every reader should do):
+- fast-growing: `ex-fgh-isigma2` (Π₂ induction gives the uniform totality that IΣ₁ lacks; cited in the text and in lesson 3).
+- catching-cuts: `ex-two-semiregular-cuts` (new; applies the theorem inside the pieces of the decomposition, the main move of the proof).
+- indicators: `ex-indicator-standard-instances` (cited in the text) and `ex-indicator-monotone-bound` (how part 2 becomes a growth bound).
+- paris-harrington: `ex-ph-one-color` (relative largeness depends on the left endpoint).
+- regressive-colorings: `ex-min-homogeneous-not-homogeneous` (cited in the text).
+- diagonal-indiscernibles: `ex-diag-sigma-examples` (new; the formula σ on a doubly exponential set and on the powers of 2, the content of the growth lemma).
+- ph-unprovable: `ex-ph-cut-not-ph` (a cut satisfying PA and ¬PH: the indicator and the minimality argument together).
+- alpha-large: `ex-alpha-large-compute`.
+- arithmetic-with-top: `ex-top-no-definable-cut` (used by `ex-top-overspill`).
+
+Moved to the further exercises: `ex-ph-g-total` (ph-unprovable), `ex-alpha-large-omega-omega` (alpha-large).
+
+**Further exercises**, by lesson (all new except the two moved):
+- fast-growing: towers below $F_3$; comparison with Wong's variant $G_{k+1}(x) = G_k^{(x+1)}(x)$ ($F_k(x) \leq G_k(x) < F_k(x+1)$, which justifies "the same rate" in the text); iterates increase with the number of iterations in IΣ₁; the variant without the shift $x+1$ and why the construction of lesson 2 needs it.
+- catching-cuts: why left ends must increase (hypothesis dropped); countability located (countable families in arbitrary models); the Kirby–Paris unprovability read directly off the cut when $\nu \leq a$; $F_k(a) < F_\nu(a)$ without monotonicity in the index.
+- indicators: a trivial formula that is not an indicator; comparison of indicators of two theories; threshold form of the bound and why $+n$ is needed; the diagonal sentence $\forall x\ \exists y\ \iota(x, y, x)$ and $\mathrm I\Sigma_1 \nvdash \forall x\ F_x(x){\downarrow}$.
+- paris-harrington: closure properties of relative largeness; absorbing $k$ into the left endpoint; an explicit bound $a(2c)^{c+1} - 1$ for colorings of points (against the lower bound $2^c a$ of the example); lowering the arity by translation (prepares lesson 5).
+- regressive-colorings: remainders and the sequence $x_{i+1} = x_0 \cdots x_i + 1$; the infinite version from the infinite Ramsey theorem; computing $f_R$; the Kanamori–McAloon principle $\mathrm{KM}_n$ is true and provable in PA.
+- diagonal-indiscernibles: closure under subsets and Boolean combinations; the hypotheses $N$ non-standard and $h_0 \geq 3$ located; two distinct elementarily equivalent cuts of indiscernibles; indiscernibility for parity alone does not give closure under addition.
+- ph-unprovable: `ex-ph-g-total` (moved); monotonicity of $\iota_{\mathrm{PH}}$ and why all arities; the arithmetic of the parameters ($m \geq 3$); the fixed-arity function $g_2$ is provably total in PA; $\iota_{\mathrm{PH}}$ is not an indicator for IΣ₁ (Kirby–Paris cuts in a model of true arithmetic).
+- alpha-large: `ex-alpha-large-omega-omega` (moved); $(\omega + n)$-large sets; non-monotonicity in the ordinal; the normal form hypothesis of the decomposition lemma (counterexample $1 + \omega$); computations at $\omega_3$ and $\omega^\omega \cdot 2$.
+- arithmetic-with-top: induction up to the top; definable elements ($a - n$, $\lfloor a/2 \rfloor$, $\lfloor \sqrt a \rfloor$); overspill in $[0, a]$; $2$-Ramsey implies $1$-Ramsey.
+
+**Sources.** The exercises were written for this course from the material of the lessons. The comparison with Wong's hierarchy uses the definition of Wong's Lecture 5; the Kanamori–McAloon principle and its infinite version are from Kanamori and McAloon (1987); the definitions of $k$-unbounded sets and $k$-Ramsey cuts are those of Hájek and Pudlák, Chapter IV, Section 2. No exercise is copied from a book.
+
+## 11. Open points
 
 - The text file of HP is garbled in several formulas (II.2.2, II.3.36 comment, IV.3.20); the precise statements of the Ketonen–Solovay bounds and of Paris's indicator for BΣₖ₊₁ were read from the surrounding proofs and should be checked against the printed book. The Ketonen–Solovay bound is now stated without a numerical constant.
 - Schwichtenberg 1971 and Wainer 1970 bibliographic details are from memory; Kołodziejczyk–Wong–Yokoyama's journal version not identified.
@@ -119,7 +149,8 @@ These are cited in the notes of lesson 4 (paris-harrington), with a pointer from
 - The fact that every countable non-standard model of IΣ₁ has cofinally many proper cuts isomorphic to it, used by HP IV.3.10 (ii), is mentioned only through the citation.
 - Lesson 3 is at 44 minutes; further additions should go to the exercises of lesson 2 or be split.
 
-## 11. History
+## 12. History
 
 - **2026-11-12.** Course created: 7 lessons (fast-growing, indicators, paris-harrington, diagonal-indiscernibles, ph-unprovable, alpha-large, arithmetic-with-top), figure generator `scripts/figures/independence.py`.
 - **2026-11-13: polishing pass.** Word counts had been measured wrongly (single-line SVG, so `sed '/<svg/,/<\/svg>/d'` deleted the rest of the file); four lessons were at 46 minutes. Split into 9 lessons: `catching-cuts` from fast-growing, `regressive-colorings` from paris-harrington and diagonal-indiscernibles; `lem-fgh-monotone` moved to fast-growing; labels unchanged. Mathematical fixes: normalization $x \leq y$ in `def-indicator` and `def-ph-indicator` (needed in part 2 of `thm-indicator-main`); the claim that standard instances follow from the converse implication corrected; figure `catching` was wrong (the chosen next interval contained a value of the coded function and spanned three pieces) and regenerated; figure `indiscernible` no longer shows the undefined $b$; Σ₁ inductions with $x$ fixed made explicit; example 2 of `ex-coded-expansion` had a wrong bound; short cuts closed under the operations; base of the construction in `thm-top-segment`; attribution of PH ↔ Con(PA + Tr(Π₁)); smaller corrections listed in the polish report. Recent literature searched and cited (section 9).
+- **2026-11-13: featured and further exercises.** Labels and objectives for all exercises; two featured exercises added (catching-cuts, diagonal-indiscernibles), two existing exercises moved to the further exercises, 36 new further exercises (section 10). Positional references to exercises replaced by :ref. Durations: catching-cuts 30, diagonal-indiscernibles 40, arithmetic-with-top 45 (remeasured).

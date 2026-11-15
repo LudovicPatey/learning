@@ -74,7 +74,7 @@ The forcing of Dzhafarov and Jockusch fits this frame. Its conditions are the tr
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-dj-disjunctive difficulty=2 objective="Recast the Dzhafarov–Jockusch proof as a disjunctive forcing question and check its two properties and its complexity."}
 Let $A$ be a set, and $\mathcal M$ a Scott ideal containing $Z$ and not containing $C$. Define a disjunctive notion of forcing for the pigeonhole principle with conditions $(\sigma_0, \sigma_1, X)$, $X \in \mathcal M$ infinite with $\min X \geq |\sigma_0|, |\sigma_1|$, $\sigma_i \subseteq A^i$ where $A^0 = A$ and $A^1 = \overline A$, the members of side $i$ being those of the Mathias condition $(\sigma_i, X)$. Show that the question of the Dzhafarov–Jockusch proof is a $\Sigma^0_1(\mathcal M)$-preserving disjunctive forcing question, and that :ref{#lem-disjunctive-cone} and :ref{#lem-disjunctive-construction} give :ref{#thm-dj-cone-avoidance}.
 
 :::solution
@@ -90,7 +90,7 @@ If some infinite subset $H$ of $A$ or of $\overline A$ lies in $\mathcal M$, the
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-disjunctive-two-cones difficulty=1 objective="See that Lachlan's disjunction handles one cone at a time, with two sets that each avoid one of two cones."}
 Let $C_0$ and $C_1$ be Turing incomparable sets. Find sets $G_0, G_1$ such that for every pair $(e_0, e_1)$ and every $j < 2$, $\Phi^{G_0}_{e_0} \neq C_j$ or $\Phi^{G_1}_{e_1} \neq C_j$, while neither $G_0$ nor $G_1$ avoids both cones. What does this say about disjunctive constructions with several cones?
 
 :::solution
@@ -106,3 +106,47 @@ Disjunctive forcing questions are defined in the chapter *Cone avoidance* of Pat
 - R. Downey, N. Greenberg, M. Harrison-Trainor, L. Patey and D. Turetsky, *Relationships between computability-theoretic properties of problems*, Journal of Symbolic Logic 87 (2022), 47–71; arXiv:1903.04273.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 8.3.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, section *Seetapun's theorem*.
+
+:::::exercises
+::::exercise[Two independent questions]{#ex-disjunctive-product difficulty=1 objective="Compare a disjunctive question with a pair of independent questions, and see that the disjunction matters only when the two sides share a reservoir."}
+Let $\mathbb P$ be a notion of forcing with a $\Sigma^0_1(\mathcal M)$-preserving forcing question, and let $\mathcal M' = \{ X_0 \oplus X_1 : X_0, X_1 \in \mathcal M \}$. Consider the disjunctive notion of forcing whose conditions are the pairs $(c_0, c_1)$ of conditions of $\mathbb P$, with $(d_0, d_1) \leq (c_0, c_1)$ if $d_0 \leq c_0$ and $d_1 \leq c_1$, and with $[(c_0, c_1)]_i = [c_i]$. Let $(c_0, c_1) \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ if $c_0 \mathrel{?{\vdash}} \varphi_0$ or $c_1 \mathrel{?{\vdash}} \varphi_1$. Show that this is a $\Sigma^0_1(\mathcal M')$-preserving disjunctive forcing question. If $C$ is computable in no member of $\mathcal M$, show that a construction can make both $G_0$ and $G_1$ avoid the cone above $C$ together with $Z$.
+
+:::solution
+This is a disjunctive notion of forcing: each $[c_i]$ is a non-empty closed class, and $(d_0, d_1) \leq (c_0, c_1)$ gives $[d_i] \subseteq [c_i]$.
+
+*Property 1.* If $c_0 \mathrel{?{\vdash}} \varphi_0$, some $d_0 \leq c_0$ forces $\varphi_0$, and $(d_0, c_1)$ forces $\varphi_0(G_0)$; the case of $c_1$ is symmetric. *Property 2.* If the answer is negative, then $c_0 \mathrel{?{\nvdash}} \varphi_0$, some $d_0 \leq c_0$ forces $\neg \varphi_0$, and $(d_0, c_1)$ forces $\neg \varphi_0(G_0)$. *Preservation.* Let $X_0, X_1 \in \mathcal M$ be given for $c_0$ and $c_1$. The relation $\{ \vec m : c_0 \mathrel{?{\vdash}} \varphi_0(\vec m) \text{ or } c_1 \mathrel{?{\vdash}} \varphi_1(\vec m) \}$ is the union of a $\Sigma^0_1(X_0)$ and a $\Sigma^0_1(X_1)$ relation, hence $\Sigma^0_1(X_0 \oplus X_1)$, uniformly in the formulas.
+
+For the last part, the sides do not interact: given $(c_0, c_1)$ and an index $e$, the proof of :ref{#thm-local-cone-avoidance} gives $d_0 \leq c_0$ such that every member $G$ of $d_0$ satisfies $\Phi^{Z \oplus G}_e \neq C$, and $(d_0, c_1)$ extends $(c_0, c_1)$; the same holds on side $1$. A sequence handling every $e$ on both sides makes both $G_0$ and $G_1$ avoid the cone. Lachlan's disjunction is needed for the Dzhafarov–Jockusch and Seetapun notions because their two sides share one reservoir: shrinking it to make progress on one side constrains the other.
+:::
+::::
+
+::::exercise[A one-sided question encodes the instance]{#ex-one-sided-complexity difficulty=1 objective="Compute the answers of a one-sided question for the pigeonhole principle, and see that they encode the instance."}
+Let $A$ be a set and $\mathcal M$ a class of sets. Consider the Mathias conditions $(\sigma, X)$ with $\sigma \subseteq A$ and $X \in \mathcal M$ infinite, building a subset of $A$, and the relation $(\sigma, X) \mathrel{?{\vdash}} \varphi$ if some string $\tau$ compatible with $(\sigma, X \cap A)$ satisfies $\varphi$. Show that if this relation is $\Sigma^0_1(\mathcal M)$-preserving, then for every infinite $X \in \mathcal M$, the set $X \cap A$ is $\Sigma^0_1(X')$ for some $X' \in \mathcal M$. Deduce that for Mathias forcing with $Z$-computable reservoirs, the relation is $\Sigma^0_1(\{ Z \})$-preserving only if $A$ is $\Sigma^0_1(Z)$.
+
+:::solution
+The sentence "$n \in G$" is $\Sigma^0_1$, uniformly in $n$: it says that a functional reading the bit $n$ of its oracle halts, which it does exactly when the bit is $1$. At the condition $(\varepsilon, X)$, $(\varepsilon, X) \mathrel{?{\vdash}} n \in G$ holds if and only if some string $\tau$ whose elements all belong to $X \cap A$ has $\tau(n) = 1$, that is, if and only if $n \in X \cap A$. If the relation is $\Sigma^0_1(\mathcal M)$-preserving, there is $X' \in \mathcal M$ given for $(\varepsilon, X)$, and $X \cap A = \{ n : (\varepsilon, X) \mathrel{?{\vdash}} n \in G \}$ is $\Sigma^0_1(X')$.
+
+For $Z$-computable reservoirs, $\mathcal M = \{ Z \}$ and $\nat$ is a reservoir, so $A = \nat \cap A$ is $\Sigma^0_1(Z)$. Since $A$ is an arbitrary instance of the pigeonhole principle, a question about one side has the complexity of the instance; this is why the disjunctive question quantifies over all partitions.
+:::
+::::
+
+::::exercise[Both sides are extendible]{#ex-dj-extendible difficulty=1 objective="Check that both sides of the Dzhafarov–Jockusch forcing can always be extended when no solution lies in the Scott ideal."}
+In the notion of forcing of :ref{#ex-dj-disjunctive}, assume that no infinite subset of $A$ or of $\overline A$ belongs to $\mathcal M$. Show that for every condition $(\sigma_0, \sigma_1, X)$ and every $i < 2$, the set $X \cap A^i$ is infinite. Deduce that for every $n$, the set of conditions whose stem on side $i$ has at least $n$ elements is dense.
+
+:::solution
+If $X \cap A^i$ were finite, then $X \cap A^{1-i} = X \setminus (X \cap A^i)$ would be an infinite subset of $A^{1-i}$; it differs from $X$ by finitely many elements, so it belongs to $\mathcal M$, contrary to the assumption.
+
+Given a condition and $i$, take $x \in X \cap A^i$, let $\tau$ be the string of length $x + 1$ whose elements are those of $\sigma_i$ and $x$, and $Y = X \setminus [0, x]$. Then $\tau \subseteq A^i$, $\tau$ is compatible with $(\sigma_i, X)$, $Y \in \mathcal M$ is infinite with $\min Y > x$, so replacing $\sigma_i$ by $\tau$ and $X$ by $Y$ gives an extension whose stem on side $i$ has one more element. Repeating $n$ times gives the density.
+:::
+::::
+
+::::exercise[Only one negation]{#ex-disjunctive-one-negation difficulty=1 objective="Compute a negative answer of the Dzhafarov–Jockusch question for which no extension forces both negations."}
+In the notion of forcing of :ref{#ex-dj-disjunctive}, let $c = (\varepsilon, \varepsilon, \nat)$, let $\varphi_0$ be the sentence "$G$ contains an even number" and $\varphi_1$ the sentence "$G$ contains an odd number". Show that $c \mathrel{?{\nvdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$, and that no extension of $c$ forces both $\neg \varphi_0(G_0)$ and $\neg \varphi_1(G_1)$.
+
+:::solution
+Let $B$ be the set of odd numbers, so that $B^0$ is the set of odd numbers and $B^1$ the set of even numbers. A string compatible with $(\varepsilon, \nat \cap B^0)$ has only odd elements and does not satisfy $\varphi_0$; a string compatible with $(\varepsilon, \nat \cap B^1)$ has only even elements and does not satisfy $\varphi_1$. So $B$ has no witness, and the answer is negative.
+
+Let $d = (\tau_0, \tau_1, Y)$ be an extension of $c$, and let $y \in Y$. The sets $\tau_0 \cup \{ y \}$ and $\tau_1 \cup \{ y \}$ are members of side $0$ and of side $1$ of $d$, since $y \geq \min Y \geq |\tau_0|, |\tau_1|$. If $y$ is even, the first satisfies $\varphi_0$; if $y$ is odd, the second satisfies $\varphi_1$. So $d$ does not force both negations. Property 2 of :ref{#def-disjunctive-notion} only asks for one of them: here $(\varepsilon, \varepsilon, Y)$ with $Y$ the odd numbers forces $\neg \varphi_0(G_0)$.
+:::
+::::
+:::::

@@ -117,21 +117,11 @@ A countable non-standard model of $\mathrm{PA}$ has a full satisfaction class if
 
 So $\mathrm{CT}^-$ is conservative over $\mathrm{PA}$ (:ref{#cor-ct-conservative}), but its models are not arbitrary: their arithmetic parts are recursively saturated, or standard. Induction changes the first fact. If a model of $\mathrm{PA}$ has a full satisfaction class satisfying induction for bounded formulas of $\mathcal L_A \cup \{ S \}$, then it satisfies $\mathrm{Con}(\mathrm{PA})$ (Kotlarski, 1986; Krajewski, 1976; see Wong's Lecture 14): the theory $\mathrm{CT}_0$ so obtained is not conservative over $\mathrm{PA}$. Enayat and Pakhomov (2019) located the source of this strength in the pathology of the previous lesson: $\mathrm{CT}^-$ together with **disjunctive correctness**, the statement that a finite disjunction of any length is true if and only if one of its disjuncts is true, is the same theory as $\mathrm{CT}_0$; in particular it proves $\mathrm{Con}(\mathrm{PA})$.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that a full satisfaction class for a model $M$ of $\mathrm{PA}$ is not definable in $M$ with parameters.
+::::exercise{#ex-lachlan-head-first difficulty=2 objective="See that a full satisfaction class evaluates a non-standard disjunction correctly only through standardly many disjuncts."}
+Let $\eta_k$, $k \in M$, be formulas given by a primitive recursive function, and $\bigvee_{k < m} \eta_k$ defined head first: $\bigvee_{k < 0} \eta_k = (v_0 \neq v_0)$ and $\bigvee_{k < m + 1} \eta_k = \eta_0 \vee \bigvee_{k < m} \eta_{k+1}$. Let $S$ be a full satisfaction class and $m$ non-standard. Show that if $S(\eta_{k_0}, e)$ for some standard $k_0 < m$, then $S(\bigvee_{k < m} \eta_k, e)$; and that the converse can fail, using :ref{#ex-sat-delta}.
 
 :::solution
-By :ref{#ex-sat-classes} (2), it satisfies condition 2 of :ref{#def-inductive-sat}; apply the exercise of :ref{to="recursive-saturation/resplendence"}.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $\eta_k$, $k \in M$, be formulas given by a primitive recursive function, and $\bigvee_{k < m} \eta_k$ defined head first: $\bigvee_{k < 0} \eta_k = (v_0 \neq v_0)$ and $\bigvee_{k < m + 1} \eta_k = \eta_0 \vee \bigvee_{k < m} \eta_{k+1}$. Let $S$ be a full satisfaction class and $m$ non-standard. Show that if $S(\eta_{k_0}, e)$ for some standard $k_0 < m$, then $S(\bigvee_{k < m} \eta_k, e)$; and that the converse can fail, using the exercise of the previous lesson.
-
-:::solution
-By the clause for $\vee$, applied $k_0 + 1$ times from the outside, $S(\bigvee_{k < m} \eta_k, e)$ holds if one of $S(\eta_0, e), \dots, S(\eta_{k_0}, e)$ holds. For the converse, take $\eta_k = (0 \neq 0)$ for every $k$ and $m = a$ non-standard. The solution of the exercise of the previous lesson applies to the formulas $\bigvee_{k < m'} \eta_k$ in place of $\delta_{m'}$, and gives a full satisfaction class for which $\bigvee_{k < a} \eta_k$ is true, while every $\eta_k$, a standard false sentence, is false.
+By the clause for $\vee$, applied $k_0 + 1$ times from the outside, $S(\bigvee_{k < m} \eta_k, e)$ holds if one of $S(\eta_0, e), \dots, S(\eta_{k_0}, e)$ holds. For the converse, take $\eta_k = (0 \neq 0)$ for every $k$ and $m = a$ non-standard. The solution of :ref{#ex-sat-delta} applies to the formulas $\bigvee_{k < m'} \eta_k$ in place of $\delta_{m'}$, and gives a full satisfaction class for which $\bigvee_{k < a} \eta_k$ is true, while every $\eta_k$, a standard false sentence, is false.
 :::
 ::::
 
@@ -145,3 +135,55 @@ By the clause for $\vee$, applied $k_0 + 1$ times from the outside, $S(\bigvee_{
 - S. Krajewski, *Non-standard satisfaction classes*, in Set Theory and Hierarchy Theory, Lecture Notes in Mathematics 537, Springer, 1976, 121–144.
 - S. T. Smith, *Nonstandard definability*, Annals of Pure and Applied Logic 42 (1989), 21–43.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 14.
+
+:::::exercises
+::::exercise{#ex-lachlan-undefinable difficulty=1 objective="Combine the correctness of full satisfaction classes on standard formulas with Tarski's argument."}
+Show that a full satisfaction class for a model $M$ of $\mathrm{PA}$ is not definable in $M$ with parameters.
+
+:::solution
+By :ref{#ex-sat-classes} (2), it satisfies condition 2 of :ref{#def-inductive-sat}; apply :ref{#ex-inductive-sat-undefinable}.
+:::
+::::
+
+::::exercise{#ex-lachlan-standard-model difficulty=1 objective="See why Lachlan's theorem needs a non-standard model, and locate where the proof uses it."}
+Show that $\nat$ has a full satisfaction class and is not recursively saturated. Where does the proof of :ref{#thm-lachlan} use that $M$ is non-standard?
+
+:::solution
+In $\nat$, satisfaction is a full satisfaction class (:ref{#ex-sat-classes}, item 1), and the recursive type $\{ \bar n < v : n \in \nat \}$ is finitely satisfiable and omitted, so $\nat$ is not recursively saturated. The proof of :ref{#thm-lachlan} takes a non-standard index $\nu$, and :ref{#lem-lachlan-values} (2) and (3) concern non-standard indices. In $\nat$, every index is standard, $B_i = A_i$ for every $i$ by item 1 of that lemma, and no contradiction arises.
+:::
+::::
+
+::::exercise{#ex-lachlan-partition-compute difficulty=1 objective="Compute the set of the partition of Lachlan's lemma that contains a given pair."}
+In the proof of :ref{#lem-lachlan-partition}, let $x = \langle a, b \rangle$ and let $j(a)$ be the largest $j \in \nat$ with $M \models \theta_j(a, c)$. Show that $j(a)$ exists, and that $x \in A_k$ for $k = \min(j(a), b) + 1$, where $\min(j(a), b) = j(a)$ if $b$ is non-standard.
+
+:::solution
+Every formula of $p$ occurs in the enumeration $\theta'_0, \theta'_1, \dots$, since it is accepted by the computation deciding $p$ within some number of steps. The formulas $\theta_j$ decrease, so $\{ j : M \models \theta_j(a, c) \}$ is an initial segment of $\nat$, containing $0$ since $\theta_0$ is $v = v$. It is finite: otherwise $a$ would satisfy every $\theta'_j$, hence realize $p$, which is omitted. So $j(a)$ exists.
+
+Since pairing is a bijection, $\theta^*_i(x)$ holds if and only if $M \models \theta_i(a, c)$ and $i \leq b$, that is, if and only if $i \leq j(a)$ and $i \leq b$, that is, $i \leq m$ with $m = \min(j(a), b)$, a standard number. Then $x$ satisfies $\theta^*_m$ and not $\theta^*_{m+1}$, so $x \in A_{m+1}$.
+:::
+::::
+
+::::exercise{#ex-lachlan-inductive difficulty=1 objective="Derive recursive saturation from a full satisfaction class with induction by overspill, without Lachlan's argument." lessons="resplendence"}
+Let $M$ be a non-standard model of $\mathrm{PA}$ with a full satisfaction class $S$ such that $(M, S)$ satisfies the induction scheme for all formulas of $\mathcal L_A \cup \{ S \}$. Show, without :ref{#thm-lachlan}, that $M$ is recursively saturated.
+
+:::solution
+By :ref{#ex-sat-classes} (2), $S$ agrees with satisfaction in $M$ on standard formulas: for every standard $\theta(v_0, \dots, v_k)$ and every $e$, $S(\ulcorner \theta \urcorner, e) \leftrightarrow M \models \theta(e(0), \dots, e(k))$. This is condition 2 of :ref{#def-inductive-sat}, and condition 1 is the hypothesis; so $S$ is an inductive partial satisfaction class. The proof of the direction ($\Leftarrow$) of :ref{#thm-inductive-sat} does not use countability, and shows that $M$ is recursively saturated.
+:::
+::::
+
+::::exercise{#ex-lachlan-resplendent difficulty=2 objective="Characterize the countable models of PA with a full satisfaction class as the resplendent ones, combining three theorems of the course." lessons="resplendence, satisfaction-classes"}
+Let $M$ be a countable non-standard model of $\mathrm{PA}$. Show that the following are equivalent, without using Barwise's theorem that resplendent structures are recursively saturated: (1) $M$ is recursively saturated; (2) $M$ is resplendent; (3) $M$ has a full satisfaction class.
+
+:::solution
+(1 ⇒ 2) is :ref{#thm-barwise-ressayre}. (2 ⇒ 3): the chain in the proof of :ref{#thm-kkl} uses only :ref{#thm-enayat-visser}, which holds for every model of $\mathrm I\Sigma_1$; it gives $M_\omega \succcurlyeq M$ with a full satisfaction class, so the single sentence $\tau(S)$ of $\mathcal L_A \cup \{ S \}$ is consistent with $\mathrm{ElemDiag}(M)$. By :ref{#def-resplendent}, $M$ has an expansion $(M, S) \models \tau(S)$. (3 ⇒ 1) is :ref{#thm-lachlan}.
+:::
+::::
+
+::::exercise{#ex-lachlan-ssy difficulty=1 objective="Combine Lachlan's theorem with the coding of complete types to describe the standard system of a model with a full satisfaction class." lessons="recursively-saturated-models"}
+Let $M$ be a non-standard model of $\mathrm{PA}$ with a full satisfaction class. Show that $\mathrm{SSy}(M)$ is a Scott set containing $\mathrm{Th}(M)$, and that if $M \models \mathrm{Th}(\nat)$, then $\mathrm{SSy}(M)$ contains every arithmetic set.
+
+:::solution
+By :ref{#thm-lachlan}, $M$ is recursively saturated, so $\mathrm{Th}(M) \in \mathrm{SSy}(M)$ by :ref{#prop-rs-realized-coded}, and $\mathrm{SSy}(M)$ is a Scott set by :ref{#cor-ssy-scott-set}. If $\mathrm{Th}(M) = \mathrm{Th}(\nat)$ and $X = \{ n : \nat \models \varphi(\bar n) \}$ is arithmetic, then $n \in X$ if and only if $\ulcorner \varphi(\bar n) \urcorner \in \mathrm{Th}(\nat)$, so $X$ is computable from $\mathrm{Th}(M)$ and belongs to $\mathrm{SSy}(M)$ by :ref{#thm-ssy-turing-ideal}.
+:::
+::::
+:::::

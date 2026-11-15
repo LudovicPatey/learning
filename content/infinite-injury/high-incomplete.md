@@ -125,9 +125,7 @@ Why is the first visit of a $\mathcal G_e$-node after an initialization not expa
   Cofiniteness only uses the node on the true path, which has infinitely many expansionary stages in both versions.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1 #ex-hi-true-path}
+::::exercise{#ex-hi-true-path difficulty=1 objective="Adapt the proof of the properties of the true path to the high incomplete construction."}
 Prove :ref{#lem-hi-true-path}, following the proof of :ref{#lem-true-path}. Where is it used that no stage ends early?
 
 :::solution
@@ -142,3 +140,53 @@ Sacks (1963) proved that every degree c.e. in and above $\mathbf 0'$ is the jump
 - G. E. Sacks, *Recursive enumerability and the jump operator*, Transactions of the American Mathematical Society 108 (1963), 223–239.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.14.3 and §2.16.
 - R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapter VIII (the thickness lemma is Theorem VIII.1.1, Sacks' jump theorem is Theorem VIII.3.1).
+
+:::::exercises
+::::exercise{#ex-hi-coding-forms difficulty=1 objective="See why the coding requirements ask for finite or cofinite columns, rather than empty or full ones, or merely infinite ones."}
+1. Show that there is no c.e. set $H$ such that $H^{[e]} = \nat$ for every $e \in \mathrm{Inf}$ and $H^{[e]} = \emptyset$ for every $e \notin \mathrm{Inf}$.
+2. Let $H = \{ \langle e, y \rangle : y \in W_e \}$. Show that $H$ is c.e., that $H^{[e]}$ is infinite if and only if $W_e$ is infinite, and that $\emptyset' \leq_T H$.
+
+Explain what these two facts say about the form of the requirements $\mathcal G_e$.
+
+:::solution
+1. If $H$ were such a set, then $e \in \mathrm{Inf}$ if and only if $\langle e, 0 \rangle \in H$, so $\mathrm{Inf} \leq_T H$. Since $H$ is c.e., $H \leq_T \emptyset'$, and since $\mathrm{Inf}$ is $\Pi^0_2$-complete (:ref{#thm-fin-complete}), $\emptyset'' \leq_T \mathrm{Inf} \leq_T \emptyset'$, contradicting :ref{#thm-jump}.
+2. $\langle e, y \rangle \in H$ if and only if $\exists s\ y \in W_{e,s}$, so $H$ is c.e. Its column $e$ is $W_e$. Finally $e \in \emptyset'$ if and only if $e \in W_e$, if and only if $\langle e, e \rangle \in H$, so $\emptyset' \leq_m H$.
+
+The requirement that $H^{[e]}$ be full or empty according to $\mathrm{Inf}$ is too strong: it would make $\mathrm{Inf}$ computable in $H$, which no c.e. set allows. The requirement that $H^{[e]}$ be infinite exactly when $W_e$ is infinite is too weak: it is met by a complete set, and it only makes $\mathrm{Inf}$ a $\Pi^0_2(H)$ set, which gives $\mathrm{Inf} \leq_T H''$ and nothing about $H'$. The requirements $\mathcal G_e$ lie in between: $\mathrm{Inf}(e)$ is the limit of the column $e$, which places $\mathrm{Inf}$ below $H'$ by the limit lemma (:ref{#lem-hi-coding-suffices}), and :ref{#thm-high-incomplete} shows that they can be met by an incomplete c.e. set.
+:::
+::::
+
+::::exercise{#ex-hi-restraints-finite difficulty=1 objective="Check that the bound $R_\alpha$ used by the coding nodes is computable."}
+Show that, at each stage $s$ of the construction, only nodes of length less than $s$ have a non-zero restraint. Deduce that the value of $R_\alpha$ at any moment of stage $s$ is computable from $\alpha$, $s$ and that moment.
+
+:::solution
+A restraint is set to a non-zero value only when a $\mathcal P$-node acts, at a stage $t \geq 1$ at which it is visited, and is reset to $0$ by initialization. A node visited at stage $t$ is $\sigma_t \uh n$ for some $n < t$, so it has length less than $t$. Hence, during stage $s$, the nodes with a non-zero restraint have length less than $s$, and there are finitely many of them.
+
+The construction up to a given moment of stage $s$ is a finite computation, which yields the current restraints of the finitely many nodes of length less than $s$. Whether such a node $\gamma$ has higher priority than $\alpha$ is decidable: check whether $\gamma \prec \alpha$ or $\gamma <_L \alpha$. So $R_\alpha$ is the maximum of a finite, computable list of numbers, or $0$ if the list is empty.
+:::
+::::
+
+::::exercise{#ex-hi-tot-coding difficulty=2 objective="Adapt the coding requirements to the $\Pi^0_2$-complete set $\mathrm{Tot}$, and identify the properties of the coded approximation that the verification uses." lessons="arithmetic-hierarchy/index-sets"}
+Let $c(e, s)$ be the largest $n \leq s$ such that $\Phi_e(y)[s]$ converges for every $y < n$. Modify the construction by replacing $|W_{e,s}|$ by $c(e, s)$ in the treatment of $\mathcal G_e$-nodes. Show that the column $e$ of the resulting set $H$ is cofinite if $\Phi_e$ is total and finite otherwise, and that $H$ is high. Which properties of the function $s \mapsto |W_{e,s}|$ does the proof of :ref{#lem-hi-coding} use?
+
+:::solution
+The proof of :ref{#lem-hi-coding} uses only three properties of $q(s) = |W_{e,s}|$: $q$ is computable, so that the construction is computable; $q$ is non-decreasing, and if it is bounded it is eventually constant, equal to its maximum $m$, from a stage $s_0$ on; if it is unbounded, it tends to infinity. In the finite case the proof uses that records never exceed $m$ and that a record defined at a stage $s \geq s_0$ equals $m$; in the infinite case, that $q(s) > \rho_\alpha$ at some later stage, whatever the record $\rho_\alpha$.
+
+The function $s \mapsto c(e, s)$ is computable. It is non-decreasing, since a computation converging at stage $s$ also converges at stage $s + 1$, and the bound $n \leq s$ increases with $s$. If $\Phi_e$ is total, then for every $n$, all the computations $\Phi_e(y)$, $y < n$, converge by some stage $s_n$, and $c(e, s) \geq n$ for every $s \geq \max(s_n, n)$, so $c(e, s) \to \infty$. If $\Phi_e(y)$ diverges, then $c(e, s) \leq y$ for every $s$, so $c(e, s)$ is bounded and, being non-decreasing, eventually constant. The proof of :ref{#lem-hi-coding} therefore applies word for word, with "$\Phi_e$ total" in place of "$W_e$ infinite": $H^{[e]}$ is cofinite if $e \in \mathrm{Tot}$ and finite otherwise. The other parts of the verification, :ref{#lem-hi-true-path} and the diagonalization requirements, do not depend on what the coding nodes measure.
+
+As in :ref{#lem-hi-coding-suffices}, $\mathrm{Tot}(e) = \lim_y H(\langle e, y \rangle)$, so $\mathrm{Tot} \leq_T H'$ by the relativized limit lemma (:ref{#thm-limit-lemma}). Since $\mathrm{Tot}$ is $\Pi^0_2$-complete (:ref{#thm-tot-complete}), $\emptyset'' \leq_T H'$.
+:::
+::::
+
+::::exercise{#ex-hi-v-every-stage difficulty=2 objective="See on the finite injury version why the timing of the coding strategy is what protects the diagonalization strategy."}
+In the finite injury version described before :ref{#prop-hi-finite-injury}, let $V = \nat$, with the enumeration $V_s = \{ 0, \dots, s - 1 \}$, and let $\Psi$ be any Turing functional. Show that the strategy for $\mathcal P_0$ is never initialized. Compare with the run of the proof of :ref{#prop-hi-finite-injury}.
+
+:::solution
+Since $|V_s| = s > |V_{s-1}|$, the strategy for $\mathcal G_0$ acts at every stage $s \geq 1$. By induction on $s \geq 1$, at the end of the action of $\mathcal G_0$ at stage $s$, the column $0$ of $H$ is $\{ \langle 0, y \rangle : y < s \}$: at stage $1$ it enumerates $\langle 0, 0 \rangle$, and at a stage $s \geq 2$ it finds the numbers $\langle 0, y \rangle$ with $y < s - 1$ already in $H$, and enumerates only $\langle 0, s - 1 \rangle$. No other strategy enumerates numbers of the column $0$.
+
+The strategy for $\mathcal P_0$ is initialized only when $\mathcal G_0$ enumerates a number less than its restraint. Before $\mathcal P_0$ acts, its restraint is $0$, and no number is less than $0$. Suppose that it acts at stage $s_1$, with restraint $s_1$; this happens after the action of $\mathcal G_0$ at stage $s_1$. At every later stage $t > s_1$, $\mathcal G_0$ enumerates only $\langle 0, t - 1 \rangle \geq t - 1 \geq s_1$, which is not less than the restraint. So $\mathcal P_0$ is never initialized, and it acts at most once.
+
+In the proof of :ref{#prop-hi-finite-injury}, $V$ grows only at the stage after an action of $\mathcal P_0$, so $\mathcal P_0$ always acts while the numbers $\langle 0, y \rangle$ with $g \leq y < s$ are missing from $H$, and the next growth of $V$ enumerates them below the restraint. Here, $\mathcal G_0$ fills its column up to the current stage at every stage, before $\mathcal P_0$ acts, and later enumerates only numbers at least as large as the stage. This is the timing that the tree imposes on the nodes below the outcome $\infty$ of a coding node: they act only at stages at which the coding node has just filled its column.
+:::
+::::
+:::::

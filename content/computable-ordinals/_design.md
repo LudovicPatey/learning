@@ -194,7 +194,63 @@ Kleene–Brouwer ordering and `prop-pi11-not-sigma11`.
   `prop-omega1-relative`, well-founded-trees → `ex-tree-boundedness`), all presented as such.
 - A full proof that ω₁ᶜᵏ is closed under exponentiation could be an exercise.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. Labels
+of existing exercises were kept (`ex-tree-boundedness`, `ex-o-bounded`); the others were
+labeled on 2026-11-13.
+
+**Featured exercises** (in the text, placed after the material they practice):
+
+- ordinals: `ex-wo-no-descending` (the equivalence used throughout the track to prove
+  well-foundedness; cited in the text) and `ex-lambda-plus-n` (successor/limit
+  decomposition, the case distinction of every transfinite recursion).
+- computable-well-orderings: `ex-omega-powers` (closure beyond multiplication, cited for
+  ω₁ᶜᵏ) and `ex-largest-sigma02` (the Σ⁰₂ bound behind `prop-wo-not-transparent`).
+- kleene-o: `ex-epsilon-zero` (a full effective transfinite recursion by the reader;
+  difficulty raised from 1 to 2, and totality of `p` made explicit).
+- markwald: `ex-no-exact-conversion` (why the conversion only gives upper bounds).
+- well-founded-trees: `ex-kb-decreasing` (rank versus Kleene–Brouwer type on an infinite
+  tree) and `ex-no-computable-path` (ill-foundedness not witnessed computably).
+- trees-and-pi11: `ex-pi11-reducible` (Π¹₁ = reducible to O, WO, WF).
+- boundedness: `ex-tree-boundedness` (cited by the hyperarithmetic course) and
+  `ex-o-bounded`.
+
+**Further exercises** (block at the end of each lesson):
+
+- ordinals: product orders (moved, `ex-antilex-orders`); an order type computed through
+  the 2-adic valuation; monotonicity of addition (Monin–Patey); absorption
+  (ω + ω² = ω²); mutual embeddings of well-orderings versus linear orders; embedding of
+  countable orders into ℚ (Cantor).
+- computable-well-orderings: a c.e. partial order that is not computable (linearity
+  needed); type ω is Π⁰₃; a computable copy of ω with non-computable successor relation;
+  a coding of Fin into "has a largest element" (strengthens `prop-wo-not-transparent`).
+- kleene-o: sums of notations computed by hand; transitivity of <_O by induction on the
+  inductive definition; Tot ≤ₘ O and Π⁰₂-completeness of the notations of ω;
+  multiplication of notations (and why |a| ≥ 1 is needed).
+- markwald: ω₁ˣ depends on the degree of X; c.e. sets of notations are bounded, so O is
+  not c.e.; c.e. subsets of WO are bounded (two proofs); exact conversion when the
+  successor/limit structure is computable.
+- well-founded-trees: finite ranks and lengths; rank functions and minimality of the
+  rank; ranks and Kleene–Brouwer types of ℕ^{≤n} (ωⁿ + 1); computably bounded trees and
+  König's lemma (Σ⁰₁); the lexicographic order as a counterexample.
+- trees-and-pi11: Σ¹₁-completeness of ill-foundedness; closure of Π¹₁ under number
+  quantifiers via trees; the well-founded part of a tree as an inductive definition (the
+  pattern of `prop-o-pi11`); no computable descending sequence, by the hierarchy theorem;
+  the ordinals of the reduction to O bound the ranks.
+- boundedness: WO≥α and successor types are not Σ¹₁, type exactly α is Δ¹₁; overspill for
+  trees; pseudo-well-orderings with a long initial segment; ω₁ˣ = ω₁ᶜᵏ for arithmetic
+  singletons such as ∅^(ω); rank < α is Δ¹₁ for trees (also listed under trees-and-pi11).
+
+**Sources.** Monin–Patey, *Transfinite numbers* (monotonicity of addition; the
+impossibility of exact conversion, already credited); classical results (Cantor's
+embedding into ℚ, König's lemma). The other exercises were written for the course from
+its own material; none is copied from a book.
+
+**Overlap noted.** `ex-o-bounded` and the first exercise of `hyperarithmetic/kleene-theorem`
+both bound Σ¹₁ subsets of O; the latter also deduces that O is not Σ¹₁.
+
+## 12. History
 
 - **2026-11-12.** Design and pedagogical revision. Seven lessons instead of three: new
   `computable-well-orderings`, `markwald`, `well-founded-trees`, `boundedness`; kleene-o and
@@ -206,3 +262,8 @@ Kleene–Brouwer ordering and `prop-pi11-not-sigma11`.
   `scripts/figures/computable-ordinals.py`. Unverifiable section numbers (Sacks I.5, Rogers
   Ch. 11) removed; references checked against Monin–Patey, Simpson, Nies and
   Dzhafarov–Mummert. All labels kept; moved labels listed in the open points.
+- **2026-11-13: featured and further exercises.** Labels and objectives for all
+  exercises; featured exercises moved into the text after the material they practice;
+  32 further exercises (section 11). The solution of `ex-no-computable-path` no longer
+  cites a lesson outside the prerequisites, and its pointer to the non-Σ¹₁ result now
+  names the boundedness lesson. Durations unchanged.

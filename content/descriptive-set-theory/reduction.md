@@ -1,7 +1,7 @@
 ---
 title: The reduction and separation properties
 summary: The reduction property for Π¹₁ sets, proved by stage comparison; Kleene's separation theorem for Σ¹₁ sets; disjoint Π¹₁ sets without Δ¹₁ separation, and the failure of reduction for Σ¹₁ sets.
-duration: 35
+duration: 30
 prerequisites: [norms]
 ---
 
@@ -93,23 +93,13 @@ In the proof of :ref{#prop-pi11-inseparable}, why is the reduction property appl
   The sets $Y_0$ and $Y_1$ are $\Pi^1_1$; if they were $\Delta^1_1$, $Y_0$ itself would separate them.
 :::
 
-Reduction and separation thus sit on opposite sides: the $\Pi^1_1$ sets have the reduction property and not the separation property, and the $\Sigma^1_1$ sets have the separation property and, by the first exercise, not the reduction property. The same pattern holds for the c.e. and co-c.e. sets, and, classically, for the co-analytic and analytic sets.
+Reduction and separation thus sit on opposite sides: the $\Pi^1_1$ sets have the reduction property and not the separation property, and the $\Sigma^1_1$ sets have the separation property and, by :ref{#ex-sigma11-no-reduction}, not the reduction property. The same pattern holds for the c.e. and co-c.e. sets, and, classically, for the co-analytic and analytic sets.
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-sigma11-no-reduction difficulty=1 objective="Derive the failure of the reduction property for $\Sigma^1_1$ sets from the existence of $\Delta^1_1$-inseparable $\Pi^1_1$ sets."}
 Show that the reduction property fails for $\Sigma^1_1$ sets: there are $\Sigma^1_1$ sets $D$ and $E$ for which no disjoint $\Sigma^1_1$ sets $D' \subseteq D$ and $E' \subseteq E$ have union $D \cup E$.
 
 :::solution
 Let $Y_0$ and $Y_1$ be given by :ref{#prop-pi11-inseparable}, and let $D = \overline{Y_0}$ and $E = \overline{Y_1}$, which are $\Sigma^1_1$ with $D \cup E = \nat$. If $D' \subseteq D$ and $E' \subseteq E$ were disjoint $\Sigma^1_1$ sets with union $\nat$, each would be the complement of the other, hence $\Delta^1_1$. Then $E'$ would contain $Y_0$, since $Y_0 \cap D' \subseteq Y_0 \cap D = \emptyset$, and $E' \cap Y_1 \subseteq E \cap Y_1 = \emptyset$: a $\Delta^1_1$ separation.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $(B_k)$ be a sequence of sets such that $\{ \langle n, k \rangle : n \in B_k \}$ is $\Pi^1_1$. Show that there are pairwise disjoint sets $B'_k \subseteq B_k$ with $\bigcup_k B'_k = \bigcup_k B_k$ and $\{ \langle n, k \rangle : n \in B'_k \}$ $\Pi^1_1$.
-
-:::solution
-Apply :ref{#thm-stage-comparison} to $A = \{ \langle n, k \rangle : n \in B_k \}$, and let $n \in B'_k$ if $\langle n, k \rangle \leq^* \langle n, j \rangle$ for every $j$, and $\langle n, k \rangle <^* \langle n, j \rangle$ for every $j < k$. This is $\Pi^1_1$, since a universal number quantifier in front of a $\Pi^1_1$ formula gives a $\Pi^1_1$ formula. If $n \in B'_k$, then $\langle n, k \rangle \in A$, so $n \in B_k$. If $n \in B'_k \cap B'_j$ with $j < k$, the first condition for $j$ gives $\rho_{\langle n, j \rangle} \leq \rho_{\langle n, k \rangle}$ and the second condition for $k$ gives $\rho_{\langle n, k \rangle} < \rho_{\langle n, j \rangle}$, a contradiction. If $n \in \bigcup_k B_k$, the stages $\rho_{\langle n, k \rangle}$ are not all $\infty$; let $\alpha$ be the least of them and $k$ the least number with $\rho_{\langle n, k \rangle} = \alpha$. Then $n \in B'_k$. This is the selection of the next lesson, applied to the relation $n \in B_k$.
 :::
 ::::
 
@@ -120,3 +110,60 @@ The separation theorem for analytic sets is due to Lusin (1927), and the reducti
 - S. C. Kleene, *Hierarchies of number-theoretic predicates*, Bulletin of the American Mathematical Society 61 (1955), 193–213.
 - J. W. Addison, *Separation principles in the hierarchies of classical and effective descriptive set theory*, Fundamenta Mathematicae 46 (1958), 123–135.
 - Y. N. Moschovakis, *Descriptive Set Theory*, 2nd edition, American Mathematical Society, 2009, Section 4B.
+
+:::::exercises
+::::exercise{#ex-reduction-sequences difficulty=2 objective="Extend the reduction property from two $\Pi^1_1$ sets to a uniform sequence of $\Pi^1_1$ sets by stage comparison."}
+Let $(B_k)$ be a sequence of sets such that $\{ \langle n, k \rangle : n \in B_k \}$ is $\Pi^1_1$. Show that there are pairwise disjoint sets $B'_k \subseteq B_k$ with $\bigcup_k B'_k = \bigcup_k B_k$ and $\{ \langle n, k \rangle : n \in B'_k \}$ $\Pi^1_1$.
+
+:::solution
+Apply :ref{#thm-stage-comparison} to $A = \{ \langle n, k \rangle : n \in B_k \}$, and let $n \in B'_k$ if $\langle n, k \rangle \leq^* \langle n, j \rangle$ for every $j$, and $\langle n, k \rangle <^* \langle n, j \rangle$ for every $j < k$. This is $\Pi^1_1$, since a universal number quantifier in front of a $\Pi^1_1$ formula gives a $\Pi^1_1$ formula. If $n \in B'_k$, then $\langle n, k \rangle \in A$, so $n \in B_k$. If $n \in B'_k \cap B'_j$ with $j < k$, the first condition for $j$ gives $\rho_{\langle n, j \rangle} \leq \rho_{\langle n, k \rangle}$ and the second condition for $k$ gives $\rho_{\langle n, k \rangle} < \rho_{\langle n, j \rangle}$, a contradiction. If $n \in \bigcup_k B_k$, the stages $\rho_{\langle n, k \rangle}$ are not all $\infty$; let $\alpha$ be the least of them and $k$ the least number with $\rho_{\langle n, k \rangle} = \alpha$. Then $n \in B'_k$. This is the selection of the next lesson, applied to the relation $n \in B_k$.
+:::
+::::
+
+::::exercise{#ex-every-reduction-inseparable difficulty=1 objective="See that the inseparability argument applies to every reduction of the diagonal sets, and deduce that none of the sets involved is $\Delta^1_1$."}
+Let $X_0$ and $X_1$ be the $\Pi^1_1$ sets defined in the proof of :ref{#prop-pi11-inseparable}. Show that for all disjoint $\Pi^1_1$ sets $B' \subseteq X_0$ and $C' \subseteq X_1$ with $B' \cup C' = X_0 \cup X_1$, no $\Delta^1_1$ set $F$ satisfies $B' \subseteq F$ and $F \cap C' = \emptyset$. Deduce that none of the sets $B'$, $C'$ and $X_0 \cup X_1$ is $\Delta^1_1$.
+
+:::solution
+The proof of :ref{#prop-pi11-inseparable} only uses that $Y_0 \subseteq X_0$ and $Y_1 \subseteq X_1$ are disjoint with union $X_0 \cup X_1$, not the way they were obtained. We repeat it for $B'$ and $C'$. Suppose that a $\Delta^1_1$ set $F$ satisfies $B' \subseteq F$ and $F \cap C' = \emptyset$. Choose $a$ with $U_a = \overline F$ and $b$ with $U_b = F$, and let $e = \langle a, b \rangle$. If $e \in F$, then $e \in U_b$, so $e \in X_1$, and $e \notin U_a$, so $e \notin X_0$; then $e \in X_0 \cup X_1 = B' \cup C'$ and $e \notin B' \subseteq X_0$, so $e \in C'$, which contradicts $F \cap C' = \emptyset$. If $e \notin F$, then $e \in U_a \setminus U_b$, so $e \in X_0 \setminus X_1$; since $C' \subseteq X_1$, $e \in B' \subseteq F$, a contradiction.
+
+If $B'$ were $\Delta^1_1$, then $F = B'$ would separate $B'$ from $C'$, since they are disjoint. If $C'$ were $\Delta^1_1$, then $F = \overline{C'}$ would. If $X_0 \cup X_1$ were $\Delta^1_1$, then $B' = (X_0 \cup X_1) \cap \overline{C'}$ would be $\Sigma^1_1$, hence $\Delta^1_1$, which was just excluded.
+:::
+::::
+
+::::exercise{#ex-ce-reduction difficulty=1 objective="Recover the classical reduction of two c.e. sets from the proof of the reduction property." lessons="norms"}
+Let $B$ and $C$ be c.e. sets with computable enumerations $(B_s)$ and $(C_s)$ by finite sets, increasing, with $B_0 = C_0 = \emptyset$. Let $A = \{ 2n : n \in B \} \cup \{ 2n + 1 : n \in C \}$, enumerated by $A_s = \{ 2n : n \in B_s \} \cup \{ 2n + 1 : n \in C_s \}$, with the trees of :ref{#ex-ce-stages}. Describe the sets $B'$ and $C'$ of the proof of :ref{#thm-pi11-reduction} in terms of the enumerations, and show that they are c.e.
+
+:::solution
+For $k \in \nat$, let $s_k$ be the least $s$ with $k \in A_s$, or $\infty$ if $k \notin A$; then $s_k \geq 1$, $\rho_k = s_k - 1$ for $k \in A$ and $\rho_k = \infty$ otherwise (:ref{#ex-ce-stages}), and $k \in A_s$ if and only if $s_k \leq s$. So $n \in B'$, that is, $2n \leq^* 2n + 1$, holds if and only if $s_{2n}$ is finite and $s_{2n} \leq s_{2n+1}$; and $n \in C'$, that is, $2n + 1 <^* 2n$, if and only if $s_{2n+1}$ is finite and $s_{2n+1} < s_{2n}$. In words, $n \in B'$ if $n$ is enumerated into $B$ at a step at which it has not been enumerated into $C$ before, and $n \in C'$ if $n$ is enumerated into $C$ strictly before it is enumerated into $B$. This is the classical reduction recalled at the beginning of the lesson. As in :ref{#ex-ce-stage-comparison},
+$$
+\begin{gathered}
+n \in B' \iff \exists s \geq 1\ (n \in B_s \wedge n \notin C_{s-1}), \\
+n \in C' \iff \exists s\ (n \in C_s \wedge n \notin B_s),
+\end{gathered}
+$$
+since $s = s_{2n}$, respectively $s = s_{2n+1}$, is a witness, and conversely a witness $s$ satisfies $s_{2n} \leq s \leq s_{2n+1}$, respectively $s_{2n+1} \leq s < s_{2n}$. Both sets are $\Sigma^0_1$.
+:::
+::::
+
+::::exercise{#ex-separation-sequences difficulty=2 objective="Derive a separation theorem for sequences of $\Sigma^1_1$ sets from the reduction of sequences."}
+Let $(D_k)$ be a sequence of sets such that the relation $\{ \langle n, k \rangle : n \in D_k \}$ is $\Sigma^1_1$, and $\bigcap_k D_k = \emptyset$. Show that there are sets $F_k \supseteq D_k$ with $\bigcap_k F_k = \emptyset$ and $\{ \langle n, k \rangle : n \in F_k \}$ $\Delta^1_1$. Explain why the case of two sets is :ref{#cor-sigma11-separation}.
+
+:::solution
+Let $B_k = \nat \setminus D_k$. The relation $\{ \langle n, k \rangle : n \in B_k \}$ is the complement of a $\Sigma^1_1$ relation, hence $\Pi^1_1$, and $\bigcup_k B_k = \nat$ since $\bigcap_k D_k = \emptyset$. By :ref{#ex-reduction-sequences}, there are pairwise disjoint sets $B'_k \subseteq B_k$ with $\bigcup_k B'_k = \nat$ and $\{ \langle n, k \rangle : n \in B'_k \}$ $\Pi^1_1$. The sets $B'_k$ form a partition of $\nat$, so $n \notin B'_k$ if and only if $\exists j\ (j \neq k \wedge n \in B'_j)$, a $\Pi^1_1$ condition, since a number quantifier in front of a $\Pi^1_1$ formula gives a $\Pi^1_1$ formula. So the relation $n \in B'_k$ is $\Delta^1_1$. Let $F_k = \nat \setminus B'_k$. The relation $n \in F_k$ is $\Delta^1_1$; $D_k \subseteq F_k$ since $B'_k \subseteq B_k = \nat \setminus D_k$; and $\bigcap_k F_k = \nat \setminus \bigcup_k B'_k = \emptyset$.
+
+For two disjoint $\Sigma^1_1$ sets $D_0$ and $D_1$ (and $D_k = \nat$ for $k \geq 2$, say), this gives $\Delta^1_1$ sets $F_0 \supseteq D_0$ and $F_1 \supseteq D_1$ with $F_0 \cap F_1 = \emptyset$, so $F_0$ separates $D_0$ from $D_1$.
+:::
+::::
+
+::::exercise{#ex-effectively-inseparable difficulty=2 objective="Extract from the diagonal argument a computable witness that a pair of disjoint $\Pi^1_1$ sets fails to separate, as for effectively inseparable c.e. sets."}
+Let $U$ be the universal $\Pi^1_1$ set, $U_e = \{ n : \langle e, n \rangle \in U \}$, and let $X_0$, $X_1$, $Y_0$ and $Y_1$ be as in the proof of :ref{#prop-pi11-inseparable}. Show that for all numbers $a$ and $b$ such that $Y_0 \subseteq U_b$, $Y_1 \subseteq U_a$ and $U_a \cap U_b = \emptyset$, the number $\langle a, b \rangle$ belongs to neither $U_a$ nor $U_b$. Deduce :ref{#prop-pi11-inseparable} again.
+
+:::solution
+Recall that $e \in X_0$ if and only if $e = \langle a, b \rangle$ with $e \in U_a$, and $e \in X_1$ if and only if $e = \langle a, b \rangle$ with $e \in U_b$, and that $Y_0 \subseteq X_0$, $Y_1 \subseteq X_1$ are disjoint with union $X_0 \cup X_1$. Let $a$ and $b$ be as in the statement, and $e = \langle a, b \rangle$.
+
+If $e \in U_b$, then $e \in X_1$, and $e \notin U_a$ since $U_a \cap U_b = \emptyset$, so $e \notin X_0$. Then $e \in Y_0 \cup Y_1$ and $e \notin Y_0 \subseteq X_0$, so $e \in Y_1 \subseteq U_a$, a contradiction. If $e \in U_a$, then $e \in X_0$ and $e \notin U_b$, so $e \notin X_1 \supseteq Y_1$; hence $e \in Y_0 \subseteq U_b$, again a contradiction. So $e \notin U_a \cup U_b$.
+
+If a $\Delta^1_1$ set $F$ satisfied $Y_0 \subseteq F$ and $F \cap Y_1 = \emptyset$, choose $b$ with $U_b = F$ and $a$ with $U_a = \overline F$. The hypotheses hold, and $U_a \cup U_b = \nat$, which contradicts the first part. The statement is the analogue of effective inseparability for c.e. sets: two disjoint $\Pi^1_1$ sets $U_a \supseteq Y_1$ and $U_b \supseteq Y_0$ never cover $\nat$, and the number $\langle a, b \rangle$, computed from their indices, is a witness.
+:::
+::::
+:::::

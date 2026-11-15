@@ -59,7 +59,7 @@ where $\obf^{(n)} = \deg_T(\emptyset^{(n)})$, and $\emptyset^{(n)} \leq_T X^{(n)
 By item 5, $X \equiv_T Y$ implies $X' \equiv_T Y'$, so the jump is well defined on degrees and monotone. By items 3 and 4, $\dbf < \dbf'$. Finally $\emptyset \leq_T X$ for every $X$, and monotonicity gives $\emptyset^{(n)} \leq_T X^{(n)}$ by induction.
 :::
 
-The jump is not injective on degrees: the lesson on low and high sets constructs a non-computable set $A$ with $A' \equiv_T \emptyset'$. In particular the converse of item 5 fails for Turing reducibility: $A' \leq_T \emptyset'$ while $A \not\leq_T \emptyset$. For one-one reducibility the converse holds (see the exercises): $X \leq_T Y$ if and only if $X' \leq_1 Y'$. A one-one reduction between jumps carries more information than a Turing reduction, because it preserves the distinction between the sets that are c.e. relative to an oracle and their complements.
+The jump is not injective on degrees: the lesson on low and high sets constructs a non-computable set $A$ with $A' \equiv_T \emptyset'$. In particular the converse of item 5 fails for Turing reducibility: $A' \leq_T \emptyset'$ while $A \not\leq_T \emptyset$. For one-one reducibility the converse holds (:ref{#ex-jump-one-one}): $X \leq_T Y$ if and only if $X' \leq_1 Y'$. A one-one reduction between jumps carries more information than a Turing reduction, because it preserves the distinction between the sets that are c.e. relative to an oracle and their complements.
 
 :::quiz[the properties of the jump]
 In item 2, why must the function $f$ be computable, and not only $X$-computable?
@@ -97,6 +97,22 @@ Is $\emptyset'' $ c.e.?
 
   So the relation "is c.e. relative to" is not transitive: $\emptyset''$ is $\emptyset'$-c.e. and $\emptyset'$ is c.e., but $\emptyset''$ is not c.e.
 :::
+
+::::exercise{#ex-jump-of-join difficulty=1 objective="Compare the jump of a join with the join of the jumps, with a low splitting as a counterexample."}
+Show that $X' \oplus Y' \leq_T (X \oplus Y)'$ for all $X$ and $Y$. Admitting that there are sets $X$ and $Y$ with $X' \equiv_T Y' \equiv_T \emptyset'$ and $X \oplus Y \equiv_T \emptyset'$ (a consequence of Sacks' splitting theorem), show that the reverse reduction fails in general.
+
+:::solution
+Since $X, Y \leq_T X \oplus Y$, monotonicity gives $X', Y' \leq_T (X \oplus Y)'$, hence $X' \oplus Y' \leq_T (X \oplus Y)'$. With the given sets, $X' \oplus Y' \equiv_T \emptyset'$ while $(X \oplus Y)' \equiv_T \emptyset''$, which is not computable in $\emptyset'$.
+:::
+::::
+
+::::exercise{#ex-jump-one-one difficulty=2 objective="Show that one-one reducibility between jumps reflects Turing reducibility between the sets."}
+Show that $X \leq_T Y$ if and only if $X' \leq_1 Y'$.
+
+:::solution
+One direction is item 5 of :ref{#thm-jump}. Conversely, suppose $X' \leq_1 Y'$ via $h$. By item 2 of :ref{#thm-jump}, applied to $X$ and to its complement, which are both $X$-c.e., there are computable injective $f_0$, $f_1$ with $x \in X \iff f_0(x) \in X'$ and $x \notin X \iff f_1(x) \in X'$. Then $x \in X \iff h(f_0(x)) \in Y'$ and $x \notin X \iff h(f_1(x)) \in Y'$, so $X$ and its complement are many-one reducible to the $Y$-c.e. set $Y'$, hence $Y$-c.e., and $X$ is $Y$-computable by :ref{#ex-relativized-complementation}.
+:::
+::::
 
 ## Complete sets
 
@@ -144,40 +160,6 @@ Why is the relation "$\forall x > n\ \ x \notin W_e$" computable in $\emptyset'$
   $W_e$ is c.e., and not computable in general.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that there is an index $e$ such that $\Phi^{X'}_e = X$ for every $X$.
-
-:::solution
-By item 2 of :ref{#thm-jump} applied to an index $a$ with $W^X_a = X$ for every $X$ (the machine that halts if and only if the oracle bit at its input is $1$), there is a computable $f$ with $x \in X \iff f(x) \in X'$ for every $X$. The machine which, on input $x$, computes $f(x)$ and outputs the bit of its oracle at $f(x)$ computes $X$ from $X'$, whatever $X$ is.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that $X' \oplus Y' \leq_T (X \oplus Y)'$ for all $X$ and $Y$. Admitting that there are sets $X$ and $Y$ with $X' \equiv_T Y' \equiv_T \emptyset'$ and $X \oplus Y \equiv_T \emptyset'$ (a consequence of Sacks' splitting theorem), show that the reverse reduction fails in general.
-
-:::solution
-Since $X, Y \leq_T X \oplus Y$, monotonicity gives $X', Y' \leq_T (X \oplus Y)'$, hence $X' \oplus Y' \leq_T (X \oplus Y)'$. With the given sets, $X' \oplus Y' \equiv_T \emptyset'$ while $(X \oplus Y)' \equiv_T \emptyset''$, which is not computable in $\emptyset'$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that $X \leq_T Y$ if and only if $X' \leq_1 Y'$.
-
-:::solution
-One direction is item 5 of :ref{#thm-jump}. Conversely, suppose $X' \leq_1 Y'$ via $h$. By item 2 of :ref{#thm-jump}, applied to $X$ and to its complement, which are both $X$-c.e., there are computable injective $f_0$, $f_1$ with $x \in X \iff f_0(x) \in X'$ and $x \notin X \iff f_1(x) \in X'$. Then $x \in X \iff h(f_0(x)) \in Y'$ and $x \notin X \iff h(f_1(x)) \in Y'$, so $X$ and its complement are many-one reducible to the $Y$-c.e. set $Y'$, hence $Y$-c.e., and $X$ is $Y$-computable by :ref{#ex-relativized-complementation}.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that $\{ e : W_e = \emptyset \}$ and $\{ e : W_e \text{ is finite} \}$ are computable in $\emptyset'$ and in $\emptyset''$ respectively, and that the first is not computable.
-
-:::solution
-$W_e \neq \emptyset$ if and only if $\exists x \exists s\ \Phi_e(x)[s]\converge$, a c.e. condition, so the first set is the complement of a c.e. set, computable in $\emptyset'$. It is not computable, by :ref{#thm-rice}. The second set is $\mathrm{Fin}$, computable in $\emptyset''$ by :ref{#prop-tot-double-jump}.
-:::
-::::
-
 ## Notes and references
 
 The jump operator was introduced by Kleene and Post (1954), who proved its basic properties. The theorem of this lesson, with the converse of item 5 for one-one reducibility, is the Jump Theorem 3.4.3 of Soare (2016); see also Downey and Hirschfeldt (2010, §2.4), Nies (2009, §1.2), and the section on the Turing jump of Monin and Patey. Soare's textbooks present the jump together with the arithmetic hierarchy.
@@ -189,3 +171,73 @@ The jump is degree invariant: $X \equiv_T Y$ implies $X' \equiv_T Y'$. **Martin'
 - J. R. Steel, *A classification of jump operators*, Journal of Symbolic Logic 47 (1982), 347–358.
 - T. A. Slaman and J. R. Steel, *Definable functions on degrees*, in *Cabal Seminar 81–85*, Lecture Notes in Mathematics 1333, Springer, 1988, 37–55.
 - P. Lutz and B. Siskind, *Part 1 of Martin's conjecture for order-preserving and measure-preserving functions*, arXiv:2305.19646, 2023.
+
+:::::exercises
+::::exercise{#ex-jump-uniform-section difficulty=1 objective="Show that a set is computed from its jump by a single machine for all oracles."}
+Show that there is an index $e$ such that $\Phi^{X'}_e = X$ for every $X$.
+
+:::solution
+By item 2 of :ref{#thm-jump} applied to an index $a$ with $W^X_a = X$ for every $X$ (the machine that halts if and only if the oracle bit at its input is $1$), there is a computable $f$ with $x \in X \iff f(x) \in X'$ for every $X$. The machine which, on input $x$, computes $f(x)$ and outputs the bit of its oracle at $f(x)$ computes $X$ from $X'$, whatever $X$ is.
+:::
+::::
+
+::::exercise{#ex-empty-finite-domains difficulty=2 objective="Locate the index sets defined by emptiness and finiteness of the domain below the jumps."}
+Show that $\{ e : W_e = \emptyset \}$ and $\{ e : W_e \text{ is finite} \}$ are computable in $\emptyset'$ and in $\emptyset''$ respectively, and that the first is not computable.
+
+:::solution
+$W_e \neq \emptyset$ if and only if $\exists x \exists s\ \Phi_e(x)[s]\converge$, a c.e. condition, so the first set is the complement of a c.e. set, computable in $\emptyset'$. It is not computable, by :ref{#thm-rice}. The second set is $\mathrm{Fin}$, computable in $\emptyset''$ by :ref{#prop-tot-double-jump}.
+:::
+::::
+
+::::exercise{#ex-jump-variants difficulty=1 objective="Show that natural variants of the relativized halting problem are one-one equivalent to the jump."}
+Show that the sets $E^X = \{ e : W^X_e \neq \emptyset \}$ and $Z^X = \{ e : 0 \in W^X_e \}$ are both one-one equivalent to $X'$.
+
+:::solution
+Both sets are $X$-c.e.: $e \in E^X$ if and only if $\exists y\, \exists s\ \Phi^X_e(y)[s]\converge$, and $e \in Z^X$ if and only if $\exists s\ \Phi^X_e(0)[s]\converge$, projections of $X$-computable relations (:ref{#prop-oracle-stages}). By item 2 of :ref{#thm-jump}, both are one-one reducible to $X'$.
+
+Conversely, as in the proof of item 2 of :ref{#thm-jump}, there is a computable injective function $f$ such that $\Phi^Z_{f(e)}(y) \simeq \Phi^Z_e(e)$ for every $Z$, $e$ and $y$. If $e \in X'$, then $W^X_{f(e)} = \nat$; otherwise $W^X_{f(e)} = \emptyset$. So $e \in X' \iff f(e) \in E^X \iff f(e) \in Z^X$, and $f$ is a one-one reduction of $X'$ to each of the two sets.
+:::
+::::
+
+::::exercise{#ex-jump-uniform-monotone difficulty=2 objective="Make the monotonicity of the jump uniform in the index of the reduction."}
+Show that there is a computable function $j$ such that, for all sets $X$ and $Y$ and every $b$ with $\Phi^Y_b = X$, we have $\Phi^{Y'}_{j(b)} = X'$.
+
+:::solution
+Let $c$ be the computable function of item 2 of :ref{#prop-turing-preorder}: if $\Phi^Y_b = X$, then $\Phi^Y_{c(b, e)} = \Phi^X_e$ for every $e$. The partial function $(Y, b, e) \mapsto \Phi^Y_{c(b, e)}(e)$ is computed by an oracle machine (compute $c(b, e)$, then use :ref{#thm-relativized-universal}), so by the parameter form of :ref{#thm-relativized-smn} there is a computable $a$ with
+$$
+W^Y_{a(b)} = \{ e : \Phi^Y_{c(b, e)}(e)\converge \} \quad \text{for every } Y \text{ and } b.
+$$
+The proof of item 2 of :ref{#thm-jump} is uniform in the index: applying the parameter form of :ref{#thm-relativized-smn} to $(Z, (i, x), y) \mapsto \Phi^Z_i(x)$, there is a computable $F$ with $\Phi^Z_{F(i, x)}(y) \simeq \Phi^Z_i(x)$, hence $x \in W^Z_i \iff F(i, x) \in Z'$, for every $Z$, $i$ and $x$. Let $j(b)$ be an index, computable from $b$ by the SMN theorem, of the oracle machine which, on input $e$, outputs the bit of its oracle at position $F(a(b), e)$. If $\Phi^Y_b = X$, then
+$$
+\Phi^{Y'}_{j(b)}(e) = Y'\big(F(a(b), e)\big) = W^Y_{a(b)}(e) = 1 \iff \Phi^Y_{c(b, e)}(e)\converge \iff \Phi^X_e(e)\converge,
+$$
+so $\Phi^{Y'}_{j(b)} = X'$.
+:::
+::::
+
+::::exercise{#ex-diagonal-below-jump difficulty=2 objective="Measure the oracle needed by the diagonal argument against a sequence of sets." lessons="turing-reducibility"}
+Let $(Y_n)_{n \in \nat}$ be a sequence of sets and $W$ a set with $\bigoplus_n Y_n \leq_T W$. Show that the set $Z$ defined in the proof of item 3 of :ref{#prop-degree-countable}, which satisfies $Z \not\leq_T Y_n$ for every $n$, is computable in $W'$.
+
+:::solution
+Recall that $Z(\langle e, n \rangle) = 1 - \Phi^{Y_n}_e(\langle e, n \rangle)$ if this value is defined and belongs to $\{0, 1\}$, and $Z(\langle e, n \rangle) = 0$ otherwise. Since $Y_n(m) = \big(\bigoplus_k Y_k\big)(\langle n, m \rangle)$ and $\bigoplus_k Y_k \leq_T W$, an oracle machine computes $(n, m) \mapsto Y_n(m)$ with oracle $W$. Hence the computations $\Phi^{Y_n}_e(x)$ can be simulated with oracle $W$, uniformly in $n$, $e$ and $x$, as in the proof of item 2 of :ref{#prop-turing-preorder}: there is an oracle machine computing $(n, e, x) \mapsto \Phi^{Y_n}_e(x)$ with oracle $W$.
+
+The set $R = \{ \langle e, n \rangle : \Phi^{Y_n}_e(\langle e, n \rangle)\converge \}$ is therefore $W$-c.e., hence one-one reducible to $W'$ (:ref{#thm-jump}). With oracle $W'$, compute $Z(\langle e, n \rangle)$ as follows: decide whether $\langle e, n \rangle \in R$; if not, output $0$; if so, compute the value $v = \Phi^{Y_n}_e(\langle e, n \rangle)$ with oracle $W$, which is computable from $W'$ (item 3 of :ref{#thm-jump}), and output $1 - v$ if $v \in \{0, 1\}$ and $0$ otherwise. So $Z \leq_T W'$. For a constant sequence $Y_n = W$, this is another proof that $W'$ computes a set not computable in $W$.
+:::
+::::
+
+::::exercise{#ex-cof-triple-jump difficulty=2 objective="Locate an index set in the jump hierarchy by eliminating one unbounded quantifier at a time."}
+Show that $\mathrm{Cof} = \{ e : W_e \text{ is cofinite} \}$ is computable in $\emptyset'''$.
+
+:::solution
+$e \in \mathrm{Cof}$ if and only if $\exists n\ \forall x > n\ \ x \in W_e$. The relation $x \notin W_e$ is the complement of a c.e. relation, so it is computable in $\emptyset'$ (:ref{#prop-ce-below-jump}). Its projection $\exists x > n\ \ x \notin W_e$ is therefore $\emptyset'$-c.e., hence computable in $\emptyset''$ by item 2 of :ref{#thm-jump} relative to $\emptyset'$. Its complement $P(e, n) \iff \forall x > n\ \ x \in W_e$ is also computable in $\emptyset''$. Then $\mathrm{Cof} = \{ e : \exists n\ P(e, n) \}$ is $\emptyset''$-c.e., hence computable in $\emptyset'''$. The course on the arithmetic hierarchy shows that $\mathrm{Cof}$ is Turing equivalent to $\emptyset'''$.
+:::
+::::
+
+::::exercise{#ex-omega-jump difficulty=1 objective="Check that the finite iterates of the jump have a common strict upper bound."}
+Let $\emptyset^{(\omega)} = \{ \langle n, x \rangle : x \in \emptyset^{(n)} \}$. Show that $\emptyset^{(n)} <_T \emptyset^{(\omega)}$ for every $n$.
+
+:::solution
+$x \in \emptyset^{(n)}$ if and only if $\langle n, x \rangle \in \emptyset^{(\omega)}$, so $\emptyset^{(n)} \leq_T \emptyset^{(\omega)}$ for every $n$. If $\emptyset^{(\omega)} \leq_T \emptyset^{(n)}$ for some $n$, then $\emptyset^{(n+1)} \leq_T \emptyset^{(\omega)} \leq_T \emptyset^{(n)}$, contradicting item 4 of :ref{#thm-jump}. So the reduction is strict. The degree of $\emptyset^{(\omega)}$ is thus an upper bound of the sequence $\obf^{(n)}$; by the theorem of Kleene, Post and Spector mentioned in the lesson on Turing reducibility, it is not a least upper bound.
+:::
+::::
+:::::

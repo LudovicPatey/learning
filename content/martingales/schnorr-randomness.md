@@ -124,6 +124,14 @@ Let $(F_n)$ be a computable sequence of finite sets of strings, given by canonic
 The measures $\lambda([F_n]^{\prec})$ are rationals computed from $n$, and the tail of their sum after $N$ is at most $2^{1-N}$; so the sum is computable, and $([F_n]^{\prec})$ is a total Solovay test.
 :::
 
+::::exercise{#ex-schnorr-runs difficulty=1 objective="Apply a total Solovay test of clopen classes to bound the runs of zeros of a Schnorr random sequence."}
+Let $X$ be Schnorr random. Show that for almost every $n$, the bits $X(n), \dots, X(n + \lceil 2 \log n \rceil - 1)$ are not all $0$ (compare :ref{#ex-solovay-runs}).
+
+:::solution
+For $n \geq 2$, let $\mathcal S_n$ be the clopen class of the sequences that vanish on these $\lceil 2 \log n \rceil$ positions; its measure is $2^{-\lceil 2 \log n \rceil} \leq n^{-2}$, a rational computed from $n$ (let $\mathcal S_0 = \mathcal S_1 = \emptyset$). The tail of $\sum_n \lambda(\mathcal S_n)$ after $N \geq 2$ is at most $\sum_{n \geq N} n^{-2} \leq 1/(N - 1)$, so the sum is computable, and $(\mathcal S_n)$ is a total Solovay test. By :ref{#thm-total-solovay}, $X$ belongs to only finitely many $\mathcal S_n$.
+:::
+::::
+
 ## No universal Schnorr test
 
 :::proposition[Schnorr]{#prop-no-universal-schnorr}
@@ -146,16 +154,6 @@ In the proof of ($\Rightarrow$) in :ref{#thm-total-solovay}, why does the constr
   They may overlap; the lemma sums over pairs $(n, \sigma)$ and counts overlaps several times.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $X$ be Schnorr random. Show that for almost every $n$, the bits $X(n), \dots, X(n + \lceil 2 \log n \rceil - 1)$ are not all $0$ (compare the exercise on runs of zeros of :ref{to="martin-lof-randomness/solovay-tests"}).
-
-:::solution
-For $n \geq 2$, let $\mathcal S_n$ be the clopen class of the sequences that vanish on these $\lceil 2 \log n \rceil$ positions; its measure is $2^{-\lceil 2 \log n \rceil} \leq n^{-2}$, a rational computed from $n$ (let $\mathcal S_0 = \mathcal S_1 = \emptyset$). The tail of $\sum_n \lambda(\mathcal S_n)$ after $N \geq 2$ is at most $\sum_{n \geq N} n^{-2} \leq 1/(N - 1)$, so the sum is computable, and $(\mathcal S_n)$ is a total Solovay test. By :ref{#thm-total-solovay}, $X$ belongs to only finitely many $\mathcal S_n$.
-:::
-::::
-
 ## Notes and references
 
 Schnorr introduced his notion and proved :ref{#thm-schnorr-tests-martingales} and :ref{#prop-no-universal-schnorr} in his monograph (1971), as a critique of Martin-Löf's definition; his orders (Ordnungsfunktionen) are computable by definition. :ref{#thm-total-solovay} is due to Downey and Griffiths (2004), who also characterized Schnorr randomness by computable measure machines. :ref{#lem-weight-martingale} is a reformulation of Nies, Lemma 7.3.4, whose proof is followed here. Downey and Hirschfeldt present this material in Section 7.1 (Definitions 7.1.4–7.1.5, Theorem 7.1.7, Definition 7.1.9 and Theorem 7.1.10, Proposition 7.1.11); Nies defines Schnorr tests in Section 3.5 (Definition 3.5.8, Fact 3.5.9 for the absence of a universal test, Fact 3.5.10) and proves the martingale characterization in Section 7.3 (Theorem 7.3.3), where computable prefix-free generators are Fact 1.8.26.
@@ -164,3 +162,51 @@ Schnorr introduced his notion and proved :ref{#thm-schnorr-tests-martingales} an
 - R. G. Downey and E. J. Griffiths, *Schnorr randomness*, Journal of Symbolic Logic 69 (2004), 533–554.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 7.1.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 3.5 and 7.3.
+
+:::::exercises
+::::exercise{#ex-schnorr-subsequence difficulty=1 objective="Transfer a strategy and an order along a computable set of positions."}
+Let $X$ be Schnorr random and $R = \{ r_0 < r_1 < \cdots \}$ an infinite computable set. Show that the sequence $Y$ defined by $Y(i) = X(r_i)$ is Schnorr random.
+
+:::solution
+Suppose that a computable martingale $d$ and an order $h$ satisfy $d(Y \uh m) \geq h(m)$ for infinitely many $m$. For a string $\sigma$, let $\ell(|\sigma|) = |R \cap [0, |\sigma|)|$ and $\sigma_R = \sigma(r_0) \cdots \sigma(r_{\ell(|\sigma|) - 1})$, the string of the bits of $\sigma$ at the positions of $R$. Let $d'(\sigma) = d(\sigma_R)$. If $|\sigma| \notin R$, then $(\sigma i)_R = \sigma_R$ and $d'$ does not bet at $\sigma$; if $|\sigma| \in R$, then $(\sigma i)_R = \sigma_R\, i$, and $d'(\sigma 0) + d'(\sigma 1) = 2 d'(\sigma)$. So $d'$ is a martingale, computable since $R$ is decidable. The function $\ell$ is computable, non-decreasing and unbounded, so $h' = h \circ \ell$ is an order. For each $m \geq 1$ with $d(Y \uh m) \geq h(m)$, let $n = r_{m-1} + 1$: then $\ell(n) = m$, $(X \uh n)_R = Y \uh m$, and $d'(X \uh n) = d(Y \uh m) \geq h(m) = h'(n)$. Distinct $m$ give distinct $n$, so $d'$ $h'$-succeeds on $X$, a contradiction.
+:::
+::::
+
+::::exercise{#ex-weight-computable-needed difficulty=2 objective="See that the weight must be computable in the lemma that turns sets of strings into martingales succeeding at a computable rate."}
+Let $(\mathcal U_n)$ be a universal Martin-Löf test (:ref{#thm-universal-test}), and let $R_n$ be given by :ref{#lem-computable-generator} for $\mathcal U_n$ and $m = n$. Show that $(R_n)$ satisfies all the hypotheses of :ref{#lem-weight-martingale} except the computability of the weight, and that its conclusion fails: there are no computable martingale $d$ and order $h$ with $d(\sigma) \geq h(|\sigma|)$ for every $n$ and every $\sigma \in R_n$.
+
+:::solution
+The sets $R_n$ are uniformly computable, their elements have length at least $n$, and, since they are prefix-free, the weight is $\sum_n \lambda(\mathcal U_n) \leq 2$. Suppose that $d$ and $h$ exist. Let $X$ be a sequence that is not Martin-Löf random. It belongs to every $\mathcal U_n$, so for each $n$ it has a prefix $X \uh m_n \in R_n$, with $m_n \geq n$; hence infinitely many prefixes of $X$ belong to sets $R_n$, and $d(X \uh m) \geq h(m)$ for each of them: $d$ $h$-succeeds on $X$. By :ref{#prop-no-universal-schnorr}, there is a computable sequence on which $d$ does not $h$-succeed. A computable sequence is not computably random (:ref{#prop-cr-basic} (3)), hence not Martin-Löf random, which gives a contradiction.
+
+The weight of $(R_n)$ is a left-c.e. real that is not computable in general; computing it is what makes the martingale of the lemma computable and its order computable.
+:::
+::::
+
+::::exercise{#ex-no-universal-schnorr-direct difficulty=2 objective="Build directly a computable sequence that avoids a component of a Schnorr test, by following the relative measure of the component."}
+Let $(\mathcal U_n)$ be a Schnorr test.
+
+1. Show that $\lambda(\mathcal U_1 \cap [\sigma])$ is a computable real, uniformly in $\sigma$.
+2. Build a computable sequence $A$ such that $2^n \lambda(\mathcal U_1 \cap [A \uh n]) < 1 - 2^{-n-2}$ for every $n$, and deduce that $A \notin \mathcal U_1$. This gives a proof of :ref{#prop-no-universal-schnorr} without martingales.
+
+:::solution
+1. The class $\mathcal U_1 \cap [\sigma]$ is $\Sigma^0_1$, uniformly in $\sigma$, so its measure is left-c.e. uniformly in $\sigma$ (:ref{#prop-measure-effective} (1)). So is the measure of $\mathcal U_1 \setminus [\sigma]$, which is the union of the classes $\mathcal U_1 \cap [\rho]$ for the strings $\rho \neq \sigma$ of length $|\sigma|$. Their sum $\lambda(\mathcal U_1)$ is computable, so $\lambda(\mathcal U_1 \cap [\sigma]) = \lambda(\mathcal U_1) - \lambda(\mathcal U_1 \setminus [\sigma])$ can also be approximated from above, uniformly in $\sigma$. A real approximable from below and from above is computable.
+2. Let $a(\sigma) = 2^{|\sigma|} \lambda(\mathcal U_1 \cap [\sigma])$, so that $a(\sigma) = \frac12 (a(\sigma 0) + a(\sigma 1))$. Define $A$ by recursion, keeping $a(A \uh n) < 1 - 2^{-n-2}$. For $n = 0$, $a(\varepsilon) = \lambda(\mathcal U_1) \leq \frac12 < \frac34$. Suppose $a(A \uh n) < 1 - 2^{-n-2}$. Then $\min_i a((A \uh n) i) \leq a(A \uh n)$. Compute rationals $q_i$ with $|q_i - a((A \uh n) i)| \leq 2^{-n-5}$, by (1), and let $A(n)$ be an $i$ with $q_i$ minimal. Then
+$$
+a((A \uh n)\, A(n)) \leq \min_i a((A \uh n) i) + 2^{-n-4} < 1 - 2^{-n-2} + 2^{-n-4} < 1 - 2^{-n-3}.
+$$
+So $A$ is computable and $a(A \uh n) < 1$ for every $n$. If $A$ belonged to the open class $\mathcal U_1$, some cylinder $[A \uh n]$ would be contained in it, and $a(A \uh n) = 1$. So $A \notin \mathcal U_1$, and $A$ is not captured by the test. Since a computable sequence is not Schnorr random (:ref{#ex-schnorr-success} (2)), the test is not universal.
+
+Adapted from Downey–Hirschfeldt 2010, Proposition 7.1.11.
+:::
+::::
+
+::::exercise{#ex-schnorr-null-union difficulty=2 objective="Combine a uniform sequence of Schnorr tests into one total Solovay test, and show that Schnorr null classes are closed under effective countable unions."}
+Let $(\mathcal U^k_n)_{k, n}$ be uniformly $\Sigma^0_1$ classes such that, for each $k$, $(\mathcal U^k_n)_n$ is a Schnorr test, and the measures $\lambda(\mathcal U^k_n)$ are computable uniformly in $k$ and $n$. Show that $\bigcup_k \bigcap_n \mathcal U^k_n$ is Schnorr null.
+
+:::solution
+Fix a computable bijection $(k, n) \mapsto \langle k, n \rangle$ of $\nat^2$ onto $\nat$, and let $\mathcal S_{\langle k, n \rangle} = \mathcal U^k_{n + k + 1}$. These classes are uniformly $\Sigma^0_1$, with $\lambda(\mathcal S_{\langle k, n \rangle}) \leq 2^{-(n + k + 1)}$. The sum of the measures is finite and computable: the terms with $k + n < N$ form a finite sum of computable reals, and the others add up to at most $\sum_{j \geq N} (j + 1) 2^{-j-1} = (N + 2) 2^{-N}$, which tends to $0$. So $(\mathcal S_m)$ is a total Solovay test. A member of $\bigcap_n \mathcal U^k_n$ belongs to $\mathcal S_{\langle k, n \rangle}$ for every $n$, hence to infinitely many $\mathcal S_m$. The proof of ($\Rightarrow$) in :ref{#thm-total-solovay} gives a computable martingale and an order such that the martingale $h$-succeeds on every sequence in infinitely many $\mathcal S_m$; by :ref{#thm-schnorr-tests-martingales}, the class of these sequences is Schnorr null, and so is its subclass $\bigcup_k \bigcap_n \mathcal U^k_n$.
+
+The union of the components $\mathcal U^k_{n+k+1}$ over $k$ would give a Martin-Löf test, but its measures need not be computable, since the classes overlap: this is why the total Solovay test is used.
+:::
+::::
+:::::

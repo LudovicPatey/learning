@@ -117,6 +117,16 @@ Why does $Y_j \in \mathcal U_S$ force $\mathcal U_S \subseteq \mathcal L_{Y_j}$,
   The argument uses only largeness and cohesiveness.
 :::
 
+## Exercises
+
+::::exercise{#ex-large-finite-size difficulty=1 objective="Compute the cover classes of a simple $\Sigma^0_1$ class by the finite pigeonhole principle."}
+Let $n \geq 2$ and $\mathcal V = \{ X : |X| \geq n \}$. Show that $\mathcal L_k(\mathcal V) = \{ X : |X| > k(n-1) \}$, and deduce $\mathcal L(\mathcal V)$.
+
+:::solution
+If $|X| > k(n-1)$, some part of a $k$-cover contains $n$ elements of $X$, by the finite pigeonhole principle. Otherwise, $X$ splits into $k$ parts of at most $n - 1$ elements. So $\mathcal L(\mathcal V)$ is the class of infinite sets, and $\mathcal V$ is large.
+:::
+::::
+
 ## Notes and references
 
 The classes $\mathcal U_S$ over a coded Scott ideal, :ref{#prop-largeness-complexity} and the compatibility lemma are from Monin and Patey's work on hyperarithmetical reductions (arXiv 2019); the notion of $\mathcal M$-cohesive class is due to Le Houérou, Levy Patey and Mimouni (2024). Monin and Patey (2024) prove that no non-trivial partition regular class is $\mathbf\Sigma^0_2$. The presentation follows the subsections *Effective classes*, *$\mathcal M$-minimal classes* and *$\mathcal M$-cohesive classes* of the chapter *Jump cone avoidance* of Patey's monograph; :ref{#lem-cover-class} makes explicit the compactness argument used there.
@@ -125,3 +135,49 @@ The classes $\mathcal U_S$ over a coded Scott ideal, :ref{#prop-largeness-comple
 - B. Monin and L. Patey, *Partition genericity and pigeonhole basis theorems*, Journal of Symbolic Logic 89 (2024), 829–857.
 - Q. Le Houérou, L. Levy Patey and A. Mimouni, *The reverse mathematics of the pigeonhole hierarchy*, arXiv:2407.01236 (2024).
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Partition regularity*.
+
+:::::exercises
+::::exercise[Co-hyperimmune sets]{#ex-large-cohyperimmune difficulty=2 objective="Show that a non-trivial large $\Pi^0_2$ class contains every set with hyperimmune complement, by building a disjoint strong array from its $\Sigma^0_1$ approximations."}
+Let $\mathcal P$ be a large $\Pi^0_2$ class all of whose members are infinite, and $X$ a set whose complement is hyperimmune (:ref{#def-hyperimmune-set}). Show that $X \in \mathcal P$.
+
+:::solution
+Write $\mathcal P = \bigcap_n \mathcal U_n$ with $\mathcal U_n$ a $\Sigma^0_1$ class, uniformly in $n$. The classes $\mathcal U_n$ need not be upward closed; we replace them. Let $E_n$ be the set of finite sets $F$ such that every set $Y \supseteq F$ is in $\mathcal U_n$, and $\mathcal U^*_n = \{ Y : F \subseteq Y \text{ for some } F \in E_n \}$. The class $\{ Y : Y \supseteq F \}$ is closed, and by compactness it is contained in the open class $\mathcal U_n$ if and only if it is covered by finitely many cylinders enumerated in $\mathcal U_n$; so $E_n$ is c.e., uniformly in $n$. Clearly $\mathcal U^*_n \subseteq \mathcal U_n$. Conversely, let $Y \in \mathcal P$. Every superset of $Y$ is in $\mathcal P \subseteq \mathcal U_n$, since $\mathcal P$ is upward closed. The closed classes $\{ Y' : Y' \supseteq Y \cap [0, s) \}$ decrease with intersection $\{ Y' : Y' \supseteq Y \}$, which is contained in $\mathcal U_n$; by compactness one of them is, and $Y \cap [0, s) \in E_n$. So $\mathcal P = \bigcap_n \mathcal U^*_n$.
+
+$\mathcal P$ contains every cofinite set: the singletons $\{0\}, \dots, \{m-1\}$ and $[m, \infty)$ cover $\nat$, and the singletons are finite. So for every $m$, $[m, \infty) \in \mathcal U^*_n$, and some $F \in E_n$ satisfies $\min F \geq m$. Fix $n$ and define $F_0$ as the first element enumerated in $E_n$, and $F_{k+1}$ as the first element enumerated in $E_n$ with $\min F_{k+1} > \max F_k$. This is a computable sequence of pairwise disjoint finite sets, given by canonical indices, so a disjoint strong array. Since $\overline X$ is hyperimmune, some $F_k$ is disjoint from $\overline X$, that is, $F_k \subseteq X$, and $X \in \mathcal U^*_n$. This holds for every $n$, so $X \in \mathcal P$.
+
+Adapted from an exercise of the chapter *Jump cone avoidance* of Patey's monograph, after Monin and Patey (2024).
+:::
+::::
+
+::::exercise[The complexity of largeness is optimal]{#ex-large-pi02-complete difficulty=2 objective="Show by a reduction from the infinite c.e. sets that the largeness of an upward closed $\Sigma^0_1$ class is a $\Pi^0_2$-complete property of its index."}
+Show that there is a computable function $g$ such that, for every $e$, $\mathcal U^\emptyset_{g(e)}$ is large if and only if $W_e$ is infinite. Deduce that the set of indices $a$ such that $\mathcal U^\emptyset_a$ is large is $\Pi^0_2$-complete.
+
+:::solution
+Let $W_{g(e)}$ enumerate, at each stage $s$, the two-element sets $\{ x, y \}$ with $\max(x, y) \leq |W_{e, s}|$. If $W_e$ is infinite, every two-element set is enumerated, and $\mathcal U^\emptyset_{g(e)} = \{ X : |X| \geq 2 \}$, which is large by :ref{#ex-large-finite-size}. If $W_e$ is finite with $N$ elements, $\mathcal U^\emptyset_{g(e)} = \{ X : |X \cap [0, N]| \geq 2 \}$. The $N + 2$ sets $\{0\}, \dots, \{N\}$ and $(N, \infty)$ cover $\nat$, and none of them is in this class; so it is not large. Since $\mathrm{Inf} = \{ e : W_e \text{ infinite} \}$ is $\Pi^0_2$-complete, so is the set of indices of large classes, which is $\Pi^0_2$ by :ref{#lem-cover-class}.
+:::
+::::
+
+::::exercise[Cohesive classes of the form L_H]{#ex-large-cohesive-set difficulty=1 objective="Prove the converse of the example of cohesive classes given by cohesive sets."}
+Let $H$ be an infinite set. Show that $\mathcal L_H$ is $\mathcal M$-cohesive if and only if $H \subseteq^* X$ or $H \subseteq^* \overline X$ for every $X \in \mathcal M$.
+
+:::solution
+The direction from right to left is shown after :ref{#def-cohesive-class}. Conversely, let $\mathcal L_H$ be $\mathcal M$-cohesive and $X \in \mathcal M$; by symmetry, suppose $\mathcal L_H \subseteq \mathcal L_X$. If $H \cap \overline X$ were infinite, the set $H \cap \overline X$ would be in $\mathcal L_H$, hence in $\mathcal L_X$; but it is disjoint from $X$. So $H \cap \overline X$ is finite, that is, $H \subseteq^* X$.
+:::
+::::
+
+::::exercise[Cohesive classes compute PA sets]{#ex-large-cohesive-pa difficulty=3 objective="Decode from an $\mathcal M$-cohesive class a function DNC relative to the jump of each member of $\mathcal M$, with the sequence of Jockusch and Stephan relativized."}
+Let $\mathcal U_S$ be $\mathcal M$-cohesive. Show that $S \oplus M'$ is PA relative to $X'$ for every $X \in \mathcal M$. Deduce that if $M$ is low, no set $S \leq_T \emptyset'$ makes $\mathcal U_S$ $\mathcal M$-cohesive.
+
+:::solution
+Let $X = Z_j \in \mathcal M$, and $R_e = \{ s : \Phi^{X'_s}_e(e)[s]\converge = 0 \}$, where $X'_s$ is the stage-$s$ approximation of $X'$; the sequence $(R_e)$ is $X$-computable, so every $R_e$ is in $\mathcal M$. As in the proof of :ref{#prop-coh-no-low}, relativized to $X$: if $\Phi^{X'}_e(e)\converge = 0$, then $R_e$ is cofinite, and if $\Phi^{X'}_e(e)$ converges to a value $v \neq 0$, then $R_e$ is finite.
+
+The classes $\{ Y : |Y \cap R_e| \geq n \}$ and $\{ Y : |Y \cap \overline{R_e}| \geq n \}$ are upward closed $\Sigma^0_1(Z_j)$ classes, with indices computable from $e$ and $n$. So $\mathcal U_S \cap \mathcal L_{R_e} = \mathcal U_{S \cup A_e}$ and $\mathcal U_S \cap \mathcal L_{\overline{R_e}} = \mathcal U_{S \cup B_e}$ for sets of pairs $A_e$, $B_e$ computable uniformly in $e$, and by :ref{#prop-largeness-complexity} their largeness is $\Pi^0_1(S \oplus M')$, uniformly in $e$.
+
+Exactly one of the two classes is large. By cohesiveness, $\mathcal U_S \subseteq \mathcal L_{R_e}$ or $\mathcal U_S \subseteq \mathcal L_{\overline{R_e}}$; in the first case $\mathcal U_S \cap \mathcal L_{R_e} = \mathcal U_S$ is large, and $\mathcal U_S \cap \mathcal L_{\overline{R_e}}$ contains neither $R_e$, which is disjoint from $\overline{R_e}$, nor $\overline{R_e}$, which is not in $\mathcal L_{R_e} \supseteq \mathcal U_S$; so it is not large. The second case is symmetric. Hence $S \oplus M'$ computes the function $p$ with $p(e) = 0$ if $\mathcal U_S \cap \mathcal L_{R_e}$ is large and $p(e) = 1$ otherwise: search for a witness that one of the two $\Pi^0_1(S \oplus M')$ properties fails.
+
+Let $f = 1 - p$. If $\Phi^{X'}_e(e)\converge = 0$, then $\overline{R_e}$ is finite, $\mathcal L_{\overline{R_e}} = \emptyset$, so $\mathcal U_S \subseteq \mathcal L_{R_e}$, $p(e) = 0$ and $f(e) = 1$. If $\Phi^{X'}_e(e)\converge = v \neq 0$, then $\mathcal L_{R_e} = \emptyset$ is not large, $p(e) = 1$ and $f(e) = 0 \neq v$. So $f$ is a $\{0, 1\}$-valued function DNC relative to $X'$, computable in $S \oplus M'$.
+
+With $X = \emptyset \in \mathcal M$, $S \oplus M'$ is PA relative to $\emptyset'$. If $M$ is low and $S \leq_T \emptyset'$, then $S \oplus M' \leq_T \emptyset'$, and no $\emptyset'$-computable function is DNC relative to $\emptyset'$. So the set PA relative to $M'$ used in :ref{to="jump-cone-avoidance/cohesive-classes"} to compute a cohesive class cannot be replaced by $\emptyset'$. Adapted from an exercise of the chapter *Jump cone avoidance* of Patey's monograph, attributed there to Le Houérou, Levy Patey and Mimouni (2024).
+:::
+::::
+:::::

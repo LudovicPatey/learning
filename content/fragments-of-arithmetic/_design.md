@@ -98,9 +98,41 @@ Web search, 2026-11-12:
 - Durations, by word count at 55 words per minute (body without SVG lines, 2026-11-13): pa-minus 2230 words (40 min), bounded-formulas 1340 (25), bounded-induction 2250 (40), parikh 1680 (30), induction-collection 2470 (45), definable-cuts 1890 (35), ackermann-coding 1970 (35), coding 1280 (25), coded-sets 2240 (40). induction-collection is at the 45-minute limit; any addition there should go to definable-cuts.
 - induction-conservation proves the same hierarchy for second-order formulas. It could now point here for the first-order statements and for partial truth definitions (in `truth-and-provability`).
 - Bennett 1962 and Gaifman–Dimitracopoulos 1982 were checked against the bibliographies of Wong (Lecture 2) and of Hájek–Pudlák (entries BENNETT and GAIFMAN–DIMITRACOPOULOS, and the remarks to Chapter V, item 3), not against the originals.
-- Other courses link to lessons of this course for exercises: recursive-saturation/automorphisms, independence/fast-growing and independence/paris-harrington cite the pigeonhole exercise by a link to `coding`, which still contains it; they can now cite `ex-finite-pigeonhole`. cuts-and-extensions/collection-end-extensions cites underspill by a link to `definable-cuts`; it can now cite `ex-underspill`.
+- Other courses link to lessons of this course for exercises: recursive-saturation/automorphisms ("last exercise" of `coding`) and the design logs of recursive-saturation and independence cite the pigeonhole exercise by a link to `coding`, which still contains it as a featured exercise; they can now cite `ex-finite-pigeonhole`. cuts-and-extensions/collection-end-extensions can cite `ex-underspill`.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a solution (2026-11-13). Further exercises are in the `:::::exercises` block at the end of each lesson, outside the reading time; the durations were measured again without them and did not change.
+
+**Featured exercises** (in the text, after the material they practice):
+- pa-minus: `ex-pam-predecessors` (non-standard elements have non-standard predecessors; used for the blocks in bounded-induction).
+- bounded-formulas: `ex-sigma1-not-down` (a Σ₁ sentence with only non-standard witnesses; cited in the text after `cor-sigma1-upward`).
+- bounded-induction: `ex-ldelta0-idelta0` (LΔ₀ ⇒ IΔ₀; cited in definable-cuts).
+- parikh: `ex-exponential-cut` (exp in a cut means closure of the cut; prepares exponential cuts).
+- induction-collection: `ex-fo-bsigma-bpi` (BΣₙ₊₁ ⇔ BΠₙ; cited by cuts-and-extensions).
+- definable-cuts: `ex-underspill` (cited by cuts-and-extensions) and `ex-overspill-interval` (overspill combined with Parsons' lemma).
+- ackermann-coding: `ex-ack-parity`.
+- coding: `ex-finite-pigeonhole` (used by recursive-saturation and independence).
+- coded-sets: `ex-exp-not-bsigma1` (IΔ₀ + exp ⊬ BΣ₁; cited in the notes).
+
+Moved to the further exercises: `ex-parikh-smallest-cut` (parikh) and `ex-fo-order-induction` (induction-collection), routine once the proofs are understood.
+
+**Further exercises**, lesson by lesson:
+- pa-minus: cancellation and monotonicity laws (`ex-pam-cancellation`, used by later exercises); a discretely ordered ring of real polynomials with integer constant term refuting the irrationality of √2 (`ex-pam-sqrt2`); non-standard primes and multiples of all standard numbers by transfer (`ex-nonstandard-prime`); Δ₀ definitions (`ex-delta0-definitions`).
+- bounded-formulas: composition and unions of chains of end extensions (`ex-end-ext-chains`); uniqueness of the embedding of ℕ (`ex-embedding-standard`); PA⁻ decides Δ₀ sentences, not Σ₁ ones (`ex-delta0-decided`); initial substructures of models of PA⁻ are models (`ex-initial-substructure-pam`).
+- bounded-induction: prime divisors (`ex-idelta0-prime-divisor`); integer square root (`ex-idelta0-sqrt`); irrationality of √2 in IΔ₀, by a minimal counterexample, against `ex-pam-sqrt2` (`ex-idelta0-sqrt2`); greatest number principle for Δ₀ formulas, a step used in ackermann-coding and coded-sets (`ex-ldelta0-greatest`); examples of cuts (`ex-cut-examples`); the standard part as the least cut (`ex-cut-intersection`).
+- parikh: `ex-parikh-smallest-cut`; terms bounded by powers (`ex-term-bound-power`); Parikh's theorem for Π₁-axiomatized theories, hence IΔ₀ + Th_Π₁(ℕ) ⊬ exp (`ex-parikh-pi1-theories`); Parikh for Σ₁ formulas and its failure for Π₁ formulas (`ex-parikh-sigma1-pi1`); the cut of exponentiation in I_a is closed under addition but not multiplication (`ex-ia-log-cut`).
+- induction-collection: `ex-fo-order-induction`; collection with a standard domain (`ex-bsigma-standard-bound`); downward induction (`ex-downward-induction`); contraction of universal blocks (`ex-contraction-universal`); total Σₙ functions have Δₙ graphs, and bounds given by their values (`ex-total-function-graph`).
+- definable-cuts: the standard part of a non-standard model of PA is not definable (`ex-standard-part-undefinable`); overspill for a property holding infinitely often (`ex-overspill-unbounded`); failure of overspill in I_a (`ex-overspill-needs-induction`); a single bound for witnesses indexed by the standard numbers (`ex-overspill-bounded-witnesses`).
+- ackermann-coding: computations, singletons and shifts (`ex-ack-examples`); codes are monotone for inclusion (`ex-ack-subset-order`); sum of codes of disjoint sets (`ex-ack-disjoint-union`); comprehension fails without exp (`ex-comprehension-needs-exp`); Ackermann's isomorphism of (ℕ, E) with (HF, ∈) (`ex-ack-hf`).
+- coding: computations of codes (`ex-seq-examples`); extensionality of sequences (`ex-seq-extensionality`); the sequence of powers of 2 (`ex-seq-powers`); partial sums, a recursion with codes bounded in advance (`ex-seq-partial-sums`); injective maps of an interval into itself are onto (`ex-injective-onto`).
+- coded-sets: the standard part is not piecewise coded (`ex-standard-part-not-coded`); Boolean closure (`ex-piecewise-boolean`); a dual proof of Friedman's theorem by the greatest code contained in the set, which uses collection (`ex-friedman-largest-code`); coded sequences of values of Σ₁-definable functions (`ex-sigma1-function-sequence`).
+
+**Excluded to avoid duplicates.** Strong collection (in cuts-and-extensions, `thm-strong-collection` and its exercise, and in induction-conservation, `ex-strong-collection`); the greatest number principle for Σₙ and Πₙ formulas (induction-conservation, `ex-sigma-max-principle`); finite choice (induction-conservation, `ex-finite-choice`); IΔ₀ ⊬ BΔ₀ (induction-conservation, `ex-idelta0-not-bdelta0`).
+
+**Sources.** The exercises are written for the course. Classical facts restated: Ackermann's interpretation of hereditarily finite sets (Ackermann 1937); the irrationality of √2 as a sentence separating weak theories; Parikh's theorem for Π₁-axiomatized theories, the form stated by Hájek and Pudlák (Theorem V.1.4), as recorded in the notes of parikh. Wong's notes and Hájek–Pudlák contain few exercises on this material ("Proof. Exercise." in HP and in Wong Lecture 2 for pairing), and none is reproduced.
+
+## 12. History
 
 - **2026-11-12.** Course created (first version: 7 lessons, including provably total functions, truth definitions and finite axiomatizability, citing the hierarchy from induction-conservation).
 - **2026-11-12 (later, coordinator decision).** Split into two courses so that each lesson takes at most about 50 minutes.
@@ -117,3 +149,4 @@ Web search, 2026-11-12:
   - Corrections: the induction formula of the pigeonhole exercise lacked the guard x ≤ a and the final step (the given sequence is below the bound); the proof of concatenation used an undeclared v₀; the sentence on models of PA + ¬Con(PA) was garbled, and the non-standardness of its witnesses is now proved by absoluteness; the remark that comprehension needs only 2^a now says which powers the proofs use; Slaman's theorem is stated for n ≥ 1; in the proof that coded Δₙ₊₁ sets give collection, the least element of the set of records is called m (it was w₀, a name used for witnesses), with the figure regenerated.
   - Additions: quiz on metatheoretic induction (pa-minus), counterexample to absoluteness for a substructure that is not an initial segment, exercise on a Σ₁ sentence true in ℤ[X]⁺ (bounded-formulas), quiz on the least number principles (definable-cuts), exercise on parities of quotients (ackermann-coding).
   - References: Bennett 1962 and Gaifman–Dimitracopoulos 1982 checked against Wong's and Hájek–Pudlák's bibliographies; Lessan added for the separation BΣₙ₊₁ ⊬ IΣₙ₊₁; sources of the least number principles (Wong Theorem 2.3, HP Theorem I.2.4, Lemma I.2.8) added to definable-cuts.
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for all exercises; new labels `ex-ldelta0-idelta0`, `ex-parikh-smallest-cut`, `ex-exponential-cut`, `ex-exp-not-bsigma1` for the unlabeled ones; `ex-parikh-smallest-cut` and `ex-fo-order-induction` moved to the further exercises; 40 new further exercises (section 11). Positional references to exercises replaced by `:ref` (bounded-formulas, definable-cuts, coded-sets). Durations unchanged.

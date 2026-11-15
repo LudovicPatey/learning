@@ -71,11 +71,11 @@ Where is the hypothesis $r < \lambda(\mathcal B)$ used?
   This inclusion holds since $|b|$ is a computable ordinal, whatever $r$.
 :::
 
-Combined with Lusin's theorem, the Sacks–Tanaka theorem refines the picture of :ref{#fig-stage-measure}: the members of a $\Pi^1_1$ class that enter at a stage at least $\omega_1^{\mathrm{CK}}$ collapse $\omega_1^{\mathrm{CK}}$ (:ref{#fact-pi11-stages} (2)), so they form a null class, and the measure of the class is the supremum of the measures of its $\Delta^1_1$ stages (exercise).
+Combined with Lusin's theorem, the Sacks–Tanaka theorem refines the picture of :ref{#fig-stage-measure}: the members of a $\Pi^1_1$ class that enter at a stage at least $\omega_1^{\mathrm{CK}}$ collapse $\omega_1^{\mathrm{CK}}$ (:ref{#fact-pi11-stages} (2)), so they form a null class, and the measure of the class is the supremum of the measures of its $\Delta^1_1$ stages (:ref{#ex-pi11-measure-lemma}).
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-pi11-measure-lemma difficulty=2 objective="Derive the measure lemma for $\Pi^1_1$ classes from its $\Delta^1_1$ case and the Sacks–Tanaka theorem."}
 Show that for every $\Pi^1_1$ class $\mathcal A = \mathcal A^p$, $\lambda(\mathcal A) = \sup_{\alpha < \omega_1^{\mathrm{CK}}} \lambda(\mathcal A_\alpha)$. Deduce that the relation $\lambda(\mathcal A^p) > q$ is $\Pi^1_1$ in $p$ and $q$.
 
 :::solution
@@ -85,8 +85,62 @@ By :ref{#fact-pi11-stages} (2), $\mathcal A \subseteq \mathcal C \cup \bigcup_{\
 
 ## Notes and references
 
-Sacks (1969) and Tanaka (1967) proved that the class of sequences collapsing $\omega_1^{\mathrm{CK}}$ is null. Nies obtains it (Corollary 9.1.15) from Sacks's theorem on hyperarithmetic upper cones (his Theorem 9.1.13, referred to Sacks's book) and Spector's theorem that $\omega_1^Y > \omega_1^{\mathrm{CK}}$ exactly when $\mathcal O \leq_h Y$ (Theorem 9.1.14). The proof given here, by selection and boundedness, follows Monin and Patey (chapter *Higher randomness*), written with trees and the stages of :ref{to="pi11-classes"}. Nies also states the companion basis theorem of Sacks and Tanaka: a $\Pi^1_1$ class of positive measure has a hyperarithmetic member (Theorem 9.1.11).
+Sacks (1969) and Tanaka (1967) proved that the class of sequences collapsing $\omega_1^{\mathrm{CK}}$ is null. Nies obtains it (Corollary 9.1.15) from Sacks's theorem on hyperarithmetic upper cones (his Theorem 9.1.13, referred to Sacks's book) and Spector's theorem that $\omega_1^Y > \omega_1^{\mathrm{CK}}$ exactly when $\mathcal O \leq_h Y$ (Theorem 9.1.14). The proof given here, by selection and boundedness, follows Monin and Patey (chapter *Higher randomness*), written with trees and the stages of :ref{to="pi11-classes"}. Nies also states the companion basis theorem of Sacks and Tanaka: a $\Pi^1_1$ class of positive measure has a hyperarithmetic member (Theorem 9.1.11), proved in :ref{#ex-sacks-tanaka-basis}.
 
 - G. E. Sacks, *Measure-theoretic uniformity in recursion theory and set theory*, Transactions of the American Mathematical Society 142 (1969), 381–420.
 - H. Tanaka, *A basis result for Π¹₁-sets of positive measure*, Commentarii Mathematici Universitatis Sancti Pauli 16 (1967), 115–127.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 9.1.
+
+:::::exercises
+::::exercise{#ex-delta11-approx-pi11 difficulty=1 objective="Approximate $\Pi^1_1$ classes from inside, and $\Sigma^1_1$ classes from outside, by $\Delta^1_1$ classes up to an arbitrary measure."}
+Let $\varepsilon > 0$ be rational. Show that every $\Pi^1_1$ class $\mathcal A$ contains a $\Delta^1_1$ class $\mathcal D$ with $\lambda(\mathcal A \setminus \mathcal D) < \varepsilon$, and that every $\Sigma^1_1$ class $\mathcal S$ is contained in a $\Delta^1_1$ class $\mathcal E$ with $\lambda(\mathcal E \setminus \mathcal S) < \varepsilon$.
+
+:::solution
+Write $\mathcal A = \mathcal A^p$. By :ref{#ex-pi11-measure-lemma}, there is a computable ordinal $\alpha$ with $\lambda(\mathcal A_\alpha) > \lambda(\mathcal A) - \varepsilon$; let $a \in \mathcal O$ with $|a| = \alpha$. The stage $\mathcal D = \mathcal A_{|a|}$ is $\Delta^1_1$ (:ref{#fact-pi11-stages} (1)) and included in $\mathcal A$, and $\lambda(\mathcal A \setminus \mathcal D) = \lambda(\mathcal A) - \lambda(\mathcal D) < \varepsilon$, both classes being measurable (:ref{#thm-lusin}). For $\mathcal S$, apply this to its complement $\mathcal A$, and let $\mathcal E = \cs \setminus \mathcal D$: then $\mathcal S \subseteq \mathcal E$ and $\mathcal E \setminus \mathcal S = \mathcal A \setminus \mathcal D$.
+
+The lesson on $\Sigma^1_1$ null classes shows that $\varepsilon = 0$ is possible when $\lambda(\mathcal S) = 0$, by a selection of the stages, and that it is not possible in general.
+:::
+::::
+
+::::exercise[The Sacks–Tanaka basis theorem]{#ex-sacks-tanaka-basis difficulty=2 objective="Prove that a $\Pi^1_1$ class of positive measure has a hyperarithmetic member, by reduction to a $\Delta^1_1$ stage."}
+Show that every $\Pi^1_1$ class of positive measure has a hyperarithmetic member.
+
+:::solution
+Let $\mathcal A$ be a $\Pi^1_1$ class with $\lambda(\mathcal A) > 0$. By :ref{#ex-delta11-approx-pi11}, with a rational $\varepsilon$ such that $0 < \varepsilon < \lambda(\mathcal A)$, $\mathcal A$ contains a $\Delta^1_1$ class $\mathcal D$ with $\lambda(\mathcal D) > \lambda(\mathcal A) - \varepsilon > 0$. By :ref{#ex-delta11-hyp-member}, $\mathcal D$ has a hyperarithmetic member, which belongs to $\mathcal A$.
+
+This is the basis theorem of Sacks and Tanaka (Nies, Theorem 9.1.11). Two ingredients are used: Sacks–Tanaka, through :ref{#ex-pi11-measure-lemma}, to find a $\Delta^1_1$ stage of positive measure, and the approximation fact, to find a closed subclass of positive measure that is $\Pi^0_1$ in a hyperarithmetic set.
+:::
+::::
+
+::::exercise{#ex-basis-hypotheses difficulty=1 objective="See that the basis theorem of Sacks and Tanaka needs both positive measure and a $\Pi^1_1$ class."}
+1. Show that the class $\mathcal C$ of :ref{#thm-sacks-tanaka} is a non-empty null $\Pi^1_1$ class with no hyperarithmetic member.
+2. Show that the class of non-hyperarithmetic sequences is a $\Sigma^1_1$ class of measure $1$ with no hyperarithmetic member.
+
+:::solution
+1. $\mathcal C$ is $\Pi^1_1$ and null by :ref{#thm-sacks-tanaka}, and contains $\mathcal O$ by :ref{#prop-omega1-relative} (2). A hyperarithmetic $X$ has $\omega_1^X = \omega_1^{\mathrm{CK}}$ (:ref{#ex-hyp-omega1-ck}), so it is not in $\mathcal C$.
+2. The class of hyperarithmetic sequences is $\Pi^1_1$ (:ref{#ex-hyp-pi11-in-x}), so its complement is $\Sigma^1_1$. It is countable, since every hyperarithmetic set is $\Phi^{H_a}_e$ for some pair $(a, e)$, hence null, and its complement has measure $1$. By the Kleene basis theorem (:ref{#thm-kleene-basis}), a non-empty $\Sigma^1_1$ class has a member computable in $\mathcal O$, but for $\Sigma^1_1$ classes positive measure does not give a hyperarithmetic member.
+:::
+::::
+
+::::exercise{#ex-null-index-complexity difficulty=2 objective="Compute the complexity of the sets of indices of null and of conull $\Pi^1_1$ classes."}
+Show that $\{ p : \lambda(\mathcal A^p) = 1 \}$ is $\Pi^1_1$ and that $\{ p : \lambda(\mathcal A^p) = 0 \}$ is $\Sigma^1_1$. Explain why the second fact does not show directly that the union of all null $\Pi^1_1$ classes is $\Pi^1_1$.
+
+:::solution
+By :ref{#ex-pi11-measure-lemma}, the relation $\lambda(\mathcal A^p) > q$ is $\Pi^1_1$ in $p$ and $q$. Then $\lambda(\mathcal A^p) = 1$ if and only if $\forall q < 1\ \lambda(\mathcal A^p) > q$, over rationals $q$, which is $\Pi^1_1$. And $\lambda(\mathcal A^p) = 0$ if and only if $\forall q > 0\ \neg\, \lambda(\mathcal A^p) > q$: the negation of a $\Pi^1_1$ relation is $\Sigma^1_1$, and $\Sigma^1_1$ relations are closed under number quantifiers.
+
+The union of the null $\Pi^1_1$ classes is defined by $\exists p\, (\lambda(\mathcal A^p) = 0 \wedge Y \in \mathcal A^p)$, the conjunction of a $\Sigma^1_1$ and a $\Pi^1_1$ condition, which is in neither class in general. The lesson on $\Pi^1_1$-randomness shows that the union is nevertheless $\Pi^1_1$, by replacing each null class with its $\Delta^1_1$ stages, whose nullity is a $\Pi^1_1$ condition, together with the class $\mathcal C$.
+:::
+::::
+
+::::exercise{#ex-o-cone-null difficulty=1 objective="Compare Sacks's theorem and the Sacks–Tanaka theorem on the upper Turing cone of $\mathcal O$." lessons="martin-lof-randomness/upper-cones"}
+Show in two ways that the class $\{ Y : \mathcal O \leq_T Y \}$ is null: with Sacks's theorem (:ref{#thm-sacks}), and with :ref{#thm-sacks-tanaka}. Which of the two proofs shows that this class is included in a null $\Pi^1_1$ class?
+
+:::solution
+*First proof.* $\mathcal O$ is not computable, so its upper cone is null by :ref{#thm-sacks}.
+
+*Second proof.* If $\mathcal O \leq_T Y$, every $\mathcal O$-computable well-ordering is $Y$-computable, so $\omega_1^Y \geq \omega_1^{\mathcal O} > \omega_1^{\mathrm{CK}}$ by :ref{#prop-omega1-relative} (2), and $Y \in \mathcal C$. The class $\mathcal C$ is null by :ref{#thm-sacks-tanaka}.
+
+The second proof places the cone inside the null $\Pi^1_1$ class $\mathcal C$. The first only gives null classes of the form $\{ Y : \Phi^Y_e = \mathcal O \}$, which are defined from $\mathcal O$; the next lesson uses the second inclusion to show that no $\Pi^1_1$-random sequence computes $\mathcal O$.
+:::
+::::
+:::::

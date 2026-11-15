@@ -110,7 +110,7 @@ A stage $\mathcal A^p_{|a|}$ with $a \in \mathcal O$ is $\Delta^1_1$ by :ref{#fa
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-sigma11-wo-bounded difficulty=1 objective="Apply the boundedness theorem for classes to the class of well-founded relations."}
 Let $\mathcal S$ be a $\Sigma^1_1$ class of sequences that code well-orderings. Show that the order types of the members of $\mathcal S$ are bounded by a computable ordinal.
 
 :::solution
@@ -118,7 +118,7 @@ $\mathcal S$ is included in the class of well-founded relations of :ref{#ex-clas
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-late-members difficulty=1 objective="See that only sequences collapsing $\omega_1^{\mathrm{CK}}$ can enter a $\Pi^1_1$ class at a non-computable stage."}
 Let $\mathcal A = \mathcal A^p$ be a $\Pi^1_1$ class. Show that the class of $Y \in \mathcal A$ that enter $\mathcal A$ at a stage at least $\omega_1^{\mathrm{CK}}$ is included in the class of $Y$ with $\omega_1^Y > \omega_1^{\mathrm{CK}}$. Give an example of a $\Pi^1_1$ class in which this class of late members is non-empty.
 
 :::solution
@@ -133,3 +133,57 @@ The normal form of $\Pi^1_1$ classes and their decomposition along the ordinals 
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 9.1.
 - G. E. Sacks, *Higher Recursion Theory*, Springer, 1990.
 - A. S. Kechris, *Classical Descriptive Set Theory*, Springer, 1995.
+
+:::::exercises
+::::exercise{#ex-stages-index-dependence difficulty=2 objective="See that the stages of a $\Pi^1_1$ class depend on the index, while its stages below $\omega_1^{\mathrm{CK}}$ are cofinal in those of any other index."}
+1. Let $p$ and $p'$ be indices such that, for every $Y$, $T^Y_p = \{ \langle\rangle \}$, and $T^Y_{p'}$ is the tree of the sequences of length at most $Y(0)$. Show that $\mathcal A^p = \mathcal A^{p'} = \cs$ and $\mathcal A^p_1 \neq \mathcal A^{p'}_1$.
+2. Let $p$ and $p'$ be any indices with $\mathcal A^p = \mathcal A^{p'}$. Show that for every computable ordinal $\alpha$ there is a computable ordinal $\beta$ with $\mathcal A^p_\alpha \subseteq \mathcal A^{p'}_\beta$. Deduce that the class of members of $\mathcal A^p$ that enter at a computable stage does not depend on the index $p$ of the class.
+
+:::solution
+1. Both trees are computable from $Y$, uniformly, and always defined, so such indices exist. The tree $\{ \langle\rangle \}$ has rank $0$, so every $Y$ enters $\mathcal A^p$ at stage $0$ and $\mathcal A^p_1 = \cs$. If $Y(0) = 0$, then $T^Y_{p'} = \{ \langle\rangle \}$ has rank $0$; if $Y(0) = 1$, then $T^Y_{p'} = \{ \langle\rangle \} \cup \{ \langle n \rangle : n \in \nat \}$, whose nodes $\langle n \rangle$ are leaves, has rank $1$. Both trees are well-founded, so $\mathcal A^{p'} = \cs$, but $\mathcal A^{p'}_1 = \{ Y : Y(0) = 0 \} \neq \cs$.
+2. Let $a \in \mathcal O$ with $|a| = \alpha$ (:ref{#cor-constructive-computable}). The stage $\mathcal A^p_{|a|}$ is $\Delta^1_1$ by :ref{#fact-pi11-stages} (1), in particular $\Sigma^1_1$, and it is included in $\mathcal A^p = \mathcal A^{p'}$. By :ref{#prop-class-boundedness} applied to the index $p'$, it is included in $\mathcal A^{p'}_\beta$ for some computable $\beta$. So $\bigcup_{\alpha < \omega_1^{\mathrm{CK}}} \mathcal A^p_\alpha \subseteq \bigcup_{\beta < \omega_1^{\mathrm{CK}}} \mathcal A^{p'}_\beta$, and the converse inclusion holds by symmetry: a member of the class enters at a computable stage for one index if and only if it does for every index.
+:::
+::::
+
+::::exercise{#ex-stages-intersection difficulty=1 objective="Compute the stages of the intersection of two $\Pi^1_1$ classes from the stages of the classes."}
+Let $p$ and $p'$ be indices. Let $r$ be an index such that $\Phi^Y_r(\langle\rangle) = \Phi^Y_p(\langle\rangle) \cdot \Phi^Y_{p'}(\langle\rangle)$, $\Phi^Y_r(\langle 0 \rangle \sigma) = \Phi^Y_p(\sigma)$, $\Phi^Y_r(\langle 1 \rangle \sigma) = \Phi^Y_{p'}(\sigma)$, and $\Phi^Y_r(\langle i \rangle \sigma) = 0$ for $i \geq 2$, where $\langle i \rangle \sigma$ is the sequence $\sigma$ preceded by $i$. Show that $\mathcal A^r = \mathcal A^p \cap \mathcal A^{p'}$, that $\mathcal A^r_{\alpha + 1} = \mathcal A^p_\alpha \cap \mathcal A^{p'}_\alpha$ for every ordinal $\alpha$, and that $\mathcal A^r_\lambda = \mathcal A^p_\lambda \cap \mathcal A^{p'}_\lambda$ for every limit ordinal $\lambda$.
+
+:::solution
+*Definedness.* $\Phi^Y_r$ is total and $\{0, 1\}$-valued if and only if $\Phi^Y_p$ and $\Phi^Y_{p'}$ are. Suppose they are, and let $T$, $T'$ and $T_r$ be the sets they define. Then $T_r$ contains $\langle\rangle$ if and only if $T$ and $T'$ do. If $T$ and $T'$ are trees, the prefixes of $\langle 0 \rangle \sigma$ are $\langle\rangle$ and the sequences $\langle 0 \rangle \sigma'$ with $\sigma' \preceq \sigma$, so $T_r$ is a tree; conversely, if $T_r$ is a tree, $\sigma \in T$ and $\sigma' \preceq \sigma$, then $\langle 0 \rangle \sigma' \preceq \langle 0 \rangle \sigma \in T_r$, so $\sigma' \in T$, and likewise for $T'$. So $T^Y_r$ is defined if and only if $T^Y_p$ and $T^Y_{p'}$ are.
+
+*Rank.* When the trees are defined, the subtrees of $T^Y_r$ above $\langle 0 \rangle$ and $\langle 1 \rangle$ are copies of $T^Y_p$ and $T^Y_{p'}$, and the root has no other immediate successors. So $T^Y_r$ is well-founded if and only if both trees are, and then $\rho(T^Y_r) = \max(\rho(T^Y_p), \rho(T^Y_{p'})) + 1$ by :ref{#def-tree-rank}. This gives $\mathcal A^r = \mathcal A^p \cap \mathcal A^{p'}$. Moreover $\max(\gamma, \gamma') + 1 < \alpha + 1$ if and only if $\gamma < \alpha$ and $\gamma' < \alpha$, which is the statement for successors; and for a limit $\lambda$, $\max(\gamma, \gamma') + 1 < \lambda$ if and only if $\max(\gamma, \gamma') < \lambda$.
+:::
+::::
+
+::::exercise{#ex-stage-omega1ck difficulty=2 objective="Show that the union of the computable stages of a $\Pi^1_1$ class is $\Pi^1_1$, and need not be $\Delta^1_1$."}
+Show that for every index $p$, the class $\mathcal A^p_{\omega_1^{\mathrm{CK}}} = \bigcup_{\alpha < \omega_1^{\mathrm{CK}}} \mathcal A^p_\alpha$ is $\Pi^1_1$. Show that for the class of well-founded relations of :ref{#ex-class-stages} (2), this class is not $\Sigma^1_1$.
+
+:::solution
+We have $Y \in \mathcal A^p_{\omega_1^{\mathrm{CK}}}$ if and only if $\exists a\, (a \in \mathcal O \wedge P_<(p, a, Y))$, with $P_<$ as in :ref{#fact-pi11-stages} (1). Indeed, if $T^Y_p$ is defined and $\rho(T^Y_p) = \gamma < \omega_1^{\mathrm{CK}}$, then $\gamma + 1$ is computable and has a notation $a$ (:ref{#cor-constructive-computable}), and $P_<(p, a, Y)$ holds since $Y \in \mathcal A^p_{|a|}$; conversely, for $a \in \mathcal O$, $P_<(p, a, Y)$ means $Y \in \mathcal A^p_{|a|}$, with $|a| < \omega_1^{\mathrm{CK}}$. The relation $a \in \mathcal O$ is $\Pi^1_1$, and an existential number quantifier in front of a $\Pi^1_1$ relation gives a $\Pi^1_1$ relation.
+
+Let $p$ be an index of the class of well-founded relations, as in :ref{#ex-class-stages} (2). If $\mathcal A^p_{\omega_1^{\mathrm{CK}}}$ were $\Sigma^1_1$, it would be a $\Sigma^1_1$ subclass of $\mathcal A^p$, hence included in $\mathcal A^p_\beta$ for some computable $\beta$, by :ref{#prop-class-boundedness}. A sequence coding a well-ordering of type $\beta + 1$ enters $\mathcal A^p$ at stage $\beta + 1 < \omega_1^{\mathrm{CK}}$, so it belongs to $\mathcal A^p_{\omega_1^{\mathrm{CK}}}$ and not to $\mathcal A^p_\beta$: a contradiction. Together with :ref{#ex-late-members}, this shows that $\mathcal A^p_{\omega_1^{\mathrm{CK}}}$ lies strictly between the $\Delta^1_1$ stages and the whole class.
+:::
+::::
+
+::::exercise[Separation for classes]{#ex-class-separation difficulty=1 objective="Derive the separation theorem for $\Sigma^1_1$ classes from the boundedness theorem for classes."}
+1. Let $\mathcal S \subseteq \mathcal A$, with $\mathcal S$ a $\Sigma^1_1$ class and $\mathcal A$ a $\Pi^1_1$ class. Show that there is a $\Delta^1_1$ class $\mathcal D$ with $\mathcal S \subseteq \mathcal D \subseteq \mathcal A$.
+2. Deduce that two disjoint $\Sigma^1_1$ classes are separated by a $\Delta^1_1$ class.
+
+:::solution
+1. Write $\mathcal A = \mathcal A^p$. By :ref{#prop-class-boundedness}, $\mathcal S \subseteq \mathcal A^p_\alpha$ for a computable ordinal $\alpha$; let $a \in \mathcal O$ with $|a| = \alpha$. The class $\mathcal D = \mathcal A^p_{|a|}$ is $\Delta^1_1$ by :ref{#fact-pi11-stages} (1), and $\mathcal S \subseteq \mathcal D \subseteq \mathcal A$.
+2. If $\mathcal S$ and $\mathcal S'$ are disjoint $\Sigma^1_1$ classes, then $\mathcal S$ is included in the complement of $\mathcal S'$, a $\Pi^1_1$ class. By (1), there is a $\Delta^1_1$ class $\mathcal D$ with $\mathcal S \subseteq \mathcal D$ and $\mathcal D \cap \mathcal S' = \emptyset$.
+
+This is the class form of Kleene's separation theorem (:ref{#cor-sigma11-separation}), and the effective counterpart of Lusin's separation theorem for analytic sets.
+:::
+::::
+
+::::exercise{#ex-hyp-member-stage difficulty=1 objective="Show in two ways that a hyperarithmetic member of a $\Pi^1_1$ class enters it at a computable stage."}
+Let $X$ be a hyperarithmetic member of a $\Pi^1_1$ class $\mathcal A^p$. Show that $X$ enters $\mathcal A^p$ at a computable stage, first with :ref{#prop-class-boundedness}, then with :ref{#fact-pi11-stages} (2).
+
+:::solution
+*First proof.* The singleton $\{ X \}$ is $\Delta^1_1$ (:ref{#ex-delta11-classes} (1)), so it is a $\Sigma^1_1$ subclass of $\mathcal A^p$. By :ref{#prop-class-boundedness}, it is included in $\mathcal A^p_\alpha$ for a computable $\alpha$, so $X$ enters at a stage less than $\alpha$.
+
+*Second proof.* Since $X$ is hyperarithmetic, $\omega_1^X = \omega_1^{\mathrm{CK}}$ (:ref{#ex-hyp-omega1-ck}), and :ref{#fact-pi11-stages} (2) gives a computable stage.
+:::
+::::
+:::::

@@ -1,7 +1,7 @@
 ---
 title: Computation relative to an oracle
 summary: Oracle machines and Turing functionals; computations with finite oracles, stages and the use principle.
-duration: 55
+duration: 45
 prerequisites: [fundamentals/ce-sets]
 ---
 
@@ -155,17 +155,7 @@ Why is the map $F(X) = 1$ if $X$ is finite, $F(X) = 0$ otherwise, not computed b
   Many computable maps take only two values, for instance $X \mapsto X(0)$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the partial function $(X, e, x) \mapsto \use^X_e(x)$ is computed by an oracle machine: there is $v$ with $\Phi^X_v(e, x) \simeq \use^X_e(x)$ for every $X$, $e$ and $x$.
-
-:::solution
-Let $T(\sigma, e, x, t)$ be the primitive recursive relation "$t$ codes a halting computation of $e$ on $x$ with oracle $\sigma$". On input $(e, x)$ with oracle $X$, for $t = 0, 1, 2, \dots$, read $X \uh t$ on the oracle tape and test $T(X \uh t, e, x, t)$. By :ref{#prop-oracle-stages}, the search terminates if and only if $\Phi^X_e(x)\converge$, and then $t$ codes the computation with oracle $X$, since that computation reads only cells below its code. The use is $1$ plus the largest oracle head position appearing in the configurations coded by $t$, which is computed from $t$. If $\Phi^X_e(x)\diverge$, the search diverges, as it should.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-total-functional-use-bound difficulty=2 objective="Apply König's lemma to bound computably the use of a functional that is total on every oracle."}
 Let $\Phi_e$ be a functional such that $\Phi^X_e$ is total for every $X \in \cs$. Show that there is a computable function $b$ such that $\use^X_e(x) \leq b(x)$ for all $X$ and $x$.
 
 :::hint
@@ -187,3 +177,72 @@ Oracle machines were introduced by Turing in his Princeton thesis, published in 
 - S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §§3.1–3.3.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.4.
+
+:::::exercises
+::::exercise{#ex-use-computable difficulty=1 objective="Show that the use of a computation is itself computed by an oracle machine, uniformly in the index and the input."}
+Show that the partial function $(X, e, x) \mapsto \use^X_e(x)$ is computed by an oracle machine: there is $v$ with $\Phi^X_v(e, x) \simeq \use^X_e(x)$ for every $X$, $e$ and $x$.
+
+:::solution
+Let $T(\sigma, e, x, t)$ be the primitive recursive relation "$t$ codes a halting computation of $e$ on $x$ with oracle $\sigma$". On input $(e, x)$ with oracle $X$, for $t = 0, 1, 2, \dots$, read $X \uh t$ on the oracle tape and test $T(X \uh t, e, x, t)$. By :ref{#prop-oracle-stages}, the search terminates if and only if $\Phi^X_e(x)\converge$, and then $t$ codes the computation with oracle $X$, since that computation reads only cells below its code. The use is $1$ plus the largest oracle head position appearing in the configurations coded by $t$, which is computed from $t$. If $\Phi^X_e(x)\diverge$, the search diverges, as it should.
+:::
+::::
+
+::::exercise{#ex-finite-oracle-example difficulty=1 objective="Compute computations with a finite oracle, and their uses, on an example."}
+Let $\Psi$ be the functional of item 2 of :ref{#ex-functionals}, and $\sigma = 0010$. For $n = 0, 1, 2, 3$, decide whether $\Psi^\sigma(n)$ converges, and if so give its value and the use of $\Psi^X(n)$ for $X \succ \sigma$. Then describe the class of the sets $X$ such that $\Psi^X(2)\converge = 5$, and give the use of these computations.
+
+:::solution
+On input $n$, the machine moves its oracle head from cell $0$ to cell $n + 1$, one cell at a time, and then to the right until it reads a $1$. The string $\sigma = 0010$ has length $4$, and its only $1$ is at position $2$.
+
+- $n = 0$: the head reads $0$ on cell $1$ and $1$ on cell $2$; the machine outputs $2$. The cells reached are $0, 1, 2$, all below $|\sigma|$, so $\Psi^\sigma(0)\converge = 2$, and the use of $\Psi^X(0)$ is $3$ for every $X \succ \sigma$.
+- $n = 1$: the head reads $1$ on cell $2$, so $\Psi^\sigma(1)\converge = 2$, with use $3$.
+- $n = 2$: the head reads $0$ on cell $3$ and then reaches cell $4 \geq |\sigma|$, so the computation with oracle $\sigma$ is undefined. With an oracle $X \succ \sigma$, the result depends on the bits of $X$ beyond $\sigma$.
+- $n = 3$: the head must reach cell $4$ before reading anything relevant, so the computation is undefined.
+
+$\Psi^X(2)\converge = 5$ holds if and only if $\min \{ m > 2 : m \in X \} = 5$, that is, $3 \notin X$, $4 \notin X$ and $5 \in X$. The class of these sets is the union of the $8$ cylinders $[\tau]$ with $|\tau| = 6$, $\tau(3) = \tau(4) = 0$ and $\tau(5) = 1$, and the use of each computation is $6$. The bits at positions $0$, $1$ and $2$ are read, since the head passes over them, but they do not influence the result: the use counts the cells read, not the cells on which the output depends.
+:::
+::::
+
+::::exercise{#ex-functional-domain-open difficulty=1 objective="Use the use principle to show that the domain of a functional is a union of cylinders, and derive what functionals cannot detect."}
+Fix $e$ and $x$. Show that $\{ X \in \cs : \Phi^X_e(x)\converge \}$ is the union of the cylinders $[\sigma]$ over the strings $\sigma$ such that $\Phi^\sigma_e(x)\converge$. Deduce that there is no index $e$ such that, for every $X$, $\Phi^X_e(0)\converge$ if and only if $X$ is infinite, and no index $e$ such that, for every $X$, $\Phi^X_e(0)\converge$ if and only if $X$ is finite.
+
+:::solution
+If $\Phi^X_e(x)\converge$ with use $u$, then $\Phi^{X \uh u}_e(x)\converge$ by :ref{#thm-use-principle}, and $X \in [X \uh u]$. Conversely, if $\Phi^\sigma_e(x)\converge$ and $X \in [\sigma]$, then $\Phi^X_e(x)\converge$ by item 3 of :ref{#prop-oracle-stages}. This proves the equality.
+
+Suppose that $\Phi^X_e(0)\converge$ exactly for the infinite sets $X$. Since $\nat$ is infinite, some string $\sigma \prec \nat$, that is, $\sigma = 1^k$, satisfies $\Phi^\sigma_e(0)\converge$. The finite set $\{0, \dots, k-1\}$ belongs to $[1^k]$, so the computation converges with this oracle too, a contradiction. Suppose now that $\Phi^X_e(0)\converge$ exactly for the finite sets. Since $\emptyset$ is finite, some $0^k$ satisfies $\Phi^{0^k}_e(0)\converge$, and the infinite set $\{ n : n \geq k \}$ belongs to $[0^k]$, a contradiction. In both cases, the class to be detected contains no cylinder around one of its members.
+:::
+::::
+
+::::exercise{#ex-finite-oracle-halting difficulty=1 objective="Contrast convergence with a finite oracle, which is c.e., with convergence by a given stage, which is decidable."}
+Show that the set $H = \{ \langle \sigma, e, x \rangle : \Phi^\sigma_e(x)\converge \}$ is c.e. and not computable, although the relation $\Phi^\sigma_e(x)[s]\converge$ is primitive recursive.
+
+:::solution
+If $\Phi^\sigma_e(x)\converge$ and $t$ is the code of the computation, then $\Phi^\sigma_e(x)[s]\converge$ for $s = \max(e, x, t) + 1$; conversely $\Phi^\sigma_e(x)[s]\converge$ implies $\Phi^\sigma_e(x)\converge$. So $\langle \sigma, e, x \rangle \in H$ if and only if $\exists s\ \Phi^\sigma_e(x)[s]\converge$, the projection of a primitive recursive relation (:ref{#prop-oracle-stages}), and $H$ is c.e.
+
+For the second statement, reduce the halting problem of the course on fundamentals to $H$. An ordinary machine of code $m$ becomes an oracle machine of code $m^*$ by letting it ignore the oracle and leave the oracle head on cell $0$; the map $m \mapsto m^*$ is a computable transformation of transition tables. With the oracle $\sigma = 0$, of length $1$, the computation of $m^*$ on input $x$ never reaches a cell $k \geq 1$, and it performs the steps of the machine $m$. So $\Phi_m(m)\converge$ if and only if $\langle 0, m^*, m \rangle \in H$. If $H$ were computable, the halting problem would be computable, contradicting :ref{#thm-halting}.
+:::
+::::
+
+::::exercise{#ex-use-antichain difficulty=2 objective="Describe the domain of a functional by a prefix-free c.e. set of strings, using the use principle."}
+Fix $e$ and $x$, and let $U$ be the set of strings $\sigma$ such that $\Phi^\sigma_e(x)\converge$ and $1$ plus the largest cell read during this computation equals $|\sigma|$. Show that $U$ is c.e., that no element of $U$ is a proper prefix of another one, and that for every $X$, $\Phi^X_e(x)\converge$ if and only if $X$ has a prefix in $U$; this prefix is then unique, and equal to $X \uh \use^X_e(x)$.
+
+:::solution
+A string $\sigma$ belongs to $U$ if and only if some $t$ codes a halting computation of $e$ on $x$ with oracle $\sigma$ in which the largest position of the oracle head is $|\sigma| - 1$. Given $t$, this is a primitive recursive condition, so $U$ is c.e. The empty string is not in $U$, since the head reads cell $0$.
+
+We use the observation of the proof of :ref{#prop-oracle-stages}, item 2: if $\Phi^\sigma_e(x)\converge$ and $\sigma \preceq \tau$, the computation with oracle $\tau$ performs the same steps and reads the same cells as the computation with oracle $\sigma$; the same holds with an infinite oracle $X \succ \sigma$.
+
+*Prefix-freeness.* If $\sigma \prec \tau$ with $\sigma, \tau \in U$, the computation with oracle $\tau$ reads the same cells as the computation with oracle $\sigma$, whose largest is $|\sigma| - 1 < |\tau| - 1$, so $\tau \notin U$.
+
+*Domain.* If $\Phi^X_e(x)\converge$ with use $u$, then, by :ref{#thm-use-principle}, the computation with oracle $X \uh u$ performs the same steps; its largest cell read is $u - 1 = |X \uh u| - 1$, so $X \uh u \in U$. Conversely, if $\sigma \prec X$ and $\sigma \in U$, the computation with oracle $X$ performs the same steps as with $\sigma$, so $\Phi^X_e(x)\converge$ and $\use^X_e(x) = |\sigma|$, that is, $\sigma = X \uh \use^X_e(x)$. Two prefixes of $X$ are comparable, so by prefix-freeness $X$ has at most one prefix in $U$.
+:::
+::::
+
+::::exercise{#ex-use-bound-all-oracles difficulty=1 objective="See why the computable bound on the use of a total functional requires totality on every oracle."}
+Let $\Psi$ be the functional of item 2 of :ref{#ex-functionals}. Show that $\Psi^X$ is total for every infinite $X$, but that no integer bounds $\use^X_\Psi(0)$ for all infinite $X$. Which step of the proof of :ref{#ex-total-functional-use-bound} fails for $\Psi$?
+
+:::solution
+If $X$ is infinite, $\min \{ m > n : m \in X \}$ exists for every $n$, so $\Psi^X$ is total. For $k \geq 1$, the set $X_k = \{ n : n \geq k \}$ is infinite, and $\Psi^{X_k}(0)$ reads the cells $0, 1, \dots, k$ and outputs $k$, with use $k + 1$. So the uses on input $0$ are unbounded.
+
+In the proof, the tree $T_0$ of strings along which the computation on input $0$ has not converged contains the strings $0^\ell$ for every $\ell$: with oracle $0^\ell$ the head runs off the end of the string without reading a $1$. König's lemma gives the path $0^\infty$, that is, the set $\emptyset$, and indeed $\Psi^\emptyset(0)\diverge$; but this contradicts nothing, since the hypothesis only concerns infinite oracles. The class of infinite sets is not closed in $\cs$, and the compactness argument needs the class of oracles on which the functional is total to be closed.
+:::
+::::
+:::::

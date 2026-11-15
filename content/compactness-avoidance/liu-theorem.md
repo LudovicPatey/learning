@@ -30,7 +30,7 @@ The relation of :ref{#def-liu-forcing} is a $\Sigma^0_1(\mathcal M)$-preserving 
 :::proof{of=lem-liu-question}
 Let $c = (\sigma_0, \sigma_1, X)$.
 
-*Preservation.* The functions $B$ for which the definition fails form a $\Pi^0_1(Z \oplus X)$ class. By compactness, $c \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ if and only if this class is empty, a $\Sigma^0_1(Z \oplus X)$ property, uniformly in the formulas (first exercise of :ref{to="avoidance/disjunctive-question"}); and $Z \oplus X \in \mathcal M$.
+*Preservation.* The functions $B$ for which the definition fails form a $\Pi^0_1(Z \oplus X)$ class. By compactness, $c \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ if and only if this class is empty, a $\Sigma^0_1(Z \oplus X)$ property, uniformly in the formulas, as for the question of :ref{#ex-dj-disjunctive}; and $Z \oplus X \in \mathcal M$.
 
 *Property 1.* Apply the definition to the function $B$ with $B^{-1}(i) = A^i$. There are $i$ and $\tau$ compatible with $(\sigma_i, X \cap A^i)$ satisfying $\varphi_i$. The new elements of $\tau$ lie in $A^i$, so $(\sigma_0, \sigma_1, X)$ with $\sigma_i$ replaced by $\tau$ and $X$ by $X \setminus [0, |\tau|)$ is a condition; all its members of side $i$ extend $\tau$, hence satisfy $\varphi_i$.
 
@@ -97,6 +97,14 @@ In the proof of :ref{#thm-rt12-strong-pa}, where is the hypothesis that the rese
   This comes from the definition of the conditions.
 :::
 
+::::exercise{#ex-coh-strong-pa difficulty=2 objective="Combine Mathias forcing with non-PA reservoirs and the strong PA avoidance of the pigeonhole principle to prove the strong PA avoidance of cohesiveness."}
+Show that $\mathsf{COH}$ admits strong PA avoidance, following the proof of :ref{#thm-coh-strong-cone}.
+
+:::solution
+Let $\vec R$ be an arbitrary sequence of sets. Use Mathias conditions $(\sigma, X)$ with $Z \oplus X$ not PA relative to $D$, and the question "some string compatible with $(\sigma, X)$ satisfies $\varphi$". It is $\Sigma^0_1(\mathcal M)$-preserving and merging, as in :ref{#thm-coh-pa-avoidance}. By :ref{#thm-local-pa-avoidance}, a sufficiently generic $G$ has $Z \oplus G$ not PA relative to $D$. For cohesiveness, given $(\sigma, X)$ and $n$, let $p$ enumerate $X$, and $A = \{ k : p(k) \in R_n \}$. By :ref{#thm-rt12-strong-pa} relative to $Z \oplus X$, there is an infinite $H$ contained in $A$ or $\overline A$ with $Z \oplus X \oplus H$ not PA relative to $D$; then $(\sigma, p[H])$ is a condition extending $(\sigma, X)$, all of whose members are almost contained in $R_n$ or in $\overline{R_n}$. Infinity is handled as usual.
+:::
+::::
+
 ## Ramsey's theorem for pairs
 
 :::theorem[Liu]{#thm-liu-rt22}
@@ -131,17 +139,7 @@ In the proof of :ref{#thm-liu-rt22}, why does the pigeonhole principle need to b
   $Z \oplus G$ is not PA relative to $D$, by the choice of $G$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=2}
-Show that $\mathsf{COH}$ admits strong PA avoidance, following the proof of :ref{#thm-coh-strong-cone}.
-
-:::solution
-Let $\vec R$ be an arbitrary sequence of sets. Use Mathias conditions $(\sigma, X)$ with $Z \oplus X$ not PA relative to $D$, and the question "some string compatible with $(\sigma, X)$ satisfies $\varphi$". It is $\Sigma^0_1(\mathcal M)$-preserving and merging, as in :ref{#thm-coh-pa-avoidance}. By :ref{#thm-local-pa-avoidance}, a sufficiently generic $G$ has $Z \oplus G$ not PA relative to $D$. For cohesiveness, given $(\sigma, X)$ and $n$, let $p$ enumerate $X$, and $A = \{ k : p(k) \in R_n \}$. By :ref{#thm-rt12-strong-pa} relative to $Z \oplus X$, there is an infinite $H$ contained in $A$ or $\overline A$ with $Z \oplus X \oplus H$ not PA relative to $D$; then $(\sigma, p[H])$ is a condition extending $(\sigma, X)$, all of whose members are almost contained in $R_n$ or in $\overline{R_n}$. Infinity is handled as usual.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-rt-ell-pa difficulty=2 objective="Extend Liu's theorems to colorings with $\ell$ colors, by induction on the number of colors and the cohesive decomposition."}
 Show that for every $\ell \geq 2$, $\mathsf{RT}^1_\ell$ admits strong PA avoidance, and $\mathsf{RT}^2_\ell$ admits PA avoidance.
 
 :::solution
@@ -157,3 +155,37 @@ Liu (2012) proved that every computable coloring of pairs has an infinite homoge
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2015, Chapter 6.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Chapter 8.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, section *Liu's theorem*.
+
+:::::exercises
+::::exercise[Strong PA avoidance of the Ramsey-type weak König lemma]{#ex-rwkl-strong-pa difficulty=1 objective="Derive the strong PA avoidance of $\mathsf{RWKL}$ from that of the pigeonhole principle, applied to a path that is never computed."}
+Show that $\mathsf{RWKL}$ admits strong PA avoidance, although $\mathsf{WKL}$ does not even admit PA avoidance.
+
+:::solution
+Let $D \leq_T Z$ with $Z$ not PA relative to $D$, and $T$ an arbitrary infinite binary tree. By König's lemma, $T$ has a path $P$. By :ref{#thm-rt12-strong-pa} applied to the set $P$, there is an infinite set $H$ contained in $P$ or in $\overline P$ with $Z \oplus H$ not PA relative to $D$. So $H \subseteq P^{-1}(i)$ for some $i$, and $H$ is homogeneous for $T$ by :ref{#prop-homogeneous-member}. The path $P$ may be PA, as for the tree of $\mathrm{DNC}_2$; it is only an instance of the pigeonhole principle, and a solution to it need not compute it. This argument is not an independent proof of :ref{#thm-rwkl-pa-avoidance}: the proof of :ref{#thm-rt12-strong-pa} uses it, through :ref{#exr-rwkl-subset}.
+:::
+::::
+
+::::exercise[A limit set that the homogeneous sets need not compute]{#ex-limit-not-computable difficulty=1 objective="Combine Flood's stable coloring with Liu's theorem to separate a stable coloring from its limit set."}
+Show that there is a computable stable coloring $f : [\nat]^2 \to 2$ with an infinite homogeneous set that does not compute the limit set of $f$.
+
+:::solution
+Let $T$ be a computable tree with $[T] = \mathrm{DNC}_2$, and $f$ the coloring of :ref{#prop-rwkl-reductions} for $T$, which is computable. By :ref{#ex-flood-stable}, $f$ is stable and its limit set is the leftmost path $P$ of $T$, which is PA. By :ref{#thm-liu-rt22} with $D = Z = \emptyset$, $f$ has an infinite homogeneous set $H$ that is not PA. If $H$ computed $P$, it would be PA (fact 1). So $H$ does not compute the limit set. For stable colorings, the homogeneous sets are contained in the limit set or in its complement (:ref{#prop-srt-d22}), but they need not know it.
+:::
+::::
+
+::::exercise[Only one side may avoid PA degrees]{#ex-one-side-pa difficulty=1 objective="Show that the disjunction in the strong PA avoidance of the pigeonhole principle cannot be removed."}
+Show that there is a set $A$ such that every infinite subset of $A$ is PA, while $\overline A$ has an infinite computable subset.
+
+:::solution
+Let $A = X_{\emptyset'}$ be the set of the codes of the prefixes of $\emptyset'$, as in :ref{#ex-coding-reservoir}. Every infinite subset of $A$ computes $\emptyset'$, which is PA, so it is PA (fact 1). Let $b = \emptyset'(0)$. The set of the codes of the strings whose first bit is $1 - b$ is computable, infinite, and disjoint from $A$, since no prefix of $\emptyset'$ of positive length begins with $1 - b$. So for this $A$, :ref{#thm-rt12-strong-pa} can only give a subset of $\overline A$. The choice of $b$ is not uniform, which is harmless here.
+:::
+::::
+
+::::exercise[Property 2 of the Liu question]{#ex-liu-question-property2 difficulty=1 objective="Complete the proof that the Liu question satisfies property 2, with one application of the relativized Liu theorem."}
+Prove property 2 of the question of :ref{#def-liu-forcing} in detail: if $c = (\sigma_0, \sigma_1, X)$ is a Liu condition and $c \mathrel{?{\nvdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$, there are a Liu condition $d \leq c$ and $i < 2$ with $d \Vdash \neg \varphi_i(G_i)$.
+
+:::solution
+Let $\mathcal P$ be the class of the functions $B : \nat \to 2$ such that for both $i < 2$, no string compatible with $(\sigma_i, X \cap B^{-1}(i))$ satisfies $\varphi_i$. It is a $\Pi^0_1(Z \oplus X)$ class, non-empty since the answer is negative. The set $W = Z \oplus X$ computes $D$ and is not PA relative to $D$, and $X \leq_T W$ is infinite. By :ref{#exr-rwkl-subset} relative to $W$, there are $B \in \mathcal P$, $i < 2$ and an infinite $H \subseteq X \cap B^{-1}(i)$ such that $W \oplus H$ is not PA relative to $D$. Removing from $H$ finitely many elements does not change its degree, and $H \subseteq X$ already satisfies $\min H \geq |\sigma_0|, |\sigma_1|$; since $Z \oplus H \leq_T W \oplus H$, $d = (\sigma_0, \sigma_1, H)$ is a Liu condition extending $c$. A member $G$ of side $i$ of $d$ satisfying $\varphi_i$ would have a prefix $\tau$ satisfying it, by the use principle, and $\tau$ would be compatible with $(\sigma_i, H)$, hence with $(\sigma_i, X \cap B^{-1}(i))$, contradicting $B \in \mathcal P$. So $d \Vdash \neg \varphi_i(G_i)$.
+:::
+::::
+:::::

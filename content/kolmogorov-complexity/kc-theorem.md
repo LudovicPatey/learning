@@ -95,21 +95,11 @@ In the proof of :ref{#thm-k-minimal}, why are requests issued with length $f_s(\
   $f + 1$ is right-c.e. whenever $f$ is.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-k-computable-bound difficulty=1 objective="Apply the characterization of $K$ to computable functions whose series $\sum 2^{-f(n)}$ converges."}
 Let $f : \nat \to \nat$ be computable with $\sum_n 2^{-f(n)} < \infty$. Show that $K(n) \leq^+ f(n)$. Deduce that $K(n) \leq^+ \log n + 2 \log \log n$ for $n \geq 4$, and show that $K(n) > \log n + \log \log n$ for infinitely many $n$.
 
 :::solution
 Let $c$ be such that $\sum_n 2^{-f(n) - c} \leq 1$. The computable function $f + c$ is right-c.e. and satisfies the Kraft inequality, so $K \leq^+ f + c$ by :ref{#thm-k-minimal}. The series $\sum_{n \geq 4} 1/(n (\log n)^2)$ converges, which gives the second bound with $f(n) = \lceil \log n + 2 \log \log n \rceil$ for $n \geq 4$ (and $f(n) = 0$ for $n < 4$). If $K(n) \leq \log n + \log \log n$ for all $n \geq n_0$, then $\sum_n 2^{-K(n)} \geq \sum_{n \geq n_0} 1/(n \log n)$, which diverges, contradicting :ref{#prop-k-basic} (4).
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $d$ be a number and $R$ a c.e. set of requests of weight at most $2^d$. Show that $K(\sigma) \leq^+ \ell + d$ for every $(\sigma, \ell) \in R$. Deduce from :ref{#thm-kc} that if $(R_d)_{d \in \nat}$ is a uniformly c.e. sequence of request sets with weights at most $2^{-d}$, then $K(\sigma) \leq^+ \ell$ for every $d$ and every $(\sigma, \ell) \in R_d$.
-
-:::solution
-The set $\{ (\sigma, \ell + d) : (\sigma, \ell) \in R \}$ has weight at most $1$, and :ref{#thm-kc} applies. For the second statement, let $R$ be the union of the sets $R_d$ for $d \geq 1$; it is c.e., and its weight is at most $\sum_{d \geq 1} 2^{-d} = 1$, so a single application of :ref{#thm-kc} gives the bound for $d \geq 1$, with one constant. The set $R_0$, of weight at most $1$, is handled by a second application.
 :::
 ::::
 
@@ -123,3 +113,76 @@ The KC theorem appears in Levin's dissertation (1971) and in Schnorr (1973, Lemm
 - L. G. Kraft, *A device for quantizing, grouping, and coding amplitude modulated pulses*, Master's thesis, MIT, 1949.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 2.2.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 3.6 and 3.7.
+
+:::::exercises
+::::exercise{#ex-request-weight difficulty=2 objective="Rescale request sets of bounded weight and merge a uniform family of them into one request set."}
+Let $d$ be a number and $R$ a c.e. set of requests of weight at most $2^d$. Show that $K(\sigma) \leq^+ \ell + d$ for every $(\sigma, \ell) \in R$. Deduce from :ref{#thm-kc} that if $(R_d)_{d \in \nat}$ is a uniformly c.e. sequence of request sets with weights at most $2^{-d}$, then $K(\sigma) \leq^+ \ell$ for every $d$ and every $(\sigma, \ell) \in R_d$.
+
+:::solution
+The set $\{ (\sigma, \ell + d) : (\sigma, \ell) \in R \}$ has weight at most $1$, and :ref{#thm-kc} applies. For the second statement, let $R$ be the union of the sets $R_d$ for $d \geq 1$; it is c.e., and its weight is at most $\sum_{d \geq 1} 2^{-d} = 1$, so a single application of :ref{#thm-kc} gives the bound for $d \geq 1$, with one constant. The set $R_0$, of weight at most $1$, is handled by a second application.
+:::
+::::
+
+
+::::exercise{#ex-kc-by-hand difficulty=1 objective="Run the KC construction on small examples and read the free strings off the remaining weight."}
+Run the construction of the proof of :ref{#thm-kc} on the requests of lengths $1, 2, 3, 3$, in this order, and then on the requests of lengths $3, 3, 2, 1$, in this order (the strings requested play no role). Give at each stage the assigned string $\tau_s$ and the set $F_{s+1}$. Show that at every stage of the construction, in general, the lengths of the free strings are the positions $j$ of the digits $1$ in the finite binary expansion $\sum_j b_j 2^{-j}$ of the remaining weight $1 - \sum_{i < s} 2^{-\ell_i}$.
+
+:::solution
+Lengths $1, 2, 3, 3$. Initially $F_0 = \{ \varepsilon \}$. Stage $0$: $\rho = \varepsilon$, $k = 1$, $\tau_0 = 0$, $F_1 = \{ 1 \}$. Stage $1$: $\rho = 1$, $k = 1$, $\tau_1 = 10$, $F_2 = \{ 11 \}$. Stage $2$: $\rho = 11$, $k = 1$, $\tau_2 = 110$, $F_3 = \{ 111 \}$. Stage $3$: $\rho = 111$, $k = 0$, $\tau_3 = 111$, $F_4 = \emptyset$. This is Kraft's placement from left to right.
+
+Lengths $3, 3, 2, 1$. Stage $0$: $\rho = \varepsilon$, $k = 3$, $\tau_0 = 000$, $F_1 = \{ 1, 01, 001 \}$. Stage $1$: the longest free string of length at most $3$ is $001$, so $k = 0$, $\tau_1 = 001$, $F_2 = \{ 1, 01 \}$. Stage $2$: $\rho = 01$, $\tau_2 = 01$, $F_3 = \{ 1 \}$. Stage $3$: $\tau_3 = 1$, $F_4 = \emptyset$.
+
+In general, by invariants 2 and 3, the remaining weight is $\sum_{\rho \in F_s} 2^{-|\rho|}$, a sum of distinct powers of $2$. A finite sum of distinct powers $2^{-j}$ is a finite binary expansion, and the finite binary expansion of a number is unique; so the set of lengths of the free strings is the set of positions of the digits $1$ of the remaining weight. (When $F_s = \{ \varepsilon \}$, the remaining weight is $1 = 2^{-0}$.) For instance, after stage $0$ of the second run, the remaining weight is $\tfrac78 = 0.111$ in binary, and the free strings have lengths $1, 2, 3$.
+:::
+::::
+
+::::exercise{#ex-kc-prefix-free-set difficulty=1 objective="Apply the KC theorem to show that the elements of a c.e. set of finite weight have complexity at most their length."}
+Let $W$ be a c.e. set of strings with $\sum_{\tau \in W} 2^{-|\tau|} < \infty$, for instance a c.e. prefix-free set. Show that $K(\tau) \leq^+ |\tau|$ for $\tau \in W$. Deduce that $K(\tau) \leq^+ |\tau|$ for every $\tau$ in the domain of $U$.
+
+:::solution
+Let $d$ be such that $\sum_{\tau \in W} 2^{-|\tau|} \leq 2^d$. The set of requests $\{ (\tau, |\tau| + d) : \tau \in W \}$ is c.e. and has weight at most $1$, so by :ref{#thm-kc} $K(\tau) \leq^+ |\tau| + d$ for every $\tau \in W$. The domain of $U$ is c.e. and prefix-free, so it has weight at most $1$ by :ref{#prop-kraft}, and the first statement applies.
+:::
+::::
+
+::::exercise{#ex-pairs-by-kc difficulty=1 objective="Recover the subadditivity of $K$ from its characterization, without building a machine."}
+Prove :ref{#prop-k-basic} (1), $K(\langle \sigma, \tau \rangle) \leq^+ K(\sigma) + K(\tau)$, by means of :ref{#thm-k-minimal}.
+
+:::solution
+Since $\langle \cdot, \cdot \rangle$ is a bijection, $f(\langle \sigma, \tau \rangle) = K(\sigma) + K(\tau)$ defines a function on all strings. It is right-c.e., with the approximation $f_s(\langle \sigma, \tau \rangle) = K_s(\sigma) + K_s(\tau)$, where $(K_s)$ is an approximation of $K$ from above. Its weight is
+$$
+\sum_{\sigma, \tau} 2^{-K(\sigma) - K(\tau)} = \Big( \sum_\sigma 2^{-K(\sigma)} \Big)^2 \leq 1,
+$$
+by :ref{#prop-k-basic} (4). So $K \leq^+ f$ by :ref{#thm-k-minimal}.
+:::
+::::
+
+::::exercise{#ex-k-minimal-right-ce difficulty=2 objective="See why the hypothesis that $f$ is approximable from above is needed in the characterization of $K$."}
+Show that there is a function $f : \bstr \to \nat$ with $\sum_\sigma 2^{-f(\sigma)} \leq 1$ such that $K(\sigma) - f(\sigma)$ is unbounded. So the hypothesis that $f$ is right-c.e. cannot be dropped in :ref{#thm-k-minimal}.
+
+:::solution
+For each $n$, let $\sigma_n$ be a string of length $n$ with $C(\sigma_n) \geq n$ (:ref{#prop-incompressible-count}). By :ref{#prop-k-basic} (3) there is $d$ with $K(\sigma_n) \geq n - d$. Let $f(\sigma_n) = 2 \lfloor \log(n+1) \rfloor + 2$, and $f(\sigma) = 2|\sigma| + 2$ for the other strings. The numbers $n$ with $\lfloor \log(n+1) \rfloor = j$ are the $2^j$ numbers from $2^j - 1$ to $2^{j+1} - 2$, so
+$$
+\sum_n 2^{-f(\sigma_n)} = \sum_j 2^j\, 2^{-2j-2} = \tfrac12, \qquad \sum_{\sigma} 2^{-2|\sigma| - 2} = \sum_m 2^m\, 2^{-2m-2} = \tfrac12,
+$$
+and the weight of $f$ is at most $1$. But $K(\sigma_n) - f(\sigma_n) \geq n - d - 2 \log(n + 1) - 2$, which tends to infinity.
+:::
+::::
+
+::::exercise{#ex-k-order-sum difficulty=3 objective="Use the minimality of $K$ to show that the series $\sum 2^{-K(\sigma)}$ diverges as soon as its terms are multiplied by an order."}
+An **order** is a total computable non-decreasing unbounded function $f : \nat \to \nat$. Let $f$ be an order with $f(0) \geq 1$. Show that $\sum_\sigma f(K(\sigma))\, 2^{-K(\sigma)} = \infty$.
+
+:::hint
+If the sum is finite, $\sigma \mapsto K(\sigma) - \log f(K(\sigma))$ almost satisfies the hypotheses of :ref{#thm-k-minimal}. Replace $\log f$ by a function that grows by at most $1$ at each step, so that the approximation remains non-increasing.
+:::
+
+:::solution
+Suppose that the sum is finite. Define $e(0) = 0$ and $e(k + 1) = \min(\lfloor \log f(k + 1) \rfloor, e(k) + 1)$. Then $e$ is computable, and by induction $e(k) \leq \lfloor \log f(k) \rfloor$ (using $f(0) \geq 1$) and $e(k) \leq k$. It is non-decreasing, since $\lfloor \log f(k + 1) \rfloor \geq \lfloor \log f(k) \rfloor \geq e(k)$, and $e(k + 1) \leq e(k) + 1$. It is unbounded: if $e(k) = E$ for every $k \geq k_1$, take $k > k_1$ with $\lfloor \log f(k) \rfloor \geq E + 1$; then $e(k) \geq \min(E + 1, e(k - 1) + 1) = E + 1$, a contradiction.
+
+Let $h(k) = k - e(k)$, a non-decreasing function from $\nat$ to $\nat$, and $g(\sigma) = h(K(\sigma))$. With an approximation $(K_s)$ of $K$ from above, $g_s(\sigma) = h(K_s(\sigma))$ is computable, non-increasing in $s$ because $h$ is non-decreasing, and equal to $g(\sigma)$ for large $s$; so $g$ is right-c.e. Since $2^{e(k)} \leq f(k)$,
+$$
+\sum_\sigma 2^{-g(\sigma)} = \sum_\sigma 2^{e(K(\sigma))}\, 2^{-K(\sigma)} \leq \sum_\sigma f(K(\sigma))\, 2^{-K(\sigma)} < \infty.
+$$
+Let $c_0$ be such that this sum is at most $2^{c_0}$. Then $g + c_0$ is right-c.e. and satisfies the Kraft inequality, so by :ref{#thm-k-minimal} there is $c$ with $K(\sigma) \leq K(\sigma) - e(K(\sigma)) + c$, that is, $e(K(\sigma)) \leq c$, for every $\sigma$. But $K$ takes arbitrarily large values, since only finitely many strings have $K(\sigma) \leq m$, and $e$ is non-decreasing and unbounded, so $e(K(\sigma))$ is unbounded. This contradiction proves the claim. (Nies 2009, Exercise 2.2.22.)
+:::
+::::
+:::::

@@ -1,7 +1,7 @@
 ---
 title: Low₂ solutions of Ramsey's theorem for pairs
 summary: Combining cohesiveness and the pigeonhole principle for Δ⁰₂ sets, every computable coloring of pairs has an infinite homogeneous set whose jump is computed by any given set PA relative to ∅′, hence a low₂ one (Cholak–Jockusch–Slaman); ω-models of low₂ sets; no low basis exists (Downey–Hirschfeldt–Lempp–Solomon).
-duration: 30
+duration: 25
 prerequisites: [cjs-theorem, ramsey-theorem/seetapun, ramsey-theorem/triples, weak-preservation]
 ---
 
@@ -61,19 +61,11 @@ The weakly low basis cannot be improved to a low basis, even for the pigeonhole 
 There is a $\Delta^0_2$ set $A$ such that neither $A$ nor $\overline A$ has an infinite low subset.
 :::
 
-By the last exercise of :ref{to="lowness/weak-preservation"}, such a set is neither hyperimmune nor co-hyperimmune. The construction is intrinsically complex: Chong, Slaman and Yang built a non-standard model of $\mathsf{RCA}_0 + \mathsf{SRT}^2_2$ in which every set is low in the sense of the model, exploiting a failure of $\Sigma^0_2$ induction (see :ref{to="ramsey-theorem/seetapun"}); so the existence of a set as in :ref{#thm-dhls} is not provable in $\mathsf{RCA}_0 + \mathsf{SRT}^2_2$, and its proof uses induction in an essential way. For cohesiveness, the gap between low and weakly low bases is explained by :ref{#prop-coh-no-low}: some instance forces the jump of every solution to be PA relative to $\emptyset'$. For $\mathsf D^2_2$ this is not the case: Monin and Patey showed that every $\Delta^0_2$ set has an infinite subset, of itself or of its complement, whose jump is not PA relative to $\emptyset'$.
+By :ref{#ex-dhls-not-hyperimmune}, such a set is neither hyperimmune nor co-hyperimmune. The construction is intrinsically complex: Chong, Slaman and Yang built a non-standard model of $\mathsf{RCA}_0 + \mathsf{SRT}^2_2$ in which every set is low in the sense of the model, exploiting a failure of $\Sigma^0_2$ induction (see :ref{to="ramsey-theorem/seetapun"}); so the existence of a set as in :ref{#thm-dhls} is not provable in $\mathsf{RCA}_0 + \mathsf{SRT}^2_2$, and its proof uses induction in an essential way. For cohesiveness, the gap between low and weakly low bases is explained by :ref{#prop-coh-no-low}: some instance forces the jump of every solution to be PA relative to $\emptyset'$. For $\mathsf D^2_2$ this is not the case: Monin and Patey showed that every $\Delta^0_2$ set has an infinite subset, of itself or of its complement, whose jump is not PA relative to $\emptyset'$.
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that there is an ω-model of $\mathsf{WKL}_0 + \mathsf{RT}^2_2$ consisting of low₂ sets.
-
-:::solution
-$\mathsf{WKL}$ admits a low basis, hence a weakly low basis, and so does $\mathsf{RT}^2_2$ by :ref{#thm-rt22-weakly-low}. By the last exercise of :ref{to="lowness/weakly-low-bases"}, the product problem, whose instances are pairs of an infinite binary tree and a coloring of pairs, admits a weakly low basis. Apply :ref{#thm-weakly-low-model} to it, with $P$ PA relative to $\emptyset'$ and $P' \leq_T \emptyset''$: the resulting Turing ideal satisfies both problems, since a tree $T$ in the ideal is the first component of the instance $T \oplus c$ of the product, with $c$ a fixed computable coloring, and a coloring $c'$ in the ideal is the second component of $T_0 \oplus c'$, with $T_0$ a fixed computable infinite tree. Its members are low₂.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-rt2k-weakly-low difficulty=2 objective="Extend the weakly low basis of Ramsey's theorem for pairs to finitely many colors, using the density of PA degrees."}
 Show by induction on $k \geq 2$ that $\mathsf{RT}^2_k$ admits a weakly low basis.
 
 :::solution
@@ -83,7 +75,7 @@ The case $k = 2$ is :ref{#thm-rt22-weakly-low}. Let $k \geq 3$, $f$ a $Z$-comput
 
 ## Notes and references
 
-:ref{#thm-rt22-weakly-low} and :ref{#cor-rt22-low2} are due to Cholak, Jockusch and Slaman (2001); Hirschfeldt presents them as Theorem 6.53 and Corollary 6.58, Dzhafarov and Mummert as Theorem 8.5.8 and Corollary 8.5.9, with the induction on the number of colors of the second exercise. The proof given here follows the section *Ramsey's theorem for pairs* of the chapter *Lowness* of Patey's monograph. :ref{#thm-dhls} is due to Downey, Hirschfeldt, Lempp and Solomon (2001), Theorem 6.37 of Hirschfeldt. Monin and Patey (2021) proved that every $\Delta^0_2$ set has an infinite subset in it or its complement whose jump is not PA relative to $\emptyset'$, a result that belongs to the later course on jump compactness avoidance. Dzhafarov and Jockusch (2009) combined the low₂ bound with cone avoidance (Dzhafarov–Mummert, Theorem 8.5.10).
+:ref{#thm-rt22-weakly-low} and :ref{#cor-rt22-low2} are due to Cholak, Jockusch and Slaman (2001); Hirschfeldt presents them as Theorem 6.53 and Corollary 6.58, Dzhafarov and Mummert as Theorem 8.5.8 and Corollary 8.5.9, with the induction on the number of colors of :ref{#ex-rt2k-weakly-low}. The proof given here follows the section *Ramsey's theorem for pairs* of the chapter *Lowness* of Patey's monograph. :ref{#thm-dhls} is due to Downey, Hirschfeldt, Lempp and Solomon (2001), Theorem 6.37 of Hirschfeldt. Monin and Patey (2021) proved that every $\Delta^0_2$ set has an infinite subset in it or its complement whose jump is not PA relative to $\emptyset'$, a result that belongs to the later course on jump compactness avoidance. Dzhafarov and Jockusch (2009) combined the low₂ bound with cone avoidance (Dzhafarov–Mummert, Theorem 8.5.10).
 
 - P. A. Cholak, C. G. Jockusch, Jr. and T. A. Slaman, *On the strength of Ramsey's theorem for pairs*, Journal of Symbolic Logic 66 (2001), 1–55.
 - R. Downey, D. R. Hirschfeldt, S. Lempp and R. Solomon, *A Δ⁰₂ set with no infinite low subset in either it or its complement*, Journal of Symbolic Logic 66 (2001), 1371–1381.
@@ -93,3 +85,45 @@ The case $k = 2$ is :ref{#thm-rt22-weakly-low}. Let $k \geq 3$, $f$ a $Z$-comput
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Sections 6.4 and 6.6.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 8.5.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Lowness*, section *Ramsey's theorem for pairs*.
+
+:::::exercises
+::::exercise{#ex-wkl-rt22-low2-model difficulty=1 objective="Combine weakly low bases into an ω-model of low₂ sets satisfying two problems."}
+Show that there is an ω-model of $\mathsf{WKL}_0 + \mathsf{RT}^2_2$ consisting of low₂ sets.
+
+:::solution
+$\mathsf{WKL}$ admits a low basis, hence a weakly low basis, and so does $\mathsf{RT}^2_2$ by :ref{#thm-rt22-weakly-low}. By :ref{#ex-weakly-low-product}, the product problem, whose instances are pairs of an infinite binary tree and a coloring of pairs, admits a weakly low basis. Apply :ref{#thm-weakly-low-model} to it, with $P$ PA relative to $\emptyset'$ and $P' \leq_T \emptyset''$: the resulting Turing ideal satisfies both problems, since a tree $T$ in the ideal is the first component of the instance $T \oplus c$ of the product, with $c$ a fixed computable coloring, and a coloring $c'$ in the ideal is the second component of $T_0 \oplus c'$, with $T_0$ a fixed computable infinite tree. Its members are low₂.
+:::
+::::
+
+::::exercise{#ex-rt22-two-colorings difficulty=1 objective="Combine finitely many colorings into one with more colors, to find a common homogeneous set with a jump computed by a given PA set."}
+Let $f$ and $g$ be computable colorings of pairs with two colors, and $P$ a set PA relative to $\emptyset'$. Show that there is an infinite set $H$, homogeneous for both $f$ and $g$, with $H' \leq_T P$.
+
+:::solution
+Let $h(\{ x, y \}) = 2 f(\{ x, y \}) + g(\{ x, y \})$, a computable coloring of pairs with $4$ colors. By :ref{#ex-rt2k-weakly-low}, $h$ has an infinite homogeneous set $H$ with $H' \leq_T P$. The color $h(\{ x, y \})$ determines both $f(\{ x, y \})$ and $g(\{ x, y \})$, so $f$ and $g$ are constant on $[H]^2$. The same argument applies to finitely many colorings with finitely many colors.
+:::
+::::
+
+::::exercise{#ex-pa-over-jump-homogeneous difficulty=1 objective="Derive from the weakly low basis that sets PA relative to $\emptyset'$ compute solutions to all computable colorings of pairs, and that such sets may avoid a cone."}
+Show that every set $P$ PA relative to $\emptyset'$ computes an infinite homogeneous set for every computable coloring of pairs. Deduce that for every set $C \not\leq_T \emptyset'$, some set computes infinite homogeneous sets for all computable colorings of pairs and does not compute $C$.
+
+:::solution
+By :ref{#thm-rt22-weakly-low}, a computable coloring has an infinite homogeneous set $H$ with $H' \leq_T P$, and $H \leq_T H'$ by item 3 of :ref{#thm-jump}. For the second statement, the class of $\{0, 1\}$-valued functions DNC relative to $\emptyset'$ is a non-empty $\Pi^0_1(\emptyset')$ class; by the cone avoidance basis theorem relativized to $\emptyset'$ (:ref{#thm-cone-avoidance-basis}), it has a member $P$ with $C \not\leq_T P$. This $P$ is PA relative to $\emptyset'$. For instance, with $C = \emptyset''$, the set $P$ solves every computable instance of $\mathsf{RT}^2_2$ without computing $\emptyset''$.
+:::
+::::
+
+::::exercise{#ex-d22-no-low-basis-separation difficulty=1 objective="Use the Downey–Hirschfeldt–Lempp–Solomon set to separate the pigeonhole principle for $\Delta^0_2$ sets from every problem with a low basis." lessons="low-bases"}
+Let $\mathsf P$ be a problem that admits a low basis. Show that neither $\mathsf D^2_2$ nor $\mathsf{SRT}^2_2$ is ω-reducible to $\mathsf P$. In particular, $\mathsf{WKL}_0$ proves neither.
+
+:::solution
+By the proof of :ref{#thm-low-basis-model}, $\mathsf P$ preserves the class $\mathcal W$ of low sets. Let $A$ be as in :ref{#thm-dhls}. By the limit lemma, $A(x) = \lim_s a(x, s)$ for a computable function $a$, and $f(\{ x, s \}) = a(x, s)$ for $x < s$ defines a computable stable coloring with $A_f = A$. The solutions of $f$ as an instance of $\mathsf D^2_2$ are the infinite subsets of $A$ or of $\overline A$, and its infinite homogeneous sets are contained in $A$ or in $\overline A$ by :ref{#prop-srt-d22} (1). None of them is low. So the instance $f$, computable in $\emptyset \in \mathcal W$, has no solution $Y$ with $\emptyset \oplus Y \in \mathcal W$, and neither problem preserves $\mathcal W$. Apply :ref{#thm-preservation-separation}. For $\mathsf{WKL}$, which admits a low basis, the ω-model of low sets of :ref{#thm-low-basis-model} satisfies $\mathsf{WKL}_0$ and not $\mathsf{SRT}^2_2$.
+:::
+::::
+
+::::exercise{#ex-rt22-relativized-model difficulty=1 objective="Relativize the construction of ω-models from weakly low bases, to build ω-models of Ramsey's theorem for pairs above a given set." lessons="weakly-low-bases"}
+Let $Z$ be a set. Show that there is a Turing ideal containing $Z$ and satisfying $\mathsf{RT}^2_2$, all of whose members $Y$ satisfy $Y'' \leq_T Z''$.
+
+:::solution
+By the low basis theorem relativized to $Z'$, applied to the class of $\{0, 1\}$-valued functions DNC relative to $Z'$, there is $P$ PA relative to $Z'$ with $P' \leq_T Z''$. Let $\mathcal W$ be the class of sets $Y$ such that $P$ is PA relative to $Y'$. As in the proof of :ref{#thm-weakly-low-model}, it is closed downward, and it contains $Z$. By :ref{#thm-rt22-weakly-low} and item 1 of :ref{#prop-weakly-low-properties}, $\mathsf{RT}^2_2$ preserves $\mathcal W$: if $W \in \mathcal W$ and $f \leq_T W$ is a coloring, $P$ is PA relative to $W'$, and some solution $H$ makes $P$ PA relative to $(W \oplus H)'$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W$ containing $Z$ and satisfying $\mathsf{RT}^2_2$. A member $Y$ satisfies $Y' \leq_T P$, since a set PA relative to $Y'$ computes $Y'$, so $Y'' \leq_T P' \leq_T Z''$.
+:::
+::::
+:::::

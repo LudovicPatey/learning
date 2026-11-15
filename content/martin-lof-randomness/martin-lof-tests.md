@@ -107,15 +107,7 @@ The two random sequences of (3) are very different. A computably dominated seque
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Let $X$ be Martin-Löf random. Show that for every $k$, some block $X(ik) \cdots X(ik + k - 1)$ consists of zeros only. Deduce that $X$ contains arbitrarily long runs of zeros.
-
-:::solution
-Fix $k$, and let $\mathcal V_N$ be the clopen class of sequences none of whose first $N$ blocks of length $k$ is $0^k$. The blocks are independent: $\lambda(\mathcal V_N) = (1 - 2^{-k})^N$, which tends to $0$ and is a computable rational. The sequence $(\mathcal V_N)_N$ is uniformly $\Sigma^0_1$, so by :ref{#lem-test-bound} a random sequence is outside some $\mathcal V_N$: one of its first $N$ blocks is $0^k$.
-:::
-::::
-
-::::exercise{#ex-tails difficulty=1}
+::::exercise{#ex-tails difficulty=1 objective="Transform a Martin-Löf test by adding or removing a fixed prefix."}
 Let $X$ be Martin-Löf random. Show that $\sigma X$ is random for every string $\sigma$, and that the tail $Y = X(1) X(2) \cdots$ is random.
 
 :::solution
@@ -125,7 +117,7 @@ If $\sigma X$ is captured by $(\mathcal U_n)$, then $X$ belongs to every $(\math
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-mlr-not-ce difficulty=1 objective="Build a Martin-Löf test from an infinite computable subset of a c.e. set."}
 Show that no Martin-Löf random sequence, viewed as a set of numbers, is c.e. or co-c.e.
 
 :::solution
@@ -142,3 +134,53 @@ Martin-Löf (1966) introduced the tests and the universal test; the definition w
 - S. A. Kurtz, *Randomness and genericity in the degrees of unsolvability*, PhD thesis, University of Illinois at Urbana–Champaign, 1981.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 6.2 and 8.1.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 3.2.
+
+:::::exercises
+::::exercise{#ex-ml-block-zeros difficulty=1 objective="Apply the lemma on computable bounds to a sequence of clopen classes with independent blocks."}
+Let $X$ be Martin-Löf random. Show that for every $k$, some block $X(ik) \cdots X(ik + k - 1)$ consists of zeros only. Deduce that $X$ contains arbitrarily long runs of zeros.
+
+:::solution
+Fix $k$, and let $\mathcal V_N$ be the clopen class of sequences none of whose first $N$ blocks of length $k$ is $0^k$. The blocks are independent: $\lambda(\mathcal V_N) = (1 - 2^{-k})^N$, which tends to $0$ and is a computable rational. The sequence $(\mathcal V_N)_N$ is uniformly $\Sigma^0_1$, so by :ref{#lem-test-bound} a random sequence is outside some $\mathcal V_N$: one of its first $N$ blocks is $0^k$.
+:::
+::::
+
+::::exercise{#ex-mlr-finite-variants difficulty=1 objective="Combine the closure of randomness under prefixes and tails to show that randomness does not depend on finitely many bits."}
+Let $X$ be Martin-Löf random, and let $Y$ be a sequence that differs from $X$ at finitely many positions only. Show that $Y$ is random.
+
+:::solution
+Let $n$ be such that $Y(m) = X(m)$ for every $m \geq n$. Applying the second part of :ref{#ex-tails} $n$ times, the tail $X(n) X(n+1) \cdots$ is random. The sequence $Y$ is this tail preceded by the string $Y \uh n$, so it is random by the first part of :ref{#ex-tails}.
+:::
+::::
+
+::::exercise{#ex-complement-join difficulty=1 objective="Transport a Martin-Löf test along a measure-preserving map, and recognize joins that are captured by the tests of the lesson."}
+For a sequence $X$, let $\bar X$ be the sequence with $\bar X(n) = 1 - X(n)$, and for two sequences $X$ and $Y$, let $X \oplus Y$ be the sequence with $(X \oplus Y)(2n) = X(n)$ and $(X \oplus Y)(2n+1) = Y(n)$. Let $X$ be Martin-Löf random. Show that $\bar X$ is random, and that $X \oplus X$ and $X \oplus \bar X$ are not.
+
+:::solution
+For a string $\sigma$, let $\bar\sigma$ be the string of the same length with $\bar\sigma(i) = 1 - \sigma(i)$; the map $\sigma \mapsto \bar\sigma$ is a bijection that preserves lengths and the prefix relation. Suppose that $\bar X$ is captured by a test $(\mathcal U_n)$. By :ref{#lem-prefix-free-generator}, there are c.e. prefix-free sets $W_n$, uniformly in $n$, with $\mathcal U_n = [W_n]^{\prec}$. Let $\mathcal V_n = [\{ \bar\sigma : \sigma \in W_n \}]^{\prec}$. The generating sets are prefix-free and uniformly c.e., with the same lengths as $W_n$, so $\lambda(\mathcal V_n) = \lambda(\mathcal U_n) \leq 2^{-n}$. Since $\bar X$ has a prefix $\sigma \in W_n$, $X$ has the prefix $\bar\sigma$, so $X \in \mathcal V_n$ for every $n$, and $X$ is not random, a contradiction.
+
+The sequence $X \oplus X$ satisfies $(X \oplus X)(2i) = (X \oplus X)(2i+1)$ for every $i$; it belongs to the class $\mathcal N$ of :ref{#ex-null-classes} (1), which is captured by a Martin-Löf test (:ref{#ex-ml-tests} (2)). The sequence $X \oplus \bar X$ satisfies $(X \oplus \bar X)(2i) \neq (X \oplus \bar X)(2i+1)$ for every $i$. The set of strings of length $2n$ with $\sigma(2i) \neq \sigma(2i+1)$ for every $i < n$ has $2^n$ elements, so it generates a clopen class of measure $2^n \cdot 2^{-2n} = 2^{-n}$, computable from $n$; these classes form a Martin-Löf test capturing $X \oplus \bar X$.
+:::
+::::
+
+::::exercise{#ex-mlr-meager difficulty=2 objective="See that a conull class can be small in the sense of category, using the computable sequences captured by a universal test."}
+A class is **nowhere dense** if its closure contains no cylinder, and **meager** if it is contained in a countable union of nowhere dense classes. Let $(\mathcal U_n)$ be a universal Martin-Löf test. Show that each $\mathcal U_n$ meets every cylinder, and that the closed class $\mathcal P_n = \cs \setminus \mathcal U_n$ contains no cylinder. Deduce that the class MLR is meager, although it is conull.
+
+:::solution
+Let $\sigma$ be a string. The sequence $\sigma 0^\omega = \sigma 000 \cdots$ is computable, hence not random (:ref{#ex-ml-tests} (1)), so it belongs to $\bigcap_m \mathcal U_m \subseteq \mathcal U_n$. So $\mathcal U_n \cap [\sigma] \neq \emptyset$, and $[\sigma] \not\subseteq \mathcal P_n$.
+
+The class $\mathcal P_n$ is closed, as the complement of an open class, so it is its own closure, and it is nowhere dense. By :ref{#cor-mlr-structure} (2), MLR $= \bigcup_n \mathcal P_n$, a countable union of nowhere dense classes, so MLR is meager; by :ref{#cor-mlr-structure} (1), it is conull. Measure and category are compared in the course on Cohen genericity.
+:::
+::::
+
+::::exercise{#ex-delta2-captured difficulty=2 objective="Check the counterexample showing that a Martin-Löf test needs a computable bound on the measures of its components."}
+Let $X$ be a $\Delta^0_2$ sequence, with a computable approximation $(X_s)$: $X(n) = \lim_s X_s(n)$ for every $n$. For each $n$, let $\mathcal U_n = [\{ X_s \uh n : s \geq n \}]^{\prec}$. Show that $(\mathcal U_n)$ is a decreasing uniformly $\Sigma^0_1$ sequence with $\bigcap_n \mathcal U_n = \{ X \}$, and that $\lambda(\mathcal U_n)$ tends to $0$. Show that if $X$ is moreover Martin-Löf random, there is no computable sequence of rationals $(q_n)$ with limit $0$ such that $\lambda(\mathcal U_n) \leq q_n$ for every $n$.
+
+:::solution
+The set of pairs $(n, X_s \uh n)$ with $s \geq n$ is c.e., so the sequence is uniformly $\Sigma^0_1$. If $Y \in \mathcal U_{n+1}$, then $Y \uh (n+1) = X_s \uh (n+1)$ for some $s \geq n + 1$, so $Y \uh n = X_s \uh n$ with $s \geq n$, and $Y \in \mathcal U_n$: the sequence decreases.
+
+Since $X \uh n$ consists of finitely many bits, each of which is eventually stable, there is $s \geq n$ with $X_s \uh n = X \uh n$, so $X \in \mathcal U_n$. Conversely, let $Y \in \bigcap_n \mathcal U_n$, and fix $m$. Let $s_0$ be such that $X_s \uh m = X \uh m$ for every $s \geq s_0$. For $n \geq \max(m, s_0)$, $Y \uh n = X_s \uh n$ for some $s \geq n \geq s_0$, so $Y \uh m = X_s \uh m = X \uh m$. As $m$ is arbitrary, $Y = X$.
+
+By continuity of the measure, $\lambda(\mathcal U_n)$ tends to $\lambda(\{ X \}) = 0$. If $X$ is random and $(q_n)$ is as in the statement, :ref{#lem-test-bound} shows that $X \notin \bigcap_n \mathcal U_n$, a contradiction. This applies to Chaitin's $\Omega$, which is $\Delta^0_2$ and is shown to be random in the lesson on the Levin–Schnorr theorem.
+:::
+::::
+:::::

@@ -108,15 +108,7 @@ The proof of $0 = 1$ that $K$ contains lies above $M$: no element of $M$ is a pr
 
 ## Exercises
 
-::::exercise{#ex-ee-sigma1-up difficulty=1}
-Let $M \subseteq_e K$ with $K$ given by :ref{#thm-ee-not-elementary}. Show that every $\Sigma_1$ formula with parameters in $M$ that holds in $M$ holds in $K$, and give a $\Pi_1$ sentence true in $M$ and false in $K$.
-
-:::solution
-The first statement is :ref{#cor-sigma1-upward}, since $M \subseteq_e K$. The sentence $\mathrm{Con}(\mathrm{PA})$ is $\Pi_1$, true in $M$ and false in $K$.
-:::
-::::
-
-::::exercise{#ex-ee-con-sigma1 difficulty=1}
+::::exercise{#ex-ee-con-sigma1 difficulty=1 objective="Use $\Sigma_1$-elementarity to see why the two applications of the arithmetized completeness theorem give different extensions."}
 Let $M \models \mathrm{PA} + \mathrm{Con}(\mathrm{PA})$ and let $K \models \mathrm{PA}$ be an end extension of $M$ with $M \preccurlyeq_1 K$. Show that $K \models \mathrm{Con}(\mathrm{PA})$, and deduce that the extension of :ref{#thm-ee-not-elementary} cannot be obtained from :ref{#thm-ee-sigma-n-end}.
 
 :::solution
@@ -124,7 +116,7 @@ $\mathrm{Con}(\mathrm{PA})$ is a $\Pi_1$ sentence true in $M$; its negation is $
 :::
 ::::
 
-::::exercise{#ex-ee-cod-delta2 difficulty=2}
+::::exercise{#ex-ee-cod-delta2 difficulty=2 objective="Bound the complexity of the sets coded in the model of the arithmetized completeness theorem."}
 In the situation of :ref{#thm-ee-act}, show that every set $\mathrm{Ack}(d) \cap M$, for $d \in K$, is $\Delta_2$-definable in $M$.
 
 :::solution
@@ -142,3 +134,47 @@ Let $d = [c]$ for a constant $c$. For $x \in M$, $x = [c_x]$, where $x \mapsto c
 - C. Smoryński, *Lectures on nonstandard models of arithmetic*, in Logic Colloquium '82, North-Holland, 1984, 1–70.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 4(c), and Chapter III, Section 2.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lectures 4 and 9.
+
+:::::exercises
+::::exercise{#ex-ee-sigma1-up difficulty=1 objective="Recall which formulas an end extension preserves, on the extension to $\mathrm{PA} + \neg\mathrm{Con}(\mathrm{PA})$."}
+Let $M \subseteq_e K$ with $K$ given by :ref{#thm-ee-not-elementary}. Show that every $\Sigma_1$ formula with parameters in $M$ that holds in $M$ holds in $K$, and give a $\Pi_1$ sentence true in $M$ and false in $K$.
+
+:::solution
+The first statement is :ref{#cor-sigma1-upward}, since $M \subseteq_e K$. The sentence $\mathrm{Con}(\mathrm{PA})$ is $\Pi_1$, true in $M$ and false in $K$.
+:::
+::::
+
+::::exercise{#ex-ee-con-dichotomy difficulty=1 objective="Combine the two constructions of the lesson to decide which models of PA have end extensions satisfying $\mathrm{Con}(\mathrm{PA})$ or its negation."}
+Let $M \models \mathrm{PA}$. Show that $M$ has a proper end extension satisfying $\mathrm{PA} + \neg\mathrm{Con}(\mathrm{PA})$, and that $M$ has a proper end extension satisfying $\mathrm{PA} + \mathrm{Con}(\mathrm{PA})$ if and only if $M \models \mathrm{Con}(\mathrm{PA})$.
+
+:::solution
+If $M \models \mathrm{Con}(\mathrm{PA})$, :ref{#thm-ee-not-elementary} gives a proper end extension satisfying $\mathrm{PA} + \neg\mathrm{Con}(\mathrm{PA})$, and :ref{#thm-ee-sigma-n-end} with $n = 1$ gives one, $K$, satisfying $\mathrm{PA}$ with $M \preccurlyeq_1 K$, so $K \models \mathrm{Con}(\mathrm{PA})$ by :ref{#ex-ee-con-sigma1}. If $M \models \neg\mathrm{Con}(\mathrm{PA})$, :ref{#thm-ee-sigma-n-end} gives a proper end extension $K \models \mathrm{PA}$; the $\Sigma_1$ sentence $\neg\mathrm{Con}(\mathrm{PA})$ holds in $K$ by :ref{#cor-sigma1-upward}. For the same reason, no end extension of $M$ satisfies $\mathrm{Con}(\mathrm{PA})$.
+:::
+::::
+
+::::exercise{#ex-ee-cod-sigma-n difficulty=2 objective="Bound the sets coded in a $\Sigma_n$-elementary end extension from below by elementarity and from above by the relativized arithmetized completeness theorem."}
+Let $M \models \mathrm{PA}$ be non-standard, $n \geq 1$, and $K$ the extension built in the proof of :ref{#thm-ee-sigma-n-end}. Show that every subset of $M$ that is $\Sigma_n$-definable in $M$ with parameters belongs to $\mathrm{Cod}(K/M)$, and that every set in $\mathrm{Cod}(K/M)$ is $\Delta_{n+3}$-definable in $M$.
+
+:::solution
+Let $S$ be defined in $M$ by a $\Sigma_n$ formula $\theta(x, \bar m)$, and let $b \in K \setminus M$. Since $K \models \mathrm{PA}$, :ref{#thm-friedman-coded} gives $c \in K$ coding $\{ x < b : \theta(x, \bar m) \}$ in $K$. For $x \in M$, $x < b$, and $K \models \theta(x, \bar m)$ if and only if $M \models \theta(x, \bar m)$, since $M \preccurlyeq_n K$. So $\mathrm{Ack}(c) \cap M = S$.
+
+The proof applies :ref{#thm-ee-act} in the form of :ref{#rem-ee-act-relativized} with $m = n + 1$, so the set $H$ describing $K$ is $\Delta_{n+3}$-definable in $M$. Let $d = [c]$ with $c$ a constant. As in :ref{#ex-ee-cod-delta2}, $x \in \mathrm{Ack}(d)$ if and only if the sentence $c_x \in c$ belongs to $H$, where $x \mapsto (c_x \in c)$ is a $\Delta_1$ function $f$. Then $x \in \mathrm{Ack}(d) \cap M$ if and only if $\exists s\ (s = f(x) \wedge s \in H)$, a $\Sigma_{n+3}$ formula, if and only if $\forall s\ (s = f(x) \rightarrow s \in H)$, a $\Pi_{n+3}$ formula.
+:::
+::::
+
+::::exercise{#ex-ee-isigma1-no-sigma1-end difficulty=2 objective="Use the theorem of Paris and Kirby to show that the exponential end extensions of models of $\mathrm I\Sigma_1$ cannot in general be $\Sigma_1$-elementary models of $\mathrm I\Sigma_1$."}
+Show that there is a countable model $M$ of $\mathrm I\Sigma_1$ with no proper end extension $K \models \mathrm I\Sigma_1$ such that $M \preccurlyeq_1 K$. What does this say about the extensions given by :ref{#thm-ee-exp-cut}?
+
+:::solution
+By :ref{#thm-isigma-not-bsigma} with $n = 1$, there is a countable model $M$ of $\mathrm I\Sigma_1$ in which $\mathrm B\Sigma_2$ fails. If $K \models \mathrm I\Sigma_1$ were a proper end extension with $M \preccurlyeq_1 K$, :ref{#thm-end-ext-collection} with $n = 1$ would give $M \models \mathrm B\Sigma_2$. So for this $M$, every proper end extension $K \models \mathrm I\Delta_0 + \mathrm{exp}$ given by :ref{#thm-ee-exp-cut} fails $\mathrm I\Sigma_1$ or is not $\Sigma_1$-elementary. For models of $\mathrm{PA}$, :ref{#thm-ee-sigma-n-end} has no such limitation, because they satisfy $\mathrm B\Sigma_{n+1}$ for every $n$.
+:::
+::::
+
+::::exercise{#ex-ee-low-model-pa difficulty=2 lessons="arithmetized-completeness" objective="Combine the low completeness theorem with Tennenbaum's theorem to obtain a non-standard model of PA whose diagram is low but not computable."}
+Apply :ref{#cor-ee-low-completeness} to $T = \mathrm{PA} + \neg\mathrm{Con}(\mathrm{PA})$, consistent by Gödel's second incompleteness theorem. Show that the model $K$ obtained is a non-standard model of $\mathrm{PA}$, and that its diagram $H$ is low but not computable.
+
+:::solution
+$K \models \mathrm{PA} + \neg\mathrm{Con}(\mathrm{PA})$, while $\nat \models \mathrm{Con}(\mathrm{PA})$; so $K \not\cong \nat$ and $K$ is non-standard. $H$ is low by the corollary. Suppose that $H$ is computable. The relation $c \sim d$, that is $(c = d) \in H$, is computable on the constants of $\mathcal L^H$, which form a computable set; let $D$ be the set of constants that are the least of their class, which is computable and infinite, as $K$ is infinite. Listing $D$ in increasing order gives a bijection $g : \nat \to K$. The addition of $K$ transported to $\nat$ is computable: for $c, d \in D$, search for a constant $e$ with $(c + d = e) \in H$, which exists (proof of :ref{#thm-ee-act}), and return the least element of $D$ equivalent to $e$. This contradicts :ref{#thm-tennenbaum}. So $H$ is low and not computable.
+:::
+::::
+:::::

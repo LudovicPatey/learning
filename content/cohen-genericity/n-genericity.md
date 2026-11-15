@@ -75,6 +75,30 @@ In the proof of :ref{#lem-relative-generic-low}, why does the search need the or
   It is a $\Pi^0_1(A)$ question, decided by $A'$.
 :::
 
+::::exercise{#ex-2-generic-not-high difficulty=2 objective="Use a $\Sigma^0_2$ set of strings to show that a 2-generic set is not high, and that a 1-generic set computes no non-computable c.e. set."}
+Let $G$ be 2-generic. Show that $G$ is not computable in $\emptyset'$, and that $G$ is not high, that is, $\emptyset'' \not\leq_T G'$.
+
+:::hint
+For a Turing functional $\Phi_e$, consider the set of strings $\tau$ such that $\Phi^{\tau \oplus \emptyset'}_e(x)\converge = 0$ for some $x \in \emptyset''$.
+:::
+
+:::solution
+By :ref{#prop-generic-hierarchy}, a 2-generic set is weakly 2-generic, so it is not computable in $\emptyset'$ by :ref{#cor-delta2-weak-generic}.
+
+By :ref{#thm-generic-jumps}, $G' \equiv_T G \oplus \emptyset'$, so it suffices to show $\Phi^{G \oplus \emptyset'}_e \neq \emptyset''$ for every $e$. Let
+$$
+U_e = \{ \tau : \exists x\ (\Phi^{\tau \oplus \emptyset'}_e(x)\converge = 0 \text{ and } x \in \emptyset'') \}.
+$$
+The first condition is $\Sigma^0_1(\emptyset')$, hence $\Sigma^0_2$, and $\emptyset''$ is $\Sigma^0_2$, so $U_e$ is $\Sigma^0_2$. If $G$ meets $U_e$, then $\Phi^{G \oplus \emptyset'}_e(x) = 0$ for some $x \in \emptyset''$, so $\Phi^{G \oplus \emptyset'}_e \neq \emptyset''$. Otherwise some prefix $\sigma$ of $G$ avoids $U_e$. Suppose, for a contradiction, that $\Phi^{G \oplus \emptyset'}_e = \emptyset''$. Then
+$$
+x \notin \emptyset'' \iff \exists \tau \succeq \sigma\ \Phi^{\tau \oplus \emptyset'}_e(x)\converge = 0.
+$$
+Indeed, if $x \notin \emptyset''$, a long enough prefix of $G$ gives the value $0$; if $x \in \emptyset''$, no extension of $\sigma$ gives $0$, since $\sigma$ avoids $U_e$. The right-hand side is $\Sigma^0_1(\emptyset')$, so the complement of $\emptyset''$ is $\Sigma^0_2$, and $\emptyset''$ is $\Delta^0_2$, that is, computable in $\emptyset'$. This contradicts the hierarchy theorem.
+
+The argument shows more generally: if $G$ is 1-generic relative to $Z$ and $C$ is c.e. in $Z$ but not computable in $Z$, then $C \not\leq_T G \oplus Z$. Unlike :ref{#thm-generic-cone}, this only requires genericity relative to $Z$, not relative to $C \oplus Z$. For $Z = \emptyset$, it says that a 1-generic set computes no non-computable c.e. set, a result of Jockusch and Posner (Soare 2016, Exercise 6.3.5); in particular no 1-generic set has c.e. degree.
+:::
+::::
+
 ## Deciding Σ⁰ₙ properties
 
 A **$\Sigma^0_n$ property** of sets is a property $P(X)$ defined by a $\Sigma^0_n$ formula of arithmetic with a set parameter $X$. By the relativized form of Post's theorem, there is an index $e$ such that $P(X)$ holds if and only if $\Phi^{X^{(n-1)}}_e(0)\converge$, for every set $X$. For $(n-1)$-generic sets, the oracle $X^{(n-1)}$ can be replaced by $X \oplus \emptyset^{(n-1)}$, and 1-genericity relative to $\emptyset^{(n-1)}$ decides the resulting $\Sigma^0_1(\emptyset^{(n-1)})$ property.
@@ -117,40 +141,6 @@ For $n = 1$, this is the existence of low 1-generic sets, already seen in the co
 
 *$n$-genericity is stronger than weak $n$-genericity.* We use a theorem of Kurtz, admitted here: for every $n \geq 0$, there is a weakly $(n+1)$-generic set $A$ with $A^{(n)} \equiv_T \emptyset^{(n+1)}$ (Downey and Hirschfeldt 2010, Theorem 2.24.14; for $n = 0$ it says that some weakly 1-generic set has the degree of $\emptyset'$). Such a set is not $(n+1)$-generic. Indeed $A \leq_T A^{(n)} \equiv_T \emptyset^{(n+1)}$, so $A \oplus \emptyset^{(n+1)} \equiv_T \emptyset^{(n+1)}$, while $A^{(n+1)} \equiv_T \emptyset^{(n+2)}$; if $A$ were $(n+1)$-generic, :ref{#thm-generic-jumps} would give $A^{(n+1)} \equiv_T A \oplus \emptyset^{(n+1)}$, that is, $\emptyset^{(n+2)} \leq_T \emptyset^{(n+1)}$, which is false. For $n = 0$, the exercise on left-c.e. sets of the previous lesson gives another route, through the existence of a weakly 1-generic left-c.e. set, also admitted, and :ref{#thm-generic-not-dnc} a third one, since a set of the degree of $\emptyset'$ computes a DNC function.
 
-## Exercises
-
-::::exercise{difficulty=1}
-A set $G$ is **$\mathrm{GL}_n$** if $G^{(n)} \equiv_T (G \oplus \emptyset')^{(n-1)}$. Show that every $n$-generic set is $\mathrm{GL}_n$.
-
-:::solution
-Since $G \oplus \emptyset' \leq_T G'$, we have $(G \oplus \emptyset')^{(n-1)} \leq_T G^{(n)}$ for every set. Conversely, $G \leq_T (G \oplus \emptyset')^{(n-1)}$ and $\emptyset^{(n)} = (\emptyset')^{(n-1)} \leq_T (G \oplus \emptyset')^{(n-1)}$, so by :ref{#thm-generic-jumps}, $G^{(n)} \equiv_T G \oplus \emptyset^{(n)} \leq_T (G \oplus \emptyset')^{(n-1)}$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $G$ be 2-generic. Show that $G$ is not computable in $\emptyset'$, and that $G$ is not high, that is, $\emptyset'' \not\leq_T G'$.
-
-:::hint
-For a Turing functional $\Phi_e$, consider the set of strings $\tau$ such that $\Phi^{\tau \oplus \emptyset'}_e(x)\converge = 0$ for some $x \in \emptyset''$.
-:::
-
-:::solution
-By :ref{#prop-generic-hierarchy}, a 2-generic set is weakly 2-generic, so it is not computable in $\emptyset'$ by :ref{#cor-delta2-weak-generic}.
-
-By :ref{#thm-generic-jumps}, $G' \equiv_T G \oplus \emptyset'$, so it suffices to show $\Phi^{G \oplus \emptyset'}_e \neq \emptyset''$ for every $e$. Let
-$$
-U_e = \{ \tau : \exists x\ (\Phi^{\tau \oplus \emptyset'}_e(x)\converge = 0 \text{ and } x \in \emptyset'') \}.
-$$
-The first condition is $\Sigma^0_1(\emptyset')$, hence $\Sigma^0_2$, and $\emptyset''$ is $\Sigma^0_2$, so $U_e$ is $\Sigma^0_2$. If $G$ meets $U_e$, then $\Phi^{G \oplus \emptyset'}_e(x) = 0$ for some $x \in \emptyset''$, so $\Phi^{G \oplus \emptyset'}_e \neq \emptyset''$. Otherwise some prefix $\sigma$ of $G$ avoids $U_e$. Suppose, for a contradiction, that $\Phi^{G \oplus \emptyset'}_e = \emptyset''$. Then
-$$
-x \notin \emptyset'' \iff \exists \tau \succeq \sigma\ \Phi^{\tau \oplus \emptyset'}_e(x)\converge = 0.
-$$
-Indeed, if $x \notin \emptyset''$, a long enough prefix of $G$ gives the value $0$; if $x \in \emptyset''$, no extension of $\sigma$ gives $0$, since $\sigma$ avoids $U_e$. The right-hand side is $\Sigma^0_1(\emptyset')$, so the complement of $\emptyset''$ is $\Sigma^0_2$, and $\emptyset''$ is $\Delta^0_2$, that is, computable in $\emptyset'$. This contradicts the hierarchy theorem.
-
-The argument shows more generally: if $G$ is 1-generic relative to $Z$ and $C$ is c.e. in $Z$ but not computable in $Z$, then $C \not\leq_T G \oplus Z$. Unlike :ref{#thm-generic-cone}, this only requires genericity relative to $Z$, not relative to $C \oplus Z$. For $Z = \emptyset$, it says that a 1-generic set computes no non-computable c.e. set, a result of Jockusch and Posner (Soare 2016, Exercise 6.3.5); in particular no 1-generic set has c.e. degree.
-:::
-::::
-
 ## Notes and references
 
 The forcing relation for arithmetic sentences, its definability for Cohen forcing (:ref{#thm-cohen-forcing-definable}) and the equivalence with the definition of n-genericity by dense sets (:ref{#thm-cohen-n-generic}) are treated in the course on effective forcing.
@@ -164,3 +154,57 @@ The arithmetic forcing relation was defined by Feferman (1965), and $n$-generic 
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.24.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §6.3.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cohen forcing*, sections on $\Sigma^0_n$ forcing and on arbitrarily generic sets.
+
+:::::exercises
+::::exercise{#ex-generic-gln difficulty=1 objective="Derive generalized lowness at level $n$ from the computation of the jumps of $n$-generic sets."}
+A set $G$ is **$\mathrm{GL}_n$** if $G^{(n)} \equiv_T (G \oplus \emptyset')^{(n-1)}$. Show that every $n$-generic set is $\mathrm{GL}_n$.
+
+:::solution
+Since $G \oplus \emptyset' \leq_T G'$, we have $(G \oplus \emptyset')^{(n-1)} \leq_T G^{(n)}$ for every set. Conversely, $G \leq_T (G \oplus \emptyset')^{(n-1)}$ and $\emptyset^{(n)} = (\emptyset')^{(n-1)} \leq_T (G \oplus \emptyset')^{(n-1)}$, so by :ref{#thm-generic-jumps}, $G^{(n)} \equiv_T G \oplus \emptyset^{(n)} \leq_T (G \oplus \emptyset')^{(n-1)}$.
+:::
+::::
+
+::::exercise{#ex-n-generic-not-sigma-n difficulty=1 objective="Show with a $\Sigma^0_n$ set of strings that an $n$-generic set is neither $\Sigma^0_n$ nor $\Pi^0_n$, and that arithmetically generic sets are not arithmetical."}
+Let $n \geq 1$ and let $G$ be $n$-generic. Show that $G$ is neither $\Sigma^0_n$ nor $\Pi^0_n$. Deduce that an arithmetically generic set is not arithmetical.
+
+:::solution
+$G$ is weakly 1-generic, so it is infinite and coinfinite (:ref{#ex-weakly-generic}). Suppose that $G$ is $\Sigma^0_n$, and let
+$$
+U = \{ \sigma : \exists x < |\sigma|\ (x \in G \text{ and } \sigma(x) = 0) \},
+$$
+a $\Sigma^0_n$ set of strings. No prefix of $G$ is in $U$. No prefix $\sigma$ of $G$ avoids $U$: take $x \in G$ with $x \geq |\sigma|$; then $\sigma\, 0^{x - |\sigma| + 1}$ extends $\sigma$ and is in $U$. So $G$ does not meet $U \cup U^\perp$, a contradiction. If $G$ is $\Pi^0_n$, the same argument applies to $\{ \sigma : \exists x < |\sigma|\ (x \notin G \text{ and } \sigma(x) = 1) \}$, which is $\Sigma^0_n$, using that $G$ is coinfinite.
+
+An arithmetical set is $\Sigma^0_n$ for some $n \geq 1$, and an arithmetically generic set is $n$-generic for every $n$. By :ref{#thm-low-generic-exists}, the first statement is optimal: some $n$-generic set is $\Delta^0_{n+1}$.
+:::
+::::
+
+::::exercise{#ex-generic-closed-classes difficulty=1 objective="Show that an $n$-generic set lies in no class with empty interior defined by avoiding a $\Sigma^0_n$ set of strings, for instance in no $\Pi^0_1$ class with empty interior."}
+Let $n \geq 1$, let $W$ be a $\Sigma^0_n$ set of strings, and $\mathcal P = \{ X : \text{no prefix of } X \text{ is in } W \}$. Show that if an $n$-generic set $G$ belongs to $\mathcal P$, then $\mathcal P$ contains a cylinder $[\sigma]$ with $\sigma \prec G$. Deduce that no 1-generic set belongs to the class of $\{0, 1\}$-valued DNC functions.
+
+:::solution
+$G$ does not meet $W$, so some prefix $\sigma$ of $G$ avoids $W$. Let $X \succ \sigma$. A prefix of $X$ of length less than $|\sigma|$ is a prefix of $G$, hence not in $W$; a prefix of length at least $|\sigma|$ extends $\sigma$, hence is not in $W$. So $[\sigma] \subseteq \mathcal P$.
+
+The class of $\{0, 1\}$-valued DNC functions is $\mathcal P$ for the c.e. set $W = \{ \sigma : \exists e < |\sigma|\ \Phi_e(e)\converge = \sigma(e) \}$. It contains no cylinder: given $\sigma$, there is an index $e \geq |\sigma|$ of the constant function $0$, since every partial computable function has infinitely many indices, and every $X \succ \sigma\, 0^{e - |\sigma| + 1}$ has $X(e) = 0 = \Phi_e(e)$. So no 1-generic set belongs to it. This is weaker than :ref{#thm-generic-not-dnc}, which excludes the DNC functions computed by $G$, and not only $G$ itself.
+:::
+::::
+
+::::exercise{#ex-2-generic-minimal-pair difficulty=1 objective="Apply relativized cone avoidance to show that a 2-generic set and $\emptyset'$ form a minimal pair." lessons="one-genericity"}
+Let $G$ be 2-generic. Show that every set computable both in $G$ and in $\emptyset'$ is computable. Show that this fails for some 1-generic set.
+
+:::solution
+Let $C \leq_T \emptyset'$ be non-computable. $G$ is 1-generic relative to $\emptyset'$, hence relative to $C$, since $C \leq_T \emptyset'$ (:ref{#ex-relative-genericity}). By :ref{#thm-generic-cone} with $Z = \emptyset$, $C \not\leq_T G$. So every set computable in $G$ and in $\emptyset'$ is computable.
+
+For 1-genericity, :ref{#thm-low-generic-exists} with $n = 1$ gives a 1-generic set $G \leq_T \emptyset'$; then $G$ itself is computable in $G$ and in $\emptyset'$, and it is not computable.
+:::
+::::
+
+::::exercise{#ex-generic-jumps-sharp difficulty=2 objective="Show with the relativized jump inversion theorem that $n$-genericity does not control the $(n+1)$-th jump." lessons="posner-robinson"}
+Admit the relativization to an oracle $X$ of Friedberg's jump inversion theorem in the form of the lesson on the Posner–Robinson theorem, obtained by relativizing its proof: for every set $X$ and every $Z \geq_T X'$, there is a set $G$, 1-generic relative to $X$, with $G \oplus X' \equiv_T Z$. Let $n \geq 1$. Show that there is an $n$-generic set $G$ with $G^{(n+1)} \not\equiv_T G \oplus \emptyset^{(n+1)}$, so that :ref{#thm-generic-jumps} cannot be extended to $k = n + 1$. Show that such a set is not $(n+1)$-generic.
+
+:::solution
+Apply the admitted theorem with $X = \emptyset^{(n-1)}$ and $Z = \emptyset^{(n+1)} \geq_T X'$. The set $G$ is 1-generic relative to $\emptyset^{(n-1)}$, that is, $n$-generic, and $G \oplus \emptyset^{(n)} \equiv_T \emptyset^{(n+1)}$. By :ref{#thm-generic-jumps}, $G^{(n)} \equiv_T G \oplus \emptyset^{(n)} \equiv_T \emptyset^{(n+1)}$, so $G^{(n+1)} \equiv_T \emptyset^{(n+2)}$, since the jump is invariant under Turing equivalence. On the other hand $G \leq_T \emptyset^{(n+1)}$, so $G \oplus \emptyset^{(n+1)} \equiv_T \emptyset^{(n+1)}$, which is strictly below $\emptyset^{(n+2)}$. Hence $G^{(n+1)} \not\equiv_T G \oplus \emptyset^{(n+1)}$.
+
+If $G$ were $(n+1)$-generic, :ref{#thm-generic-jumps} with $k = n + 1$ would give the equivalence. So $G$ is $n$-generic and not $(n+1)$-generic. The remark after :ref{#thm-generic-jumps} obtains the same conclusion from the degree form of Kurtz's theorem, which is admitted; this argument uses the jump inversion theorem instead.
+:::
+::::
+:::::

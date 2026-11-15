@@ -1,7 +1,7 @@
 ---
 title: Preservation of hyperimmunity by compact questions
 summary: Compact forcing questions, simple and disjunctive, preserve hyperimmunity; WKL, COH and Ramsey's theorem for pairs admit preservation of hyperimmunity; the relations between the avoidance properties of the course.
-duration: 30
+duration: 25
 prerequisites: [moduli]
 ---
 
@@ -71,19 +71,11 @@ The relations between the avoidance properties of this course are summarized in 
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that $\mathsf{WKL}$ preserves countably many hyperimmune functions at once, and that $\mathsf{RT}^3_2$ does not admit preservation of hyperimmunity.
-
-:::solution
-In the proof of :ref{#thm-local-hyperimmunity}, the dense sets for a function $f_j$ and an index $e$ form a countable family, indexed by $(j, e)$; a sufficiently generic set for Jockusch–Soare forcing inside the paths of the instance meets all of them. For $\mathsf{RT}^3_2$, if it admitted preservation of hyperimmunity, it would admit cone avoidance by :ref{#thm-hyperimmunity-cone}, contradicting :ref{#prop-rt32-jump}. Directly: the modulus $m$ of $\emptyset'$ is hyperimmune, and every infinite homogeneous set of the coloring of :ref{#prop-rt32-jump} computes $\emptyset'$, hence $m$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-rt12-strong-hyperimmunity difficulty=2 objective="Adapt the disjunctive argument to show that the pigeonhole principle preserves hyperimmunity on arbitrary instances." lessons="disjunctive-question"}
 Show that $\mathsf{RT}^1_2$ admits strong preservation of hyperimmunity.
 
 :::solution
-Fix $Z$ and a $Z$-hyperimmune $f$, and let $\mathcal M$ be a Scott ideal of sets $X$ such that $f$ is $X$-hyperimmune, containing $Z$ (:ref{#lem-scott-preservation} and item 1 of :ref{#thm-hyperimmunity-examples}). Use the Dzhafarov–Jockusch forcing for the set $A$, with reservoirs in $\mathcal M$ and the question of the first exercise of :ref{to="avoidance/disjunctive-question"}. It is compact, by the proof of :ref{#lem-seetapun-compact} without the homogeneity clauses. If an infinite subset of $A$ or $\overline A$ belongs to $\mathcal M$, it is a solution. Otherwise both sides can be extended, and the argument of item 2 of :ref{#thm-hyperimmunity-examples} gives, for each pair $(e_0, e_1)$, an extension forcing on some side that $\Phi_{e_i}$ is partial or below $f$ at some point; Lachlan's disjunction gives one side preserving the hyperimmunity of $f$.
+Fix $Z$ and a $Z$-hyperimmune $f$, and let $\mathcal M$ be a Scott ideal of sets $X$ such that $f$ is $X$-hyperimmune, containing $Z$ (:ref{#lem-scott-preservation} and item 1 of :ref{#thm-hyperimmunity-examples}). Use the Dzhafarov–Jockusch forcing for the set $A$, with reservoirs in $\mathcal M$ and the question of :ref{#ex-dj-disjunctive}. It is compact, by the proof of :ref{#lem-seetapun-compact} without the homogeneity clauses. If an infinite subset of $A$ or $\overline A$ belongs to $\mathcal M$, it is a solution. Otherwise both sides can be extended, and the argument of item 2 of :ref{#thm-hyperimmunity-examples} gives, for each pair $(e_0, e_1)$, an extension forcing on some side that $\Phi_{e_i}$ is partial or below $f$ at some point; Lachlan's disjunction gives one side preserving the hyperimmunity of $f$.
 :::
 ::::
 
@@ -96,3 +88,55 @@ The abstract theorem with a compact question follows the section *Preserving hyp
 - L. Patey, *Iterative forcing and hyperimmunity in reverse mathematics*, Computability 6 (2017), 209–221; arXiv:1501.07709.
 - C. G. Jockusch, Jr. and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, section *Preserving hyperimmunities*.
+
+:::::exercises
+::::exercise{#ex-wkl-countable-hyperimmune difficulty=1 objective="Preserve countably many hyperimmune functions with Jockusch–Soare forcing, and see why Ramsey's theorem for triples preserves none."}
+Show that $\mathsf{WKL}$ preserves countably many hyperimmune functions at once, and that $\mathsf{RT}^3_2$ does not admit preservation of hyperimmunity.
+
+:::solution
+In the proof of :ref{#thm-local-hyperimmunity}, the dense sets for a function $f_j$ and an index $e$ form a countable family, indexed by $(j, e)$; a sufficiently generic set for Jockusch–Soare forcing inside the paths of the instance meets all of them. For $\mathsf{RT}^3_2$, if it admitted preservation of hyperimmunity, it would admit cone avoidance by :ref{#thm-hyperimmunity-cone}, contradicting :ref{#prop-rt32-jump}. Directly: the modulus $m$ of $\emptyset'$ is hyperimmune, and every infinite homogeneous set of the coloring of :ref{#prop-rt32-jump} computes $\emptyset'$, hence $m$.
+:::
+::::
+
+::::exercise[A sparse reservoir]{#ex-hyperimmunity-sparse-reservoir difficulty=1 objective="See with a sparse reservoir why the hyperimmune function must remain hyperimmune relative to every member of the class ℳ."}
+Consider Mathias forcing with arbitrary infinite reservoirs, and the question of :ref{#prop-mathias-question}, which is a compact forcing question whose answers at $(\sigma, X)$ are $\Sigma^0_1(X)$. Let $f$ be a hyperimmune function. Find a condition all of whose infinite members $G$ compute a function dominating $f$. Which hypothesis of :ref{#thm-local-hyperimmunity} fails?
+
+:::solution
+Let $F(n) = n + \max_{i \leq n} f(i)$. It is strictly increasing, so it is the principal function of its range $X$, an infinite set. Consider the condition $(\varepsilon, X)$. Its infinite members are the infinite subsets $G$ of $X$, and the $n$-th element of such a $G$ is at least the $n$-th element of $X$: $p_G(n) \geq F(n) \geq f(n)$ for every $n$. Since $p_G \leq_T G$, $f$ is not $G$-hyperimmune.
+
+The question is compact and $\Sigma^0_1(\mathcal M)$-preserving for the class $\mathcal M$ of all sets, but $f$ is not $X$-hyperimmune: $X$ computes $F$, which dominates $f$. This is the hypothesis that fails. The example plays for hyperimmunity the role of :ref{#ex-coding-reservoir} for cones: a reservoir can transmit its growth to all the members of a condition.
+:::
+::::
+
+::::exercise[Strong preservation for cohesiveness]{#ex-coh-strong-hyperimmunity difficulty=2 objective="Combine the strong preservation of hyperimmunity for the pigeonhole principle with Mathias forcing to obtain it for cohesiveness." lessons="strong-cone-avoidance"}
+Show that $\mathsf{COH}$ admits strong preservation of hyperimmunity.
+
+:::solution
+Fix $Z$, a $Z$-hyperimmune function $f$ and an arbitrary sequence of sets $\vec R$. Use Mathias conditions $(\sigma, X)$ such that $f$ is $(Z \oplus X)$-hyperimmune, and let $\mathcal M$ be the class of these sets $Z \oplus X$. Refinement holds, since removing finitely many elements from $X$ does not change its degree.
+
+*Hyperimmunity.* The question of :ref{#prop-mathias-question}, with functionals of the oracle $Z \oplus G$, is a forcing question whatever the reservoir. It is compact: a compatible string $\tau$ with $\Phi^{Z \oplus \tau}_e(x)\converge = v$ witnesses the positive answer for "$\Phi^{Z \oplus G}_e(x)\converge < v + 1$". Its answers at $(\sigma, X)$ are $\Sigma^0_1(Z \oplus X)$, and $f$ is $(Z \oplus X)$-hyperimmune. By :ref{#thm-local-hyperimmunity}, $f$ is $(Z \oplus G)$-hyperimmune for every sufficiently generic $G$.
+
+*Cohesiveness.* Fix $n$ and a condition $(\sigma, X)$. Let $p$ enumerate $X$ in increasing order, and $A = \{ k : p(k) \in R_n \}$. By :ref{#ex-rt12-strong-hyperimmunity} relative to $Z \oplus X$, there is an infinite set $H$, contained in $A$ or in $\overline A$, such that $f$ is $(Z \oplus X \oplus H)$-hyperimmune. The set $Y = p[H]$ is an infinite subset of $X$, contained in $R_n$ or in $\overline{R_n}$, and computable in $X \oplus H$, so $f$ is $(Z \oplus Y)$-hyperimmune and $(\sigma, Y)$ is a condition extending $(\sigma, X)$. *Infinity* is handled as usual.
+
+A sufficiently generic set is infinite, $\vec R$-cohesive, and preserves the hyperimmunity of $f$. The proof is that of :ref{#thm-coh-strong-cone}, with the weakness property of hyperimmunity in place of the cone.
+:::
+::::
+
+::::exercise[Through computable domination]{#ex-wkl-hyperimmunity-dominated difficulty=1 objective="Derive the preservation of hyperimmunity for weak König's lemma from the computably dominated basis theorem."}
+Using the computably dominated basis theorem (:ref{#thm-dominated-basis}) relativized to a set $Z$, give a second proof that $\mathsf{WKL}$ admits preservation of hyperimmunity, which preserves all $Z$-hyperimmune functions with a single path.
+
+:::solution
+Relativized to $Z$, the computably dominated basis theorem gives, for every infinite $Z$-computable binary tree, a path $Y$ such that every total $(Z \oplus Y)$-computable function is dominated by a $Z$-computable function. Let $f$ be $Z$-hyperimmune. If a function $g \leq_T Z \oplus Y$ dominated $f$, a $Z$-computable function $h$ dominating $g$ would dominate $f$, which is impossible. So $f$ is $(Z \oplus Y)$-hyperimmune. The path $Y$ does not depend on $f$, so it preserves every $Z$-hyperimmune function at once. This is the form in which Jockusch and Soare proved the preservation of countably many hyperimmunities.
+:::
+::::
+
+::::exercise[Each function, or all of them]{#ex-preserve-every-hyperimmune difficulty=1 objective="Distinguish the preservation of each hyperimmune function from the preservation of all of them at once, which is computable domination."}
+Show that a set $G$ has the property that every hyperimmune function is $G$-hyperimmune if and only if $G$ is computably dominated (:ref{#def-computably-dominated}). Deduce that for every hyperimmune function $f$, every sufficiently generic set $G$ for computable Mathias forcing keeps $f$ hyperimmune, while no such $G$ keeps all hyperimmune functions hyperimmune.
+
+:::solution
+Suppose that $G$ is computably dominated, and let $f$ be hyperimmune. If $g \leq_T G$ dominated $f$, a computable function dominating $g$ would dominate $f$. So $f$ is $G$-hyperimmune. Conversely, suppose that $G$ is not computably dominated: some total $G$-computable function $g$ is dominated by no computable function, that is, $g$ is hyperimmune. Since $g$ dominates itself, $g$ is not $G$-hyperimmune.
+
+The question of :ref{#prop-mathias-question} is compact and $\Sigma^0_1$-preserving, so by :ref{#thm-local-hyperimmunity} with $Z = \emptyset$ and $\mathcal M = \{ \emptyset \}$, for each hyperimmune $f$ every sufficiently generic $G$ keeps $f$ hyperimmune; the dense sets used depend on $f$. But a sufficiently generic $G$ has a principal function $p_G$ that eventually dominates every computable function (:ref{#prop-mathias-dominant}). Then no computable function $h$ dominates $p_G$, since $p_G(n) \geq h(n) + 1$ for almost every $n$; so $p_G$ is hyperimmune and $G$-computable, and $G$ is not computably dominated. The order of the quantifiers matters: preservation of hyperimmunity is about one function at a time.
+:::
+::::
+:::::

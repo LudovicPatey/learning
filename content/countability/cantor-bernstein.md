@@ -1,7 +1,7 @@
 ---
 title: The Cantor–Bernstein theorem
 summary: Two sets each injecting into the other are equipotent; explicit form of the bijection; the role of the axiom of choice.
-duration: 50
+duration: 45
 prerequisites: [equipotence]
 ---
 
@@ -64,7 +64,7 @@ Which facts does the proof use to show that $h$ is injective?
   This makes the images of the two pieces disjoint.
 - [ ] The sets $C_0, C_1, C_2, \dots$ are pairwise disjoint.
 
-  This is true (see the exercises), but the proof does not use it.
+  This is true (:ref{#ex-cn-disjoint}), but the proof does not use it.
 - [ ] $A$ is infinite.
 
   No case distinction is needed. If $A$ is finite, $f$ injective forces $B = A$ (by :ref{#cor-finite-cardinality}), so $C = \emptyset$ and $h$ is the identity.
@@ -79,7 +79,7 @@ In the surjectivity part, why is $y \in C$ in some $C_{m+1}$ rather than in $C_0
   No surjectivity of $f$ is assumed.
 - [ ] Because the sets $C_n$ are increasing.
 
-  They need not be increasing: they are pairwise disjoint (see the exercises), and the proof uses no monotonicity.
+  They need not be increasing: they are pairwise disjoint (:ref{#ex-cn-disjoint}), and the proof uses no monotonicity.
 :::
 
 :::example{#ex-cb-interval}
@@ -127,6 +127,14 @@ The first statement is a reformulation of :ref{#thm-cantor-bernstein}. For the s
 The theorem concerns sets without structure, and its analogue fails for ordered sets or topological spaces. The intervals $[0, 1]$ and $(0, 1)$ each embed into the other by increasing continuous maps, the inclusion and $x \mapsto (x + 1)/3$, but they are neither order-isomorphic nor homeomorphic: $[0, 1]$ has a least element and is compact, and $(0, 1)$ has neither property. Accordingly, the bijections produced by the lemma are not monotone in general; in :ref{#ex-cb-interval}, $h(1) = \tfrac12 < h(0.9) = 0.9$.
 
 The second statement is often used in the following form: to show that a set $B$ has the same cardinality as a set $C$, find a subset of $B$ equipotent to $C$, and an injection of $B$ into $C$.
+
+::::exercise{#ex-intervals-equipotent difficulty=1 objective="Apply the second statement of the corollary to intervals of the real line."}
+Show that $[0, 1]$, $[0, 1)$, $(0, 1)$ and $\mathbb R$ are pairwise equipotent.
+
+:::solution
+We have $(0, 1) \subseteq [0, 1) \subseteq [0, 1] \subseteq \mathbb R$, and $|(0, 1)| = |\mathbb R|$ by :ref{#ex-equipotent-sets}. By the second part of :ref{#cor-mutually-subpotent}, applied twice, all four sets are equipotent.
+:::
+::::
 
 ## The bijection, explicitly
 
@@ -180,6 +188,14 @@ Let $A = B = \nat$, $f(n) = n + 1$ and $g(n) = n + 1$. What is $\varphi$?
   This is not injective: $0$ and $1$ are both sent to $0$.
 :::
 
+::::exercise{#ex-cb-even difficulty=2 objective="Unfold the explicit bijection of the Cantor–Bernstein theorem on a concrete pair of injections."}
+Let $E$ be the set of even numbers, $f : \nat \to E$ given by $f(n) = 4n$, and $g : E \to \nat$ the inclusion. Compute the bijection $\varphi$ of :ref{#prop-cb-explicit}.
+
+:::solution
+Write $v(x)$ for the exponent of $2$ in $x \geq 1$. Here $\nat \setminus g(E)$ is the set of odd numbers and $g \circ f(n) = 4n$, so $C$ is the set of numbers $4^k m$ with $m$ odd, that is, the $x \geq 1$ with $v(x)$ even. Hence $\varphi(x) = 4x$ if $x \geq 1$ and $v(x)$ is even, and $\varphi(x) = x$ otherwise, that is, for $x = 0$ and for $v(x)$ odd. One checks directly that $\varphi$ is a bijection onto $E$: the even numbers $x \geq 2$ with $v(x)$ odd are fixed, together with $0$, and those with $v(x) \geq 2$ even are the images $4y$ of the $y$ with $v(y)$ even.
+:::
+::::
+
 ## The role of the axiom of choice
 
 The proof of Cantor–Bernstein uses only definitions by induction and set formation: it is a theorem of ZF, set theory without the axiom of choice. Two related statements behave differently.
@@ -190,40 +206,6 @@ The proof of Cantor–Bernstein uses only definitions by induction and set forma
 The proof does use classical logic: the definition of $h$ distinguishes the case $x \in C$ from the case $x \notin C$, and membership in $C$ asks whether the ancestry of $x$ stops in $A \setminus g(B)$, after a number of steps for which no bound is given. This use of the law of excluded middle is unavoidable: Pradic and Brown showed that, in constructive set theory, the Cantor–Bernstein theorem implies the law of excluded middle. Computability theory has its own analogue, Myhill's isomorphism theorem: if $f, g : \nat \to \nat$ are computable injections and $A, B \subseteq \nat$ satisfy $x \in A \iff f(x) \in B$ and $y \in B \iff g(y) \in A$ for all $x, y$, then some computable permutation $\pi$ of $\nat$ satisfies $\pi(A) = B$. Its proof is not the one above, but a back-and-forth construction which follows the chains only as far as needed (see Soare, Theorem 1.7.4).
 
 In this course, the sets compared are mostly sets of integers, finite objects, sequences and real numbers, for which explicit injections are available, and no use of choice is needed except where stated.
-
-## Exercises
-
-::::exercise{difficulty=1}
-Use the Cantor–Bernstein theorem to show that $\nat$ and $\nat \times \nat$ are equipotent, without writing down an explicit bijection.
-
-:::solution
-The map $n \mapsto (n, 0)$ is an injection $\nat \to \nat \times \nat$. Conversely, $(a, b) \mapsto 2^a 3^b$ is an injection $\nat \times \nat \to \nat$, by uniqueness of prime factorization. By :ref{#thm-cantor-bernstein}, the two sets are equipotent.
-:::
-::::
-
-::::exercise{#ex-intervals-equipotent difficulty=1}
-Show that $[0, 1]$, $[0, 1)$, $(0, 1)$ and $\mathbb R$ are pairwise equipotent.
-
-:::solution
-We have $(0, 1) \subseteq [0, 1) \subseteq [0, 1] \subseteq \mathbb R$, and $|(0, 1)| = |\mathbb R|$ by :ref{#ex-equipotent-sets}. By the second part of :ref{#cor-mutually-subpotent}, applied twice, all four sets are equipotent.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $E$ be the set of even numbers, $f : \nat \to E$ given by $f(n) = 4n$, and $g : E \to \nat$ the inclusion. Compute the bijection $\varphi$ of :ref{#prop-cb-explicit}.
-
-:::solution
-Write $v(x)$ for the exponent of $2$ in $x \geq 1$. Here $\nat \setminus g(E)$ is the set of odd numbers and $g \circ f(n) = 4n$, so $C$ is the set of numbers $4^k m$ with $m$ odd, that is, the $x \geq 1$ with $v(x)$ even. Hence $\varphi(x) = 4x$ if $x \geq 1$ and $v(x)$ is even, and $\varphi(x) = x$ otherwise, that is, for $x = 0$ and for $v(x)$ odd. One checks directly that $\varphi$ is a bijection onto $E$: the even numbers $x \geq 2$ with $v(x)$ odd are fixed, together with $0$, and those with $v(x) \geq 2$ even are the images $4y$ of the $y$ with $v(y)$ even.
-:::
-::::
-
-::::exercise{difficulty=2}
-In the proof of :ref{#lem-injection-subset}, show that the sets $C_n$ are pairwise disjoint.
-
-:::solution
-For $n \geq 1$, $C_n \subseteq f(A) \subseteq B$, so $C_n$ is disjoint from $C_0 = A \setminus B$. Suppose $C_m \cap C_n \neq \emptyset$ with $m < n$, and choose such a pair with $m$ minimal. Then $m \geq 1$ by the first remark. Let $y \in C_m \cap C_n$: there are $x \in C_{m-1}$ and $x' \in C_{n-1}$ with $f(x) = f(x') = y$, hence $x = x'$ by injectivity, and $C_{m-1} \cap C_{n-1} \neq \emptyset$, contradicting the minimality of $m$.
-:::
-::::
 
 ## Notes and references
 
@@ -236,3 +218,77 @@ The theorem was stated by Cantor, who could prove it only using the comparabilit
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.7.
 - C. Pradic and C. E. Brown, *Cantor–Bernstein implies excluded middle*, preprint, arXiv:1904.09193, 2019.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.
+
+:::::exercises
+::::exercise{#ex-cb-nat-squared difficulty=1 objective="Prove an equipotence by exhibiting two injections instead of a bijection."}
+Use the Cantor–Bernstein theorem to show that $\nat$ and $\nat \times \nat$ are equipotent, without writing down an explicit bijection.
+
+:::solution
+The map $n \mapsto (n, 0)$ is an injection $\nat \to \nat \times \nat$. Conversely, $(a, b) \mapsto 2^a 3^b$ is an injection $\nat \times \nat \to \nat$, by uniqueness of prime factorization. By :ref{#thm-cantor-bernstein}, the two sets are equipotent.
+:::
+::::
+
+::::exercise{#ex-cn-disjoint difficulty=2 objective="Show that the sets $C_n$ of the key lemma are pairwise disjoint, using injectivity and a minimal counterexample."}
+In the proof of :ref{#lem-injection-subset}, show that the sets $C_n$ are pairwise disjoint.
+
+:::solution
+For $n \geq 1$, $C_n \subseteq f(A) \subseteq B$, so $C_n$ is disjoint from $C_0 = A \setminus B$. Suppose $C_m \cap C_n \neq \emptyset$ with $m < n$, and choose such a pair with $m$ minimal. Then $m \geq 1$ by the first remark. Let $y \in C_m \cap C_n$: there are $x \in C_{m-1}$ and $x' \in C_{n-1}$ with $f(x) = f(x') = y$, hence $x = x'$ by injectivity, and $C_{m-1} \cap C_{n-1} \neq \emptyset$, contradicting the minimality of $m$.
+:::
+::::
+
+::::exercise{#ex-cb-strict-order difficulty=1 objective="Combine strict and non-strict comparisons of cardinality, and see where the Cantor–Bernstein theorem is needed."}
+Show that if $|A| < |B|$ and $|B| \leq |C|$, then $|A| < |C|$, and that if $|A| \leq |B|$ and $|B| < |C|$, then $|A| < |C|$.
+
+:::solution
+In both cases $|A| \leq |C|$, by :ref{#prop-subpotent-transitive}; it remains to show $|A| \neq |C|$. Suppose $|A| = |C|$.
+
+In the first case, $|B| \leq |C|$ and $|C| = |A|$ give $|B| \leq |A|$, by compatibility with equipotence. Together with $|A| \leq |B|$, :ref{#cor-mutually-subpotent} gives $|A| = |B|$, a contradiction.
+
+In the second case, $|C| = |A|$ and $|A| \leq |B|$ give $|C| \leq |B|$. Together with $|B| \leq |C|$, :ref{#cor-mutually-subpotent} gives $|B| = |C|$, a contradiction.
+
+Without the Cantor–Bernstein theorem, neither argument would go through: from injections in both directions alone, one could not conclude equipotence.
+:::
+::::
+
+::::exercise{#ex-cb-closed-open difficulty=2 objective="Compute the bijection of the key lemma between $[0, 1]$ and $(0, 1)$."}
+Let $A = [0, 1]$, $B = (0, 1)$ and $f(x) = (x + 1)/3$, an injection of $A$ into $[\tfrac13, \tfrac23] \subseteq B$. Compute the sets $C_n$ of the proof of :ref{#lem-injection-subset} and the bijection $h : [0, 1] \to (0, 1)$ that it produces.
+
+:::solution
+One has $f(x) - \tfrac12 = \tfrac13\big(x - \tfrac12\big)$, so by induction $f^n(x) = \tfrac12 + 3^{-n}\big(x - \tfrac12\big)$. Since $C_0 = A \setminus B = \{0, 1\}$ and $C_n = f^n(C_0)$,
+$$
+C_n = \Big\{ \tfrac12 - \tfrac12\, 3^{-n},\ \tfrac12 + \tfrac12\, 3^{-n} \Big\},
+$$
+so that $C$ consists of the two sequences $0, \tfrac13, \tfrac49, \tfrac{13}{27}, \dots$ and $1, \tfrac23, \tfrac59, \tfrac{14}{27}, \dots$, which converge to $\tfrac12$ from below and from above; $\tfrac12$ itself is not in $C$. The bijection is
+$$
+h\big(\tfrac12 \pm \tfrac12\, 3^{-n}\big) = \tfrac12 \pm \tfrac12\, 3^{-(n+1)} \quad (n \in \nat), \qquad h(x) = x \text{ for } x \notin C.
+$$
+It shifts each of the two sequences by one step, which frees the points $0$ and $1$, and fixes every other point, as in :ref{#ex-cb-interval}.
+:::
+::::
+
+::::exercise{#ex-cb-least-fixed-point difficulty=2 objective="Recast the key lemma as a fixed point argument, and see that every fixed point gives a bijection."}
+In the setting of :ref{#lem-injection-subset}, let $\Gamma(X) = (A \setminus B) \cup f(X)$ for $X \subseteq A$.
+
+1. Show that the set $C$ of the proof satisfies $\Gamma(C) = C$, and that $C \subseteq X$ for every $X \subseteq A$ with $\Gamma(X) \subseteq X$.
+2. Show that for every $X$ with $\Gamma(X) = X$, the function $h_X$ equal to $f$ on $X$ and to the identity on $A \setminus X$ is a bijection from $A$ onto $B$.
+3. For $A = B = \mathbb Z$ and $f(n) = n + 1$, find all $X$ with $\Gamma(X) = X$, and the corresponding bijections.
+
+:::solution
+1. The image of a union is the union of the images, so $\Gamma(C) = C_0 \cup \bigcup_n f(C_n) = C_0 \cup \bigcup_n C_{n+1} = C$. If $\Gamma(X) \subseteq X$, then $C_0 = A \setminus B \subseteq X$, and if $C_n \subseteq X$, then $C_{n+1} = f(C_n) \subseteq f(X) \subseteq X$; so $C_n \subseteq X$ for all $n$ by induction, and $C \subseteq X$.
+2. *Values in $B$.* If $x \in X$, then $h_X(x) = f(x) \in B$. If $x \notin X$, then $x \notin A \setminus B$, since $A \setminus B \subseteq \Gamma(X) = X$; so $h_X(x) = x \in B$. *Injectivity.* $h_X$ is injective on $X$ and on $A \setminus X$, and the images $f(X) \subseteq \Gamma(X) = X$ and $A \setminus X$ are disjoint. *Surjectivity.* Let $y \in B$. If $y \notin X$, then $y = h_X(y)$. If $y \in X = (A \setminus B) \cup f(X)$, then $y \in f(X)$ since $y \in B$, so $y = f(x) = h_X(x)$ for some $x \in X$. The proof of the lemma is the case $X = C$, the least fixed point.
+3. Here $A \setminus B = \emptyset$, so $\Gamma(X) = X + 1$, and $\Gamma(X) = X$ means that $n \in X$ if and only if $n + 1 \in X$, for every $n \in \mathbb Z$. Then $X$ is $\emptyset$ or $\mathbb Z$: if $n \in X$, every integer is reached from $n$ by steps $\pm 1$. The least fixed point $C = \emptyset$ gives $h = \mathrm{id}_{\mathbb Z}$; the fixed point $\mathbb Z$ gives $h = f$. Both are bijections, so the bijection given by the lemma is one choice among several.
+
+This is the form of the argument that goes through the Knaster–Tarski fixed point theorem for monotone operators on $\mathcal P(A)$: $\Gamma$ is monotone, and $C$ is its least fixed point.
+:::
+::::
+
+::::exercise{#ex-cb-exchange difficulty=2 objective="See that the explicit bijection depends on the order of the two injections, on chains without a first element."}
+Let $A = B = \mathbb Z$ and $f = g : \mathbb Z \to \mathbb Z$, $n \mapsto n + 1$. Compute the bijection $\varphi : A \to B$ of :ref{#prop-cb-explicit}, and the bijection $\psi : B \to A$ obtained by the same proposition with the roles of $(A, f)$ and $(B, g)$ exchanged. Is $\psi = \varphi^{-1}$?
+
+:::solution
+Since $g$ is surjective, $A \setminus g(B) = \emptyset$, so $C = \emptyset$ and $\varphi = g^{-1}$, that is, $\varphi(n) = n - 1$. With the roles exchanged, the set $\bigcup_n (f \circ g)^n\big(B \setminus f(A)\big)$ is empty for the same reason, and $\psi = f^{-1}$, that is, $\psi(n) = n - 1$. But $\varphi^{-1}(n) = n + 1$, so $\psi \neq \varphi^{-1}$.
+
+In the language of chains, with disjoint copies of $A$ and $B$, every element has an infinite ancestry, so all chains are without a first element. On such chains, the construction uses the inverse of the second injection, which is $g$ for $\varphi$ and $f$ for $\psi$. On a chain with a first element, by contrast, the bijection is forced, as explained after :ref{#prop-cb-explicit}.
+:::
+::::
+:::::

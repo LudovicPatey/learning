@@ -1,7 +1,7 @@
 ---
 title: λ-definability of the partial recursive functions
 summary: Head reduction, and the theorem that the λ-definable partial functions are exactly the partial recursive functions.
-duration: 40
+duration: 45
 prerequisites: [lambda-programming, mu-recursion]
 ---
 
@@ -56,6 +56,20 @@ The second fact describes head reduction inside a larger term: in an application
 2. Two observations. First, a head step does not remove a leading abstraction: if $\lambda y.\, B$ is not in head normal form, its head redex lies in $B$, and its head step gives $\lambda y.\, B'$ with $B \to_h B'$. Hence if some term of the sequence from $M$ to $M'$ were an abstraction, all later terms would be, including $M'$; so none is. Second, a term $K$ which is not an abstraction and not in head normal form has the form $(\lambda z.\, P)\, R_1 \cdots R_m$ with $m \geq 1$; then $K\, N = (\lambda z.\, P)\, R_1 \cdots R_m\, N$ has the same head redex, so $K \to_h K'$ implies $K\, N \to_h K'\, N$. Applying this to each step gives the claim.
 3. Let $M = M_0 \to_h M_1 \to_h \cdots \to_h M_r = \lambda x.\, B$, and let $i$ be the least index such that $M_i$ is an abstraction, say $M_i = \lambda x.\, B_i$. By the first observation in 2, $B_i \twoheadrightarrow_h B$. By the second observation, applied to $M_0, \dots, M_{i-1}$, which are not abstractions, $M\, N \twoheadrightarrow_h M_i\, N$. Then $M_i\, N = (\lambda x.\, B_i)\, N \to_h B_i[N/x]$, and by 1, $B_i[N/x] \twoheadrightarrow_h B[N/x]$.
 :::
+
+::::exercise{#ex-head-infinite-application difficulty=2 objective="Apply the lemmas on head reduction in context to show that applying a term with an infinite head reduction preserves non-termination."}
+Show that if $M$ has an infinite head reduction, then so does $M\, N$, for every term $N$. Deduce that $M\, N_1 \cdots N_r$ has no normal form, for all terms $N_1, \dots, N_r$.
+
+:::solution
+Let $M = M_0 \to_h M_1 \to_h \cdots$ be the infinite head reduction of $M$; no $M_j$ is in head normal form. Two cases, using the two observations of the proof of :ref{#lem-head-context} (2).
+
+If no $M_j$ is an abstraction, each $M_j$ has the form $(\lambda z.\, P)\, R_1 \cdots R_m$ with $m \geq 1$, and $M_j\, N$ has the same head redex, so $M_j\, N \to_h M_{j+1}\, N$ for every $j$: the head reduction of $M\, N$ is infinite.
+
+Otherwise, let $i$ be the least index with $M_i$ an abstraction, $M_i = \lambda x.\, B_i$. Every later term is an abstraction, $M_j = \lambda x.\, B_j$, and since these are not in head normal form, $B_j \to_h B_{j+1}$ for $j \geq i$. As in the first case, $M\, N \twoheadrightarrow_h M_i\, N$; then $M_i\, N \to_h B_i[N/x]$, and by :ref{#lem-head-context} (1), $B_j[N/x] \to_h B_{j+1}[N/x]$ for every $j \geq i$. So the head reduction of $M\, N$ is infinite in this case too.
+
+By induction on $r$, the head reduction of $M\, N_1 \cdots N_r$ is infinite, and by :ref{#lem-head-normal-order} this term has no normal form.
+:::
+::::
 
 ## Numerals in head position
 
@@ -172,3 +186,43 @@ The equivalence between λ-definability and general recursiveness (for total fun
 - S. C. Kleene, *λ-definability and recursiveness*, Duke Mathematical Journal 2 (1936), 340–353.
 - H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, North-Holland, 1984.
 - J. R. Hindley, J. P. Seldin, *Lambda-Calculus and Combinators: An Introduction*, Cambridge University Press, 2008.
+
+:::::exercises
+::::exercise{#ex-head-examples difficulty=1 objective="Compute head reductions, and decide from them whether a term has a normal form."}
+For each term, give its head reduction, and say whether the term has a head normal form and whether it has a normal form: (1) $(\lambda x.\, x\, \Omega)\, \mathsf{I}$; (2) $\lambda x.\, \Omega$; (3) $x\, \Omega$; (4) $(\lambda x\, y.\, y)\, \Omega$; (5) $(\lambda x.\, x\, x)\, (\lambda y.\, y\, z)$.
+
+:::solution
+1. $(\lambda x.\, x\, \Omega)\, \mathsf{I} \to_h \mathsf{I}\, \Omega \to_h \Omega \to_h \Omega \to_h \cdots$. The head reduction is infinite, so by :ref{#lem-head-normal-order} the term has no normal form; it has no head normal form either, since its reducts are $\mathsf{I}\, \Omega$, $\Omega$ and the terms of the form $(\lambda x.\, x\, \Omega)\, \mathsf{I}$, none of which is a head normal form.
+2. $\lambda x.\, \Omega$ has the head redex $\Omega$, and $\lambda x.\, \Omega \to_h \lambda x.\, \Omega \to_h \cdots$ is infinite: no normal form.
+3. $x\, \Omega$ is a head normal form (its head is the variable $x$), with a head reduction of length $0$. It has no normal form: its only redex is $\Omega$, and every reduct is $x\, \Omega$ itself.
+4. $(\lambda x\, y.\, y)\, \Omega \to_h \lambda y.\, y$, a normal form, reached in one step although the term contains $\Omega$.
+5. $(\lambda x.\, x\, x)\, (\lambda y.\, y\, z) \to_h (\lambda y.\, y\, z)\, (\lambda y.\, y\, z) \to_h (\lambda y.\, y\, z)\, z \to_h z\, z$, a normal form.
+:::
+::::
+
+::::exercise{#ex-head-context-hypothesis difficulty=1 objective="See by a counterexample why head reduction in an application only follows the function part until it becomes an abstraction."}
+Let $M = \lambda x.\, \mathsf{I}\, (x\, x)$, $M' = \lambda x.\, x\, x$ and $y$ a variable. Check that $M \to_h M'$, but that $M\, y \twoheadrightarrow_h M'\, y$ fails. Which part of :ref{#lem-head-context} describes the head reduction of $M\, y$?
+
+:::solution
+$M = \lambda x.\, (\lambda z.\, z)\, (x\, x)$ is not in head normal form, its head redex is $\mathsf{I}\, (x\, x)$, and $M \to_h \lambda x.\, x\, x = M'$. The head reduction of $M\, y$ contracts the outer redex first: $M\, y \to_h \mathsf{I}\, (y\, y) \to_h y\, y$, which is a head normal form. So the head reduction of $M\, y$ consists of these three terms, and $M'\, y = (\lambda x.\, x\, x)\, y$ is not among them: $M\, y \twoheadrightarrow_h M'\, y$ fails. Item 2 of :ref{#lem-head-context} does not apply, since $M'$ is an abstraction. Item 3 does, with $M \twoheadrightarrow_h \lambda x.\, B$ for $B = x\, x$: it gives $M\, y \twoheadrightarrow_h B[y/x] = y\, y$, as found.
+:::
+::::
+
+::::exercise{#ex-lambda-defined-at-zero difficulty=1 objective="Use the Church–Rosser theorem to show that a term which reduces to $\Omega$ has no normal form."}
+Let $F = \lambda n.\, \mathsf{iszero}\, n\, \overline 0\, \Omega$. Show that $F$ λ-defines the partial function $f$ with $f(0) = 0$ and $f(n)\diverge$ for $n \geq 1$.
+
+:::solution
+$F\, \overline 0 \to_\beta \mathsf{iszero}\, \overline 0\, \overline 0\, \Omega \twoheadrightarrow_\beta \mathsf{true}\, \overline 0\, \Omega \twoheadrightarrow_\beta \overline 0$. For $n \geq 1$, $F\, \overline n \twoheadrightarrow_\beta \mathsf{false}\, \overline 0\, \Omega \twoheadrightarrow_\beta \Omega$. Suppose $F\, \overline n$ had a normal form $N$. By :ref{#thm-church-rosser}, $N$ and $\Omega$ have a common reduct, which is $N$ since $N$ is normal; so $\Omega \twoheadrightarrow_\beta N$. But the only one-step reduct of $\Omega$ is $\Omega$, so every reduct of $\Omega$ is $\Omega$, which is not a normal form. Hence $F\, \overline n$ has no normal form. This argument works because $F\, \overline n$ reduces to a term all of whose reducts are known; in the proof of :ref{#thm-recursive-lambda-definable} no such term is available, and head reduction is used instead.
+:::
+::::
+
+::::exercise{#ex-lambda-total-search difficulty=2 objective="Extend the divergence argument of the λ-definability theorem to the minimization of any total λ-definable function."}
+Let $g : \nat^{k+1} \to \nat$ be total and λ-defined by $G$, and let $f(\vec x) \simeq \mu z\, [g(\vec x, z) = 0]$, which may be partial. Show that the term $F = \lambda \vec x.\, \mathsf{search}\, \vec x\, \overline 0$ of the proof of :ref{#thm-recursive-lambda-definable}, built from $G$, λ-defines $f$.
+
+:::solution
+If $f(\vec n)\converge = z_0$, then $g(\vec n, z) \neq 0$ for $z < z_0$ and $g(\vec n, z_0) = 0$. The argument of the case of regular minimization only uses these facts: by induction on $z \leq z_0$, $F\, \vec{\overline n} \twoheadrightarrow_\beta \mathsf{search}\, \vec{\overline n}\, \overline z$, and $\mathsf{search}\, \vec{\overline n}\, \overline{z_0} \twoheadrightarrow_\beta \overline{z_0}$. So $F\, \vec{\overline n} \twoheadrightarrow_\beta \overline{f(\vec n)}$.
+
+If $f(\vec n)\diverge$, then, $g$ being total, $g(\vec n, z) \geq 1$ for every $z$. The proof of the partial case shows that $\Theta\, A\, \vec{\overline n}\, t\, \vec R \twoheadrightarrow_h \Theta\, A\, \vec{\overline n}\, (\mathsf{succ}\, t)\, \vec R$ in at least one step, for $t \twoheadrightarrow_\beta \overline z$. It used $g(\vec n, z) = 1$ only to obtain $M = G\, \vec{\overline n}\, t \twoheadrightarrow_\beta \overline{g(\vec n, z)}$ with $g(\vec n, z) \geq 1$, so that :ref{#lem-numeral-head} gives $M \twoheadrightarrow_h \lambda f\, x.\, f\, N$. This holds here for every $z$, so the rest of the argument applies unchanged, with $\vec R$ empty: the head reduction of $\mathsf{search}\, \vec{\overline n}\, \overline 0$ is infinite. By :ref{#lem-head-normal-order}, $F\, \vec{\overline n}$, whose first $k$ head steps lead to this term, has no normal form. So the λ-definable functions are closed under minimization of total functions, regular or not.
+:::
+::::
+:::::

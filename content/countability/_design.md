@@ -216,12 +216,91 @@ affected.
   `diagonal-argument`: "The diagonal argument" (Cantor space, the theorem, the general
   lemma) and "Power sets and the real line". Not done, to keep the general lemma next to
   its main applications.
-- The exercise on $\mathrm{Tot}$ in L7 refers forward to `prop-ce-range` of fundamentals,
-  and L4 refers forward to `prop-selection`; these are pointers, not dependencies.
+- The text of L4 refers forward to `prop-selection`, L5 to `thm-fixed-point`, L7 to
+  `thm-halting` (fundamentals) and L1 to `ex-dedekind-infinite` (L3); these are pointers,
+  not dependencies. Since 2026-11-13 no exercise cites a lesson outside its prerequisites.
 - `turing-degrees/finite-extensions` lists `countability/diagonalization-and-computation`
   as prerequisite; it should now list `countability/requirements`.
 - The Cantor set facts (homeomorphism with $2^\mathbb N$) are admitted; a proof could be
   added if `pi01-classes` does not give one.
+
+## 12. Exercises
+
+Every exercise has a permanent label, an objective and a difficulty. The lessons keep one
+or two **featured exercises** in the text, placed after the material they practice; the
+others are in the block of further exercises at the end of each lesson (outside the
+reading time).
+
+**Featured exercises, and why.**
+
+- **L1.** `ex-finite-injective-surjective` (the finite/infinite contrast of the lesson, in
+  one line from the corollary) and `ex-add-point` (the shift along a copy of $\mathbb N$,
+  reused in L2 and L3).
+- **L2.** `ex-intervals-equipotent` (the sandwich form of the corollary, used in L6) and
+  `ex-cb-even` (unfolding the explicit bijection on a concrete pair of injections).
+- **L3.** `ex-dedekind-infinite` (Dedekind's definition and the use of choice, cited from
+  L1) and `ex-union-countable` (absorbing a countable set, the pedagogical plan's
+  exercise).
+- **L4.** `ex-union-injections` (countable unions without choice, the delicate point of
+  the lesson) and `ex-eventually-periodic` (coding infinite objects by finite data).
+- **L5.** `ex-infinite-subsets-uncountable` (uncountability by injecting Cantor space, the
+  standard method) and `ex-cantor-1874` (nested intervals, the use of completeness).
+- **L6.** `ex-continuous-functions` (two injections, values on a dense countable set) and
+  `ex-infinitely-many-zeros` (explicit removal of a countable set).
+- **L7.** `ex-no-dominating` (diagonalization against one function) and
+  `ex-computably-inseparable` (defeating each program at its own index; announced in the
+  fundamentals design log).
+- **L8.** `ex-bi-immune` (the finite extension method with an infinitary requirement split
+  into finitary ones) and `ex-bi-immune-not-computable` (why the construction is not
+  effective).
+
+**Further exercises, by lesson.**
+
+- **L1.** Finiteness of subsets (`ex-subset-finite`, cited by L3); images and preimages;
+  which factor of a composition inherits injectivity or surjectivity; all left inverses of
+  the successor; products of finite sets by Euclidean division; surjective images of finite
+  sets, without choice.
+- **L2.** $\mathbb N \times \mathbb N$ by two injections; disjointness of the sets $C_n$
+  (cited by the quizzes); strict and non-strict comparisons; the bijection of the lemma
+  between $[0,1]$ and $(0,1)$; the lemma as a least fixed point (Knaster–Tarski form), with
+  a case where several fixed points give different bijections; dependence of the explicit
+  bijection on the order of the injections.
+- **L3.** Explicit bijection from a listing with repetitions (adapted from Monin–Patey);
+  removal of a finite set; countable sets as surjective images of subsets of $\mathbb N$;
+  principal functions as strictly increasing functions; principal function by counting the
+  complement; partition of a countable set into infinitely many infinite pieces.
+- **L4.** The pairing $2^x(2y+1) - 1$; transcendental numbers in every interval; finite and
+  cofinite sets; finite subsets of a countable set; an explicit bijection
+  $\mathbb Q_{>0} \to \mathbb N \setminus \{0\}$ by prime exponents.
+- **L5.** Permutations of $\mathbb N$; a list misses uncountably many sequences; a diagonal
+  to compute; Lawvere's theorem for $|B| \leq 1$; a function exceeding each member of a list
+  from some point on; a direct diagonal argument against maps $\mathcal P(A) \to A$; why
+  the digit argument fails in base 2.
+- **L6.** Binary relations; all functions $\mathbb R \to \mathbb R$; joins and columns to
+  compute; convergent sequences; open sets; finite sets of reals (order instead of choice);
+  the collisions of the binary coding $\cs \to [0,1]$ (why base 3).
+- **L7.** Uniformly computable sequences of sets; $\mathrm{Tot}$ not c.e. (rephrased with
+  the characterization of c.e. sets, so that no result of fundamentals is cited); effective
+  domination of a uniform list; the diagonal without $+1$; uniform computability and
+  $\bigoplus$; counting the finite variants of computable sets.
+- **L8.** Which strings secure which requirements; three interleaved families of
+  requirements; continuum many solutions by branching; bi-immunity through intersections;
+  the lemma effectivized (which gives back the diagonal); a computable set no finite
+  variant of which is primitive recursive.
+
+**Sources.** Soare 2016, Exercise 1.6.26 (i) (computably inseparable sets, L7) and Exercise
+6.1.7 (branching, mentioned in L8); Monin–Patey, chapter *Cantor's infinity*, section
+*Countable sets* (the exercise on surjections onto infinite sets and its question on
+choice, L3); Cantor 1874 (nested intervals, L5, presented as a variant). The other
+exercises are standard and were written for the course.
+
+**Associations.** No exercise is associated with other lessons (`lessons=`): the exercises
+that combine lessons all cite a result of their own lesson, which the earlier lessons do
+not have as prerequisite.
+
+**Overlap with other courses.** `ex-pairing-2x` (L4) duplicates the first exercise of
+`models-of-computation/what-is-an-algorithm`; it is kept, as an existing exercise, in the
+further exercises.
 
 ## 11. History
 
@@ -239,3 +318,12 @@ affected.
   `ex-no-uniform-computable-sets`, `ex-bi-immune`. Monin–Patey, Soare, Gray,
   Pradic–Brown, Normann–Sanders and Jockusch added to the references. Durations recomputed
   from word counts.
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for all
+  exercises; one or two featured exercises per lesson, moved to the material they practice;
+  37 new exercises, 36 of them further exercises (see section 12). Corrections: `ex-tot-not-ce` no longer cites
+  `fundamentals/ce-sets` and no longer claims an injective enumeration; `ex-bi-immune` no
+  longer cites `immunity-growth/immune-sets`; `ex-bi-immune-not-computable` justifies that
+  no uniformly computable sequence contains all infinite computable sets;
+  `ex-cantor-1874` is presented as a variant of Cantor's proof. Quizzes of L2 cite
+  `ex-cn-disjoint` instead of "the exercises". Durations of L1, L2, L5, L6 set to 45 (the
+  maximum; word counts without further exercises give 50–55).

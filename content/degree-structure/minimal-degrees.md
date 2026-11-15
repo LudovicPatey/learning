@@ -1,7 +1,7 @@
 ---
 title: Minimal degrees
 summary: Splitting trees give a set of minimal Turing degree computable in 0″ (Spector); the construction is a forcing with computable perfect trees, whose conditions decide for all their paths whether a functional loses information.
-duration: 50
+duration: 45
 prerequisites: [embeddings, immunity-growth/computably-dominated, ce-degrees/sacks-splitting]
 ---
 
@@ -77,6 +77,20 @@ In Case 1 of :ref{#lem-splitting-dichotomy}, why does the full subtree above $T(
   A full subtree is perfect: it has continuum many paths.
 :::
 
+::::exercise{#ex-splitting-even-bits difficulty=1 objective="Compute $e$-splits on an example, and find subtrees on which a functional splits and on which it avoids splits."}
+Let $\Phi_e$ be the functional that reads the even bits of its oracle: $\Phi^\sigma_e(x) = \sigma(2x)$ if $2x < |\sigma|$, and $\Phi^\sigma_e(x)\diverge$ otherwise, so that $\Phi^X_e = \{ x : 2x \in X \}$.
+
+1. Show that the identity tree $T(\rho) = \rho$ is neither $e$-splitting nor avoids $e$-splits.
+2. Let $S(\rho)$ and $S'(\rho)$ be the strings of length $2|\rho|$ defined, for $i < |\rho|$, by $S(\rho)(2i) = \rho(i)$, $S(\rho)(2i+1) = 0$, and $S'(\rho)(2i) = 0$, $S'(\rho)(2i+1) = \rho(i)$. Show that $S$ and $S'$ are computable f-trees, that $S$ is $e$-splitting and that $S'$ avoids $e$-splits.
+3. For $X \in [S]$, describe the computation of $X$ from $\Phi^X_e$ given by :ref{#lem-splitting-consequences}; for $X \in [S']$, compute $\Phi^X_e$.
+
+:::solution
+1. The nodes $T(0) = 0$ and $T(1) = 1$ form an $e$-split at $x = 0$, with the values $0$ and $1$; so $T$ does not avoid $e$-splits. The successors $T(00) = 00$ and $T(01) = 01$ of the node $T(0)$ do not form an $e$-split: the only input on which both computations converge is $x = 0$, with value $0$ on both. So $T$ is not $e$-splitting.
+2. The map $\rho \mapsto S(\rho)$ is the f-tree of :ref{#ex-ftree} for the set $Z = \emptyset$; for $S'$, the same argument applies: $S'(\rho) \preceq S'(\mu)$ holds if and only if $|\rho| \leq |\mu|$ and $\rho(i) = \mu(i)$ for $i < |\rho|$, that is, $\rho \preceq \mu$. Both are computable. The nodes $S(\rho 0)$ and $S(\rho 1)$ have length $2|\rho| + 2$ and differ exactly at the position $2|\rho|$, so $\Phi_e$ gives at $x = |\rho|$ the values $0$ and $1$: $S$ is $e$-splitting. Every node of $S'$ has $0$ at all its even positions, so every convergent computation $\Phi^\sigma_e(x)$ with $\sigma$ a node of $S'$ has value $0$, and no two nodes form an $e$-split.
+3. Let $X \in [S]$ and $Y = \Phi^X_e$. The procedure finds $\mu_{n+1} = \mu_n i$ where $i$ is the value that agrees with $Y$ at the splitting input $x = n$, that is, $i = Y(n)$. So $\mu_n = Y \uh n$, and $X$ is the set with $X(2i) = Y(i)$ and $X(2i+1) = 0$: the paths of $S$ are the sets $Y \oplus \emptyset$, and $\Phi_e$ returns $Y$. For $X \in [S']$, $\Phi^X_e = \emptyset$, a computable set, as :ref{#lem-splitting-consequences} (1) predicts.
+:::
+::::
+
 ## Spector's theorem
 
 :::theorem[Spector]{#thm-minimal-degree}
@@ -97,7 +111,7 @@ Let $X$ be the union of the roots $T_k(\varepsilon)$. As in the proof of :ref{#t
 
 The two lemmas on f-trees, for non-computability and for splitting, play the role of the dense sets of the finite extension method. The essential difference is that a tree decides, for all its paths at once, whether $\Phi_e$ loses information or not. With strings as conditions, genericity has the opposite effect: by :ref{#thm-generic-independent} and :ref{#ex-generic-not-minimal}, a 1-generic set never has minimal degree.
 
-In the language of forcing, the **conditions** are the computable f-trees, a condition $S$ **extends** $T$ if $S$ is a subtree of $T$, and a set $X$ satisfies a condition if $X \in [T]$. For each $e$, the conditions that are $e$-splitting or avoid $e$-splits form a **dense** family, by :ref{#lem-splitting-dichotomy}: every condition has an extension in it. So do the conditions all of whose paths differ from $\Phi_e$, by :ref{#lem-ftree-noncomputable}. The proof above builds a decreasing sequence of conditions that meets every one of these dense families, and a path of all these conditions has minimal degree. The same scheme, with other dense families, gives the computably dominated sets of :ref{#thm-martin-miller-ftrees}, and both can be met at once (see the exercises).
+In the language of forcing, the **conditions** are the computable f-trees, a condition $S$ **extends** $T$ if $S$ is a subtree of $T$, and a set $X$ satisfies a condition if $X \in [T]$. For each $e$, the conditions that are $e$-splitting or avoid $e$-splits form a **dense** family, by :ref{#lem-splitting-dichotomy}: every condition has an extension in it. So do the conditions all of whose paths differ from $\Phi_e$, by :ref{#lem-ftree-noncomputable}. The proof above builds a decreasing sequence of conditions that meets every one of these dense families, and a path of all these conditions has minimal degree. The same scheme, with other dense families, gives the computably dominated sets of :ref{#thm-martin-miller-ftrees}, and both can be met at once (:ref{#ex-minimal-dominated}).
 
 :::quiz[Spector's theorem]
 In the proof of :ref{#thm-minimal-degree}, why is $\emptyset''$ needed rather than $\emptyset'$?
@@ -121,15 +135,9 @@ Unlike the construction of a computably dominated set in :ref{#thm-martin-miller
 - [ ] Because partiality cannot be forced with trees.
 
   It can, as in :ref{#lem-ftree-domination}, but it is not needed here.
-::
+:::
 
-## Below the halting problem
-
-Spector's construction needs $\emptyset''$ to decide which case of :ref{#lem-splitting-dichotomy} holds. Sacks (1961) improved the bound: there is a minimal degree below $\obf'$. The construction uses partial computable trees: the splitting procedure of Case 2 is run without knowing whether it will stall, and a node on which it stalls avoids $e$-splits. With the oracle $\emptyset'$, the construction guesses the case and corrects its guesses finitely often, in the manner of a finite injury argument (Soare, Chapter 13). We admit this result. By contrast, no c.e. degree is minimal (:ref{#cor-no-minimal-ce}), although Yates (1970) and Cooper (1972) showed that every non-zero c.e. degree bounds a minimal degree. Every minimal degree below $\obf'$ is hyperimmune, since no non-computable $\Delta^0_2$ set is computably dominated (:ref{#thm-computation-function}); so minimality does not imply computable domination, although the first exercise below combines the two.
-
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-minimal-dominated difficulty=1 objective="Meet the dense families of two tree constructions at once."}
 Show that there is a set of minimal degree that is computably dominated, computable in $\emptyset''$.
 
 :::solution
@@ -137,13 +145,9 @@ Interleave the steps of :ref{#thm-minimal-degree} with those of :ref{#thm-martin
 :::
 ::::
 
-::::exercise{difficulty=2}
-Let $T$ be a computable f-tree that avoids $e$-splits, and let $\Phi^X_e$ be total for some $X \in [T]$. Show that the computable set $\Phi^X_e$ does not depend on $X$ among the paths $X$ of $T$ on which $\Phi_e$ is total.
+## Below the halting problem
 
-:::solution
-Let $X, X' \in [T]$ with $\Phi^X_e$ and $\Phi^{X'}_e$ total, and $x \in \nat$. Long enough prefixes of $X$ and $X'$ that are nodes of $T$ give convergent computations at $x$, with the values $\Phi^X_e(x)$ and $\Phi^{X'}_e(x)$ by the use principle. Two nodes of $T$ do not form an $e$-split, so these values are equal.
-:::
-::::
+Spector's construction needs $\emptyset''$ to decide which case of :ref{#lem-splitting-dichotomy} holds. Sacks (1961) improved the bound: there is a minimal degree below $\obf'$. The construction uses partial computable trees: the splitting procedure of Case 2 is run without knowing whether it will stall, and a node on which it stalls avoids $e$-splits. With the oracle $\emptyset'$, the construction guesses the case and corrects its guesses finitely often, in the manner of a finite injury argument (Soare, Chapter 13). We admit this result. By contrast, no c.e. degree is minimal (:ref{#cor-no-minimal-ce}), although Yates (1970) and Cooper (1972) showed that every non-zero c.e. degree bounds a minimal degree. Every minimal degree below $\obf'$ is hyperimmune, since no non-computable $\Delta^0_2$ set is computably dominated (:ref{#thm-computation-function}); so minimality does not imply computable domination, although the two properties are compatible (:ref{#ex-minimal-dominated}).
 
 ## Notes and references
 
@@ -159,3 +163,61 @@ Spector (1956) proved the existence of minimal degrees, with a forcing over a re
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Chapters 12 and 13.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.18.
 - M. Lerman, *Degrees of Unsolvability: Local and Global Theory*, Springer, 1983.
+
+:::::exercises
+::::exercise{#ex-avoid-splits-constant difficulty=1 objective="See that a tree avoiding $e$-splits determines a single output of $\Phi_e$ for all its paths."}
+Let $T$ be a computable f-tree that avoids $e$-splits, and let $\Phi^X_e$ be total for some $X \in [T]$. Show that the computable set $\Phi^X_e$ does not depend on $X$ among the paths $X$ of $T$ on which $\Phi_e$ is total.
+
+:::solution
+Let $X, X' \in [T]$ with $\Phi^X_e$ and $\Phi^{X'}_e$ total, and $x \in \nat$. Long enough prefixes of $X$ and $X'$ that are nodes of $T$ give convergent computations at $x$, with the values $\Phi^X_e(x)$ and $\Phi^{X'}_e(x)$ by the use principle. Two nodes of $T$ do not form an $e$-split, so these values are equal.
+:::
+::::
+
+::::exercise{#ex-minimal-equivalent difficulty=1 objective="Check the equivalence of the two forms of the definition of a minimal degree."}
+Show that $\deg_T(X)$ is minimal if and only if $X$ is not computable and every set $Y \leq_T X$ is computable or satisfies $X \leq_T Y$.
+
+:::solution
+Suppose $\deg_T(X)$ minimal. Then $\deg_T(X) > \obf$, so $X$ is not computable. Let $Y \leq_T X$. Then $\obf \leq \deg_T(Y) \leq \deg_T(X)$, and by minimality $\deg_T(Y)$ is $\obf$ or $\deg_T(X)$: $Y$ is computable or $X \leq_T Y$.
+
+Conversely, suppose the condition holds. Then $\deg_T(X) > \obf$. If $\obf < \cbf < \deg_T(X)$, choose $Y \in \cbf$. Then $Y \leq_T X$, $Y$ is not computable since $\cbf \neq \obf$, and $X \not\leq_T Y$ since $\cbf \neq \deg_T(X)$; this contradicts the condition. So $\deg_T(X)$ is minimal.
+:::
+::::
+
+::::exercise{#ex-minimal-meet difficulty=1 objective="Show that a minimal degree has a greatest lower bound with every degree, in contrast with the failure of the lattice property." lessons="exact-pairs"}
+Let $\mathbf m$ be a minimal degree and $\bbf$ any degree. Show that $\mathbf m$ and $\bbf$ have a greatest lower bound, equal to $\mathbf m$ if $\mathbf m \leq \bbf$ and to $\obf$ otherwise. Deduce that two distinct minimal degrees form a minimal pair: their only common lower bound is $\obf$.
+
+:::solution
+Let $\cbf$ be a common lower bound of $\mathbf m$ and $\bbf$. Since $\cbf \leq \mathbf m$, $\cbf = \obf$ or $\cbf = \mathbf m$. If $\mathbf m \leq \bbf$, then $\mathbf m$ is a common lower bound and every common lower bound is below it, so it is the greatest. Otherwise $\cbf = \mathbf m$ is impossible, since it would give $\mathbf m \leq \bbf$; so $\obf$ is the only common lower bound, and it is the greatest. If $\mathbf m'$ is another minimal degree and $\mathbf m \leq \mathbf m'$, then $\obf < \mathbf m \leq \mathbf m'$ gives $\mathbf m = \mathbf m'$ by minimality of $\mathbf m'$. So two distinct minimal degrees are incomparable, and their greatest lower bound is $\obf$. By :ref{#cor-not-lattice}, the degrees that lack a greatest lower bound with some other degree are therefore not minimal.
+:::
+::::
+
+::::exercise{#ex-splitting-subtrees difficulty=1 objective="Show that splitting and the avoidance of splits are inherited by all subtrees."}
+Let $T$ be an f-tree and $S$ a subtree of $T$. Show that if $T$ is $e$-splitting, then any two incompatible nodes of $T$ form an $e$-split, and $S$ is $e$-splitting; and that if $T$ avoids $e$-splits, so does $S$.
+
+:::solution
+Let $T$ be $e$-splitting, and let $T(\alpha)$ and $T(\beta)$ be incompatible nodes. Then $\alpha$ and $\beta$ are incomparable, since $\alpha \preceq \beta$ would give $T(\alpha) \preceq T(\beta)$. Let $\gamma$ be their longest common prefix; then $\alpha \succeq \gamma i$ and $\beta \succeq \gamma (1 - i)$ for some $i$. The nodes $T(\gamma 0)$ and $T(\gamma 1)$ form an $e$-split: $\Phi^{T(\gamma 0)}_e(x)\converge \neq \Phi^{T(\gamma 1)}_e(x)\converge$ for some $x$. Since $T(\alpha) \succeq T(\gamma i)$ and $T(\beta) \succeq T(\gamma(1 - i))$, these computations are preserved, and $T(\alpha)$, $T(\beta)$ form an $e$-split at $x$. For every $\mu$, the nodes $S(\mu 0)$ and $S(\mu 1)$ are incompatible nodes of $T$, hence form an $e$-split: $S$ is $e$-splitting.
+
+If $T$ avoids $e$-splits, the nodes of $S$ are nodes of $T$, and no two of them form an $e$-split. In the proof of :ref{#thm-minimal-degree}, the passage to the full subtree above $S(0)$ therefore preserves the property obtained by :ref{#lem-splitting-dichotomy}, and so does any later step.
+:::
+::::
+
+::::exercise{#ex-minimal-dominated-tt difficulty=1 objective="Combine minimality with the truth-table characterization of computably dominated sets." lessons="immunity-growth/computably-dominated"}
+Let $X$ be a computably dominated set of minimal degree, as in :ref{#ex-minimal-dominated}. Show that every set $Y$ with $Y \equiv_T X$ satisfies $Y \equiv_{tt} X$, and more generally that $X \leq_{tt} Y$ and $Y \leq_{tt} X$ for every non-computable $Y \leq_T X$.
+
+:::solution
+Let $Y \leq_T X$ be non-computable. By minimality, $X \leq_T Y$. The set $X$ is computably dominated, so $Y \leq_T X$ gives $Y \leq_{tt} X$ by :ref{#thm-dominated-tt}. The set $Y$ is computably dominated too, since the property is closed downward under Turing reducibility; so $X \leq_T Y$ gives $X \leq_{tt} Y$. A set $Y \equiv_T X$ is non-computable and below $X$, so the first statement follows. Thus the Turing degree of $X$ is a single truth-table degree.
+:::
+::::
+
+::::exercise{#ex-minimal-cone difficulty=2 objective="Use minimality to reduce the avoidance of a cone to a non-computability requirement."}
+Let $Z$ be a non-computable set. Show that there is a set $X$ of minimal degree such that $Z \not\leq_T X$.
+
+:::solution
+*A variant of :ref{#lem-ftree-noncomputable}.* For every computable f-tree $T$ and every $e$, there is a computable subtree $S$ of $T$ such that $\Phi^Z_e \neq X$ for every $X \in [S]$. The proof is the same, with $\Phi^Z_e$ in place of $\Phi_e$: the nodes $T(0)$ and $T(1)$ differ at some position $i$; if $\Phi^Z_e(i)\converge = T(0)(i)$, take the full subtree above $T(1)$, and otherwise the full subtree above $T(0)$. The subtree is computable; only the choice between the two depends on $Z$.
+
+*Construction.* Proceed as in :ref{#thm-minimal-degree}, with a third kind of step: at step $3e + 1$, apply :ref{#lem-ftree-noncomputable}; at step $3e + 2$, apply :ref{#lem-splitting-dichotomy} and pass to the full subtree above the node indexed by $0$; at step $3e + 3$, apply the variant above. The roots strictly increase, and the union $X$ of the roots lies on every tree. As in the theorem, $X$ has minimal degree, and $X \neq \Phi^Z_e$ for every $e$, so $X \not\leq_T Z$.
+
+*Verification.* If $Z \leq_T X$, then, since $Z$ is not computable and $X$ has minimal degree, $X \leq_T Z$ (:ref{#ex-minimal-equivalent}), a contradiction. So $Z \not\leq_T X$. Without minimality, $X \not\leq_T Z$ would not exclude $Z \leq_T X$; the splitting requirements make the weaker requirement sufficient.
+:::
+::::
+:::::

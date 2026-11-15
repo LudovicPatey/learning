@@ -45,6 +45,14 @@ In item 2 of :ref{#lem-branch-ramsey}, why are $2u_n + 1$ copies needed?
   The size of $\mathbb I_n$ is a product of the numbers $2u_t + 1$.
 :::
 
+::::exercise{#ex-meta-index-sizes difficulty=1 objective="Compute the first index sets $\mathbb I_n$, their sizes and their branches."}
+Compute $u_1$, $u_2$ and the sizes of $\mathbb I_1$ and $\mathbb I_2$, and list the branches of $\mathbb I_1$.
+
+:::solution
+$u_1 = \binom{3}{2} \cdot 1 = 3$ and $u_2 = \binom{7}{2} \cdot 3 = 63$. $\mathbb I_1 = \{0, 1, 2\}$ has $3$ elements and $\mathbb I_2 = \mathbb I_1 \cdot \{0, \dots, 6\}$ has $21$. The branches of $\mathbb I_1$ are $\{0, 1\}$, $\{0, 2\}$ and $\{1, 2\}$.
+:::
+::::
+
 ## Meta-conditions
 
 :::definition{#def-meta-condition}
@@ -126,17 +134,7 @@ In item 2, why is a single slice $\kappa$ enough?
   Different slices of a tuple can be different.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Compute $u_1$, $u_2$ and the sizes of $\mathbb I_1$ and $\mathbb I_2$, and list the branches of $\mathbb I_1$.
-
-:::solution
-$u_1 = \binom{3}{2} \cdot 1 = 3$ and $u_2 = \binom{7}{2} \cdot 3 = 63$. $\mathbb I_1 = \{0, 1, 2\}$ has $3$ elements and $\mathbb I_2 = \mathbb I_1 \cdot \{0, \dots, 6\}$ has $21$. The branches of $\mathbb I_1$ are $\{0, 1\}$, $\{0, 2\}$ and $\{1, 2\}$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-meta-finite-A difficulty=2 objective="Determine the valid parts of meta-conditions when the instance is finite."}
 Show that if $A$ is finite, then for every meta-condition only parts of the form $(I, 1)$ are valid, and at least one of them is.
 
 :::solution
@@ -150,3 +148,51 @@ The pigeonhole forcing with meta-conditions, the index sets $\mathbb I_n$ with t
 
 - B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics (2021); arXiv:1905.08427.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, section *Pigeonhole principle*.
+
+:::::exercises
+::::exercise{#ex-meta-ancestors difficulty=1 objective="Prove the facts on ancestors and on the size of branches stated after the definition of the index sets $\mathbb I_n$."}
+1. Show by induction on $m - n$ that for $m \geq n$ and every branch $J$ of $\mathbb I_m$, the set $J \upharpoonright n$ is a branch of $\mathbb I_n$ and $J = (J \upharpoonright n) \cdot K$ for a set $K \subseteq K_{m, n}$.
+2. Show that every branch of $\mathbb I_n$ has $2^n$ elements, and that every element of $\mathbb I_n$ belongs to some branch.
+
+:::solution
+1. For $m = n$, $J \upharpoonright n = J$ and $K = \{\varepsilon\}$. For $m > n$, $J = I \cdot \{a, b\}$ for a branch $I$ of $\mathbb I_{m-1}$ and $a < b \leq 2u_{m-1}$. By induction, $I \upharpoonright n$ is a branch of $\mathbb I_n$ and $I = (I \upharpoonright n) \cdot K'$ with $K' \subseteq K_{m-1, n}$. The prefixes of length $n$ of the strings $\nu a$ and $\nu b$ are those of $\nu$, so $J \upharpoonright n = I \upharpoonright n$, and $J = (I \upharpoonright n) \cdot K' \cdot \{a, b\}$. The set $K = K' \cdot \{a, b\}$ consists of strings $\kappa$ of length $m - n$ with $\kappa(t) \leq 2u_{n+t}$ for $t < m - n - 1$ and $\kappa(m - n - 1) \leq 2u_{m-1}$; so $K \subseteq K_{m, n}$.
+2. By induction on $n$. The branch $\{\varepsilon\}$ has $1$ element. If $I$ has $2^n$ elements, $I \cdot \{a, b\}$ with $a \neq b$ has $2^{n+1}$, since $\nu a = \nu' b$ implies $\nu = \nu'$ and $a = b$. An element of $\mathbb I_{n+1}$ is $\nu a$ with $\nu \in \mathbb I_n$ and $a \leq 2u_n$; by induction $\nu$ belongs to a branch $I$ of $\mathbb I_n$. Since $u_n \geq 1$, there is $b \leq 2u_n$ with $b \neq a$, and $\nu a$ belongs to the branch $I \cdot \{\min(a, b), \max(a, b)\}$.
+:::
+::::
+
+::::exercise{#ex-branch-copies-optimal difficulty=2 objective="See that the number $2u_n + 1$ of copies in the Ramsey property of branches cannot be lowered at level $2$."}
+Let $\mathbb I'_2 = \mathbb I_1 \cdot \{0, \dots, 5\}$, with six copies instead of $2u_1 + 1 = 7$, and call branches of $\mathbb I'_2$ the sets $I \cdot \{a, b\}$ for a branch $I$ of $\mathbb I_1$ and $a < b \leq 5$. Show that some $j : \mathbb I'_2 \to 2$ makes no branch of $\mathbb I'_2$ monochromatic.
+
+:::solution
+There are $2u_1 = 6$ pairs $(B, i)$ of a branch $B$ of $\mathbb I_1 = \{0, 1, 2\}$ and a color $i < 2$; number them $(B_c, i_c)$ for $c \leq 5$. For each $c$, let $g_c : \mathbb I_1 \to 2$ take the value $i_c$ on the two elements of $B_c$ and $1 - i_c$ on the third element $z$. Under $g_c$, the only monochromatic branch is $B_c$, with color $i_c$: the two other branches contain $z$ and one element of $B_c$, which have different colors. Let $j(\nu c) = g_c(\nu)$. A branch $I \cdot \{a, b\}$ with $a < b$ is monochromatic with color $k$ if and only if $I$ is monochromatic with color $k$ both under $g_a$ and under $g_b$, that is, $(I, k) = (B_a, i_a) = (B_b, i_b)$. This forces $a = b$, which is excluded. In the proof of :ref{#lem-branch-ramsey}, the pigeonhole principle needs one more copy than the number of pairs $(I_a, i_a)$, and this example shows that it cannot be avoided.
+:::
+::::
+
+::::exercise{#ex-branch-ramsey-k difficulty=1 objective="Adapt the index sets and the Ramsey property of branches to colorings with $k$ colors."}
+Let $k \geq 2$. Define $u^k_0 = 1$, $u^k_{n+1} = \binom{k u^k_n + 1}{2} u^k_n$, $\mathbb I^k_0 = \{\varepsilon\}$ and $\mathbb I^k_{n+1} = \mathbb I^k_n \cdot \{0, \dots, k u^k_n\}$, with branches defined as for $\mathbb I_n$: $\{\varepsilon\}$, and the sets $I \cdot \{a, b\}$ for a branch $I$ of $\mathbb I^k_n$ and $a < b \leq k u^k_n$. Show that $\mathbb I^k_n$ has $u^k_n$ branches and that every $j : \mathbb I^k_n \to k$ makes some branch monochromatic.
+
+:::solution
+Both by induction on $n$, the case $n = 0$ being clear. A branch of $\mathbb I^k_{n+1}$ is given by a branch of $\mathbb I^k_n$ and a pair $a < b \leq k u^k_n$, distinct choices giving distinct sets; there are $\binom{k u^k_n + 1}{2} u^k_n = u^k_{n+1}$ of them. Let $j : \mathbb I^k_{n+1} \to k$. For each $a \leq k u^k_n$, the function $\nu \mapsto j(\nu a)$ has, by induction, a monochromatic branch $I_a$ with a color $i_a < k$. There are $k u^k_n + 1$ numbers $a$ and $k u^k_n$ possible pairs $(I_a, i_a)$, so $(I_a, i_a) = (I_b, i_b)$ for some $a < b$, and $I_a \cdot \{a, b\}$ is monochromatic with color $i_a$.
+:::
+::::
+
+::::exercise{#ex-meta-valid-example difficulty=2 objective="Compute the valid parts of a meta-condition of level $1$, and the coloring given by the cover lemma." lessons="merging-level-two"}
+Let $A$ be computable, infinite and coinfinite, and let $c$ be the meta-condition of level $1$ with empty stems, reservoirs $X_0 = X_1 = X_2 = \nat$, and class $\mathcal U^{\mathbb I_1}_S = \mathcal L_{(A, \overline A, A)}$, the triples $(Z_0, Z_1, Z_2)$ with $Z_0 \cap A$, $Z_1 \setminus A$ and $Z_2 \cap A$ infinite. Show that $c$ is a meta-condition and that $(\{0, 2\}, 0)$ is its only valid part. Which function $j$ does the proof of item 1 of :ref{#lem-meta-valid} produce?
+
+:::solution
+The class is $\mathcal U^{\mathbb I_1}_S$ for a computable set $S$ of indices of the classes $\{ \vec Z : |Z_\nu \cap W_\nu| \geq m \}$ with $\vec W = (A, \overline A, A)$; it is large by item 1 of :ref{#ex-product-large}, and contained in $\mathcal L_{\vec X}$ since its members have infinite coordinates. The stems are empty, hence subsets of $A_0$ and $A_1$. So $c$ is a meta-condition.
+
+A product $\mathcal B_0 \times \mathcal B_1 \times \mathcal B_2$ of upward closed classes of sets is large if and only if each $\mathcal B_\nu$ is large: if they are, choose $j(\nu)$ for each $\nu$; if $\mathcal B_\nu$ is not, some finite cover of $\nat$ has no part in $\mathcal B_\nu$, and then for every $j$ the coordinate $\nu$ of $\vec Y_j$ is a part of this cover. For a part $(I, i)$, the class $\mathcal U^{\mathbb I_1}_S \cap \mathcal L_{\vec X^{I, i}}$ is the product of the classes $\mathcal B_\nu \cap \mathcal L_{A_i}$ for $\nu \in I$ and $\mathcal B_\nu$ for $\nu \notin I$, where $(\mathcal B_0, \mathcal B_1, \mathcal B_2) = (\mathcal L_A, \mathcal L_{\overline A}, \mathcal L_A)$. Now $\mathcal L_A \cap \mathcal L_A$ and $\mathcal L_{\overline A} \cap \mathcal L_{\overline A}$ are large, while $\mathcal L_A \cap \mathcal L_{\overline A}$ is not, by :ref{#lem-no-two-sides}. For $(\{0, 2\}, 0)$ all factors are large. For $(\{0, 1\}, 0)$ and $(\{1, 2\}, 0)$, the factor of coordinate $1$ is $\mathcal L_{\overline A} \cap \mathcal L_A$; for $(\{0, 1\}, 1)$ and $(\{0, 2\}, 1)$, the factor of coordinate $0$ is $\mathcal L_A \cap \mathcal L_{\overline A}$; for $(\{1, 2\}, 1)$, the factor of coordinate $2$ is. So exactly one part is valid.
+
+In the proof of item 1, the cover lemma for the cover $A_0, A_1$ gives $j$ with $\mathcal U^{\mathbb I_1}_S \cap \mathcal L_{\langle A_{j(\nu)} \rangle}$ large. By the same product argument, this forces $j(0) = j(2) = 0$ and $j(1) = 1$. The monochromatic branch is $\{0, 2\}$, with color $0$.
+:::
+::::
+
+::::exercise{#ex-meta-validity-lost difficulty=1 objective="See on an example that a valid part can lose its validity in an extension."}
+Let $A$ be computable, infinite and coinfinite, and $c = (\langle \varepsilon, \varepsilon \rangle, \langle \nat \rangle, S_\infty)$ the meta-condition of level $0$. Show that both parts of $c$ are valid, that $d = (\langle \varepsilon, \varepsilon \rangle, \langle A \rangle, T)$ with $\mathcal U_T = \mathcal L_A$ is a meta-condition of level $0$ extending $c$, and that the part $(\{\varepsilon\}, 1)$ of $d$ is not valid.
+
+:::solution
+In $c$, the part $(\{\varepsilon\}, i)$ is valid if the class of infinite sets intersected with $\mathcal L_{A_i}$, that is, $\mathcal L_{A_i}$, is large; it is, since $A_i$ is infinite. For $d$: $A$ is computable, hence in $\mathcal M$; $\mathcal L_A = \mathcal U_T$ for a computable set $T$ of indices of the classes $\{ Z : |Z \cap A| \geq m \}$; it is large and equal to $\mathcal L_{\langle A \rangle}$; the stems are empty. It extends $c$: $A \subseteq \nat$, the empty stems are compatible, and every member of $\mathcal L_A$ is infinite, so its only slice is in $\mathcal U_{S_\infty}$. The part $(\{\varepsilon\}, 1)$ of $d$ is valid if $\mathcal L_A \cap \mathcal L_{A \cap \overline A}$ is large; but $A \cap \overline A = \emptyset$, so this class is empty. The part $(\{\varepsilon\}, 0)$ of $d$ remains valid, as $\mathcal L_A \cap \mathcal L_{A \cap A} = \mathcal L_A$. This is why the path of valid parts can only be chosen at the end of the construction.
+:::
+::::
+:::::

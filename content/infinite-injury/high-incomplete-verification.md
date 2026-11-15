@@ -1,7 +1,7 @@
 ---
 title: Verification of the high incomplete construction
 summary: The diagonalization requirements of the high incomplete construction; a coding node with infinite outcome never enumerates a number below the restraint of a node acting below that outcome; end of the proof of Sacks' theorem; further results on the c.e. degrees.
-duration: 40
+duration: 35
 prerequisites: [high-incomplete, minimal-pair-verification]
 ---
 
@@ -69,6 +69,14 @@ In :ref{#lem-hi-diagonal}, why is the true path used, rather than an arbitrary $
 :::
 
 
+::::exercise{#ex-hi-true-path-jump difficulty=1 objective="Show that the true path of the high incomplete construction has the degree of $\emptyset''$."}
+Show that the outcome of the $\mathcal G_e$-node on the true path is $\infty$ if and only if $W_e$ is infinite, and deduce that the true path is Turing equivalent to $\emptyset''$.
+
+:::solution
+Let $\alpha = P \uh 2e$. After its last initialization, $\alpha$ keeps its record. If $W_e$ is infinite, there are infinitely many $\alpha$-expansionary stages (proof of :ref{#lem-hi-coding}), and $P(2e) = \infty$. If $W_e$ is finite, the record eventually equals $|W_e|$ and $\alpha$ is no longer expansionary, so $\alpha^\frown \infty$ is visited finitely often and $P(2e) = \mathrm f$. Hence $\mathrm{Inf}(e) = 1$ if and only if $P(2e) = \infty$, and $\emptyset'' \equiv_T \mathrm{Inf} \leq_T P$. As for the minimal pair construction (:ref{#ex-true-path-double-jump}), $P \leq_T \emptyset''$.
+:::
+::::
+
 ## Further results
 
 The c.e. degrees have been studied intensively with these methods and their elaborations. We state some of the main results without proof; references are given at the end of the lesson.
@@ -78,24 +86,6 @@ The c.e. degrees have been studied intensively with these methods and their elab
 - **No diamond with top $\mathbf 0'$** (Lachlan, 1966). There are no c.e. degrees $\abf$ and $\bbf$ forming a minimal pair with $\abf \vee \bbf = \mathbf 0'$.
 - **Cappable degrees** (Ambos-Spies, Jockusch, Shore, Soare, 1984). A non-zero c.e. degree is **cappable** if it belongs to a minimal pair of c.e. degrees. A co-infinite c.e. set $A$ is **promptly simple** if there are a c.e. approximation $(A_s)$ and a computable function $p$ such that, for every $e$ with $W_e$ infinite, some $x$ enters $W_e$ at a stage $s$ and belongs to $A_{p(s)}$. A non-zero c.e. degree is non-cappable if and only if it contains a promptly simple set. The non-cappable degrees form a filter of the c.e. degrees, and the cappable degrees, together with $\obf$, form an ideal.
 - **Minimal pairs of high degrees.** There are c.e. degrees that form a minimal pair and are both high. The proof combines the two constructions of this course on one tree; Downey and Hirschfeldt propose it as an exercise at the end of their §2.14.3.
-
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the outcome of the $\mathcal G_e$-node on the true path is $\infty$ if and only if $W_e$ is infinite, and deduce that the true path is Turing equivalent to $\emptyset''$.
-
-:::solution
-Let $\alpha = P \uh 2e$. After its last initialization, $\alpha$ keeps its record. If $W_e$ is infinite, there are infinitely many $\alpha$-expansionary stages (proof of :ref{#lem-hi-coding}), and $P(2e) = \infty$. If $W_e$ is finite, the record eventually equals $|W_e|$ and $\alpha$ is no longer expansionary, so $\alpha^\frown \infty$ is visited finitely often and $P(2e) = \mathrm f$. Hence $\mathrm{Inf}(e) = 1$ if and only if $P(2e) = \infty$, and $\emptyset'' \equiv_T \mathrm{Inf} \leq_T P$. As for the minimal pair construction (:ref{#ex-true-path-double-jump}), $P \leq_T \emptyset''$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Let $\abf$ be a cappable c.e. degree, and $\cbf$ a c.e. degree with $\obf < \cbf \leq \abf$. Show that $\cbf$ is cappable. Deduce that every c.e. degree above a non-cappable c.e. degree is non-cappable.
-
-:::solution
-Let $\bbf$ be a c.e. degree such that $\abf$ and $\bbf$ form a minimal pair. If $\mathbf d \leq \cbf$ and $\mathbf d \leq \bbf$, then $\mathbf d \leq \abf$ and $\mathbf d \leq \bbf$, so $\mathbf d = \obf$. Since $\cbf > \obf$ and $\bbf > \obf$, the degrees $\cbf$ and $\bbf$ form a minimal pair, and $\cbf$ is cappable. If $\abf$ is non-cappable and $\abf \leq \abf'$ with $\abf'$ c.e., then $\abf' \geq \abf > \obf$, and if $\abf'$ were cappable, $\abf$ would be cappable by the first part.
-:::
-::::
 
 ## Notes and references
 
@@ -115,3 +105,74 @@ Jump inversion is proved in Soare's book (Theorem VIII.3.1) and sketched in Down
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.14.3, §2.15 and §2.16.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, §1.7 and §6.3.
 - R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapter VIII.
+
+:::::exercises
+::::exercise{#ex-cappable-downward difficulty=1 objective="Derive from the definitions that the cappable degrees are closed downward and the non-cappable degrees upward."}
+Let $\abf$ be a cappable c.e. degree, and $\cbf$ a c.e. degree with $\obf < \cbf \leq \abf$. Show that $\cbf$ is cappable. Deduce that every c.e. degree above a non-cappable c.e. degree is non-cappable.
+
+:::solution
+Let $\bbf$ be a c.e. degree such that $\abf$ and $\bbf$ form a minimal pair. If $\mathbf d \leq \cbf$ and $\mathbf d \leq \bbf$, then $\mathbf d \leq \abf$ and $\mathbf d \leq \bbf$, so $\mathbf d = \obf$. Since $\cbf > \obf$ and $\bbf > \obf$, the degrees $\cbf$ and $\bbf$ form a minimal pair, and $\cbf$ is cappable. If $\abf$ is non-cappable and $\mathbf d \geq \abf$ is c.e., then $\mathbf d \geq \abf > \obf$, and if $\mathbf d$ were cappable, $\abf$ would be cappable by the first part, applied to $\mathbf d$ and $\abf$.
+:::
+::::
+
+::::exercise{#ex-hi-column-numbers difficulty=1 objective="Compute the numbers of a column of $H$ in the situation of case 4 of the preservation lemma."}
+Recall that $\langle x, y \rangle = (x + y)(x + y + 1)/2 + y$. Let $\alpha$ be a $\mathcal G_1$-node and $\beta$ a $\mathcal P$-node with $\alpha^\frown \infty \preceq \beta$, and suppose that $s_0 = 10$ is $\alpha$-expansionary, that $R_\alpha = 3$ when $\alpha$ is visited at stage $s_0$, that no number of the column $1$ was in $H$ before, and that $\beta$ acts at stage $s_0$ and is never initialized afterwards. Which numbers less than $10$ belong to the column $1$, and which of them are in $H$ at the end of stage $10$? Show that every number that $\alpha$ enumerates after stage $10$ is at least $76$.
+
+:::solution
+The numbers $\langle 1, y \rangle = (y + 1)(y + 2)/2 + y$ are $1, 4, 8, 13, 19, \dots$ for $y = 0, 1, 2, 3, 4, \dots$, and they increase with $y$. Those less than $10$ are $1$, $4$ and $8$. At stage $10$, $\alpha$ enumerates every $\langle 1, y \rangle$ with $y < 10$ and $\langle 1, y \rangle \geq 3$, that is, all of them except $\langle 1, 0 \rangle = 1$. So $4$ and $8$ are in $H$, and $1$ is not.
+
+Let $t > 10$ be an $\alpha$-expansionary stage. The numbers $\langle 1, y \rangle$ with $1 \leq y < 10$ are already in $H$. By the proof of :ref{#lem-hi-preservation} (case 4), $\alpha$ does not enumerate $\langle 1, 0 \rangle$ at stage $t$: this would require the restraint that kept it out to be released, which would initialize $\beta$. So $\alpha$ only enumerates numbers $\langle 1, y \rangle$ with $y \geq 10$, and $\langle 1, y \rangle \geq \langle 1, 10 \rangle = 11 \cdot 12 / 2 + 10 = 76$.
+:::
+::::
+
+::::exercise{#ex-hi-same-stage difficulty=1 objective="Check the step of the preservation lemma at the stage at which the diagonalization node acts."}
+Let a $\mathcal P$-node $\beta$ act at stage $s_0$. Show that every node visited after $\beta$ at stage $s_0$ extends $\beta^\frown \mathrm f$, and that a $\mathcal G_e$-node visited after $\beta$ at stage $s_0$ enumerates no number less than $s_0$ at that stage. Which case of the proof of :ref{#lem-hi-preservation} does this settle when $t = s_0$, and which rule of the construction does it use?
+
+:::solution
+A $\mathcal P$-node has outcome $\mathrm f$ at every visit, so the node visited after $\beta$ is $\beta^\frown \mathrm f$, and every later node visited at stage $s_0$ extends it. Let $\alpha$ be such a $\mathcal G_e$-node. Then $\beta \prec \alpha$, so $\beta$ has higher priority than $\alpha$, and when $\alpha$ is visited, $r_\beta = s_0$ has already been set. Hence $R_\alpha \geq s_0$, and $\alpha$ only enumerates numbers $\langle e, y \rangle \geq R_\alpha \geq s_0$.
+
+This is case 1 of the proof of :ref{#lem-hi-preservation} (a node of lower priority than $\beta$) at the stage $t = s_0$. It uses the rule that the bound $R_\alpha$ is computed from the current restraints during the stage, so that the node visited after a $\mathcal P$-node that acts already sees its restraint. The nodes of higher priority than $\beta$ visited at stage $s_0$ are its prefixes, visited before $\beta$, whose enumerations at stage $s_0$ precede the action of $\beta$ and are part of the approximation $\tilde H$ used by $\beta$.
+:::
+::::
+
+::::exercise{#ex-prompt-simple-simple difficulty=2 objective="Relate prompt simplicity to simplicity, and see that the computability of the delay function is the point of the definition."}
+Use the definition of promptly simple sets stated in the lesson, and say that $x$ enters $W_e$ at stage $s$ if $x \in W_{e,s} \setminus W_{e,s-1}$, where each $W_{e,s}$ is finite.
+
+1. Show that every promptly simple set is simple.
+2. Let $A$ be a simple set with a c.e. approximation $(A_s)$. Show that there is a function $p \leq_T \emptyset'$ such that, for every $e$ with $W_e$ infinite, some $x$ enters $W_e$ at a stage $s$ and belongs to $A_{p(s)}$.
+
+:::solution
+1. Let $A$ be promptly simple, via $(A_s)$ and $p$. It is c.e. and co-infinite by definition. If $W_e$ is infinite, some $x$ enters $W_e$ at a stage $s$ and belongs to $A_{p(s)} \subseteq A$, so $W_e \cap A \neq \emptyset$. Hence $A$ is simple.
+
+2. Let $p(s)$ be the least $t$ such that $A_t \cap F_s = A \cap F_s$, where $F_s = \bigcup_{e \leq s} W_{e,s}$ is a finite set computable from $s$. Since $(A_s)$ is increasing with union $A$, such a $t$ exists, and $\emptyset'$ finds it: $A$ is computable in $\emptyset'$, so $\emptyset'$ computes $A \cap F_s$, and then searches for $t$. Let $W_e$ be infinite. For every finite set $F$, $W_e \setminus F$ is an infinite c.e. set, so it meets $A$; hence $W_e \cap A$ is infinite. Only finitely many elements of $W_e$ enter it at a stage $s < e$, since $W_{e,e-1}$ is finite, so some $x \in W_e \cap A$ enters $W_e$ at a stage $s \geq e$. Then $x \in W_{e,s} \subseteq F_s$ and $x \in A$, so $x \in A_{p(s)}$.
+
+So every simple set satisfies the condition of prompt simplicity with a delay function computable in $\emptyset'$; what the definition adds is that the delay is computable. This is a real restriction: the sets $A$ and $B$ of :ref{#ex-mp-simple} are simple and form a minimal pair, so their degrees are cappable, while the degree of a promptly simple set is non-cappable (:ref{#ex-prompt-noncappable}).
+:::
+::::
+
+::::exercise{#ex-prompt-noncappable difficulty=3 objective="Prove that a promptly simple set is not half of a minimal pair, by permitting and the fixed point theorem."}
+Let $E$ be promptly simple, via the approximation $(E_s)$ and the computable function $p$, and let $C$ be a non-computable c.e. set with an approximation $(C_s)$. Build a simple set $A$ with $A \leq_T C$ and $A \leq_T E$. Deduce that the degree of $E$ is non-cappable.
+
+:::solution
+*Idea.* $A$ meets the simplicity requirements $\mathcal S_i$: if $W_i$ is infinite, then $W_i \cap A \neq \emptyset$. A number $x$ may enter $A$ at stage $s$ only if $C$ changes below $x$ at stage $s$ (permitting by $C$), and only if $E$ changes below $x$ at stage $s$ or later (delayed permitting by $E$). To obtain the change of $E$, the requirement $\mathcal S_i$ enumerates a number $y < x$ into an auxiliary c.e. set $G_i$; when $y$ appears in the enumeration of $G_i$, prompt simplicity forces some such $y$ to enter $E$ within the delay $p$. For this the construction must know indices of the sets $G_i$ in advance, which the fixed point theorem provides.
+
+*Indices.* For a number $r$, let $g_r(i)$ be an index, computable from $r$ and $i$, with $W_{g_r(i)} = \{ y : \langle i, y \rangle \in W_r \}$. The construction below, with $g = g_r$, enumerates sets $G^r_i$ uniformly in $r$ and $i$ (a stage may never end; the sets are then finite). There is a computable $f$ with $W_{f(r)} = \{ \langle i, y \rangle : y \in G^r_i \}$. By :ref{#thm-fixed-point}, there is $r$ with $\Phi_{f(r)} = \Phi_r$, so $W_{f(r)} = W_r$ and $W_{g_r(i)} = G^r_i$ for every $i$. We fix this $r$, write $g = g_r$ and $G_i = G^r_i$.
+
+*Construction.* $A_0 = \emptyset$ and $G_{i,0} = \emptyset$. At stage $s \geq 1$, call $i < s$ *eligible* if $\mathcal S_i$ is not declared satisfied, $W_{g(i),s-1} = G_{i,s-1}$, and there are $x$ and $y$ with $x \geq 2i$, $x \in W_{i,s}$, $C_s \uh x \neq C_{s-1} \uh x$, $y < x$ and $y \notin E_{s-1} \cup G_{i,s-1}$. If some $i$ is eligible, take the least one, and the least such $x$ and then $y$; $\mathcal S_i$ *attempts*: put $y$ into $G_i$, and search for the least $t$ with $y \in W_{g(i),t}$. If $y \in E_{p(t)}$, put $x$ into $A$ and declare $\mathcal S_i$ satisfied. Then go to the next stage.
+
+The search ends, since $y \in G_i = W_{g(i)}$. Since $W_{g(i),s-1} = G_{i,s-1}$ and $y \notin G_{i,s-1}$, we have $y \notin W_{g(i),s-1}$, so $y$ enters $W_{g(i)}$ at the stage $t \geq s$ found by the search.
+
+*Reductions.* If $x$ enters $A$ at stage $s$, then $C_s \uh x \neq C_{s-1} \uh x$. Given $x$, the oracle $C$ finds a stage $s_x$ with $C_{s_x} \uh x = C \uh x$; then $C$ does not change below $x$ after $s_x$, so $x \in A$ if and only if $x \in A_{s_x}$. Hence $A \leq_T C$. If $x$ enters $A$ at stage $s$, the number $y < x$ attached to it satisfies $y \notin E_{s-1}$ and $y \in E_{p(t)} \subseteq E$, so $E_{s-1} \uh x \neq E \uh x$. Given $x$, the oracle $E$ finds a stage $u_x$ with $E_{u_x} \uh x = E \uh x$; $x$ cannot enter $A$ at a stage $s > u_x$, so $x \in A$ if and only if $x \in A_{u_x}$. Hence $A \leq_T E$.
+
+*Each requirement attempts finitely often and is met.* Suppose, by induction, that every $\mathcal S_j$ with $j < i$ attempts only finitely often, and let $s_0$ be a stage after which none of them attempts; after $s_0$, none of them is eligible, since an eligible requirement of least index attempts.
+
+Suppose first that $\mathcal S_i$ attempts infinitely often. Then $G_i = W_{g(i)}$ is infinite, so by prompt simplicity some $y$ enters $W_{g(i)}$ at a stage $t$ with $y \in E_{p(t)}$. This $y$ was put into $G_i$ by an attempt at a stage $s$, whose search found this $t$; the attempt then put its $x$ into $A$, and $\mathcal S_i$ was declared satisfied and never attempted again. This is a contradiction, so $\mathcal S_i$ attempts finitely often, and $G_i$ is finite.
+
+Suppose now that $W_i$ is infinite and that $\mathcal S_i$ is never satisfied. Since $G_i$ is finite and $E$ is co-infinite, there is a bound $b$ such that every $x \geq b$ has some $y < x$ with $y \notin E \cup G_i$; and there is a stage $s_1 \geq s_0$ after which $\mathcal S_i$ does not attempt, $G_{i,s} = G_i$, and $W_{g(i),s} = G_i$. For $x \in W_i$ with $x \geq \max(2i, b)$, let $s_x$ be the stage at which $x$ enters $W_i$, and suppose $s_x > s_1$. If $C_s \uh x \neq C_{s-1} \uh x$ for some $s \geq s_x$, then $\mathcal S_i$ is eligible at stage $s$, with this $x$ and a $y < x$ outside $E \supseteq E_{s-1}$ and outside $G_i$, and it attempts: impossible. So $C \uh x = C_{s_x} \uh x$ for infinitely many $x$, all those of $W_i$ larger than $\max(2i, b)$ entering after $s_1$, and these $x$ and $s_x$ are found by enumerating $W_i$. This makes $C$ computable: a contradiction. Hence $\mathcal S_i$ is met.
+
+*Conclusion.* Each $\mathcal S_i$ puts at most one number into $A$, and it is at least $2i$, so $A$ has at most $n$ elements below $2n$, and $\overline A$ is infinite. With the requirements $\mathcal S_i$, $A$ is simple, hence not computable. So $A$ is a non-computable set below both $C$ and $E$. Now $E$ is simple by :ref{#ex-prompt-simple-simple}, so its degree is not $\obf$; and for every non-zero c.e. degree $\bbf$, applying the construction to a set $C \in \bbf$ gives a non-zero degree below both, so the degree of $E$ and $\bbf$ never form a minimal pair. The degree of $E$ is non-cappable.
+
+Adapted from Nies 2009, Theorem 1.7.14, where the set $A$ is moreover obtained effectively from $C$ and the reductions are weak truth-table reductions.
+:::
+::::
+:::::

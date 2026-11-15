@@ -128,19 +128,11 @@ So the computational strength of König's lemma for computable finitely branchin
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-konig-double-jump difficulty=1 objective="Apply the characterization of König's lemma to bound the paths of computable finitely branching trees by $\emptyset''$."}
 Show that every infinite computable finitely branching tree has a path computable in $\emptyset''$.
 
 :::solution
 $\emptyset''$ is PA relative to $\emptyset'$: the function $f(e) = 1$ if $\Phi^{\emptyset'}_e(e)\converge = 0$, and $f(e) = 0$ otherwise, is computable in $\emptyset''$ and is $\mathrm{DNC}_2$ relative to $\emptyset'$. Apply :ref{#thm-konig-strength}.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that if $X$ is PA relative to $\emptyset'$, then $X$ computes $\emptyset'$.
-
-:::solution
-By :ref{#ex-pa-relative}, applied with $\emptyset'$ in place of $X$, a set that is PA relative to $\emptyset'$ computes $\emptyset'$. Alternatively, $X$ computes a path through the tree of :ref{#thm-finitely-branching-jump}, by :ref{#thm-konig-strength}, and this path computes $\emptyset'$.
 :::
 ::::
 
@@ -153,3 +145,57 @@ König's lemma is due to Kőnig (1927). The coding of computably bounded trees i
 - C. G. Jockusch, A. Lewis and J. B. Remmel, *Π⁰₁-classes and Rado's selection principle*, Journal of Symbolic Logic 56 (1991), 684–693.
 - D. R. Hirschfeldt, *Slicing the Truth*, Lecture Notes Series of the Institute for Mathematical Sciences, National University of Singapore, 28, World Scientific, 2015, Section 3.2.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section III.7 and Chapter IV.
+
+:::::exercises
+::::exercise{#ex-pa-jump-computes-jump difficulty=2 objective="See in two ways that a set PA relative to $\emptyset'$ computes $\emptyset'$."}
+Show that if $X$ is PA relative to $\emptyset'$, then $X$ computes $\emptyset'$.
+
+:::solution
+By :ref{#ex-pa-relative}, applied with $\emptyset'$ in place of $X$, a set that is PA relative to $\emptyset'$ computes $\emptyset'$. Alternatively, $X$ computes a path through the tree of :ref{#thm-finitely-branching-jump}, by :ref{#thm-konig-strength}, and this path computes $\emptyset'$.
+:::
+::::
+
+::::exercise{#ex-konig-double-jump-direct difficulty=1 objective="Compute a path through a finitely branching tree from $\emptyset''$ by deciding extendibility, without PA degrees."}
+Let $T$ be an infinite computable finitely branching tree. Show that the set of extendible nodes of $T$ (the nodes through which some path passes) is $\Pi^0_2$, and deduce directly that $T$ has a path computable in $\emptyset''$.
+
+:::solution
+A node $\sigma \in T$ is extendible if and only if for every $n \geq |\sigma|$, some node of $T$ of length $n$ extends $\sigma$. The condition is necessary, by considering the prefixes of a path through $\sigma$. Conversely, if it holds, the tree $T_\sigma = \{ \tau \in T : \tau \preceq \sigma \text{ or } \sigma \preceq \tau \}$ is infinite and finitely branching, so it has a path $P$ by :ref{#lem-konig}; the prefixes of $P$ of length at least $|\sigma|$ are in $T_\sigma$, so they extend $\sigma$, and $P$ goes through $\sigma$. For fixed $\sigma$ and $n$, "some node of length $n$ extends $\sigma$" is $\Sigma^0_1$, since $T$ is computable but the values of the nodes are not bounded; so extendibility is $\Pi^0_2$, and $\emptyset''$ decides it, by Post's theorem. Let $P(n)$ be the least $v$ such that $(P \uh n)\, v$ is extendible. If $P \uh n$ is extendible, a path through it goes through one of its successors, so $v$ exists, and it is found by a search with $\emptyset''$. By induction, every $P \uh n$ is extendible, hence in $T$, and $P \leq_T \emptyset''$ is a path.
+:::
+::::
+
+::::exercise{#ex-bound-computes-jump difficulty=1 objective="See that every bound on the tree of the lesson whose path computes $\emptyset'$ computes $\emptyset'$ itself."}
+Let $T$ be the tree of :ref{#thm-finitely-branching-jump}. Show that every function $g$ such that $\sigma(n) < g(n)$ for all $\sigma \in T$ and $n < |\sigma|$ computes $\emptyset'$. Deduce that $T$ is not computably bounded.
+
+:::solution
+Let $P$ be the path of $T$. For $n \in \emptyset'$, the node $P \uh (n+1)$ has $P(n) = \langle 1, s_n \rangle$, so $g(n) > \langle 1, s_n \rangle \geq s_n$, since the Cantor pairing satisfies $\langle x, y \rangle \geq y$. Hence $n \in \emptyset'$ if and only if $\Phi_n(n)[g(n)]\converge$: if $n \in \emptyset'$, the computation converges at stage $s_n < g(n)$, hence at stage $g(n)$; the converse is clear. So $\emptyset' \leq_T g$, and no computable $g$ bounds $T$. Such a function exists computably in $\emptyset'$, for instance $g(n) = \langle 1, s_n \rangle + 1$ for $n \in \emptyset'$ and $g(n) = 1$ otherwise, using $\langle 0, 0 \rangle = 0$.
+:::
+::::
+
+::::exercise{#ex-ce-trees difficulty=2 objective="Show that the classes $\Pi^0_1$ relative to $\emptyset'$ are the classes of paths through c.e. trees, using the approximation of the proof of the lesson."}
+Show that a class $\mathcal P \subseteq \cs$ is $\Pi^0_1$ relative to $\emptyset'$, that is, of the form $[U]$ with $U$ a binary tree computable in $\emptyset'$, if and only if $\mathcal P = [V]$ for some c.e. binary tree $V$. Deduce that $X$ is PA relative to $\emptyset'$ if and only if $X$ computes a path through every infinite c.e. binary tree.
+
+:::solution
+A c.e. tree is computable in $\emptyset'$, so its class of paths is $\Pi^0_1$ relative to $\emptyset'$. Conversely, let $U$ be a binary tree computable in $\emptyset'$, and let $(U_s)$ and $V = \bigcup_s U_s$ be as in the proof of :ref{#thm-konig-strength}: each $U_s$ is a tree contained in $2^{\leq s}$, and $(U_s)$ is a computable approximation of $U$. Then $V$ is c.e., as a union of uniformly computable sets, and a tree, as a union of trees; and $[V] = [U]$ was shown in that proof.
+
+If $X$ is PA relative to $\emptyset'$ and $V$ is an infinite c.e. tree, then $[V]$ is non-empty by :ref{#lem-weak-konig}, and $\Pi^0_1$ relative to $\emptyset'$, so $X$ computes a member of it, by :ref{#thm-pa-characterization} relativized to $\emptyset'$. Conversely, suppose that $X$ computes a path through every infinite c.e. binary tree. Every non-empty $\Pi^0_1(\emptyset')$ class is $[V]$ for a c.e. tree $V$, which is infinite since it has a path; so $X$ computes a member of every non-empty $\Pi^0_1(\emptyset')$ class, in particular of the class of $\{0, 1\}$-valued functions DNC relative to $\emptyset'$ (:ref{#thm-dnc2-no-computable} relativized), and $X$ is PA relative to $\emptyset'$. The tree of :ref{#ex-prefix-closure-jump} is a c.e. tree whose only path is $\emptyset'$.
+:::
+::::
+
+::::exercise{#ex-konig-cone-avoidance difficulty=2 objective="Relativize the coding of finitely branching trees and the cone avoidance basis theorem to $\emptyset'$."}
+Let $T$ be an infinite computable finitely branching tree, and $C$ a set with $C \not\leq_T \emptyset'$. Show that $T$ has a path $P$ such that $C \not\leq_T \emptyset' \oplus P$. Deduce that $T$ has a path that does not compute $\emptyset''$.
+
+:::solution
+Relativized to a set $A$, :ref{#lem-uniform-cone} says that if $\Phi^{A \oplus Y}_e = C$ for every member $Y$ of a non-empty class $[U]$, with $U$ an $A$-computable tree, then $C \leq_T A$: the search of its proof is computable in $A$. The proof of :ref{#thm-cone-avoidance-basis} then gives, for $C \not\leq_T A$, a member $Y$ of every non-empty $\Pi^0_1(A)$ class with $C \not\leq_T A \oplus Y$.
+
+Let $S$ be the c.e. binary tree of :ref{#prop-finitely-branching-coding}. It is computable in $\emptyset'$, and $[S] = \{ c(P) : P \in [T] \}$ is non-empty by :ref{#lem-konig}. Apply the relativized theorem with $A = \emptyset'$: there is $Y = c(P) \in [S]$ with $C \not\leq_T \emptyset' \oplus Y$. Since $P \equiv_T c(P)$, $\emptyset' \oplus P \equiv_T \emptyset' \oplus Y$, and $C \not\leq_T \emptyset' \oplus P$. With $C = \emptyset''$, which is not computable in $\emptyset'$, the path $P$ does not compute $\emptyset''$, since otherwise $\emptyset' \oplus P$ would. Compare :ref{#thm-finitely-branching-jump}: a computable finitely branching tree can force all its paths to compute $\emptyset'$, but no set $C \not\leq_T \emptyset'$ is computable from $\emptyset' \oplus P$ for every path $P$. Adapted from Hirschfeldt, *Slicing the Truth*, Exercise 3.26.
+:::
+::::
+
+::::exercise{#ex-konig-finitely-many-paths difficulty=2 objective="Relativize the computability of isolated members to $\emptyset'$ through the coding of finitely branching trees."}
+Let $T$ be a computable finitely branching tree with finitely many paths. Show that each path of $T$ is computable in $\emptyset'$, and that $\emptyset'$ cannot be replaced by $\emptyset$.
+
+:::solution
+Let $S$ be the c.e. binary tree of :ref{#prop-finitely-branching-coding}, computable in $\emptyset'$. Its class of paths $\{ c(P) : P \in [T] \}$ is finite, since $c$ is injective. Relativized to $\emptyset'$, :ref{#prop-isolated-computable} and :ref{#cor-countable-computable} say that every member of a finite $\Pi^0_1(\emptyset')$ class is computable in $\emptyset'$: the proofs only use that non-extendibility in an $A$-computable tree is $\Sigma^0_1$ relative to $A$. So each $c(P)$, and hence each $P$, is computable in $\emptyset'$. The tree of :ref{#thm-finitely-branching-jump} has a single path, which computes $\emptyset'$, so it is not computable. Hirschfeldt, *Slicing the Truth*, Section 3.2, states this after Exercise 3.28.
+:::
+::::
+:::::

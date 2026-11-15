@@ -71,16 +71,13 @@ The proof uses the density $\frac{9}{10}$ and the threshold $\frac15$. Which pro
   $U$ is $\Sigma^0_1(Z)$, not computable; rationality of the threshold only makes it $\Sigma^0_1(Z)$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-wwkl-cone-sacks difficulty=1 objective="Derive cone avoidance in classes of positive measure from Sacks's theorem, and see why the PA sets require another argument."}
 Let $C \not\leq_T Z$. Show, without the forcing of :ref{#thm-wwkl-strong-pa}, that every closed class of positive measure has a member $G$ with $C \not\leq_T Z \oplus G$. Why does the same argument not prove :ref{#thm-wwkl-strong-pa} directly from Sacks's theorem?
 
 :::solution
 By Sacks's theorem (:ref{#thm-sacks}) relativized to $Z$, the class of the sets $G$ with $C \leq_T Z \oplus G$ is null; a class of positive measure is not contained in a null class. For PA degrees, the corresponding statement, that the class of the $G$ with $Z \oplus G$ PA relative to $D$ is null, is :ref{#cor-pa-null}, which was deduced from the theorem; Sacks's theorem is about the upper cone of a single set, and the PA sets do not form the upper cone of a single set, since no set is computable in all PA sets except the computable ones (:ref{#cor-pa-basis}).
 :::
 ::::
-
 
 ## Notes and references
 
@@ -89,3 +86,51 @@ That weak weak König's lemma admits strong PA avoidance, by forcing with closed
 - A. Kučera, *Measure, Π⁰₁-classes and complete extensions of PA*, in: Recursion Theory Week, Lecture Notes in Mathematics 1141, Springer, 1985, 245–259.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 8.8.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, section *Randomness*.
+
+:::::exercises
+::::exercise[Cone avoidance with measure questions]{#ex-measure-question-cone difficulty=2 objective="Run the measure argument for cone avoidance, where no merging is needed."}
+Let $C \not\leq_T Z$ and let $\mathcal Q$ be a closed class with $\lambda(\mathcal Q) > 0$. Adapt the proof of :ref{#thm-wwkl-strong-pa} to show, without Sacks's theorem, that $\mathcal Q$ has a member $G$ with $C \not\leq_T Z \oplus G$. Which case of the proof becomes simpler?
+
+:::solution
+Build closed classes $\mathcal Q = \mathcal Q_0 \supseteq \mathcal Q_1 \supseteq \cdots$ of positive measure such that $\Phi^{Z \oplus G}_e \neq C$ for every $G \in \mathcal Q_{e+1}$; a member of the intersection, which is non-empty by compactness, is as required. Given $\mathcal Q_e$, choose $\sigma$ with $\lambda(\mathcal Q_e \mid \sigma) > \frac{9}{10}$, let $\mathcal U_{x,v}$ be the class of the $Y \in [\sigma]$ with $\Phi^{Z \oplus Y}_e(x)\converge = v$, now for all $v \in \nat$, and let $U = \{ (x, v) : \lambda(\mathcal U_{x,v} \mid \sigma) > \frac15 \}$, a $\Sigma^0_1(Z)$ set.
+
+1. If $(x, v) \in U$ for some $v \neq C(x)$, a clopen class $\mathcal C \subseteq \mathcal U_{x,v}$ with $\lambda(\mathcal C \mid \sigma) > \frac15$ gives $\mathcal Q_{e+1} = \mathcal Q_e \cap \mathcal C$, of relative measure greater than $\frac{1}{10}$ in $[\sigma]$, on which $\Phi^{Z \oplus G}_e(x) = v \neq C(x)$.
+2. If $(x, C(x)) \notin U$ for some $x$, let $\mathcal Q_{e+1} = (\mathcal Q_e \cap [\sigma]) \setminus \mathcal U_{x, C(x)}$, of relative measure greater than $\frac{9}{10} - \frac15 > 0$, on which $\Phi^{Z \oplus G}_e(x) \neq C(x)$.
+3. Otherwise $C(x)$ is, for every $x$, the unique $v$ with $(x, v) \in U$, and $C \leq_T Z$, a contradiction.
+
+Case 2 removes a single class: there is one right value to miss, and no two classes have to be removed at once. Any threshold $t$ with $\frac{1}{10} < t < \frac{9}{10}$ would do.
+:::
+::::
+
+::::exercise[Weak weak König's lemma does not imply weak König's lemma]{#ex-wwkl-not-wkl difficulty=1 objective="Apply the model construction of PA avoidance to separate $\mathsf{WWKL}_0$ from $\mathsf{WKL}_0$."}
+Show that there is an ω-model of $\mathsf{RCA}_0 + \mathsf{WWKL}_0$ that is not a model of $\mathsf{WKL}_0$, and that $\mathsf{WKL} \not\leq_\omega \mathsf{WWKL}$.
+
+:::solution
+By :ref{#thm-wwkl-strong-pa}, $\mathsf{WWKL}$ admits PA avoidance. By :ref{#prop-pa-avoidance-model} (2), some Turing ideal satisfying $\mathsf{WWKL}$ contains no PA set; the ω-model with this second-order part satisfies $\mathsf{RCA}_0 + \mathsf{WWKL}_0$, and it is not a Scott ideal, so it does not satisfy $\mathsf{WKL}_0$ (:ref{#prop-wkl-scott}). The last statement is :ref{#prop-pa-avoidance-model} (3).
+:::
+::::
+
+::::exercise[Countably many parameters]{#ex-wwkl-many-d difficulty=1 objective="Use the nullness of the PA sets to avoid PA degrees relative to countably many sets at once."}
+Let $Z$ be a set and $(D_n)_{n \in \nat}$ sets with $D_n \leq_T Z$ and $Z$ not PA relative to $D_n$ for every $n$. Show that every closed class $\mathcal Q$ of positive measure has a member $G$ such that $Z \oplus G$ is not PA relative to $D_n$ for any $n$. Show also that every measurable class of positive measure has such a member.
+
+:::solution
+By :ref{#cor-pa-null}, for each $n$ the class $\mathcal N_n$ of the sets $Y$ with $Z \oplus Y$ PA relative to $D_n$ is null. A countable union of null classes is null, so $\mathcal Q \setminus \bigcup_n \mathcal N_n$ has the measure of $\mathcal Q$, which is positive; any of its members is as required. The same argument applies to a measurable class of positive measure, since only its measure is used. The forcing proof of :ref{#thm-wwkl-strong-pa} also gives the first statement directly: it suffices to handle the requirements for all pairs $(e, n)$ in turn, with $J^{D_n}$ for the pair $(e, n)$.
+:::
+::::
+
+::::exercise[The density]{#ex-density-threshold difficulty=1 objective="Find exactly which relative measures allow the measure argument, and why the density lemma is used."}
+In the proof of :ref{#thm-wwkl-strong-pa}, replace the density $\frac{9}{10}$ by $\delta$ and the threshold $\frac15$ by $t$. Show that the proof works whenever $1 - \delta < t < \frac{\delta}{2}$, that such a $t$ exists if and only if $\delta > \frac23$, and explain why the proof first restricts $\mathcal Q_e$ to a cylinder.
+
+:::solution
+In case 1, the new class has relative measure at least $\delta + t - 1$ in $[\sigma]$, which is positive if $t > 1 - \delta$. In case 2, it has relative measure greater than $\delta - 2t$, positive if $t < \frac{\delta}{2}$. Case 3 does not depend on the constants. An interval $(1 - \delta, \frac{\delta}{2})$ is non-empty if and only if $1 - \delta < \frac{\delta}{2}$, that is, $\delta > \frac23$. A closed class of positive measure may have measure less than $\frac23$ in $\cs$, and then no threshold works with $\sigma = \varepsilon$; the density lemma provides a cylinder in which its relative measure is as close to $1$ as needed.
+:::
+::::
+
+::::exercise[Random sets that are not PA]{#ex-random-not-pa difficulty=1 objective="Combine the strong PA avoidance of WWKL with a $\Pi^0_1$ class of random sequences, and compare with the Kučera–Gács theorem."}
+Show that for all sets $D \leq_T Z$ with $Z$ not PA relative to $D$, there is a Martin-Löf random set $G$ such that $Z \oplus G$ is not PA relative to $D$. Show that some Martin-Löf random sets are PA.
+
+:::solution
+By :ref{#cor-mlr-structure} (2), $\mathcal P_1$ is a $\Pi^0_1$ class of measure at least $\frac12$ consisting of random sequences. By :ref{#thm-wwkl-strong-pa}, it has a member $G$ with $Z \oplus G$ not PA relative to $D$. On the other hand, by the Kučera–Gács theorem (:ref{to="martin-lof-randomness/randomness-and-degrees"}), $\emptyset'$ is computable in some random set, which is then PA (fact 1). So the random sets that are not PA form a conull class, by :ref{#cor-pa-null}, which is not the class of all random sets.
+:::
+::::
+:::::

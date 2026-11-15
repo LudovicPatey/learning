@@ -40,6 +40,14 @@ In particular, a closed set $A \subseteq [0, 1]$ is co-c.e. closed if and only i
 2. For $i \in \nat$, let $h_i(x) = \min(1, \max(0, \min(x - c_i, d_i - x)))$, a tent function, positive exactly on $(c_i, d_i)$, and identically $0$ if $c_i \geq d_i$. Let $f = \sum_i 2^{-i-1} h_i$ on $[0, 1]$. The partial sums $F_n = \sum_{i < n} 2^{-i-1} h_i$ are rational polygons computed from the name, and $d(F_n, f) \leq \sum_{i \geq n} 2^{-i-1} = 2^{-n}$; so $d(F_k, F_l) \leq 2^{-k}$ for $k \leq l$, and $(F_n)$ is a $\delta_C$-name of $f$. A point $x \in [0, 1]$ satisfies $f(x) = 0$ if and only if $h_i(x) = 0$ for every $i$, that is, $x$ lies in none of the intervals $(c_i, d_i)$, that is, $x \in A$.
 :::
 
+::::exercise[Unique choice]{#ex-unique-choice difficulty=2 objective="Compute the point of a singleton given by negative information, using effective compactness."}
+Show that there is an algorithm which, given a $\psi_>$-name of a singleton $\{ x \} \subseteq [0, 1]$, computes a Cauchy name of $x$. Deduce that if a computable $f \in C[0, 1]$ has a unique zero, this zero is computable.
+
+:::solution
+Given $k$, search for a rational $c$ and $n$ such that the first $n$ intervals of the name cover $[0, 1] \setminus (c - 2^{-k}, c + 2^{-k})$, a union of at most two rational closed intervals; this is decidable by :ref{#lem-effective-heine-borel} (1). The search terminates: for a rational $c$ with $|c - x| < 2^{-k-1}$, the compact set $[0, 1] \setminus (c - 2^{-k}, c + 2^{-k})$ does not contain $x$, so it is covered by the intervals of the name, hence by finitely many of them. Any $c$ found satisfies $x \in (c - 2^{-k}, c + 2^{-k})$, since $x$ is not covered. The rationals $c$ found for each $k$ form a Cauchy name by :ref{#lem-cauchy-variants}. For the consequence, apply this to a computable name of the zero set (:ref{#thm-zero-sets}). The algorithm is uniform: unique choice on $[0, 1]$ is computable, while closed choice is not.
+:::
+::::
+
 ## Problems on represented spaces
 
 The problems of :ref{to="reducibilities/omega-reducibility"} have sets of numbers as instances and solutions. In analysis, instances and solutions are reals, functions or closed sets, given through names.
@@ -102,25 +110,7 @@ In the proof that $\mathsf{WKL} \leq_{sW} \mathsf C_{[0,1]}$, why is the Cantor 
   $\iota$ is continuous, and even computable.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that a closed set $A \subseteq [0, 1]$ is co-c.e. closed if and only if the set of pairs of rationals $c \leq d$ with $[c, d] \cap A = \emptyset$ is c.e.
-
-:::solution
-If the set of such pairs is c.e., list the corresponding open intervals $(c, d)$; every $x \in [0, 1] \setminus A$ lies in the interior of a rational closed interval disjoint from the closed set $A$, so the union of the listed intervals is the complement of $A$ in $[0, 1]$. Conversely, given a computable name of $A$, $[c, d] \cap A = \emptyset$ holds if and only if $[c, d] \cap [0, 1]$ is covered by finitely many listed intervals, by compactness; this is c.e. by :ref{#lem-effective-heine-borel} (1), applied to the closed interval $[\max(c, 0), \min(d, 1)]$ when it is non-empty.
-:::
-::::
-
-::::exercise{difficulty=2}
-**Unique choice.** Show that there is an algorithm which, given a $\psi_>$-name of a singleton $\{ x \} \subseteq [0, 1]$, computes a Cauchy name of $x$. Deduce that if a computable $f \in C[0, 1]$ has a unique zero, this zero is computable.
-
-:::solution
-Given $k$, search for a rational $c$ and $n$ such that the first $n$ intervals of the name cover $[0, 1] \setminus (c - 2^{-k}, c + 2^{-k})$, a union of at most two rational closed intervals; this is decidable by :ref{#lem-effective-heine-borel} (1). The search terminates: for a rational $c$ with $|c - x| < 2^{-k-1}$, the compact set $[0, 1] \setminus (c - 2^{-k}, c + 2^{-k})$ does not contain $x$, so it is covered by the intervals of the name, hence by finitely many of them. Any $c$ found satisfies $x \in (c - 2^{-k}, c + 2^{-k})$, since $x$ is not covered. The rationals $c$ found for each $k$ form a Cauchy name by :ref{#lem-cauchy-variants}. For the consequence, apply this to a computable name of the zero set (:ref{#thm-zero-sets}). The algorithm is uniform: unique choice on $[0, 1]$ is computable, while closed choice is not.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-llpo-closed-choice difficulty=2 objective="Code an instance of LLPO into a closed set whose two halves correspond to the two solutions."}
 Show that $\mathsf{LLPO} \leq_{sW} \mathsf C_{[0,1]}$ directly: from an instance $p$ of $\mathsf{LLPO}$, compute a name of a non-empty closed set $A_p \subseteq [0, 1]$ such that every point of $A_p$ below $1/2$ indicates one solution and every point above $1/2$ the other.
 
 :::solution
@@ -138,3 +128,66 @@ Representations of closed and compact subsets of Euclidean space by positive and
 - G. Gherardi and A. Marcone, *How incomputable is the separable Hahn–Banach theorem?*, Notre Dame Journal of Formal Logic 50 (2009), 393–425.
 - V. Brattka, G. Gherardi and A. Pauly, *Weihrauch complexity in computable analysis*, in V. Brattka and P. Hertling (eds.), *Handbook of Computability and Complexity in Analysis*, Springer, 2021, 367–417.
 - V. Brattka and G. Presser, *Computability on subsets of metric spaces*, Theoretical Computer Science 305 (2003), 43–76.
+
+:::::exercises
+::::exercise{#ex-closed-disjoint-intervals difficulty=1 objective="Characterize co-c.e. closed sets by the c.e. family of rational closed intervals disjoint from them."}
+Show that a closed set $A \subseteq [0, 1]$ is co-c.e. closed if and only if the set of pairs of rationals $c \leq d$ with $[c, d] \cap A = \emptyset$ is c.e.
+
+:::solution
+If the set of such pairs is c.e., list the corresponding open intervals $(c, d)$; every $x \in [0, 1] \setminus A$ lies in the interior of a rational closed interval disjoint from the closed set $A$, so the union of the listed intervals is the complement of $A$ in $[0, 1]$. Conversely, given a computable name of $A$, $[c, d] \cap A = \emptyset$ holds if and only if $[c, d] \cap [0, 1]$ is covered by finitely many listed intervals, by compactness; this is c.e. by :ref{#lem-effective-heine-borel} (1), applied to the closed interval $[\max(c, 0), \min(d, 1)]$ when it is non-empty.
+:::
+::::
+
+::::exercise{#ex-closed-union-intersection difficulty=1 objective="Compute names of unions and intersections of closed sets given by negative information."}
+Show that $(A, B) \mapsto A \cap B$ and $(A, B) \mapsto A \cup B$, for closed sets $A, B \subseteq [0, 1]$, are $([\psi_>, \psi_>], \psi_>)$-computable.
+
+:::solution
+Let $(c_i, d_i)_i$ and $(c'_j, d'_j)_j$ be names of $A$ and $B$. The complement of $A \cap B$ in $[0, 1]$ is the union of the complements of $A$ and of $B$, so the interleaved sequence, with the pair $(c_i, d_i)$ at position $2i$ and $(c'_j, d'_j)$ at position $2j + 1$, is a name of $A \cap B$.
+
+The complement of $A \cup B$ in $[0, 1]$ is the intersection of the complements:
+$$
+[0, 1] \setminus (A \cup B) = [0, 1] \cap \bigcup_{i, j} \left( (c_i, d_i) \cap (c'_j, d'_j) \right),
+$$
+where a pair $(c, d)$ with $c \geq d$ stands for the empty interval. The intersection of the intervals of $(c_i, d_i)$ and $(c'_j, d'_j)$ is the interval of the pair $(\max(c_i, c'_j), \min(d_i, d'_j))$, which is empty, as required, when one of the two pairs is. Listing these pairs for all $(i, j)$, in the order of a pairing function, gives a name of $A \cup B$.
+:::
+::::
+
+::::exercise{#ex-closed-emptiness difficulty=1 objective="Determine which properties of a closed set given by negative information are semi-decidable: emptiness and non-membership, but not non-emptiness." lessons="pi01-classes/trees-and-classes"}
+1. Show that there is a Turing functional $\Phi$ such that, for every $\psi_>$-name $p$ of a closed set $A$, $\Phi^p(0)$ converges if and only if $A = \emptyset$.
+2. Show that there is a Turing functional $\Psi$ such that, for every name $p$ of $A$ and every Cauchy name $q$ of $x \in [0, 1]$, $\Psi^{\langle p, q \rangle}(0)$ converges if and only if $x \notin A$.
+3. Show that no Turing functional converges on the names of $A$ exactly when $A \neq \emptyset$.
+
+Compare with :ref{#prop-pi01-emptiness}.
+
+:::solution
+1. Search for $n$ such that the intervals of the first $n$ pairs of the name cover $[0, 1]$, which is decidable by :ref{#lem-effective-heine-borel} (1). If $A = \emptyset$, the intervals of the name cover $[0, 1]$, and finitely many of them do by compactness, so the search terminates. If it terminates, $[0, 1]$ is covered by intervals disjoint from $A$, so $A = \emptyset$.
+2. With $(c_i, d_i)$ the pairs of $p$ and $(q_k)$ the terms of $q$, search for $i$ and $k$ with $c_i < q_k - 2^{-k}$ and $q_k + 2^{-k} < d_i$. If they are found, $x \in (c_i, d_i)$, so $x \notin A$. Conversely, if $x \notin A$, then $x \in (c_i, d_i)$ for some $i$, since $x \in [0, 1]$, and the inequalities hold for $k$ with $2^{-k+1}$ smaller than the distance from $x$ to $c_i$ and to $d_i$.
+3. Suppose that $\Phi^p(0)$ converges exactly when $p$ names a non-empty set. Let $p$ be the name of $[0, 1]$ consisting of the empty pair $(1, 0)$ repeated. Then $\Phi^p(0)$ converges, and by :ref{#lem-type2-finite} (2) there is $u$ such that $\Phi^q(0)$ converges for every $q \in [p \uh u]$. The sequence $q$ that agrees with $p$ below $u$ and continues with the pair $(-1, 2)$ is such a sequence, and it is a name of $\emptyset$, a contradiction.
+
+The situation is that of $\Pi^0_1$ classes: the emptiness of a $\Pi^0_1$ class is $\Sigma^0_1$ (:ref{#prop-pi01-emptiness}), and so is non-membership.
+:::
+::::
+
+::::exercise{#ex-closed-max difficulty=2 objective="Show that the maximum of a closed set given by negative information is known only from above, and identify the maxima of co-c.e. closed sets." lessons="representations"}
+For a non-empty closed set $A \subseteq [0, 1]$, let $\max A$ be its largest element.
+1. Show that $A \mapsto \max A$ is $(\psi_>, \rho_>)$-computable.
+2. Show that it is not $(\psi_>, \rho)$-continuous.
+3. Show that a real $b \in [0, 1]$ is right-c.e. if and only if it is the largest element of a non-empty co-c.e. closed set.
+
+:::solution
+1. A rational $q$ satisfies $q > \max A$ if and only if $q > 1$, or $q \leq 1$ and $[\max(q, 0), 1] \cap A = \emptyset$. In the second case, $[\max(q, 0), 1]$ is a compact set covered by the intervals of the name, hence by finitely many of them, which is decidable for each finite set of intervals by :ref{#lem-effective-heine-borel} (1); for $q < 0$ this never happens, since $A \neq \emptyset$. A dovetailed search lists the rationals $q > 1$ and the rationals $q \leq 1$ for which such a finite cover is found: this is a right name of $\max A$.
+2. Suppose that a continuous $F$ maps names of non-empty closed sets to Cauchy names of their maxima. Let $p$ be the name of $[0, 1]$ consisting of the empty pair $(1, 0)$ repeated. The term of index $2$ of $F(p)$ is a rational $r$ with $|r - 1| \leq 1/4$, and some $m$ is such that the term of index $2$ of $F(q)$ is $r$ for every name $q \in [p \uh m]$ of a non-empty set. Let $q$ agree with $p$ below $m$ and continue with the pair $(1/4, 2)$ and then empty pairs: it names $[0, 1/4]$, whose maximum is $1/4$, so $|r - 1/4| \leq 1/4$. The two inequalities contradict each other.
+3. If $A$ is co-c.e. closed, (1) applied to a computable name of $A$ gives a computable right name of $\max A$. Conversely, if $b \in [0, 1]$ is right-c.e., then $[0, b]$ is co-c.e. closed by :ref{#ex-co-ce-closed} (2), with the left-c.e. real $0$, and its maximum is $b$.
+:::
+::::
+
+::::exercise{#ex-finite-closed difficulty=2 objective="Contrast the non-uniform computability of the points of finite co-c.e. closed sets with the non-computability of choice among two points."}
+1. Show that every point of a finite co-c.e. closed set $A \subseteq [0, 1]$ is computable.
+2. Show that $\mathsf{LLPO}$ is strongly Weihrauch reducible to the restriction of $\mathsf C_{[0,1]}$ to the sets with at most two points. Deduce that this restriction is not computable.
+
+:::solution
+1. Let $x \in A$. Since $A$ is finite, there are rationals $c < x < d$ with $A \cap [c, d] = \{ x \}$. The interval $[c, d] \cap [0, 1]$ is co-c.e. closed, named by the intervals $(-1, c)$ and $(d, 2)$, so $\{ x \} = A \cap [c, d]$ is co-c.e. closed by :ref{#ex-closed-union-intersection}, and $x$ is computable by :ref{#ex-unique-choice}. The rationals $c$ and $d$ depend on $x$: the argument is not uniform.
+2. Given an instance $p$ of $\mathsf{LLPO}$, list the intervals $(-1, 1/3)$, $(1/3, 2/3)$ and $(2/3, 2)$, then empty pairs while no $1$ has been found in $p$; if $p(n) = 1$ is found, list $(-1, 1/2)$ if $n$ is even, and $(1/2, 2)$ if $n$ is odd. This names the set $A_p$ equal to $\{ 1/3, 2/3 \}$ if $p$ has no $1$, to $\{ 2/3 \}$ if its $1$ is at an even position, and to $\{ 1/3 \}$ if it is at an odd position. Given a point $x \in A_p$, which is $1/3$ or $2/3$, an approximation within $1/12$ decides which. If $x = 2/3$, then $p$ has no $1$ at an odd position, and $1$ is a solution; if $x = 1/3$, then $p$ has no $1$ at an even position, and $0$ is a solution. If the restriction had a computable realizer, composing it with these functionals would give a computable realizer of $\mathsf{LLPO}$, which does not exist (:ref{#prop-llpo-lpo}). The construction is that of :ref{#ex-llpo-closed-choice}, with points instead of intervals.
+:::
+::::
+:::::

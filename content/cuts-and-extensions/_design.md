@@ -24,8 +24,8 @@ After the course, a student can:
 1. **standard-system** (45 min). `def-coded-subsets`, `ex-coded-subsets`; absoluteness for bounded L₂ formulas evaluated through codes (`lem-delta00-absolute-cut`); separation lemma (`lem-cut-separation`); Δ⁰₁ comprehension in (I, Cod(M/I)) (`cor-cod-delta1-ca`); SSy(M) is a Turing ideal (`thm-ssy-turing-ideal`); exercise: SSy is preserved by end extensions (`ex-ssy-end-extension`).
 2. **weak-konig-cuts** (40 min). Binary strings in IΔ₀ + exp (`def-strings-model`, `lem-strings-model`); trees in cuts (`def-tree-cut`); Scott's theorem on WKL in proper exponential cuts (`thm-scott-wkl-cut`); Scott sets (`def-scott-set`); SSy(M) is a Scott set (`cor-ssy-scott-set`); exercises: exponential cuts closed under the operations (`ex-exp-cut-closed`), sums of codes of disjoint sets (`ex-subset-sum`).
 3. **scott-tennenbaum** (45 min). Every countable Scott set is SSy of a model of PA (`thm-scott-converse`); the Scott set problem (Knight–Nadel, Gitman); Tennenbaum's theorem for addition in models of IΔ₀ + exp (`thm-tennenbaum`), and why some induction is needed (ℤ[X]⁺, Shepherdson); exercises: the Σ*ₙ theory of M is in SSy(M), and SSy of a non-standard model of true arithmetic contains every arithmetic set (`ex-ssy-truth`); second proof that SSy is a Scott set via the separation lemma and PA degrees (`ex-scott-separation`).
-4. **semiregular-cuts** (30 min). `def-semiregular`, `ex-not-semiregular`; semiregular cuts are closed under the operations (`lem-semireg-closed`); (I, Cod(M/I)) ⊨ IΣ⁰₁ (`thm-semireg-isigma1`); exercise on the set of arguments with values in the cut.
-5. **wkl-regular-cuts** (25 min). Kirby–Paris characterization by WKL₀ (`thm-kirby-paris-wkl`), with a quiz on where exponentiality is used; regular cuts (`def-regular-cut`), regular ⇒ semiregular (`prop-regular-semireg`); the characterization by BΣ⁰₂ admitted.
+4. **semiregular-cuts** (35 min). `def-semiregular`, `ex-not-semiregular`; semiregular cuts are closed under the operations (`lem-semireg-closed`); (I, Cod(M/I)) ⊨ IΣ⁰₁ (`thm-semireg-isigma1`); exercise on the set of arguments with values in the cut.
+5. **wkl-regular-cuts** (30 min). Kirby–Paris characterization by WKL₀ (`thm-kirby-paris-wkl`), with a quiz on where exponentiality is used; regular cuts (`def-regular-cut`), regular ⇒ semiregular (`prop-regular-semireg`); the characterization by BΣ⁰₂ admitted.
 6. **cofinal-extensions** (40 min). `def-n-elementary`, `ex-n-elementary`; hierarchical Tarski–Vaught test (`lem-tarski-vaught-n`); cofinal extensions and suprema (`def-cofinal-ext`); BΣₙ₊₁ + Σₙ-elementary cofinal ⇒ Σₙ₊₂-elementary (`thm-cofinal-preservation`, `cor-cofinal-preservation`); exercise on what transfers to a cofinal extension.
 7. **collection-end-extensions** (40 min). Paris–Kirby: end extensions give collection (`thm-end-ext-collection`); converse admitted (`fact-end-ext-converse`), with the case n = 0 and Paris's open problem; Friedman's strong collection (`thm-strong-collection`); exercise: strong Σₙ₊₁ collection.
 8. **splitting-conservation** (35 min). Splitting theorem (`thm-splitting`); cofinal Σₙ₊₁-elementary extension satisfying BΣₙ₊₁ (`thm-cofinal-bsigma`); Friedman–Paris conservation (`thm-friedman-paris-conservation`); exercises `ex-sup-elementary`, `ex-conservation-sharp`.
@@ -100,7 +100,35 @@ Web search, 2026-11-12:
 - Kaye's book is cited without chapter numbers.
 - Adamowicz–Clote–Wilkie (weakening IΣₙ to IΣₙ₋₁ in `thm-end-ext-collection`) is cited through Wong, who refers to Clote 1985; the original source was not checked.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. Featured exercises stay in the text; the others are in the block of further exercises at the end of each lesson (outside the reading time).
+
+**Featured, and why.**
+- standard-system: `ex-ssy-end-extension` (the standard system is preserved by end extensions; used in later courses).
+- weak-konig-cuts: `ex-subset-sum` (comparison of codes, used in the proof of `thm-kirby-paris-wkl`). `ex-exp-cut-closed` moved to the further exercises.
+- scott-tennenbaum: `ex-ssy-truth` (truth definitions in the standard system) and `ex-scott-separation` (second proof of the Scott set property through PA degrees).
+- semiregular-cuts: `ex-semireg-preimage` (labeled; coding the arguments with values in the cut, whose converse is a further exercise).
+- wkl-regular-cuts: `ex-exp-not-semireg` (new): an exponential cut that is not semiregular, whose coded sets satisfy Δ⁰₁ comprehension and WKL but not Σ⁰₁ induction; it shows what the Kirby–Paris characterization adds to Scott's theorem.
+- cofinal-extensions: `ex-cofinal-transfer` (labeled; what transfers to a cofinal extension).
+- collection-end-extensions: `ex-strong-sigma-collection` (labeled; strong Σₙ₊₁ collection), now cited by label in the text.
+- splitting-conservation: `ex-sup-elementary` and `ex-conservation-sharp` (sharpness of the conservation theorem, cited by label in the text).
+
+**Further exercises, lesson by lesson.**
+1. standard-system: Boolean algebra of coded sets and uncoded bounded subsets of non-standard cuts; bounded definitions coded without the separation lemma; SSy(M) of a model of PA as the traces of definable sets (overspill); a proper cut is not coded relative to a larger cut (overspill).
+2. weak-konig-cuts: `ex-exp-cut-closed`; computing string codes; a cut with an unbounded tree is exponential (so the hypothesis of Scott's theorem is automatic); unbounded branch through an extendible node; coded sets versus unbounded coded branches.
+3. scott-tennenbaum: no Scott set has a largest degree; the addition of a non-standard model has PA degree and its lower cone strictly contains SSy(M); a model of PA whose standard system omits ∅' (from the low Scott ideal of big-five/wkl0, pointer only) is Σ₁-unsound; order type ω + ℤ·ℚ and a non-standard model of PA with computable order.
+4. semiregular-cuts: direct proof that semiregular cuts are exponential; a non-semiregular cut closed under multiplication; bounded Σ⁰₁ comprehension; converse of the featured exercise; semiregularity and coded sets depend only on an exponential cut above.
+5. wkl-regular-cuts: pigeonhole for standard numbers of colors holds in every cut; regularity through coded functions of the model; coded covers; semiregularity characterized by bounded Σ⁰₁ comprehension (with `lessons="semiregular-cuts"`).
+6. cofinal-extensions: an elementary extension that is neither end nor cofinal; transitivity of Σₙ-elementarity; ℕ ≼₁ M and ℕ ≼ M; the elementary chain lemma level by level; step 1 of `thm-cofinal-preservation` without codes when K satisfies BΣₙ, and why K always does (HP Remark IV.1.21).
+7. collection-end-extensions: proper cuts closed under the operations satisfy BΣ₁, and models failing BΣ₁ have no end extension satisfying IΔ₀; the cut I_a of `ex-idelta0-not-exp` shows that the conclusion is optimal for n = 0 and the elementarity hypothesis needed for n = 1; models of PA characterized by end extensions; second proof that strong collection gives induction, through `thm-friedman-coded`.
+8. splitting-conservation: splitting plus cofinal preservation under BΣₙ₊₁ (with `lessons="cofinal-extensions"`); BΣ₁ and Parikh's theorem, BΣ₁ ⊬ exp; conservation with extra Π_{n+1} axioms; conservation of BΣ₁ + exp over IΔ₀ + exp through cofinality.
+
+**Sources.** The new exercises are standard consequences of the lessons, written for this course. `ex-computable-order` is the classical computation of the order type of countable non-standard models (treated in Kaye's book; Cantor's theorem on countable dense orders is admitted). `ex-cofinal-without-code` uses HP Remark IV.1.21 (2) for the Π_{k+2} axiomatization of BΣ_k, checked against the text file on 2026-11-13. `ex-semireg-bounded-comprehension` is close in spirit to HP's definition of semiregular cuts by strong collection for coded functions (Definition IV.2.15). No exercise was copied from a book.
+
+**Dropped.** An exercise claiming that the end part of the splitting can fail to be Σₙ₊₁-elementary was dropped: the argument intended for it was wrong (it transferred a Π₂ statement to new elements of a cofinal extension). An exercise on Scott sets closed under computably bounded trees was dropped, as it duplicates the coding of finitely branching trees in pi01-classes. An exercise on the low Scott ideal was reduced to a pointer, since the construction is `thm-low-scott` of big-five/wkl0, which is not a prerequisite.
+
+## 12. History
 
 - **2026-11-12.** Course created: 6 lessons (standard-system, weak-konig-cuts, scott-tennenbaum, semiregular-cuts, cofinal-extensions, collection-end-extensions), figure generator `scripts/figures/cuts-and-extensions.py`.
 - **2026-11-13: polishing pass.**
@@ -111,3 +139,4 @@ Web search, 2026-11-12:
   - Pedagogy: quiz on exponentiality in the Kirby–Paris characterization; exercise on strong Σₙ₊₁ collection (replaces a one-line remark); splitting figure regenerated so that M has elements up to the cut.
   - Underspill now cited as `ex-underspill` (label added by the polishing of fragments-of-arithmetic).
   - References: Gitman's notion of proper Scott set described; Clote 1985 and Shepherdson 1964 added; HP IV.1.53 (2), 1.56, 2.15–2.16 checked against the text file.
+- **2026-11-13: featured and further exercises.** Labels and objectives for all exercises (labels added: `ex-semireg-preimage`, `ex-cofinal-transfer`, `ex-strong-sigma-collection`); one featured exercise added (`ex-exp-not-semireg`), `ex-exp-cut-closed` moved to the further exercises; 34 new further exercises (4 or 5 per lesson). Positional references to exercises replaced by labels (lessons 7 and 8); the forward reference to `thm-splitting` in lesson 6 replaced by a lesson link. Durations: semiregular-cuts 35 (32.6 by the word count), wkl-regular-cuts 30 (featured exercise added).

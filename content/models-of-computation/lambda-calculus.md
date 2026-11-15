@@ -128,7 +128,7 @@ A term is in **β-normal form** if it contains no β-redex. A term $M$ **has a n
 Examples:
 
 1. $\mathsf{I}\, M \to_\beta M$, and $\mathsf{K}\, M\, N \to_\beta (\lambda y.\, M)\, N \to_\beta M$ (with $y \notin \mathrm{FV}(M)$).
-2. $\mathsf{S}\, \mathsf{K}\, \mathsf{K} \twoheadrightarrow_\beta \lambda z.\, \mathsf{K}\, z\, (\mathsf{K}\, z) \twoheadrightarrow_\beta \lambda z.\, z = \mathsf{I}$ (see the first exercise for the individual steps).
+2. $\mathsf{S}\, \mathsf{K}\, \mathsf{K} \twoheadrightarrow_\beta \lambda z.\, \mathsf{K}\, z\, (\mathsf{K}\, z) \twoheadrightarrow_\beta \lambda z.\, z = \mathsf{I}$ (:ref{#ex-lambda-skk} gives the individual steps).
 3. $\Omega = (\lambda x.\, x\, x)(\lambda x.\, x\, x) \to_\beta (\lambda x.\, x\, x)(\lambda x.\, x\, x) = \Omega$. The only reduction sequence from $\Omega$ is infinite, and $\Omega$ has no normal form: it is the λ-calculus analogue of a non-terminating computation.
 4. $(\lambda x.\, y)\, \Omega$ reduces to the normal form $y$ by contracting the outer redex, but also reduces to itself by contracting $\Omega$. Some reduction sequences from this term are infinite, although it has a normal form.
 
@@ -235,19 +235,11 @@ The relation $\lambda x.\, M\, x \to_\eta M$, for $x \notin \mathrm{FV}(M)$, exp
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-lambda-skk difficulty=1 objective="Reduce a combinator to normal form step by step."}
 Reduce $\mathsf{S}\, \mathsf{K}\, \mathsf{K}$ to normal form, writing every step, and check that $\mathsf{S}\, \mathsf{K}\, \mathsf{K}\, M \twoheadrightarrow_\beta M$ for every $M$.
 
 :::solution
 $\mathsf{S}\, \mathsf{K}\, \mathsf{K} = (\lambda x y z.\, x\, z\, (y\, z))\, \mathsf{K}\, \mathsf{K} \to_\beta (\lambda y z.\, \mathsf{K}\, z\, (y\, z))\, \mathsf{K} \to_\beta \lambda z.\, \mathsf{K}\, z\, (\mathsf{K}\, z) \to_\beta \lambda z.\, (\lambda y.\, z)\, (\mathsf{K}\, z) \to_\beta \lambda z.\, z$. Then $\mathsf{S}\, \mathsf{K}\, \mathsf{K}\, M \twoheadrightarrow_\beta \mathsf{I}\, M \to_\beta M$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that the term $(\lambda x.\, x\, x\, x)(\lambda x.\, x\, x\, x)$ has no normal form, and that its reducts grow in size.
-
-:::solution
-Let $W = \lambda x.\, x\, x\, x$. Then $W\, W \to_\beta W\, W\, W \to_\beta W\, W\, W\, W \to \cdots$: the only redex of $W\, W\, \cdots\, W$ ($n$ copies) is the leftmost $W\, W$, whose contraction gives $n + 1$ copies. Every reduction sequence is therefore infinite.
 :::
 ::::
 
@@ -260,3 +252,85 @@ The λ-calculus was introduced by Church in the early 1930s as part of a foundat
 - H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, North-Holland, 1984.
 - M. Takahashi, *Parallel reductions in λ-calculus*, Information and Computation 118 (1995), 120–127.
 - J. R. Hindley, J. P. Seldin, *Lambda-Calculus and Combinators: An Introduction*, Cambridge University Press, 2008.
+
+:::::exercises
+::::exercise{#ex-lambda-www difficulty=1 objective="Show that a term has no normal form by describing all its reduction sequences."}
+Show that the term $(\lambda x.\, x\, x\, x)(\lambda x.\, x\, x\, x)$ has no normal form, and that its reducts grow in size.
+
+:::solution
+Let $W = \lambda x.\, x\, x\, x$. Then $W\, W \to_\beta W\, W\, W \to_\beta W\, W\, W\, W \to \cdots$: the only redex of $W\, W\, \cdots\, W$ ($n$ copies) is the leftmost $W\, W$, whose contraction gives $n + 1$ copies. Every reduction sequence is therefore infinite.
+:::
+::::
+
+::::exercise{#ex-lambda-fv-substitution difficulty=1 objective="Compute free variables and substitutions, renaming bound variables when needed."}
+Compute $\mathrm{FV}(\lambda x.\, x\, y\, (\lambda y.\, y\, z))$, and the substitutions $(\lambda y.\, x\, y)[(\lambda z.\, z\, y)/x]$, $(x\, (\lambda x.\, x\, y))[y/x]$ and $(\lambda x.\, y)[x/y]$.
+
+:::solution
+The body $x\, y\, (\lambda y.\, y\, z)$ has free variables $\{x, y\} \cup (\{y, z\} \setminus \{y\}) = \{x, y, z\}$, so $\mathrm{FV}(\lambda x.\, x\, y\, (\lambda y.\, y\, z)) = \{y, z\}$. Note that $y$ is free at its first occurrence, although it is bound in the subterm $\lambda y.\, y\, z$.
+
+In $(\lambda y.\, x\, y)[(\lambda z.\, z\, y)/x]$, the bound variable $y$ is free in the substituted term and $x$ is free in the body, so the last clause of :ref{#def-substitution} renames $y$ to a new variable $w$: the result is $\lambda w.\, (\lambda z.\, z\, y)\, w$.
+
+In $(x\, (\lambda x.\, x\, y))[y/x]$, only the first occurrence of $x$ is free: the result is $y\, (\lambda x.\, x\, y)$.
+
+In $(\lambda x.\, y)[x/y]$, the bound $x$ must be renamed: the result is $\lambda z.\, x$, a constant function with value $x$, and not the identity $\lambda x.\, x$.
+:::
+::::
+
+::::exercise{#ex-lambda-substitution-hypotheses difficulty=1 objective="See why each hypothesis of the substitution lemma is needed, with counterexamples."}
+Show by counterexamples that the substitution lemma :ref{#lem-substitution} fails without the hypothesis $x \neq y$, and without the hypothesis $x \notin \mathrm{FV}(L)$.
+
+:::solution
+Let $x$, $z$, $w$ be distinct variables. Without $x \neq y$: take $y = x$, $M = x$, $N = z$, $L = w$, so that $x \notin \mathrm{FV}(L)$. Then $M[N/x][L/x] = z[w/x] = z$, while $M[L/x][N[L/x]/x] = w[z/x] = w$.
+
+Without $x \notin \mathrm{FV}(L)$: take $y$ distinct from $x$ and $z$, $M = y$, $N = z$ and $L = x$. Then $M[N/x][L/y] = y[x/y] = x$, while $M[L/y][N[L/y]/x] = x[z/x] = z$. In both cases the two sides are distinct variables.
+:::
+::::
+
+::::exercise{#ex-lambda-parallel-reduction difficulty=2 objective="Complete a step of the Church–Rosser proof: parallel reduction lies between one-step reduction and reduction."}
+Prove the following properties of the parallel reduction $\Rightarrow$ of the proof of :ref{#thm-church-rosser}: $M \Rightarrow M$ for every $M$; $M \to_\beta M'$ implies $M \Rightarrow M'$; and $M \Rightarrow M'$ implies $M \twoheadrightarrow_\beta M'$. Deduce that the reflexive transitive closure of $\Rightarrow$ is $\twoheadrightarrow_\beta$.
+
+:::solution
+*Reflexivity*, by induction on $M$: $x \Rightarrow x$; if $M \Rightarrow M$ then $\lambda x.\, M \Rightarrow \lambda x.\, M$; if $M \Rightarrow M$ and $N \Rightarrow N$ then $M\, N \Rightarrow M\, N$.
+
+*${\to_\beta} \subseteq {\Rightarrow}$*, by induction on the definition of $\to_\beta$. A contraction $(\lambda x.\, M)\, N \to_\beta M[N/x]$ is obtained by the last rule of $\Rightarrow$ from $M \Rightarrow M$ and $N \Rightarrow N$. If $M \to_\beta M'$ and, by the induction hypothesis, $M \Rightarrow M'$, then $M\, N \Rightarrow M'\, N$ and $N\, M \Rightarrow N\, M'$ by the application rule and reflexivity, and $\lambda x.\, M \Rightarrow \lambda x.\, M'$.
+
+*${\Rightarrow} \subseteq {\twoheadrightarrow_\beta}$*, by induction on the derivation of $M \Rightarrow M'$. The case $x \Rightarrow x$ is trivial. For abstraction and application, use that $\twoheadrightarrow_\beta$ is compatible with the term constructors (it is the reflexive transitive closure of a compatible relation): from $M \twoheadrightarrow_\beta M'$ and $N \twoheadrightarrow_\beta N'$ we get $\lambda x.\, M \twoheadrightarrow_\beta \lambda x.\, M'$ and $M\, N \twoheadrightarrow_\beta M'\, N \twoheadrightarrow_\beta M'\, N'$. For the last rule, $(\lambda x.\, M)\, N \twoheadrightarrow_\beta (\lambda x.\, M')\, N' \to_\beta M'[N'/x]$.
+
+Finally, the reflexive transitive closure of $\to_\beta$ is contained in that of $\Rightarrow$, which is contained in that of $\twoheadrightarrow_\beta$, that is in $\twoheadrightarrow_\beta$ itself; the two closures are therefore equal to $\twoheadrightarrow_\beta$.
+:::
+::::
+
+::::exercise{#ex-lambda-one-step-diamond difficulty=1 objective="See on an example that one-step reduction does not have the diamond property, while parallel reduction joins the two reducts."}
+Let $f, y$ be variables and $M = (\lambda x.\, f\, x\, x)\, (\mathsf{I}\, y)$. Find the two terms $N_1, N_2$ with $M \to_\beta N_i$, and show that there is no term $P$ such that each $N_i$ is equal to $P$ or reduces to $P$ in one step. Show that $N_1 \Rightarrow P$ and $N_2 \Rightarrow P$ for some $P$.
+
+:::solution
+$M$ has two redexes, itself and $\mathsf{I}\, y$, so $N_1 = f\, (\mathsf{I}\, y)\, (\mathsf{I}\, y)$ and $N_2 = (\lambda x.\, f\, x\, x)\, y$. The terms reachable from $N_2$ in at most one step are $N_2$ and $f\, y\, y$, since $N_2$ has a single redex. Those reachable from $N_1$ in at most one step are $N_1$, $f\, y\, (\mathsf{I}\, y)$ and $f\, (\mathsf{I}\, y)\, y$. The two sets are disjoint. With parallel reduction, $N_1 \Rightarrow f\, y\, y$ by contracting both copies of $\mathsf{I}\, y$ at once, and $N_2 \Rightarrow f\, y\, y$.
+:::
+::::
+
+::::exercise{#ex-lambda-strategy-cost difficulty=1 objective="Compare the number of steps of normal order and applicative order on a term that duplicates its argument."}
+Reduce $(\lambda x.\, x\, x\, x)\, (\mathsf{I}\, \mathsf{I})$ to normal form by normal order and by applicative order, and count the steps.
+
+:::solution
+*Normal order.* The outer redex is contracted first, which copies the unevaluated argument three times:
+$$
+(\lambda x.\, x\, x\, x)(\mathsf{I}\, \mathsf{I}) \to (\mathsf{I}\, \mathsf{I})(\mathsf{I}\, \mathsf{I})(\mathsf{I}\, \mathsf{I}) \to \mathsf{I}\, (\mathsf{I}\, \mathsf{I})\, (\mathsf{I}\, \mathsf{I}) \to (\mathsf{I}\, \mathsf{I})(\mathsf{I}\, \mathsf{I}) \to \mathsf{I}\, (\mathsf{I}\, \mathsf{I}) \to \mathsf{I}\, \mathsf{I} \to \mathsf{I}.
+$$
+At each step the contracted redex is the leftmost outermost one; for instance, in $(\mathsf{I}\, \mathsf{I})(\mathsf{I}\, \mathsf{I})(\mathsf{I}\, \mathsf{I})$ the subterm $(\mathsf{I}\, \mathsf{I})(\mathsf{I}\, \mathsf{I})$ is not a redex, since $\mathsf{I}\, \mathsf{I}$ is not an abstraction. That is $6$ steps.
+
+*Applicative order.* The argument is evaluated first:
+$$
+(\lambda x.\, x\, x\, x)(\mathsf{I}\, \mathsf{I}) \to (\lambda x.\, x\, x\, x)\, \mathsf{I} \to \mathsf{I}\, \mathsf{I}\, \mathsf{I} \to \mathsf{I}\, \mathsf{I} \to \mathsf{I},
+$$
+in $4$ steps. Normal order always finds the normal form when there is one (:ref{#thm-normal-order}), but it may repeat the evaluation of duplicated arguments; implementations with sharing of subterms avoid this.
+:::
+::::
+
+::::exercise{#ex-lambda-k-equals-i difficulty=2 objective="Use the convertibility of terms to show that identifying two distinct normal forms makes all terms equal."}
+Let $\approx$ be the smallest equivalence relation on terms that contains $=_\beta$ and the pair $(\mathsf{K}, \mathsf{I})$, and such that $M \approx M'$ implies $M\, N \approx M'\, N$ and $N\, M \approx N\, M'$ for all $N$. Show that $M \approx N$ for all terms $M, N$. Why does this not contradict :ref{#cor-unique-normal-form}?
+
+:::solution
+Let $N$ be any term. From $\mathsf{K} \approx \mathsf{I}$ we get $\mathsf{K}\, \mathsf{I}\, N \approx \mathsf{I}\, \mathsf{I}\, N$, applying the compatibility twice. Now $\mathsf{K}\, \mathsf{I}\, N \twoheadrightarrow_\beta \mathsf{I}$ and $\mathsf{I}\, \mathsf{I}\, N \to_\beta \mathsf{I}\, N \to_\beta N$. Since $\approx$ contains $=_\beta$ and is transitive, $\mathsf{I} \approx N$. Hence any two terms $M$, $N$ satisfy $M \approx \mathsf{I} \approx N$. There is no contradiction: :ref{#cor-unique-normal-form} says that $\mathsf{K} \neq_\beta \mathsf{I}$, so the pair $(\mathsf{K}, \mathsf{I})$ is a new equation, and the argument shows that adding it to β-conversion makes the theory trivial. The Church–Rosser theorem is what guarantees that β-conversion alone is not trivial.
+:::
+::::
+:::::

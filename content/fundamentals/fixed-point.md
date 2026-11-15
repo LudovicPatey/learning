@@ -125,6 +125,14 @@ Let $e$ be given by the corollary with $g(e, x) \simeq 0$ if $x \neq e$ and unde
   $e \notin W_e$ by construction, so in fact $e \notin \emptyset'$.
 :::
 
+::::exercise{#ex-self-ref-examples difficulty=1 objective="Apply Kleene's form of the fixed point theorem to build programs that use their own index."}
+Show that there is $e$ such that $\Phi_e(x) = e + x$ for all $x$, and $e$ such that $W_e = \{ 0, 1, \dots, e \}$.
+
+:::solution
+Apply :ref{#cor-self-reference} to $g(e, x) = e + x$, and to $g(e, x) \simeq 0$ if $x \leq e$, undefined otherwise. Both are partial computable functions of $(e, x)$.
+:::
+::::
+
 ## Fixed points with parameters
 
 The fixed point can be found uniformly in a parameter.
@@ -178,25 +186,7 @@ The fixed point theorem gives short proofs of results that otherwise require exp
 
 The second argument works for every set of indices that is closed under equality of the functions computed and is neither empty nor everything. This is Rice's theorem, the subject of the next lesson.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that there is $e$ such that $\Phi_e(x) = e + x$ for all $x$, and $e$ such that $W_e = \{ 0, 1, \dots, e \}$.
-
-:::solution
-Apply :ref{#cor-self-reference} to $g(e, x) = e + x$, and to $g(e, x) \simeq 0$ if $x \leq e$, undefined otherwise. Both are partial computable functions of $(e, x)$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that there is no total computable $f$ such that, for every $e$, the sets $W_{f(e)}$ and $W_e$ differ by exactly one element. Show also that the conclusion of the fixed point theorem cannot be strengthened to $f(e) = e$.
-
-:::solution
-A fixed point $e$ of $f$ satisfies $\Phi_{f(e)} = \Phi_e$, hence $W_{f(e)} = W_e$, which contradicts the hypothesis. For the second statement, $f(e) = e + 1$ is total computable, and $f(e) \neq e$ for every $e$: the fixed point given by the theorem is extensional only.
-:::
-::::
-
-::::exercise{difficulty=3}
+::::exercise{#ex-minimal-indices difficulty=3 objective="Apply the fixed point theorem to show that the set of minimal indices has no infinite c.e. subset."}
 An index $e$ is **minimal** if $\Phi_i \neq \Phi_e$ for every $i < e$. Show that the set of minimal indices contains no infinite c.e. subset.
 
 :::hint
@@ -220,3 +210,63 @@ The fixed point theorem was proved by Kleene in 1938, in a paper on notations fo
 - S. A. Terwijn, *Fixed point theorems in computability theory*, preprint, arXiv:2402.03069, 2024.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Section 2.2.
 - B. Monin and L. Patey, *Computability theory*, chapter *Foundations of computability*, section *Kleene's fixed point theorem*.
+
+:::::exercises
+::::exercise{#ex-no-one-element-change difficulty=2 objective="Use the fixed point theorem to rule out index transformations that always change the set enumerated, and see that the fixed point is only extensional."}
+Show that there is no total computable $f$ such that, for every $e$, the sets $W_{f(e)}$ and $W_e$ differ by exactly one element. Show also that the conclusion of the fixed point theorem cannot be strengthened to $f(e) = e$.
+
+:::solution
+A fixed point $e$ of $f$ satisfies $\Phi_{f(e)} = \Phi_e$, hence $W_{f(e)} = W_e$, which contradicts the hypothesis. For the second statement, $f(e) = e + 1$ is total computable, and $f(e) \neq e$ for every $e$: the fixed point given by the theorem is extensional only.
+:::
+::::
+
+::::exercise{#ex-self-ref-ce difficulty=1 objective="State the fixed point theorem in terms of c.e. sets, and derive it back from that statement."}
+1. Let $A$ be a c.e. set. Show that there is $n$ with $W_n = \{ x : \langle x, n \rangle \in A \}$.
+2. Deduce from item 1 alone that for every total computable $f$ there is $n$ with $W_n = W_{f(n)}$.
+
+:::solution
+1. Let $A = W_a$, and $g(n, x) \simeq \Phi_a(\langle x, n \rangle)$, a partial computable function. By :ref{#cor-self-reference}, there is $n$ with $\Phi_n(x) \simeq g(n, x)$ for every $x$, so $W_n = \{ x : \langle x, n \rangle \in W_a \}$.
+2. The set $A = \{ \langle x, n \rangle : x \in W_{f(n)} \}$ is c.e.: $\langle x, n \rangle \in A \iff \exists s\ \Phi_{f(n)}(x)[s]\converge$, a projection of a computable relation. Item 1 gives $n$ with $W_n = \{ x : \langle x, n \rangle \in A \} = W_{f(n)}$.
+
+Soare 2016, Exercise 2.2.11, asks to show that the two statements are equivalent.
+:::
+::::
+
+::::exercise[Double fixed point theorem]{#ex-double-recursion difficulty=2 objective="Prove a fixed point theorem for two programs at once, with the fixed point theorem with parameters."}
+1. Let $f, g : \nat^2 \to \nat$ be total computable. Show that there are $a$ and $b$ with $\Phi_a = \Phi_{f(a, b)}$ and $\Phi_b = \Phi_{g(a, b)}$.
+2. Deduce that there are $a \neq b$ with $\Phi_a(0) = b$ and $\Phi_b(0) = a$.
+
+:::solution
+1. Apply :ref{#thm-fixed-point-parameters} to the total computable function $(y, m) \mapsto f(m, y)$: there is a total computable $n$ with $\Phi_{n(y)} = \Phi_{f(n(y), y)}$ for every $y$. The function $h(y) = g(n(y), y)$ is total computable; let $b$ be a fixed point of $h$ (:ref{#thm-fixed-point}), so that $\Phi_b = \Phi_{h(b)} = \Phi_{g(n(b), b)}$. Let $a = n(b)$. Then $\Phi_a = \Phi_{f(a, b)}$ and $\Phi_b = \Phi_{g(a, b)}$.
+2. By :ref{#cor-smn-parameters}, there is a total computable $k$ such that $\Phi_{k(u, v)}(0) = u$ and $\Phi_{k(u, v)}(x) = v$ for $x \geq 1$. Apply item 1 to $f(a, b) = k(b, 0)$ and $g(a, b) = k(a, 1)$. Then $\Phi_a(0) = b$ and $\Phi_a(1) = 0$, while $\Phi_b(0) = a$ and $\Phi_b(1) = 1$. Since $\Phi_a(1) \neq \Phi_b(1)$, $a \neq b$.
+
+Adapted from Soare 2016, Exercise 2.3.14, where the theorem is attributed to Smullyan.
+:::
+::::
+
+::::exercise{#ex-uniform-fixed-point difficulty=2 objective="Show that a fixed point can be computed from an index of the transformation." lessons="universal-program-smn"}
+Show that there is a total computable function $n$ such that, for every $i$ for which $\Phi_i$ is total, $\Phi_{n(i)} = \Phi_{\Phi_i(n(i))}$. Why does :ref{#thm-fixed-point-parameters}, applied to $(i, m) \mapsto \Phi_i(m)$, not give this directly?
+
+:::solution
+Let $d$ be the function of the proof of :ref{#thm-fixed-point}, $\delta$ an index of $d$, and $c$ the composition function of :ref{#ex-smn-uses}, with $\Phi_{c(a, b)} = \Phi_a \circ \Phi_b$. Let $n(i) = d(c(i, \delta))$, a total computable function. If $\Phi_i$ is total, then $v = c(i, \delta)$ is an index of the total function $\Phi_i \circ d$, and the proof of :ref{#thm-fixed-point}, applied to $f = \Phi_i$ with this index $v$, shows that $\Phi_{d(v)} = \Phi_{\Phi_i(d(v))}$; that is, $\Phi_{n(i)} = \Phi_{\Phi_i(n(i))}$.
+
+:ref{#thm-fixed-point-parameters} requires a total function of two variables, and $(i, m) \mapsto \Phi_i(m)$ is not total. The construction above works for all $i$, and the totality of $\Phi_i$ is only used to check that $n(i)$ is a fixed point.
+:::
+::::
+
+::::exercise{#ex-singleton-self difficulty=1 objective="Combine Kleene's form of the fixed point theorem with the existence of infinitely many fixed points."}
+Show that there are infinitely many $e$ with $W_e = \{ e \}$.
+
+:::solution
+By :ref{#cor-smn-parameters}, there is a total computable $s$ with $\Phi_{s(n)}(x) \simeq 0$ if $x = n$, undefined otherwise; so $W_{s(n)} = \{ n \}$. By :ref{#prop-infinitely-many-fixed-points}, for every $k$ there is $e \geq k$ with $\Phi_e = \Phi_{s(e)}$, hence $W_e = W_{s(e)} = \{ e \}$.
+:::
+::::
+
+::::exercise{#ex-singleton-self-not-computable difficulty=2 objective="Apply the fixed point theorem to a set of indices that is not an index set."}
+Show that the set $S = \{ e : W_e = \{ e \} \}$ is not computable.
+
+:::solution
+Suppose $S$ is computable. Let $g(e, x) \simeq 0$ if $x = e$ and $e \notin S$, and $g(e, x)$ undefined otherwise; $g$ is partial computable, the conditions being computable. By :ref{#cor-self-reference}, there is $e$ with $\Phi_e(x) \simeq g(e, x)$ for every $x$. If $e \in S$, then $W_e = \emptyset \neq \{ e \}$, so $e \notin S$. If $e \notin S$, then $W_e = \{ e \}$, so $e \in S$. Both cases are contradictory. The set $S$ is not an index set (by :ref{#ex-singleton-self} and the padding lemma), so Rice's theorem of the next lesson does not apply to it; the argument is that of :ref{#prop-halting-via-fixed-point}.
+:::
+::::
+:::::

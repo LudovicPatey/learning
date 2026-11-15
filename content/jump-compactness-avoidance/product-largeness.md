@@ -56,7 +56,7 @@ Let $\mathcal A$ be a non-trivial large class of $I$-tuples. For every finite co
 Suppose not. For each $j : I \to k$ there is a finite cover $\mathcal Z^j$ of $\nat$ with no function $r$ making the tuple of its parts a member of $\mathcal A \cap \mathcal L_{\vec Y_j}$. Let $Q_0, \dots, Q_{l-1}$ be a common refinement of all the covers $\mathcal Z^j$ and of $Y_0, \dots, Y_{k-1}$. By largeness, some $r : I \to l$ has $\vec Q_r \in \mathcal A$. Each $Q_{r(\nu)}$ is infinite, since $\mathcal A$ is non-trivial, and contained in some $Y_{j(\nu)}$; this defines $j : I \to k$. Each $Q_{r(\nu)}$ is also contained in a part $Z^j_{s(\nu)}$ of $\mathcal Z^j$. By upward closure the tuple $\langle Z^j_{s(\nu)} \rangle$ is in $\mathcal A$, and $Z^j_{s(\nu)}$ contains the infinite subset $Q_{r(\nu)}$ of $Y_{j(\nu)}$, so the tuple is in $\mathcal L_{\vec Y_j}$. This contradicts the choice of $\mathcal Z^j$.
 :::
 
-By the two lemmas, the class of tuples $\vec W$ such that $\mathcal A \cap \mathcal L_{\vec W}$ is large is a large subclass of $\mathcal A$; it is the largest partition regular subclass, as in :ref{#prop-largest-partition-regular} (last exercise). The cover lemma is how a condition will choose, for each reservoir, a part of a cover while keeping the class large.
+By the two lemmas, the class of tuples $\vec W$ such that $\mathcal A \cap \mathcal L_{\vec W}$ is large is a large subclass of $\mathcal A$; it is the largest partition regular subclass, as in :ref{#prop-largest-partition-regular} (:ref{#ex-product-largest-pr}). The cover lemma is how a condition will choose, for each reservoir, a part of a cover while keeping the class large.
 
 :::quiz[product largeness]
 In the proof of :ref{#lem-product-intersection}, why is the cover refined so that each part is contained in or disjoint from each $X_\nu$ and $W_\nu$?
@@ -82,6 +82,16 @@ Where is non-triviality used in :ref{#lem-product-cover}?
   The refinement exists for any finite family of finite covers.
 :::
 
+::::exercise{#ex-product-largest-pr difficulty=2 objective="Characterize the largest partition regular subclass of a large class of tuples by the intersection and cover lemmas."}
+Call a class $\mathcal P$ of $I$-tuples **partition regular** if it is non-empty and upward closed, and for every $\vec X \in \mathcal P$ and every finite cover $Y_0, \dots, Y_{k-1}$ of $\nat$, there is $j : I \to k$ with $\langle X_\nu \cap Y_{j(\nu)} : \nu \in I \rangle \in \mathcal P$. Let $\mathcal A$ be a non-trivial large class of $I$-tuples and $\mathcal L(\mathcal A) = \{ \vec X : \mathcal A \cap \mathcal L_{\vec X} \text{ is large} \}$. Show that $\mathcal L(\mathcal A)$ is a partition regular subclass of $\mathcal A$, and that it contains every partition regular subclass of $\mathcal A$.
+
+:::solution
+$\mathcal L(\mathcal A) \subseteq \mathcal A$ by the last statement of :ref{#lem-product-intersection}, and it is upward closed since $\mathcal L_{\vec X} \subseteq \mathcal L_{\vec Y}$ when $X_\nu \subseteq Y_\nu$ for all $\nu$. It is non-empty, since it contains the tuple with all coordinates $\nat$. Let $\vec X \in \mathcal L(\mathcal A)$ and let $Y_0, \dots, Y_{k-1}$ cover $\nat$. The class $\mathcal A \cap \mathcal L_{\vec X}$ is large and non-trivial, so by :ref{#lem-product-cover} some $j$ makes $\mathcal A \cap \mathcal L_{\vec X} \cap \mathcal L_{\vec Y_j}$ large, and by :ref{#lem-product-intersection}, $\mathcal A \cap \mathcal L_{\langle X_\nu \cap Y_{j(\nu)} \rangle}$ is large: the tuple $\langle X_\nu \cap Y_{j(\nu)} \rangle$ is in $\mathcal L(\mathcal A)$.
+
+Let $\mathcal P \subseteq \mathcal A$ be partition regular and $\vec X \in \mathcal P$. The class $\mathcal A \cap \mathcal L_{\vec X}$ is upward closed. For a cover $Y_0, \dots, Y_{k-1}$ of $\nat$, partition regularity gives $j$ with $\langle X_\nu \cap Y_{j(\nu)} \rangle \in \mathcal P \subseteq \mathcal A$. Its coordinates are infinite, since $\mathcal A$ is non-trivial, so $\vec Y_j$ is in $\mathcal A$ by upward closure and in $\mathcal L_{\vec X}$. So $\mathcal A \cap \mathcal L_{\vec X}$ is large, and $\vec X \in \mathcal L(\mathcal A)$. This is the product version of :ref{#prop-largest-partition-regular}.
+:::
+::::
+
 ## Effective classes of tuples
 
 As in :ref{to="jump-cone-avoidance/largeness"}, fix a Scott ideal $\mathcal M$ with a code $M = \bigoplus_i Z_i$. For a set $Y$, an index $e$ and an index set $I$, let $\mathcal U^{Y, I}_e$ be the class of $I$-tuples $\vec X$ such that some $I$-tuple of finite sets $\vec F$ enumerated in $W^Y_e$ satisfies $F_\nu \subseteq X_\nu$ for all $\nu$. These are exactly the upward closed $\Sigma^0_1(Y)$ classes of $I$-tuples. For $S \subseteq \nat^2$, let $\mathcal U^I_S = \bigcap_{(e, i) \in S} \mathcal U^{Z_i, I}_e$; the classes $\mathcal U^{Z_i, I}_e$, and their finite intersections, are the **$\Sigma^0_1(\mathcal M)$ classes** of $I$-tuples. For an $I$-tuple $\vec W$ of members of $\mathcal M$, $\mathcal L_{\vec W} = \bigcap_{\nu, n} \{ \vec Y : |Y_\nu \cap W_\nu| \geq n \}$ is $\mathcal U^I_E$ for a set $E$ computable from the $M$-indices of the $W_\nu$.
@@ -100,9 +110,15 @@ As in :ref{to="jump-cone-avoidance/largeness"}, fix a Scott ideal $\mathcal M$ w
 
 If $M$ is low and $S$ is $\Delta^0_2$, the property "$\mathcal U^I_S$ is large" is $\Pi^0_1(\emptyset')$, that is, $\Pi^0_2$. This is the complexity that will make the forcing questions of the course $\Sigma^0_2$.
 
-## Exercises
+## Notes and references
 
-::::exercise{difficulty=1}
+Product largeness and :ref{#lem-product-decreasing}, :ref{#lem-product-intersection} and :ref{#lem-product-cover} are due to Monin and Patey (*SRT²₂ does not imply RT²₂ in ω-models*); the presentation follows the section *Product largeness* of the chapter *Jump compactness avoidance* of Patey's monograph, where the cover lemma is proved in the form "$\mathcal L(\mathcal A)$ is large" and :ref{#ex-product-largest-pr} is stated without proof. The complexity of largeness is the product version of :ref{#prop-largeness-complexity}, with the compactness argument of :ref{#lem-cover-class}.
+
+- B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics (2021); arXiv:1905.08427.
+- L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, section *Product largeness*.
+
+:::::exercises
+::::exercise{#ex-product-pairs difficulty=1 objective="Decide the largeness of two classes of pairs, and see that conditions carried by one coordinate behave differently from conditions split between two."}
 Let $R$ be infinite and coinfinite and $I = \{0, 1\}$. Decide whether the following classes of pairs $(Y_0, Y_1)$ are large: (a) $Y_0 \cup Y_1$ is infinite; (b) $Y_0 \cap Y_1 \cap R$ and $Y_0 \cap Y_1 \cap \overline R$ are infinite.
 
 :::solution
@@ -110,19 +126,45 @@ Let $R$ be infinite and coinfinite and $I = \{0, 1\}$. Decide whether the follow
 :::
 ::::
 
-::::exercise{difficulty=2}
-Call a class $\mathcal P$ of $I$-tuples **partition regular** if it is non-empty and upward closed, and for every $\vec X \in \mathcal P$ and every finite cover $Y_0, \dots, Y_{k-1}$ of $\nat$, there is $j : I \to k$ with $\langle X_\nu \cap Y_{j(\nu)} : \nu \in I \rangle \in \mathcal P$. Let $\mathcal A$ be a non-trivial large class of $I$-tuples and $\mathcal L(\mathcal A) = \{ \vec X : \mathcal A \cap \mathcal L_{\vec X} \text{ is large} \}$. Show that $\mathcal L(\mathcal A)$ is a partition regular subclass of $\mathcal A$, and that it contains every partition regular subclass of $\mathcal A$.
+::::exercise{#ex-product-finite-changes difficulty=1 objective="Check that the classes $\mathcal L_{\vec X}$ ignore finite changes, and that $\mathcal L_X \cap \mathcal L_Y$ can be much larger than $\mathcal L_{X \cap Y}$."}
+1. Let $\vec X$ and $\vec Y$ be $I$-tuples such that $X_\nu$ and $Y_\nu$ differ by finitely many elements for every $\nu \in I$. Show that $\mathcal L_{\vec X} = \mathcal L_{\vec Y}$.
+2. Let $I$ be a singleton, and $E$ and $O$ the sets of even and odd numbers. Show that $\nat \in \mathcal L_E \cap \mathcal L_O$ while $\mathcal L_{E \cap O} = \emptyset$. Deduce from :ref{#lem-product-intersection} that $\mathcal L_E \cap \mathcal L_O$ is not large, and check it directly.
 
 :::solution
-$\mathcal L(\mathcal A) \subseteq \mathcal A$ by the last statement of :ref{#lem-product-intersection}, and it is upward closed since $\mathcal L_{\vec X} \subseteq \mathcal L_{\vec Y}$ when $X_\nu \subseteq Y_\nu$ for all $\nu$. It is non-empty, since it contains the tuple with all coordinates $\nat$. Let $\vec X \in \mathcal L(\mathcal A)$ and let $Y_0, \dots, Y_{k-1}$ cover $\nat$. The class $\mathcal A \cap \mathcal L_{\vec X}$ is large and non-trivial, so by :ref{#lem-product-cover} some $j$ makes $\mathcal A \cap \mathcal L_{\vec X} \cap \mathcal L_{\vec Y_j}$ large, and by :ref{#lem-product-intersection}, $\mathcal A \cap \mathcal L_{\langle X_\nu \cap Y_{j(\nu)} \rangle}$ is large: the tuple $\langle X_\nu \cap Y_{j(\nu)} \rangle$ is in $\mathcal L(\mathcal A)$.
+1. For a set $Z$, the sets $Z \cap X_\nu$ and $Z \cap Y_\nu$ differ only on elements of the finite set $(X_\nu \setminus Y_\nu) \cup (Y_\nu \setminus X_\nu)$, so one is infinite if and only if the other is.
+2. $\nat$ contains the infinite sets $E$ and $O$. Since $E \cap O = \emptyset$, no set meets $E \cap O$ infinitely often. If $\mathcal L_E \cap \mathcal L_O$ were large, :ref{#lem-product-intersection}, applied to the class $\mathcal A$ of all sets, would make $\mathcal L_{E \cap O}$ large; but the empty class is not large, since the cover of $\nat$ by the single part $\nat$ has no part in it. Directly: for the $2$-cover $E, O$ of $\nat$, $E \notin \mathcal L_O$ and $O \notin \mathcal L_E$.
 
-Let $\mathcal P \subseteq \mathcal A$ be partition regular and $\vec X \in \mathcal P$. The class $\mathcal A \cap \mathcal L_{\vec X}$ is upward closed. For a cover $Y_0, \dots, Y_{k-1}$ of $\nat$, partition regularity gives $j$ with $\langle X_\nu \cap Y_{j(\nu)} \rangle \in \mathcal P \subseteq \mathcal A$. Its coordinates are infinite, since $\mathcal A$ is non-trivial, so $\vec Y_j$ is in $\mathcal A$ by upward closure and in $\mathcal L_{\vec X}$. So $\mathcal A \cap \mathcal L_{\vec X}$ is large, and $\vec X \in \mathcal L(\mathcal A)$. This is the product version of :ref{#prop-largest-partition-regular}.
+Adapted from the section *Product largeness* of the chapter *Jump compactness avoidance* of Patey's monograph (an exercise on finite changes and the remark on even and odd numbers).
 :::
 ::::
 
-## Notes and references
+::::exercise{#ex-product-projections difficulty=1 objective="Show that the coordinates of a large class of tuples form large classes of sets, and that a large class of tuples is not determined by them."}
+For a class $\mathcal A$ of $I$-tuples and $\nu \in I$, let $\pi_\nu(\mathcal A) = \{ Y_\nu : \vec Y \in \mathcal A \}$. Show that if $\mathcal A$ is large, every $\pi_\nu(\mathcal A)$ is a large class of sets. Give a large class $\mathcal A$ of pairs that is strictly contained in the large class $\{ \vec Y : Y_\nu \in \pi_\nu(\mathcal A) \text{ for all } \nu \}$.
 
-Product largeness and :ref{#lem-product-decreasing}, :ref{#lem-product-intersection} and :ref{#lem-product-cover} are due to Monin and Patey (*SRT²₂ does not imply RT²₂ in ω-models*); the presentation follows the section *Product largeness* of the chapter *Jump compactness avoidance* of Patey's monograph, where the cover lemma is proved in the form "$\mathcal L(\mathcal A)$ is large" and the last exercise is stated without proof. The complexity of largeness is the product version of :ref{#prop-largeness-complexity}, with the compactness argument of :ref{#lem-cover-class}.
+:::solution
+Let $X \in \pi_\nu(\mathcal A)$, say $X = Y_\nu$ with $\vec Y \in \mathcal A$, and $X \subseteq X'$. Replacing the coordinate $\nu$ of $\vec Y$ by $X'$ gives a member of $\mathcal A$ by upward closure, so $X' \in \pi_\nu(\mathcal A)$. For a $k$-cover $Y_0, \dots, Y_{k-1}$ of $\nat$, largeness gives $j$ with $\vec Y_j \in \mathcal A$, so $Y_{j(\nu)} \in \pi_\nu(\mathcal A)$. So $\pi_\nu(\mathcal A)$ is large.
 
-- B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics (2021); arXiv:1905.08427.
-- L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, section *Product largeness*.
+Let $\mathcal A$ be the class of pairs $(Y_0, Y_1)$ with $Y_0 \cap Y_1$ infinite, large by item 3 of :ref{#ex-product-large}. Each $\pi_\nu(\mathcal A)$ is the class of infinite sets: members of $\mathcal A$ have infinite coordinates, and $(Y, Y) \in \mathcal A$ for every infinite $Y$. The class of pairs of infinite sets is large by item 1 of :ref{#ex-product-large}, and it contains the pair of the even and the odd numbers, which is not in $\mathcal A$.
+:::
+::::
+
+::::exercise{#ex-product-unions difficulty=2 objective="Compare product largeness with the largeness of the class of unions, and see that the union of a large class of tuples need not be large."}
+For a class $\mathcal A$ of $I$-tuples, let $\bigcup \mathcal A = \{ \bigcup \vec Y : \vec Y \in \mathcal A \}$.
+
+1. Show that if $\mathcal B$ is a large class of sets, the class of $I$-tuples $\vec Y$ with $\bigcup \vec Y \in \mathcal B$ is large.
+2. Let $R$ be infinite and coinfinite, $I = \{0, 1\}$ and $\mathcal A = \mathcal L_R \times \mathcal L_{\overline R}$. Show that $\bigcup \mathcal A = \mathcal L_R \cap \mathcal L_{\overline R}$, and deduce that $\bigcup \mathcal A$ is not large.
+
+:::solution
+1. If $Y_\nu \subseteq Y'_\nu$ for all $\nu$, then $\bigcup \vec Y \subseteq \bigcup \vec Y'$, so the class is upward closed. For a finite cover of $\nat$, some part $Y_t$ is in $\mathcal B$, and the constant function $j = t$ gives $\bigcup \vec Y_j = Y_t \in \mathcal B$.
+2. If $(Y_0, Y_1) \in \mathcal A$, the union contains $Y_0$, which meets $R$ infinitely often, and $Y_1$, which meets $\overline R$ infinitely often. Conversely, if $X \in \mathcal L_R \cap \mathcal L_{\overline R}$, then $(X, X) \in \mathcal A$ and its union is $X$. By :ref{#lem-no-two-sides}, $\mathcal L_R \cap \mathcal L_{\overline R}$ contains no large class, so it is not large. A large class of tuples can thus keep two requirements that no large class of sets can keep at once, which is the purpose of product largeness.
+:::
+::::
+
+::::exercise{#ex-product-cover-trivial difficulty=1 objective="See why the cover lemma needs a non-trivial class."}
+Let $I$ be a singleton and $\mathcal A = \{ X : 0 \in X \}$. Show that $\mathcal A$ is large, and that for the cover $\{0\}, \nat \setminus \{0\}$ of $\nat$, neither $\mathcal A \cap \mathcal L_{\{0\}}$ nor $\mathcal A \cap \mathcal L_{\nat \setminus \{0\}}$ is large. Where does the proof of :ref{#lem-product-cover} use non-triviality?
+
+:::solution
+$\mathcal A$ is upward closed, and for every finite cover of $\nat$, the part containing $0$ is in $\mathcal A$; it is trivial, since $\{0\} \in \mathcal A$. The class $\mathcal L_{\{0\}}$ is empty, since $\{0\}$ is finite, so $\mathcal A \cap \mathcal L_{\{0\}}$ is not large. For the cover $\{0\}, \nat \setminus \{0\}$ itself, the part $\{0\}$ does not meet $\nat \setminus \{0\}$, and the part $\nat \setminus \{0\}$ does not contain $0$; so neither is in $\mathcal A \cap \mathcal L_{\nat \setminus \{0\}}$, which is not large. The proof of the lemma uses non-triviality to know that the parts $Q_{r(\nu)}$ chosen in $\mathcal A$ are infinite, so that the coarser parts containing them meet $Y_{j(\nu)}$ infinitely often; here the part $\{0\}$ is chosen, and it is finite.
+:::
+::::
+:::::

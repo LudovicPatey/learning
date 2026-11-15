@@ -138,17 +138,7 @@ Which of these sets are $\Delta^0_2$?
   It is $\Pi^0_2$ and not $\Sigma^0_2$, by :ref{#cor-hierarchy-strict}.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the set $\{ e : \Phi^{\emptyset'}_e \text{ is total} \}$ is $\Pi^0_3$.
-
-:::solution
-It is $\{ e : \forall x\ \exists s\ \Phi^{\emptyset'}_e(x)[s]\converge \}$, a $\Pi^0_2(\emptyset')$ set, since the relation $\Phi^{\emptyset'}_e(x)[s]\converge$ is $\emptyset'$-computable. Its complement is $\Sigma^0_2(\emptyset')$, that is, c.e. in $\emptyset'' = (\emptyset')'$ by :ref{#thm-post} relativized to $\emptyset'$, and hence $\Sigma^0_3$ by the theorem unrelativized. So the set is $\Pi^0_3$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-jump-m-reduction difficulty=2 objective="Recover a Turing reduction from a many-one reduction between jumps, using the uniformity of the jump theorem."}
 Show that $X \leq_T Y$ if and only if $X' \leq_m Y'$.
 
 :::solution
@@ -156,7 +146,7 @@ If $X \leq_T Y$, then $X' \leq_1 Y'$ by :ref{#thm-jump}. Conversely, let $h$ be 
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-sigma2-cofinitely difficulty=2 objective="Rewrite a $\Sigma^0_2$ definition as a condition that holds at all sufficiently large stages of a computable approximation."}
 Show that a set $A$ is $\Sigma^0_2$ if and only if $A = \{ x : \exists y\ \forall z \geq y\ \ g(x, z) = 1 \}$ for some total computable function $g : \nat^2 \to \{0, 1\}$.
 
 :::solution
@@ -164,7 +154,7 @@ A set of this form is $\Sigma^0_2$. Conversely, let $A = \{ x : \exists y\ \fora
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise[Strictness by diagonalization]{#ex-hierarchy-universal difficulty=2 objective="Prove the strictness of the hierarchy by building universal $\Sigma^0_n$ relations and diagonalizing against them."}
 This exercise proves the strictness of the hierarchy by a direct diagonal argument, without the jump. Let $n \geq 1$.
 
 1. Show that there is a $\Sigma^0_n$ relation $U_n \subseteq \nat^2$ that is **universal**: for every $\Sigma^0_n$ set $A$ there is $e$ with $A = \{ x : (e, x) \in U_n \}$.
@@ -180,7 +170,7 @@ This is Cantor's diagonal argument, as in the proof that $\emptyset'$ is not com
 
 ## Notes and references
 
-The theorem is due to Post, who announced it in 1948. The jump and the use principle, on which :ref{#lem-sigma2-jump} rests, were developed by Kleene and Post (1954). Soare's *Turing Computability* gives the theorem as Theorem 4.2.2, with the hierarchy theorem as Corollary 4.2.3 and the relativized form as Theorem 4.4.2; Downey and Hirschfeldt give it as Theorem 2.6.4, and Nies as Theorem 1.4.13. These books prove it, as here, by an induction in which the use principle accounts for one quantifier; Monin and Patey first prove that $\emptyset^{(n)}$ is $\Sigma^0_n$-complete, and deduce the rest. The characterization of $\Sigma^0_2$ sets in the third exercise is close to Nies, Proposition 1.4.17; it is the starting point of the use of "infinitely often" and "cofinitely often" conditions in constructions below $\emptyset''$.
+The theorem is due to Post, who announced it in 1948. The jump and the use principle, on which :ref{#lem-sigma2-jump} rests, were developed by Kleene and Post (1954). Soare's *Turing Computability* gives the theorem as Theorem 4.2.2, with the hierarchy theorem as Corollary 4.2.3 and the relativized form as Theorem 4.4.2; Downey and Hirschfeldt give it as Theorem 2.6.4, and Nies as Theorem 1.4.13. These books prove it, as here, by an induction in which the use principle accounts for one quantifier; Monin and Patey first prove that $\emptyset^{(n)}$ is $\Sigma^0_n$-complete, and deduce the rest. The characterization of $\Sigma^0_2$ sets in :ref{#ex-sigma2-cofinitely} is close to Nies, Proposition 1.4.17; it is the starting point of the use of "infinitely often" and "cofinitely often" conditions in constructions below $\emptyset''$.
 
 - E. L. Post, *Degrees of recursive unsolvability (preliminary report)*, Bulletin of the American Mathematical Society 54 (1948), 641–642.
 - S. C. Kleene and E. L. Post, *The upper semi-lattice of degrees of recursive unsolvability*, Annals of Mathematics 59 (1954), 379–407.
@@ -188,3 +178,65 @@ The theorem is due to Post, who announced it in 1948. The jump and the use princ
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.6.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.4.
 - B. Monin and L. Patey, *Computability theory*, chapter *Arithmetic hierarchy*.
+
+:::::exercises
+::::exercise{#ex-tot-jump-pi3 difficulty=1 objective="Bound the complexity of a relativized index set by applying Post's theorem twice."}
+Show that the set $\{ e : \Phi^{\emptyset'}_e \text{ is total} \}$ is $\Pi^0_3$.
+
+:::solution
+It is $\{ e : \forall x\ \exists s\ \Phi^{\emptyset'}_e(x)[s]\converge \}$, a $\Pi^0_2(\emptyset')$ set, since the relation $\Phi^{\emptyset'}_e(x)[s]\converge$ is $\emptyset'$-computable. Its complement is $\Sigma^0_2(\emptyset')$, that is, c.e. in $\emptyset'' = (\emptyset')'$ by :ref{#thm-post} relativized to $\emptyset'$, and hence $\Sigma^0_3$ by the theorem unrelativized. So the set is $\Pi^0_3$.
+:::
+::::
+
+::::exercise{#ex-jump-shift difficulty=1 objective="Translate levels of the hierarchy relative to an iterated jump into unrelativized levels."}
+1. Show that for all $m, n \geq 0$, a relation is $\Sigma^0_{n+1}(\emptyset^{(m)})$ if and only if it is $\Sigma^0_{n+m+1}$, and likewise with $\Pi$ in place of $\Sigma$. For instance, the $\Pi^0_2(\emptyset')$ relations are the $\Pi^0_3$ relations.
+2. Show more generally that if $X$ is $\Delta^0_{m+1}$, then every $\Sigma^0_{n+1}(X)$ relation is $\Sigma^0_{n+m+1}$.
+
+:::solution
+We use the following fact: if a relation $B$ is $Y$-c.e. and $Y \leq_T Z$, then $B$ is $Z$-c.e. Indeed, if $B = \mathrm{dom}(\Phi^Y_i)$ and $Y = \Phi^Z_j$, the $Z$-machine that runs $\Phi_i$ and answers each oracle question by computing $\Phi^Z_j$, which is total, has domain $B$.
+
+1. By :ref{#thm-post} relativized to $X = \emptyset^{(m)}$, the $\Sigma^0_{n+1}(\emptyset^{(m)})$ relations are the relations c.e. in $(\emptyset^{(m)})^{(n)}$. By the definition of the iterated jump, $(\emptyset^{(m)})^{(n)} = \emptyset^{(m+n)}$ (induction on $n$). By :ref{#thm-post} with $X = \emptyset$, the $\emptyset^{(m+n)}$-c.e. relations are the $\Sigma^0_{m+n+1}$ relations. The $\Pi$ case follows by complementation.
+2. By :ref{#thm-post}, $X \leq_T \emptyset^{(m)}$. Applying item 5 of :ref{#thm-jump} $n$ times gives $X^{(n)} \leq_T \emptyset^{(m+n)}$. A $\Sigma^0_{n+1}(X)$ relation is $X^{(n)}$-c.e. by :ref{#thm-post}, hence $\emptyset^{(m+n)}$-c.e. by the fact above, hence $\Sigma^0_{m+n+1}$.
+:::
+::::
+
+::::exercise{#ex-arith-closure difficulty=1 objective="Use the characterization of the arithmetic sets by the iterated jumps to prove closure properties."}
+Show that the class of arithmetic sets is closed under Turing reducibility, under the join $A \oplus B$, and under the jump.
+
+:::solution
+By :ref{#cor-delta2-limit}, a set is arithmetic if and only if it is computable in $\emptyset^{(n)}$ for some $n$. If $A \leq_T B$ and $B \leq_T \emptyset^{(n)}$, then $A \leq_T \emptyset^{(n)}$. If $A \leq_T \emptyset^{(m)}$ and $B \leq_T \emptyset^{(n)}$, then both are computable in $\emptyset^{(\max(m, n))}$, since $\emptyset^{(k)} \leq_T \emptyset^{(k+1)}$ for every $k$ (:ref{#thm-jump}), and so is $A \oplus B$. If $A \leq_T \emptyset^{(n)}$, then $A' \leq_1 \emptyset^{(n+1)}$ by item 5 of :ref{#thm-jump}.
+:::
+::::
+
+::::exercise{#ex-m-to-one-one difficulty=1 objective="Derive one-one reductions to the iterated jumps from many-one reductions, by Post's theorem."}
+Let $n \geq 1$. Show that if $B \leq_m \emptyset^{(n)}$, then $B \leq_1 \emptyset^{(n)}$. Deduce that a set $A$ is $\Sigma^0_n$-complete if and only if it is $\Sigma^0_n$ and $\emptyset^{(n)} \leq_m A$.
+
+:::solution
+Since $\emptyset^{(n)}$ is $\Sigma^0_n$ (:ref{#thm-post}) and $B \leq_m \emptyset^{(n)}$, the set $B$ is $\Sigma^0_n$ by :ref{#prop-sigma1-delta1}, and item 3 of :ref{#thm-post} gives $B \leq_1 \emptyset^{(n)}$. For the second statement, a $\Sigma^0_n$-complete set $A$ satisfies $\emptyset^{(n)} \leq_m A$ by definition. Conversely, if $A$ is $\Sigma^0_n$ and $\emptyset^{(n)} \leq_m A$, then every $\Sigma^0_n$ set $B$ satisfies $B \leq_1 \emptyset^{(n)} \leq_m A$ by item 3 of :ref{#thm-post}, and $\leq_m$ is transitive. This is Soare (2016), Exercise 4.2.6.
+:::
+::::
+
+::::exercise{#ex-ce-in-pi-n difficulty=1 objective="Characterize the Σ-levels as the sets c.e. in a set of the level below."}
+Let $n \geq 1$. Show that the following are equivalent for a set $A$: (i) $A$ is $\Sigma^0_{n+1}$; (ii) $A$ is c.e. in some $\Sigma^0_n$ set; (iii) $A$ is c.e. in some $\Pi^0_n$ set.
+
+:::solution
+(i) implies (ii) and (iii): by :ref{#thm-post}, $A$ is c.e. in $\emptyset^{(n)}$, which is $\Sigma^0_n$. Being c.e. in a set depends only on its Turing degree (see the fact in the solution of :ref{#ex-jump-shift}), and $\emptyset^{(n)} \equiv_T \nat \setminus \emptyset^{(n)}$, which is $\Pi^0_n$; so $A$ is also c.e. in a $\Pi^0_n$ set.
+
+(ii) or (iii) implies (i): if $A$ is c.e. in a set $B$ that is $\Sigma^0_n$ or $\Pi^0_n$, then $B$ is $\Delta^0_{n+1}$ (:ref{#prop-hierarchy-basic}), so $B \leq_T \emptyset^{(n)}$ by :ref{#thm-post}. Hence $A$ is $\emptyset^{(n)}$-c.e., that is, $\Sigma^0_{n+1}$.
+:::
+::::
+
+::::exercise[Iterated limits]{#ex-double-limit difficulty=2 objective="Characterize the $\Delta^0_3$ sets by double limits, applying the limit lemma twice."}
+Show that a set $A$ is $\Delta^0_3$ if and only if there is a computable function $g : \nat^3 \to \{0, 1\}$ such that for all $x$ and $s$ the limit $h(x, s) = \lim_t g(x, s, t)$ exists, and for all $x$ the limit $\lim_s h(x, s)$ exists and equals $A(x)$.
+
+:::solution
+By :ref{#thm-post}, $A$ is $\Delta^0_3$ if and only if $A \leq_T \emptyset''$. We use :ref{#thm-limit-lemma} in its relativized form: a set is computable in $X'$ if and only if it has an $X$-computable $\Delta^0_2$ approximation, that is, an $X$-computable function $k(x, s) \in \{0, 1\}$ with $\lim_s k(x, s) = A(x)$ for every $x$.
+
+($\Rightarrow$) Since $A \leq_T (\emptyset')'$, there is an $\emptyset'$-computable $k : \nat^2 \to \{0, 1\}$ with $\lim_s k(x, s) = A(x)$. The set $H = \{ \langle x, s \rangle : k(x, s) = 1 \}$ is computable in $\emptyset'$, so by the limit lemma it has a computable approximation: a computable $\ell : \nat^2 \to \{0, 1\}$ with $\lim_t \ell(z, t) = H(z)$ for every $z$. Let $g(x, s, t) = \ell(\langle x, s \rangle, t)$. Then $\lim_t g(x, s, t) = H(\langle x, s \rangle) = k(x, s)$, and $\lim_s k(x, s) = A(x)$.
+
+($\Leftarrow$) Let $H = \{ \langle x, s \rangle : h(x, s) = 1 \}$. The function $(z, t) \mapsto g(\pi_0(z), \pi_1(z), t)$ is a computable $\Delta^0_2$ approximation of $H$, so $H \leq_T \emptyset'$ by the limit lemma, and $h$ is $\emptyset'$-computable. Since $\lim_s h(x, s) = A(x)$, the function $h$ is an $\emptyset'$-computable $\Delta^0_2$ approximation of $A$, and the relativized limit lemma gives $A \leq_T \emptyset''$.
+
+The same induction shows that $A$ is $\Delta^0_{n+1}$ if and only if $A(x)$ is an $n$-fold iterated limit of a computable $\{0, 1\}$-valued function. This is Nies (2009), Exercise 1.4.25.
+:::
+::::
+:::::

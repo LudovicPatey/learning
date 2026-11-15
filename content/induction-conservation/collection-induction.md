@@ -1,7 +1,7 @@
 ---
 title: Cuts, collection and the hierarchy
 summary: Overspill in models of Σ⁰ₙ induction; Σ⁰ₙ₊₁ collection implies Σ⁰ₙ induction; the hierarchy IΣ⁰ₙ₊₁ ⇒ BΣ⁰ₙ₊₁ ⇒ IΣ⁰ₙ; Σ⁰ₙ₊₁ collection is Π⁰ₙ collection.
-duration: 35
+duration: 30
 prerequisites: [induction-collection, second-order-arithmetic/nonstandard-models]
 ---
 
@@ -101,9 +101,7 @@ By :ref{#prop-least-number}, each $\mathsf I\Sigma^0_n$ may be replaced by $\mat
 
 None of these implications reverses. The next lesson builds, for every $n \geq 0$, a model of $\mathsf I\Sigma^0_n$ in which $\mathsf B\Sigma^0_{n+1}$ fails; models of $\mathsf B\Sigma^0_n$ in which $\mathsf I\Sigma^0_n$ fails also exist, and are admitted. A finer analysis is due to Slaman (2004): over $\mathsf I\Delta^0_0$ together with the totality of exponentiation, $\mathsf B\Sigma^0_n$ is equivalent to induction for $\Delta^0_n$ formulas, that is, for $\Sigma^0_n$ formulas that are equivalent, in the model at hand, to $\Pi^0_n$ formulas. So collection is itself an induction scheme, for a class of formulas that contains the $\Sigma^0_{n-1}$ and $\Pi^0_{n-1}$ formulas and is contained in $\Sigma^0_n$.
 
-## Exercises
-
-::::exercise{#ex-bsigma-bpi difficulty=1}
+::::exercise{#ex-bsigma-bpi difficulty=1 objective="Contract a block of existential quantifiers with the pairing function, to reduce $\Sigma^0_{n+1}$ collection to $\Pi^0_n$ collection."}
 Show that, over $\mathsf I\Delta^0_0$, $\mathsf B\Sigma^0_{n+1}$ is equivalent to $\mathsf B\Pi^0_n$ for every $n \geq 1$.
 
 :::solution
@@ -115,22 +113,6 @@ Since every $w$ is the pair of unique $u, v \leq w$, $\psi'(x, w)$ holds if and 
 :::
 ::::
 
-::::exercise{difficulty=2}
-Let $\mathcal M$ be a non-standard model of $\mathsf I\Delta^0_0 + \mathsf I\Sigma^0_1$ and $f \in \mathcal M$ a function with $f(k) \leq k$ for every standard $k$. Show that there is a non-standard $c$ with $f(x) \leq x$ for every $x \leq c$.
-
-:::solution
-Since $f$ is a function, $f(x) \leq x$ is expressed by the bounded formula $\exists y \leq x\ (\langle x, y \rangle \in f)$. So $\varphi(c) \equiv \forall x \leq c\ \exists y \leq x\ (\langle x, y \rangle \in f)$ is bounded, with parameter $f$, hence $\Sigma^0_1$. For every standard $k$, $\varphi(k)$ holds, since every $x \leq k$ is standard. By :ref{#prop-overspill-n}, $\varphi(c)$ holds for some non-standard $c$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that $\mathsf I\Delta^0_0$ proves the least number principle $\mathsf L\Delta^0_0$ for bounded formulas. Deduce that $\mathsf I\Delta^0_0 + \mathsf B\Sigma^0_{n+1}$ proves $\mathsf L\Sigma^0_n$ for every $n \geq 0$.
-
-:::solution
-Given a bounded $\varphi$ with $\varphi(c)$ and no least witness, the formula $\forall y \leq x\ \neg \varphi(y)$ is bounded, holds at $0$, and is preserved by successor, as in the proof of :ref{#prop-least-number}; bounded induction then gives $\neg \varphi(c)$. No collection is needed, because a bounded quantifier in front of a bounded formula gives a bounded formula. For $n \geq 1$, $\mathsf B\Sigma^0_{n+1}$ proves $\mathsf I\Sigma^0_n$ by :ref{#thm-collection-induction}, which proves $\mathsf L\Sigma^0_n$ by :ref{#prop-least-number}; for $n = 0$, $\mathsf L\Sigma^0_0$ is $\mathsf L\Delta^0_0$.
-:::
-::::
-
 ## Notes and references
 
 The implication from collection to induction is due to Paris and Kirby (1978), as is the strictness of the hierarchy, proved in the next lesson; Dzhafarov and Mummert (Theorem 6.1.3 and Section 6.3) give both, with attributions, and call it the Kirby–Paris hierarchy.
@@ -139,3 +121,77 @@ The implication from collection to induction is due to Paris and Kirby (1978), a
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 6.1–6.3.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 2, and Chapter IV.
 - T. A. Slaman, *Σₙ-bounding and Δₙ-induction*, Proceedings of the American Mathematical Society 132 (2004), 2449–2456.
+
+:::::exercises
+::::exercise{#ex-overspill-diagonal difficulty=2 objective="Apply overspill to a bounded formula with a set parameter, to extend a property of the standard numbers to a non-standard initial segment."}
+Let $\mathcal M$ be a non-standard model of $\mathsf I\Delta^0_0 + \mathsf I\Sigma^0_1$ and $f \in \mathcal M$ a function with $f(k) \leq k$ for every standard $k$. Show that there is a non-standard $c$ with $f(x) \leq x$ for every $x \leq c$.
+
+:::solution
+Since $f$ is a function, $f(x) \leq x$ is expressed by the bounded formula $\exists y \leq x\ (\langle x, y \rangle \in f)$. So $\varphi(c) \equiv \forall x \leq c\ \exists y \leq x\ (\langle x, y \rangle \in f)$ is bounded, with parameter $f$, hence $\Sigma^0_1$. For every standard $k$, $\varphi(k)$ holds, since every $x \leq k$ is standard. By :ref{#prop-overspill-n}, $\varphi(c)$ holds for some non-standard $c$.
+:::
+::::
+
+::::exercise{#ex-ldelta0-lsigma difficulty=2 objective="Check that bounded induction gives the least number principle for bounded formulas, and place the least number principles below collection."}
+Show that $\mathsf I\Delta^0_0$ proves the least number principle $\mathsf L\Delta^0_0$ for bounded formulas. Deduce that $\mathsf I\Delta^0_0 + \mathsf B\Sigma^0_{n+1}$ proves $\mathsf L\Sigma^0_n$ for every $n \geq 0$.
+
+:::solution
+Given a bounded $\varphi$ with $\varphi(c)$ and no least witness, the formula $\forall y \leq x\ \neg \varphi(y)$ is bounded, holds at $0$, and is preserved by successor, as in the proof of :ref{#prop-least-number}; bounded induction then gives $\neg \varphi(c)$. No collection is needed, because a bounded quantifier in front of a bounded formula gives a bounded formula. For $n \geq 1$, $\mathsf B\Sigma^0_{n+1}$ proves $\mathsf I\Sigma^0_n$ by :ref{#thm-collection-induction}, which proves $\mathsf L\Sigma^0_n$ by :ref{#prop-least-number}; for $n = 0$, $\mathsf L\Sigma^0_0$ is $\mathsf L\Delta^0_0$.
+:::
+::::
+
+::::exercise{#ex-strong-collection difficulty=2 objective="Show that the strong form of collection, which needs no hypothesis on the instance, already implies induction at the same level."}
+The **strong collection** scheme for a formula $\varphi(x, y)$ is
+$$
+\forall a\ \exists b\ \forall x < a\ \bigl(\exists y\ \varphi(x, y) \rightarrow \exists y < b\ \varphi(x, y)\bigr).
+$$
+Unlike $\mathsf B\Sigma^0_n$, it makes no assumption on the $x < a$: it bounds the witnesses of those $x$ that have one. Let $n \geq 1$. Show that $\mathsf I\Delta^0_0$ together with strong collection for $\Pi^0_{n-1}$ formulas (bounded formulas if $n = 1$) proves $\mathsf I\Sigma^0_n$.
+
+:::solution
+Strong collection for a formula implies collection for it: if every $x < a$ has a witness, the bound $b$ works for all of them. For $n \geq 2$ we first collect the induction and collection available one level down. The hypothesis contains $\mathsf B\Pi^0_{n-1}$, which is equivalent to $\mathsf B\Sigma^0_n$ by :ref{#ex-bsigma-bpi}; so $\mathsf I\Sigma^0_{n-1}$ holds by :ref{#thm-collection-induction}, hence $\mathsf B\Sigma^0_{n-1}$ by :ref{#thm-induction-collection} and $\mathsf I\Pi^0_{n-1}$ by :ref{#thm-isigma-ipi}.
+
+Now let $\varphi(x) \equiv \exists y\, \psi(x, y)$ with $\psi \in \Pi^0_{n-1}$ (bounded if $n = 1$), suppose $\varphi(0)$ and $\forall x\, (\varphi(x) \rightarrow \varphi(x + 1))$, and fix $a$. Strong collection for $\psi$, with the bound $a + 1$, gives $b$ such that every $x \leq a$ with $\varphi(x)$ has a witness $y < b$. Let
+$$
+\theta(x) \equiv x \leq a \rightarrow \exists y < b\ \psi(x, y).
+$$
+For $n = 1$ it is bounded; for $n \geq 2$ it is equivalent to a $\Pi^0_{n-1}$ formula by :ref{#lem-collection-closure}. Since $\varphi(0)$ holds, $0$ has a witness below $b$, so $\theta(0)$. If $\theta(x)$ and $x + 1 \leq a$, then $\varphi(x)$, hence $\varphi(x + 1)$, and $x + 1 \leq a$ has a witness below $b$: $\theta(x + 1)$. By $\mathsf I\Delta^0_0$ or $\mathsf I\Pi^0_{n-1}$, $\theta(a)$ holds, so $\varphi(a)$.
+
+The proof is that of :ref{#thm-collection-induction}, where the disjunct $\forall y\, \neg \psi(x, y)$ was needed to apply ordinary collection; strong collection makes it unnecessary, which is why no index is lost. Conversely, $\mathsf I\Sigma^0_n$ proves strong collection for $\Pi^0_{n-1}$ formulas. Adapted from Hájek and Pudlák, Chapter I, Lemma 2.29; Lemma 2.27 there proves the converse.
+:::
+::::
+
+::::exercise{#ex-bounded-functions difficulty=2 objective="Characterize $\Sigma^0_n$ collection by the boundedness of $\Sigma^0_n$-definable functions on bounded domains, using least witnesses."}
+Let $n \geq 1$, and write $\mathsf I\Sigma^0_0$ for $\mathsf I\Delta^0_0$. Show that over $\mathsf I\Delta^0_0 + \mathsf I\Sigma^0_{n-1}$, $\mathsf B\Sigma^0_n$ is equivalent to the following statement, for all $\Sigma^0_n$ formulas $\theta(x, y)$: if $\forall x < a\ \exists! y\ \theta(x, y)$, then $\exists c\ \forall x < a\ \exists y < c\ \theta(x, y)$. In words: a $\Sigma^0_n$-definable function on $[0, a)$ has a bounded range.
+
+:::solution
+Collection implies the statement, since $\exists!$ implies $\exists$. Conversely, assume the statement. By :ref{#ex-bsigma-bpi}, or by the same contraction of quantifiers when $n = 1$, it suffices to prove $\mathsf B\Pi^0_{n-1}$ (collection for bounded formulas if $n = 1$). Let $\varphi(x, y)$ be $\Pi^0_{n-1}$ with $\forall x < a\ \exists y\ \varphi(x, y)$, and let
+$$
+\theta(x, y) \equiv x < a \wedge \varphi(x, y) \wedge \forall y' < y\ \neg \varphi(x, y').
+$$
+For $n = 1$ it is bounded. For $n \geq 2$, $\mathsf I\Sigma^0_{n-1}$ proves $\mathsf B\Sigma^0_{n-1}$ (:ref{#thm-induction-collection}), so the last conjunct, a bounded universal quantifier in front of a $\Sigma^0_{n-1}$ formula, is equivalent to a $\Sigma^0_{n-1}$ formula (:ref{#lem-collection-closure}), and $\theta$, a conjunction of $\Pi^0_{n-1}$ and $\Sigma^0_{n-1}$ formulas, is equivalent to a $\Sigma^0_n$ formula.
+
+For $x < a$, there is a least $y$ with $\varphi(x, y)$: by $\mathsf L\Delta^0_0$ (:ref{#ex-ldelta0-lsigma}) if $n = 1$, and by $\mathsf L\Pi^0_{n-1}$ (:ref{#prop-least-number}) if $n \geq 2$. It satisfies $\theta(x, y)$, and it is the only such $y$: if $y_1 < y_2$ both satisfied $\theta(x, \cdot)$, the last conjunct for $y_2$ would give $\neg \varphi(x, y_1)$. So $\forall x < a\ \exists! y\ \theta(x, y)$, and the statement gives $c$ with $\forall x < a\ \exists y < c\ \theta(x, y)$, hence $\forall x < a\ \exists y < c\ \varphi(x, y)$.
+
+Adapted from Dzhafarov and Mummert, Proposition 6.2.4.
+:::
+::::
+
+::::exercise{#ex-overspill-columns difficulty=1 objective="Apply overspill at the right level of the hierarchy to a $\Pi^0_2$ property."}
+Let $\mathcal M$ be a non-standard model of $\mathsf{RCA}_0 + \mathsf I\Sigma^0_2$, and $X$ a set of $\mathcal M$ such that, for every standard $i$, the column $X^{[i]} = \{ j : \langle i, j \rangle \in X \}$ is unbounded in $M$. Show that there is a non-standard $c$ such that $X^{[i]}$ is unbounded for every $i \leq c$. Why does the overspill principle of the course on second-order arithmetic (:ref{#prop-overspill}) not suffice?
+
+:::solution
+Let $\psi(c) \equiv \forall i \leq c\ \forall m\ \exists j\ (j > m \wedge \langle i, j \rangle \in X)$. The bounded quantifier $\forall i \leq c$ merges with $\forall m$, so $\psi$ is a $\Pi^0_2$ formula with parameter $X$. For a standard $c$, every $i \leq c$ is standard, so $\psi(c)$ holds. By :ref{#prop-overspill-n} with $n = 2$, $\psi(c)$ holds for some non-standard $c$.
+
+:ref{#prop-overspill} concerns $\Sigma^0_1$ and $\Pi^0_1$ formulas and uses only $\mathsf I\Sigma^0_1$; the property "the column $i$ is unbounded" is $\Pi^0_2$, and overspill for it requires $\mathsf I\Sigma^0_2$.
+:::
+::::
+
+::::exercise{#ex-overspill-limits difficulty=2 objective="Combine Parsons' lemma with overspill for a $\Sigma^0_2$ property involving a bounded universal quantifier."}
+Let $\mathcal M$ be a non-standard model of $\mathsf{RCA}_0 + \mathsf I\Sigma^0_2$, and $f : M \times M \to M$ a function of $\mathcal M$ such that, for every standard $x$, the limit $\lim_s f(x, s)$ exists in $\mathcal M$, that is, $\mathcal M \models \exists t\ \forall s \geq t\ f(x, s) = f(x, t)$. Show that there is a non-standard $c$ such that $\lim_s f(x, s)$ exists for every $x \leq c$. Where is collection used?
+
+:::solution
+Since $f$ is a total function, $f(x, s) = f(x, t)$ is equivalent to the $\Pi^0_1$ formula $\forall u\ \forall v\ ((\langle \langle x, s \rangle, u \rangle \in f \wedge \langle \langle x, t \rangle, v \rangle \in f) \rightarrow u = v)$. So $\lambda(x) \equiv \exists t\ \forall s\ (s < t \vee f(x, s) = f(x, t))$ is equivalent to a $\Sigma^0_2$ formula. The formula $\psi(c) \equiv \forall x \leq c\ \lambda(x)$ puts a bounded universal quantifier in front of it. Since $\mathcal M$ satisfies $\mathsf I\Sigma^0_2$, it satisfies $\mathsf B\Sigma^0_2$ (:ref{#thm-induction-collection}), and $\psi$ is equivalent in $\mathcal M$ to a $\Sigma^0_2$ formula by :ref{#lem-collection-closure}. For standard $c$, $\psi(c)$ holds by hypothesis, so by :ref{#prop-overspill-n} with $n = 2$, $\psi(c)$ holds for some non-standard $c$.
+
+Collection is used to see that $\psi$ is $\Sigma^0_2$: without it, $\psi$ is only $\Pi^0_3$, and overspill at level 2 does not apply. Compare with :ref{#ex-overspill-columns}, where the property is $\Pi^0_2$ and the bounded quantifier is absorbed by logic.
+:::
+::::
+:::::

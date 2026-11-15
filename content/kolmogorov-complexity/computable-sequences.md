@@ -1,7 +1,7 @@
 ---
 title: Chaitin's characterization of computable sequences
 summary: A string has few descriptions of length close to its complexity; a sequence is computable if and only if the complexity of its initial segments is at most that of their length, up to a constant.
-duration: 40
+duration: 45
 prerequisites: [initial-segments]
 ---
 
@@ -103,9 +103,7 @@ Why does the claim $P \uh m_i \in T_{s_i}$ use the fact that $a_\ell \leq a$ for
 
 The bound $\log n$ in (3) cannot be replaced by $2 \log n$: an exercise of the previous lesson shows that the characteristic sequence of every c.e. set $A$ satisfies $C(A \uh n) \leq^+ 2 \log n$, and non-computable c.e. sets exist.
 
-## Exercises
-
-::::exercise{difficulty=2}
+::::exercise{#ex-c-trivial-finite difficulty=2 objective="Turn the counting lemma into a bound on the number of sequences whose initial segments are as simple as their lengths."}
 Show that for every $d$ there are only finitely many sequences $X$ with $C(X \uh n) \leq C(n) + d$ for every $n$, and bound their number in terms of $d$.
 
 :::solution
@@ -122,3 +120,51 @@ The theorem and the two counting lemmas are from Chaitin's 1976 paper; Downey an
 - A. K. Zvonkin and L. A. Levin, *The complexity of finite objects and the development of the concepts of information and randomness by means of the theory of algorithms*, Russian Mathematical Surveys 25 (1970), 83–124.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 3.4.
 - B. Monin and L. Patey, *Computability theory*, chapter "Kolmogorov complexity and random numbers", section "Chaitin's theorem".
+
+:::::exercises
+::::exercise{#ex-shortest-descriptions-bounded difficulty=1 objective="Specialize the counting lemma to shortest descriptions, and compare with the total number of descriptions."}
+Show that there is a constant $b$ such that every string $\sigma$ has fewer than $b$ shortest $U$-descriptions, that is, strings $\tau$ with $U(\tau) = \sigma$ and $|\tau| = C(\sigma)$. Show that, on the other hand, every string has infinitely many $U$-descriptions, where $U$ is the optimal machine $U(0^e 1 \tau) = M_e(\tau)$ of :ref{#thm-invariance}.
+
+:::solution
+Apply :ref{#lem-description-count} to $M = U$ with $d = 0$: there is $c$ such that every $\sigma$ has fewer than $2^c$ $U$-descriptions of length at most $C(\sigma)$, and the shortest descriptions are among them. So $b = 2^c$ works.
+
+For the second statement, fix $\sigma$. The constant function with value $\sigma$ is partial computable, so it has infinitely many indices (the padding lemma), that is, $M_e(\tau) = \sigma$ for every $\tau$ and infinitely many $e$. For each such $e$, $U(0^e 1) = M_e(\varepsilon) = \sigma$, and these descriptions are pairwise distinct.
+:::
+::::
+
+::::exercise{#ex-c-trivial-many difficulty=2 objective="Show that the bound of the counting lemma is exponential in $d$ by exhibiting many sequences of low complexity."}
+Show that there is a constant $c$ such that, for every $j \geq 1$, at least $2^j$ sequences $X$ satisfy $C(X \uh n) \leq C(n) + j + 2 \log j + c$ for every $n$. Deduce that there is a constant $c'$ such that, for every large enough $d$, at least $2^{d - 2 \log d - c'}$ sequences satisfy $C(X \uh n) \leq C(n) + d$ for every $n$. Compare with :ref{#ex-c-trivial-finite}.
+
+:::solution
+Let $M$ be the machine that, on an input of the form $\bar\kappa\, 01\, \rho\, \alpha$, where $\bar\kappa$ is $\kappa$ with each bit doubled, $j$ is the number associated with $\kappa$ and $|\rho| = j$, computes the number $n = U(\alpha)$ and outputs $(\rho\, 0^\infty) \uh n$, the first $n$ bits of the sequence $\rho 000\cdots$. The decomposition of the input is determined: $\bar\kappa\, 01$ by the end mark, then $\rho$ by its length $j$. Let $X = \rho\, 0^\infty$ with $|\rho| = j \geq 1$, and let $\alpha$ be a shortest description of $n$. Then $M(\bar\kappa\, 01\, \rho\, \alpha) = X \uh n$, with $|\kappa| = \lfloor \log(j + 1) \rfloor \leq \log j + 1$. So $C(X \uh n) \leq 2 \log j + 4 + j + C(n) + c_M$ for every $n$, and $c = 4 + c_M$ works. The $2^j$ strings $\rho$ of length $j$ give $2^j$ distinct sequences.
+
+Given $d$, let $j = \lfloor d - 2 \log d - c \rfloor$, which is at least $1$ for large $d$. Since $j \leq d$, $j + 2 \log j + c \leq d - 2 \log d + 2 \log d = d$, so the $2^j \geq 2^{d - 2 \log d - c - 1}$ sequences above satisfy $C(X \uh n) \leq C(n) + d$ for every $n$; $c' = c + 1$ works. So the number of such sequences, finite by :ref{#ex-c-trivial-finite} and less than $(d + 1)^2\, 2^{d + c''}$ for a constant $c''$, is $2^{d + O(\log d)}$.
+:::
+::::
+
+::::exercise{#ex-few-segments-log difficulty=2 objective="See why the proof of Chaitin's theorem bounds the width of the tree only at incompressible levels."}
+Show that :ref{#lem-few-segments} fails if $C(n)$ is replaced by $\log n$: the number of strings $\sigma$ of length $n$ with $C(\sigma) \leq \log n$ is not bounded by a constant independent of $n$.
+
+:::solution
+Let $M$ be the machine that, on an input of the form $\bar\kappa\, 01\, \rho\, \alpha$, with $j$ the number associated with $\kappa$ and $|\rho| = j$, computes the number $n = U(\alpha)$ and, if $j \leq n$, outputs $0^{n - j} \rho$. For $1 \leq j \leq n$ and $|\rho| = j$, the input $\bar\kappa\, 01\, \rho\, \alpha$, with $\kappa$ the string of $j$, of length at most $\log j + 1$, and $\alpha$ a shortest description of $n$, has length at most $2 \log j + 4 + j + C(n)$. So $C(0^{n-j}\rho) \leq C(n) + j + 2 \log j + c_1$ with $c_1 = 4 + c_M$.
+
+Let $n = 2^k$ with $k \geq 2$. By :ref{#prop-c-basic}, applied to the computable map $k \mapsto 2^k$, there is $c_2$ with $C(2^k) \leq \log k + c_2$. Take $j = \lfloor k/2 \rfloor \geq 1$. The $2^j$ strings $0^{n - j}\rho$ with $|\rho| = j$ have length $n$ and complexity at most $\log k + k/2 + 2 \log k + c_1 + c_2$, which is at most $k = \log n$ when $k$ is large enough. So, for large $k$, at least $2^{\lfloor k/2 \rfloor}$ strings of length $2^k$ satisfy $C(\sigma) \leq \log n$, and this number is unbounded. At such levels, which have small complexity $C(n)$, the hypothesis $C(X \uh n) \leq \log n + e$ of Chaitin's theorem allows many nodes; this is why the proof uses levels $n$ with $C(n) \geq \ell$.
+:::
+::::
+
+::::exercise{#ex-ce-tree-path difficulty=2 objective="See that the bounded width, and not only the finiteness of the set of paths, makes the paths of a c.e. tree computable."}
+Let $X$ be a sequence with a computable approximation: a computable function $(s, n) \mapsto X_s(n) \in \{0, 1\}$ such that, for every $n$, $X_s \uh n = X \uh n$ for all large enough $s$. For instance, $X = \emptyset'$ with $X_s$ the characteristic sequence of $\emptyset'_s$. Let
+$$
+T = \{ \sigma : \sigma = X_s \uh |\sigma| \text{ for some } s \geq |\sigma| \}.
+$$
+Show that $T$ is a c.e. tree whose only path is $X$. Deduce that no computable tree has exactly the paths of $T$ when $X = \emptyset'$, and say which step of the proof of :ref{#thm-chaitin-computable} uses more than the finiteness of the number of paths.
+
+:::solution
+$T$ is c.e., by searching for $s$. It is closed under prefixes: if $\sigma = X_s \uh |\sigma|$ with $s \geq |\sigma|$ and $\tau \preceq \sigma$, then $\tau = X_s \uh |\tau|$ and $s \geq |\tau|$. For every $n$, choosing $s \geq n$ with $X_s \uh n = X \uh n$ shows $X \uh n \in T$, so $X$ is a path.
+
+Let $Y \neq X$, and let $n$ be such that $Y \uh n \neq X \uh n$. Let $s_0$ be such that $X_s \uh n = X \uh n$ for every $s \geq s_0$. If $m \geq \max(n, s_0)$ and $Y \uh m \in T$, then $Y \uh m = X_s \uh m$ for some $s \geq m \geq s_0$, and $Y \uh n = X_s \uh n = X \uh n$, a contradiction. So $Y$ is not a path of $T$.
+
+The last paragraph of the proof of :ref{#thm-chaitin-computable} shows that a path of a computable tree with finitely many paths is computable. Since $\emptyset'$ is not computable, no computable tree has $\emptyset'$ as its only path. So the passage from $T$ to a computable tree $S$ with the same paths fails for this tree. In the proof, this passage uses the bound $a$ on the number of nodes of $T$ at infinitely many levels: the claim that $P \uh m_i \in T_{s_i}$ for every path $P$ rests on $a_\ell \leq a$ for $\ell \geq \ell^*$. The finiteness of the set of paths alone gives no such bound, and the tree of this exercise has a single path.
+:::
+::::
+:::::

@@ -22,7 +22,15 @@ A **well-ordering** is a linear order $(A, <)$ in which every non-empty subset h
 4. $(\mathbb Z, <)$, $(\nat, >)$ and $(\mathbb Q \cap [0, 1], <)$ are linear orders that are not well-orderings: $\mathbb Z$ and $(\nat, >)$ have no least element, and in $\mathbb Q \cap [0, 1]$ the subset of positive elements has none.
 :::
 
-The second equivalent form is the one used in practice: to show that an order is a well-ordering, one shows that it admits no infinite descending sequence. The equivalence is the second exercise. For $a \in A$, the **initial segment** $A_{<a} = \{ b \in A : b < a \}$ is again well-ordered. An **isomorphism** of linear orders is an order-preserving bijection.
+The second equivalent form is the one used in practice: to show that an order is a well-ordering, one shows that it admits no infinite descending sequence. The equivalence is :ref{#ex-wo-no-descending}. For $a \in A$, the **initial segment** $A_{<a} = \{ b \in A : b < a \}$ is again well-ordered. An **isomorphism** of linear orders is an order-preserving bijection.
+
+::::exercise{#ex-wo-no-descending difficulty=2 objective="Prove that well-orderings are the linear orders without infinite descending sequences, and see where dependent choice is used."}
+Show that a linear order $(A, <)$ is a well-ordering if and only if it has no infinite descending sequence, using the axiom of dependent choice for the converse.
+
+:::solution
+A descending sequence has no least element, so a well-ordering has none. Conversely, if a non-empty $S \subseteq A$ has no least element, then every $a \in S$ has some $b \in S$ with $b < a$; dependent choice gives a sequence $a_0 > a_1 > \cdots$ in $S$.
+:::
+::::
 
 :::lemma{#lem-wo-rigid}
 Let $(A, <)$ be a well-ordering.
@@ -104,6 +112,14 @@ Why is $1 + \omega = \omega$?
   Finite ordinals are not absorbed on the right: $\omega + 1 > \omega$.
 :::
 
+::::exercise{#ex-lambda-plus-n difficulty=1 objective="Decompose an ordinal into a limit part and a finite part."}
+Show that every ordinal $\alpha$ can be written uniquely as $\alpha = \lambda + n$ with $\lambda$ zero or a limit ordinal and $n \in \nat$.
+
+:::solution
+Let $\lambda$ be the largest ordinal $\leq \alpha$ that is zero or a limit; it exists since the supremum of limit ordinals below or equal to $\alpha$ is zero or a limit. If $\lambda + n \leq \alpha$ for every $n \in \nat$, then $\lambda + \omega = \sup_n (\lambda + n) \leq \alpha$ would be a limit larger than $\lambda$. So there is a least $n$ with $\lambda + (n + 1) > \alpha$; then $\lambda + n \leq \alpha < (\lambda + n) + 1$, and $\alpha = \lambda + n$, since no ordinal lies strictly between $\beta$ and $\beta + 1$. Uniqueness: if $\lambda + n = \lambda' + n'$ with $\lambda < \lambda'$, then $\lambda' \leq \lambda + n$ would be a limit of the form $\lambda + k$, $k \leq n$, which is a successor unless $k = 0$; so $\lambda = \lambda'$, and $n = n'$ by cancellation.
+:::
+::::
+
 ## Countable ordinals
 
 An ordinal is **countable** if it is a countable set; equivalently, it is the order type of a well-ordering of a subset of $\nat$, or of $\nat$ itself when it is infinite. Every countable ordinal is therefore coded by a set of numbers: a set $W \subseteq \nat \times \nat$ that is a well-ordering of its field. The orders of :ref{#ex-well-orderings} and :ref{#ex-ordinal-arithmetic} code $\omega + 1$, $\omega \cdot 2$ and $\omega^2$ in this way. The countable ordinals are closed under addition, multiplication, exponentiation and countable suprema.
@@ -120,32 +136,6 @@ This is the first appearance in the track of an argument that recurs: a set of o
 
 A countable union of countable sets being countable, every countable set of countable ordinals is bounded below $\omega_1$; this uses the axiom of choice. Since there are only countably many algorithms, only countably many countable ordinals can be the order types of computable well-orderings: the next lesson studies them.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that every ordinal $\alpha$ can be written uniquely as $\alpha = \lambda + n$ with $\lambda$ zero or a limit ordinal and $n \in \nat$.
-
-:::solution
-Let $\lambda$ be the largest ordinal $\leq \alpha$ that is zero or a limit; it exists since the supremum of limit ordinals below or equal to $\alpha$ is zero or a limit. If $\lambda + n \leq \alpha$ for every $n \in \nat$, then $\lambda + \omega = \sup_n (\lambda + n) \leq \alpha$ would be a limit larger than $\lambda$. So there is a least $n$ with $\lambda + (n + 1) > \alpha$; then $\lambda + n \leq \alpha < (\lambda + n) + 1$, and $\alpha = \lambda + n$, since no ordinal lies strictly between $\beta$ and $\beta + 1$. Uniqueness: if $\lambda + n = \lambda' + n'$ with $\lambda < \lambda'$, then $\lambda' \leq \lambda + n$ would be a limit of the form $\lambda + k$, $k \leq n$, which is a successor unless $k = 0$; so $\lambda = \lambda'$, and $n = n'$ by cancellation.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that a linear order $(A, <)$ is a well-ordering if and only if it has no infinite descending sequence, using the axiom of dependent choice for the converse.
-
-:::solution
-A descending sequence has no least element, so a well-ordering has none. Conversely, if a non-empty $S \subseteq A$ has no least element, then every $a \in S$ has some $b \in S$ with $b < a$; dependent choice gives a sequence $a_0 > a_1 > \cdots$ in $S$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that the order on $\nat \times \nat$ in which pairs are compared first by their second component, then by their first one, is a well-ordering, and that the lexicographic order on $\nat \times \{ 0, 1 \}$ (compare the first component first) has type $\omega$.
-
-:::solution
-A descending sequence $(x_k, y_k)$ has non-increasing second components, which are therefore eventually constant; from then on the first components decrease strictly, which is impossible in $\nat$. For the second order, $(n, i) \mapsto 2n + i$ is an isomorphism onto $(\nat, <)$: it is the computation $2 \cdot \omega = \omega$ of :ref{#ex-ordinal-arithmetic}.
-:::
-::::
-
 ## Notes and references
 
 Cantor introduced ordinals as order types of well-orderings (1883, 1897); von Neumann's definition dates from 1923. The comparison theorem is due to Cantor. Monin and Patey present von Neumann's and Cantor's approaches to ordinals side by side, with ordinal arithmetic and transfinite recursion, in their chapter on transfinite numbers.
@@ -153,3 +143,75 @@ Cantor introduced ordinals as order types of well-orderings (1883, 1897); von Ne
 - K. Kunen, *Set Theory*, College Publications, 2011.
 - T. Jech, *Set Theory*, 3rd millennium edition, Springer, 2003.
 - B. Monin and L. Patey, *Computability theory*, chapter *Transfinite numbers*, sections *Ordinals* and *Induction and transfinite recurrence*.
+
+:::::exercises
+::::exercise{#ex-antilex-orders difficulty=1 objective="Check the well-ordering property and compute the order type of two orders on pairs of numbers."}
+Show that the order on $\nat \times \nat$ in which pairs are compared first by their second component, then by their first one, is a well-ordering, and that the lexicographic order on $\nat \times \{ 0, 1 \}$ (compare the first component first) has type $\omega$.
+
+:::solution
+A descending sequence $(x_k, y_k)$ has non-increasing second components, which are therefore eventually constant; from then on the first components decrease strictly, which is impossible in $\nat$. For the second order, $(n, i) \mapsto 2n + i$ is an isomorphism onto $(\nat, <)$: it is the computation $2 \cdot \omega = \omega$ of :ref{#ex-ordinal-arithmetic}.
+:::
+::::
+
+::::exercise{#ex-dyadic-order difficulty=1 objective="Compute the order type of a well-ordering of the positive integers by reducing it to a product of orders."}
+For $n \geq 1$, let $v(n)$ be the exponent of $2$ in $n$, so that $n = 2^{v(n)} (2j + 1)$ for a unique $j$. Order the positive integers by $n \prec m$ if $v(n) < v(m)$, or $v(n) = v(m)$ and $n < m$. Show that $\prec$ is a well-ordering and compute its type. What happens if the comparison of $v(n)$ and $v(m)$ is reversed, that is, if $n \prec' m$ when $v(n) > v(m)$, or $v(n) = v(m)$ and $n < m$?
+
+:::solution
+The map $n = 2^k (2j + 1) \mapsto (j, k)$ is a bijection from the positive integers onto $\nat \times \nat$. For $n = 2^k (2j + 1)$ and $m = 2^{k'} (2j' + 1)$ with $k = k'$, we have $n < m$ if and only if $j < j'$. So $n \prec m$ if and only if $k < k'$, or $k = k'$ and $j < j'$: the map is an isomorphism onto $\nat \times \nat$ with pairs compared first by their second component, then by their first one. This order is a well-ordering of type $\omega \cdot \omega = \omega^2$ (:ref{#ex-ordinal-arithmetic}).
+
+The order $\prec'$ is a linear order, but not a well-ordering: $v(2^{k+1}) > v(2^k)$, so $2^{k+1} \prec' 2^k$ for every $k$, and $1 \succ' 2 \succ' 4 \succ' \cdots$ is an infinite descending sequence.
+:::
+::::
+
+::::exercise{#ex-addition-monotone difficulty=1 objective="Prove monotonicity properties of ordinal addition by transfinite induction, and see that addition is not strictly monotone in its left argument."}
+Show that for all ordinals $\alpha$, $\beta$, $\gamma$:
+
+1. if $\gamma < \beta$, then $\alpha + \gamma < \alpha + \beta$;
+2. $\beta \leq \alpha + \beta$.
+
+Show that $\alpha < \alpha'$ does not imply $\alpha + \beta < \alpha' + \beta$.
+
+:::solution
+1. By transfinite induction on $\beta$, for all $\gamma < \beta$ at once. For $\beta = 0$ there is nothing to prove. If $\beta = \delta + 1$, then $\gamma \leq \delta$, so $\alpha + \gamma \leq \alpha + \delta$ (by equality if $\gamma = \delta$, by the induction hypothesis otherwise), and $\alpha + \delta < (\alpha + \delta) + 1 = \alpha + \beta$. If $\beta$ is a limit, then $\gamma + 1 < \beta$, so $\alpha + \gamma < (\alpha + \gamma) + 1 = \alpha + (\gamma + 1) \leq \sup_{\delta < \beta} (\alpha + \delta) = \alpha + \beta$.
+2. By transfinite induction on $\beta$. For $\beta = 0$ it is clear. If $\beta \leq \alpha + \beta$, then $\beta < (\alpha + \beta) + 1$, so $\beta + 1 \leq (\alpha + \beta) + 1 = \alpha + (\beta + 1)$, since $\beta + 1$ is the least ordinal larger than $\beta$. For a limit $\lambda$, $\alpha + \lambda = \sup_{\delta < \lambda} (\alpha + \delta) \geq \sup_{\delta < \lambda} \delta = \lambda$.
+
+Finally $0 < 1$, but $0 + \omega = \sup_n n = \omega$ and $1 + \omega = \sup_n (1 + n) = \omega$.
+
+Adapted from Monin and Patey, chapter *Transfinite numbers*, exercise of the section *Induction and transfinite recurrence*, which asks for item 1.
+:::
+::::
+
+::::exercise{#ex-absorption difficulty=1 objective="Compute sums of ordinals with explicit isomorphisms between orders."}
+Show that $n + \omega = \omega$ for every $n \in \nat$, that $\omega + \omega^2 = \omega^2$, and that $\omega^2 + \omega \neq \omega^2$.
+
+:::solution
+Use the description of $\alpha + \beta$ as a copy of $\alpha$ followed by a copy of $\beta$. For $n + \omega$, send the $i$-th element of the copy of $n$ to $i$, and the $k$-th element of the copy of $\omega$ to $n + k$: this is an isomorphism onto $(\nat, <)$.
+
+Represent $\omega^2$ by $\nat \times \nat$, pairs being compared first by their second component, then by their first one (:ref{#ex-ordinal-arithmetic}). The order $\omega + \omega^2$ consists of a copy $\{ x : x \in \nat \}$ of $\omega$ followed by a copy $\{ (x, y) \}$ of this order. Send $x$ to $(x, 0)$ and $(x, y)$ to $(x, y + 1)$. This is a bijection onto $\nat \times \nat$. It preserves the order inside the first copy, since the pairs $(x, 0)$ are compared by $x$; inside the second copy, since $(x, y)$ and $(x', y')$ compare as $(x, y + 1)$ and $(x', y' + 1)$; and it sends the first copy below the second, since $0 < y + 1$. So $\omega + \omega^2 = \omega^2$.
+
+Finally, in $\omega^2 + \omega$ the copy of $\omega^2$ is a proper initial segment, so $\omega^2 + \omega$ is not isomorphic to $\omega^2$ by :ref{#lem-wo-rigid} (2), and $\omega^2 < \omega^2 + \omega$. (This is also the case $\gamma = 0$, $\beta = \omega$ of :ref{#ex-addition-monotone}.)
+:::
+::::
+
+::::exercise{#ex-mutual-embeddings difficulty=1 objective="Use the comparison of well-orderings to obtain an isomorphism from two embeddings, and see that the statement fails for linear orders."}
+Let $A$ and $B$ be well-orderings such that there are order-preserving injections from $A$ into $B$ and from $B$ into $A$. Show that $A$ and $B$ are isomorphic. Show that this fails for the linear orders $\mathbb Q \cap [0, 1]$ and $\mathbb Q \cap [0, 1)$.
+
+:::solution
+An order-preserving injection from $A$ into $B$ gives $|A| \leq |B|$, as shown in the paragraph after :ref{#thm-wo-comparison}; likewise $|B| \leq |A|$. So $|A| = |B|$, and $A$ and $B$ are both isomorphic to this ordinal, hence to each other.
+
+For the linear orders, the inclusion maps $\mathbb Q \cap [0, 1)$ into $\mathbb Q \cap [0, 1]$, and $x \mapsto x / 2$ maps $\mathbb Q \cap [0, 1]$ into $\mathbb Q \cap [0, 1/2] \subseteq \mathbb Q \cap [0, 1)$; both are order-preserving injections. But $\mathbb Q \cap [0, 1]$ has a largest element, $1$, while $\mathbb Q \cap [0, 1)$ has none: if $q < 1$, then $q < (q + 1) / 2 < 1$. An isomorphism sends a largest element to a largest element, so the two orders are not isomorphic.
+:::
+::::
+
+::::exercise{#ex-countable-into-q difficulty=2 objective="Embed every countable linear order into the rationals by a step-by-step construction, and describe the countable ordinals as the types of well-ordered sets of rationals."}
+Show that every countable linear order embeds into $(\mathbb Q, <)$ by an order-preserving injection. Deduce that the countable ordinals are exactly the order types of the subsets of $\mathbb Q$ that are well-ordered by the usual order.
+
+:::solution
+Let $(A, <)$ be a countable linear order, enumerated without repetition as $a_0, a_1, \dots$ (a finite list if $A$ is finite). We define $f(a_n)$ by induction on $n$, so that $f$ is order-preserving on $\{ a_0, \dots, a_n \}$. Suppose $f(a_0), \dots, f(a_{n-1})$ are defined. Among $a_0, \dots, a_{n-1}$, let $a_l$ be the largest element below $a_n$ and $a_r$ the least element above $a_n$, if they exist. Since $f$ is order-preserving on $\{ a_0, \dots, a_{n-1} \}$ and $a_l < a_r$, we have $f(a_l) < f(a_r)$. Choose $f(a_n) \in \mathbb Q$ strictly between $f(a_l)$ and $f(a_r)$, or above $f(a_l)$, or below $f(a_r)$, or arbitrary, depending on which of them exist; this is possible because $\mathbb Q$ is dense and has no endpoints. Then $f$ is order-preserving on $\{ a_0, \dots, a_n \}$: if $i < n$ and $a_i < a_n$, then $a_i \leq a_l$, so $f(a_i) \leq f(a_l) < f(a_n)$, and symmetrically if $a_i > a_n$. The union of these finite maps is an order-preserving injection from $A$ into $\mathbb Q$.
+
+If $\alpha$ is a countable ordinal, the image of $\alpha$ under such an embedding is a subset of $\mathbb Q$ isomorphic to $\alpha$, hence well-ordered of type $\alpha$. Conversely, a well-ordered subset of $\mathbb Q$ is countable, so its type is a countable ordinal.
+
+This is a classical result of Cantor. When $A$ is a computable linear order of $\nat$, the construction is effective: the map $f$ is computable, uniformly in $A$.
+:::
+::::
+:::::

@@ -280,10 +280,73 @@ Checked on 2026-11-12 (web search):
 - No figure in lessons 8–10; a figure of the measure argument (density point, removed
   classes) or of disperse blocks could help.
 - Forward references (not prerequisites): the table of `pa-avoidance-examples` cites
-  `thm-rt12-strong-pa` and `thm-liu-rt22`; an exercise of `ramsey-type-wkl` cites
-  `thm-liu-rt22`.
+  `thm-rt12-strong-pa`, `thm-liu-rt22` and `ex-coh-strong-pa`; the prose of `ramsey-type-wkl` cites
+  `thm-rwkl-pa-avoidance`.
 
-## 11. History
+## 11. Exercises
+
+Each lesson has one or two featured exercises in the text, after the material they
+practice, and a block of further exercises after the references (outside the reading
+time). 67 exercises in all: 15 existing (all now labeled, with objectives) and 52 new.
+
+**Featured (13).** `ex-pa-avoidance-product` (products and ω-reducibility, used as a
+model for later closure arguments); `ex-strong-pa-stable` (new: the remark that Δ⁰₂
+instances are the limit sets of stable colorings, proved); `ex-liu-explicit-u` (the two
+alternatives of Liu's lemma on an example); `ex-homogeneous-one-color` and
+`ex-flood-stable` (the definition of RWKL and Flood's coloring, both used later);
+`ex-partition-transitive` (new: transitivity of the extension relation, the point where
+the part-by-part definition matters); `exr-rwkl-subset` (used in `liu-theorem`);
+`ex-coh-strong-pa` and `ex-rt-ell-pa` (the two extensions of Liu's theorem cited in the
+tables); `ex-wwkl-cone-sacks`; `ex-singleton-trace` (c.b. traces and cones);
+`ex-tuple-lengths` (why e + 3); `ex-dnc-avoid-rwwkl`. Moved to the further block:
+`ex-dj-ell-colors`, `ex-rwkl-cone-direct`, `ex-delta2-immune-dnc`.
+
+**Further, lesson by lesson.**
+1. `pa-avoidance`: Cohen forcing relative to Z and the problem "non-computable in the
+   instance"; countable products fail; changing the parameter D; why the oracle of the
+   question must not be PA.
+2. `pa-avoidance-examples`: two non-PA sets with PA join (1-generics, X △ P); the
+   identity problem (PA but not strong PA avoidance); avoiding Z′ with D = Z without
+   Posner–Robinson; a non-PA set with a jump PA over ∅′.
+3. `weak-merging`: correct valuations and DNC₂; Liu's lemma fails for a PA oracle;
+   safe sets found with W′; a weakly merging but not merging question (finite sets of
+   strings); ℓ sides.
+4. `ramsey-type-wkl`: ℓ colors (moved); two DJ answers cannot be merged; basic
+   properties of homogeneous sets; homogeneity is Π⁰₁; homogeneous sets of DNC₂; Flood's
+   coloring on an explicit tree.
+5. `partition-forcing`: one witness for all parts fails (the choice of the log, now an
+   exercise); a small splitting extension and why k + 1 partitions; the class of refined
+   partitions; a class with one member (merging).
+6. `rwkl-pa-avoidance`: cone avoidance (moved); the color cannot be prescribed; strong
+   cone avoidance through RT¹₂; ℓ colors; acceptable parts may die.
+7. `liu-theorem`: strong PA avoidance of RWKL; a stable coloring whose limit set a
+   homogeneous set does not compute (the deduction removed from `ex-flood-stable`, which
+   cited Liu's theorem before it is proved); only one side may avoid PA; property 2 of
+   the Liu question.
+8. `measure-and-closed-classes`: cone avoidance with measure questions (no merging);
+   WWKL₀ does not imply WKL₀; countably many parameters D; the density threshold
+   δ > 2/3; random sets that are not PA.
+9. `closed-classes`: disperse sets and the empty block; k-traces and RT¹_k; a Π⁰₁ class
+   with a computable 1-trace and no computable member (homogeneity needed); traces and
+   the Δ⁰₂ forcing; c.b. trace avoidance as preservation of weakness properties; 1-traces
+   of 𝓡_c compute DNC functions.
+10. `rwwkl-dnc`: the other color; the relativized equivalence of RWWKL and DNC; the
+    class of (2 ⇒ 1) has no computable member; its homogeneous sets are effectively
+    immune (recursion theorem).
+11. `dnc-avoidance`: Δ⁰₂ inversion with immunity (moved); preservation of immunity
+    implies cone avoidance; countable, finite and binary merging; COH preserves
+    immunity; RT¹₂ does not strongly avoid DNC degrees (random sets); strong DNC
+    avoidance reduces to Δ⁰₂ instances.
+
+**Sources.** Exercises of the monograph's chapter *Compactness avoidance*: the Δ⁰₂
+variants (Shoenfield-type) for PA, traces and DNC; the k-trace/RT¹_k remark after the
+c.b. trace section; the measure question for cone avoidance. The others are variants of
+the proofs of the lessons. Duplicates avoided: Cohen generics are not PA or DNC
+(`effective-forcing`), the codes of prefixes (`ex-coding-reservoir`, reused rather than
+repeated), facts on PA relative to a set (`pi01-classes`), the one-sided negation of the
+DJ question (`ex-disjunctive-one-negation`, cited).
+
+## 12. History
 
 - **2026-11-12.** Course created: seven lessons, four figures
   (`scripts/figures/compactness-avoidance.py`), design log.
@@ -302,3 +365,11 @@ Checked on 2026-11-12 (web search):
   converse for DNC avoidance) regenerated. References checked against Downey–Hirschfeldt,
   Hirschfeldt, Dzhafarov–Mummert and the monograph's bibliography; an unchecked claim on
   Bienvenu–Patey–Shafer removed.
+- **2026-11-13: featured and further exercises.** All exercises labeled, with objectives
+  and difficulties; featured exercises placed in the text, the "Exercises" sections
+  removed; 52 new further exercises (section 11). Positional references replaced by
+  labels (`ex-dj-disjunctive`, `ex-preservation-downward`, `ex-flood-stable`,
+  `ex-coh-strong-pa`, `ex-tuple-lengths`). `ex-flood-stable` no longer cites Liu's
+  theorem (moved to `ex-limit-not-computable`). Durations recomputed: 35
+  (`pa-avoidance-examples`), 40 (`ramsey-type-wkl`), 45 (`partition-forcing`), 25
+  (`rwkl-pa-avoidance`).

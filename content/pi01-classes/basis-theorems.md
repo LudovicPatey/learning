@@ -105,7 +105,7 @@ Let $\mathcal P_0 = \mathcal P$. Given a non-empty $\Pi^0_1$ class $\mathcal P_e
 Let $X \in \bigcap_e \mathcal P_e$, which is non-empty by compactness. If $\Phi^X_e$ is total, then the first case did not occur at step $e$, so $\Phi^X_e$ is dominated by the computable function $g_e$. Hence $X$ is computably dominated.
 :::
 
-The question asked at each step is $\Sigma^0_2$, and the construction can be carried out with $\emptyset''$ (third exercise). In general $\emptyset'$ does not suffice: in a class without computable member, a computably dominated member is not computable, hence not $\Delta^0_2$.
+The question asked at each step is $\Sigma^0_2$, and the construction can be carried out with $\emptyset''$ (:ref{#ex-dominated-double-jump}). In general $\emptyset'$ does not suffice: in a class without computable member, a computably dominated member is not computable, hence not $\Delta^0_2$.
 
 :::quiz[the computably dominated basis theorem]
 In :ref{#lem-uniform-bound}, where is it used that $\Phi^X_e$ is total on **every** member of $[T]$?
@@ -157,7 +157,7 @@ Let $\mathcal P_0 = \mathcal P$. Given a non-empty $\Pi^0_1$ class $\mathcal P_e
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-cone-from-low-dominated difficulty=1 objective="Derive the cone avoidance basis theorem from the low and computably dominated basis theorems."}
 Show that a computably dominated set computes no non-computable $\Delta^0_2$ set, and that a low set computes no set that is not $\Delta^0_2$. Deduce a second proof of :ref{#thm-cone-avoidance-basis} from the low and computably dominated basis theorems.
 
 :::solution
@@ -165,15 +165,7 @@ If $X$ is computably dominated and $D \leq_T X$, then every $D$-computable total
 :::
 ::::
 
-::::exercise{difficulty=1}
-Show that $X$ is computably dominated if and only if every total $X$-computable function $f$ is dominated **eventually** by a computable function $g$, that is, $f(n) \leq g(n)$ for all but finitely many $n$.
-
-:::solution
-Domination everywhere implies eventual domination. Conversely, if $f(n) \leq g(n)$ for all $n \geq n_0$, the function $g'$ equal to $\max(g(n), f(n))$ for $n < n_0$ and to $g(n)$ for $n \geq n_0$ is computable, since it differs from $g$ at finitely many points, whose values can be written into the algorithm; and it dominates $f$ everywhere.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-dominated-double-jump difficulty=2 objective="Bound the complexity of the construction of a computably dominated member by $\emptyset''$."}
 Show that every non-empty $\Pi^0_1$ class has a computably dominated member computable in $\emptyset''$.
 
 :::solution
@@ -187,7 +179,7 @@ The proof of the low basis theorem is an instance of first-jump control by forci
 
 The constructions of this lesson are instances of forcing with Π⁰₁ classes (Jockusch–Soare forcing). Its forcing relation, and the forcing question used to prove preservation theorems such as cone avoidance, are developed in the course on effective forcing (:ref{to="effective-forcing/forcing-with-trees"}, :ref{to="effective-forcing/forcing-question"}).
 
-The three basis theorems are due to Jockusch and Soare, in *Π⁰₁ classes and degrees of theories* (1972). The derivation of cone avoidance from the first two, as in the first exercise, is given in Hirschfeldt's *Slicing the Truth* (Section 3.1), and Monin and Patey attribute it to him. An earlier form of cone avoidance, with "primitive recursive in" in place of "computable from", is due to Gandy, Kreisel and Tait (1960), according to Hirschfeldt. Forcing with $\Pi^0_1$ classes, also called Jockusch–Soare forcing, is a basic tool in the computability theory of combinatorial principles studied in reverse mathematics; Monin and Patey study it as a forcing notion in their chapter on effective forcing.
+The three basis theorems are due to Jockusch and Soare, in *Π⁰₁ classes and degrees of theories* (1972). The derivation of cone avoidance from the first two, as in :ref{#ex-cone-from-low-dominated}, is given in Hirschfeldt's *Slicing the Truth* (Section 3.1), and Monin and Patey attribute it to him. An earlier form of cone avoidance, with "primitive recursive in" in place of "computable from", is due to Gandy, Kreisel and Tait (1960), according to Hirschfeldt. Forcing with $\Pi^0_1$ classes, also called Jockusch–Soare forcing, is a basic tool in the computability theory of combinatorial principles studied in reverse mathematics; Monin and Patey study it as a forcing notion in their chapter on effective forcing.
 
 The low and computably dominated basis theorems are Theorems 3.7.2 and 9.5.1 in Soare's *Turing Computability*, Theorems 2.19.8 and 2.19.11 in Downey and Hirschfeldt, and Theorems 1.8.37 and 1.8.42 in Nies. Brattka, de Brecht and Pauly (2012) prove a uniform version of the low basis theorem in the framework of Weihrauch reducibility: closed choice on Cantor space, the problem of finding a member of a non-empty closed class given by an enumeration of its complement, is low computable.
 
@@ -197,3 +189,67 @@ The low and computably dominated basis theorems are Theorems 3.7.2 and 9.5.1 in 
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.19.3.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.8.
 - V. Brattka, M. de Brecht and A. Pauly, *Closed choice and a uniform low basis theorem*, Annals of Pure and Applied Logic 163 (2012), 986–1008.
+
+:::::exercises
+::::exercise{#ex-eventual-domination difficulty=1 objective="Check that domination everywhere and eventual domination give the same notion of computably dominated set."}
+Show that $X$ is computably dominated if and only if every total $X$-computable function $f$ is dominated **eventually** by a computable function $g$, that is, $f(n) \leq g(n)$ for all but finitely many $n$.
+
+:::solution
+Domination everywhere implies eventual domination. Conversely, if $f(n) \leq g(n)$ for all $n \geq n_0$, the function $g'$ equal to $\max(g(n), f(n))$ for $n < n_0$ and to $g(n)$ for $n \geq n_0$ is computable, since it differs from $g$ at finitely many points, whose values can be written into the algorithm; and it dominates $f$ everywhere.
+:::
+::::
+
+::::exercise{#ex-low-join difficulty=1 objective="Apply the low basis theorem to a product class to choose members of two classes with a low join."}
+Let $\mathcal P$ and $\mathcal Q$ be non-empty $\Pi^0_1$ classes. Show that there are $X \in \mathcal P$ and $Y \in \mathcal Q$ such that $X \oplus Y$ is low.
+
+:::solution
+Let $\mathcal P = [S]$ and $\mathcal Q = [T]$ with $S$ and $T$ computable, and let $\mathcal R = \{ X \oplus Y : X \in \mathcal P, Y \in \mathcal Q \}$. A sequence $Z$ is outside $\mathcal R$ if and only if its even part has a prefix outside $S$ or its odd part has a prefix outside $T$; such a prefix of length $n$ is determined by $Z \uh 2n$, so the complement of $\mathcal R$ is a $\Sigma^0_1$ class and $\mathcal R$ is a non-empty $\Pi^0_1$ class. By :ref{#thm-low-basis}, it has a low member $X \oplus Y$, with $X \in \mathcal P$ and $Y \in \mathcal Q$. (In particular $X$ and $Y$ are low, since lowness is closed downward.)
+:::
+::::
+
+::::exercise{#ex-low-tree-lowness-index difficulty=2 objective="Relativize the low basis theorem to a low tree, uniformly in a lowness index."}
+Code strings by integers, so that a binary tree is a set of integers. Let $T$ be an infinite binary tree that is low, and $j$ an index with $\Phi^{\emptyset'}_j = T'$, a **lowness index** of $T$. Show that from $j$ one can compute an index $k$ such that $\Phi^{\emptyset'}_k = X'$ for some path $X$ of $T$.
+
+:::solution
+Run the construction of :ref{#thm-low-basis} relative to $T$. For a finite set $F$, let $\mathcal P_F = [T] \cap \{ X : \Phi^X_i(i)\diverge \text{ for all } i \in F \}$, the class of paths through the tree $T \cap \{ \sigma : \Phi^\sigma_i(i)[|\sigma|]\diverge \text{ for all } i \in F \}$, which is computable in $T$, uniformly in $F$. By :ref{#prop-pi01-emptiness} relativized to $T$, emptiness of $\mathcal P_F$ is $\Sigma^0_1$ relative to $T$, uniformly in $F$: by SMN, there is a computable $g$ such that $\mathcal P_F = \emptyset$ if and only if $g(F) \in T'$.
+
+Define $F_0 = \emptyset$, and $F_{e+1} = F_e \cup \{e\}$ and $J(e) = 0$ if $g(F_e \cup \{e\}) \notin T'$, that is, if $\mathcal P_{F_e \cup \{e\}} \neq \emptyset$; otherwise $F_{e+1} = F_e$ and $J(e) = 1$. As in the proof of the theorem, the classes $\mathcal P_{F_e}$ are non-empty and decreasing, and every $X$ in their intersection, which is non-empty by :ref{#prop-cantor-compact}, is a path of $T$ with $X' = J$. The construction uses only the bits $T'(g(F))$, and $T'(m) = \Phi^{\emptyset'}_j(m)$; so $J$ is computed by an algorithm with oracle $\emptyset'$ that depends computably on $j$, and its index is the required $k$. Adapted from Hirschfeldt, *Slicing the Truth*, Exercise 3.12 (Jockusch and Soare).
+:::
+::::
+
+::::exercise{#ex-pi02-singleton difficulty=1 objective="See that the low basis theorem fails for $\Pi^0_2$ classes."}
+Call a class $\Pi^0_2$ if it is of the form $\{ X : \forall n\ \exists m\ R(X \uh m, n) \}$ for a computable relation $R$. Show that $\{ \emptyset' \}$ is a $\Pi^0_2$ class, and deduce that the low basis theorem fails for non-empty $\Pi^0_2$ classes.
+
+:::solution
+Let $R(\tau, \langle e, s \rangle)$ hold if $|\tau| > e$, if $\tau(e) = 1$ implies $\Phi_e(e)[|\tau|]\converge$, and if $\Phi_e(e)[s]\converge$ implies $\tau(e) = 1$. It is computable. For fixed $e$ and $s$, $\exists m\ R(X \uh m, \langle e, s \rangle)$ holds if and only if ($X(e) = 1$ implies $\Phi_e(e)\converge$) and ($\Phi_e(e)[s]\converge$ implies $X(e) = 1$): if $X(e) = 1$ and $\Phi_e(e)[t]\converge$, take $m > \max(e, t)$, using the monotonicity of stages; if $X(e) = 0$, any $m > e$ works; and the second condition does not depend on $m$. Taking all $e$ and $s$, the class defined by $R$ is the class of $X$ such that $X(e) = 1 \Rightarrow e \in \emptyset'$ and $e \in \emptyset' \Rightarrow X(e) = 1$, that is, $\{ \emptyset' \}$. Its only member is not low, since $\emptyset'' \not\leq_T \emptyset'$. So a non-empty $\Pi^0_2$ class need not have a low member; the closedness of $\Pi^0_1$ classes, and the effective compactness it gives, is what the proof of :ref{#thm-low-basis} uses.
+:::
+::::
+
+::::exercise{#ex-countable-cone-avoidance difficulty=1 objective="Interleave the requirements of the cone avoidance construction to avoid countably many cones at once."}
+Let $C_0, C_1, \dots$ be non-computable sets. Show that every non-empty $\Pi^0_1$ class has a member that computes none of the $C_i$.
+
+:::solution
+Modify the proof of :ref{#thm-cone-avoidance-basis}: at step $s = \langle e, i \rangle$, given the non-empty $\Pi^0_1$ class $\mathcal P_s$, apply :ref{#lem-uniform-cone} with the set $C_i$ to find $m$ such that $\mathcal P_s \cap \{ Y : \neg\, (\Phi^Y_e(m)\converge = C_i(m)) \}$ is non-empty, and let $\mathcal P_{s+1}$ be this class, for the least such $m$. It is $\Pi^0_1$, as in the proof of the theorem. A member $Y$ of $\bigcap_s \mathcal P_s$, which exists by :ref{#prop-cantor-compact}, satisfies $\Phi^Y_e \neq C_i$ for all $e$ and $i$, so it computes no $C_i$.
+:::
+::::
+
+::::exercise{#ex-low-cone-avoidance difficulty=2 objective="Combine the low basis and cone avoidance constructions into a single construction effective in $\emptyset'$."}
+Let $C$ be a non-computable set. Show that every non-empty $\Pi^0_1$ class has a low member that does not compute $C$.
+
+:::solution
+If $C$ is not $\Delta^0_2$, any low member $X$ works: every set computable in $X$ is computable in $\emptyset'$. Suppose that $C$ is $\Delta^0_2$. Alternate the steps of the two constructions. At step $2e$, given $\mathcal P_{2e}$, proceed as in :ref{#thm-low-basis}: ask $\emptyset'$ whether $\mathcal P_{2e} \cap \{ X : \Phi^X_e(e)\diverge \}$ is empty, and let $\mathcal P_{2e+1}$ be this class if it is not empty, and $\mathcal P_{2e}$ otherwise. At step $2e+1$, proceed as in :ref{#thm-cone-avoidance-basis}: for $m = 0, 1, \dots$, compute $C(m)$ with $\emptyset'$ and ask $\emptyset'$ whether $\mathcal B_m = \mathcal P_{2e+1} \cap \{ Y : \neg\, (\Phi^Y_e(m)\converge = C(m)) \}$ is empty, an index of this $\Pi^0_1$ class being computable from $e$, $m$, $C(m)$ and an index of $\mathcal P_{2e+1}$; stop at the first $m$ for which it is not, and let $\mathcal P_{2e+2} = \mathcal B_m$. Such an $m$ exists by :ref{#lem-uniform-cone}, so the search ends. The whole sequence of indices is computable in $\emptyset'$. A member $X$ of the intersection satisfies $X'(e) = 1$ if and only if the class was kept at step $2e$, which $\emptyset'$ computes, so $X$ is low; and $\Phi^X_e \neq C$ for every $e$, by step $2e+1$. This is a particular case of a theorem of Jockusch and Soare: for every non-computable $C$, a non-empty $\Pi^0_1$ class has a member $X$ with $C \not\leq_T X$ and $X' \leq_T C \oplus \emptyset'$ (Downey and Hirschfeldt, Theorem 2.19.10).
+:::
+::::
+
+::::exercise{#ex-dominated-continuum difficulty=2 objective="Split the construction of the computably dominated basis theorem along a binary tree to obtain continuum many members."}
+Let $\mathcal P$ be a non-empty $\Pi^0_1$ class without computable member. Show that $\mathcal P$ has continuum many computably dominated members.
+
+:::solution
+*One step.* Let $\mathcal R$ be a non-empty $\Pi^0_1$ class and $e \in \nat$. As in the proof of :ref{#thm-dominated-basis}, there is a non-empty $\Pi^0_1$ class $\mathcal R' \subseteq \mathcal R$ such that either $\Phi^X_e$ is partial for every $X \in \mathcal R'$, or there is a computable function dominating $\Phi^X_e$ for every $X \in \mathcal R'$: take $\mathcal R' = \mathcal R \cap \{ X : \Phi^X_e(m)\diverge \}$ for the least $m$ for which it is non-empty, if there is one, and $\mathcal R' = \mathcal R$ otherwise, using :ref{#lem-uniform-bound}.
+
+*Splitting.* A non-empty $\Pi^0_1$ subclass $\mathcal R$ of $\mathcal P$ has no computable member, so it has two members, since the member of a $\Pi^0_1$ class with one member is computable (:ref{#cor-countable-computable}). If $X \neq Y$ are members and $n$ is the first position where they differ, the classes $\mathcal R \cap [(X \uh n)\, 0]$ and $\mathcal R \cap [(X \uh n)\, 1]$ are disjoint non-empty $\Pi^0_1$ subclasses of $\mathcal R$.
+
+*Construction.* Define non-empty $\Pi^0_1$ classes $\mathcal P_\rho \subseteq \mathcal P$, for $\rho \in \bstr$. Let $\mathcal P_\varepsilon = \mathcal P$. Given $\mathcal P_\rho$ with $|\rho| = e$, split it into two disjoint non-empty $\Pi^0_1$ subclasses, and apply the first step with $e$ to each of them; call the results $\mathcal P_{\rho 0}$ and $\mathcal P_{\rho 1}$. For $Z \in \cs$, the classes $\mathcal P_{Z \uh e}$ are non-empty, closed and decreasing, so they have a common member $X_Z$ (:ref{#prop-cantor-compact}). If $\Phi^{X_Z}_e$ is total, then the class $\mathcal P_{Z \uh (e+1)}$, which contains $X_Z$, was obtained by the first step in its second case, so a computable function dominates $\Phi^{X_Z}_e$. Hence $X_Z$ is computably dominated. If $Z \neq Z'$ first differ at position $e$, then $X_Z$ and $X_{Z'}$ belong to the disjoint classes $\mathcal P_{(Z \uh e) 0}$ and $\mathcal P_{(Z \uh e) 1}$, so $X_Z \neq X_{Z'}$. The map $Z \mapsto X_Z$ is injective, and $\mathcal P$ has continuum many computably dominated members. Downey and Hirschfeldt state this after their Theorem 2.19.11.
+:::
+::::
+:::::

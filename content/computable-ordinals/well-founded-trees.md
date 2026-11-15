@@ -67,6 +67,14 @@ Why do extensions come **before** their prefixes in the Kleene–Brouwer orderin
 
 The inequality between the order type and the rank can be strict, as in the figure. For an infinite example, the tree consisting of the root and the sequences $\langle n \rangle$, $n \in \nat$, has rank $1$, while its Kleene–Brouwer ordering is $\langle 0 \rangle < \langle 1 \rangle < \cdots < \langle \rangle$, of type $\omega + 1$.
 
+::::exercise{#ex-kb-decreasing difficulty=1 objective="Compute a rank and a Kleene–Brouwer order type with the decomposition of the Kleene–Brouwer ordering into subtrees."}
+Let $T$ be the tree of strictly decreasing sequences of numbers (:ref{#ex-trees} (2)). Show that $\mathrm{rk}(T) = \omega$ and that $(T, <_{\mathrm{KB}})$ has type $\omega + 1$.
+
+:::solution
+The rank was computed after :ref{#def-tree-rank}. For the ordering, let $k_n$ be the type of $(T_{\langle n \rangle}, <_{\mathrm{KB}})$, the Kleene–Brouwer ordering of the decreasing sequences of numbers below $n$, a finite tree. By the decomposition in the proof of :ref{#thm-kleene-brouwer}, $k_n = k_0 + \cdots + k_{n-1} + 1$, so $k_n = 2^n$ by induction. The ordering of $T$ is the sum of the finite orders of types $k_0, k_1, \dots$, followed by the root: an infinite sum of non-empty finite orders has type $\omega$, so the type is $\omega + 1$.
+:::
+::::
+
 ## Ranks of computable trees
 
 :::proposition{#prop-rank-computable}
@@ -79,21 +87,11 @@ If $T$ is computable, then the restriction of $<_{\mathrm{KB}}$ to $T$ is a comp
 
 The same argument relativizes: the ranks of the $X$-computable well-founded trees are the ordinals below $\omega_1^X$. The boundedness lesson shows that a $\Sigma^1_1$ set of computable well-founded trees has ranks bounded below $\omega_1^{\mathrm{CK}}$ (:ref{#ex-tree-boundedness}).
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $T$ be the tree of strictly decreasing sequences of numbers (:ref{#ex-trees} (2)). Show that $\mathrm{rk}(T) = \omega$ and that $(T, <_{\mathrm{KB}})$ has type $\omega + 1$.
-
-:::solution
-The rank was computed after :ref{#def-tree-rank}. For the ordering, let $k_n$ be the type of $(T_{\langle n \rangle}, <_{\mathrm{KB}})$, the Kleene–Brouwer ordering of the decreasing sequences of numbers below $n$, a finite tree. By the decomposition in the proof of :ref{#thm-kleene-brouwer}, $k_n = k_0 + \cdots + k_{n-1} + 1$, so $k_n = 2^n$ by induction. The ordering of $T$ is the sum of the finite orders of types $k_0, k_1, \dots$, followed by the root: an infinite sum of non-empty finite orders has type $\omega$, so the type is $\omega + 1$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-no-computable-path difficulty=2 objective="Build by a diagonal argument a computable tree that is ill-founded but has no computable path."}
 Show that some computable tree has a path but no computable path.
 
 :::solution
-Let $T$ be the set of $\sigma \in 2^{<\nat}$ such that $\sigma(e) \neq \Phi_e(e)$ for every $e < |\sigma|$ with $\Phi_e(e)[|\sigma|]\converge$. It is a computable tree, and its paths are the $\{0,1\}$-valued functions $f$ with $f(e) \neq \Phi_e(e)$ whenever $\Phi_e(e)\converge$. It has a path, for instance $f(e) = 1$ if $\Phi_e(e)\converge = 0$ and $f(e) = 0$ otherwise. No path $f$ is computable: if $f = \Phi_e$, then $\Phi_e(e)\converge = f(e)$, a contradiction. This is a diagonal argument; the tree is the tree of :ref{#thm-dnc2-no-computable} in the course on $\Pi^0_1$ classes. So the ill-foundedness of a computable tree need not be witnessed by a computable path. The next lesson shows that well-foundedness of computable trees is not even a $\Sigma^1_1$ property.
+Let $T$ be the set of $\sigma \in 2^{<\nat}$ such that $\sigma(e) \neq \Phi_e(e)$ for every $e < |\sigma|$ with $\Phi_e(e)[|\sigma|]\converge$. It is a computable tree, and its paths are the $\{0,1\}$-valued functions $f$ with $f(e) \neq \Phi_e(e)$ whenever $\Phi_e(e)\converge$. It has a path, for instance $f(e) = 1$ if $\Phi_e(e)\converge = 0$ and $f(e) = 0$ otherwise. No path $f$ is computable: if $f = \Phi_e$, then $\Phi_e(e)\converge = f(e)$, a contradiction. This is a diagonal argument; the paths of $T$ are the $\{0, 1\}$-valued diagonally non-computable functions, studied in the course on $\Pi^0_1$ classes. So the ill-foundedness of a computable tree need not be witnessed by a computable path. The lesson on the boundedness theorem shows that well-foundedness of computable trees is not even a $\Sigma^1_1$ property.
 :::
 ::::
 
@@ -105,3 +103,71 @@ The use of well-founded trees and their ranks goes back to Lusin and Sierpiński
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section V.1.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 5.8 and 12.1.
 - B. Monin and L. Patey, *Computability theory*, chapter *Transfinite numbers*, section *Representation of ordinals by trees*.
+
+:::::exercises
+::::exercise{#ex-finite-rank difficulty=1 objective="Relate finite ranks to the lengths of the sequences of a tree."}
+Let $T$ be a non-empty tree and $n \in \nat$. Show that $T$ is well-founded of rank $n$ if and only if all the sequences of $T$ have length at most $n$ and some has length $n$. Deduce that a well-founded tree has infinite rank if and only if it has sequences of every length.
+
+:::solution
+For $\sigma \in T$, let $h(\sigma) = \sup \{ |\tau| : \sigma\tau \in T \} \in \nat \cup \{ \infty \}$.
+
+First, if $T$ is well-founded and $\sigma\tau \in T$ with $|\tau| = k$, then $\mathrm{rk}(T_\sigma) \geq k$. By induction on $k$: for $k = 0$ it is clear; for $k \geq 1$, write $\tau = m\tau'$; then $\sigma m \in T$, $\mathrm{rk}(T_{\sigma m}) \geq k - 1$ by the induction hypothesis applied to $\sigma m$ and $\tau'$, and $\mathrm{rk}(T_\sigma) \geq \mathrm{rk}(T_{\sigma m}) + 1 \geq k$, using $(T_\sigma)_{\langle m \rangle} = T_{\sigma m}$. So $\mathrm{rk}(T_\sigma) \geq h(\sigma)$ when $h(\sigma)$ is finite, and $\mathrm{rk}(T_\sigma) \geq \omega$ when $h(\sigma) = \infty$.
+
+Second, if $h(\sigma)$ is finite, then $T_\sigma$ is well-founded (a path would give extensions of every length) and $\mathrm{rk}(T_\sigma) \leq h(\sigma)$, by induction on $h(\sigma)$: if $h(\sigma) = 0$, then $\sigma$ has no immediate successor in $T$ and $\mathrm{rk}(T_\sigma) = 0$; otherwise every $\sigma m \in T$ has $h(\sigma m) \leq h(\sigma) - 1$, hence $\mathrm{rk}(T_{\sigma m}) \leq h(\sigma) - 1$, and $\mathrm{rk}(T_\sigma) \leq h(\sigma)$.
+
+Apply this to $\sigma = \langle \rangle$, for which $h(\langle \rangle)$ is the supremum of the lengths of the sequences of $T$. If these lengths are bounded, their maximum $n$ is attained, $T$ is well-founded, and $\mathrm{rk}(T) = n$. Conversely, if $T$ is well-founded of finite rank $n$, then $h(\langle \rangle) \leq n$ by the first part, so it is finite, and $\mathrm{rk}(T) = h(\langle \rangle)$ by the second part: the maximal length is $n$. A well-founded tree therefore has infinite rank exactly when the lengths of its sequences are unbounded; since $T$ is closed under prefixes, this means that it has sequences of every length.
+:::
+::::
+
+::::exercise{#ex-rank-function difficulty=2 objective="Characterize well-foundedness by the existence of an ordinal-valued function that decreases along the tree, and the rank as the least such function."}
+Let $T$ be a tree. A **rank function** for $T$ is a map $\rho$ from $T$ to the ordinals such that $\rho(\tau) < \rho(\sigma)$ whenever $\tau$ properly extends $\sigma$. Show that $T$ is well-founded if and only if it has a rank function, and that in that case $\sigma \mapsto \mathrm{rk}(T_\sigma)$ is a rank function with $\mathrm{rk}(T_\sigma) \leq \rho(\sigma)$ for every rank function $\rho$ and every $\sigma \in T$.
+
+:::solution
+If $T$ has a path $f$ and a rank function $\rho$, then $\rho(f \uh 0) > \rho(f \uh 1) > \cdots$ is an infinite descending sequence of ordinals, which is impossible. So a tree with a rank function is well-founded.
+
+Let $T$ be well-founded. For $\sigma m \in T$, we have $(T_\sigma)_{\langle m \rangle} = \{ \tau : \sigma m \tau \in T \} = T_{\sigma m}$, so by definition $\mathrm{rk}(T_\sigma) \geq \mathrm{rk}(T_{\sigma m}) + 1 > \mathrm{rk}(T_{\sigma m})$. If $\tau$ properly extends $\sigma$, the prefixes of $\tau$ of lengths $|\sigma|, |\sigma| + 1, \dots, |\tau|$ are in $T$, each an immediate successor of the previous one, and the ranks decrease strictly along them; so $\sigma \mapsto \mathrm{rk}(T_\sigma)$ is a rank function.
+
+Let $\rho$ be a rank function. We show $\mathrm{rk}(T_\sigma) \leq \rho(\sigma)$ by induction on $\mathrm{rk}(T_\sigma)$. For each $\sigma m \in T$, $\mathrm{rk}(T_{\sigma m}) < \mathrm{rk}(T_\sigma)$, so the induction hypothesis gives $\mathrm{rk}(T_{\sigma m}) \leq \rho(\sigma m)$, and $\rho(\sigma m) < \rho(\sigma)$ gives $\rho(\sigma m) + 1 \leq \rho(\sigma)$. Hence $\mathrm{rk}(T_\sigma) = \sup \{ \mathrm{rk}(T_{\sigma m}) + 1 : \sigma m \in T \} \leq \rho(\sigma)$, the supremum of the empty set being $0$.
+:::
+::::
+
+::::exercise{#ex-kb-full-height difficulty=2 objective="Compute the ranks and the Kleene–Brouwer order types of the trees of sequences of bounded length."}
+For $n \in \nat$, let $T_n = \nat^{\leq n}$ be the tree of all sequences of length at most $n$. Show that $\mathrm{rk}(T_n) = n$, that $(T_0, <_{\mathrm{KB}})$ has type $1$, and that $(T_n, <_{\mathrm{KB}})$ has type $\omega^n + 1$ for $n \geq 1$.
+
+:::solution
+For every $m$, $(T_{n+1})_{\langle m \rangle} = T_n$. The tree $T_0 = \{ \langle \rangle \}$ has rank $0$, and $\mathrm{rk}(T_{n+1}) = \sup_m (\mathrm{rk}(T_n) + 1) = n + 1$ by induction.
+
+Let $k_n$ be the type of $(T_n, <_{\mathrm{KB}})$. The tree $T_0$ has one element, so $k_0 = 1$. By the decomposition in the proof of :ref{#thm-kleene-brouwer}, $(T_{n+1}, <_{\mathrm{KB}})$ is the ordered sum of $\omega$ copies of $(T_n, <_{\mathrm{KB}})$, followed by the root: $k_{n+1} = k_n \cdot \omega + 1$. So $k_1 = \omega + 1$. Suppose $k_n = \omega^n + 1$ with $n \geq 1$. In $\nat^n$ ordered anti-lexicographically, a copy of $\omega^n$, the elements $(x, 0, \dots, 0)$ form an initial segment of type $\omega$, and $1 + \omega = \omega$; so $1 + \omega^n = \omega^n$. By induction on $m \geq 1$, $(\omega^n + 1) \cdot m = \omega^n \cdot m + 1$: the step is $(\omega^n \cdot m + 1) + (\omega^n + 1) = \omega^n \cdot m + (1 + \omega^n) + 1 = \omega^n \cdot (m + 1) + 1$, by associativity of addition. Hence
+$$
+k_n \cdot \omega = \sup_m (\omega^n \cdot m + 1) = \omega^n \cdot \omega = \omega^{n+1},
+$$
+since $\omega^n \cdot m \leq \omega^n \cdot m + 1 < \omega^n \cdot (m + 1)$, and $k_{n+1} = \omega^{n+1} + 1$.
+
+The rank grows by $1$ at each step, the Kleene–Brouwer type by a factor $\omega$: the gap of :ref{#thm-kleene-brouwer} between the two can be large.
+:::
+::::
+
+::::exercise{#ex-bounded-trees-sigma01 difficulty=2 objective="Use König's lemma to show that well-foundedness is a $\Sigma^0_1$ property of computably bounded trees."}
+Let $b : \nat \to \nat$ be computable, and call a tree $T$ **$b$-bounded** if $\sigma(i) < b(i)$ for every $\sigma \in T$ and $i < |\sigma|$. Show that a $b$-bounded tree is well-founded if and only if it is finite, if and only if it has no sequence of some length $n$. Deduce that there is a c.e. set $V$ such that for every $e$ for which $\Phi_e$ is the characteristic function of a $b$-bounded tree $T$, $T$ is well-founded if and only if $e \in V$.
+
+:::solution
+A $b$-bounded tree has at most $b(0) \cdots b(n - 1)$ sequences of length $n$. If it has no sequence of length $n$, it has none of length $\geq n$, since it is closed under prefixes; it is then finite, hence well-founded. If it is infinite, it has a path, by König's lemma: call $\sigma \in T$ *extendible* if $T$ contains infinitely many extensions of $\sigma$; the root is extendible, and an extendible $\sigma$ has, among its finitely many immediate successors $\sigma m$ with $m < b(|\sigma|)$, an extendible one; choosing at each step the least extendible immediate successor defines a path. So well-founded implies finite, and finite implies that some length $n$ has no sequence.
+
+Let $V$ be the set of $e$ such that for some $n$, $\Phi_e(\sigma)\converge = 0$ for every sequence $\sigma$ of length $n$ with $\sigma(i) < b(i)$ for $i < n$. These sequences form a finite list computable from $n$, so $V$ is c.e. If $\Phi_e$ is the characteristic function of a $b$-bounded tree $T$, then $e \in V$ if and only if $T$ has no sequence of some length $n$, that is, if and only if $T$ is well-founded.
+
+Without a computable bound, well-foundedness of computable trees is $\Pi^1_1$-complete, as the next lesson shows; the bound turns a quantifier over paths into a quantifier over numbers.
+:::
+::::
+
+::::exercise{#ex-lex-order difficulty=2 objective="See why the Kleene–Brouwer ordering puts extensions first, by comparing it with the lexicographic order."}
+Let $<_{\mathrm{lex}}$ be the order on $\nat^{<\nat}$ in which $\sigma <_{\mathrm{lex}} \tau$ if $\sigma$ is a proper prefix of $\tau$, or if $\sigma(i) < \tau(i)$ at the first position $i$ where they differ. Show that $<_{\mathrm{lex}}$ restricted to any well-founded tree is a well-ordering, and that $<_{\mathrm{lex}}$ restricted to the ill-founded tree $\{ \langle 0, \dots, 0 \rangle : k \in \nat \}$ of sequences of zeros is a well-ordering of type $\omega$. Conclude that the analogue of :ref{#thm-kleene-brouwer} fails for $<_{\mathrm{lex}}$.
+
+:::solution
+On the tree of sequences of zeros, $<_{\mathrm{lex}}$ orders the sequences by length, since each is a prefix of the longer ones: it has type $\omega$.
+
+Let $T$ be a tree and $\sigma_0 >_{\mathrm{lex}} \sigma_1 >_{\mathrm{lex}} \cdots$ a descending sequence in $T$; we build a path of $T$. No $\sigma_j$ is the root, which is the least element. If $\sigma_{j+1} <_{\mathrm{lex}} \sigma_j$, then $\sigma_{j+1}$ is a proper prefix of $\sigma_j$, so that $\sigma_{j+1}(0) = \sigma_j(0)$ when $|\sigma_{j+1}| \geq 1$, or the first difference gives $\sigma_{j+1}(0) \leq \sigma_j(0)$. So the first entries are non-increasing, and constant, equal to some $c_0$, from some index $j_0$ on. Among the sequences beginning with $c_0$, the sequence $\langle c_0 \rangle$ is the least, so it is not $\sigma_j$ for any $j \geq j_0$: it would be followed by a smaller sequence beginning with $c_0$. From $j_0$ on, all the $\sigma_j$ have length at least $2$ and begin with $c_0$, and the same argument shows that their second entries are eventually constant, equal to some $c_1$. Continuing, we obtain $c_0, c_1, c_2, \dots$ such that each $\langle c_0, \dots, c_k \rangle$ is a prefix of some $\sigma_j \in T$, hence belongs to $T$. So $f(k) = c_k$ is a path, and $T$ is ill-founded. Contrapositively, $<_{\mathrm{lex}}$ restricted to a well-founded tree has no descending sequence and is a well-ordering.
+
+Thus $<_{\mathrm{lex}}$ is a well-ordering on every well-founded tree, but also on some ill-founded ones: the well-foundedness of $<_{\mathrm{lex}}$ restricted to $T$ does not characterize the well-foundedness of $T$. Putting extensions before their prefixes, as $<_{\mathrm{KB}}$ does, turns a path into a descending sequence.
+:::
+::::
+:::::

@@ -123,19 +123,11 @@ The theorem does not extend to all languages. In a countable language extending 
 
 ## Exercises
 
-::::exercise{#ex-ee-iterate-ms difficulty=2}
+::::exercise{#ex-ee-iterate-ms difficulty=2 objective="Iterate the MacDowell–Specker theorem along the ordinals to obtain large elementary end extensions."}
 Show that every model $M$ of $\mathrm{PA}$ has elementary end extensions of every infinite cardinality $\kappa \geq |M|$.
 
 :::solution
 Define $M_0 = M$; $M_{\beta+1}$ a proper elementary end extension of $M_\beta$, by :ref{#thm-ee-macdowell-specker}, with an element $d_\beta \in M_{\beta+1} \setminus M_\beta$; and $M_\lambda = \bigcup_{\beta < \lambda} M_\beta$ at limits. A union of a chain of elementary end extensions is an elementary end extension of each member, by the elementary chain theorem and because initial segments of initial segments are initial segments; so each $M_\beta$ is a model of $\mathrm{PA}$ and the construction continues. $M_\kappa$ contains the $\kappa$ distinct elements $d_\beta$, $\beta < \kappa$. Its cardinality is at most $\kappa$ if each step adds at most $\kappa$ elements, which holds for $M(p)$ since its elements are values of definable functions of $M_\beta$, of which there are $|M_\beta|$; so $|M_\kappa| = \kappa$.
-:::
-::::
-
-::::exercise{#ex-ee-forcing-unbounded difficulty=1}
-Give an example showing that, for a complete $M$-type that is not unbounded, a formula $\theta \in p$ with $M \models \forall^\infty v\ (\theta(v) \rightarrow \varphi(v))$ need not imply $\varphi \in p$.
-
-:::solution
-Let $a \in M$, $p = \mathrm{tp}(a / M)$, $\theta(v)$ the formula $v = a$ and $\varphi(v)$ the formula $v \neq v$. Only boundedly many $v$ satisfy $\theta$, so $M \models \forall^\infty v\ (\theta(v) \rightarrow \varphi(v))$, while $\neg \varphi \in p$. Forcing in the sense of the lesson is meaningful only for formulas defining unbounded sets, which is what unboundedness of $p$ guarantees for all formulas of $p$.
 :::
 ::::
 
@@ -150,3 +142,59 @@ The theorem is due to MacDowell and Specker (1961), whose proof works with ultra
 - A. Enayat, *A standard model of Peano arithmetic with no conservative elementary extension*, Annals of Pure and Applied Logic 156 (2008), 308–318.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lectures 9 and 10.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 1(e).
+
+:::::exercises
+::::exercise{#ex-ee-forcing-unbounded difficulty=1 objective="See why forcing a formula into a type requires the type to be unbounded."}
+Give an example showing that, for a complete $M$-type that is not unbounded, a formula $\theta \in p$ with $M \models \forall^\infty v\ (\theta(v) \rightarrow \varphi(v))$ need not imply $\varphi \in p$.
+
+:::solution
+Let $a \in M$, $p = \mathrm{tp}(a / M)$, $\theta(v)$ the formula $v = a$ and $\varphi(v)$ the formula $v \neq v$. Only boundedly many $v$ satisfy $\theta$, so $M \models \forall^\infty v\ (\theta(v) \rightarrow \varphi(v))$, while $\neg \varphi \in p$. Forcing in the sense of the lesson is meaningful only for formulas defining unbounded sets, which is what unboundedness of $p$ guarantees for all formulas of $p$.
+:::
+::::
+
+::::exercise{#ex-ee-cohesive-star difficulty=1 objective="See why the cohesiveness lemma only asks for inclusion up to a bounded set."}
+Let $M \models \mathrm{PA}$, $S = M$ and $R = \{ (z, v) : v > z \}$. Show that no unbounded $H \subseteq M$ satisfies, for every $z \in M$, $H \subseteq R_z$ or $H \subseteq M \setminus R_z$. Which unbounded sets $H$ satisfy the conclusion of :ref{#lem-ee-cohesive} for $S$ and $R$?
+
+:::solution
+$M \setminus R_z = \{ v : v \leq z \}$ is bounded, so an unbounded $H$ is not contained in it; hence $H \subseteq R_z$ for every $z$, and $H \subseteq \bigcap_z R_z = \emptyset$, a contradiction. Every unbounded set $H$ satisfies the conclusion of the lemma: $H \setminus R_z \subseteq \{ v : v \leq z \}$ is bounded, so $H \subseteq^* R_z$ for every $z$. The inclusion up to a bounded set is what makes cohesiveness compatible with unboundedness; the bounded part is invisible to an unbounded type.
+:::
+::::
+
+::::exercise{#ex-ee-sd-witness-refine difficulty=1 objective="Check that witnesses of strong definability can be refined and combined."}
+Let $p(v)$ be an unbounded complete $M$-type, $M \models \mathrm{PA}$.
+
+1. Let $\theta \in p$ witness strong definability for $\varphi(v, z)$, and let $\theta' \in p$ satisfy $M \models \forall^\infty v\ (\theta'(v) \rightarrow \theta(v))$. Show that $\theta'$ also witnesses strong definability for $\varphi$.
+2. Deduce that if $p$ is strongly definable, a single formula of $p$ witnesses strong definability for finitely many given formulas $\varphi_1, \dots, \varphi_r$.
+
+:::solution
+1. Let $u_0$ be such that $\theta'(v) \rightarrow \theta(v)$ for $v \geq u_0$. Let $z \in M$; say $\theta(v) \rightarrow \varphi(v, z)$ for all $v \geq u_1$, the other case being symmetric. Then $\theta'(v) \rightarrow \varphi(v, z)$ for $v \geq \max(u_0, u_1)$. So $M \models \forall z\ (\forall^\infty v\ (\theta' \rightarrow \varphi) \vee \forall^\infty v\ (\theta' \rightarrow \neg\varphi))$, and $\theta' \in p$.
+2. Let $\theta_j \in p$ witness strong definability for $\varphi_j$, and $\theta = \bigwedge_j \theta_j$, which is in $p$ (:ref{#ex-ee-type-ultrafilter}). Since $\theta$ implies each $\theta_j$, item 1 applies to each $j$.
+:::
+::::
+
+::::exercise{#ex-ee-sd-continuum difficulty=2 objective="Vary the chain of the proof of Gaifman's theorem to obtain continuum many strongly definable types."}
+Show that every model $M$ of $\mathrm{PA}$ has at least $2^{\aleph_0}$ unbounded strongly definable complete $M$-types.
+
+:::solution
+Let $\varphi_0, \varphi_1, \dots$ be the formulas of the proof of :ref{#thm-ee-gaifman-sd} and $R^i = \{ (z, v) : M \models \varphi_i(v, z) \}$. Assign to each finite binary sequence $s$ an unbounded definable set $S_s$, with $S_\emptyset = M$. Given $S_s$ with $|s| = i$, let $H$ be given by :ref{#lem-ee-cohesive} for $S_s$ and $R^i$. Define by recursion in $M$ the increasing enumeration $f(0) = \min H$, $f(j + 1) = \min \{ v \in H : v > f(j) \}$, which exists since $H$ is unbounded, and let $S_{s0} = \{ f(2j) : j \in M \}$ and $S_{s1} = \{ f(2j + 1) : j \in M \}$. They are definable, unbounded since $f(j) \geq j$, disjoint since $f$ is injective, and contained in $H$, so they are cohesive for $R^i$: a subset of a set $H$ with $H \subseteq^* R^i_z$ or $H \subseteq^* M \setminus R^i_z$ has the same property.
+
+For $b \in 2^\nat$, let $p_b = \{ \psi(v) \in \mathcal L_A(M) : S_{b \restriction j} \subseteq^* \psi(M) \text{ for some } j \}$. The proof of :ref{#thm-ee-gaifman-sd} applies to the chain $S_{b \restriction 0} \supseteq S_{b \restriction 1} \supseteq \cdots$: $p_b$ is an unbounded complete type, strongly definable, with the formula defining $S_{b \restriction (i+1)}$ as witness for $\varphi_i$. If $b \neq b'$ first differ at $i$, then $S_{b \restriction (i+1)}$ and $S_{b' \restriction (i+1)}$ are disjoint; the formula defining the first belongs to $p_b$, and its negation to $p_{b'}$, since it holds on all of $S_{b' \restriction (i+1)}$. So $b \mapsto p_b$ is injective.
+:::
+::::
+
+::::exercise{#ex-ee-sd-uniform difficulty=2 objective="Use the uniformity of Gaifman's construction to compare the types and extensions it gives over a model and over an elementary extension."}
+As in the remark after :ref{#cor-ee-pa-characterization}, let $\theta_0, \theta_1, \dots$ be formulas without parameters such that, for every $M \models \mathrm{PA}$, the set $p^M = \{ \psi(v, \bar a) : \bar a \in M,\ M \models \forall^\infty v\ (\theta_i(v) \rightarrow \psi(v, \bar a)) \text{ for some } i \}$ is an unbounded strongly definable complete $M$-type. Let $M \preccurlyeq N$ be models of $\mathrm{PA}$. Show that $p^M \subseteq p^N$, and that if $d$ realizes $p^N$ in some $N' \succcurlyeq N$, then $M(p^M / d) \preccurlyeq N(p^N / d)$.
+
+:::solution
+If $\psi(v, \bar a) \in p^M$, the witnessing sentence $\forall^\infty v\ (\theta_i(v) \rightarrow \psi(v, \bar a))$ has parameters in $M$ and holds in $M$, hence in $N$; so $\psi(v, \bar a) \in p^N$. Let $d$ realize $p^N$ in $N' \succcurlyeq N$. Then $d$ realizes $p^M$, and $N' \succcurlyeq M$. By definition, $M(p^M / d) = \mathrm{dcl}_{N'}(M \cup \{d\})$ and $N(p^N / d) = \mathrm{dcl}_{N'}(N \cup \{d\})$; the first is contained in the second, and both are elementary substructures of $N'$ by :ref{#lem-ee-mp}. A substructure of $N'$ contained in another one, both elementary in $N'$, is an elementary substructure of it: a formula with parameters in the smaller one has the same truth value in both, namely its truth value in $N'$. Since $p^N$ contains $p^M$ and is defined by the same scheme, it is the canonical extension of $p^M$ to $N$ in the sense of the next lesson.
+:::
+::::
+
+::::exercise{#ex-ee-act-converse-fails difficulty=1 lessons="arithmetized-completeness" objective="See that the consistency hypothesis of the arithmetized completeness theorem is not necessary for its conclusion."}
+Show that there is a model $M$ of $\mathrm{PA}$ with $M \models \neg\mathrm{Con}(\mathrm{PA})$ that has a proper end extension $K$ satisfying every axiom of $\mathrm{PA}$. Compare with the hypothesis $M \models \mathrm{Con}(T)$ of :ref{#thm-ee-act}.
+
+:::solution
+By Gödel's second incompleteness theorem, $\mathrm{PA} + \neg\mathrm{Con}(\mathrm{PA})$ is consistent, so it has a model $M$. By :ref{#thm-ee-macdowell-specker}, $M$ has a proper elementary end extension $K$, and $K \models \mathrm{PA}$. So the conclusion of :ref{#thm-ee-act} for the theory $\mathrm{PA}$ of $M$ (an end extension satisfying every standard axiom) holds although $M$ believes that $\mathrm{PA}$ is inconsistent. The proofs of $0 = 1$ in $M$ are non-standard, and $K$ contains them as well: $K \models \neg\mathrm{Con}(\mathrm{PA})$, by elementarity.
+:::
+::::
+:::::

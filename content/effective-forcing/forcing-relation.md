@@ -45,7 +45,7 @@ Let $c$ be a condition and $\varphi$ a sentence of level $n \geq 1$.
 4. Since $D_\varphi = D_{\neg \varphi}$, we may assume that $\varphi$ is $\Sigma^0_n$. Given $c$, either some extension of $c$ forces $\varphi$, or $c$ forces $\neg \varphi$ by item 3.
 :::
 
-Item 3 fails for $\Pi^0_n$ sentences: a condition none of whose extensions forces a $\Pi^0_n$ sentence need not force its negation, which is existential and requires a witness (second exercise).
+Item 3 fails for $\Pi^0_n$ sentences: a condition none of whose extensions forces a $\Pi^0_n$ sentence need not force its negation, which is existential and requires a witness (:ref{#exr-weak-forcing}).
 
 :::quiz[the basic properties of forcing]
 In item 3 of :ref{#prop-forcing-basic}, at level $1$, where is the refinement property of the notion of forcing used?
@@ -70,6 +70,14 @@ Why does consistency at level $n + 1$ follow from the case $d = c$ in the univer
 
   The argument does not need the induction hypothesis.
 :::
+
+::::exercise{#ex-cohen-sigma2-witness difficulty=1 objective="See on an example that forcing a $\Sigma^0_2$ sentence requires an explicit witness."}
+In Cohen forcing, let $\varphi$ be the $\Sigma^0_2$ sentence $\exists y\ \psi(y)$, where $\psi(y)$ is a $\Pi^0_1$ formula expressing "$G(0) = y$". Show that the empty string does not force $\varphi$, although every string of length $1$ does. Conclude that the set of conditions forcing a $\Sigma^0_2$ sentence may be dense below a condition that does not force it.
+
+:::solution
+The members of the empty string are all sets, and both values of $G(0)$ occur, so the empty string forces no $\psi(m)$, hence not $\varphi$. The string $i$ forces $\psi(i)$, since all its members have $G(0) = i$; so it forces $\varphi$. Every string has an extension of length at least $1$, so the set of conditions forcing $\varphi$ is dense below the empty string.
+:::
+::::
 
 ## Forcing and truth
 
@@ -136,25 +144,15 @@ Let $c$ be a condition and $\varphi$ a sentence of level $n$. The following are 
 
 Condition 1 depends only on the class $\{ X : X \models \varphi \}$: two formulas of level $n$ defining the same class may be forced by different conditions, but are forced densely below the same conditions. In this sense the syntactic definition is harmless.
 
-## Exercises
-
-::::exercise{difficulty=1}
-In Cohen forcing, let $\varphi$ be the $\Sigma^0_2$ sentence $\exists y\ \psi(y)$, where $\psi(y)$ is a $\Pi^0_1$ formula expressing "$G(0) = y$". Show that the empty string does not force $\varphi$, although every string of length $1$ does. Conclude that the set of conditions forcing a $\Sigma^0_2$ sentence may be dense below a condition that does not force it.
-
-:::solution
-The members of the empty string are all sets, and both values of $G(0)$ occur, so the empty string forces no $\psi(m)$, hence not $\varphi$. The string $i$ forces $\psi(i)$, since all its members have $G(0) = i$; so it forces $\varphi$. Every string has an extension of length at least $1$, so the set of conditions forcing $\varphi$ is dense below the empty string.
-:::
-::::
-
-::::exercise{#exr-weak-forcing difficulty=2}
-Say that $c$ **weakly forces** $\varphi$ if the set of conditions forcing $\varphi$ is dense below $c$. Show that forcing implies weak forcing, and that for a $\Pi^0_n$ sentence $\varphi$, $n \geq 1$, weak forcing implies forcing. Deduce, with the first exercise, that item 3 of :ref{#prop-forcing-basic} fails for $\Pi^0_2$ sentences.
+::::exercise{#exr-weak-forcing difficulty=2 objective="Compare the strong forcing relation with weak forcing, and locate where they differ."}
+Say that $c$ **weakly forces** $\varphi$ if the set of conditions forcing $\varphi$ is dense below $c$. Show that forcing implies weak forcing, and that for a $\Pi^0_n$ sentence $\varphi$, $n \geq 1$, weak forcing implies forcing. Deduce, with :ref{#ex-cohen-sigma2-witness}, that item 3 of :ref{#prop-forcing-basic} fails for $\Pi^0_2$ sentences.
 
 :::solution
 If $c \Vdash \varphi$, every extension forces $\varphi$, so the set is dense below $c$.
 
 Let $\varphi$ be $\Pi^0_n$ and suppose $c$ weakly forces it. For $n = 1$, let $\varphi = \Phi^G_e(\vec m)\diverge$, and suppose a member $X$ of $c$ has $\Phi^X_e(\vec m)\converge$ with use $u$. By refinement some $d \leq c$ has all its members extending $X \uh u$, so they all satisfy $\neg \varphi$; an extension of $d$ forcing $\varphi$ would have a member satisfying $\varphi$, in $[d]$. This is a contradiction, so $c \Vdash \varphi$. For $n \geq 2$, let $\varphi = \forall y\ \psi(y)$ and suppose $d \leq c$ forces $\neg \psi(m)$. Some $e \leq d$ forces $\varphi$; it also forces $\neg \psi(m)$ by extension, while $e \Vdash \varphi$ forbids $e$ itself from forcing $\neg \psi(m)$. So $c \Vdash \varphi$.
 
-In the first exercise, the $\Pi^0_2$ sentence $\neg \varphi$ is forced by no string: a non-empty string extends a string of length $1$, so it forces $\varphi$, and not $\neg \varphi$ by consistency; the empty string does not force $\neg \varphi$, since its extension $0$ forces $\psi(0) = \neg \neg \psi(0)$. But the empty string does not force $\neg \neg \varphi = \varphi$ either.
+In :ref{#ex-cohen-sigma2-witness}, the $\Pi^0_2$ sentence $\neg \varphi$ is forced by no string: a non-empty string extends a string of length $1$, so it forces $\varphi$, and not $\neg \varphi$ by consistency; the empty string does not force $\neg \varphi$, since its extension $0$ forces $\psi(0) = \neg \neg \psi(0)$. But the empty string does not force $\neg \neg \varphi = \varphi$ either.
 :::
 ::::
 
@@ -166,3 +164,54 @@ The forcing relation for arithmetic is due to Feferman (1965), with atomic formu
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.24.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 7.4.
 - B. Monin and L. Patey, *Computability theory*, chapter *Effective forcing*, section *Forcing relation*.
+
+:::::exercises
+::::exercise{#ex-truth-needs-genericity difficulty=1 objective="See why genericity is needed in the theorem on forcing and truth."}
+For Cohen forcing, let $F$ be the set of prefixes of the set $\emptyset$, that is, of the strings $0^k$. Show that $F$ is a filter meeting every $S_n$, that it contains a condition forcing the $\Pi^0_2$ sentence "$G$ is infinite" of :ref{#ex-forcing-formulas}, and that $G_F$ is finite. Find a $\Sigma^0_1$ sentence $\varphi$ such that $F$ does not meet $D_\varphi$.
+
+:::solution
+The strings $0^k$ are pairwise comparable, the set is closed upward ($\tau \preceq 0^k$ implies $\tau = 0^j$), and it contains $0^n \in S_n$. So $F$ is a filter meeting every $S_n$, and $G_F = \emptyset$, since $\emptyset$ is a member of every $0^k$. By :ref{#ex-forcing-relation}, item 1, every string, in particular the empty string, forces "$G$ is infinite". But $\emptyset$ is finite.
+
+Let $\varphi$ be $\Phi^G_a(0)\converge$, with $\Phi_a$ the functional of :ref{#ex-forcing-formulas} that searches for an element above its input. A string forces $\varphi$ if and only if it has a $1$ at some position $y \geq 1$: otherwise its member $\sigma 0 0 \cdots$ has no element above $0$. No string forces $\neg \varphi$, since $\sigma 1 1 \cdots$ is a member with an element above $0$. So $D_\varphi$ is the set of strings with a $1$ at a position $y \geq 1$, which contains no $0^k$. The filter $F$ is not $1$-generic, and :ref{#thm-forcing-truth} does not apply to it.
+:::
+::::
+
+::::exercise{#ex-sacks-totality-local difficulty=2 objective="See that for computable Sacks forcing, forcing totality is not a property of the nodes of the tree."}
+Let $T$ be a computable f-tree and $\Phi_e$ a functional.
+
+1. Show that if $T$ forces "$\Phi^G_e$ is total", then for every node $\sigma$ of $T$ and every $x$, some node $\tau \succeq \sigma$ of $T$ satisfies $\Phi^\tau_e(x)\converge$.
+2. Let $T$ be the identity tree, and let $\Phi^X_e(x)$ search for an odd number $p$ with $X(p) = 1$, for every $x$. Show that the property of item 1 holds, but that $T$ does not force "$\Phi^G_e$ is total".
+
+:::solution
+1. Suppose that some node $\sigma = T(\rho)$ and some $x$ have no node $\tau \succeq \sigma$ of $T$ with $\Phi^\tau_e(x)\converge$. Let $S$ be the full subtree above $\sigma$. If a path $X$ of $S$ had $\Phi^X_e(x)\converge$ with use $u$, a node of $S$ that is a prefix of $X$ of length at least $u$, which exists since the nodes along a path have unbounded lengths, would make the computation converge; it is a node of $T$ extending $\sigma$. So every member of $S$ satisfies $\Phi^G_e(x)\diverge$, that is, $S \Vdash \Phi^G_e(x)\diverge$, and $T$ does not force totality, by the universal clause of :ref{#def-forcing-relation}.
+2. Every string $\sigma$ is a node of $T$, and $\tau = \sigma 1 1$ has a $1$ at an odd position, $|\sigma|$ or $|\sigma| + 1$; so $\Phi^\tau_e(x)\converge$ for every $x$. Now let $R(\rho) = \hat\rho$, the string obtained by inserting a $0$ after each bit of $\rho$. It is a computable f-tree, as in :ref{#ex-tree-compatibility}, and a subtree of $T$. Its nodes are $0$ at every odd position, so its paths are $0$ at every odd position, and $\Phi^X_e(0)\diverge$ for every path $X$ of $R$. So $R \Vdash \Phi^G_e(0)\diverge$, with $R \leq T$, and $T$ does not force "$\Phi^G_e$ is total". In :ref{#ex-forcing-relation}, item 3, the subtrees could not avoid the leftmost path; here a subtree can avoid all the escape nodes at once.
+:::
+::::
+
+::::exercise{#ex-infinite-four-notions difficulty=1 objective="Compute the conditions forcing a $\Pi^0_2$ sentence in each of the four notions of forcing."}
+For each of Cohen, Jockusch–Soare, computable Sacks and computable Mathias forcing, determine which conditions force "$G$ is infinite", the sentence $\forall x\ \Phi^G_a(x)\converge$ of :ref{#ex-forcing-formulas}. In which of them can a condition force it while having a finite member?
+
+:::solution
+By the universal clause, $c$ forces the sentence if and only if no extension of $c$ forces $\Phi^G_a(m)\diverge$ for any $m$, that is, no extension has all its members contained in $\{0, \dots, m\}$.
+
+- *Cohen.* Every string forces it (:ref{#ex-forcing-relation}, item 1), and every string has a finite member.
+- *Jockusch–Soare.* By the argument of :ref{#ex-forcing-relation}, item 2, $\mathcal P$ forces it if and only if every member of $\mathcal P$ is infinite. For instance $\{ \emptyset \}$ does not force it.
+- *Computable Sacks.* Every condition $T$ forces it. Let $S \leq T$ and $m \in \nat$. For each $k$, the sets $\bigcup_j S(\rho 0^j)$, for the $2^k$ strings $\rho$ of length $k$, are paths of $S$, and they are distinct since the nodes $S(\rho)$ are pairwise incompatible. So $S$ has infinitely many paths, while only $2^{m+1}$ sets are contained in $\{0, \dots, m\}$; hence $S$ does not force $\Phi^G_a(m)\diverge$. The identity tree has finite paths.
+- *Computable Mathias.* Every condition forces it. An extension $(\tau, Y)$ has the member whose bits below $|\tau|$ are those of $\tau$ and whose elements from $|\tau|$ on are those of $Y$; it is infinite, so $(\tau, Y)$ does not force $\Phi^G_a(m)\diverge$. The member $\sigma 0 0 \cdots$ of $(\sigma, X)$ is finite.
+
+So a condition may force the sentence while having a finite member in every notion except Jockusch–Soare forcing, where forcing this sentence is truth on all members.
+:::
+::::
+
+::::exercise{#ex-cohen-pi2-comeager difficulty=2 objective="Interpret the forcing of a $\Pi^0_2$ sentence by a string in terms of Baire category."}
+For Cohen forcing, let $\sigma$ be a string and $\varphi = \forall y\ \Phi^G_e(y)\converge$ a $\Pi^0_2$ sentence. Show that $\sigma \Vdash \varphi$ if and only if the class of members of $\sigma$ that do not satisfy $\varphi$ is meager.
+
+:::solution
+By the universal clause, $\sigma \Vdash \varphi$ if and only if no $\tau \succeq \sigma$ forces $\Phi^G_e(m)\diverge$ for any $m$. By :ref{#prop-force-sigma1}, $\tau$ forces $\Phi^G_e(m)\diverge$ if and only if no $\rho \succeq \tau$ satisfies $\Phi^\rho_e(m)\converge$. So $\sigma \Vdash \varphi$ if and only if for every $m$ and every $\tau \succeq \sigma$ there is $\rho \succeq \tau$ with $\Phi^\rho_e(m)\converge$.
+
+Suppose $\sigma \Vdash \varphi$. For each $m$, let $\mathcal C_m = [\sigma] \cap \{ X : \Phi^X_e(m)\diverge \}$. It is nowhere dense: given a string $\tau$, if $\tau$ is incompatible with $\sigma$, then $[\tau]$ is disjoint from $\mathcal C_m$; otherwise let $\tau'$ be the longer of $\tau$ and $\sigma$, and $\rho \succeq \tau'$ with $\Phi^\rho_e(m)\converge$; then $[\rho] \subseteq [\tau]$ and $[\rho]$ is disjoint from $\mathcal C_m$ by the use principle. The members of $\sigma$ that do not satisfy $\varphi$ form $\bigcup_m \mathcal C_m$, a meager class (:ref{#def-meager}).
+
+Conversely, suppose that $\sigma$ does not force $\varphi$: some $\tau \succeq \sigma$ and $m$ have no $\rho \succeq \tau$ with $\Phi^\rho_e(m)\converge$. Then no member of $\tau$ satisfies $\Phi^G_e(m)\converge$, by the use principle, so the cylinder $[\tau]$ is contained in the class of members of $\sigma$ that do not satisfy $\varphi$. A cylinder is not meager (:ref{#thm-baire-category}), and a subclass of a meager class is meager, so this class is not meager.
+:::
+::::
+:::::

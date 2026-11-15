@@ -106,7 +106,25 @@ Checked (November 2026), by web search and in the books:
 - **Post's program.** Harrington–Soare (1991) completed Post's program in a revised form (definable property in the lattice of c.e. sets); mentioned in `simple-sets`.
 - No simpler proof of the Friedberg–Muchnik or Sacks splitting theorems in the last fifteen years was found. The question of a natural solution to Post's problem (Sacks' question) remains open; it is mentioned through Nies's discussion only.
 
-## 10. Open points
+## 10. Exercises
+
+**Featured exercises** (in the text, one or two per lesson, each the one every reader should do):
+- *simple-sets*: `ex-simple-join` (a direct check of the definition of simplicity) and `ex-simple-index-set` (connects simplicity with the quantifier counting of `arithmetic-hierarchy`).
+- *friedberg-muchnik*: `ex-fm-injury-bound` (the bound 2^i − 1 that makes the argument a bounded finite injury argument, cited in the text and in the comparison of `sacks-splitting`) and `ex-fm-independent` (the construction for infinitely many sets, the first step towards embeddings).
+- *low-simple-set*: `ex-low-superlow` (counting changes of the approximation) and `ex-low-splitting` (negative requirements alone; cited in the notes and in `cone-avoidance` for the Bickford–Mills obstruction).
+- *sacks-splitting*: `ex-sacks-restraint-at-l` (why the restraint covers the computation at the length of agreement, the key point of the strategy).
+- *cone-avoidance*: `ex-ca-uniform-sequence` (cone avoidance against a uniform sequence, and the consequence that the non-zero c.e. degrees cannot be listed uniformly).
+
+**Further exercises** (block at the end of each lesson):
+- *simple-sets*: creative sets are not computable (`ex-creative-not-ce`, moved from the text since it repeats a remark); simple and cofinite sets form a filter; Tot and its complement are productive; the uniform version of `lem-productive-infinite`; simple sets are not m-complete through computably inseparable pairs.
+- *friedberg-muchnik*: why witnesses must be fresh (a run in which preservation fails); the relativized theorem and incomparable degrees between x and x′; making both sets simple (combination with Post's requirements); independence from the join of the other sets.
+- *low-simple-set*: why a lowness requirement preserves one computation; an arbitrarily sparse low simple set (variant of the size constraint); a non-computable low c.e. set by followers and initialization, compared with walls; the relativized low simple set.
+- *sacks-splitting*: computing a length of agreement and a restraint through one stage; halves of any c.e. splitting are computable with one oracle question; splitting into n parts; avoiding a uniformly c.e. sequence of cones.
+- *cone-avoidance*: incomparable c.e. degrees from the corollaries (`ex-ca-incomparable-pair`, moved from the text); a low simple set avoiding a cone (three kinds of requirements); low degrees below and beside given c.e. degrees; halves of a splitting are never simple; two low degrees whose ideals generate all c.e. degrees by joins.
+
+**Sources.** Soare 2016: Exercise 2.4.10 (`ex-productive-uniform`), 5.2.9 (`ex-simple-filter`), 5.2.11 (`ex-inseparable-not-simple`), 7.3.6 (i) (`ex-fm-independent-join`), 7.6.3 (`ex-sacks-sequence`, and the existing `ex-ca-uniform-sequence`), 7.6.5 (`ex-ca-low-cover`); Downey–Hirschfeldt, Theorem 2.11.2 (`ex-low-followers`, with requirements $A \neq \overline{W_e}$); Nies, Theorem 1.6.5 and Exercise 1.6.10 (the existing `ex-low-superlow`, `ex-low-splitting`). The other exercises are standard variants written for the course. References were checked in the text versions of the books.
+
+## 11. Open points
 
 - Lesson lengths: `simple-sets`, `sacks-splitting` and `cone-avoidance` are at about 2600–2750 words (50 minutes), slightly above the 45-minute target.
 - A lesson on permitting could be added if a later course needs it (Soare §5.2, §5.5; Monin–Patey).
@@ -114,6 +132,7 @@ Checked (November 2026), by web search and in the books:
 - `docs/REVIEW-2026-11.md` had no open item for this course.
 - The `immunity-growth` course states (`cor-arslanov` item 3) that the complement of the low simple set is not effectively immune; `rem-post-set-complete` refers to it.
 
-## 11. History
+## 12. History
 
 - **2026-11-12.** Design and pedagogical revision. New lesson `cone-avoidance` (cone avoidance for a simple set, low halves of a Sacks splitting, two corollaries on the c.e. degrees, outlook moved from `sacks-splitting`). Four new figures (`post-simple`, `fm-strategy`, `walls`, `agreement`) in `scripts/figures/ce-degrees.py`; the existing `injury-run` is unchanged. Intuition paragraphs before the constructions, examples (non-simple sets, productive index sets, non-monotone restraint), a remark on the completeness of Post's set, a summary of the structure of finite injury arguments, the hypotheses and the unbounded injury of the Sacks construction, superlowness and the Bickford–Mills remark in exercises. References checked against Soare 2016, Downey–Hirschfeldt, Nies and Monin–Patey; Soare 1987 and Odifreddi replaced. Durations recomputed from word counts. All labels kept.
+- **2026-11-13.** Featured and further exercises: labels and objectives for the existing exercises, two moved to the blocks of further exercises (`ex-creative-not-ce`, `ex-ca-incomparable-pair`), twenty new further exercises with solutions (section 10). References to "the second exercise" replaced by `:ref`. Durations of `simple-sets`, `sacks-splitting` and `cone-avoidance` set to 45 (the maximum).

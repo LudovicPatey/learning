@@ -60,7 +60,7 @@ In the proof of :ref{#thm-ph-true}, where is the infinite homogeneous set $Y$ us
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-ph-one-color difficulty=1 objective="Compute the relation $\to_*$ for one color, and see how relative largeness depends on the left endpoint."}
 Show that $[a, b] \to_* (1)^1_1$ if and only if $b \geq 2a$, and that $[a, 2a] \to_* (1)^1_1$ while $[a + 1, 2a] \not\to_* (1)^1_1$ for $a \geq 1$. Explain why item 3 of :ref{#ex-relatively-large} allows the left endpoint to decrease but not to increase.
 
 :::solution
@@ -85,3 +85,45 @@ The principle and :ref{#thm-ph-true} are due to Paris and Harrington (1977); Há
 - Q. Le Houérou, L. Levy Patey and K. Yokoyama, *$\Pi^0_4$ conservation of Ramsey's theorem for pairs*, arXiv:2404.18974; and *Conservation of Ramsey's theorem for pairs and well-foundedness*, arXiv:2402.11616.
 - Q. Le Houérou and L. Patey, *Partition theorems for Ketonen–Solovay largeness: Hardy-like version*, arXiv:2602.08778.
 - A. Bovykin and A. Weiermann, *The strength of infinitary Ramseyan principles can be accessed by their densities*, Annals of Pure and Applied Logic 168 (2017), 1700–1709.
+
+:::::exercises
+::::exercise{#ex-ph-upward-closed difficulty=1 objective="Check the closure properties of relative largeness: it passes to supersets, not to subsets nor to translates."}
+Show that every finite superset of a relatively large set is relatively large. Give a relatively large set with a subset that is not relatively large, and a relatively large set $H$ such that $H + 1 = \{ h + 1 : h \in H \}$ is not relatively large.
+
+:::solution
+If $H \subseteq H'$ with $H'$ finite and $H$ relatively large, then $|H'| \geq |H| > \min H \geq \min H'$. The set $\{ 1, 2 \}$ is relatively large ($2 > 1$), and its subset $\{ 2 \}$ is not; its translate $\{ 2, 3 \}$ is not either ($2 = 2$). In the proof of :ref{#thm-ph-true}, the first property is why any long enough finite part of $Y$ containing $\min Y$ would do.
+:::
+::::
+
+::::exercise{#ex-ph-parameter-k difficulty=1 objective="Absorb the size parameter $k$ of the Paris–Harrington principle into the left endpoint."}
+Let $a' = \max(a, k)$ and $a' \leq b$. Show that $[a', b] \to_* (1)^n_c$ implies $[a, b] \to_* (k)^n_c$. Deduce that $\mathrm{PH}$ is equivalent to $\forall n\ \forall c\ \forall a\ \exists b\ [a, b] \to_* (1)^n_c$.
+
+:::solution
+Let $f : [[a, b]]^n \to c$. Its restriction to $[[a', b]]^n$ has a relatively large homogeneous set $H \subseteq [a', b]$; since $[H]^n \subseteq [[a', b]]^n$, $H$ is homogeneous for $f$, and $|H| > \min H \geq a' \geq k$. So $[a, b] \to_* (k)^n_c$. For the equivalence, the displayed sentence is the instance $k = 1$ of $\mathrm{PH}$; conversely, given $n, c, k, a$, apply it to $n, c$ and $a' = \max(a, k)$ to get $b \geq a'$ with $[a', b] \to_* (1)^n_c$. The first part concludes.
+:::
+::::
+
+::::exercise[Colorings of points]{#ex-ph-points-bound difficulty=2 objective="Prove the Paris–Harrington principle for colorings of points with an explicit bound, by the pigeonhole principle on blocks of geometric growth."}
+Let $a, c \geq 1$ and $b = a (2c)^{c+1} - 1$. Show that $[a, b] \to_* (1)^1_c$. Compare with item 2 of :ref{#ex-relatively-large}.
+
+:::solution
+Let $m_i = a (2c)^i$ for $i \leq c + 1$, and $I_i = [m_i, m_{i+1})$ for $i \leq c$: these $c + 1$ blocks partition $[a, b]$, and $|I_i| = (2c - 1) m_i$. Let $f : [a, b] \to c$. In each block, some color $j_i$ has at least $|I_i| / c = (2c - 1) m_i / c \geq m_i$ elements, since $2c - 1 \geq c$. There are $c + 1$ blocks and $c$ colors, so $j_i = j_{i'} = j$ for some $i < i'$. Let $H = f^{-1}(j) \cap (I_i \cup I_{i'})$, which is homogeneous. Then $\min H < m_{i+1} \leq m_{i'} \leq |f^{-1}(j) \cap I_{i'}| \leq |H|$, so $H$ is relatively large.
+
+Item 2 of :ref{#ex-relatively-large} shows that $[a, 2^c a - 1] \not\to_* (1)^1_c$: the least $b$ with $[a, b] \to_* (1)^1_c$ lies between $2^c a$ and $a (2c)^{c+1} - 1$. With :ref{#ex-ph-parameter-k}, this proves $\mathrm{PH}_1$ with an explicit bound, by finite counting only.
+:::
+::::
+
+::::exercise[Lowering the arity]{#ex-ph-lower-arity difficulty=2 objective="Lower the arity of a coloring at the cost of a translation of the interval, the device used for regressive colorings." lessons="regressive-colorings"}
+Let $1 \leq n' < n$ and $d = n - n'$. Show that if $[a + d, b + d] \to_* (k + d)^n_c$, then $[a, b] \to_* (k)^{n'}_c$. Why is the interval translated?
+
+:::solution
+Let $f : [[a, b]]^{n'} \to c$. For $s \in [[a + d, b + d]]^n$, let $g(s) = f(s^- - d)$, where $s^-$ is the set of the $n'$ least elements of $s$ and $s^- - d$ its translate, a subset of $[a, b]$. Let $H$ be a relatively large homogeneous set for $g$ with at least $k + d$ elements, of color $j$, and $G = H - d \subseteq [a, b]$, so that $|G| = |H|$ and $\min G = \min H - d$. Let $H'$ be $G$ without its $d$ largest elements, which form a set $w$.
+
+*Size.* $|H'| = |H| - d \geq k$, and $|H'| = |H| - d > \min H - d = \min G \geq 0$; so $H'$ is nonempty, $\min H' = \min G$, and $|H'| > \min H'$.
+
+*Homogeneity.* Let $s \in [H']^{n'}$. The elements of $w$ lie above those of $s$, so $s \cup w \in [G]^n$ has $s$ as its $n'$ least elements, and $(s \cup w) + d \in [H]^n$. Hence $f(s) = g((s \cup w) + d) = j$.
+
+Removing the $d$ largest elements is needed to complete each $n'$-set into an $n$-set; it lowers the size by $d$, and the translation by $d$ provides the $d$ extra elements beyond relative largeness, since $|H| > \min H = \min G + d$. The same device appears in the proof of the reduction of regressive colorings to relative largeness, in the next lesson.
+:::
+::::
+:::::

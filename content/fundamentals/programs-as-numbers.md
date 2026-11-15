@@ -1,7 +1,7 @@
 ---
 title: Programs as numbers
 summary: The enumeration Φₑ of the partial computable functions, its approximation by stages, and computable sets and relations.
-duration: 50
+duration: 45
 prerequisites: [models-of-computation/equivalence-of-models]
 ---
 
@@ -155,13 +155,7 @@ Let $e$ be an index of the following algorithm: on input $n$, try $r = 0, 1, 2, 
   The function $n \mapsto \lfloor \sqrt n \rfloor$ is total computable, but it is computed by other programs. $\Phi_e(50)\diverge$: this program computes a different, partial, function.
 :::
 
-## Uniformity
-
-A typical statement of computability theory asserts that some object is obtained **uniformly** from others: for instance, "the set $A_x$ is computable, uniformly in $x$" means that the relation $\{ (x, y) : y \in A_x \}$ is computable, and not only that each $A_x$ is computable. The difference is essential. Let $\emptyset' = \{ e : \Phi_e(e)\converge \}$ be the halting set, which is not computable (:ref{#thm-halting}, in the lesson on the halting problem). Each set $A_x = \{ 0 \}$ if $x \in \emptyset'$ and $A_x = \emptyset$ otherwise is finite, hence computable; but the relation $y \in A_x$ is not, since $x \in \emptyset'$ if and only if $0 \in A_x$. Similarly, an index $e$ "obtained uniformly in $x$" is the value of a total computable function of $x$.
-
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-graph-computable difficulty=1 objective="Relate the computability of a total function to that of its graph."}
 Let $f : \nat \to \nat$ be total. Show that $f$ is computable if and only if its graph is computable.
 
 :::solution
@@ -169,21 +163,17 @@ If $f$ is computable, $f(x) = y$ is decided by computing $f(x)$ and comparing wi
 :::
 ::::
 
-::::exercise{difficulty=1}
-Show that the set $\{ e : \Phi_e(0)[e]\converge \}$ is computable, and that the function $s \mapsto |\{ e < s : \Phi_e(e)[s]\converge \}|$ is total computable.
+::::exercise{#ex-stage-sets difficulty=1 objective="Use the decidability of convergence at a given stage to show that sets and functions defined by bounded simulation are computable."}
+Show that the set $\{ e : \Phi_e(0)[e + 1]\converge \}$ is computable, and that the function $s \mapsto |\{ e < s : \Phi_e(e)[s]\converge \}|$ is total computable.
 
 :::solution
-Both follow from item 1 of :ref{#prop-stage-properties}. The first set is defined by substituting $(e, 0, e)$ in a primitive recursive relation. The function is $\sum_{e < s} \chi(e, s)$, where $\chi(e, s)$ is the characteristic function of the primitive recursive relation $\Phi_e(e)[s]\converge$; it is primitive recursive.
+Both follow from item 1 of :ref{#prop-stage-properties}. The first set is defined by substituting $(e, 0, e + 1)$ in a primitive recursive relation. The function is $\sum_{e < s} \chi(e, s)$, where $\chi(e, s)$ is the characteristic function of the primitive recursive relation $\Phi_e(e)[s]\converge$; it is primitive recursive.
 :::
 ::::
 
-::::exercise{difficulty=2}
-Show that a partial computable function with a computable domain has a total computable extension. Show by an example that a partial computable function may have a total computable extension and a non-computable domain.
+## Uniformity
 
-:::solution
-If $D = \mathrm{dom}(f)$ is computable, let $g(x) \simeq f(x)$ for $x \in D$ and $g(x) = 0$ for $x \notin D$, a definition by cases (:ref{#prop-computable-closure}); $g$ is total since $f(x)\converge$ for $x \in D$. For the converse, consider the partial function defined by $f(e) \simeq 0$ if $\Phi_e(e)\converge$, undefined otherwise. It is partial computable, its domain $\emptyset'$ is not computable (:ref{#thm-halting}), and the constant function $0$ is a total computable extension.
-:::
-::::
+A typical statement of computability theory asserts that some object is obtained **uniformly** from others: for instance, "the set $A_x$ is computable, uniformly in $x$" means that the relation $\{ (x, y) : y \in A_x \}$ is computable, and not only that each $A_x$ is computable. The difference is essential. Let $\emptyset' = \{ e : \Phi_e(e)\converge \}$ be the halting set, which is not computable (:ref{#thm-halting}, in the lesson on the halting problem). Each set $A_x = \{ 0 \}$ if $x \in \emptyset'$ and $A_x = \emptyset$ otherwise is finite, hence computable; but the relation $y \in A_x$ is not, since $x \in \emptyset'$ if and only if $0 \in A_x$. Similarly, an index $e$ "obtained uniformly in $x$" is the value of a total computable function of $x$.
 
 ## Notes and references
 
@@ -194,3 +184,53 @@ The enumeration of the partial recursive functions by indices, and the normal fo
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.
 - B. Monin and L. Patey, *Computability theory*, chapter *Foundations of computability*, sections *Computable functions* and *Computable sets*.
+
+:::::exercises
+::::exercise{#ex-stage-of-convergence difficulty=1 objective="Check that the stage at which a computation converges is well defined and computable from the computation."}
+Say that $\Phi_e(x)$ **converges first at stage $s$** if $\Phi_e(x)[s]\converge$, and either $s = 0$ or $\Phi_e(x)[s - 1]\diverge$. Show that this relation of $e, x, s$ is primitive recursive, that for given $e$ and $x$ at most one $s$ satisfies it, and that the partial function $t(e, x) \simeq \mu s\ [\Phi_e(x)[s]\converge]$ is partial computable, with domain $\{ (e, x) : \Phi_e(x)\converge \}$, and gives this unique stage.
+
+:::solution
+The relation is a Boolean combination of the predicate $s = 0$ and of the primitive recursive relation of item 1 of :ref{#prop-stage-properties}, taken at $s$ and at $s \dotminus 1$ (a primitive recursive substitution); it is primitive recursive.
+
+Suppose that $s < s'$ both satisfy it. Then $s' \geq 1$, so $\Phi_e(x)[s' - 1]\diverge$ by the condition for $s'$. But $s \leq s' - 1$ and $\Phi_e(x)[s]\converge$, so $\Phi_e(x)[s' - 1]\converge$ by item 2, a contradiction.
+
+The function $t$ is an unbounded search over a computable relation, hence partial computable by item 4 of :ref{#prop-computable-closure}. It is defined if and only if $\Phi_e(x)[s]\converge$ for some $s$, that is, by item 3, if and only if $\Phi_e(x)\converge$. When it is defined, $s = t(e, x)$ satisfies the relation: $\Phi_e(x)[s]\converge$, and if $s \geq 1$ then $\Phi_e(x)[s - 1]\diverge$ by minimality. By uniqueness, it is the only such stage.
+:::
+::::
+
+::::exercise{#ex-uniform-cofinite difficulty=1 objective="Distinguish a uniformly computable family of sets from the question whether a member of the family is empty."}
+For $x \in \nat$, let $A_x = \{ s : \Phi_x(x)[s]\converge \}$. Show that the sets $A_x$ are computable uniformly in $x$, that each $A_x$ is either empty or cofinite, and that $A_x = \emptyset$ if and only if $\Phi_x(x)\diverge$. (By the lesson on the halting problem, the set $\{ x : A_x = \emptyset \}$ is therefore not computable.)
+
+:::solution
+The relation $s \in A_x$, that is $\Phi_x(x)[s]\converge$, is primitive recursive in $(x, s)$ by item 1 of :ref{#prop-stage-properties} (substitute $x$ for $e$), so the sets $A_x$ are uniformly computable.
+
+If $A_x \neq \emptyset$, let $s_0$ be its least element. By item 2, every $s \geq s_0$ belongs to $A_x$, and by minimality no $s < s_0$ does; so $A_x = \{ s : s \geq s_0 \}$, which is cofinite. By item 3, $A_x \neq \emptyset$ if and only if $\Phi_x(x)\converge$.
+
+A single algorithm decides "$s \in A_x$?" for all $x$ and $s$; the question "$A_x = \emptyset$?" concerns all elements of $A_x$ at once, and it is the halting problem.
+:::
+::::
+
+::::exercise{#ex-first-to-halt difficulty=2 objective="Run two computations in parallel by stages, as a first instance of dovetailing."}
+Let $a, b \in \nat$, $f = \Phi_a$ and $g = \Phi_b$. Define $h(x)$ as follows: let $s$ be the least stage with $\Phi_a(x)[s]\converge$ or $\Phi_b(x)[s]\converge$; if $\Phi_a(x)[s]\converge$, let $h(x) = \Phi_a(x)$, and otherwise $h(x) = \Phi_b(x)$; if there is no such stage, $h(x)$ is undefined.
+
+1. Show that $h$ is partial computable, with $\mathrm{dom}(h) = \mathrm{dom}(f) \cup \mathrm{dom}(g)$.
+2. Show that if $f$ and $g$ agree on $\mathrm{dom}(f) \cap \mathrm{dom}(g)$, then $h(x) = f(x)$ for $x \in \mathrm{dom}(f)$ and $h(x) = g(x)$ for $x \in \mathrm{dom}(g)$.
+3. Why does the program "compute $f(x)$ and output it; if it does not halt, compute $g(x)$" not define a function with domain $\mathrm{dom}(f) \cup \mathrm{dom}(g)$?
+
+:::solution
+1. The relation $R(x, s)$: "$\Phi_a(x)[s]\converge$ or $\Phi_b(x)[s]\converge$" is computable, by item 1 of :ref{#prop-stage-properties} and :ref{#prop-computable-closure}. So $\sigma(x) \simeq \mu s\ R(x, s)$ is partial computable, and by item 3 it is defined exactly on $\mathrm{dom}(f) \cup \mathrm{dom}(g)$. When $\sigma(x)$ is defined, $h(x)$ is the value of $\Phi_a(x)[\sigma(x)]$ if $\Phi_a(x)[\sigma(x)]\converge$, and the value of $\Phi_b(x)[\sigma(x)]$ otherwise: this is a definition by cases with a computable condition, and the values are computed from $a$, $b$, $x$ and $\sigma(x)$ by item 1. So $h$ is partial computable with $\mathrm{dom}(h) = \mathrm{dom}(\sigma)$. In the first case the value is $\Phi_a(x)$ and in the second it is $\Phi_b(x)$, by item 3.
+2. If $x \in \mathrm{dom}(f) \setminus \mathrm{dom}(g)$, then $\Phi_b(x)[s]\diverge$ for every $s$, so the first case applies at stage $\sigma(x)$ and $h(x) = f(x)$; symmetrically, $h(x) = g(x)$ for $x \in \mathrm{dom}(g) \setminus \mathrm{dom}(f)$. If $x$ is in both domains, $h(x)$ is $f(x)$ or $g(x)$, which are equal by hypothesis.
+3. "If it does not halt" is not a condition that a program can act on: if $f(x)\diverge$, the program is still computing $f(x)$ forever, and never reaches $g$. It computes $f$, and diverges on $\mathrm{dom}(g) \setminus \mathrm{dom}(f)$.
+:::
+::::
+
+::::exercise{#ex-tuple-relations difficulty=1 objective="Check that a relation and the set of codes of its tuples are computable together."}
+Let $k \geq 2$, and code $k$-tuples by iterating Cantor's pairing function: $\langle x_1, \dots, x_k \rangle = \langle x_1, \langle x_2, \dots, x_k \rangle \rangle$, with $\langle x_{k-1}, x_k \rangle$ the pairing function. Show that a relation $R \subseteq \nat^k$ is computable if and only if the set $\hat R = \{ \langle x_1, \dots, x_k \rangle : \vec x \in R \}$ is computable.
+
+:::solution
+By induction on $k$, the map $c(\vec x) = \langle x_1, \dots, x_k \rangle$ is a bijection from $\nat^k$ onto $\nat$, since the pairing function is a bijection from $\nat^2$ onto $\nat$; it is total computable, as a composition of pairing functions. Its inverse is given by the total computable functions $d_i(n) = \pi_0(\pi_1^{i-1}(n))$ for $i < k$ and $d_k(n) = \pi_1^{k-1}(n)$, where $\pi_1^{j}$ is $\pi_1$ iterated $j$ times.
+
+If $R$ is computable, then $n \in \hat R \iff (d_1(n), \dots, d_k(n)) \in R$, since $c$ is a bijection; so $\hat R$ is computable by substitution (:ref{#prop-computable-closure}). Conversely, if $\hat R$ is computable, then $\vec x \in R \iff c(\vec x) \in \hat R$, and $R$ is computable by substitution.
+:::
+::::
+:::::

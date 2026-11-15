@@ -1,7 +1,7 @@
 ---
 title: Low bases for problems
 summary: A problem admits a low basis if every instance has a solution that is low relative to the instance; such problems have ω-models consisting of low sets, which separates them from the jump, from cohesiveness and from Ramsey's theorem for pairs; low solutions also control the second jump.
-duration: 45
+duration: 40
 prerequisites: [avoidance/avoidance-properties, effective-forcing/mathias-forcing, reducibilities/preservation, ramsey-theorem/cohesiveness, ramsey-theorem/triples, turing-degrees/low-and-high, arithmetic-hierarchy/post-theorem]
 ---
 
@@ -108,7 +108,7 @@ In the proof of :ref{#prop-low-second-jump}, why does the conclusion fail for $n
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-low-unrelativized difficulty=1 objective="See why the definition of a low basis is relativized to every set $Z$, with a problem whose computable instances have low solutions."}
 Let $\mathsf Q$ be the problem whose instances are all sets $X$, where the only solution to a computable $X$ is $\emptyset$, and the only solution to a non-computable $X$ is $X'$. Show that every computable instance of $\mathsf Q$ has a low solution, but that $\mathsf Q$ does not admit a low basis.
 
 :::solution
@@ -116,15 +116,7 @@ A computable instance has the solution $\emptyset$, which is low. Let $Z$ be a n
 :::
 ::::
 
-::::exercise{difficulty=1}
-Let $\mathsf P$ admit a low basis, let $Z$ be a set and $C$ a set with $C \not\leq_T Z'$. Show that every $Z$-computable instance of $\mathsf P$ has a solution $Y$ such that $C$ is not $\Delta^0_2(Z \oplus Y)$.
-
-:::solution
-Let $Y$ be a solution with $(Z \oplus Y)' \leq_T Z'$. If $C$ were $\Delta^0_2(Z \oplus Y)$, it would be computable in $(Z \oplus Y)'$ by Post's theorem relativized, hence in $Z'$, a contradiction.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-jump-delta2-model difficulty=2 objective="See why $\Delta^0_2$ solutions, unlike low solutions, do not iterate into an ω-model."}
 Show that every Turing ideal containing $\emptyset$ and satisfying $\mathsf J$ contains every arithmetic set, although every $Z$-computable instance of $\mathsf J$ has a $\Delta^0_2(Z)$ solution. Why does the proof of :ref{#thm-low-basis-model} fail for the class of $\Delta^0_2$ sets?
 
 :::solution
@@ -142,3 +134,63 @@ The distinction between genericity and effectiveness properties, the definition 
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Sections 4.5 and 6.4.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 3.6.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Lowness*, section *Motivation*.
+
+:::::exercises
+::::exercise{#ex-low-over-comparison difficulty=1 objective="Compare lowness of a set with lowness over another set, and check that lowness over a set composes."}
+Recall that $Y$ is low over $Z$ if $(Z \oplus Y)' \leq_T Z'$.
+
+1. Show that if $Y$ is low over $Z$, then $Y \leq_T Z'$; and that if moreover $W$ is low over $Z \oplus Y$, then $Y \oplus W$ is low over $Z$.
+2. Show that $\emptyset'$ is low over $\emptyset'$, but is not low.
+3. There are low sets $A$ and $B$ with $A \oplus B \equiv_T \emptyset'$ (see :ref{to="turing-degrees/low-and-high"}). Deduce that a low set need not be low over a low set.
+
+:::solution
+1. By item 3 of :ref{#thm-jump}, $Y \leq_T Z \oplus Y \leq_T (Z \oplus Y)' \leq_T Z'$. The sets $Z \oplus (Y \oplus W)$ and $(Z \oplus Y) \oplus W$ are Turing equivalent, so their jumps are Turing equivalent by item 5 of :ref{#thm-jump}, and $((Z \oplus Y) \oplus W)' \leq_T (Z \oplus Y)' \leq_T Z'$.
+2. $(\emptyset' \oplus \emptyset')' \equiv_T \emptyset'' = (\emptyset')'$, so $\emptyset'$ is low over $\emptyset'$. It is not low, since $\emptyset'' \not\leq_T \emptyset'$ by item 4 of :ref{#thm-jump}.
+3. $(B \oplus A)' \equiv_T \emptyset''$ and $B' \leq_T \emptyset'$, so $(B \oplus A)' \not\leq_T B'$: the low set $A$ is not low over the low set $B$. This is why :ref{#def-low-basis-problem} asks for solutions low over the oracle $Z$, and not only low solutions.
+:::
+::::
+
+::::exercise{#ex-low-basis-examples difficulty=1 objective="Decide which simple problems admit a low basis, using the low basis theorem and forcing the jump of generic sets."}
+Each of the following problems has all sets as instances. Determine which of them admit a low basis.
+
+1. The solutions to $X$ are the sets PA relative to $X$.
+2. The solutions to $X$ are the sets 1-generic relative to $X$.
+3. The solutions to $X$ are the sets not computable in $X$.
+4. The solutions to $X$ are the sets $Y$ with $X'' \leq_T (X \oplus Y)'$.
+
+:::solution
+Let $Z$ be a set and $X \leq_T Z$ an instance.
+
+1. Yes. The class $D^X$ of $\{0, 1\}$-valued functions DNC relative to $X$ is a non-empty $\Pi^0_1(X)$ class, hence a $\Pi^0_1(Z)$ class. By the low basis theorem relativized to $Z$ (:ref{#thm-low-basis}), it has a member $Y$ with $(Z \oplus Y)' \leq_T Z'$, and $Y$ is PA relative to $X$.
+2. Yes. By :ref{#ex-relative-generic-low}, there is a set $G \leq_T Z'$, 1-generic relative to $Z$, with $(Z \oplus G)' \leq_T G \oplus Z' \leq_T Z'$. Every $X$-c.e. set of strings is $Z$-c.e., so $G$ is also 1-generic relative to $X$.
+3. Yes: the solution $Y$ of item 1 is not computable in $X$. Otherwise $X$ would compute a $\{0, 1\}$-valued function $f = \Phi^X_e$ DNC relative to $X$, and $f(e) \neq \Phi^X_e(e) = f(e)$.
+4. No, although $X'$ is a solution to $X$. For $Z = X = \emptyset$, a solution $Y$ low over $\emptyset$ would satisfy $\emptyset'' \leq_T Y' \leq_T \emptyset'$, contradicting item 4 of :ref{#thm-jump}.
+:::
+::::
+
+::::exercise{#ex-low-basis-composition difficulty=1 objective="Show that low bases are preserved when one problem is solved after another, and in particular by products."}
+Let $\mathsf P$ and $\mathsf Q$ admit low bases. Let $\mathsf R$ be a problem such that for every instance $X$ of $\mathsf R$ there is an instance $\widehat X \leq_T X$ of $\mathsf P$ such that, for every solution $Y$ to $\widehat X$, some instance $V \leq_T X \oplus Y$ of $\mathsf Q$ has the property that $X \oplus Y \oplus W$ computes a solution to $X$ for every solution $W$ to $V$. Show that $\mathsf R$ admits a low basis. Deduce that the problem whose instances are the pairs $X_0 \oplus X_1$ of an instance of $\mathsf P$ and an instance of $\mathsf Q$, with solutions the pairs $Y_0 \oplus Y_1$ of solutions, admits a low basis.
+
+:::solution
+Let $Z$ be a set and $X \leq_T Z$ an instance of $\mathsf R$. The instance $\widehat X$ is $Z$-computable, so it has a solution $Y$ with $(Z \oplus Y)' \leq_T Z'$. The instance $V \leq_T X \oplus Y$ is computable in $Z \oplus Y$, so by the low basis of $\mathsf Q$ relativized to $Z \oplus Y$, it has a solution $W$ with $(Z \oplus Y \oplus W)' \leq_T (Z \oplus Y)' \leq_T Z'$. The solution $S$ to $X$ computed by $X \oplus Y \oplus W$ is computable in $Z \oplus Y \oplus W$, so $(Z \oplus S)' \leq_T (Z \oplus Y \oplus W)' \leq_T Z'$.
+
+For the product, take $\widehat{X_0 \oplus X_1} = X_0$, and for a solution $Y_0$, take $V = X_1$; for every solution $Y_1$ to $X_1$, the set $Y_0 \oplus Y_1$ is a solution, computable in $(X_0 \oplus X_1) \oplus Y_0 \oplus Y_1$.
+:::
+::::
+
+::::exercise{#ex-low-basis-omega-downward difficulty=2 objective="Show that admitting a low basis is inherited downwards along ω-reducibility, by preserving a relativized class of low sets." lessons="reducibilities/preservation"}
+Let $\mathsf Q$ admit a low basis and let $\mathsf P \leq_\omega \mathsf Q$ (:ref{#def-omega-reducible}). Show that $\mathsf P$ admits a low basis.
+
+:::solution
+Fix a set $Z$ and a $Z$-computable instance $X$ of $\mathsf P$. Let $\mathcal W_Z = \{ W : (Z \oplus W)' \leq_T Z' \}$. If $V \leq_T W \in \mathcal W_Z$, then $Z \oplus V \leq_T Z \oplus W$, so $(Z \oplus V)' \leq_T (Z \oplus W)' \leq_T Z'$: $\mathcal W_Z$ is a weakness property (:ref{#def-weakness}). It contains $Z$, since $(Z \oplus Z)' \equiv_T Z'$. The problem $\mathsf Q$ preserves $\mathcal W_Z$: if $W \in \mathcal W_Z$ and $V \leq_T W$ is an instance of $\mathsf Q$, the low basis of $\mathsf Q$ relativized to $Z \oplus W$ gives a solution $Y$ with $(Z \oplus W \oplus Y)' \leq_T (Z \oplus W)' \leq_T Z'$, that is, $W \oplus Y \in \mathcal W_Z$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W_Z$ containing $Z$ and satisfying $\mathsf Q$. It satisfies $\mathsf P$, since $\mathsf P \leq_\omega \mathsf Q$, and it contains $X \leq_T Z$. So $X$ has a solution $Y \in \mathcal I \subseteq \mathcal W_Z$, that is, with $(Z \oplus Y)' \leq_T Z'$. Compare with :ref{#ex-preservation-downward}, which transfers the preservation of one fixed weakness property; here the class $\mathcal W_Z$ depends on $Z$, and the argument is applied to every $Z$.
+:::
+::::
+
+::::exercise{#ex-low-jump-delta2-avoid difficulty=1 objective="Use lowness of a solution to keep a set outside the $\Delta^0_2$ sets relative to the solution."}
+Let $\mathsf P$ admit a low basis, let $Z$ be a set and $C$ a set with $C \not\leq_T Z'$. Show that every $Z$-computable instance of $\mathsf P$ has a solution $Y$ such that $C$ is not $\Delta^0_2(Z \oplus Y)$.
+
+:::solution
+Let $Y$ be a solution with $(Z \oplus Y)' \leq_T Z'$. If $C$ were $\Delta^0_2(Z \oplus Y)$, it would be computable in $(Z \oplus Y)'$ by Post's theorem relativized, hence in $Z'$, a contradiction. The exercise is from the section *Motivation* of the chapter *Lowness* of Patey's monograph, for $Z = \emptyset$.
+:::
+::::
+:::::

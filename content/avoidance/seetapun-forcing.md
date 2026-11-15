@@ -89,7 +89,7 @@ The general method of designing notions of forcing for Ramsey-type problems, by 
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-seetapun-cone-reservoirs difficulty=2 objective="Replace the Scott ideal by the cone avoidance basis theorem, and recover the setting of Seetapun's original proof."}
 Replace, in the proof of :ref{#thm-seetapun-direct}, the condition $X \in \mathcal M$ by $C \not\leq_T X \oplus Z$, and the Scott ideal by the cone avoidance basis theorem. Check each lemma, and identify the class $\mathcal M$ for which the question is $\Sigma^0_1(\mathcal M)$-preserving.
 
 :::solution
@@ -97,11 +97,11 @@ Let $\mathcal M = \{ X \oplus Z : C \not\leq_T X \oplus Z \}$. Assumption (H) be
 :::
 ::::
 
-::::exercise{difficulty=2}
-Suppose that $f$ is stable (:ref{#def-stable-coloring}), with limit set $A_f$. Show that property 1 of :ref{#lem-seetapun-question} can then be proved without thinning the reservoir, by applying the definition of the question to $B = A_f$. Where is stability used?
+::::exercise{#ex-seetapun-stable-question difficulty=2 objective="See how stability replaces the thinning step of the Seetapun question by the limit partition."}
+Suppose that $f$ is stable (:ref{#def-stable-coloring}), with limit set $A_f$. Show that property 1 of :ref{#lem-seetapun-question} can then be proved without thinning the reservoir, by applying the definition of the question to $B = \overline{A_f}$. Where is stability used?
 
 :::solution
-Apply the definition with $B = A_f$: there are $i$ and $\tau$ compatible with $(\sigma_i, X \cap B^i)$, with new elements homogeneous for color $i$, satisfying $\varphi_i$. Each new element $a$ lies in $B^i$, so $\lim_y f(\{ a, y \}) = i$: only finitely many $y$ have $f(\{ a, y \}) \neq i$. Let $Y$ be the set of $y \in X$ with $y \geq |\tau|$ and $f(\{ a, y \}) = i$ for every new element $a$. It is cofinite in $X$, hence infinite, and computable in $X \oplus Z$. The triple with stem $\tau$ on side $i$ and reservoir $Y$ is a condition, by the verification of property 1, and it forces $\varphi_i(G_i)$. Stability is used to know that the limits exist, so that $A_f$ is a partition whose sides describe the color of each element with almost all later ones. For an unstable coloring no such partition exists, and the proof uses instead the bound $\ell$ and the thinning, which give limit colors to the finitely many elements below $\ell$.
+With $B = \overline{A_f}$, the side $B^0 = \overline{A_f}$ is the set of $x$ with $\lim_y f(\{ x, y \}) = 0$, and $B^1 = A_f$ the set of $x$ with limit $1$. Apply the definition with this $B$: there are $i$ and $\tau$ compatible with $(\sigma_i, X \cap B^i)$, with new elements homogeneous for color $i$, satisfying $\varphi_i$. Each new element $a$ lies in $B^i$, so $\lim_y f(\{ a, y \}) = i$: only finitely many $y$ have $f(\{ a, y \}) \neq i$. Let $Y$ be the set of $y \in X$ with $y \geq |\tau|$ and $f(\{ a, y \}) = i$ for every new element $a$. It is cofinite in $X$, hence infinite, and computable in $X \oplus Z$. The triple with stem $\tau$ on side $i$ and reservoir $Y$ is a condition, by the verification of property 1, and it forces $\varphi_i(G_i)$. Stability is used to know that the limits exist, so that $A_f$ is a partition whose sides describe the color of each element with almost all later ones. For an unstable coloring no such partition exists, and the proof uses instead the bound $\ell$ and the thinning, which give limit colors to the finitely many elements below $\ell$.
 :::
 ::::
 
@@ -114,3 +114,52 @@ The notion of forcing is that of Seetapun's original proof (Seetapun and Slaman,
 - P. A. Cholak, C. G. Jockusch, Jr. and T. A. Slaman, *On the strength of Ramsey's theorem for pairs*, Journal of Symbolic Logic 66 (2001), 1–55.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 8.3.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, section *Seetapun's theorem*.
+
+:::::exercises
+::::exercise[Progress on an uncontrolled side]{#ex-seetapun-infinity-question difficulty=1 objective="See that the disjunctive question gives progress on a side that the construction does not choose, which is why both stems are extended separately."}
+For $n \in \nat$, let $\varphi_n$ be the $\Sigma^0_1$ sentence "$G$ has an element at least $n$". Show that $c \mathrel{?{\vdash}} \varphi_n(G_0) \vee \varphi_n(G_1)$ for every Seetapun condition $c$. What does property 1 of :ref{#lem-seetapun-question} give, and why can it not replace :ref{#lem-seetapun-infinity} in the proof of :ref{#thm-seetapun-direct}?
+
+:::solution
+Let $c = (\sigma_0, \sigma_1, X)$ and let $B$ be a set. Since $X$ is infinite, for some $i < 2$ the set $X \cap B^i$ has an element $x \geq n$. Let $\tau$ be the string of length $x + 1$ whose elements are those of $\sigma_i$ and $x$. Since $x \geq \min X \geq |\sigma_i|$, $\tau$ extends $\sigma_i$, and its only new element $x$ lies in $X \cap B^i$; a set with one element is homogeneous for color $i$; and $\tau$ satisfies $\varphi_n$. So every $B$ has a witness, and the answer is positive.
+
+Property 1 then gives an extension of $c$ whose stem on some side $i$ contains an element at least $n$; its proof does not use (H). But the side is not chosen: a construction using only these extensions might always extend the same side, and leave the other stem finite. Lachlan's disjunction (:ref{#lem-disjunctive-construction}) may then select the finite side, which avoids the cone trivially and is not a solution. :ref{#lem-seetapun-infinity} extends a prescribed side, and this is where (H) is needed.
+:::
+::::
+
+::::exercise[A one-sided question]{#ex-seetapun-single-side-question difficulty=2 objective="See why a one-sided question for the Seetapun forcing is not a forcing question: a homogeneous block may exist without being extendible."}
+For a Seetapun condition $c = (\sigma_0, \sigma_1, X)$, a side $i < 2$ and a $\Sigma^0_1$ sentence $\varphi$, let $c \mathrel{?{\vdash}_i} \varphi$ if some string $\tau$ compatible with $(\sigma_i, X)$, whose new elements form a set homogeneous for color $i$, satisfies $\varphi$. Show that this relation is $\Sigma^0_1(X \oplus Z)$, uniformly in the parameters of $\varphi$, and that if $c \mathrel{?{\nvdash}_i} \varphi$ then $c \Vdash \neg \varphi(G_i)$. With the coloring and the condition of :ref{#ex-seetapun-condition}, and $\varphi$ the sentence "$G$ has an element at least $4$", show that $c \mathrel{?{\vdash}_0} \varphi$ but that no extension of $c$ forces $\varphi(G_0)$.
+
+:::solution
+*Complexity.* The relation searches for a string $\tau$ and a convergent computation; compatibility with $(\sigma_i, X)$ is decidable in $X$, and homogeneity of the finite set of new elements is decidable in $Z$, which computes $f$. So it is $\Sigma^0_1(X \oplus Z)$, uniformly.
+
+*Negative answers.* Suppose that a member $G$ of side $i$ of $c$ satisfies $\varphi$, with use $u$. Then $\tau = G \uh \max(u, |\sigma_i|)$ is compatible with $(\sigma_i, X)$, its new elements are elements of $G$, hence homogeneous for color $i$, and $\tau$ satisfies $\varphi$, so $c \mathrel{?{\vdash}_i} \varphi$. Contrapositively, a negative answer means that $c$ forces $\neg \varphi(G_i)$.
+
+*Positive answers.* In :ref{#ex-seetapun-condition}, $\sigma_0 = \{ 1 \}$, $\sigma_1 = \{ 2 \}$ and $X$ is the set of even numbers at least $4$. The string $\tau$ of length $5$ with elements $1$ and $4$ is compatible with $(\sigma_0, X)$, its only new element $4$ forms a homogeneous set, and $\tau$ satisfies $\varphi$; so $c \mathrel{?{\vdash}_0} \varphi$. Let $d = (\tau_0, \tau_1, Y)$ be an extension of $c$ forcing $\varphi(G_0)$. Its stem $\tau_0$ is itself a member of side $0$ of $d$, so it has an element at least $4$, which is a new element, hence an even number $a \in X$. By clause 3 for $d$, $f(\{ a, y \}) = 0$ for every $y \in Y$; but $Y \subseteq X$ consists of even numbers, so $f(\{ a, y \}) = 1$. This contradicts the fact that $Y$ is non-empty. So property 1 of a forcing question fails.
+
+A block that is homogeneous for color $i$ may have color $1 - i$ with almost every element of the reservoir. The disjunctive question of :ref{#lem-seetapun-question} avoids this by the thinning step, which gives each element below $\ell$ a color with the remaining reservoir, and by asking for a block on the side matching that color.
+:::
+::::
+
+::::exercise[Where the coloring must be computable]{#ex-seetapun-uses-computability difficulty=1 objective="Locate the uses of the computability of the coloring in the direct proof of Seetapun's theorem, and see why they cannot be removed."}
+List the steps of the proofs of :ref{#lem-seetapun-infinity}, :ref{#lem-seetapun-question} and :ref{#thm-seetapun-direct} that use the hypothesis that $f$ is computable in $Z$. Explain why the proof does not apply to the coloring $h$ of the proof of :ref{#prop-rt32-jump}, which is computable in $\emptyset'$, with $C = \emptyset'$.
+
+:::solution
+The hypothesis is used each time a set must belong to $\mathcal M$ or a relation must have low complexity:
+
+1. in :ref{#lem-seetapun-infinity}, the new reservoir $Y$ of the first case and the homogeneous set of the second case are computable in $X \oplus Z$, which needs $f \leq_T Z$; the second case uses this for (H);
+2. in :ref{#lem-seetapun-question}, the tree $T$ is computable in $X \oplus Z$, since the homogeneity of the blocks is decided with $f$; this gives the preservation and, through the Scott ideal, a path in $\mathcal M$;
+3. in property 1, the thinned reservoir is computable in $X \oplus Z$;
+4. in :ref{#thm-seetapun-direct}, (H) is applied to the homogeneous sets just mentioned.
+
+For a coloring $f$ that is not computable in $Z$, one could replace $Z$ by $Z \oplus f$, but the hypothesis $C \not\leq_T Z \oplus f$ must then hold. For $h$, every set computing $h$ computes the function $m$ of the proof of :ref{#prop-rt32-jump}, hence $\emptyset'$; so no Scott ideal contains $h$ and avoids $\emptyset'$. This is consistent with the fact that every infinite homogeneous set for $h$ computes $\emptyset'$.
+:::
+::::
+
+::::exercise[Cohesive homogeneous sets]{#ex-seetapun-cohesive difficulty=1 objective="Add a density requirement to the Seetapun forcing so that the homogeneous sets are cohesive." lessons="seetapun-conditions"}
+Let $\vec R$ be a sequence of sets with $\bigoplus_n R_n \leq_T Z$. Add a task to the construction of :ref{#thm-seetapun-direct} so that $G_0$ and $G_1$ are $\vec R$-cohesive. Deduce that every $Z$-computable coloring of pairs has an infinite homogeneous set $H$ that is $\vec R$-cohesive and satisfies $C \not\leq_T Z \oplus H$.
+
+:::solution
+Given a condition $(\sigma_0, \sigma_1, X)$ and $n$, one of the sets $X \cap R_n$ and $X \setminus R_n$ is infinite; call it $Y$. It is computable in $X \oplus Z$, so $Y \in \mathcal M$. Shrinking the reservoir preserves clauses 1–3, so $(\sigma_0, \sigma_1, Y)$ is a condition extending $(\sigma_0, \sigma_1, X)$. Add the task of passing to such an extension for each $n$. At a later stage, every element of $G_i$ beyond the stem of side $i$ of this condition was added from a reservoir contained in $Y$, so $G_i \subseteq^* R_n$ or $G_i \subseteq^* \overline{R_n}$. With the other tasks, $G_0$ and $G_1$ are infinite, homogeneous and $\vec R$-cohesive, and one of them, $H$, satisfies $C \not\leq_T Z \oplus H$. If (H) fails, some infinite homogeneous set $H$ belongs to $\mathcal M$, so $C \not\leq_T Z \oplus H$, but $H$ need not be cohesive. Let $p$ enumerate $H$ in increasing order and $R'_n = \{ k : p(k) \in R_n \}$, a sequence computable in $Z \oplus H$. By :ref{#thm-coh-cone-avoidance} relative to $Z \oplus H$, there is an $\vec R'$-cohesive set $G'$ with $C \not\leq_T Z \oplus H \oplus G'$; as in :ref{#ex-coh-rt12-combined}, $p[G'] \subseteq H$ is $\vec R$-cohesive, homogeneous, and does not compute $C$ together with $Z$.
+:::
+::::
+:::::

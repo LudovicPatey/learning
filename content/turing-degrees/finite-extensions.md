@@ -1,7 +1,7 @@
 ---
 title: The finite extension method
 summary: Constructions by finite extensions; the Kleene–Post theorem on incomparable degrees below 0′; avoiding the cone above a non-computable set; 1-generic sets.
-duration: 55
+duration: 45
 prerequisites: [turing-jump, countability/requirements]
 ---
 
@@ -106,6 +106,14 @@ Why are $A$ and $B$ computable in $\emptyset'$ and not merely in $\emptyset''$?
   They need not be c.e.: the construction fixes the bits of both sets, $0$ or $1$, in an order unrelated to any enumeration.
 :::
 
+::::exercise{#ex-independent-sequence difficulty=2 objective="Extend the Kleene–Post construction to infinitely many sets at once."}
+Show that there is a sequence $(A_n)_{n \in \nat}$ of sets, uniformly computable in $\emptyset'$, such that $A_n \not\leq_T A_m$ for all $n \neq m$.
+
+:::solution
+Build all the sets at once by finite extensions of finite tuples of strings: at step $t$, strings $\sigma_{0,t}, \dots, \sigma_{t,t}$ approximate $A_0, \dots, A_t$. Requirements: $\Phi^{A_m}_e \neq A_n$ for all $e$ and $n \neq m$; at step $t$, treat the requirement with $\langle e, n, m \rangle = t$, if $n \neq m$ (otherwise do nothing), which only involves sets already started, since $n, m \leq \langle e, n, m \rangle$. To satisfy $\Phi^{A_m}_e \neq A_n$, let $x = |\sigma_{n,t}|$; if some $\rho \succeq \sigma_{m,t}$ has $\Phi^\rho_e(x)\converge = i$, extend $\sigma_{m,t}$ to $\rho$ and $\sigma_{n,t}$ by the bit $1 - i$ (or $0$); otherwise do nothing. Then extend every string by one bit and start a new string for $A_{t+1}$. As in :ref{#thm-kleene-post}, the case distinction is a c.e. question and each step is computable in $\emptyset'$. Since every string grows at each step after it is started, $A_n(k)$ is computed with oracle $\emptyset'$ by running the construction until the string for $A_n$ has length greater than $k$, uniformly in $n$ and $k$.
+:::
+::::
+
 ## Avoiding a cone
 
 In the Kleene–Post theorem both sets are built. The following result fixes one of them in advance: every non-computable set has a set incomparable with it. The upper cone $\{ X : C \leq_T X \}$ of a non-computable set $C$ is avoided by satisfying the requirements $\Phi^X_e \neq C$, and the hypothesis that $C$ is not computable is exactly what makes them dense.
@@ -180,32 +188,6 @@ For each $n$, the set $W_n$ of strings containing $n$ consecutive $1$s is comput
 
 In the lesson on low and high sets, 1-generic sets computable in $\emptyset'$ provide non-computable sets whose jump is as small as possible.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that every sequence $(\dbf_n)_{n \in \nat}$ of degrees has an upper bound.
-
-:::solution
-Choose representatives $X_n \in \dbf_n$, and let $Z = \bigoplus_n X_n$, defined by $Z(\langle n, m \rangle) = X_n(m)$ (:ref{#def-join}). Each $X_n$ is computable from $Z$, by $X_n(m) = Z(\langle n, m \rangle)$, so $\deg_T(Z)$ is an upper bound.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that there is a sequence $(A_n)_{n \in \nat}$ of sets, uniformly computable in $\emptyset'$, such that $A_n \not\leq_T A_m$ for all $n \neq m$.
-
-:::solution
-Build all the sets at once by finite extensions of finite tuples of strings: at step $t$, strings $\sigma_{0,t}, \dots, \sigma_{t,t}$ approximate $A_0, \dots, A_t$. Requirements: $\Phi^{A_m}_e \neq A_n$ for all $e$ and $n \neq m$; at step $t$, treat the requirement with $\langle e, n, m \rangle = t$, if $n \neq m$ (otherwise do nothing), which only involves sets already started, since $n, m \leq \langle e, n, m \rangle$. To satisfy $\Phi^{A_m}_e \neq A_n$, let $x = |\sigma_{n,t}|$; if some $\rho \succeq \sigma_{m,t}$ has $\Phi^\rho_e(x)\converge = i$, extend $\sigma_{m,t}$ to $\rho$ and $\sigma_{n,t}$ by the bit $1 - i$ (or $0$); otherwise do nothing. Then extend every string by one bit and start a new string for $A_{t+1}$. As in :ref{#thm-kleene-post}, the case distinction is a c.e. question and each step is computable in $\emptyset'$. Since every string grows at each step after it is started, $A_n(k)$ is computed with oracle $\emptyset'$ by running the construction until the string for $A_n$ has length greater than $k$, uniformly in $n$ and $k$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that if $G$ is 1-generic, then $\nat \setminus G$ is 1-generic.
-
-:::solution
-Let $\bar\sigma$ be the string obtained from $\sigma$ by flipping all its bits; $\sigma \mapsto \bar\sigma$ is a computable bijection of $\bstr$ that preserves prefixes, and the prefixes of $\nat \setminus G$ are the strings $\bar\sigma$ for $\sigma \prec G$. If $W$ is a c.e. set of strings, so is $\bar W = \{ \bar\sigma : \sigma \in W \}$. Some $\sigma \prec G$ is in $\bar W$ or has no extension in $\bar W$; then $\bar\sigma \prec \nat \setminus G$ is in $W$ or has no extension in $W$.
-:::
-::::
-
 ## Notes and references
 
 The finite extension method is Cohen forcing with strings; the general notion of forcing is the subject of the course on effective forcing (:ref{to="effective-forcing/notions-of-forcing"}).
@@ -217,3 +199,93 @@ The incomparable degrees below $\obf'$ are due to Kleene and Post (1954), who in
 - S. Feferman, *Some applications of the notions of forcing and generic sets*, Fundamenta Mathematicae 56 (1965), 325–345.
 - G. E. Sacks, *Degrees of Unsolvability*, Annals of Mathematics Studies 55, Princeton University Press, 1963.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §§6.1–6.3.
+
+:::::exercises
+::::exercise{#ex-sequence-upper-bound difficulty=1 objective="Use the coding of a sequence of sets to bound countably many degrees."}
+Show that every sequence $(\dbf_n)_{n \in \nat}$ of degrees has an upper bound.
+
+:::solution
+Choose representatives $X_n \in \dbf_n$, and let $Z = \bigoplus_n X_n$, defined by $Z(\langle n, m \rangle) = X_n(m)$ (:ref{#def-join}). Each $X_n$ is computable from $Z$, by $X_n(m) = Z(\langle n, m \rangle)$, so $\deg_T(Z)$ is an upper bound.
+:::
+::::
+
+::::exercise{#ex-1-generic-complement difficulty=2 objective="Transfer 1-genericity along a computable bijection of strings that preserves prefixes."}
+Show that if $G$ is 1-generic, then $\nat \setminus G$ is 1-generic.
+
+:::solution
+Let $\bar\sigma$ be the string obtained from $\sigma$ by flipping all its bits; $\sigma \mapsto \bar\sigma$ is a computable bijection of $\bstr$ that preserves prefixes, and the prefixes of $\nat \setminus G$ are the strings $\bar\sigma$ for $\sigma \prec G$. If $W$ is a c.e. set of strings, so is $\bar W = \{ \bar\sigma : \sigma \in W \}$. Some $\sigma \prec G$ is in $\bar W$ or has no extension in $\bar W$; then $\bar\sigma \prec \nat \setminus G$ is in $W$ or has no extension in $W$.
+:::
+::::
+
+::::exercise{#ex-dense-examples difficulty=1 objective="Recognize dense sets of strings, and describe the sets that meet them."}
+Which of the following sets of strings are dense? For each dense one, describe the sets $X$ that meet it.
+
+1. $D_1 = \{ \sigma : |\sigma| \text{ is even} \}$.
+2. $D_2 = \{ \sigma : \sigma \neq \varepsilon \text{ and the last bit of } \sigma \text{ is } 1 \}$.
+3. $D_3 = \{ \sigma : |\sigma| \geq 1 \text{ and } \sigma(0) = 1 \}$.
+4. $D_4 = \{ \sigma : \sigma \text{ has more } 1\text{s than } 0\text{s} \}$.
+5. $D_5 = \{ \sigma : \sigma(n) = 1 \text{ for some } n \geq 10 \}$.
+
+:::solution
+1. Dense: a string of odd length is extended by one bit. Every $X$ meets $D_1$, already with the prefix $\varepsilon$; meeting a dense set can be a void condition.
+2. Dense: append $1$. $X$ meets $D_2$ if and only if some prefix of $X$ ends with $1$, that is, $X \neq \emptyset$.
+3. Not dense: no extension of the string $0$ belongs to $D_3$.
+4. Dense: a string with $k$ zeros is extended by $k + 1$ ones. $X$ meets $D_4$ if and only if $|X \cap \{0, \dots, n-1\}| > n/2$ for some $n$.
+5. Dense: extend $\sigma$ by zeros up to length $\max(|\sigma|, 10)$ and append $1$. $X$ meets $D_5$ if and only if $X$ has an element $n \geq 10$.
+:::
+::::
+
+::::exercise{#ex-computed-by-all difficulty=1 objective="Apply cone avoidance to determine the sets computed by every non-computable set."}
+Show that a set that is computable in every non-computable set is computable.
+
+:::solution
+Let $C$ be non-computable. By :ref{#thm-cone-avoidance} with $A = \emptyset$, there is $B$ with $C \not\leq_T B$ and $B \not\leq_T \emptyset$. So $B$ is non-computable and does not compute $C$. Hence a set computed by every non-computable set is computable. Equivalently, $\obf$ is the greatest lower bound of the set of all non-zero degrees.
+:::
+::::
+
+::::exercise{#ex-genericity-all-sets difficulty=1 objective="See why 1-genericity is defined with c.e. sets of strings, and not with arbitrary ones."}
+Show that no set $G$ has the following property: for every set of strings $W$, there is a prefix $\sigma \prec G$ such that either $\sigma \in W$, or no extension of $\sigma$ belongs to $W$.
+
+:::solution
+Given $G$, let $W = \{ \sigma : \sigma \not\prec G \}$. No prefix of $G$ belongs to $W$. Every prefix $\sigma \prec G$ has the extension $\sigma\, (1 - G(|\sigma|))$, which is not a prefix of $G$, hence belongs to $W$. So $G$ fails the property for $W$. The definition of 1-genericity quantifies over countably many sets $W$, and :ref{#lem-meet-dense} applies to countable families of dense sets; the set $W$ above depends on $G$, and the family of all sets of strings is uncountable.
+:::
+::::
+
+::::exercise{#ex-even-part-generic difficulty=2 objective="Transfer 1-genericity to the bits of a set at even positions by translating c.e. sets of strings."}
+Let $G$ be 1-generic, and $G_0 = \{ n : 2n \in G \}$. Show that $G_0$ is 1-generic.
+
+:::solution
+For a string $\rho$, let $\rho_0$ be the string of its bits at even positions: $\rho_0(i) = \rho(2i)$ for $2i < |\rho|$, so that $|\rho_0| = \lceil |\rho| / 2 \rceil$. The map $\rho \mapsto \rho_0$ is computable and preserves prefixes, and $(G \uh n)_0 = G_0 \uh \lceil n/2 \rceil$.
+
+Let $W$ be a c.e. set of strings, and $W^* = \{ \rho : \rho_0 \succeq w \text{ for some } w \in W \}$, a c.e. set of strings. Since $G$ is 1-generic, there is $\rho \prec G$ which belongs to $W^*$ or has no extension in $W^*$.
+
+- If $\rho \in W^*$, then $\rho_0 \prec G_0$ extends some $w \in W$, and $w \prec G_0$: $G_0$ meets $W$.
+- Suppose that $\rho$ has no extension in $W^*$, and let $\tau = \rho_0$, a prefix of $G_0$. If some $w \succeq \tau$ belonged to $W$, let $\rho'$ be the string of length $2|w|$ with $\rho'(k) = \rho(k)$ for $k < |\rho|$, $\rho'(2i) = w(i)$ for $|\rho| \leq 2i < 2|w|$, and $\rho'(k) = 0$ at the other positions. Since $|w| \geq |\tau| = \lceil |\rho|/2 \rceil$, we have $2|w| \geq |\rho|$, so $\rho' \succeq \rho$. For $2i < |\rho|$, $\rho'(2i) = \rho(2i) = \tau(i) = w(i)$; so $\rho'_0 = w$ and $\rho' \in W^*$, a contradiction. Hence $\tau \prec G_0$ has no extension in $W$.
+
+So $G_0$ meets $W$ or has a prefix with no extension in $W$, for every c.e. $W$: $G_0$ is 1-generic. The same proof applies to the odd positions.
+:::
+::::
+
+::::exercise{#ex-cone-avoidance-jump difficulty=3 objective="Use $e$-splittings to build, below the jump of a non-computable set, a set incomparable with it." lessons="turing-jump"}
+Let $C$ be a non-computable set. Show that there is a set $B \leq_T C'$ with $C \not\leq_T B$ and $B \not\leq_T C$.
+
+:::hint
+For the requirement $\Phi^B_e \neq C$, given a string $\sigma$, ask $\emptyset'$ whether there are $x$ and two strings $\tau_0, \tau_1 \succeq \sigma$ with $\Phi^{\tau_0}_e(x)\converge \neq \Phi^{\tau_1}_e(x)\converge$. If there are none, what does $\Phi^B_e$ look like for $B \succ \sigma$?
+:::
+
+:::solution
+Recall that $C \leq_T C'$ and $\emptyset' \leq_T C'$ (:ref{#cor-jump-degrees}). We build $\sigma_0 \preceq \sigma_1 \preceq \cdots$ with oracle $C'$, starting from $\sigma_0 = \varepsilon$, and let $B$ be the limit.
+
+*Step $2e$: $\Phi^B_e \neq C$.* Let $\sigma = \sigma_{2e}$. An **$e$-splitting** above $\sigma$ is a triple $(x, \tau_0, \tau_1)$ with $\tau_0, \tau_1 \succeq \sigma$ and $\Phi^{\tau_0}_e(x)\converge \neq \Phi^{\tau_1}_e(x)\converge$. Whether one exists is a c.e. question, answered by $\emptyset'$.
+
+- If one exists, find the first one in a computable search over triples and stages. The two values are different, so at least one of them differs from $C(x)$; using $C$, choose $i$ with $\Phi^{\tau_i}_e(x) \neq C(x)$, and let $\sigma_{2e+1} = \tau_i$. Every $B \succ \tau_i$ satisfies $\Phi^B_e(x)\converge \neq C(x)$ by the use principle.
+- Otherwise, let $\sigma_{2e+1} = \sigma$. Suppose that $\Phi^B_e = C$ for some $B \succ \sigma$. Then $C$ is computable: to compute $C(x)$, search for a string $\tau \succeq \sigma$ and a stage $s$ with $\Phi^\tau_e(x)[s]\converge$, and output the value. The search terminates, since $\Phi^B_e(x)\converge$ gives a prefix $B \uh k \succeq \sigma$ with $\Phi^{B \uh k}_e(x)\converge$ (:ref{#prop-oracle-stages}). The value found equals $\Phi^{B \uh k}_e(x) = C(x)$, since otherwise $(x, \tau, B \uh k)$ would be an $e$-splitting above $\sigma$. This contradicts the hypothesis on $C$; so every $B \succ \sigma$ satisfies $\Phi^B_e \neq C$.
+
+*Step $2e + 1$: $B \neq \Phi^C_e$.* Let $\sigma = \sigma_{2e+1}$ and $x = |\sigma|$. The set $\{ y : \Phi^C_e(y)\converge \}$ is $C$-c.e., hence one-one reducible to $C'$ (:ref{#thm-jump}), so $C'$ decides whether $\Phi^C_e(x)\converge$. If so, compute its value $i$ with $C$, and let $\sigma_{2e+2} = \sigma\, j$ with $j = 1 - i$ if $i \in \{0, 1\}$ and $j = 0$ otherwise; if not, let $\sigma_{2e+2} = \sigma\, 0$. Then $B(x) \neq \Phi^C_e(x)$ or $\Phi^C_e(x)\diverge$.
+
+The odd steps increase the length, so $B$ is well defined, and the whole construction is computable in $C'$; so $B \leq_T C'$. All requirements are satisfied, so $C \not\leq_T B$ and $B \not\leq_T C$. Compared with :ref{#thm-cone-avoidance}, the dense sets $D_e$ are not used directly: whether a string has an extension in the second part of $D_e$ is a question of the form $\exists \forall$, which $\emptyset''$ answers but $C'$ need not, while the $e$-splitting question only needs $\emptyset'$, and the choice between the two values only needs $C$.
+
+Adapted from Soare 2016, Theorem 6.2.6.
+:::
+::::
+:::::

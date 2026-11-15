@@ -99,7 +99,7 @@ Let $M$ be a model of $\mathrm{PA}$. An **inductive partial satisfaction class**
 2. for every standard formula $\theta(v_0, \dots, v_k)$ of $\mathcal L_A$, $(M, S) \models \forall e\ \big( S(\ulcorner \theta \urcorner, e) \leftrightarrow \theta(e(0), \dots, e(k)) \big)$.
 :::
 
-Condition 2 concerns the standard formulas only; what $S$ does on non-standard codes is not constrained. By Tarski's argument, no such $S$ is definable in $M$ (exercise below). Condition 1 makes overspill available for formulas mentioning $S$, which is what recursive saturation needs.
+Condition 2 concerns the standard formulas only; what $S$ does on non-standard codes is not constrained. By Tarski's argument, no such $S$ is definable in $M$ (:ref{#ex-inductive-sat-undefinable}). Condition 1 makes overspill available for formulas mentioning $S$, which is what recursive saturation needs.
 
 :::theorem{#thm-inductive-sat}
 A countable non-standard model $M$ of $\mathrm{PA}$ is recursively saturated if and only if it has an inductive partial satisfaction class.
@@ -121,7 +121,7 @@ In the direction ($\Leftarrow$) of :ref{#thm-inductive-sat}, which property of $
 - [x] $S$ evaluates the standard formulas of every complexity at once, and induction holds for formulas mentioning $S$, so overspill applies to $\varphi$; no truth definition of $M$ covers all complexities.
 - [ ] $S$ is definable in $M$.
 
-  No relation satisfying condition 2 is definable in $M$, by Tarski's argument (exercise below).
+  No relation satisfying condition 2 is definable in $M$, by Tarski's argument (:ref{#ex-inductive-sat-undefinable}).
 - [ ] $S$ is correct on non-standard formulas.
 
   Nothing is required of $S$ on non-standard codes; the realizer is only checked on standard formulas.
@@ -129,9 +129,7 @@ In the direction ($\Leftarrow$) of :ref{#thm-inductive-sat}, which property of $
 
 The theorem shows how close recursive saturation is to truth: a countable model of $\mathrm{PA}$ is recursively saturated exactly when it can be expanded by a predicate that is a satisfaction relation for standard formulas and satisfies induction. The next two lessons study the dual situation, where the predicate must satisfy Tarski's conditions on all formulas of the model, standard or not, and no induction is required.
 
-## Exercises
-
-::::exercise{difficulty=2}
+::::exercise{#ex-inductive-sat-undefinable difficulty=2 objective="Adapt Tarski's diagonal argument to show that satisfaction for standard formulas is not definable with parameters."}
 Let $M$ be a model of $\mathrm{PA}$. Show that no $S \subseteq M^2$ satisfying condition 2 of :ref{#def-inductive-sat} is definable in $M$ with parameters.
 
 :::solution
@@ -150,3 +148,43 @@ Suppose $S$ is defined by $\sigma(z, e, c)$, with a parameter $c$ (several param
 - J. S. Schlipf, *A guide to the identification of admissible sets above structures*, Annals of Mathematical Logic 12 (1977), 151–192.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lectures 7 and 14.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991.
+
+:::::exercises
+::::exercise{#ex-craig-theorem difficulty=1 objective="Apply Craig's trick to theories: every theory with a computably enumerable set of axioms has a computable set of axioms."}
+Let $\mathcal L$ be a recursive language and $\Gamma$ a set of $\mathcal L$-sentences whose set of codes is computably enumerable. Show that some computable set $\Gamma'$ of $\mathcal L$-sentences has the same models as $\Gamma$, hence the same consequences.
+
+:::solution
+If $\Gamma$ is empty, take $\Gamma' = \Gamma$. Otherwise let $\sigma_0, \sigma_1, \dots$ be a computable enumeration of $\Gamma$, possibly with repetitions, and $\Gamma' = \{ \sigma_n^{(n+1)} : n \in \nat \}$, where $\sigma^{(n+1)}$ is the conjunction of $n + 1$ copies of $\sigma$. To decide whether a sentence $\eta$ belongs to $\Gamma'$, check, for each $n$ smaller than the length of $\eta$, whether $\eta$ is the conjunction of $n + 1$ copies of a sentence $\sigma$, and if so compute $\sigma_n$ and compare it with $\sigma$; finitely many computations, each terminating. Each $\sigma_n^{(n+1)}$ is logically equivalent to $\sigma_n$, so a structure satisfies $\Gamma'$ if and only if it satisfies $\Gamma$. This is Craig's theorem (1953), of which :ref{#lem-craig} is the version for types.
+:::
+::::
+
+::::exercise{#ex-respl-consistency-theory difficulty=2 objective="Show by compactness that, without parameters, consistency with the elementary diagram reduces to consistency with the theory."}
+Let $M$ be a structure for a recursive language $\mathcal L$, $\mathcal L^* \supseteq \mathcal L$, and $\Phi$ a set of $\mathcal L^*$-sentences without parameters from $M$. Show that $\Phi$ is consistent with $\mathrm{ElemDiag}(M)$ if and only if it is consistent with $\mathrm{Th}(M)$. Deduce that if $M$ and $N$ are countable recursively saturated structures with $\mathrm{Th}(M) = \mathrm{Th}(N)$ and $\Phi$ is recursive, then $M$ has an expansion satisfying $\Phi$ if and only if $N$ has one.
+
+:::solution
+Since $\mathrm{Th}(M) \subseteq \mathrm{ElemDiag}(M)$, one direction is clear. Suppose $\Phi \cup \mathrm{Th}(M)$ has a model $K^*$, and that $\Phi \cup \mathrm{ElemDiag}(M)$ is inconsistent. By compactness, there are a finite $\Phi_0 \subseteq \Phi$ and a sentence $\alpha(\bar c) \in \mathrm{ElemDiag}(M)$, a conjunction of finitely many, with its parameters $\bar c$ displayed, such that $\Phi_0 \vdash \neg \alpha(\bar c)$. The constants $\bar c$ do not occur in $\Phi_0$, so $\Phi_0 \vdash \forall \bar w\ \neg \alpha(\bar w)$. But $\exists \bar w\ \alpha(\bar w)$ belongs to $\mathrm{Th}(M)$, so it holds in $K^*$, which also satisfies $\Phi_0$: a contradiction.
+
+If $\mathrm{Th}(M) = \mathrm{Th}(N)$, the first part shows that $\Phi$ is consistent with $\mathrm{ElemDiag}(M)$ if and only if it is consistent with $\mathrm{ElemDiag}(N)$. By :ref{#thm-barwise-ressayre}, applied with no parameters, the first condition is equivalent to the existence of an expansion of $M$ satisfying $\Phi$, and the second to that of an expansion of $N$; an expansion satisfying $\Phi$ makes $\Phi$ consistent with the elementary diagram.
+:::
+::::
+
+::::exercise{#ex-respl-definable-model difficulty=2 objective="See why recursive saturation is needed in the theorem of Barwise and Ressayre, with the model of definable elements." lessons="recursively-saturated-models"}
+Let $T$ be a complete consistent extension of $\mathrm{PA}$ other than the theory of $\nat$, and $K$ the model of $T$ formed by the elements definable without parameters in some model of $T$ (:ref{#prop-rs-definable}). Let $\Psi$ be the recursive set of sentences of the proof of :ref{#thm-inductive-sat}, which says that $S$ is an inductive partial satisfaction class. Show that $\Psi$ is consistent with $\mathrm{ElemDiag}(K)$, but that $K$ has no expansion satisfying $\Psi$.
+
+:::solution
+By :ref{#thm-rs-existence}, $T$ has a countable recursively saturated model $M$, non-standard since it satisfies $T$ and is recursively saturated. By :ref{#thm-inductive-sat}, $M$ has an expansion $(M, S) \models \Psi$, so $\Psi$ is consistent with $\mathrm{Th}(M) = T = \mathrm{Th}(K)$. The set $\Psi$ has no parameters, so it is consistent with $\mathrm{ElemDiag}(K)$ by :ref{#ex-respl-consistency-theory}.
+
+The model $K$ is countable and non-standard, and it is not recursively saturated, by :ref{#prop-rs-definable}. If $(K, S) \models \Psi$, then $S$ is an inductive partial satisfaction class for $K$, and the direction ($\Leftarrow$) of :ref{#thm-inductive-sat} shows that $K$ is recursively saturated, a contradiction. So the conclusion of :ref{#thm-barwise-ressayre} fails for $K$.
+:::
+::::
+
+::::exercise{#ex-inductive-sat-theory difficulty=2 objective="Use induction for an inductive satisfaction class to code the theory of the model in its standard system." lessons="recursively-saturated-models, fragments-of-arithmetic/ackermann-coding"}
+Let $M$ be a non-standard model of $\mathrm{PA}$ with an inductive partial satisfaction class $S$. Show directly, using induction in $(M, S)$, that $\mathrm{Th}(M) \in \mathrm{SSy}(M)$.
+
+:::solution
+Let $\psi(b) \equiv \exists c\ \big( c < 2^b \wedge \forall z < b\ (z \in c \leftrightarrow S(z, 0)) \big)$, a formula of $\mathcal L_A \cup \{ S \}$. It holds for $b = 0$, with $c = 0$. Suppose $\psi(b)$, with a witness $c$. Every element of $c$ is less than $b$ (:ref{#lem-ack-basic}, item 3), so $b \notin c$. If $S(b, 0)$, let $c' = c + 2^b$, which codes the elements of $c$ together with $b$ (item 4); otherwise $c' = c$. In both cases $c' < 2^{b+1}$ and $c'$ witnesses $\psi(b + 1)$. By induction in $(M, S)$, $\psi(b)$ holds for every $b$.
+
+Take $b$ non-standard and $c$ a witness. For a standard number $z$, $z \in c$ if and only if $S(z, 0)$. If $z$ is the code of a sentence $\sigma$, condition 2 of :ref{#def-inductive-sat} gives $S(\ulcorner \sigma \urcorner, 0) \leftrightarrow M \models \sigma$. So $\mathrm{Th}(M)$ is the intersection of $\mathrm{Ack}(c) \cap \nat$ with the computable set of codes of sentences, and belongs to $\mathrm{SSy}(M)$ by :ref{#thm-ssy-turing-ideal}. By :ref{#thm-inductive-sat}, $M$ is recursively saturated when it is countable, and this agrees with :ref{#prop-rs-realized-coded}; the argument above does not use countability.
+:::
+::::
+:::::

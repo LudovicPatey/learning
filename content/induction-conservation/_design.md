@@ -94,7 +94,33 @@ No newer, simpler proof of Hirst's or Harrington's theorems was found; the Monin
 - Ryll-Nardzewski 1952 reference written from memory.
 - The admitted facts (partial truth definitions, finite pigeonhole in PA, Parikh's theorem, BΣₙ ⊬ IΣₙ) could be proved in a specialized course on models of arithmetic.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. The featured exercises stay in the text, after the material they practice; the further exercises are in the block at the end of each lesson, outside the reading time.
+
+**Featured exercises.**
+- induction-collection: `ex-strong-induction-sigma` (strong induction; the auxiliary-formula pattern of the lesson, with collection absorbing a bounded quantifier).
+- collection-induction: `ex-bsigma-bpi` (cited by the text and by the pigeonhole lesson).
+- separations: `ex-k1-nonstandard` (a second proof of `lem-nonstandard-definable` through elementarity).
+- pigeonhole: `ex-rt1-successor` (announced by the quiz: why the induction on colors is not available) and `ex-bounded-color-classes` (what a failure of Σ⁰₂ collection looks like).
+- first-order-parts: `ex-delta1-least` (the Δ₁-definable sets as the non-standard analogue of REC).
+- forcing-subtrees: `ex-standard-path` (the counterexample announced in the introduction) and `ex-unique-collection` (where BΣ⁰₁ is used).
+- harrington: `ex-wkl-not-bsigma2` (the main consequence of the course for the pigeonhole principle).
+
+Moved to the further exercises, with their labels: `ex-overspill-diagonal`, `ex-ldelta0-lsigma` (collection-induction), `ex-wkl-conservation-reduction` (first-order-parts), `ex-omega-wkl-direct` (harrington).
+
+**Further exercises, lesson by lesson.**
+- induction-collection: greatest number principle for Σ⁰ₙ and Π⁰ₙ (where collection enters); strong induction for Π⁰ₙ needs no collection (D–M Exercise 6.7.2); iteration of a Σ⁰₁-definable operation (Parsons' lemma at work); finite choice and a proof of IΣ⁰ₙ ⇒ BΣ⁰ₙ without collection one level down (Hájek–Pudlák I.2.21–2.24).
+- collection-induction: strong collection implies induction at the same level (Hájek–Pudlák, Lemma I.2.29); BΣ⁰ₙ as boundedness of Σ⁰ₙ-definable functions on [0, a) (D–M Proposition 6.2.4); overspill at level 2 for a Π⁰₂ property and, with Parsons' lemma, for a Σ⁰₂ property.
+- separations: IΔ₀ does not prove bounded collection (the case n = 0 of the theorem, and why the proof of induction ⇒ collection fails there); closure properties of K_n(M); K_n(M) = ℕ iff M satisfies the true Π_n sentences; Σ_{n+1}-elementary initial segments satisfy BΣ_{n+1}, so K_{n+1}(M) is not an initial segment.
+- pigeonhole: the cut of the k for which RT¹_k holds; BΣ⁰₂ as uniform stabilization of finitely many limits; FUF (D–M Proposition 6.5.4); StCOH implies BΣ⁰₂ (D–M Proposition 6.5.6, Hirschfeldt–Shore).
+- first-order-parts: ACA₀ is finitely axiomatizable while PA is not (D–M Exercise 5.13.14, admitted); converse of the conservation criterion up to elementary equivalence; RCA₀ + IΣ⁰ₙ conservative over IΣₙ (choice between the Σ₁ and Π₁ definitions); ACA₀ does not prove RT (Jockusch–Solovay with Jockusch's lower bound).
+- forcing-subtrees: normal form and lexicographic choice on an example; deciding one input without the lexicographic order, and why it does not iterate; extendible strings in RCA₀ (D–M Exercise 6.7.1) and their set not in REC; Cohen generics preserve IΣ⁰₁, with a greatest Σ⁰₁ guess (difficulty 3).
+- harrington: first-order parts of models of WKL₀; the general Π¹₁-conservation method (Hirschfeldt, Proposition 7.10); conservation over RCA₀ + Γ for first-order Γ, and why parameters are not covered; Π¹₁ conservation of COH by Mathias forcing (Hirschfeldt, Exercise 7.11; Cholak–Jockusch–Slaman), which realizes the candidate exercise of section 7; majorization of the functions of the extension (Simpson, Exercise IX.2.8).
+
+**Sources** (references checked in the text versions of the books): Dzhafarov–Mummert, Exercises 5.13.14, 6.7.1, 6.7.2, Propositions 6.2.4, 6.5.4, 6.5.6; Hájek–Pudlák, Chapter I, 2.20–2.29; Hirschfeldt, Proposition 7.10 and Exercise 7.11; Simpson, Exercise IX.2.8 and Definition II.2.6 (terms of a coded sequence are less than its code). The other exercises are new.
+
+## 12. History
 
 - **2026-11-12.** Design revision (course moved into the reverse mathematics track).
   - Split of lesson 1 into `induction-collection` and `collection-induction`; new lesson `separations` with the proof of IΣₙ ⊬ BΣₙ₊₁ by definable elements; split of `harrington` into `forcing-subtrees` and `harrington`.
@@ -102,3 +128,4 @@ No newer, simpler proof of Hirst's or Harrington's theorems was found; the Monin
   - Figures (generator `scripts/figures/induction-conservation.py`): cut, hierarchy, codes and values, lexicographic choice, tower of extensions.
   - References corrected: Jockusch–Solovay (Wang 1981, D–M 5.6.7; the "paper of Wang" was wrong); formalized Post theorem no longer cited to Simpson VIII.1; Simpson IX.1/IX.2/IX.3 section and theorem numbers; Kaye chapters; attribution of `prop-rt22-bsigma2` to Hirst.
   - RT²₂ literature updated (Le Houérou, Levy Patey, Yokoyama 2024).
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for all existing exercises; four existing exercises moved to the further exercises; 29 new further exercises (section 11). Durations recomputed: collection-induction 30, first-order-parts 45 (capped). The introduction of `forcing-subtrees` now cites `ex-standard-path`.

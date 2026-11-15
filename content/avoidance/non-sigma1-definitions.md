@@ -91,7 +91,7 @@ By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal M \subseteq 
 Fix $Z$ and a set $C$ that is not $\Sigma^0_1(Z)$, and let $\mathcal W = \{ X : C \text{ is not } \Sigma^0_1(X) \}$.
 
 1. For $\mathsf{WKL}$, use Jockusch–Soare forcing relative to $Z$, inside the class of paths of a $Z$-computable infinite binary tree: its question at level $1$ (:ref{#thm-tree-question}), relativized, is $\Sigma^0_1(Z)$-preserving, and :ref{#thm-local-non-sigma1} with $\mathcal M = \{ Z \}$ gives a path $G$ with $C$ not $\Sigma^0_1(Z \oplus G)$. For $\mathsf{COH}$, use Mathias forcing with $Z$-computable reservoirs and the question of :ref{#prop-mathias-question}, relativized; sufficiently generic sets are cohesive (:ref{#ex-generic-notions}).
-2. By item 1, $\mathsf{WKL}$ preserves $\mathcal W$, so :ref{#lem-scott-preservation} gives a Scott ideal $\mathcal M \subseteq \mathcal W$ containing $Z$. Use the Dzhafarov–Jockusch notion with reservoirs in $\mathcal M$ and its disjunctive question (first exercise of :ref{to="avoidance/disjunctive-question"}). If an infinite subset $H$ of $A$ or of $\overline A$ belongs to $\mathcal M$, then $Z \oplus H \in \mathcal M \subseteq \mathcal W$ and we are done. Otherwise both sides can always be extended, and :ref{#lem-disjunctive-non-sigma1}, with Lachlan's disjunction as in :ref{#lem-disjunctive-construction}, gives a side $G_i$, infinite and contained in $A$ or $\overline A$, such that $W^{Z \oplus G_i}_e \neq C$ for every $e$.
+2. By item 1, $\mathsf{WKL}$ preserves $\mathcal W$, so :ref{#lem-scott-preservation} gives a Scott ideal $\mathcal M \subseteq \mathcal W$ containing $Z$. Use the Dzhafarov–Jockusch notion with reservoirs in $\mathcal M$ and its disjunctive question (:ref{#ex-dj-disjunctive}). If an infinite subset $H$ of $A$ or of $\overline A$ belongs to $\mathcal M$, then $Z \oplus H \in \mathcal M \subseteq \mathcal W$ and we are done. Otherwise both sides can always be extended, and :ref{#lem-disjunctive-non-sigma1}, with Lachlan's disjunction as in :ref{#lem-disjunctive-construction}, gives a side $G_i$, infinite and contained in $A$ or $\overline A$, such that $W^{Z \oplus G_i}_e \neq C$ for every $e$.
 3. With the same $\mathcal M$, use the Seetapun forcing (:ref{#def-seetapun-forcing}) for a $Z$-computable coloring and its question (:ref{#lem-seetapun-question}). The proof of :ref{#thm-seetapun-direct} uses about $\mathcal M$ only that it is a Scott ideal containing $Z$ and that $C$ is not computable in its members, the latter in :ref{#lem-disjunctive-cone} and for the assumption (H). Replace :ref{#lem-disjunctive-cone} by :ref{#lem-disjunctive-non-sigma1}, and (H) by the same assumption for the new $\mathcal M$: an infinite homogeneous set $H \in \mathcal M$ gives $Z \oplus H \in \mathcal W$.
 :::
 
@@ -111,19 +111,11 @@ In item 2 of the proof of :ref{#thm-non-sigma1-examples}, why must the Scott ide
 
 ## One definition, not two
 
-The disjunctive arguments preserve one non-$\Sigma^0_1$ definition at a time. To preserve two sets $C_0$ and $C_1$, Lachlan's disjunction gives a side $i_0$ on which $C_0$ is preserved and a side $i_1$ on which $C_1$ is preserved, and nothing forces $i_0 = i_1$ (last exercise of :ref{to="avoidance/disjunctive-question"}). For cones this limitation is only apparent: by a theorem of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky, avoidance of one cone implies avoidance of countably many. For non-$\Sigma^0_1$ definitions it is real: Patey proved that $\mathsf{RT}^2_2$ admits preservation of one but not of two non-$\Sigma^0_1$ definitions, while Wang proved that $\mathsf{WKL}$ and the Erdős–Moser theorem admit preservation of countably many. Preservation of several definitions is therefore a finer tool than cone avoidance, and it separates problems that cone avoidance cannot separate; such separations are the subject of the course on custom properties and forcing design of the track. Going up the arithmetic hierarchy, preservation of non-$\Sigma^0_n$ definitions controls the $(n-1)$-st jump of solutions; for computable Mathias forcing it already fails at $n = 2$ (:ref{#cor-mathias-no-sigma2}), which is the starting point of the course on jump cone avoidance.
+The disjunctive arguments preserve one non-$\Sigma^0_1$ definition at a time. To preserve two sets $C_0$ and $C_1$, Lachlan's disjunction gives a side $i_0$ on which $C_0$ is preserved and a side $i_1$ on which $C_1$ is preserved, and nothing forces $i_0 = i_1$ (:ref{#ex-disjunctive-two-cones}). For cones this limitation is only apparent: by a theorem of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky, avoidance of one cone implies avoidance of countably many. For non-$\Sigma^0_1$ definitions it is real: Patey proved that $\mathsf{RT}^2_2$ admits preservation of one but not of two non-$\Sigma^0_1$ definitions, while Wang proved that $\mathsf{WKL}$ and the Erdős–Moser theorem admit preservation of countably many. Preservation of several definitions is therefore a finer tool than cone avoidance, and it separates problems that cone avoidance cannot separate; such separations are the subject of the course on custom properties and forcing design of the track. Going up the arithmetic hierarchy, preservation of non-$\Sigma^0_n$ definitions controls the $(n-1)$-st jump of solutions; for computable Mathias forcing it already fails at $n = 2$ (:ref{#cor-mathias-no-sigma2}), which is the starting point of the course on jump cone avoidance.
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that $\mathsf{WKL}$ and $\mathsf{COH}$ admit preservation of countably many non-$\Sigma^0_1$ definitions at once: for every $Z$ and every sequence of sets $C_0, C_1, \dots$, none of which is $\Sigma^0_1(Z)$, every $Z$-computable instance has a solution $Y$ such that no $C_j$ is $\Sigma^0_1(Z \oplus Y)$.
-
-:::solution
-In the proof of :ref{#thm-local-non-sigma1}, the dense sets for $C_j$ and $e$ form a countable family, indexed by the pairs $(j, e)$. A sufficiently generic set meets all of them. So every sufficiently generic set for Jockusch–Soare forcing inside the paths of the instance, or for Mathias forcing with $Z$-computable reservoirs, preserves all the definitions.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-non-sigma1-ce difficulty=2 objective="Derive the preservation of the definitions of complements of c.e. sets from cone avoidance, and see why the argument stops there."}
 Show directly, without :ref{#thm-non-sigma1-equivalence}, that if $\mathsf P$ admits cone avoidance, then for every $Z$, every c.e. set $A \not\leq_T Z$ and every $Z$-computable instance $X$, there is a solution $Y$ such that $\overline A$ is not $\Sigma^0_1(Z \oplus Y)$. Why does this argument not prove the theorem?
 
 :::solution
@@ -131,7 +123,7 @@ Cone avoidance gives $Y$ with $A \not\leq_T Z \oplus Y$. Since $A$ is $\Sigma^0_
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-coh-strong-non-sigma1 difficulty=2 objective="Adapt the proof of strong cone avoidance for cohesiveness to the preservation of non-Σ⁰₁ definitions." lessons="strong-cone-avoidance"}
 Show that $\mathsf{COH}$ admits strong preservation of non-$\Sigma^0_1$ definitions.
 
 :::solution
@@ -147,3 +139,59 @@ Preservation of the arithmetic hierarchy was introduced by Wang, who used it to 
 - L. Patey, *The weakness of being cohesive, thin or free in reverse mathematics*, Israel Journal of Mathematics 216 (2016), 905–955.
 - R. Downey, N. Greenberg, M. Harrison-Trainor, L. Patey and D. Turetsky, *Relationships between computability-theoretic properties of problems*, Journal of Symbolic Logic 87 (2022), 47–71; arXiv:1903.04273.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, section *Preserving definitions*.
+
+:::::exercises
+::::exercise{#ex-non-sigma1-countable difficulty=1 objective="Use the countability of the family of dense sets to preserve countably many non-Σ⁰₁ definitions for WKL and COH."}
+Show that $\mathsf{WKL}$ and $\mathsf{COH}$ admit preservation of countably many non-$\Sigma^0_1$ definitions at once: for every $Z$ and every sequence of sets $C_0, C_1, \dots$, none of which is $\Sigma^0_1(Z)$, every $Z$-computable instance has a solution $Y$ such that no $C_j$ is $\Sigma^0_1(Z \oplus Y)$.
+
+:::solution
+In the proof of :ref{#thm-local-non-sigma1}, the dense sets for $C_j$ and $e$ form a countable family, indexed by the pairs $(j, e)$. A sufficiently generic set meets all of them. So every sufficiently generic set for Jockusch–Soare forcing inside the paths of the instance, or for Mathias forcing with $Z$-computable reservoirs, preserves all the definitions.
+:::
+::::
+
+::::exercise[Closure properties]{#ex-non-sigma1-product difficulty=1 objective="Check the closure properties of the preservation of non-Σ⁰₁ definitions, and build an ω-model in which a given set keeps its complexity." lessons="avoidance-properties"}
+Show that if $\mathsf P_0$ and $\mathsf P_1$ admit preservation of non-$\Sigma^0_1$ definitions, so does $\mathsf P_0 \times \mathsf P_1$, and that if $\mathsf P \leq_\omega \mathsf Q$ and $\mathsf Q$ admits it, so does $\mathsf P$. Deduce that for every set $C$ that is not $\Sigma^0_1$, there is a Turing ideal satisfying $\mathsf{WKL}$, $\mathsf{COH}$ and $\mathsf{RT}^2_2$ relative to none of whose members $C$ is $\Sigma^0_1$.
+
+:::solution
+*Products.* Let $C$ be a set that is not $\Sigma^0_1(Z)$, and $X_0 \oplus X_1 \leq_T Z$ an instance. Preservation for $\mathsf P_0$ gives a solution $Y_0$ to $X_0$ such that $C$ is not $\Sigma^0_1(Z \oplus Y_0)$; preservation for $\mathsf P_1$ relative to $Z \oplus Y_0$, applied to $X_1 \leq_T Z \oplus Y_0$, gives $Y_1$ such that $C$ is not $\Sigma^0_1(Z \oplus Y_0 \oplus Y_1)$. This is the proof of :ref{#prop-cone-avoidance-product}.
+
+*ω-reducibility.* For each $C$, the class $\mathcal W = \{ X : C \text{ is not } \Sigma^0_1(X) \}$ is a weakness property, and the definition asks that the problem preserve each of them. By :ref{#ex-preservation-downward}, preservation of each $\mathcal W$ passes from $\mathsf Q$ to $\mathsf P$.
+
+*The ideal.* By :ref{#thm-non-sigma1-examples} and the first part, $\mathsf Q = \mathsf{WKL} \times \mathsf{COH} \times \mathsf{RT}^2_2$ preserves $\mathcal W$, and $\emptyset \in \mathcal W$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W$ satisfying $\mathsf Q$. It satisfies each factor: an instance of $\mathsf{WKL}$ in $\mathcal I$, joined with the computable instances given by the empty sequence of sets and a constant coloring, forms an instance of $\mathsf Q$ in $\mathcal I$, whose solution in $\mathcal I$ contains a path; the other factors are treated in the same way. Every member $X$ of $\mathcal I$ belongs to $\mathcal W$, so $C$ is not $\Sigma^0_1(X)$.
+:::
+::::
+
+::::exercise[One level up]{#ex-non-sigma2-jump-cone difficulty=1 objective="Lift the relation between definitions and cones one level up the arithmetic hierarchy, with Post's theorem."}
+Say that a problem $\mathsf P$ admits **preservation of non-$\Sigma^0_2$ definitions** if for every set $Z$, every set $C$ that is not $\Sigma^0_2(Z)$ and every instance $X \leq_T Z$, there is a solution $Y$ to $X$ such that $C$ is not $\Sigma^0_2(Z \oplus Y)$. Show that such a problem admits **jump cone avoidance**: for every $Z$, every $C \not\leq_T Z'$ and every instance $X \leq_T Z$, there is a solution $Y$ with $C \not\leq_T (Z \oplus Y)'$.
+
+:::solution
+By Post's theorem relativized to a set $W$ (:ref{#thm-post}), a set is computable in $W'$ if and only if it and its complement are $\Sigma^0_2(W)$. Let $C \not\leq_T Z'$; then $C$ and $\overline C$ are not both $\Sigma^0_2(Z)$, and we let $D$ be one of them that is not. Preservation gives a solution $Y$ such that $D$ is not $\Sigma^0_2(Z \oplus Y)$. If $C \leq_T (Z \oplus Y)'$, then $C$ and $\overline C$ would both be $\Sigma^0_2(Z \oplus Y)$, and so would $D$. So $C \not\leq_T (Z \oplus Y)'$. The proof is that of :ref{#prop-non-sigma1-cone}, one level up.
+:::
+::::
+
+::::exercise[No strong preservation for WKL and RT²₂]{#ex-strong-non-sigma1-fails difficulty=1 objective="Transfer the failures of strong cone avoidance to the strong preservation of definitions, with explicit witnesses." lessons="avoidance-properties"}
+Show that neither $\mathsf{WKL}$ nor $\mathsf{RT}^2_2$ admits strong preservation of non-$\Sigma^0_1$ definitions. Give for each an instance and a set $C$ that is not $\Sigma^0_1$ but is $\Sigma^0_1$ relative to every solution.
+
+:::solution
+By the strong part of :ref{#prop-non-sigma1-cone}, strong preservation would give strong cone avoidance, which fails for both problems (:ref{#ex-cone-avoidance-problems}).
+
+Explicitly, let $C = \overline{\emptyset'}$, which is not $\Sigma^0_1$, since otherwise $\emptyset'$ would be computable by Post's theorem. It is $\Sigma^0_1(Y)$ for every set $Y \geq_T \emptyset'$. For $\mathsf{WKL}$, the tree $\{ \emptyset' \uh n : n \in \nat \}$ has the single path $\emptyset'$. For $\mathsf{RT}^2_2$, every infinite homogeneous set for the coloring $h$ of the proof of :ref{#prop-rt32-jump} computes $\emptyset'$. In both cases take $Z = \emptyset$.
+:::
+::::
+
+::::exercise[Ramsey's theorem for pairs through cohesiveness]{#ex-rt22-non-sigma1-decomposition difficulty=2 objective="Prove the preservation of non-Σ⁰₁ definitions for Ramsey's theorem for pairs a second time, by decomposing it into cohesiveness and the pigeonhole principle."}
+Using item 1 of :ref{#thm-non-sigma1-examples} for $\mathsf{COH}$ and item 2 for $\mathsf{RT}^1_2$, without the Seetapun forcing, show that $\mathsf{RT}^2_2$ admits preservation of non-$\Sigma^0_1$ definitions.
+
+:::solution
+Let $C$ be a set that is not $\Sigma^0_1(Z)$, and $f : [\nat]^2 \to 2$ a $Z$-computable coloring. For each $x$, let $R_x = \{ y : y > x,\ f(\{ x, y \}) = 1 \}$; the sequence $\vec R$ is computable in $Z$.
+
+*Cohesiveness.* By item 1, there is an $\vec R$-cohesive set $G$ such that $C$ is not $\Sigma^0_1(Z \oplus G)$. Let $p$ be the enumeration of $G$ in increasing order, and $g(\{ a, b \}) = f(\{ p(a), p(b) \})$, a coloring computable in $Z \oplus G$. For each $a$, $G \subseteq^* R_{p(a)}$ or $G \subseteq^* \overline{R_{p(a)}}$, so $f(\{ p(a), y \})$ is constant for almost every $y \in G$: $g$ is stable. Let $A$ be its limit set.
+
+*Pigeonhole.* By item 2 relative to $Z \oplus G$, there is an infinite set $H$, contained in $A$ or in $\overline A$, such that $C$ is not $\Sigma^0_1(Z \oplus G \oplus H)$. Let $i$ be the limit color of the elements of $H$.
+
+*Thinning.* Let $h_0 = \min H$, and $h_{k+1}$ the least element of $H$ larger than $h_k$ with $g(\{ h_j, h_{k+1} \}) = i$ for every $j \leq k$; it exists, since each $h_j$ has color $i$ with almost every $b$. The set $L = \{ h_k : k \in \nat \}$ is infinite, homogeneous for $g$ with color $i$, and computable in $Z \oplus G \oplus H$. The set $p[L]$ is homogeneous for $f$, and computable in $G \oplus L$, hence in $Z \oplus G \oplus H$. So $C$ is not $\Sigma^0_1(Z \oplus p[L])$.
+
+The argument is the proof of :ref{#thm-seetapun} with the weakness property of non-$\Sigma^0_1$ definitions in place of the cone: it works for every property preserved by $\mathsf{COH}$ and strongly preserved by $\mathsf{RT}^1_2$.
+:::
+::::
+:::::

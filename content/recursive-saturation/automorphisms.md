@@ -1,7 +1,7 @@
 ---
 title: Automorphisms and fixed cuts
 summary: Countable recursively saturated models of PA have non-trivial automorphisms; the largest initial segment fixed pointwise by an automorphism is closed under exponentiation; conversely, every exponential cut of a countable recursively saturated model of PA is the fixed cut of an automorphism (Smoryński), by a back-and-forth argument with bounded types and the pigeonhole principle.
-duration: 45
+duration: 40
 prerequisites: [back-and-forth, cuts-and-extensions/weak-konig-cuts]
 ---
 
@@ -13,7 +13,7 @@ Throughout, $M$ is a model of $\mathrm{PA}$. All definable sets are then piecewi
 
 ## Non-trivial automorphisms
 
-::::exercise{#ex-rs-same-type difficulty=1}
+::::exercise{#ex-rs-same-type difficulty=1 objective="Realize the complete type of a non-definable element by a second element, with a recursive type."}
 Let $M$ be a recursively saturated model of $\mathrm{PA}$ and $a \in M$ an element not definable without parameters. Show that some $b \neq a$ satisfies $\mathrm{tp}(b) = \mathrm{tp}(a)$.
 
 :::solution
@@ -25,7 +25,7 @@ Given $\theta_1, \dots, \theta_k$, let $\eta(x)$ be the conjunction of the $\the
 :::
 ::::
 
-By :ref{#prop-rs-definable}, a recursively saturated model has an element not definable without parameters, and by :ref{#cor-bf-homogeneous} the exercise gives: **every countable recursively saturated model of $\mathrm{PA}$ has an automorphism other than the identity.**
+By :ref{#prop-rs-definable}, a recursively saturated model has an element not definable without parameters, and by :ref{#cor-bf-homogeneous}, :ref{#ex-rs-same-type} gives: **every countable recursively saturated model of $\mathrm{PA}$ has an automorphism other than the identity.**
 
 :::definition{#def-ifix}
 For an automorphism $g$ of $M$, $\mathrm{I_{fix}}(g) = \{ x \in M : g(y) = y \text{ for every } y \leq x \}$.
@@ -42,6 +42,14 @@ Let $x \in \mathrm{I_{fix}}(g)$ and $y \leq 2^x$. Since $g$ preserves the formul
 :::
 
 By :ref{#ex-exp-cut-closed}, $\mathrm{I_{fix}}(g)$ is also closed under addition and multiplication.
+
+::::exercise{#ex-aut-fixed-elementary difficulty=2 objective="Show with the Tarski–Vaught test that the fixed points of an automorphism form an elementary substructure."}
+Let $g$ be an automorphism of $M$. Show that the set $\{ x \in M : g(x) = x \}$ is an elementary substructure of $M$.
+
+:::solution
+Let $F$ be this set. It contains $0$ and $1$ and is closed under the operations, so it is a substructure. Apply the Tarski–Vaught test: if $M \models \exists y\ \varphi(y, \bar c)$ with $\bar c \in F$, the least such $y$ exists by the least number principle in $M$, and it is defined by $\varphi(y, \bar c) \wedge \forall z < y\ \neg \varphi(z, \bar c)$, with parameters in $F$; by :ref{#ex-aut-definable-fixed}, it belongs to $F$.
+:::
+::::
 
 ## Types over a bounded part of the model
 
@@ -80,7 +88,7 @@ Consider the recursive type in two variables
 $$
 p(u, w) = \{ u < d,\ u \neq w \} \cup \{ \forall x < a\ \big( \theta(\bar r, u, x) \leftrightarrow \theta(\bar s, w, x) \big) : \theta \in \mathcal L_A \}.
 $$
-Given $\theta_0, \dots, \theta_{k-1}$, let $F(u)$, for $u < d$, be the code below $2^{ka}$ of the table of $u$, as in the previous proof: $kx + i \in F(u)$ if and only if $\theta_i(\bar r, u, x)$, for $x < a$, $i < k$. The map $F$ is definable, from $[0, d)$ into $[0, 2^{ka})$, and $2^{ka} < 2^{a^2} \leq d$. By induction on $\ell \leq d$, using concatenation (:ref{#prop-seq-basic}), some sequence of length $d$ lists the values of $F$; the finite pigeonhole principle of :ref{to="fragments-of-arithmetic/coding"} (last exercise), applied to its restriction to length $2^{ka} + 1$, gives $u_1 \neq u_2 < d$ with $F(u_1) = F(u_2) = c$. As in the previous proof, $\bar r \equiv_{2^{a^2}} \bar s$ gives $w$ whose table over $\bar s$ is $c$. Then $w$ differs from $u_1$ or from $u_2$, and that $u_j$, with $w$, satisfies the given formulas. By recursive saturation, applied to the one-variable type of the pair $\langle u, w \rangle$, $p$ is realized.
+Given $\theta_0, \dots, \theta_{k-1}$, let $F(u)$, for $u < d$, be the code below $2^{ka}$ of the table of $u$, as in the previous proof: $kx + i \in F(u)$ if and only if $\theta_i(\bar r, u, x)$, for $x < a$, $i < k$. The map $F$ is definable, from $[0, d)$ into $[0, 2^{ka})$, and $2^{ka} < 2^{a^2} \leq d$. By induction on $\ell \leq d$, using concatenation (:ref{#prop-seq-basic}), some sequence of length $d$ lists the values of $F$; the finite pigeonhole principle (:ref{#ex-finite-pigeonhole}), applied to its restriction to length $2^{ka} + 1$, gives $u_1 \neq u_2 < d$ with $F(u_1) = F(u_2) = c$. As in the previous proof, $\bar r \equiv_{2^{a^2}} \bar s$ gives $w$ whose table over $\bar s$ is $c$. Then $w$ differs from $u_1$ or from $u_2$, and that $u_j$, with $w$, satisfies the given formulas. By recursive saturation, applied to the one-variable type of the pair $\langle u, w \rangle$, $p$ is realized.
 :::
 
 :::quiz[the extension lemmas]
@@ -133,24 +141,6 @@ Let $M$ be a countable recursively saturated model of $\mathrm{PA}$ and $I$ a cu
 
 In particular, $\nat = \mathrm{I_{fix}}(g)$ for some automorphism $g$, which moves arbitrarily small non-standard elements. Exponentiation cannot be weakened to multiplication: for a non-standard $a$, the cut $\{ x : x < a^n \text{ for some } n \in \nat \}$ is closed under addition and multiplication, and not under exponentiation, since $a^n < 2^a$ for every standard $n$; it is the fixed cut of no automorphism.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that every automorphism of $M$ fixes every element definable in $M$ from fixed parameters, and deduce that the model of :ref{#prop-rs-definable} has no automorphism other than the identity.
-
-:::solution
-If $x$ is the only element satisfying $\varphi(x, \bar c)$ and $g(\bar c) = \bar c$, then $g(x)$ satisfies $\varphi(g(x), \bar c)$, so $g(x) = x$. In the model of :ref{#prop-rs-definable}, every element is definable without parameters.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $g$ be an automorphism of $M$. Show that the set $\{ x \in M : g(x) = x \}$ is an elementary substructure of $M$.
-
-:::solution
-Let $F$ be this set. It contains $0$ and $1$ and is closed under the operations, so it is a substructure. Apply the Tarski–Vaught test: if $M \models \exists y\ \varphi(y, \bar c)$ with $\bar c \in F$, the least such $y$ exists by the least number principle in $M$, and it is defined by $\varphi(y, \bar c) \wedge \forall z < y\ \neg \varphi(z, \bar c)$, with parameters in $F$; by the first exercise, it belongs to $F$.
-:::
-::::
-
 ## Notes and references
 
 :ref{#thm-smorynski}, :ref{#lem-aut-extend} and :ref{#lem-aut-move} are Wong's Theorem 8.8 and Lemmas 8.9–8.10, after Smoryński (1982) and Kotlarski (1984); the lemma on extensions was found independently by Kotlarski, Smoryński and Vencovská. Kossak and Kotlarski (1988) characterized the automorphisms of an elementary cut $I$ of a countable recursively saturated model $M$ that extend to automorphisms of $M$, when $I$ is not the infimum of a coded ω-sequence: they are those that preserve $\mathrm{Cod}(M/I)$ in both directions (Wong, Theorem 8.11, proposed there as exercises). The automorphism groups of countable recursively saturated models are studied at length in Kossak and Schmerl's book.
@@ -160,3 +150,59 @@ Let $F$ be this set. It contains $0$ and $1$ and is closed under the operations,
 - R. Kossak and H. Kotlarski, *Results on automorphisms of recursively saturated models of PA*, Fundamenta Mathematicae 129 (1988), 9–15.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 8.
 - R. Kossak and J. H. Schmerl, *The Structure of Models of Peano Arithmetic*, Oxford University Press, 2006.
+
+:::::exercises
+::::exercise{#ex-aut-definable-fixed difficulty=1 objective="Check that automorphisms fix the elements definable from fixed parameters."}
+Show that every automorphism of $M$ fixes every element definable in $M$ from fixed parameters, and deduce that the model of :ref{#prop-rs-definable} has no automorphism other than the identity.
+
+:::solution
+If $x$ is the only element satisfying $\varphi(x, \bar c)$ and $g(\bar c) = \bar c$, then $g(x)$ satisfies $\varphi(g(x), \bar c)$, so $g(x) = x$. In the model of :ref{#prop-rs-definable}, every element is definable without parameters.
+:::
+::::
+
+::::exercise{#ex-aut-definable-iff-fixed difficulty=1 objective="Characterize the elements fixed by every automorphism of a countable recursively saturated model." lessons="back-and-forth"}
+Let $M$ be a countable recursively saturated model of $\mathrm{PA}$ and $a \in M$. Show that every automorphism of $M$ fixes $a$ if and only if $a$ is definable in $M$ without parameters.
+
+:::solution
+If $a$ is definable without parameters, every automorphism fixes it, by :ref{#ex-aut-definable-fixed} with no parameters. If not, :ref{#ex-rs-same-type} gives $b \neq a$ with $\mathrm{tp}(b) = \mathrm{tp}(a)$, and :ref{#cor-bf-homogeneous} gives an automorphism $g$ with $g(a) = b \neq a$.
+:::
+::::
+
+::::exercise{#ex-aut-orbit difficulty=2 objective="Realize types that move a non-definable element up or down, and deduce that its orbit has no endpoints." lessons="back-and-forth"}
+Let $M$ be a countable recursively saturated model of $\mathrm{PA}$ and $a \in M$ an element not definable without parameters. Show that there are automorphisms $g$ and $h$ of $M$ with $g(a) > a$ and $h(a) < a$. Deduce that the orbit $\{ f(a) : f \text{ an automorphism of } M \}$ has neither a largest nor a least element.
+
+:::solution
+Consider the recursive type, with the parameter $a$,
+$$
+q(v) = \{ a < v \} \cup \{ \theta(a) \leftrightarrow \theta(v) : \theta(x) \in \mathcal L_A \}.
+$$
+Given finitely many formulas $\theta_j$, let $\eta(x)$ be the conjunction of the $\theta_j(x)$ true of $a$ and of the $\neg \theta_j(x)$ for the others, so that $M \models \eta(a)$. If no $b > a$ satisfied $\eta$, then $a$ would be the largest element satisfying $\eta$, and it would be defined without parameters by $\eta(x) \wedge \forall y\ (x < y \rightarrow \neg \eta(y))$. So some $b > a$ satisfies the finite part, and by recursive saturation some $b$ realizes $q$: then $b > a$ and $\mathrm{tp}(b) = \mathrm{tp}(a)$, and :ref{#cor-bf-homogeneous} gives $g$ with $g(a) = b$. For $h$, replace $a < v$ by $v < a$ and use the least element satisfying $\eta$, defined by $\eta(x) \wedge \forall y < x\ \neg \eta(y)$.
+
+Every element $f(a)$ of the orbit has the type of $a$, so it is not definable without parameters: definability by $\theta$ is expressed by $\exists! x\ \theta(x) \wedge \theta(u)$, which would belong to $\mathrm{tp}(f(a)) = \mathrm{tp}(a)$. Applied to $f(a)$, the first part gives automorphisms $g', h'$ with $h'(f(a)) < f(a) < g'(f(a))$, and these elements are in the orbit.
+:::
+::::
+
+::::exercise{#ex-aut-tower-cut difficulty=2 objective="Compute the smallest exponential cut containing an element, and apply Smoryński's theorem to it." lessons="truth-and-provability/provably-total"}
+Let $M$ be a model of $\mathrm{PA}$ and $b \in M$. Define $2_0(b) = b$ and $2_{y+1}(b) = 2^{2_y(b)}$ for $y \in M$, a function of $y$ definable in $M$ by primitive recursion (:ref{#thm-pr-provably-total}). Let $I_b = \{ x \in M : x < 2_n(b) \text{ for some } n \in \nat \}$. Show that $I_b$ is the smallest exponential cut of $M$ containing $b$, and that it is a proper cut. Deduce that if $M$ is countable and recursively saturated, some automorphism $g$ of $M$ fixes every element below $2_n(b)$ for every $n \in \nat$, and, for every non-standard $c$, moves some element below $2_c(b)$.
+
+:::solution
+*A cut containing $b$.* $I_b$ is an initial segment by definition, and it contains $b < 2^b = 2_1(b)$. If $x < 2_n(b)$, then $x + 1 \leq 2_n(b) < 2_{n+1}(b)$, and $2^x < 2^{2_n(b)} = 2_{n+1}(b)$, since $y \mapsto 2^y$ is strictly increasing. So $I_b$ is a cut, and it is exponential.
+
+*The smallest.* Let $J$ be an exponential cut containing $b$. By induction on $n$ in the metatheory, $2_n(b) \in J$: for $n = 0$ by hypothesis, and $2_{n+1}(b) = 2^{2_n(b)}$ by exponentiality. Since $J$ is an initial segment, $I_b \subseteq J$.
+
+*Proper.* By induction in $M$ on $y$, the function is strictly increasing: $2_{y+1}(b) = 2^{2_y(b)} > 2_y(b)$, and so $y < y'$ implies $2_y(b) < 2_{y'}(b)$. If $c$ is non-standard, then $2_c(b) > 2_n(b)$ for every standard $n$, so $2_c(b) \notin I_b$.
+
+*The automorphism.* By :ref{#thm-smorynski}, some $g$ satisfies $\mathrm{I_{fix}}(g) = I_b$. It fixes every element of $I_b$, in particular every element below each $2_n(b)$. Let $c$ be non-standard. Then $c - 1$ is non-standard, so $2_{c-1}(b) \notin I_b = \mathrm{I_{fix}}(g)$, and by the definition of $\mathrm{I_{fix}}(g)$ some $y \leq 2_{c-1}(b)$ is moved by $g$; and $y < 2_c(b)$.
+:::
+::::
+
+::::exercise{#ex-aut-extend-standard difficulty=1 objective="Locate where the extension lemma uses that $a$ is non-standard, by proving the standard case with the back-and-forth lemma."}
+Let $M$ be a recursively saturated model of $\mathrm{PA}$, $a \geq 1$ a standard number, and $\bar r \equiv_{2^{a^2}} \bar s$. Show, with :ref{#lem-bf-step}, that for every $r \in M$ there is $s \in M$ with $(\bar r, r) \equiv_a (\bar s, s)$. Where does the proof of :ref{#lem-aut-extend} use that $a$ is non-standard?
+
+:::solution
+Since $2^{a^2} > 0$, $\mathrm{tp}(\bar r) = \mathrm{tp}(\bar s)$. By :ref{#lem-bf-step} with $N = M$, some $s$ satisfies $\mathrm{tp}(\bar r, r) = \mathrm{tp}(\bar s, s)$. Every $x < a$ is a standard number $n$, denoted by the numeral $\bar n$. For a formula $\theta(\bar u, w, y)$, $M \models \theta(\bar r, r, n)$ if and only if $\theta(\bar u, w, \bar n) \in \mathrm{tp}(\bar r, r) = \mathrm{tp}(\bar s, s)$, if and only if $M \models \theta(\bar s, s, n)$. So $(\bar r, r) \equiv_a (\bar s, s)$.
+
+The proof of :ref{#lem-aut-extend} uses non-standardness only in the bound $\langle a, c \rangle \leq 2^{2ka + 2} < 2^{a^2}$, which needs $2ka + 2 < a^2$ for every standard number $k$ of formulas; for a standard $a$ it fails when $k$ is large.
+:::
+::::
+:::::

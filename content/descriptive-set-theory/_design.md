@@ -36,7 +36,7 @@ cites `lem-rank-comparison`, `thm-stage-comparison` (lesson `norms`), `cor-total
   (`prop-pi11-not-sigma11`), Spector's boundedness theorem (`thm-boundedness`), O
   (`def-kleene-o`).
 - Hyperarithmetic sets: H-sequences (`lem-h-sequence-unique`), Kleene's theorem
-  (`thm-kleene-delta11`), `lem-wf-rank-hyp` (admitted there), quantification over HYP
+  (`thm-kleene-delta11`), `lem-wf-rank-hyp` (proved there), quantification over HYP
   (`cor-hyp-quantifier`), Σ¹₁ classes (`def-sigma11-class`), trees without hyperarithmetic
   paths (`thm-no-hyp-path`), the Kleene basis theorem (`thm-kleene-basis`), HYP countable
   (`prop-hyp-ideal`).
@@ -209,13 +209,61 @@ literature; references were corrected from the sources above.
 
 - Should a Spector–Gandy lesson be added (needs the Gandy basis theorem, admitted in the
   hyperarithmetic course)?
-- The hyperarithmetic course admits `lem-wf-rank-hyp`; `thm-pi11-stages` (2) depends on
-  it.
+- ~~The hyperarithmetic course admits `lem-wf-rank-hyp`~~: it is now proved in
+  `hyperarithmetic/kleene-theorem`, so `thm-pi11-stages` (2) rests on proved results only.
 - Exact section of Sacks for the Kreisel–Sacks metarecursion and the Σ₁(L_{ω₁ᶜᵏ})
   characterization not checked (book not available); only part-level references kept.
 - Kechris references are checked at the level of section titles only.
 
-## 11. History
+## 11. Exercises
+
+**Featured exercises** (in the text, one per lesson):
+
+- `norms`: `ex-wo-norm`, a Π¹₁ norm on WO built from embeddings, without the normal form:
+  it shows that the notion of norm is not tied to trees.
+- `reduction`: `ex-sigma11-no-reduction`, failure of reduction for Σ¹₁; the text cites it
+  for the table of which properties hold on which side.
+- `uniformization`: `ex-delta11-domain`, the hyperarithmetic extension of a Π¹₁ partial
+  function with Δ¹₁ domain, the most used form of selection.
+- `perfect-sets`: `ex-countable-pi11`, countability of Σ¹₁ classes is Π¹₁.
+
+**Further exercises** (block at the end of each lesson):
+
+- `norms`: stages of the same rank (`ex-same-stage`, moved); ranks of explicit trees and
+  length growth of strictly monotone maps; exact complexity of ≤ and < between ranks of
+  computable trees; stage comparison for c.e. sets is c.e.; min and max norms on unions and
+  intersections; initial segments for an arbitrary Π¹₁ norm, no largest value on a
+  non-Δ¹₁ set.
+- `reduction`: reduction of sequences (`ex-reduction-sequences`, moved); every reduction of
+  the diagonal sets is inseparable; the classical c.e. reduction recovered from the proof;
+  separation for sequences of Σ¹₁ sets; effective inseparability of the diagonal pair.
+- `uniformization`: unbounded stages (`ex-unbounded-stages`, moved); reduction from
+  uniformization; ranges of total Π¹₁ functions are Δ¹₁ (where the c.e. analogy breaks);
+  the Δ¹₁-domain hypothesis is needed (counterexample from inseparable sets); a uniform
+  stage bound for total Π¹₁ relations (boundedness); stage comparison with the tree of
+  descending sequences of a well-ordering, a second proof that A_{<α} is Δ¹₁.
+- `perfect-sets`: perfect subclass of the non-HYP sets (`ex-non-hyp-perfect`, moved);
+  isolated members of Σ¹₁ classes are HYP; infinitely many non-HYP members computable in
+  O; Π¹₁ singletons closed under join and jump; countability of Σ¹₁ classes is not Σ¹₁;
+  coding Baire trees into countable Π⁰₁ classes; the perfect subclass cannot be Π⁰₁ (nor
+  have a HYP tree), its tree is O-computable; Turing incomparable non-HYP sets below O
+  (difficulty 3, a splitting construction with two sequences of conditions).
+
+**Sources.** Moschovakis 4B (reduction and separation for sequences, in the spirit of
+4B.10–4B.12, not copied); Monin–Patey, chapter *Beyond hyperarithmetic*, section
+*Analogies between Π¹₁ sets and c.e. sets* (enumeration of Π¹₁ sets along O, contrasted
+in `ex-pi11-range`), and chapter *Σ¹₁ and Π¹₁ classes*, section *The continuum
+hypothesis for Σ¹₁ classes* (coding into Π⁰₁ classes, `ex-countable-pi01-coding`; the
+hyperarithmetic-incomparability exercise, of which `ex-turing-incomparable-o` is a Turing
+variant). The others are standard variants written for the course.
+
+## 12. History
+
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for
+  all exercises; one featured exercise per lesson, the others moved to the further
+  exercises; 21 new further exercises (5 + 4 + 5 + 7). Positional references to exercises
+  replaced by `:ref` (`ex-sigma11-no-reduction`, `ex-sigma11-notations-bounded`,
+  `ex-hyp-pi11-in-x`). Durations recomputed: `norms` 45, `reduction` 30, `perfect-sets` 45.
 
 - **2026-11-12.** Design revision.
   - New lesson `reduction`, split from `norms`; `prop-pi11-inseparable` promoted from an

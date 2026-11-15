@@ -129,7 +129,7 @@ The proof of :ref{#prop-pr-cases} evaluates every $g_i(\vec x)$, including those
 
 - [x] Primitive recursive functions are total, so every $g_i(\vec x)$ is defined; multiplying by $\chi_{P_i}(\vec x) = 0$ then removes it.
 
-  For **partial** functions this formula would be wrong: $0 \cdot g_i(\vec x)$ is undefined when $g_i(\vec x)$ is. Definition by cases for partial functions requires a genuine branching, as in the register machine exercise.
+  For **partial** functions this formula would be wrong: $0 \cdot g_i(\vec x)$ is undefined when $g_i(\vec x)$ is. Definition by cases for partial functions requires a genuine branching, as in :ref{#ex-urm-cases}.
 - [ ] Because only one predicate holds.
 
   This ensures that the sum has a single non-zero term, but it does not prevent the other terms from being undefined.
@@ -254,15 +254,7 @@ which is primitive recursive. These exponents are the basis of the coding of fin
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that $\gcd(x, y)$ and $\mathrm{lcm}(x, y)$ are primitive recursive.
-
-:::solution
-$\gcd(x, y) = \mu d < x + y + 1\ \big(d \mid x \wedge d \mid y \wedge \forall e \leq x + y\ (e \mid x \wedge e \mid y \rightarrow e \leq d)\big)$, which is correct for $(x, y) \neq (0, 0)$; set $\gcd(0, 0) = 0$ by cases. For $x, y \geq 1$, $\mathrm{lcm}(x, y) = \lfloor xy / \gcd(x, y) \rfloor$, and $\mathrm{lcm}(x, y) = 0$ if $x = 0$ or $y = 0$.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-pr-simultaneous difficulty=1 objective="Reduce a simultaneous recursion to a single primitive recursion with the pairing function."}
 Show that the primitive recursive functions are closed under **simultaneous recursion**: if $g_1, g_2, h_1, h_2$ are primitive recursive, so are the functions $f_1, f_2$ defined by $f_i(\vec x, 0) = g_i(\vec x)$ and $f_i(\vec x, y + 1) = h_i(\vec x, y, f_1(\vec x, y), f_2(\vec x, y))$. Deduce that the Fibonacci sequence is primitive recursive.
 
 :::solution
@@ -270,7 +262,7 @@ Let $F(\vec x, y) = \langle f_1(\vec x, y), f_2(\vec x, y) \rangle$. Then $F(\ve
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-pr-range difficulty=2 objective="Decide membership in a range by a bounded search, and see that monotonicity is needed for the bound."}
 Show that if $f : \nat \to \nat$ is primitive recursive and strictly increasing, then its range is a primitive recursive set. Is it true for every primitive recursive $f$?
 
 :::solution
@@ -288,3 +280,67 @@ Definitions by recursion go back to Dedekind (1888) and Skolem (1923). Gödel us
 - K. Gödel, *Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I*, Monatshefte für Mathematik und Physik 38 (1931), 173–198.
 - R. Péter, *Rekursive Funktionen*, Akadémiai Kiadó, 1951.
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989, chapter I.
+
+:::::exercises
+::::exercise{#ex-pr-gcd difficulty=1 objective="Define arithmetic functions by bounded minimization, with a separate case where the bound fails."}
+Show that $\gcd(x, y)$ and $\mathrm{lcm}(x, y)$ are primitive recursive.
+
+:::solution
+$\gcd(x, y) = \mu d < x + y + 1\ \big(d \mid x \wedge d \mid y \wedge \forall e \leq x + y\ (e \mid x \wedge e \mid y \rightarrow e \leq d)\big)$, which is correct for $(x, y) \neq (0, 0)$; set $\gcd(0, 0) = 0$ by cases. For $x, y \geq 1$, $\mathrm{lcm}(x, y) = \lfloor xy / \gcd(x, y) \rfloor$, and $\mathrm{lcm}(x, y) = 0$ if $x = 0$ or $y = 0$.
+:::
+::::
+
+::::exercise{#ex-pr-sg-derivation difficulty=1 objective="Write out a derivation in full, with all projections and constants."}
+Write a derivation of the sign function $\mathrm{sg}$ that follows its definition $\mathrm{sg}(x) = 1 \dotminus (1 \dotminus x)$ in the lesson, listing every function of the derivation with the scheme that produces it. Then give a shorter derivation, based on a recursion.
+
+:::solution
+Following the lesson:
+
+1. $f_1 = Z$, $f_2 = S$ (basic);
+2. $f_3 = f_2 \circ f_1$, the constant $c^1_1$;
+3. $f_4 = p^2_1$ (basic), and $f_5 = \mathrm{pred}$, the recursion with $k = 0$, $a = 0$ and $h = f_4$: $\mathrm{pred}(0) = 0$, $\mathrm{pred}(y + 1) = p^2_1(y, \mathrm{pred}(y)) = y$;
+4. $f_6 = p^1_1$, $f_7 = p^3_3$ (basic), and $f_8 = f_5 \circ f_7$;
+5. $f_9 = {\dotminus}$, the recursion with $g = f_6$ and $h = f_8$: $x \dotminus 0 = x$, $x \dotminus (y + 1) = \mathrm{pred}(x \dotminus y)$;
+6. $f_{10} = f_9 \circ (f_3, f_6)$, that is $x \mapsto 1 \dotminus x$;
+7. $f_{11} = f_9 \circ (f_3, f_{10})$, that is $x \mapsto 1 \dotminus (1 \dotminus x) = \mathrm{sg}(x)$.
+
+A shorter derivation uses $\mathrm{sg}(0) = 0$ and $\mathrm{sg}(y + 1) = 1$: take $Z$, $S$, $p^2_1$, then $Z \circ p^2_1$, then $h = S \circ (Z \circ p^2_1)$, the constant function $(y, v) \mapsto 1$, and finally the recursion with $k = 0$, $a = 0$ and this $h$. It has $6$ functions instead of $11$. A function has infinitely many derivations.
+:::
+::::
+
+::::exercise{#ex-pr-largest-witness difficulty=1 objective="Reverse a bounded search to find the largest witness below a bound."}
+For a primitive recursive predicate $P \subseteq \nat^{k+1}$, let $\nu z \leq y\ P(\vec x, z)$ be the largest $z \leq y$ such that $P(\vec x, z)$, and $0$ if there is none. Show that this function of $(\vec x, y)$ is primitive recursive.
+
+:::solution
+Let $w(\vec x, y) = \mu w < y + 1\ P(\vec x, y \dotminus w)$, which is primitive recursive by :ref{#prop-pr-bounded-mu} and composition. If some $z \leq y$ satisfies $P(\vec x, z)$, let $z_0$ be the largest. For $w \leq y$, $y \dotminus w = y - w$ runs through $y, y - 1, \dots, 0$ as $w$ increases, so the least $w$ with $P(\vec x, y - w)$ is $y - z_0$, and $y \dotminus w(\vec x, y) = z_0$. Hence
+$$
+\nu z \leq y\ P(\vec x, z) = \begin{cases} y \dotminus w(\vec x, y) & \text{if } \exists z \leq y\ P(\vec x, z), \\ 0 & \text{otherwise,} \end{cases}
+$$
+a definition by cases (:ref{#prop-pr-cases}) with a predicate that is primitive recursive by :ref{#cor-pr-bounded-quantifiers}.
+:::
+::::
+
+::::exercise{#ex-pr-digit-sum difficulty=1 objective="Combine bounded sums with quotient and remainder, choosing a bound in terms of the argument."}
+Show that the function $s(x)$, the sum of the decimal digits of $x$, is primitive recursive.
+
+:::solution
+The $i$-th decimal digit of $x$ (from the right, starting at $i = 0$) is $\lfloor x / 10^i \rfloor \bmod 10$; it is $0$ when $10^i > x$. Since $10^i > i$ for every $i$, all the digits of $x$ have positions $i \leq x$, so
+$$
+s(x) = \sum_{i < x + 1} \big( \lfloor x / 10^i \rfloor \bmod 10 \big),
+$$
+a bounded sum (:ref{#prop-pr-bounded-sums}, with the bound $x + 1$ obtained by composition) of a function that is primitive recursive by the section on arithmetic functions.
+:::
+::::
+
+::::exercise{#ex-pr-prime-bound difficulty=2 objective="Improve the bound of Euclid's argument, and define the enumeration of primes without recursion."}
+1. Show that $p_n \leq 2^{2^n}$ for every $n$.
+2. Show that the counting function $\pi(x) = |\{y \leq x : y \text{ prime}\}|$ is primitive recursive.
+3. Deduce that $p_n = \mu z < 2^{2^n} + 1\ \big(\pi(z) = n + 1\big)$, a definition of $n \mapsto p_n$ that uses no recursion on $n$ beyond those defining $\pi$ and exponentiation.
+
+:::solution
+1. By strong induction on $n$. For $n = 0$, $p_0 = 2 = 2^{2^0}$. Let $P = p_0 p_1 \cdots p_n$. A prime factor $q$ of $P + 1$ does not divide $P$, so it is none of $p_0, \dots, p_n$; hence $q \geq p_{n+1}$, and $p_{n+1} \leq q \leq P + 1$. By the induction hypothesis $P \leq 2^{2^0 + 2^1 + \cdots + 2^n} = 2^{2^{n+1} - 1}$, so $p_{n+1} \leq 2^{2^{n+1} - 1} + 1 \leq 2^{2^{n+1}}$, since $1 \leq 2^{m-1}$ for $m = 2^{n+1} \geq 1$.
+2. $\pi(x) = \sum_{y < x + 1} \chi_{\mathrm{Prime}}(y)$, a bounded sum of a primitive recursive function.
+3. $\pi(p_n) = n + 1$, since the primes $\leq p_n$ are $p_0, \dots, p_n$; and for $z < p_n$, $\pi(z) \leq n$. So $p_n$ is the least $z$ with $\pi(z) = n + 1$, and by 1 it is below the bound $2^{2^n} + 1$. The bounded minimization is primitive recursive by :ref{#prop-pr-bounded-mu}, composed with the primitive recursive bound $n \mapsto 2^{2^n} + 1$.
+:::
+::::
+:::::

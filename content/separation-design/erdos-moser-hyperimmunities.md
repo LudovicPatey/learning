@@ -34,6 +34,14 @@ Let $1 \leq k \leq \omega$. A problem $\mathsf P$ admits **preservation of $k$ h
 
 For $k = 1$ this is :ref{#def-preserve-hyperimmunity}. For a fixed sequence $(h_i)$, the class $\mathcal W_{\vec h}$ of sets $W$ such that every $h_i$ is $W$-hyperimmune is a weakness property, and preservation of $k$ hyperimmunities is the preservation of all these classes. $\mathsf{WKL}$ preserves them for $k = \omega$ (:ref{#exr-wkl-hyperimmunities}). By :ref{#thm-hyperimmunity-examples}, $\mathsf{RT}^2_2$ admits preservation of one hyperimmunity. The proof uses a disjunctive question: for a pair of indices, some side $G_i$ satisfies "$\Phi^{Z \oplus G_i}_{e_i}$ does not dominate $h$", and Lachlan's disjunction gives one side satisfying all the requirements. With two functions $h_0$ and $h_1$, the requirements for $h_0$ may be satisfied on side $0$ and those for $h_1$ on side $1$, and nothing forces a common side. For $\mathsf{EM}$ the question is not disjunctive. The next lesson shows that this difference is real: $\mathsf{RT}^2_2$ does not preserve two hyperimmunities.
 
+::::exercise{#exr-wkl-hyperimmunities difficulty=1 objective="Apply the computably dominated basis theorem to preserve countably many hyperimmunities with weak König's lemma."}
+Let $(h_i)_{i \in \nat}$ be functions that are $Z$-hyperimmune. Show that every infinite $Z$-computable binary tree has a path $P$ such that every $h_i$ is $(Z \oplus P)$-hyperimmune. Deduce that $\mathsf{WKL}$ preserves $\mathcal W_{\vec h}$.
+
+:::solution
+By the computably dominated basis theorem (:ref{#thm-dominated-basis}) relativized to $Z$, the tree has a path $P$ such that every $(Z \oplus P)$-computable function is dominated by a $Z$-computable function. If a $(Z \oplus P)$-computable function $g$ dominated $h_i$, a $Z$-computable function dominating $g$ would dominate $h_i$. Given $W \in \mathcal W_{\vec h}$ and a $W$-computable tree, apply this with $Z = W$.
+:::
+::::
+
 :::lemma{#lem-sd-em-compact}
 Let $\mathcal M$ be a Scott ideal containing $Z$. The question of :ref{#lem-sd-em-question} is compact: if $c \mathrel{?{\vdash}} \Phi^{Z \oplus G}_e(x)\converge$, there is $k$ with $c \mathrel{?{\vdash}} \Phi^{Z \oplus G}_e(x)\converge < k$.
 :::
@@ -79,17 +87,7 @@ Where is the Scott ideal used in the proof of :ref{#thm-sd-em-hyperimmunities}?
   The growth task only needs closure under computability in $X \oplus Z$.
 :::
 
-## Exercises
-
-::::exercise{#exr-wkl-hyperimmunities difficulty=1}
-Let $(h_i)_{i \in \nat}$ be functions that are $Z$-hyperimmune. Show that every infinite $Z$-computable binary tree has a path $P$ such that every $h_i$ is $(Z \oplus P)$-hyperimmune. Deduce that $\mathsf{WKL}$ preserves $\mathcal W_{\vec h}$.
-
-:::solution
-By the computably dominated basis theorem (:ref{#thm-dominated-basis}) relativized to $Z$, the tree has a path $P$ such that every $(Z \oplus P)$-computable function is dominated by a $Z$-computable function. If a $(Z \oplus P)$-computable function $g$ dominated $h_i$, a $Z$-computable function dominating $g$ would dominate $h_i$. Given $W \in \mathcal W_{\vec h}$ and a $W$-computable tree, apply this with $Z = W$.
-:::
-::::
-
-::::exercise{#exr-em-strong-cone difficulty=3}
+::::exercise{#exr-em-strong-cone difficulty=3 objective="Design a forcing question over tournaments and colorings to prove that the Erdős–Moser theorem admits strong cone avoidance."}
 Show that $\mathsf{EM}$ admits strong cone avoidance (:ref{#def-cone-avoidance-problem}): for every set $Z$, every $C \not\leq_T Z$ and every tournament $T$ on $\nat$, not necessarily computable in $Z$, there is an infinite $T$-transitive set $G$ with $C \not\leq_T Z \oplus G$. Use the $\mathsf{EM}$ conditions $(\sigma, X)$ of :ref{#def-sd-em-condition} whose reservoirs satisfy $C \not\leq_T Z \oplus X$, and proceed in five steps.
 
 1. Show with :ref{#thm-dj-cone-avoidance} that every condition has an extension with one more element in the stem.
@@ -119,3 +117,39 @@ The design of the reservoirs, cone avoidance and preservation of hyperimmunities
 - L. Patey, *Iterative forcing and hyperimmunity in reverse mathematics*, Computability 6 (2017), 209–221; arXiv:1501.07709.
 - C. G. Jockusch, Jr. and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
 - D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
+
+:::::exercises
+::::exercise{#ex-em-non-sigma1 difficulty=2 objective="Adapt the cone avoidance argument for $\mathsf{EM}$ to preserve countably many non-$\Sigma^0_1$ definitions at once."}
+Let $Z$ be a set and $C_0, C_1, \dots$ sets none of which is $\Sigma^0_1(Z)$ (:ref{#def-preserve-non-sigma1}). Show that every $Z$-computable tournament has an infinite transitive set $G$ such that no $C_j$ is $\Sigma^0_1(Z \oplus G)$. Deduce that for every sequence of sets $D_0, D_1, \dots$ none of which is computable in $Z$, there is an infinite transitive set $G$ such that no $D_j$ is computable in $Z \oplus G$.
+
+:::solution
+Let $\mathcal W$ be the class of sets $W$ such that no $C_j$ is $\Sigma^0_1(W)$; it is a weakness property containing $Z$. It is preserved by $\mathsf{WKL}$: in the proof of item 1 of :ref{#thm-non-sigma1-examples}, the requirements for the different sets $C_j$ form countably many dense sets, indexed by $j$ and $e$, and a sufficiently generic path meets all of them (:ref{#ex-non-sigma1-countable}). By :ref{#lem-scott-preservation}, there is a Scott ideal $\mathcal M \subseteq \mathcal W$ containing $Z$. Build a sequence of $\mathsf{EM}$ conditions with reservoirs in $\mathcal M$ as in :ref{#thm-sd-em-cone}, with the growth task and, for each pair $(e, j)$, the following task. Let $c = (\sigma, X)$ be the current condition and $U = \{ x : c \mathrel{?{\vdash}} \Phi^{Z \oplus G}_e(x)\converge \}$, a set $\Sigma^0_1(X \oplus Z)$ by property 3 of :ref{#lem-sd-em-question}. Since $X \oplus Z \in \mathcal M \subseteq \mathcal W$, $U \neq C_j$. If some $x \in U$ is not in $C_j$, property 1 gives an extension forcing $\Phi^{Z \oplus G}_e(x)\converge$. If some $x \in C_j$ is not in $U$, property 2 gives an extension forcing $\Phi^{Z \oplus G}_e(x)\diverge$. In both cases every member $G$ of the extension has $W^{Z \oplus G}_e \neq C_j$. The union of the stems is an infinite transitive set and a member of every condition of the sequence, so $W^{Z \oplus G}_e \neq C_j$ for all $e$ and $j$.
+
+For the second statement, let $D_j \not\leq_T Z$. By Post's theorem relativized to $Z$, $D_j$ or $\overline{D_j}$ is not $\Sigma^0_1(Z)$; call it $C_j$. Take $G$ as above. If $D_j \leq_T Z \oplus G$, then $D_j$ and $\overline{D_j}$ are both $\Sigma^0_1(Z \oplus G)$, and so is $C_j$, a contradiction. The question is not disjunctive, so all the sets are handled on the same set $G$; the first statement is a theorem of Wang.
+:::
+::::
+
+::::exercise{#ex-em-cone-from-hyperimmunity difficulty=1 objective="Derive cone avoidance of $\mathsf{EM}$ from its preservation of hyperimmunity."}
+Deduce :ref{#thm-sd-em-cone} from :ref{#thm-sd-em-hyperimmunities} and :ref{#thm-hyperimmunity-cone}.
+
+:::solution
+Let $Z$ be a set, $h$ a $Z$-hyperimmune function and $T$ a $Z$-computable tournament. Applying :ref{#thm-sd-em-hyperimmunities} to the constant sequence $h_i = h$ gives an infinite transitive set $G$ such that $h$ is $(Z \oplus G)$-hyperimmune. So $\mathsf{EM}$ admits preservation of hyperimmunity (:ref{#def-preserve-hyperimmunity}), and by :ref{#thm-hyperimmunity-cone} it admits cone avoidance. The direct proof of :ref{#thm-sd-em-cone} avoids the theorem of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky, whose proof goes through moduli.
+:::
+::::
+
+::::exercise{#ex-em-product difficulty=1 objective="Check that preservation of countably many hyperimmunities passes to products of problems."}
+For problems $\mathsf P$ and $\mathsf Q$, let $\mathsf P \times \mathsf Q$ be the problem whose instances are the sets $X_0 \oplus X_1$ with $X_0$ an instance of $\mathsf P$ and $X_1$ an instance of $\mathsf Q$, and whose solutions are the sets $Y_0 \oplus Y_1$ with $Y_i$ a solution to $X_i$. Show that if $\mathsf P$ and $\mathsf Q$ admit preservation of $\omega$ hyperimmunities, so does $\mathsf P \times \mathsf Q$. Deduce that $\mathsf{EM} \times \mathsf{WKL}$ admits preservation of $\omega$ hyperimmunities.
+
+:::solution
+Let $Z$ be a set, $(h_i)$ a sequence of $Z$-hyperimmune functions and $X_0 \oplus X_1 \leq_T Z$ an instance. Since $X_0 \leq_T Z$, there is a solution $Y_0$ to $X_0$ such that every $h_i$ is $(Z \oplus Y_0)$-hyperimmune. Since $X_1 \leq_T Z \oplus Y_0$, applying the hypothesis on $\mathsf Q$ to the set $Z \oplus Y_0$ gives a solution $Y_1$ to $X_1$ such that every $h_i$ is $(Z \oplus Y_0 \oplus Y_1)$-hyperimmune. The sets $Z \oplus (Y_0 \oplus Y_1)$ and $Z \oplus Y_0 \oplus Y_1$ compute each other, and hyperimmunity relative to a set depends only on its Turing degree, so $Y_0 \oplus Y_1$ is the required solution. The second statement follows from :ref{#thm-sd-em-hyperimmunities} and :ref{#exr-wkl-hyperimmunities}.
+:::
+::::
+
+::::exercise{#ex-em-hyperimmune-sets difficulty=1 objective="Transfer the preservation of hyperimmune functions to hyperimmune sets through principal functions."}
+Let $Z$ be a set and $A_0, A_1, \dots$ infinite sets, each hyperimmune relative to $Z$. Show that every $Z$-computable tournament has an infinite transitive set $G$ such that every $A_i$ is hyperimmune relative to $Z \oplus G$.
+
+:::solution
+By :ref{#thm-hyperimmune-principal}, whose proof relativizes to any set $W$, an infinite set $A$ is hyperimmune relative to $W$ if and only if its principal function $p_A$ is $W$-hyperimmune. So the functions $p_{A_i}$ are $Z$-hyperimmune, and :ref{#thm-sd-em-hyperimmunities} gives an infinite transitive set $G$ such that every $p_{A_i}$ is $(Z \oplus G)$-hyperimmune, that is, every $A_i$ is hyperimmune relative to $Z \oplus G$.
+:::
+::::
+:::::

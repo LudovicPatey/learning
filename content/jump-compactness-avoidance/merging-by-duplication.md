@@ -35,7 +35,15 @@ In the proof of :ref{#lem-product-merging}, why is $q$ not obtained by taking th
 <svg class="fig" viewBox="0 0 600 250" width="600" role="img" aria-label="Merging by duplication: a condition with index set I and two negative answers giving classes A_0 and A_1 is extended by a condition with index set I times 0,1 whose slice 0 ranges over A_0 and slice 1 over A_1, with the same stem and copied reservoirs"><defs><marker id="jca-pm-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><rect x="200" y="10" width="200" height="52" rx="6" class="state"/><text x="300.0" y="32.0" text-anchor="middle" class="label">p, reservoirs X, index set I</text><text x="300.0" y="48.0" text-anchor="middle" class="label">p ?⊬ φ₀ and p ?⊬ φ₁</text><rect x="20" y="100" width="200" height="44" rx="6" class="node"/><text x="120.0" y="126.0" text-anchor="middle" class="label">𝒜₀ = 𝒜(p, φ₀) large</text><rect x="380" y="100" width="200" height="44" rx="6" class="node"/><text x="480.0" y="126.0" text-anchor="middle" class="label">𝒜₁ = 𝒜(p, φ₁) large</text><rect x="130" y="186" width="340" height="52" rx="6" class="state"/><text x="300.0" y="208.0" text-anchor="middle" class="label">q: stem σ, reservoirs X copied twice, index set I·{0, 1}</text><text x="300.0" y="224.0" text-anchor="middle" class="label">slice 0 ∈ 𝒜₀, slice 1 ∈ 𝒜₁</text><line x1="250" y1="64" x2="140" y2="96" class="ink-stroke" stroke-width="1.2" marker-end="url(#jca-pm-arr)"/><line x1="350" y1="64" x2="460" y2="96" class="ink-stroke" stroke-width="1.2" marker-end="url(#jca-pm-arr)"/><line x1="140" y1="146" x2="230" y2="182" class="ink-stroke" stroke-width="1.2" marker-end="url(#jca-pm-arr)"/><line x1="460" y1="146" x2="370" y2="182" class="ink-stroke" stroke-width="1.2" marker-end="url(#jca-pm-arr)"/><text x="300" y="132" text-anchor="middle" class="label">𝒜₀ ∩ 𝒜₁ need not be large</text></svg>
 :::
 
-The duplication is what a single class could not do (:ref{#lem-no-two-sides}): for the sentences "$G \cap R$ is finite" and "$G \setminus R$ is finite", slice $0$ can provide the elements of $R$ and slice $1$ those of $\overline R$ (first exercise below).
+The duplication is what a single class could not do (:ref{#lem-no-two-sides}): for the sentences "$G \cap R$ is finite" and "$G \setminus R$ is finite", slice $0$ can provide the elements of $R$ and slice $1$ those of $\overline R$ (:ref{#ex-promise-both-halves}).
+
+::::exercise{#ex-promise-both-halves difficulty=1 objective="Use the merging lemma to promise that the generic set meets a computable set and its complement infinitely often."}
+Let $p = (\sigma, \vec X, S)$ be a condition and $R$ a computable set such that $\mathcal U^I_S \cap \mathcal L_{\langle R \rangle_\nu}$ and $\mathcal U^I_S \cap \mathcal L_{\langle \overline R \rangle_\nu}$ are both large, where $\langle R \rangle_\nu$ is the tuple with all coordinates $R$. Show that some extension of $p$ promises that $G \cap R$ and $G \setminus R$ are infinite.
+
+:::solution
+The sentence "$G \cap R$ is finite" is $\exists y\ \psi(y)$ with $\psi(y)$: no element $z \geq y$ of $G$ is in $R$. For $\tau$ compatible with $(\sigma, \bigcup \vec X)$, the class $\mathcal V^I_{\tau, \neg\psi(m)}$ contains every tuple $\vec Z$ such that $\bigcup \vec Z \cap R$ has an element larger than or equal to $\max(m, |\tau|)$. So $\mathcal A_{p, \varphi}$ contains $\mathcal U^I_S \cap \mathcal L_{\langle R \rangle_\nu}$, which is large, and $p \mathrel{?{\nvdash}} \varphi$. Similarly for "$G \setminus R$ is finite". Apply :ref{#lem-product-merging}.
+:::
+::::
 
 ## The theorem
 
@@ -63,19 +71,9 @@ We write the proof for $Z = D = \emptyset$, so that $A$ is $\Delta^0_2$ and the 
 
 Consider for a moment quadruples $(\sigma_0, \sigma_1, \vec X, S)$ such that $(\sigma_i, \vec X, S)$ is a condition of product Mathias forcing (:ref{#def-product-condition}) with $\sigma_i \subseteq A_i$, for $i < 2$. The reservoirs contain elements of both $A_0$ and $A_1$, and side $i$ is useful only if the class $\mathcal U^I_S$ allows reservoirs inside $A_i$. As in :ref{#def-valid-part}, call side $i$ **valid** if $\mathcal U^I_S \cap \mathcal L_{\langle X_\nu \cap A_i : \nu \in I \rangle}$ is large.
 
-If $I$ is a singleton, some side is valid. By :ref{#lem-product-cover} applied to the cover $A_0, A_1$ of $\nat$, some $i$ makes $\mathcal U^I_S \cap \mathcal L_{\langle A_i \rangle}$ large, and since $\mathcal U^I_S \subseteq \mathcal L_{\vec X}$, :ref{#lem-product-intersection} makes $\mathcal U^I_S \cap \mathcal L_{\langle X \cap A_i \rangle}$ large. For two coordinates this fails, and merging is the cause. Let $A$ be computable, infinite and coinfinite, and apply the first exercise below with $R = A$ to the condition $(\varepsilon, \langle \nat \rangle, S_\infty)$. The extension has the reservoirs $(\nat, \nat)$, and the members $(Z_0, Z_1)$ of its class have $Z_0 \cap A$ and $Z_1 \setminus A$ infinite. Side $0$ is valid only if this class intersected with $\mathcal L_{(A, A)}$ is large. For the cover $A_0, A_1$ of $\nat$, the second coordinate of a pair of parts in the intersection would meet both $A$ and $\overline A$ infinitely often, which neither part does. So side $0$ is not valid, and symmetrically side $1$ is not valid: the stems can grow on neither side.
+If $I$ is a singleton, some side is valid. By :ref{#lem-product-cover} applied to the cover $A_0, A_1$ of $\nat$, some $i$ makes $\mathcal U^I_S \cap \mathcal L_{\langle A_i \rangle}$ large, and since $\mathcal U^I_S \subseteq \mathcal L_{\vec X}$, :ref{#lem-product-intersection} makes $\mathcal U^I_S \cap \mathcal L_{\langle X \cap A_i \rangle}$ large. For two coordinates this fails, and merging is the cause. Let $A$ be computable, infinite and coinfinite, and apply :ref{#ex-promise-both-halves} with $R = A$ to the condition $(\varepsilon, \langle \nat \rangle, S_\infty)$. The extension has the reservoirs $(\nat, \nat)$, and the members $(Z_0, Z_1)$ of its class have $Z_0 \cap A$ and $Z_1 \setminus A$ infinite. Side $0$ is valid only if this class intersected with $\mathcal L_{(A, A)}$ is large. For the cover $A_0, A_1$ of $\nat$, the second coordinate of a pair of parts in the intersection would meet both $A$ and $\overline A$ infinitely often, which neither part does. So side $0$ is not valid, and symmetrically side $1$ is not valid: the stems can grow on neither side.
 
 The cover lemma still says something for two coordinates: it gives $j : I \to 2$ such that $\mathcal U^I_S \cap \mathcal L_{\langle X_\nu \cap A_{j(\nu)} \rangle}$ is large. The function $j$ colors the coordinates. If two coordinates out of three have the same color $i$, the pair of these two coordinates has a valid side $i$. This suggests keeping, instead of one pair of stems for the whole tuple, one pair of stems for each sub-tuple in a family with a Ramsey property: every $2$-coloring of the coordinates makes some member of the family monochromatic. Weak merging, with three negative answers instead of two, provides such families; they are the subject of the next lesson.
-
-## Exercises
-
-::::exercise{difficulty=1}
-Let $p = (\sigma, \vec X, S)$ be a condition and $R$ a computable set such that $\mathcal U^I_S \cap \mathcal L_{\langle R \rangle_\nu}$ and $\mathcal U^I_S \cap \mathcal L_{\langle \overline R \rangle_\nu}$ are both large, where $\langle R \rangle_\nu$ is the tuple with all coordinates $R$. Show that some extension of $p$ promises that $G \cap R$ and $G \setminus R$ are infinite.
-
-:::solution
-The sentence "$G \cap R$ is finite" is $\exists y\ \psi(y)$ with $\psi(y)$: no element $z \geq y$ of $G$ is in $R$. For $\tau$ compatible with $(\sigma, \bigcup \vec X)$, the class $\mathcal V^I_{\tau, \neg\psi(m)}$ contains every tuple $\vec Z$ such that $\bigcup \vec Z \cap R$ has an element larger than or equal to $\max(m, |\tau|)$. So $\mathcal A_{p, \varphi}$ contains $\mathcal U^I_S \cap \mathcal L_{\langle R \rangle_\nu}$, which is large, and $p \mathrel{?{\nvdash}} \varphi$. Similarly for "$G \setminus R$ is finite". Apply :ref{#lem-product-merging}.
-:::
-::::
 
 ## Notes and references
 
@@ -84,3 +82,49 @@ The merging lemma and the theorem follow the section *Product Mathias forcing* o
 - D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
 - B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics (2021); arXiv:1905.08427.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, sections *Product Mathias forcing* and *Pigeonhole principle*.
+
+:::::exercises
+::::exercise{#ex-merging-finitely-many difficulty=1 objective="Extend the merging lemma from two to finitely many negative answers."}
+Let $p = (\sigma, \vec X, S)$ be a condition with index set $I$, let $k \geq 1$, and let $\varphi_0, \dots, \varphi_{k-1}$ be $\Sigma^0_2$ sentences with $p \mathrel{?{\nvdash}} \varphi_a$ for every $a < k$. Show that some extension of $p$ with index set $I \cdot \{0, \dots, k-1\}$ and the same members as $p$ promises $\neg\varphi_a$ for every $a < k$.
+
+:::solution
+Let $\mathcal A_a = \mathcal A_{p, \varphi_a}$, a large class by hypothesis, contained in $\mathcal U^I_S \subseteq \mathcal L_{\vec X}$. Let $Y_{\nu a} = X_\nu$, and let $\mathcal C$ be the class of $(I \cdot \{0, \dots, k-1\})$-tuples $\vec Z$ with $\vec Z^{(a)} \in \mathcal A_a$ for every $a < k$. As in the proof of :ref{#lem-product-merging}, $\mathcal C = \mathcal U^{I \cdot \{0, \dots, k-1\}}_T$ for a $\Delta^0_2$ set $T$ obtained by reading each index of $\mathcal A_a$ on slice $a$; it is large, by choosing the function $j$ on each slice separately, and contained in $\mathcal L_{\vec Y}$. So $q = (\sigma, \vec Y, T)$ is a condition; it extends $p$, since its slices are in $\mathcal A_a \subseteq \mathcal U^I_S$, and it has the same members, since $\bigcup \vec Y = \bigcup \vec X$. Let $a < k$, $\tau$ compatible with $(\sigma, \bigcup \vec X)$, $m \in \nat$ and $\vec Z \in \mathcal C$. Then $\vec Z^{(a)} \in \mathcal A_a \subseteq \mathcal V^I_{\tau, \neg\psi_a(m)}$, so some string compatible with $(\tau, \bigcup \vec Z^{(a)})$ satisfies $\neg\psi_a(m)$, and $\bigcup \vec Z^{(a)} \subseteq \bigcup \vec Z$. So $q$ promises $\neg\varphi_a$.
+:::
+::::
+
+::::exercise{#ex-product-not-r-cohesive difficulty=1 objective="Start the construction of the theorem from a promise, to obtain a generic set that is not cohesive for a given computable set."}
+Let $R$ be a computable set, infinite and coinfinite. Show that the construction of :ref{#thm-product-mathias} can be carried out so that, in addition, $G \cap R$ and $G \setminus R$ are infinite. Why does the theorem already imply that $G$ is not cohesive for the family of all computable sets?
+
+:::solution
+For $p_0 = (\varepsilon, \langle \nat \rangle, S_\infty)$, the classes $\mathcal U_{S_\infty} \cap \mathcal L_R = \mathcal L_R$ and $\mathcal L_{\overline R}$ are large, since $R$ and $\overline R$ are infinite (:ref{#ex-product-large}). By :ref{#ex-promise-both-halves}, some extension $p'_0$ of $p_0$ promises "$G \cap R$ is infinite" and "$G \setminus R$ is infinite". Run the construction of the theorem from $p'_0$ instead of $p_0$; its proof uses no property of the first condition. Every later condition keeps both promises (:ref{#lem-product-promise}), and the tasks for these $\Pi^0_2$ sentences make $G$ satisfy each of their instances, so $G \cap R$ and $G \setminus R$ are infinite: $G$ is neither almost contained in $R$ nor in $\overline R$.
+
+Without this modification, $G$ is not cohesive for the computable sequence of :ref{#prop-coh-no-low}, since $G'$ is not PA relative to $\emptyset'$; this sequence consists of computable sets, so $G$ is not cohesive for the family of all computable sets either. The modification gives a specific $R$ on which $G$ splits.
+:::
+::::
+
+::::exercise{#ex-valid-sides-basic difficulty=1 objective="Check the basic properties of valid sides, and that both sides are valid at the start."}
+Consider a quadruple $(\sigma_0, \sigma_1, \vec X, S)$ as in the definition of valid sides, for a $\Delta^0_2$ set $A$ with $A_0 = A$ and $A_1 = \overline A$.
+
+1. Show that if side $i$ is valid, then $X_\nu \cap A_i$ is infinite for every $\nu \in I$, and $\langle X_\nu \cap A_i : \nu \in I \rangle \in \mathcal U^I_S$.
+2. Show that if $\mathcal U^I_S = \mathcal L_{\vec X}$, side $i$ is valid if and only if $X_\nu \cap A_i$ is infinite for every $\nu$. Deduce that for $(\varepsilon, \varepsilon, \langle \nat \rangle, S_\infty)$, both sides are valid when $A$ is infinite and coinfinite.
+
+:::solution
+1. A large class is non-empty, and a member of $\mathcal L_{\langle X_\nu \cap A_i \rangle}$ meets each $X_\nu \cap A_i$ infinitely often, so these sets are infinite. By the last statement of :ref{#lem-product-intersection}, applied to the upward closed class $\mathcal U^I_S$ and $\vec W = \langle X_\nu \cap A_i \rangle$, the tuple $\vec W$ is in $\mathcal U^I_S$.
+2. Since $X_\nu \cap A_i \subseteq X_\nu$, $\mathcal L_{\langle X_\nu \cap A_i \rangle} \subseteq \mathcal L_{\vec X}$, so $\mathcal U^I_S \cap \mathcal L_{\langle X_\nu \cap A_i \rangle} = \mathcal L_{\langle X_\nu \cap A_i \rangle}$. If all $X_\nu \cap A_i$ are infinite, this class is large by item 1 of :ref{#ex-product-large}; otherwise it is empty. For the initial quadruple, $\mathcal U_{S_\infty}$ is the class of infinite sets, which is $\mathcal L_{\nat}$, and $\nat \cap A_i = A_i$ is infinite for both $i$.
+:::
+::::
+
+::::exercise{#ex-thin-cohesive-jump-pa difficulty=3 objective="Apply product Mathias forcing and the cover lemma to build a thin cohesive set whose jump is not PA relative to $\emptyset'$." lessons="product-mathias, product-largeness"}
+For a function $f : \nat \to \nat$, a set $C$ is **$f$-thin** if $f[C] \neq \nat$, that is, $f$ omits some value on $C$. Let $f_0, f_1, \dots$ be a uniformly computable sequence of functions $\nat \to \nat$. Show that there is an infinite set $G$ such that $G'$ is not PA relative to $\emptyset'$ and, for every $n$, some cofinite subset $G \setminus \{0, \dots, k - 1\}$ of $G$ is $f_n$-thin.
+
+:::solution
+We add to the construction of :ref{#thm-product-mathias} a task for each $n$, and show that it can be carried out below every condition. The other tasks still occur infinitely often, so the proof of the theorem applies unchanged and $G'$ is not PA relative to $\emptyset'$.
+
+Let $p = (\sigma, \vec X, S)$ be the current condition, with index set $I$, and $N = |I|$. Let $Y_t = f_n^{-1}(\{t\})$ for $t \leq N$ and $Y_{N+1} = \{ x : f_n(x) > N \}$, an $(N + 2)$-partition of $\nat$ into computable sets, which are in $\mathcal M$. The class $\mathcal U^I_S$ is large and non-trivial, so by :ref{#lem-product-cover} there is $j : I \to N + 2$ such that $\mathcal U^I_S \cap \mathcal L_{\vec Y_j}$ is large. The function $j$ takes at most $N$ values, so some $t \leq N$ is not a value of $j$. Let $W_\nu = X_\nu \cap Y_{j(\nu)}$, a member of $\mathcal M$. Since $\mathcal U^I_S \subseteq \mathcal L_{\vec X}$, :ref{#lem-product-intersection} makes $\mathcal U^I_S \cap \mathcal L_{\vec W}$ large. This class is $\mathcal U^I_T$ with $T = S \cup E$, where $E$ is a computable set of indices of the classes $\{ \vec Z : |Z_\nu \cap W_\nu| \geq m \}$; so $T$ is $\Delta^0_2$. Then $q = (\sigma, \vec W, T)$ is a condition: $\min W_\nu \geq \min X_\nu \geq |\sigma|$, and $\mathcal U^I_T$ is a large subclass of $\mathcal L_{\vec W}$. It extends $p$ with $K = \{\varepsilon\}$, since $W_\nu \subseteq X_\nu$ and $\mathcal U^I_T \subseteq \mathcal U^I_S$.
+
+Every member of $q$ has its elements larger than or equal to $|\sigma|$ in $\bigcup \vec W \subseteq \bigcup_\nu Y_{j(\nu)}$, on which $f_n$ never takes the value $t$. The set $G$ built by the construction is a member of every condition of the sequence, $q$ among them (:ref{#ex-product-members}); so $f_n$ omits $t$ on $G \setminus \{0, \dots, |\sigma| - 1\}$.
+
+Adapted from an exercise of the section *Product Mathias forcing* of the chapter *Jump compactness avoidance* of Patey's monograph.
+:::
+::::
+:::::

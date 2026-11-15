@@ -95,7 +95,7 @@ Why are the clopen approximations $\mathcal S_{n,s}$ used, rather than the class
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-solovay-runs difficulty=1 objective="Use a Solovay test to bound the length of the runs of zeros of a random sequence."}
 Let $X$ be Martin-Löf random, and let $f$ be a computable function such that $\sum_n 2^{-f(n)} < \infty$. Show that for almost every $n$, the bits $X(n), X(n+1), \dots, X(n + f(n) - 1)$ are not all $0$. Deduce that a random sequence has no run of zeros of length $2 \log n$ starting at a position $n$, for almost every $n$, where $\log$ is the logarithm in base $2$.
 
 :::solution
@@ -103,11 +103,11 @@ Let $\mathcal S_n$ be the clopen class of the sequences $Y$ with $Y(n + i) = 0$ 
 :::
 ::::
 
-::::exercise{#ex-kurtz difficulty=2}
+::::exercise{#ex-kurtz difficulty=2 objective="Compare Martin-Löf randomness, Kurtz randomness and weak 1-genericity."}
 A sequence $G$ is **weakly 1-generic** if it meets every dense c.e. set of strings $W$: some prefix of $G$ belongs to $W$. A sequence is **Kurtz random** if it belongs to no null $\Pi^0_1$ class. Show that every Martin-Löf random sequence is Kurtz random, that every weakly 1-generic sequence is Kurtz random, and that no weakly 1-generic sequence is Martin-Löf random.
 
 :::solution
-A null $\Pi^0_1$ class $\mathcal P$ is covered by clopen classes $[F_n]^{\prec}$ of measure at most $2^{-n}$, computable from $n$ (second exercise of :ref{to="martin-lof-randomness/measure"}); this is a Martin-Löf test, so random sequences avoid $\mathcal P$.
+A null $\Pi^0_1$ class $\mathcal P$ is covered by clopen classes $[F_n]^{\prec}$ of measure at most $2^{-n}$, computable from $n$ (:ref{#ex-null-pi01-cover}); this is a Martin-Löf test, so random sequences avoid $\mathcal P$.
 
 Let $\mathcal P = [T]$ be null, with $T$ computable. The set $W$ of strings not in $T$ is computable. It is dense: if some $\sigma$ had all its extensions in $T$, then $[\sigma] \subseteq \mathcal P$ and $\lambda(\mathcal P) \geq 2^{-|\sigma|}$. A weakly 1-generic $G$ has a prefix outside $T$, so $G \notin \mathcal P$.
 
@@ -126,3 +126,57 @@ The law of large numbers for random sequences is the example that motivated Mart
 - S. A. Kurtz, *Randomness and genericity in the degrees of unsolvability*, PhD thesis, University of Illinois at Urbana–Champaign, 1981.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 6.2 and 7.2.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 3.2 and 3.5.
+
+:::::exercises
+::::exercise{#ex-fourth-moment difficulty=2 objective="Prove the law of large numbers with an elementary moment bound and a Solovay test, without Hoeffding's inequality."}
+For a string $\sigma$ of length $m \geq 1$, let $S(\sigma) = \sum_{i < m} (2\sigma(i) - 1)$, the number of ones minus the number of zeros.
+
+1. Show that $\sum_{|\sigma| = m} S(\sigma)^4 = 2^m (3m^2 - 2m)$.
+2. Deduce that for $\varepsilon > 0$, the number of strings $\sigma$ of length $m$ whose frequency of ones differs from $\frac12$ by more than $\varepsilon$ is less than $2^m \cdot 3 / (16 \varepsilon^4 m^2)$.
+3. Deduce :ref{#prop-large-numbers} from :ref{#thm-solovay}.
+
+:::solution
+1. Write $y_i(\sigma) = 2\sigma(i) - 1 \in \{ -1, 1 \}$, so that $S(\sigma)^4 = \sum_{i, j, k, l < m} y_i(\sigma) y_j(\sigma) y_k(\sigma) y_l(\sigma)$. Fix a quadruple $(i, j, k, l)$. If some index $a$ occurs an odd number of times in it, the map that flips the bit $a$ is a bijection of $2^m$ that changes the sign of the product, so the sum of the product over $\sigma \in 2^m$ is $0$. Otherwise each index occurs an even number of times, the product is $1$, and the sum is $2^m$. The quadruples of the second kind are those with four equal indices ($m$ of them) and those with two distinct indices occurring twice each: there are $3$ ways to split the four places into two pairs and $m(m-1)$ ordered choices of two distinct indices, giving $3m(m-1)$. The total is $2^m (m + 3m(m-1)) = 2^m(3m^2 - 2m)$.
+2. The number of ones in $\sigma$ is $(S(\sigma) + m)/2$, so its frequency differs from $\frac12$ by $|S(\sigma)|/(2m)$. If this exceeds $\varepsilon$, then $S(\sigma)^4 > 16 \varepsilon^4 m^4$. If $N$ strings have this property, then $16 \varepsilon^4 m^4 N < 2^m(3m^2 - 2m) \leq 3 m^2 2^m$ when $N > 0$, and the bound follows.
+3. Fix a rational $\varepsilon > 0$, let $C_m$ be the computable set of the strings of length $m$ whose frequency of ones differs from $\frac12$ by more than $\varepsilon$, and $\mathcal S_m = [C_m]^{\prec}$. Then $\lambda(\mathcal S_m) = 2^{-m}|C_m| \leq 3/(16\varepsilon^4 m^2)$, which is summable, so $(\mathcal S_m)$ is a Solovay test. A random $X$ belongs to finitely many $\mathcal S_m$, by :ref{#thm-solovay}: for almost every $m$, the frequency of ones in $X \uh m$ is within $\varepsilon$ of $\frac12$.
+
+Compare Nies 2009, Exercise 3.2.26, which asks for a proof of the law of large numbers with Solovay tests.
+:::
+::::
+
+::::exercise{#ex-solovay-strings difficulty=1 objective="Reduce Solovay tests to lists of strings with summable weights."}
+Show that a sequence $X$ is Martin-Löf random if and only if, for every c.e. set $W \subseteq \nat \times \bstr$ with $\sum_{(i, \sigma) \in W} 2^{-|\sigma|} < \infty$, there are only finitely many pairs $(i, \sigma) \in W$ with $\sigma \prec X$. (The first coordinate allows a string to be listed several times.)
+
+:::solution
+($\Rightarrow$) Let $X$ be random and $W$ as in the statement. Fix an enumeration of $W$ without repetitions, and let $\mathcal S_j = [\sigma_j]$ if the $j$-th pair $(i_j, \sigma_j)$ is enumerated, and $\mathcal S_j = \emptyset$ if $W$ has at most $j$ elements. The sequence $(\mathcal S_j)$ is uniformly $\Sigma^0_1$, and $\sum_j \lambda(\mathcal S_j) = \sum_{(i, \sigma) \in W} 2^{-|\sigma|} < \infty$. By :ref{#thm-solovay}, $X$ belongs to finitely many $\mathcal S_j$, that is, $\sigma \prec X$ for finitely many pairs $(i, \sigma) \in W$.
+
+($\Leftarrow$) Suppose that $X$ is not random. By :ref{#thm-solovay}, it is captured by a Solovay test $(\mathcal S_n)$. By :ref{#lem-prefix-free-generator}, applied uniformly in $n$, there are c.e. prefix-free sets $W_n$, uniformly in $n$, with $\mathcal S_n = [W_n]^{\prec}$. Let $W = \{ (n, \sigma) : \sigma \in W_n \}$; it is c.e., and its weight is $\sum_n \lambda(\mathcal S_n) < \infty$. For each of the infinitely many $n$ with $X \in \mathcal S_n$, some $\sigma \in W_n$ is a prefix of $X$, and these pairs $(n, \sigma)$ are distinct.
+:::
+::::
+
+::::exercise{#ex-many-intersections difficulty=2 objective="Apply the counting argument of Solovay's theorem to finitely many classes of large measure."}
+Let $\mathcal C_1, \dots, \mathcal C_N$ be Borel classes with $\lambda(\mathcal C_i) \geq \varepsilon$ for every $i$, and let $k \in \nat$ with $N \varepsilon > k$. Show that there is a set $F \subseteq \{ 1, \dots, N \}$ with $k + 1$ elements such that $\lambda(\bigcap_{i \in F} \mathcal C_i) > 0$. For instance, among five classes of measure at least $\frac12$, three have an intersection of positive measure.
+
+:::solution
+For $G \subseteq \{ 1, \dots, N \}$, let $\mathcal A_G$ be the class of the sequences that belong to $\mathcal C_i$ exactly for $i \in G$. The $2^N$ classes $\mathcal A_G$ are Borel, pairwise disjoint, with union $\cs$, so $\sum_G \lambda(\mathcal A_G) = 1$. Each $\mathcal C_i$ is the disjoint union of the classes $\mathcal A_G$ with $i \in G$, so, counting the pairs $(i, G)$ with $i \in G$ in two ways,
+$$
+\sum_{i = 1}^N \lambda(\mathcal C_i) = \sum_G |G|\, \lambda(\mathcal A_G).
+$$
+If $\lambda(\mathcal A_G) = 0$ for every $G$ with $|G| \geq k + 1$, the right-hand side is at most $k \sum_G \lambda(\mathcal A_G) = k$, whereas the left-hand side is at least $N\varepsilon > k$. So some $G$ with at least $k + 1$ elements has $\lambda(\mathcal A_G) > 0$. Any $F \subseteq G$ with $k + 1$ elements works, since $\mathcal A_G \subseteq \bigcap_{i \in F} \mathcal C_i$. In the example, $N = 5$, $\varepsilon = \frac12$ and $k = 2$.
+
+This is the counting step of :ref{#thm-solovay}, or Markov's inequality, for the number of classes containing a sequence. Adapted from Nies 2009, Exercise 1.9.15.
+:::
+::::
+
+::::exercise{#ex-normal-offsets difficulty=1 objective="Complete the passage from block frequencies to the frequency of occurrences at all positions in the proof of normality."}
+Let $X$ be a sequence and $\tau$ a string of length $k \geq 1$. For $r < k$ and $N \in \nat$, let $a_r(N)$ be the number of $i < N$ such that $X(ik + r) \cdots X(ik + r + k - 1) = \tau$, and suppose that $a_r(N)/N$ tends to $2^{-k}$ for every $r < k$. Let $b(m)$ be the number of positions $j < m$ such that $X(j) \cdots X(j + k - 1) = \tau$. Show that $b(m)/m$ tends to $2^{-k}$.
+
+:::solution
+Every $j$ is written uniquely as $j = ik + r$ with $r < k$. For $m > r$, the number of $i$ with $ik + r < m$ is $N_r(m) = \lceil (m - r)/k \rceil$, so
+$$
+b(m) = \sum_{r < k} a_r(N_r(m)), \qquad \frac{b(m)}{m} = \sum_{r < k} \frac{a_r(N_r(m))}{N_r(m)} \cdot \frac{N_r(m)}{m}
+$$
+for $m \geq k$. Since $m/k - 1 \leq N_r(m) \leq m/k + 1$, $N_r(m)$ tends to infinity and $N_r(m)/m$ tends to $1/k$. So each of the $k$ terms tends to $2^{-k}/k$, and $b(m)/m$ tends to $2^{-k}$.
+:::
+::::
+:::::

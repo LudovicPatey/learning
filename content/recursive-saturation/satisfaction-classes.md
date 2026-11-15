@@ -100,7 +100,15 @@ Every countable recursively saturated model of $\mathrm I\Sigma_1$ has a full sa
 
 Compactness and the locality of the clauses give satisfaction classes in extensions; resplendence turns consistency into existence. The chain and the last step work for every resplendent model of $\mathrm I\Sigma_1$, countable or not. Countability is used only through :ref{#thm-barwise-ressayre}, and cannot be dropped: Smith (1989) gives uncountable recursively saturated models of $\mathrm{PA}$ without full satisfaction classes, which are therefore not resplendent, and Lachlan (1981) an uncountable model of $\mathrm{PA}$ with a full satisfaction class that is not resplendent (both as reported in Wong's Lecture 14).
 
-Full satisfaction classes can be far from truth on non-standard formulas. Let $\delta_1$ be $0 \neq 0$ and $\delta_{m+1}$ be $0 \neq 0 \vee \delta_m$, defined in $M$ for every $m$ by a primitive recursive function. The exercise below shows that some full satisfaction class makes $\delta_a$ true for a non-standard $a$, although each of its disjuncts is false: the clause for $\vee$ only unravels standardly many disjuncts.
+Full satisfaction classes can be far from truth on non-standard formulas. Let $\delta_1$ be $0 \neq 0$ and $\delta_{m+1}$ be $0 \neq 0 \vee \delta_m$, defined in $M$ for every $m$ by a primitive recursive function. :ref{#ex-sat-delta} shows that some full satisfaction class makes $\delta_a$ true for a non-standard $a$, although each of its disjuncts is false: the clause for $\vee$ only unravels standardly many disjuncts.
+
+::::exercise{#ex-sat-delta difficulty=3 objective="Change the default values in the proof of the theorem of Enayat and Visser to make a false non-standard disjunction true."}
+Let $M$ be a countable recursively saturated model of $\mathrm I\Sigma_1$, $a \in M$ non-standard, and $\delta_a$ as above. Show that $M$ has a full satisfaction class $S$ with $S(\delta_a, 0)$: the sentence $\delta_a$ is true for $S$.
+
+:::solution
+In the proof of :ref{#thm-enayat-visser} with $F_0$ the standard formulas and $S_0$ satisfaction in $M$ for them, add to $T$ the sentence $U_{\delta_a}(0)$. In a finite part, put $U_{\delta_m} = M$ for every non-standard $m$ with $\delta_m$ of rank $0$, instead of $\emptyset$ (these formulas are neither atomic nor in $F_0$). By induction on the rank, $U_{\delta_m} = M$ for every non-standard $m$ with $\delta_m \in \Theta$: at positive rank, $\delta_m = (0 \neq 0) \vee \delta_{m-1}$ and $U_{\delta_m} = U_{0 \neq 0} \cup U_{\delta_{m-1}} = U_{\delta_{m-1}}$, with $m - 1$ non-standard. The standard $\delta_m$ are in $F_0$ and handled by $S_0$. So the extended theory is consistent, and $K$ carries a $\mathrm{Form}^M$-class $S_1$ with $S_1(\delta_a, 0)$. Run the chain of :ref{#thm-kkl} from $(M_1, S_1) = (K, S_1)$; since $0 \in M$, the agreement conditions keep $(\delta_a, 0)$ in $S_\omega$, so $\tau(S) \wedge S(\delta_a, 0)$ is consistent with $\mathrm{ElemDiag}(M)$, and resplendence gives the class on $M$.
+:::
+::::
 
 :::corollary{#cor-ct-conservative}
 $\mathrm{CT}^-$ is conservative over $\mathrm{PA}$: every $\mathcal L_A$-sentence provable in $\mathrm{CT}^-$ is provable in $\mathrm{PA}$.
@@ -111,16 +119,6 @@ Suppose $\mathrm{PA} \nvdash \sigma$. Then $\mathrm{PA} + \neg \sigma$ has a cou
 :::
 
 Induction for formulas mentioning $S$ changes this (Kotlarski, 1986): adding to $\mathrm{CT}^-$ induction for bounded formulas of $\mathcal L_A \cup \{ S \}$ gives a theory that proves $\mathrm{Con}(\mathrm{PA})$, as recalled in the next lesson.
-
-## Exercises
-
-::::exercise{difficulty=3}
-Let $M$ be a countable recursively saturated model of $\mathrm I\Sigma_1$, $a \in M$ non-standard, and $\delta_a$ as above. Show that $M$ has a full satisfaction class $S$ with $S(\delta_a, 0)$: the sentence $\delta_a$ is true for $S$.
-
-:::solution
-In the proof of :ref{#thm-enayat-visser} with $F_0$ the standard formulas and $S_0$ satisfaction in $M$ for them, add to $T$ the sentence $U_{\delta_a}(0)$. In a finite part, put $U_{\delta_m} = M$ for every non-standard $m$ with $\delta_m$ of rank $0$, instead of $\emptyset$ (these formulas are neither atomic nor in $F_0$). By induction on the rank, $U_{\delta_m} = M$ for every non-standard $m$ with $\delta_m \in \Theta$: at positive rank, $\delta_m = (0 \neq 0) \vee \delta_{m-1}$ and $U_{\delta_m} = U_{0 \neq 0} \cup U_{\delta_{m-1}} = U_{\delta_{m-1}}$, with $m - 1$ non-standard. The standard $\delta_m$ are in $F_0$ and handled by $S_0$. So the extended theory is consistent, and $K$ carries a $\mathrm{Form}^M$-class $S_1$ with $S_1(\delta_a, 0)$. Run the chain of :ref{#thm-kkl} from $(M_1, S_1) = (K, S_1)$; since $0 \in M$, the agreement conditions keep $(\delta_a, 0)$ in $S_\omega$, so $\tau(S) \wedge S(\delta_a, 0)$ is consistent with $\mathrm{ElemDiag}(M)$, and resplendence gives the class on $M$.
-:::
-::::
 
 ## Notes and references
 
@@ -135,3 +133,43 @@ Satisfaction classes for non-standard formulas were introduced by Krajewski (197
 - S. T. Smith, *Nonstandard definability*, Annals of Pure and Applied Logic 42 (1989), 21–43.
 - C. Cieśliński, *The Epistemic Lightness of Truth: Deflationism and its Logic*, Cambridge University Press, 2017.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 14.
+
+:::::exercises
+::::exercise{#ex-sat-closure-needed difficulty=1 objective="See why the theorem of Enayat and Visser needs a set of formulas closed under direct subformulas, with a counterexample."}
+Let $M$ be a model of $\mathrm I\Sigma_1$, $\theta$ the standard sentence $(0 = 0) \wedge (0 = 0)$, $F_0 = \{ \theta \}$ and $S_0 = \emptyset$. Show that there are no $K \succcurlyeq M$ and $S$ as in the conclusion of :ref{#thm-enayat-visser} with $S \cap (F_0 \times M) = S_0$. Which hypothesis of the theorem fails?
+
+:::solution
+Suppose $K$ and $S$ exist. The atomic clause for $0 = 0$ gives $S(\ulcorner 0 = 0 \urcorner, e)$ for every assignment $e$, since $\mathrm{Val}(\ulcorner 0 \urcorner, e) = 0$ on both sides, and the clause for $\wedge$ gives $S(\theta, e)$. With $e = 0 \in M$, $(\theta, 0) \in S \cap (F_0 \times M)$, which is not empty. The hypothesis that fails is that $F_0$ is closed under direct subformulas: $0 = 0$ is a direct subformula of $\theta$ not in $F_0$. The clause of $\theta$ is then not a condition on $S_0$ alone, and $S_0$ is not an $F_0$-satisfaction class in the sense of :ref{#def-sat-class}.
+:::
+::::
+
+::::exercise{#ex-ct-reflection difficulty=1 objective="Combine Tarski's atomic clause with conservativity to show that a full satisfaction class need not make all theorems of PA true."}
+Let $\mathrm{Prov}_{\mathrm{PA}}(x)$ be a $\Sigma_1$ formula expressing provability in $\mathrm{PA}$, $\mathrm{Con}(\mathrm{PA})$ the sentence $\neg \mathrm{Prov}_{\mathrm{PA}}(\ulcorner 0 = 1 \urcorner)$, and $\mathrm{GR}$ the sentence $\forall x\ \big( \mathrm{Prov}_{\mathrm{PA}}(x) \rightarrow S(x, 0) \big)$ of $\mathcal L_A \cup \{ S \}$, which says that every theorem of $\mathrm{PA}$ is true for $S$. Show that $\mathrm{CT}^- + \mathrm{GR}$ proves $\mathrm{Con}(\mathrm{PA})$, and deduce that $\mathrm{CT}^-$ does not prove $\mathrm{GR}$.
+
+:::solution
+Let $(M, S) \models \mathrm{CT}^- + \mathrm{GR}$. By the atomic clause, $S(\ulcorner 0 = 1 \urcorner, 0)$ holds if and only if $\mathrm{Val}(\ulcorner 0 \urcorner, 0) = \mathrm{Val}(\ulcorner 1 \urcorner, 0)$, that is $0 = 1$, by the characterization of $\mathrm{Val}$ (:ref{#fact-syntax}); so it fails. By $\mathrm{GR}$, $M \models \neg \mathrm{Prov}_{\mathrm{PA}}(\ulcorner 0 = 1 \urcorner)$. By completeness, $\mathrm{CT}^- + \mathrm{GR} \vdash \mathrm{Con}(\mathrm{PA})$.
+
+If $\mathrm{CT}^- \vdash \mathrm{GR}$, then $\mathrm{CT}^- \vdash \mathrm{Con}(\mathrm{PA})$, and $\mathrm{PA} \vdash \mathrm{Con}(\mathrm{PA})$ by :ref{#cor-ct-conservative}, which contradicts Gödel's second incompleteness theorem. In a model $(M, S)$ of $\mathrm{CT}^- + \neg \mathrm{Con}(\mathrm{PA})$, the sentence $0 = 1$, standard and false for $S$, has a proof in the sense of $M$, necessarily non-standard.
+:::
+::::
+
+::::exercise{#ex-sat-delta0-not-unique difficulty=2 objective="Compare a full satisfaction class with the bounded truth definition on non-standard bounded formulas." lessons="truth-and-provability/bounded-satisfaction"}
+Let $M$ be a countable recursively saturated model of $\mathrm I\Sigma_1$, $a \in M$ non-standard, and $S$ a full satisfaction class with $S(\delta_a, 0)$, given by :ref{#ex-sat-delta}. Let $F = (\Delta^*_0)^M$. Show that $S \cap (F \times M)$ is an $F$-satisfaction class different from the one defined by $\mathrm{Sat}_0$ (:ref{#ex-sat-classes}, item 3). So, unlike the standard formulas (item 2), the set $F$ has several $F$-satisfaction classes.
+
+:::solution
+The set $F$ is closed under direct subformulas, by the recursive characterization of $\Delta^*_0$ (:ref{#fact-syntax}). For $\theta \in F$, the clause of $\theta$ only involves its direct subformulas, which are in $F$, and the same assignments; so $S \cap (F \times M)$ satisfies the clauses of :ref{#def-sat-class} for every $\theta \in F$, and is an $F$-satisfaction class.
+
+Let $d$ be the primitive recursive function with $d(1) = \ulcorner 0 \neq 0 \urcorner$ and $d(m + 1) = \ulcorner 0 \neq 0 \vee d(m) \urcorner$, and $d(0) = d(1)$, so that $\delta_m = d(m)$ in $M$, by :ref{#thm-pr-provably-total}. The formula $d(m) \in \Delta^*_0 \wedge \neg \mathrm{Sat}_0(d(m), 0)$ is $\Delta_1$ in $\mathrm I\Sigma_1$ (:ref{#fact-syntax}, :ref{#thm-sat0}), and we prove it for all $m \geq 1$ by induction in $M$. The formula $0 \neq 0$, that is $\neg (0 = 0)$, is in $\Delta^*_0$, and $\mathrm{Sat}_0(\ulcorner \neg(0 = 0) \urcorner, 0) \leftrightarrow \neg \mathrm{Sat}_0(\ulcorner 0 = 0 \urcorner, 0)$, which is false by the atomic condition. If the formula holds at $m$, then $d(m + 1) \in \Delta^*_0$, and the condition for $\vee$ gives $\mathrm{Sat}_0(d(m + 1), 0) \leftrightarrow \mathrm{Sat}_0(\ulcorner 0 \neq 0 \urcorner, 0) \vee \mathrm{Sat}_0(d(m), 0)$, false. So $M \models \neg \mathrm{Sat}_0(\delta_a, 0)$, while $S(\delta_a, 0)$; the two classes differ at $(\delta_a, 0)$. The method is that of :ref{#ex-tp-sat0-nonstandard}.
+:::
+::::
+
+::::exercise{#ex-ct-conservative-direct difficulty=2 objective="Extract from the proof of the theorem of Kotlarski, Krajewski and Lachlan a proof of conservativity that uses neither recursive saturation nor resplendence."}
+Show that every model $M$ of $\mathrm I\Sigma_1$, of any cardinality, has an elementary extension with a full satisfaction class. Deduce :ref{#cor-ct-conservative} without :ref{#thm-rs-existence} and :ref{#thm-barwise-ressayre}.
+
+:::solution
+The chain in the proof of :ref{#thm-kkl} uses only :ref{#thm-enayat-visser}, which holds for every model of $\mathrm I\Sigma_1$, and unions of elementary chains. Starting from $M$, it gives $M \preccurlyeq M_\omega$ and a full satisfaction class $S_\omega$ for $M_\omega$, as shown in the paragraph "The union" of that proof; countability and recursive saturation are used only in the last step, which brings the class back to $M$.
+
+Suppose $\mathrm{PA} \nvdash \sigma$, and let $M \models \mathrm{PA} + \neg \sigma$. Then $M_\omega \models \mathrm{PA} + \neg \sigma$, since $M \preccurlyeq M_\omega$, and $(M_\omega, S_\omega) \models \mathrm{CT}^- + \neg \sigma$. So $\mathrm{CT}^- \nvdash \sigma$.
+:::
+::::
+:::::

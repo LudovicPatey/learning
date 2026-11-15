@@ -64,7 +64,7 @@ Let $\vec R$ be a computable sequence.
 
 :::proof{of=cor-coh-bounds}
 1. A set PA relative to $\emptyset'$ computes a member of every non-empty $\Pi^0_1(\emptyset')$ class (:ref{#thm-pa-characterization}, relativized). Apply :ref{#prop-coh-decisions}. The set $\emptyset'' = (\emptyset')'$ is PA relative to $\emptyset'$.
-2. $P$ computes $\emptyset'$ (second exercise of :ref{to="pi01-classes/pa-degrees"}). By Friedberg's jump inversion theorem (admitted in :ref{to="turing-degrees/low-and-high"}), there is $X$ with $X' \equiv_T P$. By (1), $X$ computes a cohesive set $C$, and $C' \leq_T X' \equiv_T P$. By the low basis theorem relativized to $\emptyset'$, $P$ can be chosen with $P' \leq_T \emptyset''$; then $C'' \leq_T P' \leq_T \emptyset''$.
+2. $P$ computes $\emptyset'$ (:ref{#ex-pa-relative}). By Friedberg's jump inversion theorem (admitted in :ref{to="turing-degrees/low-and-high"}), there is $X$ with $X' \equiv_T P$. By (1), $X$ computes a cohesive set $C$, and $C' \leq_T X' \equiv_T P$. By the low basis theorem relativized to $\emptyset'$, $P$ can be chosen with $P' \leq_T \emptyset''$; then $C'' \leq_T P' \leq_T \emptyset''$.
 :::
 
 The converse of (1) also holds: every non-empty $\Pi^0_1(\emptyset')$ class is $\mathcal C(\vec R)$ for some computable sequence $\vec R$ (Brattka and Rakotoniaina; Patey), so a set computes a cohesive set for every computable sequence if and only if its jump is PA relative to $\emptyset'$ (Jockusch and Stephan). We admit it. The next proposition proves the special case that matters for reverse mathematics.
@@ -103,17 +103,7 @@ In the proof of :ref{#prop-coh-no-low}, what would go wrong if $R_e$ were define
   Every sequence has cohesive sets (:ref{#prop-cohesive-exists}).
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that every infinite subset of an $\vec R$-cohesive set is $\vec R$-cohesive, and that a set is r-cohesive if and only if it is cohesive for the sequence of all computable sets $(\Phi_e)$, where $\Phi_e$ is replaced by $\emptyset$ when it is not the characteristic function of a set.
-
-:::solution
-If $C \subseteq^* R_i$ and $D \subseteq C$, then $D \setminus R_i \subseteq C \setminus R_i$ is finite. The second statement is the definition: the sequence lists every computable set, together with copies of $\emptyset$, for which cohesiveness is automatic since $C \subseteq \overline{\emptyset}$.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-high-computes-cohesive difficulty=1 objective="Apply the characterization by decisions to show that high sets compute cohesive sets."}
 A set $X$ is **high** if $\emptyset'' \leq_T X'$. Show that every high set computes a cohesive set for every computable sequence.
 
 :::solution
@@ -133,3 +123,85 @@ Cohesive sets were studied by Jockusch and Stephan (1993), who proved :ref{#prop
 - L. Patey, *The weakness of being cohesive, thin or free in reverse mathematics*, Israel Journal of Mathematics 216 (2016), 905–955.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022.
+
+:::::exercises
+::::exercise{#ex-cohesive-subsets difficulty=1 objective="Check two closure properties of cohesiveness from the definition."}
+Show that every infinite subset of an $\vec R$-cohesive set is $\vec R$-cohesive, and that a set is r-cohesive if and only if it is cohesive for the sequence of all computable sets $(\Phi_e)$, where $\Phi_e$ is replaced by $\emptyset$ when it is not the characteristic function of a set.
+
+:::solution
+If $C \subseteq^* R_i$ and $D \subseteq C$, then $D \setminus R_i \subseteq C \setminus R_i$ is finite. The second statement is the definition: the sequence lists every computable set, together with copies of $\emptyset$, for which cohesiveness is automatic since $C \subseteq \overline{\emptyset}$.
+:::
+::::
+
+::::exercise{#ex-cohesive-divisibility difficulty=1 objective="Recognize cohesive sets for a concrete sequence and compute their decisions."}
+Let $R_i = \{ x : i + 1 \text{ divides } x \}$.
+
+1. Show that $\{ k! : k \geq 1 \}$ and the set of prime numbers are $\vec R$-cohesive, and compute, for each of them, the sequence $P$ with $P(i) = 1$ if the set is almost contained in $R_i$ and $P(i) = 0$ otherwise.
+2. Show that the set of odd numbers is not $\vec R$-cohesive.
+
+:::solution
+1. For $k \geq i + 1$, $i + 1$ divides $k!$, so $\{ k! : k \geq 1 \} \subseteq^* R_i$ for every $i$, and $P = 111\cdots$. The set is infinite, since $k! < (k+1)!$ for $k \geq 1$. Every prime belongs to $R_0 = \nat$. For $i \geq 1$, a prime $p$ belongs to $R_i$ only if $p = i + 1$, so the primes are almost contained in $\overline{R_i}$, and $P = 1000\cdots$.
+2. The odd multiples of $3$ ($3, 9, 15, \dots$) and the odd numbers not divisible by $3$ ($1, 5, 7, \dots$) are both infinite, so $R_2$ splits the odd numbers into two infinite parts.
+:::
+::::
+
+::::exercise{#ex-decision-class-pi01 difficulty=1 objective="Complete the step showing that the class of decisions of a computable sequence is $\Pi^0_1(\emptyset')$."}
+Let $\vec R$ be a computable sequence. Show that $P \in \mathcal C(\vec R)$ if and only if $R^{P \uh n}$ has at least $n$ elements for every $n$, and deduce that $\mathcal C(\vec R)$ is a $\Pi^0_1(\emptyset')$ class.
+
+:::solution
+If every $R^{P \uh n}$ is infinite, each has at least $n$ elements. Conversely, suppose that $R^{P \uh n}$ is finite for some $n$, with $N$ elements. For $m \geq \max(n, N + 1)$, $R^{P \uh m} \subseteq R^{P \uh n}$ has at most $N < m$ elements. So the condition fails for $m$.
+
+The sets $R^\sigma$ are computable, uniformly in $\sigma$, so "$R^\sigma$ has at least $n$ elements" is a $\Sigma^0_1$ property of $(\sigma, n)$, decided by $\emptyset'$. The tree $T = \{ \sigma : R^{\sigma \uh n} \text{ has at least } n \text{ elements for every } n \leq |\sigma| \}$ is therefore $\emptyset'$-computable, and $\mathcal C(\vec R)$ is the class of its paths.
+:::
+::::
+
+::::exercise{#ex-decision-class-singleton difficulty=1 objective="Compute the class of decisions of a sequence that approximates the halting set."}
+Let $R_i = \{ s : i \in \emptyset'_s \}$, where $(\emptyset'_s)$ is the usual increasing approximation of $\emptyset'$. Show that $\mathcal C(\vec R) = \{ \emptyset' \}$ and that every infinite set is $\vec R$-cohesive. Check that this agrees with :ref{#prop-coh-decisions}.
+
+:::solution
+If $i \in \emptyset'$, then $i \in \emptyset'_s$ for all large $s$, and $R_i$ is cofinite; otherwise $R_i = \emptyset$. Let $P \in \mathcal C(\vec R)$. If $P(i) = 1$ and $i \notin \emptyset'$, then $R^{P \uh (i + 1)} \subseteq R_i = \emptyset$; if $P(i) = 0$ and $i \in \emptyset'$, then $R^{P \uh (i + 1)} \subseteq \overline{R_i}$, which is finite. Both contradict $P \in \mathcal C(\vec R)$, so $P = \emptyset'$. Conversely, $R^{\emptyset' \uh n}$ is the intersection of finitely many cofinite sets and complements of the empty set, so it is cofinite, and $\emptyset' \in \mathcal C(\vec R)$.
+
+Every $R_i$ is finite or cofinite, so every infinite set is cohesive (:ref{#ex-cohesive}). Accordingly, :ref{#prop-coh-decisions} says that a set $X$ computes a cohesive set if and only if $X'$ computes $\emptyset'$, which holds for every $X$.
+:::
+::::
+
+::::exercise{#ex-coh-all-sequences difficulty=2 objective="Derive the degrees that compute cohesive sets for all computable sequences, and see that cohesiveness never forces highness."}
+1. Show that a set $X$ computes a cohesive set for every computable sequence if and only if $X'$ is PA relative to $\emptyset'$.
+2. Show that every computable sequence has a cohesive set that is not high, that is, whose jump does not compute $\emptyset''$.
+
+:::solution
+1. If $X'$ is PA relative to $\emptyset'$, $X$ computes a cohesive set for every computable sequence by :ref{#cor-coh-bounds} (1). Conversely, let $\vec R$ be the sequence of :ref{#prop-coh-no-low}, and $C \leq_T X$ an $\vec R$-cohesive set. Then $C' \leq_T X'$, and $C'$ computes a $\{0, 1\}$-valued function DNC relative to $\emptyset'$, so $X'$ does too: $X'$ is PA relative to $\emptyset'$.
+2. By :ref{#cor-coh-bounds} (2), there is a cohesive set $C$ with $C'' \leq_T \emptyset''$. If $\emptyset'' \leq_T C'$, then $\emptyset''' \leq_T C'' \leq_T \emptyset''$, by monotonicity of the jump, which is impossible.
+
+Item 1 does not need the admitted converse of :ref{#cor-coh-bounds} (1), which concerns a single sequence; it uses only the particular sequence of :ref{#prop-coh-no-low}.
+:::
+::::
+
+::::exercise{#ex-cohesive-union difficulty=1 objective="Relate the union of two cohesive sets to their sequences of decisions."}
+For an $\vec R$-cohesive set $C$, let $P_C(i) = 1$ if $C \subseteq^* R_i$ and $P_C(i) = 0$ otherwise. Show that for $\vec R$-cohesive sets $C$ and $D$, the set $C \cup D$ is $\vec R$-cohesive if and only if $P_C = P_D$.
+
+:::solution
+Since $C$ is infinite, it cannot be almost contained in both $R_i$ and $\overline{R_i}$; so $P_C(i) = 0$ means $C \subseteq^* \overline{R_i}$. If $P_C = P_D$, then for each $i$, $C$ and $D$ are almost contained in the same set $R_i$ or $\overline{R_i}$, and so is $C \cup D$, which is infinite. Conversely, if $C \cup D$ is cohesive, then $C$ and $D$ are infinite subsets of it: if $C \cup D \subseteq^* R_i$, then $C \subseteq^* R_i$ and $D \subseteq^* R_i$, so $P_C(i) = P_D(i) = 1$; if $C \cup D \subseteq^* \overline{R_i}$, then both are almost contained in $\overline{R_i}$, and $P_C(i) = P_D(i) = 0$.
+:::
+::::
+
+::::exercise{#ex-computable-cohesive-delta2 difficulty=2 objective="Characterize the computable sequences with a computable cohesive set through their class of decisions."}
+Let $\vec R$ be a computable sequence. Show that $\vec R$ has a computable cohesive set if and only if $\mathcal C(\vec R)$ has a $\Delta^0_2$ member. For the sequence of :ref{#prop-coh-no-low}, show directly that every member of $\mathcal C(\vec R)$ is DNC relative to $\emptyset'$, and deduce again that it has no computable cohesive set.
+
+:::solution
+Apply :ref{#prop-coh-decisions} with $X = \emptyset$: a computable cohesive set exists if and only if $\emptyset'$ computes a member of $\mathcal C(\vec R)$, that is, if and only if $\mathcal C(\vec R)$ has a $\Delta^0_2$ member.
+
+Now let $R_e = \{ s : \Phi^{\emptyset'_s}_e(e)[s]\converge = 0 \}$ and $P \in \mathcal C(\vec R)$. If $\Phi^{\emptyset'}_e(e)\converge = 0$, $R_e$ is cofinite (proof of :ref{#prop-coh-no-low}), so $P(e) = 1$: otherwise $R^{P \uh (e + 1)} \subseteq \overline{R_e}$ would be finite. If $\Phi^{\emptyset'}_e(e)$ converges to $v \neq 0$, $R_e$ is finite, so $P(e) = 0 \neq v$. In both cases $P(e) \neq \Phi^{\emptyset'}_e(e)$: $P$ is DNC relative to $\emptyset'$. No $\Delta^0_2$ function is DNC relative to $\emptyset'$, so $\mathcal C(\vec R)$ has no $\Delta^0_2$ member, and $\vec R$ has no computable cohesive set (compare Hirschfeldt, *Slicing the Truth*, Exercise 6.33).
+:::
+::::
+
+::::exercise{#ex-r-cohesive-immune difficulty=1 objective="Show that r-cohesive sets are immune while their complements are not."}
+Let $C$ be r-cohesive. Show that $C$ has no infinite computable subset, and that $\overline{C}$ has one. Deduce that $C$ is not computable.
+
+:::solution
+Let $D \subseteq C$ be infinite and computable, with elements $d_0 < d_1 < \cdots$, and $D_0 = \{ d_{2j} : j \in \nat \}$, an infinite and coinfinite computable set. Since $C$ is r-cohesive, $C \subseteq^* D_0$ or $C \subseteq^* \overline{D_0}$. In the first case, $\{ d_{2j + 1} : j \in \nat \} \subseteq C \setminus D_0$ is finite; in the second, $D_0 = C \cap D_0$ is finite. Both are absurd.
+
+Let $E$ be the set of even numbers. If $C \subseteq^* E$, then $\overline{C}$ contains all odd numbers except finitely many; otherwise $C \subseteq^* \overline{E}$, and $\overline{C}$ contains all even numbers except finitely many. In both cases, $\overline{C}$ has an infinite computable subset. If $C$ were computable, it would be an infinite computable subset of itself.
+:::
+::::
+:::::

@@ -1,7 +1,7 @@
 ---
 title: First-order parts and conservation
 summary: Conservative extensions and ω-extensions; ACA₀ is conservative over Peano arithmetic and RCA₀ over IΣ₁ (Friedman), by expanding a model of arithmetic with its definable sets; the Jockusch–Solovay bound on the solutions provided by ACA₀, and the unprovability of ACA₀′.
-duration: 55
+duration: 45
 prerequisites: [separations, big-five/aca0]
 ---
 
@@ -131,17 +131,7 @@ Let $F(X)$ be "the column $X^{[0]}$ is non-empty", and $G(X, Y)$ be "$Y$ codes a
 
 The separation needs non-standard models: in a model of $\mathsf{ACA}_0 + \neg \mathsf{ACA}_0'$, some non-standard $n$ has no sequence of $n$ jumps, because the induction needed to iterate the jump $n$ times is not available.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that $\mathsf{WKL}_0$ is not $\mathcal L_1$-conservative over $\mathrm I\Sigma_1$ if and only if it proves an $\mathcal L_1$ sentence that $\mathsf{RCA}_0$ does not prove. Deduce from :ref{#thm-rca0-isigma1} that, to show that $\mathsf{WKL}_0$ is a conservative extension of $\mathrm I\Sigma_1$, it suffices to show that every countable model of $\mathsf{RCA}_0$ has an ω-extension satisfying $\mathsf{WKL}_0$.
-
-:::solution
-By :ref{#thm-rca0-isigma1}, the $\mathcal L_1$ sentences provable in $\mathsf{RCA}_0$ are those provable in $\mathrm I\Sigma_1$, and $\mathsf{WKL}_0$ proves all of them; this gives the first statement. Suppose every countable model of $\mathsf{RCA}_0$ has an ω-extension satisfying $\mathsf{WKL}_0$, and let $\sigma$ be an $\mathcal L_1$ sentence not provable in $\mathsf{RCA}_0$. A countable model of $\mathsf{RCA}_0 + \neg \sigma$ has an ω-extension satisfying $\mathsf{WKL}_0$, in which $\neg \sigma$ still holds, so $\mathsf{WKL}_0$ does not prove $\sigma$. With the first statement, $\mathsf{WKL}_0$ is a conservative extension of $\mathrm I\Sigma_1$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-delta1-least difficulty=2 objective="Show that the $\Delta_1$-definable sets form the least second-order part over a model of $\mathrm I\Sigma_1$, as the computable sets do over $\nat$."}
 Let $M$ be a countable model of $\mathrm I\Sigma_1$ and $\mathcal N = (M, \mathcal D)$ the model of the proof of :ref{#thm-rca0-isigma1}. Show that $\mathcal D$ is the least second-order part of a model of $\mathsf{RCA}_0$ with first-order part $M$: every model $(M, \mathcal S)$ of $\mathsf{RCA}_0$ satisfies $\mathcal D \subseteq \mathcal S$.
 
 :::solution
@@ -159,3 +149,55 @@ Friedman announced the conservation results of this lesson in 1976; the proofs a
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 5.6, 5.9 and 5.10.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 7.1.
 - C. Parsons, *On a number theoretic choice schema and its relation to induction*, in Intuitionism and Proof Theory, North-Holland, 1970, 459–473.
+
+:::::exercises
+::::exercise{#ex-wkl-conservation-reduction difficulty=1 objective="Reduce the conservation of $\mathsf{WKL}_0$ over $\mathrm I\Sigma_1$ to a statement about ω-extensions of models of $\mathsf{RCA}_0$."}
+Show that $\mathsf{WKL}_0$ is not $\mathcal L_1$-conservative over $\mathrm I\Sigma_1$ if and only if it proves an $\mathcal L_1$ sentence that $\mathsf{RCA}_0$ does not prove. Deduce from :ref{#thm-rca0-isigma1} that, to show that $\mathsf{WKL}_0$ is a conservative extension of $\mathrm I\Sigma_1$, it suffices to show that every countable model of $\mathsf{RCA}_0$ has an ω-extension satisfying $\mathsf{WKL}_0$.
+
+:::solution
+By :ref{#thm-rca0-isigma1}, the $\mathcal L_1$ sentences provable in $\mathsf{RCA}_0$ are those provable in $\mathrm I\Sigma_1$, and $\mathsf{WKL}_0$ proves all of them; this gives the first statement. Suppose every countable model of $\mathsf{RCA}_0$ has an ω-extension satisfying $\mathsf{WKL}_0$, and let $\sigma$ be an $\mathcal L_1$ sentence not provable in $\mathsf{RCA}_0$. A countable model of $\mathsf{RCA}_0 + \neg \sigma$ has an ω-extension satisfying $\mathsf{WKL}_0$, in which $\neg \sigma$ still holds, so $\mathsf{WKL}_0$ does not prove $\sigma$. With the first statement, $\mathsf{WKL}_0$ is a conservative extension of $\mathrm I\Sigma_1$.
+:::
+::::
+
+::::exercise{#ex-aca0-finite-axioms difficulty=1 objective="See that a finitely axiomatizable second-order theory can have a first-order part that is not finitely axiomatizable."}
+Admit that $\mathsf{ACA}_0$ is equivalent to a single sentence of $\mathcal L_2$ (Dzhafarov and Mummert, Exercise 5.13.14, using a universal $\Sigma^0_1$ formula). Explain why this does not contradict :ref{#thm-aca0-pa} and :ref{#cor-pa-not-finite}, and show that no sentence of $\mathcal L_1$ has the same consequences in $\mathcal L_1$ as $\mathsf{ACA}_0$.
+
+:::solution
+Suppose that $\sigma$ is a sentence of $\mathcal L_1$ whose $\mathcal L_1$ consequences are those of $\mathsf{ACA}_0$. Then $\mathsf{ACA}_0 \vdash \sigma$, since $\sigma \vdash \sigma$, so $\mathrm{PA} \vdash \sigma$ by :ref{#thm-aca0-pa}. Conversely, every axiom of $\mathrm{PA}$ is provable in $\mathsf{ACA}_0$, hence in $\sigma$. So $\mathrm{PA}$ would be equivalent to the single sentence $\sigma$, contradicting :ref{#cor-pa-not-finite}. The finite axiomatization of $\mathsf{ACA}_0$ is therefore not a sentence of $\mathcal L_1$: it quantifies over sets. In $\mathsf{ACA}_0$, the instances of arithmetic induction follow from the induction axiom, a single sentence with a set variable, together with arithmetic comprehension (:ref{#prop-induction-comprehension}); the result shows that no sentence without set variables can play this role.
+:::
+::::
+
+::::exercise{#ex-conservation-converse difficulty=2 objective="Prove a converse of the model-theoretic criterion for conservation, up to elementary equivalence, by compactness."}
+Let $S$ be an $\mathcal L_1$-theory and $T$ an $\mathcal L_2$-theory that is $\mathcal L_1$-conservative over $S$. Show that for every model $M$ of $S$ there is a model of $T$ whose first-order part satisfies the same $\mathcal L_1$ sentences as $M$. Why does the converse of :ref{#prop-conservation-method}, with ω-extensions of $M$ itself, not follow?
+
+:::solution
+Let $\mathrm{Th}(M)$ be the set of $\mathcal L_1$ sentences true in $M$. Suppose that $T \cup \mathrm{Th}(M)$ has no model. By compactness, $T$ together with finitely many sentences $\sigma_1, \dots, \sigma_k$ of $\mathrm{Th}(M)$ is inconsistent, so $T \vdash \neg (\sigma_1 \wedge \cdots \wedge \sigma_k)$. This is an $\mathcal L_1$ sentence, so $S$ proves it by conservativity, and $M$ satisfies it since $M \models S$; but $M$ satisfies $\sigma_1 \wedge \cdots \wedge \sigma_k$. So $T \cup \mathrm{Th}(M)$ has a model $\mathcal N$, and its first-order part satisfies exactly the sentences of $\mathrm{Th}(M)$, since $\mathrm{Th}(M)$ is complete.
+
+The argument gives no control on the first-order part of $\mathcal N$ beyond its $\mathcal L_1$ theory: it need not be isomorphic to $M$. The criterion of :ref{#prop-conservation-method} asks for more, an ω-extension of $M$ itself, and it is this stronger property that the proofs of :ref{#thm-aca0-pa} and :ref{#thm-rca0-isigma1} establish.
+:::
+::::
+
+::::exercise{#ex-rca0-isigma-n difficulty=2 objective="Adapt the expansion by $\Delta_1$-definable sets to show that $\mathsf{RCA}_0 + \mathsf I\Sigma^0_n$ is conservative over $\mathrm I\Sigma_n$."}
+Let $n \geq 1$. Show that $\mathsf{RCA}_0 + \mathsf I\Sigma^0_n$ is a conservative extension of $\mathrm I\Sigma_n$.
+
+:::solution
+The axioms of $\mathrm I\Sigma_n$ are instances of $\mathsf I\Sigma^0_n$. Conversely, let $M$ be a countable model of $\mathrm I\Sigma_n$, and $\mathcal N = (M, \mathcal D)$ with $\mathcal D$ the class of $\Delta_1$-definable sets of $M$. Since $M \models \mathrm I\Sigma_1$, $\mathcal N \models \mathsf{RCA}_0$ by the proof of :ref{#thm-rca0-isigma1}. By :ref{#prop-conservation-method}, it remains to show that $\mathcal N$ satisfies $\mathsf I\Sigma^0_n$.
+
+Let $\theta(x)$ be a $\Sigma^0_n$ formula with parameters in $\mathcal N$: $\theta = \exists \bar y_1\, \forall \bar y_2 \cdots \mathsf Q \bar y_n\ \delta$, with $\delta$ bounded. Only finitely many sets $X_1, \dots, X_k$ of $\mathcal D$ occur in it. The bounded formula $\delta$ is both $\Sigma^0_1$ and $\Pi^0_1$, and :ref{#lem-delta1-substitution}, applied to $M$, which satisfies $\mathrm B\Sigma_1$ by :ref{#thm-induction-collection}, and to $X_1, \dots, X_k$, gives a $\Sigma_1$ formula $\delta_\Sigma$ and a $\Pi_1$ formula $\delta_\Pi$ of $\mathcal L_1$, with parameters in $M$, both equivalent to $\delta$ for all values of the variables in the ω-extension of $M$ by $X_1, \dots, X_k$, hence in $\mathcal N$, which has the same numbers and the same sets $X_i$. If the innermost block $\mathsf Q$ is existential ($n$ odd), replace $\delta$ by $\delta_\Sigma$, whose existential quantifiers merge with that block; if it is universal ($n$ even), replace $\delta$ by $\delta_\Pi$. The result $\theta^*$ is a $\Sigma_n$ formula of $\mathcal L_1$ with parameters in $M$, equivalent to $\theta$ in $\mathcal N$. Induction for $\theta^*$ holds in $M$, and an $\mathcal L_1$ formula has the same meaning in $M$ and $\mathcal N$; so induction for $\theta$ holds in $\mathcal N$.
+
+The choice between $\delta_\Sigma$ and $\delta_\Pi$ is the reason why $\Delta_1$ definitions are needed: with a $\Sigma_1$ definition only, an innermost universal block followed by $\delta_\Sigma$ would give a $\Sigma_{n+1}$ formula.
+:::
+::::
+
+::::exercise{#ex-aca0-not-rt difficulty=2 objective="Apply the Jockusch–Solovay bound with Jockusch's lower bound for Ramsey's theorem to show that $\mathsf{ACA}_0$ does not prove Ramsey's theorem for all exponents."}
+Let $\mathsf{RT}$ be the statement "for every $n \geq 1$, every coloring $f : [\nat]^n \to 2$ has an infinite homogeneous set". Admit Jockusch's theorem: for every $n \geq 2$, there is a computable coloring of $[\nat]^n$ with two colors and no infinite $\Sigma^0_n$ homogeneous set (see the course on Ramsey's theorem). Show that $\mathsf{ACA}_0$ does not prove $\mathsf{RT}$, although it proves $\mathsf{RT}^n_2$ for each standard $n$.
+
+:::solution
+Let $F(X)$ say that the column $X^{[0]}$ is non-empty, that its least element $n$ is at least $1$, and that $X^{[1]}$ is a coloring of $[\nat]^n$ with two colors; let $G(X, Y)$ say that $Y$ is an infinite set homogeneous for $X^{[1]}$, with $n$ as before. Both formulas are arithmetic, and $\mathsf{RT}$ proves $\forall X\, (F(X) \rightarrow \exists Y\, G(X, Y))$ over $\mathsf{RCA}_0$.
+
+Suppose $\mathsf{ACA}_0$ proves $\mathsf{RT}$. By :ref{#thm-jockusch-solovay}, there is $k \in \nat$ such that $\mathsf{ACA}_0$ proves $\forall X\, (F(X) \rightarrow \exists Y\, (Y \leq_T X^{(k)} \wedge G(X, Y)))$. This sentence holds in the ω-model $\mathcal P(\nat)$, where $Y \leq_T X^{(k)}$ has its usual meaning. Let $n = k + 2$, let $c$ be a computable coloring of $[\nat]^n$ with no infinite $\Sigma^0_n$ homogeneous set, and let $X$ be the computable set with $X^{[0]} = \{ n \}$ and $X^{[1]} = c$. Then there is an infinite homogeneous set $Y \leq_T \emptyset^{(k)}$. Such a $Y$ is $\Delta^0_{k+1}$, hence $\Sigma^0_n$: a contradiction.
+
+The argument is that of :ref{#cor-aca0-prime}: the number of jumps needed by the solutions grows with a parameter of the instance, so no fixed $k$ works. For a standard $n$, $\mathsf{ACA}_0$ proves $\mathsf{RT}^n_2$ by induction on $n$ in the metatheory, as in the course on Ramsey's theorem.
+:::
+::::
+:::::

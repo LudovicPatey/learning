@@ -1,7 +1,7 @@
 ---
 title: Computably dominated degrees
 summary: Sets all of whose functions are dominated by computable functions; a construction by forcing with computable function trees; the characterization of computably dominated sets by the coincidence of Turing and truth-table reducibility below them.
-duration: 50
+duration: 45
 prerequisites: [hypersimple-sets, pi01-classes/basis-theorems]
 ---
 
@@ -97,6 +97,14 @@ Why is Case 1 handled by a full subtree, rather than by a subtree built by searc
   Only the oracles in the subtree are concerned; other oracles may make $\Phi_e$ total.
 :::
 
+::::exercise{#ex-ftree-continuum difficulty=2 objective="Branch the f-tree construction according to a parameter to obtain continuum many computably dominated sets."}
+Show that there are continuum many non-computable computably dominated sets.
+
+:::solution
+Fix, for each computable f-tree and each $e$, the subtree given by the proofs of :ref{#lem-ftree-noncomputable} and :ref{#lem-ftree-domination}, choosing the least witness in Case 1, so that the subtree is determined by the tree and $e$. Modify the construction of :ref{#thm-martin-miller-ftrees}: for $Z \in \cs$, build the trees $T^Z_k$ as before, except that at each step $k$, after applying the lemma, pass to the full subtree above the node $T(Z(k))$ of the tree $T$ obtained, rather than above a fixed node. Let $X_Z$ be the union of the roots. As before, $X_Z$ is non-computable and computably dominated. If $Z$ and $Z'$ first differ at position $k$, then the trees coincide up to step $k$, and $X_Z$, $X_{Z'}$ extend the nodes $T(0)$ and $T(1)$ of the same tree $T$, which are incompatible. So $Z \mapsto X_Z$ is injective.
+:::
+::::
+
 ## Truth-table reducibility below computably dominated sets
 
 By :ref{#prop-tt-total}, a truth-table reduction is a Turing reduction with a computable bound on its use and running time. For a general Turing reduction $\Phi^X_e = Y$, the time needed to compute $Y(n)$ is an $X$-computable function of $n$. If $X$ is computably dominated, this function is dominated by a computable one, and the reduction can be turned into a truth-table reduction. Conversely, a set that computes a function escaping every computable bound can diagonalize against all truth-table reductions, each of which has a computable running time. This is the content of the next theorem.
@@ -128,24 +136,6 @@ In the proof of ($\Rightarrow$) in :ref{#thm-dominated-tt}, why is the hypothesi
   $Y$ is a set, so its characteristic function is total.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that a computably dominated set computable in $\emptyset'$ is computable, and that a computably dominated set computes no non-computable c.e. set.
-
-:::solution
-A non-computable $\Delta^0_2$ set computes its computation function, which no computable function dominates (:ref{#thm-computation-function}); so it is not computably dominated. If $X$ is computably dominated and $Y \leq_T X$, then $Y$ is computably dominated, by downward closure. A non-computable c.e. set $Y$ is $\Delta^0_2$, hence not computably dominated; so $X$ computes none.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that there are continuum many non-computable computably dominated sets.
-
-:::solution
-Fix, for each computable f-tree and each $e$, the subtree given by the proofs of :ref{#lem-ftree-noncomputable} and :ref{#lem-ftree-domination}, choosing the least witness in Case 1, so that the subtree is determined by the tree and $e$. Modify the construction of :ref{#thm-martin-miller-ftrees}: for $Z \in \cs$, build the trees $T^Z_k$ as before, except that at each step $k$, after applying the lemma, pass to the full subtree above the node $T(Z(k))$ of the tree $T$ obtained, rather than above a fixed node. Let $X_Z$ be the union of the roots. As before, $X_Z$ is non-computable and computably dominated. If $Z$ and $Z'$ first differ at position $k$, then the trees coincide up to step $k$, and $X_Z$, $X_{Z'}$ extend the nodes $T(0)$ and $T(1)$ of the same tree $T$, which are incompatible. So $Z \mapsto X_Z$ is injective.
-:::
-::::
-
 ## Notes and references
 
 The construction of a computably dominated set is an instance of forcing with computable perfect trees; generic sets for this forcing are computably dominated and of minimal degree (:ref{#prop-sacks-generic}, in the course on effective forcing).
@@ -158,3 +148,71 @@ Computably dominated degrees were introduced by Miller and Martin (1968), who co
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.17.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Section 5.6.
 - B. Monin and L. Patey, *Computability theory*, chapter *Immunity and function growth*.
+
+:::::exercises
+::::exercise{#ex-dominated-delta2 difficulty=1 objective="Combine downward closure with the computation function to exclude non-computable $\Delta^0_2$ sets below a computably dominated set."}
+Show that a computably dominated set computable in $\emptyset'$ is computable, and that a computably dominated set computes no non-computable c.e. set.
+
+:::solution
+A non-computable $\Delta^0_2$ set computes its computation function, which no computable function dominates (:ref{#thm-computation-function}); so it is not computably dominated. If $X$ is computably dominated and $Y \leq_T X$, then $Y$ is computably dominated, by downward closure. A non-computable c.e. set $Y$ is $\Delta^0_2$, hence not computably dominated; so $X$ computes none.
+:::
+::::
+
+::::exercise{#ex-ftree-composition difficulty=1 objective="Describe the subtrees of an f-tree as its compositions with other f-trees."}
+Let $T$ and $U$ be f-trees. Show that $T \circ U$ is an f-tree and a subtree of $T$, computable if $T$ and $U$ are. Conversely, show that every subtree $S$ of $T$ is of the form $T \circ U$ for a unique f-tree $U$, which is computable if $S$ and $T$ are.
+
+:::solution
+For all $\rho, \mu$: $\rho \preceq \mu \iff U(\rho) \preceq U(\mu) \iff T(U(\rho)) \preceq T(U(\mu))$, so $T \circ U$ is an f-tree, and its nodes are nodes of $T$.
+
+Conversely, let $S$ be a subtree of $T$. Each $S(\rho)$ is a node of $T$, of the form $T(\mu)$ for a unique $\mu$, since $T$ is injective; let $U(\rho)$ be this $\mu$. Then $S = T \circ U$, and $U$ is the only function with this property. It is an f-tree: $\rho \preceq \rho' \iff S(\rho) \preceq S(\rho') \iff T(U(\rho)) \preceq T(U(\rho')) \iff U(\rho) \preceq U(\rho')$. For computability, note that $|T(\mu)| \geq |\mu|$ for every $\mu$, by induction on $\mu$, since $T(\mu i)$ strictly extends $T(\mu)$. So $U(\rho)$ is found by computing $S(\rho)$ and searching, among the finitely many $\mu$ with $|\mu| \leq |S(\rho)|$, the one with $T(\mu) = S(\rho)$.
+:::
+::::
+
+::::exercise{#ex-ftree-paths-closed difficulty=2 objective="Show that the paths of a computable f-tree are the paths of a computable binary tree, and find a computable one among them."}
+Let $T$ be a computable f-tree, and let $P$ be the set of strings that are prefixes of some node of $T$.
+
+1. Show that $P$ is a computable tree, and that $[T]$ is the set of paths of $P$, so that $[T]$ is a $\Pi^0_1$ class.
+2. Show that $\bigcup_n T(0^n)$ is a computable path of $T$.
+
+:::solution
+Recall that $|T(\mu)| \geq |\mu|$ for every $\mu$, since each node strictly extends its predecessor.
+
+1. *$\sigma \in P$ if and only if $\sigma \preceq T(\mu)$ for some $\mu$ of length $|\sigma|$.* If $\sigma \preceq T(\mu')$ with $|\mu'| < |\sigma|$, extend $\mu'$ to a string $\mu$ of length $|\sigma|$; then $\sigma \preceq T(\mu') \preceq T(\mu)$. If $|\mu'| > |\sigma|$, let $\mu = \mu' \uh |\sigma|$. Then $\sigma$ and $T(\mu)$ are both prefixes of $T(\mu')$, and $|T(\mu)| \geq |\sigma|$, so $\sigma \preceq T(\mu)$. This condition is decidable, and $P$ is closed under prefixes: it is a computable tree.
+
+   If $X \in [T]$, every prefix of $X$ is a prefix of a longer prefix of $X$ that is a node, so $X$ is a path of $P$. Conversely, let $X$ be a path of $P$, and fix a length $k$. For every $m \geq k$, the string $X \uh m$ is in $P$, so $X \uh m \preceq T(\nu)$ for some $\nu$ of length $m$; then $\mu = \nu \uh k$ satisfies $T(\mu) \preceq T(\nu)$, so $T(\mu)$ is comparable with $X \uh m$. There are finitely many strings $\mu$ of length $k$, so one of them, $\mu_k$, has $T(\mu_k)$ comparable with $X \uh m$ for infinitely many $m$, hence for all $m$. A string comparable with all prefixes of $X$ is a prefix of $X$: $T(\mu_k) \prec X$. Since $|T(\mu_k)| \geq k$ and $k$ is arbitrary, infinitely many prefixes of $X$ are nodes, and $X \in [T]$.
+2. The nodes $T(0^n)$ form a chain, $T(0^n) \prec T(0^{n+1})$, of lengths at least $n$. Their union $X_0$ is therefore an infinite sequence, with all $T(0^n)$ as prefixes, so $X_0 \in [T]$. To compute $X_0(x)$, compute $T(0^n)$ for $n = x + 1$, whose length exceeds $x$.
+
+In particular, each tree $T_k$ of the proof of :ref{#thm-martin-miller-ftrees} has computable paths: the set built there is non-computable only because it lies on all the trees at once.
+:::
+::::
+
+::::exercise{#ex-ftree-total-functional difficulty=2 objective="Extract from Case 2 of the domination lemma one functional, total on every oracle, that agrees with $\Phi_e$ on all paths."}
+Let $S$ be a computable f-tree such that $\Phi^{S(\rho)}_e(|\rho|)\converge$ for every $\rho$, as in Case 2 of :ref{#lem-ftree-domination}. Show that there is a functional $\Psi$ such that $\Psi^Z$ is total for every oracle $Z$, and $\Psi^X = \Phi^X_e$ for every $X \in [S]$. Deduce that if $\Phi^X_e$ is the characteristic function of a set for every $X \in [S]$, then $\Phi^X_e \leq_{tt} X$ for every $X \in [S]$, through a single truth-table reduction.
+
+:::solution
+With oracle $Z$ and input $n$, the functional $\Psi$ computes the $2^n$ nodes $S(\rho)$ with $|\rho| = n$. Any two of them are incompatible, since the strings $\rho$ of length $n$ are pairwise incomparable; so at most one is a prefix of $Z$, and $\Psi$ checks each of them against the bits of $Z$. If $S(\rho) \prec Z$, then $\Psi^Z(n) = \Phi^{S(\rho)}_e(n)$, a computation that converges by hypothesis; otherwise $\Psi^Z(n) = 0$. This is total for every $Z$.
+
+Let $X \in [S]$ and $n \in \nat$. Some $\rho$ of length $n$ has $S(\rho) \prec X$, as shown after :ref{#def-function-tree}. The computation $\Phi^{S(\rho)}_e(n)$ converges, with use at most $|S(\rho)|$, so $\Phi^X_e(n) = \Phi^{S(\rho)}_e(n) = \Psi^X(n)$.
+
+For the last statement, modify $\Psi$ to output $0$ instead of any value outside $\{0, 1\}$; it remains total on every oracle and equal to $\Phi^X_e$ on $[S]$. By :ref{#prop-tt-total}, it gives a truth-table reduction that computes $\Phi^X_e$ from $X$, for every $X \in [S]$.
+:::
+::::
+
+::::exercise{#ex-dominated-cone-avoidance difficulty=2 objective="Add cone avoidance to the f-tree construction by a splitting argument."}
+Let $Z$ be a non-computable set. Show that there is a non-computable computably dominated set $X$ such that $Z \not\leq_T X$.
+
+:::hint
+Given a computable f-tree $T$ and $e$, look for two nodes $\tau_0, \tau_1$ of $T$ and an input $n$ with $\Phi^{\tau_0}_e(n)\converge \neq \Phi^{\tau_1}_e(n)\converge$.
+:::
+
+:::solution
+*Lemma.* For every computable f-tree $T$ and every $e$, there is a computable subtree $S$ of $T$ such that $\Phi^X_e \neq Z$ for every $X \in [S]$.
+
+*Case A: there are nodes $\tau_0, \tau_1$ of $T$ and $n$ with $\Phi^{\tau_0}_e(n)\converge \neq \Phi^{\tau_1}_e(n)\converge$.* One of the two values differs from $Z(n)$, say the value of $\tau_i$. Let $S$ be the full subtree above $\tau_i$. Every $X \in [S]$ extends $\tau_i$, so $\Phi^X_e(n) = \Phi^{\tau_i}_e(n) \neq Z(n)$.
+
+*Case B: otherwise.* Let $S = T$, and let $\psi(n)$ be the value $\Phi^{T(\mu)}_e(n)$ for the first string $\mu$ found, in a computable search, such that this computation converges; $\psi$ is partial computable. Let $X \in [T]$ with $\Phi^X_e(n)\converge$. A node $\tau \prec X$ longer than the use satisfies $\Phi^\tau_e(n)\converge = \Phi^X_e(n)$; so $\psi(n)$ is defined, and equal to $\Phi^X_e(n)$ since Case A fails. Hence if $\Phi^X_e = Z$ for some $X \in [T]$, then $\psi$ is total and equal to $Z$, and $Z$ is computable, which is excluded.
+
+*Construction.* Proceed as in the proof of :ref{#thm-martin-miller-ftrees}, with three kinds of steps instead of two: from $T_{3e}$, obtain $T_{3e+1}$ by :ref{#lem-ftree-noncomputable}, $T_{3e+2}$ by :ref{#lem-ftree-domination} and $T_{3e+3}$ by the lemma, each time passing to the full subtree above the node $S(0)$ of the subtree $S$ obtained, so that the roots strictly increase. The union $X$ of the roots is a path of every $T_k$. As in the theorem, it is non-computable and computably dominated, and $\Phi^X_e \neq Z$ for every $e$, since $X \in [T_{3e+3}]$.
+:::
+::::
+:::::

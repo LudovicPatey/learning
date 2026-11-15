@@ -97,15 +97,7 @@ In the proof of :ref{#prop-mathias-dominant}, why is the new reservoir chosen in
   $G$ may omit elements of $Y$; omitting them only makes the later elements of $G$ larger.
 :::
 
-## The disjunctive question of Dzhafarov and Jockusch
-
-The proof of strong cone avoidance for the pigeonhole principle (:ref{#thm-dj-cone-avoidance}) uses a variant of Mathias forcing whose conditions $(\sigma_0, \sigma_1, X)$ build two sets $G^0 \subseteq A$ and $G^1 \subseteq \overline A$ at once, with reservoirs in a Scott ideal $\mathcal I$, and requirements that are disjunctions: "$\Phi^{G^0}_{e_0} \neq C$ or $\Phi^{G^1}_{e_1} \neq C$". The relation "$c$ answers $(x, v)$" of that proof is a forcing question for these disjunctions: a positive answer, applied to the partition $(A, \overline A)$, gives an extension forcing $\Phi^{G^i}_{e_i}(x)\converge = v$ on one side $i$; a negative answer, witnessed by a partition in $\mathcal I$, gives an extension forcing that $\Phi^{G^i}_{e_i}(x)$ does not converge to $v$, on one side. The question does not mention $A$, and it is $\Sigma^0_1$ relative to $Z \oplus X$, a member of $\mathcal I$. The three cases of that proof are then the argument of :ref{#thm-question-preservation} at level $1$, relative to a member of $\mathcal I$: the set $W$ of answered pairs plays the role of $U$, and it cannot coincide with the graph of $C$, since $C \notin \mathcal I$.
-
-The course on avoidance makes this precise as a disjunctive forcing question (:ref{to="avoidance/disjunctive-question"}). This is the general shape of the forcing questions used for Ramsey-type theorems: the question is asked about all instances of a problem at once, so that its complexity does not depend on the particular instance, and a negative answer is witnessed inside a class of simple sets closed under the operations of the construction.
-
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-mathias-r-cohesive difficulty=1 objective="Combine cohesiveness and highness of Mathias generic sets."}
 Show that every sufficiently generic set for computable Mathias forcing is **r-cohesive**, that is, cohesive for the sequence of all computable sets, and is not computably dominated.
 
 :::solution
@@ -113,13 +105,11 @@ The computable sets form a countable family, so the dense sets of :ref{#ex-gener
 :::
 ::::
 
-::::exercise{difficulty=2}
-Let $Z$ be a set, $\vec R$ a $Z$-computable sequence and $C \not\leq_T Z$. Using Mathias forcing with $Z$-computable reservoirs, show that there is an $\vec R$-cohesive set $G$ with $C \not\leq_T Z \oplus G$ such that $G$ is high relative to $Z$, that is, $(Z \oplus G)' \geq_T Z''$.
+## The disjunctive question of Dzhafarov and Jockusch
 
-:::solution
-Conditions are pairs $(\sigma, X)$ with $X$ infinite and $Z$-computable. The question of :ref{#prop-mathias-question}, with functionals of the oracle $Z \oplus G$, is a forcing question; it is $\Sigma^0_1(Z)$-preserving, since compatibility is $Z$-computable. The proofs of :ref{#thm-question-preservation} and :ref{#cor-question-jump-cone} with $n = 0$, relativized to $Z$, give $C \not\leq_T Z \oplus G$ for every sufficiently generic $G$: one of $C$ and $\overline C$ is not $\Sigma^0_1(Z)$, hence not $\Sigma^0_1(Z \oplus G)$. Cohesiveness follows as before, since $X \cap R_i$ and $X \setminus R_i$ are $Z$-computable. The proof of :ref{#prop-mathias-dominant}, for $Z$-computable functions $h$, shows that $p_G$ eventually dominates every $Z$-computable function, and Martin's theorem relativized to $Z$ gives $(Z \oplus G)' \geq_T Z''$.
-:::
-::::
+The proof of strong cone avoidance for the pigeonhole principle (:ref{#thm-dj-cone-avoidance}) uses a variant of Mathias forcing whose conditions $(\sigma_0, \sigma_1, X)$ build two sets $G^0 \subseteq A$ and $G^1 \subseteq \overline A$ at once, with reservoirs in a Scott ideal $\mathcal I$, and requirements that are disjunctions: "$\Phi^{G^0}_{e_0} \neq C$ or $\Phi^{G^1}_{e_1} \neq C$". The relation "$c$ answers $(x, v)$" of that proof is a forcing question for these disjunctions: a positive answer, applied to the partition $(A, \overline A)$, gives an extension forcing $\Phi^{G^i}_{e_i}(x)\converge = v$ on one side $i$; a negative answer, witnessed by a partition in $\mathcal I$, gives an extension forcing that $\Phi^{G^i}_{e_i}(x)$ does not converge to $v$, on one side. The question does not mention $A$, and it is $\Sigma^0_1$ relative to $Z \oplus X$, a member of $\mathcal I$. The three cases of that proof are then the argument of :ref{#thm-question-preservation} at level $1$, relative to a member of $\mathcal I$: the set $W$ of answered pairs plays the role of $U$, and it cannot coincide with the graph of $C$, since $C \notin \mathcal I$.
+
+The course on avoidance makes this precise as a disjunctive forcing question (:ref{to="avoidance/disjunctive-question"}). This is the general shape of the forcing questions used for Ramsey-type theorems: the question is asked about all instances of a problem at once, so that its complexity does not depend on the particular instance, and a negative answer is witnessed inside a class of simple sets closed under the operations of the construction.
 
 ## Notes and references
 
@@ -133,3 +123,51 @@ Mathias forcing with computable reservoirs is presented by Hirschfeldt (Section 
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 6.5.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 7.2–7.3.
 - B. Monin and L. Patey, *Computability theory*, chapter *Effective forcing*.
+
+:::::exercises
+::::exercise{#ex-mathias-relative-high difficulty=2 objective="Relativize the analysis of Mathias forcing to reservoirs computable in a set $Z$."}
+Let $Z$ be a set, $\vec R$ a $Z$-computable sequence and $C \not\leq_T Z$. Using Mathias forcing with $Z$-computable reservoirs, show that there is an $\vec R$-cohesive set $G$ with $C \not\leq_T Z \oplus G$ such that $G$ is high relative to $Z$, that is, $(Z \oplus G)' \geq_T Z''$.
+
+:::solution
+Conditions are pairs $(\sigma, X)$ with $X$ infinite and $Z$-computable. The question of :ref{#prop-mathias-question}, with functionals of the oracle $Z \oplus G$, is a forcing question; it is $\Sigma^0_1(Z)$-preserving, since compatibility is $Z$-computable. The proofs of :ref{#thm-question-preservation} and :ref{#cor-question-jump-cone} with $n = 0$, relativized to $Z$, give $C \not\leq_T Z \oplus G$ for every sufficiently generic $G$: one of $C$ and $\overline C$ is not $\Sigma^0_1(Z)$, hence not $\Sigma^0_1(Z \oplus G)$. Cohesiveness follows as before, since $X \cap R_i$ and $X \setminus R_i$ are $Z$-computable. The proof of :ref{#prop-mathias-dominant}, for $Z$-computable functions $h$, shows that $p_G$ eventually dominates every $Z$-computable function, and Martin's theorem relativized to $Z$ gives $(Z \oplus G)' \geq_T Z''$.
+:::
+::::
+
+::::exercise{#ex-mathias-subsets-high difficulty=1 objective="Transfer the domination property of Mathias generic sets to their infinite subsets."}
+Let $G$ be sufficiently generic for computable Mathias forcing. Show that every infinite subset $H$ of $G$ is high.
+
+:::solution
+Let $p_H$ and $p_G$ be the principal functions. For every $n$, the elements $p_H(0) < \cdots < p_H(n)$ are $n + 1$ distinct elements of $G$, so the largest of them is at least the $n$-th element of $G$: $p_H(n) \geq p_G(n)$. By :ref{#prop-mathias-dominant}, $p_G$ eventually dominates every computable function, so $p_H$ does too, and $p_H$ is dominant. Since $H$ computes $p_H$, $H$ is high by Martin's theorem (:ref{#thm-martin-domination}).
+:::
+::::
+
+::::exercise{#ex-mathias-high-incomplete difficulty=1 objective="Combine highness and cone avoidance for Mathias generic sets."}
+Show that every sufficiently generic set $G$ for computable Mathias forcing satisfies $\emptyset'' \leq_T G'$ and $\emptyset' \not\leq_T G$.
+
+:::solution
+The first property is :ref{#prop-mathias-dominant}. For the second, the question of :ref{#prop-mathias-question} is $\Sigma^0_1$-preserving, so :ref{#cor-question-jump-cone} with $n = 0$ and $A = \emptyset'$, which is not computable, gives $\emptyset' \not\leq_T G$ for every sufficiently generic $G$. Both families of dense sets are countable, so a single sufficiently generic set has both properties. Such a set is high without computing $\emptyset'$: highness is a property of the jump of $G$, not of $G$ itself.
+:::
+::::
+
+::::exercise{#ex-mathias-not-gl1 difficulty=2 objective="Show that Mathias generic sets are not generalized low, by relativizing the forcing question to $\emptyset'$." lessons="forcing-question"}
+Show that every sufficiently generic set $G$ for computable Mathias forcing satisfies $G' \not\leq_T G \oplus \emptyset'$.
+
+:::solution
+Consider the $\Sigma^0_1$ sentences with oracle $\emptyset' \oplus G$, and let $(\sigma, X) \mathrel{?{\vdash}} \Phi^{\emptyset' \oplus G}_e(m)\converge$ hold if $\Phi^{\emptyset' \oplus \tau}_e(m)\converge$ for some string $\tau$ compatible with $(\sigma, X)$, the computation reading only bits of $\tau$ in the second part of the oracle. The proof of :ref{#prop-mathias-question} applies without change: a compatible $\tau$ gives the extension $(\tau, X \setminus \{0, \dots, |\tau| - 1\})$ forcing the sentence, and if there is no such $\tau$, the condition forces the negation. Compatibility with $(\sigma, X)$ is decidable, so the set of $m$ with a positive answer is $\Sigma^0_1(\emptyset')$.
+
+By :ref{#ex-question-relativized} with $Z = \emptyset'$ and $C = \emptyset''$, which is not computable in $\emptyset'$, every sufficiently generic $G$ satisfies $\emptyset'' \not\leq_T \emptyset' \oplus G$. By :ref{#prop-mathias-dominant}, $\emptyset'' \leq_T G'$. If $G' \leq_T G \oplus \emptyset'$, then $\emptyset'' \leq_T G \oplus \emptyset'$, a contradiction. Cohen generic sets, by contrast, are generalized low (:ref{#cor-cohen-jumps}).
+:::
+::::
+
+::::exercise{#ex-mathias-principal-slow difficulty=2 objective="Show that the principal function of a Mathias generic set does not dominate every function, by adding a long block of the reservoir to the stem."}
+Let $h$ be a function that eventually dominates every computable function. Show that for every sufficiently generic set $G$ for computable Mathias forcing, $p_G(n) < h(n)$ for infinitely many $n$, where $p_G$ is the principal function of $G$.
+
+:::solution
+Fix $m$ and a condition $(\sigma, X)$. Let $p$ be the principal function of the infinite computable set $\sigma \cup X$, where $\sigma$ is identified with the finite set $\{ n < |\sigma| : \sigma(n) = 1 \}$; it is computable. Since $h$ eventually dominates $p + 1$, there is $n \geq m$ with $h(n) > p(n)$. Let $N = p(n) + 1$, let $\tau$ be the string of length $\max(N, |\sigma|)$ whose $1$s are the elements of $\sigma \cup X$ below its length, and $Y = X \setminus \{0, \dots, |\tau| - 1\}$. The string $\tau$ extends $\sigma$, since $\min X \geq |\sigma|$, and is compatible with $(\sigma, X)$; so $(\tau, Y)$ extends $(\sigma, X)$.
+
+Every infinite member $G$ of $(\tau, Y)$ agrees with $\sigma \cup X$ below $N$. The first $n + 1$ elements of $\sigma \cup X$ are below $N$, so they are the first $n + 1$ elements of $G$, and $p_G(n) = p(n) < h(n)$, with $n \geq m$. So for each $m$, the set of conditions whose infinite members $G$ satisfy $p_G(n) < h(n)$ for some $n \geq m$ is dense. A sufficiently generic set is infinite and meets all these sets.
+
+For instance, a function that eventually dominates every computable function exists and is computable in $\emptyset'$, by :ref{#thm-martin-domination} applied to the high set $\emptyset'$; so although $p_G$ is dominant, it does not eventually dominate every function computable in $\emptyset'$.
+:::
+::::
+:::::

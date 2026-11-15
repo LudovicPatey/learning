@@ -15,7 +15,7 @@ Relative largeness is used through a consequence due to Kanamori and McAloon: co
 A function $f : [X]^n \to \nat$ is **regressive** if $f(s) < \min s$ for every $s \in [X]^n$. A set $H \subseteq X$ is **min-homogeneous** for $f$ if $f(s) = f(t)$ for all $s, t \in [H]^n$ with $\min s = \min t$.
 :::
 
-For instance, $f(\{ x, y \}) = $ the remainder of $y$ modulo $x$, on $[1, \infty)$, is regressive; a set $\{ x_0 < x_1 < \cdots \}$ is min-homogeneous when, for each $i$, all $x_j$ with $j > i$ have the same remainder modulo $x_i$. Homogeneity cannot be asked for (exercise below).
+For instance, $f(\{ x, y \}) = $ the remainder of $y$ modulo $x$, on $[1, \infty)$, is regressive; a set $\{ x_0 < x_1 < \cdots \}$ is min-homogeneous when, for each $i$, all $x_j$ with $j > i$ have the same remainder modulo $x_i$. Homogeneity cannot be asked for (:ref{#ex-min-homogeneous-not-homogeneous}).
 
 :::lemma{#lem-ph-regressive}
 Let $n \geq 2$, $k \geq 1$ and $1 \leq a \leq b$. If $[a + n, b + n] \to_* (k + n - 1)^{n+1}_{2^{n-1}}$, then every regressive $f : [[a, b]]^n \to \nat$ has a min-homogeneous set with at least $k$ elements.
@@ -103,7 +103,7 @@ The arguments of this lesson are finite combinatorics with coded objects: colori
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-min-homogeneous-not-homogeneous difficulty=2 objective="See on a regressive coloring of pairs that min-homogeneity cannot be strengthened to homogeneity."}
 Let $f : [X]^2 \to \nat$, $f(\{ x, y \}) = x - 1$, on $X = [1, b]$. Show that $f$ is regressive, that every set is min-homogeneous for $f$, and that a homogeneous set for $f$ has at most two elements. Deduce that "min-homogeneous" cannot be replaced by "homogeneous" in :ref{#lem-ph-regressive}.
 
 :::solution
@@ -117,3 +117,43 @@ Regressive colorings and min-homogeneous sets are due to Kanamori and McAloon (1
 
 - A. Kanamori and K. McAloon, *On Gödel incompleteness and finite combinatorics*, Annals of Pure and Applied Logic 33 (1987), 23–41.
 - A. Bovykin, *Brief introduction to unprovability*, in Logic Colloquium 2006, Lecture Notes in Logic 32, Cambridge University Press, 2009.
+
+:::::exercises
+::::exercise{#ex-regressive-remainder difficulty=1 objective="Check min-homogeneity on the regressive coloring given by remainders."}
+Let $f(\{ x, y \}) = y \bmod x$ for $1 \leq x < y$. Let $x_0 = 2$ and $x_{i+1} = x_0 x_1 \cdots x_i + 1$. Show that $\{ x_0 < x_1 < \cdots \}$ is min-homogeneous for $f$, and that no set containing $2$, $3$ and $4$ is.
+
+:::solution
+The sequence is strictly increasing, since $x_{i+1} > x_i \geq 2$. Let $i < j$. Then $x_i$ divides $x_0 \cdots x_{j-1}$, so $x_j \bmod x_i = 1$, as $x_i \geq 2$. Hence $f(\{ x_i, x_j \}) = 1$ for all $j > i$: the value depends only on the minimum. On the other hand $f(\{ 2, 3 \}) = 1 \neq 0 = f(\{ 2, 4 \})$, two pairs with minimum $2$.
+:::
+::::
+
+::::exercise[The infinite version]{#ex-regressive-infinite difficulty=2 objective="Adapt the proof of the lemma to infinite sets, with the infinite Ramsey theorem in place of relative largeness."}
+Let $n \geq 2$ and $f : [X]^n \to \nat$ be regressive, where $X \subseteq \nat$ is infinite. Show that $f$ has an infinite min-homogeneous set.
+
+:::solution
+Define the coloring $C$ of $[X]^{n+1}$ into $2^{n-1}$ colors as in the proof of :ref{#lem-ph-regressive}, without translation. By the infinite Ramsey theorem, $C$ has an infinite homogeneous set $H = \{ x_0 < x_1 < \cdots \}$.
+
+*The color is $\{ 1, \dots, n - 1 \}$.* Otherwise, let $N = x_0 + n + 1$. The finite set $\{ x_0, \dots, x_{N-1} \}$ is homogeneous for $C$ with the same color, and has $N > x_0 + n$ elements; the counting argument of the proof of :ref{#lem-ph-regressive} applies to it verbatim and gives $N - n + 1 \leq x_0$, a contradiction.
+
+*Min-homogeneity.* The step of moving coordinates holds in $H$, with the same proof. Let $u, u' \in [H]^n$ with $u_0 = u'_0$. Since $H$ is infinite, there are $w_1 < \cdots < w_{n-1}$ in $H$ above all elements of $u \cup u'$. Moving $u_{n-1}$ to $w_{n-1}$, then $u_{n-2}$ to $w_{n-2}$, down to $u_1$ to $w_1$, gives $f(u) = f(\{ u_0, w_1, \dots, w_{n-1} \})$, and likewise for $u'$. So $f(u) = f(u')$. Unlike in the finite case, no element of $H$ needs to be removed, since there are always elements above.
+:::
+::::
+
+::::exercise{#ex-regressive-fr-compute difficulty=1 objective="Compute the coloring $f_R$ on examples, and check that it vanishes on a min-homogeneous set."}
+Let $e = m = 1$ and $R_0(x; y)$ hold if $x \geq 1$ and $x$ divides $y$. Compute $f_R(\{ 3, 4, 6 \})$ and $f_R(\{ 4, 6, 9 \})$. Show that $H = \{ 4, 8, 16, 32 \}$ is min-homogeneous for $f_R$ and that $f_R$ vanishes on $[H]^3$.
+
+:::solution
+For $s = \{ 3, 4, 6 \}$, $y_0 = 3$, $\bar y = 4$, $\bar z = 6$, and the parameters are $x \in \{ 0, 1 \}$. $R_0(0; \cdot)$ is always false and $R_0(1; \cdot)$ always true, so there is no difference: $f_R(s) = 0$. For $s = \{ 4, 6, 9 \}$, the parameters are $x \in \{ 0, 1, 2 \}$; $x = 0, 1$ give no difference, and $2$ divides $6$ and not $9$, so $f_R(s) = 3 < 4$.
+
+For $H$: the triples with minimum $4$ are $\{ 4, 8, 16 \}$, $\{ 4, 8, 32 \}$, $\{ 4, 16, 32 \}$; the parameters are $0, 1, 2$, and $2$ divides every element above $4$. The triple $\{ 8, 16, 32 \}$ has parameters $0, \dots, 6$; among them $1, 2, 4$ divide both $16$ and $32$, and $3, 5, 6$ divide neither. So $f_R$ is $0$ on $[H]^3$, and $H$ is min-homogeneous.
+:::
+::::
+
+::::exercise[The Kanamori–McAloon principle]{#ex-km-true difficulty=1 objective="Combine the reduction to relative largeness with the truth of the Paris–Harrington principle to prove the Kanamori–McAloon principle and its instances of fixed arity in $\mathrm{PA}$." lessons="paris-harrington"}
+For $n \geq 1$, let $\mathrm{KM}_n$ be the statement: for every $k$ there is $m$ such that every regressive coloring of $[[1, m]]^n$ has a min-homogeneous set with at least $k$ elements. Show that $\mathrm{KM}_n$ is true and that $\mathrm{PA} \vdash \mathrm{KM}_n$ for each standard $n$.
+
+:::solution
+For $n = 1$, two $1$-sets with the same minimum are equal, so every set is min-homogeneous, and $m = k$ works. Let $n \geq 2$ and $k \geq 1$ (for $k = 0$ any $m$ works). By $\mathrm{PH}_{n+1}$ there is $b' \geq 1 + n$ with $[1 + n, b'] \to_* (k + n - 1)^{n+1}_{2^{n-1}}$. Let $m = b' - n \geq 1$. By :ref{#lem-ph-regressive} with $a = 1$ and $b = m$, every regressive coloring of $[[1, m]]^n$ has a min-homogeneous set with at least $k$ elements. This proves $\mathrm{KM}_n$ from $\mathrm{PH}_{n+1}$. The lemma is provable in $\mathrm I\Sigma_1$ (section on formalization), and $\mathrm{PA} \vdash \mathrm{PH}_{n+1}$ by :ref{#thm-ph-true}, so $\mathrm{PA} \vdash \mathrm{KM}_n$. The truth of $\mathrm{KM}_n$ follows from that of $\mathrm{PH}$.
+:::
+::::
+:::::

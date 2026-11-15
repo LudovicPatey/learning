@@ -88,7 +88,7 @@ The proofs of :ref{#lem-ack-basic} and of the theorem only use powers $2^x$ with
 
 ## Exercises
 
-::::exercise{#ex-ack-parity difficulty=1}
+::::exercise{#ex-ack-parity difficulty=1 objective="Relate Ackermann membership to the parity of a quotient, using the uniqueness of division."}
 Show that $\mathrm I\Delta_0 + \mathrm{exp}$ proves: $i \in c$ if and only if the quotient of $c$ by $2^i$ is odd. In $\nat$, this says that the digit of $2^i$ in $c$ is the parity of $\lfloor c / 2^i \rfloor$.
 
 :::solution
@@ -103,3 +103,65 @@ The coding of hereditarily finite sets by binary expansions is due to Ackermann 
 - W. Ackermann, *Die Widerspruchsfreiheit der allgemeinen Mengenlehre*, Mathematische Annalen 114 (1937), 305–315.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 1(b).
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 2.
+
+:::::exercises
+::::exercise{#ex-ack-examples difficulty=1 objective="Compute Ackermann codes in $\nat$, and derive the codes of singletons and of shifted sets from the splitting property."}
+1. In $\nat$, find the set coded by $100$ and the code of $\{1, 3, 4\}$.
+2. Show that $\mathrm I\Delta_0 + \mathrm{exp}$ proves that $2^a$ codes $\{a\}$: $i \in 2^a \leftrightarrow i = a$.
+3. Show that $\mathrm I\Delta_0 + \mathrm{exp}$ proves that $c \cdot 2^k$ codes $\{ k + j : j \in c \}$: $i \in c \cdot 2^k$ if and only if $i = k + j$ for some $j \in c$.
+
+:::solution
+1. $100 = 64 + 32 + 4 = 2^6 + 2^5 + 2^2$ codes $\{2, 5, 6\}$, and $\{1, 3, 4\}$ is coded by $2 + 8 + 16 = 26$.
+
+2. First, $i \in 1 \leftrightarrow i = 0$: if $i \in 1$, then $2^i \leq 1$ by :ref{#lem-ack-basic}, so $i = 0$, since $i \geq 1$ would give $2^i \geq 2$; and $1 = 2 \cdot 0 + 1$ with remainder $1 \geq 2^0$, so $0 \in 1$. Also $0$ codes the empty set, since $i \in 0$ would give $2^i \leq 0$. Apply the splitting property to $2^a = 2^a \cdot 1 + 0$: for $i < a$, $i \in 2^a \leftrightarrow i \in 0$, which fails; for every $j$, $a + j \in 2^a \leftrightarrow j \in 1 \leftrightarrow j = 0$. Every $i \geq a$ is $a + j$ for some $j$, by axiom 5. So $a$ is the only element of $2^a$.
+
+3. Apply the splitting property to $c \cdot 2^k = 2^k \cdot c + 0$: no $i < k$ belongs to it, and $k + j$ belongs to it if and only if $j \in c$. Every $i \geq k$ has the form $k + j$.
+:::
+::::
+
+::::exercise{#ex-ack-subset-order difficulty=2 objective="Prove by bounded induction, with a power as a parameter, that Ackermann codes are monotone for inclusion."}
+Show that $\mathrm I\Delta_0 + \mathrm{exp}$ proves: if every element of $c$ is an element of $d$, then $c \leq d$, and $c < d$ unless $c = d$.
+
+:::solution
+Let $a = c + d$; then $c, d \leq a < 2^a$. Let $w = 2^a$, and apply bounded induction, with parameters $a$ and $w$, to the statement $\psi(x)$: if $x \leq a$, then for all $c', d' < w$ with $c', d' < 2^x$ and $\forall i < x\ (i \in c' \rightarrow i \in d')$, we have $c' \leq d'$. Here $2^x$ is the element $e \leq w$ with $\varepsilon(x, e)$, so $\psi$ is bounded. For $x = 0$, $c' = d' = 0$. Assume $\psi(x)$, $x + 1 \leq a$, and let $c', d' < 2^{x+1}$ with every element of $c'$ below $x + 1$ in $d'$; by :ref{#lem-ack-basic} (item 3), all elements of $c'$ and $d'$ are at most $x$.
+
+- If $x \in c'$, then $x \in d'$. By item 4, $c' - 2^x$ and $d' - 2^x$ code the elements of $c'$ and $d'$ other than $x$; these are below $x$, so both numbers are below $2^x$ by item 3, and the inclusion still holds. By $\psi(x)$, $c' - 2^x \leq d' - 2^x$, so $c' \leq d'$.
+- If $x \notin c'$ and $x \in d'$, then $c' < 2^x$ by item 3, and $2^x \leq d'$ by item 1.
+- If $x \notin c'$ and $x \notin d'$, then $c', d' < 2^x$, and $\psi(x)$ applies.
+
+So $\psi(x + 1)$. By induction, $\psi(a)$ holds, and it applies to $c$ and $d$, whose elements are all below $a$. If $c \neq d$, they do not have the same elements below $a$ by extensionality (item 5), so $d$ has an element not in $c$, and $c \leq d$, $c \neq d$ give $c < d$.
+:::
+::::
+
+::::exercise{#ex-ack-disjoint-union difficulty=2 objective="Show by bounded induction on the size of the interval that adding the codes of disjoint sets codes their union."}
+Show that $\mathrm I\Delta_0 + \mathrm{exp}$ proves: if $c$ and $d$ have no common element, then $c + d$ codes the union of the sets coded by $c$ and $d$.
+
+:::solution
+Let $a = c + d$, so that $c, d < 2^a$ and all their elements are below $a$ (:ref{#lem-ack-basic}, item 3); let $w = 2^{a+1}$. Apply bounded induction, with parameters $a$ and $w$, to $\psi(x)$: if $x \leq a$, then for all $c' < 2^x$ and $d' < 2^a$ with no common element below $a$, every $i < a + 1$ satisfies $i \in c' + d' \leftrightarrow (i \in c' \vee i \in d')$. The quantifiers over $c', d'$ are bounded by $w$, and the powers $2^x$, $2^a$ are bounded by $w$, so $\psi$ is bounded. Since $c' + d' < 2^{a+1}$, item 3 shows that all elements of $c' + d'$ are below $a + 1$, so $\psi(x)$ says that $c' + d'$ codes the union.
+
+For $x = 0$, $c' = 0$ codes the empty set and $c' + d' = d'$. Assume $\psi(x)$ and $x + 1 \leq a$, and let $c' < 2^{x+1}$ and $d' < 2^a$ be disjoint. If $x \notin c'$, then $c' < 2^x$ and $\psi(x)$ applies. If $x \in c'$, then $x < a$ and $x \notin d'$. By item 4, $c'' = c' - 2^x$ codes the elements of $c'$ other than $x$, and $c'' < 2^x$; and $d'' = d' + 2^x$ codes the elements of $d'$ together with $x$, and $d'' < 2^a$ by item 3, all its elements being below $a$. The sets coded by $c''$ and $d''$ are disjoint. By $\psi(x)$, $c'' + d'' = c' + d'$ codes their union, which is the union of the sets coded by $c'$ and $d'$. So $\psi(x + 1)$. By induction, $\psi(a)$, which applies to $c$ and $d$.
+:::
+::::
+
+::::exercise{#ex-comprehension-needs-exp difficulty=1 objective="See that comprehension for bounded formulas fails as soon as a power does not exist." lessons="parikh"}
+Let $M$ be a model of $\mathrm I\Delta_0$ and $b \in M$ such that $2^b$ does not exist in $M$. Show that no $c \in M$ satisfies $\forall i < b\ (i \in c)$. Deduce that :ref{#thm-delta0-comprehension} fails in every model of $\mathrm I\Delta_0 + \neg \mathrm{exp}$, for the formula $i = i$.
+
+:::solution
+Since $2^0 = 1$ exists, $b \neq 0$, so $b = b' + 1$. If $b' \in c$, the definition of $i \in c$ provides $p$ with $\varepsilon(b', p)$, and then $\varepsilon(b, p + p)$ by :ref{#fact-exp}: so $2^b$ exists, a contradiction. In a model of $\mathrm I\Delta_0 + \neg \mathrm{exp}$, some $b$ has no power $2^b$, and no element codes $\{ i < b : i = i \}$ below $b$, below $2^b$ or anywhere.
+:::
+::::
+
+::::exercise[Ackermann's interpretation]{#ex-ack-hf difficulty=2 objective="Show that Ackermann membership on $\nat$ is isomorphic to membership on the hereditarily finite sets."}
+Let $\mathrm{HF} = \bigcup_k V_k$ be the set of hereditarily finite sets, with $V_0 = \emptyset$ and $V_{k+1}$ the set of subsets of $V_k$. Define $F : \nat \to \mathrm{HF}$ by $F(n) = \{ F(i) : i \in \mathrm{Ack}(n) \}$, computed in $\nat$. Show that $F$ is well defined and is an isomorphism of $(\nat, E)$ onto $(\mathrm{HF}, \in)$, where $i \mathrel E n$ means $i \in \mathrm{Ack}(n)$.
+
+:::solution
+*Definition.* If $i \in \mathrm{Ack}(n)$, then $i < n$ (:ref{#lem-ack-basic}), so $F$ is defined by course-of-values recursion; by induction on $n$, $F(n)$ is a finite set of elements of $\mathrm{HF}$, hence an element of $\mathrm{HF}$ (if $F(i) \in V_{k_i}$ for each of the finitely many $i \in \mathrm{Ack}(n)$, then $F(n) \subseteq V_k$ for $k = \max k_i$, using $V_j \subseteq V_{j+1}$, so $F(n) \in V_{k+1}$).
+
+*Injectivity*, by induction on $\max(n, m)$. Suppose $F(n) = F(m)$. For $i \in \mathrm{Ack}(n)$, $F(i) \in F(m)$, so $F(i) = F(j)$ for some $j \in \mathrm{Ack}(m)$; since $i < n$ and $j < m$, $\max(i, j) < \max(n, m)$, and $i = j$ by the induction hypothesis. So $\mathrm{Ack}(n) \subseteq \mathrm{Ack}(m)$, and symmetrically; hence $n = m$, since $n = \sum_{i \in \mathrm{Ack}(n)} 2^i$.
+
+*Surjectivity*, by induction on $k$: every $x \in V_{k+1}$ is a finite set of elements of $V_k$, which are $F(i_1), \dots, F(i_r)$ for distinct $i_1, \dots, i_r$ by the induction hypothesis. Let $n = 2^{i_1} + \cdots + 2^{i_r}$; then $\mathrm{Ack}(n) = \{ i_1, \dots, i_r \}$ by the uniqueness of binary expansions, and $F(n) = x$.
+
+*Isomorphism.* If $i \in \mathrm{Ack}(n)$, then $F(i) \in F(n)$ by definition. Conversely, if $F(i) \in F(n)$, then $F(i) = F(j)$ for some $j \in \mathrm{Ack}(n)$, and $i = j$ by injectivity. This is the interpretation of hereditarily finite sets in arithmetic given by Ackermann (1937).
+:::
+::::
+:::::

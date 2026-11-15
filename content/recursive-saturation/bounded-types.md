@@ -76,9 +76,7 @@ Let $n \geq 0$ and $M$ a non-standard model of $\mathrm I\Sigma_1 + \mathrm B\Si
 
 So every non-standard model of $\mathrm I\Sigma_{n+1}$ is $\Sigma_{n+1}$-recursively saturated, and every non-standard model of $\mathrm{PA}$ is $\Sigma_n$-recursively saturated for every $n$. It need not be recursively saturated (:ref{#prop-rs-definable}): the types of recursive saturation have formulas of unbounded complexity, and no single truth definition covers them.
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-bt-sigma1-bound difficulty=1 objective="Realize a coded type of bounded formulas to bound the witnesses of all true $\Sigma_1$ sentences."}
 Let $M$ be a non-standard model of $\mathrm I\Sigma_1$. Show that some $d \in M$ bounds witnesses of all true $\Sigma_1$ sentences: if $M \models \exists \bar x\ \theta(\bar x)$ with $\theta$ bounded, then $M \models \exists \bar x < d\ \theta(\bar x)$.
 
 :::solution
@@ -93,3 +91,49 @@ Let $q_0(v) = \{ \exists \bar x < v\ \theta(\bar x) : M \models \exists \bar x\ 
 - H. Friedman, *Countable models of set theories*, in Cambridge Summer School in Mathematical Logic, Lecture Notes in Mathematics 337, Springer, 1973, 539–573.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 7.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991.
+
+:::::exercises
+::::exercise{#ex-bt-code-below difficulty=1 objective="Apply the realization lemma to find codes of a set of the standard system below any non-standard element."}
+Let $M$ be a non-standard model of $\mathrm I\Sigma_1$, $X \in \mathrm{SSy}(M)$ and $a \in M$ non-standard. Show, with :ref{#lem-fe-realize}, that some $c < a$ satisfies $\mathrm{Ack}(c) \cap \nat = X$.
+
+:::solution
+Consider, with the parameter $a$, the type $p(v) = \{ v < a \} \cup \{ \bar n \in v : n \in X \} \cup \{ \neg\, \bar n \in v : n \notin X \}$. Its formulas are bounded, hence $\Sigma_1$, and its set of codes is computable from $X$, so it belongs to $\mathrm{SSy}(M)$ (:ref{#thm-ssy-turing-ideal}) and $p$ is coded. A finite part mentions numbers $n < m$ only; the standard number $\sum_{n \in X,\, n < m} 2^n$ is below $a$ and satisfies it, since bounded sentences with numerals have the same truth value in $M$ and in $\nat$ (:ref{#thm-sigma1-complete}). By :ref{#lem-fe-realize} (1) with $n = 0$, since $M \models \mathrm I\Sigma_1$, some $c$ realizes $p$.
+:::
+::::
+
+::::exercise{#ex-bt-coding-needed difficulty=1 objective="See why the realization lemma needs coded types, with a type of bounded formulas omitted in a countable model."}
+Let $M$ be a countable non-standard model of $\mathrm I\Sigma_1$. Show that some type over $M$ without parameters, all of whose formulas are bounded, is omitted in $M$.
+
+:::solution
+Every member of $\mathrm{SSy}(M)$ is $\mathrm{Ack}(c) \cap \nat$ for some $c \in M$, so $\mathrm{SSy}(M)$ is countable, and some $X \subseteq \nat$ is not in it. Let $p_X(v) = \{ \bar n \in v : n \in X \} \cup \{ \neg\, \bar n \in v : n \notin X \}$, as in :ref{#ex-rs-types} (2). A finite part mentions numbers $n < m$ only, and is satisfied by $\sum_{n \in X,\, n < m} 2^n$, by :ref{#thm-sigma1-complete} as in :ref{#ex-bt-code-below}; so $p_X$ is a type. An element realizing it would satisfy $\mathrm{Ack}(c) \cap \nat = X$, which is impossible. So :ref{#lem-fe-realize} fails for types that are not coded, even of bounded formulas.
+:::
+::::
+
+::::exercise{#ex-bt-sigma-n-bound difficulty=2 objective="Adapt the bound for witnesses of $\Sigma_1$ sentences to $\Sigma_{n+1}$ sentences in models of $\mathrm I\Sigma_{n+1}$."}
+Let $n \geq 0$ and $M$ a non-standard model of $\mathrm I\Sigma_{n+1}$. Show that some $d \in M$ satisfies: for every $\Pi_n$ formula $\theta(\bar x)$ without parameters, if $M \models \exists \bar x\ \theta(\bar x)$, then $M \models \exists \bar x\ (\bar x < d \wedge \theta(\bar x))$. For $n = 0$ this is :ref{#ex-bt-sigma1-bound}.
+
+:::solution
+For a $\Pi_n$ formula $\theta(\bar x)$, the formula $\bar x < v \wedge \theta(\bar x)$ is logically equivalent to the $\Pi_n$ formula obtained by putting the bounded conjunct $\bar x < v$ inside the quantifier prefix of $\theta$, and this rewriting is computable. Let $\theta^\sharp(v)$ be the $\Sigma_{n+1}$ formula $\exists \bar x$ followed by it, and
+$$
+q(v) = \{ \theta^\sharp(v) : \theta \in \Pi_n,\ M \models \exists \bar x\ \theta(\bar x) \}.
+$$
+The sentences $\exists \bar x\ \theta(\bar x)$ are $\Sigma_{n+1}$, so the set of codes of $q$ is computable from $\mathrm{Th}_{\Sigma_{n+1}}(M)$, which belongs to $\mathrm{SSy}(M)$ by :ref{#lem-fe-types-coded}, applied with $n + 1 \geq 1$; so $q$ is coded (:ref{#thm-ssy-turing-ideal}). A finite part concerns finitely many true sentences $\exists \bar x\ \theta_j(\bar x)$; any $v$ greater than all entries of chosen witnesses satisfies it. The model satisfies $\mathrm I\Sigma_1$ and $\mathrm B\Sigma_{n+1}$ (:ref{#thm-fo-parsons}), and $\nat$ is not $\Sigma_{n+1}$-definable in it, by the last statement of :ref{#lem-fe-realize}. By item 1 of that lemma, some $d$ realizes $q$.
+:::
+::::
+
+::::exercise{#ex-bt-sigma-n-same-type difficulty=2 objective="Realize, by overspill on a truth definition, a second element with the same $\Sigma_n$ properties as a non-definable element."}
+Let $M$ be a non-standard model of $\mathrm{PA}$, $n \in \nat$, and $a \in M$ an element not definable in $M$ without parameters. Show that some $b \neq a$ satisfies exactly the same $\Sigma_n$ formulas $\theta(x)$ without parameters as $a$.
+
+:::solution
+For a $\Sigma_n$ formula $\theta$, write $\theta^-$ for the $\Pi_n$ formula obtained from $\neg \theta$ by moving the negation through the quantifier prefix. Let
+$$
+q(v) = \{ v \neq a \} \cup \{ \theta(v) : \theta \in \Sigma_n,\ M \models \theta(a) \} \cup \{ \theta^-(v) : \theta \in \Sigma_n,\ M \models \neg \theta(a) \}.
+$$
+Its formulas are $\Sigma_n$ or $\Pi_n$, hence equivalent to $\Sigma_{n+1}$ formulas by adding dummy quantifiers, computably. If $n \geq 1$, the set of $\Sigma_n$ formulas true of $a$ belongs to $\mathrm{SSy}(M)$ by :ref{#lem-fe-types-coded}; if $n = 0$, it is computable from the set of $\Sigma_1$ formulas true of $a$, given by the same lemma. In both cases the set of codes of $q$ is computable from it, so $q$ is coded.
+
+A finite part involves $v \neq a$ and finitely many formulas; let $\eta(x)$ be their conjunction, other than $v \neq a$. Then $M \models \eta(a)$. If $a$ were the only element satisfying $\eta$, it would be definable by $\eta$; so some $b \neq a$ satisfies $\eta$, and the finite part. Since $M \models \mathrm I\Sigma_{n+1}$, :ref{#lem-fe-realize} (1) gives $b$ realizing $q$. For a $\Sigma_n$ formula $\theta$, $M \models \theta(b)$ if $M \models \theta(a)$, and $M \models \theta^-(b)$, that is $\neg \theta(b)$, otherwise.
+
+The same argument for all formulas at once needs a truth definition for formulas of unbounded complexity; for recursively saturated models it is a direct application of the definition.
+:::
+::::
+:::::

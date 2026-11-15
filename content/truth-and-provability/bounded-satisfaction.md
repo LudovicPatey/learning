@@ -100,7 +100,7 @@ Why are tables indexed by a bound $r$ on the values of assignments?
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-tp-sat0-computable difficulty=1 objective="Read off from the $\Delta_1$ definition of $\mathrm{Sat}_0$ that bounded satisfaction is computable in $\nat$."}
 Show that the set of pairs $(z, e)$ of natural numbers such that $\nat \models \mathrm{Sat}_0(z, e)$ is computable.
 
 :::solution
@@ -114,3 +114,41 @@ The construction follows Hájek and Pudlák, Chapter I, Section 1(d): the arithm
 
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 1(d).
 - Z. Adamowicz, L. A. Kołodziejczyk and J. Paris, *Truth definitions without exponentiation and the Σ₁ collection scheme*, Journal of Symbolic Logic 77 (2012), 649–655.
+
+:::::exercises
+::::exercise{#ex-tp-table-compute difficulty=1 objective="Compute an entry of a satisfaction table by unfolding Tarski's conditions for two nested bounded quantifiers."}
+Let $z$ be the code of $\forall v_1 < v_0\ \exists v_2 < v_0\ (v_1 < v_2)$, and let $q$ be a table for $(p, r)$ with $z < p$. Show that, for every sequence $e$ of length $p$ with values below $r$, $q(z, e) = 1$ if and only if $e(0) = 0$.
+
+:::solution
+The codes of the subformulas $\exists v_2 < v_0\ (v_1 < v_2)$ and $v_1 < v_2$ are smaller than $z$, hence below $p$, and the indices $0, 1, 2$ are below $z < p$; so the entries used below are in the table. By the clause for $\forall v_1 < v_0$, $q(z, e) = 1$ if and only if $q(\ulcorner \exists v_2 < v_0\ (v_1 < v_2) \urcorner, e[1 := u]) = 1$ for every $u < e(0)$. Since $e[1 := u](0) = e(0)$, the clause for $\exists v_2 < v_0$ turns this into: for every $u < e(0)$ there is $u' < e(0)$ with $q(\ulcorner v_1 < v_2 \urcorner, e[1 := u][2 := u']) = 1$, that is, by the atomic clause and the characterization of $\mathrm{Val}$, with $u < u'$. If $e(0) = 0$, there is no $u < e(0)$ and the condition holds. If $e(0) = k \geq 1$, it fails at $u = k - 1$, since no $u' < k$ satisfies $k - 1 < u'$. So $q(z, e) = 1$ if and only if $e(0) = 0$: the formula is equivalent to $v_0 = 0$.
+:::
+::::
+
+::::exercise{#ex-tp-sat0-free-variables difficulty=1 objective="Derive from the uniqueness of tables that bounded satisfaction depends only on the values of the assignment at the variables of the formula."}
+Show that $\mathrm I\Sigma_1$ proves: if $z \in \Delta^*_0$ and $e(i) = e'(i)$ for every $i < z$, then $\mathrm{Sat}_0(z, e) \leftrightarrow \mathrm{Sat}_0(z, e')$.
+
+:::solution
+Work in $\mathrm I\Sigma_1$. Let $p = z + 1$, $r = 1 + \max_{i < p} e(i)$ and $r' = 1 + \max_{i < p} e'(i)$, and let $q$ and $q'$ be tables for $(p, r)$ and $(p, r')$, given by item 2 of :ref{#lem-sat-tables}. As in the proof of :ref{#thm-sat0}, $\mathrm{Sat}_0(z, e)$ is equivalent to $q(z, e) = 1$, and $\mathrm{Sat}_0(z, e')$ to $q'(z, e') = 1$. The hypotheses of item 1 of :ref{#lem-sat-tables} hold: $z < p$, $e$ has values below $r$ on $[0, p)$, $e'$ has values below $r'$ on $[0, p)$, and $e(i) = e'(i)$ for $i < z$. So $q(z, e) = q'(z, e')$. The hypothesis concerns only the indices $i < z$, which include those of all variables of the formula coded by $z$, free or bound.
+:::
+::::
+
+::::exercise{#ex-tp-table-function difficulty=2 objective="Prove that satisfaction tables are unique, and that the function giving them is provably total in $\mathrm I\Sigma_1$." lessons="provably-total"}
+Show that $\mathrm I\Sigma_1$ proves $\forall p\ \forall r\ \exists! q\ \mathrm{Tab}(q, p, r)$. Deduce that the function $(p, r) \mapsto$ the table for $(p, r)$ in $\nat$ is provably total in $\mathrm I\Sigma_1$.
+
+:::solution
+Work in $\mathrm I\Sigma_1$. Existence is item 2 of :ref{#lem-sat-tables}. Let $q$ and $q'$ be tables for $(p, r)$. Both are coded sets of triples, containing exactly one triple $\langle z, e, b \rangle$ for each $z < p$ in $\Delta^*_0$ and each sequence $e$ of length $p$ with values below $r$, and no other element. For such $z$ and $e$, item 1 of :ref{#lem-sat-tables}, with $e' = e$, gives $q(z, e) = q'(z, e)$. So $q$ and $q'$ have the same elements. Let $a = q + q' + 1$; then $q, q' < 2^a$, and $\forall i < a\ (i \in q \leftrightarrow i \in q')$, so $q = q'$ by extensionality (:ref{#lem-ack-basic}).
+
+The formula $\mathrm{Tab}(q, p, r)$ is $\Delta_1$ in $\mathrm I\Sigma_1$; let $\varphi(p, r, q)$ be its $\Sigma_1$ form. In $\nat$, which satisfies $\mathrm I\Sigma_1$, $\varphi$ defines the graph of the function $(p, r) \mapsto$ the unique table for $(p, r)$, and $\mathrm I\Sigma_1 \vdash \forall p\ \forall r\ \exists! q\ \varphi(p, r, q)$ by what was just proved. So this function is provably total in $\mathrm I\Sigma_1$ (:ref{#def-provably-total}).
+:::
+::::
+
+::::exercise{#ex-tp-sat0-nonstandard difficulty=2 objective="Apply Tarski's conditions inside $\mathrm I\Sigma_1$, by induction, to a family of formulas that includes non-standard ones." lessons="provably-total"}
+Let $c$ be the primitive recursive function with $c(0) = \ulcorner 0 = 0 \urcorner$ and $c(n + 1) = \ulcorner c(n) \wedge c(n) \urcorner = \langle 7, c(n), c(n) \rangle$, in the coding of this lesson, and use the same letter for the function defined in $\mathrm I\Sigma_1$ by :ref{#thm-pr-provably-total}. Show that $\mathrm I\Sigma_1$ proves $\forall n\ \forall e\ \big( c(n) \in \Delta^*_0 \wedge \mathrm{Sat}_0(c(n), e) \big)$ and $\forall n\ c(n) \geq n$. Deduce that every non-standard model $M$ of $\mathrm I\Sigma_1$ contains a non-standard $z \in \Delta^*_0$ with $M \models \mathrm{Sat}_0(z, e)$ for every $e$.
+
+:::solution
+Work in $\mathrm I\Sigma_1$. By :ref{#thm-pr-provably-total}, $c(0) = \ulcorner 0 = 0 \urcorner$ and $c(n + 1) = \langle 7, c(n), c(n) \rangle$. Fix $e$ and apply induction on $n$ to $c(n) \in \Delta^*_0 \wedge \mathrm{Sat}_0(c(n), e) \wedge c(n) \geq n$, which is $\Delta_1$ in $\mathrm I\Sigma_1$, since $c$ has a $\Delta_1$ graph and $\Delta^*_0$ and $\mathrm{Sat}_0$ are $\Delta_1$ (:ref{#fact-syntax}, :ref{#thm-sat0}); in its $\Sigma_1$ form it is an instance of $\Sigma_1$ induction. For $n = 0$, $\ulcorner 0 = 0 \urcorner$ is an atomic formula, so it is in $\Delta^*_0$, and $\mathrm{Sat}_0(\ulcorner 0 = 0 \urcorner, e)$ holds by the atomic condition, since $\mathrm{Val}(\ulcorner 0 \urcorner, e) = 0$ on both sides. For the step, the recursive characterization of $\Delta^*_0$ gives $c(n + 1) \in \Delta^*_0$, and the condition for $\wedge$ in :ref{#thm-sat0} gives $\mathrm{Sat}_0(c(n + 1), e) \leftrightarrow \mathrm{Sat}_0(c(n), e) \wedge \mathrm{Sat}_0(c(n), e)$, which holds. Finally $c(n + 1) > c(n) \geq n$, since the pairing function of :ref{#fact-pairing} is strictly increasing in each argument and bounds its arguments; so $c(n + 1) \geq n + 1$.
+
+Let $M$ be non-standard and $a \in M$ non-standard. Then $z = c(a) \geq a$ is non-standard, $z \in \Delta^*_0$ in the sense of $M$, and $M \models \mathrm{Sat}_0(z, e)$ for every $e$. The code $z$ is not the code of any formula of the metatheory, whose codes are standard: Tarski's conditions, proved in $\mathrm I\Sigma_1$, apply to it all the same.
+:::
+::::
+:::::

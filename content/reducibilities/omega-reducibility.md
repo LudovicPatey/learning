@@ -104,19 +104,11 @@ In the proof of ($\Leftarrow$) in :ref{#thm-game-omega}, why does Player 2 never
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-game-kl-j difficulty=1 objective="Play the reduction game with a well-chosen instance whose unique solution codes the jump."}
 Show that Player 2 has a strategy in $G(\mathsf{KL} \rightarrow \mathsf J)$ that wins at round $2$, after a single instance of $\mathsf{KL}$.
 
 :::solution
 Let $X$ be the instance of $\mathsf J$ played by Player 1. At round $1$, Player 2 plays the $X$-computable finitely branching tree of :ref{#thm-finitely-branching-jump}, relativized to $X$. It has a unique path, so Player 1 must play it, and this path computes $X'$. At round $2$, Player 2 plays $X'$, which is computable in $X \oplus Y_1$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that $\mathsf{RT}^n_k \leq_\omega \mathsf J$ for all $n, k \geq 1$.
-
-:::solution
-Let $\mathcal I$ be a jump ideal and $f \in \mathcal I$ a coloring of $[\nat]^n$ with $k$ colors. Then $f^{(n)} \in \mathcal I$. It is PA relative to $f^{(n-1)}$, since it computes the leftmost member of every non-empty $\Pi^0_1(f^{(n-1)})$ class (:ref{#prop-leftmost-path}, relativized). By :ref{#thm-jockusch-upper}, $f^{(n)}$ computes an infinite homogeneous set for $f$, which belongs to $\mathcal I$.
 :::
 ::::
 
@@ -127,3 +119,61 @@ The view of theorems as problems goes back to the computable analysis of Weihrau
 - D. R. Hirschfeldt and C. G. Jockusch, *On notions of computability-theoretic reduction between Π¹₂ principles*, Journal of Mathematical Logic 16 (2016), 1650002.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.1, 4.6 and 4.7.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2015, Sections 2.2 and 4.5.
+
+:::::exercises
+::::exercise{#ex-rtnk-jump difficulty=1 objective="Combine Jockusch's upper bound with jump ideals to show that Ramsey's theorem is ω-reducible to the jump."}
+Show that $\mathsf{RT}^n_k \leq_\omega \mathsf J$ for all $n, k \geq 1$.
+
+:::solution
+Let $\mathcal I$ be a jump ideal and $f \in \mathcal I$ a coloring of $[\nat]^n$ with $k$ colors. Then $f^{(n)} \in \mathcal I$. It is PA relative to $f^{(n-1)}$, since it computes the leftmost member of every non-empty $\Pi^0_1(f^{(n-1)})$ class (:ref{#prop-leftmost-path}, relativized). By :ref{#thm-jockusch-upper}, $f^{(n)}$ computes an infinite homogeneous set for $f$, which belongs to $\mathcal I$.
+:::
+::::
+
+::::exercise{#ex-omega-product difficulty=1 objective="Check on the product of two problems that satisfaction by a Turing ideal is a conjunction."}
+The **product** $\mathsf P \times \mathsf Q$ of two problems has as instances the sets $X_0 \oplus X_1$ with $X_0$ an instance of $\mathsf P$ and $X_1$ an instance of $\mathsf Q$, and as solutions to $X_0 \oplus X_1$ the sets $Y_0 \oplus Y_1$ with $Y_0$ a solution to $X_0$ and $Y_1$ a solution to $X_1$. Suppose that $\mathsf P$ and $\mathsf Q$ both have a computable instance. Show that a Turing ideal satisfies $\mathsf P \times \mathsf Q$ if and only if it satisfies $\mathsf P$ and $\mathsf Q$. Deduce that $\mathsf P \times \mathsf P \equiv_\omega \mathsf P$. Show that the hypothesis on computable instances cannot be dropped.
+
+:::solution
+Let $\mathcal I$ be a Turing ideal. Suppose $\mathcal I \models \mathsf P$ and $\mathcal I \models \mathsf Q$, and let $X_0 \oplus X_1 \in \mathcal I$ be an instance of $\mathsf P \times \mathsf Q$. Then $X_0, X_1 \in \mathcal I$, since both are computable in $X_0 \oplus X_1$; they have solutions $Y_0, Y_1 \in \mathcal I$, and $Y_0 \oplus Y_1 \in \mathcal I$ is a solution to $X_0 \oplus X_1$.
+
+Conversely, suppose $\mathcal I \models \mathsf P \times \mathsf Q$, and let $X_0 \in \mathcal I$ be an instance of $\mathsf P$. Let $X_1$ be a computable instance of $\mathsf Q$; it belongs to $\mathcal I$, since a Turing ideal is non-empty and closed downwards, so it contains every computable set. Then $X_0 \oplus X_1 \in \mathcal I$ has a solution $Y_0 \oplus Y_1 \in \mathcal I$, and $Y_0 \leq_T Y_0 \oplus Y_1$ is a solution to $X_0$ in $\mathcal I$. So $\mathcal I \models \mathsf P$, and symmetrically $\mathcal I \models \mathsf Q$.
+
+With $\mathsf Q = \mathsf P$, the Turing ideals satisfying $\mathsf P \times \mathsf P$ are those satisfying $\mathsf P$, so $\mathsf P \times \mathsf P \equiv_\omega \mathsf P$.
+
+For the hypothesis, let $\mathsf Q$ be the problem whose instances are the non-computable sets, each its own solution, and $\mathsf P = \mathsf{WKL}$. In the Turing ideal $\mathrm{REC}$, no instance of $\mathsf Q$, hence no instance of $\mathsf P \times \mathsf Q$, occurs; so $\mathrm{REC}$ satisfies $\mathsf P \times \mathsf Q$ vacuously, but not $\mathsf{WKL}$ (:ref{#thm-dnc2-no-computable}).
+:::
+::::
+
+::::exercise{#ex-omega-unique-solutions difficulty=1 objective="See why problems with unique solutions have a least Turing ideal satisfying them, and identify it for the jump."}
+Suppose that every instance of a problem $\mathsf P$ has exactly one solution. Show that the intersection of a non-empty family of Turing ideals satisfying $\mathsf P$ is a Turing ideal satisfying $\mathsf P$. Show that the least jump ideal is the class of arithmetic sets, $\{ Y : \exists n\ Y \leq_T \emptyset^{(n)} \}$. Why does the first argument fail for $\mathsf{WKL}$?
+
+:::solution
+Let $(\mathcal I_j)_{j \in J}$ be a non-empty family of Turing ideals satisfying $\mathsf P$, and $\mathcal I = \bigcap_j \mathcal I_j$. Each $\mathcal I_j$ contains $\emptyset$, since it is non-empty and closed downwards, so $\emptyset \in \mathcal I$. If $X, Y \in \mathcal I$, then $X \oplus Y \in \mathcal I_j$ for every $j$; if $Y \leq_T X \in \mathcal I$, then $Y \in \mathcal I_j$ for every $j$. So $\mathcal I$ is a Turing ideal. If $X \in \mathcal I$ is an instance of $\mathsf P$ with unique solution $Y$, then $Y \in \mathcal I_j$ for every $j$, since $\mathcal I_j \models \mathsf P$ and $Y$ is the only candidate; so $Y \in \mathcal I$.
+
+For $\mathsf J$, let $\mathcal A = \{ Y : \exists n\ Y \leq_T \emptyset^{(n)} \}$. It is a Turing ideal: if $Y \leq_T \emptyset^{(n)}$ and $Z \leq_T \emptyset^{(m)}$, then $Y \oplus Z \leq_T \emptyset^{(\max(n, m))}$. It is a jump ideal: if $Y \leq_T \emptyset^{(n)}$, then $Y' \leq_T \emptyset^{(n+1)}$ by monotonicity of the jump. Every jump ideal contains $\emptyset$, hence by induction every $\emptyset^{(n)}$, hence $\mathcal A$. So $\mathcal A$ is the least jump ideal (and also the intersection of all jump ideals, by the first part).
+
+For $\mathsf{WKL}$, a tree in $\mathcal I$ has a path in each $\mathcal I_j$, but these paths may differ, and none of them need belong to all the $\mathcal I_j$. Indeed, the intersection of two Scott ideals need not be a Scott ideal (:ref{#ex-scott-chain}).
+:::
+::::
+
+::::exercise[Unbounded number of rounds]{#ex-game-unbounded difficulty=2 objective="Show that a winning strategy in a reduction game may need an unbounded number of rounds."}
+Let $\mathsf P$ be the problem whose instances are the pairs $(n, X)$ with $n \geq 1$ and $X$ a set, the only solution to $(n, X)$ being $X^{(n)}$. Show that $\mathsf P \leq_\omega \mathsf J$, but that for every $k$, no strategy of Player 2 in $G(\mathsf J \rightarrow \mathsf P)$ wins every play after at most $k$ instances of $\mathsf J$.
+
+:::solution
+A jump ideal containing $(n, X)$ contains $X$, hence $X', X'', \dots, X^{(n)}$; so $\mathsf P \leq_\omega \mathsf J$.
+
+Fix $k$ and a strategy of Player 2. Player 1 plays the instance $X_0 = (k + 1, \emptyset)$, a computable set, and then the only solutions available: the jump of each instance played by Player 2. We show by induction that $Z_j \leq_T \emptyset^{(j)}$ for every round at which $Z_j$ is defined. For $j = 0$, $Z_0 = X_0$ is computable. If Player 2 plays an instance $V_{j+1} \leq_T Z_j \leq_T \emptyset^{(j)}$, then $Y_{j+1} = V_{j+1}' \leq_T \emptyset^{(j+1)}$ by monotonicity of the jump, and $Z_{j+1} = Z_j \oplus Y_{j+1} \leq_T \emptyset^{(j+1)}$.
+
+If the strategy won after at most $k$ instances, it would play the solution $\emptyset^{(k+1)}$ at some round $j + 1$ with $j \leq k$, computable in $Z_j \leq_T \emptyset^{(j)} \leq_T \emptyset^{(k)}$. But $\emptyset^{(k+1)} \not\leq_T \emptyset^{(k)}$. So on this play the strategy uses more than $k$ instances. By :ref{#thm-game-omega}, Player 2 has a winning strategy all the same; on the instance $(n, X)$, playing $X, X', \dots, X^{(n-1)}$ wins after $n$ instances.
+:::
+::::
+
+::::exercise{#ex-game-player1-low difficulty=1 objective="Turn the low basis theorem into an explicit winning strategy for Player 1."}
+Describe a winning strategy for Player 1 in $G(\mathsf{WKL} \rightarrow \mathsf J)$ in which every set $Z_n$ of the play is low. Deduce $\mathsf J \not\leq_\omega \mathsf{WKL}$ from :ref{#thm-game-omega}.
+
+:::solution
+Player 1 plays $X_0 = \emptyset$. When Player 2 plays an infinite binary tree $V_n \leq_T Z_{n-1}$, the class of its paths is a non-empty $\Pi^0_1(Z_{n-1})$ class; by the low basis theorem (:ref{#thm-low-basis}) relativized to $Z_{n-1}$, it has a member $Y_n$ with $(Z_{n-1} \oplus Y_n)' \leq_T Z_{n-1}'$. Player 1 plays this $Y_n$. Since $Z_n = Z_{n-1} \oplus Y_n$, induction gives $Z_n' \leq_T Z_0' = \emptyset'$ for every $n$: every $Z_n$ is low.
+
+Player 2 wins only by playing the unique solution $\emptyset'$ to $X_0$, computable in some $Z_n$. Then $\emptyset'' \leq_T Z_n' \leq_T \emptyset'$, which is impossible. So, whatever Player 2 does, she never wins, and the game is infinite or she cannot move: Player 1 wins every play. In particular Player 2 has no winning strategy, and $\mathsf J \not\leq_\omega \mathsf{WKL}$ by :ref{#thm-game-omega}.
+:::
+::::
+:::::

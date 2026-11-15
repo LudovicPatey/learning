@@ -116,7 +116,7 @@ The second direction contains Gödel's first incompleteness theorem in Rosser's 
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-pa-extension difficulty=1 objective="Characterize the PA sets by total extensions of partial computable $\{0, 1\}$-valued functions."}
 Show that $X$ is PA if and only if every partial computable function $\psi : \nat \rightharpoonup \{0, 1\}$ has a total $X$-computable extension.
 
 :::solution
@@ -126,7 +126,7 @@ Conversely, let $\psi(e) \simeq 1 - \Phi_e(e)$ when $\Phi_e(e)\converge \in \{0,
 :::
 ::::
 
-::::exercise{difficulty=2 #ex-pa-relative}
+::::exercise{#ex-pa-relative difficulty=2 objective="Relativize the characterization of PA sets to show that a set PA relative to $X$ computes $X$."}
 A set $Y$ is **PA relative to $X$** if it computes a function $f : \nat \to \{0, 1\}$ with $f(e) \neq \Phi^X_e(e)$ whenever $\Phi^X_e(e)\converge$. Show that if $Y$ is PA relative to $X$, then $X \leq_T Y$.
 
 :::solution
@@ -149,3 +149,41 @@ Soare's *Turing Computability* treats PA degrees in Chapter 10, Downey and Hirsc
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Chapter 10.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 2.21–2.22.
 - D. R. Hirschfeldt, *Slicing the Truth*, Lecture Notes Series of the Institute for Mathematical Sciences, National University of Singapore, 28, World Scientific, 2015, Section 3.1.
+
+:::::exercises
+::::exercise{#ex-pa-almost-dnc2 difficulty=1 objective="See that a $\{0, 1\}$-valued function diagonalizing on all but finitely many arguments suffices for PA degree."}
+Show that $X$ is PA if and only if $X$ computes a function $f : \nat \to \{0, 1\}$ such that $f(e) \neq \Phi_e(e)$ for all but finitely many $e$ with $\Phi_e(e)\converge$.
+
+:::solution
+A member of $\mathrm{DNC}_2$ has the property. Conversely, let $f \leq_T X$ be such a function, and $F$ the finite set of $e$ with $\Phi_e(e)\converge = f(e)$. Let $g(e) = 1 - f(e)$ for $e \in F$, and $g(e) = f(e)$ otherwise. Since $F$ is finite, $g$ differs from $f$ at finitely many arguments, whose values can be written into the algorithm, so $g \leq_T X$. For $e \in F$, $g(e) = 1 - \Phi_e(e) \neq \Phi_e(e)$; for $e \notin F$ with $\Phi_e(e)\converge$, $g(e) = f(e) \neq \Phi_e(e)$. So $g \in \mathrm{DNC}_2$ and $X$ is PA.
+:::
+::::
+
+::::exercise{#ex-pa-minimal-pair difficulty=1 objective="Combine the low and computably dominated basis theorems to find two PA sets with no common non-computable information."}
+Show that there are PA sets $X$ and $Y$ such that every set computable from both $X$ and $Y$ is computable.
+
+:::solution
+By :ref{#cor-pa-basis}, there are a low PA set $X$ and a computably dominated PA set $Y$. Let $D \leq_T X$ and $D \leq_T Y$. Then $D \leq_T X \leq_T \emptyset'$, so $D$ is $\Delta^0_2$. And $D$ is computable from the computably dominated set $Y$; by :ref{#ex-cone-from-low-dominated}, $Y$ computes no non-computable $\Delta^0_2$ set, so $D$ is computable.
+:::
+::::
+
+::::exercise{#ex-pa-relative-strict difficulty=1 objective="Derive from the relativized characterization that a set PA relative to $X$ is strictly above $X$, and that the relation is transitive."}
+Show that if $Y$ is PA relative to $X$ (:ref{#ex-pa-relative}), then $X <_T Y$. Show that if $Z$ is PA relative to $Y$ and $Y$ is PA relative to $X$, then $Z$ is PA relative to $X$.
+
+:::solution
+By :ref{#ex-pa-relative}, $X \leq_T Y$. If $Y \leq_T X$, then $X$ computes a function $f : \nat \to \{0, 1\}$ with $f(e) \neq \Phi^X_e(e)$ whenever $\Phi^X_e(e)\converge$; let $c$ be such that $f = \Phi^X_c$, total; then $\Phi^X_c(c)\converge = f(c)$, a contradiction, as in :ref{#thm-dnc2-no-computable} relativized to $X$. So $X <_T Y$. For the second statement, $Y \leq_T Z$ by :ref{#ex-pa-relative}, and $Y$ computes a $\{0, 1\}$-valued function that is DNC relative to $X$; so $Z$ computes it.
+:::
+::::
+
+::::exercise{#ex-pa-not-uniform difficulty=2 objective="Use the recursion theorem to show that no single functional computes a member of $\mathrm{DNC}_2$ from every PA set."}
+Show that there is no Turing functional $\Gamma$ such that $\Gamma^X$ is a member of $\mathrm{DNC}_2$ for every PA set $X$.
+
+:::solution
+Suppose that $\Gamma$ is such a functional. By SMN, there is a computable function $h$ such that, for every $e$, the program $h(e)$, on any input, searches for the first pair $(\sigma, s)$ of a string and a stage, in a fixed enumeration, such that $\Gamma^\sigma(e)[s]\converge$, and outputs this value. By the recursion theorem, there is $e$ with $\Phi_e = \Phi_{h(e)}$.
+
+If the search finds a pair $(\sigma, s)$, with $\Gamma^\sigma(e)[s]\converge = v$, then $\Phi_e(e) = v$. Let $X$ be the set $\emptyset'$ modified so as to extend $\sigma$: $X(n) = \sigma(n)$ for $n < |\sigma|$, and $X(n) = \emptyset'(n)$ otherwise. It differs from $\emptyset'$ at finitely many positions, so $X \equiv_T \emptyset'$, and $X$ is PA, since $\emptyset'$ is and the PA sets are closed upward. As $\sigma \prec X$, $\Gamma^X(e) = v = \Phi_e(e)$, so $\Gamma^X \notin \mathrm{DNC}_2$, a contradiction.
+
+If the search fails, then $\Gamma^X(e)\diverge$ for every $X$: a convergent computation would provide a pair $(X \uh u, s)$ of the kind searched for, with $u$ its use. So $\Gamma^{\emptyset'}$ is not total, again a contradiction. In contrast, by the remark after :ref{#thm-pa-characterization}, members of all non-empty $\Pi^0_1$ classes are computed uniformly from a member of $\mathrm{DNC}_2$; the non-uniformity lies in obtaining that member from an arbitrary PA set.
+:::
+::::
+:::::

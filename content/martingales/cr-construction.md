@@ -1,7 +1,7 @@
 ---
 title: A computably random sequence that is not Martin-Löf random
 summary: A computably random sequence computable in ∅′ whose prefixes have complexity O((log n)²), built by diagonalizing against a combined martingale and compressing the construction; Martin-Löf randomness is strictly stronger than computable randomness.
-duration: 35
+duration: 40
 prerequisites: [computable-randomness]
 ---
 
@@ -87,17 +87,15 @@ Why is $X$ not computably random if the index $e$ of a total martingale could le
   It cannot, and it does not need to: the construction only asks, for each $n$, a $\Sigma^0_1$ question.
 :::
 
-By a theorem of Nies, Stephan and Terwijn, proved in the last lesson (:ref{to="martingales/randomness-hierarchy"}), a computably random sequence that is not Martin-Löf random is high; so the sequence of the theorem is high, and Turing below $\emptyset'$.
-
-## Exercises
-
-::::exercise{difficulty=2}
+::::exercise{#ex-cr-slow-entry difficulty=2 objective="Slow down the introduction of candidates in the construction to make the prefixes of a computably random sequence as compressible as desired."}
 Let $p$ be a computable strictly increasing function, and modify the construction of :ref{#thm-cr-not-mlr} so that the index $e$ enters at position $p(e)$ instead of $2^e$. Show that the sequence obtained is computably random, and that $K(X \uh n) \leq K(n) + k(n)\, \ell(n) + c$, where $k(n)$ is the number of $e$ with $p(e) \leq n$. Deduce that for every order $h$ there is a computably random sequence $X$ with $K(X \uh n) \leq h(n) \log n$ for almost every $n$.
 
 :::solution
 The proof of the theorem is unchanged, with $2^e$ replaced by $p(e)$: the combined capital is at most $\sum_e 2^{-e} = 2$, every total rational-valued martingale stays active from position $p(e)$ on, and $X \uh n$ is computed from $n$ and the exit positions of the $k(n)$ indices with $p(e) \leq n$, each written with $\ell(n) = \lfloor \log(n+1) \rfloor + 1$ bits. For the last statement, given an order $h$, let $p(e)$ be the least $n > p(e-1)$ (with $p(-1) = -1$) such that $h(n) \geq 4(e + 2)$. Then $k(n) \leq h(n)/4$ when $k(n) \geq 1$, and $K(X \uh n) \leq 2 \log(n+1) + \frac14 h(n) (\log(n+1) + 1) + c$, which is at most $h(n) \log n$ for almost every $n$, since $h$ is unbounded.
 :::
 ::::
+
+By a theorem of Nies, Stephan and Terwijn, proved in the last lesson (:ref{to="martingales/randomness-hierarchy"}), a computably random sequence that is not Martin-Löf random is high; so the sequence of the theorem is high, and Turing below $\emptyset'$.
 
 ## Notes and references
 
@@ -106,3 +104,59 @@ Schnorr (1971) proved that computable randomness is strictly weaker than Martin-
 - C.-P. Schnorr, *Zufälligkeit und Wahrscheinlichkeit*, Lecture Notes in Mathematics 218, Springer, 1971.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 7.4.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 7.4.
+
+:::::exercises
+::::exercise{#ex-cr-explicit-bound difficulty=1 objective="Extract from the construction an explicit bound on the capital of each computable martingale along the sequence."}
+Let $X$ be the sequence built in the proof of :ref{#thm-cr-not-mlr}, and let $e$ be such that $\psi_e$ is a martingale with $\psi_e(\varepsilon) \leq 1$. Show that $\psi_e(X \uh n) < 2^{2^e + e + 2}$ for every $n$.
+
+:::solution
+By :ref{#lem-martingale-basic} (1), $\psi_e(\sigma) \leq 2^{|\sigma|}$ for every $\sigma$. If $n < 2^e$, then $\psi_e(X \uh n) \leq 2^n < 2^{2^e}$. If $n \geq 2^e$, then $e \in A_n$, since $\psi_e$ is $m$-good for every $m$, and the proof gives $w_e\, \psi_e(X \uh n) \leq D_n(X \uh n) < 2$; so
+$$
+\psi_e(X \uh n) < \frac{2}{w_e} = 2^{e+1} \big(1 + \psi_e(X \uh 2^e)\big) \leq 2^{e+1} \big(1 + 2^{2^e}\big) \leq 2^{2^e + e + 2}.
+$$
+The bound is computable from $e$; what cannot be computed is the set of indices $e$ to which it applies.
+:::
+::::
+
+::::exercise{#ex-cr-omega-ce difficulty=2 objective="Approximate the construction by stages and count the mind changes, to see that the sequence has a computable approximation with a computable bound on the number of changes."}
+A sequence $X$ is **$\omega$-c.e.** if there are a computable function $(n, s) \mapsto X_s(n) \in \{0, 1\}$ with $\lim_s X_s(n) = X(n)$ for every $n$, and a computable function $b$ such that $X_{s+1}(n) \neq X_s(n)$ for at most $b(n)$ numbers $s$. Show that the sequence $X$ of the proof of :ref{#thm-cr-not-mlr} is $\omega$-c.e.
+
+:::solution
+Say that $e$ is **$n$-good at stage $s$** if the computations of $\psi_e(\sigma)$ for $|\sigma| \leq n + 1$ all halt within $s$ steps and the martingale equalities hold for $|\sigma| \leq n$. This is decidable from $(e, n, s)$; it is preserved when $s$ increases and when $n$ decreases; and $e$ is $n$-good if and only if it is $n$-good at some stage.
+
+Let $X_s$ be the result of the construction run with "$m$-good at stage $s$" in place of "$m$-good". All the values it uses are defined, since goodness at stage $s$ guarantees that the computations involved have halted; so $(n, s) \mapsto X_s(n)$ is computable.
+
+Fix $n \geq 1$. For each $e$ with $2^e \leq n$, let $t_{e,s}$ be the least $m$ with $2^e \leq m \leq n$ such that $e$ is not $m$-good at stage $s$, or $n + 1$ if there is none. As in the compression part of the proof, the sets of active indices at positions $m \leq n$ at stage $s$ are $\{ e : 2^e \leq m < t_{e,s} \}$, and $X_s \uh (n+1)$ is computed from $n$ and the numbers $t_{e,s}$ by the same procedure at every stage. Since goodness at stage $s$ persists at later stages, $t_{e,s}$ is non-decreasing in $s$, with values between $2^e$ and $n + 1$: it changes at most $n$ times. So the tuple $(t_{e,s})_{2^e \leq n}$ changes at most $n (\lfloor \log n \rfloor + 1)$ times, and $X_s(n)$ can only change when the tuple does. For $s$ large, each $t_{e,s}$ equals the true exit position computed with $n$, since only finitely many computations are involved; then $X_s \uh (n+1) = X \uh (n+1)$. Hence $\lim_s X_s(n) = X(n)$, with at most $b(n) = n(\lfloor \log n \rfloor + 1)$ changes for $n \geq 1$ (and $b(0) = 0$, since $X_s(0) = 0$ at every stage).
+:::
+::::
+
+::::exercise{#ex-cr-tot-oracle difficulty=2 objective="Run the construction with the oracle that knows which candidates are total martingales, and compare the complexity of the prefixes."}
+Let $\mathrm{Mart}$ be the set of the indices $e$ such that $\psi_e$ is total and a martingale. Run the construction of :ref{#thm-cr-not-mlr} with $A_n = \{ e \in \mathrm{Mart} : 2^e \leq n \}$, keeping the weights and the choice of $X(n)$ unchanged.
+
+1. Show that $\mathrm{Mart}$ is $\Pi^0_2$, and that the sequence $X$ obtained is computable in $\emptyset''$ and computably random.
+2. Show that $X \uh n$ is computed from $n$ and the $k(n) = \lfloor \log n \rfloor + 1$ bits $\mathrm{Mart}(e)$, $2^e \leq n$, for $n \geq 1$. Deduce that $K(X \uh n) \leq 3 \log(n+1) + c$ for a constant $c$ and every $n \geq 1$.
+
+:::solution
+1. $e \in \mathrm{Mart}$ if and only if $e$ is $n$-good for every $n$; the relation "$e$ is $n$-good" is $\Sigma^0_1$, so $\mathrm{Mart}$ is $\Pi^0_2$, and $\emptyset''$ decides it. For $e \in \mathrm{Mart}$, the values of $\psi_e$ are computable; so the construction is computable in $\mathrm{Mart}$, hence in $\emptyset''$. Every active index is a total martingale and is never removed, so the argument of the proof applies without change: $D_n(X \uh (n+1)) \leq D_n(X \uh n)$, each entry adds at most $2^{-e}$, and $D_n(X \uh n) < 2$. Every rational-valued computable martingale is $\psi_e$ for some $e \in \mathrm{Mart}$, so it is bounded by $2/w_e$ along $X$ from position $2^e$ on; by :ref{#lem-rational-martingale}, $X$ is computably random.
+2. Given $n$ and the bits $\mathrm{Mart}(e)$ for $2^e \leq n$, compute for $m = 0, \dots, n - 1$ the set $A_m = \{ e : 2^e \leq m,\ \mathrm{Mart}(e) = 1 \}$, the weights and $X(m)$; the values $\psi_e(\tau)$ needed are those of total functions, and the computation halts. The machine $M$ that, on an input $\alpha\beta$ with $U(\alpha) = n \geq 1$ and $|\beta| = k(n)$, reads $\beta$ as these bits and outputs the string computed, has a prefix-free domain, by the argument of the proof. Hence $K(X \uh n) \leq K(n) + k(n) + c_M$. Since $k(n) \leq \log(n+1) + 1$ and $K(n) \leq 2 \log(n+1) + c'$ by :ref{#prop-k-basic} (2), the bound follows.
+
+The oracle $\emptyset''$ gives a better bound on the complexity, at the price of a sequence that need not be computable in $\emptyset'$. Nies (2009, Theorem 7.4.8) uses this version, with slower entries, to bound $K(X \uh n \mid n)$ by any order.
+:::
+::::
+
+::::exercise[A partial computably random sequence that is not Martin-Löf random]{#ex-pcr-not-mlr difficulty=3 objective="Adapt the construction to partial computable martingales, deciding with $\emptyset'$ whether a candidate is defined along the sequence built so far."}
+Using the notion of :ref{#ex-partial-martingale}, show that there is a partial computably random sequence $X \leq_T \emptyset'$ and a constant $c$ with $K(X \uh n) \leq (\log(n+1) + 2)^2 + c$ for every $n$. So partial computable randomness is strictly weaker than Martin-Löf randomness.
+
+:::solution
+Modify the construction of :ref{#thm-cr-not-mlr} by checking the candidates only along the sequence being built. Suppose $X \uh n$ is defined. Say that $e$ is **active at $n$** if $2^e \leq n$ and, for every $m$ with $2^e \leq m \leq n$, the values $\psi_e(X \uh m)$, $\psi_e((X \uh m) 0)$ and $\psi_e((X \uh m) 1)$ are defined and $\psi_e((X \uh m) 0) + \psi_e((X \uh m) 1) = 2 \psi_e(X \uh m)$. Given $X \uh n$, this is a $\Sigma^0_1$ question, decided by $\emptyset'$. If $e$ is active at $n + 1$ and $2^e \leq n$, it is active at $n$. Define the weights $w_e$ when $n = 2^e$ and $e$ is active at $n$, the function $D_n$ on $X \uh n$ and its two children, and $X(n)$, exactly as in the proof; all the values used are defined. So $X \leq_T \emptyset'$.
+
+The argument for the combined capital is unchanged: each active index satisfies the martingale equality at $X \uh n$, so $D_n(X \uh (n+1)) \leq D_n(X \uh n)$, the indices active at $n + 1$ were active at $n$ except the one entering, and $D_n(X \uh n) < 2$ for every $n$.
+
+$X$ is partial computably random. Let $d$ be a partial computable martingale that succeeds on $X$, and $e$ with $\psi_e = d$. Then $d(X \uh m)$ is defined for every $m$; since $d((X \uh m) 0)$ and $d((X \uh m) 1)$ are defined together, and one of them is $d(X \uh (m+1))$, both are defined and satisfy the martingale equality. So $e$ is active at every $n \geq 2^e$, and $d(X \uh n) < 2/w_e$ for $n \geq 2^e$: $d$ is bounded along $X$, a contradiction.
+
+The compression is unchanged. For $n \geq 1$ and $2^e \leq n$, let $t_e$ be the least $m$ with $2^e \leq m \leq n$ such that $e$ is not active at $m$, or $n + 1$. The indices active at $m < n$ are those with $2^e \leq m < t_e$, and from $n$ and the numbers $t_e$ one computes $X \uh n$ without oracle: at each $m$, the values of $\psi_e$ needed for the active $e$ are defined, so their computations halt. The machine of the proof then gives the bound, and $X$ is not Martin-Löf random by :ref{#thm-levin-schnorr}.
+
+Nies (2009, Theorem 7.4.15) obtains $K(X \uh n) \leq h(n) \log n$ for almost every $n$, for every order $h$, by a similar construction.
+:::
+::::
+:::::

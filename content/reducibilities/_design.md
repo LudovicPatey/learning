@@ -193,7 +193,62 @@ figure), and the Weihrauch degrees of `RT¹_k` with a proof.
   the track graph.
 - A proof of `RT¹_{k+1} ≰W RT¹_k` could be an exercise (D–M Exercise 4.8.4).
 
-## 11. History
+## 11. Exercises
+
+Each lesson keeps one or two **featured exercises** in its text, under "Exercises"; the
+others are **further exercises**, in the collapsed block at the end of the lesson. Every
+exercise has a label, an objective, a difficulty and a full solution.
+
+**Featured, and why.**
+- omega-reducibility: `ex-game-kl-j` (a play of the game with a universal instance; the
+  game is the main new tool of the lesson).
+- preservation: `ex-wkl-kl-rt22` and `ex-wkl-dominated` (two applications of the method
+  with two different weakness properties).
+- computable-reducibility: `ex-kl-bounded` (bounded KL; it carries the correction of D–M
+  Prop. 4.2.9 and is cited in the notes and in later lessons).
+- wkl-reductions: `ex-rt22-not-c-wkl` (transfer between ω and computable reducibility).
+- weihrauch: `ex-llpo-sw-lpo` and `ex-lpo-not-w-llpo` (a strong reduction and a continuity
+  argument; both cited in the text).
+- parallelization: `ex-j-rt12-parallel` and `ex-lpo-finitely-many` (parallelization
+  destroys non-uniform solvability; counting resources; both cited in the text).
+
+The references "first/third exercise" in the text were replaced by `:ref` to labels.
+
+**Further exercises, lesson by lesson.**
+1. omega-reducibility: `ex-rtnk-jump` (moved); products and satisfaction, with the role of
+   computable instances; problems with unique solutions and the least jump ideal; a game
+   needing an unbounded number of rounds (iterated jumps); an explicit winning strategy of
+   Player 1 from the low basis theorem.
+2. preservation: `ex-preservation-downward` (moved); problems preserving every weakness
+   property; the weakness properties preserved by the jump; two problems at once (an
+   ω-model of WKL + RT²₂ without ∅′); weak preservation (only `Y` weak) fails, by a
+   problem built from the relativized Sacks splitting theorem (admitted).
+3. computable-reducibility: `ex-c-transitive` (moved); transitivity of `≤sc`; iterated
+   jumps `J^(n)` (ω-equivalent, strictly increasing for `≤c`); RT²₂ needs two jumps
+   (`≤²ω J`, not `≤c J`, `≤c J^(2)`); `≤c` versus games of two rounds, and why the
+   computable instance is needed.
+4. wkl-reductions: converse of Scott's theorem; WKL `≡sc` the DNC₂ problem; `P ≤ω WKL`
+   iff every PA set over an instance computes a solution, hence low solutions to
+   computable instances; cylindrification `Q × Id`.
+5. weihrauch: `ex-klb-w-j` (moved); transitivity of `≤W`, `≤sW`; LLPO as a choice between
+   two sequences; `RT¹₂ ≤sW RT²₂`; `RT¹_{<∞}` versus `RT¹_k` (presentation matters for
+   `≤W`, not for `≤c`); a bound for a function with finite range (continuity);
+   `LPO × LPO ≰W LPO` (continuity, two cases); joins and meets.
+6. parallelization: `ex-parallel-closure`, `ex-llpo-second-proof`, `ex-kl-j2` (moved);
+   `WKL^ ≡W WKL`; `LPO ≤c LLPO` but not for the parallelizations; parallelization commutes
+   with products; `LPO ≤c WKL` but `LPO ≰W WKL`.
+
+The exercise on `LPO × LPO` complements `J × J ≤W J` in the text. A proof of
+`RT¹_{k+1} ≰W RT¹_k` (D–M Exercise 4.8.4) was not added in this pass; the open point of
+Section 10 is kept.
+
+**Sources.** Dzhafarov–Mummert Exercises 3.9.2 (bound for a function with finite range),
+4.8.2 (`WKL^ ≡sW WKL`), 4.8.11 (joins and meets, with Pauly and Brattka–Gherardi), 4.8.12
+(two problems preserving a property); D–M Exercise 3.9.4 for `ex-j-rt12-parallel` (already
+cited). The other exercises are written for the course from the results of the lessons
+and their prerequisites (Jockusch's bounds, the basis theorems, Scott ideals).
+
+## 12. History
 
 - **2026-11-12.** Design and pedagogy revision. Split into six lessons (new: `preservation`,
   `wkl-reductions`, `parallelization`); labels kept and moved within the course. Terminology
@@ -204,3 +259,8 @@ figure), and the Weihrauch degrees of `RT¹_k` with a proof.
   (`scripts/figures/reducibilities.py`). History of Weihrauch reducibility corrected ("late
   1980s, reports of 1992"); attribution of `RT¹_{k+1} ≰W RT¹_k` completed with DDHMS; section
   numbers of D–M, Slicing and BGP checked.
+- **2026-11-13.** Featured and further exercises: labels, objectives and difficulties for
+  all existing exercises; 27 new further exercises; the solution of `ex-wkl-dominated`
+  completed (why ∅′ is not computably dominated), the statement of `ex-kl-bounded` made
+  self-contained (the product is defined there); textual references to exercises replaced
+  by `:ref`; durations of weihrauch and parallelization set to 40.

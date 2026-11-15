@@ -5,7 +5,7 @@ duration: 50
 prerequisites: [first-order-parts, big-five/wkl0]
 ---
 
-Harrington's theorem, proved in the next lesson, states that every countable model of $\mathsf{RCA}_0$ has an ω-extension satisfying $\mathsf{WKL}_0$. Its core is a one-step result: a path can be added through one infinite tree without destroying $\Sigma^0_1$ induction (:ref{#thm-path-induction}). In an ω-model, any path would do, since induction holds automatically. In a non-standard model, an arbitrary path may destroy induction: the set of standard numbers is a path through the full binary tree, and it defines a cut (see the exercises). The path must therefore be chosen so that every $\Sigma^0_1$ formula about it behaves like a $\Sigma^0_1$ formula of the original model. This is achieved by **forcing with infinite subtrees**, the formalized version of forcing with $\Pi^0_1$ classes used for the basis theorems (:ref{#thm-low-basis}).
+Harrington's theorem, proved in the next lesson, states that every countable model of $\mathsf{RCA}_0$ has an ω-extension satisfying $\mathsf{WKL}_0$. Its core is a one-step result: a path can be added through one infinite tree without destroying $\Sigma^0_1$ induction (:ref{#thm-path-induction}). In an ω-model, any path would do, since induction holds automatically. In a non-standard model, an arbitrary path may destroy induction: the set of standard numbers is a path through the full binary tree, and it defines a cut (:ref{#ex-standard-path}). The path must therefore be chosen so that every $\Sigma^0_1$ formula about it behaves like a $\Sigma^0_1$ formula of the original model. This is achieved by **forcing with infinite subtrees**, the formalized version of forcing with $\Pi^0_1$ classes used for the basis theorems (:ref{#thm-low-basis}).
 
 ## Setting
 
@@ -119,9 +119,7 @@ Let $\mathcal M$ be a countable model of $\mathsf{RCA}_0$ and $T \in \mathcal M$
 The path $G$ built above from $T$ is a path through $T$, and $\mathcal M \cup \{ G \}$ satisfies $\mathsf I\Sigma^0_1$ by :ref{#lem-harrington-induction}.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-standard-path difficulty=1 objective="Show that an arbitrary path through a tree can destroy $\Sigma^0_1$ induction in a non-standard model."}
 Let $\mathcal M = (M, \mathcal S)$ be a non-standard model of $\mathsf{RCA}_0$, and $T$ the full binary tree. Show that the set $G = \nat$ of standard numbers is a path through $T$ such that $\mathcal M \cup \{ G \}$ does not satisfy $\mathsf I\Sigma^0_1$.
 
 :::solution
@@ -129,7 +127,7 @@ Every string belongs to $T$, so every $G \subseteq M$ is a path through $T$. The
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-unique-collection difficulty=2 objective="Locate the use of $\Sigma^0_1$ collection in the density of the sets $D_n$, and see why it is not needed for a standard length."}
 In the proof of :ref{#lem-harrington-unique}, the tree $S^\sigma$ is defined for each of the strings $\sigma$ of length $n$, where $n$ may be non-standard. Explain why the argument would fail without $\mathsf B\Sigma^0_1$ in $\mathcal M$, and why it does not need $\mathsf B\Sigma^0_1$ when $n$ is standard.
 
 :::solution
@@ -145,3 +143,66 @@ The construction is Harrington's (1977, unpublished, communicated by Friedman), 
 - C. G. Jockusch and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 7.6–7.7.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 7.2.
+
+:::::exercises
+::::exercise{#ex-normal-form-example difficulty=1 objective="Compute the normal form of a $\Sigma^0_1$ formula about a path and the condition chosen by the lexicographic argument on an example."}
+Let $F(x, X) \equiv \exists y\ (x < y \wedge y \in X)$, "$X$ has an element greater than $x$", and let $T$ be the full binary tree, in a countable model $\mathcal M$ of $\mathsf{RCA}_0$.
+
+1. Compute the formula $H$ of :ref{#lem-sigma1-normal-form} and simplify it.
+2. Describe $\Phi_S(a)$ and $\Psi_S(a)$ for a tree $S \in \mathbb P$, and check that neither $\Phi_T(a)$ nor $\Psi_T(a)$ holds.
+3. Given $b \geq 1$, determine the set $U$ and the tree $S_\sigma$ chosen in the proof of :ref{#lem-harrington-decide}, starting from $S = T$. What does it decide about the generic path?
+
+:::solution
+1. The only atomic formula $t \in X$ has $t = y$, so $p(x, y) = y + 1$ bounds its value. The formula $H(x, \sigma) \equiv \exists y < |\sigma|\ (y + 1 \leq |\sigma| \wedge x < y \wedge y < |\sigma| \wedge \sigma(y) = 1)$ simplifies to $\exists y < |\sigma|\ (x < y \wedge \sigma(y) = 1)$: $\sigma$ has a bit $1$ after position $x$.
+2. $\Psi_S(a)$ says that no string of $S$ has a bit $1$ after position $a$: every path through $S$ is included in $\{ 0, \dots, a \}$. $\Phi_S(a)$ says that for some $m$, every string of $S$ of length $m$ has a bit $1$ at a position in $(a, m)$. In $T$, the string $0^{a+1}1$ has a bit $1$ after $a$, so $\Psi_T(a)$ fails, and for every $m$ the string $0^m$ has none, so $\Phi_T(a)$ fails.
+3. For $\sigma$ of length $b$, $S_\sigma$ consists of the strings with no bit $1$ after any position $a < b$ with $\sigma(a) = 0$, that is, after the least such $a$. Every $S_\sigma$ contains all the strings $0^m$, so it is $\mathcal M$-infinite, and $U$ is the set of all strings of length $b$. Its lexicographically least element is $0^b$, and $S_{0^b}$ is the tree of strings with no bit $1$ after position $0$. It decides $F(a, G)$ negatively for every $a < b$: the generic path $G$ through $S_{0^b}$ is included in $\{ 0 \}$.
+:::
+::::
+
+::::exercise{#ex-decide-one-input difficulty=1 objective="Decide a single $\Sigma^0_1$ question with one extension, as in the low basis theorem, and see why this does not suffice for non-standard bounds."}
+Let $F$, $H$, $\Phi_S$ and $\Psi_S$ be as in :ref{#lem-harrington-decide}, and $a \in M$. Show directly, without the lexicographic order, that every $S \in \mathbb P$ has a subtree $S' \in \mathbb P$ with $\Phi_{S'}(a) \vee \Psi_{S'}(a)$. For a standard $b$, deduce that $D_{F, b}$ is dense by iterating this step. Why can this iteration not be carried out when $b$ is non-standard?
+
+:::solution
+Let $S' = \{ \rho \in S : \forall k \leq |\rho|\ \neg H(a, \rho \uh k) \}$. It belongs to $\mathcal S$ by $\Delta^0_1$ comprehension and is a tree. If it is $\mathcal M$-infinite, it belongs to $\mathbb P$ and $\Psi_{S'}(a)$ holds by definition. Otherwise there is $m$ such that $S'$ has no string of length $m$; then every $\rho \in S$ of length $m$ satisfies $H(a, \rho \uh k)$ for some $k \leq m$, which is $\Phi_S(a)$, and $S$ itself works.
+
+For a standard $b$, apply this step successively for $a = 0, 1, \dots, b - 1$, obtaining $S \supseteq S_0 \supseteq \cdots \supseteq S_{b-1}$. A decision for $a$ is kept by subtrees: $\Psi_S(a)$ and $\Phi_S(a)$ only quantify universally over the strings of $S$, so they remain true when strings are removed. So $S_{b-1} \in D_{F, b}$.
+
+The iteration is a recursion in the metatheory, one step for each $a$. For a non-standard $b$, the elements $a < b$ are not well-ordered in the metatheory, since the non-standard ones have no least element, so the recursion cannot reach them; and the sequence $S_0 \supseteq S_1 \supseteq \cdots$ built along the standard numbers is not an object of $\mathcal M$, so it gives no condition of $\mathbb P$ that decides all $a < b$. The lexicographically least guess of :ref{#lem-harrington-decide} replaces the recursion by a single choice defined in $\mathcal M$.
+:::
+::::
+
+::::exercise{#ex-extendible-strings difficulty=2 objective="Use $\Sigma^0_1$ collection to find extendible strings of every length in $\mathsf{RCA}_0$, and see that the set of extendible strings need not exist."}
+A string $\sigma$ of length $\ell$ is **extendible** in a binary tree $T$ if for every $m \geq \ell$ there is $\tau \in T$ of length $m$ with $\sigma \preceq \tau$.
+
+1. Show that $\mathsf{RCA}_0$ proves: if $T$ is an infinite binary tree, then for every $\ell$ there is an extendible string of length $\ell$ in $T$.
+2. Show that $\mathsf{RCA}_0$ does not prove that the set of extendible strings of every infinite binary tree exists.
+
+:::solution
+1. Suppose that no string of length $\ell$ is extendible: every $\sigma$ of length $\ell$ has some $m_\sigma \geq \ell$ such that $T$ has no string of length $m_\sigma$ extending $\sigma$. This is a bounded quantification, over the strings of length $\ell$, of a $\Sigma^0_1$ formula, so $\mathsf B\Sigma^0_1$ gives $m^*$ such that every $\sigma$ of length $\ell$ has such an $m_\sigma < m^*$. Let $\rho \in T$ have length $m^*$, and $\sigma = \rho \uh \ell$. Then $\rho \uh m_\sigma \in T$, since $T$ is closed under prefixes, has length $m_\sigma$ and extends $\sigma$: a contradiction. So $T$ has no string of length $m^*$, and $T$ is finite, contrary to the hypothesis. This is the argument of :ref{#lem-harrington-unique}.
+2. In the ω-model $\mathrm{REC}$, take a computable infinite binary tree $T$ with no computable path, which exists by :ref{#cor-rca-not-wkl}. Suppose that the set $E$ of its extendible strings were computable. The empty string is extendible since $T$ is infinite. If $\sigma$ is extendible, one of $\sigma 0$ and $\sigma 1$ is: otherwise they have no extension in $T$ of some lengths $m_0$ and $m_1$, and then $\sigma$ has none of length $\max(m_0, m_1)$. So the sequence $\sigma_0 = \emptyset$, $\sigma_{i+1} = \sigma_i 0$ if it is in $E$ and $\sigma_i 1$ otherwise, is computable, its terms are in $E \subseteq T$, and its union is a computable path through $T$: a contradiction. So $E \notin \mathrm{REC}$, and since $\mathrm{REC}$ is a model of $\mathsf{RCA}_0$ (:ref{#thm-rca-turing-ideal}), the statement is not provable.
+
+Item 1 is adapted from Dzhafarov and Mummert, Exercise 6.7.1.
+:::
+::::
+
+::::exercise{#ex-cohen-isigma1 difficulty=3 objective="Adapt the lexicographic argument to Cohen forcing over a non-standard model, using a greatest number principle instead of a least one, to show that Cohen generic sets preserve $\Sigma^0_1$ induction."}
+Let $\mathcal M = (M, \mathcal S)$ be a countable model of $\mathsf{RCA}_0$. **Cohen conditions** are the binary strings of $\mathcal M$, ordered by extension. A sequence $\sigma_0 \preceq \sigma_1 \preceq \cdots$ of conditions meets a set $D$ of conditions if some $\sigma_j$ belongs to $D$. Let $F(x, X)$ be $\Sigma^0_1$ with parameters in $\mathcal M$, $H$ given by :ref{#lem-sigma1-normal-form} (for the full binary tree), and $b \in M$; let $D_{F, b}$ be the set of strings $\tau$ such that for every $a < b$, either $H(a, \tau)$ or $\neg H(a, \tau')$ for every $\tau' \succeq \tau$.
+
+1. Show that $D_{F, b}$ is dense: every string has an extension in it.
+2. Build a sequence of conditions meeting all the sets $D_{F, b}$ and the sets $\{ \sigma : |\sigma| \geq n \}$, $n \in M$, and let $G$ be the set of $i$ such that $\sigma_j(i) = 1$ for some $j$ with $i < |\sigma_j|$. Show that $\mathcal M \cup \{ G \}$ satisfies $\mathsf I\Sigma^0_1$.
+
+:::solution
+1. Let $\sigma_0$ be a string. Code the strings of length $b$ so that the numerical order is the lexicographic order. Let $P(\rho)$ be the $\Sigma^0_1$ formula, with parameters in $\mathcal M$,
+$$
+P(\rho) \equiv \exists \tau\ \bigl(\sigma_0 \preceq \tau \wedge \forall a < b\ (\rho(a) = 1 \rightarrow H(a, \tau))\bigr),
+$$
+which says that some extension of $\sigma_0$ satisfies $H$ at every position where $\rho$ guesses $1$. $P(0^b)$ holds with $\tau = \sigma_0$, and the strings of length $b$ form a bounded set. By the greatest number principle for $\Sigma^0_1$ formulas (:ref{#ex-sigma-max-principle}), in $\mathcal M$, there is a lexicographically greatest $\rho^*$ of length $b$ with $P(\rho^*)$; let $\tau$ witness it. We show $\tau \in D_{F, b}$. Let $a < b$. If $\rho^*(a) = 1$, then $H(a, \tau)$. If $\rho^*(a) = 0$, suppose that $H(a, \tau')$ for some $\tau' \succeq \tau$. Let $\rho'$ agree with $\rho^*$ below $a$, with $\rho'(a) = 1$ and $\rho'(i) = 0$ for $a < i < b$. Then $\tau'$ witnesses $P(\rho')$: it extends $\sigma_0$; at the positions $i < a$ with $\rho'(i) = 1$, $H(i, \tau)$ holds, hence $H(i, \tau')$ since $H$ is monotone; and $H(a, \tau')$. But $\rho'$ is lexicographically greater than $\rho^*$: a contradiction. So $\neg H(a, \tau')$ for every $\tau' \succeq \tau$.
+
+2. The sets listed are countably many, since $M$, $\mathcal S$ and the set of formulas are countable; list them and extend successively, by density (the sets $\{ \sigma : |\sigma| \geq n \}$ are dense since strings can be extended by zeros). Every $i \in M$ is less than some $|\sigma_j|$, and $G \uh |\sigma_j| = \sigma_j$ for every $j$, since the $\sigma_j$ are compatible. So $G$ is a path through the full binary tree, and :ref{#lem-sigma1-normal-form} applies to it.
+
+Let $F(x, G)$ be $\Sigma^0_1$ with parameters in $\mathcal M$, with $F(0, G)$ and $\forall x\, (F(x, G) \rightarrow F(x + 1, G))$ in $\mathcal M \cup \{ G \}$, and suppose $\neg F(b, G)$. Let $\tau = \sigma_j \in D_{F, b+1}$. For $a \leq b$, $F(a, G)$ holds if and only if $H(a, \tau)$. Indeed, if $H(a, \tau)$, then $H(a, G \uh |\tau|)$, so $F(a, G)$. If $F(a, G)$, there is $k$ with $H(a, G \uh k)$; the string $\tau' = G \uh \max(k, |\tau|)$ extends $\tau$ and satisfies $H(a, \tau')$ by monotonicity, so the second alternative fails at $a$, and $H(a, \tau)$. Hence, in $\mathcal M$, $H(0, \tau)$, $H(a, \tau) \rightarrow H(a + 1, \tau)$ for $a < b$, and $\neg H(b, \tau)$. Induction in $\mathcal M$ for the bounded formula $a \leq b \rightarrow H(a, \tau)$ gives a contradiction.
+
+The argument is that of :ref{#lem-harrington-decide} and :ref{#lem-harrington-induction}, with the roles of $0$ and $1$ exchanged. For trees, the least guess maximizes the negative answers subject to the $\Pi^0_1$ constraint that $S_\sigma$ be $\mathcal M$-infinite, and $\mathsf L\Pi^0_1$ provides it; a Cohen condition has no infinitude to preserve, and the greatest guess maximizes the positive answers, a $\Sigma^0_1$ property.
+:::
+::::
+:::::

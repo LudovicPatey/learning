@@ -113,17 +113,7 @@ Why is a jump ideal never of the form $\{ X : X \leq_T A \}$?
   It is closed under join: $X, Y \leq_T A$ implies $X \oplus Y \leq_T A$. It fails to be closed under the jump.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that $\mathsf{ACA}_0$ does not prove that there is a set $Y$ with $Y^{[0]} = \emptyset$ and $Y^{[n+1]} = (Y^{[n]})'$ for every $n$.
-
-:::solution
-The condition on $Y$ is expressed by the arithmetic formula $\forall e\, (e \notin Y^{[0]}) \wedge \forall n\, \forall e\, (e \in Y^{[n+1]} \leftrightarrow \Phi^{Y^{[n]}}_e(e)\converge)$. By absoluteness, a set $Y$ satisfying it in an ω-model has $Y^{[n]} = \emptyset^{(n)}$ for every $n$, so $Y$ computes every $\emptyset^{(n)}$ and is not arithmetic. So the statement fails in the ω-model $\mathrm{ARITH}$ of $\mathsf{ACA}_0$ (:ref{#cor-aca-jump-ideal}).
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-arith-a-least difficulty=1 objective="Relativize the minimality of $\mathrm{ARITH}$ to an arbitrary set, by checking the closure conditions of a jump ideal."}
 Show that for every set $A$, the class $\mathrm{ARITH}(A)$ of sets arithmetic in $A$, that is, Turing reducible to $A^{(n)}$ for some $n$, is the least ω-model of $\mathsf{ACA}_0$ containing $A$.
 
 :::solution
@@ -139,3 +129,67 @@ The equivalence of (1), (2) and (4) is Simpson, Lemma III.1.3; the characterizat
 - H. Friedman, *Systems of second order arithmetic with restricted induction, I, II*, abstracts, Journal of Symbolic Logic 41 (1976), 557–559.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 5.6.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Sections 4.3 and 4.5.
+
+:::::exercises
+::::exercise{#ex-aca-no-omega-jump difficulty=1 objective="Use the ω-model $\mathrm{ARITH}$ and absoluteness to show that $\mathsf{ACA}_0$ does not prove the existence of the ω-jump."}
+Show that $\mathsf{ACA}_0$ does not prove that there is a set $Y$ with $Y^{[0]} = \emptyset$ and $Y^{[n+1]} = (Y^{[n]})'$ for every $n$.
+
+:::solution
+The condition on $Y$ is expressed by the arithmetic formula $\forall e\, (e \notin Y^{[0]}) \wedge \forall n\, \forall e\, (e \in Y^{[n+1]} \leftrightarrow \Phi^{Y^{[n]}}_e(e)\converge)$. By absoluteness, a set $Y$ satisfying it in an ω-model has $Y^{[n]} = \emptyset^{(n)}$ for every $n$, so $Y$ computes every $\emptyset^{(n)}$ and is not arithmetic. So the statement fails in the ω-model $\mathrm{ARITH}$ of $\mathsf{ACA}_0$ (:ref{#cor-aca-jump-ideal}).
+:::
+::::
+
+::::exercise{#ex-aca-pi02 difficulty=1 objective="Unfold the induction of (2 ⇒ 1) in the equivalents of $\mathsf{ACA}_0$ for $\Pi^0_2$ formulas, and apply it to the nodes of a tree with infinitely many extensions."}
+Show directly, with two applications of $\Sigma^0_1$ comprehension, that $\mathsf{RCA}_0$ together with $\Sigma^0_1$ comprehension proves comprehension for $\Pi^0_2$ formulas. Deduce that it proves: for every tree $T \subseteq \nat^{<\nat}$, the set of nodes of $T$ that have infinitely many extensions in $T$ exists.
+
+:::solution
+Let $\varphi(n) \equiv \forall k\, \exists l\, \theta(n, k, l)$, with $\theta$ bounded, possibly with parameters. By $\Sigma^0_1$ comprehension, the set $Y = \{ \langle n, k \rangle : \exists l\, \theta(n, k, l) \}$ exists. The formula $\exists k\, (\langle n, k \rangle \notin Y)$ is $\Sigma^0_1$ with parameter $Y$, so a second application gives $Z = \{ n : \exists k\, \langle n, k \rangle \notin Y \}$. Then $n \notin Z$ if and only if $\langle n, k \rangle \in Y$ for every $k$, that is, if and only if $\varphi(n)$. So $\{ n : \varphi(n) \} = \nat \setminus Z$, which exists by $\Delta^0_1$ comprehension relative to $Z$.
+
+A node $\sigma$ has infinitely many extensions in $T$ if and only if for every $k$ there is an extension $\tau \in T$ of $\sigma$ with code $\tau > k$, since a set of numbers is infinite exactly when it is unbounded. The set in question is therefore defined by the formula
+$$
+\sigma \in T \wedge \forall k\, \exists \tau\, (\tau \in T \wedge \sigma \preceq \tau \wedge \tau > k),
+$$
+which is equivalent to a $\Pi^0_2$ formula with parameter $T$ (move $\sigma \in T$ inside the quantifiers). It exists by the first part.
+:::
+::::
+
+::::exercise{#ex-aca-columns difficulty=1 objective="Find further equivalents of $\mathsf{ACA}_0$ by coding the range of a function into the columns of a set."}
+A set $X$ codes the sequence of its columns $X^{[n]} = \{ k : \langle n, k \rangle \in X \}$. Show that each of the following statements is equivalent to $\mathsf{ACA}_0$ over $\mathsf{RCA}_0$:
+
+1. for every set $X$, the set $\{ n : X^{[n]} \neq \emptyset \}$ exists;
+2. for every set $X$, the set $\{ n : X^{[n]} \text{ is infinite} \}$ exists.
+
+:::solution
+Both statements follow from arithmetic comprehension: the first set is defined by the $\Sigma^0_1$ formula $\exists k\, \langle n, k \rangle \in X$, the second by the $\Pi^0_2$ formula $\forall m\, \exists k\, (k > m \wedge \langle n, k \rangle \in X)$.
+
+Conversely, we prove (4) of :ref{#thm-aca-equivalents}. Let $f$ be injective.
+
+1. The set $X = \{ \langle m, i \rangle : f(i) = m \}$ exists by $\Delta^0_1$ comprehension, and $X^{[m]} \neq \emptyset$ if and only if $m$ is in the range of $f$. So the set given by statement 1 is the range of $f$.
+2. The set $X = \{ \langle m, s \rangle : \exists i < s\ f(i) = m \}$ exists by $\Delta^0_1$ comprehension, since the quantifier is bounded. If $m = f(i)$, then $X^{[m]}$ contains every $s > i$, so it is infinite. If $m$ is not in the range of $f$, then $X^{[m]} = \emptyset$. So the set given by statement 2 is the range of $f$.
+:::
+::::
+
+::::exercise{#ex-aca-modulus difficulty=1 objective="Characterize $\mathsf{ACA}_0$ by the existence of a function that bounds the search for preimages under an injection."}
+Show that $\mathsf{ACA}_0$ is equivalent over $\mathsf{RCA}_0$ to the statement: for every injective function $f : \nat \to \nat$, there is a function $h : \nat \to \nat$ such that, for every $m$, if $m$ is in the range of $f$, then $f(i) = m$ for some $i < h(m)$.
+
+:::solution
+($\Rightarrow$) Let $R$ be the range of $f$, which exists by arithmetic comprehension. Define $h(m) = i + 1$ if $m \in R$ and $f(i) = m$, and $h(m) = 0$ if $m \notin R$. The graph of $h$ is the set of pairs $\langle m, y \rangle$ such that either $m \in R$, $y \geq 1$ and $f(y - 1) = m$, or $m \notin R$ and $y = 0$; it exists by $\Delta^0_1$ comprehension relative to $R \oplus f$. It is the graph of a function: if $m \in R$, there is an $i$ with $f(i) = m$, and only one by injectivity. By definition, $h$ has the required property.
+
+($\Leftarrow$) Given $h$, the range of $f$ is $\{ m : \exists i < h(m)\ f(i) = m \}$, which is defined by a bounded formula with parameters $f$ and $h$ and exists by $\Delta^0_1$ comprehension. By :ref{#thm-aca-equivalents} (4), $\mathsf{ACA}_0$ holds.
+
+In computability-theoretic terms, for an injection $f$ enumerating $\emptyset'$, such a function $h$ is a modulus of $\emptyset'$: every function dominating it computes $\emptyset'$.
+:::
+::::
+
+::::exercise{#ex-aca-parameters difficulty=2 objective="Show with ω-models that the set parameters of $\Sigma^0_1$ comprehension are needed to obtain $\mathsf{ACA}_0$."}
+1. The scheme of **parameter-free $\Sigma^0_1$ comprehension** consists of the universal closures of $\exists X\, \forall n\, (n \in X \leftrightarrow \varphi(n))$, for $\Sigma^0_1$ formulas $\varphi$ with no free set variable (number variables are allowed). Show that $\mathsf{RCA}_0$ together with this scheme does not prove $\mathsf{ACA}_0$.
+2. Call $Y$ a **jump sequence of length $n$** if $Y^{[0]} = \emptyset$, $Y^{[k+1]} = (Y^{[k]})'$ for every $k < n$, and $Y^{[k]} = \emptyset$ for every $k > n$. Show that $\mathsf{RCA}_0$ together with the statement "for every $n$ there is a jump sequence of length $n$" does not prove $\mathsf{ACA}_0$.
+
+:::solution
+1. Let $\mathcal M = \{ X : X \leq_T \emptyset' \}$, a Turing ideal, hence an ω-model of $\mathsf{RCA}_0$ (:ref{#thm-rca-turing-ideal}). Let $\varphi(n, \vec p)$ be $\Sigma^0_1$ with no free set variable, and fix numbers $\vec p$. The set $A = \{ n : \varphi(n, \vec p) \}$ is c.e. (:ref{#cor-sigma1-ce}), hence computable in $\emptyset'$, so $A \in \mathcal M$. By absoluteness (:ref{#prop-omega-absolute}), $\mathcal M \models \forall n\, (n \in A \leftrightarrow \varphi(n, \vec p))$. So $\mathcal M$ satisfies the scheme. It contains $\emptyset'$ but not $\emptyset''$, so it is not a jump ideal and does not satisfy $\mathsf{ACA}_0$ (:ref{#cor-aca-jump-ideal}).
+2. Let $\mathcal M = \{ X : X \leq_T \emptyset^{(\omega)} \}$, where $\emptyset^{(\omega)} = \bigoplus_k \emptyset^{(k)}$; it is a Turing ideal. For each $n$, the set $Y_n = \{ \langle k, e \rangle : k \leq n \wedge e \in \emptyset^{(k)} \}$ is computable in $\emptyset^{(\omega)}$, so $Y_n \in \mathcal M$, and it is a jump sequence of length $n$. Being a jump sequence of length $n$ is expressed by an arithmetic formula in $Y$ and $n$, so by absoluteness $Y_n$ is one in $\mathcal M$, and the statement holds in $\mathcal M$. But $\mathcal M$ is not a jump ideal: $\emptyset^{(\omega)} \in \mathcal M$, and its jump is not computable in it. So $\mathsf{ACA}_0$ fails in $\mathcal M$.
+
+In both models, each set that is defined without set parameters is present, but the jump of some set of the model is missing. Comprehension with set parameters is what makes $\mathsf{ACA}_0$ closed under the jump.
+:::
+::::
+:::::

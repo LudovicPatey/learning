@@ -145,7 +145,7 @@ Why does $g$ provide a $\Delta^0_2$ approximation of $A'$?
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-low-superlow difficulty=1 objective="Count the changes of the approximation of the jump, and see that the low simple set is superlow."}
 Show that for every $e$, the value $g(e, s)$ changes at most $2e + 1$ times as $s$ increases. Deduce that $A'$ has a $\Delta^0_2$ approximation whose number of changes at $e$ is bounded by a computable function of $e$.
 
 :::solution
@@ -155,7 +155,7 @@ A set whose jump has an approximation with a computably bounded number of change
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-low-splitting difficulty=2 objective="Use negative requirements alone to split a c.e. set into two low c.e. sets."}
 Show that every c.e. set $C$ is the union of two disjoint low c.e. sets $C_0$ and $C_1$.
 
 :::hint
@@ -173,9 +173,73 @@ The number of injuries of $\mathcal N_{e,i}$ depends on the limits of restraints
 
 ## Notes and references
 
-Downey and Hirschfeldt attribute the existence of a non-computable low c.e. set to Friedberg (Theorem 2.11.2 of their book, with a construction by fresh followers and initialization). The construction of this lesson, with the terminology of positive and negative requirements and of restraints as walls, follows Soare's book of 2016, Section 7.2 (Theorem 7.2.1; Section 7.2.5 for the walls). Nies proves the same result as Theorem 1.6.4 and observes that the set is superlow (Theorem 1.6.5); his Exercise 1.6.10 is the second exercise above. Monin and Patey build a low c.e. set by the same method, and give the low simple set and the splitting into two low sets as exercises, in their chapter on the priority method and c.e. degrees. The splitting of the second exercise uses the same rule for placing elements as the Sacks splitting theorem of the next lesson.
+Downey and Hirschfeldt attribute the existence of a non-computable low c.e. set to Friedberg (Theorem 2.11.2 of their book, with a construction by fresh followers and initialization). The construction of this lesson, with the terminology of positive and negative requirements and of restraints as walls, follows Soare's book of 2016, Section 7.2 (Theorem 7.2.1; Section 7.2.5 for the walls). Nies proves the same result as Theorem 1.6.4 and observes that the set is superlow (Theorem 1.6.5); his Exercise 1.6.10 is :ref{#ex-low-splitting}. Monin and Patey build a low c.e. set by the same method, and give the low simple set and the splitting into two low sets as exercises, in their chapter on the priority method and c.e. degrees. The splitting of :ref{#ex-low-splitting} uses the same rule for placing elements as the Sacks splitting theorem of the next lesson.
 
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010.
 - B. Monin and L. Patey, *Computability theory*, chapter *Priority method and c.e. degrees*.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.
+
+:::::exercises
+::::exercise{#ex-low-unbounded-restraint difficulty=1 objective="See why a lowness requirement preserves a single computation."}
+Suppose that the restraint of $\mathcal N_e$ were the largest use of the convergent computations $\Phi^{A_s}_e(x)[s]$ for all $x \leq s$, instead of the use of $\Phi^{A_s}_e(e)[s]$ alone. Let $e$ be an index such that $\Phi^X_e(x) = X(x)$ for every $X$ and $x$, computed by reading cell $x$ of the oracle. Show that the restraint of $\mathcal N_e$ then tends to infinity, and identify the step of the proof of :ref{#lem-low-positive} that fails.
+
+:::solution
+The computation $\Phi^X_e(x)$ reads cell $x$, so its use is at least $x + 1$. For each $x$, it converges with every oracle after a number of steps that depends only on $x$, so $\Phi^{A_s}_e(x)[s]$ converges for all sufficiently large $s$. Hence, for every $x$, the modified restraint of $\mathcal N_e$ is at least $x + 1$ at all large stages: it tends to infinity.
+
+The proof of :ref{#lem-low-positive} for a requirement $\mathcal P_{e'}$ with $e' \geq e$ uses the limits $r_0, \dots, r_{e'}$ of the restraints of higher priority, and finds an element of $W_{e'}$ above $m = \max(2e', r_0, \dots, r_{e'})$. Here $r_e$ does not exist, and an element of $W_{e'}$ that $\mathcal P_{e'}$ may enumerate must lie above a restraint that keeps growing; nothing guarantees that such elements appear. The proof that $\mathcal P_{e'}$ is satisfied breaks down.
+
+For lowness, the limit lemma only requires that $g(e, s)$ converge to $A'(e)$ for each $e$, and $g(e, s)$ depends on the single computation $\Phi^{A_s}_e(e)[s]$. Preserving that computation is enough, and keeps each restraint bounded.
+:::
+::::
+
+::::exercise{#ex-low-sparse difficulty=2 objective="Vary the size constraint of the positive requirements to make the low simple set arbitrarily sparse."}
+Let $h$ be a computable, non-decreasing and unbounded function. Show that there is a low simple set $A$ such that $|A \cap \{ 0, \dots, n \}| \leq h(n)$ for every $n$.
+
+:::solution
+Let $h'(n) = \min(h(n), \lfloor n/2 \rfloor)$, which is computable, non-decreasing and unbounded. Run the construction of the lesson with the condition $x > 2e$ replaced by $h'(x) > e$.
+
+*Counting.* Each $\mathcal P_e$ enumerates at most one number $x$, and then $e < h'(x)$. If $x \leq n$, then $e < h'(x) \leq h'(n)$. So the elements of $A \cap \{ 0, \dots, n \}$ are enumerated by distinct requirements $\mathcal P_e$ with $e < h'(n)$, and there are at most $h'(n) \leq h(n)$ of them. As $h'(n) \leq n/2$, at least $n + 1 - \lfloor n/2 \rfloor$ of the numbers $0, \dots, n$ are outside $A$, so the complement of $A$ is infinite.
+
+*Negative requirements.* The proof of :ref{#lem-low-negative} uses only that each $\mathcal P_i$ acts at most once and that those with $i \geq e$ respect $r(e, s)$. Both still hold, so $A$ is low.
+
+*Positive requirements.* In the proof of :ref{#lem-low-positive}, replace $2e$ by the least $n_e$ with $h'(n_e) > e$, which exists since $h'$ is unbounded. Every $x > \max(n_e, r_0, \dots, r_e)$ satisfies $h'(x) \geq h'(n_e) > e$ by monotonicity, and the rest of the proof is unchanged. So $A$ is simple.
+:::
+::::
+
+::::exercise{#ex-low-followers difficulty=2 objective="Build a non-computable low c.e. set with followers and initialization instead of walls, and compare the two methods." lessons="friedberg-muchnik"}
+Build a non-computable low c.e. set $A$ with the requirements $\mathcal N_e$ of the lesson and, instead of $\mathcal P_e$, the requirements $\mathcal D_e : A \neq \nat \setminus W_e$, in the order $\mathcal N_0 > \mathcal D_0 > \mathcal N_1 > \mathcal D_1 > \cdots$. Use followers and initialization, as in the Friedberg–Muchnik construction, and no walls.
+
+:::solution
+Say that the computation of $\mathcal N_e$ is **new** at stage $s$ if $\Phi^{A_s}_e(e)[s]\converge$, and either $s = 0$ or it is not the case that $\Phi^{A_{s-1}}_e(e)[s - 1]\converge$ with a use $u$ such that $A_s \uh u = A_{s-1} \uh u$. If the computation is not new at stage $s$, it is the computation of stage $s - 1$, with the same use, by the use principle.
+
+*Construction.* $A_0 = \emptyset$. At stage $s + 1$:
+
+1. for every $e \leq s$ such that the computation of $\mathcal N_e$ is new at stage $s$, initialize every $\mathcal D_j$ with $j \geq e$ (cancel its follower and its mark);
+2. say that $\mathcal D_e$ requires attention if $e \leq s$, it has a follower $x$, it is not marked, and $x \in W_e[s]$; if some $\mathcal D_e$ requires attention, the least such enumerates its follower into $A$, is marked, and initializes every $\mathcal D_j$ with $j > e$;
+3. every $\mathcal D_j$ with $j \leq s$ and no follower receives a fresh follower, in increasing order of $j$.
+
+The construction is computable, so $A$ is c.e. Followers are fresh, so they are pairwise distinct, and a number enters $A$ only as the current follower of its owner.
+
+*Injuries.* Suppose that the computation of $\mathcal N_e$ is new at stage $t$, with use $u \leq t$. At stage $t + 1$, every $\mathcal D_j$ with $j \geq e$ is initialized in step 1, before step 2, so its followers from then on are chosen at stage $t + 1$ or later, and are greater than $t \geq u$. So as long as this computation is the current one, only the $\mathcal D_j$ with $j < e$ can enumerate a number below $u$; we say they **injure** $\mathcal N_e$.
+
+*Everything happens finitely often*, by induction along the priority order. If each $\mathcal D_j$ with $j < e$ acts finitely often, then $\mathcal N_e$ is injured finitely often. After its last injury, a computation of $\mathcal N_e$, once it converges, is preserved forever, as in :ref{#lem-low-negative}; so its computation is new at most once more, and $\lim_s g(e, s) = A'(e)$ by the argument of that lemma. A requirement $\mathcal D_e$ is initialized only when the computation of some $\mathcal N_i$, $i \leq e$, is new, or when some $\mathcal D_i$, $i < e$, acts; by induction, this happens finitely often. Between two initializations, and after the last one, $\mathcal D_e$ acts at most once, since it is then marked.
+
+*Each $\mathcal D_e$ is satisfied.* Let $s_0 \geq e$ be a stage after the last initialization of $\mathcal D_e$, and $x$ its follower at the end of stage $s_0 + 1$, which is never cancelled. No $\mathcal D_i$ with $i < e$ acts after $s_0$, since it would initialize $\mathcal D_e$; so none of them requires attention after $s_0$, since the least one requiring attention acts. If $x \in W_e$, take $s > s_0$ with $x \in W_e[s]$: either $\mathcal D_e$ is already marked, in which case it has enumerated $x$, or it requires attention at stage $s + 1$ and acts. Then $x \in A \cap W_e$. If $x \notin W_e$, then $x$ is never enumerated, and $x \notin A$, $x \in \nat \setminus W_e$. In both cases $A \neq \nat \setminus W_e$.
+
+*Conclusion.* If $A$ were computable, its complement would be some $W_e$, and $A = \nat \setminus W_e$; so $A$ is not computable. By the limit lemma, $A$ is low.
+
+The two methods ensure in different ways that a negative requirement is injured only from above. With walls, the positive requirements read the current restraints. With initialization, every new computation of $\mathcal N_e$ sends the requirements of lower priority to fresh followers, beyond its use. This is the construction attributed to Friedberg by Downey and Hirschfeldt (2010, Theorem 2.11.2), who also observe that the set is superlow.
+:::
+::::
+
+::::exercise{#ex-low-relativized difficulty=1 objective="Relativize the low simple set to obtain, above every degree, a degree with the same jump." lessons="turing-degrees/limit-computability"}
+Show that for every set $X$ there is a set $A$, c.e. in $X$, with $X <_T A \oplus X$ and $(A \oplus X)' \equiv_T X'$.
+
+:::solution
+Run the construction with $W^X_e$ in place of $W_e$ and with the computations $\Phi^{A_s \oplus X}_e(e)[s]$, whose convergence is decidable with oracle $X$; the restraint $r(e, s)$ is the use of this computation, and $\mathcal P_e$ enumerates only numbers $x > r(i, s)$ for $i \leq e$. The cell of $A \oplus X$ that codes $x$ is $2x \geq x > r(i, s)$, so it lies above the use, and the $X$-part of the oracle never changes. The construction is $X$-computable, so $A$ is c.e. in $X$, and the proofs of :ref{#lem-low-coinfinite}, :ref{#lem-low-negative} and :ref{#lem-low-positive} go through, with the use principle for the oracles $A_s \oplus X$.
+
+So the complement of $A$ is infinite and meets every infinite set c.e. in $X$. If $A$ were computable in $X$, its complement would be an infinite set c.e. in $X$ disjoint from $A$; hence $A \not\leq_T X$ and $X <_T A \oplus X$. The $X$-computable function $g(e, s)$, equal to $1$ if $\Phi^{A_s \oplus X}_e(e)[s]\converge$, converges to $(A \oplus X)'(e)$, so $(A \oplus X)' \leq_T X'$ by the relativized limit lemma. Conversely $X' \leq_T (A \oplus X)'$, since the jump is monotone.
+:::
+::::
+:::::

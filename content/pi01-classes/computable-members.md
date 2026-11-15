@@ -1,7 +1,7 @@
 ---
 title: Computable members
 summary: Isolated members of Π⁰₁ classes are computable; countable Π⁰₁ classes have computable members; a non-empty Π⁰₁ class without computable member is perfect; the class of DNC₂ functions.
-duration: 45
+duration: 40
 prerequisites: [trees-and-classes]
 ---
 
@@ -124,19 +124,11 @@ Why is the class $\mathrm{DNC}_2$ non-empty, although none of its members is com
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-leftmost-jump difficulty=1 objective="See that the leftmost member of a $\Pi^0_1$ class may compute $\emptyset'$."}
 Give a $\Pi^0_1$ class whose leftmost member is $\emptyset'$, and deduce that the leftmost member of a $\Pi^0_1$ class may compute $\emptyset'$.
 
 :::solution
 The class $\{ X : \emptyset' \subseteq X \}$ is $\Pi^0_1$: $X$ is outside it if and only if some $n$ enters $\emptyset'$ with $X(n) = 0$, a $\Sigma^0_1$ condition on prefixes. Its least member in the lexicographic order has the bit $0$ wherever possible, that is, outside $\emptyset'$, so it is $\emptyset'$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $(T_e)$ be an enumeration of the computable trees, given by indices. Show that the set of $e$ such that $[T_e]$ has a computable member is $\Sigma^0_3$.
-
-:::solution
-$[T_e]$ has a computable member if and only if there is $i$ such that $\Phi_i$ is total with values in $\{0, 1\}$, and every prefix of the sequence $\Phi_i$ belongs to $T_e$. The first condition is $\Pi^0_2$. Given it, the second is equivalent to "for all $n$ and $s$, if $\Phi_i(0), \dots, \Phi_i(n-1)$ converge at stage $s$, the string they form belongs to $T_e$". Membership of a string in $T_e$ is decidable, but as a relation in $e$ it is $\Sigma^0_1$ (some computation of the characteristic function of $T_e$ outputs $1$), so this condition is $\Pi^0_2$. So the condition on $(e, i)$ is $\Pi^0_2$, and its projection over $i$ is $\Sigma^0_3$.
 :::
 ::::
 
@@ -156,3 +148,69 @@ Soare's *Turing Computability* proves the Kreisel basis theorem, the computabili
 - D. Cenzer, P. Clote, R. L. Smith, R. I. Soare and S. S. Wainer, *Members of countable Π⁰₁ classes*, Annals of Pure and Applied Logic 31 (1986), 145–163.
 - C. G. Jockusch and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
 - D. Cenzer and J. B. Remmel, *Π⁰₁ classes in mathematics*, in *Handbook of Recursive Mathematics*, Volume 2, Studies in Logic 139, North-Holland, 1998, 623–821.
+
+:::::exercises
+::::exercise{#ex-computable-member-sigma3 difficulty=2 objective="Compute an upper bound on the complexity of the index set of the $\Pi^0_1$ classes with a computable member."}
+Let $(T_e)$ be an enumeration of the computable trees, given by indices. Show that the set of $e$ such that $[T_e]$ has a computable member is $\Sigma^0_3$.
+
+:::solution
+$[T_e]$ has a computable member if and only if there is $i$ such that $\Phi_i$ is total with values in $\{0, 1\}$, and every prefix of the sequence $\Phi_i$ belongs to $T_e$. The first condition is $\Pi^0_2$. Given it, the second is equivalent to "for all $n$ and $s$, if $\Phi_i(0), \dots, \Phi_i(n-1)$ converge at stage $s$, the string they form belongs to $T_e$". Membership of a string in $T_e$ is decidable, but as a relation in $e$ it is $\Sigma^0_1$ (some computation of the characteristic function of $T_e$ outputs $1$), so this condition is $\Pi^0_2$. So the condition on $(e, i)$ is $\Pi^0_2$, and its projection over $i$ is $\Sigma^0_3$.
+:::
+::::
+
+::::exercise{#ex-leftmost-ce-degree difficulty=2 objective="Show that the leftmost member of a $\Pi^0_1$ class has c.e. degree, by coding it into the c.e. set of strings to its left."}
+Let $\mathcal P = [T]$ be a non-empty $\Pi^0_1$ class, with $T$ computable, and $X$ its leftmost member. For strings of the same length, write $\sigma <_{\mathrm{lex}} \tau$ if $\sigma \neq \tau$ and $\sigma(k) = 0$ at the first position $k$ where they differ. Let $L$ be the set of strings $\sigma$ with $\sigma <_{\mathrm{lex}} X \uh |\sigma|$. Show that $L$ is c.e. and that $L \equiv_T X$. So the degree of $X$ contains a c.e. set.
+
+:::solution
+*A description of $L$.* We show that $\sigma \in L$ if and only if every string $\tau$ of length $|\sigma|$ with $\tau = \sigma$ or $\tau <_{\mathrm{lex}} \sigma$ is not extendible. Let $n = |\sigma|$. If $\sigma <_{\mathrm{lex}} X \uh n$ and $\tau$ is equal to $\sigma$ or lexicographically smaller, then $\tau <_{\mathrm{lex}} X \uh n$; a path $Y$ through $\tau$ would be a member of $\mathcal P$ with $Y(k) = 0 < 1 = X(k)$ at the first difference $k$ of $Y$ and $X$, so lexicographically smaller than $X$, which contradicts the choice of $X$ (:ref{#prop-leftmost-path}). Conversely, if no such $\tau$ is extendible, then $X \uh n$, which is extendible, is not one of them; since $<_{\mathrm{lex}}$ is a linear order on the strings of length $n$, $\sigma <_{\mathrm{lex}} X \uh n$.
+
+*$L$ is c.e.* Non-extendibility is $\Sigma^0_1$ uniformly in the string (:ref{#prop-pi01-emptiness}), and the condition above is a conjunction of at most $2^n$ such properties, so $L$ is c.e.
+
+*$L \equiv_T X$.* Given $X$, the condition $\sigma <_{\mathrm{lex}} X \uh |\sigma|$ is decidable, so $L \leq_T X$. Conversely, every string of length $n$ lexicographically smaller than $X \uh n$ is in $L$, and $X \uh n$ is not; so $X \uh n$ is the lexicographically least string of length $n$ not in $L$, which $L$ computes. Adapted from Soare 2016, Exercise 3.7.6; compare the remark after :ref{#prop-leftmost-path}.
+:::
+::::
+
+::::exercise{#ex-cantor-bendixson-example difficulty=1 objective="Compute the iterated removal of isolated members on a countable $\Pi^0_1$ class."}
+For $k \in \nat$, let $\mathcal P_k$ be the class of sets with at most $k$ elements. Show that $\mathcal P_k$ is a $\Pi^0_1$ class, that its isolated members are the sets with exactly $k$ elements, and that removing the isolated members $k+1$ times, starting from $\mathcal P_k$, leads to the empty class.
+
+:::solution
+A set is outside $\mathcal P_k$ if and only if some prefix of it contains $k+1$ ones, a $\Sigma^0_1$ condition on prefixes; so $\mathcal P_k$ is $\Pi^0_1$. Let $X \in \mathcal P_k$. If $X$ has exactly $k$ elements, all below $n$, then $X$ is the only member of $\mathcal P_k$ extending $X \uh n$, since any other one would have an additional element; so $X$ is isolated. If $X$ has fewer than $k$ elements, then for every $n$ larger than its elements, the set $X \cup \{n\}$ belongs to $\mathcal P_k$, is different from $X$ and extends $X \uh n$; so $X$ is not isolated. Removing the isolated members of $\mathcal P_k$ thus gives $\mathcal P_{k-1}$, for $k \geq 1$, and removing those of $\mathcal P_0 = \{ 0^\infty \}$ gives $\emptyset$. After $k+1$ removals, the class is empty: its perfect kernel is empty, as it must be for a countable class. Adapted from Soare 2016, Exercises 8.7.1 and 8.7.9, with the roles of $0$ and $1$ exchanged.
+:::
+::::
+
+::::exercise{#ex-dnc2-perfect difficulty=1 objective="Show directly that $\mathrm{DNC}_2$ has no isolated member by modifying a member at an index of the nowhere defined function."}
+Show, without using :ref{#cor-countable-computable}, that the class $\mathrm{DNC}_2$ has no isolated member.
+
+:::solution
+Let $X \in \mathrm{DNC}_2$ and $\sigma \prec X$. By the padding lemma, the nowhere defined function has infinitely many indices; let $e \geq |\sigma|$ be one of them, so that $\Phi_e(e)\diverge$. Let $Y$ be the sequence equal to $X$ except at $e$, where $Y(e) = 1 - X(e)$. The conditions defining $\mathrm{DNC}_2$ at the positions $e' \neq e$ are the same for $Y$ as for $X$, and there is no condition at $e$. So $Y \in \mathrm{DNC}_2$; moreover $Y$ extends $\sigma$, since $e \geq |\sigma|$, and $Y \neq X$. Hence $[\sigma] \cap \mathrm{DNC}_2 \neq \{ X \}$ for every prefix $\sigma$ of $X$.
+:::
+::::
+
+::::exercise{#ex-perfect-noncomputable-member difficulty=2 objective="Diagonalize, with the oracle $\emptyset'$, inside a perfect $\Pi^0_1$ class to build a non-computable member."}
+Let $\mathcal P$ be a non-empty $\Pi^0_1$ class without isolated members. Show that $\mathcal P$ has a non-computable member computable in $\emptyset'$.
+
+:::solution
+Let $\mathcal P = [T]$ with $T$ computable, and let $E$ be the set of extendible nodes of $T$, which is computable in $\emptyset'$ (:ref{#prop-pi01-emptiness}). We build, with $\emptyset'$, extendible strings $\sigma_0 \prec \sigma_1 \prec \cdots$. Let $\sigma_0 = \varepsilon$, extendible since $\mathcal P \neq \emptyset$.
+
+Given $\sigma_e \in E$, there are two incompatible strings in $E$ extending $\sigma_e$: a member $X$ of $\mathcal P$ through $\sigma_e$ is not isolated, so some $Y \neq X$ in $\mathcal P$ extends $\sigma_e$, and if $n$ is the first position where they differ, $X \uh (n+1)$ and $Y \uh (n+1)$ will do. With $\emptyset'$, search for the first such pair $(\tau_0, \tau_1)$ in a fixed enumeration of pairs of strings, and let $n_e$ be the first position where $\tau_0$ and $\tau_1$ differ. Ask $\emptyset'$ whether $\Phi_e(n_e)\converge$. If $\Phi_e(n_e)\converge = v$, let $\sigma_{e+1}$ be one of $\tau_0, \tau_1$ whose bit at $n_e$ is not $v$; otherwise let $\sigma_{e+1} = \tau_0$.
+
+Incompatible strings extending $\sigma_e$ are strictly longer than $\sigma_e$, so $X = \bigcup_e \sigma_e$ is an infinite sequence, computable in $\emptyset'$. Each of its prefixes is a prefix of an extendible node, hence in $T$, so $X \in \mathcal P$. If $\Phi_e$ is total, then $\Phi_e(n_e)\converge \neq \sigma_{e+1}(n_e) = X(n_e)$, so $X \neq \Phi_e$. Hence $X$ is not computable. Adapted from the exercises of Monin and Patey, chapter on $\Pi^0_1$ classes, where the proof uses instead a $\emptyset'$-computable list of the computable sets.
+:::
+::::
+
+::::exercise{#ex-unique-limit-point difficulty=3 objective="Combine compactness with the arithmetic hierarchy to locate the only non-isolated member of a $\Pi^0_1$ class below $\emptyset''$."}
+Let $\mathcal P$ be a $\Pi^0_1$ class with exactly one non-isolated member $X$. Show that $X \leq_T \emptyset''$.
+
+:::solution
+Let $\mathcal P = [T]$ with $T$ computable.
+
+*A closed class all of whose members are isolated in it is finite.* Let $\mathcal Q$ be such a class, and choose for each $Y \in \mathcal Q$ a prefix $\sigma_Y$ with $[\sigma_Y] \cap \mathcal Q = \{ Y \}$. These cylinders cover $\mathcal Q$, which is compact (:ref{#prop-cantor-compact}); finitely many of them cover it, and each contains a single member of $\mathcal Q$.
+
+*Prefixes of $X$.* We show that $[\sigma] \cap \mathcal P$ is infinite if $\sigma \prec X$, and finite otherwise. Let $\sigma \prec X$. For each $n \geq |\sigma|$, since $X$ is not isolated, there is $Y_n \neq X$ in $[X \uh n] \cap \mathcal P \subseteq [\sigma] \cap \mathcal P$. If the $Y_n$ took only finitely many values, one value $Y \neq X$ would extend $X \uh n$ for infinitely many $n$, hence $Y = X$; so $[\sigma] \cap \mathcal P$ is infinite. Let now $\sigma \not\prec X$, and $\mathcal Q = [\sigma] \cap \mathcal P$, a closed class not containing $X$. Each $Y \in \mathcal Q$ is isolated in $\mathcal P$ by some $\tau \prec Y$; if $\tau'$ is the longer of $\tau$ and $\sigma$, both prefixes of $Y$, then $[\tau'] \cap \mathcal Q \subseteq [\tau] \cap \mathcal P = \{ Y \}$. So every member of $\mathcal Q$ is isolated in $\mathcal Q$, and $\mathcal Q$ is finite.
+
+*Complexity.* The class $[\tau] \cap \mathcal P$ has at most $k$ members if and only if, for every $n \geq |\tau|$, at most $k$ nodes of $T$ of length $n$ extending $\tau$ are extendible: $k+1$ distinct members are separated at some length $n$, giving $k+1$ extendible nodes of length $n$, and $k+1$ extendible nodes of the same length give $k+1$ distinct members. For a given $n$, the condition says that among any $k+1$ of the finitely many nodes of length $n$ extending $\tau$, one is not extendible; it is a finite Boolean combination, without negation, of $\Sigma^0_1$ properties (:ref{#prop-pi01-emptiness}), hence $\Sigma^0_1$. So "$[\tau] \cap \mathcal P$ has at most $k$ members" is $\Pi^0_2$, uniformly in $\tau$ and $k$, and $\emptyset''$ decides it, by Post's theorem.
+
+*Computing $X$.* Suppose $\rho = X \uh n$ is known. One of $\rho 0$, $\rho 1$ is a prefix of $X$, and the other one is not. With $\emptyset''$, examine the pairs $(i, k)$ with $i < 2$ and $k \in \nat$ in turn, until $[\rho i] \cap \mathcal P$ is found to have at most $k$ members. The search ends, since the successor of $\rho$ that is not a prefix of $X$ has finitely many members above it; and it never ends with the successor that is a prefix of $X$, which has infinitely many. When it ends with $i$, set $X(n) = 1 - i$. Adapted from Soare 2016, Exercise 8.7.2.
+:::
+::::
+:::::

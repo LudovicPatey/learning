@@ -117,6 +117,14 @@ Why does :ref{#prop-decimal-points} not contradict :ref{#prop-decimal-cauchy}?
   They do: their finite expansions padded with zeros.
 :::
 
+::::exercise{#ex-signed-digit difficulty=2 objective="Show that a representation with overlapping digits is equivalent to the Cauchy representation, unlike the decimal one."}
+The **signed-digit representation** $\rho_{sd}$ of $[-1, 1]$ names $x$ by sequences $p \in \{-1, 0, 1\}^\nat$ with $x = \sum_i p(i)\, 2^{-i-1}$ (the digits $-1, 0, 1$ are coded by $0, 1, 2$). Show that $\rho_{sd} \equiv \rho$ on $[-1, 1]$, and compare with :ref{#prop-decimal-cauchy}.
+
+:::solution
+From a signed-digit name, $r_k = \sum_{i < k} p(i)\, 2^{-i-1}$ satisfies $|x - r_k| \leq \sum_{i \geq k} 2^{-i-1} = 2^{-k}$; so $\rho_{sd} \leq \rho$ by :ref{#lem-cauchy-variants}. Conversely, from a Cauchy name of $x \in [-1, 1]$, compute digits $d_0, d_1, \dots$ such that the partial sums $s_n = \sum_{i < n} d_i\, 2^{-i-1}$ satisfy $|x - s_n| \leq 2^{-n}$. This holds for $s_0 = 0$. Given $s_n$, take a rational $r$ with $|r - x| \leq 2^{-n-3}$ and let $t = r - s_n$; choose $d_n = 1$ if $t \geq 2^{-n-2}$, $d_n = -1$ if $t \leq -2^{-n-2}$, and $d_n = 0$ otherwise. If $d_n = 1$, then $x - s_n \geq 2^{-n-2} - 2^{-n-3} > 0$ and $x - s_n \leq 2^{-n}$, so $x - s_{n+1} = x - s_n - 2^{-n-1}$ lies in $[-2^{-n-1}, 2^{-n-1}]$. The case $d_n = -1$ is symmetric. If $d_n = 0$, $|x - s_n| < 2^{-n-2} + 2^{-n-3} < 2^{-n-1}$. The digit $0$ gives the algorithm room: unlike a binary or decimal digit, a signed digit never has to decide on which side of a point $x$ lies, since the intervals of consecutive choices overlap.
+:::
+::::
+
 ## Left and right representations
 
 Some reals arise with approximations from one side only, such as the limit of a computable non-decreasing sequence (:ref{#prop-specker}).
@@ -125,7 +133,7 @@ Some reals arise with approximations from one side only, such as the limit of a 
 The **left representation** $\rho_<$ of $\mathbb R$ is defined by $\rho_<(p) = x$ if $\{ \nu(p(n)) : n \in \nat \} = \{ q \in \mathbb Q : q < x \}$: a name lists the rationals below $x$. The **right representation** $\rho_>$ is defined symmetrically, with the rationals above $x$. A real is **left-c.e.** if it is $\rho_<$-computable, and **right-c.e.** if it is $\rho_>$-computable.
 :::
 
-A real is left-c.e. if and only if the set of rationals below it is c.e., if and only if it is the limit of a computable non-decreasing sequence of rationals (exercise of :ref{to="second-order-arithmetic/real-numbers"}). Chaitin's $\Omega$ and the limits of Specker sequences are left-c.e. and not computable.
+A real is left-c.e. if and only if the set of rationals below it is c.e., if and only if it is the limit of a computable non-decreasing sequence of rationals (:ref{#ex-left-ce-specker}). Chaitin's $\Omega$ and the limits of Specker sequences are left-c.e. and not computable.
 
 :::proposition{#prop-left-right}
 1. $\rho \leq \rho_<$ and $\rho \leq \rho_>$.
@@ -156,20 +164,59 @@ In the proof of :ref{#prop-left-right} (3), why can $p \uh m$ be extended to a l
 
 :::
 
-## Exercises
-
-::::exercise{difficulty=2}
-The **signed-digit representation** $\rho_{sd}$ of $[-1, 1]$ names $x$ by sequences $p \in \{-1, 0, 1\}^\nat$ with $x = \sum_i p(i)\, 2^{-i-1}$ (the digits $-1, 0, 1$ are coded by $0, 1, 2$). Show that $\rho_{sd} \equiv \rho$ on $[-1, 1]$, and compare with :ref{#prop-decimal-cauchy}.
-
-:::solution
-From a signed-digit name, $r_k = \sum_{i < k} p(i)\, 2^{-i-1}$ satisfies $|x - r_k| \leq \sum_{i \geq k} 2^{-i-1} = 2^{-k}$; so $\rho_{sd} \leq \rho$ by :ref{#lem-cauchy-variants}. Conversely, from a Cauchy name of $x \in [-1, 1]$, compute digits $d_0, d_1, \dots$ such that the partial sums $s_n = \sum_{i < n} d_i\, 2^{-i-1}$ satisfy $|x - s_n| \leq 2^{-n}$. This holds for $s_0 = 0$. Given $s_n$, take a rational $r$ with $|r - x| \leq 2^{-n-3}$ and let $t = r - s_n$; choose $d_n = 1$ if $t \geq 2^{-n-2}$, $d_n = -1$ if $t \leq -2^{-n-2}$, and $d_n = 0$ otherwise. If $d_n = 1$, then $x - s_n \geq 2^{-n-2} - 2^{-n-3} > 0$ and $x - s_n \leq 2^{-n}$, so $x - s_{n+1} = x - s_n - 2^{-n-1}$ lies in $[-2^{-n-1}, 2^{-n-1}]$. The case $d_n = -1$ is symmetric. If $d_n = 0$, $|x - s_n| < 2^{-n-2} + 2^{-n-3} < 2^{-n-1}$. The digit $0$ gives the algorithm room: unlike a binary or decimal digit, a signed digit never has to decide on which side of a point $x$ lies, since the intervals of consecutive choices overlap.
-:::
-::::
-
 ## Notes and references
 
-Representations, realizers and reductions between representations are Weihrauch, Sections 2.3 and 3.1; the Cauchy representation, its variants and the left and right representations are Section 4.1 (Definitions 4.1.3 and 4.1.5, Lemma 4.1.6, and Lemma 4.1.9 for $\rho \equiv \rho_< \wedge \rho_>$), and computable reals are Section 4.2. The properties of the base-$n$ representations, including :ref{#prop-decimal-cauchy} (1)–(2) and :ref{#prop-decimal-points}, are collected in Theorem 4.1.13; the failure of multiplication by $3$ for decimal names is Weihrauch's Example 2.1.4 (7). Turing noticed in his correction of 1937 that decimal expansions are not suitable names for computable reals, and replaced them by a representation through rational approximations. The signed-digit representation is his Definition 7.2.4, studied in Section 7.2. Brattka, Hertling and Weihrauch give a short presentation of the same material in Sections 2–3 of their tutorial.
+Representations, realizers and reductions between representations are Weihrauch, Sections 2.3 and 3.1; the Cauchy representation, its variants and the left and right representations are Section 4.1 (Definitions 4.1.3 and 4.1.5, Lemma 4.1.6, and Lemma 4.1.9 for $\rho \equiv \rho_< \wedge \rho_>$), and computable reals are Section 4.2. The properties of the base-$n$ representations, including :ref{#prop-decimal-cauchy} (1)–(2) and :ref{#prop-decimal-points}, are collected in Theorem 4.1.13; the failure of multiplication by $3$ for decimal names is Weihrauch's Example 2.1.4 (7). Turing noticed in his correction of 1937 that decimal expansions are not suitable names for computable reals, and replaced them by a representation through rational approximations. The signed-digit representation is Weihrauch's Definition 7.2.4, studied in Section 7.2. Brattka, Hertling and Weihrauch give a short presentation of the same material in Sections 2–3 of their tutorial.
 
 - K. Weihrauch, *Computable Analysis: An Introduction*, Springer, 2000, Sections 2.1, 2.3, 3.1, 4.1, 4.2 and 7.2.
 - V. Brattka, P. Hertling and K. Weihrauch, *A tutorial on computable analysis*, in *New Computational Paradigms*, Springer, 2008, 425–491.
 - A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem. A correction*, Proceedings of the London Mathematical Society 43 (1937), 544–546.
+
+:::::exercises
+::::exercise{#ex-dyadic-names difficulty=1 objective="Check that Cauchy names may be restricted to dyadic rationals of prescribed denominators."}
+Fix a computable bijection between $\nat$ and $\mathbb Z$, and let $\rho_D(p) = x$ if the integers $n_k$ coded by the values $p(k)$ satisfy $|n_k 2^{-k} - x| \leq 2^{-k}$ for every $k$. Show that $\rho_D \equiv \rho$.
+
+:::solution
+A $\rho_D$-name of $x$ gives the rationals $n_k 2^{-k}$, computed from $p$, within $2^{-k}$ of $x$; this is a name for the representation $\rho'$ of :ref{#lem-cauchy-variants}, so $\rho_D \leq \rho' \equiv \rho$. Conversely, let $(q_k)$ be a Cauchy name of $x$, and let $n_k$ be an integer nearest to $2^k q_{k+1}$, for instance $\lfloor 2^k q_{k+1} + 1/2 \rfloor$, computed exactly from the rational $q_{k+1}$. Then $|n_k 2^{-k} - q_{k+1}| \leq 2^{-k-1}$ and $|q_{k+1} - x| \leq 2^{-k-1}$, so $|n_k 2^{-k} - x| \leq 2^{-k}$, and $(n_k)$ is a $\rho_D$-name of $x$, computed from $(q_k)$.
+:::
+::::
+
+::::exercise{#ex-left-negation difficulty=2 objective="Compute with left names, and show by a continuity argument that negation does not preserve them."}
+1. Show that $(x, y) \mapsto x + y$ is $([\rho_<, \rho_<], \rho_<)$-computable, and that $x \mapsto -x$ is $(\rho_<, \rho_>)$-computable.
+2. Show that $x \mapsto -x$ is not $(\rho_<, \rho_<)$-continuous.
+3. Deduce that the sum of two left-c.e. reals is left-c.e., and that a real $x$ such that $x$ and $-x$ are both left-c.e. is computable.
+
+:::solution
+1. Given left names of $x$ and $y$, list every rational $q$ such that $q < a + b$ for some rationals $a$ and $b$ listed in the names of $x$ and $y$, by a dovetailed search over the triples $(q, a, b)$. Each listed $q$ satisfies $q < a + b < x + y$. Conversely, if $q < x + y$, let $\varepsilon = x + y - q$; there are rationals $a \in (x - \varepsilon/2, x)$ and $b \in (y - \varepsilon/2, y)$, which are listed, and $a + b > q$, so $q$ is listed. For the negation, $q > -x$ if and only if $-q < x$, so listing $-a$ for every $a$ listed in a left name of $x$ gives a right name of $-x$.
+2. Suppose that a continuous $F$ translates left names of $x$ into left names of $-x$. Let $p$ be a left name of $0$. Then $F(p)$ lists the rationals below $0$, so $F(p)(j)$ codes $-1$ for some $j$. By continuity there is $m$ such that $F(q)(j) = F(p)(j)$ for every left name $q \in [p \uh m]$. The rationals listed in $p \uh m$ are negative, so below $2$; let $q$ be $p \uh m$ followed by a list of all rationals below $2$. Then $q$ is a left name of $2$, and $F(q)$, a left name of $-2$, lists $-1$, which is not below $-2$.
+3. Applied to computable names, the algorithms of (1) give computable names. If $x$ and $-x$ are left-c.e., then $x = -(-x)$ is right-c.e. by (1), so $x$ is computable by :ref{#prop-left-right} (2). For instance, if $x$ is the limit of a Specker sequence, then $-x$ is right-c.e. and not left-c.e.
+:::
+::::
+
+::::exercise[The naive Cauchy representation]{#ex-naive-cauchy difficulty=2 objective="See why the rate of convergence is part of a Cauchy name: without it, a name carries no bound on the real."}
+The **naive Cauchy representation** $\rho_{Cn}$ is defined by $\rho_{Cn}(p) = x$ if the rationals $\nu(p(k))$ converge to $x$, with no condition on the rate of convergence.
+1. Show that $\rho \leq \rho_{Cn}$ and $\rho_< \leq \rho_{Cn}$.
+2. Show that $\rho_{Cn} \not\leq_t \rho_<$.
+3. Show that the real $x_{\emptyset'}$ of :ref{#ex-computable-reals} is $\rho_{Cn}$-computable and not computable. Deduce that the constant function with value $x_{\emptyset'}$ is $(\rho_{Cn}, \rho_{Cn})$-computable but not $(\rho, \rho)$-computable.
+
+:::solution
+1. A Cauchy name is a sequence of rationals converging to $x$, so the identity translates $\rho$ to $\rho_{Cn}$. From a left name of $x$, listing $a_0, a_1, \dots$, compute $r_n = \max_{i \leq n} a_i$. The sequence $(r_n)$ is non-decreasing and bounded by $x$; for $\varepsilon > 0$, some rational of $(x - \varepsilon, x)$ is listed, so $r_n > x - \varepsilon$ for $n$ large. Hence $r_n \to x$.
+2. Suppose that a continuous $F$ translates $\rho_{Cn}$ to $\rho_<$. Let $p$ be the constant name $0, 0, \dots$ of $0$. Then $F(p)$ lists $-1$, say at index $j$, and by continuity there is $m$ such that $F(q)(j) = F(p)(j)$ for every $\rho_{Cn}$-name $q \in [p \uh m]$. The sequence $q$ of rationals $0, \dots, 0, -2, -2, \dots$, with $m$ terms $0$, converges to $-2$ and extends $p \uh m$. So $F(q)$ is a left name of $-2$ that lists $-1$, a contradiction. By symmetry, $\rho_{Cn} \not\leq_t \rho_>$ as well.
+3. Let $(K_s)$ be a computable enumeration of $\emptyset'$, with $K_s$ finite. The rationals $\sum_{n \in K_s} 2 \cdot 3^{-n-1}$ form a computable non-decreasing sequence converging to $x_{\emptyset'}$, which is thus $\rho_{Cn}$-computable. It is not computable by :ref{#ex-computable-reals} (3), since $\emptyset'$ is not computable. The function that ignores its input and outputs this computable $\rho_{Cn}$-name realizes the constant function for $(\rho_{Cn}, \rho_{Cn})$. A computable $(\rho, \rho)$-realizer, applied to the computable name $0, 0, \dots$ of $0$, would output a computable Cauchy name of $x_{\emptyset'}$.
+
+Adapted from Weihrauch 2000, Exercise 4.1.13 (a) and (c).
+:::
+::::
+
+::::exercise[An effective diagonal argument]{#ex-diagonal-reals difficulty=2 objective="Make Cantor's nested interval argument effective, and deduce that the computable reals cannot be listed by a computable sequence."}
+Show that there is a computable function which, given a $\rho^\omega$-name of a sequence of reals $(x_n)$, computes a Cauchy name of a real $y \in [0, 1]$ with $y \neq x_n$ for every $n$. Deduce that no $\rho^\omega$-computable sequence of reals contains every computable real.
+
+:::solution
+We compute rationals $a_n$ and $b_n = a_n + 3^{-n}$ such that the intervals $[a_n, b_n]$ are nested and $x_n \notin [a_{n+1}, b_{n+1}]$. Let $a_0 = 0$ and $b_0 = 1$. Given $[a_n, b_n]$, of length $L = 3^{-n}$, compute from the name of $x_n$ a rational $r$ with $|r - x_n| \leq L/12$ (the term of index $k$ with $2^{-k} \leq L/12$). If $r < a_n + L/2$, let $[a_{n+1}, b_{n+1}] = [b_n - L/3, b_n]$, the right third: then $x_n \leq r + L/12 < a_n + 7L/12 < a_n + 2L/3 = b_n - L/3$. Otherwise, let $[a_{n+1}, b_{n+1}] = [a_n, a_n + L/3]$, the left third: then $x_n \geq r - L/12 \geq a_n + 5L/12 > a_n + L/3$. In both cases $x_n \notin [a_{n+1}, b_{n+1}]$, and the new interval has length $3^{-n-1}$.
+
+The intervals are nested with lengths tending to $0$, so they have exactly one common point $y \in [0, 1]$. It belongs to $[a_{n+1}, b_{n+1}]$, so $y \neq x_n$, for every $n$. Since $|a_n - y| \leq 3^{-n} \leq 2^{-n}$, the computable sequence $(a_n)$ gives a Cauchy name of $y$ by :ref{#lem-cauchy-variants}. If $(x_n)$ has a computable $\rho^\omega$-name, then $y$ is computable and differs from every $x_n$.
+
+The computable reals are countable, since there are countably many computable names; the exercise shows that no single algorithm lists names of all of them.
+:::
+::::
+:::::

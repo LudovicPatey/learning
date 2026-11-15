@@ -118,15 +118,7 @@ By :ref{#thm-ssy-turing-ideal}, $\mathrm{SSy}(M)$ is a Turing ideal. The standar
 
 ## Exercises
 
-::::exercise{#ex-exp-cut-closed difficulty=1}
-Show that an exponential cut of a model of $\mathrm I\Delta_0 + \mathrm{exp}$ is closed under addition and multiplication.
-
-:::solution
-Let $a, b \in I$ and $m = \max(a, b)$. Then $a + b \leq 2m < 2^{m+1}$, which belongs to $I$ since $m + 1 \in I$; so $a + b \in I$. Then $a \cdot b \leq m \cdot m < 2^m \cdot 2^m = 2^{2m}$, which belongs to $I$ since $2m \in I$.
-:::
-::::
-
-::::exercise{#ex-subset-sum difficulty=2}
+::::exercise{#ex-subset-sum difficulty=2 objective="Compare the codes of a set and of a subset by bounded induction on the binary digits."}
 Show in $\mathrm I\Delta_0 + \mathrm{exp}$: if $u, v < 2^a$ and every element of $u$ belongs to $v$, then $v = u + w$, where $w < 2^a$ codes the elements of $v$ that are not in $u$. Deduce that $u \leq v$, and that $u < v$ if some element of $v$ is not in $u$.
 
 :::solution
@@ -140,3 +132,64 @@ By :ref{#thm-delta0-comprehension}, let $w < 2^a$ code $\{ i < a : i \in v \wedg
 
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lectures 3 and 4.
 - D. Scott, *Algebras of sets binumerable in complete extensions of arithmetic*, in Recursive Function Theory, Proceedings of Symposia in Pure Mathematics 5, American Mathematical Society, 1962, 117–121.
+
+:::::exercises
+::::exercise{#ex-exp-cut-closed difficulty=1 objective="Check that an exponential cut is closed under addition and multiplication."}
+Show that an exponential cut of a model of $\mathrm I\Delta_0 + \mathrm{exp}$ is closed under addition and multiplication.
+
+:::solution
+Let $a, b \in I$ and $m = \max(a, b)$. Then $a + b \leq 2m < 2^{m+1}$, which belongs to $I$ since $m + 1 \in I$; so $a + b \in I$. Then $a \cdot b \leq m \cdot m < 2^m \cdot 2^m = 2^{2m}$, which belongs to $I$ since $2m \in I$.
+:::
+::::
+
+::::exercise{#ex-string-codes difficulty=1 objective="Compute codes of binary strings, their lengths and their restrictions in $\nat$."}
+In $\nat$, with the coding of :ref{#def-strings-model}, list the strings coded by the numbers $8, 9, \dots, 15$. Find the string coded by $22$, compute the codes of its prefixes, and check that they are the numbers $22 \restriction \ell$, for $\ell \leq \mathrm{len}(22)$.
+
+:::solution
+The numbers from $8$ to $15$ have length $3$, since $2^3 \leq s < 2^4$; the string coded by $s$ has digits $\sigma(i)$ equal to the binary digits of $s - 8$ at the positions $i = 0, 1, 2$. This gives $8 \mapsto 000$, $9 \mapsto 100$, $10 \mapsto 010$, $11 \mapsto 110$, $12 \mapsto 001$, $13 \mapsto 101$, $14 \mapsto 011$ and $15 \mapsto 111$, the strings of length $3$ each once.
+
+Since $16 \leq 22 < 32$, the length of $22$ is $4$, and $22 - 16 = 6 = 2^1 + 2^2$: the string is $0110$. Its prefixes $\varepsilon$, $0$, $01$, $011$ and $0110$ have codes $1$, $2 + 0 = 2$, $4 + 2 = 6$, $8 + 2 + 4 = 14$ and $22$. The remainders of $22$ modulo $2^0, 2^1, 2^2, 2^3, 2^4$ are $0, 0, 2, 6, 6$, so $22 \restriction \ell = 2^\ell + (22 \bmod 2^\ell)$ takes the values $1, 2, 6, 14, 22$ for $\ell = 0, \dots, 4$, as it should by item 3 of :ref{#lem-strings-model}.
+:::
+::::
+
+::::exercise{#ex-unbounded-tree-exp difficulty=1 objective="See that a cut with an unbounded binary tree is exponential, so that the hypothesis of exponentiality in Scott's theorem is automatic."}
+Let $I$ be a cut of $M$. Show that if some binary tree in $I$ is unbounded, then $I$ is exponential. Deduce that :ref{#thm-scott-wkl-cut} holds for every proper cut of $M$.
+
+:::solution
+Let $T$ be an unbounded binary tree in $I$, and $\ell \in I$. Some $\tau \in T$ has length $\ell$, so $2^\ell \leq \tau$ by :ref{#def-strings-model}. As $\tau \in I$ and $I$ is an initial segment, $2^\ell \in I$. So $I$ is exponential.
+
+Let $I$ be a proper cut and $T \in \mathrm{Cod}(M/I)$ an unbounded binary tree. By the first part, $I$ is exponential, and :ref{#thm-scott-wkl-cut} applies. If $I$ is not exponential, no tree in $I$ is unbounded, and the statement holds vacuously: some $\ell \in I$ has $2^\ell \notin I$, and since every string of length $\ell$ is at least $2^\ell$, no string of length $\ell$ lies in $I$. With this coding, the theorem only has content for cuts in which every length in the cut is the length of some string in the cut.
+:::
+::::
+
+::::exercise{#ex-wkl-cut-through-node difficulty=1 objective="Apply Scott's theorem to a subtree, to find an unbounded coded branch through a given extendible node."}
+Let $I$ be a proper exponential cut of $M$, $T \in \mathrm{Cod}(M/I)$ a binary tree and $\sigma \in T$ such that for every $\ell \in I$ with $\ell \geq \mathrm{len}(\sigma)$, some $\tau \in T$ of length $\ell$ satisfies $\sigma \sqsubseteq \tau$. Show that $T$ has an unbounded branch $B \in \mathrm{Cod}(M/I)$ with $\sigma \in B$.
+
+:::solution
+Let $T_\sigma = \{ \tau \in T : \tau \sqsubseteq \sigma \vee \sigma \sqsubseteq \tau \}$. The relation $\sqsubseteq$ is given by a bounded formula, since $\mathrm{len}(s) < s$ (:ref{#lem-strings-model}); so $T_\sigma$ is defined in $(I, T)$ by a bounded $\mathcal L_2$ formula with the parameter $\sigma \in I$. The cut $I$ is closed under addition and multiplication (:ref{#ex-exp-cut-closed}), so $T_\sigma \in \mathrm{Cod}(M/I)$, by :ref{#cor-cod-delta1-ca}.
+
+*$T_\sigma$ is a tree.* Let $\rho \sqsubseteq \tau \in T_\sigma$. Then $\rho \in T$, since $T$ is a tree. If $\tau \sqsubseteq \sigma$, then $\rho \sqsubseteq \sigma$ by transitivity. If $\sigma \sqsubseteq \tau$, then $\rho$ and $\sigma$ are prefixes of $\tau$, hence comparable (item 4 of :ref{#lem-strings-model}). In both cases $\rho \in T_\sigma$.
+
+*$T_\sigma$ is unbounded.* For $\ell \in I$ with $\ell < \mathrm{len}(\sigma)$, the prefix $\sigma \restriction \ell$ belongs to $T$ and is a prefix of $\sigma$; for $\ell \geq \mathrm{len}(\sigma)$, use the hypothesis.
+
+By :ref{#thm-scott-wkl-cut}, $T_\sigma$ has an unbounded branch $B \in \mathrm{Cod}(M/I)$, which is a branch of $T$. Let $\rho \in B$ have length $\mathrm{len}(\sigma)$. Since $\rho \in T_\sigma$, $\rho \sqsubseteq \sigma$ or $\sigma \sqsubseteq \rho$; as the lengths are equal, item 3 of :ref{#lem-strings-model} gives $\rho = \sigma \restriction \mathrm{len}(\sigma) = \sigma$ in the first case, and $\sigma = \rho$ in the second. So $\sigma \in B$.
+:::
+::::
+
+::::exercise{#ex-branch-set difficulty=2 objective="Translate between coded subsets of an exponential cut and the unbounded coded branches, as paths and sets correspond in $\nat$."}
+Let $I$ be a proper exponential cut of $M$. For $X \subseteq I$, let $B_X$ be the set of strings $\sigma \in I$ such that $i \in \sigma \leftrightarrow i \in X$ for every $i < \mathrm{len}(\sigma)$.
+
+1. Show that if $X \in \mathrm{Cod}(M/I)$, then $B_X \in \mathrm{Cod}(M/I)$, and $B_X$ is an unbounded binary tree whose elements are pairwise comparable.
+2. Show that every unbounded branch $B \in \mathrm{Cod}(M/I)$ of a binary tree in $I$ is $B_X$ for some $X \in \mathrm{Cod}(M/I)$.
+
+:::solution
+By :ref{#ex-exp-cut-closed}, $I$ is closed under addition and multiplication, so :ref{#cor-cod-delta1-ca} applies.
+
+1. The set $B_X$ is defined in $(I, X)$ by the bounded formula $\sigma \geq 1 \wedge \forall i < \sigma\ (i < \mathrm{len}(\sigma) \rightarrow (i \in \sigma \leftrightarrow i \in X))$, since $\mathrm{len}(\sigma) < \sigma$; so it is coded. If $\rho \sqsubseteq \sigma \in B_X$, then $\rho$ agrees with $\sigma$, hence with $X$, below $\mathrm{len}(\rho)$, and $\rho \leq \sigma$ is in $I$; so $B_X$ is a tree. If $\sigma, \sigma' \in B_X$ with $\mathrm{len}(\sigma) \leq \mathrm{len}(\sigma')$, both agree with $X$ below $\mathrm{len}(\sigma)$, so $\sigma \sqsubseteq \sigma'$. For unboundedness, let $X = \mathrm{Ack}(c) \cap I$ and $\ell \in I$; write $c = 2^\ell u + q$ with $q < 2^\ell$, and $\sigma = 2^\ell + q$. Then $\mathrm{len}(\sigma) = \ell$, and for $i < \ell$, $i \in \sigma \leftrightarrow i \in q \leftrightarrow i \in c$ by the splitting property of :ref{#lem-ack-basic}, and $i \in c \leftrightarrow i \in X$ since $i \in I$. As $\sigma < 2^{\ell + 1} \in I$, $\sigma \in B_X$.
+
+2. Let $B$ be such a branch. For each $\ell \in I$, $B$ has a string of length $\ell$, and only one: two strings of $B$ of the same length are comparable, hence equal by item 3 of :ref{#lem-strings-model}. Let $X$ be the set of $i \in I$ such that the string of $B$ of length $i + 1$ contains $i$. It is defined in $(I, B)$ by the $\Sigma^0_1$ formula $\exists \sigma\ (\sigma \in B \wedge \mathrm{len}(\sigma) = i + 1 \wedge i \in \sigma)$ and by the $\Pi^0_1$ formula $\forall \sigma\ (\sigma \in B \wedge \mathrm{len}(\sigma) = i + 1 \rightarrow i \in \sigma)$, which are equivalent since $B$ has exactly one string of length $i + 1$. By :ref{#cor-cod-delta1-ca}, $X \in \mathrm{Cod}(M/I)$.
+
+Let $\sigma \in B$ and $i < \mathrm{len}(\sigma)$. The prefix $\sigma \restriction (i + 1)$ belongs to $B$, so it is the string of $B$ of length $i + 1$, and it agrees with $\sigma$ at $i$; so $i \in \sigma \leftrightarrow i \in X$, and $\sigma \in B_X$. Conversely, let $\sigma \in B_X$ have length $\ell$, and $\rho$ the string of $B$ of length $\ell$. Both agree with $X$ below $\ell$, so $\sigma \sqsubseteq \rho$, and $\sigma = \rho \restriction \ell = \rho \in B$. Hence $B = B_X$. For $I = \nat$, this is the correspondence between an infinite path and the set of its initial segments used in :ref{#cor-ssy-scott-set}.
+:::
+::::
+:::::

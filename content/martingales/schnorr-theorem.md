@@ -92,6 +92,22 @@ Apply the proof of (3) ⇒ (1) to a universal Martin-Löf test (:ref{#thm-univer
 
 The savings trick (:ref{#prop-savings}) is not effective for c.e. martingales: the $k$-th copy must stop betting when the capital of $d$ exceeds $2^k$, and for a c.e. martingale this is known only in the limit, with values only approximated. The corollary shows that the conclusion of the trick still holds: the success set of a c.e. martingale is the class captured by the test of the proof of (1) ⇒ (2), and the c.e. martingale built from this test has capital tending to infinity on it.
 
+::::exercise{#ex-martingale-k difficulty=2 objective="Build a c.e. martingale from prefix-free complexity and derive one direction of the ample excess lemma from Schnorr's theorem."}
+For a string $\tau$, let $E_\tau$ be the elementary martingale of :ref{#ex-martingales}, and let $d_K = \sum_\tau 2^{-K(\tau)} E_\tau$. Show that $d_K$ is a c.e. martingale and that $d_K(X \uh n) \geq \sum_{m \leq n} 2^{m - K(X \uh m)}$ for every $X$ and $n$. Deduce from :ref{#thm-schnorr-martingales} the direction ($\Rightarrow$) of the ample excess lemma (:ref{#thm-ample-excess}): if $X$ is random, then $\sum_n 2^{n - K(X \uh n)} < \infty$.
+
+:::solution
+Since $E_\tau(\varepsilon) = 1$, $\sum_\tau 2^{-K(\tau)} E_\tau(\varepsilon) = \sum_\tau 2^{-K(\tau)} \leq 1$ by :ref{#prop-k-basic} (4), so $d_K$ is a martingale by :ref{#lem-martingale-basic} (2). The function $K$ is approximable from above, so $2^{-K(\tau)}$ is left-c.e. uniformly in $\tau$, and $2^{-K(\tau)} E_\tau$ is a c.e. martingale, uniformly in $\tau$ (the values of $E_\tau$ are computable). By :ref{#lem-ce-sum}, $d_K$ is c.e. For $m \leq n$ and $\tau = X \uh m$, $E_\tau(X \uh n) = 2^m$, so the terms indexed by the prefixes of $X \uh n$ contribute $\sum_{m \leq n} 2^{m - K(X \uh m)}$. If $X$ is random, $d_K$ is bounded along $X$ by the theorem, and the partial sums of the series are bounded.
+:::
+::::
+
+::::exercise{#ex-partial-martingale difficulty=2 objective="Define partial computable martingales and show that they do not defeat Martin-Löf random sequences."}
+A **partial computable martingale** is a partial computable function $d$ from strings to non-negative rationals whose domain is closed under prefixes, such that for every $\sigma$, $d(\sigma 0)$ is defined if and only if $d(\sigma 1)$ is, and then $d(\sigma 0) + d(\sigma 1) = 2 d(\sigma)$. It succeeds on $X$ if $d(X \uh n)$ is defined for every $n$ and unbounded. A sequence is **partial computably random** if no partial computable martingale succeeds on it. Show that every Martin-Löf random sequence is partial computably random.
+
+:::solution
+Let $\tilde d(\sigma) = d(\sigma)$ if $d(\sigma)$ is defined, and $\tilde d(\sigma) = 0$ otherwise. It is c.e.: the approximation at stage $s$ is $0$ until the computation of $d(\sigma)$ halts, and $d(\sigma)$ afterwards. It is a supermartingale: if $d(\sigma 0)$ and $d(\sigma 1)$ are defined, so is $d(\sigma)$ and equality holds; if they are undefined, $\tilde d(\sigma 0) + \tilde d(\sigma 1) = 0$. If $d$ succeeds on $X$, so does $\tilde d$, and $X$ is not random by :ref{#thm-schnorr-martingales}.
+:::
+::::
+
 ## Optimal supermartingales
 
 The universal martingale of the corollary succeeds on every non-random sequence, but it need not be large wherever another strategy is large. A stronger form of universality is available for supermartingales: a single c.e. supermartingale that dominates every c.e. supermartingale up to a multiplicative constant. Its construction follows the pattern of the universal test: list all candidates, trim each into a genuine supermartingale without changing those that already are, and add them with weights.
@@ -121,27 +137,9 @@ Every c.e. supermartingale $d$ with $d(\varepsilon) \leq 1$ is one of the $L^e$:
 
 By :ref{#thm-schnorr-martingales}, an optimal supermartingale $D$ is bounded along every random sequence and unbounded along every non-random one. For martingales, the theorem fails: there is no optimal c.e. martingale (Downey, Griffiths and LaForte 2004; Downey–Hirschfeldt, Theorem 6.3.12), a fact admitted here. The proof above does not adapt: trimming produces supermartingales, and the martingale above a c.e. supermartingale given by :ref{#lem-martingale-basic} (3) need not be c.e., since the amounts $L(\sigma) - \frac12(L(\sigma 0) + L(\sigma 1))$ that it adds are differences of left-c.e. reals. Levin's optimal semimeasure, through which the a priori complexity $KM$ is defined, is the same object: $\sigma \mapsto 2^{-|\sigma|} D(\sigma)$ (Downey–Hirschfeldt, Section 6.3.2).
 
-## Exercises
-
-::::exercise{difficulty=2}
-For a string $\tau$, let $E_\tau$ be the elementary martingale of :ref{#ex-martingales}, and let $d_K = \sum_\tau 2^{-K(\tau)} E_\tau$. Show that $d_K$ is a c.e. martingale and that $d_K(X \uh n) \geq \sum_{m \leq n} 2^{m - K(X \uh m)}$ for every $X$ and $n$. Deduce from :ref{#thm-schnorr-martingales} the direction ($\Rightarrow$) of the ample excess lemma (:ref{#thm-ample-excess}): if $X$ is random, then $\sum_n 2^{n - K(X \uh n)} < \infty$.
-
-:::solution
-Since $E_\tau(\varepsilon) = 1$, $\sum_\tau 2^{-K(\tau)} E_\tau(\varepsilon) = \sum_\tau 2^{-K(\tau)} \leq 1$ by :ref{#prop-k-basic} (4), so $d_K$ is a martingale by :ref{#lem-martingale-basic} (2). The function $K$ is approximable from above, so $2^{-K(\tau)}$ is left-c.e. uniformly in $\tau$, and $2^{-K(\tau)} E_\tau$ is a c.e. martingale, uniformly in $\tau$ (the values of $E_\tau$ are computable). By :ref{#lem-ce-sum}, $d_K$ is c.e. For $m \leq n$ and $\tau = X \uh m$, $E_\tau(X \uh n) = 2^m$, so the terms indexed by the prefixes of $X \uh n$ contribute $\sum_{m \leq n} 2^{m - K(X \uh m)}$. If $X$ is random, $d_K$ is bounded along $X$ by the theorem, and the partial sums of the series are bounded.
-:::
-::::
-
-::::exercise{#ex-partial-martingale difficulty=2}
-A **partial computable martingale** is a partial computable function $d$ from strings to non-negative rationals whose domain is closed under prefixes, such that for every $\sigma$, $d(\sigma 0)$ is defined if and only if $d(\sigma 1)$ is, and then $d(\sigma 0) + d(\sigma 1) = 2 d(\sigma)$. It succeeds on $X$ if $d(X \uh n)$ is defined for every $n$ and unbounded. A sequence is **partial computably random** if no partial computable martingale succeeds on it. Show that every Martin-Löf random sequence is partial computably random.
-
-:::solution
-Let $\tilde d(\sigma) = d(\sigma)$ if $d(\sigma)$ is defined, and $\tilde d(\sigma) = 0$ otherwise. It is c.e.: the approximation at stage $s$ is $0$ until the computation of $d(\sigma)$ halts, and $d(\sigma)$ afterwards. It is a supermartingale: if $d(\sigma 0)$ and $d(\sigma 1)$ are defined, so is $d(\sigma)$ and equality holds; if they are undefined, $\tilde d(\sigma 0) + \tilde d(\sigma 1) = 0$. If $d$ succeeds on $X$, so does $\tilde d$, and $X$ is not random by :ref{#thm-schnorr-martingales}.
-:::
-::::
-
 ## Notes and references
 
-Schnorr (1971) proved :ref{#thm-schnorr-martingales}, the existence of a universal c.e. martingale and of an optimal c.e. supermartingale, in his monograph and in *A unified approach to the definition of a random sequence*; Levin's optimal semimeasure (Zvonkin and Levin 1970) is essentially the same as the optimal supermartingale. The absence of an optimal c.e. martingale was first proved in print by Downey, Griffiths and LaForte (2004), though it is implicit in Levin's work. Downey and Hirschfeldt present these results in Section 6.3 (Theorem 6.3.4, Corollary 6.3.5, Theorem 6.3.7, Theorem 6.3.12); Nies in Section 7.2 (Definition 7.2.1, Proposition 7.2.6, Exercise 7.2.7). The martingale $d_K$ of the first exercise and its relation with the ample excess lemma are from Nies (Theorem 7.2.8); partial computable martingales are Nies, Definition 7.4.1.
+Schnorr (1971) proved :ref{#thm-schnorr-martingales}, the existence of a universal c.e. martingale and of an optimal c.e. supermartingale, in his monograph and in *A unified approach to the definition of a random sequence*; Levin's optimal semimeasure (Zvonkin and Levin 1970) is essentially the same as the optimal supermartingale. The absence of an optimal c.e. martingale was first proved in print by Downey, Griffiths and LaForte (2004), though it is implicit in Levin's work. Downey and Hirschfeldt present these results in Section 6.3 (Theorem 6.3.4, Corollary 6.3.5, Theorem 6.3.7, Theorem 6.3.12); Nies in Section 7.2 (Definition 7.2.1, Proposition 7.2.6, Exercise 7.2.7). The martingale $d_K$ of :ref{#ex-martingale-k} and its relation with the ample excess lemma are from Nies (Theorem 7.2.8); partial computable martingales are Nies, Definition 7.4.1.
 
 - C.-P. Schnorr, *Zufälligkeit und Wahrscheinlichkeit*, Lecture Notes in Mathematics 218, Springer, 1971.
 - C.-P. Schnorr, *A unified approach to the definition of a random sequence*, Mathematical Systems Theory 5 (1971), 246–258.
@@ -149,3 +147,59 @@ Schnorr (1971) proved :ref{#thm-schnorr-martingales}, the existence of a univers
 - R. G. Downey, E. Griffiths and G. LaForte, *On Schnorr and computable randomness, martingales, and machines*, Mathematical Logic Quarterly 50 (2004), 613–627.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 6.3.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 7.1–7.2 and 7.4.
+
+:::::exercises
+::::exercise{#ex-solovay-martingale difficulty=1 objective="Turn a Solovay test into a c.e. martingale, and obtain from Schnorr's theorem that random sequences are captured by no Solovay test."}
+A **Solovay test** is a uniformly $\Sigma^0_1$ sequence $(\mathcal S_n)$ with $\sum_n \lambda(\mathcal S_n) < \infty$. Show that $d = \sum_n d_{\mathcal S_n}$ is a c.e. martingale, and that $\lim_m d(X \uh m) = \infty$ for every $X$ that belongs to infinitely many classes $\mathcal S_n$. Deduce from :ref{#thm-schnorr-martingales} that a Martin-Löf random sequence belongs to only finitely many of them.
+
+:::solution
+By :ref{#ex-ce-martingales} (2), the martingales $d_{\mathcal S_n}$ are c.e., uniformly in $n$, and $\sum_n d_{\mathcal S_n}(\varepsilon) = \sum_n \lambda(\mathcal S_n) < \infty$; so $d$ is a c.e. martingale by :ref{#lem-ce-sum}. If $X \in \mathcal S_n$, there is $m_n$ with $[X \uh m_n] \subseteq \mathcal S_n$, since $\mathcal S_n$ is open, and then $d_{\mathcal S_n}(X \uh m) = 1$ for every $m \geq m_n$. If $X$ belongs to infinitely many $\mathcal S_n$, then $d(X \uh m) \geq |\{ n : X \in \mathcal S_n,\ m_n \leq m \}|$, which tends to infinity with $m$. So $d$ succeeds on $X$, and $X$ is not Martin-Löf random. This is a martingale proof of the easy half of Solovay's characterization of Martin-Löf randomness.
+:::
+::::
+
+::::exercise{#ex-pcr-finite-variants difficulty=1 objective="Show that partial computable randomness does not depend on finitely many bits."}
+Let $X$ and $X'$ be sequences that differ at finitely many positions. Show that if $X$ is partial computably random (:ref{#ex-partial-martingale}), then so is $X'$.
+
+:::solution
+Let $N$ be such that $X(n) = X'(n)$ for every $n \geq N$, and let $\rho = X' \uh N$. Suppose that a partial computable martingale $d$ succeeds on $X'$. Define $\tilde d(\sigma) = d(\rho)$ for $|\sigma| \leq N$, and $\tilde d(\sigma) = d(\rho\, \sigma(N) \sigma(N+1) \cdots \sigma(|\sigma| - 1))$ for $|\sigma| \geq N$: the strategy does not bet on the first $N$ bits, then bets as $d$ would after $\rho$. Since $d$ succeeds on $X'$, $d(\rho)$ is defined, so $\tilde d$ is defined on all strings of length at most $N$. The domain of $\tilde d$ is closed under prefixes, its two children are defined together, and the martingale equality holds: at length less than $N$ there is no bet, and at length at least $N$ the children of $\sigma$ correspond to the children of the corresponding extension of $\rho$. It is partial computable, since $\rho$ is a fixed string. For $n \geq N$, $\tilde d(X \uh n) = d(X' \uh n)$, so $\tilde d$ succeeds on $X$. Exchanging $X$ and $X'$ gives the converse.
+
+Adapted from Nies 2009, Exercise 7.4.5.
+:::
+::::
+
+::::exercise{#ex-pc-nonascending difficulty=2 objective="Find a computable sequence on which a given partial computable martingale fails, using a non-uniform case distinction."}
+Let $d$ be a partial computable martingale (:ref{#ex-partial-martingale}). Show that there is a computable sequence $E$ such that either $d(E \uh n)$ is undefined for some $n$, or $d(E \uh (n+1)) \leq d(E \uh n)$ for every $n$. Deduce that no partial computable martingale succeeds on every computable sequence.
+
+:::solution
+If $d(\varepsilon)$ is undefined, the domain of $d$ is empty, and every computable $E$ works. Otherwise, define strings $\rho_0 \prec \rho_1 \prec \cdots$ as long as possible: $\rho_0 = \varepsilon$; if $d(\rho_n 0)$ is defined (then so is $d(\rho_n 1)$), let $\rho_{n+1} = \rho_n 0$ if $d(\rho_n 0) \leq d(\rho_n)$ and $\rho_{n+1} = \rho_n 1$ otherwise; if $d(\rho_n 0)$ is undefined, stop. As in :ref{#lem-non-ascending}, $d(\rho_{n+1}) \leq d(\rho_n)$ whenever $\rho_{n+1}$ is defined.
+
+If the process never stops, let $E$ be the union of the $\rho_n$. It is computable: to compute $E \uh n$, compute $\rho_0, \dots, \rho_n$, which only involves computations of $d$ that halt. The capital is non-increasing along $E$. If the process stops at $\rho_n$, let $E = \rho_n 0^\infty$, a computable sequence with $d(E \uh (n+1)) = d(\rho_n 0)$ undefined.
+
+In both cases $E$ is computable, but which case holds cannot in general be decided from $d$: the proof is not uniform. A partial computable martingale fails on the sequence $E$ obtained, which is computable.
+
+Adapted from Nies 2009, Exercise 7.4.6.
+:::
+::::
+
+::::exercise{#ex-dk-not-optimal difficulty=2 objective="Show that the martingale built from prefix-free complexity is not optimal among c.e. martingales."}
+Let $d_K = \sum_\tau 2^{-K(\tau)} E_\tau$ be the c.e. martingale of :ref{#ex-martingale-k}, and let $g$ be the computable martingale that bets its whole capital on $0$ at every step: $g(0^n) = 2^n$, and $g(\sigma) = 0$ if $\sigma$ contains a $1$. Show that $2^{-n} d_K(0^n)$ tends to $0$. Deduce that there is no constant $c$ with $g \leq c\, d_K$, so that $d_K$, unlike the supermartingale of :ref{#thm-optimal-supermartingale}, does not dominate every c.e. martingale up to a multiplicative constant.
+
+:::solution
+By the definition of $E_\tau$, $E_\tau(0^n) = 2^{|\tau|}$ if $\tau = 0^m$ with $m \leq n$, $E_\tau(0^n) = 2^n$ if $\tau$ is a proper extension of $0^n$, and $E_\tau(0^n) = 0$ otherwise. So
+$$
+2^{-n} d_K(0^n) = \sum_{m \leq n} 2^{m - n - K(0^m)} + \sum_{\tau \succ 0^n} 2^{-K(\tau)}.
+$$
+The second sum tends to $0$. Given $\eta > 0$, there is a finite set $F$ of strings with $\sum_{\tau \notin F} 2^{-K(\tau)} < \eta$, since $\sum_\tau 2^{-K(\tau)} \leq 1$; for $n$ at least the length of every string of $F$, no proper extension of $0^n$ is in $F$, and the sum is less than $\eta$.
+
+The first sum tends to $0$. Only finitely many strings have complexity at most a given $k$, since there are finitely many descriptions of length at most $k$; so $K(0^m)$ tends to infinity. Given $\eta > 0$, let $M$ be such that $2^{-K(0^m)} < \eta$ for $m > M$. Then for $n > M$,
+$$
+\sum_{m \leq n} 2^{m - n - K(0^m)} \leq \sum_{m \leq M} 2^{m - n} + \eta \sum_{m \leq n} 2^{m - n} \leq 2^{M + 1 - n} + 2 \eta,
+$$
+which is less than $3\eta$ for $n$ large.
+
+Since $2^{-n} g(0^n) = 1$, an inequality $g \leq c\, d_K$ would give $2^{-n} d_K(0^n) \geq 1/c$ for every $n$, a contradiction.
+
+Adapted from Nies 2009, Exercise 7.2.7 (iii). By a theorem admitted in this lesson, no c.e. martingale is optimal.
+:::
+::::
+:::::

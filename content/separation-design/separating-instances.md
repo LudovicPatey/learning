@@ -92,7 +92,7 @@ $\mathsf{SCAC} \not\leq_\omega \mathsf{ADS}$, hence $\mathsf{CAC} \not\leq_\omeg
 :::
 
 :::proof{of=cor-sd-ads-not-scac}
-Let $<_P$, $B$, $I$ be as in :ref{#thm-sd-stable-order}, and $\mathcal W$ the class of sets relative to which $(I, B)$ is dependently hyperimmune; $\emptyset \in \mathcal W$. By :ref{#thm-sd-ads-dependent}, $\mathsf{ADS}$ preserves $\mathcal W$. Let $H$ be an infinite chain or antichain of $<_P$. Then $H \subseteq B$ or $H \subseteq I$, and by the exercise of :ref{to="separation-design/ascending-descending"}, $H \notin \mathcal W$. So $\mathsf{SCAC}$ does not preserve $\mathcal W$, and :ref{#thm-preservation-separation} applies.
+Let $<_P$, $B$, $I$ be as in :ref{#thm-sd-stable-order}, and $\mathcal W$ the class of sets relative to which $(I, B)$ is dependently hyperimmune; $\emptyset \in \mathcal W$. By :ref{#thm-sd-ads-dependent}, $\mathsf{ADS}$ preserves $\mathcal W$. Let $H$ be an infinite chain or antichain of $<_P$. Then $H \subseteq B$ or $H \subseteq I$, and by :ref{#ex-ads-one-part}, $H \notin \mathcal W$. So $\mathsf{SCAC}$ does not preserve $\mathcal W$, and :ref{#thm-preservation-separation} applies.
 :::
 
 :::quiz[the stable partial order]
@@ -107,13 +107,11 @@ Why does a strategy move to $B$ the whole interval $(m_e, \min S)$, and to $I$ t
   This follows from the requirements.
 :::
 
-## Exercises
-
-::::exercise{difficulty=2}
+::::exercise{#ex-sd-order-properties difficulty=2 objective="Derive properties of the stable partial order of the separating instance from dependent hyperimmunity."}
 Show that the order of :ref{#thm-sd-stable-order} has no infinite descending sequence, and that $B$ and $I$ are infinite. Deduce from :ref{#thm-sd-stable-order} that $B$ and $I$ are hyperimmune.
 
 :::solution
-If $x <_P y$ then $x < y$, so no pair $x < y$ has $y <_P x$. Since $\nat = B \sqcup I$ and $(I, B)$ is dependently hyperimmune, both sets are infinite by the exercise of :ref{to="separation-design/ascending-descending"}. By :ref{#ex-sd-dependent}, with $A_0 = I$, no disjoint strong array of non-empty sets has all its members meeting $I$, so $I$ is hyperimmune. For $B = A_1$, the same argument applies to the essential formula "$V = F_n$ for some $n$", with $U$ arbitrary: it gives some $F_n \subseteq \overline B$.
+If $x <_P y$ then $x < y$, so no pair $x < y$ has $y <_P x$. Since $\nat = B \sqcup I$ and $(I, B)$ is dependently hyperimmune, both sets are infinite by :ref{#ex-ads-one-part}. By :ref{#ex-sd-dependent}, with $A_0 = I$, no disjoint strong array of non-empty sets has all its members meeting $I$, so $I$ is hyperimmune. For $B = A_1$, the same argument applies to the essential formula "$V = F_n$ for some $n$", with $U$ arbitrary: it gives some $F_n \subseteq \overline B$.
 :::
 ::::
 
@@ -126,3 +124,41 @@ If $x <_P y$ then $x < y$, so no pair $x < y$ has $y <_P x$. Since $\nat = B \sq
 - M. Lerman, R. Solomon and H. Towsner, *Separating principles below Ramsey's theorem for pairs*, Journal of Mathematical Logic 13 (2013), 1350007.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2015, Sections 9.1–9.2.
 - L. Patey, *Lowness and avoidance*, chapter *Custom properties*.
+
+:::::exercises
+::::exercise{#ex-cac-no-dnc difficulty=1 objective="Combine the preservation theorem for $\mathsf{CAC}$ with the DNC instance to avoid DNC functions." lessons="chain-antichain"}
+Show that every computable partial order has an infinite chain or antichain that computes no DNC function.
+
+:::solution
+Let $A$ be the c.b.-immune set of :ref{#thm-sd-dnc-cb}. By :ref{#thm-sd-cac-cb} with $Z = \emptyset$, the order has an infinite ascending sequence, descending sequence or antichain $G$, in particular a chain or an antichain, such that $A$ is c.b.-immune, hence immune, relative to $G$. If $G$ computed a DNC function $f$, then $f$, hence $G$, would compute an infinite subset of $A$, a contradiction. Hirschfeldt and Shore obtained this with a forcing built for the avoidance of DNC degrees.
+:::
+::::
+
+::::exercise{#ex-sd-mu-domination difficulty=1 objective="Verify the properties of the cut function $\mu$ used in the DNC construction."}
+Let $\mu$ be as in the text.
+
+1. Show that $\{ (i, y) : y < \mu(i) \}$ is c.e., that $\mu \leq_T \emptyset'$ and that $\mu(i) > i$.
+2. Show directly that every function $g$ with $g(i) \geq \mu(i)$ for almost every $i$ computes $\emptyset'$.
+
+:::solution
+1. $\mu(i) > i$ by definition. Since the enumeration of $\emptyset'$ only adds elements, once $\emptyset'_s \uh i = \emptyset' \uh i$ the equality holds at all later stages. So for $y > i$, $y < \mu(i)$ holds if and only if $\emptyset'_y \uh i \neq \emptyset' \uh i$, that is, some element below $i$ enters $\emptyset'$ after stage $y$, a $\Sigma^0_1$ condition; for $y \leq i$, $y < \mu(i)$ always holds. With oracle $\emptyset'$, one knows $\emptyset' \uh i$ and finds the least $s > i$ with $\emptyset'_s \uh i = \emptyset' \uh i$.
+2. Let $g(i) \geq \mu(i)$ for $i \geq i_0$. For $i \geq i_0$, $\emptyset' \uh i = \emptyset'_{g(i)} \uh i$, by the monotonicity used in item 1. So $e \in \emptyset'$ if and only if $e \in \emptyset'_{g(i)}$ for $i = \max(e + 1, i_0)$, which is decidable in $g$, the number $i_0$ being fixed.
+:::
+::::
+
+::::exercise{#ex-sd-dnc-immune-direct difficulty=1 objective="Check directly on the requirements that the set of the DNC construction is immune."}
+Show from the requirements $R_{e,1}$ alone, without the induction on $k$, that the set $A$ of :ref{#thm-sd-dnc-cb} is immune.
+
+:::solution
+Suppose that $R \subseteq A$ is infinite and computable. Let $\Psi(n) = \{ r_n \}$, where $r_n$ is the least element of $R$ larger than $n$. It is a computable sequence of singletons with $\min \Psi(n) > n$, equal to $\Psi_{e,1}$ for an index $e$ of it. It meets each column finitely often: $R \cap X_j \subseteq A \cap X_j \subseteq F_j$ is finite, and an element $r$ equals $r_n$ only for $n < r$. By $R_{e,1}$, some $\Psi(n) = \{ r_n \}$ is contained in $W$; but $r_n \in R \subseteq A$ and $A \cap W = \emptyset$. So $A$ has no infinite computable subset, hence no infinite c.e. subset.
+:::
+::::
+
+::::exercise{#ex-sd-dnc-not-hyperimmune difficulty=2 objective="See why the separating set for $\mathsf{DNC}$ cannot be hyperimmune."}
+Show that for every hyperimmune set $A$ there is a DNC function that computes no infinite subset of $A$. Deduce that the set of :ref{#thm-sd-dnc-cb} is c.b.-immune but not hyperimmune.
+
+:::solution
+The $\{0,1\}$-valued DNC functions form a non-empty $\Pi^0_1$ class: the condition $f(e) \neq \Phi_e(e)$ fails at a finite stage when it fails. By :ref{#thm-dominated-basis}, it has a computably dominated member $f$. If $f$ computed an infinite set $H \subseteq A$, the function $p_H$ would be dominated by a computable function $g$, and $p_A \leq p_H \leq g$, so $A$ would not be hyperimmune by :ref{#thm-hyperimmune-principal}. Every DNC function computes an infinite subset of the set of :ref{#thm-sd-dnc-cb}, so this set is not hyperimmune. So the separation of $\mathsf{DNC}$ from $\mathsf{CAC}$ needs a property strictly between immunity and hyperimmunity, which constant-bound immunity provides.
+:::
+::::
+:::::

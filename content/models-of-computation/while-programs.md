@@ -68,7 +68,7 @@ This is related to the **Böhm–Jacopini theorem** (1966): every flow diagram c
 
 ## WHILE programs and register machines
 
-The translation into register machines introduces jumps; the last exercise of this lesson goes in the other direction and eliminates them. A $\mathtt{WHILE}$ loop becomes a test at the top and a jump back at the bottom; a $\mathtt{LOOP}$ instruction needs two extra registers, one to keep the number of iterations fixed on entry and one to count them.
+The translation into register machines introduces jumps; :ref{#ex-while-urm} goes in the other direction and eliminates them. A $\mathtt{WHILE}$ loop becomes a test at the top and a jump back at the bottom; a $\mathtt{LOOP}$ instruction needs two extra registers, one to keep the number of iterations fixed on entry and one to count them.
 
 :::figure[The register machine program $(\mathtt{LOOP}\ X_i\ \mathtt{DO}\ Q\ \mathtt{END})^*$, where $t$ is the length of $Q^*$. The register $R_a$ keeps the number of iterations fixed on entry, $R_b$ counts the iterations performed, and $R_1 = 0$ serves for the unconditional jump back to the test.]
 <svg class="fig" viewBox="0 0 540 300" width="540" role="img" aria-label="Layout of the register machine program for a LOOP instruction"><defs><marker id="ah-loopurm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><rect class="cell" x="80" y="18" width="200" height="32" rx="3"/><text x="90" y="39" class="mrm muted" font-size="13">1</text><text x="268" y="39" text-anchor="end" class="mrm" font-size="14">T(i+2, a)</text><text x="342" y="39" class="label">save the number of iterations</text><rect class="cell" x="80" y="58" width="200" height="32" rx="3"/><text x="90" y="79" class="mrm muted" font-size="13">2</text><text x="268" y="79" text-anchor="end" class="mrm" font-size="14">Z(b)</text><text x="342" y="79" class="label">reset the counter</text><rect class="cell" x="80" y="98" width="200" height="32" rx="3"/><text x="90" y="119" class="mrm muted" font-size="13">3</text><text x="268" y="119" text-anchor="end" class="mrm" font-size="14">J(a, b, t+6)</text><text x="342" y="119" class="label">exit when the counter reaches it</text><rect class="cell head-cell" x="80" y="138" width="200" height="32" rx="3"/><text x="90" y="159" class="mrm muted" font-size="13">4 … t+3</text><text x="268" y="159" text-anchor="end" class="mrm" font-size="14">Q* shifted by 3</text><text x="342" y="159" class="label">body</text><rect class="cell" x="80" y="178" width="200" height="32" rx="3"/><text x="90" y="199" class="mrm muted" font-size="13">t+4</text><text x="268" y="199" text-anchor="end" class="mrm" font-size="14">S(b)</text><text x="342" y="199" class="label">count one iteration</text><rect class="cell" x="80" y="218" width="200" height="32" rx="3"/><text x="90" y="239" class="mrm muted" font-size="13">t+5</text><text x="268" y="239" text-anchor="end" class="mrm" font-size="14">J(1, 1, 3)</text><text x="342" y="239" class="label">back to the test</text><rect class="cell" x="80" y="258" width="200" height="32" rx="3" stroke-dasharray="4 3"/><text x="90" y="279" class="mrm muted" font-size="13">t+6</text><text x="342" y="279" class="label">next instruction</text><path d="M280,114.0 C330,114.0 330,274.0 284,274.0" class="accent-stroke" stroke-width="1.4" marker-end="url(#ah-loopurm)"/><path d="M80,234.0 C20,234.0 20,114.0 76,114.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-loopurm)"/></svg>
@@ -93,7 +93,7 @@ The program for $f$ consists of $T(k, k+2), T(k-1, k+1), \dots, T(1, 3)$, which 
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-while-urm difficulty=2 objective="Eliminate jumps by simulating a register machine with a single while loop over a program counter."}
 Show directly, without using partial recursive functions, that every URM-computable partial function is WHILE-computable, by a WHILE program with a single $\mathtt{WHILE}$ instruction. (The converse is :ref{#prop-while-urm}.)
 
 :::solution
@@ -112,3 +112,67 @@ WHILE programs, as an extension of LOOP programs, are from Meyer and Ritchie. Th
 - R. Péter, *Graphschemata und rekursive Funktionen*, Dialectica 12 (1958), 373–393.
 - B. Monin, L. Patey, *Computability theory*, chapter "Church–Turing thesis", section on recursive functions.
 
+:::::exercises
+::::exercise{#ex-while-trace difficulty=1 objective="Determine the partial functions computed by WHILE programs, including a program that diverges on some inputs."}
+Using the abbreviations of the lesson :ref{to="models-of-computation/loop-programs"} and the conditional of :ref{#ex-loop-if-else}, determine the unary partial functions computed by
+$$
+P:\ X_0 \mathbin{:=} 0 ;\ \mathtt{WHILE}\ X_1 \neq 0\ \mathtt{DO}\ X_1 \mathbin{:=} X_1 \dotminus 1 ;\ X_1 \mathbin{:=} X_1 \dotminus 1 ;\ X_0 \mathbin{:=} X_0 + 1\ \mathtt{END}
+$$
+and by the program $Q$ obtained from $P$ by replacing the first two instructions of the body by
+$$
+D \mathbin{:=} X_1 \dotminus 1 ;\ \mathtt{IF}\ D = 0\ \mathtt{THEN}\ X_1 \mathbin{:=} X_1 + 1 ;\ X_1 \mathbin{:=} X_1 + 1\ \mathtt{ELSE}\ X_1 \mathbin{:=} X_1 \dotminus 1 ;\ X_1 \mathbin{:=} X_1 \dotminus 1\ \mathtt{END}.
+$$
+
+:::solution
+In $P$, each iteration decreases $X_1$ by $2$ (or to $0$ if $X_1 = 1$) and increases $X_0$ by $1$. Starting from $X_1 = x$, the loop stops after $\lceil x / 2 \rceil$ iterations: $P$ computes $x \mapsto \lceil x/2 \rceil$, a total function.
+
+In $Q$, the body is executed only when $X_1 \neq 0$, so $D = 0$ means $X_1 = 1$. An iteration therefore replaces $X_1 = 1$ by $3$, and $X_1 \geq 2$ by $X_1 - 2$; it preserves the parity of $X_1$. If $x$ is even, $X_1$ takes the values $x, x - 2, \dots, 0$ and the loop stops after $x/2$ iterations, with $X_0 = x/2$. If $x$ is odd, $X_1$ is never $0$: it decreases to $1$, then alternates between $3$ and $1$, and the loop runs forever. So $Q$ computes the partial function $x \mapsto x/2$, defined exactly on the even numbers.
+:::
+::::
+
+::::exercise{#ex-while-unfolding difficulty=2 objective="Characterize the semantics of a WHILE loop as the least solution of its unfolding equation."}
+Let $W = \mathtt{WHILE}\ X_i \neq 0\ \mathtt{DO}\ P\ \mathtt{END}$.
+
+1. Show that for every state $\sigma$, $[\![W]\!](\sigma) \simeq \sigma$ if $\sigma(i) = 0$, and $[\![W]\!](\sigma) \simeq [\![W]\!]([\![P]\!](\sigma))$ otherwise.
+2. Call a partial function $F$ from states to states a **solution** if it satisfies the equations of 1 in place of $[\![W]\!]$. Show that every solution $F$ extends $[\![W]\!]$: if $[\![W]\!](\sigma)\converge$ then $F(\sigma) \simeq [\![W]\!](\sigma)$.
+3. Give a program $P$ for which some solution differs from $[\![W]\!]$.
+
+:::solution
+1. If $\sigma(i) = 0$, then $n = 0$ is the least $n$ of :ref{#def-loop-while-semantics} (the condition on $m < n$ is empty), so $[\![W]\!](\sigma) = \sigma$. Let $\sigma(i) \neq 0$; then $n = 0$ does not qualify. If $[\![P]\!](\sigma)\diverge$, then $[\![P]\!]^m(\sigma)\diverge$ for every $m \geq 1$, no $n$ qualifies, and both sides are undefined. Otherwise let $\sigma' = [\![P]\!](\sigma)$. For $n \geq 1$, $[\![P]\!]^n(\sigma) \simeq [\![P]\!]^{n-1}(\sigma')$, and the conditions "$[\![P]\!]^m(\sigma)\converge$ with value $\neq 0$ at $i$ for all $m < n$" amount to $\sigma(i) \neq 0$ together with the same conditions for $\sigma'$ and $m < n - 1$. So $n$ qualifies for $\sigma$ if and only if $n - 1$ qualifies for $\sigma'$, and the least ones correspond: $[\![W]\!](\sigma) \simeq [\![W]\!](\sigma')$.
+2. Suppose $[\![W]\!](\sigma)\converge$, with $n$ iterations. We show $F(\sigma) = [\![W]\!](\sigma)$ by induction on $n$. If $n = 0$, $\sigma(i) = 0$ and $F(\sigma) = \sigma = [\![W]\!](\sigma)$. If $n \geq 1$, then $\sigma(i) \neq 0$, $\sigma' = [\![P]\!](\sigma)$ is defined, and by the proof of 1, $[\![W]\!](\sigma') = [\![W]\!](\sigma)$ with $n - 1$ iterations. By the equation for $F$ and the induction hypothesis, $F(\sigma) \simeq F(\sigma') = [\![W]\!](\sigma)$.
+3. Take $i = 1$ and $P = X_2 \mathbin{:=} X_2$, which does not change the state. Then $[\![W]\!](\sigma) = \sigma$ if $\sigma(1) = 0$, and $[\![W]\!](\sigma)\diverge$ otherwise. The identity function $F(\sigma) = \sigma$ is also a solution: when $\sigma(1) \neq 0$, $F([\![P]\!](\sigma)) = F(\sigma) = \sigma$. So the equation alone does not determine the semantics; $[\![W]\!]$ is its least solution. This description of loops as least fixed points is the starting point of denotational semantics.
+:::
+::::
+
+::::exercise{#ex-while-ackermann difficulty=2 lessons="ackermann-function" objective="Implement the stack algorithm for the Ackermann function as a WHILE program with one loop."}
+Write a WHILE program with a single $\mathtt{WHILE}$ instruction which computes the Ackermann function, using the stack algorithm of the lesson :ref{to="models-of-computation/ackermann-function"} and sequence codes. Why can no LOOP program compute it?
+
+:::solution
+Let $\mathrm{Step}(s)$ be the following function on sequence codes: with $n = \mathrm{lh}(s)$, $a = (s)'_{n-2}$, $b = (s)'_{n-1}$ and $r = s \upharpoonright (n - 2)$,
+$$
+\mathrm{Step}(s) = \begin{cases} r * [b + 1] & \text{if } a = 0, \\ r * [a - 1, 1] & \text{if } a > 0,\ b = 0, \\ r * [a - 1, a, b - 1] & \text{if } a > 0,\ b > 0. \end{cases}
+$$
+It is primitive recursive, by :ref{#prop-seq-operations} and definition by cases; on codes of stacks with at least two elements it performs one step of the stack algorithm. By :ref{#thm-loop-pr}, each assignment $V \mathbin{:=} g(\vec U)$ with $g$ primitive recursive is a LOOP program. The program is
+$$
+\begin{aligned}
+& S \mathbin{:=} [X_1, X_2] ;\ L \mathbin{:=} \mathrm{lh}(S) \dotminus 1 ; \\
+& \mathtt{WHILE}\ L \neq 0\ \mathtt{DO}\ S \mathbin{:=} \mathrm{Step}(S) ;\ L \mathbin{:=} \mathrm{lh}(S) \dotminus 1\ \mathtt{END} ; \\
+& X_0 \mathbin{:=} (S)'_0 .
+\end{aligned}
+$$
+By induction on the number of iterations, $S$ codes the stack after that many steps of the algorithm, and $L = 0$ exactly when the stack has one element. The lesson on the Ackermann function shows that from $[x, y]$ the algorithm reaches the stack $[A(x, y)]$ after finitely many steps, and continues while the stack has at least two elements. So the loop terminates with $S = [A(x, y)]$, and the program outputs $A(x, y)$. No LOOP program computes $A$: by :ref{#thm-loop-pr} it would be primitive recursive, contradicting :ref{#cor-ack-not-pr}.
+:::
+::::
+
+::::exercise{#ex-while-bounded-pr difficulty=3 objective="Replace while loops by bounded loops when the number of iterations is bounded by a primitive recursive function."}
+For a WHILE program $P$ and a state $\sigma$ with $[\![P]\!](\sigma)\converge$, let $\mathrm{it}_P(\sigma)$ be the total number of iterations of $\mathtt{WHILE}$ loops executed: $0$ for an assignment, $\mathrm{it}_Q(\sigma) + \mathrm{it}_R([\![Q]\!](\sigma))$ for $Q ; R$, the sum of the values of $\mathrm{it}_Q$ over the successive iterations for $\mathtt{LOOP}\ X_i\ \mathtt{DO}\ Q\ \mathtt{END}$, and the number $n$ of iterations plus the sum of the values of $\mathrm{it}_Q$ over them for $\mathtt{WHILE}\ X_i \neq 0\ \mathtt{DO}\ Q\ \mathtt{END}$. Suppose that $P$ computes a total function $f : \nat^k \to \nat$, and that there is a primitive recursive $b$ with $\mathrm{it}_P(\sigma_{\vec x}) \leq b(\vec x)$ for all $\vec x$. Show that $f$ is primitive recursive.
+
+:::solution
+Let $B$ be a variable not occurring in $P$. For a subprogram $Q$ of $P$, let $Q^B$ be obtained by replacing, from the innermost loops outwards, each $\mathtt{WHILE}\ X_i \neq 0\ \mathtt{DO}\ R\ \mathtt{END}$ by $\mathtt{LOOP}\ B\ \mathtt{DO}\ \mathtt{IF}\ X_i \neq 0\ \mathtt{THEN}\ R^B\ \mathtt{END}\ \mathtt{END}$, with the conditional of the lesson :ref{to="models-of-computation/loop-programs"} (each occurrence with its own fresh variable). $Q^B$ is a LOOP program, and $B$ is not modified by it.
+
+*Claim.* If $[\![Q]\!](\sigma)\converge$ and $\mathrm{it}_Q(\sigma) \leq \sigma(B)$, then $[\![Q^B]\!](\sigma)$ agrees with $[\![Q]\!](\sigma)$ on the variables of $P$. By induction on $Q$. Assignments are unchanged. For $Q ; R$, both $\mathrm{it}_Q(\sigma)$ and $\mathrm{it}_R([\![Q]\!](\sigma))$ are at most $\sigma(B)$, and $B$ is not modified, so the induction hypothesis applies to both parts. For a $\mathtt{LOOP}$ instruction, the same argument applies to each iteration, by induction on the iterations. For $W = \mathtt{WHILE}\ X_i \neq 0\ \mathtt{DO}\ R\ \mathtt{END}$ with $n$ iterations, $n \leq \mathrm{it}_W(\sigma) \leq \sigma(B)$, and the value of $\mathrm{it}_R$ at each iteration is at most $\sigma(B)$. The replacement executes $\sigma(B) \geq n$ guarded iterations. During the first $n$, $X_i \neq 0$ at the start, so the body $R^B$ runs, and by the induction hypothesis it acts as $R$; after them, the state agrees with $[\![W]\!](\sigma)$, where $X_i = 0$. The remaining iterations then do nothing, since the guard fails and the body does not run. This proves the claim.
+
+Now let $P^\ast$ be the LOOP program $B \mathbin{:=} b(X_1, \dots, X_k) ;\ P^B$, where the first part is given by the direction "primitive recursive ⇒ LOOP" of :ref{#thm-loop-pr}, with auxiliary variables not occurring in $P^B$. From $\sigma_{\vec x}$, the first part sets $B$ to $b(\vec x)$ and leaves the variables of $P$ unchanged. Since $\mathrm{it}_P(\sigma_{\vec x}) \leq b(\vec x)$, the claim gives $[\![P^\ast]\!](\sigma_{\vec x})(0) = [\![P]\!](\sigma_{\vec x})(0) = f(\vec x)$. So $f$ is LOOP-computable, hence primitive recursive by :ref{#thm-loop-pr}.
+:::
+::::
+:::::

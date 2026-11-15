@@ -1,7 +1,7 @@
 ---
 title: Arslanov's completeness criterion
 summary: A c.e. set is Turing complete if and only if it computes a DNC function; effectively simple sets are complete, and the complement of a low simple set is not effectively immune.
-duration: 30
+duration: 25
 prerequisites: [dnc-functions, ce-degrees/low-simple-set]
 ---
 
@@ -75,11 +75,7 @@ Why does the program $r(n, x)$ use the stage $t$ at which $n$ enters $\emptyset'
 
 By :ref{#ex-post-effectively-simple}, Post's simple set is effectively simple, hence Turing complete. Post's construction, designed to produce a thin complement, produces a complete set; the incomplete simple set of :ref{#thm-low-simple} is built by a priority argument. Martin's theorem preceded Arslanov's criterion by fifteen years, and was the first indication that thinness of the complement gives no control over the Turing degree.
 
-The criterion is sharp in another direction. A function computable in $\emptyset'$ and fixed-point free need not compute $\emptyset'$, by the low PA sets; but Kučera showed that it always computes a non-computable c.e. set (Downey and Hirschfeldt 2010, Theorem 2.22.5). This gives a solution of Post's problem without priority, and is admitted here.
-
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-effectively-immune-below-ce difficulty=1 objective="Combine the characterization of DNC degrees by effective immunity with Arslanov's criterion."}
 Show that if $A$ is effectively immune, $B$ is c.e. and $A \leq_T B$, then $B \equiv_T \emptyset'$.
 
 :::solution
@@ -87,21 +83,7 @@ By :ref{#thm-dnc-effectively-immune}, $A$ computes a DNC function, hence so does
 :::
 ::::
 
-::::exercise{difficulty=1}
-Show that there is a non-computable $\Delta^0_2$ set that computes no DNC function. Compare with the last exercise of :ref{to="immunity-growth/dnc-functions"}.
-
-:::solution
-Let $A$ be a low simple set (:ref{#thm-low-simple}). It is c.e., hence $\Delta^0_2$, and not computable. It is not complete, since $A' \equiv_T \emptyset' <_T \emptyset''$. By :ref{#thm-arslanov}, it computes no DNC function. The exercise of the previous lesson builds such a set computable in $\emptyset''$ by finite extensions, without priority.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $A$ be a c.e. set with $A <_T \emptyset'$. Show that for every $A$-computable total function $f$ there is $e$ with $\Phi_{f(e)} = \Phi_e$.
-
-:::solution
-Otherwise some $A$-computable function $f$ is fixed-point free, so $A$ computes a DNC function by :ref{#thm-dnc-fpf}, and $A$ is complete by :ref{#thm-arslanov}, a contradiction.
-:::
-::::
+The criterion is sharp in another direction. A function computable in $\emptyset'$ and fixed-point free need not compute $\emptyset'$, by the low PA sets; but Kučera showed that it always computes a non-computable c.e. set (Downey and Hirschfeldt 2010, Theorem 2.22.5). This gives a solution of Post's problem without priority, and is admitted here.
 
 ## Notes and references
 
@@ -114,3 +96,67 @@ Arslanov (1981) proved the completeness criterion, in the form of fixed-point fr
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Section 5.4.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.22.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 4.1.
+
+:::::exercises
+::::exercise{#ex-delta2-non-dnc-low-simple difficulty=1 objective="Obtain a non-computable $\Delta^0_2$ set that computes no DNC function from a low simple set."}
+Show that there is a non-computable $\Delta^0_2$ set that computes no DNC function. Compare with :ref{#ex-non-dnc-noncomputable}.
+
+:::solution
+Let $A$ be a low simple set (:ref{#thm-low-simple}). It is c.e., hence $\Delta^0_2$, and not computable. It is not complete, since $A' \equiv_T \emptyset' <_T \emptyset''$. By :ref{#thm-arslanov}, it computes no DNC function. The construction of :ref{#ex-non-dnc-noncomputable} gives such a set computable in $\emptyset''$, by finite extensions and without priority.
+:::
+::::
+
+::::exercise{#ex-fixed-points-incomplete difficulty=2 objective="Read Arslanov's criterion as a fixed point theorem for the functions computable in an incomplete c.e. set."}
+Let $A$ be a c.e. set with $A <_T \emptyset'$. Show that for every $A$-computable total function $f$ there is $e$ with $\Phi_{f(e)} = \Phi_e$.
+
+:::solution
+Otherwise some $A$-computable function $f$ is fixed-point free, so $A$ computes a DNC function by :ref{#thm-dnc-fpf}, and $A$ is complete by :ref{#thm-arslanov}, a contradiction.
+:::
+::::
+
+::::exercise{#ex-hypersimple-not-effectively-simple difficulty=1 objective="Separate hypersimplicity from effective simplicity in both directions."}
+Dekker's theorem states that every non-computable c.e. set is Turing equivalent to a hypersimple set. Use it to show that there is a hypersimple set that is not effectively simple. Deduce that neither of the two properties implies the other.
+
+:::solution
+Let $A$ be a low simple set (:ref{#thm-low-simple}). It is c.e. and not computable, so by Dekker's theorem there is a hypersimple set $B \equiv_T A$; then $B' \equiv_T A' \equiv_T \emptyset'$. If $B$ were effectively simple, it would be Turing complete by :ref{#cor-arslanov}, and $\emptyset'' \leq_T B' \equiv_T \emptyset'$, which is false. So $B$ is hypersimple and not effectively simple.
+
+In the other direction, Post's simple set is effectively simple (:ref{#ex-post-effectively-simple}) and not hypersimple (:ref{#ex-post-not-hypersimple}).
+:::
+::::
+
+::::exercise{#ex-weakly-effectively-simple difficulty=1 objective="Weaken the computable bound in the definition of effective simplicity to a bound computable in the set, and keep completeness."}
+A c.e. set $S$ with infinite complement is **weakly effectively simple** if there is a function $f \leq_T S$ such that $|W_e| < f(e)$ for every $e$ with $W_e \subseteq \nat \setminus S$. Show that every weakly effectively simple set is Turing complete.
+
+:::solution
+Let $H = \nat \setminus S$; it is infinite and $H \leq_T S$. By SMN, there is a total computable function $k$ with $W_{k(n)} = D_n$. Let $c(e)$ be the canonical index of the set of the first $f(e)$ elements of $H$, and $g(e) = k(c(e))$; both are $S$-computable. If $W_{g(e)} = W_e$, then $W_e$ is a subset of $H$ with $f(e)$ elements, which contradicts $|W_e| < f(e)$. So $W_{g(e)} \neq W_e$, hence $\Phi_{g(e)} \neq \Phi_e$, for every $e$: $g$ is fixed-point free. By :ref{#thm-dnc-fpf}, $S$ computes a DNC function, and $S$ is complete by :ref{#thm-arslanov}. This is the argument of (3 ⇒ 1) in :ref{#thm-dnc-effectively-immune}, which uses the bound only through the oracle. The result is due to Martin (Soare 2016, Exercise 5.4.13).
+:::
+::::
+
+::::exercise{#ex-quasi-creative-complete difficulty=2 objective="Apply Arslanov's criterion to a c.e. set whose complement escapes every c.e. subset inside a finite set computed from its index."}
+Let $A$ be a c.e. set, and suppose that there is a total computable function $d$ such that, for every $e$ with $W_e \subseteq \nat \setminus A$, the finite set $D_{d(e)}$ contains an element of $\nat \setminus A$ that is not in $W_e$. Show that $A$ is Turing complete. Deduce that every creative set is Turing complete, where $A$ is **creative** if it is c.e. and there is a total computable $p$ with $p(e) \in (\nat \setminus A) \setminus W_e$ whenever $W_e \subseteq \nat \setminus A$.
+
+:::solution
+Let $k$ be total computable with $W_{k(n)} = D_n$. With oracle $A$, compute the canonical index $c(e)$ of the finite set $D_{d(e)} \setminus A$, and let $g(e) = k(c(e))$; $g$ is $A$-computable. Suppose that $W_{g(e)} = W_e$. Then $W_e = D_{d(e)} \setminus A$ is contained in $\nat \setminus A$, so by hypothesis $D_{d(e)}$ has an element of $\nat \setminus A$ outside $W_e = D_{d(e)} \setminus A$, which is absurd. So $W_{g(e)} \neq W_e$, hence $\Phi_{g(e)} \neq \Phi_e$, for every $e$. By :ref{#thm-dnc-fpf}, $A$ computes a DNC function, and it is complete by :ref{#thm-arslanov}.
+
+If $A$ is creative with productive function $p$, the hypothesis holds with $D_{d(e)} = \{ p(e) \}$. The hypothesis is a weak form of Shoenfield's quasi-creative sets (Soare 2016, Exercise 5.4.8).
+:::
+::::
+
+::::exercise{#ex-dnc-relative-ce difficulty=3 objective="Refine the proof of Arslanov's criterion into a dichotomy for a DNC function joined with a c.e. set."}
+A function $f$ is **DNC relative to** $C$ if $f(m) \neq \Phi^C_m(m)$ for every $m$ with $\Phi^C_m(m)\converge$. Let $g$ be a DNC function and $C$ a c.e. set, with a c.e. approximation $(C_s)$. Show that either $\emptyset' \leq_T g \oplus C$, or $g$ computes a function that is DNC relative to $C$. Deduce :ref{#thm-arslanov}.
+
+:::hint
+Use programs $a(n, m)$ that wait for $n$ to enter $\emptyset'$, at some stage $s$, and then run $\Phi^{C_s}_m(m)$.
+:::
+
+:::solution
+By SMN, there is a total computable function $a$ such that the program $a(n, m)$, on any input, searches for the least $s$ with $n \in \emptyset'_s$ and, if it finds one, runs the computation $\Phi^{C_s}_m(m)$ with the finite oracle $C_s$, and outputs its value. So $\Phi_{a(n, m)}(a(n, m))\converge = v$ if and only if $n \in \emptyset'$ and $\Phi^{C_{s_n}}_m(m)\converge = v$, where $s_n$ is the least $s$ with $n \in \emptyset'_s$. For each $n$, let $f_n(m) = g(a(n, m))$; the functions $f_n$ are uniformly $g$-computable.
+
+If some $f_n$ is DNC relative to $C$, the second alternative holds. Otherwise, for every $n$ there is $m$ with $\Phi^C_m(m)\converge = g(a(n, m))$. Let $r(n)$ be the least $t$ such that, for some $m \leq t$, $\Phi^{C_t}_m(m)[t]$ converges to $g(a(n, m))$ with a use $u$ such that $C_t \uh u = C \uh u$. This condition is decidable in $g \oplus C$, and some $t$ satisfies it: for a witness $m$, the computation $\Phi^C_m(m)$ has some use $u$, and for $t$ large enough $C_t \uh u = C \uh u$ and the computation with oracle $C_t$ converges within $t$ steps, with the same value. So $r \leq_T g \oplus C$.
+
+We claim that $n \in \emptyset'$ if and only if $n \in \emptyset'_{r(n)}$. Let $n \in \emptyset'$, and suppose that $s_n > r(n) = t$, with $m$ and $u$ as in the definition of $r(n)$. Since $C$ is c.e., $C_t \subseteq C_{s_n} \subseteq C$, so $C_{s_n} \uh u = C_t \uh u$. Hence the computation $\Phi^{C_{s_n}}_m(m)$ is the same as with oracle $C_t$, and converges to $g(a(n, m))$. So $\Phi_{a(n, m)}(a(n, m))\converge = g(a(n, m))$, contradicting the fact that $g$ is DNC. Therefore $s_n \leq r(n)$, and $\emptyset' \leq_T g \oplus C$.
+
+For Arslanov's criterion, let $C$ be c.e. and $g \leq_T C$ DNC; then $g \oplus C \equiv_T C$. A function $f \leq_T C$ is of the form $\Phi^C_m$ for some $m$, and $f(m) = \Phi^C_m(m)$, so $f$ is not DNC relative to $C$. The second alternative fails, and $\emptyset' \leq_T C$. Monin and Patey give this result as an exercise in their chapter *Immunity and function growth*, and attribute it to Bienvenu, Greenberg, Kučera, Miller, Nies and Turetsky (2013).
+:::
+::::
+:::::

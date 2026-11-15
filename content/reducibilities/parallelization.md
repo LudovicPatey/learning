@@ -1,7 +1,7 @@
 ---
 title: Parallelization
 summary: The parallelization of a problem solves countably many instances at once; the jump is parallel LPO and weak König's lemma is parallel LLPO; separations of the Turing degrees transfer to problems that admit computable solutions; a single application against finitely many.
-duration: 45
+duration: 40
 prerequisites: [weihrauch]
 ---
 
@@ -19,7 +19,7 @@ The instances of $\widehat{\mathsf P}$ are given all at once, and the solutions 
 
 - $\widehat{\mathsf{Id}} \equiv_W \mathsf{Id}$, and more generally $\widehat{\mathsf P} \equiv_W \mathsf P$ whenever $\mathsf P$ uniformly admits computable solutions: apply the solving functional to each coordinate.
 - $\widehat{\mathsf J} \equiv_W \mathsf J$: the jump of $\bigoplus_n X_n$ computes the jump of each $X_n$, uniformly in $n$.
-- $\widehat{\mathsf{RT}^1_2}$ does not admit computable solutions, although $\mathsf{RT}^1_2$ does: a computable sequence of colorings can be built so that the colors of the infinite homogeneous sets form the halting set (third exercise). Parallelization does not preserve the property of admitting computable solutions, only its uniform version.
+- $\widehat{\mathsf{RT}^1_2}$ does not admit computable solutions, although $\mathsf{RT}^1_2$ does: a computable sequence of colorings can be built so that the colors of the infinite homogeneous sets form the halting set (:ref{#ex-j-rt12-parallel}). Parallelization does not preserve the property of admitting computable solutions, only its uniform version.
 
 If $\mathsf P \leq_W \mathsf Q$ via $\Phi$ and $\Psi$, then $\widehat{\mathsf P} \leq_W \widehat{\mathsf Q}$ via the functionals applying $\Phi$ and $\Psi$ to each coordinate. This is where uniformity is needed: a computable reduction gives, for each $X_n$, some reduction, but not a single procedure that handles all of them. So parallelization is an operation on Weihrauch degrees, and it turns the omniscience principles into familiar problems.
 
@@ -61,7 +61,7 @@ $\mathsf{LPO} \not\leq_W \mathsf{LLPO}$. So $\mathsf{LLPO} <_W \mathsf{LPO}$.
 If $\mathsf{LPO} \leq_W \mathsf{LLPO}$, then $\widehat{\mathsf{LPO}} \leq_W \widehat{\mathsf{LLPO}}$, so $\mathsf J \leq_W \mathsf{WKL}$ by :ref{#thm-jump-lpo} and :ref{#thm-wkl-llpo}. This would give $\mathsf J \leq_\omega \mathsf{WKL}$, which fails by :ref{#cor-wkl-not-j}.
 :::
 
-The proof transfers a separation of ω-reducibility, obtained from the cone avoidance basis theorem, to a separation between two problems that admit computable solutions, which ω-reducibility and computable reducibility do not distinguish. Parallelization thus connects the uniform world of Weihrauch reducibility with the non-uniform world of Turing degrees. The third exercise of the previous lesson proves the same separation by a continuity argument; the two proofs illustrate the two main methods of the subject.
+The proof transfers a separation of ω-reducibility, obtained from the cone avoidance basis theorem, to a separation between two problems that admit computable solutions, which ω-reducibility and computable reducibility do not distinguish. Parallelization thus connects the uniform world of Weihrauch reducibility with the non-uniform world of Turing degrees. :ref{#ex-lpo-not-w-llpo} proves the same separation by a continuity argument; the two proofs illustrate the two main methods of the subject.
 
 :::quiz[parallelization]
 In the proof that $\mathsf{WKL} \leq_W \widehat{\mathsf{LLPO}}$, why is the instance $q_\sigma$ defined from the first stage at which a successor dies, rather than from the extendibility of the successors?
@@ -101,23 +101,8 @@ Why does a computable reduction $\mathsf P \leq_c \mathsf Q$ not give $\widehat{
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that if $\mathsf P$ uniformly admits computable solutions, then so does $\widehat{\mathsf P}$. Deduce from :ref{#thm-wkl-llpo} a second proof that $\mathsf{LLPO}$ does not uniformly admit computable solutions.
 
-:::solution
-If $\Phi^X$ solves $\mathsf P$, then the functional $\bigoplus_n X_n \mapsto \bigoplus_n \Phi^{X_n}$ solves $\widehat{\mathsf P}$. If $\mathsf{LLPO}$ uniformly admitted computable solutions, so would $\widehat{\mathsf{LLPO}}$, and so would $\mathsf{WKL} \leq_W \widehat{\mathsf{LLPO}}$; in particular every infinite computable binary tree would have a computable path. But some infinite computable binary tree has no computable path (:ref{#thm-dnc2-no-computable}).
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that $\mathsf P \leq_W \widehat{\mathsf P}$ and $\widehat{\widehat{\mathsf P}} \equiv_W \widehat{\mathsf P}$ for every problem $\mathsf P$, so that parallelization is a closure operator on the Weihrauch degrees.
-
-:::solution
-For the first reduction, send $X$ to the constant sequence $\bigoplus_n X$, and read the first coordinate of a solution. For the second, $\widehat{\mathsf P} \leq_W \widehat{\widehat{\mathsf P}}$ is the first reduction applied to $\widehat{\mathsf P}$. Conversely, an instance of $\widehat{\widehat{\mathsf P}}$ is a double sequence $\bigoplus_m \bigoplus_n X_{m, n}$; send it to the single sequence $\bigoplus_k X_{k_0, k_1}$, where $k \mapsto (k_0, k_1)$ is a computable bijection from $\nat$ to $\nat^2$, and rearrange a solution in the same way.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-j-rt12-parallel difficulty=2 objective="Code the halting problem into the colors of the homogeneous sets of a sequence of colorings."}
 Show that $\mathsf J \leq_W \widehat{\mathsf{RT}^1_2}$. Deduce that $\widehat{\mathsf{RT}^1_2}$ does not admit computable solutions, although $\mathsf{RT}^1_2$ does.
 
 :::solution
@@ -125,7 +110,7 @@ Given $X$, let $f_e(s) = 1$ if $\Phi^X_e(e)[s]$ converges, and $f_e(s) = 0$ othe
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise[Finitely many applications]{#ex-lpo-finitely-many difficulty=2 objective="Show that finitely many parallel applications of LPO do not compute the jump, by counting resources."}
 For a problem $\mathsf P$ and $n \geq 1$, let $\mathsf P^n$ be the product of $n$ copies of $\mathsf P$. Show that if $\mathsf P$ admits computable solutions, so does $\mathsf P^n$, and that $\mathsf J \not\leq_c \mathsf Q$ for every problem $\mathsf Q$ that admits computable solutions. Deduce that $\widehat{\mathsf{LPO}} \not\leq_W \mathsf{LPO}^n$ for every $n$: finitely many parallel applications of $\mathsf{LPO}$ do not suffice.
 
 :::solution
@@ -133,20 +118,76 @@ An instance $X_1 \oplus \cdots \oplus X_n$ of $\mathsf P^n$ computes each $X_i$,
 :::
 ::::
 
-::::exercise{difficulty=2}
-Let $\mathsf J^{(2)}$ be the problem whose instances are all sets, the only solution to $X$ being $X''$. Show that $\mathsf{KL} \leq_W \mathsf J^{(2)}$, while $\mathsf{KL} \not\leq_c \mathsf J$ (:ref{#prop-kl-not-c-j}).
-
-:::solution
-Let $\Phi^T = T$. For a node $\sigma$ and a number $m$, whether $T$ contains some $\sigma^\frown n$ with $n \geq m$ is a $\Sigma^0_1(T)$ question, answered by $T'$ uniformly. Since $T$ is finitely branching, searching for the least $m$ with a negative answer gives, computably in $T'$ and uniformly, a function $h$ bounding the successors of every node. Then $T \oplus h \leq_T T'$ uniformly, and by the solution of the second exercise of the previous lesson, $(T \oplus h)'$ computes a path through $T$, uniformly. Since $(T \oplus h)' \leq_T T''$ uniformly, $\Psi^{T \oplus T''}$ can compute this path.
-:::
-::::
-
 ## Notes and references
 
-Parallelization was used by Brattka in computable analysis (in his 1999 dissertation and a 2003 survey), and studied as an operation on Weihrauch degrees by Brattka and Gherardi (2011), who proved $\mathsf{WKL} \equiv_{sW} \widehat{\mathsf{LLPO}}$ (their Theorem 8.2); the equivalence of $\widehat{\mathsf{LPO}}$ with the limit operation and with the jump is Theorem 6.7 of the survey of Brattka, Gherardi and Pauly, which gives the history of both results. Dzhafarov and Mummert define parallelization in Section 3.1 (Definition 3.1.5), state the third exercise as their Exercise 3.9.4, and treat reductions to several applications in Section 4.5, where they also define the **compositional product** $\mathsf Q * \mathsf P$, the problem of applying $\mathsf P$ and then $\mathsf Q$ to an instance computed from the solution; it was introduced by Brattka, Gherardi and Marcone (2012), who showed that the Bolzano–Weierstrass theorem is Weihrauch equivalent to the jump of $\mathsf{WKL}$. The Weihrauch analysis of Ramsey's theorem for all exponents and numbers of colors is due to Brattka and Rakotoniaina (2017).
+Parallelization was used by Brattka in computable analysis (in his 1999 dissertation and a 2003 survey), and studied as an operation on Weihrauch degrees by Brattka and Gherardi (2011), who proved $\mathsf{WKL} \equiv_{sW} \widehat{\mathsf{LLPO}}$ (their Theorem 8.2); the equivalence of $\widehat{\mathsf{LPO}}$ with the limit operation and with the jump is Theorem 6.7 of the survey of Brattka, Gherardi and Pauly, which gives the history of both results. Dzhafarov and Mummert define parallelization in Section 3.1 (Definition 3.1.5), state :ref{#ex-j-rt12-parallel} as their Exercise 3.9.4, and treat reductions to several applications in Section 4.5, where they also define the **compositional product** $\mathsf Q * \mathsf P$, the problem of applying $\mathsf P$ and then $\mathsf Q$ to an instance computed from the solution; it was introduced by Brattka, Gherardi and Marcone (2012), who showed that the Bolzano–Weierstrass theorem is Weihrauch equivalent to the jump of $\mathsf{WKL}$. The Weihrauch analysis of Ramsey's theorem for all exponents and numbers of colors is due to Brattka and Rakotoniaina (2017).
 
 - V. Brattka and G. Gherardi, *Weihrauch degrees, omniscience principles and weak computability*, Journal of Symbolic Logic 76 (2011), 143–176.
 - V. Brattka, G. Gherardi and A. Pauly, *Weihrauch complexity in computable analysis*, in Handbook of Computability and Complexity in Analysis, Springer, 2021, 367–417.
 - V. Brattka, G. Gherardi and A. Marcone, *The Bolzano–Weierstrass theorem is the jump of weak Kőnig's lemma*, Annals of Pure and Applied Logic 163 (2012), 623–655.
 - V. Brattka and T. Rakotoniaina, *On the uniform computational content of Ramsey's theorem*, Journal of Symbolic Logic 82 (2017), 1278–1316.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.1 and 4.5.
+
+:::::exercises
+::::exercise{#ex-parallel-closure difficulty=1 objective="Check that parallelization is a closure operator on the Weihrauch degrees."}
+Show that $\mathsf P \leq_W \widehat{\mathsf P}$ and $\widehat{\widehat{\mathsf P}} \equiv_W \widehat{\mathsf P}$ for every problem $\mathsf P$, so that parallelization is a closure operator on the Weihrauch degrees.
+
+:::solution
+For the first reduction, send $X$ to the constant sequence $\bigoplus_n X$, and read the first coordinate of a solution. For the second, $\widehat{\mathsf P} \leq_W \widehat{\widehat{\mathsf P}}$ is the first reduction applied to $\widehat{\mathsf P}$. Conversely, an instance of $\widehat{\widehat{\mathsf P}}$ is a double sequence $\bigoplus_m \bigoplus_n X_{m, n}$; send it to the single sequence $\bigoplus_k X_{k_0, k_1}$, where $k \mapsto (k_0, k_1)$ is a computable bijection from $\nat$ to $\nat^2$, and rearrange a solution in the same way.
+:::
+::::
+
+::::exercise{#ex-llpo-second-proof difficulty=1 objective="Use the uniformity of parallelization to derive a continuity result from a computability-theoretic one."}
+Show that if $\mathsf P$ uniformly admits computable solutions, then so does $\widehat{\mathsf P}$. Deduce from :ref{#thm-wkl-llpo} a second proof that $\mathsf{LLPO}$ does not uniformly admit computable solutions.
+
+:::solution
+If $\Phi^X$ solves $\mathsf P$, then the functional $\bigoplus_n X_n \mapsto \bigoplus_n \Phi^{X_n}$ solves $\widehat{\mathsf P}$. If $\mathsf{LLPO}$ uniformly admitted computable solutions, so would $\widehat{\mathsf{LLPO}}$, and so would $\mathsf{WKL} \leq_W \widehat{\mathsf{LLPO}}$; in particular every infinite computable binary tree would have a computable path. But some infinite computable binary tree has no computable path (:ref{#thm-dnc2-no-computable}).
+:::
+::::
+
+::::exercise{#ex-kl-j2 difficulty=2 objective="Compute a bound on the successors of a finitely branching tree from its jump, and obtain a uniform reduction of König's lemma to the double jump."}
+Let $\mathsf J^{(2)}$ be the problem whose instances are all sets, the only solution to $X$ being $X''$. Show that $\mathsf{KL} \leq_W \mathsf J^{(2)}$, while $\mathsf{KL} \not\leq_c \mathsf J$ (:ref{#prop-kl-not-c-j}).
+
+:::solution
+Let $\Phi^T = T$. For a node $\sigma$ and a number $m$, whether $T$ contains some $\sigma^\frown n$ with $n \geq m$ is a $\Sigma^0_1(T)$ question, answered by $T'$ uniformly. Since $T$ is finitely branching, searching for the least $m$ with a negative answer gives, computably in $T'$ and uniformly, a function $h$ bounding the successors of every node. Then $T \oplus h \leq_T T'$ uniformly, and by the solution of :ref{#ex-klb-w-j}, $(T \oplus h)'$ computes a path through $T$, uniformly. Since $(T \oplus h)' \leq_T T''$ uniformly, $\Psi^{T \oplus T''}$ can compute this path.
+:::
+::::
+
+::::exercise{#ex-wkl-parallelizable difficulty=1 objective="Combine the closure properties of parallelization with the equivalence of WKL and parallel LLPO."}
+Show that $\widehat{\mathsf{WKL}} \equiv_W \mathsf{WKL}$: countably many binary trees, given together, cost a single application of $\mathsf{WKL}$.
+
+:::solution
+$\mathsf{WKL} \leq_W \widehat{\mathsf{WKL}}$ by :ref{#ex-parallel-closure}. Conversely, $\mathsf{WKL} \leq_W \widehat{\mathsf{LLPO}}$ (:ref{#thm-wkl-llpo}), and parallelization preserves Weihrauch reducibility, so $\widehat{\mathsf{WKL}} \leq_W \widehat{\widehat{\mathsf{LLPO}}}$. By :ref{#ex-parallel-closure}, $\widehat{\widehat{\mathsf{LLPO}}} \leq_W \widehat{\mathsf{LLPO}}$, and $\widehat{\mathsf{LLPO}} \leq_W \mathsf{WKL}$ by :ref{#thm-wkl-llpo}. By transitivity, $\widehat{\mathsf{WKL}} \leq_W \mathsf{WKL}$.
+
+Dzhafarov and Mummert, Exercise 4.8.2, ask for the strong form $\widehat{\mathsf{WKL}} \equiv_{sW} \mathsf{WKL}$; the same chain of strong reductions gives it, since the reductions of :ref{#thm-wkl-llpo} and of :ref{#ex-parallel-closure} are strong.
+:::
+::::
+
+::::exercise{#ex-parallel-c-not-monotone difficulty=1 objective="Find two problems with $\mathsf P \leq_c \mathsf Q$ whose parallelizations are not computably reducible."}
+Show that $\mathsf{LPO} \leq_c \mathsf{LLPO}$, but $\widehat{\mathsf{LPO}} \not\leq_c \widehat{\mathsf{LLPO}}$.
+
+:::solution
+$\mathsf{LPO}$ admits computable solutions, since its solutions are numbers, so $\mathsf{LPO} \leq_c \mathsf{Id}$ (:ref{#prop-c-omega}). $\mathsf{LLPO}$ has a computable instance $0^\infty$, so $\mathsf{Id} \leq_c \mathsf{LLPO}$: send every instance to $0^\infty$ and keep the instance as its own solution. By transitivity (:ref{#ex-c-transitive}), $\mathsf{LPO} \leq_c \mathsf{LLPO}$.
+
+If $\widehat{\mathsf{LPO}} \leq_c \widehat{\mathsf{LLPO}}$, then $\mathsf J \leq_W \widehat{\mathsf{LPO}} \leq_c \widehat{\mathsf{LLPO}} \leq_W \mathsf{WKL}$ by :ref{#thm-jump-lpo} and :ref{#thm-wkl-llpo}; since Weihrauch reductions are computable reductions, $\mathsf J \leq_c \mathsf{WKL}$, hence $\mathsf J \leq_\omega \mathsf{WKL}$ (:ref{#prop-c-omega}), which fails by :ref{#cor-wkl-not-j}.
+:::
+::::
+
+::::exercise{#ex-parallel-product difficulty=1 objective="Check that parallelization commutes with products."}
+Show that $\widehat{\mathsf P \times \mathsf Q} \equiv_{sW} \widehat{\mathsf P} \times \widehat{\mathsf Q}$ for all problems $\mathsf P$ and $\mathsf Q$.
+
+:::solution
+An instance of $\widehat{\mathsf P \times \mathsf Q}$ is a set $\bigoplus_n (X_n \oplus V_n)$, and an instance of $\widehat{\mathsf P} \times \widehat{\mathsf Q}$ a set $(\bigoplus_n X_n) \oplus (\bigoplus_n V_n)$, with $X_n$ instances of $\mathsf P$ and $V_n$ instances of $\mathsf Q$. Each is computed from the other by a fixed permutation of $\nat$, computable with its inverse. Their solutions are the sets $\bigoplus_n (Y_n \oplus W_n)$ and $(\bigoplus_n Y_n) \oplus (\bigoplus_n W_n)$, with $Y_n$ a solution to $X_n$ and $W_n$ a solution to $V_n$, rearranged by the same permutations. So in both directions the forward functional rearranges the instance, and the backward functional rearranges the solution, without using the instance.
+:::
+::::
+
+::::exercise[One question, no uniform answer]{#ex-lpo-not-wkl difficulty=2 objective="Transfer the separation of the jump from WKL to show that WKL cannot answer a single question of LPO uniformly."}
+Show that $\mathsf{LPO} \leq_c \mathsf{WKL}$ but $\mathsf{LPO} \not\leq_W \mathsf{WKL}$.
+
+:::solution
+$\mathsf{LPO} \leq_c \mathsf{Id}$ as it admits computable solutions, and $\mathsf{Id} \leq_c \mathsf{WKL}$ since $\mathsf{WKL}$ has a computable instance, the full binary tree; so $\mathsf{LPO} \leq_c \mathsf{WKL}$ by :ref{#ex-c-transitive}.
+
+If $\mathsf{LPO} \leq_W \mathsf{WKL}$, then $\widehat{\mathsf{LPO}} \leq_W \widehat{\mathsf{WKL}}$, since parallelization preserves Weihrauch reducibility. By :ref{#thm-jump-lpo} and :ref{#ex-wkl-parallelizable}, $\mathsf J \leq_W \widehat{\mathsf{LPO}} \leq_W \widehat{\mathsf{WKL}} \leq_W \mathsf{WKL}$. Then $\mathsf J \leq_c \mathsf{WKL}$, and $\mathsf J \leq_\omega \mathsf{WKL}$, contradicting :ref{#cor-wkl-not-j}. This gives :ref{#cor-lpo-not-llpo} again, since $\mathsf{LLPO} \leq_W \mathsf{WKL}$.
+:::
+::::
+:::::

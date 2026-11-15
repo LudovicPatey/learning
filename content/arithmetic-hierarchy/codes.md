@@ -24,7 +24,7 @@ Constructions in computability theory manipulate sets through finite description
 
 The three kinds of index describe $D_5$ with decreasing information. From the canonical index $5$ one reads off the elements of $D_5$, and in particular that it has two elements and that $2$ is the largest. From $a$ one can decide membership of any given number, but not determine the size of the set, since one never knows whether a larger element remains. From $b$ one can only confirm membership, by waiting for the program to halt.
 
-By :ref{#thm-post}, a set has a $\Sigma^0_{n+1}$ index if and only if it is $\Sigma^0_{n+1}$, and a $\Delta^0_{n+1}$ index if and only if it is $\Delta^0_{n+1}$. Conventions differ between books. Soare (Definition 4.2.4) defines a $\Sigma_n$ index of $B$, for $n \geq 1$, as an index of a one-one reduction of $B$ to $\emptyset^{(n)}$, and a $\Delta_n$ index as a pair formed of a $\Sigma_n$ index of $B$ and a $\Sigma_n$ index of its complement. The definitions above follow Monin and Patey. Every integer is a $\Sigma^0_1$ index of some set, but not every integer is a $\Delta^0_1$ index: the set of $\Delta^0_1$ indices is $\Pi^0_2$-complete (see the exercises). The notion of uniformity of the course on fundamentals can be expressed with indices.
+By :ref{#thm-post}, a set has a $\Sigma^0_{n+1}$ index if and only if it is $\Sigma^0_{n+1}$, and a $\Delta^0_{n+1}$ index if and only if it is $\Delta^0_{n+1}$. Conventions differ between books. Soare (Definition 4.2.4) defines a $\Sigma_n$ index of $B$, for $n \geq 1$, as an index of a one-one reduction of $B$ to $\emptyset^{(n)}$, and a $\Delta_n$ index as a pair formed of a $\Sigma_n$ index of $B$ and a $\Sigma_n$ index of its complement. The definitions above follow Monin and Patey. Every integer is a $\Sigma^0_1$ index of some set, but not every integer is a $\Delta^0_1$ index: the set of $\Delta^0_1$ indices is $\Pi^0_2$-complete (:ref{#ex-delta-indices-complete}). The notion of uniformity of the course on fundamentals can be expressed with indices.
 
 :::proposition{#prop-uniform-indices}
 A sequence $(A_n)_{n \in \nat}$ of sets is uniformly computable if and only if there is a computable function $h$ such that $h(n)$ is a $\Delta^0_1$ index of $A_n$ for every $n$. Similarly, $(A_n)$ is uniformly c.e., that is, $\{ (n, x) : x \in A_n \}$ is c.e., if and only if $A_n = W_{h(n)}$ for some computable $h$.
@@ -41,6 +41,14 @@ The relations $x \in D_n$, $|D_n| = k$, $D_n \subseteq D_m$ and $\max D_n = x$ a
 :::proof{of=prop-canonical-indices}
 $x \in D_n$ if and only if the binary digit of $n$ at position $x$ is $1$, that is, $\lfloor n / 2^x \rfloor$ is odd; and all elements of $D_n$ are smaller than $n + 1$, so the other relations are obtained by bounded quantification over $x \leq n$. The indices are obtained by the parameter form of SMN, applied to the computable functions $(n, x) \mapsto D_n(x)$ and to the partial function that converges on $(n, x)$ exactly when $x \in D_n$.
 :::
+
+::::exercise{#ex-delta-indices-complete difficulty=2 objective="Classify the set of $\Delta^0_1$ indices, showing that recognizing a characteristic index is a $\Pi^0_2$-complete problem." lessons="index-sets"}
+Show that the set $\{ e : e \text{ is a } \Delta^0_1 \text{ index of some set} \}$ is $\Pi^0_2$-complete.
+
+:::solution
+$e$ is a $\Delta^0_1$ index if and only if $\forall x\ \exists s\ (\Phi_e(x)[s]\converge \wedge \Phi_e(x)[s] \leq 1)$, a $\Pi^0_2$ condition. For completeness, let $A = \{ x : \forall y\ \exists z\ R(x, y, z) \}$ with $R$ computable, and let $f$ be computable with $\Phi_{f(x)}(y) \simeq 0$ if $\exists z\ R(x, y, z)$, the program searching for $z$ and diverging if there is none. Then $\Phi_{f(x)}$ is total, with values in $\{0, 1\}$, if and only if $x \in A$.
+:::
+::::
 
 ## What cannot be recovered
 
@@ -98,6 +106,14 @@ In the proof of :ref{#prop-no-size-from-delta}, why does the program $e$ wait fo
   Under the hypothesis on $f$, the argument shows that $f(e)$ converges.
 :::
 
+::::exercise{#ex-no-canonical-from-sigma difficulty=2 objective="Adapt the self-reference argument to show that canonical indices cannot be computed from enumerations of finite sets."}
+Show that there is no partial computable function $f$ such that, for every $\Sigma^0_1$ index $e$ of a finite set $F$, $f(e)\converge$ and $D_{f(e)} = F$.
+
+:::solution
+Suppose $f$ exists. By :ref{#cor-self-reference}, there is $e$ such that $\Phi_e(x)$ converges if and only if $x = 0$, $f(e)\converge$ and $0 \notin D_{f(e)}$. Then $W_e \subseteq \{0\}$ is finite, so $f(e)\converge$ with $D_{f(e)} = W_e$. If $0 \in D_{f(e)}$, then $W_e = \emptyset$, so $D_{f(e)} \neq W_e$. If $0 \notin D_{f(e)}$, then $W_e = \{0\}$, so $D_{f(e)} \neq W_e$. Both cases are contradictory.
+:::
+::::
+
 ## Lowness indices
 
 A low set $A$ is $\Delta^0_2$, so it has $\Delta^0_2$ indices. But lowness says more: $\emptyset'$ computes $A'$. An index carrying this information is a **lowness index**: an $e$ such that $\Phi^{\emptyset'}_e$ is the characteristic function of $A'$. From a lowness index, a $\Delta^0_2$ index is computable: by :ref{#thm-jump} there is a computable $g$, independent of the set, with $A(n) = A'(g(n))$ for every $A$, so if $\Phi^{\emptyset'}_e = A'$ then $n \mapsto \Phi^{\emptyset'}_e(g(n))$ computes $A$, with an index computable from $e$. The converse fails. Its proof uses the fixed point theorem for oracle machines.
@@ -124,32 +140,6 @@ With $Z = \emptyset'$, the function $\Phi^{\emptyset'}_e$ is total with values i
 
 The information that distinguishes a lowness index from a $\Delta^0_2$ index is used in constructions that need to answer questions about $A'$ with the oracle $\emptyset'$ while $A$ is being built, for instance to iterate the construction of low sets.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that from a $\Delta^0_1$ index of $A$ one computes a $\Sigma^0_1$ index of $A$ and a $\Sigma^0_1$ index of $\nat \setminus A$.
-
-:::solution
-By the parameter form of SMN, there are computable $h_1$ and $h_0$ such that $\Phi_{h_i(e)}(x)$ converges if and only if $\Phi_e(x)\converge = i$. If $e$ is a $\Delta^0_1$ index of $A$, then $W_{h_1(e)} = A$ and $W_{h_0(e)} = \nat \setminus A$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that the set $\{ e : e \text{ is a } \Delta^0_1 \text{ index of some set} \}$ is $\Pi^0_2$-complete.
-
-:::solution
-$e$ is a $\Delta^0_1$ index if and only if $\forall x\ \exists s\ (\Phi_e(x)[s]\converge \wedge \Phi_e(x)[s] \leq 1)$, a $\Pi^0_2$ condition. For completeness, let $A = \{ x : \forall y\ \exists z\ R(x, y, z) \}$ with $R$ computable, and let $f$ be computable with $\Phi_{f(x)}(y) \simeq 0$ if $\exists z\ R(x, y, z)$, the program searching for $z$ and diverging if there is none. Then $\Phi_{f(x)}$ is total, with values in $\{0, 1\}$, if and only if $x \in A$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that there is no partial computable function $f$ such that, for every $\Sigma^0_1$ index $e$ of a finite set $F$, $f(e)\converge$ and $D_{f(e)} = F$.
-
-:::solution
-Suppose $f$ exists. By :ref{#cor-self-reference}, there is $e$ such that $\Phi_e(x)$ converges if and only if $x = 0$, $f(e)\converge$ and $0 \notin D_{f(e)}$. Then $W_e \subseteq \{0\}$ is finite, so $f(e)\converge$ with $D_{f(e)} = W_e$. If $0 \in D_{f(e)}$, then $W_e = \emptyset$, so $D_{f(e)} \neq W_e$. If $0 \notin D_{f(e)}$, then $W_e = \{0\}$, so $D_{f(e)} \neq W_e$. Both cases are contradictory.
-:::
-::::
-
 ## Notes and references
 
 Codes of Turing ideals, and the computation of their members by a low code, are studied in the course on lowness (:ref{to="lowness/coded-ideals"}).
@@ -160,3 +150,67 @@ Canonical indices of finite sets are standard since Rogers' book; Nies calls the
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 2.3 and 4.2.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.1.
 - B. Monin and L. Patey, *Computability theory*, chapter *Arithmetic hierarchy*, section *Arithmetic codes*.
+
+:::::exercises
+::::exercise{#ex-delta-to-sigma difficulty=1 objective="Convert a characteristic index into enumeration indices of a set and of its complement, uniformly."}
+Show that from a $\Delta^0_1$ index of $A$ one computes a $\Sigma^0_1$ index of $A$ and a $\Sigma^0_1$ index of $\nat \setminus A$.
+
+:::solution
+By the parameter form of SMN, there are computable $h_1$ and $h_0$ such that $\Phi_{h_i(e)}(x)$ converges if and only if $\Phi_e(x)\converge = i$. If $e$ is a $\Delta^0_1$ index of $A$, then $W_{h_1(e)} = A$ and $W_{h_0(e)} = \nat \setminus A$.
+:::
+::::
+
+::::exercise{#ex-canonical-computations difficulty=1 objective="Compute with canonical indices and check that the Boolean operations on finite sets are computable on them."}
+1. Determine $D_{13}$ and the canonical index of $\{ 1, 3, 4 \}$.
+2. Show that there are computable functions $u$ and $i$ with $D_{u(n, m)} = D_n \cup D_m$ and $D_{i(n, m)} = D_n \cap D_m$, and that the canonical index of $\{ x + 1 : x \in D_n \}$ is $2n$.
+
+:::solution
+1. $13 = 2^3 + 2^2 + 2^0$, so $D_{13} = \{ 0, 2, 3 \}$. The canonical index of $\{ 1, 3, 4 \}$ is $2 + 8 + 16 = 26$.
+2. Every element of $D_n$ is at most $n$, since $2^x \leq n$ for $x \in D_n$. Let $u(n, m) = \sum \{ 2^x : x \leq \max(n, m),\ x \in D_n \vee x \in D_m \}$, and define $i$ in the same way with $\wedge$; both are computable, since the relation $x \in D_n$ is computable (:ref{#prop-canonical-indices}) and the sums are bounded. Finally $\sum_{x \in D_n} 2^{x + 1} = 2 \sum_{x \in D_n} 2^x = 2n$.
+:::
+::::
+
+::::exercise{#ex-pair-indices difficulty=2 objective="Relate pairs of enumeration indices to characteristic indices, and deduce that complements cannot be enumerated uniformly."}
+1. Show that there is a computable function $p$ such that whenever $W_b = \nat \setminus W_a$, $p(a, b)$ is a $\Delta^0_1$ index of $W_a$.
+2. Deduce that there is no partial computable $f$ such that, for every $e$ with $W_e$ computable, $f(e)\converge$ and $W_{f(e)} = \nat \setminus W_e$.
+
+:::solution
+1. By the parameter form of SMN, there is a computable $p$ such that $\Phi_{p(a, b)}(x)$ searches for a stage $s$ with $x \in W_a[s]$ or $x \in W_b[s]$, and outputs $1$ in the first case and $0$ otherwise. If $W_b = \nat \setminus W_a$, every $x$ is in exactly one of the two sets, so the search terminates, the output is $1$ if and only if $x \in W_a$, and $p(a, b)$ is a $\Delta^0_1$ index of $W_a$.
+2. If $f$ existed, the partial computable function $e \mapsto p(e, f(e))$ would converge on every $e$ with $W_e$ computable, with a $\Delta^0_1$ index of $W_e$ as value. This contradicts :ref{#prop-no-delta-from-sigma}.
+
+Together with :ref{#ex-delta-to-sigma}, item 1 shows that a $\Delta^0_1$ index and Soare's $\Delta_1$ index, a pair of $\Sigma^0_1$ indices of a set and of its complement, can be computed from each other.
+:::
+::::
+
+::::exercise{#ex-no-max-from-delta difficulty=2 objective="Prove a non-uniformity result by reduction to another one, instead of a new self-reference argument."}
+Show that there is no partial computable function $f$ such that, for every $\Delta^0_1$ index $e$ of a nonempty finite set $F$, $f(e)\converge = \max F$.
+
+:::solution
+Suppose $f$ exists. By the parameter form of SMN, there is a computable $r$ with $\Phi_{r(e)}(0) = 1$ and $\Phi_{r(e)}(x + 1) \simeq \Phi_e(x)$ for all $x$. If $e$ is a $\Delta^0_1$ index of a finite set $F$, then $r(e)$ is a $\Delta^0_1$ index of $F' = \{ 0 \} \cup \{ x + 1 : x \in F \}$, which is finite, nonempty, and has $|F| + 1$ elements. Let $g(e)$ be computed as follows: compute $M = f(r(e))$, then the number $N$ of $y \leq M$ with $\Phi_{r(e)}(y) = 1$, and output $N - 1$. For a $\Delta^0_1$ index $e$ of a finite set $F$, the value $M = \max F'$ is defined, the computations $\Phi_{r(e)}(y)$ converge since $\Phi_{r(e)}$ is total, all elements of $F'$ are at most $M$, and $g(e) = |F'| - 1 = |F|$. So $g$ is a partial computable function that contradicts :ref{#prop-no-size-from-delta}.
+:::
+::::
+
+::::exercise{#ex-sigma1-to-delta2 difficulty=1 objective="Compute a $\Delta^0_2$ index of a c.e. set from a $\Sigma^0_1$ index, uniformly."}
+Show that there is a computable function $h$ such that $h(e)$ is a $\Delta^0_2$ index of $W_e$ for every $e$.
+
+:::solution
+By the parameter form of SMN, there is a computable $q$ such that $\Phi_{q(e, x)}(y)$ converges, for every $y$, if and only if $x \in W_e$: the program ignores $y$ and waits for $x$ to appear in $W_e$. Then $x \in W_e \iff \Phi_{q(e, x)}(q(e, x))\converge \iff q(e, x) \in \emptyset'$. By the parameter form of the relativized SMN theorem (:ref{#thm-relativized-smn}), there is a computable $h$ such that $\Phi^Z_{h(e)}(x) = Z(q(e, x))$ for every oracle $Z$. With $Z = \emptyset'$, the function $\Phi^{\emptyset'}_{h(e)}$ is total and is the characteristic function of $W_e$.
+:::
+::::
+
+::::exercise{#ex-no-sigma-from-delta2 difficulty=3 objective="Combine the fixed point theorem for oracle machines with questions to $\emptyset'$ to show that a $\Sigma^0_1$ index cannot be recovered from a $\Delta^0_2$ index."}
+Show that there is no partial computable function $f$ such that, for every $\Delta^0_2$ index $e$ of a c.e. set $A$, $f(e)\converge$ and $W_{f(e)} = A$.
+
+:::solution
+Suppose $f$ exists. By the parameter form of SMN, there are computable functions $p$ and $q$ such that $p(e) \in \emptyset' \iff f(e)\converge$ and $q(i) \in \emptyset' \iff 0 \in W_i$: the program $p(e)$ ignores its input and computes $f(e)$, and the program $q(i)$ ignores its input and waits for $0$ to appear in $W_i$. By :ref{#lem-relativized-fixed-point}, there is $e$ such that for every oracle $Z$:
+- $\Phi^Z_e(x) = 0$ for $x \neq 0$;
+- $\Phi^Z_e(0) = 0$ if $p(e) \notin Z$; if $p(e) \in Z$, the machine computes $i = f(e)$, and outputs $1$ if $q(i) \notin Z$, and $0$ if $q(i) \in Z$.
+
+This is an oracle machine computing a partial function $g(Z, e, x)$, uniformly in $e$, since $p$ and $q$ are computable and $f$ is partial computable.
+
+Take $Z = \emptyset'$. If $p(e) \notin \emptyset'$, then $\Phi^{\emptyset'}_e(0) = 0$. If $p(e) \in \emptyset'$, then $f(e)\converge$, the computation of $i = f(e)$ terminates, and $\Phi^{\emptyset'}_e(0)$ is defined. So $\Phi^{\emptyset'}_e$ is total with values in $\{0, 1\}$, and $e$ is a $\Delta^0_2$ index of a set $A \subseteq \{ 0 \}$, which is finite, hence c.e. By the hypothesis on $f$, $f(e)\converge = i$ with $W_i = A$. Since $f(e)\converge$, $p(e) \in \emptyset'$, so $A(0) = 1$ if and only if $q(i) \notin \emptyset'$, that is, if and only if $0 \notin W_i$. Hence $0 \in A \iff 0 \notin W_i = A$: a contradiction.
+
+The argument follows the proof of :ref{#prop-no-lowness-index}. The machine may diverge for oracles other than $\emptyset'$; only its behavior with the oracle $\emptyset'$ matters.
+:::
+::::
+:::::

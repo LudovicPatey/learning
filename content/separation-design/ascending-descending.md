@@ -106,9 +106,7 @@ Where is extremality used, and why would the proof fail with the question of $\m
 
 The first case is the usual use of the question; the second case is new. The construction does not act on a non-essential $\psi$: it could not, since essentiality is a property of high arithmetic complexity, decided by no single extension. Extremality makes the condition $c$ itself responsible for the behavior of the generic pair, whatever extensions are chosen later.
 
-## Exercises
-
-::::exercise{difficulty=2}
+::::exercise{#ex-ads-one-part difficulty=2 objective="Show that a set contained in one part of a cover destroys dependent hyperimmunity."}
 Let $(A_0, A_1)$ be a pair with $A_0 \cup A_1 = \nat$, and $H$ an infinite set contained in $A_0$ or in $A_1$. Show that $(A_0, A_1)$ is not dependently hyperimmune relative to $H$. Deduce that if $A_0 \sqcup A_1 = \nat$ is a partition and $(A_0, A_1)$ is dependently hyperimmune, then $A_0$ and $A_1$ are both infinite.
 
 :::solution
@@ -124,3 +122,37 @@ The notion of forcing, extremal questions, dependent hyperimmunity and :ref{#thm
 - M. Lerman, R. Solomon and H. Towsner, *Separating principles below Ramsey's theorem for pairs*, Journal of Mathematical Logic 13 (2013), 1350007.
 - D. R. Hirschfeldt and R. A. Shore, *Combinatorial principles weaker than Ramsey's theorem for pairs*, Journal of Symbolic Logic 72 (2007), 171–206.
 - L. Patey, *Lowness and avoidance*, chapter *Custom properties*, section *Linear orders*.
+
+:::::exercises
+::::exercise{#ex-ads-cac-reduction difficulty=1 objective="Verify the reduction of the ascending–descending principle to the chain–antichain principle."}
+Let $<_{\mathcal L}$ be a linear order on $\nat$, and let $x \prec y$ if $x < y$ and $x <_{\mathcal L} y$. Show that $\prec$ is a partial order computable in $<_{\mathcal L}$, that its infinite chains are ascending sequences of $<_{\mathcal L}$, and that its infinite antichains are descending sequences. Deduce that $\mathsf{ADS} \leq_c \mathsf{CAC}$.
+
+:::solution
+$\prec$ is irreflexive since $x < x$ never holds, and transitive since both $<$ and $<_{\mathcal L}$ are; it is computable in $<_{\mathcal L}$. Let $x < y$. If $x$ and $y$ are $\prec$-comparable, then $x \prec y$, since $y \prec x$ would require $y < x$; so $x <_{\mathcal L} y$. If they are incomparable, then $x \not<_{\mathcal L} y$, so $y <_{\mathcal L} x$ by linearity. Hence on a chain $<_{\mathcal L}$ agrees with $<$, and on an antichain with its reverse. The order $\prec$ is computed from the instance, and every solution to $\prec$ is a solution to $<_{\mathcal L}$, so $\mathsf{ADS} \leq_c \mathsf{CAC}$. Adapted from Hirschfeldt, *Slicing the Truth*, Exercise 9.3(a) (Hirschfeldt and Shore).
+:::
+::::
+
+::::exercise{#ex-ads-finite-change difficulty=1 objective="Check that dependent hyperimmunity passes to subsets and survives finite changes."}
+Let $(A_0, A_1)$ be dependently hyperimmune relative to $W$. Show that $(B_0, B_1)$ is dependently hyperimmune relative to $W$ whenever $B_0 \subseteq A_0$ and $B_1 \subseteq A_1$, and that so is $(A_0 \cup E_0, A_1 \cup E_1)$ for all finite sets $E_0, E_1$.
+
+:::solution
+For subsets, sets $R \subseteq \overline{A_0}$ and $S \subseteq \overline{A_1}$ satisfy $R \subseteq \overline{B_0}$ and $S \subseteq \overline{B_1}$. For finite changes, let $m$ be larger than every element of $E_0 \cup E_1$, and $\varphi(U, V)$ an essential $\Sigma^0_1(W)$ formula. Let $\varphi'(U, V)$ be $\varphi(U, V) \wedge \min U > m \wedge \min V > m$; it is $\Sigma^0_1(W)$. It is essential: for $x$, take $R > \max(x, m)$ given by the essentiality of $\varphi$; for $y$, take $S > \max(y, m)$ with $\varphi(R, S)$. So there are $R \subseteq \overline{A_0}$ and $S \subseteq \overline{A_1}$ with $\varphi'(R, S)$. Then $R$ and $S$ lie above $m$, so they miss $E_0$ and $E_1$: $R \subseteq \overline{A_0 \cup E_0}$, $S \subseteq \overline{A_1 \cup E_1}$, and $\varphi(R, S)$.
+:::
+::::
+
+::::exercise{#ex-cac-not-extremal difficulty=2 objective="See on an example that the question of $\mathsf{CAC}$ over split triples is not extremal." lessons="chain-antichain"}
+Let $x <_P y$ if and only if $1 \leq x < y$, so that $0$ is incomparable with every other element. Let $c = (\varepsilon, \varepsilon, \varepsilon, \nat)$, and let $\varphi_0$, $\varphi_1$, $\varphi_2$ be the $\Sigma^0_1$ sentences "$1 \in G$", "$0 = 0$" and "$0 \in G$". Show that $c$ is a $\mathsf{CAC}$ condition, that the answer to $c \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1) \vee \varphi_2(G_2)$ is negative, and that some extension of $c$ has stems satisfying the three sentences. Why does the proof of property 2 of :ref{#lem-sd-ads-question} not apply?
+
+:::solution
+$<_P$ is irreflexive and transitive, and $c$ is a condition since its stems are empty. A split triple $(\tau_0, \tau_1, \tau_2)$ with $\tau_0$ satisfying $\varphi_0$ and $\tau_2$ satisfying $\varphi_2$ has $1 \in \rho_0$ and $0 \in \rho_2$, since the stems of $c$ are empty; the definition then requires $1 <_P 0$, which is false. So the answer is negative. Let $d = (\tau_0, \varepsilon, \tau_2, Y)$ with $\tau_0$ the string of length $2$ coding $\{ 1 \}$, $\tau_2$ the string of length $1$ coding $\{ 0 \}$, and $Y = \{ y : y \geq 2 \}$. For $y \in Y$, $\{ 1, y \}$ is ascending, since $1 <_P y$, and $\{ 0, y \}$ is an antichain; so $d$ is a condition, it extends $c$, and its stems satisfy the three sentences. Along a sequence of conditions through $d$, the generic sets satisfy $\varphi_0$, $\varphi_1$ and $\varphi_2$, although the answer at $c$ is negative. In the proof for $\mathsf{ADS}$, an element of the reservoir of the extension separates the two blocks; here an element $y \in Y$ is above $\rho_0$ but incomparable with $\rho_2$, so it gives no relation between $\rho_0$ and $\rho_2$.
+:::
+::::
+
+::::exercise{#ex-ads-finite-part difficulty=2 objective="Show that dependent hyperimmunity reduces to hyperimmunity when one of the two sets is finite."}
+Let $A_0$ be infinite and $A_1$ finite. Show that $(A_0, A_1)$ is dependently hyperimmune relative to $W$ if and only if $A_0$ is hyperimmune relative to $W$.
+
+:::solution
+If the pair is dependently hyperimmune relative to $W$, $A_0$ is hyperimmune relative to $W$ by :ref{#ex-sd-dependent} relativized. Conversely, let $A_0$ be hyperimmune relative to $W$, $\varphi(U, V)$ an essential $\Sigma^0_1(W)$ formula, and $m$ larger than every element of $A_1$. For each $n$, search with oracle $W$ for a pair $(R_n, S_n)$ with $R_n > n$, $S_n > m$ and $\varphi(R_n, S_n)$; it exists by essentiality, with $x = n$ and $y = m$. The sequence $(R_n)$ is $W$-computable, its members are non-empty and $\min R_n > n$. Let $n_0 = 0$ and $n_{j+1} = \max R_{n_j}$: the sets $R_{n_j}$ are pairwise disjoint and form a disjoint strong array relative to $W$. By hyperimmunity, some $R_{n_j}$ is disjoint from $A_0$, and $S_{n_j} > m$ is disjoint from $A_1$. So $\varphi(R_{n_j}, S_{n_j})$ with $R_{n_j} \subseteq \overline{A_0}$ and $S_{n_j} \subseteq \overline{A_1}$. The dependency of $S$ on $R$ in the definition only matters when both sets are infinite.
+:::
+::::
+:::::

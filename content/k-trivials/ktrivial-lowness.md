@@ -1,7 +1,7 @@
 ---
 title: K-triviality and lowness
 summary: Every K-trivial set is low for K, by a theorem of Nies and Hirschfeldt; the amplification argument, which proves the weak truth-table case of its consequence that no K-trivial set is complete; the decanter and golden run methods; the equivalence of K-triviality with the lowness notions, and the ideal of K-trivial sets.
-duration: 50
+duration: 45
 prerequisites: [hungry-sets, cost-functions, solovay-functions, fundamentals/fixed-point]
 ---
 
@@ -99,7 +99,7 @@ The K-trivial sets form an ideal of the Turing degrees: they are closed downward
 (1 ⇔ 2) by :ref{#thm-ktrivial-lowk} and :ref{#prop-lowness-implications} (1); the other equivalences by :ref{#cor-lowness-equivalent}. Closure downward holds for low for K sets by :ref{#prop-lowness-implications} (4), and closure under join for K-trivial sets by :ref{#prop-k-trivial-join}.
 :::
 
-Downward closure is not apparent from the definition of K-triviality, and closure under join is not apparent from the definition of lowness for K; the equivalence yields both. The equivalence also transfers results proved for one notion to the others: K-trivial sets are low in the sense of the jump, by the exercise of the lesson on lowness. In the other direction, the hungry sets theorem alone shows that sets that are low for randomness are K-trivial, hence $\Delta^0_2$ by :ref{#cor-k-trivial-delta2}, which answers a question of Kučera and Terwijn.
+Downward closure is not apparent from the definition of K-triviality, and closure under join is not apparent from the definition of lowness for K; the equivalence yields both. The equivalence also transfers results proved for one notion to the others: K-trivial sets are low in the sense of the jump, by :ref{#ex-lowk-low}. In the other direction, the hungry sets theorem alone shows that sets that are low for randomness are K-trivial, hence $\Delta^0_2$ by :ref{#cor-k-trivial-delta2}, which answers a question of Kučera and Terwijn.
 
 ## Further results
 
@@ -114,19 +114,11 @@ The last result gives another route to :ref{#thm-ktrivial-lowk}, as Bienvenu, Da
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-ktrivial-incomplete difficulty=1 objective="Derive from the main theorem that K-trivial sets are Turing incomplete, which solves Post's problem without injury."}
 Show that no K-trivial set is Turing complete.
 
 :::solution
-By :ref{#thm-ktrivial-lowk}, a K-trivial set $A$ is low for K, and by the exercise of the lesson on lowness, $A' \leq_T \emptyset'$. A complete set $A$ has $A' \equiv_T \emptyset''$, which is not computable in $\emptyset'$. So $A$ is not complete. With :ref{#thm-solovay-ktrivial}, this gives a non-computable c.e. set that is not complete: a solution to Post's problem by a construction without injury.
-:::
-::::
-
-::::exercise{difficulty=1}
-Let $A$ be K-trivial, and let $B$ be K-trivial relative to $A$, that is, $K^A(B \uh n) \leq^+ K^A(n)$. Show that $B$ is K-trivial.
-
-:::solution
-By :ref{#thm-ktrivial-lowk}, $K \leq^+ K^A$, and $K^A \leq^+ K$ holds for every oracle. So $K(B \uh n) \leq^+ K^A(B \uh n) \leq^+ K^A(n) \leq^+ K(n)$.
+By :ref{#thm-ktrivial-lowk}, a K-trivial set $A$ is low for K, and by :ref{#ex-lowk-low}, $A' \leq_T \emptyset'$. A complete set $A$ has $A' \equiv_T \emptyset''$, which is not computable in $\emptyset'$. So $A$ is not complete. With :ref{#thm-solovay-ktrivial}, this gives a non-computable c.e. set that is not complete: a solution to Post's problem by a construction without injury.
 :::
 ::::
 
@@ -145,3 +137,45 @@ The amplification argument and the decanter method are due to Downey, Hirschfeld
 - L. Bienvenu, N. Greenberg, A. Kučera, A. Nies and D. Turetsky, *Coherent randomness tests and computing the K-trivial sets*, Journal of the European Mathematical Society 18 (2016), 773–812.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 5.4 and 5.5.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 11.3–11.6.
+
+:::::exercises
+::::exercise{#ex-ktrivial-relative difficulty=1 objective="Use the main theorem to show that K-triviality relative to a K-trivial set is K-triviality."}
+Let $A$ be K-trivial, and let $B$ be K-trivial relative to $A$, that is, $K^A(B \uh n) \leq^+ K^A(n)$. Show that $B$ is K-trivial.
+
+:::solution
+By :ref{#thm-ktrivial-lowk}, $K \leq^+ K^A$, and $K^A \leq^+ K$ holds for every oracle. So $K(B \uh n) \leq^+ K^A(B \uh n) \leq^+ K^A(n) \leq^+ K(n)$.
+:::
+::::
+
+::::exercise{#ex-lowk-segments difficulty=1 objective="Use the main theorem to characterize lowness for K by the complexity of the initial segments of the oracle."}
+Show that $A$ is low for K if and only if $K(A \uh n) \leq^+ K^A(n)$ for every $n$.
+
+:::solution
+If $A$ is low for K, then $K(A \uh n) \leq^+ K^A(A \uh n) \leq^+ K^A(n)$, since $A \uh n$ is computed from $n$ with oracle $A$. Conversely, $K^A(n) \leq^+ K(n)$ for every oracle, so the hypothesis gives $K(A \uh n) \leq^+ K(n)$: $A$ is K-trivial, hence low for K by :ref{#thm-ktrivial-lowk}. The condition only concerns the prefixes of $A$ and the numbers, whereas lowness for K concerns all strings. (Adapted from Nies 2009, Exercise 5.2.7.)
+:::
+::::
+
+::::exercise{#ex-ktrivial-jump difficulty=1 objective="Locate the K-trivial sets in the jump hierarchy with the main theorem."}
+Let $A$ be K-trivial. Show that $A' \equiv_T \emptyset'$, that $A$ is not high (that is, $A' \not\geq_T \emptyset''$), and that $A'$ is not K-trivial.
+
+:::solution
+$\emptyset' \leq_T A'$ holds for every set, and $A' \leq_T \emptyset'$ by :ref{#thm-ktrivial-lowk} and :ref{#ex-lowk-low}. If $A' \geq_T \emptyset''$, then $\emptyset'' \leq_T \emptyset'$, which is false. Finally $A' \equiv_T \emptyset'$ is Turing complete, and no K-trivial set is Turing complete (:ref{#ex-ktrivial-incomplete}); so $A'$ is not K-trivial. In particular the K-trivial sets, closed downward under $\leq_T$, are not closed under the jump.
+:::
+::::
+
+::::exercise{#ex-ktrivial-join-cost difficulty=1 objective="Give a second proof of the closure under join from the cost function characterization of K-triviality."}
+Admit the cost function characterization stated in this lesson: a set is K-trivial if and only if it has a computable approximation that obeys $c_K$. Deduce, with :ref{#ex-cost-join-approx}, a second proof of :ref{#prop-k-trivial-join}.
+
+:::solution
+Let $A$ and $B$ be K-trivial. By the characterization, they have computable approximations $(A_s)$ and $(B_s)$ that obey $c_K$. By :ref{#ex-cost-join-approx}, $(A_s \oplus B_s)$ is a computable approximation of $A \oplus B$ that obeys $c_K$, and $A \oplus B$ is K-trivial by :ref{#thm-obey-ktrivial}. The proof moves the work into the characterization, whose proof uses the golden run; the proof of :ref{#prop-k-trivial-join} uses only the counting theorem.
+:::
+::::
+
+::::exercise[Constants of K-triviality and of lowness]{#ex-ktrivial-common-constant difficulty=1 objective="Compare the constants of K-triviality and of lowness for K, using the finiteness of the classes of sets with a given constant."}
+Show that for every $b$ there is $c$ such that every set that is K-trivial with constant $b$ is low for K with constant $c$, in the sense of :ref{#ex-lowk-few}. Conversely, show that there is $d$ such that every set that is low for K with constant $c$ is K-trivial with constant $c + d$, for every $c$.
+
+:::solution
+By :ref{#cor-k-trivial-delta2}, there are finitely many sets $A_0, \dots, A_{N-1}$ that are K-trivial with constant $b$. By :ref{#thm-ktrivial-lowk}, each $A_i$ is low for K with some constant $c_i$; then $c = \max_{i < N} c_i$ works, and for $N = 0$ any $c$ does. The converse is :ref{#ex-lowk-few}. The first argument gives no means of computing $c$ from $b$: it uses the finiteness of a class that is not given effectively, and each $c_i$ comes from the theorem applied to one set.
+:::
+::::
+:::::

@@ -1,7 +1,7 @@
 ---
 title: Computable randomness
 summary: Sequences on which no computable martingale succeeds; rational-valued martingales suffice; there is no universal computable martingale; computably random sequences satisfy the law of large numbers and are characterized by the convergence of computable martingales.
-duration: 40
+duration: 35
 prerequisites: [schnorr-theorem]
 ---
 
@@ -70,7 +70,15 @@ If $X$ is computably random, then the frequency of ones in $X \uh n$ tends to $\
 If not, there is a rational $\delta \in (0, \frac12]$ such that $X \uh n$ has at least $(\frac12 + \delta) n$ ones for infinitely many $n$, or at least $(\frac12 + \delta) n$ zeros for infinitely many $n$. In the first case, $p_\delta$ is computable and $p_\delta(X \uh n) \geq e^{5\delta^2 n/4}$ for infinitely many $n$ by :ref{#lem-proportional}, so $p_\delta$ succeeds on $X$. In the second case, the same holds for the strategy that bets the fraction $\delta$ of its capital on the bit $0$.
 :::
 
-The capital of $p_\delta$ is not only unbounded along such a sequence: it exceeds a computable function of $n$, $e^{5\delta^2 n/4}$, at infinitely many lengths. This additional information will show that the law of large numbers holds for the weaker notion of Schnorr randomness (:ref{to="martingales/schnorr-randomness"}). The first exercise below extends the proposition to subsequences selected by computable rules.
+The capital of $p_\delta$ is not only unbounded along such a sequence: it exceeds a computable function of $n$, $e^{5\delta^2 n/4}$, at infinitely many lengths. This additional information will show that the law of large numbers holds for the weaker notion of Schnorr randomness (:ref{to="martingales/schnorr-randomness"}). The following exercise extends the proposition to subsequences selected by computable rules.
+
+::::exercise{#ex-church-stochastic difficulty=2 objective="Combine a computable selection rule with the proportional strategy to show that computably random sequences are Church stochastic."}
+A **computable selection rule** is a computable function $s : \bstr \to \{0, 1\}$; it **selects** the position $n$ in $X$ if $s(X \uh n) = 1$. Let $X$ be computably random and $s$ a computable selection rule that selects infinitely many positions in $X$. Show that the frequency of ones among the first $m$ selected bits of $X$ tends to $\frac12$ as $m$ tends to infinity. (Computably random sequences are **Church stochastic**.)
+
+:::solution
+Suppose that for a rational $\delta \in (0, \frac12]$, infinitely often, at least $(\frac12 + \delta) m$ of the first $m$ selected bits are ones (the case of zeros is symmetric). Let $d(\varepsilon) = 1$, and at a string $\sigma$ with $s(\sigma) = 1$ bet the fraction $\delta$ of the capital on $1$: $d(\sigma 1) = (1 + \delta) d(\sigma)$, $d(\sigma 0) = (1 - \delta) d(\sigma)$; at a string with $s(\sigma) = 0$, do not bet. Then $d$ is a computable rational-valued martingale, and when the selected bits among the first $n$ positions of $X$ are $m$ in number with $k$ ones, $d(X \uh n) = (1 + \delta)^k (1 - \delta)^{m-k}$. By the computation of :ref{#lem-proportional}, this is at least $e^{5\delta^2 m/4}$ at infinitely many $n$, with $m$ tending to infinity. So $d$ succeeds on $X$, a contradiction.
+:::
+::::
 
 ## Convergence of computable martingales
 
@@ -120,32 +128,6 @@ Where is the computability of $d$ used?
   The rationals $r$, $s$, $r_1$, $s_1$ are fixed numbers given by the failure of convergence; they need not be found effectively.
 :::
 
-## Exercises
-
-::::exercise{difficulty=2}
-A **computable selection rule** is a computable function $s : \bstr \to \{0, 1\}$; it **selects** the position $n$ in $X$ if $s(X \uh n) = 1$. Let $X$ be computably random and $s$ a computable selection rule that selects infinitely many positions in $X$. Show that the frequency of ones among the first $m$ selected bits of $X$ tends to $\frac12$ as $m$ tends to infinity. (Computably random sequences are **Church stochastic**.)
-
-:::solution
-Suppose that for a rational $\delta \in (0, \frac12]$, infinitely often, at least $(\frac12 + \delta) m$ of the first $m$ selected bits are ones (the case of zeros is symmetric). Let $d(\varepsilon) = 1$, and at a string $\sigma$ with $s(\sigma) = 1$ bet the fraction $\delta$ of the capital on $1$: $d(\sigma 1) = (1 + \delta) d(\sigma)$, $d(\sigma 0) = (1 - \delta) d(\sigma)$; at a string with $s(\sigma) = 0$, do not bet. Then $d$ is a computable rational-valued martingale, and when the selected bits among the first $n$ positions of $X$ are $m$ in number with $k$ ones, $d(X \uh n) = (1 + \delta)^k (1 - \delta)^{m-k}$. By the computation of :ref{#lem-proportional}, this is at least $e^{5\delta^2 m/4}$ at infinitely many $n$, with $m$ tending to infinity. So $d$ succeeds on $X$, a contradiction.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that a sequence is computably random if and only if no computable supermartingale succeeds on it.
-
-:::solution
-A martingale is a supermartingale. Conversely, let $d$ be a computable supermartingale, and let $d'$ be the martingale of :ref{#lem-martingale-basic} (3), $d'(\sigma) = d(\sigma) + \sum_{\rho \prec \sigma} r(\rho)$ with $r(\rho) = d(\rho) - \frac12(d(\rho 0) + d(\rho 1))$. Each $r(\rho)$ is a computable real, uniformly in $\rho$, and the sum is finite, so $d'$ is a computable martingale; it is above $d$, so it succeeds wherever $d$ does.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that if $X$ is computably random, then so are $\sigma X$ for every string $\sigma$ and the tail $X(1) X(2) \cdots$.
-
-:::solution
-If a computable martingale $d$ succeeds on $\sigma X$, then $\rho \mapsto d(\sigma\rho)$ is a computable martingale that succeeds on $X$. If $d$ succeeds on the tail $Y$ of $X$, let $d'(\varepsilon) = d(\varepsilon)$ and $d'(i\rho) = d(\rho)$ for $i \in \{0, 1\}$: $d'$ does not bet on the first bit, then copies $d$. It is a computable martingale and $d'(X \uh (n+1)) = d(Y \uh n)$, so it succeeds on $X$.
-:::
-::::
-
 ## Notes and references
 
 Computable randomness was introduced by Schnorr (1971), who also proved :ref{#lem-rational-martingale}. :ref{#thm-cr-limits} is folklore (Downey–Hirschfeldt, Theorem 7.1.3); the proof given here copies $d$ additively, which avoids dividing by values of $d$ that are only approximated. Church stochasticity goes back to Church (1940), who proposed computable selection rules to make von Mises's definition precise; the implication from computable randomness is discussed by Downey and Hirschfeldt in Section 7.4.1. Downey and Hirschfeldt present computable randomness in Section 7.1.1 (Definition 7.1.1, Proposition 7.1.2) and the absence of an effective enumeration of computable martingales in Proposition 7.1.12; Nies in Section 7.3 (Definition 7.3.1, Proposition 7.3.8, Proposition 7.3.9, Exercise 7.3.11).
@@ -153,5 +135,80 @@ Computable randomness was introduced by Schnorr (1971), who also proved :ref{#le
 - C.-P. Schnorr, *Zufälligkeit und Wahrscheinlichkeit*, Lecture Notes in Mathematics 218, Springer, 1971.
 - C.-P. Schnorr, *A unified approach to the definition of a random sequence*, Mathematical Systems Theory 5 (1971), 246–258.
 - A. Church, *On the concept of a random sequence*, Bulletin of the American Mathematical Society 46 (1940), 130–135.
+- J. L. Doob, *Stochastic Processes*, Wiley, New York, 1953.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 7.1 and 7.4.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 7.3.
+
+:::::exercises
+::::exercise{#ex-cr-supermartingale difficulty=1 objective="Check that computable supermartingales define the same notion of randomness as computable martingales."}
+Show that a sequence is computably random if and only if no computable supermartingale succeeds on it.
+
+:::solution
+A martingale is a supermartingale. Conversely, let $d$ be a computable supermartingale, and let $d'$ be the martingale of :ref{#lem-martingale-basic} (3), $d'(\sigma) = d(\sigma) + \sum_{\rho \prec \sigma} r(\rho)$ with $r(\rho) = d(\rho) - \frac12(d(\rho 0) + d(\rho 1))$. Each $r(\rho)$ is a computable real, uniformly in $\rho$, and the sum is finite, so $d'$ is a computable martingale; it is above $d$, so it succeeds wherever $d$ does.
+:::
+::::
+
+::::exercise{#ex-cr-shift difficulty=1 objective="Transfer a computable strategy along a shift of the sequence, in both directions."}
+Show that if $X$ is computably random, then so are $\sigma X$ for every string $\sigma$ and the tail $X(1) X(2) \cdots$.
+
+:::solution
+If a computable martingale $d$ succeeds on $\sigma X$, then $\rho \mapsto d(\sigma\rho)$ is a computable martingale that succeeds on $X$. If $d$ succeeds on the tail $Y$ of $X$, let $d'(\varepsilon) = d(\varepsilon)$ and $d'(i\rho) = d(\rho)$ for $i \in \{0, 1\}$: $d'$ does not bet on the first bit, then copies $d$. It is a computable martingale and $d'(X \uh (n+1)) = d(Y \uh n)$, so it succeeds on $X$.
+:::
+::::
+
+::::exercise{#ex-cr-predictable difficulty=1 objective="Bet on a computable set of positions where the bits are known, and deduce that no c.e. set is computably random."}
+1. Let $X$ be a sequence and $R = \{ r_0 < r_1 < \cdots \}$ an infinite computable set such that the function $i \mapsto X(r_i)$ is computable. Show that $X$ is not computably random.
+2. Identifying a set with its characteristic sequence, deduce that no c.e. set and no co-c.e. set is computably random.
+
+:::solution
+1. Let $d(\varepsilon) = 1$. At a string $\sigma$ with $|\sigma| = r_i$, bet the whole capital on $X(r_i)$: $d(\sigma b) = 2 d(\sigma)$ if $b = X(r_i)$, and $d(\sigma b) = 0$ otherwise. At a string whose length is not in $R$, do not bet. Since $R$ is decidable and $i \mapsto X(r_i)$ is computable, $d$ is a computable rational-valued martingale, and $d(X \uh n) = 2^{|R \cap [0, n)|}$ tends to infinity.
+2. Let $A$ be c.e. If $A$ is finite, it is computable, hence not computably random by :ref{#prop-cr-basic} (3). Otherwise, $A$ has an infinite computable subset $R$ (enumerate $A$ and keep each element larger than all the elements kept before), and $A(r) = 1$ for every $r \in R$; apply (1). If $A$ is co-c.e., apply the same argument to its complement, on which $A$ takes the value $0$.
+:::
+::::
+
+::::exercise{#ex-cr-xor difficulty=1 objective="Transport a computable strategy along a computable bijection of Cantor space that preserves prefixes."}
+Let $X$ be computably random and $C$ a computable sequence, and let $Y(n) = X(n) + C(n) \bmod 2$. Show that $Y$ is computably random.
+
+:::solution
+For a string $\sigma$, let $\sigma \oplus C$ be the string of the same length with $(\sigma \oplus C)(i) = \sigma(i) + C(i) \bmod 2$. The map $\sigma \mapsto \sigma \oplus C$ is computable, and $(\sigma i) \oplus C = (\sigma \oplus C)\, j$ with $j = i + C(|\sigma|) \bmod 2$, so it sends the two children of $\sigma$ to the two children of $\sigma \oplus C$. Let $d$ be a computable martingale that succeeds on $Y$, and $d'(\sigma) = d(\sigma \oplus C)$. Then $d'(\sigma 0) + d'(\sigma 1) = d((\sigma \oplus C) 0) + d((\sigma \oplus C) 1) = 2 d'(\sigma)$, $d'$ is computable, and $d'(X \uh n) = d(Y \uh n)$. So $d'$ succeeds on $X$, a contradiction.
+:::
+::::
+
+::::exercise{#ex-cr-join difficulty=1 objective="Show that the halves of a computably random join are computably random, by a strategy that bets on even positions only."}
+For sequences $A$ and $B$, let $A \oplus B$ be the sequence with $(A \oplus B)(2n) = A(n)$ and $(A \oplus B)(2n+1) = B(n)$.
+
+1. Show that if $A \oplus B$ is computably random, then so are $A$ and $B$.
+2. Show that $A \oplus A$ is not computably random, for any $A$.
+
+:::solution
+1. For a string $\sigma$, let $\sigma_{\mathrm{ev}} = \sigma(0) \sigma(2) \sigma(4) \cdots$, the string of its bits at even positions. Let $d$ be a computable martingale that succeeds on $A$, and $d'(\sigma) = d(\sigma_{\mathrm{ev}})$. If $|\sigma|$ is odd, $(\sigma i)_{\mathrm{ev}} = \sigma_{\mathrm{ev}}$, and $d'$ does not bet at $\sigma$; if $|\sigma|$ is even, $(\sigma i)_{\mathrm{ev}} = \sigma_{\mathrm{ev}}\, i$, and $d'(\sigma 0) + d'(\sigma 1) = 2 d(\sigma_{\mathrm{ev}})$. So $d'$ is a computable martingale, and $d'((A \oplus B) \uh 2n) = d(A \uh n)$ is unbounded. The case of $B$ uses the odd positions.
+2. Let $d(\varepsilon) = 1$; at a string $\sigma$ of odd length $2k + 1$, bet the whole capital on the bit $\sigma(2k)$: $d(\sigma b) = 2 d(\sigma)$ if $b = \sigma(2k)$ and $0$ otherwise; at strings of even length, do not bet. Along $A \oplus A$, the bit at position $2k + 1$ equals the bit at position $2k$, so $d((A \oplus A) \uh 2n) = 2^n$.
+
+Part (1) is the easy half of van Lambalgen's theorem for computable randomness (Downey–Hirschfeldt 2010, Theorem 7.1.13).
+:::
+::::
+
+::::exercise{#ex-cr-no-enumeration difficulty=2 objective="Show that the computable martingales cannot be listed effectively, by combining a listing into one strategy and following its non-ascending path."}
+Let $(d_e)$ be a sequence of martingales with rational values such that $(e, \sigma) \mapsto d_e(\sigma)$ is computable. Show that some computable martingale is different from every $d_e$.
+
+:::solution
+Let $c_e = d_e(\varepsilon) + 1$, a positive rational computed from $e$, and $D = \sum_e 2^{-e} d_e / c_e$. Its initial capital is at most $\sum_e 2^{-e} = 2$, so $D$ is a martingale by :ref{#lem-martingale-basic} (2). It is computable: by :ref{#lem-martingale-basic} (1), $d_e(\sigma)/c_e \leq 2^{|\sigma|} d_e(\varepsilon)/c_e < 2^{|\sigma|}$, so the terms with $e \geq N$ add up to less than $2^{|\sigma| + 1 - N}$ at $\sigma$, and the finite sum of the terms with $e < N$ is a rational computed from $\sigma$ and $N$. By :ref{#prop-cr-basic} (2), there is a computable sequence $X$ on which $D$ does not succeed. Since $d_e \leq 2^e c_e D$, no $d_e$ succeeds on $X$. The martingale $E_X$ of :ref{#prop-cr-basic} (3) is computable and succeeds on $X$, so it is different from every $d_e$.
+
+Adapted from Downey–Hirschfeldt 2010, Proposition 7.1.12, and Nies 2009, Exercise 7.3.11.
+:::
+::::
+
+::::exercise[Convergence of martingales]{#ex-doob-convergence difficulty=2 objective="Adapt the switching argument to arbitrary martingales and prove that a martingale converges along almost every sequence."}
+Let $d$ be a martingale. Show that the class of the sequences $X$ such that $d(X \uh n)$ has no limit in $[0, \infty]$ is null. Deduce that $d(X \uh n)$ converges to a finite limit for almost every $X$.
+
+:::solution
+If $d(X \uh n)$ has no limit in $[0, \infty]$, then $\liminf_n d(X \uh n) < \limsup_n d(X \uh n)$, and there are rationals $r < s$ with $\liminf_n d(X \uh n) < r < s < \limsup_n d(X \uh n)$; then $r > 0$. Fix such rationals and define a martingale $\hat d$ with $\hat d(\varepsilon) = 1$ as in the proof of :ref{#thm-cr-limits}, with exact values. Scan the prefixes $\rho$ of a string in order of length: the mode is initially **waiting**; at a prefix $\rho$ in waiting mode with $d(\rho) < r$, the mode becomes **copying**, with the scaling factor $c = \hat d(\rho)/r$; at a prefix $\rho$ in copying mode with $d(\rho) > s$, the mode becomes waiting. At a string in waiting mode, $\hat d$ does not bet; at a string $\sigma'$ in copying mode, $\hat d(\sigma' i) = \hat d(\sigma') + c\,(d(\sigma' i) - d(\sigma'))$. The martingale equality holds in both modes.
+
+During a copying period started at $\sigma_0$, $\hat d(\sigma') = \hat d(\sigma_0) + c\,(d(\sigma') - d(\sigma_0)) = c\,(r - d(\sigma_0)) + c\, d(\sigma') \geq c\, d(\sigma') \geq 0$, since $\hat d(\sigma_0) = c\, r$ and $d(\sigma_0) < r$. So $\hat d$ is non-negative, and a copying period that ends at $\sigma$ gives $\hat d(\sigma) \geq c\, d(\sigma) > c\, s = (s/r)\, \hat d(\sigma_0)$. Waiting periods leave the capital unchanged. Along $X$, $d$ falls below $r$ and rises above $s$ infinitely often, so infinitely many copying periods are completed, and the capital at the end of the $k$-th one is at least $(s/r)^k$. So $\hat d$ succeeds on $X$.
+
+The class in question is therefore contained in the union, over the countably many pairs of rationals $r < s$, of the success sets of the corresponding martingales $\hat d$, each null by :ref{#prop-success-null}. Finally, the sequences along which $d(X \uh n)$ tends to $\infty$ are in $S[d]$, which is null. So the capital has a finite limit along almost every sequence.
+
+This is Doob's martingale convergence theorem in the setting of this course; the switching argument is his upcrossing argument. The proof of :ref{#thm-cr-limits} is its effective version.
+:::
+::::
+:::::

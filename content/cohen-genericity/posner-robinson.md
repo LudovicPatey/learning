@@ -104,17 +104,7 @@ By :ref{#cor-jump-inversion} with $Z = \emptyset''$, there is a 1-generic $G$ wi
 
 This gives a second construction of high incomplete sets, after :ref{#cor-high-incomplete}; the set obtained here is moreover 1-generic and computable in $\emptyset''$.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that every set $Z \geq_T \emptyset'$ is the join of $\emptyset'$ with a set $G$ such that $G \not\geq_T \emptyset'$.
-
-:::solution
-Take $G$ as in :ref{#cor-jump-inversion}: $Z \equiv_T G \oplus \emptyset'$, and $G$ is 1-generic, so it computes no DNC function, hence not $\emptyset'$.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-low-generic-join difficulty=1 objective="Specialize the Jockusch–Shore theorem to a $\Delta^0_2$ set to obtain a low 1-generic set that joins it to $\emptyset'$."}
 Let $A \leq_T \emptyset'$ be non-computable. Show that there is a low 1-generic set $G$ with $A \oplus G \equiv_T \emptyset'$.
 
 :::solution
@@ -122,7 +112,7 @@ Apply :ref{#thm-jockusch-shore} with $Z = \emptyset'$. Then $G$ is 1-generic, $\
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-2-generic-join difficulty=2 objective="See with relativized cone avoidance that the set of the Posner–Robinson theorem cannot be taken 2-generic."}
 Let $A$ be a set with $A \leq_T \emptyset'$ and $\emptyset' \not\leq_T A$, for instance a low set. Show that no 2-generic set $G$ satisfies $A \oplus G \geq_T G'$. So the set $G$ of :ref{#cor-posner-robinson} cannot in general be chosen 2-generic.
 
 :::solution
@@ -132,9 +122,9 @@ Let $G$ be 2-generic, that is, 1-generic relative to $\emptyset'$. Since $A \leq
 
 ## Notes and references
 
-Posner and Robinson (1981) proved the join theorem: for every non-computable $A$ and every $Z \geq_T A \oplus \emptyset'$, there is $G$ with $G' \equiv_T G \oplus A \equiv_T Z$ (Downey and Hirschfeldt 2010, Theorem 2.16.2). The title of their paper refers to joins equal to $\obf'$; the case $A \leq_T \emptyset'$ is the second exercise. Their construction is a Cohen forcing construction, and the set it gives can be taken 1-generic (Day and Dzhafarov 2012, introduction; Downey and Hirschfeldt 2010, Theorem 2.24.4). The proof given here, through a non-c.e. set, is the one of Jockusch and Shore (1984), as presented by Monin and Patey, who state the theorem in the form of :ref{#thm-jockusch-shore}; Downey and Hirschfeldt give it with an immune set. Friedberg's jump inversion theorem dates from 1957 (Soare 2016, Theorem 6.4.1).
+Posner and Robinson (1981) proved the join theorem: for every non-computable $A$ and every $Z \geq_T A \oplus \emptyset'$, there is $G$ with $G' \equiv_T G \oplus A \equiv_T Z$ (Downey and Hirschfeldt 2010, Theorem 2.16.2). The title of their paper refers to joins equal to $\obf'$; the case $A \leq_T \emptyset'$ is :ref{#ex-low-generic-join}. Their construction is a Cohen forcing construction, and the set it gives can be taken 1-generic (Day and Dzhafarov 2012, introduction; Downey and Hirschfeldt 2010, Theorem 2.24.4). The proof given here, through a non-c.e. set, is the one of Jockusch and Shore (1984), as presented by Monin and Patey, who state the theorem in the form of :ref{#thm-jockusch-shore}; Downey and Hirschfeldt give it with an immune set. Friedberg's jump inversion theorem dates from 1957 (Soare 2016, Theorem 6.4.1).
 
-Shore and Slaman (1999) extended the join theorem to higher jumps: if $A \not\leq_T \emptyset^{(n-1)}$, there is $G$ with $A \oplus G \geq_T G^{(n)}$; they used it to show that the jump is definable in the partial order of the Turing degrees. Their proof uses a different notion of forcing, due to Kumabe and Slaman. Day and Dzhafarov showed that Cohen forcing cannot replace it: for $n \geq 2$, the set $G$ cannot in general be chosen $n$-generic, nor $2$-random. At the level $n = 1$, the last exercise shows that it cannot in general be chosen 2-generic; Day and Dzhafarov show that weak 2-genericity already prevents it.
+Shore and Slaman (1999) extended the join theorem to higher jumps: if $A \not\leq_T \emptyset^{(n-1)}$, there is $G$ with $A \oplus G \geq_T G^{(n)}$; they used it to show that the jump is definable in the partial order of the Turing degrees. Their proof uses a different notion of forcing, due to Kumabe and Slaman. Day and Dzhafarov showed that Cohen forcing cannot replace it: for $n \geq 2$, the set $G$ cannot in general be chosen $n$-generic, nor $2$-random. At the level $n = 1$, :ref{#ex-2-generic-join} shows that it cannot in general be chosen 2-generic; Day and Dzhafarov show that weak 2-genericity already prevents it.
 
 - D. B. Posner and R. W. Robinson, *Degrees joining to 0′*, Journal of Symbolic Logic 46 (1981), 714–722.
 - C. G. Jockusch and R. A. Shore, *Pseudo-jump operators II: transfinite iterations, hierarchies and minimal covers*, Journal of Symbolic Logic 49 (1984), 1205–1236.
@@ -144,3 +134,62 @@ Shore and Slaman (1999) extended the join theorem to higher jumps: if $A \not\le
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.16 and §2.24.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §6.4.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cohen forcing*, section *Effective genericity*.
+
+:::::exercises
+::::exercise{#ex-jump-join difficulty=1 objective="Apply the jump inversion theorem and the Demuth–Kučera theorem to split a degree above $\obf'$ into $\obf'$ and a strictly weaker degree."}
+Show that every set $Z \geq_T \emptyset'$ is the join of $\emptyset'$ with a set $G$ such that $G \not\geq_T \emptyset'$.
+
+:::solution
+Take $G$ as in :ref{#cor-jump-inversion}: $Z \equiv_T G \oplus \emptyset'$, and $G$ is 1-generic, so it computes no DNC function, hence not $\emptyset'$.
+:::
+::::
+
+::::exercise{#ex-jockusch-shore-ce difficulty=1 objective="See on an explicit c.e. set of strings why the Jockusch–Shore construction needs a set that is not c.e."}
+Let $A$ be a non-computable c.e. set, and suppose that the enumeration of the c.e. sets of strings lists first the set $W_0 = \{ i\, 0^m\, 1 : i \in \{0, 1\},\ m \in A \}$. Show that if the construction of :ref{#thm-jockusch-shore} were run with $A$ itself, step $0$ could not choose $m$. Explain how the proof avoids the problem.
+
+:::solution
+At step $0$, $\sigma_0 = \varepsilon$ and $i = Z(0)$. An element $i'\, 0^{m'}\, 1$ of $W_0$ extends $i\, 0^m\, 1$ only if $i' = i$ and $m' = m$: if $m' > m$, it has a $0$ at position $m + 1$, where $i\, 0^m\, 1$ has a $1$; if $m' < m$, it is shorter than $i\, 0^m\, 1$. Hence $D_0 = \{ m : m \in A \} = A$, and there is no $m$ in $D_0 \setminus A$ or in $A \setminus D_0$.
+
+The proof first replaces a c.e. set $A$ by its complement, which is Turing equivalent to $A$ and not c.e. With $\nat \setminus A$ in place of $A$, every $m$ lies in exactly one of $D_0 = A$ and $\nat \setminus A$, so the least disagreement is $m = 0$: if $0 \in A$, step $0$ is in the first case and $G$ extends $i\, 1 \in W_0$; otherwise it is in the second case, and $i\, 1$ avoids $W_0$.
+:::
+::::
+
+::::exercise{#ex-posner-robinson-incomparable difficulty=1 objective="Check which reductions between $A$, $G$ and $\emptyset'$ fail in the Posner–Robinson theorem, and why the decoding needs the oracle $A$."}
+Let $A$ be non-computable and let $G$ be a 1-generic set with $A \oplus G \equiv_T G' \equiv_T G \oplus \emptyset'$, as in :ref{#cor-posner-robinson}. Show that $A \not\leq_T G$, that $G \not\leq_T A$ if $\emptyset' \not\leq_T A$, and that $\emptyset' \not\leq_T G$. Deduce that in :ref{#thm-jockusch-shore} with $Z = \emptyset'$, the set $Z$ is not computable in $G$ alone.
+
+:::solution
+If $A \leq_T G$, then $G' \equiv_T A \oplus G \equiv_T G$, which contradicts $G <_T G'$. If $G \leq_T A$, then $A \equiv_T A \oplus G \equiv_T G' \geq_T \emptyset'$. Finally $\emptyset' \not\leq_T G$ because $G$ is 1-generic (:ref{#cor-generic-not-pa}). For the last statement, the set $G$ of :ref{#thm-jockusch-shore} is 1-generic, so it does not compute $Z = \emptyset'$, although $A \oplus G$ does.
+:::
+::::
+
+::::exercise{#ex-jump-inversion-incomparable difficulty=2 objective="Apply the Posner–Robinson theorem with a 1-generic set as $A$ to invert the jump at two incomparable degrees."}
+Let $Z \geq_T \emptyset'$. Show that there are two 1-generic sets $G_0$ and $G_1$, Turing incomparable, with $G_0' \equiv_T G_0 \oplus \emptyset' \equiv_T Z \equiv_T G_1 \oplus \emptyset' \equiv_T G_1'$.
+
+:::solution
+By :ref{#cor-jump-inversion}, there is a 1-generic set $G_0$ with $G_0' \equiv_T G_0 \oplus \emptyset' \equiv_T Z$. The set $G_0$ is not computable, and $Z \geq_T G_0 \oplus \emptyset'$. By :ref{#cor-posner-robinson} applied to $A = G_0$ and $Z$, there is a 1-generic set $G_1$ with $G_0 \oplus G_1 \equiv_T G_1' \equiv_T G_1 \oplus \emptyset' \equiv_T Z$.
+
+If $G_0 \leq_T G_1$, then $G_1 \equiv_T G_0 \oplus G_1 \equiv_T Z \geq_T \emptyset'$. If $G_1 \leq_T G_0$, then $G_0 \equiv_T G_0 \oplus G_1 \geq_T \emptyset'$. Both contradict :ref{#cor-generic-not-pa}, since $G_0$ and $G_1$ are 1-generic. So $G_0$ and $G_1$ are incomparable.
+
+Soare (2016, Exercise 6.4.7) states this result for degrees and suggests a direct construction combining those of the Kleene–Post and Friedberg theorems.
+:::
+::::
+
+::::exercise{#ex-posner-robinson-relative difficulty=2 objective="Relativize the Jockusch–Shore construction to an oracle $X$ and derive the relativized Posner–Robinson theorem."}
+Let $X$ and $A$ be sets with $A \not\leq_T X$. Show that there is a set $G$, 1-generic relative to $X$, such that
+$$
+A \oplus G \oplus X \equiv_T (G \oplus X)' \equiv_T G \oplus X' \equiv_T A \oplus X'.
+$$
+
+:::solution
+Relativize the construction of :ref{#thm-jockusch-shore} to $X$, with $Z = A \oplus X'$. If $A$ is c.e. relative to $X$, its complement is not, since $A$ is not $X$-computable; and it is Turing equivalent to $A$. So we may assume that $A$ is not $X$-c.e. Let $(W_e)$ enumerate the $X$-c.e. sets of strings. At step $e$, the set $D_e = \{ m : \text{some extension of } \sigma_e\, i\, 0^m\, 1 \text{ belongs to } W_e \}$ is $X$-c.e., hence different from $A$, and the two cases are as before. Then:
+
+- $G$ meets or avoids every $W_e$, so it is 1-generic relative to $X$.
+- The construction asks whether $m \in D_e$, answered by $X'$, whether $m \in A$, and reads $Z(e)$; the searches in $W_e$ use $X$. So $G \leq_T A \oplus Z \oplus X' \equiv_T A \oplus X'$.
+- The decoding of the proof, with $X$ to enumerate the sets $W_e$, gives $Z \leq_T A \oplus G \oplus X$ and $Z \leq_T G \oplus X'$.
+
+The lowness of 1-generic sets relativizes: $(G \oplus X)' \leq_T G \oplus X'$. Indeed, for each $e$, the set $\{ \sigma : \Phi^{\sigma \oplus X}_e(e)\converge \}$ is $X$-c.e., so $G$ has a prefix in it or a prefix avoiding it; $X'$ decides which, for each prefix, and the first case holds exactly when $\Phi^{G \oplus X}_e(e)\converge$. The converse $G \oplus X' \leq_T (G \oplus X)'$ holds for all sets.
+
+Now $A \oplus X' = Z \leq_T A \oplus G \oplus X$; $A \oplus G \oplus X \leq_T G \oplus X'$, since $A \leq_T Z \leq_T G \oplus X'$; $G \oplus X' \equiv_T (G \oplus X)'$; and $G \oplus X' \leq_T A \oplus X'$, since $G \leq_T A \oplus X'$. The four sets are therefore Turing equivalent. For $X = \emptyset$ this is the second statement of :ref{#cor-posner-robinson}.
+:::
+::::
+:::::

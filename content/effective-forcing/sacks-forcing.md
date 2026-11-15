@@ -23,6 +23,14 @@ For each $e$, each of the following sets of conditions is dense, by the lemma in
 
 The theorems of Spector and of Miller and Martin add that the generic set can be taken computable in $\emptyset''$: the three families of dense sets are uniformly $\emptyset''$-effectively dense, as their proofs show, and the root of each condition is a prefix of the generic set. Cohen generic sets behave in the opposite way: a 1-generic set is never of minimal degree, since its columns are Turing independent (:ref{#thm-generic-independent}).
 
+::::exercise{#ex-sacks-traceable difficulty=2 objective="Extract computable traces from the domination argument for computable Sacks forcing."}
+Let $G$ be sufficiently generic for computable Sacks forcing. Show that $G$ is **computably traceable** with bound $2^n$: for every total $G$-computable function $f$ there is a computable sequence $(T_n)$ of finite sets, given by canonical indices, with $|T_n| \leq 2^n$ and $f(n) \in T_n$ for every $n$.
+
+:::solution
+Let $f = \Phi^G_e$. By :ref{#lem-ftree-domination}, the set of conditions $S$ such that either $\Phi^X_e$ is partial for every path $X$, or $\Phi^{S(\rho)}_e(|\rho|)\converge$ for every $\rho$, is dense: in Case 2 of the proof, the subtree built has this property. Let $G$ be generic for these sets. Since $\Phi^G_e$ is total, $G$ is a path of a condition $S$ of the second kind. Let $T_n = \{ \Phi^{S(\rho)}_e(n) : |\rho| = n \}$, computable from $n$ since $S$ is computable, with at most $2^n$ elements. Some $\rho$ of length $n$ has $S(\rho) \prec G$, so $f(n) = \Phi^{S(\rho)}_e(n) \in T_n$. Adapted from Monin and Patey, chapter *Effective forcing*, exercise on computable traceability in the section *Forcing with trees*.
+:::
+::::
+
 ## Sacks generic sets are not generalized low
 
 A 1-generic set is generalized low, $G' \leq_T G \oplus \emptyset'$ (:ref{#cor-cohen-jumps}). For Sacks generic sets the jump cannot be computed from $G$ and any fixed oracle. The idea is to choose a $\Pi^0_1$ class $[R]$ inside the current condition, so that the jump of $G$ knows whether $G \in [R]$, and to keep, above every node of $R$, a node of the condition outside $[R]$. Whatever a reduction predicts about this bit of the jump, the condition can be extended to make the prediction wrong.
@@ -76,24 +84,6 @@ Why does the proof not need to know which case holds?
   Deciding it needs to know whether some node makes a computation relative to $X$ converge, which is $\Sigma^0_1(X)$, not $X$-computable.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the conclusion of :ref{#thm-sacks-not-gl1} fails for Jockusch–Soare forcing, and that :ref{#prop-sacks-generic} fails for it as well.
-
-:::solution
-Let $Y$ be computable. Every filter containing the condition $\{ Y \}$ determines $Y$, and a filter generic for any countable family of dense sets can contain $\{ Y \}$, by :ref{#lem-rasiowa-sikorski}. Then $G = Y$ satisfies $G' \equiv_T \emptyset' \leq_T G \oplus \emptyset'$, and $G$ is computable, so it is not of minimal degree.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $G$ be sufficiently generic for computable Sacks forcing. Show that $G$ is **computably traceable** with bound $2^n$: for every total $G$-computable function $f$ there is a computable sequence $(T_n)$ of finite sets, given by canonical indices, with $|T_n| \leq 2^n$ and $f(n) \in T_n$ for every $n$.
-
-:::solution
-Let $f = \Phi^G_e$. By :ref{#lem-ftree-domination}, the set of conditions $S$ such that either $\Phi^X_e$ is partial for every path $X$, or $\Phi^{S(\rho)}_e(|\rho|)\converge$ for every $\rho$, is dense: in Case 2 of the proof, the subtree built has this property. Let $G$ be generic for these sets. Since $\Phi^G_e$ is total, $G$ is a path of a condition $S$ of the second kind. Let $T_n = \{ \Phi^{S(\rho)}_e(n) : |\rho| = n \}$, computable from $n$ since $S$ is computable, with at most $2^n$ elements. Some $\rho$ of length $n$ has $S(\rho) \prec G$, so $f(n) = \Phi^{S(\rho)}_e(n) \in T_n$.
-:::
-::::
-
 ## Notes and references
 
 Spector (1956) built a minimal degree by function trees; Miller and Martin (1968) adapted the method to build a non-computable computably dominated set. The reformulation of both constructions in terms of Sacks forcing, and the theorem that Sacks generic sets are not generalized low, are from the chapter *Effective forcing* of Monin and Patey (section *Forcing with trees*, and the theorem on the continuity of the Turing jump); the proof here follows theirs, with the subtree $R$ made explicit. Monin and Patey also show, in an exercise, that Sacks generic sets are computably traceable; computable traceability is due to Terwijn and Zambella (2001). Soare (Chapter 12) presents Spector's construction.
@@ -103,3 +93,67 @@ Spector (1956) built a minimal degree by function trees; Miller and Martin (1968
 - S. A. Terwijn and D. Zambella, *Computational randomness and lowness*, Journal of Symbolic Logic 66 (2001), 1199–1205.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Chapter 12.
 - B. Monin and L. Patey, *Computability theory*, chapter *Effective forcing*, section *Forcing with trees* and subsection *Forcing Σ⁰₁/Π⁰₁ requirements*.
+
+:::::exercises
+::::exercise{#ex-js-fails-sacks-properties difficulty=1 objective="See that the properties of Sacks generic sets fail for Jockusch–Soare forcing."}
+Show that the conclusion of :ref{#thm-sacks-not-gl1} fails for Jockusch–Soare forcing, and that :ref{#prop-sacks-generic} fails for it as well.
+
+:::solution
+Let $Y$ be computable. Every filter containing the condition $\{ Y \}$ determines $Y$, and a filter generic for any countable family of dense sets can contain $\{ Y \}$, by :ref{#lem-rasiowa-sikorski}. Then $G = Y$ satisfies $G' \equiv_T \emptyset' \leq_T G \oplus \emptyset'$, and $G$ is computable, so it is not of minimal degree.
+:::
+::::
+
+::::exercise{#ex-sacks-cone-avoidance difficulty=1 objective="Prove cone avoidance for computable Sacks forcing by a splitting dichotomy."}
+Let $A$ be a non-computable set. Show directly that every sufficiently generic set $G$ for computable Sacks forcing satisfies $A \not\leq_T G$.
+
+:::solution
+Fix $e$ and a condition $T$. We find $S \leq T$ such that $\Phi^X_e \neq A$ for every path $X$ of $S$.
+
+*Case 1: there are $n$ and nodes $\tau_0, \tau_1$ of $T$ with $\Phi^{\tau_0}_e(n)\converge \neq \Phi^{\tau_1}_e(n)\converge$.* One of the two values, say that of $\tau_i$, differs from $A(n)$. Let $S$ be the full subtree above $\tau_i$. Every path $X$ of $S$ extends $\tau_i$, so $\Phi^X_e(n) = \Phi^{\tau_i}_e(n) \neq A(n)$.
+
+*Case 2: otherwise.* For each $n$, all the nodes of $T$ on which $\Phi_e(n)$ converges give the same value. Let $\psi(n)$ be the value given by the first node found on which $\Phi_e(n)$ converges, a partial computable function. Let $S = T$, and let $X$ be a path with $\Phi^X_e$ total. For each $n$, the computation $\Phi^X_e(n)$ converges with some use $u$, and a node of $T$ that is a prefix of $X$ of length at least $u$ gives the same value, so $\Phi^X_e(n) = \psi(n)$. Hence $\Phi^X_e = \psi$ is computable, and differs from $A$.
+
+In both cases, the set of conditions all of whose paths $X$ satisfy $\Phi^X_e \neq A$ is dense. A set generic for these sets, for every $e$, does not compute $A$. Adapted from Monin and Patey, chapter *Effective forcing*, section *Forcing with trees*. The statement is also the case $n = 0$ of the general preservation result of the lesson on the forcing question.
+:::
+::::
+
+::::exercise{#ex-sacks-not-low difficulty=1 objective="Draw consequences of the failure of generalized lowness for Sacks generic sets."}
+Show that every sufficiently generic set $G$ for computable Sacks forcing is not low, and that a single sufficiently generic set satisfies $G' \not\leq_T G \oplus \emptyset^{(n)}$ for every $n$. Compare with a 1-generic set computable in $\emptyset'$.
+
+:::solution
+If $G$ were low, then $G' \leq_T \emptyset' \leq_T G \oplus \emptyset'$, contradicting :ref{#thm-sacks-not-gl1} with $X = \emptyset'$. For each $n$, the theorem with $X = \emptyset^{(n)}$ gives a countable family $\mathcal D_n$ of dense sets; a set generic for the countable family $\bigcup_n \mathcal D_n$ satisfies $G' \not\leq_T G \oplus \emptyset^{(n)}$ for every $n$. By contrast, a 1-generic set $G \leq_T \emptyset'$, which exists by :ref{#thm-low-generic-exists}, satisfies $G' \leq_T G \oplus \emptyset' \equiv_T \emptyset'$ (:ref{#cor-cohen-jumps}), so it is low.
+:::
+::::
+
+::::exercise{#ex-sacks-not-1-generic difficulty=2 objective="Separate Sacks generic sets from Cohen generic sets with the escape nodes of the non-GL₁ proof."}
+1. Let $S$ be a computable f-tree. Show that for every string $\sigma$, $[\sigma] \cap [S] = \emptyset$ if and only if $\sigma$ is not a prefix of any node $S(\rho)$ with $|\rho| = |\sigma|$. Deduce that the set $W_S$ of strings $\sigma$ with $[\sigma] \cap [S] = \emptyset$ is computable.
+2. Show that every sufficiently generic set $G$ for computable Sacks forcing is not 1-generic, that is, there is a c.e. set of strings $W$ such that no prefix of $G$ belongs to $W$ and every prefix of $G$ has an extension in $W$.
+
+:::solution
+1. Recall that $|S(\rho)| \geq |\rho|$, since the nodes strictly increase along a string. If $X \in [S] \cap [\sigma]$, some node $S(\rho)$ with $|\rho| = |\sigma|$ is a prefix of $X$, as shown after :ref{#def-function-tree}; both $\sigma$ and $S(\rho)$ are prefixes of $X$ and $|S(\rho)| \geq |\sigma|$, so $\sigma \preceq S(\rho)$. Conversely, if $\sigma \preceq S(\rho)$, the set $\bigcup_j S(\rho 0^j)$ is a path of $S$ extending $\sigma$. The condition of the statement involves the $2^{|\sigma|}$ computable nodes $S(\rho)$, so $W_S$ is computable.
+2. Let $T$ be a condition, and $R$ the subtree $R(\rho) = T(\hat\rho)$ of the proof of :ref{#thm-sacks-not-gl1}. Every string $\sigma$ has an extension in $W_R$. If $\sigma \in W_R$, this is $\sigma$. Otherwise, by item 1, $\sigma \preceq R(\rho)$ for some $\rho$ with $|\rho| = |\sigma|$, and the escape node $\tau_\rho = T(\hat\rho\, 0 1)$ extends $R(\rho)$; no path of $R$ extends $\tau_\rho$, as shown in that proof, so $\tau_\rho \in W_R$. Hence the set of conditions $S$ such that every string has an extension in $W_S$ is dense, since it contains $R \leq T$.
+
+   Let $G$ be generic for this dense set, and $S$ a condition of the generic filter in it. Then $G \in [S]$, so no prefix of $G$ belongs to $W_S$; and every prefix of $G$ has an extension in $W_S$. The set $W_S$ is computable, hence c.e., so $G$ is not 1-generic.
+:::
+::::
+
+::::exercise{#ex-sacks-traceable-bound difficulty=3 objective="Refine the trace construction for Sacks generic sets to an arbitrary slow-growing bound."}
+Let $h$ be a computable nondecreasing unbounded function with $h(0) \geq 1$. Show that every sufficiently generic set $G$ for computable Sacks forcing is computably traceable with bound $h$: for every total $G$-computable function $f$ there is a computable sequence $(T_n)$ of finite sets, given by canonical indices, with $|T_n| \leq h(n)$ and $f(n) \in T_n$ for every $n$.
+
+:::solution
+Let $\ell(n)$ be the largest $k$ with $2^k \leq h(n)$; it exists since $h(n) \geq 1$, and $\ell$ is computable, nondecreasing and unbounded. For each $k$, the set $N_k = \{ n : \ell(n) = k \}$ is finite, and computable uniformly in $k$: compute $\ell(0), \ell(1), \dots$ until a value larger than $k$ appears.
+
+Fix $e$ and a condition $T$.
+
+*Case 1: some node $\sigma$ of $T$ and some $x$ have no node $\tau \succeq \sigma$ of $T$ with $\Phi^\tau_e(x)\converge$.* As in Case 1 of :ref{#lem-ftree-domination}, the full subtree above $\sigma$ is an extension on all paths of which $\Phi_e(x)$ diverges.
+
+*Case 2: otherwise.* Then for every node $\sigma$ of $T$ and every finite set $N$, some node $\tau \succeq \sigma$ of $T$ satisfies $\Phi^\tau_e(n)\converge$ for every $n \in N$: find a node converging at the first element of $N$, then a node above it converging at the second, and so on; a computation that converges on a string still converges on its extensions. Define $S(\rho) = T(\mu_\rho)$, where $\mu_\varepsilon$ is the first string found with $\Phi^{T(\mu)}_e(n)\converge$ for all $n \in N_0$, and $\mu_{\rho i}$ is the first $\mu \succeq \mu_\rho\, i$ found with $\Phi^{T(\mu)}_e(n)\converge$ for all $n \in N_{|\rho| + 1}$. The searches terminate, since the nodes of $T$ above $T(\mu_\rho\, i)$ are the strings $T(\mu)$ with $\mu \succeq \mu_\rho\, i$. As in :ref{#lem-ftree-domination}, $S$ is a computable subtree of $T$, and $\Phi^{S(\rho)}_e(n)\converge$ whenever $\ell(n) = |\rho|$. Let
+$$
+T_n = \{ \Phi^{S(\rho)}_e(n) : |\rho| = \ell(n) \},
+$$
+computable from $n$, with $|T_n| \leq 2^{\ell(n)} \leq h(n)$. For a path $X$ of $S$ and $n \in \nat$, some $\rho$ of length $\ell(n)$ has $S(\rho) \prec X$, so $\Phi^X_e(n) = \Phi^{S(\rho)}_e(n) \in T_n$.
+
+So for each $e$, the set of conditions $S$ such that either $\Phi^X_e$ is partial for every path $X$, or some computable sequence $(T_n)$ with $|T_n| \leq h(n)$ satisfies $\Phi^X_e(n) \in T_n$ for every path $X$ and every $n$, is dense. If $G$ is generic for these sets and $f = \Phi^G_e$ is total, $G$ is a path of a condition of the second kind, and $f$ is traced. Monin and Patey derive this from :ref{#ex-sacks-traceable} and a theorem of Terwijn and Zambella on changing the bound; the direct construction here avoids it.
+:::
+::::
+:::::

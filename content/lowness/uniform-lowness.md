@@ -1,7 +1,7 @@
 ---
 title: Uniform lowness
 summary: Lowness indices name low sets so that ∅′ computes their jumps uniformly, and the low basis theorem holds with lowness indices; a low code of a Scott ideal lets ∅′ answer Σ⁰₁ questions about all members of the ideal, and about their joins, uniformly in their indices.
-duration: 35
+duration: 30
 prerequisites: [coded-ideals, arithmetic-hierarchy/codes, pi01-classes/basis-theorems]
 ---
 
@@ -79,19 +79,11 @@ The two kinds of names differ in what they say about several sets at once. A low
 
 ## Exercises
 
-::::exercise{difficulty=1 #exr-lowness-index-reduction}
+::::exercise{#exr-lowness-index-reduction difficulty=1 objective="Transfer lowness indices along Turing reductions, uniformly."}
 Show that there is a computable function $v$ such that if $\ell$ is a lowness index of $Z$ and $\Phi^Z_e$ is the characteristic function of a set $Y$, then $v(\ell, e)$ is a lowness index of $Y$.
 
 :::solution
 The set $Y'$ is $Y$-c.e., hence $Z$-c.e., uniformly in $e$: $x \in Y'$ if and only if $\Phi^{\Phi^Z_e}_x(x)$ converges, where the inner oracle is simulated by $\Phi^Z_e$. By item 2 of :ref{#thm-jump}, there is a computable injective $f$, depending computably on $e$ and not on $Z$, with $x \in Y' \iff f(e, x) \in Z'$. The procedure $x \mapsto \Phi^{\emptyset'}_\ell(f(e, x))$ computes $Y'$; its index $v(\ell, e)$ is given by SMN.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $M = \bigoplus_n Z_n$ be a low member of $\mathcal S_\emptyset$. Show that $\emptyset'$ computes a function $g$ such that, for every $a$ and every $t$ such that $\Phi^{Z_a}_t$ is the characteristic function of a binary tree $T$, $g(a, t) = 0$ if $T$ is finite, and otherwise $g(a, t) = 1 + m$ where $m$ is an $M$-index of a path of $T$.
-
-:::solution
-The tree $T$ is finite if and only if it has no node of some length (:ref{#prop-pi01-emptiness}, relativized), a $\Sigma^0_1(Z_a)$ property uniformly in $a$ and $t$. By :ref{#prop-low-code-questions}, $\emptyset'$ decides it. If $T$ is infinite, let $g(a, t) = 1 + p(a, t)$, with $p$ as in :ref{#lem-scott-paths}.
 :::
 ::::
 
@@ -104,3 +96,59 @@ The low basis theorem is due to Jockusch and Soare (1972), who observed that it 
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 8.5.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, second edition, Cambridge University Press, 2009, Section VIII.2.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Lowness*, sections *Indices* and *Ramsey's theorem for pairs*.
+
+:::::exercises
+::::exercise{#ex-low-code-path-names difficulty=2 objective="Combine the questions answered by a low code with the path function of the Scott class, to name paths of trees in the ideal."}
+Let $M = \bigoplus_n Z_n$ be a low member of $\mathcal S_\emptyset$. Show that $\emptyset'$ computes a function $g$ such that, for every $a$ and every $t$ such that $\Phi^{Z_a}_t$ is the characteristic function of a binary tree $T$, $g(a, t) = 0$ if $T$ is finite, and otherwise $g(a, t) = 1 + m$ where $m$ is an $M$-index of a path of $T$.
+
+:::solution
+The tree $T$ is finite if and only if it has no node of some length (:ref{#prop-pi01-emptiness}, relativized), a $\Sigma^0_1(Z_a)$ property uniformly in $a$ and $t$. By :ref{#prop-low-code-questions}, $\emptyset'$ decides it. If $T$ is infinite, let $g(a, t) = 1 + p(a, t)$, with $p$ as in :ref{#lem-scott-paths}.
+:::
+::::
+
+::::exercise{#ex-uniform-low-basis-iterate difficulty=1 objective="Iterate the uniform low basis theorem to choose two paths whose join with the oracle is low, with a lowness index."}
+Let $\ell$ be a lowness index of a low set $Z$, and $t_1$, $t_2$ such that $\Phi^Z_{t_1}$ and $\Phi^Z_{t_2}$ are the characteristic functions of infinite binary trees $T_1$ and $T_2$. Show that a lowness index of $Z \oplus X_1 \oplus X_2$, for some paths $X_1$ of $T_1$ and $X_2$ of $T_2$, is computable from $\ell$, $t_1$ and $t_2$. What do $u(\ell, t_1)$ and $u(\ell, t_2)$ say about $X_1 \oplus X_2$?
+
+:::solution
+By :ref{#prop-uniform-low-basis}, $\ell_1 = u(\ell, t_1)$ is a lowness index of $Z \oplus X_1$ for some path $X_1$ of $T_1$. Let $t_2'$ be an index, computable from $t_2$, of the functional that, with oracle $Y \oplus W$, runs $\Phi^Y_{t_2}$; then $\Phi^{Z \oplus X_1}_{t_2'} = \Phi^Z_{t_2}$ is the characteristic function of $T_2$. So $u(\ell_1, t_2')$ is a lowness index of $(Z \oplus X_1) \oplus X_2$ for some path $X_2$ of $T_2$, and a lowness index of $Z \oplus X_1 \oplus X_2$, in any bracketing, follows by :ref{#exr-lowness-index-reduction}. Separately, $u(\ell, t_1)$ and $u(\ell, t_2)$ are lowness indices of $Z \oplus X_1$ and $Z \oplus X_2$ for paths chosen independently of each other; they give no information on $X_1 \oplus X_2$. This is why constructions with lowness indices choose each new set relative to the join of the sets already built.
+:::
+::::
+
+::::exercise{#ex-low-code-equality difficulty=1 objective="Use the lowness of a code to compare its columns with $\emptyset'$, and remove repetitions from the code."}
+Let $M = \bigoplus_n Z_n$ be a low set.
+
+1. Show that $\emptyset'$ decides, given $a$ and $b$, whether $Z_a \subseteq Z_b$, and whether $Z_a = Z_b$.
+2. Deduce that $\emptyset'$ computes the function sending $a$ to the least $b$ with $Z_b = Z_a$.
+3. Suppose that $M$ codes an infinite family, for instance a Scott ideal. Show that $\emptyset'$ computes a code $N$ of the same family in which every member has exactly one $N$-index.
+
+:::solution
+1. $Z_a \not\subseteq Z_b$ if and only if there is $x$ with $\langle a, x \rangle \in M$ and $\langle b, x \rangle \notin M$. This is $\Sigma^0_1(M)$ uniformly in $a$ and $b$, so, as in item 1 of :ref{#prop-low-code-questions}, it is decided by $M'$, hence by $\emptyset'$. Equality is the conjunction of two inclusions.
+2. Search for the least $b \leq a$ with $Z_b = Z_a$, using item 1.
+3. Let $B$ be the set of $b$ such that $Z_c \neq Z_b$ for every $c < b$. It is computable in $\emptyset'$ by item 1, and it is infinite, since every member of the family has a least index and there are infinitely many members. Let $b_0 < b_1 < \cdots$ enumerate $B$, and $N = \bigoplus_n Z_{b_n}$, that is, $\langle n, x \rangle \in N$ if and only if $\langle b_n, x \rangle \in M$. Then $N \leq_T M \oplus \emptyset' \equiv_T \emptyset'$, since $M \leq_T M' \leq_T \emptyset'$. Every member of the family is $Z_a$ for some $a$, hence $Z_{b_n}$ for the least index $b_n$ of $Z_a$, and for no other $n$.
+:::
+::::
+
+::::exercise{#ex-low-code-lowness-indices difficulty=1 objective="Compute lowness indices of all members of a low code from one lowness index of the code, and compare with the uniform low basis theorem."}
+Let $M = \bigoplus_n Z_n$ be a low set with lowness index $\ell$.
+
+1. Show that a lowness index of $Z_a$ is computable from $\ell$ and $a$.
+2. Suppose moreover $M \in \mathcal S_\emptyset$. Show that there is a computable function $g$ such that, whenever $\Phi_t$ is the characteristic function of an infinite binary tree $T$, $g(t)$ is a lowness index of a path of $T$.
+
+:::solution
+1. Let $c(a)$ be an index, computable from $a$, of the functional $\Phi^W(x) = W(\langle a, x \rangle)$. Then $\Phi^M_{c(a)}$ is the characteristic function of $Z_a$, and $v(\ell, c(a))$ is a lowness index of $Z_a$, with $v$ as in :ref{#exr-lowness-index-reduction}.
+2. Let $t'$ be an index, computable from $t$, of the functional that ignores its oracle and runs $\Phi_t$. Since $Z_0 = \emptyset$, $\Phi^{Z_0}_{t'}$ is the characteristic function of $T$, and by :ref{#lem-scott-paths} the column $Z_{p(0, t')}$ is a path of $T$. Let $g(t) = v(\ell, c(p(0, t')))$. Unlike the function $u$ of :ref{#prop-uniform-low-basis}, which chooses a new path for each call, $g$ takes all its paths from one ideal; so the join of two of them is again a column, with a lowness index computable in the same way.
+:::
+::::
+
+::::exercise{#ex-lowness-index-sequences difficulty=2 objective="See that a $\emptyset'$-computable sequence of lowness indices answers questions about each member uniformly, but does not make the join low."}
+Let $(\ell_n)$ be a $\emptyset'$-computable sequence such that each $\ell_n$ is a lowness index of a set $Z_n$.
+
+1. Show that if $R(n, y)$ is $\Sigma^0_1(Z_n)$ uniformly in $n$, that is, $R(n, y) \iff \exists s\ Q(Z_n \uh s, n, y, s)$ for a computable relation $Q$, then $R$ is computable in $\emptyset'$.
+2. Let $Z_n = \emptyset' \cap \{ 0, \dots, n - 1 \}$. Show that $\emptyset'$ computes a sequence of lowness indices of the sets $Z_n$, and that $\bigoplus_n Z_n$ is not low.
+
+:::solution
+1. The set of pairs $\langle n, y \rangle$ such that $\exists s\ Q(W \uh s, n, y, s)$ is $W^W_a$ for a fixed $a$. By item 2 of :ref{#thm-jump}, there is a computable $f$ with $\langle n, y \rangle \in W^W_a \iff f(\langle n, y \rangle) \in W'$ for every $W$. So $R(n, y)$ holds if and only if $f(\langle n, y \rangle) \in Z_n'$, that is, $\Phi^{\emptyset'}_{\ell_n}(f(\langle n, y \rangle)) = 1$; the oracle $\emptyset'$ computes $\ell_n$ and evaluates this.
+2. The finite set $D_c$ is computable uniformly in its canonical index $c$, so the set of pairs $\langle c, x \rangle$ with $x \in (D_c)'$ is c.e., and many-one reducible to $\emptyset'$ by a computable $h$. By SMN there is a computable $\lambda$ with $\Phi^{\emptyset'}_{\lambda(c)}(x) = \emptyset'(h(\langle c, x \rangle))$, so $\lambda(c)$ is a lowness index of $D_c$. The oracle $\emptyset'$ computes the canonical index $c_n$ of $\emptyset' \cap \{ 0, \dots, n - 1 \}$, hence $\ell_n = \lambda(c_n)$. But $x \in \emptyset'$ if and only if $\langle x + 1, x \rangle \in \bigoplus_n Z_n$, so $\emptyset' \leq_T \bigoplus_n Z_n$, and the join is not low: by item 5 of :ref{#thm-jump}, its jump computes $\emptyset''$, which is not computable in $\emptyset'$ by item 4. Item 1 still applies to this sequence: a question about the join may query infinitely many columns, and no single $\ell_n$ answers it.
+:::
+::::
+:::::

@@ -113,6 +113,14 @@ Why does $\sum_\sigma 2^{-C(\sigma)}$ diverge?
   This gives a lower bound on $C$, hence an upper bound on the terms; it does not cause divergence.
 :::
 
+::::exercise{#ex-k-concatenation difficulty=1 objective="Derive subadditivity of $K$ for concatenation, and see that $K$ is not monotone on numbers."}
+Show that $K(\sigma\tau) \leq^+ K(\sigma) + K(\tau)$. Show that $K$ is not monotone up to a constant on numbers: there are pairs $n_j \leq m_j$ with $K(m_j) - K(n_j)$ tending to $-\infty$.
+
+:::solution
+The first inequality follows from :ref{#prop-k-basic} (1), since $\langle \sigma, \tau \rangle \mapsto \sigma\tau$ is computable. For the second, let $n_j$ be a number whose associated string $\sigma$ has length $j$ and satisfies $C(\sigma) \geq j$, by :ref{#prop-incompressible-count}; then $K(\sigma) \geq j - d$ for a constant $d$, by :ref{#prop-k-basic} (3). Such numbers lie between $2^j - 1$ and $2^{j+1} - 2$. Let $m_j = 2^{j+1}$, computable from $j$, so that $K(m_j) \leq^+ K(j) \leq^+ 2 \log j$ for $j \geq 2$. Then $K(m_j) - K(n_j) \leq 2 \log j - j + O(1)$ tends to $-\infty$.
+:::
+::::
+
 ## Prefix-free complexity of initial segments
 
 The proof of :ref{#thm-oscillation} does not carry over to $K$: the machine in its proof, $\alpha \mapsto \beta\alpha$, is not prefix-free, since it accepts every string. In the next course, a sequence $X$ is called **random** when $K(X \uh n) \geq n - c$ for some constant $c$ and every $n$. That course proves that such sequences exist, and in fact that almost every sequence, in the sense of the uniform measure, is random; the last lesson of this course gives an example, Chaitin's number $\Omega$. Computable sequences are far from random, since $K(X \uh n) \leq^+ K(n) \leq^+ 2 \log n$.
@@ -127,24 +135,6 @@ As for :ref{#prop-computable-segments}: $n \mapsto X \uh n$ and $\sigma \mapsto 
 
 Unlike the case of $C$ (:ref{#thm-chaitin-computable}), the converse fails: there are non-computable sequences with $K(X \uh n) \leq^+ K(n)$, the **K-trivial** sequences, a central topic of the theory of algorithmic randomness.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that $K(\sigma\tau) \leq^+ K(\sigma) + K(\tau)$. Show that $K$ is not monotone up to a constant on numbers: there are pairs $n_j \leq m_j$ with $K(m_j) - K(n_j)$ tending to $-\infty$.
-
-:::solution
-The first inequality follows from :ref{#prop-k-basic} (1), since $\langle \sigma, \tau \rangle \mapsto \sigma\tau$ is computable. For the second, let $n_j$ be a number whose associated string $\sigma$ has length $j$ and satisfies $C(\sigma) \geq j$, by :ref{#prop-incompressible-count}; then $K(\sigma) \geq j - d$ for a constant $d$, by :ref{#prop-k-basic} (3). Such numbers lie between $2^j - 1$ and $2^{j+1} - 2$. Let $m_j = 2^{j+1}$, computable from $j$, so that $K(m_j) \leq^+ K(j) \leq^+ 2 \log j$ for $j \geq 2$. Then $K(m_j) - K(n_j) \leq 2 \log j - j + O(1)$ tends to $-\infty$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that $K(\sigma) \leq^+ |\sigma| + \log |\sigma| + 2 \log \log |\sigma|$ for $|\sigma| \geq 4$, and more generally that every iteration of the bound $K(n) \leq^+ \log n + K(\lfloor \log n \rfloor)$ improves the upper bound on $K(\sigma)$.
-
-:::solution
-By :ref{#prop-k-basic} (2) applied to the string associated with $n$, of length $\ell = \lfloor \log(n+1) \rfloor$, $K(n) \leq^+ \ell + K(\ell) \leq^+ \log n + K(\ell)$. Applying (2) again to $K(\ell)$ with the bound $2 \log$ gives $K(n) \leq^+ \log n + 2 \log \log n$ for $n \geq 4$. Then $K(\sigma) \leq^+ |\sigma| + K(|\sigma|) \leq^+ |\sigma| + \log |\sigma| + 2 \log \log |\sigma|$. Iterating, $K(\sigma) \leq^+ |\sigma| + \log |\sigma| + \log \log |\sigma| + \cdots$, each stage replacing a term $2 \log^{(k)}$ by $\log^{(k)} + 2 \log^{(k+1)}$.
-:::
-::::
-
 ## Notes and references
 
 Prefix-free complexity was introduced by Levin (1974) and Chaitin (1975), with a related notion due to Gács. The Kraft inequality and its converse for sorted lengths are due to Kraft (1949). The bound $K \leq^+ C + K(C)$ is Proposition 2.4.1 of Nies's book, and $K(\sigma) \leq^+ |\sigma| + K(|\sigma|)$ is due to Chaitin (Downey–Hirschfeldt, Theorem 3.7.4). The definition of randomness through $K$ and its equivalence with Martin-Löf randomness are due to Levin, Schnorr and Chaitin, and are treated in the next course. K-trivial sequences were introduced by Chaitin and studied by Solovay, and later by Downey, Hirschfeldt, Nies and Stephan.
@@ -154,3 +144,55 @@ Prefix-free complexity was introduced by Levin (1974) and Chaitin (1975), with a
 - L. G. Kraft, *A device for quantizing, grouping, and coding amplitude modulated pulses*, Master's thesis, MIT, 1949.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 3.5 and 3.7.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 2.2 and 2.4.
+
+:::::exercises
+::::exercise{#ex-k-iterated-log difficulty=2 objective="Iterate the bound $K(\sigma) \leq^+ |\sigma| + K(|\sigma|)$ to refine the upper bound on $K$."}
+Show that $K(n) \leq^+ \log n + K(\lfloor \log n \rfloor)$ for $n \geq 1$. Deduce that $K(\sigma) \leq^+ |\sigma| + \log |\sigma| + 2 \log \log |\sigma|$ for $|\sigma| \geq 4$, and that $K(\sigma) \leq^+ |\sigma| + \log |\sigma| + \log \log |\sigma| + 2 \log \log \log |\sigma|$ for $|\sigma| \geq 16$.
+
+:::solution
+Let $n \geq 1$, and let $\ell = \lfloor \log(n + 1) \rfloor$ be the length of the string of $n$. Since $n + 1 \leq 2n$, $\ell \in \{ \lfloor \log n \rfloor, \lfloor \log n \rfloor + 1 \}$, and $\ell \leq \log n + 1$. By :ref{#prop-k-basic} (2) applied to the string of $n$, $K(n) \leq^+ \ell + K(\ell) \leq^+ \log n + K(\ell)$. The maps $x \mapsto x$ and $x \mapsto x + 1$ are computable, so $K(\ell) \leq^+ K(\lfloor \log n \rfloor)$ with a constant that does not depend on which of the two values $\ell$ takes. This gives the first inequality.
+
+For $n \geq 4$, $m = \lfloor \log n \rfloor \geq 2$, so $K(m) \leq^+ 2 \log m \leq 2 \log \log n$ by :ref{#prop-k-basic} (2), and $K(n) \leq^+ \log n + 2 \log \log n$. For $n \geq 16$, $m \geq 4$, and the bound just proved, applied to $m$, gives $K(m) \leq^+ \log m + 2 \log \log m \leq \log \log n + 2 \log \log \log n$, since $m \leq \log n$ and $\log$ is increasing; so $K(n) \leq^+ \log n + \log \log n + 2 \log \log \log n$. Finally $K(\sigma) \leq^+ |\sigma| + K(|\sigma|)$ by :ref{#prop-k-basic} (2), and the bounds on $K(|\sigma|)$ give the two inequalities. (Nies 2009, Exercise 2.2.11, for the first one.)
+:::
+::::
+
+::::exercise{#ex-k-shortest-incompressible difficulty=1 objective="Check that the composition argument for shortest descriptions preserves prefix-freeness."}
+Show that there is a constant $b$ such that, if $\tau$ is a shortest $U$-description of some string, for the optimal prefix-free machine $U$, then $K(\tau) \geq |\tau| - b$.
+
+:::solution
+Let $M$ be the machine $\rho \mapsto U(U(\rho))$. Its domain is contained in the domain of $U$, so it is prefix-free, and there is $c_M$ with $K \leq K_M + c_M$. Let $\tau$ be a shortest $U$-description of $\sigma$, so that $|\tau| = K(\sigma)$, and let $\rho$ be a shortest $U$-description of $\tau$. Then $M(\rho) = \sigma$, so $K(\sigma) \leq |\rho| + c_M = K(\tau) + c_M$, and $K(\tau) \geq |\tau| - c_M$. (Nies 2009, Exercise 2.2.10, the analogue of Exercise 2.1.3 for $K$.)
+:::
+::::
+
+::::exercise[Maximal prefix-free sets]{#ex-maximal-prefix-free difficulty=2 objective="Relate maximality of prefix-free sets to their weight, and see that the relation fails for infinite sets."}
+A prefix-free set $W$ is **maximal** if every string is comparable with some element of $W$, that is, no string outside $W$ can be added to $W$ with the set remaining prefix-free. Show that a finite prefix-free set is maximal if and only if its weight is $1$. Show that there is an infinite maximal prefix-free set of weight at most $\tfrac12$.
+
+:::solution
+Let $W$ be finite and prefix-free, and let $\ell$ be larger than the length of every element of $W$. As in the proof of :ref{#prop-kraft}, the sets $E_\tau = \{ \rho \in \{0,1\}^\ell : \tau \preceq \rho \}$, $\tau \in W$, are pairwise disjoint and $|E_\tau| = 2^{\ell - |\tau|}$, so the weight of $W$ is $2^{-\ell}$ times the number of strings of length $\ell$ that extend an element of $W$.
+
+If the weight is $1$, every string of length $\ell$ extends an element of $W$. Let $\rho$ be any string. If $|\rho| \geq \ell$, then $\rho \uh \ell$ extends some $\tau \in W$, so $\tau \preceq \rho$. If $|\rho| < \ell$, some extension $\rho'$ of $\rho$ of length $\ell$ extends some $\tau \in W$; then $\rho$ and $\tau$ are both prefixes of $\rho'$, hence comparable. So $W$ is maximal. If the weight is less than $1$, some $\rho$ of length $\ell$ extends no element of $W$, and it is not a prefix of an element of $W$, since these are shorter than $\ell$. So $\rho$ is incomparable with every element of $W$, and $W$ is not maximal.
+
+For the second statement, list all strings as $\rho_0, \rho_1, \dots$, and build $W_0 = \emptyset \subseteq W_1 \subseteq \cdots$. At step $i$, if $\rho_i$ is comparable with an element of $W_i$, let $W_{i+1} = W_i$. Otherwise let $W_{i+1} = W_i \cup \{ \tau_i \}$, where $\tau_i$ is an extension of $\rho_i$ of length at least $i + 2$. Such a $\tau_i$ is incomparable with every $\tau \in W_i$: if $\tau \preceq \tau_i$, then $\tau$ and $\rho_i$ are both prefixes of $\tau_i$, hence comparable; if $\tau_i \preceq \tau$, then $\rho_i \preceq \tau$. So $W = \bigcup_i W_i$ is prefix-free, its weight is at most $\sum_i 2^{-i-2} = \tfrac12$, and every $\rho_i$ is comparable with an element of $W_{i+1}$, so $W$ is maximal. By the first part, $W$ is infinite.
+:::
+::::
+
+::::exercise[Kraft's converse for sorted lengths]{#ex-kraft-sorted difficulty=2 objective="Complete the proof of the converse of the Kraft inequality for sorted lengths, and see why sorting is needed."}
+Let $\ell_0 \leq \ell_1 \leq \cdots$ be a finite or infinite non-decreasing sequence of numbers with $\sum_i 2^{-\ell_i} \leq 1$, and let $s_i = \sum_{j < i} 2^{-\ell_j}$. Show that $s_i = k_i 2^{-\ell_i}$ for a number $k_i$ with $0 \leq k_i < 2^{\ell_i}$, and that the strings $\tau_i$, where $\tau_i$ is the binary representation of $k_i$ padded with leading zeros to length $\ell_i$, form a prefix-free set. Show that the same procedure applied to the lengths $2, 1, 2$, in this order, does not give a prefix-free set.
+
+:::solution
+For $j < i$, $\ell_j \leq \ell_i$, so $2^{-\ell_j} = 2^{\ell_i - \ell_j}\, 2^{-\ell_i}$ is a multiple of $2^{-\ell_i}$, and so is $s_i$: $s_i = k_i 2^{-\ell_i}$ with $k_i \geq 0$. Moreover $s_i + 2^{-\ell_i} = s_{i+1} \leq \sum_j 2^{-\ell_j} \leq 1$, so $k_i + 1 \leq 2^{\ell_i}$.
+
+For a string $\tau$ of length $\ell$ that is the binary representation of a number $k$ (with leading zeros), let $I(\tau) = [k 2^{-\ell}, (k + 1) 2^{-\ell})$. If $\tau' = \tau\rho$, then $\tau'$ represents $k' = k 2^{|\rho|} + r$ with $0 \leq r < 2^{|\rho|}$, so $I(\tau') \subseteq I(\tau)$. Here $I(\tau_i) = [s_i, s_{i+1})$, and these intervals are pairwise disjoint and non-empty. If $\tau_i \preceq \tau_j$ with $i \neq j$, then $I(\tau_j) \subseteq I(\tau_i)$, which contradicts disjointness. So the strings $\tau_i$ are pairwise incomparable.
+
+For the lengths $2, 1, 2$: $s_0 = 0$ gives $\tau_0 = 00$; $s_1 = \tfrac14$ is not a multiple of $\tfrac12$, and the first bit of its expansion $0.01$ is $\tau_1 = 0$, a prefix of $\tau_0$. The total weight is $\tfrac14 + \tfrac12 + \tfrac14 = 1$, so the failure is due to the order alone; this is the difficulty that the KC theorem overcomes.
+:::
+::::
+
+::::exercise{#ex-k-minus-c difficulty=1 objective="Compare $K$ and $C$ using the existence of strings with $K(\sigma) > |\sigma| + c$."}
+Show that $K - C$ is unbounded: for every $c$ there is a string $\sigma$ with $K(\sigma) > C(\sigma) + c$. Show that, on the other hand, $K(\sigma) - C(\sigma) \leq 2 \log C(\sigma) + b$ for a constant $b$ and every $\sigma$ with $C(\sigma) \geq 1$.
+
+:::solution
+Let $d$ be such that $C(\sigma) \leq |\sigma| + d$ for every $\sigma$. Given $c$, :ref{#cor-k-above-length} gives $\sigma$ with $K(\sigma) > |\sigma| + c + d \geq C(\sigma) + c$. The second statement is :ref{#prop-k-basic} (3). Together with $C \leq^+ K$, this shows that $K$ and $C$ differ by an unbounded amount, but by at most a logarithmic term.
+:::
+::::
+:::::

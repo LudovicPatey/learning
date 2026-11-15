@@ -35,7 +35,7 @@ In the proof of :ref{#prop-fo-least-number}, Parsons' theorem is used to show th
   The proof is by contradiction and never exhibits a least element; collection is used only for the complexity of $\theta$.
 :::
 
-For $n = 0$, the equivalence of $\mathrm I\Delta_0$ and $\mathrm L\Delta_0$ was proved in :ref{to="bounded-induction"} (:ref{#prop-idelta0-basic} and the exercise of that lesson).
+For $n = 0$, the equivalence of $\mathrm I\Delta_0$ and $\mathrm L\Delta_0$ was proved in :ref{to="bounded-induction"} (:ref{#prop-idelta0-basic} and :ref{#ex-ldelta0-idelta0}).
 
 
 ## Definable cuts
@@ -92,7 +92,7 @@ Otherwise, the formula $x \leq b \wedge \theta(x)$, which is $\Sigma_n$ or $\Pi_
 
 ## Exercises
 
-::::exercise{#ex-underspill difficulty=1}
+::::exercise{#ex-underspill difficulty=1 objective="Apply the characterization of induction by definable cuts to the negation of a property, to bring the property down into a cut."}
 (**Underspill.**) Let $M \models \mathrm I\Sigma_n$, $I$ a proper cut of $M$, and $\theta(x)$ a $\Sigma_n$ or $\Pi_n$ formula with parameters such that $M \models \theta(x)$ for every $x \in M \setminus I$. Show that $M \models \theta(x)$ for some $x \in I$.
 
 :::solution
@@ -100,7 +100,7 @@ Otherwise $\neg \theta$ holds exactly on $I$: on $I$ by assumption, and nowhere 
 :::
 ::::
 
-::::exercise{#ex-overspill-interval difficulty=2}
+::::exercise{#ex-overspill-interval difficulty=2 objective="Combine overspill with Parsons' lemma to extend a property of all standard numbers to a non-standard initial segment."}
 Let $M$ be a non-standard model of $\mathrm I\Sigma_n$, $n \geq 1$, and $\theta(x)$ a $\Sigma_n$ formula with parameters such that $M \models \theta(k)$ for every standard $k$. Show that there is a non-standard $c$ such that $M \models \theta(x)$ for every $x \leq c$.
 
 :::solution
@@ -115,3 +115,39 @@ The equivalence of the induction and least number schemes is Wong's Theorem 2.3 
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lectures 2 and 3.
 - J. B. Paris and L. A. S. Kirby, *Σₙ-collection schemas in arithmetic*, in Logic Colloquium '77, North-Holland, 1978, 199–209.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 2(a).
+
+:::::exercises
+::::exercise{#ex-standard-part-undefinable difficulty=1 objective="Deduce from the characterization of induction by cuts that the standard part of a non-standard model of PA is not definable."}
+Let $M$ be a non-standard model of $\mathrm{PA}$. Show that the standard part of $M$ is not definable in $M$ by any formula with parameters. Deduce that if a formula $\theta(x)$ with parameters holds at every standard number, it holds at some non-standard element.
+
+:::solution
+Every formula of $\mathcal L_A$ is logically equivalent to a $\Sigma_n$ formula for some $n$, by putting it in prenex form and adding vacuous quantifiers. $M$ satisfies $\mathrm I\Sigma_n$ for every $n$, and the standard part is a proper cut of $M$, since $M$ is non-standard. By :ref{#prop-cuts-induction}, it is not $\Sigma_n$-definable for any $n$, hence not definable. If $\theta$ holds at every standard number and at no non-standard element, it defines the standard part, which is impossible.
+:::
+::::
+
+::::exercise{#ex-overspill-unbounded difficulty=2 objective="Apply overspill to a property that holds for infinitely many standard numbers, bounding the search below a given non-standard element."}
+Let $M$ be a non-standard model of $\mathrm I\Sigma_n$, and $\theta(x)$ a $\Sigma_n$ or $\Pi_n$ formula with parameters such that $M \models \theta(k)$ for infinitely many standard $k$. Show that for every non-standard $b$ there is a non-standard $x \leq b$ with $M \models \theta(x)$.
+
+:::solution
+Let $\varphi(x) \equiv \exists y \leq b\ (x \leq y \wedge \theta(y))$. If $\theta$ is $\Sigma_n$, so is $\varphi$, logically. If $\theta$ is $\Pi_n$ and $n \geq 1$, $\varphi$ is equivalent in $M$ to a $\Pi_n$ formula by :ref{#lem-fo-collection-closure}, since $M \models \mathrm B\Sigma_n$ by :ref{#thm-fo-parsons}; if $n = 0$, $\varphi$ is bounded. For every standard $x$, there is a standard $y \geq x$ with $\theta(y)$, by hypothesis, and $y \leq b$ since $b$ is non-standard; so $M \models \varphi(x)$. By :ref{#cor-overspill}, applied to the standard part and to $b$, some non-standard $x \leq b$ satisfies $\varphi$: there is $y$ with $x \leq y \leq b$ and $\theta(y)$, and $y$ is non-standard since $y \geq x$.
+:::
+::::
+
+::::exercise{#ex-overspill-needs-induction difficulty=1 objective="See on the model of bounded induction without exponentiation that overspill fails without the corresponding induction." lessons="parikh"}
+In the model $I_a$ of :ref{#ex-idelta0-not-exp}, let $J$ be the set of $x$ such that $I_a \models \exists y\ \varepsilon(x, y)$. Show that $J$ is a proper cut of $I_a$, that the $\Sigma_1$ formula $\exists y\ \varepsilon(x, y)$ holds at every element of $J$, and that the conclusion of :ref{#cor-overspill} fails for it. Which hypothesis of the corollary is not satisfied?
+
+:::solution
+By :ref{#fact-exp}, $\varepsilon(0, 1)$, and $\varepsilon(x, y) \rightarrow \varepsilon(x + 1, y + y)$, in $I_a$, which satisfies $\mathrm I\Delta_0$; and if $\varepsilon(x, y)$ and $x' < x$, some $y' < y$ satisfies $\varepsilon(x', y')$. So $J$ contains $0$, is closed under successor and is an initial segment. It does not contain $a$, by :ref{#ex-idelta0-not-exp}. So $J$ is a proper cut, and by definition the formula $\exists y\ \varepsilon(x, y)$ holds on $J$ and at no element of $I_a \setminus J$; there is no $x \notin J$, below any $b \notin J$, at which it holds. The corollary requires $\mathrm I\Sigma_1$, and $I_a \not\models \mathrm I\Sigma_1$, since $I_a \not\models \mathrm{exp}$ (:ref{#prop-isigma1-exp}).
+:::
+::::
+
+::::exercise{#ex-overspill-bounded-witnesses difficulty=2 objective="Use overspill and collection together to bound the witnesses of a property of all standard numbers by a single element."}
+Let $M$ be a non-standard model of $\mathrm I\Sigma_1$, and $\delta(x, y)$ a bounded formula with parameters such that $M \models \exists y\ \delta(k, y)$ for every standard $k$. Show that there is $b \in M$ such that, for every standard $k$, $M \models \exists y < b\ \delta(k, y)$. Show that the statement fails for $M = \nat$.
+
+:::solution
+Let $\theta(x) \equiv \exists b\ \forall x' < x + 1\ \exists y < b\ \delta(x', y)$, a $\Sigma_1$ formula. For a standard $x$, every $x' \leq x$ is standard, so $M \models \forall x' < x + 1\ \exists y\ \delta(x', y)$, and $\mathrm B\Sigma_1$, which holds in $M$ by :ref{#thm-fo-parsons}, gives $b$; so $M \models \theta(x)$. By :ref{#cor-overspill}, applied to the standard part, $\theta(c)$ holds for some non-standard $c$. Its witness $b$ bounds witnesses for every $x' \leq c$, in particular for every standard $k$.
+
+In $\nat$, take $\delta(x, y) \equiv y = x$: every $k$ has a witness, and no $b$ bounds them all. The argument fails because the standard part of $\nat$ is not a proper cut.
+:::
+::::
+:::::

@@ -53,7 +53,7 @@ Let $M \subseteq_e N$ and $\bar a \in M$. If $\sigma(\bar x)$ is $\Sigma_1$ and 
 Write $\sigma = \exists \bar y\ \delta(\bar x, \bar y)$ with $\delta$ bounded. Witnesses $\bar b \in M$ with $M \models \delta(\bar a, \bar b)$ satisfy $N \models \delta(\bar a, \bar b)$ by :ref{#lem-delta0-absolute}. The statement for $\Pi_1$ formulas is the contrapositive, applied to the negation.
 :::
 
-The converse implications fail: a $\Sigma_1$ formula true in $N$ may have all its witnesses in $N \setminus M$. The exercise at the end of the lesson gives an example with $M = \nat$.
+The converse implications fail: a $\Sigma_1$ formula true in $N$ may have all its witnesses in $N \setminus M$. :ref{#ex-sigma1-not-down} gives an example with $M = \nat$.
 
 ## Σ₁-completeness
 
@@ -73,7 +73,7 @@ The theorem also produces non-standard models of Peano arithmetic in which false
 
 ## Exercises
 
-::::exercise{#ex-sigma1-not-down difficulty=1}
+::::exercise{#ex-sigma1-not-down difficulty=1 objective="Find a $\Sigma_1$ sentence whose only witnesses are non-standard, to see that $\Sigma_1$ formulas do not persist downwards."}
 Give a $\Sigma_1$ sentence that is true in $\mathbb Z[X]^+$ and false in $\nat$. Deduce that the converse of the first statement of :ref{#cor-sigma1-upward} fails for the end extension $\nat \subseteq_e \mathbb Z[X]^+$.
 
 :::solution
@@ -88,3 +88,46 @@ Wong (Lecture 2) notes that $\mathrm{PA}^-$ proves all true $\Sigma_1$ sentences
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 2.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 1(a).
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991, Chapter 2.
+
+:::::exercises
+::::exercise{#ex-end-ext-chains difficulty=1 objective="Check that end extensions compose and that the union of a chain of end extensions end-extends each of its members."}
+Let $M$, $N$, $K$ be $\mathcal L_A$-structures.
+
+1. Show that $M \subseteq_e N$ and $N \subseteq_e K$ imply $M \subseteq_e K$.
+2. Let $M_0 \subseteq_e M_1 \subseteq_e M_2 \subseteq_e \cdots$, and let $M_\omega$ be the union of the chain, with the operations and the order defined in any $M_i$ containing the elements concerned. Show that $M_i \subseteq_e M_\omega$ for every $i$, and deduce that $M_i$ and $M_\omega$ satisfy the same $\Delta_0$ formulas with parameters in $M_i$.
+
+:::solution
+1. $M$ is a substructure of $K$, being a substructure of a substructure. Let $a \in M$ and $b \in K$ with $K \models b < a$. Since $a \in N$ and $N$ is an initial segment of $K$, $b \in N$; since $N \models b < a$ and $M$ is an initial segment of $N$, $b \in M$.
+
+2. Any finitely many elements of $M_\omega$ lie in a common $M_j$, and since each $M_j$ is a substructure of $M_{j+1}$, the operations and the order of $M_j$ and $M_k$ agree on $M_{\min(j,k)}$; so $M_\omega$ is a well-defined structure, and each $M_i$ is a substructure of it. Let $a \in M_i$ and $b \in M_\omega$ with $b < a$; say $b \in M_j$. If $j \leq i$, then $b \in M_i$. If $j > i$, then $M_i \subseteq_e M_j$ by item 1, applied $j - i - 1$ times, and $M_j \models b < a$, so $b \in M_i$. The last statement is :ref{#lem-delta0-absolute}.
+:::
+::::
+
+::::exercise{#ex-embedding-standard difficulty=1 objective="See that the standard part is the only copy of $\nat$ inside a model of $\mathrm{PA}^-$."}
+Let $M$ be a model of $\mathrm{PA}^-$ and $f : \nat \to M$ an embedding of $\mathcal L_A$-structures. Show that $f(k) = \bar k^M$ for every $k$. Deduce that every substructure of $M$ isomorphic to $\nat$ is the standard part of $M$.
+
+:::solution
+By induction on $k$ in the metatheory. An embedding preserves $0$, so $f(0) = 0^M = \bar 0^M$. It preserves $1$ and $+$, so $f(k + 1) = f(k) + 1^M = \bar k^M + 1^M$, which is the value in $M$ of the numeral $\overline{k + 1} = \bar k + 1$. If $A \subseteq M$ is a substructure and $g : \nat \to A$ an isomorphism, then $g$ is an embedding of $\nat$ into $M$, so $A = g(\nat) = \{ \bar k^M : k \in \nat \}$.
+:::
+::::
+
+::::exercise{#ex-delta0-decided difficulty=1 objective="Apply $\Sigma_1$-completeness to a bounded sentence and to its negation."}
+Show that $\mathrm{PA}^-$ decides every $\Delta_0$ sentence: for every $\Delta_0$ sentence $\delta$, $\mathrm{PA}^- \vdash \delta$ or $\mathrm{PA}^- \vdash \neg \delta$. Deduce that for every $\Delta_0$ formula $\delta(\bar x)$, every model $M$ of $\mathrm{PA}^-$ and every tuple $\bar k$ of numbers, $M \models \delta(\bar k^M)$ if and only if $\nat \models \delta(\bar k)$. Does the first statement hold for $\Sigma_1$ sentences?
+
+:::solution
+A $\Delta_0$ sentence and its negation are both $\Delta_0$, hence $\Sigma_1$ with an empty block of quantifiers, and one of them is true in $\nat$. By :ref{#thm-sigma1-complete}, that one is provable in $\mathrm{PA}^-$. For the second statement, $\delta(\bar k)$, with the numerals substituted, is a $\Delta_0$ sentence; its value in $M$ is that of $\delta(\bar x)$ at $\bar k^M$. If $\nat \models \delta(\bar k)$, then $\mathrm{PA}^- \vdash \delta(\bar k)$, and $M \models \delta(\bar k)$; otherwise $\mathrm{PA}^- \vdash \neg \delta(\bar k)$, and $M \models \neg \delta(\bar k)$. (This also follows from :ref{#lem-delta0-absolute} and :ref{#prop-standard-part}.)
+
+The statement fails for $\Sigma_1$ sentences. The sentence $\sigma$ of :ref{#ex-sigma1-not-down} is false in $\nat$, so $\mathrm{PA}^- \nvdash \sigma$, and it is true in $\mathbb Z[X]^+$, so $\mathrm{PA}^- \nvdash \neg \sigma$.
+:::
+::::
+
+::::exercise{#ex-initial-substructure-pam difficulty=1 objective="Check that $\mathrm{PA}^-$ passes to initial segments that are substructures, by bounding the witness of the axiom of differences."}
+Let $N$ be a model of $\mathrm{PA}^-$ and $M \subseteq_e N$. Show that $M$ is a model of $\mathrm{PA}^-$. Deduce that a cut of $N$, in the sense of a nonempty initial segment closed under successor, is a model of $\mathrm{PA}^-$ as soon as it is closed under addition and multiplication.
+
+:::solution
+The axioms of :ref{#def-pa-minus} other than axiom 5 are universal closures of quantifier-free formulas. They are true in $N$, and a quantifier-free formula has the same truth value at elements of $M$ in $M$ and in $N$; so they hold in $M$. For axiom 5, let $x < y$ in $M$. In $N$ there is $z$ with $x + z + 1 = y$. By :ref{#ex-pam-cancellation}, $z \leq z + (x + 1) = y$, so $z = y$ or $z < y$, and in both cases $z \in M$, since $M$ is an initial segment of $N$. The equation $x + z + 1 = y$ holds in $M$, which is a substructure.
+
+A nonempty initial segment $I$ of $N$ contains $0$, and if it is closed under successor it contains $1 = 0 + 1$. If it is closed under addition and multiplication, it is a substructure, so $I \subseteq_e N$, and the first part applies.
+:::
+::::
+:::::

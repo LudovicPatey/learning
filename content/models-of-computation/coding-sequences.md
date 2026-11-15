@@ -171,15 +171,7 @@ The function $\beta$ is defined from $+$, $\cdot$ and the remainder, and the rel
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that the following predicates are primitive recursive: "$s$ codes a strictly increasing sequence"; "$s$ codes a prefix of the sequence coded by $t$".
-
-:::solution
-$\mathrm{Seq}(s) \wedge \forall i < \mathrm{lh}(s)\ \forall j < \mathrm{lh}(s)\ (i < j \rightarrow (s)'_i < (s)'_j)$. For prefixes: $\mathrm{Seq}(s) \wedge \mathrm{Seq}(t) \wedge \mathrm{lh}(s) \leq \mathrm{lh}(t) \wedge \forall i < \mathrm{lh}(s)\ (s)'_i = (t)'_i$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-seq-sort difficulty=2 objective="Compute a function on codes by a bounded search for its value, after bounding the value."}
 Show that the function which maps the code of a sequence to the code of the same sequence sorted in non-decreasing order is primitive recursive.
 
 :::hint
@@ -191,7 +183,7 @@ The sorted sequence has the same length $n$ and the same entries, so its code is
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-seq-bijective difficulty=2 objective="Define a bijective coding of sequences with the pairing function, and compute its operations by course-of-values recursion."}
 Define a bijective coding of finite sequences: show that the function $\langle\!\langle \cdot \rangle\!\rangle$ given by $\langle\!\langle \, \rangle\!\rangle = 0$ and $\langle\!\langle a_0, \dots, a_{n} \rangle\!\rangle = 1 + \langle a_0, \langle\!\langle a_1, \dots, a_n \rangle\!\rangle \rangle$ is a bijection between finite sequences and $\nat$, and that its length and projection functions are primitive recursive.
 
 :::solution
@@ -207,3 +199,71 @@ The β-function lemma appears in Gödel's incompleteness paper of 1931, where it
 - R. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §17.2.2.
 - K. Gödel, *Über formal unentscheidbare Sätze der Principia Mathematica und verwandter Systeme I*, Monatshefte für Mathematik und Physik 38 (1931), 173–198.
 - S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952.
+
+:::::exercises
+::::exercise{#ex-seq-increasing-prefix difficulty=1 objective="Express properties of sequences by bounded quantification over the indices of their codes."}
+Show that the following predicates are primitive recursive: "$s$ codes a strictly increasing sequence"; "$s$ codes a prefix of the sequence coded by $t$".
+
+:::solution
+$\mathrm{Seq}(s) \wedge \forall i < \mathrm{lh}(s)\ \forall j < \mathrm{lh}(s)\ (i < j \rightarrow (s)'_i < (s)'_j)$. For prefixes: $\mathrm{Seq}(s) \wedge \mathrm{Seq}(t) \wedge \mathrm{lh}(s) \leq \mathrm{lh}(t) \wedge \forall i < \mathrm{lh}(s)\ (s)'_i = (t)'_i$.
+:::
+::::
+
+::::exercise{#ex-seq-decode difficulty=1 objective="Compute and decode prime power codes, and recognize integers that are not codes."}
+Compute $[0, 2, 1]$. Decide whether $360$ and $140$ are codes of sequences, and if so of which ones.
+
+:::solution
+$[0, 2, 1] = 2^{1} \cdot 3^{3} \cdot 5^{2} = 1350$. Next, $360 = 2^3 \cdot 3^2 \cdot 5$: the exponents of $p_0, p_1, p_2$ are $3, 2, 1$, and all other exponents are $0$, so $360 = [2, 1, 0]$. Finally $140 = 2^2 \cdot 5 \cdot 7$: the exponent of $p_1 = 3$ is $0$ while those of $p_2$ and $p_3$ are not, so the non-zero exponents do not form an initial segment of the primes, and $140$ is not a code.
+:::
+::::
+
+::::exercise{#ex-seq-cov-sum difficulty=1 objective="Apply course-of-values recursion to a recursion on all previous values."}
+Let $f(0) = 1$ and $f(y + 1) = \sum_{z \leq y} f(z)$. Show that $f$ is primitive recursive by :ref{#thm-course-of-values}, and that $f(y) = 2^{y-1}$ for $y \geq 1$.
+
+:::solution
+$f(y) = h(y, \bar f(y))$ for $h(y, s) = 1$ if $y = 0$ and $h(y, s) = \sum_{i < y} (s)'_i$ if $y \geq 1$. Indeed $\bar f(y + 1) = [f(0), \dots, f(y)]$, whose $i$-th entry is $f(i)$. The function $h$ is primitive recursive, by cases and a bounded sum of the primitive recursive projection, so :ref{#thm-course-of-values} applies. For the closed form, $f(1) = f(0) = 1 = 2^0$, and if $f(z) = 2^{z-1}$ for $1 \leq z \leq y$, then $f(y + 1) = 1 + \sum_{z = 1}^{y} 2^{z - 1} = 1 + (2^y - 1) = 2^y$.
+:::
+::::
+
+::::exercise{#ex-seq-reverse difficulty=1 objective="Define an operation on sequence codes by a bounded product of prime powers."}
+Show that the function which maps the code of $(a_0, \dots, a_{n-1})$ to the code of $(a_{n-1}, \dots, a_0)$ is primitive recursive.
+
+:::solution
+Let $\mathrm{rev}(s) = \prod_{i < \mathrm{lh}(s)} p_i^{\,(s)_{\mathrm{lh}(s) \dotminus (i + 1)}}$. If $s = [a_0, \dots, a_{n-1}]$, then $\mathrm{lh}(s) = n$ and the exponent of $p_i$ is $(s)_{n - 1 - i} = a_{n-1-i} + 1$, so $\mathrm{rev}(s) = [a_{n-1}, \dots, a_0]$. It is a bounded product of a primitive recursive function, composed with primitive recursive functions.
+:::
+::::
+
+::::exercise{#ex-seq-beta-search difficulty=2 objective="Turn the existence proof of the β-function lemma into a primitive recursive bound, and search below it."}
+Show that there is a primitive recursive function $B$ such that, for every code $s$ of a sequence $(a_0, \dots, a_{n-1})$, $B(s) = \langle c, d \rangle$ with $\beta(c, d, i) = a_i$ for all $i < n$.
+
+:::solution
+Let $m(s) = \max(\mathrm{lh}(s), \max_{i < \mathrm{lh}(s)} (s)'_i)$, which is primitive recursive (the maximum over $i < \mathrm{lh}(s)$ is a bounded minimization: the least $v \leq s$ such that $(s)'_i \leq v$ for all $i < \mathrm{lh}(s)$). The proof of :ref{#lem-beta} gives $d = m(s)!$ and a solution $c$ of the Chinese remainder problem modulo $u_i = 1 + (i + 1) d$, $i < n$; the least non-negative solution satisfies $c < \prod_{i < n} u_i$. Since $\langle x, y \rangle$ is increasing in each argument, the pair satisfies $\langle c, d \rangle \leq b(s)$, where
+$$
+b(s) = \Big\langle \prod_{i < \mathrm{lh}(s)} \big(1 + (i + 1)\, m(s)!\big),\ m(s)! \Big\rangle
+$$
+is primitive recursive. Let
+$$
+B(s) = \mu z < b(s) + 1\ \forall i < \mathrm{lh}(s)\ \beta(\pi_0(z), \pi_1(z), i) = (s)'_i .
+$$
+The predicate is primitive recursive, and it holds for $z = \langle c, d \rangle \leq b(s)$, so the search finds a pair with the required property. By :ref{#prop-pr-bounded-mu}, $B$ is primitive recursive. Thus a sequence can be converted primitive recursively from its prime power code to a β-code, and back with $\beta$.
+:::
+::::
+
+::::exercise{#ex-seq-string-concat difficulty=2 lessons="what-is-an-algorithm" objective="Show that the length and the concatenation of strings are primitive recursive on their codes in bijective numeration."}
+Fix $m \geq 2$, and code strings over an alphabet of $m$ letters by bijective numeration, as in the lesson :ref{to="models-of-computation/what-is-an-algorithm"}. Let $N_\ell = (m^\ell - 1)/(m - 1) = \sum_{j < \ell} m^j$.
+
+1. Show that the codes of the strings of length $\ell$ are exactly the integers $z$ with $N_\ell \leq z < N_{\ell + 1}$.
+2. Deduce that the function $\mathrm{len}(z)$, the length of the string coded by $z$, is primitive recursive.
+3. Show that the function giving the code of the concatenation $uv$ from the codes of $u$ and $v$ is primitive recursive.
+
+:::solution
+1. Write $c(w)$ for the code of $w$. A string of length $\ell$ has code $\sum_{j=1}^{\ell} i_j m^{\ell - j}$ with $1 \leq i_j \leq m$, which lies between $\sum_{j < \ell} m^j = N_\ell$ (all digits $1$) and $m \sum_{j < \ell} m^j = N_{\ell + 1} - 1$ (all digits $m$). So the codes of the $m^\ell$ strings of length $\ell$ are $m^\ell$ distinct integers (the coding is injective) in an interval of $N_{\ell + 1} - N_\ell = m^\ell$ integers: they fill it.
+2. The intervals $[N_\ell, N_{\ell+1})$ partition $\nat$, so $\mathrm{len}(z)$ is the least $\ell$ with $z < N_{\ell + 1}$. Since $N_{\ell+1} \geq \ell + 1$, the least such $\ell$ is at most $z$, and $\mathrm{len}(z) = \mu \ell < z + 1\ \big(z < N_{\ell + 1}\big)$. The function $\ell \mapsto N_\ell = \lfloor (m^\ell - 1) / (m - 1) \rfloor$ is primitive recursive, hence so is $\mathrm{len}$.
+3. If $u = u_1 \cdots u_k$ and $v = v_1 \cdots v_\ell$ (as digits), then
+$$
+c(uv) = \sum_{j=1}^{k} u_j m^{k + \ell - j} + \sum_{j=1}^{\ell} v_j m^{\ell - j} = m^{\ell}\, c(u) + c(v).
+$$
+Hence the code of $uv$ is $c(u) \cdot m^{\mathrm{len}(c(v))} + c(v)$, a primitive recursive function of $c(u)$ and $c(v)$.
+:::
+::::
+:::::

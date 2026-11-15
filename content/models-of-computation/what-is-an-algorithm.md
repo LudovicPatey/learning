@@ -162,15 +162,7 @@ Programs, being strings, are coded the same way. With these codings, a function 
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that the function $\nat^2 \to \nat$, $(x, y) \mapsto 2^x (2y + 1) - 1$ is a bijection. Compare it with Cantor's pairing function: which one is more economical, in the sense of the size of $\langle x, x \rangle$ as a function of $x$?
-
-:::solution
-Every integer $z \geq 1$ is uniquely of the form $2^x \cdot m$ with $m$ odd, that is $m = 2y + 1$. So $(x, y) \mapsto 2^x(2y+1)$ is a bijection from $\nat^2$ onto $\nat \setminus \{0\}$, and subtracting $1$ gives a bijection onto $\nat$. On the diagonal, $2^x(2x+1) - 1$ grows exponentially, whereas $\langle x, x \rangle = x(2x+1) + x$ is quadratic. Cantor's pairing is a polynomial bijection; by a theorem of Fueter and Pólya, it is, up to exchanging the coordinates, the only quadratic polynomial bijection from $\nat^2$ to $\nat$. Lew and Rosenberg showed that there is no polynomial bijection of degree $3$ or $4$; whether one exists in higher degree is open.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-pairing-bounds difficulty=1 objective="Bound the components of a pair by its code, the inequality that justifies recursions on codes of pairs."}
 Show that $\langle x, y \rangle \geq x$ and $\langle x, y \rangle \geq y$ for all $x, y$, with equality only when $x = y = 0$, or $(x, y) = (1, 0)$ for the first inequality.
 
 :::solution
@@ -189,3 +181,80 @@ The Entscheidungsproblem is formulated in Hilbert and Ackermann's textbook *Grun
 - J. S. Lew, A. L. Rosenberg, *Polynomial indexing of integer lattice-points. II. Nonexistence results for higher-degree polynomials*, Journal of Number Theory 10 (1978), 215–243.
 - M. A. Vsemirnov, *Two elementary proofs of the Fueter–Pólya theorem on pairing polynomials*, Algebra i Analiz 13 (2001), no. 5, 1–15; English translation in St. Petersburg Mathematical Journal 13 (2002), 705–715.
 - M. B. Nathanson, *Cantor polynomials and the Fueter–Pólya theorem*, American Mathematical Monthly 123 (2016), 1001–1012.
+
+:::::exercises
+::::exercise{#ex-pairing-power-of-two difficulty=1 objective="Compare Cantor's pairing function with another bijection between pairs and integers."}
+Show that the function $\nat^2 \to \nat$, $(x, y) \mapsto 2^x (2y + 1) - 1$ is a bijection. Compare it with Cantor's pairing function: which one is more economical, in the sense of the size of $\langle x, x \rangle$ as a function of $x$?
+
+:::solution
+Every integer $z \geq 1$ is uniquely of the form $2^x \cdot m$ with $m$ odd, that is $m = 2y + 1$. So $(x, y) \mapsto 2^x(2y+1)$ is a bijection from $\nat^2$ onto $\nat \setminus \{0\}$, and subtracting $1$ gives a bijection onto $\nat$. On the diagonal, $2^x(2x+1) - 1$ grows exponentially, whereas $\langle x, x \rangle = x(2x+1) + x$ is quadratic. Cantor's pairing is a polynomial bijection; by a theorem of Fueter and Pólya, it is, up to exchanging the coordinates, the only quadratic polynomial bijection from $\nat^2$ to $\nat$. Lew and Rosenberg showed that there is no polynomial bijection of degree $3$ or $4$; whether one exists in higher degree is open.
+:::
+::::
+
+::::exercise{#ex-pairing-compute difficulty=1 objective="Compute codes of pairs and decode an integer, with a closed formula for the diagonal index."}
+1. Compute $\langle 3, 5 \rangle$.
+2. Show that for every $z$, the unique $n$ with $T(n) \leq z < T(n + 1)$ is $n = \big\lfloor (\sqrt{8z + 1} - 1)/2 \big\rfloor$.
+3. Compute $\pi_0(100)$ and $\pi_1(100)$.
+
+:::solution
+1. $\langle 3, 5 \rangle = T(8) + 5 = 36 + 5 = 41$.
+2. Multiplying by $8$ and adding $1$, the inequality $T(n) \leq z$, that is $n(n+1) \leq 2z$, is equivalent to $4n^2 + 4n + 1 \leq 8z + 1$, that is $(2n + 1)^2 \leq 8z + 1$. In the same way $z < T(n+1)$ is equivalent to $8z + 1 < (2n + 3)^2$. Taking square roots of these non-negative quantities, $T(n) \leq z < T(n+1)$ holds if and only if $2n + 1 \leq \sqrt{8z + 1} < 2n + 3$, that is $n \leq (\sqrt{8z+1} - 1)/2 < n + 1$, which says that $n$ is the integer part of $(\sqrt{8z+1} - 1)/2$.
+3. $\sqrt{801}$ lies between $28$ and $29$ (since $28^2 = 784$ and $29^2 = 841$), so $(\sqrt{801} - 1)/2$ lies between $13.5$ and $14$, and $n = 13$. Indeed $T(13) = 91 \leq 100 < 105 = T(14)$. Then $y = 100 - 91 = 9$ and $x = 13 - 9 = 4$: $\pi_0(100) = 4$ and $\pi_1(100) = 9$. Check: $\langle 4, 9 \rangle = T(13) + 9 = 100$.
+:::
+::::
+
+::::exercise{#ex-tuple-coding difficulty=1 objective="Prove by induction that iterated pairing codes tuples of every fixed length bijectively."}
+Show that for every $k \geq 1$, the function $\nat^k \to \nat$, $(x_1, \dots, x_k) \mapsto \langle x_1, \dots, x_k \rangle$, defined by $\langle x_1 \rangle = x_1$ and $\langle x_1, \dots, x_{k+1} \rangle = \langle x_1, \langle x_2, \dots, x_{k+1} \rangle \rangle$, is a bijection. Compute $\langle 1, 0, 1 \rangle$, and the triple coded by $4$.
+
+:::solution
+By induction on $k$. For $k = 1$ the function is the identity. Suppose that $c_k : \nat^k \to \nat$ is a bijection. Then $c_{k+1}(x_1, \vec y) = \langle x_1, c_k(\vec y) \rangle$ is the composition of the bijection $\mathrm{id} \times c_k : \nat \times \nat^k \to \nat \times \nat$ with the bijection $\langle \cdot, \cdot \rangle$ (:ref{#prop-cantor-pairing-bijection}), hence a bijection.
+
+For the example, $\langle 0, 1 \rangle = T(1) + 1 = 2$, so $\langle 1, 0, 1 \rangle = \langle 1, 2 \rangle = T(3) + 2 = 8$. For the triple coded by $4$: $4 = \langle 1, 1 \rangle$, since $T(2) = 3 \leq 4 < 6$; then $1 = \langle 1, 0 \rangle$. So $4 = \langle 1, \langle 1, 0 \rangle \rangle = \langle 1, 1, 0 \rangle$.
+:::
+::::
+
+::::exercise{#ex-cantor-order difficulty=2 objective="Characterize Cantor's pairing function by the order in which it enumerates the pairs."}
+For $n \in \nat$, let $D_n = \{(x, y) : x + y = n\}$ be the $n$-th diagonal. Let $p : \nat^2 \to \nat$ be a bijection such that
+
+1. $p(x, y) < p(x', y')$ whenever $x + y < x' + y'$, and
+2. $p(x + 1, y) < p(x, y + 1)$ for all $x, y$.
+
+Show that $p = \langle \cdot, \cdot \rangle$.
+
+:::solution
+The diagonal $D_n$ has $n + 1$ elements, and $\sum_{m < n} (m + 1) = T(n)$. We show by induction on $n$ that $p$ maps $D_0 \cup \dots \cup D_{n-1}$ onto $\{0, \dots, T(n) - 1\}$. For $n = 0$ both sets are empty. Suppose it holds for $n$. The values of $p$ on $D_n$ are $n + 1$ distinct integers, all $\geq T(n)$ by the induction hypothesis and injectivity. Suppose some value $v = p(a)$ with $a \in D_n$ is $\geq T(n) + n + 1$. The interval $[T(n), v]$ has at least $n + 2$ elements, and at most $n + 1$ of them are values on $D_n$, so some $w \in [T(n), v)$ is not a value on $D_n$. It is not a value on an earlier diagonal either, so by surjectivity $w = p(b)$ with $b \in D_m$, $m > n$. By condition 1, $p(b) > p(a)$, that is $w > v$, a contradiction. Hence the values on $D_n$ are $n + 1$ distinct elements of $\{T(n), \dots, T(n) + n\}$, which has $n + 1$ elements: $p(D_n) = \{T(n), \dots, T(n+1) - 1\}$, which completes the induction.
+
+On $D_n$, condition 2 says that $p(n, 0) < p(n - 1, 1) < \dots < p(0, n)$. The only increasing enumeration of $\{T(n), \dots, T(n) + n\}$ in $n + 1$ terms is $T(n), T(n) + 1, \dots$, so $p(n - y, y) = T(n) + y = \langle n - y, y \rangle$ for $0 \leq y \leq n$. Since every pair lies on some diagonal, $p = \langle \cdot, \cdot \rangle$.
+:::
+::::
+
+::::exercise{#ex-partial-expressions difficulty=1 objective="Apply the convention on undefined subexpressions and Kleene equality."}
+Let $f, g, h : \nat \rightharpoonup \nat$ be partial functions. Which of the following hold for all $x$? Justify each answer.
+
+1. $0 \cdot f(x) \simeq 0$.
+2. $f(x) + g(x) \simeq g(x) + f(x)$.
+3. If $f(x) \simeq g(x)$ and $g(x) \simeq h(x)$, then $f(x) \simeq h(x)$.
+4. $f(x) \dotminus f(x) \simeq 0$, where $a \dotminus b = \max(a - b, 0)$.
+
+Show also that $\dom (f \circ g) = \{x \in \dom g : g(x) \in \dom f\}$.
+
+:::solution
+1. False in general: if $f(x)\diverge$, the left side is undefined, by the convention that an expression is undefined as soon as a subexpression is; the right side is defined. It holds exactly for $x \in \dom f$.
+2. True: both sides are defined if and only if $f(x)\converge$ and $g(x)\converge$, and then they have the same value.
+3. True: $\simeq$ is an equivalence relation on expressions. If $f(x)\diverge$, then $g(x)\diverge$, then $h(x)\diverge$. If $f(x)\converge$, then $g(x)\converge$ with the same value, and then $h(x)\converge$ with the same value.
+4. False in general, for the same reason as 1: if $f(x)\diverge$ the left side is undefined.
+
+Finally $(f \circ g)(x) = f(g(x))$ is defined if and only if $g(x)$ is defined and $f$ converges on the value $g(x)$, which is the stated equality.
+:::
+::::
+
+::::exercise{#ex-bijective-numeration-bijection difficulty=2 objective="Prove that bijective numeration is a bijection, and decode an integer into a string."}
+Fix $m \geq 1$ and the alphabet $\{a_1, \dots, a_m\}$. Show that the coding $a_{i_1} \cdots a_{i_\ell} \mapsto \sum_{j=1}^{\ell} i_j\, m^{\ell - j}$ is a bijection between strings and $\nat$. Over $\{a, b\}$, with $a$ as digit $1$ and $b$ as digit $2$, compute the code of $bab$ and the string coded by $20$.
+
+:::solution
+Write $c(w)$ for the code of $w$. The code of $w a_i$ is $m \cdot c(w) + i$, since every digit is shifted by one place. We show by strong induction on $z$ that $z$ is the code of exactly one string. For $z = 0$: a non-empty string has code $\geq i_\ell \geq 1$, so only the empty string has code $0$. Let $z \geq 1$. If $z = c(w a_i)$, then $z = m\, c(w) + i$ with $1 \leq i \leq m$, so $i$ is the unique element of $\{1, \dots, m\}$ congruent to $z$ modulo $m$, and $c(w) = (z - i)/m$. Conversely, for this $i$, $(z - i)/m$ is an integer, $\geq 0$ and $< z$. By the induction hypothesis it is the code of exactly one string $w$, and then $z = c(w a_i)$. Hence $z$ is the code of exactly one string, the string $w a_i$.
+
+Over $\{a, b\}$: $c(bab) = 2 \cdot 4 + 1 \cdot 2 + 2 = 12$. For $20$, the proof gives the last digit and the code of the rest: $20 = 2 \cdot 9 + 2$, $9 = 2 \cdot 4 + 1$, $4 = 2 \cdot 1 + 2$, $1 = 2 \cdot 0 + 1$. Reading the digits from the first to the last, the string is $abab$; indeed $8 + 2 \cdot 4 + 2 + 2 = 20$.
+:::
+::::
+:::::

@@ -1,7 +1,7 @@
 ---
 title: Moduli and preservation of hyperimmunity
 summary: Moduli and the duality between computing a set and computing fast-growing functions; a problem preserves hyperimmunity if its solutions never compute a function dominating a given hyperimmune one; this implies cone avoidance, and is equivalent to it by a theorem of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky.
-duration: 35
+duration: 30
 prerequisites: [non-sigma1-definitions, turing-degrees/limit-computability, immunity-growth/immune-sets]
 ---
 
@@ -66,7 +66,7 @@ A problem admits preservation of hyperimmunity if and only if it admits cone avo
 :::
 
 :::proof{of=cor-hyperimmunity-equivalence}
-One direction is :ref{#thm-hyperimmunity-cone}. Conversely, assume cone avoidance, and let $f$ be $Z$-hyperimmune and $X \leq_T Z$ an instance. By the first exercise, we may assume that $f$ is non-decreasing. Let $W$ and $A$ be given by :ref{#thm-hyperimmune-modulus}. Cone avoidance relative to $Z \oplus W$ gives a solution $Y$ with $A \not\leq_T Z \oplus W \oplus Y$. If some $g \leq_T Z \oplus Y$ dominated $f$, then $A \leq_T W \oplus g \leq_T Z \oplus W \oplus Y$. So $f$ is $(Z \oplus Y)$-hyperimmune.
+One direction is :ref{#thm-hyperimmunity-cone}. Conversely, assume cone avoidance, and let $f$ be $Z$-hyperimmune and $X \leq_T Z$ an instance. By :ref{#ex-hyperimmune-envelope}, we may assume that $f$ is non-decreasing. Let $W$ and $A$ be given by :ref{#thm-hyperimmune-modulus}. Cone avoidance relative to $Z \oplus W$ gives a solution $Y$ with $A \not\leq_T Z \oplus W \oplus Y$. If some $g \leq_T Z \oplus Y$ dominated $f$, then $A \leq_T W \oplus g \leq_T Z \oplus W \oplus Y$. So $f$ is $(Z \oplus Y)$-hyperimmune.
 :::
 
 :::quiz[hyperimmunity and cone avoidance]
@@ -95,15 +95,7 @@ Where is item 2 of :ref{#lem-modulus-hyperimmune} used, and why does it need $m 
 
 ## Exercises
 
-::::exercise{difficulty=1}
-For a function $f$, let $F(n) = \max_{i \leq n} f(i)$. Show that for every set $W$, $f$ is $W$-hyperimmune if and only if $F$ is.
-
-:::solution
-Since $F \geq f$, a function dominating $F$ dominates $f$; so if $f$ is $W$-hyperimmune, so is $F$. Conversely, if $g \leq_T W$ dominates $f$, then $G(n) = \max_{i \leq n} g(i)$ is $W$-computable and $G(n) \geq g(i) \geq f(i)$ for every $i \leq n$, so $G$ dominates $F$.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-hyperimmunity-unrelativized difficulty=1 objective="See, with a computably dominated set, that the unrelativized preservation of hyperimmunity does not imply cone avoidance."}
 Let $A$ be a non-computable computably dominated set (:ref{#def-computably-dominated}), and let $\mathsf P$ be the problem with the single instance $\emptyset$, whose single solution is $A$. Show that for every hyperimmune function $f$, $f$ is $A$-hyperimmune, but that $\mathsf P$ does not admit cone avoidance. Why does this not contradict :ref{#cor-hyperimmunity-equivalence}?
 
 :::solution
@@ -113,8 +105,68 @@ Every $A$-computable function is dominated by a computable function, so a functi
 
 ## Notes and references
 
-The duality between moduli and coding, and preservation of one hyperimmunity, follow the section *Preserving hyperimmunities* of the chapter *Cone avoidance* of Patey's monograph. :ref{#thm-hyperimmunity-cone} is Corollary 2.10 of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky (2022), whose proof (their Lemma 2.9) goes through a variant of :ref{#thm-delta2-cone-avoidance} (their Lemma 2.8, attributed to Patey) and the modulus of a $\Delta^0_2$ set; :ref{#thm-hyperimmune-modulus} is their Lemma 2.6, and :ref{#cor-hyperimmunity-equivalence} their Corollary 2.7. The separations of the unrelativized versions are their Theorems 2.11 and 2.12; the problem of the last exercise is the one of Theorem 2.12. The characterization of the sets with a modulus as the hyperarithmetic sets is due to Solovay (1978).
+The duality between moduli and coding, and preservation of one hyperimmunity, follow the section *Preserving hyperimmunities* of the chapter *Cone avoidance* of Patey's monograph. :ref{#thm-hyperimmunity-cone} is Corollary 2.10 of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky (2022), whose proof (their Lemma 2.9) goes through a variant of :ref{#thm-delta2-cone-avoidance} (their Lemma 2.8, attributed to Patey) and the modulus of a $\Delta^0_2$ set; :ref{#thm-hyperimmune-modulus} is their Lemma 2.6, and :ref{#cor-hyperimmunity-equivalence} their Corollary 2.7. The separations of the unrelativized versions are their Theorems 2.11 and 2.12; the problem of :ref{#ex-hyperimmunity-unrelativized} is the one of Theorem 2.12. The characterization of the sets with a modulus as the hyperarithmetic sets is due to Solovay (1978).
 
 - R. Downey, N. Greenberg, M. Harrison-Trainor, L. Patey and D. Turetsky, *Relationships between computability-theoretic properties of problems*, Journal of Symbolic Logic 87 (2022), 47–71; arXiv:1903.04273.
 - R. M. Solovay, *Hyperarithmetically encodable sets*, Transactions of the American Mathematical Society 239 (1978), 99–122.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, section *Preserving hyperimmunities*.
+
+:::::exercises
+::::exercise{#ex-hyperimmune-envelope difficulty=1 objective="Reduce hyperimmunity relative to a set to non-decreasing functions, with the running maximum."}
+For a function $f$, let $F(n) = \max_{i \leq n} f(i)$. Show that for every set $W$, $f$ is $W$-hyperimmune if and only if $F$ is.
+
+:::solution
+Since $F \geq f$, a function dominating $F$ dominates $f$; so if $f$ is $W$-hyperimmune, so is $F$. Conversely, if $g \leq_T W$ dominates $f$, then $G(n) = \max_{i \leq n} g(i)$ is $W$-computable and $G(n) \geq g(i) \geq f(i)$ for every $i \leq n$, so $G$ dominates $F$.
+:::
+::::
+
+::::exercise[First properties of moduli]{#ex-modulus-basic difficulty=1 objective="Check the first properties of moduli from the definition."}
+Let $Z$ and $C$ be sets. Show that:
+
+1. every function that dominates a modulus of $C$ relative to $Z$ is a modulus of $C$ relative to $Z$;
+2. if $C \leq_T Z$, every function is a modulus of $C$ relative to $Z$;
+3. $C$ has a $Z$-computable modulus relative to $Z$ if and only if $C \leq_T Z$.
+
+:::solution
+1. Let $m$ be a modulus and $m' \geq m$. A function $g$ dominating $m'$ dominates $m$, so $C \leq_T Z \oplus g$.
+2. If $C \leq_T Z$, then $C \leq_T Z \oplus g$ for every function $g$.
+3. If $m \leq_T Z$ is a modulus, then $m$ dominates itself, so $C \leq_T Z \oplus m \leq_T Z$. Conversely, if $C \leq_T Z$, the constant function $0$ is a $Z$-computable modulus by item 2.
+
+By item 3, a modulus of a set $C \not\leq_T Z$ is never computable in $Z$. By item 1 of :ref{#lem-modulus-hyperimmune} with $Y = \emptyset$, it is in fact $Z$-hyperimmune.
+:::
+::::
+
+::::exercise[The Δ⁰₂ case without the extra set]{#ex-hyperimmunity-delta2-cone difficulty=1 objective="Prove the Δ⁰₂ case of the relation between hyperimmunity and cones without relativizing, and locate the role of the extra set."}
+Show directly from :ref{#lem-delta2-modulus} and :ref{#lem-modulus-hyperimmune}, without the set $W$ of the proof of :ref{#thm-hyperimmunity-cone}, that if $\mathsf P$ admits preservation of hyperimmunity, then for every set $Z$, every $C$ with $C \leq_T Z'$ and $C \not\leq_T Z$, and every instance $X \leq_T Z$, there is a solution $Y$ with $C \not\leq_T Z \oplus Y$. Which step fails when $C$ is not computable in $Z'$?
+
+:::solution
+By :ref{#lem-delta2-modulus}, $C$ has a modulus $m \leq_T C \oplus Z$ relative to $Z$. By item 1 of :ref{#lem-modulus-hyperimmune} with $Y = \emptyset$, $m$ is $Z$-hyperimmune, since $C \not\leq_T Z$. Preservation of hyperimmunity gives a solution $Y$ such that $m$ is $(Z \oplus Y)$-hyperimmune, and item 2 gives $C \not\leq_T Z \oplus Y$.
+
+When $C \not\leq_T Z'$, the first step fails: :ref{#lem-delta2-modulus} does not apply, and $C$ may have no modulus relative to $Z$ at all (by Solovay's theorem, only hyperarithmetic sets have one relative to $\emptyset$). The set $W$ of :ref{#thm-hyperimmunity-cone} makes $C$ computable in $(Z \oplus W)'$ without making it computable in $Z \oplus W$, so that the argument above applies relative to $Z \oplus W$.
+:::
+::::
+
+::::exercise[A modulus not computable in the set]{#ex-modulus-item2-hypothesis difficulty=2 objective="See with a counterexample why the second item of the lemma on moduli needs a modulus computable in the set."}
+Show that item 2 of :ref{#lem-modulus-hyperimmune} fails without the hypothesis $m \leq_T C \oplus Z$: find a modulus $m$ of $\emptyset'$ relative to $\emptyset$ and a set $Y$ such that $m$ is $Y$-hyperimmune while $\emptyset' \leq_T Y$.
+
+:::solution
+Let $s$ be the modulus of the standard approximation of $\emptyset'$; it is a modulus of $\emptyset'$ relative to $\emptyset$ by :ref{#cor-complete-domination}. Let
+$$
+F(n) = 1 + \max \{ \Phi^{\emptyset'}_e(n) : e \leq n,\ \Phi^{\emptyset'}_e(n)\converge \},
+$$
+with $\max \emptyset = 0$, a total function computable in $\emptyset''$. Let $m(n) = \max(s(n), F(n))$. Since $m$ dominates $s$, it is a modulus of $\emptyset'$ by :ref{#ex-modulus-basic}.
+
+Take $Y = \emptyset'$. If a total function $g = \Phi^{\emptyset'}_e$ dominated $m$, even from some point on, then for every $n \geq e$, $m(n) \geq F(n) \geq g(n) + 1 > g(n)$, a contradiction. So $m$ is $\emptyset'$-hyperimmune, although $\emptyset' \leq_T Y$. Item 2 fails because $m$ is not computable in $\emptyset' \oplus \emptyset$: the contradiction in its proof comes from $Y$ computing $m$ itself.
+:::
+::::
+
+::::exercise[Strong preservation fails for WKL and RT²₂]{#ex-strong-hyperimmunity-fails difficulty=1 objective="Show that strong preservation of hyperimmunity implies strong cone avoidance, and give explicit witnesses of its failure for WKL and RT²₂." lessons="avoidance-properties"}
+Show that strong preservation of hyperimmunity implies strong cone avoidance. Deduce that $\mathsf{WKL}$ and $\mathsf{RT}^2_2$ do not admit strong preservation of hyperimmunity, and give for each an instance and a hyperimmune function that is not hyperimmune relative to any solution.
+
+:::solution
+In the proof of :ref{#thm-hyperimmunity-cone}, the instance $X$ is only used when preservation is applied relative to $Z \oplus W$; with strong preservation, $X$ may be arbitrary, and the same proof gives strong cone avoidance. By :ref{#ex-cone-avoidance-problems}, $\mathsf{WKL}$ and $\mathsf{RT}^2_2$ do not admit strong cone avoidance, so they do not admit strong preservation of hyperimmunity.
+
+Explicitly, let $s$ be the modulus of the standard approximation of $\emptyset'$ and $Z = \emptyset$. It is hyperimmune, by item 1 of :ref{#lem-modulus-hyperimmune} with $Z = Y = \emptyset$, and it is computable in $\emptyset'$. The tree $\{ \emptyset' \uh n : n \in \nat \}$ has the single path $\emptyset'$, which computes $s$. Every infinite homogeneous set for the coloring $h$ of the proof of :ref{#prop-rt32-jump} computes $\emptyset'$, hence $s$. A function computable in a set is not hyperimmune relative to it, since it dominates itself.
+:::
+::::
+:::::

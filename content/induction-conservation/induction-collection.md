@@ -143,9 +143,7 @@ For every $n \geq 1$, the schemes $\mathsf I\Sigma^0_n$, $\mathsf I\Pi^0_n$, $\m
 Combined with :ref{#thm-isigma-ipi}, the four schemes are equivalent.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-strong-induction-sigma difficulty=1 objective="Apply $\Sigma^0_n$ induction to an auxiliary formula whose bounded universal quantifier is absorbed by collection, to derive strong induction."}
 The **strong induction** scheme for a formula $\varphi$ is $\forall x\, ((\forall y < x\ \varphi(y)) \rightarrow \varphi(x)) \rightarrow \forall x\, \varphi(x)$. Show that $\mathsf I\Sigma^0_n$ proves strong induction for $\Sigma^0_n$ formulas, for every $n \geq 1$.
 
 :::solution
@@ -165,3 +163,71 @@ The hierarchy of induction and collection schemes is due to Paris and Kirby (197
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 6.1.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 2.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991, chapters *Collection* and *Subsystems of Peano arithmetic*.
+
+:::::exercises
+::::exercise{#ex-sigma-max-principle difficulty=1 objective="Derive a greatest number principle for bounded definable sets from the least number principles, and see where collection is needed."}
+Let $n \geq 1$. Show that $\mathsf I\Delta^0_0 + \mathsf I\Sigma^0_n$ proves, for every formula $\varphi(x)$ that is $\Sigma^0_n$ or $\Pi^0_n$: if $\varphi(c)$ holds and $\forall x\, (\varphi(x) \rightarrow x \leq a)$, then $\varphi$ has a greatest element, that is, some $z$ with $\varphi(z)$ and $\forall y\, (\varphi(y) \rightarrow y \leq z)$. Which of the two cases uses collection?
+
+:::solution
+In both cases we find the least upper bound of $\varphi$ with a least number principle of :ref{#prop-least-number}, and show that it satisfies $\varphi$.
+
+*$\varphi \in \Sigma^0_n$.* Let $\psi(z) \equiv \forall y\, (\neg \varphi(y) \vee y \leq z)$. The formula $\neg \varphi$ is equivalent to a $\Pi^0_n$ formula, the disjunct $y \leq z$ is bounded and can be moved into its matrix, and $\forall y$ merges with its first block: $\psi$ is equivalent to a $\Pi^0_n$ formula, with no use of collection. By hypothesis $\psi(a)$ holds, so $\mathsf L\Pi^0_n$ gives a least $z_0$ with $\psi(z_0)$.
+
+*$\varphi \in \Pi^0_n$.* Let $\psi(z) \equiv \forall y \leq a\ (y \leq z \vee \neg \varphi(y))$. It is obtained from the $\Sigma^0_n$ formula $\neg \varphi$ by a disjunction and a bounded universal quantifier, so it is equivalent to a $\Sigma^0_n$ formula by :ref{#lem-collection-closure}, which applies since $\mathsf I\Sigma^0_n$ proves $\mathsf B\Sigma^0_n$ (:ref{#thm-induction-collection}). Again $\psi(a)$ holds, and $\mathsf L\Sigma^0_n$ gives a least $z_0$ with $\psi(z_0)$.
+
+In both cases, every $y$ with $\varphi(y)$ satisfies $y \leq a$, hence $y \leq z_0$ by $\psi(z_0)$; in particular $c \leq z_0$. If $z_0 = 0$, then $c = 0$ and $\varphi(z_0)$. Otherwise $z_0 = z' + 1$, and $\psi(z')$ fails: there is $y \leq a$ with $\varphi(y)$ and $y > z'$, so $z_0 \leq y \leq z_0$, and $\varphi(z_0)$. So $z_0$ is the greatest element of $\varphi$.
+
+Only the $\Pi^0_n$ case uses collection: there, the bounded universal quantifier stands in front of a $\Sigma^0_n$ formula. In the $\Sigma^0_n$ case it stands in front of a $\Pi^0_n$ formula, where it is an ordinary universal quantifier.
+:::
+::::
+
+::::exercise{#ex-strong-induction-pi difficulty=1 objective="Compare strong induction for $\Sigma^0_n$ and $\Pi^0_n$ formulas with ordinary induction, and see that the $\Pi^0_n$ case needs no collection."}
+Let $n \geq 1$, and recall the strong induction scheme of :ref{#ex-strong-induction-sigma}. Show that over $\mathsf I\Delta^0_0$ the following are equivalent: $\mathsf I\Sigma^0_n$; strong induction for $\Sigma^0_n$ formulas; strong induction for $\Pi^0_n$ formulas.
+
+:::solution
+*Strong induction implies induction*, for any formula $\varphi$. Suppose $\varphi(0)$ and $\forall x\, (\varphi(x) \rightarrow \varphi(x + 1))$, and let $x$ satisfy $\forall y < x\ \varphi(y)$. If $x = 0$, then $\varphi(x)$; otherwise $x = x' + 1$ with $x' < x$, so $\varphi(x')$ and $\varphi(x)$. So the hypothesis of strong induction holds, and it gives $\forall x\, \varphi(x)$. Hence strong induction for $\Sigma^0_n$ formulas gives $\mathsf I\Sigma^0_n$, and strong induction for $\Pi^0_n$ formulas gives $\mathsf I\Pi^0_n$, which is equivalent to $\mathsf I\Sigma^0_n$ by :ref{#thm-isigma-ipi}.
+
+*$\mathsf I\Sigma^0_n$ implies strong induction for $\Sigma^0_n$ formulas*: this is :ref{#ex-strong-induction-sigma}.
+
+*$\mathsf I\Sigma^0_n$ implies strong induction for $\Pi^0_n$ formulas.* Let $\varphi \in \Pi^0_n$ satisfy $\forall x\, ((\forall y < x\ \varphi(y)) \rightarrow \varphi(x))$, fix $z$, and let $\theta(x) \equiv x \leq z \rightarrow \forall y < x\ \varphi(y)$. The quantifier $\forall y < x$ is the universal quantifier $\forall y$ followed by the bounded disjunct $y \geq x$, so it merges with the first block of $\varphi$, and $\theta$ is equivalent to a $\Pi^0_n$ formula without any use of collection. As in :ref{#ex-strong-induction-sigma}, $\theta(0)$ holds and $\theta(x)$ implies $\theta(x + 1)$; by $\mathsf I\Pi^0_n$, which follows from $\mathsf I\Sigma^0_n$ by :ref{#thm-isigma-ipi}, $\theta(z)$ holds, and $\varphi(z)$ follows from the hypothesis.
+
+Adapted from Dzhafarov and Mummert, Exercise 6.7.2.
+:::
+::::
+
+::::exercise{#ex-sigma-recursion difficulty=2 objective="Use Parsons' lemma to show that $\Sigma^0_1$ induction makes every iteration of a $\Sigma^0_1$-definable operation total."}
+Work in $\mathsf{RCA}_0$, with its coding of finite sequences: the relations $\mathrm{lh}(s) = \ell$ and $s(i) = u$ are given by bounded formulas, and every sequence $s$ and number $v$ have a sequence $s^\frown v$ of length $\mathrm{lh}(s) + 1$ that extends $s$ by the term $v$. Let $\eta(i, u, v)$ be a $\Sigma^0_1$ formula, with parameters, such that $\forall i\ \forall u\ \exists v\ \eta(i, u, v)$, and let $c$ be a number. Show that $\mathsf{RCA}_0$ proves
+$$
+\forall x\ \exists s\ \bigl(\mathrm{lh}(s) = x + 1 \wedge s(0) = c \wedge \forall i < x\ \eta(i, s(i), s(i + 1))\bigr).
+$$
+How does this generalize item 1 of :ref{#ex-scheme-instances}?
+
+:::solution
+Let $\theta(x)$ be the formula in parentheses preceded by $\exists s$, where $\eta(i, s(i), s(i + 1))$ stands for $\exists u\ \exists v\ (u = s(i) \wedge v = s(i + 1) \wedge \eta(i, u, v))$, a $\Sigma^0_1$ formula. In $\theta$, the bounded quantifier $\forall i < x$ stands in front of this $\Sigma^0_1$ formula. Since $\mathsf{RCA}_0$ contains $\mathsf I\Sigma^0_1$, it proves $\mathsf B\Sigma^0_1$ (:ref{#thm-induction-collection}), so by :ref{#lem-collection-closure} the formula $\forall i < x\ \eta(i, s(i), s(i+1))$ is equivalent to a $\Sigma^0_1$ formula, and so is $\theta$.
+
+The sequence $\langle c \rangle$, obtained by appending $c$ to the empty sequence, witnesses $\theta(0)$. Suppose $s$ witnesses $\theta(x)$. Choose $v$ with $\eta(x, s(x), v)$, and let $s' = s^\frown v$. Then $\mathrm{lh}(s') = x + 2$ and $s'(0) = c$. For $i < x$, we have $i + 1 \leq x < \mathrm{lh}(s)$, so $s'(i) = s(i)$ and $s'(i + 1) = s(i + 1)$, and $\eta(i, s'(i), s'(i+1))$ holds. For $i = x$, $s'(x) = s(x)$ and $s'(x + 1) = v$. So $s'$ witnesses $\theta(x + 1)$. By $\Sigma^0_1$ induction, $\forall x\, \theta(x)$.
+
+With $c = 1$ and the bounded formula $\eta(i, u, v) \equiv v = 2u$, the sequence $s$ is $(2^0, \dots, 2^x)$, and we recover the totality of exponentiation. In general, $\eta$ need not define a function: the sequence records one choice of values, and collection is what keeps the statement "the first $x$ steps are correct" at the level $\Sigma^0_1$, when the steps themselves are only $\Sigma^0_1$.
+:::
+::::
+
+::::exercise{#ex-finite-choice difficulty=2 objective="Prove finite choice for $\Sigma^0_n$ formulas by carrying the witnesses in a sequence, and obtain a proof of $\mathsf B\Sigma^0_n$ from $\mathsf I\Sigma^0_n$ that uses no collection one level down."}
+Work in $\mathsf{RCA}_0 + \mathsf I\Sigma^0_n$, $n \geq 1$, with the coding of finite sequences of the previous exercise; with the coding of Simpson (Definition II.2.6), moreover, every term $s(i)$ of a sequence $s$ is less than $s$. Let $\varphi(x, y)$ be a $\Sigma^0_n$ formula, written $\exists z\, \psi(x, y, z)$ with $\psi \in \Pi^0_{n-1}$ (bounded if $n = 1$); a block of existential quantifiers $\exists z_1\, \exists z_2$ can be contracted into one, $\exists w\ \forall z_1 \leq w\ \forall z_2 \leq w\ (w = \langle z_1, z_2 \rangle \rightarrow \cdots)$, without collection. Show the **finite choice** principle: if $\forall x < a\ \exists y\ \varphi(x, y)$, there is a sequence $s$ of length $a$ such that for every $x < a$, $s(x) = \langle y, z \rangle$ for some $y, z$ with $\psi(x, y, z)$. Deduce $\mathsf B\Sigma^0_n$ without using :ref{#lem-collection-closure} or induction on $n$.
+
+:::solution
+Let $\chi(s, c)$ be the formula
+$$
+\forall x < c\ \forall u \leq s\ \forall y \leq u\ \forall z \leq u\ \bigl((u = s(x) \wedge u = \langle y, z \rangle) \rightarrow \psi(x, y, z)\bigr).
+$$
+For $x < \mathrm{lh}(s)$, the value $u = s(x)$ is at most $s$, and its components are at most $u$ (:ref{#fact-idelta0}), so $\chi(s, c)$ says, when $c \leq \mathrm{lh}(s)$, that each $s(x)$ with $x < c$ is a pair $\langle y, z \rangle$ with $\psi(x, y, z)$. The bounded universal quantifiers stand in front of a disjunction of a bounded formula and a $\Pi^0_{n-1}$ formula; each of them is an ordinary universal quantifier with a bounded guard and merges with the first block. So $\chi$ is equivalent to a $\Pi^0_{n-1}$ formula (or is bounded if $n = 1$), by logic alone. Let
+$$
+\theta(c) \equiv c \leq a \rightarrow \exists s\ (\mathrm{lh}(s) = c \wedge \chi(s, c)),
+$$
+equivalent to a $\Sigma^0_n$ formula. The empty sequence witnesses $\theta(0)$. If $s$ witnesses $\theta(c)$ and $c + 1 \leq a$, then $c < a$, so there are $y, z$ with $\psi(c, y, z)$, and $s^\frown \langle y, z \rangle$ witnesses $\theta(c + 1)$. By $\mathsf I\Sigma^0_n$, $\theta(a)$ holds, which is finite choice.
+
+For collection, let $s$ be given by finite choice and $b = s + 1$. For $x < a$, $s(x) = \langle y, z \rangle$ with $\psi(x, y, z)$, so $\varphi(x, y)$, and $y \leq s(x) < s < b$. Hence $\forall x < a\ \exists y < b\ \varphi(x, y)$.
+
+The proof of :ref{#thm-induction-collection} bounds the witnesses with an existential quantifier $\exists w < b$ in front of a $\Pi^0_{n-1}$ formula, which needs $\mathsf B\Sigma^0_{n-1}$. Here the witnesses are stored in $s$ and only checked by universal quantifiers, so no collection is needed; the price is the coding of sequences. Hájek and Pudlák (Chapter I, 2.21–2.24) study finite choice for the classes $\Sigma_n$ in first-order arithmetic.
+:::
+::::
+:::::

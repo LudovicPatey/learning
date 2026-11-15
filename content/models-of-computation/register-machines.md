@@ -117,7 +117,7 @@ What does the following program compute, with input $x$ in $R_1$?
   For $x \neq 0$, the jump $J(1, 2, 3)$ fails since $R_2 = 0$, and $J(1, 1, 1)$ returns to $I_1$ forever: the program diverges.
 :::
 
-::::exercise{difficulty=1 #ex-urm-pred}
+::::exercise{#ex-urm-pred difficulty=1 objective="Decrement a register with an instruction set that only increments, using two counters."}
 Write a URM program computing $x \dotminus 1$, where $x \dotminus 1 = x - 1$ if $x \geq 1$ and $0 \dotminus 1 = 0$. Prove that it is correct.
 
 :::hint
@@ -240,13 +240,30 @@ Suppose $g_1(\vec x)\diverge$ but $h$ is a constant function. What does the prog
 
 ## Goto programs and assembly languages
 
-The URM is a minimal example of a **goto program**: a numbered list of elementary instructions together with conditional jumps. Processors execute programs of this kind. Other common instruction sets, for instance with a decrement instruction $R_n \leftarrow R_n \dotminus 1$ and a test "if $R_n = 0$ go to $q$", lead to the same class of computable functions. The proof is a **simulation**, the technique of the lesson :ref{to="models-of-computation/multitape-machines"}: each instruction of one set is replaced by a block of instructions of the other, using auxiliary registers that the program does not mention, and jump targets are renumbered. The second exercise below is an instance, and :ref{#ex-urm-pred} shows how to decrement without a decrement instruction.
+The URM is a minimal example of a **goto program**: a numbered list of elementary instructions together with conditional jumps. Processors execute programs of this kind. Other common instruction sets, for instance with a decrement instruction $R_n \leftarrow R_n \dotminus 1$ and a test "if $R_n = 0$ go to $q$", lead to the same class of computable functions. The proof is a **simulation**, the technique of the lesson :ref{to="models-of-computation/multitape-machines"}: each instruction of one set is replaced by a block of instructions of the other, using auxiliary registers that the program does not mention, and jump targets are renumbered. :ref{#ex-urm-no-transfer} below is an instance, :ref{#ex-urm-pred} shows how to decrement without a decrement instruction, and :ref{#ex-urm-decrement-variant} carries out the simulation for the instruction set above.
 
 In the lessons :ref{to="models-of-computation/loop-programs"} and :ref{to="models-of-computation/while-programs"} we consider **structured** programs, with `for` and `while` loops instead of jumps. They are more convenient to write, and the distinction between the two kinds of loops gives a characterization of the primitive recursive functions.
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-urm-no-transfer difficulty=2 objective="Eliminate an instruction by simulating it with the others, using an auxiliary register out of reach of the program."}
+Consider the variant of the URM without the transfer instruction $T(m, n)$. Show that it computes the same functions.
+
+:::solution
+For $m \neq n$, the instruction $T(m, n)$ can be simulated with $Z$, $S$ and $J$ using as a counter a register $R_c$ with $c > \rho(P)$, where $P$ is the program being transformed: $Z(n)$, $Z(c)$, then the loop "if $R_c = R_m$, exit; $S(n)$; $S(c)$; go back", the backward jump being $J(c, c, \cdot)$. The case $m = n$ is a no-op. Replacing each $T$ instruction by such a block, and shifting all jump targets accordingly, gives a program without $T$ whose computations follow those of $P$ on the registers $R_1, \dots, R_{\rho(P)}$. Since $c > \rho(P) \geq 1$, the output register $R_1$ is never used as the counter, so both programs compute the same functions; the initial content of $R_c$, possibly an input, is irrelevant because $R_c$ is zeroed before each use and is not mentioned by $P$.
+:::
+::::
+
+## Notes and references
+
+Register machines were introduced around 1960 in several variants, by Melzak, Lambek, Minsky, and Shepherdson and Sturgis. The URM and its notation follow Cutland's textbook, which develops the whole of elementary computability theory on this model.
+
+- J. C. Shepherdson, H. E. Sturgis, *Computability of recursive functions*, Journal of the ACM 10 (1963), 217–255.
+- M. Minsky, *Computation: Finite and Infinite Machines*, Prentice-Hall, 1967.
+- N. Cutland, *Computability: An Introduction to Recursive Function Theory*, Cambridge University Press, 1980.
+
+:::::exercises
+::::exercise{#ex-urm-sign difficulty=1 objective="Write a URM program with a test against a register known to contain $0$."}
 Write a URM program computing the function $\mathrm{sg}(x)$, equal to $0$ if $x = 0$ and to $1$ otherwise.
 
 :::solution
@@ -258,26 +275,112 @@ Write a URM program computing the function $\mathrm{sg}(x)$, equal to $0$ if $x 
 :::
 ::::
 
-::::exercise{difficulty=2}
-Consider the variant of the URM without the transfer instruction $T(m, n)$. Show that it computes the same functions.
+::::exercise{#ex-urm-cases difficulty=2 objective="Implement a definition by cases with a branching program, which evaluates only the case that applies."}
+Prove that the URM-computable functions are closed under definition by cases: if $f_1, f_2 : \nat^k \rightharpoonup \nat$ are URM-computable partial functions and $P \subseteq \nat^k$ is a set whose characteristic function is URM-computable, then the partial function $f$ defined by $f(\vec x) \simeq f_1(\vec x)$ if $\vec x \in P$ and $f(\vec x) \simeq f_2(\vec x)$ otherwise is URM-computable.
 
 :::solution
-For $m \neq n$, the instruction $T(m, n)$ can be simulated with $Z$, $S$ and $J$ using as a counter a register $R_c$ with $c > \rho(P)$, where $P$ is the program being transformed: $Z(n)$, $Z(c)$, then the loop "if $R_c = R_m$, exit; $S(n)$; $S(c)$; go back", the backward jump being $J(c, c, \cdot)$. The case $m = n$ is a no-op. Replacing each $T$ instruction by such a block, and shifting all jump targets accordingly, gives a program without $T$ whose computations follow those of $P$ on the registers $R_1, \dots, R_{\rho(P)}$. Since $c > \rho(P) \geq 1$, the output register $R_1$ is never used as the counter, so both programs compute the same functions; the initial content of $R_c$, possibly an input, is irrelevant because $R_c$ is zeroed before each use and is not mentioned by $P$.
+Let $C$, $F_1$, $F_2$ be programs in standard form computing $\chi_P$, $f_1$, $f_2$, and let $N$ be larger than $k$ and than $\rho(C)$, $\rho(F_1)$, $\rho(F_2)$. Write $c = N + k + 1$ and $z = N + k + 2$; these registers initially contain $0$, and $R_z$ is never written. Consider the program
+$$
+\begin{aligned}
+& T(1, N{+}1),\ \dots,\ T(k, N{+}k),\ C[N{+}1, \dots, N{+}k \to c],\ J(c, z, a), \\
+& F_1[N{+}1, \dots, N{+}k \to 1],\ J(1, 1, b),\ F_2[N{+}1, \dots, N{+}k \to 1],
+\end{aligned}
+$$
+where $a$ is the index of the first instruction of the block for $F_2$ and $b$ is the length of the program plus one. By :ref{#lem-urm-subroutine} and :ref{#lem-urm-concat}, the block for $C$ halts, since $\chi_P$ is total, with $\chi_P(\vec x)$ in $R_c$ and the saved input unchanged. If $\vec x \notin P$, then $R_c = 0 = R_z$, and the program jumps to the block for $F_2$, which halts if and only if $f_2(\vec x)\converge$, with $f_2(\vec x)$ in $R_1$; the program then halts. If $\vec x \in P$, the jump is not taken, the block for $F_1$ halts if and only if $f_1(\vec x)\converge$, with $f_1(\vec x)$ in $R_1$, and $J(1, 1, b)$ then halts the program. In both cases the program halts exactly when $f(\vec x)\converge$, with output $f(\vec x)$. Only the function of the case that applies is evaluated, so the divergence of the other one is harmless, unlike in the arithmetic definition by cases of the lesson :ref{to="models-of-computation/primitive-recursion"}.
 :::
 ::::
 
-::::exercise{difficulty=2}
-Prove that the URM-computable functions are closed under definition by cases: if $f_1, f_2 : \nat^k \to \nat$ are total URM-computable functions and $P \subseteq \nat^k$ is a set whose characteristic function is URM-computable, then $f(\vec x) = f_1(\vec x)$ if $\vec x \in P$ and $f(\vec x) = f_2(\vec x)$ otherwise is URM-computable.
+::::exercise{#ex-urm-steps difficulty=1 objective="Count the steps of the addition and multiplication programs from their loop invariants."}
+Show that on input $(x, y)$ the addition program halts after $4y + 1$ steps, and the multiplication program after $y(4x + 5) + 2$ steps.
 
 :::solution
-Let $C$ compute the characteristic function of $P$. Save the input in fresh registers, run $C$ on it with output in a fresh register $R_c$, and use $J(c, z, \cdot)$, where $R_z$ is a fresh register containing $0$, to branch to a block computing $f_2$ on the saved input; otherwise continue with a block computing $f_1$ on the saved input, followed by an unconditional jump past the other block. Correctness follows from :ref{#lem-urm-subroutine} and :ref{#lem-urm-concat}.
+*Addition.* Each pass through the loop, from $I_1$ back to $I_1$, executes $I_1, I_2, I_3, I_4$: $4$ steps. By the invariant of the text, there are $y$ passes, and then the jump $I_1$ is taken: $4y + 1$ steps.
+
+*Multiplication.* By the proof of :ref{#prop-urm-mult}, each round $j < y$ of the outer loop executes $I_1$ and $I_2$, then $x$ passes through $I_3, I_4, I_5, I_6$, then $I_3$ (the jump is taken), $I_7$ and $I_8$: $2 + 4x + 3 = 4x + 5$ steps. After $y$ rounds, $I_1$ jumps to $I_9$, and $I_9$ is executed: $2$ more steps. The total is $y(4x + 5) + 2$. For instance, on $(1, 1)$ the program executes $I_1, I_2, I_3, I_4, I_5, I_6, I_3, I_7, I_8, I_1, I_9$: $11$ steps.
 :::
 ::::
 
-## Notes and references
+::::exercise{#ex-urm-leq difficulty=1 objective="Compare two registers with a counter that increases until it meets one of them."}
+Write a URM program computing the characteristic function of $x \leq y$, and prove it correct.
 
-Register machines were introduced around 1960 in several variants, by Melzak, Lambek, Minsky, and Shepherdson and Sturgis. The URM and its notation follow Cutland's textbook, which develops the whole of elementary computability theory on this model.
+:::solution
+A counter $k$ in $R_3$ increases from $0$; the first of $x$, $y$ that it meets decides the answer.
 
-- J. C. Shepherdson, H. E. Sturgis, *Computability of recursive functions*, Journal of the ACM 10 (1963), 217–255.
-- M. Minsky, *Computation: Finite and Infinite Machines*, Prentice-Hall, 1967.
-- N. Cutland, *Computability: An Introduction to Recursive Function Theory*, Cambridge University Press, 1980.
+| | | |
+| --- | --- | --- |
+| $I_1$ | $J(1, 3, 5)$ | if $k = x$, then $x \leq y$ |
+| $I_2$ | $J(2, 3, 8)$ | if $k = y$, then $y < x$ |
+| $I_3$ | $S(3)$ | |
+| $I_4$ | $J(1, 1, 1)$ | |
+| $I_5$ | $Z(1)$ | |
+| $I_6$ | $S(1)$ | output $1$ |
+| $I_7$ | $J(1, 1, 9)$ | halt |
+| $I_8$ | $Z(1)$ | output $0$ |
+
+By induction on $k \leq \min(x, y)$, the configuration $(1, r)$ with $r(1) = x$, $r(2) = y$, $r(3) = k$ is reached: for $k < \min(x, y)$ neither jump is taken, and $I_3$ increments the counter. At $k = \min(x, y)$: if $x \leq y$, then $k = x$ and $I_1$ jumps to $I_5$, which leads to output $1$; if $y < x$, then $k = y \neq x$, the first jump is not taken, and $I_2$ jumps to $I_8$, which gives output $0$. The program is in standard form, since its length is $8$ and its jumps go to $I_9$ at most.
+:::
+::::
+
+::::exercise{#ex-urm-half difficulty=1 objective="Maintain several counters in step to compute a quotient by a register machine."}
+Write a URM program computing $x \mapsto \lfloor x / 2 \rfloor$, and prove it correct.
+
+:::solution
+Keep $q$ in $R_2$, $2q$ in $R_3$ and $2q + 1$ in $R_4$, and stop when $x$ equals $2q$ or $2q + 1$.
+
+| | | |
+| --- | --- | --- |
+| $I_1$ | $S(4)$ | $R_2 = 0$, $R_3 = 0$, $R_4 = 1$ |
+| $I_2$ | $J(1, 3, 10)$ | if $x = 2q$, output $q$ |
+| $I_3$ | $J(1, 4, 10)$ | if $x = 2q + 1$, output $q$ |
+| $I_4$ | $S(2)$ | |
+| $I_5$ | $S(3)$ | |
+| $I_6$ | $S(3)$ | |
+| $I_7$ | $S(4)$ | |
+| $I_8$ | $S(4)$ | |
+| $I_9$ | $J(1, 1, 2)$ | |
+| $I_{10}$ | $T(2, 1)$ | |
+
+By induction on $q \leq \lfloor x / 2 \rfloor$, the configuration $(2, r)$ with $r(1) = x$, $r(2) = q$, $r(3) = 2q$, $r(4) = 2q + 1$ is reached. For $q = 0$ this follows from $I_1$. If $q < \lfloor x/2 \rfloor$, then $x \geq 2q + 2$, so neither jump is taken, and $I_4, \dots, I_8$ produce the configuration for $q + 1$. For $q = \lfloor x / 2 \rfloor$, $x \in \{2q, 2q + 1\}$, so one of the jumps leads to $I_{10}$, which copies $q$ into $R_1$; the program halts.
+:::
+::::
+
+::::exercise{#ex-urm-decrement-variant difficulty=2 objective="Simulate in both directions two instruction sets for register machines."}
+Consider register machines with the instructions $S(n)$, $D(n)$: $R_n \leftarrow R_n \dotminus 1$, and $Z?(n, q)$: if $R_n = 0$ the next instruction is $I_q$, otherwise the following one. Programs, configurations and computed functions are defined as for the URM. Show that these machines compute exactly the URM-computable partial functions.
+
+:::solution
+In both directions, a program $P$ is translated instruction by instruction into blocks of the other instruction set, using auxiliary registers of index larger than $\rho(P)$ and $k$, which $P$ does not mention; jump targets are renumbered to the first instruction of the block of the target. One of the auxiliary registers, $R_z$, is never written: it contains $0$ throughout, and a test or comparison with it is an unconditional jump. By induction on the number of steps of $P$, the translated program reaches the beginning of the block of $I_i$ with the registers $R_1, \dots, R_{\rho(P)}$ as in the configuration $(i, r)$ of $P$, and the auxiliary registers other than $R_z$ hold values that are reset before use. So both programs halt on the same inputs, with the same value in $R_1$. Below, labels such as $\ell$ name instruction indices inside a block.
+
+*From the new instructions to the URM.* $S(n)$ is kept. $Z?(n, q)$ becomes $J(n, z, q)$. $D(n)$ becomes the predecessor program of :ref{#ex-urm-pred} applied to $R_n$, with counters $R_a$, $R_b$:
+$$
+J(n, z, \mathrm{end}),\ Z(a),\ Z(b),\ S(b),\ \ell : J(n, b, \ell'),\ S(a),\ S(b),\ J(z, z, \ell),\ \ell' : T(a, n),
+$$
+where end is the index following the block. If $R_n = v \geq 1$, the loop maintains $R_b = R_a + 1$ and stops when $R_b = v$, so that $T(a, n)$ stores $v - 1$; if $v = 0$, nothing changes.
+
+*From the URM to the new instructions.* $S(n)$ is kept. $Z(n)$ becomes $\ell : Z?(n, \mathrm{end}),\ D(n),\ Z?(z, \ell)$. For $T(m, n)$ with $m \neq n$, first empty $R_n$ as for $Z(n)$, then move $R_m$ into $R_n$ and an auxiliary $R_c$, then move $R_c$ back into $R_m$:
+$$
+\ell_1 : Z?(m, \ell_2),\ D(m),\ S(n),\ S(c),\ Z?(z, \ell_1),\ \ell_2 : Z?(c, \mathrm{end}),\ D(c),\ S(m),\ Z?(z, \ell_2).
+$$
+The first loop runs $r(m)$ times and leaves $R_m = 0$, $R_n = R_c = r(m)$; the second restores $R_m$ and leaves $R_c = 0$. ($T(m, m)$ is dropped, its block being empty.) For $J(m, n, q)$, copy $R_m$ into $R_a$ and $R_n$ into $R_b$ as for $T$, then decrement both together:
+$$
+\ell : Z?(a, \ell'),\ Z?(b, \mathrm{end}),\ D(a),\ D(b),\ Z?(z, \ell),\ \ell' : Z?(b, q),
+$$
+where $q$ stands for the first instruction of the block of $I_q$, and end for the instruction following the block. After $j$ passes, $R_a = r(m) - j$ and $R_b = r(n) - j$. If $r(m) = r(n)$, both reach $0$ together and the block jumps to $q$; if $r(m) < r(n)$, $R_a$ reaches $0$ first and $Z?(b, q)$ falls through to end; if $r(m) > r(n)$, $R_b$ reaches $0$ first and the block exits to end. This matches $J(m, n, q)$. Jumps beyond the end of $P$ are sent to the index following the translated program.
+:::
+::::
+
+::::exercise{#ex-urm-primitive-recursion difficulty=2 objective="Program a primitive recursion on a register machine, as a loop around subroutine calls."}
+Let $g : \nat^k \rightharpoonup \nat$ and $h : \nat^{k+2} \rightharpoonup \nat$ be URM-computable, with $k \geq 1$, and let $f : \nat^{k+1} \rightharpoonup \nat$ be defined by $f(\vec x, 0) \simeq g(\vec x)$ and $f(\vec x, y + 1) \simeq h(\vec x, y, f(\vec x, y))$; in particular $f(\vec x, y')\diverge$ for all $y' \geq y$ as soon as $f(\vec x, y)\diverge$. Show that $f$ is URM-computable.
+
+:::solution
+Let $G$, $H$ be programs in standard form computing $g$, $h$, and let $N$ be larger than $k + 2$, $\rho(G)$ and $\rho(H)$. The input $\vec x, y$ is saved in $R_{N+1}, \dots, R_{N+k+1}$; $R_c$ with $c = N + k + 2$ is a counter and $R_v$ with $v = N + k + 3$ holds the current value. Both initially contain $0$. The program is
+$$
+\begin{aligned}
+& T(1, N{+}1),\ \dots,\ T(k{+}1, N{+}k{+}1),\ G[N{+}1, \dots, N{+}k \to v], \\
+& \ell : J(c, N{+}k{+}1, \ell'),\ H[N{+}1, \dots, N{+}k, c, v \to v],\ S(c),\ J(1, 1, \ell), \\
+& \ell' : T(v, 1).
+\end{aligned}
+$$
+By :ref{#lem-urm-subroutine}, the calls to $G$ and $H$ leave the registers above $N$ unchanged, except the result register $v$. We show by induction on $j \leq y$: if $f(\vec x, j)\converge$, the program reaches $\ell$ with $R_c = j$ and $R_v = f(\vec x, j)$; and if $f(\vec x, j)\diverge$, it does not halt. For $j = 0$, the call to $G$ halts if and only if $g(\vec x)\converge$, and then stores $f(\vec x, 0)$ in $R_v$. For $j + 1 \leq y$, at $\ell$ we have $R_c = j \neq y$, so the jump is not taken, and the call to $H$ halts if and only if $h(\vec x, j, f(\vec x, j))\converge$, that is $f(\vec x, j + 1)\converge$, with this value in $R_v$; then $R_c$ becomes $j + 1$. At $j = y$, the jump to $\ell'$ is taken and $f(\vec x, y)$ is copied into $R_1$. So the program halts exactly when $f(\vec x, y)\converge$, with output $f(\vec x, y)$. Together with :ref{#thm-urm-composition}, and URM programs for the basic functions, this shows by induction on derivations that every primitive recursive function, defined in the next lesson, is URM-computable.
+:::
+::::
+:::::

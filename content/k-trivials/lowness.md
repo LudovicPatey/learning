@@ -75,7 +75,7 @@ Implications (2) and (3) only relativize known results. A base for randomness is
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-lowk-low difficulty=2 objective="Combine lowness for K with the use principle to show that the jump of a set low for K is computable in $\emptyset'$."}
 Show that every set that is low for K is low, that is, $A' \leq_T \emptyset'$.
 
 :::hint
@@ -91,7 +91,7 @@ With oracle $\emptyset'$, decide $e \in A'$ as follows: for each string $\sigma$
 
 ## Notes and references
 
-Lowness for Martin-Löf randomness was introduced by Zambella (1990), who asked whether a non-computable set has this property; Kučera and Terwijn (1999) built a non-computable c.e. set that is low for randomness. Lowness for K is due to Muchnik (unpublished, around 1999), who built a non-computable c.e. set low for K. Bases for randomness were introduced by Kučera (1993). Nies (Proposition 5.1.2) shows that sets that are low for K are generalized low, $A' \leq_T A \oplus \emptyset'$, in a uniform way; with :ref{#cor-k-trivial-delta2}, this gives the exercise.
+Lowness for Martin-Löf randomness was introduced by Zambella (1990), who asked whether a non-computable set has this property; Kučera and Terwijn (1999) built a non-computable c.e. set that is low for randomness. Lowness for K is due to Muchnik (unpublished, around 1999), who built a non-computable c.e. set low for K. Bases for randomness were introduced by Kučera (1993). Nies (Proposition 5.1.2) shows that sets that are low for K are generalized low, $A' \leq_T A \oplus \emptyset'$, in a uniform way; with :ref{#cor-k-trivial-delta2}, this gives :ref{#ex-lowk-low}.
 
 The lowness notions and the implications between them are in Nies, *Computability and Randomness*, Section 5.1 (Definitions 5.1.1, 5.1.7 and 5.1.18, Fact 5.1.8, Proposition 5.2.3), and in Downey and Hirschfeldt, *Algorithmic Randomness and Complexity*, Sections 11.2 and 11.7 (Definitions 11.2.1, 11.2.3 and 11.7.1).
 
@@ -100,3 +100,53 @@ The lowness notions and the implications between them are in Nies, *Computabilit
 - A. Kučera and S. A. Terwijn, *Lowness for the class of random sets*, Journal of Symbolic Logic 64 (1999), 1396–1402.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 5.1.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 11.2 and 11.7.
+
+:::::exercises
+::::exercise{#ex-random-not-low difficulty=1 objective="Check on random sets that the oracle of a lowness notion must not be able to compress itself."}
+Show that no Martin-Löf random set is low for K, and that no Martin-Löf random set is low for Martin-Löf randomness.
+
+:::solution
+Let $Z$ be random. With oracle $Z$, the prefix $Z \uh n$ is computed from $n$, so $K^Z(Z \uh n) \leq^+ K^Z(n) \leq^+ K(n) \leq^+ 2 \log n$ for $n \geq 2$, by :ref{#prop-k-basic} (2). By the Levin–Schnorr theorem, $K(Z \uh n) \geq n - O(1)$. So $K(Z \uh n) - K^Z(Z \uh n)$ is unbounded, and $Z$ is not low for K. Moreover $K^Z(Z \uh n) - n$ is not bounded from below, so $Z \notin \mathrm{MLR}^Z$ by the relativized Levin–Schnorr theorem, while $Z \in \mathrm{MLR}$: $Z$ is not low for Martin-Löf randomness. The case of bases for randomness is treated after the hungry sets theorem.
+:::
+::::
+
+::::exercise{#ex-lowness-downward difficulty=1 objective="Check that lowness for randomness and being a base for randomness are closed downward under Turing reducibility."}
+Let $A \leq_T B$. Show that if $B$ is low for Martin-Löf randomness, then so is $A$, and that if $B$ is a base for randomness, then so is $A$.
+
+:::solution
+A Martin-Löf test relative to $A$ is a test relative to $B$, since a uniformly $\Sigma^0_1(A)$ sequence of classes is uniformly $\Sigma^0_1(B)$ when $A \leq_T B$. So $\mathrm{MLR}^B \subseteq \mathrm{MLR}^A \subseteq \mathrm{MLR}$. If $\mathrm{MLR}^B = \mathrm{MLR}$, then $\mathrm{MLR}^A = \mathrm{MLR}$. If $B \leq_T Z$ with $Z \in \mathrm{MLR}^B$, then $A \leq_T Z$ and $Z \in \mathrm{MLR}^A$.
+:::
+::::
+
+::::exercise[Lowness for plain complexity]{#ex-low-for-c difficulty=1 objective="Show with Chaitin's theorem that the analogue of lowness for K with plain complexity holds only for computable sets."}
+Let $C^A$ be plain complexity relative to $A$, defined from an optimal oracle machine as $K^A$ is. Say that $A$ is **low for C** if $C(\sigma) \leq^+ C^A(\sigma)$ for every string $\sigma$. Show that every set that is low for C is computable.
+
+:::solution
+With oracle $A$, the string $A \uh n$ is computed from $n$, so $C^A(A \uh n) \leq^+ C^A(n)$, and $C^A(n) \leq^+ C(n)$, since a machine with oracle $A$ can ignore its oracle. If $A$ is low for C, then $C(A \uh n) \leq^+ C^A(A \uh n) \leq^+ C(n)$. By :ref{#thm-chaitin-computable}, $A$ is computable. The same argument with $K$ gives :ref{#prop-lowness-implications} (1); the difference is that K-triviality, unlike its analogue for $C$, does not imply computability. (Adapted from Nies 2009, Exercise 5.2.22.)
+:::
+::::
+
+::::exercise[Few sets for each constant]{#ex-lowk-few difficulty=2 objective="Use the uniformity of the relativized optimal machine to bound the number of sets that are low for K with a given constant."}
+Say that $A$ is low for K **with constant** $c$ if $K(\sigma) \leq K^A(\sigma) + c$ for every $\sigma$. Show that there is a constant $d$ such that, for every $c$, every set that is low for K with constant $c$ is K-trivial with constant $c + d$. Deduce that only finitely many sets are low for K with constant $c$.
+
+:::solution
+Let $M$ be the oracle machine that, with oracle $X$ and input $\tau$, computes $n = U^X(\tau)$ and outputs $X \uh n$, and $N$ the oracle machine that ignores its oracle and behaves as $U$. For every oracle $X$, the domains of $M^X$ and $N^X$ are those of $U^X$ and $U$, which are prefix-free. By the optimality of $U$ among oracle prefix-free machines, there are $d_1$ and $d_2$, independent of $X$, with $K^X(X \uh n) \leq K^X(n) + d_1$ and $K^X(n) \leq K(n) + d_2$ for every $X$ and $n$.
+
+If $A$ is low for K with constant $c$, then for every $n$
+$$
+K(A \uh n) \leq K^A(A \uh n) + c \leq K^A(n) + c + d_1 \leq K(n) + c + d_1 + d_2,
+$$
+so $d = d_1 + d_2$ works. By :ref{#cor-k-trivial-delta2}, fewer than $2^{c + d + c'}$ sets are K-trivial with constant $c + d$, where $c'$ is the constant of :ref{#thm-k-trivial-count}; so fewer than $2^{c + d + c'}$ sets are low for K with constant $c$.
+:::
+::::
+
+::::exercise[Sets low for K compute no DNC function]{#ex-lowk-not-dnc difficulty=2 objective="Combine lowness for K with the characterization of DNC degrees by complex functions."}
+Admit the theorem of Kjos-Hanssen, Merkle and Stephan, proved in the course on Martin-Löf randomness: a set $X$ computes a diagonally non-computable function if and only if $X$ computes a function $f : \nat \to \bstr$ with $K(f(n)) \geq n$ for every $n$. Show that no set that is low for K computes a diagonally non-computable function. Deduce that no set that is low for K computes a Martin-Löf random set.
+
+:::solution
+Let $A$ be low for K, and let $f \leq_T A$ be a function from $\nat$ to strings. With oracle $A$, $f(n)$ is computed from $n$, so $K^A(f(n)) \leq^+ K^A(n) \leq^+ K(n) \leq^+ 2 \log n$ for $n \geq 2$. Since $A$ is low for K, $K(f(n)) \leq^+ K^A(f(n)) \leq^+ 2 \log n$, which is less than $n$ for all large $n$. So $A$ computes no function $f$ with $K(f(n)) \geq n$ for every $n$, and by the theorem, no diagonally non-computable function.
+
+If $A$ computed a random set $Z$, let $c$ be such that $K(Z \uh m) \geq m - c$ for every $m$ (Levin–Schnorr). The function $f(n) = Z \uh (n + c)$ is computable in $Z$, hence in $A$, and $K(f(n)) \geq n$ for every $n$, contradicting the first part. This agrees with :ref{#prop-lowness-implications} (4) and :ref{#ex-random-not-low}: a set computed by a set low for K is low for K, and a random set is not.
+:::
+::::
+:::::

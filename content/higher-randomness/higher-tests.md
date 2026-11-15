@@ -29,7 +29,7 @@ Every $\Delta^1_1$-random sequence is $n$-random for every $n$, and is not hyper
 A Martin-Löf test relative to $\emptyset^{(n-1)}$ captures a null class $\bigcap_k \mathcal U_k$ with $\mathcal U_k$ uniformly $\Sigma^0_1(\emptyset^{(n-1)})$; it is arithmetic, hence $\Delta^1_1$. If $X$ is hyperarithmetic, the singleton $\{ X \}$ is a null $\Delta^1_1$ class containing $X$ (:ref{#ex-delta11-classes} (1)).
 :::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-delta11-random-conull difficulty=1 objective="Check that almost every sequence is $\Delta^1_1$-random, by counting the $\Delta^1_1$ classes."}
 Show that the class of $\Delta^1_1$-random sequences has measure $1$.
 
 :::solution
@@ -68,7 +68,7 @@ Every $\Pi^1_1$-Martin-Löf random sequence is $\Delta^1_1$-random.
 Let $\mathcal D$ be a null $\Delta^1_1$ class. By :ref{#fact-higher-borel} (2), there are a hyperarithmetic set $A$ and sets of strings $W_k$, uniformly c.e. in $A$, with $\mathcal D \subseteq [W_k]$ and $\lambda([W_k]) \leq \lambda(\mathcal D) + 2^{-k} = 2^{-k}$. The relation $\sigma \in W_k$ is $\Sigma^0_1(A)$, hence $\Delta^1_1$, in particular $\Pi^1_1$ (:ref{#ex-delta11-classes} (2)). So $([W_k])$ is a higher Martin-Löf test, and it captures every member of $\mathcal D$.
 :::
 
-The test built in the proof is in fact a Martin-Löf test relative to a hyperarithmetic set; the exercise at the end of the lesson draws the consequence. The converse of the proposition fails: some $\Delta^1_1$-random sequence is not $\Pi^1_1$-Martin-Löf random. This is due to Hjorth and Nies. Monin and Patey give a direct construction, a $\Pi^1_1$ construction along the stages of an enumeration of the $\Delta^1_1$ classes of measure $1$; Nies derives it from a $\Delta^1_1$-random sequence of slowly growing initial segment complexity (Theorem 9.3.4 and Corollary 9.3.5). We admit it.
+The test built in the proof is in fact a Martin-Löf test relative to a hyperarithmetic set; the consequence is drawn in :ref{#ex-delta11-ml-hyp}. The converse of the proposition fails: some $\Delta^1_1$-random sequence is not $\Pi^1_1$-Martin-Löf random. This is due to Hjorth and Nies. Monin and Patey give a direct construction, a $\Pi^1_1$ construction along the stages of an enumeration of the $\Delta^1_1$ classes of measure $1$; Nies derives it from a $\Delta^1_1$-random sequence of slowly growing initial segment complexity (Theorem 9.3.4 and Corollary 9.3.5). We admit it.
 
 :::quiz[higher tests and Δ¹₁ classes]
 In the proof of :ref{#prop-higher-ml-delta11}, why is the approximation of :ref{#fact-higher-borel} (2) needed, rather than the class $\mathcal D$ itself?
@@ -144,7 +144,7 @@ Its complement is $\bigcap_n \mathcal U_n$ for the universal test, an intersecti
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-delta11-ml-hyp difficulty=2 objective="Characterize $\Delta^1_1$-randomness as Martin-Löf randomness relative to every hyperarithmetic set."}
 Show that a sequence is $\Delta^1_1$-random if and only if it is Martin-Löf random relative to every hyperarithmetic set. Deduce again that $\Pi^1_1$-Martin-Löf randomness implies Martin-Löf randomness relative to every hyperarithmetic set.
 
 :::solution
@@ -161,3 +161,55 @@ $\Delta^1_1$-randomness was proposed by Martin-Löf (1970); Sacks's book studies
 - C. T. Chong and L. Yu, *Recursion Theory: Computational Aspects of Definability*, De Gruyter, 2015.
 - G. E. Sacks, *Higher Recursion Theory*, Springer, 1990, Chapter IV.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 9.2 and 9.3.
+
+:::::exercises
+::::exercise{#ex-pi11-open-measure difficulty=1 objective="Show that the measure of an open $\Pi^1_1$ class is left-$\Pi^1_1$, the higher counterpart of the left-c.e. measure of a $\Sigma^0_1$ class."}
+Let $W$ be a $\Pi^1_1$ set of pairs $(n, \sigma)$, and $W_n = \{ \sigma : (n, \sigma) \in W \}$. Show that the relation $\lambda([W_n]) > q$, for $n \in \nat$ and $q$ rational, is $\Pi^1_1$. Deduce that the set of indices $e$ such that $(V_{e, n})_n$ is a higher Martin-Löf test, with $V$ as in :ref{#thm-higher-universal}, is $\Sigma^1_1$.
+
+:::solution
+We show that $\lambda([W_n]) > q$ if and only if there is a finite set $F$ of strings with $F \subseteq W_n$ and $\lambda([F]) > q$. If $F \subseteq W_n$, then $[F] \subseteq [W_n]$, which gives one direction. Conversely, enumerate $W_n = \{ \sigma_0, \sigma_1, \dots \}$ (a finite or empty set is handled in the same way); the classes $[\{ \sigma_0, \dots, \sigma_j \}]$ increase with union $[W_n]$, so their measures tend to $\lambda([W_n])$ by countable additivity, and one of them exceeds $q$. Coding finite sets by numbers, "$F \subseteq W_n$" is a bounded universal quantifier in front of a $\Pi^1_1$ relation, "$\lambda([F]) > q$" is computable, and the quantifier over $F$ is a number quantifier: the relation is $\Pi^1_1$.
+
+An index $e$ defines a higher Martin-Löf test if and only if $\forall n\ \neg\, \lambda([V_{e, n}]) > 2^{-n}$: the negation of a $\Pi^1_1$ relation is $\Sigma^1_1$, and $\Sigma^1_1$ relations are closed under number quantifiers. This is why the proof of :ref{#thm-higher-universal} does not select the genuine tests among the candidates, but trims every candidate by a $\Pi^1_1$ condition.
+:::
+::::
+
+::::exercise{#ex-open-measure-not-hyp difficulty=2 objective="Build an open $\Pi^1_1$ class whose measure is not a hyperarithmetic real, in contrast with the measure of a $\Delta^1_1$ class."}
+Let $W = \{ 0^n 1 : n \in \mathcal O \}$, where $0^n 1$ is the string of $n$ zeros followed by a one. Show that $[W]$ is an open $\Pi^1_1$ class that is not $\Sigma^1_1$, and that its measure $r$ is not a hyperarithmetic real: its left cut $\{ q \in \mathbb Q : q < r \}$ is $\Pi^1_1$ and not $\Delta^1_1$.
+
+:::solution
+The set $W$ is $\Pi^1_1$, since $\mathcal O$ is, so $[W]$ is open and $\Pi^1_1$ by :ref{#prop-pi11-open}. The only prefix of the computable sequence $0^n 1 0^\omega$ of the form $0^m 1$ is $0^n 1$, so $n \in \mathcal O$ if and only if $0^n 1 0^\omega \in [W]$. A $\Sigma^1_1$ definition of $[W]$ would give a $\Sigma^1_1$ definition of $\mathcal O$; then $\mathcal O$ would be $\Delta^1_1$, hence hyperarithmetic by :ref{#thm-kleene-delta11}, which it is not (:ref{#ex-o-computes-hyp}).
+
+The cylinders $[0^n 1]$ are pairwise disjoint, so $r = \sum_{n \in \mathcal O} 2^{-(n+1)}$. Since $\mathcal O$ is infinite and coinfinite, $0.b_1 b_2 \dots$ with $b_{n+1} = \mathcal O(n)$ is a binary expansion of $r$ with infinitely many $0$s and $1$s; so $r$ is not a dyadic rational, and this is its only binary expansion. The left cut $L$ is $\Pi^1_1$ by :ref{#ex-pi11-open-measure}. It computes $\mathcal O$: for each $k$, the integer $j = \lfloor 2^k r \rfloor$ is the number of integers $i \geq 1$ with $i/2^k \in L$, since $i / 2^k \neq r$, and the binary digits of $j$ are $b_1 \dots b_k$. If $L$ were $\Delta^1_1$, it would be hyperarithmetic, and so would $\mathcal O$. In contrast, the measure of a $\Delta^1_1$ class has $\Delta^1_1$ left and right cuts, by :ref{#fact-higher-borel} (1); this gives a second proof that $[W]$ is not $\Delta^1_1$.
+:::
+::::
+
+::::exercise[Higher Solovay tests]{#ex-higher-solovay difficulty=2 objective="Transfer Solovay's criterion for Martin-Löf randomness to higher Martin-Löf randomness."}
+A **higher Solovay test** is a $\Pi^1_1$ set $S$ of pairs $(n, \sigma)$ such that $\sum_n \lambda([S_n]) < \infty$, where $S_n = \{ \sigma : (n, \sigma) \in S \}$; it captures $X$ if $X \in [S_n]$ for infinitely many $n$. Show that $X$ is $\Pi^1_1$-Martin-Löf random if and only if no higher Solovay test captures $X$.
+
+:::solution
+A higher Martin-Löf test $([W_n])$ is a higher Solovay test, since $\sum_n 2^{-n} = 2$, and it captures every member of $\bigcap_n [W_n]$. So a sequence captured by no higher Solovay test is $\Pi^1_1$-Martin-Löf random.
+
+Conversely, let $S$ be a higher Solovay test, and $d$ with $\sum_n \lambda([S_n]) \leq 2^d$. Let $\mathcal V_k$ be the class of $X$ that belong to $[S_n]$ for at least $2^k$ values of $n$. A sequence captured by $S$ belongs to every $\mathcal V_k$.
+
+*Definability.* $\mathcal V_k = [G_k]$, where $G_k$ is the set of strings $\sigma$ such that there are $2^k$ distinct numbers $n$, each with a prefix $\tau \preceq \sigma$ in $S_n$: a sequence in $\mathcal V_k$ has such a prefix (take $\sigma$ longer than the $2^k$ witnesses $\tau$), and every extension of $\sigma \in G_k$ is in $\mathcal V_k$. The relation $\sigma \in G_k$ is $\Pi^1_1$ in $(k, \sigma)$: number quantifiers over the numbers $n$ and the prefixes $\tau$, in front of a bounded conjunction of instances of the $\Pi^1_1$ relation $S$.
+
+*Measure.* Let $N$ be a number and $F = (F_n)_{n < N}$ a family of finite sets $F_n \subseteq S_n$, and let $\mathcal V(F)$ be the class of $X$ in at least $2^k$ classes $[F_n]$, $n < N$. Let $\ell$ bound the lengths of the strings in the sets $F_n$. Each $[F_n]$ and $\mathcal V(F)$ are unions of cylinders $[\tau]$ with $|\tau| = \ell$. Counting the pairs $(\tau, n)$ with $|\tau| = \ell$, $n < N$ and $[\tau] \subseteq [F_n]$ in two ways, the set $D$ of strings $\tau$ of length $\ell$ with $[\tau] \subseteq \mathcal V(F)$ satisfies
+$$
+2^k\, |D| \leq \sum_{n < N} 2^\ell \lambda([F_n]) \leq 2^{\ell + d},
+$$
+so $\lambda(\mathcal V(F)) = 2^{-\ell} |D| \leq 2^{d - k}$. The class $\mathcal V(F)$ increases with $F$ (componentwise, and with $N$), so a finite union of classes $\mathcal V(F)$ is included in a single one; and every $X \in \mathcal V_k$ belongs to some $\mathcal V(F)$, with $F_n = \{ \tau \}$ for $2^k$ witnesses. There are countably many families $F$, so $\mathcal V_k$ is an increasing union of classes of measure at most $2^{d - k}$, and $\lambda(\mathcal V_k) \leq 2^{d - k}$.
+
+Hence $(\mathcal V_{k + d})_k$, generated by the $\Pi^1_1$ set $\{ (k, \sigma) : \sigma \in G_{k + d} \}$, is a higher Martin-Löf test that captures every sequence captured by $S$. The counting is that of the classical proof of Solovay's theorem, done here without stages.
+:::
+::::
+
+::::exercise{#ex-universal-component difficulty=2 objective="Show that the components of a universal higher Martin-Löf test contain every hyperarithmetic sequence and are not $\Delta^1_1$."}
+Let $(\mathcal U_n)$ be a universal higher Martin-Löf test. Show that every hyperarithmetic sequence belongs to every $\mathcal U_n$, and that $\mathcal U_n$ is not $\Delta^1_1$ for $n \geq 1$.
+
+:::solution
+If $X$ is hyperarithmetic, the classes $[X \uh n]$ form a higher Martin-Löf test (:ref{#ex-higher-ml-tests} (1)) whose intersection is $\{ X \}$. By universality, $X \in \bigcap_n \mathcal U_n$.
+
+Let $n \geq 1$. The complement of $\mathcal U_n$ has measure at least $1 - 2^{-n} > 0$ and contains no hyperarithmetic sequence. If $\mathcal U_n$ were $\Delta^1_1$, its complement would be a $\Delta^1_1$ class of positive measure, which has a hyperarithmetic member by :ref{#ex-delta11-hyp-member}: a contradiction. The complement of $\mathcal U_n$ is a $\Sigma^1_1$ class of positive measure with no hyperarithmetic member; it has members computable in $\mathcal O$, as in :ref{#cor-higher-mlr-class}.
+:::
+::::
+:::::

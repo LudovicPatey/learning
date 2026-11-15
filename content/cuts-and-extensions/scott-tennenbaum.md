@@ -81,7 +81,7 @@ Some induction is necessary. The model $\mathbb Z[X]^+$ of $\mathrm{PA}^-$ (:ref
 
 ## Exercises
 
-::::exercise{#ex-ssy-truth difficulty=2}
+::::exercise{#ex-ssy-truth difficulty=2 objective="Combine partial truth definitions with the coding of $\Sigma_n$-definable sets to place the $\Sigma^*_n$ theory of a model in its standard system."}
 Let $n \geq 1$ and $M$ a non-standard model of $\mathrm I\Sigma_n$. Show that the set of codes of $\Sigma^*_n$ sentences (:ref{#def-delta0-star}) true in $M$ belongs to $\mathrm{SSy}(M)$. Deduce that if $M$ is a non-standard model of the theory of $\nat$, then $\mathrm{SSy}(M)$ contains every arithmetic set.
 
 :::solution
@@ -91,7 +91,7 @@ If $M$ satisfies the theory of $\nat$, then $M \models \mathrm{PA}$, and a $\Sig
 :::
 ::::
 
-::::exercise{#ex-scott-separation difficulty=2}
+::::exercise{#ex-scott-separation difficulty=2 objective="Derive weak König's lemma for the standard system from the separation lemma and the characterization of PA degrees."}
 Give a second proof that $\mathrm{SSy}(M)$ is a Scott set, for $M$ non-standard, using :ref{#lem-cut-separation} instead of :ref{#thm-scott-wkl-cut}. (Use the relativization of :ref{#thm-dnc2-no-computable} and of :ref{#thm-pa-characterization}: a $\{0, 1\}$-valued function that differs from $\Phi^X_e(e)$ whenever this converges computes an infinite path of every infinite binary tree computable in $X$.)
 
 :::solution
@@ -111,3 +111,51 @@ Scott (1962) proved :ref{#thm-scott-converse} for the sets representable in comp
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991.
 - J. C. Shepherdson, *A non-standard model for a free variable fragment of number theory*, Bulletin de l'Académie Polonaise des Sciences, Série des Sciences Mathématiques, Astronomiques et Physiques 12 (1964), 79–86.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 4.
+
+:::::exercises
+::::exercise{#ex-scott-no-max difficulty=1 objective="Use a tree of diagonally non-computable functions to show that no Scott set has a largest Turing degree."}
+Let $\mathcal X$ be a Scott set and $X \in \mathcal X$. Show that $\mathcal X$ contains a function $P : \nat \to \{0, 1\}$ with $P(e) \neq \Phi^X_e(e)$ whenever $\Phi^X_e(e)$ converges, and deduce that $X <_T X \oplus P \in \mathcal X$. Conclude that no member of a Scott set, and in particular of $\mathrm{SSy}(M)$ for a non-standard model $M$ of $\mathrm I\Delta_0 + \mathrm{exp}$, computes all the others.
+
+:::solution
+Let $T$ be the set of strings $\sigma \in 2^{<\nat}$ such that $\sigma(e) \neq \Phi^X_e(e)[|\sigma|]$ for every $e < |\sigma|$ for which this computation converges within $|\sigma|$ steps. It is computable in $X$ and closed under prefixes, since a computation that converges within $|\tau|$ steps converges within $|\sigma|$ steps for $|\sigma| \geq |\tau|$. It is infinite: for each $n$, the string $\sigma$ of length $n$ with $\sigma(e) = 1$ if $\Phi^X_e(e)[n]\converge = 0$ and $\sigma(e) = 0$ otherwise belongs to $T$. As $\mathcal X$ is a Turing ideal, $T \in \mathcal X$, so $T$ has an infinite path $P \in \mathcal X$. If $\Phi^X_e(e)$ converges within $s$ steps, the prefix of $P$ of length $\max(e + 1, s)$ is in $T$, so $P(e) \neq \Phi^X_e(e)$.
+
+If $P = \Phi^X_e$ for some $e$, then $\Phi^X_e(e)$ converges and equals $P(e)$, a contradiction; so $P \not\leq_T X$. Hence $X \leq_T X \oplus P$ and $X \oplus P \not\leq_T X$, and $X \oplus P \in \mathcal X$, since $\mathcal X$ is closed under joins. Every member of $\mathcal X$ is thus strictly below another member, and none computes all the others. By :ref{#cor-ssy-scott-set}, this applies to $\mathrm{SSy}(M)$.
+:::
+::::
+
+::::exercise{#ex-tennenbaum-pa-degree difficulty=2 objective="Extract from the proof of Tennenbaum's theorem that the addition of a non-standard model has PA degree and computes its whole standard system."}
+Let $M$ be a non-standard model of $\mathrm I\Delta_0 + \mathrm{exp}$ with domain $\nat$, and $Z \subseteq \nat$ a set that computes $+^M$ (as a function from $\nat^2$ to $\nat$). Show that every member of $\mathrm{SSy}(M)$ is computable in $Z$, and that $Z$ is of PA degree (:ref{#def-pa-degree}). Show that $\mathrm{SSy}(M) \neq \{ Y : Y \leq_T Z \}$.
+
+:::solution
+Let $d \in M$ and $C = \mathrm{Ack}(d) \cap \nat$. The algorithm of the proof of :ref{#thm-tennenbaum} decides whether $n \in C$ by computing $\bar m^M$ and $\bar m^M \cdot u$ with repeated additions, and by searching for a pair $(u, r)$ with $d = \overline{2p}^M \cdot u + \bar r^M$; it only uses $+^M$, the fixed elements $0^M$, $1^M$ and $d$, and arithmetic in $\nat$. Run with oracle $Z$, it shows $C \leq_T Z$. Applied to the set $C \in \mathrm{SSy}(M)$ separating $A_0$ from $A_1$, given by :ref{#lem-cut-separation}, it shows that $Z$ computes the characteristic function of $C$, which takes values in $\{0, 1\}$ and differs from $\Phi_e(e)$ whenever $\Phi_e(e)$ converges: it belongs to $\mathrm{DNC}_2$, and $Z$ is of PA degree.
+
+If $\mathrm{SSy}(M) = \{ Y : Y \leq_T Z \}$, then $Z \in \mathrm{SSy}(M)$ computes every member of $\mathrm{SSy}(M)$, which contradicts :ref{#ex-scott-no-max}, since $\mathrm{SSy}(M)$ is a Scott set (:ref{#cor-ssy-scott-set}). So the inclusion $\mathrm{SSy}(M) \subseteq \{ Y : Y \leq_T Z \}$ is always strict.
+:::
+::::
+
+::::exercise{#ex-ssy-without-jump difficulty=2 objective="Combine Scott's theorem with a Scott set of low sets to obtain a model of PA whose standard system omits the halting set, and see that such a model satisfies a false $\Sigma_1$ sentence."}
+The course on the Big Five builds a countable Scott set all of whose members are low (:ref{to="big-five/wkl0"}). Use it to show that some model $M$ of $\mathrm{PA}$ satisfies $\emptyset' \notin \mathrm{SSy}(M)$, and deduce that $(\nat, \mathrm{SSy}(M))$ is not a model of $\Sigma^0_1$ comprehension. Show that every such model satisfies a $\Sigma_1$ sentence that is false in $\nat$.
+
+:::solution
+Let $\mathcal X$ be a countable Scott set of low sets. If $\emptyset' \leq_T X \in \mathcal X$, then $\emptyset'' \leq_T X' \leq_T \emptyset'$, which contradicts the jump theorem (:ref{#thm-jump}); so $\emptyset' \notin \mathcal X$. By :ref{#thm-scott-converse}, there is a model $M$ of $\mathrm{PA}$ with $\mathrm{SSy}(M) = \mathcal X$. The halting set is defined in $(\nat, \mathrm{SSy}(M))$ by a $\Sigma^0_1$ formula without set parameters (:ref{#cor-sigma1-ce}), and it is not in $\mathrm{SSy}(M)$.
+
+Now let $M \models \mathrm{PA}$ with $\emptyset' \notin \mathrm{SSy}(M)$, and suppose that every $\Sigma_1$ sentence true in $M$ is true in $\nat$. Every $\Sigma^*_1$ sentence is $\Sigma_1$ (:ref{#def-delta0-star}), and $\Sigma_1$ sentences true in $\nat$ are true in $M$ (:ref{#cor-sigma1-upward}, as $\nat \subseteq_e M$). So the set $S$ of codes of $\Sigma^*_1$ sentences true in $M$ is the set of codes of $\Sigma^*_1$ sentences true in $\nat$, and $S \in \mathrm{SSy}(M)$ by :ref{#ex-ssy-truth} with $n = 1$. The halting set $K = \{ e : \Phi_e(e)\converge \}$ is defined in $\nat$ by a $\Sigma_1$ formula (:ref{#cor-sigma1-ce}), hence by a $\Sigma^*_1$ formula $\kappa(v_0)$ (:ref{#lem-variable-bounds}, in $\nat$). As in the solution of :ref{#ex-ssy-truth}, $e \in K$ if and only if the $\Sigma^*_1$ sentence $\exists v_0\, (v_0 = \bar e \wedge \kappa(v_0))$, with its existential block moved to the front, is true in $\nat$, and its code is computable from $e$. So $\emptyset' \equiv_T K \leq_T S$, and $\emptyset' \in \mathrm{SSy}(M)$ by :ref{#thm-ssy-turing-ideal}, a contradiction.
+:::
+::::
+
+::::exercise{#ex-computable-order difficulty=3 objective="Determine the order type of a countable non-standard model of PA and transport the model, to see that Tennenbaum's theorem does not extend to the order."}
+Let $M$ be a countable non-standard model of $\mathrm{PA}$. For $x, y \in M$, write $x \sim y$ if the difference of $x$ and $y$ (the larger minus the smaller) is standard. Show that the classes of $\sim$, called **blocks**, are intervals; that $\nat$ is a block, of order type $\omega$; that every other block has the order type of $\mathbb Z$; and that the non-standard blocks, ordered by $<$, form a dense linear order without endpoints. Deduce that there is a non-standard model of $\mathrm{PA}$ with domain $\nat$ whose order is computable. Why does this not contradict :ref{#thm-tennenbaum}?
+
+:::solution
+For $x \leq y$, write $y - x$ for the $z$ with $x + z = y$, which exists by the axioms of $\mathrm{PA}^-$. The relation $\sim$ is an equivalence relation, since a sum of two standard numbers is standard. *Blocks are intervals:* if $x \leq z \leq y$ and $y - x$ is standard, then $z - x \leq y - x$ is standard, by :ref{#prop-standard-part}.
+
+*The blocks.* The block of $0$ is $\nat$, of order type $\omega$. Let $a$ be non-standard. For $k \in \nat$, $a > \bar k$, so $a - k$ exists, and the block of $a$ is $\{ a + k, a - k : k \in \nat \}$. These elements are distinct, ordered as the integers, and $a + k + 1$ is the successor of $a + k$ (:ref{#lem-pam-basic}); so the block has the order type of $\mathbb Z$.
+
+*Density.* Let $a < b$ be non-standard in different blocks, so that $d = b - a$ is non-standard. Divide $a + b = 2c + r$ with $r < 2$ (:ref{#prop-idelta0-basic}). Then $2(c - a) = d - r$ and $2(b - c) = d + r$; if $c - a$ or $b - c$ were standard, $d$ would be standard. So $a < c < b$ and the block of $c$ lies strictly between those of $a$ and $b$. *No endpoints:* $2a - a = a$ is non-standard, so the block of $2a$ is above that of $a$; and writing $a = 2c + r$ with $r < 2$, $c$ is non-standard, since otherwise $a \leq 2c + 1$ would be standard, and $a - c = c + r$ is non-standard, so the block of $c$ is a non-standard block below that of $a$.
+
+*A computable copy.* The non-standard blocks form a countable dense linear order without endpoints, which is non-empty; by Cantor's theorem it is isomorphic to $(\mathbb Q, <)$. Choosing an element $a_B$ in each non-standard block $B$, the map $k \mapsto k$ on $\nat$ and $a_B + z \mapsto (z, g(B))$, for $z \in \mathbb Z$ and $g$ the isomorphism of the blocks with $\mathbb Q$, is an isomorphism of $(M, <)$ with the order $L$ on $\nat \sqcup (\mathbb Z \times \mathbb Q)$ in which $\nat$ comes first, in its order, followed by $\mathbb Z \times \mathbb Q$ ordered by $(z, q) < (z', q')$ if $q < q'$, or $q = q'$ and $z < z'$. Coding $k \in \nat$ by $2k$ and $(z, q)$ by $2m + 1$, where $m$ is the index of $(z, q)$ in a computable enumeration without repetition of $\mathbb Z \times \mathbb Q$, gives a copy of $L$ with domain $\nat$ and a computable order. Transporting the addition and multiplication of $M$ along the isomorphism $h$ from $M$ to this copy, by $h(x) +' h(y) = h(x + y)$ and $h(x) \cdot' h(y) = h(x \cdot y)$, gives a model of $\mathrm{PA}$ isomorphic to $M$, non-standard, with domain $\nat$ and a computable order.
+
+By :ref{#thm-tennenbaum}, the transported addition is not computable. There is no contradiction: the algorithm of the proof uses $+^M$, and the order alone does not determine it, since it only records how the blocks are arranged.
+:::
+::::
+:::::

@@ -143,19 +143,11 @@ and each $\mathrm I\Sigma_n$ may be replaced by $\mathrm I\Pi_n$, $\mathrm L\Sig
 
 ## Exercises
 
-::::exercise{#ex-fo-bsigma-bpi difficulty=1}
+::::exercise{#ex-fo-bsigma-bpi difficulty=1 objective="Contract the existential quantifiers of a $\Sigma_{n+1}$ formula with the pairing function, to reduce $\Sigma_{n+1}$ collection to $\Pi_n$ collection."}
 Show that, over $\mathrm I\Delta_0$, $\mathrm B\Sigma_{n+1}$ is equivalent to $\mathrm B\Pi_n$ for every $n \geq 1$.
 
 :::solution
 Every $\Pi_n$ formula is $\Sigma_{n+1}$, so $\mathrm B\Sigma_{n+1}$ implies $\mathrm B\Pi_n$. Conversely, let $\varphi(x, y) \equiv \exists z\ \psi(x, y, z)$ with $\psi \in \Pi_n$ and $\forall x < a\ \exists y\ \varphi(x, y)$. Let $\psi'(x, w) \equiv \forall y \leq w\ \forall z \leq w\ (w = \langle y, z \rangle \rightarrow \psi(x, y, z))$, which is $\Pi_n$ logically. Then $\forall x < a\ \exists w\ \psi'(x, w)$, and $\mathrm B\Pi_n$ gives $b$ with $\forall x < a\ \exists w < b\ \psi'(x, w)$. If $w = \langle y, z \rangle < b$, then $y \leq w < b$ and $\varphi(x, y)$.
-:::
-::::
-
-::::exercise{#ex-fo-order-induction difficulty=2}
-Show that $\mathrm I\Sigma_n$ proves the **order induction** scheme $\forall x\, \big((\forall y < x\ \varphi(y)) \rightarrow \varphi(x)\big) \rightarrow \forall x\ \varphi(x)$ for $\Sigma_n$ formulas $\varphi$, $n \geq 1$.
-
-:::solution
-Fix $z$, and let $\theta(x) \equiv x \leq z \rightarrow \forall y < x\ \varphi(y)$, which is $\Sigma_n$ by :ref{#lem-fo-collection-closure} and :ref{#thm-fo-parsons}. Then $\theta(0)$; if $\theta(x)$ and $x + 1 \leq z$, then $\forall y < x\ \varphi(y)$, so $\varphi(x)$ by hypothesis, and $\theta(x + 1)$. By induction $\theta(z)$, and $\varphi(z)$ by hypothesis.
 :::
 ::::
 
@@ -167,3 +159,67 @@ The hierarchy of induction and collection is due to Paris and Kirby (1978), buil
 - C. Parsons, *On a number theoretic choice schema and its relation to induction*, in Intuitionism and Proof Theory, North-Holland, 1970, 459–473.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 2(a).
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 2.
+
+:::::exercises
+::::exercise{#ex-fo-order-induction difficulty=2 objective="Absorb a bounded universal quantifier by collection to derive order induction from $\Sigma_n$ induction."}
+Show that $\mathrm I\Sigma_n$ proves the **order induction** scheme $\forall x\, \big((\forall y < x\ \varphi(y)) \rightarrow \varphi(x)\big) \rightarrow \forall x\ \varphi(x)$ for $\Sigma_n$ formulas $\varphi$, $n \geq 1$.
+
+:::solution
+Fix $z$, and let $\theta(x) \equiv x \leq z \rightarrow \forall y < x\ \varphi(y)$, which is $\Sigma_n$ by :ref{#lem-fo-collection-closure} and :ref{#thm-fo-parsons}. Then $\theta(0)$; if $\theta(x)$ and $x + 1 \leq z$, then $\forall y < x\ \varphi(y)$, so $\varphi(x)$ by hypothesis, and $\theta(x + 1)$. By induction $\theta(z)$, and $\varphi(z)$ by hypothesis.
+:::
+::::
+
+::::exercise{#ex-bsigma-standard-bound difficulty=1 objective="Prove the instances of collection with a standard bound on the domain, to see that collection only matters for non-standard domains."}
+Let $\varphi(x, y)$ be any formula, with parameters, and $k \in \nat$. Show that $\mathrm{PA}^-$ proves
+$$
+\forall x < \bar k\ \exists y\ \varphi(x, y) \rightarrow \exists b\ \forall x < \bar k\ \exists y < b\ \varphi(x, y).
+$$
+
+:::solution
+Assume the hypothesis. By :ref{#lem-pam-basic}, the elements below $\bar k$ are $\bar 0, \dots, \overline{k - 1}$; let $y_i$ satisfy $\varphi(\bar i, y_i)$ for $i < k$, and let $b = y_0 + \cdots + y_{k-1} + 1$ (with $b = 1$ if $k = 0$). By :ref{#ex-pam-cancellation}, $y_i \leq y_0 + \cdots + y_{k-1} < b$. If $x < \bar k$, then $x = \bar i$ for some $i < k$, and $y_i < b$ is a witness. The proof is a different proof for each $k$, with $k$ cases; no single proof works for a variable bound $a$, which is why collection is an axiom scheme.
+:::
+::::
+
+::::exercise{#ex-downward-induction difficulty=1 objective="Run an induction downwards from a given element, as in the proof that $\Sigma_n$ and $\Pi_n$ induction are equivalent."}
+Let $n \geq 1$. Show that $\mathrm I\Sigma_n$ proves the **downward induction** scheme for $\Sigma_n$ formulas $\varphi$:
+$$
+\varphi(a) \wedge \forall x < a\ \big(\varphi(x + 1) \rightarrow \varphi(x)\big) \rightarrow \varphi(0).
+$$
+
+:::solution
+Assume the hypothesis, and let $\theta(y) \equiv y \leq a \rightarrow \exists x \leq a\ (x + y = a \wedge \varphi(x))$, which is $\Sigma_n$, a bounded existential quantifier in front of a $\Sigma_n$ formula. Then $\theta(0)$, with $x = a$. Assume $\theta(y)$ and $y + 1 \leq a$, and let $x \leq a$ satisfy $x + y = a$ and $\varphi(x)$. Since $y < a$, $x \neq 0$, so $x = x' + 1$ with $x' < a$, and $\varphi(x')$ by the hypothesis. As $x' + (y + 1) = a$, $\theta(y + 1)$ holds. By $\Sigma_n$ induction, $\theta(a)$: some $x$ with $x + a = a$, that is $x = 0$, satisfies $\varphi$.
+:::
+::::
+
+::::exercise{#ex-contraction-universal difficulty=1 objective="Contract a block of universal quantifiers with the pairing function, and see which form of the contraction keeps the class."}
+Let $n \geq 1$ and $\psi(y_1, y_2)$ be a $\Sigma_{n-1}$ formula (bounded if $n = 1$). Show that $\mathrm I\Delta_0$ proves
+$$
+\forall y_1\ \forall y_2\ \psi(y_1, y_2) \leftrightarrow \forall w\ \exists y_1 \leq w\ \exists y_2 \leq w\ \big(w = \langle y_1, y_2 \rangle \wedge \psi(y_1, y_2)\big),
+$$
+and that the right-hand side is $\Pi_n$. Why would the form $\forall w\ \forall y_1 \leq w\ \forall y_2 \leq w\ (w = \langle y_1, y_2 \rangle \rightarrow \psi)$ not do?
+
+:::solution
+We use :ref{#fact-pairing}: pairing is a bijection, and $y_1, y_2 \leq \langle y_1, y_2 \rangle$. From left to right: every $w$ is a pair $\langle y_1, y_2 \rangle$, with $y_1, y_2 \leq w$, and $\psi(y_1, y_2)$ holds. From right to left: given $y_1, y_2$, apply the hypothesis to $w = \langle y_1, y_2 \rangle$; it gives $y'_1, y'_2$ with $\langle y'_1, y'_2 \rangle = w$ and $\psi(y'_1, y'_2)$, and $y'_1 = y_1$, $y'_2 = y_2$ by injectivity.
+
+The matrix $w = \langle y_1, y_2 \rangle \wedge \psi$ is $\Sigma_{n-1}$, the graph of pairing being bounded; bounded existential quantifiers in front of a $\Sigma_{n-1}$ formula keep it $\Sigma_{n-1}$, logically (:ref{to="pa-minus"}); so the right-hand side is $\Pi_n$. The other form is also equivalent, but it puts bounded universal quantifiers in front of the $\Sigma_{n-1}$ formula $\psi$; for $n \geq 2$ the result is $\Sigma_{n-1}$ only in the presence of $\mathrm B\Sigma_{n-1}$ (:ref{#lem-fo-collection-closure}), and the contraction would no longer be logical.
+:::
+::::
+
+::::exercise{#ex-total-function-graph difficulty=2 objective="See that total functions with a $\Sigma_n$ graph have a $\Delta_n$ graph, and that collection lets their values serve as bounds of quantifiers."}
+Let $n \geq 1$, $M$ a model of $\mathrm B\Sigma_n$, and $\gamma(x, y)$ a $\Sigma_n$ formula with parameters such that $M \models \forall x\ \exists! y\ \gamma(x, y)$; write $F(x)$ for the unique $y$. Show that, in $M$:
+
+1. $\gamma(x, y)$ is equivalent to a $\Pi_n$ formula;
+2. if $\psi(y)$ is $\Sigma_n$, respectively $\Pi_n$, then $\psi(F(x))$ is equivalent to a $\Sigma_n$, respectively $\Pi_n$, formula;
+3. if $\psi(z)$ is $\Sigma_n$, then $\forall z < F(x)\ \psi(z)$ is equivalent to a $\Sigma_n$ formula.
+
+Which item uses collection?
+
+:::solution
+1. $\gamma(x, y) \leftrightarrow \forall y'\ (\neg \gamma(x, y') \vee y' = y)$, since $F(x)$ is the only $y'$ with $\gamma(x, y')$. The formula $\neg \gamma \vee y' = y$ is $\Pi_n$, and the universal quantifier merges with its first block.
+
+2. $\psi(F(x)) \leftrightarrow \exists y\ (\gamma(x, y) \wedge \psi(y))$, which is $\Sigma_n$ if $\psi$ is; and $\psi(F(x)) \leftrightarrow \forall y\ (\neg \gamma(x, y) \vee \psi(y))$, which is $\Pi_n$ if $\psi$ is, $\neg \gamma$ being $\Pi_n$.
+
+3. $\forall z < F(x)\ \psi(z) \leftrightarrow \exists y\ (\gamma(x, y) \wedge \forall z < y\ \psi(z))$. The formula $\forall z < y\ \psi(z)$ is a bounded universal quantifier in front of a $\Sigma_n$ formula; it is $\Sigma_n$ in $M$ by :ref{#lem-fo-collection-closure}, since $M \models \mathrm B\Sigma_n$. Only item 3 uses collection; items 1 and 2 are logical, given the hypothesis on $\gamma$.
+:::
+::::
+:::::

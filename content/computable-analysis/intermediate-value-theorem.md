@@ -73,6 +73,14 @@ Why is the term of index $3$ of the output used?
   The value of $m$ is given by continuity; it plays no role in the choice of the index.
 :::
 
+::::exercise{#ex-inverse-increasing difficulty=2 objective="Compute inverse functions by unique choice, avoiding the boundary cases of the intermediate value theorem." lessons="closed-sets-and-choice"}
+Let $f \in C[0, 1]$ be computable and strictly increasing. Show that its inverse $f^{-1} : [f(0), f(1)] \to [0, 1]$ is computable.
+
+:::solution
+Given a name of $y \in [f(0), f(1)]$, the function $g = f - y$ is computable from the name of $y$, uniformly, and has exactly one zero $x = f^{-1}(y)$. Its zero set $\{ x \}$ has empty interior, but $g(0) < 0 < g(1)$ may fail, when $y$ is $f(0)$ or $f(1)$. Use instead the singleton $\{ x \}$: a $\psi_>$-name of the zero set of $g$ is computed by :ref{#thm-zero-sets}, and the algorithm of :ref{#ex-unique-choice} computes $x$ from it. Both steps are uniform in the name of $y$.
+:::
+::::
+
 ## Between LLPO and weak König's lemma
 
 The polygons $g_a$ also show that a solution to $\mathsf{IVT}$ answers a question of $\mathsf{LLPO}$ (:ref{#def-lpo-llpo}): the side of $1/2$ on which a zero lies determines the sign of $a$, when $a \neq 0$.
@@ -126,24 +134,6 @@ $\mathsf{BFT}_1 \equiv_{sW} \mathsf{IVT}$.
 
 In higher dimensions, the picture changes: for $n \geq 2$, the Brouwer fixed point theorem for $[0, 1]^n$ is equivalent to $\mathsf{WKL}$ (Brattka, Le Roux, Miller and Pauly), and there are computable functions $[0, 1]^2 \to [0, 1]^2$ without computable fixed points (Orevkov, 1963; Baigger, 1985). In dimension one, every computable instance has a computable fixed point, by :ref{#cor-ivt-computable-instances}.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $\mathsf{IVT}^\pm$ be the version of $\mathsf{IVT}$ with instances the $f \in C[0, 1]$ such that $f(0) \cdot f(1) < 0$. Show that $\mathsf{IVT}^\pm \equiv_{sW} \mathsf{IVT}$.
-
-:::solution
-$\mathsf{IVT}$ is a restriction of $\mathsf{IVT}^\pm$, so the identity functionals reduce it. Conversely, given $f$ with $f(0) f(1) < 0$, the value $f(0)$ is non-zero, and its sign is found by dovetailing the two semi-decision procedures of :ref{#prop-order-undecidable}. If $f(0) < 0$, pass $f$; otherwise pass $-f$, which has the same zeros. The backward functional is the identity.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $f \in C[0, 1]$ be computable and strictly increasing. Show that its inverse $f^{-1} : [f(0), f(1)] \to [0, 1]$ is computable.
-
-:::solution
-Given a name of $y \in [f(0), f(1)]$, the function $g = f - y$ is computable from the name of $y$, uniformly, and has exactly one zero $x = f^{-1}(y)$. Its zero set $\{ x \}$ has empty interior, but $g(0) < 0 < g(1)$ may fail, when $y$ is $f(0)$ or $f(1)$. Use instead the singleton $\{ x \}$: a $\psi_>$-name of the zero set of $g$ is computed by :ref{#thm-zero-sets}, and the algorithm of the unique choice exercise of :ref{to="computable-analysis/closed-sets-and-choice"} computes $x$ from it. Both steps are uniform in the name of $y$.
-:::
-::::
-
 ## Notes and references
 
 Zero-finding is Weihrauch, Section 6.3: the non-computability of $\mathsf{IVT}$ with the polygons $g_a$ is his Theorem 6.3.2, the trisection method Theorem 6.3.7, computable zeros of computable functions Theorem 6.3.8, isolated zeros Corollary 6.3.9 and inverse functions Theorem 6.3.11. Dzhafarov and Mummert prove that $\mathsf{IVT}$ does not uniformly admit computable solutions (Proposition 3.7.4) and present its equivalence with choice for nested intervals (Theorem 10.4.3). The Weihrauch degree of $\mathsf{IVT}$ was determined by Brattka and Gherardi (2011, Theorem 6.2), and connected choice and the Brouwer fixed point theorem were studied by Brattka, Le Roux, Miller and Pauly (2019), who prove $\mathsf{BFT}_1 \equiv_{sW} \mathsf{IVT}$, the equivalence of $\mathsf{BFT}_n$ with $\mathsf{WKL}$ for $n \geq 2$, and the non-idempotency of connected choice; see Brattka, Gherardi and Pauly, Theorems 7.34, 7.35 and 8.3, Corollary 8.4 and Figure 2. The computable sequence of instances without computable sequence of solutions of :ref{#cor-ivt-parallel} is due to Pour-El and Richards (1989; see Brattka, Gherardi and Pauly, Corollary 8.4). In reverse mathematics, the intermediate value theorem is provable in $\mathsf{RCA}_0$ (Simpson, Theorem II.6.6), and the Brouwer fixed point theorem in dimension two is equivalent to $\mathsf{WKL}_0$ (Simpson, Theorem IV.7.7).
@@ -155,3 +145,63 @@ Zero-finding is Weihrauch, Section 6.3: the non-computability of $\mathsf{IVT}$ 
 - M. B. Pour-El and J. I. Richards, *Computability in Analysis and Physics*, Springer, 1989.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.7 and 10.4.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Sections II.6 and IV.7.
+
+:::::exercises
+::::exercise{#ex-ivt-sign difficulty=1 objective="Remove the sign convention of the intermediate value theorem by a semi-decision of the sign of $f(0)$."}
+Let $\mathsf{IVT}^\pm$ be the version of $\mathsf{IVT}$ with instances the $f \in C[0, 1]$ such that $f(0) \cdot f(1) < 0$. Show that $\mathsf{IVT}^\pm \equiv_{sW} \mathsf{IVT}$.
+
+:::solution
+$\mathsf{IVT}$ is a restriction of $\mathsf{IVT}^\pm$, so the identity functionals reduce it. Conversely, given $f$ with $f(0) f(1) < 0$, the value $f(0)$ is non-zero, and its sign is found by dovetailing the two semi-decision procedures of :ref{#prop-order-undecidable}. If $f(0) < 0$, pass $f$; otherwise pass $-f$, which has the same zeros. The backward functional is the identity.
+:::
+::::
+
+::::exercise{#ex-ivt-nonstrict difficulty=1 objective="Remove the strict inequalities from the intermediate value theorem by extending the function linearly beyond the interval."}
+Let $\mathsf{IVT}_{\leq}$ be the version of $\mathsf{IVT}$ with instances the $f \in C[0, 1]$ such that $f(0) \leq 0 \leq f(1)$. Show that $\mathsf{IVT}_{\leq} \equiv_{sW} \mathsf{IVT}$.
+
+:::solution
+$\mathsf{IVT}$ is a restriction of $\mathsf{IVT}_{\leq}$, so the identity functionals reduce it. Conversely, with $\kappa(u) = \min(1, \max(0, u))$, let
+$$
+g(t) = f(\kappa(3t - 1)) + \min(3t - 1, 0) + \max(3t - 2, 0), \qquad t \in [0, 1].
+$$
+Then $g(0) = f(0) - 1 < 0$ and $g(1) = f(1) + 1 > 0$. Let $u = 3t - 1 \in [-1, 2]$. If $u < 0$, then $g(t) = f(0) + u < 0$; if $u > 1$, then $g(t) = f(1) + u - 1 > 0$; if $u \in [0, 1]$, then $g(t) = f(u)$. So the zeros of $g$ are the points $t = (u + 1)/3$ with $f(u) = 0$, and the backward functional computes $u = 3t - 1$ from $t$ alone. If $(P_k)$ is a $\delta_C$-name of $f$, the functions obtained by replacing $f$ by $P_k$ in the definition of $g$ are rational polygons, with breakpoints at $1/3$, $2/3$ and the points $(b + 1)/3$ for the breakpoints $b$ of $P_k$, and they are at uniform distance at most $d(P_k, f)$ from $g$: they form a $\delta_C$-name of $g$. The same device is used in :ref{#thm-brouwer-one}.
+:::
+::::
+
+::::exercise{#ex-ivt-polynomial difficulty=1 objective="Apply the trisection method to polynomials given by their coefficients."}
+Show that there is an algorithm which, given $d$ and Cauchy names of reals $a_0, \dots, a_d$ such that the polynomial $f(x) = \sum_{i \leq d} a_i x^i$ satisfies $f(0) < 0 < f(1)$, computes a zero of $f$ in $[0, 1]$.
+
+:::solution
+The polynomial $f$ is not the zero polynomial, since $f(0) = a_0 < 0$, so it has at most $d$ zeros, and its zero set has empty interior. The algorithm of :ref{#thm-trisection} uses the instance only through its values $f(c)$ at rationals $c$, on which it runs the semi-decision procedures of :ref{#prop-order-undecidable} (2), and through the continuity of $f$ in the correctness proof. The values $f(c) = \sum_{i \leq d} a_i c^i$ are computed from the names of the coefficients by :ref{#thm-arithmetic-computable}, uniformly in $c$. Running the trisection with these values gives a Cauchy name of a zero of $f$.
+:::
+::::
+
+::::exercise{#ex-ivt-monotone difficulty=1 objective="See that monotonicity alone does not make the intermediate value theorem computable, while strict monotonicity does."}
+Show that the restriction of $\mathsf{IVT}$ to the non-decreasing functions has no continuous realizer, and that $\mathsf{LLPO}$ is strongly Weihrauch reducible to it. Compare with :ref{#ex-inverse-increasing}.
+
+:::solution
+The polygon $g_a$ has slopes $3(a + 1)$, $0$ and $3(1 - a)$ on its three pieces, so it is non-decreasing for $|a| \leq 1$. The proof of :ref{#thm-ivt-not-computable} only uses the functions $g_0$ and $g_a$ with $a = \pm 2^{-m}$, and names made of these polygons; the proof that $\mathsf{LLPO} \leq_{sW} \mathsf{IVT}$ in :ref{#thm-ivt-llpo-wkl} uses $g_a$ with $a \in \{ 0 \} \cup \{ \pm 2^{-n} : n \in \nat \}$, and names made of polygons $g_{a_k}$ with $|a_k| \leq 1$. All these functions are non-decreasing instances, so both proofs apply to the restriction without change. For strictly increasing functions, the zero is unique and is computed by :ref{#ex-inverse-increasing}, as $f^{-1}(0)$: the obstruction is the interval of zeros of $g_0$.
+:::
+::::
+
+::::exercise{#ex-lpo-not-ivt difficulty=1 objective="Transfer a separation of weak König's lemma to the intermediate value theorem and to closed choice." lessons="closed-sets-and-choice"}
+Show that $\mathsf{LPO} \not\leq_W \mathsf{IVT}$ and $\mathsf{LPO} \not\leq_W \mathsf C_{[0,1]}$.
+
+:::solution
+By :ref{#thm-ivt-llpo-wkl} and :ref{#thm-closed-choice-wkl}, $\mathsf{IVT} \leq_W \mathsf{WKL}$ and $\mathsf C_{[0,1]} \leq_W \mathsf{WKL}$. If $\mathsf{LPO} \leq_W \mathsf{IVT}$ or $\mathsf{LPO} \leq_W \mathsf C_{[0,1]}$, then $\mathsf{LPO} \leq_W \mathsf{WKL}$ by transitivity (:ref{#ex-w-transitive}, whose proof applies to problems on represented spaces, since they are problems on names). This contradicts :ref{#ex-lpo-not-wkl}. In words: a zero of a function, or a point of a closed set, never answers uniformly a $\Sigma^0_1$ question about the instance.
+:::
+::::
+
+::::exercise[Connected choice reduces to the intermediate value theorem]{#ex-cc-ivt difficulty=3 objective="Build an instance of the intermediate value theorem whose zero set is a closed interval given by negative information." lessons="closed-sets-and-choice"}
+Show that $\mathsf{CC}_{[0,1]} \leq_{sW} \mathsf{IVT}$, where $\mathsf{CC}_{[0,1]}$ is the restriction of $\mathsf C_{[0,1]}$ to the non-empty closed intervals $[a, b] \subseteq [0, 1]$. Proceed as follows: given a $\psi_>$-name $(c_i, d_i)_i$ of $A = [a, b]$, compute the side of $A$ on which each interval $(c_i, d_i)$ lies, and modify the function of :ref{#thm-zero-sets} (2) so that it is negative to the left of $A$ and positive to the right.
+
+:::solution
+Call $i$ *relevant* if $c_i < d_i$, $c_i < 1$ and $d_i > 0$, which is decidable; exactly the relevant intervals meet $[0, 1]$. For relevant $i$, the rational $e_i = (\max(c_i, 0) + \min(d_i, 1))/2$ lies in $(c_i, d_i) \cap [0, 1]$, hence not in $A$. Since $(c_i, d_i)$ is an interval disjoint from the interval $A$, it lies entirely to the left of $a$ or entirely to the right of $b$, on the same side as $e_i$.
+
+*The side is computable.* If $e_i < a$, then $[0, e_i]$ is a compact set disjoint from $A$, so it is covered by finitely many intervals of the name; if $e_i > b$, the same holds for $[e_i, 1]$. Search, by :ref{#lem-effective-heine-borel} (1), for $n$ such that the first $n$ intervals cover $[0, e_i]$ or cover $[e_i, 1]$; the search terminates. If $[0, e_i]$ is covered, then $[0, e_i] \cap A = \emptyset$ and $e_i < a$, since $A \neq \emptyset$; let $s_i = -1$. Otherwise $[e_i, 1]$ is covered, $e_i > b$, and let $s_i = 1$. For $i$ not relevant, let $s_i = 0$.
+
+*The function.* Let $h_i$ be the tent function of :ref{#thm-zero-sets} (2), positive exactly on $(c_i, d_i)$, with values in $[0, 1]$, and $f = \sum_i s_i\, 2^{-i-1} h_i$ on $[0, 1]$. The partial sums $F_n = \sum_{i < n} s_i\, 2^{-i-1} h_i$ are rational polygons, computed once $s_0, \dots, s_{n-1}$ are found, and $d(F_n, f) \leq 2^{-n}$; so $(F_n)$ is a $\delta_C$-name of $f$. If $x \in A$, then $h_i(x) = 0$ for every $i$, and $f(x) = 0$. If $x \in [0, a)$, then $x \notin A$, so $x$ lies in some $(c_i, d_i)$, and every interval of the name that contains $x$ lies to the left of $A$; so every non-zero term $s_i 2^{-i-1} h_i(x)$ is negative, at least one is non-zero, and $f(x) < 0$. Symmetrically, $f(x) > 0$ for $x \in (b, 1]$. So $f(0) \leq 0 \leq f(1)$, and the zero set of $f$ is $A$.
+
+*Conclusion.* The function $f$ is an instance of $\mathsf{IVT}_{\leq}$ whose zeros are the points of $A$, so $\mathsf{CC}_{[0,1]} \leq_{sW} \mathsf{IVT}_{\leq}$, with the identity as backward functional, and $\mathsf{IVT}_{\leq} \equiv_{sW} \mathsf{IVT}$ by :ref{#ex-ivt-nonstrict}. This is the easier half of :ref{#fact-ivt-connected-choice} (1); the converse reduction, $\mathsf{IVT} \leq_{sW} \mathsf{CC}_{[0,1]}$, is the one admitted in the lesson.
+:::
+::::
+:::::

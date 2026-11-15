@@ -81,7 +81,7 @@ The choice of the weakness property is the creative part of a separation. A rece
 
 ## Exercises
 
-::::exercise{#ex-wkl-kl-rt22 difficulty=1}
+::::exercise{#ex-wkl-kl-rt22 difficulty=1 objective="Separate weak König's lemma from König's lemma and Ramsey's theorem for pairs by preservation."}
 Show that $\mathsf{WKL} \leq_\omega \mathsf{KL}$ but $\mathsf{KL} \not\leq_\omega \mathsf{WKL}$, and that $\mathsf{RT}^2_2 \not\leq_\omega \mathsf{WKL}$.
 
 :::solution
@@ -89,19 +89,11 @@ A Turing ideal satisfying $\mathsf{KL}$ is a jump ideal by :ref{#prop-kl-j}, sin
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-wkl-dominated difficulty=1 objective="Apply the computably dominated basis theorem to obtain a second weakness property preserved by weak König's lemma."}
 Show that $\mathsf{WKL}$ preserves the class of computably dominated sets (:ref{#def-computably-dominated}), and that $\mathsf J$ does not. Deduce $\mathsf J \not\leq_\omega \mathsf{WKL}$ a second time.
 
 :::solution
-The class is closed downwards: a function computable in $Y \leq_T Z$ is computable in $Z$. Let $Z$ be computably dominated and $T \leq_T Z$ an infinite binary tree. By the computably dominated basis theorem (:ref{#thm-dominated-basis}) relativized to $Z$, $T$ has a path $Y$ such that every total $(Z \oplus Y)$-computable function is dominated by a $Z$-computable function, which is in turn dominated by a computable function. So $Z \oplus Y$ is computably dominated. For $\mathsf J$, take $Z = \emptyset$: its only solution $\emptyset'$ is a non-computable $\Delta^0_2$ set, which is not computably dominated. Apply :ref{#thm-preservation-separation}.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that if $\mathsf P \leq_\omega \mathsf Q$ and $\mathsf Q$ preserves a weakness property $\mathcal W$, then $\mathsf P$ preserves $\mathcal W$. Deduce :ref{#thm-preservation-separation} again.
-
-:::solution
-Let $Z \in \mathcal W$ and $X \leq_T Z$ an instance of $\mathsf P$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W$ containing $Z$ and satisfying $\mathsf Q$. It satisfies $\mathsf P$, and contains $X$, so it contains a solution $Y$ to $X$, and $Z \oplus Y \in \mathcal I \subseteq \mathcal W$. So $\mathsf P$ preserves $\mathcal W$. Contrapositively, if $\mathsf Q$ preserves $\mathcal W$ and $\mathsf P$ does not, then $\mathsf P \not\leq_\omega \mathsf Q$.
+The class is closed downwards: a function computable in $Y \leq_T Z$ is computable in $Z$. Let $Z$ be computably dominated and $T \leq_T Z$ an infinite binary tree. By the computably dominated basis theorem (:ref{#thm-dominated-basis}) relativized to $Z$, $T$ has a path $Y$ such that every total $(Z \oplus Y)$-computable function is dominated by a $Z$-computable function, which is in turn dominated by a computable function. So $Z \oplus Y$ is computably dominated. For $\mathsf J$, take $Z = \emptyset$: its only solution is $\emptyset'$, and $\emptyset \oplus \emptyset'$ is not computably dominated. Indeed, let $m(n)$ be the least $s$ such that $\emptyset'_s \uh n = \emptyset' \uh n$, a total $\emptyset'$-computable function. If a computable $g$ dominated $m$, then $n \in \emptyset'$ if and only if $n \in \emptyset'_{g(n+1)}$, since $m(n + 1) \leq g(n + 1)$ and the enumeration only adds elements; so $\emptyset'$ would be computable. Apply :ref{#thm-preservation-separation}.
 :::
 ::::
 
@@ -117,3 +109,63 @@ The method of preservation is standard; Dzhafarov and Mummert state it as Theore
 - R. Downey, N. Greenberg, M. Harrison-Trainor, L. Patey and D. Turetsky, *Relationships between computability-theoretic properties of problems*, Journal of Symbolic Logic 87 (2022), 47–71.
 - C. G. Jockusch and F. Stephan, *A cohesive set which is not high*, Mathematical Logic Quarterly 39 (1993), 515–530.
 - B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics 389 (2021), 107903.
+
+:::::exercises
+::::exercise{#ex-preservation-downward difficulty=2 objective="Show that preservation of a weakness property is inherited downwards along ω-reducibility."}
+Show that if $\mathsf P \leq_\omega \mathsf Q$ and $\mathsf Q$ preserves a weakness property $\mathcal W$, then $\mathsf P$ preserves $\mathcal W$. Deduce :ref{#thm-preservation-separation} again.
+
+:::solution
+Let $Z \in \mathcal W$ and $X \leq_T Z$ an instance of $\mathsf P$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W$ containing $Z$ and satisfying $\mathsf Q$. It satisfies $\mathsf P$, and contains $X$, so it contains a solution $Y$ to $X$, and $Z \oplus Y \in \mathcal I \subseteq \mathcal W$. So $\mathsf P$ preserves $\mathcal W$. Contrapositively, if $\mathsf Q$ preserves $\mathcal W$ and $\mathsf P$ does not, then $\mathsf P \not\leq_\omega \mathsf Q$.
+:::
+::::
+
+::::exercise{#ex-preserve-every difficulty=1 objective="Characterize the problems that preserve every weakness property, and see why preservation cannot separate them from anything."}
+Show that a problem $\mathsf P$ preserves every weakness property if and only if every instance of $\mathsf P$ computes a solution to itself. Deduce that such a problem satisfies $\mathsf P \leq_\omega \mathsf Q$ for every problem $\mathsf Q$.
+
+:::solution
+Suppose every instance computes a solution. Let $\mathcal W$ be a weakness property, $Z \in \mathcal W$ and $X \leq_T Z$ an instance of $\mathsf P$. A solution $Y \leq_T X$ satisfies $Z \oplus Y \leq_T Z$, so $Z \oplus Y \in \mathcal W$ by downward closure.
+
+Conversely, suppose $\mathsf P$ preserves every weakness property, and let $X$ be an instance. The class $\mathcal W = \{ Z : Z \leq_T X \}$ is closed downwards and contains $X$. Applying preservation with $Z = X$ gives a solution $Y$ with $X \oplus Y \leq_T X$, so $Y \leq_T X$.
+
+If every instance computes a solution, every Turing ideal satisfies $\mathsf P$: an instance in the ideal computes a solution, which belongs to the ideal. So every Turing ideal satisfying $\mathsf Q$ satisfies $\mathsf P$.
+:::
+::::
+
+::::exercise{#ex-preserve-jump-closed difficulty=1 objective="Determine exactly which weakness properties the jump preserves."}
+Show that $\mathsf J$ preserves a weakness property $\mathcal W$ if and only if $\mathcal W$ is closed under the jump: $Z \in \mathcal W$ implies $Z' \in \mathcal W$. Deduce that the class of arithmetic sets $\{ Z : \exists n\ Z \leq_T \emptyset^{(n)} \}$ is preserved by $\mathsf J$, $\mathsf{KL}$, $\mathsf{WKL}$ and every $\mathsf{RT}^n_k$, so that it cannot be used to separate any two of these problems.
+
+:::solution
+Suppose $\mathcal W$ is closed under the jump. Let $Z \in \mathcal W$ and $X \leq_T Z$. Then $X' \leq_T Z'$ by monotonicity of the jump, so $Z \oplus X' \leq_T Z' \in \mathcal W$, and $Z \oplus X' \in \mathcal W$. Conversely, if $\mathsf J$ preserves $\mathcal W$ and $Z \in \mathcal W$, apply preservation to the instance $X = Z$: its only solution is $Z'$, so $Z \oplus Z' \in \mathcal W$, and $Z' \in \mathcal W$ by downward closure.
+
+The arithmetic sets form a class closed downwards and under the jump, since $Z \leq_T \emptyset^{(n)}$ implies $Z' \leq_T \emptyset^{(n+1)}$; so $\mathsf J$ preserves it. The problems $\mathsf{KL}$, $\mathsf{WKL}$ (:ref{#prop-kl-j}) and $\mathsf{RT}^n_k$ (:ref{#ex-rtnk-jump}) are ω-reducible to $\mathsf J$, so they preserve it too, by :ref{#ex-preservation-downward}. Since all these problems preserve the class, :ref{#thm-preservation-separation} never applies to it.
+:::
+::::
+
+::::exercise[Several problems at once]{#ex-preserve-two-problems difficulty=2 objective="Extend the method of iterating and dovetailing to two problems, and build an ω-model of WKL and RT²₂ that is not a model of ACA₀."}
+Let $\mathsf Q_0$ and $\mathsf Q_1$ be problems that preserve a weakness property $\mathcal W$. Show that for every $X \in \mathcal W$ there is a Turing ideal $\mathcal I \subseteq \mathcal W$ containing $X$ and satisfying both $\mathsf Q_0$ and $\mathsf Q_1$. Deduce that if a problem $\mathsf P$ does not preserve $\mathcal W$, some Turing ideal satisfies $\mathsf Q_0$ and $\mathsf Q_1$ but not $\mathsf P$. Apply this to show that there is an ω-model of $\mathsf{RCA}_0 + \mathsf{WKL} + \mathsf{RT}^2_2$ that is not a model of $\mathsf{ACA}_0$.
+
+:::solution
+Let $\mathsf Q$ be the problem whose instances are the pairs $(i, V)$ with $i < 2$ and $V$ an instance of $\mathsf Q_i$, the solutions to $(i, V)$ being the solutions to $V$ for $\mathsf Q_i$. It preserves $\mathcal W$: if $Z \in \mathcal W$ and $(i, V) \leq_T Z$, then $V \leq_T Z$ is an instance of $\mathsf Q_i$, which has a solution $Y$ with $Z \oplus Y \in \mathcal W$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W$ containing $X$ and satisfying $\mathsf Q$. It satisfies each $\mathsf Q_i$: if $V \in \mathcal I$ is an instance of $\mathsf Q_i$, then $(i, V) \equiv_T V$ belongs to $\mathcal I$ and has a solution in $\mathcal I$, which is a solution to $V$.
+
+If $\mathsf P$ does not preserve $\mathcal W$, take $Z \in \mathcal W$ and an instance $X \leq_T Z$ of $\mathsf P$ such that $Z \oplus Y \notin \mathcal W$ for every solution $Y$, and an ideal $\mathcal I \subseteq \mathcal W$ containing $Z$ and satisfying $\mathsf Q_0$ and $\mathsf Q_1$. As in the proof of :ref{#thm-preservation-separation}, $X \in \mathcal I$ has no solution in $\mathcal I$.
+
+Take $\mathcal W = \{ Z : \emptyset' \not\leq_T Z \}$, $\mathsf Q_0 = \mathsf{WKL}$, $\mathsf Q_1 = \mathsf{RT}^2_2$ and $\mathsf P = \mathsf J$; the three facts needed are in the proof of :ref{#cor-wkl-not-j}. The resulting Turing ideal is an ω-model of $\mathsf{RCA}_0 + \mathsf{WKL} + \mathsf{RT}^2_2$, by absoluteness (:ref{#prop-omega-absolute}). It does not contain $\emptyset'$, which is defined by an arithmetic formula; so it does not satisfy arithmetic comprehension.
+
+Adapted from Dzhafarov and Mummert, Exercise 4.8.12.
+:::
+::::
+
+::::exercise[Preserving weakness of the solution alone]{#ex-weak-preservation difficulty=3 objective="See why preservation asks that $Z \oplus Y$, and not only $Y$, be weak, with a problem built from the Sacks splitting theorem."}
+Say that $\mathsf Q$ **weakly preserves** $\mathcal W$ if for every $Z \in \mathcal W$ and every instance $X \leq_T Z$ of $\mathsf Q$ there is a solution $Y \in \mathcal W$. Admit the relativized Sacks splitting theorem: for every set $X$, there are sets $A_X$ and $B_X$ with $X' \leq_T A_X \oplus B_X$ and $(X \oplus A_X)' \leq_T X'$, $(X \oplus B_X)' \leq_T X'$. Find a problem $\mathsf Q$ that weakly preserves the class of low sets and satisfies $\mathsf J \leq_\omega \mathsf Q$, although $\mathsf J$ does not weakly preserve it. Conclude that :ref{#thm-preservation-separation} fails for weak preservation.
+
+:::solution
+For each set $X$, fix sets $A_X$ and $B_X$ as in the theorem. Let $\mathsf Q$ be the problem whose instances are the pairs $(i, X)$ with $i < 2$ and $X$ a set, the only solution to $(0, X)$ being $A_X$ and the only solution to $(1, X)$ being $B_X$.
+
+$\mathsf Q$ weakly preserves lowness: let $Z$ be low and $(i, X) \leq_T Z$ an instance. Then $X \leq_T Z$, and for the solution $Y \in \{ A_X, B_X \}$, $Y' \leq_T (X \oplus Y)' \leq_T X' \leq_T Z' \leq_T \emptyset'$, so $Y$ is low.
+
+$\mathsf J \leq_\omega \mathsf Q$: if $\mathcal I \models \mathsf Q$ and $X \in \mathcal I$, then $(0, X)$ and $(1, X)$ belong to $\mathcal I$, so do $A_X$ and $B_X$, and so does $X' \leq_T A_X \oplus B_X$.
+
+$\mathsf J$ does not weakly preserve lowness: $\emptyset$ is low, and its only solution $\emptyset'$ is not low. So $\mathsf Q$ weakly preserves the class of low sets and $\mathsf J$ does not, but $\mathsf J \leq_\omega \mathsf Q$. The proof of :ref{#lem-preservation-ideal} breaks down because $A_X$ and $B_X$ are low separately, but their join is not. By :ref{#ex-preservation-downward}, $\mathsf Q$ does not preserve lowness in the sense of :ref{#def-weakness}.
+:::
+::::
+:::::

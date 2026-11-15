@@ -23,7 +23,7 @@ By Post's theorem, the set of codes of false $\Pi^0_2$ sentences is $\Sigma^0_2$
 Let $\varphi$ and $\psi$ be sentences, at least one true. If both are true, there is nothing to prove. If $\psi$ is false and $\varphi$ true, then $\psi$ is enumerated and $\varphi$ never is, so $(\varphi, \psi) \in A \subseteq C$ and $g(\varphi, \psi) = 0$. If $\varphi$ is false and $\psi$ true, then $(\varphi, \psi) \in B$, so $(\varphi, \psi) \notin C$ and $g(\varphi, \psi) = 1$.
 :::
 
-The function $g$ does not decide the truth of the sentences: when both are true, it may answer either way, and it gives no information on a pair of false sentences. This is the behavior of a $\{0, 1\}$-valued DNC function, one jump up. The first exercise shows that the lemma characterizes the sets PA relative to $\emptyset'$.
+The function $g$ does not decide the truth of the sentences: when both are true, it may answer either way, and it gives no information on a pair of false sentences. This is the behavior of a $\{0, 1\}$-valued DNC function, one jump up. :ref{#ex-pa-choice-converse} shows that the lemma characterizes the sets PA relative to $\emptyset'$.
 
 :::example{#ex-pa-choice-infinite}
 Let $X$ be an infinite computable set and $R$ a computable set, given by $\Delta^0_1$ indices. The sentences "$X \cap R$ is infinite" and "$X \setminus R$ is infinite" are $\Pi^0_2$, with codes computable from the indices, and at least one is true. A set $P$ PA relative to $\emptyset'$ names, uniformly in the indices, one of the two sets that is infinite. By contrast, deciding which of them are infinite requires $\emptyset''$ in general.
@@ -116,7 +116,7 @@ In item 1 of :ref{#prop-weakly-low-properties}, why is the weakly low basis appl
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-pa-choice-converse difficulty=2 objective="Prove the converse of the choice lemma, characterizing the sets PA relative to $\emptyset'$ by the choice of true $\Pi^0_2$ sentences."}
 Let $P$ be a set that computes a function $g$ with the property of :ref{#lem-pa-choice}. Show that $P$ is PA relative to $\emptyset'$.
 
 :::solution
@@ -124,7 +124,7 @@ Let $A$ and $B$ be disjoint $\emptyset'$-c.e. sets. For each $n$, the sentences 
 :::
 ::::
 
-::::exercise{difficulty=1}
+::::exercise{#ex-weakly-low-product difficulty=1 objective="Use the invariance of weakly low bases to combine two problems into one."}
 Let $\mathsf P$ and $\mathsf Q$ admit weakly low bases. Show that the problem whose instances are pairs $X_0 \oplus X_1$ of an instance of $\mathsf P$ and an instance of $\mathsf Q$, with solutions $Y_0 \oplus Y_1$, admits a weakly low basis.
 
 :::solution
@@ -140,3 +140,57 @@ The notion of a weakly low basis, the invariance of :ref{#prop-weakly-low-proper
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 2.8.
 - S. G. Simpson, *Degrees of unsolvability: a survey of results*, in *Handbook of Mathematical Logic*, North-Holland, 1977, 631–652.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Lowness*, section *Beyond ∅′*.
+
+:::::exercises
+::::exercise{#ex-pa-choice-limits difficulty=1 objective="See what the choice lemma cannot do: no oracle computable in $\emptyset'$ chooses, and choosing is weaker than deciding."}
+1. Show that no $\emptyset'$-computable function $g$ has the property of :ref{#lem-pa-choice}.
+2. Show that some set $P$ PA relative to $\emptyset'$ does not decide the truth of $\Pi^0_2$ sentences.
+
+:::solution
+1. By :ref{#ex-pa-choice-converse}, $\emptyset'$ would be PA relative to $\emptyset'$, and would compute a $\{0, 1\}$-valued function $f = \Phi^{\emptyset'}_e$ DNC relative to $\emptyset'$; then $f(e) \neq \Phi^{\emptyset'}_e(e) = f(e)$.
+2. By the low basis theorem relativized to $\emptyset'$, applied to the class of $\{0, 1\}$-valued functions DNC relative to $\emptyset'$, there is $P$ PA relative to $\emptyset'$ with $P' \leq_T \emptyset''$. If $P$ decided the truth of $\Pi^0_2$ sentences, it would compute $\emptyset''$, whose membership questions are $\Sigma^0_2$ sentences, uniformly; then $\emptyset''' \leq_T P' \leq_T \emptyset''$, contradicting item 4 of :ref{#thm-jump}.
+:::
+::::
+
+::::exercise{#ex-pa-choice-several difficulty=1 objective="Extend the choice of a true sentence from two to finitely many $\Pi^0_2$ sentences."}
+Let $P$ be PA relative to $\emptyset'$ and $k \geq 2$. Show that $P$ computes a function $g_k$ such that for all $\Pi^0_2$ sentences $\varphi_1, \dots, \varphi_k$, at least one of which is true, $\varphi_{g_k(\varphi_1, \dots, \varphi_k)}$ is true.
+
+:::solution
+A disjunction of two $\Pi^0_2$ sentences is equivalent to a $\Pi^0_2$ sentence, with a code computable from theirs: $\forall x \exists y\ R(x, y) \vee \forall u \exists v\ S(u, v)$ is equivalent to $\forall x \forall u\ \exists y \exists v\ (R(x, y) \vee S(u, v))$. The direct implication is clear. Conversely, if the first disjunct fails, $R(x_0, y)$ fails for some $x_0$ and every $y$, and the right-hand side at $(x_0, u)$ gives $\exists v\ S(u, v)$ for every $u$.
+
+Let $g$ be given by :ref{#lem-pa-choice}, and $g_2(\varphi_1, \varphi_2) = 1 + g(\varphi_1, \varphi_2)$. For $k \geq 3$, let $\psi$ be a $\Pi^0_2$ sentence equivalent to $\varphi_2 \vee \cdots \vee \varphi_k$, and let $g_k(\varphi_1, \dots, \varphi_k) = 1$ if $g(\varphi_1, \psi) = 0$, and $1 + g_{k-1}(\varphi_2, \dots, \varphi_k)$ otherwise. At least one of $\varphi_1$ and $\psi$ is true. If $g(\varphi_1, \psi) = 0$, then $\varphi_1$ is true. Otherwise $\psi$ is true, so one of $\varphi_2, \dots, \varphi_k$ is, and by induction $g_{k-1}$ names a true one. The functions $g_k$ are computable in $P$, by induction on $k$.
+:::
+::::
+
+::::exercise{#ex-weakly-low-examples difficulty=1 objective="Decide whether problems of PA sets admit weakly low bases, through the low₂ bound."}
+Each of the following problems has all sets as instances. Do they admit weakly low bases?
+
+1. The solutions to $X$ are the sets PA relative to $X$.
+2. The solutions to $X$ are the sets PA relative to $X'$.
+
+:::solution
+1. Yes: the problem admits a low basis (:ref{#ex-low-basis-examples}), hence a weakly low basis, since every $P$ PA relative to $Z'$ computes $Z'$.
+2. No. A solution $Y$ to the instance $\emptyset$ is PA relative to $\emptyset'$, so it computes $\emptyset'$ (:ref{#ex-pa-relative}), and $Y'' \geq_T \emptyset'''$ by item 5 of :ref{#thm-jump}. So $Y'' \not\leq_T \emptyset''$, while by item 2 of :ref{#prop-weakly-low-properties} a weakly low basis would give a solution $Y$ with $Y'' \leq_T \emptyset''$.
+:::
+::::
+
+::::exercise{#ex-weakly-low-higher-levels difficulty=2 objective="Translate the low₂ bound into a statement about the arithmetic hierarchy, and see that it fails one level down for cohesiveness." lessons="low-bases"}
+Let $\mathsf P$ admit a weakly low basis.
+
+1. Show that for every set $Z$, every $Z$-computable instance has a solution $Y$ such that, for every $n \geq 3$, every $\Sigma^0_n(Z \oplus Y)$ set is $\Sigma^0_n(Z)$.
+2. Show that if a set $Y$ is such that every $\Sigma^0_2(Y)$ set is $\Sigma^0_2$, then $Y$ is low. Deduce that the conclusion of item 1 fails for $n = 2$ when $\mathsf P = \mathsf{COH}$ and $Z = \emptyset$.
+
+:::solution
+1. By item 2 of :ref{#prop-weakly-low-properties}, there is a solution $Y$ with $(Z \oplus Y)'' \leq_T Z''$; the converse reduction holds since $Z \leq_T Z \oplus Y$, so $(Z \oplus Y)''$ and $Z''$ have the same degree. By Post's theorem relativized (:ref{#thm-post}), applied twice, a set is $\Sigma^0_n(W)$ if and only if it is $\Sigma^0_{n-2}(W'')$, for $n \geq 3$; and this class depends only on the degree of $W''$. Apply it to $W = Z \oplus Y$ and $W = Z$.
+2. The set $Y'$ is $\Sigma^0_1(Y)$, hence $\Sigma^0_2(Y)$, and its complement is $\Pi^0_1(Y)$, hence $\Sigma^0_2(Y)$. If every $\Sigma^0_2(Y)$ set is $\Sigma^0_2$, then $Y'$ is $\Sigma^0_2$ and $\Pi^0_2$, hence $\Delta^0_2$, and $Y' \leq_T \emptyset'$ by Post's theorem. By :ref{#prop-coh-no-low}, some computable sequence has no low cohesive set; so for this instance, every solution $Y$ has a $\Sigma^0_2(Y)$ set that is not $\Sigma^0_2$. Compare with :ref{#prop-low-second-jump}: a low basis gives the conclusion for every $n \geq 2$.
+:::
+::::
+
+::::exercise{#ex-pa-choice-lowness-indices difficulty=2 objective="Apply the choice lemma to sets named by lowness indices, to choose an infinite set among two low sets."}
+Let $P$ be PA relative to $\emptyset'$. Show that $P$ computes a function $f$ such that, for all lowness indices $e$ and $i$ of low sets $B$ and $C$, at least one of which is infinite, $f(e, i) = 0$ implies that $B$ is infinite, and $f(e, i) = 1$ implies that $C$ is infinite.
+
+:::solution
+By item 2 of :ref{#thm-jump}, there is a computable function $k$ such that, for every set $W$ and every $n$, $k(n) \in W'$ if and only if $W$ has an element larger than $n$. For an index $e$, let $\varphi_e$ be the sentence "for every $n$, it is not the case that $\Phi^{\emptyset'}_e(k(n))$ converges to $0$". The relation "$\Phi^{\emptyset'}_e(k(n))$ converges to $0$" is $\Sigma^0_1(\emptyset')$ uniformly in $e$ and $n$, so $\varphi_e$ is $\Pi^0_1(\emptyset')$, that is, $\Pi^0_2$ by Post's theorem, with a code computable from $e$. If $e$ is a lowness index of $B$, then $\Phi^{\emptyset'}_e$ is the characteristic function of $B'$, and $\varphi_e$ holds if and only if $k(n) \in B'$ for every $n$, that is, if and only if $B$ is infinite. Let $f(e, i) = g(\varphi_e, \varphi_i)$, with $g$ given by :ref{#lem-pa-choice}. Adapted from Hirschfeldt (2014), Exercise 6.56; in Hirschfeldt's proof of the Cholak–Jockusch–Slaman theorem, with low reservoirs, this is the step at which the oracle PA relative to $\emptyset'$ is used.
+:::
+::::
+:::::

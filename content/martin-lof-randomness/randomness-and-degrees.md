@@ -75,15 +75,7 @@ Why are the lengths chosen with $m_{n+1} - m_n = c + n + 1$, growing with $n$?
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that for every $n \geq 1$ there is a random sequence $Z \equiv_T \emptyset^{(n)}$, and that the class of such sequences is null.
-
-:::solution
-Apply :ref{#thm-kucera-gacs} to $X = \emptyset^{(n)}$, which computes $\emptyset'$: the random sequence $Z$ obtained satisfies $Z \equiv_T \emptyset^{(n)}$. The class of sequences computing $\emptyset^{(n)}$ is null by :ref{#thm-sacks}, and contains the class considered.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-positive-measure-degrees difficulty=1 objective="Compare the members of a $\Pi^0_1$ class of positive measure given by the Kučera–Gács theorem and by the computably dominated basis theorem."}
 Let $\mathcal P$ be a $\Pi^0_1$ class of positive measure. Show that $\mathcal P$ has a member in every Turing degree above $\obf'$, and a member that is not computably dominated. Compare with the computably dominated basis theorem.
 
 :::solution
@@ -102,3 +94,69 @@ The Kučera–Gács theorem was proved independently by Kučera (1985) and Gács
 - G. Barmpalias, A. Lewis-Pye and J. Teutsch, *Lower bounds on the redundancy in computations from random oracles via betting strategies with restricted wagers*, Information and Computation 251 (2016), 287–300.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 8.3.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 3.3.
+
+:::::exercises
+::::exercise{#ex-random-jumps difficulty=1 objective="Combine the Kučera–Gács theorem with Sacks's theorem for the iterated jumps."}
+Show that for every $n \geq 1$ there is a random sequence $Z \equiv_T \emptyset^{(n)}$, and that the class of such sequences is null.
+
+:::solution
+Apply :ref{#thm-kucera-gacs} to $X = \emptyset^{(n)}$, which computes $\emptyset'$: the random sequence $Z$ obtained satisfies $Z \equiv_T \emptyset^{(n)}$. The class of sequences computing $\emptyset^{(n)}$ is null by :ref{#thm-sacks}, and contains the class considered.
+:::
+::::
+
+::::exercise{#ex-branching-sharp difficulty=1 objective="See why the branching lemma looks at depth $k + 1$, and why the Kučera–Gács theorem needs positive measure."}
+1. For every string $\sigma$ and every $k$, give a Borel class $\mathcal B$ with $\lambda(\mathcal B \mid \sigma) \geq 2^{-k}$ such that only one string $\tau \succeq \sigma$ of length $|\sigma| + k$ satisfies $\lambda(\mathcal B \mid \tau) \geq 2^{-k-1}$.
+2. Give a non-empty $\Pi^0_1$ class whose members compute only computable sets.
+
+:::solution
+1. Let $\mathcal B = [\sigma 0^k]$. Then $\lambda(\mathcal B \mid \sigma) = 2^{-k}$. For a string $\tau \succeq \sigma$ of length $|\sigma| + k$, $\lambda(\mathcal B \mid \tau) = 1$ if $\tau = \sigma 0^k$, and $0$ otherwise, since $[\tau]$ and $[\sigma 0^k]$ are then disjoint. So the two good extensions of :ref{#lem-kucera-branching} can only be found at depth $k + 1$.
+2. The class $\{ 0^\omega \}$ is $\Pi^0_1$ (:ref{#ex-pi01-classes} (3)), and its only member is computable. Its measure is $0$, and the conclusion of :ref{#thm-kucera-gacs} fails for it.
+:::
+::::
+
+::::exercise{#ex-kucera-tails difficulty=2 objective="Iterate a $\Sigma^0_1$ class of measure less than one to build a Martin-Löf test, and show that every random sequence has a tail in a given $\Pi^0_1$ class of positive measure." lessons="martin-lof-tests"}
+Let $\mathcal P$ be a $\Pi^0_1$ class with $\lambda(\mathcal P) > 0$, and let $Z$ be Martin-Löf random. Show that there are a string $\sigma$ and a sequence $Y \in \mathcal P$ with $Z = \sigma Y$. Deduce that every random sequence is Turing equivalent to a member of $\mathcal P$.
+
+:::solution
+Let $\mathcal U = \cs \setminus \mathcal P$, a $\Sigma^0_1$ class with $\lambda(\mathcal U) = 1 - \lambda(\mathcal P) < 1$, and let $W$ be a c.e. prefix-free set with $[W]^{\prec} = \mathcal U$ (:ref{#lem-prefix-free-generator}). For $n \geq 1$, let $W^{(n)}$ be the set of the concatenations $\sigma_1 \sigma_2 \cdots \sigma_n$ with $\sigma_1, \dots, \sigma_n \in W$; these sets are c.e., uniformly in $n$.
+
+*Each $W^{(n)}$ is prefix-free, and the decomposition of its elements is unique.* If $\sigma_1 \cdots \sigma_n$ and $\sigma'_1 \cdots \sigma'_n$ are comparable, then $\sigma_1$ and $\sigma'_1$ are comparable, hence equal since $W$ is prefix-free; removing them, the remaining concatenations are comparable, and by induction $\sigma_i = \sigma'_i$ for every $i$. Hence
+$$
+\lambda([W^{(n)}]^{\prec}) = \sum_{\sigma_1, \dots, \sigma_n \in W} 2^{-|\sigma_1| - \cdots - |\sigma_n|} = \Big( \sum_{\sigma \in W} 2^{-|\sigma|} \Big)^n = \lambda(\mathcal U)^n.
+$$
+Let $q$ be a rational with $\lambda(\mathcal U) \leq q < 1$. The classes $[W^{(n)}]^{\prec}$ are uniformly $\Sigma^0_1$, with measures at most $q^n$, a computable sequence with limit $0$.
+
+Suppose that no sequence $Y$ with $Z = \sigma Y$ for some $\sigma$ is in $\mathcal P$. We show by induction that $Z \in [W^{(n)}]^{\prec}$ for every $n \geq 1$. Since $Z \notin \mathcal P$, $Z \in \mathcal U$, so $Z$ has a prefix in $W = W^{(1)}$. If $Z$ has a prefix $\rho \in W^{(n)}$, write $Z = \rho Y$; then $Y \notin \mathcal P$, so $Y$ has a prefix $\sigma \in W$, and $\rho\sigma \in W^{(n+1)}$ is a prefix of $Z$. By :ref{#lem-test-bound}, $Z$ is not random, a contradiction.
+
+For the last statement, if $Z = \sigma Y$, then $Y$ computes $Z$ (prefix $\sigma$) and $Z$ computes $Y$ (remove the first $|\sigma|$ bits), so $Z \equiv_T Y \in \mathcal P$.
+
+This is a lemma of Kučera (1985) (Downey–Hirschfeldt, Lemma 6.10.1).
+:::
+::::
+
+::::exercise{#ex-use-lower-bound difficulty=2 objective="Bound from below the use of a weak truth-table reduction computing a random sequence, with prefix-free complexity." lessons="levin-schnorr"}
+Let $X$ be Martin-Löf random, and suppose that $X = \Phi^Z$ for some sequence $Z$ and some Turing functional $\Phi$ such that, for a computable non-decreasing function $h$, the computation of $\Phi^Z(n)$ only queries the oracle below $h(n)$, for every $n$. Show that there is a constant $c$ with $h(n) \geq n - 4 \log n - c$ for every $n \geq 2$. Compare with the use $m_{n+1}$ of the proof of :ref{#thm-kucera-gacs}.
+
+:::solution
+Given $n$ and the string $\rho = Z \uh h(n)$, one computes $X \uh n$: for each $i < n$, $\Phi^\rho(i)$ converges, since the computation of $\Phi^Z(i)$ only queries the oracle below $h(i) \leq h(n)$, and its output is $X(i)$. So there is a prefix-free machine that maps a shortest description of the pair $\langle n, \rho \rangle$ to $X \uh n$, and by :ref{#prop-k-basic} (1) and (2),
+$$
+K(X \uh n) \leq^+ K(n) + K(\rho) \leq^+ 2 \log n + h(n) + 2 \log h(n)
+$$
+for $n \geq 2$ with $h(n) \geq 2$. By :ref{#thm-levin-schnorr}, $K(X \uh n) \geq n - d$ for some $d$. If $h(n) \leq n$, then $\log h(n) \leq \log n$, and the inequality gives $h(n) \geq n - 4 \log n - c$ for a suitable constant $c$ (which also absorbs the finitely many $n$ with $h(n) < 2$, since then $n \leq 2 + 2\log n + d + O(1)$); if $h(n) > n$, the bound holds trivially.
+
+So a reduction to any oracle that computes a random sequence must read almost $n$ bits of the oracle to compute $n$ bits; the use $m_{n+1}$, quadratic in $n$, is far from this bound, which the results quoted in the notes approach.
+:::
+::::
+
+::::exercise{#ex-omega-wtt difficulty=2 objective="Compute the halting problem from few bits of $\Omega$, and compare with the coding of the Kučera–Gács theorem." lessons="levin-schnorr, kolmogorov-complexity/coding-theorem"}
+Let $\omega$ be the binary expansion of $\Omega$. Show that there is a constant $c$ such that, for every $n \geq 2$, the string $\emptyset' \uh n$ is computable from $\omega \uh (\lceil 2 \log n \rceil + c)$, uniformly in $n$. So $\emptyset' \leq_{wtt} \omega$ with a logarithmic use.
+
+:::solution
+Let $M$ be the machine that, on input $\alpha$, computes $e = U(\alpha)$, read as a number, then searches for the least stage $s$ with $\Phi_e(e)[s]\converge$, and outputs $0^s$. Its domain is contained in that of $U$, so it is prefix-free, and there is $d$ with $K \leq K_M + d$. If $\Phi_e(e)$ converges, with least stage $s_e$, then $K(0^{s_e}) \leq K(e) + d$. By :ref{#prop-k-basic} (2), there is $c$ such that $K(e) + d \leq 2 \log n + c$ for all $e < n$ and $n \geq 2$.
+
+Given $n \geq 2$, let $L = \lceil 2 \log n \rceil + c$. By :ref{#thm-omega} (2), $\omega \uh L$ determines, uniformly in $n$, the set of the strings of length at most $L$ in the domain of $U$; compute their outputs, and let $t$ be the largest number such that $0^t$ is among them ($t = 0$ if there is none). If $e < n$ and $\Phi_e(e)$ converges, then $K(0^{s_e}) \leq L$, so $0^{s_e}$ is among these outputs and $s_e \leq t$. Hence, for $e < n$, $e \in \emptyset'$ if and only if $\Phi_e(e)[t]\converge$, which is decidable.
+
+By :ref{#ex-use-lower-bound}, a random sequence computable from $Z$ needs a use close to $n$. The set $\emptyset'$ is far from random: its prefixes are coded by logarithmically many bits of $\omega$, and by :ref{#prop-k-basic} (1) and (2), $K(\emptyset' \uh n) \leq^+ K(n) + K(\omega \uh L)$, which is $O(\log n)$.
+:::
+::::
+:::::

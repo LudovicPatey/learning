@@ -89,15 +89,7 @@ Why can the reservoir $X \cap R_n$, or $X \setminus R_n$, not be used directly a
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that if $\mathsf P_0$ and $\mathsf P_1$ admit strong cone avoidance, so does $\mathsf P_0 \times \mathsf P_1$ (:ref{#prop-cone-avoidance-product}).
-
-:::solution
-Let $C \not\leq_T Z$ and let $X_0 \oplus X_1$ be any instance. Strong cone avoidance of $\mathsf P_0$ gives a solution $Y_0$ to $X_0$ with $C \not\leq_T Z \oplus Y_0$. Strong cone avoidance of $\mathsf P_1$ relative to $Z \oplus Y_0$ gives a solution $Y_1$ to $X_1$ with $C \not\leq_T Z \oplus Y_0 \oplus Y_1$. The proof is the one of :ref{#prop-cone-avoidance-product}, without the hypothesis that the instance is computable in $Z$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-high-cone-subset difficulty=2 objective="Combine the abstract cone avoidance theorem with domination to build a high subset of a given set that avoids a cone."}
 Using :ref{#thm-local-cone-avoidance} and Mathias forcing, show that for every set $Z$, every $C \not\leq_T Z$ and every infinite set $A$ with $C \not\leq_T Z \oplus A$, there is an infinite set $G \subseteq A$ that is **high relative to $Z$**, that is, $(Z \oplus G)' \geq_T Z''$, and such that $C \not\leq_T Z \oplus G$.
 
 :::solution
@@ -113,3 +105,49 @@ Use Mathias forcing with conditions $(\sigma, X)$ such that $X \subseteq A$, $X$
 - D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
 - R. Downey, N. Greenberg, M. Harrison-Trainor, L. Patey and D. Turetsky, *Relationships between computability-theoretic properties of problems*, Journal of Symbolic Logic 87 (2022), 47–71; arXiv:1903.04273.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, sections *First examples* and *Seetapun's theorem*.
+
+:::::exercises
+::::exercise{#ex-strong-product difficulty=1 objective="Check that strong cone avoidance is closed under products, by the proof given for cone avoidance." lessons="avoidance-properties"}
+Show that if $\mathsf P_0$ and $\mathsf P_1$ admit strong cone avoidance, so does $\mathsf P_0 \times \mathsf P_1$ (:ref{#prop-cone-avoidance-product}).
+
+:::solution
+Let $C \not\leq_T Z$ and let $X_0 \oplus X_1$ be any instance. Strong cone avoidance of $\mathsf P_0$ gives a solution $Y_0$ to $X_0$ with $C \not\leq_T Z \oplus Y_0$. Strong cone avoidance of $\mathsf P_1$ relative to $Z \oplus Y_0$ gives a solution $Y_1$ to $X_1$ with $C \not\leq_T Z \oplus Y_0 \oplus Y_1$. The proof is the one of :ref{#prop-cone-avoidance-product}, without the hypothesis that the instance is computable in $Z$.
+:::
+::::
+
+::::exercise[Cohesive subsets of one side]{#ex-coh-rt12-combined difficulty=1 objective="Combine the strong cone avoidance of the pigeonhole principle and of cohesiveness, by transporting a sequence along a solution."}
+Let $Z$ be a set, $C \not\leq_T Z$, $\vec R$ an arbitrary sequence of sets and $A$ an arbitrary set. Show that there is an $\vec R$-cohesive set $G$, contained in $A$ or in $\overline A$, with $C \not\leq_T Z \oplus G$.
+
+:::solution
+By :ref{#thm-dj-cone-avoidance}, there is an infinite set $H$, contained in $A$ or in $\overline A$, with $C \not\leq_T Z \oplus H$. Let $p$ be the enumeration of $H$ in increasing order, and $R'_n = \{ k : p(k) \in R_n \}$. By :ref{#thm-coh-strong-cone} relative to $Z \oplus H$, there is an $\vec R'$-cohesive set $G'$ with $C \not\leq_T Z \oplus H \oplus G'$. Let $G = p[G'] \subseteq H$. It is infinite, since $p$ is injective. If $G' \subseteq^* R'_n$, every $k \in G'$ outside a finite set satisfies $p(k) \in R_n$, so $G \subseteq^* R_n$; in the same way $G' \subseteq^* \overline{R'_n}$ gives $G \subseteq^* \overline{R_n}$. So $G$ is $\vec R$-cohesive. Finally $G \leq_T H \oplus G'$, so $C \not\leq_T Z \oplus G$.
+:::
+::::
+
+::::exercise[Cohesiveness and the pigeonhole principle]{#ex-coh-implies-rt12 difficulty=1 objective="Reduce the pigeonhole principle to cohesiveness, and see that the two problems have equivalent strong cone avoidance properties."}
+Show that if $\mathsf{COH}$ admits strong cone avoidance, so does $\mathsf{RT}^1_2$. Deduce, with the proof of :ref{#thm-coh-strong-cone}, that $\mathsf{COH}$ admits strong cone avoidance if and only if $\mathsf{RT}^1_2$ does.
+
+:::solution
+Let $C \not\leq_T Z$ and let $A$ be an instance of $\mathsf{RT}^1_2$. Let $\vec R$ be the sequence with $R_n = A$ for every $n$. Strong cone avoidance of $\mathsf{COH}$ gives an $\vec R$-cohesive set $G$ with $C \not\leq_T Z \oplus G$. Then $G$ is infinite, and $G \subseteq^* A$ or $G \subseteq^* \overline A$. Removing finitely many elements gives an infinite set $H$, contained in $A$ or in $\overline A$, with $H \equiv_T G$; so $C \not\leq_T Z \oplus H$.
+
+Conversely, the proof of :ref{#thm-coh-strong-cone} uses about the pigeonhole principle only its strong cone avoidance, in the density of cohesiveness. So the two properties are equivalent, and a proof of strong cone avoidance for $\mathsf{COH}$ contains one for $\mathsf{RT}^1_2$.
+:::
+::::
+
+::::exercise[The question is not uniform]{#ex-delta2-not-uniform difficulty=2 objective="See why the question of the Δ⁰₂ theorem is Σ⁰₁ relative to Z at each condition but cannot be so uniformly in the condition."}
+In the proof of :ref{#thm-delta2-cone-avoidance}, the sentences "$G(n) = 1$" and "$G(n) = 0$" are $\Sigma^0_1$: a functional reading the bit $n$ of its oracle can halt exactly when it is $1$, or exactly when it is $0$. Show that $(\varepsilon, m) \mathrel{?{\vdash}} G(\langle x, y \rangle) = 1$ holds if and only if $x \geq m$ or $A(x) = 1$. Deduce that if the relations $\{ (m, x, y) : (\varepsilon, m) \mathrel{?{\vdash}} G(\langle x, y \rangle) = j \}$, for $j < 2$, were $\Sigma^0_1(Z)$, then $A$ would be computable in $Z$.
+
+:::solution
+By definition, $(\varepsilon, m) \mathrel{?{\vdash}} G(\langle x, y \rangle) = 1$ if some string $\tau$ with $(\tau, m) \leq (\varepsilon, m)$ has $\tau(\langle x, y \rangle) = 1$. The extensions $(\tau, m)$ of $(\varepsilon, m)$ are the strings with $\tau(\langle x', y' \rangle) = A(x')$ for every position $\langle x', y' \rangle < |\tau|$ with $x' < m$, the other positions being free. If $x \geq m$, the string of length $\langle x, y \rangle + 1$ that agrees with $A$ on the constrained positions and has $1$ elsewhere is such an extension. If $x < m$, every extension long enough has $\tau(\langle x, y \rangle) = A(x)$, so the answer is positive if and only if $A(x) = 1$. In the same way, $(\varepsilon, m) \mathrel{?{\vdash}} G(\langle x, y \rangle) = 0$ if and only if $x \geq m$ or $A(x) = 0$.
+
+Hence $A = \{ x : (\varepsilon, x + 1) \mathrel{?{\vdash}} G(\langle x, 0 \rangle) = 1 \}$ and $\overline A = \{ x : (\varepsilon, x + 1) \mathrel{?{\vdash}} G(\langle x, 0 \rangle) = 0 \}$. If both relations were $\Sigma^0_1(Z)$, then $A$ and $\overline A$ would be $\Sigma^0_1(Z)$, and $A$ would be computable in $Z$: to decide $x$, enumerate both sets with oracle $Z$ until $x$ appears. For each fixed $m$, on the other hand, the relation only involves the finite string $A \uh m$, and it is $\Sigma^0_1(Z)$, which is all that :ref{#def-question-local} asks.
+:::
+::::
+
+::::exercise[A high cohesive set]{#ex-coh-strong-high difficulty=1 objective="Add a domination requirement to the forcing for strong cone avoidance of cohesiveness."}
+Let $Z$ be a set, $C \not\leq_T Z$ and $\vec R$ an arbitrary sequence of sets. Show that there is an $\vec R$-cohesive set $G$ with $C \not\leq_T Z \oplus G$ and $(Z \oplus G)' \geq_T Z''$.
+
+:::solution
+Use the notion of forcing of :ref{#thm-coh-strong-cone}: Mathias conditions $(\sigma, X)$ with $C \not\leq_T Z \oplus X$. Sufficiently generic sets are $\vec R$-cohesive and satisfy $C \not\leq_T Z \oplus G$ by that proof. Add the following dense sets. Let $h$ be a $Z$-computable function and $(\sigma, X)$ a condition, and let $k$ be the number of elements of $\sigma$. Let $y_j$ be the least element of $X$ larger than $y_{j-1}$ and than $h(j + k)$, and $Y = \{ y_j : j \in \nat \}$, as in the proof of :ref{#prop-mathias-dominant}. Then $Y$ is an infinite subset of $X$ computable in $X \oplus Z$, so $Z \oplus Y \leq_T Z \oplus X$ and $C \not\leq_T Z \oplus Y$: $(\sigma, Y)$ is a condition extending $(\sigma, X)$. Every infinite member $G$ of $(\sigma, Y)$ has $p_G(n) \geq h(n)$ for $n \geq k$. So a sufficiently generic $G$ has a principal function that eventually dominates every $Z$-computable function. Since $p_G \leq_T G$, Martin's theorem relativized to $Z$ (:ref{#thm-martin-domination}) gives $(Z \oplus G)' \geq_T Z''$.
+:::
+::::
+:::::

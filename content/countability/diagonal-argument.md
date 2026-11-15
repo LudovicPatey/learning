@@ -1,7 +1,7 @@
 ---
 title: The diagonal argument
 summary: Cantor space; uncountability of the sets of binary sequences, of integer sequences, of power sets and of ℝ by diagonalization; a general form of the argument.
-duration: 55
+duration: 45
 prerequisites: [countable-constructions]
 ---
 
@@ -78,6 +78,14 @@ Let $X_n$ be the characteristic function of $\{n\}$, so that row $n$ has a singl
 
   This is $X_0$, which differs from $Y$ at position $0$.
 :::
+
+::::exercise{#ex-infinite-subsets-uncountable difficulty=1 objective="Prove that a set is uncountable by injecting Cantor space into it."}
+Show that the set of infinite subsets of $\nat$, and the set of strictly increasing functions $\nat \to \nat$, are uncountable.
+
+:::solution
+The map $X \mapsto \{ 2n + X(n) : n \in \nat \}$ is an injection of $\cs$ into the set of infinite subsets of $\nat$: the image contains exactly one element of $\{2n, 2n+1\}$ for each $n$, and $X(n)$ is its parity. Similarly, $X \mapsto (n \mapsto 2n + X(n))$ is an injection of $\cs$ into the set of strictly increasing functions, since $2n + X(n) \leq 2n + 1 < 2(n+1) + X(n+1)$. A set into which $\cs$ injects is uncountable, since otherwise $\cs$ would be countable by :ref{#cor-subset-countable}.
+:::
+::::
 
 ## A general form
 
@@ -231,37 +239,11 @@ In the proof, where is it used that $c_n \in \{4, 5\}$, rather than merely $c_n 
   The proof does not need $r$ to be irrational; for some sequences $(x_n)$, $r$ is rational.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the set of infinite subsets of $\nat$, and the set of strictly increasing functions $\nat \to \nat$, are uncountable.
-
-:::solution
-The map $X \mapsto \{ 2n + X(n) : n \in \nat \}$ is an injection of $\cs$ into the set of infinite subsets of $\nat$: the image contains exactly one element of $\{2n, 2n+1\}$ for each $n$, and $X(n)$ is its parity. Similarly, $X \mapsto (n \mapsto 2n + X(n))$ is an injection of $\cs$ into the set of strictly increasing functions, since $2n + X(n) \leq 2n + 1 < 2(n+1) + X(n+1)$. A set into which $\cs$ injects is uncountable, since otherwise $\cs$ would be countable by :ref{#cor-subset-countable}.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that the set of bijections $\nat \to \nat$ is uncountable.
-
-:::solution
-To $X \in \cs$, associate the permutation $\pi_X$ that exchanges $2n$ and $2n + 1$ when $X(n) = 1$, and fixes them when $X(n) = 0$. It is a bijection (it is its own inverse), and $X \mapsto \pi_X$ is injective, since $X(n) = 1$ if and only if $\pi_X(2n) = 2n + 1$. Conclude as in the previous exercise.
-:::
-::::
-
-::::exercise{difficulty=2}
-(Cantor's proof of 1874.) Let $(x_n)$ be a sequence of real numbers. Construct closed intervals $[a_0, b_0] \supseteq [a_1, b_1] \supseteq \cdots$ with $b_n - a_n = 3^{-n}$ and $x_n \notin [a_{n+1}, b_{n+1}]$, and deduce that some real number differs from every $x_n$. Which property of $\mathbb R$ is used?
+::::exercise{#ex-cantor-1874 difficulty=2 objective="Prove the uncountability of $\mathbb R$ by nested intervals, and locate the use of completeness."}
+(A variant of Cantor's proof of 1874.) Let $(x_n)$ be a sequence of real numbers. Construct closed intervals $[a_0, b_0] \supseteq [a_1, b_1] \supseteq \cdots$ with $b_n - a_n = 3^{-n}$ and $x_n \notin [a_{n+1}, b_{n+1}]$, and deduce that some real number differs from every $x_n$. Which property of $\mathbb R$ is used?
 
 :::solution
 Start from $[a_0, b_0] = [0, 1]$. Given $[a_n, b_n]$, cut it into three closed thirds; $x_n$ belongs to at most two of them, since the first and the last third are disjoint. Let $[a_{n+1}, b_{n+1}]$ be the leftmost third not containing $x_n$. The sequence $(a_n)$ is non-decreasing and bounded by $b_0$, so it has a limit $r$, by the **completeness** of $\mathbb R$; and $a_m \leq r \leq b_m$ for every $m$, since $a_n \leq b_m$ for all $n$ and $m$. Then $r \in [a_{n+1}, b_{n+1}]$, so $r \neq x_n$, for every $n$. Over $\mathbb Q$, which is countable, the limit $r$ need not exist.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $(X_n)$ be a sequence of elements of $\cs$. Show that the set of $Y \in \cs$ different from every $X_n$ is uncountable.
-
-:::solution
-Let $M = \cs \setminus \{ X_n : n \in \nat \}$. It is non-empty by :ref{#thm-cantor-diagonal}. If it were countable, there would be a surjection $m \mapsto Z_m$ from $\nat$ onto $M$, and the sequence $X_0, Z_0, X_1, Z_1, \dots$, that is, $W_{2n} = X_n$ and $W_{2n+1} = Z_n$, would enumerate all of $\cs$, contradicting :ref{#thm-cantor-diagonal}. The lesson on the continuum shows more: $M$ is equipotent to $\cs$.
 :::
 ::::
 
@@ -276,3 +258,67 @@ Monin and Patey (chapter *Cantor's infinity*, section *Cantor's diagonal argumen
 - R. Gray, *Georg Cantor and transcendental numbers*, American Mathematical Monthly 101 (1994), 819–832.
 - D. Normann and S. Sanders, *On the uncountability of $\mathbb R$*, Journal of Symbolic Logic 87 (2022), 1474–1521.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.
+
+:::::exercises
+::::exercise{#ex-permutations-uncountable difficulty=2 objective="Inject Cantor space into the set of permutations of $\nat$."}
+Show that the set of bijections $\nat \to \nat$ is uncountable.
+
+:::solution
+To $X \in \cs$, associate the permutation $\pi_X$ that exchanges $2n$ and $2n + 1$ when $X(n) = 1$, and fixes them when $X(n) = 0$. It is a bijection (it is its own inverse), and $X \mapsto \pi_X$ is injective, since $X(n) = 1$ if and only if $\pi_X(2n) = 2n + 1$. Conclude as in :ref{#ex-infinite-subsets-uncountable}.
+:::
+::::
+
+::::exercise{#ex-diagonal-complement difficulty=2 objective="Show that a sequence of binary sequences misses uncountably many of them."}
+Let $(X_n)$ be a sequence of elements of $\cs$. Show that the set of $Y \in \cs$ different from every $X_n$ is uncountable.
+
+:::solution
+Let $M = \cs \setminus \{ X_n : n \in \nat \}$. It is non-empty by :ref{#thm-cantor-diagonal}. If it were countable, there would be a surjection $m \mapsto Z_m$ from $\nat$ onto $M$, and the sequence $X_0, Z_0, X_1, Z_1, \dots$, that is, $W_{2n} = X_n$ and $W_{2n+1} = Z_n$, would enumerate all of $\cs$, contradicting :ref{#thm-cantor-diagonal}. The lesson on the continuum shows more: $M$ is equipotent to $\cs$.
+:::
+::::
+
+::::exercise{#ex-diagonal-multiples difficulty=1 objective="Compute the diagonal sequence of a concrete list."}
+For $n \in \nat$, let $X_n = \{ m \in \nat : n + 1 \text{ divides } m \}$. Compute the sequence $Y$ of :ref{#thm-cantor-diagonal}, and check directly that it is none of the $X_n$.
+
+:::solution
+$X_n(n) = 1$ if and only if $n + 1$ divides $n$. Since $0 \leq n < n + 1$, this holds only for $n = 0$. So $Y(0) = 0$ and $Y(n) = 1$ for $n \geq 1$: $Y = 0111\cdots$ is the set $\nat \setminus \{0\}$. Directly, every $X_n$ contains $0$, which is a multiple of every integer, and $Y$ does not.
+:::
+::::
+
+::::exercise{#ex-lawvere-one-point difficulty=1 objective="See why the diagonal lemma needs a map without fixed point, through sets of values with at most one element."}
+Let $A$ be a non-empty set. Show that if $B$ has exactly one element, there is a surjection from $A$ onto $B^A$, and explain why this does not contradict :ref{#cor-lawvere}. What happens when $B = \emptyset$?
+
+:::solution
+If $B = \{b\}$, then $B^A$ has exactly one element, the constant function with value $b$; since $A \neq \emptyset$, every function from $A$ to $B^A$ is surjective. The only function $\delta : B \to B$ is the identity, which has a fixed point, as :ref{#cor-lawvere} requires. The diagonal lemma does not apply, since $B$ has no map without fixed point.
+
+If $B = \emptyset$, then $B^A = \emptyset$, since there is no function from the non-empty set $A$ to $\emptyset$; and there is no function at all from $A$ to $\emptyset$, so no surjection. This agrees with :ref{#cor-lawvere}: the empty function $\emptyset \to \emptyset$ has no fixed point, vacuously.
+:::
+::::
+
+::::exercise{#ex-eventually-exceed difficulty=1 objective="Strengthen the diagonal construction on Baire space to exceed each function of a list from some point on."}
+Let $(f_n)_{n \in \nat}$ be a sequence of functions $\nat \to \nat$. Construct $g : \nat \to \nat$ such that, for every $n$, $g(m) > f_n(m)$ for all $m \geq n$. Show that one cannot in general require $g(m) > f_n(m)$ for all $m$ and $n$.
+
+:::solution
+Let $g(m) = \max \{ f_n(m) : n \leq m \} + 1$, a maximum of finitely many integers. If $m \geq n$, then $n$ is one of the indices in the maximum, so $g(m) \geq f_n(m) + 1$. In particular $g$ differs from every $f_n$, as the diagonal function of :ref{#ex-diagonal-instances} does, and moreover exceeds each $f_n$ from position $n$ on.
+
+For the second statement, let $f_n$ be the constant function with value $n$. A function $g$ with $g(0) > f_n(0) = n$ for all $n$ does not exist.
+:::
+::::
+
+::::exercise{#ex-powerset-no-injection difficulty=2 objective="Run a diagonal argument directly against a map from $\mathcal P(A)$ to $A$, and produce an explicit collision."}
+Let $i : \mathcal P(A) \to A$ be a function, and let $D = \{ i(X) : X \subseteq A \text{ and } i(X) \notin X \}$. Show that $i(D) \in D$, and deduce two distinct sets with the same image under $i$. Conclude that there is no injection from $\mathcal P(A)$ into $A$, without using :ref{#thm-cantor-powerset}.
+
+:::solution
+Let $d = i(D)$. If $d \notin D$, then the set $X = D$ satisfies $i(X) = d \notin X$, so $d \in D$ by definition of $D$, a contradiction. Hence $d \in D$: there is $X \subseteq A$ with $i(X) = d$ and $d \notin X$. Then $X \neq D$, since $d \in D$ and $d \notin X$, while $i(X) = i(D)$. So $i$ is not injective.
+
+When $A \neq \emptyset$, the conclusion also follows from :ref{#thm-cantor-powerset}: an injection $\mathcal P(A) \to A$ would have a left inverse $A \to \mathcal P(A)$ (:ref{#lem-inverses}), which is surjective. The direct argument does not need the left inverse, and it exhibits the collision.
+:::
+::::
+
+::::exercise{#ex-binary-diagonal-pitfall difficulty=1 objective="See why a diagonal argument on digits must avoid numbers with two expansions."}
+For $x \in [0, 1)$ and $k \geq 1$, let $b_k(x) = \lfloor 2^k x \rfloor - 2 \lfloor 2^{k-1} x \rfloor$ be the $k$-th binary digit of $x$. For a sequence $(x_n)$ in $[0, 1)$, let $r = \sum_{n \in \nat} \big(1 - b_{n+1}(x_n)\big)\, 2^{-(n+1)}$. Find a sequence $(x_n)$ for which $r = x_0$, and explain what goes wrong compared with :ref{#thm-reals-uncountable}.
+
+:::solution
+Let $x_0 = \tfrac12$ and $x_n = 0$ for $n \geq 1$. Then $b_1(\tfrac12) = \lfloor 1 \rfloor - 2 \lfloor \tfrac12 \rfloor = 1$, so the first chosen digit is $0$, and $b_{n+1}(0) = 0$, so all the other chosen digits are $1$. Hence $r = \sum_{n \geq 1} 2^{-(n+1)} = \tfrac12 = x_0$. The chosen digits $0111\cdots$ form the expansion of $\tfrac12$ that ends with $1$s, while $b$ reads the other one, $1000\cdots$; so the digits of $r$ are not the chosen ones, and the comparison at position $1$ fails. In base $10$, the proof chooses its digits in $\{4, 5\}$, which keeps away from both $0$ and $9$ and makes the chosen expansion the one read by $d_k$. In base $2$ there are only two digits, so a rule that changes every diagonal digit has no such freedom.
+:::
+::::
+:::::

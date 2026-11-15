@@ -1,7 +1,7 @@
 ---
 title: The Sacks splitting theorem
 summary: Splitting a c.e. set into two c.e. sets that avoid the cone above a non-computable c.e. set; the length of agreement and Sacks' preservation strategy; consequences for the c.e. degrees.
-duration: 50
+duration: 45
 prerequisites: [low-simple-set]
 ---
 
@@ -145,7 +145,7 @@ By contrast, Spector showed that there are **minimal** degrees, that is, non-zer
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-sacks-restraint-at-l difficulty=2 objective="See why the restraint must protect the computation at the length of agreement."}
 In the construction, replace the restraint by the largest use of the computations at $x < l(e, i, s)$ only. Identify the step of the proof of :ref{#lem-sacks-main} that fails.
 
 :::solution
@@ -162,3 +162,55 @@ The splitting theorem is due to Sacks (1963), who also introduced the preservati
 - G. E. Sacks, *On the degrees less than 0′*, Annals of Mathematics 77 (1963), 211–231.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.
 - C. Spector, *On degrees of recursive unsolvability*, Annals of Mathematics 64 (1956), 581–592.
+
+:::::exercises
+::::exercise{#ex-sacks-compute difficulty=1 objective="Compute a length of agreement and a restraint, and follow them through one stage."}
+At a stage $s \geq 5$, suppose that for $x = 0, 1, 2, 3$ the computations $\Phi^{A_{i,s}}_e(x)[s]$ converge with values $0, 1, 0, 0$ and uses $3, 5, 9, 4$ respectively, that $\Phi^{A_{i,s}}_e(4)[s]$ diverges, and that $B_s \cap \{ 0, \dots, 4 \} = \{ 1 \}$.
+
+1. Compute $l(e, i, s)$ and $r(e, i, s)$.
+2. At stage $s + 1$, the number $2$ enters $B$, and $a_s = 7$. Suppose that $\mathcal R_{e,i}$ is the requirement of highest priority whose restraint is at least $7$. Where is $a_s$ placed? Compute $l(e, i, s + 1)$ and $r(e, i, s + 1)$.
+3. What happens to $\mathcal R_{e,i}$ if it is never injured after stage $s$?
+
+:::solution
+1. For $x = 0, 1, 2, 3$, the values $0, 1, 0, 0$ agree with $B_s(x)$, and the computation at $4$ diverges. So $l(e, i, s) = 4$. The restraint is the largest use of a convergent computation at $x \leq 4$, that is, $\max(3, 5, 9, 4) = 9$.
+
+2. Since $7 \leq r(e, i, s)$ and $\mathcal R_{e,i}$ is the requirement of highest priority with this property, $a_s$ goes into $A_{1-i}$. So $A_{i,s+1} = A_{i,s}$, and the computations at $x \leq 3$ converge at stage $s + 1$ with the same values and uses. Now $B_{s+1}(2) = 1 \neq 0$, while the values at $0$ and $1$ still agree with $B_{s+1}$. So $l(e, i, s + 1) = 2$, and $r(e, i, s + 1) = \max(3, 5, 9) = 9$: the restraint still covers the computation at $2$, which is now a disagreement.
+
+3. If $\mathcal R_{e,i}$ is never injured after stage $s$, no number below $9$ ever enters $A_i$, so the computation at $2$ is preserved forever: $\Phi^{A_i}_e(2) = 0 \neq 1 = B(2)$, and the requirement is satisfied. This is the situation of the proof of item 2 of :ref{#lem-sacks-main}, with $q = 2$.
+:::
+::::
+
+::::exercise{#ex-sacks-one-query difficulty=1 objective="Show that the halves of any c.e. splitting are computable in the set with one oracle question per input."}
+Let $A_0$ and $A_1$ be disjoint c.e. sets, and $A = A_0 \cup A_1$. Show that $A_0 \leq_T A$ and $A_1 \leq_T A$, by a procedure that on input $x$ asks only whether $x \in A$. Deduce that $A \equiv_T A_0 \oplus A_1$.
+
+:::solution
+On input $x$, ask whether $x \in A$. If not, then $x \notin A_i$. If so, enumerate $A_0$ and $A_1$ simultaneously until $x$ appears in one of them; this happens, since $x \in A_0 \cup A_1$, and in exactly one of them, since they are disjoint. Answer that $x \in A_i$ if $x$ appeared in $A_i$. This computes $A_i$ from $A$, with use $x + 1$.
+
+Conversely, $x \in A$ if and only if $x \in A_0$ or $x \in A_1$, so $A \leq_T A_0 \oplus A_1$; and $A_0 \oplus A_1 \leq_T A$ by the first part. The argument does not use the construction: it gives another proof that the halves built in :ref{#thm-sacks-splitting} are computable in $A$.
+:::
+::::
+
+::::exercise{#ex-sacks-many-parts difficulty=1 objective="Iterate the splitting theorem to split a c.e. degree into finitely many parts."}
+Let $A$ and $B$ be c.e. sets with $B$ not computable, and $n \geq 2$. Show that $A$ is the disjoint union of $n$ c.e. sets, each computable in $A$ and none computing $B$. Deduce that every non-computable c.e. degree is the join of $n$ c.e. degrees strictly below it.
+
+:::solution
+By induction on $n$. For $n = 2$, this is :ref{#thm-sacks-splitting}. If $A = A_1 \sqcup \cdots \sqcup A_n$ with the required properties, apply the theorem to the c.e. set $A_n$ and to $B$: $A_n = A'_n \sqcup A''_n$ with $A'_n, A''_n$ c.e., computable in $A_n$, hence in $A$, and not computing $B$. Then $A_1, \dots, A_{n-1}, A'_n, A''_n$ are $n + 1$ parts with the required properties.
+
+Let $A$ be a non-computable c.e. set, and apply this with $B = A$. Each part $A_j$ is computable in $A$ and does not compute $A$, so its degree is strictly below that of $A$. Since $x \in A$ if and only if $x$ belongs to one of the parts, $A \leq_T A_1 \oplus \cdots \oplus A_n$, and the converse holds since each $A_j \leq_T A$. So $\deg_T(A)$ is the join of the degrees of the parts.
+:::
+::::
+
+::::exercise{#ex-sacks-sequence difficulty=2 objective="Run the Sacks preservation strategy against a uniformly c.e. sequence of sets."}
+Let $A$ be a c.e. set and $(C_j)_{j \in \nat}$ a uniformly c.e. sequence of non-computable sets. Show that there are disjoint c.e. sets $A_0$ and $A_1$ with $A_0 \cup A_1 = A$, $A_0, A_1 \leq_T A$, and $C_j \not\leq_T A_i$ for every $j$ and $i \in \{0, 1\}$.
+
+:::solution
+If $A$ is finite, take $A_0 = A$ and $A_1 = \emptyset$. Otherwise, fix an injective computable enumeration $(a_s)$ of $A$ and a computable approximation $(C_{j,s})$ of the sequence, with $C_{j,s} \subseteq C_{j,s+1}$ and $C_j = \bigcup_s C_{j,s}$, computable in $(j, s)$. The requirements are $\mathcal R_{e,j,i} : \Phi^{A_i}_e \neq C_j$, ordered by the code $\langle e, j, i \rangle$. Define the length of agreement $l(e, j, i, s)$ and the restraint $r(e, j, i, s)$ as in :ref{#def-length-agreement}, with $C_{j,s}$ in place of $B_s$; they are computable in $(e, j, i, s)$.
+
+*Construction.* At stage $s + 1$, if some code $\langle e, j, i \rangle \leq s$ has $a_s \leq r(e, j, i, s)$, take the smallest one and put $a_s$ into $A_{1-i}$; otherwise put $a_s$ into $A_0$. The sets $A_0$ and $A_1$ are c.e., disjoint, with union $A$, and computable in $A$ as in the lesson (or by :ref{#ex-sacks-one-query}).
+
+*Verification.* Prove the three items of :ref{#lem-sacks-main} for $\mathcal R_{e,j,i}$, by induction on the code $k = \langle e, j, i \rangle$. Item 1: an injury of $\mathcal R_{e,j,i}$ at a stage $s \geq k$ puts $a_s$ into $A_i$, so the smallest code at most $s$ whose restraint is at least $a_s$ belongs to a requirement $\mathcal R_{e',j',1-i}$ of smaller code; then $a_s$ is at most a bound $R$ on the restraints of higher priority, which exists by item 3 for smaller codes, and this happens for finitely many $s$. Items 2 and 3 use only the preservation property after the last injury, and the facts that $C_j$ is c.e. and not computable; their proofs apply verbatim with $C_j$ in place of $B$. So $\Phi^{A_i}_e \neq C_j$ for all $e$, $j$, $i$.
+
+The case of $\Delta^0_2$ sets $C_j$ is Soare 2016, Exercise 7.6.3; it requires the variant of the strategy for $\Delta^0_2$ sets.
+:::
+::::
+:::::

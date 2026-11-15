@@ -90,6 +90,22 @@ Why does the theorem not show that $F(q)$ is defined for every $q$ close to $p$?
   Compactness plays no role in this question.
 :::
 
+::::exercise{#ex-sup-not-continuous difficulty=1 objective="Apply the continuity method to the supremum of a bounded sequence of numbers."}
+Show that the function $\sup :\subseteq \bs \to \nat$, defined on the bounded sequences by $\sup(p) = \max_n p(n)$, is not continuous, and that its restriction to the non-decreasing bounded sequences is not continuous either.
+
+:::solution
+Let $p = 0^\infty$, a non-decreasing bounded sequence with $\sup(p) = 0$. For every $m$, the sequence $0^m 1^\infty$ is non-decreasing, bounded, belongs to $[p \uh m]$, and has supremum $1$. So no cylinder around $p$ keeps the value $0$, and $\sup$ is not continuous at $p$, even on the non-decreasing sequences. This is a discrete form of the monotone convergence theorem; its continuous form is studied in the last lesson.
+:::
+::::
+
+::::exercise{#ex-computable-points difficulty=2 objective="See that mapping computable sequences to computable sequences is much weaker than being computable."}
+Let $F : \bs \to \bs$ be the function with $F(p) = 0^\infty$ if $p$ is computable and $F(p) = 1^\infty$ otherwise. Show that $F$ maps computable sequences to computable sequences and is not computable.
+
+:::solution
+$F(p)$ is one of the two computable sequences $0^\infty$ and $1^\infty$, for every $p$. Let $p$ be computable, so $F(p) = 0^\infty$. For every $m$, the cylinder $[p \uh m]$ contains a non-computable sequence $q$, since it contains $2^{\aleph_0}$ sequences and only countably many are computable; then $F(q)(0) = 1 \neq F(p)(0)$. So $F$ is not continuous at $p$, and not computable by :ref{#thm-type2-continuous}. Preserving computable points is thus much weaker than being computable; in analysis, the property of mapping computable points to computable points is sometimes called Banach–Mazur computability, and is not equivalent to computability either (Weihrauch, Section 9.1).
+:::
+::::
+
 ## Continuity is relative computability
 
 The converse of :ref{#thm-type2-continuous} holds once an oracle is allowed: the oracle stores, for each finite part of the input, which finite part of the output it determines. A function $F :\subseteq \bs \to \bs$ is **computable relative to** $A \subseteq \nat$ if there is $e$ with $\Phi^{A \oplus p}_e = F(p)$ for every $p \in \dom F$, where the oracle $A \oplus p$ is the join of $A$ with the graph of $p$.
@@ -108,32 +124,6 @@ The oracle $A$ of the proof is in general very complex, and need not be unique; 
 
 Computable functions are closed under composition, with the natural domain: if $F$ and $G$ are computable, then $G \circ F$, defined on $\{ p \in \dom F : F(p) \in \dom G \}$, is computable. A functional computes $G(F(p))(n)$ by simulating the functional of $G$, and answering each of its oracle queries about the graph of $F(p)$ by computing the corresponding value of $F(p)$ with the functional of $F$. Continuous functions are closed under composition as well.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the function $\sup :\subseteq \bs \to \nat$, defined on the bounded sequences by $\sup(p) = \max_n p(n)$, is not continuous, and that its restriction to the non-decreasing bounded sequences is not continuous either.
-
-:::solution
-Let $p = 0^\infty$, a non-decreasing bounded sequence with $\sup(p) = 0$. For every $m$, the sequence $0^m 1^\infty$ is non-decreasing, bounded, belongs to $[p \uh m]$, and has supremum $1$. So no cylinder around $p$ keeps the value $0$, and $\sup$ is not continuous at $p$, even on the non-decreasing sequences. This is a discrete form of the monotone convergence theorem; its continuous form is studied in the last lesson.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $F : \bs \to \bs$ be the function with $F(p) = 0^\infty$ if $p$ is computable and $F(p) = 1^\infty$ otherwise. Show that $F$ maps computable sequences to computable sequences and is not computable.
-
-:::solution
-$F(p)$ is one of the two computable sequences $0^\infty$ and $1^\infty$, for every $p$. Let $p$ be computable, so $F(p) = 0^\infty$. For every $m$, the cylinder $[p \uh m]$ contains a non-computable sequence $q$, since it contains $2^{\aleph_0}$ sequences and only countably many are computable; then $F(q)(0) = 1 \neq F(p)(0)$. So $F$ is not continuous at $p$, and not computable by :ref{#thm-type2-continuous}. Preserving computable points is thus much weaker than being computable; in analysis, the property of mapping computable points to computable points is sometimes called Banach–Mazur computability, and is not equivalent to computability either (Weihrauch, Section 9.1).
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that every computable $G :\subseteq \bs \to \nat$ extends to a computable function whose domain is open, and that every computable $G :\subseteq \bs \to \bs$ extends to a computable function whose domain is $\Pi^0_2$. Is the domain $D$ of :ref{#ex-type2-functions} open?
-
-:::solution
-If $\Phi_e$ computes $G :\subseteq \bs \to \nat$, then $\Phi^p_e(0)$ converges on the open set $\mathcal U = \bigcup \{ [\sigma] : \Phi^\sigma_e(0)\converge \}$ (:ref{#lem-type2-finite}), which contains $\dom G$, and $p \mapsto \Phi^p_e(0)$ is computable on $\mathcal U$ and extends $G$. For $G :\subseteq \bs \to \bs$ computed by $\Phi_e$, the set $\{ p : \forall n\ \exists m\ \Phi^{p \uh m}_e(n)\converge \}$ is $\Pi^0_2$, contains $\dom G$, and $\Phi_e$ computes a total function on it; so every computable function $G :\subseteq \bs \to \bs$ extends to a computable function with a $\Pi^0_2$ domain (Weihrauch, Theorem 2.2.4, in the form "the domain of the function computed by a Type-2 machine is a $G_\delta$ set"). The set $D$ is $\Pi^0_2$ and not open: every cylinder $[\sigma]$ contains $\sigma 0^\infty \notin D$. The natural domains of the two kinds of functions differ accordingly.
-:::
-::::
-
 ## Notes and references
 
 Type-2 machines and the Type-2 Theory of Effectivity are presented in Weihrauch, *Computable Analysis*, Chapter 2: machines and computable string functions in Section 2.1, continuity of computable functions in Section 2.2 (Theorem 2.2.3), where the natural domains of computable functions are also shown to be $G_\delta$ sets (Theorem 2.2.4). The characterization of continuous functions by relative computability, :ref{#thm-continuous-relative}, is the content of Weihrauch's representation of the continuous functions by programs with an oracle (Section 2.3, Lemma 2.3.11). Weihrauch works with sequences over a finite alphabet; Brattka, Hertling and Weihrauch use Baire space, as here. Computability on infinite sequences of numbers goes back to Turing's paper on computable numbers (1936, with a correction in 1937), and to the analyses of Grzegorczyk (1955) and Lacombe (1955); Kleene's functionals of type 2 are the same notion seen from recursion theory.
@@ -143,3 +133,63 @@ Type-2 machines and the Type-2 Theory of Effectivity are presented in Weihrauch,
 - A. M. Turing, *On computable numbers, with an application to the Entscheidungsproblem*, Proceedings of the London Mathematical Society 42 (1936), 230–265; correction, 43 (1937), 544–546.
 - A. Grzegorczyk, *Computable functionals*, Fundamenta Mathematicae 42 (1955), 168–202.
 - D. Lacombe, *Extension de la notion de fonction récursive aux fonctions d'une ou plusieurs variables réelles*, Comptes Rendus de l'Académie des Sciences Paris 240 (1955), 2478–2480; 241 (1955), 13–14 and 151–153.
+
+:::::exercises
+::::exercise{#ex-type2-domains difficulty=2 objective="Describe the natural domains of computable functions on Baire space: open for values in $\nat$, $\Pi^0_2$ for values in $\bs$."}
+Show that every computable $G :\subseteq \bs \to \nat$ extends to a computable function whose domain is open, and that every computable $G :\subseteq \bs \to \bs$ extends to a computable function whose domain is $\Pi^0_2$. Is the domain $D$ of :ref{#ex-type2-functions} open?
+
+:::solution
+If $\Phi_e$ computes $G :\subseteq \bs \to \nat$, then $\Phi^p_e(0)$ converges on the open set $\mathcal U = \bigcup \{ [\sigma] : \Phi^\sigma_e(0)\converge \}$ (:ref{#lem-type2-finite}), which contains $\dom G$, and $p \mapsto \Phi^p_e(0)$ is computable on $\mathcal U$ and extends $G$. For $G :\subseteq \bs \to \bs$ computed by $\Phi_e$, the set $\{ p : \forall n\ \exists m\ \Phi^{p \uh m}_e(n)\converge \}$ is $\Pi^0_2$, contains $\dom G$, and $\Phi_e$ computes a total function on it; so every computable function $G :\subseteq \bs \to \bs$ extends to a computable function with a $\Pi^0_2$ domain (Weihrauch, Theorem 2.2.4, in the form "the domain of the function computed by a Type-2 machine is a $G_\delta$ set"). The set $D$ is $\Pi^0_2$ and not open: every cylinder $[\sigma]$ contains $\sigma 0^\infty \notin D$. The natural domains of the two kinds of functions differ accordingly.
+:::
+::::
+
+::::exercise{#ex-type2-least-zero difficulty=1 objective="Check on two examples how the domain and the continuity of a function on Baire space are determined."}
+Let $M :\subseteq \bs \to \nat$ map a sequence $p$ with a zero to the least $n$ with $p(n) = 0$, and let $N :\subseteq \bs \to \nat$ map a sequence with finitely many zeros to the number of $n$ with $p(n) = 0$. Show that $M$ is computable and that its domain is open, and that $N$ is not continuous.
+
+:::solution
+On oracle $p$, a functional computes $p(0), p(1), \dots$ in turn and outputs the first $n$ with $p(n) = 0$; it converges exactly when $p$ has a zero, with output $M(p)$, so $M$ is computable. Its domain is $\bigcup \{ [\sigma] : \sigma(i) = 0 \text{ for some } i < |\sigma| \}$, a union of cylinders: if $p(n) = 0$, the whole cylinder $[p \uh (n+1)]$ consists of sequences with a zero.
+
+The sequence $1^\infty$ has no zero, so $N(1^\infty) = 0$. For every $m$, the sequence $1^m 0 1^\infty$ belongs to $[1^m]$ and to the domain of $N$, and $N(1^m 0 1^\infty) = 1$. No cylinder around $1^\infty$ keeps the value $0$, so $N$ is not continuous at $1^\infty$, and it is not computable by :ref{#thm-type2-continuous}.
+:::
+::::
+
+::::exercise{#ex-baire-not-uniform difficulty=1 objective="See that a computable total function on Baire space need not be uniformly continuous, unlike on Cantor space." lessons="pi01-classes/cantor-space"}
+Let $F : \bs \to \nat$ be defined by $F(p) = p(p(0))$. Show that $F$ is computable and total, and that it is not uniformly continuous: there is no $m$ such that $F(p) = F(q)$ for all $p, q$ with $p \uh m = q \uh m$. Compare with :ref{#ex-uniform-continuity}.
+
+:::solution
+A functional reads $k = p(0)$ and then outputs $p(k)$; it converges on every oracle, so $F$ is computable and total. Let $m \geq 1$, let $p$ be the sequence with $p(0) = m$ and $p(n) = 0$ for $n \geq 1$, and let $q$ agree with $p$ except at position $m$, where $q(m) = 1$. Since $m \geq 1$, the positions $0$ and $m$ are different, so $q(0) = m$, and $p \uh m = q \uh m$. But $F(p) = p(m) = 0$ and $F(q) = q(m) = 1$. The case $m = 0$ follows from the case $m = 1$, since $p \uh 1 = q \uh 1$ implies $p \uh 0 = q \uh 0$.
+
+On Cantor space, every continuous total function is uniformly continuous, by compactness (:ref{#ex-uniform-continuity}). Baire space is not compact, and here the use of the computation at $p$ is $p(0) + 1$, which is unbounded.
+:::
+::::
+
+::::exercise{#ex-type2-ce-graph difficulty=2 objective="Prove the effective form of the characterization of continuous functions: the oracle of the proof can be taken c.e. exactly for computable functions."}
+Show that $F :\subseteq \bs \to \bs$ is computable if and only if there is a c.e. set $W$ of pairs of strings $(\sigma, \tau)$ such that
+1. if $(\sigma, \tau) \in W$ and $p \in \dom F \cap [\sigma]$, then $\tau \prec F(p)$;
+2. for every $p \in \dom F$ and every $n$, there is $(\sigma, \tau) \in W$ with $\sigma \prec p$ and $|\tau| > n$.
+
+Compare with the set $A$ in the proof of :ref{#thm-continuous-relative}.
+
+:::solution
+Suppose that $\Phi_e$ computes $F$. Let $W$ be the set of pairs $(\sigma, \tau)$ with $\Phi^\sigma_e(i)\converge = \tau(i)$ for every $i < |\tau|$. It is c.e. by :ref{#lem-type2-finite} (1), since only finitely many $i$ are involved. For condition 1, if $(\sigma, \tau) \in W$ and $p \in \dom F \cap [\sigma]$, then $\sigma = p \uh |\sigma|$, so $\Phi^p_e(i)\converge = \tau(i)$ for $i < |\tau|$ by :ref{#lem-type2-finite} (2), and $F(p)(i) = \tau(i)$. For condition 2, let $p \in \dom F$ and $n \in \nat$. For each $i \leq n$, :ref{#lem-type2-finite} (2) gives $m_i$ with $\Phi^{p \uh m_i}_e(i)\converge = F(p)(i)$; with $m = \max_{i \leq n} m_i$, item 1 of the lemma gives $(p \uh m, F(p) \uh (n+1)) \in W$.
+
+Conversely, let $W$ be c.e. with these properties. On oracle $p$ and input $n$, a functional enumerates $W$ and searches for a pair $(\sigma, \tau)$ with $|\tau| > n$ and $\sigma \prec p$, the latter being checked by reading $p(0), \dots, p(|\sigma| - 1)$ from the oracle; it outputs $\tau(n)$. If $p \in \dom F$, condition 2 ensures that the search terminates, and condition 1 that $\tau(n) = F(p)(n)$.
+
+The set $A$ of the proof of :ref{#thm-continuous-relative} contains all pairs satisfying condition 1, and is in general not c.e.; a computable function is one for which a c.e. subfamily of such pairs suffices to determine $F$.
+:::
+::::
+
+::::exercise{#ex-baire-into-cantor difficulty=2 objective="Embed Baire space into Cantor space by a computable map with a computable inverse, and determine the complexity of its range."}
+For $p \in \bs$, let $\beta(p) = 0^{p(0)}\, 1\, 0^{p(1)}\, 1\, 0^{p(2)}\, 1 \cdots \in \cs$. Show that $\beta$ is computable and injective, that its range $R$ is the set of $X \in \cs$ with $X(n) = 1$ for infinitely many $n$, and that the inverse $\beta^{-1} : R \to \bs$ is computable. Show that $R$ is a $\Pi^0_2$ set that is neither open nor closed.
+
+:::solution
+The $1$s of $\beta(p)$ are at the positions $s_k = \sum_{i \leq k} (p(i) + 1) - 1$, which increase strictly with $k$ and satisfy $s_k \geq k$. To compute $\beta(p)(n)$, compute $s_0, \dots, s_n$ from $p(0), \dots, p(n)$; then $\beta(p)(n) = 1$ if and only if $n = s_k$ for some $k \leq n$. So $\beta$ is computable. The sequence $p$ is recovered from the positions of the $1$s: $p(0) = s_0$ and $p(k) = s_k - s_{k-1} - 1$ for $k \geq 1$; so $\beta$ is injective.
+
+Every $\beta(p)$ has infinitely many $1$s. Conversely, if $X$ has infinitely many $1$s, at positions $t_0 < t_1 < \cdots$, the sequence $p$ with $p(0) = t_0$ and $p(k) = t_k - t_{k-1} - 1$ satisfies $\beta(p) = X$. The inverse is computed on $R$ by searching for the successive $1$s of $X$, a search that terminates since there are infinitely many.
+
+$R = \{ X : \forall n\ \exists m > n\ X(m) = 1 \}$ is $\Pi^0_2$. It is not open: every cylinder $[\sigma]$ contains $\sigma 0^\infty \notin R$. It is not closed: its complement contains $0^\infty$, and every cylinder $[0^n]$ around $0^\infty$ contains $0^n 1^\infty \in R$, so the complement is not open. Since $\beta$ and $\beta^{-1}$ are continuous, Baire space is homeomorphic to the subspace $R$ of Cantor space; it is not compact, and $R$ is not closed.
+
+Adapted from Weihrauch 2000, Exercise 2.2.9.
+:::
+::::
+:::::

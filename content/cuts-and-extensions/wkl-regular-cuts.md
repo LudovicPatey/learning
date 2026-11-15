@@ -1,7 +1,7 @@
 ---
 title: The Kirby–Paris characterization and regular cuts
 summary: A proper cut is semiregular if and only if it is closed under multiplication and its coded subsets form a model of WKL₀ (Kirby and Paris); regular cuts and the pigeonhole principle; every regular cut is semiregular.
-duration: 25
+duration: 30
 prerequisites: [semiregular-cuts]
 ---
 
@@ -61,6 +61,22 @@ Suppose that $I$ is closed under addition and multiplication, as in the definiti
 
 The converse fails: Kirby and Paris (1977) built semiregular cuts that are not regular. With their coded subsets, regular cuts are characterized by a collection scheme: by a theorem of Hirst, the infinite pigeonhole principle for arbitrarily many colors is equivalent over $\mathsf{RCA}_0$ to $\Sigma^0_2$ collection (:ref{to="induction-conservation/pigeonhole"}), and accordingly a semiregular cut $I$ is regular if and only if $(I, \mathrm{Cod}(M/I))$ satisfies $\Sigma^0_2$ collection with set parameters (Hájek and Pudlák, Theorem IV.2.21, for short cuts). We admit this characterization.
 
+## Exercises
+
+::::exercise{#ex-exp-not-semireg difficulty=2 objective="Build an exponential cut that is not semiregular, and deduce from the Kirby–Paris characterization that its coded subsets satisfy weak König's lemma but not $\Sigma^0_1$ induction."}
+Let $M$ be a non-standard model of $\mathrm I\Sigma_1$ and $a \in M$ non-standard. Show that $M$ has a sequence $s$ of length $a$ with $(s)_0 = a$ and $(s)_{i+1} = 2^{(s)_i}$ for $i + 1 < a$. Let $I = \{ x \in M : x < (s)_n \text{ for some } n \in \nat \}$. Show that $I$ is a proper exponential cut that is not semiregular. Deduce that $(I, \mathrm{Cod}(M/I))$ satisfies $\Delta^0_1$ comprehension and weak König's lemma, but not the $\Sigma^0_1$ induction scheme.
+
+:::solution
+*The sequence.* $M \models \mathrm{exp}$ (:ref{#prop-isigma1-exp}). Let $\theta(\ell)$ say that some $s$ codes a sequence of length $\ell + 1$ with $(s)_0 = a$ and $\varepsilon((s)_i, (s)_{i+1})$ for every $i < \ell$; it is a $\Sigma_1$ formula, the rest being bounded. $\theta(0)$ holds, and if $s$ witnesses $\theta(\ell)$, the concatenation $s^\frown 2^{(s)_\ell}$ (:ref{#prop-seq-basic}) witnesses $\theta(\ell + 1)$. By $\Sigma_1$ induction, $\theta(a - 1)$ holds. By bounded induction on $j$, $(s)_i < (s)_j$ for $i < j < a$, since $x < 2^x$.
+
+*The cut.* $I$ is an initial segment containing $0$. If $x < (s)_n$, then $2^x < 2^{(s)_n} = (s)_{n + 1}$, so $I$ is exponential, hence closed under successor, addition and multiplication (:ref{#ex-exp-cut-closed}). The element $(s)_{a - 1}$ is above every $(s)_n$, $n \in \nat$, since $n < a - 1$; so it is not in $I$, and $I$ is proper.
+
+*Not semiregular.* The domain $a$ of $s$ is in $I$, since $a = (s)_0 < (s)_1$. For $n \in \nat$, $(s)_n < (s)_{n+1}$, so $(s)_n \in I$; these values are cofinal in $I$. So $I$ is not semiregular.
+
+*Consequences.* $\Delta^0_1$ comprehension holds by :ref{#cor-cod-delta1-ca}, and weak König's lemma by :ref{#thm-scott-wkl-cut}, since $I$ is a proper exponential cut. The basic axioms hold, since $I$ is a model of $\mathrm I\Delta_0$ (:ref{#lem-cut-model}). If $\Sigma^0_1$ induction held as well, $(I, \mathrm{Cod}(M/I))$ would be a model of $\mathsf{WKL}_0$, and $I$, being closed under multiplication, would be semiregular by :ref{#thm-kirby-paris-wkl}. So $\Sigma^0_1$ induction fails in $(I, \mathrm{Cod}(M/I))$.
+:::
+::::
+
 ## Notes and references
 
 :ref{#thm-kirby-paris-wkl} is Wong's Theorem 5.9 (Kirby and Paris), of which Wong proves one direction; the proof of the other direction given here, by $\Sigma^0_1$ induction on the codes $d_y$, is added. Hájek and Pudlák treat regular cuts in models of arithmetic with a top, as $1$-Ramsey cuts (Definition IV.2.19 and the remark after it); :ref{#prop-regular-semireg} is their Theorem IV.2.20, and the characterization by collection is the case $k = 1$ of their Theorem IV.2.21. Hirst's theorem is proved in the course on induction and conservation.
@@ -68,3 +84,41 @@ The converse fails: Kirby and Paris (1977) built semiregular cuts that are not r
 - L. A. S. Kirby and J. B. Paris, *Initial segments of models of Peano's axioms*, in Set Theory and Hierarchy Theory V, Lecture Notes in Mathematics 619, Springer, 1977, 211–226.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 5.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 2(c).
+
+:::::exercises
+::::exercise{#ex-regular-standard-colors difficulty=1 objective="See that the pigeonhole principle for a standard number of colors holds in every cut, so that regularity is about non-standard numbers of colors."}
+Let $I$ be a proper cut of $M$ closed under addition and multiplication, $k \in \nat$, and $F : I \to [0, k)$ a function whose graph belongs to $\mathrm{Cod}(M/I)$. Show that $F^{-1}(j)$ is unbounded in $I$ for some $j < k$. Where does the argument fail when $k$ is replaced by a non-standard $a \in I$?
+
+:::solution
+Suppose that each $F^{-1}(j)$, $j < k$, is bounded in $I$, by $b_j \in I$: every element of $F^{-1}(j)$ is below $b_j$. Let $b = \max(b_0, \dots, b_{k-1}) \in I$, a maximum of finitely many elements. Then $F(b) = j$ for some $j < k$, so $b \in F^{-1}(j)$ and $b < b_j \leq b$, a contradiction. The graph of $F$ is not used. For a non-standard number $a$ of colors, the bounds $b_j$ exist one by one, but they form a family indexed by $[0, a)$ that need not be coded, and the family of bounds may have no upper bound in $I$; bounding it is an instance of collection, as in the characterization of regular cuts by $\Sigma^0_2$ collection.
+:::
+::::
+
+::::exercise{#ex-regular-coded-functions difficulty=1 objective="Reformulate regularity with coded functions of the model defined on an interval above the cut."}
+Let $I$ be a proper cut of $M$ closed under addition and multiplication. Show that $I$ is regular if and only if for every $a \in I$, every $b \in M \setminus I$ and every coded function $f : [0, b) \to [0, a)$, there is $j < a$ such that $\{ x \in I : f(x) = j \}$ is unbounded in $I$.
+
+:::solution
+($\Rightarrow$) Let $f$ be coded by $s$. Its restriction $F$ to $I$ maps $I$ into $[0, a)$, since $I \subseteq [0, b)$, and its graph is the trace on $I$ of the set of $z < \langle b, a \rangle$ such that $z = \langle x, v \rangle$ with $x < b$ and $v = (s)_x$, which is defined by a bounded formula; it is coded by :ref{#ex-coded-subsets}. Regularity gives $j$ with $F^{-1}(j) = \{ x \in I : f(x) = j \}$ unbounded.
+
+($\Leftarrow$) Let $F : I \to [0, a)$ have graph $G = \mathrm{Ack}(c) \cap I$, and take $b \in M \setminus I$. Let $f(x)$, for $x < b$, be the least $j < a$ with $\langle x, j \rangle \in c$, or $0$ if there is none; it is coded, by :ref{#prop-seq-basic} with a bounded formula and the bound $a$. For $x \in I$ and $j < a$, $\langle x, j \rangle \in I$, since $I$ is closed under addition and multiplication, so $\langle x, j \rangle \in c$ if and only if $\langle x, j \rangle \in G$, if and only if $j = F(x)$. So $f(x) = F(x)$ for $x \in I$, and the hypothesis gives $j$ with $F^{-1}(j)$ unbounded.
+:::
+::::
+
+::::exercise{#ex-regular-cover difficulty=1 objective="Derive from regularity that a coded cover of the cut by a bounded number of sets has an unbounded member."}
+Let $I$ be a regular cut of $M$, $a \in I$, and $R \in \mathrm{Cod}(M/I)$ such that the sets $X_j = \{ x \in I : \langle x, j \rangle \in R \}$, for $j < a$, cover $I$. Show that some $X_j$ is unbounded in $I$.
+
+:::solution
+Let $F(x)$ be the least $j < a$ with $x \in X_j$, which exists since the sets cover $I$. The graph of $F$ is the set of $z \in I$ such that $z = \langle x, y \rangle$ for some $x, y \leq z$ with $y < a$, $\langle x, y \rangle \in R$ and $\langle x, j \rangle \notin R$ for every $j < y$; this is a bounded $\mathcal L_2$ formula with parameters $a$ and $R$, using the bounded definition of pairing (:ref{#fact-pairing}), so the graph belongs to $\mathrm{Cod}(M/I)$ by :ref{#cor-cod-delta1-ca}. By regularity, some $F^{-1}(j)$ is unbounded in $I$, and $F^{-1}(j) \subseteq X_j$.
+:::
+::::
+
+::::exercise{#ex-semireg-bounded-comprehension difficulty=2 objective="Characterize semiregular cuts by bounded $\Sigma^0_1$ comprehension, combining two exercises of the previous lesson." lessons="semiregular-cuts"}
+Let $I$ be a proper cut of $M$ closed under addition and multiplication. Show that $I$ is semiregular if and only if, for every $a \in I$ and every $\Sigma^0_1$ formula $\varphi(x)$ with parameters, $\{ x < a : (I, \mathrm{Cod}(M/I)) \models \varphi(x) \}$ belongs to $\mathrm{Cod}(M/I)$.
+
+:::solution
+($\Rightarrow$) This is :ref{#ex-semireg-bounded-sigma1}.
+
+($\Leftarrow$) By :ref{#ex-semireg-preimage-converse}, it suffices to show that for every coded function $f$ with domain $a \in I$, given by $s$, the set $\{ i < a : f(i) \in I \}$ is coded. Let $G = \{ z \in I : \exists i < a\ \exists v < z + 1\ (z = \langle i, v \rangle \wedge v = (s)_i) \}$, the trace on $I$ of a set defined by a bounded formula; $G \in \mathrm{Cod}(M/I)$ by :ref{#ex-coded-subsets}. For $i < a$: if $f(i) \in I$, then $\langle i, f(i) \rangle \in I$, since $I$ is closed under the operations, so $\langle i, f(i) \rangle \in G$; conversely, if $\langle i, v \rangle \in G$ for some $v \in I$, then $v = f(i) \in I$. So $f(i) \in I$ if and only if $(I, G) \models \exists v\ \exists z\ (z = \langle i, v \rangle \wedge z \in G)$, a $\Sigma^0_1$ formula with the parameter $G$. By hypothesis, $\{ i < a : f(i) \in I \}$ is coded.
+:::
+::::
+:::::

@@ -87,14 +87,13 @@ The translation $\varphi \mapsto \varphi^*$ given by the proof of :ref{#lem-vari
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-tp-sigma1-truth-complete difficulty=1 objective="Use the partial truth definition $\mathrm{Sat}_{\Sigma_1}$ to show that truth for $\Sigma^*_1$ sentences is a complete c.e. set."}
 Show that the set of codes of $\Sigma^*_1$ sentences true in $\nat$ is $\Sigma^0_1$, and that every set defined in $\nat$ by a $\Sigma^*_1$ formula with one free variable is many-one reducible to it.
 
 :::solution
 In $\nat$, a $\Sigma^*_1$ sentence $\varphi$ is true if and only if $\mathrm{Sat}_{\Sigma_1}(\ulcorner \varphi \urcorner, 0)$, by :ref{#cor-snowing}, since $\nat \models \mathrm I\Sigma_1$; the set of codes of $\Sigma^*_1$ sentences is computable; so the set is defined by a $\Sigma_1$ formula, and it is $\Sigma^0_1$ by :ref{#thm-definable-arithmetic}. Let $A$ be defined by the $\Sigma^*_1$ formula $\varphi(v_0)$, and write $\varphi = \exists \bar u\ \delta$ with $\delta \in \Delta^*_0$, the variables $\bar u$ being distinct from $v_0$. Then $n \in A$ if and only if the $\Sigma^*_1$ sentence $\exists v_0\ \exists \bar u\ (v_0 = \bar n \wedge \delta)$ is true, and its code is a computable function of $n$.
 :::
 ::::
-
 
 ## Notes and references
 
@@ -103,3 +102,70 @@ Partial truth definitions were studied by Montague (1961) and, with their use fo
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 1(d).
 - R. Montague, *Semantical closure and non-finite axiomatizability I*, in Infinitistic Methods, Pergamon, 1961, 45–69.
 - G. Kreisel and A. Lévy, *Reflection principles and their use for establishing the complexity of axiomatic systems*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 14 (1968), 97–142.
+
+:::::exercises
+::::exercise{#ex-tp-sat-pi2-compute difficulty=1 objective="Unfold the definitions of $\mathrm{Sat}_{\Pi_2}$ and $\mathrm{Sat}_{\Sigma_1}$ on a formula with two blocks of unbounded quantifiers."}
+Let $\varphi$ be the formula $\forall v_1\ \exists v_2\ (v_0 \cdot v_2 = v_1)$. Show that $\varphi \in \Pi^*_2$, and that, in every model of $\mathrm I\Sigma_1$, $\mathrm{Sat}_{\Pi_2}(\ulcorner \varphi \urcorner, e)$ holds if and only if $e(0) = 1$, by unfolding :ref{#def-sat-n}.
+
+:::solution
+The formula $\psi \equiv \exists v_2\ (v_0 \cdot v_2 = v_1)$ is $\Sigma^*_1$: a block $\exists v_2$ followed by an atomic formula, which is $\Delta^*_0$ and does not begin with an unbounded $\exists$. Since $\psi$ does not begin with an unbounded $\forall$, $\varphi = \forall v_1\ \psi$ is $\Pi^*_2$, its maximal universal block is $v_1$, and its matrix is $\psi$.
+
+By :ref{#def-sat-n}, $\mathrm{Sat}_{\Pi_2}(\ulcorner \varphi \urcorner, e)$ holds if and only if $\mathrm{Sat}_{\Sigma_1}(\ulcorner \psi \urcorner, e')$ for every $e'$ that agrees with $e$ except possibly at $1$. In turn, $\mathrm{Sat}_{\Sigma_1}(\ulcorner \psi \urcorner, e')$ holds if and only if there is $e''$ that agrees with $e'$ except possibly at $2$ with $\mathrm{Sat}_0(\ulcorner v_0 \cdot v_2 = v_1 \urcorner, e'')$, that is, by the atomic condition and the characterization of $\mathrm{Val}$, with $e''(0) \cdot e''(2) = e''(1)$. Here $e''(0) = e(0)$ and $e''(1) = e'(1)$, and $e''(2)$ can take any value $y$, through $e'' = e'[2 := y]$; similarly $e'(1)$ can take any value $x$. So the condition says: for every $x$ there is $y$ with $e(0) \cdot y = x$. If $e(0) = 1$, take $y = x$. Conversely, the case $x = 1$ gives $e(0) \cdot y = 1$, and in $\mathrm{PA}^-$ this forces $e(0) = 1$: $e(0) \neq 0$ since $0 \cdot y = 0$, and if $e(0) > 1$ then $y \geq 1$ and $e(0) \cdot y \geq e(0) > 1$. So $\varphi(e)$ says that $e(0)$ divides every number, that is, $e(0) = 1$.
+:::
+::::
+
+::::exercise{#ex-tp-variable-bounds-compute difficulty=1 objective="Apply the reduction of term bounds to bounds by variables to a concrete formula, and locate where collection is needed."}
+Let $\psi(v_0)$ be the $\Delta_0$ formula $\forall v_1 < v_0\ \exists v_2 < v_1 + 1\ \theta$, where $\theta \equiv (v_1 = v_2 + v_2 \vee v_1 = v_2 + v_2 + 1)$. Following the proof of :ref{#lem-variable-bounds}, give a $\Pi^*_1$ formula and a $\Sigma^*_1$ formula equivalent to $\psi$ in $\mathrm{PA}^- + \mathrm B\Delta^*_0$. Show that for this formula the equivalences hold in $\mathrm{PA}^-$ alone.
+
+:::solution
+Let $w$ and $v$ be new variables. The inner formula $\exists v_2 < v_1 + 1\ \theta$ has a bound given by a term; it is equivalent, by logic, to $\exists w\ (w = v_1 + 1 \wedge \exists v_2 < w\ \theta)$ and to $\forall w\ (w = v_1 + 1 \rightarrow \exists v_2 < w\ \theta)$, with $\Delta^*_0$ matrices.
+
+*$\Pi^*_1$ form.* Substituting the second form, $\psi$ is equivalent to $\forall v_1 < v_0\ \forall w\ (w = v_1 + 1 \rightarrow \exists v_2 < w\ \theta)$, hence, by logic, to
+$$
+\forall w\ \forall v_1 < v_0\ (w = v_1 + 1 \rightarrow \exists v_2 < w\ \theta),
+$$
+which is $\Pi^*_1$.
+
+*$\Sigma^*_1$ form.* Substituting the first form, $\psi$ is equivalent to $\forall v_1 < v_0\ \exists w\ (w = v_1 + 1 \wedge \exists v_2 < w\ \theta)$, and the unbounded $\exists w$ must be moved in front of $\forall v_1 < v_0$. The proof does this by collection: the formula is equivalent in $\mathrm B\Delta^*_0$ to
+$$
+\exists v\ \forall v_1 < v_0\ \exists w < v\ (w = v_1 + 1 \wedge \exists v_2 < w\ \theta),
+$$
+which is $\Sigma^*_1$. From this formula back to $\psi$ is logic.
+
+*Without collection.* For this formula, the witnesses can be bounded explicitly: if $v_1 < v_0$ and $w = v_1 + 1$, then $w < v_0 + 1$ in $\mathrm{PA}^-$. So $\psi$ implies the $\Sigma^*_1$ formula with $v = v_0 + 1$, in $\mathrm{PA}^-$. The explicit bound comes from the fact that the term $v_1 + 1$ is increasing in $v_1$ and that no unbounded witness occurs inside $\theta$. The proof of the lemma treats all $\Delta_0$ formulas uniformly, including those whose translation already has unbounded witnesses $\bar u$ in front of the matrix, and collection is what bounds these witnesses.
+:::
+::::
+
+::::exercise{#ex-tp-sat-monotone difficulty=2 objective="Prove, by an induction in the metatheory, that the partial truth definitions agree with one another on the classes where several of them apply."}
+Show that for every $n \in \nat$, $\mathrm I\Sigma_1$ proves: for every $e$, if $z \in \Sigma^*_n$ then $\mathrm{Sat}_{\Sigma_n}(z, e) \leftrightarrow \mathrm{Sat}_{\Sigma_{n+1}}(z, e)$, and if $z \in \Pi^*_n$ then $\mathrm{Sat}_{\Pi_n}(z, e) \leftrightarrow \mathrm{Sat}_{\Pi_{n+1}}(z, e)$. Use the facts on syntax that follow :ref{#def-delta0-star}, which $\mathrm I\Sigma_1$ proves: the classes are increasing, and the decomposition of a formula into its maximal block and the rest is unique.
+
+:::solution
+By induction on $n$ in the metatheory; we work in $\mathrm I\Sigma_1$.
+
+*$n = 0$.* Let $z \in \Delta^*_0$. It has no unbounded quantifier, so as an element of $\Sigma^*_1$ its maximal existential block is empty and the rest is $z$ itself. By :ref{#def-sat-n}, $\mathrm{Sat}_{\Sigma_1}(z, e)$ holds if and only if $\mathrm{Sat}_0(z, e')$ for some $e'$ that agrees with $e$ at every $i$; such an $e'$ has the same values as $e$, and $\mathrm{Sat}_0$ depends only on the values, so this is $\mathrm{Sat}_0(z, e)$. The case of $\mathrm{Sat}_{\Pi_1}$ is the same, with "for every $e'$".
+
+*From $n$ to $n + 1$.* Let $z \in \Sigma^*_{n+1}$, with maximal existential block listed by $d$ and rest $u \in \Pi^*_n$, which does not begin with an unbounded $\exists$. Since $u \in \Pi^*_{n+1}$ as well, $z \in \Sigma^*_{n+2}$ with the same decomposition, by uniqueness. So
+$$
+\begin{aligned}
+\mathrm{Sat}_{\Sigma_{n+1}}(z, e) &\leftrightarrow \exists e'\ (e' \text{ agrees with } e \text{ outside } d \wedge \mathrm{Sat}_{\Pi_n}(u, e')) \\
+&\leftrightarrow \exists e'\ (e' \text{ agrees with } e \text{ outside } d \wedge \mathrm{Sat}_{\Pi_{n+1}}(u, e')) \leftrightarrow \mathrm{Sat}_{\Sigma_{n+2}}(z, e),
+\end{aligned}
+$$
+the middle equivalence by the induction hypothesis for $u \in \Pi^*_n$, applied to each $e'$. The case of $z \in \Pi^*_{n+1}$ is dual.
+
+The induction is in the metatheory because $\mathrm{Sat}_{\Sigma_n}$ is a different formula for each $n$: there is no formula of $n$ to which an induction inside the theory could be applied.
+:::
+::::
+
+::::exercise{#ex-tp-sat-n-free-variables difficulty=2 objective="Extend the dependence of satisfaction on the variables of the formula from bounded formulas to the partial truth definitions." lessons="bounded-satisfaction"}
+Show that for every $n \in \nat$, $\mathrm I\Sigma_1$ proves: if $z \in \Sigma^*_n$ and $e(i) = e'(i)$ for every $i < z$, then $\mathrm{Sat}_{\Sigma_n}(z, e) \leftrightarrow \mathrm{Sat}_{\Sigma_n}(z, e')$; and the same for $\Pi^*_n$ and $\mathrm{Sat}_{\Pi_n}$.
+
+:::solution
+By induction on $n$ in the metatheory; we work in $\mathrm I\Sigma_1$. The case $n = 0$ is :ref{#ex-tp-sat0-free-variables}.
+
+Let $z \in \Sigma^*_{n+1}$, with maximal existential block listed by $d$ and rest $u \in \Pi^*_n$; then $u \leq z$, and every index listed in $d$ is the index of a variable of $z$, hence below $z$. Let $e$ and $e'$ agree below $z$, and suppose $\mathrm{Sat}_{\Sigma_{n+1}}(z, e)$: some $e_1$ agrees with $e$ outside $d$ and satisfies $\mathrm{Sat}_{\Pi_n}(u, e_1)$. Let $e_1'$ be the sequence of length $\max(\mathrm{lh}(e_1), \mathrm{lh}(e'))$ with $e_1'(i) = e_1(i)$ if $i$ is listed in $d$ and $e_1'(i) = e'(i)$ otherwise; it exists by item 2 of :ref{#prop-seq-basic}, the condition being bounded and the values bounded by the entries of $e_1$ and $e'$. For $i$ beyond this length, $e_1(i) = 0 = e'(i)$, so $e_1'(i) = e_1(i)$ if $i$ is in $d$ and $e_1'(i) = e'(i)$ otherwise, for every $i$. Then $e_1'$ agrees with $e'$ outside $d$. For $i < u$, either $i$ is listed in $d$ and $e_1'(i) = e_1(i)$, or $e_1'(i) = e'(i) = e(i) = e_1(i)$, since $i < z$. By the induction hypothesis for $u \in \Pi^*_n$, $\mathrm{Sat}_{\Pi_n}(u, e_1')$; so $\mathrm{Sat}_{\Sigma_{n+1}}(z, e')$. The converse exchanges $e$ and $e'$.
+
+For $z \in \Pi^*_{n+1}$, suppose $\mathrm{Sat}_{\Pi_{n+1}}(z, e)$, and let $e_1'$ agree with $e'$ outside $d$. Define $e_1$ from $e_1'$ and $e$ as above, so that $e_1$ agrees with $e$ outside $d$ and with $e_1'$ below $u$. Then $\mathrm{Sat}_{\Sigma_n}(u, e_1)$, hence $\mathrm{Sat}_{\Sigma_n}(u, e_1')$ by the induction hypothesis. So $\mathrm{Sat}_{\Pi_{n+1}}(z, e')$.
+:::
+::::
+:::::

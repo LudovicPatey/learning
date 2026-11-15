@@ -126,6 +126,14 @@ In the proof of :ref{#thm-rt22-coh}, why can bit $k$ rise at a position $n$ only
   Bit $k$ may change up to $2^{k+1} - 1$ times; only bit $0$ drops at most once.
 :::
 
+::::exercise{#ex-coh-direct-induction difficulty=1 objective="See where $\Sigma^0_2$ induction enters the direct proof that RT²₂ implies COH."}
+Show that every infinite homogeneous set for the coloring in the proof of :ref{#thm-rt22-coh} is cohesive directly, without counting, when the first-order part is the standard $\nat$.
+
+:::solution
+Suppose $H$ has color $0$. By induction on $k$, bit $k$ is eventually constant along $a_0 < a_1 < \cdots$. Assume bits $j < k$ are constant for $n \geq N$. A rise of bit $k$ at $n \geq N$ would require a drop of some bit $j < k$ at $n$, which does not happen. So after $N$, bit $k$ only drops, at most once, and is eventually constant. Each bit is eventually constant, so $H$ is cohesive. This induction is on a $\Sigma^0_2$ statement, which is why the proof over $\mathsf{RCA}_0$ counts the changes instead.
+:::
+::::
+
 :::corollary[Cholak, Jockusch, Slaman]{#cor-rt22-equivalence}
 Over $\mathsf{RCA}_0$, $\mathsf{RT}^2_2$ is equivalent to $\mathsf{SRT}^2_2 + \mathsf{COH}$.
 :::
@@ -134,21 +142,11 @@ Over $\mathsf{RCA}_0$, $\mathsf{RT}^2_2$ is equivalent to $\mathsf{SRT}^2_2 + \m
 :ref{#thm-rt22-decomposition} and :ref{#thm-rt22-coh}, with the trivial implication from $\mathsf{RT}^2_2$ to $\mathsf{SRT}^2_2$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=2}
+::::exercise{#ex-rt22-via-decomposition difficulty=2 objective="Recover the upper bound for pairs by solving the two halves of the decomposition separately." lessons="cohesiveness"}
 Show that for every computable coloring $f : [\nat]^2 \to 2$, there is an infinite homogeneous set computable in $\emptyset''$, using the decomposition: a cohesive set computable in $\emptyset''$ and a solution to the induced stable coloring.
 
 :::solution
 By :ref{#prop-cohesive-exists}, the computable sequence $R_x = \{ y : f(\{ x, y \}) = 1 \}$ has a cohesive set $C \leq_T \emptyset''$. Its construction also tells, computably in $\emptyset''$, for each $x$ whether $C \subseteq^* R_x$ or $C \subseteq^* \overline{R_x}$: this is the decision $P(x)$. So the set $A$ of $x \in C$ such that $f(\{ x, y \}) = 1$ for almost all $y \in C$ is computable in $\emptyset''$, and so is $C \setminus A$. One of them is infinite; call it $H$. The restriction of $f$ to $C$ is stable (:ref{#thm-rt22-decomposition}), $H$ is contained in its limit set or in the complement, and :ref{#prop-srt-d22} (2), applied to the restriction of $f$ to $C$, gives an infinite homogeneous set computable in $f \oplus C \oplus H \leq_T \emptyset''$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that every infinite homogeneous set for the coloring in the proof of :ref{#thm-rt22-coh} is cohesive directly, without counting, when the first-order part is the standard $\nat$.
-
-:::solution
-Suppose $H$ has color $0$. By induction on $k$, bit $k$ is eventually constant along $a_0 < a_1 < \cdots$. Assume bits $j < k$ are constant for $n \geq N$. A rise of bit $k$ at $n \geq N$ would require a drop of some bit $j < k$ at $n$, which does not happen. So after $N$, bit $k$ only drops, at most once, and is eventually constant. Each bit is eventually constant, so $H$ is cohesive. This induction is on a $\Sigma^0_2$ statement, which is why the proof over $\mathsf{RCA}_0$ counts the changes instead.
 :::
 ::::
 
@@ -161,3 +159,57 @@ Stable colorings and the decomposition are due to Cholak, Jockusch and Slaman (2
 - C. T. Chong, S. Lempp and Y. Yang, *On the role of the collection principle for Σ⁰₂-formulas in second-order reverse mathematics*, Proceedings of the American Mathematical Society 138 (2010), 1093–1100.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022.
+
+:::::exercises
+::::exercise{#ex-stable-examples difficulty=1 objective="Decide whether colorings are stable, and compute their limit sets and homogeneous sets."}
+For each coloring of pairs, defined for $x < y$, decide whether it is stable. If it is, give its limit set and describe its infinite homogeneous sets.
+
+1. $f(\{ x, y \}) = 1$ if $y > 2x$, and $0$ otherwise.
+2. $f(\{ x, y \}) = 1$ if $x \in \emptyset'_y$, and $0$ otherwise, where $(\emptyset'_s)$ is the usual increasing approximation of $\emptyset'$.
+3. $f(\{ x, y \}) = 1$ if $x + 1$ divides $y$, and $0$ otherwise.
+
+:::solution
+1. For each $x$, $f(\{ x, y \}) = 1$ for all $y > 2x$: $f$ is stable and $A_f = \nat$. A homogeneous set $H$ of color $0$ satisfies $y \leq 2 \min H$ for all $y \in H$, so it is finite. The infinite homogeneous sets are the infinite sets $\{ a_0 < a_1 < \cdots \}$ with $a_{j+1} > 2 a_j$ for every $j$: this condition is necessary, and sufficient since then $a_l > 2 a_j$ for all $j < l$. In particular, $\nat \subseteq A_f$ is not homogeneous, which is why :ref{#prop-srt-d22} (2) thins the subset of the limit set.
+2. If $x \in \emptyset'$, then $x \in \emptyset'_y$ for all large $y$; otherwise $x \notin \emptyset'_y$ for every $y$. So $f$ is stable, with $A_f = \emptyset'$, and it is computable. By :ref{#prop-srt-d22}, the infinite homogeneous sets are contained in $\emptyset'$ or in $\overline{\emptyset'}$, and every infinite subset of one of them computes one.
+3. For $x \geq 1$, $x + 1 \geq 2$ divides infinitely many $y$ and fails to divide infinitely many $y$, so $\lim_y f(\{ x, y \})$ does not exist: $f$ is not stable.
+:::
+::::
+
+::::exercise{#ex-srt22-not-computable difficulty=2 objective="Build a $\Delta^0_2$ set with no infinite c.e. subset on either side, and deduce that RCA₀ does not prove SRT²₂."}
+1. Build, computably in $\emptyset'$, a set $A$ such that neither $A$ nor $\overline{A}$ has an infinite c.e. subset.
+2. Deduce that some computable stable coloring of pairs has no computable infinite homogeneous set, and that $\mathsf{RCA}_0$ does not prove $\mathsf{SRT}^2_2$.
+
+:::solution
+1. Build strings $\sigma_0 \preceq \sigma_1 \preceq \cdots$ computably in $\emptyset'$, with $\sigma_0$ empty. At step $e$, ask $\emptyset'$ whether $W_e$ has two elements $a < b$ with $a \geq |\sigma_e|$, a $\Sigma^0_1$ question. If so, find such $a, b$ by an effective search and let $\sigma_{e+1}$ extend $\sigma_e$ to length $b + 1$, with value $1$ at $a$ and $0$ at all other new positions. Otherwise let $\sigma_{e+1} = \sigma_e 0$. Let $A = \bigcup_e \sigma_e$, a set computable in $\emptyset'$. If $W_e$ is infinite, it has two elements above $|\sigma_e|$, so at step $e$ some $a \in W_e$ is put into $A$ and some $b \in W_e$ is kept out of $A$: $W_e \not\subseteq A$ and $W_e \not\subseteq \overline{A}$.
+2. By the limit lemma, $A(x) = \lim_s A_s(x)$ for a computable approximation, and $f(\{ x, y \}) = A_y(x)$ is a computable stable coloring with $A_f = A$. By :ref{#prop-srt-d22} (1), an infinite homogeneous set is contained in $A$ or in $\overline{A}$; by part 1, it is not computable. So the ω-model of the computable sets, which satisfies $\mathsf{RCA}_0$, does not satisfy $\mathsf{SRT}^2_2$. Jockusch built a $\Delta^0_2$ set with the stronger property that neither side has an infinite subset of hyperimmune-free degree, which shows that $\mathsf{WKL}_0$ does not prove $\mathsf{SRT}^2_2$ (Hirschfeldt, *Slicing the Truth*, Exercise 6.35).
+:::
+::::
+
+::::exercise{#ex-stable-without-cohesive difficulty=1 objective="See that only the rows indexed by the set itself matter for stability of a restriction."}
+Let $f$ be a coloring of pairs and $R_x = \{ y : f(\{ x, y \}) = 1 \}$.
+
+1. Show that the restriction of $f$ to $[C]^2$, for an infinite set $C$, is stable if and only if $C$ is cohesive for the sequence $(R_x)_{x \in C}$.
+2. Give $f$ and an infinite set $C$ such that the restriction of $f$ to $[C]^2$ is stable, but $C$ is not cohesive for the sequence $(R_x)_{x \in \nat}$.
+
+:::solution
+1. The restriction is stable if and only if, for every $x \in C$, the value $f(\{ x, y \})$ is eventually constant for $y \in C$, that is, $C \subseteq^* R_x$ or $C \subseteq^* \overline{R_x}$.
+2. For $x < y$, let $f(\{ x, y \}) = 1$ if $x$ is even, and, if $x$ is odd, $f(\{ x, y \}) = 1$ if $4$ divides $y$ and $0$ otherwise. Let $C$ be the set of even numbers. The restriction of $f$ to $[C]^2$ is constant, hence stable. But $R_1 \cap C$ contains all multiples of $4$ above $1$, and $C \setminus R_1$ contains $2, 6, 10, \dots$, so $R_1$ splits $C$ into two infinite parts.
+:::
+::::
+
+::::exercise{#ex-srt2k difficulty=1 objective="Extend stable Ramsey's theorem from two to finitely many colors by merging colors."}
+A coloring $f : [\nat]^2 \to k$ is stable if $\lim_y f(\{ x, y \})$ exists for every $x$, and $\mathsf{SRT}^2_k$ is $\mathsf{RT}^2_k$ restricted to stable colorings. Show that $\mathsf{RCA}_0$ proves $\mathsf{SRT}^2_2 \rightarrow \mathsf{SRT}^2_k$ for every standard $k \geq 2$.
+
+:::solution
+By induction on $k$ in the metatheory, as in :ref{#prop-rt-basic} (3). Let $f : [\nat]^2 \to k + 1$ be stable, and let $g$ merge the colors $k - 1$ and $k$ into $k - 1$. Then $g$ is stable: if $f(\{ x, y \}) = c$ for all large $y$, then $g(\{ x, y \})$ is eventually the merged value of $c$. By $\mathsf{SRT}^2_k$, $g$ has an infinite homogeneous set $H$. If its color is less than $k - 1$, $H$ is homogeneous for $f$. Otherwise $f$ takes only the values $k - 1$ and $k$ on $[H]^2$. Let $p$ enumerate $H$ in increasing order, and $h(\{ i, j \}) = f(\{ p(i), p(j) \}) - (k - 1)$. It is stable, since $\lim_j f(\{ p(i), p(j) \}) = \lim_y f(\{ p(i), y \})$ along the subsequence $p(j)$. By $\mathsf{SRT}^2_2$, $h$ has an infinite homogeneous set $L$, and $p[L]$ is homogeneous for $f$.
+:::
+::::
+
+::::exercise{#ex-rt22-jump-decomposition difficulty=2 objective="Bound the jump of a homogeneous set through a low₂ cohesive set and the limit set of the induced stable coloring." lessons="cohesiveness, jockusch"}
+Using :ref{#cor-coh-bounds} and the decomposition, show that every computable coloring $f : [\nat]^2 \to 2$ has an infinite homogeneous set $H$ with $H' \leq_T \emptyset''$.
+
+:::solution
+By :ref{#cor-coh-bounds} (2), the computable sequence $R_x = \{ y : f(\{ x, y \}) = 1 \}$ has a cohesive set $C$ with $C'' \leq_T \emptyset''$. Let $p$ enumerate $C$ and $g(\{ i, j \}) = f(\{ p(i), p(j) \})$; it is stable by :ref{#thm-rt22-decomposition} and computable in $C$. Its limit set $A_g$ is $\Delta^0_2(C)$ by the limit lemma, so $A_g$ and $\overline{A_g}$ are computable in $C'$; let $K$ be one of them that is infinite. By :ref{#prop-srt-d22} (2), $g \oplus K$ computes an infinite homogeneous set $L$ for $g$, and $H = p[L]$ is homogeneous for $f$. Then $H \leq_T C \oplus L \leq_T C'$, so $H' \leq_T C'' \leq_T \emptyset''$. This is the bound of :ref{#ex-homogeneous-jump-bound}, obtained without the Erdős–Radó tree.
+:::
+::::
+:::::

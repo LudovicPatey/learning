@@ -44,6 +44,26 @@ In the reversal of :ref{#thm-monotone-aca}, why is the range of $f$ defined by a
   This holds for every $f$, and for $f$ enumerating $\emptyset'$ the complement of the range is not c.e.; the limit $x$ is the additional information.
 :::
 
+::::exercise{#ex-lub-aca difficulty=1 objective="Adapt the proof of the monotone convergence theorem to least upper bounds, and derive monotone convergence from them."}
+Show that $\mathsf{ACA}_0$ is equivalent over $\mathsf{RCA}_0$ to the statement: every bounded sequence of reals has a least upper bound.
+
+:::solution
+($\Rightarrow$) Let $(x_n)$ be bounded, rescaled into $[0, 1]$. The proof of the forward direction of :ref{#thm-monotone-aca} does not use monotonicity until its last sentence: it produces a real $x$ with $x_n \leq x$ for every $n$, and for every $k$ some $x_n > x - 2^{-k}$. So $x$ is an upper bound, and every $y < x$ is exceeded by some $x_n$, taking $k$ with $2^{-k} < x - y$. Hence $x$ is the least upper bound.
+
+($\Leftarrow$) We prove the monotone convergence theorem. Let $(x_n)$ be non-decreasing and bounded, and $x$ its least upper bound. For every $k$, $x - 2^{-k}$ is not an upper bound, so some $x_n > x - 2^{-k}$, and then $x - 2^{-k} < x_n \leq x_m \leq x$ for every $m \geq n$. So $x$ is the limit, and :ref{#thm-monotone-aca} applies.
+:::
+::::
+
+::::exercise{#ex-bolzano-weierstrass-aca difficulty=2 objective="Prove the Bolzano–Weierstrass theorem in $\mathsf{ACA}_0$ by bisection, and reverse it through the monotone convergence theorem."}
+The Bolzano–Weierstrass theorem states that every sequence of reals in $[0, 1]$ has a subsequence converging to some real. Show that it is equivalent to $\mathsf{ACA}_0$ over $\mathsf{RCA}_0$.
+
+:::solution
+($\Rightarrow$) With arithmetic comprehension relative to the sequence, define nested closed dyadic intervals $J_0 = [0, 1] \supseteq J_1 \supseteq \cdots$, with $J_k$ of length $2^{-k}$ containing $x_n$ for infinitely many $n$: take the left half of $J_k$ if it contains infinitely many terms, an arithmetic property, and the right half otherwise. By a search, choose $n_0 < n_1 < \cdots$ such that $x_{n_k}$ lies within $2^{-k}$ of $J_k$, a $\Sigma^0_1$ condition satisfied by infinitely many indices. The left endpoints of the $J_k$ form a real $x$, which lies in every $J_k$; since $J_k$ has length $2^{-k}$, $|x_{n_k} - x| < 2^{-k+1}$, so the subsequence converges to $x$.
+
+($\Leftarrow$) We prove the monotone convergence theorem and apply :ref{#thm-monotone-aca}. Let $(x_n)$ be non-decreasing, rescaled into $[0, 1]$, and let $(x_{n_k})$ converge to $x$. Every $x_m$ satisfies $x_m \leq x$: otherwise, all terms $x_{n_k}$ with $n_k \geq m$ would be at least $x_m > x$, and could not converge to $x$. Given $\varepsilon > 0$, choose $k$ with $x - x_{n_k} < \varepsilon$; then $0 \leq x - x_m < \varepsilon$ for every $m \geq n_k$. So $x$ is the limit of the whole sequence.
+:::
+::::
+
 ## Torsion subgroups
 
 The second example comes from algebra. A **countable abelian group** is coded in $\mathsf{RCA}_0$ by a set $A \subseteq \nat$ of elements together with the graph of the group operation and a neutral element, satisfying the group axioms. An element $a$ is **torsion** if $na = 0$ for some $n \geq 1$.
@@ -110,28 +130,6 @@ In the forward direction, where is arithmetic comprehension used?
   Given $E$, the path is computed by a search, which only requires $\Delta^0_1$ comprehension.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that $\mathsf{ACA}_0$ is equivalent over $\mathsf{RCA}_0$ to the statement: every bounded sequence of reals has a least upper bound.
-
-:::solution
-($\Rightarrow$) Let $(x_n)$ be bounded, rescaled into $[0, 1]$. The proof of the forward direction of :ref{#thm-monotone-aca} does not use monotonicity until its last sentence: it produces a real $x$ with $x_n \leq x$ for every $n$, and for every $k$ some $x_n > x - 2^{-k}$. So $x$ is an upper bound, and every $y < x$ is exceeded by some $x_n$, taking $k$ with $2^{-k} < x - y$. Hence $x$ is the least upper bound.
-
-($\Leftarrow$) We prove the monotone convergence theorem. Let $(x_n)$ be non-decreasing and bounded, and $x$ its least upper bound. For every $k$, $x - 2^{-k}$ is not an upper bound, so some $x_n > x - 2^{-k}$, and then $x - 2^{-k} < x_n \leq x_m \leq x$ for every $m \geq n$. So $x$ is the limit, and :ref{#thm-monotone-aca} applies.
-:::
-::::
-
-::::exercise{difficulty=2}
-The Bolzano–Weierstrass theorem states that every sequence of reals in $[0, 1]$ has a subsequence converging to some real. Show that it is equivalent to $\mathsf{ACA}_0$ over $\mathsf{RCA}_0$.
-
-:::solution
-($\Rightarrow$) With arithmetic comprehension relative to the sequence, define nested closed dyadic intervals $J_0 = [0, 1] \supseteq J_1 \supseteq \cdots$, with $J_k$ of length $2^{-k}$ containing $x_n$ for infinitely many $n$: take the left half of $J_k$ if it contains infinitely many terms, an arithmetic property, and the right half otherwise. By a search, choose $n_0 < n_1 < \cdots$ such that $x_{n_k}$ lies within $2^{-k}$ of $J_k$, a $\Sigma^0_1$ condition satisfied by infinitely many indices. The left endpoints of the $J_k$ form a real $x$, which lies in every $J_k$; since $J_k$ has length $2^{-k}$, $|x_{n_k} - x| < 2^{-k+1}$, so the subsequence converges to $x$.
-
-($\Leftarrow$) We prove the monotone convergence theorem and apply :ref{#thm-monotone-aca}. Let $(x_n)$ be non-decreasing, rescaled into $[0, 1]$, and let $(x_{n_k})$ converge to $x$. Every $x_m$ satisfies $x_m \leq x$: otherwise, all terms $x_{n_k}$ with $n_k \geq m$ would be at least $x_m > x$, and could not converge to $x$. Given $\varepsilon > 0$, choose $k$ with $x - x_{n_k} < \varepsilon$; then $0 \leq x - x_m < \varepsilon$ for every $m \geq n_k$. So $x$ is the limit of the whole sequence.
-:::
-::::
-
 ## Notes and references
 
 The equivalences of this lesson are in Simpson's monograph, Chapter III: monotone convergence and least upper bounds in Theorem III.2.2, Bolzano–Weierstrass in Theorems III.2.2 and III.2.9, torsion subgroups in Theorem III.6.2, König's lemma in Theorem III.7.2. Most were stated by Friedman (1976); the algebraic ones are due to Friedman, Simpson and Smith (1983), whose paper also contains the existence of bases of countable vector spaces and of maximal ideals of countable commutative rings (Simpson, Theorems III.4.3 and III.5.5). Hirschfeldt, Section 4.3, describes the method of reversal used here and states König's lemma as an exercise; Dzhafarov and Mummert, Chapters 10 and 11, survey analysis and algebra.
@@ -142,3 +140,77 @@ The equivalences of this lesson are in Simpson's monograph, Chapter III: monoton
 - E. Specker, *Nicht konstruktiv beweisbare Sätze der Analysis*, Journal of Symbolic Logic 14 (1949), 145–158.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 4.3.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Chapters 10 and 11.
+
+:::::exercises
+::::exercise{#ex-cauchy-aca difficulty=2 objective="Show that the convergence of Cauchy sequences without a modulus is equivalent to $\mathsf{ACA}_0$, by computing a modulus with arithmetic comprehension and reusing the Specker coding."}
+A sequence of reals $(x_n)$ is **Cauchy** if for every $k$ there is $N$ such that $|x_m - x_n| \leq 2^{-k}$ for all $m, n \geq N$. Show that $\mathsf{ACA}_0$ is equivalent over $\mathsf{RCA}_0$ to the statement: every Cauchy sequence of reals converges.
+
+:::solution
+($\Rightarrow$) Let $(x_n)$ be Cauchy. The relation $|x_m - x_n| \leq 2^{-k}$ is $\Pi^0_1$, as the negation of a strict inequality between reals. Let $h(k)$ be the least $N$ such that $|x_m - x_n| \leq 2^{-k}$ for all $m, n \geq N$. Its graph is defined by an arithmetic formula, so it exists by arithmetic comprehension; $h$ is total by the Cauchy condition and the least number principle for arithmetic formulas, which follows from arithmetic induction. If $N$ works for $2^{-l}$ and $k \leq l$, it works for $2^{-k}$; so $h$ is non-decreasing. Let $y_k = x_{h(k)}$. For $k \leq l$, both $h(k)$ and $h(l)$ are at least $h(k)$, so $|y_k - y_l| \leq 2^{-k}$. By :ref{#prop-rca-complete}, $(y_k)$ converges to a real $x$ with $|y_k - x| \leq 2^{-k}$ for every $k$. For $n \geq h(k)$, $|x_n - x| \leq |x_n - y_k| + |y_k - x| \leq 2^{-k+1}$. So $(x_n)$ converges to $x$.
+
+($\Leftarrow$) We prove (4) of :ref{#thm-aca-equivalents}. Let $f$ be injective and $x_n = \sum_{i \leq n} 2^{-f(i)-1}$, as in the proof of :ref{#thm-monotone-aca}. We show that $(x_n)$ is Cauchy. Given $k$, the set $\{ i : f(i) \leq k \}$ exists by $\Delta^0_1$ comprehension, and $f$ maps it injectively into $\{ 0, \dots, k \}$, so it has at most $k + 1$ elements by the finite pigeonhole principle; let $N$ exceed all of them. For $n > m \geq N$, the values $f(i)$ with $m < i \leq n$ are distinct and larger than $k$, so
+$$
+0 \leq x_n - x_m = \sum_{m < i \leq n} 2^{-f(i)-1} < \sum_{j > k} 2^{-j-1} = 2^{-k-1}.
+$$
+By hypothesis $(x_n)$ converges to a real $x$; since it is non-decreasing, $x_n \leq x$ for every $n$. The second part of the proof of :ref{#thm-monotone-aca} uses only these two facts about $x$, and shows that the range of $f$ exists.
+
+Adapted from Simpson, Theorem III.2.2, where the condition is stated with an arbitrary $\varepsilon > 0$.
+:::
+::::
+
+::::exercise{#ex-zero-set-aca difficulty=1 objective="Reverse the undecidability of equality of reals: the existence of the zero set of a sequence of reals is equivalent to $\mathsf{ACA}_0$."}
+Show that $\mathsf{ACA}_0$ is equivalent over $\mathsf{RCA}_0$ to the statement: for every sequence of reals $(x_n)$, the set $\{ n : x_n = 0 \}$ exists.
+
+:::solution
+($\Rightarrow$) Write $x_n = (q_{n, k})_k$. By :ref{#def-real-rca}, $x_n = 0$ if and only if $|q_{n,k}| \leq 2^{-k+1}$ for every $k$, a $\Pi^0_1$ formula. The set exists by arithmetic comprehension.
+
+($\Leftarrow$) We prove (4) of :ref{#thm-aca-equivalents}, adapting :ref{#ex-real-equality}. Let $f$ be injective. Let $q_{m, k} = 2^{-i}$ if $f(i) = m$ for some $i \leq k$, and $q_{m, k} = 0$ otherwise; the double sequence exists by $\Delta^0_1$ comprehension. Each $x_m = (q_{m, k})_k$ is a real: for $k \leq l$, the terms $q_{m,k}$ and $q_{m,l}$ differ only if $f(i) = m$ with $k < i \leq l$, and then by $2^{-i} < 2^{-k}$. If $m = f(i)$, then $q_{m,k} = 2^{-i}$ for all $k \geq i$, so $q_{m,k} > 2^{-k+1}$ for $k \geq i + 2$, and $x_m \neq 0$. If $m$ is not in the range of $f$, then every $q_{m,k}$ is $0$ and $x_m = 0$. So the range of $f$ is the complement of $\{ m : x_m = 0 \}$, and exists by $\Delta^0_1$ comprehension.
+:::
+::::
+
+::::exercise{#ex-subgroup-generated-aca difficulty=1 objective="Carry out an algebraic reversal to $\mathsf{ACA}_0$ in a free abelian group, where no normal forms are needed."}
+For a countable abelian group $G$ and a sequence $(a_i)$ of elements of $G$, the **subgroup generated** by $(a_i)$ is the set of elements of the form $\sum_{j < k} n_j a_j$ with $k \in \nat$ and $n_0, \dots, n_{k-1} \in \mathbb Z$. Show that $\mathsf{ACA}_0$ is equivalent over $\mathsf{RCA}_0$ to the statement: for every countable abelian group $G$ and every sequence of elements of $G$, the subgroup generated exists.
+
+:::solution
+($\Rightarrow$) Membership in the subgroup generated is defined by the $\Sigma^0_1$ formula $\exists k\, \exists (n_0, \dots, n_{k-1})\ g = \sum_{j < k} n_j a_j$, where the finite sum is computed with the group operation; it exists by arithmetic comprehension.
+
+($\Leftarrow$) We prove (4) of :ref{#thm-aca-equivalents}. Let $f$ be injective. Let $G = \bigoplus_{m \in \nat} \mathbb Z$, whose elements are the finite sequences of integers $(c_0, \dots, c_{l-1})$ with $c_{l-1} \neq 0$ (the empty sequence for $0$), with coordinatewise addition followed by the removal of trailing zeros; it exists by $\Delta^0_1$ comprehension and satisfies the group axioms. Let $e_m$ be the element with $1$ at coordinate $m$ and $0$ elsewhere, and $a_i = e_{f(i)}$. Let $H$ be the subgroup generated by $(a_i)$, given by the hypothesis. If $m = f(i)$, then $e_m = a_i \in H$. Conversely, if $e_m = \sum_{j < k} n_j e_{f(j)}$, then comparing the coordinates $m$ gives $1 = \sum_{j < k,\ f(j) = m} n_j$, so $f(j) = m$ for some $j < k$. Hence the range of $f$ is $\{ m : e_m \in H \}$, which exists by $\Delta^0_1$ comprehension.
+
+The reversal of :ref{#thm-torsion-aca} needed normal forms because the relations had to be built into the group; here the group is fixed and computable, and the information is in the choice of the generators.
+:::
+::::
+
+::::exercise{#ex-torsion-orders difficulty=1 objective="Compute in the group of the torsion reversal, to check which elements are torsion and how the coordinates are reduced."}
+Let $f$ be an injective function and $G$ the group built from $f$ in the proof of :ref{#thm-torsion-aca}.
+
+1. For $m = f(i)$, compute the order of $x_m$.
+2. Show that an element $(c_0, \dots, c_{l-1})$ of $G$ is torsion if and only if $c_m = 0$ for every $m < l$ that is not in the range of $f$.
+
+:::solution
+1. If $m = f(i)$, the coordinate $m$ is added as in $\mathbb Z / (2i+1) \mathbb Z$, with representatives $\{-i, \dots, i\}$. For $i = 0$, the representative of $1$ is $0$, so $x_m = 0$, of order $1$. For $i \geq 1$, $x_m$ has the coefficient $1$ at coordinate $m$, and $n x_m$ has the representative of $n$ modulo $2i + 1$ there; it is $0$ for $n = 2i+1$ and not for $1 \leq n \leq 2i$. So $x_m$ has order $2i + 1$.
+2. Multiplication by $n$ acts coordinatewise. If $c_m \neq 0$ for some $m$ not in the range of $f$, the coordinate $m$ is added as in $\mathbb Z$, so the coordinate $m$ of $n c$ is $n c_m \neq 0$ for every $n \geq 1$, and $c$ is not torsion. Conversely, suppose that every non-zero coordinate $c_m$ has $m = f(i_m)$ for some $i_m$. Let $N$ be the product of the numbers $2 i_m + 1$ over these coordinates, with $N = 1$ if there are none. Each coordinate of $N c$ is a multiple of $2 i_m + 1$ in $\mathbb Z / (2 i_m + 1) \mathbb Z$, hence $0$, so $N c = 0$.
+
+So the torsion elements are those supported on the range of $f$, and $G$ is a presentation of $\bigoplus_{m \notin \mathrm{ran}(f)} \mathbb Z \oplus \bigoplus_i \mathbb Z / (2i+1) \mathbb Z$, as stated after the proof.
+:::
+::::
+
+::::exercise{#ex-konig-unique-path difficulty=1 objective="Check that the tree of the reversal of König's lemma has a unique path, so that uniqueness of the solution does not lower the strength."}
+Show that König's lemma restricted to trees in which every node has at most two immediate successors and which have at most one path is equivalent to $\mathsf{ACA}_0$ over $\mathsf{RCA}_0$. More precisely, the restricted statement is: every infinite tree $T \subseteq \nat^{<\nat}$ such that every node has at most two immediate successors in $T$ and any two paths of $T$ are equal has a path.
+
+:::solution
+$\mathsf{ACA}_0$ proves the restricted statement, by :ref{#thm-konig-aca}, since a tree with at most two immediate successors at each node is finitely branching.
+
+Conversely, let $f$ be injective and $T$ the tree of the proof of :ref{#thm-konig-aca}. That proof shows, in $\mathsf{RCA}_0$, that $T$ is infinite, that each node has at most two immediate successors, and that every path $P$ satisfies: if $P(m) = i + 1$ then $f(i) = m$, and if $P(m) = 0$ then $m$ is not in the range of $f$. Let $P$ and $Q$ be two paths and $m \in \nat$. If $P(m) = 0$, then $m$ is not in the range of $f$, so $Q(m)$ cannot be of the form $j + 1$, and $Q(m) = 0$. If $P(m) = i + 1$, then $f(i) = m$, so $Q(m) \neq 0$; thus $Q(m) = j + 1$ with $f(j) = m$, and $j = i$ by injectivity. So $P = Q$, and $T$ satisfies the hypotheses of the restricted statement. Its path gives the range of $f$, as in the proof.
+:::
+::::
+
+::::exercise{#ex-konig-finitely-branching difficulty=1 objective="See why König's lemma needs finite branching, with a counterexample and the step of the proof that fails."}
+Give an infinite tree $T \subseteq \nat^{<\nat}$ with no path. Identify the step of the forward direction of :ref{#thm-konig-aca} that fails for this tree.
+
+:::solution
+Let $T = \{ \varepsilon \} \cup \{ \langle n \rangle : n \in \nat \}$, the root and all sequences of length $1$. It is closed under prefixes and infinite. It has no path, since a path $P$ would have $P \uh 2 \in T$, and $T$ has no sequence of length $2$.
+
+The forward direction uses finite branching in the step: if $\sigma \in E$, one of its immediate successors is in $E$. Here the root has infinitely many extensions, so it is in $E$, but each $\langle n \rangle$ has a single extension, itself, so none of the successors is in $E$. A node with infinitely many successors, each with finitely many extensions, has infinitely many extensions; with finitely many successors, this is impossible.
+:::
+::::
+:::::

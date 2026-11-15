@@ -164,7 +164,64 @@ Checked (web search, 2026-11-12):
 - No simpler proof of Arslanov's criterion or of Martin's theorem was found; the textbook
   proofs are already short.
 
-## 10. Open points
+## 10. Exercises
+
+Each lesson has one or two **featured exercises** in its text, placed after the material
+they practice, and a block of **further exercises** at the end (outside the reading time).
+Every exercise has a label, an objective, a difficulty and a complete solution.
+
+**Featured, and why.**
+
+- `immune-sets`: `ex-hyperimmune-intervals` (the interval device of the KMU proof, reused
+  for maximal sets) and `ex-hyperimmune-degree-agreement` (hyperimmune degrees through
+  agreement with computable functions, a time-bound diagonalization reused in
+  Jockusch–Martin).
+- `hypersimple-sets`: `ex-deficiency-tt` (Soare's part (ii) of Dekker's theorem; it makes
+  Example "tt-reductions", item 3, precise).
+- `computably-dominated`: `ex-ftree-continuum` (branching the f-tree construction; cited by
+  `degree-structure/minimal-covers`).
+- `dnc-functions`: `ex-non-dnc-noncomputable` (finite extensions plus the fixed point
+  theorem; contrasted with the low simple set in `arslanov`).
+- `arslanov`: `ex-effectively-immune-below-ce` (Soare Exercise 5.4.6, the most used form of
+  the criterion).
+- `domination`: `ex-dominant-function-lists` (the function version of Jockusch's theorem).
+- `high-or-dnc`: `ex-maximal-hypersimple` (reuses the dominant function of Martin's proof).
+
+**Further exercises, lesson by lesson.**
+
+- `immune-sets`: subsets of hyperimmune sets (moved); images under computable injections;
+  running maximum and composition; a hyperimmune set computable in ∅′ by diagonalization;
+  hyperimmunity through gaps.
+- `hypersimple-sets`: transitivity of ≤tt (moved); c.e. supersets of hypersimple sets;
+  Boolean combinations of c.e. sets are tt below ∅′; introreducibility of the set of true
+  stages (and failure for the deficiency set); one-query tt-reductions between c.e. sets
+  are m-reductions.
+- `computably-dominated`: Δ⁰₂ sets (moved); subtrees as compositions of f-trees; paths of a
+  computable f-tree form a Π⁰₁ class with a computable member; Case 2 gives one total
+  functional; cone avoidance added to the f-tree construction (splitting argument).
+- `dnc-functions`: DNC function in the degree (moved); fixed-point free for c.e. indices;
+  closure of effective immunity; a low effectively immune set; minimal indices are
+  effectively immune (with `fundamentals/fixed-point`).
+- `arslanov`: Δ⁰₂ non-DNC sets and fixed points below incomplete c.e. sets (moved);
+  hypersimple versus effectively simple; weakly effectively simple sets; a weak form of
+  quasi-creative sets, and creative sets; the dichotomy for a DNC function joined with a
+  c.e. set (difficulty 3).
+- `domination`: time bounds (moved); dominance tested on increasing functions; lists of
+  infinite sets; low₂ sets below ∅′ by relativizing Martin's theorem; diagonally correct
+  enumerations of non-high c.e. sets.
+- `high-or-dnc`: computably dominated case (moved); dense simple sets (maximal ⇒ dense
+  simple ⇒ hypersimple and high); maximal sets are hyperhypersimple; infinitely often
+  different functions; for c.e. sets, a.e. different iff high.
+
+**Sources.** Soare 2016, Exercises 4.5.8, 5.3.12, 5.3.14, 5.3.16, 5.4.5, 5.4.6, 5.4.8,
+5.4.13 and Theorem 4.6.1; Monin–Patey, chapter *Immunity and function growth* (lists of
+infinite sets; the dichotomy for DNC functions and c.e. sets, which they attribute to
+Bienvenu, Greenberg, Kučera, Miller, Nies and Turetsky 2013). The others are standard or
+written for the course. Excluded to avoid duplicates: bi-immune sets (`countability`),
+simple sets are not m-complete (`ce-degrees`), continuum many pairwise incomparable
+degrees (`degree-structure`).
+
+## 11. Open points
 
 - The Martin-Löf randomness lesson `randomness-and-degrees` cites `thm-arslanov`, now in
   the lesson `arslanov`; its lesson prerequisites list only `immunity-growth/dnc-functions`.
@@ -175,10 +232,11 @@ Checked (web search, 2026-11-12):
   an example only; the text says so.
 - Post's theorem that hypersimple sets are not tt-complete is admitted. A proof (about one
   page) could be added to `hypersimple-sets` if the lesson has room.
-- `computably-dominated` is about 2900 words (50 minutes), above the target; a further split
+- `computably-dominated` is about 2850 words without the further exercises (duration set to
+  the maximum, 45 minutes), above the target; a further split
   (f-trees / truth-table characterization) is possible but would leave two short lessons.
 
-## 11. History
+## 12. History
 
 - **2026-11-12.** Design and pedagogy revision (this log created).
   - Split from four to seven lessons: new `hypersimple-sets` (Dekker, truth-table
@@ -198,3 +256,11 @@ Checked (web search, 2026-11-12):
     corrected; "Miller–Martin" order; attribution of the effective-immunity
     characterization to Jockusch removed (not checkable); Nerode credited for total
     functionals (per Soare).
+- **2026-11-13.** Featured and further exercises.
+  - Labels and objectives for all existing exercises; one or two featured exercises per
+    lesson, placed in the text; the others moved to the further exercises.
+  - 28 new further exercises (four per lesson), see section 10.
+  - Durations recomputed without the further exercises: `hypersimple-sets` 35,
+    `computably-dominated` 45, `arslanov` 25, `domination` 35.
+  - Label `ex-dominated-continuum` was taken by `pi01-classes`; the f-tree version is
+    `ex-ftree-continuum`.

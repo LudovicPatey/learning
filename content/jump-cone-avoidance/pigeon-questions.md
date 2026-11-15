@@ -109,9 +109,59 @@ Let $\mathcal V$ be $\Sigma^0_1(W)$ with $W \in \mathcal M$.
 
 The witness forces the partition to put its large part on side $i$: this is how a question on one side can be answered by a partition, although the partition does not know $A$.
 
+## Exercises
+
+::::exercise{#ex-pigeon-promise-infinite difficulty=1 objective="See that a promise is not truth on the members of a condition, and that it is kept only on a valid side."}
+Let $\theta(y)$ be the $\Sigma^0_1$ formula "$G$ has an element larger than or equal to $y$". Show that every condition promises $\forall y\ \theta(y)$, "$G$ is infinite", on both sides. Deduce that a condition may promise a sentence that some of its members of that side do not satisfy. Suppose $A = \emptyset$: what becomes of the promise on side $0$?
+
+:::solution
+By :ref{#ex-pigeon-question-examples}, part 1, $\tau \mathrel{?{\vdash}} \theta(m)$ for every string $\tau$ and every $m$, so the promise holds on both sides of every condition. The member $\sigma_i 0 0 \cdots$ of side $i$ of $(\sigma_0, \sigma_1, X)$ is finite, so it does not satisfy $\forall y\ \theta(y)$. If $A = \emptyset$, all stems on side $0$ are subsets of $A_0 = \emptyset$, and the set built on side $0$ is empty: the promise is never kept. This does not contradict :ref{#lem-pigeon-promise}, since side $0$ is invalid in every condition (:ref{#ex-pigeon-question-examples}, part 3).
+:::
+::::
+
 ## Notes and references
 
 The syntactic relation called a promise here is the syntactic forcing relation for $\Pi^0_2$ formulas of the section *Pigeonhole principle* of the chapter *Jump cone avoidance* of Patey's monograph, and the question on one side is its degenerate forcing question. The monograph states the disjunctive question for conditions with both sides valid; the positive case needs no validity, as noted after :ref{#lem-pigeon-disjunctive}. The strings compatible with $(\sigma_i, B^i)$ replace the finite sets $\rho \subseteq B^i$ of the monograph, so that the use principle applies to the members.
 
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095; arXiv:1803.09771.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Pigeonhole principle*.
+
+:::::exercises
+::::exercise[Promises exclude counterexamples]{#ex-pigeon-promise-consistent difficulty=1 objective="Relate promises to the universal clause of the forcing relation, on the extensions where the side stays valid."}
+Let $p$ promise $\forall y\ \theta(y)$ on side $i$. Show that no extension $q$ of $p$ with side $i$ valid has all its members of side $i$ satisfying $\neg\theta(m)$, for any $m$.
+
+:::solution
+Suppose $q$ is such an extension and $m$ such a number. The promise is preserved by extensions, so $q$ promises $\forall y\ \theta(y)$ on side $i$, and side $i$ of $q$ is valid. By :ref{#lem-pigeon-promise}, some $r \leq q$ forces $\theta(m)$ on side $i$. The members of side $i$ of $r$ are members of side $i$ of $q$ (:ref{#ex-pigeon-extension}), so they satisfy both $\theta(m)$ and $\neg\theta(m)$. But $r$ has a member of side $i$, its stem on side $i$ followed by zeros. This is a contradiction. So, as long as side $i$ is valid, no extension forces a counterexample on side $i$: this is the universal clause of :ref{#def-forcing-relation}, restricted to the extensions with side $i$ valid.
+:::
+::::
+
+::::exercise[The witness of invalidity]{#ex-pigeon-one-side-witness difficulty=2 objective="See on an example why the question on one side quantifies only over the partitions that respect a witness of invalidity."}
+Let $p = (\sigma_0, \sigma_1, X)$ be a condition whose side $1$ is invalid, with a witness $\mathcal V$. Let $\varphi = \exists y\ \psi(y)$, with $\psi(y)$ the formula "$y \geq |\sigma_0|$ and $y \in G$", which says that $G$ has an element beyond the stem $\sigma_0$.
+
+1. Show that $\tau \mathrel{?{\nvdash}} \neg\psi(m)$ if and only if $m \geq |\sigma_0|$ and $m \in \tau$.
+2. Show that $p \mathrel{?{\vdash}}_{\mathcal V} \varphi(G_0)$.
+3. Show that the question without witness, "for every set $B$ there are $m$ and $\tau$ compatible with $(\sigma_0, B^0)$ with $\tau \mathrel{?{\nvdash}} \neg\psi(m)$", answers negatively at $p$, although item 4 of :ref{#lem-valid-part} gives an extension of $p$ all of whose members of side $0$ satisfy $\varphi$.
+
+:::solution
+1. If $m < |\sigma_0|$, the sentence $\neg\psi(m)$ is true of every set, $\mathcal V_{\tau, \neg\psi(m)}$ is the class of all sets, and $\tau \mathrel{?{\vdash}} \neg\psi(m)$. Let $m \geq |\sigma_0|$, so that $\neg\psi(m)$ says $m \notin G$. If $m \in \tau$, no extension of $\tau$ satisfies it, $\mathcal V_{\tau, \neg\psi(m)} = \emptyset$, and the answer is negative. If $m \notin \tau$, the string $\tau$ padded with zeros up to length $m + 1$ is compatible with $(\tau, Y)$ for every $Y$ and satisfies $m \notin G$; so $\mathcal V_{\tau, \neg\psi(m)}$ is the class of all sets and the answer is positive.
+2. Let $B$ be a set with $B^1 \notin \mathcal V$. Since $\mathcal U \subseteq \mathcal V$, $B^1 \notin \mathcal U$, and since $B^0, B^1$ cover $X \in \mathcal U$, $B^0 \in \mathcal U$; so $B^0$ is infinite. Take $m \in B^0$; then $m \geq \min X \geq |\sigma_0|$, and the string $\tau$ extending $\sigma_0$ by zeros and a $1$ at $m$ is compatible with $(\sigma_0, B^0)$ and satisfies $m \in \tau$. By part 1, $\tau \mathrel{?{\nvdash}} \neg\psi(m)$.
+3. Take $B = \emptyset$, so that $B^0 = \emptyset$. A string compatible with $(\sigma_0, \emptyset)$ has no element at least $|\sigma_0|$, so by part 1 no witness exists. Side $0$ of $p$ is valid, by item 1 of :ref{#lem-valid-part}, and item 4 adds an element of $X \cap A_0$ to $\sigma_0$. The question without witness is spoiled by partitions that put the whole reservoir on side $1$; the witness excludes them, since they would make $B^1 = X \in \mathcal U \subseteq \mathcal V$.
+:::
+::::
+
+::::exercise[Partitions in the ideal]{#ex-pigeon-partitions-ideal difficulty=1 objective="See that the disjunctive question is unchanged when the partitions range over the ideal of reservoirs, by the Scott property."}
+Show that $p \mathrel{?{\vdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ holds if and only if the condition of :ref{#def-pigeon-disjunctive} holds for every set $B \in \mathcal N$. Why is the definition nevertheless stated for all sets $B$?
+
+:::solution
+One direction is immediate. Conversely, if the condition fails for some set $B$, the class $\mathcal C$ of the proof of :ref{#lem-pigeon-disjunctive} is a non-empty $\Pi^0_1(X \oplus S \oplus M')$ class, and $X \oplus S \oplus M' \in \mathcal N$; since $\mathcal N$ is a Scott ideal, $\mathcal C$ has a member in $\mathcal N$, for which the condition fails. The proof of item 1 of :ref{#lem-pigeon-disjunctive} applies the definition to $B = A$, which need not be in $\mathcal N$; the form "for every set $B$" makes this application immediate, and the equivalence shows that it is not a stronger requirement.
+:::
+::::
+
+::::exercise[Finiteness on two sides]{#ex-pigeon-finite-questions difficulty=1 objective="Compute the two questions for $\Sigma^0_2$ sentences on the sentence &quot;$G$ is finite&quot;."}
+Let $\varphi_0 = \varphi_1$ be the $\Sigma^0_2$ sentence $\exists y\ \forall z \geq y\ (z \notin G)$, "$G$ is finite". Show that $p \mathrel{?{\nvdash}} \varphi_0(G_0) \vee \varphi_1(G_1)$ for every condition $p$, and that $p \mathrel{?{\nvdash}}_{\mathcal V} \varphi_0(G_i)$ for every condition $p$ with side $1 - i$ invalid and every witness $\mathcal V$. What do the extensions of item 2 of the two lemmas promise?
+
+:::solution
+Here $\neg\psi(m)$ is "$G$ has an element larger than or equal to $m$", and $\tau \mathrel{?{\vdash}} \neg\psi(m)$ for all $\tau$ and $m$, by :ref{#ex-pigeon-question-examples}, part 1. So no $m$ and $\tau$ satisfy $\tau \mathrel{?{\nvdash}} \neg\psi(m)$, and the condition of :ref{#def-pigeon-disjunctive} fails for every $B$; the disjunctive question is negative. For the question on one side, the condition fails for every $B$ with $B^{1-i} \notin \mathcal V$, and such a $B$ exists: $B = A$, since $X \cap A_{1-i} \notin \mathcal V$. The extensions of item 2 promise $\forall y\ \neg\psi(y)$, "$G$ is infinite", on some side, which every condition already promises on both sides (:ref{#ex-pigeon-promise-infinite}).
+:::
+::::
+:::::

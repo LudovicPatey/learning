@@ -75,6 +75,14 @@ Why are the values of $f$ on $F$ fixed in advance rather than computed?
   $J^D$ may be undefined on $F$; then the value $0$ is chosen.
 :::
 
+::::exercise{#ex-liu-explicit-u difficulty=1 objective="Check the two alternatives of Liu's lemma on an explicit c.e. set of valuations."}
+Let $U$ be the c.e. set of the finite valuations $h$ such that $J(n)\converge = h(n)$ for some $n \in \mathrm{dom}\, h$. Show that $U$ contains no correct valuation, and give, for every $m$, a set $F$ of size $m$ as in :ref{#lem-liu-valuations}.
+
+:::solution
+A correct valuation satisfies $J(n)\converge = 1 - h(n) \neq h(n)$ on its whole domain, so it is not in $U$. Let $F$ be a set of $m$ numbers $n$ with $J(n)$ undefined; there are infinitely many, for instance the indices of the nowhere defined function, which form an infinite set by the padding lemma. A valuation with domain $F$ never satisfies $J(n)\converge = h(n)$ for $n \in F$, so it is not in $U$.
+:::
+::::
+
 ## Weakly merging questions
 
 :::definition{#def-weakly-merging}
@@ -141,19 +149,75 @@ a $\Sigma^0_1(X)$ set. If $U$ contains a correct valuation, property 1 of the di
 
 The lemma needs two properties of the question: a combinatorial one, weak merging, and a definability one, an oracle $X$ not PA relative to $D$. The next lesson shows that the Dzhafarov–Jockusch question has the first but not the second.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $U$ be the c.e. set of the finite valuations $h$ such that $J(n)\converge = h(n)$ for some $n \in \mathrm{dom}\, h$. Show that $U$ contains no correct valuation, and give, for every $m$, a set $F$ of size $m$ as in :ref{#lem-liu-valuations}.
-
-:::solution
-A correct valuation satisfies $J(n)\converge = 1 - h(n) \neq h(n)$ on its whole domain, so it is not in $U$. Let $F$ be a set of $m$ numbers $n$ with $J(n)$ undefined; there are infinitely many, for instance the indices of the nowhere defined function, which form an infinite set by the padding lemma. A valuation with domain $F$ never satisfies $J(n)\converge = h(n)$ for $n \in F$, so it is not in $U$.
-:::
-::::
-
 ## Notes and references
 
 Weakly merging questions and the abstract theorem are in the chapter *Compactness avoidance* of Patey's monograph, section *Weak merging*, where they are called weakly $\Pi^0_1$-merging; the monograph proves the combinatorial lemma there, with the explicit attribution to Liu. Valuations, their correctness and the lemma are from Liu's paper (2012), where they appear in the proof that the pigeonhole principle admits strong PA avoidance. The proof given here is a reorganization of the monograph's proof around the notion of a safe set.
 
 - J. Liu, *RT²₂ does not imply WKL₀*, Journal of Symbolic Logic 77 (2012), 609–620.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, section *Weak merging*.
+
+:::::exercises
+::::exercise[Correct valuations]{#ex-correct-valuations difficulty=1 objective="Characterize the correct valuations by the $\mathrm{DNC}_2$ functions, and compute the complexity of the sets of valuations involved."}
+Let $D$ be a set. Show that:
+
+1. the set of the finite valuations correct relative to $D$ is $\Sigma^0_1(D)$;
+2. a finite valuation $h$ is correct relative to $D$ if and only if every function $\mathrm{DNC}_2$ relative to $D$ agrees with $h$ on $\mathrm{dom}\, h$;
+3. the set of the finite valuations $h$ such that some function $\mathrm{DNC}_2$ relative to $D$ agrees with $h$ on $\mathrm{dom}\, h$ is $\Pi^0_1(D)$.
+
+:::solution
+1. $h$ is correct if and only if $J^D(n)\converge = 1 - h(n)$ for every $n$ in the finite set $\mathrm{dom}\, h$, a finite conjunction of $\Sigma^0_1(D)$ conditions, uniformly in the code of $h$.
+2. If $h$ is correct and $f$ is $\mathrm{DNC}_2$ relative to $D$, then for $n \in \mathrm{dom}\, h$, $J^D(n)$ is defined and $f(n) \neq J^D(n)$, so $f(n) = 1 - J^D(n) = h(n)$. Conversely, suppose that $h$ is not correct, and let $n \in \mathrm{dom}\, h$ be such that $J^D(n)$ is undefined or equal to $h(n)$. In the second case, every $\mathrm{DNC}_2$ function $f$ satisfies $f(n) \neq J^D(n) = h(n)$, and such functions exist. In the first case, the function equal to $1 - h(n)$ at $n$, to $1 - J^D(m)$ at every $m \neq n$ where $J^D(m)$ is defined, and to $0$ elsewhere, is $\mathrm{DNC}_2$ relative to $D$ and disagrees with $h$ at $n$.
+3. Some $\mathrm{DNC}_2$ function agrees with $h$ on its domain if and only if $J^D(n) \neq h(n)$ for every $n \in \mathrm{dom}\, h$ at which $J^D(n)$ is defined: if so, extend $h$ by $1 - J^D(m)$ where $J^D(m)$ is defined and $0$ elsewhere. The condition says that no $n \in \mathrm{dom}\, h$ satisfies $J^D(n)\converge = h(n)$, a $\Pi^0_1(D)$ property of $h$.
+
+So correct valuations are those determined by the class $\mathrm{DNC}_2^D$, and the set $U$ of a forcing question meets this $\Sigma^0_1(D)$ set in case 1 of the density arguments.
+:::
+::::
+
+::::exercise[Liu's lemma for a PA oracle]{#ex-liu-lemma-pa-needed difficulty=1 objective="See why Liu's lemma needs an oracle that is not PA relative to $D$, and where its proof fails without it."}
+Let $D \leq_T W$ with $W$ PA relative to $D$. Find a $W$-computable set $U$ of finite valuations that contains no valuation correct relative to $D$, and such that for every non-empty finite set $F$, some valuation with domain $F$ belongs to $U$. Which step of the proof of :ref{#lem-liu-valuations} fails?
+
+:::solution
+Let $f \leq_T W$ be $\mathrm{DNC}_2$ relative to $D$, and $U = \{ h : h(n) \neq f(n) \text{ for some } n \in \mathrm{dom}\, h \}$, which is $W$-computable since domains are finite. A correct valuation agrees with $f$ on its domain (:ref{#ex-correct-valuations}), so it is not in $U$. For a non-empty finite set $F$, the valuation $n \mapsto 1 - f(n)$ with domain $F$ is in $U$. So both alternatives of the lemma fail for every $m \geq 1$.
+
+In the proof, the empty set is safe, but no singleton $\{ w \}$ is: the valuation $\{ w \mapsto 1 - f(w) \}$ is in $U$ and is vacuously correct outside $\{ w \}$. So the claim fails for $F = \emptyset$. The function built in the proof of the claim is then $\mathrm{DNC}_2$ relative to $D$ and computable in $W$, which is no contradiction.
+:::
+::::
+
+::::exercise[Safe sets and the jump]{#ex-safe-sets-jump difficulty=1 objective="Compute the complexity of safety in the proof of Liu's lemma, and find the set $F$ with the jump of the oracle."}
+In the proof of :ref{#lem-liu-valuations}, assume that $U$ contains no correct valuation. Show that "$F$ is safe" is a $\Pi^0_1(W)$ property of the finite set $F$, and that a set $F$ with $m$ elements such that no valuation with domain $F$ belongs to $U$ can be computed from $W'$, uniformly in $m$.
+
+:::solution
+$F$ is not safe if and only if there is $h \in U$ with $F \subseteq \mathrm{dom}\, h$ and $J^D(n)\converge = 1 - h(n)$ for every $n \in \mathrm{dom}\, h \setminus F$. Since $U$ is $\Sigma^0_1(W)$ and $J^D$ is partial computable in $D \leq_T W$, this is $\Sigma^0_1(W)$, uniformly in $F$; so safety is $\Pi^0_1(W)$, and $W'$ decides it.
+
+Let $F_0 = \emptyset$, which is safe. Given a safe set $F_j$, search with $W'$ for the least $w \notin F_j$ such that $F_j \cup \{ w \}$ is safe, and let $F_{j+1} = F_j \cup \{ w \}$; the search terminates by the claim of the proof. The set $F_m$ is safe and has $m$ elements, and, as at the end of the proof, no valuation with domain $F_m$ belongs to $U$. The procedure is uniform in $m$.
+:::
+::::
+
+::::exercise[Finitely many cylinders]{#ex-finite-set-forcing difficulty=2 objective="Exhibit a forcing question that is weakly merging but not merging, and apply the abstract theorem to it."}
+Let the conditions be the finite non-empty sets $S$ of strings, with $[S] = \bigcup_{\sigma \in S} [\sigma]$, and $S' \leq S$ if every string of $S'$ extends some string of $S$. For a $\Sigma^0_1$ sentence $\varphi$ about $G$, let $S \mathrel{?{\vdash}} \varphi$ if every $\sigma \in S$ has an extension $\tau$ satisfying $\varphi$. Show that this is a notion of forcing with a $\Sigma^0_1$-preserving forcing question that is weakly merging, with $k = |S| + 1$ for the condition $S$, but not merging. Deduce that every sufficiently generic set is not PA.
+
+:::solution
+*Notion of forcing.* The class $[S]$ is a non-empty finite union of cylinders, hence closed. The relation $\leq$ is reflexive and transitive, and $S' \leq S$ implies $[S'] \subseteq [S]$. For refinement, if $[S] \cap [\rho] \neq \emptyset$, some $\sigma \in S$ is comparable with $\rho$; the longer of the two, $\tau$, gives $\{ \tau \} \leq S$ with $[\{ \tau \}] \subseteq [\rho]$.
+
+*Question.* If every $\sigma \in S$ has an extension $\tau_\sigma$ satisfying $\varphi$, the condition $\{ \tau_\sigma : \sigma \in S \}$ extends $S$, and all its members satisfy $\varphi$ by the use principle. If some $\sigma \in S$ has no such extension, then $\{ \sigma \}$ extends $S$ and forces $\neg \varphi$: a member satisfying $\varphi$ would have a prefix extending $\sigma$ and satisfying $\varphi$. For a formula $\varphi(\vec x)$, the relation $S \mathrel{?{\vdash}} \varphi(\vec m)$ is a finite conjunction of $\Sigma^0_1$ relations, so the question is $\Sigma^0_1$-preserving.
+
+*Weak merging.* Let $\varphi_0, \dots, \varphi_{k-1}$ be answered negatively at $S$, with $k = |S| + 1$. For each $s$, choose $\sigma_s \in S$ with no extension satisfying $\varphi_s$. By the pigeonhole principle, $\sigma_s = \sigma_t = \sigma$ for some $s < t$, and $\{ \sigma \}$ forces $\neg \varphi_s \wedge \neg \varphi_t$.
+
+*Not merging.* Let $S = \{ 0, 1 \}$, the two strings of length $1$, $\varphi_0$ the sentence "$G(0) = 1$" and $\varphi_1$ the sentence "$G(0) = 0$", both $\Sigma^0_1$. The string $0$ has no extension satisfying $\varphi_0$ and the string $1$ none satisfying $\varphi_1$, so both answers are negative. But every member of every condition has a first bit, so satisfies $\varphi_0$ or $\varphi_1$: no extension forces both negations.
+
+By :ref{#thm-weak-merging-pa} with $D = Z = \emptyset$ and $\mathcal M = \{ \emptyset \}$, every sufficiently generic set is not PA.
+:::
+::::
+
+::::exercise[Several sides]{#ex-disjunctive-many-sides difficulty=2 objective="Extend weak merging and Lachlan's disjunction to notions of forcing with $\ell$ sides."}
+Let $\ell \geq 2$. Consider a notion of forcing whose conditions $c$ have $\ell$ sides, with closed classes of members $[c]_i$ for $i < \ell$, and a forcing question for disjunctions $\varphi_0(G_0) \vee \cdots \vee \varphi_{\ell - 1}(G_{\ell - 1})$ of $\Sigma^0_1$ sentences, such that a positive answer gives an extension $d$ and a side $i$ with $d \Vdash \varphi_i(G_i)$, and a negative answer gives an extension $d$ and a side $i$ with $d \Vdash \neg \varphi_i(G_i)$. Call the question weakly merging if for every condition $c$ there is $k$ such that $k$ negative answers at $c$ give an extension $d$, a side $i$ and $s < t < k$ with $d \Vdash \neg \varphi^s_i(G_i) \wedge \neg \varphi^t_i(G_i)$. State and prove the analog of :ref{#lem-disjunctive-pa}.
+
+:::solution
+*Statement.* Let $D$ be a set, $\mathcal M$ a class of sets computing $D$, none of which is PA relative to $D$, and suppose that the question is $\Sigma^0_1(\mathcal M)$-preserving and weakly merging. (1) For every condition $c$ and every tuple $(e_0, \dots, e_{\ell - 1})$, there are $d \leq c$ and $i < \ell$ such that for every member $G$ of side $i$ of $d$, $\Phi^{Z \oplus G}_{e_i}$ is not $\mathrm{DNC}_2$ relative to $D$. (2) If $c_0 \geq c_1 \geq \cdots$ and sets $G_i \in [c_s]_i$ for all $s$ and $i$ are such that every tuple is handled by some $c_s$ as in (1), then $Z \oplus G_i$ is not PA relative to $D$ for some $i < \ell$.
+
+*Proof of (1).* Let $k$ be given for $c$, $X \in \mathcal M$ for $c$, and $U$ the set of the finite valuations $h$ such that $c$ answers positively the disjunction of the sentences $\Phi^{Z \oplus G_i}_{e_i} \perp h$, $i < \ell$; it is $\Sigma^0_1(X)$. By :ref{#lem-liu-valuations} with $W = X$ and $2^m \geq k$, either $U$ contains a correct valuation $h$, and property 1 gives $d$ and $i$ forcing $\Phi^{Z \oplus G_i}_{e_i} \perp h$ on side $i$, so that these functionals are incompatible with a correct valuation; or $k$ pairwise incompatible valuations lie outside $U$, and weak merging gives $d$, $i$ and $s < t$ such that on side $i$ the functional is compatible with $h_s$ and $h_t$, hence partial.
+
+*Proof of (2).* Suppose that for every $i < \ell$, some $\Phi^{Z \oplus G_i}_{e_i}$ is $\mathrm{DNC}_2$ relative to $D$. The tuple $(e_0, \dots, e_{\ell - 1})$ is handled by some $c_s$, through a side $i$ on which no member makes $\Phi_{e_i}$ a $\mathrm{DNC}_2$ function; but $G_i$ is such a member. This contradiction shows that for some $i$, no $\Phi^{Z \oplus G_i}_e$ is $\mathrm{DNC}_2$ relative to $D$.
+:::
+::::
+:::::

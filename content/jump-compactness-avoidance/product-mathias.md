@@ -22,11 +22,19 @@ A **condition** is a triple $p = (\sigma, \vec X, S)$ where, for an index set $I
 A **member** of $p$ is a set $G$ with $\sigma \prec G$ whose elements larger than or equal to $|\sigma|$ are in $\bigcup \vec X$. A condition $(\tau, \vec Y, T)$ with index set $J$ **extends** $p$ if $J = I \cdot K$ for some index set $K$, $Y_{\nu\kappa} \subseteq X_\nu$ for all $\nu$ and $\kappa$, $\tau$ is compatible with $(\sigma, \bigcup \vec X)$, and $\vec Z^{(\kappa)} \in \mathcal U^I_S$ for every $\vec Z \in \mathcal U^J_T$ and every $\kappa \in K$.
 :::
 
-A member of an extension is a member of $p$. The relation is transitive: slices of slices are slices, and compatibility composes. The class $\mathcal U^I_S$ is a class of possible future tuples of reservoirs; since it is contained in $\mathcal L_{\vec X}$, it is non-trivial, and all $X_\nu$ are infinite. By the last statement of :ref{#lem-product-intersection}, applied to $\mathcal U^I_S = \mathcal U^I_S \cap \mathcal L_{\vec X}$, the tuple $\vec X$ itself belongs to $\mathcal U^I_S$. The triple $(\varepsilon, \langle \nat \rangle, S_\infty)$, with $I = \{ \varepsilon \}$ and $\mathcal U^I_{S_\infty}$ the class of infinite sets, is a condition.
+A member of an extension is a member of $p$. The relation is transitive (:ref{#ex-product-transitivity}): slices of slices are slices, and compatibility composes. The class $\mathcal U^I_S$ is a class of possible future tuples of reservoirs; since it is contained in $\mathcal L_{\vec X}$, it is non-trivial, and all $X_\nu$ are infinite. By the last statement of :ref{#lem-product-intersection}, applied to $\mathcal U^I_S = \mathcal U^I_S \cap \mathcal L_{\vec X}$, the tuple $\vec X$ itself belongs to $\mathcal U^I_S$. The triple $(\varepsilon, \langle \nat \rangle, S_\infty)$, with $I = \{ \varepsilon \}$ and $\mathcal U^I_{S_\infty}$ the class of infinite sets, is a condition.
 
 :::example{#ex-product-extension}
 Let $p = (\sigma, \langle \nat \rangle, S_\infty)$, and let $E$ and $O$ be the sets of even and odd numbers larger than or equal to $|\sigma|$. Let $q = (\sigma, \langle E, O \rangle, T)$ with index set $\{0, 1\} = \{\varepsilon\} \cdot \{0, 1\}$ and $\mathcal U^{\{0, 1\}}_T = \mathcal L_E \times \mathcal L_O$, which is large by :ref{#ex-product-large}. Both slices of a member of this class are infinite sets, so $q$ extends $p$. The two conditions have the same members, since $E \cup O$ contains every number above $|\sigma|$. What $q$ adds is information on the future: every later tuple of reservoirs will keep infinitely many even numbers in its first coordinate and infinitely many odd numbers in its second. A forcing with one reservoir can only record one of the two, by passing to $E$ or to $O$, and then loses the other.
 :::
+
+::::exercise{#ex-product-transitivity difficulty=1 objective="Prove the transitivity of the extension relation of product Mathias forcing, by composing slices."}
+Show that the extension relation of :ref{#def-product-condition} is transitive.
+
+:::solution
+Let $p = (\sigma, \vec X, S)$ with index set $I$, $q = (\tau, \vec Y, T)$ extending $p$ with index set $I \cdot K$, and $r = (\rho, \vec W, R)$ extending $q$ with index set $(I \cdot K) \cdot K' = I \cdot (K \cdot K')$; the set $K \cdot K'$ is an index set, since its strings have the same length. For $\nu \in I$, $\kappa \in K$ and $\kappa' \in K'$, $W_{\nu\kappa\kappa'} \subseteq Y_{\nu\kappa} \subseteq X_\nu$. The stem $\rho$ is compatible with $(\tau, \bigcup \vec Y)$, $\tau$ is compatible with $(\sigma, \bigcup \vec X)$ and $\bigcup \vec Y \subseteq \bigcup \vec X$, so $\rho$ is compatible with $(\sigma, \bigcup \vec X)$. For $\vec Z \in \mathcal U^{I \cdot K \cdot K'}_R$, the slice $\vec Z^{(\kappa')}$ is in $\mathcal U^{I \cdot K}_T$, and its slice $\kappa$ is $\langle Z_{\nu\kappa\kappa'} : \nu \in I \rangle = \vec Z^{(\kappa\kappa')}$, which is therefore in $\mathcal U^I_S$.
+:::
+::::
 
 :::lemma{#lem-product-basic}
 Let $p = (\sigma, \vec X, S)$ be a condition.
@@ -102,19 +110,51 @@ In item 2 of :ref{#lem-product-question}, why is the partition $Y_0, \dots, Y_{k
   Membership comes from the cover lemma and the intersection lemma.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the extension relation of :ref{#def-product-condition} is transitive.
-
-:::solution
-Let $p = (\sigma, \vec X, S)$ with index set $I$, $q = (\tau, \vec Y, T)$ extending $p$ with index set $I \cdot K$, and $r = (\rho, \vec W, R)$ extending $q$ with index set $(I \cdot K) \cdot K' = I \cdot (K \cdot K')$; the set $K \cdot K'$ is an index set, since its strings have the same length. For $\nu \in I$, $\kappa \in K$ and $\kappa' \in K'$, $W_{\nu\kappa\kappa'} \subseteq Y_{\nu\kappa} \subseteq X_\nu$. The stem $\rho$ is compatible with $(\tau, \bigcup \vec Y)$, $\tau$ is compatible with $(\sigma, \bigcup \vec X)$ and $\bigcup \vec Y \subseteq \bigcup \vec X$, so $\rho$ is compatible with $(\sigma, \bigcup \vec X)$. For $\vec Z \in \mathcal U^{I \cdot K \cdot K'}_R$, the slice $\vec Z^{(\kappa')}$ is in $\mathcal U^{I \cdot K}_T$, and its slice $\kappa$ is $\langle Z_{\nu\kappa\kappa'} : \nu \in I \rangle = \vec Z^{(\kappa\kappa')}$, which is therefore in $\mathcal U^I_S$.
-:::
-::::
-
 ## Notes and references
 
 Product Mathias forcing and its question for $\Sigma^0_2$ sentences follow the section *Product Mathias forcing* of the chapter *Jump compactness avoidance* of Patey's monograph, after Monin and Patey (2021). Extensions are defined here with slices, which replace the monograph's projections; in the negative case of the question, the extension has the index set $S \cup E$ (the monograph writes the old one). The transitivity of extension is an exercise of the monograph, stated there for its order on classes of tuples.
 
 - B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics (2021); arXiv:1905.08427.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, section *Product Mathias forcing*.
+
+:::::exercises
+::::exercise{#ex-product-members difficulty=1 objective="Check that the members of an extension are members of the condition, and describe the members of a condition."}
+Let $p = (\sigma, \vec X, S)$ be a condition and $q = (\tau, \vec Y, T)$ an extension of $p$. Show that $\bigcup \vec Y \subseteq \bigcup \vec X$ and that every member of $q$ is a member of $p$. Show that $p$ has an infinite member and a finite member.
+
+:::solution
+Each coordinate $Y_{\nu\kappa}$ is contained in $X_\nu$, so $\bigcup \vec Y \subseteq \bigcup \vec X$. Let $G$ be a member of $q$. Since $\tau$ is compatible with $(\sigma, \bigcup \vec X)$, $\sigma \preceq \tau \prec G$, and every element $x$ of $\tau$ with $|\sigma| \leq x < |\tau|$ is in $\bigcup \vec X$. An element $x \geq |\tau|$ of $G$ is in $\bigcup \vec Y \subseteq \bigcup \vec X$. So every element of $G$ larger than or equal to $|\sigma|$ is in $\bigcup \vec X$, and $G$ is a member of $p$.
+
+The set of elements of $\sigma$ is a finite member. The reservoirs are infinite, since $\mathcal U^I_S \subseteq \mathcal L_{\vec X}$ is large, hence non-empty; so the union of the elements of $\sigma$ and of $\bigcup \vec X$, all of whose elements are larger than or equal to $|\sigma|$, is an infinite member.
+:::
+::::
+
+::::exercise{#ex-product-finite-question difficulty=1 objective="Compute the question of product Mathias forcing for the sentence &quot;$G$ is finite&quot;, and see that a promise is not a property of all members."}
+Let $p = (\sigma, \vec X, S)$ be a condition and $\varphi$ the $\Sigma^0_2$ sentence "$G$ is finite", that is, $\exists y\ \psi(y)$ with $\psi(y)$ the $\Pi^0_1$ formula $\forall z\ (z \geq y \rightarrow z \notin G)$.
+
+1. Show that $\mathcal A_{p, \varphi} = \mathcal U^I_S$, so that $p \mathrel{?{\nvdash}} \varphi$.
+2. Deduce that $p$ promises "$G$ is infinite", and show that some member of $p$ is finite.
+
+:::solution
+1. The formula $\neg\psi(m)$ says that $G$ has an element $z \geq m$. Let $\tau$ be compatible with $(\sigma, \bigcup \vec X)$, $m \in \nat$ and $\vec Z \in \mathcal U^I_S$. Since $\mathcal U^I_S \subseteq \mathcal L_{\vec X}$, each $Z_\nu$ is infinite; take $z \in \bigcup \vec Z$ with $z \geq \max(m, |\tau|)$. The string $\tau \cup \{ z \}$ of length $z + 1$ is compatible with $(\tau, \bigcup \vec Z)$ and satisfies $\neg\psi(m)$. So $\mathcal U^I_S \subseteq \mathcal V^I_{\tau, \neg\psi(m)}$ for all $\tau$ and $m$, and $\mathcal A_{p, \varphi} = \mathcal U^I_S$, which is large.
+2. By definition of $\mathcal A_{p, \varphi}$, $\mathcal U^I_S = \mathcal A_{p, \varphi}$ is contained in all the classes $\mathcal V^I_{\tau, \neg\psi(m)}$: $p$ promises $\forall y\ \neg\psi(y)$, that is, "$G$ is infinite", without changing its class. The set of elements of $\sigma$ is a member of $p$, and it is finite. A promise is kept by every extension and becomes true for the set built along a construction that handles its instances (:ref{#lem-product-promise}); it says nothing about the members of the condition themselves.
+:::
+::::
+
+::::exercise{#ex-product-positive-answer difficulty=1 objective="Compute a positive answer of the question of product Mathias forcing, with the intersection lemma."}
+Let $p = (\sigma, \langle X \rangle, S)$ be a condition with $I = \{\varepsilon\}$, let $R$ be a computable set with $X \cap R$ finite, and let $\varphi$ be "$G \cap R$ is finite", that is, $\exists y\ \psi(y)$ with $\psi(y)$ the formula $\forall z\ (z \geq y \wedge z \in G \rightarrow z \notin R)$. Show that $p \mathrel{?{\vdash}} \varphi$, and that $p$ itself forces $\varphi$.
+
+:::solution
+Let $m \geq |\sigma|$. A string compatible with $(\sigma, Z)$ has its elements larger than or equal to $|\sigma|$ in $Z$, and $\sigma$ has no element $\geq m$. So $\mathcal V_{\sigma, \neg\psi(m)}$ is the class of sets $Z$ with an element $z \geq m$ in $R$. Intersecting over $m \geq |\sigma|$, $\mathcal A_{p, \varphi} \subseteq \mathcal U_S \cap \mathcal L_R$. If this class were large, then, since $\mathcal U_S \subseteq \mathcal L_X$, :ref{#lem-product-intersection} would make $\mathcal U_S \cap \mathcal L_{X \cap R}$ large; but $\mathcal L_{X \cap R}$ is empty, since $X \cap R$ is finite. So $\mathcal A_{p, \varphi}$ is not large, and $p \mathrel{?{\vdash}} \varphi$. Every member $G$ of $p$ has its elements larger than or equal to $|\sigma|$ in $X$, so $G \cap R \subseteq \{0, \dots, |\sigma| - 1\} \cup (X \cap R)$ is finite: $p$ already forces $\varphi$.
+:::
+::::
+
+::::exercise{#ex-product-duplication difficulty=2 objective="Duplicate the reservoirs of a condition along an arbitrary index set, keeping its members, as a first step towards merging." lessons="merging-by-duplication"}
+Let $p = (\sigma, \vec X, S)$ be a condition with index set $I$, let $K$ be an index set and $J = I \cdot K$. Let $\vec Y$ be the $J$-tuple with $Y_{\nu\kappa} = X_\nu$. Show that there is a $\Delta^0_2$ set $T$ such that $\mathcal U^J_T = \{ \vec Z : \vec Z^{(\kappa)} \in \mathcal U^I_S \text{ for every } \kappa \in K \}$, that $q = (\sigma, \vec Y, T)$ is a condition extending $p$, and that $p$ and $q$ have the same members.
+
+:::solution
+For an index $e$ and $\kappa \in K$, let $d(e, \kappa)$ be an index, computable from $e$, $\kappa$, $I$ and $K$, of the oracle machine that enumerates, for every $I$-tuple $\vec F$ of finite sets enumerated in $W^{Z_i}_e$, for every $i$,, the $J$-tuple $\vec F'$ with $F'_{\nu\kappa} = F_\nu$ for $\nu \in I$ and $F'_\mu = \emptyset$ for the other $\mu \in J$. A $J$-tuple $\vec Z$ is in $\mathcal U^{Z_i, J}_{d(e, \kappa)}$ if and only if $\vec Z^{(\kappa)} \in \mathcal U^{Z_i, I}_e$. Let $T = \{ (d(e, \kappa), i) : (e, i) \in S,\ \kappa \in K \}$. It is computable in $S$, hence $\Delta^0_2$, and $\mathcal U^J_T$ is the class of the statement.
+
+The class is large: for a $k$-cover $Q_0, \dots, Q_{k-1}$ of $\nat$, largeness of $\mathcal U^I_S$ gives for each $\kappa$ a function $j_\kappa : I \to k$ with $\langle Q_{j_\kappa(\nu)} : \nu \in I \rangle \in \mathcal U^I_S$, and $j(\nu\kappa) = j_\kappa(\nu)$ gives $\vec Q_j \in \mathcal U^J_T$; upward closure holds coordinatewise. It is contained in $\mathcal L_{\vec Y}$: for $\vec Z \in \mathcal U^J_T$, the slice $\vec Z^{(\kappa)}$ is in $\mathcal U^I_S \subseteq \mathcal L_{\vec X}$, so $Z_{\nu\kappa} \cap X_\nu = Z_{\nu\kappa} \cap Y_{\nu\kappa}$ is infinite. The reservoirs are those of $p$, so $q$ is a condition. It extends $p$: $J = I \cdot K$, $Y_{\nu\kappa} \subseteq X_\nu$, the stem $\sigma$ is compatible with $(\sigma, \bigcup \vec X)$, and the slices of members of $\mathcal U^J_T$ are in $\mathcal U^I_S$ by definition. Since $\bigcup \vec Y = \bigcup \vec X$ and the stem is the same, $p$ and $q$ have the same members. The merging lemma of the next lesson is the same construction, with a different class on each slice.
+:::
+::::
+:::::

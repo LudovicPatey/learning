@@ -71,6 +71,28 @@ $C \equiv_T \emptyset'$, where $C$ is used as an oracle through its graph.
 $C \leq_T \emptyset'$ by the argument above, and $\emptyset' \leq_T C$ by :ref{#ex-c-complete} below.
 :::
 
+::::exercise{#ex-domain-complete difficulty=1 objective="Reduce the halting problem to the domain of $U$ by describing halting times with few bits."}
+Let $X$ be the set of strings $\sigma$ such that $U(\sigma)$ converges. Show that $\emptyset' \leq_T X$.
+
+:::solution
+Let $M$ be the machine with $M(0^e) = 0^s$, where $s$ is the least stage with $\Phi_e(e)[s]\converge$, and $M$ undefined elsewhere. Let $d$ be such that $C \leq C_M + d$. If $\Phi_e(e)$ converges at stage $s$, then $C(0^s) \leq e + d$. With oracle $X$, list the strings $\tau$ of length at most $e + d$ such that $U(\tau)$ converges, compute their outputs, and let $t$ be the largest number such that $0^t$ is one of them ($t = 0$ if there is none). Then $\Phi_e(e)$ converges if and only if $\Phi_e(e)[t]\converge$.
+:::
+::::
+
+::::exercise{#ex-c-complete difficulty=2 objective="Reduce the halting problem to $C$ by describing a string with no short description converging before a halting time."}
+Show that $\emptyset' \leq_T C$, where $C$ is used as an oracle through its graph.
+
+:::hint
+Adapt the previous solution: when $\Phi_e(e)$ converges at stage $s$, describe with about $e$ bits a string of length $2e$ that has no short description converging by stage $s$.
+:::
+
+:::solution
+Let $M$ be the machine defined on the strings $0^e$ as follows: search for the least $s$ with $\Phi_e(e)[s]\converge$, and output the first string $\sigma$ of length $2e$, in the lexicographic order, such that $U(\tau)[s] \converge = \sigma$ for no $\tau$ of length less than $2e$. Such a string exists, since fewer than $2^{2e}$ strings are outputs of strings of length less than $2e$. Let $d$ be such that $C \leq C_M + d$, and let $e > d$.
+
+With oracle $C$, compute the finite set $S$ of strings $\sigma$ of length $2e$ with $C(\sigma) < 2e$, and then a stage $t$ such that every $\sigma \in S$ satisfies $U(\tau)[t]\converge = \sigma$ for some $\tau$ of length less than $2e$; the search for $t$ terminates, since every element of $S$ has such a description. If $\Phi_e(e)$ converges at stage $s$, the string $\sigma = M(0^e)$ satisfies $C(\sigma) \leq e + d < 2e$, so $\sigma \in S$, and no description of $\sigma$ of length less than $2e$ converges by stage $s$; hence $s < t$. So $\Phi_e(e)\converge$ if and only if $\Phi_e(e)[t]\converge$. The finitely many $e \leq d$ are handled by a finite table.
+:::
+::::
+
 ## The lower envelope
 
 For each $k$, only finitely many numbers $n$ satisfy $C(n) \leq k$, since they have descriptions of length at most $k$. So $C(n)$ tends to infinity. It does so more slowly than any computable function tending to infinity: the Berry argument applied to the numbers at which a computable function crosses a threshold shows that $C$ takes small values arbitrarily far.
@@ -103,46 +125,6 @@ In the proof of :ref{#thm-c-envelope}, why does the number $h(k+1)$ have small c
   Monotonicity is used to locate $n$ between $h(k)$ and $h(k+1)$, not to bound the complexity.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1 #ex-domain-complete}
-Let $X$ be the set of strings $\sigma$ such that $U(\sigma)$ converges. Show that $\emptyset' \leq_T X$.
-
-:::solution
-Let $M$ be the machine with $M(0^e) = 0^s$, where $s$ is the least stage with $\Phi_e(e)[s]\converge$, and $M$ undefined elsewhere. Let $d$ be such that $C \leq C_M + d$. If $\Phi_e(e)$ converges at stage $s$, then $C(0^s) \leq e + d$. With oracle $X$, list the strings $\tau$ of length at most $e + d$ such that $U(\tau)$ converges, compute their outputs, and let $t$ be the largest number such that $0^t$ is one of them ($t = 0$ if there is none). Then $\Phi_e(e)$ converges if and only if $\Phi_e(e)[t]\converge$.
-:::
-::::
-
-::::exercise{difficulty=2 #ex-c-complete}
-Show that $\emptyset' \leq_T C$, where $C$ is used as an oracle through its graph.
-
-:::hint
-Adapt the previous solution: when $\Phi_e(e)$ converges at stage $s$, describe with about $e$ bits a string of length $2e$ that has no short description converging by stage $s$.
-:::
-
-:::solution
-Let $M$ be the machine defined on the strings $0^e$ as follows: search for the least $s$ with $\Phi_e(e)[s]\converge$, and output the first string $\sigma$ of length $2e$, in the lexicographic order, such that $U(\tau)[s] \converge = \sigma$ for no $\tau$ of length less than $2e$. Such a string exists, since fewer than $2^{2e}$ strings are outputs of strings of length less than $2e$. Let $d$ be such that $C \leq C_M + d$, and let $e > d$.
-
-With oracle $C$, compute the finite set $S$ of strings $\sigma$ of length $2e$ with $C(\sigma) < 2e$, and then a stage $t$ such that every $\sigma \in S$ satisfies $U(\tau)[t]\converge = \sigma$ for some $\tau$ of length less than $2e$; the search for $t$ terminates, since every element of $S$ has such a description. If $\Phi_e(e)$ converges at stage $s$, the string $\sigma = M(0^e)$ satisfies $C(\sigma) \leq e + d < 2e$, so $\sigma \in S$, and no description of $\sigma$ of length less than $2e$ converges by stage $s$; hence $s < t$. So $\Phi_e(e)\converge$ if and only if $\Phi_e(e)[t]\converge$. The finitely many $e \leq d$ are handled by a finite table.
-:::
-::::
-
-::::exercise{difficulty=1}
-Fix $c$. Show that the set $R_c = \{ \sigma : C(\sigma) \geq |\sigma| - c \}$ of $c$-incompressible strings is **immune**: it is infinite and has no infinite c.e. subset. Deduce that the set of strings $\sigma$ with $C(\sigma) < |\sigma| - c$ is **simple**: c.e., with an infinite complement that has no infinite c.e. subset.
-
-:::solution
-$R_c$ contains a string of each length by :ref{#prop-incompressible-count}, so it is infinite. If $W \subseteq R_c$ were an infinite c.e. set, the partial computable function $g(\sigma) = \max(|\sigma| - c, 0)$ with domain $W$ would satisfy $g \leq C$ on its domain, and it would be unbounded, since $W$ contains strings of arbitrary length. This contradicts :ref{#thm-c-not-computable}. The complement of $R_c$ is c.e., since $C(\sigma) < |\sigma| - c$ holds if and only if $C_s(\sigma) < |\sigma| - c$ for some $s$; its complement $R_c$ is infinite and immune.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that no total computable function $f : \bstr \to \nat$ satisfies $f =^+ C$, that is, $|f(\sigma) - C(\sigma)| \leq b$ for a constant $b$ and every $\sigma$.
-
-:::solution
-If $|f(\sigma) - C(\sigma)| \leq b$ for every $\sigma$, then $g = \max(f - b, 0)$ is total computable with $g \leq C$ and $g \geq C - 2b$, which is unbounded since $C$ is. This contradicts :ref{#thm-c-not-computable} (1).
-:::
-::::
-
 ## Notes and references
 
 The use of the Berry paradox to prove the non-computability of complexity goes back to the founders of the theory; Chaitin's incompleteness theorem is from his 1974 paper. Monin and Patey credit the Turing completeness of $C$ (:ref{#ex-c-complete}) to Gács, after Li and Vitányi. Kummer (1996) proved that the set of compressible strings $\{ \sigma : C(\sigma) < |\sigma| \}$ is truth-table complete, a stronger form of :ref{#ex-c-complete}; Nies (Proposition 2.1.28) proves that it is weak truth-table complete and simple, and Downey and Hirschfeldt (Section 16.3) present Kummer's theorem. The lower envelope is treated in Zvonkin and Levin's survey and in Nies, Proposition 2.1.22.
@@ -153,3 +135,69 @@ The use of the Berry paradox to prove the non-computability of complexity goes b
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 2.1.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 3.1 and 16.3.
 - B. Monin and L. Patey, *Computability theory*, chapter "Kolmogorov complexity and random numbers".
+
+:::::exercises
+::::exercise{#ex-incompressible-immune difficulty=1 objective="Apply the Berry argument to show that the incompressible strings form an immune set."}
+Fix $c$. Show that the set $R_c = \{ \sigma : C(\sigma) \geq |\sigma| - c \}$ of $c$-incompressible strings is **immune**: it is infinite and has no infinite c.e. subset. Deduce that the set of strings $\sigma$ with $C(\sigma) < |\sigma| - c$ is **simple**: c.e., with an infinite complement that has no infinite c.e. subset.
+
+:::solution
+$R_c$ contains a string of each length by :ref{#prop-incompressible-count}, so it is infinite. If $W \subseteq R_c$ were an infinite c.e. set, the partial computable function $g(\sigma) = \max(|\sigma| - c, 0)$ with domain $W$ would satisfy $g \leq C$ on its domain, and it would be unbounded, since $W$ contains strings of arbitrary length. This contradicts :ref{#thm-c-not-computable}. The complement of $R_c$ is c.e., since $C(\sigma) < |\sigma| - c$ holds if and only if $C_s(\sigma) < |\sigma| - c$ for some $s$; its complement $R_c$ is infinite and immune.
+:::
+::::
+
+::::exercise{#ex-no-computable-c-approx difficulty=2 objective="See that $C$ cannot be computed even up to a bounded error."}
+Show that no total computable function $f : \bstr \to \nat$ satisfies $f =^+ C$, that is, $|f(\sigma) - C(\sigma)| \leq b$ for a constant $b$ and every $\sigma$.
+
+:::solution
+If $|f(\sigma) - C(\sigma)| \leq b$ for every $\sigma$, then $g = \max(f - b, 0)$ is total computable with $g \leq C$ and $g \geq C - 2b$, which is unbounded since $C$ is. This contradicts :ref{#thm-c-not-computable} (1).
+:::
+::::
+
+::::exercise{#ex-stephan-zm difficulty=1 objective="Use the maximality of a number of small complexity to bound its complexity from below."}
+Let $m_0 = C(0) + 1$. For $m \geq m_0$, let $z_m$ be the largest number $z$ with $C(z) < m$. Show that $z_m$ is well defined and that there is a constant $d \geq m_0$ such that $C(z_{n + d}) \geq n$ for every $n$.
+
+:::solution
+For $m \geq m_0$, the set $\{ z : C(z) < m \}$ contains $0$ and is finite, since its elements have descriptions of length less than $m$; so $z_m$ exists. Every number larger than $z_m$ has complexity at least $m$, so $C(z_m + 1) \geq m$. The function $z \mapsto z + 1$ is computable, so by :ref{#prop-c-basic} (2) there is $b$ with $C(z + 1) \leq C(z) + b$ for every $z$. Hence $C(z_m) \geq m - b$ for every $m \geq m_0$. Let $d = \max(b, m_0)$. For every $n$, $n + d \geq m_0$, and $C(z_{n + d}) \geq n + d - b \geq n$. (After Stephan; Nies 2009, Exercise 2.1.23.)
+:::
+::::
+
+::::exercise{#ex-envelope-monotone difficulty=1 objective="Drop the monotonicity hypothesis of the lower envelope theorem and see what remains of its conclusion."}
+Let $g : \nat \to \nat$ be total computable and unbounded. Show that $C(n) < g(n)$ for infinitely many $n$. Give a total computable unbounded function $g$ such that $C(n) < g(n)$ fails for infinitely many $n$, so that the conclusion of :ref{#thm-c-envelope} for all large $n$ needs the hypothesis that $\varphi$ is non-decreasing.
+
+:::solution
+Let $h(k)$ be the least $x$ with $g(x) > k$. It is total computable, since $g$ is unbounded, and non-decreasing. By :ref{#prop-c-basic} (2), and since the string of $k$ has length $\lfloor \log(k + 1) \rfloor$, there is $c$ with $C(h(k)) \leq \log(k + 1) + c$ for every $k$. Let $k_0$ be such that $\log(k + 1) + c < k$ for $k \geq k_0$. For $k \geq k_0$, $C(h(k)) < k < g(h(k))$. The set $\{ h(k) : k \geq k_0 \}$ is infinite: if $h(k) \leq N$ for every $k$, then $\max \{ g(x) : x \leq N \} > k$ for every $k$, which is absurd. So $C(n) < g(n)$ for infinitely many $n$.
+
+Let $g(n) = n$ for even $n$ and $g(n) = 0$ for odd $n$. It is computable and unbounded, and $C(n) < g(n) = 0$ fails for every odd $n$.
+:::
+::::
+
+::::exercise{#ex-compressible-complete difficulty=1 objective="Observe that the reduction of the halting problem to $C$ only queries the set of compressible strings."}
+Let $B = \{ \sigma : C(\sigma) < |\sigma| \}$. Show that $B$ is simple and that $\emptyset' \leq_T B$.
+
+:::solution
+$B$ is the complement of the set $R_0$ of $0$-incompressible strings, so it is simple by :ref{#ex-incompressible-immune} with $c = 0$. For the reduction, follow the solution of :ref{#ex-c-complete}. The only use of the oracle is the computation of the set $S$ of strings $\sigma$ of length $2e$ with $C(\sigma) < 2e$, and $S = B \cap \{0, 1\}^{2e}$ is computed by $2^{2e}$ queries to $B$. The rest of the reduction, the search for the stage $t$ and the finite table for $e \leq d$, does not use the oracle. So the same procedure, with oracle $B$, decides $\emptyset'$. (Nies 2009, Proposition 2.1.28, proves the stronger statement that $B$ is weak truth-table complete.)
+:::
+::::
+
+::::exercise{#ex-incompressible-count difficulty=2 objective="Show that the number of incompressible strings of a given length is itself an incompressible number."}
+Fix $d \geq 1$, and let $r_n$ be the number of strings $\sigma$ of length $n$ with $C(\sigma) \geq n - d$. Show that there is a constant $c$ with $C(r_n) \geq n - c$ for every $n$.
+
+:::solution
+By :ref{#prop-incompressible-count}, fewer than $2^{n - d} \leq 2^{n - 1}$ strings of length $n$ satisfy $C(\sigma) < n - d$, so $2^{n - 1} < r_n \leq 2^n$, and $n$ is determined by $r_n$ as the unique $n$ with $2^{n-1} < r_n \leq 2^n$.
+
+Let $M$ be the machine that, on input $\tau$, computes the number $r = U(\tau)$, if $r \geq 1$ finds the $n$ with $2^{n-1} < r \leq 2^n$, then, using the approximation $C_s$ of :ref{#thm-c-not-computable} (2), enumerates the strings $\sigma$ of length $n$ such that $C_s(\sigma) < n - d$ for some $s$ until $2^n - r$ of them have appeared, and outputs the first string of length $n$, in the lexicographic order, that has not appeared. If $U(\tau) = r_n$, the enumerated strings are exactly the strings of length $n$ with $C(\sigma) < n - d$: the enumeration lists only such strings, and there are exactly $2^n - r_n$ of them, so the search terminates and all of them have appeared. The output $\sigma$ then satisfies $C(\sigma) \geq n - d$. Taking for $\tau$ a shortest description of $r_n$,
+$$
+n - d \leq C(\sigma) \leq C_M(\sigma) + c_M \leq C(r_n) + c_M,
+$$
+so $c = d + c_M$ works. (Nies 2009, Exercise 2.1.17.)
+:::
+::::
+
+::::exercise[Settling time of the approximation]{#ex-settling-time difficulty=2 objective="Show by a Berry argument that the settling time of the approximation of $C$ dominates every computable function."}
+Let $(C_s)$ be the approximation of :ref{#thm-c-not-computable} (2), and for each $n$ let $S(n)$ be the least stage $s$ such that $C_s(\sigma) = C(\sigma)$ for every string $\sigma$ of length $n$. Show that for every total computable function $f$, $S(n) > f(n)$ for all but finitely many $n$.
+
+:::solution
+Since $C_s(\sigma)$ is non-increasing in $s$ with limit $C(\sigma)$, $C_s(\sigma) = C(\sigma)$ for every $s \geq S(n)$ and every $\sigma$ of length $n$. Let $g(n)$ be the first string $\sigma$ of length $n$, in the lexicographic order, with $C_{f(n)}(\sigma) \geq n$. It exists: by :ref{#prop-incompressible-count} some $\sigma$ of length $n$ has $C(\sigma) \geq n$, and $C_{f(n)}(\sigma) \geq C(\sigma)$. So $g$ is total computable, and by :ref{#prop-c-basic} there is $c$ with $C(g(n)) \leq \log n + c$ for $n \geq 1$. If $S(n) \leq f(n)$, then $C(g(n)) = C_{f(n)}(g(n)) \geq n$, so $n \leq \log n + c$. This holds for only finitely many $n$.
+:::
+::::
+:::::

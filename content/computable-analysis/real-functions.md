@@ -105,6 +105,14 @@ Item 2 is the effective counterpart of the fact that $x < y$ is a $\Sigma^0_1$ p
 
 Restricting the domain can restore computability: the sign function is computable on $\mathbb R \setminus \{ 0 \}$, by a search for $k$ with $|q_k| > 2^{-k}$, which exists when $x \neq 0$.
 
+::::exercise{#ex-positive-search difficulty=2 objective="Semi-decide the positivity of a computable function, and find a rational point where it does not vanish."}
+Let $f : \mathbb R \to \mathbb R$ be computable. Show that there is a Turing functional $\Phi$ such that, for every name $p$ of $x$, $\Phi^p(0)$ converges if and only if $f(x) > 0$. Deduce that if $f$ is computable and $f(x_0) \neq 0$ for some $x_0$, then $f(q) \neq 0$ for some rational $q$, and such a $q$ can be found by an algorithm.
+
+:::solution
+Compose a realizer of $f$ with the functional of :ref{#prop-order-undecidable} (2), applied to the pair $(0, f(x))$: on a name $p$ of $x$, it searches for $k$ such that the term of index $k$ of the name of $f(x)$ exceeds $2^{-k+1}$. For the second part, $f$ is continuous, so $f \neq 0$ on an open interval around $x_0$, which contains a rational. An algorithm dovetails the computations of the functionals for $f(q) > 0$ and $-f(q) > 0$ over all rationals $q$, with their constant names, and stops at the first one that converges.
+:::
+::::
+
 ## Arithmetic and limits
 
 :::theorem{#thm-arithmetic-computable}
@@ -163,29 +171,11 @@ In the proof of the product, what is $B$ for?
   The product is defined everywhere.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the floor function is computable on $\mathbb R \setminus \mathbb Z$, and not on any interval containing an integer in its interior.
-
-:::solution
-Given a name $(q_k)$ of $x \notin \mathbb Z$, search for $k$ and an integer $n$ with $n < q_k - 2^{-k}$ and $q_k + 2^{-k} < n + 1$; this exists since $x$ lies strictly between two consecutive integers, and then $n < x < n + 1$. Output the constant name of $n$. If $I$ is an interval containing an integer $n$ in its interior, the floor function restricted to $I$ is discontinuous at $n$, since it takes the value $n - 1$ immediately to the left of $n$; so it is not computable by :ref{#thm-real-continuous}.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-exp difficulty=2 objective="Compute a function given by a power series from an explicit bound on its tail."}
 Show that the exponential function is computable on $\mathbb R$.
 
 :::solution
 Given a name of $x$, compute an integer $M \geq |x|$, for instance $M = \lceil |q_0| \rceil + 1$. For $n \geq 2M$, the tail satisfies $\sum_{i > n} |x|^i / i! \leq \frac{M^{n+1}}{(n+1)!} \sum_{j \geq 0} 2^{-j} \leq 2 \frac{M^{n+1}}{(n+1)!}$, since successive terms decrease by a factor at most $M / (n+2) \leq 1/2$; this bound tends to $0$ and is computable. Let $n_k \geq 2M$ be least with $2 M^{n_k+1}/(n_k + 1)! \leq 2^{-k-1}$, and $s_k$ the partial sum $\sum_{i \leq n_k} x^i / i!$, computable from the name of $x$ by :ref{#thm-arithmetic-computable}. Then $|s_k - e^x| \leq 2^{-k-1}$, so $|s_k - s_l| \leq 2^{-k}$ for $k \leq l$, and :ref{#prop-effective-limit} computes $e^x = \lim_k s_k$, uniformly in the name of $x$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $f : \mathbb R \to \mathbb R$ be computable. Show that there is a Turing functional $\Phi$ such that, for every name $p$ of $x$, $\Phi^p(0)$ converges if and only if $f(x) > 0$. Deduce that if $f$ is computable and $f(x_0) \neq 0$ for some $x_0$, then $f(q) \neq 0$ for some rational $q$, and such a $q$ can be found by an algorithm.
-
-:::solution
-Compose a realizer of $f$ with the functional of :ref{#prop-order-undecidable} (2), applied to the pair $(0, f(x))$: on a name $p$ of $x$, it searches for $k$ such that the term of index $k$ of the name of $f(x)$ exceeds $2^{-k+1}$. For the second part, $f$ is continuous, so $f \neq 0$ on an open interval around $x_0$, which contains a rational. An algorithm dovetails the computations of the functionals for $f(q) > 0$ and $-f(q) > 0$ over all rationals $q$, with their constant names, and stops at the first one that converges.
 :::
 ::::
 
@@ -197,3 +187,68 @@ Computable real functions and their continuity are Weihrauch, Section 4.3: Theor
 - V. Brattka, P. Hertling and K. Weihrauch, *A tutorial on computable analysis*, in *New Computational Paradigms*, Springer, 2008, 425–491.
 - M. B. Pour-El and J. I. Richards, *Computability in Analysis and Physics*, Springer, 1989, Chapter 0.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section II.6.
+
+:::::exercises
+::::exercise{#ex-floor difficulty=1 objective="Restore computability by restricting the domain, and recognize discontinuity as the obstruction."}
+Show that the floor function is computable on $\mathbb R \setminus \mathbb Z$, and not on any interval containing an integer in its interior.
+
+:::solution
+Given a name $(q_k)$ of $x \notin \mathbb Z$, search for $k$ and an integer $n$ with $n < q_k - 2^{-k}$ and $q_k + 2^{-k} < n + 1$; this exists since $x$ lies strictly between two consecutive integers, and then $n < x < n + 1$. Output the constant name of $n$. If $I$ is an interval containing an integer $n$ in its interior, the floor function restricted to $I$ is discontinuous at $n$, since it takes the value $n - 1$ immediately to the left of $n$; so it is not computable by :ref{#thm-real-continuous}.
+:::
+::::
+
+::::exercise{#ex-sqrt difficulty=1 objective="Compute a function that is not Lipschitz, by reading the input with a precision adapted to its modulus of continuity."}
+Show that $x \mapsto \sqrt x$ is computable on $[0, \infty)$. Use the inequality $|\sqrt a - \sqrt b| \leq \sqrt{|a - b|}$ for $a, b \geq 0$, and prove it.
+
+:::solution
+For $a \geq b \geq 0$, $(\sqrt b + \sqrt{a - b})^2 = a + 2 \sqrt{b (a - b)} \geq a$, so $\sqrt a - \sqrt b \leq \sqrt{a - b}$; the case $b \geq a$ is symmetric.
+
+Let $(q_j)$ be a Cauchy name of $x \geq 0$, and $k \in \nat$. Let $s = \max(q_{2k+2}, 0)$. Since $x \geq 0$ and $u \mapsto \max(u, 0)$ does not increase distances, $|s - x| \leq |q_{2k+2} - x| \leq 2^{-2k-2}$, hence $|\sqrt s - \sqrt x| \leq 2^{-k-1}$. Let $r_k$ be the largest multiple of $2^{-k-1}$ with $r_k^2 \leq s$, found by a finite search as in :ref{#ex-computable-reals} (2); then $0 \leq \sqrt s - r_k < 2^{-k-1}$. So $|r_k - \sqrt x| \leq 2^{-k}$, and :ref{#lem-cauchy-variants} gives a Cauchy name of $\sqrt x$. Near $0$, an output precision $2^{-k}$ requires the input precision $2^{-2k-2}$: the precision read from the name depends on the modulus of continuity of the function.
+:::
+::::
+
+::::exercise[Overlapping conditions]{#ex-overlapping-choice difficulty=2 objective="See that a choice between two overlapping conditions is computable on names, while no such choice depends only on the real."}
+1. Show that there is a Turing functional $\Phi$ such that, for every Cauchy name $p$ of a real $x$, $\Phi^p(0)$ converges to $0$ or $1$, with $x < 1$ if the output is $0$, and $x > 0$ if the output is $1$.
+2. Show that for every such $\Phi$, some real has two names on which $\Phi$ gives different outputs.
+
+:::solution
+1. On a name $p$ of $x$, run the two semi-decision procedures of :ref{#prop-order-undecidable} (2) for $x < 1$ and for $0 < x$, using the constant names of $0$ and $1$, alternately step by step. Output $0$ if the first terminates first, and $1$ otherwise. Every real satisfies $x < 1$ or $x > 0$, so one of them terminates, and the output satisfies the required condition.
+2. Suppose that $\Phi^p(0)$ depends only on the real $x$ named by $p$, and let $f(x)$ be this value. Then $f : \mathbb R \to \nat$ is computable, realized by the functional that outputs $\Phi^p(0)$, hence continuous by the argument of :ref{#thm-real-continuous}, as in :ref{#prop-order-undecidable} (1). But $f(x) = 0$ for $x \leq 0$ and $f(x) = 1$ for $x \geq 1$, and a continuous function from $\mathbb R$ to $\nat \subseteq \mathbb R$ is constant, by the intermediate value theorem. So the output depends on the name. Such choices, where a realizer may give different correct answers on different names of the same input, are the reason why the problems studied later in the course are allowed to have several solutions.
+:::
+::::
+
+::::exercise{#ex-sup-left-ce difficulty=2 objective="Compute the supremum of a bounded sequence from below, and show by a continuity argument that no realizer computes it from both sides." lessons="representations"}
+1. Show that the map $(x_n) \mapsto \sup_n x_n$, defined on the bounded sequences of reals, is $(\rho^\omega, \rho_<)$-computable. Deduce that the supremum of a bounded computable sequence of reals is left-c.e.
+2. Show that it is not $(\rho^\omega, \rho)$-continuous, even on the sequences with values in $\{0, 1\}$.
+
+:::solution
+1. Let $(q_{n,k})_k$ be the given name of $x_n$, and $x = \sup_n x_n$. For a rational $q$, $q < x$ if and only if $q < x_n$ for some $n$, if and only if $q < q_{n,k} - 2^{-k}$ for some $n$ and $k$: if $q < q_{n,k} - 2^{-k}$ then $q < x_n$, since $q_{n,k} - 2^{-k} \leq x_n$; and if $q < x_n$, choose $k$ with $2^{-k+1} < x_n - q$, so that $q_{n,k} - 2^{-k} \geq x_n - 2^{-k+1} > q$. A dovetailed search over the triples $(q, n, k)$ lists these rationals, which is a left name of $x$. A computable sequence has a computable name, and the algorithm turns it into a computable left name.
+2. Suppose that a continuous $F$ maps $\rho^\omega$-names of bounded sequences to Cauchy names of their suprema. Let $p = \langle p_0, p_1, \dots \rangle$ with every $p_i$ the constant name of $0$. The term of index $2$ of $F(p)$ is a rational $r$ with $|r| \leq 1/4$, and by continuity there is $m$ such that the term of index $2$ of $F(q)$ is $r$ for every name $q \in [p \uh m]$ of a bounded sequence. The positions below $m$ are of the form $\langle i, n \rangle$ for finitely many $i$; choose $i_0$ different from all of them, and let $q$ be the name obtained from $p$ by replacing $p_{i_0}$ with the constant name of $1$. It agrees with $p$ below $m$ and names a sequence with values in $\{0, 1\}$ and supremum $1$, so $|r - 1| \leq 1/4$, a contradiction.
+
+Part 1 is adapted from Weihrauch 2000, Exercise 4.2.11. The same continuity argument shows that the limit of a non-decreasing sequence is not computable, which the last lesson of the course classifies.
+:::
+::::
+
+::::exercise{#ex-dedekind-cut difficulty=1 objective="Relate computable reals to decidable Dedekind cuts, and see that the equivalence is not uniform." lessons="representations"}
+Show that a real $x$ is computable if and only if the set $L_x = \{ q \in \mathbb Q : q < x \}$ is decidable. Show that no Turing functional computes the characteristic function of $L_x$ from every Cauchy name of $x$.
+
+:::solution
+If $x$ is rational, $L_x$ is decidable, by comparing rationals. If $x$ is computable and irrational, then for every rational $q$ exactly one of $q < x$ and $x < q$ holds, and both are semi-decidable from the constant name of $q$ and a computable name of $x$ (:ref{#prop-order-undecidable} (2)); running both procedures alternately decides $q < x$. Conversely, if $L_x$ is decidable, then for each $k$ the integer $j$ with $j 2^{-k} \in L_x$ and $(j+1) 2^{-k} \notin L_x$ is found by testing $j = 0, -1, 1, -2, 2, \dots$; it exists and is unique, and $x - 2^{-k} \leq j 2^{-k} < x$, so these rationals give a Cauchy name of $x$ by :ref{#lem-cauchy-variants}.
+
+A functional computing $L_x$ from all names of $x$ would in particular decide $0 < x$ from the names of $x$, uniformly, which :ref{#prop-order-undecidable} (1) excludes. The proof of the first part distinguishes whether $x$ is rational, and this case distinction is not effective.
+:::
+::::
+
+::::exercise[A rate of convergence cannot always be computed]{#ex-modulus-convergence difficulty=2 objective="See when a computable null sequence has a computable modulus of convergence, and build one that has none."}
+A **modulus of convergence** of a sequence $(a_k)$ converging to $0$ is a function $m : \nat \to \nat$ with $|a_k| \leq 2^{-n}$ for all $k \geq m(n)$.
+1. Show that a computable non-increasing sequence of reals converging to $0$ has a computable modulus of convergence.
+2. Let $g : \nat \to \nat$ be a computable injective function whose range $A$ is not computable. Show that the computable sequence $b_k = 2^{-g(k)}$ converges to $0$ and has no computable modulus of convergence.
+
+:::solution
+1. A non-increasing sequence converging to $0$ has non-negative terms. Given $n$, search for $k$ with $a_k < 2^{-n}$, by running the semi-decision procedures of :ref{#prop-order-undecidable} (2) for the pairs $(a_k, 2^{-n})$, $k \in \nat$, in parallel, using the computable names of the $a_k$; such a $k$ exists since $a_k \to 0$. Let $m(n)$ be the first $k$ found. For $k' \geq m(n)$, $0 \leq a_{k'} \leq a_{m(n)} < 2^{-n}$.
+2. Since $g$ is injective, for each $n$ only finitely many $k$ satisfy $g(k) \leq n$, so $b_k < 2^{-n}$ for $k$ large: $b_k \to 0$. Suppose that $m$ is a computable modulus. For $k \geq m(n+1)$, $2^{-g(k)} \leq 2^{-n-1}$, that is, $g(k) > n$. So $n \in A$ if and only if $n = g(k)$ for some $k < m(n+1)$, a finite and computable check; this makes $A$ computable, a contradiction.
+
+Without a modulus, :ref{#prop-effective-limit} does not apply, even when the limit is known to be $0$. Adapted from Weihrauch 2000, Exercise 4.2.4.
+:::
+::::
+:::::

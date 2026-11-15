@@ -70,6 +70,14 @@ Where is the computability of $P$ used?
   This is a hypothesis, unrelated to computability.
 :::
 
+::::exercise{#ex-equality-undecidable difficulty=1 objective="Apply Rice's theorem to the equivalence of programs."}
+Show that there is no algorithm which, given $a$ and $b$, decides whether $\Phi_a = \Phi_b$.
+
+:::solution
+Fix an index $z$ of the nowhere defined function. If equality were decidable, the set $\{ e : \Phi_e = \Phi_z \}$ would be computable. It is an index set, non-trivial since it contains $z$ and no index of the constant function $0$. This contradicts :ref{#thm-rice}.
+:::
+::::
+
 The fixed point proof shows that $P$ is not computable, but not how difficult it is. A reduction gives more information.
 
 :::proposition{#prop-rice-reduction}
@@ -104,27 +112,17 @@ In the proof of :ref{#prop-rice-reduction}, why must $z \notin P$ be assumed?
   $P$ can be non-trivial and contain $z$, for instance $P = \{ e : W_e = \emptyset \}$.
 :::
 
-## Consequences
-
-Rice's theorem is a limitation on the automatic analysis of programs. Whether a program meets a behavioral specification — computes a given function, halts on all inputs, never outputs $0$ — is undecidable in general. In practice, program analysis tools either restrict the programs considered, or accept answers that may be inconclusive. The theorem is about **decidability** only. Questions of the form "does the program ever do this?" are often c.e., while questions about all inputs, such as totality, are typically not even c.e.; the next lesson characterizes the c.e. index sets. Measuring their exact difficulty is the purpose of the arithmetic hierarchy, the subject of a later course.
-
-## Exercises
-
-::::exercise{difficulty=1}
-Show that there is no algorithm which, given $a$ and $b$, decides whether $\Phi_a = \Phi_b$.
-
-:::solution
-Fix an index $z$ of the nowhere defined function. If equality were decidable, the set $\{ e : \Phi_e = \Phi_z \}$ would be computable. It is an index set, non-trivial since it contains $z$ and no index of the constant function $0$. This contradicts :ref{#thm-rice}.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-index-ce-coce difficulty=2 objective="Combine Rice's theorem, the index set theorem and the complementation theorem to locate the nowhere defined function with respect to a c.e. index set."}
 Let $P$ be a non-trivial index set. Show that $P$ and $\nat \setminus P$ cannot both be c.e. Deduce that if $P$ is c.e., the indices of the nowhere defined function are not in $P$.
 
 :::solution
 If both were c.e., $P$ would be computable by :ref{#prop-computable-iff-ce-coce}, contradicting :ref{#thm-rice}. If $P$ is c.e. and contains an index $z$ of the nowhere defined function, then $\emptyset' \leq_m \nat \setminus P$ by :ref{#prop-rice-reduction}, that is, $\nat \setminus \emptyset' \leq_m P$ by item 2 of :ref{#prop-many-one}; so $\nat \setminus \emptyset'$ would be c.e. by :ref{#prop-ce-downward}, contradicting :ref{#thm-halting-ce}.
 :::
 ::::
+
+## Consequences
+
+Rice's theorem is a limitation on the automatic analysis of programs. Whether a program meets a behavioral specification — computes a given function, halts on all inputs, never outputs $0$ — is undecidable in general. In practice, program analysis tools either restrict the programs considered, or accept answers that may be inconclusive. The theorem is about **decidability** only. Questions of the form "does the program ever do this?" are often c.e., while questions about all inputs, such as totality, are typically not even c.e.; the next lesson characterizes the c.e. index sets. Measuring their exact difficulty is the purpose of the arithmetic hierarchy, the subject of a later course.
 
 ## Notes and references
 
@@ -133,3 +131,64 @@ Rice's theorem appeared in 1953, in a paper on classes of c.e. sets. In Soare's 
 - H. G. Rice, *Classes of recursively enumerable sets and their decision problems*, Transactions of the American Mathematical Society 74 (1953), 358–366.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 1.6.3 and 2.2.
 - B. Monin and L. Patey, *Computability theory*, chapter *Arithmetic hierarchy*, section *Rice's theorem*.
+
+:::::exercises
+::::exercise{#ex-which-index-sets difficulty=1 objective="Decide whether a set of indices is an index set, using padding and self-reference."}
+Which of the following sets are index sets?
+
+1. $\{ e : \Phi_e \text{ is total and } \Phi_e(0) = 0 \}$.
+2. $\{ e : W_e \subseteq \{ 0, \dots, 9 \} \}$.
+3. $\{ e : \Phi_e(0)\converge = e \}$.
+4. The set of minimal indices, $\{ e : \Phi_i \neq \Phi_e \text{ for every } i < e \}$.
+
+:::solution
+1 and 2 are index sets: membership of $e$ depends only on the function $\Phi_e$, and on its domain $W_e$.
+
+3 is not. By :ref{#cor-self-reference} with $g(e, x) = e$, there is $e$ with $\Phi_e(x) = e$ for all $x$, so $e$ belongs to the set. Let $e' = p(e, e + 1)$, with $p$ the padding function (:ref{#lem-padding}): then $\Phi_{e'} = \Phi_e$ and $e' \geq e + 1$, so $\Phi_{e'}(0) = e \neq e'$ and $e'$ does not belong to the set.
+
+4 is not. Let $m$ be the least index of some partial computable function; $m$ is minimal. The index $e' = p(m, m + 1) > m$ computes the same function, and it is not minimal, since $m < e'$ and $\Phi_m = \Phi_{e'}$.
+:::
+::::
+
+::::exercise{#ex-index-set-classify difficulty=1 objective="Apply the index set theorem to decide whether the halting set or its complement reduces to a given index set."}
+For each of the following index sets $P$, check that $P$ is non-trivial, and determine which of $\emptyset' \leq_m P$ and $\emptyset' \leq_m \nat \setminus P$ follows from :ref{#prop-rice-reduction}.
+
+1. $\{ e : W_e \text{ is finite} \}$.
+2. $\{ e : \Phi_e(0)\diverge \}$.
+3. $\{ e : \text{the range of } \Phi_e \text{ is infinite} \}$.
+4. $\{ e : \Phi_e \circ \Phi_e = \Phi_e \}$.
+
+:::solution
+Let $z$ be an index of the nowhere defined function.
+
+1. $z \in P$, and an index of a total function is not in $P$. So $\emptyset' \leq_m \nat \setminus P = \{ e : W_e \text{ is infinite} \}$, as found directly in :ref{#ex-inf-reductions}.
+2. $z \in P$, and an index of the constant function $0$ is not. So $\emptyset' \leq_m \{ e : \Phi_e(0)\converge \}$, as in :ref{#prop-halting-variants}.
+3. $z \notin P$, since the range of the nowhere defined function is empty, and an index of the identity is in $P$. So $\emptyset' \leq_m P$.
+4. The nowhere defined function $\zeta$ satisfies $\zeta \circ \zeta = \zeta$, so $z \in P$; the successor function $\sigma$ does not, since $\sigma(\sigma(0)) = 2 \neq 1 = \sigma(0)$. So $\emptyset' \leq_m \nat \setminus P$.
+
+In each case the proposition gives one reduction; it says nothing about the other one.
+:::
+::::
+
+::::exercise{#ex-not-self-dual difficulty=2 objective="Apply the fixed point theorem to show that no index set reduces to its complement." lessons="fixed-point"}
+A set $A$ is **self-dual** if $A \leq_m \nat \setminus A$. Show that no index set is self-dual, the trivial ones included. Deduce, using :ref{#ex-join-m}, that no index set is many-one equivalent to $\emptyset' \oplus (\nat \setminus \emptyset')$.
+
+:::solution
+Let $P$ be an index set, and suppose that $f$ reduces $P$ to $\nat \setminus P$: $x \in P \iff f(x) \notin P$ for every $x$. By :ref{#thm-fixed-point}, there is $e$ with $\Phi_e = \Phi_{f(e)}$. Since $P$ is an index set, $e \in P \iff f(e) \in P$, which contradicts $e \in P \iff f(e) \notin P$.
+
+Self-duality is invariant under $\equiv_m$: if $P \equiv_m D$ and $D \leq_m \nat \setminus D$, then $P \leq_m D \leq_m \nat \setminus D \leq_m \nat \setminus P$, using item 2 of :ref{#prop-many-one} for the last step and transitivity. By :ref{#ex-join-m}, $D = \emptyset' \oplus (\nat \setminus \emptyset')$ is self-dual, so no index set is many-one equivalent to $D$.
+
+Adapted from Soare 2016, Exercise 2.2.10.
+:::
+::::
+
+::::exercise{#ex-rice-acceptable difficulty=2 objective="See that Rice's theorem holds in every acceptable numbering, and can fail in a numbering without repetitions." lessons="universal-program-smn"}
+1. Let $(\psi_e)$ be an acceptable numbering (:ref{#def-acceptable}), and $\mathcal C$ a class of unary partial computable functions containing some but not all of them. Show that $\{ e : \psi_e \in \mathcal C \}$ is not computable.
+2. Admit Friedberg's theorem: there is a numbering $(\psi_e)$ satisfying condition 1 of :ref{#def-acceptable} in which every unary partial computable function appears exactly once. Show that for this numbering, $\{ e : \psi_e = \psi_0 \}$ is computable, although the class $\{ \psi_0 \}$ contains some but not all partial computable functions. Which step of item 1 fails?
+
+:::solution
+1. Let $t$ be total computable with $\psi_{t(e)} = \Phi_e$, and $Q = \{ n : \psi_n \in \mathcal C \}$. Then $e \in P = \{ e : \Phi_e \in \mathcal C \} \iff t(e) \in Q$, so $P \leq_m Q$. The set $P$ is a non-trivial index set: every function of $\mathcal C$, and every function outside $\mathcal C$, has a standard index. By :ref{#thm-rice}, $P$ is not computable, so $Q$ is not computable (:ref{#prop-many-one}).
+2. Since $\psi_0$ appears only once in the numbering, $\{ e : \psi_e = \psi_0 \} = \{ 0 \}$, which is computable. Item 1 uses condition 2 of :ref{#def-acceptable}, the translation $t$ of standard indices into the numbering. Friedberg's numbering has no such translation, as the lesson on the SMN theorem explains: in an acceptable numbering every function has infinitely many indices.
+:::
+::::
+:::::

@@ -74,7 +74,7 @@ An enumeration of a $\Sigma^0_1$ class reveals more and more of it, so its measu
 3. A real that is left-c.e. or right-c.e. is the limit of a computable sequence of rationals that is monotone. With $\emptyset'$ one decides, for a rational $q$, whether some term of a non-decreasing sequence exceeds $q$, a $\Sigma^0_1$ question; this suffices to compute the binary expansion, or approximations to any precision. The same holds for non-increasing sequences.
 :::
 
-The bounds of the proposition are sharp: by the first exercise below, every left-c.e. real of $[0, 1]$ is the measure of a $\Sigma^0_1$ class. Since $\Omega$ is not computable, neither is the measure $1 - \Omega$ of the complementary $\Pi^0_1$ class.
+The bounds of the proposition are sharp: by :ref{#ex-left-ce-measure}, every left-c.e. real of $[0, 1]$ is the measure of a $\Sigma^0_1$ class. Since $\Omega$ is not computable, neither is the measure $1 - \Omega$ of the complementary $\Pi^0_1$ class.
 
 :::quiz[the measure of effective classes]
 In :ref{#prop-measure-effective} (1), why is the prefix-free generator $W'$ used rather than $W$?
@@ -118,7 +118,7 @@ In both examples, the covers are given by an algorithm: the open class of measur
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-left-ce-measure difficulty=1 objective="Build a $\Sigma^0_1$ class with a prescribed left-c.e. measure from dyadic approximations."}
 Show that for every left-c.e. real $r \in [0, 1]$ there is a $\Sigma^0_1$ class of measure $r$. Deduce that there is a non-empty $\Pi^0_1$ class whose measure is not computable.
 
 :::solution
@@ -128,7 +128,7 @@ For the second statement, apply this to $\Omega$, which is left-c.e. and in $(0,
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-null-pi01-cover difficulty=2 objective="Turn the approximation from above of the measure of a null $\Pi^0_1$ class into computable clopen covers."}
 Let $\mathcal P = [T]$ be a $\Pi^0_1$ class, with $T$ computable, such that $\lambda(\mathcal P) = 0$. Show that there is a computable function $n \mapsto F_n$, with $F_n$ a finite set of strings given by its canonical index, such that $\mathcal P \subseteq [F_n]^{\prec}$ and $\lambda([F_n]^{\prec}) \leq 2^{-n}$ for every $n$. Show also that a $\Pi^0_1$ class of positive measure has a non-computable member.
 
 :::solution
@@ -140,8 +140,76 @@ For the second statement, the class of computable sequences is countable, hence 
 
 ## Notes and references
 
-Borel introduced the measure of sets of reals in 1898; Lebesgue (1901, 1902) defined the measure of arbitrary sets through countable covers by intervals, which is the origin of outer regularity. Carathéodory (1914) gave the abstract construction. The computation of the measure of effective classes is folklore. Downey and Hirschfeldt present the measure on Cantor space in Section 1.2, $\Sigma^0_1$ classes in Section 2.19 and left-c.e. reals in Section 5.1; Nies treats open classes and their prefix-free generators, and left-c.e. reals, in Section 1.8, and the measure in Section 1.9. The second exercise is the first step of Kurtz's notion of randomness, treated in :ref{to="martin-lof-randomness/solovay-tests"}.
+Borel introduced the measure of sets of reals in 1898; Lebesgue (1901, 1902) defined the measure of arbitrary sets through countable covers by intervals, which is the origin of outer regularity. Carathéodory (1914) gave the abstract construction. The computation of the measure of effective classes is folklore. Downey and Hirschfeldt present the measure on Cantor space in Section 1.2, $\Sigma^0_1$ classes in Section 2.19 and left-c.e. reals in Section 5.1; Nies treats open classes and their prefix-free generators, and left-c.e. reals, in Section 1.8, and the measure in Section 1.9. :ref{#ex-null-pi01-cover} is the first step of Kurtz's notion of randomness, treated in :ref{to="martin-lof-randomness/solovay-tests"}.
 
 - A. S. Kechris, *Classical Descriptive Set Theory*, Springer, 1995, Section 17.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 1.2, 2.19 and 5.1.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 1.8–1.9.
+
+:::::exercises
+::::exercise{#ex-prefix-free-density difficulty=1 objective="Use the additivity of the measure on a prefix-free set to bound its number of strings of each length."}
+Let $S$ be a prefix-free set of strings. Show that $\lim_n 2^{-n} |S \cap 2^n| = 0$. Show that the hypothesis that $S$ is prefix-free cannot be dropped.
+
+:::solution
+The cylinders $[\sigma]$, $\sigma \in S$, are pairwise disjoint, so $\sum_{\sigma \in S} 2^{-|\sigma|} = \lambda([S]^{\prec}) \leq 1$. Grouping the strings by length, $\sum_n 2^{-n} |S \cap 2^n| \leq 1$. The terms of a convergent series of non-negative terms tend to $0$.
+
+For the set $S$ of all strings, $2^{-n} |S \cap 2^n| = 1$ for every $n$.
+
+Adapted from Nies 2009, Exercise 1.9.13.
+:::
+::::
+
+::::exercise{#ex-measure-ra difficulty=1 objective="Compute the measure of a $\Sigma^0_1$ class with a simple prefix-free generator, and obtain a $\Sigma^0_1$ class of non-computable measure without $\Omega$."}
+For $A \subseteq \nat$, let $\mathcal U_A = [\{ 0^n 1 : n \in A \}]^{\prec}$. Show that $\lambda(\mathcal U_A) = \sum_{n \in A} 2^{-n-1}$. Deduce that the measure of the $\Sigma^0_1$ class $\mathcal U_{\emptyset'}$, and that of the $\Pi^0_1$ class $\cs \setminus \mathcal U_{\emptyset'}$, are not computable.
+
+:::solution
+For $n < m$, the strings $0^n 1$ and $0^m 1$ differ at position $n$, so the set $\{ 0^n 1 : n \in A \}$ is prefix-free, and $\lambda(\mathcal U_A) = \sum_{n \in A} 2^{-n-1}$, which is the real $r_A$ of :ref{#ex-left-ce} (2).
+
+For $A = \emptyset'$, the generating set is c.e., so $\mathcal U_{\emptyset'}$ is a $\Sigma^0_1$ class, and its complement is a $\Pi^0_1$ class (:ref{#prop-pi01-equivalent}). By :ref{#ex-left-ce} (2), $r_{\emptyset'}$ is not computable, since $\emptyset'$ is infinite, coinfinite and not computable. Hence neither $\lambda(\mathcal U_{\emptyset'}) = r_{\emptyset'}$ nor $\lambda(\cs \setminus \mathcal U_{\emptyset'}) = 1 - r_{\emptyset'}$ is computable.
+:::
+::::
+
+::::exercise{#ex-minimal-not-ce difficulty=1 objective="See why the set of minimal elements of a c.e. set of strings cannot replace the construction of a c.e. prefix-free generator."}
+Let $A$ be a c.e. set that is not computable, and let $W = \{ 1^n 0 : n \in A \} \cup \{ 1^n 0 1 : n \in \nat \}$. Show that $W$ is c.e., and that the set $W_{\min}$ of the elements of $W$ with no proper prefix in $W$ is not c.e.
+
+:::solution
+$W$ is c.e., as the union of a set enumerated along $A$ and of a computable set.
+
+The proper prefixes of $1^n 0 1$ are the strings $1^k$ for $k \leq n$ and $1^n 0$. No string $1^k$ is in $W$, since every element of $W$ contains a $0$; and $1^n 0 \in W$ if and only if $n \in A$. So $1^n 0 1 \in W_{\min}$ if and only if $n \notin A$. If $W_{\min}$ were c.e., the set $\{ n : 1^n 0 1 \in W_{\min} \} = \nat \setminus A$ would be c.e., and $A$, being c.e. and co-c.e., would be computable, a contradiction.
+
+The prefix-free set $W'$ built by :ref{#lem-prefix-free-generator} is c.e., but in general it is not $W_{\min}$: its elements need not belong to $W$.
+:::
+::::
+
+::::exercise{#ex-computable-effectively-null difficulty=2 objective="Cover the class of computable sequences by open classes of small measure, uniformly, and obtain a $\Pi^0_1$ class of positive measure without computable members."}
+Show that there is a c.e. set $W \subseteq \nat \times \bstr$ such that, for every $k$, the open class $\mathcal U_k$ generated by $\{ \sigma : (k, \sigma) \in W \}$ contains every computable sequence and has measure at most $2^{-k}$. Deduce that there is a $\Pi^0_1$ class of measure at least $\frac12$ with no computable member.
+
+:::solution
+For $e, k \in \nat$, if $\Phi_e(i)\converge \in \{0, 1\}$ for every $i \leq e + k$, let $\sigma_{e,k}$ be the string $\Phi_e(0) \Phi_e(1) \cdots \Phi_e(e + k)$, of length $e + k + 1$. Let $W$ be the set of the pairs $(k, \sigma_{e,k})$ for which $\sigma_{e,k}$ is defined; it is c.e., by running all the computations in parallel.
+
+For each $k$, $\mathcal U_k$ is generated by at most one string of length $e + k + 1$ for each $e$, so by subadditivity $\lambda(\mathcal U_k) \leq \sum_e 2^{-e-k-1} = 2^{-k}$. If $X$ is computable, its characteristic function is $\Phi_e$ for some $e$, total with values in $\{0, 1\}$; then $\sigma_{e,k} = X \uh (e + k + 1)$ is defined, and $X \in \mathcal U_k$.
+
+The class $\mathcal P = \cs \setminus \mathcal U_1$ is $\Pi^0_1$, as the complement of a $\Sigma^0_1$ class, has measure at least $\frac12$, and contains no computable sequence.
+:::
+::::
+
+::::exercise{#ex-computable-measure-member difficulty=2 objective="Use the computability of the measure of a $\Pi^0_1$ class to follow, effectively, a path along which the measure stays positive."}
+Let $\mathcal P$ be a $\Pi^0_1$ class whose measure is positive and computable. Show that $\mathcal P$ has a computable member. Deduce that the measure of the $\Pi^0_1$ class of :ref{#ex-computable-effectively-null} is not computable.
+
+:::solution
+Let $\mathcal P = [T]$ with $T$ computable. For a string $\sigma$, $\mathcal P \cap [\sigma] = [T_\sigma]$, where $T_\sigma$ is the computable tree of the nodes of $T$ comparable with $\sigma$; by :ref{#prop-measure-effective} (2), $\lambda(\mathcal P \cap [\sigma])$ is right-c.e., uniformly in $\sigma$.
+
+*The measures $\lambda(\mathcal P \cap [\sigma])$ are computable, uniformly in $\sigma$.* Let $n = |\sigma|$. The class $\mathcal P$ is the disjoint union of the classes $\mathcal P \cap [\tau]$, $\tau \in 2^n$, so
+$$
+\lambda(\mathcal P \cap [\sigma]) = \lambda(\mathcal P) - \sum_{\tau \in 2^n,\ \tau \neq \sigma} \lambda(\mathcal P \cap [\tau]).
+$$
+The sum is right-c.e.: adding the non-increasing approximations of its terms gives a non-increasing computable sequence $(b_s)$ with limit the sum. Let $(p_s)$ be a computable sequence of rationals with $|p_s - \lambda(\mathcal P)| \leq 2^{-s}$. Then $l_s = \max_{t \leq s} (p_t - 2^{-t} - b_t)$ is a non-decreasing computable sequence, bounded by $\lambda(\mathcal P \cap [\sigma])$, and it converges to it since $p_t - 2^{-t} - b_t$ does. So $\lambda(\mathcal P \cap [\sigma])$ is both left-c.e. and right-c.e., uniformly in $\sigma$, hence computable uniformly in $\sigma$.
+
+*Construction.* Let $\sigma_0$ be the empty string, so that $\lambda(\mathcal P \cap [\sigma_0]) > 0$. Given $\sigma_n$ with $\lambda(\mathcal P \cap [\sigma_n]) > 0$, one of $\sigma_n 0$ and $\sigma_n 1$ has the same property, since $\lambda(\mathcal P \cap [\sigma_n]) = \lambda(\mathcal P \cap [\sigma_n 0]) + \lambda(\mathcal P \cap [\sigma_n 1])$. A left-c.e. real is positive if and only if one of its approximations from below is positive; so the search, run in parallel on both extensions, for a positive approximation from below terminates, and we let $\sigma_{n+1}$ be the extension found first. The sequence $X = \bigcup_n \sigma_n$ is computable. Each $[\sigma_n]$ meets $\mathcal P$, so $\sigma_n$ is a prefix of a path of $T$, hence $\sigma_n \in T$, for every $n$; so $X \in [T] = \mathcal P$.
+
+The $\Pi^0_1$ class of :ref{#ex-computable-effectively-null} has positive measure and no computable member, so its measure is not computable.
+
+Adapted from Nies 2009, Exercise 1.9.21.
+:::
+::::
+:::::

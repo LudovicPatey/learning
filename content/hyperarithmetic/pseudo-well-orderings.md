@@ -21,7 +21,7 @@ Let $D = (\sigma_j)$ be a descending sequence in $L$; we show that $D'$ computes
 If $D$ were hyperarithmetic, so would be $D'$ and $p$, contradicting the choice of $T$.
 :::
 
-Such an order is a **pseudo-well-ordering**, or **Harrison order**. Harrison showed that its order type is $\omega_1^{\mathrm{CK}} \cdot (1 + \eta) + \rho$, where $\eta$ is the type of the rationals and $\rho < \omega_1^{\mathrm{CK}}$: an initial well-ordered part of length $\omega_1^{\mathrm{CK}}$, followed by copies of $\omega_1^{\mathrm{CK}}$ indexed by a dense order without endpoints, and a final segment of type $\rho$; we admit this description (Harrison 1968). The third exercise proves the part that matters below: the well-founded part has type exactly $\omega_1^{\mathrm{CK}}$.
+Such an order is a **pseudo-well-ordering**, or **Harrison order**. Harrison showed that its order type is $\omega_1^{\mathrm{CK}} \cdot (1 + \eta) + \rho$, where $\eta$ is the type of the rationals and $\rho < \omega_1^{\mathrm{CK}}$: an initial well-ordered part of length $\omega_1^{\mathrm{CK}}$, followed by copies of $\omega_1^{\mathrm{CK}}$ indexed by a dense order without endpoints, and a final segment of type $\rho$; we admit this description (Harrison 1968). The part that matters below, that the well-founded part has type exactly $\omega_1^{\mathrm{CK}}$, is proved in :ref{#ex-harrison-wf-part}.
 
 :::figure[The order type $\omega_1^{\mathrm{CK}} \cdot (1 + \eta) + \rho$ of a Harrison order. The well-founded part $W$ is an initial segment of type $\omega_1^{\mathrm{CK}}$; after it, every element has a descending sequence below it, but no such sequence is hyperarithmetic, and no hyperarithmetic set separates $W$ from the rest.]{#fig-harrison}
 <svg class="fig" viewBox="0 0 600 150" width="600" role="img" aria-label="A Harrison order: a well-founded initial segment of type omega one CK, then densely many copies of omega one CK, then a final well-ordered segment; a descending sequence lies in the ill-founded part"><line x1="30" y1="60" x2="220" y2="60" class="accent-stroke" stroke-width="3"/><line x1="232" y1="60" x2="500" y2="60" class="ink-stroke" stroke-width="1.4"/><line x1="236" y1="54" x2="236" y2="66" class="muted-stroke" stroke-width="1"/><line x1="258" y1="54" x2="258" y2="66" class="muted-stroke" stroke-width="1"/><line x1="280" y1="54" x2="280" y2="66" class="muted-stroke" stroke-width="1"/><line x1="302" y1="54" x2="302" y2="66" class="muted-stroke" stroke-width="1"/><line x1="324" y1="54" x2="324" y2="66" class="muted-stroke" stroke-width="1"/><line x1="346" y1="54" x2="346" y2="66" class="muted-stroke" stroke-width="1"/><line x1="368" y1="54" x2="368" y2="66" class="muted-stroke" stroke-width="1"/><line x1="390" y1="54" x2="390" y2="66" class="muted-stroke" stroke-width="1"/><line x1="412" y1="54" x2="412" y2="66" class="muted-stroke" stroke-width="1"/><line x1="434" y1="54" x2="434" y2="66" class="muted-stroke" stroke-width="1"/><line x1="456" y1="54" x2="456" y2="66" class="muted-stroke" stroke-width="1"/><line x1="478" y1="54" x2="478" y2="66" class="muted-stroke" stroke-width="1"/><line x1="512" y1="60" x2="570" y2="60" class="ink-stroke" stroke-width="3"/><circle cx="470" cy="82" r="3" class="ink-fill"/><circle cx="400" cy="82" r="3" class="ink-fill"/><circle cx="340" cy="82" r="3" class="ink-fill"/><circle cx="300" cy="82" r="3" class="ink-fill"/><circle cx="276" cy="82" r="3" class="ink-fill"/><circle cx="262" cy="82" r="3" class="ink-fill"/><circle cx="254" cy="82" r="3" class="ink-fill"/><text x="244" y="86" text-anchor="end" class="mrm" font-size="12">⋯</text><text x="125" y="46" text-anchor="middle" class="label">well-founded part W</text><text x="125" y="88" text-anchor="middle" class="mrm" font-size="14"><tspan class="math">ω</tspan><tspan font-size="10" dy="4">1</tspan><tspan font-size="9" dy="-11">CK</tspan><tspan dy="7"></tspan></text><text x="366" y="46" text-anchor="middle" class="label">copies of the type of W, indexed by η</text><text x="541" y="46" text-anchor="middle" class="mrm" font-size="14"><tspan class="math">ρ</tspan> &lt; <tspan class="math">ω</tspan><tspan font-size="10" dy="4">1</tspan><tspan font-size="9" dy="-11">CK</tspan><tspan dy="7"></tspan></text><text x="366" y="110" text-anchor="middle" class="label">a descending sequence: it is not hyperarithmetic</text><text x="300" y="140" text-anchor="middle" class="mrm" font-size="14">order type <tspan class="math">ω</tspan><tspan font-size="10" dy="4">1</tspan><tspan font-size="9" dy="-11">CK</tspan><tspan dy="7"> · (1 + <tspan class="math">η</tspan>) + <tspan class="math">ρ</tspan></tspan></text></svg>
@@ -38,6 +38,22 @@ In the proof of :ref{#thm-harrison}, why are the first values $\sigma_j(0)$ even
 
   The argument applies to every descending sequence.
 :::
+
+::::exercise{#ex-harrison-second-proof difficulty=2 objective="Obtain a Harrison order by a definability argument: a $\Sigma^1_1$ set containing $\mathrm{WO}$ contains an ill-founded order."}
+Show that the set of indices of computable linear orders with no hyperarithmetic descending sequence is $\Sigma^1_1$, and deduce a second proof of :ref{#thm-harrison}.
+
+:::solution
+By :ref{#cor-hyp-quantifier}, "there is a hyperarithmetic descending sequence in $L_e$" is $\Pi^1_1$, so its negation is $\Sigma^1_1$; "$L_e$ is a linear order" is arithmetic. The resulting $\Sigma^1_1$ set $P$ contains $\mathrm{WO}$. If it were equal to $\mathrm{WO}$, then $\mathrm{WO}$ would be $\Sigma^1_1$, contradicting :ref{#prop-pi11-not-sigma11}. So some $e \in P \setminus \mathrm{WO}$ is the index of a computable linear order that is not a well-ordering and has no hyperarithmetic descending sequence.
+:::
+::::
+
+::::exercise{#ex-harrison-wf-part difficulty=2 objective="Show with Kleene's theorem that the well-founded part of a Harrison order has type exactly $\omega_1^{\mathrm{CK}}$."}
+Let $L$ be a Harrison order. Show, without the admitted description of its order type, that its well-founded part $W$, the set of elements $x$ such that $L$ restricted to $\{ y : y <_L x \}$ is a well-ordering, is an initial segment of type exactly $\omega_1^{\mathrm{CK}}$.
+
+:::solution
+$W$ is an initial segment: if $x \in W$ and $y <_L x$, the restriction of $L$ below $y$ is an initial segment of the restriction below $x$, hence a well-ordering. So $W$ is well-ordered by $L$, and its type is the supremum of the ordinals $\beta_x + 1$, where $\beta_x$ is the type of the restriction of $L$ below $x \in W$. Each such restriction is a computable well-ordering, so $\beta_x + 1 < \omega_1^{\mathrm{CK}}$, and the type of $W$ is at most $\omega_1^{\mathrm{CK}}$. Suppose it is some $\alpha < \omega_1^{\mathrm{CK}}$. Then $x \in W$ if and only if the restriction of $L$ below $x$ embeds into a fixed computable well-ordering of type $\alpha$, a $\Sigma^1_1$ condition; $W$ is also $\Pi^1_1$, so it would be $\Delta^1_1$, hence hyperarithmetic by :ref{#thm-kleene-delta11}. The complement of $W$ is non-empty, since $L$ is not a well-ordering, and has no $L$-least element: if $x$ were one, everything below $x$ would be in $W$, so the restriction below $x$ would be a well-ordering, and $x \in W$. Starting from an element of the complement and choosing repeatedly the element of least code of the complement below the previous one gives a descending sequence computable in $L$ and the complement of $W$, hence hyperarithmetic. This contradicts :ref{#thm-harrison}.
+:::
+::::
 
 ## Descending sequences of jumps
 
@@ -109,24 +125,6 @@ Now let $L$ be a Harrison order (:ref{#thm-harrison}). If $\mathrm{HYP}$ were an
 
 This is the result announced in the reverse mathematics track. Jump hierarchies, and more generally arithmetic hierarchies, along ill-founded orders that a model believes to be well-ordered are called **pseudo-hierarchies**; by :ref{#thm-enderton-putnam}, a jump pseudo-hierarchy computes every hyperarithmetic set. Their existence for suitable orders is a proof method in reverse mathematics, the method of pseudo-hierarchies (Simpson, Section V.4, Lemma V.4.12).
 
-## Exercises
-
-::::exercise{difficulty=2}
-Show that the set of indices of computable linear orders with no hyperarithmetic descending sequence is $\Sigma^1_1$, and deduce a second proof of :ref{#thm-harrison}.
-
-:::solution
-By :ref{#cor-hyp-quantifier}, "there is a hyperarithmetic descending sequence in $L_e$" is $\Pi^1_1$, so its negation is $\Sigma^1_1$; "$L_e$ is a linear order" is arithmetic. The resulting $\Sigma^1_1$ set $P$ contains $\mathrm{WO}$. If it were equal to $\mathrm{WO}$, then $\mathrm{WO}$ would be $\Sigma^1_1$, contradicting :ref{#prop-pi11-not-sigma11}. So some $e \in P \setminus \mathrm{WO}$ is the index of a computable linear order that is not a well-ordering and has no hyperarithmetic descending sequence.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $L$ be a Harrison order. Show, without the admitted description of its order type, that its well-founded part $W$, the set of elements $x$ such that $L$ restricted to $\{ y : y <_L x \}$ is a well-ordering, is an initial segment of type exactly $\omega_1^{\mathrm{CK}}$.
-
-:::solution
-$W$ is an initial segment, and its type is the supremum of the types of the restrictions of $L$ below its elements, plus one. Each such restriction is a computable well-ordering, so the type of $W$ is at most $\omega_1^{\mathrm{CK}}$. Suppose it is some $\alpha < \omega_1^{\mathrm{CK}}$. Then $x \in W$ if and only if the restriction of $L$ below $x$ embeds into a fixed computable well-ordering of type $\alpha$, a $\Sigma^1_1$ condition; $W$ is also $\Pi^1_1$, so it would be $\Delta^1_1$, hence hyperarithmetic by :ref{#thm-kleene-delta11}. The complement of $W$ is non-empty, since $L$ is not a well-ordering, and has no $L$-least element: if $x$ were one, everything below $x$ would be in $W$, so the restriction below $x$ would be a well-ordering, and $x \in W$. Starting from an element of the complement and choosing repeatedly the element of least code of the complement below the previous one gives a descending sequence computable in $L$ and the complement of $W$, hence hyperarithmetic. This contradicts :ref{#thm-harrison}.
-:::
-::::
-
 ## Notes and references
 
 Harrison (1968) studied the pseudo-well-orderings and determined their order types. Enderton and Putnam (1970) proved that a descending sequence of jumps computes every hyperarithmetic set; the proof given here follows Simpson (Lemmas VIII.3.22 and VIII.3.23), who proves it in $\mathsf{ACA}_0$, and the deduction that $\mathrm{HYP}$ is not a model of $\mathsf{ATR}_0$ follows Monin and Patey. That $\mathrm{HYP}$ is nevertheless the intersection of the ω-models of $\mathsf{ATR}_0$, and the minimum ω-model of $\Delta^1_1$ comprehension, is proved in Simpson (Remark I.11.4, Sections VII.2, VIII.4 and VIII.6).
@@ -136,3 +134,54 @@ Harrison (1968) studied the pseudo-well-orderings and determined their order typ
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Remark I.11.4 and Sections V.4, VII.2, VIII.3, VIII.4 and VIII.6.
 - B. Monin and L. Patey, *Computability theory*, chapter "The systems $\mathsf{ATR}_0$ and $\Pi^1_1\text{-}\mathsf{CA}_0$".
 - G. E. Sacks, *Higher Recursion Theory*, Springer, 1990.
+
+:::::exercises
+::::exercise{#ex-kb-descending-path difficulty=1 objective="Translate between paths of a tree and descending sequences of its Kleene–Brouwer ordering, counting the jump this costs."}
+Let $T \subseteq \nat^{<\nat}$ be a tree and $L$ the Kleene–Brouwer ordering on $T$. Show that every path $p$ of $T$ computes a descending sequence of $L$. Deduce, with the proof of :ref{#thm-harrison}, that $L$ has a hyperarithmetic descending sequence if and only if $T$ has a hyperarithmetic path.
+
+:::solution
+Let $\sigma_j = p \uh j$. Each $\sigma_j$ is in $T$, and $\sigma_{j+1}$ properly extends $\sigma_j$, so $\sigma_{j+1} <_{\mathrm{KB}} \sigma_j$. The sequence $(\sigma_j)$ is computable in $p$, and it is a descending sequence of $L$.
+
+If $T$ has a hyperarithmetic path $p$, the sequence $(p \uh j)$ is computable in $p$, hence hyperarithmetic. Conversely, the proof of :ref{#thm-harrison} shows that every descending sequence $D$ of $L$ computes a path of $T$ with one jump, $p \leq_T D'$; if $D$ is hyperarithmetic, so is $D'$ (:ref{#prop-hyp-ideal}), and so is $p$.
+:::
+::::
+
+::::exercise{#ex-harrison-o-descending difficulty=1 objective="Apply the Kleene basis theorem to descending sequences of computable linear orders."}
+Show that every computable linear order that is not a well-ordering has a descending sequence computable in $\mathcal O$. Deduce that a Harrison order has a descending sequence computable in $\mathcal O$, but none computable in any $H_a$, $a \in \mathcal O$.
+
+:::solution
+Let $L$ be a computable linear order that is not a well-ordering. The class of graphs of descending sequences of $L$,
+$$
+\{ X : X \text{ is the graph of a function } f \text{ with } f(k+1) <_L f(k) \text{ for every } k \},
+$$
+is defined by an arithmetic formula, so it is $\Sigma^1_1$, and it is non-empty. By :ref{#thm-kleene-basis}, it has a member computable in $\mathcal O$, and the corresponding function is computable in its graph. For a Harrison order, a descending sequence computable in some $H_a$ would be hyperarithmetic, which :ref{#thm-harrison} excludes.
+:::
+::::
+
+::::exercise{#ex-jump-hierarchy-ill-founded difficulty=2 objective="Prove by a definability argument that some ill-founded computable order carries a jump hierarchy, and deduce that descending sequences of jumps exist."}
+Show that there is a computable linear order that is not a well-ordering but carries a jump hierarchy. Deduce that there is a sequence of sets $(A_n)$ with $A_{n+1}' \leq_T A_n$ for every $n$.
+
+:::solution
+Let $P$ be the set of $e$ such that $L_e$ is a linear order and there is a jump hierarchy along $L_e$. Being a jump hierarchy along $L_e$ is an arithmetic property of $(Y, e)$, since "$Z = V'$" is arithmetic; so $P$ is $\Sigma^1_1$.
+
+Every $e \in \mathrm{WO}$ is in $P$. Indeed, a jump hierarchy along a well-ordering $L$ is built by transfinite recursion along $L$: for $j$ in the field of $L$, assuming the columns $Y^{[i]}$, $i <_L j$, defined, the set $Y^{[<j]}$ is determined by them, and one sets $Y^{[j]} = (Y^{[<j]})'$; the other columns are empty.
+
+Since $\mathrm{WO}$ is not $\Sigma^1_1$ (:ref{#prop-pi11-not-sigma11}), $P \neq \mathrm{WO}$: there is $e \in P \setminus \mathrm{WO}$, an index of a computable linear order that is not a well-ordering and carries a jump hierarchy $Y$. Let $j_0 >_L j_1 >_L \cdots$ be a descending sequence of $L = L_e$, and $A_n = Y^{[<j_n]}$. As explained before :ref{#thm-enderton-putnam}, the column $j_{n+1}$ of $A_n$ is $Y^{[j_{n+1}]} = A_{n+1}'$, so $A_{n+1}' \leq_T A_n$.
+
+By :ref{#thm-enderton-putnam}, none of these sets is hyperarithmetic. The argument is that of :ref{#ex-harrison-second-proof}, with "carries a jump hierarchy" in place of "has no hyperarithmetic descending sequence".
+:::
+::::
+
+::::exercise{#ex-hyp-not-sigma11-class difficulty=3 objective="Show that the class of hyperarithmetic sets is not $\Sigma^1_1$, using jump hierarchies along well-orderings and the Enderton–Putnam theorem."}
+Show that the class $\mathrm{HYP}$, which is $\Pi^1_1$ by :ref{#ex-hyp-pi11-in-x}, is not a $\Sigma^1_1$ class.
+
+:::solution
+For an index $e$ of a computable linear order, let $\varphi_e(Y)$ be the arithmetic formula "$Y$ is a jump hierarchy along $L_e$".
+
+1. If $e \in \mathrm{WO}$, there is exactly one $Y$ with $\varphi_e(Y)$, and it is hyperarithmetic. Existence is proved by transfinite recursion along $L_e$ (:ref{#ex-jump-hierarchy-ill-founded}). If $Y$ and $Z$ both satisfy $\varphi_e$, then by induction along $L_e$, $Y^{[i]} = Z^{[i]}$ for all $i <_L j$ implies $Y^{[<j]} = Z^{[<j]}$, hence $Y^{[j]} = Z^{[j]}$; the other columns are empty, so $Y = Z$. Then $n \in Y$ if and only if $\exists Z\, (\varphi_e(Z) \wedge n \in Z)$, if and only if $\forall Z\, (\varphi_e(Z) \rightarrow n \in Z)$; so $Y$ is $\Delta^1_1$, hence hyperarithmetic by :ref{#thm-kleene-delta11}.
+2. If $L_e$ is a linear order but not a well-ordering, no jump hierarchy along $L_e$ is hyperarithmetic, by :ref{#prop-hyp-not-atr0}.
+
+So $e \in \mathrm{WO}$ if and only if $L_e$ is a linear order and $\exists Y\, (Y \in \mathrm{HYP} \wedge \varphi_e(Y))$. If $\mathrm{HYP} = \{ Y : \exists Z\, \psi(Y, Z) \}$ with $\psi$ arithmetic, the right-hand side becomes $\exists Y\, \exists Z\, (\psi(Y, Z) \wedge \varphi_e(Y))$, together with the arithmetic condition on $L_e$, a $\Sigma^1_1$ definition of $\mathrm{WO}$. This contradicts :ref{#prop-pi11-not-sigma11}.
+:::
+::::
+:::::

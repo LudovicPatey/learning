@@ -60,6 +60,14 @@ The type $\{ \exists! x\ \theta(x, \bar c) \rightarrow \neg \theta(v, \bar c) : 
 For the second statement, let $N \models T$ and $K$ the set of its elements definable without parameters. As in the proof of :ref{#thm-scott-converse}, least witnesses make $K \preccurlyeq N$, by the Tarski–Vaught test; every element of $K$ is definable in $K$ by the formula that defines it in $N$. If $K$ were standard, $T$ would be the theory of $\nat$.
 :::
 
+::::exercise{#ex-rs-chain difficulty=1 objective="Check that recursive saturation passes to unions of elementary chains."}
+Show that the union of an elementary chain $M_0 \preccurlyeq M_1 \preccurlyeq \cdots$ of structures for a recursive language is recursively saturated if every $M_{k+1}$ realizes all recursive types over $M_k$, and that it is recursively saturated if every $M_k$ is.
+
+:::solution
+The first statement is the second step of the proof of :ref{#thm-rs-existence}. For the second, a recursive type over the union has its parameters in some $M_k$, is a type over $M_k$ by elementarity, and is realized in $M_k$, hence in the union.
+:::
+::::
+
 ## Coded types
 
 In a non-standard model of arithmetic, a set of formulas can be described by a single element, through the standard system.
@@ -124,16 +132,6 @@ The completeness hypothesis is needed for "realized implies coded": the type $\{
 
 So the standard system of a recursively saturated model $M$ of $\mathrm{PA}$ is a Scott set (:ref{#cor-ssy-scott-set}) that contains $\mathrm{Th}(M)$. The next lesson shows that, for countable models, these two invariants determine $M$.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the union of an elementary chain $M_0 \preccurlyeq M_1 \preccurlyeq \cdots$ of structures for a recursive language is recursively saturated if every $M_{k+1}$ realizes all recursive types over $M_k$, and that it is recursively saturated if every $M_k$ is.
-
-:::solution
-The first statement is the second step of the proof of :ref{#thm-rs-existence}. For the second, a recursive type over the union has its parameters in some $M_k$, is a type over $M_k$ by elementarity, and is realized in $M_k$, hence in the union.
-:::
-::::
-
 ## Notes and references
 
 Recursively saturated structures were introduced by Barwise and Schlipf (1976), in connection with admissible sets; Schlipf (1978) developed their model theory. Wong's Lecture 7 gives the definitions and the existence argument. :ref{#thm-rs-coded-types}, :ref{#prop-rs-realized-coded} and :ref{#cor-rs-complete-types} correspond to Wong's Proposition 8.1, stated there for complete types, and his Proposition 8.13 gives a converse: a non-standard model of $\mathrm{PA}$ in which the coded complete types are exactly the realized ones is recursively saturated.
@@ -142,3 +140,65 @@ Recursively saturated structures were introduced by Barwise and Schlipf (1976), 
 - J. S. Schlipf, *Toward model theory through recursive saturation*, Journal of Symbolic Logic 43 (1978), 183–206.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lectures 7 and 8.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991.
+
+:::::exercises
+::::exercise{#ex-rs-constants difficulty=1 objective="Check that naming finitely many elements by constants preserves recursive saturation."}
+Let $M$ be a recursively saturated structure for a recursive language $\mathcal L$, and $\bar c \in M$. Let $\mathcal L(\bar c)$ be $\mathcal L$ with new constant symbols for the entries of $\bar c$, and $(M, \bar c)$ the expansion of $M$ interpreting them by $\bar c$. Show that $(M, \bar c)$ is recursively saturated.
+
+:::solution
+The language $\mathcal L(\bar c)$ has finitely many new symbols, so it is recursive. Let $p(\bar v, \bar d)$ be a recursive type over $(M, \bar c)$, with parameters $\bar d$; its formulas are $\theta(\bar v, \bar d)$ with $\theta(\bar v, \bar z)$ an $\mathcal L(\bar c)$-formula. For such a $\theta$, let $\theta^\circ(\bar v, \bar z, \bar w)$ be the $\mathcal L$-formula obtained by replacing each new constant symbol by a new variable $w_j$. The map $\theta \mapsto \theta^\circ$ is computable and injective, and $\theta$ is computed back from $\theta^\circ$ by substituting the constants for $\bar w$. So the set of codes of the formulas $\theta^\circ$ with $\theta(\bar v, \bar d) \in p$ is computable: a formula $\eta(\bar v, \bar z, \bar w)$ belongs to it if and only if the formula obtained by substituting the constants for $\bar w$ belongs to the computable set of $p$.
+
+Let $p^\circ = \{ \theta^\circ(\bar v, \bar d, \bar c) : \theta(\bar v, \bar d) \in p \}$, a set of $\mathcal L(M)$-formulas with the finitely many parameters $\bar d, \bar c$. For every tuple $\bar a$, $M \models \theta^\circ(\bar a, \bar d, \bar c)$ if and only if $(M, \bar c) \models \theta(\bar a, \bar d)$. So $p^\circ$ is finitely satisfiable in $M$ because $p$ is finitely satisfiable in $(M, \bar c)$, it is a recursive type over $M$, and a tuple realizing it in $M$, which exists by recursive saturation, realizes $p$ in $(M, \bar c)$.
+:::
+::::
+
+::::exercise{#ex-rs-definable-sets difficulty=1 objective="Show that the subsets of $\nat$ definable with parameters in a recursively saturated model belong to its standard system." lessons="cuts-and-extensions/standard-system"}
+Let $M$ be a recursively saturated model of $\mathrm I\Delta_0 + \mathrm{exp}$, $\varphi(x, \bar z)$ an $\mathcal L_A$-formula and $\bar c \in M$. Show that $\{ n \in \nat : M \models \varphi(\bar n, \bar c) \}$ belongs to $\mathrm{SSy}(M)$. Show that, for models of $\mathrm{PA}$, the hypothesis of recursive saturation is not needed.
+
+:::solution
+By :ref{#prop-rs-realized-coded}, applied with the empty tuple in place of $\bar a$, the complete type $\mathrm{tp}(\bar c)$ is coded: the set $Y$ of codes of the formulas $\theta(\bar z)$ with $M \models \theta(\bar c)$ belongs to $\mathrm{SSy}(M)$. The map $n \mapsto \ulcorner \varphi(\bar n, \bar z) \urcorner$ is computable, and $M \models \varphi(\bar n, \bar c)$ if and only if $\ulcorner \varphi(\bar n, \bar z) \urcorner \in Y$. So the set is computable from $Y$, and belongs to $\mathrm{SSy}(M)$ by :ref{#thm-ssy-turing-ideal}.
+
+If $M \models \mathrm{PA}$ is non-standard, $\varphi$ is $\Sigma_k$ for some $k$, and $M \models \mathrm I\Sigma_k$, so the set $D = \{ x \in M : M \models \varphi(x, \bar c) \}$ is piecewise coded (:ref{#thm-friedman-coded}): for a non-standard $b$, some $d$ satisfies $x \in d \leftrightarrow x \in D$ for every $x < b$. Then $\mathrm{Ack}(d) \cap \nat = D \cap \nat$, which is the given set, since the numeral $\bar n$ denotes $n$ in $M$. If $M = \nat$, the standard system is not defined.
+:::
+::::
+
+::::exercise{#ex-rs-undefinable-below difficulty=1 objective="Combine several conditions in one recursive type to find an element that is small, non-standard and not definable."}
+Let $M$ be a recursively saturated model of $\mathrm{PA}$ and $a \in M$ non-standard. Show that some non-standard $b < a$ is not definable in $M$ with the parameter $a$, and in particular not definable without parameters.
+
+:::solution
+Consider, with the parameter $a$,
+$$
+q(v) = \{ v < a \} \cup \{ \bar n < v : n \in \nat \} \cup \{ \exists! x\ \theta(x, a) \rightarrow \neg \theta(v, a) : \theta(x, y) \in \mathcal L_A \}.
+$$
+Its set of formulas is computable, since each of the three families is. A finite part involves $\bar n < v$ for $n \leq m$, say, and $k$ formulas $\theta_1, \dots, \theta_k$. Each $\theta_j(x, a)$ defines at most one element. The standard numbers $m + 1, \dots, m + k + 1$ are $k + 1$ distinct elements below $a$ and above $m$, so one of them is not defined by any $\theta_j(x, a)$; it satisfies the finite part. By recursive saturation, some $b$ realizes $q$. It is below $a$, above every standard number, and not the unique solution of any $\theta(x, a)$. An element definable without parameters, by $\theta(x)$, is definable with the parameter $a$, by the same formula with a dummy variable $y$.
+:::
+::::
+
+::::exercise{#ex-rs-one-variable difficulty=1 objective="Reduce recursive saturation of models of arithmetic to types in one variable with one parameter, by pairing." lessons="fragments-of-arithmetic/bounded-induction"}
+Let $M$ be a model of $\mathrm I\Delta_0$. Show that $M$ is recursively saturated if and only if every recursive type $p(v, c)$ over $M$ in one variable, with at most one parameter, is realized in $M$.
+
+:::solution
+One direction is immediate. For the other, write $\langle x_1 \rangle = x_1$ and $\langle x_1, \dots, x_{k+1} \rangle = \langle \langle x_1, \dots, x_k \rangle, x_{k+1} \rangle$ with the pairing of :ref{#fact-pairing}. By that fact, the relation $w = \langle x_1, \dots, x_k \rangle$ is defined by a bounded formula $\pi_k(w, \bar x)$, every $w \in M$ is $\langle \bar x \rangle$ for exactly one tuple $\bar x$ of length $k$, and its entries are at most $w$.
+
+Let $p(\bar v, \bar c)$ be a recursive type, with $\bar v$ of length $k$ and $\bar c$ of length $m$. If $k = 0$, its formulas are sentences, each true in $M$ by finite satisfiability, and the empty tuple realizes it. If $m = 0$, add a dummy parameter $0$. Let $c = \langle \bar c \rangle$ and, for each formula $\theta(\bar v, \bar z)$,
+$$
+\theta'(w, y) \equiv \exists \bar v \leq w\ \exists \bar z \leq y\ \big( \pi_k(w, \bar v) \wedge \pi_m(y, \bar z) \wedge \theta(\bar v, \bar z) \big).
+$$
+For $w \in M$, write $w = \langle \bar a \rangle$; then $M \models \theta'(w, c)$ if and only if $M \models \theta(\bar a, \bar c)$, by the uniqueness of the decompositions. Let $p'(w, c) = \{ \theta'(w, c) : \theta(\bar v, \bar c) \in p \}$. The map $\theta \mapsto \theta'$ is computable and injective, and $\theta$ is read off from $\theta'$; so the set of formulas of $p'$ is computable. A finite part of $p'$ comes from finitely many formulas of $p$, satisfied by some $\bar a$, and $\langle \bar a \rangle$ satisfies it. So $p'$ is a recursive type in one variable with one parameter; if $w = \langle \bar a \rangle$ realizes it, $\bar a$ realizes $p$.
+:::
+::::
+
+::::exercise{#ex-rs-converse difficulty=3 objective="Prove that a model whose coded complete types are exactly its realized complete types is recursively saturated, using completions in a Scott set." lessons="cuts-and-extensions/scott-tennenbaum"}
+Let $M$ be a non-standard model of $\mathrm I\Delta_0 + \mathrm{exp}$ such that a complete type over $M$ with finitely many parameters is realized in $M$ if and only if it is coded in $M$. Show that $M$ is recursively saturated.
+
+:::solution
+By :ref{#thm-rs-coded-types}, it is enough to realize every recursive type $p(\bar v, \bar c)$; we find a complete coded type containing it. The complete type $\mathrm{tp}(\bar c)$, in the variables $\bar z$, is realized by $\bar c$, so by hypothesis its set of codes $Y = \{ \ulcorner \psi(\bar z) \urcorner : M \models \psi(\bar c) \}$ belongs to $\mathrm{SSy}(M)$.
+
+Read $\bar v$ and $\bar z$ as new constants, and let $\Sigma = \{ \theta(\bar v, \bar z) : \theta(\bar v, \bar c) \in p \} \cup \{ \psi(\bar z) : \ulcorner \psi \urcorner \in Y \}$, a theory in $\mathcal L_A$ with these constants. It is computable in $Y$, since $p$ is recursive. It is consistent: a finite part involves $\theta_1, \dots, \theta_k$ from $p$ and $\psi_1, \dots, \psi_l$ true of $\bar c$; a tuple $\bar a$ satisfying $\theta_1, \dots, \theta_k$ with $\bar c$ exists since $p$ is a type, and $M$ with $\bar v, \bar z$ interpreted by $\bar a, \bar c$ is a model of the finite part. By :ref{#cor-ssy-scott-set}, $\mathrm{SSy}(M)$ is a Scott set, so by the fact used in the first step of the proof of :ref{#thm-scott-converse} it contains a complete consistent extension $\Sigma^*$ of $\Sigma$.
+
+Let $p^*(\bar v, \bar c) = \{ \theta(\bar v, \bar c) : \theta(\bar v, \bar z) \in \Sigma^* \}$. It is a type: for a finite part, with conjunction $\eta(\bar v, \bar z) \in \Sigma^*$, the sentence $\exists \bar v\, \eta(\bar v, \bar z)$ belongs to $\Sigma^*$, since its negation contradicts $\eta$; it is a formula of $\bar z$ alone, and $\Sigma^*$ is consistent and contains, for each such formula, either it or its negation from $\mathrm{tp}(\bar c)$; so $M \models \exists \bar v\, \eta(\bar v, \bar c)$. It is complete, since $\Sigma^*$ is, and coded, since its set of codes is computable from $\Sigma^*$. By hypothesis it is realized, and its realizers realize $p \subseteq p^*$.
+
+This is Wong's Proposition 8.13, given there with a sketch of the same argument.
+:::
+::::
+:::::

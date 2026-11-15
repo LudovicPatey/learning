@@ -1,7 +1,7 @@
 ---
 title: Minimization and partial recursive functions
 summary: The minimization operator, the partial recursive functions, recursive functions and predicates, and the statement of Kleene's normal form theorem.
-duration: 35
+duration: 30
 prerequisites: [ackermann-function]
 ---
 
@@ -74,7 +74,7 @@ The Ackermann function is recursive.
 :::
 
 :::proof{of=prop-ackermann-recursive}
-By the last exercise of the lesson :ref{to="models-of-computation/ackermann-function"}, the graph $G = \{(x, y, z) : A(x, y) = z\}$ is primitive recursive. Hence $A(x, y) = \mu z\, G(x, y, z)$, and the search terminates since $(x, y, A(x, y)) \in G$.
+By :ref{#ex-ack-graph}, the graph $G = \{(x, y, z) : A(x, y) = z\}$ is primitive recursive. Hence $A(x, y) = \mu z\, G(x, y, z)$, and the search terminates since $(x, y, A(x, y)) \in G$.
 :::
 
 This is an instance of a general principle: a total function whose graph is recursive is recursive, by searching for the value.
@@ -170,23 +170,7 @@ According to the theorem, how many applications of the minimization operator suf
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that the recursive predicates are closed under the boolean connectives and bounded quantification, and that the recursive functions are closed under bounded minimization over recursive predicates.
-
-:::solution
-The total recursive functions contain the primitive recursive functions and are closed under composition and primitive recursion, since these operations preserve totality. The proofs given for primitive recursive predicates and functions in the lesson :ref{to="models-of-computation/primitive-recursion"} only use these closure properties, applied to characteristic functions, which are total. They therefore apply verbatim to recursive predicates and functions.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $g : \nat \to \nat$ be recursive and strictly increasing. Show that its range is a recursive set, and that the function $h(y) = $ "the least $x$ such that $g(x) \geq y$" is recursive.
-
-:::solution
-Since $g$ is strictly increasing, $g(x) \geq x$, so $y \in \operatorname{im} g \iff \exists x \leq y\ g(x) = y$, a bounded quantification over a recursive predicate. The function $h(y) = \mu x\, [g(x) \geq y]$ is a minimization of a recursive predicate, which is regular since $g(y) \geq y$; hence $h$ is recursive (and even $h(y) = \mu x \leq y\, [g(x) \geq y]$).
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-mu-domain difficulty=2 objective="See why the domain of a minimization is not the set of arguments where a zero exists."}
 Let $f(x) \simeq \mu y\, [g(x, y) = 0]$ for a partial recursive $g$. Is it true that $\dom f = \{x : \exists y\ g(x, y) = 0\}$? Give a proof or a counterexample.
 
 :::solution
@@ -203,3 +187,83 @@ The general recursive functions were defined by Gödel in 1934, following a sugg
 - S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952, chapters XI–XII.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §17.2.
 - B. Monin, L. Patey, *Computability theory*, chapter "Church–Turing thesis".
+
+:::::exercises
+::::exercise{#ex-mu-recursive-closure difficulty=1 objective="Transfer the closure properties of primitive recursive predicates to recursive predicates."}
+Show that the recursive predicates are closed under the boolean connectives and bounded quantification, and that the recursive functions are closed under bounded minimization over recursive predicates.
+
+:::solution
+The total recursive functions contain the primitive recursive functions and are closed under composition and primitive recursion, since these operations preserve totality. The proofs given for primitive recursive predicates and functions in the lesson :ref{to="models-of-computation/primitive-recursion"} only use these closure properties, applied to characteristic functions, which are total. They therefore apply verbatim to recursive predicates and functions.
+:::
+::::
+
+::::exercise{#ex-mu-increasing difficulty=2 objective="Bound a search by monotonicity, and recognize a regular minimization."}
+Let $g : \nat \to \nat$ be recursive and strictly increasing. Show that its range is a recursive set, and that the function $h(y) = $ "the least $x$ such that $g(x) \geq y$" is recursive.
+
+:::solution
+Since $g$ is strictly increasing, $g(x) \geq x$, so $y \in \operatorname{im} g \iff \exists x \leq y\ g(x) = y$, a bounded quantification over a recursive predicate. The function $h(y) = \mu x\, [g(x) \geq y]$ is a minimization of a recursive predicate, which is regular since $g(y) \geq y$; hence $h$ is recursive (and even $h(y) = \mu x \leq y\, [g(x) \geq y]$).
+:::
+::::
+
+::::exercise{#ex-mu-compute difficulty=1 objective="Compute minimizations of total and partial functions from the definition."}
+Determine the following partial functions.
+
+1. $f_1(x) \simeq \mu y\, [x \dotminus 2y = 0]$.
+2. $f_2(x) \simeq \mu y\, [\,|2y - x| = 0\,]$, where $|a - b| = (a \dotminus b) + (b \dotminus a)$.
+3. $g(x, y) \simeq \mu z\, [z + (y \dotminus x) = 0]$, then $f_3(x) \simeq \mu y\, [g(x, y) = 0]$ and $f_4(x) \simeq \mu y\, [g(x, y + x + 1) = 0]$.
+
+:::solution
+1. $x \dotminus 2y = 0$ if and only if $2y \geq x$, so $f_1(x) = \lceil x / 2 \rceil$, a total function.
+2. $|2y - x| = 0$ if and only if $2y = x$. So $f_2(x) = x / 2$ if $x$ is even; if $x$ is odd, all values are defined and non-zero, and $f_2(x)\diverge$.
+3. If $y \leq x$, then $y \dotminus x = 0$ and $g(x, y) = 0$, found at $z = 0$. If $y > x$, then $z + (y \dotminus x) \geq 1$ for all $z$, and $g(x, y)\diverge$. Hence $f_3(x) = 0$ for all $x$: the search stops at $y = 0$, since $g(x, 0) = 0$, before reaching the arguments where $g(x, \cdot)$ diverges. On the other hand $g(x, y + x + 1)\diverge$ for every $y$, so the search for $f_4(x)$ is stuck at $y = 0$, and $f_4$ is the empty function.
+:::
+::::
+
+::::exercise{#ex-mu-inverse-hypotheses difficulty=1 objective="See what the search for an inverse computes when a recursive function is only injective, or only surjective."}
+Let $f : \nat \to \nat$ be recursive and $g(y) \simeq \mu x\, [f(x) = y]$.
+
+1. If $f$ is injective, show that $g$ is a partial recursive function with domain $\operatorname{im} f$ and $g(f(x)) = x$ for all $x$.
+2. If $f$ is surjective, show that $g$ is recursive and $f(g(y)) = y$ for all $y$, and give an example where $g(f(x)) \neq x$ for some $x$.
+
+:::solution
+$g$ is partial recursive, as a minimization of the recursive function $(y, x) \mapsto \overline{\mathrm{sg}}(\chi_=(f(x), y))$, which is total, so $g(y)\converge$ if and only if some $x$ satisfies $f(x) = y$, and then $g(y)$ is the least such $x$, with $f(g(y)) = y$.
+
+1. The domain of $g$ is $\operatorname{im} f$. For $y = f(x)$, injectivity makes $x$ the only solution, so $g(f(x)) = x$.
+2. Every $y$ is in the image, so $g$ is total and $f(g(y)) = y$. For $f(x) = \lfloor x / 2 \rfloor$, $g(y) = 2y$, and $g(f(1)) = g(0) = 0 \neq 1$: $g$ is a right inverse of $f$, not an inverse.
+:::
+::::
+
+::::exercise{#ex-mu-graph-sigma difficulty=2 objective="Characterize the partial recursive functions by their graphs, using the normal form theorem."}
+Show that a partial function $f : \nat^k \rightharpoonup \nat$ is partial recursive if and only if there is a primitive recursive predicate $R \subseteq \nat^{k+2}$ such that, for all $\vec x$ and $y$, $f(\vec x)\converge = y$ if and only if $\exists s\ R(\vec x, y, s)$.
+
+:::solution
+Suppose $f$ is partial recursive. By :ref{#thm-kleene-normal-form}, $f(\vec x) \simeq U(\mu s\, T_k(e, \vec x, s))$ for some $e$. Let
+$$
+R(\vec x, y, s) \iff T_k(e, \vec x, s) \wedge \forall s' < s\ \neg T_k(e, \vec x, s') \wedge U(s) = y,
+$$
+which is primitive recursive. Then $\exists s\ R(\vec x, y, s)$ holds if and only if the least $s$ with $T_k(e, \vec x, s)$ exists and $U$ maps it to $y$, that is, if and only if $f(\vec x)\converge = y$.
+
+Conversely, given $R$, let $f'(\vec x) \simeq \pi_0\big(\mu z\, R(\vec x, \pi_0(z), \pi_1(z))\big)$, which is partial recursive. If $f(\vec x)\converge = y$, there is $s$ with $R(\vec x, y, s)$, so the search, over a total predicate, terminates; it returns some $z$ with $R(\vec x, \pi_0(z), \pi_1(z))$, and then $f(\vec x) = \pi_0(z)$ by the hypothesis, so $f'(\vec x) = f(\vec x)$. If $f(\vec x)\diverge$, no pair satisfies $R(\vec x, \cdot, \cdot)$ and the search diverges. Hence $f = f'$. (The search may find a $z$ other than $\langle y, s \rangle$ for the least $s$, but its first component is always $y$.)
+:::
+::::
+
+::::exercise{#ex-mu-regular-not-pr difficulty=1 lessons="ackermann-function" objective="Show that the primitive recursive functions are not closed under regular minimization."}
+Give a primitive recursive regular function $g : \nat^2 \to \nat$ such that $x \mapsto \mu z\, [g(x, z) = 0]$ is not primitive recursive.
+
+:::solution
+Let $G$ be the graph of the Ackermann function, primitive recursive by :ref{#ex-ack-graph}, and $g(x, z) = 1 \dotminus \chi_G(\pi_0(x), \pi_1(x), z)$. It is primitive recursive and regular, since $g(x, z) = 0$ for $z = A(\pi_0(x), \pi_1(x))$, and this is the only zero. So $f(x) = \mu z\, [g(x, z) = 0] = A(\pi_0(x), \pi_1(x))$. If $f$ were primitive recursive, so would be $A(a, b) = f(\langle a, b \rangle)$, contradicting :ref{#cor-ack-not-pr}.
+:::
+::::
+
+::::exercise{#ex-mu-partial-cases difficulty=2 lessons="register-machines" objective="Use the normal form theorem to define partial recursive functions by cases without evaluating the case that does not apply."}
+Let $f_1, f_2 : \nat^k \rightharpoonup \nat$ be partial recursive and $P \subseteq \nat^k$ recursive. Show that the partial function $f$ with $f(\vec x) \simeq f_1(\vec x)$ if $P(\vec x)$ and $f(\vec x) \simeq f_2(\vec x)$ otherwise is partial recursive. Why does the formula $f_1(\vec x) \cdot \chi_P(\vec x) + f_2(\vec x) \cdot \chi_{\neg P}(\vec x)$ not work?
+
+:::solution
+By :ref{#thm-kleene-normal-form}, there are $e_1, e_2$ with $f_i(\vec x) \simeq U(\mu s\, T_k(e_i, \vec x, s))$. Let
+$$
+f'(\vec x) \simeq U\big(\mu s\, [(P(\vec x) \wedge T_k(e_1, \vec x, s)) \vee (\neg P(\vec x) \wedge T_k(e_2, \vec x, s))]\big).
+$$
+The predicate in brackets is recursive, by :ref{#ex-mu-recursive-closure}, so $f'$ is partial recursive. If $P(\vec x)$, the predicate reduces to $T_k(e_1, \vec x, s)$ and $f'(\vec x) \simeq f_1(\vec x)$; otherwise $f'(\vec x) \simeq f_2(\vec x)$. Hence $f = f'$. The arithmetic formula is defined only when both $f_1(\vec x)$ and $f_2(\vec x)$ are, by the convention on undefined subexpressions: if $P(\vec x)$ holds and $f_2(\vec x)\diverge$, the formula is undefined while $f(\vec x) \simeq f_1(\vec x)$ may be defined. The normal form replaces the evaluation of both functions by a single search, which looks only for a computation of the function of the case that applies; :ref{#ex-urm-cases} does the same with a branching program.
+:::
+::::
+:::::

@@ -97,7 +97,7 @@ Compactness is the main tool of the course. It converts a statement about all se
 
 ## Exercises
 
-::::exercise{difficulty=1 #ex-clopen}
+::::exercise{#ex-clopen difficulty=1 objective="Use compactness to characterize the classes that are both open and closed."}
 Show that a class is both open and closed if and only if it is a finite union of cylinders.
 
 :::solution
@@ -105,7 +105,7 @@ A finite union of cylinders is open, and it is closed as a finite union of close
 :::
 ::::
 
-::::exercise{difficulty=2 #ex-uniform-continuity}
+::::exercise{#ex-uniform-continuity difficulty=2 objective="Derive a uniform bound on the use of a functional that is total on Cantor space from weak König's lemma."}
 Let $\Phi$ be a Turing functional such that $\Phi^X$ is total for every $X \in \cs$. Show that there is a function $u$ such that, for every $X$ and every $n$, the computation $\Phi^X(n)$ converges with use at most $u(n)$. Deduce that $\Phi^X(n)$ is computed from the $u(n)$ first bits of $X$, uniformly in $X$.
 
 :::solution
@@ -115,9 +115,77 @@ Fix $n$, and let $T_n$ be the set of strings $\sigma$ such that $\Phi^\sigma(n)[
 
 ## Notes and references
 
-König's lemma is due to Dénes Kőnig (1927). Its restriction to binary trees, weak König's lemma, is the axiom of the system $\mathsf{WKL}_0$ of reverse mathematics (Simpson, Chapter IV). The topology of Cantor space is standard; Soare's *Turing Computability* treats open and closed classes and the compactness theorem in Sections 8.1–8.3, and Nies in Section 1.8, where :ref{#prop-closed-tree} and its dual form are Facts 1.8.3 and 1.8.4, and the first exercise is Proposition 1.8.6. The derivation of compactness from weak König's lemma has a converse in reverse mathematics: over $\mathsf{RCA}_0$, weak König's lemma is equivalent to the Heine–Borel covering lemma for the unit interval (Simpson, Theorem IV.1.2).
+König's lemma is due to Dénes Kőnig (1927). Its restriction to binary trees, weak König's lemma, is the axiom of the system $\mathsf{WKL}_0$ of reverse mathematics (Simpson, Chapter IV). The topology of Cantor space is standard; Soare's *Turing Computability* treats open and closed classes and the compactness theorem in Sections 8.1–8.3, and Nies in Section 1.8, where :ref{#prop-closed-tree} and its dual form are Facts 1.8.3 and 1.8.4, and :ref{#ex-clopen} is Proposition 1.8.6. The derivation of compactness from weak König's lemma has a converse in reverse mathematics: over $\mathsf{RCA}_0$, weak König's lemma is equivalent to the Heine–Borel covering lemma for the unit interval (Simpson, Theorem IV.1.2).
 
 - D. Kőnig, *Über eine Schlussweise aus dem Endlichen ins Unendliche*, Acta Scientiarum Mathematicarum (Szeged) 3 (1927), 121–130.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 8.1–8.3.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.8.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section IV.1.
+
+:::::exercises
+::::exercise{#ex-classify-open-closed difficulty=1 objective="Decide on examples whether a class of Cantor space is open, closed, both or neither."}
+Identify sequences with sets of integers. For each of the following classes, decide whether it is open, closed, both or neither:
+
+1. the class of sets with at most two elements;
+2. the class of sets $X$ such that $X(n) = X(n+1) = 1$ for some $n$;
+3. the class of sets all of whose elements are even;
+4. the class of sets $X$ with $X(0) = 1$ or $X(5) = 0$;
+5. the class of cofinite sets.
+
+:::solution
+A class is open if and only if each of its members has a prefix whose cylinder is contained in the class; so a class is not open as soon as some member has no such prefix, and not closed as soon as some non-member has every cylinder around it meeting the class.
+
+1. *Closed, not open.* The complement is the union of the cylinders $[\sigma]$ with $\sigma$ containing three ones, so it is open. The class is not open: it contains $0^\infty$, and every cylinder $[0^n]$ contains the set $0^n 1 1 1 0^\infty$, which has three elements.
+2. *Open, not closed.* It is the union of the cylinders $[\sigma]$ with $\sigma$ containing two consecutive ones. Its complement contains $0^\infty$, and every cylinder $[0^n]$ contains $0^n 1 1 0^\infty$, which is in the class; so the complement is not open.
+3. *Closed, not open.* The complement is the union of the cylinders $[\sigma]$ such that $\sigma(n) = 1$ for some odd $n < |\sigma|$. The class contains $0^\infty$, and every cylinder $[0^n]$ contains the set $\{2n + 1\}$, which has an odd element.
+4. *Both.* Membership depends only on the first six bits: the class is the union of the cylinders $[\sigma]$ with $|\sigma| = 6$ and $\sigma(0) = 1$ or $\sigma(5) = 0$, and its complement is the union of the other cylinders of strings of length $6$.
+5. *Neither.* Every cylinder $[\sigma]$ contains the finite set $\sigma 0^\infty$, which is not cofinite, so the class contains no cylinder at all, and it is not empty: it is not open. Its complement contains $0^\infty$, and every cylinder $[0^n]$ contains the cofinite set $0^n 1^\infty$: the complement is not open.
+:::
+::::
+
+::::exercise{#ex-wkl-from-compactness difficulty=1 objective="Derive weak König's lemma from the compactness of Cantor space, the converse of the proof given in the lesson."}
+Assume only that every cover of $\cs$ by cylinders has a finite subcover. Deduce weak König's lemma, without using :ref{#lem-weak-konig}.
+
+:::solution
+Let $T$ be a binary tree without path; we show that $T$ is finite. Every sequence $X$ has a prefix outside $T$, since otherwise $X$ would be a path. So the cylinders $[\sigma]$ with $\sigma \notin T$ cover $\cs$, and finitely many of them, say $[\sigma_1], \dots, [\sigma_k]$ with each $\sigma_i \notin T$, already cover it; $k \geq 1$ since $\cs$ is not empty. Let $n$ be the largest length of the $\sigma_i$. Let $\tau$ be a string of length $n$, and $X$ a sequence extending $\tau$. Then $X \in [\sigma_i]$ for some $i$; the strings $\sigma_i$ and $\tau$ are both prefixes of $X$ and $|\sigma_i| \leq |\tau|$, so $\sigma_i \preceq \tau$. Since $\sigma_i \notin T$ and $T$ is closed under prefixes, $\tau \notin T$. So $T$ has no node of length $n$, hence none of length at least $n$, and $T \subseteq 2^{\leq n}$ is finite. By contraposition, an infinite binary tree has a path.
+:::
+::::
+
+::::exercise{#ex-continuous-finite-range difficulty=1 objective="Apply compactness to show that a locally constant function on Cantor space depends on a bounded prefix."}
+Let $f : \cs \to \nat$ be **locally constant**: every $X$ has a prefix $\sigma$ such that $f$ is constant on $[\sigma]$. Show that there is $n$ such that $f(X)$ depends only on $X \uh n$, and that $f$ takes finitely many values.
+
+:::solution
+Let $W$ be the set of strings $\sigma$ such that $f$ is constant on $[\sigma]$. By hypothesis $\cs = [W]^{\prec}$, so by :ref{#prop-cantor-compact} there are $\sigma_1, \dots, \sigma_k \in W$ with $\cs = [\sigma_1] \cup \dots \cup [\sigma_k]$. Let $n$ be the largest length of the $\sigma_i$. If $X \uh n = Y \uh n$, choose $i$ with $X \in [\sigma_i]$; then $\sigma_i \preceq X \uh n = Y \uh n$, so $Y \in [\sigma_i]$, and $f(X) = f(Y)$ since $f$ is constant on $[\sigma_i]$. The values of $f$ are its values on the $k$ cylinders $[\sigma_i]$, one on each, so there are at most $k$ of them.
+:::
+::::
+
+::::exercise{#ex-closed-sequential difficulty=1 objective="Characterize the closed classes of Cantor space by limits of sequences."}
+Say that a sequence $(X_k)_{k \in \nat}$ of elements of $\cs$ **converges** to $X$ if for every $n$, $X_k \uh n = X \uh n$ for all sufficiently large $k$. Show that a class $\mathcal P$ is closed if and only if the limit of every convergent sequence of members of $\mathcal P$ belongs to $\mathcal P$.
+
+:::solution
+Let $\mathcal P$ be closed, $X_k \in \mathcal P$ converging to $X$, and suppose $X \notin \mathcal P$. The complement of $\mathcal P$ is open, so it contains a cylinder $[\sigma]$ with $\sigma \prec X$. For $k$ large enough, $X_k \uh |\sigma| = X \uh |\sigma| = \sigma$, so $X_k \in [\sigma]$ is not in $\mathcal P$, a contradiction.
+
+Conversely, suppose that $\mathcal P$ contains the limits of its convergent sequences, and let $Y \notin \mathcal P$. Some cylinder $[Y \uh n]$ is disjoint from $\mathcal P$: otherwise, choose $X_n \in [Y \uh n] \cap \mathcal P$ for every $n$; for every $m$ and every $k \geq m$, $X_k \uh m = Y \uh m$, so $(X_n)$ converges to $Y$, and $Y \in \mathcal P$, a contradiction. So the complement of $\mathcal P$ is the union of the cylinders disjoint from $\mathcal P$, which is open, and $\mathcal P$ is closed.
+:::
+::::
+
+::::exercise{#ex-extendible-subtree difficulty=1 objective="Show that the extendible nodes of a tree form the least tree with the same paths."}
+Let $T$ be a binary tree and $E$ the set of its extendible nodes. Show that $E$ is a tree with $[E] = [T]$, that every node of $E$ has an immediate successor in $E$, and that $E \subseteq S$ for every binary tree $S$ with $[S] = [T]$.
+
+:::solution
+If $\sigma \in E$ and $\tau \preceq \sigma$, a path through $\sigma$ also goes through $\tau$, so $\tau \in E$: $E$ is a tree. Since $E \subseteq T$, $[E] \subseteq [T]$. If $X \in [T]$, every prefix of $X$ is extendible, witnessed by $X$ itself, so $X \in [E]$. If $\sigma \in E$ and $X$ is a path through $\sigma$, then $X \uh (|\sigma| + 1)$ is an immediate successor of $\sigma$, extendible by $X$. Finally, let $S$ be a tree with $[S] = [T]$ and $\sigma \in E$; a path $X \in [T]$ through $\sigma$ belongs to $[S]$, so its prefix $\sigma$ belongs to $S$. In other words, $E$ is the tree $\{ X \uh n : X \in [T], n \in \nat \}$ of :ref{#prop-closed-tree}, and it is the least tree whose class of paths is $[T]$. Adapted from Soare 2016, Exercise 3.7.3(a).
+:::
+::::
+
+::::exercise{#ex-cantor-metric difficulty=1 objective="Describe the topology of Cantor space by an ultrametric whose balls are the cylinders."}
+For $X \neq Y$ in $\cs$, let $d(X, Y) = 2^{-n}$, where $n$ is the least position with $X(n) \neq Y(n)$, and let $d(X, X) = 0$. Show that $d$ is a metric satisfying $d(X, Z) \leq \max(d(X, Y), d(Y, Z))$, that the ball $\{ Y : d(X, Y) < 2^{-n} \}$ is the cylinder $[X \uh (n+1)]$, and that the open classes of :ref{#def-open-closed} are exactly the open sets of the metric $d$.
+
+:::solution
+Symmetry and $d(X, Y) = 0 \iff X = Y$ are immediate. Let $X, Y, Z$ be given, and suppose that $X$ and $Y$ agree below $n$ and $Y$ and $Z$ agree below $m$. Then $X$ and $Z$ agree below $\min(n, m)$, so $d(X, Z) \leq 2^{-\min(n, m)}$. Applying this with $n$ and $m$ the first positions of difference (or arbitrarily large if the sequences are equal) gives $d(X, Z) \leq \max(d(X, Y), d(Y, Z))$, which implies the triangle inequality.
+
+For $Y \neq X$, $d(X, Y) < 2^{-n}$ if and only if the first difference between $X$ and $Y$ is at a position greater than $n$, that is, $X \uh (n+1) = Y \uh (n+1)$; and $Y = X$ belongs to both sets. So the ball is $[X \uh (n+1)]$.
+
+If $\mathcal U = [W]^{\prec}$ and $X \in \mathcal U$, then $X \in [\sigma] \subseteq \mathcal U$ for some $\sigma \in W$, and the ball $[X \uh (|\sigma| + 1)]$ is contained in $[\sigma]$; so $\mathcal U$ is open for $d$. Conversely, if every $X \in \mathcal U$ has a ball $[X \uh (n_X + 1)]$ contained in $\mathcal U$, then $\mathcal U$ is the union of these cylinders.
+:::
+::::
+:::::

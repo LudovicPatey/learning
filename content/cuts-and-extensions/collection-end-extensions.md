@@ -97,11 +97,11 @@ In the proof that induction gives strong collection, why is the set $\{ x < a : 
   No relation between $b$ and $a$ is claimed.
 :::
 
-The same theorem holds for strong $\Sigma_{n+1}$ collection, as the exercise below shows.
+The same theorem holds for strong $\Sigma_{n+1}$ collection (:ref{#ex-strong-sigma-collection}).
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-strong-sigma-collection difficulty=1 objective="Reduce strong $\Sigma_{n+1}$ collection to strong $\Pi_n$ collection by pairing a witness with its own witness."}
 The **strong $\Sigma_{n+1}$ collection** scheme consists of the universal closures of $\exists b\ \forall x < a\ (\exists y\ \varphi(x, y) \rightarrow \exists y < b\ \varphi(x, y))$ for $\varphi \in \Sigma_{n+1}$. Show that, over $\mathrm I\Delta_0$, it is equivalent to strong $\Pi_n$ collection, hence to $\mathrm I\Sigma_{n+1}$.
 
 :::solution
@@ -118,3 +118,47 @@ A $\Pi_n$ formula is $\Sigma_{n+1}$, so strong $\Sigma_{n+1}$ collection implies
 - M. Sun, *The Kaufmann–Clote question on end extensions of models of arithmetic and the weak regularity principle*, Journal of Symbolic Logic, 2025 (arXiv:2409.03527).
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 6.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Sections 1(c) and 1(e).
+
+:::::exercises
+::::exercise{#ex-cut-bsigma1 difficulty=1 objective="Apply the case $n = 0$ of the Paris–Kirby theorem to proper cuts, and deduce that a model failing collection has no end extension satisfying bounded induction."}
+Let $K$ be a model of $\mathrm I\Delta_0$ and $I$ a proper cut of $K$ closed under addition and multiplication. Show that $I \models \mathrm B\Sigma_1$. Deduce that a model of $\mathrm{PA}^-$ in which $\mathrm B\Sigma_1$ fails has no proper end extension satisfying $\mathrm I\Delta_0$.
+
+:::solution
+By :ref{#lem-cut-model}, $I$ is a substructure of $K$, a model of $\mathrm I\Delta_0$, hence of $\mathrm{PA}^-$, and $I \subseteq_e K$; so $I \preccurlyeq_0 K$ by :ref{#lem-delta0-absolute}. As $I \neq K$ and $K \models \mathrm I\Delta_0$, which is $\mathrm I\Sigma_0$, :ref{#thm-end-ext-collection} with $n = 0$ gives $I \models \mathrm B\Sigma_1$.
+
+Let $N \models \mathrm{PA}^-$, and suppose $N \subseteq_e K$, $N \neq K$, with $K \models \mathrm I\Delta_0$. As a substructure, $N$ is closed under addition, multiplication and successor; as an initial segment, it is a proper cut of $K$. By the first part, $N \models \mathrm B\Sigma_1$. For instance, the models of $\mathrm I\Delta_0 + \neg \mathrm B\Sigma_1$ of the course on induction and conservation (:ref{to="induction-conservation/separations"}) have no proper end extension satisfying $\mathrm I\Delta_0$.
+:::
+::::
+
+::::exercise{#ex-end-ext-elementarity-needed difficulty=2 objective="Use a cut without exponentiation to show that the elementarity hypothesis of the Paris–Kirby theorem is needed, and that its conclusion is optimal for $n = 0$."}
+Let $M$, $a$ and $I_a$ be as in :ref{#ex-idelta0-not-exp}. Show that $I_a$ is a proper cut of $M$ closed under addition and multiplication, that $I_a \models \mathrm B\Sigma_1$, and that $I_a$ satisfies neither $\mathrm I\Sigma_1$ nor $\mathrm B\Sigma_2$. Deduce that in :ref{#thm-end-ext-collection} the conclusion $\mathrm B\Sigma_1$ cannot be improved to $\mathrm I\Sigma_1$ for $n = 0$, and that for $n = 1$ the hypothesis $M \preccurlyeq_1 K$ cannot be weakened to $M \preccurlyeq_0 K$.
+
+:::solution
+$I_a = \{ b \in M : b < t(a) \text{ for some term } t \}$ is an initial segment containing $0$. If $b < t(a)$ and $b' < t'(a)$, then $b + 1 \leq t(a) < t(a) + 1$, $b + b' < t(a) + t'(a)$ and $b \cdot b' \leq t(a) \cdot t'(a) < t(a) \cdot t'(a) + 1$, all values of terms; so $I_a$ is closed under successor, addition and multiplication. It is proper, since $2^a \notin I_a$ (:ref{#ex-idelta0-not-exp}). $M$ satisfies the theory of $\nat$, so $M \models \mathrm{PA}$, and :ref{#ex-cut-bsigma1} gives $I_a \models \mathrm B\Sigma_1$.
+
+By :ref{#ex-idelta0-not-exp}, $I_a \not\models \mathrm{exp}$, so $I_a \not\models \mathrm I\Sigma_1$ (:ref{#prop-isigma1-exp}) and $I_a \not\models \mathrm B\Sigma_2$ (:ref{#thm-fo-paris-kirby}).
+
+For $n = 0$: $I_a \subseteq_e M$, $I_a \neq M$, $I_a \preccurlyeq_0 M$ and $M \models \mathrm I\Delta_0$, and $I_a$ satisfies $\mathrm B\Sigma_1$ but not $\mathrm I\Sigma_1$. For $n = 1$: $M \models \mathrm I\Sigma_1$ and all hypotheses hold except $\Sigma_1$-elementarity, which is replaced by $I_a \preccurlyeq_0 M$; the conclusion $\mathrm B\Sigma_2$ fails. Directly, $I_a \not\preccurlyeq_1 M$: the $\Sigma_1$ formula $\exists y\ \varepsilon(a, y)$ holds in $M$ and fails in $I_a$.
+:::
+::::
+
+::::exercise{#ex-elementary-end-ext-pa difficulty=1 objective="Combine the Paris–Kirby theorem and its converse to characterize the models of PA by their end extensions."}
+Show that if $M \models \mathrm{PA}^-$ has a proper elementary end extension $K \models \mathrm{PA}$, then $M \models \mathrm{PA}$. Show, with :ref{#fact-end-ext-converse}, that a countable model $M$ of $\mathrm I\Delta_0$ satisfies $\mathrm{PA}$ if and only if, for every $n \geq 1$, it has a proper $\Sigma_{n+1}$-elementary end extension satisfying $\mathrm I\Delta_0$.
+
+:::solution
+For every $n$, $K \models \mathrm I\Sigma_n$ and $M \preccurlyeq_n K$, so :ref{#thm-end-ext-collection} gives $M \models \mathrm B\Sigma_{n+1}$, hence $M \models \mathrm I\Sigma_n$ by :ref{#thm-fo-paris-kirby}. So $M \models \mathrm{PA}$.
+
+For the second statement, if $M \models \mathrm{PA}$, then $M \models \mathrm B\Sigma_{n+1}$ for every $n$ (:ref{#thm-fo-parsons}), and :ref{#fact-end-ext-converse} gives the extensions. Conversely, the extensions give $M \models \mathrm B\Sigma_{n+1}$ for every $n \geq 1$, by :ref{#fact-end-ext-converse}, hence $M \models \mathrm I\Sigma_n$ for every $n$, by :ref{#thm-fo-paris-kirby}.
+:::
+::::
+
+::::exercise{#ex-strong-collection-coded difficulty=2 objective="Give a second proof that strong collection implies induction, through the characterization of induction by coded sets."}
+Give a second proof that, over $\mathrm I\Delta_0 + \mathrm{exp}$, strong $\Pi_n$ collection implies $\mathrm I\Sigma_{n+1}$, by showing that every $\Sigma_{n+1}$-definable set is piecewise coded and applying :ref{#thm-friedman-coded}.
+
+:::solution
+By induction on $n$. Let $M \models \mathrm I\Delta_0 + \mathrm{exp}$ satisfy strong $\Pi_n$ collection. If $n \geq 1$, it satisfies strong $\Pi_{n-1}$ collection, since $\Pi_{n-1}$ formulas are $\Pi_n$, so $M \models \mathrm I\Sigma_n$ by the induction hypothesis, and $M \models \mathrm B\Sigma_n$ by :ref{#thm-fo-parsons}. Let $\varphi(x) \equiv \exists y\ \eta(x, y)$, with $\eta \in \Pi_n$ after contraction, and $a \in M$. Strong collection gives $b$ such that, for $x < a$, $\varphi(x) \leftrightarrow \psi(x)$, where $\psi(x) \equiv \exists y < b\ \eta(x, y)$.
+
+If $n = 0$, $\psi$ is bounded, and :ref{#thm-delta0-comprehension} gives $c$ with $\forall x < a\ (x \in c \leftrightarrow \psi(x))$. If $n \geq 1$, $\psi$ is equivalent in $M$ to a $\Pi_n$ formula (:ref{#lem-fo-collection-closure}), so $\neg \psi$ is equivalent to a $\Sigma_n$ formula. By :ref{#thm-friedman-coded}, since $M \models \mathrm I\Sigma_n$, some $c'$ satisfies $\forall x < a\ (x \in c' \leftrightarrow \neg \psi(x))$, and by :ref{#thm-delta0-comprehension} some $c$ codes $\{ x < a : x \notin c' \}$. In both cases $\forall x < a\ (x \in c \leftrightarrow \varphi(x))$. So every $\Sigma_{n+1}$-definable subset of $M$ is piecewise coded, and $M \models \mathrm I\Sigma_{n+1}$ by :ref{#thm-friedman-coded}.
+:::
+::::
+:::::

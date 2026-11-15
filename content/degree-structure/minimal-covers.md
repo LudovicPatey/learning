@@ -1,7 +1,7 @@
 ---
 title: Minimal covers and minimal upper bounds
 summary: Relativized splitting trees give a minimal cover of every degree and a minimal upper bound of every strictly increasing sequence of degrees; PA degrees, c.e. degrees and 1-generic degrees are not minimal, and the non-computability requirements of Spector's construction are redundant.
-duration: 50
+duration: 45
 prerequisites: [minimal-degrees, pi01-classes/pa-degrees]
 ---
 
@@ -83,7 +83,7 @@ Let $T_0$ be the coding subtree of the identity tree for $B_0$; it is $B_0$-comp
 *$\deg_T(X)$ is a minimal upper bound.* It is an upper bound by the previous paragraph. Let $Y \leq_T X$ compute every $B_n$, say $Y = \Phi^X_e$. Let $S$ be the tree of step $e$. It is $B_e$-computable and $X \in [S]$. If $S$ avoids $e$-splits, then $Y \leq_T B_e$ by :ref{#lem-relativized-splitting} (3); since $B_{e+1} \leq_T Y$, this gives $\dbf_{e+1} \leq \dbf_e$, a contradiction. So $S$ is $e$-splitting, and $X \leq_T Y \oplus B_e \equiv_T Y$. Hence no upper bound of the sequence is strictly below $\deg_T(X)$.
 :::
 
-The strictness of the sequence is used once, to exclude the case where $\Phi_e$ loses information. Since a countable ideal without greatest element contains a strictly increasing cofinal sequence, every such ideal has a minimal upper bound. Sacks showed that there are continuum many; two distinct ones $\mathbf m \neq \mathbf m'$ again exclude a least upper bound $\mathbf l$, which would satisfy $\mathbf l \leq \mathbf m$, hence $\mathbf l = \mathbf m$ by minimality, and likewise $\mathbf l = \mathbf m'$.
+The strictness of the sequence is used once, to exclude the case where $\Phi_e$ loses information. Since a countable ideal without greatest element contains a strictly increasing cofinal sequence, every such ideal has a minimal upper bound. Sacks showed that there are continuum many (:ref{#ex-mub-continuum}); two distinct ones $\mathbf m \neq \mathbf m'$ again exclude a least upper bound $\mathbf l$, which would satisfy $\mathbf l \leq \mathbf m$, hence $\mathbf l = \mathbf m$ by minimality, and likewise $\mathbf l = \mathbf m'$.
 
 :::quiz[minimal upper bounds]
 In the proof of :ref{#thm-minimal-upper-bound}, why is the dichotomy at step $e$ taken relative to $B_e$, and not relative to the final set $X$ or to a fixed oracle?
@@ -115,27 +115,21 @@ Nevertheless, every PA degree bounds a minimal degree (Groszek and Slaman, 1997)
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that there is no non-empty $\Pi^0_1$ class all of whose members have minimal degree.
+The two exercises below return to Spector's construction of the previous lesson.
 
-:::solution
-Let $\mathcal P = [T]$ be non-empty, with $T$ computable, and $X$ its leftmost path: for every $n$, $X \uh n$ is the lexicographically least string of length $n$ that is extendible in $T$. Let $L$ be the set of strings $\sigma$ that are lexicographically smaller than $X \uh |\sigma|$. Then $\sigma \in L$ if and only if every string $\tau$ of length $|\sigma|$ with $\tau \leq_{\mathrm{lex}} \sigma$ satisfies $[\tau] \cap \mathcal P = \emptyset$; this is a finite conjunction of $\Sigma^0_1$ conditions (:ref{#prop-pi01-emptiness}), so $L$ is c.e. The set $L$ computes $X$: $X \uh n$ is the least string of length $n$ not in $L$. Conversely $X$ computes $L$. So $X$ has c.e. degree. If $X$ is computable, it does not have minimal degree; otherwise its degree is c.e. and non-zero, hence not minimal by :ref{#cor-no-minimal-ce}.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-continuum-minimal difficulty=2 objective="Branch Spector's construction according to a parameter to obtain continuum many minimal degrees."}
 Show that there are continuum many minimal degrees.
 
 :::hint
-Modify the construction as in the last exercise of :ref{to="immunity-growth/computably-dominated"}: at each step, choose between the two subtrees above $T(0)$ and $T(1)$ according to a bit of a parameter $Z \in \cs$.
+Modify the construction as in :ref{#ex-ftree-continuum}: at each step, choose between the two subtrees above $T(0)$ and $T(1)$ according to a bit of a parameter $Z \in \cs$.
 :::
 
 :::solution
-Fix the subtrees given by the lemmas, choosing the least witness in Case 1, so that each step is determined by the current tree. For $Z \in \cs$, run the construction, but at each even step $2e+2$ pass to the full subtree of $S$ above $S(Z(e))$ instead of $S(0)$. Let $X_Z$ be the union of the roots. As before, $X_Z$ has minimal degree. If $Z$ and $Z'$ first differ at $e$, the constructions coincide up to step $2e + 1$ and produce the same $S$; then $X_Z$ and $X_{Z'}$ extend the incompatible nodes $S(0)$ and $S(1)$, so $X_Z \neq X_{Z'}$. Each degree contains countably many sets, so the continuum many sets $X_Z$ have continuum many degrees.
+Fix the subtrees given by the lemmas, choosing the least witness in Case 1, so that each step is determined by the current tree. For $Z \in \cs$, run the construction, but at each even step $2e+2$ pass to the full subtree of $S$ above $S(Z(e))$ instead of $S(0)$. Let $X_Z$ be the union of the roots. As before, $X_Z$ has minimal degree. If $Z$ and $Z'$ first differ at $e$, the constructions coincide up to step $2e + 1$ and produce the same $S$; then $X_Z$ and $X_{Z'}$ extend the incompatible nodes $S(0)$ and $S(1)$, so $X_Z \neq X_{Z'}$. Each degree contains countably many sets, so the continuum many sets $X_Z$ have continuum many degrees. This is Soare's Exercise 12.6.2.
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-posner-epstein difficulty=2 objective="Design a functional that defeats both cases of the splitting dichotomy on a computable path, to show that the non-computability steps are redundant."}
 Let $X$ be a set such that, for every $e$, $X$ is a path of some computable f-tree that is $e$-splitting or avoids $e$-splits. Show that $X$ is not computable. Conclude that the odd steps of the proof of :ref{#thm-minimal-degree} can be omitted.
 
 :::hint
@@ -155,7 +149,7 @@ This contradicts the choice of $T$. In the proof of :ref{#thm-minimal-degree}, t
 
 ## Notes and references
 
-Monin and Patey present minimal covers and strong minimal covers in their chapter on the structure of the degrees. Soare gives the minimal upper bound theorem, with a hint, as Exercise 12.6.1 of *Turing Computability*, crediting it to Sacks; Monin and Patey state that there are continuum many minimal upper bounds, after Sacks's monograph. The non-computability lemma of the third exercise is Lemma 12.2.1 in Soare, credited to Posner and Epstein. That no PA degree is minimal, with the class $\mathcal P$ used here, is an exercise in Monin and Patey; Groszek and Slaman (1997) proved that every PA degree bounds a minimal degree. Kumabe built a minimal degree that computes a DNC function; the proof was published by Kumabe and Lewis (2009), and recast as a forcing with **bushy trees** by Khan and Miller (2017). Jockusch and Posner (1978) showed that every minimal degree $\abf$ satisfies $\abf'' = (\abf \vee \obf')'$. Lachlan and Lebeuf (1976) showed, by elaborations of the tree method, that every countable upper semilattice with least element is isomorphic to an initial segment of $\mathcal D$; Lerman's monograph presents these constructions.
+Monin and Patey present minimal covers and strong minimal covers in their chapter on the structure of the degrees. Soare gives the minimal upper bound theorem, with a hint, as Exercise 12.6.1 of *Turing Computability*, crediting it to Sacks; Monin and Patey state that there are continuum many minimal upper bounds, after Sacks's monograph. The non-computability lemma of :ref{#ex-posner-epstein} is Lemma 12.2.1 in Soare, credited to Posner and Epstein. That no PA degree is minimal, with the class $\mathcal P$ used here, is an exercise in Monin and Patey; Groszek and Slaman (1997) proved that every PA degree bounds a minimal degree. Kumabe built a minimal degree that computes a DNC function; the proof was published by Kumabe and Lewis (2009), and recast as a forcing with **bushy trees** by Khan and Miller (2017). Jockusch and Posner (1978) showed that every minimal degree $\abf$ satisfies $\abf'' = (\abf \vee \obf')'$. Lachlan and Lebeuf (1976) showed, by elaborations of the tree method, that every countable upper semilattice with least element is isomorphic to an initial segment of $\mathcal D$; Lerman's monograph presents these constructions.
 
 - G. E. Sacks, *Degrees of Unsolvability*, Annals of Mathematics Studies 55, Princeton University Press, 1963 (revised edition 1966).
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Section 12.2 and Exercise 12.6.1.
@@ -166,3 +160,75 @@ Monin and Patey present minimal covers and strong minimal covers in their chapte
 - A. H. Lachlan and R. Lebeuf, *Countable initial segments of the degrees of unsolvability*, Journal of Symbolic Logic 41 (1976), 289–300.
 - A. E. M. Lewis, *Strong minimal covers and a question of Yates: the story so far*, in *Logic Colloquium 2006*, Lecture Notes in Logic 32, 2009, 213–228.
 - R. A. Shore, *Conjectures and questions from Gerald Sacks's Degrees of Unsolvability*, Archive for Mathematical Logic 36 (1997), 233–253.
+
+:::::exercises
+::::exercise{#ex-pi01-no-minimal difficulty=1 objective="Show that the leftmost path of a $\Pi^0_1$ class has c.e. degree, and deduce that no non-empty $\Pi^0_1$ class consists of minimal degrees."}
+Show that there is no non-empty $\Pi^0_1$ class all of whose members have minimal degree.
+
+:::solution
+Let $\mathcal P = [T]$ be non-empty, with $T$ computable, and $X$ its leftmost path: for every $n$, $X \uh n$ is the lexicographically least string of length $n$ that is extendible in $T$. Let $L$ be the set of strings $\sigma$ that are lexicographically smaller than $X \uh |\sigma|$. Then $\sigma \in L$ if and only if every string $\tau$ of length $|\sigma|$ with $\tau \leq_{\mathrm{lex}} \sigma$ satisfies $[\tau] \cap \mathcal P = \emptyset$; this is a finite conjunction of $\Sigma^0_1$ conditions (:ref{#prop-pi01-emptiness}), so $L$ is c.e. The set $L$ computes $X$: $X \uh n$ is the least string of length $n$ not in $L$. Conversely $X$ computes $L$. So $X$ has c.e. degree. If $X$ is computable, it does not have minimal degree; otherwise its degree is c.e. and non-zero, hence not minimal by :ref{#cor-no-minimal-ce}. Adapted from an exercise of Monin and Patey, chapter on the structure of the degrees.
+:::
+::::
+
+::::exercise{#ex-minimal-cover-join difficulty=1 objective="Characterize minimal covers through joins with the degrees below them."}
+Let $\abf < \bbf$. Show that $\bbf$ is a minimal cover of $\abf$ if and only if every degree $\cbf \leq \bbf$ satisfies $\cbf \leq \abf$ or $\abf \vee \cbf = \bbf$.
+
+:::solution
+Suppose $\bbf$ is a minimal cover of $\abf$, and let $\cbf \leq \bbf$. Then $\abf \leq \abf \vee \cbf \leq \bbf$, so $\abf \vee \cbf$ is $\abf$ or $\bbf$. In the first case $\cbf \leq \abf$. Conversely, suppose the condition holds and $\abf < \cbf < \bbf$. Then $\cbf \not\leq \abf$, since $\abf \leq \cbf$ and $\cbf \neq \abf$; and $\abf \vee \cbf = \cbf \neq \bbf$. This contradicts the condition. For $\abf = \obf$, the condition says that every non-zero degree below $\bbf$ is $\bbf$ itself.
+:::
+::::
+
+::::exercise{#ex-ideal-mub difficulty=1 objective="Extract a strictly increasing cofinal sequence from a countable ideal without greatest element." lessons="exact-pairs"}
+Let $\mathcal I$ be a countable ideal without greatest element. Show that there is a strictly increasing sequence $\dbf_0 < \dbf_1 < \cdots$ of elements of $\mathcal I$ such that every element of $\mathcal I$ is below some $\dbf_n$. Deduce that every countable ideal has a minimal upper bound.
+
+:::solution
+List the elements of $\mathcal I$ as $\cbf_0, \cbf_1, \dots$. Let $\dbf_0 = \cbf_0$. Given $\dbf_n \in \mathcal I$, it is not the greatest element of $\mathcal I$, so some $\cbf_k$ satisfies $\cbf_k \not\leq \dbf_n$; take the least such $k$, and let $\dbf_{n+1} = \dbf_n \vee \cbf_k \vee \cbf_{n+1}$. It belongs to $\mathcal I$, by closure under $\vee$, and $\dbf_n < \dbf_{n+1}$, since $\dbf_n \leq \dbf_{n+1}$ and $\cbf_k \leq \dbf_{n+1}$, $\cbf_k \not\leq \dbf_n$. Every $\cbf_n$ is below $\dbf_n$, by construction for $n \geq 1$, and $\cbf_0 = \dbf_0$.
+
+The upper bounds of $\mathcal I$ are then exactly the upper bounds of the sequence: an upper bound of the sequence is above every $\cbf_n$, and the $\dbf_n$ belong to $\mathcal I$. So a minimal upper bound of the sequence, given by :ref{#thm-minimal-upper-bound}, is a minimal upper bound of $\mathcal I$. If $\mathcal I$ has a greatest element, this element is its least upper bound, hence its only minimal upper bound. The two cases give a minimal upper bound for every countable ideal.
+:::
+::::
+
+::::exercise{#ex-minimal-cover-bound difficulty=2 objective="Relativize the effectivity analysis of Spector's construction."}
+Show that for every set $A$, the set $B$ of :ref{#thm-minimal-cover} can be chosen computable in $A''$.
+
+:::solution
+We follow the analysis of :ref{#thm-minimal-degree}, relative to $A$. An $A$-computable f-tree is given by an index $k$ with $T = \Phi^A_k$. The initial tree $T_0(\rho) = \rho \oplus (A \uh |\rho|)$ has an index computable outright. At a step of the first kind, for the index of $T$ and $e$, one asks whether $\Phi^A_e(i)\converge = T(0)(i)$, where $i$ is the first position where $T(0)$ and $T(1)$ differ, found with $A$; this is a $\Sigma^0_1$ question relative to $A$, answered by $A'$, hence by $A''$. The index of the full subtree chosen is computable from the answer. At a step of the second kind, the relation "$T(\rho)$ and $T(\rho')$ form an $e$-split" is $\Sigma^0_1$ relative to $A$, uniformly in the index of $T$; so "no two extensions above $T(\nu)$ form an $e$-split" is $\Pi^0_1$ relative to $A$, the existence of such a $\nu$ is $\Sigma^0_2$ relative to $A$, and $A''$ decides it and finds the least $\nu$. In Case 2, the splitting subtree has an index computable from the index of $T$ and $e$, and the passage to a full subtree is computable on indices. So the sequence of indices is computable in $A''$, and the roots, hence $X = B$, are computable from it with the oracle $A \leq_T A''$.
+:::
+::::
+
+::::exercise{#ex-pa-relative-not-cover difficulty=2 objective="Relativize the proof that PA degrees are not minimal, to show that a degree PA relative to $\abf$ is not a minimal cover of $\abf$." lessons="pi01-classes/pa-degrees"}
+A set $B$ is PA relative to a set $A$ if it computes a function $f : \nat \to \{0, 1\}$ with $f(e) \neq \Phi^A_e(e)$ whenever $\Phi^A_e(e)\converge$ (:ref{#ex-pa-relative}). Show that if $B$ is PA relative to $A$, then $\deg_T(B)$ is not a minimal cover of $\deg_T(A)$.
+
+:::solution
+Relativize :ref{#prop-pa-not-minimal}. Let $\mathcal P_A$ be the class of sets $X \oplus Y$ such that $X(e) \neq \Phi^A_e(e)$ whenever $\Phi^A_e(e)\converge$, and $Y(e) \neq \Phi^{A \oplus X}_e(e)$ whenever $\Phi^{A \oplus X}_e(e)\converge$. A set fails to belong to $\mathcal P_A$ if and only if a finite prefix of it witnesses a convergent computation with the forbidden value, which can be recognized with the oracle $A$; so $\mathcal P_A$ is the class of paths of an $A$-computable tree. It is non-empty: let $X(e) = 1$ if $\Phi^A_e(e)\converge = 0$ and $X(e) = 0$ otherwise, and define $Y$ from $A \oplus X$ in the same way.
+
+By the relativized characterization of PA sets (the proof of :ref{#thm-pa-characterization} relativized, as in :ref{#ex-pa-relative}), $B$ computes a member $X \oplus Y$ of $\mathcal P_A$, and $A \leq_T B$ by :ref{#ex-pa-relative}. The set $X$ is not computable in $A$: if $X = \Phi^A_e$, then $\Phi^A_e(e)\converge = X(e)$, which is excluded. Similarly $Y$ is not computable in $A \oplus X$. So
+$$
+A <_T A \oplus X <_T A \oplus X \oplus Y \leq_T B,
+$$
+and $\deg_T(A \oplus X)$ lies strictly between $\deg_T(A)$ and $\deg_T(B)$. In particular, a minimal cover of $\abf$ is never PA relative to $\abf$; for $A = \emptyset$, this is :ref{#prop-pa-not-minimal}.
+:::
+::::
+
+::::exercise{#ex-mub-continuum difficulty=2 objective="Branch the construction of a minimal upper bound to obtain continuum many of them."}
+Let $\dbf_0 < \dbf_1 < \cdots$ be a strictly increasing sequence of degrees. Show that it has continuum many minimal upper bounds.
+
+:::solution
+In the proof of :ref{#thm-minimal-upper-bound}, fix the subtrees given by :ref{#lem-relativized-splitting} (2), choosing the least $\nu$ in Case 1, so that each step is determined by the current tree. For $Z \in \cs$, run the construction, but at step $n$ let $T_{n+1}$ be the full subtree of $S_{B_{n+1}}$ above $S_{B_{n+1}}(Z(n))$ instead of $S_{B_{n+1}}(0)$. Let $X_Z$ be the union of the roots.
+
+The proof applies to $X_Z$ without change: $T_{n+1}$ is still a $B_{n+1}$-computable subtree of $S_{B_{n+1}}$, and its root $S_{B_{n+1}}(Z(n)) = S(B_{n+1}(0)\, Z(n))$ strictly extends the root $S(\varepsilon)$ of $S$, which extends the root of $T_n$. So $\deg_T(X_Z)$ is a minimal upper bound of the sequence.
+
+If $Z$ and $Z'$ first differ at $n$, the two constructions coincide up to step $n$, which produces the same tree $S_{B_{n+1}}$ for both; then $X_Z$ and $X_{Z'}$ extend the incompatible nodes $S_{B_{n+1}}(0)$ and $S_{B_{n+1}}(1)$, so $X_Z \neq X_{Z'}$. Each degree contains countably many sets, so the continuum many sets $X_Z$ have continuum many degrees. The method is that of :ref{#ex-continuum-minimal}.
+:::
+::::
+
+::::exercise{#ex-mub-arithmetic difficulty=2 objective="Analyze the effectivity of a tree construction whose oracle grows."}
+Let $\emptyset^{(\omega)} = \bigoplus_n \emptyset^{(n)}$. Show that the arithmetic degrees have a minimal upper bound computable in $\emptyset^{(\omega)}$.
+
+:::solution
+The sequence $\obf^{(n)}$ is strictly increasing and cofinal in the arithmetic degrees, so a minimal upper bound of the sequence is a minimal upper bound of the arithmetic degrees. Apply the proof of :ref{#thm-minimal-upper-bound} with $B_n = \emptyset^{(n)}$. Every set $X$ is $X$-c.e. through a single index, that of the machine that halts on $x$ if and only if $x$ is in its oracle; so item 2 of :ref{#thm-jump} gives one computable function $f$ with $x \in X \iff f(x) \in X'$ for every $X$. Replacing each query "$y \in B_n$?" by "$f(y) \in B_{n+1}$?" turns a $B_n$-index of a tree into a $B_{n+1}$-index of the same tree, uniformly in $n$.
+
+Step $n$ starts from a $B_n$-index of $T_n$. To find $S$ by :ref{#lem-relativized-splitting} (2), one must decide whether some node of $T_n$ has no two extensions forming an $n$-split, a $\Sigma^0_2$ question relative to $B_n$, and find the least such node if it exists, by $\Pi^0_1$ questions relative to $B_n$; the oracle $B_n'' = \emptyset^{(n+2)}$ answers them. Otherwise $S$ is the splitting subtree, with a $B_n$-index computable from that of $T_n$. The coding subtree $S_{B_{n+1}}$ and its full subtree above $S_{B_{n+1}}(0)$ then have a $B_{n+1}$-index computable from the index of $S$. Since $\emptyset^{(\omega)}$ computes $\emptyset^{(n+2)}$ uniformly in $n$, as its column $n + 2$, the sequence of indices is computable in $\emptyset^{(\omega)}$, and so is the sequence of roots, each root $T_n(\varepsilon)$ being computed with the oracle $B_n$ from its index. So $X \leq_T \emptyset^{(\omega)}$.
+:::
+::::
+:::::

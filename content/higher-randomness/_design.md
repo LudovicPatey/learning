@@ -227,8 +227,69 @@ is the simplest available with the course's tools.
 - Monin's thesis, mentioned in the previous version, was removed from the references
   (no checked bibliographic data).
 
-## 11. History
+## 11. Exercises
 
+**Featured** (in the text, 10). They practice the central tool of each lesson:
+- `pi11-classes`: `ex-sigma11-wo-bounded` (boundedness for classes on the
+  well-founded relations), `ex-late-members` (late entry forces a collapse).
+- `pi11-measure`: `ex-measure-countable-stages` (Lusin gives λ(𝒜) as a supremum of
+  stages; its computable form is `ex-pi11-measure-lemma`).
+- `higher-tests`: `ex-delta11-random-conull` (in the text after `prop-delta11-arith`),
+  `ex-delta11-ml-hyp` (Δ¹₁-random iff ML-random in every hyperarithmetic set; used by
+  the hierarchy of `hyperdegrees`).
+- `sacks-tanaka`: `ex-pi11-measure-lemma` (the measure lemma from its Δ¹₁ case; used by
+  most further exercises of the course).
+- `pi11-randomness`: `ex-delta11-null-union` (no largest null Δ¹₁ class, cited in the
+  text), `ex-pi11-random-invariance` (measure-preserving maps).
+- `hyperdegrees`: `ex-omega-hyp-not-delta11` (the separating example of the hierarchy,
+  cited there), `ex-delta11-random-hyp-cone` (Sacks's theorem inside a Δ¹₁ class).
+
+**Further** (in the collapsed block). Moved from the text: `ex-pi11-random-not-hyp`,
+`ex-hyp-random-minimal-pair` (routine consequences). New, 28:
+- `pi11-classes` (5): dependence of the stages on the index and cofinality of the
+  computable stages (`ex-stages-index-dependence`); stages of an intersection; the union
+  of the computable stages is Π¹₁, not Σ¹₁ for the well-founded relations
+  (`ex-stage-omega1ck`); separation for Σ¹₁ classes; hyperarithmetic members enter at
+  computable stages (two proofs).
+- `pi11-measure` (5): measurability by inner and outer Borel classes; continuity of the
+  stage measures at limits, with a computed example; null iff all stages null; inner
+  approximation of Δ¹₁ classes by Π⁰₁(A) classes and a hyperarithmetic member of a Δ¹₁
+  class of positive measure (`ex-delta11-hyp-member`, used later); an example showing
+  why the proof of Lusin's theorem controls all nodes (`ex-lusin-all-nodes`).
+- `higher-tests` (4): the measure of an open Π¹₁ class is left-Π¹₁ and the index set of
+  tests is Σ¹₁ (why trimming is needed); an open Π¹₁ class whose measure is not
+  hyperarithmetic (`ex-open-measure-not-hyp`, W = {0ⁿ1 : n ∈ O}); higher Solovay tests;
+  components of a universal test contain HYP and are not Δ¹₁.
+- `sacks-tanaka` (5): inner/outer Δ¹₁ approximation of Π¹₁/Σ¹₁ classes; the
+  Sacks–Tanaka basis theorem (`ex-sacks-tanaka-basis`, previously only mentioned in the
+  notes); both hypotheses of the basis theorem are needed; complexity of the index sets
+  of null and conull Π¹₁ classes (and why it does not give `thm-largest-null`); the cone
+  above O by Sacks and by Sacks–Tanaka.
+- `pi11-randomness` (4): the classes of random sequences are not Π¹₁ and 𝒬 meets every
+  non-empty Π¹₁ class; examples of non-random sequences; ML-randomness relative to O
+  versus Π¹₁-randomness; Π¹₁-random sequences computable in O in every cylinder.
+- `hyperdegrees` (5): hyperarithmetic sets are low for Π¹₁-randomness (easy half of
+  Greenberg–Monin); a Σ¹₁ class not covered by a Δ¹₁ class of the same measure (limit of
+  `thm-sigma11-random`); hyperarithmetically incomparable Π¹₁-randoms; the easy
+  direction of Spector's theorem (O ≤_h Y ⇒ ω₁^Y > ω₁ᶜᵏ), without the admitted theorem;
+  Π¹₁-random sequences are hyp-dominated (difficulty 3).
+
+**Sources.** Nies, Theorem 9.1.11 (basis theorem), Exercise 9.3.10 (𝒬 meets every
+non-empty Π¹₁ class), Theorem 9.4.3 (hyp-dominated; Chong–Nies–Yu 2008, proved here with
+`fact-hyp-reducible` instead of the bounding principle), a remark in Nies Section 9.3 that the
+Δ¹₁-randoms do not form a Π¹₁ class; Solovay's criterion (classical proof in
+`martin-lof-randomness/solovay-tests`, redone without stages); Greenberg–Monin 2017 for
+the lowness statement. The other exercises were written for the course. Not used: the
+exercises of Monin–Patey on higher prefix-free machines, higher K-triviality and higher
+Δ⁰₂ approximations (material excluded from the course), Nies 9.3.12 (higher van
+Lambalgen) and 9.3.13 (≤_K), which need higher complexity.
+
+## 12. History
+
+- **2026-11-13.** Featured and further exercises: labels and objectives for the 12
+  existing exercises (solutions checked, none changed); 2 moved to the further blocks;
+  28 new further exercises; positional references to exercises replaced by `:ref`
+  (higher-tests, sacks-tanaka, pi11-randomness, hyperdegrees). Durations unchanged.
 - **2026-11-12.** Design revision.
   - Course split into six lessons: new `pi11-classes` (stages), `pi11-measure` (Lusin and
     measure facts), `sacks-tanaka`; `hyperdegrees` renamed "Σ¹₁ null classes and

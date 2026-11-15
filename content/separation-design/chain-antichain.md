@@ -29,7 +29,7 @@ Say that $x < y$ are in the **relation of side $i$** if $x <_P y$ ($i = 0$), $y 
 
 (H) for every infinite $Z$-computable set $X$ and every $i < 3$, some $x \in X$ has infinitely many $y > x$ in $X$ in the relation of side $i$.
 
-If (H) fails for $X$ and $i$, each $x \in X$ is in the relation of side $i$ with finitely many larger elements of $X$, and choosing greedily $y_{n+1}$, the least element of $X$ above $y_n$ in that relation with no $y_j$, gives an infinite $Z$-computable $Y \subseteq X$ without pairs of type $i$; the construction restarts inside $Y$ without side $i$ (exercise).
+If (H) fails for $X$ and $i$, each $x \in X$ is in the relation of side $i$ with finitely many larger elements of $X$, and choosing greedily $y_{n+1}$, the least element of $X$ above $y_n$ in that relation with no $y_j$, gives an infinite $Z$-computable $Y \subseteq X$ without pairs of type $i$; the construction restarts inside $Y$ without side $i$ (:ref{#ex-cac-degenerate}).
 
 :::lemma{#lem-sd-cac-extension}
 Assume (H). For every condition $c = (\sigma_0, \sigma_1, \sigma_2, X)$ and $i < 3$, there is an extension of $c$ whose stem on side $i$ has an element beyond $|\sigma_i|$.
@@ -101,7 +101,7 @@ $\mathsf{CAC}$ admits preservation of c.b.-immunity. More precisely, for every $
 :::
 
 :::proof{of=thm-sd-cac-cb}
-Assume (H); the other case is the exercise. Build a decreasing sequence of $\mathsf{CAC}$ conditions from $(\varepsilon, \varepsilon, \varepsilon, \nat)$, handling infinitely often the growth of each side (:ref{#lem-sd-cac-extension}) and, for every triple of pairs $((e_0, k_0), (e_1, k_1), (e_2, k_2))$, the following task. Let $k = \max_i k_i$ and $c$ the current condition.
+Assume (H); the other case is :ref{#ex-cac-degenerate}. Build a decreasing sequence of $\mathsf{CAC}$ conditions from $(\varepsilon, \varepsilon, \varepsilon, \nat)$, handling infinitely often the growth of each side (:ref{#lem-sd-cac-extension}) and, for every triple of pairs $((e_0, k_0), (e_1, k_1), (e_2, k_2))$, the following task. Let $k = \max_i k_i$ and $c$ the current condition.
 
 - If for some $n$ the answer to $\Psi^{Z \oplus G}_{e_0, k_0}(n)\converge(G_0) \vee \Psi^{Z \oplus G}_{e_1, k_1}(n)\converge(G_1) \vee \Psi^{Z \oplus G}_{e_2, k_2}(n)\converge(G_2)$ is negative, property 2 gives an extension forcing $\Psi^{Z \oplus G}_{e_i, k_i}(n)\diverge$ on some side $i$.
 - Otherwise, for each $n$, search with oracle $Z$ for a witnessing split triple, and let $F_i$ be the set computed on side $i$, and $E_n = F_0 \cup F_1 \cup F_2$. Then $|E_n| \leq 3k$, $\min E_n > n$, and $n \mapsto E_n$ is $Z$-computable. By c.b.-immunity relative to $Z$, some $E_n$ is disjoint from $A$. The same split triple witnesses a positive answer for the sentences "$\Psi^{Z \oplus G}_{e_i, k_i}(n)\converge \subseteq E_n$", and property 1 gives an extension forcing, on some side $i$, that $\Psi^{Z \oplus G}_{e_i, k_i}(n)$ is a set disjoint from $A$.
@@ -111,13 +111,11 @@ Let $G_0, G_1, G_2$ be the unions of the stems. They are infinite, respectively 
 
 The reservoirs stay $Z$-computable: negative answers are handled by a case analysis on extensions, not by a member of a $\Pi^0_1$ class. First-jump control with computable reservoirs is a sign that the problem involves no compactness.
 
-## Exercises
-
-::::exercise{difficulty=2}
-Complete the proof of :ref{#thm-sd-cac-cb} when (H) fails.
+::::exercise{#ex-cac-wkl difficulty=1 objective="Separate weak König's lemma from the chain–antichain principle with constant-bound immunity." lessons="custom-properties"}
+Show that $\mathsf{WKL} \not\leq_\omega \mathsf{CAC}$.
 
 :::solution
-Start with the set of sides $I = \{ 0, 1, 2 \}$ and $Y = \nat$. While (H) fails for some infinite $Z$-computable $X \subseteq Y$ and some $i \in I$, replace $Y$ by the set $Y' \subseteq X$ without pairs of type $i$ given in the text, and $I$ by $I \setminus \{ i \}$. If $I$ becomes a singleton, $Y$ is a $Z$-computable solution. Otherwise, use stems on the sides of $I$, reservoirs inside $Y$, and split tuples with the order constraints restricted to $I$. In property 1, a block element cannot behave towards the thinned reservoir as a missing side would, since this would give a pair of that type in $Y$; for $I = \{ 0, 1 \}$, either some element of $\rho_0$ is large, and then all of $\rho_1$ is, or $\rho_0$ is small. In property 2, Case 1 concerns the sides of $I$ other than $2$; for $I = \{ 0, 1 \}$ it contradicts the negative answer. The theorem follows with Lachlan's disjunction over $I$.
+Let $A$ be the complement of Post's simple set. It is co-c.e. and immune, hence c.b.-immune by :ref{#prop-sd-coce-cb}. Let $\mathcal W$ be the class of sets relative to which $A$ is c.b.-immune; $\emptyset \in \mathcal W$. By :ref{#thm-sd-cac-cb}, $\mathsf{CAC}$ preserves $\mathcal W$. By :ref{#prop-sd-wkl-immunity}, some computable infinite binary tree has all its paths $P$ computing an infinite subset of $A$; listing it in increasing order as singletons gives a $P$-computable $1$-array all of whose members meet $A$, so $P \notin \mathcal W$. So $\mathsf{WKL}$ does not preserve $\mathcal W$, and :ref{#thm-preservation-separation} applies.
 :::
 ::::
 
@@ -129,3 +127,61 @@ The notion of forcing, the split triples and :ref{#thm-sd-cac-cb} are due to Pat
 - D. R. Hirschfeldt and R. A. Shore, *Combinatorial principles weaker than Ramsey's theorem for pairs*, Journal of Symbolic Logic 72 (2007), 171–206.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2015, Sections 9.1 and 9.2.1.
 - L. Patey, *Lowness and avoidance*, chapter *Custom properties*, section *Partial orders*.
+
+:::::exercises
+::::exercise{#ex-cac-degenerate difficulty=2 objective="Complete the preservation of constant-bound immunity by $\mathsf{CAC}$ when some side cannot be extended."}
+Complete the proof of :ref{#thm-sd-cac-cb} when (H) fails.
+
+:::solution
+For a set $I$ of sides and an infinite $Z$-computable set $Y$, say that **(H) holds for $(I, Y)$** if for every infinite $Z$-computable $X \subseteq Y$ and every $i \in I$, some $x \in X$ has infinitely many $y > x$ in $X$ in the relation of side $i$. Start with $I = \{ 0, 1, 2 \}$ and $Y = \nat$. While (H) fails for $(I, Y)$, witnessed by $X \subseteq Y$ and $i \in I$, replace $Y$ by the infinite $Z$-computable set $Y' \subseteq X$ given by the greedy construction of the text, which has no pair in the relation of side $i$, and $I$ by $I \setminus \{ i \}$. Every pair of elements of $Y$ is in the relation of some side, and no pair is in the relation of a side outside $I$, so $I$ never becomes empty. If $I$ becomes a singleton $\{ j \}$, every pair of $Y$ is in the relation of side $j$, so $Y$ is a $Z$-computable infinite ascending sequence, descending sequence or antichain, and $A$ is c.b.-immune relative to $Z \oplus Y$. Otherwise the procedure stops with $|I| = 2$ and (H) holding for $(I, Y)$.
+
+Use conditions with stems on the sides of $I$ and reservoirs $X \subseteq Y$; :ref{#lem-sd-cac-extension} holds for the sides of $I$ with the same proof. Split pairs are defined by the order constraints of the split triples restricted to $I$: for $I = \{ 0, 1 \}$, $\rho_0$ ascending, $\rho_1$ descending and $\rho_0 <_P \rho_1$; for $I = \{ 0, 2 \}$, $\rho_0 <_P \rho_2$; for $I = \{ 1, 2 \}$, $\rho_2 <_P \rho_1$. Property 3 holds as before. In property 1, after thinning the reservoir to $Y'' \subseteq Y$, an element $x$ of the blocks cannot behave towards $Y''$ as a missing side would: if $x$ were small for $I = \{ 1, 2 \}$, the pairs $\{ x, y \}$, $y \in Y''$, would be in the relation of side $0$, and $x, y \in Y$; similarly large elements do not occur for $I = \{ 0, 2 \}$, and isolated ones for $I = \{ 0, 1 \}$.
+
+- $I = \{ 0, 1 \}$: every element is small or large. If some $x \in \rho_0$ is large, every element of $\rho_1$ is above $x$, hence large, and the extension of side $1$ forces $\varphi_1$. Otherwise $\rho_0$ is small and the extension of side $0$ forces $\varphi_0$.
+- $I = \{ 0, 2 \}$: every element is small or isolated. If some $z \in \rho_2$ is small, $\rho_0$ is small, and side $0$ is extended; otherwise $\rho_2$ is isolated, and side $2$ is extended.
+- $I = \{ 1, 2 \}$: symmetric, with large elements.
+
+For property 2 with sides $j < j'$ of $I$: if no extension has a stem on side $j$ satisfying $\varphi_j$, the condition forces $\neg \varphi_j(G_j)$. Otherwise let $d = (\ldots, Y_d)$ be an extension whose stem $\tau_j$ on side $j$ satisfies $\varphi_j$, and $d'$ the condition with the stem $\tau_j$ on side $j$, the original stem on side $j'$, and reservoir $Y_d$. It forces $\neg \varphi_{j'}(G_{j'})$: the new elements of a stem on side $j'$ of an extension of $d'$ lie in $Y_d$, and each element $y \in Y_d$ satisfies the constraint of the split pair with $\rho_j$ (for instance $\rho_0 <_P y$, since $\tau_0 \cup \{ y \}$ is ascending), so such a stem satisfying $\varphi_{j'}$ would give a split pair satisfying both sentences. The proof of :ref{#thm-sd-cac-cb} then goes through with pairs instead of triples, sets $E_n$ of size at most $2k$, and Lachlan's disjunction over the two sides of $I$.
+:::
+::::
+
+::::exercise{#ex-cac-cone difficulty=2 objective="Prove cone avoidance for $\mathsf{CAC}$ with the disjunctive question over split triples."}
+Show with the $\mathsf{CAC}$ conditions and :ref{#lem-sd-cac-question} that every $Z$-computable partial order satisfying (H) has an infinite ascending sequence, descending sequence or antichain $G$ with $C \not\leq_T Z \oplus G$, for every $C \not\leq_T Z$.
+
+:::solution
+Build a decreasing sequence of conditions from $(\varepsilon, \varepsilon, \varepsilon, \nat)$, with the growth tasks of :ref{#lem-sd-cac-extension} and, for each triple $(e_0, e_1, e_2)$, the following task. Let $c$ be the current condition and $U$ the set of pairs $(x, v)$ with $v < 2$ such that
+$$
+c \mathrel{?{\vdash}} (\Phi^{Z \oplus G}_{e_0}(x)\converge = v)(G_0) \vee (\Phi^{Z \oplus G}_{e_1}(x)\converge = v)(G_1) \vee (\Phi^{Z \oplus G}_{e_2}(x)\converge = v)(G_2),
+$$
+a $\Sigma^0_1(Z)$ set by property 3. If $(x, 1 - C(x)) \in U$ for some $x$, property 1 gives an extension forcing $\Phi^{Z \oplus G_i}_{e_i}(x) = 1 - C(x)$ on some side $i$. If $(x, C(x)) \notin U$ for some $x$, property 2 gives an extension forcing, on some side $i$, that $\Phi^{Z \oplus G_i}_{e_i}(x)$ does not converge to $C(x)$. Otherwise, for every $x$, $C(x)$ is the only $v$ with $(x, v) \in U$, and $C \leq_T Z$, which is excluded. The unions $G_0, G_1, G_2$ of the stems are infinite and satisfy what is forced, so for every triple some side $i$ has $\Phi^{Z \oplus G_i}_{e_i} \neq C$. If every side $i$ had an index $e_i$ with $\Phi^{Z \oplus G_i}_{e_i} = C$, the triple $(e_0, e_1, e_2)$ would contradict this. So $C \not\leq_T Z \oplus G_i$ for some $i$. When (H) fails, one argues with fewer sides as in :ref{#ex-cac-degenerate}.
+:::
+::::
+
+::::exercise{#ex-cac-3k difficulty=2 objective="Extract from the proof for $\mathsf{CAC}$ a quantitative statement: $3k$-immunity yields $k$-immunity."}
+Let $k \geq 1$, $A$ a set $3k$-immune relative to $Z$, and $<_P$ a $Z$-computable partial order satisfying (H). Show that there is an infinite ascending sequence, descending sequence or antichain $G$ such that $A$ is $k$-immune relative to $Z \oplus G$.
+
+:::solution
+Run the construction of :ref{#thm-sd-cac-cb} with only the triples of pairs $((e_0, k), (e_1, k), (e_2, k))$. In the second case of the task, the sets $E_n$ have at most $3k$ elements, $\min E_n > n$, and $n \mapsto E_n$ is $Z$-computable; by :ref{#exr-sd-min-arrays} for $3k$, relativized to $Z$, some $E_n$ is disjoint from $A$. The end of the proof gives a side $i$ such that, for every $e$, $\Psi^{Z \oplus G_i}_{e,k}$ is partial or has a member disjoint from $A$. A $(Z \oplus G_i)$-computable sequence of sets $F_n$ with $|F_n| \leq k$ and $\min F_n > n$, all meeting $A$, would be $\Psi^{Z \oplus G_i}_{e,k}$ for an index $e$ of it, since its members are non-empty. So there is none, and $A$ is $k$-immune relative to $Z \oplus G_i$ by :ref{#exr-sd-min-arrays} relativized.
+:::
+::::
+
+::::exercise{#ex-cac-h-needed difficulty=1 objective="See on a linear order why the assumption (H) is needed to extend the stems."}
+Let $x <_P y$ if and only if $x < y$. Show that $(\varepsilon, \varepsilon, \varepsilon, \nat)$ is a $\mathsf{CAC}$ condition with no extension whose stem on side $2$ or on side $1$ is non-empty, and that (H) fails. Follow the procedure of :ref{#ex-cac-degenerate} on this order.
+
+:::solution
+The stems are empty, so the condition is valid. An extension with a stem on side $2$ containing some $x$ would have an infinite reservoir $Y$ with $\{ x, y \}$ an antichain for every $y \in Y$; but any two elements are comparable. An extension with a stem on side $1$ containing $x$ would have $y <_P x$ for the elements $y > x$ of its reservoir, which never holds. For $X = \nat$ and side $2$, no $x$ has a larger element in the relation of side $2$, so (H) fails. The procedure removes side $2$ with $Y = \nat$, which has no incomparable pair, then side $1$, still with $Y = \nat$; it ends with $I = \{ 0 \}$, and $\nat$ is a computable ascending sequence.
+:::
+::::
+
+::::exercise{#ex-cac-split-cases difficulty=1 objective="Check the case distinction and the conditions obtained in property 1 of the question over split triples."}
+In the proof of property 1 of :ref{#lem-sd-cac-question}:
+
+1. show that $\rho_2$ cannot contain both a small and a large element;
+2. show in detail that if some $z \in \rho_2$ is small, $(\tau_0, \sigma_1, \sigma_2, Y)$ is a condition extending $c$.
+
+:::solution
+1. If $z \in \rho_2$ is small and $z' \in \rho_2$ is large, take $y \in Y$: $z <_P y <_P z'$, so $z <_P z'$ by transitivity, while $\rho_2$ is an antichain.
+2. $Y$ is infinite, $Z$-computable, contained in $X$ and above $m \geq |\tau_0|, |\sigma_1|, |\sigma_2|$; $\tau_0$ is compatible with $(\sigma_0, X)$, and the other stems are unchanged. For $y \in Y \subseteq X$, $\sigma_1 \cup \{ y \}$ is descending and $\sigma_2 \cup \{ y \}$ an antichain, by the condition $c$. It remains that $\tau_0 \cup \{ y \} = \sigma_0 \cup \rho_0 \cup \{ y \}$ is ascending. The set $\sigma_0 \cup \rho_0$ is ascending, since $\rho_0 \subseteq X$ is (remark after :ref{#def-sd-cac-condition}). For $a \in \sigma_0$, $a <_P y$ since $\sigma_0 \cup \{ y \}$ is ascending. For $x \in \rho_0$, $x <_P z$ by the definition of a split triple and $z <_P y$ since $z$ is small, so $x <_P y$. All these elements are below $y$ in the order of $\nat$, so the set is ascending.
+:::
+::::
+:::::

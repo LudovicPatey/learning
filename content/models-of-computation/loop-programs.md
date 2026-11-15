@@ -147,19 +147,7 @@ Why does the proof work with codes of the whole state rather than with the value
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Write LOOP programs computing $x \cdot y$, $x^y$, and $\mathrm{sg}(x)$.
-
-:::solution
-$x \cdot y$: $X_0 \mathbin{:=} 0 ;\ \mathtt{LOOP}\ X_2\ \mathtt{DO}\ \mathtt{LOOP}\ X_1\ \mathtt{DO}\ X_0 \mathbin{:=} X_0 + 1\ \mathtt{END}\ \mathtt{END}$.
-
-$x^y$: $X_0 \mathbin{:=} 0 ; X_0 \mathbin{:=} X_0 + 1 ;\ \mathtt{LOOP}\ X_2\ \mathtt{DO}\ Y \mathbin{:=} 0 ;\ \mathtt{LOOP}\ X_1\ \mathtt{DO}\ \mathtt{LOOP}\ X_0\ \mathtt{DO}\ Y \mathbin{:=} Y + 1\ \mathtt{END}\ \mathtt{END} ;\ X_0 \mathbin{:=} Y\ \mathtt{END}$ (each round multiplies $X_0$ by $x$).
-
-$\mathrm{sg}(x)$: $X_0 \mathbin{:=} 0 ;\ \mathtt{LOOP}\ X_1\ \mathtt{DO}\ X_0 \mathbin{:=} 0 ;\ X_0 \mathbin{:=} X_0 + 1\ \mathtt{END}$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-loop-depth-one difficulty=2 objective="Bound the growth of the functions computed by programs without nested loops."}
 Show that the functions computed by LOOP programs of **nesting depth** at most $1$ (no $\mathtt{LOOP}$ inside a $\mathtt{LOOP}$) are bounded by linear functions: for each such program computing $f$ there are $a, b$ with $f(\vec x) \leq a \cdot |\vec x| + b$. Deduce that multiplication requires nesting depth at least $2$.
 
 :::solution
@@ -176,3 +164,65 @@ LOOP programs and the characterization of the primitive recursive functions are 
 - H. Wang, *A variant to Turing's theory of computing machines*, Journal of the ACM 4 (1957), 63–92.
 - R. Péter, *Graphschemata und rekursive Funktionen*, Dialectica 12 (1958), 373–393.
 - B. Monin, L. Patey, *Computability theory*, chapter "Church–Turing thesis", section on recursive functions.
+
+:::::exercises
+::::exercise{#ex-loop-programs difficulty=1 objective="Write LOOP programs for arithmetic functions with nested loops."}
+Write LOOP programs computing $x \cdot y$, $x^y$, and $\mathrm{sg}(x)$.
+
+:::solution
+$x \cdot y$: $X_0 \mathbin{:=} 0 ;\ \mathtt{LOOP}\ X_2\ \mathtt{DO}\ \mathtt{LOOP}\ X_1\ \mathtt{DO}\ X_0 \mathbin{:=} X_0 + 1\ \mathtt{END}\ \mathtt{END}$.
+
+$x^y$: $X_0 \mathbin{:=} 0 ; X_0 \mathbin{:=} X_0 + 1 ;\ \mathtt{LOOP}\ X_2\ \mathtt{DO}\ Y \mathbin{:=} 0 ;\ \mathtt{LOOP}\ X_1\ \mathtt{DO}\ \mathtt{LOOP}\ X_0\ \mathtt{DO}\ Y \mathbin{:=} Y + 1\ \mathtt{END}\ \mathtt{END} ;\ X_0 \mathbin{:=} Y\ \mathtt{END}$ (each round multiplies $X_0$ by $x$).
+
+$\mathrm{sg}(x)$: $X_0 \mathbin{:=} 0 ;\ \mathtt{LOOP}\ X_1\ \mathtt{DO}\ X_0 \mathbin{:=} 0 ;\ X_0 \mathbin{:=} X_0 + 1\ \mathtt{END}$.
+:::
+::::
+
+::::exercise{#ex-loop-trace difficulty=1 objective="Determine the function computed by a LOOP program, using that the number of iterations is fixed on entry."}
+Determine the unary function computed by $X_0 \mathbin{:=} X_1 ;\ \mathtt{LOOP}\ X_1\ \mathtt{DO}\ \mathtt{LOOP}\ X_0\ \mathtt{DO}\ X_0 \mathbin{:=} X_0 + 1\ \mathtt{END}\ \mathtt{END}$.
+
+:::solution
+The inner loop is executed $v$ times, where $v$ is the value of $X_0$ on entry, and each iteration adds $1$ to $X_0$: it doubles $X_0$, although the body modifies the loop variable. The outer loop runs $x$ times, since $X_1$ is not modified. Starting from $X_0 = x$, the program computes $x \cdot 2^x$. For instance, on input $2$ the values of $X_0$ are $2, 4, 8$.
+:::
+::::
+
+::::exercise{#ex-loop-if-else difficulty=1 objective="Program a two-way conditional in LOOP with fresh flag variables."}
+Show that for LOOP programs $P$, $Q$ and a variable $X_i$, there is a LOOP program $\mathtt{IF}\ X_i = 0\ \mathtt{THEN}\ P\ \mathtt{ELSE}\ Q\ \mathtt{END}$ whose semantics, on the variables mentioned in $P$, $Q$ and $X_i$, is $[\![P]\!](\sigma)$ if $\sigma(i) = 0$ and $[\![Q]\!](\sigma)$ otherwise.
+
+:::solution
+Let $Y, Z$ be variables not occurring in $P$, $Q$ and distinct from $X_i$, and take
+$$
+\begin{aligned}
+& Y \mathbin{:=} 0 ;\ Y \mathbin{:=} Y + 1 ;\ Z \mathbin{:=} 0 ; \\
+& \mathtt{LOOP}\ X_i\ \mathtt{DO}\ Y \mathbin{:=} 0 ;\ Z \mathbin{:=} 0 ;\ Z \mathbin{:=} Z + 1\ \mathtt{END} ; \\
+& \mathtt{LOOP}\ Y\ \mathtt{DO}\ P\ \mathtt{END} ;\ \mathtt{LOOP}\ Z\ \mathtt{DO}\ Q\ \mathtt{END}.
+\end{aligned}
+$$
+After the first line and the first loop, $Y = 1$ and $Z = 0$ if $\sigma(i) = 0$, and $Y = 0$ and $Z = 1$ otherwise; the other variables are unchanged. Then $P$ runs once or not at all. It does not mention $Y$ and $Z$, so $Z$ is not modified, and $Q$ runs exactly when $\sigma(i) \neq 0$. Since $Z$ was computed before $P$ ran, the result does not depend on what $P$ does to $X_i$.
+:::
+::::
+
+::::exercise{#ex-loop-depth-two difficulty=1 objective="Separate the programs of nesting depth $1$ and $2$ by a growth argument."}
+Write LOOP programs of nesting depth $2$ computing $x \mapsto 2^x$ and $x \mapsto 2^{2^x}$. Deduce that some functions computed at depth $2$ are not computed at depth $1$.
+
+:::solution
+The program $X_0 \mathbin{:=} 0 ;\ X_0 \mathbin{:=} X_0 + 1 ;\ \mathtt{LOOP}\ X_1\ \mathtt{DO}\ \mathtt{LOOP}\ X_0\ \mathtt{DO}\ X_0 \mathbin{:=} X_0 + 1\ \mathtt{END}\ \mathtt{END}$ computes $2^x$: as in :ref{#ex-loop-trace}, each iteration of the outer loop doubles $X_0$. It has nesting depth $2$. For $2^{2^x}$, run the same program with a fresh variable $Y$ in place of $X_0$, which sets $Y$ to $2^x$, and then $X_0 \mathbin{:=} 0 ;\ X_0 \mathbin{:=} X_0 + 1 ;\ \mathtt{LOOP}\ Y\ \mathtt{DO}\ \mathtt{LOOP}\ X_0\ \mathtt{DO}\ X_0 \mathbin{:=} X_0 + 1\ \mathtt{END}\ \mathtt{END}$. The sequence of two programs of depth $2$ has depth $2$. By :ref{#ex-loop-depth-one}, functions computed at depth $1$ are bounded by $a x + b$, and $2^x$ is not, so it is not computed at depth $1$. Sequencing allows any fixed number of exponentials at depth $2$, so depth $2$ is not bounded by any single exponential either.
+:::
+::::
+
+::::exercise{#ex-loop-running-time difficulty=1 objective="Add a step counter to a LOOP program to show that LOOP programs run in primitive recursive time."}
+For a LOOP program $P$ and a state $\sigma$, let $t_P(\sigma)$ be the number of assignments executed by $P$ from $\sigma$. Show that for every LOOP program $P$ and every $k$, the function $\vec x \mapsto t_P(\sigma_{\vec x})$ is primitive recursive.
+
+:::solution
+Let $C$ be a variable that does not occur in $P$, with index larger than $k$, and let $P'$ be obtained from $P$ by adding $C \mathbin{:=} C + 1$ after each assignment. By induction on subprograms $Q$ of $P$: for every state $\sigma$, $[\![Q']\!](\sigma)$ agrees with $[\![Q]\!](\sigma)$ on all variables other than $C$, and its value at $C$ is $\sigma(C) + t_Q(\sigma)$. This is clear for an assignment; for $Q ; R$ it follows from $t_{Q;R}(\sigma) = t_Q(\sigma) + t_R([\![Q]\!](\sigma))$; for a loop, by induction on the number of iterations, which is the same in $Q$ and $Q'$ since the loop variable is not $C$. The program $P' ;\ X_0 \mathbin{:=} C$ is a LOOP program, and since $C$ is $0$ initially, it computes $\vec x \mapsto t_P(\sigma_{\vec x})$. By :ref{#thm-loop-pr}, this function is primitive recursive.
+:::
+::::
+
+::::exercise{#ex-loop-no-copy difficulty=1 objective="Eliminate an instruction of LOOP by simulating it with a loop."}
+Show that every LOOP-computable function is computed by a LOOP program without instructions $X_i \mathbin{:=} X_j$.
+
+:::solution
+Replace each instruction $X_i \mathbin{:=} X_j$ with $i \neq j$ by $X_i \mathbin{:=} 0 ;\ \mathtt{LOOP}\ X_j\ \mathtt{DO}\ X_i \mathbin{:=} X_i + 1\ \mathtt{END}$: the loop runs $\sigma(j)$ times, the value of $X_j$ on entry, so it sets $X_i$ to $\sigma(j)$ and changes nothing else. An instruction $X_i \mathbin{:=} X_i$ does nothing; replace it by $Y \mathbin{:=} 0$ for a variable $Y$ occurring nowhere else, with index larger than $k$ (a program cannot be empty). By induction on the program, the new program has the same semantics on all variables other than $Y$, so it computes the same function.
+:::
+::::
+:::::

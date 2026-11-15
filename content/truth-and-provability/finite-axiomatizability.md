@@ -127,14 +127,13 @@ For $M = \nat$, the theorem gives again $\Sigma^0_n \neq \Pi^0_n$. In a non-stan
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-tp-bsigma-finite difficulty=2 objective="Adapt the proof of finite axiomatizability from induction to collection, with one instance of collection for $\mathrm{Sat}_{\Pi_n}$."}
 Show that for every $n \geq 1$, $\mathrm B\Sigma_{n+1}$ is finitely axiomatizable.
 
 :::solution
 By :ref{#thm-fo-paris-kirby}, $\mathrm B\Sigma_{n+1}$ proves $\mathrm I\Sigma_n$, hence $\mathrm I\Sigma_1$ and the finitely many axioms $A_n$ of :ref{#thm-isigma-finite} for $\mathrm I\Sigma_n$. Let $\pi_n(z, e)$ be a $\Pi_n$ formula equivalent to $\mathrm{Sat}_{\Pi_n}$ in $\mathrm I\Sigma_1$, and $C_n$ the instance of collection, with parameters $z$ and $e$, for the formula $\exists e'\ (e' = e[0 := x][1 := y] \wedge \pi_n(z, e'))$, equivalent in $\mathrm I\Sigma_1$ to a $\Pi_n$ formula, in the variables $x$ and $y$. Then $A_n \cup \{ C_n \}$ is contained in $\mathrm B\Sigma_{n+1}$, since the formula of $C_n$ is an existential quantification of a conjunction of a $\Delta_1$ and a $\Pi_n$ formula, hence $\Sigma_{n+1}$. Conversely, $A_n \cup \{ C_n \}$ proves $\mathrm I\Sigma_n$, and for every $\Pi_n$ formula $\varphi(x, y, \bar p)$, $\mathrm I\Sigma_1$ proves $\varphi$ equivalent to $\mathrm{Sat}_{\Pi_n}(\ulcorner \varphi^* \urcorner, \langle x, y, \bar p \rangle)$, by :ref{#cor-snowing-general}; so the instance of collection for $\varphi$ follows from $C_n$. This gives $\mathrm B\Pi_n$, which is equivalent to $\mathrm B\Sigma_{n+1}$ by :ref{#ex-fo-bsigma-bpi}.
 :::
 ::::
-
 
 ## Notes and references
 
@@ -146,3 +145,60 @@ The finite axiomatizability of $\mathrm I\Sigma_n$ and $\mathrm B\Sigma_{n+1}$, 
 - G. Takeuti, *Proof Theory*, North-Holland, 1975.
 - D. Leivant, *On the proof theory of the modal logic for arithmetic provability*, Journal of Symbolic Logic 46 (1981), 531–538.
 - H. Gaifman and C. Dimitracopoulos, *Fragments of Peano's arithmetic and the MRDP theorem*, in Logic and Algorithmic, Monographies de L'Enseignement Mathématique 30, Genève, 1982, 187–206.
+
+:::::exercises
+::::exercise{#ex-tp-isigma-single-sentence difficulty=2 objective="Combine finite axiomatizability with compactness to axiomatize $\mathrm I\Sigma_n$ by a single sentence of the complexity of its induction axioms."}
+Let $n \geq 1$.
+
+1. Show that each axiom of $\mathrm{PA}^-$ and the universal closure of each instance of induction for a $\Sigma_n$ formula is logically equivalent to a $\Pi_{n+2}$ sentence.
+2. Let $T$ be a theory equivalent to a finite set of sentences, and $S$ any set of sentences equivalent to $T$. Show that some finite subset of $S$ is equivalent to $T$.
+3. Deduce that $\mathrm I\Sigma_n$ is equivalent to a single $\Pi_{n+2}$ sentence.
+
+:::solution
+1. The axioms of $\mathrm{PA}^-$ are $\Pi_1$, except item 5, $\forall x\ \forall y\ (x < y \rightarrow \exists z\ (x + z + 1 = y))$, which is $\Pi_2$; all are $\Pi_{n+2}$. Let $\varphi(x, \bar p)$ be $\Sigma_n$. The instance $\varphi(0) \wedge \forall x\ (\varphi(x) \rightarrow \varphi(x + 1)) \rightarrow \forall x\ \varphi(x)$ is logically equivalent to the disjunction of $\neg \varphi(0)$, which is $\Pi_n$; of $\exists x\ (\varphi(x) \wedge \neg \varphi(x + 1))$, an existential quantifier in front of the conjunction of a $\Sigma_n$ and a $\Pi_n$ formula, which is $\Sigma_{n+1}$ after renaming the bound variables apart; and of $\forall x\ \varphi(x)$, which is $\Pi_{n+1}$. Each disjunct is $\Pi_{n+2}$, and a disjunction of $\Pi_{n+2}$ formulas with bound variables renamed apart is logically equivalent to a $\Pi_{n+2}$ formula, by moving the quantifier blocks to the front in the order of the levels. The universal closure over $\bar p$ is $\Pi_{n+2}$.
+
+2. Let $F$ be a finite set of sentences equivalent to $T$. Each $\sigma \in F$ is provable from $S$, and a proof uses finitely many sentences of $S$; let $S_0 \subseteq S$ be the finite union of these sets over $\sigma \in F$. Then $S_0 \vdash F$, so $S_0$ proves $T$, which proves $S \supseteq S_0$. So $S_0$ is equivalent to $T$.
+
+3. By :ref{#thm-isigma-finite}, $\mathrm I\Sigma_n$ is equivalent to a finite set of sentences. Apply item 2 to the usual axiomatization $S$ of $\mathrm I\Sigma_n$: a finite subset $S_0$ is equivalent to $\mathrm I\Sigma_n$, and by item 1 its sentences are equivalent to $\Pi_{n+2}$ sentences. Their conjunction is logically equivalent, after renaming the bound variables apart and moving the quantifiers to the front, to a single $\Pi_{n+2}$ sentence.
+:::
+::::
+
+::::exercise{#ex-tp-isigma-not-pi difficulty=2 objective="Adapt the proof of Rabin's theorem to show that the complexity $\Pi_{n+2}$ of the axioms of $\mathrm I\Sigma_n$ cannot be lowered."}
+Let $n \geq 1$. Show that $\mathrm I\Sigma_n$ is not equivalent to any set of $\Pi_{n+1}$ sentences. With :ref{#ex-tp-isigma-single-sentence}, this shows that $\Pi_{n+2}$ is the least complexity of an axiomatization of $\mathrm I\Sigma_n$ among the classes $\Pi_m$.
+
+:::solution
+Suppose that a set $S$ of $\Pi_{n+1}$ sentences is equivalent to $\mathrm I\Sigma_n$. Let $M$ be a model of $\mathrm{PA}$ with a non-standard element defined by a bounded formula (:ref{#lem-nonstandard-definable}), and $K = K_n(M)$. Since $n \geq 1$, $K \prec_{\Sigma_n} M$ by :ref{#lem-kn-elementary}. Let $\forall \bar x\ \sigma(\bar x)$ be a sentence of $S$, with $\sigma \in \Sigma_n$. It is true in $M$, since $M \models \mathrm{PA} \supseteq \mathrm I\Sigma_n$. For $\bar a$ in $K$, $M \models \sigma(\bar a)$, hence $K \models \sigma(\bar a)$ by elementarity; so $K \models \forall \bar x\ \sigma(\bar x)$. Thus $K \models S$, hence $K \models \mathrm I\Sigma_n$, and $K \models \mathrm B\Sigma_n$ by :ref{#thm-fo-parsons}. But $K = K_{(n-1)+1}(M)$ does not satisfy $\mathrm B\Sigma_n$, by :ref{#thm-isigma-not-bsigma} applied with $n - 1$: a contradiction.
+
+The proof is that of :ref{#thm-rabin}, one level lower: $\Pi_{n+1}$ sentences go down to $\Sigma_n$-elementary substructures, and the model $K_n(M)$ fails a consequence of $\mathrm I\Sigma_n$.
+:::
+::::
+
+::::exercise{#ex-tp-delta-not-sigma-pi difficulty=1 objective="Combine the diagonal set with its complement to separate $\Delta_{n+1}$ definability from $\Sigma_n$ and $\Pi_n$ definability in every model of $\mathrm I\Sigma_1$."}
+Let $M$ be a model of $\mathrm I\Sigma_1$, $n \geq 1$, and $D$ the set of :ref{#thm-hierarchy-proper}. Let $E = \{ 2y : y \in D \} \cup \{ 2y + 1 : y \in M \setminus D \}$. Show that $E$ is defined in $M$ without parameters both by a $\Sigma_{n+1}$ formula and by a $\Pi_{n+1}$ formula, and that it is neither $\Sigma_n$-definable nor $\Pi_n$-definable with parameters.
+
+:::solution
+Let $\delta(y)$ be a $\Pi_n$ formula without parameters that defines $D$. Every $x \in M$ is $y + y + r$ with $y \leq x$ and $r \leq 1$, and $y$ and $r$ are unique, by division with remainder (:ref{#prop-idelta0-basic}). So $x \in E$ if and only if
+$$
+\begin{gathered}
+\big( \exists y < x + 1\ (x = y + y) \wedge \forall y < x + 1\ (x = y + y \rightarrow \delta(y)) \big) \\
+\vee\; \exists y < x + 1\ (x = y + y + 1 \wedge \neg \delta(y)).
+\end{gathered}
+$$
+The first disjunct is the conjunction of a bounded formula and of a formula that is $\Pi_n$ after moving $\forall y$ to the front, hence $\Pi_n$; the second is $\Sigma_n$. A disjunction of a $\Pi_n$ and a $\Sigma_n$ formula, with bound variables renamed apart, is logically equivalent to a $\Sigma_{n+1}$ formula, putting the existential block of the $\Sigma_n$ part first, and to a $\Pi_{n+1}$ formula, putting the universal block of the $\Pi_n$ part first.
+
+If $E = \{ x : M \models \psi(x, \bar c) \}$ with $\psi \in \Sigma_n$, then $D = \{ y : M \models \exists x\ (x = y + y \wedge \psi(x, \bar c)) \}$, a $\Sigma_n$ definition with parameters, against :ref{#thm-hierarchy-proper}. If $\psi$ is $\Pi_n$, then $M \setminus D = \{ y : M \models \forall x\ (x = y + y + 1 \rightarrow \psi(x, \bar c)) \}$ is $\Pi_n$-definable, so $D$ is $\Sigma_n$-definable with parameters, again a contradiction. For $M = \nat$ this is item 2 of :ref{#cor-hierarchy-strict}, with $D$ in place of $\emptyset^{(n)}$.
+:::
+::::
+
+::::exercise{#ex-tp-diagonal-complete difficulty=2 objective="See that, in $\nat$, the diagonal set of the hierarchy theorem is complete, the parameter slot serving as the input of the reduction." lessons="truth-definitions"}
+Let $n \geq 1$, and let $D \subseteq \nat$ be the set of :ref{#thm-hierarchy-proper} for $M = \nat$. Show that every $\Pi^0_n$ set is many-one reducible to $D$, by a function of the form $m \mapsto \langle a, m \rangle$.
+
+:::solution
+Let $X$ be a $\Pi^0_n$ set. Its complement is $\Sigma^0_n$, hence defined in $\nat$ by a $\Sigma_n$ formula (:ref{#thm-definable-arithmetic}); after renaming, write it $\psi(v_1)$, and regard it as a formula $\psi'(v_0, v_1)$ in which $v_0$ does not occur. By :ref{#cor-snowing-general}, since $\nat \models \mathrm I\Sigma_1$, there is a code $a$ with $\nat \models \psi'(x, y) \leftrightarrow \mathrm{Sat}_{\Sigma_n}(a, \langle x, y \rangle)$ for all $x, y$. For $m \in \nat$, let $w = \langle a, m \rangle$. By the definition of $D$,
+$$
+w \notin D \iff \nat \models \mathrm{Sat}_{\Sigma_n}(a, \langle w, m \rangle) \iff \nat \models \psi'(w, m) \iff \nat \models \psi(m) \iff m \notin X.
+$$
+So $m \in X$ if and only if $\langle a, m \rangle \in D$, and $m \mapsto \langle a, m \rangle$ is computable. Since $D$ is itself $\Pi^0_n$, it is $\Pi^0_n$-complete, and its complement is $\Sigma^0_n$-complete. In the proof of the theorem, the parameter $c$ is folded into the diagonal element; here the same slot carries the input $m$.
+:::
+::::
+:::::

@@ -79,7 +79,7 @@ Why are $\varphi(\sigma)$ and $\psi(\sigma)$ disjoint?
   Incompatibility alone says nothing about the lengths at which the two successors die.
 :::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-separation-injections difficulty=2 objective="Reduce $\Sigma^0_1$ separation to the separation of the ranges of two injections, with the least-witness coding of the equivalents of $\mathsf{ACA}_0$."}
 Show that $\mathsf{WKL}$ is equivalent over $\mathsf{RCA}_0$ to the statement: for every pair of injective functions $f, g$ with disjoint ranges, there is a set $X$ containing the range of $f$ and disjoint from the range of $g$.
 
 :::solution
@@ -152,14 +152,81 @@ The following theorems are also equivalent to $\mathsf{WKL}_0$ over $\mathsf{RCA
 | Topology | Brouwer's fixed point theorem for the unit square | Theorem IV.7.7 |
 | Functional analysis | the Hahn–Banach theorem for separable Banach spaces | Theorems IV.9.3–IV.9.4 |
 
-Several of these reversals, such as the one for prime ideals, go through $\Sigma^0_1$ separation in the form of the exercise above, with two injections with disjoint ranges; others, such as the one for Brouwer's theorem, start from an infinite binary tree with no path, as in the proof of :ref{#thm-wkl-heine-borel}. The usual proofs of all these theorems use compactness, in the form of a finite subcover or of a path through an infinite binary tree of choices.
+Several of these reversals, such as the one for prime ideals, go through $\Sigma^0_1$ separation in the form of :ref{#ex-separation-injections}, with two injections with disjoint ranges; others, such as the one for Brouwer's theorem, start from an infinite binary tree with no path, as in the proof of :ref{#thm-wkl-heine-borel}. The usual proofs of all these theorems use compactness, in the form of a finite subcover or of a path through an infinite binary tree of choices.
 
 ## Notes and references
 
-$\Sigma^0_1$ separation is Simpson, Lemma IV.4.4, which also contains the form with injections of the exercise; the main results of Section IV.4 are from Friedman, Simpson and Smith (1983). The equivalence with the Heine–Borel theorem was announced by Friedman (1976) (Simpson, Theorem IV.1.2 and notes to Section IV.1). Dzhafarov and Mummert, Sections 5.6.2 and 10.5, and Hirschfeldt, Section 4.4, give the same equivalences.
+$\Sigma^0_1$ separation is Simpson, Lemma IV.4.4, which also contains the form with injections of :ref{#ex-separation-injections}; the main results of Section IV.4 are from Friedman, Simpson and Smith (1983). The equivalence with the Heine–Borel theorem was announced by Friedman (1976) (Simpson, Theorem IV.1.2 and notes to Section IV.1). Dzhafarov and Mummert, Sections 5.6.2 and 10.5, and Hirschfeldt, Section 4.4, give the same equivalences.
 
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Chapter IV.
 - H. Friedman, *Systems of second order arithmetic with restricted induction, I, II*, abstracts, Journal of Symbolic Logic 41 (1976), 557–559.
 - H. Friedman, S. G. Simpson and R. L. Smith, *Countable algebra and set existence axioms*, Annals of Pure and Applied Logic 25 (1983), 141–181.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 5.6.2 and 10.5.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 4.4.
+
+:::::exercises
+::::exercise{#ex-dnc2-wkl difficulty=2 objective="Formalize the characterization of PA degrees by $\{0,1\}$-valued DNC functions as an equivalent of $\mathsf{WKL}_0$, reducing separation to diagonalization."}
+Show that $\mathsf{WKL}_0$ is equivalent over $\mathsf{RCA}_0$ to the statement: for every set $X$ there is a function $g : \nat \to \{0, 1\}$ that is DNC relative to $X$, that is, $g(e) \neq \Phi^X_e(e)$ for every $e$ such that $\Phi^X_e(e)$ converges.
+
+:::solution
+($\Rightarrow$) Let $T$ be the set of strings $\sigma \in 2^{<\nat}$ such that $\sigma(e) \neq v$ for every $e < |\sigma|$ such that $\Phi^X_{e, |\sigma|}(e)$ converges with value $v$. It exists by $\Delta^0_1$ comprehension, and it is a tree, since a computation that converges by stage $|\tau|$ converges by stage $|\sigma|$ for $\tau \preceq \sigma$. It is infinite: for each $\ell$, the string of length $\ell$ with $\sigma(e) = 1$ if $\Phi^X_{e, \ell}(e)$ converges with value $0$, and $\sigma(e) = 0$ otherwise, belongs to $T$. Let $g$ be a path. If $\Phi^X_e(e)$ converges with value $v$ at stage $s$, then $g \uh \ell \in T$ for $\ell > \max(e, s)$, so $g(e) \neq v$.
+
+($\Leftarrow$) We prove $\Sigma^0_1$ separation and apply :ref{#thm-wkl-separation}. Let $\varphi(n) \equiv \exists k\, \theta(n, k)$ and $\psi(n) \equiv \exists k\, \eta(n, k)$ be disjoint, with $\theta, \eta$ bounded and set parameters joined into $X$. By the formalized $s$-$m$-$n$ theorem, as in the proof of :ref{#thm-aca-equivalents}, there is a primitive recursive function $h$ such that $\Phi^X_{h(n)}(h(n))$ searches for the least $k$ with $\theta(n, k)$ or $\eta(n, k)$, and outputs $0$ if $\theta(n, k)$ holds and $1$ otherwise. If $\varphi(n)$ holds, then $\psi(n)$ fails, the search ends at a witness of $\theta$, and the output is $0$; if $\psi(n)$ holds, the output is $1$; otherwise the computation diverges. Let $g$ be $\{0,1\}$-valued and DNC relative to $X$, and $S = \{ n : g(h(n)) = 1 \}$, which exists by $\Delta^0_1$ comprehension. If $\varphi(n)$, then $g(h(n)) \neq 0$, so $n \in S$; if $\psi(n)$, then $g(h(n)) \neq 1$, so $n \notin S$. So $S$ separates the two formulas.
+
+This is the formal counterpart of the equivalence of (1) and (2) in :ref{#thm-pa-characterization}.
+:::
+::::
+
+::::exercise{#ex-finite-cover-check difficulty=1 objective="Complete a step of the proof of the Heine–Borel theorem: whether finitely many rational intervals cover a closed interval is decided by finitely many rational points."}
+Let $c \leq d$ be rationals and $(a_i, b_i)$, $i < n$, finitely many open intervals with rational endpoints, with union $U$. Show that if some real $x \in [c, d]$ is not in $U$, then some point of the finite set
+$$
+F = \big(\{ c \} \cup \{ b_i : i < n \}\big) \cap [c, d]
+$$
+is not in $U$. Deduce that whether $[c, d] \subseteq U$ is decidable from $c$, $d$ and the endpoints, as used for the tree of the forward direction of :ref{#thm-wkl-heine-borel}.
+
+:::solution
+Let $x \in [c, d] \setminus U$, and let $p$ be the largest element of $\{ c \} \cup \{ b_i : i < n,\ c \leq b_i \leq x \}$, a finite non-empty set of rationals; the comparisons $b_i \leq x$ are finitely many, so the case distinction is legitimate. Then $c \leq p \leq x \leq d$, so $p \in F$. Suppose that $p \in (a_j, b_j)$ for some $j$. Then $p < b_j$. If $b_j \leq x$, then $c \leq p < b_j \leq x$, so $b_j$ belongs to the set of which $p$ is the largest element, and $b_j \leq p$, a contradiction. So $x < b_j$, and $a_j < p \leq x < b_j$, so $x \in (a_j, b_j) \subseteq U$, a contradiction. Hence $p \notin U$.
+
+Consequently $[c, d] \subseteq U$ if and only if every point of $F$ lies in some $(a_i, b_i)$: the direct implication is clear, and the converse is the contrapositive of the statement just proved. This is a finite conjunction of strict inequalities between rationals, which is decidable. In the proof of :ref{#thm-wkl-heine-borel}, it shows that the condition $I_\sigma \not\subseteq \bigcup_{i < |\sigma|} (a_i, b_i)$ is decidable and that, when finitely many intervals do not cover $[0, 1]$, some rational point of $[0,1]$ is not covered.
+:::
+::::
+
+::::exercise{#ex-sigma01-choice difficulty=2 objective="Apply $\Sigma^0_1$ separation to choose, for each $n$, one of two $\Sigma^0_1$ alternatives that is known to hold."}
+Show in $\mathsf{WKL}_0$: if $\varphi_0(n)$ and $\varphi_1(n)$ are $\Sigma^0_1$ formulas such that $\forall n\, (\varphi_0(n) \vee \varphi_1(n))$, then there is a set $X$ such that, for every $n$, $n \in X \rightarrow \varphi_1(n)$ and $n \notin X \rightarrow \varphi_0(n)$.
+
+:::solution
+Write $\varphi_i(n) \equiv \exists k\, \theta_i(n, k)$ with $\theta_i$ bounded. Let
+$$
+\begin{aligned}
+\varphi(n) &\equiv \exists k\, \big(\theta_1(n, k) \wedge \forall k' \leq k\ \neg \theta_0(n, k')\big), \\
+\psi(n) &\equiv \exists k\, \big(\theta_0(n, k) \wedge \forall k' < k\ \neg \theta_1(n, k')\big),
+\end{aligned}
+$$
+two $\Sigma^0_1$ formulas: $\varphi(n)$ says that a witness for $\varphi_1$ appears strictly before any witness for $\varphi_0$, and $\psi(n)$ that a witness for $\varphi_0$ appears no later than any witness for $\varphi_1$. They are disjoint: if $\varphi(n)$ holds with $k$ and $\psi(n)$ with $k''$, then $k'' \leq k$ contradicts $\forall k' \leq k\ \neg\theta_0(n, k')$, and $k < k''$ contradicts $\forall k' < k''\ \neg \theta_1(n, k')$. By :ref{#thm-wkl-separation}, there is $X$ with $\varphi(n) \rightarrow n \in X$ and $\psi(n) \rightarrow n \notin X$.
+
+Let $n \in X$, and suppose that $\varphi_1(n)$ fails. Then $\varphi_0(n)$ holds; with $k$ its least witness, $\psi(n)$ holds, since $\theta_1(n, k')$ fails for all $k'$, and $n \notin X$, a contradiction. Symmetrically, let $n \notin X$, and suppose that $\varphi_0(n)$ fails. Then $\varphi_1(n)$ holds, with some witness $k$, and $\varphi(n)$ holds, since $\theta_0(n, k')$ fails for all $k'$; so $n \in X$, a contradiction.
+:::
+::::
+
+::::exercise{#ex-separation-parameter-free difficulty=2 objective="Show with an ω-model generated by a PA set that set parameters are needed in $\Sigma^0_1$ separation to obtain $\mathsf{WKL}_0$." lessons="wkl0"}
+Show that $\mathsf{RCA}_0$ together with $\Sigma^0_1$ separation restricted to formulas with no free set variable (number variables are allowed) does not prove $\mathsf{WKL}_0$.
+
+:::solution
+Let $P$ be a PA set (:ref{#def-pa-degree}), for instance $\emptyset'$, and $\mathcal M = \{ X : X \leq_T P \}$, an ω-model of $\mathsf{RCA}_0$ (:ref{#thm-rca-turing-ideal}). Let $\varphi(n, \vec p)$ and $\psi(n, \vec p)$ be $\Sigma^0_1$ with no free set variable, and fix numbers $\vec p$ such that $\mathcal M \models \neg \exists n\, (\varphi(n, \vec p) \wedge \psi(n, \vec p))$. By absoluteness (:ref{#prop-omega-absolute}), the sets $A = \{ n : \varphi(n, \vec p) \}$ and $B = \{ n : \psi(n, \vec p) \}$ are disjoint, and they are c.e. (:ref{#cor-sigma1-ce}). By :ref{#thm-pa-characterization}, $P$ computes a set $C$ with $A \subseteq C$ and $C \cap B = \emptyset$; then $C \in \mathcal M$ separates the two formulas in $\mathcal M$, by absoluteness. So $\mathcal M$ satisfies the restricted scheme. By :ref{#ex-scott-not-principal}, $\mathcal M$ is not a Scott ideal, so it is not a model of $\mathsf{WKL}_0$ (:ref{#prop-wkl-scott}).
+
+With set parameters, separation must hold relative to $P$ itself, which would require a set of $\mathcal M$ that is PA relative to $P$; this is what fails.
+:::
+::::
+
+::::exercise{#ex-heine-borel-hypotheses difficulty=1 objective="See why the Heine–Borel theorem needs a closed bounded interval and open intervals in the cover, with two counterexamples."}
+1. Give a sequence of open intervals with rational endpoints that covers $(0, 1]$, no finite subfamily of which covers $(0, 1]$.
+2. Give a sequence of closed intervals with rational endpoints that covers $[0, 1]$, no finite subfamily of which covers $[0, 1]$.
+
+For each, say which step of the forward direction of :ref{#thm-wkl-heine-borel} fails.
+
+:::solution
+1. Let $U_n = (2^{-n-1}, 2)$. Every $x \in (0, 1]$ satisfies $2^{-n-1} < x$ for some $n$, so $x \in U_n$. A finite subfamily with largest index $N$ has union $(2^{-N-1}, 2)$, which misses $2^{-N-1} \in (0, 1]$. In the proof, the path $X$ gives a point $x = \sum_i X(i) 2^{-i-1}$ of $[0, 1]$; with $(0, 1]$ in place of $[0, 1]$, this point may be $0$, which is not covered: here the tree of intervals not covered by the first $n$ intervals has the leftmost path $000\cdots$.
+2. Let $J_0 = [0, 0]$ and $J_{n+1} = [2^{-n-1}, 2^{-n}]$. The point $0$ is in $J_0$. For $x \in (0, 1]$, let $n$ be least with $2^{-n-1} < x$; then $x \leq 2^{-n}$, since either $n = 0$ and $x \leq 1$, or $2^{-n} < x$ would contradict the minimality of $n$; so $x \in J_{n+1}$. A finite subfamily of intervals with index at most $N$ has union contained in $\{0\} \cup [2^{-N}, 1]$, which misses $2^{-N-1}$. In the proof, the point $x$ covered by $(a_i, b_i)$ has a neighborhood $(x - \delta, x + \delta)$ inside it, which gives a small dyadic interval $I_{X \uh n}$ inside it; for $x = 0$ and the cover above, $0$ lies only in $J_0$, which contains no neighborhood of $0$.
+:::
+::::
+:::::

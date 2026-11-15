@@ -1,7 +1,7 @@
 ---
 title: Π¹₁ norms and stage comparison
 summary: The rank of the normal-form tree as a stage at which an element enters a Π¹₁ set; comparison of ranks by strictly monotone maps; the stage comparison relations are Π¹₁, so the stage map is a Π¹₁ norm and the Π¹₁ sets have the prewellordering property.
-duration: 50
+duration: 45
 prerequisites: [hyperarithmetic/kleene-theorem]
 ---
 
@@ -128,17 +128,7 @@ A **norm** on a set $A \subseteq \nat$ is a map $\varphi$ from $A$ to the ordina
 
 By :ref{#thm-stage-comparison}, the map $n \mapsto \rho_n$ is a $\Pi^1_1$ norm on $A$, for every sequence of trees given by the normal form: **the $\Pi^1_1$ sets have the prewellordering property**. The name comes from the relation $\varphi(n) \leq \varphi(m)$ on $A$, which is a prewellordering: a total preorder without infinite strictly descending sequences.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that for $n \in A$, the set $\{ m : \rho_m < \rho_n \}$ is $\Delta^1_1$, and that the relation $n \leq^* m \wedge m \leq^* n$ is $\Pi^1_1$ and an equivalence relation on $A$ whose classes are the sets of elements entering $A$ at the same stage.
-
-:::solution
-The set is $\{ m : m <^* n \}$, which is $\Pi^1_1$, and $\{ m : \exists k\ (\langle k \rangle \in T_n \wedge \rho(T_m) \leq \rho((T_n)_{\langle k \rangle})) \}$, which is $\Sigma^1_1$, by the display after :ref{#lem-rank-comparison}, since $T_n$ is well-founded. The relation is a conjunction of $\Pi^1_1$ relations. It holds exactly when $n, m \in A$ and $\rho_n = \rho_m$, which is an equivalence relation on $A$ with the stated classes.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-wo-norm difficulty=2 objective="Build a $\Pi^1_1$ norm on $\mathrm{WO}$ directly from embeddings of well-orderings, without the normal form theorem."}
 For an index $e$ of a computable linear order, let $\varphi(e) = |L_e|$ if $e \in \mathrm{WO}$, and $\varphi(e) = \infty$ otherwise. Show that $\varphi$ is a $\Pi^1_1$ norm on $\mathrm{WO}$, without using the normal form theorem.
 
 :::solution
@@ -160,3 +150,108 @@ Monin and Patey present the analogy between $\Pi^1_1$ and c.e. sets differently:
 - Y. N. Moschovakis, *Descriptive Set Theory*, 2nd edition, American Mathematical Society, 2009, Sections 4A–4B.
 - A. S. Kechris, *Classical Descriptive Set Theory*, Springer, 1995, Sections 34–35 (co-analytic ranks and rank theory).
 - B. Monin and L. Patey, *Computability theory*, chapter *Beyond hyperarithmetic*, sections *The Π¹₁ sets and the well-orders* and *Analogies between Π¹₁ sets and c.e. sets*.
+
+:::::exercises
+::::exercise{#ex-same-stage difficulty=1 objective="Apply stage comparison to the elements that enter a $\Pi^1_1$ set strictly before a given element, and to the relation of entering at the same stage."}
+Show that for $n \in A$, the set $\{ m : \rho_m < \rho_n \}$ is $\Delta^1_1$, and that the relation $n \leq^* m \wedge m \leq^* n$ is $\Pi^1_1$ and an equivalence relation on $A$ whose classes are the sets of elements entering $A$ at the same stage.
+
+:::solution
+The set is $\{ m : m <^* n \}$, which is $\Pi^1_1$, and $\{ m : \exists k\ (\langle k \rangle \in T_n \wedge \rho(T_m) \leq \rho((T_n)_{\langle k \rangle})) \}$, which is $\Sigma^1_1$, by the display after :ref{#lem-rank-comparison}, since $T_n$ is well-founded. The relation is a conjunction of $\Pi^1_1$ relations. It holds exactly when $n, m \in A$ and $\rho_n = \rho_m$, which is an equivalence relation on $A$ with the stated classes.
+:::
+::::
+
+::::exercise{#ex-rank-full-trees difficulty=1 objective="Compare the ranks of explicit trees by strictly monotone maps, and see that such maps never shorten nodes."}
+For $k \in \nat$, let $F_k$ be the tree of all sequences of length at most $k$, and let
+$$
+G = \{ \emptyset \} \cup \{ \langle n \rangle \sigma : n \in \nat,\ |\sigma| \leq n \}.
+$$
+
+1. Show that every strictly monotone map $g : S \to T$ between trees satisfies $|g(\sigma)| \geq |\sigma|$ for every $\sigma \in S$. Deduce, without :ref{#lem-rank-comparison}, that there is a strictly monotone map from $F_j$ to $F_k$ if and only if $j \leq k$.
+2. Show that $\rho(G) = \omega$, that every $F_k$ has a strictly monotone map into $G$, and that $G$ has none into any $F_k$.
+
+:::solution
+1. By induction on $|\sigma|$. For $\sigma = \emptyset$ there is nothing to prove. If $\sigma = \tau n$, then $g(\tau) \subsetneq g(\sigma)$, so $|g(\sigma)| \geq |g(\tau)| + 1 \geq |\tau| + 1 = |\sigma|$. If $j \leq k$, the inclusion of $F_j$ into $F_k$ is strictly monotone. Conversely, if $g : F_j \to F_k$ is strictly monotone, then $g(0^j)$ is a node of $F_k$ of length at least $j$, so $j \leq k$.
+2. $G$ is a tree: the prefixes of $\langle n \rangle \sigma$ are $\emptyset$ and the sequences $\langle n \rangle \tau$ with $\tau \subseteq \sigma$. The subtree $G_{\langle n \rangle}$ is $F_n$, of rank $n$ (as observed at the beginning of the lesson), so $\mathrm{rk}(G) = \sup_n (n + 1) = \omega$ by :ref{#def-tree-rank}. The map $\sigma \mapsto \langle k \rangle \sigma$ sends $F_k$ into $G$, since $|\sigma| \leq k$, and it is strictly monotone. Finally, $G$ contains $\langle k \rangle 0^k$, of length $k + 1$; by item 1, its image under a strictly monotone map would have length at least $k + 1$, so $G$ has no strictly monotone map into $F_k$. Both facts agree with :ref{#lem-rank-comparison}, since $k < \omega$.
+:::
+::::
+
+::::exercise{#ex-rank-comparison-complexity difficulty=1 objective="Locate the comparison relations $\rho(S) \leq \rho(T)$ and $\rho(S) < \rho(T)$ on computable trees exactly in the analytical hierarchy."}
+Let $\mathrm{Tr}$ be the set of numbers $e$ such that $\Phi_e$ is total, $\{0, 1\}$-valued, and the characteristic function of a tree $T_e$ containing the empty sequence; it is an arithmetic set. Show that the set of pairs $(d, e) \in \mathrm{Tr}^2$ with $\rho(T_d) \leq \rho(T_e)$ is $\Sigma^1_1$ but not $\Pi^1_1$, and that the set of pairs $(d, e) \in \mathrm{Tr}^2$ with $\rho(T_d) < \rho(T_e)$ is $\Pi^1_1$ but not $\Sigma^1_1$.
+
+:::solution
+*Upper bounds.* By :ref{#lem-rank-comparison}, for $d, e \in \mathrm{Tr}$, $\rho(T_d) \leq \rho(T_e)$ if and only if some function $g$, defined on codes of sequences, maps $T_d$ into $T_e$ strictly monotonically. This condition on $d$, $e$ and $g$ is arithmetic, so the relation is $\Sigma^1_1$. For the strict relation: if $T_d$ is well-founded, then $\rho(T_d)$ is an ordinal, and $\rho(T_d) < \rho(T_e)$ holds if and only if $\rho(T_e) \leq \rho(T_d)$ fails; if $T_d$ is ill-founded, $\rho(T_d) = \infty$ and $\rho(T_d) < \rho(T_e)$ is false. So
+$$
+\rho(T_d) < \rho(T_e) \iff T_d \text{ is well-founded} \wedge \neg \big(\rho(T_e) \leq \rho(T_d)\big),
+$$
+the conjunction of a $\Pi^1_1$ condition and the negation of a $\Sigma^1_1$ condition.
+
+*Lower bounds.* Let $\mathrm{WF}^+ = \{ d \in \mathrm{Tr} : T_d \text{ is well-founded} \}$. It is not $\Sigma^1_1$. Indeed, let $A$ be a $\Pi^1_1$ set that is not $\Sigma^1_1$ (:ref{#prop-pi11-not-sigma11}), and $(T'_n)$ uniformly computable trees containing the empty sequence with $n \in A$ if and only if $T'_n$ is well-founded (:ref{#thm-pi11-normal-form}). By the SMN theorem, there is a computable function $h$ with $h(n) \in \mathrm{Tr}$ and $T_{h(n)} = T'_n$ for every $n$. Then $n \in A$ if and only if $h(n) \in \mathrm{WF}^+$, so $A$ would be $\Sigma^1_1$ if $\mathrm{WF}^+$ were. Now fix $u \in \mathrm{Tr}$ with $T_u = \nat^{<\nat}$, so that $\rho(T_u) = \infty$. Then
+$$
+\begin{gathered}
+\mathrm{WF}^+ = \{ d \in \mathrm{Tr} : \rho(T_d) < \rho(T_u) \}, \\
+\mathrm{Tr} \setminus \mathrm{WF}^+ = \{ d \in \mathrm{Tr} : \rho(T_u) \leq \rho(T_d) \}.
+\end{gathered}
+$$
+If the strict relation were $\Sigma^1_1$, so would be $\mathrm{WF}^+$. If the relation $\leq$ were $\Pi^1_1$, so would be $\mathrm{Tr} \setminus \mathrm{WF}^+$, and $\mathrm{WF}^+ = \mathrm{Tr} \setminus (\mathrm{Tr} \setminus \mathrm{WF}^+)$ would be $\Sigma^1_1$, since $\mathrm{Tr}$ is arithmetic. Both are impossible.
+:::
+::::
+
+::::exercise{#ex-ce-stage-comparison difficulty=1 objective="Compute the stage comparison relations of a c.e. set from its enumeration, and check that they are c.e."}
+Let $A$ be a c.e. set, with the enumeration $(A_s)$ and the trees $T_n$ of :ref{#ex-ce-stages}. Show that
+$$
+\begin{gathered}
+n \leq^* m \iff \exists s \geq 1\ (n \in A_s \wedge m \notin A_{s-1}), \\
+n <^* m \iff \exists s\ (n \in A_s \wedge m \notin A_s).
+\end{gathered}
+$$
+Deduce that both relations are c.e., and that each of them is computable only if $A$ is.
+
+:::solution
+For each $n$, let $s_n$ be the least $s$ with $n \in A_s$, and $s_n = \infty$ if $n \notin A$. Since $A_0 = \emptyset$, $s_n \geq 1$, and by :ref{#ex-ce-stages}, $\rho_n = s_n - 1$ if $n \in A$ and $\rho_n = \infty$ otherwise. Since the sets $A_s$ increase, $n \in A_s$ if and only if $s_n \leq s$. So $n \leq^* m$ holds if and only if $s_n$ is finite and $s_n \leq s_m$, and $n <^* m$ if and only if $s_n$ is finite and $s_n < s_m$.
+
+If $s_n$ is finite and $s_n \leq s_m$, then $s = s_n \geq 1$ satisfies $n \in A_s$, and $m \notin A_{s-1}$ since $s_m > s - 1$. Conversely, if $n \in A_s$ and $m \notin A_{s-1}$, then $s_n \leq s$ and $s_m > s - 1$, that is, $s_n \leq s \leq s_m$. Similarly, $s_n < s_m$ with $s_n$ finite holds if and only if some $s$ satisfies $s_n \leq s < s_m$, that is, $n \in A_s$ and $m \notin A_s$.
+
+The relations "$n \in A_s$" and "$m \notin A_s$" are computable, so both relations are $\Sigma^0_1$. Finally, $n \leq^* n$ if and only if $n \in A$, so $A$ is computable if $\leq^*$ is. For $<^*$: if $A = \nat$, $A$ is computable; otherwise fix $m_0 \notin A$, and $n <^* m_0$ if and only if $n \in A$. This is the c.e. counterpart of :ref{#thm-stage-comparison}.
+:::
+::::
+
+::::exercise{#ex-norm-min-max difficulty=2 objective="Combine stage comparison relations to build $\Pi^1_1$ norms on unions and intersections of $\Pi^1_1$ sets."}
+Let $B$ and $C$ be $\Pi^1_1$ sets, let $A = \{ 2n : n \in B \} \cup \{ 2n + 1 : n \in C \}$, with stages $\rho_k$ given by a sequence of trees as in :ref{#def-pi11-stage}, and let
+$$
+\varphi(n) = \min(\rho_{2n}, \rho_{2n+1}), \qquad \psi(n) = \max(\rho_{2n}, \rho_{2n+1}),
+$$
+computed in the ordinals extended by $\infty$. Show that $\varphi$ is a $\Pi^1_1$ norm on $B \cup C$ and that $\psi$ is a $\Pi^1_1$ norm on $B \cap C$.
+
+:::solution
+First, $\varphi(n) = \infty$ if and only if $\rho_{2n} = \rho_{2n+1} = \infty$, that is, $n \notin B \cup C$; and $\psi(n) = \infty$ if and only if one of the two stages is $\infty$, that is, $n \notin B \cap C$. So $\varphi$ and $\psi$ are norms on $B \cup C$ and $B \cap C$ in the sense of :ref{#def-pi11-norm}. We write their comparison relations with the $\Pi^1_1$ relations $\leq^*$ and $<^*$ of :ref{#thm-stage-comparison}; finite conjunctions and disjunctions of $\Pi^1_1$ formulas are $\Pi^1_1$.
+
+*The norm $\varphi$.* We claim
+$$
+n \in B \cup C \wedge \varphi(n) \leq \varphi(m) \iff \exists i < 2\ \big(2n + i \leq^* 2m \wedge 2n + i \leq^* 2m + 1\big).
+$$
+If $n \in B \cup C$, then $\varphi(n) = \rho_{2n+i}$ for some $i < 2$ with $\rho_{2n+i} < \infty$, so $2n + i \in A$; if moreover $\varphi(n) \leq \varphi(m)$, then $\rho_{2n+i}$ is at most both $\rho_{2m}$ and $\rho_{2m+1}$. Conversely, if $2n + i \leq^* 2m$ and $2n + i \leq^* 2m + 1$, then $2n + i \in A$, so $n \in B \cup C$, and $\varphi(n) \leq \rho_{2n+i} \leq \min(\rho_{2m}, \rho_{2m+1}) = \varphi(m)$. The same argument with $<$ and $<^*$ gives the strict relation.
+
+*The norm $\psi$.* We claim
+$$
+n \in B \cap C \wedge \psi(n) \leq \psi(m) \iff \exists i < 2\ \big(2n \leq^* 2m + i \wedge 2n + 1 \leq^* 2m + i\big).
+$$
+If $n \in B \cap C$ and $\psi(n) \leq \psi(m)$, let $i < 2$ with $\psi(m) = \rho_{2m+i}$; then $2n, 2n + 1 \in A$ and both $\rho_{2n}$ and $\rho_{2n+1}$ are at most $\rho_{2m+i}$. Conversely, the right-hand side gives $2n, 2n + 1 \in A$, so $n \in B \cap C$, and $\psi(n) \leq \rho_{2m+i} \leq \psi(m)$. Again, the strict relation is obtained by replacing $\leq$ and $\leq^*$ by $<$ and $<^*$.
+:::
+::::
+
+::::exercise{#ex-norm-initial-segments difficulty=2 objective="Extend the corollary on initial segments to an arbitrary $\Pi^1_1$ norm, and deduce that its values on a non-$\Delta^1_1$ set have no largest element."}
+Let $\varphi$ be a $\Pi^1_1$ norm on a set $A$ (:ref{#def-pi11-norm}), and write $n \leq_\varphi m$ for $n \in A \wedge \varphi(n) \leq \varphi(m)$, and $n <_\varphi m$ for $n \in A \wedge \varphi(n) < \varphi(m)$.
+
+1. Show that $A$ is $\Pi^1_1$, and that for every $n \in A$, the sets $\{ m : \varphi(m) \leq \varphi(n) \}$ and $\{ m : \varphi(m) < \varphi(n) \}$ are $\Delta^1_1$.
+2. Show that if $A$ is not $\Delta^1_1$, then the set $\{ \varphi(n) : n \in A \}$ has no largest element.
+3. Show that the relation $\leq_\varphi$ is $\Delta^1_1$ only if $A$ is.
+
+:::solution
+1. $n \in A$ if and only if $n \leq_\varphi n$, so $A$ is $\Pi^1_1$. Let $n \in A$, so that $\varphi(n)$ is an ordinal. A number $m$ with $\varphi(m) \leq \varphi(n)$ has $\varphi(m) < \infty$, so it belongs to $A$; hence $\{ m : \varphi(m) \leq \varphi(n) \} = \{ m : m \leq_\varphi n \}$, which is $\Pi^1_1$. Since the ordinals extended by $\infty$ are linearly ordered, $\varphi(m) \leq \varphi(n)$ holds if and only if $\varphi(n) < \varphi(m)$ fails, that is, since $n \in A$, if and only if $n <_\varphi m$ fails; so the set is also $\Sigma^1_1$. In the same way, $\{ m : \varphi(m) < \varphi(n) \}$ is $\{ m : m <_\varphi n \}$, which is $\Pi^1_1$, and $\{ m : \neg (n \leq_\varphi m) \}$, which is $\Sigma^1_1$.
+2. If $\varphi(n_0)$ were the largest value of $\varphi$ on $A$, with $n_0 \in A$, then $A = \{ m : \varphi(m) \leq \varphi(n_0) \}$: members of $A$ satisfy the inequality by maximality, and numbers satisfying it belong to $A$ by item 1. So $A$ would be $\Delta^1_1$ by item 1.
+3. If $\leq_\varphi$ is $\Sigma^1_1$, then so is $A = \{ n : n \leq_\varphi n \}$, which is then $\Delta^1_1$.
+
+For the stage map, item 1 is :ref{#cor-initial-segments} and :ref{#ex-same-stage}. Item 2 says that a $\Pi^1_1$ set that is not $\Delta^1_1$ receives new elements at arbitrarily late values of the norm, which the lesson on uniformization makes precise for the stages.
+:::
+::::
+:::::

@@ -91,7 +91,7 @@ Strong reducibility is strictly stronger than computable reducibility in general
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-rt22-not-c-wkl difficulty=2 objective="Transfer separations between ω-reducibility and computable reducibility in both directions, through reductions to WKL and problems with computable solutions."}
 Show that $\mathsf{RT}^2_2 \not\leq_c \mathsf{WKL}$, and that $\mathsf{WKL} \not\leq_c \mathsf{RT}^1_2$.
 
 :::solution
@@ -108,3 +108,49 @@ Scott (1962) proved that every PA degree bounds a Scott ideal, in the language o
 - V. Brattka and G. Gherardi, *Weihrauch degrees, omniscience principles and weak computability*, Journal of Symbolic Logic 76 (2011), 143–176.
 - D. D. Dzhafarov and C. G. Jockusch, *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 4.2 and 4.5.
+
+:::::exercises
+::::exercise{#ex-scott-converse difficulty=1 objective="Prove the converse of Scott's theorem, characterizing the sets that bound a Scott ideal containing a given set."}
+Let $A$ and $P$ be sets. Show that some Scott ideal containing $A$ has all its members computable in $P$ if and only if $P$ is PA relative to $A$. Explain why the hypothesis that $P$ computes $A$ in :ref{#thm-scott-pa} is redundant.
+
+:::solution
+Suppose that $\mathcal I$ is a Scott ideal containing $A$ with all members computable in $P$. By :ref{#prop-wkl-scott} (2), some $Y \in \mathcal I$ is PA relative to $A$: it computes a $\{0, 1\}$-valued function $g$ with $g(e) \neq \Phi^A_e(e)$ whenever $\Phi^A_e(e)$ converges. Since $Y \leq_T P$, $P$ computes $g$ too, and is PA relative to $A$.
+
+Conversely, a set PA relative to $A$ computes $A$ (:ref{#ex-pa-relative}), so :ref{#thm-scott-pa} applies to it. So the hypothesis "$P$ computes $A$" in :ref{#thm-scott-pa} follows from the hypothesis that $P$ is PA relative to $A$; it is stated only for convenience, since the proof uses it to compute the class $\mathcal C$ from $P$.
+:::
+::::
+
+::::exercise{#ex-wkl-dnc2-sc difficulty=1 objective="Show that weak König's lemma is strongly computably equivalent to the problem of diagonalizing against an oracle with values in $\{0, 1\}$."}
+Let $\mathsf D$ be the problem whose instances are all sets $X$, the solutions to $X$ being the functions $g : \nat \to \{0, 1\}$ with $g(e) \neq \Phi^X_e(e)$ whenever $\Phi^X_e(e)$ converges. Show that $\mathsf D \equiv_{sc} \mathsf{WKL}$, that is, $\mathsf D \leq_{sc} \mathsf{WKL}$ and $\mathsf{WKL} \leq_{sc} \mathsf D$.
+
+:::solution
+($\mathsf D \leq_{sc} \mathsf{WKL}$) Given $X$, let $\widetilde X$ be the tree of strings $\sigma \in 2^{<\nat}$ such that $\sigma(e) \neq \Phi^X_e(e)[|\sigma|]$ for every $e < |\sigma|$ for which this computation converges within $|\sigma|$ steps. It is computable in $X$ and closed under prefixes, and the paths through it are the solutions to $X$. It is infinite, since the restriction of any solution to $n$ belongs to it for every $n$, and solutions exist (for instance, $g(e) = 1$ if $\Phi^X_e(e)\converge = 0$, and $g(e) = 0$ otherwise). Each path is itself a solution.
+
+($\mathsf{WKL} \leq_{sc} \mathsf D$) Given an infinite binary tree $T$, let $\widetilde X = T$. A solution $g$ to $T$ makes $g$ PA relative to $T$. By :ref{#ex-pa-relative}, $g$ computes $T$; by :ref{#thm-pa-characterization} relativized to $T$, $g$ computes a member of every non-empty $\Pi^0_1(T)$ class, in particular a path through $T$. Only $g$ is used.
+:::
+::::
+
+::::exercise{#ex-wkl-pa-characterization difficulty=2 objective="Characterize the problems ω-reducible to WKL by the PA sets over their instances, and use it to bound their solutions."}
+Show that $\mathsf P \leq_\omega \mathsf{WKL}$ if and only if, for every instance $X$ of $\mathsf P$, every set PA relative to $X$ computes a solution to $X$. Deduce that if $\mathsf P \leq_\omega \mathsf{WKL}$, every computable instance of $\mathsf P$ has a low solution, and use this to show $\mathsf{RT}^2_2 \not\leq_\omega \mathsf{WKL}$ again.
+
+:::solution
+($\Rightarrow$) Let $X$ be an instance and $P$ a set PA relative to $X$. Then $P$ computes $X$ (:ref{#ex-pa-relative}), so by :ref{#thm-scott-pa} there is a Scott ideal $\mathcal I$ containing $X$, all of whose members are computable in $P$. It satisfies $\mathsf{WKL}$, hence $\mathsf P$, so $X$ has a solution in $\mathcal I$, computable in $P$.
+
+($\Leftarrow$) Let $\mathcal I$ be a Scott ideal and $X \in \mathcal I$ an instance of $\mathsf P$. By :ref{#prop-wkl-scott} (2), some $P \in \mathcal I$ is PA relative to $X$; it computes a solution to $X$, which belongs to $\mathcal I$. So every Turing ideal satisfying $\mathsf{WKL}$ satisfies $\mathsf P$.
+
+For a computable instance $X$, the sets PA relative to $X$ are the PA sets. Applying the low basis theorem (:ref{#thm-low-basis}) to the non-empty $\Pi^0_1$ class $\mathrm{DNC}_2$ (:ref{#thm-dnc2-no-computable}) gives a low PA set $P$. It computes a solution $Y$, and $Y' \leq_T P' \leq_T \emptyset'$, so $Y$ is low. The computable coloring of :ref{#thm-jockusch-no-delta2} has no $\Delta^0_2$, hence no low, infinite homogeneous set; so $\mathsf{RT}^2_2 \not\leq_\omega \mathsf{WKL}$.
+:::
+::::
+
+::::exercise[Cylindrification]{#ex-cylindrification difficulty=2 objective="Turn every problem into a cylinder by adding the identity, and express computable reducibility through strong reducibility."}
+Show that for every problem $\mathsf Q$, the product $\mathsf Q \times \mathsf{Id}$ is a cylinder, and that $\mathsf P \leq_c \mathsf Q$ if and only if $\mathsf P \leq_{sc} \mathsf Q \times \mathsf{Id}$. Deduce that $\mathsf{Id} \leq_{sc} \mathsf{RT}^1_2 \times \mathsf{Id}$, although $\mathsf{Id} \not\leq_{sc} \mathsf{RT}^1_2$.
+
+:::solution
+An instance of $\mathsf{Id} \times (\mathsf Q \times \mathsf{Id})$ is a set $A \oplus (V \oplus B)$, with $V$ an instance of $\mathsf Q$; its solutions are the sets $A \oplus (W \oplus B)$ with $W$ a solution to $V$. Map it to the instance $V \oplus (A \oplus B)$ of $\mathsf Q \times \mathsf{Id}$, which it computes. A solution $W \oplus (A \oplus B)$ of the latter computes $A \oplus (W \oplus B)$. So $\mathsf{Id} \times (\mathsf Q \times \mathsf{Id}) \leq_{sc} \mathsf Q \times \mathsf{Id}$.
+
+Suppose $\mathsf P \leq_c \mathsf Q$. Given an instance $X$ of $\mathsf P$, let $\widetilde X \leq_T X$ be the instance of $\mathsf Q$ of the reduction, and take the instance $\widetilde X \oplus X$ of $\mathsf Q \times \mathsf{Id}$. Its solutions are the sets $\widetilde Y \oplus X$ with $\widetilde Y$ a solution to $\widetilde X$; each computes $X \oplus \widetilde Y$, hence a solution to $X$. So $\mathsf P \leq_{sc} \mathsf Q \times \mathsf{Id}$. Conversely, $\mathsf Q \times \mathsf{Id} \leq_c \mathsf Q$: map $V \oplus B$ to $V$, and compute $W \oplus B$ from $(V \oplus B) \oplus W$. If $\mathsf P \leq_{sc} \mathsf Q \times \mathsf{Id}$, then $\mathsf P \leq_c \mathsf Q \times \mathsf{Id} \leq_c \mathsf Q$, and $\mathsf P \leq_c \mathsf Q$ by :ref{#ex-c-transitive}.
+
+Since $\mathsf{Id} \leq_c \mathsf{RT}^1_2$, the second part gives $\mathsf{Id} \leq_{sc} \mathsf{RT}^1_2 \times \mathsf{Id}$; the failure of $\mathsf{Id} \leq_{sc} \mathsf{RT}^1_2$ is shown at the end of the lesson. The identity component carries the instance into the solutions, which is what $\mathsf{RT}^1_2$ alone cannot do.
+:::
+::::
+:::::

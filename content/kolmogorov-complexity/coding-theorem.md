@@ -39,6 +39,14 @@ In the proof of :ref{#thm-coding}, why is the weight of the requests about $\sig
   A string may have infinitely many $M$-descriptions; prefix-freeness only bounds the sum of all output probabilities by $1$.
 :::
 
+::::exercise{#ex-k-few-descriptions difficulty=1 objective="Derive from the coding theorem a bound on the number of descriptions of length close to $K(\sigma)$."}
+Show that there is a constant $c$ such that every string $\sigma$ has at most $2^{c+d}$ descriptions $\tau$ with $|\tau| \leq K(\sigma) + d$, for every $d$.
+
+:::solution
+By the coding theorem, $P_U(\sigma) \leq 2^{c - K(\sigma)}$. Each description $\tau$ with $|\tau| \leq K(\sigma) + d$ contributes at least $2^{-K(\sigma) - d}$ to $P_U(\sigma)$. So there are at most $2^{c - K(\sigma)} / 2^{-K(\sigma) - d} = 2^{c + d}$ of them.
+:::
+::::
+
 :::theorem[Counting theorem; Chaitin]{#thm-k-counting}
 There is a constant $c$ such that for all $n$ and $k$, fewer than $2^{n - k + c}$ strings $\sigma$ of length $n$ satisfy $K(\sigma) < n + K(n) - k$.
 :::
@@ -112,24 +120,6 @@ In the incompressibility proof, why is the machine $N$ prefix-free?
   It may not terminate when $U(\tau)$ is not a prefix of $\omega$; this only makes the domain smaller.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that there is a constant $c$ such that every string $\sigma$ has at most $2^{c+d}$ descriptions $\tau$ with $|\tau| \leq K(\sigma) + d$, for every $d$.
-
-:::solution
-By the coding theorem, $P_U(\sigma) \leq 2^{c - K(\sigma)}$. Each description $\tau$ with $|\tau| \leq K(\sigma) + d$ contributes at least $2^{-K(\sigma) - d}$ to $P_U(\sigma)$. So there are at most $2^{c - K(\sigma)} / 2^{-K(\sigma) - d} = 2^{c + d}$ of them.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that there is a constant $c$ such that, for all $n$ and $b$, fewer than $2^{b + c}$ strings $\sigma$ of length $n$ satisfy $K(\sigma) < K(n) + b$. Compare with :ref{#lem-few-segments}.
-
-:::solution
-Apply :ref{#thm-k-counting} with $k = n - b$: fewer than $2^{n - (n - b) + c} = 2^{b + c}$ strings of length $n$ satisfy $K(\sigma) < n + K(n) - (n - b) = K(n) + b$. (If $k$ is negative, the statement of the counting theorem still holds, with the same proof.) The bound is exponential in $b$, like the bound $(d + 1)^2 2^{d + c}$ of :ref{#lem-few-segments} for plain complexity, and it is used to show that the sets with $K(X \uh n) \leq^+ K(n)$ are computable in $\emptyset'$.
-:::
-::::
-
 ## Notes and references
 
 The coding theorem is due to Levin (1974) and Chaitin (1975), and in a sense to Solomonoff; Downey and Hirschfeldt (Section 3.9) state it with Levin's maximal c.e. discrete semimeasure, and Nies (Theorem 2.2.25) derives it from the characterization of $K$; the proof given here applies the KC theorem directly. The counting theorem is due to Chaitin (1975) (Downey–Hirschfeldt, Theorem 3.7.6; Nies, Theorem 2.2.26). Chaitin (1975) introduced $\Omega$ and proved its randomness (Downey–Hirschfeldt, Theorem 6.1.3). Calude, Hertling, Khoussainov and Wang (1998), after Solovay, and Kučera and Slaman (2001) showed that the left-c.e. reals that are random in the sense of the next course are exactly the halting probabilities of optimal prefix-free machines (Downey–Hirschfeldt, Section 9.2).
@@ -141,3 +131,60 @@ The coding theorem is due to Levin (1974) and Chaitin (1975), and in a sense to 
 - A. Kučera and T. A. Slaman, *Randomness and recursive enumerability*, SIAM Journal on Computing 31 (2001), 199–211.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 3.7, 3.9, 3.13 and 6.1.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 2.2.
+
+:::::exercises
+::::exercise{#ex-k-few-strings difficulty=1 objective="Specialize the counting theorem to strings whose complexity is close to that of their length."}
+Show that there is a constant $c$ such that, for all $n$ and $b$, fewer than $2^{b + c}$ strings $\sigma$ of length $n$ satisfy $K(\sigma) < K(n) + b$. Compare with :ref{#lem-few-segments}.
+
+:::solution
+Apply :ref{#thm-k-counting} with $k = n - b$: fewer than $2^{n - (n - b) + c} = 2^{b + c}$ strings of length $n$ satisfy $K(\sigma) < n + K(n) - (n - b) = K(n) + b$. (If $k$ is negative, the statement of the counting theorem still holds, with the same proof.) The bound is exponential in $b$, like the bound $(d + 1)^2 2^{d + c}$ of :ref{#lem-few-segments} for plain complexity, and it is used to show that the sets with $K(X \uh n) \leq^+ K(n)$ are computable in $\emptyset'$.
+:::
+::::
+
+
+::::exercise{#ex-omega-ce-set difficulty=1 objective="Compute halting probabilities of simple prefix-free machines, and see that optimality is needed for the properties of $\Omega$."}
+For a prefix-free machine $M$, let $\Omega_M = \sum_{\tau : M(\tau)\converge} 2^{-|\tau|}$. Compute $\Omega_M$ when the domain of $M$ is $\{ 0^{2k} 1 : k \in \nat \}$. Let $A$ be a c.e. set, and let $M_A(0^n 1) = 0$ for $n \in A$, with $M_A$ undefined elsewhere. Show that $M_A$ is a prefix-free machine and that, if $A$ is co-infinite, the binary expansion of $\Omega_{M_A}$ is the characteristic sequence of $A$. Deduce that the binary expansion of a left-c.e. real can be $\emptyset'$, which is not incompressible.
+
+:::solution
+In the first case, $\Omega_M = \sum_k 2^{-2k-1} = \tfrac12 \cdot \tfrac{1}{1 - 1/4} = \tfrac23$.
+
+$M_A$ is partial computable: on input $\tau$, if $\tau = 0^n 1$, wait for $n$ to be enumerated into $A$ and output $0$. Its domain $\{ 0^n 1 : n \in A \}$ is a subset of the prefix-free set $\{ 0^n 1 : n \in \nat \}$, hence prefix-free. So $\Omega_{M_A} = \sum_{n \in A} 2^{-n-1} = \sum_n A(n) 2^{-n-1}$, and $A(0) A(1) \cdots$ is a binary expansion of this real. If $A$ is co-infinite, it does not end with infinitely many $1$s, and it is the binary expansion of $\Omega_{M_A}$ that does not end with infinitely many $1$s, which is unique. The real $\Omega_{M_A}$ is left-c.e., as every $\Omega_M$ is, by the approximation used for $\Omega$. With $A = \emptyset'$, which is co-infinite, the expansion is $\emptyset'$. By :ref{#ex-barzdins}, $C(\emptyset' \uh n) \leq^+ 2 \log n$ for $n \geq 1$, so by :ref{#prop-k-basic} (3), $K(\emptyset' \uh n) \leq^+ C(\emptyset' \uh n) + 2 \log C(\emptyset' \uh n) \leq^+ 4 \log n$ for $n \geq 2$; so $\emptyset'$ does not satisfy statement 3 of :ref{#thm-omega}. (The value $\tfrac23$ is Example 2.2.5 of Nies 2009.)
+:::
+::::
+
+::::exercise{#ex-omega-not-right-ce difficulty=1 objective="See that $\Omega$ can be approximated from below but not from above."}
+Show that there is no computable non-increasing sequence of rationals $(r_s)$ with limit $\Omega$; equivalently, $1 - \Omega$ is not left-c.e.
+
+:::solution
+Suppose that $(r_s)$ is such a sequence. Then $\Omega_s \leq \Omega \leq r_s$ for every $s$, and $r_s - \Omega_s$ tends to $0$. To compute $\omega \uh n$, search for $s$ and $j < 2^n$ with $j 2^{-n} \leq \Omega_s$ and $r_s < (j + 1) 2^{-n}$, comparisons between rationals. The search terminates: $\Omega$ is irrational by :ref{#thm-omega}, so $j 2^{-n} < \Omega < (j + 1) 2^{-n}$ for the $j$ with $\omega \uh n$ the binary representation of $j$, and for large $s$ the interval $[\Omega_s, r_s]$ lies in this open interval. When it terminates, $\Omega \in [j 2^{-n}, (j + 1) 2^{-n})$, so $\omega \uh n$ is the $n$-bit binary representation of $j$. Then $\omega$ is computable, which contradicts $\Omega \equiv_T \emptyset'$. If $1 - \Omega$ were the limit of a computable non-decreasing sequence $(q_s)$, then $r_s = 1 - q_s$ would be such a sequence, and conversely.
+:::
+::::
+
+::::exercise{#ex-length-sum difficulty=1 objective="Show that the strings of length $n$ carry, up to a constant factor, the same weight $2^{-K}$ as the number $n$."}
+Show that there is a constant $c$ such that $2^{-K(n) - c} \leq \sum_{|\sigma| = n} 2^{-K(\sigma)} \leq 2^{c - K(n)}$ for every $n$.
+
+:::solution
+Upper bound: as in the proof of :ref{#thm-k-counting}, let $M$ be the prefix-free machine $\tau \mapsto |U(\tau)|$. Then $\sum_{|\sigma| = n} 2^{-K(\sigma)} \leq \sum_{|\sigma| = n} P_U(\sigma) = P_M(n) \leq 2^{c_1 - K(n)}$, by :ref{#thm-coding}. Lower bound: the map $n \mapsto 0^n$ is computable, so $K(0^n) \leq K(n) + c_2$, and the term of $\sigma = 0^n$ alone is at least $2^{-K(n) - c_2}$. Take $c = \max(c_1, c_2)$.
+:::
+::::
+
+::::exercise[Left-c.e. semimeasures]{#ex-semimeasure-coding difficulty=2 objective="Extend the proof of the coding theorem to left-c.e. semimeasures and deduce the maximality of $2^{-K}$."}
+A **left-c.e. semimeasure** is a function $m : \bstr \to [0, 1]$ with $\sum_\sigma m(\sigma) \leq 1$ such that there is a computable function $(s, \sigma) \mapsto m_s(\sigma)$, with non-negative rational values, non-decreasing in $s$, with $\lim_s m_s(\sigma) = m(\sigma)$. Show that $K(\sigma) \leq^+ -\log m(\sigma)$ for every $\sigma$ with $m(\sigma) > 0$, and deduce that there is a constant $c$ with $m(\sigma) \leq 2^{c - K(\sigma)}$ for every $\sigma$. Show that $2^{-K}$ and the functions $P_M$, for prefix-free machines $M$, are left-c.e. semimeasures.
+
+:::solution
+For each $\sigma$ and $k \geq 1$, enumerate the request $(\sigma, k + 1)$ at the first stage $s$ with $m_s(\sigma) > 2^{-k}$, if there is one. Fix $\sigma$ with $m(\sigma) > 0$, and let $k_0$ be the least $k$ with $m(\sigma) > 2^{-k}$; since $m(\sigma) \leq 1$, $k_0 \geq 1$. Since $m_s(\sigma)$ is non-decreasing with limit $m(\sigma)$, the requests about $\sigma$ are those with $k \geq k_0$, of total weight $\sum_{k \geq k_0} 2^{-k-1} = 2^{-k_0} < m(\sigma)$; strings with $m(\sigma) = 0$ receive no request. The request set is c.e. and its weight is less than $\sum_\sigma m(\sigma) \leq 1$. By :ref{#thm-kc}, $K(\sigma) \leq^+ k_0 + 1$. By minimality of $k_0$, $m(\sigma) \leq 2^{-(k_0 - 1)}$, so $k_0 \leq 1 - \log m(\sigma)$ and $K(\sigma) \leq^+ -\log m(\sigma)$. With $c$ such that $K(\sigma) \leq -\log m(\sigma) + c$, $m(\sigma) \leq 2^{c - K(\sigma)}$; this also holds when $m(\sigma) = 0$.
+
+The function $2^{-K}$ has sum at most $1$ by :ref{#prop-k-basic} (4), and $2^{-K_s(\sigma)}$, with $(K_s)$ an approximation of $K$ from above, is computable, rational and non-decreasing in $s$. For a prefix-free machine $M$, $\sum_\sigma P_M(\sigma) \leq 1$ by :ref{#prop-kraft}, and the approximation $P_{M,s}$ of the proof of :ref{#thm-coding} is computable, rational and non-decreasing. So $2^{-K}$ is, up to a multiplicative constant, the largest left-c.e. semimeasure, and the coding theorem is the case $m = P_M$. (After Levin; Nies 2009, Exercises 2.2.23 and 2.2.27.)
+:::
+::::
+
+::::exercise[Convergence of the approximation of Ω]{#ex-omega-settling difficulty=2 objective="Show that the approximation of $\Omega$ converges more slowly than every computable function."}
+For each $n$, let $s(n)$ be the least $s$ with $\Omega - \Omega_s < 2^{-n}$. Show that for every total computable function $f$, $s(n) > f(n)$ for all but finitely many $n$.
+
+:::solution
+Let $N$ be the machine that, on an input $\alpha b$ with $\alpha$ in the domain of $U$ and $b \in \{0, 1\}$ a single bit, computes the number $n = U(\alpha)$ and the rational $q = \Omega_{f(n)}$, lets $j = \lfloor q 2^n \rfloor + b$, and outputs the binary representation of $j$ padded to length $n$, if $j < 2^n$. Its domain is prefix-free: if $\alpha b \preceq \alpha' b'$ with $\alpha, \alpha'$ in the domain of $U$, then $\alpha$ and $\alpha'$ are both prefixes of $\alpha' b'$, hence comparable, hence equal, and then $b = b'$.
+
+Suppose that $s(n) \leq f(n)$. Since $(\Omega_s)$ is non-decreasing, $q = \Omega_{f(n)}$ satisfies $q \leq \Omega < q + 2^{-n}$, so $\lfloor \Omega 2^n \rfloor \in \{ \lfloor q 2^n \rfloor, \lfloor q 2^n \rfloor + 1 \}$. Since $\Omega$ is irrational and less than $1$, $\omega \uh n$ is the $n$-bit binary representation of $\lfloor \Omega 2^n \rfloor < 2^n$. So $N(\alpha b) = \omega \uh n$ for a shortest description $\alpha$ of $n$ and a suitable bit $b$, and $K(\omega \uh n) \leq K(n) + 1 + c_N \leq 2 \log n + c'$ for $n \geq 2$, by :ref{#prop-k-basic} (2). By :ref{#thm-omega} (3), $n - c \leq K(\omega \uh n)$. So $n - c \leq 2 \log n + c'$, which holds for only finitely many $n$.
+:::
+::::
+:::::

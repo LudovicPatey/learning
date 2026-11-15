@@ -1,7 +1,7 @@
 ---
 title: The Ackermann function in IΣ₁ and IΣ₂
 summary: The converse of the previous lesson, due to Parsons, Mints and Takeuti, is stated and proved later in the track; a Σ₁ definition of the Ackermann function by finite computations; IΣ₁ proves that it defines a partial function and that each row is total, but not that the function is total; IΣ₂ proves it, by Π₂ induction on the first argument.
-duration: 15
+duration: 35
 prerequisites: [provably-total, models-of-computation/ackermann-function, fragments-of-arithmetic/coding]
 ---
 
@@ -68,7 +68,7 @@ $$
 a $\Pi_2$ formula; $\Pi_2$ induction is available by :ref{#thm-fo-isigma-ipi}. The case $x = 0$ and the induction step are those of item 3, with $\tau(x)$ as the hypothesis on $x$; the induction on $y$ inside the step is $\Sigma_1$, with $x$ as a parameter.
 :::
 
-Items 3 and 4 differ only in the place of the induction on the first argument. In item 3 it is carried out in the metatheory, and produces for each $m$ a separate proof, made of $m + 1$ inductions for $\Sigma_1$ formulas; in item 4 it is a single induction inside the theory, for the $\Pi_2$ formula $\tau$. By :ref{#cor-ack-isigma1}, item 4 cannot be proved in $\mathrm I\Sigma_1$: the rows are provably total one by one, as the rows $A(m, \cdot)$ are primitive recursive one by one (an exercise of :ref{to="models-of-computation/ackermann-function"}), but not uniformly. This is a first instance of a general phenomenon studied at the end of the track: the provably total functions of $\mathrm I\Sigma_{n+1}$ grow faster than those of $\mathrm I\Sigma_n$.
+Items 3 and 4 differ only in the place of the induction on the first argument. In item 3 it is carried out in the metatheory, and produces for each $m$ a separate proof, made of $m + 1$ inductions for $\Sigma_1$ formulas; in item 4 it is a single induction inside the theory, for the $\Pi_2$ formula $\tau$. By :ref{#cor-ack-isigma1}, item 4 cannot be proved in $\mathrm I\Sigma_1$: the rows are provably total one by one, as the rows $A(m, \cdot)$ are primitive recursive one by one (:ref{#ex-ack-row-pr}), but not uniformly. This is a first instance of a general phenomenon studied at the end of the track: the provably total functions of $\mathrm I\Sigma_{n+1}$ grow faster than those of $\mathrm I\Sigma_n$.
 
 :::quiz[the Ackermann function in fragments]
 In the proof that a computation is functional, why is $y$ chosen least for the least $x$?
@@ -96,7 +96,7 @@ Why does the argument of item 3 not give item 4 in $\mathrm I\Sigma_1$?
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-tp-ack-increasing difficulty=2 objective="Prove a property of all triples of a computation by the least number principle, as in the proof of functionality."}
 Show that $\mathrm I\Sigma_1$ proves $\forall x\ \forall y\ \forall z\ \big( \alpha(x, y, z) \rightarrow y < z \big)$, the formalized form of $A(x, y) > y$.
 
 :::solution
@@ -111,3 +111,56 @@ The characterization of the provably total functions of $\mathrm I\Sigma_1$ is d
 - C. Parsons, *On a number theoretic choice schema and its relation to induction*, in Intuitionism and Proof Theory, North-Holland, Amsterdam, 1970, 459–473.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 3.
 - G. Takeuti, *Proof Theory*, North-Holland, 1975.
+
+:::::exercises
+::::exercise{#ex-tp-ack-equations difficulty=1 objective="Check that the formula $\alpha$ satisfies the defining equations of the Ackermann function in $\mathrm I\Sigma_1$, wherever its values exist."}
+Show that $\mathrm I\Sigma_1$ proves, for all $x, y, z$:
+
+1. $\alpha(0, y, z) \leftrightarrow z = y + 1$;
+2. $\alpha(x + 1, 0, z) \leftrightarrow \alpha(x, 1, z)$;
+3. $\alpha(x + 1, y + 1, z) \leftrightarrow \exists w\ \big( \alpha(x + 1, y, w) \wedge \alpha(x, w, z) \big)$.
+
+Deduce that $\mathrm I\Sigma_2$ proves that $\alpha$ defines a total function satisfying the three equations of :ref{#def-ackermann}.
+
+:::solution
+Work in $\mathrm I\Sigma_1$. Recall from the proof of :ref{#prop-ack-computations} that justifications are preserved when a computation is enlarged, so that the union of computations is a computation, and that adding to a computation a triple justified in the enlarged set gives a computation; the enlarged sets are coded, by :ref{#thm-delta0-comprehension} or item 4 of :ref{#lem-ack-basic}.
+
+*From left to right.* Let $c$ be a computation containing the triple on the left. The triple is justified in $c$, and since $0 \neq x' + 1$ and $y + 1 \neq 0$ in $\mathrm{PA}^-$, only one clause of :ref{#def-ack-computation} can justify it: the first for $\langle 0, y, z \rangle$, which gives $z = y + 1$; the second for $\langle x + 1, 0, z \rangle$, which gives $\langle x, 1, z \rangle \in c$; the third for $\langle x + 1, y + 1, z \rangle$, which gives $w$ with $\langle x + 1, y, w \rangle, \langle x, w, z \rangle \in c$. The triples found are in the computation $c$, so $\alpha$ holds for them.
+
+*From right to left.* 1. The set $\{ \langle 0, y, y + 1 \rangle \}$ is a computation. 2. If $c$ is a computation containing $\langle x, 1, z \rangle$, then $c \cup \{ \langle x + 1, 0, z \rangle \}$ is one, the new triple being justified by the second clause. 3. If $c$ and $c'$ are computations containing $\langle x + 1, y, w \rangle$ and $\langle x, w, z \rangle$, then $c \cup c' \cup \{ \langle x + 1, y + 1, z \rangle \}$ is one, the new triple being justified by the third clause.
+
+In $\mathrm I\Sigma_2$, items 2 and 4 of :ref{#prop-ack-computations} give $\forall x\ \forall y\ \exists! z\ \alpha(x, y, z)$. Writing $A(x, y)$ for this $z$, the three equivalences become $A(0, y) = y + 1$, $A(x + 1, 0) = A(x, 1)$ and $A(x + 1, y + 1) = A(x, A(x + 1, y))$, the $w$ of item 3 being $A(x + 1, y)$ by uniqueness. So the Ackermann function is provably total in $\mathrm I\Sigma_2$, together with its equations.
+:::
+::::
+
+::::exercise{#ex-tp-ack-monotone difficulty=1 objective="Combine functionality with the inequality $A(x, y) > y$ to prove monotonicity in the second argument inside $\mathrm I\Sigma_1$."}
+Show that $\mathrm I\Sigma_1$ proves $\forall x\ \forall y\ \forall z\ \forall z'\ \big( \alpha(x, y, z) \wedge \alpha(x, y + 1, z') \rightarrow z < z' \big)$.
+
+:::solution
+Work in $\mathrm I\Sigma_1$. Let $c$ and $c'$ be computations containing $\langle x, y, z \rangle$ and $\langle x, y + 1, z' \rangle$; their union $d$ is a computation containing both. If $x = 0$, then $z = y + 1 < y + 2 = z'$. If $x = x' + 1$, the triple $\langle x, y + 1, z' \rangle$ is justified in $d$ by the third clause: there is $w$ with $\langle x, y, w \rangle \in d$ and $\langle x', w, z' \rangle \in d$. By item 2 of :ref{#prop-ack-computations}, $w = z$. By :ref{#ex-tp-ack-increasing}, applied to $\langle x', w, z' \rangle$, $w < z'$. So $z < z'$.
+:::
+::::
+
+::::exercise{#ex-tp-ack-first-column difficulty=2 objective="Apply the Parsons–Mints–Takeuti theorem to a function built from the Ackermann function, through its definition by computations."}
+Show that $\mathrm I\Sigma_1$ does not prove $\forall x\ \exists z\ \alpha(x, 0, z)$, although it proves $\exists z\ \alpha(\bar m, 0, z)$ for every $m \in \nat$.
+
+:::solution
+The second statement is a special case of item 3 of :ref{#prop-ack-computations}. Suppose that $\mathrm I\Sigma_1 \vdash \forall x\ \exists z\ \alpha(x, 0, z)$. The formula $\alpha(x, 0, z)$ is $\Sigma_1$; by item 1 of :ref{#prop-ack-computations} it defines in $\nat$ the graph of $g(x) = A(x, 0)$; and by item 2, $\mathrm I\Sigma_1$ proves that it has at most one $z$ for each $x$. So $\mathrm I\Sigma_1 \vdash \forall x\ \exists! z\ \alpha(x, 0, z)$, and $g$ is provably total in $\mathrm I\Sigma_1$. By :ref{#thm-pmt}, $g$ is primitive recursive, which contradicts :ref{#ex-ack-first-column}. The same argument applies to the diagonal $x \mapsto A(x, x)$, by :ref{#cor-ack-not-pr}.
+:::
+::::
+
+::::exercise{#ex-tp-ack-cut difficulty=2 objective="Turn the induction step of the $\Pi_2$ induction into a $\Pi_2$-definable proper cut in a model of $\mathrm I\Sigma_1$." lessons="fragments-of-arithmetic/definable-cuts"}
+Let $\tau(x) \equiv \forall y\ \exists z\ \alpha(x, y, z)$, as in the proof of :ref{#prop-ack-computations}.
+
+1. Show that $\mathrm I\Sigma_1 \vdash \forall x\ (\tau(x) \rightarrow \tau(x + 1))$.
+2. Show that there is a model $M$ of $\mathrm I\Sigma_1$ in which $I = \{ a \in M : M \models \forall x \leq a\ \tau(x) \}$ is a proper cut, and that $I$ is $\Pi_2$-definable in $M$ without parameters. Why does this not contradict item 4 of :ref{#prop-ack-computations}?
+
+:::solution
+1. This is the induction step of item 4, carried out in $\mathrm I\Sigma_1$: assume $\tau(x)$, and prove $\forall y\ \exists z\ \alpha(x + 1, y, z)$ by $\Sigma_1$ induction on $y$, with the parameter $x$. For $y = 0$, $\tau(x)$ gives a computation $c$ containing some $\langle x, 1, z \rangle$, and $c \cup \{ \langle x + 1, 0, z \rangle \}$ is a computation. If a computation $c$ contains $\langle x + 1, y, w \rangle$, then $\tau(x)$ gives a computation $c'$ containing some $\langle x, w, z \rangle$, and $c \cup c' \cup \{ \langle x + 1, y + 1, z \rangle \}$ is a computation. The only use of $\tau(x)$ is as a hypothesis; no induction on $x$ is made.
+
+2. By :ref{#cor-ack-isigma1} and item 2 of :ref{#prop-ack-computations}, $\mathrm I\Sigma_1$ does not prove $\forall x\ \tau(x)$: otherwise it would prove $\forall x\ \forall y\ \exists! z\ \alpha(x, y, z)$. By the completeness theorem, there are $M \models \mathrm I\Sigma_1$ and $b \in M$ with $M \models \neg \tau(b)$. The set $I$ is an initial segment by definition. It contains $0$, since $\{ \langle 0, y, y + 1 \rangle \}$ is a computation for every $y$. If $a \in I$, then $\tau(a)$, so $\tau(a + 1)$ by item 1, and $a + 1 \in I$. So $I$ is a cut, and $b \notin I$, so $I \neq M$. The formula $\forall x \leq a\ \forall y\ \exists z\ \alpha(x, y, z)$ is equivalent to $\forall y\ \forall x \leq a\ \exists z\ \alpha(x, y, z)$, and $\forall x \leq a\ \exists z\ \alpha(x, y, z)$ is $\Sigma_1$ in $\mathrm I\Sigma_1$ by Parsons' lemma (:ref{#lem-fo-collection-closure}) and :ref{#thm-fo-parsons}; so $I$ is $\Pi_2$-definable without parameters.
+
+There is no contradiction: $M$ satisfies $\mathrm I\Sigma_1$ but not $\mathrm I\Sigma_2$. In a model of $\mathrm I\Sigma_2$, no proper cut is $\Pi_2$-definable (:ref{to="fragments-of-arithmetic/definable-cuts"}), and $\Pi_2$ induction applied to $\tau$, which is what item 4 does, is the statement that $I = M$.
+:::
+::::
+:::::

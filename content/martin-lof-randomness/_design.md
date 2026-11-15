@@ -292,7 +292,82 @@ Checked on 2026-11-12:
   `martin-lof-randomness/measure` as citing `trees-and-classes` for cylinders; the link
   already points to `cantor-space`.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. The
+featured exercises stay in the section "Exercises" of their lesson; the others are in the
+collapsed block of further exercises at the end of the lesson (outside the reading time).
+
+**Featured exercises and why.**
+
+1. `measure`: `ex-left-ce-measure` (the bound of `prop-measure-effective` is sharp) and
+   `ex-null-pi01-cover` (effective covers of null Π⁰₁ classes, used by `ex-kurtz`).
+2. `martin-lof-tests`: `ex-tails` (used throughout the course and by later courses) and
+   `ex-mlr-not-ce` (a test built from a computable subset). `ex-ml-block-zeros` moved to the
+   further exercises: the runs of zeros are treated better by Solovay tests.
+3. `solovay-tests`: `ex-solovay-runs` (the model application of Solovay tests, cited by
+   `martingales/schnorr-randomness`) and `ex-kurtz` (cited by `randomness-notions` and
+   `martingales`).
+4. `levin-schnorr`: `ex-runs-k` (Solovay test with weights 2^{-K(n)}) and `ex-rettinger`
+   (Solovay test of intervals). `ex-subsequence-random` moved (routine).
+5. `upper-cones`: `ex-de-leeuw` (the majority vote for enumerations). `ex-sacks-relative`
+   moved (routine relativization).
+6. `randomness-and-degrees`: `ex-positive-measure-degrees` (Kučera–Gács against the
+   computably dominated basis theorem). `ex-random-jumps` moved (direct application).
+7. `random-dnc`: `ex-random-subsets-dnc` (the easy direction of the subsets
+   characterization, cited in the text) and `ex-random-ce-complete` (with Arslanov; cited by
+   `martingales/randomness-hierarchy`).
+
+**Further exercises, lesson by lesson.**
+
+1. `measure`: prefix-free sets are sparse at each length (`ex-prefix-free-density`); the
+   measure of [{0ⁿ1 : n ∈ A}] and a Σ⁰₁ class of non-computable measure without Ω
+   (`ex-measure-ra`); the minimal elements of a c.e. set need not be c.e.
+   (`ex-minimal-not-ce`, a claim of the text); the computable sequences are effectively null
+   and a Π⁰₁ class of measure ≥ 1/2 without computable member
+   (`ex-computable-effectively-null`); a Π⁰₁ class of computable positive measure has a
+   computable member (`ex-computable-measure-member`).
+2. `martin-lof-tests`: blocks of zeros (moved); finite variants (`ex-mlr-finite-variants`);
+   complements and joins (`ex-complement-join`); MLR is meager (`ex-mlr-meager`); the
+   Δ⁰₂ counterexample of the text checked in detail (`ex-delta2-captured`).
+3. `solovay-tests`: the law of large numbers by the fourth moment and a Solovay test
+   (`ex-fourth-moment`, the "weaker bound" mentioned after Hoeffding's inequality); Solovay
+   tests as weighted lists of strings (`ex-solovay-strings`); k + 1 of N classes of measure
+   ≥ ε meet in positive measure (`ex-many-intersections`, counting); the step from aligned
+   blocks to all positions in normality (`ex-normal-offsets`).
+4. `levin-schnorr`: computable subsequences (moved); `ex-tails` through K
+   (`ex-tails-k`); lengths restricted to a computable set (`ex-ls-lengths`, variant of the
+   proof); the excess falls below log n on a set of density 0 (`ex-excess-density`); the
+   Π⁰₁ classes Q_c and a random Z ≤_T ∅′ with K(Z↾n) ≥ n − 1 (`ex-deficiency-class`).
+5. `upper-cones`: relativized Sacks (moved); computing a member of DNC₂ is a null property,
+   by a vote that only avoids one value (`ex-dnc2-null`); the cone of ∅′ is Σ⁰₄
+   (`ex-cone-complexity`, a claim of the text); averaging along a path, and why closedness is
+   needed (`ex-averaging-path`); ∅′ finds dense cylinders of Π⁰₁ classes
+   (`ex-density-jump`).
+6. `randomness-and-degrees`: iterated jumps (moved); sharpness of the branching lemma and
+   need for positive measure (`ex-branching-sharp`); Kučera's lemma on tails in Π⁰₁ classes
+   of positive measure (`ex-kucera-tails`); the use of a wtt reduction computing a random
+   sequence is ≥ n − 4 log n − O(1) (`ex-use-lower-bound`); ∅′ ≤_wtt Ω with use
+   2 log n + O(1) (`ex-omega-wtt`).
+7. `random-dnc`: any computable order instead of n (`ex-dnc-order`); a Solovay-test proof
+   that randoms compute DNC functions bounded by 2^{e+2} (`ex-dnc-solovay`); low and
+   computably dominated DNC sets, and why Arslanov needs c.e. (`ex-dnc-low-dominated`);
+   coinfinite supersets of random sets (`ex-dnc-supersets`).
+
+**Sources.** Nies 2009, Exercises 1.9.13 (`ex-prefix-free-density`), 1.9.15
+(`ex-many-intersections`), 1.9.21 (`ex-computable-measure-member`), 3.2.26 (compare
+`ex-fourth-moment`), 5.1.15 (`ex-dnc2-null`, stated there for PA degrees);
+Downey–Hirschfeldt, Lemma 6.10.1 (Kučera, `ex-kucera-tails`); the coding argument of
+`thm-omega` for `ex-omega-wtt`. The other new exercises are variants of the proofs of the
+course, written for it. Not taken: the improvement of the use of Kučera–Gács through
+λ(Q ∩ [x]) ≥ 2^{-K(x)-c} (Nies, Exercises 3.3.3–3.3.4), whose hinted solution uses the KC
+theorem with a coding constant given in advance (Nies, Remark 2.2.21), by the recursion
+theorem, not covered in the prerequisites; the meagerness of upper cones (already in
+`turing-degrees/finite-extensions` and `cohen-genericity`); van Lambalgen's halves (in
+`randomness-notions/relative-randomness`); frequencies along computable selections (in
+`martingales/computable-randomness`).
+
+## 12. History
 
 - **2026-11-12.** Design and pedagogy revision; initial log.
   - Structure: 4 → 7 lessons. New lessons `solovay-tests` (law of large numbers, normality,
@@ -322,3 +397,8 @@ Checked on 2026-11-12:
     Calude–Hertling–Khoussainov–Wang / Kučera–Slaman statement split into its two
     directions; Rettinger's theorem located in both books; the density theorem dated.
   - Durations recomputed (words / 55).
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for
+  all existing exercises; featured exercises chosen (section 11); 29 new further
+  exercises (4 or 5 per lesson). References "the first/second exercise" in the text replaced
+  by `:ref`. `ex-kurtz` cites `ex-null-pi01-cover` instead of "the second exercise of
+  measure". Duration of `upper-cones` 35 → 30 (two exercises moved out; 1787 words).

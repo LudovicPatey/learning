@@ -79,6 +79,14 @@ In the proof of :ref{#lem-limit-coloring}, why does the argument fail for a fini
   $f$ is defined on all $(n+1)$-tuples.
 :::
 
+::::exercise{#ex-no-sigma-n-homogeneous difficulty=1 objective="Iterate the limit lemma for colorings to lift Jockusch's lower bound to $n$-tuples."}
+Show that for every $n \geq 2$ there is a computable coloring $f : [\nat]^n \to 2$ with no infinite $\Sigma^0_n$ homogeneous set.
+
+:::solution
+By induction on $n$, relativized to an arbitrary oracle $Z$: there is a $Z$-computable coloring of $[\nat]^n$ with no infinite $\Sigma^0_n(Z)$ homogeneous set. For $n = 2$, this is :ref{#thm-jockusch-no-delta2} relativized. Given the statement for $n$ and every oracle, apply it to $Z'$: there is a $Z'$-computable coloring $h$ of $[\nat]^n$ with no infinite $\Sigma^0_n(Z')$, that is $\Sigma^0_{n+1}(Z)$, homogeneous set. By :ref{#lem-limit-coloring} relativized to $Z$, there is a $Z$-computable coloring of $[\nat]^{n+1}$ whose infinite homogeneous sets are homogeneous for $h$.
+:::
+::::
+
 ## Coding the jump into triples
 
 To code $\emptyset'$, it suffices to force homogeneous sets to grow fast enough. Let $m(x)$ be the **settling time** of $\emptyset'$ below $x$: the least stage $s$ at which the approximation $\emptyset'_s$ agrees with $\emptyset'$ on $\{ 0, \dots, x - 1 \}$. A set containing, after each of its elements $x$, an element larger than $m(x)$ computes $\emptyset'$, by reading the approximation at that element. The function $m$ is $\emptyset'$-computable, so a coloring of pairs expressing "$y$ is larger than $m(x)$" is $\Delta^0_2$, and :ref{#lem-limit-coloring} turns it into a computable coloring of triples.
@@ -104,6 +112,16 @@ In the proof of :ref{#prop-rt32-jump}, why can an infinite homogeneous set for $
 :::
 
 The coloring $h$ has an unusual feature: for each $x$, $h(\{ x, y \}) = 1$ for all large $y$. Colorings of pairs in which each element has a limit color are called **stable**; they reappear in the lesson on stable colorings, where this example shows that a statement about computable colorings fails for $\Delta^0_2$ ones.
+
+::::exercise{#ex-coding-n-jumps difficulty=2 objective="Combine limits of colorings with the coding of the jump to code $\emptyset^{(n-2)}$ into $n$-tuples."}
+Show that for every $n \geq 3$ there is a computable coloring of $[\nat]^n$ with finitely many colors all of whose infinite homogeneous sets compute $\emptyset^{(n-2)}$.
+
+:::solution
+We prove by induction on $n \geq 3$ that for every $Z$ there is a $Z$-computable coloring of $[\nat]^n$ with finitely many colors such that $Z^{(n-2)} \leq_T Z \oplus H$ for every infinite homogeneous set $H$. For $n = 3$, this is :ref{#prop-rt32-jump} relativized to $Z$: the set $H$ computes $Z'$ from the approximation $Z'_s$, which is $Z$-computable.
+
+Assume the statement for $n$, and apply it to $Z'$: there is a $Z'$-computable coloring $h$ of $[\nat]^n$ with $Z^{(n-1)} \leq_T Z' \oplus H$ for every infinite homogeneous $H$. By :ref{#lem-limit-coloring} relativized to $Z$, there is a $Z$-computable coloring $f$ of $[\nat]^{n+1}$ whose infinite homogeneous sets are homogeneous for $h$. Let $c$ be the $Z$-computable coloring of triples given by the case $n = 3$, and $c'(\{ x_1, \dots, x_{n+1} \}) = c(\{ x_1, x_2, x_3 \})$. The coloring $e = (f, c')$, with pairs of colors as colors, is $Z$-computable. An infinite homogeneous set $H$ for $e$ is homogeneous for $c'$, hence for $c$, so $Z' \leq_T Z \oplus H$; and it is homogeneous for $f$, hence for $h$, so $Z^{(n-1)} \leq_T Z' \oplus H \leq_T Z \oplus H$.
+:::
+::::
 
 ## Reverse mathematics
 
@@ -147,34 +165,60 @@ In the proof of :ref{#thm-rt3-aca}, why must an infinite homogeneous set for $f$
   Many colorings take both values infinitely often; homogeneity of $H$ together with the counting argument fixes the color.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that for every $n \geq 2$ there is a computable coloring $f : [\nat]^n \to 2$ with no infinite $\Sigma^0_n$ homogeneous set.
-
-:::solution
-By induction on $n$, relativized to an arbitrary oracle $Z$: there is a $Z$-computable coloring of $[\nat]^n$ with no infinite $\Sigma^0_n(Z)$ homogeneous set. For $n = 2$, this is :ref{#thm-jockusch-no-delta2} relativized. Given the statement for $n$ and every oracle, apply it to $Z'$: there is a $Z'$-computable coloring $h$ of $[\nat]^n$ with no infinite $\Sigma^0_n(Z')$, that is $\Sigma^0_{n+1}(Z)$, homogeneous set. By :ref{#lem-limit-coloring} relativized to $Z$, there is a $Z$-computable coloring of $[\nat]^{n+1}$ whose infinite homogeneous sets are homogeneous for $h$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that for every $n \geq 3$ there is a computable coloring of $[\nat]^n$ with finitely many colors all of whose infinite homogeneous sets compute $\emptyset^{(n-2)}$.
-
-:::solution
-We prove by induction on $n \geq 3$ that for every $Z$ there is a $Z$-computable coloring of $[\nat]^n$ with finitely many colors such that $Z^{(n-2)} \leq_T Z \oplus H$ for every infinite homogeneous set $H$. For $n = 3$, this is :ref{#prop-rt32-jump} relativized to $Z$: the set $H$ computes $Z'$ from the approximation $Z'_s$, which is $Z$-computable.
-
-Assume the statement for $n$, and apply it to $Z'$: there is a $Z'$-computable coloring $h$ of $[\nat]^n$ with $Z^{(n-1)} \leq_T Z' \oplus H$ for every infinite homogeneous $H$. By :ref{#lem-limit-coloring} relativized to $Z$, there is a $Z$-computable coloring $f$ of $[\nat]^{n+1}$ whose infinite homogeneous sets are homogeneous for $h$. Let $c$ be the $Z$-computable coloring of triples given by the case $n = 3$, and $c'(\{ x_1, \dots, x_{n+1} \}) = c(\{ x_1, x_2, x_3 \})$. The coloring $e = (f, c')$, with pairs of colors as colors, is $Z$-computable. An infinite homogeneous set $H$ for $e$ is homogeneous for $c'$, hence for $c$, so $Z' \leq_T Z \oplus H$; and it is homogeneous for $f$, hence for $h$, so $Z^{(n-1)} \leq_T Z' \oplus H \leq_T Z \oplus H$.
-:::
-::::
-
 ## Notes and references
 
 A finite variant of Ramsey's theorem, the Paris–Harrington principle, is true and unprovable in PA (:ref{to="independence/paris-harrington"}).
 
-Specker (1971) built a computable coloring of pairs without computable infinite homogeneous set, and Jockusch (1972) improved it to :ref{#thm-jockusch-no-delta2} (Hirschfeldt, Theorem 6.11; Dzhafarov–Mummert, Theorem 8.2.2). Jockusch also proved :ref{#lem-limit-coloring} and :ref{#prop-rt32-jump}, as well as the generalization of the second exercise, in which the coloring has two colors; Hirschfeldt presents them as Theorem 6.13 and Exercise 6.15, Dzhafarov and Mummert as Lemma 8.2.1 and Theorem 8.2.4. Simpson formalized the equivalence with $\mathsf{ACA}_0$ (Simpson, Lemmas III.7.4 and III.7.5 and Theorem III.7.6; Hirschfeldt, Exercise 6.14; Dzhafarov–Mummert, Corollary 8.2.6). Hirschfeldt attributes :ref{#cor-wkl-not-rt22} to Hirst (Corollary 6.12). Hirschfeldt and Jockusch strengthened :ref{#prop-rt32-jump}: some computable coloring of triples has all its infinite pre-homogeneous sets, hence all its infinite homogeneous sets, of PA degree relative to $\emptyset'$ (Hirschfeldt, Theorems 6.16 and 6.17). By contrast, the exact coding power of $\mathsf{RT}^3_2$ is $\emptyset'$: a set $X \not\leq_T \emptyset'$ can be avoided by some homogeneous set of every computable coloring of triples (Cholak, Jockusch and Slaman; see the exercises of the lesson on Seetapun's theorem).
+Specker (1971) built a computable coloring of pairs without computable infinite homogeneous set, and Jockusch (1972) improved it to :ref{#thm-jockusch-no-delta2} (Hirschfeldt, Theorem 6.11; Dzhafarov–Mummert, Theorem 8.2.2). Jockusch also proved :ref{#lem-limit-coloring} and :ref{#prop-rt32-jump}, as well as the generalization of :ref{#ex-coding-n-jumps} in which the coloring has two colors; Hirschfeldt presents them as Theorem 6.13 and Exercise 6.15, Dzhafarov and Mummert as Lemma 8.2.1 and Theorem 8.2.4. Simpson formalized the equivalence with $\mathsf{ACA}_0$ (Simpson, Lemmas III.7.4 and III.7.5 and Theorem III.7.6; Hirschfeldt, Exercise 6.14; Dzhafarov–Mummert, Corollary 8.2.6). Hirschfeldt attributes :ref{#cor-wkl-not-rt22} to Hirst (Corollary 6.12). Hirschfeldt and Jockusch strengthened :ref{#prop-rt32-jump}: some computable coloring of triples has all its infinite pre-homogeneous sets, hence all its infinite homogeneous sets, of PA degree relative to $\emptyset'$ (Hirschfeldt, Theorems 6.16 and 6.17). By contrast, the exact coding power of $\mathsf{RT}^3_2$ is $\emptyset'$: a set $X \not\leq_T \emptyset'$ can be avoided by some homogeneous set of every computable coloring of triples (Cholak, Jockusch and Slaman; see the exercises of the lesson on Seetapun's theorem).
 
 - E. Specker, *Ramsey's theorem does not hold in recursive set theory*, in *Logic Colloquium '69*, North-Holland, 1971, 439–442.
 - C. G. Jockusch, Jr., *Ramsey's theorem and recursion theory*, Journal of Symbolic Logic 37 (1972), 268–280.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, second edition, Cambridge University Press, 2009.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022.
+
+:::::exercises
+::::exercise{#ex-no-delta2-prehomogeneous difficulty=1 objective="See why the Erdős–Radó tree needs a degree PA over the jump, and not only the jump." lessons="jockusch"}
+Let $f$ be the computable coloring of :ref{#thm-jockusch-no-delta2}. Show that $f$ has no infinite $\Delta^0_2$ pre-homogeneous set. Deduce that, in :ref{#prop-erdos-rado-tree}, "computable in every set PA relative to $f'$" cannot be replaced by "computable in $f'$".
+
+:::solution
+Let $X$ be an infinite $\Delta^0_2$ pre-homogeneous set for $f$, and $g(x) = f(\{ x, y \})$ for $x \in X$ and any $y \in X$ above $x$. The function $g$ is computable in $f \oplus X \leq_T \emptyset'$: search for the next element $y$ of $X$ and compute $f(\{ x, y \})$. One of the sets $X_i = \{ x \in X : g(x) = i \}$, $i < 2$, is infinite, and it is computable in $\emptyset'$. For $x < y$ in $X_i$, $f(\{ x, y \}) = g(x) = i$. So $X_i$ is an infinite $\Delta^0_2$ homogeneous set for $f$, which contradicts :ref{#thm-jockusch-no-delta2}. For the second statement, $f$ is computable, so $f' \equiv_T \emptyset'$, and an infinite pre-homogeneous set computable in $f'$ would be $\Delta^0_2$.
+:::
+::::
+
+::::exercise{#ex-limit-coloring-strict difficulty=1 objective="Check on an example that limits of colorings have more homogeneous sets than their approximations."}
+Give a computable function $h : \nat \to 2$ and a computable coloring $f : [\nat]^2 \to 2$ with $h(x) = \lim_t f(\{ x, t \})$ for every $x$, and an infinite set homogeneous for $h$ that is not homogeneous for $f$. Which inclusion between the classes of infinite homogeneous sets does :ref{#lem-limit-coloring} assert?
+
+:::solution
+Let $h(x) = 0$ for every $x$, and $f(\{ x, t \}) = 1$ if $t = x + 1$ and $0$ otherwise, for $x < t$. For every $x$, $f(\{ x, t \}) = 0$ for $t > x + 1$, so the limit is $h(x)$. The set $\nat$ is homogeneous for $h$, but not for $f$: $f(\{ 0, 1 \}) = 1 \neq 0 = f(\{ 0, 2 \})$. The lemma asserts that every infinite homogeneous set for $f$ is homogeneous for $h$, not the converse; it is enough, since one only needs that solutions of the computable coloring are solutions of the $\Delta^0_2$ one.
+:::
+::::
+
+::::exercise{#ex-rt32-uniform-coding difficulty=1 objective="Check that the coding of the jump into homogeneous sets for triples is uniform."}
+Let $f$ be the computable coloring of triples of :ref{#prop-rt32-jump}. Show that there is a single Turing functional $\Psi$ such that $\Psi^H = \emptyset'$ for every infinite homogeneous set $H$ for $f$.
+
+:::solution
+By :ref{#lem-limit-coloring}, $H$ is homogeneous for the coloring $h$ of the proof of :ref{#prop-rt32-jump}, and by that proof its color is $1$: $m(x) < y$ for all $x < y$ in $H$. Let $\Psi^H(z)$ search for the least $x \in H$ with $x > z$, then for the least $y \in H$ with $y > x$, and output $\emptyset'_y(z)$. The search terminates since $H$ is infinite. The approximation $\emptyset'_s$ is increasing and contained in $\emptyset'$, so once it agrees with $\emptyset'$ on $\{ 0, \dots, x - 1 \}$ at stage $m(x)$, it agrees at every later stage. Since $y > m(x)$ and $z < x$, $\emptyset'_y(z) = \emptyset'(z)$. The procedure does not depend on $H$.
+:::
+::::
+
+::::exercise{#ex-rt32-fast-growth difficulty=2 objective="Express the coding power of homogeneous sets for triples through the growth of their principal functions."}
+Let $h$ and $m$ be as in the proof of :ref{#prop-rt32-jump}, $H = \{ p_H(0) < p_H(1) < \cdots \}$ an infinite homogeneous set for $h$, and $p_H$ its principal function. Show that $p_H(i + 1) > m(i)$ for every $i$. Deduce that every function $g$ with $g(i) \geq p_H(i + 1)$ for every $i$ computes $\emptyset'$.
+
+:::solution
+The function $m$ is non-decreasing: at stage $m(x')$ the approximation agrees with $\emptyset'$ below $x'$, hence below $x \leq x'$, so $m(x) \leq m(x')$. The color of $H$ is $1$ (proof of :ref{#prop-rt32-jump}), so $m(p_H(i)) < p_H(i + 1)$. Since $p_H(i) \geq i$, $m(i) \leq m(p_H(i)) < p_H(i + 1)$.
+
+Let $g(i) \geq p_H(i + 1)$ for every $i$. Then $g(z + 1) > m(z + 1)$, so, as the approximation is increasing, $\emptyset'_{g(z+1)}$ agrees with $\emptyset'$ below $z + 1$, and $\emptyset'(z) = \emptyset'_{g(z + 1)}(z)$, computably in $g$. So homogeneous sets for $h$ compute $\emptyset'$ through their growth alone: any function growing at least as fast as the shifted principal function does.
+:::
+::::
+
+::::exercise{#ex-delta2-pairs-upper difficulty=1 objective="Locate the homogeneous sets of $\emptyset'$-computable colorings of pairs between two bounds, using limits of colorings." lessons="jockusch"}
+Let $h : [\nat]^2 \to 2$ be $\emptyset'$-computable. Show in two ways that $h$ has an infinite homogeneous set computable in every set PA relative to $\emptyset''$: by :ref{#thm-jockusch-upper} relativized, and by :ref{#lem-limit-coloring}. Show that some $\emptyset'$-computable coloring of pairs has no infinite homogeneous set computable in $\emptyset''$.
+
+:::solution
+Let $P$ be PA relative to $\emptyset''$. First way: $h' \leq_T \emptyset''$, and $P$ is PA relative to $h'$, since every non-empty $\Pi^0_1(h')$ class is a $\Pi^0_1(\emptyset'')$ class. By :ref{#thm-jockusch-upper} for $n = 2$ and the coloring $h$, $P$ computes an infinite homogeneous set for $h$. Second way: by :ref{#lem-limit-coloring}, there is a computable coloring $f$ of $[\nat]^3$ whose infinite homogeneous sets are homogeneous for $h$. By :ref{#thm-jockusch-upper} for $n = 3$, $P$, which is PA relative to $f'' \equiv_T \emptyset''$, computes an infinite homogeneous set for $f$.
+
+For the last statement, relativize :ref{#thm-jockusch-no-delta2} to $\emptyset'$: there is an $\emptyset'$-computable coloring of pairs with no infinite $\Delta^0_2(\emptyset')$ homogeneous set, that is, none computable in $\emptyset''$.
+:::
+::::
+:::::

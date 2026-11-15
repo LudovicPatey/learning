@@ -36,7 +36,7 @@ Conversely, by induction on $n$, assume the condition for $n$; then $M \preccurl
 Let $M \subseteq K$ be models of $\mathrm{PA}^-$. $K$ is a **cofinal extension** of $M$, written $M \subseteq_{cf} K$, if every element of $K$ is below some element of $M$. The **supremum** of $M$ in $K$ is $\sup_K M = \{ x \in K : x \leq m \text{ for some } m \in M \}$.
 :::
 
-An extension may be neither end nor cofinal. The set $\sup_K M$ is closed under addition and multiplication, since $m + m'$ and $m \cdot m'$ are in $M$; it is an initial segment of $K$ containing $M$, and $M \subseteq_{cf} \sup_K M \subseteq_e K$. The splitting theorem (:ref{#thm-splitting}), proved two lessons later, shows that under induction hypotheses on $M$ some elementarity survives on both sides of this decomposition.
+An extension may be neither end nor cofinal. The set $\sup_K M$ is closed under addition and multiplication, since $m + m'$ and $m \cdot m'$ are in $M$; it is an initial segment of $K$ containing $M$, and $M \subseteq_{cf} \sup_K M \subseteq_e K$. The splitting theorem, proved two lessons later (:ref{to="splitting-conservation"}), shows that under induction hypotheses on $M$ some elementarity survives on both sides of this decomposition.
 
 ## Preservation in cofinal extensions
 
@@ -100,7 +100,7 @@ The bound of item 1 is optimal: Hájek and Pudlák (Remark IV.1.25) show that fo
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-cofinal-transfer difficulty=2 objective="Determine which sentences transfer from a model of collection to a cofinal extension, and why collection itself does not."}
 Let $M \models \mathrm B\Sigma_{n+1}$, $n \geq 0$, and let $K$ be a cofinal extension of $M$ with $M \preccurlyeq_n K$. Show that $K \models \mathrm I\Delta_0$ and that every $\Pi_{n+2}$ sentence true in $M$ is true in $K$. Why does this not show that $K \models \mathrm B\Sigma_{n+1}$?
 
 :::solution
@@ -115,3 +115,55 @@ The hierarchical Tarski–Vaught test is in Wong's Lecture 6 and in Hájek and P
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 6.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 1(c).
 - H. Gaifman, *A note on models and submodels of arithmetic*, in Conference in Mathematical Logic — London '70, Lecture Notes in Mathematics 255, Springer, 1972, 128–144.
+
+:::::exercises
+::::exercise{#ex-neither-end-nor-cofinal difficulty=1 objective="Use compactness to build an elementary extension that is neither an end extension nor a cofinal extension."}
+Let $M$ be a non-standard model of $\mathrm{PA}$. Show that $M$ has an elementary extension $K$ such that $M \subsetneq \sup_K M \subsetneq K$; in particular $K$ is neither an end extension nor a cofinal extension of $M$.
+
+:::solution
+Let $c \in M$ be non-standard, and let $d$ and $e$ be new constants. Consider the elementary diagram of $M$ together with the sentences $d > m$ and $e \neq m$, for $m \in M$, and $e < c$. A finite part mentions finitely many elements $m_1, \dots, m_r$; it is satisfied in $M$ by interpreting $d$ as $\max(m_1, \dots, m_r) + 1$ and $e$ as an element below $c$ different from $m_1, \dots, m_r$, which exists since all standard numbers are below $c$. By compactness there is a model $K$ of the whole theory; identifying $M$ with its image, $M \preccurlyeq K$. Then $e \in \sup_K M \setminus M$, since $e < c$, and $d \in K \setminus \sup_K M$, since $d$ is above every element of $M$.
+:::
+::::
+
+::::exercise{#ex-n-elementary-transitive difficulty=1 objective="Check the transitivity properties of $\Sigma_n$-elementarity used when splitting extensions."}
+Let $M \subseteq K \subseteq L$ be $\mathcal L_A$-structures, each a substructure of the next, and $n \geq 0$. Show that if $M \preccurlyeq_n K$ and $K \preccurlyeq_n L$, then $M \preccurlyeq_n L$; and that if $M \preccurlyeq_n L$ and $K \preccurlyeq_n L$, then $M \preccurlyeq_n K$.
+
+:::solution
+Let $\varphi$ be $\Sigma_n$ and $\bar a$ a tuple of elements of $M$. In the first case, $M \models \varphi(\bar a)$ if and only if $K \models \varphi(\bar a)$, since $M \preccurlyeq_n K$, if and only if $L \models \varphi(\bar a)$, since $\bar a$ is also a tuple of elements of $K$ and $K \preccurlyeq_n L$. In the second case, $M \models \varphi(\bar a)$ if and only if $L \models \varphi(\bar a)$, if and only if $K \models \varphi(\bar a)$, using that $\bar a \in K$.
+:::
+::::
+
+::::exercise{#ex-standard-sigma1-elementary difficulty=1 objective="Characterize when the standard model is a $\Sigma_1$-elementary or elementary substructure of a model of $\mathrm{PA}^-$."}
+Let $M$ be a model of $\mathrm{PA}^-$. Show that $\nat \preccurlyeq_1 M$ if and only if every $\Pi_1$ sentence true in $\nat$ is true in $M$, and that $\nat \preccurlyeq M$ if and only if $M$ satisfies the theory of $\nat$.
+
+:::solution
+By :ref{#ex-n-elementary}, $\nat \preccurlyeq_0 M$. The elements of $\nat$ are the values of the numerals, so a formula with parameters in $\nat$ is a sentence $\varphi(\bar k)$ with numerals.
+
+If $\nat \preccurlyeq_1 M$ and $\pi$ is a $\Pi_1$ sentence true in $\nat$, then $\neg \pi$ is $\Sigma_1$ and false in $\nat$, hence false in $M$. Conversely, let $\exists \bar y\ \delta(\bar k, \bar y)$ be a $\Sigma_1$ sentence, $\delta$ bounded. If it holds in $\nat$, a witness in $\nat$ satisfies $\delta$ in $M$, by $\nat \preccurlyeq_0 M$. If it fails in $\nat$, the $\Pi_1$ sentence $\forall \bar y\ \neg \delta(\bar k, \bar y)$ is true in $\nat$, hence in $M$, and the $\Sigma_1$ sentence fails in $M$.
+
+If $\nat \preccurlyeq M$, every sentence true in $\nat$ is true in $M$. Conversely, if $M$ satisfies the theory of $\nat$ and $\varphi(\bar k)$ is any sentence with numerals, then either $\varphi(\bar k)$ or $\neg \varphi(\bar k)$ belongs to this theory, and the same one holds in $M$.
+:::
+::::
+
+::::exercise{#ex-elementary-chain difficulty=2 objective="Prove the elementary chain lemma level by level with the Tarski–Vaught test."}
+Let $n \geq 0$ and $M_0 \subseteq M_1 \subseteq \cdots$ be $\mathcal L_A$-structures, each a substructure of the next, with $M_i \preccurlyeq_n M_{i+1}$ for every $i$, and let $U = \bigcup_i M_i$. Show that $M_i \preccurlyeq_n U$ for every $i$.
+
+:::solution
+By :ref{#ex-n-elementary-transitive} and induction, $M_i \preccurlyeq_n M_j$ for $i \leq j$. Every finite tuple of elements of $U$ lies in some $M_j$.
+
+*Level $0$.* We show by induction on a bounded formula $\delta$ that for every $j$ and every tuple $\bar a$ of $M_j$, $M_j \models \delta(\bar a)$ if and only if $U \models \delta(\bar a)$. Atomic formulas hold in the same way, since $M_j$ is a substructure of $U$, and connectives are immediate. Let $\delta = \exists y < t\ \delta'$. If $M_j \models \delta(\bar a)$, a witness in $M_j$ satisfies $y < t(\bar a) \wedge \delta'$ in $U$, by the induction hypothesis. If $U \models \delta(\bar a)$, a witness $y$ belongs to some $M_k$ with $k \geq j$; by the induction hypothesis at $k$, $M_k \models y < t(\bar a) \wedge \delta'(y, \bar a)$, so $M_k \models \delta(\bar a)$, and $M_j \models \delta(\bar a)$ since $M_j \preccurlyeq_0 M_k$. Bounded universal quantifiers are negations of bounded existential ones. So $M_j \preccurlyeq_0 U$ for every $j$.
+
+*From $k$ to $k + 1$, for $k < n$.* Assume $M_j \preccurlyeq_k U$ for every $j$. We apply :ref{#lem-tarski-vaught-n} to $M_j \preccurlyeq_0 U$. Let $\eta(\bar y)$ be a $\Pi_k$ formula with parameters in $M_j$ such that $U \models \exists \bar y\ \eta(\bar y)$, with a witness $\bar y$ in some $M_l$, $l \geq j$. By the hypothesis at $l$, $M_l \models \eta(\bar y)$, so $M_l \models \exists \bar y\ \eta(\bar y)$, a $\Sigma_{k+1}$ formula with $k + 1 \leq n$; hence $M_j \models \exists \bar y\ \eta(\bar y)$, since $M_j \preccurlyeq_n M_l$. A witness $\bar c$ in $M_j$ satisfies $\eta$ in $M_j$, hence in $U$, by the hypothesis at $j$. So $M_j \preccurlyeq_{k+1} U$. After $n$ steps, $M_j \preccurlyeq_n U$.
+:::
+::::
+
+::::exercise{#ex-cofinal-without-code difficulty=2 objective="See that the coding step in the proof of the cofinal preservation theorem can be avoided when the extension is known to satisfy collection."}
+In the situation of :ref{#thm-cofinal-preservation}, with $n \geq 1$, assume moreover that $K$ is a model of $\mathrm B\Sigma_n$. Give a proof of step 1 that uses collection in $M$ but no coded set. Then show, with :ref{#ex-cofinal-transfer}, that this extra assumption always holds once the theorem is proved.
+
+:::solution
+Let $\forall \bar x\ \exists \bar y\ \theta(\bar x, \bar y)$, $\theta \in \Pi_n$, be true in $M$, and $a \in M$. By $\mathrm B\Sigma_{n+1}$ in $M$, after contracting the tuples, there is $b \in M$ with $M \models \forall \bar x < a\ \exists \bar y < b\ \theta(\bar x, \bar y)$. By :ref{#lem-fo-collection-closure}, there is a $\Pi_n$ formula $\psi(a, b)$, with the parameters of $\theta$, such that $\mathrm B\Sigma_n$ proves $\psi(a, b) \leftrightarrow \forall \bar x < a\ \exists \bar y < b\ \theta(\bar x, \bar y)$ for all $a$ and $b$. Since $M \models \mathrm B\Sigma_n$, $M \models \psi(a, b)$; by $M \preccurlyeq_n K$, $K \models \psi(a, b)$; since $K \models \mathrm B\Sigma_n$, $K \models \forall \bar x < a\ \exists \bar y < b\ \theta(\bar x, \bar y)$. Every tuple $\bar x$ of $K$ is below some $a \in M$, so $K \models \forall \bar x\ \exists \bar y\ \theta(\bar x, \bar y)$.
+
+Over $\mathrm I\Delta_0$, $\mathrm B\Sigma_n$ is axiomatized by $\Pi_{n+2}$ sentences (Hájek and Pudlák, Remark IV.1.21). By :ref{#ex-cofinal-transfer}, $K$ satisfies $\mathrm I\Delta_0$ and every $\Pi_{n+2}$ sentence true in $M$, so $K \models \mathrm B\Sigma_n$. The proof with codes is needed to obtain this, since nothing is assumed of $K$.
+:::
+::::
+:::::

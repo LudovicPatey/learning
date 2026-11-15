@@ -14,7 +14,7 @@ After the course, a student can:
 ## 2. Prerequisites assumed
 
 - First-order logic: compactness, Löwenheim–Skolem, elementary chains, the Tarski–Vaught test, Henkin's canonical model of a complete Henkin theory (stated in `_course.yaml` and lessons 1 and 5).
-- fragments-of-arithmetic: `def-cut`, `prop-cuts-induction`, `def-ack-membership`, `lem-ack-basic`, `prop-seq-basic`, `thm-friedman-coded`, `lem-fo-collection-closure`, `thm-fo-parsons`, `fact-pairing`, `fact-exp`, `prop-isigma1-exp`, `lem-delta0-absolute`, `cor-sigma1-upward`, `thm-sigma1-complete`; the finite pigeonhole exercise of the lesson coding (lesson link).
+- fragments-of-arithmetic: `def-cut`, `prop-cuts-induction`, `def-ack-membership`, `lem-ack-basic`, `prop-seq-basic`, `thm-friedman-coded`, `lem-fo-collection-closure`, `thm-fo-parsons`, `fact-pairing`, `fact-exp`, `prop-isigma1-exp`, `lem-delta0-absolute`, `cor-sigma1-upward`, `thm-sigma1-complete`, `ex-finite-pigeonhole` (the finite pigeonhole principle, an exercise of the lesson coding).
 - truth-and-provability: `fact-syntax`, `def-sat-table`, `def-sat0`, `thm-sat0`, `thm-sat-n`, `cor-snowing`, `lem-variable-bounds`, `thm-pr-provably-total`.
 - cuts-and-extensions: `def-coded-subsets`, `thm-ssy-turing-ideal`, `ex-ssy-end-extension`, `cor-ssy-scott-set`, `thm-scott-converse` (its proof is reused twice), `ex-ssy-truth`, `ex-exp-cut-closed`.
 - big-five/wkl0: lesson link only (countable Scott sets containing a given set).
@@ -50,7 +50,7 @@ In sections 4–8, "lesson 3" is the pair bounded-types and friedman-embedding (
 - **Coded types** (lesson 1): `thm-rs-coded-types` uses the implication form, which works for incomplete types; Wong's Proposition 8.1 is restricted to complete types. The complete-type converse (Wong 8.13) is mentioned in the notes.
 - **Existence with prescribed invariants** (`thm-bf-existence`) is proved by adding realizing steps to the proof of `thm-scott-converse`; Wong does not prove it. It yields the classification by standard systems.
 - **Friedman's theorem without recursive saturation.** Wong proves the self-embedding theorem for recursively saturated models and remarks (8.7) that less suffices. The course proves Friedman's two-model criterion for countable non-standard models of IΣ₁ directly, with `lem-fe-realize` (coded Σ₁ types, and Π₁ types with a bound) instead of recursive saturation. The forth step uses Δ₀ types bounded by d, the back step bounded Π₁ types, which is why item 2 of the lemma needs the bound v < a.
-- **Smoryński's theorem**: the inductive condition uses single elements x < b, with pairs ⟨a, c⟩ coded below 2^{a²}; the pigeonhole principle is obtained from the exercise of fragments-of-arithmetic/coding by coding the definable map as a sequence (Wong proves an injective coded pigeonhole principle instead).
+- **Smoryński's theorem**: the inductive condition uses single elements x < b, with pairs ⟨a, c⟩ coded below 2^{a²}; the pigeonhole principle is obtained from `ex-finite-pigeonhole` (fragments-of-arithmetic/coding) by coding the definable map as a sequence (Wong proves an injective coded pigeonhole principle instead).
 - **Inductive partial satisfaction classes** (Wong 7, exercises (a)–(c)) are a theorem of lesson 5, as the first application of resplendence and as a contrast with full classes.
 - **Lachlan's proof: two corrections to the presentation in Wong 14.4.**
   1. Wong makes the differences θᵢ ∧ ¬θᵢ₊₁ non-empty by θ′ᵢ₊₁ = θᵢ₊₁ ∧ ∃v′ < v θ′ᵢ(v′). (Polishing pass: this is correct, given Wong's condition (iv) that every θᵢ has infinitely many solutions, since the least element of θ′ᵢ is in the difference; the earlier claim of this log that it fails was wrong. The change is a simplification, not a correction.) The course uses the pairing θ*ᵢ(⟨a, b⟩) ⇔ θᵢ(a) ∧ b ≥ i, which makes every difference non-empty with no case analysis, and tolerates repetitions in the enumeration of p; this matters because the enumeration must be primitive recursive (see 2026-11-13 in the history).
@@ -102,8 +102,37 @@ Web search, 2026-11-13 (the first attempt on 2026-11-12 failed on a usage limit)
 - `thm-bf-existence` has no direct source reference (Kaye and Kossak–Schmerl treat the classification; chapter numbers not checked).
 - ~~Primitive recursiveness of φ ↦ φ*~~: closed 2026-11-13; truth-and-provability now has `rem-variable-bounds-pr`, cited in bounded-types.
 - Preservation theorems (Wong 12) are not covered anywhere in the track.
+- Section 5 says that Wong's partition θ′ᵢ₊₁ = θᵢ₊₁ ∧ ∃v′ < v θ′ᵢ(v′) is correct given his condition (iv). Checked again on 2026-11-13 (exercises pass): (iv) gives infinitely many solutions to each θᵢ, but the non-emptiness of θ′ᵢ₊₁ needs a solution of θᵢ₊₁ above the least solution of θ′ᵢ, which (iv) read as "infinitely many" does not obviously give in a non-standard model (unboundedness would). Wong's wording (checked in the text file) is "infinitely [many] v ∈ M", and he gives no further argument. Not used in the course, which takes the pairing; the claim of section 5 should be re-proved or withdrawn.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. Featured exercises stay in the text, at the end of the section they practice; the others are in the collapsed block at the end of each lesson.
+
+**Featured** (10, all pre-existing, solutions checked):
+1. `ex-rs-chain` (end of "Existence"): the chain argument is reused in every later construction.
+2. `ex-bf-end-extension`, `ex-bf-elementary-embedding` (end of "The isomorphism theorem"): the first is the typical use of the invariants, the second the forth-only variant of the construction.
+3. `ex-bt-sigma1-bound`: the element d of Friedman's theorem, as a first realization by overspill.
+3′. `ex-fe-below`: the role of d, characterized.
+4. `ex-rs-same-type` (kept in place, used by the text), `ex-aut-fixed-elementary` (end of "Non-trivial automorphisms").
+5. `ex-inductive-sat-undefinable` (cited twice in the text): Tarski's argument for partial classes.
+6. `ex-sat-delta` (now right after the paragraph that introduces δ, which cites it): the pathology used in lesson 7.
+7. `ex-lachlan-head-first`: why disjunctive correctness fails, and why the γ_{i,k} are nested.
+
+**Further** (34 new, 2 moved):
+1. Five: constants preserve recursive saturation; parameter-definable subsets of ℕ are in SSy (and for PA without recursive saturation); a small non-definable non-standard element; reduction to one variable and one parameter by pairing; Wong's Proposition 8.13 (coded complete types = realized complete types implies recursive saturation, d3, through completions in a Scott set).
+2. Four: homogeneity of the model of definable elements (homogeneity does not imply recursive saturation); same standard system, different theories; the inclusion of standard systems is needed in lem-bf-step; embedding into a model with a larger Scott set.
+3. Four: codes of a set of SSy below any non-standard element; the coding hypothesis of lem-fe-realize is needed; bound for Σₙ₊₁ witnesses in IΣₙ₊₁; a second element with the same Σₙ type (contrast with ex-rs-same-type, which needs recursive saturation).
+3′. Four: decreasing chain of initial segments isomorphic to M; an initial self-embedding fixing a given element; non-symmetry of initial embeddability (Th(ℕ) against ¬Con(PA)); embeddings below every non-standard element iff Σ₁-soundness.
+4. Four new, one moved (`ex-aut-definable-fixed`): fixed by all automorphisms iff definable; orbits without endpoints; the smallest exponential cut containing b (tower) and its automorphism; the extension lemma for standard a, locating where non-standardness is used.
+5. Four: Craig's theorem for theories; consistency with ElemDiag reduces to consistency with Th without parameters; the model of definable elements shows that recursive saturation is needed in Barwise–Ressayre; Th(M) ∈ SSy(M) from an inductive class by induction in (M, S).
+6. Four: closure under direct subformulas is needed in Enayat–Visser; CT⁻ + global reflection proves Con(PA), so CT⁻ does not prove it; Δ*₀-classes are not unique (Sat₀ against the δ class); conservativity of CT⁻ from the chain alone, for models of any cardinality.
+7. Five new, one moved (`ex-lachlan-undefinable`): ℕ and the non-standard hypothesis; computing the set A_k of a pair; full classes with induction give recursive saturation by overspill; countable models: recursively saturated ⇔ resplendent ⇔ full class (without Barwise's converse); SSy of a model with a full class.
+
+**Sources.** Wong Lecture 8, Proposition 8.13 (`ex-rs-converse`, proof written here from Wong's sketch); Craig 1953 (`ex-craig-theorem`); the remark in Wong's Lecture 14 that resplendent models carry full classes (`ex-lachlan-resplendent`). The others are new, built on the proofs of the lessons.
+
+**Dropped.** An exercise on Wong's version of the partition in Lachlan's proof (θ′ᵢ₊₁ = θᵢ₊₁ ∧ ∃v′ < v θ′ᵢ(v′)): the non-emptiness of the sets θ′ᵢ needs Wong's condition (iv) in a form I could not verify from finite satisfiability alone (the solutions of θᵢ₊₁ might all lie below the least solution of θ′ᵢ). See also the open points. Exercises needing MacDowell–Specker, elementary cuts or 2^ℵ₀ satisfaction classes (resplendence handles finitely many parameters only) were not attempted.
+
+## 12. History
 
 - **2026-11-12/13.** Course created: 7 lessons (recursively-saturated-models, back-and-forth, friedman-embedding, automorphisms, resplendence, satisfaction-classes, lachlan), figure generator `scripts/figures/recursive-saturation.py` (figures zigzag, friedman, smorynski, ranks, lachlan).
 - **2026-11-13: polishing pass.**
@@ -113,3 +142,4 @@ Web search, 2026-11-13 (the first attempt on 2026-11-12 failed on a usage limit)
   - References. Barwise–Schlipf title corrected ("An introduction to recursively saturated and resplendent models"); Enayat–Visser editors and pages 321–335; Kotlarski's survey pages 573–579; Friedman 1973 checked.
   - Figure lachlan: subscript m in italic (generator changed, figure regenerated); the other figures agree with the generator.
   - bounded-types cites `rem-variable-bounds-pr` (new in truth-and-provability) for the primitive recursiveness of φ ↦ φ*; open point closed.
+- **2026-11-13: featured and further exercises.** Labels and objectives for the 12 existing exercises; 34 new further exercises (section 11); positional references to exercises replaced by `:ref` (automorphisms: `ex-rs-same-type`, `ex-finite-pigeonhole`, `ex-aut-definable-fixed`; resplendence, satisfaction-classes, lachlan: `ex-inductive-sat-undefinable`, `ex-sat-delta`). The "Exercises" sections were removed; featured exercises close the section they practice. Duration of automorphisms 45 → 40 (2297 words); the others unchanged.

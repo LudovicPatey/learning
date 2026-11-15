@@ -268,7 +268,59 @@ thin sets. No change to the course.
 - Durations (2026-11-13): eight lessons, at most 2476 words each (45 minutes); the
   shortest is `erdos-moser-separation` (about 1790 words, 35 minutes).
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a solution. Featured exercises
+(in the text) are the ones every reader should do; the others are in the block of further
+exercises at the end of each lesson.
+
+**Featured, and why.**
+- `custom-properties`: `exr-sd-min-arrays` (placed after the definition of k-arrays; the
+  convention min F_n > n is used in lessons 4 and 6).
+- `erdos-moser-design`: `exr-em-l-compatible` (the block condition of the monograph; used in
+  `exr-em-strong-cone`).
+- `erdos-moser-hyperimmunities`: `exr-wkl-hyperimmunities` (placed after the definition; used
+  in the main proof) and `exr-em-strong-cone` (a full second run of the design method).
+- `erdos-moser-separation`: `exr-rt22-two-among-three` (what a disjunctive question can still
+  preserve).
+- `chain-antichain`: `ex-cac-wkl` (new; WKL ≰_ω CAC in three lines, the method in miniature).
+  The degenerate case (H) fails, formerly in the text, is now the further exercise
+  `ex-cac-degenerate`, with a complete solution (the previous one was a sketch), cited by
+  label from the text.
+- `ascending-descending`: `ex-ads-one-part` (labelled; used in lesson 6).
+- `separating-instances`: `ex-sd-order-properties` (labelled).
+- `free-set-design`: `ex-fs-thin` (labelled; cited from the text).
+
+**Further exercises, by lesson.**
+1. Immune but not 2-immune via a bi-immune set (with the existence of Δ⁰₂ bi-immune sets);
+   k-immunity under subsets and finite changes; closure under subsets is needed; PA sets
+   compute subsets of a co-c.e. set iff it is not hyperimmune.
+2. Finite tournaments: the log₂ n lower bound and the Paley tournament on 7 vertices;
+   (b) means "beating elements first"; a ∅''-computable transitive set from step 1; stable
+   tournaments vs stable colorings, and a transitive set not homogeneous for L.
+3. EM preserves countably many non-Σ⁰₁ definitions (Wang), hence countably many cones;
+   cone avoidance from preservation of hyperimmunity (DGHPT); products of problems; sets
+   instead of functions.
+3b. EM + WKL ⊬ SRT²₂ (ω-models); EM vs SRT²₂ on the bi-hyperimmune instance; strong RT¹₂
+   does not preserve 2 hyperimmunities; SADS ≰_ω EM.
+4. Degenerate case (moved); cone avoidance of CAC with split triples; 3k-immunity gives
+   k-immunity; a linear order where (H) fails; details of property 1.
+5. ADS ≤_c CAC (Hirschfeldt Ex. 9.3(a)); dependent hyperimmunity under subsets and finite
+   changes; the CAC question is not extremal (explicit order); one finite part reduces to
+   hyperimmunity.
+6. Every computable partial order has a chain or antichain computing no DNC function;
+   properties of μ; immunity of A directly from R_{e,1}; no hyperimmune set works for DNC.
+7. Explicit free sets; one candidate is not enough; FS² preserves one hyperimmunity, and the
+   obstacle to two is the reservoir ideal (RT²₂); Friedman's FS² ≤_c RT³₄; FS^{n+1} → FS^n
+   (Hirschfeldt Ex. 9.33(c)).
+
+**Sources.** Hirschfeldt, *Slicing the Truth*: Exercise 9.3(a), remark after Theorem 9.31
+(SRT²₂ from EM + SADS), Friedman's argument after Exercise 9.33, Exercise 9.33(c), checked in
+the text version. The countable preservation of non-Σ⁰₁ definitions by EM is attributed to
+Wang as in `avoidance/non-sigma1-definitions`. The other exercises are new, built on the
+lessons' proofs.
+
+## 12. History
 
 - **2026-11-12.** Course created: seven lessons, three figures
   (`scripts/figures/separation-design.py`), design log.
@@ -294,3 +346,7 @@ thin sets. No change to the course.
   - References: Hirschfeldt sections corrected (EM 9.2.2, CAC 9.1 and 9.2.1); unused LST
     entry removed from lesson 2; Flood–Towsner pages added; Patey's thesis and
     Dzhafarov–Jockusch added where used.
+
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for all
+  exercises; 34 new exercises; degenerate CAC case moved to the further exercises with a
+  complete solution; positional references to exercises replaced by `:ref` (section 11).

@@ -43,7 +43,7 @@ For a set $B$, write $B^0 = B$ and $B^1 = \overline B$. Let $\mathcal Q$ be the 
 *Case 2: $\mathcal Q$ is non-empty.* The class $\mathcal Q$ is the set of paths of an infinite tree computable in $X$, with an index computable from the code of $c$; by :ref{#lem-scott-paths}, an $M$-index of a member $B \in \mathcal Q \cap \mathcal M$ is computable from the code of $c$. The sentences "$X \cap B^0$ is infinite" and "$X \cap B^1$ is infinite" are $\Pi^0_2(M)$, uniformly in the indices of $X$ and $B$, hence $\Pi^0_2$ by :ref{#prop-low-code-questions}, with codes computable from the code of $c$. At least one is true, since $X$ is infinite. By :ref{#lem-pa-choice}, $P$ names an $i$ such that $X \cap B^i$ is infinite. Let $d = (\sigma_0, \sigma_1, X \cap B^i)$, an extension of $c$, whose reservoir has an $M$-index computable from those of $X$ and $B$. If a member $G$ of side $i$ of $d$ had $\Phi^G_{e_i}(e_i)\converge$ with use $u$, the prefix of $G$ of length $\max(u, |\sigma_i|)$ would be compatible with $(\sigma_i, X \cap B^i)$ and make the computation converge, contradicting $B \in \mathcal Q$. Return $d$, $i$ and $b = 0$.
 :::
 
-The relation "$c \mathrel{?{\vdash}} \Phi^{G_0}_{e_0}(e_0)\converge \vee \Phi^{G_1}_{e_1}(e_1)\converge$ if $\mathcal Q$ is empty" is the disjunctive forcing question of the Dzhafarov–Jockusch notion (first exercise of :ref{to="avoidance/disjunctive-question"}), and it is $\Sigma^0_1(X)$. For cone avoidance, this definability gave a contradiction with a reduction of $C$ to $X$; here, through the lowness of the code, it lets $\emptyset'$ answer the question.
+The relation "$c \mathrel{?{\vdash}} \Phi^{G_0}_{e_0}(e_0)\converge \vee \Phi^{G_1}_{e_1}(e_1)\converge$ if $\mathcal Q$ is empty" is the disjunctive forcing question of the Dzhafarov–Jockusch notion (:ref{#ex-dj-disjunctive}), and it is $\Sigma^0_1(X)$. For cone avoidance, this definability gave a contradiction with a reduction of $C$ to $X$; here, through the lowness of the code, it lets $\emptyset'$ answer the question.
 
 :::quiz[the decision of the jump]
 In the proof of :ref{#lem-d22-decision}, why does the class $\mathcal Q$ quantify over all sets $B$, instead of asking about the sides $X \cap A^i$ directly?
@@ -99,11 +99,11 @@ For a set $Z$, the same proof works with a code $M$ of a Scott ideal containing 
 
 ## Exercises
 
-::::exercise{difficulty=3}
+::::exercise{#ex-d22-low-reservoirs difficulty=3 objective="Adapt the decision of the jump to low reservoirs named by lowness indices, as in Hirschfeldt's presentation."}
 Hirschfeldt presents the proof of :ref{#thm-d22-weakly-low} with **low reservoirs** instead of a low code: conditions $(\sigma_0, \sigma_1, X)$ with $X$ low and infinite, coded by a lowness index of $X$, under the assumption that no infinite low set is contained in $A$ or in $\overline A$. Adapt the proof of :ref{#lem-d22-decision} to this setting.
 
 :::solution
-Given a lowness index of $X$, the class $\mathcal Q$ is $\Pi^0_1(X)$ with an index computable from the code, and its emptiness is a $\Sigma^0_1(X)$ question, which $\emptyset'$ answers through the lowness index, by item 2 of :ref{#thm-jump}. In case 1, the search is the same. In case 2, :ref{#prop-uniform-low-basis} gives a lowness index of $X \oplus B$ for some $B \in \mathcal Q$, computably from the code; by :ref{#exr-lowness-index-reduction}, lowness indices of $X \cap B^0$ and $X \cap B^1$ are computable from it. The sentences "$X \cap B^i$ is infinite" are $\Pi^0_2(X \oplus B)$, hence $\Pi^0_1((X \oplus B)')$, and the lowness index turns them into $\Pi^0_1(\emptyset')$, that is, $\Pi^0_2$ sentences with computable codes. $P$ chooses an infinite side by :ref{#lem-pa-choice}, and its lowness index is the code of the new reservoir. The infinity lemma uses the new assumption: if $X \cap A^i$ were finite, a cofinite part of the low set $X$ would be an infinite low subset of $A^{1-i}$.
+Given a lowness index of $X$, the class $\mathcal Q$ is $\Pi^0_1(X)$ with an index computable from the code, and its emptiness is a $\Sigma^0_1(X)$ question, which $\emptyset'$ answers through the lowness index, by item 2 of :ref{#thm-jump}. In case 1, the search is the same, since $\emptyset'$ computes $X$ from a lowness index of $X$, by item 3 of :ref{#thm-jump}, and computes $A$. In case 2, :ref{#prop-uniform-low-basis} gives a lowness index of $X \oplus B$ for some $B \in \mathcal Q$, computably from the code; by :ref{#exr-lowness-index-reduction}, lowness indices of $X \cap B^0$ and $X \cap B^1$ are computable from it. The sentences "$X \cap B^i$ is infinite" are $\Pi^0_2(X \oplus B)$, hence $\Pi^0_1((X \oplus B)')$, and the lowness index turns them into $\Pi^0_1(\emptyset')$, that is, $\Pi^0_2$ sentences with computable codes. $P$ chooses an infinite side by :ref{#lem-pa-choice}, and its lowness index is the code of the new reservoir. The infinity lemma uses the new assumption: if $X \cap A^i$ were finite, a cofinite part of the low set $X$ would be an infinite low subset of $A^{1-i}$.
 :::
 ::::
 
@@ -116,3 +116,47 @@ Given a lowness index of $X$, the class $\mathcal Q$ is $\Pi^0_1(X)$ with an ind
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 6.6.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 8.5.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Lowness*, section *Ramsey's theorem for pairs*.
+
+:::::exercises
+::::exercise{#ex-srt22-weakly-low difficulty=1 objective="Transfer the weakly low basis from the pigeonhole principle for $\Delta^0_2$ sets to stable colorings of pairs." lessons="ramsey-theorem/stable-colorings"}
+Show that $\mathsf{SRT}^2_2$ admits a weakly low basis.
+
+:::solution
+Let $Z$ be a set, $f$ a $Z$-computable stable coloring of pairs, and $P$ PA relative to $Z'$. The limit set $A_f$, with $A_f(x) = \lim_y f(\{ x, y \})$, is $\Delta^0_2(Z)$ by the limit lemma relativized (:ref{#thm-limit-lemma}). By :ref{#thm-d22-weakly-low}, there is an infinite set $G$, contained in $A_f$ or in its complement, with $(Z \oplus G)' \leq_T P$. By :ref{#prop-srt-d22} (2), $f \oplus G$ computes an infinite homogeneous set $H$ for $f$. Then $H \leq_T Z \oplus G$, so $(Z \oplus H)' \leq_T (Z \oplus G)' \leq_T P$.
+:::
+::::
+
+::::exercise{#ex-d22-ideal-bi-immune difficulty=1 objective="Restate the assumption (H) as a bi-immunity property relative to the ideal, and see the infinity lemma fail without it."}
+Let $\mathcal M$ be a Turing ideal and $A$ a set, with $A^0 = A$ and $A^1 = \overline A$.
+
+1. Show that no infinite subset of $A^0$ or of $A^1$ belongs to $\mathcal M$ if and only if, for every infinite $X \in \mathcal M$, both $X \cap A^0$ and $X \cap A^1$ are infinite.
+2. Let $A$ be the set of even numbers. Give a condition $(\sigma_0, \sigma_1, X)$ with $X \in \mathcal M$ for which the conclusion of :ref{#lem-d22-infinity} fails, and explain why :ref{#thm-d22-weakly-low} holds for this $A$.
+
+:::solution
+1. Suppose that some infinite $X \in \mathcal M$ has $X \cap A^i$ finite, contained in $\{ 0, \dots, m \}$. Then $X \setminus \{ 0, \dots, m \}$ is computable in $X$, so it belongs to $\mathcal M$, and it is an infinite subset of $A^{1-i}$. Conversely, an infinite $H \in \mathcal M$ contained in $A^i$ satisfies $H \cap A^{1-i} = \emptyset$.
+2. The set $A$ is computable, so it belongs to every Turing ideal. For the condition $(\varepsilon, \varepsilon, A)$, the set $X \cap A^1$ is empty, so no extension adds an element to the side $1$. The theorem holds since $A$ itself is an infinite subset of $A$ with $A' \equiv_T \emptyset' \leq_T P$: this is the case where (H) fails.
+:::
+::::
+
+::::exercise{#ex-lachlan-symmetric difficulty=1 objective="Analyze the table of Lachlan's disjunction, and see that the case distinction can be made symmetric."}
+Let $f : \nat^2 \to 2$ be the table of sides of the proof of :ref{#thm-d22-weakly-low}, with rows indexed by $e_0$ and columns by $e_1$.
+
+1. Show that every row contains a $0$ or every column contains a $1$.
+2. Show that if every column contains a $1$, then $G_1' \leq_T P$, by a search different from the one in the proof.
+3. Show that the set of tables in which every row contains a $0$ is defined by a $\Pi^0_2$ formula about $f$, and that the side whose jump the proof computes from $P$ is determined by $P''$.
+
+:::solution
+1. If some row $e_0^*$ contains no $0$, then $f(e_0^*, e_1) = 1$ for every $e_1$, so every column contains a $1$.
+2. Given $e$, search for $e_0$ with $f(e_0, e) = 1$, and output $h(e_0, e)$. The pair $(e_0, e)$ is decided on side $1$, so $G_1'(e) = h(e_0, e)$. The search is computable in $P$ and terminates by hypothesis.
+3. "Every row contains a $0$" is $\forall e_0\ \exists e_1\ f(e_0, e_1) = 0$, a $\Pi^0_2(f)$ formula, and $f \leq_T P$, so it is $\Pi^0_2(P)$, decided by $P''$. If it holds, the proof computes $G_0'$; otherwise, it computes $G_1'$. In general $P$ itself cannot tell which case holds, which is why the theorem gives no uniform procedure for the side.
+:::
+::::
+
+::::exercise{#ex-d2k-weakly-low difficulty=2 objective="Extend the weakly low basis from partitions into two $\Delta^0_2$ parts to finitely many parts, using the density of PA degrees." lessons="weakly-low-bases"}
+Let $k \geq 2$. Show that for every set $Z$, every partition $\nat = A_0 \sqcup \cdots \sqcup A_{k-1}$ into $\Delta^0_2(Z)$ sets, and every set $P$ PA relative to $Z'$, there is an infinite set $H$, contained in some $A_j$, with $(Z \oplus H)' \leq_T P$.
+
+:::solution
+By induction on $k$; the case $k = 2$ is :ref{#thm-d22-weakly-low}. Let $k \geq 3$. By :ref{#lem-pa-between} applied to $Z'$ and $P$, let $Q$ be PA relative to $Z'$ such that $P$ is PA relative to $Q$. Let $B = A_{k-2} \cup A_{k-1}$. The partition $A_0, \dots, A_{k-3}, B$ has $k - 1$ parts, all $\Delta^0_2(Z)$; by the induction hypothesis with $Q$, there is an infinite set $H_0$ contained in one of them with $(Z \oplus H_0)' \leq_T Q$. If $H_0 \subseteq A_j$ with $j < k - 2$, then $(Z \oplus H_0)' \leq_T Q \leq_T P$, and $H = H_0$ works. Otherwise $H_0 \subseteq B$. Let $p$ be the increasing enumeration of $H_0$, and $D = \{ n : p(n) \in A_{k-2} \}$, a $\Delta^0_2(Z \oplus H_0)$ set. The set $P$ is PA relative to $Q$, hence relative to $(Z \oplus H_0)' \leq_T Q$. By :ref{#thm-d22-weakly-low} relativized to $Z \oplus H_0$, there is an infinite set $H_1$, contained in $D$ or in $\overline D$, with $(Z \oplus H_0 \oplus H_1)' \leq_T P$. The set $H = p[H_1]$ is infinite, contained in $A_{k-2}$ if $H_1 \subseteq D$ and in $A_{k-1}$ otherwise, since $p$ takes its values in $B$. It is computable in $H_0 \oplus H_1$, so $(Z \oplus H)' \leq_T P$.
+:::
+::::
+:::::

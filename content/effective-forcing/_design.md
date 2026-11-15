@@ -307,7 +307,76 @@ the forcing question and the choice of level-1 compactness and merging.
   are unaffected.
 - `lowness` writes the oracle as G ⊕ Z in four places; the track uses Z ⊕ G.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. Featured
+exercises stay in the text, after the material they practice; the others are in the
+collapsed block `:::::exercises` at the end of each lesson (outside the reading time).
+
+**Featured (11).** Chosen because each shows a point of the framework that the text
+uses later or states without proof.
+
+- `notions-of-forcing`: `ex-prefix-filter` (Cohen filters meeting every S_n are the
+  prefix filters; used tacitly in lessons 2 and 4).
+- `generic-sets`: `ex-sacks-avoids-sets` (Sacks versus Jockusch–Soare on avoiding
+  countably many sets).
+- `forcing-relation`: `ex-cohen-sigma2-witness` and `exr-weak-forcing` (the existential
+  clause needs a witness; strong versus weak forcing; cited after `prop-forcing-basic`).
+- `cohen-forcing`: `ex-cohen-totality-pi2` (unfolding the universal clause) and
+  `ex-cohen-relative-preservation` (how much genericity preservation needs).
+- `forcing-with-trees`: `exr-low2-dominated` (effective genericity plus the level-2
+  decision; cited in the notes).
+- `sacks-forcing`: `ex-sacks-traceable` (traces from the domination argument).
+- `forcing-question`: `ex-question-needs-extensions` (why a question refers to extensions).
+- `compactness-merging`: `exr-sacks-dnc` (ω-merging; used by `mathias-forcing`).
+- `mathias-forcing`: `ex-mathias-r-cohesive`.
+
+**Further exercises (5 moved, 38 new), lesson by lesson.**
+
+1. `notions-of-forcing`: countability in Rasiowa–Sikorski (`ex-uncountable-dense`);
+   Mathias forcing with reservoirs in a class, and why closure under finite changes is
+   needed (`ex-mathias-refinement-class`); compatibility versus intersection for tree
+   forcings, and why a set does not determine a Sacks filter (`ex-tree-compatibility`,
+   the point of the "Framework" choice in §5); compatibility of Mathias conditions.
+2. `generic-sets`: Mathias generic sets contain no infinite computable set; normal forms
+   of formulas; Jockusch–Soare conditions below which generic sets are non-computable;
+   Mathias generic sets are not 1-generic (thinning the reservoir).
+3. `forcing-relation`: a non-generic filter for which forcing and truth fail; forcing
+   totality for Sacks forcing is not local to the nodes; "G is infinite" in the four
+   notions; forcing a Π⁰₂ sentence by a string as co-meagerness.
+4. `cohen-forcing`: (moved) non-highness; oracle-free sentences and optimality of the
+   definability theorem; jump inversion at level n (`ex-cohen-jump-inversion-n`, difficulty
+   3, used in lesson 5); order of quantifiers in preservation; non-arithmetical sets.
+5. `forcing-with-trees`: (moved) complexity of forcing totality; Π⁰₂-completeness of Sacks
+   conditions; Π⁰₁-completeness of Sacks extension; a 1-generic set that is not GL₂;
+   GL₂ sets are not high.
+6. `sacks-forcing`: (moved) failure for Jockusch–Soare forcing; cone avoidance by a
+   splitting dichotomy; not low; not 1-generic (escape nodes); traceability for any
+   slow bound (difficulty 3, direct construction instead of Terwijn–Zambella).
+7. `forcing-question`: the question "some extension forces" is not Σ⁰₁-preserving for
+   Jockusch–Soare forcing (`ex-js-naive-question`); iterated cone avoidance basis;
+   questions for Π⁰ₙ sentences; behavior under extension; relativization to Z ⊕ G
+   (`ex-question-relativized`, used in lesson 9).
+8. `compactness-merging`: computably dominated sets preserve all hyperimmune functions,
+   Cohen generic sets do not; ω-merging for Cohen forcing (Demuth–Kučera recovered);
+   a merging question that is not Σ⁰₁-preserving (the hypothesis is needed); the
+   question "some extension forces" is always compact.
+9. `mathias-forcing`: (moved) relativized highness; infinite subsets are high; high but
+   not above ∅′; not GL₁ (via `ex-question-relativized`); the principal function is
+   below a given dominant function infinitely often.
+
+**Sources.** Monin–Patey, *Effective forcing*: Sacks generic sets avoid countably many
+sets and cones (section *Forcing with trees*), computable traceability, Π-ω-merging
+(section *Forcing question*); these are restated and solved here, with the source named
+in the solutions. Dzhafarov–Mummert §7.5 and Downey–Hirschfeldt §2.24 for the Cohen
+material. The other exercises were designed for the course. Checked against the
+exercises of `cohen-genericity`, `pi01-classes`, `immunity-growth` and `ramsey-theorem`
+to avoid duplicates: the n = 1 jump inversion of `cohen-genericity/posner-robinson` and
+the low cone-avoiding member of `pi01-classes/basis-theorems` are not repeated (an
+exercise bounding a cone-avoiding member by C ⊕ ∅′ and one building a cohesive set
+below ∅″ were dropped for that reason).
+
+## 12. History
 
 - **2026-11-12.** Course created: seven lessons, three figures
   (`scripts/figures/effective-forcing.py`), design log.
@@ -328,4 +397,8 @@ the forcing question and the choice of level-1 compactness and merging.
   lessons. References: Jockusch 1980 and Spector 1956 added to lesson 1; arXiv number of
   Patey 2017 confirmed (1501.07709); volume and pages of *Pigeons do not jump high* still
   unconfirmed (DOI only).
-
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for
+  all exercises; 11 featured exercises in the text, 43 further exercises (5 moved, 38
+  new) in collapsed blocks; positional references to exercises replaced by labels
+  (`forcing-relation`); durations recomputed (`forcing-with-trees` 40,
+  `forcing-question` 35). See §11.

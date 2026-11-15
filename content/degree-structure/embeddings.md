@@ -1,7 +1,7 @@
 ---
 title: Embedding partial orders
 summary: The columns of a 1-generic set are computably independent; a computable partial order contains a copy of every countable partial order; hence every countable partial order embeds into the Turing degrees below 0′; there is an antichain of continuum many degrees.
-duration: 50
+duration: 45
 prerequisites: [exact-pairs, turing-degrees/finite-extensions]
 ---
 
@@ -54,6 +54,14 @@ Why is $y$ chosen with $\langle i, y \rangle \geq |\sigma|$?
 
   The value of $G^{[i]}(y)$ plays no role; the flipped bit is chosen opposite to the computed value.
 :::
+
+::::exercise{#ex-generic-not-minimal difficulty=1 objective="Use the independence of the columns to find a degree strictly between $\obf$ and a 1-generic degree."}
+Show that no 1-generic set has minimal degree: if $G$ is 1-generic, there is a set $Y$ with $\obf < \deg_T(Y) < \deg_T(G)$.
+
+:::solution
+Let $Y = G^{[0]}$. It is computable from $G$. It is not computable: otherwise $G^{[0]} \leq_T G^{\neq 0}$, contradicting :ref{#thm-generic-independent}. If $G \leq_T Y$, then $G^{[1]} \leq_T G^{[0]} \leq_T G^{\neq 1}$, again a contradiction. So $\obf < \deg_T(Y) < \deg_T(G)$.
+:::
+::::
 
 ## A universal countable partial order
 
@@ -141,6 +149,14 @@ Where is the independence of the columns used?
   This follows from $G \leq_T \emptyset'$.
 :::
 
+::::exercise{#ex-generic-computable-subsets difficulty=1 objective="Code the computable subsets of $\nat$ into the columns of a 1-generic set."}
+Let $G$ be 1-generic. For a computable set $S$, let $G_S$ be the set whose column $m$ is $G^{[m]}$ for $m \in S$ and empty otherwise. Show that $S \subseteq S'$ if and only if $G_S \leq_T G_{S'}$, for computable sets $S, S'$.
+
+:::solution
+If $S \subseteq S'$, then $G_S$ is obtained from $G_{S'}$ by erasing the columns $m \notin S$, a computable operation since $S$ is computable. If $m \in S \setminus S'$, then $G^{[m]} \leq_T G_S$ and $G_{S'} \leq_T G^{\neq m}$, so $G_S \leq_T G_{S'}$ would contradict :ref{#thm-generic-independent}.
+:::
+::::
+
 ## An antichain of size continuum
 
 The degrees also contain antichains of the largest possible size. The proof replaces the sequence of strings of the Kleene–Post construction (:ref{#thm-kleene-post}) by a binary tree of strings, so that every path of the tree defines a set; the requirements diagonalize between any two nodes of the same level, hence between any two paths. This method of **perfect trees of finite extensions** is used again for continuum many minimal degrees in the last lesson.
@@ -165,24 +181,6 @@ The degrees $\deg_T(X_Z)$ are pairwise distinct, so the antichain has continuum 
 
 Each step asks whether some extension of a string makes a computation converge, a $\Sigma^0_1$ question; so, choosing the first witness in a fixed enumeration, the map $\rho \mapsto \sigma_\rho$ is computable in $\emptyset'$, and the construction uses no form of the axiom of choice.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $G$ be 1-generic. For a computable set $S$, let $G_S$ be the set whose column $m$ is $G^{[m]}$ for $m \in S$ and empty otherwise. Show that $S \subseteq S'$ if and only if $G_S \leq_T G_{S'}$, for computable sets $S, S'$.
-
-:::solution
-If $S \subseteq S'$, then $G_S$ is obtained from $G_{S'}$ by erasing the columns $m \notin S$, a computable operation since $S$ is computable. If $m \in S \setminus S'$, then $G^{[m]} \leq_T G_S$ and $G_{S'} \leq_T G^{\neq m}$, so $G_S \leq_T G_{S'}$ would contradict :ref{#thm-generic-independent}.
-:::
-::::
-
-::::exercise{difficulty=1 #ex-generic-not-minimal}
-Show that no 1-generic set has minimal degree: if $G$ is 1-generic, there is a set $Y$ with $\obf < \deg_T(Y) < \deg_T(G)$.
-
-:::solution
-Let $Y = G^{[0]}$. It is computable from $G$. It is not computable: otherwise $G^{[0]} \leq_T G^{\neq 0}$, contradicting :ref{#thm-generic-independent}. If $G \leq_T Y$, then $G^{[1]} \leq_T G^{[0]} \leq_T G^{\neq 1}$, again a contradiction. So $\obf < \deg_T(Y) < \deg_T(G)$.
-:::
-::::
-
 ## Notes and references
 
 Kleene and Post (1954) introduced the finite extension method, from which the embedding of countable partial orders follows, since it builds independent sequences below $\obf'$ (Shore, 1997). Soare presents the countable case as Exercises 6.1.4–6.1.6 of *Turing Computability*. Monin and Patey attribute the embedding theorem to Sacks, and obtain independent sets from a 1-generic set, as here. The computable universal partial order is a computable presentation of the Fraïssé limit of the finite partial orders.
@@ -198,3 +196,75 @@ Shoenfield (1960) proved, using Zorn's lemma, that there is an uncountable antic
 - R. A. Shore, *Conjectures and questions from Gerald Sacks's Degrees of Unsolvability*, Archive for Mathematical Logic 36 (1997), 233–253.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Section 6.1.
 - M. Lerman, *Degrees of Unsolvability: Local and Global Theory*, Springer, 1983.
+
+:::::exercises
+::::exercise{#ex-independent-basic difficulty=1 objective="Draw the first consequences of computable independence, and see that pairwise incomparability is weaker."}
+1. Let $(X_n)_{n \in \nat}$ be computably independent. Show that every $X_i$ is non-computable and that the degrees $\deg_T(X_i)$ are pairwise incomparable.
+2. Let $G$ be 1-generic and $G_m = G^{[m]}$. Show that the three sets $Y_0 = G_0 \oplus G_1$, $Y_1 = G_1 \oplus G_2$ and $Y_2 = G_0 \oplus G_2$ have pairwise incomparable degrees, but that no sequence containing them is computably independent.
+
+:::solution
+1. If $X_i$ is computable, it is computable from every set, in particular from $\bigoplus_{k \neq i} X_k$. If $X_i \leq_T X_j$ with $j \neq i$, then, since $X_j$ is the column $j$ of $\bigoplus_{k \neq i} X_k$, we get $X_i \leq_T X_j \leq_T \bigoplus_{k \neq i} X_k$. Both contradict independence.
+2. Each $Y_i$ contains a column that the others lack: $G_0$ is computable from $Y_0$, while $Y_1 \leq_T G^{\neq 0}$. So $Y_0 \leq_T Y_1$ would give $G_0 \leq_T G^{\neq 0}$, contradicting :ref{#thm-generic-independent}. The five other cases are the same, with the column $G_m$ that belongs to one set and not to the other: $G_1$ for $Y_0$ against $Y_2$, $G_2$ for $Y_1$ against $Y_0$, $G_1$ for $Y_1$ against $Y_2$, $G_0$ for $Y_2$ against $Y_1$, $G_2$ for $Y_2$ against $Y_0$. But $Y_0 \leq_T Y_1 \oplus Y_2$, since $Y_1 \oplus Y_2$ computes $G_0$ and $G_1$. In a sequence containing $Y_0$, $Y_1$, $Y_2$, the join of the terms other than $Y_0$ computes $Y_1 \oplus Y_2$, hence $Y_0$.
+:::
+::::
+
+::::exercise{#ex-extension-consequences difficulty=1 objective="Derive density properties of a partial order from the extension property."}
+Let $(Q, \leq)$ be a partial order with the extension property. Show that $Q$ is infinite, has no maximal and no minimal element, that every element is incomparable with some other element, and that for $a < b$ in $Q$ there is $c$ with $a < c < b$.
+
+:::solution
+Each property is an instance of the extension property, with a new element $p$ and the order on $F \cup \{ p \}$ described below; in each case it is a partial order extending that of $F$. The element $q \in Q \setminus F$ given by the extension property satisfies, for $a \in F$, $a \leq q \iff a \leq p$ and $q \leq a \iff p \leq a$.
+
+- For every finite $F$, there is $q \in Q \setminus F$ (take any one-point extension, for instance $p$ incomparable with all elements of $F$). So $Q$ is infinite.
+- $F = \{ a \}$ and $a < p$: then $a \leq q$ and $q \not\leq a$, so $a < q$, and $a$ is not maximal. Symmetrically, with $p < a$, $a$ is not minimal.
+- $F = \{ a \}$ and $p$ incomparable with $a$: then $q$ is incomparable with $a$.
+- $F = \{ a, b \}$ with $a < b$, and $a < p < b$: this is a partial order (a chain of three elements). Then $a \leq q$, $q \not\leq a$, $q \leq b$ and $b \not\leq q$, so $a < q < b$.
+:::
+::::
+
+::::exercise{#ex-extension-unique difficulty=2 objective="Turn the greedy embedding into a back-and-forth argument, to show that the countable partial order with the extension property is unique up to isomorphism."}
+Show that any two countable partial orders $(Q, \leq)$ and $(Q', \leq')$ with the extension property are isomorphic.
+
+:::solution
+Both are infinite (:ref{#ex-extension-consequences}); enumerate them as $q_0, q_1, \dots$ and $q'_0, q'_1, \dots$. A **partial isomorphism** is a bijection $f$ between finite subsets of $Q$ and $Q'$ with $a \leq b \iff f(a) \leq' f(b)$. We build partial isomorphisms $f_0 \subseteq f_1 \subseteq \cdots$, starting with $f_0 = \emptyset$.
+
+*Forth, at step $2n + 1$.* Let $q$ be the first element of $Q$ outside the domain $D$ of $f_{2n}$, and $F' = f_{2n}(D)$. Define an order on $F' \cup \{ p \}$, with $p$ new, by transporting the order of $D \cup \{ q \}$ through $f_{2n} \cup \{ (q, p) \}$: $f_{2n}(a) \leq' p$ iff $a \leq q$, and $p \leq' f_{2n}(a)$ iff $q \leq a$. It is a partial order extending that of $F'$, since it is isomorphic to the order of $D \cup \{ q \}$. The extension property of $Q'$ gives $q' \in Q' \setminus F'$ with the same relations to $F'$ as $p$. Let $f_{2n+1} = f_{2n} \cup \{ (q, q') \}$. It is injective since $q' \notin F'$, and for $a \in D$: $a \leq q \iff f_{2n}(a) \leq' q'$ and $q \leq a \iff q' \leq' f_{2n}(a)$. So it is a partial isomorphism.
+
+*Back, at step $2n + 2$.* Symmetrically, with the first element of $Q'$ outside the range of $f_{2n+1}$ and the extension property of $Q$.
+
+The union $f = \bigcup_n f_n$ is defined on every $q_n$ (by step $2n + 1$ at the latest) and takes every value $q'_n$ (by step $2n + 2$); it is a bijection that preserves the order in both directions, since any two elements lie in the domain of some $f_n$. This is the uniqueness of the Fraïssé limit of the finite partial orders: the computable order of :ref{#lem-computable-universal} is, up to isomorphism, the only countable partial order with the extension property.
+:::
+::::
+
+::::exercise{#ex-embed-below-generic difficulty=2 objective="Check which properties of the generic set the embedding uses, to embed every countable partial order strictly between $\obf$ and a 1-generic degree."}
+Let $G$ be 1-generic. Show that every countable partial order embeds into the degrees $\cbf$ with $\obf < \cbf < \deg_T(G)$.
+
+:::solution
+Apply the proof of :ref{#thm-embedding} to $G$: it uses only :ref{#thm-generic-independent} and the computability of the universal order $(\nat, \preceq)$, and gives sets $D_n \leq_T G$ such that $n \mapsto \deg_T(D_n)$ is an embedding. It remains to see that $\obf < \deg_T(D_n) < \deg_T(G)$.
+
+- $G_n = G^{[n]}$ is computable from $D_n$, since $n \preceq n$, and is not computable: otherwise $G_n \leq_T G^{\neq n}$. So $D_n$ is not computable.
+- By :ref{#ex-extension-consequences}, $n$ is not maximal in $(\nat, \preceq)$: there is $m$ with $n \prec m$, so $m \not\preceq n$ by antisymmetry. The column $m$ of $D_n$ is empty, and $\preceq$ is computable, so $D_n \leq_T G^{\neq m}$. If $G \leq_T D_n$, then $G_m \leq_T G \leq_T D_n \leq_T G^{\neq m}$, contradicting :ref{#thm-generic-independent}.
+
+With $G \leq_T \emptyset'$, this gives an embedding into the degrees strictly between $\obf$ and some degree below $\obf'$; it also shows that every countable partial order with a least element embeds into $\mathcal D$ with its least element sent to $\obf$: embed the other elements as above, and send the least element to $\obf$.
+:::
+::::
+
+::::exercise{#ex-not-lattice-below-0pp difficulty=2 objective="Combine independence with the effectivity of the exact pair construction to find two degrees below $\obf''$ without greatest lower bound." lessons="exact-pairs"}
+Show that there are two degrees below $\obf''$ that have no greatest lower bound.
+
+:::solution
+Let $G \leq_T \emptyset'$ be 1-generic (:ref{#prop-1-generic}), and let $A_n$ be the set whose columns $m \leq n$ are those of $G$ and whose other columns are empty. Then $A_n \leq_T A_{n+1}$, by erasing a column, and $A_{n+1} \not\leq_T A_n$: otherwise $G^{[n+1]} \leq_T A_{n+1} \leq_T A_n \leq_T G^{\neq n+1}$, contradicting :ref{#thm-generic-independent}. So the degrees $\deg_T(A_n)$ are strictly increasing. Moreover $\bigoplus_n A_n \leq_T G \leq_T \emptyset'$, since $A_n(\langle m, y \rangle)$ is $G(\langle m, y \rangle)$ if $m \leq n$ and $0$ otherwise. By :ref{#ex-exact-pair-bound}, the ideal generated by $(A_n)$ has an exact pair $\abf, \bbf$ computable in $\big(\bigoplus_n A_n\big)' \leq_T \emptyset''$ (:ref{#thm-jump}). The proof of :ref{#cor-not-lattice} (2) shows that the two degrees of an exact pair for the ideal generated by a strictly increasing sequence have no greatest lower bound.
+:::
+::::
+
+::::exercise{#ex-antichain-above difficulty=2 objective="Relativize the perfect tree of finite extensions to build an antichain of size continuum above a given degree."}
+Let $A$ be a set. Show that there is a family $(Y_Z)_{Z \in \cs}$ of sets such that $A \leq_T Y_Z$ for every $Z$, and $Y_Z$ and $Y_{Z'}$ are Turing incomparable whenever $Z \neq Z'$.
+
+:::solution
+Relativize the proof of :ref{#thm-continuum-antichain} to $A$. For a string $\tau$, write $\Phi^{A \oplus \tau}_e(x)\converge = v$ if the computation of $\Phi_e$ on input $x$, with the oracle $A \oplus Y$ for any $Y \succeq \tau$, converges to $v$ while querying the second component only at positions below $|\tau|$; by the use principle, if $\Phi^{A \oplus Y}_e(x)\converge = v$, then $\Phi^{A \oplus (Y \uh u)}_e(x)\converge = v$ for $u$ large.
+
+Build the strings $\sigma_\rho$ as in the proof, with the step for $(e, \rho, \rho')$ modified: let $x = |\sigma_{\rho'}|$; if some $\tau \succeq \sigma_\rho$ has $\Phi^{A \oplus \tau}_e(x)\converge = v$, replace $\sigma_\rho$ by $\tau$ and $\sigma_{\rho'}$ by $\sigma_{\rho'} b$ with $b \in \{ 0, 1 \}$, $b \neq v$; otherwise leave the strings unchanged, and then $\Phi^{A \oplus Y}_e(x)\diverge$ for every $Y \succeq \sigma_\rho$, by the use principle. In both cases $\Phi^{A \oplus Y}_e \neq X$ for all $Y \succeq \sigma_\rho$ and $X \succeq \sigma_{\rho'}$. Let $X_Z = \bigcup_n \sigma_{Z \uh n}$ and $Y_Z = A \oplus X_Z$.
+
+Then $A \leq_T Y_Z$. If $Z \neq Z'$ and $e \in \nat$, the step for $(e, Z \uh n, Z' \uh n)$, with $n > e$ beyond the first difference, gives $\Phi^{A \oplus X_Z}_e \neq X_{Z'}$. So $X_{Z'} \not\leq_T Y_Z$, and since $X_{Z'} \leq_T Y_{Z'}$, also $Y_{Z'} \not\leq_T Y_Z$. Symmetrically $Y_Z \not\leq_T Y_{Z'}$. So above every degree there is an antichain of continuum many degrees.
+:::
+::::
+:::::

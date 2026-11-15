@@ -83,6 +83,14 @@ In the proof that $M$ is an initial segment of $K$, why is property (iii) of $H$
 
 Unlike omitting types arguments, the proof does not use the countability of $M$; and $K$ is described inside $M$ through the $\Delta_2$-definable set $H$. The relativization to $\mathrm I\Sigma_{m+1}$ is stated in the next lesson, where it is used.
 
+::::exercise{#ex-ee-act-pi1-reflection difficulty=2 objective="Derive from the arithmetized completeness theorem that a theory consistent in $M$ proves only $\Pi_1$ statements true in $M$."}
+Let $M \models \mathrm I\Sigma_1$ and $T$ a theory of $M$ in $\mathcal L_A$ containing $\mathrm{PA}^-$, with $M \models \mathrm{Con}(T)$. Let $\pi(\bar x)$ be a standard $\Pi_1$ formula and $\bar a$ a tuple of $M$ with $M \models \mathrm{Prov}_T(\pi(\bar{\bar a}))$. Show that $M \models \pi(\bar a)$.
+
+:::solution
+Let $K$ be given by :ref{#thm-ee-act}. By item 2, $K \models \pi(\bar a)$. Write $\pi(\bar x) = \forall \bar y\ \delta(\bar x, \bar y)$ with $\delta$ bounded. If $M \models \neg \pi(\bar a)$, some $\bar b \in M$ satisfies $M \models \neg \delta(\bar a, \bar b)$; since $M \subseteq_e K$ (item 1), $K \models \neg \delta(\bar a, \bar b)$ by :ref{#lem-delta0-absolute}, and $K \models \neg \pi(\bar a)$, a contradiction. The end extension property is what transfers the failure of $\pi$ from $M$ to $K$; an arbitrary model of $T$ containing $M$ as a substructure would not do.
+:::
+::::
+
 ## The standard model
 
 :::corollary[Low completeness theorem]{#cor-ee-low-completeness}
@@ -103,3 +111,49 @@ The arithmetization of the completeness theorem goes back to Hilbert and Bernays
 - K. McAloon, *Completeness theorems, incompleteness theorems and models of arithmetic*, Transactions of the American Mathematical Society 239 (1978), 253–277.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 4(a)–(b).
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 4.
+
+:::::exercises
+::::exercise{#ex-ee-act-any-path difficulty=1 lessons="trees-isigma1" objective="Locate where the proof of the arithmetized completeness theorem uses the lowness of the path."}
+In the proof of :ref{#thm-ee-act}, let $X$ be any path through $\mathrm{Tr}$ in the sense of :ref{#def-ee-tree}, not necessarily low, and define $H$ from $X$ as in the proof. Show that properties (i)–(iii) still hold, and that the structure $K$ built from $H$ satisfies items 1 and 2 and the first half of item 3. Which conclusion needs the low basis theorem? (For countable $M$, such paths exist by :ref{#ex-ee-countable-paths}.)
+
+:::solution
+Property (i) uses only that $X \restriction \ell' \in \mathrm{Tr}$ for every $\ell'$, which holds for every path. Property (ii) uses (i) and item 3 of :ref{#fact-ee-logic}. Property (iii) uses that $X \restriction \ell$ is an element of $M$, so that the statement "the disjunction and all the $\neg \psi_i$, $i < k$, belong to $\Theta(X \restriction \ell)$" can be evaluated in $M$; this is part of the definition of a path. The construction of the term model, the embedding and the end extension property use only (i)–(iii) and the facts of logic. So $K$ satisfies items 1 and 2, its elements are named by constants, and $K \models \psi(\bar c^K)$ if and only if $\psi(\bar c) \in H$. What is lost is the definability of $H$: it is $\Delta_2$-definable because $X$ is low over $M$, by the choice of $X$ in :ref{#thm-ee-low-basis}. This bound is what :ref{#cor-ee-low-completeness} uses, and the next lesson uses it to describe the sets coded in $K$.
+:::
+::::
+
+::::exercise{#ex-ee-act-false-sigma1 difficulty=1 objective="Show that a provable $\Sigma_1$ sentence false in $M$ forces the model of the arithmetized completeness theorem to be a proper extension."}
+Let $M$, $T$ and $K$ be as in :ref{#thm-ee-act}, and let $\delta(x, \bar y)$ be a standard bounded formula and $\bar a \in M$ such that $M \models \mathrm{Prov}_T(\exists x\ \delta(x, \bar{\bar a}))$ and $M \models \neg \exists x\ \delta(x, \bar a)$. Show that $K \neq M$ and that every witness of $\exists x\ \delta(x, \bar a)$ in $K$ lies above $M$.
+
+:::solution
+By item 2, $K \models \exists x\ \delta(x, \bar a)$. Let $b \in K$ be a witness. If $b \in M$, then $M \models \delta(b, \bar a)$ by :ref{#lem-delta0-absolute}, since $M \subseteq_e K$, contradicting the hypothesis. So $b \notin M$, hence $K \neq M$, and $b > M$ since $M$ is an initial segment of $K$. The next lesson uses this with the sentence $\neg \mathrm{Con}(\mathrm{PA})$, which is $\Sigma_1$.
+:::
+::::
+
+::::exercise{#ex-ee-act-closure difficulty=2 objective="Check that the complete theory of the proof is consistent and closed under provability as seen by $M$."}
+In the proof of :ref{#thm-ee-act}:
+
+1. Show that for every sentence $s$ of $M$ in $\mathcal L^H$, exactly one of $s$ and $\neg s$ belongs to $H$, and that $X(s) = 1$ for every $s \in H$.
+2. Let $F$ be a finite set of sentences of $M$, coded in $M$, all of which belong to $H$, and $\psi$ a sentence of $M$ with $M \models \mathrm{Prov}_{T^H \cup F}(\psi)$. Show that $\psi \in H$.
+
+:::solution
+1. By definition of $H$, $s \in H$ if $X(s) = 1$ and $\neg s \in H$ if $X(s) = 0$. Suppose $s, \neg s \in H$. For $\ell$ large enough, both belong to $\Theta(X \restriction \ell)$; then $T^H \cup \Theta(X \restriction \ell)$ proves $s$ by a proof of one line, and contains $\neg s$, so it is inconsistent by item 3 of :ref{#fact-ee-logic}, contradicting property (i). If $s \in H$ and $X(s) = 0$, then $\neg s \in H$ as well, which was just excluded; so $X(s) = 1$.
+2. Let $\ell > F$. Every element $s$ of $F$ is below $F$ (:ref{#lem-ack-basic}), lies in $H$, and so satisfies $X(s) = 1$ by item 1; hence $s \in \Theta(X \restriction \ell)$. The statement "$\forall s \in F\ (s \in \Theta(X \restriction \ell))$" is a bounded statement about the elements $F$ and $X \restriction \ell$ of $M$, true at every $s \in M$ coded by $F$; so it holds in $M$. A proof of $\psi$ from $T^H \cup F$ is then a proof of $\psi$ from $T^H \cup \Theta(X \restriction \ell)$, since it uses finitely many sentences of $T^H \cup F$. By property (ii), $\psi \in H$.
+:::
+::::
+
+::::exercise{#ex-ee-act-not-delta1 difficulty=1 objective="See that the bound $\Delta_2$ on the diagram cannot be improved to $\Delta_1$, by the theory of PA degrees."}
+Show that for $M = \nat$ and $T = \mathrm{PA}$, the set $H$ of :ref{#thm-ee-act} is never computable, whatever path is used. Deduce that $\Delta_2$ cannot be replaced by $\Delta_1$ in item 3.
+
+:::solution
+$\nat \models \mathrm{Con}(\mathrm{PA})$. By property (i) and item 1 of :ref{#ex-ee-act-closure}, the set of sentences of $\mathcal L_A$ that belong to $H$ is complete and consistent, and by (ii) it contains the axioms of $\mathrm{PA}$. It is computable in $H$, since the codes of sentences of $\mathcal L_A$ form a computable set. If $H$ were computable, this completion of $\mathrm{PA}$ would be computable, and the computable set $\emptyset$ would be PA by :ref{#thm-pa-completions}; but no computable set is PA, by :ref{#thm-dnc2-no-computable}. So $H$ is not computable, that is, not $\Delta_1$-definable in $\nat$ (:ref{#thm-definable-arithmetic}).
+:::
+::::
+
+::::exercise{#ex-ee-act-pa-minus difficulty=1 objective="See why the theory must contain $\mathrm{PA}^-$ for the model to extend $M$."}
+Let $T$ be the theory $\{ \forall x\ \forall y\ (x = y) \}$ of $\nat$. Show that $\nat \models \mathrm{Con}(T)$ and that no model of $T$ contains a copy of $\nat$. Which step of the proof of :ref{#thm-ee-act} fails?
+
+:::solution
+$T$ has a model with one element, so it is consistent, and $\nat \models \mathrm{Con}(T)$, since $\mathrm{Con}(T)$ is a $\Pi_1$ sentence and its negation, a $\Sigma_1$ sentence, would give an actual proof of $0 = 1$ from $T$. A model of $T$ has one element, and $\nat$ is infinite, so it has no copy of $\nat$. The embedding step fails: it uses item 4 of :ref{#fact-ee-logic}, that $\mathrm{PA}^-$ proves $\neg\, \bar a = \bar b$ for $a \neq b$, to put the sentences $\neg\, c_a = c_b$ into $H$; here $H$ contains $c_a = c_b$ for all $a, b$.
+:::
+::::
+:::::

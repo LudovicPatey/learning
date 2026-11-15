@@ -40,6 +40,14 @@ So $p_{1/3}$ succeeds on every sequence whose prefixes have a frequency of ones 
 <svg class="fig" viewBox="0 0 600 300" width="600" role="img" aria-label="Binary tree of depth three labelled by the capital of the strategy that bets one third of its capital on the bit 1; the strings 1 and 011, the first where the capital reaches 10/9, are highlighted"><line x1="300.0" y1="40" x2="160.0" y2="88" class="ink-stroke" stroke-width="1"/><text x="221.0" y="67.0" text-anchor="middle" class="mrm" font-size="11">0</text><line x1="300.0" y1="40" x2="440.0" y2="88" class="ink-stroke" stroke-width="1"/><text x="375.0" y="67.0" text-anchor="middle" class="mrm" font-size="11">1</text><line x1="160.0" y1="110" x2="90.0" y2="158" class="ink-stroke" stroke-width="1"/><text x="116.0" y="137.0" text-anchor="middle" class="mrm" font-size="11">0</text><line x1="160.0" y1="110" x2="230.0" y2="158" class="ink-stroke" stroke-width="1"/><text x="200.0" y="137.0" text-anchor="middle" class="mrm" font-size="11">1</text><line x1="440.0" y1="110" x2="370.0" y2="158" class="muted-stroke" stroke-width="1"/><text x="396.0" y="137.0" text-anchor="middle" class="mrm" font-size="11">0</text><line x1="440.0" y1="110" x2="510.0" y2="158" class="muted-stroke" stroke-width="1"/><text x="480.0" y="137.0" text-anchor="middle" class="mrm" font-size="11">1</text><line x1="90.0" y1="180" x2="55.0" y2="228" class="ink-stroke" stroke-width="1"/><text x="63.5" y="207.0" text-anchor="middle" class="mrm" font-size="11">0</text><line x1="90.0" y1="180" x2="125.0" y2="228" class="ink-stroke" stroke-width="1"/><text x="112.5" y="207.0" text-anchor="middle" class="mrm" font-size="11">1</text><line x1="230.0" y1="180" x2="195.0" y2="228" class="ink-stroke" stroke-width="1"/><text x="203.5" y="207.0" text-anchor="middle" class="mrm" font-size="11">0</text><line x1="230.0" y1="180" x2="265.0" y2="228" class="ink-stroke" stroke-width="1"/><text x="252.5" y="207.0" text-anchor="middle" class="mrm" font-size="11">1</text><line x1="370.0" y1="180" x2="335.0" y2="228" class="muted-stroke" stroke-width="1"/><text x="343.5" y="207.0" text-anchor="middle" class="mrm" font-size="11">0</text><line x1="370.0" y1="180" x2="405.0" y2="228" class="muted-stroke" stroke-width="1"/><text x="392.5" y="207.0" text-anchor="middle" class="mrm" font-size="11">1</text><line x1="510.0" y1="180" x2="475.0" y2="228" class="muted-stroke" stroke-width="1"/><text x="483.5" y="207.0" text-anchor="middle" class="mrm" font-size="11">0</text><line x1="510.0" y1="180" x2="545.0" y2="228" class="muted-stroke" stroke-width="1"/><text x="532.5" y="207.0" text-anchor="middle" class="mrm" font-size="11">1</text><text x="300.0" y="35.0" text-anchor="middle" class="mrm" font-size="13">1</text><text x="286.5" y="35.0" text-anchor="end" class="math" font-size="10">ε</text><text x="160.0" y="105.0" text-anchor="middle" class="mrm" font-size="13">2/3</text><text x="139.5" y="105.0" text-anchor="end" class="mrm" font-size="10">0</text><rect x="423.5" y="90" width="33.0" height="20" rx="3" class="head-cell"/><text x="440.0" y="105.0" text-anchor="middle" class="mrm" font-size="13">4/3</text><text x="419.5" y="105.0" text-anchor="end" class="mrm" font-size="10">1</text><text x="90.0" y="175.0" text-anchor="middle" class="mrm" font-size="13">4/9</text><text x="69.5" y="175.0" text-anchor="end" class="mrm" font-size="10">00</text><text x="230.0" y="175.0" text-anchor="middle" class="mrm" font-size="13">8/9</text><text x="209.5" y="175.0" text-anchor="end" class="mrm" font-size="10">01</text><rect x="353.5" y="160" width="33.0" height="20" rx="3" class="soft-fill"/><text x="370.0" y="175.0" text-anchor="middle" class="mrm" font-size="13">8/9</text><text x="349.5" y="175.0" text-anchor="end" class="mrm" font-size="10">10</text><rect x="490.0" y="160" width="40.0" height="20" rx="3" class="soft-fill"/><text x="510.0" y="175.0" text-anchor="middle" class="mrm" font-size="13">16/9</text><text x="486.0" y="175.0" text-anchor="end" class="mrm" font-size="10">11</text><text x="55.0" y="245.0" text-anchor="middle" class="mrm" font-size="13">8/27</text><text x="55.0" y="264.0" text-anchor="middle" class="mrm" font-size="10">000</text><text x="125.0" y="245.0" text-anchor="middle" class="mrm" font-size="13">16/27</text><text x="125.0" y="264.0" text-anchor="middle" class="mrm" font-size="10">001</text><text x="195.0" y="245.0" text-anchor="middle" class="mrm" font-size="13">16/27</text><text x="195.0" y="264.0" text-anchor="middle" class="mrm" font-size="10">010</text><rect x="241.5" y="230" width="47.0" height="20" rx="3" class="head-cell"/><text x="265.0" y="245.0" text-anchor="middle" class="mrm" font-size="13">32/27</text><text x="265.0" y="264.0" text-anchor="middle" class="mrm" font-size="10">011</text><rect x="311.5" y="230" width="47.0" height="20" rx="3" class="soft-fill"/><text x="335.0" y="245.0" text-anchor="middle" class="mrm" font-size="13">16/27</text><text x="335.0" y="264.0" text-anchor="middle" class="mrm" font-size="10">100</text><rect x="381.5" y="230" width="47.0" height="20" rx="3" class="soft-fill"/><text x="405.0" y="245.0" text-anchor="middle" class="mrm" font-size="13">32/27</text><text x="405.0" y="264.0" text-anchor="middle" class="mrm" font-size="10">101</text><rect x="451.5" y="230" width="47.0" height="20" rx="3" class="soft-fill"/><text x="475.0" y="245.0" text-anchor="middle" class="mrm" font-size="13">32/27</text><text x="475.0" y="264.0" text-anchor="middle" class="mrm" font-size="10">110</text><rect x="521.5" y="230" width="47.0" height="20" rx="3" class="soft-fill"/><text x="545.0" y="245.0" text-anchor="middle" class="mrm" font-size="13">64/27</text><text x="545.0" y="264.0" text-anchor="middle" class="mrm" font-size="10">111</text><rect x="60" y="280" width="22" height="14" rx="3" class="head-cell"/><text x="88" y="291" class="label">first strings with capital ≥ 10/9: the set S</text><rect x="360" y="280" width="22" height="14" rx="3" class="soft-fill"/><text x="388" y="291" class="label">extensions of S</text></svg>
 :::
 
+::::exercise{#ex-pairs-martingale difficulty=1 objective="Build by hand a martingale that wins on a class defined by a simple regularity."}
+Let $\mathcal N$ be the class of the sequences $X$ with $X(2i) = X(2i+1)$ for every $i$ (:ref{#ex-null-classes} (1)). Define explicitly a martingale $d$ with $d(\varepsilon) = 1$ such that $d(X \uh 2n) = 2^n$ for every $X \in \mathcal N$ and every $n$.
+
+:::solution
+At a string $\sigma$ of even length, bet nothing: $d(\sigma 0) = d(\sigma 1) = d(\sigma)$. At a string $\sigma = \rho i$ of odd length, bet the whole capital on the bit $i$: $d(\rho i i) = 2 d(\rho i)$ and $d(\rho i (1-i)) = 0$. The martingale equality holds at every string, and along a member of $\mathcal N$ every bet at an odd length is won, so the capital doubles at each pair of bits.
+:::
+::::
+
 ## Basic properties
 
 :::lemma{#lem-martingale-basic}
@@ -120,25 +128,7 @@ In (2), why does the proof pass from $R$ to the set $S$ of its minimal elements?
   Open classes are Borel, so they have a measure.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $\mathcal N$ be the class of the sequences $X$ with $X(2i) = X(2i+1)$ for every $i$ (:ref{#ex-null-classes} (1)). Define explicitly a martingale $d$ with $d(\varepsilon) = 1$ such that $d(X \uh 2n) = 2^n$ for every $X \in \mathcal N$ and every $n$.
-
-:::solution
-At a string $\sigma$ of even length, bet nothing: $d(\sigma 0) = d(\sigma 1) = d(\sigma)$. At a string $\sigma = \rho i$ of odd length, bet the whole capital on the bit $i$: $d(\rho i i) = 2 d(\rho i)$ and $d(\rho i (1-i)) = 0$. The martingale equality holds at every string, and along a member of $\mathcal N$ every bet at an odd length is won, so the capital doubles at each pair of bits.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that the martingales $d$ with $d(\varepsilon) = 1$ are exactly the functions $\sigma \mapsto 2^{|\sigma|} \mu(\sigma)$, where $\mu : \bstr \to [0, 1]$ satisfies $\mu(\varepsilon) = 1$ and $\mu(\sigma) = \mu(\sigma 0) + \mu(\sigma 1)$ for every $\sigma$. Which function $\mu$ corresponds to the constant martingale $1$, and which to $E_\tau$?
-
-:::solution
-If $d$ is a martingale with $d(\varepsilon) = 1$, let $\mu(\sigma) = 2^{-|\sigma|} d(\sigma)$. Then $\mu(\sigma 0) + \mu(\sigma 1) = 2^{-|\sigma| - 1}(d(\sigma 0) + d(\sigma 1)) = 2^{-|\sigma|} d(\sigma) = \mu(\sigma)$, and $\mu(\varepsilon) = 1$. By induction on $n$, the values of $\mu$ on the strings of length $n$ sum to $\mu(\varepsilon) = 1$; they are non-negative, so each is at most $1$. The converse computation is the same. The constant martingale $1$ corresponds to $\mu(\sigma) = 2^{-|\sigma|}$, the uniform measure of the cylinders, and $E_\tau$ to the measure concentrated on $[\tau]$ and uniform inside it: $\mu(\sigma) = 2^{-|\sigma|} E_\tau(\sigma)$, which is $1$ for $\sigma \preceq \tau$ and $2^{|\tau| - |\sigma|}$ for $\sigma \succeq \tau$. (By Carathéodory's theorem, such functions $\mu$ are the probability measures on $\cs$, through $\mu([\sigma]) = \mu(\sigma)$.)
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-supermartingale-closed-class difficulty=2 objective="Use Kolmogorov's inequality to find a closed class of large measure on which a supermartingale stays bounded, and see that the bound is attained."}
 Let $d$ be a supermartingale with $d(\varepsilon) = 1$, and let $b > 1$. Show that the class $\mathcal P_b = \{ X : \forall n\ d(X \uh n) < b \}$ is closed and has measure at least $1 - 1/b$. Give, for each integer $k \geq 1$, a martingale for which $\lambda(\mathcal P_{2^k}) = 1 - 2^{-k}$.
 
 :::solution
@@ -148,8 +138,109 @@ The complement of $\mathcal P_b$ is the open class $\{ X : \exists n\ d(X \uh n)
 
 ## Notes and references
 
-Martingales were introduced into the foundations of probability by Ville (1939); Lévy had studied the corresponding sequences of random variables. The martingales of this course, functions on strings, are a special case of the martingales of probability theory, where the fairness condition is conditioned on the past values of the capital rather than on the past bits (Downey–Hirschfeldt, Section 6.3.4). Downey and Hirschfeldt present martingales, supermartingales and Kolmogorov's inequality in Section 6.3.1 (Definition 6.3.1, Proposition 6.3.2, Theorem 6.3.3); Nies treats the same material in Section 7.1 (Definition 7.1.1, Proposition 7.1.6 for :ref{#lem-martingale-basic} (3), Fact 7.1.7, Lemma 7.1.8 and Proposition 7.1.9 for Kolmogorov's inequality, Fact 7.1.12 for the leftmost non-ascending path). The examples $E_\tau$ and $d_{\mathcal C}$ follow Nies (Examples 7.1.3 and 7.1.4), and the second exercise is his Fact 7.1.2. Monin and Patey mention the martingale approach in a remark of their chapter on Martin-Löf randomness.
+Martingales were introduced into the foundations of probability by Ville (1939); Lévy had studied the corresponding sequences of random variables. The martingales of this course, functions on strings, are a special case of the martingales of probability theory, where the fairness condition is conditioned on the past values of the capital rather than on the past bits (Downey–Hirschfeldt, Section 6.3.4). Downey and Hirschfeldt present martingales, supermartingales and Kolmogorov's inequality in Section 6.3.1 (Definition 6.3.1, Proposition 6.3.2, Theorem 6.3.3); Nies treats the same material in Section 7.1 (Definition 7.1.1, Proposition 7.1.6 for :ref{#lem-martingale-basic} (3), Fact 7.1.7, Lemma 7.1.8 and Proposition 7.1.9 for Kolmogorov's inequality, Fact 7.1.12 for the leftmost non-ascending path). The examples $E_\tau$ and $d_{\mathcal C}$ follow Nies (Examples 7.1.3 and 7.1.4), and :ref{#ex-martingale-measure} is his Fact 7.1.2. Monin and Patey mention the martingale approach in a remark of their chapter on Martin-Löf randomness.
 
 - J. Ville, *Étude critique de la notion de collectif*, Gauthier-Villars, Paris, 1939.
+- J. L. Kelly, *A new interpretation of information rate*, Bell System Technical Journal 35 (1956), 917–926.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 6.3.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 7.1.
+
+:::::exercises
+::::exercise{#ex-martingale-measure difficulty=1 objective="Identify the martingales with initial capital $1$ with the functions that describe probability measures on cylinders."}
+Show that the martingales $d$ with $d(\varepsilon) = 1$ are exactly the functions $\sigma \mapsto 2^{|\sigma|} \mu(\sigma)$, where $\mu : \bstr \to [0, 1]$ satisfies $\mu(\varepsilon) = 1$ and $\mu(\sigma) = \mu(\sigma 0) + \mu(\sigma 1)$ for every $\sigma$. Which function $\mu$ corresponds to the constant martingale $1$, and which to $E_\tau$?
+
+:::solution
+If $d$ is a martingale with $d(\varepsilon) = 1$, let $\mu(\sigma) = 2^{-|\sigma|} d(\sigma)$. Then $\mu(\sigma 0) + \mu(\sigma 1) = 2^{-|\sigma| - 1}(d(\sigma 0) + d(\sigma 1)) = 2^{-|\sigma|} d(\sigma) = \mu(\sigma)$, and $\mu(\varepsilon) = 1$. By induction on $n$, the values of $\mu$ on the strings of length $n$ sum to $\mu(\varepsilon) = 1$; they are non-negative, so each is at most $1$. The converse computation is the same. The constant martingale $1$ corresponds to $\mu(\sigma) = 2^{-|\sigma|}$, the uniform measure of the cylinders, and $E_\tau$ to the measure concentrated on $[\tau]$ and uniform inside it: $\mu(\sigma) = 2^{-|\sigma|} E_\tau(\sigma)$, which is $1$ for $\sigma \preceq \tau$ and $2^{|\tau| - |\sigma|}$ for $\sigma \succeq \tau$. (By Carathéodory's theorem, such functions $\mu$ are the probability measures on $\cs$, through $\mu([\sigma]) = \mu(\sigma)$.)
+:::
+::::
+
+::::exercise{#ex-product-martingales difficulty=1 objective="See that martingales are not closed under products, and find a condition on the bets under which they are."}
+Say that a martingale $d$ **does not bet** at a string $\sigma$ if $d(\sigma 0) = d(\sigma 1) = d(\sigma)$.
+
+1. Show that the product of two martingales need not be a martingale.
+2. Let $d_1$ and $d_2$ be martingales such that, at every string, at least one of them does not bet. Show that the product $d_1 d_2$ is a martingale.
+
+:::solution
+1. Let $d_1 = d_2 = E_0$, the elementary martingale that bets its whole capital on the bit $0$ at the first step. Then $(d_1 d_2)(\varepsilon) = 1$, $(d_1 d_2)(0) = 4$ and $(d_1 d_2)(1) = 0$, and $4 + 0 \neq 2$.
+2. The product is non-negative. Let $\sigma$ be a string, and suppose that $d_2$ does not bet at $\sigma$. Then
+$$
+(d_1 d_2)(\sigma 0) + (d_1 d_2)(\sigma 1) = d_2(\sigma) \big(d_1(\sigma 0) + d_1(\sigma 1)\big) = 2\, d_1(\sigma) d_2(\sigma).
+$$
+The case where $d_1$ does not bet at $\sigma$ is symmetric. A gambler who splits the positions between two strategies, using each on its own positions and reinvesting the gains of one in the other, has capital $d_1 d_2$.
+:::
+::::
+
+::::exercise{#ex-martingale-convex difficulty=1 objective="Decompose a martingale that stops betting after a fixed length into elementary martingales."}
+Let $d$ be a martingale with $d(\varepsilon) = 1$, and let $n$ be such that $d$ does not bet after length $n$: $d(\sigma) = d(\sigma \uh n)$ for every string $\sigma$ of length at least $n$. Show that
+$$
+d = \sum_{|\tau| = n} c_\tau E_\tau, \quad\text{with } c_\tau = 2^{-n} d(\tau) \geq 0 \text{ and } \sum_{|\tau| = n} c_\tau = 1,
+$$
+so that $d$ is a convex combination of the elementary martingales $E_\tau$ with $|\tau| = n$.
+
+:::solution
+By induction on $m$, $\sum_{|\tau| = m} d(\tau) = 2^m d(\varepsilon)$: indeed $\sum_{|\tau| = m + 1} d(\tau) = \sum_{|\rho| = m} (d(\rho 0) + d(\rho 1)) = 2 \sum_{|\rho| = m} d(\rho)$. So the coefficients $c_\tau$ are non-negative and sum to $1$. Let $f = \sum_{|\tau| = n} c_\tau E_\tau$, a martingale by :ref{#lem-martingale-basic} (2).
+
+Let $\sigma$ be a string with $|\sigma| \geq n$. For $|\tau| = n$, either $\tau = \sigma \uh n$, and then $E_\tau(\sigma) = 2^n$, or $\tau$ and $\sigma$ are incomparable, and then $E_\tau(\sigma) = 0$. So $f(\sigma) = 2^n c_{\sigma \uh n} = d(\sigma \uh n) = d(\sigma)$. Finally, the values of a martingale on the strings of length $m$ determine its values on shorter strings, through $d(\rho) = \frac12 (d(\rho 0) + d(\rho 1))$; since $f$ and $d$ agree at length $n$, they agree everywhere.
+
+Adapted from Nies 2009, Exercise 7.1.10 (iii).
+:::
+::::
+
+::::exercise[Optional stopping]{#ex-optional-stopping difficulty=2 objective="Prove that a martingale stopped at a prefix-free set that covers a cylinder keeps its average capital, and see why each hypothesis is needed."}
+Let $d$ be a martingale, $\sigma$ a string and $S$ a prefix-free set of extensions of $\sigma$ such that $[S]^{\prec} = [\sigma]$.
+
+1. Show that $S$ is finite.
+2. Show that $\sum_{\tau \in S} 2^{-|\tau|} d(\tau) = 2^{-|\sigma|} d(\sigma)$.
+3. Deduce that $\sum_{|\tau| = n} 2^{-n} d(\tau) = d(\varepsilon)$ for every $n$.
+4. Show by examples that the equality of (2) can fail if $d$ is only a supermartingale, or if $[S]^{\prec} \neq [\sigma]$.
+
+:::solution
+1. The cylinder $[\sigma]$ is compact, and the cylinders $[\tau]$, $\tau \in S$, form an open cover of it; let $S' \subseteq S$ be finite with $[\sigma] = [S']^{\prec}$. If $\tau \in S \setminus S'$, a sequence extending $\tau$ lies in $[\sigma]$, hence extends some $\tau' \in S'$; then $\tau$ and $\tau'$ are distinct prefixes of the same sequence, hence comparable, which contradicts prefix-freeness. So $S = S'$.
+2. By induction on $\max_{\tau \in S} |\tau| - |\sigma|$, as in the proof of :ref{#lem-kolmogorov-inequality} (1). If $\sigma \in S$, then $S = \{ \sigma \}$ and the equality is clear. Otherwise, let $S_i$ be the set of elements of $S$ extending $\sigma i$. Every element of $S$ is a proper extension of $\sigma$, so it extends $\sigma 0$ or $\sigma 1$. A sequence $Y \in [\sigma i]$ has a prefix $\tau \in S$; $\tau$ extends $\sigma$ properly and is a prefix of $Y$, so $\tau \succeq \sigma i$. Hence $S_i$ is a prefix-free set of extensions of $\sigma i$ with $[S_i]^{\prec} = [\sigma i]$, and by the induction hypothesis
+$$
+\sum_{\tau \in S} 2^{-|\tau|} d(\tau) = 2^{-|\sigma| - 1} \big(d(\sigma 0) + d(\sigma 1)\big) = 2^{-|\sigma|} d(\sigma),
+$$
+where the martingale equality is used in the last step.
+3. Apply (2) to $\sigma = \varepsilon$ and the set of all strings of length $n$.
+4. Let $d$ be the supermartingale with $d(\varepsilon) = 1$ and $d(\tau) = 0$ for $\tau \neq \varepsilon$, and $S = \{0, 1\}$: the sum is $0 < 1$. Let $d = 1$ be constant and $S = \{ 0 \}$, so that $[S]^{\prec} = [0] \neq \cs$: the sum is $\frac12 < 1$.
+
+Part (2) is Nies 2009, Lemma 7.1.8 (ii). In probabilistic terms, a gambler who stops at a bounded stopping time keeps, on average, her initial capital.
+:::
+::::
+
+::::exercise{#ex-kolmogorov-equality difficulty=1 objective="Find when Kolmogorov's inequality is an equality."}
+1. Give a martingale $d$ with $d(\varepsilon) = 1$ such that $\lambda(\{ X : \exists n\ d(X \uh n) \geq b \}) = 1/b$ for every $b = 2^k$, $k \in \nat$.
+2. Let $d$ be a martingale with $d(\varepsilon) = 1$ and $b > 0$ a real for which equality holds in :ref{#lem-kolmogorov-inequality} (2). Show that $d(\tau) = b$ for every string $\tau$ such that $d(\tau) \geq b$ and $d(\rho) < b$ for every proper prefix $\rho$ of $\tau$.
+
+:::solution
+1. Let $d(0^m) = 2^m$ for every $m$, and $d(\sigma) = 0$ if $\sigma$ contains a $1$: the gambler bets her whole capital on $0$ at every step. This is a martingale, and $d(X \uh n) \geq 2^k$ for some $n$ if and only if $X$ extends $0^k$. So the class has measure $2^{-k}$.
+2. Let $S$ be the set of the strings $\tau$ described, as in the proof of :ref{#lem-kolmogorov-inequality} (2). The chain of the proof reads
+$$
+\lambda([S]^{\prec}) = \sum_{\tau \in S} 2^{-|\tau|} \leq \sum_{\tau \in S} 2^{-|\tau|} \frac{d(\tau)}{b} \leq \frac{1}{b},
+$$
+and all the sums are finite. If the two ends are equal, then $\sum_{\tau \in S} 2^{-|\tau|} \big(\frac{d(\tau)}{b} - 1\big) = 0$, a sum of non-negative terms; each term vanishes, so $d(\tau) = b$ for every $\tau \in S$. Equality thus requires that the capital never jumps strictly above $b$ when it first reaches $b$.
+
+Part (1) answers Nies 2009, Exercise 7.1.11.
+:::
+::::
+
+::::exercise[The growth rate of proportional strategies]{#ex-proportional-growth difficulty=2 objective="Compute the exponential growth rate of a proportional strategy along a sequence with a limiting frequency of ones, and find the best fraction to bet."}
+Let $X$ be a sequence such that the frequency $k_n / n$ of ones in $X \uh n$ tends to $q \in [0, 1]$. For $\delta \in (0, 1)$, let $g(\delta) = q \ln(1 + \delta) + (1 - q) \ln(1 - \delta)$.
+
+1. Show that if $g(\delta) > 0$, then $p_\delta(X \uh n)$ tends to infinity, and if $g(\delta) < 0$, then $p_\delta(X \uh n)$ tends to $0$.
+2. Let $q \in (\frac12, 1)$. Show that $g$ is maximal at $\delta = 2q - 1$, where it is positive, and that $g(\delta) < 0$ for $\delta$ close to $1$.
+3. Let $q = \frac12$. Show that $g(\delta) < 0$ for every $\delta \in (0, 1)$.
+
+:::solution
+1. By the formula of :ref{#ex-martingales} (4), $\ln p_\delta(X \uh n) = n\, g_n$ with $g_n = \frac{k_n}{n} \ln(1 + \delta) + (1 - \frac{k_n}{n}) \ln(1 - \delta)$, and $g_n$ tends to $g(\delta)$. If $g(\delta) > 0$, then $g_n \geq g(\delta)/2$ for all large $n$, and $\ln p_\delta(X \uh n) \geq n\, g(\delta)/2$ tends to infinity. If $g(\delta) < 0$, then $\ln p_\delta(X \uh n) \leq n\, g(\delta)/2$ for all large $n$, and $p_\delta(X \uh n)$ tends to $0$.
+2. On $(0, 1)$, $g'(\delta) = \frac{q}{1 + \delta} - \frac{1 - q}{1 - \delta}$ and $g''(\delta) = -\frac{q}{(1 + \delta)^2} - \frac{1 - q}{(1 - \delta)^2} < 0$, so $g$ is strictly concave. The equation $g'(\delta) = 0$ reads $q(1 - \delta) = (1 - q)(1 + \delta)$, that is, $\delta = 2q - 1$, which lies in $(0, 1)$; this is the maximum. Its value is
+$$
+g(2q - 1) = q \ln(2q) + (1 - q) \ln(2(1 - q)) = \ln 2 - H(q), \quad H(q) = -q \ln q - (1 - q) \ln(1 - q).
+$$
+Since $g$ extends continuously to $[0, 1)$ with $g(0) = 0$ and is strictly increasing on $[0, 2q - 1]$, $g(2q - 1) > 0$. As $\delta$ tends to $1$, $q \ln(1 + \delta) \leq \ln 2$ while $(1 - q) \ln(1 - \delta)$ tends to $-\infty$, since $q < 1$; so $g(\delta) < 0$ for $\delta$ close to $1$.
+3. $g(\delta) = \frac12 \ln\big((1 + \delta)(1 - \delta)\big) = \frac12 \ln(1 - \delta^2) < 0$.
+
+The best fraction $2q - 1$ is known as the Kelly criterion (Kelly 1956). Betting too large a fraction loses, even on a sequence biased in the gambler's favor; this is why the lesson on computable randomness uses small fractions $\delta$.
+:::
+::::
+:::::

@@ -107,7 +107,7 @@ The cut contains $0$, being a nonempty initial segment, and $1 = 0 + 1$; it is c
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-ldelta0-idelta0 difficulty=1 objective="Reverse the proof of the least number principle to derive bounded induction from it."}
 Show that, conversely to :ref{#prop-idelta0-basic}, the least number principle for $\Delta_0$ formulas implies bounded induction over $\mathrm{PA}^-$.
 
 :::solution
@@ -122,3 +122,57 @@ Parikh (1971) introduced $\mathrm I\Delta_0$. The elementary properties of addit
 - R. Parikh, *Existence and feasibility in arithmetic*, Journal of Symbolic Logic 36 (1971), 494–508.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 1(a), and Chapter V, Section 1.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lectures 2 and 3.
+
+:::::exercises
+::::exercise{#ex-idelta0-prime-divisor difficulty=1 objective="Apply the least number principle for bounded formulas to find a prime divisor."}
+Show that $\mathrm I\Delta_0$ proves that every $x > 1$ has a prime divisor: some $p \leq x$ with $p \mid x$ and $1 < p \wedge \forall y < p\ \forall z < p\ \neg (y \cdot z = p)$, where $d \mid x$ is the bounded formula $\exists q < x + 1\ (q \cdot d = x)$.
+
+:::solution
+Fix $x > 1$ and let $\varphi(d) \equiv 1 < d \wedge d \mid x$, a $\Delta_0$ formula with parameter $x$. It holds at $d = x$, with $q = 1$. By the least number principle (:ref{#prop-idelta0-basic}), it has a least element $p$; then $p \leq x$. Suppose $y \cdot z = p$ with $y, z < p$. Neither factor is $0$, since $p \neq 0$, and $y \neq 1$, since otherwise $z = p$. So $1 < y < p$. If $q \cdot p = x$, then $(q z) \cdot y = x$, and $q z \leq x$ since $y \geq 1$; so $y \mid x$, and $\varphi(y)$ with $y < p$ contradicts the minimality of $p$. Hence $p$ is prime.
+:::
+::::
+
+::::exercise{#ex-idelta0-sqrt difficulty=1 objective="Define the integer square root by a least number argument with a bounded formula."}
+Show that $\mathrm I\Delta_0$ proves $\forall x\ \exists y < x + 1\ \big(y \cdot y \leq x \wedge x < (y + 1) \cdot (y + 1)\big)$.
+
+:::solution
+Fix $x$ and let $\varphi(y) \equiv x < (y + 1) \cdot (y + 1)$, bounded with parameter $x$. It holds at $y = x$, since $(x + 1)(x + 1) = x \cdot x + x + x + 1 > x$ by :ref{#ex-pam-cancellation}. Let $y$ be the least element satisfying $\varphi$, so $y \leq x$. If $y = 0$, then $x < 1$, so $x = 0$ and $y \cdot y = 0 \leq x$. Otherwise $y = y' + 1$, and $\neg \varphi(y')$ by minimality, that is $(y' + 1)(y' + 1) \leq x$, which is $y \cdot y \leq x$.
+:::
+::::
+
+::::exercise{#ex-idelta0-sqrt2 difficulty=2 objective="Prove the irrationality of $\sqrt 2$ in bounded induction by a minimal counterexample, and compare with the model of $\mathrm{PA}^-$ in which it fails." lessons="pa-minus"}
+Show that $\mathrm I\Delta_0$ proves $\forall x\ \forall y\ \big(x \cdot x = 2 \cdot y \cdot y \rightarrow x = 0\big)$, where $2 = 1 + 1$. By :ref{#ex-pam-sqrt2}, $\mathrm{PA}^-$ does not prove it.
+
+:::solution
+First, if $x \cdot x$ is even then $x$ is even. By :ref{#prop-idelta0-basic}, $x = 2q + r$ with $r \leq 1$. If $r = 1$, then $x \cdot x = 2(2q^2 + 2q) + 1$. No element is both $2u$ and $2v + 1$, by the uniqueness of division by $2$; so $x \cdot x$ is not even.
+
+Suppose $x \cdot x = 2 y y$ with $x > 0$. Then $y \leq x$: otherwise $y \cdot y > x \cdot x \geq y \cdot y$ by :ref{#ex-pam-cancellation}. Let $\varphi(x) \equiv 0 < x \wedge \exists y < x + 1\ (x \cdot x = 2 \cdot y \cdot y)$, a bounded formula. It has a least element $x_0$, with some $y_0 \leq x_0$. Since $x_0 \cdot x_0$ is even, $x_0 = 2 x_1$, and $4 x_1 x_1 = 2 y_0 y_0$, so $y_0 \cdot y_0 = 2 x_1 x_1$ by cancellation of $2$. Here $y_0 > 0$, since otherwise $x_0 \cdot x_0 = 0$ and $x_0 = 0$. Moreover $y_0 < x_0$: we have $x_0 \cdot x_0 = y_0 y_0 + y_0 y_0 > y_0 y_0$, as $y_0 y_0 > 0$, and $y_0 \geq x_0$ would give $y_0 y_0 \geq x_0 x_0$. So $\varphi(y_0)$ holds, with the witness $x_1$, which is at most $y_0$ by the bound $y \leq x$ proved above, and $y_0 < x_0$: a contradiction with the minimality of $x_0$.
+:::
+::::
+
+::::exercise{#ex-ldelta0-greatest difficulty=1 objective="Derive a greatest number principle for bounded formulas from the least number principle, a step used in later lessons."}
+Show that $\mathrm I\Delta_0$ proves, for every $\Delta_0$ formula $\delta(x)$ with parameters: if $\delta(x)$ holds for some $x \leq a$, then there is a greatest $x \leq a$ with $\delta(x)$.
+
+:::solution
+Let $\psi(y) \equiv y \leq a \wedge \forall x < a + 1\ (\delta(x) \rightarrow x \leq y)$, a bounded formula: $y$ is an upper bound of the elements $x \leq a$ satisfying $\delta$. It holds at $y = a$. Let $y$ be its least element (:ref{#prop-idelta0-basic}). We show $\delta(y)$. Let $x_1 \leq a$ satisfy $\delta$. If $y = 0$, then $x_1 \leq 0$, so $x_1 = y$ and $\delta(y)$. Otherwise $y = y' + 1$. If $\neg \delta(y)$, every $x \leq a$ with $\delta(x)$ satisfies $x \leq y$ and $x \neq y$, hence $x \leq y'$ by :ref{#lem-pam-basic}; and $y' \leq a$; so $\psi(y')$, contradicting minimality. So $y$ satisfies $\delta$ and bounds every $x \leq a$ that does.
+:::
+::::
+
+::::exercise{#ex-cut-examples difficulty=1 objective="Compute examples of cuts in a non-standard model and check their closure properties."}
+Let $M$ be a non-standard model of $\mathrm I\Delta_0$ and $a \in M$ non-standard. Show that $I = \{ b \in M : b < k \cdot a \text{ for some } k \in \nat \}$ is a proper cut of $M$ closed under addition but not under multiplication, and that $J = \{ b \in M : b < a^k \text{ for some } k \in \nat \}$, with $a^k = a \cdots a$ ($k$ factors), is a cut closed under addition and multiplication.
+
+:::solution
+Both sets are initial segments by definition. $I$ contains $a$, since $a < 2a$. If $b < k a$ and $b' < k' a$, then $b + b' < (k + k') a$, and $b + 1 < k a + a = (k + 1) a$ since $1 \leq a$; so $I$ is closed under successor and addition. It does not contain $a \cdot a$: if $a \cdot a < k \cdot a$, then $a < \bar k$ by the monotonicity axiom, since otherwise $\bar k \leq a$ would give $k a \leq a a$; and $a$ is non-standard. So $I$ is proper and not closed under multiplication.
+
+For $J$: if $b < a^k$ and $b' < a^{k'}$, then $b \cdot b' < a^{k + k'}$ (if $b' = 0$ because $a^{k+k'} > 0$; otherwise $b b' < a^k b' < a^k a^{k'}$). For addition, $b + b' < 2 a^{\max(k, k')} \leq a^{\max(k, k') + 1}$, since $2 \leq a$. So $J$ is closed under addition, hence under successor, and under multiplication.
+:::
+::::
+
+::::exercise{#ex-cut-intersection difficulty=1 objective="Check that the standard part is the least cut and that cuts are closed under unions and intersections."}
+Let $M$ be a model of $\mathrm{PA}^-$. Show that every cut of $M$ contains the standard part, and that the union and the intersection of a nonempty family of cuts are cuts. Deduce that, if $M$ is non-standard, the standard part is the intersection of all proper cuts of $M$.
+
+:::solution
+A cut $I$ is nonempty and an initial segment, so it contains $0$; being closed under successor, it contains every $\bar k^M$, by induction on $k$ in the metatheory. Let $(I_j)_{j \in J}$ be a nonempty family of cuts. The union and the intersection contain $0$; if $b < a$ and $a$ is in the union, $a \in I_j$ for some $j$, so $b \in I_j$; if $a$ is in the intersection, $b \in I_j$ for every $j$; closure under successor is checked in the same way. If $M$ is non-standard, the standard part is a proper cut, and it is contained in every cut, so it is the intersection of all proper cuts.
+:::
+::::
+:::::

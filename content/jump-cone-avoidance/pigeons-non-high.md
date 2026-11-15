@@ -1,7 +1,7 @@
 ---
 title: Pigeons do not jump high
 summary: The requirements of second-jump control for the pigeonhole principle follow from the three-case argument with the questions on two sides; a case distinction on validity and Lachlan's disjunction give an infinite subset, of the set or of its complement, whose jump avoids a given cone, and which is not high.
-duration: 45
+duration: 35
 prerequisites: [pigeon-questions]
 ---
 
@@ -93,15 +93,7 @@ By :ref{#ex-no-low2-subset}, "not high" cannot be improved to "low₂" for arbit
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that if $A$ is finite, side $0$ of every condition is invalid, and side $1$ of every condition is valid.
-
-:::solution
-If $A$ is finite, $X \cap A_0$ is finite, so it is not in $\mathcal U$, whose members are infinite. By item 1 of :ref{#lem-valid-part}, side $1$ is valid.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise[Instances in the ideal of tests]{#ex-pigeon-instance-in-ideal difficulty=2 objective="See that for an instance in $\mathcal M$ the cohesive class fixes the valid side in advance, so that the construction is in case A."}
 Suppose that $A \in \mathcal M$, for instance $A$ computable. Show that there is $i < 2$ such that side $i$ of every condition is valid and side $1 - i$ of every condition is invalid.
 
 :::solution
@@ -109,7 +101,7 @@ Since $\mathcal U_S$ is $\mathcal M$-cohesive and $A \in \mathcal M$, $\mathcal 
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise[Ramsey's theorem for pairs]{#ex-pigeon-rt22 difficulty=2 objective="Combine the theorem with cohesiveness to obtain jump cone avoidance for Ramsey's theorem for pairs."}
 Deduce from :ref{#thm-pigeons-non-high} and :ref{#thm-coh-weakly-low} that $\mathsf{RT}^2_2$ admits jump cone avoidance, without using :ref{#thm-rt22-weakly-low}.
 
 :::solution
@@ -117,11 +109,29 @@ Let $Z$ be a set, $C \not\leq_T Z'$, and $f$ a $Z$-computable coloring of pairs.
 :::
 ::::
 
-::::exercise{difficulty=3}
+## Notes and references
+
+:ref{#thm-pigeons-non-high} and :ref{#cor-pigeons-non-high} are due to Monin and Patey (2019); the same paper proves low₃ solutions for $\Delta^0_3$ sets and gives a simpler proof of Liu's theorem that every set has an infinite subset, of itself or of its complement, of non-PA degree. The proof given here follows the section *Pigeonhole principle* of the chapter *Jump cone avoidance* of Patey's monograph, with the cohesive classes of Le Houérou, Levy Patey and Mimouni (2024), including the case distinction on validity. The construction by sequences of conditions with tasks, instead of sufficiently generic filters, is written here, so that promises are turned into truth explicitly. :ref{#ex-pigeon-jump-hyperimmunity} is stated in the monograph, after Monin and Patey (2019).
+
+- B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095; arXiv:1803.09771.
+- B. Monin and L. Patey, *The weakness of the pigeonhole principle under hyperarithmetical reductions*, arXiv:1905.08425 (2019).
+- Q. Le Houérou, L. Levy Patey and A. Mimouni, *The reverse mathematics of the pigeonhole hierarchy*, arXiv:2407.01236 (2024).
+- L. Liu, *RT²₂ does not imply WKL₀*, Journal of Symbolic Logic 77 (2012), 609–620.
+- L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Pigeonhole principle*.
+:::::exercises
+::::exercise[Finite instances]{#ex-pigeon-finite-instance difficulty=1 objective="Check on finite instances that one side of every condition is invalid." lessons="pigeonhole-forcing"}
+Show that if $A$ is finite, side $0$ of every condition is invalid, and side $1$ of every condition is valid.
+
+:::solution
+If $A$ is finite, $X \cap A_0$ is finite, so it is not in $\mathcal U$, whose members are infinite. By item 1 of :ref{#lem-valid-part}, side $1$ is valid.
+:::
+::::
+
+::::exercise[Jump hyperimmunity for the pigeonhole principle]{#ex-pigeon-jump-hyperimmunity difficulty=3 objective="Adapt the proof of the theorem of Monin and Patey to preserve a function hyperimmune relative to $\emptyset'$, with compact questions and a Scott ideal of dominated sets."}
 Let $f$ be a function hyperimmune relative to $\emptyset'$. Show that every set $A$ has an infinite subset $H$, of $A$ or of $\overline A$, such that $f$ is hyperimmune relative to $H'$.
 
 :::solution
-Follow the proof of :ref{#thm-pigeons-non-high}, with the requirement "$\Phi^{G'}_e$ is partial, or $\Phi^{G'}_e(m) < f(m)$ for some $m$" in place of "$\Phi^{G'}_e \neq C$", and the sentences "$\Phi^{G'}_e(m)\converge$" and "$\Phi^{G'}_e(m)\converge < b$" written as in the exercise of :ref{to="jump-cone-avoidance/sigma2-questions"}.
+Follow the proof of :ref{#thm-pigeons-non-high}, with the requirement "$\Phi^{G'}_e$ is partial, or $\Phi^{G'}_e(m) < f(m)$ for some $m$" in place of "$\Phi^{G'}_e \neq C$", and the sentences "$\Phi^{G'}_e(m)\converge$" and "$\Phi^{G'}_e(m)\converge < b$" written as in :ref{#ex-cohen-jump-hyperimmunity}.
 
 *Compactness.* The question $\tau \mathrel{?{\vdash}} \varphi$ depends only on the strings satisfying $\varphi$, so for $k < b$ the formulas $\psi^b_m(k, y)$ and $\psi_m(k, y)$ give the same answers. If the question on one side holds for "$\Phi^{G'}_e(m)\converge$", the class $\mathcal C$ of the proof of :ref{#lem-pigeon-one-side} is empty; its complement is covered by open sets, each given by a finite part of $B$ together with a witness $\tau$, $\langle k, y \rangle$, or with a finite part of $B^{1-i}$ in $\mathcal V$. By compactness of Cantor space, finitely many of them suffice, and for $b$ larger than the numbers $k$ involved, the question holds for "$\Phi^{G'}_e(m)\converge < b$". The same holds for the disjunctive question.
 
@@ -131,12 +141,45 @@ Follow the proof of :ref{#thm-pigeons-non-high}, with the requirement "$\Phi^{G'
 :::
 ::::
 
-## Notes and references
+::::exercise[Neither high nor low₂]{#ex-pigeon-intermediate difficulty=1 objective="Combine the theorem with the example of the first lesson to locate the solutions for a generic instance."}
+Let $A$ be 1-generic relative to $\emptyset''$. Show that $A$ has an infinite subset $H$, of $A$ or of $\overline A$, that is neither high nor low₂.
 
-:ref{#thm-pigeons-non-high} and :ref{#cor-pigeons-non-high} are due to Monin and Patey (2019); the same paper proves low₃ solutions for $\Delta^0_3$ sets and gives a simpler proof of Liu's theorem that every set has an infinite subset, of itself or of its complement, of non-PA degree. The proof given here follows the section *Pigeonhole principle* of the chapter *Jump cone avoidance* of Patey's monograph, with the cohesive classes of Le Houérou, Levy Patey and Mimouni (2024), including the case distinction on validity. The construction by sequences of conditions with tasks, instead of sufficiently generic filters, is written here, so that promises are turned into truth explicitly. The exercise on hyperimmunity is stated in the monograph, after Monin and Patey (2019).
+:::solution
+By :ref{#cor-pigeons-non-high}, there is an infinite $H \subseteq A$ or $H \subseteq \overline A$ that is not high. By :ref{#ex-no-low2-subset}, no infinite subset of $A$ or of $\overline A$ is low₂. So $H$ is neither: $\emptyset'' \not\leq_T H'$ and $H'' \not\leq_T \emptyset''$.
+:::
+::::
 
-- B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095; arXiv:1803.09771.
-- B. Monin and L. Patey, *The weakness of the pigeonhole principle under hyperarithmetical reductions*, arXiv:1905.08425 (2019).
-- Q. Le Houérou, L. Levy Patey and A. Mimouni, *The reverse mathematics of the pigeonhole hierarchy*, arXiv:2407.01236 (2024).
-- L. Liu, *RT²₂ does not imply WKL₀*, Journal of Symbolic Logic 77 (2012), 609–620.
-- L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Pigeonhole principle*.
+::::exercise[Finitely many colors]{#ex-pigeon-rt1k difficulty=1 objective="Iterate the relativized theorem to obtain strong jump cone avoidance for the pigeonhole principle with finitely many colors."}
+Show that for every $k \geq 1$, every set $Z$, every $C \not\leq_T Z'$ and every partition $A_0 \cup \dots \cup A_{k-1} = \nat$, there is an infinite set $H$ contained in some $A_j$ with $C \not\leq_T (Z \oplus H)'$.
+
+:::solution
+By induction on $k$, for all $Z$ and $C$ at once. For $k = 1$, take $H = \nat$, since $(Z \oplus \nat)' \equiv_T Z'$. Let $k \geq 2$. By :ref{#thm-pigeons-non-high} applied to $A_0$, there is an infinite $H_1$ with $C \not\leq_T (Z \oplus H_1)'$, contained in $A_0$, in which case we are done, or in $A_1 \cup \dots \cup A_{k-1}$. In the second case, let $p$ enumerate $H_1$ in increasing order, and $B_j = \{ n : p(n) \in A_j \}$ for $1 \leq j < k$, a partition of $\nat$ into $k - 1$ parts. The induction hypothesis, with $Z \oplus H_1$ in place of $Z$, gives an infinite $K \subseteq B_j$ for some $j$ with $C \not\leq_T (Z \oplus H_1 \oplus K)'$. The set $H = p[K]$ is infinite, contained in $A_j$, and computable in $H_1 \oplus K$; so $(Z \oplus H)' \leq_T (Z \oplus H_1 \oplus K)'$ and $C \not\leq_T (Z \oplus H)'$.
+:::
+::::
+
+::::exercise[Generic instances are in case B]{#ex-pigeon-generic-instance difficulty=2 objective="Show that both cases of the proof occur, by checking that a sufficiently generic instance keeps both sides of every condition valid."}
+Fix the setting of :ref{#lem-pigeon-setting}, and a set $W$ computing $M$ and every member of $\mathcal N$, which exists since $\mathcal N$ is countable. Let $A$ be 1-generic relative to $W$. Show that both sides of every condition are valid. Compare with :ref{#ex-pigeon-ideal-instance}.
+
+:::solution
+Let $(\sigma_0, \sigma_1, X)$ be a condition. We show $X \cap A \in \mathcal U$; the case of $\overline A$ is the same with the values $0$ and $1$ exchanged below. By definition of the core, it suffices to show $X \cap A \in \mathcal V$ for every $\Sigma^0_1(\mathcal M)$ class $\mathcal V = \mathcal U^{Z_j}_a$ with $\mathcal U_S \cap \mathcal V$ large. For such a class, $\mathcal U \subseteq \mathcal V$ by item 2 of :ref{#prop-cohesive-core}.
+
+Let $D$ be the set of strings $\alpha$ for which some finite set $F \in W^{Z_j}_a$ satisfies $F \subseteq X$ and $\alpha(x) = 1$ for every $x \in F$, with $F$ below $|\alpha|$. It is c.e. relative to $X \oplus Z_j$, hence relative to $W$. Every string $\alpha$ has an extension in $D$: the set $X \setminus \{0, \dots, |\alpha| - 1\}$ is in $\mathcal U$, which is closed under finite changes, hence in $\mathcal V$, so it contains some $F \in W^{Z_j}_a$, all of whose elements are at least $|\alpha|$; extend $\alpha$ with the value $1$ on $F$ and $0$ elsewhere. Since $A$ is 1-generic relative to $W$ and no prefix of $A$ is without extension in $D$, some prefix of $A$ is in $D$. Then $A \supseteq F$ for some $F \in W^{Z_j}_a$ with $F \subseteq X$, so $X \cap A \supseteq F$ and $X \cap A \in \mathcal V$ by upward closure.
+
+So for such $A$ the proof is in case B, while for $A \in \mathcal N$ it is in case A. Both cases occur.
+:::
+::::
+
+::::exercise[Preservation of non-Σ⁰₂ definitions]{#ex-pigeon-non-sigma2 difficulty=3 objective="Adapt the proof of the theorem to sets that are not $\Sigma^0_2$, with a two-case argument and a Scott ideal preserving the definition."}
+Let $C$ be a set that is not $\Sigma^0_2$. Show that every set $A$ has an infinite subset $H$, of $A$ or of $\overline A$, such that $C$ is not $\Sigma^0_2(H)$.
+
+:::solution
+*The ideal $\mathcal N$.* Let $\mathcal W$ be the class of sets $Y$ such that $C$ is not $\Sigma^0_1(Y)$, closed downward, and containing $\emptyset'$ by Post's theorem. $\mathsf{WKL}$ preserves $\mathcal W$: for $Z \in \mathcal W$ and a $Z$-computable infinite tree, use Jockusch–Soare forcing relative to $Z$ below its paths, whose question at level 1 is $\Sigma^0_1(Z)$-preserving (:ref{#thm-tree-question}, relativized); for each $e$ and each condition, the set $U = \{ x : c \mathrel{?{\vdash}} \Phi^{Z \oplus G}_e(x)\converge \}$ is $\Sigma^0_1(Z)$, so $U \neq C$, and an extension forces $x \in W^{Z \oplus G}_e$ for some $x \notin C$ or $x \notin W^{Z \oplus G}_e$ for some $x \in C$. A sufficiently generic path $G$ satisfies $Z \oplus G \in \mathcal W$. By :ref{#lem-preservation-ideal} and :ref{#prop-wkl-scott}, there is a Scott ideal $\mathcal N \subseteq \mathcal W$ containing $\emptyset'$. Take $\mathcal M$ and $S$ as in :ref{#lem-pigeon-setting}; its proof only uses that $\mathcal N$ is a Scott ideal containing $\emptyset'$.
+
+*Requirements.* By Post's theorem relativized, there are $\Sigma^0_2$ sentences $\varphi_{e,x}$, with codes computable from $e$ and $x$, such that $x \in W^{G'}_e$ if and only if $\varphi_{e,x}$ holds of $G$; the $\Sigma^0_2(G)$ sets are the sets $W^{G'}_e$. Given a condition $p$ and $e_0, e_1$, the set $U = \{ x : p \mathrel{?{\vdash}} \varphi_{e_0,x}(G_0) \vee \varphi_{e_1,x}(G_1) \}$ is $\Sigma^0_1(Y)$ for some $Y \in \mathcal N$ by item 3 of :ref{#lem-pigeon-disjunctive}, so $U \neq C$. If $x \in U \setminus C$, item 1 gives an extension and a side $i$ all of whose members satisfy $\varphi_{e_i,x}$. If $x \in C \setminus U$, item 2 gives an extension and a side $i$ promising $\neg\varphi_{e_i,x}$. If side $1 - i$ of $p$ is invalid, the same argument with :ref{#lem-pigeon-one-side} gives, for every $e$, an extension satisfying one of the two alternatives on side $i$ for $e$. There are two cases instead of three, as in :ref{#ex-non-sigma2-local}.
+
+*Construction.* Run the construction of the proof of :ref{#thm-pigeons-non-high}, cases A and B, with these requirements in place of those of :ref{#lem-pigeon-requirements}. The set $G_i$ built on a side that stays valid is a member of side $i$ of every condition of the sequence and keeps its promises. So for each requirement handled on side $i$ there is $x$ with $x \in W^{G_i'}_{e} \setminus C$ or $x \in C \setminus W^{G_i'}_{e}$. In case A this holds for every $e$ on side $i$; in case B, Lachlan's disjunction gives a side $j$ with $W^{G_j'}_e \neq C$ for every $e$. So $C$ is not $\Sigma^0_2(H)$ for the resulting $H$.
+
+If $C \not\leq_T \emptyset'$, then $C$ or $\overline C$ is not $\Sigma^0_2$, by Post's theorem, and a set $H$ for which it is not $\Sigma^0_2(H)$ satisfies $C \not\leq_T H'$; this is another proof of :ref{#thm-pigeons-non-high} for $Z = \emptyset$, as in :ref{to="avoidance/non-sigma1-definitions"}.
+:::
+::::
+:::::

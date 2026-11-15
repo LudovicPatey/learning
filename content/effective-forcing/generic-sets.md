@@ -48,6 +48,14 @@ The previous courses proved many density statements without the vocabulary of fo
 4. **Computable Mathias forcing.** Every sufficiently generic set is infinite: given $(\sigma, X)$ and $m$, adding to $\sigma$ an element $n > m$ of $X$, and removing from $X$ the numbers up to $n$, gives an extension all of whose members have an element above $m$. For every computable sequence of sets $\vec R = (R_i)$, every sufficiently generic set is **$\vec R$-cohesive**, that is, $G \subseteq^* R_i$ or $G \subseteq^* \overline{R_i}$ for every $i$ (the notion is studied in :ref{to="ramsey-theorem/cohesiveness"}): one of $X \cap R_i$ and $X \setminus R_i$ is infinite, so $(\sigma, X \cap R_i)$ or $(\sigma, X \setminus R_i)$ is an extension, with a computable reservoir, and its members $G$ satisfy $G \subseteq^* R_i$ or $G \subseteq^* \overline{R_i}$.
 :::
 
+::::exercise{#ex-sacks-avoids-sets difficulty=1 objective="Contrast computable Sacks and Jockusch–Soare forcing on avoiding countably many given sets."}
+Show that for computable Sacks forcing, for every countable family of sets $(A_k)$, every sufficiently generic set differs from every $A_k$. Show that this fails for Jockusch–Soare forcing.
+
+:::solution
+Given a computable f-tree $T$ and a set $A$, the nodes $T(0)$ and $T(1)$ are incompatible, so one of them, $T(i)$, is not a prefix of $A$. The full subtree above $T(i)$ is an extension whose paths all differ from $A$. So the set of conditions all of whose members differ from $A_k$ is dense, for each $k$. For Jockusch–Soare forcing, take for $(A_k)$ the computable sets. For every countable family $\mathcal D$ of dense sets, :ref{#lem-rasiowa-sikorski} gives a $\mathcal D$-generic filter containing the condition $\{ A_0 \}$, and its generic set is $A_0$. So no family $\mathcal D$ makes all $\mathcal D$-generic sets differ from every $A_k$. The first part is adapted from Monin and Patey, chapter *Effective forcing*, exercise on Sacks forcing in the section *Forcing with trees*.
+:::
+::::
+
 ## Effective genericity
 
 The properties of sufficiently generic sets in :ref{#ex-generic-notions} forget the effectiveness of the constructions they come from. It is recovered by measuring how hard it is to find extensions in the dense sets.
@@ -102,16 +110,6 @@ These formulas express all arithmetic properties. By the relativization of :ref{
 4. Formulas may also be built with functionals of an oracle $Z \oplus G$ for a fixed set $Z$; everything in this course relativizes to such formulas. The later courses of the track work with these formulas throughout, writing for instance "$\Phi^{Z \oplus G}_e(x)\converge = v$" for the $\Sigma^0_1$ sentence expressing that the computation converges with value $v$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that for computable Sacks forcing, for every countable family of sets $(A_k)$, every sufficiently generic set differs from every $A_k$. Show that this fails for Jockusch–Soare forcing.
-
-:::solution
-Given a computable f-tree $T$ and a set $A$, the nodes $T(0)$ and $T(1)$ are incompatible, so one of them, $T(i)$, is not a prefix of $A$. The full subtree above $T(i)$ is an extension whose paths all differ from $A$. So the set of conditions all of whose members differ from $A_k$ is dense, for each $k$. For Jockusch–Soare forcing, take for $(A_k)$ the computable sets. For every countable family $\mathcal D$ of dense sets, :ref{#lem-rasiowa-sikorski} gives a $\mathcal D$-generic filter containing the condition $\{ A_0 \}$, and its generic set is $A_0$. So no family $\mathcal D$ makes all $\mathcal D$-generic sets differ from every $A_k$.
-:::
-::::
-
 ## Notes and references
 
 The phrase "sufficiently generic" is standard; see Jockusch (1980) for Cohen forcing and Dzhafarov and Mummert (Section 7.3) in general. Effective forms of the existence of generic filters are given by Hirschfeldt (Section 2.3, Proposition 2.7) and by Dzhafarov and Mummert (Theorem 7.5.6, existence of effective generics); the low basis theorem is due to Jockusch and Soare (1972). The examples are taken from the courses on Cohen genericity, on $\Pi^0_1$ classes and on immunity and growth, where they are proved without forcing vocabulary; Monin and Patey, chapter *Effective forcing*, section *Fundamentals of forcing*, present them in the same way.
@@ -121,3 +119,51 @@ The phrase "sufficiently generic" is standard; see Jockusch (1980) for Cohen for
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 2.3.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 7.3 and 7.5.
 - B. Monin and L. Patey, *Computability theory*, chapter *Effective forcing*, section *Fundamentals of forcing*.
+
+:::::exercises
+::::exercise{#ex-mathias-no-computable-subset difficulty=1 objective="Prove a property of Mathias generic sets by shrinking the reservoir."}
+Show that every sufficiently generic set $G$ for computable Mathias forcing contains no infinite computable set. Deduce that $G$ is not computable and that its complement is infinite.
+
+:::solution
+Let $R$ be an infinite computable set, and $(\sigma, X)$ a condition. Choose $r \in R$ with $r \geq |\sigma|$, which exists since $R$ is infinite. The set $X' = X \setminus \{ r \}$ is infinite, computable and contained in $X$, so $(\sigma, X')$ is an extension of $(\sigma, X)$. Every member $G$ of $(\sigma, X')$ satisfies $G(r) = 0$, since $r \geq |\sigma|$ and $r \notin X'$; so $R \not\subseteq G$. Hence the set of conditions none of whose members contains $R$ is dense, for each of the countably many infinite computable sets $R$, and every sufficiently generic set contains none of them.
+
+By :ref{#ex-generic-notions}, $G$ is infinite; if it were computable, it would be an infinite computable set contained in $G$. If its complement were finite, $G$ would be cofinite, hence computable, which was just excluded.
+:::
+::::
+
+::::exercise{#ex-normal-form-practice difficulty=1 objective="Write properties of the generic set as formulas in the normal form of the course."}
+Write each property as a sentence in the sense of :ref{#def-forcing-formula}, describing the functionals used, and give its class.
+
+1. $G$ is cofinite.
+2. $G \subseteq^* R$, for a fixed computable set $R$.
+3. $\Phi^G_e$ is total and $\{0, 1\}$-valued.
+
+:::solution
+1. Let $\Phi_b$ be the functional that, on input $x$, searches for $y > x$ with $G(y) = 0$. Then $X \models \exists x\ \Phi^G_b(x)\diverge$ if and only if some $x$ has no $y > x$ outside $X$, that is, $X$ is cofinite. This is a $\Sigma^0_2$ sentence.
+2. Let $\Phi_c$ be the functional that, on input $x$, searches for $y > x$ with $G(y) = 1$ and $y \notin R$, which it can test since $R$ is computable. Then "$G \subseteq^* R$" is the $\Sigma^0_2$ sentence $\exists x\ \Phi^G_c(x)\diverge$.
+3. Let $\Phi_d$ be the functional that, on input $x$, runs $\Phi^G_e(x)$, and if it converges with value $0$ or $1$, halts; if it converges with another value, it enters an infinite loop. Then $\Phi^X_d(x)\converge$ if and only if $\Phi^X_e(x)\converge \in \{0, 1\}$, and the property is the $\Pi^0_2$ sentence $\forall x\ \Phi^G_d(x)\converge$.
+
+The indices $b$, $c$ and $d$ are computed from an index of $R$ and from $e$.
+:::
+::::
+
+::::exercise{#ex-js-generic-computable difficulty=1 objective="Characterize the Jockusch–Soare conditions below which the sufficiently generic sets are non-computable."}
+Let $\mathcal P$ be a non-empty $\Pi^0_1$ class. Show that every sufficiently generic set for Jockusch–Soare forcing below $\mathcal P$ is non-computable if and only if $\mathcal P$ has no computable member.
+
+:::solution
+Suppose that $\mathcal P$ has no computable member. For a computable set $Y$, let $D_Y$ be the set of conditions not containing $Y$. Every extension $\mathcal Q \subseteq \mathcal P$ belongs to $D_Y$, so $D_Y$ is dense below $\mathcal P$. By :ref{#lem-dense-below}, every sufficiently generic filter containing $\mathcal P$ meets $D_Y$, for each of the countably many computable sets $Y$; its generic set is a member of a condition not containing $Y$, so it differs from $Y$.
+
+Conversely, let $Y \in \mathcal P$ be computable. Then $\{ Y \}$ is a $\Pi^0_1$ class, hence a condition extending $\mathcal P$. For every countable family $\mathcal D$ of dense sets, :ref{#lem-rasiowa-sikorski} gives a $\mathcal D$-generic filter containing $\{ Y \}$; it contains $\mathcal P$, since filters are closed upward, and its generic set is $Y$.
+:::
+::::
+
+::::exercise{#ex-mathias-not-cohen-generic difficulty=2 objective="Separate Mathias generic sets from Cohen generic sets by a density argument on the reservoir."}
+A set $G$ is **1-generic** if for every c.e. set of strings $W$, some prefix of $G$ belongs to $W$ or has no extension in $W$. Show that the complement of a 1-generic set contains no infinite computable set. Show that every sufficiently generic set for computable Mathias forcing has a complement containing an infinite computable set, and deduce that it is not 1-generic.
+
+:::solution
+Let $G$ be 1-generic and $R$ an infinite computable set. Let $W$ be the computable set of strings $\tau$ such that $\tau(r) = 1$ for some $r \in R$ with $r < |\tau|$. It is dense: given $\tau$, take $r \in R$ with $r \geq |\tau|$, and extend $\tau$ by zeros up to length $r$, then by a $1$. So no string lacks an extension in $W$, and $G$ has a prefix in $W$: $G \cap R \neq \emptyset$. Hence $R$ is not contained in the complement of $G$.
+
+Let $(\sigma, X)$ be a computable Mathias condition, and $x_0 < x_1 < \cdots$ the elements of $X$. The set $X' = \{ x_{2j} : j \in \nat \}$ is infinite, computable and contained in $X$, so $(\sigma, X')$ extends $(\sigma, X)$. The set $R = \{ n \geq |\sigma| : n \notin X' \}$ is computable, and infinite since it contains every $x_{2j+1}$. Every member $G$ of $(\sigma, X')$ has its elements $n \geq |\sigma|$ in $X'$, so $G \cap R = \emptyset$. Hence the set of conditions all of whose members have a complement containing an infinite computable set is dense, and every sufficiently generic set has this property. By the first part, it is not 1-generic.
+:::
+::::
+:::::

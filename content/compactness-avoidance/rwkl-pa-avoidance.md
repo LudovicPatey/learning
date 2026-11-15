@@ -1,7 +1,7 @@
 ---
 title: Liu's theorem for the Ramsey-type weak König lemma
 summary: Every non-empty Π⁰₁ class has an infinite homogeneous set that is not PA, so the Ramsey-type weak König lemma admits PA avoidance; the solution follows a branch of parts chosen at the end by König's lemma.
-duration: 30
+duration: 25
 prerequisites: [partition-forcing]
 ---
 
@@ -56,21 +56,11 @@ In the proof that $H$ is homogeneous, why is the color $c$ the same for all $s$?
   Infinity is proved separately and does not determine the color.
 :::
 
-## Exercises
-
-::::exercise{#exr-rwkl-subset difficulty=2}
+::::exercise{#exr-rwkl-subset difficulty=2 objective="Relativize Liu's theorem to an infinite set $X$, to find a homogeneous set inside $X$ by composing with the enumeration of $X$."}
 Using :ref{#thm-rwkl-pa-avoidance} and :ref{#prop-homogeneous-member}, show that for all $D \leq_T Z$ with $Z$ not PA relative to $D$ and every non-empty $\Pi^0_1(Z)$ class $\mathcal P \subseteq \cs$ and infinite set $X \leq_T Z$, there are $P \in \mathcal P$, $i < 2$ and an infinite set $H \subseteq X \cap P^{-1}(i)$ such that $Z \oplus H$ is not PA relative to $D$.
 
 :::solution
 Let $p_X$ be the increasing enumeration of $X$, computable in $Z$, and $\mathcal Q = \{ P \circ p_X : P \in \mathcal P \}$, where $(P \circ p_X)(k) = P(p_X(k))$. It is non-empty, and it is a $\Pi^0_1(Z)$ class. Let $S$ be a $Z$-computable tree with $[S] = \mathcal P$. If $Q \notin \mathcal Q$, the strings of $S$ that agree with $Q$ at the positions $p_X(j)$ below their length form a subtree of $S$ without path, hence finite, so some level $p_X(n) + 1$ of $S$ contains no string agreeing with $Q \uh (n + 1)$ at the positions $p_X(0), \dots, p_X(n)$; conversely, this condition excludes $Q$ from $\mathcal Q$. It is $\Sigma^0_1(Z)$, so the complement of $\mathcal Q$ is $\Sigma^0_1(Z)$. By the theorem, $\mathcal Q$ has an infinite homogeneous set $K$, with $Z \oplus K$ not PA relative to $D$, and $K \subseteq (P \circ p_X)^{-1}(i)$ for some $P \in \mathcal P$. Then $H = p_X[K]$ is an infinite subset of $X \cap P^{-1}(i)$, computable in $Z \oplus K$, so $Z \oplus H$ is not PA relative to $D$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that the forcing of this lesson also gives cone avoidance for $\mathsf{RWKL}$ directly: if $C \not\leq_T Z$, every non-empty $\Pi^0_1(Z)$ class has an infinite homogeneous set $H$ with $C \not\leq_T Z \oplus H$. Which case of the proof becomes simpler?
-
-:::solution
-Let part $\nu$ settle $e$ if $\Phi^{Z \oplus \sigma_\nu}_e(x)\converge \neq C(x)$ for some $x$, or if there is $x$ such that no string $\tau$ compatible with part $\nu$ has $\Phi^{Z \oplus \tau}_e(x)\converge = C(x)$. Define $U$ as the set of pairs $(x, v)$ such that for every $X \in \mathcal A$, some $\nu \in I$ and $\tau$ compatible with part $\nu$ relative to $X$ have $\Phi^{Z \oplus \tau}_e(x)\converge = v$; it is $\Sigma^0_1(Z)$ by the same compactness argument. If $(x, 1 - C(x)) \in U$, a part extension settles a part. If $(x, C(x)) \notin U$, the class of $X \in \mathcal A$ for which no $\tau$ compatible with a part $\nu \in I$ relative to $X$ gives $C(x)$ is non-empty, and replacing $\mathcal A$ by it settles all parts of $I$ at once; no splitting is needed, since a single negative answer suffices. Otherwise $C \leq_T Z$. The rest of the proof is unchanged. This also follows from :ref{#thm-rwkl-pa-avoidance} and :ref{#thm-pa-implies-cone}.
 :::
 ::::
 
@@ -82,3 +72,53 @@ The theorem that every non-empty $\Pi^0_1$ class has a homogeneous set that is n
 - S. Flood, *Reverse mathematics and a Ramsey-type König's lemma*, Journal of Symbolic Logic 77 (2012), 1272–1280.
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, section *Ramsey-type WKL*.
+
+:::::exercises
+::::exercise[Cone avoidance with the same forcing]{#ex-rwkl-cone-direct difficulty=2 objective="Adapt forcing with partitions to cone avoidance, and see that a single negative answer then suffices."}
+Show that the forcing of this lesson also gives cone avoidance for $\mathsf{RWKL}$ directly: if $C \not\leq_T Z$, every non-empty $\Pi^0_1(Z)$ class has an infinite homogeneous set $H$ with $C \not\leq_T Z \oplus H$. Which case of the proof becomes simpler?
+
+:::solution
+Let part $\nu$ settle $e$ if $\Phi^{Z \oplus \sigma_\nu}_e(x)\converge \neq C(x)$ for some $x$, or if there is $x$ such that no string $\tau$ compatible with part $\nu$ has $\Phi^{Z \oplus \tau}_e(x)\converge = C(x)$. Define $U$ as the set of pairs $(x, v)$ such that for every $X \in \mathcal A$, some $\nu \in I$ and $\tau$ compatible with part $\nu$ relative to $X$ have $\Phi^{Z \oplus \tau}_e(x)\converge = v$; it is $\Sigma^0_1(Z)$ by the same compactness argument. If $(x, 1 - C(x)) \in U$, a part extension settles a part. If $(x, C(x)) \notin U$, the class of $X \in \mathcal A$ for which no $\tau$ compatible with a part $\nu \in I$ relative to $X$ gives $C(x)$ is non-empty, and replacing $\mathcal A$ by it settles all parts of $I$ at once; no splitting is needed, since a single negative answer suffices. Otherwise $C \leq_T Z$. The rest of the proof is unchanged. This also follows from :ref{#thm-rwkl-pa-avoidance} and :ref{#thm-pa-implies-cone}.
+:::
+::::
+
+::::exercise[The color cannot be prescribed]{#ex-rwkl-color-not-prescribed difficulty=2 objective="Build a non-empty $\Pi^0_1$ class whose homogeneous sets of one color are all PA, while the other color has computable solutions."}
+Fix a computable bijection $\rho \mapsto \ulcorner \rho \urcorner$ between strings and numbers, and for $f : \nat \to 2$ let $X_f = \{ 2 \ulcorner f \uh n \urcorner : n \in \nat \}$. Let $\mathcal P = \{ X_f : f \in \mathrm{DNC}_2 \}$, where $\mathrm{DNC}_2$ is relative to $\emptyset$. Show that $\mathcal P$ is a non-empty $\Pi^0_1$ class, that every infinite set homogeneous for $\mathcal P$ with color $1$ is PA, and that some computable infinite set is homogeneous for $\mathcal P$ with color $0$. What does this say about :ref{#thm-rwkl-pa-avoidance}?
+
+:::solution
+A set $X$ belongs to $\mathcal P$ if and only if: every element of $X$ is even; for every $n$, $X$ contains exactly one number $2 \ulcorner \rho \urcorner$ with $|\rho| = n$; the strings coded by any two elements of $X$ are comparable; and no string $\rho$ coded by an element of $X$ has $J(x)\converge = \rho(x)$ for some $x < |\rho|$. If so, the coded strings form an increasing sequence with one string of each length, whose union $f$ is $\mathrm{DNC}_2$, and $X = X_f$; the converse is clear. Each clause, for fixed numbers and a fixed number of steps of the computation of $J$, is decided by a finite part of $X$, uniformly; so $\mathcal P$ is $\Pi^0_1$, and it is non-empty since $\mathrm{DNC}_2$ is.
+
+Let $H$ be infinite and homogeneous with color $1$: by :ref{#prop-homogeneous-member}, $H \subseteq X_f$ for some $f \in \mathrm{DNC}_2$. To compute $f(m)$, search for an element of $H$ coding a string of length larger than $m$; it exists, since $H$ is infinite and only finitely many numbers code shorter strings, and its bit at $m$ is $f(m)$. So $H$ computes $f$ and is PA. On the other hand, the set of odd numbers is disjoint from every $X_f$, so it is contained in $P^{-1}(0)$ for every $P \in \mathcal P$: it is a computable infinite set homogeneous with color $0$.
+
+So the color of the homogeneous set in :ref{#thm-rwkl-pa-avoidance} cannot be chosen in advance: the theorem gives some color, and for this class only the color $0$ admits solutions that are not PA. This is why the construction keeps all the parts and chooses the branch of parts, and with it the color, at the end.
+:::
+::::
+
+::::exercise[Strong cone avoidance]{#ex-rwkl-strong-cone difficulty=1 objective="Derive the strong cone avoidance of $\mathsf{RWKL}$ from that of the pigeonhole principle, by choosing a path without computing it."}
+Show that $\mathsf{RWKL}$ admits strong cone avoidance: for every set $Z$, every $C \not\leq_T Z$ and every infinite binary tree $T$, not necessarily computable in $Z$, there is an infinite set $H$ homogeneous for $T$ with $C \not\leq_T Z \oplus H$. Which theorem would give strong PA avoidance in the same way?
+
+:::solution
+By König's lemma, $T$ has a path $P$. By :ref{#thm-dj-cone-avoidance} applied to the set $P$, there is an infinite set $H$ contained in $P$ or in $\overline P$ with $C \not\leq_T Z \oplus H$. Then $H \subseteq P^{-1}(1)$ or $H \subseteq P^{-1}(0)$, so $H$ is homogeneous for $T$ by :ref{#prop-homogeneous-member}. The path $P$ may be complex, but it is only used as an instance of the pigeonhole principle, whose strong avoidance property allows arbitrary instances. The same argument with the strong PA avoidance of the pigeonhole principle, proved in :ref{to="compactness-avoidance/liu-theorem"}, shows that $\mathsf{RWKL}$ admits strong PA avoidance; but that proof uses the present theorem.
+:::
+::::
+
+::::exercise[More than two colors]{#ex-rwkl-ell-colors difficulty=2 objective="Run the proof of Liu's theorem for classes of partitions into $\ell$ parts, and adapt the compactness argument for homogeneity."}
+Let $\ell \geq 2$, $D \leq_T Z$ with $Z$ not PA relative to $D$, and $\mathcal P \subseteq \ell^\nat$ a non-empty $\Pi^0_1(Z)$ class. Show that there are $P \in \mathcal P$, $c < \ell$ and an infinite set $H \subseteq P^{-1}(c)$ such that $Z \oplus H$ is not PA relative to $D$.
+
+:::solution
+Start from the condition $p_0 = (\ell, (\varepsilon, \dots, \varepsilon), \mathcal P)$, whose class consists of partitions into $\ell$ parts, and run the construction of the proof of :ref{#thm-rwkl-pa-avoidance} unchanged: neither :ref{#lem-partition-progress} nor the steps $2n + 2$ depend on the number of parts. The branch $(\nu_s)$ of acceptable parts and the set $H$, the union of the stems $\sigma^s_{\nu_s}$, are obtained in the same way; $H$ is infinite, and $Z \oplus H$ is not PA relative to $D$, by the same arguments.
+
+For homogeneity, the composite map from the parts of $p_s$ to those of $p_0$ sends $\nu_s$ to a color $c < \ell$ independent of $s$, and for each $s$ the class $\mathcal C_s = \{ P \in \mathcal P : \sigma^s_{\nu_s} \subseteq P^{-1}(c) \}$ is non-empty, by the definition of extension applied to a member of $\mathcal A_s$. These classes are closed and decreasing, since the stems increase. The space $\ell^\nat$ is compact, by König's lemma for the full $\ell$-branching tree, so their intersection contains some $P$, and $H \subseteq P^{-1}(c)$.
+:::
+::::
+
+::::exercise[Acceptable parts may die]{#ex-acceptable-dead-end difficulty=1 objective="See on an example that an acceptable part can lose its acceptability after an extension, and why the branch of parts is chosen by König's lemma."}
+Let $X(n) = n \bmod 2$, and let $X'(0) = 0$ and $X'(n) = 1$ for $n \geq 1$. Let $p = (2, (\varepsilon, \varepsilon), \{ X, X' \})$. Show that part $0$ of $p$ is acceptable, and find a part extension $q$ of $p$ in which part $0$, which refines part $0$ of $p$, is not acceptable. Explain why the proof of :ref{#thm-rwkl-pa-avoidance} still finds an infinite branch of acceptable parts.
+
+:::solution
+A finite class of computable functions is $\Pi^0_1$, so $p$ is a condition. Part $0$ is acceptable, since $X_0$, the set of even numbers, is infinite. The string $\tau = \{ 2 \}$ is compatible with part $1$ relative to $X'$, since $2 \in X'_1$. The part extension replaces $\sigma_1$ by $\tau$ and the class by $\{ Y \in \{ X, X' \} : 2 \in Y_1 \} = \{ X' \}$, since $X(2) = 0$. In the resulting condition $q$, part $0$ is not acceptable: the only member is $X'$, and $X'_0 = \{ 0 \}$. Part $0$ of $q$ refines part $0$ of $p$, through the identity map.
+
+So in the tree of the proof, whose nodes at level $s$ are the acceptable parts of $p_s$, a node may have no child. The tree is still infinite, since every condition has an acceptable part, and finitely branching, so König's lemma gives an infinite branch; it avoids the dead nodes, which cannot be recognized during the construction. This is also why the steps $2n + 2$ extend a part only if it is acceptable at its turn.
+:::
+::::
+:::::

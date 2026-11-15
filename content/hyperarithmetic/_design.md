@@ -199,7 +199,67 @@ was checked.
 - Sacks and Ash–Knight section numbers were removed because no copy was available; they
   could be restored after checking.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a full solution. Featured
+exercises stay in the text, after the material they practice; the others are in the
+collapsed block `:::::exercises` at the end of each lesson.
+
+**Featured, and why.**
+
+- h-sets: `ex-notation-successor-below` (2^b <_O a below a limit), placed where the fact
+  is first used; the proofs of this lesson and of the next one rely on it.
+- spector-uniqueness: `ex-same-ordinal-notations` (after the comparison lemma: one more
+  jump decides equality of ordinals) and `ex-h-omega-two` (after the degrees 0^(α): the
+  first computation of an H-set above ω, which uses Spector's theorem).
+- kleene-theorem: `ex-sigma11-notations-bounded` and `ex-hyp-pi11-in-x`, after Kleene's
+  theorem, in their old order: `descriptive-set-theory` (uniformization, perfect-sets)
+  cites them as the "first" and "second exercise" of this lesson.
+- sigma11-classes: `ex-unique-path-hyp` (new): isolated paths of computable trees are
+  hyperarithmetic, so the tree of `thm-no-hyp-path` has a perfect set of paths. It uses
+  Kleene's theorem in a new way and explains the shape of that tree; the old exercise on
+  Π⁰₁ classes repeated the paragraph after the theorem and moved to the further block.
+- pseudo-well-orderings: `ex-harrison-second-proof` and `ex-harrison-wf-part` (the text
+  relies on the second for the type of the well-founded part).
+
+**Further exercises, lesson by lesson.**
+
+- h-sets: two incomparable notations of ω (moved); 1 <_O a and non-computability of H_a;
+  H_a arithmetic iff |a| finite; H_a ≡_T ⊕ H_{a_n} at limits (the alternative definition);
+  H_b ≤_1 H_a along <_O; H-sets from a base X ≤_T ∅′ (a full effective transfinite
+  recursion, difficulty 3).
+- spector-uniqueness: O computes HYP and is not in it (moved, associated with
+  kleene-theorem); closure of HYP under the ω-jump; the relation of all H-sets is not
+  hyperarithmetic and computes O with one jump; comparison of ordinals below |x| in
+  H_{2^x}; a uniform join via +_O; every hyperarithmetic set is ≤_1 some H_a.
+- kleene-theorem: ω₁^X = ω₁ᶜᵏ for hyperarithmetic X (announced in
+  `computable-ordinals/boundedness`); WF is not hyperarithmetic; the relation of all H-sets
+  is Π¹₁ and not Σ¹₁; a number a ∉ O with no H-sequence (recursion theorem); no Σ¹₁ set of
+  notations indexes HYP.
+- sigma11-classes: Π⁰₁ classes in Cantor space (moved); closure properties of Σ¹₁
+  classes; the extendible nodes of the tree of `thm-no-hyp-path` are not hyperarithmetic;
+  the index set of trees with paths but no hyperarithmetic path is Σ¹₁ and not Π¹₁.
+- pseudo-well-orderings: paths versus Kleene–Brouwer descending sequences; descending
+  sequences computable in O (Kleene basis); an ill-founded computable order with a jump
+  hierarchy, hence descending sequences of jumps (removes the appeal to Harrison for
+  their existence); HYP is not a Σ¹₁ class (difficulty 3).
+
+**Sources.** The new exercises are standard consequences of the lessons, written for the
+course. `ex-hyp-omega1-ck` follows the proof of `prop-omega1-relative`; the existence of
+jump hierarchies along ill-founded orders and the failure of Σ¹₁ for HYP are the
+definability arguments behind Harrison's pseudo-hierarchies (Simpson, Section V.4, for
+the method; Monin–Patey, chapter "The systems ATR₀ and Π¹₁-CA₀"). `ex-unique-path-hyp`
+is the effective counterpart of the fact that isolated points of a closed set are
+definable from the tree; the perfect set theorem itself is in `descriptive-set-theory`.
+
+**Not used.** Σ¹₁ singletons are hyperarithmetic, and countable Σ¹₁ classes have only
+hyperarithmetic members: these are in `descriptive-set-theory/perfect-sets`. A function
+with Π¹₁ graph and Δ¹₁ domain is hyperarithmetic: in
+`descriptive-set-theory/uniformization`. Boundedness of Σ¹₁ sets of notations is also
+`computable-ordinals` `ex-o-bounded`; the existing `ex-sigma11-notations-bounded` stays,
+because other courses cite it.
+
+## 12. History
 
 - **2026-11-12.** Design and pedagogy revision. New lesson `spector-uniqueness` with the
   comparison lemma and a proof of Spector's theorem (previously admitted); `def-hyp` and
@@ -210,3 +270,9 @@ was checked.
   HYP is not a model of ATR₀ without admitted comparison. Four figures
   (`scripts/figures/hyperarithmetic.py`). Unverifiable section numbers of Sacks and
   Ash–Knight removed; Simpson references checked and made precise.
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for
+  the 10 existing exercises; 2 featured per lesson except h-sets and sigma11-classes (1);
+  23 new exercises, one of them featured (section 11). Text references to exercises by position inside
+  the course replaced by `:ref`. Solution of `ex-harrison-wf-part` made precise (initial
+  segment, type of W). Durations recomputed: h-sets 35, kleene-theorem 45 (cap; about
+  2700 words), sigma11-classes 30.

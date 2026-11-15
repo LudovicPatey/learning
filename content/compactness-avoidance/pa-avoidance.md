@@ -54,6 +54,14 @@ If $Y \leq_T Z$ and $Z \in \mathcal W_D$, then $Y \oplus D \leq_T Z \oplus D$, s
 
 When $\mathsf P$ comes from a $\Pi^1_2$ theorem, the first item gives an ω-model of $\mathsf{RCA}_0 + \mathsf P$ that is not a model of $\mathsf{WKL}_0$. This is how Ramsey's theorem for pairs will be separated from weak König's lemma.
 
+::::exercise{#ex-pa-avoidance-product difficulty=1 objective="Show that PA avoidance is preserved by products and inherited downwards along ω-reducibility."}
+Show that if $\mathsf P_0$ and $\mathsf P_1$ admit PA avoidance, so does the product $\mathsf P_0 \times \mathsf P_1$ of :ref{#prop-cone-avoidance-product}, and that if $\mathsf P \leq_\omega \mathsf Q$ and $\mathsf Q$ admits PA avoidance, so does $\mathsf P$.
+
+:::solution
+Let $D \leq_T Z$ with $Z$ not PA relative to $D$, and $X_0 \oplus X_1 \leq_T Z$. PA avoidance of $\mathsf P_0$ gives $Y_0$ with $Z \oplus Y_0$ not PA relative to $D$. Then $D \leq_T Z \oplus Y_0$ and $X_1 \leq_T Z \oplus Y_0$, so PA avoidance of $\mathsf P_1$ relative to $Z \oplus Y_0$, with the same $D$, gives $Y_1$ with $Z \oplus Y_0 \oplus Y_1$ not PA relative to $D$. For the second statement, by :ref{#prop-pa-avoidance-model} (1) it suffices to show that $\mathsf P$ preserves each $\mathcal W_D$; this follows from :ref{#ex-preservation-downward}: if $\mathsf P \leq_\omega \mathsf Q$ and $\mathsf Q$ preserves a weakness property, so does $\mathsf P$.
+:::
+::::
+
 ## Merging forcing questions
 
 Recall the three-case argument of :ref{#thm-local-cone-avoidance}. Given a condition $c$ and a functional $\Phi_e$, the set $U$ of pairs $(x, v)$ for which the forcing question answers yes about "$\Phi^{Z \oplus G}_e(x)\converge = v$" is $\Sigma^0_1$ relative to the condition. To prevent $\Phi^{Z \oplus G}_e$ from computing a set $C$, it suffices to find a wrong pair in $U$ or a right pair missing from $U$. To prevent $\Phi^{Z \oplus G}_e$ from being a $\mathrm{DNC}_2$ function, the first case is the same: a pair $(x, J(x))$ in $U$ lets one force $\Phi^{Z \oplus G}_e(x) = J(x)$. The second case is different. There is no right value to miss: if $J(x)$ is undefined, both values $0$ and $1$ are right. What one can hope for is a number $x$ such that **neither** $(x, 0)$ nor $(x, 1)$ is in $U$, and then one needs an extension that forces both negations at once, so that $\Phi^{Z \oplus G}_e(x)$ has no value in $\{0, 1\}$. Two separate extensions, one for each negation, are useless.
@@ -106,16 +114,6 @@ In case 3, why is the function $g$ total?
   This hypothesis is what case 3 contradicts.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that if $\mathsf P_0$ and $\mathsf P_1$ admit PA avoidance, so does the product $\mathsf P_0 \times \mathsf P_1$ of :ref{#prop-cone-avoidance-product}, and that if $\mathsf P \leq_\omega \mathsf Q$ and $\mathsf Q$ admits PA avoidance, so does $\mathsf P$.
-
-:::solution
-Let $D \leq_T Z$ with $Z$ not PA relative to $D$, and $X_0 \oplus X_1 \leq_T Z$. PA avoidance of $\mathsf P_0$ gives $Y_0$ with $Z \oplus Y_0$ not PA relative to $D$. Then $D \leq_T Z \oplus Y_0$ and $X_1 \leq_T Z \oplus Y_0$, so PA avoidance of $\mathsf P_1$ relative to $Z \oplus Y_0$, with the same $D$, gives $Y_1$ with $Z \oplus Y_0 \oplus Y_1$ not PA relative to $D$. For the second statement, by :ref{#prop-pa-avoidance-model} (1) it suffices to show that $\mathsf P$ preserves each $\mathcal W_D$; this follows from the exercise of :ref{to="reducibilities/preservation"} stating that $\mathsf P \leq_\omega \mathsf Q$ and preservation of a weakness property by $\mathsf Q$ imply its preservation by $\mathsf P$.
-:::
-::::
-
 ## Notes and references
 
 PA avoidance as a property of problems, with the parameter $D$, follows the chapter *Compactness avoidance* of Patey's monograph, section *PA avoidance*; the notion is implicit in Liu's separation of Ramsey's theorem for pairs from weak König's lemma (2012), and Dzhafarov and Mummert use it as a separation tool (Corollary 4.6.15: a problem admitting PA avoidance has an ω-model with no PA set). The equivalence with the preservation of the weakness properties $\mathcal W_D$ (:ref{#prop-pa-avoidance-model}) is not in the monograph; it places the notion in the framework of the course on reducibilities. Merging forcing questions are defined in the same chapter, where they are called $\Pi^0_1$-merging, and in the chapter *Effective forcing* of Monin and Patey. The monograph handles case 3 of the abstract theorem with a self-referential index.
@@ -124,3 +122,55 @@ PA avoidance as a property of problems, with the parameter $D$, follows the chap
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 4.6.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, section *PA avoidance*.
 - B. Monin and L. Patey, *Computability theory*, chapter *Effective forcing*, section *Forcing question*.
+
+:::::exercises
+::::exercise[Cohen forcing relative to a set]{#ex-cohen-pa-avoidance difficulty=2 objective="Apply the abstract PA avoidance theorem to Cohen forcing relativized to $Z$, and add dense sets to make the generic set a solution."}
+Let $Z$ be a set. Cohen forcing relative to $Z$ has the strings as conditions, $\tau \leq \sigma$ if $\tau \succeq \sigma$, and the cylinder $[\sigma]$ as the class of members of $\sigma$. For a $\Sigma^0_1$ sentence $\varphi$ with oracle $Z \oplus G$, let $\sigma \mathrel{?{\vdash}} \varphi$ if some string $\tau \succeq \sigma$ satisfies $\varphi$. Show that this is a $\Sigma^0_1(\{ Z \})$-preserving merging forcing question. Deduce that the problem whose instances are all sets, and whose solutions to an instance $X$ are the sets not computable in $X$, admits PA avoidance.
+
+:::solution
+*Property 1.* If $\tau \succeq \sigma$ satisfies $\varphi$, then $\tau$ extends $\sigma$, and every member of $\tau$ satisfies $\varphi$, by the use principle.
+
+*Property 2.* Suppose that no $\tau \succeq \sigma$ satisfies $\varphi$. If a member $X$ of $\sigma$ satisfied $\varphi$, the prefix of $X$ of length the maximum of $|\sigma|$ and the use of the computation would be a string $\tau \succeq \sigma$ satisfying $\varphi$. So $\sigma$ itself forces $\neg \varphi$.
+
+*Preservation and merging.* For a $\Sigma^0_1$ formula $\varphi(\vec x)$, the relation $\{ \vec m : \exists \tau \succeq \sigma\ \tau \text{ satisfies } \varphi(\vec m) \}$ is $\Sigma^0_1(Z)$, so the question is $\Sigma^0_1(\{ Z \})$-preserving. If $\sigma \mathrel{?{\nvdash}} \varphi_0$ and $\sigma \mathrel{?{\nvdash}} \varphi_1$, the argument of property 2 shows that $\sigma$ forces $\neg \varphi_0$ and $\neg \varphi_1$: the question is merging, with $\sigma$ as the common extension.
+
+*Application.* Let $D \leq_T Z$ with $Z$ not PA relative to $D$, and $X \leq_T Z$ an instance. The class $\mathcal M = \{ Z \}$ contains no set PA relative to $D$, so by :ref{#thm-local-pa-avoidance} every sufficiently generic $G$ has $Z \oplus G$ not PA relative to $D$. For each $e$ such that $\Phi^Z_e$ is total, the set of strings $\sigma$ with $\sigma(x) \neq \Phi^Z_e(x)$ for some $x < |\sigma|$ is dense: extend $\sigma$ by one bit different from $\Phi^Z_e(|\sigma|)$ (by $0$ if this value is not in $\{0, 1\}$). A set $G$ generic for these countably many dense sets as well differs from every total $\Phi^Z_e$, so $G \not\leq_T Z$, and a fortiori $G \not\leq_T X$. So $G$ is a solution to $X$ with $Z \oplus G$ not PA relative to $D$.
+:::
+::::
+
+::::exercise[Countable products]{#ex-pa-countable-product difficulty=1 objective="See that PA avoidance, unlike its preservation under finite products, is not preserved by solving infinitely many instances at once."}
+For a problem $\mathsf P$, let $\mathsf P^\omega$ be the problem whose instances are the sequences $(X_n)_{n \in \nat}$ of instances of $\mathsf P$, coded by $\bigoplus_n X_n$, and whose solutions are the sequences $(Y_n)_{n \in \nat}$, coded by $\bigoplus_n Y_n$, with $Y_n$ a solution to $X_n$ for every $n$. Find a problem $\mathsf P$ that admits strong PA avoidance such that $\mathsf P^\omega$ does not admit PA avoidance. Compare with :ref{#ex-pa-avoidance-product}.
+
+:::solution
+Let $K = \emptyset'$. Let the instances of $\mathsf P$ be the singletons $\{ n \}$, and let the only solution to $\{ n \}$ be the finite set $K \cap [0, n)$. Every solution is finite, hence computable, so $Z \oplus Y \equiv_T Z$ for every set $Z$ and every solution $Y$: $\mathsf P$ admits strong PA avoidance.
+
+The sequence $(\{ n \})_{n \in \nat}$ is a computable instance of $\mathsf P^\omega$. Its only solution is $\bigoplus_n (K \cap [0, n))$, which computes $K$: $m \in K$ if and only if $m$ belongs to the column of index $m + 1$. Since $K$ is PA (fact 2 with $D = \emptyset$), the definition of PA avoidance fails for $\mathsf P^\omega$ with $D = Z = \emptyset$.
+
+In :ref{#ex-pa-avoidance-product} the solutions are added one at a time, and each finite join remains not PA relative to $D$. Here every finite join $\bigoplus_{n < m} Y_n$ is computable; it is the infinite join that is PA. The class of sets that are not PA relative to $D$ is closed under finite steps of this kind, not under unions of increasing sequences.
+:::
+::::
+
+::::exercise[Changing the parameter]{#ex-pa-relative-monotone difficulty=1 objective="Compare PA relative to two sets $D_0 \leq_T D_1$, and see how the parameter $D$ of the definition interacts with the conclusion."}
+Let $D_0 \leq_T D_1$. Show that every set that is PA relative to $D_1$ is PA relative to $D_0$. Deduce that a Turing ideal containing no PA set contains no two sets $X, Y$ with $Y$ PA relative to $X$. Give sets $Z$, $Y$, $D_0 \leq_T D_1 \leq_T Z$ such that $Z \oplus Y$ is not PA relative to $D_1$ but is PA relative to $D_0$.
+
+:::solution
+Let $Y$ be PA relative to $D_1$. By :ref{#thm-pa-characterization} relativized to $D_1$, $Y$ computes a member of every non-empty $\Pi^0_1(D_1)$ class. The class $\mathrm{DNC}_2^{D_0}$ is a non-empty $\Pi^0_1(D_0)$ class (fact 3), hence a $\Pi^0_1(D_1)$ class, since $D_0 \leq_T D_1$. So $Y$ computes a function that is $\mathrm{DNC}_2$ relative to $D_0$.
+
+If a Turing ideal contained $X$ and $Y$ with $Y$ PA relative to $X$, then by the first part with $D_0 = \emptyset$ and $D_1 = X$, $Y$ would be PA. In particular the Turing ideal of :ref{#prop-pa-avoidance-model} (2) contains no such pair.
+
+Let $D_0 = \emptyset$, $D_1 = Z = \emptyset'$ and $Y = \emptyset$. Then $Z \oplus Y \equiv_T \emptyset'$ is not PA relative to $\emptyset'$, and it is PA relative to $\emptyset$ (fact 2). So in :ref{#def-pa-avoidance}, the conclusion for a parameter $D$ becomes weaker as $D$ grows, while the hypothesis on $Z$ becomes weaker too.
+:::
+::::
+
+::::exercise[The oracle of the question must not be PA]{#ex-local-pa-hypothesis difficulty=1 objective="See why the hypothesis that no member of $\mathcal M$ is PA relative to $D$ is needed in the abstract PA avoidance theorem."}
+Let $P$ be a PA set. Consider the conditions $\sigma \in 2^{<\nat}$, ordered by $\tau \leq \sigma$ if $\tau \succeq \sigma$, where the members of $\sigma$ are the sets $P \oplus Y$ with $Y \succeq \sigma$. For a $\Sigma^0_1$ sentence $\varphi$ about $G$, let $\sigma \mathrel{?{\vdash}} \varphi$ if $\varphi$ holds of the finite oracle $(P \uh |\tau|) \oplus \tau$ for some $\tau \succeq \sigma$. Show that this defines a notion of forcing with a $\Sigma^0_1(\{ P \})$-preserving merging forcing question, all of whose generic sets are PA. Which hypothesis of :ref{#thm-local-pa-avoidance} fails, and where does its proof break down?
+
+:::solution
+The class of members of $\sigma$ is the image of the cylinder $[\sigma]$ under the continuous map $Y \mapsto P \oplus Y$, so it is closed and non-empty, and it decreases when $\sigma$ is extended. For refinement, if a member $P \oplus Y$ of $\sigma$ extends a string $\rho$, the string $\tau = Y \uh k$ with $k \geq |\sigma|$ and $2k \geq |\rho|$ extends $\sigma$, and all members $P \oplus Y'$ of $\tau$ extend $(P \oplus Y) \uh 2k$, hence $\rho$.
+
+The two properties of a forcing question and merging are proved as for Cohen forcing (:ref{#ex-cohen-pa-avoidance}): a witness $\tau$ forces $\varphi$ by the use principle, and if there is no witness, $\sigma$ itself forces $\neg \varphi$, and forces $\neg \varphi_0 \wedge \neg \varphi_1$ when both answers are negative. For a formula $\varphi(\vec x)$, the relation $\{ \vec m : \sigma \mathrel{?{\vdash}} \varphi(\vec m) \}$ is $\Sigma^0_1(P)$, so the question is $\Sigma^0_1(\{ P \})$-preserving. Every member of every condition computes $P$, so it is PA.
+
+The hypothesis that fails is that no member of $\mathcal M = \{ P \}$ is PA relative to $D = \emptyset$. The proof breaks down in case 3. Let $\Phi_e$ be a functional that, on an oracle $P' \oplus Y$, computes from $P'$ the $\mathrm{DNC}_2$ function that $P$ computes. Then $U$ is the graph of this function: case 1 fails since its values differ from $J$, case 2 fails since every $x$ has a value, and the $P$-computable function $g$ of case 3 is no contradiction.
+:::
+::::
+:::::

@@ -24,7 +24,7 @@ A K-trivial set is far from random: $K(A \uh n) \leq^+ K(n) \leq^+ 2 \log n$ for
 :::example{#ex-k-trivial}
 1. Every computable set is K-trivial, by :ref{#prop-k-segments-computable}.
 2. Chaitin's number $\Omega$ is not K-trivial: $K(\Omega \uh n) \geq n - c$ by :ref{#thm-omega}, and $n - c > 2\log n + O(1)$ for large $n$. Like a K-trivial set, $\Omega$ is computable in $\emptyset'$; the two notions are at opposite ends of the $\Delta^0_2$ sets.
-3. Sets of small complexity need not be K-trivial. Let $X$ be random and $A = \{ 2^i : i \in X \}$. The prefix $A \uh n$ is computed from $n$ and $X \uh \ell$, where $\ell$ is the number of powers of $2$ below $n$, so $K(A \uh n) \leq^+ K(n) + \ell + 2 \log \ell \leq^+ 4 \log n$ by :ref{#prop-k-basic} (1) and (2), since $\ell \leq \log n + 1$. But $A$ is not K-trivial, as an exercise of the next lesson shows.
+3. Sets of small complexity need not be K-trivial. Let $X$ be random and $A = \{ 2^i : i \in X \}$. The prefix $A \uh n$ is computed from $n$ and $X \uh \ell$, where $\ell$ is the number of powers of $2$ below $n$, so $K(A \uh n) \leq^+ K(n) + \ell + 2 \log \ell \leq^+ 4 \log n$ by :ref{#prop-k-basic} (1) and (2), since $\ell \leq \log n + 1$. But $A$ is not K-trivial, as the next lesson shows with weak truth-table reductions.
 :::
 
 :::proposition{#prop-k-trivial-basic}
@@ -135,7 +135,7 @@ Why are the indices $\beta$ and $\gamma$ written with exactly $k$ bits?
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-ktrivial-computable-lengths difficulty=1 objective="Reduce K-triviality to a bound on the prefixes whose lengths belong to an infinite computable set."}
 Let $S$ be an infinite computable set, and suppose that $K(A \uh n) \leq K(n) + b$ for every $n \in S$. Show that $A$ is K-trivial.
 
 :::solution
@@ -143,7 +143,7 @@ Let $h(n)$ be the $n$-th element of $S$ in increasing order; $h$ is computable a
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-ktrivial-count-lower difficulty=2 objective="Bound from below the number of sets that are K-trivial with a given constant, using finite sets."}
 Show that there is a constant $c'$ such that for every large enough $b$, at least $2^{b - 2 \log b - c'}$ sets are K-trivial with constant $b$. Compare with :ref{#cor-k-trivial-delta2}.
 
 :::hint
@@ -157,7 +157,7 @@ The prefix of length $n$ of $\sigma 0^\infty$ is computed from $\langle \sigma, 
 
 ## Notes and references
 
-Chaitin (1975) proved the counting theorem for prefix-free complexity, in the form "at most $2^{n - r + O(1)}$ strings of length $n$ have $K(\sigma) \leq n + K(n) - r$", of which :ref{#thm-k-trivial-count} is the case $r = n - b$. Chaitin (1977) proved that K-trivial sets are $\Delta^0_2$; Nies attributes this result, and the finiteness of the classes $[T_b]$, to Chaitin (1976), while Downey and Hirschfeldt attribute the bound $O(2^b)$ on the number of sets that are K-trivial with constant $b$ to Zambella (1990). The lower bound of the second exercise and the finer estimates of the function $b \mapsto |[T_b]|$ are due to Downey, Miller and Yu (Downey and Hirschfeldt, Section 11.1.4). A non-computable K-trivial set was first built by Solovay (1975), in an unpublished manuscript; the lesson on cost functions gives the cost function form of the construction. The closure under join is due to Downey, Hirschfeldt, Nies and Stephan (2003).
+Chaitin (1975) proved the counting theorem for prefix-free complexity, in the form "at most $2^{n - r + O(1)}$ strings of length $n$ have $K(\sigma) \leq n + K(n) - r$", of which :ref{#thm-k-trivial-count} is the case $r = n - b$. Chaitin (1977) proved that K-trivial sets are $\Delta^0_2$; Nies attributes this result, and the finiteness of the classes $[T_b]$, to Chaitin (1976), while Downey and Hirschfeldt attribute the bound $O(2^b)$ on the number of sets that are K-trivial with constant $b$ to Zambella (1990). The lower bound of :ref{#ex-ktrivial-count-lower} and the finer estimates of the function $b \mapsto |[T_b]|$ are due to Downey, Miller and Yu (Downey and Hirschfeldt, Section 11.1.4). A non-computable K-trivial set was first built by Solovay (1975), in an unpublished manuscript; the lesson on cost functions gives the cost function form of the construction. The closure under join is due to Downey, Hirschfeldt, Nies and Stephan (2003).
 
 The basic facts of the lesson are in Nies, *Computability and Randomness*, Section 5.2 (Definition 5.2.1, Theorems 5.2.4 and 5.2.17), with the counting theorem as Theorem 2.2.26, and in Downey and Hirschfeldt, *Algorithmic Randomness and Complexity*, Section 11.1 (Theorems 11.1.1 and 11.1.3, Proposition 11.1.4, Theorems 11.1.10 and 11.1.11), with the counting theorem as Theorem 3.7.6.
 
@@ -168,3 +168,70 @@ The basic facts of the lesson are in Nies, *Computability and Randomness*, Secti
 - R. G. Downey, D. R. Hirschfeldt, A. Nies and F. Stephan, *Trivial reals*, in: Proceedings of the 7th and 8th Asian Logic Conferences, 2003, 103–131.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 2.2 and 5.2.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 3.7 and 11.1.
+
+:::::exercises
+::::exercise{#ex-ktrivial-constants-unbounded difficulty=1 objective="Derive from the counting theorem that the constants of K-triviality of computable sets are unbounded."}
+Show that for every $b$ there is a finite set that is not K-trivial with constant $b$. Deduce that no constant $b$ works for all computable sets at once.
+
+:::solution
+Let $c$ be as in :ref{#thm-k-trivial-count} and $N = 2^{b + c}$. The sets $\{0\}, \{1\}, \dots, \{N - 1\}$ are $N$ pairwise distinct finite sets. By :ref{#cor-k-trivial-delta2}, fewer than $N$ sets are K-trivial with constant $b$, so one of them is not. Finite sets are computable, so no single $b$ is a constant of K-triviality for every computable set, although each computable set has some constant by :ref{#prop-k-trivial-basic}.
+:::
+::::
+
+::::exercise[Prefixing a string]{#ex-ktrivial-shift difficulty=1 objective="Track the constant of K-triviality when a finite string is placed in front of a set."}
+For a string $\rho$ and a set $A$, let $\rho A$ be the set whose characteristic sequence is $\rho$ followed by the characteristic sequence of $A$: $(\rho A)(i) = \rho(i)$ for $i < |\rho|$ and $(\rho A)(i) = A(i - |\rho|)$ for $i \geq |\rho|$. Show that there is a constant $r$ such that, for every string $\rho$ and every set $A$ that is K-trivial with constant $b$, the set $\rho A$ is K-trivial with constant $b + 2K(\rho) + r$. Show that, conversely, if $\rho A$ is K-trivial, then so is $A$.
+
+:::solution
+By :ref{#prop-k-basic} (1), composed with computable maps on pairs, there is $r_1$ such that $K(\rho \uh n) \leq K(\rho) + K(n) + r_1$, $K(\rho\sigma) \leq K(\rho) + K(\sigma) + r_1$ and $K(n - |\rho|) \leq K(\rho) + K(n) + r_1$ (for $n \geq |\rho|$), for all strings $\rho, \sigma$ and numbers $n$: in each case the left-hand string is computed from the pair $\langle \rho, \sigma \rangle$ or $\langle \rho, n \rangle$ by a fixed computable function. Note that $b \geq 0$, since $A \uh 0$ and the number $0$ are both the empty string.
+
+If $n < |\rho|$, then $(\rho A) \uh n = \rho \uh n$, so $K((\rho A) \uh n) \leq K(\rho) + K(n) + r_1$. If $n \geq |\rho|$, let $m = n - |\rho|$; then $(\rho A) \uh n = \rho\, (A \uh m)$, and
+$$
+\begin{aligned}
+K((\rho A) \uh n) &\leq K(\rho) + K(A \uh m) + r_1 \leq K(\rho) + K(m) + b + r_1 \\
+&\leq 2K(\rho) + K(n) + b + 2r_1.
+\end{aligned}
+$$
+In both cases $K((\rho A) \uh n) \leq K(n) + b + 2K(\rho) + 2r_1$, and $r = 2r_1$ works.
+
+Conversely, for fixed $\rho$, the map deleting the first $|\rho|$ bits of a string is computable, and sends $(\rho A) \uh (m + |\rho|)$ to $A \uh m$. So $K(A \uh m) \leq^+ K((\rho A) \uh (m + |\rho|)) \leq^+ K(m + |\rho|) \leq^+ K(m)$, with constants depending on $\rho$. (Adapted from Nies 2009, Exercise 5.2.14.)
+:::
+::::
+
+::::exercise[Joins of several sets]{#ex-ktrivial-multi-join difficulty=2 objective="Extend the proof of the closure under join to finitely many sets described with a single description of the length."}
+Let $k \geq 1$, and let $A_0, \dots, A_{k-1}$ be K-trivial sets. Their join is $\bigoplus_{i < k} A_i = \{ kn + i : i < k,\ n \in A_i \}$. Show directly, by a single prefix-free machine as in the proof of :ref{#prop-k-trivial-join}, that $\bigoplus_{i < k} A_i$ is K-trivial.
+
+:::solution
+Let $b$ be a common constant, $c$ as in :ref{#thm-k-trivial-count}, and $\ell = b + c$. For $\tau$ in the domain of $U$ with $U(\tau) = n$, let $S_\tau$ be the list, in order of enumeration, of the strings $\sigma$ of length $n$ with $K(\sigma) \leq |\tau| + b$. If $\tau$ is a shortest description of $n$, the list has fewer than $2^\ell$ elements and contains $A_i \uh n$ for every $i < k$.
+
+Let $M$ be the machine that, on input $\tau \beta_0 \cdots \beta_{k-1}$ with $\tau \in \dom U$ and $|\beta_i| = \ell$ for each $i$, reads $\beta_i$ as a number $j_i < 2^\ell$, waits for the $j_i$-th element $\sigma_i$ of $S_\tau$ for each $i$, and outputs the string $\pi$ of length $kn$ with $\pi(kq + i) = \sigma_i(q)$ for $q < n$ and $i < k$. Once $\tau$ is read, $M$ knows that exactly $k\ell$ more bits follow, so its domain is prefix-free. With $\tau$ a shortest description of $n$ and $\beta_i$ the position of $A_i \uh n$ in the list, $M$ outputs $(\bigoplus_{i<k} A_i) \uh kn$. So $K((\bigoplus_{i<k} A_i) \uh kn) \leq^+ K(n) + k\ell$.
+
+For an arbitrary $m$, let $n = \lceil m/k \rceil$ and $r = kn - m < k$. The prefix of length $m$ is obtained from the prefix of length $kn$ by deleting its last $r$ bits. For each $r < k$ this is a computable map, so, with the largest of these $k$ constants, $K((\bigoplus A_i) \uh m) \leq^+ K((\bigoplus A_i) \uh kn) \leq^+ K(n) \leq^+ K(m)$, since $n$ is computed from $m$.
+:::
+::::
+
+::::exercise[Sums of K-trivial reals]{#ex-ktrivial-sum difficulty=2 objective="Use the closure under join and a bounded number of candidates to show that the sum of two K-trivial reals is K-trivial."}
+For a set $X$, let $0.X = \sum_i X(i)\, 2^{-i-1} \in [0, 1]$. Let $A$ and $B$ be K-trivial with $0.A + 0.B < 1$, and let $C$ be a set with $0.C = 0.A + 0.B$. Show that $C$ is K-trivial.
+
+:::solution
+For a string $\sigma$ of length $n$, let $v(\sigma) = \sum_{i < n} \sigma(i)\, 2^{n - 1 - i}$, the number of which $\sigma$ is the binary expansion with $n$ digits. Since the tail $\sum_{i \geq n} X(i)\, 2^{-i-1}$ lies in $[0, 2^{-n}]$, every set $X$ satisfies $v(X \uh n)\, 2^{-n} \leq 0.X \leq (v(X \uh n) + 1)\, 2^{-n}$.
+
+Fix $n$, and let $a = v(A \uh n)$, $a' = v(B \uh n)$ and $w = v(C \uh n)$. Adding the inequalities for $A$ and $B$ gives $(a + a')\, 2^{-n} \leq 0.C \leq (a + a' + 2)\, 2^{-n}$. With the inequalities for $C$, $w\, 2^{-n} \leq (a + a' + 2)\, 2^{-n}$ and $(w + 1)\, 2^{-n} \geq (a + a')\, 2^{-n}$, so $w = a + a' + j - 1$ for some $j \in \{0, 1, 2, 3\}$.
+
+Let $M$ be the machine that, on input $\tau \beta$ with $\tau \in \dom U$ and $|\beta| = 2$, computes $\pi = U(\tau)$; if $|\pi| = 2n$ is even, it writes $\pi = \sigma \oplus \sigma'$ with $|\sigma| = |\sigma'| = n$, reads $\beta$ as a number $j < 4$, and outputs the string of length $n$ with value $v(\sigma) + v(\sigma') + j - 1$, if this value lies in $[0, 2^n)$. Its domain is contained in $\{ \tau\beta : \tau \in \dom U, |\beta| = 2 \}$, which is prefix-free. Taking for $\tau$ a shortest description of $(A \oplus B) \uh 2n$ and the right $\beta$, $M$ outputs $C \uh n$. So
+$$
+K(C \uh n) \leq^+ K((A \oplus B) \uh 2n) \leq^+ K(2n) \leq^+ K(n),
+$$
+since $A \oplus B$ is K-trivial by :ref{#prop-k-trivial-join}, and $2n$ is computed from $n$. (Adapted from Nies 2009, Exercise 5.2.19.)
+:::
+::::
+
+::::exercise[Plain complexity of K-trivial sets]{#ex-ktrivial-plain difficulty=1 objective="Compare K-triviality with the condition on plain complexity in Chaitin's theorem."}
+Show that every K-trivial set $A$ satisfies $C(A \uh n) \leq C(n) + 2 \log C(n) + O(1)$. Admitting that there are non-computable K-trivial sets (this is proved in the lesson on cost functions), show that the term $2 \log C(n)$ cannot be replaced by a constant.
+
+:::solution
+By :ref{#prop-k-basic} (3), $C \leq^+ K$ and $K(n) \leq^+ C(n) + 2 \log C(n)$. So $C(A \uh n) \leq^+ K(A \uh n) \leq^+ K(n) \leq^+ C(n) + 2 \log C(n)$.
+
+If the inequality held with a constant in place of $2 \log C(n)$ for every K-trivial set, then every K-trivial set would satisfy $C(A \uh n) \leq^+ C(n)$, hence be computable by :ref{#thm-chaitin-computable}. This contradicts the existence of a non-computable K-trivial set. So K-triviality is a strictly weaker condition than its analogue for $C$, and the difference lies in the logarithmic gap between $K(n)$ and $C(n)$.
+:::
+::::
+:::::

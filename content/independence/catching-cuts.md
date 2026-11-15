@@ -1,7 +1,7 @@
 ---
 title: Catching a semiregular cut
 summary: Between a and F_ν(a), for ν non-standard, a countable model of IΣ₁ contains a semiregular cut, hence a cut satisfying IΣ₁ (Kirby and Paris); the proof is a construction by finite extensions along a decreasing index.
-duration: 25
+duration: 30
 prerequisites: [fast-growing, cuts-and-extensions/semiregular-cuts]
 ---
 
@@ -67,6 +67,16 @@ Where is it used that $\nu$ is non-standard?
   The pigeonhole principle holds in $M$ for all elements.
 :::
 
+## Exercises
+
+::::exercise{#ex-two-semiregular-cuts difficulty=2 objective="Apply the theorem inside the pieces of the decomposition of $F_\nu(a)$ to find several semiregular cuts in the same interval."}
+Let $M$ be a countable model of $\mathrm I\Sigma_1$, $a \geq 2$ in $M$, and $\nu \in M$ non-standard with $F_\nu(a){\downarrow}$. Show that there are two distinct semiregular cuts $I_0 \subsetneq I_1$ of $M$ that contain $a$ and not $F_\nu(a)$.
+
+:::solution
+By item 3 of :ref{#fact-fgh-formal} and :ref{#lem-fgh-isigma1}, there is a strictly increasing coded sequence $t$ of length $a + 1$ with $(t)_0 = a + 1$, $(t)_{j+1} = F_{\nu-1}((t)_j)$ for $j < a$, and $(t)_a = F_\nu(a)$, as in the proof of :ref{#thm-kirby-paris-cut}. The index $\nu - 1$ is non-standard, and $(t)_0, (t)_1 \geq 1$. Apply :ref{#thm-kirby-paris-cut} to $(t)_0$ and $\nu - 1$: there is a semiregular cut $I_0$ with $(t)_0 \in I_0$ and $(t)_1 = F_{\nu-1}((t)_0) \notin I_0$. Apply it to $(t)_1$ and $\nu - 1$: there is a semiregular cut $I_1$ with $(t)_1 \in I_1$ and $(t)_2 \notin I_1$. Both contain $a < (t)_0 < (t)_1$. Since $a \geq 2$, $(t)_2 \leq (t)_a = F_\nu(a)$, so $F_\nu(a) \notin I_1$, and $F_\nu(a) \notin I_0$ since $(t)_1 < F_\nu(a)$. Finally $(t)_1 \in I_1 \setminus I_0$; as cuts are linearly ordered by inclusion, $I_0 \subsetneq I_1$.
+:::
+::::
+
 ## Notes and references
 
 :ref{#thm-kirby-paris-cut} is due to Kirby and Paris (1977). The proof follows Wong's proof of his Theorem 5.6, with two changes: the index is lowered at each stage instead of being obtained by a new overspill, which avoids the monotonicity of the hierarchy in its index inside the model (a statement whose proof would need $\Pi_2$ induction), and the pieces are chosen with left end above $r_k$, so that the left ends increase strictly. Hájek and Pudlák obtain the same cuts through the indicators of their Chapter IV, Section 3.
@@ -74,3 +84,39 @@ Where is it used that $\nu$ is non-standard?
 - L. A. S. Kirby and J. B. Paris, *Initial segments of models of Peano's axioms*, in Set Theory and Hierarchy Theory V, Lecture Notes in Mathematics 619, Springer, 1977, 211–226.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 5.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 3.
+
+:::::exercises
+::::exercise{#ex-catching-left-ends difficulty=1 objective="See why the pieces are chosen with left end above $r_k$, by dropping this condition."}
+Consider a variant of the proof of :ref{#thm-kirby-paris-cut} in which the pieces at stage $k$ may start at $r_k$ itself, so that only $r_k \leq r_{k+1}$ is guaranteed. Show that if the sequence $(r_k)$ is eventually constant, the set $I = \{ x : x < r_k \text{ for some } k \}$ is not a cut. Which step of the actual proof excludes this?
+
+:::solution
+Suppose $r_k = r$ for all $k \geq k_0$. Since $(r_k)$ is non-decreasing, $r_k \leq r$ for every $k$, so $I = \{ x : x < r \}$. As $a \geq 1$ and $r \geq a$, $r - 1 \in I$ while $(r - 1) + 1 = r \notin I$: $I$ is not closed under successor. In the proof, the pieces lie in $[r_k + 1, s_k)$, since $(t)_0 = r_k + 1$; so $r_{k+1} = (t)_i \geq r_k + 1$, and the left ends increase strictly.
+:::
+::::
+
+::::exercise{#ex-catching-countable-family difficulty=1 objective="Locate the use of countability in the construction, by running it for a countable family of coded functions in an arbitrary model."}
+Let $M$ be a model of $\mathrm I\Sigma_1$ of any cardinality, $a \geq 1$ in $M$, $\nu \in M$ non-standard with $F_\nu(a){\downarrow}$, and $\mathcal C$ a countable set of coded functions of $M$. Show that there is a cut $I$ with $a \in I$ and $F_\nu(a) \notin I$ such that, for every $f \in \mathcal C$ whose domain is in $I$, the values of $f$ in $I$ are bounded in $I$.
+
+:::solution
+We may assume $\mathcal C$ nonempty, adding a function if needed. Let $(f_k)_{k \in \nat}$ enumerate $\mathcal C$ with each member repeated infinitely often, and run the construction of the proof of :ref{#thm-kirby-paris-cut} with this sequence. Each stage only uses that $f_k$ is a coded function of $M$, and the facts on the cut $I$ (initial segment, closed under successor, $a \in I$, no $s_j$ in $I$) do not depend on the enumeration. The argument of the paragraph on semiregularity applies to each $f \in \mathcal C$ with domain in $I$, since $f = f_k$ for infinitely many $k$. Countability of $M$ was used only to enumerate all coded functions.
+:::
+::::
+
+::::exercise[The Kirby–Paris theorem without indicators]{#ex-catching-direct-kp difficulty=2 objective="Read the unprovability of the totality of the hierarchy directly off the cut, when the index lies in the cut." lessons="fast-growing"}
+Let $M$ be a countable model of $\mathrm I\Sigma_1$, $a \geq 1$ in $M$, and $\nu \leq a$ non-standard with $F_\nu(a){\downarrow}$; let $I$ be the cut given by :ref{#thm-kirby-paris-cut}. Show that $I \models \neg \exists y\ F_\nu(a) = y$. Deduce, using a countable non-standard model of the theory of $\nat$, that $\mathrm I\Sigma_1$ does not prove $\forall k\ \forall x\ F_k(x){\downarrow}$.
+
+:::solution
+Since $\nu \leq a \in I$, the parameters $\nu$ and $a$ are in $I$. Suppose $I \models F_\nu(a) = z$ with $z \in I$. The formula $\mathrm{It}(\nu, 1, a, z)$ is $\Sigma_1$, so it holds in $M$ (:ref{#cor-sigma1-upward}), and functionality in $M$ (:ref{#fact-fgh-formal}) gives $z = F_\nu(a) \notin I$: a contradiction.
+
+The sentence $\forall k\ \forall x\ F_k(x){\downarrow}$ is true in $\nat$, since $\mathrm{It}$ defines the functions $F_k$ there. Let $M$ be a countable non-standard model of the theory of $\nat$, given by compactness and the Löwenheim–Skolem theorem; it satisfies $\mathrm I\Sigma_1$ and the sentence. Choose $a$ non-standard and $\nu = a$; then $F_\nu(a){\downarrow}$ in $M$. The cut $I$ satisfies $\mathrm I\Sigma_1$ and, by the first part, not the sentence. So $\mathrm I\Sigma_1$ does not prove it. The next lesson obtains the same result from the general theorem on indicators.
+:::
+::::
+
+::::exercise{#ex-catching-dominates difficulty=1 objective="Derive from the theorem a comparison of $F_\nu(a)$ with the standard levels of the hierarchy, without monotonicity in the index inside the model." lessons="fast-growing"}
+Let $M$ be a countable model of $\mathrm I\Sigma_1$, $a \geq 1$ in $M$, and $\nu$ non-standard with $F_\nu(a){\downarrow}$. Show that $F_k(a) < F_\nu(a)$ for every standard $k$.
+
+:::solution
+Let $I$ be the cut of :ref{#thm-kirby-paris-cut}: $a \in I$, $F_\nu(a) \notin I$ and $I \models \mathrm I\Sigma_1$. For standard $k$, $I \models F_k(a) = z$ for some $z \in I$, by :ref{#lem-fgh-isigma1}; this $\Sigma_1$ fact goes up to $M$ (:ref{#cor-sigma1-upward}), and functionality in $M$ gives $z = F_k(a)$. So $F_k(a) \in I$, and since $I$ is an initial segment not containing $F_\nu(a)$, $F_k(a) < F_\nu(a)$. No comparison of $F_k$ and $F_\nu$ inside $M$ was used.
+:::
+::::
+:::::

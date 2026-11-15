@@ -96,11 +96,40 @@ After the course, a student can:
 
 ## 10. Open points
 
-- **Lesson lengths.** With the word-count rule (words / 55), oracle-computation (≈3050 words) and finite-extensions (≈3040) come out at 55 minutes, above the 45-minute target; limit-computability is at 50. Possible further split: move 1-generic sets out of finite-extensions into a lesson with generic lowness; this would change lesson-level prerequisites in `degree-structure/embeddings.md`, `cohen-genericity` and `randomness-notions`.
+- **Lesson lengths.** Without the further exercises, oracle-computation (≈2900 words) and finite-extensions (≈2900) still come out at about 53 minutes with the word-count rule, and limit-computability at about 48; their durations are set to the 45-minute maximum (2026-11-13). Possible further split: move 1-generic sets out of finite-extensions into a lesson with generic lowness; this would change lesson-level prerequisites in `degree-structure/embeddings.md`, `cohen-genericity` and `randomness-notions`.
 - The low splitting (two low c.e. sets joining to ∅′) is admitted; `ce-degrees/sacks-splitting` proves the splitting without lowness.
 - Journal version of Lutz–Siskind to confirm.
 - A figure for the forward direction of the limit lemma (approximations of ∅′ and the use) could be added.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. The featured exercises stay in the text, after the material they practice; the others form the block of further exercises at the end of each lesson, outside the reading time.
+
+**Featured exercises, and why.**
+
+- oracle-computation: `ex-total-functional-use-bound` (computable bound on the use of a functional total on all oracles): the first compactness argument of the track, reused in the course on Π⁰₁ classes.
+- relativization: `ex-relativized-rice` (a relativized proof done by the reader) and `ex-union-uniform` (uniform versus oracle-by-oracle computability, the distinction the lesson is about).
+- turing-reducibility: `ex-turing-iff-join-ce` (≤_T through relative enumerability, used later for jumps) and `ex-principal-function-degree` (function oracles, cited by the relativization lesson).
+- turing-jump: `ex-jump-one-one` (the converse of monotonicity for ≤_1, cited in the text) and `ex-jump-of-join` (the jump does not commute with the join).
+- limit-computability: `ex-dce-limit` (the simplest approximations with bounded mind changes) and `ex-bounded-changes-use` (mind changes versus use, the link between approximations and reductions).
+- finite-extensions: `ex-independent-sequence` (Kleene–Post for infinitely many sets, cited in the lesson on Turing reducibility).
+- low-and-high: `ex-generic-gl1` (1-generic sets are exactly GL₁ in the sense of the definition) and `ex-coding-into-jump` (the high construction with an arbitrary set coded into the limit).
+
+**Further exercises, lesson by lesson.**
+
+- oracle-computation: computing with a finite oracle on an example; domains of functionals are unions of cylinders (no functional detects finiteness or infiniteness); convergence with a finite oracle is c.e. and not computable; the prefix-free set of minimal oracles of a computation; the hypothesis "total on every oracle" in the use bound; the use is computable from the oracle.
+- relativization: computable oracles add nothing; relativized diagonal argument against total functions; a uniform enumeration of non-empty X-c.e. sets by a search; relativized selection is not computable (contrast with SMN); graph versus region below the graph as function oracles.
+- turing-reducibility: monotonicity of the join; every non-zero degree contains a set neither c.e. nor co-c.e.; strict upper bounds for sequences of degrees; uncountably many degrees above every degree; the coding of a sequence is not an operation on degrees unless it is uniform.
+- turing-jump: X from X′ uniformly; Tot-like index sets (emptiness, finiteness); variants of X′ that are 1-equivalent to it; uniform monotonicity of the jump; the diagonal set of `prop-degree-countable` is below W′; Cof below ∅‴; ∅^(ω) above all ∅^(n).
+- limit-computability: the modulus of ∅′ escapes computable functions; closure of Δ⁰₂ approximations; the limit lemma for functions; bounded use gives bounded mind changes (ω-c.e. sets); a Δ⁰₂ approximation of ∅ whose modulus computes ∅′; a co-d.c.e. set that is not d.c.e.; modulus and computation function of a c.e. approximation.
+- finite-extensions: upper bounds of sequences of degrees; complements of 1-generic sets; examples of dense sets; sets computed by every non-computable set; why 1-genericity quantifies over c.e. sets only; the even part of a 1-generic set is 1-generic; cone avoidance below C′ by e-splittings (difficulty 3).
+- low-and-high: lowness through the limit lemma; closure properties of low and high sets; no GL₁ set computes ∅′; relative 1-genericity and a set G with A ⊕ G low for low A; the high cone-avoiding set can be computed in ∅″.
+
+**Sources.** Soare 2016: Exercise 3.3.21 (`ex-relativized-selection`), Exercise 3.4.7 (`ex-coding-not-invariant`), Theorem 3.8.8 and Exercise 3.8.16 (`ex-bounded-use-changes`, `ex-co-dce`), Theorem 6.2.6 (`ex-cone-avoidance-jump`); Downey–Hirschfeldt 2010, Corollary 2.6.2 (ω-c.e. sets); Nies 2009, Exercise 1.4.7 (`ex-limit-lemma-functions`); Monin–Patey, section on high degrees (`ex-coding-into-jump`). The other exercises are standard consequences of the lessons. Checked against other courses to avoid duplicates: the halves of a 1-generic set (incomparability) and 2-generic sets are in `cohen-genericity`, the uniform fixed point theorem without oracle in `fundamentals`, completeness of Cof in `arithmetic-hierarchy`, open and closed classes in `pi01-classes`.
+
+**Dropped.** A Δ⁰₂ approximation of a non-computable set whose least correct stage (without the condition c(x) ≥ x) is computably bounded (Soare 2016, Exercise 3.5.6): no short complete solution was written; the remark after `thm-computation-function` already explains the role of the condition.
+
+## 12. History
 
 - **2026-11-12.** Design revision. Split the first lesson: new lesson `relativization` (relativization principle with a worked example, uniformity, universal function and SMN theorem, function oracles, relativized Rice exercise, a non-uniformity exercise). New examples: `ex-functionals`, `ex-relative-computability`, `ex-relativized-complementation`, `ex-turing-reductions`, `ex-jumps`, `ex-delta2-approximations`, `ex-modulus-computation`, `ex-1-generic`; new quiz question on continuity; new exercises (X ≤_T Y iff X′ ≤_1 Y′; relativized Rice; non-uniformity). Five new figures (join, first jumps, frames, Kleene–Post steps, conditions of the high construction) generated by `scripts/figures/turing-degrees.py`. The theorem `thm-computation-function` is no longer called "Martin–Miller theorem" (not a standard name); it is attributed to Miller and Martin (1968) with Soare Theorem 5.6.6. References checked against Soare, Downey–Hirschfeldt, Nies and Monin–Patey; sources added to every lesson; the cone avoidance note now cites Sacks and de Leeuw–Moore–Shannon–Shapiro precisely; generic lowness credited to Jockusch (1980) with Soare's Jockusch–Posner attribution noted. Notes on Martin's conjecture added to the jump lesson. Durations recomputed. The prerequisite of finite-extensions now points to `countability/requirements`, after the split of the countability course.
+- **2026-11-13.** Featured and further exercises: labels, objectives and difficulties for the 21 existing exercises; 12 kept in the text as featured exercises, placed after the material they practice, the others moved to a block of further exercises at the end of each lesson; 33 new further exercises (sources in section 11). Durations recomputed without the further exercises (oracle-computation, limit-computability and finite-extensions set to the 45-minute maximum). The lesson `relativization` now has `fundamentals/rice-theorem` as a prerequisite, since its featured exercise relativizes Rice's theorem.

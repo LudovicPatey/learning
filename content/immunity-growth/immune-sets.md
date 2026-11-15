@@ -110,6 +110,14 @@ In the proof of ($\Leftarrow$), where is the disjointness of the sets $F_n$ used
   $A$ is infinite by hypothesis.
 :::
 
+::::exercise{#ex-hyperimmune-intervals difficulty=1 objective="Recast hyperimmunity with arrays of consecutive intervals given by a computable function."}
+Show that an infinite set $A$ is hyperimmune if and only if, for every strictly increasing computable function $f$, there is $n$ such that $A \cap [f(n), f(n+1)) = \emptyset$.
+
+:::solution
+If $A$ is hyperimmune, the intervals $[f(n), f(n+1))$ form a disjoint strong array, so one of them misses $A$. Conversely, suppose that the condition holds, and let $g$ be computable. Let $h(x) = g(x) + x + 1$ and $f(n) = h^{(n)}(0)$, which is strictly increasing and computable. Some interval $[f(n), f(n+1))$ misses $A$, and as in the proof of :ref{#thm-hyperimmune-principal}, $p_A(f(n)) > g(f(n))$. So no computable function dominates $p_A$, and $A$ is hyperimmune.
+:::
+::::
+
 ## Hyperimmune degrees
 
 The principal function turns hyperimmune sets into hyperimmune functions. The converse direction requires a little care, since a function computable from $X$ must be turned into a set of the same degree as $X$ whose principal function is at least as large.
@@ -124,17 +132,7 @@ A hyperimmune set $A \leq_T X$ gives the hyperimmune function $p_A \leq_T X$, by
 
 Being of hyperimmune degree is therefore a property of strength, closed upward under Turing reducibility: if $X$ computes a hyperimmune function, so does every set that computes $X$. By :ref{#thm-computation-function}, every non-computable $\Delta^0_2$ set has hyperimmune degree, since its computation function is dominated by no computable function. The opposite property, being **computably dominated** (:ref{#def-computably-dominated}), is a property of weakness; it is studied in :ref{to="immunity-growth/computably-dominated"}.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that an infinite set $A$ is hyperimmune if and only if, for every strictly increasing computable function $f$, there is $n$ such that $A \cap [f(n), f(n+1)) = \emptyset$.
-
-:::solution
-If $A$ is hyperimmune, the intervals $[f(n), f(n+1))$ form a disjoint strong array, so one of them misses $A$. Conversely, suppose that the condition holds, and let $g$ be computable. Let $h(x) = g(x) + x + 1$ and $f(n) = h^{(n)}(0)$, which is strictly increasing and computable. Some interval $[f(n), f(n+1))$ misses $A$, and as in the proof of :ref{#thm-hyperimmune-principal}, $p_A(f(n)) > g(f(n))$. So no computable function dominates $p_A$, and $A$ is hyperimmune.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-hyperimmune-degree-agreement difficulty=2 objective="Characterize the hyperimmune degrees by functions that agree infinitely often with every computable function."}
 Show that a set $X$ has hyperimmune degree if and only if $X$ computes a function $h$ such that every computable function is equal to $h$ at infinitely many points.
 
 :::hint
@@ -148,14 +146,6 @@ Conversely, let $f \leq_T X$ be hyperimmune and $F(n) = \max_{m \leq n} f(m)$. F
 :::
 ::::
 
-::::exercise{difficulty=1}
-Show that every infinite subset of a hyperimmune set is hyperimmune, and that a set containing a hyperimmune set need not be immune.
-
-:::solution
-If $B \subseteq A$ is infinite and $(F_n)$ is a disjoint strong array meeting $B$ at every $n$, it meets $A$ at every $n$. For the second statement, let $A$ be hyperimmune, for instance a hyperimmune set of the degree of $\emptyset'$ given by :ref{#cor-hyperimmune-degree}, and let $A_0 = \{ 2n : n \in A \}$. Then $p_{A_0}(n) = 2 p_A(n) \geq p_A(n)$, so $p_{A_0}$ is hyperimmune and $A_0$ is hyperimmune by :ref{#thm-hyperimmune-principal}. The set $A_0 \cup \{ 2n + 1 : n \in \nat \}$ contains $A_0$ and the infinite computable set of odd numbers, so it is not immune.
-:::
-::::
-
 ## Notes and references
 
 Immune and simple sets were introduced by Post (1944), who also defined hypersimple and hyperhypersimple sets. The characterization of hyperimmune sets through principal functions is due to Kuznecov, Medvedev and Uspenskii (Soare 2016, Theorem 5.3.3), and the study of hyperimmune degrees to Miller and Martin (1968). Soare treats arrays, hyperimmune sets and dominating functions in Section 5.3 of his book, and hyperimmune degrees in Section 5.6. Monin and Patey cover the same material in the sections *Immune sets* and *Hyperimmune functions* of their chapter *Immunity and function growth*.
@@ -165,3 +155,57 @@ Immune and simple sets were introduced by Post (1944), who also defined hypersim
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 5.3 and 5.6.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.17.
 - B. Monin and L. Patey, *Computability theory*, chapter *Immunity and function growth*.
+
+:::::exercises
+::::exercise{#ex-hyperimmune-subsets difficulty=1 objective="Check that hyperimmunity passes to infinite subsets, and that a superset of a hyperimmune set need not be immune."}
+Show that every infinite subset of a hyperimmune set is hyperimmune, and that a set containing a hyperimmune set need not be immune.
+
+:::solution
+If $B \subseteq A$ is infinite and $(F_n)$ is a disjoint strong array meeting $B$ at every $n$, it meets $A$ at every $n$. For the second statement, let $A$ be hyperimmune, for instance a hyperimmune set of the degree of $\emptyset'$ given by :ref{#cor-hyperimmune-degree}, and let $A_0 = \{ 2n : n \in A \}$. Then $p_{A_0}(n) = 2 p_A(n) \geq p_A(n)$, so $p_{A_0}$ is hyperimmune and $A_0$ is hyperimmune by :ref{#thm-hyperimmune-principal}. The set $A_0 \cup \{ 2n + 1 : n \in \nat \}$ contains $A_0$ and the infinite computable set of odd numbers, so it is not immune.
+:::
+::::
+
+::::exercise{#ex-immune-injective-image difficulty=1 objective="Transport immunity along a computable injection, and see why injectivity is needed."}
+Let $A$ be immune and $f$ a total computable injective function. Show that $f[A] = \{ f(x) : x \in A \}$ is immune. Show that the conclusion may fail, even with $f[A]$ infinite, if $f$ is computable but not injective.
+
+:::solution
+The set $f[A]$ is infinite, since $A$ is infinite and $f$ is injective. Suppose that $W \subseteq f[A]$ is an infinite c.e. set, and let $V = \{ x : f(x) \in W \}$. It is c.e.: $x \in V$ as soon as $f(x)$ appears in the enumeration of $W$. It is contained in $A$: if $f(x) \in W \subseteq f[A]$, then $f(x) = f(y)$ for some $y \in A$, and $x = y$ by injectivity. It is infinite: every element of $W$ is of the form $f(x)$, with $x \in V$, and distinct elements of $W$ have distinct preimages. So $V$ is an infinite c.e. subset of $A$, a contradiction.
+
+For the second statement, let $X$ be non-computable and $B$ the set of prefixes of $X$, which is immune by :ref{#prop-immune-every-degree}. The function $f(\sigma) = |\sigma|$, read through the coding of strings by integers, is computable and not injective, and $f[B] = \nat$, since $X$ has a prefix of each length. The set $\nat$ is not immune.
+:::
+::::
+
+::::exercise{#ex-running-maximum difficulty=2 objective="Compare a function with its running maximum and with its compositions, from the point of view of domination."}
+For $f : \nat \to \nat$, let $\hat f(n) = \max_{m \leq n} f(m)$.
+
+1. Show that $f$ is hyperimmune if and only if $\hat f$ is hyperimmune.
+2. Let $g$ be a strictly increasing computable function. Show that $\hat f \circ g$ is hyperimmune whenever $f$ is. Give a hyperimmune function $f$ such that $f \circ g$ is not hyperimmune, for $g(n) = 2n$.
+
+:::solution
+1. A function above a hyperimmune function is hyperimmune, since a computable function dominating the larger one dominates the smaller one. If $f$ is hyperimmune, then $\hat f \geq f$ is hyperimmune. Conversely, suppose that a computable function $h$ dominates $f$. Then $\hat h$ is computable, and $\hat h(n) \geq h(m) \geq f(m)$ for every $m \leq n$, so $\hat h$ dominates $\hat f$. Hence if $\hat f$ is hyperimmune, so is $f$.
+2. Since $g$ is strictly increasing, $g(n) \geq n$, and since $\hat f$ is non-decreasing, $\hat f(g(n)) \geq \hat f(n)$ for every $n$. So $\hat f \circ g \geq \hat f$, which is hyperimmune by 1.
+
+   For the example, let $h$ be a hyperimmune function; there is one, for instance computable in $\emptyset'$, by :ref{#cor-hyperimmune-degree} and the remark that follows it. Let $f(2n) = 0$ and $f(2n + 1) = h(n)$. If a computable function $k$ dominated $f$, the computable function $n \mapsto k(2n + 1)$ would dominate $h$; so $f$ is hyperimmune. But $f(g(n)) = f(2n) = 0$ for every $n$, and $f \circ g$ is dominated by the constant function $0$.
+:::
+::::
+
+::::exercise{#ex-hyperimmune-below-jump difficulty=1 objective="Build a hyperimmune set computable in $\emptyset'$ by diagonalizing against all partial computable functions at once."}
+Define $p(n) = 1 + p(n - 1) + \max \{ \Phi_e(n) : e \leq n,\ \Phi_e(n)\converge \}$, where $p(-1) = 0$ and the maximum of the empty set is $0$. Show that $p$ is computable in $\emptyset'$, that its range $A$ is a hyperimmune set computable in $\emptyset'$, and that $p(n) > \Phi_e(n)$ for every $e$ such that $\Phi_e$ is total and every $n \geq e$.
+
+:::solution
+To compute $p(n)$ from $p(n - 1)$, the oracle $\emptyset'$ decides for each $e \leq n$ whether $\Phi_e(n)$ converges, and the convergent computations are then run. So $p \leq_T \emptyset'$. Since $p(n) \geq 1 + p(n - 1)$, $p$ is strictly increasing, so $p(x) \geq x$, and $x \in A$ if and only if $x \in \{ p(0), \dots, p(x) \}$; hence $A \leq_T \emptyset'$, and $p$ is the principal function of $A$.
+
+If $\Phi_e$ is total and $n \geq e$, then $\Phi_e(n)$ is one of the values in the maximum, so $p(n) > \Phi_e(n)$. In particular, no computable function $g = \Phi_e$ dominates $p$, since $p(e) > g(e)$. So $p$ is hyperimmune, and $A$ is hyperimmune by :ref{#thm-hyperimmune-principal}. The function $p$ even exceeds each computable function from some point on, which is more than hyperimmunity requires.
+:::
+::::
+
+::::exercise{#ex-hyperimmune-windows difficulty=1 objective="Characterize hyperimmunity by the gaps of a set: no computable function bounds, from every point, the distance to the next element."}
+Show that an infinite set $A$ is hyperimmune if and only if there is no computable function $g$ such that $A \cap [n, g(n)] \neq \emptyset$ for every $n$.
+
+:::solution
+Suppose that $A$ is not hyperimmune. By :ref{#thm-hyperimmune-principal}, a computable function $g$ dominates $p_A$. Since $p_A(n) \geq n$, the element $p_A(n)$ of $A$ lies in $[n, g(n)]$, for every $n$.
+
+Conversely, let $g$ be computable with $A \cap [n, g(n)] \neq \emptyset$ for every $n$; in particular $g(n) \geq n$. Let $x_0 = 0$ and $x_{k+1} = g(x_k) + 1$, a computable strictly increasing sequence, and let $F_k = [x_k, x_{k+1})$. These intervals are pairwise disjoint, their canonical indices are computable from $k$, and $F_k \supseteq [x_k, g(x_k)]$ meets $A$ for every $k$. So $A$ is not hyperimmune.
+:::
+::::
+:::::

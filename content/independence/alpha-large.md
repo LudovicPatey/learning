@@ -121,19 +121,11 @@ Ketonen and Solovay (1981) related the two notions of largeness directly, by fin
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-alpha-large-compute difficulty=1 objective="Compute the functions $L_\alpha$ for small ordinals from the recursion and the composition rule."}
 Compute $L_\omega(x)$, $L_{\omega \cdot 2}(x)$ and $L_{\omega^2}(1)$, and check the last value with :ref{#ex-fgh-values}.
 
 :::solution
 $L_\omega(x) = L_x(x + 1) = 2x + 1$. By the composition rule, $L_{\omega \cdot 2}(x) = L_\omega(L_\omega(x)) = 4x + 3$. $L_{\omega^2}(1) = L_{\omega \cdot 1}(2) = 5 = F_2(1)$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that $[x, y)$ is $\omega^\omega$-large if and only if $[x + 1, y)$ is $\omega^x$-large, and deduce from :ref{#thm-large-fgh} that $L_{\omega^\omega}(x) = F_x(x + 1)$. Compute $L_{\omega^\omega}(1)$.
-
-:::solution
-$\{ \omega^\omega \}(x) = \omega^{\{ \omega \}(x)} = \omega^x$, so the run on $[x, y)$ continues from $\omega^x$ on $[x + 1, y)$. Hence $L_{\omega^\omega}(x) = L_{\omega^x}(x + 1) = F_x(x + 1)$. For $x = 1$: $F_1(2) = 5$.
 :::
 ::::
 
@@ -147,3 +139,49 @@ Recent applications of $\alpha$-large sets to Ramsey's theorem for pairs are lis
 - H. Schwichtenberg, *Eine Klassifikation der ε₀-rekursiven Funktionen*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 17 (1971), 61–74.
 - S. S. Wainer, *A classification of the ordinal recursive functions*, Archiv für mathematische Logik und Grundlagenforschung 13 (1970), 136–153.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter II, Section 3, and Chapter IV, Section 3(d).
+
+:::::exercises
+::::exercise{#ex-alpha-large-omega-omega difficulty=2 objective="Unfold one step of the definition at $\omega^\omega$ and identify the resulting function with the diagonal of the hierarchy."}
+Show that $[x, y)$ is $\omega^\omega$-large if and only if $[x + 1, y)$ is $\omega^x$-large, and deduce from :ref{#thm-large-fgh} that $L_{\omega^\omega}(x) = F_x(x + 1)$. Compute $L_{\omega^\omega}(1)$.
+
+:::solution
+$\{ \omega^\omega \}(x) = \omega^{\{ \omega \}(x)} = \omega^x$, so the run on $[x, y)$ continues from $\omega^x$ on $[x + 1, y)$. Hence $L_{\omega^\omega}(x) = L_{\omega^x}(x + 1) = F_x(x + 1)$. For $x = 1$: $F_1(2) = 5$.
+:::
+::::
+
+::::exercise{#ex-alpha-large-omega-plus-n difficulty=1 objective="Apply the decomposition lemma to $(\omega + n)$-large sets, and check it against the definition on an example."}
+Show that a finite set $A$ is $(\omega + n)$-large if and only if $|A| \geq n$ and $A$ without its $n$ least elements is relatively large. Compute $L_{\omega + n}(x)$, and check with the definition that $\{ 2, 3, 5, 6, 7 \}$ is $(\omega + 1)$-large.
+
+:::solution
+$\omega + n$ is in normal form, the last exponent of $\omega$ being $1 \geq 0$. For $n = 0$ the claim is :ref{#ex-alpha-large}, item 2. For $n \geq 1$, the shortest $n$-large initial segment of $A$, if any, consists of its $n$ least elements (item 1 of :ref{#ex-alpha-large}), and it exists if and only if $|A| \geq n$; :ref{#lem-large-sum} gives the claim, with item 2 of :ref{#ex-alpha-large}. By the composition rule, $L_{\omega + n}(x) = L_\omega(L_n(x)) = L_\omega(x + n) = 2x + 2n + 1$.
+
+For $A = \{ 2, 3, 5, 6, 7 \}$: $\alpha_0 = \omega + 1$, $\alpha_1 = \{ \omega + 1 \}(2) = \omega$, $\alpha_2 = \{ \omega \}(3) = 3$, and the elements $5, 6, 7$ lower $3$ to $0$. So $\alpha_5 = 0$, and $A$ is $(\omega + 1)$-large; accordingly $\{ 3, 5, 6, 7 \}$ is relatively large.
+:::
+::::
+
+::::exercise{#ex-alpha-large-ordinal-order difficulty=1 objective="See that $\alpha$-largeness is not monotone in the ordinal $\alpha$."}
+Find a finite set that is $\omega$-large and not $3$-large, although $3 < \omega$. Show that every $\omega$-large set with least element at least $n$ is $n$-large.
+
+:::solution
+$\{ 1, 2 \}$ has $2 > 1$ elements, so it is $\omega$-large, and it is not $3$-large since it has fewer than $3$ elements (item 1 of :ref{#ex-alpha-large}). If $A$ is $\omega$-large and $\min A \geq n$, then $|A| > \min A \geq n$, so $A$ is $n$-large. The step $\{ \omega \}(a_0) = a_0$ depends on the least element, which is why a smaller ordinal can require more elements.
+:::
+::::
+
+::::exercise{#ex-alpha-large-normal-form difficulty=1 objective="See why the decomposition lemma requires the sum to be in normal form, with a counterexample."}
+Show that the conclusion of :ref{#lem-large-sum} fails for $\beta = 1$ and $\gamma = \omega$.
+
+:::solution
+Here $\beta + \gamma = 1 + \omega = \omega$, and the sum is not in normal form: the last exponent of $\beta = \omega^0$ is $0$, below the exponent $1$ of $\gamma$. Let $A = \{ 1, 2 \}$, which is $\omega$-large. Its shortest $\omega$-large initial segment is $A$ itself, since $\{ 1 \}$ is not relatively large, and $A \setminus A = \emptyset$ is not $1$-large. So $A$ is $(\beta + \gamma)$-large while the right side of the equivalence fails. In the proof, the step $\{ 1 + \gamma_i \}(x) = 1 + \{ \gamma_i \}(x)$ fails for $\gamma_0 = \omega$: the left side is $\{ \omega \}(x) = x$, the right side $1 + x$.
+:::
+::::
+
+::::exercise{#ex-alpha-large-towers difficulty=1 objective="Compute least large intervals for ordinals beyond $\omega^\omega$ by unfolding fundamental sequences and applying the composition rule."}
+Compute $L_{\omega_3}(1)$, where $\omega_3 = \omega^{\omega^\omega}$, and $L_{\omega^\omega \cdot 2}(1)$, the latter in terms of the functions $F_k$.
+
+:::solution
+$\{ \omega^{\omega^\omega} \}(1) = \omega^{\{ \omega^\omega \}(1)} = \omega^{\omega^1} = \omega^\omega$, so $L_{\omega_3}(1) = L_{\omega^\omega}(2) = F_2(3) = 39$, by :ref{#ex-alpha-large-omega-omega} and :ref{#ex-fgh-values}.
+
+$\omega^\omega \cdot 2 = \omega^\omega + \omega^\omega$ is in normal form, so $L_{\omega^\omega \cdot 2}(1) = L_{\omega^\omega}(L_{\omega^\omega}(1)) = L_{\omega^\omega}(F_1(2)) = L_{\omega^\omega}(5) = F_5(6)$.
+:::
+::::
+:::::

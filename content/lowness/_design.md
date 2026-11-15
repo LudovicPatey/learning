@@ -306,7 +306,74 @@ Checked on 2026-11-12 (web search):
   `separation-design/erdos-moser-hyperimmunities` links to `lowness/weak-preservation`
   for ascending sequences, now in `lowness/stable-linear-orders`.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a permanent label, an objective, a difficulty and a full solution.
+Labels of the existing exercises were added on 2026-11-13 (`exr-lowness-index-reduction`
+kept its earlier form). Positional references ("the second exercise") were replaced by
+`:ref` to labels, including `ex-delta-indices-complete` (arithmetic-hierarchy) and
+`ex-dj-disjunctive` (avoidance).
+
+**Featured** (in the text; chosen as the exercises every reader should do, each placed
+after the material it practices):
+
+1. `low-bases`: `ex-low-unrelativized` (why the definition is relativized),
+   `ex-jump-delta2-model` (why Δ⁰₂ does not iterate).
+2. `forcing-the-jump`: `ex-computable-sacks-low` (a fourth notion of forcing deciding the
+   jump, plus diagonalization).
+3. `weak-preservation`: `ex-cohen-cohyperimmune` and `ex-dhls-not-hyperimmune`, both cited
+   in the text (the Σ⁰₂ hypothesis is needed; consequence for the DHLS set).
+4. `stable-linear-orders`: `ex-sads-solutions`, `ex-wkl-sads-low-model` (cited in the text).
+5. `coded-ideals`: `ex-scott-code-cone` (one application of a basis theorem to the class
+   of codes).
+6. `uniform-lowness`: `exr-lowness-index-reduction` (cited in the text and in lesson 9).
+7. `weakly-low-bases`: `ex-pa-choice-converse`, `ex-weakly-low-product` (both cited).
+8. `beyond-zero-jump`: `ex-r-cohesive-weakly-low`.
+9. `cjs-theorem`: `ex-d22-low-reservoirs` (the alternative presentation of the literature).
+10. `ramsey-pairs-low2`: `ex-rt2k-weakly-low` (cited in the notes).
+
+**Further exercises**, lesson by lesson (moved existing ones in parentheses):
+
+1. `low-bases` (`ex-low-jump-delta2-avoid`): lowness over a set versus lowness;
+   simple problems with and without low bases (PA, 1-generic, non-computable, high);
+   composition and products; low bases inherited downwards along ≤_ω.
+2. `forcing-the-jump` (`ex-low-hyperimmune-principal`): a computed run of the
+   construction; no notion decides the jump computably; a low immune subset of a
+   computable set by Mathias forcing; Mathias forcing with c.e. reservoirs.
+3. `weak-preservation` (`ex-cohyperimmune-noncomputable`): relativization; the dichotomy
+   fails for the prefix set of ∅′; uniformity and lowness indices; a Δ⁰₃ counterexample
+   built with ∅″.
+4. `stable-linear-orders`: order types of stable orders; an explicit limit approximation
+   of A; the halves of a Tennenbaum–Denisov order are hyperimmune; ADS through COH and
+   SADS; every Δ⁰₂ degree contains a set c.e. in a low set (Harizanov's theorem
+   admitted).
+5. `coded-ideals` (`ex-jump-ideal-code`): codes of Scott ideals are PA, members of the
+   Scott class are PA over the ideal; indices of Boolean operations; the Scott class is
+   perfect; a Scott ideal of computably dominated sets in one step.
+6. `uniform-lowness` (`ex-low-code-path-names`): iterating the uniform low basis theorem;
+   equality of columns and a code without repetitions; lowness indices of all columns
+   from one lowness index of the code; a ∅′-computable sequence of lowness indices whose
+   join computes ∅′.
+7. `weakly-low-bases`: limits of the choice lemma; choice among k sentences; problems of
+   PA sets; the arithmetic hierarchy above a weakly low solution, and its failure at
+   level 2 for COH; choice between low sets given by lowness indices.
+8. `beyond-zero-jump`: the choices of the construction form a member of the decision
+   class; jumps of cohesive sets strictly below every set PA over ∅′; a low cohesive set
+   when ∅′ decides which Boolean combinations are infinite.
+9. `cjs-theorem`: SRT²₂ admits a weakly low basis; (H) as bi-immunity relative to the
+   ideal; Lachlan's table; Δ⁰₂ partitions into k parts.
+10. `ramsey-pairs-low2` (`ex-wkl-rt22-low2-model`): two colorings at once; sets PA over ∅′
+    solve all computable instances and may avoid a cone; D²₂ and SRT²₂ are not
+    ω-reducible to problems with a low basis; relativized ω-models of low₂ sets.
+
+**Sources.** Patey's monograph, chapter *Lowness* (exercises of *Motivation* and *Basic
+constructions*, adapted); Hirschfeldt, *Slicing the Truth*, Exercise 6.56
+(`ex-pa-choice-lowness-indices`), Exercise 9.17 (`ex-ads-via-coh`), Section 9.1 after
+Corollary 9.21 (Jockusch's argument with Harizanov 1998, `ex-delta2-degree-ce-in-low`).
+The others are new. Dropped: a low 1-generic set avoiding a Δ⁰₂ cone (duplicate of
+`cohen-genericity/ex-low-generic-cone`, written in parallel).
+
+## 12. History
 
 - **2026-11-12.** Course created: seven lessons, four figures
   (`scripts/figures/lowness.py`), design log.
@@ -329,3 +396,6 @@ Checked on 2026-11-12 (web search):
   Z ⊕ G (base oracle first) throughout; Mathias "stem"; ⊩ and ?⊢ notation, with the
   Mathias question cited from `prop-mathias-question`; prerequisite
   `effective-forcing/generic-sets` for effective genericity.
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for
+  all exercises; featured exercises chosen; 41 new further exercises added, 6 existing ones moved (see Exercises);
+  positional references replaced by `:ref`; durations recomputed (lessons 1, 2, 3, 6, 10).

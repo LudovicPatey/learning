@@ -1,7 +1,7 @@
 ---
 title: Σ⁰ₙ and Π⁰ₙ sets
 summary: The arithmetic hierarchy defined by alternations of quantifiers over computable relations; normal forms, closure properties, relativization and many-one reductions.
-duration: 50
+duration: 45
 prerequisites: [turing-degrees/turing-jump, fundamentals/complete-sets]
 ---
 
@@ -151,6 +151,26 @@ Let $C \subseteq \nat^2$ be a $\Sigma^0_2$ relation. Which of these sets are gua
   Substitution of total computable functions.
 :::
 
+::::exercise{#ex-small-ce-sets difficulty=1 objective="Place index sets defined by the size of $W_e$ by counting quantifiers."}
+Show that $\{ e : W_e = \emptyset \}$ is $\Pi^0_1$, that $\{ e : |W_e| \geq 2 \}$ is $\Sigma^0_1$, and that $\{ e : |W_e| = 2 \}$ is $\Delta^0_2$.
+
+:::solution
+$W_e = \emptyset \iff \forall x\ \forall s\ \Phi_e(x)[s]\diverge$. Next, $|W_e| \geq 2 \iff \exists x\ \exists x'\ \exists s\ (x \neq x' \wedge \Phi_e(x)[s]\converge \wedge \Phi_e(x')[s]\converge)$. Finally, $|W_e| = 2$ is the intersection of $|W_e| \geq 2$, which is $\Sigma^0_1$, and of the complement of $|W_e| \geq 3$, which is $\Pi^0_1$ by the same argument. Both are $\Delta^0_2$, and $\Delta^0_2$ is closed under intersection.
+:::
+::::
+
+::::exercise{#ex-rec-sigma3 difficulty=2 objective="Place the set of indices of computable c.e. sets at the third level by quantifying over characteristic indices."}
+Show that $\{ e : W_e \text{ is computable} \}$ is $\Sigma^0_3$.
+
+:::solution
+Let $E(e, i, x)$ be the relation
+$$
+\big(x \in W_e \wedge \exists s\ \Phi_i(x)[s]\converge = 1\big) \vee \big(x \notin W_e \wedge \exists s\ \Phi_i(x)[s]\converge = 0\big).
+$$
+Then $W_e$ is computable if and only if $\exists i\ \forall x\ E(e, i, x)$: if $\forall x\ E(e, i, x)$, then $\Phi_i$ is total with values in $\{0, 1\}$ and computes $W_e$; conversely, an index of the characteristic function of $W_e$ satisfies $\forall x\ E(e, i, x)$. The relation $E$ is a Boolean combination of $\Sigma^0_1$ relations, hence $\Delta^0_2$ and in particular $\Pi^0_2$. So $\forall x\ E$ is $\Pi^0_2$, and $\exists i\ \forall x\ E$ is $\Sigma^0_3$.
+:::
+::::
+
 ## Relativization and reductions
 
 :::definition{#def-relativized-hierarchy}
@@ -177,36 +197,6 @@ A set $A$ is **$\Sigma^0_n$-complete** if it is $\Sigma^0_n$ and $B \leq_m A$ fo
 
 By :ref{#thm-halting-complete}, $\emptyset'$ is $\Sigma^0_1$-complete, and so its complement is $\Pi^0_1$-complete, since $A \leq_m B$ if and only if $\nat \setminus A \leq_m \nat \setminus B$. A $\Sigma^0_n$-complete set is not $\Pi^0_n$ as soon as some $\Sigma^0_n$ set is not $\Pi^0_n$; the next lesson shows that this is always the case.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that $\{ e : W_e = \emptyset \}$ is $\Pi^0_1$, that $\{ e : |W_e| \geq 2 \}$ is $\Sigma^0_1$, and that $\{ e : |W_e| = 2 \}$ is $\Delta^0_2$.
-
-:::solution
-$W_e = \emptyset \iff \forall x\ \forall s\ \Phi_e(x)[s]\diverge$. Next, $|W_e| \geq 2 \iff \exists x\ \exists x'\ \exists s\ (x \neq x' \wedge \Phi_e(x)[s]\converge \wedge \Phi_e(x')[s]\converge)$. Finally, $|W_e| = 2$ is the intersection of $|W_e| \geq 2$, which is $\Sigma^0_1$, and of the complement of $|W_e| \geq 3$, which is $\Pi^0_1$ by the same argument. Both are $\Delta^0_2$, and $\Delta^0_2$ is closed under intersection.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that for each $n$ there are only countably many $\Sigma^0_n$ sets, and deduce that the $\Sigma^0_n$ sets are not closed under arbitrary countable unions.
-
-:::solution
-A $\Sigma^0_n$ set is determined by a computable relation, which has an index; so there are countably many. Hence some set $A$ is not arithmetic, by :ref{#thm-cantor-diagonal}. But $A = \bigcup_{x \in A} \{ x \}$ is a countable union of finite sets, which are computable, hence $\Sigma^0_n$. The closure under existential quantification only applies to **uniform** unions, $\bigcup_y \{ x : (x, y) \in B \}$ with $B$ a single $\Sigma^0_n$ relation.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that $\{ e : W_e \text{ is computable} \}$ is $\Sigma^0_3$.
-
-:::solution
-Let $E(e, i, x)$ be the relation
-$$
-\big(x \in W_e \wedge \exists s\ \Phi_i(x)[s]\converge = 1\big) \vee \big(x \notin W_e \wedge \exists s\ \Phi_i(x)[s]\converge = 0\big).
-$$
-Then $W_e$ is computable if and only if $\exists i\ \forall x\ E(e, i, x)$: if $\forall x\ E(e, i, x)$, then $\Phi_i$ is total with values in $\{0, 1\}$ and computes $W_e$; conversely, an index of the characteristic function of $W_e$ satisfies $\forall x\ E(e, i, x)$. The relation $E$ is a Boolean combination of $\Sigma^0_1$ relations, hence $\Delta^0_2$ and in particular $\Pi^0_2$. So $\forall x\ E$ is $\Pi^0_2$, and $\exists i\ \forall x\ E$ is $\Sigma^0_3$.
-:::
-::::
-
 ## Notes and references
 
 The arithmetic hierarchy was introduced independently by Kleene (1943) and Mostowski (1947). The notation $\Sigma^0_n$, $\Pi^0_n$ brings out the analogy with the Borel hierarchy of descriptive set theory, of which the arithmetic hierarchy is the effective counterpart. Soare's *Turing Computability*, Section 4.1, treats the definition and the closure properties (Theorem 4.1.4) and places $\mathrm{Fin}$, $\mathrm{Cof}$ and $\mathrm{Rec}$ by quantifier counting; the inclusion relation of :ref{#ex-inclusion-pi2} is his Proposition 4.1.7. Shorter treatments are in Downey and Hirschfeldt, Section 2.5, and Nies, Section 1.4. Monin and Patey present the closure properties in terms of uniform unions and intersections.
@@ -218,3 +208,139 @@ The arithmetic hierarchy was introduced independently by Kleene (1943) and Mosto
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.5.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.4.
 - B. Monin and L. Patey, *Computability theory*, chapter *Arithmetic hierarchy*.
+
+:::::exercises
+::::exercise{#ex-countable-unions difficulty=1 objective="See by a counting argument why closure under existential quantification concerns uniform unions only."}
+Show that for each $n$ there are only countably many $\Sigma^0_n$ sets, and deduce that the $\Sigma^0_n$ sets are not closed under arbitrary countable unions.
+
+:::solution
+A $\Sigma^0_n$ set is determined by a computable relation, which has an index; so there are countably many. Hence there are countably many arithmetic sets, as a countable union of countable classes, and some set $A$ is not arithmetic, by :ref{#thm-cantor-diagonal}. But $A = \bigcup_{x \in A} \{ x \}$ is a countable union of finite sets, which are computable, hence $\Sigma^0_n$. The closure under existential quantification only applies to **uniform** unions, $\bigcup_y \{ x : (x, y) \in B \}$ with $B$ a single $\Sigma^0_n$ relation.
+:::
+::::
+
+::::exercise{#ex-place-sets difficulty=1 objective="Write definitions of index sets and relations with the least number of quantifier blocks."}
+Give an upper bound in the arithmetic hierarchy for each of the following sets, by writing a definition and counting quantifiers.
+
+1. $\{ e : \text{the range of } \Phi_e \text{ is infinite} \}$.
+2. $\{ e : \Phi_e \text{ is total and strictly increasing} \}$.
+3. $\{ (a, b) : W_a \cap W_b = \emptyset \}$.
+4. $\{ e : \Phi_e(e)\converge \text{ and } \Phi_e(e) \in W_e \}$.
+
+:::solution
+1. The range of $\Phi_e$ is infinite if and only if it contains numbers larger than every $n$:
+$$
+\forall n\ \exists x\ \exists s\ \big( \Phi_e(x)[s]\converge \wedge \Phi_e(x)[s] > n \big).
+$$
+The relation inside is computable, so after contraction of $\exists x\, \exists s$ the set is $\Pi^0_2$.
+2. $\Phi_e$ is total and strictly increasing if and only if $\forall x\ \exists s\ \Phi_e(x)[s]\converge$ and
+$$
+\forall x\ \forall s\ \big( \Phi_e(x)[s]\converge \wedge \Phi_e(x + 1)[s]\converge \to \Phi_e(x)[s] < \Phi_e(x + 1)[s] \big).
+$$
+A single stage $s$ suffices in the second condition: if both computations converge, they have both converged at the larger of their two halting stages, by monotonicity. The set is the intersection of a $\Pi^0_2$ and a $\Pi^0_1$ set, hence $\Pi^0_2$.
+3. $W_a \cap W_b = \emptyset$ if and only if $\forall x\ \forall s\ \neg (\Phi_a(x)[s]\converge \wedge \Phi_b(x)[s]\converge)$, by the same remark on stages; the relation is $\Pi^0_1$.
+4. The condition is $\exists s\ \exists t\ \exists y\ (\Phi_e(e)[s]\converge = y \wedge \Phi_e(y)[t]\converge)$, so the set is $\Sigma^0_1$.
+:::
+::::
+
+::::exercise{#ex-partial-substitution difficulty=2 objective="See where totality is needed in the closure of the hierarchy under substitution."}
+For a partial computable function $\psi$ and $A \subseteq \nat$, let $\psi^{-1}[A] = \{ x : \psi(x)\converge \text{ and } \psi(x) \in A \}$.
+
+1. Show that if $A$ is $\Sigma^0_n$ with $n \geq 1$, then $\psi^{-1}[A]$ is $\Sigma^0_n$, and that if $A$ is $\Pi^0_n$ with $n \geq 2$, then $\psi^{-1}[A]$ is $\Pi^0_n$.
+2. Show that there are a partial computable $\psi$ and a $\Pi^0_1$ set $A$ such that $\psi^{-1}[A]$ is not $\Pi^0_1$.
+
+:::solution
+Let $c$ be an index of $\psi$, and $G = \{ (x, y) : \exists s\ \Phi_c(x)[s]\converge = y \}$ its graph, a $\Sigma^0_1$ relation.
+
+1. If $A$ is $\Sigma^0_n$, then $x \in \psi^{-1}[A] \iff \exists y\ \big( (x, y) \in G \wedge y \in A \big)$. The relation inside is the intersection of two $\Sigma^0_n$ relations, since $\Sigma^0_1 \subseteq \Sigma^0_n$, and $\Sigma^0_n$ is closed under existential quantification. If $A$ is $\Pi^0_n$ with $n \geq 2$, use the fact that $G$ is the graph of a function:
+$$
+x \in \psi^{-1}[A] \iff x \in \mathrm{dom}(\psi) \wedge \forall y\ \big( (x, y) \notin G \vee y \in A \big).
+$$
+Here $\mathrm{dom}(\psi)$ is $\Sigma^0_1$ and $\nat^2 \setminus G$ is $\Pi^0_1$, and both are $\Pi^0_n$ by item 2 of :ref{#prop-hierarchy-basic}, since $n \geq 2$. By :ref{#prop-hierarchy-closure}, the right-hand side is $\Pi^0_n$.
+2. Let $\psi(x) \simeq 0$ if $\Phi_x(x)\converge$, undefined otherwise, and $A = \nat$, which is computable, hence $\Pi^0_1$. Then $\psi^{-1}[A] = \emptyset'$. If it were $\Pi^0_1$, it would be $\Delta^0_1$, hence computable (:ref{#prop-sigma1-delta1}), which it is not.
+
+So the restriction to total functions in :ref{#prop-hierarchy-closure} matters only at the level $\Pi^0_1$: the domain of $\psi$, which is $\Sigma^0_1$, is absorbed by every level above.
+:::
+::::
+
+::::exercise{#ex-collection-sequences difficulty=1 objective="Prove closure under bounded universal quantification by coding the finitely many witnesses into one finite sequence."}
+Fix a computable bijection between $\nat$ and the finite sequences of integers, under which the length $|\sigma|$ and the function $(\sigma, z) \mapsto \sigma(z)$ (with value $0$ when $z \geq |\sigma|$) are computable. Let $n \geq 1$ and let $P \subseteq \nat^{k+2}$ be a $\Pi^0_n$ relation. Show that
+$$
+\forall z < w\ \exists y\ P(\vec x, z, y) \iff \exists \sigma\ \big( |\sigma| = w \wedge \forall z < w\ P(\vec x, z, \sigma(z)) \big),
+$$
+and deduce, using only the closure of $\Pi^0_n$ under substitution and bounded quantification, that the left-hand side defines a $\Sigma^0_{n+1}$ relation of $(\vec x, w)$.
+
+:::solution
+From left to right, choose for each $z < w$ a witness $y_z$ with $P(\vec x, z, y_z)$, and let $\sigma = (y_0, \dots, y_{w-1})$; for $w = 0$, take the empty sequence. From right to left, $y = \sigma(z)$ is a witness for each $z < w$.
+
+The relation $(\vec x, z, \sigma) \mapsto P(\vec x, z, \sigma(z))$ is $\Pi^0_n$, by substitution of the total computable function $(\sigma, z) \mapsto \sigma(z)$. By bounded universal quantification, $\forall z < w\ P(\vec x, z, \sigma(z))$ is $\Pi^0_n$ as a relation of $(\vec x, w, \sigma)$. The relation $|\sigma| = w$ is computable, hence $\Pi^0_n$, and the intersection is $\Pi^0_n$. Its projection along $\sigma$ is $\Sigma^0_{n+1}$. This is the route followed by Soare (2016, Theorem 4.1.4).
+:::
+::::
+
+::::exercise{#ex-total-graph-delta difficulty=1 objective="Show that a total function with a $\Sigma^0_n$ graph has a $\Delta^0_n$ graph, and see why totality is needed."}
+Let $n \geq 1$ and let $f : \nat \to \nat$ be a total function whose graph $G_f = \{ (x, y) : f(x) = y \}$ is $\Sigma^0_n$. Show that $G_f$ is $\Delta^0_n$. Show that the hypothesis that $f$ is total cannot be dropped, already for $n = 1$.
+
+:::solution
+Since $f$ is total, $f(x) \neq y$ if and only if $f(x) = z$ for some $z \neq y$:
+$$
+(x, y) \notin G_f \iff \exists z\ \big( z \neq y \wedge (x, z) \in G_f \big).
+$$
+The right-hand side is $\Sigma^0_n$ by closure under intersection with a computable relation and existential quantification. So the complement of $G_f$ is $\Sigma^0_n$, that is, $G_f$ is $\Pi^0_n$, and it is $\Delta^0_n$. For $n = 1$ this shows that a total function with a c.e. graph has a computable graph, hence is computable, as $f(x) = \mu y\ (x, y) \in G_f$.
+
+For a partial function the argument fails at the first step. Let $\psi(x) \simeq 0$ if $x \in \emptyset'$, undefined otherwise. Its graph $\{ (x, 0) : x \in \emptyset' \}$ is $\Sigma^0_1$. It is not $\Pi^0_1$: otherwise $\emptyset' = \{ x : (x, 0) \in G_\psi \}$ would be $\Pi^0_1$ by substitution, hence computable.
+:::
+::::
+
+::::exercise{#ex-pr-normal-form difficulty=2 objective="Strengthen the normal form of the hierarchy to a primitive recursive matrix, using Kleene's normal form theorem."}
+Show that in :ref{#def-arithmetic-hierarchy}, for $n \geq 1$, the computable relation $R$ can be taken primitive recursive: every $\Sigma^0_n$ relation $A \subseteq \nat^k$ is of the form $\{ \vec x : \exists y_1\ \forall y_2 \cdots Q y_n\ R(\vec x, y_1, \dots, y_n) \}$ with $R$ primitive recursive, and likewise for $\Pi^0_n$.
+
+:::solution
+By induction on $n$, for all arities $k$ simultaneously; the $\Pi^0_n$ case follows from the $\Sigma^0_n$ case by complementation, since the complement of a primitive recursive relation is primitive recursive.
+
+For $n = 1$, $A$ is c.e., so the set $\{ \langle \vec x \rangle : \vec x \in A \}$ of codes of its tuples, with the iterated pairing function, is c.e., hence equal to $W_e$ for some $e$. By Kleene's normal form theorem, $z \in W_e \iff \exists s\ T(e, z, s)$ with $T$ primitive recursive. Then $\vec x \in A \iff \exists s\ T(e, \langle \vec x \rangle, s)$, and $(\vec x, s) \mapsto T(e, \langle \vec x \rangle, s)$ is primitive recursive, since the pairing function is.
+
+Suppose the result holds for $n$, and let $A$ be $\Sigma^0_{n+1}$: $\vec x \in A \iff \exists y\ P(\vec x, y)$ with $P$ a $\Pi^0_n$ relation of arity $k + 1$. By the induction hypothesis applied to $P$, $P(\vec x, y) \iff \forall y_1\ \exists y_2 \cdots Q' y_n\ R'(\vec x, y, y_1, \dots, y_n)$ with $R'$ primitive recursive. Then $\vec x \in A \iff \exists y\ \forall y_1 \cdots Q' y_n\ R'(\vec x, y, y_1, \dots, y_n)$: a prefix of $n + 1$ alternating quantifiers starting with $\exists$, followed by a primitive recursive relation.
+:::
+::::
+
+::::exercise{#ex-projection-complement difficulty=1 objective="Characterize the arithmetic relations as the closure of the computable relations under projection and complementation."}
+Show that a relation is arithmetic if and only if it can be obtained from a computable relation by finitely many applications of projection, $B \mapsto \{ \vec x : \exists y\ (\vec x, y) \in B \}$, and complementation.
+
+:::solution
+Let $\mathcal C$ be the class of relations obtained in this way. Every computable relation is $\Sigma^0_1$, hence arithmetic. The arithmetic relations are closed under projection, since $\Sigma^0_n$ is closed under existential quantification, and under complementation, since the complement of a $\Sigma^0_n$ relation is $\Pi^0_n$, hence $\Sigma^0_{n+1}$ (:ref{#prop-hierarchy-basic}). So every relation in $\mathcal C$ is arithmetic.
+
+Conversely, we show by induction on $n \geq 1$ that every $\Sigma^0_n$ relation is in $\mathcal C$. A $\Sigma^0_1$ relation is the projection of a computable relation. A $\Sigma^0_{n+1}$ relation is the projection of a $\Pi^0_n$ relation $P$, whose complement is $\Sigma^0_n$, hence in $\mathcal C$ by the induction hypothesis; so $P$ is in $\mathcal C$, and so is its projection. The computable relations, the $\Sigma^0_0$ relations, are in $\mathcal C$ by definition. This is Soare (2016), Exercise 4.1.10.
+:::
+::::
+
+::::exercise{#ex-separable-sigma3 difficulty=2 objective="Place a property of pairs of c.e. sets at the third level by quantifying over characteristic indices."}
+Two c.e. sets $W_a$ and $W_b$ are **computably separable** if there is a computable set $R$ with $W_a \subseteq R$ and $W_b \cap R = \emptyset$. Show that $\{ \langle a, b \rangle : W_a \text{ and } W_b \text{ are computably separable} \}$ is $\Sigma^0_3$.
+
+:::solution
+The pair is computably separable if and only if there is $i$ such that $\Phi_i$ is the characteristic function of such a set $R$, that is,
+$$
+\begin{aligned}
+\exists i\ \Big[ &\forall x\ \exists s\ \big(\Phi_i(x)[s]\converge \wedge \Phi_i(x)[s] \leq 1\big) \\
+&\wedge \forall x\ \big( x \notin W_a \vee \exists s\ \Phi_i(x)[s]\converge = 1 \big) \wedge \forall x\ \big( x \notin W_b \vee \exists s\ \Phi_i(x)[s]\converge = 0 \big) \Big].
+\end{aligned}
+$$
+If $i$ satisfies the three conditions, $R = \{ x : \Phi_i(x) = 1 \}$ is computable, contains $W_a$ and is disjoint from $W_b$; conversely, an index of the characteristic function of a separating set satisfies them. The first condition is $\Pi^0_2$. In the second and the third, the disjunction of a $\Pi^0_1$ and a $\Sigma^0_1$ relation is $\Pi^0_2$, and so is its universal closure. The conjunction is $\Pi^0_2$, and the existential quantifier over $i$ gives a $\Sigma^0_3$ relation of $(a, b)$. The set of codes $\langle a, b \rangle$ is $\Sigma^0_3$ by substitution of the projections $\pi_0$ and $\pi_1$. This is Soare (2016), Exercise 4.1.12.
+:::
+::::
+
+::::exercise[Unique witnesses]{#ex-unique-witness difficulty=3 objective="Choose least witnesses, coded in a finite sequence, so that a $\Sigma^0_{n+1}$ set is a projection with unique witnesses."}
+Let $n \geq 1$. Show that every $\Sigma^0_{n+1}$ set $A$ is of the form $\{ x : \exists w\ P'(x, w) \}$ with $P'$ a $\Pi^0_n$ relation such that for every $x$ there is at most one $w$ with $P'(x, w)$.
+
+:::solution
+Write $x \in A \iff \exists y\ P(x, y)$ with $P$ in $\Pi^0_n$. The complement of $P$ is $\Sigma^0_n$: $\neg P(x, y) \iff \exists z\ Q(x, y, z)$ with $Q$ in $\Pi^0_{n-1}$ (computable if $n = 1$). Use the coding of finite sequences of :ref{#ex-collection-sequences}. The idea is to accept only the least $y$ with $P(x, y)$, and to certify that the smaller $y'$ fail by giving, for each of them, the least $z$ with $Q(x, y', z)$. Let $P'(x, \langle y, \sigma \rangle)$ hold if
+$$
+P(x, y) \wedge |\sigma| = y \wedge \forall y' < y\ \Big( Q(x, y', \sigma(y')) \wedge \forall z < \sigma(y')\ \neg Q(x, y', z) \Big).
+$$
+
+*Complexity.* $Q(x, y', \sigma(y'))$ is $\Pi^0_{n-1}$ by substitution, and $\forall z < \sigma(y')\ \neg Q(x, y', z)$ is $\Sigma^0_{n-1}$ by bounded quantification; for $n = 1$ both are computable. Both are $\Pi^0_n$ (item 2 of :ref{#prop-hierarchy-basic}), and so is their conjunction, then its bounded universal quantification over $y' < y$. With $P$ and the computable condition $|\sigma| = y$, the relation $P'$ is $\Pi^0_n$.
+
+*Same projection.* If $P'(x, \langle y, \sigma \rangle)$, then $P(x, y)$, so $x \in A$. Conversely, if $x \in A$, let $y$ be least with $P(x, y)$. For each $y' < y$, $\neg P(x, y')$, so there is $z$ with $Q(x, y', z)$; let $\sigma(y')$ be the least one. Then $P'(x, \langle y, \sigma \rangle)$.
+
+*Uniqueness.* If $P'(x, \langle y, \sigma \rangle)$, then $Q(x, y', \sigma(y'))$, hence $\neg P(x, y')$, for every $y' < y$, while $P(x, y)$: so $y$ is the least $y$ with $P(x, y)$. Then $|\sigma| = y$ and each $\sigma(y')$ is the least $z$ with $Q(x, y', z)$, so $\sigma$ is determined, and so is $w = \langle y, \sigma \rangle$.
+:::
+::::
+:::::

@@ -31,7 +31,7 @@ After the course, a student can:
 - **Absoluteness** of arithmetic formulas for ω-models (`prop-omega-absolute`); used in every ω-model argument (lessons 1, 2, 4).
 - **Metatheoretic induction** on the true numbers (full induction in ω-models; Dedekind's theorem).
 - **Separation by an ω-model**: REC as counter-model (`cor-rca-not-wkl`, `prop-specker`); completeness theorem.
-- **Coding in RCA₀**: show that a construction is computable from given sets by giving Σ⁰₁ and Π⁰₁ definitions (`ex-rca-range`, `prop-rca-complete`, evaluation of codes, `thm-ivt-rca`); the index trick turning Σ⁰₁ descriptions into codes (`def-continuous-code`, Exercise 1 of lesson 5).
+- **Coding in RCA₀**: show that a construction is computable from given sets by giving Σ⁰₁ and Π⁰₁ definitions (`ex-rca-range`, `prop-rca-complete`, evaluation of codes, `thm-ivt-rca`); the index trick turning Σ⁰₁ descriptions into codes (`def-continuous-code`, `ex-ivt-value-c`, `ex-code-sum`).
 - **Compactness** to build non-standard models; **overspill** (`prop-overspill`), the basic technique for non-standard models, used again in the course on induction and conservation.
 - **Non-uniform case distinction** in a classical proof (`thm-ivt-rca`), as the bridge to Weihrauch reducibility.
 
@@ -58,7 +58,7 @@ After the course, a student can:
 2. **rca0.** Intuition: the method of the track (computable proofs versus Turing-ideal counter-models); why Σ⁰₁ induction. Example: the range of an increasing function (Δ⁰₁ comprehension needs induction to justify a bounded definition). Examples and non-examples of Turing ideals, showing that both closure conditions are needed. Quizzes on the proof of the characterization and on completeness.
 3. **nonstandard-models.** Figure of the order of a non-standard model. Example of a non-standard model of ACA₀ (definable sets). Dedekind's theorem with quiz (where fullness is used). Overspill with quiz; examples of the two failures of "finite = bounded". Exercises: underspill; sets of standard numbers are finite (and why non-standardness is needed).
 4. **real-numbers.** Example of two representations of 0 (why the factor 2 in equality); example of an undecidable equality (`ex-real-equality`). Specker sequence with two quizzes (the tail argument, absoluteness of "limit").
-5. **analysis-in-rca0.** Figure of a code (rectangles around the graph, shrinking around a point). Evaluation argument. Intuition for the IVT proof and figure of the bisection. Quizzes on the case distinction and on the existence of the bisection sequence. Exercise: code of f − c, using the index.
+5. **analysis-in-rca0.** Figure of a code (rectangles around the graph, shrinking around a point). Evaluation argument. Intuition for the IVT proof and figure of the bisection. Quizzes on the case distinction and on the existence of the bisection sequence. Exercise: code of f − c, using the index (`ex-ivt-value-c`).
 
 ## 8. Sources
 
@@ -82,10 +82,30 @@ All section, theorem and page numbers above were checked against the text versio
 ## 10. Open points
 
 - The coding of finite sets in RCA₀ (bounded sets have codes) is admitted. A future exercise could prove it with the Chinese remainder theorem (DM Theorem 5.5.8).
-- `language-and-models` is about 2800 words (50 minutes), above the 45-minute target. Splitting it would move labels cited by other courses (`prop-omega-absolute`, `def-l2`, `def-z2`); not done.
+- `language-and-models` is about 2700 words without its further exercises (duration set to 45, the maximum), slightly above the 45-minute target. Splitting it would move labels cited by other courses (`prop-omega-absolute`, `def-l2`, `def-z2`); not done.
 - The claim that RCA₀ is the "first-order part IΣ₁" is stated with a pointer to `induction-conservation/first-order-parts`; that course should keep a label for it.
 
-## 11. History
+## 11. Exercises
+
+**Featured exercises** (in the text, after the material they practice):
+- language-and-models: `ex-pi11-absolute` (Π¹₁ sentences go down to ω-models, Σ¹₁ go up, and a Σ¹₁ sentence that fails in REC), after the quiz on absoluteness: it is the pattern of every later ω-model argument.
+- rca0: `ex-pi01-lnp` (Π⁰₁ least number principle), after `prop-pi01-induction`: it shows the common-bound trick that keeps an induction formula Σ⁰₁, used again in later courses.
+- nonstandard-models: `ex-underspill-rca` after `cor-standard-not-set`, and `ex-standard-subset` (a set of standard elements is finite; the non-standard hypothesis is needed) after the section on finite and bounded sets: the two basic uses of overspill.
+- real-numbers: `ex-left-ce-specker` (left-c.e. reals and Specker sequences), at the end: it links the coding of reals with the course on algorithmic randomness and is cited by `computable-analysis`.
+- analysis-in-rca0: `ex-ivt-value-c` (code of f − c through the index field), after the IVT: the only use of the index trick in the lesson text.
+
+**Further exercises** (block at the end of each lesson):
+- language-and-models: `ex-z2-arith-models` (moved from the text), classifying formulas of L₂ (`ex-classify-l2`), the pairing function (`ex-pairing-injective`), formalizing a theorem as a problem (`ex-split-formalization`), Π¹₂ statements in ω-models (`ex-pi12-omega-models`), induction does not give comprehension (`ex-induction-not-comprehension`).
+- rca0: `ex-union-ideals` (moved), composition of functions (`ex-rca-composition`), range of a non-decreasing unbounded function (`ex-range-nondecreasing`, variant of `ex-rca-range`), Π⁰₁ course-of-values induction (`ex-pi01-course-of-values`), a domination principle refuted in REC (`ex-domination-rec`), ARITH is not principal (`ex-arith-not-principal`).
+- nonstandard-models: overspill below a non-standard bound (`ex-overspill-below`) and on values of functions (`ex-overspill-function`), non-standard models of Z₂ are not full (`ex-nonstandard-z2`), M-finite sets have a maximum (`ex-bounded-max`), absoluteness between models with the same first-order part (`ex-same-first-order-part`).
+- real-numbers: order and equality versus limits (`ex-real-order-limits`), transitivity of equality without limits (`ex-real-equality-transitive`), moduli of convergence (`ex-cauchy-modulus`), nested intervals (`ex-nested-intervals-rca`), uncountability of the reals in RCA₀ (`ex-reals-uncountable-rca`).
+- analysis-in-rca0: codes of the identity and constants (`ex-code-identity-constant`), the continuity step of the IVT proof (`ex-ivt-continuity-step`), codes from Lipschitz bounds (`ex-lipschitz-code`), code of a sum (`ex-code-sum`), a computable function whose least zero is not computable (`ex-least-zero`, difficulty 3).
+
+Not included because other courses already have them: ℤ[X]⁺ as a model of the basic axioms without induction (`fragments-of-arithmetic/pa-minus`), ARITH as the least ω-model of ACA₀ (`big-five/aca0`), proper cuts are not Σ₁-definable and underspill in fragments (`fragments-of-arithmetic/definable-cuts`), computable decimal expansions and the trisection method (`computable-analysis`).
+
+**Sources.** Simpson, Theorem II.2.2 (`ex-pairing-injective`), Theorems II.4.8–II.4.9 (`ex-nested-intervals-rca`, `ex-reals-uncountable-rca`), Lemma II.6.3 (`ex-code-sum`); Dzhafarov–Mummert, Exercises 10.9.4–10.9.5 and Examples 10.3.5–10.3.6 (`ex-code-identity-constant`, `ex-code-sum`). The others are standard facts written for the course.
+
+## 12. History
 
 - **2026-11-12.** Design and pedagogy revision.
   - New lesson `nonstandard-models` (compactness, Dedekind's theorem, overspill, finite versus bounded, role of induction); the former section "The role of induction" of `rca0` is reduced to a pointer.
@@ -94,3 +114,8 @@ All section, theorem and page numbers above were checked against the text versio
   - New examples: `ex-formalization`, `ex-rca-range`, `ex-turing-ideals`, `ex-definable-model`, `ex-real-equality`. New quizzes on full structures, overspill and Specker sequences.
   - Three figures (`scripts/figures/second-order-arithmetic.py`): order of a non-standard model, code of a continuous function, bisection.
   - References checked against Simpson, Dzhafarov–Mummert and Hirschfeldt; notes rewritten with theorem numbers.
+- **2026-11-13.** Featured and further exercises.
+  - Every exercise has a label, an objective and a difficulty; the featured exercises are placed in the text after the material they practice, and the "Exercises" sections are removed.
+  - 25 further exercises added (five per lesson), two existing exercises moved to the further block; see Section 11.
+  - The exercise `ex-left-ce-specker` no longer cites `thm-omega` (not a prerequisite); it names the course on Kolmogorov complexity instead.
+  - Duration of `language-and-models` set to 45 (2730 words without the further exercises).

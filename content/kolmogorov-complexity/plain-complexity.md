@@ -109,6 +109,14 @@ Why does :ref{#prop-incompressible-count} not exhibit a particular incompressibl
   The argument is finite counting.
 :::
 
+::::exercise{#ex-shortest-incompressible difficulty=1 objective="Show by composing machines that shortest descriptions are themselves incompressible."}
+Show that shortest descriptions are incompressible: there is a constant $b$ such that, if $\tau$ is a shortest $U$-description of some string, then $C(\tau) \geq |\tau| - b$.
+
+:::solution
+Let $M$ be the machine $\rho \mapsto U(U(\rho))$, and let $c_M$ be such that $C \leq C_M + c_M$. Let $\tau$ be a shortest $U$-description of $\sigma$, so that $|\tau| = C(\sigma)$, and let $\rho$ be a shortest $U$-description of $\tau$. Then $M(\rho) = \sigma$, so $C(\sigma) \leq |\rho| + c_M = C(\tau) + c_M$. Hence $C(\tau) \geq |\tau| - c_M$, and $b = c_M$ works.
+:::
+::::
+
 ## Pairs
 
 The complexity of a pair is not bounded by the sum of the complexities. A description of $\sigma$ followed by a description of $\tau$ does not tell where the first one ends. The length of the first description has to be coded as well, in a form that indicates its own end: each of its bits is doubled, and the pair $01$, which cannot occur at an odd position of a doubled string, marks the end.
@@ -141,17 +149,19 @@ In the proof of :ref{#prop-c-pairs}, why is the length of $\alpha_0$ coded, and 
   No such assumption is made; the bound holds for all pairs.
 :::
 
-## Exercises
+## Notes and references
 
-::::exercise{difficulty=1}
-Show that shortest descriptions are incompressible: there is a constant $b$ such that, if $\tau$ is a shortest $U$-description of some string, then $C(\tau) \geq |\tau| - b$.
+Solomonoff (1960–1964), Kolmogorov (1965) and Chaitin (1966) introduced the complexity of strings independently, with different motivations: inductive inference, the definition of information and randomness, and the length of programs. The invariance theorem is due to Solomonoff and Kolmogorov. The pair bound and the counting argument are standard (Downey–Hirschfeldt, Propositions 3.1.3 and 3.1.5); the incompressibility of shortest descriptions is Exercise 2.1.3 of Nies's book. Li and Vitányi's book is the standard reference on Kolmogorov complexity and its applications; Shen, Uspensky and Vereshchagin give a textbook account in the tradition of the Moscow school.
 
-:::solution
-Let $M$ be the machine $\rho \mapsto U(U(\rho))$, and let $c_M$ be such that $C \leq C_M + c_M$. Let $\tau$ be a shortest $U$-description of $\sigma$, so that $|\tau| = C(\sigma)$, and let $\rho$ be a shortest $U$-description of $\tau$. Then $M(\rho) = \sigma$, so $C(\sigma) \leq |\rho| + c_M = C(\tau) + c_M$. Hence $C(\tau) \geq |\tau| - c_M$, and $b = c_M$ works.
-:::
-::::
+- A. N. Kolmogorov, *Three approaches to the quantitative definition of information*, Problems of Information Transmission 1 (1965), 1–7.
+- R. J. Solomonoff, *A formal theory of inductive inference I*, Information and Control 7 (1964), 1–22.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 3.1.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 2.1.
+- M. Li and P. Vitányi, *An Introduction to Kolmogorov Complexity and Its Applications*, 4th edition, Springer, 2019.
+- A. Shen, V. A. Uspensky and N. Vereshchagin, *Kolmogorov Complexity and Algorithmic Randomness*, Mathematical Surveys and Monographs 220, American Mathematical Society, 2017.
 
-::::exercise{difficulty=2}
+:::::exercises
+::::exercise{#ex-pair-loglog difficulty=2 objective="Refine the self-delimiting code of a length to bound the complexity of a concatenation with $\log + 2 \log\log$ extra bits."}
 Show that $C(\sigma\tau) \leq^+ C(\sigma) + C(\tau) + 2 \log \log C(\sigma) + \log C(\sigma)$ for strings with $C(\sigma) \geq 4$.
 
 :::hint
@@ -163,13 +173,43 @@ Let $\rho$ be the string associated with $\ell = C(\sigma)$ and $\lambda$ the st
 :::
 ::::
 
-## Notes and references
+::::exercise[Continuity of C]{#ex-c-continuity difficulty=1 objective="Apply the non-increase of complexity under computable maps to small modifications of a string."}
+Show that $C(\sigma 0) =^+ C(\sigma)$ and $C(\sigma\sigma) =^+ C(\sigma)$. Show that there is a constant $c$ such that, if $\sigma'$ is obtained from a string $\sigma$ of length $n \geq 1$ by changing one bit, then $C(\sigma') \leq C(\sigma) + 2 \log n + c$.
 
-Solomonoff (1960–1964), Kolmogorov (1965) and Chaitin (1966) introduced the complexity of strings independently, with different motivations: inductive inference, the definition of information and randomness, and the length of programs. The invariance theorem is due to Solomonoff and Kolmogorov. The pair bound and the counting argument are standard (Downey–Hirschfeldt, Propositions 3.1.3 and 3.1.5); the incompressibility of shortest descriptions is Exercise 2.1.3 of Nies's book. Li and Vitányi's book is the standard reference on Kolmogorov complexity and its applications; Shen, Uspensky and Vereshchagin give a textbook account in the tradition of the Moscow school.
+:::solution
+The maps $\sigma \mapsto \sigma 0$ and $\sigma \mapsto \sigma\sigma$ are computable, so $C(\sigma 0) \leq^+ C(\sigma)$ and $C(\sigma\sigma) \leq^+ C(\sigma)$ by :ref{#prop-c-basic} (2). Conversely, the partial computable functions "delete the last bit" (defined on non-empty strings) and "keep the first half" (defined on strings of even length) send $\sigma 0$ and $\sigma\sigma$ to $\sigma$, so $C(\sigma) \leq^+ C(\sigma 0)$ and $C(\sigma) \leq^+ C(\sigma\sigma)$, by the same item.
 
-- A. N. Kolmogorov, *Three approaches to the quantitative definition of information*, Problems of Information Transmission 1 (1965), 1–7.
-- R. J. Solomonoff, *A formal theory of inductive inference I*, Information and Control 7 (1964), 1–22.
-- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 3.1.
-- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 2.1.
-- M. Li and P. Vitányi, *An Introduction to Kolmogorov Complexity and Its Applications*, 4th edition, Springer, 2019.
-- A. Shen, V. A. Uspensky and N. Vereshchagin, *Kolmogorov Complexity and Algorithmic Randomness*, Mathematical Surveys and Monographs 220, American Mathematical Society, 2017.
+For the second statement, let $M$ be the machine that, on an input of the form $\bar\rho\, 01\, \alpha$, where $\bar\rho$ is $\rho$ with each bit doubled, lets $i$ be the number associated with $\rho$, computes $U(\alpha)$, and outputs it with its bit at position $i$ changed, if $i < |U(\alpha)|$. Let $\sigma'$ differ from $\sigma$ at position $i < n$, and let $\alpha$ be a shortest $U$-description of $\sigma$. Then $M(\bar\rho\, 01\, \alpha) = \sigma'$, where $\rho$ is the string of $i$, of length $\lfloor \log(i + 1) \rfloor \leq \log n$. So $C(\sigma') \leq 2 \log n + 2 + C(\sigma) + c_M$, where $C \leq C_M + c_M$, and $c = c_M + 2$ works.
+:::
+::::
+
+::::exercise{#ex-optimal-padding difficulty=1 objective="See that optimality is a weak condition by building an optimal machine whose descriptions all have lengths divisible by $d$."}
+Let $d \geq 1$. Show that there is an optimal machine $R$ such that $d$ divides $|\rho|$ for every string $\rho$ in the domain of $R$.
+
+:::solution
+Every string $\rho$ that contains a $1$ decomposes uniquely as $\rho = \tau 1 0^j$, where $j$ is the number of zeros after the last $1$. Let $R(\rho) = U(\tau)$ if $d$ divides $|\rho|$ and $\rho = \tau 1 0^j$ with $j < d$, and let $R(\rho)$ be undefined otherwise. Then $R$ is partial computable, and every string in its domain has length divisible by $d$. For every $\tau$ there is exactly one $j$ with $0 \leq j < d$ such that $d$ divides $|\tau| + 1 + j$, and then $R(\tau 1 0^j) = U(\tau)$ whenever $U(\tau)$ is defined. So $C_R(\sigma) \leq C(\sigma) + d$ for every $\sigma$. For every machine $M$, $C_R \leq C + d \leq C_M + c_M + d$, so $R$ is optimal. (Nies 2009, Exercise 2.1.5.)
+:::
+::::
+
+::::exercise{#ex-one-description-per-length difficulty=2 objective="Build an optimal machine in which a string has at most one description of each length."}
+Show that there is an optimal machine $R$ such that, for every string $\sigma$ and every number $m$, the string $\sigma$ has at most one $R$-description of length $m$.
+
+:::solution
+Fix a computable enumeration $(\tau_0, \sigma_0), (\tau_1, \sigma_1), \dots$ of the graph of $U$, without repetitions; since $U$ is a function, each string $\tau$ appears at most once as a first coordinate. Let $R(\tau_i) = \sigma_i$ if there is no $j < i$ with $|\tau_j| = |\tau_i|$ and $\sigma_j = \sigma_i$, and let $R$ be undefined otherwise. To compute $R(\tau)$, wait until $\tau$ appears as some $\tau_i$ and check the finitely many earlier pairs; so $R$ is partial computable.
+
+If $\tau_i \neq \tau_j$ are $R$-descriptions of the same string with $|\tau_i| = |\tau_j|$, say $j < i$, then $R(\tau_i)$ is undefined by definition, a contradiction. So each string has at most one $R$-description of each length. Since $R(\tau) = U(\tau)$ whenever $R(\tau)$ is defined, $C_R \geq C$. Conversely, if $C(\sigma) = m$, the first pair $(\tau_i, \sigma)$ of the enumeration with $|\tau_i| = m$ satisfies $R(\tau_i) = \sigma$, so $C_R(\sigma) \leq m$. Hence $C_R = C$, and $R$ is optimal. (Nies 2009, Exercise 2.1.4.)
+:::
+::::
+
+::::exercise[Runs of zeros in incompressible strings]{#ex-runs-of-zeros difficulty=2 objective="Use a description by position to show that incompressible strings have no long runs of zeros."}
+Show that there is a constant $b$ such that every string $\sigma$ of length $n \geq 1$ that contains $k$ consecutive zeros satisfies $C(\sigma) \leq n - k + 4 \log n + b$. Deduce that, for every $c$, a $c$-incompressible string of length $n \geq 1$ contains no block of more than $4 \log n + b + c$ consecutive zeros.
+
+:::solution
+Write $\sigma = \alpha\, 0^k \beta$, and let $i = |\alpha|$. Let $M$ be the machine that, on an input of the form $\bar\rho\, 01\, \bar\kappa\, 01\, \gamma$ (bits of $\rho$ and $\kappa$ doubled), lets $i$ and $k$ be the numbers associated with $\rho$ and $\kappa$, and, if $i \leq |\gamma|$, outputs $(\gamma \uh i)\, 0^k\, \gamma'$, where $\gamma = (\gamma \uh i) \gamma'$. With $\rho$, $\kappa$ the strings of $i$ and $k$ and $\gamma = \alpha\beta$, of length $n - k$, the machine outputs $\sigma$. Since $i, k \leq n$, the strings $\rho$ and $\kappa$ have length at most $\lfloor \log(n + 1) \rfloor \leq \log n + 1$. So
+$$
+C(\sigma) \leq 2(\log n + 1) + 2 + 2(\log n + 1) + 2 + (n - k) + c_M = n - k + 4 \log n + 8 + c_M,
+$$
+and $b = 8 + c_M$ works. If $\sigma$ is $c$-incompressible, then $n - c \leq C(\sigma) \leq n - k + 4 \log n + b$, so $k \leq 4 \log n + b + c$.
+:::
+::::
+:::::

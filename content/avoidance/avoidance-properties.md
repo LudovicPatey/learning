@@ -107,10 +107,10 @@ If $\mathsf P_0$ and $\mathsf P_1$ admit cone avoidance, so does $\mathsf P_0 \t
 :::
 
 :::proof{of=prop-cone-avoidance-product}
-Let $C \not\leq_T Z$ and $X_0 \oplus X_1 \leq_T Z$. Cone avoidance of $\mathsf P_0$ gives a solution $Y_0$ to $X_0$ with $C \not\leq_T Z \oplus Y_0$. The instance $X_1$ is computable in $Z \oplus Y_0$, so cone avoidance of $\mathsf P_1$ **relative to $Z \oplus Y_0$** gives a solution $Y_1$ to $X_1$ with $C \not\leq_T Z \oplus Y_0 \oplus Y_1$. The second statement is the third exercise of :ref{to="reducibilities/preservation"}, applied to each weakness property $\mathcal W_C$, with :ref{#prop-cone-avoidance-preservation}.
+Let $C \not\leq_T Z$ and $X_0 \oplus X_1 \leq_T Z$. Cone avoidance of $\mathsf P_0$ gives a solution $Y_0$ to $X_0$ with $C \not\leq_T Z \oplus Y_0$. The instance $X_1$ is computable in $Z \oplus Y_0$, so cone avoidance of $\mathsf P_1$ **relative to $Z \oplus Y_0$** gives a solution $Y_1$ to $X_1$ with $C \not\leq_T Z \oplus Y_0 \oplus Y_1$. The second statement is :ref{#ex-preservation-downward}, applied to each weakness property $\mathcal W_C$, with :ref{#prop-cone-avoidance-preservation}.
 :::
 
-The first part of the proof uses cone avoidance of $\mathsf P_1$ with the oracle $Z \oplus Y_0$, which is not computable in general. The unrelativized definition does not support such arguments: in the first exercise, no Turing ideal satisfying both its problem and $\mathsf{WKL}$ avoids the cone above $\emptyset'$. Every natural problem known to satisfy an unrelativized preservation property satisfies the relativized one, with the same proof; in this course the definitions are always relativized.
+The first part of the proof uses cone avoidance of $\mathsf P_1$ with the oracle $Z \oplus Y_0$, which is not computable in general. The unrelativized definition does not support such arguments: in :ref{#exr-unrelativized-cone}, no Turing ideal satisfying both its problem and $\mathsf{WKL}$ avoids the cone above $\emptyset'$. Every natural problem known to satisfy an unrelativized preservation property satisfies the relativized one, with the same proof; in this course the definitions are always relativized.
 
 :::quiz[relativization]
 In the proof of :ref{#prop-cone-avoidance-product}, why is cone avoidance of $\mathsf P_1$ applied relative to $Z \oplus Y_0$ rather than relative to $Z$?
@@ -126,7 +126,7 @@ In the proof of :ref{#prop-cone-avoidance-product}, why is cone avoidance of $\m
 
 ## Exercises
 
-::::exercise{#exr-unrelativized-cone difficulty=2}
+::::exercise{#exr-unrelativized-cone difficulty=2 objective="See why cone avoidance is relativized, with a problem that avoids cones on computable instances but not in the ω-models of weak König's lemma."}
 Let $\mathsf P$ be the problem whose instances are all sets, where the only solution to a computable set is $\emptyset$, and the only solution to a non-computable set $X$ is $X'$. Show that every computable instance of $\mathsf P$ has a solution that computes no non-computable set, that $\mathsf P$ does not admit cone avoidance, and that every Turing ideal satisfying both $\mathsf P$ and $\mathsf{WKL}$ contains $\emptyset'$.
 
 :::solution
@@ -134,15 +134,7 @@ A computable instance has the solution $\emptyset$, which computes only computab
 :::
 ::::
 
-::::exercise{difficulty=1}
-For $k \geq 2$, show that $\mathsf{RT}^2_k$ admits cone avoidance, by induction on $k$, using Seetapun's theorem.
-
-:::solution
-The case $k = 2$ is :ref{#thm-seetapun}. Let $f : [\nat]^2 \to k + 1$ be computable in $Z$, and $C \not\leq_T Z$. Let $g$ be the $k$-coloring that merges the colors $k - 1$ and $k$. By induction, $g$ has an infinite homogeneous set $H$ with $C \not\leq_T Z \oplus H$. If the color of $H$ is less than $k - 1$, $H$ is homogeneous for $f$. Otherwise $f$ takes only the colors $k - 1$ and $k$ on $[H]^2$; transported to $[\nat]^2$ through the enumeration of $H$, it is a coloring with two colors computable in $Z \oplus H$. By Seetapun's theorem relative to $Z \oplus H$, it has an infinite homogeneous set $L$ with $C \not\leq_T Z \oplus H \oplus L$, and the image of $L$ under the enumeration of $H$ is homogeneous for $f$, computable in $H \oplus L$.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-wkl-coh-not-rt12 difficulty=1 objective="Separate weak König's lemma and cohesiveness from the pigeonhole principle, and see that cone avoidance cannot do it."}
 Show that neither $\mathsf{WKL}$ nor $\mathsf{COH}$ is ω-reducible to $\mathsf{RT}^1_2$. Explain why :ref{#cor-cone-avoidance-model} cannot prove it, and which weakness property does.
 
 :::solution
@@ -162,3 +154,65 @@ The definitions of cone avoidance and strong cone avoidance follow the chapter *
 - R. Downey, N. Greenberg, M. Harrison-Trainor, L. Patey and D. Turetsky, *Relationships between computability-theoretic properties of problems*, Journal of Symbolic Logic 87 (2022), 47–71; arXiv:1903.04273.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.6, 4.6 and 8.3.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, sections *Context and motivation* and *First examples*.
+
+:::::exercises
+::::exercise{#ex-rt2k-cone-avoidance difficulty=1 objective="Extend cone avoidance from two to finitely many colors by merging colors and relativizing."}
+For $k \geq 2$, show that $\mathsf{RT}^2_k$ admits cone avoidance, by induction on $k$, using Seetapun's theorem.
+
+:::solution
+The case $k = 2$ is :ref{#thm-seetapun}. Let $f : [\nat]^2 \to k + 1$ be computable in $Z$, and $C \not\leq_T Z$. Let $g$ be the $k$-coloring that merges the colors $k - 1$ and $k$. By induction, $g$ has an infinite homogeneous set $H$ with $C \not\leq_T Z \oplus H$. If the color of $H$ is less than $k - 1$, $H$ is homogeneous for $f$. Otherwise $f$ takes only the colors $k - 1$ and $k$ on $[H]^2$; transported to $[\nat]^2$ through the enumeration of $H$, it is a coloring with two colors computable in $Z \oplus H$. By Seetapun's theorem relative to $Z \oplus H$, it has an infinite homogeneous set $L$ with $C \not\leq_T Z \oplus H \oplus L$, and the image of $L$ under the enumeration of $H$ is homogeneous for $f$, computable in $H \oplus L$.
+:::
+::::
+
+::::exercise[The identity problem]{#ex-identity-strong-cone difficulty=1 objective="See that strong cone avoidance depends on the instances of a problem and not only on its ω-models, with the identity problem."}
+Let $\mathsf{Id}$ be the problem whose instances are all sets, the only solution to $X$ being $X$ itself. Show that $\mathsf{Id}$ admits cone avoidance but not strong cone avoidance, and that $\mathsf{Id} \leq_\omega \mathsf Q$ for every problem $\mathsf Q$. Deduce that strong cone avoidance, unlike cone avoidance (:ref{#prop-cone-avoidance-product}), is not inherited along ω-reducibility.
+
+:::solution
+*Cone avoidance.* Let $C \not\leq_T Z$ and let $X \leq_T Z$ be an instance. Its solution $X$ satisfies $Z \oplus X \equiv_T Z$, so $C \not\leq_T Z \oplus X$.
+
+*Strong cone avoidance fails.* Take $Z = \emptyset$, a non-computable set $C$, and the instance $X = C$. Its only solution $C$ computes $C$.
+
+*ω-reducibility.* Every Turing ideal $\mathcal I$ satisfies $\mathsf{Id}$: an instance $X \in \mathcal I$ has the solution $X \in \mathcal I$. In particular every Turing ideal satisfying $\mathsf Q$ satisfies $\mathsf{Id}$, which is $\mathsf{Id} \leq_\omega \mathsf Q$.
+
+Take $\mathsf Q = \mathsf{RT}^1_2$, which admits strong cone avoidance (:ref{#thm-dj-cone-avoidance}). Then $\mathsf{Id} \leq_\omega \mathsf{RT}^1_2$, and $\mathsf{Id}$ does not admit strong cone avoidance. An ω-reduction only concerns the instances that belong to a Turing ideal, while strong cone avoidance quantifies over all instances, including those that compute $C$.
+:::
+::::
+
+::::exercise[Instances with a single solution]{#ex-unique-solution difficulty=1 objective="Apply cone avoidance to instances with a single solution, and recover that the only path of a computable tree with one path is computable."}
+1. Let $\mathsf P$ be a problem admitting cone avoidance, $Z$ a set and $X \leq_T Z$ an instance of $\mathsf P$ with exactly one solution $Y$. Show that $Y \leq_T Z$.
+2. Deduce that if an infinite $Z$-computable binary tree has exactly one infinite path, this path is computable in $Z$.
+3. Show that if $\mathsf P$ admits strong cone avoidance, every instance of $\mathsf P$ with exactly one solution has a computable solution.
+
+:::solution
+1. Suppose that $Y \not\leq_T Z$. Cone avoidance with $C = Y$ gives a solution $Y_1$ to $X$ with $Y \not\leq_T Z \oplus Y_1$. Since $Y$ is the only solution, $Y_1 = Y$, and $Y \leq_T Z \oplus Y$, a contradiction.
+2. $\mathsf{WKL}$ admits cone avoidance (:ref{#thm-cone-avoidance-basis}), and the paths of the tree are the solutions to it as an instance of $\mathsf{WKL}$. Apply item 1.
+3. Let $X$ be an instance with the single solution $Y$, and suppose that $Y$ is not computable. Strong cone avoidance with $Z = \emptyset$ and $C = Y$ gives a solution $Y_1$ with $Y \not\leq_T Y_1$; but $Y_1 = Y$, a contradiction.
+
+The instance $\emptyset$ of $\mathsf J$ has the single solution $\emptyset'$, which is not computable: item 1 gives another proof that $\mathsf J$ does not admit cone avoidance.
+:::
+::::
+
+::::exercise[Cone avoidance and Turing ideals]{#ex-cone-avoidance-ideals difficulty=1 objective="Characterize cone avoidance by the existence of Turing ideals, and locate where relativization enters."}
+Show that a problem $\mathsf P$ admits cone avoidance if and only if for every set $Z$ and every set $C$ with $C \not\leq_T Z$, there is a Turing ideal satisfying $\mathsf P$ that contains $Z$ and does not contain $C$. For the problem $\mathsf P$ of :ref{#exr-unrelativized-cone}, show that the condition holds for every computable set $Z$ and fails for every non-computable set $Z$.
+
+:::solution
+Suppose that $\mathsf P$ admits cone avoidance, and let $C \not\leq_T Z$. By :ref{#prop-cone-avoidance-preservation}, $\mathsf P$ preserves $\mathcal W_C$, and $Z \in \mathcal W_C$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W_C$ containing $Z$ and satisfying $\mathsf P$; it does not contain $C$, since $C \notin \mathcal W_C$.
+
+Conversely, let $C \not\leq_T Z$ and $X \leq_T Z$ an instance, and let $\mathcal I$ be a Turing ideal satisfying $\mathsf P$, with $Z \in \mathcal I$ and $C \notin \mathcal I$. Then $X \in \mathcal I$, since a Turing ideal is closed downwards; so $X$ has a solution $Y \in \mathcal I$, and $Z \oplus Y \in \mathcal I$. If $C \leq_T Z \oplus Y$, then $C \in \mathcal I$, which is not the case.
+
+For the problem of :ref{#exr-unrelativized-cone}, the ideal $\mathrm{REC}$ of the computable sets satisfies $\mathsf P$, since every computable instance has the solution $\emptyset$. So for a computable $Z$ and a non-computable $C$, $\mathrm{REC}$ is the required ideal. For a non-computable $Z$, take $C = Z'$: every Turing ideal satisfying $\mathsf P$ and containing $Z$ contains the instance $Z$, hence its only solution $Z'$. The unrelativized property only asks for the ideals containing $\emptyset$; cone avoidance asks for ideals above every $Z$.
+:::
+::::
+
+::::exercise[Problems applied in sequence]{#ex-sequential-composition difficulty=2 objective="Adapt the proof of closure under products to two problems applied in sequence, the second instance depending on the first solution."}
+For problems $\mathsf P$ and $\mathsf Q$, let $\mathsf P ; \mathsf Q$ be the problem whose instances are the pairs $(X, e)$ such that $X$ is an instance of $\mathsf P$ and, for every solution $Y_0$ to $X$, $\Phi^{X \oplus Y_0}_e$ is the characteristic function of an instance of $\mathsf Q$; the solutions to $(X, e)$ are the sets $Y_0 \oplus Y_1$ with $Y_0$ a solution to $X$ and $Y_1$ a solution to $\Phi^{X \oplus Y_0}_e$. A pair $(X, e)$ is computable in $Z$ if $X$ is. Show that if $\mathsf P$ and $\mathsf Q$ admit cone avoidance, so does $\mathsf P ; \mathsf Q$, and that the same holds for strong cone avoidance. Where is relativization used?
+
+:::solution
+Let $C \not\leq_T Z$ and let $(X, e)$ be an instance with $X \leq_T Z$. Cone avoidance of $\mathsf P$ gives a solution $Y_0$ to $X$ with $C \not\leq_T Z \oplus Y_0$. The set $X_1 = \Phi^{X \oplus Y_0}_e$ is an instance of $\mathsf Q$, and $X_1 \leq_T X \oplus Y_0 \leq_T Z \oplus Y_0$. Cone avoidance of $\mathsf Q$ relative to $Z \oplus Y_0$ gives a solution $Y_1$ to $X_1$ with $C \not\leq_T Z \oplus Y_0 \oplus Y_1$. Then $Y_0 \oplus Y_1$ is a solution to $(X, e)$, and $C \not\leq_T Z \oplus (Y_0 \oplus Y_1)$.
+
+For strong cone avoidance, $X$ is arbitrary. Strong cone avoidance of $\mathsf P$ gives $Y_0$ with $C \not\leq_T Z \oplus Y_0$, and strong cone avoidance of $\mathsf Q$ relative to $Z \oplus Y_0$, applied to the instance $X_1$, which need not be computable in $Z \oplus Y_0$, gives $Y_1$ as before.
+
+Relativization is used in the second step: $\mathsf Q$ is applied with the oracle $Z \oplus Y_0$, which is not computable in general, and the solution $Y_1$ must avoid the cone together with $Y_0$. The proof of Seetapun's theorem through cohesiveness has a similar form, with a second instance that is only defined from the coloring and a cohesive set, not computed from them: the limit set of a stable coloring, to which the strong cone avoidance of the pigeonhole principle is applied.
+:::
+::::
+:::::

@@ -34,7 +34,7 @@ For a meta-condition $c$ of level $n$, $i < 2$ and $e$, let $N_e(c, i)$ be the s
 2. Apply item 1 repeatedly with $i = 0$. Each application either decreases $|N_e(\cdot, 0)|$ or makes it empty, so after finitely many steps $N_e(d_0, 0) = \emptyset$. Then apply it with $i = 1$ to get $d_1$ extending $d_0$. Forcing on the parts with $i = 0$ is inherited by $d_1$, so $N_e(d_1, 0) = N_e(d_1, 1) = \emptyset$.
 :::
 
-The lemma is the three-case argument of :ref{#thm-weak-merging-pa}, one level up as in the first exercise of :ref{to="jump-compactness-avoidance/merging-level-two"}, with $\emptyset'$ in the role of the oracle, and the number of branches as a measure of progress. A positive answer settles one branch without changing the level. A negative answer settles all branches at once, at the next level, where the count starts again from zero. The third case is empty: Liu's lemma says that one of the first two always applies, because $\emptyset'$ is not PA relative to itself.
+The lemma is the three-case argument of :ref{#thm-weak-merging-pa}, one level up as in :ref{#ex-weak-merging-level-two}, with $\emptyset'$ in the role of the oracle, and the number of branches as a measure of progress. A positive answer settles one branch without changing the level. A negative answer settles all branches at once, at the next level, where the count starts again from zero. The third case is empty: Liu's lemma says that one of the first two always applies, because $\emptyset'$ is not PA relative to itself.
 
 :::quiz[forcing the requirements]
 In item 1 of :ref{#lem-meta-requirement}, why does a positive answer not give $N_e(d, i) = \emptyset$?
@@ -118,21 +118,11 @@ Where in the proof is the hypothesis that $\emptyset'$ is not PA relative to $\e
   Validity uses only the cover lemma and the Ramsey property of branches.
 :::
 
-## Exercises
-
-::::exercise{difficulty=2}
+::::exercise{#ex-valid-count difficulty=2 objective="Run the counting argument on the valid parts only, and see that the proof of the theorem only needs the requirements on valid parts."}
 Show that the proof still works if $N_e(c, i)$ is replaced by the set $N^{\mathrm{v}}_e(c, i)$ of the branches $I$ such that $(I, i)$ is valid in $c$ and $c$ does not force the requirement $e$ on $(I, i)$.
 
 :::solution
 Item 1 of :ref{#lem-meta-requirement} holds with $H = N^{\mathrm v}_e(c, i)$. In the first case, $d$ has the same level, the branch $I$ is now forced, and by item 2 of :ref{#lem-meta-valid} a part valid in $d$ was valid in $c$; so $N^{\mathrm v}_e(d, i) \subseteq H \setminus \{I\}$. In the second case, a valid part $(J, i)$ of $d$ has a valid ancestor $(J \upharpoonright n, i)$, which is either in $H$, and then $(J, i)$ is forced by the merging, or forced in $c$, and then $(J, i)$ is forced by inheritance; so $N^{\mathrm v}_e(d, i) = \emptyset$. The iteration terminates as before, and the resulting meta-condition forces the requirement on all its valid parts, which is all that the proof of the theorem uses, since the path consists of valid parts.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that while the level of $c_s$ is $0$, the branch $I_s$ is $\{\varepsilon\}$, and that if $A$ is finite, the path has $i = 1$.
-
-:::solution
-At level $0$ there is one branch, so $I_s = \{\varepsilon\}$ while $n_s = 0$. If $A$ is finite, no part $(I, 0)$ is valid (second exercise of :ref{to="jump-compactness-avoidance/meta-conditions"}), and the path consists of valid parts, so $i = 1$.
 :::
 ::::
 
@@ -143,3 +133,47 @@ The notion of forcing a requirement on a branch, the counting argument and the c
 - B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics (2021); arXiv:1905.08427.
 - L. Liu, *RT²₂ does not imply WKL₀*, Journal of Symbolic Logic 77 (2012), 609–620.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump compactness avoidance*, section *Pigeonhole principle*.
+
+:::::exercises
+::::exercise{#ex-path-level-zero difficulty=1 objective="Read the path of valid parts at level $0$, and determine its side when the instance is finite." lessons="meta-conditions"}
+Show that while the level of $c_s$ is $0$, the branch $I_s$ is $\{\varepsilon\}$, and that if $A$ is finite, the path has $i = 1$.
+
+:::solution
+At level $0$ there is one branch, so $I_s = \{\varepsilon\}$ while $n_s = 0$. If $A$ is finite, no part $(I, 0)$ is valid (:ref{#ex-meta-finite-A}), and the path consists of valid parts, so $i = 1$.
+:::
+::::
+
+::::exercise{#ex-infinite-by-promises difficulty=2 objective="Show that every meta-condition promises that the generic set is infinite, and deduce that the tasks extending the stems are redundant." lessons="meta-questions"}
+Let $\theta(y)$ be the $\Sigma^0_1$ formula $\exists z\ (z \geq y \wedge z \in G)$, so that $\forall y\ \theta(y)$ says that $G$ is infinite. Show that every meta-condition promises $\forall y\ \theta(y)$ on every part. Deduce that the construction still proves :ref{#thm-d22-jump-pa} if the tasks (L) are removed.
+
+:::solution
+Let $c = (\vec \sigma, \vec X, S)$ be of level $n$, $(I, i)$ a part, $m \in \nat$, $\tau$ a string compatible with $(\sigma^I_i, A_i \cap \bigcup_{\nu \in I} X_\nu)$, and $\vec Z \in \mathcal U^{\mathbb I_n}_S$. Since $\mathcal U^{\mathbb I_n}_S \subseteq \mathcal L_{\vec X}$, every $Z_\nu$ is infinite; take $\nu \in I$ and $z \in Z_\nu$ with $z \geq \max(m, |\tau|)$. The string $\tau \cup \{ z \}$ of length $z + 1$ is compatible with $(\tau, \bigcup_{\nu \in I} Z_\nu)$ and satisfies $\theta(m)$. So $\vec Z \in \mathcal V^I_{\tau, \theta(m)}$, and $c$ promises $\forall y\ \theta(y)$ on $(I, i)$.
+
+In the proof of the theorem, the tasks (L) are used only to show that $G$ is infinite. Without them, $c_0$ promises $\forall y\ \theta(y)$ on $(I_0, i)$, and the argument "promises are kept" applies: for every $m$, at a step $t$ with the task (P) for $\forall y\ \theta(y)$ and $m$, the part $(I_t, i) = (I_{t+1}, i)$ is valid throughout the task, so the task makes all members of this part satisfy $\theta(m)$, and $G$ is one of them. So $G$ has an element larger than or equal to every $m$. This argument does not use the tasks (L), and the other parts of the proof do not use them either.
+:::
+::::
+
+::::exercise{#ex-d22-side-needed difficulty=1 objective="See that the theorem cannot fix in advance the side in which the solution is found."}
+Fix a computable bijection between strings and natural numbers, and let $A$ be the set of the codes of the initial segments of $\emptyset'$. Show that $A$ is $\Delta^0_2$, infinite and coinfinite, and that every infinite subset $H$ of $A$ has a jump PA relative to $\emptyset'$. What does :ref{#thm-d22-jump-pa} give for this set?
+
+:::solution
+$A$ is computable in $\emptyset'$, which decides whether a string is an initial segment of $\emptyset'$, so it is $\Delta^0_2$. It is infinite, since $\emptyset'$ has an initial segment of every length, and coinfinite, since for each length only one string of that length is in $A$. Let $H \subseteq A$ be infinite. To compute $\emptyset'(n)$ from $H$, search for an element of $H$ coding a string $\rho$ of length larger than $n$; it exists, since $H$ contains codes of strings of infinitely many lengths, and $\emptyset'(n) = \rho(n)$. So $\emptyset' \leq_T H$, hence $\emptyset'' \leq_T H'$, and $\emptyset''$ is PA relative to $\emptyset'$, since it computes the function equal to $1 - J^{\emptyset'}(x)$ when $J^{\emptyset'}(x)$ is defined and to $0$ otherwise. The theorem therefore gives an infinite subset of $\overline A$ whose jump is not PA relative to $\emptyset'$; the side depends on $A$ and cannot be chosen in advance, which is why the construction keeps both sides and chooses the side of the path at the end.
+:::
+::::
+
+::::exercise{#ex-requirement-level-bound difficulty=1 objective="Bound the growth of the level when a requirement is forced on all parts."}
+Let $c$ be a meta-condition of level $n$ and $e$ an index. Show that the extension given by item 2 of :ref{#lem-meta-requirement} has level at most $n + 2$, and that it has level $n$ if only the first case of item 1 is used.
+
+:::solution
+In item 1, the first case gives an extension of the same level, and the second an extension of level exactly one more, by :ref{#lem-meta-merging}, with $N_e(d, i) = \emptyset$. In item 2, the applications with $i = 0$ continue while $N_e(\cdot, 0)$ is non-empty: each one either keeps the level, or raises it by one and empties $N_e(\cdot, 0)$, which stops this phase. So the phase with $i = 0$ raises the level by at most one, and similarly the phase with $i = 1$. The final level is at most $n + 2$, and it is $n$ if every application uses the first case.
+:::
+::::
+
+::::exercise{#ex-d2k-jump-pa difficulty=2 objective="Extend the theorem of Monin and Patey to $\Delta^0_2$ partitions into finitely many parts, by iterating it with a growing parameter." lessons="jump-pa-avoidance"}
+Let $k \geq 2$, let $D \leq_T Z$ be sets such that $Z'$ is not PA relative to $D'$, and let $A_0, \dots, A_{k-1}$ be a partition of $\nat$ into $\Delta^0_2(Z)$ sets. Show that there are $t < k$ and an infinite set $H \subseteq A_t$ such that $(Z \oplus H)'$ is not PA relative to $D'$.
+
+:::solution
+By induction on $k$, for all $D$ and $Z$ at once. For $k = 2$ this is :ref{#thm-d22-jump-pa} with $A = A_0$. Let $k \geq 2$ and let $A_0, \dots, A_k$ be a partition into $\Delta^0_2(Z)$ sets. By the theorem applied to $A_0$, there is an infinite $H_0$, contained in $A_0$ or in $A_1 \cup \dots \cup A_k$, with $(Z \oplus H_0)'$ not PA relative to $D'$. In the first case take $H = H_0$. In the second, let $h$ be the increasing enumeration of $H_0$, computable in $H_0$, and $B_t = \{ n : h(n) \in A_t \}$ for $1 \leq t \leq k$. These $k$ sets partition $\nat$ and are $\Delta^0_2(Z \oplus H_0)$, since $A_t$ is $\Delta^0_2(Z)$ and $h$ is computable in $H_0$. Apply the induction hypothesis with $Z \oplus H_0$ in place of $Z$, which is allowed since $D \leq_T Z \oplus H_0$ and $(Z \oplus H_0)'$ is not PA relative to $D'$: there are $t$ and an infinite $H_1 \subseteq B_t$ with $(Z \oplus H_0 \oplus H_1)'$ not PA relative to $D'$. Let $H = h[H_1]$. It is infinite, contained in $A_t$, and computable in $H_0 \oplus H_1$; so $(Z \oplus H)' \leq_T (Z \oplus H_0 \oplus H_1)'$ is not PA relative to $D'$.
+:::
+::::
+:::::

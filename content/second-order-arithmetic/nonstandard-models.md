@@ -77,6 +77,14 @@ In a non-standard model $(M, \mathcal S)$ of $\mathsf{RCA}_0$, the set of standa
 Apply :ref{#prop-overspill} to the bounded formula $n \in X$.
 :::
 
+::::exercise{#ex-underspill-rca difficulty=1 objective="Derive underspill from overspill by negation."}
+**Underspill.** Let $\mathcal M$ be a non-standard model of $\mathsf{RCA}_0$ and $\varphi$ a $\Sigma^0_1$ or $\Pi^0_1$ formula with parameters. Show that if $\mathcal M \models \varphi(c)$ for every non-standard $c$, then $\mathcal M \models \varphi(k^{\mathcal M})$ for some $k \in \nat$.
+
+:::solution
+Otherwise $\neg \varphi$ holds at every standard element. The formula $\neg \varphi$ is equivalent to a $\Pi^0_1$ or $\Sigma^0_1$ formula, so by :ref{#prop-overspill} it holds at some non-standard $c$, contradicting the hypothesis.
+:::
+::::
+
 ## Finite and bounded sets
 
 In $\mathsf{RCA}_0$, finite sets are coded by numbers: there is a coding in which "$i$ belongs to the set coded by $c$" is expressed by a bounded formula, and $\mathsf{RCA}_0$ proves that every bounded set has a code and that every coded set exists (Simpson, Theorem II.2.5; Dzhafarov–Mummert, Theorem 5.5.8 and Proposition 5.5.9). So in a model $(M, \mathcal S)$ of $\mathsf{RCA}_0$, a set $X \subseteq M$ is coded by an element of $M$ if and only if $X \in \mathcal S$ and $X$ is bounded in $M$. Such sets are called **$\mathcal M$-finite**, and they are the sets that the model regards as finite.
@@ -112,21 +120,7 @@ Why does :ref{#cor-standard-not-set} not contradict the fact that $\{ i : i \leq
   The corollary applies to every set of $\mathcal S$ that contains all standard elements, whatever the model thinks of its size.
 :::
 
-## The role of induction
-
-In a model of $\mathsf{RCA}_0$, induction holds for $\Sigma^0_1$ formulas, but may fail for $\Sigma^0_2$ formulas; the failure takes the form of a proper initial segment of the first-order part, closed under successor and defined by a $\Sigma^0_2$ formula, much like the standard part in :ref{#fig-nonstandard-order}. Statements of combinatorics can then fail for reasons that have nothing to do with comprehension. Hirst showed that the infinite pigeonhole principle for arbitrarily many colors is equivalent over $\mathsf{RCA}_0$ to $\Sigma^0_2$ bounding, a consequence of $\Sigma^0_2$ induction; it holds in every ω-model, and fails in some non-standard models of $\mathsf{RCA}_0$. In the other direction, the first-order part of $\mathsf{RCA}_0$ is exactly $\mathrm I\Sigma_1$: every first-order sentence provable in $\mathsf{RCA}_0$ is provable from the basic axioms and $\Sigma_1$ induction (Friedman). The proofs build, from a model of $\mathrm I\Sigma_1$, a second-order part made of definable sets, as in :ref{#ex-definable-model}. These results are the subject of the course on induction and conservation (:ref{to="induction-conservation/first-order-parts"}).
-
-## Exercises
-
-::::exercise{difficulty=1}
-**Underspill.** Let $\mathcal M$ be a non-standard model of $\mathsf{RCA}_0$ and $\varphi$ a $\Sigma^0_1$ or $\Pi^0_1$ formula with parameters. Show that if $\mathcal M \models \varphi(c)$ for every non-standard $c$, then $\mathcal M \models \varphi(k^{\mathcal M})$ for some $k \in \nat$.
-
-:::solution
-Otherwise $\neg \varphi$ holds at every standard element. The formula $\neg \varphi$ is equivalent to a $\Pi^0_1$ or $\Sigma^0_1$ formula, so by :ref{#prop-overspill} it holds at some non-standard $c$, contradicting the hypothesis.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-standard-subset difficulty=2 objective="Use overspill to show that a set of the model with only standard elements is finite, and see why non-standardness is needed."}
 Let $(M, \mathcal S)$ be a non-standard model of $\mathsf{RCA}_0$ and $X \in \mathcal S$ a set all of whose elements are standard. Show that $X$ is finite (in reality) and $\mathcal M$-finite. Show that the hypothesis that the model is non-standard is needed.
 
 :::solution
@@ -135,6 +129,10 @@ Suppose that $X$ is infinite. Then for every $k \in \nat$ there is an element of
 In an ω-model, every element is standard, and $X = \nat$ belongs to $\mathcal S$ without being finite.
 :::
 ::::
+
+## The role of induction
+
+In a model of $\mathsf{RCA}_0$, induction holds for $\Sigma^0_1$ formulas, but may fail for $\Sigma^0_2$ formulas; the failure takes the form of a proper initial segment of the first-order part, closed under successor and defined by a $\Sigma^0_2$ formula, much like the standard part in :ref{#fig-nonstandard-order}. Statements of combinatorics can then fail for reasons that have nothing to do with comprehension. Hirst showed that the infinite pigeonhole principle for arbitrarily many colors is equivalent over $\mathsf{RCA}_0$ to $\Sigma^0_2$ bounding, a consequence of $\Sigma^0_2$ induction; it holds in every ω-model, and fails in some non-standard models of $\mathsf{RCA}_0$. In the other direction, the first-order part of $\mathsf{RCA}_0$ is exactly $\mathrm I\Sigma_1$: every first-order sentence provable in $\mathsf{RCA}_0$ is provable from the basic axioms and $\Sigma_1$ induction (Friedman). The proofs build, from a model of $\mathrm I\Sigma_1$, a second-order part made of definable sets, as in :ref{#ex-definable-model}. These results are the subject of the course on induction and conservation (:ref{to="induction-conservation/first-order-parts"}).
 
 ## Notes and references
 
@@ -148,3 +146,53 @@ The categoricity of the second-order Peano axioms is due to Dedekind (1888); :re
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Sections II.2 and IX.1.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 4.2.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 5.5, 5.12, 6.2 and 6.5.
+
+:::::exercises
+::::exercise{#ex-overspill-below difficulty=2 objective="Apply overspill to a bounded formula with a non-standard parameter, to find non-standard elements of a set below a given bound."}
+Let $(M, \mathcal S)$ be a non-standard model of $\mathsf{RCA}_0$ and $X \in \mathcal S$ a set that contains infinitely many standard elements. Show that for every non-standard $d \in M$, the set $X$ contains a non-standard element $m \leq d$.
+
+:::solution
+Fix a non-standard $d$ and let $\varphi(n)$ be the bounded formula $\exists m \leq d\, (n \leq m \wedge m \in X)$, with parameters $X$ and $d$. For every standard $n$, $X$ contains a standard element $m \geq n$, since it contains infinitely many standard elements, and $m \leq d$ since standard elements lie below non-standard ones. So $\varphi$ holds at every standard element. By :ref{#prop-overspill}, $\varphi(c)$ holds for some non-standard $c$: there is $m \in X$ with $c \leq m \leq d$, and $m$ is non-standard since the standard elements form an initial segment.
+:::
+::::
+
+::::exercise{#ex-overspill-function difficulty=1 objective="Apply overspill to the values of a function of the model."}
+Let $(M, \mathcal S)$ be a non-standard model of $\mathsf{RCA}_0$ and $f \in \mathcal S$ a function from $M$ to $M$ such that $f(k)$ is standard for every standard $k$. Show that for every non-standard $d$ there is a non-standard $c$ such that $f(i) < d$ for every $i \leq c$.
+
+:::solution
+Let $\varphi(n)$ be the bounded formula $\forall i \leq n\ \exists v < d\ \langle i, v \rangle \in f$, with parameters $f$ and $d$. For a standard $n$, every $i \leq n$ is standard, so $f(i)$ is standard and below $d$; hence $\varphi(n)$ holds. By :ref{#prop-overspill}, $\varphi(c)$ holds for some non-standard $c$. For $i \leq c$ there is $v < d$ with $\langle i, v \rangle \in f$, and $v = f(i)$ since $f$ is a function.
+:::
+::::
+
+::::exercise{#ex-nonstandard-z2 difficulty=1 lessons="language-and-models" objective="Combine compactness with Dedekind's theorem to see that $\mathsf Z_2$ has models with non-standard numbers, none of them full."}
+Show that $\mathsf Z_2$ has a model $(M, \mathcal S)$ whose first-order part contains a non-standard element, and that $\mathcal S \neq \mathcal P(M)$ in every such model.
+
+:::solution
+Add a new constant $c$ to $\mathcal L_2$, and to $\mathsf Z_2$ the sentences $c \neq k$ for every $k \in \nat$, where $k$ stands for the term $1 + \cdots + 1$. A finite subset of this theory mentions finitely many $k$, and is satisfied by $\mathcal P(\nat)$, a model of $\mathsf Z_2$ (:ref{#ex-z2-arith-models}), with $c$ interpreted as a number different from all of them. By the compactness theorem, which holds for two-sorted first-order logic like the completeness theorem, the theory has a model $(M, \mathcal S)$. Its element $c^M$ differs from every $k^M$, so it is non-standard.
+
+If $(M, \mathcal S) \models \mathsf Z_2$ has a non-standard element, it satisfies the basic axioms and the induction axiom, so it is not full: otherwise, by :ref{#prop-full-standard}, every element of $M$ would be standard.
+:::
+::::
+
+::::exercise{#ex-bounded-max difficulty=1 lessons="rca0" objective="Prove in a model of $\mathsf{RCA}_0$ that $\mathcal M$-finite sets have a largest element, and contrast with the standard part."}
+Let $(M, \mathcal S)$ be a model of $\mathsf{RCA}_0$. Show that every non-empty $\mathcal M$-finite set $X$ has a largest element. Deduce again that, in a non-standard model, the set of standard elements is not $\mathcal M$-finite.
+
+:::solution
+Let $X \in \mathcal S$ be non-empty with $i \leq B$ for every $i \in X$. The set $U = \{ b : \forall i \leq B\, (i \in X \rightarrow i \leq b) \}$ is defined by a bounded formula with parameters $X, B$, so it belongs to $\mathcal S$ by $\Delta^0_1$ comprehension, and $B \in U$. By the least number principle (:ref{#ex-pi01-lnp}, for the bounded formula $b \in U$), $U$ has a least element $b$; it is an upper bound of $X$, since all elements of $X$ are at most $B$. Let $x \in X$; then $x \leq b$. If $b = 0$, then $x = 0 = b$, so $b \in X$. If $b \neq 0$ and $b \notin X$, every $i \in X$ satisfies $i \leq b$ and $i \neq b$, hence $i \leq b - 1$, so $b - 1 \in U$, contradicting the minimality of $b$. So $b \in X$ is the largest element of $X$.
+
+In a non-standard model, the set of standard elements is non-empty and has no largest element, since $k + 1$ is standard when $k$ is. So it is not $\mathcal M$-finite.
+:::
+::::
+
+::::exercise{#ex-same-first-order-part difficulty=2 lessons="rca0" objective="Extend absoluteness of arithmetic formulas to models with the same first-order part, and use it to find submodels of $\mathsf{RCA}_0$."}
+Let $(M, \mathcal S)$ be a model of $\mathsf{RCA}_0$, and $\mathcal S' \subseteq \mathcal S$ a non-empty class with the following property: every set $Y \subseteq M$ defined in $(M, \mathcal S)$ by a $\Sigma^0_1$ formula with parameters from $M$ and $\mathcal S'$, which $(M, \mathcal S)$ satisfies to be equivalent to a $\Pi^0_1$ formula with parameters from $M$ and $\mathcal S'$, belongs to $\mathcal S'$. Show that $(M, \mathcal S')$ is a model of $\mathsf{RCA}_0$. What does this give when $M = \nat$?
+
+:::solution
+*Absoluteness.* For every arithmetic formula $\varphi$ with parameters from $M$ and $\mathcal S'$, $(M, \mathcal S') \models \varphi$ if and only if $(M, \mathcal S) \models \varphi$. This is proved by induction on $\varphi$ as in :ref{#prop-omega-absolute}: the two structures have the same first-order part, atomic formulas $t \in X$ are evaluated by membership in both, and only number quantifiers occur.
+
+*Axioms.* The basic axioms are first-order and hold in $M$. An instance of $\Sigma^0_1$ induction with parameters from $M$ and $\mathcal S'$ is arithmetic and holds in $(M, \mathcal S)$, hence in $(M, \mathcal S')$. For $\Delta^0_1$ comprehension, let $\varphi$ be $\Sigma^0_1$ and $\psi$ be $\Pi^0_1$, with parameters from $M$ and $\mathcal S'$, such that $(M, \mathcal S') \models \forall n\, (\varphi(n) \leftrightarrow \psi(n))$. By absoluteness, $(M, \mathcal S)$ satisfies the same equivalence, so the set $Y = \{ n \in M : (M, \mathcal S) \models \varphi(n) \}$ belongs to $\mathcal S'$ by hypothesis. By absoluteness again, $(M, \mathcal S') \models \forall n\, (n \in Y \leftrightarrow \varphi(n))$.
+
+For $M = \nat$, absoluteness reduces truth in both structures to truth in reality, and the property says that $\mathcal S'$ contains every set that is c.e. and co-c.e. relative to finitely many of its members, that is, $\mathcal S'$ is closed under join and downward under Turing reducibility. Taking for $\mathcal S$ the full structure $\mathcal P(\nat)$, a model of $\mathsf Z_2$ and hence of $\mathsf{RCA}_0$, we recover the direction ($\Leftarrow$) of :ref{#thm-rca-turing-ideal}: every Turing ideal is an ω-model of $\mathsf{RCA}_0$.
+:::
+::::
+:::::

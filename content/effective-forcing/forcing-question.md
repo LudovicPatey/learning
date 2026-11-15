@@ -1,7 +1,7 @@
 ---
 title: The forcing question
 summary: Forcing questions and their definability; a forcing question for tree forcings at every level; preservation of non-Σ⁰ₙ sets and cone avoidance for the iterated jumps.
-duration: 30
+duration: 35
 prerequisites: [forcing-with-trees, cohen-forcing]
 ---
 
@@ -27,6 +27,14 @@ A forcing question may be given only for the $\Sigma^0_n$ sentences of some leve
 :::example{#ex-cohen-question}
 For Cohen forcing, the relation "$\sigma \mathrel{?{\vdash}} \varphi$ if some $\tau \succeq \sigma$ forces $\varphi$" is a forcing question, and it is $\Sigma^0_n$-preserving for every $n$ by :ref{#thm-cohen-forcing-definable}. At level $1$, $\sigma \mathrel{?{\vdash}} \Phi^G_e(\vec m)\converge$ if and only if $\Phi^\tau_e(\vec m)\converge$ for some $\tau \succeq \sigma$.
 :::
+
+::::exercise{#ex-question-needs-extensions difficulty=1 objective="See why a forcing question must refer to extensions of the condition, and not to the condition alone."}
+For Cohen forcing, let $\sigma \mathrel{?{\vdash}} \varphi$ hold, for $\Sigma^0_1$ sentences $\varphi$, if $\sigma$ itself forces $\varphi$. This relation is $\Sigma^0_1$ by :ref{#thm-cohen-forcing-definable}. Show that it is not a forcing question.
+
+:::solution
+Property 1 holds, with the condition itself as extension. Property 2 fails. Let $\Phi_e$ be the functional that, on every input, searches for an element of its oracle, and $\varphi$ the sentence $\Phi^G_e(0)\converge$, "$G$ is non-empty". The empty string does not force $\varphi$, since its member $\emptyset$ does not satisfy it. But no string $\tau$ forces $\neg \varphi$, since $\tau 1 1 \cdots$ is a member of $\tau$ satisfying $\varphi$. So the empty string answers negatively, and no extension forces $\neg \varphi$. The question of :ref{#ex-cohen-question}, which asks whether some extension forces $\varphi$, answers positively here.
+:::
+::::
 
 :::theorem{#thm-tree-question}
 Jockusch–Soare forcing and computable Sacks forcing have forcing questions that are $\Sigma^0_n$-preserving for every $n \geq 1$.
@@ -105,3 +113,55 @@ The forcing question was introduced by Monin and Patey, and appears in several o
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics (2019), doi:10.1016/j.aim.2019.06.026; arXiv:1803.09771.
 - L. Patey, *Controlling iterated jumps of solutions to combinatorial problems*, arXiv:1509.05340 (2015).
 - B. Monin and L. Patey, *Computability theory*, chapter *Effective forcing*, sections *Computational complexity and forcing question* and *Forcing question*.
+
+:::::exercises
+::::exercise{#ex-js-naive-question difficulty=2 objective="See that the question &quot;some extension forces $\varphi$&quot; may fail to be $\Sigma^0_1$-preserving for Jockusch–Soare forcing."}
+For Jockusch–Soare forcing, let $\mathcal P \mathrel{?{\vdash}} \varphi$ hold, for $\Sigma^0_1$ sentences, if some extension of $\mathcal P$ forces $\varphi$.
+
+1. Show that $\mathcal P \mathrel{?{\vdash}} \Phi^G_e(\vec m)\converge$ if and only if some member $X$ of $\mathcal P$ satisfies $\Phi^X_e(\vec m)\converge$.
+2. For a number $a$, let $C_a = \{ \langle a, t \rangle : t \in \nat \}$ be the $a$-th column. Show that $\mathcal P = \{ \emptyset \} \cup \{ C_a : a \notin \emptyset' \}$ is a non-empty $\Pi^0_1$ class.
+3. Let $\Phi_e$ be the functional that, on input $m$, searches for $t$ with $\langle m, t \rangle \in G$. Show that $\{ m : \mathcal P \mathrel{?{\vdash}} \Phi^G_e(m)\converge \}$ is the complement of $\emptyset'$, so that this question is not $\Sigma^0_1$-preserving.
+
+:::solution
+1. If some $\mathcal Q \subseteq \mathcal P$ forces the sentence, any member of $\mathcal Q$ is a member of $\mathcal P$ satisfying it. Conversely, if $X \in \mathcal P$ satisfies $\Phi^X_e(\vec m)\converge$ with use $u$, then $\mathcal P \cap [X \uh u]$ is a non-empty $\Pi^0_1$ class contained in $\mathcal P$, and all its members satisfy the sentence by the use principle.
+2. Let $T$ be the set of strings $\sigma$ that either have no $1$, or for which there is $a$ such that $\sigma(p) = 1$ exactly for the positions $p < |\sigma|$ of the form $\langle a, t \rangle$, and $a$ has not entered $\emptyset'$ by stage $|\sigma|$. The number $a$ is then unique, since it is read off any position where $\sigma$ is $1$, so $T$ is computable. It is closed under prefixes: a prefix of $\sigma$ has no $1$, or the same pattern for the same $a$, which has not entered $\emptyset'$ by an earlier stage either. A path of $T$ with no $1$ is $\emptyset$. A path with a $1$ at a position $\langle a, t \rangle$ has the pattern of $a$ on all its long prefixes, so it is $C_a$, and $a$ has not entered $\emptyset'$ at any stage, that is, $a \notin \emptyset'$. Conversely $\emptyset$, and $C_a$ for $a \notin \emptyset'$, are paths. So $\mathcal P = [T]$, which contains $\emptyset$.
+3. By item 1, $\mathcal P \mathrel{?{\vdash}} \Phi^G_e(m)\converge$ if and only if some member of $\mathcal P$ meets the column of $m$. The member $\emptyset$ does not, and $C_a$ does if and only if $a = m$. So the answer is positive if and only if $C_m \in \mathcal P$, that is, $m \notin \emptyset'$. The complement of $\emptyset'$ is not c.e. By contrast, the question of :ref{#thm-tree-question} answers positively at $\mathcal P$ only if $\mathcal P$ itself forces the convergence, which never happens here, because of the member $\emptyset$.
+:::
+::::
+
+::::exercise{#ex-question-iterated-cones difficulty=1 objective="Combine the cone avoidance results for iterated jumps into one basis theorem."}
+Let $C_0, C_1, \dots$ be sets with $C_n \not\leq_T \emptyset^{(n)}$ for every $n$. Show that every non-empty $\Pi^0_1$ class has a member $G$ with $C_n \not\leq_T G^{(n)}$ for every $n$. Deduce that every non-empty $\Pi^0_1$ class has a member that is not high.
+
+:::solution
+By :ref{#thm-tree-question} and :ref{#cor-question-jump-cone}, for each $n$ there is a countable family $\mathcal D_n$ of dense sets of Jockusch–Soare forcing such that $C_n \not\leq_T G^{(n)}$ for every $\mathcal D_n$-generic set $G$. Let $\mathcal P$ be a non-empty $\Pi^0_1$ class. By :ref{#lem-rasiowa-sikorski}, some filter containing $\mathcal P$ is generic for the countable family $\bigcup_n \mathcal D_n$; its generic set $G$ is a member of $\mathcal P$, and $C_n \not\leq_T G^{(n)}$ for every $n$. For the last statement, take $C_1 = \emptyset''$, which is not computable in $\emptyset'$, and for instance $C_n = \emptyset^{(n+1)}$ for the other $n$; then $\emptyset'' \not\leq_T G'$.
+:::
+::::
+
+::::exercise{#ex-question-pi-sentences difficulty=1 objective="Extend a forcing question from $\Sigma^0_n$ sentences to $\Pi^0_n$ sentences."}
+Let $\mathbb P$ have a forcing question for $\Sigma^0_n$ sentences. For a $\Pi^0_n$ sentence $\psi$, let $c \mathrel{?{\vdash}} \psi$ hold if $c \mathrel{?{\nvdash}} \neg \psi$. Show that properties 1 and 2 of :ref{#def-forcing-question} hold for $\Pi^0_n$ sentences, and that if the question is $\Sigma^0_n$-preserving, then $\{ \vec m : c \mathrel{?{\vdash}} \psi(\vec m) \}$ is $\Pi^0_n$ for every condition $c$ and every $\Pi^0_n$ formula $\psi(\vec x)$.
+
+:::solution
+The sentence $\neg \psi$ is $\Sigma^0_n$, and $\neg \neg \psi = \psi$. If $c \mathrel{?{\vdash}} \psi$, then $c \mathrel{?{\nvdash}} \neg \psi$, and property 2 for $\neg \psi$ gives an extension forcing $\neg \neg \psi = \psi$. If $c \mathrel{?{\nvdash}} \psi$, then $c \mathrel{?{\vdash}} \neg \psi$, and property 1 for $\neg \psi$ gives an extension forcing $\neg \psi$. For the complexity, $\{ \vec m : c \mathrel{?{\vdash}} \psi(\vec m) \}$ is the complement of $\{ \vec m : c \mathrel{?{\vdash}} \neg \psi(\vec m) \}$, which is $\Sigma^0_n$ since $\neg \psi(\vec x)$ is a $\Sigma^0_n$ formula.
+:::
+::::
+
+::::exercise{#ex-question-not-monotone difficulty=1 objective="Compare how forcing and the forcing question behave under extension."}
+For the question of Cohen forcing of :ref{#ex-cohen-question}, find a $\Sigma^0_1$ sentence $\varphi$ and strings $\tau \preceq \sigma$ such that $\tau \mathrel{?{\vdash}} \varphi$ and $\sigma \mathrel{?{\nvdash}} \varphi$. Show that, on the contrary, a negative answer at $\tau$ remains negative at every $\sigma \succeq \tau$, and that a sentence forced by $\tau$ is forced by every $\sigma \succeq \tau$.
+
+:::solution
+Let $\varphi$ be the $\Sigma^0_1$ sentence expressing $G(0) = 1$, given by a functional that reads the bit $0$ of its oracle and converges if and only if it is $1$. The empty string answers positively, since its extension $1$ forces $\varphi$. The string $0$ answers negatively: all its extensions have $0$ at position $0$, so none forces $\varphi$.
+
+If $\tau \mathrel{?{\nvdash}} \varphi$, no extension of $\tau$ forces $\varphi$; the extensions of $\sigma \succeq \tau$ are extensions of $\tau$, so none of them forces $\varphi$, and $\sigma \mathrel{?{\nvdash}} \varphi$. The last statement is the extension property of :ref{#prop-forcing-basic}. So the question records what can still be forced, which shrinks along a construction, while forcing records what has been forced, which grows.
+:::
+::::
+
+::::exercise{#ex-question-relativized difficulty=1 objective="Relativize the preservation theorem at level $1$ to formulas with oracle $Z \oplus G$."}
+Let $Z$ be a set, and consider the $\Sigma^0_1$ sentences with oracle $Z \oplus G$ (:ref{#ex-forcing-formulas}, item 4). Suppose that a notion of forcing has a forcing question for these sentences such that $\{ m : c \mathrel{?{\vdash}} \varphi(m) \}$ is $\Sigma^0_1(Z)$ for every condition $c$ and every such formula $\varphi(x)$. Show that if $A$ is not $\Sigma^0_1(Z)$, then $A$ is not $\Sigma^0_1(Z \oplus G)$ for every sufficiently generic set $G$, and that if $C \not\leq_T Z$, then $C \not\leq_T Z \oplus G$ for every sufficiently generic set $G$.
+
+:::solution
+For a formula $\varphi(x)$, let $E_\varphi$ be the set of conditions forcing $\varphi(m)$ for some $m \notin A$, or $\neg \varphi(m)$ for some $m \in A$. Given $c$, the set $U = \{ m : c \mathrel{?{\vdash}} \varphi(m) \}$ is $\Sigma^0_1(Z)$, so $U \neq A$, and properties 1 and 2 give an extension in $E_\varphi$, as in :ref{#thm-question-preservation}. Let $G$ be generic for the sets $E_\varphi$. For each $\varphi$, $G$ is a member of a condition in $E_\varphi$, and at level $1$ forcing is truth on all members; so $G$ satisfies $\varphi(m)$ for some $m \notin A$, or $\neg \varphi(m)$ for some $m \in A$. The $\Sigma^0_1(Z \oplus G)$ sets are the sets $\{ m : \Phi^{Z \oplus G}_e(m)\converge \}$, so $A$ is not one of them.
+
+If $C \not\leq_T Z$, then $C$ or its complement is not $\Sigma^0_1(Z)$, since a set that is $\Sigma^0_1(Z)$ and $\Pi^0_1(Z)$ is $Z$-computable. By the first part, for every set generic for the corresponding family, $C$ or its complement is not $\Sigma^0_1(Z \oplus G)$, so $C \not\leq_T Z \oplus G$.
+:::
+::::
+:::::

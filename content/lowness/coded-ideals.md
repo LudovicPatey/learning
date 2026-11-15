@@ -112,19 +112,11 @@ Item 1 is the coded form of :ref{#thm-scott-pa}, and item 2 is Simpson's proof o
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-scott-code-cone difficulty=1 objective="Apply the cone avoidance basis theorem to the class of codes, to obtain a Scott ideal avoiding a cone in one step."}
 Let $C$ be a non-computable set. Show, with a single application of the cone avoidance basis theorem, that there is a code $M$ of a Scott ideal with $C \not\leq_T M$, and deduce :ref{#lem-scott-cone} for $Z = \emptyset$.
 
 :::solution
 By :ref{#thm-cone-avoidance-basis}, the non-empty $\Pi^0_1$ class $\mathcal S_\emptyset$ has a member $M$ with $C \not\leq_T M$. Every member of the ideal coded by $M$ is computable in $M$, so it does not compute $C$. The ideal is a Scott ideal by :ref{#thm-scott-class}, and it does not contain $C$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Let $M$ code a Turing ideal $\mathcal M$ that contains $\emptyset$ and is closed under the jump. Show that $M$ computes every arithmetic set, and that $M$ is not arithmetic.
-
-:::solution
-$\mathcal M$ contains $\emptyset^{(n)}$ for every $n$, and every member of $\mathcal M$ is computable in $M$; every arithmetic set is computable in some $\emptyset^{(n)}$ by Post's theorem. If $M$ were arithmetic, it would be computable in some $\emptyset^{(n)}$, and $\emptyset^{(n+1)}$, which is computable in $M$, would be computable in $\emptyset^{(n)}$, contradicting :ref{#thm-jump}.
 :::
 ::::
 
@@ -135,3 +127,57 @@ Scott (1962) showed that the countable Scott ideals are exactly the families of 
 - D. Scott, *Algebras of sets binumerable in complete extensions of arithmetic*, in *Recursive Function Theory*, Proceedings of Symposia in Pure Mathematics 5, American Mathematical Society, 1962, 117–121.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, second edition, Cambridge University Press, 2009, Sections VII.2 and VIII.2.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Lowness*, section *Coding ideals*.
+
+:::::exercises
+::::exercise{#ex-jump-ideal-code difficulty=1 objective="Bound from below the complexity of a code of a Turing ideal closed under the jump."}
+Let $M$ code a Turing ideal $\mathcal M$ that contains $\emptyset$ and is closed under the jump. Show that $M$ computes every arithmetic set, and that $M$ is not arithmetic.
+
+:::solution
+$\mathcal M$ contains $\emptyset^{(n)}$ for every $n$, and every member of $\mathcal M$ is computable in $M$; every arithmetic set is computable in some $\emptyset^{(n)}$ by Post's theorem. If $M$ were arithmetic, it would be computable in some $\emptyset^{(n)}$, and $\emptyset^{(n+1)}$, which is computable in $M$, would be computable in $\emptyset^{(n)}$, contradicting :ref{#thm-jump}.
+:::
+::::
+
+::::exercise{#ex-scott-code-pa difficulty=1 objective="Relate codes of Scott ideals to PA sets, for arbitrary codes and for members of the Scott class."}
+Let $X$ be a set.
+
+1. Show that every set that codes a Scott ideal containing $X$ is PA relative to $X$.
+2. Show that every $M \in \mathcal S_X$ is PA relative to every member of the ideal it codes.
+3. Deduce that a set computes a code of some Scott ideal containing $X$ if and only if it is PA relative to $X$.
+
+:::solution
+1. Let $M$ code a Scott ideal $\mathcal M$ containing $X$. By :ref{#prop-wkl-scott} (2), $\mathcal M$ contains a set $Q$ PA relative to $X$. It is a column of $M$, so $Q \leq_T M$, and $M$ computes the $\{0, 1\}$-valued function DNC relative to $X$ that $Q$ computes: $M$ is PA relative to $X$.
+2. A member of the ideal is a column $Z_a$, and $M$ computes the column $Z_{\mathrm{pa}(a)}$, a $\{0, 1\}$-valued function DNC relative to $Z_a$ by :ref{#thm-scott-class}.
+3. If $W$ computes a code of a Scott ideal containing $X$, it computes a function DNC relative to $X$ with values in $\{0, 1\}$, by item 1, so it is PA relative to $X$. The converse is item 1 of :ref{#cor-scott-codes}. So item 1 of the corollary holds for all codes of Scott ideals, not only for members of $\mathcal S_X$.
+:::
+::::
+
+::::exercise{#ex-scott-boolean-indices difficulty=1 objective="Compute indices of Boolean combinations and finite modifications of members in a member of the Scott class."}
+Recall that $Y \oplus W = \{ 2x : x \in Y \} \cup \{ 2x + 1 : x \in W \}$. Show that there are computable functions $\mathrm{int}$, $\mathrm{uni}$, $\mathrm{cmp}$ and $\mathrm{cut}$ such that for every $X$ and every $M = \bigoplus_n Z_n \in \mathcal S_X$, and all $a$, $b$, $n$:
+$$
+Z_{\mathrm{int}(a, b)} = Z_a \cap Z_b, \quad Z_{\mathrm{uni}(a, b)} = Z_a \cup Z_b, \quad Z_{\mathrm{cmp}(a)} = \nat \setminus Z_a, \quad Z_{\mathrm{cut}(a, n)} = Z_a \setminus \{ 0, \dots, n \}.
+$$
+Give $M$-indices of $\emptyset$ and of $\nat$ that do not depend on $M$.
+
+:::solution
+Let $e_\cap$ be an index of the functional $\Phi^W(x) = W(2x) \cdot W(2x + 1)$. It is total and $\{0, 1\}$-valued for every oracle, and with oracle $Z_a \oplus Z_b = Z_{\mathrm{join}(a, b)}$ it is the characteristic function of $Z_a \cap Z_b$. By the first consequence stated in :ref{#thm-scott-class}, $\mathrm{int}(a, b) = \mathrm{red}(\mathrm{join}(a, b), e_\cap)$ works. Similarly $\mathrm{uni}(a, b) = \mathrm{red}(\mathrm{join}(a, b), e_\cup)$ with $\Phi^W_{e_\cup}(x) = \max(W(2x), W(2x + 1))$, and $\mathrm{cmp}(a) = \mathrm{red}(a, e_c)$ with $\Phi^W_{e_c}(x) = 1 - W(x)$. For $\mathrm{cut}$, let $k(n)$ be an index, computable from $n$ by SMN, of the functional equal to $W(x)$ for $x > n$ and to $0$ for $x \leq n$, and let $\mathrm{cut}(a, n) = \mathrm{red}(a, k(n))$. Finally $\mathrm{red}(0, e_0)$ and $\mathrm{red}(0, e_1)$, with $e_0$ and $e_1$ indices of the constant functionals $0$ and $1$, are $M$-indices of $\emptyset$ and $\nat$. These are the operations used on reservoirs in :ref{to="lowness/cjs-theorem"}.
+:::
+::::
+
+::::exercise{#ex-scott-class-perfect difficulty=2 objective="Show that the Scott class has no member computable in its parameter, and deduce that it has continuum many members."}
+Show that $\mathcal S_X$ has no $X$-computable member, and that it has $2^{\aleph_0}$ members.
+
+:::solution
+A member $M$ computes $Z_{\mathrm{pa}(0)}$, a $\{0, 1\}$-valued function DNC relative to $X$. If $M \leq_T X$, this function is $\Phi^X_e$ for some $e$, and $\Phi^X_e(e) \neq \Phi^X_e(e)$, a contradiction.
+
+Let $T$ be an $X$-computable tree with $[T] = \mathcal S_X$, and call a string $\sigma$ extendible if $[\sigma] \cap \mathcal S_X \neq \emptyset$. Every extendible $\sigma$ has two incomparable extendible extensions. Otherwise the extendible extensions of $\sigma$ are pairwise comparable, and $[\sigma] \cap \mathcal S_X$ has a single member $M$. Then $M$ is $X$-computable: for $n \geq |\sigma|$, if $\tau \succeq \sigma$ has length $n$ and $\tau \neq M \uh n$, then $[\tau] \cap [T] = \emptyset$, so by König's lemma $T$ has no node of some length above $\tau$; while $M \uh n$ has extensions in $T$ of every length. So $X$ computes $M \uh n$ by searching for a length $s$ at which exactly one string $\tau \succeq \sigma$ of length $n$ has an extension in $T$. This contradicts the first part. Now let $\sigma_\varepsilon = \varepsilon$, and let $\sigma_{\rho 0}$ and $\sigma_{\rho 1}$ be incomparable extendible extensions of $\sigma_\rho$. For each $\beta \in 2^\nat$, the strings $\sigma_{\beta \uh n}$ are comparable and of unbounded length; their union $Y_\beta$ has only extendible prefixes, so it belongs to the closed class $\mathcal S_X$. Distinct $\beta$ give distinct $Y_\beta$.
+:::
+::::
+
+::::exercise{#ex-scott-code-dominated difficulty=1 objective="Apply the computably dominated basis theorem to the class of codes, to obtain a Scott ideal of computably dominated sets in one step." lessons="big-five/wkl0"}
+Show, with a single application of the computably dominated basis theorem, that there is a Scott ideal all of whose members are computably dominated.
+
+:::solution
+By :ref{#thm-dominated-basis}, the non-empty $\Pi^0_1$ class $\mathcal S_\emptyset$ has a computably dominated member $M$. It codes a Scott ideal by :ref{#thm-scott-class}. Every member $Y$ of this ideal is computable in $M$, so every $Y$-computable function is $M$-computable, hence dominated by a computable function: $Y$ is computably dominated. Compare with :ref{#ex-dominated-scott}, which builds such an ideal by a chain of applications of the basis theorem.
+:::
+::::
+:::::

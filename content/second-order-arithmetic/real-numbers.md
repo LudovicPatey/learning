@@ -86,15 +86,13 @@ Why does the failure of the monotone convergence theorem in $\mathrm{REC}$ need 
 
 A computable non-decreasing bounded sequence of rationals whose limit is not computable is called a **Specker sequence**. The same construction, carried out for an arbitrary injective function, shows that the monotone convergence theorem implies the existence of the ranges of injective functions, and thus arithmetic comprehension; this reversal is proved in the course on the Big Five (:ref{#thm-monotone-aca}).
 
-## Exercises
-
-::::exercise{difficulty=2}
-A real $x$ is **left-c.e.** if the set of rationals $q < x$ is c.e. Show that $x$ is left-c.e. if and only if it is the limit of a computable non-decreasing sequence of rationals. Deduce that every non-computable left-c.e. real, such as Chaitin's halting probability $\Omega$ (a forward pointer to the course on Kolmogorov complexity, :ref{#thm-omega}), is the limit of a Specker sequence.
+::::exercise{#ex-left-ce-specker difficulty=2 objective="Characterize the left-c.e. reals as limits of computable non-decreasing sequences, and recognize Specker sequences among them."}
+A real $x$ is **left-c.e.** if the set of rationals $q < x$ is c.e. Show that $x$ is left-c.e. if and only if it is the limit of a computable non-decreasing sequence of rationals. Deduce that every non-computable left-c.e. real, such as Chaitin's halting probability $\Omega$ of the course on Kolmogorov complexity, is the limit of a Specker sequence.
 
 :::solution
 If $x$ is the limit of a computable non-decreasing sequence $(x_n)$ of rationals, then $q < x$ if and only if $q < x_n$ for some $n$: each $x_n$ is at most $x$, and if $q < x$, then $x_n > q$ for $n$ large. This is a c.e. condition on $q$. Conversely, let $q_0, q_1, \dots$ be a computable enumeration of the non-empty c.e. set $L = \{ q : q < x \}$, and $x_n = \max_{i \leq n} q_i$. The sequence $(x_n)$ is computable, non-decreasing and bounded by $x$; for $\varepsilon > 0$, some rational of $(x - \varepsilon, x)$ belongs to $L$, so $x_n > x - \varepsilon$ for $n$ large. Hence $x_n \to x$.
 
-If $x$ is moreover not computable, such a sequence, bounded by any rational above $x$, is a Specker sequence. The real $\Omega$ is the limit of the computable non-decreasing sequence $(\Omega_s)$ of rationals, and it is not computable, since $\Omega \equiv_T \emptyset'$ (:ref{#thm-omega}).
+If $x$ is moreover not computable, such a sequence, bounded by any rational above $x$, is a Specker sequence. The real $\Omega$ is the limit of the computable non-decreasing sequence $(\Omega_s)$ of rationals, and it is not computable, since $\Omega \equiv_T \emptyset'$, as shown in the course on Kolmogorov complexity.
 :::
 ::::
 
@@ -109,3 +107,85 @@ The coding of reals follows Simpson, Section II.4 (Definition II.4.4), and Dzhaf
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Sections II.4 and III.2.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 10.1–10.2.
 - K. Weihrauch, *Computable Analysis*, Springer, 2000.
+
+:::::exercises
+::::exercise{#ex-real-order-limits difficulty=1 objective="Check that the order and equality of coded reals agree with those of their limits, and read off their complexity."}
+For a real $x = (q_k)$ in the sense of :ref{#def-real-rca}, let $\hat x = \lim_k q_k$. Show that $x < y$ if and only if $\hat x < \hat y$, and $x =_{\mathbb R} y$ if and only if $\hat x = \hat y$. Deduce that exactly one of $x < y$, $x =_{\mathbb R} y$, $y < x$ holds, and write $x < y$ as a $\Sigma^0_1$ formula and $x =_{\mathbb R} y$ as a $\Pi^0_1$ formula with parameters $x, y$.
+
+:::solution
+Let $x = (q_k)$ and $y = (p_k)$. Letting $l \to \infty$ in $|q_k - q_l| \leq 2^{-k}$ gives $|q_k - \hat x| \leq 2^{-k}$, and similarly for $y$.
+
+- If $q_k + 2^{-k+1} < p_k$, then $\hat x \leq q_k + 2^{-k} < p_k - 2^{-k} \leq \hat y$. Conversely, if $\hat x < \hat y$, take $k$ with $2^{-k+2} < \hat y - \hat x$; then $q_k + 2^{-k+1} \leq \hat x + 2^{-k} + 2^{-k+1} < \hat y - 2^{-k} \leq p_k$, so $x < y$.
+- If $\hat x = \hat y$, then $|q_k - p_k| \leq |q_k - \hat x| + |\hat y - p_k| \leq 2^{-k+1}$ for every $k$. Conversely, if $|q_k - p_k| \leq 2^{-k+1}$ for every $k$, then $|\hat x - \hat y| \leq 2^{-k} + 2^{-k+1} + 2^{-k}$ for every $k$, so $\hat x = \hat y$.
+
+Exactly one of $\hat x < \hat y$, $\hat x = \hat y$, $\hat y < \hat x$ holds, hence exactly one of the three relations between $x$ and $y$. With the sequences coded by their graphs, $x < y$ is $\exists k\, \exists a\, \exists b\, (\langle k, a \rangle \in x \wedge \langle k, b \rangle \in y \wedge a + 2^{-k+1} < b)$ and $x =_{\mathbb R} y$ is $\forall k\, \forall a\, \forall b\, \big( (\langle k, a \rangle \in x \wedge \langle k, b \rangle \in y) \rightarrow |a - b| \leq 2^{-k+1} \big)$, where $a, b$ range over (codes of) rationals and the comparisons of rationals are bounded.
+:::
+::::
+
+::::exercise{#ex-real-equality-transitive difficulty=1 objective="Prove that equality of reals is transitive from the definition, by an argument that does not use limits and therefore works in $\mathsf{RCA}_0$."}
+Show directly from :ref{#def-real-rca}, without using limits, that if $x =_{\mathbb R} y$ and $y =_{\mathbb R} z$, then $x =_{\mathbb R} z$.
+
+:::solution
+Let $x = (q_k)$, $y = (p_k)$, $z = (r_k)$, and fix $k$. For every $j \geq k$,
+$$
+\begin{aligned}
+|q_k - r_k| &\leq |q_k - q_j| + |q_j - p_j| + |p_j - r_j| + |r_j - r_k| \\
+&\leq 2^{-k} + 2^{-j+1} + 2^{-j+1} + 2^{-k} = 2^{-k+1} + 2^{-j+2}.
+\end{aligned}
+$$
+A rational $a$ such that $a \leq b + 2^{-j+2}$ for every $j$ satisfies $a \leq b$, so $|q_k - r_k| \leq 2^{-k+1}$. The direct estimate through $p_k$ alone would only give $2^{-k+2}$; passing through a finer precision $j$ is what preserves the factor $2$.
+:::
+::::
+
+::::exercise{#ex-cauchy-modulus difficulty=2 objective="Relate computable limits to computable moduli of convergence, and show by a halting-time construction that the converse fails."}
+A **modulus of convergence** of a convergent sequence of rationals $(x_n)$ with limit $x$ is a function $h$ with $|x_n - x| \leq 2^{-k}$ for all $k$ and all $n \geq h(k)$.
+
+1. Show that if a computable sequence of rationals has a computable modulus of convergence, its limit is a computable real.
+2. Give a computable sequence of rationals that converges to $0$ and has no computable modulus of convergence.
+3. Deduce that the sequence of :ref{#prop-specker} has no computable modulus of convergence.
+
+:::solution
+1. Let $p_k = x_{h(k+1)}$, a computable sequence. Then $|p_k - x| \leq 2^{-k-1}$, so for $k \leq l$, $|p_k - p_l| \leq 2^{-k-1} + 2^{-l-1} \leq 2^{-k}$: $(p_k)$ is a computable real with limit $x$.
+2. Let $x_n = \sum \{ 2^{-e} : e \leq n \text{ and } \Phi_e(e) \text{ halts at stage } n \text{ exactly} \}$, where "at stage $n$ exactly" means at stage $n$ and not before. The sequence is computable, and each $e$ contributes to at most one term. Given $k$, let $N$ exceed the halting stages of the finitely many $e \leq k + 1$ in $\emptyset'$; for $n \geq N$, $0 \leq x_n \leq \sum_{e \geq k + 2} 2^{-e} = 2^{-k-1}$. So $x_n \to 0$. Suppose $h$ is a computable modulus. If $\Phi_e(e)$ halts at stage $s$ exactly with $s \geq \max(e, h(e+1))$, then $x_s \geq 2^{-e} > 2^{-e-1}$, while $s \geq h(e + 1)$ gives $x_s \leq 2^{-e-1}$, a contradiction. So $e \in \emptyset'$ if and only if $\Phi_e(e)$ halts before stage $\max(e, h(e+1))$, which is decidable: a contradiction.
+3. The sequence of :ref{#prop-specker} is computable and its limit is not a computable real; by item 1, it has no computable modulus.
+
+Item 2 shows that a computable limit does not give a computable modulus: the information is in the rate of convergence, not in the limit.
+:::
+::::
+
+::::exercise{#ex-nested-intervals-rca difficulty=2 objective="Carry out a completeness argument in $\mathsf{RCA}_0$, by computing the speed of convergence from the data."}
+Show that $\mathsf{RCA}_0$ proves the following nested interval principle. Let $(a_n)$ and $(b_n)$ be sequences of rationals with $a_n \leq a_{n+1} \leq b_{n+1} \leq b_n$ for every $n$, and such that for every $k$ there is $n$ with $b_n - a_n < 2^{-k}$. Then there is a real $x$ with $a_n \leq x \leq b_n$ for every $n$, where a rational $q$ is identified with the real $(q, q, \dots)$ and $x \leq y$ means $\neg (y < x)$. Why does this not contradict :ref{#prop-specker}?
+
+:::solution
+By induction, $a_n \leq a_m$ and $b_m \leq b_n$ for $n \leq m$, and $a_m \leq b_n$ for all $m, n$ (both are between $a_{\max(m, n)}$ and $b_{\max(m, n)}$); so $b_n - a_n$ is non-increasing. Let $n_k$ be the least $n$ with $b_n - a_n < 2^{-k}$. It exists by hypothesis and the least number principle (:ref{#ex-pi01-lnp}), and the graph of $k \mapsto n_k$ is defined by the bounded formula $b_n - a_n < 2^{-k} \wedge \forall m < n\ b_m - a_m \geq 2^{-k}$, so the function exists by $\Delta^0_1$ comprehension. It is non-decreasing, since $b_n - a_n$ is non-increasing. Let $p_k = a_{n_k}$. For $k \leq l$,
+$$
+p_k = a_{n_k} \leq a_{n_l} = p_l \leq b_{n_l} \leq b_{n_k} < a_{n_k} + 2^{-k} = p_k + 2^{-k},
+$$
+so $|p_k - p_l| < 2^{-k}$ and $x = (p_k)$ is a real.
+
+Suppose $x < a_n$: $p_k + 2^{-k+1} < a_n$ for some $k$. If $n \leq n_k$, then $a_n \leq a_{n_k} = p_k$; if $n > n_k$, then $a_n \leq b_n \leq b_{n_k} < p_k + 2^{-k}$. Both contradict the assumption, so $a_n \leq x$. Suppose $b_n < x$: $b_n + 2^{-k+1} < p_k$ for some $k$; but $p_k = a_{n_k} \leq b_n$. So $x \leq b_n$.
+
+For the Specker sequence $(a_n)$, the hypothesis would require a sequence $(b_n)$ of upper bounds approaching it, with the condition on $b_n - a_n$; the proof computes a real from both sequences. In $\mathrm{REC}$, no computable such $(b_n)$ exists, since the limit is not computable.
+
+Adapted from Simpson, Theorem II.4.8, and Dzhafarov–Mummert, Exercise 10.9.4, which state it for sequences of reals.
+:::
+::::
+
+::::exercise{#ex-reals-uncountable-rca difficulty=2 objective="Formalize Cantor's diagonal argument for the reals in $\mathsf{RCA}_0$, making each choice decidable from approximations."}
+Show that $\mathsf{RCA}_0$ proves: for every sequence of reals $(r_i)$ there is a real $x$ with $x \neq r_i$ for every $i$. Deduce that no computable sequence of reals contains every computable real.
+
+:::solution
+Write $r_i = (q_{i,k})_k$. Define rationals $a_0 = 0$, $b_0 = 1$, and, with $L = b_i - a_i = 3^{-i}$ and $q = q_{i, 2i + 4}$:
+$$
+(a_{i+1}, b_{i+1}) = \begin{cases} (a_i + 2L/3,\ b_i) & \text{if } q < a_i + L/2, \\ (a_i,\ a_i + L/3) & \text{otherwise.} \end{cases}
+$$
+The comparison is between rationals, so the sequence is defined by primitive recursion relative to $(r_i)$ and exists in $\mathsf{RCA}_0$. Since $2^{-2i-4} \cdot 6 < 2^{-2i} \leq 3^{-i}$, we have $2^{-2i-4} < L/6$, and $|r_i - q| \leq 2^{-2i-4}$. In the first case, $r_i \leq q + 2^{-2i-4} < a_i + L/2 + L/6 = a_{i+1}$; in the second, $r_i \geq q - 2^{-2i-4} > a_i + L/3 = b_{i+1}$.
+
+The intervals are nested and $b_n - a_n = 3^{-n} < 2^{-k}$ for $n = k + 1$, so :ref{#ex-nested-intervals-rca} gives a real $x$ with $a_n \leq x \leq b_n$ for every $n$. For each $i$, either $r_i < a_{i+1} \leq x$ or $x \leq b_{i+1} < r_i$; in both cases $x \neq r_i$.
+
+Applied in the ω-model $\mathrm{REC}$, a computable sequence of reals belongs to $\mathrm{REC}$, and the real $x$ of the model is a computable real, different from every $r_i$ by absoluteness.
+
+Adapted from Simpson, Theorem II.4.9, and Dzhafarov–Mummert, Exercise 10.9.5; Simpson's proof keeps the outer quarters of each interval instead of the outer thirds.
+:::
+::::
+:::::

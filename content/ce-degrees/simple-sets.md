@@ -1,7 +1,7 @@
 ---
 title: Simple sets and Post's problem
 summary: Post's problem; simple sets and Post's construction; productive and creative sets; simple sets are not many-one complete.
-duration: 50
+duration: 45
 prerequisites: [turing-degrees/turing-reducibility, arithmetic-hierarchy/index-sets]
 ---
 
@@ -157,15 +157,7 @@ Post introduced stronger thinness properties, such as **hypersimplicity**, and s
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that every creative set is not computable, and that its complement is not c.e.
-
-:::solution
-Let $p$ be a productive function for the complement $P$ of the creative set. If $P = W_e$, then $W_e \subseteq P$ gives $p(e) \in P \setminus W_e = \emptyset$, a contradiction. So $P$ is not c.e., and the creative set, whose complement is not c.e., is not computable.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-simple-join difficulty=1 objective="Check that the join of two simple sets is simple."}
 Show that the join $A \oplus B$ of two simple sets is simple.
 
 :::solution
@@ -173,7 +165,7 @@ $A \oplus B$ is c.e., and its complement $\{ 2n : n \notin A \} \cup \{ 2n + 1 :
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-simple-index-set difficulty=2 objective="Count quantifiers to place the index set of the simple sets in the arithmetic hierarchy." lessons="arithmetic-hierarchy/index-sets"}
 Show that the index set $\{ e : W_e \text{ is simple} \}$ is $\Pi^0_3$.
 
 :::solution
@@ -193,3 +185,76 @@ Post's problem, simple sets and the program of finding thinness properties of co
 - L. Harrington and R. I. Soare, *Post's program and incomplete recursively enumerable sets*, Proceedings of the National Academy of Sciences of the USA 88 (1991), 10242–10246.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.
+
+:::::exercises
+::::exercise{#ex-creative-not-ce difficulty=1 objective="Derive from the definition that a creative set is not computable."}
+Show that every creative set is not computable, and that its complement is not c.e.
+
+:::solution
+Let $p$ be a productive function for the complement $P$ of the creative set. If $P = W_e$, then $W_e \subseteq P$ gives $p(e) \in P \setminus W_e = \emptyset$, a contradiction. So $P$ is not c.e., and the creative set, whose complement is not c.e., is not computable.
+:::
+::::
+
+::::exercise{#ex-simple-filter difficulty=1 objective="Check that simple sets are closed under finite intersections and, up to cofinite sets, under c.e. supersets."}
+Let $A$ and $B$ be simple sets. Show that $A \cap B$ is simple, and that every c.e. set $C \supseteq A$ is either simple or cofinite.
+
+:::solution
+*Supersets.* The complement of $C$ is contained in the complement of $A$. If it is finite, $C$ is cofinite. Otherwise, an infinite c.e. subset of $\nat \setminus C$ would be an infinite c.e. subset of $\nat \setminus A$, and there is none; so $C$ is simple.
+
+*Intersections.* $A \cap B$ is c.e., and its complement $(\nat \setminus A) \cup (\nat \setminus B)$ contains $\nat \setminus A$, so it is infinite. Let $W$ be an infinite c.e. set contained in $(\nat \setminus A) \cup (\nat \setminus B)$. The set $W \cap A$ is c.e., and contained in $\nat \setminus B$, since an element of $W$ that lies in $A$ must lie outside $B$. As $B$ is simple, $W \cap A$ is finite. Then $W \setminus A = W \setminus (W \cap A)$ is an infinite set, c.e. since it is obtained from $W$ by removing finitely many elements, and contained in $\nat \setminus A$. This contradicts the simplicity of $A$. So $A \cap B$ is simple.
+
+Soare (2016, Exercise 5.2.9) states this as follows: the simple sets and the cofinite sets together form a filter in the lattice of c.e. sets.
+:::
+::::
+
+::::exercise{#ex-tot-productive difficulty=1 objective="Apply the transfer of productivity along many-one reductions to the index set of the total functions."}
+Let $\mathrm{Tot} = \{ e : \Phi_e \text{ is total} \}$. Show that $\mathrm{Tot}$ and $\nat \setminus \mathrm{Tot}$ are both productive.
+
+:::solution
+By the parameter form of SMN, there are total computable functions $f$ and $g$ such that, for all $n$ and $y$:
+
+- $\Phi_{f(n)}(y)$ runs $\Phi_n(n)$ for $y$ steps; if the computation has halted within these steps, it loops forever, and otherwise it outputs $0$;
+- $\Phi_{g(n)}(y)$ runs $\Phi_n(n)$ and, if it halts, outputs $0$.
+
+If $\Phi_n(n)\diverge$, then $\Phi_{f(n)}$ is total; if $\Phi_n(n)$ halts after $t$ steps, then $\Phi_{f(n)}(y)\diverge$ for every $y \geq t$. So $n \in \emptyset'$ if and only if $f(n) \in \nat \setminus \mathrm{Tot}$, that is, $\emptyset' \leq_m \nat \setminus \mathrm{Tot}$. Since $\nat \setminus \emptyset'$ is productive (:ref{#prop-halting-creative}), :ref{#prop-productive-reduction} shows that the complement of $\nat \setminus \mathrm{Tot}$, which is $\mathrm{Tot}$, is productive.
+
+Similarly, $\Phi_{g(n)}$ is total if $n \in \emptyset'$ and nowhere defined otherwise, so $\emptyset' \leq_m \mathrm{Tot}$ via $g$, and $\nat \setminus \mathrm{Tot}$ is productive. In particular neither $\mathrm{Tot}$ nor its complement is c.e., and the failure is effective on both sides.
+:::
+::::
+
+::::exercise{#ex-productive-uniform difficulty=2 objective="Make the proof that productive sets contain infinite c.e. sets uniform, and avoid a given c.e. subset."}
+Let $P$ be a productive set. Show that there is a total computable function $f$ such that for every $e$: if $W_e \subseteq P$, then $W_{f(e)}$ is an infinite subset of $P$ disjoint from $W_e$.
+
+:::solution
+Let $p$ be a productive function for $P$. By the parameter form of SMN, there is a total computable $h$ with $W_{h(e, n)} = W_e \cup D_n$ for all $e$ and $n$, where $D_n$ is the finite set of canonical index $n$: the program $h(e, n)$, on input $y$, halts at once if $y \in D_n$, and otherwise runs $\Phi_e(y)$.
+
+For each $e$, define by recursion on $k$:
+$$
+x^e_0 = p(h(e, 0)), \qquad x^e_{k+1} = p(h(e, n^e_k)),
+$$
+where $n^e_k$ is the canonical index of $\{ x^e_0, \dots, x^e_k \}$, and $D_0 = \emptyset$. Since $p$ and $h$ are total, $(e, k) \mapsto x^e_k$ is total computable, and by the parameter form of SMN there is a total computable $f$ with $W_{f(e)} = \{ x^e_k : k \in \nat \}$. The function $f$ is defined for every $e$, including those with $W_e \not\subseteq P$; this is necessary, since the inclusion $W_e \subseteq P$ cannot be decided.
+
+Suppose $W_e \subseteq P$. We show by induction on $k$ that $x^e_k \in P \setminus W_e$ and $x^e_k \notin \{ x^e_0, \dots, x^e_{k-1} \}$. Assume it for all $j < k$. Then $W_e \cup \{ x^e_0, \dots, x^e_{k-1} \} \subseteq P$, and this set is $W_{h(e, m)}$ for the index $m$ used to define $x^e_k$. As $p$ is productive, $x^e_k = p(h(e, m))$ belongs to $P$ and not to $W_e \cup \{ x^e_0, \dots, x^e_{k-1} \}$. So the $x^e_k$ are pairwise distinct elements of $P \setminus W_e$, and $W_{f(e)}$ is an infinite subset of $P$ disjoint from $W_e$.
+
+Adapted from Soare 2016, Exercise 2.4.10. With $W_e = \emptyset$, this is :ref{#lem-productive-infinite}.
+:::
+::::
+
+::::exercise{#ex-inseparable-not-simple difficulty=2 objective="Prove that simple sets are not many-one complete through a computably inseparable pair, without productive sets."}
+Two disjoint c.e. sets $C$ and $D$ are **computably inseparable** if there is no computable set $R$ with $C \subseteq R$ and $R \cap D = \emptyset$.
+
+1. Show that $C = \{ e : \Phi_e(e)\converge = 0 \}$ and $D = \{ e : \Phi_e(e)\converge = 1 \}$ are computably inseparable.
+2. Let $(C, D)$ be a computably inseparable pair and $S$ a c.e. set with $C \leq_m S$. Show that $S$ is not simple.
+3. Deduce :ref{#thm-simple-not-complete}.
+
+:::solution
+1. Suppose $R$ is computable, $C \subseteq R$ and $R \cap D = \emptyset$. Let $e$ be an index of the total computable function equal to $1$ on $R$ and to $0$ outside $R$. If $e \in R$, then $\Phi_e(e) = 1$, so $e \in D$, which contradicts $R \cap D = \emptyset$. If $e \notin R$, then $\Phi_e(e) = 0$, so $e \in C \subseteq R$, a contradiction.
+
+2. Let $f$ be a computable function with $x \in C \iff f(x) \in S$. The set $f(D) = \{ f(x) : x \in D \}$ is c.e. If $x \in D$, then $x \notin C$, so $f(x) \notin S$: hence $f(D) \subseteq \nat \setminus S$. Suppose $f(D)$ is finite. Then $R = \{ x : f(x) \notin f(D) \}$ is computable, since $f$ is computable and $f(D)$ is a fixed finite set. It contains $C$, because $x \in C$ gives $f(x) \in S$, while $f(D) \cap S = \emptyset$; and it is disjoint from $D$, by definition. This contradicts the inseparability of $(C, D)$. So $f(D)$ is an infinite c.e. subset of $\nat \setminus S$, and $S$ is not simple.
+
+3. If $S$ is m-complete, then $C \leq_m S$ for the c.e. set $C$ of item 1, and $S$ is not simple by items 1 and 2.
+
+Adapted from Soare 2016, Exercise 5.2.11.
+:::
+::::
+:::::

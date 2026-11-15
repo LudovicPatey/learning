@@ -1,7 +1,7 @@
 ---
 title: Π⁰₁ classes and effective compactness
 summary: The Π⁰₁ classes as sets of paths through computable trees, their equivalent descriptions, examples, and the Σ⁰₁ complexity of emptiness.
-duration: 35
+duration: 30
 prerequisites: [cantor-space, arithmetic-hierarchy/post-theorem]
 ---
 
@@ -91,7 +91,7 @@ Which of these classes are $\Pi^0_1$?
 
 ## Exercises
 
-::::exercise{difficulty=1 #ex-pi01-intersection-union}
+::::exercise{#ex-pi01-intersection-union difficulty=1 objective="Check that the $\Pi^0_1$ classes are closed under finite intersections and unions, uniformly in indices."}
 Show that the intersection of two $\Pi^0_1$ classes, and the union of two $\Pi^0_1$ classes, are $\Pi^0_1$ classes, uniformly in indices.
 
 :::solution
@@ -99,19 +99,11 @@ If $\mathcal P = [S]$ and $\mathcal Q = [T]$ with $S$ and $T$ computable trees, 
 :::
 ::::
 
-::::exercise{difficulty=2 #ex-pi01-disjoint-cylinders}
+::::exercise{#ex-pi01-disjoint-cylinders difficulty=2 objective="Characterize the $\Pi^0_1$ classes among the closed classes by the cylinders disjoint from them."}
 Show that a class $\mathcal P \subseteq \cs$ is $\Pi^0_1$ if and only if the set of strings $\sigma$ with $[\sigma] \cap \mathcal P = \emptyset$ is c.e., and $\mathcal P$ is closed.
 
 :::solution
 If $\mathcal P = [T]$ with $T$ computable, then $[\sigma] \cap \mathcal P = \emptyset$ is the $\Sigma^0_1$ property of :ref{#prop-pi01-emptiness}, uniformly in $\sigma$. Conversely, if $\mathcal P$ is closed and $W = \{ \sigma : [\sigma] \cap \mathcal P = \emptyset \}$ is c.e., then the complement of $\mathcal P$ is $[W]^{\prec}$: a sequence outside the closed class $\mathcal P$ has a cylinder neighborhood disjoint from $\mathcal P$. So the complement is a $\Sigma^0_1$ class, and $\mathcal P$ is $\Pi^0_1$ by :ref{#prop-pi01-equivalent}.
-:::
-::::
-
-::::exercise{difficulty=2 #ex-nonempty-indices}
-Show that there is a computable function $f$ such that, for every index $e$ of a computable tree $T_e$, $f(e)$ is the index of a computable tree $S_e$ with $[S_e] \neq \emptyset$, and $[S_e] = [T_e]$ whenever $[T_e] \neq \emptyset$. So the non-empty $\Pi^0_1$ classes can be listed by a computable sequence of indices, although the set of $e$ such that $\{ X : \Phi^X_e(0)\diverge \}$ is non-empty is not c.e.
-
-:::solution
-The idea is to follow $T_e$ as long as it has nodes at every length, and to freeze it on a single path if it dies out. Given $\sigma$, check whether $T_e$ has a node of every length $\ell \leq |\sigma|$. If so, put $\sigma \in S_e$ if and only if $\sigma \in T_e$. Otherwise, let $L < |\sigma|$ be the largest length such that $T_e$ has nodes of all lengths $\ell \leq L$, and $\rho$ the leftmost node of $T_e$ of length $L$; put $\sigma \in S_e$ if and only if $\sigma = \rho\, 0^{|\sigma| - L}$. This is decidable uniformly in $e$ and $\sigma$, so $f$ is computable by SMN. A prefix $\tau$ of a node $\sigma \in S_e$ is in $S_e$: if $|\tau| \leq L$ in the second case, then $\tau \preceq \rho \in T_e$ and the first case applies to $\tau$; otherwise the same case and the same $L$ apply to $\tau$ as to $\sigma$. If $T_e$ is infinite, the first case always applies, and $S_e = T_e$. If $T_e$ is finite, $[T_e] = \emptyset$, and $S_e$ has the path $\rho\, 0^\infty$. The set of $e$ such that $\{ X : \Phi^X_e(0)\diverge \}$ is non-empty is co-c.e. by :ref{#prop-pi01-emptiness}. It is not c.e.: by SMN there is a computable $g$ such that $\Phi^X_{g(n)}(0)$ ignores $X$ and converges if and only if $\Phi_n(n)\converge$, so that the class of index $g(n)$ is $\cs$ if $n \notin \emptyset'$ and empty otherwise; if the set were c.e., the complement of $\emptyset'$ would be c.e.
 :::
 ::::
 
@@ -128,3 +120,61 @@ Soare's *Turing Computability* proves the effective compactness theorem in Secti
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.19.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.8.
 - D. R. Hirschfeldt, *Slicing the Truth*, Lecture Notes Series of the Institute for Mathematical Sciences, National University of Singapore, 28, World Scientific, 2015, Section 3.1.
+
+:::::exercises
+::::exercise{#ex-nonempty-indices difficulty=2 objective="Build a computable listing of the non-empty $\Pi^0_1$ classes, although non-emptiness is not a $\Sigma^0_1$ property."}
+Show that there is a computable function $f$ such that, for every index $e$ of a computable tree $T_e$, $f(e)$ is the index of a computable tree $S_e$ with $[S_e] \neq \emptyset$, and $[S_e] = [T_e]$ whenever $[T_e] \neq \emptyset$. So the non-empty $\Pi^0_1$ classes can be listed by a computable sequence of indices, although the set of $e$ such that $\{ X : \Phi^X_e(0)\diverge \}$ is non-empty is not c.e.
+
+:::solution
+The idea is to follow $T_e$ as long as it has nodes at every length, and to freeze it on a single path if it dies out. If $T_e$ is empty, that is, $\varepsilon \notin T_e$, put $\sigma \in S_e$ if and only if $\sigma = 0^{|\sigma|}$; then $[S_e] = \{ 0^\infty \}$. Otherwise, given $\sigma$, check whether $T_e$ has a node of every length $\ell \leq |\sigma|$. If so, put $\sigma \in S_e$ if and only if $\sigma \in T_e$. Otherwise, let $L < |\sigma|$ be the largest length such that $T_e$ has nodes of all lengths $\ell \leq L$, and $\rho$ the leftmost node of $T_e$ of length $L$; put $\sigma \in S_e$ if and only if $\sigma = \rho\, 0^{|\sigma| - L}$. This is decidable uniformly in $e$ and $\sigma$, so $f$ is computable by SMN. A prefix $\tau$ of a node $\sigma \in S_e$ is in $S_e$: if $|\tau| \leq L$ in the second case, then $\tau \preceq \rho \in T_e$ and the first case applies to $\tau$; otherwise the same case and the same $L$ apply to $\tau$ as to $\sigma$. If $T_e$ is infinite, the first case always applies, and $S_e = T_e$. If $T_e$ is finite, $[T_e] = \emptyset$, and $S_e$ has the path $\rho\, 0^\infty$. The set of $e$ such that $\{ X : \Phi^X_e(0)\diverge \}$ is non-empty is co-c.e. by :ref{#prop-pi01-emptiness}. It is not c.e.: by SMN there is a computable $g$ such that $\Phi^X_{g(n)}(0)$ ignores $X$ and converges if and only if $\Phi_n(n)\converge$, so that the class of index $g(n)$ is $\cs$ if $n \notin \emptyset'$ and empty otherwise; if the set were c.e., the complement of $\emptyset'$ would be c.e.
+:::
+::::
+
+::::exercise{#ex-pi01-colorings difficulty=2 objective="Describe the colorings of a computable graph as a $\Pi^0_1$ class, and use compactness to show that it is non-empty when every finite subgraph is colorable."}
+Let $G$ be a graph with vertex set $\nat$ and a computable edge relation $E$, and let $k \geq 1$. Let $\mathcal C$ be the class of sets $X$ such that, for every vertex $v$, there is exactly one $i < k$ with $\langle v, i \rangle \in X$, and such that there are no edge $\{u, v\} \in E$ and $i < k$ with $\langle u, i \rangle \in X$ and $\langle v, i \rangle \in X$. Each $X \in \mathcal C$ defines a $k$-coloring $c_X$ of $G$, with $c_X(v)$ the unique $i < k$ such that $\langle v, i \rangle \in X$, and every proper $k$-coloring is of this form. Show that $\mathcal C$ is a $\Pi^0_1$ class, uniformly in $k$ and an index of $E$, and that $\mathcal C$ is non-empty if and only if every finite subgraph of $G$ has a proper $k$-coloring.
+
+:::solution
+*$\Pi^0_1$.* Let $R(\sigma)$ hold if there is no vertex $v$ such that all the positions $\langle v, i \rangle$, $i < k$, are below $|\sigma|$ and $\sigma$ has zero or at least two ones among them, and there are no $u$, $v$ and $i < k$ with $\{u, v\} \in E$, both positions $\langle u, i \rangle$ and $\langle v, i \rangle$ below $|\sigma|$, and $\sigma$ equal to $1$ at both. The quantifiers are bounded by $|\sigma|$, since $\langle v, i \rangle \geq v$, so $R$ is computable, uniformly in $k$ and $E$. A set $X$ fails to be in $\mathcal C$ if and only if one of the forbidden configurations occurs in $X$; it involves finitely many positions, so it occurs in $X \uh n$ for all large $n$. Hence $\mathcal C = \{ X : \forall n\ R(X \uh n) \}$, a $\Pi^0_1$ class by :ref{#prop-pi01-equivalent}.
+
+*Non-emptiness.* If $\mathcal C$ has a member $X$, the restriction of $c_X$ to a finite subgraph is a proper coloring of it. Conversely, let $\mathcal C_n$ be the class defined as $\mathcal C$, but with the conditions required only for the vertices $v < n$ and the edges between vertices $u, v < n$. Each $\mathcal C_n$ is closed, by the same argument, and non-empty: if $c$ is a proper $k$-coloring of the subgraph induced on $\{0, \dots, n-1\}$, the set $\{ \langle v, c(v) \rangle : v < n \}$ belongs to $\mathcal C_n$. The classes $\mathcal C_n$ decrease, and their intersection is $\mathcal C$. By :ref{#prop-cantor-compact}, $\mathcal C \neq \emptyset$. The second part is the theorem of de Bruijn and Erdős (1951) for countable graphs.
+:::
+::::
+
+::::exercise{#ex-pi01-uniform-intersection difficulty=1 objective="See that $\Pi^0_1$ classes are closed under uniform countable intersections but not under uniform countable unions."}
+A sequence of classes $(\mathcal P_i)$ is **uniformly $\Pi^0_1$** if $\mathcal P_i = [T_i]$ for trees $T_i$ computable uniformly in $i$. Show that the intersection of a uniformly $\Pi^0_1$ sequence is a $\Pi^0_1$ class. Show that the classes $\mathcal F_i = \{ X : X \subseteq \{0, \dots, i\} \}$ form a uniformly $\Pi^0_1$ sequence whose union is not closed.
+
+:::solution
+Let $T = \bigcap_i T_i$. It is a tree, as an intersection of trees, and it is co-c.e.: $\sigma \notin T$ if and only if $\sigma \notin T_i$ for some $i$, a $\Sigma^0_1$ condition. A sequence $X$ is a path through $T$ if and only if $X \uh n \in T_i$ for all $n$ and $i$, if and only if $X \in \bigcap_i [T_i]$. So $\bigcap_i \mathcal P_i = [T]$ is $\Pi^0_1$ by :ref{#prop-pi01-equivalent}. The class $\mathcal F_i$ is the class of paths through the tree of strings $\sigma$ with $\sigma(n) = 0$ for every $n$ with $i < n < |\sigma|$, which is computable uniformly in $i$. The union of the $\mathcal F_i$ is the class of finite sets, which is not closed, as shown in :ref{to="pi01-classes/cantor-space"}.
+:::
+::::
+
+::::exercise{#ex-extendible-not-computable difficulty=1 objective="Construct a computable tree whose set of extendible nodes is not computable."}
+Write $\emptyset'_s = \{ e : \Phi_e(e)[s]\converge \}$. Let $T$ be the set of strings $0^n$, for $n \in \nat$, and $0^e 1^j$, for $e \in \nat$ and $j \geq 1$ such that $e \notin \emptyset'_{e+j}$. Show that $T$ is a computable tree, describe $[T]$, and show that the set of extendible nodes of $T$ is not computable.
+
+:::solution
+Membership in $T$ is decidable: a string is in $T$ if it is of the form $0^n$, or of the form $0^e 1^j$ with $j \geq 1$ and $\Phi_e(e)[e+j]\diverge$; no other string is. The prefixes of $0^e 1^j$ are the strings $0^i$ with $i \leq e$ and the strings $0^e 1^{j'}$ with $1 \leq j' \leq j$, and $\Phi_e(e)[e+j]\diverge$ implies $\Phi_e(e)[e+j']\diverge$; so $T$ is a tree. The nodes of $T$ extending $0^e 1$ are of the form $0^e 1^j$, so the only possible path through $0^e 1$ is $0^e 1^\infty$, and it is a path if and only if $\Phi_e(e)[s]\diverge$ for every $s$. Hence $[T] = \{ 0^\infty \} \cup \{ 0^e 1^\infty : e \notin \emptyset' \}$, and the node $0^e 1$ is extendible if and only if $e \notin \emptyset'$. If the set of extendible nodes were computable, so would be $\emptyset'$. The set is co-c.e., as for every computable tree (:ref{#prop-pi01-emptiness}).
+:::
+::::
+
+::::exercise{#ex-prefix-closure-jump difficulty=2 objective="Build a c.e. tree whose only path is the halting set, to see the difference between c.e. and co-c.e. trees."}
+The **prefix closure** of a set of strings $S$ is $\hat S = \{ \tau : \tau \preceq \sigma \text{ for some } \sigma \in S \}$. Show that if $S$ is infinite, $\hat S$ is an infinite tree, and so has a path. Let $\sigma_t$ be the string of length $t$ such that $\sigma_t(e) = 1$ if and only if $\Phi_e(e)[t]\converge$, and $S = \{ \sigma_t : t \in \nat \}$. Show that $S$ is computable, that $\hat S$ is c.e., and that $[\hat S] = \{ \emptyset' \}$.
+
+:::solution
+$\hat S$ is closed under prefixes by definition, and contains $S$, so it is an infinite tree when $S$ is infinite, and has a path by :ref{#lem-weak-konig}.
+
+A string $\sigma$ belongs to $S$ if and only if $\sigma = \sigma_{|\sigma|}$, which is decidable; so $S$ is computable and $\hat S$, the set of prefixes of its elements, is c.e. For every $n$, the strings $\sigma_t \uh n$ are equal to $\emptyset' \uh n$ for all large $t$, since each $e < n$ in $\emptyset'$ has $\Phi_e(e)[t]\converge$ from some stage on; so $\emptyset' \uh n \in \hat S$, and $\emptyset'$ is a path. Let $Y$ be a path and $n \in \nat$. For each $m \geq n$, $Y \uh m \preceq \sigma_{t_m}$ for some $t_m$, and $t_m \geq m$ since $|\sigma_{t_m}| = t_m$. Then $Y \uh n = \sigma_{t_m} \uh n$ for every $m \geq n$, and $t_m$ is arbitrarily large, so $Y \uh n = \emptyset' \uh n$. Hence $Y = \emptyset'$. The tree $\hat S$ is c.e. but not co-c.e.: by the next lesson, the only member of a $\Pi^0_1$ class with one member is computable, so $\{ \emptyset' \}$ is not a $\Pi^0_1$ class. Adapted from the exercises of Monin and Patey, chapter on $\Pi^0_1$ classes.
+:::
+::::
+
+::::exercise{#ex-pi01-image difficulty=2 objective="Use effective compactness to show that the image of a $\Pi^0_1$ class under a total functional is a $\Pi^0_1$ class."}
+Let $\Phi$ be a Turing functional such that, for every $X \in \cs$, $\Phi^X$ is total with values in $\{0, 1\}$, and let $\mathcal P$ be a $\Pi^0_1$ class. Show that $\{ X : \Phi^X \in \mathcal P \}$ and $\{ \Phi^X : X \in \mathcal P \}$ are $\Pi^0_1$ classes.
+
+:::solution
+Let $W$ be a c.e. set of strings with $\cs \setminus \mathcal P = [W]^{\prec}$ (:ref{#prop-pi01-equivalent}).
+
+*Preimage.* $\Phi^X \notin \mathcal P$ if and only if some $\sigma \in W$ satisfies $\Phi^X(i) = \sigma(i)$ for all $i < |\sigma|$, if and only if some prefix $\tau$ of $X$ satisfies $\Phi^\tau(i)[|\tau|]\converge = \sigma(i)$ for all $i < |\sigma|$, for some $\sigma \in W$, by :ref{#prop-oracle-stages}. The set of such strings $\tau$ is c.e., so the complement of the preimage is a $\Sigma^0_1$ class.
+
+*Image.* For a string $\rho$, let $\mathcal P_\rho = \{ X \in \mathcal P : \Phi^X(i) = \rho(i) \text{ for all } i < |\rho| \}$. Since $\Phi^X$ is total, $X$ is outside $\{ X : \Phi^X(i) = \rho(i) \text{ for all } i < |\rho| \}$ if and only if $\Phi^X(i)\converge \neq \rho(i)$ for some $i < |\rho|$, a $\Sigma^0_1$ condition; so $\mathcal P_\rho$ is a $\Pi^0_1$ class, uniformly in $\rho$, by :ref{#ex-pi01-intersection-union}. By :ref{#prop-pi01-emptiness}, the set $V = \{ \rho : \mathcal P_\rho = \emptyset \}$ is c.e. We show that $\{ \Phi^X : X \in \mathcal P \} = \cs \setminus [V]^{\prec}$. If $Y = \Phi^X$ with $X \in \mathcal P$, then $X \in \mathcal P_{Y \uh n}$ for every $n$, so no prefix of $Y$ is in $V$. If no prefix of $Y$ is in $V$, the classes $\mathcal P_{Y \uh n}$ are non-empty, closed and decreasing, so by :ref{#prop-cantor-compact} some $X$ belongs to all of them; then $X \in \mathcal P$ and $\Phi^X = Y$.
+:::
+::::
+:::::

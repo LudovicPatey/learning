@@ -67,9 +67,23 @@ Why is the least acting $n$ chosen at each stage?
 Soare (*Turing Computability*, Theorem 4.3.3) uses a variant: when $W_{g(x, n)}$ receives a new element, only the marker of rank $n$ is enumerated, and the next marker takes its rank. If $W_{g(x, n)}$ is infinite, the marker of rank $n$ moves infinitely often, so at most $n$ markers are final; if all the sets are finite, the marker of rank $k$ settles once the markers of rank less than $k$ have settled and $W_{g(x, k)}$ has stopped growing. The two constructions rest on the same principle: the marker of rank $k$ is disturbed only on behalf of the finitely many $n \leq k$.
 :::
 
+::::exercise{#ex-coinf-inf difficulty=2 objective="Modify the reduction to $\mathrm{Cof}$ by a join with a fixed set, to classify the infinite coinfinite c.e. sets."}
+1. Show that $\{ e : W_e \text{ is infinite and coinfinite} \}$ is $\Pi^0_3$-complete.
+2. Deduce that $\mathrm{Fin} \cup \mathrm{Cof}$, the set of indices of c.e. sets that are finite or cofinite, is $\Sigma^0_3$-complete.
+
+:::solution
+1. Let $B$ be the set. $W_e$ is infinite is $\Pi^0_2$, hence $\Pi^0_3$, and $W_e$ is coinfinite is the complement of $\mathrm{Cof}$, which is $\Sigma^0_3$ (:ref{#ex-arithmetic-examples}); so $B$ is $\Pi^0_3$. Let $C$ be $\Pi^0_3$, and $A = \nat \setminus C$, a $\Sigma^0_3$ set. Let $h$ be the function built in the proof of :ref{#thm-cof-complete} for $A$: $W_{h(x)}$ is cofinite if $x \in A$ and coinfinite if $x \notin A$. The proof does not exclude that $W_{h(x)}$ is finite, so we join it with an infinite set. By :ref{#cor-smn-parameters}, there is a computable $k$ with
+$$
+W_{k(x)} = \{ 2m : m \in W_{h(x)} \} \cup \{ 2m + 1 : m \in \nat \}.
+$$
+Every $W_{k(x)}$ is infinite, and its complement is $\{ 2m : m \notin W_{h(x)} \}$, which is infinite if and only if $W_{h(x)}$ is coinfinite. So $x \in C \iff x \notin A \iff W_{h(x)}$ is coinfinite $\iff k(x) \in B$.
+2. $\mathrm{Fin} \cup \mathrm{Cof}$ is the union of a $\Sigma^0_2$ and a $\Sigma^0_3$ set, hence $\Sigma^0_3$, and it is the complement of $B$. With $A$ and $k$ as in item 1, $x \in A \iff k(x) \notin B \iff k(x) \in \mathrm{Fin} \cup \mathrm{Cof}$.
+:::
+::::
+
 ## Computable sets
 
-The set $\mathrm{Rec} = \{ e : W_e \text{ is computable} \}$ is $\Sigma^0_3$ (Exercise in :ref{to="arithmetic-hierarchy/sigma-pi-sets"}). A cofinite set is computable, so the reduction of :ref{#thm-cof-complete} already sends the elements of a $\Sigma^0_3$ set $A$ into $\mathrm{Rec}$. For $x \notin A$, the set $V_x$ is coinfinite, but it may well be computable. The construction is therefore modified so that, in that case, $V_x$ also computes $\emptyset'$. Coding $\emptyset'$ costs little: when $k$ enters $\emptyset'$, the number $k$ acts once more. This adds at most one action for each $k$, so the markers still settle, and the final position of the markers then tells when the enumeration of $\emptyset'$ below $k$ is complete. This is a **coding** strategy added to the marker argument; it only uses actions that are harmless when the main strategy wins.
+The set $\mathrm{Rec} = \{ e : W_e \text{ is computable} \}$ is $\Sigma^0_3$ (:ref{#ex-rec-sigma3}). A cofinite set is computable, so the reduction of :ref{#thm-cof-complete} already sends the elements of a $\Sigma^0_3$ set $A$ into $\mathrm{Rec}$. For $x \notin A$, the set $V_x$ is coinfinite, but it may well be computable. The construction is therefore modified so that, in that case, $V_x$ also computes $\emptyset'$. Coding $\emptyset'$ costs little: when $k$ enters $\emptyset'$, the number $k$ acts once more. This adds at most one action for each $k$, so the markers still settle, and the final position of the markers then tells when the enumeration of $\emptyset'$ below $k$ is complete. This is a **coding** strategy added to the marker argument; it only uses actions that are harmless when the main strategy wins.
 
 :::theorem[Rogers]{#thm-rec-complete}
 The set $\mathrm{Rec} = \{ e : W_e \text{ is computable} \}$ is $\Sigma^0_3$-complete. More precisely, for every $\Sigma^0_3$ set $A$ there is a computable $h$ such that $W_{h(x)}$ is cofinite if $x \in A$, and Turing equivalent to $\emptyset'$ if $x \notin A$.
@@ -112,6 +126,18 @@ How does the oracle $V_x$ know that the marker of rank $k$ has reached its final
 :::
 
 
+::::exercise{#ex-cof-rec-hard difficulty=1 objective="Use the two outcomes of the reduction to $\mathrm{Rec}$ to obtain lower bounds for other index sets."}
+Let $B$ be a set of indices that contains every index of a cofinite set and no index of a set Turing equivalent to $\emptyset'$.
+
+1. Show that every $\Sigma^0_3$ set is many-one reducible to $B$, and that $B$ is not $\Pi^0_3$.
+2. Deduce that the sets $\{ e : W_e \text{ is low} \}$ and $\{ e : W_e <_T \emptyset' \}$ are not $\Pi^0_3$, where a set $X$ is low if $X' \leq_T \emptyset'$, and that every $\Pi^0_3$ set is many-one reducible to $\{ e : W_e \equiv_T \emptyset' \}$.
+
+:::solution
+1. Let $A$ be $\Sigma^0_3$, and $h$ as in :ref{#thm-rec-complete}. If $x \in A$, $W_{h(x)}$ is cofinite, so $h(x) \in B$; if $x \notin A$, $W_{h(x)} \equiv_T \emptyset'$, so $h(x) \notin B$. Hence $A \leq_m B$. If $B$ were $\Pi^0_3$, every $\Sigma^0_3$ set would be $\Pi^0_3$ (:ref{#prop-sigma1-delta1}), contradicting :ref{#cor-hierarchy-strict}.
+2. A cofinite set is computable, hence low and strictly below $\emptyset'$. A set $X \equiv_T \emptyset'$ is not low, since $X' \equiv_T \emptyset''$ and $\emptyset'' \not\leq_T \emptyset'$ (:ref{#thm-jump}), and it is not strictly below $\emptyset'$. So both sets satisfy the hypothesis on $B$. Finally, the set $\{ e : W_e \equiv_T \emptyset' \}$ contains every index of a set Turing equivalent to $\emptyset'$ and no index of a cofinite set, so with $h$ as above, $x \notin A \iff h(x) \in \{ e : W_e \equiv_T \emptyset' \}$, for every $\Sigma^0_3$ set $A$; the complements of the $\Sigma^0_3$ sets are the $\Pi^0_3$ sets.
+:::
+::::
+
 ## Summary
 
 The following table collects the classification of the basic index sets, proved in this lesson, in the previous one, or in their exercises.
@@ -128,9 +154,17 @@ The following table collects the classification of the basic index sets, proved 
 The degrees follow by :ref{#thm-post}: a $\Sigma^0_n$-complete or $\Pi^0_n$-complete set is Turing equivalent to $\emptyset^{(n)}$. So $\mathrm{Fin}$, $\mathrm{Inf}$ and $\mathrm{Tot}$ have the degree of $\emptyset''$, and $\mathrm{Cof}$ and $\mathrm{Rec}$ that of $\emptyset'''$.
 
 
-## Exercises
+## Notes and references
 
-::::exercise{difficulty=1}
+The $\Sigma^0_3$-completeness of $\mathrm{Cof}$ is in Soare's *Turing Computability* (Theorem 4.3.3), with the one-marker variant of :ref{#rem-one-marker}, and in Downey and Hirschfeldt (Theorem 2.6.5); Nies lists the completeness of $\mathrm{Cof}$ and $\mathrm{Rec}$ in Exercise 1.4.20, and :ref{#ex-tot-jump-complete} is his Exercise 1.4.21. The $\Sigma^0_3$-completeness of $\mathrm{Rec}$ is due to Rogers. The proof given here, which codes $\emptyset'$ into $V_x$ in the $\Pi^0_3$ case, is the one of Soare's Theorem 4.3.5 and Corollary 4.3.6, adapted to the construction of :ref{#thm-cof-complete}. Soare's Remark 4.3.8 explains how other properties can be coded in the same way, and Section 4.3.5 gives representations of $\Sigma^0_3$ sets used to guess at membership in priority constructions. Marker arguments, of which the proof for $\mathrm{Cof}$ is a simple instance, are a basic tool in the study of c.e. sets.
+
+- H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 4.3.2–4.3.5.
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.6.
+- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.4.
+
+:::::exercises
+::::exercise{#ex-cof-not-pi3 difficulty=1 objective="Deduce non-membership in $\Pi^0_3$ from $\Sigma^0_3$-completeness."}
 Show that $\mathrm{Cof}$ is not $\Pi^0_3$.
 
 :::solution
@@ -138,20 +172,63 @@ If $\mathrm{Cof}$ were $\Pi^0_3$, every $\Sigma^0_3$ set, being many-one reducib
 :::
 ::::
 
-
-::::exercise{difficulty=2}
+::::exercise{#ex-tot-jump-complete difficulty=2 objective="Relativize the classification of $\mathrm{Tot}$ to $\emptyset'$, keeping the reduction computable."}
 Show that $\{ e : \Phi^{\emptyset'}_e \text{ is total} \}$ is $\Pi^0_3$-complete.
 
 :::solution
-It is $\Pi^0_3$ by an exercise of :ref{to="arithmetic-hierarchy/post-theorem"}. Relativized to $\emptyset'$, the proof of :ref{#thm-tot-complete} shows that for every $\Pi^0_2(\emptyset')$ set $A$ there is a computable $f$ with $x \in A \iff \Phi^{\emptyset'}_{f(x)}$ total: the function $f$ is given by the parameter form of SMN for oracle machines, and is computable, not only $\emptyset'$-computable. By :ref{#thm-post}, the $\Sigma^0_2(\emptyset')$ sets are the sets c.e. in $\emptyset''$, that is, the $\Sigma^0_3$ sets; so the $\Pi^0_2(\emptyset')$ sets are the $\Pi^0_3$ sets, and all of them reduce to the given set.
+It is $\Pi^0_3$ by :ref{#ex-tot-jump-pi3}. Relativized to $\emptyset'$, the proof of :ref{#thm-tot-complete} shows that for every $\Pi^0_2(\emptyset')$ set $A$ there is a computable $f$ with $x \in A \iff \Phi^{\emptyset'}_{f(x)}$ total: the function $f$ is given by the parameter form of SMN for oracle machines, and is computable, not only $\emptyset'$-computable. By :ref{#thm-post}, the $\Sigma^0_2(\emptyset')$ sets are the sets c.e. in $\emptyset''$, that is, the $\Sigma^0_3$ sets; so the $\Pi^0_2(\emptyset')$ sets are the $\Pi^0_3$ sets, and all of them reduce to the given set.
 :::
 ::::
 
-## Notes and references
+::::exercise{#ex-marker-run difficulty=1 objective="Run the marker construction by hand and identify the markers that an action can no longer remove."}
+In the construction of :ref{#thm-cof-complete}, suppose that no number acts at stages $1$, $2$ and $4$, that $0$ acts at stage $3$, $2$ acts at stage $5$ and $1$ acts at stage $6$.
 
-The $\Sigma^0_3$-completeness of $\mathrm{Cof}$ is in Soare's *Turing Computability* (Theorem 4.3.3), with the one-marker variant of :ref{#rem-one-marker}, and in Downey and Hirschfeldt (Theorem 2.6.5); Nies lists the completeness of $\mathrm{Cof}$ and $\mathrm{Rec}$ in Exercise 1.4.20, and the last exercise is his Exercise 1.4.21. The $\Sigma^0_3$-completeness of $\mathrm{Rec}$ is due to Rogers. The proof given here, which codes $\emptyset'$ into $V_x$ in the $\Pi^0_3$ case, is the one of Soare's Theorem 4.3.5 and Corollary 4.3.6, adapted to the construction of :ref{#thm-cof-complete}. Soare's Remark 4.3.8 explains how other properties can be coded in the same way, and Section 4.3.5 gives representations of $\Sigma^0_3$ sets used to guess at membership in priority constructions. Marker arguments, of which the proof for $\mathrm{Cof}$ is a simple instance, are a basic tool in the study of c.e. sets.
+1. Compute $V_x[6]$ and the markers at stage $6$.
+2. Suppose that from stage $7$ on, only numbers $n \geq 3$ act. Which markers are final?
 
-- H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
-- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 4.3.2–4.3.5.
-- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.6.
-- A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.4.
+:::solution
+1. $V_x[2] = \emptyset$, since nothing acts at stages $1$ and $2$. At stage $3 = s + 1$ with $s = 2$, the numbers below $2$ outside $V_x$ are $0, 1$; the action of $0$ keeps none of them, so $V_x[3] = \{ 0, 1 \}$. Stage $4$ changes nothing. At stage $5$, with $s = 4$, the numbers below $4$ outside $V_x$ are $2, 3$; the action of $2$ keeps the first two, so nothing is enumerated. At stage $6$, with $s = 5$, the numbers below $5$ outside $V_x$ are $2, 3, 4$; the action of $1$ keeps $2$ and enumerates $3$ and $4$. So $V_x[6] = \{ 0, 1, 3, 4 \}$, and the markers at stage $6$ are $2, 5, 6, 7, \dots$
+2. An action of $n \geq 3$ at a stage $s + 1 \geq 7$ keeps the first $n$ markers below $s$, hence the first three. As long as $2$, $5$ and $6$ are markers, they are the three smallest markers, since every other number below $6$ is in $V_x$; so each of them that is below $s$ is among the first three markers below $s$, and is kept. Hence $2$, $5$ and $6$ are never enumerated: they are final. Nothing can be said about the later markers without more information on the actions.
+:::
+::::
+
+::::exercise{#ex-marker-choices difficulty=1 objective="See by examples why an action keeps the first n markers and why the least acting number is chosen."}
+Consider two modifications of the construction of :ref{#thm-cof-complete}, and describe the stages at which each set $W_{g(x, n)}$ receives a new element.
+
+1. When $n$ acts, it enumerates all the markers below $s$. Give a behavior of the sets $W_{g(x, n)}$, all finite, for which $V_x$ is cofinite.
+2. At each stage, the greatest acting $n \leq s$ acts, instead of the least. Give a behavior for which some $W_{g(x, n)}$ is infinite and $V_x$ is not cofinite.
+
+:::solution
+1. Suppose that each $W_{g(x, n)}$ receives exactly one element, at stage $n + 1$. At stage $n + 1$, with $s = n$, the number $n$ is the only acting number, and in the modified construction it enumerates every number below $n$ not yet in $V_x$. So $\{ 0, \dots, n - 1 \} \subseteq V_x$ for every $n$, and $V_x = \nat$ is cofinite, while every $W_{g(x, n)}$ is finite. In the construction of the lesson, the action of $n$ at stage $n + 1$ keeps the first $n$ markers below $n$, that is, all of them, and $V_x = \emptyset$.
+2. Suppose that $W_{g(x, 0)}$ receives a new element at every stage, so that it is infinite, and that each $W_{g(x, n)}$ with $n \geq 1$ receives exactly one element, at stage $n + 1$. At stage $1$, only $0 \leq s = 0$ can act, and there is no number below $0$. At a stage $s + 1$ with $s \geq 1$, the numbers $0$ and $s$ both act, and the greatest one, $s$, keeps the first $s$ markers below $s$; there are at most $s$ numbers below $s$, so nothing is enumerated. Hence $V_x = \emptyset$, which is not cofinite. In the construction of the lesson, $0$ acts at every stage and enumerates every number below $s$, so $V_x = \nat$.
+:::
+::::
+
+::::exercise[The one-marker construction]{#ex-one-marker-variant difficulty=2 objective="Prove the correctness of Soare's variant of the marker construction, in which only the marker of rank n moves."}
+Let $g$ be as in the proof of :ref{#thm-cof-complete}. For a finite set $V$, the **marker of rank $k$** of $V$ is the $k$-th element (counting from $0$) of $\nat \setminus V$. Build $V_x$ in stages: $V_x[0] = \emptyset$, and at stage $s + 1$, for each $n \leq s$ with $W_{g(x, n)}[s + 1] \neq W_{g(x, n)}[s]$, enumerate into $V_x$ the marker of rank $n$ of $V_x[s]$. Show that $V_x$ is cofinite if some $W_{g(x, n)}$ is infinite, and coinfinite otherwise.
+
+:::solution
+At each stage, the markers of $V_x[s]$ are its non-elements in increasing order, and the rank of a non-element $m$ is the number of non-elements below $m$. Since $V_x$ only grows, the rank of a fixed non-element can only decrease.
+
+*Some $W_{g(x, n)}$ is infinite.* Suppose that $m_0 < \dots < m_n$ are outside $V_x$. At every stage, $m_0, \dots, m_{n-1}$ are non-elements below $m_n$, so the rank of $m_n$ is at least $n$. At each stage $s + 1$ with $s \geq n$ at which $W_{g(x, n)}$ receives a new element, the marker of rank $n$ of $V_x[s]$ is enumerated; it is not $m_n$, which never enters $V_x$, and its rank is at most that of $m_n$, so it is a number smaller than $m_n$. Different stages enumerate different numbers, since a number enumerated at one stage is no longer a marker afterwards. There are infinitely many such stages, hence infinitely many numbers below $m_n$: a contradiction. So the complement of $V_x$ has at most $n$ elements.
+
+*Every $W_{g(x, n)}$ is finite.* Fix $k$, and let $s_k$ be a stage after which no $W_{g(x, n)}$ with $n \leq k$ receives a new element. After stage $s_k$, every number enumerated is a marker of rank greater than $k$ at the previous stage, and enumerating it does not change the markers of rank at most $k$. So the markers of rank $0, \dots, k$ are the same at all stages after $s_k$, and are never enumerated. Their final values $c_0 < \dots < c_k$ lie outside $V_x$. Since $k$ is arbitrary, the complement of $V_x$ is infinite.
+
+This is the construction of Soare (2016, Theorem 4.3.3), sketched in :ref{#rem-one-marker}.
+:::
+::::
+
+::::exercise{#ex-almost-equal difficulty=1 objective="Classify almost inclusion and almost equality of c.e. sets by reducing $\mathrm{Cof}$ to them."}
+Write $X \subseteq^* Y$ if $X \setminus Y$ is finite, and $X =^* Y$ if $X \subseteq^* Y$ and $Y \subseteq^* X$. Show that the sets $\{ \langle a, b \rangle : W_a \subseteq^* W_b \}$ and $\{ \langle a, b \rangle : W_a =^* W_b \}$ are $\Sigma^0_3$-complete.
+
+:::solution
+*Upper bounds.* $W_a \subseteq^* W_b$ if and only if
+$$
+\exists n\ \forall x\ \big( x \leq n \vee x \notin W_a \vee x \in W_b \big).
+$$
+The disjunction is of a computable, a $\Pi^0_1$ and a $\Sigma^0_1$ relation, all $\Pi^0_2$, so it is $\Pi^0_2$; with $\forall x$ it stays $\Pi^0_2$, and with $\exists n$ it is $\Sigma^0_3$. The relation $W_a =^* W_b$ is the intersection of two such relations, one with $a$ and $b$ exchanged, hence $\Sigma^0_3$. The sets of codes $\langle a, b \rangle$ are $\Sigma^0_3$ by substitution of the projections.
+
+*Lower bounds.* Fix $c$ with $W_c = \nat$. Then $W_c \subseteq^* W_e$ if and only if $\nat \setminus W_e$ is finite, and $W_c =^* W_e$ holds in exactly the same case, since $W_e \subseteq^* \nat$ always holds. So $e \mapsto \langle c, e \rangle$ reduces $\mathrm{Cof}$ to both sets, and $\mathrm{Cof}$ is $\Sigma^0_3$-complete (:ref{#thm-cof-complete}). This is Soare (2016), Exercises 4.1.13 and 4.3.14.
+:::
+::::
+:::::

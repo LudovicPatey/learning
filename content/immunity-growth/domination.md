@@ -1,7 +1,7 @@
 ---
 title: Martin's domination theorem
 summary: A set is high if and only if it computes a function that eventually dominates every computable function, if and only if it computes a uniform list of exactly the computable sets.
-duration: 40
+duration: 35
 prerequisites: [computably-dominated, turing-degrees/low-and-high, arithmetic-hierarchy/index-sets, arithmetic-hierarchy/post-theorem]
 ---
 
@@ -124,9 +124,7 @@ In ($\Leftarrow$), when $\Phi_e$ is partial, the second clause may define $\psi_
   A total function may extend a partial one; the obstruction is the disagreement with the diagonal.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-dominant-function-lists difficulty=1 objective="Pass between dominant functions and uniform lists of total functions containing every computable function."}
 Show that the following are equivalent for a set $A$: (1) $A$ computes a dominant function; (2) there is a uniformly $A$-computable sequence of total functions containing every computable function.
 
 :::solution
@@ -136,7 +134,17 @@ Show that the following are equivalent for a set $A$: (1) $A$ computes a dominan
 :::
 ::::
 
-::::exercise{difficulty=2}
+## Notes and references
+
+Martin (1966) proved the domination theorem; Soare calls it the high domination theorem (Soare 2016, Theorem 4.5.6). The characterization by lists of computable sets is due to Jockusch (1972); Soare (2016, Theorem 4.8.2) proves it together with the version for functions of :ref{#ex-dominant-function-lists}, and our proof of ($\Rightarrow$) follows his. Monin and Patey prove both theorems in the section *Martin's domination theorem* of their chapter *Immunity and function growth*; our proof of ($\Leftarrow$) in :ref{#thm-jockusch-lists} is a variant of theirs. Relativized to a set $X \leq_T \emptyset'$, Martin's theorem characterizes the sets that are low₂ by domination (Soare 2016, Theorem 4.6.1).
+
+- D. A. Martin, *Classes of recursively enumerable sets and degrees of unsolvability*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 12 (1966), 295–310.
+- C. G. Jockusch, *Degrees in which the recursive sets are uniformly recursive*, Canadian Journal of Mathematics 24 (1972), 1092–1099.
+- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 4.5, 4.6 and 4.8.
+- B. Monin and L. Patey, *Computability theory*, chapter *Immunity and function growth*.
+
+:::::exercises
+::::exercise{#ex-high-time-bounds difficulty=2 objective="Characterize the high sets by functions that eventually bound the running time of every total program."}
 Show that a set $A$ is high if and only if $A$ computes a function $g$ such that, for every total computable function $\Phi_e$, $\forall^\infty x\ \Phi_e(x)[g(x)]\converge$.
 
 :::solution
@@ -144,11 +152,55 @@ If $A$ is high, a dominant $g \leq_T A$ eventually dominates the computable func
 :::
 ::::
 
-## Notes and references
+::::exercise{#ex-dominant-increasing difficulty=1 objective="Reduce the test of dominance to strictly increasing computable functions, and check that no dominant function is computable."}
+Show that a function $g$ is dominant if and only if it eventually dominates every strictly increasing computable function. Show that no dominant function is computable.
 
-Martin (1966) proved the domination theorem; Soare calls it the high domination theorem (Soare 2016, Theorem 4.5.6). The characterization by lists of computable sets is due to Jockusch (1972); Soare (2016, Theorem 4.8.2) proves it together with the version for functions of the first exercise, and our proof of ($\Rightarrow$) follows his. Monin and Patey prove both theorems in the section *Martin's domination theorem* of their chapter *Immunity and function growth*; our proof of ($\Leftarrow$) in :ref{#thm-jockusch-lists} is a variant of theirs. Relativized to a set $X \leq_T \emptyset'$, Martin's theorem characterizes the sets that are low₂ by domination (Soare 2016, Theorem 4.6.1).
+:::solution
+One direction is immediate. Conversely, suppose that $g$ eventually dominates every strictly increasing computable function, and let $f$ be computable. The function $F(n) = n + \max_{m \leq n} f(m)$ is computable and strictly increasing, since $F(n + 1) \geq n + 1 + \max_{m \leq n} f(m) > F(n)$, and $F \geq f$. So $g$ eventually dominates $F$, hence $f$.
 
-- D. A. Martin, *Classes of recursively enumerable sets and degrees of unsolvability*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 12 (1966), 295–310.
-- C. G. Jockusch, *Degrees in which the recursive sets are uniformly recursive*, Canadian Journal of Mathematics 24 (1972), 1092–1099.
-- R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 4.5, 4.6 and 4.8.
-- B. Monin and L. Patey, *Computability theory*, chapter *Immunity and function growth*.
+If $g$ were computable and dominant, it would eventually dominate the computable function $g + 1$, that is, $g(n) \geq g(n) + 1$ for some $n$, which is absurd.
+:::
+::::
+
+::::exercise{#ex-high-infinite-set-lists difficulty=1 objective="Characterize the high sets by uniform lists of infinite sets containing every infinite computable set."}
+Show that a set $A$ is high if and only if there is a uniformly $A$-computable sequence $(Y_i)$ of infinite sets that contains every infinite computable set.
+
+:::solution
+($\Rightarrow$) By :ref{#thm-martin-domination} and :ref{#ex-dominant-function-lists}, there is a uniformly $A$-computable sequence $(f_i)$ of total functions containing every computable function. Let $s_i(n) = n + \sum_{m \leq n} f_i(m)$, a strictly increasing function, and $Y_i$ its range. Since $s_i(n) \geq n$, $x \in Y_i$ if and only if $x \in \{ s_i(0), \dots, s_i(x) \}$; so the sets $Y_i$ are infinite and uniformly $A$-computable. Let $Y$ be an infinite computable set, with principal function $p$, which is computable. Let $f(0) = p(0)$ and $f(n) = p(n) - p(n - 1) - 1$ for $n \geq 1$; it is a computable function with values in $\nat$, since $p$ is strictly increasing, so $f = f_i$ for some $i$. Then $s_i(n) = n + p(0) + \sum_{1 \leq m \leq n} (p(m) - p(m - 1) - 1) = p(n)$, and $Y_i = Y$.
+
+($\Leftarrow$) Let $g(n) = \max_{i \leq n} p_{Y_i}(n)$; it is $A$-computable, since each $Y_i$ is infinite and the sequence is uniformly $A$-computable. Let $f$ be computable. The range $Y$ of $n \mapsto n + \sum_{m \leq n} f(m)$ is an infinite computable set whose principal function is at least $f$. So $Y = Y_i$ for some $i$, and $g(n) \geq p_{Y_i}(n) \geq f(n)$ for every $n \geq i$. Hence $g$ is dominant, and $A$ is high by :ref{#thm-martin-domination}. Adapted from an exercise of Monin and Patey, chapter *Immunity and function growth*.
+:::
+::::
+
+::::exercise{#ex-low2-domination difficulty=2 objective="Relativize Martin's theorem to characterize by domination the low$_2$ sets below $\emptyset'$."}
+A set $A$ is **low₂** if $A'' \equiv_T \emptyset''$. Let $A \leq_T \emptyset'$. Show that $A$ is low₂ if and only if some $\emptyset'$-computable function eventually dominates every $A$-computable function.
+
+:::hint
+First prove, for sets $X \leq_T Y$: $X'' \leq_T Y'$ if and only if $Y$ computes a function that eventually dominates every $X$-computable function.
+:::
+
+:::solution
+*Relativized theorem.* Let $X \leq_T Y$, and let $\mathrm{Tot}^X = \{ e : \Phi^X_e \text{ is total} \}$. Relativizing :ref{#thm-tot-complete} to $X$, $\mathrm{Tot}^X$ is $\Pi^0_2(X)$-complete, so $\mathrm{Tot}^X \equiv_T X''$ by :ref{#thm-post} relativized.
+
+Suppose $X'' \leq_T Y'$. By the limit lemma relative to $Y$, there is a $Y$-computable $a(e, s)$ with $\lim_s a(e, s) = \mathrm{Tot}^X(e)$. Define $g(x) = \sum_{e \leq x} v_e$, where $v_e$ is obtained by searching for the least $s \geq x$ such that $\Phi^X_e(x)[s]\converge$ or $a(e, s) = 0$, and is $\Phi^X_e(x)$ in the first case, $0$ in the second. The search terminates, and $g$ is $Y$-computable since $X \leq_T Y$. If $\Phi^X_e$ is total and $a(e, s) = 1$ for all $s \geq s_0$, then $g(x) \geq \Phi^X_e(x)$ for every $x \geq \max(e, s_0)$, exactly as in the proof of :ref{#thm-martin-domination}.
+
+Conversely, let $g \leq_T Y$ eventually dominate every $X$-computable function. If $\Phi^X_e$ is total, its running time $x \mapsto \mu s\ [\Phi^X_e(x)[s]\converge]$ is $X$-computable, hence eventually below $g$. So
+$$
+e \in \mathrm{Tot}^X \iff \exists k\ \big[\ \forall x \geq k\ \ \Phi^X_e(x)[g(x)]\converge \ \text{ and } \ \forall x < k\ \ \Phi^X_e(x)\converge\ \big],
+$$
+which is $\Sigma^0_2(Y)$, since $X \leq_T Y$. As $\mathrm{Tot}^X$ is also $\Pi^0_2(X)$, hence $\Pi^0_2(Y)$, it is computable in $Y'$, and $X'' \leq_T Y'$.
+
+*Application.* Take $X = A$ and $Y = \emptyset'$, which is allowed since $A \leq_T \emptyset'$. Then $A'' \leq_T \emptyset''$ if and only if some $\emptyset'$-computable function eventually dominates every $A$-computable function. Since $\emptyset'' \leq_T A''$ always holds, $A'' \leq_T \emptyset''$ means that $A$ is low₂. This is Martin's characterization (Soare 2016, Theorem 4.6.1).
+:::
+::::
+
+::::exercise{#ex-diagonally-correct-enumeration difficulty=2 objective="Use the escape property of a non-high c.e. set to slow down its enumeration until its complement is correct infinitely often on the diagonal."}
+Let $A$ be a c.e. set with infinite complement that is not high, and write $\nat \setminus A = \{ a_0 < a_1 < \cdots \}$. For a sequence of finite sets $B_0 \subseteq B_1 \subseteq \cdots$, write $b^s_n$ for the $n$-th element of $\nat \setminus B_s$, in increasing order and starting from $n = 0$. Show that there is a computable such sequence with $\bigcup_s B_s = A$ and $b^s_s = a_s$ for infinitely many $s$.
+
+:::solution
+Fix a computable enumeration $(A_s)$ of $A$ by finite sets, increasing with union $A$. Let $f(n)$ be the least $s$ such that $A_s \cap [0, a_n] = A \cap [0, a_n]$. It exists, since $A \cap [0, a_n]$ is finite, and $f \leq_T A$, since $A$ computes $a_n$ and $A \cap [0, a_n]$. Since $A$ is not high, $f$ is not dominant by :ref{#thm-martin-domination}: there is a computable $h$ with $h(n) > f(n)$ for infinitely many $n$. Let $H(n) = n + \max_{m \leq n} h(m)$, which is computable, strictly increasing and at least $h$, and let $B_s = A_{H(s)}$.
+
+The sequence $(B_s)$ is computable and increasing, and its union is $A$ since $H$ is unbounded. Let $s$ be such that $h(s) > f(s)$. Then $H(s) \geq f(s)$, so $A \cap [0, a_s] \supseteq B_s \cap [0, a_s] \supseteq A_{f(s)} \cap [0, a_s] = A \cap [0, a_s]$. Hence the elements of $\nat \setminus B_s$ up to $a_s$ are exactly $a_0, \dots, a_s$, and $b^s_s = a_s$. This holds for infinitely many $s$. Adapted from Soare 2016, Exercise 4.5.8.
+:::
+::::
+:::::

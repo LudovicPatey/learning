@@ -296,6 +296,84 @@ Checked on 2026-11-12:
   degrees.
 - **Course order:** `order: 3` coincides with `k-trivials`; the coordinator may renumber.
 
+## 12. Exercises
+
+Every exercise has a label, an objective, a difficulty and a solution. The featured
+exercises stay in the text, after the material they practice; the others are in the
+collapsed block `:::::exercises` at the end of each lesson, outside the reading time.
+
+**Featured exercises, and why.**
+
+1. `betting-strategies`: `ex-pairs-martingale` (building a strategy by hand, right after the
+   examples) and `ex-supermartingale-closed-class` (the first use of Kolmogorov's inequality,
+   with an example showing the bound is attained).
+2. `ville-theorem`: `ex-success-union` (combining strategies by weights, used in every later
+   lesson) and `ex-savings-convergence` (what the savings property gives).
+3. `schnorr-theorem`: `ex-martingale-k` (the martingale Σ 2^{-K(τ)} E_τ links Schnorr's
+   theorem with the ample excess lemma) and `ex-partial-martingale` (the definition is used
+   in the last lesson, which cites it).
+4. `computable-randomness`: `ex-church-stochastic` (selection rules and proportional
+   strategies; cited in the text).
+5. `cr-construction`: `ex-cr-slow-entry` (slower entries give smaller complexity; cited in
+   the text).
+6. `schnorr-randomness`: `ex-schnorr-runs` (a total Solovay test in practice).
+7. `randomness-hierarchy`: `ex-kurtz-powers` (Wang's characterization on an example) and
+   `ex-schnorr-ce-high` (an application of the NST theorem).
+
+**Further exercises, lesson by lesson.**
+
+1. `betting-strategies`: martingales as measures (`ex-martingale-measure`, moved); products
+   of martingales betting at different times (`ex-product-martingales`); decomposition into
+   elementary martingales (`ex-martingale-convex`); optional stopping, the equality case of
+   Kolmogorov's inequality, with the role of each hypothesis (`ex-optional-stopping`); when
+   Kolmogorov's inequality is an equality (`ex-kolmogorov-equality`); growth rate of p_δ and
+   the Kelly fraction (`ex-proportional-growth`).
+2. `ville-theorem`: the Ville martingale of a singleton computed (`ex-ville-computation`);
+   linear growth of that martingale, and growth as slow as desired
+   (`ex-ville-linear-growth`); success sets are G_δ, so Ville's theorem gives an inclusion
+   and not an equality, by Baire category (`ex-success-gdelta`); savings property and
+   stakes, two counterexamples (`ex-savings-stakes`).
+3. `schnorr-theorem`: Solovay tests through c.e. martingales (`ex-solovay-martingale`);
+   partial computable randomness and finite variants (`ex-pcr-finite-variants`); a
+   computable sequence defeating a partial computable martingale, by a non-uniform case
+   distinction (`ex-pc-nonascending`); d_K is not multiplicatively optimal
+   (`ex-dk-not-optimal`).
+4. `computable-randomness`: supermartingales and shifts (`ex-cr-supermartingale`,
+   `ex-cr-shift`, moved); predictable positions and c.e. sets (`ex-cr-predictable`);
+   computable bit flips (`ex-cr-xor`); halves of a join and A ⊕ A (`ex-cr-join`); no
+   effective listing of computable martingales (`ex-cr-no-enumeration`); Doob's
+   convergence theorem by the switching argument (`ex-doob-convergence`).
+5. `cr-construction`: explicit bound on the capitals (`ex-cr-explicit-bound`); the sequence
+   is ω-c.e. (`ex-cr-omega-ce`); the version with the oracle Mart ≤ ∅″, with complexity
+   O(log n) (`ex-cr-tot-oracle`); a partial computably random sequence that is not
+   Martin-Löf random, by deciding goodness along the sequence (`ex-pcr-not-mlr`,
+   difficulty 3; it proves a separation admitted in the last lesson, with a weaker bound
+   than Nies 7.4.15).
+6. `schnorr-randomness`: computable subsequences (`ex-schnorr-subsequence`); the weight must
+   be computable in `lem-weight-martingale` (`ex-weight-computable-needed`); a direct
+   proof that there is no universal Schnorr test (`ex-no-universal-schnorr-direct`);
+   effective unions of Schnorr null classes (`ex-schnorr-null-union`).
+7. `randomness-hierarchy`: Kurtz's original definition (`ex-kurtz-sigma1`, moved); Kurtz
+   null tests (`ex-kurtz-null-tests`); substrings of Kurtz random sequences and
+   uncontrolled frequencies (`ex-kurtz-substrings`); success above an order on a
+   computable set of lengths (`ex-kurtz-computable-lengths`); partial computable randomness
+   implies computable randomness (`ex-pcr-cr`).
+
+**Sources.** Nies 2009: Fact 7.1.2 (`ex-martingale-measure`), Exercise 7.1.10 (iii)
+(`ex-martingale-convex`), Lemma 7.1.8 (ii) (`ex-optional-stopping`), Exercise 7.1.11
+(`ex-kolmogorov-equality`), Exercise 7.2.7 (iii) (`ex-dk-not-optimal`), Exercises 7.4.5
+and 7.4.6 (`ex-pcr-finite-variants`, `ex-pc-nonascending`), Exercise 7.3.11 and Theorem
+7.4.8 (`ex-cr-no-enumeration`, `ex-cr-tot-oracle`), Theorem 7.4.15 (compared in
+`ex-pcr-not-mlr`). Downey–Hirschfeldt 2010: Theorem 7.1.13 (`ex-cr-join`), Propositions
+7.1.11 and 7.1.12 (`ex-no-universal-schnorr-direct`, `ex-cr-no-enumeration`), Definition
+7.2.2 and Theorem 7.2.3 (`ex-kurtz-null-tests`). Kelly 1956 (`ex-proportional-growth`);
+Doob 1953 (`ex-doob-convergence`); both added to the references of their lessons. The
+other exercises are standard consequences of the lessons. Checked against other courses
+to avoid duplicates: bi-immunity of Kurtz random sequences and a Δ⁰₂ Kurtz random
+sequence that is not random are in `randomness-notions/schnorr-kurtz`; sparse sequences
+of low complexity are in `kolmogorov-complexity/initial-segments`; subsequences of
+Martin-Löf random sequences (by tests) in `martin-lof-randomness/levin-schnorr`.
+
 ## 11. History
 
 - **2026-11-12: course created.** Seven lessons, written after comparing D–H Chapters 6.3,
@@ -303,3 +381,6 @@ Checked on 2026-11-12:
   five figures (`fig-betting-tree`, `fig-savings`, `fig-exit-timeline`,
   `fig-success-panels`, `fig-hierarchy`). Five lessons were first drafted and split into
   seven to respect the lesson length.
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for
+  all exercises; 11 featured exercises, 34 further exercises (4 moved, 30 new), section 12.
+  Durations recomputed: `computable-randomness` 35, `cr-construction` 40.

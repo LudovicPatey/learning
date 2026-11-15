@@ -62,6 +62,22 @@ Let $M$ be a countable recursively saturated model of $\mathrm I\Delta_0 + \math
 
 Each hypothesis of the theorem is needed. Two models with different theories are not isomorphic, and neither are two models with different standard systems; the existence theorem below gives countable recursively saturated models of the same completion of $\mathrm{PA}$ with different standard systems. Recursive saturation cannot be dropped either: by :ref{#prop-rs-definable}, the elements of a recursively saturated model $M \models \mathrm{PA}$ that are definable without parameters form an elementary substructure that is not recursively saturated, and so it is not isomorphic to $M$, although the two models have the same theory.
 
+::::exercise{#ex-bf-end-extension difficulty=1 objective="Apply the isomorphism theorem to an elementary end extension."}
+Let $M \preccurlyeq N$ be countable recursively saturated models of $\mathrm{PA}$ with $M \subseteq_e N$. Show that $M \cong N$.
+
+:::solution
+The theories are equal since $M \preccurlyeq N$, and $\mathrm{SSy}(M) = \mathrm{SSy}(N)$ by :ref{#ex-ssy-end-extension}. Apply :ref{#thm-bf-isomorphism}.
+:::
+::::
+
+::::exercise{#ex-bf-elementary-embedding difficulty=2 objective="Run the back-and-forth construction with forth steps only, under an inclusion of standard systems."}
+Let $M$ and $N$ be countable recursively saturated models of $\mathrm{PA}$ with $\mathrm{Th}(M) = \mathrm{Th}(N)$ and $\mathrm{SSy}(M) \subseteq \mathrm{SSy}(N)$. Show that there is an elementary embedding of $M$ into $N$. Show that it cannot be surjective if the inclusion is strict.
+
+:::solution
+Run the construction of :ref{#thm-bf-isomorphism} with forth steps only; :ref{#lem-bf-step} applies with the inclusion $\mathrm{SSy}(M) \subseteq \mathrm{SSy}(N)$. The map $f$ is total, and it preserves every formula: if $M \models \theta(\bar r)$ for a tuple $\bar r$ of the domain, then $N \models \theta(f(\bar r))$ by the inductive condition. An elementary embedding that is surjective is an isomorphism, and isomorphic models have the same standard system.
+:::
+::::
+
 ## Models with prescribed invariants
 
 A recursively saturated model $M$ of a completion $T$ of $\mathrm{PA}$ has a standard system that is a Scott set (:ref{#cor-ssy-scott-set}) containing $T$ (:ref{#prop-rs-realized-coded}). The converse adds to Scott's construction steps that realize types. We use one-variable types: in $\mathrm{PA}$, a type in $v_1, \dots, v_k$ is realized if and only if the type in one variable $w$ obtained by writing each $v_i$ as the $i$-th component of $w$, with the pairing of :ref{#fact-pairing}, is realized; and the second type is computable from the first.
@@ -109,24 +125,6 @@ The standard system of such a model is a countable Scott set containing $T$, by 
 
 For example, every set $Z \subseteq \nat$ belongs to a countable Scott set containing $T$: a countable ω-model of $\mathsf{WKL}_0$ containing $T \oplus Z$, as in :ref{to="big-five/wkl0"}. Each countable Scott set contains countably many sets, so there are $2^{\aleph_0}$ countable Scott sets containing $T$, and $2^{\aleph_0}$ countable recursively saturated models of $T$ up to isomorphism. For the theory of $\nat$, the Scott sets concerned are those containing $\mathrm{Th}(\nat)$, hence every arithmetic set, as in :ref{#ex-ssy-truth}.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $M \preccurlyeq N$ be countable recursively saturated models of $\mathrm{PA}$ with $M \subseteq_e N$. Show that $M \cong N$.
-
-:::solution
-The theories are equal since $M \preccurlyeq N$, and $\mathrm{SSy}(M) = \mathrm{SSy}(N)$ by :ref{#ex-ssy-end-extension}. Apply :ref{#thm-bf-isomorphism}.
-:::
-::::
-
-::::exercise{#ex-bf-elementary-embedding difficulty=2}
-Let $M$ and $N$ be countable recursively saturated models of $\mathrm{PA}$ with $\mathrm{Th}(M) = \mathrm{Th}(N)$ and $\mathrm{SSy}(M) \subseteq \mathrm{SSy}(N)$. Show that there is an elementary embedding of $M$ into $N$. Show that it cannot be surjective if the inclusion is strict.
-
-:::solution
-Run the construction of :ref{#thm-bf-isomorphism} with forth steps only; :ref{#lem-bf-step} applies with the inclusion $\mathrm{SSy}(M) \subseteq \mathrm{SSy}(N)$. The map $f$ is total, and it preserves every formula: if $M \models \theta(\bar r)$ for a tuple $\bar r$ of the domain, then $N \models \theta(f(\bar r))$ by the inductive condition. An elementary embedding that is surjective is an isomorphism, and isomorphic models have the same standard system.
-:::
-::::
-
 ## Notes and references
 
 :ref{#thm-bf-isomorphism} and :ref{#cor-bf-homogeneous} are Wong's Theorem 8.3 and Remark 8.4, with the same back-and-forth proof; the classification by standard systems, which combines this theorem with Scott's theorem (1962), is treated in Kaye's book and in Kossak and Schmerl's. The proof of :ref{#thm-bf-existence} given here adds realizing steps to the construction of :ref{#thm-scott-converse}.
@@ -135,3 +133,39 @@ Run the construction of :ref{#thm-bf-isomorphism} with forth steps only; :ref{#l
 - D. Scott, *Algebras of sets binumerable in complete extensions of arithmetic*, in Recursive Function Theory, Proceedings of Symposia in Pure Mathematics 5, American Mathematical Society, 1962, 117–121.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991.
 - R. Kossak and J. H. Schmerl, *The Structure of Models of Peano Arithmetic*, Oxford University Press, 2006.
+
+:::::exercises
+::::exercise{#ex-bf-definable-homogeneous difficulty=1 objective="See that homogeneity does not characterize recursive saturation, on a model whose elements are all definable."}
+Let $T$ be a complete consistent extension of $\mathrm{PA}$ other than the theory of $\nat$, $N \models T$, and $K$ the elementary substructure of $N$ formed by the elements definable without parameters, as in :ref{#prop-rs-definable}. Show that if $\bar a, \bar b \in K$ satisfy $\mathrm{tp}^K(\bar a) = \mathrm{tp}^K(\bar b)$, then $\bar a = \bar b$. Deduce that $K$ satisfies the conclusion of :ref{#cor-bf-homogeneous}, although it is countable and not recursively saturated.
+
+:::solution
+Let $a_i$ be an entry of $\bar a$. It is definable in $K$ without parameters, by a formula $\theta(x)$ with $K \models \exists! x\ \theta(x)$ (as in the proof of :ref{#prop-rs-definable}). The formula $\theta(u_i)$ belongs to $\mathrm{tp}^K(\bar a) = \mathrm{tp}^K(\bar b)$, so $K \models \theta(b_i)$, and $b_i = a_i$ by uniqueness. So $\bar a = \bar b$, and the identity is an automorphism mapping $\bar a$ to $\bar b$. The model $K$ is countable, since there are countably many formulas, and it is not recursively saturated by :ref{#prop-rs-definable}. Homogeneity says that elements of the same type are exchanged; it does not say that types are realized, which is what the back-and-forth lemma needs.
+:::
+::::
+
+::::exercise{#ex-bf-different-theories difficulty=1 objective="Show that the theory is not determined by the standard system, using the existence theorem."}
+Show that there are countable recursively saturated models of $\mathrm{PA}$ with the same standard system and different theories.
+
+:::solution
+Let $\mathcal X$ be a countable Scott set, for instance the standard system of a countable non-standard model of $\mathrm{PA}$ (:ref{#cor-ssy-scott-set}). The theories $\mathrm{PA} + \mathrm{Con}(\mathrm{PA})$ and $\mathrm{PA} + \neg \mathrm{Con}(\mathrm{PA})$ are consistent, the second by Gödel's second incompleteness theorem, and computable. By the fact used in the first step of the proof of :ref{#thm-scott-converse}, $\mathcal X$ contains a complete consistent extension $T_1$ of the first and $T_2$ of the second, and $T_1 \neq T_2$. By :ref{#thm-bf-existence}, there are countable recursively saturated models $M_1 \models T_1$ and $M_2 \models T_2$ with $\mathrm{SSy}(M_1) = \mathrm{SSy}(M_2) = \mathcal X$.
+:::
+::::
+
+::::exercise{#ex-bf-step-inclusion difficulty=2 objective="See why the back-and-forth lemma needs the inclusion of standard systems, with a counterexample."}
+Let $T$ be a complete consistent extension of $\mathrm{PA}$. Show that there are countable recursively saturated models $M$ and $N$ of $T$ and an element $r \in M$ such that no $s \in N$ satisfies $\mathrm{tp}^N(s) = \mathrm{tp}^M(r)$. So :ref{#lem-bf-step} fails for the empty tuples without the hypothesis $\mathrm{SSy}(M) \subseteq \mathrm{SSy}(N)$.
+
+:::solution
+By :ref{#thm-rs-existence}, $T$ has a countable recursively saturated model; its standard system $\mathcal Y$ is a countable Scott set containing $T$ (:ref{#cor-ssy-scott-set}, :ref{#prop-rs-realized-coded}). Since $\mathcal Y$ is countable, some $Z \subseteq \nat$ is not in $\mathcal Y$. As noted after :ref{#cor-bf-classification}, some countable Scott set $\mathcal X$ contains $T \oplus Z$, hence $T$ and $Z$. By :ref{#thm-bf-existence}, there are countable recursively saturated models $M, N \models T$ with $\mathrm{SSy}(M) = \mathcal X$ and $\mathrm{SSy}(N) = \mathcal Y$.
+
+Since $Z \in \mathrm{SSy}(M)$, some $r \in M$ satisfies $\mathrm{Ack}(r) \cap \nat = Z$. Suppose $s \in N$ has the same type. For each $n \in \nat$, the formula $\bar n \in u$ belongs to $\mathrm{tp}^M(r)$ if and only if $n \in Z$, so $N \models \bar n \in s$ if and only if $n \in Z$, and $\mathrm{Ack}(s) \cap \nat = Z \in \mathrm{SSy}(N) = \mathcal Y$, a contradiction.
+:::
+::::
+
+::::exercise{#ex-bf-embed-larger difficulty=2 objective="Combine the existence theorem with forth-only back-and-forth to embed a model into one with a larger standard system."}
+Let $M$ be a countable recursively saturated model of $\mathrm{PA}$ and $\mathcal X$ a countable Scott set with $\mathrm{SSy}(M) \subseteq \mathcal X$. Show that there are a countable recursively saturated model $N$ with $\mathrm{Th}(N) = \mathrm{Th}(M)$ and $\mathrm{SSy}(N) = \mathcal X$, and an elementary embedding of $M$ into $N$, which is not surjective if $\mathrm{SSy}(M) \neq \mathcal X$.
+
+:::solution
+By :ref{#prop-rs-realized-coded}, $\mathrm{Th}(M) \in \mathrm{SSy}(M) \subseteq \mathcal X$, and $\mathrm{Th}(M)$ is a complete consistent extension of $\mathrm{PA}$. By :ref{#thm-bf-existence}, there is a countable recursively saturated $N \models \mathrm{Th}(M)$ with $\mathrm{SSy}(N) = \mathcal X$. Then $\mathrm{Th}(M) = \mathrm{Th}(N)$ and $\mathrm{SSy}(M) \subseteq \mathrm{SSy}(N)$, and :ref{#ex-bf-elementary-embedding} gives an elementary embedding of $M$ into $N$, not surjective when the inclusion is strict.
+:::
+::::
+:::::

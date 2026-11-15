@@ -90,15 +90,7 @@ The function $g$ thus grows faster than every function provably total in $\mathr
 
 ## Exercises
 
-::::exercise{difficulty=2}
-Show that $\mathrm{PA} + \mathrm{PH}$ proves that $g$ is total, and that $\mathrm{PA} \nvdash \forall x\ \exists y\ \iota_{\mathrm{PH}}(x, y, x)$.
-
-:::solution
-In $\mathrm{PA} + \mathrm{PH}$, given $x$, each $n \leq x$ has some $y_n$ with $[x, y_n] \to_* (x)^n_x$; $\Sigma_1$ collection gives a common bound, which works for all $n \leq x$ by monotonicity, and the least such $y$, which is at least $x$, exists by the least number principle. So $g$ is total. If $\mathrm{PA}$ proved $\forall x\ \exists y\ \iota_{\mathrm{PH}}(x, y, x)$, the least such $y$, which is $g(x)$, would be given by a $\Sigma_1$ formula provably defining a total function, contradicting :ref{#cor-ph-envelope}.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-ph-cut-not-ph difficulty=2 objective="Combine the indicator for $\mathrm{PA}$ with the minimality argument of the main theorem to find a cut that satisfies $\mathrm{PA}$ and refutes $\mathrm{PH}$."}
 Let $M$ be a countable non-standard model of $\mathrm{PA}$ and $a \in M$ non-standard. Suppose $M \models \mathrm{PH}$. Show that there is a cut $I \subsetneq M$ with $a \in I$, $I \models \mathrm{PA}$ and $I \models \neg \mathrm{PH}$.
 
 :::solution
@@ -113,3 +105,55 @@ The unprovability of $\mathrm{PH}$ is due to Paris and Harrington (1977), who pr
 - J. Paris and L. Harrington, *A mathematical incompleteness in Peano arithmetic*, in Handbook of Mathematical Logic, North-Holland, 1977, 1133–1142.
 - A. Kanamori and K. McAloon, *On Gödel incompleteness and finite combinatorics*, Annals of Pure and Applied Logic 33 (1987), 23–41.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter II, Section 2, and Chapter IV, Section 3(c).
+
+:::::exercises
+::::exercise{#ex-ph-g-total difficulty=2 objective="Relate the totality of the Paris–Harrington function to the principle and to the diagonal instances of the indicator."}
+Show that $\mathrm{PA} + \mathrm{PH}$ proves that $g$ is total, and that $\mathrm{PA} \nvdash \forall x\ \exists y\ \iota_{\mathrm{PH}}(x, y, x)$.
+
+:::solution
+In $\mathrm{PA} + \mathrm{PH}$, given $x$, each $n \leq x$ has some $y_n$ with $[x, y_n] \to_* (x)^n_x$; $\Sigma_1$ collection gives a common bound, which works for all $n \leq x$ by monotonicity, and the least such $y$, which is at least $x$, exists by the least number principle. So $g$ is total. If $\mathrm{PA}$ proved $\forall x\ \exists y\ \iota_{\mathrm{PH}}(x, y, x)$, the least such $y$, which is $g(x)$, would be given by a $\Sigma_1$ formula provably defining a total function, contradicting :ref{#cor-ph-envelope}.
+:::
+::::
+
+::::exercise{#ex-ph-indicator-monotone difficulty=1 objective="Check the monotonicity of the indicator for $\mathrm{PA}$, and see why it contains all arities up to $c$." lessons="paris-harrington"}
+Show that $\iota_{\mathrm{PH}}(x, y, c)$ implies $\iota_{\mathrm{PH}}(x', y', c')$ for $x' \leq x$, $y \leq y'$ and $c' \leq c$. Explain why the formula $x \leq y \wedge c \leq y \wedge [x, y] \to_* (c)^c_c$, with the single arity $c$, would not obviously be monotone in $c$.
+
+:::solution
+The normalization passes: $x' \leq x \leq y \leq y'$ and $c' \leq c \leq y \leq y'$. Let $n \leq c'$. Then $n \leq c$, so $[x, y] \to_* (c)^n_c$, and item 3 of :ref{#ex-relatively-large} gives $[x', y'] \to_* (c')^n_{c'}$. So $\iota_{\mathrm{PH}}(x', y', c')$.
+
+With a single arity, lowering $c$ to $c'$ also lowers the arity from $c$ to $c'$. Item 3 of :ref{#ex-relatively-large} keeps the arity fixed, and lowering the arity costs relative largeness: :ref{#ex-ph-lower-arity} needs a translation of the interval by the difference of the arities.
+:::
+::::
+
+::::exercise{#ex-ph-parameters difficulty=1 objective="Check the arithmetic of the parameters in the construction of the indiscernibles, and find from which value of $m$ it works."}
+In the proof of :ref{#thm-ph-indicator}, with $n = 2m + 1$ and $k = (2^m + 3) m$, check that $k + n - 1 = (2^m + 5) m$ and that $H_2$ has at least $m$ elements. Show that $n + 1 \leq 2^{2m}$ for $m \geq 1$ and $(2^m + 5) m \leq 2^{2m}$ for $m \geq 3$, and that $m = 2$ fails.
+
+:::solution
+$k + n - 1 = (2^m + 3) m + 2m = (2^m + 5) m$. $H$ has at least $k$ elements and $H_2$ is $H$ without $(2^m + 2) m$ of them, so $|H_2| \geq (2^m + 3) m - (2^m + 2) m = m$. Next, $n + 1 = 2m + 2 \leq 4^m$ for $m \geq 1$, by induction ($4 \leq 4$, and the right side is multiplied by $4$ when the left side grows by $2$). For $m \geq 3$, $2^m \geq m + 5$ (true for $m = 3$, and the left side doubles while the right side grows by $1$), and $2^m \geq m$, so
+$$
+2^{2m} = 2^m \cdot 2^m \geq 2^m (m + 5) = 2^m m + 5 \cdot 2^m \geq 2^m m + 5m = (2^m + 5) m.
+$$
+For $m = 2$, $(4 + 5) \cdot 2 = 18 > 16$. These inductions are bounded inductions with exponentiation, available in $\mathrm I\Sigma_1$, so the inequalities hold for the non-standard $m$ of the proof.
+:::
+::::
+
+::::exercise{#ex-ph-fixed-arity difficulty=1 objective="See why the growth theorem for the Paris–Harrington function needs all arities, by computing what $\mathrm{PA}$ proves about a fixed arity."}
+Let $g_2(x)$ be the least $y$ with $[x, y] \to_* (x)^2_x$. Show that $g_2$ is provably total in $\mathrm{PA}$, and deduce that the conclusion of :ref{#cor-ph-envelope} fails for $g_2$.
+
+:::solution
+By :ref{#thm-ph-true}, $\mathrm{PA} \vdash \mathrm{PH}_2$, and in particular $\mathrm{PA} \vdash \forall x\ \exists y\ [x, y] \to_* (x)^2_x$. The relation is $\Delta_1$ in $\mathrm I\Sigma_1$, so the formula &quot;$y$ satisfies the relation and no $y' < y$ does&quot; is $\Delta_1$ in $\mathrm{PA}$, and the least number principle shows that it defines a total function in $\mathrm{PA}$; in $\nat$ it defines $g_2$. Then $g_2 + 1$ is provably total in $\mathrm{PA}$ too, and $g_2(x) + 1 < g_2(x)$ holds for no $x$. The function $g$ of :ref{#cor-ph-envelope} escapes this argument because $\mathrm{PA}$ proves $\mathrm{PH}_n$ only for each standard $n$, while $g$ uses the arities up to $x$.
+:::
+::::
+
+::::exercise{#ex-ph-not-indicator-isigma1 difficulty=2 objective="Show that the indicator for $\mathrm{PA}$ is not an indicator for $\mathrm I\Sigma_1$, by comparing it with the cuts of Kirby and Paris in a model of true arithmetic." lessons="catching-cuts, fast-growing"}
+Show that $\iota_{\mathrm{PH}}$ is not an indicator for $\mathrm I\Sigma_1$. (Use the function $x \mapsto F_x(x)$ and a countable non-standard model of the theory of $\nat$.)
+
+:::solution
+By :ref{#ex-fgh-isigma2}, $\mathrm{PA} \vdash \forall x\ \exists y\ \mathrm{It}(x, 1, x, y)$, and functionality makes the value unique; so $f(x) = F_x(x)$ is provably total in $\mathrm{PA}$. By part 2 of :ref{#thm-indicator-main} and :ref{#thm-ph-indicator}, there is $n_0$ with $\neg \iota_{\mathrm{PH}}(x, F_x(x), n_0)$ for every $x \in \nat$; by monotonicity in $c$ (:ref{#ex-ph-indicator-monotone}),
+$$
+\nat \models \forall x\ \forall c \geq n_0\ \forall y\ \big(\mathrm{It}(x, 1, x, y) \rightarrow \neg \iota_{\mathrm{PH}}(x, y, c)\big).
+$$
+Let $M$ be a countable non-standard model of the theory of $\nat$; it satisfies $\mathrm I\Sigma_1$, this sentence, and $\forall x\ F_x(x){\downarrow}$. Let $a \in M$ be non-standard and $b = F_a(a)$, so $a \leq b$. By the sentence, $M \models \neg \iota_{\mathrm{PH}}(a, b, c)$ for every non-standard $c$. But :ref{#thm-kirby-paris-cut}, with $\nu = a$, gives a semiregular cut $I$ with $a \in I$, $b \notin I$ and $I \models \mathrm I\Sigma_1$. So condition 2 of :ref{#def-indicator} holds for $T = \mathrm I\Sigma_1$ and condition 1 fails.
+:::
+::::
+:::::

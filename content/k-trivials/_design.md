@@ -245,10 +245,76 @@ Checked on 2026-11-12 (web search and the arXiv versions of the papers):
 - **A lesson on the decanter method** with a complete proof of Turing incompleteness
   could be added, following DH 11.3 or the game version of Bienvenu–Shen. It would teach
   the core technique of the area; it needs a careful formalization (about 3000 words).
-- Durations of `cost-functions` and `ktrivial-lowness` are 50 minutes, slightly above
-  the 45-minute guideline; both contain complete constructions that are hard to split.
+- Durations of `cost-functions` and `ktrivial-lowness` were 50 minutes; with the further
+  exercises moved out of the text (2026-11-13) they are 45 minutes (2505 and 2804 words;
+  the second is capped at 45).
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. The
+featured exercises stay in the section "Exercises" of each lesson; the others are in the
+collapsed block of further exercises at the end of the lesson.
+
+**Featured, and why.**
+
+- `k-trivial-sets`: `ex-ktrivial-computable-lengths` (the reduction to a computable set
+  of lengths, used implicitly for joins) and `ex-ktrivial-count-lower` (the lower bound
+  that makes the counting theorem sharp up to a logarithmic term).
+- `solovay-functions`: `ex-ktrivial-not-random` (the first use of the wtt closure, and the
+  non-K-triviality of the sparse coding of example 3 of lesson 1).
+- `cost-functions`: `ex-ktrivial-permitting` (cost functions combined with a classical
+  method of the c.e. degrees).
+- `lowness`: `ex-lowk-low` (lowness for K implies lowness, used in lessons 5 and 6).
+- `hungry-sets`: `ex-hungry-common-lower` (the typical application of the theorem).
+- `ktrivial-lowness`: `ex-ktrivial-incomplete` (Turing incompleteness and Post's problem
+  without injury).
+
+**Further exercises, lesson by lesson.**
+
+- `k-trivial-sets`: unbounded constants of computable sets (counting); prefixing a string
+  (constant $b + 2K(\rho) + O(1)$); joins of $k$ sets by one machine; sums of K-trivial
+  reals (join plus four candidates); plain complexity of K-trivial sets compared with
+  Chaitin's theorem.
+- `solovay-functions`: Solovay functions via $\sum 2^{-g}$ (moved); examples of wtt
+  reductions ($A \cap B$, $A \cup B$, pairs); $\min$ of a Solovay function and a bound
+  with finite sum, a Solovay function below $2\log m + 2$; no Solovay function is tight
+  everywhere; the tightness hypothesis of `prop-solovay-ktrivial` is needed (bound
+  $4\log m$ and the sparse coding of a random set); the class $K(A \uh n) \leq^+ 4\log n$
+  is not closed under wtt reductions.
+- `cost-functions`: neither c.e. nor co-c.e., speed-up (moved); a slow enumeration of
+  $\nat$ that does not obey $c_K$ (obedience is a property of approximations); the limit
+  condition is necessary for monotone cost functions; joins of approximations; a sparse
+  simple K-trivial set below any order.
+- `lowness`: random sets are neither low for K nor low for randomness; downward closure of
+  lowness for randomness and of bases; low for C implies computable (Chaitin's theorem);
+  finitely many sets low for K with a given constant (uniform constants of the oracle
+  machine); sets low for K compute no DNC function and no random set (Kjos-Hanssen,
+  Merkle, Stephan, admitted with a pointer, since `random-dnc` is not a prerequisite).
+- `hungry-sets`: bases are incomplete (moved); no random set is a base; the hypothesis
+  $Z \in \mathrm{MLR}^A$ cannot be weakened to $Z \in \mathrm{MLR}$ ($\emptyset'$ and $\Omega$);
+  the variant in which requests wait for the full target (divisibility by $2^{-s}$);
+  Δ⁰₂ sets low for $\Omega$ are low for randomness, and the Δ⁰₂ hypothesis is needed.
+- `ktrivial-lowness`: relative K-triviality (moved); lowness for K through the initial
+  segments of the oracle; $A' \equiv_T \emptyset'$ and $A'$ not K-trivial; the join
+  through the cost function characterization; constants of K-triviality and of lowness
+  bound each other, non-effectively.
+
+**Sources.** Nies, *Computability and Randomness*: Exercises 5.2.7
+(`ex-lowk-segments`), 5.2.9 (`ex-ktrivial-computable-lengths`), 5.2.14
+(`ex-ktrivial-shift`), 5.2.19 (`ex-ktrivial-sum`), 5.2.22 (`ex-low-for-c`), 5.3.7
+(`ex-cost-slow-enumeration`), 5.3.8 (`ex-cost-limit-necessary`), 5.1.27
+(`ex-low-omega`), 5.1.30 (`ex-hungry-common-lower`, also DH Corollary 11.7.3), all checked
+in the text version on 2026-11-13; Proposition 5.2.11 for the lower bound
+(`ex-ktrivial-count-lower`). The other exercises are new; they vary the proofs of the
+lessons or combine them.
+
+**Not included.** The Σ⁰₃ index set (Nies 5.3.29–5.3.32) and the function counting the sets
+with a given constant (Nies 5.2.15–5.2.16), excluded by section 5; Nies 5.2.8 (a
+wtt-incomplete c.e. set is K-trivial at infinitely many lengths) and a direct
+construction of a c.e. set that is not K-trivial (Nies 5.2.10), whose solutions need
+more than the lessons provide; the decanter exercises of Nies 5.4.
+
+## 12. History
 
 - **2026-11-12.** Design and pedagogy revision. The course grows from three to six
   lessons: `solovay-functions` (wtt closure and incompleteness, Solovay functions moved
@@ -265,3 +331,10 @@ Checked on 2026-11-12 (web search and the arXiv versions of the papers):
   Zambella after Solovay (DH 11.1.5), of the cost function form to DHNS 2003; the title of
   Chaitin's 1977 paper corrected; the STACS 2011 reference replaced by BDMN 2015; the
   alternative route to the main theorem made precise.
+- **2026-11-13: featured and further exercises.** Labels and objectives for the twelve
+  existing exercises; one featured exercise per lesson, two in lesson 1; the others moved
+  to the further exercises. Twenty-seven new further exercises (section 11). Positional
+  references to exercises replaced by `:ref`; the forward reference of lesson 1 to an
+  exercise of lesson 2 rephrased, and the forward `:ref` of lesson 2 to
+  `thm-obey-ktrivial` replaced by a description. Durations of `cost-functions` and
+  `ktrivial-lowness` set to 45 minutes.

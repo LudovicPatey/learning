@@ -79,9 +79,17 @@ In case 2, why does keeping the condition unchanged suffice?
   The divergence is already forced; nothing further is needed.
 :::
 
+::::exercise{#ex-coh-countable-cones difficulty=2 objective="Adapt Mathias cone avoidance to countably many cones at once."}
+Let $Z$ be a set and $C_0, C_1, \dots$ sets with $C_j \not\leq_T Z$ for every $j$. Show that every $Z$-computable sequence $\vec R$ has a cohesive set $G$ with $C_j \not\leq_T Z \oplus G$ for every $j$.
+
+:::solution
+Run the construction of :ref{#thm-coh-cone-avoidance} with one requirement $\Phi^{Z \oplus G}_e \neq C_j$ for each pair $(e, j)$, handled in a fixed order together with the infinity and cohesiveness steps. Each requirement is satisfied as before: cases 1 and 2 extend or keep the condition, and case 3 would give $C_j \leq_T Z$. The reservoirs stay $Z$-computable throughout, since the hypothesis on $C_j$ is used only in case 3, for the current reservoir.
+:::
+::::
+
 ## Strong cone avoidance for the pigeonhole principle
 
-The infinite pigeonhole principle for two colors asks, given a set $A$, for an infinite subset of $A$ or of $\overline{A}$. When $A$ is computable, $A$ or $\overline A$ itself is a computable solution. When $A$ is arbitrary, a solution may be forced to be complex: some infinite set $A$ has only infinite subsets computing a given set (see the exercises). The theorem of Dzhafarov and Jockusch says that the two sides cannot both be forced.
+The infinite pigeonhole principle for two colors asks, given a set $A$, for an infinite subset of $A$ or of $\overline{A}$. When $A$ is computable, $A$ or $\overline A$ itself is a computable solution. When $A$ is arbitrary, a solution may be forced to be complex: some infinite set $A$ has only infinite subsets computing a given set (:ref{#ex-pigeonhole-one-side}). The theorem of Dzhafarov and Jockusch says that the two sides cannot both be forced.
 
 The proof builds a subset of $A$ and a subset of $\overline{A}$ at the same time, by Mathias forcing with a common reservoir, and satisfies, for every pair of indices $(e_0, e_1)$, the **disjunction** "$\Phi_{e_0}$ fails to compute $C$ from the first set, or $\Phi_{e_1}$ fails from the second". If every disjunction holds, one of the two sets avoids the cone: if the first set computes $C$ through some $e_0$, then every $e_1$ fails on the second set. This way of combining two lists of requirements is sometimes called **Lachlan's disjunction**. The obstacle is that $A$ may be arbitrarily complex, so a question about extensions inside $A$ cannot be answered with a simple oracle. The solution is to ask the question about **all** partitions of $\nat$ simultaneously, which removes $A$ from the question and makes it a $\Pi^0_1$ question, answered by compactness.
 
@@ -143,16 +151,6 @@ Where is it used that $\mathcal I$ is a Scott ideal?
   In case 1, the string comes from the definition applied to $(A^0, A^1)$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=2}
-Let $Z$ be a set and $C_0, C_1, \dots$ sets with $C_j \not\leq_T Z$ for every $j$. Show that every $Z$-computable sequence $\vec R$ has a cohesive set $G$ with $C_j \not\leq_T Z \oplus G$ for every $j$.
-
-:::solution
-Run the construction of :ref{#thm-coh-cone-avoidance} with one requirement $\Phi^{Z \oplus G}_e \neq C_j$ for each pair $(e, j)$, handled in a fixed order together with the infinity and cohesiveness steps. Each requirement is satisfied as before: cases 1 and 2 extend or keep the condition, and case 3 would give $C_j \leq_T Z$. The reservoirs stay $Z$-computable throughout, since the hypothesis on $C_j$ is used only in case 3, for the current reservoir.
-:::
-::::
-
 ## Notes and references
 
 Cone avoidance for arbitrary problems, and the forcing question as the general method to establish it, are the subject of the course on cone avoidance (:ref{to="avoidance/avoidance-properties"}).
@@ -166,3 +164,59 @@ Mathias forcing was introduced by Mathias in set theory; its computable version 
 - D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022.
+
+:::::exercises
+::::exercise{#ex-pigeonhole-one-side difficulty=1 objective="See why strong cone avoidance for the pigeonhole principle cannot prescribe the side of the solution."}
+Show that there is an infinite set $A$ all of whose infinite subsets compute a given set $C$, and explain why this does not contradict :ref{#thm-dj-cone-avoidance}.
+
+:::solution
+Let $A = \{ \langle C \uh n \rangle : n \in \nat \}$, the set of codes of the prefixes of $C$, with a coding in which longer strings have larger codes. An infinite subset of $A$ contains codes of arbitrarily long prefixes of $C$, so it computes $C$: to find $C(x)$, search for an element coding a string of length larger than $x$. If $C$ is not computable, :ref{#thm-dj-cone-avoidance} with $Z = \emptyset$ gives an infinite subset of $A$ or of $\overline{A}$ that does not compute $C$; it cannot be a subset of $A$, so it is a subset of $\overline{A}$. There is no contradiction: the theorem only guarantees a solution on one of the two sides, without saying which.
+:::
+::::
+
+::::exercise{#ex-mathias-extension difficulty=1 objective="Check the basic properties of Mathias conditions from the definition."}
+1. Show that extension of Mathias conditions is transitive, and that if $(\tau, Y)$ extends $(\sigma, X)$, every set satisfying $(\tau, Y)$ satisfies $(\sigma, X)$.
+2. Show that the class of sets satisfying $(\sigma, X)$ is a $\Pi^0_1(X)$ class with an infinite member.
+
+:::solution
+1. Let $(\rho, W)$ extend $(\tau, Y)$, which extends $(\sigma, X)$. Then $\sigma \preceq \tau \preceq \rho$ and $W \subseteq Y \subseteq X$. A position $n$ with $|\sigma| \leq n < |\rho|$ and $\rho(n) = 1$ is either below $|\tau|$, and then $\tau(n) = 1$ and $n \in X$, or at least $|\tau|$, and then $n \in Y \subseteq X$. So $\rho$ is compatible with $(\sigma, X)$. For the second statement, let $G$ satisfy $(\tau, Y)$. Then $\sigma \preceq \tau \prec G$, and every $n \geq |\sigma|$ in $G$ is a new element of $\tau$, hence in $X$, if $n < |\tau|$, and belongs to $Y \subseteq X$ otherwise.
+2. The class is $\{ G : \sigma \prec G \text{ and } \forall n \geq |\sigma|\ (n \in G \rightarrow n \in X) \}$, an intersection of conditions each involving one bit of $G$ and decidable from $X$: a $\Pi^0_1(X)$ class. The set $\sigma \cup X$, that is, the set whose characteristic sequence extends $\sigma$ and coincides with $X$ above $|\sigma|$, is an infinite member, since $\min X \geq |\sigma|$.
+:::
+::::
+
+::::exercise{#ex-dj-k-colors difficulty=1 objective="Extend strong cone avoidance for the pigeonhole principle to finitely many colors by induction."}
+Let $Z$ be a set, $C \not\leq_T Z$, $k \geq 2$, and $\nat = A_0 \sqcup \cdots \sqcup A_{k-1}$ a partition. Show that some $A_i$ has an infinite subset $H$ with $C \not\leq_T Z \oplus H$.
+
+:::solution
+By induction on $k$, for all $Z$ simultaneously. For $k = 2$, this is :ref{#thm-dj-cone-avoidance} with $A = A_0$. For $k + 1$ parts, apply :ref{#thm-dj-cone-avoidance} to $A_0$: there is an infinite set $H$ with $C \not\leq_T Z \oplus H$, contained in $A_0$, in which case we are done, or in $A_1 \cup \cdots \cup A_k$. In the second case, let $p$ enumerate $H$ in increasing order and $B_i = \{ n : p(n) \in A_i \}$ for $1 \leq i \leq k$, a partition of $\nat$ into $k$ parts. By the induction hypothesis with $Z \oplus H$ in place of $Z$, some $B_i$ has an infinite subset $L$ with $C \not\leq_T Z \oplus H \oplus L$. Then $p[L]$ is an infinite subset of $A_i$, computable in $H \oplus L$, so $C \not\leq_T Z \oplus p[L]$. Adapted from Hirschfeldt, *Slicing the Truth*, Exercise 6.70.
+:::
+::::
+
+::::exercise{#ex-coh-omega-model difficulty=2 objective="Iterate cone avoidance for cohesiveness to build an ω-model of COH without the halting set."}
+Show directly from :ref{#thm-coh-cone-avoidance} that there is an ω-model of $\mathsf{RCA}_0 + \mathsf{COH}$ not containing $\emptyset'$.
+
+:::solution
+Identify a sequence of sets $\vec R$ with the set $\{ \langle i, x \rangle : x \in R_i \}$. Fix an enumeration of all pairs $(e, m)$ in which each pair appears infinitely often. Build sets $Z_0 = \emptyset \leq_T Z_1 \leq_T \cdots$ with $\emptyset' \not\leq_T Z_n$. At stage $n$, let $(e, m)$ be the $n$-th pair. If $m \leq n$ and $\Phi^{Z_m}_e$ is the characteristic function of a set, it codes a $Z_n$-computable sequence $\vec R$, and :ref{#thm-coh-cone-avoidance} with $Z = Z_n$ and $C = \emptyset'$ gives an $\vec R$-cohesive set $G$ with $\emptyset' \not\leq_T Z_n \oplus G$; let $Z_{n+1} = Z_n \oplus G$. Otherwise $Z_{n+1} = Z_n$.
+
+The class $\mathcal I = \{ X : \exists n\ X \leq_T Z_n \}$ is a Turing ideal, since the sequence is increasing, and does not contain $\emptyset'$. Every sequence in $\mathcal I$ is $\Phi^{Z_m}_e$ for some $e$ and $m$, and the pair $(e, m)$ is the $n$-th pair for some $n \geq m$, so the sequence has a cohesive set in $\mathcal I$. Cohesiveness is arithmetical, so $\mathcal I$ satisfies $\mathsf{COH}$, and as a Turing ideal it is an ω-model of $\mathsf{RCA}_0$.
+:::
+::::
+
+::::exercise{#ex-lachlan-disjunction difficulty=1 objective="Check that the disjunctive requirements express exactly that one of two sets avoids the cone."}
+Let $Z$, $C$, $G^0$ and $G^1$ be sets. Show that the requirements $\mathcal R_{e_0, e_1}$ of the proof of :ref{#thm-dj-cone-avoidance} hold for all $e_0, e_1$ if and only if $C \not\leq_T Z \oplus G^0$ or $C \not\leq_T Z \oplus G^1$.
+
+:::solution
+If $C \not\leq_T Z \oplus G^0$, then $\Phi^{Z \oplus G^0}_{e_0} \neq C$ for every $e_0$, so every requirement holds; similarly if $C \not\leq_T Z \oplus G^1$. Conversely, if $C = \Phi^{Z \oplus G^0}_{e_0}$ and $C = \Phi^{Z \oplus G^1}_{e_1}$, the requirement $\mathcal R_{e_0, e_1}$ fails. So the disjunctions are exactly as strong as the conclusion of the theorem, while each one concerns a single pair of indices and can be satisfied by a single extension.
+:::
+::::
+
+::::exercise{#ex-dj-answer-sigma1 difficulty=2 objective="Complete the compactness step of the disjunctive question of Dzhafarov and Jockusch."}
+In the proof of :ref{#thm-dj-cone-avoidance}, let $c = (\sigma_0, \sigma_1, X)$ be a condition. Show that the class of sets $U^0$ for which the partition $(U^0, \overline{U^0})$ witnesses that $c$ does not answer $(x, v)$ is a $\Pi^0_1(Z \oplus X)$ class, uniformly in $(x, v)$, and deduce that the set $W$ of pairs answered by $c$ is c.e. in $Z \oplus X$.
+
+:::solution
+For a string $\rho$, viewed as an initial segment of $U^0$, say that $\rho$ is **bad** if there are $i < 2$ and a string $\tau$ with $|\tau| \leq |\rho|$ such that $\sigma_i \preceq \tau$, every $n$ with $|\sigma_i| \leq n < |\tau|$ and $\tau(n) = 1$ belongs to $X$ and satisfies $\rho(n) = 1 - i$ (that is, $n \in U^i$), and $\Phi^{Z \oplus \tau}_{e_i}(x)$ converges to $v$ in at most $|\rho|$ steps. Being bad is decidable in $Z \oplus X$, uniformly in $(\rho, x, v)$: the search is bounded, and a bounded computation queries finitely many bits of $Z$. Badness is preserved by extension of $\rho$. A set $U^0$ has a bad prefix if and only if there are $i$ and $\tau$ compatible with $(\sigma_i, X \cap U^i)$ with $\Phi^{Z \oplus \tau}_{e_i}(x)\converge = v$: compatibility depends only on $U^i \uh |\tau|$, and a convergent computation converges in finitely many steps. So the class of partitions witnessing a negative answer is the class of paths of the $Z \oplus X$-computable tree of strings without bad prefix, a $\Pi^0_1(Z \oplus X)$ class.
+
+By compactness (König's lemma for binary trees), this class is empty if and only if the tree is finite, that is, if and only if there is a length $\ell$ such that every string of length $\ell$ has a bad prefix. This is a $\Sigma^0_1(Z \oplus X)$ property of $(x, v)$, so $W$ is c.e. in $Z \oplus X$.
+:::
+::::
+:::::

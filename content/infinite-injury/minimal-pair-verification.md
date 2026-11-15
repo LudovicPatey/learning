@@ -1,7 +1,7 @@
 ---
 title: The true path and the verification
 summary: The true path of a tree construction, whose nodes are visited infinitely often and initialized finitely often; the nodes on the true path meet their requirements; between two consecutive expansionary stages of an N-node on the true path, only one of the two sets changes below the first of them; end of the proof of the minimal pair theorem.
-duration: 50
+duration: 45
 prerequisites: [trees-of-strategies]
 ---
 
@@ -67,6 +67,14 @@ Why must a node to the left of $\alpha$ have higher priority than $\alpha$, rath
 
   The priority order is not well-founded: each of the nodes $\mathrm f$, $\infty\mathrm{fff}$, $\infty\mathrm{ff}\infty\mathrm{fff}$, … has lower priority than the next one.
 :::
+
+::::exercise{#ex-true-path-double-jump difficulty=1 objective="Compute the true path of a tree construction with the oracle $\emptyset''$."}
+Show that the true path is computable in $\emptyset''$.
+
+:::solution
+Given $P \uh n$, if it is an $\mathcal N$-node, then $P(n) = \infty$ if and only if $(P \uh n)^\frown \infty$ is visited at infinitely many stages. The set of stages at which a node $\beta$ is visited is computable, uniformly in $\beta$, so it is $W_{g(\beta)}$ for a computable function $g$. Hence $\beta$ is visited at infinitely many stages if and only if $g(\beta) \in \mathrm{Inf}$, which $\emptyset''$ decides (:ref{#prop-tot-double-jump}). If $P \uh n$ is another node, $P(n) = \mathrm f$. By induction on $n$, $\emptyset''$ computes $P$.
+:::
+::::
 
 ## The positive requirements
 
@@ -152,17 +160,15 @@ In the proof of :ref{#lem-mp-negative}, why is the $\mathcal N_e$-node on the tr
   A node initialized infinitely often and visited infinitely often has infinitely many expansionary stages, since its first visit after each initialization is expansionary.
 :::
 
-## Exercises
+## Notes and references
 
-::::exercise{difficulty=1 #ex-true-path-double-jump}
-Show that the true path is computable in $\emptyset''$.
+The verification follows the proof of the minimal pair theorem of Downey and Hirschfeldt (their Lemmas 2.14.4 and 2.14.5), with the preservation lemma :ref{#lem-pair-module} isolated as a statement about a sequence of stages. A case analysis on the position of the acting node with respect to the node under consideration, as in the proof of :ref{#lem-mp-one-side}, is the typical verification step of tree arguments; the verification of the high incomplete construction uses it again (:ref{#lem-hi-preservation}).
 
-:::solution
-Given $P \uh n$, if it is an $\mathcal N$-node, then $P(n) = \infty$ if and only if $(P \uh n)^\frown \infty$ is visited at infinitely many stages. The set of stages at which a node $\beta$ is visited is computable, uniformly in $\beta$, so it is $W_{g(\beta)}$ for a computable function $g$. Hence $\beta$ is visited at infinitely many stages if and only if $g(\beta) \in \mathrm{Inf}$, which $\emptyset''$ decides (:ref{#prop-tot-double-jump}). If $P \uh n$ is another node, $P(n) = \mathrm f$. By induction on $n$, $\emptyset''$ computes $P$.
-:::
-::::
+- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.14.2.
+- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapter IX.
 
-::::exercise{difficulty=2}
+:::::exercises
+::::exercise{#ex-mp-simple difficulty=2 objective="Adapt the positive requirements of the minimal pair construction so that both sets are simple."}
 Modify the construction so that $A$ and $B$ are, in addition, simple sets.
 
 :::solution
@@ -172,9 +178,61 @@ A node $\gamma$ initialized at the end of stage $s$ only enumerates numbers larg
 :::
 ::::
 
-## Notes and references
+::::exercise{#ex-mp-left-right difficulty=1 objective="Describe how often the nodes to the left and to the right of the true path are visited and initialized."}
+Say that a node $\beta$ is to the left of the true path if $\beta <_L P \uh n$ for some $n$, and to the right of it if $P \uh n <_L \beta$ for some $n$. Show that a node to the left of the true path is visited at only finitely many stages, and that a node to the right of the true path is initialized at infinitely many stages.
 
-The verification follows the proof of the minimal pair theorem of Downey and Hirschfeldt (their Lemmas 2.14.4 and 2.14.5), with the preservation lemma :ref{#lem-pair-module} isolated as a statement about a sequence of stages. A case analysis on the position of the acting node with respect to the node under consideration, as in the proof of :ref{#lem-mp-one-side}, is the typical verification step of tree arguments; the verification of the high incomplete construction uses it again (:ref{#lem-hi-preservation}).
+:::solution
+Let $\beta <_L P \uh n$, and let $m$ be the position with $\beta \uh m = P \uh m$, $\beta(m) = \infty$ and $P(m) = \mathrm f$. By :ref{#def-true-path}, $P(m) = \mathrm f$ means that $(P \uh m)^\frown \infty$ is visited at only finitely many stages, since $\infty$ is the least element of $\Lambda$. If $\beta$ is visited at stage $s$, then $(P \uh m)^\frown \infty \preceq \beta \prec \sigma_s$, so $(P \uh m)^\frown \infty$ is visited at $s$. Hence $\beta$ is visited at only finitely many stages.
 
-- R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.14.2.
-- R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987, Chapter IX.
+Let $P \uh n <_L \beta$, and let $m$ be the position with $\beta \uh m = P \uh m$, $P(m) = \infty$ and $\beta(m) = \mathrm f$. The node $(P \uh m)^\frown \infty = P \uh (m + 1)$ is visited at infinitely many stages $s$, by :ref{#lem-true-path}. At each of them $\sigma_s \uh (m + 1) = (P \uh m)^\frown \infty$, so $\sigma_s <_L \beta$, and $\beta$ is initialized at the end of stage $s$.
+
+A node to the right of the true path may still be visited infinitely often, as $\langle \mathrm f \rangle$ in :ref{#ex-true-path}; it may then act infinitely often, but each of its followers is eventually cancelled or enumerated.
+:::
+::::
+
+::::exercise{#ex-mp-true-path-unique difficulty=2 objective="Characterize the true path as the only path whose nodes are visited infinitely often and are to the right of the current path only finitely often."}
+An infinite path through $\mathbb T$ is a sequence $X \in \Lambda^\nat$ with $X \uh n \in \mathbb T$ for every $n$. Show that the true path is the only infinite path $X$ through $\mathbb T$ such that, for every $n$, the node $X \uh n$ is visited at infinitely many stages, and $\sigma_s <_L X \uh n$ holds for only finitely many $s$.
+
+:::solution
+The true path has these properties by :ref{#lem-true-path}. Let $X$ be an infinite path with these properties, and suppose $X \neq P$. Let $n$ be the first position where they differ; then $X \uh n = P \uh n$ is an $\mathcal N$-node, since the other nodes have only the outcome $\mathrm f$, and $\{ X(n), P(n) \} = \{ \infty, \mathrm f \}$.
+
+If $X(n) = \infty$ and $P(n) = \mathrm f$, then by :ref{#def-true-path}, $(P \uh n)^\frown \infty = X \uh (n + 1)$ is visited at only finitely many stages, contradicting the first property of $X$.
+
+If $X(n) = \mathrm f$ and $P(n) = \infty$, then $P \uh (n + 1)$ is visited at infinitely many stages $s$, and at each of them $\sigma_s$ extends $(P \uh n)^\frown \infty$, so $\sigma_s <_L (P \uh n)^\frown \mathrm f = X \uh (n + 1)$. This contradicts the second property of $X$. Hence $X = P$.
+:::
+::::
+
+::::exercise{#ex-mp-outcomes-examples difficulty=1 objective="Compute the outcome on the true path of an $\mathcal N_e$-node for explicit functionals."}
+Let $\alpha = P \uh 3e$. Determine $P(3e)$ in each of the following cases:
+
+1. $\Phi^X_e(y) = X(y)$ for every oracle $X$ and every $y$;
+2. $\Phi^X_e(y)$ diverges for every $X$ and $y$;
+3. $\Phi^X_e(y) = 0$ for every $X$ and $y$, by a computation that does not query the oracle.
+
+:::solution
+By :ref{#lem-true-path}, $\alpha$ is initialized only finitely often; let $t_0$ be a stage after which it is not initialized. After $t_0$, the record of $\alpha$ is set at the first visit and then strictly increases at each later $\alpha$-expansionary stage, since a stage is $\alpha$-expansionary only if $l(e, s)$ exceeds the record, which then becomes $l(e, s)$. The node $\alpha^\frown \infty$ is visited only at $\alpha$-expansionary stages, and at every $\alpha$-expansionary stage $s > |\alpha| + 1$, since an $\mathcal N$-node does not end the stage; so $P(3e) = \infty$ if and only if there are infinitely many of them.
+
+1. By the proof of :ref{#thm-minimal-pair}, $A$ contains some number $a$, and $a \notin B$ since $A \cap B = \emptyset$. Let $s_a$ be a stage with $a \in A_{s_a}$. For $s \geq s_a$, $\Phi^{A_s}_e(a)[s]$ and $\Phi^{B_s}_e(a)[s]$, if they converge, have the values $1$ and $0$, so $l(e, s) \leq a$. After $\max(t_0, s_a)$, the records at the $\alpha$-expansionary stages are strictly increasing and at most $a$: there are at most $a + 1$ such stages. So $P(3e) = \mathrm f$.
+2. $l(e, s) = 0$ for every $s$. After $t_0$, the first visit sets the record to $0$, and no later stage has $l(e, s) > 0$. So $P(3e) = \mathrm f$.
+3. $\Phi^A_e = \Phi^B_e$ is total. As in the proof of :ref{#lem-mp-negative}, :ref{#prop-agreement-unbounded} applied to the $\alpha$-stages after $t_0$ gives infinitely many $\alpha$-expansionary stages. So $P(3e) = \infty$, as in :ref{#ex-true-path}.
+
+In cases 1 and 2, $\mathcal N_e$ holds because its hypothesis fails; in case 3, because the common function is computable. The outcome on the true path reflects whether the length of agreement keeps growing, not whether $\mathcal N_e$ holds.
+:::
+::::
+
+::::exercise{#ex-mp-family difficulty=2 objective="Extend the minimal pair construction to a uniformly c.e. sequence of sets that pairwise form minimal pairs."}
+Show that there is a uniformly c.e. sequence of sets $A_0, A_1, \dots$ such that, for all $i \neq j$, the degrees of $A_i$ and $A_j$ form a minimal pair. Explain which parts of the verification change.
+
+:::solution
+*Requirements.* For all $e$ and $i$, $\mathcal R_{e,i} : W_e \neq \overline{A_i}$; for all $e$ and $i < j$,
+$$
+\mathcal N_{e,i,j} : \Phi^{A_i}_e = \Phi^{A_j}_e \text{ total} \implies \Phi^{A_i}_e \text{ computable}.
+$$
+List all these requirements in a computable sequence of order type $\omega$. The tree is the set of strings in $\{ \infty, \mathrm f \}^{<\nat}$ with the value $\mathrm f$ at every position $n$ such that the $n$-th requirement is not an $\mathcal N$-requirement; the priority order is that of :ref{#def-strategy-tree}.
+
+*Construction.* As in the lesson: an $\mathcal N_{e,i,j}$-node computes the length of agreement of $\Phi^{A_{i,s}}_e$ and $\Phi^{A_{j,s}}_e$, and has outcome $\infty$ at its expansionary stages; an $\mathcal R_{e,i}$-node receives a fresh follower, and acts by enumerating it into $A_i$ when it appears in $W_e$, after which the stage ends. At the end of the stage, the nodes to the right of the current path are initialized. All the sets are enumerated by one construction, so the sequence is uniformly c.e. A follower enters only the set of its own node, so the sets $A_i$ are pairwise disjoint.
+
+*Verification.* :ref{#lem-true-path} holds with the same proof, since it uses only the shape of the tree, the rule that a stage ends when a node acts, and the initialization rule. :ref{#lem-mp-positive} holds with the same proof, so each $A_i$ is non-computable and contains a number, by $\mathcal R_{e,i}$ for an $e$ with $W_e = \nat$. In the proof of :ref{#lem-mp-one-side} for an $\mathcal N_{e,i,j}$-node $\alpha$ on the true path, the case analysis shows that the only number below $s$ enumerated during the stages $s, \dots, t - 1$ is the follower of the node acting at stage $s$, if any. It enters one set $A_k$, so at least one of $A_i$ and $A_j$ does not change below $s$, which is condition 2 of :ref{#lem-pair-module} for the pair $(A_i, A_j)$. The proof of :ref{#lem-mp-negative} then shows that $\mathcal N_{e,i,j}$ holds. Finally, $A_i \neq A_j$ for $i \neq j$, since they are disjoint and non-empty, so :ref{#lem-posner} applied to $A_i$ and $A_j$ shows that every set computable in both is computable.
+:::
+::::
+:::::

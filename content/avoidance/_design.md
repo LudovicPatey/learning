@@ -294,7 +294,7 @@ Checked on 2026-11-12 (web search and the arXiv text of Downey et al.):
   equivalences of lessons 7–9 and the failure of the unrelativized versions; it fixed the
   statements of the admitted results, which are garbled in the monograph, and supplied the
   example of the principal function of a Δ¹₁-random set and the unrelativized separation
-  of the last exercise of lesson 8 (the Δ¹₁-random example is not used, see the open points).
+  of `ex-hyperimmunity-unrelativized` in lesson 8 (the Δ¹₁-random example is not used, see the open points).
 - **Wang, *The definability strength of combinatorial principles*** (JSL 81 (2016)):
   preservation of the arithmetic hierarchy; cited in lesson 7. First page 1531 confirmed, last page not; DOI
   confirmed.
@@ -327,7 +327,78 @@ Checked on 2026-11-12 (web search and the arXiv text of Downey et al.):
   also `cor-strong-delta2`) with the prerequisite `avoidance/forcing-question-method`; the
   prerequisite should be `avoidance/strong-cone-avoidance`.
 
-## 11. History
+## 11. Exercises
+
+Each lesson has one to three featured exercises in its text (section "Exercises", before the
+references) and a collapsed block of further exercises at the end. All existing exercises
+were kept, labeled, given an objective, and checked; the old labels `exr-unrelativized-cone`
+and `exr-question-converse` are unchanged. Positional references ("the first exercise of …")
+were replaced by references to labels, including `ex-preservation-downward` of
+`reducibilities/preservation`.
+
+**Featured, and why.**
+
+1. `exr-unrelativized-cone` (the reason for relativizing, cited in the text) and
+   `ex-wkl-coh-not-rt12` (a separation that needs a property other than cone avoidance).
+2. `ex-question-necessary` and `exr-question-converse`: the pair shows what the definition of
+   a forcing question asks beyond correct answers on deciding conditions; both are cited in
+   the text.
+3. `ex-high-cone-subset`: the abstract theorem with a class ℳ of reservoirs, combined with
+   domination.
+4. `ex-dj-disjunctive` (the model disjunctive question, cited by lessons 7 and 9) and
+   `ex-disjunctive-two-cones` (the limit of Lachlan's disjunction, cited by lesson 7).
+5. `ex-seetapun-many-extendible`: the dichotomy of the infinity lemma, reused.
+6. `ex-seetapun-cone-reservoirs` (Seetapun's original setting) and
+   `ex-seetapun-stable-question` (what the thinning replaces).
+7. `ex-non-sigma1-ce` (what cone avoidance gives directly, and why it is not enough) and
+   `ex-coh-strong-non-sigma1` (the transfer of a strong proof to another property).
+8. `ex-hyperimmunity-unrelativized`: the unrelativized separation of Downey et al.
+9. `ex-rt12-strong-hyperimmunity`: the compact disjunctive question in a strong setting.
+
+**Further exercises, lesson by lesson.**
+
+1. RT²_k by merging colors (moved; it overlaps `ramsey-theorem/ex-seetapun-k-colors`, kept as
+   an existing exercise); the identity problem (strong cone avoidance is not inherited along
+   ω-reducibility); instances with a single solution (the only path of a computable tree with
+   one path is computable); cone avoidance characterized by Turing ideals above every Z;
+   problems applied in sequence.
+2. A condition in the middle region of the dividing line; why Σ⁰₁(ℳ)-preservation is about
+   formulas with free variables (counterexample with the coding reservoir); the cone avoidance
+   basis theorem from the abstract theorem; Mathias forcing with reservoirs in a Turing ideal.
+3. Products (moved); cohesive subsets of one side of a set; strong cone avoidance of COH and
+   RT¹₂ are equivalent; the Δ⁰₂ question is not uniform in the condition; a high cohesive set
+   for an arbitrary sequence avoiding a cone.
+4. Pairs of independent questions (the disjunction matters only for a shared reservoir); a
+   one-sided question encodes the instance; both sides of the Dzhafarov–Jockusch forcing are
+   extendible; a negative answer for which no extension forces both negations.
+5. One side is always extendible, even without (H); clause 3 is needed under (H); stems and the
+   limit set of a stable coloring; homogeneous subsets of the reservoir as members.
+6. The question gives progress on an uncontrolled side; a one-sided question fails property 1
+   (on the example of lesson 5); where the computability of the coloring is used; cohesive
+   homogeneous sets.
+7. Countably many definitions for WKL and COH (moved); closure under products and
+   ω-reducibility, with an ω-model; non-Σ⁰₂ definitions and jump cone avoidance; failure of
+   the strong version for WKL and RT²₂; RT²₂ through the decomposition COH + RT¹₂.
+8. The running maximum (moved; it overlaps `immunity-growth/ex-running-maximum`, in a
+   relativized form); first properties of moduli; the Δ⁰₂ case without the set W; a modulus
+   not computable in the set (item 2 of `lem-modulus-hyperimmune` needs its hypothesis);
+   failure of strong preservation of hyperimmunity for WKL and RT²₂.
+9. Countably many hyperimmunities for WKL and RT³₂ (moved); a sparse reservoir (the analogue
+   of `ex-coding-reservoir` for growth); strong preservation for COH; WKL through the
+   computably dominated basis theorem; preserving each hyperimmune function versus all of
+   them (computable domination).
+
+**Sources.** Patey's monograph, chapter *Cone avoidance*: the exercises on forcing questions
+for Cohen and Jockusch–Soare forcing (`ex-js-cone-basis`), on the Seetapun–Slaman forcing and
+its side note (`ex-seetapun-homogeneous-member`), on Wang's theorem, and on preserving
+definitions. Dzhafarov–Mummert §8.3 for the cone-avoiding reservoirs. Downey et al. (2022)
+for `ex-hyperimmunity-unrelativized`. The others were designed for the course from the
+proofs of the lessons.
+
+**Corrections.** `ex-seetapun-stable-question` applied the question to B = A_f, which puts the
+elements of limit color 1 on side 0; it now uses B = complement of A_f.
+
+## 12. History
 
 - **2026-11-12.** Course created: six lessons, three figures
   (`scripts/figures/avoidance.py`), design log.
@@ -342,3 +413,8 @@ Checked on 2026-11-12 (web search and the arXiv text of Downey et al.):
   questions by the complexity of one-sided questions (lesson 4), an example of a blocked
   side and an exercise (lesson 5), an exercise on products (lesson 3); quizzes of lesson 6
   placed after the proofs they test; figure `avoidance-relations` labels Σ⁰₁(ℳ).
+- **2026-11-13: featured and further exercises.** All exercises labeled, with objectives
+  and difficulties; one to three featured exercises per lesson, 36 new further exercises (four
+  per lesson); `ex-seetapun-stable-question` corrected (the partition is the complement of the
+  limit set); positional references to exercises replaced by labels; durations of lessons 8
+  and 9 recomputed after moving exercises out of the text (30 and 25 minutes).

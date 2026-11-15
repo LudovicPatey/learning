@@ -87,15 +87,7 @@ So the model $I_a$ of the example is a model of $\mathrm I\Delta_0$ in which $\S
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that the cut $I$ of the proof of :ref{#thm-parikh} is the smallest cut of $M$ that contains $\bar c$ and is closed under addition and multiplication.
-
-:::solution
-A cut $J$ containing $\bar c$ and closed under addition and multiplication contains $0$ and $1$, as a nonempty initial segment closed under successor, hence it contains the value $t(\bar c)$ of every term, by induction on the term. Being an initial segment, it contains every $b < t(\bar c)$. So $I \subseteq J$, and $I$ itself is such a cut.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-exponential-cut difficulty=2 objective="Use the absoluteness of the bounded graph of exponentiation to read exponentiation in a cut as closure of the cut."}
 Let $M$ be a model of $\mathrm I\Delta_0 + \mathrm{exp}$ and $I$ a cut of $M$ closed under addition and multiplication. Show that $I \models \mathrm{exp}$ if and only if $I$ is an exponential cut, and that $I \not\models \mathrm I\Sigma_1$ if $I$ is not exponential.
 
 :::solution
@@ -112,3 +104,62 @@ Parikh (1971) proved the theorem that bears his name, in a proof-theoretic form;
 - H. Gaifman and C. Dimitracopoulos, *Fragments of Peano's arithmetic and the MRDP theorem*, in Logic and Algorithmic, Monographies de L'Enseignement Mathématique 30, Genève, 1982, 187–206.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter I, Section 1(a), Chapter V, Sections 1 and 3.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 2.
+
+:::::exercises
+::::exercise{#ex-parikh-smallest-cut difficulty=1 objective="Identify the cut of the proof of Parikh's theorem as the least cut containing the parameters and closed under the operations."}
+Show that the cut $I$ of the proof of :ref{#thm-parikh} is the smallest cut of $M$ that contains $\bar c$ and is closed under addition and multiplication.
+
+:::solution
+A cut $J$ containing $\bar c$ and closed under addition and multiplication contains $0$ and $1$, as a nonempty initial segment closed under successor, hence it contains the value $t(\bar c)$ of every term, by induction on the term. Being an initial segment, it contains every $b < t(\bar c)$. So $I \subseteq J$, and $I$ itself is such a cut.
+:::
+::::
+
+::::exercise{#ex-term-bound-power difficulty=1 objective="Bound every term by a power of the sum of its variables, to give the bound of Parikh's theorem a uniform shape."}
+For a tuple $\bar x = (x_1, \dots, x_n)$, let $s(\bar x) = x_1 + \cdots + x_n + 2$, and write $s^k$ for the product of $k$ copies of $s$, with $s^0 = 1$. Show that for every term $t(\bar x)$ there is $k \in \nat$ such that $\mathrm{PA}^- \vdash t(\bar x) \leq s(\bar x)^k$. Deduce that the term of :ref{#thm-parikh} may be taken of the form $s(\bar x)^k$.
+
+:::solution
+We use the monotonicity laws of :ref{#ex-pam-cancellation}, and $1 \leq s$, $2 \leq s$, which hold since $0 \leq x_i$. They give $s^j \leq s^k$ for $j \leq k$. By induction on $t$. For $t = 0$ or $t = 1$, take $k = 0$: $0 < 1$ and $1 \leq 1$. For $t = x_i$, take $k = 1$: $x_i \leq s$ by :ref{#ex-pam-cancellation}. If $t_1 \leq s^{k_1}$ and $t_2 \leq s^{k_2}$, let $k = \max(k_1, k_2)$; then $t_1 + t_2 \leq s^k + s^k = 2 \cdot s^k \leq s \cdot s^k = s^{k+1}$, and $t_1 \cdot t_2 \leq s^{k_1} \cdot s^{k_2} = s^{k_1 + k_2}$. If $\mathrm I\Delta_0 \vdash \forall \bar x\ \exists y < t(\bar x)\ \theta$, then also $\mathrm I\Delta_0 \vdash \forall \bar x\ \exists y < s(\bar x)^k\ \theta$, since $y < t \leq s^k$.
+:::
+::::
+
+::::exercise{#ex-parikh-pi1-theories difficulty=2 objective="Extend Parikh's theorem to every theory with a $\Pi_1$ axiomatization, by checking which property of $\mathrm I\Delta_0$ the proof uses." lessons="bounded-induction"}
+Let $T$ be a theory containing $\mathrm{PA}^-$ and equivalent to a set of $\Pi_1$ sentences. Show that if $T \vdash \forall \bar x\ \exists y\ \theta(\bar x, y)$ with $\theta$ bounded, then $T \vdash \forall \bar x\ \exists y < t(\bar x)\ \theta(\bar x, y)$ for some term $t$. Deduce that $\mathrm I\Delta_0$ together with all the $\Pi_1$ sentences true in $\nat$ does not prove $\mathrm{exp}$.
+
+:::solution
+Repeat the proof of :ref{#thm-parikh} with $T$ in place of $\mathrm I\Delta_0$. Compactness gives a model $M$ of $T$ with elements $\bar c$ such that $M \models \forall y < t(\bar c)\ \neg \theta(\bar c, y)$ for every term $t$. The set $I$ of elements below some $t(\bar c)$ is an initial segment, closed under successor, addition and multiplication, by the computation of the proof, which uses only $\mathrm{PA}^-$. So $I$ is a substructure of $M$ and $I \subseteq_e M$. Every $\Pi_1$ sentence true in $M$ is true in $I$ by :ref{#cor-sigma1-upward}, so $I \models T$, and $I \models \exists y\ \theta(\bar c, y)$. A witness $b \in I$ satisfies $M \models \theta(\bar c, b)$ by :ref{#lem-delta0-absolute}, and $b < t(\bar c)$ for some $t$: a contradiction. This is the only place where the proof of :ref{#thm-parikh} used $\mathrm I\Delta_0$, through :ref{#lem-cut-model}.
+
+The theory $T = \mathrm I\Delta_0 \cup \{ \pi : \pi \text{ a } \Pi_1 \text{ sentence true in } \nat \}$ is equivalent to a set of $\Pi_1$ sentences by :ref{#lem-idelta0-pi1}, and it is true in $\nat$. If it proved $\mathrm{exp}$, it would prove $\forall x\ \exists y < t(x)\ \varepsilon(x, y)$ for some term $t$, a sentence that is then true in $\nat$; this is impossible, as in the proof of :ref{#cor-idelta0-exp}.
+:::
+::::
+
+::::exercise{#ex-parikh-sigma1-pi1 difficulty=2 objective="See that Parikh's theorem extends to $\Sigma_1$ formulas by contraction of quantifiers, and fails for $\Pi_1$ formulas."}
+1. Show that the conclusion of :ref{#thm-parikh} holds when $\theta(\bar x, y)$ is a $\Sigma_1$ formula.
+2. Let $\theta(x, y) \equiv \varepsilon(x, y) \vee \forall z\ \neg \varepsilon(x, z)$. Show that $\theta$ is equivalent to a $\Pi_1$ formula, that $\mathrm I\Delta_0 \vdash \forall x\ \exists y\ \theta(x, y)$, and that for no term $t$ does $\mathrm I\Delta_0$ prove $\forall x\ \exists y < t(x)\ \theta(x, y)$.
+
+:::solution
+1. Write $\theta(\bar x, y) \equiv \exists z\ \delta(\bar x, y, z)$ with $\delta$ bounded; a block of several quantifiers $\exists z$ is treated in the same way, with tuples coded by iterated pairs. Let
+$$
+\delta'(\bar x, w) \equiv \exists y < w + 1\ \exists z < w + 1\ \big(w = \langle y, z \rangle \wedge \delta(\bar x, y, z)\big),
+$$
+which is bounded, since the graph of pairing is (:ref{#fact-pairing}). If $\mathrm I\Delta_0 \vdash \forall \bar x\ \exists y\ \exists z\ \delta$, then $\mathrm I\Delta_0 \vdash \forall \bar x\ \exists w\ \delta'$, with $w = \langle y, z \rangle$, since $y, z \leq \langle y, z \rangle$. By :ref{#thm-parikh}, $\mathrm I\Delta_0 \vdash \forall \bar x\ \exists w < t(\bar x)\ \delta'(\bar x, w)$ for some term $t$. A witness $w = \langle y, z \rangle < t$ gives $y \leq w < t$ with $\delta(\bar x, y, z)$, so $\mathrm I\Delta_0 \vdash \forall \bar x\ \exists y < t(\bar x)\ \theta(\bar x, y)$.
+
+2. The formula $\theta$ is logically equivalent to $\forall z\ (\varepsilon(x, y) \vee \neg \varepsilon(x, z))$, which is $\Pi_1$. The sentence $\forall x\ \exists y\ \theta(x, y)$ is logically valid: if some $z$ satisfies $\varepsilon(x, z)$, take $y = z$; otherwise every $y$ satisfies the second disjunct. In $\nat$, $2^x$ exists for every $x$, so $\theta(x, y)$ holds if and only if $y = 2^x$. If $\mathrm I\Delta_0$ proved $\forall x\ \exists y < t(x)\ \theta(x, y)$, this sentence would be true in $\nat$, and $2^x < t(x)$ for every $x$, which fails for large $x$ as in the proof of :ref{#cor-idelta0-exp}.
+:::
+::::
+
+::::exercise{#ex-ia-log-cut difficulty=2 objective="Analyze the cut on which exponentiation is defined in a model of $\mathrm I\Delta_0 + \neg \mathrm{exp}$, by transferring true sentences from $\nat$."}
+Let $M$, $a$ and $I_a$ be as in :ref{#ex-idelta0-not-exp}, with powers $2^x$ computed in $M$, and let $J = \{ x \in I_a : 2^x \in I_a \}$. Show that $J$ is the set of $x \in I_a$ such that $I_a \models \exists y\ \varepsilon(x, y)$, that it is a proper cut of $I_a$ closed under addition, and that it is not closed under multiplication.
+
+:::solution
+Since $M \models \mathrm{Th}(\nat)$, every sentence true in $\nat$ holds in $M$; we use this for the laws of exponentiation. For $x, b \in I_a$, $I_a \models \varepsilon(x, b)$ if and only if $M \models \varepsilon(x, b)$, by :ref{#lem-delta0-absolute}, that is, if and only if $b = 2^x$. So $x \in J$ if and only if $I_a \models \exists y\ \varepsilon(x, y)$.
+
+*$J$ is a cut closed under addition.* If $x' < x \in J$, then $2^{x'} < 2^x \in I_a$, so $2^{x'} \in I_a$. The elements $0$ and $1$ belong to $J$, since $1, 2 \in I_a$. If $x, x' \in J$, then $2^{x + x'} = 2^x \cdot 2^{x'} \in I_a$, since $I_a$ is closed under multiplication. So $J$ is closed under addition, hence under successor. It is proper, since $2^a \notin I_a$ by :ref{#ex-idelta0-not-exp}, so $a \in I_a \setminus J$.
+
+*$J$ is not closed under multiplication.* The sentence "for every $u \geq 1$ there is $x$ with $2^x \leq u < 2^{x+1}$" is true in $\nat$; let $x \in M$ satisfy $2^x \leq a < 2^{x+1}$. Then $x \in J$, since $2^x \leq a$, and $x$ is non-standard, since otherwise $a < 2^{x+1}$ would be standard. Also $x < 2^x \leq a$, so $x \cdot x < a \cdot a$ and $x \cdot x \in I_a$. Suppose $2^{x \cdot x} \in I_a$, so $2^{x \cdot x} < t(a)$ for a term $t$. By :ref{#ex-term-bound-power}, $t(a) \leq (a + 2)^k \leq a^{2k}$ for some standard $k$, since $a + 2 \leq a \cdot a$. Let $m = 2k + 1$. The sentence
+$$
+\forall x\ \forall u\ \big(\overline{m + 1} \leq x \wedge u < 2^{x + 1} \rightarrow u^m < 2^{x \cdot x}\big),
+$$
+written with $\varepsilon$, is true in $\nat$: $u^m < 2^{(x+1) m}$, and $(x + 1) m \leq x \cdot x$ for $x \geq m + 1$, since then $x \cdot x \geq (m + 1) x = m x + x \geq m x + m$. It holds in $M$, and $x$ is non-standard, so $a^m < 2^{x \cdot x}$. But $2^{x \cdot x} < t(a) \leq a^{2k} < a^m$: a contradiction. So $x \cdot x \notin J$.
+:::
+::::
+:::::

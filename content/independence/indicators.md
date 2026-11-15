@@ -37,7 +37,7 @@ $$
 is $\Sigma_1$ and true in $\nat$, hence in $M$, for every standard $n$. By overspill (:ref{#cor-overspill}), $M \models \theta(\nu)$ for some non-standard $\nu$: there are $x, y \in M$ with $\varphi_f(x, y)$ and $\iota(x, y, \nu)$. Then $x \leq y$, and $y \geq \nu$ is non-standard, by the normalization. For standard $x$, the value of $f$ in $M$ is the standard number $f(x)$, since $\nat \models \varphi_f(x, f(x))$, $\Sigma_1$ formulas go up, and $\varphi_f$ defines a function in $M$; so $x$ is non-standard. By the indicator property there is a cut $I \models T$ with $x \in I$ and $y \notin I$. Since $I \models T$, some $y' \in I$ satisfies $I \models \varphi_f(x, y')$; then $M \models \varphi_f(x, y')$, and $y' = y$ by functionality in $M$, although $y' \in I$ and $y \notin I$. This contradiction proves the claim.
 :::
 
-The two parts use only the implication from 1 to 2 in :ref{#def-indicator}. The converse implication says that the indicator measures nothing else. Hájek and Pudlák (Theorem IV.3.10 (ii)) deduce from it, for indicators that are monotone in their arguments, that each instance $\forall x\ \exists y\ \iota(x, y, n)$ with standard $n$ is provable in $T$; for the two indicators of this course it is proved directly (first exercise below, and lesson 7), and the sentence $\forall x\ \forall c\ \exists y\ \iota(x, y, c)$ is true in $\nat$. For these indicators, the sentence of part 1 is therefore a true $\Pi_2$ sentence, all of whose standard instances in $c$ are provable in $T$, and which is not provable in $T$.
+The two parts use only the implication from 1 to 2 in :ref{#def-indicator}. The converse implication says that the indicator measures nothing else. Hájek and Pudlák (Theorem IV.3.10 (ii)) deduce from it, for indicators that are monotone in their arguments, that each instance $\forall x\ \exists y\ \iota(x, y, n)$ with standard $n$ is provable in $T$; for the two indicators of this course it is proved directly (:ref{#ex-indicator-standard-instances}, and lesson 7), and the sentence $\forall x\ \forall c\ \exists y\ \iota(x, y, c)$ is true in $\nat$. For these indicators, the sentence of part 1 is therefore a true $\Pi_2$ sentence, all of whose standard instances in $c$ are provable in $T$, and which is not provable in $T$.
 
 :::quiz[the main theorem on indicators]
 In part 1 of the proof of :ref{#thm-indicator-main}, why is $b$ chosen *least* with $\iota(a, b, a)$?
@@ -85,7 +85,7 @@ $\mathrm I\Sigma_1$ does not prove $\forall k\ \forall x\ F_k(x){\downarrow}$, a
 If $F_c(x)$ exists, then $y = \max(c, F_c(x))$, which is above $x$, satisfies $\iota_1(x, y, c)$. So $\forall k\ \forall x\ F_k(x){\downarrow}$ implies $\forall x\ \forall c\ \exists y\ \iota_1(x, y, c)$ in $\mathrm I\Sigma_1$, and the latter is not provable, by part 1 of :ref{#thm-indicator-main}. The second statement is :ref{#lem-fgh-isigma1}.
 :::
 
-The true $\Pi_2$ sentence $\forall k\ \forall x\ F_k(x){\downarrow}$ is provable in $\mathrm I\Sigma_2$ (exercise of :ref{to="independence/fast-growing"}). Its unprovability in $\mathrm I\Sigma_1$ is proved without Gödel's incompleteness theorems: no consistency statement is involved, only the construction of a cut.
+The true $\Pi_2$ sentence $\forall k\ \forall x\ F_k(x){\downarrow}$ is provable in $\mathrm I\Sigma_2$ (:ref{#ex-fgh-isigma2}). Its unprovability in $\mathrm I\Sigma_1$ is proved without Gödel's incompleteness theorems: no consistency statement is involved, only the construction of a cut.
 
 ## The provably total functions of IΣ₁
 
@@ -119,7 +119,7 @@ The first statement is the analogue for the hierarchy $F_k$ of the majorization 
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-indicator-standard-instances difficulty=1 objective="Check that every standard degree of largeness of the indicator for $\mathrm I\Sigma_1$ is provably reached."}
 Show that for each standard $n$, $\mathrm I\Sigma_1 \vdash \forall x\ \exists y\ \iota_1(x, y, n)$, so that every standard instance of the sentence of :ref{#cor-isigma1-fgh} in the variable $c$ is provable.
 
 :::solution
@@ -127,7 +127,7 @@ By :ref{#lem-fgh-isigma1}, $\mathrm I\Sigma_1$ proves that $F_n(x)$ exists; take
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-indicator-monotone-bound difficulty=2 objective="Turn part 2 of the main theorem into a growth bound, and see why monotonicity of the indicator in $y$ is needed."}
 Let $T \supseteq \mathrm I\Sigma_1$ be true in $\nat$, with an indicator $\iota$ that is monotone in $y$: $\nat \models \iota(x, y, n) \wedge y \leq y' \rightarrow \iota(x, y', n)$. Suppose that $h_n(x) = $ the least $y$ with $\iota(x, y, n)$ exists for all $n, x$. Show that for every $T$-provably total $f$ there is $n$ with $f(x) < h_n(x)$ for every $x$. Explain why some monotonicity in $y$ is needed to turn part 2 of :ref{#thm-indicator-main} into a bound.
 
 :::solution
@@ -146,3 +146,41 @@ Indicators were introduced by Paris and Kirby; the definition and the main theor
 - A. Bovykin, *Brief introduction to unprovability*, in Logic Colloquium 2006, Lecture Notes in Logic 32, Cambridge University Press, 2009.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 3(a)–(b).
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 5.
+
+:::::exercises
+::::exercise{#ex-indicator-trivial difficulty=1 objective="See on a trivial formula why the implication from large intervals to cuts is the content of the definition of an indicator."}
+Let $\iota(x, y, c) \equiv x \leq y \wedge c \leq y$. Show that $\iota$ is not an indicator for any theory $T \supseteq \mathrm I\Sigma_1$, and check that part 1 of :ref{#thm-indicator-main} would otherwise give an absurd conclusion.
+
+:::solution
+$\iota$ is $\Sigma_1$ and satisfies the normalization. Let $M$ be a countable non-standard model of $\mathrm I\Sigma_1$, $a$ non-standard, and $b = a$, $c = a$. Then $M \models \iota(a, b, c)$ with $c$ non-standard, but no cut $I$ satisfies $a \in I$ and $b = a \notin I$; so the implication from 1 to 2 of :ref{#def-indicator} fails. If $\iota$ were an indicator for a consistent $T$, part 1 would say that $T$ does not prove $\forall x\ \forall c\ \exists y\ (x \leq y \wedge c \leq y)$, which $\mathrm I\Sigma_1$ proves with $y = x + c$.
+:::
+::::
+
+::::exercise{#ex-indicator-compare difficulty=1 objective="Compare the indicators of two theories through the cuts that they describe."}
+Let $\mathrm I\Sigma_1 \subseteq T \subseteq T'$, with an indicator $\iota$ for $T$ and an indicator $\iota'$ for $T'$. Let $M$ be a countable non-standard model of $\mathrm I\Sigma_1$ and $a \leq b$ in $M$ with $a$ non-standard. Show that if $M \models \iota'(a, b, c')$ for some non-standard $c'$, then $M \models \iota(a, b, c)$ for some non-standard $c$. Deduce that two indicators for the same theory have the same intervals of non-standard largeness.
+
+:::solution
+By the implication from 1 to 2 for $\iota'$, there is a cut $I$ with $a \in I$, $b \notin I$ and $I \models T'$. Since $T \subseteq T'$, $I \models T$, and the implication from 2 to 1 for $\iota$ gives a non-standard $c$ with $M \models \iota(a, b, c)$. If $T = T'$, the argument applies in both directions.
+:::
+::::
+
+::::exercise{#ex-indicator-threshold difficulty=1 objective="See why the bound on the provably total functions of $\mathrm I\Sigma_1$ has the form $F_n(x) + n$, and replace it by a bound valid from some point on."}
+Let $f$ be provably total in $\mathrm I\Sigma_1$. Show that there is $m$ with $f(x) < F_m(x)$ for every $x \geq m$. Show that one cannot ask for $f(x) < F_m(x)$ for every $x$, even for primitive recursive $f$.
+
+:::solution
+By :ref{#thm-isigma1-envelope} there is $n$ with $f(x) < F_n(x) + n$ for every $x$. Let $m = n + 1$ and $x \geq m$. By item 2 of :ref{#lem-fgh-monotone}, since $x \geq 1$, $F_{n+1}(x) \geq F_n(x) + x \geq F_n(x) + n > f(x)$.
+
+The constant function $f(x) = 2$ is primitive recursive, hence provably total in $\mathrm I\Sigma_1$ (:ref{#thm-pr-provably-total}). But $F_m(0) = 1$ for every $m$ (:ref{#ex-fgh-values}, and $F_0(0) = 1$), so $f(0) > F_m(0)$ for every $m$.
+:::
+::::
+
+::::exercise{#ex-indicator-diagonal difficulty=1 objective="Extract from the proof of the main theorem the unprovability of the diagonal sentence, and apply it to the diagonal of the hierarchy."}
+Let $\iota$ be an indicator for a consistent theory $T$. Show that $T$ does not prove $\forall x\ \exists y\ \iota(x, y, x)$. Deduce, without :ref{#thm-isigma1-envelope}, that $\mathrm I\Sigma_1$ does not prove $\forall x\ F_x(x){\downarrow}$.
+
+:::solution
+Suppose $T \vdash \forall x\ \exists y\ \iota(x, y, x)$. Let $M$ be a countable non-standard model of $T$ and $a \in M$ non-standard. By the least number principle for $\Sigma_1$ formulas (:ref{#prop-fo-least-number}), let $b$ be least with $M \models \iota(a, b, a)$; by the normalization, $a \leq b$. Since $a$ is a non-standard degree, :ref{#def-indicator} gives a cut $I \models T$ with $a \in I$ and $b \notin I$. Then $I \models \iota(a, y, a)$ for some $y \in I$, so $M \models \iota(a, y, a)$ (:ref{#cor-sigma1-upward}) with $y < b$, contradicting the choice of $b$. This is the proof of part 1 of :ref{#thm-indicator-main}, which only uses the instances with $x = c$.
+
+For $\iota_1$: if $F_x(x) = z$, then $y = \max(x, z)$ satisfies $\iota_1(x, y, x)$. So $\forall x\ F_x(x){\downarrow}$ implies $\forall x\ \exists y\ \iota_1(x, y, x)$ in $\mathrm I\Sigma_1$, and the first part, with :ref{#prop-indicator-isigma1}, shows that it is not provable.
+:::
+::::
+:::::

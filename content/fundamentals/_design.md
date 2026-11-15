@@ -195,7 +195,68 @@ Rice's theorem in the last fifteen years. Found:
 No simpler proof of the fixed point theorem was found; Owings' "diagonal argument that fails"
 (1973), already presented by Soare, was adopted as the figure of lesson 6.
 
-## 10. Open points
+## 10. Exercises
+
+Every exercise has a label, an objective, a difficulty and a complete solution. Each lesson has two
+**featured exercises** in its text, placed after the material they practice, and a block of
+**further exercises** at the end, after the references.
+
+**Featured exercises and why.**
+
+- L1: `ex-graph-computable` (totality and graphs, used again in lesson 3) and `ex-stage-sets`
+  (the first use of the decidability of convergence at a stage); both after the closure properties.
+- L2: `ex-no-total-refinement` (after the universal function: why it must be partial) and
+  `ex-smn-doubling` (after padding: SMN and padding together).
+- L3: `ex-halting-zero` and `ex-inf-reductions`, after the reductions of the halting set: the two
+  patterns of reduction by SMN ("ignore the input" and "stop at stage $x$"), the second reused in
+  lessons 5 and 8.
+- L4: `ex-increasing-enumeration` and `ex-infinite-computable-subset`, after `prop-ce-range`.
+- L5: `ex-reduction-principle` (a dovetailed construction, after selection) and `ex-inf-not-ce`
+  (after `cor-tot-not-ce`, cited by the Venn figure).
+- L6: `ex-self-ref-examples` (Kleene's form in practice) and `ex-minimal-indices` (Blum's
+  result, the one difficulty-3 application of the theorem).
+- L7: `ex-equality-undecidable` and `ex-index-ce-coce` (which prepares lesson 8).
+- L8: `ex-rice-shapiro-sets` (cited in the notes) and `ex-computable-domain`.
+
+**Further exercises, lesson by lesson.**
+
+- L1: stage of first convergence; a uniformly computable family of empty-or-cofinite sets (the
+  uniformity distinction); two computations run in parallel by stages (first dovetailing);
+  relations versus sets of codes of tuples.
+- L2: fixing an argument other than the first; domains of unions and intersections, uniformly;
+  acceptable numberings characterized by SMN; uniform inversion, with stages.
+- L3: computable sets reduce to every non-trivial set (moved from the text); total extensions
+  (moved from lesson 1, since it uses `thm-halting`); graphs of partial functions; no computable
+  bound on halting times; minimization of partial functions; the join as least upper bound and a
+  self-dual set; a numbering that can be evaluated and is not acceptable; the diagonal argument
+  made uniform.
+- L4: properties of $W_e[s]$ and finiteness; uniform passage between domains and ranges;
+  primitive recursive enumerations; unions and intersections of uniformly computable sequences
+  (monotonicity is harmless for unions); uniform complementation.
+- L5: an m-complete set of pairs; separation for co-c.e. sets; least witnesses cannot be
+  selected; $\mathrm{Cof}$ neither c.e. nor co-c.e.; the projection of a co-c.e. relation.
+- L6: transformations changing one element (moved from the text); the c.e. form of the theorem and
+  its converse; the double fixed point theorem; fixed points computed from an index of $f$;
+  infinitely many $e$ with $W_e = \{ e \}$; $\{ e : W_e = \{ e \} \}$ is not computable.
+- L7: recognizing index sets; applying the index set theorem; no index set is self-dual; Rice's
+  theorem in acceptable numberings and its failure for Friedberg's numbering.
+- L8: a monotonicity failure (moved from the text); a list of c.e. and non-c.e. index sets;
+  subfunctions of a fixed function; monotonicity and finiteness are not sufficient without a c.e.
+  list; $\{ e : \Phi_e = \Phi_a \}$ is never c.e. (both constructions of the proof).
+
+Exercises that use a later lesson are placed in that lesson and associated with the earlier one
+(`lessons=`), so that every `:ref` points to a prerequisite.
+
+**Sources.** Soare 2016: Exercises 1.6.21 (join), 1.6.28 (minimization of partial functions),
+1.7.9 (non-acceptable numbering), 2.1.17 (iii) ($\mathrm{Cof}$), 2.1.19 and 2.1.20 (the existing
+exercises on graphs and computable subsets), 2.1.22 (separation), 2.2.9 (minimal indices), 2.2.10
+(self-duality), 2.2.11 (c.e. form of the fixed point theorem), 2.3.14 (double fixed point theorem,
+Smullyan). The others are standard consequences of the lessons, written for this course.
+Avoided as duplicates: computably inseparable sets and $\mathrm{Tot}$ not c.e. (countability
+course), creative, productive and simple sets (`ce-degrees`), the arithmetical classification of
+index sets (`arithmetic-hierarchy`).
+
+## 11. Open points
 
 - Rogers' book is cited without chapter numbers (no copy available to check).
 - Attribution of the SMN theorem to Kleene 1938 and of Theorem `thm-fixed-point` in its
@@ -204,11 +265,13 @@ No simpler proof of the fixed point theorem was found; Owings' "diagonal argumen
   name `fundamentals/ce-sets`; the labels `thm-halting-complete`, `prop-ce-downward` and
   `prop-ce-closure`, used in the turing-degrees and arithmetic-hierarchy courses, are now in
   `fundamentals/complete-sets`. Lesson prerequisites there should be updated (outside this course).
+- The text of `programs-as-numbers` cites `thm-halting` and `cor-infinitely-many-indices` of later
+  lessons (forward references in the text, not in exercises).
 - `arithmetic-hierarchy/index-sets` names `fundamentals/rice-theorem`; it does not cite the
   Rice–Shapiro labels, but `fundamentals/rice-shapiro` would be the natural prerequisite if it
   relies on the c.e. index sets.
 
-## 11. History
+## 12. History
 
 - **2026-11-12 — design and pedagogy revision.** Design log written. Seven figures added, generated
   by `scripts/figures/fundamentals.py` (stages, SMN tape, halting diagonal, many-one reduction,
@@ -222,3 +285,11 @@ No simpler proof of the fixed point theorem was found; Owings' "diagonal argumen
   and Monin–Patey and made precise (section and theorem numbers); Kalmár 1937, Owings 1973 and
   Terwijn 2024 added; the unverifiable attribution of the selection theorem to Kleene removed.
   Durations recomputed from word counts.
+- **2026-11-13 — featured and further exercises.** Labels, objectives and difficulties for all
+  existing exercises; two featured exercises per lesson moved into the text, the others into a
+  block of further exercises; 37 new exercises (section 10). Corrections: in `ex-stage-sets` the
+  set $\{ e : \Phi_e(0)[e]\converge \}$ was empty by the convention $e < s$, replaced by stage
+  $e + 1$; `ex-total-extension` moved from lesson 1 to lesson 3, as it uses `thm-halting`. In
+  `ce-sets`, the sentence after `def-ce-approx` claimed that without monotonicity the definition
+  describes a larger class; this holds for pointwise limits, not for unions, and the sentence now
+  says so (`ex-ce-unions-intersections`). Duration of `programs-as-numbers` set to 45 (the cap).

@@ -98,15 +98,7 @@ The converse of :ref{#prop-lowness-implications} (1), that every K-trivial set i
 
 ## Exercises
 
-::::exercise{difficulty=2}
-Show that a base for randomness is not Turing complete.
-
-:::solution
-By :ref{#thm-hungry-sets}, a base for randomness $A$ is low for K, and by the exercise of the previous lesson it is low. A complete set $A$ has $A' \equiv_T \emptyset''$, which is not computable in $\emptyset'$; so $A$ is not complete.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-hungry-common-lower difficulty=2 objective="Apply the hungry sets theorem to the sets computed by two sequences, one random relative to the other."}
 Let $Z_0$ and $Z_1$ be sequences such that $Z_1$ is random relative to $Z_0$. Show that every set $X$ with $X \leq_T Z_0$ and $X \leq_T Z_1$ is low for K.
 
 :::solution
@@ -116,11 +108,65 @@ A Martin-Löf test relative to $X$ is a test relative to $Z_0$, since $X \leq_T 
 
 ## Notes and references
 
-The hungry sets theorem is due to Hirschfeldt, Nies and Stephan (2007). The proof given here, with the conclusion "low for K", follows Nies; Downey and Hirschfeldt present the argument with the conclusion "K-trivial", which suffices with the main theorem of the last lesson. Nies (2005) had proved earlier, by a different argument, that lowness for K and lowness for Martin-Löf randomness coincide. The second exercise is a corollary of Hirschfeldt, Nies and Stephan.
+The hungry sets theorem is due to Hirschfeldt, Nies and Stephan (2007). The proof given here, with the conclusion "low for K", follows Nies; Downey and Hirschfeldt present the argument with the conclusion "K-trivial", which suffices with the main theorem of the last lesson. Nies (2005) had proved earlier, by a different argument, that lowness for K and lowness for Martin-Löf randomness coincide. :ref{#ex-hungry-common-lower} is a corollary of Hirschfeldt, Nies and Stephan.
 
-The theorem is Theorem 5.1.22 of Nies, *Computability and Randomness*, with the accounting method as Remark 5.1.21, and Theorem 11.7.2 of Downey and Hirschfeldt, *Algorithmic Randomness and Complexity*, with the second exercise as Corollary 11.7.3.
+The theorem is Theorem 5.1.22 of Nies, *Computability and Randomness*, with the accounting method as Remark 5.1.21, and Theorem 11.7.2 of Downey and Hirschfeldt, *Algorithmic Randomness and Complexity*, with :ref{#ex-hungry-common-lower} as Corollary 11.7.3.
 
 - A. Nies, *Lowness properties and randomness*, Advances in Mathematics 197 (2005), 274–305.
 - D. R. Hirschfeldt, A. Nies and F. Stephan, *Using random sets as oracles*, Journal of the London Mathematical Society 75 (2007), 610–622.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 5.1.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 11.7.
+
+:::::exercises
+::::exercise{#ex-base-incomplete difficulty=2 objective="Combine the hungry sets theorem with the lowness of sets low for K to show that bases for randomness are incomplete."}
+Show that a base for randomness is not Turing complete.
+
+:::solution
+By :ref{#thm-hungry-sets}, a base for randomness $A$ is low for K, and by :ref{#ex-lowk-low} it is low. A complete set $A$ has $A' \equiv_T \emptyset''$, which is not computable in $\emptyset'$; so $A$ is not complete.
+:::
+::::
+
+::::exercise{#ex-random-not-base difficulty=1 objective="Complete the comparison of random sets with the three lowness notions."}
+Show that no Martin-Löf random set is a base for randomness.
+
+:::solution
+By :ref{#thm-hungry-sets}, a base for randomness is low for K, and by :ref{#ex-random-not-low}, no random set is low for K.
+:::
+::::
+
+::::exercise[Randomness relative to the oracle is needed]{#ex-hungry-hypothesis difficulty=1 objective="See with a counterexample that the hungry sets theorem fails when $Z$ is only assumed to be random."}
+Show that the conclusion of :ref{#thm-hungry-sets} fails if $A \leq_T Z$ is only assumed for some $Z \in \mathrm{MLR}$, rather than $Z \in \mathrm{MLR}^A$. Where does the proof use the stronger hypothesis?
+
+:::solution
+By the Kučera–Gács theorem (:ref{#thm-kucera-gacs}), every set is computed by a random set; in particular $\emptyset'$ is computed by the random sequence $\omega$, the binary expansion of $\Omega$. But $\emptyset'$ is not low for K, by :ref{#ex-lowness}. So the weaker hypothesis holds for every set, and the conclusion does not.
+
+In the proof, $(\mathcal V_d)$ is a Martin-Löf test relative to $A$, not without oracle: its definition selects the hungry sets of the triples with $\rho \prec A$. The hypothesis $Z \in \mathrm{MLR}^A$ is used to find $d$ with $Z \notin \mathcal V_d$. For $A = \emptyset'$ and $Z = \omega$, $\omega$ is not random relative to $\emptyset'$, and the argument breaks down at this point.
+:::
+::::
+
+::::exercise[Waiting for full hungry sets]{#ex-hungry-full difficulty=2 objective="Check a variant of the hungry sets construction, in which each request waits for the full target measure."}
+Modify the construction in the proof of :ref{#thm-hungry-sets}: for each triple $(\rho, \tau, x)$, enumerate the request $(x, |\tau| + d)$ into $R_d$ when $\lambda([C^\rho_{\tau, x}]^{\prec}) \geq 2^{-|\tau| - d}$, instead of the request $(x, |\tau| + d + 1)$ at half this measure. Show that the proof still works.
+
+:::hint
+At stage $s \geq |\tau| + d$, the measure of a hungry set and its target are both multiples of $2^{-s}$.
+:::
+
+:::solution
+*Weight.* A request $(x, |\tau| + d)$ is made only when the hungry set of the triple has measure at least $2^{-|\tau| - d}$, its weight. The hungry sets are pairwise disjoint, so $R_d$ has weight at most $1$, as before. The construction of the hungry sets and the test $(\mathcal V_d)$ are unchanged, so there is $d$ with $Z \notin \mathcal V_d$.
+
+*Every hungry set of a true computation becomes full.* Let $\rho \prec A$ with $U^\rho(\tau)\converge = x$, and suppose that $C = C^\rho_{\tau, x}$ never reaches measure $2^{-|\tau| - d}$. Choose a stage $s \geq |\tau| + d$, after the triple is first considered, with $\Phi^{Z \uh s}[s] \succeq \rho$, and let $\eta = Z \uh s$. Conditions 1 and 2 hold for $\eta$ at stage $s$, by the argument of the proof. When $\eta$ is examined, the strings of $C$ have length at most $s$ and their cylinders are pairwise disjoint, so $\lambda([C]^{\prec})$ is a sum of terms $2^{-|\eta'|}$ with $|\eta'| \leq s$, hence a multiple of $2^{-s}$. The target $2^{-|\tau| - d}$ is also a multiple of $2^{-s}$, since $s \geq |\tau| + d$, and $\lambda([C]^{\prec}) < 2^{-|\tau| - d}$. So $\lambda([C]^{\prec}) + 2^{-s} \leq 2^{-|\tau| - d}$, which is condition 3. Then $\eta$ is added to $C$, and $Z \in \mathcal V_d$, a contradiction.
+
+*Conclusion.* For every $\tau \in \dom U^A$ with $U^A(\tau) = x$, the request $(x, |\tau| + d)$ belongs to $R_d$, so $K(x) \leq |\tau| + d + O(1)$, and $K \leq^+ K^A$. The half target of the lesson leaves room for one more cylinder without the divisibility argument.
+:::
+::::
+
+::::exercise[Lowness for Ω]{#ex-low-omega difficulty=1 objective="Characterize the $\Delta^0_2$ sets that are low for randomness by the randomness of $\Omega$ relative to them."}
+Let $\omega$ be the binary expansion of $\Omega$, and let $A$ be a $\Delta^0_2$ set. Show that $A$ is low for Martin-Löf randomness if and only if $\omega$ is random relative to $A$.
+
+:::solution
+If $A$ is low for Martin-Löf randomness, then $\omega \in \mathrm{MLR} = \mathrm{MLR}^A$, since $\omega$ is random by :ref{#thm-omega} (3) and the Levin–Schnorr theorem. Conversely, suppose that $\omega \in \mathrm{MLR}^A$. Since $A$ is $\Delta^0_2$, $A \leq_T \emptyset' \equiv_T \omega$, by :ref{#thm-omega} (1). So $A$ is a base for randomness, witnessed by $\omega$, and it is low for Martin-Löf randomness by :ref{#cor-lowness-equivalent}.
+
+The hypothesis that $A$ is $\Delta^0_2$ is used to obtain $A \leq_T \omega$. Without it the equivalence fails: by van Lambalgen's theorem (admitted here), if $A$ is random relative to $\omega$, then $\omega$ is random relative to $A$, while $A$, being random, is not low for Martin-Löf randomness (:ref{#ex-random-not-low}). (Adapted from Nies 2009, Exercise 5.1.27.)
+:::
+::::
+:::::

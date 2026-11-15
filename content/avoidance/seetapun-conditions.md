@@ -64,7 +64,7 @@ In the proof of :ref{#lem-seetapun-infinity}, where is assumption (H) used?
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-seetapun-many-extendible difficulty=1 objective="Strengthen the infinity lemma: infinitely many elements of the reservoir can be added to each stem."}
 Assume (H), and let $(\sigma_0, \sigma_1, X)$ be a condition and $i < 2$. Show that infinitely many $x \in X$ have color $i$ with infinitely many $y \in X$.
 
 :::solution
@@ -79,3 +79,43 @@ Seetapun's theorem appeared in Seetapun and Slaman (1995). The notion of forcing
 - D. Seetapun and T. A. Slaman, *On the strength of Ramsey's theorem*, Notre Dame Journal of Formal Logic 36 (1995), 570–582.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 8.3.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, section *Seetapun's theorem*.
+
+:::::exercises
+::::exercise[One side at least]{#ex-seetapun-one-side difficulty=1 objective="Check that, even without assumption (H), at least one stem of a Seetapun condition can always be extended."}
+Do not assume (H). Show that for every condition $(\sigma_0, \sigma_1, X)$ there is $i < 2$ such that the first case of the proof of :ref{#lem-seetapun-infinity} applies to side $i$. Which side is it in :ref{#ex-seetapun-condition}?
+
+:::solution
+Let $x = \min X$. Each $y \in X$ with $y > x$ has color $0$ or $1$ with $x$, and there are infinitely many such $y$, so some color $i$ occurs for infinitely many of them. Then $x \in X$ has color $i$ with infinitely many $y \in X$, which is the hypothesis of the first case for side $i$; that case does not use (H), and it gives an extension whose stem on side $i$ contains $x$. In :ref{#ex-seetapun-condition}, every element of $X$ is even and has color $1$ with all other elements of $X$, so the side is $1$; side $0$ cannot be extended.
+:::
+::::
+
+::::exercise[Clause 3 under assumption (H)]{#ex-seetapun-clause3-needed difficulty=1 objective="See, under assumption (H), that clause 3 is needed to keep the stems extendible."}
+Assume (H). Show that there are a number $a$ and an infinite set $X \in \mathcal M$ with $\min X > a$ such that the triple $(\{ a \}, \varepsilon, X)$, where $\{ a \}$ is the string of length $a + 1$ with the single element $a$, satisfies clauses 1 and 2 of :ref{#def-seetapun-forcing}, while no element of $X$ can be added to its stem of side $0$ without breaking clause 2. Why does this not contradict :ref{#lem-seetapun-infinity}?
+
+:::solution
+Some $a$ has color $1$ with infinitely many $y$. Otherwise every $a$ has color $0$ with almost every $y$, and the construction of the second case of :ref{#lem-seetapun-infinity}, applied to the reservoir $\nat$, gives an infinite homogeneous set for color $0$ computable in $Z$, hence in $\mathcal M$, contradicting (H). Let $X = \{ y > a : f(\{ a, y \}) = 1 \}$. It is infinite and computable in $Z$, so $X \in \mathcal M$, and $\min X \geq a + 1 = |\{ a \}|$: clause 1 holds. Clause 2 holds since the stems have at most one element. For $y \in X$, the pair $\{ a, y \}$ has color $1$, so $\{ a, y \}$ is not homogeneous for color $0$: no element of $X$ can be added to the stem of side $0$.
+
+There is no contradiction: clause 3 fails, since $f(\{ a, y \}) = 1 \neq 0$ for every $y \in X$, so the triple is not a Seetapun condition, and :ref{#lem-seetapun-infinity} says nothing about it. Under (H), a reservoir that only satisfies clauses 1 and 2 can still block a side forever.
+:::
+::::
+
+::::exercise[Stems and the limit set]{#ex-seetapun-stable-stems difficulty=1 objective="Relate the stems of Seetapun conditions to the limit set of a stable coloring."}
+Suppose that $f$ is stable (:ref{#def-stable-coloring}), with limit set $A_f$. Show that every Seetapun condition $(\sigma_0, \sigma_1, X)$ satisfies $\sigma_1 \subseteq A_f$ and $\sigma_0 \cap A_f = \emptyset$. Deduce that if $c_0 \geq c_1 \geq \cdots$ are Seetapun conditions and $G_i$ is the union of their stems on side $i$, then $G_1 \subseteq A_f$ and $G_0 \subseteq \overline{A_f}$.
+
+:::solution
+Let $a \in \sigma_i$. By clause 3, $f(\{ a, y \}) = i$ for every $y \in X$, and $X$ is infinite, so the limit $\lim_y f(\{ a, y \})$, which exists by stability, is $i$. So $a \in A_f$ if $i = 1$, and $a \notin A_f$ if $i = 0$. Every element of $G_i$ belongs to the stem of side $i$ of some $c_s$, which gives the second statement. A homogeneous set built by the Seetapun forcing for a stable coloring is therefore an infinite subset of $A_f$ or of $\overline{A_f}$, as in the proof through the pigeonhole principle.
+:::
+::::
+
+::::exercise[Homogeneous sets in the reservoir]{#ex-seetapun-homogeneous-member difficulty=1 objective="Check that an infinite homogeneous subset of the reservoir can be appended to the stem of its color."}
+Let $(\sigma_0, \sigma_1, X)$ be a Seetapun condition, $i < 2$ and $H \subseteq X$ an infinite set homogeneous for color $i$. Show that $\sigma_i \cup H$ is a member of side $i$. Deduce from Ramsey's theorem for pairs that every condition has a member, on one of its two sides, that is an infinite homogeneous set.
+
+:::solution
+A pair of elements of $\sigma_i$ has color $i$ by clause 2, a pair of elements of $H$ by homogeneity, and a pair $\{ a, y \}$ with $a \in \sigma_i$ and $y \in H \subseteq X$ by clause 3. So $\sigma_i \cup H$ is homogeneous for color $i$. Its elements below $|\sigma_i|$ are those of $\sigma_i$, since $\min H \geq \min X \geq |\sigma_i|$, so $\sigma_i$ is a prefix of it; and its other elements belong to $X$. So it is a member of side $i$.
+
+By Ramsey's theorem for pairs applied to the restriction of $f$ to $[X]^2$, there are an infinite set $H \subseteq X$ and a color $i$ such that $H$ is homogeneous for color $i$. Then $\sigma_i \cup H$ is an infinite homogeneous member of side $i$. The forcing does not use this argument, since $H$ need not belong to $\mathcal M$ nor avoid the cone; it shows that the clauses of a condition never exclude every solution.
+
+The remark follows a note to the exercise *Seetapun and Slaman* in the chapter *Cone avoidance* of Patey's monograph.
+:::
+::::
+:::::

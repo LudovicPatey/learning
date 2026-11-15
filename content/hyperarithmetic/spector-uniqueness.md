@@ -11,7 +11,7 @@ The idea of the proof is to compute $H_a$ from $H_b$ by effective transfinite re
 
 ## H-sets compare notations
 
-For $x \in \mathcal O$, write $\mathcal O_{<x} = \{ y \in \mathcal O : |y| < |x| \}$: the notations, on all branches, of ordinals smaller than $|x|$. Recall that $x_m$ denotes the terms $\Phi_f(m)$ of the fundamental sequence of a limit notation $x = 3 \cdot 5^f$, and that, by the first exercise of :ref{to="h-sets"}, $2^{x_m} <_{\mathcal O} x$, so that $H_{2^{x_m}}$ is a column of $H_x$. We use Post's theorem relativized (:ref{#thm-post}): a $\Sigma^0_1(A)$ question is answered by $A'$, and a $\Pi^0_2(A)$ question by $A''$, uniformly in an index of the question.
+For $x \in \mathcal O$, write $\mathcal O_{<x} = \{ y \in \mathcal O : |y| < |x| \}$: the notations, on all branches, of ordinals smaller than $|x|$. Recall that $x_m$ denotes the terms $\Phi_f(m)$ of the fundamental sequence of a limit notation $x = 3 \cdot 5^f$, and that, by :ref{#ex-notation-successor-below}, $2^{x_m} <_{\mathcal O} x$, so that $H_{2^{x_m}}$ is a column of $H_x$. We use Post's theorem relativized (:ref{#thm-post}): a $\Sigma^0_1(A)$ question is answered by $A'$, and a $\Pi^0_2(A)$ question by $A''$, uniformly in an index of the question.
 
 :::lemma[Spector]{#lem-notations-below}
 There is an oracle procedure $\Psi$ such that for every $x \in \mathcal O$ and every $y$, the computation $\Psi^{H_{2^x}}(x, y)$ halts, with output $1$ if $y \in \mathcal O_{<x}$ and $0$ otherwise. In other words, $\mathcal O_{<x} \leq_T H_{2^x}$, uniformly in $x$.
@@ -50,6 +50,14 @@ In case 2 of the proof of :ref{#lem-notations-below}, with $b = 3 \cdot 5^f$ and
 
   $R$ is c.e., a $\Sigma^0_1$ relation.
 :::
+
+::::exercise{#ex-same-ordinal-notations difficulty=2 objective="Apply the comparison of notations to decide which notations have a given ordinal, and count the jumps it costs."}
+Show that for every $x \in \mathcal O$, the set $\{ y \in \mathcal O : |y| = |x| \}$ is computable in $H_{2^{2^x}}$, uniformly in $x$.
+
+:::solution
+It is $\mathcal O_{<2^x} \setminus \mathcal O_{<x}$. By :ref{#lem-notations-below}, the first set is computable in $H_{2^{2^x}}$ and the second in $H_{2^x}$, both uniformly; and $H_{2^x} \leq_T H_{2^{2^x}}$ uniformly by :ref{#prop-h-sets-uniform}.
+:::
+::::
 
 ## Spector's theorem
 
@@ -99,6 +107,16 @@ In case 3, where is the hypothesis $|a| \leq |b|$ used?
 
 By the theorem, for every computable ordinal $\alpha$, the degree $\obf^{(\alpha)} = \deg_T(H_a)$, for any $a$ with $|a| = \alpha$, is well defined. For finite $\alpha$ it is the degree of $\emptyset^{(\alpha)}$, and the map $\alpha \mapsto \obf^{(\alpha)}$ is strictly increasing on $\omega_1^{\mathrm{CK}}$: if $\alpha < \beta = |b|$, some $c <_{\mathcal O} b$ has $|c| = \alpha$, by :ref{#prop-kleene-o-basic} (1), and $H_b \not\leq_T H_c$ by :ref{#prop-h-sets-basic} (3). One also writes $\emptyset^{(\alpha)}$ for any set $H_a$ with $|a| = \alpha$, when only its Turing degree matters.
 
+::::exercise{#ex-h-omega-two difficulty=2 objective="Compute the H-sets along a notation of $\omega \cdot 2$ and relate them to the sets arithmetic in $\emptyset^{(\omega)}$."}
+Let $a$ be a notation for $\omega \cdot 2$. Describe $H_a$ up to Turing equivalence in terms of $\emptyset^{(\omega)}$. Show that a set is arithmetic in $\emptyset^{(\omega)}$ if and only if it is computable in $H_b$ for some $b \in \mathcal O$ with $|b| < \omega \cdot 2$, and that $H_a$ is not arithmetic in $\emptyset^{(\omega)}$.
+
+:::solution
+Write $X^{(\omega)} = \bigoplus_n X^{(n)}$. Let $c$ be a notation for $\omega$, and $c_n$ the notation for $\omega + n$ obtained from $c$ by $n$ applications of $x \mapsto 2^x$; then $H_{c_n} = (H_c)^{(n)}$. Let $d = 3 \cdot 5^e$ with $\Phi_e(n) = c_{n+1}$, a notation for $\omega \cdot 2$. The notations below $d$ are the notations of the finite ordinals, $c$, and the $c_n$; this set is decidable, the columns of $H_d$ indexed by finite notations are computable in $H_c$ uniformly, and the column indexed by $c_n$ is $(H_c)^{(n)}$. Since $H_c \equiv_T \emptyset^{(\omega)}$ by :ref{#prop-h-sets-basic} (2), and the jump preserves Turing equivalence uniformly, $H_d \equiv_T \bigoplus_n (\emptyset^{(\omega)})^{(n)} = (\emptyset^{(\omega)})^{(\omega)}$. By :ref{#thm-spector-uniqueness}, $H_a \equiv_T H_d$.
+
+By Post's theorem relativized, a set is arithmetic in $\emptyset^{(\omega)}$ if and only if it is computable in $(\emptyset^{(\omega)})^{(n)} \equiv_T H_{c_n}$ for some $n$. The notations $b$ with $|b| < \omega \cdot 2$ are those of the ordinals $k$ and $\omega + n$, and by :ref{#thm-spector-uniqueness} each $H_b$ is Turing equivalent to some $H_{c_n}$ or computable in $H_c$. Finally $H_a \geq_T (H_{c_n})'$ for every $n$, so $H_a$ is computable in no $(\emptyset^{(\omega)})^{(n)}$: it is not arithmetic in $\emptyset^{(\omega)}$.
+:::
+::::
+
 The theorem cannot be strengthened to many-one reducibility in general. For $|a| \geq \omega$, the set $H_{2^a}$ is complete, for many-one reductions, for the $\Sigma^0_{|a|}$ level of the effective transfinite extension of the arithmetic hierarchy, so the sets $H_{2^a}$ with $|a|$ fixed are many-one equivalent (Monin and Patey, chapter "Hyperarithmetic sets"). For limit notations, the many-one degrees of the sets $H_a$ were studied by Moschovakis (1966): the sets $H_a$ with $|a|$ fixed are many-one equivalent when $|a|$ has the form $\beta + \omega$, and the situation is more complicated for limits of limit ordinals.
 
 ## Hyperarithmetic sets
@@ -119,35 +137,7 @@ If $X \leq_T H_a$ and $Y \leq_T H_b$, let $c$ be a notation for $\max(|a|, |b|)$
 
 Closure under $\oplus$ is where Spector's theorem is needed: two notations on different branches have no common upper bound in $<_{\mathcal O}$ given in advance, and the theorem replaces it by a comparison of ordinals.
 
-The jump ideal $\mathrm{HYP}$ contains $\emptyset^{(\omega)}$ and many other sets that are not arithmetic, but it does not contain every set definable with a quantifier over sets: $\mathcal O$ itself, which is $\Pi^1_1$, is not hyperarithmetic, since it computes every $H_a$ (first exercise below). The next lesson identifies the hyperarithmetic sets with the $\Delta^1_1$ sets.
-
-## Exercises
-
-::::exercise{difficulty=1}
-Show that $\mathcal O$ computes every hyperarithmetic set, and that it is not hyperarithmetic.
-
-:::solution
-By the next lesson, each $H_a$ is $\Pi^1_1$, and every $\Pi^1_1$ set is many-one reducible to $\mathcal O$, which is $\Pi^1_1$-complete (:ref{#thm-o-complete}); so $H_a \leq_T \mathcal O$, and every hyperarithmetic set is computable in $\mathcal O$. If $\mathcal O$ were hyperarithmetic, say $\mathcal O \leq_T H_a$, then $H_{2^a} \leq_T \mathcal O \leq_T H_a$, contradicting :ref{#prop-h-sets-basic} (3).
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $a$ be a notation for $\omega \cdot 2$. Describe $H_a$ up to Turing equivalence in terms of $\emptyset^{(\omega)}$. Show that a set is arithmetic in $\emptyset^{(\omega)}$ if and only if it is computable in $H_b$ for some $b \in \mathcal O$ with $|b| < \omega \cdot 2$, and that $H_a$ is not arithmetic in $\emptyset^{(\omega)}$.
-
-:::solution
-Write $X^{(\omega)} = \bigoplus_n X^{(n)}$. Let $c$ be a notation for $\omega$, and $c_n$ the notation for $\omega + n$ obtained from $c$ by $n$ applications of $x \mapsto 2^x$; then $H_{c_n} = (H_c)^{(n)}$. Let $d = 3 \cdot 5^e$ with $\Phi_e(n) = c_{n+1}$, a notation for $\omega \cdot 2$. The notations below $d$ are the notations of the finite ordinals, $c$, and the $c_n$; this set is decidable, the columns of $H_d$ indexed by finite notations are computable in $H_c$ uniformly, and the column indexed by $c_n$ is $(H_c)^{(n)}$. Since $H_c \equiv_T \emptyset^{(\omega)}$ by :ref{#prop-h-sets-basic} (2), and the jump preserves Turing equivalence uniformly, $H_d \equiv_T \bigoplus_n (\emptyset^{(\omega)})^{(n)} = (\emptyset^{(\omega)})^{(\omega)}$. By :ref{#thm-spector-uniqueness}, $H_a \equiv_T H_d$.
-
-By Post's theorem relativized, a set is arithmetic in $\emptyset^{(\omega)}$ if and only if it is computable in $(\emptyset^{(\omega)})^{(n)} \equiv_T H_{c_n}$ for some $n$. The notations $b$ with $|b| < \omega \cdot 2$ are those of the ordinals $k$ and $\omega + n$, and by :ref{#thm-spector-uniqueness} each $H_b$ is Turing equivalent to some $H_{c_n}$ or computable in $H_c$. Finally $H_a \geq_T (H_{c_n})'$ for every $n$, so $H_a$ is computable in no $(\emptyset^{(\omega)})^{(n)}$: it is not arithmetic in $\emptyset^{(\omega)}$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that for every $x \in \mathcal O$, the set $\{ y \in \mathcal O : |y| = |x| \}$ is computable in $H_{2^{2^x}}$, uniformly in $x$.
-
-:::solution
-It is $\mathcal O_{<2^x} \setminus \mathcal O_{<x}$. By :ref{#lem-notations-below}, the first set is computable in $H_{2^{2^x}}$ and the second in $H_{2^x}$, both uniformly; and $H_{2^x} \leq_T H_{2^{2^x}}$ uniformly by :ref{#prop-h-sets-uniform}.
-:::
-::::
+The jump ideal $\mathrm{HYP}$ contains $\emptyset^{(\omega)}$ and many other sets that are not arithmetic, but it does not contain every set definable with a quantifier over sets: $\mathcal O$ itself, which is $\Pi^1_1$, is not hyperarithmetic, since it computes every $H_a$ (:ref{#ex-o-computes-hyp}). The next lesson identifies the hyperarithmetic sets with the $\Delta^1_1$ sets.
 
 ## Notes and references
 
@@ -159,3 +149,61 @@ Spector (1955) proved the uniqueness theorem. The proof given here, through the 
 - G. E. Sacks, *Higher Recursion Theory*, Springer, 1990.
 - C. J. Ash and J. F. Knight, *Computable Structures and the Hyperarithmetical Hierarchy*, Elsevier, 2000.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section VIII.3.
+
+:::::exercises
+::::exercise{#ex-o-computes-hyp difficulty=1 objective="Use the $\Pi^1_1$-completeness of $\mathcal O$ to place it above every hyperarithmetic set." lessons="kleene-theorem"}
+Show that $\mathcal O$ computes every hyperarithmetic set, and that it is not hyperarithmetic.
+
+:::solution
+By the next lesson, each $H_a$ is $\Pi^1_1$, and every $\Pi^1_1$ set is many-one reducible to $\mathcal O$, which is $\Pi^1_1$-complete (:ref{#thm-o-complete}); so $H_a \leq_T \mathcal O$, and every hyperarithmetic set is computable in $\mathcal O$. If $\mathcal O$ were hyperarithmetic, say $\mathcal O \leq_T H_a$, then $H_{2^a} \leq_T \mathcal O \leq_T H_a$, contradicting :ref{#prop-h-sets-basic} (3).
+:::
+::::
+
+::::exercise{#ex-hyp-omega-jump difficulty=1 objective="Show that $\mathrm{HYP}$ is closed under the $\omega$-jump by building a notation along the successive jumps."}
+For a set $X$, let $X^{(\omega)} = \{ \langle n, v \rangle : v \in X^{(n)} \}$. Show that if $X$ is hyperarithmetic, then so is $X^{(\omega)}$.
+
+:::solution
+Let $X \leq_T H_a$ with $a \in \mathcal O$, say $X = \Phi^{H_a}_p$. Let $a_0 = a$ and $a_{n+1} = 2^{a_n}$, so that $H_{a_n} = H_a^{(n)}$. The jump preserves Turing reductions uniformly: from an index of $B \leq_T A$ one computes an index of $B' \leq_T A'$. So there is a total computable function $n \mapsto p_n$, with $p_0 = p$, such that $\Phi^{H_{a_n}}_{p_n}$ is the characteristic function of $X^{(n)}$.
+
+The function $n \mapsto a_n$ is computable, its values are in $\mathcal O$, and $a_n <_{\mathcal O} a_{n+1}$; so $c = 3 \cdot 5^e$, for an index $e$ of this function, is a notation (of $|a| + \omega$). Each $a_n$ is below $c$, so the column $a_n$ of $H_c$ is $H_{a_n}$. Then $\langle n, v \rangle \in X^{(\omega)}$ if and only if $\Phi^{H_{a_n}}_{p_n}(v) = 1$, where $H_{a_n}$ is read in $H_c$. So $X^{(\omega)} \leq_T H_c$.
+:::
+::::
+
+::::exercise{#ex-h-relation-not-hyp difficulty=1 objective="See that the H-sets are not uniformly hyperarithmetic: the relation gathering all of them is not hyperarithmetic."}
+Let $\mathcal H = \{ \langle a, v \rangle : a \in \mathcal O \text{ and } v \in H_a \}$. Show that $\mathcal H$ is not hyperarithmetic, and that $\mathcal O$ is computable in $\mathcal H'$.
+
+:::solution
+The column $a$ of $\mathcal H$ is $H_a$ for $a \in \mathcal O$. If $\mathcal H \leq_T H_b$ with $b \in \mathcal O$, then $H_{2^b} \leq_T \mathcal H \leq_T H_b$, which contradicts :ref{#prop-h-sets-basic} (3).
+
+For $a \in \mathcal O$ with $a \neq 1$, the set $H_a$ is not computable (:ref{#ex-h-noncomputable}), hence not empty; for $a \notin \mathcal O$, the column $a$ of $\mathcal H$ is empty. So $a \in \mathcal O$ if and only if $a = 1$ or $\exists v\, \langle a, v \rangle \in \mathcal H$. This is a $\Sigma^0_1(\mathcal H)$ condition, so $\mathcal O \leq_T \mathcal H'$.
+:::
+::::
+
+::::exercise{#ex-compare-below-x difficulty=2 objective="Combine the comparison lemma with the uniform form of Spector's theorem to compare all pairs of notations below a given ordinal."}
+Show that the relation $\{ (y, z) : y, z \in \mathcal O_{<x} \text{ and } |y| \leq |z| \}$ is computable in $H_{2^x}$, uniformly in $x \in \mathcal O$.
+
+:::solution
+Given $(y, z)$, decide with $\Psi^{H_{2^x}}(x, \cdot)$ whether $y$ and $z$ are in $\mathcal O_{<x}$ (:ref{#lem-notations-below}); if not, answer negatively. If so, $|y| \leq |z|$ if and only if $|y| < |2^z|$, that is, $y \in \mathcal O_{<2^z}$, which is decided by $\Psi^{H_{2^{2^z}}}(2^z, y)$. It remains to compute $H_{2^{2^z}}$ from $H_{2^x}$. Since $|z| < |x|$, we have $|z| + 1 \leq |x|$, so $|2^{2^z}| = |z| + 2 \leq |x| + 1 = |2^x|$. By :ref{#thm-spector-uniqueness}, $\Theta^{H_{2^x}}(2^{2^z}, 2^x, \cdot)$ is the characteristic function of $H_{2^{2^z}}$. All the steps are uniform in $x$, $y$ and $z$.
+
+The comparison of two notations of ordinal less than $|x|$ thus costs no more than the membership in $\mathcal O_{<x}$.
+:::
+::::
+
+::::exercise{#ex-join-uniform-notation difficulty=1 objective="Make the closure of $\mathrm{HYP}$ under $\oplus$ uniform by using the sum of notations instead of a comparison of ordinals."}
+Show that there is a partial computable function $k$ such that, for all $a, b \in \mathcal O$, the notation $c = a +_{\mathcal O} b$ (:ref{#lem-notation-sum}) satisfies $H_a \oplus H_b = \Phi^{H_c}_{k(a, b)}$. Explain why the proof of :ref{#prop-hyp-ideal} does not give such a function directly.
+
+:::solution
+We have $|c| = |a| + |b|$, and both $|a| \leq |a| + |b|$ and $|b| \leq |a| + |b|$ (the second by induction on $|b|$). By :ref{#thm-spector-uniqueness}, $\Theta^{H_c}(a, c, \cdot)$ and $\Theta^{H_c}(b, c, \cdot)$ are the characteristic functions of $H_a$ and $H_b$. Let $k(a, b)$ be an index, computed from $a$ and $b$ by the s-m-n theorem, of the oracle procedure that on input $2n$ outputs $\Theta^Z(a, a +_{\mathcal O} b, n)$ and on input $2n + 1$ outputs $\Theta^Z(b, a +_{\mathcal O} b, n)$. With $Z = H_c$, it computes $H_a \oplus H_b$.
+
+The proof of :ref{#prop-hyp-ideal} takes for $c$ whichever of $a$ and $b$ has the larger ordinal. Deciding which one it is requires comparing $|a|$ and $|b|$, which :ref{#lem-notations-below} does with an oracle, not by a computable procedure; the sum $a +_{\mathcal O} b$ is above both ordinals without any comparison.
+:::
+::::
+
+::::exercise{#ex-hyp-one-one difficulty=1 objective="Show that every hyperarithmetic set is one-one reducible to an H-set."}
+Show that for every hyperarithmetic set $X$, there is $a \in \mathcal O$ with $X \leq_1 H_a$.
+
+:::solution
+Let $X \leq_T H_b$ with $b \in \mathcal O$, say $X = \Phi^{H_b}_p$. By the s-m-n theorem, there is an injective total computable function $g$ such that, for every oracle $Y$, the program $g(n)$ with oracle $Y$ halts on every input if $\Phi^Y_p(n)\converge = 1$, and on no input otherwise. With $Y = H_b$: $n \in X$ if and only if $\Phi^{H_b}_{g(n)}(g(n))\converge$, that is, $g(n) \in H_b' = H_{2^b}$. So $X \leq_1 H_{2^b}$.
+:::
+::::
+:::::

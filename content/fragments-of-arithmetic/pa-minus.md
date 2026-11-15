@@ -93,7 +93,7 @@ The compactness theorem gives non-standard models of every theory true in $\nat$
 
 ## Exercises
 
-::::exercise{#ex-pam-predecessors difficulty=2}
+::::exercise{#ex-pam-predecessors difficulty=2 objective="Use the axiom of differences and the standard part to show that non-standard elements have non-standard predecessors."}
 Let $M$ be a model of $\mathrm{PA}^-$ and $a \in M$ a non-standard element. Show that for every $k \in \nat$ there is a unique $b \in M$ with $b + \bar k = a$, written $a - k$, and that it is non-standard. Deduce that $M$ has no least non-standard element.
 
 :::solution
@@ -108,3 +108,65 @@ The axiomatization of $\mathrm{PA}^-$ is the one of Kaye's book (Chapter 2), use
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lectures 1 and 2.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Preliminaries (b) and Chapter I, Section 1(a).
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991, Chapter 2.
+
+:::::exercises
+::::exercise{#ex-pam-cancellation difficulty=1 objective="Derive the cancellation and monotonicity laws of addition and multiplication from the axioms of $\mathrm{PA}^-$."}
+Show that $\mathrm{PA}^-$ proves:
+
+1. $x + z = y + z \rightarrow x = y$, and $0 < z \wedge x \cdot z = y \cdot z \rightarrow x = y$;
+2. $x \leq x + y$;
+3. $x \leq y \wedge x' \leq y' \rightarrow x + x' \leq y + y'$, and $x \leq y \wedge x' \leq y' \rightarrow x \cdot x' \leq y \cdot y'$.
+
+:::solution
+The relation $\leq$ is transitive, by the transitivity of $<$ and the substitution of equals.
+
+1. Suppose $x + z = y + z$ and $x \neq y$. By trichotomy, $x < y$ or $y < x$; by axiom 4, $x + z < y + z$ or $y + z < x + z$, and in both cases $x + z < x + z$, which contradicts irreflexivity. The second law is proved in the same way with the second part of axiom 4, which requires $0 < z$.
+
+2. By axiom 6, $0 \leq y$. If $y = 0$, then $x + y = x$ by axiom 2. If $0 < y$, axiom 4 gives $0 + x < y + x$, that is $x < x + y$, by commutativity and $x + 0 = x$.
+
+3. For addition, $x + x' \leq y + x'$ by axiom 4 if $x < y$, and trivially if $x = y$; likewise $y + x' \leq y + y'$, using commutativity; and $\leq$ is transitive. For multiplication, if $x' = 0$, then $x \cdot x' = 0 \leq y \cdot y'$ by axioms 2 and 6. If $0 < x'$, then $x \cdot x' \leq y \cdot x'$ by axiom 4 (or equality if $x = y$). If $y = 0$, then $y \cdot x' = 0 = y \cdot y'$; if $0 < y$, then $x' \cdot y \leq y' \cdot y$ by axiom 4 (or equality). By transitivity, $x \cdot x' \leq y \cdot y'$.
+:::
+::::
+
+::::exercise[The irrationality of √2]{#ex-pam-sqrt2 difficulty=2 objective="Build a discretely ordered ring whose non-negative part refutes a universal sentence true in $\nat$."}
+Let $R$ be the set of polynomials $p \in \mathbb R[X]$ whose constant term is an integer, ordered by declaring $p$ positive when its leading coefficient is positive. Show that $R$ is a discretely ordered ring, and that its non-negative part $R^+$ is a model of $\mathrm{PA}^-$ in which the universal sentence
+$$
+\forall x\ \forall y\ \big(x \cdot x = (1 + 1) \cdot y \cdot y \rightarrow x = 0\big),
+$$
+true in $\nat$, fails. Deduce that $\mathrm{PA}^-$ does not prove that $\sqrt 2$ is irrational in this form.
+
+:::solution
+The constant term of a sum or a product of polynomials is the sum or the product of their constant terms, so $R$ is a subring of $\mathbb R[X]$ containing $\mathbb Z$. On $\mathbb R[X]$, the positive polynomials, those with a positive leading coefficient, are closed under addition (if the degrees differ, the leading coefficient of the sum is that of the summand of larger degree; if they are equal, it is the sum of two positive numbers) and under multiplication (the leading coefficient of a product is the product of the leading coefficients), and every non-zero $p$ satisfies exactly one of $p > 0$ and $-p > 0$. Setting $p < q$ when $q - p$ is positive gives a linear order compatible with addition and with multiplication by positive elements; it restricts to $R$.
+
+The order of $R$ is discrete. Let $0 < p < 1$ in $R$. If $p$ has degree at least $1$, then $1 - p$ has the leading coefficient of $-p$, which is negative, so $p > 1$, a contradiction. So $p$ is a constant, equal to its constant term, an integer strictly between $0$ and $1$: impossible.
+
+As in :ref{#ex-zx-plus}, the axioms of items 1–4 and 6 of :ref{#def-pa-minus} hold in the non-negative part of every discretely ordered ring, and axiom 5 holds by discreteness: if $p < q$, then $q - p \geq 1$, so $z = q - p - 1$ is non-negative and $p + z + 1 = q$. So $R^+ \models \mathrm{PA}^-$.
+
+The polynomials $x = \sqrt 2\, X$ and $y = X$ belong to $R^+$: their constant term is $0$ and their leading coefficient is positive. Then $x \neq 0$ and $x \cdot x = 2X^2 = (1 + 1) \cdot y \cdot y$, so the sentence fails in $R^+$. It is true in $\nat$, since $\sqrt 2$ is irrational. By the soundness of first-order logic, $\mathrm{PA}^-$ does not prove it. Bounded induction proves it, as shown in the further exercises of :ref{to="bounded-induction"}.
+:::
+::::
+
+::::exercise{#ex-nonstandard-prime difficulty=1 objective="Transfer sentences true in $\nat$ to a non-standard model of true arithmetic to find non-standard elements with given properties."}
+Let $M$ be a non-standard model of $\mathrm{Th}(\nat)$. Show that $M$ has a non-standard element satisfying the formula "$x$ is prime" of :ref{#ex-delta0-examples}, and a non-standard element divisible by every standard positive number.
+
+:::solution
+Write $\pi(p)$ for the formula $1 < p \wedge \forall y < p\ \forall z < p\ \neg (y \cdot z = p)$. Euclid's theorem gives the sentence $\forall x\ \exists p\ (x < p \wedge \pi(p))$, true in $\nat$, hence in $M$. Applied to a non-standard $a \in M$, it gives $p > a$ with $M \models \pi(p)$, and $p$ is non-standard, since the standard part is an initial segment (:ref{#prop-standard-part}).
+
+The sentence $\forall x\ \exists y\ \big(0 < y \wedge \forall i < x + 1\ (0 < i \rightarrow \exists q < y + 1\ (q \cdot i = y))\big)$ is true in $\nat$, with $y = x!$ (and $y = 1$ for $x = 0$), hence in $M$. Applied to a non-standard $a$, it gives $y > 0$ divisible by every $i \leq a$, in particular by every standard $k \geq 1$, since $\bar k < a$. If $q \cdot \bar k = y$ with $y > 0$, then $q \geq 1$, so $y \geq \bar k$ by :ref{#ex-pam-cancellation}; as this holds for every $k$, $y$ is non-standard.
+:::
+::::
+
+::::exercise{#ex-delta0-definitions difficulty=1 objective="Write bounded definitions of elementary relations of number theory, choosing the bounds of the quantifiers."}
+Give $\Delta_0$ formulas that define in $\nat$: (a) $x$ divides $y$; (b) $x$ is a power of $2$; (c) $x$ and $y$ are coprime; (d) $y > 0$ and $z$ is the remainder of $x$ modulo $y$.
+
+:::solution
+(a) $x \mid y$ is $\exists q < y + 1\ (q \cdot x = y)$. If $y > 0$ and $q x = y$, then $x \geq 1$ and $q \leq y$; if $y = 0$, then $q = 0$ is a witness. For $x = 0$ the formula holds exactly when $y = 0$, as it should.
+
+(b) $0 < x \wedge \forall d < x + 1\ \big(1 < d \wedge d \mid x \rightarrow \exists u < d\ (d = u + u)\big)$, with $d \mid x$ as in (a). If $x = 2^k$, every divisor $d > 1$ of $x$ is a power $2^j$ with $j \geq 1$, hence even. If $x > 0$ is not a power of $2$, it has an odd prime divisor $p \leq x$, and the formula fails at $d = p$.
+
+(c) $\forall d < x + y + 1\ (d \mid x \wedge d \mid y \rightarrow d = 1)$. If $x$ and $y$ are not both $0$, every common divisor is at most $\max(x, y) \leq x + y$, and $d = 0$ is not a common divisor; so the formula says that $1$ is the only common divisor. If $x = y = 0$, the formula fails at $d = 0$, and indeed $0$ and $0$ are not coprime.
+
+(d) $0 < y \wedge z < y \wedge \exists q < x + 1\ (x = q \cdot y + z)$, since the quotient is at most $x$.
+:::
+::::
+:::::

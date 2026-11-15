@@ -99,13 +99,11 @@ Why is the function $+_{\mathcal O}$ total, even on numbers $b$ that are not not
 
 The sum of notations is the tool of the next lesson, which proves the converse of :ref{#prop-constructive-computable}. Its uses in the course on hyperarithmetic sets follow the same pattern: a program defined by the recursion theorem, total by construction, whose values are shown to be correct by induction on notations.
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-epsilon-zero difficulty=2 objective="Define exponentiation of notations by effective transfinite recursion, and use it to give a notation for $\varepsilon_0$."}
 Show that $\varepsilon_0 = \sup \{ \omega, \omega^\omega, \omega^{\omega^\omega}, \dots \}$ is computable.
 
 :::solution
-By the recursion theorem, as in :ref{#lem-notation-sum}, there is a total computable function $p$ with $p(1) = 2^1$ (the notation of $1$), $p(2^c) = 3 \cdot 5^{k(c)}$ for $c \geq 1$, where $\Phi_{k(c)}(0) = p(c)$ and $\Phi_{k(c)}(n+1) = \Phi_{k(c)}(n) +_{\mathcal O} p(c)$, and $p(3 \cdot 5^e) = 3 \cdot 5^{k'(e)}$ with $\Phi_{k'(e)}(n) = p(\Phi_e(n))$. By induction on $b \in \mathcal O$, $p(b) \in \mathcal O$, $|p(b)| = \omega^{|b|}$, and $c <_{\mathcal O} b$ implies $p(c) <_{\mathcal O} p(b)$. For $b = 2^c$: $p(c) \neq 1$ since $|p(c)| \geq 1$, so by :ref{#lem-notation-sum} the notations $\Phi_{k(c)}(n)$ are $<_{\mathcal O}$-increasing, of types $\omega^{|c|} \cdot (n+1)$, with supremum $\omega^{|c| + 1}$; and $c' \leq_{\mathcal O} c$ gives $p(c') \leq_{\mathcal O} p(c) = \Phi_{k(c)}(0) <_{\mathcal O} p(b)$. For $b = 3 \cdot 5^e$, the sequence $p(\Phi_e(n))$ is $<_{\mathcal O}$-increasing by the induction hypothesis, and its supremum is $\omega^{|b|}$ by continuity of exponentiation.
+By the recursion theorem, as in :ref{#lem-notation-sum}, there is a total computable function $p$ with $p(1) = 2^1$ (the notation of $1$), $p(2^c) = 3 \cdot 5^{k(c)}$ for $c \geq 1$, where $\Phi_{k(c)}(0) = p(c)$ and $\Phi_{k(c)}(n+1) = \Phi_{k(c)}(n) +_{\mathcal O} p(c)$, and $p(3 \cdot 5^e) = 3 \cdot 5^{k'(e)}$ with $\Phi_{k'(e)}(n) = p(\Phi_e(n))$, and $p(b) = 1$ for all other $b$. The function $p$ is total, as in :ref{#lem-notation-sum}: it only computes indices. By induction on $b \in \mathcal O$, $p(b) \in \mathcal O$, $|p(b)| = \omega^{|b|}$, and $c <_{\mathcal O} b$ implies $p(c) <_{\mathcal O} p(b)$. For $b = 2^c$: $p(c) \neq 1$ since $|p(c)| \geq 1$, so by :ref{#lem-notation-sum} the notations $\Phi_{k(c)}(n)$ are $<_{\mathcal O}$-increasing, of types $\omega^{|c|} \cdot (n+1)$, with supremum $\omega^{|c| + 1}$; and $c' \leq_{\mathcal O} c$ gives $p(c') \leq_{\mathcal O} p(c) = \Phi_{k(c)}(0) <_{\mathcal O} p(b)$. For $b = 3 \cdot 5^e$, the sequence $p(\Phi_e(n))$ is $<_{\mathcal O}$-increasing by the induction hypothesis, and its supremum is $\omega^{|b|}$ by continuity of exponentiation.
 
 Let $x_0 = p(2^1)$, a notation for $\omega$, and $x_{n+1} = x_n +_{\mathcal O} p(x_n)$. Then $x_n <_{\mathcal O} x_{n+1}$, since $p(x_n) \neq 1$, and $|x_{n+1}| \geq \omega^{|x_n|}$, so $|x_n|$ is at least the tower $\omega^{\omega^{\cdots}}$ of height $n + 1$. The sequence $(x_n)$ is computable, and $3 \cdot 5^e$ for an index $e$ of it is a notation of an ordinal at least $\varepsilon_0$. The constructive ordinals being closed downward, $\varepsilon_0$ is constructive, hence computable by :ref{#prop-constructive-computable}.
 :::
@@ -118,3 +116,73 @@ Church and Kleene (1936–1938) introduced constructive ordinals and the system 
 - S. C. Kleene, *On notation for ordinal numbers*, Journal of Symbolic Logic 3 (1938), 150–155.
 - B. Monin and L. Patey, *Computability theory*, chapter *Transfinite numbers*, sections *Kleene's O* and *Effective ordinals*.
 - G. E. Sacks, *Higher Recursion Theory*, Perspectives in Mathematical Logic, Springer, 1990.
+
+:::::exercises
+::::exercise{#ex-sum-computation difficulty=1 objective="Compute sums of notations from the defining equations of $+_{\mathcal O}$, and compare them with ordinal addition."}
+For $n \in \nat$, write $n_{\mathcal O}$ for the notation of $n$, and let $w = 3 \cdot 5^e$ be the notation of $\omega$ of :ref{#ex-notations}, with $\Phi_e(n) = n_{\mathcal O}$. Show that $2 +_{\mathcal O} n_{\mathcal O} = (n + 1)_{\mathcal O}$ for every $n$, that $2 +_{\mathcal O} w$ is a notation of $\omega$ whose fundamental sequence is $1_{\mathcal O}, 2_{\mathcal O}, 3_{\mathcal O}, \dots$, and that $w +_{\mathcal O} 2 = 2^w$. Which ordinal identities do these computations reflect?
+
+:::solution
+Recall that $2 = 2^1 = 1_{\mathcal O}$ and $(n + 1)_{\mathcal O} = 2^{n_{\mathcal O}}$. By induction on $n$: $2 +_{\mathcal O} 0_{\mathcal O} = 2 +_{\mathcal O} 1 = 2 = 1_{\mathcal O}$, and $2 +_{\mathcal O} (n + 1)_{\mathcal O} = 2 +_{\mathcal O} 2^{n_{\mathcal O}} = 2^{2 +_{\mathcal O} n_{\mathcal O}} = 2^{(n + 1)_{\mathcal O}} = (n + 2)_{\mathcal O}$, using $n_{\mathcal O} \geq 1$.
+
+By definition, $2 +_{\mathcal O} w = 3 \cdot 5^{h(2, e)}$, where $\Phi_{h(2, e)}(n) = 2 +_{\mathcal O} \Phi_e(n) = (n + 1)_{\mathcal O}$. These values are notations, $<_{\mathcal O}$-increasing, with supremum $\omega$; so $2 +_{\mathcal O} w$ is a notation of $\omega$, as :ref{#lem-notation-sum} also gives: $|2 +_{\mathcal O} w| = 1 + \omega = \omega$. Finally $w +_{\mathcal O} 2 = w +_{\mathcal O} 2^1 = 2^{w +_{\mathcal O} 1} = 2^w$, a notation of $\omega + 1 = |w| + |2|$.
+
+The computations reflect $1 + n = n + 1$, $1 + \omega = \omega$ and $\omega + 1 > \omega$: adding $1$ on the left of $\omega$ only shifts the fundamental sequence, while adding it on the right produces a successor.
+:::
+::::
+
+::::exercise{#ex-o-transitive difficulty=1 objective="Prove a property of all notations by induction along the inductive definition of $\mathcal O$."}
+Show that the relation $<_{\mathcal O}$ is transitive and irreflexive on $\mathcal O$: for $a \in \mathcal O$, $c <_{\mathcal O} b <_{\mathcal O} a$ implies $c <_{\mathcal O} a$, and $a \not<_{\mathcal O} a$.
+
+:::solution
+Irreflexivity: if $a <_{\mathcal O} a$, then $|a| < |a|$ by :ref{#lem-o-inversion} (3), which is impossible.
+
+For transitivity, proceed as in the proof of :ref{#lem-o-inversion}. Let $\mathcal O''$ be the set of $a \in \mathcal O$ such that for all $b$ and $c$, if $c <_{\mathcal O} b <_{\mathcal O} a$, then $c <_{\mathcal O} a$. We check that $\mathcal O''$, with the restriction of $<_{\mathcal O}$, satisfies the three rules of :ref{#def-kleene-o}; by minimality, $\mathcal O \subseteq \mathcal O''$.
+
+1. $1 \in \mathcal O''$: no $b$ satisfies $b <_{\mathcal O} 1$, since $|b| < |1| = 0$ would follow by :ref{#lem-o-inversion} (3).
+2. Let $a \in \mathcal O''$, and $c <_{\mathcal O} b <_{\mathcal O} 2^a$. Then $b = a$ or $b <_{\mathcal O} a$. In the first case $c <_{\mathcal O} a$; in the second, $c <_{\mathcal O} a$ since $a \in \mathcal O''$. In both cases $c <_{\mathcal O} 2^a$.
+3. Let $\Phi_e$ be total with values in $\mathcal O''$ and $<_{\mathcal O}$-increasing, and let $c <_{\mathcal O} b <_{\mathcal O} 3 \cdot 5^e$. Then $b <_{\mathcal O} \Phi_e(n)$ for some $n$, so $c <_{\mathcal O} \Phi_e(n)$ since $\Phi_e(n) \in \mathcal O''$, and $c <_{\mathcal O} 3 \cdot 5^e$.
+:::
+::::
+
+::::exercise{#ex-tot-reduces-to-o difficulty=2 objective="Reduce the $\Pi^0_2$-complete set $\mathrm{Tot}$ to $\mathcal O$ with notations of $\omega$, and classify the set of notations of $\omega$."}
+Let $\mathrm{Tot} = \{ e : \Phi_e \text{ is total} \}$, and let $N_\omega$ be the set of notations of $\omega$. Show that there is a total computable function $k$ such that $e \in \mathrm{Tot} \iff 3 \cdot 5^{k(e)} \in \mathcal O \iff 3 \cdot 5^{k(e)} \in N_\omega$. Deduce that $\mathcal O$ is not $\Sigma^0_2$, and that $N_\omega$ is $\Pi^0_2$-complete.
+
+:::solution
+For $m \in \nat$, write $m_{\mathcal O}$ for the notation of $m$; the map $m \mapsto m_{\mathcal O}$ is computable, the set $\{ m_{\mathcal O} : m \in \nat \}$ of notations of finite ordinals is decidable, and $m_{\mathcal O} <_{\mathcal O} m'_{\mathcal O}$ if and only if $m < m'$. By the SMN theorem, there is a total computable $k$ such that $\Phi_{k(e)}(n) \simeq (s_n + n)_{\mathcal O}$, where $s_n$ is the least $s$ such that $\Phi_e(i)[s]\converge$ for every $i \leq n$, and $\Phi_{k(e)}(n)$ diverges if there is no such $s$.
+
+If $e \in \mathrm{Tot}$, then $\Phi_{k(e)}$ is total; the sequence $s_n$ is non-decreasing, so $s_n + n$ is strictly increasing, and the values $\Phi_{k(e)}(n)$ are $<_{\mathcal O}$-increasing notations of finite ordinals, with supremum $\omega$. So $3 \cdot 5^{k(e)} \in N_\omega \subseteq \mathcal O$. If $e \notin \mathrm{Tot}$, then $\Phi_{k(e)}$ is not total, and $3 \cdot 5^{k(e)} \notin \mathcal O$ by :ref{#lem-o-inversion} (2).
+
+$\mathrm{Tot}$ is $\Pi^0_2$-complete (course on the arithmetic hierarchy, lesson on index sets), hence not $\Sigma^0_2$: otherwise every $\Pi^0_2$ set would be $\Sigma^0_2$, contradicting the hierarchy theorem. The $\Sigma^0_2$ sets are closed under computable preimages, so neither $\mathcal O$ nor $N_\omega$ is $\Sigma^0_2$.
+
+$N_\omega$ is $\Pi^0_2$. If $a \in N_\omega$, then $a \neq 1$, since $|1| = 0$, and $a$ is not of the form $2^c$: $2^0 = 1$, and for $c \neq 0$, $2^c \in \mathcal O$ implies $c \in \mathcal O$ (:ref{#lem-o-inversion} (1)) and $|2^c|$ is a successor. So $a = 3 \cdot 5^e$, where $\Phi_e$ is total, $<_{\mathcal O}$-increasing, and $|\Phi_e(n)| < \omega$ by :ref{#lem-o-inversion} (3): its values are notations of finite ordinals. Conversely, if $a = 3 \cdot 5^e$ with such a $\Phi_e$, then $a \in \mathcal O$ and $|a| = \omega$. Let $C(x, y)$ be the decidable relation "$x$ and $y$ are notations of finite ordinals and $x <_{\mathcal O} y$". Hence $a \in N_\omega$ if and only if $a$ is of the form $3 \cdot 5^e$ (a decidable condition, and $e$ is computed from $a$) and
+$$
+\forall n\, \exists s\, \big[\Phi_e(n)[s]\converge \wedge \Phi_e(n + 1)[s]\converge \wedge C(\Phi_e(n), \Phi_e(n + 1))\big],
+$$
+a $\Pi^0_2$ condition. With the reduction of $\mathrm{Tot}$, $N_\omega$ is $\Pi^0_2$-complete.
+:::
+::::
+
+::::exercise{#ex-notation-product difficulty=2 objective="Define multiplication of notations by effective transfinite recursion, and see where the hypothesis $|a| \geq 1$ is used."}
+Show that there is a total computable function $\times_{\mathcal O}$ such that for all $a, b \in \mathcal O$ with $a \neq 1$: $a \times_{\mathcal O} b \in \mathcal O$, $|a \times_{\mathcal O} b| = |a| \cdot |b|$, and $a \times_{\mathcal O} c <_{\mathcal O} a \times_{\mathcal O} b$ whenever $c <_{\mathcal O} b$. Show that the recursion that defines it fails for $a = 1$.
+
+:::solution
+By the recursion theorem, as in :ref{#lem-notation-sum}, there is a partial computable function $\times_{\mathcal O}$ with
+$$
+\begin{aligned}
+a \times_{\mathcal O} 1 &= 1, \\
+a \times_{\mathcal O} 2^c &= (a \times_{\mathcal O} c) +_{\mathcal O} a \quad \text{for } c \geq 1, \\
+a \times_{\mathcal O} 3 \cdot 5^e &= 3 \cdot 5^{h(a, e)},
+\end{aligned}
+$$
+where $h(a, e)$ is an index of $n \mapsto a \times_{\mathcal O} \Phi_e(n)$, computed from $a$, $e$ and the index of $\times_{\mathcal O}$, and $a \times_{\mathcal O} b = 1$ for all other $b$. It is total, by induction on $b$ as a number: the successor case makes one call on $c < 2^c$ and then applies the total function $+_{\mathcal O}$, and the limit case only computes an index.
+
+Fix $a \in \mathcal O$ with $a \neq 1$. Since $1$ is the only notation of $0$, $|a| \geq 1$. We prove the properties by induction on $b \in \mathcal O$.
+
+- $b = 1$: $a \times_{\mathcal O} 1 = 1 \in \mathcal O$, $|1| = 0 = |a| \cdot 0$, and no $c$ is below $1$.
+- $b = 2^c$ with $c \in \mathcal O$: let $x = a \times_{\mathcal O} c$, a notation of $|a| \cdot |c|$ by the induction hypothesis. By :ref{#lem-notation-sum}, $x +_{\mathcal O} a \in \mathcal O$, of ordinal $|a| \cdot |c| + |a| = |a| \cdot (|c| + 1) = |a| \cdot |b|$, and $x <_{\mathcal O} x +_{\mathcal O} a$ since $a \neq 1$. If $d <_{\mathcal O} b$, then $d \leq_{\mathcal O} c$, so $a \times_{\mathcal O} d \leq_{\mathcal O} x <_{\mathcal O} a \times_{\mathcal O} b$, using the induction hypothesis when $d <_{\mathcal O} c$ and transitivity (:ref{#ex-o-transitive}).
+- $b = 3 \cdot 5^e$: by the induction hypothesis, the values $a \times_{\mathcal O} \Phi_e(n)$ are notations, and they are $<_{\mathcal O}$-increasing, by the last property applied to $\Phi_e(n) <_{\mathcal O} \Phi_e(n + 1)$. So $a \times_{\mathcal O} b \in \mathcal O$, with ordinal $\sup_n |a| \cdot |\Phi_e(n)|$. Multiplication is non-decreasing in its right argument and continuous at limits, and the $|\Phi_e(n)|$ are cofinal in $|b|$, so this supremum is $|a| \cdot |b|$. If $d <_{\mathcal O} b$, then $d <_{\mathcal O} \Phi_e(n)$ for some $n$, and $a \times_{\mathcal O} d <_{\mathcal O} a \times_{\mathcal O} \Phi_e(n) <_{\mathcal O} a \times_{\mathcal O} b$.
+
+For $a = 1$: $1 \times_{\mathcal O} 1 = 1$ and $1 \times_{\mathcal O} 2^c = (1 \times_{\mathcal O} c) +_{\mathcal O} 1 = 1 \times_{\mathcal O} c$, so $1 \times_{\mathcal O} m_{\mathcal O} = 1$ for every finite notation $m_{\mathcal O}$. For a notation $b = 3 \cdot 5^e$ of $\omega$ whose fundamental sequence consists of finite notations, the sequence $1 \times_{\mathcal O} \Phi_e(n)$ is constant, equal to $1$, so $1 \times_{\mathcal O} b \notin \mathcal O$ by :ref{#lem-o-inversion} (2), although $|1| \cdot \omega = 0$. The successor step needs $x <_{\mathcal O} x +_{\mathcal O} a$, which holds only for $a \neq 1$. Setting $1 \times_{\mathcal O} b = 1$ for every $b$ repairs the definition.
+:::
+::::
+:::::

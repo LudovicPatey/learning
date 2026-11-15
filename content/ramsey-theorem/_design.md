@@ -207,7 +207,59 @@ Checked (web search and the DM/Monin–Patey books, 2026-11-12):
 - Consider proving SRT²₂ cone avoidance for low₂-ness (CJS) or Liu's theorem in a future
   specialized course.
 
-## 11. History
+## 11. Exercises
+
+**Featured exercises** (in the text, one to three per lesson, placed after the material they
+practice):
+
+- jockusch: `ex-homogeneous-jump-bound` (low basis + upper bound: the jump of a solution
+  below ∅″) and `ex-classical-ramsey-proof` (the classical proof costs ∅″ for pairs and
+  has no arithmetic bound for triples), the two points that motivate the Erdős–Radó tree.
+- triples: `ex-no-sigma-n-homogeneous` and `ex-coding-n-jumps`, the iteration of
+  `lem-limit-coloring`, which is the technique of the lesson.
+- cohesiveness: `ex-high-computes-cohesive`, a direct use of `prop-coh-decisions`.
+- stable-colorings: `ex-coh-direct-induction` (where Σ⁰₂ induction would enter, the
+  contrast with the counting argument) and `ex-rt22-via-decomposition` (the decomposition
+  used as a computation).
+- cone-avoidance: `ex-coh-countable-cones`, the robustness of the Mathias construction.
+- seetapun: `ex-stable-no-cone-avoidance` (why the pigeonhole step uses the limit set),
+  `ex-rt32-coding-power` (coding power of RT³₂) and `ex-wkl-rt22-model` (an ω-model by
+  interleaving two preservation steps).
+
+**Further exercises** (collapsed block at the end of each lesson):
+
+- jockusch: Erdős–Radó trees of two colorings computed by hand; pre-homogeneity for
+  colorings depending on the larger element; RTⁿ₂ → RTⁿ₄ through binary digits; the case
+  n = 1 of the canonical Ramsey theorem; a path of the tree below ∅″ without PA degrees.
+- triples: no Δ⁰₂ pre-homogeneous set for Jockusch's coloring (PA over f′ is needed in
+  `prop-erdos-rado-tree`); strictness of the inclusion in `lem-limit-coloring`; uniformity
+  of the coding of ∅′ and its expression through growth (settling-time technique);
+  bounds for ∅′-computable colorings of pairs.
+- cohesiveness: closure properties (moved from the text); cohesive sets for a divisibility
+  sequence; the Π⁰₁(∅′) description of 𝒞(R⃗); a sequence whose decision class is {∅′};
+  the degrees computing cohesive sets for all computable sequences and the existence of
+  non-high cohesive sets; unions and decisions; computable cohesive sets and Δ⁰₂ members
+  of 𝒞(R⃗); r-cohesive sets are immune.
+- stable-colorings: deciding stability on examples; a Δ⁰₂ set with no infinite c.e.
+  subset on either side, hence RCA₀ ⊬ SRT²₂; stability of a restriction depends only on
+  the rows of the set; SRT²₂ → SRT²ₖ; a homogeneous set with jump below ∅″ through a low₂
+  cohesive set.
+- cone-avoidance: the pigeonhole instance with all solutions on one side coding C (moved
+  from seetapun, where it was the first exercise); basic properties of Mathias conditions;
+  strong cone avoidance for k colors; an ω-model of COH without ∅′; Lachlan's disjunction
+  is exactly the conclusion; the compactness step of the disjunctive question.
+- seetapun: Seetapun's theorem for k colors; RT²₂ ⊬ RT³₂; no principal ideal is a model of
+  RT²₂; the sets in all ω-models of RT²₂ are the computable ones; the coding power of RTⁿ₂
+  for all n ≥ 3 (difficulty 3).
+
+**Sources.** Hirschfeldt, *Slicing the Truth*: Exercise 6.2 (number of colors), Exercise
+6.4 (classical proof), Exercise 6.15 (coding ∅⁽ⁿ⁻²⁾), Exercise 6.33 (no computable cohesive
+set), Exercise 6.35 (Δ⁰₂ set without hyperimmune-free solutions, compared with the c.e.
+version), Exercise 6.42 (high sets and cohesive sets), Exercise 6.70 (k colors),
+Theorem 6.65 (coding power of RTⁿ₂). Dzhafarov–Mummert Proposition 8.5.5 (stable colorings).
+Erdős–Radó for the canonical Ramsey theorem (case n = 1 only). The other exercises are new.
+
+## 12. History
 
 - **2026-11-12.** Design revision. Split into six lessons: `jockusch` (upper bound),
   `triples` (lower bounds, coding ∅′, RTⁿ₂ ↔ ACA₀; new), `cohesiveness` (COH and its
@@ -222,3 +274,9 @@ Checked (web search and the DM/Monin–Patey books, 2026-11-12):
   `thm-rt22-coh`, `cor-rt22-equivalence`, `ex-mathias-coh`. Five figures
   (`scripts/figures/ramsey-theorem.py`). Section numbers in Hirschfeldt restored;
   attributions corrected (see the review report).
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for
+  the 13 existing exercises; 11 kept in the text as featured exercises and placed after
+  the material they practice, the "Exercises" sections removed; `ex-cohesive-subsets`
+  moved to the further exercises, `ex-pigeonhole-one-side` moved from seetapun to the
+  further exercises of cone-avoidance (it illustrates `thm-dj-cone-avoidance`). 32 new
+  further exercises (section 11). References "see the exercises" replaced by `:ref`.

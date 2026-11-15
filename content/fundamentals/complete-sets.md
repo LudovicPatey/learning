@@ -87,6 +87,14 @@ Let $R(x, y)$ be "$\Phi_y(x)\converge$". What can be said of $g(x)$ given by :re
   The relation $R$ concerns $\Phi_y(x)$ for all $y$, not $\Phi_x(x)$.
 :::
 
+::::exercise[Reduction principle]{#ex-reduction-principle difficulty=2 objective="Use c.e. approximations to split the union of two c.e. sets into disjoint c.e. parts."}
+Show that for all c.e. sets $A$ and $B$, there are disjoint c.e. sets $A' \subseteq A$ and $B' \subseteq B$ with $A' \cup B' = A \cup B$.
+
+:::solution
+Fix c.e. approximations $(A_s)$ and $(B_s)$. For $x \in A \cup B$, let $s_x$ be the least $s$ with $x \in A_s \cup B_s$. Let $A' = \{ x : x \in A_{s_x} \}$ and $B' = \{ x : x \notin A_{s_x} \text{ and } x \in B_{s_x} \}$: an element is assigned to the set in which it appears first, with priority to $A$ in case of a tie. Both sets are c.e., since $x \in A' \iff \exists s\ (x \in A_s \wedge \forall t < s\ x \notin A_t \cup B_t)$, and similarly for $B'$. They are disjoint, contained in $A$ and $B$ respectively, and every $x \in A \cup B$ belongs to one of them.
+:::
+::::
+
 ## The halting set is m-complete
 
 :::proposition{#prop-ce-downward}
@@ -143,25 +151,8 @@ In the proof of :ref{#thm-halting-complete}, why does the program $f(x)$ ignore 
 2. By :ref{#prop-halting-variants}, $\nat \setminus \emptyset' \leq_m \mathrm{Tot}$, and $\emptyset' \leq_m \mathrm{Tot}$, which gives $\nat \setminus \emptyset' \leq_m \nat \setminus \mathrm{Tot}$. If $\mathrm{Tot}$ or its complement were c.e., then $\nat \setminus \emptyset'$ would be c.e. by :ref{#prop-ce-downward}, contradicting :ref{#thm-halting-ce}.
 :::
 
-:::figure[The c.e. and co-c.e. sets. Their intersection is the class of computable sets (:ref{#prop-computable-iff-ce-coce}). The halting set is c.e. and not co-c.e., its complement is co-c.e. and not c.e., and the index sets $\mathrm{Tot}$ and $\mathrm{Inf} = \{ e : W_e \text{ is infinite} \}$ are neither (:ref{#cor-tot-not-ce} and the exercises).]
-<svg class="fig" viewBox="0 0 520 250" width="520" role="img" aria-label="Two overlapping regions, the c.e. sets and the co-c.e. sets, inside the box of all sets; their intersection is the computable sets"><rect x="4" y="4" width="512" height="242" rx="8" class="track-outline"/><text x="18" y="26" class="label">all subsets of ℕ</text><ellipse cx="200" cy="128" rx="140" ry="88" class="soft-fill" fill-opacity="0.6"/><ellipse cx="320" cy="128" rx="140" ry="88" class="soft-fill" fill-opacity="0.6"/><ellipse cx="200" cy="128" rx="140" ry="88" class="accent-stroke" stroke-width="1.3"/><ellipse cx="320" cy="128" rx="140" ry="88" class="accent-stroke" stroke-width="1.3"/><text x="112" y="92" text-anchor="middle" class="label">c.e.</text><text x="408" y="92" text-anchor="middle" class="label">co-c.e.</text><text x="260" y="88" text-anchor="middle" class="label">computable</text><text x="260" y="122" text-anchor="middle" class="mrm" font-size="15">∅, ℕ, evens</text><text x="130" y="128" text-anchor="middle" class="mrm" font-size="15">∅′, <tspan class="math">H</tspan></text><text x="130" y="152" text-anchor="middle" class="mrm" font-size="13">{<tspan class="math">e</tspan> : <tspan class="math">W</tspan><tspan class="math" font-size="9" dy="3">e</tspan><tspan dy="-3"> ≠ ∅}</tspan></text><text x="390" y="128" text-anchor="middle" class="mrm" font-size="15">ℕ ∖ ∅′</text><text x="390" y="152" text-anchor="middle" class="mrm" font-size="13">{<tspan class="math">e</tspan> : <tspan class="math">W</tspan><tspan class="math" font-size="9" dy="3">e</tspan><tspan dy="-3"> = ∅}</tspan></text><text x="500" y="26" text-anchor="end" class="label">neither: <tspan class="mrm" font-size="14">Tot, Inf</tspan></text></svg>
-:::
-
-Post asked in 1944 whether every c.e. set that is not computable is m-complete, or at least as hard as $\emptyset'$ in a weaker sense. For m-reducibility he answered negatively himself, with the **simple sets**; for Turing reducibility the question, known as **Post's problem**, was solved by Friedberg and Muchnik with the priority method. These results are the subject of later courses.
-
-
-## Exercises
-
-::::exercise{difficulty=2}
-(Reduction principle.) Show that for all c.e. sets $A$ and $B$, there are disjoint c.e. sets $A' \subseteq A$ and $B' \subseteq B$ with $A' \cup B' = A \cup B$.
-
-:::solution
-Fix c.e. approximations $(A_s)$ and $(B_s)$. For $x \in A \cup B$, let $s_x$ be the least $s$ with $x \in A_s \cup B_s$. Let $A' = \{ x : x \in A_{s_x} \}$ and $B' = \{ x : x \notin A_{s_x} \text{ and } x \in B_{s_x} \}$: an element is assigned to the set in which it appears first, with priority to $A$ in case of a tie. Both sets are c.e., since $x \in A' \iff \exists s\ (x \in A_s \wedge \forall t < s\ x \notin A_t \cup B_t)$, and similarly for $B'$. They are disjoint, contained in $A$ and $B$ respectively, and every $x \in A \cup B$ belongs to one of them.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that the set $\{ e : W_e \text{ is infinite} \}$ is neither c.e. nor co-c.e.
+::::exercise{#ex-inf-not-ce difficulty=2 objective="Combine two reductions from the halting set to show that a set is neither c.e. nor co-c.e."}
+Show that the set $\mathrm{Inf} = \{ e : W_e \text{ is infinite} \}$ is neither c.e. nor co-c.e.
 
 :::hint
 Use the two reductions of :ref{#ex-inf-reductions}.
@@ -172,6 +163,13 @@ By :ref{#ex-inf-reductions}, $\emptyset'$ and $\nat \setminus \emptyset'$ both r
 :::
 ::::
 
+:::figure[The c.e. and co-c.e. sets. Their intersection is the class of computable sets (:ref{#prop-computable-iff-ce-coce}). The halting set is c.e. and not co-c.e., its complement is co-c.e. and not c.e., and the index sets $\mathrm{Tot}$ and $\mathrm{Inf} = \{ e : W_e \text{ is infinite} \}$ are neither (:ref{#cor-tot-not-ce} and :ref{#ex-inf-not-ce}).]
+<svg class="fig" viewBox="0 0 520 250" width="520" role="img" aria-label="Two overlapping regions, the c.e. sets and the co-c.e. sets, inside the box of all sets; their intersection is the computable sets"><rect x="4" y="4" width="512" height="242" rx="8" class="track-outline"/><text x="18" y="26" class="label">all subsets of ℕ</text><ellipse cx="200" cy="128" rx="140" ry="88" class="soft-fill" fill-opacity="0.6"/><ellipse cx="320" cy="128" rx="140" ry="88" class="soft-fill" fill-opacity="0.6"/><ellipse cx="200" cy="128" rx="140" ry="88" class="accent-stroke" stroke-width="1.3"/><ellipse cx="320" cy="128" rx="140" ry="88" class="accent-stroke" stroke-width="1.3"/><text x="112" y="92" text-anchor="middle" class="label">c.e.</text><text x="408" y="92" text-anchor="middle" class="label">co-c.e.</text><text x="260" y="88" text-anchor="middle" class="label">computable</text><text x="260" y="122" text-anchor="middle" class="mrm" font-size="15">∅, ℕ, evens</text><text x="130" y="128" text-anchor="middle" class="mrm" font-size="15">∅′, <tspan class="math">H</tspan></text><text x="130" y="152" text-anchor="middle" class="mrm" font-size="13">{<tspan class="math">e</tspan> : <tspan class="math">W</tspan><tspan class="math" font-size="9" dy="3">e</tspan><tspan dy="-3"> ≠ ∅}</tspan></text><text x="390" y="128" text-anchor="middle" class="mrm" font-size="15">ℕ ∖ ∅′</text><text x="390" y="152" text-anchor="middle" class="mrm" font-size="13">{<tspan class="math">e</tspan> : <tspan class="math">W</tspan><tspan class="math" font-size="9" dy="3">e</tspan><tspan dy="-3"> = ∅}</tspan></text><text x="500" y="26" text-anchor="end" class="label">neither: <tspan class="mrm" font-size="14">Tot, Inf</tspan></text></svg>
+:::
+
+Post asked in 1944 whether every c.e. set that is not computable is m-complete, or at least as hard as $\emptyset'$ in a weaker sense. For m-reducibility he answered negatively himself, with the **simple sets**; for Turing reducibility the question, known as **Post's problem**, was solved by Friedberg and Muchnik with the priority method. These results are the subject of later courses.
+
+
 ## Notes and references
 
 Post's paper of 1944 introduced many-one and one-one reducibility, complete sets and simple sets, and asked the question now called Post's problem. In Soare's textbook, the selection theorem is the uniformization theorem (Theorem 2.1.8), followed by the graph theorem (Theorem 2.1.9), the union theorem (Theorem 2.1.11) and the reduction principle (Corollary 2.1.12); complete sets are treated in Sections 1.6 and 2.4.
@@ -179,3 +177,51 @@ Post's paper of 1944 introduced many-one and one-one reducibility, complete sets
 - E. L. Post, *Recursively enumerable sets of positive integers and their decision problems*, Bulletin of the American Mathematical Society 50 (1944), 284–316.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 2.1 and 2.4.
 - R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987.
+
+:::::exercises
+::::exercise{#ex-intersecting-pairs difficulty=1 objective="Prove that a set is m-complete by checking that it is c.e. and reducing the halting set to it."}
+Show that the set $\{ \langle a, b \rangle : W_a \cap W_b \neq \emptyset \}$ is m-complete.
+
+:::solution
+Call the set $S$. Then $\langle a, b \rangle \in S \iff \exists x\, \exists s\ (\Phi_a(x)[s]\converge \wedge \Phi_b(x)[s]\converge)$, where we may take the same stage for both computations since convergence persists (:ref{#prop-stage-properties}). Written with $a = \pi_0(n)$ and $b = \pi_1(n)$, this is the projection of a computable relation of $(n, x, s)$, so $S$ is c.e. (:ref{#prop-ce-closure} and :ref{#thm-ce-characterizations}). Let $z$ be the function of :ref{#ex-smn-uses}, so that $W_{z(e, e)} = \nat$ if $e \in \emptyset'$ and $W_{z(e, e)} = \emptyset$ otherwise. Then $e \in \emptyset' \iff \langle z(e, e), z(e, e) \rangle \in S$, so $\emptyset' \leq_m S$, and $S$ is m-complete by :ref{#cor-tot-not-ce}.
+:::
+::::
+
+::::exercise[Separation for co-c.e. sets]{#ex-separation-coce difficulty=2 objective="Derive the separation principle for co-c.e. sets from the reduction principle."}
+Let $A$ and $B$ be disjoint co-c.e. sets. Show that there is a computable set $C$ with $A \subseteq C$ and $C \cap B = \emptyset$.
+
+:::solution
+The complements $\bar A = \nat \setminus A$ and $\bar B = \nat \setminus B$ are c.e., and $\bar A \cup \bar B = \nat \setminus (A \cap B) = \nat$. By :ref{#ex-reduction-principle}, there are disjoint c.e. sets $A' \subseteq \bar A$ and $B' \subseteq \bar B$ with $A' \cup B' = \nat$. Then $B' = \nat \setminus A'$, so $B'$ and its complement are c.e., and $B'$ is computable (:ref{#prop-computable-iff-ce-coce}). Let $C = B'$. If $x \in A$, then $x \notin \bar A$, so $x \notin A'$, so $x \in B' = C$. And $C = B' \subseteq \bar B$ is disjoint from $B$.
+
+The corresponding statement for disjoint c.e. sets is false: the sets $\{ e : \Phi_e(e)\converge = 0 \}$ and $\{ e : \Phi_e(e)\converge = 1 \}$ are computably inseparable, as shown in an exercise of the course on countability.
+
+Adapted from Soare 2016, Exercise 2.1.22.
+:::
+::::
+
+::::exercise{#ex-least-witness difficulty=1 objective="See why the selection theorem cannot select the least witness."}
+Give a c.e. relation $R \subseteq \nat^2$ such that every $x$ has some $y$ with $R(x, y)$, but the function $x \mapsto \min \{ y : R(x, y) \}$ is not computable.
+
+:::solution
+Let $R(x, y)$ hold if $y = 1$, or if $y = 0$ and $x \in \emptyset'$. It is c.e.: $R(x, y) \iff y = 1 \vee \exists s\ (y = 0 \wedge \Phi_x(x)[s]\converge)$, the projection of a computable relation. Every $x$ has the witness $1$. The least witness is $0$ if $x \in \emptyset'$ and $1$ otherwise, that is, $1 - \chi_{\emptyset'}(x)$, which is not computable (:ref{#thm-halting}). The selection function of :ref{#prop-selection} is total here, but it may return the witness $1$ for some $x \in \emptyset'$.
+:::
+::::
+
+::::exercise{#ex-cof-neither difficulty=1 objective="Adapt the reductions of the halting set to show that the set of indices of cofinite sets is neither c.e. nor co-c.e."}
+Let $\mathrm{Cof} = \{ e : W_e \text{ is cofinite} \}$. Show that $\emptyset' \leq_m \mathrm{Cof}$ and $\nat \setminus \emptyset' \leq_m \mathrm{Cof}$, and deduce that $\mathrm{Cof}$ is neither c.e. nor co-c.e.
+
+:::solution
+The reduction $e \mapsto z(e, e)$ of :ref{#prop-halting-variants} gives $W_{z(e, e)} = \nat$, which is cofinite, if $e \in \emptyset'$, and $W_{z(e, e)} = \emptyset$, which is not, otherwise; so $\emptyset' \leq_m \mathrm{Cof}$. The reduction $g$ of item 3 of the same proposition gives $W_{g(e)} = \nat$ if $e \notin \emptyset'$, and a finite set $\{ x : \Phi_e(e)[x]\diverge \}$, which is not cofinite, if $e \in \emptyset'$; so $\nat \setminus \emptyset' \leq_m \mathrm{Cof}$. By item 2 of :ref{#prop-many-one}, the first reduction also gives $\nat \setminus \emptyset' \leq_m \nat \setminus \mathrm{Cof}$. If $\mathrm{Cof}$ or its complement were c.e., then $\nat \setminus \emptyset'$ would be c.e. by :ref{#prop-ce-downward}, contradicting :ref{#thm-halting-ce}.
+
+Soare 2016, Exercise 2.1.17 (iii), asks to show that $\mathrm{Cof}$ is not c.e.
+:::
+::::
+
+::::exercise{#ex-fin-projection difficulty=2 objective="See that the projection of a co-c.e. relation need not be c.e. or co-c.e."}
+Let $R(e, n)$ be the relation "$W_e \subseteq \{ 0, \dots, n - 1 \}$". Show that $R$ is co-c.e., and that its projection $\{ e : \exists n\ R(e, n) \}$ is neither c.e. nor co-c.e. Compare with item 2 of :ref{#prop-ce-closure}.
+
+:::solution
+The complement of $R$ is $\{ (e, n) : \exists x\, \exists s\ (x \geq n \wedge \Phi_e(x)[s]\converge) \}$, the projection of a computable relation, hence c.e.; so $R$ is co-c.e. Its projection is $\{ e : W_e \text{ is finite} \} = \nat \setminus \mathrm{Inf}$. By :ref{#ex-inf-not-ce}, $\mathrm{Inf}$ is neither c.e. nor co-c.e., and therefore neither is its complement. So the class of co-c.e. relations is not closed under projection, unlike the class of c.e. relations, and the projection of a co-c.e. relation can leave both classes.
+:::
+::::
+:::::

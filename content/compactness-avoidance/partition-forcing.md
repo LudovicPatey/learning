@@ -1,7 +1,7 @@
 ---
 title: Forcing with partitions
 summary: A notion of forcing whose reservoirs are the parts of all members of a Π⁰₁ class at once; part extensions and splitting extensions, which split instead of choosing; the progress lemma, which combines Liu's lemma with splitting extensions.
-duration: 40
+duration: 45
 prerequisites: [ramsey-type-wkl, pi01-classes/finitely-branching-trees]
 ---
 
@@ -22,6 +22,14 @@ Each part of a condition is a family of Mathias conditions $(\sigma_\nu, X_\nu)$
 1. a string compatible with part $\mu$ of $q$ is compatible with part $f(\mu)$ of $p$: if $\tau'$ is compatible relative to $Y$, take $X$ for $Y$ and $\mu$; then $\sigma_{f(\mu)} \preceq \tau_\mu \preceq \tau'$, and the new elements lie in $Y_\mu \cup X_{f(\mu)} = X_{f(\mu)}$;
 2. if part $\mu$ of $q$ is acceptable, so is part $f(\mu)$ of $p$, since $Y_\mu \subseteq X_{f(\mu)}$;
 3. the relation is transitive, with the composite map, by the argument of property 1.
+
+::::exercise{#ex-partition-transitive difficulty=1 objective="Prove the transitivity of the extension relation of forcing with partitions, part by part."}
+Let $p = (k, \vec \sigma, \mathcal A)$, $q = (\ell, \vec \tau, \mathcal B)$ and $r = (m, \vec \rho, \mathcal C)$ be conditions such that $q$ extends $p$ through $f$ and $r$ extends $q$ through $g$. Show that $r$ extends $p$ through $f \circ g$.
+
+:::solution
+Let $W \in \mathcal C$ and $\lambda < m$, and let $\mu = g(\lambda)$. Since $r$ extends $q$, there is $Y \in \mathcal B$ such that $\rho_\lambda$ is compatible with part $\mu$ of $q$ relative to $Y$ and $W_\lambda \subseteq Y_\mu$. Since $q$ extends $p$, applied to $Y$ and $\mu$, there is $X \in \mathcal A$ such that $\tau_\mu$ is compatible with part $f(\mu)$ of $p$ relative to $X$ and $Y_\mu \subseteq X_{f(\mu)}$. Then $W_\lambda \subseteq X_{f(\mu)}$. Moreover $\sigma_{f(\mu)} \preceq \tau_\mu \preceq \rho_\lambda$, the elements of $\rho_\lambda$ between $|\sigma_{f(\mu)}|$ and $|\tau_\mu|$ are elements of $\tau_\mu$, hence in $X_{f(\mu)}$, and those beyond $|\tau_\mu|$ are in $Y_\mu \subseteq X_{f(\mu)}$. So $\rho_\lambda$ is compatible with part $f(g(\lambda))$ of $p$ relative to $X$, and $X$ witnesses the definition for $W$ and $\lambda$. The witness $X$ depends on $\lambda$ through $Y$ and $\mu$: this is why the definition is stated part by part.
+:::
+::::
 
 Only two kinds of extensions are used.
 
@@ -91,3 +99,47 @@ Forcing with partitions follows the chapter *Compactness avoidance* of Patey's m
 
 - J. Liu, *RT²₂ does not imply WKL₀*, Journal of Symbolic Logic 77 (2012), 609–620.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, section *Ramsey-type WKL*.
+
+:::::exercises
+::::exercise[One witness for all parts]{#ex-single-witness-fails difficulty=2 objective="See why the extension relation is stated part by part, with a splitting extension that has no single witness for all its parts."}
+Suppose that "$q$ extends $p$ through $f$" were defined with one $X$ for all parts: for every $Y \in \mathcal B$ there is $X \in \mathcal A$ such that, for every $\mu < \ell$, $\tau_\mu$ is compatible with part $f(\mu)$ of $p$ relative to $X$ and $Y_\mu \subseteq X_{f(\mu)}$. For $s < 3$, let $X_s : \nat \to 2$ be defined by $X_s(n) = 1$ if $n \equiv s \pmod 3$ and $X_s(n) = 0$ otherwise. Let $p = (2, (\varepsilon, \varepsilon), \{ X_0, X_1, X_2 \})$, and let $q$ be the splitting extension given by $\mathcal B_s = \{ X_s \}$ and by the map $f$ that sends $\mu \in 2^3$ to the value it takes at least twice. Show that $q$ extends $p$ in the sense of :ref{#def-partition-forcing}, but not in the sense above.
+
+:::solution
+A finite class of computable functions is a $\Pi^0_1$ class, so $p$ is a condition, and so are the classes $\mathcal B_s$. The class $\mathcal B$ of the refined partitions has the single member $Y$ with $Y(n) = (X_0(n), X_1(n), X_2(n))$, the triple with a $1$ at position $n \bmod 3$ and $0$ elsewhere. So $Y_\mu$ is $\{ n : n \equiv s \pmod 3 \}$ if $\mu$ has its only $1$ at position $s$, and is empty for the other $\mu$. All stems are empty, so compatibility of the stems holds relative to every $X$.
+
+In the sense of :ref{#def-partition-forcing}, for $\mu$ with its only $1$ at position $s$, $f(\mu) = 0$, and $X_t$ with $t \neq s$ satisfies $Y_\mu \subseteq (X_t)_0 = \{ n : n \not\equiv t \pmod 3 \}$; for the other $\mu$, $Y_\mu = \emptyset$. So $q$ extends $p$.
+
+In the sense above, a single $X \in \{ X_0, X_1, X_2 \}$ would be needed for all $\mu$. For $X = X_s$, the part $\mu$ with its only $1$ at position $s$ has $f(\mu) = 0$ and $Y_\mu = \{ n : n \equiv s \pmod 3 \}$, which is not contained in $(X_s)_0$. So no single $X$ works. Each part of $q$ inherits from a partition that depends on the part.
+:::
+::::
+
+::::exercise[A splitting extension with two partitions]{#ex-splitting-small difficulty=1 objective="Compute a splitting extension on an example, and see why the progress lemma uses $k + 1$ partitions."}
+Let $X_0(n) = n \bmod 2$ and $X_1(n) = \lfloor n / 2 \rfloor \bmod 2$, and let $p = (2, (\varepsilon, \varepsilon), \{ X_0, X_1 \})$. Describe the parts of the splitting extensions given by $\mathcal B_0 = \{ X_0 \}$ and $\mathcal B_1 = \{ X_1 \}$, and list the admissible maps $f : 2^2 \to 2$. Explain why the proof of :ref{#lem-partition-progress} would fail with $k$ partitions instead of $k + 1$.
+
+:::solution
+The refined partition $Y$ sends $n$ to $(n \bmod 2, \lfloor n / 2 \rfloor \bmod 2)$, so $Y_\mu$ is the set of $n$ congruent to $\mu(0) + 2 \mu(1)$ modulo $4$, and the four parts are infinite. A map $f$ is admissible if $f(\mu) \in \{ \mu(0), \mu(1) \}$: so $f(0, 0) = 0$, $f(1, 1) = 1$, and $f(0, 1)$ and $f(1, 0)$ can each be $0$ or $1$, which gives four maps.
+
+In the progress lemma, part $\mu$ settles $e$ because $\mu$ takes the value $f(\mu)$ at two positions $s < t$, so that its strings are compatible with part $f(\mu)$ of $p$ relative to a member of $\mathcal B_s$ and to a member of $\mathcal B_t$, and are compatible with both $h_s$ and $h_t$. Here, with $k = 2$ partitions, the part $\mu = (0, 1)$ with $f(\mu) = 0$ is only known to lie in part $0$ of $X_0$; its strings are compatible with $h_0$ and possibly incompatible with $h_1$, and divergence is not forced. With $k + 1 = 3$ partitions, every $\mu \in 2^3$ takes some value twice.
+:::
+::::
+
+::::exercise[The class of refined partitions]{#ex-refined-class difficulty=1 objective="Check that the refined partitions form a non-empty $\Pi^0_1(Z)$ class, in bijection with the product of the classes."}
+Let $\mathcal B_0, \dots, \mathcal B_{m-1}$ be non-empty $\Pi^0_1(Z)$ classes of partitions into $k$ parts. Show that the refined partitions of the members of $\mathcal B_0 \times \cdots \times \mathcal B_{m-1}$ form a non-empty $\Pi^0_1(Z)$ class $\mathcal B$ of partitions into $k^m$ parts, that the map sending $(X_0, \dots, X_{m-1})$ to its refined partition is a bijection onto $\mathcal B$, and that $Y_\mu = \bigcap_{s < m} (X_s)_{\mu(s)}$.
+
+:::solution
+Identify $k^m$ with the set of functions $\mu : m \to k$. For $Y : \nat \to k^m$ and $s < m$, let $\pi_s Y$ be the function $n \mapsto Y(n)(s)$. The refined partition of $(X_0, \dots, X_{m-1})$ is the unique $Y$ with $\pi_s Y = X_s$ for every $s$, and $Y$ belongs to $\mathcal B$ if and only if $\pi_s Y \in \mathcal B_s$ for every $s$. So the map is a bijection, with inverse $Y \mapsto (\pi_s Y)_{s < m}$, and $\mathcal B$ is non-empty since each $\mathcal B_s$ is. Let $S_s$ be a $Z$-computable tree with $[S_s] = \mathcal B_s$. Then $Y \in \mathcal B$ if and only if for every $\ell$ and every $s < m$, the string $\pi_s(Y \uh \ell)$ belongs to $S_s$: the class $\mathcal B$ is the class of paths of a $Z$-computable tree, a $\Pi^0_1(Z)$ class. Finally, $n \in Y_\mu$ if and only if $Y(n) = \mu$, that is, $X_s(n) = \mu(s)$ for every $s$, that is, $n \in \bigcap_{s < m} (X_s)_{\mu(s)}$.
+:::
+::::
+
+::::exercise[A class with one member]{#ex-partition-singleton difficulty=2 objective="See that forcing with partitions over a single partition behaves like a product of Mathias forcings, whose question is merging."}
+In the proof of :ref{#lem-partition-progress}, suppose that $\mathcal A = \{ X \}$ has a single member and that $I$ is non-empty. Show that no two incompatible valuations lie outside $U$, and deduce that $U$ contains a correct valuation, so that only part extensions are needed. Describe the splitting extension of case 2 when the class has a single member.
+
+:::solution
+Since $\mathcal A = \{ X \}$, a string is compatible with part $\nu$ of $p$ if and only if it is compatible with it relative to $X$, and a valuation $h$ is outside $U$ if and only if for every $\nu \in I$ and every $\tau$ compatible with part $\nu$, $\Phi^{Z \oplus \tau}_e$ is compatible with $h$. Suppose that $h_0$ and $h_1$ are incompatible valuations outside $U$, and let $n$ be a number where they differ. For $\nu \in I$ and $\tau$ compatible with part $\nu$, $\Phi^{Z \oplus \tau}_e$ is compatible with both, so $\Phi^{Z \oplus \tau}_e(n)$ diverges, and part $\nu$ settles $e$ by (b). This contradicts the definition of $I$.
+
+By :ref{#lem-liu-valuations} with $W = Z$ and $m = 1$, either $U$ contains a correct valuation, or for some $w$ the two valuations with domain $\{ w \}$, which are incompatible, lie outside $U$. The second alternative has just been excluded, so case 1 applies, and the induction only uses part extensions. This is the merging property of the question of a Mathias condition with a fixed reservoir: two negative answers are witnessed by the condition itself.
+
+In general, the classes $\mathcal B_s$ of case 2 are non-empty subclasses of $\mathcal A$; here they all equal $\{ X \}$. The refined partition of $(X, \dots, X)$ has $Y_\mu = X_\nu$ if $\mu$ is the constant tuple with value $\nu$, and $Y_\mu = \emptyset$ otherwise. Its non-empty parts are the parts of $p$ with the same stems, and the other parts never receive an element. So with a single member, splitting changes nothing.
+:::
+::::
+:::::

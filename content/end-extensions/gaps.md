@@ -110,7 +110,7 @@ The unique unbounded extension of a strongly definable type is therefore its can
 
 ## Exercises
 
-::::exercise{#ex-ee-iterated-gaps difficulty=2}
+::::exercise{#ex-ee-iterated-gaps difficulty=2 objective="Apply the one-gap proposition along an iterated construction to describe the models obtained."}
 In the iterated construction, show that for every ordinal $\alpha$, $M_\alpha = M \cup \bigcup_{\beta < \alpha} \mathrm{gap}^{M_\alpha}(d_\beta)$, that these gaps are distinct, and that $\mathrm{gap}^{M_\alpha}(d_\beta) < \mathrm{gap}^{M_\alpha}(d_\gamma)$ for $\beta < \gamma$.
 
 :::solution
@@ -118,7 +118,7 @@ By induction on $\alpha$. Each $M_\alpha$ is an elementary end extension of the 
 :::
 ::::
 
-::::exercise{#ex-ee-sd-preserved difficulty=1}
+::::exercise{#ex-ee-sd-preserved difficulty=1 objective="Check that strong definability passes to unbounded extensions of the type."}
 Show that if $p$ is an unbounded strongly definable $M$-type and $K \succcurlyeq M$, every complete unbounded extension of $p$ to $K$ is strongly definable.
 
 :::solution
@@ -134,3 +134,55 @@ Skolem functions, the sets $M(d)$ and $M[d]$ and gaps follow Wong's Lecture 10 (
 - A. Blass, *On certain types and models for arithmetic*, Journal of Symbolic Logic 39 (1974), 151–162.
 - L. A. S. Kirby, *Ultrafilters and types on models of arithmetic*, Annals of Pure and Applied Logic 27 (1984), 215–252.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 10.
+
+:::::exercises
+::::exercise{#ex-ee-skolem-majorant difficulty=1 objective="Verify the closure properties of Skolem functions used to manipulate gaps."}
+Let $t(v)$ and $s(v)$ be Skolem functions and $u(\bar v)$ a Skolem function of $k$ variables. Show that $s(t(v))$, $t^*(v) = \max_{w \leq v} t(w) + v + 1$ and $U(x) = \max_{\bar y \leq x} u(\bar y)$ are Skolem functions, that $t^*$ is strictly increasing with $t^* > t$, and that $u(\bar y) \leq U(\max \bar y)$.
+
+:::solution
+Let $\eta_t, \eta_s, \eta_u$ be the defining formulas. The composition is defined by $\exists y\ (\eta_t(v, y) \wedge \eta_s(y, x))$, and $\mathrm{PA}$ proves that for each $v$ there is exactly one such $x$. In $\mathrm{PA}$, a definable function on $\{ w : w \leq v \}$ is bounded there, by collection (:ref{#thm-fo-parsons}), and the least bound that is a value exists by the least number principle; so $\max_{w \leq v} t(w)$ is defined by a formula for which $\mathrm{PA}$ proves existence and uniqueness, and so is $U$, the tuples $\bar y \leq x$ being coded below a bound depending on $x$. Then $t^*(v + 1) \geq \max_{w \leq v} t(w) + v + 2 > t^*(v)$, and $t^*(v) \geq t(v) + v + 1 > t(v)$. Finally $u(\bar y)$ is one of the values in the maximum defining $U(\max \bar y)$.
+:::
+::::
+
+::::exercise{#ex-ee-gap-cuts difficulty=2 objective="Show that the sets $K(d)$ and $K[d]$ are the elementary cuts that bound the gap of $d$."}
+Let $K \models \mathrm{PA}$ and $d \in K$. An **elementary cut** of $K$ is an initial segment $I$ of $K$ with $I \preccurlyeq K$.
+
+1. Show that $K(d)$ is the smallest elementary cut of $K$ that contains $d$.
+2. Show that if $K[d] \neq \emptyset$, then $K[d]$ is the largest elementary cut of $K$ that does not contain $d$.
+
+:::solution
+Both sets are initial segments (remark after :ref{#def-ee-gap}). We use the Tarski–Vaught test; the least witness of $\exists y\ \varphi(y, \bar c)$, when there is one, is $w(\bar c)$ for the Skolem function $w(\bar z) = (\min y)\, \varphi(y, \bar z)$.
+
+1. $d < d + 1$, so $d \in K(d)$. If $x < t(d)$ and $y < t'(d)$, then $x + y$ and $x y$ are below the Skolem function $(t(d) + t'(d))^2 + 1$ of $d$; so $K(d)$ is a substructure. Let $\bar c \in K(d)$, all below $t(d)$ for a single Skolem $t$ (take the maximum of finitely many), with $K \models \exists y\ \varphi(y, \bar c)$. With $W(x) = \max_{\bar z \leq x} w(\bar z)$ (:ref{#ex-ee-skolem-majorant}), $w(\bar c) \leq W(t(d)) < W(t(d)) + 1$, so the least witness is in $K(d)$. Hence $K(d) \preccurlyeq K$. If $I$ is an elementary cut containing $d$, then $t(d) \in I$ for every Skolem $t$, since the element defined by $\eta_t(d, x)$ in $I$ is the one defined in $K$; so every $x < t(d)$ is in $I$, and $K(d) \subseteq I$.
+2. Since $K[d]$ is a non-empty initial segment, $0 \in K[d]$. If $x, y \in K[d]$ and $t$ is Skolem, then $t(x + y) \leq t'(\max(x, y))$ with $t'(m) = \max_{u \leq 2m} t(u)$, and $t'(\max(x, y)) < d$; similarly for $x y$, with $\max_{u \leq m^2} t(u)$. So $K[d]$ is a substructure. If $\bar c \in K[d]$ and $K \models \exists y\ \varphi(y, \bar c)$, then for every Skolem $t$, $t(w(\bar c)) \leq T(\max \bar c)$ with $T(x) = \max_{\bar z \leq x} t(w(\bar z))$, and $T(\max \bar c) < d$; so $w(\bar c) \in K[d]$, and $K[d] \preccurlyeq K$. It does not contain $d$, since the identity is a Skolem function. If $I$ is an elementary cut with $d \notin I$ and $x \in I$, then $t(x) \in I$ for every Skolem $t$, so $t(x) < d$, as $I$ is an initial segment not containing $d$; hence $x \in K[d]$.
+
+These are the facts stated without proof in Wong's Lecture 10, Section 10.1.
+:::
+::::
+
+::::exercise{#ex-ee-mp-gap-bound difficulty=1 objective="Show that an extension by an unbounded type is bounded by the Skolem functions of the realization."}
+Let $M \models \mathrm{PA}$, $p(v)$ an unbounded complete $M$-type and $d$ a realization. Show that every element of $M(p / d)$ is below $t(d)$ for some Skolem function $t$, so that $M(p / d)$ is the smallest elementary cut of itself containing $d$. Show by an example that this fails for types that are not unbounded.
+
+:::solution
+By :ref{#lem-ee-mp}, an element of $M(p / d)$ is $u(\bar m, d)$ for a Skolem function $u$ and $\bar m \in M$, as in the remark after :ref{#def-ee-skolem}. Since $p$ is unbounded, $\bar m < d$, so $u(\bar m, d) \leq T(d)$ for the Skolem function $T(x) = \max_{\bar y \leq x} u(\bar y, x)$, and it is below $T(d) + 1$. By :ref{#ex-ee-gap-cuts}, the smallest elementary cut containing $d$ is $M(p/d)(d)$, which is therefore all of $M(p / d)$. For a counterexample, let $M$ be a non-standard model of $\mathrm{Th}(\nat)$, $a \in M$ non-standard, and $p = \mathrm{tp}(0 / M)$: then $M(p) = M$, and the elements below $t(0)$ for Skolem functions $t$ are the standard numbers (:ref{#ex-ee-gap-zero}), which do not include $a$. The first statement is a remark of Wong (Further comments to Lecture 10).
+:::
+::::
+
+::::exercise{#ex-ee-gap-zero difficulty=2 objective="Characterize the gap of $0$ through the elements definable without parameters."}
+Let $K \models \mathrm{PA}$. Show that $\mathrm{gap}(0) = K(0)$ is the set of elements below some element of $K$ definable without parameters, and that $K(0) = \nat$ if and only if $K \equiv \nat$.
+
+:::solution
+The identity is a Skolem function and $0 \not< 0$, so $K[0] = \emptyset$ and $\mathrm{gap}(0) = K(0)$. For a Skolem $t$, $t(0)$ is defined without parameters, by $\eta_t(0, x)$; conversely, an element $b$ defined by $\eta(x)$ without parameters is $t(0)$ for the Skolem function $t(v) = (\min x)\, \eta(x)$. So $K(0) = \{ x : x < b \text{ for some } b \text{ definable without parameters} \}$, and $K(0) = \nat$ if and only if every element definable without parameters is standard.
+
+Suppose $K \equiv \nat$ and $b$ is defined by $\eta(x)$. Then $\exists! x\ \eta(x)$ holds in $K$, hence in $\nat$, at some $n$; and $\eta(\bar n)$ holds in $\nat$, hence in $K$, so $b = n$. Conversely, suppose that every element definable without parameters is standard. We show by induction on the number of quantifiers that every prenex sentence $\sigma$ of $\mathcal L_A$, possibly with numerals, has the same truth value in $K$ and in $\nat$. For quantifier-free sentences, both compute the same closed terms, since $\nat$ is a substructure of $K$. If $\sigma = \exists x\ \pi(x)$ holds in $K$, the least witness is definable without parameters, hence equal to some $n \in \nat$; then $K \models \pi(\bar n)$, so $\nat \models \pi(\bar n)$ by the induction hypothesis, and $\nat \models \sigma$. If $\nat \models \pi(\bar n)$, then $K \models \pi(\bar n)$ by the induction hypothesis. The case $\forall x\ \pi(x)$ follows by negation. So $K \equiv \nat$.
+:::
+::::
+
+::::exercise{#ex-ee-iterated-cuts difficulty=2 objective="Determine the elementary cuts of a model obtained by iterating a strongly definable type."}
+In the iterated construction at the end of the lesson, show that the elementary cuts of $M_\alpha$ that contain $M$ (in the sense of :ref{#ex-ee-gap-cuts}) are exactly the models $M_\gamma$, $\gamma \leq \alpha$.
+
+:::solution
+Each $M_\gamma$ contains $M$, is an elementary substructure of $M_\alpha$, and is an initial segment of it, since the construction is a chain of elementary end extensions (:ref{#ex-ee-iterated-gaps}). Conversely, let $I \supseteq M$ be an elementary cut of $M_\alpha$. If $c \in I$, then $K(c) \subseteq I$ by :ref{#ex-ee-gap-cuts}, computed in $M_\alpha$, so $\mathrm{gap}(c) \subseteq I$. By :ref{#ex-ee-iterated-gaps}, $I = M \cup \bigcup_{\beta \in B} \mathrm{gap}^{M_\alpha}(d_\beta)$ with $B = \{ \beta < \alpha : d_\beta \in I \}$. Since $I$ is an initial segment and $d_\beta < d_{\beta'}$ for $\beta < \beta'$, $B$ is an initial segment of $\alpha$, that is, an ordinal $\gamma \leq \alpha$. The elements of $\mathrm{gap}^{M_\alpha}(d_\beta)$, $\beta < \gamma$, are bounded by Skolem functions of $d_\beta \in M_\gamma$, so they lie in $M_\gamma$, an initial segment, and they form $\mathrm{gap}^{M_\gamma}(d_\beta)$. By :ref{#ex-ee-iterated-gaps} applied to $\gamma$, $I = M_\gamma$.
+:::
+::::
+:::::

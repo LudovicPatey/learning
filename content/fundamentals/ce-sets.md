@@ -26,7 +26,7 @@ Older texts say *recursively enumerable*, or *r.e.* By the conventions on stages
 A **c.e. approximation** of a set $A$ is a uniformly computable sequence of sets $A_0 \subseteq A_1 \subseteq A_2 \subseteq \cdots$ with $\bigcup_s A_s = A$.
 :::
 
-The approximation must be increasing: an element, once enumerated, stays. Without this condition the definition describes a larger class. For instance, the sets $A_s = \{ e : \Phi_e(e)[s]\diverge \}$ form a uniformly computable, decreasing sequence with $\bigcap_s A_s = \nat \setminus \emptyset'$, and $\nat \setminus \emptyset'$ is not c.e. (:ref{#thm-halting-ce} below). The sets that are pointwise limits of uniformly computable sequences, with finitely many changes at each point, are the $\Delta^0_2$ sets of Shoenfield's limit lemma (:ref{#thm-limit-lemma}).
+The approximation must be increasing: an element, once enumerated, stays. If the sets $A_s$ are only required to converge to $A$ pointwise, the definition describes a larger class. (Dropping monotonicity while keeping the union does not change the class: see :ref{#ex-ce-unions-intersections}.) For instance, the sets $A_s = \{ e : \Phi_e(e)[s]\diverge \}$ form a uniformly computable, decreasing sequence with $\bigcap_s A_s = \nat \setminus \emptyset'$, and $\nat \setminus \emptyset'$ is not c.e. (:ref{#thm-halting-ce} below). The sets that are pointwise limits of uniformly computable sequences, with finitely many changes at each point, are the $\Delta^0_2$ sets of Shoenfield's limit lemma (:ref{#thm-limit-lemma}).
 
 A relation $R \subseteq \nat^k$ is c.e. if the set $\{ \langle x_1, \dots, x_k \rangle : \vec x \in R \}$ is.
 
@@ -96,6 +96,22 @@ An infinite set $A$ is computably enumerable if and only if it is the range of a
 The range of a total computable function is c.e. by :ref{#thm-ce-characterizations}. Conversely, let $f$ be total computable with range $A$. Define $g(0) = f(0)$, and $g(n+1) = f(m_{n+1})$, where $m_{n+1}$ is the least $m$ with $f(m) \notin \{ g(0), \dots, g(n) \}$. The search terminates since $A$ is infinite, so $g$ is total computable, and it is injective by construction. Let $m_0 = 0$. By induction on $n$, $\{ f(0), \dots, f(m_n) \} = \{ g(0), \dots, g(n) \}$: the values $f(m)$ for $m_n < m < m_{n+1}$ are already listed, by minimality of $m_{n+1}$. Hence $m_0 < m_1 < \cdots$, and every value of $f$ is a value of $g$.
 :::
 
+::::exercise{#ex-increasing-enumeration difficulty=1 objective="Characterize the infinite computable sets as the sets that can be enumerated in increasing order."}
+An infinite set $A$ is **enumerable in increasing order** if $A = f(\nat)$ for some total computable $f$ with $f(n) < f(n+1)$ for all $n$. Show that an infinite set is computable if and only if it is enumerable in increasing order.
+
+:::solution
+If $A$ is infinite and computable, its principal function $p_A$ (:ref{#lem-subsets-of-n}) is computable, by $p_A(0) = \mu x\, (x \in A)$ and $p_A(n+1) = \mu x\, (x > p_A(n) \wedge x \in A)$, and it enumerates $A$ in increasing order. Conversely, to decide whether $x \in A$, compute $f(0), f(1), \dots$ until a value greater than $x$ appears, which happens since $f(n) \geq n$; then $x \in A$ if and only if $x$ is among the values computed, since later values are larger.
+:::
+::::
+
+::::exercise{#ex-infinite-computable-subset difficulty=1 objective="Extract an infinite computable subset from an enumeration of an infinite c.e. set."}
+Show that every infinite c.e. set contains an infinite computable subset.
+
+:::solution
+Let $f$ be a total computable function with range $A$. Let $g(0) = f(0)$, and $g(n+1) = f(m)$ for the least $m$ with $f(m) > g(n)$, which exists since $A$ is infinite. Then $g$ is total computable and strictly increasing, and its range is an infinite subset of $A$, computable by :ref{#ex-increasing-enumeration}.
+:::
+::::
+
 ## Computable and c.e. sets
 
 :::proposition{#prop-computable-iff-ce-coce}
@@ -145,24 +161,6 @@ Which statements are correct?
   $\nat$ is c.e., and $\nat \setminus \emptyset'$ is a subset of it which is not c.e.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-An infinite set $A$ is **enumerable in increasing order** if $A = f(\nat)$ for some total computable $f$ with $f(n) < f(n+1)$ for all $n$. Show that an infinite set is computable if and only if it is enumerable in increasing order.
-
-:::solution
-If $A$ is infinite and computable, its principal function $p_A$ (:ref{#lem-subsets-of-n}) is computable, by $p_A(0) = \mu x\, (x \in A)$ and $p_A(n+1) = \mu x\, (x > p_A(n) \wedge x \in A)$, and it enumerates $A$ in increasing order. Conversely, to decide whether $x \in A$, compute $f(0), f(1), \dots$ until a value greater than $x$ appears, which happens since $f(n) \geq n$; then $x \in A$ if and only if $x$ is among the values computed, since later values are larger.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that every infinite c.e. set contains an infinite computable subset.
-
-:::solution
-Let $f$ be a total computable function with range $A$. Let $g(0) = f(0)$, and $g(n+1) = f(m)$ for the least $m$ with $f(m) > g(n)$, which exists since $A$ is infinite. Then $g$ is total computable and strictly increasing, and its range is an infinite subset of $A$, computable by the previous exercise.
-:::
-::::
-
 ## Notes and references
 
 Computably enumerable sets were introduced in the 1930s, in the work of Church, Kleene and Post on recursive functions; Post's paper of 1944 made them a subject of study in their own right. The characterization of computable sets as the c.e. sets with a c.e. complement is due to Post (1944). In Soare's textbook, the material of this lesson is in Sections 1.6.1 and 2.1: the normal form theorem (Theorem 2.1.3), the listing theorem (Theorem 2.1.10) and the complementation theorem (Theorem 2.1.14). Soare's earlier book is the standard reference for the theory of c.e. sets.
@@ -171,3 +169,55 @@ Computably enumerable sets were introduced in the 1930s, in the work of Church, 
 - R. I. Soare, *Recursively Enumerable Sets and Degrees*, Springer, 1987.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Sections 1.6 and 2.1.
 - B. Monin and L. Patey, *Computability theory*, chapter *Foundations of computability*, section *Computably enumerable sets*.
+
+:::::exercises
+::::exercise{#ex-ce-finite-stages difficulty=1 objective="Check the basic properties of the finite approximations of a c.e. set, and relate the finiteness of the set to their stabilization."}
+Show that for all $e$ and $s$, $W_e[s] \subseteq \{ 0, \dots, s - 1 \}$, and $W_e[s] = \emptyset$ if $s \leq e$; that the relation $x \in W_e[s]$ of $x, e, s$ is primitive recursive; and that $W_e$ is finite if and only if there is $s_0$ with $W_e[s] = W_e[s_0]$ for every $s \geq s_0$.
+
+:::solution
+By :ref{#def-stage}, $x \in W_e[s]$, that is $\Phi_e(x)[s]\converge$, requires $e < s$ and $x < s$; this gives the first two claims. The relation is primitive recursive by item 1 of :ref{#prop-stage-properties}.
+
+If $W_e$ is finite, each $x \in W_e$ belongs to $W_e[s_x]$ for some $s_x$ (item 3), and to every later $W_e[s]$ (item 2). Let $s_0$ be the largest $s_x$, or $0$ if $W_e = \emptyset$. For $s \geq s_0$, $W_e \subseteq W_e[s] \subseteq W_e$, so $W_e[s] = W_e = W_e[s_0]$. Conversely, if $W_e[s] = W_e[s_0]$ for all $s \geq s_0$, then $W_e = \bigcup_s W_e[s] = W_e[s_0]$, since the sequence is increasing; this set is contained in $\{ 0, \dots, s_0 - 1 \}$, hence finite. (The stage $s_0$ exists, but nothing says that it can be computed from $e$.)
+:::
+::::
+
+::::exercise{#ex-ce-uniform-range difficulty=1 objective="Make the equivalence between domains and ranges of partial computable functions uniform in the indices." lessons="universal-program-smn"}
+Show that there are total computable functions $g$ and $h$ such that for every $e$, $W_{g(e)}$ is the range of $\Phi_e$, and the range of $\Phi_{h(e)}$ is $W_e$.
+
+:::solution
+The proof of (4 ⇒ 1) in :ref{#thm-ce-characterizations} is uniform. The function $G(e, x) \simeq \mu n\ [\Phi_e(\pi_0(n))[\pi_1(n)]\converge = x]$ is partial computable, since the relation in brackets is computable in $(e, x, n)$ (:ref{#prop-stage-properties}); and $G(e, x)$ is defined exactly when $x$ is in the range of $\Phi_e$. By :ref{#cor-smn-parameters}, there is a total computable $g$ with $\Phi_{g(e)}(x) \simeq G(e, x)$, so $W_{g(e)}$ is the range of $\Phi_e$.
+
+Let $H(e, x)$ be computed by: compute $\Phi_e(x)$, then output $x$. It is partial computable, and $H(e, x)$ is defined, with value $x$, exactly when $x \in W_e$; so the range of $x \mapsto H(e, x)$ is $W_e$. Let $h$ be given by :ref{#cor-smn-parameters} for $H$.
+:::
+::::
+
+::::exercise{#ex-ce-pr-range difficulty=1 objective="Strengthen the listing theorem: every non-empty c.e. set is the range of a primitive recursive function."}
+Show that a set $A$ is c.e. if and only if $A = \emptyset$ or $A$ is the range of a primitive recursive function.
+
+:::solution
+A primitive recursive function is total computable, so one direction follows from :ref{#thm-ce-characterizations}. Conversely, let $A$ be c.e. and non-empty. By the last statement of :ref{#thm-ce-characterizations}, $A = \{ x : \exists y\ R(x, y) \}$ with $R$ primitive recursive. Fix $a \in A$ and let $f(n) = \pi_0(n)$ if $R(\pi_0(n), \pi_1(n))$, and $f(n) = a$ otherwise. The inverses $\pi_0$, $\pi_1$ of the pairing function are primitive recursive (they are obtained by bounded search), so $f$ is defined by cases from primitive recursive functions with a primitive recursive condition, and is primitive recursive. Its range is $A$, by the argument of (2 ⇒ 3).
+:::
+::::
+
+::::exercise{#ex-ce-unions-intersections difficulty=2 objective="Determine which sets are unions, and which are intersections, of uniformly computable sequences of sets."}
+Let $(A_s)$ be a uniformly computable sequence of sets, not necessarily monotone.
+
+1. Show that $\bigcup_s A_s$ is c.e., and that it has a c.e. approximation with the same union.
+2. Show that $\bigcap_s A_s$ is co-c.e., and that every co-c.e. set is the intersection of a uniformly computable **decreasing** sequence of sets.
+
+:::solution
+1. $x \in \bigcup_s A_s \iff \exists s\ (x \in A_s)$, and the relation $x \in A_s$ of $x$ and $s$ is computable, so the union is c.e. by :ref{#thm-ce-characterizations}. Directly: let $B_s = \bigcup_{t \leq s} A_t$. The relation $x \in B_s \iff \exists t \leq s\ (x \in A_t)$ is computable by bounded quantification (:ref{#prop-computable-closure}), the sequence $(B_s)$ is increasing, and $\bigcup_s B_s = \bigcup_s A_s$.
+2. $\nat \setminus \bigcap_s A_s = \bigcup_s (\nat \setminus A_s)$, and the sequence of complements is uniformly computable, so by item 1 the complement of the intersection is c.e. Conversely, if $\nat \setminus A = W_e$, let $A_s = \nat \setminus W_e[s]$. The sets $A_s$ are uniformly computable, decreasing since $(W_e[s])$ is increasing, and $\bigcap_s A_s = \nat \setminus \bigcup_s W_e[s] = A$.
+
+So monotonicity in :ref{#def-ce-approx} can be dropped as long as the set is defined as the union of the sequence; the sequence $\{ e : \Phi_e(e)[s]\diverge \}$ discussed after the definition is decreasing, and its intersection, the complement of $\emptyset'$, is co-c.e.
+:::
+::::
+
+::::exercise{#ex-uniform-complementation difficulty=1 objective="Make the complementation theorem uniform in the indices of the two sets." lessons="universal-program-smn"}
+Show that there is a total computable function $c$ such that, whenever $W_a \cap W_b = \emptyset$ and $W_a \cup W_b = \nat$, the function $\Phi_{c(a, b)}$ is the characteristic function of $W_a$. What is the domain of $\Phi_{c(a, b)}$ when $W_a \cup W_b \neq \nat$?
+
+:::solution
+Let $F(n, x)$ be computed as follows: search for the least $s$ with $x \in W_{\pi_0(n)}[s] \cup W_{\pi_1(n)}[s]$; output $1$ if $x \in W_{\pi_0(n)}[s]$, and $0$ otherwise. The condition is computable in $(n, x, s)$ (:ref{#prop-stage-properties}), so $F$ is partial computable (:ref{#prop-computable-closure}). By :ref{#cor-smn-parameters} there is a total computable $s'$ with $\Phi_{s'(n)}(x) \simeq F(n, x)$; let $c(a, b) = s'(\langle a, b \rangle)$. If $W_a$ and $W_b$ are complementary, $\Phi_{c(a, b)}$ is the algorithm of the proof of :ref{#prop-computable-iff-ce-coce}, and computes the characteristic function of $W_a$. In general, the search terminates exactly when $x \in W_a \cup W_b$, so $\mathrm{dom}(\Phi_{c(a, b)}) = W_a \cup W_b$, and $\Phi_{c(a, b)}$ is not total when $W_a \cup W_b \neq \nat$.
+:::
+::::
+:::::

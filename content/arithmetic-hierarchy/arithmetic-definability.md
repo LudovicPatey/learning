@@ -1,7 +1,7 @@
 ---
 title: Arithmetic definability
 summary: The arithmetic sets are the sets definable in the language of arithmetic; Σ₁-definable means c.e.; truth in ℕ is not arithmetic, and the first incompleteness theorem.
-duration: 50
+duration: 45
 prerequisites: [post-theorem, models-of-computation/coding-sequences]
 ---
 
@@ -99,6 +99,14 @@ Where is the collection principle used in the proof of :ref{#thm-pr-sigma1}?
   That definition is bounded.
 :::
 
+::::exercise{#ex-exp-beta difficulty=1 objective="Apply the β-function directly to define the graph of exponentiation by a $\Sigma_1$ formula."}
+Show that the graph of exponentiation $\{ (x, z, y) : y = x^z \}$ is $\Sigma_1$-definable, by a direct use of the β-function.
+
+:::solution
+$y = x^z$ if and only if there are $c, d$ with $\beta(c, d, 0) = 1$, $\beta(c, d, i + 1) = \beta(c, d, i) \cdot x$ for all $i < z$, and $\beta(c, d, z) = y$. Each condition is $\Sigma_1$-definable, using the bounded definition of the graph of $\beta$; the second one by :ref{#lem-sigma1-closure}. The same proof as in :ref{#thm-pr-sigma1} shows that this defines the graph.
+:::
+::::
+
 ## Definable sets are arithmetic
 
 :::theorem{#thm-definable-arithmetic}
@@ -161,25 +169,7 @@ Which property of $T$ is used in :ref{#cor-incompleteness} to conclude that the 
   Consistency follows from truth, but the argument uses truth and complexity.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the graph of exponentiation $\{ (x, z, y) : y = x^z \}$ is $\Sigma_1$-definable, by a direct use of the β-function.
-
-:::solution
-$y = x^z$ if and only if there are $c, d$ with $\beta(c, d, 0) = 1$, $\beta(c, d, i + 1) = \beta(c, d, i) \cdot x$ for all $i < z$, and $\beta(c, d, z) = y$. Each condition is $\Sigma_1$-definable, using the bounded definition of the graph of $\beta$; the second one by :ref{#lem-sigma1-closure}. The same proof as in :ref{#thm-pr-sigma1} shows that this defines the graph.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that a set is computable if and only if it is defined both by a $\Sigma_1$ formula and by the negation of a $\Sigma_1$ formula.
-
-:::solution
-By :ref{#cor-sigma1-ce}, a set defined by a $\Sigma_1$ formula is c.e., and a set defined by the negation of a $\Sigma_1$ formula is co-c.e.; a set that is both is computable (:ref{#prop-computable-iff-ce-coce}). The converse is the second statement of the corollary.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-true-sigma1 difficulty=2 objective="Show that truth for $\Sigma_1$ sentences is $\Sigma^0_1$-complete, by evaluating bounded sentences and arithmetizing the halting set."}
 Show that the set of codes of true $\Sigma_1$ sentences is $\Sigma^0_1$-complete.
 
 :::solution
@@ -199,3 +189,73 @@ The β-function and the representation of recursive functions in arithmetic are 
 - H. Rogers, *Theory of Recursive Functions and Effective Computability*, McGraw-Hill, 1967.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.4.
 - B. Monin and L. Patey, *Computability theory*, chapter *Formal interlude*.
+
+:::::exercises
+::::exercise{#ex-computable-sigma1 difficulty=1 objective="Characterize the computable sets by $\Sigma_1$ definitions of the set and of its complement."}
+Show that a set is computable if and only if it is defined both by a $\Sigma_1$ formula and by the negation of a $\Sigma_1$ formula.
+
+:::solution
+By :ref{#cor-sigma1-ce}, a set defined by a $\Sigma_1$ formula is c.e., and a set defined by the negation of a $\Sigma_1$ formula is co-c.e.; a set that is both is computable (:ref{#prop-computable-iff-ce-coce}). The converse is the second statement of the corollary.
+:::
+::::
+
+::::exercise{#ex-bounded-definitions difficulty=1 objective="Write bounded formulas for basic arithmetic relations, choosing the bounds of the quantifiers."}
+Write bounded formulas defining in $\nat$ the following relations, where $1$ abbreviates the numeral $S(0)$.
+
+1. $x \leq y$.
+2. $x$ divides $y$.
+3. $x$ is prime.
+4. $x$ is a power of $2$.
+
+:::solution
+1. $x < y \vee x = y$.
+2. $\exists q < S(y)\ (q \cdot x = y)$. If $x$ divides $y$, then $y = q x$ for some $q$; if $y = 0$, take $q = 0$; if $y > 0$, then $x \geq 1$ and $q \leq y$. So the bound $q < S(y)$ loses no witness.
+3. $1 < x \wedge \forall u < x\ \forall v < x\ \neg (u \cdot v = x)$. If $x > 1$ is composite, $x = u v$ with $1 < u, v < x$. Conversely, if $x = u v$ with $u, v < x$, then $u, v \geq 2$ (if $u \leq 1$, then $u v = x$ forces $v = x$ or $x = 0$), so $x$ is composite. Hence the formula holds exactly for the primes.
+4. $0 < x \wedge \forall u < S(x)\ \forall v < S(x)\ \big( u \cdot v = x \to (u = 1 \vee \exists w < u\ (u = w + w)) \big)$: every divisor of $x$ other than $1$ is even. A positive integer is a power of $2$ if and only if it has no odd divisor larger than $1$, by uniqueness of the prime decomposition; and the divisors $u$ of $x > 0$, with their cofactors $v$, are at most $x$.
+:::
+::::
+
+::::exercise{#ex-beta-example difficulty=1 objective="Compute codes of a short sequence by the β-function, and compare with the pair given by the proof of Gödel's lemma."}
+Consider the sequence $(2, 1, 0)$.
+
+1. Check that $\beta(56, 2, i) = 2, 1, 0$ for $i = 0, 1, 2$.
+2. Show that no pair $(c, d)$ with $d \leq 1$ codes this sequence, and that $56$ is the least $c$ such that $(c, 2)$ codes it.
+3. Compute the value of $d$ given by the proof of :ref{#lem-beta}, and the least $c$ that works with it.
+
+:::solution
+1. The moduli are $1 + (i + 1) \cdot 2 = 3, 5, 7$, and $56 = 18 \cdot 3 + 2 = 11 \cdot 5 + 1 = 8 \cdot 7$.
+2. With $d = 0$ every modulus is $1$, and $\beta(c, 0, i) = 0$. With $d = 1$ the first modulus is $2$, so $\beta(c, 1, 0) \leq 1 < 2$. With $d = 2$, the conditions are $c \equiv 2 \pmod 3$, $c \equiv 1 \pmod 5$, $c \equiv 0 \pmod 7$; since $3, 5, 7$ are pairwise coprime, by the Chinese remainder theorem they determine $c$ modulo $105$, so $56$, which satisfies them and is less than $105$, is the least solution.
+3. The proof takes $m = \max(3, 2, 1, 0) = 3$ and $d = 3! = 6$. The moduli are $7, 13, 19$, and the conditions are $c \equiv 2 \pmod 7$, $c \equiv 1 \pmod{13}$, $c \equiv 0 \pmod{19}$. The multiples of $19$ that are $\equiv 1 \pmod{13}$ are those $19 k$ with $6 k \equiv 1 \pmod{13}$, that is $k \equiv 11 \pmod{13}$, which gives $c \equiv 209 \pmod{247}$. Then $209 + 247 j \equiv 6 + 2 j \pmod 7$, which is $2$ for $j \equiv 5 \pmod 7$. So $c = 209 + 5 \cdot 247 = 1444$, the least solution modulo $7 \cdot 13 \cdot 19 = 1729$. Check: $1444 = 206 \cdot 7 + 2 = 111 \cdot 13 + 1 = 76 \cdot 19$. The proof of the lemma aims at a uniform argument, not at small codes.
+:::
+::::
+
+::::exercise[Truth at each level]{#ex-true-sigma-n difficulty=2 objective="Show that truth for prenex sentences with n quantifier alternations is $\Sigma^0_n$-complete, and derive Tarski's theorem again."}
+For $n \geq 1$, call a sentence **strictly $\Sigma_n$** if it is of the form $\exists y_1\ \forall y_2 \cdots Q y_n\ \theta$, with $n$ single alternating quantifiers and $\theta$ bounded. Let $\mathrm{Tr}_n$ be the set of codes of the true strictly $\Sigma_n$ sentences.
+
+1. Show that $\mathrm{Tr}_n$ is $\Sigma^0_n$-complete.
+2. Deduce that $\mathrm{True}$ is not $\Sigma^0_n$ for any $n$.
+
+:::solution
+1. *Upper bound.* The set $S_n$ of codes of strictly $\Sigma_n$ sentences is computable, and so is the function that sends the code of $\exists y_1 \cdots Q y_n\ \theta$ and integers $m_1, \dots, m_n$ to the code of the bounded sentence $\theta(\bar m_1, \dots, \bar m_n)$ (with value the code of $0 = S(0)$ when the first argument is not in $S_n$). The truth of a bounded sentence is decidable, uniformly in its code, as in :ref{#ex-true-sigma1}. Since every element of $\nat$ is the value of a numeral, a sentence $\exists y\ \varphi(y)$ is true if and only if $\varphi(\bar m)$ is true for some $m$, and similarly for $\forall$. Hence $e \in \mathrm{Tr}_n$ if and only if $e \in S_n$ and $\exists m_1\ \forall m_2 \cdots Q m_n$ the bounded sentence computed from $(e, m_1, \dots, m_n)$ is true: a computable relation preceded by $n$ alternating quantifiers, so $\mathrm{Tr}_n$ is $\Sigma^0_n$.
+
+   *Lower bound.* Let $A$ be $\Sigma^0_n$. By :ref{#thm-definable-arithmetic}, $A$ is defined by a formula $\exists y_1\ \forall y_2 \cdots Q y_n\ \varphi(x, \vec y)$ with $\varphi$ a $\Sigma_1$ formula $\exists \vec z\ \eta$, $\eta$ bounded, if $n$ is odd, and the negation of one if $n$ is even. If $n$ is odd, $Q$ is $\exists$, and in $\nat$
+$$
+\exists y_n\ \exists \vec z\ \eta \iff \exists w\ \exists y_n < w\ \exists z_1 < w \cdots \exists z_k < w\ \eta,
+$$
+   with $w$ a new variable: take $w$ larger than the witnesses. If $n$ is even, $Q$ is $\forall$, and $\forall y_n\ \neg \exists \vec z\ \eta$ is equivalent to $\forall w\ \forall y_n < w\ \forall z_1 < w \cdots \forall z_k < w\ \neg \eta$. In both cases $A$ is defined by a strictly $\Sigma_n$ formula $\psi(x)$, obtained by replacing $Q y_n\ \varphi$ by the formula with the single quantifier on $w$. Then $x \in A \iff \ulcorner \psi(\bar x) \urcorner \in \mathrm{Tr}_n$, and $x \mapsto \ulcorner \psi(\bar x) \urcorner$ is computable.
+2. $\mathrm{Tr}_{n+1} = \mathrm{True} \cap S_{n+1}$. If $\mathrm{True}$ were $\Sigma^0_n$, then $\mathrm{Tr}_{n+1}$ would be $\Sigma^0_n$, as the intersection with a computable set, hence $\Pi^0_{n+1}$. But a $\Sigma^0_{n+1}$-complete set is not $\Pi^0_{n+1}$, since $\emptyset^{(n+1)}$ reduces to it and is not $\Pi^0_{n+1}$ (:ref{#cor-hierarchy-strict}).
+:::
+::::
+
+::::exercise{#ex-incompleteness-pi1 difficulty=2 objective="Find the unprovable true sentences of the incompleteness theorem among the negations of $\Sigma_1$ sentences."}
+Let $T$ be as in :ref{#cor-incompleteness}: a set of sentences true in $\nat$ whose set of theorems is c.e. Show that some true sentence of the form $\neg \sigma$, with $\sigma$ a $\Sigma_1$ sentence, is not a theorem of $T$.
+
+:::solution
+By :ref{#cor-sigma1-ce}, there is a $\Sigma_1$ formula $\psi(e, x)$ defining the relation $x \in W_e$. Let $\sigma_e$ be the $\Sigma_1$ sentence $\psi(\bar e, \bar e)$, so that $\sigma_e$ is true if and only if $e \in \emptyset'$. The map $e \mapsto \ulcorner \neg \sigma_e \urcorner$ is computable.
+
+Suppose that every true sentence $\neg \sigma_e$ is a theorem of $T$. Since the theorems of $T$ are true, $e \notin \emptyset' \iff \neg \sigma_e \text{ is true} \iff \neg \sigma_e$ is a theorem of $T$. The set of theorems is c.e., so $\{ e : \neg \sigma_e \text{ is a theorem} \}$ is c.e., as the preimage of a c.e. set by a computable function. Then $\nat \setminus \emptyset'$ would be c.e., and $\emptyset'$ computable: a contradiction.
+
+The sentence $\neg \sigma_e$ states that the computation $\Phi_e(e)$ does not halt. So the unprovable true sentences can be chosen of a very simple form, equivalent in $\nat$ to $\forall s$ followed by a bounded formula.
+:::
+::::
+:::::

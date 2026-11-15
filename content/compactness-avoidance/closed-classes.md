@@ -42,6 +42,14 @@ If a problem admits constant-bound trace avoidance, it admits PA avoidance.
 Let $D \leq_T Z$ with $Z$ not PA relative to $D$, and $X \leq_T Z$ an instance. By :ref{#lem-trace-reduction} with $W = Z$, the class $\mathcal C = \mathrm{DNC}_2^D$ has no $Z$-computable c.b. trace. So some solution $Y$ is such that $\mathcal C$ has no $(Z \oplus Y)$-computable c.b. trace. If $Z \oplus Y$ were PA relative to $D$, it would compute a member of $\mathcal C$, hence a $1$-trace.
 :::
 
+::::exercise{#ex-singleton-trace difficulty=1 objective="Show that singletons of non-computable sets have no computable c.b. trace, and deduce that c.b. trace avoidance implies cone avoidance."}
+Let $C$ be a set with $C \not\leq_T Z$. Show that $\{ C \}$ has no $Z$-computable c.b. trace. Deduce that constant-bound trace avoidance implies cone avoidance.
+
+:::solution
+Let $(F_n)$ be a $Z$-computable $k$-trace of $\{ C \}$, and $T$ the set of strings $\tau$ with $\tau \uh m \in F_m$ for every $m \leq |\tau|$. It is a $Z$-computable tree with at most $k$ strings of each length, and $C$ is a path of $T$, since $C \uh m \in F_m$ for every $m$. A tree with at most $k$ strings of each length has at most $k$ paths. So $C$ is an isolated path of $T$, and is $Z$-computable by :ref{#prop-isolated-computable} relativized, a contradiction. If $\mathsf P$ admits c.b. trace avoidance, $C \not\leq_T Z$ and $X \leq_T Z$, a solution $Y$ such that $\{ C \}$ has no $(Z \oplus Y)$-computable c.b. trace satisfies $C \not\leq_T Z \oplus Y$.
+:::
+::::
+
 ## Liu's lemma for blocks
 
 The proofs of c.b. trace avoidance follow those of PA avoidance, with finite sets of strings of one length in place of valuations. A **block** of length $n$ is a finite set of strings of length $n$, coded together with $n$; let $\mathcal B_n$ be the finite set of blocks of length $n$. For a closed class $\mathcal C$, the block $F \in \mathcal B_n$ is **$\mathcal C$-correct** if it is the set of the strings of length $n$ that are prefixes of members of $\mathcal C$.
@@ -130,17 +138,6 @@ In the first case of the proof of :ref{#lem-trace-reduction}, why does the restr
   The restriction of a dead string may be alive; only the live strings matter.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $C$ be a set with $C \not\leq_T Z$. Show that $\{ C \}$ has no $Z$-computable c.b. trace. Deduce that constant-bound trace avoidance implies cone avoidance.
-
-:::solution
-Let $(F_n)$ be a $Z$-computable $k$-trace of $\{ C \}$, and $T$ the set of strings $\tau$ with $\tau \uh m \in F_m$ for every $m \leq |\tau|$. It is a $Z$-computable tree with at most $k$ strings of each length, and $C$ is a path of $T$, since $C \uh m \in F_m$ for every $m$. A tree with at most $k$ strings of each length has at most $k$ paths. So $C$ is an isolated path of $T$, and is $Z$-computable by :ref{#prop-isolated-computable} relativized, a contradiction. If $\mathsf P$ admits c.b. trace avoidance, $C \not\leq_T Z$ and $X \leq_T Z$, a solution $Y$ such that $\{ C \}$ has no $(Z \oplus Y)$-computable c.b. trace satisfies $C \not\leq_T Z \oplus Y$.
-:::
-::::
-
-
 ## Notes and references
 
 Constant-bound traces, the lemma on disperse sets and the abstract theorem are from the section *Avoiding closed classes* of the chapter *Compactness avoidance* of Patey's monograph, where the lemma is attributed to Liu (2015); Liu calls the traces constant-bound enumerations. Liu proved in this paper that Ramsey's theorem for pairs admits the avoidance of closed classes with no computable constant-bound enumeration, and deduced that $\mathsf{RT}^2_2$ does not imply $\mathsf{WWKL}_0$ (Hirschfeldt, *Slicing the Truth*, Theorem 6.72). :ref{#lem-trace-reduction} solves two exercises of the monograph; the induction on $k$ given here is not uniform. The bound $K(n) \leq 2 \log n + O(1)$ is given by the prefix-free code that writes the length of the binary expansion of $n$ in unary before the expansion itself.
@@ -148,3 +145,63 @@ Constant-bound traces, the lemma on disperse sets and the abstract theorem are f
 - L. Liu, *Cone avoiding closed sets*, Transactions of the American Mathematical Society 367 (2015), 1609–1630; arXiv:1602.03777.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2015, Section 6.7.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, section *Avoiding closed classes*.
+
+:::::exercises
+::::exercise[Disperse sets]{#ex-disperse-examples difficulty=1 objective="Decide on examples whether a set of blocks is $k$-disperse, including the role of the empty block."}
+Let $n \geq 1$ and $k \geq 1$. Show that the set of the $2^n$ singleton blocks of length $n$ is $k$-disperse if and only if $k < 2^n$, and that every set of blocks of length $n$ containing the empty block is $k$-disperse for every $k$. What does the second fact mean in case 2 of the proof of :ref{#thm-finitely-merging-trace}?
+
+:::solution
+Let $V$ be the set of the singletons. The intersection of a part is non-empty if and only if the part has at most one element: two distinct singletons have empty intersection, and the empty part has intersection the set of all strings of length $n$. A partition of $V$ into $k$ parts all of which have at most one element exists if and only if $2^n \leq k$. So $V$ is $k$-disperse if and only if $k < 2^n$.
+
+If $\emptyset \in V$, in every partition of $V$ the part containing $\emptyset$ has empty intersection, so $V$ is $k$-disperse for every $k$. In the proof, $\varphi(\emptyset)$ is the sentence "$\Phi^{Z \oplus G}_e(n)$ converges", since every value is disjoint from the empty block. If $\emptyset \notin U$, then $\mathcal B_n \setminus U$ is $k$-disperse, and forcing $\neg \varphi(\emptyset)$ already forces $\Phi^{Z \oplus G}_e(n)$ to diverge: the merging of the other negations is not needed.
+:::
+::::
+
+::::exercise[Traces and the pigeonhole principle]{#ex-trace-pigeonhole difficulty=2 objective="Turn a $k$-trace into a $1$-trace with one instance of the pigeonhole principle for $k$ colors."}
+Let $\mathcal C$ be a closed class and $(F_n)$ a $Z$-computable $k$-trace of $\mathcal C$. Show that there is a coloring $c : \nat \to k$ such that for every infinite set $H$ homogeneous for $c$, $Z \oplus H$ computes a $1$-trace of $\mathcal C$.
+
+:::solution
+List the strings of each $F_n$ in lexicographic order as $\rho_{n,0}, \rho_{n,1}, \dots$, and let $c(n)$ be the least $j$ such that $\rho_{n,j}$ is the prefix of a member of $\mathcal C$; it exists since $(F_n)$ is a trace, and $c(n) < k$. The coloring $c$ is in general not computable. Let $H$ be infinite and homogeneous with color $j$. For each $m$, let $n$ be the least element of $H$ with $n \geq m$, and let $E_m = \{ \rho_{n,j} \uh m \}$. Since $c(n) = j$, the string $\rho_{n,j}$ exists and is the prefix of a member of $\mathcal C$, and so is its restriction to $m$. The sequence $(E_m)$ is a $1$-trace of $\mathcal C$, computable in $Z \oplus H$. So the avoidance of c.b. traces by the pigeonhole principle only makes sense for classes with no computable c.b. trace, as in :ref{#def-cb-trace}.
+:::
+::::
+
+::::exercise[Homogeneity in the trace reduction]{#ex-trace-needs-homogeneity difficulty=2 objective="Build a $\Pi^0_1$ class with a computable $1$-trace and no computable member, to see why the second part of the trace reduction needs homogeneity."}
+Let $T$ be a computable tree with $[T] = \mathrm{DNC}_2$, the class relative to $\emptyset$, and $\sigma_n$ the leftmost string of $T$ of length $n$. Let $T''$ be the set of the strings $\tau$ such that $\tau \in T$, or $\tau = \sigma_n \tau'$ for some $n$ with $\tau' \in T$. Show that $\mathcal C = [T'']$ is a $\Pi^0_1$ class with a computable $1$-trace and no computable member. Which step of :ref{#lem-trace-reduction} fails for $\mathcal C$?
+
+:::solution
+*$T''$ is a computable tree.* Whether $\tau \in T''$ is decided by checking $\tau \in T$ and, for each $n \leq |\tau|$, whether $\sigma_n \preceq \tau$ and the rest of $\tau$ is in $T$. If $\tau = \sigma_n \tau'$ with $\tau' \in T$ and $\rho \preceq \tau$, then either $|\rho| \leq n$ and $\rho \preceq \sigma_n \in T$, or $\rho = \sigma_n \rho'$ with $\rho' \preceq \tau'$, so $\rho' \in T$; prefixes of strings of $T$ are in $T$. So $T''$ is closed under prefixes.
+
+*The members.* If $P \in \mathrm{DNC}_2$, then $P$ and every $\sigma_n P$ are paths of $T''$. Conversely, let $X$ be a path. If infinitely many prefixes of $X$ are in $T$, all are, and $X \in \mathrm{DNC}_2$. Otherwise every long enough prefix has the form $\sigma_n \tau'$ with $\tau' \in T$. If one $n$ occurs for infinitely many prefixes, then $X = \sigma_n P$, where all prefixes of $P$ are in $T$, so $P \in \mathrm{DNC}_2$. If not, $\sigma_n \preceq X$ for infinitely many $n$, and $X \uh n = \sigma_n \in T$ for these $n$, so $X \in \mathrm{DNC}_2$. In all cases $X$ computes a member of $\mathrm{DNC}_2$, so it is not computable.
+
+*The trace.* The sequence $(\{ \sigma_n \})_n$ is computable, and $\sigma_n$ is a prefix of the member $\sigma_n P$, for any $P \in \mathrm{DNC}_2$. So it is a computable $1$-trace of $\mathcal C$. The step that fails is the last one: the function $f(x) = \sigma_{x+1}(x)$ is computable, so it is not a member of $\mathcal C$. For $\mathrm{DNC}_2^D$, a string that is the prefix of some member is correct at each of its positions, and these bits can be put together into a member: this is homogeneity. For $\mathcal C$, the bit of $\sigma_{x+1}$ at $x$ is a bit of the member $\sigma_{x+1} P$, and bits of different members need not form a member.
+:::
+::::
+
+::::exercise[Traces and the jump]{#ex-cb-trace-delta2 difficulty=2 objective="Apply the abstract theorem for finitely merging questions to the forcing that makes an arbitrary set $\Delta^0_2$."}
+Let $\mathcal C$ be a closed class with no $Z$-computable c.b. trace, and $A$ an arbitrary set. Show that there is a set $G$ with $A \leq_T G'$ such that $\mathcal C$ has no $(Z \oplus G)$-computable c.b. trace.
+
+:::solution
+Use the notion of forcing and the question of :ref{#thm-delta2-pa-avoidance}, relative to $Z$. The question is $\Sigma^0_1(\{ Z \})$-preserving, and if $(\sigma, m) \mathrel{?{\nvdash}} \varphi(y)$ for every $y$ in a finite set $R$, then $(\sigma, m)$ itself forces every $\neg \varphi(y)$, $y \in R$, as shown in the proof of :ref{#thm-delta2-cone-avoidance}; so the question is finitely merging. With $\mathcal M = \{ Z \}$, no member of $\mathcal M$ computes a c.b. trace of $\mathcal C$, and :ref{#thm-finitely-merging-trace} shows that $\mathcal C$ has no $(Z \oplus G)$-computable c.b. trace for every sufficiently generic $G$. The density argument of :ref{#thm-delta2-cone-avoidance} gives $A \leq_T G'$ as well. As in :ref{#cor-strong-pa-delta2}, it follows that a strong form of c.b. trace avoidance for arbitrary instances reduces to the instances $X \leq_T Z'$.
+:::
+::::
+
+::::exercise[A family of weakness properties]{#ex-cb-trace-weakness difficulty=1 objective="Express c.b. trace avoidance as the preservation of weakness properties, and deduce its closure under ω-reducibility."}
+For a closed class $\mathcal C$, let $\mathcal W_{\mathcal C}$ be the class of the sets $Z$ such that $\mathcal C$ has no $Z$-computable c.b. trace. Show that $\mathcal W_{\mathcal C}$ is a weakness property, that a problem admits c.b. trace avoidance if and only if it preserves every $\mathcal W_{\mathcal C}$, and that if $\mathsf P \leq_\omega \mathsf Q$ and $\mathsf Q$ admits c.b. trace avoidance, so does $\mathsf P$.
+
+:::solution
+If $Y \leq_T Z$ and $\mathcal C$ has a $Y$-computable c.b. trace, this trace is $Z$-computable; so $Z \in \mathcal W_{\mathcal C}$ implies $Y \in \mathcal W_{\mathcal C}$. The definition of c.b. trace avoidance (:ref{#def-cb-trace}) says: for every $Z \in \mathcal W_{\mathcal C}$ and every instance $X \leq_T Z$, some solution $Y$ has $Z \oplus Y \in \mathcal W_{\mathcal C}$; this is the preservation of $\mathcal W_{\mathcal C}$ (:ref{#def-weakness}), for every closed $\mathcal C$. The last statement follows from :ref{#ex-preservation-downward}.
+:::
+::::
+
+::::exercise[Complex strings give DNC functions]{#ex-complex-trace-dnc difficulty=2 objective="Show with prefix-free complexity that a $1$-trace of the class $\mathcal R_c$ computes a DNC function."}
+Let $\mathcal R_c$ be the class of :ref{#prop-random-no-trace}, and $(\{ \rho_n \})_n$ a $1$-trace of $\mathcal R_c$ computable in a set $W$. Show that $W$ computes a DNC function.
+
+:::solution
+Each $\rho_n$ is the prefix of length $n$ of a member of $\mathcal R_c$, so $K(\rho_n) \geq n - c$. Let $g(e)$ be the code of the string $\rho_e$; it is computable in $W$. Consider the prefix-free machine that, on an input $p$, runs the universal prefix-free machine on $p$; if it outputs a number $e$, it computes $\Phi_e(e)$ and, if this is the code of a string, outputs that string. If $\Phi_e(e) = g(e)$, this machine outputs $\rho_e$ on a shortest description of $e$, so
+$$
+e - c \leq K(\rho_e) \leq K(e) + O(1) \leq 2 \log e + O(1),
+$$
+which fails for $e$ larger than some $e_0$. So $g(e) \neq \Phi_e(e)$ for every $e > e_0$ at which $\Phi_e(e)$ converges. Changing $g$ at the finitely many $e \leq e_0$ to a value different from $\Phi_e(e)$, when this converges, gives a $W$-computable DNC function; the construction is not uniform. The converse fails: the next lesson gives a computable coloring all of whose infinite homogeneous sets compute DNC functions, and by :ref{#thm-liu-closed-classes} one of them computes no c.b. trace of $\mathcal R_c$, which has no computable one by :ref{#prop-random-no-trace}.
+:::
+::::
+:::::

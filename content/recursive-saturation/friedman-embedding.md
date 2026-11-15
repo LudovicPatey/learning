@@ -67,9 +67,7 @@ Every countable non-standard model of $\mathrm I\Sigma_1$ is isomorphic to a pro
 
 Such cuts are not definable, by :ref{#prop-cuts-induction}. Both conditions of the theorem are needed. A countable Scott set $\mathcal X$ contains completions $T_1 \ni \neg \mathrm{Con}(\mathrm{PA})$ and $T_2 \ni \mathrm{Con}(\mathrm{PA})$ of $\mathrm{PA}$ (first step of the proof of :ref{#thm-scott-converse}), and that theorem gives $M \models T_1$ and $N \models T_2$ with standard system $\mathcal X$; the $\Sigma_1$ sentence $\neg \mathrm{Con}(\mathrm{PA})$ holds in $M$ and not in $N$. Models of one completion with different standard systems (:ref{#cor-bf-classification}) show that the first condition is needed.
 
-## Exercises
-
-::::exercise{difficulty=2}
+::::exercise{#ex-fe-below difficulty=2 objective="Characterize the elements below which a model embeds into itself as an initial segment."}
 Let $M$ be a countable non-standard model of $\mathrm I\Sigma_1$ and $a \in M$. Show that $M$ is isomorphic to a proper initial segment of itself lying below $a$ if and only if every $\Sigma_1$ sentence true in $M$ has witnesses below $a$.
 
 :::solution
@@ -86,3 +84,53 @@ Friedman (1973) proved :ref{#thm-fe-friedman} for models of $\mathrm{PA}$; the e
 - J.-P. Ressayre, *Nonstandard universes with strong embeddings, and their finite approximations*, in Logic and Combinatorics, Contemporary Mathematics 65, American Mathematical Society, 1987, 333–358.
 - C. Dimitracopoulos and J. Paris, *A note on a theorem of H. Friedman*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 34 (1988), 13–17.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991.
+
+:::::exercises
+::::exercise{#ex-fe-decreasing-chain difficulty=1 objective="Iterate an initial self-embedding to obtain a strictly decreasing sequence of initial segments isomorphic to the model."}
+Let $M$ be a countable non-standard model of $\mathrm I\Sigma_1$. Show that there are proper initial segments $M = I_0 \supsetneq I_1 \supsetneq I_2 \supsetneq \cdots$ of $M$, each isomorphic to $M$.
+
+:::solution
+By :ref{#cor-fe-self}, there is an embedding $f : M \to M$ whose image $f[M]$ is a proper initial segment. Let $I_k = f^k[M]$, the image of the $k$-th iterate, which is isomorphic to $M$ through $f^k$.
+
+First, $f$ maps every initial segment $J$ of $M$ onto an initial segment of $M$: if $y < f(x)$ with $x \in J$, then $y \in f[M]$, since $f[M]$ is an initial segment, so $y = f(x')$, and $x' < x$ since $f$ preserves the order and is injective; so $x' \in J$ and $y \in f[J]$. By induction on $k$, each $I_{k+1} = f[I_k]$ is an initial segment. Finally $I_1 \subsetneq I_0$, and applying the injective map $f^k$ gives $I_{k+1} = f^k[I_1] \subsetneq f^k[I_0] = I_k$.
+:::
+::::
+
+::::exercise{#ex-fe-fix-element difficulty=2 objective="Start the back-and-forth of Friedman's theorem from a non-empty pair of tuples, to fix a given element."}
+Let $M$ be a countable non-standard model of $\mathrm I\Sigma_1$ and $b \in M$. Show that there is an embedding $f : M \to M$ whose image is a proper initial segment of $M$ and such that $f(b) = b$. Deduce that this image contains every element $x \leq b$.
+
+:::solution
+We start the construction of the proof of :ref{#thm-fe-friedman}, with $N = M$, from the tuples $\bar r = \bar s = (b)$ instead of the empty tuples. Let
+$$
+q(v) = \{ \exists \bar x < v\ \theta(\bar x, b) : M \models \exists \bar x\ \theta(\bar x, b),\ \theta \text{ bounded} \}.
+$$
+Its set of codes is computable from the set of $\Sigma_1$ formulas true of $b$, which belongs to $\mathrm{SSy}(M)$ by :ref{#lem-fe-types-coded}; so $q$ is coded. A finite part is satisfied by any $v$ above chosen witnesses. Its formulas are bounded, with the parameter $b$, so :ref{#lem-fe-realize} (1) gives $d$ realizing $q$. Then $(b)$ and $(b)$ satisfy the inductive condition $(*)$ with $d$: this is the choice of $q$.
+
+From there, the forth and back steps of the proof apply unchanged, and the embedding $f$ they produce maps the first entry $b$ of $\bar r$ to the first entry $b$ of $\bar s$. Its image is an initial segment below $d$, hence proper. It contains $f(b) = b$, so it contains every $x \leq b$.
+:::
+::::
+
+::::exercise{#ex-fe-not-symmetric difficulty=2 objective="Use the criterion of Friedman's theorem to show that embeddability as an initial segment is not symmetric." lessons="recursively-saturated-models"}
+Give countable non-standard models $M$ and $N$ of $\mathrm{PA}$ such that $M$ is isomorphic to a proper initial segment of $N$, while $N$ is isomorphic to no initial segment of $M$.
+
+:::solution
+By :ref{#thm-rs-existence}, the theory of $\nat$ has a countable recursively saturated model $M$; it is non-standard, and $\mathcal X = \mathrm{SSy}(M)$ is a countable Scott set (:ref{#cor-ssy-scott-set}) containing $\mathrm{Th}(M) = \mathrm{Th}(\nat)$ (:ref{#prop-rs-realized-coded}). The theory $\mathrm{PA} + \neg \mathrm{Con}(\mathrm{PA})$ is consistent, by Gödel's second incompleteness theorem, and computable, so $\mathcal X$ contains a completion $T$ of it (first step of the proof of :ref{#thm-scott-converse}), and that theorem gives a countable $N \models T$ with $\mathrm{SSy}(N) = \mathcal X$; it is non-standard since $T \neq \mathrm{Th}(\nat)$.
+
+Every $\Sigma_1$ sentence true in $M$ is true in $\nat$, since $M \equiv \nat$, hence true in $N$ (:ref{#thm-sigma1-complete}). By :ref{#thm-fe-friedman}, $M$ is isomorphic to a proper initial segment of $N$. The $\Sigma_1$ sentence $\neg \mathrm{Con}(\mathrm{PA})$ is true in $N$ and false in $M$, so $\mathrm{Th}_{\Sigma_1}(N) \not\subseteq \mathrm{Th}_{\Sigma_1}(M)$, and by the same theorem $N$ is isomorphic to no proper initial segment of $M$. It is not isomorphic to $M$ itself either, since the theories differ.
+:::
+::::
+
+::::exercise{#ex-fe-arbitrarily-small difficulty=2 objective="Characterize the models that embed into themselves as initial segments below every non-standard element."}
+Let $M$ be a countable non-standard model of $\mathrm I\Sigma_1$. Show that $M$ is isomorphic to a proper initial segment of itself lying below $a$, for every non-standard $a \in M$, if and only if every $\Sigma_1$ sentence true in $M$ is true in $\nat$. Give an example of such a model.
+
+:::solution
+By :ref{#ex-fe-below}, the first condition says that for every non-standard $a$, every $\Sigma_1$ sentence true in $M$ has witnesses below $a$.
+
+Suppose every $\Sigma_1$ sentence true in $M$ is true in $\nat$. If $M \models \exists \bar x\ \theta(\bar x)$ with $\theta$ bounded, some standard tuple $\bar n$ satisfies $\theta$ in $\nat$, hence in $M$ (:ref{#thm-sigma1-complete}), and $\bar n < a$ for every non-standard $a$.
+
+Conversely, let $\exists \bar x\ \theta(\bar x)$ be true in $M$, with witnesses below every non-standard element. The bounded formula $\psi(y) \equiv \exists \bar x < y\ \theta(\bar x)$ holds of every non-standard $y$. By the least number principle for bounded formulas, there is a least $y_0$ with $M \models \psi(y_0)$. If $y_0$ were non-standard, $y_0 - 1$ would be non-standard and satisfy $\psi$, contradicting minimality. So $y_0$ is standard, $M \models \theta(\bar n)$ for some standard $\bar n < y_0$, and $\nat \models \theta(\bar n)$ by :ref{#lem-delta0-absolute}. So the sentence is true in $\nat$.
+
+Every countable non-standard model of $\mathrm{Th}(\nat)$, for instance one given by :ref{#thm-rs-existence}, satisfies the condition.
+:::
+::::
+:::::

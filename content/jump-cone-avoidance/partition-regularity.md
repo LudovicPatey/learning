@@ -116,15 +116,7 @@ Where is the decreasing hypothesis used in :ref{#lem-decreasing-large}?
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that the union of any family of partition regular classes is partition regular, and that the intersection of two partition regular classes need not be partition regular, nor even large.
-
-:::solution
-The union is non-empty and upward closed; if $X$ belongs to a member $\mathcal P$ of the family, every $2$-cover of $X$ has a part in $\mathcal P$, hence in the union. For the intersection, let $Z$ be infinite and coinfinite: $\mathcal L_Z$ and $\mathcal L_{\overline Z}$ are partition regular, but their intersection does not contain $Z$ or $\overline Z$, which cover $\nat$, so it is not large.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-pr-large-trace difficulty=2 objective="Restrict a partition regular class to the sets meeting one of its members infinitely, and see that largeness survives."}
 Let $\mathcal P$ be a non-trivial partition regular class and $X \in \mathcal P$. Show that $\mathcal P \cap \mathcal L_X$ is large.
 
 :::solution
@@ -132,18 +124,80 @@ It is upward closed. Let $Y_0, \dots, Y_{k-1}$ cover $\nat$. The sets $Y_i \cap 
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-pr-largest-subclass difficulty=2 objective="Characterize the largest partition regular subclass of a large class through the largeness of its traces."}
 Let $\mathcal A$ be a large class all of whose members are infinite. Show that $\mathcal L(\mathcal A) = \{ X : \mathcal A \cap \mathcal L_X \text{ is large} \}$.
 
 :::solution
-If $X \in \mathcal L(\mathcal A)$, then $\mathcal L(\mathcal A)$ is non-trivial, being contained in $\mathcal A$, and the previous exercise applied to $\mathcal L(\mathcal A)$ shows that $\mathcal L(\mathcal A) \cap \mathcal L_X$ is large; so is the larger class $\mathcal A \cap \mathcal L_X$. Conversely, suppose $\mathcal A \cap \mathcal L_X$ is large, and let $Y_0, \dots, Y_{k-1}$ cover $X$. The sets $Y_0, \dots, Y_{k-1}, \overline X$ cover $\nat$, so one of them is in $\mathcal A \cap \mathcal L_X$. It is not $\overline X$, which is disjoint from $X$. So some $Y_i$ is in $\mathcal A$, and $X \in \mathcal L(\mathcal A)$.
+If $X \in \mathcal L(\mathcal A)$, then $\mathcal L(\mathcal A)$ is non-trivial, being contained in $\mathcal A$, and :ref{#ex-pr-large-trace} applied to $\mathcal L(\mathcal A)$ shows that $\mathcal L(\mathcal A) \cap \mathcal L_X$ is large; so is the larger class $\mathcal A \cap \mathcal L_X$. Conversely, suppose $\mathcal A \cap \mathcal L_X$ is large, and let $Y_0, \dots, Y_{k-1}$ cover $X$. The sets $Y_0, \dots, Y_{k-1}, \overline X$ cover $\nat$, so one of them is in $\mathcal A \cap \mathcal L_X$. It is not $\overline X$, which is disjoint from $X$. So some $Y_i$ is in $\mathcal A$, and $X \in \mathcal L(\mathcal A)$.
 :::
 ::::
 
 ## Notes and references
 
-Partition regularity is a classical notion of Ramsey theory. Its use in computability theory, the notions of large class and of the largest partition regular subclass $\mathcal L(\mathcal A)$, and :ref{#lem-decreasing-large} are due to Monin and Patey (*Pigeons do not jump high*, 2019). The exercises are from Monin and Patey (2024), who also prove that measurable partition regular classes have measure $1$, and that partition regular classes with the Baire property are comeager. The presentation follows the subsection *Largeness* of the section *Partition regularity* of the chapter *Jump cone avoidance* of Patey's monograph.
+Partition regularity is a classical notion of Ramsey theory. Its use in computability theory, the notions of large class and of the largest partition regular subclass $\mathcal L(\mathcal A)$, and :ref{#lem-decreasing-large} are due to Monin and Patey (*Pigeons do not jump high*, 2019). :ref{#ex-pr-large-trace}, :ref{#ex-pr-largest-subclass}, :ref{#ex-pr-union-intersection} and :ref{#ex-pr-trace-not-regular} are adapted from exercises of the monograph, after Monin and Patey (2024) and Mimouni; Monin and Patey (2024) who also prove that measurable partition regular classes have measure $1$, and that partition regular classes with the Baire property are comeager. The presentation follows the subsection *Largeness* of the section *Partition regularity* of the chapter *Jump cone avoidance* of Patey's monograph.
 
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095.
 - B. Monin and L. Patey, *Partition genericity and pigeonhole basis theorems*, Journal of Symbolic Logic 89 (2024), 829–857.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Partition regularity*.
+
+:::::exercises
+::::exercise[Unions and intersections]{#ex-pr-union-intersection difficulty=1 objective="Check that partition regularity is preserved by unions and not by intersections."}
+Show that the union of any family of partition regular classes is partition regular, and that the intersection of two partition regular classes need not be partition regular, nor even large.
+
+:::solution
+The union is non-empty and upward closed; if $X$ belongs to a member $\mathcal P$ of the family, every $2$-cover of $X$ has a part in $\mathcal P$, hence in the union. For the intersection, let $Z$ be infinite and coinfinite: $\mathcal L_Z$ and $\mathcal L_{\overline Z}$ are partition regular, but their intersection does not contain $Z$ or $\overline Z$, which cover $\nat$, so it is not large.
+:::
+::::
+
+::::exercise[A trace that is not partition regular]{#ex-pr-trace-not-regular difficulty=1 objective="Show by an example that the trace of a partition regular class on one of its members is large but need not be partition regular."}
+Let $Z$ be the set of even numbers and $X$ the set of multiples of $3$. Show that $X \in \mathcal L_Z$ and that $\mathcal L_Z \cap \mathcal L_X$ is large but not partition regular.
+
+:::solution
+$X \cap Z$ is the set of multiples of $6$, which is infinite, so $X \in \mathcal L_Z$, and $\mathcal L_Z \cap \mathcal L_X$ is large by :ref{#ex-pr-large-trace}. Let $Y = (Z \setminus X) \cup (X \setminus Z)$. Then $Y \cap Z = Z \setminus X$, the even numbers not divisible by $3$, and $Y \cap X = X \setminus Z$, the odd multiples of $3$; both are infinite, so $Y \in \mathcal L_Z \cap \mathcal L_X$. The sets $Y_0 = Z \setminus X$ and $Y_1 = X \setminus Z$ cover $Y$. But $Y_0 \cap X = \emptyset$ and $Y_1 \cap Z = \emptyset$, so neither part belongs to $\mathcal L_Z \cap \mathcal L_X$.
+:::
+::::
+
+::::exercise[Ultrafilters]{#ex-pr-ultrafilter difficulty=2 objective="Identify the minimal partition regular classes with the ultrafilters, and see why a definable substitute for minimality is needed."}
+An **ultrafilter** is a class $\mathcal F$ of sets, non-empty, upward closed and closed under finite intersections, with $\emptyset \notin \mathcal F$, such that $Y \in \mathcal F$ or $\overline Y \in \mathcal F$ for every set $Y$. It is **principal** if it is $\{ X : n \in X \}$ for some $n$.
+
+1. Show that every ultrafilter is partition regular, and that it is non-trivial if and only if it is not principal.
+2. Show that a partition regular class $\mathcal P$ is minimal for inclusion among partition regular classes if and only if it is an ultrafilter.
+
+:::solution
+1. Let $\mathcal F$ be an ultrafilter, $X \in \mathcal F$ and $X \subseteq Y_0 \cup Y_1$. If neither $Y_i$ is in $\mathcal F$, then $\overline{Y_0}, \overline{Y_1} \in \mathcal F$, so $X \cap \overline{Y_0} \cap \overline{Y_1} = \emptyset$ is in $\mathcal F$, which is excluded. So $\mathcal F$ is partition regular. A principal ultrafilter contains $\{ n \}$, so it is trivial. Conversely, if $\mathcal F$ contains a finite set $F$, then $F \neq \emptyset$, and by partition regularity applied to its cover by singletons, some $\{ n \}$ is in $\mathcal F$. Then $\mathcal F \supseteq \{ X : n \in X \}$ by upward closure, and a set $X$ with $n \notin X$ is not in $\mathcal F$, since $X \cap \{ n \} = \emptyset$. So $\mathcal F$ is principal.
+2. Let $\mathcal F$ be an ultrafilter and $\mathcal Q \subseteq \mathcal F$ partition regular. Let $X \in \mathcal F$ and $Y \in \mathcal Q$. The sets $Y \cap X$ and $Y \setminus X$ cover $Y$, so one of them is in $\mathcal Q \subseteq \mathcal F$; it is not $Y \setminus X$, which is disjoint from $X \in \mathcal F$. So $Y \cap X \in \mathcal Q$, and $X \in \mathcal Q$ by upward closure. Hence $\mathcal Q = \mathcal F$, and $\mathcal F$ is minimal.
+
+Conversely, let $\mathcal P$ be minimal. For $X \in \mathcal P$, let $\mathcal P_X = \{ Y : Y \cap X \in \mathcal P \}$. It contains $X$, is upward closed, and is partition regular: if $Y \cap X \in \mathcal P$ and $Y \subseteq Y_0 \cup Y_1$, the sets $Y_0 \cap X$ and $Y_1 \cap X$ cover $Y \cap X$, so one of them is in $\mathcal P$. Moreover $\mathcal P_X \subseteq \mathcal P$ by upward closure. By minimality $\mathcal P_X = \mathcal P$: for $X, Y \in \mathcal P$, $Y \in \mathcal P_X$ gives $X \cap Y \in \mathcal P$. If $\emptyset \in \mathcal P$, then $\mathcal P$ is the class of all sets, which strictly contains the partition regular class $\{ X : 0 \in X \}$; so $\emptyset \notin \mathcal P$. Finally $\nat \in \mathcal P$, and $Y, \overline Y$ cover $\nat$, so one of them is in $\mathcal P$. So $\mathcal P$ is an ultrafilter.
+
+Non-principal ultrafilters exist by Zorn's lemma, but none of them has the Baire property (a classical fact, admitted here), so minimal non-trivial partition regular classes are of no use in an effective construction. The course replaces minimality by a minimality with respect to the $\Sigma^0_1(\mathcal M)$ classes of a countable ideal (:ref{to="jump-cone-avoidance/cohesive-classes"}).
+:::
+::::
+
+::::exercise[Many elements in exponential intervals]{#ex-pr-towers difficulty=2 objective="Prove the partition regularity of a $\Pi^0_2$ class by a pigeonhole argument on the parameter, and separate it from the class of infinite sets."}
+Let $\mathcal Q$ be the class of sets $X$ such that for every $n$ there is $x$ with $|X \cap [x, 2^x)| \geq n$. Show that $\mathcal Q$ is a non-trivial partition regular class. Let $t_0 = 1$ and $t_{k+1} = 2^{t_k}$; show that the infinite set $\{ t_k : k \in \nat \}$ is not in $\mathcal Q$.
+
+:::solution
+$\mathcal Q$ is upward closed, and $\nat \in \mathcal Q$, since $|[x, 2^x)| = 2^x - x$ is unbounded. A finite set $X$ satisfies $|X \cap [x, 2^x)| \leq |X|$ for every $x$, so it is not in $\mathcal Q$. Let $X \in \mathcal Q$ and $X \subseteq Y_0 \cup Y_1$. For each $n$, choose $x_n$ with $|X \cap [x_n, 2^{x_n})| \geq 2n$; one of $Y_0$, $Y_1$, call it $Y_{i_n}$, has at least $n$ elements in $[x_n, 2^{x_n})$. Some $i$ equals $i_n$ for infinitely many $n$. For every $n$ there is $n' \geq n$ with $i_{n'} = i$, and $Y_i$ has at least $n' \geq n$ elements in $[x_{n'}, 2^{x_{n'}})$. So $Y_i \in \mathcal Q$.
+
+Let $T = \{ t_k : k \in \nat \}$, an increasing sequence. For $x = 0$ the interval is empty. For $x \geq 1$, let $k$ be least with $x \leq t_k$; then $t_{k-1} < x$ if $k \geq 1$, and $2^x \leq 2^{t_k} = t_{k+1}$. So $T \cap [x, 2^x) \subseteq \{ t_k \}$ has at most one element, and $T \notin \mathcal Q$.
+:::
+::::
+
+::::exercise[Density classes]{#ex-pr-density difficulty=1 objective="Complete the verification of item 4 of the examples of partition regular classes."}
+Prove item 4 of :ref{#ex-partition-regular}: the class of sets of positive upper density and the class of sets $X$ with $\sum_{n \in X} 1/(n + 1) = \infty$ are non-trivial partition regular classes. Show that the second class contains the first, and that the set of squares is in neither.
+
+:::solution
+Write $d_n(X) = |X \cap \{0, \dots, n-1\}| / n$ and $\bar d(X) = \limsup_n d_n(X)$. If $X \subseteq Y$, then $d_n(X) \leq d_n(Y)$, so $\bar d(X) \leq \bar d(Y)$: the class is upward closed, and it contains $\nat$. If $X \subseteq Y_0 \cup Y_1$, then $d_n(X) \leq d_n(Y_0) + d_n(Y_1)$, and $\limsup (a_n + b_n) \leq \limsup a_n + \limsup b_n$; so $\bar d(X) > 0$ gives $\bar d(Y_i) > 0$ for some $i$. A finite set has upper density $0$. For the second class, $\sum_{n \in X} 1/(n+1) \leq \sum_{n \in Y_0} 1/(n+1) + \sum_{n \in Y_1} 1/(n+1)$, the class is upward closed, contains $\nat$ (harmonic series), and finite sets have finite sums.
+
+If $\bar d(X) > \varepsilon > 0$, there are infinitely many $n$ with $|X \cap [0, n)| \geq \varepsilon n$. For such $n$, at most $\varepsilon n / 2$ of these elements are below $\varepsilon n / 2$, so at least $\varepsilon n / 2$ of them lie in $[\varepsilon n / 2, n)$, and each contributes $1/(k+1) \geq 1/n$; the block $[\varepsilon n / 2, n)$ contributes at least $\varepsilon / 2$ to the sum. Choose such numbers $n_0 < n_1 < \cdots$ with $\varepsilon n_{j+1} / 2 \geq n_j$: the blocks are disjoint, and the sum diverges. The squares satisfy $d_n \leq (\sqrt n + 1)/n \to 0$ and $\sum_k 1/(k^2 + 1) < \infty$.
+:::
+::::
+
+::::exercise[Computing a largest partition regular subclass]{#ex-pr-largest-example difficulty=1 objective="Compute the largest partition regular subclass of the large class of the lesson that is not partition regular."}
+Let $Z$ be infinite and coinfinite, and $\mathcal A = \mathcal L_Z \cup \{ X : X \supseteq \overline Z \}$. Show that $\mathcal L(\mathcal A) = \mathcal L_Z$.
+
+:::solution
+$\mathcal L_Z$ is a partition regular subclass of $\mathcal A$, so $\mathcal L_Z \subseteq \mathcal L(\mathcal A)$ by :ref{#prop-largest-partition-regular}. Conversely, let $X \notin \mathcal L_Z$, so that $X \cap Z$ is finite. Split $X \cap \overline Z$ into two sets $W_0, W_1$, each different from $\overline Z$: if $X \cap \overline Z$ has at most one element, take it and $\emptyset$, which differ from the infinite set $\overline Z$; otherwise put one element in $W_0$ and the rest in $W_1$. The sets $X \cap Z$, $W_0$, $W_1$ cover $X$. None is in $\mathcal L_Z$: the first is finite, the others are disjoint from $Z$. None contains $\overline Z$: the first is disjoint from the non-empty set $\overline Z$, and $W_0, W_1$ are subsets of $\overline Z$ different from it. So this cover has no part in $\mathcal A$, and $X \notin \mathcal L(\mathcal A)$.
+:::
+::::
+:::::

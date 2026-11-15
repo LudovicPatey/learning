@@ -105,24 +105,7 @@ In (2 ⇒ 3), why does the set $W_v$ contain all the numbers $y \leq x_{s-1}$?
   This case uses only that $D_{\gamma(s)}$ has $s + 1$ elements and does not contain $x_s$.
 :::
 
-## Bounded DNC functions
-
-The PA degrees are the degrees of $\{0, 1\}$-valued DNC functions (:ref{#def-pa-degree}). More generally, for a non-decreasing computable function $b \geq 2$, a DNC function $f$ with $f(n) < b(n)$ for every $n$ is a $\mathrm{DNC}_b$ function. The $\mathrm{DNC}_b$ functions are the paths of a computable, computably bounded tree. Two results, admitted here, describe the role of the bound.
-
-- *Constant bounds.* For every $k \geq 2$, a $\mathrm{DNC}_k$ function computes a $\mathrm{DNC}_2$ function, so the sets computing a DNC function with a constant bound are exactly the PA sets (Jockusch 1989; Nies 2009, Exercise 4.3.5).
-- *Growing bounds.* For every computable bound $b$, there is a larger computable bound $b'$ and a set computing a $\mathrm{DNC}_{b'}$ function but no $\mathrm{DNC}_b$ function (Ambos-Spies, Kjos-Hanssen, Lempp and Slaman 2004). The DNC degrees are therefore stratified by the growth of the bound, from the PA degrees to the DNC degrees with no computable bound.
-
-## Exercises
-
-::::exercise{difficulty=1}
-Show that if $X$ computes a DNC function, then the degree of $X$ contains a DNC function.
-
-:::solution
-Let $g \leq_T X$ be DNC. By the padding lemma, there is a computable strictly increasing sequence $a_0 < a_1 < \cdots$ of indices of the nowhere defined function; its range $R$ is computable. Let $f(x) = X(n)$ if $x = a_n$, and $f(x) = g(x)$ if $x \notin R$. Then $f \leq_T X$, and $X \leq_T f$ since $X(n) = f(a_n)$. For $x \notin R$, $f(x) = g(x) \neq \Phi_x(x)$ when $\Phi_x(x)\converge$; for $x \in R$, $\Phi_x(x)$ diverges. So $f$ is DNC.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-non-dnc-noncomputable difficulty=2 objective="Build by finite extensions a non-computable set that computes no DNC function, defeating each functional with the fixed point theorem."}
 Show that there is a non-computable set, computable in $\emptyset''$, that computes no DNC function.
 
 :::hint
@@ -139,6 +122,13 @@ The limit $X$ is computable in $\emptyset''$, is not computable, and computes no
 :::
 ::::
 
+## Bounded DNC functions
+
+The PA degrees are the degrees of $\{0, 1\}$-valued DNC functions (:ref{#def-pa-degree}). More generally, for a non-decreasing computable function $b \geq 2$, a DNC function $f$ with $f(n) < b(n)$ for every $n$ is a $\mathrm{DNC}_b$ function. The $\mathrm{DNC}_b$ functions are the paths of a computable, computably bounded tree. Two results, admitted here, describe the role of the bound.
+
+- *Constant bounds.* For every $k \geq 2$, a $\mathrm{DNC}_k$ function computes a $\mathrm{DNC}_2$ function, so the sets computing a DNC function with a constant bound are exactly the PA sets (Jockusch 1989; Nies 2009, Exercise 4.3.5).
+- *Growing bounds.* For every computable bound $b$, there is a larger computable bound $b'$ and a set computing a $\mathrm{DNC}_{b'}$ function but no $\mathrm{DNC}_b$ function (Ambos-Spies, Kjos-Hanssen, Lempp and Slaman 2004). The DNC degrees are therefore stratified by the growth of the bound, from the PA degrees to the DNC degrees with no computable bound.
+
 ## Notes and references
 
 Problems whose solutions can avoid computing DNC functions are studied in the course on compactness avoidance (:ref{to="compactness-avoidance/dnc-avoidance"}).
@@ -152,3 +142,53 @@ Fixed-point free functions were studied by Arslanov, whose completeness criterio
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Section 2.22.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 4.1.
 - B. Monin and L. Patey, *Computability theory*, chapter *Immunity and function growth*.
+
+:::::exercises
+::::exercise{#ex-dnc-degree difficulty=1 objective="Code a set into a DNC function at indices of the nowhere defined function."}
+Show that if $X$ computes a DNC function, then the degree of $X$ contains a DNC function.
+
+:::solution
+Let $g \leq_T X$ be DNC. By the padding lemma, there is a computable strictly increasing sequence $a_0 < a_1 < \cdots$ of indices of the nowhere defined function; its range $R$ is computable. Let $f(x) = X(n)$ if $x = a_n$, and $f(x) = g(x)$ if $x \notin R$. Then $f \leq_T X$, and $X \leq_T f$ since $X(n) = f(a_n)$. For $x \notin R$, $f(x) = g(x) \neq \Phi_x(x)$ when $\Phi_x(x)\converge$; for $x \in R$, $\Phi_x(x)$ diverges. So $f$ is DNC.
+:::
+::::
+
+::::exercise{#ex-fpf-ce-indices difficulty=1 objective="Pass between fixed-point free functions for partial computable functions and for c.e. sets."}
+Show that a set $X$ computes a DNC function if and only if it computes a total function $f$ such that $W_{f(e)} \neq W_e$ for every $e$.
+
+:::solution
+($\Leftarrow$) Since $W_e$ is the domain of $\Phi_e$, the inequality $W_{f(e)} \neq W_e$ implies $\Phi_{f(e)} \neq \Phi_e$. So $f$ is fixed-point free, and $X$ computes a DNC function by :ref{#thm-dnc-fpf}.
+
+($\Rightarrow$) Let $h \leq_T X$ be DNC. Let $\theta(e)$ be the first element enumerated into $W_e$, defined if and only if $W_e \neq \emptyset$. By SMN, there are total computable functions $q$ and $k$ such that $\Phi_{q(e)}(y) = \theta(e)$ for every $y$ (so $\Phi_{q(e)}$ is nowhere defined if $W_e = \emptyset$), and $W_{k(v)} = \{ v \}$. Let $f(e) = k(h(q(e)))$; it is $X$-computable. If $W_{f(e)} = W_e$, then $W_e = \{ h(q(e)) \}$ is non-empty, its only element is $\theta(e) = h(q(e))$, and $\Phi_{q(e)}(q(e))\converge = \theta(e) = h(q(e))$, which contradicts the fact that $h$ is DNC. Adapted from Soare 2016, Exercise 5.4.5.
+:::
+::::
+
+::::exercise{#ex-effectively-immune-closure difficulty=1 objective="Check that effective immunity passes to infinite subsets and survives the addition of finitely many elements."}
+Let $A$ be effectively immune, with bound $q$. Show that every infinite subset of $A$ is effectively immune, with the same bound. Show that $A \cup F$ is effectively immune for every finite set $F$.
+
+:::solution
+If $B \subseteq A$ is infinite and $W_e \subseteq B$, then $W_e \subseteq A$ and $|W_e| \leq q(e)$.
+
+For $A \cup F$, by SMN there is a total computable function $r$ with $W_{r(e)} = W_e \setminus F$; the program enumerates $W_e$ and discards the elements of the fixed finite set $F$. If $W_e \subseteq A \cup F$, then $W_{r(e)} \subseteq A$, so $|W_e| \leq |F| + |W_{r(e)}| \leq |F| + q(r(e))$. The function $e \mapsto |F| + q(r(e))$ is computable, and $A \cup F$ is infinite, so it is effectively immune.
+:::
+::::
+
+::::exercise{#ex-low-effectively-immune difficulty=1 objective="Combine the low basis theorem for PA sets with the main theorem of the lesson."}
+Show that there is a low effectively immune set, and a low set that computes a fixed-point free function.
+
+:::solution
+By :ref{#cor-pa-basis}, there is a low PA set $X$. It computes a $\{0, 1\}$-valued DNC function (:ref{#def-pa-degree}). By :ref{#thm-dnc-effectively-immune}, $X$ computes an effectively immune set $H$, and by :ref{#thm-dnc-fpf}, it computes a fixed-point free function. Since $H \leq_T X$, $H' \leq_T X' \equiv_T \emptyset'$, so $H$ is low. By contrast, a c.e. set that computes a DNC function is Turing complete, by Arslanov's criterion, proved in the next lesson; so no low c.e. set computes one.
+:::
+::::
+
+::::exercise{#ex-minimal-indices-effectively-immune difficulty=2 objective="Strengthen the immunity of the set of minimal indices to effective immunity, with the fixed point theorem with parameters." lessons="fundamentals/fixed-point"}
+An index $e$ is **minimal** if $\Phi_i \neq \Phi_e$ for every $i < e$. Show that the set $M$ of minimal indices is effectively immune, and deduce that $M$ computes a DNC function.
+
+:::solution
+The set $M$ is infinite: each of the infinitely many partial computable functions has a least index, which is minimal.
+
+By SMN, there is a total computable function $r$ such that the program $r(e, x)$, on input $y$, enumerates $W_e$ until an element $m > x$ appears, and then runs $\Phi_m(y)$; it diverges if no such element appears. By the fixed point theorem with parameters (:ref{#thm-fixed-point-parameters}), there is a total computable function $p$ with $\Phi_{p(e)} = \Phi_{r(e, p(e))}$ for every $e$.
+
+Suppose that $W_e \subseteq M$, and that $W_e$ has an element larger than $p(e)$. Let $m$ be the first such element enumerated. Then $\Phi_{p(e)} = \Phi_{r(e, p(e))} = \Phi_m$, with $p(e) < m$, so $m$ is not minimal, a contradiction. Hence $W_e \subseteq \{ 0, \dots, p(e) \}$ and $|W_e| \leq p(e) + 1$. So $M$ is effectively immune, with bound $q(e) = p(e) + 1$, and $M$ computes a DNC function by :ref{#thm-dnc-effectively-immune}. This strengthens the immunity of $M$, proved in the course on fundamentals by the fixed point theorem without parameters.
+:::
+::::
+:::::

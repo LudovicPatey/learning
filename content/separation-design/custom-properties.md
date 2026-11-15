@@ -40,6 +40,14 @@ Let $k \geq 1$. A **$k$-array** is a disjoint strong array $(F_n)$ with $|F_n| \
 
 A $1$-array is a computable sequence of distinct singletons, so the $1$-immune sets are the immune sets. A $k$-array is a disjoint strong array, so hyperimmune sets are c.b.-immune. For a fixed set $A$, the classes of sets $W$ relative to which $A$ is immune, $k$-immune, c.b.-immune or hyperimmune are weakness properties: an array computable in $V \leq_T W$ is computable in $W$.
 
+::::exercise{#exr-sd-min-arrays difficulty=2 objective="Replace disjointness by the condition $\min F_n > n$ in the definition of $k$-immunity."}
+Show that the requirement "$\min F_n > n$" may replace disjointness in :ref{#def-sd-cb-immune}: an infinite set $A$ is $k$-immune if and only if for every computable sequence $(F_n)$ of finite sets, given by canonical indices, with $|F_n| \leq k$ and $\min F_n > n$, some $F_n$ is disjoint from $A$.
+
+:::solution
+Let $(F_n)$ be a $k$-array each member of which meets $A$; its members are non-empty and pairwise disjoint, so only finitely many of them meet each interval $[0, m]$. Let $s(n)$ be the least $s$ with $\min F_s > n$; it is computable, and $F'_n = F_{s(n)}$ is a computable sequence with $|F'_n| \leq k$, $\min F'_n > n$, and each $F'_n$ meeting $A$. Conversely, from a sequence with $\min F_n > n$, define $n_0 = 0$ and $n_{j+1} = \max F_{n_j}$; the sets $F_{n_j}$ are pairwise disjoint, since $\min F_{n_{j+1}} > n_{j+1} = \max F_{n_j}$, and form a $k$-array, computable whenever the sequence is.
+:::
+::::
+
 On co-c.e. sets the hierarchy collapses at its lower end.
 
 :::proposition{#prop-sd-coce-cb}
@@ -111,16 +119,6 @@ For each pair of problems, the course gives a forcing for the weaker one, the im
 
 The question of $\mathsf{EM}$ is not disjunctive, so it preserves several properties at once; the question of $\mathsf{CAC}$ bounds the blocks of its positive answers by a constant; the question of $\mathsf{ADS}$ is answered negatively only when the condition already forces the negation. Before these separations, the next lesson explains where the notions of forcing come from.
 
-## Exercises
-
-::::exercise{#exr-sd-min-arrays difficulty=2}
-Show that the requirement "$\min F_n > n$" may replace disjointness in :ref{#def-sd-cb-immune}: an infinite set $A$ is $k$-immune if and only if for every computable sequence $(F_n)$ of finite sets, given by canonical indices, with $|F_n| \leq k$ and $\min F_n > n$, some $F_n$ is disjoint from $A$.
-
-:::solution
-Let $(F_n)$ be a $k$-array each member of which meets $A$; its members are non-empty and pairwise disjoint, so only finitely many of them meet each interval $[0, m]$. Let $s(n)$ be the least $s$ with $\min F_s > n$; it is computable, and $F'_n = F_{s(n)}$ is a computable sequence with $|F'_n| \leq k$, $\min F'_n > n$, and each $F'_n$ meeting $A$. Conversely, from a sequence with $\min F_n > n$, define $n_0 = 0$ and $n_{j+1} = \max F_{n_j}$; the sets $F_{n_j}$ are pairwise disjoint, since $\min F_{n_{j+1}} > n_{j+1} = \max F_{n_j}$, and form a $k$-array, computable whenever the sequence is.
-:::
-::::
-
 ## Notes and references
 
 The use of custom weakness properties for separations below Ramsey's theorem for pairs, and the analysis of weak König's lemma through its forcing question, follow the chapter *Custom properties* of Patey's monograph (sections *Separation framework*, *Immunity and variants*, *Hyperimmunity and WKL*). Constant-bound immunity was introduced by Patey (2018), who also notes that it coincides with immunity on co-c.e. sets; the proof of :ref{#prop-sd-coce-cb} given here is a direct induction on the bound. Preservation of hyperimmunity by $\mathsf{WKL}$ is the computably dominated basis theorem of Jockusch and Soare (1972). The first separations of the problems in the table are due to Lerman, Solomon and Towsner (2013) for $\mathsf{EM}$ and $\mathsf{ADS}$, and Hirschfeldt and Shore (2007) for $\mathsf{CAC}$; the proofs by custom immunity properties are due to Patey (2017, 2018).
@@ -131,3 +129,44 @@ The use of custom weakness properties for separations below Ramsey's theorem for
 - M. Lerman, R. Solomon and H. Towsner, *Separating principles below Ramsey's theorem for pairs*, Journal of Mathematical Logic 13 (2013), 1350007.
 - D. R. Hirschfeldt and R. A. Shore, *Combinatorial principles weaker than Ramsey's theorem for pairs*, Journal of Symbolic Logic 72 (2007), 171–206.
 - C. G. Jockusch, Jr. and R. I. Soare, *Π⁰₁ classes and degrees of theories*, Transactions of the American Mathematical Society 173 (1972), 33–56.
+
+:::::exercises
+::::exercise{#ex-sd-immune-not-2-immune difficulty=2 objective="Separate immunity from $2$-immunity with a set that picks one number in each pair $\{2n, 2n+1\}$."}
+A set $X$ is **bi-immune** if $X$ and $\overline X$ are both immune.
+
+1. Let $X$ be bi-immune and $B = \{ 2n + X(n) : n \in \nat \}$. Show that $B$ is immune but not $2$-immune.
+2. Show that there is a bi-immune set computable in $\emptyset'$.
+
+:::solution
+1. The set $B$ contains exactly one of $2n$ and $2n + 1$ for each $n$, so it is infinite, and the sets $F_n = \{ 2n, 2n + 1 \}$ form a $2$-array each member of which meets $B$: $B$ is not $2$-immune. Suppose that $R \subseteq B$ is infinite and computable. The sets $N_0 = \{ n : 2n \in R \}$ and $N_1 = \{ n : 2n + 1 \in R \}$ are computable. Since $2n \in B$ if and only if $X(n) = 0$, and $2n + 1 \in B$ if and only if $X(n) = 1$, we have $N_0 \subseteq \overline X$ and $N_1 \subseteq X$. Every element of $R$ is $2n$ or $2n + 1$ for some $n \in N_0 \cup N_1$, so one of $N_0$, $N_1$ is infinite, and it is an infinite computable subset of $\overline X$ or of $X$. This contradicts bi-immunity, so $B$ has no infinite computable subset, hence no infinite c.e. subset (:ref{#def-immune}).
+
+2. Build $X$ by finite extensions $\sigma_0 \preceq \sigma_1 \preceq \cdots$ with oracle $\emptyset'$. At step $e$, with current string $\sigma$, ask $\emptyset'$ whether $W_e$ has two elements $a < b$ with $a \geq |\sigma|$, a $\Sigma^0_1$ question. If so, find such $a, b$ and extend $\sigma$ by zeros up to position $b$, with the bit $1$ at position $b$: then $a \notin X$ and $b \in X$. In both cases, then append the bits $1$ and $0$. The construction is computable in $\emptyset'$. The set $X$ and its complement are infinite, by the last clause. If $W_e$ is infinite, the question at step $e$ has a positive answer, so $W_e$ meets both $X$ and $\overline X$, and is contained in neither. So no infinite c.e. set is contained in $X$ or in $\overline X$.
+:::
+::::
+
+::::exercise{#ex-sd-cb-finite-change difficulty=1 objective="Check that $k$-immunity passes to infinite subsets and survives the addition of finitely many elements."}
+Let $k \geq 1$, $W$ a set, and $A$ a set $k$-immune relative to $W$. Show that every infinite subset of $A$ is $k$-immune relative to $W$, and that so is $A \cup E$ for every finite set $E$.
+
+:::solution
+If $B \subseteq A$ is infinite and a $W$-computable $k$-array $(F_n)$ has every member meeting $B$, every member meets $A$, which is impossible. Now let $E$ be finite, and suppose that a $W$-computable $k$-array $(F_n)$ has every member meeting $A \cup E$. Its members are pairwise disjoint, so only finitely many of them meet $E$; let $n_0$ be larger than their indices. Then $(F_{n_0 + n})_{n \in \nat}$ is a $W$-computable $k$-array every member of which meets $A$, a contradiction. The set $A \cup E$ is infinite since $A$ is.
+:::
+::::
+
+::::exercise{#ex-sd-subset-closure difficulty=1 objective="See why closure of the solutions under infinite subsets is needed for solutions to be immune."}
+Give a problem $\mathsf P$ and an instance $X$ of $\mathsf P$ with no computable solution, such that some solution to $X$ is not immune. Which hypothesis of :ref{#prop-sd-subset-immune} fails?
+
+:::solution
+Let the instances of $\mathsf P$ be all sets, and let the only solution to $X$ be $X \oplus \nat = \{ 2n : n \in X \} \cup \{ 2n + 1 : n \in \nat \}$, an infinite set. If $X$ is not computable, neither is $X \oplus \nat$, since $n \in X$ if and only if $2n \in X \oplus \nat$; so $X$ has no computable solution. But $X \oplus \nat$ contains the infinite computable set of odd numbers, so it is not immune. The solutions to $X$ are not closed under infinite subsets: the set of odd numbers is an infinite subset of the solution and is not a solution. This is the hypothesis used in the proof of :ref{#prop-sd-subset-immune}, where an infinite computable subset of a solution would itself be a solution.
+:::
+::::
+
+::::exercise{#ex-sd-pa-coce difficulty=2 objective="Characterize the co-c.e. sets of which every PA set computes an infinite subset, through hyperimmunity."}
+Let $A$ be an infinite co-c.e. set. Show that every PA set computes an infinite subset of $A$ if and only if $A$ is not hyperimmune. Show that the direction from left to right holds for every infinite set $A$.
+
+:::solution
+Suppose that $A$ is not hyperimmune: some disjoint strong array $(F_n)$ has every member meeting $A$. Let $S$ be the set of finite sequences $(x_0, \dots, x_{j-1})$ such that $x_i \in F_i$ for every $i < j$ and no $x_i$ is enumerated into $\overline A$ within $j$ steps. It is closed under prefixes, computable, and computably bounded, since $x_i \leq \max F_i$. An infinite sequence $(x_i)$ is a path through $S$ if and only if $x_i \in F_i \cap A$ for every $i$: if some $x_i$ is in $\overline A$, it is enumerated at some stage $s$, and the prefixes of length larger than $\max(i, s)$ are not in $S$. Since every $F_i$ meets $A$, $S$ has a path, so it is infinite. By :ref{#cor-bounded-pa}, every PA set computes a path $(x_i)$, and $\{ x_i : i \in \nat \}$ is an infinite subset of $A$, the sets $F_i$ being disjoint. This is the general form of :ref{#prop-sd-wkl-immunity}, whose set is co-c.e. and not hyperimmune.
+
+Conversely, let $A$ be any infinite hyperimmune set. The $\{0,1\}$-valued DNC functions form a non-empty $\Pi^0_1$ class whose members are PA (:ref{#thm-pa-characterization}). By :ref{#thm-dominated-basis}, it has a computably dominated member $P$. If $P$ computed an infinite set $H \subseteq A$, the function $p_H$ would be dominated by a computable function $g$, and $p_A(n) \leq p_H(n) \leq g(n)$ for every $n$, since $H \subseteq A$; so $p_A$ would not be hyperimmune, contradicting :ref{#thm-hyperimmune-principal}.
+:::
+::::
+:::::

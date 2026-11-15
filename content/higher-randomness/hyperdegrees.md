@@ -129,7 +129,7 @@ Why does the majority vote give a $\Delta^1_1$ definition of $X$, and not only a
 
 ## The hierarchy of higher randomness
 
-Combining the lessons of this course, and the characterization of $\Delta^1_1$-randomness in the exercise of :ref{to="higher-tests"}:
+Combining the lessons of this course, and the characterization of $\Delta^1_1$-randomness of :ref{#ex-delta11-ml-hyp}:
 
 :::figure[The notions of randomness of the course, from the strongest to the weakest. Each implies the next; the labels on the arrows give the examples that separate them, and the labels on the right give characterizations.]{#fig-randomness-hierarchy}
 <svg class="fig" viewBox="0 0 600 290" width="600" role="img" aria-label="Five randomness notions in a column, from Pi11-randomness at the top to Martin-Loef randomness at the bottom, each implying the next; no implication reverses"><defs><marker id="hr-hier-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><rect x="30" y="14" width="230" height="30" rx="4" class="cell"/><text x="145.0" y="34" text-anchor="middle" font-size="14">Π¹₁-random</text><text x="274" y="33" class="label">= Δ¹₁-random and <tspan class="math" font-size="14">ω</tspan><tspan class="mrm" font-size="9" dy="3">1</tspan><tspan class="math" font-size="9" dy="-9">X</tspan><tspan class="mrm" font-size="14" dy="6"> = </tspan><tspan class="math" font-size="14">ω</tspan><tspan class="mrm" font-size="9" dy="3">1</tspan><tspan class="mrm" font-size="9" dy="-9">CK</tspan></text><line x1="145.0" y1="46" x2="145.0" y2="68" class="ink-stroke" stroke-width="1.3" marker-end="url(#hr-hier-arrow)"/><text x="157.0" y="61.0" text-anchor="start" class="label">strict: a Π¹₁-Martin-Löf random Z with O ≤h Z</text><rect x="30" y="70" width="230" height="30" rx="4" class="cell"/><text x="145.0" y="90" text-anchor="middle" font-size="14">Π¹₁-Martin-Löf random</text><line x1="145.0" y1="102" x2="145.0" y2="124" class="ink-stroke" stroke-width="1.3" marker-end="url(#hr-hier-arrow)"/><text x="157.0" y="117.0" text-anchor="start" class="label">strict: Hjorth and Nies</text><rect x="30" y="126" width="230" height="30" rx="4" class="cell"/><text x="145.0" y="146" text-anchor="middle" font-size="14">Δ¹₁-random  =  Σ¹₁-random</text><text x="274.0" y="145.0" text-anchor="start" class="label">= Martin-Löf random relative to every hyperarithmetic set</text><line x1="145.0" y1="158" x2="145.0" y2="180" class="ink-stroke" stroke-width="1.3" marker-end="url(#hr-hier-arrow)"/><text x="157.0" y="173.0" text-anchor="start" class="label">strict: Ω relative to ∅⁽ω⁾</text><rect x="30" y="182" width="230" height="30" rx="4" class="cell"/><text x="145.0" y="202" text-anchor="middle" font-size="14">n-random for every n</text><line x1="145.0" y1="214" x2="145.0" y2="236" class="ink-stroke" stroke-width="1.3" marker-end="url(#hr-hier-arrow)"/><text x="157.0" y="229.0" text-anchor="start" class="label">strict: Ω</text><rect x="30" y="238" width="230" height="30" rx="4" class="cell"/><text x="145.0" y="258" text-anchor="middle" font-size="14">Martin-Löf random</text></svg>
@@ -137,7 +137,7 @@ Combining the lessons of this course, and the characterization of $\Delta^1_1$-r
 
 None of the implications reverses.
 
-- The sequence $\Omega^{\emptyset^{(\omega)}}$ is $n$-random for every $n$ but not $\Delta^1_1$-random (first exercise).
+- The sequence $\Omega^{\emptyset^{(\omega)}}$ is $n$-random for every $n$ but not $\Delta^1_1$-random (:ref{#ex-omega-hyp-not-delta11}).
 - Some $\Delta^1_1$-random sequence is not $\Pi^1_1$-Martin-Löf random (Hjorth and Nies; admitted in :ref{to="higher-tests"}).
 - Some $\Pi^1_1$-Martin-Löf random sequence $Z$ satisfies $\mathcal O \leq_h Z$, so it collapses $\omega_1^{\mathrm{CK}}$ and is not $\Pi^1_1$-random. This follows from the higher analogue of the Kučera–Gács theorem (Nies, Theorem 9.2.9): every set is computed, by a reduction with a $\Pi^1_1$ graph using finitely many bits of the oracle, by a member of a $\Sigma^1_1$ class of $\Pi^1_1$-Martin-Löf random sequences. The higher analogue of Chaitin's $\Omega$ is an explicit example (Nies, Exercise 9.2.10). We admit these results.
 
@@ -145,7 +145,7 @@ The notions differ in their lowness properties as well. A set $A$ is **low** for
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-omega-hyp-not-delta11 difficulty=1 objective="Separate $\Delta^1_1$-randomness from $n$-randomness for every $n$ with a relativized halting probability."}
 Let $\Omega^Z$ denote Chaitin's halting probability relative to an oracle $Z$. Show that $\Omega^{\emptyset^{(\omega)}}$ is $n$-random for every $n$ but not $\Delta^1_1$-random, where $\emptyset^{(\omega)} = \bigoplus_n \emptyset^{(n)}$.
 
 :::solution
@@ -153,15 +153,7 @@ By :ref{#cor-omega-random} relativized to $Z = \emptyset^{(\omega)}$, the sequen
 :::
 ::::
 
-::::exercise{difficulty=2}
-Let $Z$ be any set. Show that there is a $\Pi^1_1$-random sequence $Y$ such that every set $X$ with $X \leq_h Z$ and $X \leq_h Y$ is hyperarithmetic.
-
-:::solution
-The sets $X \leq_h Z$ are countably many: each is computable in some $H^Z_b$ with $b \in \mathcal O^Z$, and there are countably many notations and functionals. Apply :ref{#cor-higher-null-cone} to the non-hyperarithmetic ones: almost every $Y$ is $\Pi^1_1$-random and hyperarithmetically computes none of them. Any such $Y$ works.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-delta11-random-hyp-cone difficulty=2 objective="Combine Sacks's theorem with the $\Delta^1_1$ definition of a Turing cone above a hyperarithmetic set."}
 Show that a $\Delta^1_1$-random sequence computes no non-computable hyperarithmetic set.
 
 :::solution
@@ -180,3 +172,71 @@ Sacks proved the measure-theoretic results of this lesson in his work on measure
 - N. Greenberg and B. Monin, *Higher randomness and genericity*, Forum of Mathematics, Sigma 5 (2017), e31.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Chapter 9.
 - C. T. Chong and L. Yu, *Recursion Theory: Computational Aspects of Definability*, De Gruyter, 2015.
+
+:::::exercises
+::::exercise{#ex-hyp-random-minimal-pair difficulty=2 objective="Apply the null cone theorem to countably many sets at once."}
+Let $Z$ be any set. Show that there is a $\Pi^1_1$-random sequence $Y$ such that every set $X$ with $X \leq_h Z$ and $X \leq_h Y$ is hyperarithmetic.
+
+:::solution
+The sets $X \leq_h Z$ are countably many: each is computable in some $H^Z_b$ with $b \in \mathcal O^Z$, and there are countably many notations and functionals. Apply :ref{#cor-higher-null-cone} to the non-hyperarithmetic ones: almost every $Y$ is $\Pi^1_1$-random and hyperarithmetically computes none of them. Any such $Y$ works.
+:::
+::::
+
+::::exercise{#ex-hyp-low-pi11 difficulty=1 objective="Show that hyperarithmetic sets are low for $\Pi^1_1$-randomness, by eliminating a hyperarithmetic parameter."}
+A class is **$\Pi^1_1(A)$** if it is defined by a formula $\forall Z\, \varphi(Y, Z, A)$ with $\varphi$ arithmetic, and a sequence is **$\Pi^1_1$-random relative to $A$** if it belongs to no null $\Pi^1_1(A)$ class. Show that if $A$ is hyperarithmetic, every $\Pi^1_1(A)$ class is $\Pi^1_1$, so that $\Pi^1_1$-randomness relative to $A$ is $\Pi^1_1$-randomness.
+
+:::solution
+Let $\psi(n)$ and $\chi(n)$ be a $\Pi^1_1$ and a $\Sigma^1_1$ definition of $A$ (:ref{#prop-h-delta11}). Write $\varphi$ in prenex form, with its matrix in negation normal form, so that the parameter $A$ occurs only in atomic formulas $x \in A$ and negated atomic formulas $x \notin A$. Replace each $x \in A$ by $\psi(x)$ and each $x \notin A$ by $\neg \chi(x)$, both $\Pi^1_1$. The result is built from $\Pi^1_1$ and arithmetic formulas by conjunctions, disjunctions and number quantifiers, so it is $\Pi^1_1$, and it is equivalent to $\varphi(Y, Z, A)$ for all $Y$ and $Z$. A universal set quantifier in front of a $\Pi^1_1$ formula gives a $\Pi^1_1$ formula, by contracting the two set quantifiers $\forall Z\, \forall Z'$ into one. So the class is $\Pi^1_1$, and the null $\Pi^1_1(A)$ classes are null $\Pi^1_1$ classes. Conversely, a $\Pi^1_1$ class is $\Pi^1_1(A)$. The argument is that of :ref{#ex-delta11-classes} (2). This is the easy half of the theorem of Greenberg and Monin stated in the lesson: the sets low for $\Pi^1_1$-randomness are exactly the hyperarithmetic sets.
+:::
+::::
+
+::::exercise{#ex-sigma11-measure-not-attained difficulty=2 objective="See that the theorem on null $\Sigma^1_1$ classes does not extend to $\Sigma^1_1$ classes of positive measure."}
+Give a $\Sigma^1_1$ class $\mathcal S$ such that no $\Delta^1_1$ class $\mathcal D \supseteq \mathcal S$ has $\lambda(\mathcal D) = \lambda(\mathcal S)$. (By :ref{#ex-delta11-approx-pi11}, such classes $\mathcal D$ exist with $\lambda(\mathcal D) < \lambda(\mathcal S) + \varepsilon$ for every $\varepsilon > 0$.)
+
+:::solution
+Let $\mathcal S = \cs \setminus [W]$, with $W = \{ 0^n 1 : n \in \mathcal O \}$ as in :ref{#ex-open-measure-not-hyp}; it is $\Sigma^1_1$, of measure $1 - r$, where $r = \lambda([W])$ is not a hyperarithmetic real. If $\mathcal D \supseteq \mathcal S$ is $\Delta^1_1$ with $\lambda(\mathcal D) = 1 - r$, then by :ref{#fact-higher-borel} (1) and the discussion after it, the left and right cuts of $1 - r$ are $\Delta^1_1$, and so are those of $r$: $q < r$ if and only if $1 - q > 1 - r$. This contradicts :ref{#ex-open-measure-not-hyp}.
+
+In the proof of :ref{#thm-sigma11-random}, the selection uses the relation $\lambda(\mathcal A^p_{|a|}) > 1 - 2^{-n}$, whose bound is a rational. For a class of positive measure, the corresponding bound $\lambda(\mathcal A^p) - 2^{-n}$ need not be a hyperarithmetic real, as the example shows, and :ref{#fact-higher-borel} (1) no longer makes the relation $\Pi^1_1$.
+:::
+::::
+
+::::exercise{#ex-random-hyp-incomparable difficulty=1 objective="Apply the null cone theorem to find $\Pi^1_1$-random sequences that are hyperarithmetically incomparable."}
+Let $X$ be $\Pi^1_1$-random. Show that almost every $Y$ is $\Pi^1_1$-random and hyperarithmetically incomparable with $X$: $X \not\leq_h Y$ and $Y \not\leq_h X$.
+
+:::solution
+The sequence $X$ is not hyperarithmetic (:ref{#ex-pi11-random-not-hyp}), so by :ref{#cor-higher-null-cone} almost every $Y$ is $\Pi^1_1$-random with $X \not\leq_h Y$. The class $\{ Y : Y \leq_h X \}$ is countable, since by Kleene's theorem relativized every such $Y$ is $\Phi^{H^X_b}_e$ for some $b \in \mathcal O^X$ and some $e$; so it is null. The union of these two null classes is null, and every $Y$ outside it works.
+:::
+::::
+
+::::exercise[One direction of Spector's theorem]{#ex-spector-easy-direction difficulty=2 objective="Prove without Spector's theorem that a sequence hyperarithmetically above $\mathcal O$ collapses $\omega_1^{\mathrm{CK}}$."}
+Show that if $\mathcal O \leq_h Y$, then $\omega_1^Y > \omega_1^{\mathrm{CK}}$. Deduce that no $\Pi^1_1$-random sequence $X$ satisfies $\mathcal O \leq_h X$.
+
+:::solution
+Suppose $\mathcal O \leq_h Y$ and $\omega_1^Y = \omega_1^{\mathrm{CK}}$. By :ref{#fact-hyp-reducible}, $\mathcal O \leq_T H^Y_a$ for some $a \in \mathcal O$. We show that $\omega_1^{H^Y_a} = \omega_1^Y$; then every $\mathcal O$-computable well-ordering is $H^Y_a$-computable, and $\omega_1^{\mathcal O} \leq \omega_1^Y = \omega_1^{\mathrm{CK}}$, contradicting :ref{#prop-omega1-relative} (2).
+
+Clearly $\omega_1^{H^Y_a} \geq \omega_1^Y$, since $Y \leq_T H^Y_a$. Suppose that some $H^Y_a$-computable well-ordering $W = \Phi^{H^Y_a}_k$ has type $\omega_1^Y$; such a $W$ exists if $\omega_1^{H^Y_a} > \omega_1^Y$, since the $H^Y_a$-computable ordinals are closed downward. For an index $e$, let $L^Y_e$ be the relation computed by $\Phi^Y_e$. Then $L^Y_e$ is a well-ordering if and only if it is a linear order and there are sets $Z$ and $h$ such that $Z$ is an H-sequence along $a$ starting from $Y$, $\Phi^{Z^{[a]}}_k$ is the characteristic function of a linear order $W_Z$, and $h$ embeds $L^Y_e$ into $W_Z$. Indeed, there is exactly one such $Z$, with column $a$ equal to $H^Y_a$ (:ref{#lem-h-sequence-unique} relativized to $Y$, as in the proof of :ref{#thm-higher-null-cone}), so $W_Z = W$; a well-ordering $L^Y_e$ has type less than $\omega_1^Y$ and embeds into $W$ by :ref{#thm-wo-comparison}, and a linear order that embeds into a well-ordering is a well-ordering. The conditions are arithmetic in $Y$, $Z$ and $h$. This is a $\Sigma^1_1(Y)$ definition of the set of indices of $Y$-computable well-orderings, which contradicts :ref{#prop-pi11-not-sigma11} relativized to $Y$. This is the argument of :ref{#ex-hyp-omega1-ck}, relativized to $Y$.
+
+If $X$ is $\Pi^1_1$-random, then $\omega_1^X = \omega_1^{\mathrm{CK}}$ by :ref{#thm-chong-nies-yu}, so $\mathcal O \not\leq_h X$. The converse of the first statement, that $\omega_1^Y > \omega_1^{\mathrm{CK}}$ implies $\mathcal O \leq_h Y$, is the harder direction of Spector's theorem, admitted in the lesson.
+:::
+::::
+
+::::exercise[Π¹₁-random sequences are hyp-dominated]{#ex-pi11-random-hyp-dominated difficulty=3 objective="Combine the $\Delta^1_1$ classes of the null cone proof with Kreisel's selection to show that functions hyperarithmetic in a $\Pi^1_1$-random sequence are dominated by hyperarithmetic functions."}
+A function $g$ **dominates** $f$ if $f(n) \leq g(n)$ for almost every $n$. Show that if $X$ is $\Pi^1_1$-random, then every function $f \leq_h X$ is dominated by a hyperarithmetic function.
+
+:::solution
+By :ref{#thm-chong-nies-yu}, $X$ is $\Delta^1_1$-random and $\omega_1^X = \omega_1^{\mathrm{CK}}$. By :ref{#fact-hyp-reducible}, applied to the graph of $f$, there are $a \in \mathcal O$ and $e$ with $f = \Phi^{H^X_a}_e$. For numbers $n$ and $k$, let
+$$
+\mathcal E_{n, k} = \{ Y : \Phi^{H^Y_a}_e(n)\converge \geq k \}.
+$$
+*The classes $\mathcal E_{n, k}$ are $\Delta^1_1$, uniformly.* As for the classes $\mathcal P^\sigma_{n, i}$ in the proof of :ref{#thm-higher-null-cone}, $Y \in \mathcal E_{n, k}$ if and only if every H-sequence $Z$ along $a$ starting from $Y$ satisfies $\Phi^{Z^{[a]}}_e(n)\converge \geq k$, and $Y \notin \mathcal E_{n, k}$ if and only if every such $Z$ fails it; both are $\Pi^1_1$ in $(n, k, Y)$. By :ref{#fact-higher-borel} (1), and the discussion after it, the relations $\lambda(\mathcal E_{n, k}) > q$ and $\lambda(\mathcal E_{n, k}) < q$ are $\Pi^1_1$ in $(n, k, q)$; so is $\lambda(\mathcal E_{n, k}) \leq q$, which holds if and only if $\lambda(\mathcal E_{n, k}) < q'$ for every rational $q' > q$.
+
+*A hyperarithmetic bound.* For fixed $n$, the classes $\mathcal E_{n, k}$ decrease with $k$, and their intersection is empty, since a convergent computation has a single value. By countable additivity, $\lambda(\mathcal E_{n, k}) \to 0$ as $k \to \infty$. Let $r(n)$ be the least $k$ with $\lambda(\mathcal E_{n, k}) \leq 2^{-n}$. Then $r(n) = k$ if and only if $\lambda(\mathcal E_{n, k}) \leq 2^{-n}$ and $\lambda(\mathcal E_{n, j}) > 2^{-n}$ for every $j < k$, a $\Pi^1_1$ relation. So $r$ is a total function with $\Pi^1_1$ graph, hyperarithmetic by :ref{#cor-total-pi11}.
+
+*A null $\Delta^1_1$ class.* Let $\mathcal D$ be the class of $Y$ that belong to $\mathcal E_{n, r(n)}$ for infinitely many $n$. Since the graph of $r$ is $\Delta^1_1$, the relation $Y \in \mathcal E_{n, r(n)}$, that is $\exists k\, (r(n) = k \wedge Y \in \mathcal E_{n, k})$, and its negation, $\exists k\, (r(n) = k \wedge Y \notin \mathcal E_{n, k})$, are $\Pi^1_1$; so $\mathcal D = \{ Y : \forall m\, \exists n \geq m\ Y \in \mathcal E_{n, r(n)} \}$ and its complement are $\Pi^1_1$, and $\mathcal D$ is $\Delta^1_1$. For every $m$, $\mathcal D \subseteq \bigcup_{n \geq m} \mathcal E_{n, r(n)}$, of measure at most $\sum_{n \geq m} 2^{-n} = 2^{1 - m}$; so $\mathcal D$ is null.
+
+*Domination.* $X$ is $\Delta^1_1$-random, so $X \notin \mathcal D$: for almost every $n$, $X \notin \mathcal E_{n, r(n)}$. Since $\Phi^{H^X_a}_e(n)$ converges to $f(n)$, this means $f(n) < r(n)$. So $r$ dominates $f$.
+
+This is a theorem of Chong, Nies and Yu (Nies, Theorem 9.4.3, where the proof uses the bounding principle instead of :ref{#fact-hyp-reducible}); sequences with this property are called **hyp-dominated**.
+:::
+::::
+:::::

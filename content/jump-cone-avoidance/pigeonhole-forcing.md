@@ -161,6 +161,16 @@ Why does item 2 not require side $i$ to be valid?
   Its valid sides may differ from those of $p$.
 :::
 
+## Exercises
+
+::::exercise{#ex-pigeon-ideal-instance difficulty=1 objective="See that an instance in the ideal of reservoirs makes one side invalid at once."}
+Suppose $A \in \mathcal N$, and let side $i$ of $(\sigma_0, \sigma_1, X)$ be valid. Show that $(\sigma_0, \sigma_1, X \cap A_i)$ is an extension whose side $1 - i$ is invalid. What fails for an arbitrary $A$?
+
+:::solution
+$X \cap A_i$ is in $\mathcal N$, which contains $X$ and $A$, in $\mathcal U$ by validity, and contained in $X$; so this is an extension. Its side $1 - i$ is invalid: $(X \cap A_i) \cap A_{1-i} = \emptyset \notin \mathcal U$. In general, $X \cap A_i$ need not be in $\mathcal N$.
+:::
+::::
+
 ## Notes and references
 
 The two Scott ideals, the notion of forcing, validity and the question for $\Sigma^0_1$ sentences follow the section *Pigeonhole principle* of the chapter *Jump cone avoidance* of Patey's monograph. Its definition of validity is written with $\mathcal U_S$; the proofs use the core, as here. Monin and Patey (2019) introduced largeness and partition regularity to prove the theorem; the cohesive class fixed in advance comes from the later work of Monin and Patey on hyperarithmetical reductions and of Le Houérou, Levy Patey and Mimouni (2024). The underlying forcing is that of Dzhafarov and Jockusch (2009), presented in :ref{to="ramsey-theorem/cone-avoidance"} and, as a disjunctive notion of forcing, in :ref{to="avoidance/disjunctive-question"}.
@@ -169,3 +179,55 @@ The two Scott ideals, the notion of forcing, validity and the question for $\Sig
 - Q. Le Houérou, L. Levy Patey and A. Mimouni, *The reverse mathematics of the pigeonhole hierarchy*, arXiv:2407.01236 (2024).
 - D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Pigeonhole principle*.
+
+:::::exercises
+::::exercise[Extension and members]{#ex-pigeon-extension difficulty=1 objective="Check that the extension relation of the forcing with a cohesive class is a preorder compatible with the members of each side."}
+Show that the extension relation of :ref{#def-pigeon-condition} is reflexive and transitive, and that if $q$ extends $p$, every member of side $i$ of $q$ is a member of side $i$ of $p$.
+
+:::solution
+*Reflexivity.* $X \subseteq X$, and $\sigma_i$ is compatible with $(\sigma_i, X)$, having no new element.
+
+*Transitivity.* Let $(\rho_0, \rho_1, W) \leq (\tau_0, \tau_1, Y) \leq (\sigma_0, \sigma_1, X)$. Then $W \subseteq Y \subseteq X$, and $\sigma_i \preceq \tau_i \preceq \rho_i$. An element $x$ with $|\sigma_i| \leq x < |\rho_i|$ and $\rho_i(x) = 1$ is in $X$ if $x < |\tau_i|$, since then $\tau_i(x) = 1$ and $\tau_i$ is compatible with $(\sigma_i, X)$, and in $Y \subseteq X$ otherwise. So $\rho_i$ is compatible with $(\sigma_i, X)$.
+
+*Members.* Let $q = (\tau_0, \tau_1, Y)$ extend $p = (\sigma_0, \sigma_1, X)$, and $G$ a member of side $i$ of $q$. Then $\sigma_i \preceq \tau_i \prec G$. An element $x \geq |\sigma_i|$ of $G$ is a new element of $\tau_i$ if $x < |\tau_i|$, hence in $X$, and is in $Y \subseteq X$ otherwise. So $G$ is a member of side $i$ of $p$.
+:::
+::::
+
+::::exercise[Computing the question on stems]{#ex-pigeon-question-examples difficulty=1 objective="Compute the classes $\mathcal V_{\sigma, \varphi}$ and the answers of the question for $\Sigma^0_1$ sentences on examples, and see why a positive answer is useful only on a valid side."}
+1. For $k \in \nat$, let $\varphi_k$ be the sentence "$G$ has an element larger than or equal to $k$". Show that $\sigma \mathrel{?{\vdash}} \varphi_k$ for every string $\sigma$.
+2. Let $\varphi$ be the sentence "$1 \in G$". Show that $\sigma \mathrel{?{\nvdash}} \varphi$ if $|\sigma| \leq 1$.
+3. Suppose $A = \emptyset$. Show that side $0$ of every condition is invalid, and that no extension of a condition forces $\varphi_k$ on side $0$ for $k \geq 1$, although $\sigma_0 \mathrel{?{\vdash}} \varphi_k$.
+
+:::solution
+1. A string compatible with $(\sigma, Y)$ satisfies $\varphi_k$ if and only if it has an element at least $k$, either in $\sigma$ or a new one, taken in $Y$ and at least $|\sigma|$. So $\mathcal V_{\sigma, \varphi_k}$ is the class of all sets if $\sigma$ has an element at least $k$, and the class of sets with an element at least $\max(k, |\sigma|)$ otherwise. In both cases it contains every infinite set, hence $\mathcal U_S$, and $\mathcal U_S \cap \mathcal V_{\sigma, \varphi_k} = \mathcal U_S$ is large.
+2. If $|\sigma| \leq 1$, a string compatible with $(\sigma, Y)$ contains $1$ if and only if $1 \in Y$, so $\mathcal V_{\sigma, \varphi} = \{ Y : 1 \in Y \}$. The sets $\{ 1 \}$ and $\nat \setminus \{ 1 \}$ cover $\nat$; the first is finite, hence not in $\mathcal U_S$, and the second is not in $\mathcal V_{\sigma, \varphi}$. So $\mathcal U_S \cap \mathcal V_{\sigma, \varphi}$ is not large. A positive answer must hold for all reservoirs of $\mathcal U$, and some of them omit $1$.
+3. $X \cap A_0 = \emptyset \notin \mathcal U$, so side $0$ is invalid. The stems on side $0$ are subsets of $A_0 = \emptyset$. For any condition $q$ with stem $\tau_0$ on side $0$, the set $\tau_0 0 0 \cdots = \emptyset$ is a member of side $0$ of $q$ that does not satisfy $\varphi_k$. So no condition forces $\varphi_k$ on side $0$, while $\sigma_0 \mathrel{?{\vdash}} \varphi_k$ by part 1: item 1 of :ref{#lem-pigeon-sigma1} needs the validity of the side.
+:::
+::::
+
+::::exercise[Why the question uses the cohesive class]{#ex-pigeon-question-hypotheses difficulty=2 objective="See by counterexamples why the question for $\Sigma^0_1$ sentences asks for the largeness of $\mathcal U_S \cap \mathcal V$, with $\mathcal U_S$ cohesive."}
+Item 1 of :ref{#lem-pigeon-sigma1} fails for each of the following modifications.
+
+1. The question is "$\mathcal V_{\sigma, \varphi}$ is large".
+2. The class of infinite sets $\mathcal I$ replaces both $\mathcal U_S$ and $\mathcal U$: the reservoirs are the infinite sets in $\mathcal N$, side $i$ is valid if $X \cap A_i$ is infinite, and the question is "$\mathcal I \cap \mathcal V_{\sigma, \varphi}$ is large".
+
+Give in each case a condition, a valid side and a sentence for which the question answers positively but no extension forces the sentence on that side.
+
+:::solution
+1. Take $\varphi$ = "$0 \in G$" and $\sigma = \varepsilon$. A string compatible with $(\varepsilon, Y)$ contains $0$ if and only if $0 \in Y$, so $\mathcal V_{\varepsilon, \varphi} = \{ Y : 0 \in Y \}$, which is large: in a finite cover of $\nat$, the part containing $0$ is in it. Let $p = (\varepsilon, \varepsilon, \nat \setminus \{ 0 \})$; it is a condition, since $\mathcal U$ is closed under finite changes and contains $\nat$. Let $i$ be a valid side. Every extension of $p$ has a stem $\tau_i$ compatible with $(\varepsilon, \nat \setminus \{ 0 \})$, so $0 \notin \tau_i$, and the member $\tau_i 0 0 \cdots$ of side $i$ does not contain $0$. So no extension forces $\varphi$ on side $i$.
+2. Let $Z$ be the set of even numbers, $A = \nat$, $\varphi$ = "$G$ has an element in $Z$", and $\sigma = \varepsilon$. Then $\mathcal V_{\varepsilon, \varphi} = \{ Y : Y \cap Z \neq \emptyset \}$, and $\mathcal I \cap \mathcal V_{\varepsilon, \varphi} \supseteq \mathcal L_Z$ is large. The set $\overline Z$ is computable and infinite, and $p = (\varepsilon, \varepsilon, \overline Z)$ has side $0$ valid in the modified sense, since $\overline Z \cap A_0 = \overline Z$ is infinite. Every extension of $p$ has a stem on side $0$ with all its elements odd, so the member obtained by adding zeros has no element in $Z$: no extension forces $\varphi$ on side $0$.
+
+In the actual setting, the cohesive class $\mathcal U_S$ has chosen $\mathcal L_Z$ or $\mathcal L_{\overline Z}$. If it chose $\mathcal L_{\overline Z}$, the question answers negatively: $Z$ and $\overline Z$ cover $\nat$, $Z \notin \mathcal L_{\overline Z} \supseteq \mathcal U_S$ and $\overline Z \notin \mathcal V_{\varepsilon, \varphi}$. If it chose $\mathcal L_Z$, then $\overline Z \notin \mathcal U$ and $(\varepsilon, \varepsilon, \overline Z)$ is not a condition.
+:::
+::::
+
+::::exercise[Why two ideals]{#ex-pigeon-two-ideals difficulty=2 objective="Show that the index set of a cohesive class cannot be in the ideal of tests, and that no Scott ideal contains the jump of its own code."}
+1. Show that the set $S$ of :ref{#lem-pigeon-setting} is not in $\mathcal M$, and indeed $S \not\leq_T \emptyset'$.
+2. Show that no Scott ideal contains the jump of one of its codes. Deduce that $\mathcal M$ and $\mathcal N$ cannot be the same ideal.
+
+:::solution
+1. By :ref{#ex-large-cohesive-pa} with $X = \emptyset$, $S \oplus M'$ is PA relative to $\emptyset'$. Since $M$ is low, $M' \leq_T \emptyset'$. If $S \leq_T \emptyset'$, then $S \oplus M' \leq_T \emptyset'$ would compute a function DNC relative to $\emptyset'$, which no $\emptyset'$-computable function is. So $S \not\leq_T \emptyset'$. Every member of $\mathcal M$ is computable in $M$, hence in $\emptyset'$; so $S \notin \mathcal M$.
+2. Let $\mathcal K$ be a Scott ideal coded by $K = \bigoplus_i K_i$. Every member of $\mathcal K$ is some $K_i$, computable in $K$. If $K' \in \mathcal K$, then $K' \leq_T K$, which contradicts the jump theorem. The construction needs $S \oplus M'$ in the ideal of reservoirs, since the answers of the questions for $\Sigma^0_2$ sentences are $\Sigma^0_1$ relative to $X \oplus S \oplus M'$ (:ref{to="jump-cone-avoidance/pigeon-questions"}); so the ideal of reservoirs contains the jump of a code of the ideal of tests, and the two ideals differ.
+:::
+::::
+:::::

@@ -173,9 +173,7 @@ $\mathrm{PA}$ is not equivalent to any finite set of sentences.
 Suppose $\mathrm{PA}$ were equivalent to finitely many sentences. Each of them is provable in $\mathrm{PA}$, from finitely many axioms, which all belong to $\mathrm I\Sigma_n$ for some $n$. So $\mathrm I\Sigma_n$ would prove all of $\mathrm{PA}$, in particular $\mathrm B\Sigma_{n+1}$, contradicting :ref{#thm-isigma-not-bsigma}.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-k1-nonstandard difficulty=1 objective="Use the $\Sigma_1$-elementarity of $K_1(M)$ to relate its non-standard elements to the false $\Sigma_1$ sentences true in $M$."}
 Let $M$ be a model of $\mathrm{PA}$ in which some $\Sigma_1$ sentence false in $\nat$ is true. Show that $K_1(M)$ contains a non-standard element.
 
 :::solution
@@ -195,3 +193,59 @@ The existence of models of $\mathrm I\Sigma_n$ in which $\mathrm B\Sigma_{n+1}$ 
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 6.2–6.3.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapters I and IV.
 - R. Kaye, *Models of Peano Arithmetic*, Oxford University Press, 1991, chapters *Satisfaction* and *Subsystems of Peano arithmetic*.
+
+:::::exercises
+::::exercise{#ex-idelta0-not-bdelta0 difficulty=1 objective="Read off from the separation theorem that bounded induction does not prove collection for bounded formulas, and locate the step of the proof of induction ⇒ collection that fails at level $0$."}
+Show that $\mathrm I\Delta_0$ does not prove collection for bounded formulas: there are a model of $\mathrm I\Delta_0$, a bounded formula $\delta(x, w)$ with parameters and an element $a$ such that $\forall x < a\ \exists w\ \delta(x, w)$ holds but $\exists b\ \forall x < a\ \exists w < b\ \delta(x, w)$ fails. Where does the proof of :ref{#thm-induction-collection} break down for $n = 0$?
+
+:::solution
+By :ref{#thm-isigma-not-bsigma} with $n = 0$, there is a model $K$ of $\mathrm I\Sigma_0 = \mathrm I\Delta_0$ in which an instance of $\mathrm B\Sigma_1$ fails: for some $\Sigma_1$ formula $\varphi(x, y) \equiv \exists z_1 \cdots \exists z_k\ \delta_0(x, y, \bar z)$, with $\delta_0$ bounded and parameters in $K$, and some $a$, $K \models \forall x < a\ \exists y\ \varphi(x, y)$, but no $b$ bounds witnesses $y$ for all $x < a$. Using an iterated pairing function (:ref{#fact-idelta0}), let $\delta(x, w)$ say that $w = \langle y, \bar z \rangle$ for some $y, \bar z \leq w$ with $\delta_0(x, y, \bar z)$; it is bounded, and $K \models \forall x < a\ \exists w\ \delta(x, w)$. If some $b$ satisfied $\forall x < a\ \exists w < b\ \delta(x, w)$, then for each $x < a$ the first component $y \leq w < b$ of such a $w$ would be a witness of $\varphi(x, y)$ below $b$, which is impossible.
+
+In the proof of :ref{#thm-induction-collection}, the induction is applied to $\theta(c) \equiv c \leq a \rightarrow \exists b\ \forall x < c\ \exists w < b\ \chi(x, w)$. For $n = 0$, $\chi$ is bounded, but the unbounded quantifier $\exists b$ makes $\theta$ a $\Sigma_1$ formula, to which $\mathrm I\Delta_0$ does not apply. The bound $b$ is precisely what cannot be found by bounded induction.
+:::
+::::
+
+::::exercise{#ex-kn-closure difficulty=1 objective="Check closure properties of the model of definable elements with the first item of the main lemma."}
+Let $M$ be a model of $\mathrm{PA}$, $n \geq 1$ and $K = K_n(M)$. Show:
+
+1. if $a \in K$, then $\lfloor a / 2 \rfloor$ and the least prime number greater than $a$ belong to $K$;
+2. if $K$ contains a non-standard element, the set of non-standard elements of $K$ has no least element;
+3. $K$ satisfies every $\Pi_{n+1}$ sentence true in $M$, for instance "for every $x$ there is a prime number greater than $x$".
+
+:::solution
+1. The number $\lfloor a / 2 \rfloor$ is the only $x$ with $x + x = a \vee x + x + 1 = a$, a bounded formula with parameter $a$. Being prime is expressed by the bounded formula $\pi(p) \equiv 1 < p \wedge \forall u < p\ \forall v < p\ u \cdot v \neq p$. $\mathrm{PA}$ proves Euclid's theorem that there is a prime above every number, so $M$ has a prime above $a$, and by the least number principle in $M$ a least one, which is the only $p$ with $p > a \wedge \pi(p) \wedge \forall q < p\ (q > a \rightarrow \neg \pi(q))$. In both cases item 1 of :ref{#lem-kn-elementary} gives the result.
+2. Let $b \in K$ be non-standard. Then $b \geq 1$, so $\lfloor b / 2 \rfloor < b$, and $\lfloor b / 2 \rfloor \in K$ by 1. If $\lfloor b / 2 \rfloor$ were a standard number $k$, then $b \leq 2k + 1$ would be standard. So below every non-standard element of $K$ there is another one.
+3. By :ref{#lem-kn-elementary}, $K \prec_{\Sigma_n} M$, and the remark after :ref{#def-sigma-elementary} shows that $\Pi_{n+1}$ sentences go down from $M$ to $K$. The sentence $\forall x\ \exists p\ (p > x \wedge \pi(p))$ is $\Pi_2$, hence $\Pi_{n+1}$ up to vacuous quantifiers, and true in $M$.
+:::
+::::
+
+::::exercise{#ex-kn-standard difficulty=2 objective="Characterize the models of $\mathrm{PA}$ whose $\Sigma_n$-definable elements are all standard, through the $\Pi_n$ sentences they satisfy."}
+Let $M$ be a model of $\mathrm{PA}$ and $n \geq 1$. Show that $K_n(M)$ consists of the standard numbers if and only if $M$ satisfies every $\Pi_n$ sentence of $\mathcal L_1$ that is true in $\nat$.
+
+:::solution
+We first note that if $M$ satisfies every $\Pi_n$ sentence true in $\nat$, then it satisfies every $\Sigma_n$ sentence true in $\nat$. Such a sentence is $\exists y\, \psi(y)$, contracting the first block, with $\psi \in \Pi_{n-1}$ (bounded if $n = 1$); if $\nat \models \psi(k)$, then $\psi(k)$ is a $\Pi_{n-1}$ sentence, hence a $\Pi_n$ sentence after adding vacuous quantifiers, true in $\nat$, so $M \models \psi(k)$.
+
+($\Leftarrow$) Let $a \in K_n(M)$, defined by a $\Sigma_n$ formula $\varphi(x)$ without parameters. The $\Sigma_n$ sentence $\exists x\, \varphi(x)$ holds in $M$. If it were false in $\nat$, its negation, equivalent to a $\Pi_n$ sentence, would be true in $\nat$, hence in $M$: a contradiction. So $\nat \models \varphi(k)$ for some $k \in \nat$. The $\Sigma_n$ sentence $\varphi(k)$ is true in $\nat$, so $M \models \varphi(k)$ by the first paragraph, and $a = k$ since $a$ is the only element satisfying $\varphi$. So $K_n(M) \subseteq \nat$; the converse inclusion always holds.
+
+($\Rightarrow$) If $K_n(M)$ is the set of standard numbers, then, as a structure, it is $\nat$, and $\nat \prec_{\Sigma_n} M$ by :ref{#lem-kn-elementary}. Let $\sigma$ be a $\Pi_n$ sentence true in $\nat$. If $M \models \neg \sigma$, a $\Sigma_n$ sentence up to equivalence, then $\nat \models \neg \sigma$ by elementarity: a contradiction.
+
+For $n = 1$, the direction ($\Rightarrow$) is the contrapositive of :ref{#ex-k1-nonstandard}.
+:::
+::::
+
+::::exercise{#ex-elementary-cut-collection difficulty=2 objective="Show that $\Sigma_{n+1}$-elementary initial segments satisfy $\Sigma_{n+1}$ collection, and deduce that the model of definable elements is not an initial segment."}
+Let $M$ be a model of $\mathrm{PA}$, $n \geq 0$, and $K \prec_{\Sigma_{n+1}} M$ a substructure that is a proper initial segment of $M$: if $y \in K$ and $x < y$ in $M$, then $x \in K$, and $K \neq M$. Show that $K$ satisfies $\mathrm B\Sigma_{n+1}$. Deduce that if $K_{n+1}(M)$ contains a non-standard element, it is not an initial segment of $M$.
+
+:::solution
+Every $c \in M \setminus K$ is greater than every element of $K$, since $c \leq y \in K$ would give $c \in K$. Let $\varphi(x, y)$ be $\Sigma_{n+1}$ with parameters $\bar d$ in $K$, and $a \in K$ with $K \models \forall x < a\ \exists y\ \varphi(x, y)$. Fix $c \in M \setminus K$.
+
+*In $M$, the witnesses are bounded by $c$.* Let $x < a$ in $M$; then $x \in K$, and there is $y \in K$ with $K \models \varphi(x, y)$, hence $M \models \varphi(x, y)$ by elementarity, and $y < c$. So $M \models \forall x < a\ \exists y < c\ \varphi(x, y)$.
+
+*The bound comes down to $K$.* In $M$, which satisfies $\mathrm B\Sigma_{n+1}$, the formula $\forall x < u\ \exists y < v\ \varphi(x, y)$ is equivalent to a $\Sigma_{n+1}$ formula $\rho(u, v)$ by :ref{#lem-collection-closure}. So $M \models \exists v\ \rho(a, v)$, a $\Sigma_{n+1}$ formula with parameters in $K$, and $K \models \exists v\ \rho(a, v)$ by elementarity: there is $b \in K$ with $K \models \rho(a, b)$, hence $M \models \rho(a, b)$, that is, $M \models \forall x < a\ \exists y < b\ \varphi(x, y)$. For $x < a$, the witness $y < b$ belongs to $K$, since $K$ is an initial segment, and $K \models \varphi(x, y)$ by elementarity. So $K \models \forall x < a\ \exists y < b\ \varphi(x, y)$.
+
+The equivalence between $\rho$ and the bounded formula is used only in $M$, so no collection is assumed in $K$.
+
+*Consequence.* $K_{n+1}(M) \prec_{\Sigma_{n+1}} M$ by :ref{#lem-kn-elementary}, and it is not equal to $M$, since by :ref{#thm-isigma-not-bsigma} it fails $\mathrm B\Sigma_{n+1}$ while $M$ satisfies it. If it were an initial segment of $M$, it would satisfy $\mathrm B\Sigma_{n+1}$ by the first part, contradicting the same theorem.
+:::
+::::
+:::::

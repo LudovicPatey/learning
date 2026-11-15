@@ -97,7 +97,7 @@ By the cone avoidance basis theorem (:ref{#thm-cone-avoidance-basis}) relativize
 The four families of dense sets are countable, so a single sufficiently generic $G$ has all the properties.
 :::
 
-The choice of $P$ is not a technicality. A sufficiently generic $G$ satisfies $G \subseteq^* R_{P \uh n}$ for every $n$, and for each $n$ the string $P \uh n$ is the only string $\rho$ of length $n$ with $G \subseteq^* R_\rho$, since the sets $R_\rho$ for distinct $\rho$ of the same length are disjoint. The relation "$G \subseteq^* R_\rho$" is $\Sigma^0_2(G)$, so $G'$ computes $P$ by enumerating these strings. A path $P$ with $D \leq_T P \oplus \emptyset'$ would give $D \leq_T G'$. For the sequence of Jockusch and Stephan (:ref{#prop-coh-no-low}), every path of $T$ is PA relative to $\emptyset'$ (second exercise).
+The choice of $P$ is not a technicality. A sufficiently generic $G$ satisfies $G \subseteq^* R_{P \uh n}$ for every $n$, and for each $n$ the string $P \uh n$ is the only string $\rho$ of length $n$ with $G \subseteq^* R_\rho$, since the sets $R_\rho$ for distinct $\rho$ of the same length are disjoint. The relation "$G \subseteq^* R_\rho$" is $\Sigma^0_2(G)$, so $G'$ computes $P$ by enumerating these strings. A path $P$ with $D \leq_T P \oplus \emptyset'$ would give $D \leq_T G'$. For the sequence of Jockusch and Stephan (:ref{#prop-coh-no-low}), every path of $T$ is PA relative to $\emptyset'$ (:ref{#ex-path-jockusch-stephan}).
 
 Compared with the weakly low basis of :ref{#thm-coh-weakly-low}, the theorem adds cone avoidance to jump cone avoidance, for the reason explained for $\mathsf{WKL}$ in :ref{to="jump-cone-avoidance/wkl-two-cones"}: a cohesive set whose jump is computed by a set $Q$ PA relative to $\emptyset'$ may compute any given $C \leq_T \emptyset'$.
 
@@ -119,7 +119,7 @@ Why does $G'$ compute the path $P$?
 - [x] Because $P \uh n$ is the unique string $\rho$ of length $n$ with $G \subseteq^* R_\rho$, a $\Sigma^0_2(G)$ property; $G'$ enumerates the strings with this property and finds exactly one of each length.
 - [ ] Because $G$ computes $P$.
 
-  Not in general: for the sequence of the second exercise, $P$ computes $\emptyset'$, and $G$ can be built with $\emptyset' \not\leq_T G$.
+  Not in general: for the sequence of :ref{#ex-path-jockusch-stephan}, $P$ computes $\emptyset'$, and $G$ can be built with $\emptyset' \not\leq_T G$.
 - [ ] Because $P$ is computable in $\emptyset'$.
 
   $P$ is a path of a $\emptyset'$-computable tree, not necessarily $\emptyset'$-computable.
@@ -127,15 +127,7 @@ Why does $G'$ compute the path $P$?
 
 ## Exercises
 
-::::exercise{difficulty=2}
-Let $f$ be a function hyperimmune relative to $P \oplus \emptyset'$. Show that $f$ is hyperimmune relative to $G'$ for every sufficiently generic $G$ for $P$-conditions.
-
-:::solution
-Write the sentences "$\Phi^{G'}_e(m)\converge$" and "$\Phi^{G'}_e(m)\converge < b$" as in the exercise of :ref{to="jump-cone-avoidance/sigma2-questions"}. The lifted question is compact in the same way: a witness $(\tau, m')$ and $\langle k, y \rangle$ for the first sentence is a witness for the second with $b = k + 1$. Given a condition $c$, let $g(m)$ be the first $b$ found with $c \mathrel{?{\vdash}} \Phi^{G'}_e(m)\converge < b$; this partial function is computable in $P \oplus \emptyset'$ by item 2 of :ref{#lem-path-questions}. If $g(m)$ is undefined, some extension forces $\Phi^{G'}_e(m)\diverge$; if $g$ is total, $f(m) > g(m)$ for some $m$, and some extension forces $\Phi^{G'}_e(m)\converge < g(m)$. These sets of conditions are dense, and :ref{#thm-forcing-truth} concludes.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise[Paths for the sequence of Jockusch and Stephan]{#ex-path-jockusch-stephan difficulty=2 objective="Compute the paths of decisions for the sequence of Jockusch and Stephan, and recover that the jumps of generic sets are PA relative to $\emptyset'$."}
 Let $\vec R$ be the sequence of :ref{#prop-coh-no-low}, with $R_e = \{ s : \Phi^{\emptyset'_s}_e(e)[s]\converge = 0 \}$. Show that for every path $P$ of the tree $T$ of :ref{#lem-decision-tree}, the function $1 - P$ is $\{0,1\}$-valued and DNC relative to $\emptyset'$. Deduce, without using :ref{#prop-coh-no-low}, that the jump of every sufficiently generic set for $P$-conditions is PA relative to $\emptyset'$.
 
 :::solution
@@ -151,3 +143,61 @@ The two diagnoses, the principle of restricting the partial order, the forcing a
 - C. G. Jockusch, Jr. and F. Stephan, *A cohesive set which is not high*, Mathematical Logic Quarterly 39 (1993), 515–530.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 6.5.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Cohesiveness principle*.
+
+:::::exercises
+::::exercise[Jump hyperimmunity along a path]{#ex-path-jump-hyperimmunity difficulty=2 objective="Preserve a function hyperimmune relative to $P \oplus \emptyset'$ in the jump of a cohesive set, with the compactness of the lifted question of $P$-conditions."}
+Let $f$ be a function hyperimmune relative to $P \oplus \emptyset'$. Show that $f$ is hyperimmune relative to $G'$ for every sufficiently generic $G$ for $P$-conditions.
+
+:::solution
+Write the sentences "$\Phi^{G'}_e(m)\converge$" and "$\Phi^{G'}_e(m)\converge < b$" as in :ref{#ex-cohen-jump-hyperimmunity}. The lifted question is compact in the same way: a witness $(\tau, m')$ and $\langle k, y \rangle$ for the first sentence is a witness for the second with $b = k + 1$. Given a condition $c$, let $g(m)$ be the first $b$ found with $c \mathrel{?{\vdash}} \Phi^{G'}_e(m)\converge < b$; this partial function is computable in $P \oplus \emptyset'$ by item 2 of :ref{#lem-path-questions}. If $g(m)$ is undefined, some extension forces $\Phi^{G'}_e(m)\diverge$; if $g$ is total, $f(m) > g(m)$ for some $m$, and some extension forces $\Phi^{G'}_e(m)\converge < g(m)$. These sets of conditions are dense, and :ref{#thm-forcing-truth} concludes.
+:::
+::::
+
+::::exercise[Binary digits]{#ex-path-bits difficulty=1 objective="Compute the tree of decisions for a simple sequence and see that a cohesive set can be as strong as its path."}
+Let $R_n$ be the set of numbers whose binary expansion has the digit $1$ at position $n$, so that $x \in R_n$ if and only if $\lfloor x / 2^n \rfloor$ is odd.
+
+1. Show that the tree $T$ of :ref{#lem-decision-tree} contains every string.
+2. For a path $P$, let $x_n = 2^n + \sum_{i < n,\ P(i) = 0} 2^i$ and $G_P = \{ x_n : n \in \nat \}$. Show that $G_P$ is $\vec R$-cohesive, that $G_P \subseteq^* R_{P \uh n}$ for every $n$, and that $G_P \equiv_T P$.
+3. Deduce that every set is Turing equivalent to an $\vec R$-cohesive set, and explain why the path $P$ used in :ref{#thm-coh-two-cones} must satisfy $D \not\leq_T P \oplus \emptyset'$.
+
+:::solution
+1. For a string $\rho$, the set $R_\rho$ contains every number $x = 2^k + \sum_{i < |\rho|,\ \rho(i) = 0} 2^i$ with $k \geq |\rho|$: its digit at position $i < |\rho|$ is $1$ exactly when $\rho(i) = 0$. These numbers are larger than $|\rho|$, so $\rho \in T$.
+2. For $m \geq n$ and $i < n$, the digit of $x_m$ at position $i$ is $1$ if and only if $P(i) = 0$, so $x_m \in R_i$ if and only if $P(i) = 0$, and $x_m \in R_{P \uh n}$. Hence $G_P \setminus R_{P \uh n} \subseteq \{ x_0, \dots, x_{n-1} \}$ is finite. Since $2^n \leq x_n < 2^{n+1}$, the sequence is increasing and $G_P$ is infinite, so $G_P$ is cohesive. $P$ computes the sequence $(x_n)$, which is increasing, so $G_P \leq_T P$. Conversely, $x_n$ is the unique element of $G_P$ in $[2^n, 2^{n+1})$, and $P(i) = 0$ if and only if the digit of $x_{i+1}$ at position $i$ is $1$; so $P \leq_T G_P$.
+3. Every set $P$ is a path of $T$, and $G_P \equiv_T P$. For this sequence, the path can code any set: if $P$ computes $D$, the cohesive set $G_P$ computes $D$, and, by the remark after :ref{#thm-coh-two-cones}, so does the jump of every sufficiently generic set for $P$-conditions. So the path must be chosen with $D \not\leq_T P \oplus \emptyset'$; here a computable path, such as the one with $P(i) = 1$ for all $i$, would do.
+:::
+::::
+
+::::exercise[Paths computable in the jump]{#ex-path-delta2-paths difficulty=1 objective="See when a path of decisions can be taken computable in $\emptyset'$, and why the cone avoidance basis theorem relative to $\emptyset'$ is used in general."}
+1. Show that if the tree $T$ of :ref{#lem-decision-tree} has a path $P \leq_T \emptyset'$, then the proof of :ref{#thm-coh-two-cones} works with this $P$ for every $D \not\leq_T \emptyset'$ at once.
+2. Show that for the sequence of :ref{#prop-coh-no-low}, no path of $T$ is computable in $\emptyset'$.
+
+:::solution
+1. The only property of $P$ used in the proof is $D \not\leq_T P \oplus \emptyset'$. If $P \leq_T \emptyset'$, then $P \oplus \emptyset' \equiv_T \emptyset'$, and $D \not\leq_T \emptyset'$ is the hypothesis.
+2. By :ref{#ex-path-jockusch-stephan}, $1 - P$ is DNC relative to $\emptyset'$ for every path $P$. A function $f = \Phi^{\emptyset'}_e$ computable in $\emptyset'$ satisfies $f(e) = \Phi^{\emptyset'}_e(e)$, so it is not DNC relative to $\emptyset'$. Hence no path is computable in $\emptyset'$, and the path must be chosen by a basis theorem relative to $\emptyset'$, depending on $D$.
+:::
+::::
+
+::::exercise[The lifted question decides a side]{#ex-path-lifted-side difficulty=2 objective="Compute the lifted question of $P$-conditions on the sentence &quot;$G \subseteq^* R_k$&quot;, and recover that the jump of a generic set computes the path."}
+For $k \in \nat$, let $\varphi_k$ be the $\Sigma^0_2$ sentence $\exists y\ \psi_k(y)$, with $\psi_k(y) = \forall z \geq y\ (z \in G \rightarrow z \in R_k)$, which says $G \subseteq^* R_k$. Show that for every $P$-condition $(\sigma, n)$, the lifted question of :ref{#lem-path-questions} satisfies $(\sigma, n) \mathrel{?{\vdash}} \varphi_k$ if and only if $P(k) = 0$. Deduce that $P \leq_T G'$ for every sufficiently generic $G$.
+
+:::solution
+The negation $\neg\psi_k(y)$ says that $G$ has an element $z \geq y$ outside $R_k$.
+
+Suppose $P(k) = 0$, and let $m = \max(n, k + 1)$. Then $(\sigma, m) \leq (\sigma, n)$ and $R_{P \uh m} \subseteq R_k$. A string $\tau'$ with $(\tau', m) \leq (\sigma, m)$ has its elements larger than or equal to $|\sigma|$ in $R_{P \uh m}$, hence in $R_k$, so it does not satisfy $\neg\psi_k(|\sigma|)$. By item 1 of :ref{#lem-path-questions}, $(\sigma, m) \mathrel{?{\nvdash}} \neg\psi_k(|\sigma|)$, and the lifted question answers yes.
+
+Suppose $P(k) = 1$, and let $(\tau, m) \leq (\sigma, n)$ and $y \in \nat$. The set $R_{P \uh \max(m, k+1)}$ is infinite by :ref{#lem-decision-tree}, contained in $R_{P \uh m}$ and in $\overline{R_k}$. Take an element $z \geq \max(y, |\tau|)$ of it, and let $\tau'$ extend $\tau$ by zeros and a $1$ at $z$. Then $(\tau', m) \leq (\tau, m)$ and $\tau'$ satisfies $\neg\psi_k(y)$, so $(\tau, m) \mathrel{?{\vdash}} \neg\psi_k(y)$. No witness exists, and the lifted question answers no.
+
+So the answer does not depend on the condition. By :ref{#lem-lifted-question}, if $P(k) = 0$ the conditions forcing $\varphi_k$ are dense, and if $P(k) = 1$ every condition forces $\neg\varphi_k$. For a sufficiently generic $G$, $G \subseteq^* R_k$ if and only if $P(k) = 0$, and $G \subseteq^* \overline{R_k}$ if and only if $P(k) = 1$, since $G$ is cohesive. Both relations are $\Sigma^0_2(G)$, so $G'$ computes $P$, as observed after :ref{#thm-coh-two-cones}.
+:::
+::::
+
+::::exercise[An ω-model of WKL and COH]{#ex-path-ideal difficulty=2 objective="Relativize Wang's theorem and the theorem on cohesive sets, and preserve a weakness property to build an ω-model of $\mathsf{WKL}$ and $\mathsf{COH}$ with no high member and no member above a given cone."}
+Let $C$ be a non-computable set. Show that there is a Turing ideal satisfying $\mathsf{WKL}$ and $\mathsf{COH}$ none of whose members computes $C$ or is high.
+
+:::solution
+*Relativization.* Let $Z$ be a set, $C \not\leq_T Z$, $D \not\leq_T Z'$, and $\vec R$ a $Z$-computable sequence. The proof of :ref{#thm-coh-two-cones} relativizes: the tree $T$ of :ref{#lem-decision-tree} is $Z$-c.e., hence $Z'$-computable; the cone avoidance basis theorem relativized to $Z'$ gives a path $P$ with $D \not\leq_T P \oplus Z'$; with sentences about $Z \oplus G$, the question of item 1 of :ref{#lem-path-questions} is $\Sigma^0_1(Z)$ for each condition and the lifted question is $\Sigma^0_1(P \oplus Z')$. So there is an $\vec R$-cohesive $G$ with $C \not\leq_T Z \oplus G$ and $D \not\leq_T (Z \oplus G)'$. The same holds for paths of $Z$-computable trees, by :ref{#thm-wkl-two-cones} relativized, as in :ref{#ex-wkl-no-high-ideal}.
+
+*Preservation.* Let $\mathsf Q$ be the problem whose instances are the infinite binary trees and the sequences of sets, with the solutions of $\mathsf{WKL}$ and of $\mathsf{COH}$ respectively. Let $\mathcal W$ be the class of sets $Y$ with $C \not\leq_T Y$ and $\emptyset'' \not\leq_T Y'$, closed downward. For $Z \in \mathcal W$ and a $Z$-computable instance, the relativized theorems with $D = \emptyset''$, which satisfies $D \not\leq_T Z'$, give a solution $G$ with $Z \oplus G \in \mathcal W$. So $\mathsf Q$ preserves $\mathcal W$, and :ref{#lem-preservation-ideal} gives a Turing ideal $\mathcal I \subseteq \mathcal W$ satisfying $\mathsf Q$, hence $\mathsf{WKL}$ and $\mathsf{COH}$. Its members are not high and do not compute $C$.
+:::
+::::
+:::::

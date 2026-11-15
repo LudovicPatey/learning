@@ -66,7 +66,17 @@ In the proof of :ref{#prop-computable-ordinals-basic} (3), why is $S$ computable
 The **Church–Kleene ordinal** $\omega_1^{\mathrm{CK}}$ is the least ordinal that is not computable.
 :::
 
-By :ref{#prop-computable-ordinals-basic} (1), the computable ordinals are exactly the ordinals below $\omega_1^{\mathrm{CK}}$: they form a downward closed set of ordinals, which is the ordinal $\omega_1^{\mathrm{CK}}$ itself, as in the proof of :ref{#prop-omega1}. There are countably many computable relations, so $\omega_1^{\mathrm{CK}}$ is countable. It is therefore the order type of some well-ordering of $\nat$, but of no computable one. By (2), it is a limit ordinal, closed under addition and multiplication. It is also closed under ordinal exponentiation, a fact we do not use; the first exercise shows that $\omega^n$ and $\omega^\omega$ are computable, and an exercise of the next lesson shows that $\varepsilon_0$, the least ordinal with $\omega^{\varepsilon_0} = \varepsilon_0$, is computable.
+By :ref{#prop-computable-ordinals-basic} (1), the computable ordinals are exactly the ordinals below $\omega_1^{\mathrm{CK}}$: they form a downward closed set of ordinals, which is the ordinal $\omega_1^{\mathrm{CK}}$ itself, as in the proof of :ref{#prop-omega1}. There are countably many computable relations, so $\omega_1^{\mathrm{CK}}$ is countable. It is therefore the order type of some well-ordering of $\nat$, but of no computable one. By (2), it is a limit ordinal, closed under addition and multiplication. It is also closed under ordinal exponentiation, a fact we do not use; :ref{#ex-omega-powers} shows that $\omega^n$ and $\omega^\omega$ are computable, and an exercise of the next lesson shows that $\varepsilon_0$, the least ordinal with $\omega^{\varepsilon_0} = \varepsilon_0$, is computable.
+
+::::exercise{#ex-omega-powers difficulty=2 objective="Present the ordinals $\omega^n$, uniformly in $n$, and $\omega^\omega$ by computable well-orderings."}
+Show that $\omega^n$ is computable for every $n$, uniformly in $n$, and that $\omega^\omega = \sup_n \omega^n$ is computable.
+
+:::solution
+By induction, $\omega^n$ is the type of $\nat^n$ ordered anti-lexicographically (compare the last components first, then the previous ones): for $n = 0$ this is a one-element order, and $\nat^{n+1}$ ordered in this way is $\omega$ copies of $\nat^n$, of type $\omega^n \cdot \omega = \omega^{n+1}$, by the description of multiplication in the previous lesson. These orders are computable, uniformly in $n$ (code $\nat^n$ by sequence numbers of length $n$).
+
+Let $S$ be their ordered sum: the elements are the pairs $\langle n, x \rangle$ with $x \in \nat^n$, compared first by $n$, then by the order of $\nat^n$. It is a computable linear order, and a well-ordering, since a descending sequence would have eventually constant first components and then descend in some $\nat^n$. Its type is at least $\omega^n$ for every $n$, since the block of index $n$ is a copy of $\nat^n$; so $|S| \geq \omega^\omega$. Conversely, the initial segment below an element of the block $n$ is contained in the blocks $0, \dots, n$, whose type $1 + \omega + \cdots + \omega^n$ is at most $\omega^n \cdot (n + 1) < \omega^{n+1}$. Every proper initial segment of $S$ therefore has type below $\omega^\omega$, and $|S| \leq \omega^\omega$.
+:::
+::::
 
 The ordinal $\omega_1^{\mathrm{CK}}$ is much larger than the ordinals one meets in arithmetic, such as $\varepsilon_0$, the ordinal of Gentzen's consistency proof for Peano arithmetic. It has, however, a precise computability-theoretic meaning: by Spector's boundedness theorem (:ref{#thm-boundedness}), the order types of a $\Sigma^1_1$ set of indices in $\mathrm{WO}$ are bounded below it, and the hyperarithmetic sets are exactly the sets obtained by iterating the jump along the computable ordinals.
 
@@ -100,21 +110,9 @@ Why is the relation $L_{f(n)}$ computable, although $\emptyset'$ is not?
   This is true of the family of orders but irrelevant: the question is how each single order is decided.
 :::
 
-The proposition shows that a computable well-ordering hides the decomposition of its type into successor and limit steps: whether the type is a successor depends on whether the order has a largest element, a $\Sigma^0_2$ property of the index (second exercise) that no algorithm decides. Kleene's notations, introduced in the next lesson, make this decomposition explicit, at the price of a set of notations that is far from computable.
+The proposition shows that a computable well-ordering hides the decomposition of its type into successor and limit steps: whether the type is a successor depends on whether the order has a largest element, a $\Sigma^0_2$ property of the index (:ref{#ex-largest-sigma02}) that no algorithm decides. Kleene's notations, introduced in the next lesson, make this decomposition explicit, at the price of a set of notations that is far from computable.
 
-## Exercises
-
-::::exercise{difficulty=2}
-Show that $\omega^n$ is computable for every $n$, uniformly in $n$, and that $\omega^\omega = \sup_n \omega^n$ is computable.
-
-:::solution
-By induction, $\omega^n$ is the type of $\nat^n$ ordered anti-lexicographically (compare the last components first, then the previous ones): for $n = 0$ this is a one-element order, and $\nat^{n+1}$ ordered in this way is $\omega$ copies of $\nat^n$, of type $\omega^n \cdot \omega = \omega^{n+1}$, by the description of multiplication in the previous lesson. These orders are computable, uniformly in $n$ (code $\nat^n$ by sequence numbers of length $n$).
-
-Let $S$ be their ordered sum: the elements are the pairs $\langle n, x \rangle$ with $x \in \nat^n$, compared first by $n$, then by the order of $\nat^n$. It is a computable linear order, and a well-ordering, since a descending sequence would have eventually constant first components and then descend in some $\nat^n$. Its type is at least $\omega^n$ for every $n$, since the block of index $n$ is a copy of $\nat^n$; so $|S| \geq \omega^\omega$. Conversely, the initial segment below an element of the block $n$ is contained in the blocks $0, \dots, n$, whose type $1 + \omega + \cdots + \omega^n$ is at most $\omega^n \cdot (n + 1) < \omega^{n+1}$. Every proper initial segment of $S$ therefore has type below $\omega^\omega$, and $|S| \leq \omega^\omega$.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-largest-sigma02 difficulty=1 objective="Count quantifiers to classify the existence of a largest element and of immediate predecessors in a computable linear order."}
 Let $e$ be an index of a computable linear order. Show that "$L_e$ has a largest element" is a $\Sigma^0_2$ property of $e$, and that the set of elements of the field of $L_e$ that have an immediate predecessor is $\Sigma^0_2$, uniformly in $e$.
 
 :::solution
@@ -130,3 +128,62 @@ Church and Kleene (1936–1938) introduced the constructive ordinals, and the or
 - B. Monin and L. Patey, *Computability theory*, chapter *Transfinite numbers*, section *Effective ordinals*.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section V.1.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 9.1.
+
+:::::exercises
+::::exercise{#ex-ce-partial-order difficulty=1 objective="See why linearity is needed to show that a c.e. order is computable."}
+Give a c.e. relation $R \subseteq \nat \times \nat$ that is a partial order of $\nat$ (reflexive, antisymmetric and transitive) but is not computable. Which step of the proof of :ref{#prop-computable-ordinals-basic} (3) fails for $R$?
+
+:::solution
+Let $R = \{ (x, x) : x \in \nat \} \cup \{ (0, n + 1) : n \in \emptyset' \}$. It is c.e., since $\emptyset'$ is. It is reflexive. It is antisymmetric, since its only pairs $(x, y)$ with $x \neq y$ have $x = 0$ and $y \geq 1$. It is transitive: if $(x, y)$ and $(y, z)$ are in $R$ with $x \neq y$ and $y \neq z$, then $y = 0$ by the form of the second pair and $y \geq 1$ by the form of the first, which is impossible; and if $x = y$ or $y = z$, the conclusion $(x, z) \in R$ is one of the hypotheses. Finally $(0, n + 1) \in R$ if and only if $n \in \emptyset'$, so $R$ is not computable.
+
+The proof of :ref{#prop-computable-ordinals-basic} (3) decides the order of two distinct elements by waiting until one of the two comparisons is enumerated. Here, for $n \notin \emptyset'$, the elements $0$ and $n + 1$ are incomparable, and neither comparison is ever enumerated.
+:::
+::::
+
+::::exercise{#ex-type-omega-pi03 difficulty=2 objective="Characterize the order type $\omega$ by a first-order condition and classify the corresponding index set in the arithmetic hierarchy."}
+Show that a linear order is of type $\omega$ if and only if its field is infinite and every element has finitely many predecessors. Deduce that the set of indices $e$ of computable linear orders with $|L_e| = \omega$ (that is, $L_e$ is a well-ordering of type $\omega$) is $\Pi^0_3$.
+
+:::solution
+A linear order of type $\omega$ is isomorphic to $(\nat, <)$, so it has the two properties. Conversely, let $L$ be a linear order with infinite field $F$ in which every element has finitely many predecessors, and let $p(x)$ be the number of predecessors of $x \in F$. If $x <_L y$, every predecessor of $x$ is a predecessor of $y$, and $x$ is one too, so $p(x) < p(y)$: the map $p$ is order-preserving and injective. Its image is downward closed: if $p(x) = k$, list the predecessors of $x$ as $y_0 <_L \cdots <_L y_{k-1}$; the predecessors of $y_j$ are predecessors of $x$, namely $y_0, \dots, y_{j-1}$, so $p(y_j) = j$ for every $j < k$. An infinite downward closed subset of $\nat$ is $\nat$, so $p$ is an isomorphism onto $(\nat, <)$.
+
+Let $\mathrm{LO}$ be the set of indices of computable linear orders, a $\Pi^0_2$ set. For $e \in \mathrm{LO}$, the function $\Phi_e$ is total, so "$(x, y) \in L_e$" is equivalent both to $\exists s\, \Phi_e(\langle x, y \rangle)[s]\converge = 1$ and to $\forall s\, (\Phi_e(\langle x, y \rangle)[s]\converge \rightarrow \Phi_e(\langle x, y \rangle) = 1)$; it can therefore be used inside a formula as a $\Sigma^0_1$ or as a $\Pi^0_1$ condition, as convenient. By the first part, $|L_e| = \omega$ if and only if
+$$
+\begin{gathered}
+e \in \mathrm{LO} \ \wedge\ \forall n\, \exists x\, [x > n \wedge (x, x) \in L_e] \\
+\wedge\ \forall x\, \big[(x, x) \in L_e \rightarrow \exists n\, \forall y\, (y <_{L_e} x \rightarrow y < n)\big].
+\end{gathered}
+$$
+The first conjunct is $\Pi^0_2$; so is the second. In the third, "$y <_{L_e} x \rightarrow y < n$" is $\Pi^0_1$ (take $y <_{L_e} x$ in its $\Sigma^0_1$ form), so $\exists n\, \forall y\, (\cdots)$ is $\Sigma^0_2$; the implication with the $\Sigma^0_1$ hypothesis $(x, x) \in L_e$ is $\Sigma^0_2$, and the universal quantifier $\forall x$ gives $\Pi^0_3$. The conjunction is $\Pi^0_3$.
+:::
+::::
+
+::::exercise{#ex-successor-not-computable difficulty=2 objective="Build a computable copy of $\omega$ whose successor relation is not computable, by inserting elements as numbers enter $\emptyset'$."}
+Show that in every computable linear order, the successor relation $S = \{ (x, y) : y \text{ is the immediate successor of } x \}$ is $\Pi^0_1$. Show that there is a computable well-ordering of $\nat$ of type $\omega$ whose successor relation is not computable.
+
+:::solution
+For a computable linear order $L$, $(x, y) \in S$ if and only if $x <_L y$ and $\forall z\, \neg (x <_L z <_L y)$, a $\Pi^0_1$ condition.
+
+Let $k_0, k_1, \dots$ be a computable enumeration of $\emptyset'$ without repetitions ($\emptyset'$ is infinite). Give each number a key: $2m$ has key $(m, 0)$ and $2s + 1$ has key $(k_s, 1)$. The keys are pairwise distinct, since the $k_s$ are. Let $x <_L y$ if the key of $x$ is lexicographically smaller than the key of $y$ (compare first components, then second ones). The key of a number is computable, so $L$ is a computable linear order of $\nat$. Concretely, the even numbers are in their usual order, and the odd number $2s + 1$ is inserted immediately after $2 k_s$.
+
+Every element has finitely many predecessors: the predecessors of an element with key $(m, i)$ have keys with first component at most $m$, and there are finitely many such keys, namely $(j, 0)$ for $j \leq m$ and $(k_s, 1)$ for the finitely many $s$ with $k_s \leq m$. By :ref{#ex-type-omega-pi03}, or directly by sending each element to its number of predecessors, $L$ has type $\omega$.
+
+The element $2m + 2$ is the immediate successor of $2m$ if and only if no odd number is inserted between them, that is, if and only if $m \notin \emptyset'$. So $m \in \emptyset' \iff (2m, 2m + 2) \notin S$, and $S$ is not computable. The usual order of $\nat$ has a computable successor relation: two computable well-orderings of the same type can differ in which of their relations are computable.
+:::
+::::
+
+::::exercise{#ex-largest-element-fin difficulty=3 objective="Strengthen the coding of $\emptyset'$ into the order type to a coding of a $\Sigma^0_2$-complete set, by moving a top element each time a number is enumerated."}
+Let $\mathrm{Fin} = \{ e : W_e \text{ is finite} \}$. Show that there is a total computable function $g$ such that $g(e) \in \mathrm{WO}$ for every $e$, with $|L_{g(e)}| = \omega + 1$ if $e \in \mathrm{Fin}$ and $|L_{g(e)}| = \omega$ otherwise. Deduce that the set of $d \in \mathrm{WO}$ such that $L_d$ has a largest element is not $\Pi^0_2$.
+
+:::solution
+Fix $e$. We build a linear order $L$ of $\nat$ in stages, the number $s$ being placed at stage $s$ with respect to $0, \dots, s - 1$, and we keep track of a **top** element $t_s \leq s$. At stage $0$, the order is $\{ 0 \}$ and $t_0 = 0$. At stage $s + 1$, if some number enters $W_e$ at stage $s + 1$ (that is, $W_{e, s+1} \neq W_{e, s}$), place $s + 1$ above all of $0, \dots, s$ and let $t_{s+1} = s + 1$; otherwise, place $s + 1$ just below $t_s$ and above all the other numbers $\leq s$, and let $t_{s+1} = t_s$. Each stage inserts one number into a finite linear order, so $L$ is a linear order of $\nat$. For $x < y$, the position of $y$ relative to $x$ is decided at stage $y$: $y <_L x$ if and only if $W_{e, y} = W_{e, y-1}$ and $x = t_{y-1}$. So $L$ is computable, uniformly in $e$, and the SMN theorem gives $g$.
+
+Predecessors of an element $x$: they are among $0, \dots, x - 1$, together with the numbers $y > x$ placed below $x$, which are placed at stages $y$ with $t_{y-1} = x$. A number is the top during an interval of stages starting when it is placed; once replaced, it is never the top again, since every new top is a new number.
+
+If $W_e$ is infinite, the top changes infinitely often, so each $x$ is the top during finitely many stages and has finitely many predecessors. The field is infinite, so $L$ has type $\omega$ by :ref{#ex-type-omega-pi03}; in particular it has no largest element.
+
+If $W_e$ is finite, let $s_0$ be the last stage at which a number enters $W_e$, or $0$ if $W_e$ is empty. Then $t = t_{s_0}$ is the top at every later stage. It is the largest element: it is above $0, \dots, t - 1$ by construction (or $t = 0$), every number placed after stage $t$ while $t$ is the top is placed below it, and these are all the numbers $y > t$. Every $x \neq t$ is the top during finitely many stages, so it has finitely many predecessors. The order restricted to $\nat \setminus \{ t \}$ is infinite with every element having finitely many predecessors, of type $\omega$ by :ref{#ex-type-omega-pi03}, and $t$ comes after it: the type is $\omega + 1$.
+
+So $e \in \mathrm{Fin}$ if and only if $L_{g(e)}$ has a largest element. If the set $P$ of $d \in \mathrm{WO}$ such that $L_d$ has a largest element were $\Pi^0_2$, then $\mathrm{Fin} = g^{-1}(P)$ would be $\Pi^0_2$. But $\mathrm{Fin}$ is $\Sigma^0_2$-complete (course on the arithmetic hierarchy, lesson on index sets), and a $\Sigma^0_2$-complete set is not $\Pi^0_2$: otherwise every $\Sigma^0_2$ set would be $\Pi^0_2$, contradicting the hierarchy theorem.
+:::
+::::
+:::::

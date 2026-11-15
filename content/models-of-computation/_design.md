@@ -413,6 +413,86 @@ Checked on 2026-11-12:
 - A specialized course on subrecursive hierarchies (Grzegorczyk, fast-growing hierarchy,
   provably total functions) would continue `ackermann-function` and `while-programs`.
 
+## 12. Exercises
+
+Every exercise has a label, an objective, a difficulty and a solution. **Featured** exercises
+stay in the text (one to three per lesson, the most instructive); the others are in the
+collapsed block of **further exercises** at the end of each lesson, after the references.
+
+**Featured, and why.**
+- what-is-an-algorithm: `ex-pairing-bounds` (the inequality used later to justify recursions on
+  codes of pairs, e.g. `ex-seq-bijective`).
+- turing-machines: `ex-tm-zero` (a verification by phases), `ex-tm-countable` (counting gives a
+  non-computable function).
+- programming-turing-machines: `ex-tm-clean-halt` (used in the proof of composition, stays inline),
+  `ex-tm-parity` (counting in the finite control, invariant; solution completed with a full table).
+- multitape-machines: `ex-one-way-tape` (the first variant, cited in the text).
+- register-machines: `ex-urm-pred` (inline, decrement without decrement), `ex-urm-no-transfer`
+  (simulation, cited in the text).
+- primitive-recursion: `ex-pr-simultaneous` (pairing turns several recursions into one),
+  `ex-pr-range` (a hypothesis needed for a bounded search).
+- coding-sequences: `ex-seq-sort` (bound the value, then search), `ex-seq-bijective`.
+- ackermann-function: `ex-ack-row-pr` (rows vs. the whole function), `ex-ack-graph` (used in
+  mu-recursion; the text now cites it by label).
+- mu-recursion: `ex-mu-domain` (the convention on partial arguments).
+- loop-programs: `ex-loop-depth-one` (growth argument).
+- while-programs: `ex-while-urm` (URM ⊆ WHILE with one loop; cited in two lessons by label).
+- lambda-calculus: `ex-lambda-skk` (cited in the text). lambda-programming: `ex-lambda-minus-eq`,
+  `ex-lambda-fact` (fixed points and strategies).
+- lambda-definability: new `ex-head-infinite-application`, placed after `lem-head-context`: the
+  lemmas on head reduction at work.
+- equivalence-of-models: `ex-step-bounded-halting` (the step-bounded halting predicate used in
+  `fundamentals`).
+- church-turing-thesis: new `ex-ct-pi-sevens` (existence of an algorithm vs. knowledge of one).
+
+**Further exercises, lesson by lesson** (existing ones moved there, then new ones).
+- what-is-an-algorithm: power-of-two pairing; computing and decoding pairs with a closed formula;
+  tuple coding; Cantor pairing characterized by its enumeration order; partial expressions and
+  Kleene equality; bijective numeration is a bijection.
+- turing-machines: projection; step count of $M_+$; predecessor machine; $M_+$ in arities 1 and 3;
+  right-moving machines (two-way motion is needed); halting in bounded space (pigeonhole).
+- programming-turing-machines: exact step count $2(x+2)^2$ of the doubling machine; a copying
+  machine; a counterexample to naive composition; composition with several arguments.
+- multitape-machines: two-tape multiplication; stay moves; linear equality test on two tapes;
+  two heads on one tape; one-way machines compute all computable functions (difficulty 3).
+- register-machines: sign; definition by cases (now stated for partial functions, as the quiz of
+  primitive-recursion cites it); step counts; $\leq$; halving; the decrement/zero-test instruction
+  set mentioned in the text; closure under primitive recursion.
+- primitive-recursion: gcd/lcm; a derivation written out; largest witness; digit sum;
+  $p_n \leq 2^{2^n}$ and $\pi(x)$.
+- coding-sequences: increasing/prefix; decoding; a course-of-values example; reversal; a
+  primitive recursive β-code; length and concatenation of strings in bijective numeration.
+- ackermann-function: first rows; fourth row (towers); stack run of $A(2,1)$; rows iterate; the
+  inverse Ackermann function is primitive recursive; $n \mapsto A(n,0)$ is not.
+- mu-recursion: closure of recursive predicates; increasing functions; computing minimizations;
+  inverses of injections/surjections; $\Sigma_1$ graphs; regular minimization leaves the primitive
+  recursive functions; definition by cases for partial recursive functions via the normal form.
+- loop-programs: programs for $\cdot$, exp, sg; a trace ($x 2^x$); if-then-else; depth 2;
+  running time is primitive recursive; eliminating copies.
+- while-programs: traces (one partial); the loop as least solution of its unfolding equation;
+  Ackermann by one while loop; primitive recursive iteration bounds give primitive recursive
+  functions (difficulty 3).
+- lambda-calculus: $WWW$; free variables and substitution; hypotheses of the substitution lemma;
+  properties of parallel reduction (a step of Church–Rosser); failure of the one-step diamond;
+  normal vs. applicative order cost; $\mathsf K = \mathsf I$ trivializes the theory.
+- lambda-programming: booleans; short exponentiation; multiplication by iteration; Church lists;
+  Scott numerals (answers the open point on lists and Scott numerals); $\mathsf Y(\mathsf{SI})$.
+- lambda-definability: head reductions computed; why item 2 of `lem-head-context` needs a
+  non-abstraction; no normal form via Church–Rosser; minimization of total λ-definable functions.
+- equivalence-of-models: Init; the enumeration of primitive recursive functions (difficulty 3);
+  configuration codes of $M_S$; primitive recursive time; non-deterministic machines; direct
+  arithmetization of URM (the Monin–Patey route).
+- church-turing-thesis: Goldbach constant function; infinitely many states; an exact real
+  register decides every set; a proof by Church's thesis made formal (twin primes).
+
+**Sources.** Most exercises are standard textbook material written for this course. Ideas
+from: Soare §1.4 and Boolos–Burgess–Jeffrey ch. 3 (machine programming), Cutland (URM variants,
+URM exercises), Barendregt and Hindley–Seldin (head reduction, Scott numerals, Church lists,
+$\mathsf Y(\mathsf{SI})$, inconsistency of $\mathsf K = \mathsf I$), Monin–Patey (arithmetization
+of register machines). No text is copied; no exercise is attributed to a specific numbered
+exercise of a book, since none was transcribed. The π-sevens example is a classical illustration
+of non-constructive computability proofs.
+
 ## 11. History
 
 - **2026-11-12.** Design revision of lessons 1–6 and creation of this log (the log covers the
@@ -457,3 +537,11 @@ Checked on 2026-11-12:
   - Recent literature: Takahashi 1995, Accattoli–Dal Lago 2016, Gurevich 2000,
     Dershowitz–Gurevich 2008.
   - Durations recomputed with the convention above: 45, 35, 30, 30, 40, 20, 40, 50, 30.
+- **2026-11-13.** Featured and further exercises: labels, objectives and difficulties for all
+  existing exercises, featured exercises chosen (section 12), 76 new exercises (at least
+  four per lesson), text references to exercises replaced by `:ref` labels (`ex-ack-graph`,
+  `ex-while-urm`, `ex-urm-cases`, `ex-urm-no-transfer`, `ex-ack-rows`, `ex-lambda-skk`,
+  `ex-one-way-tape`). `ex-urm-cases` generalized to partial functions; solution of
+  `ex-tm-parity` completed. Durations recomputed (old duration scaled by the change of length):
+  programming-turing-machines 35, multitape-machines 30, mu-recursion 30, lambda-definability 45,
+  equivalence-of-models 45, church-turing-thesis 35.

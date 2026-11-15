@@ -311,7 +311,84 @@ quoted in lesson 4 (no non-trivial Σ⁰₂ partition regular class; measure and
 - The combined notion of forcing of Patey (2017) for COH (choice of the path during the
   construction) could be added as an exercise with a checked solution.
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a solution. Featured exercises
+(in the text, section "Exercises" before the notes) are the ones every reader should do;
+further exercises are in the collapsed block at the end of each lesson. Cross-lesson
+associations (`lessons=`) are used only where every label cited is in the prerequisites of
+the associated lesson; this left only `ex-pigeon-finite-instance` (also shown in
+`pigeonhole-forcing`).
+
+**Featured, and why.**
+1. `jump-cones`: `ex-jca-products` (the reason for relativizing the definition, cited in
+   the text), `ex-jca-jump-hyperimmunity` (first-jump control transfers domination).
+2. `sigma2-questions`: `ex-cohen-jump-hyperimmunity` (compactness of the lifted question;
+   template of three later exercises).
+3. `wkl-two-cones`: `ex-wkl-primitive-trees` (restricting the order, the monograph's
+   proof), `ex-wkl-no-high-ideal` (ω-models without high members).
+4. `cohesiveness-second-jump`: `ex-path-jockusch-stephan` (cited in the text: paths are PA
+   relative to ∅'). The hyperimmunity exercise moved to the further block.
+5. `partition-regularity`: `ex-pr-large-trace`, `ex-pr-largest-subclass` (a pair; the
+   second uses the first). The union/intersection exercise moved (its counterexample is
+   already in the text).
+6. `largeness`: `ex-large-finite-size` (new, short: cover classes computed by hand; the
+   lesson is at the 45-minute limit).
+7. `cohesive-classes`: `ex-cohesive-ultrafilter`, `ex-minimal-greedy` (cited in notes).
+8. `pigeonhole-forcing`: `ex-pigeon-ideal-instance` (new, short: an instance in 𝒩 makes a
+   side invalid at once).
+9. `pigeon-questions`: `ex-pigeon-promise-infinite` (new: a promise is not truth on
+   members, and needs validity).
+10. `pigeons-non-high`: `ex-pigeon-instance-in-ideal`, `ex-pigeon-rt22`. The finite
+    instance and jump hyperimmunity exercises moved to the further block.
+
+**Further exercises, lesson by lesson.**
+1. Single-solution problems fail JCA unless computable (Posner–Robinson); jump DNC
+   avoidance separates low from weakly low bases (COH); strong JCA for 1-genericity
+   relative to X' by finite extensions; transfer along ≤_c and ≤_sc.
+2. Lifted question of Cohen forcing on "G finite" and on gaps [y, 2y); lifted question =
+   "some extension forces" (independent of the level-1 question; JS case = the Σ⁰₂
+   question of `prop-tree-sigma2`); preservation of non-Σ⁰₂ definitions (two cases);
+   Π⁰₂-completeness of Mathias reservoir indices.
+3. Two hyperimmunities for Π⁰₁ classes (LLM); PA sets / Scott ideals with no high member
+   and no non-computable Δ⁰₂ member; two cones for Cohen generics and why 1-generics
+   avoid Π⁰₁ classes without computable members; all cones at once at level 2 = lowness.
+4. Hyperimmunity along a path (moved); binary-digit sequence (every set ≡_T a cohesive
+   set); paths computable in ∅'; lifted question on "G ⊆* R_k" computes P; ω-model of
+   WKL + COH without high members avoiding a cone.
+5. Union/intersection (moved); L_Z ∩ L_X not partition regular; minimal partition
+   regular classes = ultrafilters (motivates 𝓜-minimality); the Π⁰₂ class
+   "many elements in [x, 2^x)"; density classes in detail; L(𝒜) for the lesson's
+   counterexample.
+6. Non-trivial large Π⁰₂ classes contain co-hyperimmune sets; largeness of a Σ⁰₁ class is
+   Π⁰₂-complete; L_H cohesive iff H cohesive; S ⊕ M' PA over X' for X ∈ 𝓜 (LLM), so no
+   Δ⁰₂ S with M low.
+7. Splitting lemma fails with finite members; 𝓜-minimal ⇒ 𝓜-cohesive and equal to its
+   core; members of 𝓜 in the core; a cohesive class inside the class of exercise 5.
+8. Extension is a preorder; computing V_{σ,φ} and the role of validity; why U_S ∩ V and
+   why cohesiveness (two counterexamples); why two ideals (S ∉ 𝓜, no Scott ideal contains
+   the jump of its code).
+9. Promises exclude counterexamples on valid extensions; the witness of invalidity
+   (example where the question without witness fails); partitions may range over 𝒩;
+   both questions on "G finite".
+10. Finite instances and jump hyperimmunity (moved); neither high nor low₂; RT¹_k by
+    induction; generic instances are in case B (both cases occur); preservation of
+    non-Σ⁰₂ definitions for RT¹₂ (second proof of the theorem for Z = ∅).
+
+**Sources.** Patey's monograph, chapter *Jump cone avoidance* (jump DNC avoidance; two
+hyperimmunities for WKL, attributed to Le Houérou–Levy Patey–Mimouni; L_Z ∩ L_X, after
+Monin–Patey 2024 and Mimouni; co-hyperimmune sets in large Π⁰₂ classes, after Monin–Patey
+2024; S ⊕ M' PA, LLM 2024; RT¹₂ jump hyperimmunity, Monin–Patey 2019). The others were
+written for the course; the non-Σ⁰₂ exercises follow `avoidance/non-sigma1-definitions`
+one level up. The monograph's exercises on Flood's packed sets, on the combined COH
+forcing of Patey (2017) and on the Π⁰₂ class whose cohesive subclass is not minimal were
+not used (secondary, or no fully checked solution).
+
+**Durations.** The further exercises are outside the reading time. `pigeons-non-high`
+went from 45 to 35 minutes (1941 words); the featured exercises added to `largeness`
+and `pigeonhole-forcing` keep them at 45 (2575 and 2587 words, below 47.5 minutes).
+
+## 12. History
 
 - **2026-11-12.** Course created: seven lessons, six figures
   (`scripts/figures/jump-cone-avoidance.py`), design log.
@@ -330,3 +407,8 @@ quoted in lesson 4 (no non-trivial Σ⁰₂ partition regular class; measure and
   theorem does not give; validity in the monograph is written with U_S, not the core.
   Figure `cohesive-choices`: subscripts L_Z instead of L(Z) (which denotes the largest
   partition regular subclass) and width within the view box.
+- **2026-11-13: featured and further exercises.** Labels, objectives and difficulties
+  for all existing exercises; featured exercises chosen (one or two per lesson, three new
+  short ones for the lessons that had none); 41 new further exercises, at least four per
+  lesson; positional references to exercises replaced by `:ref`; `pigeons-non-high` set
+  to 35 minutes. See section 11.

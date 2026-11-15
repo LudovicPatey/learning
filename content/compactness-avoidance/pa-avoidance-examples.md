@@ -1,7 +1,7 @@
 ---
 title: First consequences of PA avoidance
 summary: The table of examples; cohesiveness admits PA avoidance; every set is Δ⁰₂ relative to a set that is not PA, so that strong PA avoidance reduces to Δ⁰₂ instances; PA avoidance implies cone avoidance, by the Posner–Robinson theorem.
-duration: 30
+duration: 35
 prerequisites: [pa-avoidance, cohen-genericity/posner-robinson]
 ---
 
@@ -16,7 +16,7 @@ The following table collects the problems of :ref{#ex-cone-avoidance-problems}, 
 | --- | --- | --- |
 | $\mathsf{RT}^1_2$ | yes (trivial) | yes, Liu (:ref{#thm-rt12-strong-pa}) |
 | $\mathsf{WKL}$ | no | no |
-| $\mathsf{COH}$ | yes (:ref{#thm-coh-pa-avoidance}) | yes (:ref{to="compactness-avoidance/liu-theorem"}, exercise) |
+| $\mathsf{COH}$ | yes (:ref{#thm-coh-pa-avoidance}) | yes (:ref{#ex-coh-strong-pa}) |
 | $\mathsf{RT}^2_2$ | yes, Liu (:ref{#thm-liu-rt22}) | no |
 | $\mathsf{RT}^3_2$ | no | no |
 | $\mathsf J$ | no | no |
@@ -62,6 +62,14 @@ The forward direction is a special case. Conversely, let $D \leq_T Z$ with $Z$ n
 :::
 
 The proof keeps the same $D$ and replaces $Z$ by $Z \oplus G$: this is the stability of the definition under iteration announced above. By the corollary, the instances of the pigeonhole principle that matter for strong PA avoidance are the $\Delta^0_2$ sets, which are the limit sets of stable colorings computable in $Z$.
+
+::::exercise{#ex-strong-pa-stable difficulty=1 objective="Reduce the strong PA avoidance of the pigeonhole principle to the limit sets of stable colorings, with the limit lemma."}
+A coloring $f : [\nat]^2 \to 2$ is **stable** if $\lim_y f(\{ x, y \})$ exists for every $x$, and its **limit set** is $A_f = \{ x : \lim_y f(\{ x, y \}) = 1 \}$. Show that $\mathsf{RT}^1_2$ admits strong PA avoidance if and only if for all sets $D \leq_T Z$ such that $Z$ is not PA relative to $D$, and every stable coloring $f$ computable in $Z$, there is an infinite set $H$ contained in $A_f$ or in $\overline{A_f}$ such that $Z \oplus H$ is not PA relative to $D$.
+
+:::solution
+The forward direction is a special case: $A_f$ is an instance of $\mathsf{RT}^1_2$, and its solutions are the infinite subsets of $A_f$ or of $\overline{A_f}$. Conversely, by :ref{#cor-strong-pa-delta2} it suffices to consider an instance $A \leq_T Z'$. By the limit lemma relativized to $Z$, there is a $Z$-computable function $g$ with $A(x) = \lim_s g(x, s)$ for every $x$, and we may take $g$ with values in $\{0, 1\}$. Let $f(\{ x, y \}) = g(x, y)$ for $x < y$. Then $f$ is computable in $Z$, and stable with limit set $A$, so the hypothesis gives an infinite subset $H$ of $A$ or of $\overline A$ with $Z \oplus H$ not PA relative to $D$.
+:::
+::::
 
 ## PA avoidance implies cone avoidance
 
@@ -112,3 +120,45 @@ The examples, the reduction of strong PA avoidance to $\Delta^0_2$ instances and
 - D. B. Posner and R. W. Robinson, *Degrees joining to 0′*, Journal of Symbolic Logic 46 (1981), 714–722.
 - C. G. Jockusch and R. A. Shore, *Pseudo-jump operators II: transfinite iterations, hierarchies and minimal covers*, Journal of Symbolic Logic 49 (1984), 1205–1236.
 - L. Patey, *Lowness and avoidance*, chapter *Compactness avoidance*, sections *PA avoidance* and *Comparing avoidances*.
+
+:::::exercises
+::::exercise[Joins of sets that are not PA]{#ex-pa-join-not-closed difficulty=2 objective="Build two sets that are not PA whose join is PA, with 1-generic sets, and see why the iteration in the proof for products is needed."}
+Let $P$ be a PA set. Show that there are sets $Y_0$ and $Y_1$, neither of which is PA, such that $Y_0 \oplus Y_1$ computes $P$. Deduce that the class $\mathcal W_\emptyset$ of the sets that are not PA is not closed under joins, and explain why, in :ref{#ex-pa-avoidance-product}, PA avoidance of $\mathsf P_1$ is applied relative to $Z \oplus Y_0$ and not relative to $Z$.
+
+:::solution
+For a set or a string $X$, let $X \mathbin{\triangle} P$ have the bit $X(n) + P(n) \bmod 2$ at each position $n$ where $X$ is defined. This is a bijection on the strings of each length, which preserves the prefix order in both directions, and it is its own inverse.
+
+Let $G$ be 1-generic relative to $P$, and $Y_0 = G$, $Y_1 = G \mathbin{\triangle} P$. We show that $Y_1$ is 1-generic relative to $P$. Let $W$ be a set of strings, c.e. relative to $P$, and let $V = \{ \tau : \tau \mathbin{\triangle} P \in W \}$, also c.e. relative to $P$. Some prefix $\tau$ of $G$ is in $V$, or has no extension in $V$. In the first case $\tau \mathbin{\triangle} P$ is a prefix of $Y_1$ in $W$. In the second, no extension $\rho$ of $\tau \mathbin{\triangle} P$ is in $W$, since $\rho \mathbin{\triangle} P$ would be an extension of $\tau$ in $V$. So $Y_1$ meets or avoids $W$.
+
+A set 1-generic relative to $P$ is 1-generic, since every c.e. set of strings is c.e. relative to $P$. By :ref{#cor-generic-not-pa}, neither $Y_0$ nor $Y_1$ is PA. But $P(n) = Y_0(n) + Y_1(n) \bmod 2$, so $Y_0 \oplus Y_1$ computes $P$ and is PA (fact 1). Hence $Y_0, Y_1 \in \mathcal W_\emptyset$ and $Y_0 \oplus Y_1 \notin \mathcal W_\emptyset$.
+
+In the proof for products, PA avoidance of $\mathsf P_1$ applied relative to $Z$ would give $Y_1$ with $Z \oplus Y_1$ not PA relative to $D$, and $Z \oplus Y_0$ is not PA relative to $D$ either; the example with $Z = D = \emptyset$ shows that $Z \oplus Y_0 \oplus Y_1$ may still be PA. Applying it relative to $Z \oplus Y_0$ controls the join directly.
+:::
+::::
+
+::::exercise[The identity problem]{#ex-identity-problem difficulty=1 objective="Separate PA avoidance from strong PA avoidance with a problem whose solutions are its instances."}
+Let $\mathsf{Id}$ be the problem whose instances are all sets, the only solution to $X$ being $X$ itself. Show that $\mathsf{Id}$ admits PA avoidance and cone avoidance, but neither strong PA avoidance nor strong cone avoidance.
+
+:::solution
+If $X \leq_T Z$, the solution $Y = X$ satisfies $Z \oplus Y \equiv_T Z$. So $Z \oplus Y$ is not PA relative to $D$ whenever $Z$ is not, and $C \not\leq_T Z \oplus Y$ whenever $C \not\leq_T Z$. For the strong versions, take $Z = D = \emptyset$ and the instance $\emptyset'$: its only solution is $\emptyset'$, which is PA (fact 2) and computes $C = \emptyset'$, a set not computable in $Z$. The strong properties concern instances that are not computable in $Z$, and $\mathsf{Id}$ hands such an instance back unchanged.
+:::
+::::
+
+::::exercise[Avoiding the jump without Posner–Robinson]{#ex-pa-avoids-jump difficulty=1 objective="Use PA avoidance with $D = Z$ to avoid the cone above $Z'$, and see why the Posner–Robinson theorem is needed for an arbitrary cone."}
+Let $\mathsf P$ admit PA avoidance, $Z$ a set and $X \leq_T Z$ an instance. Show, without the Posner–Robinson theorem, that $X$ has a solution $Y$ with $Z' \not\leq_T Z \oplus Y$. Why does the same argument not give $C \not\leq_T Z \oplus Y$ for an arbitrary set $C \not\leq_T Z$?
+
+:::solution
+Take $D = Z$. Then $Z$ is not PA relative to $D$ (fact 2), so PA avoidance gives a solution $Y$ with $Z \oplus Y$ not PA relative to $Z$. The set $Z'$ is PA relative to $Z$ (fact 2), so if $Z' \leq_T Z \oplus Y$, then $Z \oplus Y$ would be PA relative to $Z$ (fact 1). Hence $Z' \not\leq_T Z \oplus Y$.
+
+The argument uses that $Z'$ is PA relative to $Z$. An arbitrary set $C \not\leq_T Z$ need not be PA relative to $Z$, and then "$Z \oplus Y$ is not PA relative to $Z$" does not exclude $C \leq_T Z \oplus Y$. The proof of :ref{#thm-pa-implies-cone} changes the base: relative to $W = Z \oplus G$, the set $C \oplus W$ computes $W'$, which is PA relative to $W$.
+:::
+::::
+
+::::exercise[A set that is not PA with a PA jump]{#ex-nonpa-jump-pa difficulty=1 objective="Apply the Δ⁰₂ construction to see that PA avoidance controls a set and not its jump."}
+Show that there is a set $G$ that is not PA, such that $G'$ is PA relative to $\emptyset'$.
+
+:::solution
+Apply :ref{#thm-delta2-pa-avoidance} with $D = Z = \emptyset$ and $A = \emptyset''$: there is a set $G$ that is not PA with $\emptyset'' \leq_T G'$. Fact 2 relativized to $\emptyset'$ says that $\emptyset''$ is PA relative to $\emptyset'$, so $G'$ is PA relative to $\emptyset'$ by fact 1. So PA avoidance at the level of $G$ says nothing on the jump of $G$; the avoidance of PA degrees relative to $\emptyset'$ by jumps is a different property, studied in the course on jump compactness avoidance.
+:::
+::::
+:::::

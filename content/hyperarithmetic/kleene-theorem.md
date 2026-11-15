@@ -1,7 +1,7 @@
 ---
 title: The hyperarithmetic sets are the Δ¹₁ sets
 summary: The H-sets are uniformly Δ¹₁ along O; quantification over hyperarithmetic sets is Π¹₁; H-sets compute the sets of trees of bounded rank; Kleene's theorem that a set is hyperarithmetic if and only if it is Δ¹₁, through Spector's boundedness theorem.
-duration: 50
+duration: 45
 prerequisites: [spector-uniqueness, computable-ordinals/markwald, computable-ordinals/trees-and-pi11, computable-ordinals/boundedness]
 ---
 
@@ -154,9 +154,7 @@ Why does the proof fail for $\mathcal O$, which is $\Pi^1_1$?
   Each of them is a computable well-founded tree, so its rank is a computable ordinal; what fails is a common bound below $\omega_1^{\mathrm{CK}}$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-sigma11-notations-bounded difficulty=1 objective="Apply the boundedness theorem to sets of notations, and deduce that $\mathcal O$ is not $\Sigma^1_1$."}
 Show that if $S \subseteq \mathcal O$ is $\Sigma^1_1$, then $\sup \{ |a| : a \in S \} < \omega_1^{\mathrm{CK}}$. Deduce that $\mathcal O$ is not $\Sigma^1_1$.
 
 :::solution
@@ -164,7 +162,7 @@ By :ref{#prop-kleene-o-basic} (2), the relation $\{ (b, c) : R(b, a) \wedge R(c,
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-hyp-pi11-in-x difficulty=2 objective="Express &quot;$X$ is hyperarithmetic&quot; with H-sequences, as a $\Pi^1_1$ property of $X$."}
 Show that no hyperarithmetic set computes all hyperarithmetic sets, and that the relation "$X$ is hyperarithmetic" is $\Pi^1_1$ in $X$.
 
 :::solution
@@ -182,3 +180,59 @@ Kleene (1955) proved that the $\Delta^1_1$ sets are exactly the hyperarithmetic 
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section VIII.3.
 - G. E. Sacks, *Higher Recursion Theory*, Springer, 1990.
 - Y. N. Moschovakis, *Descriptive Set Theory*, 2nd edition, American Mathematical Society, 2009.
+
+:::::exercises
+::::exercise{#ex-hyp-omega1-ck difficulty=2 objective="Adapt the proof that arithmetic sets do not compute $\omega_1^{\mathrm{CK}}$ to hyperarithmetic oracles, using an H-sequence as witness."}
+Show that $\omega_1^X = \omega_1^{\mathrm{CK}}$ for every hyperarithmetic set $X$, where $\omega_1^X$ is the least ordinal that is not the type of an $X$-computable well-ordering.
+
+:::solution
+Every computable well-ordering is $X$-computable, so $\omega_1^X \geq \omega_1^{\mathrm{CK}}$. Suppose $\omega_1^X > \omega_1^{\mathrm{CK}}$. The $X$-computable ordinals are closed downward (:ref{#prop-computable-ordinals-basic} (1), relativized), so there is an $X$-computable well-ordering $W$ of type $\omega_1^{\mathrm{CK}}$; write $W = \Phi^X_k$ and $X = \Phi^{H_a}_p$ with $a \in \mathcal O$. We claim that $e \in \mathrm{WO}$ if and only if $L_e$ is a linear order and there are a set $Y$ and a function $h$ such that
+
+- $Y$ is an H-sequence along $a$,
+- $Z = \Phi^{Y^{[a]}}_p$ is total and $\{0, 1\}$-valued, $\Phi^Z_k$ is total and is the characteristic function of a linear order $W_Z$,
+- $h$ is an order-preserving injection from $L_e$ into $W_Z$.
+
+If $e \in \mathrm{WO}$, take for $Y$ the H-sequence along $a$ (:ref{#lem-h-sequence-unique}); then $Z = X$ and $W_Z = W$, and since $|L_e| < \omega_1^{\mathrm{CK}} = |W|$, the comparison theorem (:ref{#thm-wo-comparison}) gives an embedding $h$ of $L_e$ onto a proper initial segment of $W$. Conversely, the only H-sequence along $a$ has column $H_a$, so $W_Z = W$ is a well-ordering, and a linear order that embeds into a well-ordering is a well-ordering. The conditions are arithmetic in $Y$ and $h$, so $\mathrm{WO}$ would be $\Sigma^1_1$, contradicting :ref{#prop-pi11-not-sigma11}.
+
+The argument is that of :ref{#prop-omega1-relative} (1); the only change is that $X$ is described through the H-sequence along $a$ instead of by an arithmetic formula.
+:::
+::::
+
+::::exercise{#ex-wf-not-hyp difficulty=1 objective="Contrast the bounded sets $\mathrm{WF}_{<\alpha}$, which are hyperarithmetic, with $\mathrm{WF}$, which is not."}
+Show that $\mathrm{WF}$, the set of indices of well-founded computable trees, is not hyperarithmetic. Deduce, without :ref{#prop-rank-computable}, that for every computable ordinal $\alpha$, some computable well-founded tree has rank at least $\alpha$.
+
+:::solution
+By :ref{#prop-h-delta11}, every hyperarithmetic set is $\Delta^1_1$, and $\mathrm{WF}$ is not $\Sigma^1_1$ (:ref{#prop-pi11-not-sigma11}); so $\mathrm{WF}$ is not hyperarithmetic. If every computable well-founded tree had rank less than a computable ordinal $\alpha$, then $\mathrm{WF} = \mathrm{WF}_{<\alpha}$, which is hyperarithmetic by :ref{#lem-wf-rank-hyp}; this is impossible.
+:::
+::::
+
+::::exercise{#ex-h-relation-pi11-not-sigma11 difficulty=1 objective="Place the relation gathering all H-sets in the analytic hierarchy."}
+Show that $\mathcal H = \{ \langle a, v \rangle : a \in \mathcal O \text{ and } v \in H_a \}$ is $\Pi^1_1$ but not $\Sigma^1_1$.
+
+:::solution
+The relation "$a \in \mathcal O$ and $v \in H_a$" is $\Pi^1_1$ by :ref{#prop-h-delta11}, and $\langle a, v \rangle$ is a computable bijection, so $\mathcal H$ is $\Pi^1_1$. If it were also $\Sigma^1_1$, it would be $\Delta^1_1$, hence hyperarithmetic by :ref{#thm-kleene-delta11}, which contradicts :ref{#ex-h-relation-not-hyp}.
+:::
+::::
+
+::::exercise{#ex-h-sequence-none difficulty=2 objective="See why the hypothesis $a \in \mathcal O$ is needed for H-sequences, with a self-referential limit notation."}
+Let $R$ be the c.e. relation constructed in the proof of :ref{#prop-kleene-o-basic} (2), which is used in :ref{#def-h-sequence}. Using the recursion theorem, find a number $a$ such that there is no H-sequence along $a$, and check that $a \notin \mathcal O$.
+
+:::solution
+By the s-m-n theorem, there is a total computable function $f$ such that $\Phi_{f(e)}$ is the constant function with value $2^{3 \cdot 5^e}$. By the recursion theorem (:ref{#cor-self-reference}), there is $e$ with $\Phi_e = \Phi_{f(e)}$. Let $a = 3 \cdot 5^e$, so that $\Phi_e(n) = 2^a$ for every $n$.
+
+By the rules generating $R$, $R(2^a, a)$ holds, since $2^a = \Phi_e(0)$. Suppose $Y$ is an H-sequence along $a$, and let $A = Y^{[a]}$. Since $R(2^a, a)$, the clause for $u = 2^a$ gives $Y^{[2^a]} = (Y^{[a]})' = A'$. The clause for $u = a$, a number of the form $3 \cdot 5^e$, gives $A = \{ \langle w, v \rangle : R(w, a) \text{ and } v \in Y^{[w]} \}$; since $R(2^a, a)$, the column $2^a$ of $A$ is $Y^{[2^a]} = A'$. So $A' \leq_T A$, which contradicts :ref{#thm-jump}. There is no H-sequence along $a$.
+
+The number $a$ is not in $\mathcal O$, since $\Phi_e(0) = \Phi_e(1)$, while the terms of a fundamental sequence must be $<_{\mathcal O}$-increasing (:ref{#lem-o-inversion}); this agrees with :ref{#lem-h-sequence-unique}, which gives an H-sequence along every notation.
+:::
+::::
+
+::::exercise{#ex-no-sigma11-hyp-index difficulty=2 objective="Combine boundedness with Spector's theorem: no $\Sigma^1_1$ set of notations suffices to describe all hyperarithmetic sets."}
+Show that there is no $\Sigma^1_1$ set $I \subseteq \mathcal O$ such that every hyperarithmetic set is computable in $H_a$ for some $a \in I$.
+
+:::solution
+Let $I \subseteq \mathcal O$ be $\Sigma^1_1$. By :ref{#ex-sigma11-notations-bounded}, $\gamma = \sup \{ |a| : a \in I \} < \omega_1^{\mathrm{CK}}$. Let $b$ be a notation of $\gamma$ (:ref{#cor-constructive-computable}). For every $a \in I$, $|a| \leq |b|$, so $H_a \leq_T H_b$ by :ref{#thm-spector-uniqueness}. If every hyperarithmetic set were computable in some $H_a$ with $a \in I$, all of them would be computable in $H_b$, but $H_{2^b}$ is not (:ref{#prop-h-sets-basic} (3)).
+
+In contrast, $\mathcal O$ itself, which is $\Pi^1_1$, has this property by definition of $\mathrm{HYP}$.
+:::
+::::
+:::::

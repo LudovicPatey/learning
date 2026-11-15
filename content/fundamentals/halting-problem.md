@@ -94,7 +94,7 @@ The reduction transforms each question "$x \in A$?" into a question "$f(x) \in B
 :::
 
 :::example{#ex-many-one}
-Let $A \subseteq \nat$ and $2A = \{ 2x : x \in A \}$. The function $x \mapsto 2x$ reduces $A$ to $2A$. Conversely, if $A \neq \nat$, fix $b \notin A$; the function $g(y) = y/2$ for $y$ even and $g(y) = b$ for $y$ odd reduces $2A$ to $A$, so $A \equiv_m 2A$. The hypothesis $A \neq \nat$ is needed: the set $2\nat$ of even numbers does not reduce to $\nat$, since every value of a reduction to $\nat$ lies in $\nat$, which would force every $y$ to be even. So $\leq_m$ is sensitive to the trivial sets $\emptyset$ and $\nat$; the first exercise shows that this is the only anomaly among computable sets.
+Let $A \subseteq \nat$ and $2A = \{ 2x : x \in A \}$. The function $x \mapsto 2x$ reduces $A$ to $2A$. Conversely, if $A \neq \nat$, fix $b \notin A$; the function $g(y) = y/2$ for $y$ even and $g(y) = b$ for $y$ odd reduces $2A$ to $A$, so $A \equiv_m 2A$. The hypothesis $A \neq \nat$ is needed: the set $2\nat$ of even numbers does not reduce to $\nat$, since every value of a reduction to $\nat$ lies in $\nat$, which would force every $y$ to be even. So $\leq_m$ is sensitive to the trivial sets $\emptyset$ and $\nat$; :ref{#ex-computable-reduces} shows that this is the only anomaly among computable sets.
 :::
 
 :::proposition{#prop-many-one}
@@ -166,8 +166,24 @@ Which statements are correct?
 - [x] If $A \leq_m B$ and $B$ is computable, then $A$ is computable.
 - [ ] If $A \leq_m B$ and $A$ is computable, then $B$ is computable.
 
-  Every computable set reduces to $\emptyset'$, as to any set other than $\emptyset$ and $\nat$ (see the exercises).
+  Every computable set reduces to $\emptyset'$, as to any set other than $\emptyset$ and $\nat$ (:ref{#ex-computable-reduces}).
 :::
+
+::::exercise{#ex-halting-zero difficulty=1 objective="Build a many-one reduction from the halting set with the parameter form of the SMN theorem."}
+Show that $\{ e : \Phi_e(e)\converge = 0 \}$ is not computable.
+
+:::solution
+Let $g$ be total computable with $\Phi_{g(e)}(y) \simeq 0$ if $\Phi_e(e)\converge$, and undefined otherwise; it exists by :ref{#cor-smn-parameters}, since the right-hand side is a partial computable function of $(e, y)$. Then $e \in \emptyset' \iff \Phi_{g(e)}(g(e))\converge = 0$, so $g$ reduces $\emptyset'$ to the set.
+:::
+::::
+
+::::exercise{difficulty=2 #ex-inf-reductions objective="Reduce the halting set and its complement to the set of indices of functions with infinite domain."}
+Let $\mathrm{Inf} = \{ e : \mathrm{dom}(\Phi_e) \text{ is infinite} \}$. Show that $\emptyset' \leq_m \mathrm{Inf}$ and $\nat \setminus \emptyset' \leq_m \mathrm{Inf}$.
+
+:::solution
+The reduction $e \mapsto z(e, e)$ of :ref{#prop-halting-variants} sends $e \in \emptyset'$ to an index of a total function, whose domain is infinite, and $e \notin \emptyset'$ to an index of the nowhere defined function. The reduction $g$ of item 3 sends $e \notin \emptyset'$ to an index of a total function, and $e \in \emptyset'$ to an index of a function whose domain is $\{ x : \Phi_e(e)[x]\diverge \}$, a finite initial segment of $\nat$.
+:::
+::::
 
 ## Undecidable problems in mathematics
 
@@ -176,32 +192,6 @@ Reductions from the halting problem show that many natural mathematical problems
 - **The Entscheidungsproblem.** The set of (codes of) valid formulas of first-order logic is not computable (Church, Turing, 1936). Since Kalmár reduced the decision problem to formulas whose only non-logical symbol is a single binary relation symbol (1937), it remains undecidable for these formulas.
 - **The word problem for groups.** There is a finitely presented group for which the set of words equal to the identity is not computable (Novikov, 1955; Boone, 1959).
 - **Hilbert's tenth problem.** The set of polynomial equations with integer coefficients having a solution in integers is not computable (Matiyasevich, 1970, completing work of Davis, Putnam and Robinson). More precisely, every computably enumerable set (in the sense of the next lesson) is Diophantine, and therefore $\emptyset'$ reduces to the solvability of Diophantine equations.
-
-## Exercises
-
-::::exercise{difficulty=1}
-Show that if $A$ is computable and $B \neq \emptyset$, $B \neq \nat$, then $A \leq_m B$. What happens if $B = \emptyset$ or $B = \nat$?
-
-:::solution
-Fix $b_1 \in B$ and $b_0 \notin B$, and let $f(x) = b_1$ if $x \in A$ and $f(x) = b_0$ otherwise; $f$ is total computable and reduces $A$ to $B$. If $B = \emptyset$, then $A \leq_m B$ forces $A = \emptyset$, since no $f(x)$ lies in $B$; similarly, $A \leq_m \nat$ forces $A = \nat$.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that $\{ e : \Phi_e(e)\converge = 0 \}$ is not computable.
-
-:::solution
-Let $g$ be total computable with $\Phi_{g(e)}(y) \simeq 0$ if $\Phi_e(e)\converge$, and undefined otherwise; it exists by :ref{#cor-smn-parameters}, since the right-hand side is a partial computable function of $(e, y)$. Then $e \in \emptyset' \iff \Phi_{g(e)}(g(e))\converge = 0$, so $g$ reduces $\emptyset'$ to the set.
-:::
-::::
-
-::::exercise{difficulty=2 #ex-inf-reductions}
-Let $\mathrm{Inf} = \{ e : \mathrm{dom}(\Phi_e) \text{ is infinite} \}$. Show that $\emptyset' \leq_m \mathrm{Inf}$ and $\nat \setminus \emptyset' \leq_m \mathrm{Inf}$.
-
-:::solution
-The reduction $e \mapsto z(e, e)$ of :ref{#prop-halting-variants} sends $e \in \emptyset'$ to an index of a total function, whose domain is infinite, and $e \notin \emptyset'$ to an index of the nowhere defined function. The reduction $g$ of item 3 sends $e \notin \emptyset'$ to an index of a total function, and $e \in \emptyset'$ to an index of a function whose domain is $\{ x : \Phi_e(e)[x]\diverge \}$, a finite initial segment of $\nat$.
-:::
-::::
 
 ## Notes and references
 
@@ -216,3 +206,95 @@ Turing proved in 1936 that no machine decides whether a given machine is circle-
 - R. C. Lyndon and P. E. Schupp, *Combinatorial Group Theory*, Springer, 1977.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Section 1.6.
 - B. Monin and L. Patey, *Computability theory*, chapter *Foundations of computability*, section *Computably enumerable sets*.
+
+:::::exercises
+::::exercise{#ex-computable-reduces difficulty=1 objective="Determine to which sets every computable set many-one reduces."}
+Show that if $A$ is computable and $B \neq \emptyset$, $B \neq \nat$, then $A \leq_m B$. What happens if $B = \emptyset$ or $B = \nat$?
+
+:::solution
+Fix $b_1 \in B$ and $b_0 \notin B$, and let $f(x) = b_1$ if $x \in A$ and $f(x) = b_0$ otherwise; $f$ is total computable and reduces $A$ to $B$. If $B = \emptyset$, then $A \leq_m B$ forces $A = \emptyset$, since no $f(x)$ lies in $B$; similarly, $A \leq_m \nat$ forces $A = \nat$.
+:::
+::::
+
+::::exercise{#ex-total-extension difficulty=2 objective="Relate the computability of the domain of a partial computable function to the existence of a total computable extension." lessons="programs-as-numbers"}
+Show that a partial computable function with a computable domain has a total computable extension. Show by an example that a partial computable function may have a total computable extension and a non-computable domain.
+
+:::solution
+If $D = \mathrm{dom}(f)$ is computable, let $g(x) \simeq f(x)$ for $x \in D$ and $g(x) = 0$ for $x \notin D$, a definition by cases (:ref{#prop-computable-closure}); $g$ is total since $f(x)\converge$ for $x \in D$. For the converse, consider the partial function defined by $f(e) \simeq 0$ if $\Phi_e(e)\converge$, undefined otherwise. It is partial computable, its domain $\emptyset'$ is not computable (:ref{#thm-halting}), and the constant function $0$ is a total computable extension.
+:::
+::::
+
+::::exercise{#ex-partial-graph difficulty=1 objective="See that the graph of a partial computable function need not be computable." lessons="programs-as-numbers"}
+Show that there is a partial computable function whose graph is not computable, so that totality is needed in one direction of :ref{#ex-graph-computable}. Show that the other direction holds for partial functions: if the graph of a partial function $f$ is computable, then $f$ is partial computable.
+
+:::solution
+Let $f(e) \simeq 0$ if $\Phi_e(e)\converge$, undefined otherwise; $f$ is partial computable (compute $\Phi_e(e)$, then output $0$). Its graph is $G = \{ (e, 0) : e \in \emptyset' \}$, and $e \in \emptyset' \iff (e, 0) \in G$. If $G$ were computable, $\emptyset'$ would be computable by substitution (:ref{#prop-computable-closure}), contradicting :ref{#thm-halting}.
+
+Conversely, if the graph $G$ of $f$ is computable, then $f(x) \simeq \mu y\ G(x, y)$: the search terminates exactly when $x \in \mathrm{dom}(f)$, and then returns the only $y$ with $G(x, y)$, namely $f(x)$. It is partial computable by item 4 of :ref{#prop-computable-closure}.
+:::
+::::
+
+::::exercise{#ex-no-stage-bound difficulty=1 objective="See that no computable function bounds the stages at which halting computations converge." lessons="programs-as-numbers"}
+Show that there is no total computable function $b$ such that, for every $e$, if $\Phi_e(e)\converge$ then $\Phi_e(e)[b(e)]\converge$. Deduce that there is no total computable $b'$ such that, for all $e$ and $x$, $\Phi_e(x)\converge$ implies $\Phi_e(x)[b'(e, x)]\converge$.
+
+:::solution
+Suppose such a $b$ exists. Then $e \in \emptyset' \iff \Phi_e(e)[b(e)]\converge$: from left to right by the property of $b$, from right to left by item 3 of :ref{#prop-stage-properties}. The right-hand side is a computable relation of $e$, by item 1 of :ref{#prop-stage-properties} and substitution of the total computable function $b$. So $\emptyset'$ would be computable, contradicting :ref{#thm-halting}. If $b'$ existed, $b(e) = b'(e, e)$ would be such a function.
+:::
+::::
+
+::::exercise{#ex-mu-partial difficulty=2 objective="See why the minimization of partial functions requires all earlier values to be defined." lessons="programs-as-numbers"}
+For a partial function $\psi : \nat^2 \rightharpoonup \nat$, let $F_\psi(x)$ be the least $y$ such that $\psi(x, y)\converge = 1$, whether or not $\psi(x, z)$ is defined for $z < y$, and let $F_\psi(x)$ be undefined if there is no such $y$. Show that there is a partial computable $\psi$ such that $F_\psi$ is not partial computable. What is the function $x \mapsto \mu y\ [\psi(x, y) = 1]$, with the minimization of the partial recursive functions, for this $\psi$?
+
+:::solution
+Let $\psi(x, 0) \simeq 1$ if $\Phi_x(x)\converge$, undefined otherwise, and $\psi(x, y) = 1$ for $y \geq 1$. This is a definition by cases on the computable condition $y = 0$, whose first branch computes $\Phi_x(x)$ and then outputs $1$; so $\psi$ is partial computable. Then $F_\psi(x) = 0$ if $x \in \emptyset'$ and $F_\psi(x) = 1$ otherwise. This $F_\psi$ is total; if it were partial computable, it would be computable, and $\emptyset' = \{ x : F_\psi(x) = 0 \}$ would be computable, contradicting :ref{#thm-halting}.
+
+The minimization of the partial recursive functions returns $y$ only if $\psi(x, z)$ is defined for every $z < y$. Here $\mu y\ [\psi(x, y) = 1]$ is $0$ if $x \in \emptyset'$, and undefined otherwise, since the search is stuck at $y = 0$. An algorithm can only evaluate $\psi(x, 0), \psi(x, 1), \dots$ in turn, and cannot skip a value whose computation does not terminate; $F_\psi$ would need to know that it does not.
+
+Adapted from Soare 2016, Exercise 1.6.28.
+:::
+::::
+
+::::exercise{#ex-join-m difficulty=1 objective="Show that the join of two sets is their least upper bound for many-one reducibility."}
+For $A, B \subseteq \nat$, let $A \oplus B = \{ 2x : x \in A \} \cup \{ 2x + 1 : x \in B \}$.
+
+1. Show that $A \leq_m A \oplus B$ and $B \leq_m A \oplus B$, and that if $A \leq_m C$ and $B \leq_m C$, then $A \oplus B \leq_m C$.
+2. Show that $A \oplus (\nat \setminus A) \leq_m \nat \setminus (A \oplus (\nat \setminus A))$ for every $A$.
+
+:::solution
+1. The functions $x \mapsto 2x$ and $x \mapsto 2x + 1$ reduce $A$ and $B$ to $A \oplus B$. If $f$ reduces $A$ to $C$ and $g$ reduces $B$ to $C$, let $h(2x) = f(x)$ and $h(2x + 1) = g(x)$. It is total computable, since the parity of $y$ and $\lfloor y / 2 \rfloor$ are computable. For $y = 2x$, $y \in A \oplus B \iff x \in A \iff f(x) \in C$, and for $y = 2x + 1$, $y \in A \oplus B \iff x \in B \iff g(x) \in C$.
+2. Let $D = A \oplus (\nat \setminus A)$ and $k(2x) = 2x + 1$, $k(2x + 1) = 2x$. Then $2x \in D \iff x \in A \iff 2x + 1 \notin D$, and $2x + 1 \in D \iff x \notin A \iff 2x \notin D$. So $y \in D \iff k(y) \notin D$, and $k$ reduces $D$ to its complement.
+
+Adapted from Soare 2016, Exercise 1.6.21.
+:::
+::::
+
+::::exercise{#ex-nonacceptable-numbering difficulty=2 objective="Construct a numbering that can be evaluated but is not acceptable." lessons="universal-program-smn"}
+For $p, q \in \nat$, let $\psi_{\langle p, q \rangle}$ be the unary partial function with $\psi_{\langle p, q \rangle}(0)$ undefined if $p = 0$, $\psi_{\langle p, q \rangle}(0) = p - 1$ if $p \geq 1$, and $\psi_{\langle p, q \rangle}(x) \simeq \Phi_q(x)$ for $x \geq 1$. Show that $(\psi_n)$ is a numbering of the unary partial computable functions that satisfies condition 1 of :ref{#def-acceptable} but not condition 2.
+
+:::solution
+*Condition 1.* $\psi_n(x)$ is defined by cases on the computable conditions $x = 0$ and $\pi_0(n) = 0$: it is undefined if both hold, equal to $\pi_0(n) - 1$ if $x = 0$ and $\pi_0(n) \geq 1$, and equal to $\Phi_{\pi_1(n)}(x)$ if $x \geq 1$, computed by the universal function. So $(n, x) \mapsto \psi_n(x)$ is partial computable, and each $\psi_n$ is partial computable.
+
+*Every function appears.* Let $f$ be unary partial computable and $q$ an index of $f$. If $f(0)\diverge$, then $f = \psi_{\langle 0, q \rangle}$; if $f(0) = y$, then $f = \psi_{\langle y + 1, q \rangle}$. In both cases the two functions agree at $0$ and on all $x \geq 1$.
+
+*Condition 2 fails.* Suppose $t$ is total computable with $\psi_{t(e)} = \Phi_e$ for every $e$. Then $\Phi_e(0)\converge \iff \psi_{t(e)}(0)\converge \iff \pi_0(t(e)) \geq 1$, a computable condition. So $\{ e : \Phi_e(0)\converge \}$ would be computable, contradicting :ref{#prop-halting-variants}. In this numbering, an index tells whether the function is defined at $0$, and this information cannot be computed from a standard index.
+
+Adapted from Soare 2016, Exercise 1.7.9.
+:::
+::::
+
+::::exercise{#ex-uniform-diagonal difficulty=2 objective="Make the diagonal argument effective by computing, from a program, an input on which it fails to decide the halting set."}
+Show that there is a total computable function $d$ such that for every $e$ for which $\Phi_e$ is total with values in $\{0, 1\}$,
+$$
+d(e) \in \emptyset' \iff \Phi_e(d(e)) = 0.
+$$
+In other words, $d(e)$ is an input on which $\Phi_e$ is not the characteristic function of $\emptyset'$.
+
+:::solution
+By :ref{#cor-smn-parameters}, there is a total computable $d$ such that the program $d(e)$, on input $x$, computes $\Phi_e(x)$, halts with output $0$ if this value is $0$, and loops otherwise (in particular if $\Phi_e(x)\diverge$). Then $\Phi_{d(e)}(x)\converge \iff \Phi_e(x)\converge = 0$ for all $x$. Taking $x = d(e)$,
+$$
+d(e) \in \emptyset' \iff \Phi_{d(e)}(d(e))\converge \iff \Phi_e(d(e))\converge = 0.
+$$
+If $\Phi_e$ is total with values in $\{0, 1\}$, the right-hand side is $\Phi_e(d(e)) = 0$, so $\Phi_e(d(e)) \neq \chi_{\emptyset'}(d(e))$. This is the proof of :ref{#thm-halting} with the program $D$ built from $e$, and its index $d(e)$ computed from $e$; it shows not only that $\emptyset'$ is not computable, but how to refute each candidate algorithm.
+:::
+::::
+:::::

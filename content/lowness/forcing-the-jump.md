@@ -1,7 +1,7 @@
 ---
 title: Forcing the jump effectively
 summary: Conditions represented by codes; a notion of forcing decides the jump effectively relative to an oracle A if A finds extensions deciding each Σ⁰₁ sentence; then an A-computable generic sequence yields a set whose jump is computable in A; Cohen, Jockusch–Soare and computable Mathias forcing.
-duration: 45
+duration: 40
 prerequisites: [low-bases, effective-forcing/generic-sets, effective-forcing/mathias-forcing, arithmetic-hierarchy/codes, pi01-classes/basis-theorems]
 ---
 
@@ -19,7 +19,7 @@ This is the setting of :ref{#thm-effective-generic}. A coding is a choice, and t
 2. **Jockusch–Soare forcing.** A non-empty $\Pi^0_1$ class is coded by an index of a computable tree whose paths are its members. From the code one cannot decide whether the class is non-empty, but $\emptyset'$ can (:ref{#prop-pi01-emptiness}).
 3. **Computable Mathias forcing.** A condition $(\sigma, X)$ is coded by a pair $\langle \sigma, b \rangle$ where $b$ is a $\Delta^0_1$ index of $X$ (:ref{#def-indices}). Membership in $X$ is decided from the code, but whether $X$ is infinite, or whether $X \cap R$ is infinite for a computable set $R$, are $\Pi^0_2$ questions about $b$.
 
-The set of codes need not be simple: the set of $\Delta^0_1$ indices of infinite sets is $\Pi^0_2$-complete (exercises of :ref{to="arithmetic-hierarchy/codes"}). This is harmless, since a construction applies its procedures only to numbers that it has itself produced as codes.
+The set of codes need not be simple: the set of $\Delta^0_1$ indices is $\Pi^0_2$-complete (:ref{#ex-delta-indices-complete}), and the same reduction, with the output $1$ instead of $0$, shows that so is the set of $\Delta^0_1$ indices of infinite sets. This is harmless, since a construction applies its procedures only to numbers that it has itself produced as codes.
 
 ## Deciding the jump
 
@@ -117,15 +117,7 @@ Why does the Jockusch–Soare decision return the class $\mathcal P$ itself when
 
 ## Exercises
 
-::::exercise{difficulty=2}
-Use :ref{#thm-jump-control} with Cohen forcing to build a low infinite set $G$ whose principal function $p_G$ is hyperimmune (:ref{#def-hyperimmune-fn}).
-
-:::solution
-Count the elements of a set from $0$, so that $p_G(k)$ is its $k$-th element. Let $D_{2e}$ be the set of strings $\tau$ such that $\Phi_e(k)\diverge$ for some $k$, or $\tau$ has a $k$-th element larger than $\Phi_e(k)$ for some $k$; and let $D_{2e+1}$ be the set of strings with at least $e$ elements. Given $\sigma$ and $e$, let $k$ be the number of elements of $\sigma$. The oracle $\emptyset'$ decides whether $\Phi_e(k)\converge$. If not, $\sigma \in D_{2e}$. If so, let $\tau = \sigma 0^m 1$ with $|\sigma| + m > \Phi_e(k)$: the $k$-th element of $\tau$ is $|\sigma| + m$, so $\tau \in D_{2e}$. The sets $D_{2e+1}$ and $S_n$ are computably dense. By :ref{#prop-jump-decision-examples} and :ref{#thm-jump-control}, there is a low set $G$ whose filter of prefixes meets all these sets. It is infinite, and for every total computable function $\Phi_e$, some prefix of $G$ has a $k$-th element larger than $\Phi_e(k)$, so $p_G(k) > \Phi_e(k)$. No computable function dominates $p_G$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-computable-sacks-low difficulty=2 objective="Apply forcing the jump to computable Sacks forcing, deciding convergence by a search for a node."}
 Show that computable Sacks forcing, with conditions coded by indices of computable f-trees (:ref{#def-function-tree}), decides the jump $\emptyset'$-effectively. Deduce that every computable f-tree has a low path that is not computable.
 
 :::solution
@@ -141,3 +133,45 @@ The effectivization of forcing constructions with codes of conditions follows th
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Sections 2.3 and 6.5.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 7.5 and 8.5.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Lowness*, sections *Indices* and *Basic constructions*.
+
+:::::exercises
+::::exercise{#ex-low-hyperimmune-principal difficulty=2 objective="Add dense sets to the construction of a low set to make its principal function escape every computable function."}
+Use :ref{#thm-jump-control} with Cohen forcing to build a low infinite set $G$ whose principal function $p_G$ is hyperimmune (:ref{#def-hyperimmune-fn}).
+
+:::solution
+Count the elements of a set from $0$, so that $p_G(k)$ is its $k$-th element. Let $D_{2e}$ be the set of strings $\tau$ such that $\Phi_e(k)\diverge$ for some $k$, or $\tau$ has a $k$-th element larger than $\Phi_e(k)$ for some $k$; and let $D_{2e+1}$ be the set of strings with at least $e$ elements. Given $\sigma$ and $e$, let $k$ be the number of elements of $\sigma$. The oracle $\emptyset'$ decides whether $\Phi_e(k)\converge$. If not, $\sigma \in D_{2e}$. If so, let $\tau = \sigma 0^m 1$ with $|\sigma| + m > \Phi_e(k)$: the $k$-th element of $\tau$ is $|\sigma| + m$, so $\tau \in D_{2e}$. The sets $D_{2e+1}$ and $S_n$ are computably dense. By :ref{#prop-jump-decision-examples} and :ref{#thm-jump-control}, there is a low set $G$ whose filter of prefixes meets all these sets. It is infinite, and for every total computable function $\Phi_e$, some prefix of $G$ has a $k$-th element larger than $\Phi_e(k)$, so $p_G(k) > \Phi_e(k)$. No computable function dominates $p_G$. The exercise is adapted from the section *Basic constructions* of the chapter *Lowness* of Patey's monograph, where a low set of hyperimmune degree is built directly.
+:::
+::::
+
+::::exercise{#ex-no-computable-jump-decision difficulty=1 objective="See that no notion of forcing decides the jump computably, as a consequence of the jump control theorem."}
+Let $\mathbb P$ be a coded notion of forcing with at least one condition, whose sets $S_n$ are uniformly computably dense. Show that $\mathbb P$ does not decide the jump $\emptyset$-effectively. For Cohen forcing, which question would a computable procedure have to answer?
+
+:::solution
+Suppose that $\mathbb P$ decides the jump $\emptyset$-effectively. The sets $S_n$ are uniformly $\emptyset$-effectively dense, so :ref{#thm-jump-control} with $A = \emptyset$, applied to any condition, gives a set $G$ with $G' \leq_T \emptyset$. Then $G' \leq_T G$, contradicting item 4 of :ref{#thm-jump}. For Cohen forcing, a decision for $\sigma$ and $e$ must answer, in effect, whether some $\tau \succeq \sigma$ satisfies $\Phi^\tau_e(e)\converge$: if it returns the bit $0$ with an extension $\tau$, no extension of $\tau$ makes the computation converge. By SMN, there is a computable function $k$ such that $\Phi^G_{k(x)}(k(x))$ converges if and only if $x \in \emptyset'$, for every $G$; for $\sigma = \varepsilon$ and $e = k(x)$, the bit returned is $\emptyset'(x)$, so a computable decision would make $\emptyset'$ computable.
+:::
+::::
+
+::::exercise{#ex-low-immune-mathias difficulty=2 objective="Add dense sets to computable Mathias forcing to build a low immune subset of a given computable set."}
+Let $R$ be an infinite computable set. Use computable Mathias forcing and :ref{#thm-jump-control} to build an infinite low set $G \subseteq R$ with no infinite c.e. subset.
+
+:::solution
+Start from the condition $(\varepsilon, R)$, whose members are subsets of $R$. For each $e$, let $D_e$ be the set of conditions $(\sigma, X)$ such that either $W_e \subseteq \{ 0, \dots, |\sigma| - 1 \}$, or some $x \in W_e$ with $x \geq |\sigma|$ is not in $X$. They are uniformly $\emptyset'$-effectively dense: given a code $\langle \sigma, b \rangle$ of $(\sigma, X)$ and $e$, the oracle $\emptyset'$ decides whether some $x \geq |\sigma|$ belongs to $W_e$. If not, $(\sigma, X) \in D_e$. If so, a search finds such an $x$, and $(\sigma, X \setminus \{ x \})$ is a condition in $D_e$, with a $\Delta^0_1$ index computable from $b$ and $x$; its reservoir is infinite and its minimum is still at least $|\sigma|$. Add the sets $S_n$ and the sets of conditions whose stem has at least $n$ elements, which are computably dense. By :ref{#prop-jump-decision-examples} and :ref{#thm-jump-control}, there is a set $G$ with $G' \leq_T \emptyset'$, a member of all the conditions of a filter meeting these sets and containing $(\varepsilon, R)$. It is infinite and contained in $R$. Let $W_e$ be infinite, and $(\sigma, X)$ a condition of the filter in $D_e$. The first case is impossible, so some $x \in W_e$ with $x \geq |\sigma|$ is not in $X$; every member of $(\sigma, X)$ omits $x$, so $x \notin G$, and $W_e \not\subseteq G$.
+:::
+::::
+
+::::exercise{#ex-jump-control-run difficulty=1 objective="Run the first steps of the jump control construction for Cohen forcing on explicit functionals."}
+Apply the proof of :ref{#thm-jump-control} to Cohen forcing, with $D_i = S_i$, the function $h$ that extends a string by zeros up to length $i$ (or leaves it unchanged if it is already long enough), and the decision function of :ref{#prop-jump-decision-examples}, in which the search returns the shortest string $\tau \succeq \sigma$ with $\Phi^\tau_e(e)\converge$, and the lexicographically least one among those. Suppose that, with any oracle $G$ and on any input, $\Phi_0$ halts if and only if $3 \in G$, $\Phi_1$ never halts, and $\Phi_2$ halts if and only if $G$ has at least two elements, each functional querying only the bits needed. Compute $c_0, \dots, c_6$ and $b_0, b_1, b_2$. What do they say about $G$ and $G'$?
+
+:::solution
+$c_0 = \varepsilon$ and $c_1 = h(\varepsilon, 0) = \varepsilon$. Some extension of $\varepsilon$ contains $3$; the shortest ones have length $4$, and the least is $0001$: $c_2 = 0001$, $b_0 = 1$. Then $c_3 = h(0001, 1) = 0001$. No string makes $\Phi_1$ converge, so $c_4 = 0001$ and $b_1 = 0$. Then $c_5 = h(0001, 2) = 0001$. The shortest extensions of $0001$ with two elements have length $5$, and the only one is $00011$: $c_6 = 00011$, $b_2 = 1$. So $G$ extends $00011$, and $0 \in G'$, $1 \notin G'$, $2 \in G'$: the bits record the decisions, and they hold for $G$ because $G$ extends every condition of the sequence.
+:::
+::::
+
+::::exercise{#ex-ce-reservoirs difficulty=1 objective="See that forcing the jump with Mathias conditions only needs the positive information on the reservoir, by working with c.e. reservoirs."}
+Consider Mathias forcing with **c.e. reservoirs**: a condition is a pair $(\sigma, W)$ with $W$ an infinite c.e. set, coded by $\langle \sigma, b \rangle$ with $W_b = W$; a string $\tau$ is compatible with $(\sigma, W)$ if $\sigma \preceq \tau$ and every $n$ with $|\sigma| \leq n < |\tau|$ and $\tau(n) = 1$ belongs to $W$; the members are the sets all of whose prefixes of length at least $|\sigma|$ are compatible; $(\tau, V) \leq (\sigma, W)$ if $\tau$ is compatible with $(\sigma, W)$ and $V \subseteq W$. Show that this notion decides the jump $\emptyset'$-effectively, and that the sets $S_n$ and the sets of conditions whose stem has at least $n$ elements are uniformly computably dense.
+
+:::solution
+Given $\langle \sigma, b \rangle$ and $e$, the question whether some $\tau$ compatible with $(\sigma, W_b)$ satisfies $\Phi^\tau_e(e)\converge$ is $\Sigma^0_1$ uniformly in $\sigma$, $b$ and $e$: compatibility of a given $\tau$ asks that finitely many numbers be enumerated into $W_b$, a $\Sigma^0_1$ condition. The oracle $\emptyset'$ decides it. If it holds, a search finds $\tau$ together with the stages at which its elements enter $W_b$; let $b'$ be an index, computable from $b$ and $|\tau|$, of $W_b \setminus \{ 0, \dots, |\tau| \}$, and return $(\langle \tau, b' \rangle, 1)$: every member extends $\tau$, so makes the computation converge. If not, return $(\langle \sigma, b \rangle, 0)$: a member $G$ with $\Phi^G_e(e)\converge$ would have a prefix $\tau$ of length at least $|\sigma|$ and larger than the use, compatible with $(\sigma, W_b)$, with $\Phi^\tau_e(e)\converge$. For $S_n$, extend $\sigma$ by zeros to length $n$ and remove from $W_b$ the numbers below $n$. For the stems, enumerate $W_b$ until an element $x \geq |\sigma|$ appears, which happens since $W_b$ is infinite, and return $\sigma 0^{x - |\sigma|} 1$ with the reservoir $W_b \setminus \{ 0, \dots, x \}$. The negative information on $W_b$, which a $\Sigma^0_1$ index does not give, is never used.
+:::
+::::
+:::::

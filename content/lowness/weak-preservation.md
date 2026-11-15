@@ -1,7 +1,7 @@
 ---
 title: Weak preservation
 summary: To build low sets, a forcing question needs only to be decided by ∅′, not to be Σ⁰₁; every Σ⁰₂ set whose complement is hyperimmune has an infinite low subset (Jockusch); both hypotheses are needed.
-duration: 40
+duration: 35
 prerequisites: [forcing-the-jump, immunity-growth/immune-sets, avoidance/forcing-question-method]
 ---
 
@@ -80,13 +80,13 @@ Where is it used that $A$ is $\Sigma^0_2$?
   The dichotomy uses only the hyperimmunity of $\overline A$.
 :::
 
-Both hypotheses are needed. :ref{#ex-no-low-subset} gives a $\Delta^0_2$ set with no infinite low subset, whose complement is not hyperimmune. The first exercise gives a set with hyperimmune complement and no infinite $\Delta^0_2$ subset; it is not $\Sigma^0_2$.
+Both hypotheses are needed. :ref{#ex-no-low-subset} gives a $\Delta^0_2$ set with no infinite low subset, whose complement is not hyperimmune. :ref{#ex-cohen-cohyperimmune} gives a set with hyperimmune complement and no infinite $\Delta^0_2$ subset; it is not $\Sigma^0_2$.
 
 The next lesson, :ref{to="lowness/stable-linear-orders"}, applies the theorem to linear orders.
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-cohen-cohyperimmune difficulty=2 objective="See that the $\Sigma^0_2$ hypothesis of Jockusch's theorem is needed, with a Cohen generic set."}
 Let $G$ be sufficiently generic for Cohen forcing. Show that $\overline G$ is hyperimmune and that $G$ has no infinite $\Delta^0_2$ subset. Which hypothesis of :ref{#thm-cohyperimmune-low} fails?
 
 :::solution
@@ -94,15 +94,7 @@ Let $(F_n)$ be a disjoint strong array. If some $F_n$ is empty, it does not meet
 :::
 ::::
 
-::::exercise{difficulty=2}
-Let $A$ be a $\Sigma^0_2$ set whose complement is hyperimmune. Show that $A$ has an infinite low subset $G$ that is not computable, and, if $A$ is immune, explain why every infinite low subset of $A$ is non-computable.
-
-:::solution
-Add to the proof of :ref{#thm-cohyperimmune-low} the sets $E_e$ of conditions $\tau$ such that no member of $\tau$ is equal to $\Phi_e$. They are uniformly $\emptyset'$-effectively dense. Given $\sigma$, the oracle $\emptyset'$ enumerates $A$ until it finds an element $x \geq |\sigma|$, and decides whether $\Phi_e(x)\converge$. If not, $\Phi_e$ is not the characteristic function of a set, and $\sigma \in E_e$. If $\Phi_e(x)\converge = 0$, take $\sigma 0^{x - |\sigma|} 1$, a condition since $x \in A$, all of whose members contain $x$. Otherwise take $\sigma 0^{x - |\sigma| + 1}$, all of whose members omit $x$. In each case no member equals $\Phi_e$, so the resulting low set $G \subseteq A$ is not computable. If $A$ is immune, it has no infinite computable subset, so every infinite subset of $A$ is non-computable.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-dhls-not-hyperimmune difficulty=1 objective="Apply Jockusch's theorem to both sides of a $\Delta^0_2$ set, and locate the sets with no low subset on either side."}
 Let $A$ be a $\Delta^0_2$ set such that both $A$ and $\overline A$ are infinite. Show that if $A$ is hyperimmune or $\overline A$ is hyperimmune, then $A$ or $\overline A$ has an infinite low subset. Deduce that a $\Delta^0_2$ set with no infinite low subset in itself or its complement, as in the theorem of Downey, Hirschfeldt, Lempp and Solomon, is neither hyperimmune nor co-hyperimmune.
 
 :::solution
@@ -116,3 +108,57 @@ If $\overline A$ is hyperimmune, apply :ref{#thm-cohyperimmune-low} to $A$, whic
 
 - D. R. Hirschfeldt, C. G. Jockusch, Jr., B. Kjos-Hanssen, S. Lempp and T. A. Slaman, *The strength of some combinatorial principles related to Ramsey's theorem for pairs*, in *Computational Prospects of Infinity, Part II*, World Scientific, 2008, 143–161.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Lowness*, section *Weak preservation*.
+
+:::::exercises
+::::exercise{#ex-cohyperimmune-noncomputable difficulty=2 objective="Add diagonalization requirements to the construction of a low subset of a co-hyperimmune set."}
+Let $A$ be a $\Sigma^0_2$ set whose complement is hyperimmune. Show that $A$ has an infinite low subset $G$ that is not computable, and, if $A$ is immune, explain why every infinite low subset of $A$ is non-computable.
+
+:::solution
+Add to the proof of :ref{#thm-cohyperimmune-low} the sets $E_e$ of conditions $\tau$ such that no member of $\tau$ is equal to $\Phi_e$. They are uniformly $\emptyset'$-effectively dense. Given $\sigma$, the oracle $\emptyset'$ enumerates $A$ until it finds an element $x \geq |\sigma|$, and decides whether $\Phi_e(x)\converge$. If not, $\Phi_e$ is not the characteristic function of a set, and $\sigma \in E_e$. If $\Phi_e(x)\converge = 0$, take $\sigma 0^{x - |\sigma|} 1$, a condition since $x \in A$, all of whose members contain $x$. Otherwise take $\sigma 0^{x - |\sigma| + 1}$, all of whose members omit $x$. In each case no member equals $\Phi_e$, so the resulting low set $G \subseteq A$ is not computable. If $A$ is immune, it has no infinite computable subset, so every infinite subset of $A$ is non-computable.
+:::
+::::
+
+::::exercise{#ex-cohyperimmune-relativized difficulty=1 objective="Relativize Jockusch's theorem on low subsets of co-hyperimmune sets to an arbitrary oracle."}
+Let $Z$ be a set and $A$ a $\Sigma^0_2(Z)$ set whose complement is hyperimmune relative to $Z$: it is infinite, and for every disjoint array $F_n = D_{f(n)}$ with $f$ total and $Z$-computable, some $F_n$ is disjoint from $\overline A$. Show that $A$ has an infinite subset $G$ with $(Z \oplus G)' \leq_T Z'$.
+
+:::solution
+Use the same conditions, and replace $\Phi^\tau_e(e)$ by $\Phi^{Z \oplus \tau}_e(e)$ in :ref{#lem-cohyperimmune-dichotomy}. Statement 1 becomes $\Sigma^0_2(Z)$, since membership in $A$ is $\Sigma^0_2(Z)$; statement 2 is the projection of a $\Pi^0_1(Z)$ relation. If statement 2 fails, the strings $\mu_n$ are found by a $Z$-computable search, so the blocks $F_{n_k}$ form a $Z$-computable disjoint array; if statement 1 fails too, each block meets $\overline A$, contradicting the hypothesis. By Post's theorem relativized, $Z'$ enumerates the witnesses of both statements and the elements of $A$. The proof of :ref{#thm-cohyperimmune-low} then shows that the notion decides the jump $Z'$-effectively, for the functionals with oracle $Z \oplus G$, and that the sets $S_n$ and the sets of conditions with at least $k$ elements are uniformly $Z'$-effectively dense. :ref{#thm-jump-control}, relativized, gives an infinite $G \subseteq A$ with $(Z \oplus G)' = \{ e : b_e = 1 \} \leq_T Z'$.
+:::
+::::
+
+::::exercise{#ex-dichotomy-prefix-set difficulty=2 objective="See the dichotomy lemma fail for a set whose complement is not hyperimmune."}
+Let $A$ be the set of codes of the prefixes of $\emptyset'$, as in :ref{#ex-no-low-subset}. Find an index $e$ such that, for the condition $\sigma = \varepsilon$, neither statement of :ref{#lem-cohyperimmune-dichotomy} holds. Which step of its proof fails?
+
+:::solution
+Let $e$ be an index of a functional that, with oracle $G$ and on every input, searches for two elements of $G$ that are codes of distinct strings of the same length, and halts when it finds them. Then $\Phi^G_e(e)\converge$ if and only if $G$ contains such a pair; for a string $\mu$, viewed as the finite set of its elements, the same holds with $\mu$ in place of $G$.
+
+*Statement 1 fails.* A condition $\tau$ has all its elements in $A$, which contains exactly one string of each length. So $\tau$ contains no such pair, and $\Phi^\tau_e(e)\diverge$.
+
+*Statement 2 fails.* Let $n \in \nat$. Only finitely many strings have a code smaller than $n$, so there is $\ell \geq 1$ such that all the strings of length $\ell$ have codes at least $n$; take two of them, with codes $x \neq y$. The string $\mu \succeq 0^n$ of length $\max(x, y) + 1$ whose elements are $x$ and $y$ satisfies $\Phi^\mu_e(e)\converge$.
+
+In the proof of the lemma, the blocks $F_{n_k}$ form a disjoint strong array each member of which meets $\overline A$, as they should; this is no contradiction, since $\overline A$ is not hyperimmune. The hypothesis of hyperimmunity is the only one that fails: $A$ is $\Delta^0_2$.
+:::
+::::
+
+::::exercise{#ex-cohyperimmune-uniform difficulty=1 objective="Check that the construction of a low subset of a co-hyperimmune set is uniform, and produces a lowness index."}
+Show that there is a computable function $h$ such that for every $\Sigma^0_2$ index $a$ of a set $A$ whose complement is hyperimmune (:ref{#def-indices}), $h(a)$ is a lowness index of an infinite subset of $A$.
+
+:::solution
+In the proof of :ref{#thm-cohyperimmune-low}, the oracle $\emptyset'$ uses $A$ only through enumerations of $A = W^{\emptyset'}_a$ and of the witnesses of the two statements of :ref{#lem-cohyperimmune-dichotomy}, which are $\Sigma^0_1(\emptyset')$ uniformly in $a$, $\sigma$ and $e$: statement 1 asks that finitely many elements belong to $W^{\emptyset'}_a$, and statement 2 does not depend on $A$. So the sequence of conditions and the bits $b_e$ are computed by a single procedure with oracle $\emptyset'$ and parameter $a$, and $e \mapsto b_e$ is computed by $\Phi^{\emptyset'}_{h(a)}$ for an index $h(a)$ given by SMN. When $\overline A$ is hyperimmune, every search terminates, and $\Phi^{\emptyset'}_{h(a)} = G'$ for the infinite subset $G$ of $A$ that is built. When it is not, $\Phi^{\emptyset'}_{h(a)}$ may be partial; the function $h$ is still total.
+:::
+::::
+
+::::exercise{#ex-cohyperimmune-delta3 difficulty=2 objective="Show that the $\Sigma^0_2$ hypothesis of Jockusch's theorem cannot be weakened to $\Delta^0_3$, by an effective version of the Cohen counterexample."}
+Build, with the oracle $\emptyset''$, a set $G$ with hyperimmune complement and no infinite $\Delta^0_2$ subset. Deduce that :ref{#thm-cohyperimmune-low} fails for some $\Delta^0_3$ set.
+
+:::solution
+Build strings $\sigma_0 \preceq \sigma_1 \preceq \cdots$ with $\sigma_0 = \varepsilon$, computably in $\emptyset''$, and let $G = \bigcup_s \sigma_s$. Given $\sigma = \sigma_s$:
+
+- if $s = 3e$, the oracle $\emptyset''$ decides whether there is $x \geq |\sigma|$ with $\Phi^{\emptyset'}_e(x)\converge = 1$, a $\Sigma^0_1(\emptyset')$ question. If so, it finds such an $x$ and lets $\sigma_{s+1} = \sigma 0^{x - |\sigma| + 1}$, so that $x \notin G$; otherwise $\sigma_{s+1} = \sigma$;
+- if $s = 3e + 1$, it decides whether there is $n$ with $\Phi_e(n)\converge$ and $D_{\Phi_e(n)}$ non-empty with minimum at least $|\sigma|$. If so, it finds such an $n$ and lets $\sigma_{s+1}$ extend $\sigma$ up to $\max D_{\Phi_e(n)}$, with ones exactly at the new positions in $D_{\Phi_e(n)}$, so that $D_{\Phi_e(n)} \subseteq G$; otherwise $\sigma_{s+1} = \sigma$;
+- if $s = 3e + 2$, $\sigma_{s+1} = \sigma 0 1$.
+
+The last steps make $G$ and $\overline G$ infinite, and $G \leq_T \emptyset''$. Let $(F_n)$, $F_n = D_{\Phi_e(n)}$, be a disjoint strong array. If some $F_n$ is empty, it does not meet $\overline G$. Otherwise, the sets $F_n$ are disjoint and non-empty, so their minima are unbounded, and at step $3e + 1$ some $F_n$ is put into $G$. So $\overline G$ is hyperimmune. Let $H$ be an infinite $\Delta^0_2$ set, with $\Phi^{\emptyset'}_e$ its characteristic function. At step $3e$, some $x \in H$ is kept out of $G$, so $H \not\subseteq G$. The set $G$ is $\Delta^0_3$ by Post's theorem, its complement is hyperimmune, and it has no infinite $\Delta^0_2$ subset, hence no infinite low subset. Compare with :ref{#ex-cohen-cohyperimmune}, where the same requirements are met by a sufficiently generic set.
+:::
+::::
+:::::

@@ -112,6 +112,18 @@ In the proof of :ref{#lem-generic-set}, where is it used that the classes $[c]$ 
   Density of $S_n$ comes from refinement and non-emptiness.
 :::
 
+::::exercise{#ex-prefix-filter difficulty=1 objective="Identify the filters of Cohen forcing that meet every $S_n$ with the sets they determine."}
+For Cohen forcing, show that a filter $F$ meets every $S_n$ if and only if it is the set of prefixes of some set $X$, and that $X = G_F$ in that case.
+
+:::solution
+For Cohen forcing, a string $\sigma$ belongs to $S_n$ if and only if $|\sigma| \geq n$: all members of $\sigma$ then share the prefix $\sigma \uh n$, while if $|\sigma| < n$ the members $\sigma 0 0 \cdots$ and $\sigma 1 1 \cdots$ differ below $n$.
+
+Let $X$ be a set and $F$ the set of its prefixes. It contains the empty string. If $\sigma \in F$ and $\sigma \leq \tau$, that is, $\tau \preceq \sigma$, then $\tau$ is a prefix of $X$, so $F$ is closed upward. Two prefixes of $X$ are comparable, and the longer one is a common extension in $F$. So $F$ is a filter, and it meets $S_n$ at $X \uh n$.
+
+Conversely, let $F$ be a filter meeting every $S_n$. By :ref{#lem-generic-set}, $G_F$ is a member of every condition of $F$, so every $\sigma \in F$ is a prefix of $G_F$. Let $\tau$ be a prefix of $G_F$, and $\sigma \in F \cap S_{|\tau|}$. Then $\sigma$ is a prefix of $G_F$ of length at least $|\tau|$, so $\tau \preceq \sigma$, that is, $\sigma \leq \tau$, and $\tau \in F$ since $F$ is closed upward. So $F$ is exactly the set of prefixes of $G_F$. Finally, if $F$ is the set of prefixes of $X$, then $X$ is a member of every condition of $F$, so $X = G_F$ by the uniqueness in :ref{#lem-generic-set}.
+:::
+::::
+
 ## Notes and references
 
 Forcing was invented by Cohen (1963) in set theory; Feferman (1965) adapted it to arithmetic, and Jockusch (1980) made Cohen genericity a standard tool of computability theory. The existence of generic filters is the lemma of Rasiowa and Sikorski (1950). Forcing with $\Pi^0_1$ classes comes from Jockusch and Soare (1972), forcing with perfect trees from Spector (1956) and, in set theory, Sacks (1971), and Mathias forcing from Mathias (1977). The definition of a notion of forcing used here, with a closed class of members for each condition and the refinement property, follows the chapter *Effective forcing* of Monin and Patey, where such notions are called Cantor forcings. Dzhafarov and Mummert (Section 7.2, Definition 7.2.1) use instead a valuation map giving the prefix decided by each condition; Hirschfeldt (Section 2.3, Propositions 2.6 and 2.7) presents generic filters and their effective existence. The conventions for Mathias conditions (stem, reservoir, compatible strings) are those of the course on Ramsey's theorem and of Patey's monograph *Lowness and avoidance*.
@@ -127,3 +139,53 @@ Forcing was invented by Cohen (1963) in set theory; Feferman (1965) adapted it t
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 2.3.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 7.2–7.3.
 - B. Monin and L. Patey, *Computability theory*, chapter *Effective forcing*, section *Fundamentals of forcing*.
+
+:::::exercises
+::::exercise{#ex-uncountable-dense difficulty=1 objective="See why the family of dense sets must be countable in the Rasiowa–Sikorski lemma."}
+For Cohen forcing and a set $X$, let $D_X$ be the set of strings that are not prefixes of $X$. Show that each $D_X$ is dense, and that no filter meets all the sets $S_n$ and all the sets $D_X$, $X \in \cs$.
+
+:::solution
+Let $\sigma$ be a string. If $\sigma$ is not a prefix of $X$, then $\sigma \in D_X$. Otherwise $\sigma\, i$ with $i = 1 - X(|\sigma|)$ is an extension of $\sigma$ that is not a prefix of $X$. So $D_X$ is dense.
+
+Let $F$ be a filter meeting every $S_n$. By :ref{#lem-generic-set}, $G_F$ is a member of every condition of $F$, so every string of $F$ is a prefix of $G_F$, and $F$ does not meet $D_{G_F}$. The family $\{ S_n \} \cup \{ D_X : X \in \cs \}$ is uncountable, and the proof of :ref{#lem-rasiowa-sikorski}, which meets the dense sets one at a time along a sequence, cannot be carried out for it.
+:::
+::::
+
+::::exercise{#ex-mathias-refinement-class difficulty=1 objective="Check the axioms of a notion of forcing for Mathias forcing with reservoirs in a class, and see why closure under finite modifications is needed."}
+Let $\mathcal M$ be a class of infinite sets, and consider Mathias forcing with reservoirs in $\mathcal M$: the conditions are the pairs $(\sigma, X)$ with $X \in \mathcal M$ and $\min X \geq |\sigma|$, ordered and with members as in :ref{#ex-forcing-notions}, item 4.
+
+1. Show that if $(\tau, Y) \leq (\sigma, X)$, every member of $(\tau, Y)$ is a member of $(\sigma, X)$.
+2. Show that refinement holds if $X \setminus \{0, \dots, k - 1\} \in \mathcal M$ for every $X \in \mathcal M$ and every $k$.
+3. Show that refinement fails for $\mathcal M = \{ \nat \}$.
+
+:::solution
+1. Let $G$ be a member of $(\tau, Y)$. Then $\sigma \preceq \tau \prec G$. Let $n \geq |\sigma|$ with $G(n) = 1$. If $n < |\tau|$, then $\tau(n) = 1$, and $n \in X$ since $\tau$ is compatible with $(\sigma, X)$. If $n \geq |\tau|$, then $n \in Y \subseteq X$ since $G$ is a member of $(\tau, Y)$. So $G$ is a member of $(\sigma, X)$.
+2. The class of members of $(\sigma, X)$ is closed, and contains $\sigma 0 0 \cdots$, as in :ref{#ex-forcing-notions}. Let $G$ be a member of $(\sigma, X)$ extending a string $\rho$, and $\tau = G \uh \max(|\sigma|, |\rho|)$. Then $\tau$ is compatible with $(\sigma, X)$, since $G$ is a member. The set $X' = X \setminus \{0, \dots, |\tau| - 1\}$ is infinite, belongs to $\mathcal M$ by hypothesis, and satisfies $\min X' \geq |\tau|$, so $(\tau, X')$ is a condition, and it extends $(\sigma, X)$. Its members extend $\tau$, and $\rho \preceq \tau$ since both are prefixes of $G$ and $|\rho| \leq |\tau|$.
+3. A condition $(\sigma, \nat)$ requires $|\sigma| \leq \min \nat = 0$, so the only condition is $c = (\varepsilon, \nat)$, whose members are all sets. The class $[c] \cap [1]$ is non-empty, but the only extension of $c$ is $c$ itself, and $[c] \not\subseteq [1]$.
+:::
+::::
+
+::::exercise{#ex-tree-compatibility difficulty=2 objective="Compare compatibility of conditions with intersection of their classes for Jockusch–Soare and computable Sacks forcing."}
+1. Show that two Jockusch–Soare conditions $\mathcal P$ and $\mathcal Q$ are compatible if and only if $\mathcal P \cap \mathcal Q \neq \emptyset$, and that for every set $X$ the conditions having $X$ as a member form a filter, if there is at least one.
+2. For a string $\rho$, let $\hat\rho$ be obtained by inserting a $0$ after each bit of $\rho$. Let $T_1(\rho) = \hat\rho$ and $T_2(\rho) = 0 \hat\rho$. Show that $T_1$ and $T_2$ are computable f-trees with a common path, and that they are incompatible as conditions of computable Sacks forcing.
+3. Deduce that, for computable Sacks forcing, the conditions having a given set as a path need not form a filter.
+
+:::solution
+1. If $\mathcal P \cap \mathcal Q \neq \emptyset$, it is a non-empty $\Pi^0_1$ class contained in both, hence a common extension. Conversely, a common extension $\mathcal R$ is non-empty and contained in $\mathcal P \cap \mathcal Q$. Let $F$ be the set of conditions containing $X$, assumed non-empty. It is closed upward, since a larger class still contains $X$, and two of its elements $\mathcal P, \mathcal Q$ have the common extension $\mathcal P \cap \mathcal Q$, which contains $X$ and so belongs to $F$.
+2. The map $\rho \mapsto \hat\rho$ preserves the prefix relation, and conversely if $\hat\rho \preceq \hat\mu$, reading the bits at even positions gives $\rho \preceq \mu$; the same holds for $\rho \mapsto 0 \hat\rho$. Both maps are computable, so $T_1$ and $T_2$ are computable f-trees. The nodes of $T_1$ have $0$ at every odd position below their length, so every path of $T_1$, which has arbitrarily long nodes as prefixes, is $0$ at every odd position; likewise every path of $T_2$ is $0$ at every even position. Hence $[T_1] \cap [T_2] \subseteq \{ \emptyset \}$. Conversely, $\emptyset$ is a path of both: its prefixes $0^{2k} = T_1(0^k)$ and $0^{2k+1} = T_2(0^k)$ are nodes.
+
+   Suppose $S$ is a common extension. Then $[S] \subseteq [T_1] \cap [T_2] = \{ \emptyset \}$. But $[S]$ has at least two members: for $i \in \{0, 1\}$, the set $\bigcup_k S(i 0^k)$ is a path of $S$ extending $S(i)$, and $S(0)$, $S(1)$ are incompatible. This is a contradiction.
+3. The conditions $T_1$ and $T_2$ both have $\emptyset$ as a path, and they have no common extension at all. So the set of conditions having $\emptyset$ as a path is not a filter. This is why a filter is not identified with a set in :ref{#def-generic-filter}: a generic filter determines a set (:ref{#lem-generic-set}), but a set does not determine a filter.
+:::
+::::
+
+::::exercise{#ex-mathias-compatible difficulty=1 objective="Characterize compatibility of two computable Mathias conditions."}
+Let $(\sigma, X)$ and $(\tau, Y)$ be computable Mathias conditions with $|\sigma| \leq |\tau|$. Show that they are compatible if and only if $\tau$ is compatible with $(\sigma, X)$ and $X \cap Y$ is infinite.
+
+:::solution
+Suppose that $\tau$ is compatible with $(\sigma, X)$ and that $X \cap Y$ is infinite. Let $Z = (X \cap Y) \setminus \{0, \dots, |\tau| - 1\}$, an infinite computable set with $\min Z \geq |\tau|$. Then $(\tau, Z) \leq (\tau, Y)$, since $\tau$ is compatible with $(\tau, Y)$ and $Z \subseteq Y$, and $(\tau, Z) \leq (\sigma, X)$, since $\tau$ is compatible with $(\sigma, X)$ and $Z \subseteq X$.
+
+Conversely, let $(\rho, Z)$ be a common extension. Then $\sigma \preceq \rho$ and $\tau \preceq \rho$, so $\sigma \preceq \tau$ since $|\sigma| \leq |\tau|$. If $|\sigma| \leq n < |\tau|$ and $\tau(n) = 1$, then $\rho(n) = 1$, so $n \in X$ since $\rho$ is compatible with $(\sigma, X)$. So $\tau$ is compatible with $(\sigma, X)$. Finally $Z \subseteq X \cap Y$ and $Z$ is infinite.
+:::
+::::
+:::::

@@ -122,17 +122,7 @@ An infinite set is countable if and only if it is equipotent to each of its infi
 If $A$ is countably infinite and $B \subseteq A$ is infinite, then $B$ is countable by :ref{#cor-subset-countable}, and infinite, so $|B| = |\nat| = |A|$. Conversely, if $A$ is infinite and equipotent to each of its infinite subsets, then by :ref{#prop-n-smallest} it has a subset $a(\nat)$ equipotent to $\nat$, and $|A| = |a(\nat)| = |\nat|$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $s : \nat \to A$ be a surjection onto an infinite set $A$. Construct an explicit bijection between $\nat$ and $A$, without appealing to :ref{#prop-n-smallest}.
-
-:::solution
-Let $S = \{ n : s(n) \neq s(m) \text{ for all } m < n \}$ be the set of positions of first occurrences. The restriction of $s$ to $S$ is a bijection from $S$ onto $A$: it is surjective, since each $a \in A$ has a least $n$ with $s(n) = a$, and this $n$ is in $S$; it is injective, since two first occurrences of the same element would be equal. $S$ is infinite since $A$ is. So $s \circ p_S : \nat \to A$ is a bijection, where $p_S$ is the principal function of :ref{#lem-subsets-of-n}.
-:::
-::::
-
-::::exercise{#ex-dedekind-infinite difficulty=2}
+::::exercise{#ex-dedekind-infinite difficulty=2 objective="Characterize infinite sets as those equipotent to a proper subset, and locate the use of choice."}
 Show that a set $A$ is infinite if and only if it is equipotent to a proper subset of itself. Which direction uses the axiom of choice?
 
 :::solution
@@ -140,15 +130,7 @@ If $A$ is finite, it is not equipotent to a proper subset, by :ref{#cor-finite-c
 :::
 ::::
 
-::::exercise{difficulty=1}
-Let $A$ be countably infinite and $F \subseteq A$ finite. Show that $A \setminus F$ is countably infinite.
-
-:::solution
-By :ref{#cor-subset-countable}, $A \setminus F$ is countable. It is infinite: otherwise $A = (A \setminus F) \cup F$ would be a union of two finite sets, hence finite (if $\beta : A \setminus F \to \underline m$ and $\gamma : F \to \underline k$ are bijections, then $x \mapsto \beta(x)$ on $A \setminus F$ and $x \mapsto m + \gamma(x)$ on $F$ is a bijection onto $\underline{m + k}$, the two pieces being disjoint).
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-union-countable difficulty=2 objective="Absorb a countable set into an infinite set by interleaving along a copy of $\nat$."}
 Let $A$ be infinite and $B$ countable. Show that $|A \cup B| = |A|$. Where is the axiom of choice used?
 
 :::solution
@@ -164,3 +146,57 @@ Characterizations of countable sets by injections and surjections are standard; 
 - T. Jech, *The Axiom of Choice*, North-Holland, 1973.
 - K. Hrbacek and T. Jech, *Introduction to Set Theory*, 3rd edition, Marcel Dekker, 1999.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.
+
+:::::exercises
+::::exercise{#ex-surjection-bijection difficulty=1 objective="Turn a listing with repetitions of an infinite set into a bijection with $\nat$, without the axiom of choice."}
+Let $s : \nat \to A$ be a surjection onto an infinite set $A$. Construct an explicit bijection between $\nat$ and $A$, without appealing to :ref{#prop-n-smallest}.
+
+:::solution
+Let $S = \{ n : s(n) \neq s(m) \text{ for all } m < n \}$ be the set of positions of first occurrences. The restriction of $s$ to $S$ is a bijection from $S$ onto $A$: it is surjective, since each $a \in A$ has a least $n$ with $s(n) = a$, and this $n$ is in $S$; it is injective, since two first occurrences of the same element would be equal. $S$ is infinite since $A$ is. So $s \circ p_S : \nat \to A$ is a bijection, where $p_S$ is the principal function of :ref{#lem-subsets-of-n}. Adapted from Monin and Patey, chapter *Cantor's infinity*, section *Countable sets*, which asks for a solution of this exercise that avoids the axiom of choice.
+:::
+::::
+
+::::exercise{#ex-remove-finite difficulty=1 objective="Check that removing finitely many elements from a countably infinite set leaves it countably infinite."}
+Let $A$ be countably infinite and $F \subseteq A$ finite. Show that $A \setminus F$ is countably infinite.
+
+:::solution
+By :ref{#cor-subset-countable}, $A \setminus F$ is countable. It is infinite: otherwise $A = (A \setminus F) \cup F$ would be a union of two finite sets, hence finite (if $\beta : A \setminus F \to \underline m$ and $\gamma : F \to \underline k$ are bijections, then $x \mapsto \beta(x)$ on $A \setminus F$ and $x \mapsto m + \gamma(x)$ on $F$ is a bijection onto $\underline{m + k}$, the two pieces being disjoint).
+:::
+::::
+
+::::exercise{#ex-countable-subset-surjection difficulty=1 objective="Characterize countable sets, the empty set included, as surjective images of sets of integers."}
+Show that a set $A$ is countable if and only if there are a set $S \subseteq \nat$ and a surjection from $S$ onto $A$.
+
+:::solution
+If $A$ is countable, let $i : A \to \nat$ be an injection, by :ref{#prop-countable-characterizations}, and $S = i(A)$. Then $i$ is a bijection from $A$ onto $S$, and its inverse is a surjection from $S$ onto $A$. Conversely, a surjection from $S \subseteq \nat$ onto $A$ gives $|A| \leq |S|$ by :ref{#prop-surjection-subpotent}, and $|S| \leq |\nat|$ by inclusion, so $A$ is countable. Unlike characterization 3, this one needs no separate case for $A = \emptyset$: take $S = \emptyset$.
+:::
+::::
+
+::::exercise{#ex-principal-function-increasing difficulty=2 objective="Identify the infinite subsets of $\nat$ with the strictly increasing functions, through principal functions."}
+Show that $S \mapsto p_S$ is a bijection from the set of infinite subsets of $\nat$ onto the set of strictly increasing functions $\nat \to \nat$, whose inverse is $f \mapsto f(\nat)$. Give $p_S$ when $S = \{3k + 1 : k \in \nat\}$ and when $S$ is the set of squares.
+
+:::solution
+By :ref{#lem-subsets-of-n}, $p_S$ is strictly increasing with image $S$, so $p_S(\nat) = S$. Conversely, let $f$ be strictly increasing and $S = f(\nat)$. Since $f$ is injective, $S$ is equipotent to $\nat$, hence infinite. We show $p_S = f$ by induction. First, $f(0) < f(n)$ for every $n > 0$, so $f(0) = \min S = p_S(0)$. Next, suppose $p_S(n) = f(n)$. The elements of $S$ greater than $f(n)$ are the $f(m)$ with $m > n$, since $f(m) > f(n)$ holds exactly when $m > n$; the least of them is $f(n+1)$. So $p_S(n+1) = f(n+1)$.
+
+Hence $f \mapsto f(\nat)$ and $S \mapsto p_S$ are inverse to each other. For $S = \{3k + 1 : k \in \nat\}$, the function $n \mapsto 3n + 1$ is strictly increasing with image $S$, so it is $p_S$ by what precedes. Similarly, the principal function of the set of squares is $n \mapsto n^2$.
+:::
+::::
+
+::::exercise{#ex-principal-function-count difficulty=2 objective="Compute the principal function of a set of integers by counting the elements of its complement."}
+Let $S \subseteq \nat$ be infinite. Show that for every $n$, the set $\{ m < p_S(n) : m \notin S \}$ is finite, with $p_S(n) - n$ elements. Deduce that $n \mapsto p_S(n) - n$ is non-decreasing, and that $p_S$ is the identity if and only if $S = \nat$.
+
+:::solution
+Let $x = p_S(n)$. The set $\underline x$ is the disjoint union of $S \cap \underline x$ and $D = \underline x \setminus S$. We claim $S \cap \underline x = \{ p_S(0), \dots, p_S(n-1) \}$. These elements are in $S$ and below $p_S(n)$, since $p_S$ is strictly increasing. Conversely, every $s \in S$ is $p_S(j)$ for some $j$, by :ref{#lem-subsets-of-n}, and $p_S(j) < p_S(n)$ forces $j < n$. So $S \cap \underline x$ has exactly $n$ elements, the $p_S(i)$ being pairwise distinct. The set $D$ is finite by :ref{#ex-subset-finite}, say with $c$ elements. As in :ref{#ex-remove-finite}, a disjoint union of a set with $n$ elements and a set with $c$ elements has $n + c$ elements; so $|\underline x| = |\underline{n + c}|$, and $x = n + c$ by :ref{#cor-finite-cardinality}.
+
+Since $p_S(n) < p_S(n+1)$, the set $D$ for $n$ is contained in the set $D$ for $n + 1$, and the inclusion is an injection; by :ref{#lem-pigeonhole}, the number of elements cannot decrease. Finally, $p_S$ is the identity if and only if all these sets are empty. If $S = \nat$, they are. Conversely, if some $m \notin S$, take $n$ with $p_S(n) > m$, which exists since $p_S(n) \geq n$; then $m$ lies in the set for $n$, and $p_S(n) > n$.
+:::
+::::
+
+::::exercise{#ex-split-countable difficulty=1 objective="Partition a countably infinite set into infinitely many countably infinite pieces."}
+Let $A$ be countably infinite. Show that $A$ is the union of a sequence $(A_k)_{k \in \nat}$ of pairwise disjoint countably infinite subsets.
+
+:::solution
+Let $e : \nat \to A$ be a bijection; it suffices to partition $\nat$ and to take the images under $e$. Every integer $n + 1 \geq 1$ is $2^k q$ for exactly one $k \in \nat$ and one odd $q$; let $S_k$ be the set of $n$ for which this exponent is $k$. By existence and uniqueness of $k$, the sets $S_k$ are pairwise disjoint and cover $\nat$. Each $S_k$ contains the pairwise distinct numbers $2^k(2m + 1) - 1$, for $m \in \nat$, so it is infinite; as a subset of $\nat$, it is countably infinite by :ref{#lem-subsets-of-n}. Let $A_k = e(S_k)$.
+:::
+::::
+:::::

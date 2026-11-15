@@ -183,15 +183,7 @@ In the proof for $\mathsf Y$, why do we only obtain $\mathsf{Y}\, F =_\beta F\,(
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Define λ-terms $\mathsf{and}$, $\mathsf{or}$ and $\mathsf{not}$ on the booleans $\mathsf{true}$, $\mathsf{false}$, and check them.
-
-:::solution
-$\mathsf{not} = \lambda b.\, b\, \mathsf{false}\, \mathsf{true}$, $\mathsf{and} = \lambda a b.\, a\, b\, \mathsf{false}$, $\mathsf{or} = \lambda a b.\, a\, \mathsf{true}\, b$. For instance $\mathsf{and}\, \mathsf{true}\, B \twoheadrightarrow_\beta \mathsf{true}\, B\, \mathsf{false} \twoheadrightarrow_\beta B$ and $\mathsf{and}\, \mathsf{false}\, B \twoheadrightarrow_\beta \mathsf{false}$.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-lambda-minus-eq difficulty=1 objective="Combine iteration, the predecessor and the booleans to define subtraction and comparisons on numerals."}
 Define truncated subtraction $\mathsf{minus}$ and the equality test $\mathsf{eq}$ on numerals.
 
 :::solution
@@ -199,7 +191,7 @@ $\mathsf{minus} = \lambda m n.\, n\, \mathsf{pred}\, m$ iterates the predecessor
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-lambda-fact difficulty=2 objective="Follow a recursive definition by a fixed-point combinator, and see the role of the reduction strategy."}
 Show that $\mathsf{fact}\, \overline 3 \twoheadrightarrow_\beta \overline 6$ under normal order reduction, and explain what goes wrong with applicative order.
 
 :::solution
@@ -215,3 +207,70 @@ The definability of the predecessor was found by Kleene in 1932, as he recounts 
 - A. M. Turing, *The p-function in λ-K-conversion*, Journal of Symbolic Logic 2 (1937), 164.
 - H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, North-Holland, 1984.
 - J. R. Hindley, J. P. Seldin, *Lambda-Calculus and Combinators: An Introduction*, Cambridge University Press, 2008.
+
+:::::exercises
+::::exercise{#ex-lambda-boolean-ops difficulty=1 objective="Program the boolean connectives with the selection behavior of the Church booleans."}
+Define λ-terms $\mathsf{and}$, $\mathsf{or}$ and $\mathsf{not}$ on the booleans $\mathsf{true}$, $\mathsf{false}$, and check them.
+
+:::solution
+$\mathsf{not} = \lambda b.\, b\, \mathsf{false}\, \mathsf{true}$, $\mathsf{and} = \lambda a b.\, a\, b\, \mathsf{false}$, $\mathsf{or} = \lambda a b.\, a\, \mathsf{true}\, b$. For instance $\mathsf{and}\, \mathsf{true}\, B \twoheadrightarrow_\beta \mathsf{true}\, B\, \mathsf{false} \twoheadrightarrow_\beta B$ and $\mathsf{and}\, \mathsf{false}\, B \twoheadrightarrow_\beta \mathsf{false}$.
+:::
+::::
+
+::::exercise{#ex-lambda-exp-short difficulty=1 objective="Verify the short exponentiation term on Church numerals, and see where it fails."}
+Show that $(\lambda m n.\, n\, m)\, \overline m\, \overline n \twoheadrightarrow_\beta \overline{m^n}$ for all $m$ and all $n \geq 1$.
+
+:::solution
+Write $F^j(A)$ for the $j$-fold application of $F$ to $A$, as in :ref{#def-church-numerals}. The term reduces to $\overline n\, \overline m \twoheadrightarrow_\beta \lambda x.\, \overline m^{\,n}(x)$. We show by induction on $n \geq 1$ that $\overline m^{\,n}(x) \twoheadrightarrow_\beta \lambda z.\, x^{m^n}(z)$. For $n = 1$, $\overline m\, x \to_\beta \lambda z.\, x^m(z)$. For $n + 1$, by the induction hypothesis and compatibility,
+$$
+\overline m^{\,n+1}(x) = \overline m\,\big(\overline m^{\,n}(x)\big) \twoheadrightarrow_\beta \overline m\, G \to_\beta \lambda z'.\, G^m(z'), \qquad G = \lambda z.\, x^{m^n}(z),
+$$
+and $G^m(z') \twoheadrightarrow_\beta x^{m^n \cdot m}(z')$, contracting the innermost application of $G$ first and using induction on the number of applications. Hence $(\lambda m n.\, n\, m)\, \overline m\, \overline n \twoheadrightarrow_\beta \lambda x z.\, x^{m^n}(z) = \overline{m^n}$. For $n = 0$ the induction does not start, and the result is $\lambda x.\, x$, as noted after :ref{#prop-church-arithmetic}.
+:::
+::::
+
+::::exercise{#ex-lambda-mult-iterate difficulty=1 objective="Define multiplication on numerals as an iteration of addition, and verify it by induction."}
+Show that $\mathsf{mult}' = \lambda m n.\, m\, (\mathsf{plus}\, n)\, \overline 0$ λ-defines multiplication.
+
+:::solution
+$\mathsf{mult}'\, \overline m\, \overline n \twoheadrightarrow_\beta \overline m\, (\mathsf{plus}\, \overline n)\, \overline 0 \twoheadrightarrow_\beta (\mathsf{plus}\, \overline n)^m(\overline 0)$. By induction on $j$, $(\mathsf{plus}\, \overline n)^j(\overline 0) \twoheadrightarrow_\beta \overline{jn}$: for $j = 0$ this is $\overline 0$, and $(\mathsf{plus}\, \overline n)^{j+1}(\overline 0) = \mathsf{plus}\, \overline n\, \big((\mathsf{plus}\, \overline n)^j(\overline 0)\big) \twoheadrightarrow_\beta \mathsf{plus}\, \overline n\, \overline{jn} \twoheadrightarrow_\beta \overline{n + jn}$, by compatibility and :ref{#prop-church-arithmetic}. For $j = m$ we get $\overline{mn}$.
+:::
+::::
+
+::::exercise{#ex-lambda-lists difficulty=2 objective="Represent finite lists by their fold, as numerals represent iteration, and program functions on them."}
+Represent the list of terms $A_1, \dots, A_k$ by $[\![A_1, \dots, A_k]\!] = \lambda c\, n.\, c\, A_1\, (c\, A_2\, (\cdots (c\, A_k\, n) \cdots))$, where $c, n$ are not free in the $A_i$. Let $\mathsf{nil} = \lambda c\, n.\, n$ and $\mathsf{cons} = \lambda h\, t\, c\, n.\, c\, h\, (t\, c\, n)$.
+
+1. Show that $\mathsf{nil} = [\![\,]\!]$ and $\mathsf{cons}\, A\, [\![A_1, \dots, A_k]\!] \twoheadrightarrow_\beta [\![A, A_1, \dots, A_k]\!]$.
+2. Give terms $\mathsf{length}$ and $\mathsf{sum}$ such that $\mathsf{length}\, [\![A_1, \dots, A_k]\!] \twoheadrightarrow_\beta \overline k$ for all terms $A_i$, and $\mathsf{sum}\, [\![\overline{a_1}, \dots, \overline{a_k}]\!] \twoheadrightarrow_\beta \overline{a_1 + \dots + a_k}$.
+
+:::solution
+1. For $k = 0$ the definition gives $\lambda c\, n.\, n = \mathsf{nil}$. Let $L = [\![A_1, \dots, A_k]\!]$. For any terms $C, N$ (with the variable convention), $L\, C\, N \twoheadrightarrow_\beta C\, A_1\, (C\, A_2\, (\cdots (C\, A_k\, N) \cdots))$, by two β-steps, since $c$ and $n$ are not free in the $A_i$. Hence $\mathsf{cons}\, A\, L \twoheadrightarrow_\beta \lambda c\, n.\, c\, A\, (L\, c\, n) \twoheadrightarrow_\beta \lambda c\, n.\, c\, A\, (c\, A_1\, (\cdots (c\, A_k\, n) \cdots)) = [\![A, A_1, \dots, A_k]\!]$, reducing inside the abstraction.
+2. Let $\mathsf{length} = \lambda l.\, l\, (\lambda h\, r.\, \mathsf{succ}\, r)\, \overline 0$ and $\mathsf{sum} = \lambda l.\, l\, \mathsf{plus}\, \overline 0$. By the computation in 1, $\mathsf{length}\, [\![A_1, \dots, A_k]\!]$ reduces to $S\, A_1\, (S\, A_2\, (\cdots (S\, A_k\, \overline 0) \cdots))$ with $S = \lambda h\, r.\, \mathsf{succ}\, r$. By induction on $j$, the innermost $j$ applications of $S$ reduce to $\overline j$: $S\, A\, \overline j \twoheadrightarrow_\beta \mathsf{succ}\, \overline j \twoheadrightarrow_\beta \overline{j + 1}$, whatever $A$ is. So the whole term reduces to $\overline k$. In the same way, $\mathsf{sum}\, [\![\overline{a_1}, \dots, \overline{a_k}]\!]$ reduces to $\mathsf{plus}\, \overline{a_1}\, (\cdots (\mathsf{plus}\, \overline{a_k}\, \overline 0) \cdots)$, and by induction from the inside, using :ref{#prop-church-arithmetic}, to $\overline{a_1 + \cdots + a_k}$.
+:::
+::::
+
+::::exercise{#ex-lambda-scott-numerals difficulty=2 objective="Compare Church numerals with Scott numerals, which have a direct predecessor but need a fixed point for iteration."}
+The **Scott numerals** are $\ulcorner 0 \urcorner = \lambda x\, y.\, x$ and $\ulcorner n + 1 \urcorner = \lambda x\, y.\, y\, \ulcorner n \urcorner$. Give terms $\mathsf{succ}_S$, $\mathsf{pred}_S$, $\mathsf{iszero}_S$ and $\mathsf{plus}_S$ such that $\mathsf{succ}_S\, \ulcorner n \urcorner \twoheadrightarrow_\beta \ulcorner n + 1 \urcorner$, $\mathsf{pred}_S\, \ulcorner 0 \urcorner \twoheadrightarrow_\beta \ulcorner 0 \urcorner$, $\mathsf{pred}_S\, \ulcorner n + 1 \urcorner \twoheadrightarrow_\beta \ulcorner n \urcorner$, $\mathsf{iszero}_S$ returns $\mathsf{true}$ on $\ulcorner 0 \urcorner$ and $\mathsf{false}$ on the others, and $\mathsf{plus}_S\, \ulcorner m \urcorner\, \ulcorner n \urcorner \twoheadrightarrow_\beta \ulcorner m + n \urcorner$.
+
+:::solution
+The Scott numerals are closed normal forms. A Scott numeral is a case distinction: applied to $A$ and $B$, $\ulcorner 0 \urcorner$ returns $A$ and $\ulcorner n + 1 \urcorner$ returns $B\, \ulcorner n \urcorner$.
+
+- $\mathsf{succ}_S = \lambda n\, x\, y.\, y\, n$: $\mathsf{succ}_S\, \ulcorner n \urcorner \to_\beta \lambda x\, y.\, y\, \ulcorner n \urcorner = \ulcorner n + 1 \urcorner$.
+- $\mathsf{pred}_S = \lambda n.\, n\, \ulcorner 0 \urcorner\, \mathsf{I}$: $\mathsf{pred}_S\, \ulcorner 0 \urcorner \to_\beta \ulcorner 0 \urcorner\, \ulcorner 0 \urcorner\, \mathsf{I} \twoheadrightarrow_\beta \ulcorner 0 \urcorner$, and $\mathsf{pred}_S\, \ulcorner n + 1 \urcorner \to_\beta \ulcorner n + 1 \urcorner\, \ulcorner 0 \urcorner\, \mathsf{I} \twoheadrightarrow_\beta \mathsf{I}\, \ulcorner n \urcorner \to_\beta \ulcorner n \urcorner$, in a number of steps independent of $n$, unlike Kleene's predecessor.
+- $\mathsf{iszero}_S = \lambda n.\, n\, \mathsf{true}\, (\lambda m.\, \mathsf{false})$: on $\ulcorner 0 \urcorner$ it gives $\mathsf{true}$, and on $\ulcorner n + 1 \urcorner$ it gives $(\lambda m.\, \mathsf{false})\, \ulcorner n \urcorner \to_\beta \mathsf{false}$.
+- A Scott numeral does not iterate, so addition needs a fixed point. Let $\mathsf{plus}_S = \Theta\, P$ with $P = \lambda p\, m\, n.\, m\, n\, (\lambda m'.\, \mathsf{succ}_S\, (p\, m'\, n))$. By :ref{#thm-lambda-fixed-point}, $\mathsf{plus}_S \twoheadrightarrow_\beta P\, \mathsf{plus}_S$. Then $\mathsf{plus}_S\, \ulcorner 0 \urcorner\, \ulcorner n \urcorner \twoheadrightarrow_\beta \ulcorner 0 \urcorner\, \ulcorner n \urcorner\, (\cdots) \twoheadrightarrow_\beta \ulcorner n \urcorner$, and
+$$
+\mathsf{plus}_S\, \ulcorner m + 1 \urcorner\, \ulcorner n \urcorner \twoheadrightarrow_\beta (\lambda m'.\, \mathsf{succ}_S\, (\mathsf{plus}_S\, m'\, \ulcorner n \urcorner))\, \ulcorner m \urcorner \to_\beta \mathsf{succ}_S\, (\mathsf{plus}_S\, \ulcorner m \urcorner\, \ulcorner n \urcorner).
+$$
+By induction on $m$ and compatibility, this reduces to $\mathsf{succ}_S\, \ulcorner m + n \urcorner \to_\beta \ulcorner m + n + 1 \urcorner$.
+:::
+::::
+
+::::exercise{#ex-lambda-fixed-point-si difficulty=2 objective="Build new fixed-point combinators as fixed points of the term $\mathsf{S}\, \mathsf{I}$."}
+Call a term $Z$ a **fixed-point combinator** if $Z\, F =_\beta F\, (Z\, F)$ for every term $F$. Show that if $Z$ is a fixed-point combinator, then so is $Z\, (\mathsf{S}\, \mathsf{I})$, where $\mathsf{S}$ and $\mathsf{I}$ are the combinators of the lesson :ref{to="models-of-computation/lambda-calculus"}. Deduce that $\mathsf{Y}\, (\mathsf{S}\, \mathsf{I})$ is a fixed-point combinator.
+
+:::solution
+For all terms $Z'$ and $F$, $\mathsf{S}\, \mathsf{I}\, Z'\, F \twoheadrightarrow_\beta \mathsf{I}\, F\, (Z'\, F) \to_\beta F\, (Z'\, F)$. Let $Z' = Z\, (\mathsf{S}\, \mathsf{I})$. Since $Z$ is a fixed-point combinator, $Z' =_\beta \mathsf{S}\, \mathsf{I}\, Z'$. Hence, for every $F$, since $=_\beta$ is compatible with application, $Z'\, F =_\beta \mathsf{S}\, \mathsf{I}\, Z'\, F =_\beta F\, (Z'\, F)$. By :ref{#thm-lambda-fixed-point}, $\mathsf{Y}$ is a fixed-point combinator, so $\mathsf{Y}\, (\mathsf{S}\, \mathsf{I})$ is one. More generally, the first computation shows that every term $Z'$ with $Z' =_\beta \mathsf{S}\, \mathsf{I}\, Z'$ is a fixed-point combinator.
+:::
+::::
+:::::

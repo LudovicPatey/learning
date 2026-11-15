@@ -114,7 +114,7 @@ Why are the elements of $E_i$ and $F_i$ taken at least $i$?
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-cohesive-ultrafilter difficulty=1 objective="See that an $\mathcal M$-cohesive class induces an ultrafilter on the Boolean algebra $\mathcal M$."}
 Let $\mathcal A$ be $\mathcal M$-cohesive. Show that for $X \in \mathcal M$, $X \in \mathcal A$ if and only if $\mathcal A \subseteq \mathcal L_X$, and deduce that $\{ X \in \mathcal M : X \in \mathcal A \}$ is an ultrafilter on the Boolean algebra $\mathcal M$ containing no finite set, provided all members of $\mathcal A$ are infinite.
 
 :::solution
@@ -124,7 +124,7 @@ Let $\mathcal F = \mathcal A \cap \mathcal M$. It is closed under supersets in $
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-minimal-greedy difficulty=2 objective="Build an $\mathcal M$-minimal class by the greedy algorithm, and measure the oracle it needs."}
 Let $S_0$ be such that $\mathcal U_{S_0}$ is large. Show that $(S_0 \oplus M')'$ computes a set $S \supseteq S_0$ such that $\mathcal U_S$ is $\mathcal M$-minimal in the sense of item 2 of :ref{#prop-cohesive-core}: for every $\Sigma^0_1(\mathcal M)$ class $\mathcal V$, $\mathcal U_S \subseteq \mathcal V$ or $\mathcal U_S \cap \mathcal V$ is not large.
 
 :::solution
@@ -134,8 +134,44 @@ Enumerate the $\Sigma^0_1(\mathcal M)$ classes as $\mathcal V_0, \mathcal V_1, \
 
 ## Notes and references
 
-$\mathcal M$-minimal classes and the core are due to Monin and Patey (*The weakness of the pigeonhole principle under hyperarithmetical reductions*, arXiv 2019); :ref{#thm-cohesive-class} and the greedy construction of the second exercise are due, according to the monograph, to Le Houérou, Levy Patey and Mimouni (2024), who also show that some $\mathcal M$-cohesive class of the form $\mathcal U_S$ is not $\mathcal M$-minimal. The presentation follows the chapter *Jump cone avoidance* of Patey's monograph. The partition regularity of the core (item 4 of :ref{#prop-cohesive-core}) is proved here directly with :ref{#lem-cover-class}; the monograph obtains it from the fact that the largest partition regular subclass of a class $\mathcal U_S$ is again of the form $\mathcal U_{S'}$, with $S'$ computable in $S$.
+$\mathcal M$-minimal classes and the core are due to Monin and Patey (*The weakness of the pigeonhole principle under hyperarithmetical reductions*, arXiv 2019); :ref{#thm-cohesive-class} and the greedy construction of :ref{#ex-minimal-greedy} are due, according to the monograph, to Le Houérou, Levy Patey and Mimouni (2024), who also show that some $\mathcal M$-cohesive class of the form $\mathcal U_S$ is not $\mathcal M$-minimal. The presentation follows the chapter *Jump cone avoidance* of Patey's monograph. The partition regularity of the core (item 4 of :ref{#prop-cohesive-core}) is proved here directly with :ref{#lem-cover-class}; the monograph obtains it from the fact that the largest partition regular subclass of a class $\mathcal U_S$ is again of the form $\mathcal U_{S'}$, with $S'$ computable in $S$.
 
 - B. Monin and L. Patey, *The weakness of the pigeonhole principle under hyperarithmetical reductions*, arXiv:1905.08425 (2019).
 - Q. Le Houérou, L. Levy Patey and A. Mimouni, *The reverse mathematics of the pigeonhole hierarchy*, arXiv:2407.01236 (2024).
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Partition regularity*.
+
+:::::exercises
+::::exercise[Finite members]{#ex-cohesive-split-finite difficulty=1 objective="See by a counterexample why the splitting lemma needs a class whose members are infinite."}
+Let $\mathcal A = \{ X : 0 \in X \}$ and let $X$ be infinite and coinfinite. Show that $\mathcal A$ is large, but that neither $\mathcal A \cap \mathcal L_X$ nor $\mathcal A \cap \mathcal L_{\overline X}$ is large. Which hypothesis of :ref{#lem-large-split} fails?
+
+:::solution
+$\mathcal A$ is upward closed, and in every finite cover of $\nat$ the part containing $0$ is in $\mathcal A$. The sets $\{ 0 \}$, $X \setminus \{ 0 \}$ and $\overline X \setminus \{ 0 \}$ cover $\nat$. The first is finite, so it is in neither $\mathcal L_X$ nor $\mathcal L_{\overline X}$; the other two do not contain $0$, so they are not in $\mathcal A$. So neither intersection is large. The class $\mathcal A$ has finite members, such as $\{ 0 \}$; in the proof of :ref{#lem-large-split}, the part of the merged cover lying in $\mathcal A$ is here $\{0\} = Y_j \cap X$ or $W_l \cap \overline X$, a finite set, and no contradiction arises.
+:::
+::::
+
+::::exercise[Minimal classes are cohesive]{#ex-cohesive-minimal difficulty=2 objective="Show that an $\mathcal M$-minimal class with infinite members is $\mathcal M$-cohesive and is its own core."}
+Let $S$ be such that $\mathcal U_S$ is large, all its members are infinite, and $\mathcal U_S$ is $\mathcal M$-minimal: for every $\Sigma^0_1(\mathcal M)$ class $\mathcal V$, $\mathcal U_S \subseteq \mathcal V$ or $\mathcal U_S \cap \mathcal V$ is not large. Show that $\mathcal U_S$ is $\mathcal M$-cohesive and that $\langle \mathcal U_S \rangle = \mathcal U_S$.
+
+:::solution
+Let $X \in \mathcal M$. By :ref{#lem-large-split}, $\mathcal U_S \cap \mathcal L_X$ or $\mathcal U_S \cap \mathcal L_{\overline X}$ is large; say the first. For each $n$, the class $\mathcal V_n = \{ Y : |Y \cap X| \geq n \}$ is a $\Sigma^0_1(\mathcal M)$ class, and $\mathcal U_S \cap \mathcal V_n$ contains the large class $\mathcal U_S \cap \mathcal L_X$, so it is large. By minimality $\mathcal U_S \subseteq \mathcal V_n$ for every $n$, that is, $\mathcal U_S \subseteq \mathcal L_X$. So $\mathcal U_S$ is $\mathcal M$-cohesive.
+
+By item 1 of :ref{#prop-cohesive-core}, $\langle \mathcal U_S \rangle \subseteq \mathcal U_S$. Every $\Sigma^0_1(\mathcal M)$ class $\mathcal V$ in the intersection defining the core satisfies that $\mathcal U_S \cap \mathcal V$ is large, hence $\mathcal U_S \subseteq \mathcal V$ by minimality; so $\mathcal U_S \subseteq \langle \mathcal U_S \rangle$. With :ref{#ex-minimal-greedy}, the greedy construction relative to $(S_0 \oplus M')'$ thus gives cohesive classes equal to their cores; :ref{#thm-cohesive-class} saves one jump, and its classes need not be $\mathcal M$-minimal, as recalled in the notes.
+:::
+::::
+
+::::exercise[The members of the ideal in the core]{#ex-cohesive-core-ideal difficulty=1 objective="Show that the core and the cohesive class contain the same members of $\mathcal M$."}
+Let $\mathcal U_S$ be $\mathcal M$-cohesive and $X \in \mathcal M$. Show that $X \in \langle \mathcal U_S \rangle$ if and only if $X \in \mathcal U_S$, if and only if $\mathcal U_S \subseteq \mathcal L_X$.
+
+:::solution
+If $X \in \langle \mathcal U_S \rangle$, then $X \in \mathcal U_S$ by item 1 of :ref{#prop-cohesive-core}. If $X \in \mathcal U_S$, then $\mathcal U_S \subseteq \mathcal L_X$ by :ref{#ex-cohesive-ultrafilter}. Suppose $\mathcal U_S \subseteq \mathcal L_X$, and let $\mathcal V$ be a $\Sigma^0_1(\mathcal M)$ class with $\mathcal U_S \cap \mathcal V$ large. The sets $X$ and $\overline X$ cover $\nat$, so one of them is in $\mathcal U_S \cap \mathcal V$; it is not $\overline X$, which is disjoint from $X$ and so not in $\mathcal L_X \supseteq \mathcal U_S$. So $X \in \mathcal V$. This holds for every $\mathcal V$ in the intersection, so $X \in \langle \mathcal U_S \rangle$.
+:::
+::::
+
+::::exercise[A cohesive class inside a given class]{#ex-cohesive-towers difficulty=1 objective="Apply the construction of a cohesive class to a starting class other than the class of infinite sets."}
+Let $\mathcal Q$ be the partition regular class of :ref{#ex-pr-towers}. Show that $\mathcal Q = \mathcal U_{S_0}$ for a computable set $S_0$, and deduce that every set $P$ PA relative to $M'$ computes a set $S$ such that $\mathcal U_S$ is $\mathcal M$-cohesive and contained in $\mathcal Q$, with a core that is a non-trivial partition regular subclass of $\mathcal Q$.
+
+:::solution
+For each $n$, the class $\mathcal Q_n = \{ X : |X \cap [x, 2^x)| \geq n \text{ for some } x \}$ is $\mathcal U^Y_{a_n}$ for every oracle $Y$, where $W_{a_n}$ enumerates the $n$-element sets contained in some interval $[x, 2^x)$; $a_n$ is computable from $n$. With $S_0 = \{ (a_n, 0) : n \in \nat \}$, a computable set, $\mathcal U_{S_0} = \bigcap_n \mathcal Q_n = \mathcal Q$. By :ref{#ex-pr-towers}, $\mathcal Q$ is partition regular, hence large, and its members are infinite. A set $P$ PA relative to $M'$ is PA relative to $S_0 \oplus M' \equiv_T M'$, so :ref{#thm-cohesive-class} gives $S \supseteq S_0$, computable in $P$, with $\mathcal U_S$ $\mathcal M$-cohesive, all of whose members are infinite, and $\mathcal U_S \subseteq \mathcal U_{S_0} = \mathcal Q$. By :ref{#prop-cohesive-core}, its core is a non-trivial partition regular class contained in $\mathcal U_S \subseteq \mathcal Q$.
+:::
+::::
+:::::

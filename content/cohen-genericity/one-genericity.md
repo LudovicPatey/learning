@@ -1,7 +1,7 @@
 ---
 title: 1-generic sets
 summary: Forcing Σ⁰₁ and Π⁰₁ properties with strings; 1-generic sets decide them by a prefix; no 1-generic set is DNC; relativized cone avoidance; meager classes of degrees.
-duration: 50
+duration: 45
 prerequisites: [weak-genericity, turing-degrees/low-and-high, immunity-growth/dnc-functions]
 ---
 
@@ -73,6 +73,34 @@ Why is every 1-generic set weakly 1-generic?
 
   Many c.e. sets of strings are not dense, for instance the set of strings beginning with $0$.
 :::
+
+::::exercise{#ex-generic-halves difficulty=2 objective="Apply the meet-or-avoid property to the c.e. set of strings on which a reduction between the two halves of a set fails."}
+Let $G = G_0 \oplus G_1$ be 1-generic. Show that $G_0 \not\leq_T G_1$ and $G_1 \not\leq_T G_0$.
+
+:::solution
+Suppose $\Phi^{G_1}_e = G_0$. For a string $\sigma$, write $\sigma_0$ and $\sigma_1$ for the strings of its bits at even and at odd positions. Let $W$ be the c.e. set of strings $\sigma$ such that $\Phi^{\sigma_1}_e(n)\converge \neq \sigma_0(n)$ for some $n < |\sigma_0|$. No prefix of $G$ is in $W$, since $\Phi^{G_1}_e = G_0$. Let $\sigma \prec G$. Take $n = |\sigma_0|$, and a prefix $\tau \prec G$ extending $\sigma$, long enough that $\Phi^{\tau_1}_e(n)\converge$ and $|\tau_0| > n$. Let $\tau'$ be $\tau$ with the even bit of index $n$ flipped. Then $\tau' \succeq \sigma$, its odd part is $\tau_1$, so $\Phi^{\tau'_1}_e(n)\converge = G_0(n) \neq \tau'_0(n)$, and $\tau' \in W$. So no prefix of $G$ avoids $W$, contradicting the 1-genericity of $G$. The other half is symmetric.
+:::
+::::
+
+::::exercise{#ex-left-ce-not-generic difficulty=2 objective="Show that left-c.e. sets are not 1-generic, with the c.e. set of strings at which their approximation moves to the right."}
+A set $X$ is **left-c.e.** if there is a computable sequence of finite sets $X_0, X_1, \dots$ such that each $X_{s+1}$ is lexicographically greater than $X_s$, as infinite binary sequences, and $X(n) = \lim_s X_s(n)$ for every $n$. Show that no left-c.e. set is 1-generic.
+
+:::hint
+Enumerate the strings $X_s \uh (n_s + 1)$, where $n_s$ is the first position at which $X_s$ and $X_{s+1}$ differ.
+:::
+
+:::solution
+Since $X_s <_{\mathrm{lex}} X_{s+1}$, the first position $n_s$ at which they differ has $X_s(n_s) = 0$ and $X_{s+1}(n_s) = 1$. Let $W = \{ X_s \uh (n_s + 1) : s \in \nat \}$, a c.e. set of strings.
+
+First, $X_t \leq_{\mathrm{lex}} X$ for every $t$. Otherwise $X$ and $X_t$ first differ at some $p$ with $X(p) = 0$ and $X_t(p) = 1$; for $u$ large enough, $X_u \uh (p + 1) = X \uh (p + 1)$, so $X_u <_{\mathrm{lex}} X_t$ with $u > t$, which is impossible. Hence $X \geq_{\mathrm{lex}} X_{s+1}$ for every $s$.
+
+*No prefix of $X$ is in $W$.* If $X \uh (n_s + 1) = X_s \uh (n_s + 1)$, then $X$ and $X_{s+1}$ agree below $n_s$ and $X(n_s) = 0 < 1 = X_{s+1}(n_s)$, so $X <_{\mathrm{lex}} X_{s+1}$, a contradiction.
+
+*No prefix of $X$ avoids $W$.* Let $k \in \nat$, and $s$ large enough that $X_s \uh k = X_{s+1} \uh k = X \uh k$. Then $n_s \geq k$, and $X_s \uh (n_s + 1) \in W$ extends $X \uh k$.
+
+So $X$ does not meet $W \cup W^\perp$. The same proof shows that no set left-c.e. relative to $A$ is 1-generic relative to $A$. On the other hand, there are left-c.e. sets that are weakly 1-generic (Monin and Patey, chapter *Cohen forcing*, exercise after the comparison of weak and full genericity); this gives another separation of the two notions.
+:::
+::::
 
 ## 1-generic sets are not DNC
 
@@ -154,44 +182,6 @@ The following classes are meager:
 
 Items 2 and 3 show that typical sets in the sense of category compute no DNC function and are not computably dominated. In the sense of measure, the situation is reversed for DNC functions: every Martin-Löf random sequence computes a DNC function, so the class of sets computing a DNC function has measure $1$ (:ref{to="martin-lof-randomness/random-dnc"}). The comparison of the typical degree in the sense of measure and in the sense of category is the subject of a paper of Barmpalias, Day and Lewis-Pye (2014).
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show directly that no 1-generic set is computable.
-
-:::solution
-Let $X$ be computable, and $W = \{ (X \uh n)\, (1 - X(n)) : n \in \nat \}$, a computable set of strings. No prefix of $X$ is in $W$, and every prefix $X \uh n$ has the extension $(X \uh n)(1 - X(n))$ in $W$, so no prefix of $X$ avoids $W$. So $X$ does not meet $W \cup W^\perp$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $G = G_0 \oplus G_1$ be 1-generic. Show that $G_0 \not\leq_T G_1$ and $G_1 \not\leq_T G_0$.
-
-:::solution
-Suppose $\Phi^{G_1}_e = G_0$. For a string $\sigma$, write $\sigma_0$ and $\sigma_1$ for the strings of its bits at even and at odd positions. Let $W$ be the c.e. set of strings $\sigma$ such that $\Phi^{\sigma_1}_e(n)\converge \neq \sigma_0(n)$ for some $n < |\sigma_0|$. No prefix of $G$ is in $W$, since $\Phi^{G_1}_e = G_0$. Let $\sigma \prec G$. Take $n = |\sigma_0|$, and a prefix $\tau \prec G$ extending $\sigma$, long enough that $\Phi^{\tau_1}_e(n)\converge$ and $|\tau_0| > n$. Let $\tau'$ be $\tau$ with the even bit of index $n$ flipped. Then $\tau' \succeq \sigma$, its odd part is $\tau_1$, so $\Phi^{\tau'_1}_e(n)\converge = G_0(n) \neq \tau'_0(n)$, and $\tau' \in W$. So no prefix of $G$ avoids $W$, contradicting the 1-genericity of $G$. The other half is symmetric.
-:::
-::::
-
-::::exercise{difficulty=2}
-A set $X$ is **left-c.e.** if there is a computable sequence of finite sets $X_0, X_1, \dots$ such that each $X_{s+1}$ is lexicographically greater than $X_s$, as infinite binary sequences, and $X(n) = \lim_s X_s(n)$ for every $n$. Show that no left-c.e. set is 1-generic.
-
-:::hint
-Enumerate the strings $X_s \uh (n_s + 1)$, where $n_s$ is the first position at which $X_s$ and $X_{s+1}$ differ.
-:::
-
-:::solution
-Since $X_s <_{\mathrm{lex}} X_{s+1}$, the first position $n_s$ at which they differ has $X_s(n_s) = 0$ and $X_{s+1}(n_s) = 1$. Let $W = \{ X_s \uh (n_s + 1) : s \in \nat \}$, a c.e. set of strings.
-
-First, $X_t \leq_{\mathrm{lex}} X$ for every $t$. Otherwise $X$ and $X_t$ first differ at some $p$ with $X(p) = 0$ and $X_t(p) = 1$; for $u$ large enough, $X_u \uh (p + 1) = X \uh (p + 1)$, so $X_u <_{\mathrm{lex}} X_t$ with $u > t$, which is impossible. Hence $X \geq_{\mathrm{lex}} X_{s+1}$ for every $s$.
-
-*No prefix of $X$ is in $W$.* If $X \uh (n_s + 1) = X_s \uh (n_s + 1)$, then $X$ and $X_{s+1}$ agree below $n_s$ and $X(n_s) = 0 < 1 = X_{s+1}(n_s)$, so $X <_{\mathrm{lex}} X_{s+1}$, a contradiction.
-
-*No prefix of $X$ avoids $W$.* Let $k \in \nat$, and $s$ large enough that $X_s \uh k = X_{s+1} \uh k = X \uh k$. Then $n_s \geq k$, and $X_s \uh (n_s + 1) \in W$ extends $X \uh k$.
-
-So $X$ does not meet $W \cup W^\perp$. The same proof shows that no set left-c.e. relative to $A$ is 1-generic relative to $A$. On the other hand, there are left-c.e. sets that are weakly 1-generic (Monin and Patey, chapter *Cohen forcing*, exercise after the comparison of weak and full genericity); this gives another separation of the two notions.
-:::
-::::
-
 ## Notes and references
 
 1-generic sets were introduced by Jockusch (1980), who proved most of their basic properties; Soare (2016, §6.3) credits the characterization by forcing the jump to Jockusch and Posner. The theorem that 1-generic sets are not DNC is due to Demuth and Kučera (1987); the proof by the fixed point theorem given here is the one of Monin and Patey, while Downey and Hirschfeldt (2010, Theorem 2.24.5) give a proof through a co-c.e. set of strings. The meagerness of the high sets and of the computably dominated sets is classical. The exercise on left-c.e. sets is taken from Monin and Patey.
@@ -202,3 +192,111 @@ So $X$ does not meet $W \cup W^\perp$. The same proof shows that no set left-c.e
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §6.3.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.24.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cohen forcing*, section *Effective genericity*.
+
+:::::exercises
+::::exercise{#ex-1-generic-not-computable difficulty=1 objective="Build, for a computable set, a c.e. set of strings that it neither meets nor avoids."}
+Show directly that no 1-generic set is computable.
+
+:::solution
+Let $X$ be computable, and $W = \{ (X \uh n)\, (1 - X(n)) : n \in \nat \}$, a computable set of strings. No prefix of $X$ is in $W$, and every prefix $X \uh n$ has the extension $(X \uh n)(1 - X(n))$ in $W$, so no prefix of $X$ avoids $W$. So $X$ does not meet $W \cup W^\perp$.
+:::
+::::
+
+::::exercise{#ex-forcing-examples difficulty=1 objective="Determine on examples which strings force a $\Sigma^0_1$ property or its negation, and what a 1-generic set does."}
+For each of the following $\Sigma^0_1$ properties $P$ of a set $G$, describe the strings that force $P$ and the strings that force $\neg P$, and say whether a 1-generic set satisfies $P$.
+
+1. $0 \in G$.
+2. There is $n$ with $n \in G$ and $n + 1 \in G$.
+3. There is $n \geq 1$ with $n \in G$ and $2n \in G$.
+4. There is $n \in \emptyset'$ with $n \in G$.
+
+:::solution
+Each property is of the form "$\Phi^G_e(0)\converge$", for a functional that searches for a witness.
+
+1. A string forces $P$ if and only if it is non-empty and begins with $1$, and forces $\neg P$ if and only if it begins with $0$; the empty string forces neither. Every set, generic or not, decides $P$ by its first bit; a 1-generic set may or may not satisfy $P$.
+2. A string $\sigma$ forces $P$ if and only if it contains two consecutive $1$s: if it does not, the set extending $\sigma$ by zeros fails $P$. No string forces $\neg P$, since $\sigma\, 1\, 1$ extends $\sigma$ and satisfies $P$. By :ref{#thm-1generic-decides}, a 1-generic set has a prefix forcing $P$ or one forcing $\neg P$; the second is impossible, so every 1-generic set satisfies $P$.
+3. A string $\sigma$ forces $P$ if and only if $\sigma(n) = \sigma(2n) = 1$ for some $n \geq 1$ with $2n < |\sigma|$: otherwise the set extending $\sigma$ by zeros fails $P$, since a witness $n$ with $2n \geq |\sigma|$ would need a $1$ at position $2n$. No string forces $\neg P$: for $n = \max(|\sigma|, 1)$, the string $\sigma$ extended with $1$s at positions $n$ and $2n$ and $0$s elsewhere satisfies $P$. So every 1-generic set satisfies $P$.
+4. A string $\sigma$ forces $P$ if and only if $\sigma(n) = 1$ for some $n \in \emptyset'$ with $n < |\sigma|$, by the same argument. No string forces $\neg P$, since $\emptyset'$ is infinite and has an element $n \geq |\sigma|$, at which a $1$ can be placed. So every 1-generic set meets $\emptyset'$. Here the strings forcing $P$ form a c.e. set and no string forces $\neg P$; in general, the strings forcing $\neg P$ form a co-c.e. set (:ref{#prop-force-sigma1}).
+:::
+::::
+
+::::exercise{#ex-forcing-jump-converse difficulty=1 objective="Complete the proof that deciding every property $\Phi^G_e(e)\converge$ by a prefix characterizes 1-genericity."}
+Suppose that for every $e$, some prefix of $G$ forces "$\Phi^G_e(e)\converge$" or forces "$\Phi^G_e(e)\diverge$". Show that $G$ is 1-generic.
+
+:::solution
+Let $(W_i)$ be an enumeration of the c.e. sets of strings. Consider the oracle program that, on any input, searches for $k$ and $s$ with $X \uh k \in W_i[s]$, and halts when it finds them. By the parameter theorem there is a computable function $g$ such that $\Phi^X_{g(i)}(y)\converge$ if and only if $X$ meets $W_i$, for every set $X$ and every $y$. Let $e = g(i)$; then $\Phi^X_e(e)\converge$ if and only if $X$ meets $W_i$.
+
+By hypothesis, some $\sigma \prec G$ forces one of the two properties. If $\sigma$ forces convergence, then $\Phi^G_e(e)\converge$, since $G$ extends $\sigma$, so $G$ meets $W_i$. If $\sigma$ forces divergence, then $\sigma$ avoids $W_i$: if some $\tau \succeq \sigma$ were in $W_i$, the set $X$ extending $\tau$ by zeros would extend $\sigma$ and meet $W_i$, so $\Phi^X_e(e)\converge$. In both cases $G$ meets $W_i \cup W_i^\perp$. This is the converse of forcing the jump (Soare 2016, Theorem 6.3.2).
+:::
+::::
+
+::::exercise{#ex-avoid-not-ce difficulty=1 objective="Exhibit a c.e. set of strings $W$ for which $W \cup W^\perp$ is not c.e., which is why 1-genericity is stronger than weak 1-genericity." lessons="n-genericity"}
+Let $W = \{ 0^e\, 1\, 1 : e \in \emptyset' \}$. Show that $W \cup W^\perp$ is not c.e.
+
+:::solution
+Fix $e$ and consider the string $0^e 1$. It is not in $W$: the strings of $W$ end with $11$, and $0^e 1$ does not. An element $0^{e'} 1 1$ of $W$ extends $0^e 1$ only if $e' = e$: if $e' > e$, it has a $0$ at position $e$; if $e' < e$, it has a $1$ at position $e' < e$. Hence $0^e 1$ has an extension in $W$ if and only if $e \in \emptyset'$, and
+$$
+0^e 1 \in W \cup W^\perp \iff 0^e 1 \in W^\perp \iff e \notin \emptyset'.
+$$
+If $W \cup W^\perp$ were c.e., the complement of $\emptyset'$ would be c.e., and $\emptyset'$ would be computable. This is why, in the comparison of the notions of genericity of the lesson on arithmetic genericity, the dense set $W \cup W^\perp$ is one level above $W$ in the arithmetic hierarchy.
+:::
+::::
+
+::::exercise{#ex-generic-not-pa-direct difficulty=2 objective="Prove directly, by the meet-or-avoid argument of cone avoidance, that a 1-generic set computes no separating set of two computably inseparable c.e. sets."}
+Let $A$ and $B$ be disjoint c.e. sets that are computably inseparable: no computable set $C$ satisfies $A \subseteq C$ and $B \cap C = \emptyset$. Show, without using DNC functions, that no 1-generic set computes a set $C$ with $A \subseteq C$ and $B \cap C = \emptyset$.
+
+:::solution
+Let $G$ be 1-generic and suppose that $\Phi^G_e$ is the characteristic function of such a set $C$. Let $W$ be the set of strings $\sigma$ such that, for some $x$, either $x \in A$ and $\Phi^\sigma_e(x)\converge \neq 1$, or $x \in B$ and $\Phi^\sigma_e(x)\converge \neq 0$. It is c.e. No prefix of $G$ is in $W$, since $\Phi^G_e(x) = 1$ for $x \in A$ and $\Phi^G_e(x) = 0$ for $x \in B$, and a computation with oracle a prefix of $G$ gives the same value with oracle $G$. So some $\sigma \prec G$ avoids $W$.
+
+Define a computable function $\psi$: on input $x$, search for a string $\tau \succeq \sigma$ with $\Phi^\tau_e(x)\converge$, and output $1$ if the value of the first one found is $1$, and $0$ otherwise. The search terminates, since a long enough prefix of $G$ is such a $\tau$. If $x \in A$, the value found is $1$, since otherwise $\tau$ would be an extension of $\sigma$ in $W$; if $x \in B$, it is $0$ for the same reason. So $\{ x : \psi(x) = 1 \}$ is a computable set containing $A$ and disjoint from $B$, a contradiction.
+
+For instance, $A = \{ e : \Phi_e(e)\converge = 0 \}$ and $B = \{ e : \Phi_e(e)\converge = 1 \}$ are computably inseparable, and every PA set computes a set separating them; this gives another proof that no 1-generic set is PA (:ref{#cor-generic-not-pa}; Downey and Hirschfeldt 2010, Corollary 2.24.6).
+:::
+::::
+
+::::exercise{#ex-low-generic-cone difficulty=2 objective="Combine meeting or avoiding c.e. sets of strings with $e$-splittings to keep a 1-generic set below $\emptyset'$ while avoiding a cone."}
+Let $B$ be a non-computable set with $B \leq_T \emptyset'$. Show that there is a 1-generic set $G \leq_T \emptyset'$, hence low, such that $B \not\leq_T G$. Why does :ref{#thm-generic-cone} not give this directly?
+
+:::hint
+To make $\Phi^G_e \neq B$, ask $\emptyset'$ whether the current string has two extensions on which $\Phi_e$ converges with different values at the same argument.
+:::
+
+:::solution
+Let $(W_e)$ enumerate the c.e. sets of strings. We build $\sigma_0 = \varepsilon \prec \sigma_1 \prec \cdots$ with oracle $\emptyset'$, and let $G$ be the limit.
+
+*Step $2e$.* Ask $\emptyset'$ whether $\sigma_{2e}$ has an extension in $W_e$, a $\Sigma^0_1$ question. If yes, let $\sigma_{2e+1} = \tau\, 0$ for the first such extension $\tau$; otherwise $\sigma_{2e}$ avoids $W_e$, and $\sigma_{2e+1} = \sigma_{2e}\, 0$.
+
+*Step $2e + 1$.* Let $\sigma = \sigma_{2e+1}$. Ask $\emptyset'$ whether there are $x$ and $\tau_0, \tau_1 \succeq \sigma$ with $\Phi^{\tau_0}_e(x)\converge \neq \Phi^{\tau_1}_e(x)\converge$, a $\Sigma^0_1$ question. If yes, find the first such triple by a computable search; one of the two values differs from $B(x)$, and $\emptyset'$ computes $B(x)$; let $\sigma_{2e+2} = \tau_i\, 0$ for an $i$ with $\Phi^{\tau_i}_e(x) \neq B(x)$. If no, let $\sigma_{2e+2} = \sigma\, 0$.
+
+The sequence is computable in $\emptyset'$, so $G \leq_T \emptyset'$. At step $2e$, $G$ meets $W_e \cup W_e^\perp$, so $G$ is 1-generic. At step $2e + 1$, in the first case $\Phi^G_e(x) = \Phi^{\tau_i}_e(x) \neq B(x)$. In the second case, all convergent computations $\Phi^\tau_e(x)$ with $\tau \succeq \sigma$ have the same value; if $\Phi^G_e$ were total, it would be computable: search for $\tau \succeq \sigma$ with $\Phi^\tau_e(x)\converge$ and output the value, which equals $\Phi^G_e(x)$ since prefixes of $G$ are such strings. As $B$ is not computable, $\Phi^G_e \neq B$. Finally $G$ is 1-generic and $\Delta^0_2$, so $G' \leq_T G \oplus \emptyset' \equiv_T \emptyset'$ by :ref{#thm-generic-low}.
+
+:ref{#thm-generic-cone} would require $G$ to be 1-generic relative to $B$, and the construction of such a set asks $\Sigma^0_1(B)$ questions, answered by $B'$, which may compute $\emptyset''$. The splitting argument only asks $\Sigma^0_1$ questions. This is adapted from Soare (2016, Exercise 6.3.7), where the set is only required to be low.
+:::
+::::
+
+::::exercise[Van Lambalgen's theorem for genericity]{#ex-generic-van-lambalgen difficulty=3 objective="Translate a c.e. set of strings relative to one half of a 1-generic set into a c.e. set of strings for the whole set."}
+Let $G = A \oplus B$ be 1-generic. Show that $B$ is 1-generic relative to $A$, and that $A$ is 1-generic relative to $B$. Deduce again that $A \not\leq_T B$ and $B \not\leq_T A$.
+
+:::hint
+By the use principle, an $A$-c.e. set of strings $W$ can be written $\{ \tau : \exists \rho \prec A\ (\rho, \tau) \in V \}$ for a c.e. set $V$ of pairs of strings.
+:::
+
+:::solution
+For a string $\sigma$, write $\sigma_0$ and $\sigma_1$ for the strings of its bits at even and at odd positions, so that the prefixes of $G$ are the strings $\sigma$ with $\sigma_0 \prec A$ and $\sigma_1 \prec B$ and with lengths $|\sigma_0| \in \{ |\sigma_1|, |\sigma_1| + 1 \}$.
+
+Let $W$ be an $A$-c.e. set of strings, enumerated by an oracle program with oracle $A$. By the use principle (:ref{#prop-oracle-stages}), $\tau \in W$ if and only if there is a prefix $\rho \prec A$ such that the program, with oracle $\rho$, enumerates $\tau$ within $|\rho|$ steps; let $V$ be the c.e. set of pairs $(\rho, \tau)$ with this property, so that $\tau \in W \iff \exists \rho \prec A\ (\rho, \tau) \in V$. Let
+$$
+V^* = \{ \sigma : \exists (\rho, \tau) \in V\ (\rho \preceq \sigma_0 \text{ and } \tau \preceq \sigma_1) \},
+$$
+a c.e. set of strings. Since $G$ is 1-generic, some $\sigma \prec G$ is in $V^*$ or avoids $V^*$.
+
+If $\sigma \in V^*$, with witness $(\rho, \tau)$, then $\rho \preceq \sigma_0 \prec A$, so $\tau \in W$, and $\tau \preceq \sigma_1 \prec B$: $B$ meets $W$.
+
+Suppose that $\sigma$ avoids $V^*$; we show that $\sigma_1 \prec B$ avoids $W$. Let $\tau \succeq \sigma_1$, and suppose $\tau \in W$, with $(\rho, \tau) \in V$ and $\rho \prec A$. Both $\rho$ and $\sigma_0$ are prefixes of $A$; let $\alpha$ be the longer one. Let $\ell = \max(|\alpha|, |\tau|)$, let $\alpha'$ and $\tau'$ be $\alpha$ and $\tau$ extended by zeros to length $\ell$, and let $\sigma'$ be the string of length $2\ell$ with $\sigma'_0 = \alpha'$ and $\sigma'_1 = \tau'$. Since $\sigma_0 \preceq \alpha'$, $\sigma_1 \preceq \tau'$ and $2\ell \geq |\sigma|$, the string $\sigma'$ extends $\sigma$; and since $\rho \preceq \alpha'$ and $\tau \preceq \tau'$, it belongs to $V^*$. This contradicts the choice of $\sigma$. So no extension of $\sigma_1$ is in $W$.
+
+Hence $B$ meets $W \cup W^\perp$ for every $A$-c.e. set of strings $W$. The same argument, with the roles of the even and odd positions exchanged, shows that $A$ is 1-generic relative to $B$. By :ref{#ex-relative-genericity}, no set is 1-generic relative to a set that computes it; so $B \not\leq_T A$ and $A \not\leq_T B$.
+
+The converse also holds, at every level $n$: $A \oplus B$ is $n$-generic if and only if $A$ is $n$-generic and $B$ is $n$-generic relative to $A$. This is the analogue for genericity of van Lambalgen's theorem on random sequences, due to Yu (Downey and Hirschfeldt 2010, Theorem 8.20.1).
+:::
+::::
+:::::

@@ -86,6 +86,14 @@ Where is 1-genericity used?
   $V_e$ is c.e. by definition.
 :::
 
+::::exercise{#ex-generic-gl1 difficulty=1 objective="Check that 1-generic sets satisfy the equivalence that defines generalized lowness."}
+Show that if $G$ is 1-generic, then $G' \equiv_T G \oplus \emptyset'$.
+
+:::solution
+One direction is :ref{#thm-generic-low}. Conversely, $G \leq_T G'$ and $\emptyset' \leq_T G'$ by :ref{#cor-jump-degrees}, so $G \oplus \emptyset' \leq_T G'$.
+:::
+::::
+
 ## High sets
 
 :::definition{#def-high}
@@ -163,25 +171,7 @@ Why does the column $\{ y : \langle x, y \rangle \in A \}$ converge to $\emptyse
 
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that a set $A$ is low if and only if $A'$ has a computable $\Delta^0_2$ approximation.
-
-:::solution
-By :ref{#thm-limit-lemma}, $A' \leq_T \emptyset'$ if and only if $A'$ is limit computable.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that if $G$ is 1-generic, then $G' \equiv_T G \oplus \emptyset'$.
-
-:::solution
-One direction is :ref{#thm-generic-low}. Conversely, $G \leq_T G'$ and $\emptyset' \leq_T G'$ by :ref{#cor-jump-degrees}, so $G \oplus \emptyset' \leq_T G'$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-coding-into-jump difficulty=2 objective="Adapt the coding of the high construction to place any given set below the jump."}
 Let $B$ be any set and $C$ a non-computable set. Show that there is a set $A$ with $B \leq_T A'$ and $C \not\leq_T A$.
 
 :::solution
@@ -193,10 +183,70 @@ Repeat the proof of :ref{#thm-high-cone-avoidance} with $B$ in place of $\emptys
 
 Problems admitting low solutions, and the forcing techniques that produce them, are studied in the course on lowness (:ref{to="lowness/low-bases"}).
 
-The hierarchies of low$_n$ and high$_n$ sets were introduced by Soare and by Cooper in the early 1970s; high degrees had been studied before by Martin (1966), who characterized them by dominant functions (Soare 2016, Theorem 4.5.6). The theorem on 1-generic sets is due to Jockusch (1980) (Downey and Hirschfeldt 2010, Theorem 2.24.3); Soare (2016, §6.3) credits it to Jockusch and Posner and calls the argument forcing the jump. The construction of a high set avoiding a cone follows the section on high degrees of Monin and Patey, where the variant of the last exercise is also given. The jump inversion theorem is due to Friedberg (1957) (Soare 2016, Theorem 6.4.1), and the existence of high incomplete c.e. sets to Sacks (1963), as a consequence of his jump theorem for c.e. degrees. Low and high sets are also treated in Soare (2016, §3.6 and §4.4) and Nies (2009, §1.5).
+The hierarchies of low$_n$ and high$_n$ sets were introduced by Soare and by Cooper in the early 1970s; high degrees had been studied before by Martin (1966), who characterized them by dominant functions (Soare 2016, Theorem 4.5.6). The theorem on 1-generic sets is due to Jockusch (1980) (Downey and Hirschfeldt 2010, Theorem 2.24.3); Soare (2016, §6.3) credits it to Jockusch and Posner and calls the argument forcing the jump. The construction of a high set avoiding a cone follows the section on high degrees of Monin and Patey, where the variant of :ref{#ex-coding-into-jump} is also given. The jump inversion theorem is due to Friedberg (1957) (Soare 2016, Theorem 6.4.1), and the existence of high incomplete c.e. sets to Sacks (1963), as a consequence of his jump theorem for c.e. degrees. Low and high sets are also treated in Soare (2016, §3.6 and §4.4) and Nies (2009, §1.5).
 
 - R. M. Friedberg, *A criterion for completeness of degrees of unsolvability*, Journal of Symbolic Logic 22 (1957), 159–160.
 - G. E. Sacks, *Recursive enumerability and the jump operator*, Transactions of the American Mathematical Society 108 (1963), 223–239.
 - C. G. Jockusch, *Degrees of generic sets*, in *Recursion Theory: its Generalisations and Applications*, London Mathematical Society Lecture Note Series 45, Cambridge University Press, 1980, 110–139.
 - D. A. Martin, *Classes of recursively enumerable sets and degrees of unsolvability*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 12 (1966), 295–310.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §3.6, §4.4 and §6.3.
+
+:::::exercises
+::::exercise{#ex-low-approximation difficulty=1 objective="Restate lowness through the limit lemma."}
+Show that a set $A$ is low if and only if $A'$ has a computable $\Delta^0_2$ approximation.
+
+:::solution
+By :ref{#thm-limit-lemma}, $A' \leq_T \emptyset'$ if and only if $A'$ is limit computable.
+:::
+::::
+
+::::exercise{#ex-low-high-closure difficulty=1 objective="Check the closure properties of the classes of low and of high sets."}
+1. Show that the complement and every finite modification of a low set are low.
+2. Show that $A$ is low if and only if every $A$-c.e. set is computable in $\emptyset'$.
+3. Show that if $A$ is high and $A \leq_T B$, then $B$ is high.
+
+:::solution
+1. The complement and the finite modifications of $A$ are Turing equivalent to $A$ (:ref{#prop-turing-preorder} and :ref{#prop-degree-countable}), and Turing equivalent sets have Turing equivalent jumps (:ref{#cor-jump-degrees}); so their jumps are computable in $\emptyset'$.
+2. One direction is item 4 of :ref{#prop-low-basic}. Conversely, $A'$ is $A$-c.e. (:ref{#thm-jump}), so if every $A$-c.e. set is computable in $\emptyset'$, then $A' \leq_T \emptyset'$.
+3. By monotonicity of the jump, $\emptyset'' \leq_T A' \leq_T B'$.
+:::
+::::
+
+::::exercise{#ex-gl1-not-complete difficulty=1 objective="Combine generalized lowness with the strictness of the jump." lessons="turing-jump"}
+Show that no generalized low set computes $\emptyset'$. Deduce that no 1-generic set computes $\emptyset'$, and that a set $A \leq_T \emptyset'$ is generalized low if and only if it is low.
+
+:::solution
+Let $A$ be generalized low, that is, $A' \equiv_T A \oplus \emptyset'$. If $\emptyset' \leq_T A$, then $A \oplus \emptyset' \equiv_T A$, so $A' \equiv_T A$, contradicting item 4 of :ref{#thm-jump}. Every 1-generic set is generalized low (:ref{#ex-generic-gl1}), so no 1-generic set computes $\emptyset'$. Finally, if $A \leq_T \emptyset'$, then $A \oplus \emptyset' \equiv_T \emptyset'$, and the condition $A' \equiv_T A \oplus \emptyset'$ becomes $A' \equiv_T \emptyset'$.
+:::
+::::
+
+::::exercise{#ex-relative-generic-low difficulty=2 objective="Relativize the existence of 1-generic sets and forcing the jump, to make the join of a low set with a new set low." lessons="finite-extensions"}
+A set $G$ is **1-generic relative to $A$** if, for every $A$-c.e. set of strings $W$, some prefix of $G$ belongs to $W$ or has no extension in $W$.
+
+1. Show that for every $A$ there is a set $G \leq_T A'$ which is 1-generic relative to $A$, and that no such $G$ is computable in $A$.
+2. Show that if $G$ is 1-generic relative to $A$, then $(A \oplus G)' \leq_T G \oplus A'$.
+3. Deduce that for every low set $A$ there is a set $G \leq_T \emptyset'$ with $G \not\leq_T A$ such that $A \oplus G$ is low.
+
+:::solution
+1. Relativize the proof of item 1 of :ref{#prop-1-generic}. The sets $W'_n = \{ \tau : \text{the code of } \tau \text{ is in } W^A_n \}$ list the $A$-c.e. sets of strings, and the sets $D_n = W'_n \cup \{ \sigma : \forall \tau \succeq \sigma\ \tau \notin W'_n \}$ are dense. Whether some $\tau \succeq \sigma$ belongs to $W'_n$ is an $A$-c.e. question, uniformly in $(n, \sigma)$, answered by $A'$, and the extension is then found by enumerating $W'_n$ with oracle $A$. So :ref{#lem-meet-dense} gives $G \leq_T A'$ meeting every $D_n$, that is, 1-generic relative to $A$. If $G = \Phi^A_e$, the set $W = \{ \sigma : \exists x < |\sigma|\ \ \Phi^A_e(x)\converge \neq \sigma(x) \}$ is $A$-c.e.; no prefix of $G$ belongs to it, and every prefix $\sigma \prec G$ has the extension $\sigma\, (1 - G(|\sigma|))$ in $W$. This contradicts the genericity of $G$ relative to $A$.
+2. For a string $\sigma$, let $A \oplus \sigma$ be the string of length $2|\sigma|$ with $A(i)$ at position $2i$ and $\sigma(i)$ at position $2i + 1$, for $i < |\sigma|$; then $A \oplus (G \uh n) = (A \oplus G) \uh 2n$. The set $V_e = \{ \sigma : \Phi^{A \oplus \sigma}_e(e)\converge \}$ is $A$-c.e., uniformly in $e$. As in the proof of :ref{#thm-generic-low}, with oracle $G \oplus A'$: for $n = 0, 1, \dots$, let $\sigma = G \uh n$; ask $A'$ whether $\sigma \in V_e$ (if so, answer $e \in (A \oplus G)'$), and whether some extension of $\sigma$ belongs to $V_e$ (if not, answer $e \notin (A \oplus G)'$). Both are $A$-c.e. questions. The procedure terminates by genericity relative to $A$. If $\sigma \in V_e$, then $\Phi^{A \oplus G}_e(e)\converge$, since $A \oplus \sigma \prec A \oplus G$. If $\sigma$ has no extension in $V_e$ and $\Phi^{A \oplus G}_e(e)\converge$, then $\Phi^{(A \oplus G) \uh k}_e(e)\converge$ for some $k$, which can be taken even, $k = 2m$ with $m \geq n$, by monotonicity; then $G \uh m$ is an extension of $\sigma$ in $V_e$, a contradiction.
+3. Let $A$ be low and $G \leq_T A'$ be 1-generic relative to $A$, by item 1. Then $G \leq_T A' \equiv_T \emptyset'$, and $G \not\leq_T A$. By item 2, $(A \oplus G)' \leq_T G \oplus A' \leq_T \emptyset'$, so $A \oplus G$ is low.
+
+With $A = \emptyset$, items 1 and 2 are :ref{#prop-1-generic} and :ref{#thm-generic-low}. Relative genericity is studied in the course on Cohen genericity.
+:::
+::::
+
+::::exercise{#ex-high-below-double-jump difficulty=2 objective="Measure the oracle needed by the construction of a high set that avoids a cone."}
+Show that the construction in the proof of :ref{#thm-high-cone-avoidance} can be carried out with oracle $C' \oplus \emptyset''$. Deduce that there is a high set $A \leq_T \emptyset''$ with $\emptyset' \not\leq_T A$.
+
+:::solution
+Consider step $e$, with the condition $(\sigma, m) = (\sigma_e, m_e)$, and assume that $\sigma$ and $m$ have been computed. The oracle $\emptyset''$ gives the string $\emptyset'' \uh (m + 1)$, so the relation "$(\tau, m)$ extends $(\sigma, m)$" is decided from it.
+
+- Case 1 asks whether there are $x$, $\tau$ and $s$ with $(\tau, m)$ extending $(\sigma, m)$ and $\Phi^\tau_e(x)[s]\converge \neq C(x)$. Given $\emptyset'' \uh m$, this is a $C$-c.e. question, answered by $C'$ (:ref{#thm-jump}). If the answer is positive, the first such $\tau$ is found by a $C$-computable search.
+- If the answer is negative, case 3 is impossible since $C$ is not computable, so case 2 holds, and $\tau = \sigma$.
+- The bit appended to $\tau$ at position $|\tau| = \langle x, y \rangle$ is $\emptyset''(x)$ if $x < m$, and $0$ otherwise, which is read from $\emptyset''$.
+
+So the sequence $(\sigma_e, m_e)$ is computable in $C' \oplus \emptyset''$, and so is $A$, since $|\sigma_e| \geq e$. For $C = \emptyset'$, the oracle is $\emptyset'' \oplus \emptyset'' \equiv_T \emptyset''$: the set $A$ is high, does not compute $\emptyset'$, and satisfies $A \leq_T \emptyset''$.
+:::
+::::
+:::::

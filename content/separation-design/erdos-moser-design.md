@@ -114,9 +114,7 @@ Where is it used that $\mathcal M$ is a Scott ideal, and not only a Turing ideal
   It only uses that $S$ is computable in $X \oplus Z$.
 :::
 
-## Exercises
-
-::::exercise{#exr-em-l-compatible difficulty=2}
+::::exercise{#exr-em-l-compatible difficulty=2 objective="Show that blocks compatible with the limit function of a stable tournament can be added to the stem of an $\mathsf{EM}$ condition."}
 Suppose $T$ is stable, with limit function $L$ as above. Say that a finite set $\rho$ is **$L$-compatible** if $T(a, b)$ implies $L(a) \geq L(b)$ for all $a, b \in \rho$. Show that if $(\sigma, X)$ is an $\mathsf{EM}$ condition and $\rho \subseteq X$ is a transitive $L$-compatible set, there is an infinite set $Y \subseteq X$, cofinite in $X$, such that $(\sigma \cup \rho, Y)$ satisfies (a) and (b). Show that every set homogeneous for $L$ is $L$-compatible, and that the block of :ref{#ex-sd-em-block} is not.
 
 :::solution
@@ -131,3 +129,46 @@ The three steps and their application to the Erdős–Moser theorem follow the c
 - L. Patey, *Lowness and avoidance*, chapter *Forcing design*.
 - L. Patey, *Iterative forcing and hyperimmunity in reverse mathematics*, Computability 6 (2017), 209–221; arXiv:1501.07709.
 - A. Bovykin and A. Weiermann, *The strength of infinitary Ramseyan principles can be accessed by their densities*, Annals of Pure and Applied Logic 168 (2017), 1700–1709.
+
+:::::exercises
+::::exercise{#ex-em-finite-transitive difficulty=2 objective="Bound the size of the largest transitive subset of a finite tournament, from below by halving and from above by an example."}
+1. Show that every tournament on a finite set with $n \geq 1$ elements has a transitive subset with at least $\lfloor \log_2 n \rfloor + 1$ elements.
+2. Let $T$ be the relation on $\{ 0, \dots, 6 \}$ with $T(a, b)$ if and only if $b - a \bmod 7 \in \{ 1, 2, 4 \}$. Show that $T$ is a tournament with no transitive subset of $4$ elements.
+
+:::solution
+1. By induction on $n$. For $n = 1$ the whole set is transitive. Let $n \geq 2$, $D$ the set, and $v \in D$. The $n - 1$ other elements are beaten by $v$ or beat $v$, so one of these two sets, $P$, has at least $\lceil (n - 1)/2 \rceil = \lfloor n/2 \rfloor$ elements. If $2^k \leq n < 2^{k+1}$, then $k \geq 1$ and $2^{k-1} \leq \lfloor n/2 \rfloor < 2^k$, so $\lfloor \log_2 \lfloor n/2 \rfloor \rfloor = \lfloor \log_2 n \rfloor - 1$. By the induction hypothesis, $P$ has a transitive subset $Q$ with at least $\lfloor \log_2 n \rfloor$ elements. Then $Q \cup \{ v \}$ is transitive: a 3-cycle in it would contain $v$ and two elements of $Q$, since $Q$ is transitive, but in a 3-cycle each element beats one of the two others and is beaten by the other, while $v$ beats both or is beaten by both. It has at least $\lfloor \log_2 n \rfloor + 1$ elements.
+
+2. For $a \neq b$, let $d = b - a \bmod 7 \in \{ 1, \dots, 6 \}$; then $a - b \bmod 7 = 7 - d$. Exactly one of $d$ and $7 - d$ lies in $Q = \{ 1, 2, 4 \}$, since $7 - 1 = 6$, $7 - 2 = 5$ and $7 - 4 = 3$ are not in $Q$. So exactly one of $T(a, b)$ and $T(b, a)$ holds, and $T(a, a)$ never holds: $T$ is a tournament. Suppose that $S$ is transitive with $4$ elements. On $S$, $T$ is a strict linear order; its first element $s$ beats the three others, which therefore lie in $\{ s + 1, s + 2, s + 4 \}$, computed modulo $7$, and are exactly these three numbers. But they form a 3-cycle: $(s + 2) - (s + 1) = 1$, $(s + 4) - (s + 2) = 2$ and $(s + 1) - (s + 4) \equiv 4$ modulo $7$, so $T(s + 1, s + 2)$, $T(s + 2, s + 4)$ and $T(s + 4, s + 1)$. This contradicts transitivity.
+:::
+::::
+
+::::exercise{#ex-em-condition-order difficulty=1 objective="Show that property (b) of an $\mathsf{EM}$ condition says that the stem elements beating the reservoir come first."}
+Let $T$ be a tournament, $\sigma$ a $T$-transitive finite set and $X$ a non-empty set disjoint from $\sigma$ such that property (a) of :ref{#def-sd-em-condition} holds. Let $D$ be the set of $a \in \sigma$ that beat every element of $X$, and $U = \sigma \setminus D$. Show that property (b) holds if and only if $T(d, u)$ for all $d \in D$ and $u \in U$.
+
+:::solution
+By (a) and since $X$ is non-empty, every $u \in U$ is beaten by every element of $X$. Let $y \in X$. Since $\sigma$ is transitive, a 3-cycle in $\sigma \cup \{ y \}$ has the form $\{ a, b, y \}$ with $a, b \in \sigma$; say $T(a, b)$. It is a 3-cycle if and only if $T(b, y)$ and $T(y, a)$, that is, $b \in D$ and $a \in U$. So (b) fails if and only if $T(u, d)$ for some $u \in U$ and $d \in D$. Since $u \neq d$, the negation of $T(u, d)$ is $T(d, u)$, which gives the equivalence. In the linear order of $T$ on $\sigma$, $D$ is therefore an initial segment, as in the figure.
+:::
+::::
+
+::::exercise{#ex-em-double-jump difficulty=1 objective="Bound the complexity of the transitive set built by the one-point extensions of step 1."}
+Show that every computable tournament has an infinite transitive set computable in $\emptyset''$.
+
+:::solution
+Use $\mathsf{EM}$ conditions whose reservoirs are computable sets, given by indices of their characteristic functions. Start from $c_0 = (\varepsilon, \nat)$, and given $c_s = (\sigma_s, X_s)$, apply :ref{#lem-sd-em-extension} with $x_s = \min X_s$; the two candidate reservoirs $\{ y \in X_s : y > x_s, T(x_s, y) \}$ and $\{ y \in X_s : y > x_s, T(y, x_s) \}$ are computable, with indices computable from an index of $X_s$ and from $x_s$. The lemma takes the first one if it is infinite. Whether a computable set given by an index is infinite is a $\Pi^0_2$ question, decided by $\emptyset''$. So the sequence of indices of the reservoirs, and the sequence $(x_s)$, are computable in $\emptyset''$. The stems are $\sigma_{s+1} = \sigma_s \cup \{ x_s \}$, and $x_{s+1} \in X_{s+1}$ is larger than $x_s$, so $G = \{ x_s : s \in \nat \}$ is infinite and computable in $\emptyset''$. Every finite subset of $G$ lies in some stem, which is transitive by property (b), so $G$ is transitive.
+:::
+::::
+
+::::exercise{#ex-em-stable-coloring difficulty=1 objective="Relate stable tournaments to stable colorings, and see that transitive sets need not be homogeneous for the limit."}
+Let $T$ be a tournament on $\nat$ and $f$ the coloring of the proof of :ref{#prop-sd-em-rt22}.
+
+1. Show that $T$ is stable if and only if $f$ is stable, that is, $\lim_y f(\{ x, y \})$ exists for every $x$, and that then $L(x) = \lim_y f(\{ x, y \})$.
+2. Show that if $T$ is stable, every infinite set homogeneous for $f$ is homogeneous for $L$.
+3. Let $T(a, b)$ hold, for $a < b$, if and only if $a$ is even, and $T(b, a)$ otherwise. Show that $T$ is stable, and that $\nat$ is $T$-transitive but not homogeneous for $L$.
+
+:::solution
+1. For $y > x$, $f(\{ x, y \}) = 1$ if and only if $T(x, y)$, and $f(\{ x, y \}) = 0$ if and only if $T(y, x)$. So $x$ beats almost every $y$ if and only if $f(\{ x, y \}) = 1$ for almost every $y$, and is beaten by almost every $y$ if and only if $f(\{ x, y \}) = 0$ for almost every $y$. Both statements follow.
+2. Let $H$ be infinite and homogeneous for $f$ with color $i$. For $x \in H$, $f(\{ x, y \}) = i$ for the infinitely many $y > x$ in $H$, so $L(x) = i$.
+3. An even $a$ beats every $b > a$, so $L(a) = 1$; an odd $a$ is beaten by every $b > a$, so $L(a) = 0$. Let $a < b < c$. Either $T(a, b)$ and $T(a, c)$, or $T(b, a)$ and $T(c, a)$; in a 3-cycle each element beats exactly one of the two others, so $\{ a, b, c \}$ is not a 3-cycle. So $\nat$ is transitive, and $L$ takes both values on it. It is $L$-compatible in the sense of :ref{#exr-em-l-compatible}: for $a < b$, $T(a, b)$ implies $L(a) = 1$, and $T(b, a)$ implies $L(a) = 0$.
+:::
+::::
+:::::

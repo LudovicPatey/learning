@@ -221,10 +221,72 @@ No simpler proof of the basis theorems was found; the presentation by decreasing
   `trees-and-classes`. The link could point to `cantor-space`.
 - Course-level prerequisites: `computable-ordinals`, `hyperarithmetic` and `cohen-genericity`
   use this course at lesson level only (REVIEW-2026-11).
-- A possible exercise or remark: the c.e. basis theorem (leftmost path of c.e. degree) is
-  stated with a reference only.
+- The c.e. basis theorem (leftmost path of c.e. degree) is now the further exercise
+  `ex-leftmost-ce-degree` (2026-11-13).
+- `computable-members` cites `def-pa-degree` of the later lesson `pa-degrees` (a forward
+  reference in the text after `thm-dnc2-no-computable`).
 
-## 11. History
+## 11. Exercises
+
+Every exercise has a label, an objective, a difficulty and a solution. The featured
+exercises stay in the section "Exercises" of each lesson; the further exercises are in the
+collapsed block at the end of the lesson, outside the reading time.
+
+**Featured exercises, and why.**
+
+1. `cantor-space`: `ex-clopen` (compactness in its simplest use) and
+   `ex-uniform-continuity` (the uniform bound on uses, the model of `lem-uniform-bound` and
+   `lem-uniform-cone`).
+2. `trees-and-classes`: `ex-pi01-intersection-union` (used in the low basis theorem) and
+   `ex-pi01-disjoint-cylinders` (cited by the second quiz, and the characterization used in
+   later courses).
+3. `computable-members`: `ex-leftmost-jump` (the Kreisel basis theorem cannot be improved for
+   leftmost members).
+4. `basis-theorems`: `ex-cone-from-low-dominated` (the second proof of cone avoidance, cited
+   in the notes) and `ex-dominated-double-jump` (cited in the text: the complexity of the
+   construction).
+5. `pa-degrees`: `ex-pa-extension` (the characterization by total extensions, used in later
+   courses) and `ex-pa-relative` (cited in the statement of `thm-konig-strength`).
+6. `finitely-branching-trees`: `ex-konig-double-jump` (the first application of
+   `thm-konig-strength`).
+
+**Further exercises, lesson by lesson.**
+
+1. `cantor-space`: open and closed classes on examples; weak König's lemma from compactness
+   (the converse of the proof in the lesson); locally constant functions; closed classes and
+   limits of sequences; the extendible nodes as the least tree with given paths; the
+   ultrametric of Cantor space.
+2. `trees-and-classes`: computable listing of the non-empty classes (moved); colorings of a
+   computable graph and the de Bruijn–Erdős compactness argument; uniform intersections, and
+   a uniform union that is not closed; a computable tree whose extendible nodes are not
+   computable; a c.e. tree with the single path ∅′; preimages and images of Π⁰₁ classes by
+   total functionals.
+3. `computable-members`: Σ⁰₃ bound for the index set of classes with a computable member
+   (moved); the leftmost member has c.e. degree (the remark after the Kreisel basis theorem,
+   formerly an open point of section 10); the Cantor–Bendixson removal on the classes of sets
+   with at most k elements; DNC₂ is perfect, directly; a non-computable ∅′-computable member
+   of a perfect class; a unique non-isolated member is computable in ∅″ (difficulty 3).
+4. `basis-theorems`: eventual domination (moved); low join of members of two classes; the
+   low basis theorem relative to a low tree, uniformly in a lowness index; failure for
+   Π⁰₂ classes ({∅′}); countably many cones; low and cone avoiding at once; continuum many
+   computably dominated members.
+5. `pa-degrees`: almost-DNC₂ functions; two PA sets forming a minimal pair (low and
+   computably dominated); PA relative to X is strict and transitive; no uniform passage from
+   PA sets to DNC₂ (recursion theorem).
+6. `finitely-branching-trees`: PA relative to ∅′ computes ∅′ (moved); a direct ∅″
+   computation of a path; every bound of the jump tree computes ∅′; Π⁰₁(∅′) classes are the
+   classes of paths of c.e. trees; cone avoidance over ∅′; trees with finitely many paths.
+
+**Sources.** Soare 2016, Exercises 3.7.3(a), 3.7.6, 8.7.1, 8.7.2, 8.7.9; Hirschfeldt,
+*Slicing the Truth*, Exercises 3.12, 3.26 and the remark after Exercise 3.28;
+Downey–Hirschfeldt, Theorem 2.19.10 and the remark after Theorem 2.19.11; the exercises of
+the Monin–Patey chapter on Π⁰₁ classes (prefix closures, perfect classes). The others are
+standard and written for the course. Excluded: DNC_k for constant k (equivalence with PA
+admitted in immunity-growth), the low Scott ideal (big-five/wkl0), the low₂ computably
+dominated member (effective-forcing/forcing-with-trees), bounded König's lemma and the
+jump (reducibilities).
+
+## 12. History
 
 - **2026-11-12.** Design and pedagogy revision. First lesson split into `cantor-space` (new)
   and `trees-and-classes` (renamed "Π⁰₁ classes and effective compactness"). Added examples
@@ -238,3 +300,9 @@ No simpler proof of the basis theorems was found; the presentation by decreasing
   of the first class without computable member (Kleene 1952), and of the derivation of cone
   avoidance (given in Hirschfeldt's book) corrected or made precise; section and theorem
   numbers added. Durations recomputed.
+- **2026-11-13: featured and further exercises.** Labels and objectives for all exercises;
+  one to two featured exercises per lesson; 31 new further exercises (four to six per
+  lesson) and four existing exercises moved to the further block. Corrected the boundary
+  case of the empty tree in `ex-nonempty-indices`. Hand-written references to exercises by
+  position ("third exercise", "first exercise") replaced by `:ref`. Durations recomputed:
+  `trees-and-classes` 30, `computable-members` 40.

@@ -67,7 +67,7 @@ which is $\Sigma_1$ in $\mathrm I\Sigma_1$ by Parsons' lemma (:ref{#lem-fo-colle
 *Totality.* By induction on $k$ in the metatheory. $F_0$ is total by item 3. If $\mathrm I\Sigma_1 \vdash \forall y\ F_k(y){\downarrow}$, then, for fixed $x$, $\Sigma_1$ induction on $i$ for $\exists y\ \mathrm{It}(k, i, x, y)$, with item 2, gives $\forall i\ \forall x\ \exists y\ \mathrm{It}(k, i, x, y)$, and item 3 gives $\forall x\ F_{k+1}(x){\downarrow}$.
 :::
 
-The induction in the totality proof is in the metatheory, one proof for each $k$. A uniform proof would be an induction on $k$ for the $\Pi_2$ formula $\forall x\ F_k(x){\downarrow}$: $\mathrm I\Sigma_2$ can carry it out (exercise), and lesson 3 shows that $\mathrm I\Sigma_1$ cannot.
+The induction in the totality proof is in the metatheory, one proof for each $k$. A uniform proof would be an induction on $k$ for the $\Pi_2$ formula $\forall x\ F_k(x){\downarrow}$: $\mathrm I\Sigma_2$ can carry it out (:ref{#ex-fgh-isigma2}), and lesson 3 shows that $\mathrm I\Sigma_1$ cannot.
 
 :::quiz[the formalization of the hierarchy]
 In the proof of :ref{#lem-fgh-isigma1}, item 1, why is the induction carried out on the formula $P(k)$, which says that every *existing* value $F_k(y)$ is above $y$, rather than on the statement that $F_k$ is total and increasing?
@@ -99,7 +99,7 @@ For all $k, x$ in $\nat$:
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-fgh-isigma2 difficulty=2 objective="Carry out with $\Pi_2$ induction the uniform proof of totality that $\mathrm I\Sigma_1$ can only give level by level."}
 Show that $\mathrm I\Sigma_2$ proves $\forall k\ \forall x\ F_k(x){\downarrow}$.
 
 :::solution
@@ -115,3 +115,56 @@ The hierarchy is the finite part of the hierarchy of Hájek and Pudlák (Chapter
 - A. Grzegorczyk, *Some classes of recursive functions*, Rozprawy Matematyczne 4 (1953), 1–46.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 5.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter II, Section 3(d).
+
+:::::exercises
+::::exercise{#ex-fgh-tower difficulty=1 objective="Compare $F_2$ and $F_3$ with exponentiation and with towers of exponentials, by induction on the number of iterations."}
+Let $t(0) = 1$ and $t(i + 1) = 2^{t(i)}$. Show that $F_2(y) \geq 2^y$ for every $y$, and that $F_3(x) \geq t(x)$ for every $x$.
+
+:::solution
+By :ref{#ex-fgh-values}, $F_2(y) = 2^y (y + 2) - 1 \geq 2^y$, since $2^y (y + 2) - 1 - 2^y = 2^y (y + 1) - 1 \geq 0$. We show by induction on $i$ that $F_2^{(i)}(y) \geq t(i)$ for every $y \geq 1$. For $i = 0$, $F_2^{(0)}(y) = y \geq 1 = t(0)$. If $F_2^{(i)}(y) \geq t(i)$, then $F_2^{(i+1)}(y) = F_2(F_2^{(i)}(y)) \geq 2^{F_2^{(i)}(y)} \geq 2^{t(i)} = t(i + 1)$, since $z \mapsto 2^z$ is increasing. Finally $F_3(x) = F_2^{(x)}(x + 1)$ with $x + 1 \geq 1$, so $F_3(x) \geq t(x)$.
+:::
+::::
+
+::::exercise[Wong's hierarchy]{#ex-fgh-wong-variant difficulty=2 objective="Compare two variants of the fast-growing hierarchy by a double induction, and see that they differ by a shift of the argument."}
+Let $G_0(x) = x + 1$ and $G_{k+1}(x) = G_k^{(x+1)}(x)$, the variant used in Wong's Lecture 5. Show that for all $k, x \in \nat$,
+$$
+F_k(x) \leq G_k(x) < F_k(x + 1).
+$$
+
+:::solution
+By induction on $k$. For $k = 0$, $G_0 = F_0$ and $x + 1 < x + 2$. Assume the inequalities for $k$, for all arguments.
+
+*Lower bound.* By induction on $i$, $G_k^{(i)}(y) \geq F_k^{(i)}(y)$: the case $i = 0$ is an equality, and $G_k^{(i+1)}(y) = G_k(G_k^{(i)}(y)) \geq F_k(G_k^{(i)}(y)) \geq F_k(F_k^{(i)}(y))$, by the hypothesis on $k$ and since $F_k$ is increasing (:ref{#lem-fgh-monotone}). Hence
+$$
+G_{k+1}(x) = G_k^{(x+1)}(x) \geq F_k^{(x+1)}(x) = F_k^{(x)}(F_k(x)) \geq F_k^{(x)}(x + 1) = F_{k+1}(x),
+$$
+since $F_k(x) \geq x + 1$ and the iterates of $F_k$ are increasing.
+
+*Upper bound.* By induction on $i$, $G_k^{(i)}(y) + 1 \leq F_k^{(i)}(y + 1)$: for $i = 0$ it is an equality, and $G_k^{(i+1)}(y) + 1 = G_k(G_k^{(i)}(y)) + 1 \leq F_k(G_k^{(i)}(y) + 1) \leq F_k(F_k^{(i)}(y + 1))$, by the hypothesis $G_k(z) < F_k(z + 1)$ with $z = G_k^{(i)}(y)$ and the monotonicity of $F_k$. With $i = y + 1$ and $y = x$:
+$$
+G_{k+1}(x) + 1 \leq F_k^{(x+1)}(x + 1) < F_k^{(x+1)}(x + 2) = F_{k+1}(x + 1),
+$$
+since $F_k^{(x+1)}$ is strictly increasing. So $G_{k+1}(x) < F_{k+1}(x + 1)$.
+
+For instance $G_1 = F_1$, and $G_2(x) = 2^{x+1}(x + 1) - 1$ lies between $F_2(x) = 2^x (x + 2) - 1$ and $F_2(x + 1) = 2^{x+1}(x + 3) - 1$.
+:::
+::::
+
+::::exercise{#ex-fgh-iterates-increasing difficulty=1 objective="Derive inside $\mathrm I\Sigma_1$ the monotonicity of the iterates in the number of iterations from the coded sequences of iterates."}
+Show that $\mathrm I\Sigma_1$ proves: if $\mathrm{It}(k, i', x, y')$ and $i < i'$, then there is $y$ with $\mathrm{It}(k, i, x, y)$, and $y < y'$ for every such $y$.
+
+:::solution
+Argue in a model of $\mathrm I\Sigma_1$. By item 2 of :ref{#lem-fgh-isigma1}, there is a strictly increasing coded sequence $t$ of length $i' + 1$ with $\mathrm{It}(k, j, x, (t)_j)$ for every $j \leq i'$. Then $y = (t)_i$ satisfies $\mathrm{It}(k, i, x, y)$. If $\mathrm{It}(k, i, x, y)$, functionality (item 1 of :ref{#fact-fgh-formal}) gives $y = (t)_i$ and $y' = (t)_{i'}$, so $y < y'$ since $t$ is strictly increasing.
+:::
+::::
+
+::::exercise{#ex-fgh-no-shift difficulty=1 objective="See why the definition of the hierarchy iterates from $x + 1$ and not from $x$." lessons="catching-cuts"}
+Let $F'_0(x) = x + 1$ and $F'_{k+1}(x) = F'^{(x)}_k(x)$. Show that $F'_k(0) = 0$ for every $k \geq 1$ and $F'_k(1) = 2$ for every $k$, whereas $F_k(1) \geq 2k + 1$. Explain why the theorem of the next lesson, which finds in a model of $\mathrm I\Sigma_1$ a cut containing $a$ and not $F_\nu(a)$ for non-standard $\nu$, would fail for the functions $F'_k$ with $a = 1$.
+
+:::solution
+For $k \geq 0$, $F'_{k+1}(0) = F'^{(0)}_k(0) = 0$. Next $F'_0(1) = 2$, and $F'_{k+1}(1) = F'^{(1)}_k(1) = F'_k(1)$, so $F'_k(1) = 2$ for every $k$ by induction. For the hierarchy $F_k$: $F_0(1) = 2 \geq 1$, and for $k \geq 0$, $F_{k+1}(1) = F_k(2) \geq F_0(2) + 2k = 2k + 3$, by item 2 of :ref{#lem-fgh-monotone} applied $k$ times with $x = 2$.
+
+Formalize the variant as in :ref{#fact-fgh-formal}, with the clause $\mathrm{It}'(k + 1, 1, x, y) \leftrightarrow \mathrm{It}'(k, x, x, y)$. In a model of $\mathrm I\Sigma_1$, $\Sigma_1$ induction on $k$ for $\mathrm{It}'(k, 1, 1, 2)$ gives $F'_\nu(1) = 2$ also for non-standard $\nu$, since $\mathrm{It}'(k + 1, 1, 1, 2) \leftrightarrow \mathrm{It}'(k, 1, 1, 2)$; and no cut contains $1$ and not $2$, since cuts are closed under successor. In the proof of that theorem, which splits $F_\nu(a)$ into iterates of $F_{\nu - 1}$, the decomposition $F'_\nu(1) = F'^{(1)}_{\nu-1}(1)$ has a single piece $[1, 2)$, whose left end is $r_0 = 1$ itself: the shift to $x + 1$ in the definition of $F_k$ is what makes the left ends increase.
+:::
+::::
+:::::

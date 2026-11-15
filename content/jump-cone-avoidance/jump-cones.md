@@ -17,7 +17,7 @@ By Post's theorem relativized (:ref{#thm-post}), a set $C$ is $\Delta^0_2(Y)$ if
 A problem $\mathsf P$ admits **jump cone avoidance** if for every set $Z$, every set $C$ with $C \not\leq_T Z'$ and every $Z$-computable instance $X$ of $\mathsf P$, there is a solution $Y$ to $X$ with $C \not\leq_T (Z \oplus Y)'$. It admits **strong jump cone avoidance** if the same holds for every instance $X$, computable in $Z$ or not.
 :::
 
-The definition is the one of cone avoidance (:ref{#def-cone-avoidance-problem}) one jump up: the hypothesis $C \not\leq_T Z$ becomes $C \not\leq_T Z'$, and the conclusion $C \not\leq_T Z \oplus Y$ becomes $C \not\leq_T (Z \oplus Y)'$. It is relativized for the same reason: to add solutions one after the other, as in the exercise on products, and to build ω-models.
+The definition is the one of cone avoidance (:ref{#def-cone-avoidance-problem}) one jump up: the hypothesis $C \not\leq_T Z$ becomes $C \not\leq_T Z'$, and the conclusion $C \not\leq_T Z \oplus Y$ becomes $C \not\leq_T (Z \oplus Y)'$. It is relativized for the same reason: to add solutions one after the other, as in :ref{#ex-jca-products}, and to build ω-models.
 
 A set $Y$ is **high relative to $Z$** if $Z'' \leq_T (Z \oplus Y)'$; for $Z = \emptyset$, this is highness (:ref{#def-high}). By Martin's theorem relativized (:ref{#thm-martin-domination}), $Y$ is high relative to $Z$ if and only if $Z \oplus Y$ computes a function that eventually dominates every $Z$-computable function.
 
@@ -126,7 +126,7 @@ The argument uses only that $A$ and $\overline A$ have no infinite $\Delta^0_3$ 
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-jca-products difficulty=1 objective="Add solutions one after the other with the relativized definition of jump cone avoidance."}
 Show that if $\mathsf P$ and $\mathsf Q$ admit jump cone avoidance, so does their product, whose instances are the pairs $X_0 \oplus X_1$ of an instance of $\mathsf P$ and an instance of $\mathsf Q$, and whose solutions are the pairs $Y_0 \oplus Y_1$ of solutions.
 
 :::solution
@@ -134,7 +134,7 @@ Let $Z$ be a set, $C \not\leq_T Z'$, and $X_0 \oplus X_1$ a $Z$-computable insta
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-jca-jump-hyperimmunity difficulty=2 objective="Transfer a domination property from a set PA relative to $Z'$ to the jump of a solution, with the computably dominated basis theorem."}
 A problem $\mathsf P$ **preserves jump hyperimmunity** if for every set $Z$, every function $f$ hyperimmune relative to $Z'$ and every $Z$-computable instance $X$, there is a solution $Y$ such that $f$ is hyperimmune relative to $(Z \oplus Y)'$. Show that a problem with a weakly low basis preserves jump hyperimmunity.
 
 :::solution
@@ -144,10 +144,64 @@ By the computably dominated basis theorem (:ref{#thm-dominated-basis}) relativiz
 
 ## Notes and references
 
-Jump cone avoidance, its strong version, the remark that a weakly low basis gives it, and the exercise on jump hyperimmunity follow the sections *Context and motivation* and *Use first-jump control* of the chapter *Jump cone avoidance* of Patey's monograph. :ref{#thm-delta3-jump-cone} and :ref{#cor-strong-jca-delta3} are the second-level analogues of :ref{#thm-delta2-cone-avoidance} and :ref{#cor-strong-delta2}, obtained here with jump inversion. Highness and Martin's domination theorem are in Hirschfeldt (Section 2.1, Theorem 2.2), who also notes, in Section 6.4, that some set might have only high infinite $\Delta^0_2$ subsets of itself or of its complement; the theorem of this course produces subsets that are not high, but not $\Delta^0_2$ ones. The theorem that every set has an infinite subset, of itself or of its complement, that is not high is due to Monin and Patey (2019); the same paper proves that every $\Delta^0_3$ set has an infinite low₃ subset of itself or of its complement, which is not proved here.
+Jump cone avoidance, its strong version, the remark that a weakly low basis gives it, and :ref{#ex-jca-jump-hyperimmunity} follow the sections *Context and motivation* and *Use first-jump control* of the chapter *Jump cone avoidance* of Patey's monograph. :ref{#thm-delta3-jump-cone} and :ref{#cor-strong-jca-delta3} are the second-level analogues of :ref{#thm-delta2-cone-avoidance} and :ref{#cor-strong-delta2}, obtained here with jump inversion. Highness and Martin's domination theorem are in Hirschfeldt (Section 2.1, Theorem 2.2), who also notes, in Section 6.4, that some set might have only high infinite $\Delta^0_2$ subsets of itself or of its complement; the theorem of this course produces subsets that are not high, but not $\Delta^0_2$ ones. The theorem that every set has an infinite subset, of itself or of its complement, that is not high is due to Monin and Patey (2019); the same paper proves that every $\Delta^0_3$ set has an infinite low₃ subset of itself or of its complement, which is not proved here.
 
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095; arXiv:1803.09771.
 - P. A. Cholak, C. G. Jockusch, Jr. and T. A. Slaman, *On the strength of Ramsey's theorem for pairs*, Journal of Symbolic Logic 66 (2001), 1–55.
 - R. Downey, D. R. Hirschfeldt, S. Lempp and R. Solomon, *A Δ⁰₂ set with no infinite low subset in either it or its complement*, Journal of Symbolic Logic 66 (2001), 1371–1381.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Sections 2.1 and 6.4.
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, sections *Context and motivation* and *Use first-jump control*.
+
+:::::exercises
+::::exercise[Problems with a single solution]{#ex-jca-single-solution difficulty=2 objective="See with the Posner–Robinson theorem that a problem whose only solution is a non-computable set fails jump cone avoidance, even when that set is low."}
+Let $\mathsf P$ be the problem with the single instance $\emptyset$, whose single solution is a fixed set $Y$. Show that $\mathsf P$ admits jump cone avoidance if and only if $Y$ is computable. Why is the choice $Z = \emptyset$ not enough when $Y$ is low?
+
+:::solution
+If $Y$ is computable, then $(Z \oplus Y)' \equiv_T Z'$ for every $Z$, so every $C \not\leq_T Z'$ satisfies $C \not\leq_T (Z \oplus Y)'$.
+
+Conversely, let $Y$ be non-computable. By the Posner–Robinson theorem (:ref{#cor-posner-robinson}) applied to $A = Y$, there is a set $G$ with $Y \oplus G \equiv_T G'$. Take $Z = G$ and $C = G''$. Then $C \not\leq_T G'$ by the jump theorem (:ref{#thm-jump}), the instance $\emptyset$ is $G$-computable, and its only solution satisfies $(G \oplus Y)' \equiv_T (G')' = G''$, which computes $C$. So jump cone avoidance fails.
+
+With $Z = \emptyset$, the hypothesis is $C \not\leq_T \emptyset'$ and the conclusion $C \not\leq_T Y'$. If $Y$ is low, $Y' \leq_T \emptyset'$, and every admissible $C$ satisfies the conclusion. The failure appears only relative to an oracle $Z$ such that $Z \oplus Y$ is much stronger than $Z$; this is why the definition is relativized.
+:::
+::::
+
+::::exercise[Jump DNC avoidance]{#ex-jca-jump-dnc difficulty=2 objective="Separate the consequences of a low basis from those of a weakly low basis with a jump version of DNC avoidance."}
+Say that a set $W$ is **DNC over** a set $D$ if $W$ computes a function $f$ with $f(e) \neq \Phi^D_e(e)$ for every $e$ such that $\Phi^D_e(e)\converge$. A problem $\mathsf P$ admits **jump DNC avoidance** if for every set $Z$, every set $D$ such that $Z'$ is not DNC over $D$, and every $Z$-computable instance $X$, there is a solution $Y$ to $X$ such that $(Z \oplus Y)'$ is not DNC over $D$.
+
+1. Show that a problem with a low basis (:ref{#def-low-basis-problem}) admits jump DNC avoidance.
+2. Show that $\mathsf{COH}$ admits a weakly low basis but not jump DNC avoidance.
+
+:::solution
+1. Let $Z$, $D$ and $X$ be as in the definition, and $Y$ a solution with $(Z \oplus Y)' \leq_T Z'$. Every function computable in $(Z \oplus Y)'$ is computable in $Z'$, so none of them is DNC relative to $D$, and $(Z \oplus Y)'$ is not DNC over $D$.
+2. $\mathsf{COH}$ admits a weakly low basis by :ref{#thm-coh-weakly-low}. Take $Z = \emptyset$ and $D = \emptyset'$. The set $\emptyset'$ is not DNC over $\emptyset'$: if $f = \Phi^{\emptyset'}_e$ is total, then $f(e) = \Phi^{\emptyset'}_e(e)$. Let $\vec R$ be the computable sequence of :ref{#prop-coh-no-low}. The jump of every $\vec R$-cohesive set $Y$ is PA relative to $\emptyset'$, hence computes a $\{0, 1\}$-valued function DNC relative to $\emptyset'$, so $Y'$ is DNC over $\emptyset'$. So the instance $\vec R$ has no solution as required.
+
+A weakly low basis bounds the jump of a solution by an arbitrary set PA relative to $Z'$; such a set is itself DNC over $Z'$, which is why the property is not inherited. Adapted from an exercise of the chapter *Jump cone avoidance* of Patey's monograph.
+:::
+::::
+
+::::exercise[Generic sets relative to an arbitrary instance]{#ex-jca-generic difficulty=2 objective="Build a solution by finite extensions without any definability of the instance, and obtain strong jump cone avoidance for a problem of genericity."}
+Let $\mathsf{GEN}_2$ be the problem whose instances are all sets $X$, a solution to $X$ being a set that is 1-generic relative to $X'$. Show that $\mathsf{GEN}_2$ admits strong jump cone avoidance.
+
+:::solution
+Fix $Z$, a set $C \not\leq_T Z'$ and an instance $X$. We build $G = \bigcup_s \sigma_s$, a union of strings $\sigma_0 \preceq \sigma_1 \preceq \cdots$, handling once each of the following countably many requirements, one at each step.
+
+- For an $X'$-c.e. set of strings $W$: if some $\tau \succeq \sigma_s$ is in $W$, let $\sigma_{s+1} = \tau$; otherwise $\sigma_s$ has no extension in $W$, and $\sigma_{s+1} = \sigma_s$.
+- For a $Z$-c.e. set of strings $W$: the same.
+- For an index $e$: we ensure $\Phi^{Z' \oplus G}_e \neq C$. If there are $x$ and $\tau \succeq \sigma_s$ with $\Phi^{Z' \oplus \tau}_e(x)\converge \neq C(x)$, the oracle queries to the second component being below $|\tau|$, let $\sigma_{s+1} = \tau$. If there is $x$ such that no $\tau \succeq \sigma_s$ makes $\Phi^{Z' \oplus \tau}_e(x)$ converge, let $\sigma_{s+1} = \sigma_s$; then $\Phi^{Z' \oplus G}_e(x)\diverge$, since a convergent computation would only use a prefix of $G$ extending $\sigma_s$. In the remaining case, for every $x$ some $\tau \succeq \sigma_s$ makes the computation converge, and every convergent value is $C(x)$; searching for such a $\tau$ computes $C$ from $Z'$, which is excluded.
+
+The set $G$ is 1-generic relative to $X'$, so it is a solution to $X$. It is 1-generic relative to $Z$, so $(Z \oplus G)' \leq_T G \oplus Z'$ by :ref{#lem-relative-generic-low}. Since $C \not\leq_T Z' \oplus G$, we get $C \not\leq_T (Z \oplus G)'$.
+
+The construction is not effective in any oracle; it only uses that the requirements are countably many. This is the remark at the end of the lesson: avoidance properties do not require the instance to be definable.
+:::
+::::
+
+::::exercise[Transfer along computable reductions]{#ex-jca-computable-reduction difficulty=1 objective="Check that jump cone avoidance is inherited along computable reductions, and see why the strong version needs strong reductions."}
+Let $\mathsf P \leq_c \mathsf Q$ (:ref{#def-computable-reducible}). Show that if $\mathsf Q$ admits jump cone avoidance, so does $\mathsf P$. Show that if $\mathsf P \leq_{sc} \mathsf Q$ and $\mathsf Q$ admits strong jump cone avoidance, so does $\mathsf P$. Where does the argument for the strong version fail with $\leq_c$?
+
+:::solution
+Let $Z$ be a set, $C \not\leq_T Z'$ and $X$ a $Z$-computable instance of $\mathsf P$. The instance $\widetilde X$ of $\mathsf Q$ given by the reduction is computable in $X$, hence in $Z$. Jump cone avoidance of $\mathsf Q$ gives a solution $\widetilde Y$ with $C \not\leq_T (Z \oplus \widetilde Y)'$. The set $X \oplus \widetilde Y$ computes a solution $Y$ to $X$; then $Y \leq_T Z \oplus \widetilde Y$, so $(Z \oplus Y)' \leq_T (Z \oplus \widetilde Y)'$ and $C \not\leq_T (Z \oplus Y)'$.
+
+For the strong version, $X$ is arbitrary and $\widetilde X$ too; strong jump cone avoidance of $\mathsf Q$ gives $\widetilde Y$ with $C \not\leq_T (Z \oplus \widetilde Y)'$. With $\leq_{sc}$, $\widetilde Y$ alone computes a solution $Y$, and the same computation concludes. With $\leq_c$, the solution is computed by $X \oplus \widetilde Y$, and the bound becomes $(Z \oplus Y)' \leq_T (Z \oplus X \oplus \widetilde Y)'$, about which nothing is known, since $X$ need not be computable in $Z$.
+:::
+::::
+:::::

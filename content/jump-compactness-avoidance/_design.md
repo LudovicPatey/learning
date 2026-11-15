@@ -41,7 +41,7 @@ depend on `separation-design`.
 - `lowness`: `cor-scott-codes`, `thm-coh-weakly-low`, `thm-weakly-low-model`,
   `def-weakly-low-basis`, `thm-d22-weakly-low`, `thm-rt22-weakly-low`, `thm-dhls`.
 - `ramsey-theorem`: `prop-coh-no-low`, `cor-coh-bounds`, `prop-srt-d22`,
-  `thm-rt22-decomposition`, `thm-rt22-coh` (and its second exercise),
+  `thm-rt22-decomposition`, `thm-rt22-coh` (and `ex-coh-direct-induction`),
   `thm-dj-cone-avoidance`. `reducibilities`: `def-weakness`, `lem-preservation-ideal`.
   `big-five`: `prop-wkl-scott`. `immunity-growth`: `thm-dnc-effectively-immune`.
 
@@ -102,7 +102,7 @@ depend on `separation-design`.
   jump DNC avoidance. Complete proof of the main theorem in lessons 2–6.
 - **Nine lessons at ≤ 2475 counted words** (body words without the SVG lines; the SVG of each
   figure is on one line, so the count must skip that line only, not a `/<svg/,/<\/svg>/`
-  range). Durations 30, 40, 45, 40, 35, 40, 45, 45, 35. The polishing pass split the old
+  range). Durations 30, 45, 45, 40, 35, 40, 45, 45, 35 (`merging-level-two` was 40 before the exercise pass; the labels and objectives of its featured exercises brought it to 2367 words). The polishing pass split the old
   lessons 1 (definition / merging) and 3 (product conditions / merging by duplication) and
   restored the cut exercises (weakly merging version, transitivity, L(𝒜)) and a quiz.
 - **No projections.** The monograph equips each branch with the projected class π_I(𝒰).
@@ -194,10 +194,71 @@ were not confirmed online and are not given. No simpler proof of the theorem was
 - The monograph's thin-set and rainbow (Miller) exercises are not included.
 
 - Volume/article number of Monin–Patey (Adv. Math. 2021) to be added once checked.
-- Miller's theorem on the rainbow Ramsey theorem is quoted from the monograph, not checked.
+- Miller's theorem on the rainbow Ramsey theorem: the direction used is now proved in `ex-miller-rainbow`; the reversal mentioned in the monograph is not stated.
 - `qu-d22-jump-dnc` is open according to the monograph; not checked against recent work.
 
-## 11. History
+## 11. Exercises
+
+**Featured exercises** (in the text, after the material they practice):
+
+- `jump-pa-avoidance`: `ex-jump-pa-product` (used in `srt22-coh`) and `ex-jump-pa-join` (why the
+  definition controls (Z ⊕ Y)′).
+- `merging-level-two`: `ex-weak-merging-level-two` (the form of the abstract theorem used in
+  `delta2-jump-pa`) and `ex-mathias-no-merging` (the obstruction of one reservoir, on the forcing
+  question).
+- `product-largeness`: `ex-product-largest-pr` (cited in the text after the cover lemma).
+- `product-mathias`: `ex-product-transitivity` (cited where transitivity is claimed).
+- `merging-by-duplication`: `ex-promise-both-halves` (used twice in the text, including the example
+  of a pair of stems with no valid side).
+- `meta-conditions`: `ex-meta-index-sizes` (the numbers u_n and the first branches) and
+  `ex-meta-finite-A` (used in `delta2-jump-pa`).
+- `meta-questions`: `ex-meta-question-monotone` (the role of the set H of branches).
+- `delta2-jump-pa`: `ex-valid-count` (the proof only needs requirements on valid parts).
+- `srt22-coh`: `ex-wkl-srt22-no-coh` (cited in a quiz: the ideal can be a Scott ideal).
+
+Moved to the further exercises: `ex-product-pairs`, `ex-meta-level-zero`, `ex-path-level-zero`,
+`ex-stable-dnc` (routine, and `product-largeness`, `meta-questions` and `delta2-jump-pa` were at
+the length limit).
+
+**Further exercises**, lesson by lesson:
+
+1. `jump-pa-avoidance`: strong version fails for the identity problem and for WKL; non-high
+   solutions (and COH shows the converse fails); downward closure under ≤_c and the failure for
+   RT²₂; one ideal for countably many problems.
+2. `merging-level-two`: the sentences χ written by hand as Σ⁰₂; Cohen forcing relativized to Z,
+   and the problem "a set not computable in X"; L_R ∩ L_R̄ versus L_R ∪ L_R̄; a trivial partition
+   regular class in `prop-one-reservoir-cohesive`.
+3. `product-largeness`: finite changes and even/odd numbers; coordinates (projections) of a large
+   class; the class of unions is not large; the cover lemma fails for trivial classes.
+4. `product-mathias`: members of extensions; the question for "G is finite" (promise versus
+   members); a positive answer computed with the intersection lemma; duplication of reservoirs
+   along any index set (preview of merging).
+5. `merging-by-duplication`: merging finitely many answers; a generic set splitting a given
+   computable set; basic facts on valid sides; a thin cohesive set (in the sense of the thin set
+   theorem) with jump not PA over ∅′, by the cover lemma with |I| + 2 parts (difficulty 3).
+6. `meta-conditions`: ancestors and sizes of branches; six copies do not suffice at level 2
+   (optimality of 2u_n + 1); branches for k colors; a level-1 meta-condition with exactly one
+   valid part; validity lost in an extension.
+7. `meta-questions`: a negative answer that kills a side; validity of the parts produced by weak
+   merging; the meta question and the product question differ; the branch of a positive answer is
+   imposed by the witness.
+8. `delta2-jump-pa`: every meta-condition promises "G infinite", so tasks (L) are redundant; the
+   side cannot be fixed in advance (initial segments of ∅′); the level grows by at most 2 per
+   requirement; Δ⁰₂ partitions into k parts, by iteration with a growing parameter.
+9. `srt22-coh`: basic facts on DNC relative to a jump (COH fails, WKL satisfies jump DNC
+   avoidance); SRT²_k admits jump PA avoidance; Miller's 2-bounded coloring (difficulty 3), now
+   cited in the text in place of "admitted"; jump DNC avoidance gives an ω-model without RRT²₂.
+
+**Sources.** Patey's monograph, chapter *Jump compactness avoidance*: the exercise on finite
+changes and the remark on even/odd numbers (*Product largeness*), the thin cohesive exercise
+(*Product Mathias forcing*), Miller's exercise (*Jump DNC avoidance*); all restated and solved
+here. The others are new. Not used: the monograph's exercise claiming that 𝒰^{𝓜,I}_C is Π⁰₂ for a
+low code and a Σ⁰₂ set C appears to be false as stated, for lightface Π⁰₂ (a single Σ⁰₁(𝓜) class {X : X ∩ A ≠ ∅}
+with A low, Δ⁰₂ and neither c.e. nor co-c.e. is not Π⁰₂: its complement would be a Σ⁰₂ class with
+largest element Ā, which forces Ā to be Π⁰₁); the projection exercises (the course has no
+projections); the thin cohesive exercise for primitive recursive functions (not checked).
+
+## 12. History
 
 - **2026-11-12.** Course created: seven lessons, five figures
   (`scripts/figures/jump-compactness-avoidance.py`), design log.
@@ -211,3 +272,7 @@ were not confirmed online and are not given. No simpler proof of the theorem was
   "valid sides" example made concrete; several quiz explanations sharpened. Figures rendered;
   combining arrow X⃗ removed from `product-merging` (it does not render in sans fonts).
   Durations recomputed. Added the Jockusch–Stephan correction (MLQ 43, 1997).
+- **2026-11-13: featured and further exercises.** Every exercise labelled, with an objective and a
+  difficulty; 12 featured exercises in the text, 41 further exercises (37 new) in collapsed blocks;
+  positional references to exercises replaced by `:ref`; Miller's theorem proved in
+  `ex-miller-rainbow`; `merging-level-two` duration 45.

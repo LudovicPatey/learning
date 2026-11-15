@@ -1,7 +1,7 @@
 ---
 title: Semiregular cuts
 summary: Semiregular cuts, in which no coded function on a bounded domain has values cofinal in the cut; they are closed under addition and multiplication, and with their coded subsets they satisfy Σ⁰₁ induction (Kirby and Paris).
-duration: 30
+duration: 35
 prerequisites: [weak-konig-cuts]
 ---
 
@@ -75,7 +75,7 @@ In the proof of :ref{#thm-semireg-isigma1}, why is $f(x)$ defined as the *least*
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-semireg-preimage difficulty=1 objective="Use the bound given by semiregularity to code the set of arguments at which a coded function takes values in the cut."}
 Let $I$ be a semiregular cut of $M$, $a \in I$, and $f$ a coded function with domain $a$. Show that $\{ i < a : f(i) \in I \}$ belongs to $\mathrm{Cod}(M/I)$.
 
 :::solution
@@ -90,3 +90,57 @@ Semiregular and regular cuts were introduced by Kirby and Paris (1977), by analo
 - L. A. S. Kirby and J. B. Paris, *Initial segments of models of Peano's axioms*, in Set Theory and Hierarchy Theory V, Lecture Notes in Mathematics 619, Springer, 1977, 211–226.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 5.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Section 2(b).
+
+:::::exercises
+::::exercise{#ex-semireg-exp difficulty=1 objective="Prove directly, with the coded function $i \mapsto 2^i$, that a semiregular cut is exponential."}
+Let $I$ be a semiregular cut of $M$. Without using :ref{#thm-semireg-isigma1}, show that $I$ is exponential, by applying the definition to the coded function $i \mapsto 2^i$ on a suitable domain.
+
+:::solution
+Let $a \in I$ and suppose $2^a \notin I$. The function $f(i) = 2^i$, for $i < a + 1$, is coded, by :ref{#prop-seq-basic} with the bounded formula $\varepsilon(i, v)$ and the bound $2^a + 1$. Its domain $a + 1$ is in $I$. Let $y \in I$ with $y \geq 1$, and $\ell = \mathrm{len}(y)$, so that $2^\ell \leq y < 2^{\ell + 1}$ (:ref{#lem-strings-model}). Since $2^a \notin I$ and $y \in I$, $y < 2^a$, so $\ell < a$ and $\ell + 1$ is in the domain of $f$. Moreover $2^{\ell + 1} = 2^\ell + 2^\ell \leq y + y$, which is in $I$ by :ref{#lem-semireg-closed}. So $f(\ell + 1) \in I$ and $f(\ell + 1) > y$: the values of $f$ in $I$ are cofinal in $I$, which contradicts semiregularity. Hence $2^a \in I$.
+:::
+::::
+
+::::exercise{#ex-not-semireg-mult difficulty=1 objective="Find a cut closed under addition and multiplication that is not semiregular, and check that it is not exponential."}
+Let $a \in M$ be non-standard and $I = \{ x \in M : x < 2^{a \cdot n} \text{ for some } n \in \nat \}$. Show that $I$ is a proper cut closed under addition and multiplication, that it is not semiregular, and that it is not exponential.
+
+:::solution
+We use the laws $2^u \cdot 2^v = 2^{u + v}$ and $u < v \rightarrow 2^u < 2^v$, provable in $\mathrm I\Delta_0 + \mathrm{exp}$ by bounded induction from :ref{#fact-exp}. *A cut.* $I$ is an initial segment containing $0$; if $x < 2^{a n}$, then $x + 1 \leq 2^{a n} < 2^{a (n + 1)}$. *Operations.* If $x < 2^{a n}$ and $y < 2^{a m}$ with $m \leq n$, then $x + y < 2 \cdot 2^{a n} = 2^{a n + 1} \leq 2^{a (n + 1)}$, since $a \geq 1$, and $x \cdot y < 2^{a n} \cdot 2^{a m} = 2^{a (n + m)}$. *Proper.* $2^{a \cdot a}$ exists, and $a \cdot a > a \cdot n$ for every $n \in \nat$, so $2^{a \cdot a} \notin I$.
+
+*Not semiregular.* The function $f(i) = 2^{a \cdot i}$, for $i < a$, is coded, by :ref{#prop-seq-basic} with the bounded formula $\varepsilon(a \cdot i, v)$ and the bound $2^{a \cdot a}$. Its domain $a$ is in $I$, since $a < 2^a$. For $n \in \nat$, the value $f(n) = 2^{a n}$ lies in $I$, and these values are cofinal in $I$ by definition. *Not exponential.* $a \cdot a < 2^a \cdot 2^a = 2^{2a}$, so $a \cdot a \in I$, but $2^{a \cdot a} \notin I$. This agrees with :ref{#ex-semireg-exp}; the cut of :ref{#ex-not-semiregular} fails semiregularity for a cruder reason, not being closed under multiplication.
+:::
+::::
+
+::::exercise{#ex-semireg-bounded-sigma1 difficulty=2 objective="Adapt the least witness argument of the Kirby–Paris theorem to prove bounded $\Sigma^0_1$ comprehension in a semiregular cut."}
+Let $I$ be a semiregular cut of $M$, $a \in I$, and $\varphi(x)$ a $\Sigma^0_1$ formula of $\mathcal L_2$ with set parameters in $\mathrm{Cod}(M/I)$ and number parameters in $I$. Show that $\{ x < a : (I, \mathrm{Cod}(M/I)) \models \varphi(x) \}$ belongs to $\mathrm{Cod}(M/I)$.
+
+:::solution
+Write $\varphi(x) \equiv \exists y\ \eta(x, y)$ with $\eta$ bounded, contracting a block of quantifiers by pairing, and let $\bar c$ be codes of the set parameters, $\eta' = \eta[\bar c]$ and $e \in M \setminus I$. As in the proof of :ref{#thm-semireg-isigma1}, let $f$ be the coded function with domain $a$ such that $f(x)$ is the least $y < e$ with $M \models \eta'(x, y)$ if there is one, and $f(x) = e$ otherwise, and let $d \in I$ bound the values of $f$ in $I$. The claim of that proof, applied with $b + 1 = a$, gives, for $x < a$,
+$$
+(I, \mathrm{Cod}(M/I)) \models \varphi(x) \iff M \models \exists y < d\ \eta'(x, y).
+$$
+The right-hand side is a bounded formula with parameters, so by :ref{#thm-delta0-comprehension} some $c$ codes $\{ x < a : M \models \exists y < d\ \eta'(x, y) \}$. This set is contained in $[0, a) \subseteq I$, so it equals its trace $\mathrm{Ack}(c) \cap I$, and it is the required set.
+:::
+::::
+
+::::exercise{#ex-semireg-preimage-converse difficulty=2 objective="Prove the converse of the featured exercise, so that semiregularity is characterized by coding the arguments with values in the cut."}
+Let $I$ be a proper cut of $M$ such that for every $a \in I$ and every coded function $f$ with domain $a$, the set $\{ i < a : f(i) \in I \}$ belongs to $\mathrm{Cod}(M/I)$. Show that $I$ is semiregular. With :ref{#ex-semireg-preimage}, this characterizes semiregular cuts.
+
+:::solution
+Let $f$ be coded by $s$, with domain $a \in I$, and let $c$ satisfy $\mathrm{Ack}(c) \cap I = \{ i < a : f(i) \in I \}$. Since $a \in I$, for $i < a$ we have $i \in c$ if and only if $f(i) \in I$. If $a = 0$ there is nothing to prove; let $a \geq 1$. Let $g$ be the coded function with domain $a$ given by $g(i) = f(i)$ if $i \in c$ and $g(i) = 0$ otherwise (:ref{#prop-seq-basic}, with a bounded formula and the bound $s + 1$). All values of $g$ lie in $I$.
+
+The set of $m \leq s$ such that $g(i) \leq m$ for every $i < a$ is defined by a bounded formula and contains $s$; let $m_0$ be its least element. If $m_0 = 0$, then $m_0 = g(0)$. If $m_0 > 0$, then $m_0 - 1$ is not an upper bound, so $g(i) \geq m_0$ for some $i < a$, and $g(i) = m_0$. In both cases $m_0$ is a value of $g$, hence $m_0 \in I$. Every value of $f$ in $I$ is $f(i)$ with $i \in c$, hence equal to $g(i) \leq m_0$; so $d = m_0 + 1 \in I$ bounds the values of $f$ in $I$.
+:::
+::::
+
+::::exercise{#ex-semireg-local difficulty=2 objective="Show that semiregularity and the coded subsets of a cut only depend on an exponential cut above it, by truncating coded functions."}
+Let $I \subsetneq J$ be cuts of $M$, with $J$ exponential. Show that $J$ is a model of $\mathrm I\Delta_0 + \mathrm{exp}$ in which $I$ is a proper cut, that $\mathrm{Cod}(J/I) = \mathrm{Cod}(M/I)$, and that $I$ is semiregular in $J$ if and only if it is semiregular in $M$.
+
+:::solution
+$J$ is closed under addition and multiplication (:ref{#ex-exp-cut-closed}), so $J \models \mathrm I\Delta_0$ and $J \subseteq_e M$ (:ref{#lem-cut-model}). For $x \in J$, $2^x \in J$ and $J \models \varepsilon(x, 2^x)$ by :ref{#lem-delta0-absolute}, so $J \models \mathrm{exp}$, and powers in $J$ are those of $M$. Bounded formulas with parameters in $J$ have the same meaning in $J$ and in $M$; in particular $\mathrm{Ack}^J(c) = \mathrm{Ack}(c) \cap J$ for $c \in J$, and an element of $J$ codes in $J$ the same sequence as in $M$, since $\mathrm{Seq}$ and $(s)_i$ are bounded.
+
+*Coded sets.* $\mathrm{Cod}(J/I) \subseteq \mathrm{Cod}(M/I)$ by the previous remark. Conversely, let $c \in M$ and $b \in J \setminus I$. By :ref{#thm-delta0-comprehension}, some $c' < 2^b$ codes $\{ x < b : x \in c \}$; then $c' \in J$, and $\mathrm{Ack}(c') \cap I = \mathrm{Ack}(c) \cap I$, since $I \subseteq [0, b)$.
+
+*Semiregularity.* If $I$ is semiregular in $M$, it is semiregular in $J$, because a coded function of $J$ is a coded function of $M$ with the same values. Conversely, suppose that $I$ is semiregular in $J$, and let $f$ be a coded function of $M$ with domain $a \in I$. Fix $b \in J \setminus I$, and let $g(i) = f(i)$ if $f(i) < b$ and $g(i) = b$ otherwise, for $i < a$. By :ref{#prop-seq-basic}, $g$ is coded in $M$ by some $s' < 2^{\langle a, b + 1 \rangle}$; since $J$ is closed under addition, multiplication and pairing (:ref{#fact-pairing}) and is exponential, $s' \in J$, and $s'$ codes $g$ in $J$. If $f(i) \in I$, then $f(i) < b$ and $g(i) = f(i)$; if $g(i) \in I$, then $g(i) \neq b$, so $g(i) = f(i)$. So $f$ and $g$ have the same values in $I$, which are bounded in $I$ by semiregularity in $J$.
+:::
+::::
+:::::

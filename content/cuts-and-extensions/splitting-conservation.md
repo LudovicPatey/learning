@@ -80,11 +80,11 @@ Why does the proof give conservation for $\Pi_{n+2}$ sentences and not for $\Pi_
   This is true but plays no role in the argument.
 :::
 
-The conservation theorem is sharp, as the second exercise shows. For $n = 0$ it says that $\mathrm B\Sigma_1$ is $\Pi_2$-conservative over $\mathrm I\Delta_0$; with :ref{#thm-fo-paris-kirby}, $\mathrm B\Sigma_{n+1}$ and $\mathrm I\Sigma_n$ are equiconsistent, since $0 = 1$ is a $\Pi_{n+2}$ sentence. Many proofs are known: Paris's original proof used a hierarchy of cuts, and others use definable ultrapowers, Skolem hulls, or proof theory (Wong, Further comments to Lecture 6).
+The conservation theorem is sharp (:ref{#ex-conservation-sharp}). For $n = 0$ it says that $\mathrm B\Sigma_1$ is $\Pi_2$-conservative over $\mathrm I\Delta_0$; with :ref{#thm-fo-paris-kirby}, $\mathrm B\Sigma_{n+1}$ and $\mathrm I\Sigma_n$ are equiconsistent, since $0 = 1$ is a $\Pi_{n+2}$ sentence. Many proofs are known: Paris's original proof used a hierarchy of cuts, and others use definable ultrapowers, Skolem hulls, or proof theory (Wong, Further comments to Lecture 6).
 
 ## Exercises
 
-::::exercise{#ex-sup-elementary difficulty=1}
+::::exercise{#ex-sup-elementary difficulty=1 objective="Apply the splitting theorem at every level to an elementary extension of models of PA."}
 Let $M \preccurlyeq K$ be models of $\mathrm{PA}$. Show that $M \preccurlyeq \sup_K M \preccurlyeq K$.
 
 :::solution
@@ -92,7 +92,7 @@ For every $n$, $M \models \mathrm I\Sigma_n$ and $M \preccurlyeq_{n+1} K$, so :r
 :::
 ::::
 
-::::exercise{#ex-conservation-sharp difficulty=2}
+::::exercise{#ex-conservation-sharp difficulty=2 objective="Show that the conservation theorem is sharp, by writing the instances of collection as $\Pi_{n+3}$ sentences."}
 Using the strictness of the hierarchy of induction and collection (the lesson :ref{to="fragments-of-arithmetic/induction-collection"}), show that $\mathrm B\Sigma_{n+1}$ is not $\Pi_{n+3}$-conservative over $\mathrm I\Sigma_n$.
 
 :::solution
@@ -113,3 +113,39 @@ The splitting theorem is Wong's, "essentially Kaye", with the proof of Enayat an
 - A. Enayat and S. Mohsenipour, *Model theory of the regularity and reflection schemes*, Archive for Mathematical Logic 47 (2008), 447–464.
 - T. L. Wong, *Model theory of arithmetic*, lecture notes, Lecture 6.
 - P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Springer, 1993, Chapter IV, Sections 1(c) and 1(f).
+
+:::::exercises
+::::exercise{#ex-splitting-bsigma difficulty=1 objective="Combine the splitting theorem with the cofinal preservation theorem to gain one level of elementarity under collection." lessons="cofinal-extensions"}
+Let $n \geq 0$, $M$ a model of $\mathrm B\Sigma_{n+1}$, and $K$ a structure with $M \preccurlyeq_{n+1} K$. Show that $M \preccurlyeq_{n+2} \sup_K M$.
+
+:::solution
+By :ref{#thm-fo-paris-kirby}, $M \models \mathrm I\Sigma_n$. By :ref{#thm-splitting}, $M \preccurlyeq_{n+1} \sup_K M$, in particular $M \preccurlyeq_n \sup_K M$, and $M \subseteq_{cf} \sup_K M$. Since $M \models \mathrm B\Sigma_{n+1}$, :ref{#thm-cofinal-preservation} gives $M \preccurlyeq_{n+2} \sup_K M$. For $M \models \mathrm{PA}$ and $M \preccurlyeq K$, this gives again the first half of :ref{#ex-sup-elementary}.
+:::
+::::
+
+::::exercise{#ex-bsigma1-parikh difficulty=1 objective="Combine the conservation theorem with Parikh's theorem to bound the provably total functions of $\mathrm B\Sigma_1$."}
+Let $\theta(\bar x, y)$ be a $\Delta_0$ formula such that $\mathrm B\Sigma_1 \vdash \forall \bar x\ \exists y\ \theta(\bar x, y)$. Show that there is a term $t(\bar x)$ such that $\mathrm I\Delta_0 \vdash \forall \bar x\ \exists y < t(\bar x)\ \theta(\bar x, y)$. Deduce that $\mathrm B\Sigma_1$ does not prove $\mathrm{exp}$.
+
+:::solution
+The sentence $\forall \bar x\ \exists y\ \theta(\bar x, y)$ is $\Pi_2$, so by :ref{#thm-friedman-paris-conservation} with $n = 0$, it is provable in $\mathrm I\Delta_0$; :ref{#thm-parikh} gives the term $t$. The axiom $\mathrm{exp}$ is the $\Pi_2$ sentence $\forall x\ \exists y\ \varepsilon(x, y)$ (:ref{#def-exp}); if $\mathrm B\Sigma_1$ proved it, $\mathrm I\Delta_0$ would prove it, which contradicts :ref{#cor-idelta0-exp}.
+:::
+::::
+
+::::exercise{#ex-conservation-pi-extension difficulty=1 objective="Extend the conservation theorem to theories with additional $\Pi_{n+1}$ axioms."}
+Let $n \geq 0$ and $S$ a set of $\Pi_{n+1}$ sentences. Show that every $\Pi_{n+2}$ sentence provable in $\mathrm B\Sigma_{n+1} + S$ is provable in $\mathrm I\Sigma_n + S$. For instance, $\mathrm B\Sigma_1 + \mathrm{Con}(\mathrm{PA})$ is $\Pi_2$-conservative over $\mathrm I\Delta_0 + \mathrm{Con}(\mathrm{PA})$.
+
+:::solution
+Let $\sigma$ be a $\Pi_{n+2}$ sentence not provable in $\mathrm I\Sigma_n + S$, and $M \models \mathrm I\Sigma_n + S + \neg \sigma$. Let $\bar M$ be given by :ref{#thm-cofinal-bsigma}. As in the proof of :ref{#thm-friedman-paris-conservation}, $\bar M \models \mathrm B\Sigma_{n+1} + \neg \sigma$. A sentence $\pi \in S$ is $\Pi_{n+1}$ and true in $M$; its negation is a $\Sigma_{n+1}$ sentence false in $M$, hence false in $\bar M$, by $M \preccurlyeq_{n+1} \bar M$. So $\bar M \models \mathrm B\Sigma_{n+1} + S + \neg \sigma$, and $\sigma$ is not provable in $\mathrm B\Sigma_{n+1} + S$. The sentence $\mathrm{Con}(\mathrm{PA})$, which says that no number codes a proof of $0 = 1$, is $\Pi_1$.
+:::
+::::
+
+::::exercise{#ex-conservation-exp difficulty=2 objective="Use the cofinality of the extension to transfer the $\Pi_2$ axiom $\mathrm{exp}$, and obtain the conservation of $\mathrm B\Sigma_1 + \mathrm{exp}$ over $\mathrm I\Delta_0 + \mathrm{exp}$."}
+Show that every $\Pi_2$ sentence provable in $\mathrm B\Sigma_1 + \mathrm{exp}$ is provable in $\mathrm I\Delta_0 + \mathrm{exp}$. Why does :ref{#ex-conservation-pi-extension} not apply directly?
+
+:::solution
+The axiom $\mathrm{exp}$ is $\Pi_2$, not $\Pi_1$, and $\Sigma_1$-elementarity does not in general transfer $\Pi_2$ sentences from $M$ up to an extension; so :ref{#ex-conservation-pi-extension} does not apply. We use cofinality instead.
+
+Let $\sigma$ be a $\Pi_2$ sentence not provable in $\mathrm I\Delta_0 + \mathrm{exp}$, and $M \models \mathrm I\Delta_0 + \mathrm{exp} + \neg \sigma$. Let $\bar M$ be given by :ref{#thm-cofinal-bsigma} with $n = 0$: $\bar M \models \mathrm B\Sigma_1$, $M \subseteq_{cf} \bar M$ and $M \preccurlyeq_1 \bar M$. As in the proof of :ref{#thm-friedman-paris-conservation}, $\bar M \models \neg \sigma$. Let $x \in \bar M$, and $m \in M$ with $x \leq m$. In $M$, $\varepsilon(m, p)$ holds for some $p$, and this bounded formula holds in $\bar M$, since $M \preccurlyeq_0 \bar M$. If $x = m$, $p$ is a witness. If $x < m$, :ref{#fact-exp} (item 3), applied in $\bar M$, which satisfies $\mathrm I\Delta_0$, gives $y < p$ with $\varepsilon(x, y)$. So $\bar M \models \mathrm{exp}$, and $\bar M$ is a model of $\mathrm B\Sigma_1 + \mathrm{exp} + \neg \sigma$.
+:::
+::::
+:::::

@@ -24,7 +24,7 @@ $$
 
 These equations define a unique total function. Indeed, order $\nat^2$ lexicographically: $(x', y') <_{\mathrm{lex}} (x, y)$ if $x' < x$, or $x' = x$ and $y' < y$. This is a well-order. In each equation, the right-hand side only involves values of $A$ at pairs lexicographically smaller than the left-hand side: $(x, 1) <_{\mathrm{lex}} (x+1, 0)$, $(x+1, y) <_{\mathrm{lex}} (x+1, y+1)$, and $(x, z) <_{\mathrm{lex}} (x+1, y+1)$ whatever $z = A(x+1, y)$ is. By well-founded induction along $<_{\mathrm{lex}}$, $A(x, y)$ is defined for all $(x, y)$.
 
-The first rows are easy to compute (see the exercises):
+The first rows are easy to compute (:ref{#ex-ack-rows}):
 $$
 A(1, y) = y + 2, \qquad A(2, y) = 2y + 3, \qquad A(3, y) = 2^{y+3} - 3,
 $$
@@ -219,15 +219,7 @@ Thus unbounded loops are necessary to compute all total computable functions —
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Prove that $A(1, y) = y + 2$, $A(2, y) = 2y + 3$ and $A(3, y) = 2^{y + 3} - 3$.
-
-:::solution
-By induction on $y$ in each case. $A(1, 0) = A(0, 1) = 2$ and $A(1, y + 1) = A(0, A(1, y)) = A(1, y) + 1$. Then $A(2, 0) = A(1, 1) = 3$ and $A(2, y + 1) = A(1, A(2, y)) = A(2, y) + 2$. Finally $A(3, 0) = A(2, 1) = 5 = 2^3 - 3$ and $A(3, y + 1) = A(2, A(3, y)) = 2 A(3, y) + 3 = 2(2^{y+3} - 3) + 3 = 2^{y+4} - 3$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-ack-row-pr difficulty=2 objective="Distinguish a family of primitive recursive functions from a single primitive recursive function of two arguments."}
 For each $n$, show that the function $y \mapsto A(n, y)$ is primitive recursive. Why does this not contradict :ref{#cor-ack-not-pr}?
 
 :::solution
@@ -235,7 +227,7 @@ By induction on $n$. $A(0, \cdot)$ is the successor. If $g = A(n, \cdot)$ is pri
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-ack-graph difficulty=2 objective="Show that a function that is not primitive recursive can have a primitive recursive graph, by bounding its computations."}
 Show that the graph $G = \{(x, y, z) : A(x, y) = z\}$ of the Ackermann function is a primitive recursive predicate.
 
 :::hint
@@ -257,3 +249,67 @@ Ackermann's original function had three arguments and generalized the sequence a
 - A. Grzegorczyk, *Some classes of recursive functions*, Rozprawy Matematyczne 4 (1953).
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §17.2.3.
 - B. Monin, L. Patey, *Computability theory*, chapter "Church–Turing thesis".
+
+:::::exercises
+::::exercise{#ex-ack-rows difficulty=1 objective="Compute the first rows of the Ackermann function by induction on the second argument."}
+Prove that $A(1, y) = y + 2$, $A(2, y) = 2y + 3$ and $A(3, y) = 2^{y + 3} - 3$.
+
+:::solution
+By induction on $y$ in each case. $A(1, 0) = A(0, 1) = 2$ and $A(1, y + 1) = A(0, A(1, y)) = A(1, y) + 1$. Then $A(2, 0) = A(1, 1) = 3$ and $A(2, y + 1) = A(1, A(2, y)) = A(2, y) + 2$. Finally $A(3, 0) = A(2, 1) = 5 = 2^3 - 3$ and $A(3, y + 1) = A(2, A(3, y)) = 2 A(3, y) + 3 = 2(2^{y+3} - 3) + 3 = 2^{y+4} - 3$.
+:::
+::::
+
+::::exercise{#ex-ack-fourth-row difficulty=1 objective="Compute the fourth row of the Ackermann function as a tower of exponentials."}
+Let $2 \uparrow\uparrow 0 = 1$ and $2 \uparrow\uparrow (n + 1) = 2^{2 \uparrow\uparrow n}$. Show that $A(4, y) = 2 \uparrow\uparrow (y + 3) - 3$ for all $y$.
+
+:::solution
+By :ref{#ex-ack-rows}, $A(3, z) = 2^{z + 3} - 3$. By induction on $y$: $A(4, 0) = A(3, 1) = 2^4 - 3 = 13$, and $2 \uparrow\uparrow 3 = 2^{2^2} = 16$, so $A(4, 0) = 2 \uparrow\uparrow 3 - 3$. If $A(4, y) = 2 \uparrow\uparrow (y + 3) - 3$, then
+$$
+A(4, y + 1) = A(3, A(4, y)) = 2^{A(4, y) + 3} - 3 = 2^{2 \uparrow\uparrow (y + 3)} - 3 = 2 \uparrow\uparrow (y + 4) - 3.
+$$
+:::
+::::
+
+::::exercise{#ex-ack-stack-run difficulty=1 objective="Run the stack algorithm for the Ackermann function on an example."}
+Compute $A(2, 1)$ with the stack algorithm of the lesson, listing all the stacks. How many steps are made, and what is the largest stack?
+
+:::solution
+The stacks are
+$$
+\begin{gathered}
+[2, 1] \to [1, 2, 0] \to [1, 1, 1] \to [1, 0, 1, 0] \to [1, 0, 0, 1] \to [1, 0, 2] \to [1, 3] \\
+\to [0, 1, 2] \to [0, 0, 1, 1] \to [0, 0, 0, 1, 0] \to [0, 0, 0, 0, 1] \to [0, 0, 0, 2] \to [0, 0, 3] \to [0, 4] \to [5].
+\end{gathered}
+$$
+At each step the rule is determined by the last two entries: for instance $[1, 1, 1]$ ends with $1, 1$, which the third rule replaces by $0, 1, 0$. So $A(2, 1) = 5$, in agreement with $A(2, y) = 2y + 3$, after $14$ steps; the largest stack, $[0, 0, 0, 1, 0]$, has $5$ entries.
+:::
+::::
+
+::::exercise{#ex-ack-iterate-row difficulty=1 objective="Prove that each row of the Ackermann function iterates the previous one."}
+Show that $A(x + 1, y) = A(x, \cdot)^{y + 1}(1)$ for all $x, y$, where $A(x, \cdot)^{n}$ is the $n$-fold iterate of $z \mapsto A(x, z)$.
+
+:::solution
+By induction on $y$. For $y = 0$, $A(x + 1, 0) = A(x, 1) = A(x, \cdot)^1(1)$. If $A(x + 1, y) = A(x, \cdot)^{y+1}(1)$, then $A(x + 1, y + 1) = A(x, A(x + 1, y)) = A(x, A(x, \cdot)^{y+1}(1)) = A(x, \cdot)^{y+2}(1)$.
+:::
+::::
+
+::::exercise{#ex-ack-inverse difficulty=2 objective="Use the primitive recursive graph of the Ackermann function to show that its slowly growing inverse is primitive recursive."}
+Let $\alpha(n)$ be the least $m$ such that $A(m, m) \geq n$. Show that $\alpha$ is well defined, unbounded, and primitive recursive.
+
+:::solution
+By :ref{#lem-ack-monotone}, $A(n, n) > n$, so $m = n$ satisfies $A(m, m) \geq n$: $\alpha$ is defined and $\alpha(n) \leq n$. It is unbounded, since $\alpha(n) \leq m_0$ for all $n$ would give $A(m_0, m_0) \geq A(\alpha(n), \alpha(n)) \geq n$ for all $n$, using monotonicity. By :ref{#ex-ack-graph}, the graph $G$ of $A$ is primitive recursive. Since $A(m, m)$ has exactly one value, $A(m, m) \geq n$ holds if and only if $\neg \exists z < n\ G(m, m, z)$, a primitive recursive predicate of $(m, n)$. Hence $\alpha(n) = \mu m < n + 1\ \neg \exists z < n\ G(m, m, z)$ is primitive recursive, although $A$ is not.
+:::
+::::
+
+::::exercise{#ex-ack-first-column difficulty=2 objective="Apply the majorization theorem to show that another function built from the Ackermann function is not primitive recursive."}
+Show that the function $n \mapsto A(n, 0)$ is not primitive recursive.
+
+:::solution
+Suppose it is. By :ref{#thm-ack-majorization} there is $m$ such that $A(n, 0) < A(m, n)$ for all $n$. By item 4 of :ref{#lem-ack-monotone}, $A(j + 1, 0) > A(j, 0)$ for every $j$, so $A(m + 1, 0) \geq A(0, 0) + m + 1 = m + 2$. Then, by the definition of $A$ and item 2 of :ref{#lem-ack-monotone},
+$$
+A(m + 2, 0) = A(m + 1, 1) = A(m, A(m + 1, 0)) \geq A(m, m + 2).
+$$
+For $n = m + 2$ this contradicts $A(n, 0) < A(m, n)$.
+:::
+::::
+:::::

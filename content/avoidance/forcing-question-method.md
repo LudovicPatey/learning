@@ -23,7 +23,7 @@ Recall that a forcing question (:ref{#def-forcing-question}) answers, for a cond
 <svg class="fig" viewBox="0 0 600 236" width="600" role="img" aria-label="The conditions are divided into those forcing phi, those forcing its negation, and those deciding neither; the Jockusch-Soare question answers yes only on the first part, the Cohen question on the first two parts"><defs><marker id="av-dl-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="accent-fill"/></marker></defs><rect x="40" y="70" width="160" height="36" class="cell head-cell"/><rect x="200" y="70" width="200" height="36" class="cell"/><rect x="400" y="70" width="160" height="36" class="state"/><text x="120.0" y="93" text-anchor="middle" class="label">c ⊩ φ</text><text x="300.0" y="93" text-anchor="middle" class="label">c forces neither φ nor ¬φ</text><text x="480.0" y="93" text-anchor="middle" class="label">c ⊩ ¬φ</text><line x1="200" y1="48" x2="200" y2="128" class="ink-stroke" stroke-width="1.4" stroke-dasharray="5 4"/><text x="200" y="38" text-anchor="middle" class="label">Jockusch–Soare question</text><line x1="400" y1="48" x2="400" y2="128" class="ink-stroke" stroke-width="1.4" stroke-dasharray="5 4"/><text x="400" y="38" text-anchor="middle" class="label">Cohen question</text><line x1="40" y1="156" x2="200" y2="156" class="accent-stroke" stroke-width="2" marker-start="url(#av-dl-arr)" marker-end="url(#av-dl-arr)"/><text x="120.0" y="149" text-anchor="middle" class="label">Jockusch–Soare: yes</text><text x="380.0" y="149" text-anchor="middle" class="label muted">no</text><line x1="40" y1="196" x2="400" y2="196" class="accent-stroke" stroke-width="2" marker-start="url(#av-dl-arr)" marker-end="url(#av-dl-arr)"/><text x="220.0" y="189" text-anchor="middle" class="label">Cohen: yes</text><text x="480.0" y="189" text-anchor="middle" class="label muted">no</text><text x="300" y="228" text-anchor="middle" class="label">conditions, for a fixed Σ⁰₁ sentence φ</text></svg>
 :::
 
-The two extreme positions correspond to two definitions. "Some extension of $c$ forces $\varphi$" is always a forcing question, but its complexity is that of searching through the extensions. "The condition $c$ forces $\varphi$" has the complexity of the forcing relation, and is a forcing question only when every condition forcing neither $\varphi$ nor $\neg \varphi$ can be extended to force $\neg \varphi$ (second exercise). For Jockusch–Soare forcing the first definition is $\Sigma^0_2$: an extension forcing a convergence exists as soon as one member makes the computation converge, and membership is $\Pi^0_1$. The second is $\Sigma^0_1$ by compactness: a $\Pi^0_1$ class forces a convergence if and only if all the nodes of some level of its tree make the computation converge. This is the first instance of a recurring technique, the **over-approximation**: when the natural question is too complex, one asks a question with a stronger positive answer, chosen so that compactness brings it down to $\Sigma^0_1$. The Dzhafarov–Jockusch argument (:ref{#thm-dj-cone-avoidance}) is the second: it asks about all partitions of $\nat$ instead of the given one.
+The two extreme positions correspond to two definitions. "Some extension of $c$ forces $\varphi$" is always a forcing question, but its complexity is that of searching through the extensions. "The condition $c$ forces $\varphi$" has the complexity of the forcing relation, and is a forcing question only when every condition forcing neither $\varphi$ nor $\neg \varphi$ can be extended to force $\neg \varphi$ (:ref{#exr-question-converse}). For Jockusch–Soare forcing the first definition is $\Sigma^0_2$: an extension forcing a convergence exists as soon as one member makes the computation converge, and membership is $\Pi^0_1$. The second is $\Sigma^0_1$ by compactness: a $\Pi^0_1$ class forces a convergence if and only if all the nodes of some level of its tree make the computation converge. This is the first instance of a recurring technique, the **over-approximation**: when the natural question is too complex, one asks a question with a stronger positive answer, chosen so that compactness brings it down to $\Sigma^0_1$. The Dzhafarov–Jockusch argument (:ref{#thm-dj-cone-avoidance}) is the second: it asks about all partitions of $\nat$ instead of the given one.
 
 ## Questions relative to the condition
 
@@ -91,7 +91,7 @@ Why does the argument compare $U$ with the graph of $C$ rather than with $C$ its
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-question-necessary difficulty=1 objective="Derive from the definition the answers that every forcing question gives on the conditions that decide a sentence."}
 Show that every forcing question satisfies: if $c \Vdash \varphi$ then $c \mathrel{?{\vdash}} \varphi$, and if $c \Vdash \neg \varphi$ then $c \mathrel{?{\nvdash}} \varphi$.
 
 :::solution
@@ -99,8 +99,8 @@ If $c \Vdash \varphi$ and $c \mathrel{?{\nvdash}} \varphi$, property 2 gives $d 
 :::
 ::::
 
-::::exercise{#exr-question-converse difficulty=2}
-For Cohen forcing, let $\sigma \mathrel{R} \varphi$ hold if $\sigma \Vdash \varphi$, for $\Sigma^0_1$ sentences $\varphi$. Show that $R$ satisfies the two properties of the previous exercise, but is not a forcing question. Show that $R$ is a forcing question for Jockusch–Soare forcing at level $1$, and explain the difference.
+::::exercise{#exr-question-converse difficulty=2 objective="See that answering correctly on the conditions that decide a sentence does not make a relation a forcing question."}
+For Cohen forcing, let $\sigma \mathrel{R} \varphi$ hold if $\sigma \Vdash \varphi$, for $\Sigma^0_1$ sentences $\varphi$. Show that $R$ satisfies the two properties of :ref{#ex-question-necessary}, but is not a forcing question. Show that $R$ is a forcing question for Jockusch–Soare forcing at level $1$, and explain the difference.
 
 :::solution
 The two properties hold since forcing is consistent. Let $\varphi$ say that $G$ has an element $n \geq |\sigma|$: it is $\Phi^G_a\converge$ for the functional searching for such an element. The condition $\sigma$ does not force it, since $\sigma 0 0 \cdots$ is a member. But no extension $\tau$ of $\sigma$ forces $\neg \varphi$, since $\tau 1 1 \cdots$ is a member of $\tau$. So property 2 fails. For Jockusch–Soare forcing, if $\mathcal P$ does not force $\Phi^G_e(\vec m)\converge$, some member makes it diverge, and $\mathcal P \cap \{ X : \Phi^X_e(\vec m)\diverge \}$ is a non-empty $\Pi^0_1$ class forcing the divergence. The difference is that a $\Pi^0_1$ class can be cut down to the members satisfying a $\Pi^0_1$ property, while a Cohen condition cannot exclude a single member without fixing a longer string.
@@ -109,7 +109,63 @@ The two properties hold since forcing is consistent. Let $\varphi$ say that $G$ 
 
 ## Notes and references
 
-The three-case argument and the forcing question as its abstraction follow the chapter *Cone avoidance* of Patey's monograph (sections *First examples* and *Forcing question*), where the dividing line between conditions is drawn as in the figure; the forcing question was introduced by Monin and Patey (2019, Lemma 2.4 for the abstract cone avoidance theorem). The monograph states as an exercise that the two properties of the first exercise characterize forcing questions; :ref{#exr-question-converse} shows that they are necessary but not sufficient in the framework of this course. :ref{#def-question-local} is introduced here to state in one theorem the variants with reservoirs computable in $Z$, avoiding a cone, or belonging to a Scott ideal. The example of reservoirs that code $C$ shows why the class $\mathcal M$ must avoid the cone; it is the reason for the restrictions on reservoirs in all later constructions.
+The three-case argument and the forcing question as its abstraction follow the chapter *Cone avoidance* of Patey's monograph (sections *First examples* and *Forcing question*), where the dividing line between conditions is drawn as in the figure; the forcing question was introduced by Monin and Patey (2019, Lemma 2.4 for the abstract cone avoidance theorem). The monograph states as an exercise that the two properties of :ref{#ex-question-necessary} characterize forcing questions; :ref{#exr-question-converse} shows that they are necessary but not sufficient in the framework of this course. :ref{#def-question-local} is introduced here to state in one theorem the variants with reservoirs computable in $Z$, avoiding a cone, or belonging to a Scott ideal. The example of reservoirs that code $C$ shows why the class $\mathcal M$ must avoid the cone; it is the reason for the restrictions on reservoirs in all later constructions.
 
 - B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095; arXiv:1803.09771.
 - L. Patey, *Lowness and avoidance*, chapter *Cone avoidance*, sections *First examples* and *Forcing question*.
+
+:::::exercises
+::::exercise[A condition in the middle region]{#ex-dividing-line-example difficulty=1 objective="Locate a condition that decides neither a sentence nor its negation, and compute on it the answers of two forcing questions."}
+For Jockusch–Soare forcing, let $\mathcal P = \{ X : X \text{ has at most one element} \}$, and let $\varphi$ be the $\Sigma^0_1$ sentence "$G$ contains $0$ or $1$". Show that $\mathcal P$ is a condition that forces neither $\varphi$ nor $\neg \varphi$. Compute at $\mathcal P$ the answer of the question of :ref{#thm-tree-question}, "$\mathcal P$ forces $\varphi$", and the answer of the question "some extension of $\mathcal P$ forces $\varphi$", and give in each case the extension provided by the corresponding property of a forcing question.
+
+:::solution
+A set $X$ belongs to $\mathcal P$ if and only if for all $a < b$, $a \notin X$ or $b \notin X$; each of these clauses depends on a finite prefix of $X$, so $\mathcal P$ is a $\Pi^0_1$ class, and it contains $\emptyset$. Since forcing a sentence of level $1$ means truth on all members, $\mathcal P$ does not force $\varphi$ (its member $\emptyset$ fails it) and does not force $\neg \varphi$ (its member $\{ 0 \}$ satisfies it). In the figure, $\mathcal P$ lies in the middle region.
+
+The question of Jockusch–Soare forcing answers no, since $\mathcal P$ does not force $\varphi$. Property 2 is witnessed by $\mathcal P \cap \{ X : 0 \notin X,\ 1 \notin X \}$, a $\Pi^0_1$ class containing $\emptyset$, all of whose members fail $\varphi$.
+
+The second question answers yes: the class $\{ \{ 0 \} \}$, defined by $X(0) = 1$ and $X(n) = 0$ for $n \geq 1$, is a non-empty $\Pi^0_1$ class contained in $\mathcal P$, and its only member satisfies $\varphi$. It is the extension given by property 1. The two questions give opposite answers at the same condition, and both are forcing questions.
+:::
+::::
+
+::::exercise[Formulas, not sentences]{#ex-question-formulas difficulty=1 objective="See why the definition of a Σ⁰₁(ℳ)-preserving question is about formulas with free variables and not about single sentences."}
+:ref{#def-question-local} asks that $\{ \vec m : c \mathrel{?{\vdash}} \varphi(\vec m) \}$ be $\Sigma^0_1(X)$ for every $\Sigma^0_1$ formula $\varphi(\vec x)$. Suppose that this were only required for formulas without free variables. Show that every forcing question would then be $\Sigma^0_1(\{ \emptyset \})$-preserving, and that :ref{#thm-local-cone-avoidance} would become false, using :ref{#ex-coding-reservoir}. Where does its proof use free variables?
+
+:::solution
+For a sentence $\varphi$, the relation is a subset of the set with one element, the empty tuple: it is either empty or full, hence computable, hence $\Sigma^0_1(\emptyset)$, whatever the question. So every forcing question would qualify with $\mathcal M = \{ \emptyset \}$.
+
+In :ref{#ex-coding-reservoir}, Mathias forcing with arbitrary infinite reservoirs has a forcing question, and a non-computable set $C$ is computable in no member of $\{ \emptyset \}$. But every sufficiently generic set whose filter contains the condition $(\varepsilon, X_C)$ computes $C$, and such sets exist, since a generic filter can be built below any condition. So the conclusion of the theorem would fail.
+
+The proof uses the set $U$ of pairs $(x, v)$ such that $c \mathrel{?{\vdash}} \Phi^{Z \oplus G}_e(x)\converge = v$, given by a formula with the free variables $x$ and $v$. Case 3 needs $U$ to be $\Sigma^0_1(X)$ as a whole, so that $C(x)$ can be computed uniformly in $x$; that each single answer is a computable truth value says nothing.
+:::
+::::
+
+::::exercise[The cone avoidance basis theorem]{#ex-js-cone-basis difficulty=1 objective="Recover the cone avoidance basis theorem as an instance of the abstract theorem, with Jockusch–Soare forcing relativized."}
+Let $Z$ be a set, $C \not\leq_T Z$, and $T$ an infinite $Z$-computable binary tree. Consider Jockusch–Soare forcing relative to $Z$ below $[T]$: the conditions are the non-empty $\Pi^0_1(Z)$ classes contained in $[T]$, ordered by inclusion. Show that the relation "$\mathcal P$ forces $\Phi^{Z \oplus G}_e(\vec m)\converge$" is a $\Sigma^0_1(\{ Z \})$-preserving forcing question, and deduce from :ref{#thm-local-cone-avoidance} that $T$ has an infinite path $G$ with $C \not\leq_T Z \oplus G$.
+
+:::solution
+This is a notion of forcing by the argument for Jockusch–Soare forcing (:ref{#ex-forcing-notions}, item 2) relativized to $Z$: if $\mathcal P \cap [\sigma] \neq \emptyset$, then $\mathcal P \cap [\sigma]$ is a non-empty $\Pi^0_1(Z)$ class contained in $[T]$.
+
+*Property 1* is trivial: $\mathcal P$ itself forces the sentence. *Property 2*: if $\mathcal P$ does not force $\Phi^{Z \oplus G}_e(\vec m)\converge$, some member $X$ makes it diverge, and $\mathcal P \cap \{ X : \Phi^{Z \oplus X}_e(\vec m)\diverge \}$ is a non-empty $\Pi^0_1(Z)$ class contained in $\mathcal P$, which forces the divergence.
+
+*Preservation.* Let $S$ be a $Z$-computable tree with $[S] = \mathcal P$. We show that $\mathcal P$ forces the convergence if and only if there is $\ell$ such that $\Phi^{Z \oplus \sigma}_e(\vec m)[\ell]\converge$ for every $\sigma \in S$ of length $\ell$, a $\Sigma^0_1(Z)$ relation in $\vec m$. If such an $\ell$ exists, every member extends a string of $S$ of length $\ell$, and converges by the use principle. Conversely, the strings $\sigma \in S$ with $\Phi^{Z \oplus \sigma}_e(\vec m)[|\sigma|]\diverge$ form a tree, since convergence persists along extensions; if every member of $\mathcal P$ converges, this tree has no infinite path, so it is finite by König's lemma, and any $\ell$ beyond its height works.
+
+By :ref{#thm-local-cone-avoidance} with $\mathcal M = \{ Z \}$, every sufficiently generic $G$ satisfies $C \not\leq_T Z \oplus G$; it is a member of the condition $[T]$, hence a path of $T$.
+
+The question is the one of an exercise of the section *Forcing question* of the chapter *Cone avoidance* of Patey's monograph, relativized.
+:::
+::::
+
+::::exercise[Reservoirs in a Turing ideal]{#ex-mathias-ideal difficulty=2 objective="Apply the abstract theorem to Mathias forcing with reservoirs in a Turing ideal, for all the oracles of the ideal at once."}
+Let $\mathcal I$ be a countable Turing ideal and $C \notin \mathcal I$. Show that there is a set $G$ such that $C \not\leq_T W \oplus G$ for every $W \in \mathcal I$, and $G$ is cohesive for every sequence of sets $\vec R$ with $\bigoplus_n R_n \in \mathcal I$.
+
+:::solution
+Use Mathias conditions $(\sigma, X)$ with $X \in \mathcal I$ infinite and $\min X \geq |\sigma|$. Refinement holds as for computable Mathias forcing, since removing finitely many elements from $X$ keeps it in $\mathcal I$.
+
+*Cones.* Fix $W \in \mathcal I$. The question of :ref{#prop-mathias-question}, with functionals of the oracle $W \oplus G$, is a forcing question: its proof only uses that $X \setminus \{ 0, \dots, |\tau| - 1 \}$ is again a reservoir, which holds in $\mathcal I$. At $(\sigma, X)$ it is $\Sigma^0_1(W \oplus X)$, uniformly in the parameters, since compatibility with $(\sigma, X)$ is decidable in $X$. So it is $\Sigma^0_1(\mathcal M_W)$-preserving for $\mathcal M_W = \{ W \oplus X : X \in \mathcal I \} \subseteq \mathcal I$, and $C$ is computable in no member of $\mathcal M_W$, since $\mathcal I$ is closed downwards and does not contain $C$. The proof of :ref{#thm-local-cone-avoidance}, with $W$ in place of $Z$, gives dense sets $E^W_e$ whose generic sets satisfy $\Phi^{W \oplus G}_e \neq C$.
+
+*Cohesiveness.* For a sequence $\vec R$ with $\bigoplus_n R_n \in \mathcal I$ and a number $n$, the sets $X \cap R_n$ and $X \setminus R_n$ belong to $\mathcal I$ and one of them is infinite; with it as reservoir, $(\sigma, X)$ is extended to a condition all of whose members $G$ satisfy $G \subseteq^* R_n$ or $G \subseteq^* \overline{R_n}$. *Infinity* is handled as usual.
+
+There are countably many dense sets, since $\mathcal I$ is countable. A set generic for all of them has the required properties. It need not belong to $\mathcal I$.
+:::
+::::
+:::::

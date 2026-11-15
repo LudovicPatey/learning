@@ -1,7 +1,7 @@
 ---
 title: Variants of Turing machines
 summary: Multi-tape machines and their simulation by single-tape machines; other variants of the model, which compute the same partial functions.
-duration: 35
+duration: 30
 prerequisites: [programming-turing-machines]
 ---
 
@@ -90,13 +90,13 @@ The same method — encode the richer structure on one tape, simulate step by st
 - machines with the alphabet $\{\sqcup, 1\}$ only (encode each symbol of a larger alphabet by a fixed-length block of $\sqcup$ and $1$);
 - **non-deterministic** machines, where $\delta$ is a relation, and a function value is accepted if *some* computation produces it, provided the function is well defined (simulate all computations in breadth-first order, using a third tape).
 
-Some care is needed with the input and output conventions in each case, but no new idea. The exercises below treat the first variant.
+Some care is needed with the input and output conventions in each case, but no new idea. :ref{#ex-one-way-tape} below treats the first variant.
 
 The variants also show what the definition does **not** depend on. Every model above is still a finite control acting locally on a discrete memory, which is why each simulates the others. The lesson :ref{to="models-of-computation/church-turing-thesis"} returns to the question of which features of a model are responsible for this robustness.
 
 ## Exercises
 
-::::exercise{difficulty=2 #ex-one-way-tape}
+::::exercise{#ex-one-way-tape difficulty=2 objective="Simulate a two-way tape on a one-way tape by folding it onto two tracks."}
 A **one-way** machine has a tape indexed by $\nat$ instead of $\mathbb{Z}$; a move to the left on cell $0$ leaves the head on cell $0$. Show that the computation of an ordinary machine $M$ from a configuration whose tape is blank on the negative cells can be simulated step by step by a one-way machine.
 
 :::hint
@@ -108,7 +108,15 @@ The one-way machine $N$ uses cell $0$ for an end marker $\triangleright$, and st
 :::
 ::::
 
-::::exercise{difficulty=2}
+## Notes and references
+
+The simulation of multi-tape machines by single-tape machines, with a quadratic slowdown, is due to Hartmanis and Stearns, who used it in the foundational paper of complexity theory. The study of such simulations and of their cost belongs to complexity theory, where the robustness of the class of polynomial-time computable functions plays the role that the robustness of the computable functions plays here.
+
+- J. Hartmanis, R. E. Stearns, *On the computational complexity of algorithms*, Transactions of the American Mathematical Society 117 (1965), 285–306.
+- M. Sipser, *Introduction to the Theory of Computation*, 3rd edition, Cengage, 2012, chapter 3.
+
+:::::exercises
+::::exercise{#ex-two-tape-mult difficulty=2 objective="Program multiplication on a two-tape machine and estimate its running time."}
 Describe a $2$-tape machine computing $(x, y) \mapsto x \cdot y$, and estimate its number of steps.
 
 :::solution
@@ -116,10 +124,53 @@ Use an auxiliary symbol $\#$ and a marker $X$. First copy $\ulcorner y \urcorner
 :::
 ::::
 
+::::exercise{#ex-tm-stay-moves difficulty=1 objective="Simulate a move that stays in place by two moves, a first instance of simulation."}
+Consider single-tape machines whose transitions may also use the move $S$ (stay in place). Show that every such machine $M$ can be transformed into an ordinary machine $M'$ which computes the same partial function in every arity.
 
-## Notes and references
+:::solution
+For every state $p$ of $M$, add a new state $r_p$. Replace each transition $\delta(q, a) = (p, b, S)$ by $\delta'(q, a) = (r_p, b, R)$, and set $\delta'(r_p, c) = (p, c, L)$ for every symbol $c$. The other transitions are unchanged. If $(q, \tau, h) \vdash_M (p, \tau', h)$ by a transition with move $S$, then $M'$ goes from $(q, \tau, h)$ to $(r_p, \tau', h + 1)$ and then, rewriting the symbol it scans, to $(p, \tau', h)$; the other steps of $M$ are steps of $M'$. By induction on the number of steps, the computation of $M'$ from a configuration of $M$ is the computation of $M$ in which some intermediate configurations, with states $r_p$, are inserted. The states $r_p$ are not halting, so $M'$ halts exactly when $M$ does, in the same final configuration (also when $p = q_h$: then $M'$ halts after the step back). Hence $\varphi^{(k)}_{M'} = \varphi^{(k)}_M$ for every $k$.
+:::
+::::
 
-The simulation of multi-tape machines by single-tape machines, with a quadratic slowdown, is due to Hartmanis and Stearns, who used it in the foundational paper of complexity theory. The study of such simulations and of their cost belongs to complexity theory, where the robustness of the class of polynomial-time computable functions plays the role that the robustness of the computable functions plays here.
+::::exercise{#ex-two-tape-equality difficulty=2 objective="Program a comparison on a two-tape machine in a linear number of steps."}
+Describe a $2$-tape machine computing the characteristic function of equality, $(x, y) \mapsto 1$ if $x = y$ and $0$ otherwise, in $O(x + y)$ steps, and prove that it is correct.
 
-- J. Hartmanis, R. E. Stearns, *On the computational complexity of algorithms*, Transactions of the American Mathematical Society 117 (1965), 285–306.
-- M. Sipser, *Introduction to the Theory of Computation*, 3rd edition, Cengage, 2012, chapter 3.
+:::solution
+Tape $1$ initially holds $1^{x+1} \sqcup 1^{y+1}$ from cell $0$. Entries give the scanned pair, the written pair and the moves; $a$ stands for any symbol.
+
+1. State $c_1$, scanning $(1, \sqcup)$: write $(\sqcup, 1)$, move $(R, R)$. Head $1$ erases the first block while head $2$ copies it. Scanning $(\sqcup, \sqcup)$, on the separator: move $(R, L)$ and enter $c_2$. Now tape $2$ holds $1^{x+1}$ on the cells $0, \dots, x$, head $2$ is on cell $x$, and head $1$ is on the first cell $x + 2$ of the second block.
+2. State $c_2$, scanning $(1, 1)$: move $(S, L)$. Scanning $(1, \sqcup)$, on cell $-1$ of tape $2$: move $(S, R)$ and enter $c_3$.
+3. State $c_3$, scanning $(1, 1)$: write $(\sqcup, 1)$, move $(R, R)$. Both heads advance together, head $1$ erasing the second block. After $j$ such steps head $1$ is on cell $x + 2 + j$ and head $2$ on cell $j$; head $1$ first meets a blank after $y + 1$ steps, head $2$ after $x + 1$ steps. Scanning $(\sqcup, \sqcup)$ (so $x = y$): enter $e_1$ without moving. Scanning $(\sqcup, 1)$ (so $y < x$): enter $e_0$ without moving. Scanning $(1, \sqcup)$ (so $x < y$): enter $c_4$ without moving.
+4. State $c_4$, scanning $(1, a)$: write $(\sqcup, a)$, move $(R, S)$; this erases the rest of the second block. Scanning $(\sqcup, a)$: enter $e_0$ without moving.
+5. State $e_0$, scanning $(\sqcup, a)$: write $(1, a)$ and halt without moving. State $e_1$, scanning $(\sqcup, a)$: write $(1, a)$, move $(R, S)$ and enter $e'_1$; state $e'_1$, scanning $(\sqcup, a)$: write $(1, a)$, move $(L, S)$ and halt.
+
+When $e_0$ or $e_1$ is entered, both blocks of tape $1$ have been erased, and head $1$ is on a blank cell with only blanks to its right. So the machine halts with tape $1$ equal to $\ulcorner 0 \urcorner$ or $\ulcorner 1 \urcorner$ from head $1$, according to whether $x \neq y$ or $x = y$; the contents of tape $2$ do not matter. The phases take $x + 2$, $x + 2$, $\min(x, y) + 2$, at most $y - x$, and at most $2$ steps, so the total is $O(x + y)$.
+:::
+::::
+
+::::exercise{#ex-two-head-machine difficulty=2 objective="Adapt the multi-tape simulation to a machine with two heads on a single tape."}
+A **two-head machine** has one tape and two heads; its transition function has the form $\delta : (Q \setminus \{q_h\}) \times \Gamma^2 \to Q \times \Gamma^2 \times \{L, S, R\}^2$, the $i$-th components referring to head $i$. When both heads scan the same cell and write different symbols, the symbol written by head $1$ is kept. Both heads start on cell $0$, and input and output are as in :ref{#def-tm-computes}, for head $1$. Show that every partial function computed by a two-head machine is computed by an ordinary machine.
+
+:::solution
+Let $M$ be a two-head machine with alphabet $\Gamma$. The simulating machine $N$ uses the alphabet $\Gamma \cup (\Gamma \times \{0, 1\}^2)$: a converted cell $(a, m_1, m_2)$ contains the symbol $a$ of $M$, and $m_i = 1$ says that head $i$ of $M$ is there. As in the proof of :ref{#thm-multitape-simulation}, $N$ converts cell $0$ to $(a, 1, 1)$, keeps the state of $M$ in its own state, and converts a cell $a$ to $(a, 0, 0)$ when a mark first arrives on it; the converted cells form an interval containing $0$.
+
+To simulate a step, $N$ sweeps the converted zone from left to right and records in its state the symbols $a_1, a_2$ under the marks $m_1, m_2$ (if both marks are on one cell, $a_1 = a_2$). It then knows the transition $\delta(q, a_1, a_2) = (q', b_1, b_2, D_1, D_2)$. In a second sweep, from right to left, it writes on the cell of each mark: $b_2$ on the cell of mark $2$, then $b_1$ on the cell of mark $1$, which gives head $1$ precedence when the marks coincide. It also moves each mark one cell according to $D_i$. To avoid moving a mark twice, the state records which marks have already been moved in the current sweep; this is finite information. Then $N$ enters the state $q'$ of $M$.
+
+By induction on the number of steps, after $t$ simulated steps the converted zone, read through the first component, is the tape of $M$ after $t$ steps, the marks are on the cells of the heads, and the unconverted cells hold what $M$ has there (input symbols or blanks). When $M$ halts, $N$ replaces each converted cell $(a, m_1, m_2)$ by $a$, moves to the cell of mark $1$, and halts. Its final configuration is that of $M$ for head $1$, so $N$ halts in a standard configuration with output $y$ exactly when $M$ does.
+:::
+::::
+
+::::exercise{#ex-one-way-functions difficulty=3 objective="Complete the folding simulation with the input and output conventions, to show that one-way machines compute every Turing-computable function."}
+For a one-way machine (:ref{#ex-one-way-tape}), the initial and standard final configurations are defined as in :ref{#def-tm-computes}, with cells indexed by $\nat$. Show that every Turing-computable partial function is computed by a one-way machine.
+
+:::solution
+Let $M$ compute $f : \nat^k \rightharpoonup \nat$. The initial tape of $M$ is blank on the negative cells, so :ref{#ex-one-way-tape} applies. Let $N$ be the one-way machine of that solution, with two additions. First, during its initial shift, $N$ writes an end marker $\dashv$ after the last converted cell, and it moves $\dashv$ one cell to the right whenever the simulated head reaches it, converting the cell it leaves to $(\sqcup, \sqcup)$. The cells strictly between $\triangleright$ and $\dashv$ then hold, on two tracks, a segment $[-i, j]$ of the tape of $M$ which contains the head and all non-blank cells. Second, $N$ stores on its cells a third component, a mark telling whether the head of $M$ is on that position.
+
+When $M$ would halt, $N$ does not halt but **unfolds** the segment: it writes, to the right of $\dashv$, a copy of the contents of positions $-i, \dots, j$ of $M$ in this order, with the head mark, as plain symbols of an enlarged alphabet. In $N$ these positions are the lower tracks of the cells $i, i - 1, \dots, 1$, then the upper tracks of the cells $1, \dots, j + 1$. The copy is made one symbol at a time, as in :ref{#ex-tm-copy}: $N$ finds the next uncopied position in this order (marking the copied positions), records its content in its state, goes right past the last written cell, writes it, and comes back. This terminates, since the segment is finite.
+
+The copy is now an ordinary tape segment $\sigma$ containing the final tape of $M$, the rest of which is blank. $N$ checks, in one sweep over $\sigma$, that $\sigma$ consists of blanks, then a block of $1$s whose first cell carries the head mark, then blanks. If the check fails, $M$ has halted in a non-standard configuration, and $N$ enters a state which moves right forever. If it succeeds, $N$ erases everything except the block of $1$s: the folded zone, the markers $\triangleright$ and $\dashv$, and the blanks and marks of $\sigma$, replacing the marked $1$ by a plain $1$. To find the ends of the region to erase, it uses $\triangleright$ on cell $0$ and the first blank after $\sigma$. It then moves to the first $1$ of the block and halts.
+
+If $M$ does not halt on $\vec x$, neither does $N$. If $M$ halts in a non-standard configuration, $N$ does not halt. If $M$ halts in a standard configuration with output $y$, the block of $1$s of $\sigma$ is $\ulcorner y \urcorner$, and $N$ halts with exactly $\ulcorner y \urcorner$ on its tape and the head on its first cell. Hence $N$ computes $f$.
+:::
+::::
+:::::

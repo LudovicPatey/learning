@@ -112,6 +112,14 @@ Where does the proof use the hypothesis that $\mathrm{Tot}$ is computable?
   This is the diagonal lemma, which uses no hypothesis on $\mathrm{Tot}$.
 :::
 
+::::exercise{#ex-no-dominating difficulty=1 objective="Diagonalize against a single function to show that no total computable function dominates all others."}
+A function $h$ **dominates** a function $f$ if $h(n) \geq f(n)$ for all sufficiently large $n$. Show that no total computable function dominates every total computable function.
+
+:::solution
+If $h$ is total computable and dominates every total computable function, it dominates $h + 1$, which is total computable: $h(n) \geq h(n) + 1$ for large $n$, a contradiction.
+:::
+::::
+
 ## Partial functions
 
 The previous section shows that three wishes are incompatible: a list $(f_e)$ (1) containing all computable functions, (2) uniformly computable, and (3) consisting of total functions. The diagonal function $g(n) = f_n(n) + 1$ would be computable by (2), total by (3), and missing from the list, against (1). The theory of computation keeps (1) and (2), which make a universal machine possible, and gives up (3). The enumeration $\Phi_0, \Phi_1, \dots$ of the partial computable functions is uniformly computable in the sense that $\Phi$ is partial computable. What happens when one diagonalizes against it?
@@ -176,37 +184,11 @@ Why is the function $h$ of :ref{#cor-halting-diagonal} total, given that $\Phi_e
   It takes the value $0$ only outside $\emptyset'$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-A function $h$ **dominates** a function $f$ if $h(n) \geq f(n)$ for all sufficiently large $n$. Show that no total computable function dominates every total computable function.
-
-:::solution
-If $h$ is total computable and dominates every total computable function, it dominates $h + 1$, which is total computable: $h(n) \geq h(n) + 1$ for large $n$, a contradiction.
-:::
-::::
-
-::::exercise{#ex-no-uniform-computable-sets difficulty=1}
-Show that there is no uniformly computable sequence $(X_n)$ of sets containing every computable set.
-
-:::solution
-If $(X_n)$ is uniformly computable, then $Y(n) = 1 - X_n(n)$ is computable, as a composition of computable functions, and differs from every $X_n$. Alternatively, apply :ref{#thm-effective-diagonal} to the characteristic functions, replacing $f_n(n) + 1$ by $1 - f_n(n)$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-computably-inseparable difficulty=2 objective="Defeat each computable separating set at its own index."}
 Let $A = \{ e : \Phi_e(e)\converge = 0 \}$ and $B = \{ e : \Phi_e(e)\converge = 1 \}$. Show that there is no computable set $S$ with $A \subseteq S$ and $S \cap B = \emptyset$. (The sets $A$ and $B$ are **computably inseparable**.)
 
 :::solution
-Let $S$ be computable, and let $c$ be a code of its characteristic function, so that $\Phi_c$ is total with values in $\{0, 1\}$. If $c \in S$, then $\Phi_c(c) = 1$, so $c \in B$, and $S \cap B \neq \emptyset$. If $c \notin S$, then $\Phi_c(c) = 0$, so $c \in A$, and $A \not\subseteq S$. This is a diagonal argument in which the program $c$ is defeated at its own index.
-:::
-::::
-
-::::exercise{difficulty=2}
-Using :ref{#prop-ce-range} of the course on fundamentals, where computably enumerable sets are defined, show that $\mathrm{Tot}$ is not even computably enumerable.
-
-:::solution
-$\mathrm{Tot}$ is infinite. If it were computably enumerable, there would be an injective total computable $f$ with $f(\nat) = \mathrm{Tot}$. Then $f_n(x) = \Phi(f(n), x)$ defines a uniformly computable sequence of total functions containing every total computable function, contradicting :ref{#thm-effective-diagonal}. The proof of :ref{#cor-tot-not-computable} is the special case where $f$ is the principal function.
+Let $S$ be computable, and let $c$ be a code of its characteristic function, so that $\Phi_c$ is total with values in $\{0, 1\}$. If $c \in S$, then $\Phi_c(c) = 1$, so $c \in B$, and $S \cap B \neq \emptyset$. If $c \notin S$, then $\Phi_c(c) = 0$, so $c \in A$, and $A \not\subseteq S$. This is a diagonal argument in which the program $c$ is defeated at its own index. Adapted from Soare 2016, Exercise 1.6.26 (i).
 :::
 ::::
 
@@ -219,3 +201,55 @@ The undecidability of the halting problem is due to Turing (1936), in the form t
 - P. Odifreddi, *Classical Recursion Theory*, North-Holland, 1989.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.1.2.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.
+
+:::::exercises
+::::exercise{#ex-no-uniform-computable-sets difficulty=1 objective="Adapt effective diagonalization to sequences of sets."}
+Show that there is no uniformly computable sequence $(X_n)$ of sets containing every computable set.
+
+:::solution
+If $(X_n)$ is uniformly computable, then $Y(n) = 1 - X_n(n)$ is computable, as a composition of computable functions, and differs from every $X_n$. Alternatively, apply :ref{#thm-effective-diagonal} to the characteristic functions, replacing $f_n(n) + 1$ by $1 - f_n(n)$.
+:::
+::::
+
+::::exercise{#ex-tot-not-ce difficulty=2 objective="Show that the set of indices of total functions cannot even be listed by an algorithm."}
+By a theorem of the course on fundamentals, a set is **computably enumerable** if and only if it is empty or the range of a total computable function. Using this characterization, show that $\mathrm{Tot}$ is not computably enumerable.
+
+:::solution
+$\mathrm{Tot}$ is non-empty, as shown in the proof of :ref{#cor-tot-not-computable}. Suppose $f$ is a total computable function with $f(\nat) = \mathrm{Tot}$. Then $f_n(x) = \Phi(f(n), x)$ defines a sequence of total functions, since $f(n) \in \mathrm{Tot}$, and $(n, x) \mapsto f_n(x)$ is partial computable, hence computable. Every total computable function is $\Phi_e$ for some $e \in \mathrm{Tot}$, that is, for some $e = f(n)$, so it is $f_n$. This contradicts :ref{#thm-effective-diagonal}. The proof of :ref{#cor-tot-not-computable} is the special case where $f$ is the principal function of $\mathrm{Tot}$.
+:::
+::::
+
+::::exercise{#ex-uniform-dominate difficulty=1 objective="Effectivize the construction of a function that exceeds each member of a list from some point on."}
+Let $(f_e)$ be a uniformly computable sequence of total functions. Show that there is a total computable function $g$ such that $g(m) > f_e(m)$ whenever $e \leq m$. Deduce again that no uniformly computable sequence contains all total computable functions.
+
+:::solution
+Let $g(m) = \max \{ f_e(m) : e \leq m \} + 1$, the construction of :ref{#ex-eventually-exceed}. To compute $g(m)$, evaluate the computable function $(e, x) \mapsto f_e(x)$ at the $m + 1$ pairs $(0, m), \dots, (m, m)$, each of which gives a value since every $f_e$ is total, and take the maximum. So $g$ is total computable. If $g = f_e$ for some $e$, then $g(e) > f_e(e) = g(e)$, which is impossible. Alternatively, $g$ dominates every $f_e$, while by :ref{#ex-no-dominating} no total computable function dominates all total computable functions.
+:::
+::::
+
+::::exercise{#ex-diagonal-no-successor difficulty=1 objective="Vary the diagonal function of the lesson, moving the $+1$ from the function into the program."}
+Show that the partial computable function $\psi(e) \simeq \Phi_e(e)$ has no total computable extension. Deduce once more that $\emptyset'$ is not computable.
+
+:::solution
+$\psi$ is partial computable, as the composition of $\Phi$ with $e \mapsto (e, e)$. Suppose $h$ is a total computable extension of $\psi$. Then $h + 1$ is total computable; let $c$ be a code of it, so that $\Phi_c = h + 1$. Since $\Phi_c$ is total, $\psi(c) \simeq \Phi_c(c) = h(c) + 1$ is defined, and the extension property gives $h(c) = \psi(c) = h(c) + 1$, a contradiction. If $\emptyset'$ were computable, the function equal to $\Phi_e(e)$ for $e \in \emptyset'$ and to $0$ otherwise would be a total computable extension of $\psi$, as in the proof of :ref{#cor-halting-diagonal}.
+:::
+::::
+
+::::exercise{#ex-uniform-columns difficulty=1 objective="Express the uniform computability of a sequence of sets through the computability of its coding by a single set."}
+Show that a sequence $(X_n)$ of sets is uniformly computable if and only if the set $\bigoplus_n X_n$ is computable, using that Cantor's pairing function and its inverses are computable. Deduce that there is no computable set $Z$ such that every computable set is a column of $Z$.
+
+:::solution
+Let $Z = \bigoplus_n X_n$, so that $Z(\langle n, m \rangle) = X_n(m)$. If $(n, m) \mapsto X_n(m)$ is computable, then so is $Z$: to compute $Z(k)$, compute the pair $(n, m)$ with $\langle n, m \rangle = k$, then $X_n(m)$. Conversely, if $Z$ is computable, then $(n, m) \mapsto Z(\langle n, m \rangle) = X_n(m)$ is computable.
+
+If $Z$ is computable, its columns form a uniformly computable sequence, by the first part, and by :ref{#ex-no-uniform-computable-sets} this sequence does not contain every computable set.
+:::
+::::
+
+::::exercise{#ex-computable-finite-variants difficulty=1 objective="Show by counting that some sets differ at infinitely many positions from every computable set."}
+Show that there is a set $Y \subseteq \nat$ such that, for every computable set $X$, the symmetric difference $Y \mathbin{\triangle} X = (Y \setminus X) \cup (X \setminus Y)$ is infinite. Show that the set of such $Y$ has the cardinality of the continuum.
+
+:::solution
+If $F = Y \mathbin{\triangle} X$ is finite, then $Y = X \mathbin{\triangle} F$: for every $m$, $m \in F$ if and only if exactly one of $m \in X$ and $m \in Y$ holds, so $m \in X \mathbin{\triangle} F$ if and only if $m \in Y$. So the sets $Y$ that fail the property are the sets $X \mathbin{\triangle} F$ with $X$ computable and $F$ finite. They form the image of the product of the set of computable sets and of $\mathcal P_{\mathrm{fin}}(\nat)$, which is countable by :ref{#prop-countably-many-computable}, :ref{#cor-finite-subsets} and :ref{#cor-product-countable}; hence they form a countable set, by :ref{#cor-subset-countable}. Its complement in $\cs$ has the cardinality of the continuum, by :ref{#prop-cocountable}. The argument exhibits no such $Y$; the next lesson obtains such sets by finite extensions.
+:::
+::::
+:::::

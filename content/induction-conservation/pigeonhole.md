@@ -78,9 +78,7 @@ The first-order strength of $\mathsf{RT}^2_2$ has been studied intensively. We s
 
 So $\mathsf{RT}^2_2$ proves no $\Pi_4$ sentence of $\mathcal L_1$ beyond $\mathrm I\Sigma_1 + \mathrm B\Sigma_2$. Whether it is $\Pi^1_1$-conservative over $\mathsf{RCA}_0 + \mathsf B\Sigma^0_2$, which would make its first-order part exactly $\mathrm I\Sigma_1 + \mathrm B\Sigma_2$, remains open; it is regarded as the main open question on the first-order part of Ramsey's theorem for pairs. Le Houérou, Levy Patey and Yokoyama recall that, by work of Fiori-Carones, Kołodziejczyk, Wong and Yokoyama, this $\Pi^1_1$-conservation is equivalent to conservation for sentences $\forall X\, \varphi(X)$ with $\varphi \in \Pi^0_5$, so the 2024 result leaves one level of the arithmetic hierarchy to be settled.
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-rt1-successor difficulty=1 objective="See why the induction on the number of colors that proves each $\mathsf{RT}^1_k$ cannot be carried out inside $\mathsf{RCA}_0$."}
 Show that $\mathsf{RCA}_0$ proves $\mathsf{RT}^1_1$ and $\forall k\, (\mathsf{RT}^1_k \rightarrow \mathsf{RT}^1_{k+1})$. Explain why $\mathsf{RT}^1_{<\infty}$ does not follow.
 
 :::solution
@@ -88,7 +86,7 @@ A coloring with one color is constant, and $\nat$ is homogeneous. Assume $\maths
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-bounded-color-classes difficulty=2 objective="Translate a failure of $\Sigma^0_2$ collection into a coloring whose color classes are all bounded."}
 Let $\mathcal M$ be a model of $\mathsf{RCA}_0$ in which $\mathsf B\Pi^0_1$ fails. Show that there are $k \in M$ and a coloring $f : M \to k$ in $\mathcal M$ such that every color class $\{ z : f(z) = x \}$, for $x < k$, is bounded in $M$, and that $k$ is non-standard.
 
 :::solution
@@ -111,3 +109,53 @@ Hirst proved the equivalence of :ref{#thm-hirst} and :ref{#prop-rt22-bsigma2} in
 - M. Fiori-Carones, L. A. Kołodziejczyk, T. L. Wong and K. Yokoyama, *An isomorphism theorem for models of weak König's lemma without primitive recursion*, Journal of the European Mathematical Society, published online 2024, arXiv:2112.10876.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014, Section 6.8.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 6.5.
+
+:::::exercises
+::::exercise{#ex-rt1-cut difficulty=1 objective="See the numbers of colors for which the pigeonhole principle holds as a cut, and deduce that this property is not $\Sigma^0_1$-definable."}
+Let $\mathcal M = (M, \mathcal S)$ be a model of $\mathsf{RCA}_0$, and $I$ the set of $k \in M$ such that $\mathcal M \models \mathsf{RT}^1_k$. Show that $I$ contains $0$, is closed under successor, and is an initial segment of $M$. Show that $I = M$ if and only if $\mathcal M \models \mathsf B\Sigma^0_2$. Deduce that if $\mathcal M \not\models \mathsf B\Sigma^0_2$, the property "$\mathsf{RT}^1_k$" of $k$ is not equivalent in $\mathcal M$ to any $\Sigma^0_1$ or $\Pi^0_1$ formula with parameters.
+
+:::solution
+There is no function from $M$ to $0$, so $\mathsf{RT}^1_0$ holds vacuously and $0 \in I$. If $k \in I$, then $k + 1 \in I$ by :ref{#ex-rt1-successor}, whose proof takes place in $\mathsf{RCA}_0$, hence in $\mathcal M$. If $k' \leq k \in I$, a coloring $f : M \to k'$ in $\mathcal M$ is also a coloring with $k$ colors, so it has an infinite homogeneous set in $\mathcal M$: $k' \in I$. By definition, $I = M$ if and only if $\mathcal M \models \mathsf{RT}^1_{<\infty}$, that is, by :ref{#thm-hirst}, if and only if $\mathcal M \models \mathsf B\Sigma^0_2$.
+
+If $\mathcal M \not\models \mathsf B\Sigma^0_2$, then $I$ contains $0$, is closed under successor, and is not all of $M$. A $\Sigma^0_1$ formula $\psi(k)$ defining $I$ in $\mathcal M$ would violate $\mathsf I\Sigma^0_1$; a $\Pi^0_1$ formula would violate $\mathsf I\Pi^0_1$, which holds in $\mathcal M$ by :ref{#thm-isigma-ipi}. The formula $\mathsf{RT}^1_k$ begins with a universal set quantifier, to which the induction of $\mathsf{RCA}_0$ does not apply.
+:::
+::::
+
+::::exercise{#ex-uniform-limits difficulty=2 objective="Prove that $\Sigma^0_2$ collection is equivalent to the uniform stabilization of finitely many convergent sequences." lessons="collection-induction"}
+Consider the following statement: for every $a$ and every function $f : \nat \times \nat \to \nat$ such that $\lim_s f(x, s)$ exists for every $x < a$ (that is, $\exists t\ \forall s \geq t\ f(x, s) = f(x, t)$), there is $s_0$ such that $f(x, s) = f(x, s_0)$ for all $x < a$ and $s \geq s_0$. Show that it is equivalent to $\mathsf B\Sigma^0_2$ over $\mathsf{RCA}_0$.
+
+:::solution
+By :ref{#ex-bsigma-bpi}, we may work with $\mathsf B\Pi^0_1$. Since $f$ is total, $f(x, s) = f(x, t)$ is equivalent to a $\Pi^0_1$ formula, as in :ref{#ex-overspill-limits}.
+
+*$\mathsf B\Pi^0_1$ implies the statement.* The formula $\forall s\ (s < t \vee f(x, s) = f(x, t))$ is $\Pi^0_1$, and every $x < a$ has some $t$ satisfying it. By $\mathsf B\Pi^0_1$ there is $b$ such that every $x < a$ has such a $t < b$. Let $s_0 = b$. For $x < a$ and $s \geq s_0$, both $s$ and $s_0$ are at least $t$, so $f(x, s) = f(x, t) = f(x, s_0)$.
+
+*The statement implies $\mathsf B\Pi^0_1$.* Let $\varphi(x, y) \equiv \forall z\ \theta(x, y, z)$ with $\theta$ bounded, and suppose $\forall x < a\ \exists y\ \varphi(x, y)$. Let $f(x, s)$ be the least $y < s$ such that $\forall z < s\ \theta(x, y, z)$, and $s$ if there is none. Its graph is defined by a bounded formula, so $f$ exists by $\Delta^0_1$ comprehension. Fix $x < a$. By $\mathsf L\Pi^0_1$ (:ref{#prop-least-number}), there is a least $y_0$ with $\varphi(x, y_0)$. Every $y < y_0$ has some $z$ with $\neg \theta(x, y, z)$, and by $\mathsf B\Sigma^0_1$ there is $z_0$ such that every $y < y_0$ has such a $z < z_0$. For $s > \max(y_0, z_0)$, $y_0 < s$ satisfies $\forall z < s\ \theta(x, y_0, z)$, and no $y < y_0$ does, so $f(x, s) = y_0$. Hence $\lim_s f(x, s)$ exists and equals $y_0$. The statement gives $s_0$ with $f(x, s) = f(x, s_0)$ for all $x < a$ and $s \geq s_0$; so $f(x, s_0)$ is the limit $y_0$ for each $x < a$. Since $f(x, s_0) \leq s_0$ by definition, $\forall x < a\ \exists y < s_0 + 1\ \varphi(x, y)$.
+:::
+::::
+
+::::exercise{#ex-fuf difficulty=2 objective="Prove that $\Sigma^0_2$ collection is equivalent to the statement that a finite union of finite sets is finite."}
+A **sequence of finite sets** is a set $F$ whose columns $F_i = \{ x : \langle i, x \rangle \in F \}$ are all bounded. The principle $\mathsf{FUF}$ states: if $F$ is a sequence of finite sets and $F_i = \emptyset$ for every $i \geq m$, for some $m$, then $\bigcup_i F_i = \{ x : \exists i\ \langle i, x \rangle \in F \}$ is bounded. Show that $\mathsf{FUF}$ is equivalent to $\mathsf B\Sigma^0_2$ over $\mathsf{RCA}_0$.
+
+:::solution
+($\mathsf B\Sigma^0_2 \Rightarrow \mathsf{FUF}$) We use $\mathsf B\Pi^0_1$ (:ref{#ex-bsigma-bpi}). Every $i < m$ satisfies $\exists b\ \forall x\ (\langle i, x \rangle \in F \rightarrow x < b)$, and the formula after $\exists b$ is $\Pi^0_1$. By $\mathsf B\Pi^0_1$, there is $c$ such that every $i < m$ has such a $b < c$; then every element of $F_i$, $i < m$, is less than $c$. Since $F_i$ is empty for $i \geq m$, $\bigcup_i F_i$ is bounded by $c$.
+
+($\mathsf{FUF} \Rightarrow \mathsf B\Sigma^0_2$) We prove $\mathsf{RT}^1_{<\infty}$ and apply :ref{#thm-hirst}. Let $f : \nat \to k$, and suppose that it has no infinite homogeneous set. Then every color class $\{ z : f(z) = i \}$ is bounded: otherwise it would exist by $\Delta^0_1$ comprehension and be an infinite homogeneous set. Let $F = \{ \langle i, z \rangle : i < k \wedge f(z) = i \}$, which exists by $\Delta^0_1$ comprehension. Its columns are the color classes for $i < k$ and are empty for $i \geq k$, so $\mathsf{FUF}$ gives a bound $b$ on $\bigcup_i F_i$. But $f(b) = i$ for some $i < k$, so $b \in F_i$: a contradiction.
+
+Adapted from Dzhafarov and Mummert, Proposition 6.5.4.
+:::
+::::
+
+::::exercise{#ex-stcoh difficulty=2 objective="Show that requiring a uniform threshold in the definition of cohesiveness forces $\Sigma^0_2$ collection."}
+A sequence of sets $\vec R = (R_i)$ is coded by a set whose $i$-th column is $R_i$. The **strong cohesiveness principle** $\mathsf{StCOH}$ states: for every sequence $\vec R$ there is an infinite set $S$ such that, for every $z$, there is $w$ with
+$$
+\forall i < z\ \bigl(\forall x > w\ (x \in S \rightarrow x \in R_i) \vee \forall x > w\ (x \in S \rightarrow x \notin R_i)\bigr).
+$$
+It differs from cohesiveness in that one threshold $w$ works for all $i < z$. Show that $\mathsf{RCA}_0 + \mathsf{StCOH}$ proves $\mathsf B\Sigma^0_2$.
+
+:::solution
+We prove $\mathsf{RT}^1_{<\infty}$ and apply :ref{#thm-hirst}. Let $f : \nat \to z$, and let $R_i = \{ x : f(x) = i \}$; the sequence exists by $\Delta^0_1$ comprehension. Let $S$ be given by $\mathsf{StCOH}$, and $w$ the threshold for this $z$. Since $S$ is infinite, it has an element $x_0 > w$; let $i = f(x_0) < z$. Then $x_0 \in S \cap R_i$ and $x_0 > w$, so the second alternative fails for $i$, and the first holds: every $x \in S$ with $x > w$ belongs to $R_i$. The set $\{ x \in S : x > w \}$ exists by $\Delta^0_1$ comprehension, is infinite, and $f$ takes the value $i$ on it: it is homogeneous.
+
+The non-uniform principle $\mathsf{COH}$, where $w$ may depend on $i$, does not imply $\mathsf B\Sigma^0_2$ over $\mathsf{RCA}_0$: it is $\Pi^1_1$-conservative over $\mathsf{RCA}_0$ (Cholak, Jockusch and Slaman; an exercise of the lesson on Harrington's theorem). Adapted from Dzhafarov and Mummert, Proposition 6.5.6, due to Hirschfeldt and Shore.
+:::
+::::
+:::::

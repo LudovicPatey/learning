@@ -82,7 +82,7 @@ If $\mathcal R_i$ does not act after stage $t$, then $x \notin B$, since only $\
 The sets $A$ and $B$ are c.e., and by :ref{#lem-fm-finite-injury} every requirement is satisfied: $\Phi^A_e \neq B$ and $\Phi^B_e \neq A$ for every $e$. So $B \not\leq_T A$ and $A \not\leq_T B$.
 :::
 
-The method is called **finite injury** because each requirement is injured only finitely often; here the number of injuries of $\mathcal R_i$ is even bounded by a computable function of $i$ (see the exercises). In later constructions, a requirement may be injured infinitely often while still being satisfied; these are **infinite injury** arguments.
+The method is called **finite injury** because each requirement is injured only finitely often; here the number of injuries of $\mathcal R_i$ is even bounded by a computable function of $i$ (:ref{#ex-fm-injury-bound}). In later constructions, a requirement may be injured infinitely often while still being satisfied; these are **infinite injury** arguments.
 
 The proof has the structure shared by all finite injury arguments, which the next two lessons follow:
 
@@ -137,7 +137,7 @@ A requirement $\mathcal R_{2e}$ never acts after its last initialization, and $\
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-fm-injury-bound difficulty=1 objective="Bound the number of injuries of a requirement in the Friedberg–Muchnik construction by a computable function."}
 Show that the requirement $\mathcal R_i$ acts at most $2^i$ times and is initialized at most $2^i - 1$ times.
 
 :::solution
@@ -145,7 +145,7 @@ Let $a_i$ and $n_i$ be the numbers of actions and initializations of $\mathcal R
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-fm-independent difficulty=2 objective="Extend the Friedberg–Muchnik construction to infinitely many pairwise incomparable c.e. sets."}
 Show that there is a uniformly c.e. sequence of sets $(A_n)_{n \in \nat}$ such that $A_n \not\leq_T A_m$ for all $n \neq m$.
 
 :::solution
@@ -165,3 +165,61 @@ Muchnik announced the solution of Post's problem in 1956 and Friedberg published
 - M. Mytilinaios, *Finite injury and $\Sigma_1$-induction*, Journal of Symbolic Logic 54 (1989), 38–49.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016.
+
+:::::exercises
+::::exercise{#ex-fm-fresh-needed difficulty=1 objective="See why the witnesses of the Friedberg–Muchnik construction must be fresh."}
+Change the construction so that a requirement without witness receives as witness the least number that is not in $A_s \cup B_s$ and is not the witness of another requirement, instead of a fresh number. Identify the step of the proof of :ref{#lem-fm-preservation} that no longer holds, and describe how $\mathcal R_0$ could then fail to be satisfied.
+
+:::solution
+The proof of :ref{#lem-fm-preservation} uses that every requirement $\mathcal R_j$ with $j > 2e$, initialized at stage $s + 1$, afterwards uses only witnesses greater than $s$, hence greater than the use $u \leq s$ of the computation preserved by $\mathcal R_{2e}$. With the new rule, this fails: the new witness of $\mathcal R_j$ may be smaller than $u$.
+
+A possible run: $\mathcal R_0$ acts at stage $s + 1$ with witness $x$, through a computation $\Phi^{A_s}_0(x)[s] = 0$ whose use $u$ exceeds some number $y \notin A_s$ read by the computation. At the same stage, $\mathcal R_1 : \Phi^B_0 \neq A$ is initialized and may receive $y$ as its new witness, if $y$ is the least number outside $A_s \cup B_s$ that is not a witness. If later $\Phi^{B_t}_0(y)[t]\converge = 0$, then $\mathcal R_1$ requires attention; $\mathcal R_0$ is marked and does not, so $\mathcal R_1$ acts and enumerates $y$ into $A$. Then $A \uh u \neq A_s \uh u$, and the computation $\Phi^A_0(x)$ may diverge or converge to $1$. Since $\mathcal R_1$ has lower priority, $\mathcal R_0$ is not initialized: it stays marked as satisfied and never acts again, although $\Phi^A_0(x) = 1 = B(x)$ is possible. Freshness is what prevents a requirement of lower priority from acting below a use that a requirement of higher priority preserves.
+:::
+::::
+
+::::exercise{#ex-fm-relativized difficulty=1 objective="Relativize the Friedberg–Muchnik theorem and derive incomparable degrees between a degree and its jump." lessons="turing-degrees/turing-jump"}
+Show that for every set $X$ there are sets $A$ and $B$, c.e. in $X$, such that $A \oplus X$ and $B \oplus X$ are Turing incomparable. Deduce that for every degree $\mathbf{x}$ there are incomparable degrees $\abf$ and $\bbf$ with $\mathbf{x} < \abf < \mathbf{x}'$ and $\mathbf{x} < \bbf < \mathbf{x}'$.
+
+:::solution
+Run the construction with the requirements $\Phi^{A \oplus X}_e \neq B$ and $\Phi^{B \oplus X}_e \neq A$, using at stage $s$ the computations $\Phi^{A_s \oplus X}_e(x)[s]$ and $\Phi^{B_s \oplus X}_e(x)[s]$. Their convergence is decidable with oracle $X$, so the construction is $X$-computable and $A$, $B$ are c.e. in $X$. The verification is unchanged. In :ref{#lem-fm-preservation}, a computation converging at stage $s$ reads only cells below $u \leq s$ of $A_s \oplus X$; its $X$-part never changes, and a number $y$ entering $A$ after stage $s$ is fresh, so $y > s$ and the cell $2y$ that codes it lies above $u$. The use principle, which holds for every oracle, gives the preservation, and :ref{#lem-fm-finite-injury} is proved as before. So $B \not\leq_T A \oplus X$ and $A \not\leq_T B \oplus X$; since $B \leq_T B \oplus X$ and $X \leq_T A \oplus X$, this gives $B \oplus X \not\leq_T A \oplus X$, and symmetrically.
+
+Let $X \in \mathbf{x}$, $\abf = \deg_T(A \oplus X)$ and $\bbf = \deg_T(B \oplus X)$, which are incomparable. Both are above $\mathbf{x}$. If $\abf = \mathbf{x}$, then $A \oplus X \leq_T B \oplus X$, which is false; so $\mathbf{x} < \abf$. Every set c.e. in $X$ is computable in $X'$, so $A \oplus X \leq_T X'$. If $X' \leq_T A \oplus X$, then $B \leq_T X' \leq_T A \oplus X$, which is false; so $\abf < \mathbf{x}'$. The same holds for $\bbf$.
+:::
+::::
+
+::::exercise{#ex-fm-simple difficulty=2 objective="Combine the Friedberg–Muchnik requirements with Post's requirements to make both sets simple." lessons="simple-sets"}
+Modify the construction so that, in addition, $A$ and $B$ are simple.
+
+:::solution
+Add, for every $e$, the requirements $\mathcal P^A_e : W_e \text{ infinite} \Rightarrow W_e \cap A \neq \emptyset$ and $\mathcal P^B_e : W_e \text{ infinite} \Rightarrow W_e \cap B \neq \emptyset$, and arrange all requirements in one priority list $\mathcal Q_0, \mathcal Q_1, \dots$, for instance $\mathcal Q_{4e} = \mathcal R_{2e}$, $\mathcal Q_{4e+1} = \mathcal R_{2e+1}$, $\mathcal Q_{4e+2} = \mathcal P^A_e$, $\mathcal Q_{4e+3} = \mathcal P^B_e$. When $\mathcal R_{2e}$ is marked as satisfied, call the use of the computation through which it acted its **restraint on $A$**; similarly, a marked $\mathcal R_{2e+1}$ has a restraint on $B$.
+
+*Construction.* The requirements $\mathcal R_i$ require attention as before. The requirement $\mathcal P^A_e = \mathcal Q_k$ requires attention at stage $s + 1$ if $k \leq s$, $W_e[s] \cap A_s = \emptyset$, and some $x \in W_e[s]$ is greater than the restraint on $A$ of every marked $\mathcal R_j$ of higher priority, and is not the witness of a requirement of higher priority. At stage $s + 1$, the requirement $\mathcal Q_k$ of least index $k \leq s$ that requires attention acts: an $\mathcal R_i$ as before, and $\mathcal P^A_e$ by enumerating the least such $x$ into $A$; in both cases, all requirements of lower priority are initialized. Then fresh witnesses are assigned as before. $\mathcal P^B_e$ is treated symmetrically.
+
+*Preservation.* Suppose $\mathcal R_{2e}$ acts at stage $s + 1$ with use $u \leq s$ and is never initialized afterwards; it stays marked. A number entering $A$ after stage $s$ is either the witness of some $\mathcal R_j$ with $j$ odd, or an element enumerated by some $\mathcal P^A_{e'}$. Requirements of higher priority do not act after stage $s + 1$, since they would initialize $\mathcal R_{2e}$. Requirements $\mathcal R_j$ of lower priority use witnesses chosen fresh after stage $s$, greater than $u$. Requirements $\mathcal P^A_{e'}$ of lower priority enumerate only numbers greater than the restraint $u$ of the marked $\mathcal R_{2e}$. So $A \uh u = A_s \uh u$, and :ref{#lem-fm-preservation} holds.
+
+*Each requirement acts finitely often and is satisfied*, by induction on $k$. Let $s_0 \geq k$ be a stage after which no requirement of higher priority than $\mathcal Q_k$ acts. Then $\mathcal Q_k$ is not initialized after $s_0$.
+
+- A requirement $\mathcal P^A_e$ acts at most once: afterwards $W_e \cap A \neq \emptyset$, and it never requires attention again.
+- If $\mathcal Q_k = \mathcal R_{2e}$, the proof of :ref{#lem-fm-finite-injury} applies, with one more remark: its final witness $x$ could only enter $B$ through $\mathcal R_{2e}$ itself or through some $\mathcal P^B_{e'}$; one of higher priority does not act after $s_0$, and one of lower priority may not enumerate the witness of a requirement of higher priority. So $x \notin B$ as long as $\mathcal R_{2e}$ does not act.
+- If $\mathcal Q_k = \mathcal P^A_e$ and $W_e$ is infinite: after $s_0$, the witnesses of the requirements of higher priority, and the marks and restraints of the $\mathcal R_j$ of higher priority, no longer change, since these change only when a requirement acts or is initialized. Let $M$ bound these restraints and witnesses. Some $x > M$ belongs to $W_e[s]$ for some $s \geq s_0$. If $W_e[s] \cap A_s = \emptyset$, then $\mathcal P^A_e$ requires attention at stage $s + 1$, while no requirement of higher priority does, since it would act; so $\mathcal P^A_e$ acts. In all cases $W_e \cap A \neq \emptyset$.
+
+*Conclusion.* As before, $A \not\leq_T B$ and $B \not\leq_T A$. In particular $A$ is not computable, hence not cofinite, so its complement is infinite; together with the requirements $\mathcal P^A_e$, $A$ is simple. The same holds for $B$. No counting argument is needed here: the coinfiniteness of $A$ follows from its non-computability.
+:::
+::::
+
+::::exercise{#ex-fm-independent-join difficulty=2 objective="Strengthen the independence of a uniformly c.e. sequence: no set is computable in the join of the others."}
+For a sequence $(A_n)$ and a set $F \subseteq \nat$, write $\bigoplus_{m \in F} A_m = \{ \langle m, x \rangle : m \in F, x \in A_m \}$. Show that there is a uniformly c.e. sequence $(A_n)$ such that $A_n \not\leq_T \bigoplus_{m \neq n} A_m$ for every $n$. Deduce that for finite sets $F, G \subseteq \nat$ with $G \not\subseteq F$, we have $\bigoplus_{m \in G} A_m \not\leq_T \bigoplus_{m \in F} A_m$.
+
+:::solution
+Write $\widehat A_n = \bigoplus_{m \neq n} A_m$, with the approximations $\widehat A_{n,s} = \{ \langle m, x \rangle : m \neq n, x \in A_{m,s} \}$. The requirements are $\mathcal R_{\langle e, n \rangle} : \Phi^{\widehat A_n}_e \neq A_n$, ordered by their index. The strategy of $\mathcal R_{\langle e, n \rangle}$ has a witness $x$, fresh when chosen, waits for a stage $s$ with $\Phi^{\widehat A_{n,s}}_e(x)[s]\converge = 0$, then enumerates $x$ into $A_n$, is marked as satisfied, and initializes all requirements of lower priority. The construction is that of the lesson, with these requirements; it is computable, so the relation $x \in A_n$ is c.e. in $(n, x)$.
+
+*Preservation.* Suppose $\mathcal R_{\langle e, n \rangle}$ acts at stage $s + 1$ through a computation with use $u \leq s$, and is never initialized afterwards. A number entering $\widehat A_n$ after stage $s$ has the form $\langle m, y \rangle$, where $m \neq n$ and $y$ is the witness of a requirement $\mathcal R_{\langle e', m \rangle}$ acting after stage $s + 1$. Such a requirement has lower priority, since one of higher priority would initialize $\mathcal R_{\langle e, n \rangle}$; it was initialized at stage $s + 1$, so $y$ was chosen fresh afterwards and $y > s$. Then $\langle m, y \rangle \geq y > s \geq u$, by the properties of the pairing function. So $\widehat A_n \uh u = \widehat A_{n,s} \uh u$, and $\Phi^{\widehat A_n}_e(x) = 0 \neq 1 = A_n(x)$.
+
+*Finite injury.* The proof of :ref{#lem-fm-finite-injury} applies without change: by induction on the index, each requirement is initialized finitely often, has a final witness, acts at most once after its last initialization, and is satisfied either by the preservation above or because its final witness stays out of $A_n$ while $\Phi^{\widehat A_n}_e(x) \neq 0$.
+
+*Deduction.* Let $n \in G \setminus F$. Then $A_n \leq_T \bigoplus_{m \in G} A_m$, through $x \in A_n \iff \langle n, x \rangle \in \bigoplus_{m \in G} A_m$. And $\bigoplus_{m \in F} A_m \leq_T \widehat A_n$, since $n \notin F$: a number belongs to the first set if and only if it has the form $\langle m, x \rangle$ with $m \in F$ and it belongs to $\widehat A_n$, and $F$ is finite. If $\bigoplus_{m \in G} A_m \leq_T \bigoplus_{m \in F} A_m$, then $A_n \leq_T \widehat A_n$, a contradiction.
+
+Adapted from Soare 2016, Exercise 7.3.6 (i). The sets $\bigoplus_{m \in F} A_m$, for finite $F$, thus have pairwise distinct degrees, ordered as the finite sets $F$ under inclusion; this is the starting point of embeddings of partial orders into the c.e. degrees.
+:::
+::::
+:::::

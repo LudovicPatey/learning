@@ -1,7 +1,7 @@
 ---
 title: Limit computability
 summary: Shoenfield's limit lemma; Δ⁰₂ approximations, their moduli and computation functions; domination properties of the sets computable in ∅′.
-duration: 50
+duration: 45
 prerequisites: [turing-jump]
 ---
 
@@ -78,6 +78,22 @@ In the direction ($\Leftarrow$), what is asked of the oracle?
 1. An $X$-c.e. approximation of $Y$ is an $X$-computable $\Delta^0_2$ approximation; apply the relativized limit lemma.
 2. If $\emptyset''$ were c.e., it would be computable in $\emptyset'$ by item 1, contradicting $\emptyset' <_T \emptyset''$.
 :::
+
+::::exercise{#ex-dce-limit difficulty=1 objective="Approximate a difference of c.e. sets with at most two mind changes."}
+A set $A$ is **d.c.e.** if $A = B \setminus C$ for c.e. sets $B$ and $C$. Show that every d.c.e. set has a $\Delta^0_2$ approximation in which each $x$ changes at most twice, and is therefore computable in $\emptyset'$.
+
+:::solution
+Let $(B_s)$ and $(C_s)$ be c.e. approximations, and $A_s = B_s \setminus C_s$. The value $A_s(x)$ starts at $0$, may become $1$ when $x$ enters $B$, and may become $0$ again when $x$ enters $C$; once $x \in C_s$ it stays $0$. So it changes at most twice, and converges to $(B \setminus C)(x)$. Apply :ref{#thm-limit-lemma}.
+:::
+::::
+
+::::exercise{#ex-bounded-changes-use difficulty=2 objective="Turn an approximation with computably bounded mind changes into a computation from $\emptyset'$ with computably bounded use."}
+Let $(A_s)$ be a $\Delta^0_2$ approximation of $A$ such that, for every $x$, the number of $s$ with $A_{s+1}(x) \neq A_s(x)$ is at most $h(x)$, for a computable function $h$. Show that there are an index $e$ and a computable function $b$ such that $\Phi^{\emptyset'}_e = A$ and $\use^{\emptyset'}_e(x) \leq b(x)$ for every $x$.
+
+:::solution
+For each $x$ and $k$, let $q(x, k)$ be an index, computable from $(x, k)$, of the machine which halts on its own index if and only if the approximation of $x$ changes at least $k$ times; then $q(x, k) \in \emptyset'$ if and only if $x$ changes at least $k$ times. To compute $A(x)$, query $\emptyset'$ at the positions $q(x, 1), \dots, q(x, h(x))$, let $k$ be the number of changes found, and run the approximation until $k$ changes of $x$ have been observed; the value reached is $A(x)$. Only the positions $q(x, k)$, $k \leq h(x)$, are queried, so the use is bounded by $b(x) = 1 + \max_{k \leq h(x)} q(x, k)$, up to the cells the oracle head crosses to reach them, which are below this bound.
+:::
+::::
 
 ## Moduli and computation functions
 
@@ -170,32 +186,6 @@ Why does $M(x)$ consider all stages between $x$ and $f(x)$, rather than only the
   $f(x) \geq c(x) \geq x$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-A set $A$ is **d.c.e.** if $A = B \setminus C$ for c.e. sets $B$ and $C$. Show that every d.c.e. set has a $\Delta^0_2$ approximation in which each $x$ changes at most twice, and is therefore computable in $\emptyset'$.
-
-:::solution
-Let $(B_s)$ and $(C_s)$ be c.e. approximations, and $A_s = B_s \setminus C_s$. The value $A_s(x)$ starts at $0$, may become $1$ when $x$ enters $B$, and may become $0$ again when $x$ enters $C$; once $x \in C_s$ it stays $0$. So it changes at most twice, and converges to $(B \setminus C)(x)$. Apply :ref{#thm-limit-lemma}.
-:::
-::::
-
-::::exercise{difficulty=1}
-Let $m$ be the modulus of the approximation $\emptyset'_s = \{ e : \Phi_e(e)[s]\converge \}$. Show that no computable function dominates $m$, and that for every computable $f$ there are infinitely many $x$ with $f(x) < m(x)$.
-
-:::solution
-A computable function dominating $m$ would compute $\emptyset'$ by :ref{#prop-modulus-computes}, so $\emptyset'$ would be computable. If $f(x) \geq m(x)$ for all but finitely many $x$, modify $f$ at these finitely many points to obtain a computable function dominating $m$, which is impossible.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $(A_s)$ be a $\Delta^0_2$ approximation of $A$ such that, for every $x$, the number of $s$ with $A_{s+1}(x) \neq A_s(x)$ is at most $h(x)$, for a computable function $h$. Show that there are an index $e$ and a computable function $b$ such that $\Phi^{\emptyset'}_e = A$ and $\use^{\emptyset'}_e(x) \leq b(x)$ for every $x$.
-
-:::solution
-For each $x$ and $k$, let $q(x, k)$ be an index, computable from $(x, k)$, of the machine which halts on its own index if and only if the approximation of $x$ changes at least $k$ times; then $q(x, k) \in \emptyset'$ if and only if $x$ changes at least $k$ times. To compute $A(x)$, query $\emptyset'$ at the positions $q(x, 1), \dots, q(x, h(x))$, let $k$ be the number of changes found, and run the approximation until $k$ changes of $x$ have been observed; the value reached is $A(x)$. Only the positions $q(x, k)$, $k \leq h(x)$, are queried, so the use is bounded by $b(x) = 1 + \max_{k \leq h(x)} q(x, k)$, up to the cells the oracle head crosses to reach them, which are below this bound.
-:::
-::::
-
 ## Notes and references
 
 The limit lemma is due to Shoenfield (1959), and was also observed by Gold and by Putnam (1965), in connection with learning in the limit and trial-and-error predicates. The theorem on computation functions is due to Miller and Martin (1968); it is Theorem 5.6.6 of Soare (2016), and Proposition "Martin and Miller" of the section on limit computability of Monin and Patey, whose proof is followed here. The name "Martin–Miller theorem" used in earlier versions of this lesson is not standard. Soare defines the computation function with $\mu s > x$ and $A \uh x$ the restriction to the elements $y \leq x$, which makes no difference to the argument. The limit lemma is Lemma 3.6.2 of Soare (2016), Theorem 2.6.1 of Downey and Hirschfeldt (2010) and Lemma 1.4.2 of Nies (2009); moduli are treated in Soare (2016, §3.5). The d.c.e. sets and the hierarchy of $n$-c.e. sets were introduced by Putnam and by Ershov.
@@ -205,3 +195,87 @@ The limit lemma is due to Shoenfield (1959), and was also observed by Gold and b
 - E. M. Gold, *Limiting recursion*, Journal of Symbolic Logic 30 (1965), 28–48.
 - W. Miller and D. A. Martin, *The degrees of hyperimmune sets*, Zeitschrift für mathematische Logik und Grundlagen der Mathematik 14 (1968), 159–166.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §§3.5–3.6 and §5.6.
+
+:::::exercises
+::::exercise{#ex-modulus-not-dominated difficulty=1 objective="Deduce from the properties of the modulus that the settling time of the halting problem escapes every computable function."}
+Let $m$ be the modulus of the approximation $\emptyset'_s = \{ e : \Phi_e(e)[s]\converge \}$. Show that no computable function dominates $m$, and that for every computable $f$ there are infinitely many $x$ with $f(x) < m(x)$.
+
+:::solution
+A computable function dominating $m$ would compute $\emptyset'$ by :ref{#prop-modulus-computes}, so $\emptyset'$ would be computable. If $f(x) \geq m(x)$ for all but finitely many $x$, modify $f$ at these finitely many points to obtain a computable function dominating $m$, which is impossible.
+:::
+::::
+
+::::exercise{#ex-delta2-closure difficulty=1 objective="Manipulate $\Delta^0_2$ approximations to show closure properties of the sets computable in $\emptyset'$."}
+Let $(A_s)$ and $(B_s)$ be $\Delta^0_2$ approximations of $A$ and $B$, and $f$ a total computable function. Give $\Delta^0_2$ approximations of $\nat \setminus A$, $A \cup B$, $A \cap B$, $A \oplus B$ and $f^{-1}(A) = \{ x : f(x) \in A \}$.
+
+:::solution
+Take $\nat \setminus A_s$, $A_s \cup B_s$, $A_s \cap B_s$, $A_s \oplus B_s$ and $f^{-1}(A_s) = \{ x : f(x) \in A_s \}$. Each sequence is uniformly computable, since membership of $x$ in its $s$-th term is computed from finitely many values $A_s(y)$, $B_s(y)$, with $y \in \{ x, f(x), \lfloor x/2 \rfloor \}$. For a fixed $x$, these finitely many values are constant from some stage on, and then equal to the values $A(y)$, $B(y)$; so the $s$-th term agrees with the target set at $x$ for all large $s$. For instance, if $A_s(f(x)) = A(f(x))$ for $s \geq s_0$, then $x \in f^{-1}(A_s) \iff x \in f^{-1}(A)$ for $s \geq s_0$. By :ref{#thm-limit-lemma}, this confirms that the sets computable in $\emptyset'$ are closed under these operations, which can also be checked directly with oracle machines.
+:::
+::::
+
+::::exercise{#ex-limit-lemma-functions difficulty=2 objective="Extend the limit lemma from sets to functions."}
+Show that a total function $f : \nat \to \nat$ is computable in $\emptyset'$ if and only if there is a total computable function $g : \nat^2 \to \nat$ with $f(x) = \lim_s g(x, s)$ for every $x$.
+
+:::solution
+Let $\emptyset'_s = \{ e : \Phi_e(e)[s]\converge \}$.
+
+($\Rightarrow$) Let $f = \Phi^{\emptyset'}_e$, and let $g(x, s) = \Phi^{\emptyset'_s}_e(x)[s]$ if this computation converges, and $g(x, s) = 0$ otherwise. It is computable by :ref{#prop-oracle-stages}. Fix $x$, let $u$ be the use of $\Phi^{\emptyset'}_e(x)$ and $t$ a stage with $\Phi^{\emptyset'}_e(x)[t]\converge$. Only finitely many elements below $u$ enter $\emptyset'$, so there is $s_0$ with $\emptyset'_s \uh u = \emptyset' \uh u$ for $s \geq s_0$. For $s \geq \max(s_0, t, u)$, the computation $\Phi^{\emptyset'}_e(x)[s]$ converges by monotonicity and reads only cells below $u$, where $\emptyset'_s$ and $\emptyset'$ agree; so $\Phi^{\emptyset'_s}_e(x)[s]\converge = f(x)$, and $g(x, s) = f(x)$.
+
+($\Leftarrow$) The relation $C(x, y) \iff \exists s \geq y\ \ g(x, s) \neq g(x, y)$ is c.e., hence computable in $\emptyset'$ (:ref{#prop-ce-below-jump}). With oracle $\emptyset'$, search for the least $y$ with $\neg C(x, y)$, which exists since $g(x, s)$ is eventually constant, and output $g(x, y)$. Since $g(x, s) = g(x, y)$ for all $s \geq y$, this is $\lim_s g(x, s) = f(x)$.
+
+The proof is that of :ref{#thm-limit-lemma}, with values in $\nat$ instead of $\{0, 1\}$. Adapted from Nies 2009, Exercise 1.4.7(i).
+:::
+::::
+
+::::exercise{#ex-bounded-use-changes difficulty=2 objective="Prove the converse of the exercise on bounded mind changes: a computation from $\emptyset'$ with computably bounded use gives an approximation with computably bounded mind changes."}
+Let $A = \Phi^{\emptyset'}_e$ with $\use^{\emptyset'}_e(x) \leq b(x)$ for every $x$, for a computable function $b$. Show that $A$ has a $\Delta^0_2$ approximation $(A_s)$ such that, for every $x$, the number of $s$ with $A_{s+1}(x) \neq A_s(x)$ is at most $b(x) + 1$.
+
+:::solution
+Let $\emptyset'_s = \{ e : \Phi_e(e)[s]\converge \}$, and $\sigma_{x, s} = \emptyset'_s \uh b(x)$, a string of length $b(x)$. Define $A_0(x) = 0$ and
+$$
+A_{s+1}(x) = \begin{cases} v & \text{if } \Phi^{\sigma_{x, s+1}}_e(x)[s+1]\converge = v \text{ with } v \in \{0, 1\},\\ A_s(x) & \text{otherwise.} \end{cases}
+$$
+The sequence is uniformly computable by :ref{#prop-oracle-stages}.
+
+*Mind changes.* The approximation $(\emptyset'_s)$ is increasing, so the string $\sigma_{x, s}$ changes only when an element below $b(x)$ enters, which happens at most $b(x)$ times. The stages therefore split into at most $b(x) + 1$ intervals on which $\sigma_{x, s}$ is a constant string $\sigma$. On such an interval, once $\Phi^\sigma_e(x)[s]\converge = v$ holds, it holds at all later stages of the interval with the same $v$ (monotonicity in $s$), so $A_s(x)$ changes at most once in the interval: when this computation first converges. In total, $x$ changes at most $b(x) + 1$ times.
+
+*Convergence.* From some stage $s_0$ on, $\sigma_{x, s} = \emptyset' \uh b(x)$. The computation $\Phi^{\emptyset'}_e(x)$ has use $u \leq b(x)$, so by :ref{#thm-use-principle} and monotonicity, $\Phi^{\emptyset' \uh b(x)}_e(x)\converge = A(x)$, and $\Phi^{\emptyset' \uh b(x)}_e(x)[s]\converge = A(x)$ for all large $s$. From then on $A_s(x) = A(x)$.
+
+The sets with an approximation of this kind are the **$\omega$-c.e.** sets. With :ref{#ex-bounded-changes-use}, the exercise shows that they are exactly the sets computable from $\emptyset'$ with a computably bounded use (Soare 2016, Theorem 3.8.8; Downey and Hirschfeldt 2010, Corollary 2.6.2).
+:::
+::::
+
+::::exercise{#ex-modulus-not-in-set difficulty=2 objective="See that the modulus of a $\Delta^0_2$ approximation need not be computable in the set approximated."}
+Give a $\Delta^0_2$ approximation of the empty set whose modulus computes $\emptyset'$. Compare with item 2 of :ref{#prop-modulus-computes}.
+
+:::solution
+For $e \in \emptyset'$, let $s_e$ be the least $s$ with $\Phi_e(e)[s]\converge$. Let $A_s = \{ e : s = s_e \}$; that is, $e \in A_s$ if and only if $\Phi_e(e)[s]\converge$ and, for $s \geq 1$, not $\Phi_e(e)[s-1]\converge$ (for $s = 0$ no computation has converged, since convergence at stage $s$ requires $e < s$). This sequence is uniformly computable. Each $e$ belongs to $A_s$ for at most one $s$, so $\lim_s A_s(e) = 0$, and $(A_s)$ is a $\Delta^0_2$ approximation of $\emptyset$.
+
+Let $m$ be its modulus. If $e \in \emptyset'$, the bit $e$ equals $1$ at stage $s_e$ and $0$ at stage $s_e + 1$, so the bits below $e + 1$ change after every stage $s < s_e + 1$: hence $m(e + 1) > s_e$. Therefore $e \in \emptyset'$ if and only if $\Phi_e(e)[m(e + 1)]\converge$: if $e \in \emptyset'$, the computation converges at stage $s_e < m(e+1)$, hence at stage $m(e+1)$ by monotonicity; the converse is clear. So $\emptyset' \leq_T m$, while the set approximated is computable. For a c.e. approximation this cannot happen, since then $m \leq_T A$.
+:::
+::::
+
+::::exercise{#ex-co-dce difficulty=1 objective="Diagonalize against all differences of c.e. sets to show that the class of d.c.e. sets is not closed under complement."}
+Show that there is a set $A$ whose complement is d.c.e. but which is not d.c.e. Deduce that $A$ is computable in $\emptyset'$ and has an approximation in which each $x$ changes at most twice, starting from the value $1$.
+
+:::solution
+Write $e = \langle a, b \rangle$, and let $B = \{ \langle a, b \rangle : \langle a, b \rangle \in W_a \}$ and $C = \{ \langle a, b \rangle : \langle a, b \rangle \in W_b \}$. Both are c.e., so $D = B \setminus C$ is d.c.e. Let $A = \nat \setminus D$. If $A = W_a \setminus W_b$ for some $a$ and $b$, let $e = \langle a, b \rangle$. Then
+$$
+e \in A \iff e \in W_a \setminus W_b \iff e \in B \setminus C = D \iff e \notin A,
+$$
+a contradiction. So $A$ is not d.c.e.
+
+By :ref{#ex-dce-limit}, $D$ has an approximation $(D_s)$ in which each $x$ starts at $0$ and changes at most twice. Then $A_s = \nat \setminus D_s$ is an approximation of $A$ which starts at $1$ and changes at most twice, and $A$ is computable in $\emptyset'$. This is the first step of the **Ershov hierarchy** of $n$-c.e. sets (Soare 2016, Exercise 3.8.16, gives the general step: an $(n+1)$-c.e. set that is not $n$-c.e.).
+:::
+::::
+
+::::exercise{#ex-ce-computation-function difficulty=1 objective="Compare the modulus and the computation function of a c.e. approximation."}
+Let $(A_s)$ be a c.e. approximation of $A$, with modulus $m$ and computation function $c$. Show that $c(x) = \max(x, m(x))$ for every $x$, and that $A$, $m$ and $c$ are Turing equivalent.
+
+:::solution
+As in the proof of :ref{#prop-modulus-computes}, for a c.e. approximation, $A_s \uh x = A \uh x$ implies $A_t \uh x = A \uh x$ for every $t \geq s$: the elements of $A$ below $x$ are already in $A_s$, elements never leave, and no other element enters, since $A_t \subseteq A$. Conversely, if $A_s \uh x \neq A \uh x$, a change below $x$ occurs after stage $s$. So the stages $s$ with $A_s \uh x = A \uh x$ form the final segment $[m(x), \infty)$, and the least such $s \geq x$ is $\max(x, m(x))$.
+
+By :ref{#prop-modulus-computes}, $A \equiv_T m$; $c$ is computed from $m$ by the formula above. Conversely, $m$ is computed from $c$: if $c(x) > x$, then $m(x) = c(x)$; if $c(x) = x$, then $m(x) \leq x$, the string $A_x \uh x$ is correct, and $m(x)$ is the least $s \leq x$ with $A_s \uh x = A_x \uh x$, which is computed from the approximation. So $A \equiv_T m \equiv_T c$, in agreement with :ref{#thm-computation-function}.
+:::
+::::
+:::::

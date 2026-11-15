@@ -109,7 +109,7 @@ course without a link (the course does not exist yet; add a `:ref{to=...}` once 
   Kurtz's theorem and `thm-generic-jumps` (Downey–Hirschfeldt, Corollary 2.24.20), which
   works at every level. Before 2026-11-12 the text used "no 1-generic set has c.e.
   degree (Jockusch)" for n = 1 and admitted the general case without reference. The
-  c.e.-degree fact is now derived in the second exercise of `n-genericity`.
+  c.e.-degree fact is now derived in `ex-2-generic-not-high` (`n-genericity`).
 - **Posner–Robinson in the full form** Z ≥ A ⊕ ∅′ (Downey–Hirschfeldt 2.16.2, 2.24.4):
   it contains both previous corollaries (Z = A ⊕ ∅′; A = ∅′ gives jump inversion).
 - **Proof of Demuth–Kučera by the fixed point theorem** (Monin–Patey), rather than
@@ -230,7 +230,63 @@ Checked (web search and the introduction of the papers):
   `cohen-genericity/one-genericity` as a lesson prerequisite (decision for the
   coordinator, REVIEW-2026-11).
 
-## 11. History
+## 11. Exercises (2026-11-13)
+
+Every exercise has a label, an objective, a difficulty and a solution. Existing labels kept
+(`exr-density-meager`); the eleven unlabeled exercises received labels; no existing solution
+needed a correction. Durations recomputed without the further exercises: baire-category and
+one-genericity come out at 52 minutes and are set to the 45-minute maximum; posner-robinson
+stays at 40, the others at 45.
+
+**Featured exercises** (in the text, after the material they practice):
+
+- baire-category: `ex-closed-meager` (uses the Baire category theorem in a characterization),
+  `exr-density-meager` (cited by the text for the comparison of measure and category).
+- weak-genericity: `ex-weak-generic-principal` (the escape argument of Kurtz's theorem on the
+  principal function; the "Higher levels" section cites its relativization).
+- one-genericity: `ex-generic-halves`, `ex-left-ce-not-generic` (the meet-or-avoid argument
+  on two typical c.e. sets of strings; the second is cited by n-genericity).
+- posner-robinson: `ex-low-generic-join` (cupping a Δ⁰₂ set to 0′ with a low 1-generic set,
+  the original Posner–Robinson setting), `ex-2-generic-join` (limit of the method; cited in
+  the notes).
+- n-genericity: `ex-2-generic-not-high` (Σ⁰₂ sets of strings at work; derives Jockusch–Posner).
+
+**Further exercises** (block at the end of each lesson):
+
+- baire-category: computable sets and the cone of ∅′ are meager (moved); classification of
+  four classes (meager / co-meager / neither); Banach–Mazur game for meager classes (the
+  direction not admitted in the aside); effective Baire category (∅′ for uniformly Δ⁰₂ dense
+  sets, ∅″ when density is unknown); sufficiently generic sets meet a dense set infinitely often.
+- weak-genericity: complements (moved); relativized escape of the principal function (cited by
+  the text); bi-immunity; dense Π⁰ₙ sets suffice (and computable sets for 1-genericity);
+  weak genericity is not degree-invariant (G ⊕ complement); the weakly 1-generic sets form a
+  null class.
+- one-genericity: 1-generic sets are not computable (moved); forcing on four examples; the
+  converse of forcing the jump in detail; W ∪ W^⊥ need not be c.e. (supports a claim of the
+  text); a direct proof that no 1-generic computes a separating set; a low 1-generic set
+  avoiding the cone of a given Δ⁰₂ set (e-splittings below ∅′); van Lambalgen's theorem for
+  1-genericity, one direction (difficulty 3).
+- posner-robinson: joins with ∅′ (moved); the construction fails for c.e. A on an explicit
+  W₀; which reductions fail between A, G, ∅′; two incomparable jump inversions; relativized
+  Posner–Robinson.
+- n-genericity: GLₙ (moved); n-generic sets are neither Σ⁰ₙ nor Π⁰ₙ; n-generic sets avoid
+  nowhere dense classes defined from Σ⁰ₙ sets of strings (DNC₂); 2-generic sets form a minimal
+  pair with ∅′; n-genericity does not control the (n+1)-th jump (via relativized jump
+  inversion, admitted).
+
+**Sources.** Soare 2016, Exercises 6.3.5 (i) (bi-immunity), 6.3.7 (low set avoiding a
+cone), 6.4.7 (incomparable jump inversions), 14.1.8 (effective Baire), Theorem 6.3.2
+(converse of forcing the jump); Downey–Hirschfeldt 2010, remark after Definition 2.24.10
+(dense Π⁰ₙ sets, credited to Jockusch), Theorem 2.24.12 (relativized escape), Corollary
+2.24.6 (no PA degree below a 1-generic), Theorem 8.20.1 (Yu, van Lambalgen for genericity);
+Monin–Patey, chapter *Cohen forcing* (1-generic not computable, left-c.e. sets). The other
+exercises are standard consequences of the lessons. Checked against other courses to avoid
+duplicates: complements and the even half of 1-generic sets, dense set examples
+(`turing-degrees/finite-extensions`), hyperimmune degrees through infinitely-often agreement
+(`immunity-growth/immune-sets`), Cohen forcing and non-highness via forcing
+(`effective-forcing/cohen-forcing`).
+
+## 12. History
 
 - **2026-11-12** — Design and pedagogical revision. Course prerequisite
   `immunity-growth` added (hyperimmune functions, DNC functions, computably dominated
@@ -247,3 +303,7 @@ Checked (web search and the introduction of the papers):
   Posner–Robinson. References checked against Downey–Hirschfeldt, Soare, Monin–Patey;
   unsupported claims removed (Jockusch "1-generic degrees are never c.e." is now
   derived and credited to Jockusch–Posner via Soare). Durations recomputed.
+- **2026-11-13** — Featured and further exercises. Labels, objectives and difficulties for
+  every exercise; featured exercises placed in the text; 23 new further exercises (see §11);
+  text references to "the second exercise" replaced by `:ref` to labels (weak-genericity,
+  posner-robinson); durations of baire-category and one-genericity set to 45.

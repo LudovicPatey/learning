@@ -134,7 +134,7 @@ Why does the conclusion of case 2 not hold for every member of the extension?
 
 ## Exercises
 
-::::exercise{difficulty=2}
+::::exercise{#ex-cohen-jump-hyperimmunity difficulty=2 objective="Combine the lifted question of Cohen forcing with a compactness property to preserve a function hyperimmune relative to $\emptyset'$."}
 Let $f$ be hyperimmune relative to $\emptyset'$. Using the lifted question of Cohen forcing, show that $f$ is hyperimmune relative to $G'$ for every sufficiently Cohen generic set $G$.
 
 :::solution
@@ -146,6 +146,63 @@ Let $E_e$ be the set of strings forcing $\Phi^{G'}_e(m)\diverge$ for some $m$, o
 
 ## Notes and references
 
-The discussion of the forcing relation for $\Pi^0_2$ sentences, the forcing question of Cohen forcing at level $2$, the abstract theorem and the exercise follow the section *Forcing and density* of the chapter *Jump cone avoidance* of Patey's monograph. The lifted question is stated there for each example separately, and is isolated here as :ref{#def-lifted-question}; :ref{#thm-local-jump-cone} is stated here in the local form of :ref{#thm-local-cone-avoidance}, as needed for cohesiveness and for the pigeonhole principle.
+The discussion of the forcing relation for $\Pi^0_2$ sentences, the forcing question of Cohen forcing at level $2$, the abstract theorem and :ref{#ex-cohen-jump-hyperimmunity} follow the section *Forcing and density* of the chapter *Jump cone avoidance* of Patey's monograph. The lifted question is stated there for each example separately, and is isolated here as :ref{#def-lifted-question}; :ref{#thm-local-jump-cone} is stated here in the local form of :ref{#thm-local-cone-avoidance}, as needed for cohesiveness and for the pigeonhole principle.
 
 - L. Patey, *Lowness and avoidance*, monograph, chapter *Jump cone avoidance*, section *Forcing and density*.
+
+:::::exercises
+::::exercise[Two sentences for Cohen forcing]{#ex-lifted-cohen-examples difficulty=1 objective="Compute the lifted question of Cohen forcing on two $\Sigma^0_2$ sentences, and read off the extensions given by its two properties."}
+For Cohen forcing, with the question at level $1$ "$\sigma \mathrel{?{\vdash}} \theta$ if some $\tau \succeq \sigma$ satisfies $\theta$" (:ref{#ex-cohen-question}), compute the lifted question at every string $\sigma$ for the sentences
+$$
+\begin{gathered}
+\varphi_1 = \exists y\ \forall z \geq y\ (z \notin G), \\
+\varphi_2 = \exists y\ \big[\, y \geq 1 \wedge \forall z\ (y \leq z < 2y \rightarrow z \notin G) \,\big],
+\end{gathered}
+$$
+"$G$ is finite" and "$G$ misses some interval $[y, 2y)$". Give in each case the extension or the forced sentence provided by :ref{#lem-lifted-question}, and say which sentence holds for every sufficiently generic set.
+
+:::solution
+*First sentence.* Here $\psi(m)$ is $\forall z \geq m\ (z \notin G)$ and $\neg\psi(m)$ is $\exists z \geq m\ (z \in G)$. Every string $\tau$ has an extension with a $1$ at a position at least $m$, which satisfies $\neg\psi(m)$; so $\tau \mathrel{?{\vdash}} \neg\psi(m)$ for all $\tau$ and $m$, and the lifted question answers no at every $\sigma$. By property 2, every string forces $\forall y\ \neg\psi(y)$, "$G$ is infinite", as in :ref{#ex-forcing-relation}.
+
+*Second sentence.* Here $\neg\psi(m)$ says $m = 0$ or $G$ has an element in $[m, 2m)$. A string $\tau$ has no extension satisfying it if and only if $m \geq 1$, $|\tau| \geq 2m$ and $\tau(z) = 0$ for $m \leq z < 2m$: if $|\tau| < 2m$, the position $\max(m, |\tau|)$ lies in $[m, 2m)$ and can be set to $1$. Given $\sigma$, take $m = |\sigma| + 1$ and $\tau = \sigma 0^{2m - |\sigma|}$: then $\tau \succeq \sigma$ and $\tau \mathrel{?{\nvdash}} \neg\psi(m)$, so the lifted question answers yes at every $\sigma$. Property 1 gives the extension $\tau$, all of whose members miss $[m, 2m)$.
+
+So every sufficiently generic set is infinite and satisfies $\varphi_2$; it does not satisfy $\varphi_1$.
+:::
+::::
+
+::::exercise[The lifted question asks for an extension that forces]{#ex-lifted-extension difficulty=2 objective="Characterize the lifted question through the forcing relation, and see that it does not depend on the question chosen at level $1$."}
+Let $\mathbb P$ be a notion of forcing with a forcing question for $\Sigma^0_1$ sentences, and $\varphi = \exists y\ \psi(y)$ a $\Sigma^0_2$ sentence. Show that $c \mathrel{?{\vdash}} \varphi$, for the lifted question, if and only if some $d \leq c$ forces $\varphi$ in the sense of :ref{#def-forcing-relation}. Deduce that two forcing questions for $\Sigma^0_1$ sentences have the same lifted question.
+
+:::solution
+If $c \mathrel{?{\vdash}} \varphi$, item 1 of :ref{#lem-lifted-question} gives an extension forcing $\varphi$.
+
+Conversely, let $d \leq c$ force $\varphi$. By the existential clause of :ref{#def-forcing-relation}, $d$ forces $\psi(m)$ for some $m$: every member of $d$ satisfies the $\Pi^0_1$ sentence $\psi(m)$. Suppose $d \mathrel{?{\vdash}} \neg\psi(m)$. Property 1 at level $1$ gives $e \leq d$ all of whose members satisfy $\neg\psi(m)$. The members of $e$ are members of $d$ (:ref{#def-forcing-notion}), and $e$ has a member, since its class of members is non-empty; this member satisfies $\psi(m)$ and $\neg\psi(m)$, which is impossible. So $d \mathrel{?{\nvdash}} \neg\psi(m)$, and $d$ and $m$ witness $c \mathrel{?{\vdash}} \varphi$.
+
+The characterization does not mention the question at level $1$, so all forcing questions for $\Sigma^0_1$ sentences have the same lifted question. What the choice at level $1$ changes is the way the lifted question is written, hence the upper bound on its complexity that can be read off. For Jockusch–Soare forcing, an extension of $\mathcal P$ forces $\psi(m)$ if and only if the $\Pi^0_1$ class $\mathcal P \cap \{ X : X \text{ satisfies } \psi(m) \}$ is non-empty, since this class is then such an extension, and every extension forcing $\psi(m)$ is contained in it. So the lifted question, $\Sigma^0_3$ as written in :ref{#ex-lifted-questions}, item 3, holds if and only if some member of $\mathcal P$ satisfies some $\psi(m)$, which is the $\Sigma^0_2$ answer of :ref{#prop-tree-sigma2}.
+:::
+::::
+
+::::exercise[Preservation of non-Σ⁰₂ definitions]{#ex-non-sigma2-local difficulty=2 objective="Adapt the abstract jump cone avoidance theorem to sets that are not $\Sigma^0_2$, with a two-case argument."}
+Let $\mathbb P$ be a notion of forcing with a $\Sigma^0_1(\mathcal M)$-preserving forcing question for $\Sigma^0_2$ sentences (:ref{#def-jump-question-local}), and let $C$ be a set that is not $\Sigma^0_1(X)$ for any $X \in \mathcal M$. Show that for every sufficiently generic set $G$, $C$ is not $\Sigma^0_2(G)$. What does this give for Cohen forcing?
+
+:::solution
+By Post's theorem relativized, the $\Sigma^0_2(G)$ sets are the sets $W^{G'}_e = \{ x : \Phi^{G'}_e(x)\converge \}$, and there are $\Sigma^0_2$ formulas $\varphi_e(x)$, with codes computable from $e$, such that $x \in W^{G'}_e$ if and only if $\varphi_e(x)$ holds of $G$. For each $e$, let $E_e$ be the set of conditions that force $\varphi_e(x)$ for some $x \notin C$, or force $\neg\varphi_e(x)$ for some $x \in C$.
+
+$E_e$ is dense. Let $c$ be a condition and $X \in \mathcal M$ as in :ref{#def-jump-question-local}. The set $U = \{ x : c \mathrel{?{\vdash}} \varphi_e(x) \}$ is $\Sigma^0_1(X)$, so $U \neq C$. If $x \in U \setminus C$, property 1 gives an extension forcing $\varphi_e(x)$. If $x \in C \setminus U$, property 2 gives an extension forcing $\neg\varphi_e(x)$, a $\Pi^0_2$ sentence. There is no third case: the hypothesis on $C$ excludes $U = C$ directly.
+
+A $2$-generic filter meeting every $E_e$ gives, by :ref{#thm-forcing-truth}, a set $G$ with $W^{G'}_e \neq C$ for every $e$. For Cohen forcing and $\mathcal M = \{ \emptyset' \}$ (:ref{#ex-lifted-questions}, item 1): if $C$ is not $\Sigma^0_2$, it is not $\Sigma^0_2(G)$ for any sufficiently generic $G$.
+:::
+::::
+
+::::exercise[Indices of reservoirs]{#ex-mathias-index-complexity difficulty=1 objective="Show that the quantifier over extensions in the lifted question of computable Mathias forcing ranges over a $\Pi^0_2$-complete set of indices."}
+Present a computable Mathias reservoir by an index $e$ such that $\Phi_e$ is the characteristic function of an infinite set. Show that the set $\mathrm{Res}$ of such indices is $\Pi^0_2$ and that every $\Pi^0_2$ set is many-one reducible to it, using that $\mathrm{Inf} = \{ e : W_e \text{ is infinite} \}$ is $\Pi^0_2$-complete.
+
+:::solution
+$e \in \mathrm{Res}$ if and only if for every $n$, $\Phi_e(n)$ converges with a value in $\{0, 1\}$, and for every $n$ there is $m > n$ with $\Phi_e(m) = 1$. Both clauses are $\forall\exists$ with a computable matrix, so $\mathrm{Res}$ is $\Pi^0_2$.
+
+Let $g$ be a computable function such that $\Phi_{g(e)}(s) = 1$ if $W_{e, s+1} \neq W_{e, s}$ and $\Phi_{g(e)}(s) = 0$ otherwise. The function $\Phi_{g(e)}$ is total and $\{0, 1\}$-valued for every $e$. If $W_e$ is infinite, new elements appear at infinitely many stages, so $\Phi_{g(e)}$ takes the value $1$ infinitely often; if $W_e$ is finite, only finitely many stages add an element. So $e \in \mathrm{Inf}$ if and only if $g(e) \in \mathrm{Res}$, and every $\Pi^0_2$ set, many-one reducible to $\mathrm{Inf}$, is many-one reducible to $\mathrm{Res}$.
+
+The quantifier over extensions of the lifted question therefore ranges over a set of indices that is not $\Sigma^0_2$; this is the source of the third quantifier in the expression of :ref{#ex-lifted-questions}, item 2. That no other way of writing the question removes it is :ref{#cor-mathias-no-sigma2}.
+:::
+::::
+:::::

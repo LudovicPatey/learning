@@ -71,9 +71,7 @@ Otherwise every Turing ideal satisfying $\mathsf{EM}$ would satisfy $\mathsf{ADS
 
 So Ramsey's theorem for pairs splits into a part about transitivity and a part about orders. The first has the compactness of $\mathsf{RT}^2_2$: $\mathsf{EM}$ implies the Ramsey-type weak König lemma, by a theorem of Bienvenu, Patey and Shafer, and of Flood and Towsner, which we admit. The second has none: $\mathsf{ADS}$ follows from $\mathsf{CAC}$ (:ref{to="separation-design/ascending-descending"}), which does not even imply $\mathsf{DNC}$, as :ref{to="separation-design/separating-instances"} shows.
 
-## Exercises
-
-::::exercise{#exr-rt22-two-among-three difficulty=2}
+::::exercise{#exr-rt22-two-among-three difficulty=2 objective="Measure how many of several hyperimmunities Ramsey's theorem for pairs can preserve, with a partition into three parts and Lachlan's disjunction."}
 Say that a problem $\mathsf P$ admits **preservation of $\ell$ among $k$ hyperimmunities** if for every set $Z$, all $Z$-hyperimmune functions $h_0, \dots, h_{k-1}$ and every instance $X \leq_T Z$, there are a solution $Y$ and a set $F \subseteq \{ 0, \dots, k - 1 \}$ with $\ell$ elements such that $h_j$ is $(Z \oplus Y)$-hyperimmune for every $j \in F$.
 
 1. Show that $\mathsf{RT}^2_3$ does not admit preservation of $3$ among $3$ hyperimmunities.
@@ -98,3 +96,37 @@ The separation of $\mathsf{EM}$ from $\mathsf{RT}^2_2$ through preservation of h
 - S. Flood and H. Towsner, *Separating principles below WKL₀*, Mathematical Logic Quarterly 62 (2016), 507–529.
 - L. Patey, *The reverse mathematics of Ramsey-type theorems*, PhD thesis, Université Paris Diderot, 2016.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2015, Section 9.2.2.
+
+:::::exercises
+::::exercise{#ex-em-wkl-not-srt22 difficulty=2 objective="Separate stable Ramsey's theorem for pairs from the conjunction of the Erdős–Moser theorem and weak König's lemma." lessons="erdos-moser-hyperimmunities"}
+Show that there is an ω-model of $\mathsf{RCA}_0 + \mathsf{EM} + \mathsf{WKL}$ that is not a model of $\mathsf{SRT}^2_2$.
+
+:::solution
+Let $h_0, h_1$ and $f$ be as in :ref{#prop-sd-rt22-two}, and $\mathcal W$ the class of sets $W$ such that $h_0$ and $h_1$ are $W$-hyperimmune; $\emptyset \in \mathcal W$. By :ref{#ex-em-product}, applied to the sequence $h_0, h_1, h_1, \dots$, the problem $\mathsf{EM} \times \mathsf{WKL}$ preserves $\mathcal W$. By :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W$ satisfying $\mathsf{EM} \times \mathsf{WKL}$. It satisfies $\mathsf{EM}$ and $\mathsf{WKL}$: for a tournament $T$ and an infinite binary tree $S$ in $\mathcal I$, the instance $T \oplus S$ has a solution $Y_0 \oplus Y_1 \in \mathcal I$, and $Y_0$, a transitive set for $T$, and $Y_1$, a path through $S$, belong to $\mathcal I$, which is closed under $\leq_T$. The computable stable coloring $f$ belongs to $\mathcal I$; an infinite homogeneous set $H$ for $f$ in $\mathcal I$ would satisfy $H \in \mathcal W$, which :ref{#prop-sd-rt22-two} excludes. So $\mathcal I$ is not a model of $\mathsf{SRT}^2_2$.
+:::
+::::
+
+::::exercise{#ex-em-bihyperimmune difficulty=1 objective="Compare the Erdős–Moser theorem and stable Ramsey's theorem for pairs on the instance built from a bi-hyperimmune set."}
+Let $A$ be as in :ref{#lem-sd-bihyperimmune}, $f$ the stable coloring of the proof of :ref{#prop-sd-rt22-two}, and $T$ the tournament with $T(x, y)$ if and only if $f(\{ x, y \}) = 1$, for $x < y$. Show that $T$ is computable and has an infinite transitive set $G$ such that $A$ and $\overline A$ are hyperimmune relative to $G$, while no infinite set $H$ homogeneous for $f$ has this property.
+
+:::solution
+$T$ is computable since $f$ is. The sets $A$ and $\overline A$ are infinite and hyperimmune, so $p_A$ and $p_{\overline A}$ are hyperimmune (:ref{#thm-hyperimmune-principal}). By :ref{#thm-sd-em-hyperimmunities} with $Z = \emptyset$, there is an infinite transitive set $G$ such that $p_A$ and $p_{\overline A}$ are $G$-hyperimmune, so $A$ and $\overline A$ are hyperimmune relative to $G$, by :ref{#thm-hyperimmune-principal} relativized. If $H$ is infinite and homogeneous for $f$, then $H \subseteq A$ or $H \subseteq \overline A$, as in the proof of :ref{#prop-sd-rt22-two}; in the first case $p_H$ is computable in $H$ and dominates $p_A$, so $A$ is not hyperimmune relative to $H$, and symmetrically in the second case. In particular $G$ meets both $A$ and $\overline A$ infinitely often: otherwise a cofinite subset of $G$, computable in $G$, would be contained in one of them, and the same argument would apply.
+:::
+::::
+
+::::exercise{#ex-rt12-strong-two difficulty=1 objective="Show that the pigeonhole principle for arbitrary instances does not preserve two hyperimmunities."}
+Let $\mathsf{RT}^1_2$ be the problem whose instances are the sets $A \subseteq \nat$ and whose solutions are the infinite subsets of $A$ or of $\overline A$. Show that there are hyperimmune functions $h_0, h_1$ and an instance $A$, not computable, such that every solution $H$ makes $h_0$ or $h_1$ fail to be $H$-hyperimmune. Explain how the proof of :ref{#prop-sd-rt22-two} turns this non-computable instance into a computable instance of $\mathsf{SRT}^2_2$.
+
+:::solution
+Let $A$ be as in :ref{#lem-sd-bihyperimmune}, $h_1 = p_A$ and $h_0 = p_{\overline A}$, hyperimmune by :ref{#thm-hyperimmune-principal}. If $H \subseteq A$ is infinite, then $p_H(n) \geq p_A(n)$ for every $n$ and $p_H \leq_T H$, so $h_1$ is not $H$-hyperimmune; if $H \subseteq \overline A$, the same holds for $h_0$. The set $A$ is not computable, since it is hyperimmune. In :ref{#prop-sd-rt22-two}, $A$ is $\Delta^0_2$, and the coloring $f(\{ x, y \}) = A_y(x)$ is computable and has $A$ as its limit; stability makes every infinite homogeneous set a solution to the instance $A$ of $\mathsf{RT}^1_2$.
+:::
+::::
+
+::::exercise{#ex-sads-not-em difficulty=2 objective="Strengthen the separation of the ascending–descending principle from $\mathsf{EM}$ to stable linear orders."}
+A linear order on $\nat$ is **stable** if every element has finitely many predecessors or finitely many successors, and $\mathsf{SADS}$ is the restriction of $\mathsf{ADS}$ to stable linear orders. Show that $\mathsf{SADS} \not\leq_\omega \mathsf{EM}$.
+
+:::solution
+Let $h_0, h_1$, $A$ and $f$ be as in :ref{#prop-sd-rt22-two}, and $\mathcal W$ as in the proof of :ref{#cor-sd-em-not-srt22}. By :ref{#thm-sd-em-hyperimmunities} and :ref{#lem-preservation-ideal}, there is a Turing ideal $\mathcal I \subseteq \mathcal W$ satisfying $\mathsf{EM}$; it contains $f$. Let $T$ be the tournament of the proof of :ref{#prop-sd-rt22-em-ads}, $H \in \mathcal I$ an infinite transitive set, $h$ its increasing enumeration and $\mathcal L$ the linear order with $m <_{\mathcal L} n$ if and only if $T(h(m), h(n))$; it belongs to $\mathcal I$. It is stable: if $h(m) \in A$, then $f(\{ h(m), y \}) = 1$ for almost every $y$, so $T(h(m), h(n))$ and $m <_{\mathcal L} n$ for almost every $n$, and $m$ has finitely many predecessors; if $h(m) \notin A$, $m$ has finitely many successors in the same way. If $\mathcal I$ satisfied $\mathsf{SADS}$, $\mathcal L$ would have an ascending or descending sequence $S \in \mathcal I$, and $h[S] \in \mathcal I$ would be homogeneous for $f$, as in the proof of :ref{#prop-sd-rt22-em-ads}. But $\mathcal I \subseteq \mathcal W$ and :ref{#prop-sd-rt22-two} exclude this. Hirschfeldt (*Slicing the Truth*, remark after Theorem 9.31) notes that the argument of Exercise 9.30 shows that $\mathsf{SRT}^2_2$ follows from $\mathsf{EM} + \mathsf{SADS}$; this is the semantic form of that remark.
+:::
+::::
+:::::

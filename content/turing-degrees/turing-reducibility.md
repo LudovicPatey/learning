@@ -143,17 +143,7 @@ A c.e. set is many-one reducible to $\emptyset'$ (:ref{#thm-halting-complete}), 
 
 So the c.e. degrees, that is, the degrees of c.e. sets, all lie between $\obf$ and $\deg_T(\emptyset')$, written $\obf'$. Whether there are c.e. degrees strictly between $\obf$ and $\obf'$ is Post's problem, solved by the priority method in a later course.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that if $X \leq_T Y$ and $A \leq_T B$, then $X \oplus A \leq_T Y \oplus B$.
-
-:::solution
-$X \leq_T Y \leq_T Y \oplus B$ and $A \leq_T B \leq_T Y \oplus B$, so $Y \oplus B$ is an upper bound of $X$ and $A$, hence computes $X \oplus A$ by :ref{#prop-join-lub}.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-turing-iff-join-ce difficulty=1 objective="Characterize Turing reducibility by the relative enumerability of a set together with its complement."}
 Show that $X \leq_T Y$ if and only if $X \oplus (\nat \setminus X)$ is $Y$-c.e.
 
 :::solution
@@ -161,7 +151,7 @@ If $X \leq_T Y$, then $X$ and its complement are $Y$-computable, so their join i
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-principal-function-degree difficulty=2 objective="Compare an infinite set with its principal function used as a function oracle."}
 Let $X$ be infinite. Show that $X$ is Turing equivalent to its principal function $p_X$, used as an oracle, and to the set $\{ \langle n, p_X(n) \rangle : n \in \nat \}$.
 
 :::solution
@@ -179,3 +169,49 @@ Turing reducibility was defined by Post (1944) from Turing's oracle machines, an
 - M. Lerman, *Degrees of Unsolvability*, Springer, 1983.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §3.4 and §6.5.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, §1.2.
+
+:::::exercises
+::::exercise{#ex-join-monotone difficulty=1 objective="Check that the join is monotone for Turing reducibility."}
+Show that if $X \leq_T Y$ and $A \leq_T B$, then $X \oplus A \leq_T Y \oplus B$.
+
+:::solution
+$X \leq_T Y \leq_T Y \oplus B$ and $A \leq_T B \leq_T Y \oplus B$, so $Y \oplus B$ is an upper bound of $X$ and $A$, hence computes $X \oplus A$ by :ref{#prop-join-lub}.
+:::
+::::
+
+::::exercise{#ex-degree-neither-ce difficulty=1 objective="Combine the join with relative enumerability to find, in every non-zero degree, a set that is neither c.e. nor co-c.e."}
+Show that every Turing degree $\dbf \neq \obf$ contains a set that is neither c.e. nor co-c.e.
+
+:::solution
+Let $X \in \dbf$, and $Z = X \oplus (\nat \setminus X)$. Then $Z \equiv_T X$: $X(n) = Z(2n)$, and $Z$ is computed from $X$ by reading $X(n)$ and flipping it on the odd positions. So $Z \in \dbf$. If $Z$ were c.e., that is, $\emptyset$-c.e., then $X \leq_T \emptyset$ by :ref{#ex-turing-iff-join-ce}, contradicting $\dbf \neq \obf$. The complement of $Z$ is $\{ 2n : n \notin X \} \cup \{ 2n + 1 : n \in X \} = (\nat \setminus X) \oplus X$; if it were c.e., the same exercise applied to the set $\nat \setminus X$, whose complement is $X$, would make $\nat \setminus X$ computable, hence $X$ computable. So $Z$ is neither c.e. nor co-c.e.
+:::
+::::
+
+::::exercise{#ex-strict-upper-bound difficulty=1 objective="Combine the coding of a sequence with the diagonal argument to bound a sequence of degrees strictly."}
+Show that for every sequence $(\dbf_n)_{n \in \nat}$ of degrees there is a degree $\abf$ with $\dbf_n < \abf$ for every $n$.
+
+:::solution
+Choose $X_n \in \dbf_n$ and let $Y = \bigoplus_n X_n$ (:ref{#def-join}). Each $X_n$ is computable from $Y$, by $X_n(m) = Y(\langle n, m \rangle)$. By item 3 of :ref{#prop-degree-countable}, applied to the constant sequence $Y, Y, \dots$, there is $Z$ with $Z \not\leq_T Y$. Let $\abf = \deg_T(Y \oplus Z)$. Then $X_n \leq_T Y \leq_T Y \oplus Z$, so $\dbf_n \leq \abf$. If $Y \oplus Z \leq_T X_n$ for some $n$, then $Z \leq_T Y \oplus Z \leq_T X_n \leq_T Y$, a contradiction. So $\dbf_n < \abf$ for every $n$. In particular there is no maximal degree.
+:::
+::::
+
+::::exercise{#ex-degrees-above difficulty=2 objective="Use a counting argument to show that every degree has uncountably many degrees above it."}
+Show that for every set $X$, the set of degrees $\dbf \geq \deg_T(X)$ is uncountable.
+
+:::solution
+Suppose that the degrees above $\deg_T(X)$ form a countable set. It is non-empty, since it contains $\deg_T(X)$, so it can be listed as $\dbf_0, \dbf_1, \dots$, with repetitions if needed. Choose $Y_n \in \dbf_n$. By item 3 of :ref{#prop-degree-countable}, there is $Z$ with $Z \not\leq_T Y_n$ for every $n$. But $X \leq_T X \oplus Z$, so $\deg_T(X \oplus Z) = \dbf_n$ for some $n$, and $Z \leq_T X \oplus Z \equiv_T Y_n$, a contradiction. As in the lesson, the choice of the representatives uses countable choice.
+:::
+::::
+
+::::exercise{#ex-coding-not-invariant difficulty=1 objective="See that the coding of a sequence of sets is not an operation on degrees, unless it is applied uniformly."}
+1. Give sequences of sets $(A_n)$ and $(B_n)$ with $A_n \equiv_T B_n$ for every $n$, but $\bigoplus_n A_n \not\equiv_T \bigoplus_n B_n$.
+2. Show that if $C$ is a set and $f$ a computable function with $A_n = \Phi^C_{f(n)}$ for every $n$, then $\bigoplus_n A_n \leq_T C$.
+
+:::solution
+1. Let $A_n = \emptyset$ for every $n$, and $B_n = \{ 0 \}$ if $n \in \emptyset'$, $B_n = \emptyset$ otherwise. Each $B_n$ is finite, hence computable, so $A_n \equiv_T B_n$. But $\bigoplus_n A_n = \emptyset$, while $\bigoplus_n B_n = \{ \langle n, 0 \rangle : n \in \emptyset' \}$ computes $\emptyset'$, by $n \in \emptyset' \iff \langle n, 0 \rangle \in \bigoplus_n B_n$, and is therefore not computable. The reductions $B_n \leq_T A_n$ exist for each $n$, but their indices depend on $n$ in a non-computable way.
+2. On input $z = \langle n, m \rangle$, with oracle $C$, compute $f(n)$ and then $\Phi^C_{f(n)}(m)$ with the relativized universal function (:ref{#thm-relativized-universal}). This computes $\bigoplus_n A_n$ from $C$.
+
+Adapted from Soare 2016, Exercise 3.4.7.
+:::
+::::
+:::::

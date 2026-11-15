@@ -139,15 +139,7 @@ Where is the Kraft inequality for $K$ used?
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Let $Z$ be Martin-Löf random and $f$ a strictly increasing computable function. Show that the sequence $Y = Z(f(0))\, Z(f(1))\, Z(f(2)) \cdots$ is random.
-
-:::solution
-For a string $\sigma$, the class of $X$ with $X(f(i)) = \sigma(i)$ for $i < |\sigma|$ is a clopen class $[\sigma]_f$ of measure $2^{-|\sigma|}$, computable from $\sigma$. If $Y$ is captured by $(\mathcal U_n)$, write $\mathcal U_n = [W_n]^{\prec}$ with $W_n$ c.e. prefix-free (:ref{#lem-prefix-free-generator}), and let $\mathcal V_n = \bigcup_{\sigma \in W_n} [\sigma]_f$. The classes $[\sigma]_f$, $\sigma \in W_n$, are pairwise disjoint since the strings are incomparable, so $\lambda(\mathcal V_n) = \lambda(\mathcal U_n) \leq 2^{-n}$. The sequence $(\mathcal V_n)$ is uniformly $\Sigma^0_1$, and it captures $Z$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-runs-k difficulty=2 objective="Combine a Solovay test with the approximation of $K$ from above and the Kraft inequality."}
 Let $Z$ be Martin-Löf random. Show that for almost every $n$, the bits $Z(n), \dots, Z(n + K(n) - 1)$ are not all $0$.
 
 :::hint
@@ -159,7 +151,7 @@ Let $\mathcal S_n$ be the class of sequences $X$ with $X(n + i) = 0$ for every $
 :::
 ::::
 
-::::exercise{difficulty=2}
+::::exercise{#ex-rettinger difficulty=2 objective="Use a Solovay test made of intervals to constrain the computable approximations of a random real."}
 Identify a sequence $X$ with the real $0.X = \sum_i X(i) 2^{-i-1}$. Let $Z$ be random, and suppose that there is a computable sequence of rationals $(r_t)$ converging to $\alpha = 0.Z$ with $\sum_t |r_{t+1} - r_t| < \infty$. Show that $\alpha$ is left-c.e. or right-c.e.
 
 :::solution
@@ -169,7 +161,7 @@ For rationals $a < b$, the class of $X$ with $a < 0.X < b$ is a $\Sigma^0_1$ cla
 
 ## Notes and references
 
-The characterization of randomness by incompressibility was found independently by Levin (1973), with monotone complexity, and Schnorr (1973), with process complexity. The form with prefix-free complexity is credited to Schnorr and was published by Chaitin (1975), who defined randomness by the condition $K(Z \uh n) \geq n - c$ (Downey–Hirschfeldt, Definition 6.1.1 and Theorem 6.2.3; Nies, Theorem 3.2.9). :ref{#cor-k-excess} is due to Chaitin (1987); the ample excess lemma is due to Miller and Yu (2008) (Downey–Hirschfeldt, Theorem 6.6.1 and Corollary 6.6.2; Nies, Proposition 3.2.21 for the corollary). The randomness of $\Omega$ is Downey–Hirschfeldt, Theorem 6.1.3, and Nies, Theorem 3.2.11. The last exercise is due to Rettinger (unpublished; Downey–Hirschfeldt, Theorem 9.2.4; Nies, Proposition 3.2.32), and the second one is a variant of Nies, Proposition 3.2.20.
+The characterization of randomness by incompressibility was found independently by Levin (1973), with monotone complexity, and Schnorr (1973), with process complexity. The form with prefix-free complexity is credited to Schnorr and was published by Chaitin (1975), who defined randomness by the condition $K(Z \uh n) \geq n - c$ (Downey–Hirschfeldt, Definition 6.1.1 and Theorem 6.2.3; Nies, Theorem 3.2.9). :ref{#cor-k-excess} is due to Chaitin (1987); the ample excess lemma is due to Miller and Yu (2008) (Downey–Hirschfeldt, Theorem 6.6.1 and Corollary 6.6.2; Nies, Proposition 3.2.21 for the corollary). The randomness of $\Omega$ is Downey–Hirschfeldt, Theorem 6.1.3, and Nies, Theorem 3.2.11. :ref{#ex-rettinger} is due to Rettinger (unpublished; Downey–Hirschfeldt, Theorem 9.2.4; Nies, Proposition 3.2.32), and :ref{#ex-runs-k} is a variant of Nies, Proposition 3.2.20.
 
 A third characterization of Martin-Löf randomness, by betting strategies, is due to Schnorr (1971): a sequence is random if and only if no c.e. martingale wins an unbounded capital on it (Downey–Hirschfeldt, Theorem 6.3.4). It is proved in the next course of the track, on martingales (:ref{#thm-schnorr-martingales}).
 
@@ -183,3 +175,59 @@ A third characterization of Martin-Löf randomness, by betting strategies, is du
 - A. Kučera and T. A. Slaman, *Randomness and recursive enumerability*, SIAM Journal on Computing 31 (2001), 199–211.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 6.1–6.3, 6.6 and 9.2.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 3.2.
+
+:::::exercises
+::::exercise{#ex-subsequence-random difficulty=1 objective="Pull back a Martin-Löf test along a computable selection of positions."}
+Let $Z$ be Martin-Löf random and $f$ a strictly increasing computable function. Show that the sequence $Y = Z(f(0))\, Z(f(1))\, Z(f(2)) \cdots$ is random.
+
+:::solution
+For a string $\sigma$, the class of $X$ with $X(f(i)) = \sigma(i)$ for $i < |\sigma|$ is a clopen class $[\sigma]_f$ of measure $2^{-|\sigma|}$, computable from $\sigma$. If $Y$ is captured by $(\mathcal U_n)$, write $\mathcal U_n = [W_n]^{\prec}$ with $W_n$ c.e. prefix-free (:ref{#lem-prefix-free-generator}), and let $\mathcal V_n = \bigcup_{\sigma \in W_n} [\sigma]_f$. The classes $[\sigma]_f$, $\sigma \in W_n$, are pairwise disjoint since the strings are incomparable, so $\lambda(\mathcal V_n) = \lambda(\mathcal U_n) \leq 2^{-n}$. The sequence $(\mathcal V_n)$ is uniformly $\Sigma^0_1$, and it captures $Z$.
+:::
+::::
+
+::::exercise{#ex-tails-k difficulty=1 objective="Use the Levin–Schnorr theorem to transfer randomness through simple computable transformations of prefixes." lessons="martin-lof-tests"}
+Let $Z$ be a sequence, $\sigma$ a string, and $Y = Z(1) Z(2) \cdots$ the tail of $Z$. Show that there is a constant $c$ such that $K(Z \uh n) \leq K((\sigma Z) \uh (n + |\sigma|)) + c$ and $K(Z \uh (n+1)) \leq K(Y \uh n) + c$ for every $n$. Deduce :ref{#ex-tails} from :ref{#thm-levin-schnorr}.
+
+:::solution
+Let $M$ be the machine that, on input $\alpha$, computes $\rho = U(\alpha)$ and, if $|\rho| \geq |\sigma|$, outputs $\rho$ without its first $|\sigma|$ bits. Its domain is contained in that of $U$, so it is prefix-free. Since $(\sigma Z) \uh (n + |\sigma|) = \sigma\, (Z \uh n)$, a shortest description of this string is an $M$-description of $Z \uh n$, which gives the first inequality. Likewise, the machine $\alpha \mapsto Z(0)\, U(\alpha)$, where the bit $Z(0)$ is fixed in its program, is prefix-free and gives the second.
+
+If $Z$ is random, let $d$ be such that $K(Z \uh n) \geq n - d$ for every $n$. For $m \geq |\sigma|$, $K((\sigma Z) \uh m) \geq K(Z \uh (m - |\sigma|)) - c \geq m - |\sigma| - d - c$; the finitely many $m < |\sigma|$ change only the constant, so $\sigma Z$ is random. For the tail, $K(Y \uh n) \geq K(Z \uh (n+1)) - c \geq n + 1 - d - c$, so $Y$ is random.
+:::
+::::
+
+::::exercise{#ex-ls-lengths difficulty=2 objective="Adapt the proof of the Levin–Schnorr theorem so that the compressible prefixes are found at prescribed lengths."}
+Let $A$ be an infinite computable set. Show that a sequence $Z$ is Martin-Löf random if and only if there is a constant $c$ with $K(Z \uh n) \geq n - c$ for every $n \in A$.
+
+:::solution
+($\Rightarrow$) This follows from :ref{#thm-levin-schnorr}.
+
+($\Leftarrow$) Suppose that $Z$ is captured by a Martin-Löf test $(\mathcal U_n)$, and let $W_n$ be c.e. prefix-free sets, uniformly in $n$, with $\mathcal U_n = [W_n]^{\prec}$ (:ref{#lem-prefix-free-generator}). For a string $\sigma$, let $a(\sigma)$ be the least element of $A$ that is at least $|\sigma|$, and let $W'_n$ be the set of the strings $\tau \succeq \sigma$ of length $a(\sigma)$, for $\sigma \in W_n$. The sets $W'_n$ are c.e., uniformly in $n$, and $[W'_n]^{\prec} = \mathcal U_n$. They are prefix-free: if $\tau \preceq \tau'$ are in $W'_n$, extending $\sigma, \sigma' \in W_n$, then $\sigma$ and $\sigma'$ are both prefixes of $\tau'$, hence comparable, hence equal, and then $|\tau| = |\tau'| = a(\sigma)$, so $\tau = \tau'$. Hence $\sum_{\tau \in W'_n} 2^{-|\tau|} = \lambda(\mathcal U_n) \leq 2^{-n}$, and every element of $W'_n$ has length at least $n$, as in the proof of :ref{#thm-levin-schnorr}.
+
+The rest of that proof applies to the sets $W'_n$: the requests $(\tau, |\tau| - c)$ for $c \geq 1$ and $\tau \in W'_{2c}$ have weight at most $\sum_{c \geq 1} 2^c \lambda(\mathcal U_{2c}) \leq 1$, so there is $d$ with $K(\tau) \leq |\tau| - c + d$ for these strings. Since $Z \in \mathcal U_{2c}$, $Z$ has a prefix $\sigma \in W_{2c}$, hence the prefix $Z \uh a(\sigma) \in W'_{2c}$, of length $a(\sigma) \in A$, with $K(Z \uh a(\sigma)) \leq a(\sigma) - c + d$. As $c$ is arbitrary, no constant works on $A$.
+:::
+::::
+
+::::exercise{#ex-excess-density difficulty=2 objective="Extract a density statement from the ample excess lemma."}
+Let $Z$ be Martin-Löf random, and let $A$ be the set of $n \geq 1$ with $K(Z \uh n) < n + \log n$. Show that $A$ has density $0$: $|A \cap [1, N]|/N$ tends to $0$. Deduce that $K(Z \uh n) \geq n + \log n$ for infinitely many $n$.
+
+:::solution
+As noted after :ref{#cor-k-excess}, each $n \in A$ contributes more than $1/n$ to the convergent series of :ref{#thm-ample-excess}, so $\sum_{n \in A} 1/n < \infty$. For $j \in \nat$, let $a_j = |A \cap [2^j, 2^{j+1})|$ and $t_j = \sum_{n \in A \cap [2^j, 2^{j+1})} 1/n$. Each term of $t_j$ exceeds $2^{-j-1}$, so $a_j \leq 2^{j+1} t_j$, and $t_j$ tends to $0$ since $\sum_j t_j < \infty$.
+
+Let $\delta > 0$, and let $J$ be such that $t_j \leq \delta$ for $j \geq J$. For $N \geq 2^J$, let $L$ be such that $2^L \leq N < 2^{L+1}$. Then
+$$
+|A \cap [1, N]| \leq 2^J + \sum_{J \leq j \leq L} 2^{j+1} \delta \leq 2^J + 2^{L+2} \delta \leq 2^J + 4N\delta,
+$$
+so $|A \cap [1, N]|/N \leq 2^J/N + 4\delta$, which is less than $5\delta$ for $N$ large. As $\delta$ is arbitrary, $A$ has density $0$. In particular $A$ is not cofinite, so $K(Z \uh n) \geq n + \log n$ for infinitely many $n$.
+:::
+::::
+
+::::exercise{#ex-deficiency-class difficulty=1 objective="Describe the components of the explicit universal test through $\Pi^0_1$ classes, and find a random sequence computable in $\emptyset'$ with an explicit constant."}
+For $c \in \nat$, let $\mathcal Q_c = \{ Z : K(Z \uh n) \geq n - c \text{ for every } n \}$. Show that $\mathcal Q_c$ is a $\Pi^0_1$ class of measure at least $1 - 2^{-c}$, and that MLR $= \bigcup_c \mathcal Q_c$. Deduce that there is a random sequence $Z \leq_T \emptyset'$ with $K(Z \uh n) \geq n - 1$ for every $n$.
+
+:::solution
+A sequence is outside $\mathcal Q_c$ if and only if it has a prefix $\sigma$ with $K(\sigma) < |\sigma| - c$, that is, if it belongs to the class $\mathcal V_c$ of :ref{#cor-explicit-universal}. So $\mathcal Q_c = \cs \setminus \mathcal V_c$ is a $\Pi^0_1$ class, as the complement of a $\Sigma^0_1$ class, and $\lambda(\mathcal Q_c) \geq 1 - 2^{-c}$ since $\lambda(\mathcal V_c) \leq 2^{-c}$. By :ref{#thm-levin-schnorr}, a sequence is random if and only if it belongs to some $\mathcal Q_c$.
+
+The class $\mathcal Q_1$ has measure at least $\frac12$, so it is non-empty, and its leftmost member $Z$ is computable in $\emptyset'$ (:ref{#prop-leftmost-path}). It is random and satisfies $K(Z \uh n) \geq n - 1$ for every $n$.
+:::
+::::
+:::::

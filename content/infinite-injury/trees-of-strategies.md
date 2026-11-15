@@ -69,6 +69,22 @@ The $\mathcal N$-nodes have two outcomes, the other nodes only the outcome $\mat
 <svg class="fig" viewBox="0 0 590 250" width="590" role="img" aria-label="The first levels of the tree of strategies of the minimal pair construction: each N node has two outcomes, infinite on the left and finite on the right; the other nodes have one outcome"><line x1="250" y1="41" x2="130" y2="73" class="accent-stroke" stroke-width="2.4"/><text x="178" y="59" class="mrm" font-size="14">∞</text><line x1="250" y1="41" x2="370" y2="73" class="muted-stroke" stroke-width="1.3"/><text x="318" y="59" class="math" font-size="14">f</text><line x1="130" y1="87" x2="130" y2="119" class="accent-stroke" stroke-width="2.4"/><line x1="370" y1="87" x2="370" y2="119" class="muted-stroke" stroke-width="1.3"/><line x1="130" y1="133" x2="130" y2="165" class="accent-stroke" stroke-width="2.4"/><line x1="370" y1="133" x2="370" y2="165" class="muted-stroke" stroke-width="1.3"/><line x1="130" y1="179" x2="70" y2="211" class="accent-stroke" stroke-width="2.4"/><text x="88" y="197" class="mrm" font-size="14">∞</text><line x1="130" y1="179" x2="190" y2="211" class="muted-stroke" stroke-width="1.3"/><text x="168" y="197" class="math" font-size="14">f</text><line x1="370" y1="179" x2="310" y2="211" class="muted-stroke" stroke-width="1.3"/><text x="328" y="197" class="mrm" font-size="14">∞</text><line x1="370" y1="179" x2="430" y2="211" class="muted-stroke" stroke-width="1.3"/><text x="408" y="197" class="math" font-size="14">f</text><circle cx="250" cy="34" r="6" class="accent-fill"/><circle cx="130" cy="80" r="6" class="accent-fill"/><circle cx="370" cy="80" r="6" class="node"/><circle cx="130" cy="126" r="6" class="accent-fill"/><circle cx="370" cy="126" r="6" class="node"/><circle cx="130" cy="172" r="6" class="accent-fill"/><circle cx="370" cy="172" r="6" class="node"/><circle cx="70" cy="218" r="6" class="accent-fill"/><circle cx="190" cy="218" r="6" class="node"/><circle cx="310" cy="218" r="6" class="node"/><circle cx="430" cy="218" r="6" class="node"/><line x1="70" y1="226" x2="70" y2="244" class="muted-stroke" stroke-width="1.3" stroke-dasharray="2 3"/><line x1="190" y1="226" x2="190" y2="244" class="muted-stroke" stroke-width="1.3" stroke-dasharray="2 3"/><line x1="310" y1="226" x2="310" y2="244" class="muted-stroke" stroke-width="1.3" stroke-dasharray="2 3"/><line x1="430" y1="226" x2="430" y2="244" class="muted-stroke" stroke-width="1.3" stroke-dasharray="2 3"/><text x="520" y="39" class="math" font-size="16">N<tspan class="mrm" font-size="10" dy="4">0</tspan></text><line x1="470" y1="34" x2="505" y2="34" class="axis" stroke-dasharray="2 4"/><text x="520" y="85" class="math" font-size="16">R<tspan class="mrm" font-size="10" dy="4">0</tspan></text><line x1="470" y1="80" x2="505" y2="80" class="axis" stroke-dasharray="2 4"/><text x="520" y="131" class="math" font-size="16">S<tspan class="mrm" font-size="10" dy="4">0</tspan></text><line x1="470" y1="126" x2="505" y2="126" class="axis" stroke-dasharray="2 4"/><text x="520" y="177" class="math" font-size="16">N<tspan class="mrm" font-size="10" dy="4">1</tspan></text><line x1="470" y1="172" x2="505" y2="172" class="axis" stroke-dasharray="2 4"/><text x="520" y="223" class="math" font-size="16">R<tspan class="mrm" font-size="10" dy="4">1</tspan></text><line x1="470" y1="218" x2="505" y2="218" class="axis" stroke-dasharray="2 4"/></svg>
 :::
 
+::::exercise{#ex-tree-priority-linear difficulty=1 objective="Check that the priority order on the tree is linear, and find the nodes with infinitely many nodes of higher priority."}
+Show that the priority order of :ref{#def-strategy-tree} is a strict linear order on $\mathbb T$. Show that a node $\beta$ has infinitely many nodes of higher priority if $\beta(n) = \mathrm f$ for some multiple $n$ of $3$ with $n < |\beta|$, and only its proper prefixes otherwise.
+
+:::solution
+Write $\alpha \lhd \beta$ when $\alpha$ has higher priority than $\beta$. No node is a proper prefix of itself or to the left of itself, so $\lhd$ is irreflexive. If $\alpha \neq \beta$ and neither is a prefix of the other, let $n$ be the first position where they differ; since $\Lambda$ has two elements, one of them has the value $\infty$ at $n$ and is to the left of the other. So any two distinct nodes are comparable.
+
+Transitivity: let $\alpha \lhd \beta \lhd \gamma$.
+- If $\alpha \prec \beta \prec \gamma$, then $\alpha \prec \gamma$.
+- If $\alpha \prec \beta$ and $\beta <_L \gamma$, with first difference at $n$: if $|\alpha| \leq n$, then $\alpha \preceq \beta \uh n = \gamma \uh n$, and $\alpha \prec \gamma$ since $|\alpha| \leq n < |\gamma|$; otherwise $\alpha \uh n = \gamma \uh n$ and $\alpha(n) = \beta(n) = \infty \neq \gamma(n)$, so $\alpha <_L \gamma$.
+- If $\alpha <_L \beta$, with first difference at $n$, and $\beta \prec \gamma$, then $\gamma \uh (n + 1) = \beta \uh (n + 1)$, so $\alpha <_L \gamma$.
+- If $\alpha <_L \beta$ at $n$ and $\beta <_L \gamma$ at $m$, then $n \neq m$, since $\beta(n) = \mathrm f$ and $\beta(m) = \infty$. If $n < m$, then $\alpha \uh n = \gamma \uh n$, $\alpha(n) = \infty$ and $\gamma(n) = \beta(n) = \mathrm f$. If $m < n$, then $\alpha \uh m = \gamma \uh m$, $\alpha(m) = \beta(m) = \infty$ and $\gamma(m) = \mathrm f$. In both cases $\alpha <_L \gamma$.
+
+If $\beta(n) = \mathrm f$ with $n$ a multiple of $3$, every node extending $(\beta \uh n)^\frown \infty$ is to the left of $\beta$, and there are infinitely many. Otherwise, a node $\alpha <_L \beta$ would need a position $n$ with $\alpha(n) = \infty$ and $\beta(n) = \mathrm f$; such an $n$ is a multiple of $3$, since the other positions have the value $\mathrm f$ in every node, and there is none. So the nodes of higher priority are the proper prefixes of $\beta$.
+:::
+::::
+
 ## The construction
 
 Each node carries some data, which **initializing** the node resets.
@@ -90,24 +106,6 @@ A node $\alpha$ is **visited at stage $s$**, and $s$ is an **$\alpha$-stage**, i
 
 In the Friedberg–Muchnik construction, an action initializes every requirement of lower priority. Here, initialization is triggered by the current path, not by actions: a node is initialized when the construction moves to its left. The initialization rule replaces the explicit restraints of finite injury arguments. A node to the right of the current path has made a guess that the current stage refutes, at least for now: it loses its follower, and the next follower it receives is fresh, hence larger than every use of a computation examined so far.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the priority order of :ref{#def-strategy-tree} is a strict linear order on $\mathbb T$. Show that a node $\beta$ has infinitely many nodes of higher priority if $\beta(n) = \mathrm f$ for some multiple $n$ of $3$ with $n < |\beta|$, and only its proper prefixes otherwise.
-
-:::solution
-Write $\alpha \lhd \beta$ when $\alpha$ has higher priority than $\beta$. No node is a proper prefix of itself or to the left of itself, so $\lhd$ is irreflexive. If $\alpha \neq \beta$ and neither is a prefix of the other, let $n$ be the first position where they differ; since $\Lambda$ has two elements, one of them has the value $\infty$ at $n$ and is to the left of the other. So any two distinct nodes are comparable.
-
-Transitivity: let $\alpha \lhd \beta \lhd \gamma$.
-- If $\alpha \prec \beta \prec \gamma$, then $\alpha \prec \gamma$.
-- If $\alpha \prec \beta$ and $\beta <_L \gamma$, with first difference at $n$: if $|\alpha| \leq n$, then $\alpha \preceq \beta \uh n = \gamma \uh n$, and $\alpha \prec \gamma$ since $|\alpha| \leq n < |\gamma|$; otherwise $\alpha \uh n = \gamma \uh n$ and $\alpha(n) = \beta(n) = \infty \neq \gamma(n)$, so $\alpha <_L \gamma$.
-- If $\alpha <_L \beta$, with first difference at $n$, and $\beta \prec \gamma$, then $\gamma \uh (n + 1) = \beta \uh (n + 1)$, so $\alpha <_L \gamma$.
-- If $\alpha <_L \beta$ at $n$ and $\beta <_L \gamma$ at $m$, then $n \neq m$, since $\beta(n) = \mathrm f$ and $\beta(m) = \infty$. If $n < m$, then $\alpha \uh n = \gamma \uh n$, $\alpha(n) = \infty$ and $\gamma(n) = \beta(n) = \mathrm f$. If $m < n$, then $\alpha \uh m = \gamma \uh m$, $\alpha(m) = \beta(m) = \infty$ and $\gamma(m) = \mathrm f$. In both cases $\alpha <_L \gamma$.
-
-If $\beta(n) = \mathrm f$ with $n$ a multiple of $3$, every node extending $(\beta \uh n)^\frown \infty$ is to the left of $\beta$, and there are infinitely many. Otherwise, a node $\alpha <_L \beta$ would need a position $n$ with $\alpha(n) = \infty$ and $\beta(n) = \mathrm f$; such an $n$ is a multiple of $3$, since the other positions have the value $\mathrm f$ in every node, and there is none. So the nodes of higher priority are the proper prefixes of $\beta$.
-:::
-::::
-
 ## Notes and references
 
 Infinite injury arguments were introduced in the 1960s by Sacks, Shoenfield and Yates, without trees. According to Lempp and Lerman, the tree of strategies was introduced by Lachlan (1975), in a $\mathbf 0'''$-argument, developed by Harrington, and popularized by Soare's book. Lempp and Lerman also describe Harrington's classification of priority arguments by the oracle needed to determine how each requirement is satisfied: finite injury arguments are $\mathbf 0'$-arguments, the infinite injury arguments of this course are $\mathbf 0''$-arguments, since the true path is computable in $\emptyset''$, and so on. Downey and Hirschfeldt (§2.14.1) present trees of strategies first on the Friedberg–Muchnik construction, as in the remark of the section on the tree method, and discuss the coherence problem between two $\mathcal N$-requirements in §2.14.2.
@@ -120,3 +118,59 @@ Other presentations exist. Montalbán's true stages replace the guesses along a 
 - S. Lempp and M. Lerman, *A general framework for priority arguments*, Bulletin of Symbolic Logic 1 (1995), 189–201.
 - A. Montalbán, *Priority arguments via true stages*, Journal of Symbolic Logic 79 (2014), 1315–1335.
 - A. Day, N. Greenberg, M. Harrison-Trainor and D. Turetsky, *Iterated priority arguments in descriptive set theory*, Bulletin of Symbolic Logic 30 (2024), 199–226.
+
+:::::exercises
+::::exercise{#ex-tree-levels difficulty=1 objective="Count the nodes of a level of the tree of strategies and list the first levels in priority order."}
+Show that $\mathbb T$ has $2^{\lceil n/3 \rceil}$ nodes of length $n$. List the nodes of length at most $4$ in the priority order of :ref{#def-strategy-tree}, writing $\infty\mathrm{ff}$ for the string $\langle \infty, \mathrm f, \mathrm f \rangle$, and say for which requirement each length works.
+
+:::solution
+A node of length $n$ is determined by its values at the positions $m < n$ that are multiples of $3$, each of which may be $\infty$ or $\mathrm f$, the other values being $\mathrm f$. These positions are $0, 3, \dots$, and there are $\lceil n/3 \rceil$ of them (none if $n = 0$). So there are $2^{\lceil n/3 \rceil}$ nodes of length $n$.
+
+The nodes of length at most $4$ are, in priority order,
+$$
+\varepsilon,\ \infty,\ \infty\mathrm f,\ \infty\mathrm{ff},\ \infty\mathrm{ff}\infty,\ \infty\mathrm{fff},\ \mathrm f,\ \mathrm{ff},\ \mathrm{fff},\ \mathrm{fff}\infty,\ \mathrm{ffff}.
+$$
+Indeed, a node precedes its proper extensions, and every node extending $\infty$ precedes every node extending $\mathrm f$; within the nodes extending $\infty\mathrm{ff}$, the node $\infty\mathrm{ff}$ comes first, then those extending $\infty\mathrm{ff}\infty$, then those extending $\infty\mathrm{ff}\mathrm f$, and similarly below $\mathrm{fff}$. The order is that of a depth-first traversal that explores the outcome $\infty$ before the outcome $\mathrm f$. The root and the nodes of length $3$ work for $\mathcal N_0$ and $\mathcal N_1$, the nodes of length $1$ and $4$ for $\mathcal R_0$ and $\mathcal R_1$, and those of length $2$ for $\mathcal S_0$.
+:::
+::::
+
+::::exercise{#ex-tree-nested-stages difficulty=1 objective="Check from the construction that the stages at which a node is visited are nested along the tree."}
+Let $\alpha$ and $\beta$ be nodes.
+
+1. Show that if $\alpha \prec \beta$, every $\beta$-stage is an $\alpha$-stage.
+2. Suppose that $\alpha$ is an $\mathcal N$-node. Show that if $\alpha^\frown \infty \preceq \beta$, every $\beta$-stage is $\alpha$-expansionary, and that if $\alpha^\frown \mathrm f \preceq \beta$, no $\beta$-stage is $\alpha$-expansionary.
+3. Deduce that if $\beta$ is an $\mathcal N$-node with $\alpha^\frown \infty \preceq \beta$, every $\beta$-expansionary stage is $\alpha$-expansionary.
+
+:::solution
+1. If $s$ is a $\beta$-stage, then $\alpha \prec \beta \prec \sigma_s$, so $s$ is an $\alpha$-stage.
+2. Let $s$ be a $\beta$-stage. Then $\alpha \prec \sigma_s$, so $\alpha$ is visited at stage $s$. An $\mathcal N$-node does not act, so the next node visited is $\alpha^\frown o$, where $o$ is the outcome of $\alpha$ at stage $s$; hence $\sigma_s(|\alpha|) = o$. Since $\beta \prec \sigma_s$, also $\sigma_s(|\alpha|) = \beta(|\alpha|)$. If $\beta(|\alpha|) = \infty$, the outcome is $\infty$, and $s$ is $\alpha$-expansionary; if $\beta(|\alpha|) = \mathrm f$, the outcome is $\mathrm f$, and $s$ is not.
+3. A $\beta$-expansionary stage is a stage at which $\beta$ is visited with outcome $\infty$; it is a stage $s$ with $\beta^\frown \infty \preceq \sigma_s$, hence a $\beta$-stage, at which $\alpha$ is visited, since $\alpha \prec \beta$. By item 2, it is $\alpha$-expansionary.
+
+Item 3 is the coherence discussed in the lesson: the strategy for $\mathcal N_{e'}$ guessing the outcome $\infty$ for $\mathcal N_e$ only finds expansionary stages among those of $\mathcal N_e$.
+:::
+::::
+
+::::exercise{#ex-tree-finite-data difficulty=1 objective="Check that the construction on the tree handles only finitely many data at each stage."}
+Show that at the end of each stage $s$, every node that has a follower, a mark or a defined record has length less than $s$, and is not to the right of $\sigma_s$. Deduce that only finitely many nodes carry data at each stage, and that the construction is computable.
+
+:::solution
+A node receives a follower, a mark or a record only while it is visited, and it loses them only by initialization. A node $\beta$ visited at a stage $t \leq s$ satisfies $\beta \prec \sigma_t$, and $|\sigma_t| \leq t$, so $|\beta| < t \leq s$. At the end of stage $s$, every node $\beta$ with $\sigma_s <_L \beta$ is initialized, so a node that still carries data is not to the right of $\sigma_s$.
+
+There are finitely many nodes of length less than $s$, so at the end of stage $s$ the data of the construction form a finite list of nodes with their followers, marks and records, together with the finite sets $A_{s+1}$ and $B_{s+1}$. Stage $s + 1$ visits at most $s + 1$ nodes, and each visit performs a computable operation on this list: the computation of $l(e, s + 1)$, a comparison with the record, the choice of a fresh number, the test $x \in W_{e,s+1}$. Initialization at the end of the stage only removes data. Hence the list at the end of each stage is computable from the stage, and $A$ and $B$ are c.e.
+:::
+::::
+
+::::exercise{#ex-tree-record difficulty=2 objective="Identify the stages that are $\alpha$-expansionary with the expansionary stages for the set of $\alpha$-stages." lessons="minimal-pairs"}
+Let $\alpha$ be an $\mathcal N_e$-node that is initialized only finitely often. Let $t_0$ be the last stage at the end of which $\alpha$ is initialized, or $t_0 = 0$ if there is none, and let $Q$ be the set of $\alpha$-stages larger than $t_0$. Show that a stage $s \in Q$ is $\alpha$-expansionary if and only if it is expansionary for $Q$ in the sense of :ref{#def-expansionary}, and that after the visit at an $\alpha$-expansionary stage $s \in Q$, the record $m_\alpha$ is $l(e, s)$. Where is this used in the verification of the minimal pair construction?
+
+:::solution
+We prove both statements together, by induction along the elements of $Q$. The record $m_\alpha$ changes only at $\alpha$-expansionary stages, where it is set to $l(e, s)$, and by initialization. At the end of stage $t_0$ it is undefined (for $t_0 = 0$: no node is visited at stage $0$, and every node is initialized at the start), and $\alpha$ is not initialized afterwards, so during the visit at a stage $s \in Q$, the record is undefined if no stage of $Q$ before $s$ is $\alpha$-expansionary, and equal to $l(e, t)$ for the last $\alpha$-expansionary stage $t \in Q$ with $t < s$ otherwise.
+
+Let $s = \min Q$. The record is undefined, so $s$ is $\alpha$-expansionary, and the first stage of $Q$ is expansionary for $Q$.
+
+Let $s \in Q$ with $s > \min Q$, and suppose that the stages of $Q$ below $s$ are $\alpha$-expansionary exactly when they are expansionary for $Q$. There is at least one such stage, $\min Q$; let $t$ be the last one. The record during the visit at $s$ is $l(e, t)$, so $s$ is $\alpha$-expansionary if and only if $l(e, s) > l(e, t)$. The lengths of agreement at the expansionary stages for $Q$ are strictly increasing, so $l(e, t)$ is the largest of them below $s$, and $s$ is expansionary for $Q$ if and only if $l(e, s) > l(e, t)$.
+
+The verification of the next lesson, for the negative requirements, applies :ref{#prop-agreement-unbounded} to the set of $\alpha$-stages after the last initialization of $\alpha$, and concludes that there are infinitely many $\alpha$-expansionary stages: this is the identification proved here. The same identification shows that the records increase along the $\alpha$-expansionary stages, which is condition 1 of :ref{#lem-pair-module}.
+:::
+::::
+:::::

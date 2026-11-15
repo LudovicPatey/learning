@@ -35,7 +35,7 @@ In the proof of :ref{#thm-seetapun}, why is :ref{#thm-dj-cone-avoidance} applied
   For this particular $G$ it does, by the choice of $G$; this is what makes the hypothesis of the theorem available with $Z \oplus G$.
 :::
 
-The last step thins $K$ along $g$, which is computable in $Z \oplus G$. This is why the pigeonhole step is applied to the limit set, with the stable coloring kept as a parameter, and not to the stable coloring itself: for stable colorings that are not computable in the sets already built, cone avoidance fails (see the exercises).
+The last step thins $K$ along $g$, which is computable in $Z \oplus G$. This is why the pigeonhole step is applied to the limit set, with the stable coloring kept as a parameter, and not to the stable coloring itself: for stable colorings that are not computable in the sets already built, cone avoidance fails (:ref{#ex-stable-no-cone-avoidance}).
 
 :::corollary[Seetapun]{#cor-rt22-not-aca}
 There is an ω-model of $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ not containing $\emptyset'$. Consequently $\mathsf{RT}^2_2$ does not imply $\mathsf{ACA}_0$ over $\mathsf{RCA}_0$.
@@ -49,12 +49,36 @@ The class $\mathcal I = \{ X : \exists n\ X \leq_T Z_n \}$ is a Turing ideal not
 
 The construction of the ω-model is the standard method for separations in reverse mathematics: a class of sets (here, those not computing $\emptyset'$) that is closed under adding solutions to the instances of the weaker principle, and excludes the stronger one. The course on reducibilities develops it as the **preservation** of a weakness property.
 
+::::exercise{#ex-stable-no-cone-avoidance difficulty=1 objective="See why the pigeonhole step of Seetapun's proof uses the limit set and not the stable coloring." lessons="triples"}
+Show that the coloring $h$ in the proof of :ref{#prop-rt32-jump} is stable, and deduce that :ref{#thm-seetapun} fails for stable colorings that are not computable in $Z$: there is a stable coloring of pairs all of whose infinite homogeneous sets compute $\emptyset'$. Why does this not affect the proof of :ref{#thm-seetapun}?
+
+:::solution
+For each $x$, $h(\{ x, y \}) = 1$ for all $y > m(x)$, so $h$ is stable with limit set $\nat$. The proof of :ref{#prop-rt32-jump} shows that every infinite homogeneous set for $h$ computes $\emptyset'$. In the proof of :ref{#thm-seetapun}, the stable coloring $g$ is computable in $Z \oplus G$, and the pigeonhole principle is applied to its limit set. For $h$, the limit set $\nat$ is its own trivial solution $K = \nat$, and all the difficulty lies in thinning $K$ along $h$, which uses $h$ as an oracle. The decomposition separates the two: the arbitrary instance is only the limit set, while the coloring used for thinning stays in the cone-avoiding class.
+:::
+::::
+
+::::exercise{#ex-rt32-coding-power difficulty=2 objective="Combine the cone avoidance basis theorem with Seetapun's theorem to determine the coding power of RT³₂." lessons="triples, jockusch"}
+Let $C$ be a set with $C \not\leq_T \emptyset'$. Show that every computable coloring of $[\nat]^3$ with two colors has an infinite homogeneous set that does not compute $C$. Conclude that :ref{#prop-rt32-jump} is optimal: the sets computed by all infinite homogeneous sets of every computable coloring of triples are computable in $\emptyset'$.
+
+:::solution
+Let $f$ be the coloring. In the proof of :ref{#prop-erdos-rado-tree}, the paths of the Erdős–Radó tree of $f$ are computable, uniformly, from the members of a non-empty $\Pi^0_1(\emptyset')$ class together with $\emptyset'$. By the cone avoidance basis theorem (:ref{#thm-cone-avoidance-basis}) relativized to $\emptyset'$, this class has a member $Q$ with $C \not\leq_T \emptyset' \oplus Q$. So there is an infinite pre-homogeneous set $A \leq_T \emptyset' \oplus Q$, and $C \not\leq_T A$. The induced coloring of $[A]^2$, transported to $[\nat]^2$ by the enumeration $p$ of $A$, is $A$-computable. By :ref{#thm-seetapun} with $Z = A$, it has an infinite homogeneous set $L$ with $C \not\leq_T A \oplus L$. The set $H = p[L]$ is homogeneous for $f$ and computable in $A \oplus L$, so $C \not\leq_T H$. For the conclusion, if every infinite homogeneous set of a computable coloring of triples computes $C$, then $C \leq_T \emptyset'$.
+:::
+::::
+
+::::exercise{#ex-wkl-rt22-model difficulty=2 objective="Interleave PA degrees and homogeneous sets to build an ω-model of WKL₀ + RT²₂ without the halting set."}
+Show that there is an ω-model of $\mathsf{WKL}_0 + \mathsf{RT}^2_2$ not containing $\emptyset'$.
+
+:::solution
+Combine the constructions of :ref{#lem-scott-cone} and :ref{#cor-rt22-not-aca}: at even stages, add a set $P$ PA relative to $Z_n$ with $\emptyset' \not\leq_T Z_n \oplus P$, by the relativized cone avoidance basis theorem; at odd stages, handle the next coloring with :ref{#thm-seetapun}. The resulting Turing ideal is a Scott ideal, satisfies $\mathsf{RT}^2_2$, and does not contain $\emptyset'$.
+:::
+::::
+
 ## The place of Ramsey's theorem for pairs
 
 Together with :ref{#cor-wkl-not-rt22}, Seetapun's theorem shows that $\mathsf{RT}^2_2$ escapes the Big Five: it lies strictly below $\mathsf{ACA}_0$ and is not provable in $\mathsf{WKL}_0$. The following results, admitted here, complete the picture.
 
 - **Liu (2012)** proved that $\mathsf{RT}^2_2$ does not imply $\mathsf{WKL}_0$, by showing that the infinite pigeonhole principle avoids PA degrees in the sense of :ref{#thm-dj-cone-avoidance}: for every set $A$, there is an infinite subset of $A$ or of $\overline A$ that is not of PA degree. So $\mathsf{RT}^2_2$ and $\mathsf{WKL}_0$ are incomparable.
-- **Cholak, Jockusch and Slaman (2001)** showed that every computable coloring of pairs has a low₂ infinite homogeneous set, and determined the coding power of $\mathsf{RT}^n_2$ for $n \geq 3$: some homogeneous set avoids any given set not computable in $\emptyset^{(n-2)}$ (see the exercises for $n = 3$).
+- **Cholak, Jockusch and Slaman (2001)** showed that every computable coloring of pairs has a low₂ infinite homogeneous set, and determined the coding power of $\mathsf{RT}^n_2$ for $n \geq 3$: some homogeneous set avoids any given set not computable in $\emptyset^{(n-2)}$ (:ref{#ex-rt32-coding-power} for $n = 3$, :ref{#ex-rtn-coding-power} in general).
 - **Monin and Patey (2019)** extended strong cone avoidance up the arithmetic hierarchy: for every set $A$ and every set $C$ that is not $\Delta^0_n$, some infinite subset of $A$ or of $\overline A$ is a set $H$ such that $C$ is not $\Delta^0_n(H)$. In particular every set has an infinite subset, of itself or of its complement, that is not high.
 - **Wang (2014)** and **Cholak and Patey (2020)** studied weakenings of Ramsey's theorem that allow a homogeneous set to use $\ell$ colors instead of one, the **thin set theorems**. For colorings of $n$-tuples with arbitrarily many colors, strong cone avoidance holds exactly when $\ell$ is at least the $n$-th Catalan number.
 
@@ -77,45 +101,11 @@ The table does not separate $\mathsf{COH}$ from $\mathsf{SRT}^2_2$, and neither 
 
 So the decomposition is proper: $\mathsf{RT}^2_2$ is the conjunction of two strictly weaker, incomparable principles.
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that there is an infinite set $A$ all of whose infinite subsets compute a given set $C$, and explain why this does not contradict :ref{#thm-dj-cone-avoidance}.
-
-:::solution
-Let $A = \{ \langle C \uh n \rangle : n \in \nat \}$, the set of codes of the prefixes of $C$, with a coding in which longer strings have larger codes. An infinite subset of $A$ contains codes of arbitrarily long prefixes of $C$, so it computes $C$: to find $C(x)$, search for an element coding a string of length larger than $x$. If $C$ is not computable, :ref{#thm-dj-cone-avoidance} with $Z = \emptyset$ gives an infinite subset of $A$ or of $\overline{A}$ that does not compute $C$; it cannot be a subset of $A$, so it is a subset of $\overline{A}$. There is no contradiction: the theorem only guarantees a solution on one of the two sides, without saying which.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that the coloring $h$ in the proof of :ref{#prop-rt32-jump} is stable, and deduce that :ref{#thm-seetapun} fails for stable colorings that are not computable in $Z$: there is a stable coloring of pairs all of whose infinite homogeneous sets compute $\emptyset'$. Why does this not affect the proof of :ref{#thm-seetapun}?
-
-:::solution
-For each $x$, $h(\{ x, y \}) = 1$ for all $y > m(x)$, so $h$ is stable with limit set $\nat$. The proof of :ref{#prop-rt32-jump} shows that every infinite homogeneous set for $h$ computes $\emptyset'$. In the proof of :ref{#thm-seetapun}, the stable coloring $g$ is computable in $Z \oplus G$, and the pigeonhole principle is applied to its limit set. For $h$, the limit set $\nat$ is its own trivial solution $K = \nat$, and all the difficulty lies in thinning $K$ along $h$, which uses $h$ as an oracle. The decomposition separates the two: the arbitrary instance is only the limit set, while the coloring used for thinning stays in the cone-avoiding class.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $C$ be a set with $C \not\leq_T \emptyset'$. Show that every computable coloring of $[\nat]^3$ with two colors has an infinite homogeneous set that does not compute $C$. Conclude that :ref{#prop-rt32-jump} is optimal: the sets computed by all infinite homogeneous sets of every computable coloring of triples are computable in $\emptyset'$.
-
-:::solution
-Let $f$ be the coloring. In the proof of :ref{#prop-erdos-rado-tree}, the paths of the Erdős–Radó tree of $f$ are computable, uniformly, from the members of a non-empty $\Pi^0_1(\emptyset')$ class together with $\emptyset'$. By the cone avoidance basis theorem (:ref{#thm-cone-avoidance-basis}) relativized to $\emptyset'$, this class has a member $Q$ with $C \not\leq_T \emptyset' \oplus Q$. So there is an infinite pre-homogeneous set $A \leq_T \emptyset' \oplus Q$, and $C \not\leq_T A$. The induced coloring of $[A]^2$, transported to $[\nat]^2$ by the enumeration $p$ of $A$, is $A$-computable. By :ref{#thm-seetapun} with $Z = A$, it has an infinite homogeneous set $L$ with $C \not\leq_T A \oplus L$. The set $H = p[L]$ is homogeneous for $f$ and computable in $A \oplus L$, so $C \not\leq_T H$. For the conclusion, if every infinite homogeneous set of a computable coloring of triples computes $C$, then $C \leq_T \emptyset'$.
-:::
-::::
-
-::::exercise{difficulty=2}
-Show that there is an ω-model of $\mathsf{WKL}_0 + \mathsf{RT}^2_2$ not containing $\emptyset'$.
-
-:::solution
-Combine the constructions of :ref{#lem-scott-cone} and :ref{#cor-rt22-not-aca}: at even stages, add a set $P$ PA relative to $Z_n$ with $\emptyset' \not\leq_T Z_n \oplus P$, by the relativized cone avoidance basis theorem; at odd stages, handle the next coloring with :ref{#thm-seetapun}. The resulting Turing ideal is a Scott ideal, satisfies $\mathsf{RT}^2_2$, and does not contain $\emptyset'$.
-:::
-::::
-
 ## Notes and references
 
 The track on lowness and avoidance revisits this theorem with the forcing question (:ref{to="avoidance/seetapun-forcing"}), separates other Ramsey-type principles by custom preservation properties (:ref{to="separation-design/custom-properties"}), and proves the jump versions: solutions of non-high degree for the pigeonhole principle (:ref{to="jump-cone-avoidance/pigeons-non-high"}) and the theorem of Monin and Patey on Δ⁰₂ sets (:ref{to="jump-compactness-avoidance/delta2-jump-pa"}).
 
-Seetapun's theorem appeared in Seetapun and Slaman (1995); the original proof is a direct forcing argument with finitely many Mathias conditions at once (Dzhafarov–Mummert, §8.3). The proof given here is due to Dzhafarov and Jockusch (2009), with the cohesiveness step of Cholak, Jockusch and Slaman (2001) (Hirschfeldt, §6.7, Corollary 6.64 and Theorem 6.61; Dzhafarov–Mummert, §8.5.1; Monin and Patey, section *Computational weakness of RT²₂*). The failure of strong cone avoidance for stable colorings is Proposition 8.5.5 of Dzhafarov–Mummert. The third exercise is the case $n = 3$ of a theorem of Cholak, Jockusch and Slaman (Hirschfeldt, Theorem 6.65). Liu's theorem is proved in the appendix of Hirschfeldt's book and in Dzhafarov–Mummert, §8.6. The low₂ bounds are Theorems 6.52 and 6.53 of Hirschfeldt, the theorem of Downey, Hirschfeldt, Lempp and Solomon is Theorem 6.37. The history of the problem whether $\mathsf{SRT}^2_2$ implies $\mathsf{RT}^2_2$ is told in Dzhafarov–Mummert, §8.8 (Theorems 8.8.2, 8.8.5 and 8.8.7), which also records the questions that remain open for finer reducibilities, for instance whether $\mathsf{COH}$ is reducible to $\mathsf D^2_2$ by an omniscient computable reduction (Question 8.8.13). The surveys of Hirschfeldt (Chapter 9) and of Dzhafarov and Mummert (Chapter 9) describe the reverse mathematics zoo.
+Seetapun's theorem appeared in Seetapun and Slaman (1995); the original proof is a direct forcing argument with finitely many Mathias conditions at once (Dzhafarov–Mummert, §8.3). The proof given here is due to Dzhafarov and Jockusch (2009), with the cohesiveness step of Cholak, Jockusch and Slaman (2001) (Hirschfeldt, §6.7, Corollary 6.64 and Theorem 6.61; Dzhafarov–Mummert, §8.5.1; Monin and Patey, section *Computational weakness of RT²₂*). The failure of strong cone avoidance for stable colorings is Proposition 8.5.5 of Dzhafarov–Mummert. :ref{#ex-rt32-coding-power} and :ref{#ex-rtn-coding-power} follow the proof of a theorem of Cholak, Jockusch and Slaman (Hirschfeldt, Theorem 6.65). Liu's theorem is proved in the appendix of Hirschfeldt's book and in Dzhafarov–Mummert, §8.6. The low₂ bounds are Theorems 6.52 and 6.53 of Hirschfeldt, the theorem of Downey, Hirschfeldt, Lempp and Solomon is Theorem 6.37. The history of the problem whether $\mathsf{SRT}^2_2$ implies $\mathsf{RT}^2_2$ is told in Dzhafarov–Mummert, §8.8 (Theorems 8.8.2, 8.8.5 and 8.8.7), which also records the questions that remain open for finer reducibilities, for instance whether $\mathsf{COH}$ is reducible to $\mathsf D^2_2$ by an omniscient computable reduction (Question 8.8.13). The surveys of Hirschfeldt (Chapter 9) and of Dzhafarov and Mummert (Chapter 9) describe the reverse mathematics zoo.
 
 - D. Seetapun and T. A. Slaman, *On the strength of Ramsey's theorem*, Notre Dame Journal of Formal Logic 36 (1995), 570–582.
 - D. D. Dzhafarov and C. G. Jockusch, Jr., *Ramsey's theorem and cone avoidance*, Journal of Symbolic Logic 74 (2009), 557–578.
@@ -129,3 +119,54 @@ Seetapun's theorem appeared in Seetapun and Slaman (1995); the original proof is
 - P. Cholak and L. Patey, *Thin set theorems and cone avoidance*, Transactions of the American Mathematical Society 373 (2020), 2743–2773.
 - D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022.
+
+:::::exercises
+::::exercise{#ex-seetapun-k-colors difficulty=1 objective="Extend Seetapun's theorem to finitely many colors by merging colors and relativizing."}
+Let $Z$ be a set, $C \not\leq_T Z$ and $k \geq 2$. Show that every $Z$-computable coloring $f : [\nat]^2 \to k$ has an infinite homogeneous set $H$ with $C \not\leq_T Z \oplus H$.
+
+:::solution
+By induction on $k$, for all $Z$ simultaneously; the case $k = 2$ is :ref{#thm-seetapun}. Let $f : [\nat]^2 \to k + 1$ be $Z$-computable, and $g$ the $Z$-computable coloring obtained by merging the colors $k - 1$ and $k$. By the induction hypothesis, $g$ has an infinite homogeneous set $H$ with $C \not\leq_T Z \oplus H$. If its color is less than $k - 1$, $H$ is homogeneous for $f$. Otherwise, let $p$ enumerate $H$ in increasing order; the coloring $h(\{ i, j \}) = f(\{ p(i), p(j) \}) - (k - 1)$ takes two values and is computable in $Z \oplus H$. By :ref{#thm-seetapun} with $Z \oplus H$ in place of $Z$, it has an infinite homogeneous set $L$ with $C \not\leq_T Z \oplus H \oplus L$, and $p[L]$, which is computable in $H \oplus L$, is homogeneous for $f$.
+:::
+::::
+
+::::exercise{#ex-rt22-not-rt32 difficulty=1 objective="Separate Ramsey's theorem for pairs from Ramsey's theorem for triples." lessons="triples"}
+Show that $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ does not prove $\mathsf{RT}^3_2$, in two ways: through :ref{#thm-rt3-aca}, and directly through the coloring of :ref{#prop-rt32-jump}.
+
+:::solution
+Let $\mathcal I$ be the ω-model of :ref{#cor-rt22-not-aca}: it satisfies $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ and does not contain $\emptyset'$. First way: if $\mathcal I$ satisfied $\mathsf{RT}^3_2$, it would satisfy $\mathsf{ACA}_0$ by :ref{#thm-rt3-aca}, and an ω-model of $\mathsf{ACA}_0$ contains the jump of each of its members, in particular $\emptyset'$. Second way: the computable coloring of triples of :ref{#prop-rt32-jump} belongs to $\mathcal I$, and all its infinite homogeneous sets compute $\emptyset'$, so none of them belongs to $\mathcal I$.
+:::
+::::
+
+::::exercise{#ex-rt22-not-principal difficulty=1 objective="Show that no ω-model of RT²₂ consists of the sets computable in a single set." lessons="triples"}
+Show that no Turing ideal of the form $\{ Y : Y \leq_T X \}$ is an ω-model of $\mathsf{RT}^2_2$.
+
+:::solution
+Relativize :ref{#thm-jockusch-no-delta2} to $X$: there is an $X$-computable coloring $f : [\nat]^2 \to 2$ with no infinite $\Delta^0_2(X)$ homogeneous set, in particular none computable in $X$. The coloring belongs to the ideal, and no infinite homogeneous set does.
+:::
+::::
+
+::::exercise{#ex-rt22-intersection-models difficulty=1 objective="Determine the sets that belong to every ω-model of RT²₂."}
+Show that for every non-computable set $C$ there is an ω-model of $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ not containing $C$. Deduce that the sets belonging to every ω-model of $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ are exactly the computable sets.
+
+:::solution
+Repeat the proof of :ref{#cor-rt22-not-aca} with $C$ in place of $\emptyset'$: start from $Z_0 = \emptyset$, which does not compute $C$, and apply :ref{#thm-seetapun} with the set $C$ at each stage. The resulting Turing ideal satisfies $\mathsf{RT}^2_2$ and does not contain $C$. Conversely, every ω-model of $\mathsf{RCA}_0$ is a non-empty Turing ideal, closed downwards under $\leq_T$, so it contains every computable set. Hence the sets common to all ω-models of $\mathsf{RCA}_0 + \mathsf{RT}^2_2$ are the computable sets.
+:::
+::::
+
+::::exercise{#ex-rtn-coding-power difficulty=3 objective="Determine the coding power of Ramsey's theorem for $n$-tuples by controlling jumps with the low basis theorem." lessons="triples, jockusch"}
+Let $n \geq 2$ and $k \geq 2$. Show that for every set $Z$ and every $C$ with $C \not\leq_T Z^{(n-2)}$, every $Z$-computable coloring $f : [\nat]^n \to k$ has an infinite homogeneous set $H$ with $C \not\leq_T Z \oplus H$. Deduce that, for $n \geq 3$, a set is computed by all infinite homogeneous sets of some computable coloring of $[\nat]^n$ with finitely many colors if and only if it is computable in $\emptyset^{(n-2)}$.
+
+:::solution
+By induction on $n$, for all $Z$, $C$ and $k$ simultaneously. For $n = 2$, this is :ref{#ex-seetapun-k-colors}. Assume the statement for some $n \geq 2$, and let $f$ be a $Z$-computable coloring of $[\nat]^{n+1}$ with $k$ colors and $C \not\leq_T Z^{(n-1)}$.
+
+By the proof of :ref{#prop-erdos-rado-tree} relativized to $Z$, the paths of the Erdős–Radó tree of $f$ are computable, uniformly, from $Z' \oplus Q$ for the members $Q$ of a non-empty $\Pi^0_1(Z')$ class $\mathcal P$. Choose $Q \in \mathcal P$ such that $W = Z' \oplus Q$ satisfies $C \not\leq_T W^{(n-2)}$:
+
+- if $n = 2$, by the cone avoidance basis theorem (:ref{#thm-cone-avoidance-basis}) relativized to $Z'$, since $C \not\leq_T Z'$;
+- if $n \geq 3$, by the low basis theorem relativized to $Z'$, with $W' \leq_T Z''$; then $W^{(n-2)} = (W')^{(n-3)} \leq_T Z^{(n-1)}$, so $C \not\leq_T W^{(n-2)}$.
+
+Let $X \leq_T W$ be an infinite pre-homogeneous set given by a path, $p$ its increasing enumeration, and $g(\{ i_1, \dots, i_n \}) = f(\{ p(i_1), \dots, p(i_n), p(j) \})$ for any $j > i_n$, the induced coloring transported to $[\nat]^n$. It has $k$ colors and is computable in $Z \oplus X \leq_T W$. By the induction hypothesis with $W$ in place of $Z$, $g$ has an infinite homogeneous set $L$ with $C \not\leq_T W \oplus L$. The set $H = p[L]$ is homogeneous for the induced coloring, hence for $f$, and $Z \oplus H \leq_T W \oplus L$, so $C \not\leq_T Z \oplus H$.
+
+For the last statement, let $n \geq 3$. If $C \not\leq_T \emptyset^{(n-2)}$, the statement with $Z = \emptyset$ gives, for every computable coloring of $[\nat]^n$ with finitely many colors, an infinite homogeneous set that does not compute $C$. Conversely, by :ref{#ex-coding-n-jumps}, some computable coloring of $[\nat]^n$ with finitely many colors has all its infinite homogeneous sets computing $\emptyset^{(n-2)}$, hence every set computable in $\emptyset^{(n-2)}$. Adapted from Hirschfeldt, *Slicing the Truth*, Theorem 6.65 (Cholak, Jockusch and Slaman).
+:::
+::::
+:::::

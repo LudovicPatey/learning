@@ -61,6 +61,14 @@ Why does the martingale of the proof satisfy $\lim_m d(X \uh m) = \infty$, and n
   The initial capital plays no role in the behavior along $X$.
 :::
 
+::::exercise{#ex-success-union difficulty=1 objective="Combine countably many strategies into one by weighting them, without going through measure."}
+Let $d_0, d_1, \dots$ be martingales with $d_n(\varepsilon) > 0$. Show directly, without :ref{#thm-ville}, that there is a single martingale that succeeds on every sequence on which some $d_n$ succeeds.
+
+:::solution
+Let $d = \sum_n 2^{-n} d_n / d_n(\varepsilon)$. Its initial capital is $\sum_n 2^{-n} = 2$, so it is a martingale by :ref{#lem-martingale-basic} (2). It is above each $2^{-n} d_n / d_n(\varepsilon)$, so it succeeds wherever some $d_n$ does.
+:::
+::::
+
 Martingales were introduced by Ville in a critique of von Mises's definition of random sequences. Von Mises called a sequence random if the frequency of ones tends to $\frac12$ along every subsequence chosen by an admissible selection rule, a rule that decides whether to select the next bit by looking at the bits seen so far. Ville showed that for every countable family of selection rules there is a sequence that satisfies this condition for all of them and yet has, in every prefix, at least as many zeros as ones. The class of such sequences is null (the simple random walk crosses above $0$ almost surely, a classical fact admitted here), so by :ref{#thm-ville} a single martingale succeeds on all of them: betting strategies detect regularities that selection rules miss. Ville's construction is presented by Downey and Hirschfeldt (Theorem 6.5.1).
 
 ## The savings trick
@@ -116,17 +124,7 @@ Why is $S[d^+] \subseteq S[d]$?
   Supermartingales can succeed on sequences on which a given $d$ does not.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Let $d_0, d_1, \dots$ be martingales with $d_n(\varepsilon) > 0$. Show directly, without :ref{#thm-ville}, that there is a single martingale that succeeds on every sequence on which some $d_n$ succeeds.
-
-:::solution
-Let $d = \sum_n 2^{-n} d_n / d_n(\varepsilon)$. Its initial capital is $\sum_n 2^{-n} = 2$, so it is a martingale by :ref{#lem-martingale-basic} (2). It is above each $2^{-n} d_n / d_n(\varepsilon)$, so it succeeds wherever some $d_n$ does.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-savings-convergence difficulty=1 objective="See that the savings property turns unbounded capital into capital tending to infinity."}
 Let $d$ be a martingale with the savings property: $d(\sigma\tau) \geq d(\sigma) - 2$ for all strings $\sigma$ and $\tau$. Show that $d$ succeeds on $X$ if and only if $\lim_n d(X \uh n) = \infty$.
 
 :::solution
@@ -145,3 +143,57 @@ Ville (1939) proved that the success sets of martingales are exactly the null cl
 - J. N. Y. Franklin and F. Stephan, *Schnorr trivial sets and truth-table reducibility*, Journal of Symbolic Logic 75 (2010), 501–521.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 6.2, 6.3, 6.5 and 7.1.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 7.1.
+
+:::::exercises
+::::exercise{#ex-ville-computation difficulty=1 objective="Compute the martingale of the proof of Ville's theorem for a singleton, and read off the strategy."}
+Let $\mathcal U_n = [0^{n+1}]$ for each $n$, so that $\lambda(\mathcal U_n) = 2^{-n-1}$ and $\{ 0^\infty \} \subseteq \mathcal U_n$, where $0^\infty$ is the sequence of zeros. Compute the martingale $d = \sum_n d_{\mathcal U_n}$ of the proof of :ref{#thm-ville} on every string, and describe the corresponding betting strategy.
+
+:::solution
+Recall $d_{\mathcal U_n}(\sigma) = 2^{|\sigma|} \lambda([0^{n+1}] \cap [\sigma])$. Let $\sigma = 0^m$. For $n + 1 \leq m$, $[\sigma] \subseteq [0^{n+1}]$, and the term is $1$; for $n + 1 > m$, $[0^{n+1}] \subseteq [\sigma]$, and the term is $2^{m - n - 1}$. So
+$$
+d(0^m) = m + \sum_{n \geq m} 2^{m - n - 1} = m + 1.
+$$
+Let $\sigma = 0^j 1 \rho$. The class $[0^{n+1}] \cap [\sigma]$ is non-empty only if $n + 1 \leq j$, and then it is $[\sigma]$; so $d(\sigma) = j$. The strategy starts with capital $1$ and stakes $1$ on the bit $0$ at every step: as long as it sees zeros it gains $1$ per bit, and at the first $1$, at position $j$, it falls from $j + 1$ to $j$ and stops betting. Along $0^\infty$ its capital tends to infinity, as the theorem requires.
+:::
+::::
+
+::::exercise{#ex-ville-linear-growth difficulty=2 objective="Bound the growth of the martingale of Ville's theorem, and make it grow as slowly as desired."}
+1. Show that the martingale $d$ of the proof of :ref{#thm-ville} satisfies $d(\sigma) \leq |\sigma| + 1$ for every string $\sigma$, and that this bound is attained in :ref{#ex-ville-computation}.
+2. Let $g : \nat \to \nat$ be non-decreasing and unbounded, with $g(0) \geq 1$. Show that every null class $\mathcal N$ is contained in the success set of a martingale $d$ with $d(\sigma) \leq g(|\sigma|)$ for every $\sigma$ and $\lim_n d(X \uh n) = \infty$ for every $X \in \mathcal N$.
+
+:::solution
+1. Let $m = |\sigma|$. Since $\lambda(\mathcal U_n \cap [\sigma]) \leq \min(2^{-m}, 2^{-n-1})$, $d_{\mathcal U_n}(\sigma) \leq \min(1, 2^{m - n - 1})$. Hence $d(\sigma) \leq \sum_{n < m} 1 + \sum_{n \geq m} 2^{m - n - 1} = m + 1$. In :ref{#ex-ville-computation}, $d(0^m) = m + 1$.
+2. Let $a_0 < a_1 < \cdots$ be defined by: $a_n$ is the least $a > a_{n-1}$ (with $a_{-1} = 0$) such that $g(a) \geq n + 2$; it exists since $g$ is unbounded, and $a_n \geq 1$. By outer regularity (:ref{#fact-lebesgue-measure}), choose open classes $\mathcal U_n \supseteq \mathcal N$ with $\lambda(\mathcal U_n) \leq 2^{-a_n}$, and let $d = \sum_n d_{\mathcal U_n}$. Its initial capital is at most $\sum_n 2^{-a_n} \leq 1$, so $d$ is a martingale, and the proof of :ref{#thm-ville} shows that $\lim_n d(X \uh n) = \infty$ for $X \in \mathcal N$.
+
+Let $|\sigma| = m$. As in (1), $d_{\mathcal U_n}(\sigma) \leq \min(1, 2^{m - a_n})$. The numbers $a_n$ are distinct, so the terms with $a_n > m$ add up to at most $\sum_{a > m} 2^{m - a} = 1$. If no $n$ has $a_n \leq m$, then $d(\sigma) \leq 1 \leq g(m)$. Otherwise, let $N$ be the largest $n$ with $a_n \leq m$; the terms with $a_n \leq m$ are the $N + 1$ terms with $n \leq N$, each at most $1$, and $g(m) \geq g(a_N) \geq N + 2$. So $d(\sigma) \leq N + 2 \leq g(m)$.
+
+The success of a martingale says nothing about the speed at which its capital grows; this is the starting point of Schnorr randomness, later in the course.
+:::
+::::
+
+::::exercise{#ex-success-gdelta difficulty=2 objective="Show that success sets are $G_\delta$ classes, and deduce that Ville's theorem gives an inclusion and not an equality."}
+1. Show that the success set $S[d]$ of a supermartingale is the intersection of countably many open classes.
+2. Let $\mathcal Q$ be the class of the sequences with finitely many ones. Show that $\mathcal Q$ is null, and that $\mathcal Q \neq S[d]$ for every supermartingale $d$. (Use the Baire category theorem: in $\cs$, the intersection of countably many dense open classes is dense.)
+
+:::solution
+1. $S[d] = \bigcap_k \bigcup_n \{ X : d(X \uh n) > k \}$, and for each $k$ the union is the open class generated by the strings $\sigma$ with $d(\sigma) > k$.
+2. $\mathcal Q$ is countable, hence null. Suppose $\mathcal Q = \bigcap_k \mathcal V_k$ with $\mathcal V_k$ open. Each $\mathcal V_k$ contains $\mathcal Q$, which is dense, since every cylinder $[\sigma]$ contains the sequence $\sigma 0^\infty$; so $\mathcal V_k$ is a dense open class. For $Y \in \mathcal Q$, the class $\cs \setminus \{ Y \}$ is open, and dense since every cylinder has more than one element. By the Baire category theorem, the intersection of the countably many dense open classes $\mathcal V_k$ ($k \in \nat$) and $\cs \setminus \{ Y \}$ ($Y \in \mathcal Q$) is dense, hence non-empty. A member of it belongs to $\bigcap_k \mathcal V_k = \mathcal Q$ and to no singleton $\{ Y \}$ with $Y \in \mathcal Q$, a contradiction. By (1), $\mathcal Q$ is not a success set.
+
+So :ref{#thm-ville} gives, for the null class $\mathcal Q$, a martingale whose success set contains $\mathcal Q$ strictly.
+:::
+::::
+
+::::exercise{#ex-savings-stakes difficulty=1 objective="Relate the savings property to the size of the stakes, and see what the property does not give."}
+Let $c \geq 0$ and let $d$ be a martingale with $d(\sigma\tau) \geq d(\sigma) - c$ for all strings $\sigma$ and $\tau$.
+
+1. Show that $d$ never stakes more than $c$: $|d(\sigma 0) - d(\sigma)| \leq c$ for every $\sigma$. Deduce that if $c = 0$, then $d$ is constant.
+2. Show that the converse of (1) fails: give a martingale whose stakes are all at most $1$ but which has the savings property for no constant.
+3. Give a martingale with the savings property (with constant $2$) and a sequence $X \notin S[d]$ along which $d(X \uh n)$ does not converge.
+
+:::solution
+1. For $i \in \{0, 1\}$, $d(\sigma i) \geq d(\sigma) - c$, and $d(\sigma (1 - i)) = 2 d(\sigma) - d(\sigma i) \leq d(\sigma) + c$. So both children are within $c$ of $d(\sigma)$. If $c = 0$, then $d(\sigma 0) = d(\sigma 1) = d(\sigma)$ for every $\sigma$, and $d$ is equal to $d(\varepsilon)$ everywhere.
+2. Let $d(\varepsilon) = 1$, and at every $\sigma$ stake $s(\sigma) = \min(1, d(\sigma))$ on the bit $1$: $d(\sigma 1) = d(\sigma) + s(\sigma)$ and $d(\sigma 0) = d(\sigma) - s(\sigma)$. This is a martingale with non-negative values and stakes at most $1$. Along $1^N 0^{N+1}$, the capital rises to $N + 1$ at $1^N$, then falls by $1$ at each $0$ until it reaches $0$: it loses $N + 1$, for every $N$.
+3. Let $d(\varepsilon) = 1$; at a string where the capital is $1$, stake $\frac12$ on the bit $0$; at a string where it is $\frac32$, stake $\frac12$ on the bit $1$; elsewhere, do not bet. The capital only takes the values $\frac12$, $1$, $\frac32$ and $2$, so $d(\sigma\tau) \geq 0 \geq d(\sigma) - 2$. Along the sequence of zeros, the capital alternates between $1$ and $\frac32$: it is bounded and does not converge.
+:::
+::::
+:::::

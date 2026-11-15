@@ -89,13 +89,13 @@ $$
 where $q$ ranges over rationals. Each component is $\Pi^1_1$, and number quantifiers preserve $\Pi^1_1$. The second statement is the definition of $\Pi^1_1$-randomness.
 :::
 
-The proof shows that $\mathcal Q$ is the union of $\mathcal C$ and of the null $\Delta^1_1$ classes, by :ref{#cor-delta11-stage}: this is :ref{#thm-chong-nies-yu} again. The contrast with the other notions is instructive. For Martin-Löf randomness, the classes captured by tests are covered by a single one, but only because the tests are a restricted family of null $\Pi^0_2$ classes, with a computable bound on the measures of the components. For $\Delta^1_1$-randomness, the union of the null $\Delta^1_1$ classes is $\Pi^1_1$ but not $\Delta^1_1$ (first exercise), so there is no largest null $\Delta^1_1$ class. For $\Pi^1_1$-randomness, the union of the tests is again a test.
+The proof shows that $\mathcal Q$ is the union of $\mathcal C$ and of the null $\Delta^1_1$ classes, by :ref{#cor-delta11-stage}: this is :ref{#thm-chong-nies-yu} again. The contrast with the other notions is instructive. For Martin-Löf randomness, the classes captured by tests are covered by a single one, but only because the tests are a restricted family of null $\Pi^0_2$ classes, with a computable bound on the measures of the components. For $\Delta^1_1$-randomness, the union of the null $\Delta^1_1$ classes is $\Pi^1_1$ but not $\Delta^1_1$ (:ref{#ex-delta11-null-union}), so there is no largest null $\Delta^1_1$ class. For $\Pi^1_1$-randomness, the union of the tests is again a test.
 
 The class of $\Pi^1_1$-random sequences, the complement of $\mathcal Q$, is $\Sigma^1_1$ and non-empty, so it has a member computable in $\mathcal O$ by the Kleene basis theorem (:ref{#thm-kleene-basis}). Such a member does not compute $\mathcal O$, by :ref{#cor-pi11-random-class}; it is strictly below $\mathcal O$ in the Turing degrees.
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-delta11-null-union difficulty=1 objective="Compute the complexity of the union of the null $\Delta^1_1$ classes, and see that there is no largest null $\Delta^1_1$ class."}
 Show that the union $\mathcal G$ of all null $\Delta^1_1$ classes is $\Pi^1_1$, so that the class of $\Delta^1_1$-random sequences is $\Sigma^1_1$, and that $\mathcal G$ is not $\Delta^1_1$.
 
 :::hint
@@ -109,15 +109,7 @@ Suppose that $\mathcal G$ is $\Delta^1_1$. It is null, being a countable union o
 :::
 ::::
 
-::::exercise{difficulty=1}
-Show that a $\Pi^1_1$-random sequence is not hyperarithmetic and does not compute $\mathcal O$, and that a sequence computing $\mathcal O$ is not $\Pi^1_1$-random.
-
-:::solution
-A $\Pi^1_1$-random sequence is $\Delta^1_1$-random, hence not hyperarithmetic by :ref{#prop-delta11-arith}. It does not compute $\mathcal O$ by :ref{#cor-pi11-random-class}, which is equivalent to the last statement.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-pi11-random-invariance difficulty=2 objective="Show that $\Pi^1_1$-randomness is preserved by finite changes and by taking halves, through measure-preserving maps."}
 Show that if $X$ is $\Pi^1_1$-random, then so is every $Y$ that differs from $X$ at finitely many positions, and so are the halves $X_0 = \{ n : 2n \in X \}$ and $X_1 = \{ n : 2n + 1 \in X \}$.
 
 :::solution
@@ -136,3 +128,56 @@ Sacks introduced $\Pi^1_1$-randomness and showed that it differs from $\Delta^1_
 - N. Greenberg and B. Monin, *Higher randomness and genericity*, Forum of Mathematics, Sigma 5 (2017), e31.
 - B. Monin, *Higher randomness and forcing with closed sets*, 31st Symposium on Theoretical Aspects of Computer Science (STACS 2014), LIPIcs 25 (2014).
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 9.3.
+
+:::::exercises
+::::exercise{#ex-pi11-random-not-hyp difficulty=1 objective="Check that $\Pi^1_1$-random sequences are neither hyperarithmetic nor above $\mathcal O$."}
+Show that a $\Pi^1_1$-random sequence is not hyperarithmetic and does not compute $\mathcal O$, and that a sequence computing $\mathcal O$ is not $\Pi^1_1$-random.
+
+:::solution
+A $\Pi^1_1$-random sequence is $\Delta^1_1$-random, hence not hyperarithmetic by :ref{#prop-delta11-arith}. It does not compute $\mathcal O$ by :ref{#cor-pi11-random-class}, which is equivalent to the last statement.
+:::
+::::
+
+::::exercise{#ex-randoms-not-pi11 difficulty=1 objective="Apply the basis theorem of Sacks and Tanaka to show that the classes of higher random sequences are not $\Pi^1_1$." lessons="sacks-tanaka"}
+1. Show that none of the classes of $\Delta^1_1$-random, $\Pi^1_1$-Martin-Löf random and $\Pi^1_1$-random sequences is $\Pi^1_1$.
+2. Show that every non-empty $\Pi^1_1$ class meets the largest null $\Pi^1_1$ class $\mathcal Q$ of :ref{#thm-largest-null}. Deduce that $\mathcal Q$ is not included in any null $\Sigma^1_1$ class.
+
+:::solution
+1. Each of these classes has measure $1$ (:ref{#ex-delta11-random-conull}, :ref{#cor-higher-mlr-class}, :ref{#cor-pi11-random-class}). If one of them were $\Pi^1_1$, it would have a hyperarithmetic member by :ref{#ex-sacks-tanaka-basis}. A hyperarithmetic sequence is not $\Delta^1_1$-random (:ref{#prop-delta11-arith}), hence random in none of the three senses.
+2. Let $\mathcal S$ be a non-empty $\Pi^1_1$ class. If $\mathcal S$ is null, then $\mathcal S \subseteq \mathcal Q$. Otherwise $\mathcal S$ has a hyperarithmetic member by :ref{#ex-sacks-tanaka-basis}, and this member is not $\Pi^1_1$-random, so it belongs to $\mathcal Q$. If $\mathcal Q$ were included in a null $\Sigma^1_1$ class $\mathcal S'$, the complement of $\mathcal S'$ would be a non-empty $\Pi^1_1$ class disjoint from $\mathcal Q$. Item 2 is adapted from Nies, Exercise 9.3.10.
+:::
+::::
+
+::::exercise{#ex-not-pi11-random-examples difficulty=1 objective="Check on examples that a sequence fails to be $\Pi^1_1$-random, by finding a null $\Pi^1_1$ class containing it."}
+Show that none of the following sequences is $\Pi^1_1$-random:
+1. $\Omega^Z$, Chaitin's halting probability relative to a hyperarithmetic set $Z$;
+2. a sequence $X$ whose half $X_0 = \{ n : 2n \in X \}$ is hyperarithmetic, or computes $\mathcal O$;
+3. $Y \oplus Y$, for any $Y$;
+4. a sequence coding a well-founded relation.
+
+:::solution
+1. $\Omega^Z$ is left-c.e. relative to $Z$, so it is computable in $Z'$, which is hyperarithmetic. By :ref{#prop-delta11-arith}, it is not $\Delta^1_1$-random.
+2. If $X_0 = H$ is hyperarithmetic, $X$ belongs to $\{ Y : Y_0 = H \}$, which is $\Delta^1_1$ by :ref{#ex-delta11-classes} (2), as an arithmetic class with the parameter $H$. It is null: for each $n$, the class of $Y$ with $Y(2i) = H(i)$ for $i < n$ has measure $2^{-n}$. If $X_0$ computes $\mathcal O$, so does $X$, and :ref{#cor-pi11-random-class} applies.
+3. $Y \oplus Y$ belongs to $\{ Z : Z(2i) = Z(2i + 1) \text{ for all } i \}$, an arithmetic class, hence $\Delta^1_1$, which is null for the same reason.
+4. The class of well-founded relations is a null $\Pi^1_1$ class (:ref{#ex-measure-pi11}).
+:::
+::::
+
+::::exercise{#ex-o-random-delta11 difficulty=2 objective="Compare $\Pi^1_1$-randomness with Martin-Löf randomness relative to $\mathcal O$."}
+Show that every sequence that is Martin-Löf random relative to $\mathcal O$ is $\Delta^1_1$-random, and that some $\Pi^1_1$-random sequence is not Martin-Löf random relative to $\mathcal O$.
+
+:::solution
+By :ref{#ex-delta11-ml-hyp}, a sequence is $\Delta^1_1$-random if it is Martin-Löf random relative to every hyperarithmetic set $A$. Every hyperarithmetic set $A$ is computable in some $H_a$, hence in $\mathcal O$ (:ref{#ex-o-computes-hyp}); a set of strings c.e. in $A$ is then c.e. in $\mathcal O$, so a Martin-Löf test relative to $A$ is a Martin-Löf test relative to $\mathcal O$. A sequence random relative to $\mathcal O$ is therefore random relative to every hyperarithmetic set.
+
+By the paragraph after :ref{#thm-largest-null}, some $\Pi^1_1$-random sequence $X$ is computable in $\mathcal O$. The sets $\{ X \uh n \}$ are uniformly computable in $\mathcal O$, and they form a Martin-Löf test relative to $\mathcal O$ that captures $X$.
+:::
+::::
+
+::::exercise{#ex-pi11-random-cylinders difficulty=1 objective="Use the Kleene basis theorem to find $\Pi^1_1$-random sequences computable in $\mathcal O$ in every cylinder."}
+Show that every cylinder $[\sigma]$ contains a $\Pi^1_1$-random sequence computable in $\mathcal O$. Deduce that the class of $\Pi^1_1$-random sequences is dense and not closed.
+
+:::solution
+The class $[\sigma] \setminus \mathcal Q$, with $\mathcal Q$ as in :ref{#thm-largest-null}, is $\Sigma^1_1$, since $\mathcal Q$ is $\Pi^1_1$, and it has measure $2^{-|\sigma|} > 0$ since $\mathcal Q$ is null. It is non-empty, so it has a member computable in $\mathcal O$ by the Kleene basis theorem (:ref{#thm-kleene-basis}). So the class of $\Pi^1_1$-random sequences meets every cylinder: it is dense, and its closure is $\cs$. It is not $\cs$, since $0^\omega$ is computable, hence not $\Pi^1_1$-random; so it is not closed.
+:::
+::::
+:::::

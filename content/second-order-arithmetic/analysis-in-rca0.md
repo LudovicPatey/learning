@@ -24,7 +24,7 @@ The relation $(a, r)\, \Phi\, (b, s)$ asserts that $f$ maps the interval $(a - r
 <svg class="fig" viewBox="0 0 600 290" width="600" role="img" aria-label="The graph of a continuous function and rectangles given by quadruples of a code; around a point x, narrower rectangles determine the value f(x)"><line x1="60" y1="113.7" x2="550" y2="113.7" class="axis"/><line x1="70" y1="15" x2="70" y2="250" class="axis"/><line x1="530" y1="109.7" x2="530" y2="117.7" class="axis"/><text x="536" y="131.7" text-anchor="middle" class="mrm" font-size="13">1</text><rect x="79.2" y="151.2" width="92.0" height="65.3" class="muted-stroke" stroke-width="1.1"/><rect x="300.0" y="101.3" width="110.4" height="43.4" class="muted-stroke" stroke-width="1.1"/><rect x="428.8" y="31.0" width="92.0" height="73.8" class="muted-stroke" stroke-width="1.1"/><rect x="180.4" y="130.1" width="110.4" height="33.2" class="accent-stroke" stroke-width="1.5"/><rect x="198.8" y="135.8" width="55.2" height="18.6" class="accent-stroke" stroke-width="1.5"/><rect x="209.5" y="141.0" width="23.0" height="7.9" class="accent-stroke" stroke-width="1.5"/><polyline points="70.0,215.9 72.3,214.4 74.6,212.8 76.9,211.2 79.2,209.7 81.5,208.1 83.8,206.6 86.1,205.0 88.4,203.5 90.7,201.9 93.0,200.4 95.3,198.9 97.6,197.4 99.9,195.9 102.2,194.4 104.5,192.9 106.8,191.4 109.1,190.0 111.4,188.5 113.7,187.1 116.0,185.7 118.3,184.3 120.6,183.0 122.9,181.6 125.2,180.3 127.5,178.9 129.8,177.6 132.1,176.4 134.4,175.1 136.7,173.9 139.0,172.6 141.3,171.4 143.6,170.3 145.9,169.1 148.2,168.0 150.5,166.9 152.8,165.8 155.1,164.7 157.4,163.7 159.7,162.7 162.0,161.7 164.3,160.7 166.6,159.8 168.9,158.9 171.2,158.0 173.5,157.1 175.8,156.3 178.1,155.5 180.4,154.7 182.7,154.0 185.0,153.2 187.3,152.5 189.6,151.8 191.9,151.2 194.2,150.5 196.5,149.9 198.8,149.3 201.1,148.7 203.4,148.2 205.7,147.7 208.0,147.2 210.3,146.7 212.6,146.2 214.9,145.8 217.2,145.4 219.5,145.0 221.8,144.6 224.1,144.2 226.4,143.9 228.7,143.6 231.0,143.3 233.3,143.0 235.6,142.7 237.9,142.4 240.2,142.2 242.5,141.9 244.8,141.7 247.1,141.5 249.4,141.3 251.7,141.1 254.0,140.9 256.3,140.8 258.6,140.6 260.9,140.4 263.2,140.3 265.5,140.1 267.8,140.0 270.1,139.8 272.4,139.7 274.7,139.6 277.0,139.4 279.3,139.3 281.6,139.2 283.9,139.0 286.2,138.9 288.5,138.7 290.8,138.6 293.1,138.4 295.4,138.3 297.7,138.1 300.0,137.9 302.3,137.7 304.6,137.5 306.9,137.3 309.2,137.1 311.5,136.9 313.8,136.6 316.1,136.4 318.4,136.1 320.7,135.8 323.0,135.5 325.3,135.2 327.6,134.9 329.9,134.5 332.2,134.2 334.5,133.8 336.8,133.4 339.1,132.9 341.4,132.5 343.7,132.0 346.0,131.5 348.3,131.0 350.6,130.5 352.9,129.9 355.2,129.3 357.5,128.7 359.8,128.1 362.1,127.5 364.4,126.8 366.7,126.1 369.0,125.4 371.3,124.6 373.6,123.8 375.9,123.0 378.2,122.2 380.5,121.4 382.8,120.5 385.1,119.6 387.4,118.7 389.7,117.7 392.0,116.8 394.3,115.8 396.6,114.7 398.9,113.7 401.2,112.6 403.5,111.5 405.8,110.4 408.1,109.3 410.4,108.1 412.7,106.9 415.0,105.7 417.3,104.5 419.6,103.2 421.9,102.0 424.2,100.7 426.5,99.4 428.8,98.0 431.1,96.7 433.4,95.3 435.7,93.9 438.0,92.5 440.3,91.1 442.6,89.7 444.9,88.2 447.2,86.8 449.5,85.3 451.8,83.8 454.1,82.3 456.4,80.8 458.7,79.3 461.0,77.8 463.3,76.3 465.6,74.7 467.9,73.2 470.2,71.6 472.5,70.1 474.8,68.5 477.1,66.9 479.4,65.4 481.7,63.8 484.0,62.2 486.3,60.7 488.6,59.1 490.9,57.6 493.2,56.0 495.5,54.4 497.8,52.9 500.1,51.3 502.4,49.8 504.7,48.3 507.0,46.7 509.3,45.2 511.6,43.7 513.9,42.2 516.2,40.7 518.5,39.3 520.8,37.8 523.1,36.4 525.4,34.9 527.7,33.5 530.0,32.1" class="ink-stroke" stroke-width="1.8"/><line x1="180.4" y1="163.2" x2="180.4" y2="256" class="muted-stroke" stroke-dasharray="2 3"/><line x1="290.8" y1="163.2" x2="290.8" y2="256" class="muted-stroke" stroke-dasharray="2 3"/><text x="180.4" y="268" text-anchor="middle" class="math" font-size="13">a<tspan class="mrm"> − </tspan>r</text><text x="290.8" y="268" text-anchor="middle" class="math" font-size="13">a<tspan class="mrm"> + </tspan>r</text><line x1="70" y1="130.1" x2="180.4" y2="130.1" class="muted-stroke" stroke-dasharray="2 3"/><line x1="70" y1="163.2" x2="180.4" y2="163.2" class="muted-stroke" stroke-dasharray="2 3"/><text x="64" y="135.1" text-anchor="end" class="math" font-size="13">b<tspan class="mrm"> + </tspan>s</text><text x="64" y="168.2" text-anchor="end" class="math" font-size="13">b<tspan class="mrm"> − </tspan>s</text><line x1="217.2" y1="109.7" x2="217.2" y2="117.7" class="ink-stroke" stroke-width="1.2"/><text x="217.2" y="105.7" text-anchor="middle" class="math" font-size="13">x</text><circle cx="217.2" cy="145.4" r="3.5" class="accent-fill"/><text x="544.0" y="37.1" text-anchor="middle" class="math" font-size="14">f</text></svg>
 :::
 
-The number $n$ plays no role in the meaning of the code; it makes the relation $(a, r)\, \Phi\, (b, s)$ a $\Sigma^0_1$ relation rather than a bounded one. Conversely, for every $\Sigma^0_1$ formula $\exists n\, \theta(n, a, r, b, s)$ with $\theta$ bounded, possibly with parameters, the set $\{ (n, a, r, b, s) : \theta(n, a, r, b, s) \}$ exists by $\Delta^0_1$ comprehension. So a family of rectangles described by a $\Sigma^0_1$ formula yields a code in $\mathsf{RCA}_0$, although the set of these rectangles may not exist; Exercise 1 below uses this. Simpson's Definition II.6.1 has the same index $n$; it requires consistency only for equal pairs $(a, r)$, and adds two closure conditions, under which the two definitions code the same functions.
+The number $n$ plays no role in the meaning of the code; it makes the relation $(a, r)\, \Phi\, (b, s)$ a $\Sigma^0_1$ relation rather than a bounded one. Conversely, for every $\Sigma^0_1$ formula $\exists n\, \theta(n, a, r, b, s)$ with $\theta$ bounded, possibly with parameters, the set $\{ (n, a, r, b, s) : \theta(n, a, r, b, s) \}$ exists by $\Delta^0_1$ comprehension. So a family of rectangles described by a $\Sigma^0_1$ formula yields a code in $\mathsf{RCA}_0$, although the set of these rectangles may not exist; :ref{#ex-ivt-value-c} uses this. Simpson's Definition II.6.1 has the same index $n$; it requires consistency only for equal pairs $(a, r)$, and adds two closure conditions, under which the two definitions code the same functions.
 
 $\mathsf{RCA}_0$ proves that $f(x)$ exists, uniformly in $x$. Let $x = (x_t)_t$ be a real in $[0, 1]$. For each $k$, take the first pair $\langle j, t \rangle$ such that $j$ codes a quintuple $(n, a_k, r_k, b_k, s_k) \in \Phi$ with $s_k < 2^{-k-2}$ and $|x_t - a_k| + 2^{-t} < r_k$. This condition is bounded in $\Phi$ and $x$, it implies $|x - a_k| < r_k$, and some pair satisfies it by totality; so the sequence $(a_k, r_k, b_k, s_k)_k$ exists by $\Delta^0_1$ comprehension. The two intervals around $a_k$ and $a_l$ contain $x$, so consistency gives $|b_k - b_l| \leq s_k + s_l \leq 2^{-k-1}$ for $k \leq l$, and $y = (b_k)$ is a real. If $(a, r)\, \Phi\, (b, s)$ and $|x - a| < r$, then $|b - b_k| \leq s + 2^{-k-2}$ by consistency, and $|b_k - y| \leq 2^{-k}$, so $|y - b| \leq s$; uniqueness follows from totality. The function $f$ is continuous: given $x$ and $\varepsilon > 0$, take $(a, r)\, \Phi\, (b, s)$ with $|x - a| < r$ and $s < \varepsilon / 2$, and $\delta = r - |x - a|$; then $|f(x) - f(x')| \leq 2s < \varepsilon$ whenever $|x' - x| < \delta$. Simpson (Section II.6) and Dzhafarov–Mummert (Section 10.3) define codes for continuous functions between arbitrary complete separable metric spaces in the same way.
 
@@ -84,9 +84,7 @@ Why does the existence of the sequence $(a_n, b_n)$ not require arithmetic compr
   $f$ is an arbitrary continuous function of the model; only computability relative to its code is used.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-ivt-value-c difficulty=1 objective="Use the index field of codes to form the code of $f - c$, and derive the general intermediate value theorem."}
 Show that $\mathsf{RCA}_0$ proves that every continuous function $f : [0, 1] \to \mathbb R$ with $f(0) < c < f(1)$ takes the value $c$, for every real $c$, by producing a code for $f - c$.
 
 :::solution
@@ -111,3 +109,72 @@ The coding of continuous functions follows Simpson, Section II.6: Definition II.
 - V. Brattka and G. Gherardi, *Effective choice and boundedness principles in computable analysis*, Bulletin of Symbolic Logic 17 (2011), 73–117.
 - S. G. Simpson, *Subsystems of Second Order Arithmetic*, 2nd edition, Cambridge University Press, 2009, Section II.6.
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Sections 3.7 and 10.3–10.4.
+
+:::::exercises
+::::exercise{#ex-code-identity-constant difficulty=1 objective="Write codes for the simplest continuous functions and check the conditions of the definition on them."}
+Show that $\mathsf{RCA}_0$ proves that the identity function of $[0, 1]$ and, for every real $c = (c_k)$, the constant function with value $c$ have codes in the sense of :ref{#def-continuous-code}.
+
+:::solution
+*Identity.* Let $\Phi$ be the set of quintuples $(0, a, r, a, r)$ for rationals $a$ and $r > 0$; it is defined by a bounded formula, so it exists. Consistency: if $|a - a'| < r + r'$, then $|a - a'| \leq r + r'$. Totality: given $x = (x_k) \in [0, 1]$ and $\varepsilon > 0$, take a rational $r$ with $0 < r < \varepsilon$, and $k$ with $2^{-k} < r$; then $a = x_k$ satisfies $|x - a| < r$, and $(a, r)\, \Phi\, (a, r)$ with $s = r < \varepsilon$. Value: if $|x - a| < r$, then $|x - a| \leq r$, so $x$ is the value at $x$.
+
+*Constant.* Let $\Phi$ be the set of quintuples $(k, a, r, c_k, 2^{-k})$ for $k \in \nat$ and rationals $a$, $r > 0$; membership is decided by checking $\langle k, b \rangle \in c$ for the fourth component $b$, so $\Phi$ exists by $\Delta^0_1$ comprehension. Consistency: $|c_k - c_{k'}| \leq 2^{-\min(k, k')} \leq 2^{-k} + 2^{-k'}$. Totality: for $x$ and $\varepsilon$, take $k$ with $2^{-k} < \varepsilon$ and any $(a, r)$ with $|x - a| < r$. Value: $|c - c_k| \leq 2^{-k}$ for every $k$, so $c$ is the value at every $x$.
+
+These are items 1 and 3 of Dzhafarov–Mummert, Example 10.3.6.
+:::
+::::
+
+::::exercise{#ex-ivt-continuity-step difficulty=1 objective="Complete a step of the proof of the intermediate value theorem: derive local positivity from the code."}
+In the proof of :ref{#thm-ivt-rca}, the case $f(x) > 0$ uses a rational $\delta > 0$ such that $f(y) > 0$ for every $y \in [0, 1]$ with $|y - x| < \delta$. Show from the definition of codes and :ref{#lem-value-sigma1} that $\mathsf{RCA}_0$ proves the existence of such a $\delta$.
+
+:::solution
+By :ref{#lem-value-sigma1}, in its symmetric form, $f(x) > 0$ gives $(a, r)\, \Phi\, (b, s)$ with $|x - a| < r$ and $b - s > 0$. Since $r - |x - a|$ is a positive real, there is a rational $\delta$ with $0 < \delta < r - |x - a|$. If $y \in [0, 1]$ and $|y - x| < \delta$, then $|y - a| \leq |y - x| + |x - a| < r$, so $|f(y) - b| \leq s$ by the definition of the value at $y$, and $f(y) \geq b - s > 0$.
+:::
+::::
+
+::::exercise{#ex-lipschitz-code difficulty=2 objective="Build a computable code from computable values at rationals and a Lipschitz bound, as a source of computable continuous functions."}
+Let $f : [0, 1] \to \mathbb R$ and $L \geq 1$ be an integer such that $|f(x) - f(y)| \leq L |x - y|$ for all $x, y \in [0, 1]$. Suppose that there is a computable function $v$ that maps every rational $a \in [0, 1]$ and every $k$ to a rational $v(a, k)$ with $|v(a, k) - f(a)| \leq 2^{-k}$. Show that $f$ has a computable code.
+
+:::solution
+Let $\Phi$ be the set of quintuples $(k, a, r, v(a, k), 2^{-k} + L r)$ for $k \in \nat$, rationals $a \in [0, 1]$ and $r > 0$. Membership of a quintuple $(k, a, r, b, s)$ is decided by computing $v(a, k)$ and comparing rationals, so $\Phi$ is computable.
+
+- *Consistency.* If $|a - a'| < r + r'$, then $|v(a, k) - v(a', k')| \leq 2^{-k} + L |a - a'| + 2^{-k'} \leq (2^{-k} + L r) + (2^{-k'} + L r')$.
+- *Totality.* Given $x = (x_j) \in [0, 1]$ and $\varepsilon > 0$, take $k$ with $2^{-k} < \varepsilon / 2$, a rational $r > 0$ with $L r < \varepsilon / 2$, and $j$ with $2^{-j} < r$; let $a$ be $x_j$ moved into $[0, 1]$ (replaced by $0$ if negative, by $1$ if larger than $1$). Since $x \in [0, 1]$, this does not increase the distance to $x$, so $|x - a| < r$, and $s = 2^{-k} + L r < \varepsilon$.
+- *Value.* If $|x - a| < r$, then $|f(x) - v(a, k)| \leq L |x - a| + 2^{-k} \leq s$; so $f(x)$ is the value of $\Phi$ at $x$.
+:::
+::::
+
+::::exercise{#ex-code-sum difficulty=2 objective="Use the index field to form the code of a sum of two coded functions in $\mathsf{RCA}_0$."}
+Show that $\mathsf{RCA}_0$ proves: if $\Phi$ and $\Psi$ code continuous functions $f, g : [0, 1] \to \mathbb R$, then $f + g$ has a code.
+
+:::solution
+A rectangle for $f + g$ combines a rectangle $(n, a, r, b, s) \in \Phi$ and a rectangle $(m, a', r', b', s') \in \Psi$ over a common rational interval. Let $\Theta$ be the set of quintuples $(j, c, t, b + b', s + s')$ where $j$ codes the tuple $(n, a, r, b, s, m, a', r', b', s')$, $(n, a, r, b, s) \in \Phi$, $(m, a', r', b', s') \in \Psi$, $t > 0$, and $|c - a| + t \leq r$ and $|c - a'| + t \leq r'$, so that $(c - t, c + t)$ is contained in both intervals. All components can be read off from $j$, so membership in $\Theta$ is decided by a bounded formula with parameters $\Phi, \Psi$, and $\Theta$ exists by $\Delta^0_1$ comprehension. The index $j$ records the rectangles used; without it, the existence of suitable rectangles would be a $\Sigma^0_1$ condition.
+
+- *Consistency.* Let two quintuples of $\Theta$ come from $(a_1, r_1, b_1, s_1), (a'_1, \dots)$ and $(a_2, r_2, b_2, s_2), (a'_2, \dots)$ with intervals $(c_1, t_1)$, $(c_2, t_2)$, and $|c_1 - c_2| < t_1 + t_2$. Then
+$$
+|a_1 - a_2| \leq |a_1 - c_1| + |c_1 - c_2| + |c_2 - a_2| < (r_1 - t_1) + (t_1 + t_2) + (r_2 - t_2) = r_1 + r_2,
+$$
+so $|b_1 - b_2| \leq s_1 + s_2$ by consistency of $\Phi$; likewise $|b'_1 - b'_2| \leq s'_1 + s'_2$, and the sums satisfy the consistency condition.
+- *Totality.* Given $x$ and $\varepsilon$, take $(a, r)\, \Phi\, (b, s)$ and $(a', r')\, \Psi\, (b', s')$ with $|x - a| < r$, $|x - a'| < r'$ and $s, s' < \varepsilon / 2$. Take a rational $t > 0$ with $2t < \min(r - |x - a|,\ r' - |x - a'|)$ and a rational $c$ with $|x - c| < t$. Then $|c - a| + t < 2t + |x - a| < r$, and likewise for $a'$, so the corresponding quintuple is in $\Theta$, with $|x - c| < t$ and $s + s' < \varepsilon$.
+- *Value.* If $|x - c| < t$ for a quintuple of $\Theta$, then $|x - a| < r$ and $|x - a'| < r'$, so $|f(x) - b| \leq s$ and $|g(x) - b'| \leq s'$, and $|(f + g)(x) - (b + b')| \leq s + s'$.
+
+Compare Dzhafarov–Mummert, Example 10.3.5, and Simpson, Lemma II.6.3.
+:::
+::::
+
+::::exercise{#ex-least-zero difficulty=3 lessons="real-numbers" objective="Build a computable function whose least zero is not computable, and deduce that $\mathsf{RCA}_0$ does not prove that a least zero exists."}
+Let $(x_n)$ be the Specker sequence of :ref{#prop-specker} and $x$ its limit, so that $0 < x_n \leq x \leq 1$ and $x$ is not computable. For $y \in [0, 1]$, let
+$$
+g(y) = \sum_{n} 2^{-n-1} \min(y - x_n / 2,\ 0) + \max(4y - 3,\ 0).
+$$
+1. Show that $g$ has a computable code.
+2. Show that $g(0) < 0 < g(1)$ and that the set of zeros of $g$ is $[x/2, 3/4]$.
+3. Deduce that $\mathsf{RCA}_0$ does not prove that every continuous $f : [0, 1] \to \mathbb R$ with $f(0) < 0 < f(1)$ has a least zero.
+
+:::solution
+1. Each function $y \mapsto \min(y - x_n/2, 0)$ is $1$-Lipschitz and bounded by $1$ in absolute value on $[0, 1]$, so the series converges, and $g$ is Lipschitz with constant $\sum_n 2^{-n-1} + 4 = 5$. For a rational $a \in [0, 1]$, the partial sum up to $n = k$ together with $\max(4a - 3, 0)$ is a rational computable from $a$ and $k$, within $\sum_{n > k} 2^{-n-1} = 2^{-k-1}$ of $g(a)$. By :ref{#ex-lipschitz-code}, $g$ has a computable code.
+2. $g(0) = -\sum_n 2^{-n-2} x_n < 0$, and $g(1) = 0 + 1 > 0$ since $x_n / 2 \leq 1$. If $x/2 \leq y \leq 3/4$, every term vanishes, since $x_n \leq x$ and $4y \leq 3$, so $g(y) = 0$. If $y < x/2$, some $x_n / 2 > y$, since $x_n \to x$; that term is negative, the others are non-positive, and $4y - 3 < 0$ since $y < 1/2$; so $g(y) < 0$. If $y > 3/4$, the sum vanishes and $g(y) = 4y - 3 > 0$. So the zero set is $[x/2, 3/4]$ and the least zero is $x/2$, which is not computable.
+3. In the ω-model $\mathrm{REC}$ of $\mathsf{RCA}_0$, the computable code of $g$ is an instance: $g(0) < 0 < g(1)$ is arithmetic, hence holds in $\mathrm{REC}$. Suppose that $y \in \mathrm{REC}$ is a least zero in the sense of $\mathrm{REC}$. The formula $g(y) = 0$ is arithmetic, so $g(y) = 0$ and $y \geq x/2$. Every rational $q \in (x/2, 3/4]$ is a computable real with $g(q) = 0$, so $\mathrm{REC} \models y \leq q$, and $y \leq q$ by absoluteness. Hence $y \leq x/2$, and $y = x/2$ would be computable, a contradiction. By the completeness theorem, $\mathsf{RCA}_0$ does not prove the statement. The quantifier "for every zero $z$" ranges over reals, which are sets; it is the reason why the argument goes through the rationals.
+
+:::
+::::
+:::::

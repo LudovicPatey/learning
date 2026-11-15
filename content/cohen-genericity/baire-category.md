@@ -1,7 +1,7 @@
 ---
 title: Genericity and Baire category
 summary: Dense sets of strings and generic sets; meager and co-meager classes of Cantor space; the Baire category theorem; properties of sufficiently generic sets.
-duration: 50
+duration: 45
 prerequisites: [turing-degrees/finite-extensions]
 ---
 
@@ -146,17 +146,7 @@ Is the class $\{ X : X(2n) = 0 \text{ for every } n \}$ meager?
 Genericity has a description in terms of games. Given a class $\mathcal B$, two players alternately extend a string: player I chooses $\tau_0$, player II chooses $\tau_1 \succ \tau_0$, player I chooses $\tau_2 \succ \tau_1$, and so on; player II wins if the set extending all the $\tau_k$ belongs to $\mathcal B$. If $\mathcal B$ contains $\bigcap_n [D_n]^{\prec}$ with each $D_n$ dense, player II wins by answering, at her $n$-th move, with a proper extension in $D_n$ of the current string. Conversely, Banach showed that if player II has a winning strategy, then $\mathcal B$ is co-meager. A finite extension construction is thus a strategy for player II in which the opponent's moves are the finite parts fixed so far. This converse is admitted here; see Soare (2016, Theorem 14.1.3, stated there with the roles of the players exchanged).
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that the class of computable sets is meager, and that the class of sets computing $\emptyset'$ is meager.
-
-:::solution
-The class of computable sets is countable, hence meager. By :ref{#thm-cone-avoidance}, the sets $D_e = \{ \tau : \exists x\ \Phi^\tau_e(x)\converge \neq \emptyset'(x) \} \cup \{ \tau : \exists x\ \forall \rho \succeq \tau\ \Phi^\rho_e(x)\diverge \}$ are dense, and a set meeting all of them does not compute $\emptyset'$. By :ref{#prop-generic-comeager}, the class of sets not computing $\emptyset'$ is co-meager.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-closed-meager difficulty=1 objective="Characterize the meager closed classes by the absence of cylinders, using the Baire category theorem."}
 Show that a closed class is meager if and only if it is nowhere dense, if and only if it contains no cylinder.
 
 :::solution
@@ -164,7 +154,7 @@ Nowhere dense classes are meager. A meager class contains no cylinder, since by 
 :::
 ::::
 
-::::exercise{#exr-density-meager difficulty=2}
+::::exercise{#exr-density-meager difficulty=2 objective="Construct dense sets of strings that make the frequency of elements oscillate, and compare category with measure."}
 For a set $X$ and $n \geq 1$, let $\delta_n(X) = |X \cap \{0, \dots, n-1\}| / n$. Show that for every sufficiently generic set $G$, $\limsup_n \delta_n(G) = 1$ and $\liminf_n \delta_n(G) = 0$. Deduce that the class of sets with asymptotic density $\tfrac12$ is meager.
 
 :::solution
@@ -185,3 +175,63 @@ Baire introduced meager classes, under the name of sets of first category, in hi
 - J. C. Oxtoby, *Measure and Category*, 2nd edition, Graduate Texts in Mathematics 2, Springer, 1980.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §14.1.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cohen forcing*.
+
+:::::exercises
+::::exercise{#ex-meager-computable-cone difficulty=1 objective="Recognize meager classes through countability and through cone avoidance."}
+Show that the class of computable sets is meager, and that the class of sets computing $\emptyset'$ is meager.
+
+:::solution
+The class of computable sets is countable, hence meager. By :ref{#thm-cone-avoidance}, the sets $D_e = \{ \tau : \exists x\ \Phi^\tau_e(x)\converge \neq \emptyset'(x) \} \cup \{ \tau : \exists x\ \forall \rho \succeq \tau\ \Phi^\rho_e(x)\diverge \}$ are dense, and a set meeting all of them does not compute $\emptyset'$. By :ref{#prop-generic-comeager}, the class of sets not computing $\emptyset'$ is co-meager.
+:::
+::::
+
+::::exercise{#ex-category-classify difficulty=1 objective="Decide whether a class is meager, co-meager or neither, with dense sets of strings and the Baire category theorem."}
+For each of the following classes, decide whether it is meager, co-meager, or neither.
+
+1. $\{ X : 0 \in X \}$.
+2. $\{ X : X \text{ is infinite} \}$.
+3. $\{ X : X \text{ contains an infinite computable set} \}$.
+4. $\{ X : X \cap R \text{ and } R \setminus X \text{ are infinite for every infinite computable set } R \}$.
+
+:::solution
+Two general facts are used. First, a class containing a cylinder is not meager: a subclass of a meager class is meager, and no cylinder is meager by :ref{#thm-baire-category}. Second, no class $\mathcal B$ is both meager and co-meager: otherwise $\cs$, the union of $\mathcal B$ and its complement, would be meager, as a union of two meager classes.
+
+1. Neither. The class contains the cylinder $[1]$, so it is not meager; its complement contains the cylinder $[0]$, so it is not co-meager.
+2. Co-meager. For each $m$, the set $\{ \sigma : \exists n \geq m\ \sigma(n) = 1 \}$ is dense, and a set meeting all of them is infinite; conclude by :ref{#prop-generic-comeager}.
+3. Meager. For an infinite computable set $R$, let $D_R = \{ \sigma : \exists n \in R\ \sigma(n) = 0 \}$. It is dense: given $\sigma$, choose $n \in R$ with $n \geq |\sigma|$, which exists since $R$ is infinite; the string $\sigma\, 0^{n - |\sigma| + 1}$ extends $\sigma$ and has a $0$ at position $n$. A set meeting $D_R$ does not contain $R$. There are countably many computable sets, so the sets meeting every $D_R$ form a co-meager class by :ref{#prop-generic-comeager}, and it is disjoint from the class of item 3. A subclass of the complement of a co-meager class is meager.
+4. Co-meager. For an infinite computable set $R$, $m \in \nat$ and $i \in \{0, 1\}$, the set $\{ \sigma : \exists n \in R\ (n \geq m \text{ and } \sigma(n) = i) \}$ is dense, by the argument of item 3. A set meeting all of them, for the countably many triples $(R, m, i)$, has infinitely many elements and infinitely many non-elements in each $R$.
+:::
+::::
+
+::::exercise[Banach–Mazur games: the meager case]{#ex-banach-mazur-meager difficulty=1 objective="Turn the definition of a meager class into a winning strategy for the player who avoids it."}
+Consider the game of the aside on Banach–Mazur games for a class $\mathcal B$: player I chooses a string $\tau_0$, then the players alternately choose proper extensions $\tau_1 \succ \tau_0$, $\tau_2 \succ \tau_1$, and so on, and player II wins if the set extending all the $\tau_k$ belongs to $\mathcal B$. Show that if $\mathcal B$ is meager, player I has a strategy that makes the resulting set lie outside $\mathcal B$, whatever player II plays. Deduce that player II has no winning strategy when $\mathcal B$ is meager.
+
+:::solution
+Let $\mathcal B \subseteq \bigcup_n \mathcal N_n$ with each $\mathcal N_n$ nowhere dense. At her $n$-th move ($n = 0, 1, \dots$), player I is given the current string $\rho$: the empty string if $n = 0$, and $\tau_{2n-1}$ otherwise. Since $\mathcal N_n$ is nowhere dense, the cylinder $[\rho\, 0]$ contains a cylinder $[\tau]$ disjoint from $\mathcal N_n$; player I plays $\tau_{2n} = \tau$, a proper extension of $\rho$. The lengths of the strings increase strictly, so they determine a set $X$, and $X \in [\tau_{2n}]$ for every $n$. Hence $X \notin \mathcal N_n$ for every $n$, and $X \notin \mathcal B$.
+
+If player II also had a winning strategy, the play in which each player follows her strategy would produce a set that belongs to $\mathcal B$, by the strategy of player II, and does not, by the strategy of player I. So player II has none.
+:::
+::::
+
+::::exercise[Effective Baire category]{#ex-effective-baire difficulty=1 objective="Measure the oracle needed to meet a sequence of dense sets of strings of a given complexity."}
+1. Let $(D_n)$ be a sequence of dense sets of strings such that the relation "$\tau \in D_n$" is computable in $\emptyset'$, as a relation of $(n, \tau)$. Show that some set meeting every $D_n$ is computable in $\emptyset'$.
+2. Suppose only that the relation "$\tau \in D_n$" is computable in $\emptyset'$, without assuming that the sets $D_n$ are dense. Show that $\emptyset''$ computes a set that meets every $D_n$ that is dense.
+
+:::solution
+1. Fix a computable enumeration of $\bstr$. Let $\sigma_0 = \varepsilon$, and let $\sigma_{n+1} = \tau\, 0$, where $\tau$ is the first extension of $\sigma_n$ in $D_n$ in the enumeration. The search terminates since $D_n$ is dense, and each test "$\tau \in D_n$" is answered by $\emptyset'$, so the sequence $(\sigma_n)$ is computable in $\emptyset'$. The lengths increase strictly, so the limit $G$ is a set, $G \leq_T \emptyset'$, and $G$ meets $D_n$ through the prefix $\tau$ of $\sigma_{n+1}$.
+2. The question "$\sigma_n$ has an extension in $D_n$" has the form $\exists \tau\ (\tau \succeq \sigma_n \wedge \tau \in D_n)$, with a matrix computable in $\emptyset'$; it is $\Sigma^0_1$ relative to $\emptyset'$, so $\emptyset''$ answers it. If the answer is yes, let $\sigma_{n+1} = \tau\, 0$ for the first such $\tau$, found by a search in which $\emptyset'' \geq_T \emptyset'$ decides membership in $D_n$; otherwise let $\sigma_{n+1} = \sigma_n 0$. The limit $G$ is computable in $\emptyset''$. If $D_n$ is dense, the answer at step $n$ is yes, and $G$ meets $D_n$.
+
+This is adapted from Soare (2016, Exercise 14.1.8). In item 2, the construction does not decide whether $D_n$ is dense, a question of higher complexity; it only asks whether the current string can be extended into $D_n$.
+:::
+::::
+
+::::exercise{#ex-generic-meets-infinitely difficulty=1 objective="Show that meeting a dense set infinitely often is again a property of sufficiently generic sets."}
+Let $D$ be a dense set of strings. Show that every sufficiently generic set has infinitely many prefixes in $D$. Give an example of a dense set $D$ and a set $X$ that has exactly one prefix in $D$.
+
+:::solution
+For $m \in \nat$, let $D_m$ be the set of strings having a prefix of length at least $m$ in $D$. It is dense: given $\sigma$, take an extension $\tau \in D$ of $\sigma\, 0^m$; then $|\tau| \geq m$ and $\tau \in D_m$. A set $G$ meeting every $D_m$ has, for each $m$, a prefix of length at least $m$ in $D$, hence infinitely many prefixes in $D$.
+
+For the example, let $D$ be the set of strings that contain at least two $1$s, together with the strings that contain exactly one $1$, in last position. It is dense: a string without $1$ is extended by a $1$, a string with exactly one $1$ is extended by a $1$, and a string with two $1$s is in $D$. Let $X = \{ 0 \}$. Its prefix $1$ is in $D$; its longer prefixes $1\, 0^k$, $k \geq 1$, contain one $1$, not in last position, so they are not in $D$; and the empty prefix is not in $D$. So $X$ has exactly one prefix in $D$.
+:::
+::::
+:::::

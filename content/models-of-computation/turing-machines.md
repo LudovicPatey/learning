@@ -179,7 +179,7 @@ Suppose we had represented $x$ by $x$ ones instead of $x + 1$. What would go wro
 
 ## Exercises
 
-::::exercise{difficulty=1}
+::::exercise{#ex-tm-zero difficulty=1 objective="Write a Turing machine for a constant function and verify it phase by phase."}
 Give a machine computing the constant function $x \mapsto 0$, and prove that it is correct.
 
 :::solution
@@ -196,24 +196,7 @@ On input $x$ the head steps from cell $0$ to cell $1$ in state $q_1$, erases cel
 :::
 ::::
 
-::::exercise{difficulty=1}
-Give a machine computing the projection $(x, y) \mapsto x$.
-
-:::solution
-Run right to the separator, step over it, erase the block $\ulcorner y \urcorner$ until reaching the blank after it, then run left over blanks until the last $1$ of $\ulcorner x \urcorner$, then left over the $1$s to cell $-1$, and step right:
-
-| | $1$ | $\sqcup$ |
-| --- | --- | --- |
-| $q_0$ | $(q_0, 1, R)$ | $(q_1, \sqcup, R)$ |
-| $q_1$ | $(q_1, \sqcup, R)$ | $(q_2, \sqcup, L)$ |
-| $q_2$ | $(q_3, 1, L)$ | $(q_2, \sqcup, L)$ |
-| $q_3$ | $(q_3, 1, L)$ | $(q_h, \sqcup, R)$ |
-
-In state $q_2$, the head moves left over the erased cells and the separator until it reaches cell $x$, the last $1$ of the first block.
-:::
-::::
-
-::::exercise{difficulty=1}
+::::exercise{#ex-tm-countable difficulty=1 objective="Deduce from a counting argument that some total function is not Turing-computable."}
 Show that every Turing-computable partial function is computed by infinitely many machines. Show that there are only countably many Turing-computable partial functions $\nat \rightharpoonup \nat$, and deduce that there is a total function $\nat \to \nat$ which is not Turing-computable.
 
 :::solution
@@ -233,3 +216,80 @@ Very small machines can already have a behavior that is hard to analyze. Radó's
 - R. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §1.4.
 - T. Radó, *On non-computable functions*, Bell System Technical Journal 41 (1962), 877–884.
 - The bbchallenge Collaboration, *Determination of the fifth Busy Beaver value*, arXiv:2509.12337, 2025.
+
+:::::exercises
+::::exercise{#ex-tm-projection difficulty=1 objective="Write a Turing machine that erases part of its input and leaves the output in standard position."}
+Give a machine computing the projection $(x, y) \mapsto x$.
+
+:::solution
+Run right to the separator, step over it, erase the block $\ulcorner y \urcorner$ until reaching the blank after it, then run left over blanks until the last $1$ of $\ulcorner x \urcorner$, then left over the $1$s to cell $-1$, and step right:
+
+| | $1$ | $\sqcup$ |
+| --- | --- | --- |
+| $q_0$ | $(q_0, 1, R)$ | $(q_1, \sqcup, R)$ |
+| $q_1$ | $(q_1, \sqcup, R)$ | $(q_2, \sqcup, L)$ |
+| $q_2$ | $(q_3, 1, L)$ | $(q_2, \sqcup, L)$ |
+| $q_3$ | $(q_3, 1, L)$ | $(q_h, \sqcup, R)$ |
+
+In state $q_2$, the head moves left over the erased cells and the separator until it reaches cell $x$, the last $1$ of the first block.
+:::
+::::
+
+::::exercise{#ex-tm-addition-steps difficulty=1 objective="Count the steps of a verified machine from the description of its phases."}
+Show that the addition machine $M_+$ halts on input $(x, y)$ after exactly $2x + 2y + 8$ steps.
+
+:::solution
+Follow the phases of the proof of :ref{#prop-tm-addition}. In state $q_0$ the head moves from cell $0$ to cell $x + 1$ in $x + 1$ steps, and one more step writes $1$ there and moves to cell $x + 2$: $x + 2$ steps. In state $q_1$ the head crosses the $y + 1$ cells $x + 2, \dots, x + y + 2$ in $y + 1$ steps, and one more step moves it back from the blank cell $x + y + 3$: $y + 2$ steps. The states $q_2$ and $q_3$ take one step each, leaving the head on cell $x + y$ in state $q_4$. In state $q_4$ the head crosses the $x + y + 1$ cells $x + y, \dots, 0$ in $x + y + 1$ steps, and one more step goes from cell $-1$ to cell $0$ and halts. The total is $(x + 2) + (y + 2) + 2 + (x + y + 2) = 2x + 2y + 8$. For instance, on input $(0, 0)$ the computation has $8$ steps.
+:::
+::::
+
+::::exercise{#ex-tm-predecessor difficulty=1 objective="Write a Turing machine that treats the input $0$ as a separate case."}
+Give a machine computing $x \mapsto x \dotminus 1$, where $0 \dotminus 1 = 0$, and prove that it is correct.
+
+:::solution
+The idea is to erase the first $1$: if $x \geq 1$, the remaining block $1^x$ is $\ulcorner x - 1 \urcorner$. If $x = 0$, nothing remains, and the $1$ must be written back.
+
+| | $1$ | $\sqcup$ |
+| --- | --- | --- |
+| $q_0$ | $(q_1, \sqcup, R)$ | $(q_h, \sqcup, R)$ |
+| $q_1$ | $(q_2, 1, L)$ | $(q_3, \sqcup, L)$ |
+| $q_2$ | $(q_h, 1, R)$ | $(q_h, \sqcup, R)$ |
+| $q_3$ | $(q_h, 1, R)$ | $(q_4, 1, R)$ |
+| $q_4$ | $(q_h, 1, L)$ | $(q_h, \sqcup, L)$ |
+
+If $x \geq 1$: the machine erases cell $0$ and moves to cell $1$ in state $q_1$; cell $1$ contains $1$, so it moves back to cell $0$ in state $q_2$; cell $0$ is now blank, so it halts on cell $1$. The tape contains $1$s exactly on the cells $1, \dots, x$, that is $\ulcorner x - 1 \urcorner$ starting at the head: the output is $x - 1$. If $x = 0$: the machine erases cell $0$ and reaches the blank cell $1$ in state $q_1$, moves back to cell $0$ in state $q_3$, writes $1$ there and moves to cell $1$ in state $q_4$, and halts on cell $0$. The tape contains a single $1$ on cell $0$: the output is $0$. The entries $\delta(q_0, \sqcup)$, $\delta(q_2, 1)$, $\delta(q_3, 1)$ and $\delta(q_4, 1)$ are never used.
+:::
+::::
+
+::::exercise{#ex-tm-other-arities difficulty=1 objective="Determine the partial functions computed by one machine in several arities, using the output convention."}
+Determine the partial functions $\varphi^{(1)}_{M_+}$ and $\varphi^{(3)}_{M_+}$ computed by the addition machine $M_+$ in arities $1$ and $3$.
+
+:::solution
+*Arity $1$.* On input $x$, the tape holds $1$s on the cells $0, \dots, x$. In state $q_0$ the head reaches the blank cell $x + 1$, writes $1$ there and moves to cell $x + 2$, which is blank; $q_1$ moves back to cell $x + 1$ in state $q_2$, which erases it and moves to cell $x$ in state $q_3$. Cell $x$ contains $1$, so $q_3$ erases it and moves to cell $x - 1$ in state $q_4$. If $x \geq 1$, the cells $0, \dots, x - 1$ contain $1$, and $q_4$ runs left to cell $-1$ and halts on cell $0$, with $1$s exactly on $0, \dots, x - 1$: the output is $x - 1$. If $x = 0$, cell $-1$ is blank, and the machine halts on cell $0$ with a blank tape, which is not a standard final configuration. So $\varphi^{(1)}_{M_+}(x) = x - 1$ for $x \geq 1$, and $\varphi^{(1)}_{M_+}(0)\diverge$.
+
+*Arity $3$.* On input $\ulcorner x \urcorner \sqcup \ulcorner y \urcorner \sqcup \ulcorner z \urcorner$, the first phase fills the first separator, on cell $x + 1$, and the head stops in state $q_1$ on the second separator, cell $x + y + 3$, which is blank. As for two arguments, the machine erases the cells $x + y + 2$ and $x + y + 1$ and halts on cell $0$. The final tape has $1$s on $0, \dots, x + y$ and on the block of $z$, from cell $x + y + 4$ on: two blocks, so the configuration is not standard. Hence $\varphi^{(3)}_{M_+}$ is the empty function.
+:::
+::::
+
+::::exercise{#ex-tm-right-only difficulty=2 objective="Determine the functions computed by machines that never move left, and see why two-way motion is needed."}
+Call a machine **right-moving** if every transition moves the head to the right. Show that a unary partial function is computed by a right-moving machine if and only if it is the empty function or, for some $c \geq 1$, the function defined by $f(x) = x - c$ for $x \geq c$ and undefined for $x < c$.
+
+:::solution
+Let $M$ be right-moving. After $t$ steps the head is on cell $t$, and the cells $\geq t$ have not been visited. Define the states $s_0 = q_0$ and, as long as $s_i \neq q_h$, $s_{i+1}$ and the symbol $b_i$ by $\delta(s_i, 1) = (s_{i+1}, b_i, R)$: the sequence of states of $M$ as long as it scans $1$s. On input $x$ the head scans the $1$s of cells $0, \dots, x$ during the first $x + 1$ steps, so the computation follows this sequence for as long as it is defined and $i \leq x$.
+
+A standard final configuration with the head on cell $t$ needs $\tau(t) = 1$. If $M$ halts at a step $t \geq x + 1$, cell $t$ is beyond the input and unvisited, hence blank, and the configuration is not standard. So $\varphi^{(1)}_M(x)\converge$ requires $M$ to halt at a step $t \leq x$, that is, $s_t = q_h$ for some $t \leq x$. Let $c$ be the least index with $s_c = q_h$, if any; $c \geq 1$ since $q_0 \neq q_h$. If there is no such $c$, $\varphi^{(1)}_M$ is empty. Otherwise, on an input $x \geq c$ the machine halts at step $c$ on cell $c$, the cells $i < c$ contain $b_i$, and the cells $c, \dots, x$ still contain $1$. The configuration is standard if and only if $b_0 = \dots = b_{c-1} = \sqcup$, and then the output is $x - c$. This condition does not depend on $x$. On an input $x < c$ the machine does not halt at a step $\leq x$, so $\varphi^{(1)}_M(x)\diverge$. Hence $\varphi^{(1)}_M$ is empty, or is the function of the statement for this $c$.
+
+Conversely, the empty function is computed by a right-moving machine that never halts, for instance $\delta(q_0, a) = (q_0, a, R)$ for all $a$. For $c \geq 1$, take states $q_0, \dots, q_{c-1}, q_h$ with $\delta(q_i, 1) = (q_{i+1}, \sqcup, R)$ for $i < c - 1$, $\delta(q_{c-1}, 1) = (q_h, \sqcup, R)$, and $\delta(q_i, \sqcup) = (q_h, \sqcup, R)$. By the first part, it computes $x \mapsto x - c$ on $x \geq c$ and diverges elsewhere. In particular, the identity, which is computed by the machine $M_1$ of :ref{#ex-tm-identity}, and the successor are not computed by right-moving machines.
+:::
+::::
+
+::::exercise{#ex-tm-bounded-space difficulty=2 objective="Use a pigeonhole argument on configurations to decide halting for computations in bounded space."}
+Let $M$ have $|Q|$ states and $|\Gamma|$ symbols, and suppose that the computation of $M$ from a configuration $C_0$ never moves the head outside an interval $I$ of $L$ cells, which contains all the non-blank cells of $C_0$. Show that if the computation halts, it does so within $N = |Q| \cdot |\Gamma|^L \cdot L$ steps. Deduce that the computation halts if and only if it halts within $N$ steps.
+
+:::solution
+The cells outside $I$ are never visited, so they stay blank, and every configuration $C_t$ of the computation is determined by its state, the contents of the $L$ cells of $I$, and the head position in $I$. There are at most $N$ such triples. Suppose the computation does not halt within $N$ steps, so that $C_0, \dots, C_N$ are $N + 1$ non-halting configurations. Two of them are equal, say $C_i = C_j$ with $i < j \leq N$. Since each configuration determines its successor, $C_{i + r} = C_{j + r}$ for all $r$, so the sequence is periodic from $i$ on with period $j - i$: every $C_t$ with $t \geq i$ equals some $C_{t'}$ with $i \leq t' < j$, which is not halting. Hence the computation never halts. So a halting computation halts within $N$ steps, and the converse is trivial.
+
+Halting is therefore decidable for such computations: simulate $N$ steps. The course on fundamentals shows that it is not decidable in general; the difficulty comes from computations that use unboundedly many cells.
+:::
+::::
+:::::

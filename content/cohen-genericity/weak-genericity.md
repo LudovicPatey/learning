@@ -123,21 +123,7 @@ Where is the hyperimmunity of $f$ used?
   This holds for every $f \leq_T X$.
 :::
 
-## Higher levels
-
-The direction (3 ⇒ 1) relativizes without change: a weakly $(n+1)$-generic set computes a function that is dominated by no $\emptyset^{(n)}$-computable function (second exercise below, relativized). The converse direction does not relativize at all levels. Andrews, Gerdes and Miller showed that a set computes a weakly 2-generic set if and only if it computes a function dominated by no $\Delta^0_2$ function, using the fact that $\Delta^0_2$ functions are limits of computable approximations. At the next level the analogy breaks down: for every countable family of functions $\mathcal F$, there is a function that escapes every member of $\mathcal F$ and computes no weakly 3-generic set (Andrews, Gerdes and Miller; Monin and Patey, chapter *Cohen forcing*). These results are admitted.
-
-## Exercises
-
-::::exercise{difficulty=1}
-Show that if $G$ is weakly 1-generic, then so is its complement $\nat \setminus G$.
-
-:::solution
-For a set of strings $W$, let $\bar W = \{ \bar\sigma : \sigma \in W \}$, where $\bar\sigma$ flips all bits of $\sigma$. If $W$ is c.e. and dense, so is $\bar W$, since $\sigma \mapsto \bar\sigma$ is a computable bijection preserving the prefix relation. $G$ meets $\bar W$, so $\nat \setminus G$ meets $W$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise{#ex-weak-generic-principal difficulty=2 objective="Use a dense set of strings that prescribes long blocks of zeros to make the principal function of a generic set escape a computable function."}
 Show that the principal function $p_G$ of a weakly 1-generic set $G$ is hyperimmune.
 
 :::solution
@@ -145,12 +131,80 @@ By :ref{#ex-weakly-generic}, $G$ is infinite, so $p_G(n)$, the $n$-th element of
 :::
 ::::
 
+## Higher levels
+
+The direction (3 ⇒ 1) relativizes without change: a weakly $(n+1)$-generic set computes a function that is dominated by no $\emptyset^{(n)}$-computable function (:ref{#ex-weak-generic-relative-escape}). The converse direction does not relativize at all levels. Andrews, Gerdes and Miller showed that a set computes a weakly 2-generic set if and only if it computes a function dominated by no $\Delta^0_2$ function, using the fact that $\Delta^0_2$ functions are limits of computable approximations. At the next level the analogy breaks down: for every countable family of functions $\mathcal F$, there is a function that escapes every member of $\mathcal F$ and computes no weakly 3-generic set (Andrews, Gerdes and Miller; Monin and Patey, chapter *Cohen forcing*). These results are admitted.
+
 ## Notes and references
 
-Weakly 1-generic sets and the equivalence with hyperimmune degrees are due to Kurtz (1981), in his thesis on randomness and genericity, and appear in his paper on weak genericity (1983). The presentation of (1 ⇒ 3) by one bit per stage follows the standard modern proofs; Monin and Patey use a recursive search procedure instead, and Downey and Hirschfeldt prove the degree form directly. The second exercise is the case $n = 0$ of Downey and Hirschfeldt (2010, Theorem 2.24.12). The results of Andrews, Gerdes and Miller are presented, with a proof of the second one, in Monin and Patey.
+Weakly 1-generic sets and the equivalence with hyperimmune degrees are due to Kurtz (1981), in his thesis on randomness and genericity, and appear in his paper on weak genericity (1983). The presentation of (1 ⇒ 3) by one bit per stage follows the standard modern proofs; Monin and Patey use a recursive search procedure instead, and Downey and Hirschfeldt prove the degree form directly. The exercise on the principal function is the case $n = 0$ of Downey and Hirschfeldt (2010, Theorem 2.24.12). The results of Andrews, Gerdes and Miller are presented, with a proof of the second one, in Monin and Patey.
 
 - S. A. Kurtz, *Randomness and genericity in the degrees of unsolvability*, PhD thesis, University of Illinois at Urbana-Champaign, 1981.
 - S. A. Kurtz, *Notions of weak genericity*, Journal of Symbolic Logic 48 (1983), 764–770.
 - U. Andrews, P. Gerdes and J. S. Miller, *The degrees of bi-hyperhyperimmune sets*, Annals of Pure and Applied Logic 165 (2014), 803–811.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, §2.24.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cohen forcing*, section *Effective genericity*.
+
+:::::exercises
+::::exercise{#ex-weak-generic-complement difficulty=1 objective="Transfer weak 1-genericity along the computable bijection of strings that flips every bit."}
+Show that if $G$ is weakly 1-generic, then so is its complement $\nat \setminus G$.
+
+:::solution
+For a set of strings $W$, let $\bar W = \{ \bar\sigma : \sigma \in W \}$, where $\bar\sigma$ flips all bits of $\sigma$. If $W$ is c.e. and dense, so is $\bar W$, since $\sigma \mapsto \bar\sigma$ is a computable bijection preserving the prefix relation. $G$ meets $\bar W$, so $\nat \setminus G$ meets $W$.
+:::
+::::
+
+::::exercise{#ex-weak-generic-relative-escape difficulty=1 objective="Relativize the escape argument for the principal function to weakly $(n+1)$-generic sets and $\emptyset^{(n)}$-computable functions."}
+Let $n \geq 0$ and let $G$ be weakly $(n+1)$-generic. Show that the principal function $p_G$ is dominated by no function computable in $\emptyset^{(n)}$.
+
+:::solution
+$G$ is weakly 1-generic, hence infinite, and $p_G$ is total. Let $f \leq_T \emptyset^{(n)}$. The set $D = \{ \sigma\, 0^{f(|\sigma|) + 1} : \sigma \in \bstr \}$ is dense and computable in $\emptyset^{(n)}$, hence $\Delta^0_{n+1}$ by Post's theorem, in particular $\Sigma^0_{n+1}$. So $G$ meets $D$, and the argument of :ref{#ex-weak-generic-principal} gives $n_0$ with $p_G(n_0) > f(n_0)$. This is Downey and Hirschfeldt (2010, Theorem 2.24.12).
+:::
+::::
+
+::::exercise{#ex-weakly-generic-bi-immune difficulty=1 objective="Show with a dense c.e. set of strings that a weakly 1-generic set and its complement contain no infinite c.e. set."}
+Show that if $G$ is weakly 1-generic, then neither $G$ nor $\nat \setminus G$ contains an infinite c.e. set. Deduce that $G$ is neither c.e. nor co-c.e.
+
+:::solution
+Let $V$ be an infinite c.e. set of numbers, and $S = \{ \sigma : \exists x < |\sigma|\ (x \in V \text{ and } \sigma(x) = 0) \}$. It is c.e., by enumerating $V$. It is dense: given $\sigma$, choose $x \in V$ with $x \geq |\sigma|$, which exists since $V$ is infinite; then $\sigma\, 0^{x - |\sigma| + 1}$ extends $\sigma$ and lies in $S$. So $G$ meets $S$: some $x \in V$ is not in $G$, and $V \not\subseteq G$. With $\sigma(x) = 1$ in place of $\sigma(x) = 0$, the same argument gives $V \not\subseteq \nat \setminus G$.
+
+By :ref{#ex-weakly-generic}, $G$ and $\nat \setminus G$ are infinite. If $G$ were c.e., it would be an infinite c.e. subset of itself; if $\nat \setminus G$ were c.e., likewise. For 1-generic sets, this is Soare (2016, Exercise 6.3.5 (i)).
+:::
+::::
+
+::::exercise{#ex-weak-generic-pi0n difficulty=2 objective="Replace the dense $\Sigma^0_{n+1}$ sets of strings in the definition of weak genericity by dense $\Pi^0_n$ ones, by bounding the witnesses with the length of the string."}
+Let $n \geq 0$, and call $\Pi^0_0$ the computable sets of strings. Show that a set is weakly $(n+1)$-generic if and only if it meets every dense $\Pi^0_n$ set of strings. In particular, a set is weakly 1-generic if and only if it meets every dense computable set of strings.
+
+:::solution
+A $\Pi^0_n$ set of strings is $\Sigma^0_{n+1}$, so a weakly $(n+1)$-generic set meets every dense $\Pi^0_n$ set of strings.
+
+Conversely, suppose that $G$ meets every dense $\Pi^0_n$ set of strings, and let $W$ be a dense $\Sigma^0_{n+1}$ set of strings. Write $\tau \in W \iff \exists k\ R(\tau, k)$, with $R$ a $\Pi^0_n$ relation (computable if $n = 0$). Let
+$$
+V = \{ \sigma : \exists \tau \preceq \sigma\ \exists k < |\sigma|\ R(\tau, k) \}.
+$$
+The quantifiers are bounded by computable functions of $\sigma$, so $V$ is $\Pi^0_n$ (computable if $n = 0$). It is dense: given $\sigma$, take $\tau \succeq \sigma$ in $W$ and $k$ with $R(\tau, k)$; then $\tau\, 0^{k+1}$ extends $\sigma$, has length greater than $k$, and has the prefix $\tau$, so it is in $V$. So $G$ has a prefix $\sigma \in V$, and the string $\tau \preceq \sigma$ of the definition is a prefix of $G$ in $W$.
+
+The remark is due to Jockusch (Downey and Hirschfeldt 2010, after Definition 2.24.10). The same bounding of the witness shows that a set meets or avoids every c.e. set of strings as soon as it meets or avoids every computable one: if a prefix $\sigma$ of $G$ avoids $V$, it also avoids $W$, since an extension $\tau \in W$ of $\sigma$ with witness $k$ would give the extension $\tau\, 0^{k+1} \in V$.
+:::
+::::
+
+::::exercise{#ex-weak-generic-join-complement difficulty=1 objective="See that weak 1-genericity is a property of sets, not of Turing degrees."}
+Let $G$ be weakly 1-generic. Show that $G \oplus (\nat \setminus G)$ is Turing equivalent to $G$ but is not weakly 1-generic.
+
+:::solution
+Both $G$ and $\nat \setminus G$ are computable in $G$, and $G$ is read off the even bits of $G \oplus (\nat \setminus G)$, so the two sets are Turing equivalent. Let $D = \{ \sigma : \exists i\ (2i + 1 < |\sigma| \text{ and } \sigma(2i) = \sigma(2i+1)) \}$, a computable set of strings. It is dense: a string of even length $2i$ is extended by $00$, which puts equal bits at positions $2i$ and $2i + 1$, and a string of odd length is first extended by one bit. The set $G \oplus (\nat \setminus G)$ has the bits $G(i)$ and $1 - G(i)$ at positions $2i$ and $2i + 1$, so none of its prefixes is in $D$. Being weakly 1-generic is therefore not invariant under Turing equivalence; applied to a 1-generic set $G$, the same argument shows it for 1-genericity.
+:::
+::::
+
+::::exercise{#ex-weak-generic-null difficulty=2 objective="Show that the weakly 1-generic sets form a co-meager class of measure zero, by prescribing long blocks of zeros."}
+Let $\mu$ be the uniform measure on Cantor space: $\mu([\sigma]) = 2^{-|\sigma|}$, and $\mu$ is monotone and countably subadditive. Show that the class of weakly 1-generic sets has measure $0$. Deduce that there is a co-meager class of measure $0$.
+
+:::solution
+For $n \geq 1$, let $\mathcal E_n = \{ X : X(i) = 0 \text{ for all } i \text{ with } n \leq i < 2n \}$. It is the union of the $2^n$ cylinders $[\rho\, 0^n]$ with $|\rho| = n$, each of measure $2^{-2n}$, so $\mu(\mathcal E_n) \leq 2^{-n}$.
+
+For $m \geq 1$, the set $D_m = \{ \sigma\, 0^{|\sigma|} : |\sigma| \geq m \}$ is computable and dense: a string $\sigma$ is first extended by zeros to a string $\sigma'$ of length at least $m$, and then to $\sigma'\, 0^{|\sigma'|} \in D_m$. A weakly 1-generic set $G$ meets $D_m$, so it has a prefix $\sigma\, 0^{|\sigma|}$ with $n = |\sigma| \geq m$, and $G \in \mathcal E_n$. Hence the class of weakly 1-generic sets is contained in $\bigcup_{n \geq m} \mathcal E_n$, of measure at most $\sum_{n \geq m} 2^{-n} = 2^{1-m}$. This holds for every $m$, so the class has measure $0$.
+
+The class of weakly 1-generic sets is co-meager (:ref{#prop-generic-comeager}), which gives the second statement. This separates category from measure without the strong law of large numbers, which the comparison after :ref{#thm-baire-category} admits.
+:::
+::::
+:::::

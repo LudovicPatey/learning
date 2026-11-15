@@ -1,7 +1,7 @@
 ---
 title: Cost functions and a c.e. K-trivial set
 summary: The standard cost function; a set with a computable approximation obeying it is K-trivial; a simple K-trivial set, built by Post's construction restricted to cheap enumerations.
-duration: 50
+duration: 45
 prerequisites: [k-trivial-sets, kolmogorov-complexity/coding-theorem, ce-degrees/simple-sets]
 ---
 
@@ -134,27 +134,7 @@ Why does the cost of the whole enumeration stay below $2$?
 
 ## Exercises
 
-::::exercise{difficulty=1}
-Show that there is a K-trivial set that is neither c.e. nor co-c.e.
-
-:::solution
-Let $A$ be a non-computable c.e. K-trivial set. By :ref{#prop-k-trivial-basic} and :ref{#prop-k-trivial-join}, $B = A \oplus \overline{A}$ is K-trivial. If $B$ were c.e., then $\overline{A} = \{ n : 2n + 1 \in B \}$ would be c.e., and $A$ would be computable. If $B$ were co-c.e., then $A = \{ n : 2n \in B \}$ would be co-c.e., hence computable since it is c.e.
-:::
-::::
-
-::::exercise{difficulty=2}
-Let $(A_s)$ be a computable approximation obeying $c_K$, and $f$ a computable strictly increasing function. Show that $(A_{f(s)})_s$ obeys $c_K$.
-
-:::solution
-Let $B_s = A_{f(s)}$. If $B_{s+1} \neq B_s$, then $A$ changes at some stages $t$ with $f(s) \leq t < f(s+1)$, and the least position $y_s$ at which $B_s$ and $B_{s+1}$ differ is at least the least $x_t$ over these stages $t$: a position where $A_{f(s)}$ and $A_{f(s+1)}$ differ has changed at some intermediate stage. Let $t$ be such a stage with $x_t \leq y_s$. Since $c_K$ is non-increasing in $x$ and non-decreasing in its second argument, and $s + 1 \leq f(s) + 1 \leq t + 1$,
-$$
-c_K(y_s, s+1) \leq c_K(x_t, s + 1) \leq c_K(x_t, t+1).
-$$
-Distinct $s$ give distinct $t$, since the intervals $[f(s), f(s+1))$ are disjoint. So the total cost of $(B_s)$ is at most that of $(A_s)$.
-:::
-::::
-
-::::exercise{difficulty=2}
+::::exercise[Permitting]{#ex-ktrivial-permitting difficulty=2 objective="Combine the cost function construction with permitting to build a K-trivial set below a given non-computable c.e. set."}
 Let $B$ be a non-computable c.e. set. Modify the construction of :ref{#thm-solovay-ktrivial} to build a K-trivial c.e. set $A$ that is not computable and satisfies $A \leq_T B$.
 
 :::hint
@@ -172,7 +152,7 @@ Fix a computable enumeration $(B_s)$ of $B$. At stage $s + 1$, for each $e \leq 
 
 ## Notes and references
 
-Solovay (1975) built the first non-computable K-trivial set, in an unpublished manuscript; Zambella (1990) adapted the construction to obtain a c.e. one. The cost function form given here, with the theorem that obeying $c_K$ implies K-triviality, is due to Downey, Hirschfeldt, Nies and Stephan (2003); Kummer found a similar construction independently, and Kučera and Terwijn (1999) had used the same idea to build a non-computable c.e. set that is low for randomness. Nies developed the general theory of cost functions and proved that every K-trivial set obeys $c_K$. The permitting construction of the third exercise is one of the variations of the construction noted by Downey, Hirschfeldt, Nies and Stephan (see Downey and Hirschfeldt, Section 11.1.1): every non-zero c.e. degree bounds a non-computable c.e. K-trivial set.
+Solovay (1975) built the first non-computable K-trivial set, in an unpublished manuscript; Zambella (1990) adapted the construction to obtain a c.e. one. The cost function form given here, with the theorem that obeying $c_K$ implies K-triviality, is due to Downey, Hirschfeldt, Nies and Stephan (2003); Kummer found a similar construction independently, and Kučera and Terwijn (1999) had used the same idea to build a non-computable c.e. set that is low for randomness. Nies developed the general theory of cost functions and proved that every K-trivial set obeys $c_K$. The permitting construction of :ref{#ex-ktrivial-permitting} is one of the variations of the construction noted by Downey, Hirschfeldt, Nies and Stephan (see Downey and Hirschfeldt, Section 11.1.1): every non-zero c.e. degree bounds a non-computable c.e. K-trivial set.
 
 The material is in Nies, *Computability and Randomness*, Section 5.3 (Definitions 5.3.1–5.3.4, Theorem 5.3.10, Proposition 5.3.11) and Section 5.5 (Theorem 5.5.2), and in Downey and Hirschfeldt, *Algorithmic Randomness and Complexity*, Sections 11.1 (Theorem 11.1.5) and 11.5 (Definition 11.5.1, Theorem 11.5.3).
 
@@ -183,3 +163,81 @@ The material is in Nies, *Computability and Randomness*, Section 5.3 (Definition
 - A. Nies, *Lowness properties and randomness*, Advances in Mathematics 197 (2005), 274–305.
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Sections 5.3 and 5.5.
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 11.1 and 11.5.
+
+:::::exercises
+::::exercise{#ex-ktrivial-not-ce-coce difficulty=1 objective="Combine the existence of a non-computable c.e. K-trivial set with the closure properties of the first lesson."}
+Show that there is a K-trivial set that is neither c.e. nor co-c.e.
+
+:::solution
+Let $A$ be a non-computable c.e. K-trivial set. By :ref{#prop-k-trivial-basic} and :ref{#prop-k-trivial-join}, $B = A \oplus \overline{A}$ is K-trivial. If $B$ were c.e., then $\overline{A} = \{ n : 2n + 1 \in B \}$ would be c.e., and $A$ would be computable. If $B$ were co-c.e., then $A = \{ n : 2n \in B \}$ would be co-c.e., hence computable since it is c.e.
+:::
+::::
+
+::::exercise[Speeding up an approximation]{#ex-cost-speedup difficulty=2 objective="Use the monotonicity of the standard cost function to compare an approximation with its subsequences."}
+Let $(A_s)$ be a computable approximation obeying $c_K$, and $f$ a computable strictly increasing function. Show that $(A_{f(s)})_s$ obeys $c_K$.
+
+:::solution
+Let $B_s = A_{f(s)}$. If $B_{s+1} \neq B_s$, then $A$ changes at some stages $t$ with $f(s) \leq t < f(s+1)$, and the least position $y_s$ at which $B_s$ and $B_{s+1}$ differ is at least the least $x_t$ over these stages $t$: a position where $A_{f(s)}$ and $A_{f(s+1)}$ differ has changed at some intermediate stage. Let $t$ be such a stage with $x_t \leq y_s$. Since $c_K$ is non-increasing in $x$ and non-decreasing in its second argument, and $s + 1 \leq f(s) + 1 \leq t + 1$,
+$$
+c_K(y_s, s+1) \leq c_K(x_t, s + 1) \leq c_K(x_t, t+1).
+$$
+Distinct $s$ give distinct $t$, since the intervals $[f(s), f(s+1))$ are disjoint. So the total cost of $(B_s)$ is at most that of $(A_s)$.
+:::
+::::
+
+::::exercise[A slow enumeration of a computable set]{#ex-cost-slow-enumeration difficulty=2 objective="See that obeying the standard cost function is a property of the approximation and not of the set."}
+Show that there is a computable approximation $(A_s)$ of the set $\nat$, in which each $A_s$ is an initial segment $\{0, \dots, a_s - 1\}$ of $\nat$, that does not obey $c_K$.
+
+:::hint
+Bound the tail $\sum_{n > x} 2^{-K(n)}$ from below by a constant times $1/(x+1)$, and enumerate $x$ only when its cost has reached a fixed fraction of this bound.
+:::
+
+:::solution
+*A lower bound for the tails.* By :ref{#prop-k-basic} (2), applied to the string of $n$, of length $\lfloor \log(n+1) \rfloor$, there is $c_0$ with $K(n) \leq 2 \lfloor \log(n+1) \rfloor + c_0$ for every $n$. If $x < n \leq 2x + 1$, then $\lfloor \log(n+1) \rfloor \leq \log(2x + 2) = 1 + \log(x+1)$, so $2^{-K(n)} \geq 2^{-c_0 - 2} (x+1)^{-2}$. There are $x + 1$ such numbers $n$, so
+$$
+t_x = \sum_{n > x} 2^{-K(n)} \geq \frac{2^{-c_0-2}}{x+1} > q_x, \quad \text{where } q_x = \frac{2^{-c_0-3}}{x+1}.
+$$
+For fixed $x$, $c_K(x, s)$ is non-decreasing in $s$, and its limit is $t_x$: each term $2^{-K_s(n)}$ increases to $2^{-K(n)}$, and every $n > x$ is eventually counted. So $c_K(x, s) > q_x$ for all large $s$.
+
+*The approximation.* Let $A_0 = \emptyset$. At stage $s + 1$, let $x = a_s$ be the least number not in $A_s$; if $c_K(x, s + 1) > q_x$, let $A_{s+1} = A_s \cup \{x\}$, and otherwise $A_{s+1} = A_s$. The approximation is computable, since $q_x$ is a rational computed from $x$. Each $A_s$ is an initial segment of $\nat$, and by induction every $x$ eventually enters: once $x$ is the least number missing, it enters at the first stage $s + 1$ with $c_K(x, s+1) > q_x$. So $(A_s)$ is a computable approximation of $\nat$, and $A_s(x)$ changes exactly once, for every $x$.
+
+*The cost.* The stage at which $x$ enters changes only the position $x$, so it has cost $c_K(x, s + 1) > q_x$. The total cost is at least $\sum_x q_x = \infty$, since the harmonic series diverges. The constant approximation $A_s = \nat$ has cost $0$, so the same set has approximations that obey $c_K$ and approximations that do not. (Adapted from Nies 2009, Exercise 5.3.7.)
+:::
+::::
+
+::::exercise[The limit condition is necessary]{#ex-cost-limit-necessary difficulty=2 objective="Show that a monotone cost function without the limit condition is obeyed only by approximations of computable sets."}
+A **cost function** is a computable function $c$ from $\nat \times \nat$ to the non-negative rationals, and a computable approximation $(A_s)$ **obeys** $c$ if $\sum_s c(x_s, s+1) < \infty$, the sum ranging over the stages $s$ with $A_{s+1} \neq A_s$, with $x_s$ as in :ref{#def-cost-ck}. Let $c$ be non-decreasing in its second argument and non-increasing in its first, and suppose that $c$ fails the **limit condition**: there is $\delta > 0$ such that for every $x$, $c(x, s) > \delta$ for some $s$. Show that if a computable approximation of $A$ obeys $c$, then $A$ is computable.
+
+:::solution
+Let $(A_s)$ obey $c$. For each $x$, let $t_x$ be the least $s$ with $c(x, s) > \delta$; it exists by hypothesis, and $x \mapsto t_x$ is computable, since $c$ is. Since the total cost is finite, only finitely many stages have a cost larger than $\delta$; let $s_0$ be larger than all of them.
+
+Let $x \in \nat$ and $s \geq \max(s_0, t_x)$. If $A_{s+1}$ and $A_s$ differed at some position $y \leq x$, then $x_s \leq y \leq x$, and by the two monotonicity properties
+$$
+c(x_s, s + 1) \geq c(x, s + 1) \geq c(x, t_x) > \delta,
+$$
+contradicting $s \geq s_0$. So $A_s(x)$ does not change after stage $\max(s_0, t_x)$, and $A(x) = A_{\max(s_0, t_x)}(x)$. For the fixed number $s_0$, this is a computable function of $x$, so $A$ is computable.
+
+The standard cost function satisfies the limit condition, and this is what allows the proof of :ref{#thm-solovay-ktrivial} to find cheap elements; the exercise shows that some form of it is needed for any non-computable set. (Adapted from Nies 2009, Exercise 5.3.8.)
+:::
+::::
+
+::::exercise{#ex-cost-join-approx difficulty=1 objective="Check that obeying the standard cost function is preserved by the join of approximations."}
+Let $(A_s)$ and $(B_s)$ be computable approximations that obey $c_K$. Show that $(A_s \oplus B_s)$ obeys $c_K$. Deduce, with :ref{#thm-obey-ktrivial}, that $A \oplus B$ is K-trivial.
+
+:::solution
+Let $C_s = A_s \oplus B_s$, and let $s$ be a stage with $C_{s+1} \neq C_s$. The least position $z$ at which $C_s$ and $C_{s+1}$ differ is $2x$ for the least position $x$ at which $A_s$ and $A_{s+1}$ differ, or $2y + 1$ for the least position $y$ at which $B_s$ and $B_{s+1}$ differ. In the first case $A$ changes at stage $s$ and $z \geq x$, so $c_K(z, s+1) \leq c_K(x, s+1)$, since $c_K$ is non-increasing in its first argument; this is the cost of $(A_s)$ at stage $s$. In the second case, similarly, $c_K(z, s+1) \leq c_K(y, s+1)$, the cost of $(B_s)$ at stage $s$. So the total cost of $(C_s)$ is at most the sum of the total costs of $(A_s)$ and $(B_s)$. The sequence $(C_s)$ is a computable approximation of $A \oplus B$, and :ref{#thm-obey-ktrivial} applies.
+:::
+::::
+
+::::exercise[A sparse simple K-trivial set]{#ex-ktrivial-sparse-simple difficulty=2 objective="Vary the construction of a simple K-trivial set to control the number of its elements below each bound."}
+An **order** is a computable non-decreasing unbounded function $h : \nat \to \nat$. Show that for every order $h$ there is a simple K-trivial set $A$ such that $A$ has at most $h(n)$ elements below $n$, for every $n$.
+
+:::solution
+Let $g(e)$ be the least $m$ with $h(m) > e$; it exists since $h$ is unbounded, and $g$ is computable. Run the construction of :ref{#thm-solovay-ktrivial} with the condition $x > \max(2e, g(e))$ in place of $x > 2e$.
+
+The cost argument is unchanged: each $e$ acts at most once, at a cost less than $2^{-e}$, so $A$ is K-trivial by :ref{#thm-obey-ktrivial}. The complement is infinite as before, since the elements contributed for $e$ are larger than $2e$. If $W_e$ is infinite, choose $x_0$ as in the proof; an element $x \in W_e$ with $x > \max(x_0, 2e, g(e))$ qualifies at every stage after it appears in $W_e$, so $e$ acts, and $A$ meets $W_e$. So $A$ is simple.
+
+Let $y \in A$ with $y < n$, and let $e$ be the index for which $y$ was enumerated. Then $g(e) < y < n$, so $h(n) \geq h(g(e)) > e$, since $h$ is non-decreasing. Distinct elements of $A$ are enumerated for distinct indices, all smaller than $h(n)$, so $A$ has at most $h(n)$ elements below $n$.
+:::
+::::
+:::::

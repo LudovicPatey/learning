@@ -47,6 +47,14 @@ Why does $f(n)$ wait for $2n$ elements of the complement, rather than $n$?
 
 Yates constructed a maximal set in the degree of $\emptyset'$ (Soare 2016, Section 5.7), and Martin (1966) showed that the degrees of the maximal sets are exactly the high c.e. degrees. These results are admitted here.
 
+::::exercise{#ex-maximal-hypersimple difficulty=1 objective="Derive the hypersimplicity of maximal sets from the dominant function of Martin's proof."}
+Show that every maximal set is hypersimple.
+
+:::solution
+Let $M$ be maximal, $p$ the principal function of its complement, and $f$ the function of the proof of :ref{#thm-maximal-high}, which is dominant. For $n \geq 1$, $f(n) = p(2n - 1) + 1$. If a computable function $g$ dominated $p$, then $f(n) \leq g(2n - 1) + 1$ for every $n \geq 1$, while $f$ eventually dominates the computable function equal to $g(2n - 1) + 2$ at every $n \geq 1$, a contradiction. So $p$ is hyperimmune, and the complement of $M$ is hyperimmune by :ref{#thm-hyperimmune-principal}.
+:::
+::::
+
 ## High or DNC
 
 A function $h$ is **almost everywhere different** from $f$ if $\forall^\infty n\ h(n) \neq f(n)$. Both high sets and DNC sets compute functions almost everywhere different from every computable function, for different reasons: a dominant function plus one is eventually above each computable function, and a DNC function can be strengthened to avoid, at $n$, all the values $\Phi_e(n)$ with $e \leq n$ (:ref{#thm-dnc-effectively-immune}). Kjos-Hanssen, Merkle and Stephan showed that there is no other way.
@@ -91,24 +99,6 @@ In ($\Rightarrow$), where is the assumption that $X$ is not high used?
   The finite modification is computable from $k$ for every $X$.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
-Show that every maximal set is hypersimple.
-
-:::solution
-Let $M$ be maximal, $p$ the principal function of its complement, and $f$ the function of the proof of :ref{#thm-maximal-high}, which is dominant. For $n \geq 1$, $f(n) = p(2n - 1) + 1$. If a computable function $g$ dominated $p$, then $f(n) \leq g(2n - 1) + 1$ for every $n \geq 1$, while $f$ eventually dominates the computable function equal to $g(2n - 1) + 2$ at every $n \geq 1$, a contradiction. So $p$ is hyperimmune, and the complement of $M$ is hyperimmune by :ref{#thm-hyperimmune-principal}.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that a computably dominated set computes a function almost everywhere different from every computable function if and only if it computes a DNC function.
-
-:::solution
-A computably dominated set is not high, by :ref{#cor-high-hyperimmune}. So, by :ref{#thm-high-or-dnc}, it computes a function almost everywhere different from every computable function if and only if it computes a DNC function.
-:::
-::::
-
 ## Notes and references
 
 Friedberg (1958) constructed maximal sets. Martin (1966) proved that maximal sets are high, and that every high c.e. degree contains a maximal set; Monin and Patey give the first result as an exercise, with the proof followed here. The theorem on high or DNC sets is Theorem 5.1 of Kjos-Hanssen, Merkle and Stephan (2011), with further equivalent conditions in terms of Kolmogorov complexity; they arrived at it through the study of the complexity of initial segments, treated in the course on algorithmic randomness. Monin and Patey prove it in the section *High or DNC degrees* of their chapter *Immunity and function growth*.
@@ -118,3 +108,53 @@ Friedberg (1958) constructed maximal sets. Martin (1966) proved that maximal set
 - B. Kjos-Hanssen, W. Merkle and F. Stephan, *Kolmogorov complexity and the recursion theorem*, Transactions of the American Mathematical Society 363 (2011), 5465–5480.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, Section 5.7.
 - B. Monin and L. Patey, *Computability theory*, chapter *Immunity and function growth*.
+
+:::::exercises
+::::exercise{#ex-high-or-dnc-dominated difficulty=1 objective="Specialize the high or DNC theorem to computably dominated sets."}
+Show that a computably dominated set computes a function almost everywhere different from every computable function if and only if it computes a DNC function.
+
+:::solution
+A computably dominated set is not high, by :ref{#cor-high-hyperimmune}. So, by :ref{#thm-high-or-dnc}, it computes a function almost everywhere different from every computable function if and only if it computes a DNC function.
+:::
+::::
+
+::::exercise{#ex-dense-simple difficulty=2 objective="Show that maximal sets have complements whose principal function is dominant, and that this property gives hypersimplicity and highness."}
+A c.e. set $A$ with infinite complement is **dense simple** if the principal function of $\nat \setminus A$ is dominant.
+
+1. Show that every dense simple set is hypersimple and high.
+2. Let $M$ be maximal, and $g$ a strictly increasing computable function. Show that for all but finitely many $n$, the interval $[g(n), g(n+1))$ contains at most one element of $\nat \setminus M$.
+3. Deduce that every maximal set is dense simple.
+
+:::solution
+1. Let $p$ be the principal function of $\nat \setminus A$, which is dominant. A dominant function is hyperimmune, so $\nat \setminus A$ is hyperimmune by :ref{#thm-hyperimmune-principal}, and $A$ is hypersimple. Since $\nat \setminus A$ is infinite and computable in $A$, $p \leq_T A$, and $A$ is high by :ref{#thm-martin-domination}.
+2. The second part of the proof of :ref{#thm-maximal-high} applies to any strictly increasing computable $g$: if infinitely many intervals $I_n = [g(n), g(n+1))$ contained two elements of $\nat \setminus M$, the c.e. set $W$ defined there would contain $M$, with $W \setminus M$ infinite and $\nat \setminus W$ infinite, contradicting the maximality of $M$.
+3. Let $p$ be the principal function of $\nat \setminus M$, and $f$ a computable function. Let $g(n) = n + \max_{k \leq 2n} f(k)$, which is computable and strictly increasing. By 2, there is $n_0$ such that $I_n$ contains at most one element of $\nat \setminus M$ for every $n \geq n_0$. Let $c$ be the number of elements of $\nat \setminus M$ below $g(n_0)$. For $n \geq n_0$, at most $c + (n - n_0)$ elements of $\nat \setminus M$ are below $g(n)$, so $p(c + n - n_0) \geq g(n)$. Let $d = c - n_0$. For $m \geq \max(c, 2d)$, take $n = m - d \geq n_0$: then $p(m) \geq g(m - d)$, and $2(m - d) \geq m$, so $g(m - d) \geq f(m)$. Hence $p$ eventually dominates $f$, and $M$ is dense simple.
+
+By 1, this gives a second proof that maximal sets are hypersimple (:ref{#ex-maximal-hypersimple}). Dense simple sets are due to Martin (Soare 2016, Exercise 5.3.12).
+:::
+::::
+
+::::exercise{#ex-maximal-hyperhypersimple difficulty=1 objective="Show that maximal sets are hyperhypersimple, by splitting a weak array into its even and odd members."}
+A **disjoint weak array** is a sequence $(W_{f(n)})$ of pairwise disjoint finite sets, with $f$ total computable. A c.e. set with infinite complement is **hyperhypersimple** if no disjoint weak array meets its complement at every $n$. Show that every maximal set is hyperhypersimple.
+
+:::solution
+Let $M$ be maximal, and suppose that $(W_{f(n)})$ is a disjoint weak array such that $W_{f(n)} \setminus M \neq \emptyset$ for every $n$. The set $W = M \cup \bigcup_n W_{f(2n)}$ is c.e. and contains $M$. It contains an element of each set $W_{f(2n)} \setminus M$, and these elements are distinct by disjointness, so $W \setminus M$ is infinite. An element of $W_{f(2n+1)} \setminus M$ is not in $M$ and, by disjointness, in no $W_{f(2k)}$, so it is not in $W$; these elements are distinct for distinct $n$, so $\nat \setminus W$ is infinite. This contradicts the maximality of $M$. Since $D_n = W_{k(n)}$ for a total computable $k$, every disjoint strong array is a disjoint weak array, so hyperhypersimple sets are hypersimple.
+:::
+::::
+
+::::exercise{#ex-io-different-noncomputable difficulty=1 objective="Contrast almost everywhere difference with difference at infinitely many points, which every non-computable set achieves."}
+Show that a set $X$ computes a function $h$ such that, for every computable function $g$, $h(n) \neq g(n)$ for infinitely many $n$, if and only if $X$ is not computable.
+
+:::solution
+If $X$ is computable, every $X$-computable function $h$ is computable, and $h$ is equal to itself at every $n$. Conversely, let $X$ be non-computable and $h$ its characteristic function. If $h(n) = g(n)$ for all $n \geq n_0$, with $g$ computable, then $X$ is a finite modification of the computable set $\{ n : g(n) = 1 \}$, hence computable, a contradiction. So $h$ differs from every computable function at infinitely many points.
+:::
+::::
+
+::::exercise{#ex-ce-ae-different-high difficulty=1 objective="Combine the high or DNC theorem with Arslanov's criterion for c.e. sets."}
+Arslanov's completeness criterion states that a c.e. set computing a DNC function is Turing complete. Show that a c.e. set $A$ computes a function almost everywhere different from every computable function if and only if $A$ is high. Deduce that no low c.e. set computes such a function.
+
+:::solution
+If $A$ is high, it computes such a function by :ref{#thm-high-or-dnc}. Conversely, if $A$ computes such a function, then $A$ is high or computes a DNC function, by the same theorem. In the second case, $A$ is Turing complete by Arslanov's criterion, so $A' \geq_T \emptyset''$ and $A$ is high. A low set is not high, since $\emptyset'' \not\leq_T \emptyset'$.
+:::
+::::
+:::::

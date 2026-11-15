@@ -104,6 +104,14 @@ Where does the proof of :ref{#prop-countable-union} use that the enumerations $s
   Surjectivity only uses that each $s_n$ is surjective, once the map is defined.
 :::
 
+::::exercise{#ex-union-injections difficulty=1 objective="Show that a countable union is countable when injections into $\nat$, instead of enumerations, are given."}
+Let $(A_n)_{n \in \nat}$ be a sequence of sets, and let $(i_n)_{n \in \nat}$ be a sequence of functions such that each $i_n : A_n \to \nat$ is injective. Give an explicit injection of $\bigcup_n A_n$ into $\nat$.
+
+:::solution
+For $a \in \bigcup_n A_n$, let $n(a)$ be the least $n$ with $a \in A_n$, and let $j(a) = \langle n(a), i_{n(a)}(a) \rangle$. If $j(a) = j(b)$, then $n(a) = n(b) = n$ and $i_n(a) = i_n(b)$, since the pairing function is injective (:ref{#prop-nxn-countable}); so $a = b$, since $i_n$ is injective. The sets $A_n$ may overlap: the least index $n(a)$ selects one of the sets containing $a$, without any choice. As in :ref{#prop-countable-union}, the injections must be given as a sequence for $j$ to be defined.
+:::
+::::
+
 ## Finite strings and finite sets
 
 An **alphabet** is a set $\Sigma$, whose elements are called **letters**. A **string** of length $k$ over $\Sigma$ is a finite sequence $w = a_1 a_2 \cdots a_k$ of letters, that is, a function $\{1, \dots, k\} \to \Sigma$; the string of length $0$ is the **empty string** $\varepsilon$. The set of strings over $\Sigma$ is written $\Sigma^*$.
@@ -156,29 +164,11 @@ Which of these sets are countable?
   Such a sequence is determined by the finite string of its values up to its last non-zero value.
 :::
 
-## Exercises
-
-::::exercise{difficulty=1}
+::::exercise{#ex-eventually-periodic difficulty=1 objective="Show that a set of infinite sequences is countable by describing each of its elements by finitely many strings."}
 Show that the set of eventually periodic sequences $X : \nat \to \{0, 1\}$ is countable. (A sequence is **eventually periodic** if there are $n_0$ and $p \geq 1$ such that $X(n + p) = X(n)$ for all $n \geq n_0$.)
 
 :::solution
 An eventually periodic sequence is determined by two strings $u$ and $v$ over $\{0, 1\}$, with $v$ non-empty: its first $n_0$ values $u$, followed by $v$ repeated forever. So there is a surjection from a subset of $\{0, 1\}^* \times \{0, 1\}^*$, which is countable by :ref{#prop-strings-countable} and :ref{#cor-product-countable}, onto the set of eventually periodic sequences, which is therefore countable by :ref{#cor-subset-countable}.
-:::
-::::
-
-::::exercise{difficulty=1}
-Show that $(x, y) \mapsto 2^x (2y + 1) - 1$ is a bijection from $\nat \times \nat$ onto $\nat$.
-
-:::solution
-Every integer $m \geq 1$ can be written uniquely as $m = 2^x q$ with $q$ odd: $x$ is the number of times $2$ divides $m$, and $q = m / 2^x$. Writing $q = 2y + 1$, every $m \geq 1$ is $2^x(2y+1)$ for exactly one pair $(x, y)$. Hence $(x, y) \mapsto 2^x(2y+1)$ is a bijection onto $\nat \setminus \{0\}$, and subtracting $1$ gives a bijection onto $\nat$.
-:::
-::::
-
-::::exercise{difficulty=2}
-A real number is **transcendental** if it is not algebraic. Show that every non-empty open interval contains a transcendental number, admitting that intervals are uncountable (this is proved in the next lessons).
-
-:::solution
-An open interval $(a, b)$ with $a < b$ is uncountable, while the algebraic numbers form a countable set by :ref{#ex-algebraic-numbers}. If $(a, b)$ contained only algebraic numbers, it would be countable, by :ref{#cor-subset-countable}.
 :::
 ::::
 
@@ -191,3 +181,51 @@ The countability of the algebraic numbers is the first result of Cantor's paper 
 - T. Jech, *The Axiom of Choice*, North-Holland, 1973.
 - K. Hrbacek and T. Jech, *Introduction to Set Theory*, 3rd edition, Marcel Dekker, 1999.
 - B. Monin and L. Patey, *Computability theory*, chapter *Cantor's infinity*.
+
+:::::exercises
+::::exercise{#ex-pairing-2x difficulty=1 objective="Check a second pairing function, by unique factorization."}
+Show that $(x, y) \mapsto 2^x (2y + 1) - 1$ is a bijection from $\nat \times \nat$ onto $\nat$.
+
+:::solution
+Every integer $m \geq 1$ can be written uniquely as $m = 2^x q$ with $q$ odd: $x$ is the number of times $2$ divides $m$, and $q = m / 2^x$. Writing $q = 2y + 1$, every $m \geq 1$ is $2^x(2y+1)$ for exactly one pair $(x, y)$. Hence $(x, y) \mapsto 2^x(2y+1)$ is a bijection onto $\nat \setminus \{0\}$, and subtracting $1$ gives a bijection onto $\nat$.
+:::
+::::
+
+::::exercise{#ex-transcendental-interval difficulty=2 objective="Combine a countability result with an uncountability result to prove the existence of transcendental numbers in every interval."}
+A real number is **transcendental** if it is not algebraic. Show that every non-empty open interval contains a transcendental number, admitting that intervals are uncountable (this is proved in the next lessons).
+
+:::solution
+An open interval $(a, b)$ with $a < b$ is uncountable, while the algebraic numbers form a countable set by :ref{#ex-algebraic-numbers}. If $(a, b)$ contained only algebraic numbers, it would be countable, by :ref{#cor-subset-countable}.
+:::
+::::
+
+::::exercise{#ex-finite-cofinite difficulty=1 objective="Code the finite and the cofinite sets of integers by integers."}
+A set $X \subseteq \nat$ is **cofinite** if $\nat \setminus X$ is finite. Show that the set of cofinite subsets of $\nat$ is countably infinite, and give an explicit bijection between $\nat$ and the set of subsets of $\nat$ that are finite or cofinite.
+
+:::solution
+Complementation $X \mapsto \nat \setminus X$ is a bijection from the cofinite sets onto the finite sets, so the cofinite sets form a countably infinite set, by :ref{#cor-finite-subsets}. No set is both finite and cofinite: otherwise $\nat$ would be the union of two finite sets, hence finite (:ref{#ex-remove-finite}), contradicting :ref{#cor-finite-cardinality}. Let $c(F) = \sum_{n \in F} 2^n$, a bijection from the finite sets onto $\nat$. The map sending a finite set $F$ to $2c(F)$ and a cofinite set $X$ to $2c(\nat \setminus X) + 1$ is well defined, since the two cases are exclusive, and it is a bijection onto $\nat$: the even numbers are the images of the finite sets, and the odd numbers those of the cofinite sets, each time through a bijection.
+:::
+::::
+
+::::exercise{#ex-finite-subsets-countable difficulty=1 objective="Transfer the coding of finite sets of integers to the finite subsets of any countable set."}
+Let $A$ be countable. Show that the set $\mathcal P_{\mathrm{fin}}(A)$ of finite subsets of $A$ is countable.
+
+:::solution
+Let $i : A \to \nat$ be an injection. For a finite $F \subseteq A$, the set $i(F)$ is finite, by :ref{#ex-surjection-from-finite}, and $F = i^{-1}(i(F))$ since $i$ is injective. So $F \mapsto i(F)$ is an injection of $\mathcal P_{\mathrm{fin}}(A)$ into $\mathcal P_{\mathrm{fin}}(\nat)$, which is countable by :ref{#cor-finite-subsets}. Explicitly, $F \mapsto \sum_{a \in F} 2^{i(a)}$ is an injection into $\nat$.
+:::
+::::
+
+::::exercise{#ex-rationals-exponents difficulty=2 objective="Build an explicit bijection between the positive rationals and the positive integers from prime factorizations."}
+Let $p_1 = 2, p_2 = 3, p_3 = 5, \dots$ be the primes. By unique factorization of numerators and denominators, every rational $q > 0$ is $\prod_{i \geq 1} p_i^{e_i}$ for exactly one sequence $(e_i)$ of integers in $\mathbb Z$ of which all but finitely many are zero. Let $z : \mathbb Z \to \nat$ be the bijection of :ref{#ex-countable-sets}, $z(e) = 2e$ for $e \geq 0$ and $z(e) = -2e - 1$ for $e < 0$. Show that
+$$
+\psi\Big(\prod_i p_i^{e_i}\Big) = \prod_i p_i^{z(e_i)}
+$$
+is a bijection from the set of positive rationals onto $\nat \setminus \{0\}$. Compute $\psi(\tfrac12)$, $\psi(\tfrac23)$ and $\psi^{-1}(10)$.
+
+:::solution
+Since $z(0) = 0$, the exponents $z(e_i)$ are zero for all but finitely many $i$, so $\psi(q)$ is a positive integer, and $\psi$ is well defined by the uniqueness of the sequence $(e_i)$. Every positive integer is $\prod_i p_i^{k_i}$ for exactly one sequence $(k_i)$ of natural numbers, almost all zero. Define $\chi\big(\prod_i p_i^{k_i}\big) = \prod_i p_i^{z^{-1}(k_i)}$, where $z^{-1}(0) = 0$, so that again almost all exponents are zero. By the two uniqueness statements, $\chi \circ \psi$ and $\psi \circ \chi$ are identities, so $\psi$ is a bijection with inverse $\chi$.
+
+For $\tfrac12 = 2^{-1}$, $z(-1) = 1$, so $\psi(\tfrac12) = 2$. For $\tfrac23 = 2^1 3^{-1}$, $\psi(\tfrac23) = 2^{z(1)} 3^{z(-1)} = 2^2 \cdot 3 = 12$. For $10 = 2^1 5^1$, $z^{-1}(1) = -1$, so $\psi^{-1}(10) = 2^{-1} 5^{-1} = \tfrac1{10}$. Composing with $n \mapsto n + 1$ gives an explicit bijection from $\nat$ onto the positive rationals.
+:::
+::::
+:::::

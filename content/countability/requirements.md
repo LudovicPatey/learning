@@ -79,9 +79,7 @@ In the computable part of :ref{#prop-infinitely-different}, why is the explicit 
   It always terminates, by the hypothesis of the lemma; the problem is that its steps may not be computable.
 :::
 
-## Exercises
-
-::::exercise{#ex-bi-immune difficulty=3}
+::::exercise{#ex-bi-immune difficulty=3 objective="Apply the finite extension method to build a set such that neither it nor its complement contains an infinite computable set."}
 Show that there is a set $Y$ such that neither $Y$ nor its complement contains an infinite computable set.
 
 :::hint
@@ -89,18 +87,17 @@ For each infinite computable set $C$, the requirement is: $C \not\subseteq Y$ an
 :::
 
 :::solution
-The infinite computable sets form a countably infinite set, by :ref{#prop-countably-many-computable} and :ref{#cor-subset-countable} (it contains the sets $\nat \setminus \underline n$); let $C_0, C_1, \dots$ be an enumeration of them. Requirement $R_{2n}$: $Y(m) = 0$ for some $m \in C_n$; requirement $R_{2n+1}$: $Y(m) = 1$ for some $m \in C_n$. Given $\sigma$, since $C_n$ is infinite there is $m \in C_n$ with $m \geq |\sigma|$; extend $\sigma$ by zeros to length $m$, then append the required bit. Every $Y$ extending the result satisfies the requirement. By :ref{#lem-finite-extension}, some $Y$ satisfies all requirements: each infinite computable set meets both $Y$ and its complement, so it is contained in neither. Such a set is called **bi-immune**. The definition in the course on immunity (:ref{#def-immune}) uses infinite c.e. sets instead of infinite computable sets; the two versions are equivalent, since every infinite c.e. set has an infinite computable subset.
+The infinite computable sets form a countably infinite set, by :ref{#prop-countably-many-computable} and :ref{#cor-subset-countable} (it contains the sets $\nat \setminus \underline n$); let $C_0, C_1, \dots$ be an enumeration of them. Requirement $R_{2n}$: $Y(m) = 0$ for some $m \in C_n$; requirement $R_{2n+1}$: $Y(m) = 1$ for some $m \in C_n$. Given $\sigma$, since $C_n$ is infinite there is $m \in C_n$ with $m \geq |\sigma|$; extend $\sigma$ by zeros to length $m$, then append the required bit. Every $Y$ extending the result satisfies the requirement. By :ref{#lem-finite-extension}, some $Y$ satisfies all requirements: each infinite computable set meets both $Y$ and its complement, so it is contained in neither. Such a set is called **bi-immune**. The definition in the course on immunity and growth uses infinite c.e. sets instead of infinite computable sets; the two versions are equivalent, since every infinite c.e. set has an infinite computable subset.
 :::
 ::::
 
-
-::::exercise{difficulty=1}
-Show that a bi-immune set is not computable. Which step of the construction of the previous exercise is not effective?
+::::exercise{#ex-bi-immune-not-computable difficulty=1 objective="See that a bi-immune set is not computable, and locate the non-effective step of its construction."}
+Show that a bi-immune set is not computable. Which step of the construction of :ref{#ex-bi-immune} is not effective?
 
 :::solution
 Let $Y$ be computable. Since $\nat = Y \cup (\nat \setminus Y)$ is infinite, one of $Y$ and $\nat \setminus Y$ is infinite, a union of two finite sets being finite. That set is computable, as $Y$ is, and it is contained in itself; so $Y$ is not bi-immune.
 
-In the construction, the step from $\sigma$ to its extension is effective as soon as $C_n$ is given by an algorithm: search for the least $m \geq |\sigma|$ in $C_n$. What is not effective is the enumeration $C_0, C_1, \dots$ itself: by :ref{#ex-no-uniform-computable-sets}, no uniformly computable sequence contains all computable sets. Compare with :ref{#prop-infinitely-different}, where the list is uniformly computable and the resulting $Y$ is computable.
+In the construction, the step from $\sigma$ to its extension is effective as soon as $C_n$ is given by an algorithm: search for the least $m \geq |\sigma|$ in $C_n$. What is not effective is the enumeration $C_0, C_1, \dots$ itself: by :ref{#ex-no-uniform-computable-sets}, no uniformly computable sequence contains all computable sets, and hence none contains all infinite computable sets: interleaving such a sequence with the uniformly computable sequence of all finite sets, the $k$-th of which is $\{ n : \text{the } n\text{-th binary digit of } k \text{ is } 1 \}$, would give one. Compare with :ref{#prop-infinitely-different}, where the list is uniformly computable and the resulting $Y$ is computable.
 :::
 ::::
 
@@ -114,3 +111,73 @@ The finite extension method is due to Kleene and Post (1954), who used it to bui
 - C. G. Jockusch, Jr., *The degrees of bi-immune sets*, Zeitschrift für Mathematische Logik und Grundlagen der Mathematik 15 (1969), 135–140.
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §6.1.
 - B. Monin and L. Patey, *Computability theory*, chapter *Turing degrees*.
+
+:::::exercises
+::::exercise{#ex-secures difficulty=1 objective="Determine which strings secure a given requirement, and which requirements meet the hypothesis of the finite extension lemma."}
+For each of the following requirements, describe the strings $\tau$ that secure it: (a) $Y(3) = 1$; (b) $Y(m) = 1$ for some $m < 5$; (c) $Y \neq 000\cdots$; (d) $Y$ has infinitely many ones; (e) $Y$ is not computable. Which of them, taken as a constant sequence $R_e = R$, satisfy the hypothesis of :ref{#lem-finite-extension}?
+
+:::solution
+In each case, compare with the extension $\tau 000 \cdots$ of $\tau$.
+
+(a) $\tau$ secures the requirement if and only if $|\tau| \geq 4$ and $\tau(3) = 1$: then every extension has bit $3$ equal to $1$, while if $|\tau| \leq 3$ the extension $\tau 000 \cdots$ has bit $3$ equal to $0$, and if $\tau(3) = 0$ no extension works.
+
+(b) $\tau$ secures it if and only if $\tau(m) = 1$ for some $m < \min(5, |\tau|)$: otherwise $\tau 000 \cdots$ has no $1$ below position $5$.
+
+(c) $\tau$ secures it if and only if $\tau$ contains a $1$: otherwise $\tau 000 \cdots = 000 \cdots$.
+
+(d) No string secures it, since $\tau 000 \cdots$ has finitely many ones.
+
+(e) No string secures it, since $\tau 000 \cdots$ is computable: it is a finite set.
+
+The hypothesis of the lemma asks for a securing extension of *every* string $\sigma$. Only (c) satisfies it, with the extension $\sigma 1$. For (a), the string $0000$ has no securing extension, and for (b) the string $00000$ has none. Requirement (e) can nevertheless be met, after splitting it into the requirements $Y \neq X_n$ for an enumeration $(X_n)$ of the computable sets, as in :ref{#ex-finite-extension-diagonal}.
+:::
+::::
+
+::::exercise{#ex-three-requirements difficulty=1 objective="Interleave several families of requirements in one construction by finite extensions."}
+Let $(X_n)$ be a sequence in $\cs$. Use :ref{#lem-finite-extension} to build a set $Y$ that is infinite, has an infinite complement, and differs from every $X_n$.
+
+:::solution
+Every $e$ is $3k + i$ for exactly one $k \in \nat$ and one $i < 3$. Let $R_{3k}$ be "$Y(m) = 1$ for some $m \geq k$", $R_{3k+1}$ be "$Y(m) = 0$ for some $m \geq k$", and $R_{3k+2}$ be "$Y \neq X_k$". Given $\sigma$, extend it by zeros to a string $\sigma'$ of length at least $k$, and let $\tau = \sigma' 1$ for $R_{3k}$ and $\tau = \sigma' 0$ for $R_{3k+1}$; every extension of $\tau$ has the required bit at position $|\sigma'| \geq k$. For $R_{3k+2}$, let $\tau = \sigma\, i$ with $i = 1 - X_k(|\sigma|)$, as in :ref{#ex-finite-extension-diagonal}. By the lemma, some $Y$ satisfies all the requirements. Then $Y$ has a one beyond every $k$, hence infinitely many ones, and likewise infinitely many zeros; and $Y \neq X_k$ for every $k$.
+:::
+::::
+
+::::exercise{#ex-many-solutions difficulty=2 objective="Branch a construction by finite extensions to obtain continuum many solutions."}
+Let $(R_e)$ satisfy the hypothesis of :ref{#lem-finite-extension}. Show that the set of $Y \in \cs$ satisfying every $R_e$ has the cardinality of the continuum.
+
+:::solution
+Fix an enumeration $\rho_0, \rho_1, \dots$ of $2^{<\nat}$. For $X \in \cs$, define strings $\sigma^X_e$ by $\sigma^X_0 = \varepsilon$, and let $\sigma^X_{e+1}$ be the first $\rho_i$ that extends the string $\sigma^X_e X(e)$, obtained by appending the bit $X(e)$, and secures $R_e$; it exists by the hypothesis applied to $\sigma^X_e X(e)$. The lengths increase strictly, so there is a unique $Y_X$ extending every $\sigma^X_e$, and $Y_X$ satisfies every $R_e$, as in the proof of the lemma.
+
+The map $X \mapsto Y_X$ is injective. Let $X \neq X'$, and let $e$ be the least position where they differ. The string $\sigma^X_{e'+1}$ depends only on $\sigma^X_{e'}$ and $X(e')$, so by induction $\sigma^X_{e'} = \sigma^{X'}_{e'}$ for $e' \leq e$. Let $\ell = |\sigma^X_e|$. Then $Y_X(\ell) = X(e)$ and $Y_{X'}(\ell) = X'(e)$, since $\sigma^X_{e+1}$ extends $\sigma^X_e X(e)$; so $Y_X \neq Y_{X'}$.
+
+So $\cs$ injects into the set of solutions, which is a subset of $\cs$; by :ref{#thm-cantor-bernstein}, it is equipotent to $\cs$, hence has the cardinality of the continuum (:ref{#thm-continuum}). The same branching, with requirements on pairs of branches, is used in Soare 2016, Exercise 6.1.7, to build continuum many pairwise incomparable Turing degrees.
+:::
+::::
+
+::::exercise{#ex-bi-immune-splits difficulty=1 objective="Reformulate bi-immunity in terms of intersections with infinite computable sets."}
+Show that a set $Y$ is bi-immune, in the sense of :ref{#ex-bi-immune}, if and only if, for every infinite computable set $C$, both $C \cap Y$ and $C \setminus Y$ are infinite.
+
+:::solution
+If both sets are infinite for every infinite computable $C$, then no such $C$ is contained in $Y$, since $C \setminus Y \neq \emptyset$, or in $\nat \setminus Y$, since $C \cap Y \neq \emptyset$. So $Y$ is bi-immune.
+
+Conversely, let $Y$ be bi-immune and $C$ infinite computable. If $F = C \cap Y$ were finite, then $C \setminus F = C \setminus Y$ would be infinite, by :ref{#ex-remove-finite}, and computable: to decide $m \in C \setminus F$, decide $m \in C$ and compare $m$ with the finitely many elements of $F$, which the algorithm can list. It would be an infinite computable subset of $\nat \setminus Y$, a contradiction. Symmetrically, if $C \setminus Y$ were finite, then $C \cap Y$ would be an infinite computable subset of $Y$.
+:::
+::::
+
+::::exercise{#ex-effective-finite-extension difficulty=2 objective="Effectivize the finite extension lemma when securing extensions can be computed."}
+Let $(R_e)$ be a sequence of requirements, and let $s$ be a total computable function, defined on pairs $(e, \sigma)$ with $e \in \nat$ and $\sigma \in 2^{<\nat}$ (strings being coded by integers), such that $s(e, \sigma) \succeq \sigma$, $|s(e, \sigma)| > |\sigma|$, and $s(e, \sigma)$ secures $R_e$. Show that some computable $Y$ satisfies every $R_e$. Apply this to a uniformly computable sequence $(X_n)$ and the requirements $Y \neq X_n$, and compare the resulting $Y$ with the diagonal sequence of :ref{#ex-no-uniform-computable-sets}.
+
+:::solution
+Let $\sigma_0 = \varepsilon$ and $\sigma_{e+1} = s(e, \sigma_e)$. Then $e \mapsto \sigma_e$ is computable, by iterating $s$, and $|\sigma_e| \geq e$. Let $Y$ be the unique sequence extending every $\sigma_e$; then $Y(m)$ is the $m$-th bit of $\sigma_{m+1}$, which has length at least $m + 1$, so $Y$ is computable. Since $\sigma_{e+1} \prec Y$ and $\sigma_{e+1}$ secures $R_e$, $Y$ satisfies $R_e$.
+
+For $R_n$: $Y \neq X_n$, let $s(n, \sigma) = \sigma\, i$ with $i = 1 - X_n(|\sigma|)$; it is computable since $(n, m) \mapsto X_n(m)$ is. Then $|\sigma_n| = n$ for every $n$, and $\sigma_{n+1}$ appends the bit $1 - X_n(n)$. So $Y(n) = 1 - X_n(n)$: the construction is exactly the diagonal argument of :ref{#ex-no-uniform-computable-sets}.
+:::
+::::
+
+::::exercise{#ex-avoid-pr-sets difficulty=2 objective="Apply the computable form of the construction to a uniformly computable list of all primitive recursive sets."}
+A set is **primitive recursive** if its characteristic function is. Using that the primitive recursive functions form a uniformly computable sequence $(f_e)$, as recalled in the previous lesson, show that there is a computable set $Y$ such that $Y \mathbin{\triangle} P$ is infinite for every primitive recursive set $P$. Deduce that no finite modification of $Y$ is primitive recursive.
+
+:::solution
+Let $X_e = \{ m : f_e(m) \geq 1 \}$. Then $(e, m) \mapsto X_e(m) = \min(f_e(m), 1)$ is computable, so $(X_e)$ is uniformly computable. Every primitive recursive set $P$ occurs in it: its characteristic function is some $f_e$, and then $X_e = P$. By :ref{#prop-infinitely-different}, there is a computable $Y$ that differs from every $X_e$ at infinitely many positions, that is, $Y \mathbin{\triangle} X_e$ is infinite for every $e$. If a finite modification $Y \mathbin{\triangle} F$ of $Y$, with $F$ finite, were a primitive recursive set $P$, then $Y \mathbin{\triangle} P = F$ would be finite, a contradiction.
+:::
+::::
+:::::
