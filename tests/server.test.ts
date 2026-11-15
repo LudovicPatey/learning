@@ -8,7 +8,8 @@ const dbDir = fs.mkdtempSync(path.join(os.tmpdir(), "cl-db-"));
 process.env.DATABASE_PATH = path.join(dbDir, "test.db");
 
 const { safeReturnTo, sameOrigin, upsertUser } = await import("@/lib/auth");
-const { createComment, deleteComment, getCommentDTO, listThreads, parseAnchor, updateComment } = await import("@/lib/comments");
+const { createComment, deleteComment, getCommentDTO, listEndorsements, listThreads, listUserComments, listUserEndorsements, parseAnchor, setEndorsement, updateComment } =
+  await import("@/lib/comments");
 const { exchangeCode, orcidConfig } = await import("@/lib/orcid");
 
 afterAll(() => fs.rmSync(dbDir, { recursive: true, force: true }));
@@ -122,5 +123,34 @@ describe("ORCID", () => {
     vi.stubGlobal("fetch", vi.fn(async () => new Response("no", { status: 401 })));
     await expect(exchangeCode("abc", new Request("http://localhost/"))).rejects.toThrow(/401/);
     vi.unstubAllGlobals();
+  });
+});
+
+describe("endorsements and activity", () => {
+  it("endorses, records the version checked, and withdraws", () => {
+    const carol = upsertUser("0000-0000-0000-0003", "Carol");
+    const dave = upsertUser("0000-0000-0000-0004", "Dave");
+    setEndorsement(carol.id, "ex-a", "h1", true);
+    setEndorsement(dave.id, "ex-a", "h1", true);
+    setEndorsement(carol.id, "ex-a", "h2", true); // again, after an edit: one endorsement, new version
+    setEndorsement(carol.id, "ex-b", "h3", true);
+    const all = listEndorsements().filter((e) => e.exercise.startsWith("ex-"));
+    expect(all.filter((e) => e.exercise === "ex-a").map((e) => [e.author.name, e.contentHash]).sort()).toEqual([
+      ["Carol", "h2"],
+      ["Dave", "h1"],
+    ]);
+    expect(Object.keys(all[0]).sort()).toEqual(["author", "contentHash", "createdAt", "exercise"]);
+    setEndorsement(carol.id, "ex-b", "h3", false);
+    expect(listUserEndorsements(carol.id).map((e) => e.exercise)).toEqual(["ex-a"]);
+  });
+
+  it("lists the comments of one person, replies included", () => {
+    const erin = upsertUser("0000-0000-0000-0005", "Erin");
+    const me = { ...erin, isAdmin: false };
+    const anchor = { exact: "t", prefix: "", suffix: "", position: 0, display: "t" };
+    const t = createComment({ lessonId: "c/l", userId: erin.id, parentId: null, kind: "question", body: "Why?", anchor, contentHash: "h" });
+    createComment({ lessonId: "c/l", userId: erin.id, parentId: t, kind: "suggestion", body: "Answered.", anchor: null, contentHash: null });
+    expect(listUserComments(me).map((c) => c.body).sort()).toEqual(["Answered.", "Why?"]);
+    expect(listUserComments(me).every((c) => c.mine)).toBe(true);
   });
 });

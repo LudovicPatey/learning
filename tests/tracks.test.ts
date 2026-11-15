@@ -2,7 +2,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import fs from "node:fs";
 import path from "node:path";
 import { useFixtureContent } from "./helpers";
-import { matchesQuery, normalizeForSearch, parseTracks, trackGraph, trackOfCourse, type Track } from "@/lib/tracks";
+import { matchesQuery, normalizeForSearch, orderTracks, parseTracks, trackGraph, trackOfCourse, type Track } from "@/lib/tracks";
 import { getCatalog } from "@/lib/content";
 
 const courses = [
@@ -13,7 +13,7 @@ const courses = [
   { id: "y", prerequisites: ["x", "b"] },
   { id: "z", prerequisites: ["y", "a"] },
 ];
-const track: Track = { id: "t", title: "T", area: "logic", description: "", courses: ["x", "y", "z"] };
+const track: Track = { id: "t", title: "T", area: "logic", description: "", primary: true, courses: ["x", "y", "z"] };
 
 describe("trackGraph", () => {
   it("keeps only the edges inside the track", () => {
@@ -76,6 +76,31 @@ describe("parseTracks", () => {
     expect(m.get("b")).toBe("one");
     expect(m.get("c")).toBe("two");
     expect(m.has("z")).toBe(false);
+  });
+
+  it("reads the kind of a track, primary by default", () => {
+    const warnings: string[] = [];
+    const t = parseTracks(
+      [
+        { id: "p", area: "logic", courses: [] },
+        { id: "s", area: "logic", kind: "secondary", courses: [] },
+        { id: "q", area: "logic", kind: "tertiary", courses: [] },
+      ],
+      new Set(),
+      new Set(["logic"]),
+      warnings,
+    );
+    expect(t.map((x) => x.primary)).toEqual([true, false, true]);
+    expect(warnings).toEqual(['content/tracks.yaml: track "q" has unknown kind "tertiary" (primary or secondary)']);
+  });
+
+  it("puts primary tracks first, and assigns courses to them first", () => {
+    const tracks = [
+      { ...track, id: "sec", primary: false, courses: ["a"] },
+      { ...track, id: "pri", primary: true, courses: ["a", "b"] },
+    ];
+    expect(orderTracks(tracks).map((t) => t.id)).toEqual(["pri", "sec"]);
+    expect(trackOfCourse(tracks).get("a")).toBe("pri");
   });
 });
 

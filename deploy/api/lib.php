@@ -19,6 +19,7 @@ function cfg(): array {
     'admin_token' => '',
     'data_dir' => dirname(__DIR__, 2) . '/learning-data',
     'lessons_json' => __DIR__ . '/lessons.json',
+    'exercises_json' => __DIR__ . '/exercises.json',
     'site_url' => '',
     'dev_login' => false,
   ];
@@ -113,14 +114,15 @@ function sign_in(string $orcid, string $name): void {
 
 // ---- storage -------------------------------------------------------------------
 // data_dir/remarks.json  {nextId, users: {orcid: {name}}, comments: [{id, lessonId, parentId,
-//                         kind, body, anchor, status, contentHash, createdAt, updatedAt, orcid}]}
+//                         kind, body, anchor, status, contentHash, createdAt, updatedAt, orcid}],
+//                         endorsements: [{exercise, orcid, contentHash, createdAt}]}
 // Outside the web root; dates as "YYYY-MM-DD HH:MM:SS" (UTC), as in the SQLite version.
 function data_dir(): string {
   $d = cfg()['data_dir'];
   if (!is_dir($d) && !@mkdir($d, 0700, true)) fail(500, 'Cannot create the data directory.');
   return $d;
 }
-function empty_store(): array { return ['nextId' => 1, 'users' => [], 'comments' => []]; }
+function empty_store(): array { return ['nextId' => 1, 'users' => [], 'comments' => [], 'endorsements' => []]; }
 function read_store(): array {
   $file = data_dir() . '/remarks.json';
   if (!is_file($file)) return empty_store();
@@ -159,6 +161,17 @@ function lessons(): array {
     if (!is_array($l)) fail(500, 'Cannot read the list of lessons.');
   }
   return $l;
+}
+
+// The exercises of the deployed working copy, with the hash of their source
+// (written by scripts/build-static.ts): {label: contentHash}.
+function exercises(): array {
+  static $e = null;
+  if ($e === null) {
+    $e = json_decode((string) @file_get_contents(cfg()['exercises_json']), true);
+    if (!is_array($e)) fail(500, 'Cannot read the list of exercises.');
+  }
+  return $e;
 }
 
 // ---- comments ------------------------------------------------------------------
@@ -218,4 +231,34 @@ function list_threads(array $s, string $lessonId, ?array $me): array {
     elseif (isset($index[$c['parentId']])) $threads[$index[$c['parentId']]]['replies'][] = $d;
   }
   return $threads;
+}
+
+// All comments of one person, threads and replies, newest first (src/lib/comments.ts listUserComments).
+function list_user_comments(array $s, array $me): array {
+  $rows = array_values(array_filter($s['comments'], fn ($c) => $c['orcid'] === $me['orcid']));
+  usort($rows, fn ($a, $b) => [$b['createdAt'], $b['id']] <=> [$a['createdAt'], $a['id']]);
+  return array_map(fn ($c) => to_dto($c, $s, $me), $rows);
+}
+
+// ---- endorsements --------------------------------------------------------------
+// src/lib/comment-types.ts EndorsementDTO
+function endorsement_dto(array $e, array $s): array {
+  return [
+    'exercise' => $e['exercise'],
+    'contentHash' => $e['contentHash'],
+    'createdAt' => $e['createdAt'] . 'Z',
+    'author' => ['name' => $s['users'][$e['orcid']]['name'] ?? $e['orcid'], 'orcid' => $e['orcid']],
+  ];
+}
+// All endorsements, oldest first (src/lib/comments.ts listEndorsements).
+function list_endorsements(array $s): array {
+  $rows = $s['endorsements'];
+  usort($rows, fn ($a, $b) => [$a['createdAt'], $a['exercise'], $a['orcid']] <=> [$b['createdAt'], $b['exercise'], $b['orcid']]);
+  return array_map(fn ($e) => endorsement_dto($e, $s), $rows);
+}
+// The endorsements of one person, newest first.
+function list_user_endorsements(array $s, array $me): array {
+  $rows = array_values(array_filter($s['endorsements'], fn ($e) => $e['orcid'] === $me['orcid']));
+  usort($rows, fn ($a, $b) => [$b['createdAt'], $a['exercise']] <=> [$a['createdAt'], $b['exercise']]);
+  return array_map(fn ($e) => endorsement_dto($e, $s), $rows);
 }

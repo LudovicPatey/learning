@@ -2,8 +2,9 @@
 
 An online course platform for computability theory and related fields (algorithmic randomness, reverse mathematics, higher computability).
 
-- **Small courses.** Each course is a short series of lessons on one topic (e.g. *Models of computation*). Main courses are organized in learning tracks (`content/tracks.yaml`), each shown as a dependency graph on the home page; specialized courses are listed in the searchable catalogue only.
+- **Small courses.** Each course is a short series of lessons on one topic (e.g. *Models of computation*). Main courses are organized in learning tracks (`content/tracks.yaml`), each shown as a dependency graph: the primary tracks on the home page, all tracks (primary and secondary) on `/tracks`. Specialized courses are listed in the searchable catalogue only.
 - **Small lessons.** Each lesson is one Markdown file covering one idea, with explicit prerequisites.
+- **Exercises.** Each lesson has a few featured exercises in its text and further exercises in a collapsed block at its end, all with an objective and a solution. The exercise catalogue (`/exercises`) lists them with their lessons. Readers signed in with ORCID can endorse an exercise, stating that they have checked it and its solution, and see their remarks and endorsements on `/account`.
 - **Check-up questions right after proofs.** Multiple-choice questions that test one step of the argument, with an explanation for every option.
 - **Reader suggestions.** Readers select any passage, sign in with ORCID, and leave a typed suggestion (typo, unclear, mathematical error, …). Maintainers can resolve or decline them.
 
@@ -24,7 +25,7 @@ To enable real ORCID sign-in, copy `.env.example` to `.env.local` and fill in:
 - Redirect URI to register: `${APP_URL}/api/auth/orcid/callback`.
 - `ADMIN_ORCIDS`: comma-separated ORCID iDs allowed to resolve or decline suggestions.
 
-Comments and users are stored in SQLite (`data/app.db`, created automatically).
+Comments, endorsements and users are stored in SQLite (`data/app.db`, created automatically).
 
 ## Writing lessons
 
@@ -75,16 +76,26 @@ For all $m, n$ there is a total computable function …
 
 Numbered kinds: `definition`, `theorem`, `lemma`, `proposition`, `corollary`, `fact`, `example`, `remark`, `notation`, `exercise`, `question`, `conjecture`.
 Others: `proof`, `solution` and `hint` (collapsed), `aside`, `figure` (the `[label]` becomes the caption).
-Exercises take `{difficulty=1}` to `3`. To nest a solution inside an exercise, give the outer block one more colon:
+Exercises have a permanent label (endorsements refer to it), a difficulty from 1 to 3, an objective (one sentence, Markdown with math; write `"` as `&quot;`), and optionally `lessons="slug, course/slug"` to associate them with other lessons. To nest a solution inside an exercise, give the outer block one more colon:
 
 ```md
-::::exercise{difficulty=2}
+::::exercise{#ex-halting-variant difficulty=2 objective="Adapt the diagonal argument to the totality problem."}
 Show that …
 
 :::solution
 …
 :::
 ::::
+```
+
+Exercises in the text of a lesson are its featured exercises. The others go in one block at the end of the lesson, collapsed by default and not counted in its duration:
+
+```md
+:::::exercises
+::::exercise{#ex-… difficulty=1 objective="…"}
+…
+::::
+:::::
 ```
 
 ### Cross-references
@@ -154,12 +165,13 @@ A suggestion stores the selected text plus ~32 characters of context on each sid
 | --- | --- |
 | `src/lib/content.ts` | Catalog loading, Markdown → HTML pipeline, numbering, references, quiz extraction |
 | `src/lib/katex-macros.ts` | Book macros for KaTeX |
-| `src/lib/db.ts`, `comments.ts`, `auth.ts`, `orcid.ts` | SQLite schema, comments, sessions, ORCID OAuth |
+| `src/lib/db.ts`, `comments.ts`, `auth.ts`, `orcid.ts` | SQLite schema, comments and endorsements, sessions, ORCID OAuth |
 | `src/app/api/…` | Sign-in/out and comments API (development server) |
 | `deploy/api/` | The same API in PHP, for the live site |
 | `scripts/build-static.ts`, `scripts/deploy.ts` | Static export and deployment: [docs/DEPLOY.md](docs/DEPLOY.md) |
 | `src/components/LessonView.tsx`, `CommentsPanel.tsx`, `anchoring.ts` | Selection, highlights, suggestion threads |
 | `src/components/Quiz.tsx`, `progress.ts` | Check-up questions; progress kept in the browser |
+| `src/components/Endorsements.tsx`, `ExerciseCatalog.tsx`, `AccountView.tsx` | Endorsements of exercises, exercise catalogue, a reader's remarks and endorsements |
 
 ## Deployment
 

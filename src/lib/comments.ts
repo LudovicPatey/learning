@@ -1,8 +1,16 @@
 import { db } from "./db.ts";
 import type { User } from "./auth.ts";
 
-import { COMMENT_KINDS, COMMENT_STATUSES, type Anchor, type CommentDTO, type CommentKind, type CommentStatus } from "./comment-types.ts";
-export { COMMENT_KINDS, COMMENT_STATUSES, type Anchor, type CommentDTO, type CommentKind, type CommentStatus };
+import {
+  COMMENT_KINDS,
+  COMMENT_STATUSES,
+  type Anchor,
+  type CommentDTO,
+  type CommentKind,
+  type CommentStatus,
+  type EndorsementDTO,
+} from "./comment-types.ts";
+export { COMMENT_KINDS, COMMENT_STATUSES, type Anchor, type CommentDTO, type CommentKind, type CommentStatus, type EndorsementDTO };
 
 type Row = {
   id: number;
@@ -51,6 +59,49 @@ export function listThreads(lessonId: string, me: User | null): CommentDTO[] {
     else byId.get(dto.parentId)?.replies.push(dto);
   }
   return threads;
+}
+
+/** All comments of one person (threads and replies), newest first. */
+export function listUserComments(me: User): CommentDTO[] {
+  const rows = db().prepare(`${SELECT} WHERE c.user_id = ? ORDER BY c.created_at DESC, c.id DESC`).all(me.id) as Row[];
+  return rows.map((r) => toDTO(r, me));
+}
+
+// ---- endorsements
+
+type EndorsementRow = { exercise_id: string; content_hash: string | null; created_at: string; name: string; orcid: string };
+const SELECT_ENDORSEMENTS = `SELECT e.exercise_id, e.content_hash, e.created_at, u.name, u.orcid FROM endorsements e JOIN users u ON u.id = e.user_id`;
+const endorsementDTO = (r: EndorsementRow): EndorsementDTO => ({
+  exercise: r.exercise_id,
+  contentHash: r.content_hash,
+  createdAt: r.created_at + "Z",
+  author: { name: r.name, orcid: r.orcid },
+});
+
+/** All endorsements, oldest first. */
+export function listEndorsements(): EndorsementDTO[] {
+  return (db().prepare(`${SELECT_ENDORSEMENTS} ORDER BY e.created_at, e.exercise_id, u.orcid`).all() as EndorsementRow[]).map(endorsementDTO);
+}
+
+/** The endorsements of one person, newest first. */
+export function listUserEndorsements(userId: number): EndorsementDTO[] {
+  return (db().prepare(`${SELECT_ENDORSEMENTS} WHERE e.user_id = ? ORDER BY e.created_at DESC, e.exercise_id`).all(userId) as EndorsementRow[]).map(
+    endorsementDTO,
+  );
+}
+
+/** Endorse an exercise (recording the version checked; endorsing again updates it), or withdraw. */
+export function setEndorsement(userId: number, exerciseId: string, contentHash: string, endorse: boolean) {
+  if (endorse) {
+    db()
+      .prepare(
+        `INSERT INTO endorsements (user_id, exercise_id, content_hash) VALUES (?, ?, ?)
+         ON CONFLICT(user_id, exercise_id) DO UPDATE SET content_hash = excluded.content_hash, created_at = datetime('now')`,
+      )
+      .run(userId, exerciseId, contentHash);
+  } else {
+    db().prepare(`DELETE FROM endorsements WHERE user_id = ? AND exercise_id = ?`).run(userId, exerciseId);
+  }
 }
 
 export function getComment(id: number) {

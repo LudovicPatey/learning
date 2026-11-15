@@ -7,9 +7,17 @@ import type { Anchor, CommentDTO, CommentKind } from "@/lib/comment-types";
 import { Quiz } from "./Quiz";
 import { anchorToRange, buildIndex, caretAt, rangeToAnchor, selectionInside } from "./anchoring";
 import { CommentsPanel, type Draft, type Me } from "./CommentsPanel";
+import { EndorseControl, useEndorsements } from "./Endorsements";
 
 const HL_ALL = "cl-comment";
 const HL_ACTIVE = "cl-comment-active";
+
+/** Open the collapsed blocks (further exercises, solutions) that contain a node. */
+function openAncestors(node: Node | null) {
+  for (let el = node instanceof Element ? node : node?.parentElement; el; el = el.parentElement) {
+    if (el instanceof HTMLDetailsElement) el.open = true;
+  }
+}
 
 function setHighlights(ranges: Range[], active: Range | null) {
   if (typeof CSS === "undefined" || !("highlights" in CSS)) return;
@@ -23,12 +31,15 @@ export function LessonView({
   contentHash,
   segments,
   refPreviews = {},
+  exerciseHashes = {},
   readOnly = false,
 }: {
   lessonId: string;
   contentHash: string;
   segments: Segment[];
   refPreviews?: Record<string, RefPreview>;
+  /** Hash of the current text of each exercise of the lesson, by label (endorsements). */
+  exerciseHashes?: Record<string, string>;
   /** Archived versions are read-only: no comments. */
   readOnly?: boolean;
 }) {
@@ -51,6 +62,29 @@ export function LessonView({
   const hideTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => setSlot(document.getElementById("comments-slot")), []);
+
+  // Endorsement marks, rendered into the slots of the exercise heads.
+  const endorsements = useEndorsements(!readOnly);
+  const [endorseSlots, setEndorseSlots] = useState<HTMLElement[]>([]);
+  useEffect(() => {
+    if (readOnly || !articleRef.current) return;
+    setEndorseSlots([...articleRef.current.querySelectorAll<HTMLElement>(".endorse-slot[data-exercise]")]);
+  }, [segments, readOnly]);
+
+  // A link to a statement inside a collapsed block (further exercises) opens the block.
+  useEffect(() => {
+    const show = () => {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      const el = id && !id.startsWith("remark-") ? document.getElementById(id) : null;
+      if (!el || !articleRef.current?.contains(el)) return;
+      const hidden = el.closest("details:not([open])");
+      openAncestors(el.parentElement);
+      if (hidden) requestAnimationFrame(() => el.scrollIntoView({ block: "start" }));
+    };
+    show();
+    window.addEventListener("hashchange", show);
+    return () => window.removeEventListener("hashchange", show);
+  }, [segments]);
 
   // Load comments + restore an unsent draft (e.g. after signing in).
   useEffect(() => {
@@ -162,6 +196,7 @@ export function LessonView({
       if (scrollText) {
         const r = ranges.get(id);
         if (r) {
+          openAncestors(r.startContainer);
           const rect = r.getBoundingClientRect();
           window.scrollTo({ top: window.scrollY + rect.top - window.innerHeight / 3, behavior: "smooth" });
         }
@@ -171,6 +206,24 @@ export function LessonView({
     },
     [ranges],
   );
+
+  // A link #remark-<id> (from the page of one's remarks) opens that remark once anchored.
+  const remarkFromHash = useRef(true);
+  useEffect(() => {
+    if (!remarkFromHash.current || !loaded) return;
+    const m = /^#remark-(\d+)$/.exec(window.location.hash);
+    if (!m) {
+      remarkFromHash.current = false;
+      return;
+    }
+    const id = Number(m[1]);
+    const thread = threads.find((t) => t.id === id || t.replies.some((r) => r.id === id));
+    if (!thread) return;
+    if (thread.status !== "open") setShowResolved(true);
+    if (!ranges.has(thread.id)) return; // wait for anchoring
+    remarkFromHash.current = false;
+    focusThread(thread.id, true);
+  }, [loaded, threads, ranges, focusThread]);
 
   // Hovering (or focusing) a cross-reference shows the referenced statement.
   function showPreview(target: EventTarget | null) {
@@ -262,6 +315,11 @@ export function LessonView({
           <div dangerouslySetInnerHTML={{ __html: refPreviews[preview.id].html }} />
         </div>
       )}
+
+      {endorseSlots.map((el) => {
+        const ex = el.dataset.exercise!;
+        return createPortal(<EndorseControl exercise={ex} currentHash={exerciseHashes[ex]} state={endorsements} />, el, ex);
+      })}
 
       {selButton && (
         <button

@@ -52,9 +52,11 @@ describe.skipIf(!hasPhp)("PHP remarks server", () => {
   beforeAll(async () => {
     tmp = fs.mkdtempSync(path.join(os.tmpdir(), "cl-php-"));
     fs.writeFileSync(path.join(tmp, "lessons.json"), JSON.stringify({ "c/l": "hash1", "c/m": "hash2" }));
+    fs.writeFileSync(path.join(tmp, "exercises.json"), JSON.stringify({ "ex-one": "xhash1", "ex-two": "xhash2" }));
     fs.writeFileSync(
       path.join(tmp, "config.php"),
       `<?php return ['data_dir' => ${JSON.stringify(path.join(tmp, "data"))}, 'lessons_json' => ${JSON.stringify(path.join(tmp, "lessons.json"))},
+        'exercises_json' => ${JSON.stringify(path.join(tmp, "exercises.json"))},
         'dev_login' => true, 'admin_orcids' => ['${ADMIN}'], 'admin_token' => '${TOKEN}'];`,
     );
     const port = await freePort();
@@ -88,6 +90,9 @@ describe.skipIf(!hasPhp)("PHP remarks server", () => {
     expect((await call("GET", "/api/comments?lesson=nope")).status).toBe(404);
     expect((await call("POST", "/api/comments", { lessonId: "c/l", body: "x", anchor })).status).toBe(401);
     expect((await call("GET", "/api/nothing")).status).toBe(404);
+    expect((await call("GET", "/api/endorsements")).json).toEqual({ endorsements: [], me: null });
+    expect((await call("POST", "/api/endorsements", { exercise: "ex-one", endorse: true })).status).toBe(401);
+    expect((await call("GET", "/api/me/activity")).status).toBe(401);
   });
 
   it("signs in with the dev login, keeping only safe return paths", async () => {
@@ -126,6 +131,32 @@ describe.skipIf(!hasPhp)("PHP remarks server", () => {
     expect(list.threads).toHaveLength(1);
     expect(list.threads[0].replies.map((r: { id: number }) => r.id)).toEqual([reply.id]);
     expect(list.me.orcid).toBe(ADMIN);
+  });
+
+  it("endorses exercises and withdraws, with the DTO of the Next.js API", async () => {
+    expect((await call("POST", "/api/endorsements", { exercise: "ex-one", endorse: true }, { origin: "https://evil.com" })).status).toBe(403);
+    expect((await call("POST", "/api/endorsements", { exercise: "nope", endorse: true })).status).toBe(404);
+    const r = await call("POST", "/api/endorsements", { exercise: "ex-one", endorse: true }, { origin: base });
+    expect(r.status).toBe(200);
+    expect(r.json.endorsements).toHaveLength(1);
+    const e = r.json.endorsements[0];
+    expect(Object.keys(e).sort()).toEqual(["author", "contentHash", "createdAt", "exercise"]);
+    expect(e).toMatchObject({ exercise: "ex-one", contentHash: "xhash1", author: { name: "Josiah Carberry (dev login)", orcid: ADMIN } });
+    expect(Number.isNaN(Date.parse(e.createdAt))).toBe(false);
+    // endorsing twice keeps one endorsement
+    await call("POST", "/api/endorsements", { exercise: "ex-one", endorse: true });
+    await call("POST", "/api/endorsements", { exercise: "ex-two", endorse: true });
+    expect((await call("GET", "/api/endorsements")).json.endorsements.map((x: { exercise: string }) => x.exercise).sort()).toEqual(["ex-one", "ex-two"]);
+    const after = (await call("POST", "/api/endorsements", { exercise: "ex-two", endorse: false })).json.endorsements;
+    expect(after.map((x: { exercise: string }) => x.exercise)).toEqual(["ex-one"]);
+  });
+
+  it("lists the comments and endorsements of the signed-in person", async () => {
+    const a = (await call("GET", "/api/me/activity")).json;
+    expect(Object.keys(a).sort()).toEqual(["comments", "endorsements"]);
+    expect(a.comments.map((c: { body: string }) => c.body)).toEqual(["Agreed", "Typo here"]); // newest first, replies included
+    expect(a.comments[0].mine).toBe(true);
+    expect(a.endorsements.map((x: { exercise: string }) => x.exercise)).toEqual(["ex-one"]);
   });
 
   it("edits, changes the status and deletes, with the permissions of the Next.js API", async () => {

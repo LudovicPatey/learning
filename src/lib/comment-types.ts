@@ -31,3 +31,17 @@ export const KIND_LABELS: Record<CommentKind, string> = {
   suggestion: "Suggestion",
   question: "Question",
 };
+
+/**
+ * An endorsement: the person has checked the exercise and its solution. `contentHash` is
+ * the version of the exercise they checked; it differs from the current one after an edit.
+ */
+export type EndorsementDTO = {
+  exercise: string;
+  contentHash: string | null;
+  createdAt: string;
+  author: { name: string; orcid: string };
+};
+
+/** What a signed-in person has written and endorsed (GET /api/me/activity). */
+export type ActivityDTO = { comments: CommentDTO[]; endorsements: EndorsementDTO[] };

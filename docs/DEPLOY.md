@@ -5,7 +5,7 @@ therefore deployed in two parts, modeled on the RM Zoo:
 
 - the **course notes** as a static export of the Next.js site (plain HTML, one
   directory per page, built by `npm run build:static` into `out/`);
-- the **reader remarks** (ORCID sign-in, comments) by a small PHP server in
+- the **reader remarks** (ORCID sign-in, comments, endorsements of exercises) by a small PHP server in
   `deploy/api/`, which answers the same URLs with the same JSON as the Next.js
   API of `src/app/api/`. The browser code is the same in development and in
   production; only the server behind `/api/` changes.
@@ -49,7 +49,8 @@ Every option can also be given on the command line: `--host`, `--user`, `--dir`.
 What is uploaded, and only that: the files of `out/`, that is the static export,
 `api/index.php`, `api/lib.php`, `api/.htaccess`, `api/config.example.php`,
 `api/lessons.json` (the lessons that accept remarks, with the hash of their
-source) and the root `.htaccess` (`deploy/htaccess.txt`: HTTPS redirect, 404
+source), `api/exercises.json` (the exercises that can be endorsed, with the hash of
+their source) and the root `.htaccess` (`deploy/htaccess.txt`: HTTPS redirect, 404
 page, compression, caching). A file named `config.php` is never uploaded, and
 nothing outside `out/` is (in particular not `external-data/`).
 
@@ -74,8 +75,10 @@ control panel → Web hosting → Logs), with a line starting with
 `ORCID token exchange failed`. Spaces and line breaks around the credentials in
 `config.php` are ignored.
 
-Remarks and sessions are stored in `learning-data/` next to the site's folder,
-outside the web root (`data_dir` in `config.php` to change it). To download them:
+Remarks, endorsements and sessions are stored in `learning-data/` next to the
+site's folder, outside the web root (`data_dir` in `config.php` to change it).
+Endorsements are public: the list of endorsers of an exercise shows their names
+and ORCID iDs, as remarks do. To download everything:
 
 ```bash
 curl -H "Authorization: Bearer <admin_token>" https://<site>/api/admin/export > remarks.json

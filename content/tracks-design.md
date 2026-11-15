@@ -9,6 +9,16 @@ The reader is a master's student who will do research in mathematical logic. A
 track is the shortest sequence of courses after which such a student can read the
 research literature of its area; everything else is a specialized course.
 
+**Primary and secondary tracks.** The four tracks computability, algorithmic
+randomness, reverse mathematics and higher computability are **primary**: they form
+the common education of a researcher in the field, and the home page shows them. The
+tracks lowness and avoidance, and models of arithmetic, are **secondary**
+(`kind: secondary`): each is a research-oriented continuation that assumes a primary
+track (computability theory, and the first-order part of reverse mathematics,
+respectively), and they are shown only on the page of all tracks. A secondary track is
+chosen when its subject is a specialization rather than a basis, but is long enough to
+need its own dependency graph.
+
 ## Literature compared
 
 - **Computability:**
@@ -432,3 +442,6 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
 - **2026-11-13.** Both new tracks written in full and polished; long lessons split (no
   lesson exceeds 45 minutes at 55 words per minute); pointers added from the existing
   courses to the new tracks.
+- **2026-11-13.** Tracks divided into primary and secondary ones: lowness and avoidance,
+  and models of arithmetic, become secondary tracks, shown on the page of all tracks
+  only.

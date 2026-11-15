@@ -9,6 +9,8 @@
 //   :::theorem[Optional title]{#thm-id}   ... :::   (also lemma, definition, ...)
 //   :::proof{of=thm-id}                   ... :::
 //   :::quiz                               ... :::   (multiple-choice questions)
+//   ::::exercise{#ex-id difficulty=2 objective="..."} ... ::::   (exercises)
+//   :::::exercises                        ... :::::  (further exercises, collapsed at the end)
 //   :ref{#thm-id}                          cross-reference, possibly to another lesson
 
 import fs from "node:fs";
@@ -31,7 +33,7 @@ import type { Root as MdRoot } from "mdast";
 import type { Root as HRoot, Element as HElement, ElementContent, RootContent } from "hast";
 import { macros } from "./katex-macros.ts";
 import { contentDir, versionDir } from "./versions.ts";
-import { parseTracks, trackOfCourse, type Track } from "./tracks.ts";
+import { orderTracks, parseTracks, trackOfCourse, type Track } from "./tracks.ts";
 
 // ---------------------------------------------------------------- types
 
@@ -48,6 +50,26 @@ export type LessonMeta = {
   sections: string[]; // titles of the level-2 headings
   file: string; // absolute path of the source file
   version?: string; // set when the lesson comes from a released version
+};
+
+/**
+ * An exercise. Featured exercises are in the text of their lesson; the others are in the
+ * block of further exercises at the end of the lesson. All are listed in the catalogue.
+ */
+export type ExerciseMeta = {
+  id: string; // the label, e.g. "ex-halting-variants"; endorsements refer to it
+  lessonId: string; // the lesson that contains it
+  course: string;
+  number: string; // e.g. "7.4"
+  title?: string;
+  /** What the exercise trains, in Markdown with math (the `objective` attribute). */
+  objective: string;
+  difficulty?: number; // 1 to 3
+  featured: boolean;
+  /** Lessons the exercise is associated with: its own lesson first, then those of `lessons=`. */
+  lessons: string[];
+  /** Hash of the source of the exercise and its solution; endorsements record it. */
+  hash: string;
 };
 
 /** Selects a released version of one course; other courses are read from their working copy. */
@@ -112,8 +134,10 @@ type Catalog = {
   lessons: Map<string, LessonMeta>;
   labels: Map<string, Label>;
   warnings: string[];
-  /** Main learning tracks (content/tracks.yaml). */
+  /** Learning tracks (content/tracks.yaml), primary ones first. */
   tracks: Track[];
+  /** All exercises, by label, in course and lesson order. */
+  exercises: Map<string, ExerciseMeta>;
   /** Fingerprint of the content files this catalog was built from. */
   fingerprint: string;
 };
@@ -141,6 +165,7 @@ const UNNUMBERED: Record<string, string> = {
   aside: "Aside",
   figure: "Figure",
   quiz: "Check your understanding",
+  exercises: "Further exercises",
 };
 
 export function kindLabel(kind: string): string {
@@ -234,7 +259,7 @@ function readCourse(
   warnings: string[],
   dir = path.join(contentDir(), courseId),
   version?: string,
-): { course: Course; lessons: LessonMeta[]; labels: Label[] } | null {
+): { course: Course; lessons: LessonMeta[]; labels: Label[]; exercises: ExerciseMeta[] } | null {
   const courseFile = path.join(dir, "_course.yaml");
   if (!fs.existsSync(courseFile)) return null;
   const raw = YAML.parse(fs.readFileSync(courseFile, "utf8")) ?? {};
@@ -257,6 +282,7 @@ function readCourse(
 
   const lessons: LessonMeta[] = [];
   const labels: Label[] = [];
+  const exercises: ExerciseMeta[] = [];
   slugs.forEach((slug, index) => {
     const file = path.join(dir, `${slug}.md`);
     if (!fs.existsSync(file)) {
@@ -272,9 +298,18 @@ function readCourse(
     visit(tree, "heading", (node: any) => {
       if (node.depth === 2) sections.push(mdText(node.children));
     });
-    visit(tree, "containerDirective", (node: any) => {
+    let wrappers = 0;
+    visit(tree, "containerDirective", (node: any, _i, parent: any) => {
       if (node.name === "quiz") {
         quizCount += 1 + node.children.filter((c: any) => c.type === "thematicBreak").length;
+      }
+      if (node.name === "exercises") {
+        wrappers += 1;
+        if (parent?.type !== "root") warnings.push(`${id}: the block of further exercises must be at the top level`);
+      }
+      if (node.name === "exercise") {
+        const ex = exerciseMeta(node, parent, { id, courseId, index, content }, warnings);
+        if (ex) exercises.push(ex);
       }
       const anchor = node.attributes?.id;
       if (anchor) {
@@ -282,6 +317,7 @@ function readCourse(
         labels.push({ id: anchor, lessonId: id, kind: node.name, number: node.data?.envNumber ? `${index + 1}.${node.data.envNumber}` : undefined, title, titleText: title ? mdText(title) : undefined });
       }
     });
+    if (wrappers > 1) warnings.push(`${id}: more than one block of further exercises`);
     lessons.push({
       id,
       course: courseId,
@@ -303,7 +339,45 @@ function readCourse(
       warnings.push(`${courseId}/${f} is not listed in ${courseId}/_course.yaml`);
     }
   }
-  return { course, lessons, labels };
+  return { course, lessons, labels, exercises };
+}
+
+/** Metadata of one exercise directive; warns about a missing label or objective. */
+function exerciseMeta(
+  node: any,
+  parent: any,
+  lesson: { id: string; courseId: string; index: number; content: string },
+  warnings: string[],
+): ExerciseMeta | null {
+  const attrs = node.attributes ?? {};
+  const where = `${lesson.id}: exercise ${lesson.index + 1}.${node.data?.envNumber ?? "?"}`;
+  if (!attrs.id) {
+    warnings.push(`${where} has no label (add {#ex-...})`);
+    return null;
+  }
+  const objective = String(attrs.objective ?? "").trim();
+  if (!objective) warnings.push(`${where} (#${attrs.id}) has no objective (add objective="...")`);
+  const extra = String(attrs.lessons ?? "")
+    .split(",")
+    .map((x) => x.trim())
+    .filter(Boolean)
+    .map((x) => (x.includes("/") ? x : `${lesson.courseId}/${x}`));
+  const title = peekDirectiveLabel(node);
+  const start = node.position?.start?.offset ?? 0;
+  const end = node.position?.end?.offset ?? 0;
+  const d = Number(attrs.difficulty);
+  return {
+    id: String(attrs.id),
+    lessonId: lesson.id,
+    course: lesson.courseId,
+    number: `${lesson.index + 1}.${node.data?.envNumber ?? "?"}`,
+    title: title ? mdText(title) : undefined,
+    objective,
+    difficulty: Number.isFinite(d) && d >= 1 ? Math.min(3, Math.round(d)) : undefined,
+    featured: parent?.name !== "exercises",
+    lessons: [lesson.id, ...extra.filter((l) => l !== lesson.id)],
+    hash: contentHash(lesson.content.slice(start, end)),
+  };
 }
 
 function buildCatalog(sel?: VersionSel): Catalog {
@@ -312,6 +386,7 @@ function buildCatalog(sel?: VersionSel): Catalog {
   const courses: Course[] = [];
   const lessons = new Map<string, LessonMeta>();
   const labels = new Map<string, Label>();
+  const exerciseList: ExerciseMeta[] = [];
   const root = contentDir();
   const dirs = fs.existsSync(root)
     ? fs.readdirSync(root, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_") && !d.name.startsWith("."))
@@ -324,6 +399,7 @@ function buildCatalog(sel?: VersionSel): Catalog {
     if (!res) continue;
     courses.push(res.course);
     for (const l of res.lessons) lessons.set(l.id, l);
+    exerciseList.push(...res.exercises);
     for (const lab of res.labels) {
       const prev = labels.get(lab.id);
       if (prev) warnings.push(`Duplicate label #${lab.id} in ${prev.lessonId} and ${lab.lessonId}`);
@@ -348,7 +424,18 @@ function buildCatalog(sel?: VersionSel): Catalog {
     : [];
   const trackOf = trackOfCourse(tracks);
   for (const c of courses) c.track = trackOf.get(c.id);
-  return { areas, courses, lessons, labels, warnings, tracks, fingerprint: contentFingerprint(sel) };
+
+  // exercises in course order, then lesson order
+  const courseRank = new Map(courses.map((c, i) => [c.id, i]));
+  exerciseList.sort((a, b) => (courseRank.get(a.course) ?? 0) - (courseRank.get(b.course) ?? 0));
+  const exercises = new Map<string, ExerciseMeta>();
+  for (const ex of exerciseList) {
+    if (exercises.has(ex.id)) continue; // duplicate labels are reported above
+    for (const l of ex.lessons.slice(1)) if (!lessons.has(l)) warnings.push(`${ex.lessonId}: exercise #${ex.id} is associated with unknown lesson "${l}"`);
+    ex.lessons = ex.lessons.filter((l) => lessons.has(l));
+    exercises.set(ex.id, ex);
+  }
+  return { areas, courses, lessons, labels, warnings, tracks: orderTracks(tracks), exercises, fingerprint: contentFingerprint(sel) };
 }
 
 // Caching. Every cache is keyed by a fingerprint of the content files (paths,
@@ -416,7 +503,10 @@ export function courseLessons(courseId: string, sel?: VersionSel): LessonMeta[] 
 
 export function courseStats(courseId: string, sel?: VersionSel) {
   const ls = courseLessons(courseId, sel);
+  const ex = [...getCatalog(sel).exercises.values()].filter((e) => e.course === courseId);
   return {
+    exercises: ex.length,
+    featuredExercises: ex.filter((e) => e.featured).length,
     lessons: ls.length,
     minutes: ls.reduce((s, l) => s + (l.duration ?? 0), 0),
     questions: ls.reduce((s, l) => s + l.quizCount, 0),
@@ -468,7 +558,7 @@ export function courseHref(id: string, version?: string) {
 type Ctx = { lessonId: string; catalog: Catalog; warnings: string[]; refs: Set<string>; sel?: VersionSel };
 
 /** Links inside a released course stay inside the same release. */
-function hrefIn(ctx: Ctx, lessonId: string) {
+function hrefIn(ctx: { sel?: VersionSel }, lessonId: string) {
   const v = ctx.sel && lessonId.startsWith(`${ctx.sel.course}/`) ? ctx.sel.version : undefined;
   return lessonHref(lessonId, v);
 }
@@ -602,6 +692,18 @@ function remarkEnvironments(ctx: Ctx) {
       }
       const title = takeDirectiveLabel(node);
 
+      if (kind === "exercises") {
+        const count = node.children.filter((c: any) => c.type === "containerDirective" && c.name === "exercise").length;
+        const summary = block("summary", ["further-head"], [
+          span(["further-title"], title ?? [text("Further exercises")]),
+          text(" "),
+          span(["further-count"], [text(`${count} exercise${count === 1 ? "" : "s"}`)]),
+        ]);
+        node.children.unshift(summary);
+        node.data = { hName: "details", hProperties: { className: ["further-exercises"], id: id ?? "further-exercises" } };
+        return;
+      }
+
       if (kind === "figure") {
         node.data = { hName: "figure", hProperties: { className: ["env", "env-figure"], id } };
         if (title) node.children.push(block("figcaption", [], title));
@@ -637,15 +739,42 @@ function remarkEnvironments(ctx: Ctx) {
           children: [text("#")],
         });
       }
+      if (kind === "exercise" && id) {
+        // filled in the browser with the endorsements of the exercise (LessonView)
+        head.push(span(["endorse-slot", "no-annotate"], [], { dataExercise: id }));
+      }
       const collapsible = kind === "solution" || kind === "hint";
       const headNode = block(collapsible ? "summary" : "div", ["env-head"], head);
       node.children.unshift(headNode);
+      if (kind === "exercise" && attrs.objective) {
+        node.children.splice(1, 0, {
+          type: "paragraph",
+          data: { hProperties: { className: ["env-objective"] } },
+          children: [span(["env-objective-label"], [text("Objective.")]), text(" "), ...inlineMarkdown(String(attrs.objective))],
+        });
+      }
       node.data = {
         hName: collapsible ? "details" : "section",
         hProperties: { className: ["env", `env-${kind}`], id, dataKind: kind },
       };
     });
   };
+}
+
+/** Phrasing nodes of a short Markdown text (with math), such as an objective. */
+function inlineMarkdown(md: string): any[] {
+  const p = parser();
+  const root = p.runSync(p.parse(md)) as any;
+  return root.children.flatMap((c: any) => (c.type === "paragraph" ? c.children : []));
+}
+
+/** HTML of a short Markdown text with math, without the enclosing paragraph (objectives of exercises). */
+export async function renderInlineMarkdown(md: string): Promise<string> {
+  const processor = unified()
+    .use(remarkRehype)
+    .use(rehypeKatex, { macros: macros(), throwOnError: false, strict: false });
+  const tree = await processor.run({ type: "root", children: [{ type: "paragraph", children: inlineMarkdown(md) }] } as any);
+  return toHtml((tree as any).children[0]?.children ?? []);
 }
 
 function hasClass(n: any, cls: string): boolean {
@@ -701,46 +830,24 @@ async function renderTree(id: string, sel?: VersionSel) {
   return { meta, source, ctx, tree };
 }
 
-// Rendered trees, cached per lesson for a given state of the content.
-const treeCache = new Map<string, { fp: string; value: Promise<Awaited<ReturnType<typeof renderTree>>> }>();
+// The products of rendering a lesson: HTML strings only. The syntax trees are not
+// kept: with KaTeX output they take about ten megabytes per lesson, which exhausts
+// the memory when every lesson is rendered (static build, content tests).
+type Processed = {
+  meta: LessonMeta;
+  contentHash: string;
+  segments: Segment[];
+  headings: { id: string; text: string }[];
+  /** Rendered HTML of the labelled statements, for hover previews in other lessons. */
+  statements: Map<string, string>;
+  warnings: string[];
+  refs: Set<string>;
+};
 
-function cachedTree(id: string, sel?: VersionSel) {
-  const fp = getCatalog(sel).fingerprint;
-  const key = `${selKey(sel)}|${id}`;
-  const hit = treeCache.get(key);
-  if (hit?.fp === fp) return hit.value;
-  const value = renderTree(id, sel);
-  treeCache.set(key, { fp, value });
-  value.catch(() => treeCache.delete(key));
-  return value;
-}
-
-/** Rendered HTML of the labelled statements of one lesson. */
-const previewCache = new Map<string, { fp: string; map: Map<string, string> }>();
-
-async function lessonStatements(lessonId: string, sel?: VersionSel): Promise<Map<string, string>> {
-  const { labels, fingerprint } = getCatalog(sel);
-  const key = `${selKey(sel)}|${lessonId}`;
-  const hit = previewCache.get(key);
-  if (hit?.fp === fingerprint) return hit.map;
-  const map = new Map<string, string>();
-  const r = await cachedTree(lessonId, sel);
-  if (r) {
-    visit(r.tree, "element", (el: any) => {
-      const anchor = el.properties?.id;
-      if (anchor && labels.has(String(anchor)) && hasClass(el, "env")) map.set(String(anchor), toHtml(el));
-    });
-  }
-  previewCache.set(key, { fp: fingerprint, map });
-  return map;
-}
-
-/** Render a lesson of the working copy, or of a released version when `sel` is given. */
-export async function renderLesson(id: string, sel?: VersionSel): Promise<RenderedLesson | null> {
-  const r = await cachedTree(id, sel);
+async function processLesson(id: string, sel?: VersionSel): Promise<Processed | null> {
+  const r = await renderTree(id, sel);
   if (!r) return null;
   const { meta, source, ctx, tree } = r;
-  const catalog = ctx.catalog;
 
   const segments: Segment[] = [];
   let buffer: RootContent[] = [];
@@ -758,20 +865,50 @@ export async function renderLesson(id: string, sel?: VersionSel): Promise<Render
   flush();
 
   const headings: { id: string; text: string }[] = [];
+  const statements = new Map<string, string>();
+  const { labels } = ctx.catalog;
   visit(tree, "element", (el: any) => {
     if (el.tagName === "h2" && el.properties?.id) {
       const t = toHtml(el.children).replace(/<[^>]+>/g, "");
       headings.push({ id: String(el.properties.id), text: t });
     }
+    const anchor = el.properties?.id;
+    if (anchor && labels.has(String(anchor)) && hasClass(el, "env")) statements.set(String(anchor), toHtml(el));
   });
 
+  return { meta, contentHash: contentHash(source), segments, headings, statements, warnings: ctx.warnings, refs: ctx.refs };
+}
+
+// Rendered lessons, cached per lesson for a given state of the content.
+const renderCache = new Map<string, { fp: string; value: Promise<Processed | null> }>();
+
+function cachedLesson(id: string, sel?: VersionSel) {
+  const fp = getCatalog(sel).fingerprint;
+  const key = `${selKey(sel)}|${id}`;
+  const hit = renderCache.get(key);
+  if (hit?.fp === fp) return hit.value;
+  const value = processLesson(id, sel);
+  renderCache.set(key, { fp, value });
+  value.catch(() => renderCache.delete(key));
+  return value;
+}
+
+/** Rendered HTML of the labelled statements of one lesson. */
+async function lessonStatements(lessonId: string, sel?: VersionSel): Promise<Map<string, string>> {
+  return (await cachedLesson(lessonId, sel))?.statements ?? new Map();
+}
+
+/** Render a lesson of the working copy, or of a released version when `sel` is given. */
+export async function renderLesson(id: string, sel?: VersionSel): Promise<RenderedLesson | null> {
+  const r = await cachedLesson(id, sel);
+  if (!r) return null;
   return {
-    meta,
-    segments,
-    headings,
-    contentHash: contentHash(source),
-    warnings: ctx.warnings,
-    refPreviews: await refPreviewsFor(ctx, catalog),
+    meta: r.meta,
+    segments: r.segments,
+    headings: r.headings,
+    contentHash: r.contentHash,
+    warnings: r.warnings,
+    refPreviews: await refPreviewsFor(r.refs, sel),
   };
 }
 
@@ -779,10 +916,12 @@ export function contentHash(source: string): string {
   return crypto.createHash("sha256").update(source).digest("hex").slice(0, 16);
 }
 
-async function refPreviewsFor(ctx: Ctx, catalog: Catalog): Promise<Record<string, RefPreview>> {
-  if (!ctx.refs.size) return {};
+async function refPreviewsFor(refs: Set<string>, sel?: VersionSel): Promise<Record<string, RefPreview>> {
+  if (!refs.size) return {};
+  const catalog = getCatalog(sel);
+  const ctx = { sel };
   const out: Record<string, RefPreview> = {};
-  for (const id of ctx.refs) {
+  for (const id of refs) {
     const lab = catalog.labels.get(id);
     const html = lab && (await lessonStatements(lab.lessonId, ctx.sel)).get(id);
     const lesson = lab && catalog.lessons.get(lab.lessonId);

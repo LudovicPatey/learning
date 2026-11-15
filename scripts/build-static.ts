@@ -1,7 +1,8 @@
 // Builds the site deployed to the PHP web hosting (docs/DEPLOY.md) into out/:
 //   1. the static export of the Next.js site (STATIC_EXPORT=1, see next.config.ts);
 //   2. the remarks server (deploy/api/*.php), which serves the URLs of src/app/api/;
-//   3. api/lessons.json, the lessons that accept remarks, with the hash of their source;
+//   3. api/lessons.json, the lessons that accept remarks, with the hash of their source, and
+//      api/exercises.json, the exercises that can be endorsed, with the hash of their source;
 //   4. the root .htaccess (deploy/htaccess.txt).
 // Usage: npm run build:static
 import { spawnSync } from "node:child_process";
@@ -28,10 +29,13 @@ for (const id of [...getCatalog().lessons.keys()].sort()) {
 }
 fs.mkdirSync(path.join(out, "api"), { recursive: true });
 fs.writeFileSync(path.join(out, "api", "lessons.json"), JSON.stringify(lessons, null, 1) + "\n");
+const exercises: Record<string, string> = {};
+for (const ex of getCatalog().exercises.values()) exercises[ex.id] = ex.hash;
+fs.writeFileSync(path.join(out, "api", "exercises.json"), JSON.stringify(exercises, null, 1) + "\n");
 
 for (const f of ["index.php", "lib.php", ".htaccess", "config.example.php"]) {
   fs.copyFileSync(path.join(root, "deploy", "api", f), path.join(out, "api", f));
 }
 fs.copyFileSync(path.join(root, "deploy", "htaccess.txt"), path.join(out, ".htaccess"));
 
-console.log(`\nStatic site in out/: ${Object.keys(lessons).length} lessons accept remarks.`);
+console.log(`\nStatic site in out/: ${Object.keys(lessons).length} lessons accept remarks, ${Object.keys(exercises).length} exercises can be endorsed.`);

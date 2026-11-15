@@ -34,6 +34,18 @@ const MIGRATIONS: string[] = [
   CREATE INDEX comments_lesson ON comments(lesson_id, created_at);
   CREATE INDEX comments_parent ON comments(parent_id);
   `,
+  `
+  -- "I have checked this exercise and its solution"; content_hash is the version checked
+  CREATE TABLE endorsements (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    exercise_id TEXT NOT NULL,
+    content_hash TEXT,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    PRIMARY KEY (user_id, exercise_id)
+  );
+  CREATE INDEX endorsements_exercise ON endorsements(exercise_id);
+  CREATE INDEX comments_user ON comments(user_id, created_at);
+  `,
 ];
 
 function migrate(db: Database.Database) {
@@ -46,7 +58,9 @@ function migrate(db: Database.Database) {
   }
 }
 
-const g = globalThis as unknown as { __db?: Database.Database };
+// The connection survives hot reloads of the development server, which may bring new
+// migrations: they are applied to the open connection as well.
+const g = globalThis as unknown as { __db?: Database.Database; __dbMigrations?: number };
 
 export function db(): Database.Database {
   if (!g.__db) {
@@ -55,8 +69,11 @@ export function db(): Database.Database {
     const conn = new Database(file);
     conn.pragma("journal_mode = WAL");
     conn.pragma("foreign_keys = ON");
-    migrate(conn);
     g.__db = conn;
+  }
+  if (g.__dbMigrations !== MIGRATIONS.length) {
+    migrate(g.__db);
+    g.__dbMigrations = MIGRATIONS.length;
   }
   return g.__db;
 }

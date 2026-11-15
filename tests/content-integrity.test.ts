@@ -1,12 +1,16 @@
 // Checks the real course content: every lesson renders cleanly. This test
 // fails when a lesson contains a broken reference, a malformed quiz or a
 // formula KaTeX cannot typeset — run it before every commit.
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { getCatalog, renderLesson } from "@/lib/content";
 import { allVersions } from "@/lib/versions";
 
 delete process.env.CONTENT_DIR;
 const catalog = getCatalog();
+
+// Rendering resolves through already-settled promises, so the worker would never
+// return to its event loop and Vitest's progress messages would time out: yield.
+afterEach(() => new Promise<void>((resolve) => setImmediate(resolve)));
 
 describe("course content", () => {
   it("has a consistent catalog", () => {

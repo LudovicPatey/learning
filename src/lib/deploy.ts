@@ -11,7 +11,7 @@ import path from "node:path";
 export type DeployFile = { local: string; remote: string; hash: string; size: number };
 
 /** Files that must be in out/ for a deployment to make sense. */
-export const REQUIRED = ["index.html", "404.html", ".htaccess", "api/index.php", "api/lib.php", "api/.htaccess", "api/lessons.json"];
+export const REQUIRED = ["index.html", "404.html", ".htaccess", "api/index.php", "api/lib.php", "api/.htaccess", "api/lessons.json", "api/exercises.json"];
 const SKIPPED = new Set([".DS_Store"]);
 
 /** Every file of out/, with its path on the server (relative to the site's folder). */

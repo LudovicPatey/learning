@@ -58,7 +58,7 @@ describe("catalog", () => {
   });
 
   it("computes statistics and course graph", () => {
-    expect(courseStats("alpha")).toEqual({ lessons: 2, minutes: 25, questions: 2 });
+    expect(courseStats("alpha")).toEqual({ lessons: 2, minutes: 25, questions: 2, exercises: 3, featuredExercises: 1 });
     expect(courseDepths().get("alpha")).toBe(0);
     expect(courseDepths().get("beta")).toBe(1);
     expect(nextCourses("alpha").map((c) => c.id)).toEqual(["beta"]);
@@ -212,5 +212,47 @@ describe("caching", () => {
     expect(changed).not.toBe(src);
     fs.writeFileSync(file, changed);
     expect(stripTags(await preview())).toContain("Additional hypothesis zeta");
+  });
+});
+
+describe("exercises", () => {
+  it("lists featured exercises and further exercises with their lessons", () => {
+    const ex = getCatalog().exercises;
+    expect([...ex.keys()]).toEqual(["ex-do-it", "ex-variant", "ex-other"]);
+    expect(ex.get("ex-do-it")).toMatchObject({ lessonId: "alpha/one", featured: true, difficulty: 2, objective: "Apply the main theorem to $n = 2$." });
+    expect(ex.get("ex-variant")).toMatchObject({ lessonId: "alpha/two", featured: false, title: "Variant", number: "2.2", lessons: ["alpha/two", "alpha/one"] });
+    // the lesson itself is listed once, first
+    expect(ex.get("ex-other")?.lessons).toEqual(["alpha/two", "beta/three"]);
+  });
+
+  it("hashes the source of each exercise", () => {
+    const before = getCatalog().exercises.get("ex-variant")!.hash;
+    const file = path.join(process.env.CONTENT_DIR!, "alpha", "two.md");
+    fs.writeFileSync(file, fs.readFileSync(file, "utf8").replace("Varied.", "Varied again."));
+    const after = getCatalog().exercises;
+    expect(after.get("ex-variant")!.hash).not.toBe(before);
+    expect(after.get("ex-other")!.hash).toBe(getCatalog().exercises.get("ex-other")!.hash);
+  });
+
+  it("renders the objective, the endorsement slot and the collapsed further exercises", async () => {
+    const r = await html("alpha/two");
+    const h = allHtml(r);
+    expect(h).toContain('<details class="further-exercises" id="further-exercises">');
+    expect(stripTags(h)).toContain("Further exercises 2 exercises");
+    expect(h).toContain('data-exercise="ex-variant"');
+    expect(stripTags(h)).toContain("Objective. See why the lemma needs “two”.");
+    expect(r.warnings).toEqual(["Unknown reference #does-not-exist"]);
+  });
+
+  it("warns about exercises without label or objective, and unknown lessons", () => {
+    const file = path.join(process.env.CONTENT_DIR!, "alpha", "two.md");
+    fs.writeFileSync(
+      file,
+      fs.readFileSync(file, "utf8") + '\n::::exercise\nNo label.\n::::\n\n::::exercise{#ex-bare lessons="nowhere"}\nNo objective.\n::::\n',
+    );
+    const w = getCatalog().warnings;
+    expect(w).toContain("alpha/two: exercise 2.4 has no label (add {#ex-...})");
+    expect(w).toContain('alpha/two: exercise 2.5 (#ex-bare) has no objective (add objective="...")');
+    expect(w).toContain('alpha/two: exercise #ex-bare is associated with unknown lesson "alpha/nowhere"');
   });
 });

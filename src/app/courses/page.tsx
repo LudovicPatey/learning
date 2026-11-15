@@ -52,7 +52,7 @@ export default function CoursesPage() {
         <h1 style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", margin: "8px 0 12px" }}>Course catalogue</h1>
         <p>
           All courses, including the specialized courses that do not belong to a main track. The search covers titles, summaries,
-          objectives and lesson titles. The <Link href="/#map">learning tracks</Link> show the main sequences and their prerequisites.
+          objectives and lesson titles. The <Link href="/tracks">learning tracks</Link> show the main sequences and their prerequisites.
         </p>
       </div>
       <CourseCatalog entries={entries} areas={areas.map((a) => ({ id: a.id, title: a.title, color: a.color }))} levels={levels} />

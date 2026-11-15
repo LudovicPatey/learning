@@ -31,7 +31,13 @@ export async function LessonPage({ courseId, slug, version }: { courseId: string
   const course = getCourse(courseId, sel);
   if (!rendered || !course) notFound();
   const { meta } = rendered;
-  const { lessons } = getCatalog(sel);
+  const { lessons, exercises } = getCatalog(sel);
+  const lessonExercises = [...exercises.values()].filter((e) => e.lessonId === id);
+  const exerciseHashes = Object.fromEntries(lessonExercises.map((e) => [e.id, e.hash]));
+  const featuredCount = lessonExercises.filter((e) => e.featured).length;
+  const furtherCount = lessonExercises.length - featuredCount;
+  // exercises of other lessons that are also associated with this one
+  const related = version ? [] : [...getCatalog().exercises.values()].filter((e) => e.lessonId !== id && e.lessons.includes(id));
   const area = getArea(course.area);
 
   const ordered = courseLessons(courseId, sel);
@@ -126,6 +132,17 @@ export async function LessonPage({ courseId, slug, version }: { courseId: string
                   {meta.quizCount} question{meta.quizCount > 1 ? "s" : ""}
                 </span>
               )}
+              {lessonExercises.length > 0 && (
+                <span className="pill">
+                  {featuredCount} exercise{featuredCount === 1 ? "" : "s"}
+                  {furtherCount > 0 && (
+                    <>
+                      {" "}
+                      + <a href="#further-exercises">{furtherCount} further</a>
+                    </>
+                  )}
+                </span>
+              )}
             </div>
             {meta.prerequisites.length > 0 && (
               <div className="prereq-box">
@@ -172,8 +189,25 @@ export async function LessonPage({ courseId, slug, version }: { courseId: string
             contentHash={rendered.contentHash}
             segments={rendered.segments}
             refPreviews={rendered.refPreviews}
+            exerciseHashes={exerciseHashes}
             readOnly={Boolean(version)}
           />
+
+          {related.length > 0 && (
+            <div className="related-exercises">
+              <strong>Exercises of other lessons that use this one:</strong>{" "}
+              {related.map((e, i) => (
+                <span key={e.id}>
+                  {i > 0 && " · "}
+                  <Link href={`${lessonHref(e.lessonId)}#${e.id}`}>
+                    Exercise {e.number}
+                    {e.title ? ` (${e.title})` : ""}
+                  </Link>
+                  {e.course !== courseId && <span className="muted"> ({getCourse(e.course)?.title})</span>}
+                </span>
+              ))}
+            </div>
+          )}
 
           <footer className="lesson-footer">
             {!next && (
@@ -187,7 +221,7 @@ export async function LessonPage({ courseId, slug, version }: { courseId: string
                       {c.status === "planned" ? " (in preparation)" : ""}
                     </Link>
                   ))}
-                  <Link className="btn btn-small btn-ghost" href="/#map">
+                  <Link className="btn btn-small btn-ghost" href="/tracks">
                     Course map
                   </Link>
                 </div>

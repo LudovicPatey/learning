@@ -12,7 +12,10 @@
 //   POST   /api/comments                {lessonId, body, kind?, anchor?, parentId?}
 //   PATCH  /api/comments/<id>           {body} (author) or {status} (maintainer)
 //   DELETE /api/comments/<id>           author or maintainer
-//   GET    /api/admin/export            all remarks (header Authorization: Bearer <admin_token>)
+//   GET    /api/endorsements            {endorsements, me}
+//   POST   /api/endorsements            {exercise, endorse}: endorse (true) or withdraw (false)
+//   GET    /api/me/activity             {comments, endorsements} of the signed-in person
+//   GET    /api/admin/export            all remarks and endorsements (header Authorization: Bearer <admin_token>)
 
 declare(strict_types=1);
 require __DIR__ . '/lib.php';
@@ -173,6 +176,37 @@ if (preg_match('~^comments/(\d+)$~', $route, $m) && in_array($method, ['PATCH', 
   });
   if ($method === 'DELETE') json_out(['ok' => true]);
   json_out(['comment' => to_dto(find_comment($s, $id), $s, $me)]);
+}
+
+if ($route === 'endorsements' && $method === 'GET') {
+  json_out(['endorsements' => list_endorsements(read_store()), 'me' => current_user()]);
+}
+
+if ($route === 'endorsements' && $method === 'POST') {
+  if (!same_origin()) fail(403, 'Forbidden');
+  $me = current_user();
+  if (!$me) fail(401, 'Sign in with ORCID to endorse an exercise.');
+  $b = body();
+  if ($b === null) fail(400, 'Invalid JSON');
+  $exercise = is_string($b['exercise'] ?? null) ? $b['exercise'] : '';
+  if (!array_key_exists($exercise, exercises())) fail(404, 'Unknown exercise');
+  $on = ($b['endorse'] ?? null) === true;
+  $s = with_store(function (array $s) use ($me, $exercise, $on) {
+    $s['endorsements'] = array_values(array_filter($s['endorsements'], fn ($e) => !($e['exercise'] === $exercise && $e['orcid'] === $me['orcid'])));
+    if ($on) {
+      $s['endorsements'][] = ['exercise' => $exercise, 'orcid' => $me['orcid'], 'contentHash' => exercises()[$exercise], 'createdAt' => now()];
+      $s['users'][$me['orcid']] = ['name' => $me['name']];
+    }
+    return $s;
+  });
+  json_out(['endorsements' => list_endorsements($s)]);
+}
+
+if ($route === 'me/activity' && $method === 'GET') {
+  $me = current_user();
+  if (!$me) fail(401, 'Not signed in');
+  $s = read_store();
+  json_out(['comments' => list_user_comments($s, $me), 'endorsements' => list_user_endorsements($s, $me)]);
 }
 
 if ($route === 'admin/export' && $method === 'GET') {

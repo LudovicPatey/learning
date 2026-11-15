@@ -14,10 +14,20 @@ export type TrackView = {
   external: { id: string; title: string; trackTitle?: string }[];
 };
 
-const STORAGE_KEY = "track-map:selected";
-
 /** The dependency graph of one track at a time, with tabs to switch track. */
-export function TrackMaps({ tracks, specializedCount }: { tracks: TrackView[]; specializedCount: number }) {
+export function TrackMaps({
+  tracks,
+  specializedCount = 0,
+  label = "Learning tracks",
+  storageKey = "track-map:selected",
+}: {
+  tracks: TrackView[];
+  specializedCount?: number;
+  label?: string;
+  /** Remembers the selected tab; one key per group of tabs. */
+  storageKey?: string;
+}) {
+  const STORAGE_KEY = storageKey;
   const [selected, setSelected] = useState(tracks[0]?.id);
   useEffect(() => {
     try {
@@ -26,7 +36,7 @@ export function TrackMaps({ tracks, specializedCount }: { tracks: TrackView[]; s
     } catch {
       // storage unavailable: keep the default
     }
-  }, [tracks]);
+  }, [tracks, STORAGE_KEY]);
   const choose = (id: string) => {
     setSelected(id);
     try {
@@ -40,7 +50,7 @@ export function TrackMaps({ tracks, specializedCount }: { tracks: TrackView[]; s
 
   return (
     <div className="track-maps">
-      <div className="track-tabs" role="tablist" aria-label="Learning tracks">
+      <div className="track-tabs" role="tablist" aria-label={label}>
         {tracks.map((t) => (
           <button
             key={t.id}

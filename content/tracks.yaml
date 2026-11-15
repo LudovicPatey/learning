@@ -1,6 +1,8 @@
-# Main learning tracks. Each track is a sequence of core courses in one area,
-# displayed as a dependency graph on the home page. Courses that appear in no
-# track are specialized courses: they are listed in the catalogue only.
+# Learning tracks. Each track is a sequence of core courses in one area, displayed
+# as a dependency graph. Primary tracks (the default) are shown on the home page;
+# secondary tracks (kind: secondary) only on the page of all tracks (/tracks).
+# Courses that appear in no track are specialized courses: they are listed in the
+# catalogue only.
 # Prerequisites on courses of other tracks are shown as "Builds on".
 # The reasons for the contents of each track are in tracks-design.md.
 - id: computability
@@ -32,6 +34,7 @@
   courses: [computable-ordinals, hyperarithmetic, descriptive-set-theory]
 - id: avoidance
   title: Lowness and avoidance
+  kind: secondary
   area: computability
   description: >
     Separating mathematical problems by preservation properties, with the forcing
@@ -40,6 +43,7 @@
   courses: [effective-forcing, avoidance, lowness, compactness-avoidance, separation-design, jump-cone-avoidance, jump-compactness-avoidance]
 - id: arithmetic
   title: Models of arithmetic
+  kind: secondary
   area: arithmetic
   description: >
     Fragments of Peano arithmetic and their models: induction and collection, truth

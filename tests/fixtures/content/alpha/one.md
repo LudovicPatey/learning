@@ -45,7 +45,7 @@ Discussion text.
 
 ## Second section
 
-::::exercise{difficulty=2}
+::::exercise{#ex-do-it difficulty=2 objective="Apply the main theorem to $n = 2$."}
 Do it.
 
 :::solution

@@ -59,6 +59,11 @@ export async function CoursePage({ id, version }: { id: string; version?: string
                   <span className="pill">{stats.lessons} lessons</span>
                   {stats.minutes > 0 && <span className="pill">≈ {Math.round(stats.minutes / 5) * 5} min</span>}
                   <span className="pill">{stats.questions} questions</span>
+                  {stats.exercises > 0 && (
+                    <Link className="pill" href={`/exercises?course=${id}`} title="In the exercise catalogue">
+                      {stats.exercises} exercises ({stats.featuredExercises} featured)
+                    </Link>
+                  )}
                 </>
               )}
               {course.status === "planned" && <span className="pill">In preparation</span>}

@@ -1,9 +1,10 @@
 // Learning tracks.
 //
-// A track is a main sequence of courses in one area, listed in
-// content/tracks.yaml. Courses that belong to no track are "specialized
-// courses": they appear in the catalogue and on course pages, but not in the
-// dependency graphs of the home page, which show one track at a time.
+// A track is a sequence of courses in one area, listed in content/tracks.yaml.
+// Primary tracks are the main sequences, shown on the home page; secondary
+// tracks (`kind: secondary`) are shown with them on the page of all tracks.
+// Courses that belong to no track are "specialized courses": they appear in the
+// catalogue and on course pages, but in no dependency graph.
 //
 // This module is pure (no file system), so that it can be unit-tested.
 
@@ -12,6 +13,8 @@ export type Track = {
   title: string;
   area: string;
   description: string;
+  /** Primary tracks are shown on the home page; secondary ones on the page of all tracks only. */
+  primary: boolean;
   /** Core courses of the track, in their recommended order. */
   courses: string[];
 };
@@ -37,6 +40,8 @@ export function parseTracks(raw: unknown, courseIds: Set<string>, areaIds: Set<s
     seen.add(id);
     const area = String(t.area ?? "");
     if (!areaIds.has(area)) warnings.push(`content/tracks.yaml: track "${id}" has unknown area "${area}"`);
+    const kind = t.kind == null ? "primary" : String(t.kind);
+    if (kind !== "primary" && kind !== "secondary") warnings.push(`content/tracks.yaml: track "${id}" has unknown kind "${kind}" (primary or secondary)`);
     const courses = ((t.courses ?? []) as unknown[]).map(String);
     for (const c of courses) if (!courseIds.has(c)) warnings.push(`content/tracks.yaml: track "${id}" lists unknown course "${c}"`);
     tracks.push({
@@ -44,16 +49,22 @@ export function parseTracks(raw: unknown, courseIds: Set<string>, areaIds: Set<s
       title: String(t.title ?? id),
       area,
       description: String(t.description ?? ""),
+      primary: kind !== "secondary",
       courses: courses.filter((c) => courseIds.has(c)),
     });
   }
   return tracks;
 }
 
-/** The first track listing each course; courses absent from the map are specialized. */
+/** Primary tracks first, then secondary ones, each group in file order. */
+export function orderTracks(tracks: Track[]): Track[] {
+  return [...tracks.filter((t) => t.primary), ...tracks.filter((t) => !t.primary)];
+}
+
+/** The first track listing each course (primary tracks first); courses absent from the map are specialized. */
 export function trackOfCourse(tracks: Track[]): Map<string, string> {
   const m = new Map<string, string>();
-  for (const t of tracks) for (const c of t.courses) if (!m.has(c)) m.set(c, t.id);
+  for (const t of orderTracks(tracks)) for (const c of t.courses) if (!m.has(c)) m.set(c, t.id);
   return m;
 }
 

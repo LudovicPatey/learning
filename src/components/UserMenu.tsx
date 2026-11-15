@@ -34,6 +34,9 @@ export function UserMenu() {
         <OrcidIcon size={16} /> {state.user.name}
       </a>
       {state.user.isAdmin && <span className="dev-tag">maintainer</span>}
+      <a className="link-btn" href="/account/" title="Your remarks and endorsements">
+        My activity
+      </a>
       <button
         className="link-btn"
         onClick={async () => {
