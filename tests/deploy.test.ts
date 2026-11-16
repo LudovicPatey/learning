@@ -2,7 +2,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { REQUIRED, changedFiles, curlConfig, deployFiles, remotePath, sftpBatch, updatedManifest } from "@/lib/deploy";
+import { BUILD_STAMP, REQUIRED, buildFingerprint, buildIsCurrent, changedFiles, curlConfig, deployFiles, remotePath, sftpBatch, updatedManifest } from "@/lib/deploy";
 
 const dirs: string[] = [];
 afterEach(() => {
@@ -78,5 +78,48 @@ describe("upload commands", () => {
     expect(conf).toContain("ssl-reqd");
     expect(conf).toContain('url = "ftp://ftp.example.org/learning/courses/x/index.html"');
     expect(curlConfig(files, { host: "h", user: "u", password: "p", dir: "d", tls: false })).not.toContain("ssl-reqd");
+  });
+});
+
+describe("buildFingerprint and buildIsCurrent", () => {
+  function makeRepo(): string {
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "cl-repo-"));
+    dirs.push(dir);
+    for (const [rel, text] of Object.entries({ "content/a/one.md": "one", "src/x.ts": "x", "package.json": "{}", "tests/t.ts": "t" })) {
+      fs.mkdirSync(path.dirname(path.join(dir, rel)), { recursive: true });
+      fs.writeFileSync(path.join(dir, rel), text);
+    }
+    return dir;
+  }
+
+  it("changes with the content and the path of an input, not with other files", () => {
+    const repo = makeRepo();
+    const f0 = buildFingerprint(repo);
+    expect(buildFingerprint(repo)).toBe(f0);
+    fs.writeFileSync(path.join(repo, "tests/t.ts"), "changed");
+    fs.writeFileSync(path.join(repo, "content/.DS_Store"), "");
+    expect(buildFingerprint(repo)).toBe(f0);
+    fs.writeFileSync(path.join(repo, "content/a/one.md"), "one!");
+    const f1 = buildFingerprint(repo);
+    expect(f1).not.toBe(f0);
+    fs.renameSync(path.join(repo, "content/a/one.md"), path.join(repo, "content/a/two.md"));
+    expect(buildFingerprint(repo)).not.toBe(f1);
+    fs.writeFileSync(path.join(repo, ".env.local"), "NEXT_PUBLIC_X=1");
+    expect(buildFingerprint(repo)).not.toBe(f1);
+  });
+
+  it("accepts out/ only when it is complete and stamped with the same fingerprint", () => {
+    const out = makeOut();
+    expect(buildIsCurrent(out, "abc")).toBe(false);
+    fs.writeFileSync(path.join(out, BUILD_STAMP), "abc\n");
+    expect(buildIsCurrent(out, "abc")).toBe(true);
+    expect(buildIsCurrent(out, "abd")).toBe(false);
+    fs.rmSync(path.join(out, "api", "exercises.json"));
+    expect(buildIsCurrent(out, "abc")).toBe(false);
+  });
+
+  it("does not upload the stamp", () => {
+    const out = makeOut({ [BUILD_STAMP]: "abc" });
+    expect(deployFiles(out).map((f) => f.remote)).not.toContain(BUILD_STAMP);
   });
 });

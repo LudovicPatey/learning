@@ -12,7 +12,9 @@ export type DeployFile = { local: string; remote: string; hash: string; size: nu
 
 /** Files that must be in out/ for a deployment to make sense. */
 export const REQUIRED = ["index.html", "404.html", ".htaccess", "api/index.php", "api/lib.php", "api/.htaccess", "api/lessons.json", "api/exercises.json"];
-const SKIPPED = new Set([".DS_Store"]);
+/** Fingerprint of the inputs of the last successful build, written by scripts/build-static.ts. */
+export const BUILD_STAMP = ".build-inputs";
+const SKIPPED = new Set([".DS_Store", BUILD_STAMP]);
 
 /** Every file of out/, with its path on the server (relative to the site's folder). */
 export function deployFiles(outDir = "out"): DeployFile[] {
@@ -85,4 +87,63 @@ export function curlConfig(
     lines.push(`url = ${q(`ftp://${host}/${encodeURI(remotePath(dir, f.remote))}`)}`);
   }
   return lines.join("\n") + "\n";
+}
+
+/**
+ * What the static build depends on (relative to the repository): the lessons and
+ * released versions, the site's code and styles, the PHP API, the build script, the
+ * dependencies and the configuration. Tests and docs are not inputs.
+ */
+export const BUILD_INPUTS = [
+  "content",
+  "src",
+  "public",
+  "deploy",
+  "scripts/build-static.ts",
+  "next.config.ts",
+  "package.json",
+  "package-lock.json",
+  "tsconfig.json",
+  ".env",
+  ".env.local",
+  ".env.production",
+  ".env.production.local",
+];
+
+/**
+ * A hash of every file of `inputs` under `root` (paths and contents), and of the
+ * Node version: equal fingerprints mean that the build would produce the same out/.
+ * Missing inputs are skipped.
+ */
+export function buildFingerprint(root: string, inputs: string[] = BUILD_INPUTS): string {
+  const h = crypto.createHash("sha256").update(`node ${process.version}\n`);
+  const add = (rel: string) => {
+    const abs = path.join(root, rel);
+    let st: fs.Stats;
+    try {
+      st = fs.statSync(abs);
+    } catch {
+      return;
+    }
+    if (st.isDirectory()) {
+      for (const name of fs.readdirSync(abs).sort()) if (!SKIPPED.has(name)) add(`${rel}/${name}`);
+    } else {
+      h.update(`${rel}\0${crypto.createHash("sha256").update(fs.readFileSync(abs)).digest("hex")}\n`);
+    }
+  };
+  for (const r of inputs) add(r);
+  return h.digest("hex");
+}
+
+/**
+ * Whether out/ is a complete build of the current inputs: it has every required file
+ * and the fingerprint recorded by its build equals `fingerprint`.
+ */
+export function buildIsCurrent(outDir: string, fingerprint: string): boolean {
+  if (REQUIRED.some((r) => !fs.existsSync(path.join(outDir, r)))) return false;
+  try {
+    return fs.readFileSync(path.join(outDir, BUILD_STAMP), "utf8").trim() === fingerprint;
+  } catch {
+    return false;
+  }
 }

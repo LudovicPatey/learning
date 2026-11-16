@@ -3,17 +3,22 @@
 //   2. the remarks server (deploy/api/*.php), which serves the URLs of src/app/api/;
 //   3. api/lessons.json, the lessons that accept remarks, with the hash of their source, and
 //      api/exercises.json, the exercises that can be endorsed, with the hash of their source;
-//   4. the root .htaccess (deploy/htaccess.txt).
+//   4. the root .htaccess (deploy/htaccess.txt);
+//   5. out/.build-inputs, the fingerprint of the inputs, so that npm run deploy can skip
+//      the build when nothing changed (it is not uploaded).
 // Usage: npm run build:static
 import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { getCatalog, renderLesson } from "../src/lib/content.ts";
+import { BUILD_STAMP, buildFingerprint } from "../src/lib/deploy.ts";
 import { allVersions } from "../src/lib/versions.ts";
 
 const root = path.resolve(import.meta.dirname, "..");
 const out = path.join(root, "out");
 
+// Taken before the build: an edit made during the build makes the next deployment build again.
+const fingerprint = buildFingerprint(root);
 fs.rmSync(out, { recursive: true, force: true });
 const r = spawnSync("npx", ["next", "build"], { cwd: root, stdio: "inherit", env: { ...process.env, STATIC_EXPORT: "1" } });
 if (r.status !== 0) process.exit(r.status ?? 1);
@@ -37,5 +42,8 @@ for (const f of ["index.php", "lib.php", ".htaccess", "config.example.php"]) {
   fs.copyFileSync(path.join(root, "deploy", "api", f), path.join(out, "api", f));
 }
 fs.copyFileSync(path.join(root, "deploy", "htaccess.txt"), path.join(out, ".htaccess"));
+
+// Last, so that an interrupted build leaves no stamp.
+fs.writeFileSync(path.join(out, BUILD_STAMP), fingerprint + "\n");
 
 console.log(`\nStatic site in out/: ${Object.keys(lessons).length} lessons accept remarks, ${Object.keys(exercises).length} exercises can be endorsed.`);

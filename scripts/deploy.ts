@@ -1,13 +1,15 @@
 // Upload the site to the web hosting (docs/DEPLOY.md): builds out/ with
-// scripts/build-static.ts, then uploads the files of out/ that changed since the
+// scripts/build-static.ts (unless out/ is already a build of the current sources:
+// content, code, PHP API and configuration are unchanged since it was made), then uploads the files of out/ that changed since the
 // last deployment. Nothing is ever deleted on the server; its api/config.php and
 // the remarks (in learning-data/, outside the web root) are never touched.
 //
-//   npm run deploy -- [--dry-run] [--all] [--no-build] [--protocol sftp|ftp] [--host H] [--user U] [--dir learning] [--no-tls]
+//   npm run deploy -- [--dry-run] [--all] [--no-build] [--rebuild] [--protocol sftp|ftp] [--host H] [--user U] [--dir learning] [--no-tls]
 //
 //   --dry-run   build and list what would be uploaded, upload nothing
 //   --all       upload every file, not only those changed since the last deployment
-//   --no-build  use out/ as it is
+//   --no-build  use out/ as it is, even if the sources changed since it was built
+//   --rebuild   build out/ again even if the sources did not change
 //
 // Settings are read from cache/deploy.json (git-ignored), e.g.
 //   { "protocol": "sftp", "host": "ftp.clusterXXX.hosting.ovh.net", "user": "LOGIN", "dir": "learning" }
@@ -19,11 +21,11 @@
 import { execFileSync, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { changedFiles, curlConfig, deployFiles, sftpBatch, updatedManifest, type Manifest } from "../src/lib/deploy.ts";
+import { buildFingerprint, buildIsCurrent, changedFiles, curlConfig, deployFiles, sftpBatch, updatedManifest, type Manifest } from "../src/lib/deploy.ts";
 
 const root = path.resolve(import.meta.dirname, "..");
 process.chdir(root);
-const usage = "npm run deploy -- [--dry-run] [--all] [--no-build] [--protocol sftp|ftp] [--host H] [--user U] [--dir learning] [--no-tls]";
+const usage = "npm run deploy -- [--dry-run] [--all] [--no-build] [--rebuild] [--protocol sftp|ftp] [--host H] [--user U] [--dir learning] [--no-tls]";
 
 // ---- options -------------------------------------------------------------------
 const argv = process.argv.slice(2);
@@ -31,7 +33,7 @@ const flags = new Set<string>();
 const values = new Map<string, string>();
 for (let i = 0; i < argv.length; i++) {
   const a = argv[i];
-  if (["--dry-run", "--all", "--no-build", "--no-tls"].includes(a)) flags.add(a);
+  if (["--dry-run", "--all", "--no-build", "--rebuild", "--no-tls"].includes(a)) flags.add(a);
   else if (["--protocol", "--host", "--user", "--dir"].includes(a) && i + 1 < argv.length) values.set(a, argv[++i]);
   else {
     console.error(`Unknown option ${a}\nUsage: ${usage}`);
@@ -65,7 +67,15 @@ try {
 } catch {
   /* not a git checkout */
 }
-if (!flags.has("--no-build")) {
+if (flags.has("--no-build") && flags.has("--rebuild")) {
+  console.error("--no-build and --rebuild exclude each other.");
+  process.exit(1);
+}
+if (flags.has("--no-build")) {
+  if (!buildIsCurrent("out", buildFingerprint(root))) console.warn("! out/ is not a build of the current sources (--no-build): uploading it as it is.");
+} else if (!flags.has("--rebuild") && buildIsCurrent("out", buildFingerprint(root))) {
+  console.log("Sources unchanged since the last build: using out/ as it is (--rebuild to build again).");
+} else {
   const r = spawnSync("node", ["--experimental-strip-types", "--no-warnings", "scripts/build-static.ts"], { stdio: "inherit" });
   if (r.status !== 0) {
     console.error("The build failed: nothing uploaded.");

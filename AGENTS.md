@@ -158,6 +158,6 @@ npm run check-content  # validates all lessons (broken references, malformed qui
 npm run release -- models-of-computation 1.1 "Corrections in lesson 7"
 npm run build
 npm run build:static          # static site for the web hosting, in out/; npm run preview:static serves it
-npm run deploy -- --dry-run   # build the static site (out/) and list what would be uploaded
+npm run deploy -- --dry-run   # build the static site (out/), unless its sources are unchanged, and list what would be uploaded
 npm run deploy                # upload it to the web hosting (docs/DEPLOY.md)
 ```

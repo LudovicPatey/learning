@@ -26,7 +26,13 @@ To try the built site before uploading it, `npm run build:static` then
 built-in server, as the hosting does: static pages, and the PHP remarks server
 under `/api/` with the dev login (remarks stored in `cache/preview-data/`).
 
-`npm run deploy` builds `out/` with `scripts/build-static.ts`, then uploads over
+`npm run deploy` builds `out/` with `scripts/build-static.ts`, unless `out/` is
+already a build of the current sources: the build records in `out/.build-inputs`
+(not uploaded) a hash of its inputs (`content/`, `src/`, `deploy/`, the build
+script, `package.json`, `package-lock.json`, the Next.js and TypeScript
+configuration, `.env*` files, the Node version), and the deployment skips the
+build when that hash is unchanged. `--rebuild` builds again anyway; `--no-build`
+uploads `out/` as it is, with a warning if the sources changed. It then uploads over
 SFTP the files of `out/` whose content changed since the last deployment to the
 same target. The hashes of the uploaded files are kept in
 `cache/deploy-manifest.json`; `--all` uploads everything again (after a manual
