@@ -1,7 +1,7 @@
 ---
 title: α-large sets and fast-growing functions
 summary: Ordinals below ε₀ in Cantor normal form and their fundamental sequences; α-large finite sets, which generalize relative largeness; the decomposition of (β + γ)-large sets; the least y such that [x, y) is ω^k-large is F_k(x), and ω^α-largeness defines the Schwichtenberg–Wainer hierarchy; IΣ₁ does not prove that every interval contains an ω^ω-large one; the theorems of Ketonen–Solovay and Schwichtenberg–Wainer are stated.
-duration: 40
+duration: 35
 prerequisites: [ph-unprovable, computable-ordinals/ordinals]
 ---
 

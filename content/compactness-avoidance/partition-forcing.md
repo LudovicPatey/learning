@@ -1,7 +1,7 @@
 ---
 title: Forcing with partitions
 summary: A notion of forcing whose reservoirs are the parts of all members of a Π⁰₁ class at once; part extensions and splitting extensions, which split instead of choosing; the progress lemma, which combines Liu's lemma with splitting extensions.
-duration: 45
+duration: 35
 prerequisites: [ramsey-type-wkl, pi01-classes/finitely-branching-trees]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Uniformization and stages
 summary: Kreisel's uniformization theorem for Π¹₁ relations on numbers; total Π¹₁ functions are hyperarithmetic; a Π¹₁ set is the increasing union of hyperarithmetic stages along ω₁ᶜᵏ, and it is Δ¹₁ exactly when its stages are bounded.
-duration: 40
+duration: 35
 prerequisites: [reduction]
 ---
 

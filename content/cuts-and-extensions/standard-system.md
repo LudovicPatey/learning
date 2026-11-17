@@ -1,7 +1,7 @@
 ---
 title: Coded subsets of cuts and the standard system
 summary: The coded subsets of a cut and the standard system of a non-standard model; formulas with set parameters evaluated through codes; a separation lemma by overspill; the coded subsets of a cut closed under addition and multiplication are closed under Δ⁰₁ definability, and the standard system is a Turing ideal.
-duration: 45
+duration: 35
 prerequisites: [fragments-of-arithmetic/definable-cuts, fragments-of-arithmetic/coding, second-order-arithmetic/rca0]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: LOOP programs
 summary: Structured programs with bounded loops, their semantics, and the theorem of Meyer and Ritchie. The LOOP-computable functions are exactly the primitive recursive functions.
-duration: 30
+duration: 25
 prerequisites: [mu-recursion, register-machines]
 ---
 

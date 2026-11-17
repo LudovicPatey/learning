@@ -1,7 +1,7 @@
 ---
 title: Preservation of weakness properties
 summary: Weakness properties and their preservation, the standard method for separating problems in ω-models; iterating and dovetailing; the jump is not ω-reducible to weak König's lemma or to Ramsey's theorem for pairs; cone avoidance.
-duration: 35
+duration: 25
 prerequisites: [omega-reducibility, ramsey-theorem/seetapun]
 ---
 

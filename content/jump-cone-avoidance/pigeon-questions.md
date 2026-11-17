@@ -1,7 +1,7 @@
 ---
 title: Questions for Σ⁰₂ sentences on two sides
 summary: For the forcing with a cohesive class, Π⁰₂ sentences are promised through the question on stems and become true on sides that stay valid; a disjunctive question for Σ⁰₂ sentences ranges over all partitions of the reservoir; a question on one side uses a witness that the other side is invalid; both have answers Σ⁰₁ relative to a member of the ideal.
-duration: 35
+duration: 30
 prerequisites: [pigeonhole-forcing]
 ---
 

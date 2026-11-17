@@ -1,7 +1,7 @@
 ---
 title: The Turing jump
 summary: The jump of a set, its completeness for relatively c.e. sets, its strict increase and monotonicity, the iterated jumps, and the position of totality and finiteness below the double jump.
-duration: 40
+duration: 30
 prerequisites: [turing-reducibility, fundamentals/complete-sets]
 ---
 

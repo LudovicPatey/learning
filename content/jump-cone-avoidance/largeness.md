@@ -1,7 +1,7 @@
 ---
 title: Largeness over a Scott ideal
 summary: Upward closed Σ⁰₁ classes over the members of a coded Scott ideal and their intersections; the largeness of such an intersection is Π⁰₁ relative to the jump of the code; cohesive classes choose a side of every member of the ideal, and are compatible with every Σ⁰₁ class they meet largely.
-duration: 45
+duration: 40
 prerequisites: [partition-regularity, lowness/coded-ideals, big-five/wkl0]
 ---
 

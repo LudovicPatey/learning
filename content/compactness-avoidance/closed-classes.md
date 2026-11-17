@@ -1,7 +1,7 @@
 ---
 title: Avoiding closed classes
 summary: Constant-bound traces of closed classes and constant-bound trace avoidance, which implies PA avoidance; Liu's lemma for blocks and the abstract theorem for finitely merging questions; weak weak König's lemma does not admit constant-bound trace avoidance, while Ramsey's theorem for pairs does (Liu), so that Ramsey's theorem for pairs does not imply weak weak König's lemma.
-duration: 45
+duration: 40
 prerequisites: [measure-and-closed-classes, liu-theorem, martin-lof-randomness/levin-schnorr]
 ---
 

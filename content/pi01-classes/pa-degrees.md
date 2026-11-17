@@ -1,7 +1,7 @@
 ---
 title: PA degrees
 summary: Sets computing a diagonally non-computable {0,1}-valued function; equivalence with computing a member of every non-empty Π⁰₁ class and with separating disjoint c.e. sets; completions of Peano arithmetic.
-duration: 45
+duration: 35
 prerequisites: [basis-theorems]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Equipotence and subpotence
 summary: Comparison of sets by bijections and injections; finite sets and the pigeonhole principle.
-duration: 45
+duration: 40
 ---
 
 In the *Dialogues Concerning Two New Sciences* (1638), Galileo observes that every integer is the root of exactly one square and every square has exactly one root, so that there should be as many squares as integers; yet the squares form a proper part of the integers, so that there should be fewer of them. He concludes that the attributes "equal", "greater" and "smaller" do not apply to infinite quantities.

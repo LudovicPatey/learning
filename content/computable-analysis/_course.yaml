@@ -25,4 +25,4 @@ objectives:
   - Work with computable metric spaces and with closed sets given by negative information
   - Classify the maximum, the intermediate value theorem, the Brouwer fixed point theorem in dimension one and the monotone convergence theorem in the Weihrauch degrees
   - Compare these classifications with the reverse mathematics of the same theorems
-lessons: [type-two-computability, representations, real-functions, continuous-functions, closed-sets-and-choice, intermediate-value-theorem, maximum-and-limits]
+lessons: [type-two-computability, representations, real-functions, continuous-functions, computable-metric-spaces, closed-sets-and-choice, intermediate-value-theorem, maximum-and-limits]

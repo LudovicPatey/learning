@@ -1,7 +1,7 @@
 ---
 title: Σ⁰₃-complete sets
 summary: Cof and Rec are Σ⁰₃-complete; marker constructions, and coding the halting set into the complement.
-duration: 45
+duration: 35
 prerequisites: [index-sets]
 ---
 

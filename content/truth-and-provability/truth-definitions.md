@@ -1,7 +1,7 @@
 ---
 title: Partial truth definitions
 summary: The partial truth definitions Sat_Σₙ and Sat_Πₙ, obtained from satisfaction for bounded formulas by quantifying over assignments; their complexity and Tarski's conditions in IΣ₁; every Σₙ formula is equivalent in IΣ₁ to an instance of Sat_Σₙ, through formulas whose quantifiers are bounded by variables.
-duration: 40
+duration: 35
 prerequisites: [bounded-satisfaction]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Seetapun conditions
 summary: "The notion of forcing of Seetapun's original proof, with two stems homogeneous for the two colors and a common reservoir from which either stem can be extended; why both stems can always be extended when no homogeneous set lies in the Scott ideal of reservoirs."
-duration: 30
+duration: 25
 prerequisites: [disjunctive-question, big-five/wkl0]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Parikh's theorem and exponentiation
 summary: Parikh's theorem, by a cut closed under the terms of a model; the bounded graph of exponentiation; IΔ₀ does not prove that exponentiation is total, a model of IΔ₀ + ¬exp, and IΣ₁ proves exp.
-duration: 30
+duration: 25
 prerequisites: [bounded-induction]
 ---
 

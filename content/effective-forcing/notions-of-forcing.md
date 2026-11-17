@@ -1,7 +1,7 @@
 ---
 title: Notions of forcing
 summary: Conditions, extensions and the classes of their members; Cohen, Jockusch–Soare, computable Sacks and computable Mathias forcing; filters, dense sets and the existence of generic filters; the set determined by a generic filter.
-duration: 45
+duration: 40
 prerequisites: [cohen-genericity/baire-category, pi01-classes/basis-theorems, immunity-growth/computably-dominated]
 ---
 

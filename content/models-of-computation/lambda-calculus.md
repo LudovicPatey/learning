@@ -1,7 +1,7 @@
 ---
 title: The λ-calculus
 summary: λ-terms, free variables and substitution, α-equivalence, β-reduction, normal forms, the Church–Rosser theorem, and reduction strategies.
-duration: 40
+duration: 35
 prerequisites: [what-is-an-algorithm]
 ---
 

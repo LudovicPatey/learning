@@ -1,7 +1,7 @@
 ---
 title: Simple sets and Post's problem
 summary: Post's problem; simple sets and Post's construction; productive and creative sets; simple sets are not many-one complete.
-duration: 45
+duration: 40
 prerequisites: [turing-degrees/turing-reducibility, arithmetic-hierarchy/index-sets]
 ---
 

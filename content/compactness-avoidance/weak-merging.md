@@ -1,7 +1,7 @@
 ---
 title: Weak merging and Liu's lemma
 summary: Forcing questions that can only merge two of several negative answers; finite valuations and Liu's combinatorial lemma, which makes the third case of the PA avoidance argument non-trivial; the abstract theorem for weakly merging questions, and its disjunctive version for problems with two sides.
-duration: 45
+duration: 40
 prerequisites: [pa-avoidance, avoidance/disjunctive-question]
 ---
 

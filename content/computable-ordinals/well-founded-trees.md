@@ -1,7 +1,7 @@
 ---
 title: Well-founded trees
 summary: Trees on ℕ, well-foundedness and ranks, the tree of descending sequences of a well-ordering, the Kleene–Brouwer ordering, and the ranks of computable well-founded trees.
-duration: 35
+duration: 30
 prerequisites: [computable-well-orderings]
 ---
 

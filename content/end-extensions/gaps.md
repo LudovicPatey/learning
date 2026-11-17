@@ -1,7 +1,7 @@
 ---
 title: Gaps and strongly definable types
 summary: Skolem functions and the gaps of a model of PA; an extension by an unbounded strongly definable type adds exactly one gap; the canonical extension of definable types, and Gaifman's characterization of strongly definable types as the unbounded types with a unique unbounded extension to every elementary extension; iterated extensions.
-duration: 45
+duration: 40
 prerequisites: [macdowell-specker]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Weak König's lemma
 summary: The system WKL₀; its ω-models are the Scott ideals; there is a Scott ideal of low sets, so WKL₀ does not prove ACA₀; REC is the intersection of all ω-models of WKL₀; WKL₀ is Π¹₁-conservative over RCA₀.
-duration: 40
+duration: 25
 prerequisites: [aca0-reversals, pi01-classes/pa-degrees]
 ---
 

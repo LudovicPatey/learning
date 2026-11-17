@@ -1,7 +1,7 @@
 ---
 title: Parallelization
 summary: The parallelization of a problem solves countably many instances at once; the jump is parallel LPO and weak König's lemma is parallel LLPO; separations of the Turing degrees transfer to problems that admit computable solutions; a single application against finitely many.
-duration: 40
+duration: 30
 prerequisites: [weihrauch]
 ---
 

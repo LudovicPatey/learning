@@ -1,7 +1,7 @@
 ---
 title: Forcing design for the free set theorem
 summary: The design method for the free set theorem for pairs; optional and required properties; one of two candidates; limit patterns; cone avoidance; the case of triples.
-duration: 45
+duration: 40
 prerequisites: [erdos-moser-hyperimmunities, reducibilities/preservation, ramsey-theorem/seetapun]
 ---
 

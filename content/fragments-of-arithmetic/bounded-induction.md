@@ -1,7 +1,7 @@
 ---
 title: Bounded induction and cuts
 summary: Induction schemes over PA⁻ and the theory IΔ₀; least number principle, division with remainder and pairing in IΔ₀; the order type of countable non-standard models of IΔ₀; cuts; cuts closed under addition and multiplication are models of IΔ₀.
-duration: 40
+duration: 35
 prerequisites: [bounded-formulas]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Computable members
 summary: Isolated members of Π⁰₁ classes are computable; countable Π⁰₁ classes have computable members; a non-empty Π⁰₁ class without computable member is perfect; the class of DNC₂ functions.
-duration: 40
+duration: 35
 prerequisites: [trees-and-classes]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Π¹₁-randomness
 summary: Randomness with respect to all null Π¹₁ classes; Π¹₁-randomness is Δ¹₁-randomness together with ω₁ˣ = ω₁ᶜᵏ (Stern; Chong, Nies, Yu); there is a largest null Π¹₁ class.
-duration: 35
+duration: 25
 prerequisites: [sacks-tanaka, higher-tests]
 ---
 

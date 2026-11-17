@@ -1,7 +1,7 @@
 ---
 title: Merging at level 2
 summary: A forcing question for Σ⁰₂ sentences that is Σ⁰₁ relative to the condition and merges two negative answers gives jump PA avoidance; Cohen forcing has one; Mathias forcing with one reservoir in a partition regular class produces cohesive sets, and one large class cannot keep both halves of a split.
-duration: 45
+duration: 35
 prerequisites: [jump-pa-avoidance, jump-cone-avoidance/sigma2-questions, jump-cone-avoidance/largeness, jump-cone-avoidance/pigeonhole-forcing, compactness-avoidance/weak-merging]
 ---
 

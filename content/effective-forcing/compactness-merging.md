@@ -1,7 +1,7 @@
 ---
 title: Compactness and merging
 summary: Compact forcing questions and the preservation of hyperimmunity; merging forcing questions and the avoidance of PA degrees; ω-merging and DNC functions; the properties of the questions of Cohen, Jockusch–Soare, computable Sacks and computable Mathias forcing.
-duration: 30
+duration: 25
 prerequisites: [forcing-question, pi01-classes/pa-degrees, immunity-growth/immune-sets]
 ---
 

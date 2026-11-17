@@ -1,7 +1,7 @@
 ---
 title: The diagonal argument
 summary: Cantor space; uncountability of the sets of binary sequences, of integer sequences, of power sets and of ℝ by diagonalization; a general form of the argument.
-duration: 45
+duration: 35
 prerequisites: [countable-constructions]
 ---
 

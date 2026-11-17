@@ -1,7 +1,7 @@
 ---
 title: The universal function and the SMN theorem
 summary: The universal partial computable function, the SMN theorem and its use with parameters, the padding lemma, and acceptable numberings.
-duration: 45
+duration: 35
 prerequisites: [programs-as-numbers, countability/diagonalization-and-computation]
 ---
 

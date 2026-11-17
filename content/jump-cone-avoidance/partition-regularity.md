@@ -1,7 +1,7 @@
 ---
 title: Partition regularity and largeness
 summary: Partition regular classes generalize the class of infinite sets; a class is large if every finite cover of the integers has a part in it; large classes contain a largest partition regular subclass; decreasing intersections of large classes are large.
-duration: 40
+duration: 30
 prerequisites: [cohesiveness-second-jump, ramsey-theorem/cone-avoidance]
 ---
 

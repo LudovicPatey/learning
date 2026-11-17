@@ -1,7 +1,7 @@
 ---
 title: The reduction and separation properties
 summary: The reduction property for Π¹₁ sets, proved by stage comparison; Kleene's separation theorem for Σ¹₁ sets; disjoint Π¹₁ sets without Δ¹₁ separation, and the failure of reduction for Σ¹₁ sets.
-duration: 30
+duration: 20
 prerequisites: [norms]
 ---
 

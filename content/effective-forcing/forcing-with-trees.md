@@ -1,7 +1,7 @@
 ---
 title: Forcing with Π⁰₁ classes and perfect trees
 summary: The complexity of the conditions and of the forcing of Σ⁰₁ and Π⁰₁ sentences for Jockusch–Soare and computable Sacks forcing; tree forcings decide Σ⁰₂ sentences for all members by a Σ⁰₂ question; their generic sets satisfy G″ ≤ G′ ⊕ ∅″.
-duration: 40
+duration: 35
 prerequisites: [cohen-forcing]
 ---
 

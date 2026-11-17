@@ -1,7 +1,7 @@
 ---
 title: Transfinite recursion and Π¹₁ comprehension
 summary: Countable well-orderings in second-order arithmetic; the systems ATR₀ and Π¹₁-CA₀; Π¹₁-CA₀ is equivalent to the existence of the set of ill-founded trees in a sequence; a survey of the theorems equivalent to ATR₀ and Π¹₁-CA₀.
-duration: 50
+duration: 45
 prerequisites: [wkl0]
 ---
 

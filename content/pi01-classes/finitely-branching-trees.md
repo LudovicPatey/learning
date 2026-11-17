@@ -1,7 +1,7 @@
 ---
 title: Finitely branching trees
 summary: Trees of sequences of integers; König's lemma; computably bounded trees behave like binary trees; a computable finitely branching tree whose paths all compute ∅′; the strength needed for König's lemma.
-duration: 40
+duration: 35
 prerequisites: [pa-degrees]
 ---
 

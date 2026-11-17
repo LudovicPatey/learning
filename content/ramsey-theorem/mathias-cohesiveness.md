@@ -1,0 +1,119 @@
+---
+title: Mathias forcing and cohesive sets
+summary: Mathias conditions; every computable sequence has a cohesive set avoiding a given cone, by Mathias forcing with computable reservoirs.
+duration: 20
+prerequisites: [stable-colorings]
+---
+
+The decomposition of the previous lesson splits the search for a homogeneous set of a coloring of pairs into two tasks: a cohesive set for the rows of the coloring, and an infinite subset of the limit set of the resulting stable coloring, or of its complement. This lesson and the next show that both tasks can be carried out without computing a given non-computable set $C$. The tool is **Mathias forcing**, the main method for building solutions of combinatorial principles. This lesson introduces it and carries out the first task; the next lesson carries out the second, and the lesson after it combines the two into Seetapun's theorem.
+
+## Mathias forcing
+
+To build a set with a property such as "not computing $C$", the course has used finite extensions (:ref{to="turing-degrees/finite-extensions"}): the set is approximated by strings, and each requirement is forced by a finite piece of information. A cohesive set cannot be built this way, since a finite string commits to nothing about the future elements of the set, and cohesiveness is a property of the tail of the set. **Mathias forcing** adds to the string an infinite commitment: a **reservoir** from which all future elements must be taken.
+
+Throughout, a set is identified with its characteristic sequence, and a finite string $\sigma$ with the finite set $\{ n < |\sigma| : \sigma(n) = 1 \}$.
+
+:::definition{#def-mathias-condition}
+A **Mathias condition** is a pair $(\sigma, X)$ with $\sigma$ a string and $X$ an infinite set with $\min X \geq |\sigma|$. A string $\tau$ is **compatible** with $(\sigma, X)$ if $\sigma \preceq \tau$ and every $n$ with $|\sigma| \leq n < |\tau|$ and $\tau(n) = 1$ belongs to $X$. A condition $(\tau, Y)$ **extends** $(\sigma, X)$ if $\tau$ is compatible with $(\sigma, X)$ and $Y \subseteq X$. A set $G$ **satisfies** $(\sigma, X)$ if every prefix of $G$ of length at least $|\sigma|$ is compatible with it, that is, $\sigma \prec G$ and $G \setminus \sigma \subseteq X$.
+:::
+
+The string $\sigma$ is the part of $G$ already decided, and the reservoir $X$ contains the elements that may still be added. A condition $(\tau, Y)$ extending $(\sigma, X)$ is satisfied only by sets satisfying $(\sigma, X)$.
+
+:::figure[A Mathias condition $(\sigma, X)$ with $\sigma = 010010$, so that $G$ contains $1$ and $4$ and no other number below $6$, and an extension $(\tau, Y)$. The string $\tau$ adds $9$ and $12$, both taken from the reservoir, and the new reservoir $Y$ is an infinite subset of $X$ above $|\tau|$.]
+<svg class="fig" viewBox="0 0 600 196" width="600" role="img" aria-label="A Mathias condition: a finite string followed by a reservoir; an extension decides more bits, adding only elements of the reservoir, and shrinks the reservoir"><text x="71.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">0</text><text x="115.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">2</text><text x="159.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">4</text><text x="203.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">6</text><text x="247.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">8</text><text x="291.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">10</text><text x="335.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">12</text><text x="379.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">14</text><text x="423.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">16</text><text x="467.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">18</text><text x="511.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">20</text><text x="555.0" y="20" text-anchor="middle" class="mrm muted" font-size="10">22</text><text x="50" y="45" text-anchor="end" class="label">(σ, X)</text><rect x="60" y="30" width="22" height="22" class="cell"/><text x="71.0" y="45" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="82" y="30" width="22" height="22" class="cell head-cell"/><text x="93.0" y="45" text-anchor="middle" class="mrm" font-size="12">1</text><rect x="104" y="30" width="22" height="22" class="cell"/><text x="115.0" y="45" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="126" y="30" width="22" height="22" class="cell"/><text x="137.0" y="45" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="148" y="30" width="22" height="22" class="cell head-cell"/><text x="159.0" y="45" text-anchor="middle" class="mrm" font-size="12">1</text><rect x="170" y="30" width="22" height="22" class="cell"/><text x="181.0" y="45" text-anchor="middle" class="mrm" font-size="12">0</text><circle cx="203.0" cy="41.0" r="2" class="muted-fill"/><circle cx="225.0" cy="41.0" r="5" class="accent-fill"/><circle cx="247.0" cy="41.0" r="2" class="muted-fill"/><circle cx="269.0" cy="41.0" r="5" class="accent-fill"/><circle cx="291.0" cy="41.0" r="2" class="muted-fill"/><circle cx="313.0" cy="41.0" r="2" class="muted-fill"/><circle cx="335.0" cy="41.0" r="5" class="accent-fill"/><circle cx="357.0" cy="41.0" r="5" class="accent-fill"/><circle cx="379.0" cy="41.0" r="2" class="muted-fill"/><circle cx="401.0" cy="41.0" r="2" class="muted-fill"/><circle cx="423.0" cy="41.0" r="5" class="accent-fill"/><circle cx="445.0" cy="41.0" r="2" class="muted-fill"/><circle cx="467.0" cy="41.0" r="5" class="accent-fill"/><circle cx="489.0" cy="41.0" r="2" class="muted-fill"/><circle cx="511.0" cy="41.0" r="2" class="muted-fill"/><circle cx="533.0" cy="41.0" r="5" class="accent-fill"/><circle cx="555.0" cy="41.0" r="2" class="muted-fill"/><text x="572" y="45" class="mrm muted" font-size="14">⋯</text><text x="50" y="115" text-anchor="end" class="label">(τ, Y)</text><rect x="60" y="100" width="22" height="22" class="cell"/><text x="71.0" y="115" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="82" y="100" width="22" height="22" class="cell head-cell"/><text x="93.0" y="115" text-anchor="middle" class="mrm" font-size="12">1</text><rect x="104" y="100" width="22" height="22" class="cell"/><text x="115.0" y="115" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="126" y="100" width="22" height="22" class="cell"/><text x="137.0" y="115" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="148" y="100" width="22" height="22" class="cell head-cell"/><text x="159.0" y="115" text-anchor="middle" class="mrm" font-size="12">1</text><rect x="170" y="100" width="22" height="22" class="cell"/><text x="181.0" y="115" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="192" y="100" width="22" height="22" class="cell"/><text x="203.0" y="115" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="214" y="100" width="22" height="22" class="cell"/><text x="225.0" y="115" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="236" y="100" width="22" height="22" class="cell"/><text x="247.0" y="115" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="258" y="100" width="22" height="22" class="cell head-cell"/><text x="269.0" y="115" text-anchor="middle" class="mrm" font-size="12">1</text><rect x="280" y="100" width="22" height="22" class="cell"/><text x="291.0" y="115" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="302" y="100" width="22" height="22" class="cell"/><text x="313.0" y="115" text-anchor="middle" class="mrm" font-size="12">0</text><rect x="324" y="100" width="22" height="22" class="cell head-cell"/><text x="335.0" y="115" text-anchor="middle" class="mrm" font-size="12">1</text><circle cx="357.0" cy="111.0" r="2" class="muted-fill"/><circle cx="379.0" cy="111.0" r="2" class="muted-fill"/><circle cx="401.0" cy="111.0" r="2" class="muted-fill"/><circle cx="423.0" cy="111.0" r="5" class="accent-fill"/><circle cx="445.0" cy="111.0" r="2" class="muted-fill"/><circle cx="467.0" cy="111.0" r="2" class="muted-fill"/><circle cx="489.0" cy="111.0" r="2" class="muted-fill"/><circle cx="511.0" cy="111.0" r="2" class="muted-fill"/><circle cx="533.0" cy="111.0" r="5" class="accent-fill"/><circle cx="555.0" cy="111.0" r="2" class="muted-fill"/><text x="572" y="115" class="mrm muted" font-size="14">⋯</text><line x1="269.0" y1="58" x2="269.0" y2="96" class="accent-stroke" stroke-width="1.2" stroke-dasharray="3 3"/><line x1="335.0" y1="58" x2="335.0" y2="96" class="accent-stroke" stroke-width="1.2" stroke-dasharray="3 3"/><rect x="60" y="150" width="14" height="14" class="cell head-cell"/><text x="80" y="162" class="label">elements of the finite part</text><circle cx="297" cy="157" r="5" class="accent-fill"/><text x="308" y="162" class="label">elements of the reservoir</text><text x="60" y="186" class="label">τ adds 9 and 12, both taken from X; the new reservoir Y is a subset of X above |τ| = 13</text></svg>
+:::
+
+:::example{#ex-mathias-coh}
+For every set $R$ and every condition $(\sigma, X)$, one of $X \cap R$ and $X \setminus R$ is infinite, and $(\sigma, X \cap R)$ or $(\sigma, X \setminus R)$ is an extension. Every set $G$ satisfying it has $G \setminus \sigma$ contained in $R$ or in $\overline R$, so $G \subseteq^* R$ or $G \subseteq^* \overline R$. Shrinking the reservoir thus forces cohesiveness for one set at a time, by a single extension. With finite extensions alone, no condition forces $G \subseteq^* R$ for an infinite and coinfinite $R$.
+:::
+
+## Cone avoidance for cohesiveness
+
+The cone avoidance theorem for finite extensions (:ref{#thm-cone-avoidance}) has a Mathias analogue. In the Cohen case, the decisive point was that, if no extension forces $\Phi^G_e \neq C$, then $C$ is computable, by a search through the extensions of a string. In the Mathias case the search runs through the strings compatible with a condition, and is effective only if the reservoir is: the reservoirs must therefore stay simple.
+
+:::theorem{#thm-coh-cone-avoidance}
+Let $Z$ be a set and $C \not\leq_T Z$. Every $Z$-computable sequence $\vec R$ has a cohesive set $G$ with $C \not\leq_T Z \oplus G$.
+:::
+
+:::proof{of=thm-coh-cone-avoidance}
+We build a sequence of Mathias conditions $(\sigma_0, X_0) \geq (\sigma_1, X_1) \geq \cdots$, with $(\sigma_0, X_0) = (\varepsilon, \nat)$ and **all reservoirs $Z$-computable**, and let $G = \bigcup_s \sigma_s$, assuming the strings grow unboundedly. Then $G$ satisfies every condition. The steps of the construction handle, in a fixed order, three kinds of tasks.
+
+*Infinity.* Given $(\sigma, X)$, let $n = \min X$, and pass to $(\tau, X \setminus \{0, \dots, n\})$, where $\tau$ extends $\sigma$ by zeros up to position $n$, and $\tau(n) = 1$. The set $G$ then contains $n$.
+
+*Cohesiveness for $R_i$.* One of $X \cap R_i$ and $X \setminus R_i$ is infinite; pass to $(\sigma, Y)$ with $Y$ that set, which is $Z$-computable. Then $G \setminus \sigma \subseteq Y$, so $G \subseteq^* R_i$ or $G \subseteq^* \overline{R_i}$.
+
+*The requirement $\Phi^{Z \oplus G}_e \neq C$.* Given $(\sigma, X)$, consider the following cases.
+
+1. There are $x$ and a string $\tau$ compatible with $(\sigma, X)$ with $\Phi^{Z \oplus \tau}_e(x)\converge \neq C(x)$. Pass to $(\tau, X \setminus \{0, \dots, |\tau|\})$. Every $G$ satisfying it has $\Phi^{Z \oplus G}_e(x) \neq C(x)$, by the use principle.
+2. There is $x$ such that $\Phi^{Z \oplus \tau}_e(x)$ diverges for every $\tau$ compatible with $(\sigma, X)$. Keep $(\sigma, X)$. Every $G$ satisfying it has $\Phi^{Z \oplus G}_e(x)\diverge$: a convergent computation would converge with a prefix of $G$, which is compatible.
+3. Otherwise, for every $x$ some compatible $\tau$ gives a convergent computation, and all such computations give $C(x)$. Then $C \leq_T Z$: given $x$, search, with $Z$ and the $Z$-computable set $X$, for a compatible $\tau$ with $\Phi^{Z \oplus \tau}_e(x)\converge$, and output its value. This case is excluded by hypothesis.
+
+The resulting set $G$ is infinite, cohesive, and satisfies $\Phi^{Z \oplus G}_e \neq C$ for every $e$.
+:::
+
+The reservoirs must stay $Z$-computable for case 3 to give a reduction to $Z$. This is possible because the cohesiveness steps only intersect the reservoir with sets computable in $Z$. The construction is not effective (the case distinction and the choice of the infinite side are not computable in $Z$), and it need not be: only the reservoirs must be simple, not the sequence of conditions.
+
+:::quiz[cone avoidance for cohesiveness]
+In the proof of :ref{#thm-coh-cone-avoidance}, why must the reservoirs be $Z$-computable?
+
+- [x] Because in case 3, the search for compatible strings must be carried out with oracle $Z$, to conclude that $C \leq_T Z$, which contradicts the hypothesis.
+- [ ] Because the cohesive set must be $Z$-computable.
+
+  The cohesive set is not $Z$-computable in general; only the reservoirs are.
+- [ ] Because Mathias conditions require computable reservoirs.
+
+  The definition allows arbitrary infinite reservoirs; the restriction is chosen for this proof.
+
+---
+
+In case 2, why does keeping the condition unchanged suffice?
+
+- [x] Because every set satisfying the condition has its prefixes compatible with it, so a convergent computation on such a set would give a compatible string with a convergent computation.
+- [ ] Because $C$ is not computable.
+
+  This hypothesis is used in case 3; case 2 holds for every $C$.
+- [ ] Because the construction will later remove $x$ from the reservoir.
+
+  The divergence is already forced; nothing further is needed.
+:::
+
+::::exercise{#ex-coh-countable-cones difficulty=2 objective="Adapt Mathias cone avoidance to countably many cones at once."}
+Let $Z$ be a set and $C_0, C_1, \dots$ sets with $C_j \not\leq_T Z$ for every $j$. Show that every $Z$-computable sequence $\vec R$ has a cohesive set $G$ with $C_j \not\leq_T Z \oplus G$ for every $j$.
+
+:::solution
+Run the construction of :ref{#thm-coh-cone-avoidance} with one requirement $\Phi^{Z \oplus G}_e \neq C_j$ for each pair $(e, j)$, handled in a fixed order together with the infinity and cohesiveness steps. Each requirement is satisfied as before: cases 1 and 2 extend or keep the condition, and case 3 would give $C_j \leq_T Z$. The reservoirs stay $Z$-computable throughout, since the hypothesis on $C_j$ is used only in case 3, for the current reservoir.
+:::
+::::
+
+## Notes and references
+
+Mathias forcing is studied as a notion of forcing in the course on effective forcing, where cone avoidance for cohesive sets is derived from a forcing question (:ref{#prop-mathias-question}, :ref{#thm-mathias-coh-preservation}), and where it is shown that no such question can preserve Σ⁰₂ properties (:ref{#cor-mathias-no-sigma2}).
+
+Mathias forcing was introduced by Mathias in set theory; its computable version is presented by Hirschfeldt (§6.5, Definition 6.40 and Proposition 6.41) and by Dzhafarov and Mummert (Examples 7.2.5, 7.2.10 and 7.3.9). Cone avoidance for cohesiveness is attributed to Cholak, Jockusch and Slaman (2001) by Dzhafarov and Mummert (Lemma 8.5.6), and to Jockusch and Stephan (1993) by Hirschfeldt (Exercise 6.62).
+
+- C. G. Jockusch, Jr. and F. Stephan, *A cohesive set which is not high*, Mathematical Logic Quarterly 39 (1993), 515–530.
+- P. A. Cholak, C. G. Jockusch, Jr. and T. A. Slaman, *On the strength of Ramsey's theorem for pairs*, Journal of Symbolic Logic 66 (2001), 1–55.
+- D. R. Hirschfeldt, *Slicing the Truth*, World Scientific, 2014.
+- D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022.
+
+:::::exercises
+::::exercise{#ex-mathias-extension difficulty=1 objective="Check the basic properties of Mathias conditions from the definition."}
+1. Show that extension of Mathias conditions is transitive, and that if $(\tau, Y)$ extends $(\sigma, X)$, every set satisfying $(\tau, Y)$ satisfies $(\sigma, X)$.
+2. Show that the class of sets satisfying $(\sigma, X)$ is a $\Pi^0_1(X)$ class with an infinite member.
+
+:::solution
+1. Let $(\rho, W)$ extend $(\tau, Y)$, which extends $(\sigma, X)$. Then $\sigma \preceq \tau \preceq \rho$ and $W \subseteq Y \subseteq X$. A position $n$ with $|\sigma| \leq n < |\rho|$ and $\rho(n) = 1$ is either below $|\tau|$, and then $\tau(n) = 1$ and $n \in X$, or at least $|\tau|$, and then $n \in Y \subseteq X$. So $\rho$ is compatible with $(\sigma, X)$. For the second statement, let $G$ satisfy $(\tau, Y)$. Then $\sigma \preceq \tau \prec G$, and every $n \geq |\sigma|$ in $G$ is a new element of $\tau$, hence in $X$, if $n < |\tau|$, and belongs to $Y \subseteq X$ otherwise.
+2. The class is $\{ G : \sigma \prec G \text{ and } \forall n \geq |\sigma|\ (n \in G \rightarrow n \in X) \}$, an intersection of conditions each involving one bit of $G$ and decidable from $X$: a $\Pi^0_1(X)$ class. The set $\sigma \cup X$, that is, the set whose characteristic sequence extends $\sigma$ and coincides with $X$ above $|\sigma|$, is an infinite member, since $\min X \geq |\sigma|$.
+:::
+::::
+
+::::exercise{#ex-coh-omega-model difficulty=2 objective="Iterate cone avoidance for cohesiveness to build an ω-model of COH without the halting set."}
+Show directly from :ref{#thm-coh-cone-avoidance} that there is an ω-model of $\mathsf{RCA}_0 + \mathsf{COH}$ not containing $\emptyset'$.
+
+:::solution
+Identify a sequence of sets $\vec R$ with the set $\{ \langle i, x \rangle : x \in R_i \}$. Fix an enumeration of all pairs $(e, m)$ in which each pair appears infinitely often. Build sets $Z_0 = \emptyset \leq_T Z_1 \leq_T \cdots$ with $\emptyset' \not\leq_T Z_n$. At stage $n$, let $(e, m)$ be the $n$-th pair. If $m \leq n$ and $\Phi^{Z_m}_e$ is the characteristic function of a set, it codes a $Z_n$-computable sequence $\vec R$, and :ref{#thm-coh-cone-avoidance} with $Z = Z_n$ and $C = \emptyset'$ gives an $\vec R$-cohesive set $G$ with $\emptyset' \not\leq_T Z_n \oplus G$; let $Z_{n+1} = Z_n \oplus G$. Otherwise $Z_{n+1} = Z_n$.
+
+The class $\mathcal I = \{ X : \exists n\ X \leq_T Z_n \}$ is a Turing ideal, since the sequence is increasing, and does not contain $\emptyset'$. Every sequence in $\mathcal I$ is $\Phi^{Z_m}_e$ for some $e$ and $m$, and the pair $(e, m)$ is the $n$-th pair for some $n \geq m$, so the sequence has a cohesive set in $\mathcal I$. Cohesiveness is arithmetical, so $\mathcal I$ satisfies $\mathsf{COH}$, and as a Turing ideal it is an ω-model of $\mathsf{RCA}_0$.
+:::
+::::
+:::::

@@ -1,7 +1,7 @@
 ---
 title: Computably enumerable sets
 summary: Equivalent characterizations of the computably enumerable sets, the dovetailing technique, and the comparison with computable sets.
-duration: 40
+duration: 30
 prerequisites: [halting-problem]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Lowness for randomness
 summary: Relativized prefix-free complexity and randomness; sets that are low for K, low for Martin-Löf randomness, and bases for randomness; the implications between these notions and K-triviality; sets that are low for K are low.
-duration: 30
+duration: 20
 prerequisites: [k-trivial-sets, martin-lof-randomness/randomness-and-degrees]
 ---
 

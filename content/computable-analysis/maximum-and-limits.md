@@ -1,7 +1,7 @@
 ---
 title: The maximum and monotone convergence
 summary: Finding a point where a continuous function attains its maximum is Weihrauch equivalent to weak König's lemma, and some computable functions attain their maximum only at non-computable points; the monotone convergence theorem is equivalent to the jump; a comparison of the classifications of the course with reverse mathematics.
-duration: 40
+duration: 30
 prerequisites: [intermediate-value-theorem, pi01-classes/basis-theorems, big-five/aca0-reversals, reducibilities/parallelization]
 ---
 

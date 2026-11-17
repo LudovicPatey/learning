@@ -1,7 +1,7 @@
 ---
 title: Branches and meta-conditions
 summary: Index sets built by triplication, whose branches satisfy a Ramsey property for 2-colorings; meta-conditions carry one pair of stems per branch and share their reservoirs; validity of a part, inherited by ancestors, and some part always valid.
-duration: 40
+duration: 35
 prerequisites: [merging-by-duplication]
 ---
 

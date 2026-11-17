@@ -1,7 +1,7 @@
 ---
 title: Satisfaction for bounded formulas
 summary: Codes of formulas and assignments in IΣ₁; quantifiers bounded by variables; satisfaction for bounded formulas through finite tables, Δ₁ in IΣ₁, with Tarski's conditions.
-duration: 45
+duration: 40
 prerequisites: [provably-total, fragments-of-arithmetic/coded-sets]
 ---
 

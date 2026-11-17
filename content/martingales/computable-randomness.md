@@ -1,7 +1,7 @@
 ---
 title: Computable randomness
 summary: Sequences on which no computable martingale succeeds; rational-valued martingales suffice; there is no universal computable martingale; computably random sequences satisfy the law of large numbers and are characterized by the convergence of computable martingales.
-duration: 35
+duration: 30
 prerequisites: [schnorr-theorem]
 ---
 

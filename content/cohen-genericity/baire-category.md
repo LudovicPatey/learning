@@ -1,7 +1,7 @@
 ---
 title: Genericity and Baire category
 summary: Dense sets of strings and generic sets; meager and co-meager classes of Cantor space; the Baire category theorem; properties of sufficiently generic sets.
-duration: 45
+duration: 40
 prerequisites: [turing-degrees/finite-extensions]
 ---
 

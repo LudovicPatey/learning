@@ -1,7 +1,7 @@
 ---
 title: Programming Turing machines
 summary: Auxiliary symbols used as markers, translation invariance, and the sequential composition of machines.
-duration: 35
+duration: 25
 prerequisites: [turing-machines]
 ---
 

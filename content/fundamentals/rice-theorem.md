@@ -1,7 +1,7 @@
 ---
 title: Rice's theorem
 summary: Non-trivial index sets are not computable, and the halting set or its complement many-one reduces to each of them.
-duration: 30
+duration: 20
 prerequisites: [fixed-point, complete-sets]
 ---
 

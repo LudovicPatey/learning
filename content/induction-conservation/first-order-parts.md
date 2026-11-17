@@ -11,7 +11,7 @@ A subsystem of second-order arithmetic proves sentences about sets, but also sen
 
 The intuition is the following. A second-order theory $T$ proves more sentences about sets than a first-order theory $S$, but it may prove the same sentences about numbers. To show this, it suffices to show that the numbers of any model of $S$ can be equipped with sets so as to satisfy $T$: then a counterexample to an arithmetic sentence in a model of $S$ remains a counterexample in a model of $T$. The sets must be chosen so that the axioms of $T$ hold, and the natural choice is the sets that are definable from the numbers, since statements about them reduce to statements about numbers.
 
-The language $\mathcal L_1$ of first-order arithmetic, Peano arithmetic $\mathrm{PA}$ and the fragments $\mathrm I\Sigma_n$ were introduced in the lesson on separations: they are the restrictions of the second-order notions to formulas without set variables.
+The language $\mathcal L_1$ of first-order arithmetic, Peano arithmetic $\mathrm{PA}$ and the fragments $\mathrm I\Sigma_n$ were introduced in the lesson on models of definable elements: they are the restrictions of the second-order notions to formulas without set variables.
 
 :::definition{#def-conservative}
 Let $S$ and $T$ be theories, in languages $\mathcal L_S \subseteq \mathcal L_T$, and $\Gamma$ a set of sentences of $\mathcal L_S$. The theory $T$ is **$\Gamma$-conservative** over $S$ if every sentence of $\Gamma$ provable in $T$ is provable in $S$. If $T$ proves every axiom of $S$ and is conservative over $S$ for all sentences of $\mathcal L_S$, then $T$ is a **conservative extension** of $S$, and the theorems of $S$ are the **first-order part** of $T$ when $\mathcal L_S = \mathcal L_1$.

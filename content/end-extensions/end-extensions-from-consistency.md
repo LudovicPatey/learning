@@ -1,7 +1,7 @@
 ---
 title: End extensions from consistency
 summary: Applications of the arithmetized completeness theorem. Every model of IΣ₁ is a proper exponential cut of a model of IΔ₀ + exp; every model of PA has, for each n, a proper Σₙ-elementary end extension satisfying PA; a model of PA + Con(PA) has an end extension satisfying PA + ¬Con(PA), which is not Σ₁-elementary.
-duration: 45
+duration: 35
 prerequisites: [arithmetized-completeness, cuts-and-extensions/collection-end-extensions, truth-and-provability/finite-axiomatizability]
 ---
 

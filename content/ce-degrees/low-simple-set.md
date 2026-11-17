@@ -1,7 +1,7 @@
 ---
 title: A low simple set
 summary: A c.e. set that is simple and low, built by finite injury; preservation of computations by restraints; a second solution to Post's problem.
-duration: 45
+duration: 30
 prerequisites: [friedberg-muchnik, turing-degrees/low-and-high]
 ---
 

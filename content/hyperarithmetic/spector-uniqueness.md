@@ -1,7 +1,7 @@
 ---
 title: Spector's uniqueness theorem and the hyperarithmetic sets
 summary: H-sets decide comparisons of notations; Spector's theorem that the Turing degree of an H-set depends only on the ordinal of the notation; the degrees 0^(α); the hyperarithmetic sets form a countable jump ideal.
-duration: 45
+duration: 35
 prerequisites: [h-sets]
 ---
 

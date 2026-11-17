@@ -1,7 +1,7 @@
 ---
 title: The Levin–Schnorr theorem
 summary: A sequence is Martin-Löf random if and only if its initial segments are incompressible for prefix-free complexity; Chaitin's Ω is random; the ample excess lemma and Chaitin's characterization of randomness by the growth of K(X↾n) − n.
-duration: 45
+duration: 35
 prerequisites: [solovay-tests]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Chaitin's characterization of computable sequences
 summary: A string has few descriptions of length close to its complexity; a sequence is computable if and only if the complexity of its initial segments is at most that of their length, up to a constant.
-duration: 45
+duration: 35
 prerequisites: [initial-segments]
 ---
 

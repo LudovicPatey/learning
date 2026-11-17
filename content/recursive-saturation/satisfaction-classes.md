@@ -1,7 +1,7 @@
 ---
 title: Full satisfaction classes
 summary: Satisfaction classes for sets of formulas of a model, standard or not, defined by Tarski's clauses; every partial satisfaction class closed under subformulas extends, in an elementary extension, to all formulas of the model (Enayat, Visser); every countable recursively saturated model of IΣ₁ has a full satisfaction class (Kotlarski, Krajewski, Lachlan), and the theory of a full satisfaction class without induction is conservative over Peano arithmetic.
-duration: 45
+duration: 35
 prerequisites: [resplendence, truth-and-provability/bounded-satisfaction]
 ---
 

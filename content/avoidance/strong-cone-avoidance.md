@@ -1,7 +1,7 @@
 ---
 title: Strong cone avoidance
 summary: Every set is Δ⁰₂ relative to some set avoiding a given cone, so that strong cone avoidance only needs to be checked on Δ⁰₂ instances; cohesiveness admits strong cone avoidance, with reservoirs that only avoid the cone.
-duration: 40
+duration: 35
 prerequisites: [forcing-question-method, ramsey-theorem/cone-avoidance, turing-degrees/low-and-high]
 ---
 

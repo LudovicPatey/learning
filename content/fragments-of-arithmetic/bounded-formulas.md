@@ -1,7 +1,7 @@
 ---
 title: End extensions and Σ₁-completeness
 summary: End extensions; bounded formulas are absolute between a model and its end extensions, Σ₁ formulas persist upwards and Π₁ formulas downwards; PA⁻ proves every Σ₁ sentence true in ℕ; non-standard models of PA with false Σ₁ sentences.
-duration: 25
+duration: 20
 prerequisites: [pa-minus]
 ---
 

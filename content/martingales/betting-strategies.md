@@ -1,7 +1,7 @@
 ---
 title: Martingales
 summary: Betting strategies formalized as martingales and supermartingales; elementary, measure and proportional strategies; every supermartingale fails along some sequence; Kolmogorov's inequality bounds the measure of the sequences on which a strategy wins much.
-duration: 45
+duration: 35
 prerequisites: [martin-lof-randomness/measure]
 ---
 

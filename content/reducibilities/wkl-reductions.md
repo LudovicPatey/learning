@@ -1,7 +1,7 @@
 ---
 title: Computable reductions to weak König's lemma
 summary: Scott's theorem that every PA degree bounds a Scott ideal; ω-reducibility and computable reducibility to WKL coincide; universal instances; cylinders, and when computable reductions can be made strong.
-duration: 30
+duration: 25
 prerequisites: [computable-reducibility, pi01-classes/pa-degrees]
 ---
 

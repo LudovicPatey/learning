@@ -1,7 +1,7 @@
 ---
 title: C.e. martingales and Schnorr's theorem
 summary: A sequence is Martin-Löf random if and only if no c.e. martingale succeeds on it; there is a universal c.e. martingale, whose capital tends to infinity on every non-random sequence, and an optimal c.e. supermartingale.
-duration: 45
+duration: 40
 prerequisites: [ville-theorem, martin-lof-randomness/levin-schnorr]
 ---
 

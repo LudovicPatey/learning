@@ -1,7 +1,7 @@
 ---
 title: Arithmetic comprehension
 summary: The system ACA₀; it is equivalent to Σ⁰₁ comprehension, to the existence of Turing jumps, and to the existence of ranges of injections; its ω-models are the jump ideals, and ARITH is the least one.
-duration: 35
+duration: 25
 prerequisites: [second-order-arithmetic/rca0]
 ---
 

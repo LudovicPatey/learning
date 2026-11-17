@@ -1,7 +1,7 @@
 ---
 title: The Church–Turing thesis
 summary: Formulation and status of the Church–Turing thesis, Turing's analysis of human computation, Gandy's principles, physical and complexity-theoretic variants, and the use of the thesis in proofs.
-duration: 35
+duration: 25
 prerequisites: [equivalence-of-models]
 ---
 

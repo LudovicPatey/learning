@@ -1,7 +1,7 @@
 ---
 title: Arithmetic definability
 summary: The arithmetic sets are the sets definable in the language of arithmetic; Σ₁-definable means c.e.; truth in ℕ is not arithmetic, and the first incompleteness theorem.
-duration: 45
+duration: 40
 prerequisites: [post-theorem, models-of-computation/coding-sequences]
 ---
 

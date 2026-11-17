@@ -1,7 +1,7 @@
 ---
 title: The MacDowell–Specker theorem
 summary: Strongly definable types, in which one formula decides a whole definable family of formulas; a cohesiveness lemma proved inside a model of PA; Gaifman's theorem that every model of PA has an unbounded strongly definable type; strongly definable unbounded types are definable; every model of PA has a proper elementary end extension, and a model of IΔ₀ has one only if it satisfies PA.
-duration: 45
+duration: 35
 prerequisites: [definable-types]
 ---
 

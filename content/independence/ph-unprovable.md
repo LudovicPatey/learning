@@ -1,7 +1,7 @@
 ---
 title: The unprovability of the Paris–Harrington principle
 summary: Relative largeness of all arities up to c is an indicator for Peano arithmetic, by a construction of diagonal indiscernibles with a satisfaction table; hence PA does not prove the Paris–Harrington principle (Paris, Harrington), and the least y with [x, y] →* (x)^x_x eventually dominates every function provably total in PA.
-duration: 35
+duration: 30
 prerequisites: [diagonal-indiscernibles, truth-and-provability/truth-definitions]
 ---
 

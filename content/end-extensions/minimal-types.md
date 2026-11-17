@@ -1,7 +1,7 @@
 ---
 title: Minimal types and minimal end extensions
 summary: Rare types, realized at most once in each gap, and their syntactic characterization; every model of PA has an unbounded strongly definable rare type, a minimal type; the extension it generates is a minimal elementary end extension.
-duration: 30
+duration: 25
 prerequisites: [gaps, cuts-and-extensions/splitting-conservation]
 ---
 

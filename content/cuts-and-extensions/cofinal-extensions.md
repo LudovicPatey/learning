@@ -1,7 +1,7 @@
 ---
 title: Elementarity and cofinal extensions
 summary: Σₙ-elementary substructures and the Tarski–Vaught test level by level; end and cofinal extensions; a cofinal Σₙ-elementary extension of a model of BΣₙ₊₁ is Σₙ₊₂-elementary, and a cofinal Δ₀-elementary extension of a model of PA is elementary.
-duration: 40
+duration: 35
 prerequisites: [fragments-of-arithmetic/coded-sets]
 ---
 

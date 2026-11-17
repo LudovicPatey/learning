@@ -1,7 +1,7 @@
 ---
 title: Prefix-free complexity
 summary: Machines whose domain is prefix-free; the optimal prefix-free machine and the complexity K; subadditivity, the Kraft inequality, and the comparison between K and C.
-duration: 45
+duration: 35
 prerequisites: [computable-sequences]
 ---
 

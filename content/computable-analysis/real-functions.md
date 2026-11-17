@@ -1,7 +1,7 @@
 ---
 title: Computable real functions
 summary: Computable real functions are continuous, and continuous functions are those computable relative to an oracle; equality and order of reals are not decidable, only the strict order is semi-decidable; the arithmetic operations and effective limits are computable.
-duration: 45
+duration: 40
 prerequisites: [representations, second-order-arithmetic/analysis-in-rca0]
 ---
 

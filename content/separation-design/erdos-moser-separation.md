@@ -1,7 +1,7 @@
 ---
 title: Separating the Erdős–Moser theorem from Ramsey's theorem for pairs
 summary: A computable stable coloring of pairs, built from a Δ⁰₂ partition into two hyperimmune sets, defeats two hyperimmunities, so SRT²₂ does not follow from EM; RT²₂ is EM plus ADS, so ADS does not follow from EM either.
-duration: 35
+duration: 25
 prerequisites: [erdos-moser-hyperimmunities, turing-degrees/limit-computability]
 ---
 

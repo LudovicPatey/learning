@@ -1,7 +1,7 @@
 ---
 title: Lachlan's theorem
 summary: A non-standard model of PA with a full satisfaction class is recursively saturated (Lachlan); with the theorem of Kotlarski, Krajewski and Lachlan, a countable non-standard model of PA has a full satisfaction class exactly when it is recursively saturated; satisfaction classes with induction, and disjunctive correctness.
-duration: 45
+duration: 35
 prerequisites: [satisfaction-classes, truth-and-provability/provably-total]
 ---
 

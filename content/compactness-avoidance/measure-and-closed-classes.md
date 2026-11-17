@@ -1,7 +1,7 @@
 ---
 title: Weak weak König's lemma
 summary: Weak weak König's lemma admits strong PA avoidance, by forcing with closed classes of positive measure; the PA sets form a null class (Kučera).
-duration: 25
+duration: 20
 prerequisites: [pa-avoidance, martin-lof-randomness/upper-cones, martin-lof-randomness/levin-schnorr]
 ---
 

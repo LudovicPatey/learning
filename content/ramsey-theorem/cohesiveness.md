@@ -1,7 +1,7 @@
 ---
 title: Cohesive sets
 summary: Cohesive sets and the principle COH; a set computes a cohesive set for a computable sequence if and only if its jump computes a path through a Π⁰₁(∅′) class of decisions; cohesive sets for computable sequences can be low₂ but not always low.
-duration: 40
+duration: 35
 prerequisites: [jockusch]
 ---
 

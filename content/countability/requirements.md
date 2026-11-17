@@ -1,7 +1,7 @@
 ---
 title: Diagonalization by requirements
 summary: Constructions by finite extensions; requirements that can always be secured; sequences differing infinitely often from every member of a list; bi-immune sets.
-duration: 35
+duration: 25
 prerequisites: [diagonalization-and-computation]
 ---
 

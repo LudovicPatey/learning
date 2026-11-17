@@ -1,7 +1,7 @@
 ---
 title: Disjunctive forcing questions
 summary: Disjunctive notions of forcing, which build one set on each side of an instance, and their forcing questions; the abstract disjunctive cone avoidance lemma and Lachlan's disjunction; the Dzhafarov–Jockusch forcing as an example.
-duration: 35
+duration: 25
 prerequisites: [strong-cone-avoidance, ramsey-theorem/cone-avoidance]
 ---
 

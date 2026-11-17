@@ -1,7 +1,7 @@
 ---
 title: Definability of forcing for Cohen forcing
 summary: For Cohen forcing, forcing a Σ⁰ₙ formula is a Σ⁰ₙ relation; n-generic filters and n-generic sets; the jumps of generic sets; generic sets preserve the non-Σ⁰ₙ sets and avoid the cones above sets not computable in the n-th jump.
-duration: 45
+duration: 30
 prerequisites: [forcing-relation, generic-sets, cohen-genericity/n-genericity]
 ---
 

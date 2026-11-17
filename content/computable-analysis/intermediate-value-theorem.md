@@ -1,7 +1,7 @@
 ---
 title: The intermediate value theorem
 summary: The intermediate value theorem has computable solutions for computable instances but not uniformly; the trisection method; the theorem lies between LLPO and weak König's lemma, its parallelization is equivalent to weak König's lemma, and it is equivalent to the Brouwer fixed point theorem in dimension one.
-duration: 45
+duration: 40
 prerequisites: [closed-sets-and-choice, reducibilities/weihrauch, pi01-classes/computable-members]
 ---
 

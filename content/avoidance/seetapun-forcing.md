@@ -1,7 +1,7 @@
 ---
 title: Seetapun's theorem by a disjunctive forcing question
 summary: The disjunctive forcing question of the Seetapun forcing, about all partitions of the reservoir, and the direct proof of Seetapun's theorem; comparison with the proof through cohesiveness.
-duration: 45
+duration: 35
 prerequisites: [seetapun-conditions]
 ---
 

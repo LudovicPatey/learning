@@ -1,7 +1,7 @@
 ---
 title: Jump cone avoidance
 summary: Jump cone avoidance, its relation with weakly low bases and non-high solutions, and the reduction of its strong version to Δ⁰₃ instances.
-duration: 45
+duration: 35
 prerequisites: [lowness/ramsey-pairs-low2, effective-forcing/mathias-forcing, avoidance/strong-cone-avoidance, cohen-genericity/posner-robinson, immunity-growth/domination, pi01-classes/basis-theorems]
 ---
 

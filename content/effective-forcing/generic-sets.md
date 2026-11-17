@@ -1,7 +1,7 @@
 ---
 title: Sufficiently generic sets
 summary: Properties of every sufficiently generic set; density below a condition; earlier constructions recast as density statements for Cohen, Jockusch–Soare, computable Sacks and computable Mathias forcing; uniformly effectively dense families and effective generic sequences; arithmetic formulas about the generic set.
-duration: 40
+duration: 30
 prerequisites: [notions-of-forcing, arithmetic-hierarchy/post-theorem, cohen-genericity/baire-category, pi01-classes/basis-theorems, immunity-growth/computably-dominated]
 ---
 

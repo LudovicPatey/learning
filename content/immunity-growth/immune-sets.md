@@ -1,7 +1,7 @@
 ---
 title: Immune and hyperimmune sets
 summary: Immune sets contain no infinite c.e. subset; hyperimmune sets escape every disjoint strong array, equivalently their principal function is dominated by no computable function; the sets of hyperimmune degree.
-duration: 45
+duration: 35
 prerequisites: [turing-degrees/limit-computability, ce-degrees/simple-sets]
 ---
 

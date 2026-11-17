@@ -1,7 +1,7 @@
 ---
 title: Pigeons do not jump high
 summary: The requirements of second-jump control for the pigeonhole principle follow from the three-case argument with the questions on two sides; a case distinction on validity and Lachlan's disjunction give an infinite subset, of the set or of its complement, whose jump avoids a given cone, and which is not high.
-duration: 35
+duration: 25
 prerequisites: [pigeon-questions]
 ---
 

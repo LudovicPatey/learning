@@ -1,7 +1,7 @@
 ---
 title: Register machines
 summary: Unlimited register machines (URM), their operational semantics, examples, concatenation of programs, and closure of URM-computable functions under composition.
-duration: 45
+duration: 40
 prerequisites: [what-is-an-algorithm]
 ---
 

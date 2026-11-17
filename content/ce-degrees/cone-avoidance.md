@@ -1,7 +1,7 @@
 ---
 title: Cone avoidance and low splittings
 summary: The preservation strategy combined with other requirements; a simple set that does not compute a given non-computable c.e. set; the halves of a Sacks splitting are low; consequences and outlook for the c.e. degrees.
-duration: 45
+duration: 40
 prerequisites: [sacks-splitting]
 ---
 

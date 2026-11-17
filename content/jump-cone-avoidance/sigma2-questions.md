@@ -1,7 +1,7 @@
 ---
 title: Forcing questions for Σ⁰₂ sentences
 summary: A Π⁰₂ sentence is forced by density, not on all members; a forcing question at level 1 lifts to level 2 by quantifying over extensions, at a cost measured by the complexity of the partial order; questions with answers Σ⁰₁ relative to the condition give jump cone avoidance.
-duration: 40
+duration: 30
 prerequisites: [jump-cones, effective-forcing/forcing-question, effective-forcing/forcing-with-trees, avoidance/forcing-question-method]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Forcing the jump effectively
 summary: Conditions represented by codes; a notion of forcing decides the jump effectively relative to an oracle A if A finds extensions deciding each Σ⁰₁ sentence; then an A-computable generic sequence yields a set whose jump is computable in A; Cohen, Jockusch–Soare and computable Mathias forcing.
-duration: 40
+duration: 30
 prerequisites: [low-bases, effective-forcing/generic-sets, effective-forcing/mathias-forcing, arithmetic-hierarchy/codes, pi01-classes/basis-theorems]
 ---
 

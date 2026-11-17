@@ -1,7 +1,7 @@
 ---
 title: Computation relative to an oracle
 summary: Oracle machines and Turing functionals; computations with finite oracles, stages and the use principle.
-duration: 45
+duration: 40
 prerequisites: [fundamentals/ce-sets]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: K-trivial sets
 summary: Sets whose initial segments are as simple as their lengths; Chaitin's counting theorem shows that there are countably many K-trivial sets, all of them Δ⁰₂; closure under join.
-duration: 45
+duration: 35
 prerequisites: [martin-lof-randomness/levin-schnorr, kolmogorov-complexity/coding-theorem, pi01-classes/computable-members]
 ---
 

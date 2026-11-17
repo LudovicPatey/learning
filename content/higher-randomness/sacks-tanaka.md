@@ -1,7 +1,7 @@
 ---
 title: The Sacks–Tanaka theorem
 summary: Almost no sequence computes a non-computable ordinal; the class of sequences collapsing ω₁ᶜᵏ is Π¹₁ and null; the proof by selection and boundedness; the measure of a Π¹₁ class is reached at its Δ¹₁ stages.
-duration: 30
+duration: 25
 prerequisites: [pi11-measure, martin-lof-randomness/upper-cones]
 ---
 

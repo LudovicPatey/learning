@@ -23,7 +23,7 @@ After the course, a student can:
 
 1. **induction-collection.** Definitions of the schemes; Parsons' closure lemma (`lem-collection-closure`); IΣₙ ⇔ IΠₙ; IΣₙ ⇒ BΣₙ; IΣₙ ⇔ LΣₙ ⇔ LΠₙ.
 2. **collection-induction.** Cuts; overspill for Σ⁰ₙ formulas (`prop-overspill-n`); BΣₙ₊₁ ⇒ IΣₙ; the hierarchy (figure); Slaman's BΣₙ ⇔ IΔₙ (admitted); BΣₙ₊₁ ⇔ BΠₙ (exercise `ex-bsigma-bpi`).
-3. **separations.** Σₙ-elementary substructures; K_n(M) ≺_{Σn} M (`lem-kn-elementary`); K_{n+1}(M) ⊨ IΣₙ + ¬BΣₙ₊₁ (`thm-isigma-not-bsigma`, Parsons; Paris–Kirby); BΣₙ ⊬ IΣₙ (admitted, `thm-bsigma-not-isigma`); PA not finitely axiomatizable (Ryll-Nardzewski).
+3. **definable-elements.** Σₙ-elementary substructures; definable elements, non-standard ones (`lem-nonstandard-definable`); K_n(M) ≺_{Σn} M (`lem-kn-elementary`). **separations.** K_{n+1}(M) ⊨ IΣₙ + ¬BΣₙ₊₁ (`thm-isigma-not-bsigma`, Parsons; Paris–Kirby); BΣₙ ⊬ IΣₙ (admitted, `thm-bsigma-not-isigma`); PA not finitely axiomatizable (Ryll-Nardzewski).
 4. **pigeonhole.** Hirst: RT¹_{<∞} ⇔ BΣ⁰₂; RT²₂ ⇒ BΣ⁰₂ (Hirst); survey of the first-order part of RT²₂.
 5. **first-order-parts.** Conservation via ω-extensions; ACA₀ conservative over PA, RCA₀ over IΣ₁ (Friedman); Jockusch–Solovay bound; ACA₀ ⊬ ACA₀′.
 6. **forcing-subtrees.** Forcing with infinite subtrees; a single condition decides a Σ⁰₁ formula below a non-standard bound (`lem-harrington-decide`); one generic path preserves IΣ⁰₁ (`thm-path-induction`).
@@ -89,7 +89,7 @@ No newer, simpler proof of Hirst's or Harrington's theorems was found; the Monin
 
 ## 10. Open points
 
-- Lessons `separations` (60 min), `first-order-parts` (55), `induction-collection` (50) and `forcing-subtrees` (50) exceed 45 minutes by the word-count rule (formulas inflate the count). Further splitting is possible: the Jockusch–Solovay section could become its own lesson with ACA₀′.
+- (Resolved 2026-11-17: `separations` was split, and the open-text rule puts the other lessons at 45 minutes or less.) Lessons `separations` (60 min), `first-order-parts` (55), `induction-collection` (50) and `forcing-subtrees` (50) exceeded 45 minutes by the former word-count rule (formulas inflate the count). Further splitting is possible: the Jockusch–Solovay section could become its own lesson with ACA₀′.
 - Kaye and Hájek–Pudlák are cited by chapter title or chapter number from tables of contents only; sections not checked.
 - Ryll-Nardzewski 1952 reference written from memory.
 - The admitted facts (partial truth definitions, finite pigeonhole in PA, Parikh's theorem, BΣₙ ⊬ IΣₙ) could be proved in a specialized course on models of arithmetic.
@@ -101,7 +101,8 @@ Every exercise has a label, an objective, a difficulty and a complete solution. 
 **Featured exercises.**
 - induction-collection: `ex-strong-induction-sigma` (strong induction; the auxiliary-formula pattern of the lesson, with collection absorbing a bounded quantifier).
 - collection-induction: `ex-bsigma-bpi` (cited by the text and by the pigeonhole lesson).
-- separations: `ex-k1-nonstandard` (a second proof of `lem-nonstandard-definable` through elementarity).
+- definable-elements: `ex-k1-nonstandard` (a second proof of `lem-nonstandard-definable` through elementarity).
+- separations: `ex-idelta0-not-bdelta0` (the case n = 0 of the theorem; moved from the further exercises when the lesson was split).
 - pigeonhole: `ex-rt1-successor` (announced by the quiz: why the induction on colors is not available) and `ex-bounded-color-classes` (what a failure of Σ⁰₂ collection looks like).
 - first-order-parts: `ex-delta1-least` (the Δ₁-definable sets as the non-standard analogue of REC).
 - forcing-subtrees: `ex-standard-path` (the counterexample announced in the introduction) and `ex-unique-collection` (where BΣ⁰₁ is used).
@@ -129,3 +130,4 @@ Moved to the further exercises, with their labels: `ex-overspill-diagonal`, `ex-
   - References corrected: Jockusch–Solovay (Wang 1981, D–M 5.6.7; the "paper of Wang" was wrong); formalized Post theorem no longer cited to Simpson VIII.1; Simpson IX.1/IX.2/IX.3 section and theorem numbers; Kaye chapters; attribution of `prop-rt22-bsigma2` to Hirst.
   - RT²₂ literature updated (Le Houérou, Levy Patey, Yokoyama 2024).
 - **2026-11-13: featured and further exercises.** Labels, objectives and difficulties for all existing exercises; four existing exercises moved to the further exercises; 29 new further exercises (section 11). Durations recomputed: collection-induction 30, first-order-parts 45 (capped). The introduction of `forcing-subtrees` now cites `ex-standard-path`.
+- **2026-11-17: split of `separations`.** The lesson read in about 55 minutes of open text. Its first half, Σₙ-elementary substructures and the models of definable elements (`def-sigma-elementary`, `def-definable-elements`, `lem-nonstandard-definable`, `lem-kn-elementary`, `ex-k1-nonstandard`, `ex-kn-closure`, `ex-kn-standard`), is the new lesson `definable-elements`; `separations` keeps the two separations and Ryll-Nardzewski's corollary, with a new introduction, and `ex-idelta0-not-bdelta0` becomes its featured exercise. All labels unchanged. New exercise `ex-kn-least` (K_n(M) is the least Σₙ-elementary substructure). `first-order-parts` now points to `definable-elements` for the language L₁. Durations recomputed by the open-text rule (AGENTS.md; `npm run durations`): quizzes, solutions, hints and further exercises are no longer counted.

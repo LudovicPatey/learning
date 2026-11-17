@@ -1,7 +1,7 @@
 ---
 title: The halting problem
 summary: Undecidability of the halting problem; many-one reductions; undecidability of totality and of halting on a fixed input.
-duration: 40
+duration: 30
 prerequisites: [universal-program-smn, countability/diagonalization-and-computation]
 ---
 

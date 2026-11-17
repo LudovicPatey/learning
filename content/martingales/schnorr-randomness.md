@@ -1,7 +1,7 @@
 ---
 title: Schnorr randomness
 summary: Schnorr randomness, defined by computable martingales that succeed at a computable rate, is equivalent to passing all Martin-Löf tests of computable measure and all total Solovay tests; it implies the law of large numbers and has no universal test.
-duration: 45
+duration: 40
 prerequisites: [computable-randomness]
 ---
 

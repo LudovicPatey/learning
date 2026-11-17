@@ -1,7 +1,7 @@
 ---
 title: Arithmetic with a top
 summary: Initial segments [0, a] of models of arithmetic as structures with a top element, and their coded expansions; truth in a coded expansion is computed by bounded formulas, and the least number principle holds for all formulas; every model of arithmetic with a top is an initial segment of a model of bounded induction (Paris); cuts in such structures, k-Ramsey, k-extendable and k-restrainable cuts, and the indicators for BΣₖ₊₁ (Paris), stated.
-duration: 45
+duration: 35
 prerequisites: [ph-unprovable, cuts-and-extensions/wkl-regular-cuts, truth-and-provability/bounded-satisfaction]
 ---
 

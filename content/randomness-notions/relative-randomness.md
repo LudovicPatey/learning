@@ -1,7 +1,7 @@
 ---
 title: Relative randomness and van Lambalgen's theorem
 summary: Martin-Löf randomness relative to an oracle; van Lambalgen's theorem that a join is random exactly when its halves are random, the second relative to the first; consequences for the Turing degrees of random sequences; 2-randomness.
-duration: 45
+duration: 40
 prerequisites: [martin-lof-randomness/levin-schnorr, martin-lof-randomness/solovay-tests]
 ---
 

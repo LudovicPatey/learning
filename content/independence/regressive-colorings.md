@@ -1,7 +1,7 @@
 ---
 title: Regressive colorings
 summary: Regressive colorings and min-homogeneous sets (Kanamori and McAloon); relatively large homogeneous sets for colorings of (n+1)-sets give min-homogeneous sets for regressive colorings of n-sets; a regressive coloring that compares blocks of a set gives, on a min-homogeneous set, indiscernibility for a family of relations with parameters below each element.
-duration: 40
+duration: 35
 prerequisites: [paris-harrington]
 ---
 

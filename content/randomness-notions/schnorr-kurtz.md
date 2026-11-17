@@ -1,7 +1,7 @@
 ---
 title: Kurtz randomness and computable domination
 summary: The hierarchy of randomness notions from 2-randomness to Kurtz randomness; on computably dominated sequences, Kurtz randomness implies weak 2-randomness; every set of hyperimmune degree computes a Kurtz random sequence that is not Schnorr random; computable domination is the dividing line for Kurtz randomness, as highness is for Schnorr randomness.
-duration: 40
+duration: 30
 prerequisites: [weak-2-randomness, martingales/randomness-hierarchy, cohen-genericity/weak-genericity, immunity-growth/immune-sets]
 ---
 

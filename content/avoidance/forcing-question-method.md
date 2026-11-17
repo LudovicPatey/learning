@@ -1,7 +1,7 @@
 ---
 title: The forcing question as a method
 summary: The three-case argument behind every proof of cone avoidance; the forcing question as a dividing line between conditions; forcing questions whose answers are Σ⁰₁ relative to the condition, and the cone avoidance theorem for them.
-duration: 40
+duration: 35
 prerequisites: [avoidance-properties, effective-forcing/mathias-forcing]
 ---
 

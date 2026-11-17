@@ -1,7 +1,7 @@
 ---
 title: The cardinality of the continuum
 summary: The sets of binary sequences, of integer sequences, of real numbers and of real sequences are equipotent; removing a countable set does not change their cardinality; the continuum hypothesis.
-duration: 45
+duration: 35
 prerequisites: [diagonal-argument]
 ---
 

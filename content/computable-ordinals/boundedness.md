@@ -1,7 +1,7 @@
 ---
 title: Π¹₁ versus Σ¹₁ and the boundedness theorem
 summary: A diagonal argument shows that Π¹₁ is not Σ¹₁; Spector's boundedness theorem bounds the types of a Σ¹₁ set of well-orderings below ω₁ᶜᵏ; applications to the ordinals ω₁ˣ and to ill-founded computable orders without arithmetic descending sequences.
-duration: 45
+duration: 35
 prerequisites: [trees-and-pi11]
 ---
 

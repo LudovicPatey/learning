@@ -1,7 +1,7 @@
 ---
 title: Product Mathias forcing
 summary: Mathias conditions with a tuple of reservoirs in a low Scott ideal and a large Δ⁰₂ class of tuples, extended through slices; promises for Π⁰₂ sentences; a Σ⁰₂ question whose positive answers are forced and whose negative answers are promised.
-duration: 40
+duration: 35
 prerequisites: [product-largeness, lowness/coded-ideals, jump-cone-avoidance/pigeons-non-high, jump-cone-avoidance/pigeon-questions]
 ---
 

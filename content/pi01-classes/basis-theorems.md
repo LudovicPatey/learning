@@ -1,7 +1,7 @@
 ---
 title: Basis theorems
 summary: The low basis theorem, the computably dominated basis theorem and the cone avoidance basis theorem, proved by forcing with Π⁰₁ classes.
-duration: 45
+duration: 35
 prerequisites: [computable-members, turing-degrees/low-and-high, turing-degrees/limit-computability]
 ---
 

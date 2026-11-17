@@ -1,7 +1,7 @@
 ---
 title: The true path and the verification
 summary: The true path of a tree construction, whose nodes are visited infinitely often and initialized finitely often; the nodes on the true path meet their requirements; between two consecutive expansionary stages of an N-node on the true path, only one of the two sets changes below the first of them; end of the proof of the minimal pair theorem.
-duration: 45
+duration: 30
 prerequisites: [trees-of-strategies]
 ---
 

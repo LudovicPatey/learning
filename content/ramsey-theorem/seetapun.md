@@ -1,7 +1,7 @@
 ---
 title: Seetapun's theorem
 summary: Seetapun's theorem that every computable coloring of pairs has a homogeneous set not computing a given non-computable set; RT²₂ does not imply ACA₀; the separation of cohesiveness and stable Ramsey's theorem; further results on the weakness of Ramsey's theorem for pairs.
-duration: 40
+duration: 35
 prerequisites: [cone-avoidance, triples]
 ---
 

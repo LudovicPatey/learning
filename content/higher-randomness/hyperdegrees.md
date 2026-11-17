@@ -1,7 +1,7 @@
 ---
 title: Σ¹₁ null classes and hyperarithmetic reducibility
 summary: Every null Σ¹₁ class is included in a null Δ¹₁ class, so Σ¹₁-randomness is Δ¹₁-randomness; hyperarithmetic reducibility; the upper hyperarithmetic cone of a non-hyperarithmetic set is null; the hierarchy of higher randomness notions.
-duration: 45
+duration: 35
 prerequisites: [pi11-randomness, martin-lof-randomness/upper-cones]
 ---
 

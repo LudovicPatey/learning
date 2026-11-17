@@ -1,7 +1,7 @@
 ---
 title: Statistical laws and Solovay tests
 summary: Random sequences satisfy the law of large numbers and are normal; Solovay tests, with summable measures, define Martin-Löf randomness; Kurtz randomness and weakly 1-generic sequences.
-duration: 40
+duration: 30
 prerequisites: [martin-lof-tests]
 ---
 

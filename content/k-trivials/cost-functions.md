@@ -1,7 +1,7 @@
 ---
 title: Cost functions and a c.e. K-trivial set
 summary: The standard cost function; a set with a computable approximation obeying it is K-trivial; a simple K-trivial set, built by Post's construction restricted to cheap enumerations.
-duration: 45
+duration: 35
 prerequisites: [k-trivial-sets, kolmogorov-complexity/coding-theorem, ce-degrees/simple-sets]
 ---
 

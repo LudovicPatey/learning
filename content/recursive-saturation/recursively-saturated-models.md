@@ -1,7 +1,7 @@
 ---
 title: Recursively saturated models
 summary: Types over a structure, recursive types and recursively saturated structures; every countable structure for a recursive language has a countable recursively saturated elementary extension; a non-standard model of IΔ₀ + exp is recursively saturated exactly when it realizes every type coded in it, and its realized complete types are then exactly its coded complete types.
-duration: 45
+duration: 40
 prerequisites: [cuts-and-extensions/standard-system, cuts-and-extensions/scott-tennenbaum]
 ---
 

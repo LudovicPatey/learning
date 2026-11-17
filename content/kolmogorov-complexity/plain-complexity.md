@@ -1,7 +1,7 @@
 ---
 title: Plain Kolmogorov complexity
 summary: The complexity of a string is the length of its shortest description by an optimal machine; the invariance theorem; most strings are incompressible; the complexity of pairs.
-duration: 45
+duration: 40
 prerequisites: [fundamentals/ce-sets]
 ---
 

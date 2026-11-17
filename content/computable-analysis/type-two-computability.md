@@ -1,7 +1,7 @@
 ---
 title: Computability on Baire space
 summary: Computable partial functions on Baire space, given by Turing functionals that read an infinite input and produce an infinite output; computable functions are continuous, and continuous functions are those computable relative to an oracle.
-duration: 45
+duration: 40
 prerequisites: [turing-degrees/oracle-computation, pi01-classes/cantor-space]
 ---
 

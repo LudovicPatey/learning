@@ -1,7 +1,7 @@
 ---
 title: The Ackermann function in IΣ₁ and IΣ₂
 summary: The converse of the previous lesson, due to Parsons, Mints and Takeuti, is stated and proved later in the track; a Σ₁ definition of the Ackermann function by finite computations; IΣ₁ proves that it defines a partial function and that each row is total, but not that the function is total; IΣ₂ proves it, by Π₂ induction on the first argument.
-duration: 35
+duration: 30
 prerequisites: [provably-total, models-of-computation/ackermann-function, fragments-of-arithmetic/coding]
 ---
 

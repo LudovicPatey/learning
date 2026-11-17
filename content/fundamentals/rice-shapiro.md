@@ -1,7 +1,7 @@
 ---
 title: The Rice–Shapiro theorem
 summary: A c.e. index set is monotone and determined by finite information; the c.e. index sets are those given by c.e. lists of finite functions.
-duration: 30
+duration: 25
 prerequisites: [rice-theorem]
 ---
 

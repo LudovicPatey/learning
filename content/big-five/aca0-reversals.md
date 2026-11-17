@@ -1,7 +1,7 @@
 ---
 title: Theorems equivalent to ACA₀
 summary: The monotone convergence theorem, the existence of torsion subgroups of countable abelian groups, and König's lemma are each equivalent to ACA₀ over RCA₀; each reversal codes the range of an injection into a computable instance.
-duration: 50
+duration: 40
 prerequisites: [aca0, second-order-arithmetic/real-numbers, pi01-classes/finitely-branching-trees]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Martin's domination theorem
 summary: A set is high if and only if it computes a function that eventually dominates every computable function, if and only if it computes a uniform list of exactly the computable sets.
-duration: 35
+duration: 25
 prerequisites: [computably-dominated, turing-degrees/low-and-high, arithmetic-hierarchy/index-sets, arithmetic-hierarchy/post-theorem]
 ---
 

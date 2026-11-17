@@ -1,7 +1,7 @@
 ---
 title: Coded finite sequences
 summary: Finite sequences coded as finite graphs in IΔ₀ + exp; length and entries are bounded relations; the bound on codes, definable sequences, concatenation and restriction; the finite pigeonhole principle.
-duration: 25
+duration: 15
 prerequisites: [ackermann-coding, models-of-computation/coding-sequences]
 ---
 

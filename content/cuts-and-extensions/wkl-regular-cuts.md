@@ -1,7 +1,7 @@
 ---
 title: The Kirby–Paris characterization and regular cuts
 summary: A proper cut is semiregular if and only if it is closed under multiplication and its coded subsets form a model of WKL₀ (Kirby and Paris); regular cuts and the pigeonhole principle; every regular cut is semiregular.
-duration: 30
+duration: 25
 prerequisites: [semiregular-cuts]
 ---
 

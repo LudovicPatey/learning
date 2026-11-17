@@ -1,7 +1,7 @@
 ---
 title: The Friedberg–Muchnik theorem
 summary: Two Turing incomparable c.e. sets, by the finite injury priority method; requirements, witnesses, priority and initialization.
-duration: 45
+duration: 35
 prerequisites: [simple-sets, turing-degrees/finite-extensions]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: The pigeonhole principle and Σ⁰₂ collection
 summary: The infinite pigeonhole principle for arbitrarily many colors is equivalent to Σ⁰₂ collection over RCA₀ (Hirst); Ramsey's theorem for pairs implies it; what is known of the first-order part of Ramsey's theorem for pairs.
-duration: 35
+duration: 30
 prerequisites: [separations, ramsey-theorem/jockusch]
 ---
 

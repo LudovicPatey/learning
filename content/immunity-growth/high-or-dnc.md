@@ -1,7 +1,7 @@
 ---
 title: Maximal sets and the high or DNC theorem
 summary: Two applications of Martin's domination theorem; maximal sets are high, and a set computes a function almost everywhere different from every computable function if and only if it is high or computes a DNC function.
-duration: 35
+duration: 25
 prerequisites: [domination, dnc-functions]
 ---
 

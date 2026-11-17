@@ -1,7 +1,7 @@
 ---
 title: The Sacks splitting theorem
 summary: Splitting a c.e. set into two c.e. sets that avoid the cone above a non-computable c.e. set; the length of agreement and Sacks' preservation strategy; consequences for the c.e. degrees.
-duration: 45
+duration: 40
 prerequisites: [low-simple-set]
 ---
 

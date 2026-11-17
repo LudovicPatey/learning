@@ -1,7 +1,7 @@
 ---
 title: The pigeonhole principle and jump PA avoidance
 summary: Forcing a requirement on a part of a meta-condition with Liu's valuations one jump up; the number of branches where a requirement is not forced decreases, or becomes zero at the next level; a construction by tasks, a path of valid parts by König's lemma, and the proof that every Δ⁰₂ set has an infinite subset of itself or of its complement whose jump is not PA relative to ∅′.
-duration: 45
+duration: 30
 prerequisites: [meta-questions]
 ---
 

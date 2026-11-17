@@ -1,7 +1,7 @@
 ---
 title: Pseudo-well-orderings and descending sequences of jumps
 summary: Harrison's computable linear orders that are ill-founded but have no hyperarithmetic descending sequence; the Enderton–Putnam theorem that a descending sequence of jumps computes every hyperarithmetic set; HYP is not a model of ATR₀.
-duration: 40
+duration: 30
 prerequisites: [sigma11-classes]
 ---
 

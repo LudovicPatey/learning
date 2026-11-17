@@ -1,7 +1,7 @@
 ---
 title: Σ⁰ₙ and Π⁰ₙ sets
 summary: The arithmetic hierarchy defined by alternations of quantifiers over computable relations; normal forms, closure properties, relativization and many-one reductions.
-duration: 45
+duration: 40
 prerequisites: [turing-degrees/turing-jump, fundamentals/complete-sets]
 ---
 

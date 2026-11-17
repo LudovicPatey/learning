@@ -1,7 +1,7 @@
 ---
 title: Provably total functions of IΣ₁
 summary: Provably total functions of a theory; every primitive recursive function is provably total in IΣ₁, with its recursion equations, and so are the functions defined by course-of-values recursion.
-duration: 40
+duration: 35
 prerequisites: [fragments-of-arithmetic/coding, fragments-of-arithmetic/induction-collection, fragments-of-arithmetic/parikh, models-of-computation/primitive-recursion]
 ---
 

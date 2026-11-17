@@ -1,7 +1,7 @@
 ---
 title: Weak König's lemma and two cones
 summary: First-jump constructions give a path of a Π⁰₁ class avoiding a cone, or one whose jump avoids a cone, but not both; the forcing questions of Jockusch–Soare forcing at levels 1 and 2 give both at once (Wang).
-duration: 35
+duration: 20
 prerequisites: [sigma2-questions, pi01-classes/basis-theorems]
 ---
 

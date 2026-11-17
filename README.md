@@ -55,7 +55,7 @@ A lesson starts with frontmatter:
 ---
 title: Kleene's fixed point theorem
 summary: One-line description shown in lists.
-duration: 20                              # minutes
+duration: 20                              # minutes of open text (npm run durations -- --write)
 prerequisites: [universal-program-smn]    # slugs in the same course, or "course/slug"
 ---
 ```
@@ -126,7 +126,8 @@ Second question …
 ### Checking content
 
 ```bash
-npm run check-content                              # all lessons: broken refs, malformed quizzes, missing files
+npm run check-content                              # all lessons: broken refs, malformed quizzes, missing files, durations
+npm run durations -- --write                       # set each duration from the open text (quizzes, solutions, hints, figures and further exercises excluded)
 npm run check-content -- computability/fixed-point # also prints the rendered HTML
 ```
 

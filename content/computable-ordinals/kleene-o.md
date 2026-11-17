@@ -1,7 +1,7 @@
 ---
 title: Kleene's O
 summary: Kleene's system of notations O, its partial order and the inversion principle, the computable well-orderings of the notations below a given one, and addition of notations by effective transfinite recursion.
-duration: 45
+duration: 40
 prerequisites: [computable-well-orderings, fundamentals/fixed-point]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Low₂ solutions of Ramsey's theorem for pairs
 summary: Combining cohesiveness and the pigeonhole principle for Δ⁰₂ sets, every computable coloring of pairs has an infinite homogeneous set whose jump is computed by any given set PA relative to ∅′, hence a low₂ one (Cholak–Jockusch–Slaman); ω-models of low₂ sets; no low basis exists (Downey–Hirschfeldt–Lempp–Solomon).
-duration: 25
+duration: 20
 prerequisites: [cjs-theorem, ramsey-theorem/seetapun, ramsey-theorem/triples, weak-preservation]
 ---
 

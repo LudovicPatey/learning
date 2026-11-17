@@ -1,7 +1,7 @@
 ---
 title: Complexity of initial segments
 summary: Computable sequences have initial segments of minimal complexity; every sequence has initial segments compressible by any constant, so plain complexity does not define random sequences.
-duration: 30
+duration: 20
 prerequisites: [non-computability]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Σ⁰₁ separation and the Heine–Borel theorem
 summary: WKL₀ is equivalent over RCA₀ to Σ⁰₁ separation and to the Heine–Borel covering theorem for [0, 1]; a survey of other theorems of analysis, algebra and logic equivalent to WKL₀.
-duration: 50
+duration: 40
 prerequisites: [wkl0]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Finite axiomatizability and the hierarchy in models
 summary: Every Σₙ formula is equivalent in IΣ₁ to one with quantifiers bounded by variables, hence to an instance of Sat_Σₙ; for n ≥ 1, IΣₙ is axiomatized by finitely many theorems of IΣ₁ and one instance of induction for Sat_Σₙ; Peano arithmetic is not axiomatized by sentences of bounded complexity (Rabin); in every model of IΣ₁, some Πₙ-definable set is not Σₙ-definable with parameters.
-duration: 45
+duration: 35
 prerequisites: [truth-definitions, induction-conservation/separations]
 ---
 

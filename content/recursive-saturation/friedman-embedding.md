@@ -1,7 +1,7 @@
 ---
 title: Friedman's embedding theorem
 summary: A countable non-standard model of IΣ₁ is isomorphic to a proper initial segment of another one exactly when they have the same standard system and its Σ₁ theory is contained in the other's (Friedman); so every such model is isomorphic to a proper initial segment of itself.
-duration: 30
+duration: 25
 prerequisites: [bounded-types, back-and-forth, cuts-and-extensions/scott-tennenbaum]
 ---
 

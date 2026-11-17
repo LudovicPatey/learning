@@ -1,7 +1,7 @@
 ---
 title: Weakly low cohesive sets
 summary: For every computable sequence of sets and every set P PA relative to ∅′, there is a cohesive set whose jump is computed by P (Jockusch–Stephan), by a forcing argument in which P is used only to choose the reservoirs; so cohesiveness admits a weakly low basis, but no low basis.
-duration: 20
+duration: 15
 prerequisites: [weakly-low-bases, ramsey-theorem/cohesiveness]
 ---
 

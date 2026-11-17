@@ -1,7 +1,7 @@
 ---
 title: The language and models of second-order arithmetic
 summary: The two-sorted language of second-order arithmetic, its formula classes, the axioms of Z₂, Henkin structures and ω-models, absoluteness of arithmetic formulas, and the program of reverse mathematics.
-duration: 45
+duration: 40
 prerequisites: [arithmetic-hierarchy/arithmetic-definability]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: The splitting theorem and conservation
 summary: Every Σₙ₊₁-elementary extension of a model of IΣₙ splits into a Σₙ₊₁-elementary cofinal extension followed by a Σₙ-elementary end extension; every model of IΣₙ has a Σₙ₊₁-elementary cofinal extension satisfying BΣₙ₊₁; BΣₙ₊₁ is Πₙ₊₂-conservative over IΣₙ (Friedman, Paris).
-duration: 35
+duration: 25
 prerequisites: [collection-end-extensions]
 ---
 

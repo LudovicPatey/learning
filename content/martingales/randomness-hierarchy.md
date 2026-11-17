@@ -1,7 +1,7 @@
 ---
 title: The hierarchy of randomness notions
 summary: Kurtz randomness characterized by martingales that stay above an order; Martin-Löf, computable, Schnorr and Kurtz randomness form a strict hierarchy; outside the high degrees, Schnorr randomness implies Martin-Löf randomness; partial computable and Kolmogorov–Loveland randomness, and the open question whether the latter equals Martin-Löf randomness.
-duration: 45
+duration: 40
 prerequisites: [schnorr-randomness, cr-construction, martin-lof-randomness/solovay-tests, immunity-growth/domination, turing-degrees/finite-extensions]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Trees and Cantor space
 summary: Binary trees and their paths, weak König's lemma, open and closed classes of Cantor space, and compactness.
-duration: 35
+duration: 30
 prerequisites: [turing-degrees/oracle-computation]
 ---
 

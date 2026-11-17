@@ -1,7 +1,7 @@
 ---
 title: The forcing question
 summary: Forcing questions and their definability; a forcing question for tree forcings at every level; preservation of non-Σ⁰ₙ sets and cone avoidance for the iterated jumps.
-duration: 35
+duration: 25
 prerequisites: [forcing-with-trees, cohen-forcing]
 ---
 

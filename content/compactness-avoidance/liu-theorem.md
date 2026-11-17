@@ -1,7 +1,7 @@
 ---
 title: Liu's theorem
 summary: The pigeonhole principle admits strong PA avoidance, by a disjunctive forcing question whose negative answers are realized with the Ramsey-type weak König lemma instead of a Scott ideal; Ramsey's theorem for pairs admits PA avoidance, and does not imply weak König's lemma.
-duration: 45
+duration: 35
 prerequisites: [rwkl-pa-avoidance, pa-avoidance-examples, ramsey-theorem/seetapun]
 ---
 

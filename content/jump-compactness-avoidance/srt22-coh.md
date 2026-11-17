@@ -1,7 +1,7 @@
 ---
 title: Stable Ramsey's theorem without cohesiveness
 summary: An ω-model of stable Ramsey's theorem for pairs in which no set has a jump PA relative to ∅′; it satisfies neither cohesiveness nor Ramsey's theorem for pairs; the second-jump picture of COH, SRT²₂ and RT²₂; jump DNC avoidance, a Δ⁰₃ set all of whose homogeneous sets have a jump DNC relative to ∅′, and an open question.
-duration: 35
+duration: 25
 prerequisites: [delta2-jump-pa, immunity-growth/dnc-functions, compactness-avoidance/liu-theorem]
 ---
 

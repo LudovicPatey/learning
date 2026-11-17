@@ -1,7 +1,7 @@
 ---
 title: Jump PA avoidance
 summary: A problem admits jump PA avoidance if its instances have solutions whose jump is not PA relative to the jump of the parameter; such problems do not imply cohesiveness on ω-models; low bases give jump PA avoidance, weakly low bases do not.
-duration: 30
+duration: 20
 prerequisites: [compactness-avoidance/pa-avoidance, lowness/beyond-zero-jump, ramsey-theorem/cohesiveness, ramsey-theorem/stable-colorings, reducibilities/preservation]
 ---
 

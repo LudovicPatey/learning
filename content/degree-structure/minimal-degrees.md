@@ -1,7 +1,7 @@
 ---
 title: Minimal degrees
 summary: Splitting trees give a set of minimal Turing degree computable in 0″ (Spector); the construction is a forcing with computable perfect trees, whose conditions decide for all their paths whether a functional loses information.
-duration: 45
+duration: 40
 prerequisites: [embeddings, immunity-growth/computably-dominated, ce-degrees/sacks-splitting]
 ---
 

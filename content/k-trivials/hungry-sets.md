@@ -1,7 +1,7 @@
 ---
 title: The hungry sets theorem
 summary: Every base for randomness is low for K, by the hungry sets construction of Hirschfeldt, Nies and Stephan; hence being low for K, low for Martin-Löf randomness and a base for randomness are equivalent.
-duration: 35
+duration: 25
 prerequisites: [lowness]
 ---
 

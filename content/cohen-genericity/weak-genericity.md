@@ -1,7 +1,7 @@
 ---
 title: Weakly 1-generic sets
 summary: Sets meeting every dense c.e. set of strings; Kurtz's theorem identifies their degrees with the hyperimmune degrees; weak n-genericity.
-duration: 45
+duration: 35
 prerequisites: [baire-category, immunity-growth/immune-sets]
 ---
 

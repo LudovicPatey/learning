@@ -1,7 +1,7 @@
 ---
 title: Forcing with a cohesive class
 summary: Pairs of stems sharing a reservoir in the core of a cohesive class and in a Scott ideal avoiding the cone; validity; a question for Σ⁰₁ sentences about stems.
-duration: 45
+duration: 35
 prerequisites: [cohesive-classes, ramsey-theorem/cone-avoidance, avoidance/seetapun-forcing]
 ---
 

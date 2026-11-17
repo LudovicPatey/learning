@@ -1,7 +1,7 @@
 ---
 title: The Erdős–Moser theorem, cone avoidance and hyperimmunities
 summary: Reservoirs in a Scott ideal; the Erdős–Moser theorem admits cone avoidance and preservation of countably many hyperimmunities, because its forcing question is not disjunctive.
-duration: 45
+duration: 25
 prerequisites: [erdos-moser-design, avoidance/hyperimmunities]
 ---
 

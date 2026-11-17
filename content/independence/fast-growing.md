@@ -1,7 +1,7 @@
 ---
 title: A fast-growing hierarchy
 summary: The hierarchy of functions F_k, defined by iteration; its formalization in IΣ₁ by finite computations; IΣ₁ proves the totality of each F_k, and IΣ₂ proves the totality of all of them; growth of the hierarchy in the argument and in the index.
-duration: 30
+duration: 25
 prerequisites: [truth-and-provability/provably-total, truth-and-provability/ackermann-isigma, fragments-of-arithmetic/coding]
 ---
 

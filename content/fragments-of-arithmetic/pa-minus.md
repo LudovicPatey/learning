@@ -1,7 +1,7 @@
 ---
 title: The base theory PA⁻ and non-standard models
 summary: The theory PA⁻ of the non-negative parts of discretely ordered rings; the standard numbers form an initial segment of every model; bounded, Σₙ and Πₙ formulas in arbitrary models; the model ℤ[X]⁺ and non-standard models of true arithmetic.
-duration: 40
+duration: 35
 prerequisites: [arithmetic-hierarchy/arithmetic-definability]
 ---
 

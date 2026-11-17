@@ -1,7 +1,7 @@
 ---
 title: Arslanov's completeness criterion
 summary: A c.e. set is Turing complete if and only if it computes a DNC function; effectively simple sets are complete, and the complement of a low simple set is not effectively immune.
-duration: 25
+duration: 20
 prerequisites: [dnc-functions, ce-degrees/low-simple-set]
 ---
 

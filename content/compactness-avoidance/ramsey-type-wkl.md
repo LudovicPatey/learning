@@ -1,7 +1,7 @@
 ---
 title: The Ramsey-type weak König lemma
 summary: The Dzhafarov–Jockusch question is weakly merging but its reservoirs are PA; homogeneous sets for binary trees and their characterization by the paths; the Ramsey-type weak König lemma, implied by weak König's lemma and by Ramsey's theorem for pairs (Flood); homogeneous sets need not carry the complexity of the paths.
-duration: 40
+duration: 30
 prerequisites: [weak-merging, pi01-classes/finitely-branching-trees, ramsey-theorem/jockusch]
 ---
 

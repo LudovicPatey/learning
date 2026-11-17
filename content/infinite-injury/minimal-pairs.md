@@ -1,7 +1,7 @@
 ---
 title: Minimal pairs and the preservation of agreement
 summary: Minimal pairs of degrees; Posner's trick, which reduces the meet requirements to one functional; length of agreement and expansionary stages; the lemma that agreement is preserved when only one side changes between consecutive expansionary stages.
-duration: 45
+duration: 35
 prerequisites: [ce-degrees/sacks-splitting]
 ---
 

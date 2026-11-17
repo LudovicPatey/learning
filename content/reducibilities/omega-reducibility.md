@@ -1,7 +1,7 @@
 ---
 title: Problems and ω-reducibility
 summary: Theorems of the form "every instance has a solution" seen as problems; Turing ideals satisfying a problem and ω-reducibility; ω-reducibility ignores induction; König's lemma and the jump; the game characterization of ω-reducibility.
-duration: 40
+duration: 35
 prerequisites: [big-five/wkl0, pi01-classes/finitely-branching-trees, ramsey-theorem/cohesiveness, induction-conservation/pigeonhole]
 ---
 

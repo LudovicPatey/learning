@@ -1,7 +1,7 @@
 ---
 title: Liu's theorem for the Ramsey-type weak König lemma
 summary: Every non-empty Π⁰₁ class has an infinite homogeneous set that is not PA, so the Ramsey-type weak König lemma admits PA avoidance; the solution follows a branch of parts chosen at the end by König's lemma.
-duration: 25
+duration: 20
 prerequisites: [partition-forcing]
 ---
 

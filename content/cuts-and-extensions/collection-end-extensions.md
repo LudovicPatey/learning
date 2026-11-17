@@ -1,7 +1,7 @@
 ---
 title: End extensions and collection
 summary: A model with a proper Σₙ-elementary end extension satisfying IΣₙ satisfies BΣₙ₊₁ (Paris and Kirby), and the converse for countable models is stated; Σₙ₊₁ induction is equivalent to collection for partial functions (Friedman).
-duration: 40
+duration: 30
 prerequisites: [cofinal-extensions, fragments-of-arithmetic/definable-cuts]
 ---
 

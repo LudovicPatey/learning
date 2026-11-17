@@ -1,7 +1,7 @@
 ---
 title: Primitive recursive functions
 summary: Definition of the primitive recursive functions and predicates, and their closure under definition by cases, bounded sums and products, bounded quantification and bounded minimization.
-duration: 35
+duration: 40
 prerequisites: [what-is-an-algorithm]
 ---
 

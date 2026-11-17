@@ -1,7 +1,7 @@
 ---
 title: Automorphisms and fixed cuts
 summary: Countable recursively saturated models of PA have non-trivial automorphisms; the largest initial segment fixed pointwise by an automorphism is closed under exponentiation; conversely, every exponential cut of a countable recursively saturated model of PA is the fixed cut of an automorphism (Smoryński), by a back-and-forth argument with bounded types and the pigeonhole principle.
-duration: 40
+duration: 35
 prerequisites: [back-and-forth, cuts-and-extensions/weak-konig-cuts]
 ---
 

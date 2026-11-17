@@ -1,7 +1,7 @@
 ---
 title: Product largeness
 summary: Large classes of tuples of sets, where each coordinate chooses its own part of a cover; the decreasing intersection, intersection and cover lemmas; the complexity of largeness over a coded Scott ideal.
-duration: 45
+duration: 35
 prerequisites: [merging-level-two, jump-cone-avoidance/largeness, big-five/wkl0]
 ---
 

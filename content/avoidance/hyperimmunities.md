@@ -1,7 +1,7 @@
 ---
 title: Preservation of hyperimmunity by compact questions
 summary: Compact forcing questions, simple and disjunctive, preserve hyperimmunity; WKL, COH and Ramsey's theorem for pairs admit preservation of hyperimmunity; the relations between the avoidance properties of the course.
-duration: 25
+duration: 20
 prerequisites: [moduli]
 ---
 

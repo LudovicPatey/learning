@@ -20,4 +20,4 @@ objectives:
   - Define a tree of strategies, its priority order and its true path
   - Verify an infinite injury construction along the true path, by a case analysis on the position of the acting node
   - Build a high incomplete c.e. set by coding Inf into its columns, and explain why finite injury does not suffice
-lessons: [minimal-pairs, trees-of-strategies, minimal-pair-verification, high-incomplete, high-incomplete-verification]
+lessons: [minimal-pairs, trees-of-strategies, minimal-pair-verification, high-incomplete, high-incomplete-construction, high-incomplete-verification]

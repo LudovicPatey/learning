@@ -1,7 +1,7 @@
 ---
 title: Kleene's fixed point theorem
 summary: Every total computable transformation of indices has a fixed point up to the function computed; the version with parameters; self-referential programs and applications.
-duration: 45
+duration: 30
 prerequisites: [universal-program-smn, ce-sets]
 ---
 

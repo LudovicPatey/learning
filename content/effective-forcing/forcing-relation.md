@@ -1,7 +1,7 @@
 ---
 title: The forcing relation
 summary: The forcing relation of a notion of forcing; extension, consistency and density; forcing implies truth for generic sets; n-generic filters; forcing as density.
-duration: 40
+duration: 30
 prerequisites: [generic-sets, arithmetic-hierarchy/post-theorem, cohen-genericity/one-genericity]
 ---
 

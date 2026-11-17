@@ -1,7 +1,7 @@
 ---
 title: Martin-Löf tests
 summary: Martin-Löf tests and Martin-Löf random sequences; why the definition requires uniformity and an effective rate; a universal test; random sequences form a conull Σ⁰₂ class, with low and computably dominated members.
-duration: 40
+duration: 30
 prerequisites: [measure, pi01-classes/basis-theorems]
 ---
 

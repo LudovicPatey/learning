@@ -1,7 +1,7 @@
 ---
 title: Programs as numbers
 summary: The enumeration Φₑ of the partial computable functions, its approximation by stages, and computable sets and relations.
-duration: 45
+duration: 40
 prerequisites: [models-of-computation/equivalence-of-models]
 ---
 

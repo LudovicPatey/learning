@@ -1,7 +1,7 @@
 ---
 title: Avoidance properties of problems
 summary: Cone avoidance and strong cone avoidance as properties of problems; their relation to preservation and to ω-models; examples and counterexamples among WKL, COH, the pigeonhole principle and Ramsey's theorem; why the definitions are relativized.
-duration: 45
+duration: 35
 prerequisites: [reducibilities/preservation, ramsey-theorem/seetapun, pi01-classes/basis-theorems]
 ---
 

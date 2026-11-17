@@ -1,7 +1,7 @@
 ---
 title: Arithmetic genericity
 summary: n-generic sets meet or avoid every Σ⁰ₙ set of strings; their n-th jump is computed from the set and the n-th jump of the empty set; they decide every Σ⁰ₙ property by a prefix; the hierarchy of genericity notions.
-duration: 45
+duration: 35
 prerequisites: [one-genericity, arithmetic-hierarchy/post-theorem]
 ---
 

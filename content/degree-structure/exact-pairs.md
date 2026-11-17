@@ -1,7 +1,7 @@
 ---
 title: The partial order of the Turing degrees
 summary: The Turing degrees form an upper semilattice with countable lower cones and no maximal element; every countable ideal has an exact pair; consequently the degrees do not form a lattice, and strictly increasing sequences have no least upper bound.
-duration: 45
+duration: 40
 prerequisites: [turing-degrees/finite-extensions, turing-degrees/turing-jump]
 ---
 

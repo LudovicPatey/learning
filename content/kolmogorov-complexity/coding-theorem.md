@@ -1,7 +1,7 @@
 ---
 title: The coding theorem and Chaitin's Ω
 summary: The coding theorem identifies K with minus the logarithm of the probability that the optimal machine outputs a string; counting strings of small complexity; Chaitin's halting probability Ω is Turing complete and has incompressible prefixes.
-duration: 45
+duration: 35
 prerequisites: [kc-theorem]
 ---
 

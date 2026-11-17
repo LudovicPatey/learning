@@ -1,7 +1,7 @@
 ---
 title: Induction, collection and coded sets
 summary: In IΔ₀ + exp, IΣₙ means that bounded Σₙ-definable sets are coded (Friedman), and BΣₙ₊₁ that bounded Δₙ₊₁-definable sets are coded; BΣₙ₊₁ + exp proves IΣₙ.
-duration: 40
+duration: 35
 prerequisites: [coding, definable-cuts]
 ---
 

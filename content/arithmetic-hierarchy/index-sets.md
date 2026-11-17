@@ -1,7 +1,7 @@
 ---
 title: Classifying index sets
 summary: Upper bounds by counting quantifiers, lower bounds by reductions; Fin is Σ⁰₂-complete, Tot and Inf are Π⁰₂-complete.
-duration: 20
+duration: 15
 prerequisites: [post-theorem, fundamentals/rice-theorem]
 ---
 

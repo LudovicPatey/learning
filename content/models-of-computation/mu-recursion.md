@@ -1,7 +1,7 @@
 ---
 title: Minimization and partial recursive functions
 summary: The minimization operator, the partial recursive functions, recursive functions and predicates, and the statement of Kleene's normal form theorem.
-duration: 30
+duration: 25
 prerequisites: [ackermann-function]
 ---
 

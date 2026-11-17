@@ -1,7 +1,7 @@
 ---
 title: DNC avoidance and the comparison of avoidances
 summary: DNC avoidance and countably merging forcing questions; DNC avoidance implies cone avoidance; preservation of immunity; the relations between cone, PA, constant-bound trace and DNC avoidance.
-duration: 35
+duration: 30
 prerequisites: [rwwkl-dnc, pa-avoidance-examples, immunity-growth/immune-sets]
 ---
 

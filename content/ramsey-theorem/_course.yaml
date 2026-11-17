@@ -19,4 +19,4 @@ objectives:
   - Decompose Ramsey's theorem for pairs into COH and SRT²₂, in both directions
   - Use Mathias forcing to prove cone avoidance and strong cone avoidance
   - Prove Seetapun's theorem and build ω-models by preservation of cone avoidance
-lessons: [jockusch, triples, cohesiveness, stable-colorings, cone-avoidance, seetapun]
+lessons: [jockusch, triples, cohesiveness, stable-colorings, mathias-cohesiveness, cone-avoidance, seetapun]

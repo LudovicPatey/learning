@@ -1,7 +1,7 @@
 ---
 title: The Kučera–Gács theorem
 summary: Kučera's branching lemma; every set is computable, by a weak truth-table reduction, from a member of any Π⁰₁ class of positive measure, hence from a Martin-Löf random sequence; every degree above 0′ contains a random sequence.
-duration: 30
+duration: 25
 prerequisites: [upper-cones]
 ---
 

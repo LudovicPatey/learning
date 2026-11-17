@@ -1,7 +1,7 @@
 ---
 title: Limit computability
 summary: Shoenfield's limit lemma; Δ⁰₂ approximations, their moduli and computation functions; domination properties of the sets computable in ∅′.
-duration: 45
+duration: 40
 prerequisites: [turing-jump]
 ---
 

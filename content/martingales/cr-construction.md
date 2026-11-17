@@ -1,7 +1,7 @@
 ---
 title: A computably random sequence that is not Martin-Löf random
 summary: A computably random sequence computable in ∅′ whose prefixes have complexity O((log n)²), built by diagonalizing against a combined martingale and compressing the construction; Martin-Löf randomness is strictly stronger than computable randomness.
-duration: 40
+duration: 30
 prerequisites: [computable-randomness]
 ---
 

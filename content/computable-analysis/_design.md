@@ -71,7 +71,7 @@ for the research literature on Weihrauch complexity in analysis.
    (`thm-arithmetic-computable`), effective limits (`prop-effective-limit`). Featured
    exercises: exponential (`ex-exp`), positivity of computable functions
    (`ex-positive-search`). Figure `prefix-interval`.
-4. **Continuous functions and computable metric spaces** (`continuous-functions`):
+4. **Continuous functions on the unit interval** (`continuous-functions`) and **Computable metric spaces** (`computable-metric-spaces`, split off 2026-11-17; from `def-computable-metric-space` on):
    rectangle names (`def-rectangle-name`), evaluation and computable functions ⇔
    computable names (`thm-rectangle-computable`), effective Heine–Borel
    (`lem-effective-heine-borel`), modulus of uniform continuity and maximum value
@@ -295,7 +295,7 @@ later lesson cites it.
 - `real-functions`: `ex-positive-search` (semi-decision composed with a realizer, used
   again for trisection), after the order section; `ex-exp` (tail bounds and effective
   limits), after the arithmetic section.
-- `continuous-functions`: `ex-integral`, at the end: the simplest use of δ_C.
+- `computable-metric-spaces`: `ex-integral`, at the end: the simplest use of δ_C. (`continuous-functions` has no featured exercise; its further exercises are `ex-cover-semidecidable` and `ex-max-subinterval`, added 2026-11-17.)
 - `closed-sets-and-choice`: `ex-unique-choice` (cited by lessons 6 and 7 and by further
   exercises), after the zero sets; `ex-llpo-closed-choice`, after closed choice.
 - `intermediate-value-theorem`: `ex-inverse-increasing`, after the non-computability of
@@ -360,3 +360,4 @@ than the exercise warrants.
   (`ex-cantor-cauchy`, `ex-unique-choice`, `ex-left-ce-specker`); in the notes of
   `representations`, the signed-digit representation is attributed to Weihrauch's
   Definition 7.2.4 (the sentence read as if it were Turing's).
+- **2026-11-17: split of `continuous-functions`.** The lesson read in about 46 minutes of open text. Rectangle names, effective Heine–Borel and the modulus and maximum stay in `continuous-functions` (retitled "Continuous functions on the unit interval"), with the remark on WKL₀ moved there; computable metric spaces, δ_C ≡ δ_□ and all the further exercises on δ_C form the new lesson `computable-metric-spaces`, which `closed-sets-and-choice` now requires. New exercises for `continuous-functions`: covering of [0, 1] by a computable sequence of intervals is semi-decidable but not decidable (`ex-cover-semidecidable`); maximum on a rational subinterval (`ex-max-subinterval`). All labels unchanged. Durations recomputed by the open-text rule (AGENTS.md; `npm run durations`): quizzes, solutions, hints and further exercises are no longer counted.

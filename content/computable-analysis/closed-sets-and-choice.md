@@ -1,8 +1,8 @@
 ---
 title: Closed sets and closed choice
 summary: Closed subsets of the unit interval given by negative information; co-c.e. closed sets are exactly the zero sets of computable functions; problems on represented spaces; choosing a point in a non-empty closed set is Weihrauch equivalent to weak König's lemma.
-duration: 45
-prerequisites: [continuous-functions, reducibilities/parallelization]
+duration: 40
+prerequisites: [computable-metric-spaces, reducibilities/parallelization]
 ---
 
 The previous lesson showed that the maximum value of a continuous function on $[0, 1]$ is computable from the function. A point where the maximum is attained, or a zero of the function, is another matter. The set of such points is closed, and it is described by **negative information**: an algorithm can enumerate the points that are not zeros, by finding non-zero values, but never certify that a point is one. This lesson studies closed sets given in this way, the effective counterpart of $\Pi^0_1$ classes, and the problem of choosing a point in a non-empty closed set. This problem, **closed choice**, is Weihrauch equivalent to weak König's lemma, and it serves as an upper bound for the theorems of analysis classified in the next two lessons. To state the equivalence, Weihrauch reducibility is extended from problems on sets of numbers to problems on represented spaces.

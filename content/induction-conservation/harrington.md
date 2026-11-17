@@ -1,7 +1,7 @@
 ---
 title: Harrington's conservation theorem
 summary: WKL₀ proves the same Π¹₁ sentences as RCA₀ (Harrington), by iterating the addition of generic paths over a countable model; the first-order part of WKL₀ and the partial realization of Hilbert's program.
-duration: 30
+duration: 25
 prerequisites: [forcing-subtrees, pigeonhole]
 ---
 

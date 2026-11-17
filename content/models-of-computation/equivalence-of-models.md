@@ -1,7 +1,7 @@
 ---
 title: Equivalence of the models
 summary: Arithmetization of Turing machines, proof of Kleene's normal form theorem, simulation of register machines by Turing machines, and the universal partial recursive function.
-duration: 45
+duration: 40
 prerequisites: [while-programs, lambda-definability, multitape-machines]
 ---
 

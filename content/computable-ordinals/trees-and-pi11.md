@@ -1,7 +1,7 @@
 ---
 title: Π¹₁ sets and Kleene's O
 summary: The analytic sets Π¹₁ and Σ¹₁, Kleene's normal form by well-founded trees, and the Π¹₁-completeness of well-foundedness, of well-ordering and of Kleene's O.
-duration: 45
+duration: 40
 prerequisites: [well-founded-trees, markwald]
 ---
 

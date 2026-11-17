@@ -1,7 +1,7 @@
 ---
 title: PA avoidance
 summary: PA avoidance and strong PA avoidance as properties of problems; ω-models without PA sets; merging forcing questions relative to the condition and the abstract PA avoidance theorem.
-duration: 45
+duration: 40
 prerequisites: [avoidance/strong-cone-avoidance, big-five/wkl0]
 ---
 

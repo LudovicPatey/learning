@@ -1,7 +1,7 @@
 ---
 title: The pigeonhole principle for Δ⁰₂ sets
 summary: Every Δ⁰₂ set has an infinite subset, of itself or of its complement, whose jump is computed by any given set PA relative to ∅′ (Cholak–Jockusch–Slaman); the proof runs the Dzhafarov–Jockusch forcing effectively over a low code of a Scott ideal.
-duration: 45
+duration: 35
 prerequisites: [beyond-zero-jump, uniform-lowness, avoidance/disjunctive-question, ramsey-theorem/cone-avoidance, ramsey-theorem/stable-colorings, ramsey-theorem/triples]
 ---
 

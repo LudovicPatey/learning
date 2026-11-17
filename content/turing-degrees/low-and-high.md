@@ -1,7 +1,7 @@
 ---
 title: Low and high sets
 summary: Sets whose jump is as small or as large as possible; 1-generic sets are generalized low, so non-computable low sets exist; high sets that avoid a cone.
-duration: 45
+duration: 35
 prerequisites: [limit-computability, finite-extensions]
 ---
 

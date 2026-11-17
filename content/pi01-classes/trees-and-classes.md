@@ -1,7 +1,7 @@
 ---
 title: Π⁰₁ classes and effective compactness
 summary: The Π⁰₁ classes as sets of paths through computable trees, their equivalent descriptions, examples, and the Σ⁰₁ complexity of emptiness.
-duration: 30
+duration: 25
 prerequisites: [cantor-space, arithmetic-hierarchy/post-theorem]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Stages of Π¹₁ classes
 summary: A Π¹₁ class is the increasing union of its stages along the countable ordinals; a sequence Y enters at a stage below ω₁ʸ; the stages below ω₁ᶜᵏ are Δ¹₁, and every Δ¹₁ class is such a stage, by the boundedness theorem for classes.
-duration: 45
+duration: 40
 prerequisites: [descriptive-set-theory/uniformization, hyperarithmetic/sigma11-classes]
 ---
 

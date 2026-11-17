@@ -21,4 +21,4 @@ objectives:
   - Build ω-extensions of models of arithmetic from definable sets
   - Prove that RCA₀ and ACA₀ are conservative over IΣ₁ and Peano arithmetic
   - Prove Harrington's conservation theorem by forcing over a non-standard model
-lessons: [induction-collection, collection-induction, separations, pigeonhole, first-order-parts, forcing-subtrees, harrington]
+lessons: [induction-collection, collection-induction, definable-elements, separations, pigeonhole, first-order-parts, forcing-subtrees, harrington]

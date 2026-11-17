@@ -1,7 +1,7 @@
 ---
 title: Closure properties and complete sets
 summary: Closure properties of the c.e. sets, the selection and graph theorems, and the m-completeness of the halting set.
-duration: 35
+duration: 25
 prerequisites: [ce-sets]
 ---
 

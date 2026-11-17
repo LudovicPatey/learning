@@ -1,7 +1,7 @@
 ---
 title: Custom properties and immunity
 summary: Separations between Ramsey-type problems need weakness properties designed for the pair of problems; solutions closed under subsets are immune; hyperimmunity, constant-bound immunity and effective immunity as strengthenings of immunity; the property preserved by weak König's lemma read off its forcing question.
-duration: 45
+duration: 40
 prerequisites: [avoidance/hyperimmunities, compactness-avoidance/dnc-avoidance, immunity-growth/dnc-functions, pi01-classes/finitely-branching-trees]
 ---
 

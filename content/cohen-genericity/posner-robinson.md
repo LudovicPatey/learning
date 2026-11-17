@@ -1,7 +1,7 @@
 ---
 title: The Posner–Robinson theorem
 summary: Coding a set into a 1-generic set so that it can be decoded with any non-computable set; the Posner–Robinson join theorem and Friedberg's jump inversion theorem.
-duration: 40
+duration: 35
 prerequisites: [one-genericity]
 ---
 

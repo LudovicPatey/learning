@@ -1,7 +1,7 @@
 ---
 title: Scott sets as standard systems, and Tennenbaum's theorem
 summary: Every countable Scott set is the standard system of a model of Peano arithmetic, built from a chain of completions inside the Scott set (Scott); the Scott set problem; the standard system of a non-standard model contains non-computable sets, and no non-standard model of IΔ₀ + exp has a computable addition (Tennenbaum).
-duration: 45
+duration: 35
 prerequisites: [weak-konig-cuts, pi01-classes/pa-degrees, truth-and-provability/truth-definitions]
 ---
 

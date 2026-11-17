@@ -1,7 +1,7 @@
 ---
 title: Diagonally non-computable functions
 summary: DNC and fixed-point free functions compute each other, and the DNC degrees are the degrees of effectively immune sets; DNC functions avoid every c.e. set of known bounded size.
-duration: 45
+duration: 35
 prerequisites: [immune-sets, fundamentals/fixed-point, pi01-classes/pa-degrees]
 ---
 

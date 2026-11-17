@@ -1,7 +1,7 @@
 ---
 title: The Paris–Harrington principle
 summary: Relatively large homogeneous sets and the Paris–Harrington principle; its truth, from the infinite Ramsey theorem and König's lemma; each instance of fixed arity is provable in ACA₀, hence in Peano arithmetic.
-duration: 35
+duration: 30
 prerequisites: [indicators, ramsey-theorem/triples, big-five/aca0-reversals, induction-conservation/first-order-parts]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: The arithmetized completeness theorem
 summary: Provability and consistency inside a model of IΣ₁; Henkin's proof of the completeness theorem carried out in the model, with a path through the tree of completions given by the low basis theorem; a theory consistent in M has a model that is an end extension of M, with an elementary diagram Δ₂-definable in M.
-duration: 45
+duration: 40
 prerequisites: [low-basis-isigma1, truth-and-provability/bounded-satisfaction, pi01-classes/pa-degrees]
 ---
 

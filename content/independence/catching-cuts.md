@@ -1,7 +1,7 @@
 ---
 title: Catching a semiregular cut
 summary: Between a and F_ν(a), for ν non-standard, a countable model of IΣ₁ contains a semiregular cut, hence a cut satisfying IΣ₁ (Kirby and Paris); the proof is a construction by finite extensions along a decreasing index.
-duration: 30
+duration: 20
 prerequisites: [fast-growing, cuts-and-extensions/semiregular-cuts]
 ---
 

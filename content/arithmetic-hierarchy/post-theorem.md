@@ -1,7 +1,7 @@
 ---
 title: Post's theorem
 summary: The levels of the arithmetic hierarchy are the sets c.e. or computable in the iterated jumps; the iterated jumps are complete at each level; the hierarchy is strict.
-duration: 40
+duration: 25
 prerequisites: [sigma-pi-sets]
 ---
 

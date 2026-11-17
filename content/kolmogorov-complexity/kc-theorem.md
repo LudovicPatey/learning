@@ -1,7 +1,7 @@
 ---
 title: The KC theorem
 summary: Prefix-free machines can be built from c.e. sets of requests of total weight at most 1; K is the least right-c.e. function satisfying the Kraft inequality.
-duration: 35
+duration: 25
 prerequisites: [prefix-free-complexity]
 ---
 

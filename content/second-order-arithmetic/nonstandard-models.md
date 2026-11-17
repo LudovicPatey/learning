@@ -1,7 +1,7 @@
 ---
 title: Non-standard models
 summary: Non-standard models of arithmetic and of RCA₀; full structures have a standard first-order part; overspill; the standard part is never a set of a model of RCA₀; finite versus bounded sets.
-duration: 40
+duration: 35
 prerequisites: [rca0]
 ---
 

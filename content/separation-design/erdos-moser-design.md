@@ -1,7 +1,7 @@
 ---
 title: Designing a notion of forcing
 summary: How a notion of forcing for a Ramsey-type problem is designed, on the example of the Erdős–Moser theorem; extendibility and block extendibility of the stems; the forcing question over all partitions of the reservoir.
-duration: 45
+duration: 40
 prerequisites: [custom-properties, avoidance/seetapun-forcing]
 ---
 

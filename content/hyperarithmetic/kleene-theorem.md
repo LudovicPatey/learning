@@ -1,7 +1,7 @@
 ---
 title: The hyperarithmetic sets are the Δ¹₁ sets
 summary: The H-sets are uniformly Δ¹₁ along O; quantification over hyperarithmetic sets is Π¹₁; H-sets compute the sets of trees of bounded rank; Kleene's theorem that a set is hyperarithmetic if and only if it is Δ¹₁, through Spector's boundedness theorem.
-duration: 45
+duration: 35
 prerequisites: [spector-uniqueness, computable-ordinals/markwald, computable-ordinals/trees-and-pi11, computable-ordinals/boundedness]
 ---
 

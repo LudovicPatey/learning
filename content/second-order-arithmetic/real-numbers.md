@@ -1,7 +1,7 @@
 ---
 title: Real numbers in RCA₀
 summary: Real numbers as fast Cauchy sequences of rationals; order is Σ⁰₁ and equality Π⁰₁; RCA₀ proves completeness for sequences with a modulus of convergence; Specker sequences show that RCA₀ does not prove the monotone convergence theorem.
-duration: 30
+duration: 25
 prerequisites: [rca0]
 ---
 

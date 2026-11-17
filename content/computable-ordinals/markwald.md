@@ -1,7 +1,7 @@
 ---
 title: The Markwald–Kleene theorem
 summary: Every computable ordinal has a notation in Kleene's O, by effective transfinite recursion along a computable well-ordering; the conversion only gives upper bounds; relativization and the ordinals ω₁ˣ.
-duration: 25
+duration: 20
 prerequisites: [kleene-o]
 ---
 

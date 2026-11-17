@@ -1,7 +1,7 @@
 ---
 title: Types of bounded complexity
 summary: Satisfaction for the formulas of a type through partial truth definitions; the Σₙ and Πₙ types of a tuple are coded in a non-standard model of IΣₙ; coded types of Σₙ₊₁ formulas, and of Πₙ₊₁ formulas with a bound, are realized by overspill; a model of IΣ₁ + BΣₙ₊₁ is Σₙ₊₁-recursively saturated exactly when the standard cut is not Σₙ₊₁-definable (Friedman).
-duration: 25
+duration: 20
 prerequisites: [recursively-saturated-models, truth-and-provability/truth-definitions, truth-and-provability/provably-total, fragments-of-arithmetic/coded-sets]
 ---
 

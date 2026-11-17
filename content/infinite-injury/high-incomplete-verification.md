@@ -1,8 +1,8 @@
 ---
 title: Verification of the high incomplete construction
 summary: The diagonalization requirements of the high incomplete construction; a coding node with infinite outcome never enumerates a number below the restraint of a node acting below that outcome; end of the proof of Sacks' theorem; further results on the c.e. degrees.
-duration: 35
-prerequisites: [high-incomplete, minimal-pair-verification]
+duration: 30
+prerequisites: [high-incomplete-construction, minimal-pair-verification]
 ---
 
 The previous lesson built the c.e. sets $H$ and $C$ on a tree of strategies and showed that $H$ is high. It remains to show that $C \not\leq_T H$: for every $i$, the $\mathcal P_i$-node $\beta$ on the true path meets $\mathcal P_i$. Once $\beta$ has acted at a stage $s_0$, it suffices that no number below $s_0$ enters $H$ afterwards. As in the verification of the minimal pair theorem (:ref{#lem-mp-one-side}), this is proved by a case analysis on the position, relative to $\beta$, of a node that could enumerate such a number.

@@ -1,7 +1,7 @@
 ---
 title: Relativization
 summary: Computability and enumerability relative to an oracle; the relativized universal function and SMN theorem, uniform in the oracle; functions as oracles.
-duration: 35
+duration: 25
 prerequisites: [oracle-computation, fundamentals/rice-theorem]
 ---
 

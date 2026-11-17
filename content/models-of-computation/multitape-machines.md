@@ -1,7 +1,7 @@
 ---
 title: Variants of Turing machines
 summary: Multi-tape machines and their simulation by single-tape machines; other variants of the model, which compute the same partial functions.
-duration: 30
+duration: 25
 prerequisites: [programming-turing-machines]
 ---
 

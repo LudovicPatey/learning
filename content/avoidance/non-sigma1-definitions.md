@@ -1,7 +1,7 @@
 ---
 title: Preservation of non-Σ⁰₁ definitions
 summary: A problem preserves non-Σ⁰₁ definitions if its solutions never make a non-Σ⁰₁ set Σ⁰₁; this implies cone avoidance, and is equivalent to it by a theorem of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky; the forcing question proves it directly for WKL, COH, the pigeonhole principle and Ramsey's theorem for pairs.
-duration: 45
+duration: 35
 prerequisites: [seetapun-forcing, arithmetic-hierarchy/post-theorem]
 ---
 

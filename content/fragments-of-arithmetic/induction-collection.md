@@ -1,7 +1,7 @@
 ---
 title: Induction and collection
 summary: The schemes IΣₙ, IΠₙ, LΣₙ, LΠₙ and BΣₙ in first-order arithmetic; Σₙ and Πₙ induction are equivalent; collection closes Σₙ and Πₙ under bounded quantification (Parsons); IΣₙ proves BΣₙ (Parsons); BΣₙ₊₁ proves IΣₙ (Paris and Kirby); the hierarchy and its strictness.
-duration: 45
+duration: 35
 prerequisites: [bounded-induction]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Weak 2-randomness
 summary: Sequences avoiding every null Π⁰₂ class; 2-randomness implies weak 2-randomness, which implies Martin-Löf randomness, both strictly; no universal test; the theorem of Downey, Nies, Weber and Yu and of Hirschfeldt and Miller that a random sequence is weakly 2-random exactly when it computes no non-computable c.e. set.
-duration: 45
+duration: 35
 prerequisites: [relative-randomness, martin-lof-randomness/upper-cones, martingales/randomness-hierarchy]
 ---
 

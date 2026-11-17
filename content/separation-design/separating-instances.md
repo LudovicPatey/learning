@@ -1,7 +1,7 @@
 ---
 title: Building the separating instances
 summary: A Δ⁰₂ constant-bound immune set meeting every DNC degree, so that CAC implies neither DNC nor RT²₂; a stable partial order defeating dependent hyperimmunity, so that ADS does not imply SCAC.
-duration: 45
+duration: 40
 prerequisites: [chain-antichain, ascending-descending, immunity-growth/dnc-functions, turing-degrees/limit-computability]
 ---
 

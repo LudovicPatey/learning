@@ -1,7 +1,7 @@
 ---
 title: Indiscernible types and automorphism groups
 summary: Realizations of a minimal type are indiscernible; realizing a minimal type along a linear order gives a model that is the ground model followed by one gap for each element of the order; every completion of PA has models whose automorphism group is that of any given linear order, and rigid models of every infinite cardinality.
-duration: 35
+duration: 25
 prerequisites: [minimal-types]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Low bases for problems
 summary: A problem admits a low basis if every instance has a solution that is low relative to the instance; such problems have ω-models consisting of low sets, which separates them from the jump, from cohesiveness and from Ramsey's theorem for pairs; low solutions also control the second jump.
-duration: 40
+duration: 30
 prerequisites: [avoidance/avoidance-properties, effective-forcing/mathias-forcing, reducibilities/preservation, ramsey-theorem/cohesiveness, ramsey-theorem/triples, turing-degrees/low-and-high, arithmetic-hierarchy/post-theorem]
 ---
 

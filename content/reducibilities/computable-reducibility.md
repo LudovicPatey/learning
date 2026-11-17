@@ -1,7 +1,7 @@
 ---
 title: Computable reducibility
 summary: Reductions that use a single instance of the stronger problem; computable and strong computable reducibility; problems that admit computable solutions; König's lemma is ω-reducible but not computably reducible to the jump; computable reducibility and provability over RCA₀ are incomparable.
-duration: 30
+duration: 25
 prerequisites: [preservation]
 ---
 

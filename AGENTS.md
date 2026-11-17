@@ -16,7 +16,8 @@ This file is the memory of the project. Read it fully before changing anything, 
 - **Level of detail: a lecture course.** Each lesson has the detail of a lecture given to students: full definitions with all conventions made explicit (input/output conventions, partiality), complete proofs, the intuition behind each definition and proof, worked examples verified in detail, figures where a picture helps, exercises with solutions. Pedagogy is the key criterion: clarity first. A course may take several hours.
 - **Mathematical correctness first.** Every statement, proof, quiz answer and explanation must be checked. When a result is admitted without proof, say so explicitly and give a reference.
 - **American spelling** (formalize, behavior), en dashes for ranges (1931–1936), em dashes without surrounding hyphens.
-- **Small courses, small lessons.** A course is a short series of lessons on one topic; a lesson treats one notion or theorem (25–45 minutes of reading for the detailed courses). Prerequisites are explicit, at both levels.
+- **Small courses, small lessons.** A course is a short series of lessons on one topic; a lesson treats one notion or theorem, in at most 45 minutes of reading. Prerequisites are explicit, at both levels.
+- **Reading time.** The `duration` of a lesson is the reading time of its **open text**, the text shown when the page loads: the body without figures (SVG), quizzes, solutions, hints and further exercises, at 55 words per minute (formulas count as words), rounded to a multiple of 5 minutes (`src/lib/reading-time.ts`). `npm run check-content` reports a wrong duration and a lesson over 45 minutes; `npm run durations -- --write` sets the durations. A lesson over 45 minutes is split at a natural point into two lessons, each with its own introduction, prerequisites and references; labels move with their statements, and the slug of the original lesson stays with the part that other lessons depend on.
 - **Tracks and specialized courses.** `content/tracks.yaml` lists the learning tracks, each an ordered sequence of core courses in one area. **Primary tracks** are the main sequences (computability, randomness, reverse mathematics, higher computability): the home page shows one dependency graph per primary track, with only the edges inside the track; prerequisites on other tracks are shown as "Builds on". **Secondary tracks** (`kind: secondary`: lowness and avoidance, models of arithmetic) are research-oriented continuations, shown with the primary ones on the page of all tracks (`/tracks`) only. A course in no track is a **specialized course**: it appears in the searchable catalogue (`/courses`) and on course pages, never in the graphs. Keep tracks short enough to be readable; add new advanced topics as specialized courses unless they belong to a main sequence.
 
 ### Designing tracks and courses
@@ -85,6 +86,7 @@ These rules apply to every new track and course, and to every revision of an exi
 | `src/lib/katex-macros.ts` | LaTeX macros available in lessons (from the book's preamble) |
 | `src/lib/db.ts`, `auth.ts`, `orcid.ts`, `comments.ts` | SQLite storage, sessions, ORCID OAuth, reader remarks and endorsements of exercises (development server) |
 | `deploy/api/` | The same API in PHP, for the live site on PHP hosting; keep it in step with `src/app/api/` (`tests/php-api.test.ts`) |
+| `src/lib/reading-time.ts`, `scripts/durations.ts` | Reading time of a lesson (open text), checked by `check-content`, set by `npm run durations -- --write` |
 | `src/lib/deploy.ts`, `scripts/build-static.ts`, `scripts/deploy.ts` | Static export and upload to the web hosting: `docs/DEPLOY.md` |
 | `src/components/pages/` | Lesson and course pages, shared by current and released versions |
 | `src/components/LessonView.tsx`, `anchoring.ts`, `CommentsPanel.tsx` | Reading view, text-anchored remarks |
@@ -154,7 +156,8 @@ The objective is Markdown with math; write a double quote inside it as `&quot;`.
 npm run dev            # development server
 npm run verify         # type-check + tests + content check: run before finishing any task
 npm test               # unit tests only
-npm run check-content  # validates all lessons (broken references, malformed quizzes)
+npm run check-content  # validates all lessons (broken references, malformed quizzes, durations)
+npm run durations -- --write  # set the duration of every lesson from its open text
 npm run release -- models-of-computation 1.1 "Corrections in lesson 7"
 npm run build
 npm run build:static          # static site for the web hosting, in out/; npm run preview:static serves it

@@ -1,7 +1,7 @@
 ---
 title: Stable linear orders
 summary: In a computable stable linear order, the elements with finitely many predecessors form a Δ⁰₂ set whose complement is hyperimmune unless a computable solution exists; so every computable stable linear order has a low ascending or descending sequence (Hirschfeldt–Shore).
-duration: 25
+duration: 20
 prerequisites: [weak-preservation, low-bases]
 ---
 

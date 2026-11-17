@@ -1,7 +1,7 @@
 ---
 title: Countable constructions
 summary: Products, countable unions with given enumerations and finite strings over countable sets are countable; so are the finite sets of integers, the rationals and the algebraic numbers.
-duration: 40
+duration: 30
 prerequisites: [countable-sets, models-of-computation/what-is-an-algorithm]
 ---
 

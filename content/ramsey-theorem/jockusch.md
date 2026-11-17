@@ -1,7 +1,7 @@
 ---
 title: Ramsey's theorem in the arithmetic hierarchy
 summary: Ramsey's theorem for n-tuples; pre-homogeneous sets and the Erdős–Radó tree; every coloring of n-tuples has a homogeneous set computable in any degree PA over its (n−1)-st jump.
-duration: 50
+duration: 40
 prerequisites: [big-five/wkl0]
 ---
 

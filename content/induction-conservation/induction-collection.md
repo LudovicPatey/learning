@@ -1,7 +1,7 @@
 ---
 title: Induction, collection and least numbers
 summary: The schemes of Σ⁰ₙ and Π⁰ₙ induction, collection and least number principles; closure of the classes Σ⁰ₙ under bounded quantification in the presence of collection; Σ⁰ₙ and Π⁰ₙ induction are equivalent; Σ⁰ₙ induction implies Σ⁰ₙ collection and the least number principles.
-duration: 50
+duration: 45
 prerequisites: [second-order-arithmetic/rca0]
 ---
 

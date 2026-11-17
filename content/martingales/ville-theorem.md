@@ -1,7 +1,7 @@
 ---
 title: Ville's theorem and the savings trick
 summary: The success set of a supermartingale is null, and every null class is contained in the success set of a martingale (Ville); von Mises's selection rules and Ville's critique; the savings trick turns success into convergence of the capital to infinity.
-duration: 35
+duration: 30
 prerequisites: [betting-strategies]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Merging by duplication
 summary: Two negative answers of product Mathias forcing are merged by duplicating the reservoirs, and the generic set has a jump that is not PA relative to ∅′; the theorem of Monin and Patey for Δ⁰₂ sets, and why a pair of stems with product reservoirs may have no valid side.
-duration: 35
+duration: 30
 prerequisites: [product-mathias, jump-cone-avoidance/pigeonhole-forcing, lowness/cjs-theorem, ramsey-theorem/cone-avoidance]
 ---
 

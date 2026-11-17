@@ -1,7 +1,7 @@
 ---
 title: Cohesiveness and restricted reservoirs
 summary: Restricting Mathias reservoirs to Boolean combinations along a path of decisions gives cohesive sets avoiding a cone and a jump cone at once.
-duration: 45
+duration: 35
 prerequisites: [sigma2-questions, ramsey-theorem/cohesiveness]
 ---
 

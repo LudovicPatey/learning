@@ -1,7 +1,7 @@
 ---
 title: Linear orders and dependent hyperimmunity
 summary: The forcing for the ascending–descending sequence principle; its question over split pairs is answered negatively only when the condition already forces one of the two negations; dependent hyperimmunity of a pair of sets; ADS preserves it.
-duration: 40
+duration: 30
 prerequisites: [chain-antichain]
 ---
 

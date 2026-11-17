@@ -1,7 +1,7 @@
 ---
 title: Back-and-forth and the classification of countable models
 summary: Two countable recursively saturated models of IΔ₀ + exp are isomorphic if and only if they have the same theory and the same standard system; countable recursively saturated models are homogeneous; every countable Scott set containing a completion T of PA is the standard system of a countable recursively saturated model of T, so that these models are classified by their standard systems.
-duration: 40
+duration: 35
 prerequisites: [recursively-saturated-models]
 ---
 

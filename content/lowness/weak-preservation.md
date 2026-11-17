@@ -1,7 +1,7 @@
 ---
 title: Weak preservation
 summary: To build low sets, a forcing question needs only to be decided by ∅′, not to be Σ⁰₁; every Σ⁰₂ set whose complement is hyperimmune has an infinite low subset (Jockusch); both hypotheses are needed.
-duration: 35
+duration: 30
 prerequisites: [forcing-the-jump, immunity-growth/immune-sets, avoidance/forcing-question-method]
 ---
 

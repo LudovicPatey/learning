@@ -1,7 +1,7 @@
 ---
 title: Σ¹₁ classes and their members
 summary: Σ¹₁ classes as projections of closed sets of Baire space; a computable tree with paths but no hyperarithmetic path; the Kleene basis theorem; the Gandy basis theorem (admitted).
-duration: 30
+duration: 20
 prerequisites: [kleene-theorem, pi01-classes/computable-members, computable-ordinals/boundedness]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Coding finite sets
 summary: Ackermann's coding of finite sets by binary expansions, in IΔ₀ + exp; splitting, insertion and removal, extensionality; comprehension for bounded formulas.
-duration: 35
+duration: 30
 prerequisites: [parikh]
 ---
 

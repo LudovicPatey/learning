@@ -1,7 +1,7 @@
 ---
 title: Trees and the jump in IΣ₁
 summary: Binary trees and their paths inside a model of IΣ₁; the Σ₁ properties of a path, indexed by the jump of the path over the model; the order of guesses on strings, and the Kreisel basis theorem in IΣ₁ obtained from the least number principle for Π₁ formulas.
-duration: 30
+duration: 25
 prerequisites: [cuts-and-extensions/weak-konig-cuts, truth-and-provability/truth-definitions, pi01-classes/computable-members, pi01-classes/basis-theorems]
 ---
 

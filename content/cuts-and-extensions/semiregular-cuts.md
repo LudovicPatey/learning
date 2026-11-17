@@ -1,7 +1,7 @@
 ---
 title: Semiregular cuts
 summary: Semiregular cuts, in which no coded function on a bounded domain has values cofinal in the cut; they are closed under addition and multiplication, and with their coded subsets they satisfy Σ⁰₁ induction (Kirby and Paris).
-duration: 35
+duration: 30
 prerequisites: [weak-konig-cuts]
 ---
 

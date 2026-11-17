@@ -1,7 +1,7 @@
 ---
 title: Uniform lowness
 summary: Lowness indices name low sets so that ∅′ computes their jumps uniformly, and the low basis theorem holds with lowness indices; a low code of a Scott ideal lets ∅′ answer Σ⁰₁ questions about all members of the ideal, and about their joins, uniformly in their indices.
-duration: 30
+duration: 25
 prerequisites: [coded-ideals, arithmetic-hierarchy/codes, pi01-classes/basis-theorems]
 ---
 

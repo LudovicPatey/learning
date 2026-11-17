@@ -1,7 +1,7 @@
 ---
 title: Iterating the jump along notations
 summary: The H-sets, iterating the Turing jump along Kleene's notations; their basic reductions; effective transfinite recursion, and the uniformity of the reductions between H-sets.
-duration: 35
+duration: 30
 prerequisites: [computable-ordinals/kleene-o]
 ---
 

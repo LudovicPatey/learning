@@ -1,7 +1,7 @@
 ---
 title: Resplendence
 summary: Craig's trick; every countable recursively saturated structure is resplendent, and expands to a model of any recursive theory with finitely many parameters consistent with its elementary diagram (Barwise, Ressayre); a countable non-standard model of PA is recursively saturated exactly when it carries an inductive satisfaction class for standard formulas.
-duration: 45
+duration: 35
 prerequisites: [recursively-saturated-models]
 ---
 

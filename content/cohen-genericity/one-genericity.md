@@ -1,7 +1,7 @@
 ---
 title: 1-generic sets
 summary: Forcing Σ⁰₁ and Π⁰₁ properties with strings; 1-generic sets decide them by a prefix; no 1-generic set is DNC; relativized cone avoidance; meager classes of degrees.
-duration: 45
+duration: 40
 prerequisites: [weak-genericity, turing-degrees/low-and-high, immunity-growth/dnc-functions]
 ---
 

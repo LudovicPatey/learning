@@ -1,7 +1,7 @@
 ---
 title: Turing reducibility and degrees
 summary: Turing reducibility, the partial order of Turing degrees, the join as least upper bound, countability of lower cones, and relative computable enumerability.
-duration: 45
+duration: 35
 prerequisites: [relativization, fundamentals/complete-sets]
 ---
 

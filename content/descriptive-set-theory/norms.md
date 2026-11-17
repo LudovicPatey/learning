@@ -1,7 +1,7 @@
 ---
 title: Π¹₁ norms and stage comparison
 summary: The rank of the normal-form tree as a stage at which an element enters a Π¹₁ set; comparison of ranks by strictly monotone maps; the stage comparison relations are Π¹₁, so the stage map is a Π¹₁ norm and the Π¹₁ sets have the prewellordering property.
-duration: 45
+duration: 40
 prerequisites: [hyperarithmetic/kleene-theorem]
 ---
 

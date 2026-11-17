@@ -1,7 +1,7 @@
 ---
 title: Lower bounds and Ramsey's theorem for triples
 summary: A computable coloring of pairs without Δ⁰₂ homogeneous set; a Δ⁰₂ coloring of n-tuples is the limit of a computable coloring of (n+1)-tuples; a computable coloring of triples codes the halting set into all its homogeneous sets; Ramsey's theorem for n-tuples, n ≥ 3, is equivalent to ACA₀; WKL₀ does not prove Ramsey's theorem for pairs.
-duration: 50
+duration: 35
 prerequisites: [jockusch]
 ---
 

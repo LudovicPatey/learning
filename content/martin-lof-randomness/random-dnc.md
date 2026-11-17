@@ -1,7 +1,7 @@
 ---
 title: Random sequences and DNC functions
 summary: A set computes a DNC function exactly when it computes a sequence of strings of high prefix-free complexity; every Martin-Löf random sequence computes a DNC function; infinite subsets of random sequences.
-duration: 30
+duration: 25
 prerequisites: [randomness-and-degrees, immunity-growth/dnc-functions, immunity-growth/arslanov]
 ---
 

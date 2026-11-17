@@ -1,7 +1,7 @@
 ---
 title: Guessing on a tree of strategies
 summary: The strategy for a minimal pair requirement and its two outcomes; why the strategies of lower priority must guess the outcome; the tree of strategies, its priority order, and the construction along the current path, with initialization to the right of the current path.
-duration: 45
+duration: 35
 prerequisites: [minimal-pairs]
 ---
 

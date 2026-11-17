@@ -1,7 +1,7 @@
 ---
 title: Partial orders and constant-bound immunity
 summary: The chain–antichain principle; forcing with an ascending, a descending and an antichain stem over a computable reservoir; split triples; preservation of constant-bound immunity.
-duration: 45
+duration: 40
 prerequisites: [erdos-moser-hyperimmunities, avoidance/disjunctive-question]
 ---
 

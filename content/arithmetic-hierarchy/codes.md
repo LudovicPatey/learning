@@ -1,7 +1,7 @@
 ---
 title: Codes for sets
 summary: Indices of computable, c.e., finite and low sets; the information each kind of index provides, and fixed point arguments showing what cannot be recovered uniformly.
-duration: 45
+duration: 35
 prerequisites: [post-theorem, fundamentals/fixed-point, turing-degrees/low-and-high]
 ---
 

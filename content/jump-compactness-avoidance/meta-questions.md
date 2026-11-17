@@ -1,7 +1,7 @@
 ---
 title: Questions on meta-conditions
 summary: Promises for Π⁰₂ sentences on the parts of a meta-condition, kept by descendants and made true on valid parts; a Σ⁰₂ question about a set of branches, which uses that the instance is Δ⁰₂; its positive answers are witnessed on one branch at the same level, its negative answers by promises on all branches; weak merging of two answers out of 2uₙ + 1 by triplication of the index set.
-duration: 45
+duration: 35
 prerequisites: [meta-conditions]
 ---
 

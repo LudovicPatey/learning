@@ -1,7 +1,7 @@
 ---
 title: The low basis theorem in IΣ₁
 summary: Every unbounded Δ₁-definable binary tree of a model of IΣ₁ has a path whose jump is Δ₂-definable in the model, obtained by choosing at each length the least guess that keeps the tree unbounded; the classical low basis theorem, and the relativization to IΣₘ₊₁.
-duration: 35
+duration: 30
 prerequisites: [trees-isigma1, pi01-classes/basis-theorems]
 ---
 

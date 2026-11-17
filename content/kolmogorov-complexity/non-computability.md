@@ -1,7 +1,7 @@
 ---
 title: The complexity function is not computable
 summary: No algorithm certifies large complexity (the Berry paradox and Chaitin's incompleteness theorem); C is approximable from above and Turing equivalent to the halting problem; the lower envelope of C grows more slowly than every computable unbounded function.
-duration: 40
+duration: 30
 prerequisites: [plain-complexity, turing-degrees/turing-reducibility]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Countable sets
 summary: Characterizations of countable sets by injections into ℕ and by listings with repetitions; subsets of ℕ; every infinite set has a countably infinite subset.
-duration: 35
+duration: 25
 prerequisites: [cantor-bernstein]
 ---
 

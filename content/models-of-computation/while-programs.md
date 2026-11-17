@@ -1,7 +1,7 @@
 ---
 title: WHILE programs
 summary: Structured programs with unbounded loops. The WHILE-computable functions are the partial recursive functions, a single while loop suffices, and WHILE programs translate into register machines.
-duration: 30
+duration: 25
 prerequisites: [loop-programs]
 ---
 

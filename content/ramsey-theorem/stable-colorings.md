@@ -1,7 +1,7 @@
 ---
 title: Stable colorings and the decomposition
 summary: Stable colorings of pairs and their limit sets; stable Ramsey's theorem is equivalent to the statement that every Δ⁰₂ set has an infinite subset in it or in its complement; Ramsey's theorem for pairs is equivalent to COH + SRT²₂ over RCA₀.
-duration: 45
+duration: 35
 prerequisites: [cohesiveness]
 ---
 

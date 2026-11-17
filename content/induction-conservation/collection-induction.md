@@ -1,7 +1,7 @@
 ---
 title: Cuts, collection and the hierarchy
 summary: Overspill in models of Σ⁰ₙ induction; Σ⁰ₙ₊₁ collection implies Σ⁰ₙ induction; the hierarchy IΣ⁰ₙ₊₁ ⇒ BΣ⁰ₙ₊₁ ⇒ IΣ⁰ₙ; Σ⁰ₙ₊₁ collection is Π⁰ₙ collection.
-duration: 30
+duration: 20
 prerequisites: [induction-collection, second-order-arithmetic/nonstandard-models]
 ---
 

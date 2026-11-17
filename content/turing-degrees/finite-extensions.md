@@ -1,7 +1,7 @@
 ---
 title: The finite extension method
 summary: Constructions by finite extensions; the Kleene–Post theorem on incomparable degrees below 0′; avoiding the cone above a non-computable set; 1-generic sets.
-duration: 45
+duration: 40
 prerequisites: [turing-jump, countability/requirements]
 ---
 

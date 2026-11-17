@@ -1,7 +1,7 @@
 ---
 title: Moduli and preservation of hyperimmunity
 summary: Moduli and the duality between computing a set and computing fast-growing functions; a problem preserves hyperimmunity if its solutions never compute a function dominating a given hyperimmune one; this implies cone avoidance, and is equivalent to it by a theorem of Downey, Greenberg, Harrison-Trainor, Patey and Turetsky.
-duration: 30
+duration: 25
 prerequisites: [non-sigma1-definitions, turing-degrees/limit-computability, immunity-growth/immune-sets]
 ---
 

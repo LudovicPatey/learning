@@ -1,7 +1,7 @@
 ---
 title: Weihrauch reducibility
 summary: Uniform computable reductions; problems that uniformly admit computable solutions, and the pigeonhole principle as a problem that admits computable solutions but not uniformly; continuity arguments; the omniscience principles LPO and LLPO.
-duration: 40
+duration: 35
 prerequisites: [wkl-reductions]
 ---
 

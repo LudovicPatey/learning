@@ -1,7 +1,7 @@
 ---
 title: Weak König's lemma in cuts
 summary: Binary strings coded by numbers in IΔ₀ + exp; every unbounded binary tree coded in a proper exponential cut has an unbounded coded branch (Scott); the standard system of a non-standard model of IΔ₀ + exp is a Scott set.
-duration: 40
+duration: 30
 prerequisites: [standard-system]
 ---
 

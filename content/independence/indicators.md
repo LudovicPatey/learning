@@ -1,7 +1,7 @@
 ---
 title: Indicators and the provably total functions of IΣ₁
 summary: Indicators for cuts satisfying a theory T; the main theorem on indicators gives a true Π₂ sentence unprovable in T and a bound on the T-provably total functions; the hierarchy F_k gives an indicator for IΣ₁; hence IΣ₁ does not prove that all F_k are total, and every function provably total in IΣ₁ is primitive recursive (Parsons, Mints, Takeuti).
-duration: 45
+duration: 40
 prerequisites: [catching-cuts, models-of-computation/primitive-recursion]
 ---
 

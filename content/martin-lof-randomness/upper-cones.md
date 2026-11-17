@@ -1,7 +1,7 @@
 ---
 title: Upper cones are null
 summary: Relative measure and the Lebesgue density lemma; Sacks's theorem that the upper cone of a non-computable set is null, by the majority vote technique.
-duration: 30
+duration: 20
 prerequisites: [levin-schnorr]
 ---
 

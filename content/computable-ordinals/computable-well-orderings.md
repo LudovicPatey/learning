@@ -1,7 +1,7 @@
 ---
 title: Computable well-orderings
 summary: Computable and c.e. well-orderings, their closure properties, the Church–Kleene ordinal, the index set WO, and the information that an index of a well-ordering does not reveal.
-duration: 40
+duration: 30
 prerequisites: [ordinals, fundamentals/ce-sets]
 ---
 

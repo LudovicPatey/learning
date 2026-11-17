@@ -1,7 +1,7 @@
 ---
 title: The base theory RCA₀
 summary: Δ⁰₁ comprehension and Σ⁰₁ induction; consequences of Σ⁰₁ induction; the ω-models of RCA₀ are the Turing ideals; the computable sets form the least ω-model, and non-provability in RCA₀ follows from computability-theoretic constructions.
-duration: 40
+duration: 30
 prerequisites: [language-and-models, pi01-classes/computable-members]
 ---
 

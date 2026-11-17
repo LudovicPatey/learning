@@ -1,7 +1,7 @@
 ---
 title: First consequences of PA avoidance
 summary: The table of examples; cohesiveness admits PA avoidance; every set is Δ⁰₂ relative to a set that is not PA, so that strong PA avoidance reduces to Δ⁰₂ instances; PA avoidance implies cone avoidance, by the Posner–Robinson theorem.
-duration: 35
+duration: 30
 prerequisites: [pa-avoidance, cohen-genericity/posner-robinson]
 ---
 

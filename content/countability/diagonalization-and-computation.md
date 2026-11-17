@@ -1,7 +1,7 @@
 ---
 title: Diagonalization and computation
 summary: Counting arguments; effective diagonalization against uniformly computable sequences; partial functions and the halting set.
-duration: 40
+duration: 30
 prerequisites: [continuum, models-of-computation/equivalence-of-models, models-of-computation/ackermann-function]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Continuous functions in RCA₀
 summary: Codes for continuous functions on [0, 1] and their evaluation in RCA₀; comparisons of values with reals are Σ⁰₁; RCA₀ proves the intermediate value theorem by a non-uniform bisection.
-duration: 35
+duration: 30
 prerequisites: [real-numbers]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: The core of a cohesive class
 summary: The core of a cohesive class is partition regular and minimal; a set PA relative to the jump of the code computes a cohesive class.
-duration: 45
+duration: 30
 prerequisites: [largeness, lowness/beyond-zero-jump]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Least numbers, definable cuts and overspill
 summary: The least number principles for Σₙ and Πₙ formulas are equivalent to Σₙ induction; a model of PA⁻ satisfies IΣₙ exactly when no proper cut is Σₙ-definable, or Πₙ-definable, with parameters; overspill and underspill for arbitrary cuts.
-duration: 35
+duration: 30
 prerequisites: [induction-collection]
 ---
 

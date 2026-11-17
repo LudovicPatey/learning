@@ -1,7 +1,7 @@
 ---
 title: Well-orderings and ordinals
 summary: Well-orderings, the comparison theorem, ordinals as canonical order types, transfinite induction and recursion, ordinal arithmetic, and the countable ordinals.
-duration: 45
+duration: 35
 prerequisites: [arithmetic-hierarchy/sigma-pi-sets]
 ---
 

@@ -59,8 +59,8 @@ consequences of combinatorial principles (`induction-conservation`, which cites
 4. **stable-colorings** — stable colorings (`def-stable-coloring`, `ex-stable`), D²₂
    (`def-d22`, `prop-srt-d22`); `thm-rt22-decomposition`; RT²₂ → COH over RCA₀
    (`thm-rt22-coh`); `cor-rt22-equivalence`.
-5. **cone-avoidance** — Mathias conditions (`def-mathias-condition`, `ex-mathias-coh`);
-   cone avoidance for COH (`thm-coh-cone-avoidance`); Scott ideals avoiding a cone
+5. **mathias-cohesiveness** (split off 2026-11-17) — Mathias conditions (`def-mathias-condition`, `ex-mathias-coh`);
+   cone avoidance for COH (`thm-coh-cone-avoidance`). **cone-avoidance** — Scott ideals avoiding a cone
    (`lem-scott-cone`); strong cone avoidance for RT¹₂ (`thm-dj-cone-avoidance`).
 6. **seetapun** — Seetapun's theorem (`thm-seetapun`) and the ω-model (`cor-rt22-not-aca`);
    the place of RT²₂ (Liu, CJS low₂ and coding power, Monin–Patey, thin set theorems);
@@ -200,7 +200,7 @@ Checked (web search and the DM/Monin–Patey books, 2026-11-12):
 
 ## 10. Open points
 
-- Word counts of cone-avoidance and triples are slightly above 2700 (≈ 2800–2860 words
+- (Cone-avoidance split on 2026-11-17; triples reads in at most 45 minutes by the open-text rule.) Word counts of cone-avoidance and triples were slightly above 2700 (≈ 2800–2860 words
   including formulas); acceptable, could be trimmed.
 - The pages and theorem number of Jockusch 1972 for the Π⁰ₙ bound were not checked.
 - A figure for the Dzhafarov–Jockusch forcing (two sides and a partition) could help.
@@ -221,7 +221,8 @@ practice):
 - stable-colorings: `ex-coh-direct-induction` (where Σ⁰₂ induction would enter, the
   contrast with the counting argument) and `ex-rt22-via-decomposition` (the decomposition
   used as a computation).
-- cone-avoidance: `ex-coh-countable-cones`, the robustness of the Mathias construction.
+- mathias-cohesiveness: `ex-coh-countable-cones`, the robustness of the Mathias construction.
+- cone-avoidance: `ex-pigeonhole-one-side`, cited in the text (moved from the further exercises at the split).
 - seetapun: `ex-stable-no-cone-avoidance` (why the pigeonhole step uses the limit set),
   `ex-rt32-coding-power` (coding power of RT³₂) and `ex-wkl-rt22-model` (an ω-model by
   interleaving two preservation steps).
@@ -280,3 +281,4 @@ Erdős–Radó for the canonical Ramsey theorem (case n = 1 only). The other exe
   moved to the further exercises, `ex-pigeonhole-one-side` moved from seetapun to the
   further exercises of cone-avoidance (it illustrates `thm-dj-cone-avoidance`). 32 new
   further exercises (section 11). References "see the exercises" replaced by `:ref`.
+- **2026-11-17: split of `cone-avoidance`.** The lesson read in about 45 minutes of open text and was stated at 50; its two theorems use different techniques. Mathias forcing and cone avoidance for COH form the new lesson `mathias-cohesiveness` (with `ex-coh-countable-cones`, `ex-mathias-extension`, `ex-coh-omega-model`); `cone-avoidance` (retitled "Strong cone avoidance for the pigeonhole principle") keeps the theorem of Dzhafarov and Jockusch and requires `mathias-cohesiveness`, so that the lessons of other courses that require `ramsey-theorem/cone-avoidance` still have both. `ex-pigeonhole-one-side` becomes its featured exercise. All labels unchanged. Durations recomputed by the open-text rule (AGENTS.md; `npm run durations`): quizzes, solutions, hints and further exercises are no longer counted.

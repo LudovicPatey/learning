@@ -1,7 +1,7 @@
 ---
 title: Forcing with infinite subtrees
 summary: Given a countable model of RCA₀ and an infinite binary tree in it, a path chosen generically for forcing with infinite subtrees preserves Σ⁰₁ induction; a single condition decides a Σ⁰₁ formula at non-standardly many inputs.
-duration: 50
+duration: 40
 prerequisites: [first-order-parts, big-five/wkl0]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: Mathias forcing and preservation
 summary: The forcing question of computable Mathias forcing at level 1; cohesive sets that avoid a cone, preserve a hyperimmune function and are not PA; sufficiently generic sets are high, so there is no Σ⁰₂-preserving forcing question; the disjunctive question of Dzhafarov and Jockusch.
-duration: 40
+duration: 30
 prerequisites: [compactness-merging, immunity-growth/domination, ramsey-theorem/cone-avoidance]
 ---
 

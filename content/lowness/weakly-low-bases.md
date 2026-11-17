@@ -1,7 +1,7 @@
 ---
 title: Weakly low bases
 summary: A set PA relative to ∅′ chooses a true statement among two Π⁰₂ statements one of which is true; between a set and a set PA relative to it there is room for another PA step; weakly low bases, where the jump of a solution is computed by any set PA relative to ∅′, give low₂ solutions and ω-models of low₂ sets.
-duration: 40
+duration: 30
 prerequisites: [forcing-the-jump, pi01-classes/pa-degrees, pi01-classes/basis-theorems, reducibilities/preservation]
 ---
 

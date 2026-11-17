@@ -1,7 +1,7 @@
 ---
 title: Minimal covers and minimal upper bounds
 summary: Relativized splitting trees give a minimal cover of every degree and a minimal upper bound of every strictly increasing sequence of degrees; PA degrees, c.e. degrees and 1-generic degrees are not minimal, and the non-computability requirements of Spector's construction are redundant.
-duration: 45
+duration: 35
 prerequisites: [minimal-degrees, pi01-classes/pa-degrees]
 ---
 

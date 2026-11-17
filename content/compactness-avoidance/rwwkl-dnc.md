@@ -1,7 +1,7 @@
 ---
 title: DNC functions and homogeneous sets
 summary: A set computes a DNC function if and only if it computes homogeneous sets for all Π⁰₁ classes of positive measure (Bienvenu, Patey, Shafer); a computable coloring of pairs all of whose homogeneous sets compute DNC functions; the chain of four levels of compactness.
-duration: 30
+duration: 25
 prerequisites: [closed-classes, immunity-growth/dnc-functions, martin-lof-randomness/random-dnc]
 ---
 

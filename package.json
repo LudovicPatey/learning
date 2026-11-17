@@ -9,6 +9,7 @@
     "preview:static": "php -S 127.0.0.1:8137 -t out deploy/preview-router.php",
     "deploy": "node --experimental-strip-types --no-warnings scripts/deploy.ts",
     "start": "next start",
+    "durations": "node --experimental-strip-types --no-warnings scripts/durations.ts",
     "check-content": "node --experimental-strip-types --no-warnings scripts/check-content.ts",
     "typecheck": "tsc --noEmit",
     "release": "node --experimental-strip-types --no-warnings scripts/release-course.ts",

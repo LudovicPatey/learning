@@ -1,7 +1,7 @@
 ---
 title: Coded Scott ideals
 summary: A set codes a countable family through its columns; no Turing ideal contains its own code; the codes of Scott ideals containing X, with computable indices for joins, reductions and PA sets, form a non-empty Π⁰₁(X) class, so the sets PA relative to X are exactly those that compute such codes, and low codes exist.
-duration: 40
+duration: 35
 prerequisites: [forcing-the-jump, big-five/wkl0, reducibilities/wkl-reductions, pi01-classes/pa-degrees]
 ---
 

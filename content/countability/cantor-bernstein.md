@@ -1,7 +1,7 @@
 ---
 title: The Cantor–Bernstein theorem
 summary: Two sets each injecting into the other are equipotent; explicit form of the bijection; the role of the axiom of choice.
-duration: 45
+duration: 35
 prerequisites: [equipotence]
 ---
 

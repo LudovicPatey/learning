@@ -1,7 +1,7 @@
 ---
 title: Weak truth-table reductions and Solovay functions
 summary: K-triviality is preserved by weak truth-table reductions, so no K-trivial set is weak truth-table complete; a computable Solovay function can replace K(n) in the definition, and every K-trivial set is an isolated path of a c.e. tree.
-duration: 35
+duration: 30
 prerequisites: [k-trivial-sets]
 ---
 

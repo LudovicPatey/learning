@@ -1,7 +1,7 @@
 ---
 title: Hypersimple sets and truth-table reducibility
 summary: Dekker's deficiency sets give a hypersimple set in every non-zero c.e. degree; truth-table reductions are the Turing reductions that are total on every oracle; hypersimple sets can be Turing complete but not truth-table complete.
-duration: 35
+duration: 30
 prerequisites: [immune-sets, pi01-classes/trees-and-classes]
 ---
 
