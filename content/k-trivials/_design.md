@@ -24,8 +24,9 @@ After the course, a student can:
 - derive from the main theorem (admitted) the equivalence of the four notions and the
   ideal structure of the K-trivial sets.
 
-**Role.** Specialized course (not in a track): `tracks-design.md` keeps K-triviality out
-of the randomness track because lowness is a research topic built on the core. It builds
+**Role.** Last core course of the randomness track since 2026-11-17 (until then a
+specialized course: `tracks-design.md` kept K-triviality out of the track as a research
+topic built on the core; every reference text ends its core part with it). It builds
 on `martin-lof-randomness` (Levin–Schnorr, Kučera–Gács, Sacks), `kolmogorov-complexity`
 (KC theorem, coding theorem, Ω) and `ce-degrees` (simple sets, Post's construction). It is
 cited by `ce-degrees/cone-avoidance` (`thm-solovay-ktrivial`, as a solution to Post's
@@ -338,3 +339,5 @@ more than the lessons provide; the decanter exercises of Nies 5.4.
   exercise of lesson 2 rephrased, and the forward `:ref` of lesson 2 to
   `thm-obey-ktrivial` replaced by a description. Durations of `cost-functions` and
   `ktrivial-lowness` set to 45 minutes.
+- **2026-11-17: moved into the randomness track** as a core course (enlargement of the
+  track, see `tracks-design.md`). No change to the lessons.

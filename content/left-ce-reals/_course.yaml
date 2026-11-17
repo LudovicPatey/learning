@@ -1,0 +1,25 @@
+title: Left-c.e. reals and Ω
+area: randomness
+level: Advanced
+order: 5
+prerequisites: [martin-lof-randomness, kolmogorov-complexity]
+summary: Left-c.e. reals and halting probabilities, Solovay reducibility, the Kučera–Slaman theorem, the splitting of random left-c.e. reals, and Solovay functions.
+description: >
+  The reals that can be approximated from below, which play in algorithmic
+  randomness the role of the c.e. sets: their characterizations by cuts,
+  approximations, sums and halting probabilities of prefix-free machines;
+  Solovay reducibility, which compares the speed of approximations, implies
+  Turing reducibility and the domination of initial segment complexity, and
+  has Ω at the top; the theorem of Kučera and Slaman that the random left-c.e.
+  reals are exactly the Solovay complete ones, and the theorem of Calude,
+  Hertling, Khoussainov and Wang that they are the halting probabilities of
+  optimal machines; the theorem of Downey, Hirschfeldt and Nies that a random
+  sum of two left-c.e. reals has a random summand; and the characterization of
+  Solovay functions by random sums, due to Bienvenu and Downey.
+objectives:
+  - Work with left-c.e. reals through cuts, approximations and sums, and identify them with halting probabilities of prefix-free machines
+  - Prove the basic properties of Solovay reducibility, including the domination of initial segment complexity and the completeness of Ω
+  - Prove that random left-c.e. reals are Ω-like and are halting probabilities of optimal machines
+  - Transfer a Solovay test along non-computable good stages to prove that a random sum of two left-c.e. reals has a random summand
+  - Characterize Solovay functions by the randomness of the associated sums
+lessons: [approximations, solovay-reducibility, kucera-slaman, random-sums, solovay-functions-and-omega]

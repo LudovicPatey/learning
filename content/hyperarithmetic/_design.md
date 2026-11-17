@@ -190,8 +190,8 @@ was checked.
 
 - Π¹₁-completeness of O (admitted in `computable-ordinals`) is used in the Kleene basis
   theorem and in exercises; once it is proved there, nothing here changes.
-- Gandy basis theorem admitted; a proof could go into `descriptive-set-theory` or a
-  course on Σ¹₁ forcing, and the reference here would then point to it.
+- ~~Gandy basis theorem admitted~~: proved since 2026-11-17 in the core course
+  `sigma11-basis` (lesson `gandy-basis`); `sigma11-classes` now points to it.
 - Harrison's order type admitted.
 - Relativization (H^X_a, Δ¹₁(X) = HYP(X)) is stated in one sentence after Kleene's
   theorem and used by `higher-randomness`; a relativized statement with a label might
@@ -276,3 +276,5 @@ because other courses cite it.
   the course replaced by `:ref`. Solution of `ex-harrison-wf-part` made precise (initial
   segment, type of W). Durations recomputed: h-sets 35, kleene-theorem 45 (cap; about
   2700 words), sigma11-classes 30.
+- **2026-11-17:** the Gandy basis theorem is now proved in the new core course
+  `sigma11-basis`; `sigma11-classes` points to it.

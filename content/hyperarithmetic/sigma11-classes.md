@@ -1,6 +1,6 @@
 ---
 title: Σ¹₁ classes and their members
-summary: Σ¹₁ classes as projections of closed sets of Baire space; a computable tree with paths but no hyperarithmetic path; the Kleene basis theorem; the Gandy basis theorem (admitted).
+summary: Σ¹₁ classes as projections of closed sets of Baire space; a computable tree with paths but no hyperarithmetic path; the Kleene basis theorem; the statement of the Gandy basis theorem.
 duration: 20
 prerequisites: [kleene-theorem, pi01-classes/computable-members, computable-ordinals/boundedness]
 ---
@@ -68,7 +68,7 @@ Let $S$ be a computable tree of pairs whose projection is the class. Let $E$ be 
 
 The proof is the method of the leftmost path, used for the $\emptyset'$ bound on binary trees (:ref{#prop-leftmost-path}); the only change is the cost of deciding extendibility, $\Sigma^1_1$ instead of $\Pi^0_1$.
 
-By :ref{#thm-no-hyp-path}, $\mathcal O$ cannot be replaced by a hyperarithmetic set. Gandy (1960) refined the theorem: every non-empty $\Sigma^1_1$ class has a member $X$ with $\omega_1^X = \omega_1^{\mathrm{CK}}$. Such an $X$ does not compute $\mathcal O$, since $\omega_1^{\mathcal O} > \omega_1^{\mathrm{CK}}$ (:ref{#prop-omega1-relative}). This **Gandy basis theorem** is the analogue of the low basis theorem (:ref{to="pi01-classes/basis-theorems"}), with $\omega_1^X = \omega_1^{\mathrm{CK}}$ playing the role of lowness. Its proof is a forcing argument with $\Sigma^1_1$ classes, parallel to the proof of the low basis theorem with $\Pi^0_1$ classes; the new difficulty is that a decreasing sequence of non-empty $\Sigma^1_1$ classes may have an empty intersection, so the construction must build the witnesses $f$ together with $X$. It gives a member $X$ that is **hyperlow**, $\mathcal O^X \leq_T \mathcal O$. We admit it (Monin and Patey, chapter "$\Sigma^1_1$ and $\Pi^1_1$ classes").
+By :ref{#thm-no-hyp-path}, $\mathcal O$ cannot be replaced by a hyperarithmetic set. Gandy (1960) refined the theorem: every non-empty $\Sigma^1_1$ class has a member $X$ with $\omega_1^X = \omega_1^{\mathrm{CK}}$. Such an $X$ does not compute $\mathcal O$, since $\omega_1^{\mathcal O} > \omega_1^{\mathrm{CK}}$ (:ref{#prop-omega1-relative}). This **Gandy basis theorem** is the analogue of the low basis theorem (:ref{to="pi01-classes/basis-theorems"}), with $\omega_1^X = \omega_1^{\mathrm{CK}}$ playing the role of lowness. Its proof is a forcing argument with $\Sigma^1_1$ classes, parallel to the proof of the low basis theorem with $\Pi^0_1$ classes; the new difficulty is that a decreasing sequence of non-empty $\Sigma^1_1$ classes may have an empty intersection, so the construction must build the witnesses $f$ together with $X$. It gives a member $X$ that is **hyperlow**, $\mathcal O^X \leq_T \mathcal O$. It is proved in the course on $\Sigma^1_1$ classes and the hyperjump (:ref{to="sigma11-basis/gandy-basis"}).
 
 :::quiz[trees without hyperarithmetic paths]
 In the proof of :ref{#thm-no-hyp-path}, why would the hypothesis make $\mathrm{WF}$ a $\Sigma^1_1$ set?

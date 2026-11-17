@@ -113,12 +113,30 @@ incompressibility, effective null sets, and betting strategies — and their equ
   sentence. A core course **martingales** is added after Martin-Löf randomness. It covers
   martingales and Ville's theorem, c.e. martingales and Schnorr's theorem, and computable
   and Schnorr randomness defined by martingales.
-- **Kept specialized:**
-  - **Notions of randomness.** It assumes the martingale course for computable and
-    Schnorr randomness.
-  - **K-trivial sets.** Lowness is central in Nies's book, but it is a research topic
-    built on the core rather than part of it.
-  - **Higher randomness**, which needs the higher computability track.
+- **Enlarged on 2026-11-17** (from three to seven courses, about 11 to about 30 hours),
+  after a comparison with the core parts of Downey–Hirschfeldt (Chapters 3–9 and 11) and
+  Nies (Chapters 2–5 and 7), both of which go well beyond the three approaches:
+  - `kolmogorov-complexity` gains three lessons: conditional complexity and the symmetry of
+    information for C and K, and the comparison of C and K (Levin, Solovay); DH 3.2–3.3,
+    3.10, Chapter 4; Nies 2.3–2.4.
+  - `randomness-notions` (relative randomness, van Lambalgen, 2-randomness, weak
+    2-randomness) becomes core: every reference treats it in its core chapters (DH 6.8–6.9,
+    7.2; Nies 3.4–3.6).
+  - New core course `left-ce-reals`: left-c.e. reals and halting probabilities, Solovay
+    reducibility, Kučera–Slaman, Calude–Hertling–Khoussainov–Wang, Demuth's splitting,
+    Solovay functions (DH 5, 9.1–9.5; Nies 3.2). Left-c.e. reals are to randomness what
+    c.e. sets are to computability.
+  - New core course `randomness-degrees`: Kučera's theorems on c.e. sets, Stephan's
+    theorem, randomness for computable measures, Demuth's theorem, Kautz's 0-1 law and the
+    properties of almost every degree (DH 6.10, 6.12, 8; Nies 4).
+  - `k-trivials` becomes the last core course: lowness for randomness and K-triviality are
+    where both reference books end their core material.
+  The order is: Kolmogorov complexity, Martin-Löf randomness, martingales, notions of
+  randomness, left-c.e. reals, randomness and Turing degrees, K-trivial sets.
+- **Kept specialized:** **higher randomness**, which needs the higher computability track.
+- **Possible specialized courses:** effective dimension (DH 13); randomness and analysis
+  (differentiability, density, ergodic theorems); stochasticity and Kolmogorov–Loveland
+  randomness (DH 7.4–7.5); strong jump traceability (DH 14).
 
 ## Reverse mathematics
 
@@ -174,6 +192,23 @@ incompressibility, effective null sets, and betting strategies — and their equ
   usable, and every later topic (higher randomness, Π¹₁ forcing) relies on them. For
   this reason the course on descriptive set theory, previously specialized, is part of
   the track from 2026-11-12.
+
+**Enlarged on 2026-11-17** with the core course `sigma11-basis` (hyperarithmetic
+reducibility and the hyperjump, Spector's collapse theorem, the Gandy and Kreisel basis
+theorems, Gandy forcing, Π¹₁ singletons), written from Monin–Patey's chapters "Beyond
+hyperarithmetic" and "Σ¹₁ and Π¹₁ classes". The Gandy basis theorem, admitted until then,
+is now proved.
+
+**Written on 2026-11-17**, once Sacks and Chong–Yu were added to `external-data/`:
+- `admissible-sets` (*Admissible sets and constructibility*): Kripke–Platek set theory,
+  L_α, ω-models of KP, ω₁ᶜᵏ as the second admissible ordinal, HYP = P(ℕ) ∩ L_{ω₁ᶜᵏ}, the
+  Spector–Gandy theorem, ω₁ˣ admissible; Sacks's converse stated. Barwise compactness,
+  first planned, is left out (a model-theoretic topic).
+- `hyperarithmetic-forcing` (*Forcing over the hyperarithmetic sets*): the ramified analytic
+  hierarchy, Feferman's Cohen forcing, incomparable hyperdegrees, perfect forcing and a
+  minimal hyperdegree (Gandy–Sacks).
+The track is now: computable ordinals, hyperarithmetic sets, effective descriptive set
+theory, Σ¹₁ classes and the hyperjump, admissible sets, forcing over HYP.
 
 **Excluded.**
 - α-recursion theory and admissible ordinals beyond ω₁ᶜᵏ (Sacks, Parts C–D). They are a
@@ -445,3 +480,10 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
 - **2026-11-13.** Tracks divided into primary and secondary ones: lowness and avoidance,
   and models of arithmetic, become secondary tracks, shown on the page of all tracks
   only.
+- **2026-11-17.** Randomness and higher computability tracks enlarged after a comparison
+  with the standard references (sections above). Randomness: `randomness-notions` and
+  `k-trivials` become core; new core courses `left-ce-reals` and `randomness-degrees`;
+  three lessons added to `kolmogorov-complexity`. Higher computability: new core course
+  `sigma11-basis`; two further courses planned.
+- **2026-11-17.** Higher computability: `admissible-sets` and `hyperarithmetic-forcing`
+  written from Sacks and Chong–Yu, completing the planned enlargement.

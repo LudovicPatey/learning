@@ -21,7 +21,8 @@ After the course, a student can:
   Terwijn, Yu), and every set of hyperimmune degree computes a Kurtz random sequence that
   is not Schnorr random (Kurtz).
 
-**Role.** A specialized course of the randomness area (`content/tracks-design.md`), after
+**Role.** A core course of the randomness track since 2026-11-17 (until then specialized;
+`content/tracks-design.md`), after
 the core track Kolmogorov complexity → Martin-Löf randomness → martingales. Since
 2026-11-12 the core course `martingales` covers computable, Schnorr and Kurtz randomness by
 martingales, the strict hierarchy of these four notions and the collapse of the upper three
@@ -238,7 +239,9 @@ Checked on 2026-11-12 (web search):
 - The attribution of the two directions of the plain-complexity characterization of
   2-randomness differs between D–H and Nies; check against Miller (2004) and NST (2005).
 - `Miyabe–Rute 2013`: page numbers not checked.
-- Possible addition: Kautz's 0-1 law and the Martin–Kautz proof that 2-random sequences
+- Kautz's 0-1 law and the Martin–Kautz theorem are proved since 2026-11-17 in
+  `randomness-degrees/almost-every-degree`, which comes later in the track; this course
+  still quotes them. Possible addition (superseded): Kautz's 0-1 law and the Martin–Kautz proof that 2-random sequences
   have hyperimmune degree, which would remove the main admitted result of lesson 1.
 - `relative-randomness` has about 2550 words of text (duration 45), at the upper limit.
 - The "degree" version of Kurtz's theorem (every hyperimmune degree contains a weakly
@@ -329,3 +332,5 @@ other exercises are new or standard consequences of the lessons.
     martingales/randomness-hierarchy" (`ex-kurtz-powers`), "the third exercise of
     weak-2-randomness" (`ex-w2r-not-2-random`, twice).
   - Durations unchanged (45, 45, 40): the featured exercises are those already in the text.
+- **2026-11-17: moved into the randomness track** as a core course (enlargement of the
+  track, see `tracks-design.md`). No change to the lessons.

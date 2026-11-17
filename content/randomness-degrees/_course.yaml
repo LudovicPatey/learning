@@ -1,0 +1,26 @@
+title: Random sequences and Turing degrees
+area: randomness
+level: Advanced
+order: 6
+prerequisites: [randomness-notions, left-ce-reals, ce-degrees]
+summary: Random sequences and c.e. sets, random sequences of PA degree, randomness for computable measures, Demuth's theorem, and the properties of almost every degree.
+description: >
+  The place of random sequences in the Turing degrees, beyond the Kučera–Gács
+  theorem: Kučera's theorems that a c.e. set above a random sequence is complete
+  and that random sequences below ∅′ compute non-computable c.e. sets, which
+  solves Post's problem without priority; Stephan's theorem that a random
+  sequence of PA degree computes ∅′; Martin-Löf randomness for computable
+  measures and the degree invariance of randomness (Levin, Kautz); Demuth's
+  theorem that non-computable sets truth-table below a random sequence have
+  random degree, with its consequences for Ω and truth-table completeness; and
+  the effective 0-1 laws of Kučera and Kautz, with Martin's and Kautz's theorems
+  that almost every degree, and every 2-random degree, is hyperimmune and
+  generalized low.
+objectives:
+  - Prove that a c.e. set computing a random sequence is complete, with the KC theorem
+  - Build a non-computable c.e. set below a fixed-point free function computable in ∅′, with the fixed point theorem
+  - Prove Stephan's theorem with a Solovay test built from a partial function that is hard to extend
+  - Define randomness for computable measures and transfer it to the uniform measure through representations of reals
+  - Prove Demuth's theorem by transporting the uniform measure along a truth-table reduction
+  - Use translates and the effective 0-1 laws to prove properties of all 2-random degrees
+lessons: [ce-sets, stephan-theorem, computable-measures, demuth-theorem, almost-every-degree]

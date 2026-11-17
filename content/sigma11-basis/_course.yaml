@@ -1,0 +1,23 @@
+title: Σ¹₁ classes and the hyperjump
+area: higher
+level: Advanced
+order: 4
+prerequisites: [hyperarithmetic, descriptive-set-theory]
+summary: Hyperarithmetic reducibility and the hyperjump, Spector's theorem on collapsing ω₁ᶜᵏ, the Gandy and Kreisel basis theorems for Σ¹₁ classes, Gandy forcing, and Π¹₁ singletons.
+description: >
+  The higher analogues of the jump and of the basis theorems for Π⁰₁ classes:
+  hyperarithmetic reducibility and the hyperjump O^X; a Σ¹₁ well-founded tree has
+  rank below ω₁ᶜᵏ, so hyperarithmetic reducibility preserves the Church–Kleene
+  ordinal, and Spector's theorem that a set is hyperarithmetically above O
+  exactly when it collapses ω₁ᶜᵏ; the Gandy basis theorem, proved by building
+  the witnesses of membership in Σ¹₁ classes along with the member; forcing with
+  Σ¹₁ classes and Kreisel's hyperarithmetic cone avoidance; and the Π¹₁
+  singletons, which include O and its hyperjumps but no set strictly between
+  the hyperarithmetic sets and O.
+objectives:
+  - Work with hyperarithmetic reducibility and the hyperjump, and compare ordinals through morphisms of trees
+  - Prove Spector's theorem that O ≤_h Y exactly when ω₁ʸ > ω₁ᶜᵏ
+  - Prove the Gandy basis theorem with trees of tuples carrying the witnesses
+  - Use Gandy forcing to prove Kreisel's basis theorem
+  - Show that O and its hyperjumps are Π¹₁ singletons, and that no Π¹₁ singleton lies strictly between 0 and O in the hyperdegrees
+lessons: [hyperjump, gandy-basis, kreisel-basis, pi11-singletons]

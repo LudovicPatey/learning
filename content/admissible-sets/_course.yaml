@@ -1,0 +1,24 @@
+title: Admissible sets and constructibility
+area: higher
+level: Advanced
+order: 5
+prerequisites: [sigma11-basis]
+summary: Kripke–Platek set theory and admissible sets, the constructible hierarchy, ω₁ᶜᵏ as the second admissible ordinal, the hyperarithmetic sets as the constructible sets of numbers of level below ω₁ᶜᵏ, and the Spector–Gandy theorem.
+description: >
+  Higher computability in the setting of set theory: Kripke–Platek set theory,
+  Σ-reflection, Σ-collection and Σ-recursion; admissible sets, with the
+  hereditarily finite sets as the smallest one, over which the Σ₁ relations on
+  numbers are the c.e. relations; Gödel's constructible hierarchy, the
+  admissibility of L_α, and ω-models of KP and their standard parts; the
+  theorem that ω₁ᶜᵏ is the second admissible ordinal and that the
+  hyperarithmetic sets are the sets of numbers constructed before stage ω₁ᶜᵏ, proved with the
+  Gandy and Kreisel basis theorems; the Spector–Gandy theorem that the Π¹₁ sets
+  are the Σ₁ sets over the level ω₁ᶜᵏ of L; and, after relativization, the admissibility of
+  every ω₁ˣ, with Sacks's converse.
+objectives:
+  - Work in Kripke–Platek set theory with Σ-reflection, Σ-collection, Δ-separation and Σ-recursion
+  - Relate admissible ordinals, the constructible hierarchy and ω₁ᶜᵏ
+  - Analyze ω-models of KP through their standard parts
+  - Prove that the hyperarithmetic sets are the sets of numbers constructed before stage ω₁ᶜᵏ, and the Spector–Gandy theorem
+  - Explain why ω₁ˣ is admissible for every x and state Sacks's converse
+lessons: [kripke-platek, constructible-hierarchy, hyp-in-l, spector-gandy]

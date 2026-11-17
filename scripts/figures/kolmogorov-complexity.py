@@ -7,6 +7,8 @@
 #   kraft                             -> prefix-free-complexity.md
 #   kc-stages                         -> kc-theorem.md
 #   omega-settled                     -> coding-theorem.md
+#   symmetry-counting                 -> conditional-complexity.md
+#   symmetry-requests                 -> prefix-free-symmetry.md
 # The output is deterministic: every loop runs over fixed, ordered data.
 import json, math, sys
 out = {}
@@ -246,6 +248,53 @@ s.append(f'<text x="{L}" y="24" class="label">q = 0.ω<tspan font-size="9" dy="3
 s.append(f'<text x="{L}" y="42" class="label">At the first stage s with Ω<tspan font-size="9" dy="3">s</tspan><tspan dy="-3">\u00a0&gt; q,\u00a0every program of length ≤ n in the domain has converged.</tspan></text>')
 s.append('</svg>')
 out['omega-settled'] = ''.join(s)
+
+# ---------------------------------------------------------------- counting in the symmetry of information (plain)
+# Columns are first coordinates mu; each column lists the heights (row indices) of its points.
+cols = [(0, [1, 4]), (1, [2]), (3, [0, 2, 4, 6, 8, 10]), (5, [1]), (6, [3, 0]), (7, [5]),
+        (9, [0, 2, 4, 6, 8, 10, 12]), (11, [1]), (12, [4]), (13, [0]),
+        (15, [0, 3, 5, 7, 9, 11]), (17, [2]), (18, [0])]
+heavy = {3, 9, 15}
+sigma_col, tau_row = 9, 6
+X0, Y0, dx, dy = 87, 198, 25, 12
+s = ['<svg class="fig" viewBox="0 0 600 250" width="600" role="img" aria-label="A grid of pairs; columns are first coordinates mu; the dots of the set A are scattered; three columns, including the column of sigma, have many dots and are highlighted as the set B; the column of sigma contains tau">']
+s.append('<line x1="60" y1="210" x2="560" y2="210" class="axis"/><line x1="60" y1="210" x2="60" y2="30" class="axis"/>')
+s.append('<text x="566" y="214" class="math" font-size="15">μ</text><text x="48" y="30" text-anchor="end" class="math" font-size="15">ν</text>')
+for c in sorted(heavy):
+    s.append(f'<rect x="{X0 + c * dx - 14}" y="38" width="28" height="166" class="soft-fill"/>')
+for c, rows in cols:
+    for r in rows:
+        cx, cy = X0 + c * dx, Y0 - r * dy
+        if c == sigma_col and r == tau_row:
+            s.append(f'<circle cx="{cx}" cy="{cy}" r="5" class="accent-fill"/>')
+        else:
+            s.append(f'<circle cx="{cx}" cy="{cy}" r="3" class="ink-fill"/>')
+xs = X0 + sigma_col * dx
+s.append(f'<text x="{xs}" y="228" text-anchor="middle" class="math" font-size="14">σ</text>')
+s.append(f'<text x="{xs + 18}" y="{Y0 - tau_row * dy + 4}" class="math" font-size="14">τ</text>')
+s.append(f'<text x="{xs + 50}" y="46" class="label">section A_σ: about 2ᵏ points</text>')
+s.append('<text x="60" y="244" class="label">shaded columns: B = {μ : |A_μ| ≥ 2ᵏ}, fewer than 2ᵐ⁺¹⁻ᵏ of them</text>')
+s.append('</svg>')
+out['symmetry-counting'] = ''.join(s)
+
+# ---------------------------------------------------------------- requests in the prefix-free symmetry of information
+rows = [('ν₁', 'τ₁'), ('ν₂', 'τ₂'), ('ν₃', 'τ₁')]
+s = ['<svg class="fig" viewBox="0 0 600 200" width="600" role="img" aria-label="Left: descriptions nu one, nu two, nu three of pairs (sigma, tau one), (sigma, tau two), (sigma, tau one), with total weight at most 2 to the c minus K of sigma. Right: requests for tau one, tau two, tau one, of lengths reduced by K of sigma minus c, with total weight at most 1">']
+s.append('<defs>' + marker('soi-arrow') + '</defs>')
+s.append('<text x="40" y="24" class="label">descriptions of pairs ⟨σ, τ⟩</text>')
+s.append('<text x="360" y="24" class="label">requests given σ*</text>')
+for i, (nu, tau) in enumerate(rows):
+    y = 40 + 36 * i
+    s.append(f'<rect x="40" y="{y}" width="200" height="26" class="cell"/>')
+    s.append(f'<text x="140" y="{y + 18}" text-anchor="middle" class="mrm" font-size="13">{nu} ↦ ⟨σ, {tau}⟩</text>')
+    s.append(f'<rect x="360" y="{y}" width="200" height="26" class="cell head-cell"/>')
+    s.append(f'<text x="460" y="{y + 18}" text-anchor="middle" class="mrm" font-size="13">({tau}, |{nu}| − K(σ) + c)</text>')
+    s.append(f'<line x1="248" y1="{y + 13}" x2="352" y2="{y + 13}" class="ink-stroke" stroke-width="1.1" marker-end="url(#soi-arrow)"/>')
+s.append('<text x="40" y="166" class="label">total weight ≤ 2^(c − K(σ))</text>')
+s.append('<text x="360" y="166" class="label">total weight ≤ 1: a KC set</text>')
+s.append('<text x="300" y="190" text-anchor="middle" class="label">weights multiplied by 2^(K(σ) − c)</text>')
+s.append('</svg>')
+out['symmetry-requests'] = ''.join(s)
 
 with open(sys.argv[1], 'w') as f:
     json.dump(out, f, indent=1, ensure_ascii=False)

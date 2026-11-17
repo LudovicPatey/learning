@@ -3,14 +3,15 @@ area: randomness
 level: Intermediate
 order: 1
 prerequisites: [fundamentals, turing-degrees]
-summary: The length of the shortest description of a string, prefix-free machines, the coding theorem, and Chaitin's halting probability.
+summary: The length of the shortest description of a string, prefix-free machines, the coding theorem, Chaitin's halting probability, symmetry of information, and the relation between plain and prefix-free complexity.
 description: >
   The information content of finite strings measured by the length of their
   shortest descriptions: the invariance theorem, incompressible strings and the
   non-computability of complexity, the complexity of initial segments of infinite
   sequences and Chaitin's characterization of the computable sequences,
   prefix-free machines and the complexity K, the KC theorem, the coding theorem,
-  and the halting probability Ω.
+  the halting probability Ω, conditional complexity and the symmetry of
+  information, and the theorems of Levin and Solovay relating C and K.
 objectives:
   - Define plain and prefix-free complexity and prove the invariance theorems
   - Use counting arguments to show that most strings are incompressible
@@ -20,4 +21,6 @@ objectives:
   - Build prefix-free machines with the KC theorem
   - Relate K to output probabilities through the coding theorem
   - Prove that Ω is Turing complete and has incompressible prefixes
-lessons: [plain-complexity, non-computability, initial-segments, computable-sequences, prefix-free-complexity, kc-theorem, coding-theorem]
+  - Prove the symmetry of information for C up to a logarithmic term, and for K up to a constant with the condition σ*
+  - Relate C and K by Levin's theorem and Solovay's estimates
+lessons: [plain-complexity, non-computability, initial-segments, computable-sequences, prefix-free-complexity, kc-theorem, coding-theorem, conditional-complexity, prefix-free-symmetry, plain-and-prefix-free]

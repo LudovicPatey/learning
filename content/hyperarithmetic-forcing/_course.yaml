@@ -1,0 +1,22 @@
+title: Forcing over the hyperarithmetic sets
+area: higher
+level: Advanced
+order: 6
+prerequisites: [sigma11-basis, effective-forcing]
+summary: The ramified analytic hierarchy, Cohen forcing over it and the preservation of ω₁ᶜᵏ, incomparable hyperdegrees, and perfect forcing with a minimal hyperdegree.
+description: >
+  Forcing over the hyperarithmetic hierarchy: Kleene's ramified analytic
+  hierarchy, in which the sets hyperarithmetic in T are built by stages along
+  the computable ordinals, with truth for existential sentences Π¹₁ and
+  Kreisel's characterization of the sets T that preserve ω₁ᶜᵏ by Δ¹₁
+  comprehension; Feferman's Cohen forcing, the truth lemma, the preservation
+  of ω₁ᶜᵏ by generic sets and the existence of hyperarithmetically incomparable
+  sets; and the perfect forcing of Gandy and Sacks, with the fusion lemma and
+  a set of minimal hyperdegree.
+objectives:
+  - Work with the ramified analytic hierarchy and the complexity of its truth relation
+  - Characterize the sets that preserve ω₁ᶜᵏ by Δ¹₁ comprehension
+  - Prove that Cohen generic sets preserve ω₁ᶜᵏ with uniformization and boundedness
+  - Build hyperarithmetically incomparable sets by forcing
+  - Prove the fusion lemma for hyperarithmetic perfect classes and build a minimal hyperdegree
+lessons: [ramified-hierarchy, cohen-forcing, minimal-hyperdegree]

@@ -18,7 +18,7 @@
   description: >
     Randomness of individual infinite sequences, through tests, incompressibility
     and betting strategies.
-  courses: [kolmogorov-complexity, martin-lof-randomness, martingales]
+  courses: [kolmogorov-complexity, martin-lof-randomness, martingales, randomness-notions, left-ce-reals, randomness-degrees, k-trivials]
 - id: reverse-math
   title: Reverse mathematics
   area: reverse-math
@@ -31,7 +31,7 @@
   area: higher
   description: >
     Computability along the computable ordinals, beyond the arithmetic sets.
-  courses: [computable-ordinals, hyperarithmetic, descriptive-set-theory]
+  courses: [computable-ordinals, hyperarithmetic, descriptive-set-theory, sigma11-basis, admissible-sets, hyperarithmetic-forcing]
 - id: avoidance
   title: Lowness and avoidance
   kind: secondary

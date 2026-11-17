@@ -72,6 +72,25 @@ uses `thm-chaitin-computable`, `prop-k-segments-computable`, `thm-coding`, `thm-
 7. **coding-theorem:** output probability, coding theorem (`thm-coding`), counting theorem
    (`thm-k-counting`), Ω (`def-omega`, `thm-omega`). Exercises: few descriptions near $K$;
    few strings with $K(\sigma) < K(n) + b$.
+8. **conditional-complexity** (new, 2026-11-17): conditional machines and $C(\sigma \mid \tau)$
+   (`def-conditional-machine`, `prop-conditional-basic`), Kolmogorov's counting bounds
+   (`thm-conditional-counting`), symmetry of information for $C$ with a logarithmic error
+   (`thm-symmetry-plain`, `cor-symmetry-plain`). Featured exercise: incompressible pairs
+   (`ex-incompressible-pairs`), the finite analogue of van Lambalgen's theorem.
+9. **prefix-free-symmetry** (new, 2026-11-17): conditional prefix-free machines, the KC
+   theorem with conditions (`lem-conditional-kc`) and truncated request sets, the canonical
+   shortest description $\sigma^*$ (`prop-star`), the Gács–Chaitin theorem
+   $K(\sigma, \tau) =^+ K(\sigma) + K(\tau \mid \sigma^*)$ (`thm-symmetry-prefix-free`), the
+   symmetric form, $K(\sigma) =^+ K(n) + K(\sigma \mid n^*)$ for strings of length $n$.
+   Gács–Solovay lower bound on $K(K(\sigma) \mid \sigma)$ admitted. Featured exercise: the
+   naive decomposition up to $K(K(\sigma) \mid \sigma)$.
+10. **plain-and-prefix-free** (new, 2026-11-17): Levin's theorem
+    $C(\sigma) =^+ K(\sigma \mid C(\sigma))$ (`thm-levin-c-k`), Solovay's theorem that strongly
+    K-random strings are C-random (`thm-solovay-strong-k`), Solovay's bound on $|L_n|$
+    (`lem-solovay-ln`) and $C \leq^+ K - K^{(2)} + K^{(3)}$ (`thm-solovay-c-upper`). The full
+    estimates $K = C + C^{(2)} \pm O(C^{(3)})$ and the counterexamples of DH 4.3.2 are
+    admitted. Featured exercise: $C(\sigma) =^+ \min\{n : K(\sigma \mid n) \leq n\}$, proved
+    without the recursion theorem.
 
 ## 4. Proof techniques
 
@@ -114,9 +133,15 @@ uses `thm-chaitin-computable`, `prop-k-segments-computable`, `thm-coding`, `thm-
   invariants are explicit and match the figure.
 - **The coding theorem** is proved directly from KC (requests at powers of 2) rather than via
   semimeasures: semimeasures are not used elsewhere in the track.
-- **Excluded:** conditional complexity and symmetry of information (Downey–Hirschfeldt 3.2,
-  3.3, 3.10; Li–Vitányi): not used by the track, and a natural topic for a specialized
-  course; monotone and process complexity (DH 3.15–3.16); Solovay functions and Solovay's
+- **Conditional complexity and symmetry of information** (Downey–Hirschfeldt 3.2, 3.3, 3.10;
+  Chapter 4), excluded until 2026-11-17, now form the last three lessons: every textbook
+  treats them (DH Chapters 3–4, Nies 2.3–2.4, Li–Vitányi 2.8 and 3.9), and the later
+  courses of the track use $K(\sigma \mid \tau)$ and the comparison of $C$ and $K$.
+  Conditional complexity is defined with a second argument (Li–Vitányi) rather than an oracle
+  (DH); the two agree up to a constant. In `plain-and-prefix-free`, the characterization of
+  $C$ by $\min\{n : K(\sigma \mid n) \leq n\}$ is proved with a padding machine instead of the
+  recursion theorem used by DH.
+- **Excluded:** monotone and process complexity (DH 3.15–3.16); Solovay functions and Solovay's
   estimates of the domain of $U$ (DH 3.12–3.13); Kummer's tt-completeness of the
   compressible strings (cited only); the Miller–Yu improved counting theorem; applications
   of incompressibility to combinatorics and complexity theory.
@@ -210,8 +235,10 @@ No simpler proof of Chaitin's theorem or of the KC theorem was found.
   Li–Vitányi, Exercise 2.7.7); Li–Vitányi was not available to check the exercise number.
 - Nies (before Theorem 3.6.10) says Miller (2004) obtained "⇐", while the title of Miller's
   paper suggests "⇒"; the course says only "one implication".
-- Possible later additions: conditional complexity and symmetry of information (a
-  specialized course), Solovay functions.
+- Possible later additions: Solovay functions (conditional complexity and symmetry of
+  information were added on 2026-11-17). The proof of Solovay's full estimates
+  (DH Theorem 4.2.2) and of the Gács–Solovay bound (DH Theorem 3.14.2) could become a
+  lesson if a later course needs them.
 
 ## 11. Exercises
 
@@ -296,3 +323,7 @@ the tree defined with $C(n)$ in the bound is not c.e.
   11). `ex-k-iterated-log` restated precisely with a rewritten solution; the solution of
   `ex-barzdins` no longer cites the next lesson by reference. Durations of initial-segments
   (30) and computable-sequences (45) recomputed.
+- **2026-11-17: extension (randomness track enlarged).** Three lessons added at the end:
+  `conditional-complexity`, `prefix-free-symmetry`, `plain-and-prefix-free` (section 3).
+  Sources checked against DH 3.2–3.3, 3.10, 3.14, 4.1–4.3. Two figures added to
+  `scripts/figures/kolmogorov-complexity.py` (`symmetry-counting`, `symmetry-requests`).
