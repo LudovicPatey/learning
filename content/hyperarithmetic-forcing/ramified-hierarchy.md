@@ -1,7 +1,7 @@
 ---
 title: The ramified analytic hierarchy
 summary: The structure M(ω₁ᶜᵏ, T) of the sets ramified analytic in T; truth for existential sentences is Π¹₁; the ramified analytic hierarchy is HYP (Kleene); M(ω₁ᶜᵏ, T) satisfies Δ¹₁ comprehension exactly when ω₁ᵀ = ω₁ᶜᵏ (Kreisel).
-duration: 40
+duration: 45
 prerequisites: [sigma11-basis/hyperjump, descriptive-set-theory/uniformization, hyperarithmetic/kleene-theorem]
 ---
 
@@ -68,7 +68,13 @@ For each $b \in \mathcal O_1$ there is a ranked formula $\eta_b(x)$, in which $\
 :::
 
 :::proof{of=lem-h-ranked}
-"$Y$ is an H-sequence along $b$" is an arithmetic property of $Y$ (:ref{#def-h-sequence}), and the H-sequence along $b$ is unique. Let $\eta_b(x)$ be $(\exists Y^{|b|})(Y \text{ is an H-sequence along } b \wedge \langle b, x \rangle \in Y)$. By induction along $b$, the H-sequence along $b$ is arithmetic in the H-sequences along the notations below $b$, hence belongs to $\mathcal M(|b|, T)$, and then $\eta_b$ defines $H_b$. The relativized statement is proved in the same way with H-sequences relative to $T$. (Sacks, Lemma III.4.7 and Exercise III.4.21.)
+For $a \in \mathcal O$, let $Y_a$ be the H-sequence along $a$, which is unique (:ref{#def-h-sequence}); its column $a$ is $H_a$, and "$Y$ is an H-sequence along $a$" is an arithmetic property of $Y$ and $a$. The set $H_b$ is arithmetic, uniformly, in the H-sequences along the notations $a <_{\mathcal O} b$: $H_1 = \emptyset$; for $b = 2^c$, $x \in H_b$ if and only if $x \in (Y_c^{[c]})'$; for $b = 3 \cdot 5^e$, $x \in H_b$ if and only if $x = \langle a, v \rangle$ with $a <_{\mathcal O} b$ and $v \in Y_a^{[a]}$. So there is an arithmetic formula $\theta(x, Y, a, b)$ such that, for $b \in \mathcal O$, $x \in H_b$ if and only if $\theta(x, Y_a, a, b)$ holds for some $a <_{\mathcal O} b$. Let
+$$
+\eta_b(x) = (\exists Y^{|b|})(\exists a)\big(a <_{\mathcal O} b \wedge Y \text{ is an H-sequence along } a \wedge \theta(x, Y, a, b)\big),
+$$
+where $a <_{\mathcal O} b$ is expressed with the c.e. relation that agrees with $<_{\mathcal O}$ on $\mathcal O$. It has rank $|b| + 1$.
+
+We show by induction on $|b|$, for $b \in \mathcal O_1$, that $\eta_b$ defines $H_b$ and that $Y_b \in \mathcal M(|b| + 1, T)$. For $a <_{\mathcal O} b$, the notation $a$ has the same ordinal as some $a_1 \in \mathcal O_1$, and $Y_a \leq_T H_a \equiv_T H_{a_1} \leq_T Y_{a_1}$, by :ref{#prop-h-sets-uniform} and Spector's uniqueness theorem (:ref{#thm-spector-uniqueness}); so by induction $Y_a \in \mathcal M(|a| + 1, T) \subseteq \mathcal M(|b|, T)$, the members of $\mathcal M(|a_1| + 1, T)$ being closed under Turing reducibility. So the witnesses $Y = Y_a$ are available to the variable $Y^{|b|}$, and since H-sequences are unique, $\eta_b$ defines $H_b$. Then $H_b \in \mathcal M(|b| + 1, T)$, and $Y_b$, which is computable in $H_b$ by :ref{#prop-h-sets-uniform}, is arithmetic in a member of $\mathcal M(|b| + 1, T)$, hence a member. The relativized statement is proved in the same way with H-sequences relative to $T$. (Sacks, Lemma III.4.7 and Exercise III.4.21.)
 :::
 
 :::theorem[Kleene]{#thm-ramified-hyp}
@@ -145,6 +151,22 @@ The ramified analytic hierarchy is due to Kleene (1959), who proved that it equa
 - C. T. Chong and L. Yu, *Recursion Theory: Computational Aspects of Definability*, De Gruyter, 2015, Section 5.1.
 
 :::::exercises
+::::exercise{#ex-ramified-monotone difficulty=1 objective="Check the basic closure properties of the levels of the ramified hierarchy."}
+Show that $\mathcal M(\beta, T) \subseteq \mathcal M(\gamma, T)$ for $\beta \leq \gamma$, that each $\mathcal M(\beta, T)$ is countable and closed under arithmetic definability, and that $\mathcal M(\omega_1^{\mathrm{CK}}, T)$ contains $T$ and is closed under join and Turing reducibility.
+
+:::solution
+A formula of rank at most $\beta$ has rank at most $\gamma$, and its truth does not depend on the bound $\gamma$ chosen, since the ranges of its variables are the same; so $\mathcal M(\beta, T) \subseteq \mathcal M(\gamma, T)$. There are countably many formulas, so each level is countable. If $Z \in \mathcal M(\beta, T)$ is defined by $\theta(x)$, and $W$ is arithmetic in $Z$, defined by an arithmetic formula $\psi(x, Z)$, replace each atomic formula $t \in Z$ by $\theta(t)$: the result has rank at most $\beta$ and defines $W$. The set $T$ is defined by $x \in \mathcal T$, of rank $0$. If $Z_0 \in \mathcal M(\beta_0, T)$ and $Z_1 \in \mathcal M(\beta_1, T)$, both are in $\mathcal M(\max(\beta_0, \beta_1), T)$, which contains the arithmetic set $Z_0 \oplus Z_1$; sets computable in a member are arithmetic in it.
+:::
+::::
+
+::::exercise{#ex-full-rank-wo difficulty=2 objective="Check that induction on full ordinal rank is legitimate."}
+Show that the full ordinal ranks, functions $r : \{ -1 \} \cup \omega_1^{\mathrm{CK}} \to \nat$ with finite support, compared lexicographically from the top, form a well-ordering.
+
+:::solution
+It is a linear order: two distinct functions with finite support differ at finitely many points, and the largest of them decides. Suppose $r_0 > r_1 > \cdots$ is a descending sequence. Let $\beta_n$ be the largest point of the support of $r_n$ (with a separate treatment of the zero function, which is the least element). The sequence $\beta_n$ is non-increasing, since $r_{n+1} < r_n$ cannot have a larger top point; so it is eventually constant, equal to some $\beta$. From then on, the values $r_n(\beta)$ are non-increasing natural numbers, so eventually constant. Removing the point $\beta$ from all the functions from then on gives a descending sequence of functions whose supports lie below $\beta$, or which are all zero. By induction on the ordinal $\beta$ (the top point), no such sequence exists. This order is isomorphic to the ordinal $\omega^{\omega_1^{\mathrm{CK}}}$, as the Cantor normal form suggests.
+:::
+::::
+
 ::::exercise{#ex-ramified-levels difficulty=1 objective="Locate the first levels of the ramified hierarchy."}
 Show that $\mathcal M(0, T)$ is the set of sets arithmetic in $T$, and that $\mathcal M(1, T)$ contains the $\omega$-th jump of $T$.
 

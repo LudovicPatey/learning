@@ -29,7 +29,7 @@ Clause 1 treats every ranked sentence at once, by truth along the whole class; t
 ## The fusion lemma
 
 :::lemma[Fusion; Gandy, Sacks]{#lem-hyp-fusion}
-Let $(\varphi_i)_{i \in \nat}$ be a hyperarithmetic sequence of existential sentences, and $P$ a condition such that for every $i$ and every condition $Q \subseteq P$, some condition $R \subseteq Q$ forces $\varphi_i$. Then some condition $Q \subseteq P$ forces every $\varphi_i$.
+Let $(\varphi_i)_{i \in \nat}$ be a hyperarithmetic sequence of sentences, each ranked or of the form $(\exists Y)\psi(Y)$ with $\psi$ ranked, and $P$ a condition such that for every $i$ and every condition $Q \subseteq P$, some condition $R \subseteq Q$ forces $\varphi_i$. Then some condition $Q \subseteq P$ forces every $\varphi_i$.
 :::
 
 :::proof{of=lem-hyp-fusion}
@@ -37,7 +37,9 @@ Let $(\varphi_i)_{i \in \nat}$ be a hyperarithmetic sequence of existential sent
 
 *A fusion sequence.* Define conditions $Q_{i,j}$, for $i \in \nat$ and $j < 2^i$, by recursion on $i$: $Q_{0,0} = P$; given $Q_{i,j}$, choose the first two incompatible nodes $\sigma_0, \sigma_1$ of the tree of $Q_{i,j}$ of length at least $i$, and let $Q_{i+1, 2j + k} = F(Q_{i,j} \cap [\sigma_k], i)$ for $k < 2$. So $Q_{i+1, 2j}$ and $Q_{i+1, 2j+1}$ are disjoint subclasses of $Q_{i,j}$, the first $i$ bits of their members are fixed, and they force $\varphi_i$. The sequence of indices is defined by iterating a $\Pi^1_1$ partial function; since it is total, its graph is $\Pi^1_1$ (a value is correct if there is a finite sequence of correct steps leading to it), and a total function with a $\Pi^1_1$ graph is hyperarithmetic.
 
-*The limit.* Let $Q = \bigcap_i \bigcup_{j < 2^i} Q_{i,j}$. It is a perfect class: each of its members lies in a unique $Q_{i,j}$ for each $i$, and the splitting at each level gives continuum many members, with a hyperarithmetic tree, computable from the hyperarithmetic sequence. So $Q$ is a condition, $Q \subseteq P$. Fix $i$ and write $\varphi_i$ as $(\exists Y_1) \cdots (\exists Y_k)\psi$ with $\psi$ ranked, or as a ranked sentence. Each $Q_{i+1, j}$ forces $\varphi_i$, so by clauses 2 and 3 and clause 1, every member $X$ of $Q_{i+1, j}$ satisfies, in $\mathcal M(\omega_1^{\mathrm{CK}}, X)$, a ranked instance of $\varphi_i$ with ranks at most some $\alpha_j < \omega_1^{\mathrm{CK}}$. With $\alpha = \max_{j < 2^{i+1}} \alpha_j$, every member $X$ of $Q$, which lies in some $Q_{i+1, j}$, satisfies the ranked sentence $(\exists Y_1^\alpha)\cdots(\exists Y_k^\alpha)\psi$. By clause 1, $Q$ forces it, and by clause 3, $Q \Vdash \varphi_i$.
+*The limit.* Let $Q = \bigcap_i \bigcup_{j < 2^i} Q_{i,j}$. It is a perfect class: each of its members lies in a unique $Q_{i,j}$ for each $i$, and the splitting at each level gives continuum many members, with a hyperarithmetic tree, computable from the hyperarithmetic sequence. So $Q$ is a condition, $Q \subseteq P$. Fix $i$. If $\varphi_i$ is ranked, every member of $Q$ lies in some $Q_{i+1, j}$, which forces $\varphi_i$, so it satisfies $\varphi_i$, and $Q \Vdash \varphi_i$ by clause 1. If $\varphi_i = (\exists Y)\psi(Y)$, each $Q_{i+1, j}$ forces it, so by clause 3 it forces the ranked sentence $(\exists Y^{\alpha_j})\psi(Y^{\alpha_j})$ for some $\alpha_j < \omega_1^{\mathrm{CK}}$, and by clause 1 all its members satisfy this sentence. With $\alpha = \max_{j < 2^{i+1}} \alpha_j$, every member $X$ of $Q$ satisfies $(\exists Y^\alpha)\psi(Y^\alpha)$, since $\mathcal M(\alpha_j, X) \subseteq \mathcal M(\alpha, X)$. By clause 1, $Q$ forces this ranked sentence, and by clause 3, $Q \Vdash \varphi_i$. Only finitely many conditions $Q_{i+1, j}$ are involved at level $i + 1$, which is why a maximum exists: this is the point of fusion.
+
+A sentence with several unranked existential quantifiers would need, for clause 2, a single ranked formula for its first variable, common to all the conditions of the level, which the conditions do not provide; the lemma is only applied to sentences of the two forms of the statement.
 :::
 
 :::lemma{#lem-perfect-decide}
@@ -46,6 +48,10 @@ For every sentence $\varphi$ and condition $P$, some condition $Q \subseteq P$ f
 
 :::proof{of=lem-perfect-decide}
 For an unranked $\varphi$, this follows from clause 6. For a ranked $\varphi$, we show by induction on full ordinal rank and logical complexity that some $Q \subseteq P$ has all its members satisfying $\varphi$ in $\mathcal M(\omega_1^{\mathrm{CK}}, X)$, or all satisfying $\neg\varphi$. For an atomic $t \in \mathcal T$, take $Q = P \cap [\sigma]$ for a node $\sigma$ of the tree of $P$ longer than the value of $t$. Negation is immediate, and conjunction follows by applying the induction hypothesis twice. For $(\exists Y^\alpha)\psi(Y^\alpha)$: let $\theta_0, \theta_1, \dots$ be a hyperarithmetic list of the formulas of rank at most $\alpha$ with one free number variable. If some $Q \subseteq P$ and $i$ have all members of $Q$ satisfying $\psi(x_{\theta_i})$, then all satisfy $(\exists Y^\alpha)\psi$. Otherwise, by the induction hypothesis applied to the sentences $\psi(x_{\theta_i})$, of smaller full rank, every $Q \subseteq P$ has an extension all of whose members satisfy $\neg\psi(x_{\theta_i})$, that is, which forces this ranked sentence; by :ref{#lem-hyp-fusion}, some $Q \subseteq P$ forces all of them, and all its members satisfy $\neg(\exists Y^\alpha)\psi$. Number quantifiers are treated in the same way, with the sentences $\psi(n)$. (Sacks, Lemma IV.4.4.)
+:::
+
+:::figure[The fusion sequence of :ref{#lem-hyp-fusion}. Each condition of level $i$ splits into two disjoint conditions of level $i + 1$, chosen by a hyperarithmetic selection to force $\varphi_i$. The limit $Q$ meets every condition of every level, and finitely many conditions per level give a common bound on the ranks of the witnesses.]
+<svg class="fig" viewBox="0 0 600 230" width="600" role="img" aria-label="Nested conditions: the condition P at the top is split into two disjoint conditions Q(1,0) and Q(1,1), each forcing phi 0; each of them is split again into two conditions forcing phi 1, and so on; the limit Q is the class of sets lying in one condition at every level"><rect x="40.0" y="30" width="520.0" height="26" rx="3" class="cell head-cell"/><text x="300.0" y="48" text-anchor="middle" class="label">P = Q₀,₀</text><rect x="44.0" y="78" width="252.0" height="26" rx="3" class="soft-fill"/><text x="170.0" y="96" text-anchor="middle" class="label">Q₁,₀</text><rect x="304.0" y="78" width="252.0" height="26" rx="3" class="soft-fill"/><text x="430.0" y="96" text-anchor="middle" class="label">Q₁,₁</text><text x="566" y="96" class="label">⊩ φ₀</text><rect x="48.0" y="126" width="114.0" height="26" rx="3" class="cell"/><text x="105.0" y="144" text-anchor="middle" class="label">Q₂,₀</text><rect x="178.0" y="126" width="114.0" height="26" rx="3" class="cell"/><text x="235.0" y="144" text-anchor="middle" class="label">Q₂,₁</text><rect x="308.0" y="126" width="114.0" height="26" rx="3" class="cell"/><text x="365.0" y="144" text-anchor="middle" class="label">Q₂,₂</text><rect x="438.0" y="126" width="114.0" height="26" rx="3" class="cell"/><text x="495.0" y="144" text-anchor="middle" class="label">Q₂,₃</text><text x="566" y="144" class="label">⊩ φ₁</text><rect x="52.0" y="174" width="41.0" height="26" rx="3" class="soft-fill"/><rect x="117.0" y="174" width="41.0" height="26" rx="3" class="soft-fill"/><rect x="182.0" y="174" width="41.0" height="26" rx="3" class="soft-fill"/><rect x="247.0" y="174" width="41.0" height="26" rx="3" class="soft-fill"/><rect x="312.0" y="174" width="41.0" height="26" rx="3" class="soft-fill"/><rect x="377.0" y="174" width="41.0" height="26" rx="3" class="soft-fill"/><rect x="442.0" y="174" width="41.0" height="26" rx="3" class="soft-fill"/><rect x="507.0" y="174" width="41.0" height="26" rx="3" class="soft-fill"/><text x="566" y="192" class="label">⊩ φ₂</text><text x="300" y="222" text-anchor="middle" class="label">Q = the sets that lie in some condition of every level: a hyperarithmetic perfect class forcing every φᵢ</text></svg>
 :::
 
 ## Generic sets
@@ -115,13 +121,13 @@ In the proof of :ref{#lem-constant-or-injective}, where is the fusion lemma used
 
 Why is genericity defined with dense sets arithmetic in $\mathcal O$, rather than with all dense sets?
 
-- [x] Because there are uncountably many sets of conditions but only countably many arithmetic in $\mathcal O$; meeting all dense sets would be impossible, while the dense sets needed in the proofs, such as $D_\varphi$ and $D_\theta$, are arithmetic in $\mathcal O$.
+- [x] Meeting all dense sets is impossible: for every set $X$, the conditions that do not contain $X$ form a dense set, which $X$ does not meet. The dense sets needed in the proofs, such as $D_\varphi$ and $D_\theta$, are arithmetic in $\mathcal O$, and there are countably many of these.
 - [ ] Because conditions are hyperarithmetic.
 
   Conditions being hyperarithmetic makes the sets of indices definable, but does not bound the number of dense sets.
 - [ ] To make the generic set computable in $\mathcal O$.
 
-  A generic set is not computable in $\mathcal O$ in general; it is computable in a set arithmetic in $\mathcal O$, a different statement.
+  The definition restricts which dense sets must be met; it says nothing about the complexity of a generic set.
 :::
 
 ::::exercise[Generic sets are not hyperarithmetic]{#ex-perfect-generic-not-hyp difficulty=1 objective="Show with a dense set that perfect generic sets avoid the hyperarithmetic sets."}
@@ -142,6 +148,22 @@ Gandy and Sacks (1967) constructed a set of minimal hyperdegree by perfect forci
 - C. T. Chong and L. Yu, *Recursion Theory: Computational Aspects of Definability*, De Gruyter, 2015, Section 5.3.
 
 :::::exercises
+::::exercise{#ex-condition-hyp-member difficulty=1 objective="See that conditions have hyperarithmetic members although generic sets are not hyperarithmetic."}
+Show that every condition contains a hyperarithmetic set. Why does this not contradict :ref{#ex-perfect-generic-not-hyp}?
+
+:::solution
+The tree of a condition $P$ is hyperarithmetic and has no dead ends, since it is perfect. Its leftmost path, obtained by following the bit $0$ whenever it stays in the tree, is computable in the tree, hence hyperarithmetic, and belongs to $P$. Genericity does not say that $T$ is a typical member of a single condition, but that $T$ belongs to conditions of every dense set arithmetic in $\mathcal O$; for each hyperarithmetic $H$, one of these dense sets excludes $H$.
+:::
+::::
+
+::::exercise{#ex-dichotomy-examples difficulty=1 objective="Recognize the two cases of the dichotomy lemma on examples."}
+For the ranked formulas $\theta_0(x) = x \in \mathcal T$, $\theta_1(x) = (\exists y)(\text{the Turing machine } x \text{ halts within } y \text{ steps})$ and $\theta_2(x) = (2x \in \mathcal T)$, say which case of :ref{#lem-constant-or-injective} applies on a suitable condition, and give $Q$ and $H$.
+
+:::solution
+$\theta_0^X = X$: on every condition, $X \leq_T \theta_0^X$ with $H = \emptyset$. $\theta_1^X = \emptyset'$ for every $X$: the map is constant on every condition, with $H = \emptyset'$. For $\theta_2^X = \{ x : 2x \in X \}$, the map is neither constant nor injective on $\cs$; take for $Q$ the perfect class of the sets $X$ with $X(2x + 1) = 0$ for every $x$, a computable condition. On $Q$, $X$ is computable from $\theta_2^X$, so the second case holds with $H = \emptyset$. On the condition of the sets with $X(2x) = 0$ for every $x$, the first case holds with $H = \emptyset$.
+:::
+::::
+
 ::::exercise{#ex-generic-closed-hyp difficulty=2 objective="Compare the generic sets with the sets of the same hyperdegree."}
 Let $T$ be generic for perfect forcing and $S \equiv_h T$. Show that $S$ has minimal hyperdegree, and that $\omega_1^S = \omega_1^{\mathrm{CK}}$.
 

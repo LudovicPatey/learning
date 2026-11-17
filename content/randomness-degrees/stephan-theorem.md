@@ -81,7 +81,7 @@ Where is the hypothesis $\emptyset' \not\leq_T A$ used?
 3. A PA set computes a member of the non-empty $\Pi^0_1$ class of :ref{#cor-mlr-structure}, which consists of random sequences. By (2), a low PA set is not Turing equivalent to a random sequence.
 :::
 
-Part 1 shows that the DNC degrees are not all PA: a low random sequence computes a DNC function but no $\{0, 1\}$-valued one. The two notions differ in the size of the values allowed, and the difference is exactly what random sequences fall into.
+Part 1 shows that the DNC degrees are not all PA: a low random sequence computes a DNC function but no $\{0, 1\}$-valued one. The two notions differ in the size of the values allowed, and the incomplete random sequences lie between them: DNC, but not PA.
 
 ::::exercise[Above every incomplete degree]{#ex-stephan-above-incomplete difficulty=2 objective="Combine Stephan's theorem with the relativized computably dominated basis theorem."}
 Let $X$ be a set with $\emptyset' \not\leq_T X$. Show that some set $Y \geq_T X$ is not of random degree. (Stephan.)

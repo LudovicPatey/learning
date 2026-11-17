@@ -138,6 +138,14 @@ Kolmogorov's 0-1 law is from his 1933 monograph. The translation lemma is Kučer
 - R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Springer, 2010, Sections 6.10, 8.14 and 8.21.
 
 :::::exercises
+::::exercise{#ex-gl1-measure-one difficulty=1 objective="Translate the results on 2-random sequences into statements about measure."}
+Show that the class of generalized low sequences and the class of sequences of hyperimmune degree both have measure $1$, and that the sequences of hyperimmune-free degree form a null class that contains random sequences.
+
+:::solution
+The 2-random sequences form a class of measure $1$: its complement is the intersection of a universal Martin-Löf test relative to $\emptyset'$, a null class. By :ref{#thm-kautz-gl1} and :ref{#thm-martin-hyperimmune} (2), both classes contain every 2-random sequence, so they have measure $1$. The sequences of hyperimmune-free degree lie in the complement of the second class, a null class, and a computably dominated random sequence exists by the computably dominated basis theorem (:ref{#cor-mlr-structure}). So measure $1$ is reached by 2-randomness, not by 1-randomness.
+:::
+::::
+
 ::::exercise{#ex-01-degree-invariant difficulty=2 objective="Apply Kautz's 0-1 law to degree-invariant classes."}
 Let $\mathcal C$ be a $\Sigma^0_3$ class closed under finite changes. Show that $\mathcal C$ contains every 2-random sequence or no 2-random sequence.
 

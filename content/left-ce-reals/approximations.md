@@ -159,6 +159,14 @@ The characterizations of left-c.e. reals by cuts, approximations and sums go bac
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 1.8.
 
 :::::exercises
+::::exercise{#ex-one-minus-omega difficulty=1 objective="Use the two-sided characterization of computable reals to separate left-c.e. and right-c.e. reals."}
+Show that $1 - \Omega$ is right-c.e. but not left-c.e.
+
+:::solution
+$\Omega$ is left-c.e., so $-\Omega$ is right-c.e., and so is $1 - \Omega$, whose left cut is obtained by adding $1$ to the left cut of $-\Omega$. If $1 - \Omega$ were left-c.e., then $\Omega = 1 - (1 - \Omega)$ would be right-c.e. as well as left-c.e., hence computable; but $\Omega$ is random, hence not computable.
+:::
+::::
+
 ::::exercise{#ex-left-ce-closure difficulty=1 objective="Check the closure properties of left-c.e. reals from their approximations."}
 Let $\alpha$ and $\beta$ be left-c.e. reals in $[0, 1]$. Show that $\alpha + \beta$, $\alpha\beta$, $\max(\alpha, \beta)$ and $\min(\alpha, \beta)$ are left-c.e. Show that if $(\alpha^{(k)})_k$ is a sequence of reals of $[0, 1]$ that are left-c.e. uniformly in $k$, then $\sum_k 2^{-k-1} \alpha^{(k)}$ is left-c.e.
 

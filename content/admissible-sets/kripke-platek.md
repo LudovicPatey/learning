@@ -100,7 +100,7 @@ A relation $S \subseteq \nat^k$ is c.e. if and only if it is $\Sigma_1$-definabl
 :::proof{of=thm-hf-ce}
 The finite ordinals form a $\Delta_0$-definable subset of $\mathrm{HF}$, and addition and multiplication of finite ordinals are definable by $\Sigma_1$ formulas over $\mathrm{HF}$, by $\Sigma$-recursion; their graphs are also $\Pi_1$, since they are total functions. So every bounded arithmetic formula is equivalent over $\mathrm{HF}$ to a $\Delta_1$ formula, and a c.e. relation, of the form $(\exists i)\psi(i, m)$ with $\psi$ bounded, is $\Sigma_1$ over $\mathrm{HF}$.
 
-Conversely, the map $f(2^{n_1} + \dots + 2^{n_k}) = \{ f(n_1), \dots, f(n_k) \}$, for distinct $n_i$, is a bijection from $\nat$ onto $\mathrm{HF}$ under which $\in$ becomes a computable relation, and every $\Delta_0$ formula becomes a computable relation, since bounded quantifiers range over finite, computably listed sets. A $\Sigma_1$ relation $(\exists u)\varphi(u, m)$ with $\varphi$ in $\Delta_0$ becomes $(\exists i)$ (computable relation), which is c.e.
+Conversely, the map $f(2^{n_1} + \dots + 2^{n_k}) = \{ f(n_1), \dots, f(n_k) \}$, for distinct $n_i$, is a bijection from $\nat$ onto $\mathrm{HF}$ under which $\in$ becomes a computable relation, the code of the finite ordinal $m$ is computable from $m$, and every $\Delta_0$ formula becomes a computable relation, since bounded quantifiers range over finite, computably listed sets. A $\Sigma_1$ relation $(\exists u)\varphi(u, m)$ with $\varphi$ in $\Delta_0$ becomes $(\exists i)$ (computable relation), which is c.e.
 :::
 
 So KP over $\mathrm{HF}$ is ordinary computability. The following lessons lift this to the ordinals: the admissible sets of the constructible hierarchy, and in particular $L_{\omega_1^{\mathrm{CK}}}$, are the universes of generalized computations.
@@ -148,13 +148,39 @@ Kripke (1964) and Platek (1966) introduced the theory independently, as a set-th
 - G. E. Sacks, *Higher Recursion Theory*, Springer, 1990, Chapter VII.
 
 :::::exercises
+::::exercise{#ex-kp-delta0-examples difficulty=1 objective="Write elementary set-theoretic notions as Δ₀ formulas."}
+Write $\Delta_0$ formulas expressing: $x$ is transitive; $x$ is an ordinal; $z = x \cup y$; $f$ is a function from $a$ to $b$; $x = \omega$ (the least non-zero limit ordinal).
+
+:::solution
+Transitive: $(\forall u \in x)(\forall v \in u)(v \in x)$. Ordinal: $x$ is transitive and $(\forall u \in x)(u \text{ is transitive})$, using foundation for the linear order. Union: $(\forall u \in z)(u \in x \vee u \in y) \wedge (\forall u \in x)(u \in z) \wedge (\forall u \in y)(u \in z)$. A pair $(u, v) = \{ \{ u \}, \{ u, v \} \}$ is $\Delta_0$-definable, and "$f$ is a function from $a$ to $b$" says that every element of $f$ is a pair $(u, v)$ with $u \in a$ and $v \in b$, the components being found inside the elements of the elements of $f$, and that $(\forall u \in a)$ there is exactly one such pair in $f$; all the quantifiers are bounded by $f$, $a$, $b$ or their elements. Finally $x = \omega$: $x$ is an ordinal, $x \neq \emptyset$, $x$ is a limit ($(\forall u \in x)(\exists v \in x)(u \in v)$), and every element of $x$ is $\emptyset$ or a successor ($(\forall u \in x)(u = \emptyset \vee (\exists v \in u)(u = v \cup \{ v \}))$).
+:::
+::::
+
+::::exercise{#ex-sigma-upward difficulty=1 objective="Prove upward absoluteness of Σ formulas between transitive sets."}
+Let $A \subseteq B$ be transitive sets, and $\varphi$ a $\Sigma$ formula with parameters in $A$. Show that if $A \models \varphi$, then $B \models \varphi$.
+
+:::solution
+By induction on $\varphi$. For $\Delta_0$ formulas, both $A$ and $B$ agree with the universe. Conjunction and disjunction are immediate. For $(\exists u \in v)\psi$ and $(\forall u \in v)\psi$ with $v \in A$, the elements of $v$ are the same in $A$ and $B$, since both are transitive, and the induction hypothesis applies to each. For $(\exists u)\psi$: a witness $u \in A$ belongs to $B$, and $B \models \psi(u)$ by induction. The universal unbounded quantifier is the only one that would break the argument, and $\Sigma$ formulas do not contain it.
+:::
+::::
+
+::::exercise{#ex-v-omega-omega difficulty=2 objective="See why Δ₀-collection is the axiom that makes admissible sets closed under recursion."}
+Show that $V_{\omega + \omega}$ satisfies all the axioms of KP except $\Delta_0$-collection, and that $\Delta_0$-collection fails in it.
+
+:::solution
+$V_\lambda$ is transitive for every limit $\lambda$, so extensionality and foundation hold; it contains $\{ x, y \}$ and $\bigcup x$ when it contains $x$ and $y$, and every subset of an element of $V_\lambda$ belongs to $V_\lambda$, so separation holds for all formulas.
+
+Let $\varphi(n, v)$ say: $v$ is a function with domain $n \cup \{ n \}$, $v(0) = \omega$, and $v(i \cup \{ i \}) = v(i) \cup \{ v(i) \}$ for every $i \in n$. It is $\Delta_0$ with the parameter $\omega \in V_{\omega + \omega}$, and for each $n \in \omega$ its unique witness $v_n$, whose last value is $\omega + n$, is a finite set of pairs of ordinals below $\omega + n + 1$, so it belongs to $V_{\omega + \omega}$. So $V_{\omega + \omega} \models (\forall n \in \omega)(\exists v)\varphi(n, v)$. A set $y \in V_{\omega + \omega}$ containing witnesses for all $n$ would contain all the $v_n$; the rank of $v_n$ is at least $\omega + n$, so the rank of $y$ would be at least $\omega + \omega$, which is impossible for an element of $V_{\omega + \omega}$. So $\Delta_0$-collection fails, and $V_{\omega + \omega}$ is not admissible. Each stage of the recursion $n \mapsto \omega + n$ exists in $V_{\omega + \omega}$, but the recursion of length $\omega$ cannot be completed there: this is what collection provides in the proof of :ref{#thm-sigma-recursion}.
+:::
+::::
+
 ::::exercise[The smallest admissible set]{#ex-hf-smallest difficulty=2 objective="Check the axioms of KP on the hereditarily finite sets and show minimality."}
 Show that $\mathrm{HF}$ is admissible, and that every non-empty admissible set contains $\mathrm{HF}$.
 
 :::solution
 $\mathrm{HF}$ is transitive. Extensionality and foundation hold in every transitive set, since $\in$ is well-founded. Pair and union hold, since $\{ x, y \}$ and $\bigcup x$ are hereditarily finite when $x$ and $y$ are. $\Delta_0$-separation holds because a subset of a finite set of hereditarily finite sets is hereditarily finite, and $\Delta_0$ formulas are absolute. For $\Delta_0$-collection, if every element of the finite set $x$ has a witness in $\mathrm{HF}$, the finite set of chosen witnesses is in $\mathrm{HF}$.
 
-Let $A$ be admissible and non-empty. By foundation and $\Delta_0$-separation, $\emptyset \in A$. If $x, y \in A$, then $x \cup \{ y \} \in A$: pair gives $\{ x, y \}$, and union gives a superset of $x \cup \{ y \}$ from which $\Delta_0$-separation extracts it. Every hereditarily finite set is obtained from $\emptyset$ by finitely many operations $x, y \mapsto x \cup \{ y \}$, by induction on the rank, so $\mathrm{HF} \subseteq A$.
+Let $A$ be admissible and non-empty. By $\Delta_0$-separation applied to any element of $A$ with the formula $u \neq u$, $\emptyset \in A$. If $x, y \in A$, then $x \cup \{ y \} \in A$: pair and $\Delta_0$-separation give $\{ y \} = \{ u \in z : u = y \}$ and then $\{ x, \{ y \} \}$, and union applied to it gives a superset of $x \cup \{ y \}$, from which $\Delta_0$-separation extracts $x \cup \{ y \}$. Every hereditarily finite set is obtained from $\emptyset$ by finitely many operations $x, y \mapsto x \cup \{ y \}$, by induction on the rank, so $\mathrm{HF} \subseteq A$.
 :::
 ::::
 

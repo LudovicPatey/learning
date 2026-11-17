@@ -147,7 +147,7 @@ Let $\alpha$ be computable, and let $(a_m)$ be a computable sequence of rational
 
 ## Notes and references
 
-Solovay reducibility was introduced by Solovay in unpublished notes (1975), with :ref{#lem-close-strings}, :ref{#thm-solovay-complexity} and :ref{#thm-omega-complete}; Solovay called the complete left-c.e. reals Ω-like. The characterization by approximations is due to Calude, Coles, Hertling and Khoussainov (2001). Downey, Hirschfeldt and Nies (2002) studied the structure of the Solovay degrees of left-c.e. reals: it is a dense distributive upper semilattice, in which every incomplete degree splits, and Downey, Hirschfeldt and LaForte showed that its first-order theory is undecidable (admitted; Downey–Hirschfeldt, Section 9.5). Solovay reducibility does not imply weak truth-table reducibility (Downey, Hirschfeldt and LaForte; Downey–Hirschfeldt, Theorem 9.1.6).
+Solovay reducibility was introduced by Solovay in unpublished notes (1975), with :ref{#lem-close-strings}, :ref{#thm-solovay-complexity} and :ref{#thm-omega-complete}; Solovay called the complete left-c.e. reals Ω-like. The characterization by approximations is due to Calude, Coles, Hertling and Khoussainov (1999). Downey, Hirschfeldt and Nies (2002) studied the structure of the Solovay degrees of left-c.e. reals: it is a dense distributive upper semilattice, in which every incomplete degree splits, and Downey, Hirschfeldt and LaForte showed that its first-order theory is undecidable (admitted; Downey–Hirschfeldt, Section 9.5). Solovay reducibility does not imply weak truth-table reducibility (Downey, Hirschfeldt and LaForte; Downey–Hirschfeldt, Theorem 9.1.6).
 
 - R. M. Solovay, *Draft of a paper (or series of papers) on Chaitin's work*, unpublished notes, IBM Thomas J. Watson Research Center, 1975.
 - C. S. Calude, R. J. Coles, P. H. Hertling and B. Khoussainov, *Degree-theoretic aspects of computably enumerable reals*, in: Models and Computability, London Mathematical Society Lecture Note Series 259, Cambridge University Press, 1999, 23–39.
@@ -156,6 +156,14 @@ Solovay reducibility was introduced by Solovay in unpublished notes (1975), with
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 3.2.
 
 :::::exercises
+::::exercise{#ex-solovay-rational-shift difficulty=1 objective="Check that Solovay degrees ignore rational translations."}
+Let $\alpha$ be a left-c.e. real and $q$ a rational with $\alpha + q \in [0, 1]$. Show that $\alpha + q \equiv_S \alpha$.
+
+:::solution
+$(\alpha_s + q)$ is an approximation of $\alpha + q$, and $(\alpha + q) - (\alpha_n + q) = \alpha - \alpha_n$. By :ref{#prop-solovay-approximations} with $g(n) = n$ and $c = 2$, each real is Solovay reducible to the other.
+:::
+::::
+
 ::::exercise{#ex-solovay-sum-characterization difficulty=2 objective="Prove the easy direction of the characterization of Solovay reducibility by sums."}
 Let $\alpha$, $\beta$ and $\gamma$ be left-c.e. reals and $d$ a positive integer with $d\beta = \alpha + \gamma$. Show that $\alpha \leq_S \beta$. (Downey, Hirschfeldt and Nies proved the converse: if $\alpha \leq_S \beta$, then $d\beta - \alpha$ is left-c.e. for some $d$; admitted.)
 

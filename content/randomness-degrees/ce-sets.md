@@ -100,7 +100,7 @@ contradicting the hypothesis on $f$. This proves the claim, and $B \leq_T f$.
 A random sequence computes a DNC function by :ref{#cor-random-dnc}, hence a function $f$ with $W_{f(e)} \neq W_e$ by :ref{#ex-fpf-ce-indices}. If $A \leq_T \emptyset'$, then $f \leq_T \emptyset'$, and :ref{#thm-kucera-post} gives a simple c.e. set $B \leq_T f \leq_T A$. For (2), the random sequences form a $\Sigma^0_2$ class containing a non-empty $\Pi^0_1$ class $\{ X : K(X \uh n) \geq n - c \text{ for all } n \}$, for $c$ large (:ref{#cor-mlr-structure}); a low member $A$ of this class exists by :ref{#thm-low-basis}, and $B' \leq_T A' \equiv_T \emptyset'$.
 :::
 
-The two theorems together say that the random sequences below $\emptyset'$ bound non-computable c.e. sets, but that no random sequence lies below an incomplete c.e. set. The c.e. sets below a low random sequence are thus far from it in the Turing degrees: they are below it, never above. In the course on K-trivial sets, these c.e. sets reappear as the K-trivial sets that are computable from incomplete random sequences.
+The two theorems together say that the random sequences below $\emptyset'$ bound non-computable c.e. sets, but that no random sequence lies below an incomplete c.e. set. Below a low random sequence there are non-computable c.e. sets, all of them low, while the only c.e. degree above it is $\mathbf 0'$. In the course on K-trivial sets, these c.e. sets reappear as the K-trivial sets that are computable from incomplete random sequences.
 
 ::::exercise{#ex-two-random-no-minimal-pair difficulty=2 objective="Combine Kučera's theorem with the construction of a c.e. set below two sets at once."}
 Let $A_0, A_1 \leq_T \emptyset'$ be random. Admit the theorem of Ambos-Spies, Jockusch, Shore and Soare that the c.e. set $B$ built in the proof of :ref{#thm-kucera-post} can be made promptly simple, and that a promptly simple c.e. set $B_0$ and a non-computable c.e. set $B_1$ always compute a common non-computable c.e. set. Deduce that the Turing degrees of $A_0$ and $A_1$ do not form a minimal pair: some non-computable set is computable from both.
@@ -120,6 +120,14 @@ Both theorems are from Kučera's papers of 1985 and 1986. Kučera's original pro
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 4.2.
 
 :::::exercises
+::::exercise{#ex-low-random-strictly-above difficulty=1 objective="Combine the two theorems of Kučera to compare a low random sequence with the c.e. sets it computes."}
+Let $A$ be a low random sequence and $B \leq_T A$ the simple c.e. set given by :ref{#cor-kucera-post}. Show that $B <_T A$.
+
+:::solution
+$B \leq_T A$ by construction. If $A \leq_T B$, then by :ref{#thm-kucera-ce-random}, $\emptyset' \leq_T B \leq_T A$, which contradicts the lowness of $A$: a low set does not compute $\emptyset'$, since $\emptyset'' \leq_T A' \leq_T \emptyset'$ would follow. So $B <_T A$.
+:::
+::::
+
 ::::exercise{#ex-kucera-not-wtt-incomplete difficulty=1 objective="Apply Kučera's theorem in its weak truth-table form."}
 Show that no c.e. set $B$ with $\emptyset' \not\leq_{wtt} B$ is weak truth-table above a random sequence. Deduce that a c.e. set that is Turing complete but not weak truth-table complete computes random sequences, but none by a weak truth-table reduction.
 

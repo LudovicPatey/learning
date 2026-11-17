@@ -11,7 +11,7 @@ The proofs combine the two sides of the theory. ω-models of KP can be coded by 
 
 ## Codes of ω-models
 
-A set $E \subseteq \nat^2$, read as a binary relation on $\nat$, **codes** the structure $(\nat, E)$. It is a **nice code of an ω-model of KP** if $(\nat, E)$ is a model of KP and the elements that $(\nat, E)$ regards as natural numbers are the even numbers, with $2n$ playing the role of $n$: the number $0$ codes $\emptyset$, and $2n + 2$ codes $(2n) \cup \{ 2n \}$ in the model.
+A set $E \subseteq \nat^2$, read as a binary relation on $\nat$, **codes** the structure $(\nat, E)$. It is a **nice code of an ω-model of KP** if $(\nat, E)$ is a model of KP and of the axiom of infinity, and the elements that $(\nat, E)$ regards as natural numbers are the even numbers, with $2n$ playing the role of $n$: the number $0$ codes $\emptyset$, $2n + 2$ codes $(2n) \cup \{ 2n \}$ in the model, and some element has exactly the even numbers as its $E$-elements.
 
 :::proposition{#prop-omega-model-codes}
 1. The class of nice codes of ω-models of KP is $\Delta^1_1$; in fact it is arithmetic in the $\omega$-th jump of $E$, uniformly.
@@ -22,7 +22,7 @@ A set $E \subseteq \nat^2$, read as a binary relation on $\nat$, **codes** the s
 :::proof{of=prop-omega-model-codes}
 1. That $(\nat, E)$ satisfies a given axiom of KP is arithmetic in $E$, uniformly in the axiom; satisfying all of them is computable in $E^{(\omega)}$, uniformly. The conditions on the even numbers are arithmetic in $E$. So the class is computable in the $\omega$-th jump, uniformly in $E$, and is $\Delta^1_1$.
 2. $n$ belongs to the represented set if and only if $2n \mathrel E c$.
-3. Given an ω-model $(M, E')$, its natural numbers are isomorphic to $\nat$ by hypothesis; enumerate them as $0, 2, 4, \dots$ and the other elements as $1, 3, 5, \dots$ (if there are finitely many others, the model is hereditarily finite, which is impossible since it contains $\omega$). A countable admissible set containing $\omega$ exists: the transitive collapse of a countable elementary substructure of $L_{\omega_1}$, which is admissible (admitted; Chong–Yu, Exercise 3.3.1). Its natural numbers are standard, so it gives a nice code.
+3. Given an ω-model $(M, E')$, its natural numbers are isomorphic to $\nat$ by hypothesis; enumerate them as $0, 2, 4, \dots$ and the other elements as $1, 3, 5, \dots$; there are infinitely many others, such as the ordinals $\omega$, $\omega \cup \{ \omega \}$, and so on, of the model. A countable admissible set containing $\omega$ exists: the transitive collapse of a countable elementary substructure of $L_{\omega_1}$, which is admissible (admitted; Chong–Yu, Exercise 3.3.1). Its natural numbers are standard, so it gives a nice code.
 :::
 
 ## The second admissible ordinal
@@ -49,6 +49,10 @@ In the proof of :ref{#thm-ck-second-admissible}, why is the Gandy basis theorem 
 
 ## The hyperarithmetic sets are the constructible sets of level ω₁ᶜᵏ
 
+:::figure[The first levels of the constructible hierarchy and the classes of sets of numbers they carry. Over $L_\omega$, the $\Sigma_1$ relations on numbers are the c.e. relations (:ref{#thm-hf-ce}); over $L_{\omega_1^{\mathrm{CK}}}$, they are the $\Pi^1_1$ relations (:ref{to="spector-gandy"}).]
+<svg class="fig" viewBox="0 0 600 190" width="600" role="img" aria-label="The constructible hierarchy on a line: L zero is empty; L omega is HF, over which the Sigma-1 relations on numbers are the c.e. relations; L omega plus one contains the arithmetic sets; L at the Church-Kleene ordinal has the hyperarithmetic sets as its subsets of N, and over it the Sigma-1 relations on numbers are the Pi-1-1 relations"><line x1="50" y1="70" x2="560" y2="70" class="ink-stroke" stroke-width="1.5"/><line x1="300" y1="70" x2="470" y2="70" class="muted-stroke" stroke-width="1.5" stroke-dasharray="4 4"/><line x1="50" y1="62" x2="50" y2="78" class="ink-stroke" stroke-width="1.2"/><text x="50" y="46" text-anchor="middle" class="math">L<tspan class="mrm" font-size="11" dy="4">0</tspan></text><line x1="150" y1="62" x2="150" y2="78" class="ink-stroke" stroke-width="1.2"/><text x="150" y="46" text-anchor="middle" class="math">L<tspan class="mrm" font-size="11" dy="4">ω</tspan></text><line x1="230" y1="62" x2="230" y2="78" class="ink-stroke" stroke-width="1.2"/><text x="230" y="46" text-anchor="middle" class="math">L<tspan class="mrm" font-size="11" dy="4">ω+1</tspan></text><line x1="520" y1="62" x2="520" y2="78" class="ink-stroke" stroke-width="1.2"/><text x="520" y="46" text-anchor="middle" class="math">L<tspan class="mrm" font-size="11" dy="4">ω₁ᶜᵏ</tspan></text><rect x="100" y="100" width="110" height="52" rx="4" class="soft-fill"/><text x="155" y="118" text-anchor="middle" class="label">Σ₁ over HF</text><text x="155" y="136" text-anchor="middle" class="label">= c.e.</text><rect x="215" y="100" width="120" height="52" rx="4" class="soft-fill"/><text x="275" y="118" text-anchor="middle" class="label">new reals:</text><text x="275" y="136" text-anchor="middle" class="label">arithmetic sets</text><rect x="430" y="100" width="160" height="70" rx="4" class="soft-fill"/><text x="510" y="118" text-anchor="middle" class="label">reals in it = HYP</text><text x="510" y="136" text-anchor="middle" class="label">Σ₁ over it = Π¹₁</text><text x="510" y="154" text-anchor="middle" class="label">admissible</text><text x="385" y="58" text-anchor="middle" class="label">no admissible level</text><text x="150" y="92" text-anchor="middle" class="label">= HF</text><text x="300" y="184" text-anchor="middle" class="label">ω and ω₁ᶜᵏ are the first two admissible ordinals</text></svg>
+:::
+
 :::theorem{#thm-hyp-l}
 A set $X \subseteq \nat$ is hyperarithmetic if and only if $X \in L_{\omega_1^{\mathrm{CK}}}$.
 :::
@@ -69,13 +73,17 @@ A set $X \subseteq \nat$ is hyperarithmetic if and only if it is represented in 
 If $X$ is hyperarithmetic, then $X \in L_{\omega_1^{\mathrm{CK}}}$ by :ref{#thm-hyp-l}, and $X$ is represented in every ω-model of KP by :ref{#cor-omega-model-contains-l}. If $X$ is not hyperarithmetic, Kreisel's basis theorem gives a nice code $E$ with $X \not\leq_h E$, so $X$ is not represented in $(\nat, E)$.
 :::
 
-So the hyperarithmetic sets are the sets of numbers that every ω-model of KP must contain, as the computable sets are, in a sense, the sets that every model of the arithmetic of finite sets must contain. Kreisel proved the corresponding statement for ω-models of $\Delta^1_1$ comprehension, an axiom of second-order arithmetic, which the course on forcing over the hyperarithmetic sets uses.
+So the hyperarithmetic sets are the sets of numbers that every ω-model of KP must contain, as the computable sets are the sets of numbers that every ω-model of $\mathrm{RCA}_0$ contains. Kreisel proved the corresponding statement for ω-models of $\Delta^1_1$ comprehension, an axiom of second-order arithmetic, which the course on forcing over the hyperarithmetic sets uses.
 
 ::::exercise[Notations and constructibility]{#ex-wf-sigma1 difficulty=1 objective="Recognize well-foundedness of computable trees as a Σ₁ property over $L_{\omega_1^{\mathrm{CK}}}$."}
 Show that the set $\mathcal O$ of notations is $\Sigma_1$-definable over $L_{\omega_1^{\mathrm{CK}}}$, without parameters other than numbers.
 
 :::solution
-By the normal form theorem, there is a computable sequence of trees $(T_n)$ with $n \in \mathcal O$ if and only if $T_n$ is well-founded; the sequence is computable, so it is $\Delta_1$-definable over $L_\omega$ and belongs to $L_{\omega+1}$, and it is $\Sigma_1$-definable over $L_{\omega_1^{\mathrm{CK}}}$ without parameters, as the unique set satisfying a $\Delta_0$ property over $L_\omega$ (in fact over $\mathrm{HF}$, by :ref{#thm-hf-ce}). By the claim in the proof of :ref{#thm-hyp-l}, $n \in \mathcal O$ if and only if $L_{\omega_1^{\mathrm{CK}}} \models (\exists g)(g$ is an order-reversing map from $T_n$ to the ordinals$)$, a $\Sigma_1$ formula. (Chong–Yu, Exercise 3.7.1.)
+By the normal form theorem, there is a computable sequence of trees $(T_n)$ with $n \in \mathcal O$ if and only if $T_n$ is well-founded. The relation $\sigma \in T_n$ is computable, so it and its negation are $\Sigma_1$ over $\mathrm{HF}$ (:ref{#thm-hf-ce}); the formulas of that proof only quantify over finite sequences coding computations, which are the same in every transitive set containing $\omega$, so they still define the relation and its negation over $L_{\omega_1^{\mathrm{CK}}}$, which makes it $\Delta_1$ there. Each $T_n$ belongs to $L_{\omega+1}$. By the claim in the proof of :ref{#thm-hyp-l},
+$$
+n \in \mathcal O \iff L_{\omega_1^{\mathrm{CK}}} \models (\exists T)(\exists g)\big(T = T_n \wedge g \text{ is an order-reversing map from } T \text{ to the ordinals}\big),
+$$
+where "$T = T_n$" says that $T$ is the set of the finite sequences $\sigma$ with $\sigma \in T_n$, a $\Delta_1$ condition with quantifiers bounded by $T$ and by the set of finite sequences. The formula is $\Sigma_1$ and its only parameter is the number $n$. (Chong–Yu, Exercise 3.7.1.)
 :::
 ::::
 
@@ -89,6 +97,22 @@ That $\omega_1^{\mathrm{CK}}$ is the second admissible ordinal, and that the hyp
 - J. Barwise, *Admissible Sets and Structures*, Springer, 1975.
 
 :::::exercises
+::::exercise{#ex-omega1-relative-model difficulty=1 objective="Bound the ordinal of the standard part of a coded ω-model."}
+Let $E$ be a nice code of an ω-model of KP, and $N$ the transitive collapse of the standard part of $(\nat, E)$. Show that $\omega_1^{\mathrm{CK}} \leq o(N) \leq \omega_1^E$.
+
+:::solution
+The lower bound is :ref{#cor-omega-model-contains-l}. For the upper bound, as in the proof of :ref{#thm-ck-second-admissible}, an ordinal $\beta \in N$ is represented by some $b \in \nat$, and the $E$-elements of $b$, ordered by $E$, form an $E$-computable well-ordering of type $\beta$; so $\beta < \omega_1^E$.
+:::
+::::
+
+::::exercise{#ex-o-not-in-l-ck difficulty=1 objective="Locate O in the constructible hierarchy."}
+Show that $\mathcal O \notin L_{\omega_1^{\mathrm{CK}}}$ and $\mathcal O \in L_{\omega_1^{\mathrm{CK}} + 1}$.
+
+:::solution
+$\mathcal O$ is not hyperarithmetic, so $\mathcal O \notin L_{\omega_1^{\mathrm{CK}}}$ by :ref{#thm-hyp-l}. By :ref{#ex-wf-sigma1}, it is definable over $L_{\omega_1^{\mathrm{CK}}}$ by a formula with no parameters other than $\omega$, so it belongs to $\mathrm{Def}(L_{\omega_1^{\mathrm{CK}}}) = L_{\omega_1^{\mathrm{CK}} + 1}$. So the first non-hyperarithmetic sets appear at the first level after $\omega_1^{\mathrm{CK}}$.
+:::
+::::
+
 ::::exercise{#ex-hyp-delta1-l difficulty=2 objective="Show that hyperarithmetic sets are Δ₁-definable over $L_{\omega_1^{\mathrm{CK}}}$ and that the converse also holds."}
 Show that a set $X \subseteq \nat$ is hyperarithmetic if and only if both $X$ and its complement are $\Sigma_1$-definable over $L_{\omega_1^{\mathrm{CK}}}$, with parameters.
 

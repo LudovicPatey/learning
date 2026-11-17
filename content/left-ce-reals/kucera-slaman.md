@@ -118,7 +118,7 @@ Combining the three results, for a left-c.e. real $\alpha \in (0, 1)$, the follo
 3. Every left-c.e. real is weak truth-table reducible to $\emptyset'$ (lesson :ref{to="approximations"}). Conversely, by :ref{#thm-chkw}, $\alpha = \Omega_V$ for an optimal prefix-free machine $V$, and the domain of $V$ is weak truth-table reducible to $\Omega_V$ by :ref{#prop-omega-m-domain}. The proof of :ref{#thm-omega} computes $\emptyset'$ from the domain of an optimal machine by querying the strings of length at most $e + 1 + d$ to decide whether $e \in \emptyset'$, a computable bound; so $\emptyset' \leq_{wtt} \dom V \leq_{wtt} \alpha$.
 :::
 
-Part 1 is remarkable. The complexity $K(\alpha \uh n)$ of a random sequence oscillates between about $n$ and $n + K(n)$, and part 1 says that the oscillations are the same, up to a constant, for all random left-c.e. reals: they are all simple and all complex at the same lengths. Part 2 contrasts with :ref{#ex-sum-not-random}: the sum of two random reals need not be random, but adding a left-c.e. real to a random left-c.e. real keeps it random.
+Part 1 concerns the oscillations of complexity. The complexity $K(\alpha \uh n)$ of a random sequence oscillates between about $n$ and $n + K(n)$, and part 1 says that the oscillations are the same, up to a constant, for all random left-c.e. reals: they are all simple and all complex at the same lengths. Part 2 contrasts with :ref{#ex-sum-not-random}: the sum of two random reals need not be random, but adding a left-c.e. real to a random left-c.e. real keeps it random.
 
 ::::exercise[Sums of random reals]{#ex-sum-not-random difficulty=1 objective="See that the randomness of sums of left-c.e. reals is special to left-c.e. reals."}
 Show that if $\alpha$ is random, then $\beta = 1 - \alpha$ is random, while $\alpha + \beta = 1$ is not. Show that if $\alpha$ and $\beta$ are random left-c.e. reals, then $\alpha\beta$ is random, and $\alpha + \beta$ is random if it is less than $1$.
@@ -139,6 +139,14 @@ The Kučera–Slaman theorem is from their 2001 paper; Kučera and Slaman note t
 - A. Nies, *Computability and Randomness*, Oxford University Press, 2009, Section 3.2.
 
 :::::exercises
+::::exercise{#ex-omega-halves-optimal difficulty=1 objective="Apply the characterization of halting probabilities of optimal machines."}
+Show that $\Omega/2$ and $\Omega/2 + 1/4$ are halting probabilities of optimal prefix-free machines, and that $\Omega/2 + 1/4 \equiv_S \Omega$.
+
+:::solution
+Both reals are left-c.e. and in $(0, 1)$. They are Solovay equivalent to $\Omega$, by :ref{#ex-solovay-examples} (2) for $\Omega/2$ and :ref{#ex-solovay-rational-shift} for the translation by $1/4$; so they are Ω-like, hence random by :ref{#cor-above-random}. By :ref{#thm-chkw}, each is $\Omega_V$ for an optimal prefix-free machine $V$.
+:::
+::::
+
 ::::exercise{#ex-omega-like-turing difficulty=1 objective="Derive Turing completeness of Ω-like reals from Solovay completeness."}
 Show without :ref{#thm-chkw} that every Ω-like real is Turing equivalent to $\emptyset'$.
 

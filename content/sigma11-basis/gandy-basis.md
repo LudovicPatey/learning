@@ -17,7 +17,9 @@ By the normal form theorem, every $\Sigma^1_1$ class $\mathcal A$ of sets or fun
 $$
 n \notin \mathcal O^f \iff \exists g\ (f, g) \in [W_n].
 $$
-Indeed, by the normal form theorem relativized to $f$, uniformly, there are trees $T^f_n$, computable in $f$ uniformly in $n$, with $n \in \mathcal O^f$ if and only if $T^f_n$ is well-founded; let $W_n$ be the set of pairs $(\sigma, \tau)$ such that $\tau$ belongs to the tree $T^\sigma_n$ computed with the finite oracle $\sigma$.
+Indeed, by the normal form theorem relativized to $f$, uniformly, there are trees $T^f_n$, computable in $f$ uniformly in $n$, with $n \in \mathcal O^f$ if and only if $T^f_n$ is well-founded; let $W_n$ be the set of pairs $(\sigma, \tau)$ of strings of the same length such that every prefix of $\tau$ belongs to the tree $T^\sigma_n$ computed with the finite oracle $\sigma$, within $|\sigma|$ steps. With the usual convention that a computation with oracle $\sigma$ only queries $\sigma$ and that the membership of a string of length $\ell$ in $T^f_n$ is decided by a computation using $f \uh \ell$, a pair $(f, g)$ is a path of $W_n$ exactly when $g$ is a path of $T^f_n$.
+
+For example, the class of the sets $X$ that are not hyperarithmetic is $\Sigma^1_1$ (:ref{#prop-sigma11-singleton}), and a witness of the membership of $X$ is a path through a tree computable in $X$, uniformly: since "$X \in \mathrm{HYP}$" is $\Pi^1_1$, it says that a tree computable in $X$ is well-founded, and its negation that this tree has a path.
 
 For a computable tree of tuples $R$ and a node $\rho \in R$, the question whether $R$ has a path extending $\rho$ is $\Sigma^1_1$, uniformly in $R$ and $\rho$; its negation is $\Pi^1_1$, hence many-one reducible to $\mathcal O$ (:ref{#thm-o-complete}). So **$\mathcal O$ decides, uniformly, whether a computable tree of tuples has a path through a given node**.
 
@@ -97,6 +99,30 @@ Gandy proved the basis theorem in 1960, answering a question of Kleene. The proo
 - C. T. Chong and L. Yu, *Recursion Theory: Computational Aspects of Definability*, De Gruyter, 2015.
 
 :::::exercises
+::::exercise{#ex-tuples-projection difficulty=1 objective="Check that projections of trees of tuples give no new classes."}
+Let $R$ be a computable tree of triples. Show that the class $\{ f : \exists g\, \exists h\ (f, g, h) \in [R] \}$ is the projection of a computable tree of pairs.
+
+:::solution
+Let $\langle g, h \rangle$ denote the function $n \mapsto \langle g(n), h(n) \rangle$, and let $S$ be the set of pairs $(\sigma, \tau)$ of strings of the same length $\ell$ such that every $\tau(i)$ codes a pair $\langle \tau_0(i), \tau_1(i) \rangle$ and $(\sigma, \tau_0, \tau_1) \in R$. It is a computable tree of pairs, and $(f, \langle g, h \rangle) \in [S]$ if and only if $(f, g, h) \in [R]$. Every function $k$ is of the form $\langle g, h \rangle$, so the projections coincide. This is why the trees $R_n$ of the proof of :ref{#thm-gandy-basis}, with more and more coordinates, still define $\Sigma^1_1$ classes.
+:::
+::::
+
+::::exercise{#ex-gandy-pi11-fails difficulty=1 objective="See why the Gandy basis theorem needs the hypothesis Σ¹₁."}
+Give a non-empty $\Pi^1_1$ class none of whose members $X$ satisfies $\omega_1^X = \omega_1^{\mathrm{CK}}$.
+
+:::solution
+The class $\{ Y : \omega_1^Y > \omega_1^{\mathrm{CK}} \}$ is $\Pi^1_1$ (:ref{#prop-collapse-pi11} of the next lesson) and contains $\mathcal O$. A simpler example is the class $\{ \mathcal O \}$, which is $\Pi^1_1$ (:ref{#prop-o-pi11-singleton}): its only member collapses $\omega_1^{\mathrm{CK}}$. So the basis theorem cannot be extended to $\Pi^1_1$ classes, in the same way as the low basis theorem cannot be extended to $\Sigma^0_1$ classes.
+:::
+::::
+
+::::exercise{#ex-gandy-kleene-tree difficulty=2 objective="Combine the Gandy basis theorem with Kleene's tree without hyperarithmetic paths."}
+Show that there is a computable tree $T \subseteq \nat^{<\nat}$ with a path, no hyperarithmetic path, and a path $f$ with $\omega_1^f = \omega_1^{\mathrm{CK}}$ and $\mathcal O \not\leq_h f$.
+
+:::solution
+Kleene's theorem gives a computable tree $T$ with a path but no hyperarithmetic path. Its class of paths, a class of functions identified with sets through their graphs, is $\Pi^0_1$, hence $\Sigma^1_1$, and non-empty, so by :ref{#thm-gandy-basis} it has a path $f$ with $\mathcal O^f \leq_T \mathcal O$, hence $\mathcal O \not\leq_h f$ and $\omega_1^f = \omega_1^{\mathrm{CK}}$. So the paths of $T$ escape the hyperarithmetic sets, but some of them stay below $\mathcal O$ and preserve $\omega_1^{\mathrm{CK}}$: to have a path, a computable tree does not need the full strength of $\mathcal O$.
+:::
+::::
+
 ::::exercise{#ex-gandy-relativized difficulty=1 objective="Relativize the Gandy basis theorem."}
 Let $Z$ be a set. Show that every non-empty $\Sigma^1_1(Z)$ class has a member $X$ with $\mathcal O^{X \oplus Z} \leq_T \mathcal O^Z$ and $\omega_1^{X \oplus Z} = \omega_1^Z$.
 

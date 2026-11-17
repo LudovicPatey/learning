@@ -1,7 +1,7 @@
 ---
 title: Π¹₁ singletons
 summary: Kleene's O and the iterated hyperjumps are Π¹₁ singletons, unlike Σ¹₁ singletons, which are hyperarithmetic; a Π¹₁ singleton is either hyperarithmetic or hyperarithmetically above O.
-duration: 20
+duration: 25
 prerequisites: [kreisel-basis, descriptive-set-theory/uniformization]
 ---
 
@@ -16,7 +16,9 @@ The class $\{ \mathcal O \}$ is $\Pi^1_1$.
 :::proof{of=prop-o-pi11-singleton}
 Let $R$ be the c.e. relation of :ref{#prop-kleene-o-basic} (2), which agrees with $<_{\mathcal O}$ on $\mathcal O$. Say that a set $X$ is **closed** if $1 \in X$, $2^a \in X$ for every $a \in X$, and $3 \cdot 5^e \in X$ for every $e$ such that $\Phi_e$ is total, $\Phi_e(n) \in X$ and $(\Phi_e(n), \Phi_e(n+1)) \in R$ for every $n$. Closedness is an arithmetic property of $X$. We claim that $\mathcal O$ is the only closed subset of $\mathcal O$; then $\{ \mathcal O \} = \{ X : X \subseteq \mathcal O \text{ and } X \text{ is closed} \}$, and "$X \subseteq \mathcal O$", that is $\forall n\, (n \notin X \vee n \in \mathcal O)$, is $\Pi^1_1$.
 
-$\mathcal O$ is closed, by the definition of notations (:ref{#def-kleene-o}), since $R$ agrees with $<_{\mathcal O}$ on $\mathcal O$. Let $X \subseteq \mathcal O$ be closed. On $X$, the relation $R$ coincides with $<_{\mathcal O}$, so $X$ satisfies the closure conditions that define $\mathcal O$ as the least set satisfying them; by minimality, $\mathcal O \subseteq X$, and $X = \mathcal O$.
+$\mathcal O$ is closed, by the definition of notations (:ref{#def-kleene-o}), since $R$ agrees with $<_{\mathcal O}$ on $\mathcal O$. Let $X \subseteq \mathcal O$ be closed. We show that every $a \in \mathcal O$ belongs to $X$, by induction on $|a|$. If $a = 1$, this is the first closure condition. If $a = 2^b$, then $b \in \mathcal O$ with $|b| < |a|$, so $b \in X$ and $a \in X$. If $a = 3 \cdot 5^e$, then $\Phi_e$ is total, and every $\Phi_e(n)$ is in $\mathcal O$ with $|\Phi_e(n)| < |a|$, so $\Phi_e(n) \in X$ by induction; moreover $\Phi_e(n) <_{\mathcal O} \Phi_e(n+1)$, so $(\Phi_e(n), \Phi_e(n+1)) \in R$, since $R$ agrees with $<_{\mathcal O}$ on $\mathcal O$. The third closure condition gives $a \in X$. So $\mathcal O \subseteq X$, and $X = \mathcal O$.
+
+The hypothesis $X \subseteq \mathcal O$ cannot be dropped: the set $\nat$ is closed. Closedness alone only says that $X$ contains the notations, and the $\Pi^1_1$ condition $X \subseteq \mathcal O$ removes everything else.
 :::
 
 :::proposition{#prop-hyperjump-singleton}
@@ -103,6 +105,30 @@ That $\mathcal O$ and its hyperjumps are $\Pi^1_1$ singletons, and the gap theor
 - G. E. Sacks, *Higher Recursion Theory*, Springer, 1990, Part A.
 
 :::::exercises
+::::exercise{#ex-o-least-singleton difficulty=1 objective="Locate the hyperdegree of O among the hyperdegrees of Π¹₁ singletons."}
+Show that the hyperdegree of $\mathcal O$ is the least hyperdegree of a non-hyperarithmetic $\Pi^1_1$ singleton.
+
+:::solution
+$\mathcal O$ is a $\Pi^1_1$ singleton (:ref{#prop-o-pi11-singleton}) and is not hyperarithmetic, since it is not $\Sigma^1_1$. If $X$ is a non-hyperarithmetic $\Pi^1_1$ singleton, then $\mathcal O \leq_h X$ by :ref{#thm-pi11-singleton-gap}.
+:::
+::::
+
+::::exercise{#ex-countably-many-singletons difficulty=1 objective="Count the Π¹₁ singletons."}
+Show that there are only countably many $\Pi^1_1$ singletons, and that every $\Pi^1_1$ singleton is $\Delta^1_2$, as a set of numbers.
+
+:::solution
+A $\Pi^1_1$ class is given by a $\Pi^1_1$ formula, and there are countably many formulas, so there are countably many $\Pi^1_1$ singletons. If $\{ X \}$ is defined by the $\Pi^1_1$ formula $\varphi(Z)$, then $n \in X$ if and only if $\exists Z\, (\varphi(Z) \wedge n \in Z)$, which is $\Sigma^1_2$, and if and only if $\forall Z\, (\varphi(Z) \rightarrow n \in Z)$, which is $\Pi^1_2$. So $X$ is $\Delta^1_2$. In particular $\mathcal O^{\mathcal O}$, which is not hyperarithmetic in $\mathcal O$, is still $\Delta^1_2$.
+:::
+::::
+
+::::exercise{#ex-wf-singleton difficulty=1 objective="Recognize another Π¹₁ singleton through the gap theorem."}
+Let $\mathrm{WF}$ be the set of indices of computable well-founded trees, a $\Pi^1_1$ singleton (:ref{#prop-wf-pi11-singleton}). Without using that $\mathrm{WF}$ is $\Pi^1_1$-complete, show that $\mathcal O \leq_h \mathrm{WF}$.
+
+:::solution
+$\mathrm{WF}$ is not $\Sigma^1_1$: otherwise, by the boundedness theorem (:ref{#thm-sigma11-tree-bound}) applied to the $\Sigma^1_1$ tree made of the trees with indices in $\mathrm{WF}$, as in :ref{#ex-pi11-tree-unbounded}, the ranks of computable well-founded trees would be bounded below $\omega_1^{\mathrm{CK}}$, contradicting :ref{#prop-rank-computable}. So $\mathrm{WF}$ is not hyperarithmetic, and :ref{#thm-pi11-singleton-gap} gives $\mathcal O \leq_h \mathrm{WF}$.
+:::
+::::
+
 ::::exercise{#ex-pi11-singleton-omega1 difficulty=1 objective="Combine the gap theorem with Spector's theorem."}
 Let $X$ be a non-hyperarithmetic $\Pi^1_1$ singleton. Show that $\omega_1^X > \omega_1^{\mathrm{CK}}$.
 

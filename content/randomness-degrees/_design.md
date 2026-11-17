@@ -150,3 +150,4 @@ dominated random sequences, and degree-invariant Σ⁰₃ classes.
 ## 12. History
 
 - **2026-11-17: course written** (five lessons) when the randomness track was enlarged.
+- **2026-11-17: polishing pass.** All proofs checked again; sources checked against Downey–Hirschfeldt (Kautz's nontrivial measure, Section 6.12; the remark of Bienvenu and Porter after Theorem 8.6.1). Corrections: a remark in `ce-sets` said that the c.e. sets below a low random sequence are never above it, which is false for ∅′; replaced by the correct statement (the only c.e. degree above a random sequence is 0′). In `computable-measures`, the generating strings of the classes of part 2 of `thm-levin-kautz` are the minimal ones, not the maximal ones. A vague sentence of `stephan-theorem` rewritten. New further exercises: `ex-low-random-strictly-above`, `ex-measure-with-atom`, `ex-gl1-measure-one`.

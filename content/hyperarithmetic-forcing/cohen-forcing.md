@@ -45,7 +45,7 @@ The relation "$p \Vdash \varphi$", restricted to existential sentences $\varphi$
 :::
 
 :::proof{of=lem-cohen-hyp-pi11}
-As in the proof of :ref{#lem-ramified-truth}: the clauses of the definition, for ranked sentences, are $\Sigma^1_1$ closure conditions $A(X)$ on a set $X$ of pairs $(p, \varphi)$ and $(p, \neg\varphi)$, and the forcing relation is the least set satisfying them, so $p \Vdash \varphi$ if and only if $(\forall X)(A(X) \to (p, \varphi) \in X)$. Clause 6 quantifies over the finitely branching set of extensions of $p$, a number quantifier. An existential sentence is forced if and only if a ranked instance is, as in clause 4. (Sacks, Lemma IV.3.2.)
+As in the proof of :ref{#lem-ramified-truth}, with triples in place of pairs: $X$ is a set of triples $(p, \varphi, 1)$, recording that $p \Vdash \varphi$, and $(p, \varphi, 0)$, recording that $p \not\Vdash \varphi$, so that negation is handled monotonically. For instance, clause 6 becomes: if $(q, \varphi, 0) \in X$ for every $q \leq p$, then $(p, \neg\varphi, 1) \in X$; and if $(q, \varphi, 1) \in X$ for some $q \leq p$, then $(p, \neg\varphi, 0) \in X$. The quantifiers over the extensions $q$ of $p$ are number quantifiers. For ranked sentences, the clauses are $\Sigma^1_1$ closure conditions $A(X)$, the forcing relation and its complement form the least set satisfying them, and $p \Vdash \varphi$ if and only if $(\forall X)(A(X) \to (p, \varphi, 1) \in X)$. An existential sentence is forced if and only if a ranked instance is, as in clause 4. (Sacks, Lemma IV.3.2.)
 :::
 
 ## Generic sets
@@ -108,7 +108,7 @@ Why does the bound $\gamma$ give a set in $\mathcal M(\omega_1^{\mathrm{CK}}, T)
 
 ## Incomparable hyperdegrees
 
-:::theorem[Feferman; Chong–Yu]{#thm-incomparable-hyp}
+:::theorem{#thm-incomparable-hyp}
 For every non-hyperarithmetic set $Z$, there is a generic set $T$ with $T \not\leq_h Z$ and $Z \not\leq_h T$.
 :::
 
@@ -122,7 +122,7 @@ Let $Z_0, Z_1, \dots$ list the sets hyperarithmetic in $Z$, a countable family, 
 Let $T = \bigcup_i p_i$. It is generic, by step 2, and differs from every $Z_i$, by step 1, so $T \not\leq_h Z$. By :ref{#thm-feferman}, $\mathrm{HYP}(T) = \mathcal M(\omega_1^{\mathrm{CK}}, T)$. Suppose $Z \leq_h T$. Then $Z$ is a member of $\mathcal M(\omega_1^{\mathrm{CK}}, T)$, so for some $i$, $Z(n) = k$ if and only if $\theta_i(n, k)$ is true in $\mathcal M(\omega_1^{\mathrm{CK}}, T)$, for all $n$ and $k$. Consider step $i$, with $q' = q'_i \prec T$. In the first case, some $n$ has no extension of $q'$ forcing any $\theta_i(n, k)$; but $\theta_i(n, Z(n))$ is true, so some $r \prec T$ forces it by :ref{#lem-cohen-hyp-truth}, and the longer of $r$ and $q'$ is an extension of $q'$ that forces it, a contradiction. In the third case, $p_{i+1} \prec T$ forces $\theta_i(n, k)$ with $k \neq Z(n)$, so $\theta_i(n, k)$ is true and $Z(n) = k$, a contradiction. In the second case, define $\hat Z(n) = k$ if some $r \leq q'$ forces $\theta_i(n, k)$; this is a total function, its graph is $\Pi^1_1$ by :ref{#lem-cohen-hyp-pi11}, so it is hyperarithmetic, and $\hat Z = Z$: the true value $Z(n)$ is forced by some $r \prec T$ extending $q'$, and the forced value is unique. Then $Z$ is hyperarithmetic, a contradiction. So $Z \not\leq_h T$.
 :::
 
-The theorem gives, for instance, a set $T$ hyperarithmetically incomparable with $\mathcal O$, and two sets $T$, $Z$ of incomparable hyperdegrees, both preserving $\omega_1^{\mathrm{CK}}$ when $Z$ is taken generic. The construction can be carried out computably in $\mathcal O$ relative to the given $Z$, since the questions it asks are about the $\Pi^1_1$ forcing relation.
+The theorem gives, for instance, a set $T$ hyperarithmetically incomparable with $\mathcal O$, and two sets $T$, $Z$ of incomparable hyperdegrees, both preserving $\omega_1^{\mathrm{CK}}$ when $Z$ is taken generic.
 
 ::::exercise[Generic sets are not hyperarithmetic]{#ex-generic-not-hyp difficulty=1 objective="Use the truth lemma and the Kleene definitions of the H-sets to show that generic sets avoid HYP."}
 Show that no generic set is hyperarithmetic.
@@ -141,6 +141,30 @@ Feferman (1965) introduced forcing over the ramified analytic hierarchy and prov
 - C. T. Chong and L. Yu, *Recursion Theory: Computational Aspects of Definability*, De Gruyter, 2015, Section 5.2.
 
 :::::exercises
+::::exercise{#ex-generic-comeager difficulty=1 objective="See that genericity for the ramified language is a countable intersection of dense open conditions."}
+Show that the class of generic sets is comeager in $\cs$.
+
+:::solution
+For a sentence $\varphi$, let $\mathcal U_\varphi$ be the class of sets $T$ that meet a condition forcing $\varphi$ or $\neg\varphi$. It is open, a union of basic open sets $[p]$, and dense, since every $p$ has an extension deciding $\varphi$ (:ref{#prop-cohen-hyp-basic} (2)). The generic sets form the intersection of the classes $\mathcal U_\varphi$ over the countably many sentences, a comeager class.
+:::
+::::
+
+::::exercise{#ex-generic-1-generic difficulty=2 objective="Compare genericity for the ramified language with 1-genericity."}
+Show that every generic set $T$ is 1-generic: for every c.e. set $W$ of strings, some prefix of $T$ belongs to $W$ or has no extension in $W$.
+
+:::solution
+For a string $\sigma$, let $\sigma \prec \mathcal T$ be the conjunction of the atomic formulas $i \in \mathcal T$ for $\sigma(i) = 1$ and of their negations for $\sigma(i) = 0$. A condition $q \succeq \sigma$ forces $\sigma \prec \mathcal T$: it forces $i \in \mathcal T$ when $q(i) = 1$, and forces $\neg(i \in \mathcal T)$ when $q(i) = 0$, since no extension of $q$ forces $i \in \mathcal T$. Let $\varphi$ be the rank $0$ sentence $(\exists x)(x \text{ codes a string in } W \wedge x \prec \mathcal T)$, where "$x$ codes a string in $W$" is an arithmetic formula. By genericity, some $p \prec T$ forces $\varphi$ or $\neg\varphi$. If $p \Vdash \varphi$, then $\varphi$ is true by :ref{#lem-cohen-hyp-truth}: some prefix of $T$ belongs to $W$. If $p \Vdash \neg\varphi$, then no $q \leq p$ forces $\varphi$; if some $q \succeq p$ extended a string $\sigma \in W$, then $q$ would force $\varphi$ with the witness $\sigma$. So $p$ has no extension in $W$.
+:::
+::::
+
+::::exercise{#ex-generic-below-o-cone difficulty=1 objective="Combine Feferman's theorem with Spector's theorem."}
+Show that no generic set $T$ satisfies $\mathcal O \leq_h T$.
+
+:::solution
+By :ref{#thm-feferman}, $\omega_1^T = \omega_1^{\mathrm{CK}}$, and by :ref{#thm-spector-collapse}, $\mathcal O \leq_h T$ would imply $\omega_1^T > \omega_1^{\mathrm{CK}}$.
+:::
+::::
+
 ::::exercise{#ex-generic-hyp-below-o difficulty=2 objective="Bound the complexity of a generic set by the complexity of the forcing relation."}
 Show that there is a generic set $T \leq_T \mathcal O^{(\omega)}$, and deduce that there is a generic set $T \leq_h \mathcal O$.
 

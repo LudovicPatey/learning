@@ -111,6 +111,24 @@ Kreisel's basis theorem is from his 1962 paper on the axiom of choice and the cl
 - C. T. Chong and L. Yu, *Recursion Theory: Computational Aspects of Definability*, De Gruyter, 2015.
 
 :::::exercises
+::::exercise{#ex-collapse-cone difficulty=1 objective="Restate the class of collapsing sets as a cone, and locate it in the projective hierarchy."}
+Show that $\{ Y : \mathcal O \leq_h Y \}$ is a $\Pi^1_1$ class that is not $\Sigma^1_1$, and that it contains no non-empty $\Sigma^1_1$ class.
+
+:::solution
+By :ref{#thm-spector-collapse}, it is the class $\{ Y : \omega_1^Y > \omega_1^{\mathrm{CK}} \}$, which is $\Pi^1_1$ by :ref{#prop-collapse-pi11}. A non-empty $\Sigma^1_1$ subclass would have a member $X$ with $\omega_1^X = \omega_1^{\mathrm{CK}}$ by :ref{#thm-gandy-basis}, which is impossible. The class itself is non-empty, since it contains $\mathcal O$; so it is not $\Sigma^1_1$.
+:::
+::::
+
+::::exercise{#ex-incomparable-hyperdegrees difficulty=2 objective="Add dense families to Gandy forcing to build incomparable hyperdegrees."}
+Show that there are sets $X$ and $Y$ with $\omega_1^X = \omega_1^Y = \omega_1^{\mathrm{CK}}$ such that $X \not\leq_h Y$ and $Y \not\leq_h X$.
+
+:::solution
+Let $X$ be the set of :ref{#ex-hyperlow-nonhyp}: not hyperarithmetic, $\mathcal O^X \leq_T \mathcal O$, $X \leq_T \mathcal O$ and $\omega_1^X = \omega_1^{\mathrm{CK}}$. Let $\mathcal A'$ be the class of the non-hyperarithmetic sets $Y$ with $\omega_1^Y = \omega_1^{\mathrm{CK}}$, which is $\Sigma^1_1$ by :ref{#prop-sigma11-singleton} and :ref{#prop-collapse-pi11}, and non-empty since it contains $X$.
+
+Take the families $\mathfrak D_{e, a}$ of the proof of :ref{#thm-kreisel-basis}, for $X$, which are dense below $\mathcal A'$. Add, for each set $Z \leq_h X$, the family $\mathfrak E_Z$ of the classes $\{ Y : Y(m) \neq Z(m) \}$, $m \in \nat$; there are countably many such $Z$. Each of these classes is $\Sigma^1_1$, being defined by a single bit. The family $\mathfrak E_Z$ is dense below $\mathcal A'$: a non-empty $\Sigma^1_1$ class $\mathcal C \subseteq \mathcal A'$ that meets none of its members is included in $\{ Z \}$, so it equals $\{ Z \}$, and $Z$ would be a hyperarithmetic member of $\mathcal A'$ (:ref{#prop-sigma11-singleton}), which is impossible. By :ref{#thm-gandy-forcing}, there is $Y \in \mathcal A'$ with $X \not\leq_h Y$ and $Y \neq Z$ for every $Z \leq_h X$, that is, $Y \not\leq_h X$.
+:::
+::::
+
 ::::exercise{#ex-gandy-forcing-generic-collapse difficulty=1 objective="See that the generic member of Gandy forcing can be required to preserve ω₁ᶜᵏ."}
 Show that in :ref{#thm-gandy-forcing} one may also require $\omega_1^X = \omega_1^{\mathrm{CK}}$.
 

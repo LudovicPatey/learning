@@ -1,7 +1,7 @@
 ---
 title: The constructible hierarchy and ω-models
 summary: Gödel's constructible hierarchy L_α; an ordinal is admissible exactly when L_α is admissible; every admissible ordinal above ω is at least ω₁ᶜᵏ; recursion along well-founded relations in an admissible set; ω-models of KP and their standard parts.
-duration: 30
+duration: 35
 prerequisites: [kripke-platek, computable-ordinals/kleene-o]
 ---
 
@@ -65,7 +65,7 @@ In the proof of :ref{#prop-admissible-above-ck}, where is it used that $\alpha$ 
 
 ## ω-models of KP
 
-KP can also be studied in models that are not transitive, given by a binary relation $E$ on a set $M$ that interprets $\in$. Such a model is an **ω-model** if its natural numbers are standard: the elements that the model regards as natural numbers are, under $E$, isomorphic to $\nat$.
+KP can also be studied in models that are not transitive, given by a binary relation $E$ on a set $M$ that interprets $\in$. Such a model is an **ω-model** if it satisfies the axiom of infinity, so that it has an element that it regards as the set $\omega$ of natural numbers, and its natural numbers are standard: the $E$-elements of this set, ordered by $E$, are isomorphic to $\nat$.
 
 :::definition{#def-standard-part}
 Let $(M, E)$ be a model of KP. A subset $M_1 \subseteq M$ is **$E$-closed** if $y \mathrel E x$ and $x \in M_1$ imply $y \in M_1$. The **standard part** of $M$ is the largest $E$-closed subset of $M$ on which $E$ is well-founded.
@@ -86,9 +86,9 @@ The standard part of a model of KP is a model of KP. So its transitive collapse 
 :::
 
 :::proof{of=lem-standard-kp}
-Let $M_1$ be the standard part of $(M, E) \models \mathrm{KP}$. Since $M_1$ is $E$-closed, $\Delta_0$ formulas with parameters in $M_1$ have the same truth value in $M_1$ and in $M$. Extensionality, pair, union and $\Delta_0$-separation pass from $M$ to $M_1$: the sets they provide in $M$ have their $E$-elements in $M_1$, hence a well-founded $E$-closure, hence belong to $M_1$. Foundation holds since $E$ is well-founded on $M_1$.
+Let $M_1$ be the standard part of $(M, E) \models \mathrm{KP}$. Since $M_1$ is $E$-closed, $\Delta_0$ formulas with parameters in $M_1$ have the same truth value in $M_1$ and in $M$. Extensionality, pair, union and $\Delta_0$-separation pass from $M$ to $M_1$: for $x, y, a \in M_1$, the sets $\{ x, y \}$, $\bigcup x$ and $\{ u \mathrel E a : \varphi(u) \}$, which exist in $M$ by these axioms and $\Delta_0$-separation, have all their $E$-elements in $M_1$, hence a well-founded $E$-closure, hence belong to $M_1$. Foundation holds since $E$ is well-founded on $M_1$.
 
-For $\Delta_0$-collection, suppose $M_1 \models (\forall x \mathrel E a)(\exists y)\varphi(x, y)$, with $\varphi$ in $\Delta_0$ and parameters in $M_1$. Then the same holds in $M$, with witnesses in $M_1$. Let $\alpha_0$ be the least ordinal of $M$ such that some $b$ of rank $\alpha_0$ in $M$ collects witnesses; it exists by collection in $M$ and foundation in $M$. If $\alpha_0$ is standard, then $b$ is in $M_1$ by :ref{#lem-standard-rank}. Otherwise, there is a non-standard ordinal $\alpha_1 \mathrel E \alpha_0$ of $M$: if every ordinal $E$-below $\alpha_0$ were standard, the $E$-closure of $\{ \alpha_0 \}$ would be well-founded, and $\alpha_0$ would be standard. The ordinals of $M$ are linearly ordered by $E$, as KP proves, and the standard ones form an initial segment, so all the witnesses in $M_1$ have ranks $E$-below $\alpha_1$. So $M \models (\forall x \mathrel E a)(\exists y)(\varphi(x, y) \wedge \mathrm{rk}(y) \mathrel E \alpha_1)$, a $\Sigma$ statement; by $\Sigma$-collection in $M$ and $\Delta_0$-separation, there is $c$ in $M$ collecting witnesses of rank below $\alpha_1$, so $\mathrm{rk}(c) \leq \alpha_1 < \alpha_0$, contradicting the choice of $\alpha_0$.
+For $\Delta_0$-collection, suppose $M_1 \models (\forall x \mathrel E a)(\exists y)\varphi(x, y)$, with $\varphi$ in $\Delta_0$ and parameters in $M_1$. Then the same holds in $M$, with witnesses in $M_1$. Let $\alpha_0$ be the least ordinal of $M$ such that some $b$ of rank $\alpha_0$ in $M$ collects witnesses; it exists by collection in $M$ and foundation in $M$. If $\alpha_0$ is standard, then $b$ is in $M_1$ by :ref{#lem-standard-rank}. Otherwise, there is a non-standard ordinal $\alpha_1 \mathrel E \alpha_0$ of $M$: if every ordinal $E$-below $\alpha_0$ were standard, the $E$-closure of $\{ \alpha_0 \}$ would be well-founded, and $\alpha_0$ would be standard. The ordinals of $M$ are linearly ordered by $E$, as KP proves, and the standard ones form an initial segment (figure below), so all the witnesses in $M_1$ have ranks $E$-below $\alpha_1$. So $M \models (\forall x \mathrel E a)(\exists y)(\varphi(x, y) \wedge \mathrm{rk}(y) \mathrel E \alpha_1)$, a $\Sigma$ statement; by $\Sigma$-collection in $M$ and $\Delta_0$-separation, there is $c$ in $M$ collecting witnesses of rank below $\alpha_1$, so $\mathrm{rk}(c) \leq \alpha_1 < \alpha_0$, contradicting the choice of $\alpha_0$.
 :::
 
 :::corollary{#cor-omega-model-contains-l}
@@ -97,6 +97,10 @@ Let $(M, E)$ be an ω-model of KP. The ordinal of the transitive collapse of its
 
 :::proof{of=cor-omega-model-contains-l}
 By :ref{#lem-standard-kp}, the collapse $N$ of the standard part is admissible. Since $M$ is an ω-model, the natural numbers and the set $\omega$ of $M$ are in the standard part, so $\omega \in N$ and $o(N) > \omega$. By :ref{#prop-admissible-above-ck}, $o(N) \geq \omega_1^{\mathrm{CK}}$. By :ref{#fact-l-absolute}, $L_\beta \in N$ for every $\beta < \omega_1^{\mathrm{CK}}$, so every subset of $\nat$ in $L_{\omega_1^{\mathrm{CK}}}$ is an element of $N$. The collapse fixes the natural numbers, so such a set corresponds to an element of the standard part of $M$ whose $E$-elements are exactly its members.
+:::
+
+:::figure[The ordinals of an ω-model $(M, E)$ of KP. The standard ordinals form an initial segment, isomorphic to the ordinal of the transitive collapse $N$ of the standard part; beyond it, the ordinals of $M$ are ill-founded. In the proof of :ref{#lem-standard-kp}, a collecting set of non-standard rank is replaced by one of smaller non-standard rank.]
+<svg class="fig" viewBox="0 0 600 170" width="600" role="img" aria-label="The ordinals of an omega-model of KP on a line: an initial segment of standard ordinals, from 0 through omega to at least the Church-Kleene ordinal, isomorphic to the ordinal of the standard part; then non-standard ordinals with no least element, each having a non-standard ordinal below it"><defs><marker id="sp-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="muted-fill"/></marker></defs><line x1="40" y1="80" x2="300" y2="80" class="accent-stroke" stroke-width="3"/><line x1="330" y1="80" x2="570" y2="80" class="muted-stroke" stroke-width="3" stroke-dasharray="7 5"/><line x1="40" y1="72" x2="40" y2="88" class="ink-stroke" stroke-width="1.2"/><text x="40" y="106" text-anchor="middle" class="math">0</text><line x1="90" y1="72" x2="90" y2="88" class="ink-stroke" stroke-width="1.2"/><text x="90" y="106" text-anchor="middle" class="math">ω</text><line x1="250" y1="72" x2="250" y2="88" class="ink-stroke" stroke-width="1.2"/><text x="250" y="106" text-anchor="middle" class="math">ω₁ᶜᵏ</text><text x="170" y="56" text-anchor="middle" class="label">standard ordinals: the ordinals of N</text><text x="450" y="56" text-anchor="middle" class="label">non-standard ordinals</text><path d="M560,92 Q530,118 504,92" class="muted-stroke" fill="none" stroke-width="1.1" marker-end="url(#sp-arrow)"/><path d="M500,92 Q470,118 444,92" class="muted-stroke" fill="none" stroke-width="1.1" marker-end="url(#sp-arrow)"/><path d="M440,92 Q410,118 384,92" class="muted-stroke" fill="none" stroke-width="1.1" marker-end="url(#sp-arrow)"/><path d="M380,92 Q350,118 324,92" class="muted-stroke" fill="none" stroke-width="1.1" marker-end="url(#sp-arrow)"/><text x="300" y="150" text-anchor="middle" class="label">every non-standard ordinal has a non-standard ordinal below it: there is no least one</text><text x="300" y="166" text-anchor="middle" class="label">for an ω-model, ω is standard, and o(N) ≥ ω₁ᶜᵏ</text></svg>
 :::
 
 ::::exercise[Non-standard ordinals]{#ex-nonstandard-ordinals difficulty=1 objective="Relate the well-foundedness of an ω-model of KP to its ordinals."}
@@ -117,6 +121,22 @@ Gödel introduced the constructible universe in 1938 to prove the consistency of
 - C. T. Chong and L. Yu, *Recursion Theory: Computational Aspects of Definability*, De Gruyter, 2015, Sections 3.3 and 3.5.
 
 :::::exercises
+::::exercise{#ex-l-countable difficulty=1 objective="Check basic properties of the constructible hierarchy."}
+Show that $L_n = V_n$ for every $n \in \omega$, that $L_\beta$ is countable for every countable $\beta$, and that $L_\beta \cap \mathrm{Ord} = \beta$.
+
+:::solution
+For finite $X$, every subset of $X$ is definable over $X$ with parameters, by the formula $u = a_1 \vee \dots \vee u = a_k$; so $\mathrm{Def}(X)$ is the power set of $X$, and $L_n = V_n$ by induction. If $X$ is countable, there are countably many formulas and finite tuples of parameters, so $\mathrm{Def}(X)$ is countable; by induction on $\beta$, using that a countable union of countable sets is countable at limits, $L_\beta$ is countable for countable $\beta$. For the ordinals: by induction, $L_\beta \cap \mathrm{Ord} = \beta$ implies that $\beta = \{ u \in L_\beta : u \text{ is an ordinal} \}$ is definable over $L_\beta$, so $\beta \in L_{\beta+1}$; and $L_{\beta+1}$ contains no ordinal $\gamma > \beta$, since its elements are subsets of $L_\beta$, whose ordinals are those below $\beta$. Limits are clear.
+:::
+::::
+
+::::exercise{#ex-omega-plus-omega difficulty=2 objective="See directly why a computable ordinal above ω is not admissible."}
+Show directly, without :ref{#prop-admissible-above-ck}, that $L_{\omega + \omega}$ is not admissible.
+
+:::solution
+The set $\omega$ belongs to $L_{\omega+1}$. For each $n \in \omega$, the function $v_n$ with domain $n + 1$, $v_n(0) = \omega$ and $v_n(i + 1) = v_n(i) \cup \{ v_n(i) \}$ is a finite set built from the ordinals $\omega, \dots, \omega + n$, so it belongs to $L_{\omega + n + k}$ for some fixed $k$. The $\Delta_0$ formula $\varphi(n, v)$ of :ref{#ex-v-omega-omega}, with the parameter $\omega$, has the witness $v_n$ for each $n$. A collecting set $y \in L_{\omega + \omega}$ belongs to some $L_{\omega + m}$, so its transitive closure is included in the transitive set $L_{\omega + m}$. It contains $v_m$, and the value $\omega + m$ of $v_m$ belongs to the transitive closure of $v_m$, hence to $L_{\omega + m}$, which contains no ordinal $\geq \omega + m$ (:ref{#ex-l-countable}). This is a contradiction. So $\Delta_0$-collection fails in $L_{\omega + \omega}$.
+:::
+::::
+
 ::::exercise{#ex-computable-in-l-omega-plus-one difficulty=1 objective="Locate the computable and the arithmetic sets in the constructible hierarchy."}
 Show that every computable set and every c.e. set belongs to $L_{\omega+1}$, and every arithmetic set to $L_{\omega+1}$ as well.
 

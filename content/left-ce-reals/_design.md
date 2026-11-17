@@ -163,3 +163,4 @@ links (Ω-likeness and Turing completeness).
 
 - **2026-11-17: course written** as part of the enlargement of the randomness track (five
   lessons). Sources checked against the Downey–Hirschfeldt PDF.
+- **2026-11-17: polishing pass.** All proofs checked again. Corrections: the splitting theorem of Downey, Hirschfeldt and Nies is stated for left-c.e. reals that are neither computable nor random (Downey–Hirschfeldt, Theorem 9.5.3, splits over every lesser degree), and the definability of randomness in the Solovay degrees for non-computable reals; the year of the paper of Calude, Coles, Hertling and Khoussainov (1999, as in the references); two hype words removed. New further exercises: `ex-one-minus-omega`, `ex-solovay-rational-shift`, `ex-omega-halves-optimal`.
