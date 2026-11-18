@@ -1,0 +1,42 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-effective-baire:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 14.1.8"
+ex-2-generic-not-high:
+  source: soare-2016
+  relation: from
+  where: "Exercise 6.3.5"
+ex-forcing-jump-converse:
+  source: soare-2016
+  relation: related
+  where: "Theorem 6.3.2"
+ex-generic-not-pa-direct:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Corollary 2.24.6"
+ex-low-generic-cone:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 6.3.7"
+ex-generic-van-lambalgen:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Theorem 8.20.1"
+ex-jump-inversion-incomparable:
+  source: soare-2016
+  relation: from
+  where: "Exercise 6.4.7"
+ex-weak-generic-relative-escape:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Theorem 2.24.12"
+ex-weakly-generic-bi-immune:
+  source: soare-2016
+  relation: from
+  where: "Exercise 6.3.5"

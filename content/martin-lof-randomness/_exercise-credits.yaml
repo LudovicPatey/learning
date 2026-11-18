@@ -1,0 +1,30 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-prefix-free-density:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 1.9.13"
+ex-computable-measure-member:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 1.9.21"
+ex-kucera-tails:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Lemma 6.10.1"
+ex-fourth-moment:
+  source: nies-2009
+  relation: related
+  where: "Exercise 3.2.26"
+ex-many-intersections:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 1.9.15"
+ex-dnc2-null:
+  source: nies-2009
+  relation: from
+  where: "Exercise 5.1.15"

@@ -51,6 +51,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <br />
               Remarks are signed with an ORCID iD.
             </div>
+            <div>
+              <Link href="/credits">Credits</Link>: the books, lecture notes and articles the courses are based on.
+            </div>
           </div>
         </footer>
       </body>

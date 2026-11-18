@@ -23,3 +23,10 @@ objectives:
   - Construct the partial truth definitions Sat_Σₙ and prove Tarski's conditions for them in IΣ₁
   - Prove that IΣₙ is finitely axiomatizable for n ≥ 1, and that the arithmetic hierarchy is proper in every model of IΣ₁
 lessons: [provably-total, ackermann-isigma, bounded-satisfaction, truth-definitions, finite-axiomatizability]
+credits:
+  - source: hajek-pudlak-1993
+    role: main
+    note: "Partial truth definitions and the arithmetized completeness theorem."
+  - source: wong-notes
+    role: consulted
+    note: "Lectures 3–4 and 14."

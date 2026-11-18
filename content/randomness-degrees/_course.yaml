@@ -24,3 +24,13 @@ objectives:
   - Prove Demuth's theorem by transporting the uniform measure along a truth-table reduction
   - Use translates and the effective 0-1 laws to prove properties of all 2-random degrees
 lessons: [ce-sets, stephan-theorem, computable-measures, demuth-theorem, almost-every-degree]
+credits:
+  - source: downey-hirschfeldt-2010
+    role: main
+    note: "Chapter 8 and Sections 6.10–6.12."
+  - source: nies-2009
+    role: main
+    note: "Chapter 4."
+  - source: monin-patey
+    role: consulted
+    note: "Section on randomness and Turing degrees."

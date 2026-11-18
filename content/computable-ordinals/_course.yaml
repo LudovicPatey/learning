@@ -20,3 +20,19 @@ objectives:
   - Prove the normal form theorem for Π¹₁ sets and the Π¹₁-completeness of WO and of O
   - Prove and apply Spector's boundedness theorem
 lessons: [ordinals, computable-well-orderings, kleene-o, markwald, well-founded-trees, trees-and-pi11, boundedness]
+credits:
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Transfinite numbers\"."
+  - source: simpson-2009
+    role: consulted
+    note: "Section V.1."
+  - source: nies-2009
+    role: consulted
+    note: "Section 9.1."
+  - source: dzhafarov-mummert-2022
+    role: consulted
+    note: "Sections 5.8 and 12.1."
+  - source: sacks-1990
+    role: consulted
+    note: "Part A."

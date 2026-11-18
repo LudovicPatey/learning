@@ -6,3 +6,9 @@ summary: First test course.
 authors: [Ada Lovelace]
 objectives: [Learn things]
 lessons: [one, two]
+credits:
+  - source: book-a
+    role: main
+    note: "Chapters 1–2."
+  - source: notes-b
+    role: consulted

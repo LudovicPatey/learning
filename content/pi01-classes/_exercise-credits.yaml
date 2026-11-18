@@ -1,0 +1,38 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-low-tree-lowness-index:
+  source: hirschfeldt-2014
+  relation: adapted
+  where: "Exercise 3.12"
+ex-low-cone-avoidance:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Theorem 2.19.10"
+ex-extendible-subtree:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 3.7.3"
+ex-leftmost-ce-degree:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 3.7.6"
+ex-cantor-bendixson-example:
+  source: soare-2016
+  relation: adapted
+  where: "Exercises 8.7.1 and 8.7.9"
+ex-unique-limit-point:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 8.7.2"
+ex-konig-cone-avoidance:
+  source: hirschfeldt-2014
+  relation: adapted
+  where: "Exercise 3.26"
+ex-konig-finitely-many-paths:
+  source: hirschfeldt-2014
+  relation: result
+  where: "Section 3.2"

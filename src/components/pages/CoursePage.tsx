@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { courseHref, courseLessons, courseStats, getArea, getCourse, getTrack, lessonHref, nextCourses, type VersionSel } from "@/lib/content";
+import { courseHref, courseLessons, courseStats, getArea, getCatalog, getCourse, getTrack, lessonHref, nextCourses, renderInlineMarkdown, type VersionSel } from "@/lib/content";
 import { hasVersion, listVersions } from "@/lib/versions";
 import { CourseProgressCard, StepDot } from "@/components/progress-ui";
 import { renderMathText } from "@/components/math-text";
@@ -29,6 +29,19 @@ export async function CoursePage({ id, version }: { id: string; version?: string
   const after = nextCourses(id);
   const releases = listVersions(id);
   const thisRelease = version ? releases.find((r) => r.version === version) : undefined;
+  const cat = getCatalog(sel);
+  const credits = await Promise.all(
+    course.credits.map(async (c) => {
+      const src = cat.sources.get(c.source);
+      return {
+        id: c.source,
+        role: c.role,
+        citationHtml: await renderInlineMarkdown(src?.citation ?? c.source),
+        noteHtml: c.note ? await renderInlineMarkdown(c.note) : "",
+      };
+    }),
+  );
+  const credited = [...cat.exercises.values()].filter((e) => e.course === id && e.credit).length;
 
   return (
     <>
@@ -122,6 +135,28 @@ export async function CoursePage({ id, version }: { id: string; version?: string
                   <li key={o}>{o}</li>
                 ))}
               </ul>
+            </div>
+          )}
+          {credits.length > 0 && (
+            <div className="side-card">
+              <h2>Credits</h2>
+              <ul className="credit-list">
+                {credits.map((c) => (
+                  <li key={c.id} className={c.role === "consulted" ? "credit-consulted" : undefined}>
+                    <span className="credit-role">{c.role === "main" ? "Based on" : "Also consulted"}</span>
+                    <span className="credit-citation" dangerouslySetInnerHTML={{ __html: c.citationHtml }} />
+                    {c.noteHtml && <span className="credit-note small muted" dangerouslySetInnerHTML={{ __html: c.noteHtml }} />}
+                  </li>
+                ))}
+              </ul>
+              {stats.exercises > 0 && (
+                <p className="small muted" style={{ margin: 0 }}>
+                  {credited > 0
+                    ? `${credited} of the ${stats.exercises} exercises are credited to a published work, as stated on each exercise; the others were written for this course.`
+                    : `The ${stats.exercises} exercises were written for this course.`}{" "}
+                  <Link href="/credits">All credits</Link>
+                </p>
+              )}
             </div>
           )}
           <div className="side-card">

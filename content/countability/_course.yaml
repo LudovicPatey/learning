@@ -18,3 +18,13 @@ objectives:
   - Show that the sets of binary sequences, of integer sequences, of real numbers and of real sequences are equipotent
   - Diagonalize effectively, and build sets by finite extension
 lessons: [equipotence, cantor-bernstein, countable-sets, countable-constructions, diagonal-argument, continuum, diagonalization-and-computation, requirements]
+credits:
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Cantor's infinity\"."
+  - source: soare-2016
+    role: consulted
+    note: "Section 1.1.2."
+  - source: downey-hirschfeldt-2010
+    role: consulted
+    note: "Section 7.2.4."

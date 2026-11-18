@@ -21,3 +21,13 @@ objectives:
   - Use Gandy forcing to prove Kreisel's basis theorem
   - Show that O and its hyperjumps are Π¹₁ singletons, and that no Π¹₁ singleton lies strictly between 0 and O in the hyperdegrees
 lessons: [hyperjump, gandy-basis, kreisel-basis, pi11-singletons]
+credits:
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Beyond hyperarithmetic\"."
+  - source: sacks-1990
+    role: consulted
+    note: "Part A."
+  - source: chong-yu-2015
+    role: consulted
+    note: "Chapters 2–5."

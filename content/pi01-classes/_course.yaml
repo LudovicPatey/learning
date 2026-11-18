@@ -21,3 +21,22 @@ objectives:
   - Characterize the PA degrees, and relate them to completions of Peano arithmetic
   - Determine the strength of König's lemma for finitely branching trees
 lessons: [cantor-space, trees-and-classes, computable-members, basis-theorems, pa-degrees, finitely-branching-trees]
+credits:
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Π⁰₁ classes\"."
+  - source: soare-2016
+    role: main
+    note: "Part II, Chapters 8–10."
+  - source: downey-hirschfeldt-2010
+    role: consulted
+    note: "Sections 2.19, 2.21, 2.22."
+  - source: nies-2009
+    role: consulted
+    note: "Section 1.8."
+  - source: hirschfeldt-2014
+    role: consulted
+    note: "Sections 3.1–3.2."
+  - source: simpson-2009
+    role: consulted
+    note: "Sections III.7 and IV.1."

@@ -1,0 +1,157 @@
+# Works credited by the tracks, courses and exercises (see src/lib/credits.ts).
+# Each work has an id (used in `credits:` of tracks.yaml and _course.yaml, and in the
+# _exercise-credits.yaml files), a short name shown in the interface, a full citation
+# in Markdown, and a kind: book, monograph (a book in preparation), lecture-notes,
+# survey or article. The page /credits lists them with the places that use them.
+
+# ---------------------------------------------------------------- computability
+- id: soare-2016
+  short: "Soare 2016"
+  kind: book
+  citation: "R. I. Soare, *Turing Computability: Theory and Applications*, Theory and Applications of Computability, Springer, 2016."
+- id: soare-1987
+  short: "Soare 1987"
+  kind: book
+  citation: "R. I. Soare, *Recursively Enumerable Sets and Degrees*, Perspectives in Mathematical Logic, Springer, 1987."
+- id: monin-patey
+  short: "Monin–Patey"
+  kind: monograph
+  citation: "B. Monin and L. Patey, *Computability Theory*, book in preparation."
+- id: lerman-1983
+  short: "Lerman 1983"
+  kind: book
+  citation: "M. Lerman, *Degrees of Unsolvability*, Perspectives in Mathematical Logic, Springer, 1983."
+- id: cutland-1980
+  short: "Cutland 1980"
+  kind: book
+  citation: "N. Cutland, *Computability: An Introduction to Recursive Function Theory*, Cambridge University Press, 1980."
+- id: kleene-1952
+  short: "Kleene 1952"
+  kind: book
+  citation: "S. C. Kleene, *Introduction to Metamathematics*, North-Holland, 1952."
+- id: barendregt-1984
+  short: "Barendregt 1984"
+  kind: book
+  citation: "H. P. Barendregt, *The Lambda Calculus: Its Syntax and Semantics*, revised edition, Studies in Logic and the Foundations of Mathematics 103, North-Holland, 1984."
+- id: hindley-seldin-2008
+  short: "Hindley–Seldin 2008"
+  kind: book
+  citation: "J. R. Hindley and J. P. Seldin, *Lambda-Calculus and Combinators: An Introduction*, Cambridge University Press, 2008."
+
+# ---------------------------------------------------------------- randomness
+- id: downey-hirschfeldt-2010
+  short: "Downey–Hirschfeldt 2010"
+  kind: book
+  citation: "R. G. Downey and D. R. Hirschfeldt, *Algorithmic Randomness and Complexity*, Theory and Applications of Computability, Springer, 2010."
+- id: nies-2009
+  short: "Nies 2009"
+  kind: book
+  citation: "A. Nies, *Computability and Randomness*, Oxford Logic Guides 51, Oxford University Press, 2009."
+- id: li-vitanyi-2019
+  short: "Li–Vitányi 2019"
+  kind: book
+  citation: "M. Li and P. Vitányi, *An Introduction to Kolmogorov Complexity and Its Applications*, fourth edition, Texts in Computer Science, Springer, 2019."
+- id: hjorth-nies-2007
+  short: "Hjorth–Nies 2007"
+  kind: article
+  citation: "G. Hjorth and A. Nies, *Randomness via effective descriptive set theory*, Journal of the London Mathematical Society 75 (2007), 495–508."
+
+# ---------------------------------------------------------------- reverse mathematics
+- id: simpson-2009
+  short: "Simpson 2009"
+  kind: book
+  citation: "S. G. Simpson, *Subsystems of Second Order Arithmetic*, second edition, Perspectives in Logic, Cambridge University Press and Association for Symbolic Logic, 2009."
+- id: hirschfeldt-2014
+  short: "Hirschfeldt 2014"
+  kind: book
+  citation: "D. R. Hirschfeldt, *Slicing the Truth: On the Computable and Reverse Mathematics of Combinatorial Principles*, Lecture Notes Series, Institute for Mathematical Sciences, National University of Singapore 28, World Scientific, 2014."
+- id: dzhafarov-mummert-2022
+  short: "Dzhafarov–Mummert 2022"
+  kind: book
+  citation: "D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Theory and Applications of Computability, Springer, 2022."
+- id: hirschfeldt-jockusch-2016
+  short: "Hirschfeldt–Jockusch 2016"
+  kind: article
+  citation: "D. R. Hirschfeldt and C. G. Jockusch, Jr., *On notions of computability-theoretic reduction between Π¹₂ principles*, Journal of Mathematical Logic 16 (2016), 1650002."
+
+# ---------------------------------------------------------------- lowness and avoidance
+- id: patey-lowness-avoidance
+  short: "Patey, Lowness and avoidance"
+  kind: monograph
+  citation: "L. Patey, *Lowness and Avoidance: A Gentle Introduction to Iterated Jump Control*, monograph in preparation."
+- id: monin-patey-2019
+  short: "Monin–Patey 2019"
+  kind: article
+  citation: "B. Monin and L. Patey, *Pigeons do not jump high*, Advances in Mathematics 352 (2019), 1066–1095."
+- id: monin-patey-2021
+  short: "Monin–Patey 2021"
+  kind: article
+  citation: "B. Monin and L. Patey, *SRT²₂ does not imply RT²₂ in ω-models*, Advances in Mathematics, 2021; arXiv:1905.08427."
+- id: patey-2017
+  short: "Patey 2017"
+  kind: article
+  citation: "L. Patey, *Iterative forcing and hyperimmunity in reverse mathematics*, Computability 6 (2017), 209–221."
+
+# ---------------------------------------------------------------- higher computability
+- id: sacks-1990
+  short: "Sacks 1990"
+  kind: book
+  citation: "G. E. Sacks, *Higher Recursion Theory*, Perspectives in Mathematical Logic, Springer, 1990."
+- id: chong-yu-2015
+  short: "Chong–Yu 2015"
+  kind: book
+  citation: "C. T. Chong and L. Yu, *Recursion Theory: Computational Aspects of Definability*, De Gruyter Series in Logic and Its Applications 8, De Gruyter, 2015."
+- id: moschovakis-2009
+  short: "Moschovakis 2009"
+  kind: book
+  citation: "Y. N. Moschovakis, *Descriptive Set Theory*, second edition, Mathematical Surveys and Monographs 155, American Mathematical Society, 2009."
+- id: kechris-1995
+  short: "Kechris 1995"
+  kind: book
+  citation: "A. S. Kechris, *Classical Descriptive Set Theory*, Graduate Texts in Mathematics 156, Springer, 1995."
+- id: barwise-1975
+  short: "Barwise 1975"
+  kind: book
+  citation: "J. Barwise, *Admissible Sets and Structures*, Perspectives in Mathematical Logic, Springer, 1975."
+
+# ---------------------------------------------------------------- computable structure theory
+- id: ash-knight-2000
+  short: "Ash–Knight 2000"
+  kind: book
+  citation: "C. J. Ash and J. F. Knight, *Computable Structures and the Hyperarithmetical Hierarchy*, Studies in Logic and the Foundations of Mathematics 144, Elsevier, 2000."
+- id: montalban-2021
+  short: "Montalbán 2021"
+  kind: book
+  citation: "A. Montalbán, *Computable Structure Theory: Within the Arithmetic*, Perspectives in Logic, Cambridge University Press and Association for Symbolic Logic, 2021."
+- id: montalban-beyond
+  short: "Montalbán, Beyond the Arithmetic"
+  kind: monograph
+  citation: "A. Montalbán, *Computable Structure Theory: Beyond the Arithmetic*, revised draft of 2025."
+- id: fokina-harizanov-melnikov-2014
+  short: "Fokina–Harizanov–Melnikov 2014"
+  kind: survey
+  citation: "E. B. Fokina, V. Harizanov and A. Melnikov, *Computable model theory*, in *Turing's Legacy*, Lecture Notes in Logic 42, Cambridge University Press, 2014, 124–194."
+
+# ---------------------------------------------------------------- computable analysis
+- id: weihrauch-2000
+  short: "Weihrauch 2000"
+  kind: book
+  citation: "K. Weihrauch, *Computable Analysis: An Introduction*, Texts in Theoretical Computer Science, Springer, 2000."
+- id: brattka-hertling-weihrauch-2008
+  short: "Brattka–Hertling–Weihrauch 2008"
+  kind: survey
+  citation: "V. Brattka, P. Hertling and K. Weihrauch, *A tutorial on computable analysis*, in *New Computational Paradigms*, Springer, 2008, 425–491."
+- id: brattka-gherardi-pauly-2021
+  short: "Brattka–Gherardi–Pauly 2021"
+  kind: survey
+  citation: "V. Brattka, G. Gherardi and A. Pauly, *Weihrauch complexity in computable analysis*, in *Handbook of Computability and Complexity in Analysis*, Springer, 2021, 367–417."
+
+# ---------------------------------------------------------------- models of arithmetic
+- id: wong-notes
+  short: "Wong, Model theory of arithmetic"
+  kind: lecture-notes
+  citation: "T. L. Wong, *Model Theory of Arithmetic*, lecture notes of a course given at the National University of Singapore and the Kurt Gödel Research Center, Vienna."
+- id: hajek-pudlak-1993
+  short: "Hájek–Pudlák 1993"
+  kind: book
+  citation: "P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Perspectives in Mathematical Logic, Springer, 1993."

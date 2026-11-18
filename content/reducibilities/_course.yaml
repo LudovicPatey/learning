@@ -23,3 +23,16 @@ objectives:
   - Prove that ω-reducibility and computable reducibility to WKL coincide
   - Prove non-reducibility results for Weihrauch reducibility by continuity and parallelization
 lessons: [omega-reducibility, preservation, computable-reducibility, wkl-reductions, weihrauch, parallelization]
+credits:
+  - source: dzhafarov-mummert-2022
+    role: main
+    note: "Chapters 3–4 and Section 5.11."
+  - source: hirschfeldt-jockusch-2016
+    role: main
+    note: "The reduction game."
+  - source: hirschfeldt-2014
+    role: consulted
+    note: "Section 2.2."
+  - source: brattka-gherardi-pauly-2021
+    role: consulted
+    note: "Weihrauch reducibility."

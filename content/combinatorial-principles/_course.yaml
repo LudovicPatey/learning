@@ -24,3 +24,13 @@ objectives:
   - Separate ADS from DNR by forcing with ascending sequences and preservation of a weakness property
   - Measure disjunction by preserved hyperimmunities and compactness by constant-bound immunity, and read separations off both measures
 lessons: [orders, computable-orders, stable-cohesive, erdos-moser, dnr-wwkl, ads-dnr, disjunction-compactness]
+credits:
+  - source: hirschfeldt-2014
+    role: main
+    note: "Sections 9.1–9.2: the same order of topics."
+  - source: dzhafarov-mummert-2022
+    role: main
+    note: "Sections 9.2, 9.5, 9.11, 9.12."
+  - source: patey-2017
+    role: consulted
+    note: "Preservation of hyperimmunities."

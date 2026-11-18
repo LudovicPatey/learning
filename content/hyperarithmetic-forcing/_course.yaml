@@ -20,3 +20,10 @@ objectives:
   - Build hyperarithmetically incomparable sets by forcing
   - Prove the fusion lemma for hyperarithmetic perfect classes and build a minimal hyperdegree
 lessons: [ramified-hierarchy, cohen-forcing, minimal-hyperdegree]
+credits:
+  - source: sacks-1990
+    role: main
+    note: "Parts A and B: forcing with hyperarithmetic conditions."
+  - source: chong-yu-2015
+    role: consulted
+    note: "Higher forcing."

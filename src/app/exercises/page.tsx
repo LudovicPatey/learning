@@ -20,6 +20,8 @@ export default async function ExercisesPage() {
       difficulty: ex.difficulty,
       featured: ex.featured,
       hash: ex.hash,
+      creditHtml: await renderInlineMarkdown(ex.creditText),
+      credited: Boolean(ex.credit),
       course: ex.course,
       href: `${lessonHref(ex.lessonId)}#${ex.id}`,
       lessons: ex.lessons.map((id) => ({ id, title: lessons.get(id)?.title ?? id, href: lessonHref(id) })),
@@ -37,7 +39,8 @@ export default async function ExercisesPage() {
         <p>
           All exercises of the courses, with their objective and the lessons they are associated with. Featured exercises appear in
           the text of their lesson; the others are collected at the end of the lesson, under “Further exercises”. Every exercise has
-          a solution. Readers signed in with ORCID can endorse an exercise once they have checked it and its solution; the{" "}
+          a solution and a credit: the published work it comes from, or “Written for this course” (see the{" "}
+          <Link href="/credits">credits</Link>). Readers signed in with ORCID can endorse an exercise once they have checked it and its solution; the{" "}
           <Link href="/account">account page</Link> lists one&apos;s endorsements and remarks.
         </p>
       </div>

@@ -3,3 +3,5 @@
   area: logic
   description: The core sequence.
   courses: [alpha]
+  credits:
+    - source: book-a

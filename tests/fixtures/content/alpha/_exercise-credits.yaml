@@ -1,0 +1,4 @@
+ex-do-it:
+  source: book-a
+  relation: adapted
+  where: "Exercise 1.2"

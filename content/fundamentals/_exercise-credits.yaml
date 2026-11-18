@@ -1,0 +1,38 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-separation-coce:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 2.1.22"
+ex-cof-neither:
+  source: soare-2016
+  relation: from
+  where: "Exercise 2.1.17"
+ex-self-ref-ce:
+  source: soare-2016
+  relation: from
+  where: "Exercise 2.2.11"
+ex-double-recursion:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 2.3.14"
+ex-mu-partial:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 1.6.28"
+ex-join-m:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 1.6.21"
+ex-nonacceptable-numbering:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 1.7.9"
+ex-not-self-dual:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 2.2.10"

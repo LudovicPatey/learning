@@ -28,3 +28,16 @@ objectives:
   - Use a set PA relative to ∅′ to choose between true Π⁰₂ statements, and define weakly low bases
   - Prove that COH, the pigeonhole principle for Δ⁰₂ sets and RT²₂ admit weakly low bases, hence low₂ solutions
 lessons: [low-bases, forcing-the-jump, weak-preservation, stable-linear-orders, coded-ideals, uniform-lowness, weakly-low-bases, beyond-zero-jump, cjs-theorem, ramsey-pairs-low2]
+credits:
+  - source: patey-lowness-avoidance
+    role: main
+    note: "Chapter \"Lowness\"."
+  - source: hirschfeldt-2014
+    role: consulted
+    note: "Section 2.3."
+  - source: dzhafarov-mummert-2022
+    role: consulted
+    note: "Sections 2.8 and 3.6."
+  - source: simpson-2009
+    role: consulted
+    note: "Sections VII.2 and VIII.2."

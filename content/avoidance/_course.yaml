@@ -27,3 +27,13 @@ objectives:
   - Use disjunctive forcing questions and Lachlan's disjunction, and prove Seetapun's theorem directly
   - Prove preservation of non-Σ⁰₁ definitions and of hyperimmunities for WKL, COH, RT¹₂ and RT²₂, and relate both properties to cone avoidance
 lessons: [avoidance-properties, forcing-question-method, strong-cone-avoidance, disjunctive-question, seetapun-conditions, seetapun-forcing, non-sigma1-definitions, moduli, hyperimmunities]
+credits:
+  - source: patey-lowness-avoidance
+    role: main
+    note: "Chapter \"Cone avoidance\"."
+  - source: dzhafarov-mummert-2022
+    role: consulted
+    note: "Section 8.3: Seetapun's original proof."
+  - source: hirschfeldt-2014
+    role: consulted
+    note: "Section 6.7."

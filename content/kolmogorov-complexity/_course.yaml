@@ -24,3 +24,16 @@ objectives:
   - Prove the symmetry of information for C up to a logarithmic term, and for K up to a constant with the condition σ*
   - Relate C and K by Levin's theorem and Solovay's estimates
 lessons: [plain-complexity, non-computability, initial-segments, computable-sequences, prefix-free-complexity, kc-theorem, coding-theorem, conditional-complexity, prefix-free-symmetry, plain-and-prefix-free]
+credits:
+  - source: downey-hirschfeldt-2010
+    role: main
+    note: "Chapters 3–4."
+  - source: nies-2009
+    role: main
+    note: "Chapter 2."
+  - source: monin-patey
+    role: consulted
+    note: "Chapter \"Kolmogorov complexity and random numbers\"."
+  - source: li-vitanyi-2019
+    role: consulted
+    note: "Background and history."

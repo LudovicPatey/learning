@@ -20,3 +20,16 @@ objectives:
   - Relativize the construction to obtain minimal covers and minimal upper bounds
   - Show that no c.e., 1-generic or PA degree is minimal
 lessons: [exact-pairs, embeddings, minimal-degrees, minimal-covers]
+credits:
+  - source: soare-2016
+    role: main
+    note: "Section 6.1 and the chapters on minimal degrees."
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Structure of the degrees\"."
+  - source: downey-hirschfeldt-2010
+    role: consulted
+    note: "Sections 2.4 and 2.17–2.18."
+  - source: lerman-1983
+    role: consulted
+    note: "Initial segments and the global theory."

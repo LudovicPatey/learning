@@ -20,3 +20,13 @@ objectives:
   - Prove the equivalence of ATR₀ with Σ¹₁ separation and with the comparability of well-orderings
   - Prove the equivalence of ATR₀ with open and clopen determinacy
 lessons: [well-orderings, pseudohierarchies, sigma11-separation, unique-paths, comparability, open-determinacy]
+credits:
+  - source: simpson-2009
+    role: main
+    note: "Chapter V."
+  - source: dzhafarov-mummert-2022
+    role: consulted
+    note: "Sections 5.8, 12.1, 12.3."
+  - source: hirschfeldt-2014
+    role: consulted
+    note: "Chapter 10."

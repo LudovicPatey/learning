@@ -19,3 +19,13 @@ objectives:
   - Characterize weakly 2-random sequences among random ones by their computational power
   - Show that computable domination is the dividing line between Kurtz randomness and the stronger notions
 lessons: [relative-randomness, weak-2-randomness, schnorr-kurtz]
+credits:
+  - source: downey-hirschfeldt-2010
+    role: main
+    note: "Sections 6.8–6.9 and 7.2."
+  - source: nies-2009
+    role: main
+    note: "Sections 3.4–3.6."
+  - source: monin-patey
+    role: consulted
+    note: "Randomness chapter."

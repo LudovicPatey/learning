@@ -21,3 +21,16 @@ objectives:
   - Verify an infinite injury construction along the true path, by a case analysis on the position of the acting node
   - Build a high incomplete c.e. set by coding Inf into its columns, and explain why finite injury does not suffice
 lessons: [minimal-pairs, trees-of-strategies, minimal-pair-verification, high-incomplete, high-incomplete-construction, high-incomplete-verification]
+credits:
+  - source: downey-hirschfeldt-2010
+    role: main
+    note: "Section 2.14: priority trees, minimal pairs, high sets."
+  - source: monin-patey
+    role: main
+    note: "Section on the Π⁰₂ priority method."
+  - source: soare-1987
+    role: consulted
+    note: "Chapters VIII–IX."
+  - source: nies-2009
+    role: consulted
+    note: "Sections 1.7 and 6.3."

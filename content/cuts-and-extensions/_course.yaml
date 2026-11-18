@@ -29,3 +29,10 @@ objectives:
   - Use the Tarski–Vaught test level by level, and prove preservation theorems for cofinal extensions
   - Prove that end extensions give collection, split extensions into cofinal and end parts, and deduce the conservation of BΣₙ₊₁ over IΣₙ
 lessons: [standard-system, weak-konig-cuts, scott-tennenbaum, semiregular-cuts, wkl-regular-cuts, cofinal-extensions, collection-end-extensions, splitting-conservation]
+credits:
+  - source: wong-notes
+    role: main
+    note: "Lectures 4–6."
+  - source: hajek-pudlak-1993
+    role: consulted
+    note: "Chapter IV."

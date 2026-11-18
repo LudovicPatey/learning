@@ -1,0 +1,18 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-01-degree-invariant:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Corollary 6.10.3"
+ex-two-random-no-minimal-pair:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Corollary 8.8.3"
+ex-stephan-above-incomplete:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Corollary 8.8.7"

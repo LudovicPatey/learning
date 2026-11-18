@@ -1,0 +1,8 @@
+- id: book-a
+  short: "Author 2000"
+  kind: book
+  citation: "A. Author, *A Book*, Publisher, 2000."
+- id: notes-b
+  short: "Lecturer, Notes"
+  kind: lecture-notes
+  citation: "B. Lecturer, *Notes*, lecture notes."

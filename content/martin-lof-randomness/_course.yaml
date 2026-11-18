@@ -20,3 +20,13 @@ objectives:
   - Prove Sacks's theorem by the majority vote technique, and the Kučera–Gács theorem by coding into a Π⁰₁ class of positive measure
   - Show that random sequences, and their infinite subsets, compute DNC functions
 lessons: [measure, martin-lof-tests, solovay-tests, levin-schnorr, upper-cones, randomness-and-degrees, random-dnc]
+credits:
+  - source: downey-hirschfeldt-2010
+    role: main
+    note: "Sections 1.2 and 6.1–6.2."
+  - source: nies-2009
+    role: main
+    note: "Sections 1.9 and 3.1–3.3."
+  - source: monin-patey
+    role: consulted
+    note: "Chapter \"Martin-Löf randomness\"."

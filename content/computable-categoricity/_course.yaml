@@ -1,0 +1,33 @@
+title: Computable categoricity
+area: structures
+level: Advanced
+order: 3
+prerequisites: [intrinsic-definability]
+summary: When all copies of a structure are computably isomorphic; relative computable categoricity and Scott families of existential formulas, the classical examples, the theorems of Nurtazin and Goncharov comparing relative and plain categoricity, computable dimension and degrees of categoricity.
+description: >
+  The third question of computable structure theory: when are all computable
+  copies of a structure computably isomorphic? The relative version, over all
+  copies, has a structural answer: Ash, Knight, Manasse, Slaman and Chisholm
+  showed that a computable structure is relatively computably categorical if and
+  only if the orbits of its tuples are defined by a c.e. family of existential
+  formulas over finitely many parameters. The course applies it to linear orders,
+  vector spaces and Boolean algebras, compares relative and plain categoricity
+  (categoricity on a cone, the theorems of Nurtazin and Goncharov, Goncharov's
+  counterexample), and measures the failure of categoricity by the computable
+  dimension and the degree of categoricity of a structure.
+objectives:
+  - Prove that relative computable categoricity is equivalent to a c.e. Scott family of existential formulas over parameters
+  - Decide relative computable categoricity for linear orders, vector spaces and Boolean algebras
+  - Prove Nurtazin's theorem by a finite injury construction, and explain when plain and relative categoricity agree
+  - Define computable dimension and degrees of categoricity, and compute the strong degree of categoricity of ω
+lessons: [scott-families, relative-categoricity, classical-examples, relative-vs-plain, nurtazin-theorem, dimension-and-degrees]
+credits:
+  - source: montalban-2021
+    role: main
+    note: "Chapter VIII."
+  - source: ash-knight-2000
+    role: main
+    note: "Chapters 10 and 12."
+  - source: fokina-harizanov-melnikov-2014
+    role: consulted
+    note: "Survey of categoricity."

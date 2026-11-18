@@ -2834,6 +2834,79 @@ pre {
   font-style: italic;
 }
 
+/* the credit of an exercise: the work it comes from, below the objective */
+.env-exercise:has(> .env-credit) > .env-head {
+  display: block;
+}
+.env-exercise > p.env-credit {
+  display: block;
+  margin: 0.1em 0 0;
+  font-size: 0.85em;
+  color: var(--muted);
+}
+.env-exercise > p.env-credit + * {
+  margin-top: 0.45em;
+}
+.env-credit-label,
+.exercise-item-credit-label {
+  font-weight: 600;
+  font-style: italic;
+}
+.exercise-item-credit {
+  margin: 2px 0;
+}
+
+/* credits of tracks and courses */
+.track-credits {
+  margin: -6px 0 14px;
+  color: var(--muted);
+}
+.track-credits > span:first-child,
+.credit-role {
+  font: 600 0.78rem var(--font-ui);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin-right: 4px;
+}
+.credit-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 12px;
+  display: grid;
+  gap: 12px;
+}
+.credit-list li {
+  display: grid;
+  gap: 2px;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.credit-consulted .credit-citation {
+  color: var(--muted);
+}
+.credits-sources {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 18px;
+}
+.credits-sources > li {
+  scroll-margin-top: 80px;
+  border-left: 3px solid var(--border-strong);
+  padding-left: 14px;
+}
+.credits-sources > li:target {
+  border-left-color: var(--accent);
+}
+.credits-uses {
+  margin-top: 4px;
+  display: grid;
+  gap: 2px;
+  color: var(--muted);
+}
+
 .further-exercises {
   margin: 2.4em 0 1em;
   border-top: 1px solid var(--border-strong);

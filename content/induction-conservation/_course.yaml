@@ -22,3 +22,19 @@ objectives:
   - Prove that RCA₀ and ACA₀ are conservative over IΣ₁ and Peano arithmetic
   - Prove Harrington's conservation theorem by forcing over a non-standard model
 lessons: [induction-collection, collection-induction, definable-elements, separations, pigeonhole, first-order-parts, forcing-subtrees, harrington]
+credits:
+  - source: dzhafarov-mummert-2022
+    role: main
+    note: "Chapter 6 and Sections 5.9–5.10."
+  - source: hirschfeldt-2014
+    role: main
+    note: "Sections 4.6, 6.8 and 7.1–7.2."
+  - source: simpson-2009
+    role: consulted
+    note: "Chapter IX."
+  - source: monin-patey
+    role: consulted
+    note: "Chapter \"Induction and conservation\": the proof of Harrington's theorem."
+  - source: hajek-pudlak-1993
+    role: consulted
+    note: "Chapters I and IV."

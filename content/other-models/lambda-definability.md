@@ -2,7 +2,7 @@
 title: λ-definability of the partial recursive functions
 summary: Head reduction, and the theorem that the λ-definable partial functions are exactly the partial recursive functions.
 duration: 45
-prerequisites: [lambda-programming, mu-recursion]
+prerequisites: [lambda-programming, models-of-computation/mu-recursion]
 ---
 
 The previous lesson represented integers, booleans and pairs by λ-terms, and gave the tools to program iteration and unbounded recursion. This lesson proves that the λ-definable partial functions (:ref{#def-lambda-definable}) are exactly the partial recursive functions. One direction follows the inductive definition of the partial recursive functions, as for LOOP and WHILE programs. For partial functions one must also show that a term has **no** normal form when the function is undefined; this is done by following its head reduction, introduced in the first section. The other direction codes λ-terms by integers and searches for the normal form along normal order reduction.

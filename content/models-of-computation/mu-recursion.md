@@ -64,7 +64,7 @@ Every partial recursive function is computable: there is an algorithm which, on 
 :::
 
 :::proof{of=prop-partial-recursive-computable}
-By induction on the definition of $f$, as for :ref{#prop-pr-total-computable}, with one additional case: for minimization, the algorithm runs the computations of $g(\vec x, 0), g(\vec x, 1), \dots$ one after the other, as described above. In the composition and recursion cases, the algorithm computes the subexpressions in order and does not terminate if one of them does not. A precise version of this proof, for WHILE programs, is given in the lesson :ref{to="models-of-computation/while-programs"}.
+By induction on the definition of $f$, as for :ref{#prop-pr-total-computable}, with one additional case: for minimization, the algorithm runs the computations of $g(\vec x, 0), g(\vec x, 1), \dots$ one after the other, as described above. In the composition and recursion cases, the algorithm computes the subexpressions in order and does not terminate if one of them does not. A precise version of this proof, with Turing machines, is given in the lesson :ref{to="models-of-computation/equivalence-of-models"}.
 :::
 
 Every primitive recursive function is recursive. The converse fails:
@@ -255,7 +255,7 @@ Let $G$ be the graph of the Ackermann function, primitive recursive by :ref{#ex-
 :::
 ::::
 
-::::exercise{#ex-mu-partial-cases difficulty=2 lessons="register-machines" objective="Use the normal form theorem to define partial recursive functions by cases without evaluating the case that does not apply."}
+::::exercise{#ex-mu-partial-cases difficulty=2 lessons="other-models/register-machines" objective="Use the normal form theorem to define partial recursive functions by cases without evaluating the case that does not apply."}
 Let $f_1, f_2 : \nat^k \rightharpoonup \nat$ be partial recursive and $P \subseteq \nat^k$ recursive. Show that the partial function $f$ with $f(\vec x) \simeq f_1(\vec x)$ if $P(\vec x)$ and $f(\vec x) \simeq f_2(\vec x)$ otherwise is partial recursive. Why does the formula $f_1(\vec x) \cdot \chi_P(\vec x) + f_2(\vec x) \cdot \chi_{\neg P}(\vec x)$ not work?
 
 :::solution

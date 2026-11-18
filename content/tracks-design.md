@@ -81,8 +81,7 @@ areas.
   later.
 - **Lachlan games** (Soare Part IV). They are a presentation device rather than a body of
   results.
-- **Computable structure theory.** It is not covered by the reference books of the
-  platform, and would be a track of its own.
+- **Computable structure theory.** A track of its own since 2026-11-18 (see below).
 
 **Course added on 2026-11-12** (specialized at first; since 2026-11-13 the first course of
 the track "Lowness and avoidance").
@@ -470,6 +469,55 @@ Weihrauch's book is the reference. The platform needs one specialized course:
 It connects the reverse mathematics of analysis (second-order arithmetic) with
 Weihrauch reducibility (reducibilities). A track of its own is not planned.
 
+## Review of 2026-11-18
+
+At the author's request, every track was reviewed for its pedagogical structure, without
+following one book, and for recent results that should be included or that settle a
+question presented as open.
+
+- **Computability theory: entry course split.** `models-of-computation` had 16 lessons, and
+  six of them (register machines, LOOP and WHILE programs, three lessons on the
+  λ-calculus) are used by no later course. The core course now treats two formalizations,
+  Turing machines and partial recursive functions, proves their equivalence in both
+  directions (by arithmetization, and by clean multi-tape machines for the schemes), and
+  ends with the normal form, the universal function and the thesis. The other models form
+  the specialized course `other-models`, which ends with the equivalence of all five
+  models. A reader reaches c.e. sets after ten lessons instead of sixteen. The rest of the
+  track keeps its order: each course uses the techniques of the previous ones (see the
+  list of techniques above). State of the art: Lutz–Siskind (Part 1 of Martin's
+  conjecture for order-preserving functions) is now cited in its journal version (JAMS
+  2024).
+- **Algorithmic randomness: order kept.** An alternative would start with Martin-Löf tests,
+  which need less machinery than prefix-free complexity. It was rejected: the
+  Levin–Schnorr theorem, the central equivalence of the area, needs both, and the
+  complexity course also serves the later courses (left-c.e. reals, K-triviality); Downey–
+  Hirschfeldt and Nies make the same choice. State of the art: the covering problem
+  (Bienvenu, Greenberg, Kučera, Nies and Turetsky; Day and Miller) is already in
+  `k-trivials`; nothing found that changes the core courses.
+- **Reverse mathematics: restructured earlier the same day** (sections above): the
+  combinatorial principles are organized by preservation of hyperimmunities and of
+  constant-bound immunity, and ATR₀ has a course of its own. State of the art: the
+  first-order part of RT²₂ (Le Houérou, Levy Patey and Yokoyama 2024: Π⁰₄ conservation
+  over BΣ⁰₂, and Π¹₁ conservation with the well-foundedness of ε₀) is in
+  `induction-conservation/pigeonhole` and `independence/paris-harrington`, which present
+  full Π¹₁ conservation over RCA₀ + BΣ⁰₂ as open. The question was solved in 2026
+  by Y.-S. Hwang (*Π¹₁ conservation of Ramsey's theorem for pairs over BΣ⁰₂*, preprint on
+  ResearchGate, October 2026, not yet refereed; the only reference available); both
+  lessons now say so, and the first-order part of RT²₂ is IΣ₁ + BΣ₂.
+  Whether CADS implies COH over RCA₀ is still presented as open; no resolution was found.
+- **Higher computability: order kept** (hyperarithmetic sets, Π¹₁ sets and ordinal
+  notations, the Σ¹₁ basis theorems, admissible sets, hyperarithmetic forcing), as
+  enlarged on 2026-11-17: each course needs the previous one, and admissible sets come
+  after the concrete theory so that they generalize something known.
+- **Lowness and avoidance, models of arithmetic: kept as secondary tracks.** Their order
+  (forcing, then avoidance, then lowness; fragments, then conservation, then
+  independence) follows the dependencies of the results. The open questions cited in the
+  arithmetic track (Scott set problem, minimal cofinal extensions, Paris's question whether
+  IΔ₁ proves BΣ₁, and whether IΔ₀ + ¬exp proves BΣ₁) were not rechecked in this review; this is left for the
+  next revision of those courses.
+- **Computable structure theory.** New track of the same day (section above), organized by
+  questions rather than by the chapters of one book.
+
 ## History
 
 - **2026-11-12.** Initial log, written when the design rules were introduced.
@@ -515,3 +563,111 @@ Weihrauch reducibility (reducibilities). A track of its own is not planned.
   `sigma11-basis`; two further courses planned.
 - **2026-11-17.** Higher computability: `admissible-sets` and `hyperarithmetic-forcing`
   written from Sacks and Chong–Yu, completing the planned enlargement.
+- **2026-11-18.** Computable structure theory: third course `computable-categoricity` written
+  (six lessons: Scott families, the characterization of relative computable categoricity,
+  classical examples, categoricity on a cone, Nurtazin's theorem, computable dimension and
+  degrees of categoricity).
+
+## Computable structure theory
+
+**Added on 2026-11-18**, at the author's request, once the reference books were available:
+Ash and Knight, *Computable Structures and the Hyperarithmetical Hierarchy* (2000), and
+Montalbán, *Computable Structure Theory: Within the Arithmetic* (draft of 2019, published
+2021) and *Beyond the Arithmetic* (revised version of 2025). It is a **primary** track:
+computable structure theory is one of the main areas of research in computability, with
+its own monographs, and its basic notions (presentations, categoricity, degree spectra,
+Scott rank) are used across the other areas (reverse mathematics of algebra, the atomic
+model theorem, Borel reducibility).
+
+**Objective.** The complexity of countable structures: their presentations and degree
+spectra, the complexity of their relations and of their isomorphisms, and the infinitary
+formulas that explain both.
+
+**Techniques.**
+- Building presentations as pull-backs of enumerations (Knight's coding);
+- the back-and-forth method and its effective versions;
+- generic presentations and forcing on presentations;
+- finite injury and true stages in constructions of structures;
+- infinitary formulas, Scott sentences and back-and-forth relations;
+- (later) the α-priority method.
+
+**Comparison and choices.**
+- **Ash–Knight** is organized around the hyperarithmetical hierarchy: infinitary formulas
+  first, then intrinsic definability and categoricity at all levels, then the
+  metatheorems for α-systems. **Montalbán** separates the theory below one jump (Part I)
+  from the transfinite theory (Part II), and develops the tools (r.i.c.e. relations,
+  ∃-atomic structures, generic presentations) before the questions they answer.
+  **Downey–Melnikov** (2025) start from effective classification and include
+  uncountable structures. The survey of **Fokina, Harizanov and Melnikov** (*Turing's
+  Legacy*, 2014) organizes the field by its questions.
+- **Decision (2026-11-18, at the author's request that the track not follow one book).**
+  The track is ordered by **questions**, each course answering one, and the tools are
+  introduced where a question needs them:
+  1. *Which structures have computable copies, and do two computable copies agree?*
+     (`computable-structures`): presentations, Knight's theorem, decidable theories and
+     their decidable models, computable algebra, the effective back-and-forth method and
+     the first examples of computable categoricity. Concrete structures (orders, groups,
+     fields, vector spaces, Boolean algebras) come before any general tool, so that the
+     reader has examples on which to test the general theory.
+  2. *Which relations can every copy compute or enumerate?* (`intrinsic-definability`):
+     r.i.c.e. relations and the theorem of Ash, Knight, Manasse, Slaman and Chisholm, the
+     jump of relations and complete relations, and the difference between intrinsic and
+     relatively intrinsic notions (Ash–Nerode), which prepares the same difference for
+     categoricity.
+  3. *When are all copies computably isomorphic?* (`computable-categoricity`): Scott
+     families, relative computable categoricity, the classical examples, relative versus
+     plain categoricity, computable dimension, degrees of categoricity.
+  4. *Which sets of degrees are degree spectra?* (`degree-spectra`): generic
+     presentations, possible and impossible spectra, the jump of a structure, low
+     structures.
+  5. *How complicated is a structure to describe?* (`scott-analysis`): infinitary logic,
+     back-and-forth relations, Scott sentences, Scott rank and Scott complexity.
+  6. *What happens beyond one jump?* (`hyperarithmetic-structures`): computable
+     infinitary formulas, intrinsic definability and relative Δ⁰_α-categoricity at all
+     levels, pairs of structures.
+  7. *Can countable structures be classified?* (`isomorphism-problem`): index sets, the
+     complexity of isomorphism, structures of high Scott rank, effective
+     bi-interpretability and computable embeddings of classes.
+  This differs from Montalbán in three places: categoricity comes before degree spectra
+  and generic presentations, being the more natural first question and needing only the
+  finitary tools; effective model theory (decidable models, computable algebra) belongs to
+  the first course; and Scott analysis is a course of its own, separate from the
+  hyperarithmetic level, since Scott complexity is now the standard language of
+  descriptive complexity. It differs from Ash–Knight in starting below one jump.
+
+It builds on the computability track (finite injury, the arithmetic hierarchy), and from
+course 5 on the higher computability track (computable ordinals, hyperarithmetic sets).
+
+**State of the literature (checked 2026-11-18).**
+- New reference: Downey and Melnikov, *Computable Structure Theory: A Unified Approach*
+  (Springer, 2025), which treats countable and uncountable (Polish, profinite, locally
+  compact) structures together, and Friedberg enumerations of classes of structures. It
+  is not in `external-data/`; it is cited as further reading, and is the natural source
+  for a later specialized course on computable topological structures.
+- Montalbán's *Beyond the Arithmetic* is published (2026); the file used is the revised
+  version of April 2025, and section numbers may differ slightly.
+- **Scott complexity** (Alvir, Greenberg, Harrison-Trainor, Turetsky, JSL 2021, and
+  Harrison-Trainor's survey, BSL): the least complexity of a Scott sentence, which is
+  always Π_α, Σ_α or d-Σ_α (α a successor for the last two), never Σ₁ nor Σ₂. It refines
+  Scott rank and is now the standard measure; the course `infinitary-logic` must present
+  it, with Montalbán's robust Scott rank, instead of the older rank of Ash–Knight
+  (Chapter 6). Recent work on the computability of optimal Scott sentences (2025) is
+  further reading.
+- **Degrees of categoricity** (Fokina, Kalimullin, Miller; Csima, Franklin, Shore;
+  Csima and Harrison-Trainor): to be covered in `computable-categoricity`, with the open
+  question, still open in 2025, whether every degree of categoricity is a strong degree
+  of categoricity.
+- **Punctual (online) structures** (Bazhenov, Downey, Kalimullin, Melnikov, Ng and others,
+  surveyed in the BSL in 2019; recent work on primitive recursive categoricity spectra,
+  2026): a sub-area of its own; a possible specialized course, outside the track.
+- The results of course 1 (Knight's theorem, the characterization of r.i.c.e. relations,
+  the jump of relations) are classical and not superseded.
+
+**Excluded, for now.**
+- Prime and atomic models, homogeneous models, the atomic model theorem and its reverse
+  mathematics (Hirschfeldt, Section 9.3; Ash–Knight 9): a possible specialized course;
+  decidable models of decidable theories are in the first course.
+- The α-priority method and the metatheorems of Ash–Knight (Chapters 13–19): a possible
+  specialized course after the track.
+- Σ-small classes and the copy-versus-diagonalize game (Montalbán I, X), Vaught's
+  conjecture (Montalbán II, XII): research topics.

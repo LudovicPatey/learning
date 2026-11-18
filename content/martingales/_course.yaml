@@ -24,3 +24,13 @@ objectives:
   - Prove the equivalence of the martingale and test definitions of Schnorr randomness
   - Characterize Kurtz randomness by martingales, separate the four notions, and show that they collapse outside the high degrees
 lessons: [betting-strategies, ville-theorem, schnorr-theorem, computable-randomness, cr-construction, schnorr-randomness, randomness-hierarchy]
+credits:
+  - source: downey-hirschfeldt-2010
+    role: main
+    note: "Section 6.3 and Chapter 7."
+  - source: nies-2009
+    role: main
+    note: "Chapter 7."
+  - source: monin-patey
+    role: consulted
+    note: "Martingales in the randomness chapter."

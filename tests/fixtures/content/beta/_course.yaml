@@ -4,3 +4,5 @@ order: 2
 prerequisites: [alpha]
 summary: Second test course.
 lessons: [three]
+credits:
+  - source: notes-b

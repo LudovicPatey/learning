@@ -170,7 +170,7 @@ The jump is degree invariant: $X \equiv_T Y$ implies $X' \equiv_T Y'$. **Martin'
 - R. I. Soare, *Turing Computability: Theory and Applications*, Springer, 2016, §3.4.
 - J. R. Steel, *A classification of jump operators*, Journal of Symbolic Logic 47 (1982), 347–358.
 - T. A. Slaman and J. R. Steel, *Definable functions on degrees*, in *Cabal Seminar 81–85*, Lecture Notes in Mathematics 1333, Springer, 1988, 37–55.
-- P. Lutz and B. Siskind, *Part 1 of Martin's conjecture for order-preserving and measure-preserving functions*, arXiv:2305.19646, 2023.
+- P. Lutz and B. Siskind, *Part 1 of Martin's conjecture for order-preserving and measure-preserving functions*, Journal of the American Mathematical Society, published electronically 2024, doi:10.1090/jams/1046 (arXiv:2305.19646).
 
 :::::exercises
 ::::exercise{#ex-jump-uniform-section difficulty=1 objective="Show that a set is computed from its jump by a single machine for all oracles."}

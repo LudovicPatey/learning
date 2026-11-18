@@ -1,0 +1,27 @@
+title: Intrinsic definability
+area: structures
+level: Advanced
+order: 2
+prerequisites: [computable-structures]
+summary: Relations that are c.e. or computable in every copy of a structure, their characterization by computable infinitary existential formulas, the sets a structure codes, the jump of a relation and complete relations.
+description: >
+  Which relations on a structure can every copy enumerate or compute? The
+  relatively intrinsically c.e. relations, characterized by Ash, Knight, Manasse,
+  Slaman and Chisholm as those definable by computable disjunctions of existential
+  formulas with parameters; the uniform version and the role of parameters; the
+  sets of numbers a structure codes (Knight); the Kleene relation and the jump of a
+  relation; linear dependence, adjacency and the rational order as examples of
+  complete relations.
+objectives:
+  - Prove that r.i.c.e. relations are exactly the Σᶜ₁-definable relations with parameters
+  - Characterize the sets of numbers c.e. in every copy of a structure
+  - Define the jump of a relation and show that it is not relatively intrinsically computable
+  - Identify complete relations on vector spaces, linear orders and the rational order
+lessons: [intrinsic-relations, complete-relations, intrinsic-vs-relative]
+credits:
+  - source: montalban-2021
+    role: main
+    note: "Chapter II."
+  - source: ash-knight-2000
+    role: main
+    note: "Chapters 10–11."

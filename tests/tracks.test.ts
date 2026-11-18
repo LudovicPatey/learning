@@ -13,7 +13,7 @@ const courses = [
   { id: "y", prerequisites: ["x", "b"] },
   { id: "z", prerequisites: ["y", "a"] },
 ];
-const track: Track = { id: "t", title: "T", area: "logic", description: "", primary: true, courses: ["x", "y", "z"] };
+const track: Track = { id: "t", title: "T", area: "logic", description: "", primary: true, courses: ["x", "y", "z"], credits: [] };
 
 describe("trackGraph", () => {
   it("keeps only the edges inside the track", () => {

@@ -7,10 +7,10 @@ the course, keep to its objectives, and record every decision in the history.
 
 After the course, a student can:
 
-- state each classical model of computation precisely, with its input and output
-  conventions and its treatment of partiality: Turing machines (one and several tapes),
-  unlimited register machines, primitive and partial recursive functions, LOOP and WHILE
-  programs, the λ-calculus;
+- state two classical models of computation precisely, with their input and output
+  conventions and their treatment of partiality: Turing machines (one and several tapes),
+  and primitive and partial recursive functions (since 2026-11-18, the other models are
+  in the specialized course `other-models`, see the history);
 - write small programs in each model and **prove them correct** (invariants, induction on
   steps or rounds);
 - prove that a function is primitive recursive from the closure properties, and code finite
@@ -20,9 +20,9 @@ After the course, a student can:
 - prove that the Ackermann function is not primitive recursive (majorization, and a direct
   diagonalization), and state and prove Kleene's normal form theorem and the existence of a
   universal partial computable function;
-- prove that the LOOP programs compute the primitive recursive functions, and that the WHILE
-  programs and the λ-terms compute the partial recursive functions, including the proof that a
-  λ-term has no normal form when the function is undefined;
+- prove that the Turing-computable functions are exactly the partial recursive functions,
+  in both directions: by arithmetization, and by building clean multi-tape machines for
+  the schemes;
 - say what the Church–Turing thesis asserts, and how it is (and is not) used in proofs.
 
 **Role in the track.** First course of the computability track (`tracks-design.md`). Its job
@@ -545,3 +545,27 @@ of non-constructive computability proofs.
   `ex-tm-parity` completed. Durations recomputed (old duration scaled by the change of length):
   programming-turing-machines 35, multitape-machines 30, mu-recursion 30, lambda-definability 45,
   equivalence-of-models 45, church-turing-thesis 35.
+- **2026-11-18.** Course split, after a review of the computability track (`tracks-design.md`,
+  section "Review of 2026-11-18").
+  - Reason: with 16 lessons, the entry course of every track was the longest course of the
+    site, and six of its lessons (register machines, LOOP and WHILE programs, three lessons
+    on the λ-calculus) are used by no later course. A reader heading for randomness or
+    reverse mathematics needs one machine model, the partial recursive functions, their
+    equivalence, the normal form and the thesis. Soare (Chapter 1) and Monin–Patey make
+    the same choice; Cutland and Odifreddi start from register machines, a choice that
+    suits a course on models but delays the core.
+  - The six lessons moved to the new specialized course `other-models`, with their labels
+    unchanged, together with the equivalence of all the models (new lesson `all-models`,
+    which received `thm-equivalence-models`, the cycle figure, `prop-urm-tm` and
+    `ex-urm-arithmetization`).
+  - `equivalence-of-models` rewritten as "Turing machines and partial recursive
+    functions": new theorem `thm-tm-pr`, and a direct proof that partial recursive
+    functions are Turing-computable (`prop-pr-tm`), by clean multi-tape machines for
+    composition, primitive recursion and minimization. Before, this direction went
+    through register machines. The arithmetization, normal form and universal function
+    sections are kept.
+  - References updated in `mu-recursion`, `primitive-recursion`, `church-turing-thesis`.
+  - No version of the course had been released, so no permanent URL is affected; the
+    working-copy URLs of the six lessons change from `models-of-computation/<slug>` to
+    `other-models/<slug>`, with their labels unchanged.
+

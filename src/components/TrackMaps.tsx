@@ -12,6 +12,8 @@ export type TrackView = {
   courses: MapCourse[];
   /** Courses of other tracks that this track builds on. */
   external: { id: string; title: string; trackTitle?: string }[];
+  /** Works the track is based on, main ones first. */
+  credits: { id: string; short: string; role: "main" | "consulted" }[];
 };
 
 /** The dependency graph of one track at a time, with tabs to switch track. */
@@ -76,6 +78,19 @@ export function TrackMaps({
                 {e.title}
                 {e.trackTitle && <span className="track-external-of"> · {e.trackTitle}</span>}
               </Link>
+            ))}
+          </p>
+        )}
+        {track.credits.length > 0 && (
+          <p className="track-credits small">
+            <span>Based on</span>{" "}
+            {track.credits.map((c, i) => (
+              <span key={c.id}>
+                {i > 0 && " · "}
+                <Link href={`/credits#${c.id}`} className={c.role === "consulted" ? "muted" : undefined}>
+                  {c.short}
+                </Link>
+              </span>
             ))}
           </p>
         )}

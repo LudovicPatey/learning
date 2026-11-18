@@ -1,0 +1,14 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-ads-cac-reduction:
+  source: hirschfeldt-2014
+  relation: adapted
+  where: "Exercise 9.3"
+ex-fs-downward:
+  source: hirschfeldt-2014
+  relation: adapted
+  where: "Exercise 9.33"

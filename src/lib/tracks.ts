@@ -8,6 +8,8 @@
 //
 // This module is pure (no file system), so that it can be unit-tested.
 
+import { parseCredits, type Credit, type Source } from "./credits.ts";
+
 export type Track = {
   id: string;
   title: string;
@@ -17,12 +19,20 @@ export type Track = {
   primary: boolean;
   /** Core courses of the track, in their recommended order. */
   courses: string[];
+  /** Works the track is based on (`credits:`), main ones first. */
+  credits: Credit[];
 };
 
 export type GraphCourse = { id: string; prerequisites: string[] };
 
 /** Parse the content of tracks.yaml, reporting unknown courses and areas. */
-export function parseTracks(raw: unknown, courseIds: Set<string>, areaIds: Set<string>, warnings: string[]): Track[] {
+export function parseTracks(
+  raw: unknown,
+  courseIds: Set<string>,
+  areaIds: Set<string>,
+  warnings: string[],
+  sources?: Map<string, Source>,
+): Track[] {
   if (raw == null) return [];
   if (!Array.isArray(raw)) {
     warnings.push("content/tracks.yaml must be a list of tracks");
@@ -51,7 +61,9 @@ export function parseTracks(raw: unknown, courseIds: Set<string>, areaIds: Set<s
       description: String(t.description ?? ""),
       primary: kind !== "secondary",
       courses: courses.filter((c) => courseIds.has(c)),
+      credits: sources ? parseCredits(t.credits, `content/tracks.yaml: track "${id}"`, sources, warnings) : [],
     });
+    if (sources && !t.credits) warnings.push(`content/tracks.yaml: track "${id}" has no credits (add credits: with the works the track is based on)`);
   }
   return tracks;
 }

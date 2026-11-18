@@ -34,3 +34,10 @@ objectives:
   - Compute with α-large sets and relate them to the Schwichtenberg–Wainer hierarchy
   - Work with initial segments with a top and their coded expansions
 lessons: [fast-growing, catching-cuts, indicators, paris-harrington, regressive-colorings, diagonal-indiscernibles, ph-unprovable, alpha-large, arithmetic-with-top]
+credits:
+  - source: hajek-pudlak-1993
+    role: main
+    note: "Part II: Paris–Harrington and α-large sets."
+  - source: wong-notes
+    role: consulted
+    note: "Lecture 5: fast-growing functions."

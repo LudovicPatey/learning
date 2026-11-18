@@ -24,3 +24,16 @@ objectives:
   - Characterize Π¹₁-randomness through the Church–Kleene ordinal of a sequence, and build the largest null Π¹₁ class
   - Prove that null Σ¹₁ classes are covered by null Δ¹₁ classes, and that the upper hyperarithmetic cone of a non-hyperarithmetic set is null
 lessons: [pi11-classes, pi11-measure, higher-tests, sacks-tanaka, pi11-randomness, hyperdegrees]
+credits:
+  - source: nies-2009
+    role: main
+    note: "Chapter 9."
+  - source: hjorth-nies-2007
+    role: main
+    note: "Π¹₁-Martin-Löf randomness and its lowness notions."
+  - source: monin-patey
+    role: consulted
+    note: "Chapter \"Higher randomness\"."
+  - source: chong-yu-2015
+    role: consulted
+    note: "Monograph treatment."

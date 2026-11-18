@@ -23,3 +23,10 @@ objectives:
   - Transfer a Solovay test along non-computable good stages to prove that a random sum of two left-c.e. reals has a random summand
   - Characterize Solovay functions by the randomness of the associated sums
 lessons: [approximations, solovay-reducibility, kucera-slaman, random-sums, solovay-functions-and-omega]
+credits:
+  - source: downey-hirschfeldt-2010
+    role: main
+    note: "Chapters 5 and 9."
+  - source: nies-2009
+    role: main
+    note: "Section 3.2."

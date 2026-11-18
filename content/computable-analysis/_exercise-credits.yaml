@@ -1,0 +1,26 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-sup-left-ce:
+  source: weihrauch-2000
+  relation: adapted
+  where: "Exercise 4.2.11"
+ex-modulus-convergence:
+  source: weihrauch-2000
+  relation: adapted
+  where: "Exercise 4.2.4"
+ex-naive-cauchy:
+  source: weihrauch-2000
+  relation: adapted
+  where: "Exercise 4.1.13"
+ex-computable-points:
+  source: weihrauch-2000
+  relation: result
+  where: "Section 9.1"
+ex-baire-into-cantor:
+  source: weihrauch-2000
+  relation: adapted
+  where: "Exercise 2.2.9"

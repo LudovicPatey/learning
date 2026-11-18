@@ -12,6 +12,19 @@
     From the models of computation to the structure of the Turing degrees: the
     common basis of the other tracks.
   courses: [models-of-computation, countability, fundamentals, turing-degrees, arithmetic-hierarchy, ce-degrees, pi01-classes, immunity-growth]
+  credits:
+    - source: soare-2016
+      role: main
+      note: "Parts I–III: the common core of the track."
+    - source: monin-patey
+      role: main
+      note: "The book this platform grew from; same sequence of topics and conventions."
+    - source: downey-hirschfeldt-2010
+      role: consulted
+      note: "Chapter 2."
+    - source: nies-2009
+      role: consulted
+      note: "Chapter 1."
 - id: randomness
   title: Algorithmic randomness
   area: randomness
@@ -19,6 +32,16 @@
     Randomness of individual infinite sequences, through tests, incompressibility
     and betting strategies.
   courses: [kolmogorov-complexity, martin-lof-randomness, martingales, randomness-notions, left-ce-reals, randomness-degrees, k-trivials]
+  credits:
+    - source: downey-hirschfeldt-2010
+      role: main
+      note: "Chapters 3–9 and 11."
+    - source: nies-2009
+      role: main
+      note: "Chapters 2–5 and 7."
+    - source: monin-patey
+      role: consulted
+      note: "Chapters on Kolmogorov complexity and Martin-Löf randomness."
 - id: reverse-math
   title: Reverse mathematics
   area: reverse-math
@@ -26,12 +49,62 @@
     The axioms needed to prove theorems of ordinary mathematics, measured over a
     weak base theory.
   courses: [second-order-arithmetic, big-five, ramsey-theorem, induction-conservation, reducibilities, combinatorial-principles, transfinite-recursion]
+  credits:
+    - source: simpson-2009
+      role: main
+      note: "The big five, conservation and ATR₀."
+    - source: hirschfeldt-2014
+      role: main
+      note: "Combinatorial principles and the zoo below ACA₀."
+    - source: dzhafarov-mummert-2022
+      role: main
+      note: "Problems, reductions and the organization by computability-theoretic properties."
+    - source: monin-patey
+      role: consulted
+      note: "Ramsey's theorem and induction."
 - id: higher
   title: Higher computability
   area: higher
   description: >
     Computability along the computable ordinals, beyond the arithmetic sets.
   courses: [computable-ordinals, hyperarithmetic, descriptive-set-theory, sigma11-basis, admissible-sets, hyperarithmetic-forcing]
+  credits:
+    - source: sacks-1990
+      role: main
+      note: "Part A: hyperarithmetic and Π¹₁ sets, admissibility, forcing."
+    - source: chong-yu-2015
+      role: main
+      note: "Higher computability and its forcing methods."
+    - source: monin-patey
+      role: main
+      note: "Chapters on transfinite numbers, hyperarithmetic sets and beyond."
+    - source: moschovakis-2009
+      role: consulted
+      note: "Chapter 4."
+    - source: simpson-2009
+      role: consulted
+      note: "Chapter V and Section VIII.3."
+- id: structures
+  title: Computable structure theory
+  area: structures
+  description: >
+    The complexity of countable structures: their presentations, the relations
+    that are c.e. or computable in every copy, categoricity, degree spectra,
+    and the infinitary formulas that explain them.
+  courses: [computable-structures, intrinsic-definability, computable-categoricity]
+  credits:
+    - source: montalban-2021
+      role: main
+      note: "The theory below one jump."
+    - source: ash-knight-2000
+      role: main
+      note: "Intrinsic definability and categoricity at all levels."
+    - source: montalban-beyond
+      role: consulted
+      note: "The theory beyond one jump."
+    - source: fokina-harizanov-melnikov-2014
+      role: consulted
+      note: "The organization of the field by its questions."
 - id: avoidance
   title: Lowness and avoidance
   kind: secondary
@@ -41,6 +114,16 @@
     question as the main tool: cone avoidance, lowness, compactness avoidance, and the
     control of the first and second jumps.
   courses: [effective-forcing, avoidance, lowness, compactness-avoidance, separation-design, jump-cone-avoidance, jump-compactness-avoidance]
+  credits:
+    - source: patey-lowness-avoidance
+      role: main
+      note: "The track follows the chapters of the monograph."
+    - source: dzhafarov-mummert-2022
+      role: consulted
+      note: "Chapter 8."
+    - source: hirschfeldt-2014
+      role: consulted
+      note: "Chapter 6."
 - id: arithmetic
   title: Models of arithmetic
   kind: secondary
@@ -50,3 +133,10 @@
     definitions, cuts and end extensions, recursive saturation, and the independence of
     combinatorial statements.
   courses: [fragments-of-arithmetic, truth-and-provability, cuts-and-extensions, end-extensions, recursive-saturation, independence]
+  credits:
+    - source: wong-notes
+      role: main
+      note: "The fifteen lectures, reorganized into courses."
+    - source: hajek-pudlak-1993
+      role: main
+      note: "Fragments, partial truth definitions and independence."

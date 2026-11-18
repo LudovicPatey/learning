@@ -18,3 +18,16 @@ objectives:
   - Build sets with prescribed properties by finite extensions
   - Construct non-computable low sets and incomplete high sets
 lessons: [oracle-computation, relativization, turing-reducibility, turing-jump, limit-computability, finite-extensions, low-and-high]
+credits:
+  - source: soare-2016
+    role: main
+    note: "Chapters 3 and 6; the order of the first half."
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Turing degrees\"."
+  - source: downey-hirschfeldt-2010
+    role: consulted
+    note: "Sections 2.4, 2.6, 2.10, 2.24."
+  - source: nies-2009
+    role: consulted
+    note: "Sections 1.2–1.6."

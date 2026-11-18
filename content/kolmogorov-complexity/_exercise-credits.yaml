@@ -1,0 +1,54 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-semimeasure-coding:
+  source: nies-2009
+  relation: from
+  where: "Exercises 2.2.23 and 2.2.27"
+ex-k-order-sum:
+  source: nies-2009
+  relation: from
+  where: "Exercise 2.2.22"
+ex-stephan-zm:
+  source: nies-2009
+  relation: from
+  where: "Exercise 2.1.23"
+ex-compressible-complete:
+  source: nies-2009
+  relation: result
+  where: "Proposition 2.1.28"
+ex-incompressible-count:
+  source: nies-2009
+  relation: from
+  where: "Exercise 2.1.17"
+ex-levin-minimum:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Theorem 4.1.1"
+ex-k-iterated-c:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Proposition 4.2.1"
+ex-optimal-padding:
+  source: nies-2009
+  relation: from
+  where: "Exercise 2.1.5"
+ex-one-description-per-length:
+  source: nies-2009
+  relation: from
+  where: "Exercise 2.1.4"
+ex-k-iterated-log:
+  source: nies-2009
+  relation: from
+  where: "Exercise 2.2.11"
+ex-k-shortest-incompressible:
+  source: nies-2009
+  relation: from
+  where: "Exercise 2.2.10"
+ex-concatenation-star:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Corollary 3.10.3"

@@ -2,7 +2,7 @@
 title: Register machines
 summary: Unlimited register machines (URM), their operational semantics, examples, concatenation of programs, and closure of URM-computable functions under composition.
 duration: 40
-prerequisites: [what-is-an-algorithm]
+prerequisites: [models-of-computation/equivalence-of-models]
 ---
 
 Turing machines access their memory sequentially, one cell at a time. **Register machines** instead have a memory made of registers, each holding a natural number, accessed directly by their index. Several variants were introduced around 1960 by Melzak, Lambek, Minsky, and Shepherdson and Sturgis. We use the **unlimited register machine** (URM) of Shepherdson and Sturgis, in the form popularized by Cutland's textbook. Its instruction set is small, which makes proofs about it short, and close to an assembly language, which makes it easy to program.
@@ -242,7 +242,7 @@ Suppose $g_1(\vec x)\diverge$ but $h$ is a constant function. What does the prog
 
 The URM is a minimal example of a **goto program**: a numbered list of elementary instructions together with conditional jumps. Processors execute programs of this kind. Other common instruction sets, for instance with a decrement instruction $R_n \leftarrow R_n \dotminus 1$ and a test "if $R_n = 0$ go to $q$", lead to the same class of computable functions. The proof is a **simulation**, the technique of the lesson :ref{to="models-of-computation/multitape-machines"}: each instruction of one set is replaced by a block of instructions of the other, using auxiliary registers that the program does not mention, and jump targets are renumbered. :ref{#ex-urm-no-transfer} below is an instance, :ref{#ex-urm-pred} shows how to decrement without a decrement instruction, and :ref{#ex-urm-decrement-variant} carries out the simulation for the instruction set above.
 
-In the lessons :ref{to="models-of-computation/loop-programs"} and :ref{to="models-of-computation/while-programs"} we consider **structured** programs, with `for` and `while` loops instead of jumps. They are more convenient to write, and the distinction between the two kinds of loops gives a characterization of the primitive recursive functions.
+In the lessons :ref{to="other-models/loop-programs"} and :ref{to="other-models/while-programs"} we consider **structured** programs, with `for` and `while` loops instead of jumps. They are more convenient to write, and the distinction between the two kinds of loops gives a characterization of the primitive recursive functions.
 
 ## Exercises
 

@@ -22,3 +22,16 @@ objectives:
   - Prove that countable Σ¹₁ classes consist of hyperarithmetic sets, and contrast with Π¹₁ singletons
   - Recognize the techniques: rank comparison, stage comparison, boundedness, splitting constructions
 lessons: [norms, reduction, uniformization, perfect-sets]
+credits:
+  - source: moschovakis-2009
+    role: main
+    note: "Chapter 4."
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Beyond hyperarithmetic\"."
+  - source: simpson-2009
+    role: consulted
+    note: "Sections V.3–V.5."
+  - source: kechris-1995
+    role: consulted
+    note: "Sections 29 and following."

@@ -1,0 +1,26 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-scac-preserves-dnc:
+  source: dzhafarov-mummert-2022
+  relation: result
+  where: "Theorem 9.2.21"
+ex-wwkl-threshold:
+  source: dzhafarov-mummert-2022
+  relation: result
+  where: "Theorem 9.11.12"
+ex-ads-transitive:
+  source: dzhafarov-mummert-2022
+  relation: result
+  where: "Proposition 9.2.7"
+ex-sads-hyperimmune:
+  source: dzhafarov-mummert-2022
+  relation: result
+  where: "Proposition 9.2.17"
+ex-weakly-stable:
+  source: dzhafarov-mummert-2022
+  relation: result
+  where: "Theorem 9.2.11"

@@ -21,3 +21,10 @@ objectives:
   - Use amplification to show that no K-trivial set is weak truth-table complete
   - Derive the ideal structure of the K-trivial sets from the main theorem
 lessons: [k-trivial-sets, solovay-functions, cost-functions, lowness, hungry-sets, ktrivial-lowness]
+credits:
+  - source: nies-2009
+    role: main
+    note: "Chapter 5."
+  - source: downey-hirschfeldt-2010
+    role: main
+    note: "Chapter 11."

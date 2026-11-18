@@ -1,0 +1,34 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-cost-slow-enumeration:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 5.3.7"
+ex-cost-limit-necessary:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 5.3.8"
+ex-low-omega:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 5.1.27"
+ex-ktrivial-shift:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 5.2.14"
+ex-ktrivial-sum:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 5.2.19"
+ex-lowk-segments:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 5.2.7"
+ex-low-for-c:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 5.2.22"

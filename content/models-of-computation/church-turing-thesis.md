@@ -5,7 +5,7 @@ duration: 25
 prerequisites: [equivalence-of-models]
 ---
 
-The previous lesson established that five independent formalizations of computability define the same class of partial functions. The **Church–Turing thesis** asserts that this class is the right one.
+The previous lesson established that two independent formalizations of computability, Turing machines and the partial recursive functions, define the same class of partial functions; the specialized course on other models of computation adds register machines, WHILE programs and the λ-calculus to the list. The **Church–Turing thesis** asserts that this class is the right one.
 
 :::aside[The Church–Turing thesis]
 A partial function $f : \nat^k \rightharpoonup \nat$ is computable by an effective procedure — in the informal sense of an algorithm executed mechanically by a human with unlimited time and paper — if and only if it is Turing-computable (equivalently, partial recursive).
@@ -94,7 +94,7 @@ Quantum computers can be simulated by Turing machines, possibly with exponential
 
 In practice, computability theorists rarely write Turing machines. To show that a function is computable, one describes an algorithm informally, and invokes the thesis — or, more precisely, relies on the fact that the reader could translate the description into a formal model given enough patience. Proofs of this kind are called **proofs by Church's thesis**.
 
-This usage is safe because of the equivalence theorem: the reader may choose the most convenient model for the formalization. WHILE programs and the closure properties of partial recursive functions make the translation routine for any algorithm described precisely. In this sense the thesis is not an assumption of the theory: every theorem proved "by Church's thesis" can in principle be proved formally.
+This usage is safe because of the equivalence theorem: the reader may choose the most convenient model for the formalization. The closure properties of the partial recursive functions, and their translation into Turing machines of the previous lesson, make the translation routine for any algorithm described precisely. In this sense the thesis is not an assumption of the theory: every theorem proved "by Church's thesis" can in principle be proved formally.
 
 In the following courses, we adopt this practice. A function is **computable** if it is computed by some program, described in pseudo-code; we fix an enumeration $\Phi_0, \Phi_1, \Phi_2, \dots$ of the partial computable functions, given by the universal function of the previous lesson, and study its properties. The first question addressed is the one that motivated the whole enterprise: the existence of problems that are **not** computable. This is the starting point of the lesson :ref{to="fundamentals/programs-as-numbers"}.
 
@@ -151,7 +151,7 @@ On input $x$, the states $q_i$ erase the cells $0, \dots, x$, counting them, and
 ::::
 
 ::::exercise{#ex-ct-real-register difficulty=2 objective="See how a model storing an exact real number decides every set, which shows why infinite precision is excluded."}
-Consider register machines with the URM instructions on integer registers, and one more register $X$ holding a real number, with the instructions $X \leftarrow 3X$, $X \leftarrow X - 1$, and "if $X \geq 1$, the next instruction is $I_q$". The initial value of $X$ is a real number $\alpha$ fixed with the machine. Show that for every set $A \subseteq \nat$ there are such a machine and $\alpha$ computing the characteristic function of $A$.
+Consider register machines (:ref{to="other-models/register-machines"}) with the URM instructions on integer registers, and one more register $X$ holding a real number, with the instructions $X \leftarrow 3X$, $X \leftarrow X - 1$, and "if $X \geq 1$, the next instruction is $I_q$". The initial value of $X$ is a real number $\alpha$ fixed with the machine. Show that for every set $A \subseteq \nat$ there are such a machine and $\alpha$ computing the characteristic function of $A$.
 
 :::solution
 Let $\alpha = \sum_{m \in A} 3^{-(m+1)}$, and for $i \in \nat$ let $r_i = \sum_{m \in A,\, m \geq i} 3^{-(m - i + 1)}$, so that $r_0 = \alpha$ and $0 \leq r_i \leq \sum_{j \geq 1} 3^{-j} = 1/2$. Then

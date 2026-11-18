@@ -20,3 +20,16 @@ objectives:
   - Use Mathias forcing to prove cone avoidance and strong cone avoidance
   - Prove Seetapun's theorem and build ω-models by preservation of cone avoidance
 lessons: [jockusch, triples, cohesiveness, stable-colorings, mathias-cohesiveness, cone-avoidance, seetapun]
+credits:
+  - source: hirschfeldt-2014
+    role: main
+    note: "Chapter 6: the same sequence of topics."
+  - source: dzhafarov-mummert-2022
+    role: main
+    note: "Chapter 8."
+  - source: monin-patey
+    role: consulted
+    note: "Chapter \"Ramsey's theorem\"."
+  - source: simpson-2009
+    role: consulted
+    note: "Section III.7."

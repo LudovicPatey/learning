@@ -21,3 +21,16 @@ objectives:
   - Use the length of agreement and Sacks' preservation strategy
   - Combine strategies of different kinds, and distinguish bounded from unbounded finite injury
 lessons: [simple-sets, friedberg-muchnik, low-simple-set, sacks-splitting, cone-avoidance]
+credits:
+  - source: soare-2016
+    role: main
+    note: "Chapters 2, 5 and 7."
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Priority method and c.e. degrees\"."
+  - source: downey-hirschfeldt-2010
+    role: consulted
+    note: "Sections 2.11–2.12."
+  - source: nies-2009
+    role: consulted
+    note: "Section 1.6."

@@ -1,0 +1,26 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-computable-cohesive-delta2:
+  source: hirschfeldt-2014
+  relation: related
+  where: "Exercise 6.33"
+ex-dj-k-colors:
+  source: hirschfeldt-2014
+  relation: adapted
+  where: "Exercise 6.70"
+ex-rt-four-colors:
+  source: hirschfeldt-2014
+  relation: related
+  where: "Exercise 6.2"
+ex-rtn-coding-power:
+  source: hirschfeldt-2014
+  relation: adapted
+  where: "Theorem 6.65"
+ex-srt22-not-computable:
+  source: hirschfeldt-2014
+  relation: from
+  where: "Exercise 6.35"

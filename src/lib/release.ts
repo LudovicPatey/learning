@@ -29,7 +29,7 @@ export function releaseCourse(opts: { course: string; version: string; notes?: s
 
   fs.mkdirSync(dest, { recursive: true });
   for (const f of fs.readdirSync(src)) {
-    if (f === "_course.yaml" || f.endsWith(".md")) fs.copyFileSync(path.join(src, f), path.join(dest, f));
+    if (f === "_course.yaml" || f === "_exercise-credits.yaml" || f.endsWith(".md")) fs.copyFileSync(path.join(src, f), path.join(dest, f));
   }
   const info: VersionInfo = {
     version,

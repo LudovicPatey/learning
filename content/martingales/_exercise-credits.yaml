@@ -1,0 +1,46 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-martingale-convex:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 7.1.10"
+ex-kolmogorov-equality:
+  source: nies-2009
+  relation: from
+  where: "Exercise 7.1.11"
+ex-cr-join:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Theorem 7.1.13"
+ex-cr-no-enumeration:
+  source: downey-hirschfeldt-2010
+  relation: adapted
+  where: "Proposition 7.1.12"
+ex-cr-tot-oracle:
+  source: nies-2009
+  relation: related
+  where: "Theorem 7.4.8"
+ex-kurtz-null-tests:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Definition 7.2.2"
+ex-no-universal-schnorr-direct:
+  source: downey-hirschfeldt-2010
+  relation: adapted
+  where: "Proposition 7.1.11"
+ex-pcr-finite-variants:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 7.4.5"
+ex-pc-nonascending:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 7.4.6"
+ex-dk-not-optimal:
+  source: nies-2009
+  relation: adapted
+  where: "Exercise 7.2.7"

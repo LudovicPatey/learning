@@ -18,3 +18,7 @@
   title: Models of arithmetic
   description: Fragments of Peano arithmetic, their models, and the independence of combinatorial statements.
   color: "#15803d"
+- id: structures
+  title: Computable structure theory
+  description: The complexity of countable mathematical structures, their presentations, relations and isomorphisms.
+  color: "#7c3aed"

@@ -1,0 +1,33 @@
+title: Other models of computation
+area: computability
+level: Introductory
+order: 1.5
+prerequisites: [models-of-computation]
+summary: Register machines, LOOP and WHILE programs, the λ-calculus, and the equivalence of all the classical models of computation.
+description: >
+  Further formalizations of computability beyond Turing machines and the partial
+  recursive functions: unlimited register machines, structured programs with
+  bounded and unbounded loops (Meyer and Ritchie: LOOP programs compute exactly
+  the primitive recursive functions, WHILE programs the partial recursive ones),
+  the λ-calculus with the Church–Rosser theorem and the λ-definability of the
+  partial recursive functions, and the cycle of simulations showing that all
+  these models compute the same partial functions.
+objectives:
+  - Program register machines, LOOP and WHILE programs, and prove programs correct by invariants
+  - Prove that LOOP programs compute exactly the primitive recursive functions
+  - Compute with λ-terms and prove that the λ-definable functions are the partial recursive functions
+  - Assemble the simulations into the equivalence of the five classical models
+lessons: [register-machines, loop-programs, while-programs, lambda-calculus, lambda-programming, lambda-definability, all-models]
+credits:
+  - source: cutland-1980
+    role: main
+    note: "Register machines."
+  - source: barendregt-1984
+    role: main
+    note: "The λ-calculus: Church–Rosser and standardization."
+  - source: hindley-seldin-2008
+    role: consulted
+    note: "The λ-calculus at the level of the course."
+  - source: monin-patey
+    role: consulted
+    note: "Chapter on the Church–Turing thesis."

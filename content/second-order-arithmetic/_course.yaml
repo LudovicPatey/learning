@@ -19,3 +19,13 @@ objectives:
   - Formalize real numbers and continuous functions in RCA₀
   - Prove the intermediate value theorem in RCA₀ and refute monotone convergence in REC
 lessons: [language-and-models, rca0, nonstandard-models, real-numbers, analysis-in-rca0]
+credits:
+  - source: simpson-2009
+    role: main
+    note: "Chapters I–II."
+  - source: dzhafarov-mummert-2022
+    role: main
+    note: "Chapters 5, 6 and 10."
+  - source: hirschfeldt-2014
+    role: consulted
+    note: "Sections 4.1–4.2."

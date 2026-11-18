@@ -1,0 +1,34 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-ca-low-cover:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 7.6.5"
+ex-fm-independent-join:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 7.3.6"
+ex-low-followers:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Theorem 2.11.2"
+ex-sacks-sequence:
+  source: soare-2016
+  relation: from
+  where: "Exercise 7.6.3"
+ex-simple-filter:
+  source: soare-2016
+  relation: from
+  where: "Exercise 5.2.9"
+ex-productive-uniform:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 2.4.10"
+ex-inseparable-not-simple:
+  source: soare-2016
+  relation: adapted
+  where: "Exercise 5.2.11"

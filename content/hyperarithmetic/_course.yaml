@@ -22,3 +22,16 @@ objectives:
   - Build computable trees without hyperarithmetic paths and Harrison orders
   - Show that descending sequences of jumps compute every hyperarithmetic set
 lessons: [h-sets, spector-uniqueness, kleene-theorem, sigma11-classes, pseudo-well-orderings]
+credits:
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Hyperarithmetic sets\"."
+  - source: simpson-2009
+    role: consulted
+    note: "Section VIII.3."
+  - source: sacks-1990
+    role: consulted
+    note: "Part A."
+  - source: ash-knight-2000
+    role: consulted
+    note: "Chapter 5."

@@ -7,7 +7,7 @@ prerequisites: [lambda-calculus]
 
 The pure λ-calculus has no built-in data. To compute functions on integers, we represent integers, booleans and pairs by λ-terms in normal form, and operations on them by terms which reduce correctly when applied to these representations.
 
-The guiding idea is that a datum is represented by what can be done with it. An integer $n$ is used to repeat something $n$ times, so it is represented by the operation of iterating a function $n$ times; a boolean is used to choose between two branches, so it is represented by the selection of one of two arguments. Iteration gives primitive recursion, with one difficulty, the predecessor, solved by Kleene with pairs. Unbounded search needs recursion without a bound fixed in advance, which is provided by fixed-point combinators. These are the ingredients of the proof, in the lesson :ref{to="models-of-computation/lambda-definability"}, that the λ-definable functions are exactly the partial recursive functions.
+The guiding idea is that a datum is represented by what can be done with it. An integer $n$ is used to repeat something $n$ times, so it is represented by the operation of iterating a function $n$ times; a boolean is used to choose between two branches, so it is represented by the selection of one of two arguments. Iteration gives primitive recursion, with one difficulty, the predecessor, solved by Kleene with pairs. Unbounded search needs recursion without a bound fixed in advance, which is provided by fixed-point combinators. These are the ingredients of the proof, in the lesson :ref{to="other-models/lambda-definability"}, that the λ-definable functions are exactly the partial recursive functions.
 
 ## Church numerals and arithmetic
 
@@ -267,7 +267,7 @@ By induction on $m$ and compatibility, this reduces to $\mathsf{succ}_S\, \ulcor
 ::::
 
 ::::exercise{#ex-lambda-fixed-point-si difficulty=2 objective="Build new fixed-point combinators as fixed points of the term $\mathsf{S}\, \mathsf{I}$."}
-Call a term $Z$ a **fixed-point combinator** if $Z\, F =_\beta F\, (Z\, F)$ for every term $F$. Show that if $Z$ is a fixed-point combinator, then so is $Z\, (\mathsf{S}\, \mathsf{I})$, where $\mathsf{S}$ and $\mathsf{I}$ are the combinators of the lesson :ref{to="models-of-computation/lambda-calculus"}. Deduce that $\mathsf{Y}\, (\mathsf{S}\, \mathsf{I})$ is a fixed-point combinator.
+Call a term $Z$ a **fixed-point combinator** if $Z\, F =_\beta F\, (Z\, F)$ for every term $F$. Show that if $Z$ is a fixed-point combinator, then so is $Z\, (\mathsf{S}\, \mathsf{I})$, where $\mathsf{S}$ and $\mathsf{I}$ are the combinators of the lesson :ref{to="other-models/lambda-calculus"}. Deduce that $\mathsf{Y}\, (\mathsf{S}\, \mathsf{I})$ is a fixed-point combinator.
 
 :::solution
 For all terms $Z'$ and $F$, $\mathsf{S}\, \mathsf{I}\, Z'\, F \twoheadrightarrow_\beta \mathsf{I}\, F\, (Z'\, F) \to_\beta F\, (Z'\, F)$. Let $Z' = Z\, (\mathsf{S}\, \mathsf{I})$. Since $Z$ is a fixed-point combinator, $Z' =_\beta \mathsf{S}\, \mathsf{I}\, Z'$. Hence, for every $F$, since $=_\beta$ is compatible with application, $Z'\, F =_\beta \mathsf{S}\, \mathsf{I}\, Z'\, F =_\beta F\, (Z'\, F)$. By :ref{#thm-lambda-fixed-point}, $\mathsf{Y}$ is a fixed-point combinator, so $\mathsf{Y}\, (\mathsf{S}\, \mathsf{I})$ is one. More generally, the first computation shows that every term $Z'$ with $Z' =_\beta \mathsf{S}\, \mathsf{I}\, Z'$ is a fixed-point combinator.

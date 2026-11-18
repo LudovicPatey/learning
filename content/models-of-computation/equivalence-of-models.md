@@ -1,33 +1,17 @@
 ---
-title: Equivalence of the models
-summary: Arithmetization of Turing machines, proof of Kleene's normal form theorem, simulation of register machines by Turing machines, and the universal partial recursive function.
+title: Turing machines and partial recursive functions
+summary: Arithmetization of Turing machines, so that every Turing-computable function is partial recursive; Kleene's normal form theorem; every partial recursive function is Turing-computable, by closure of multi-tape machines under composition, primitive recursion and minimization; the universal partial computable function.
 duration: 40
-prerequisites: [while-programs, lambda-definability, multitape-machines]
+prerequisites: [mu-recursion, multitape-machines]
 ---
 
-We have met five definitions of computable partial function. Some equivalences are already proved:
+We have met two definitions of computable partial function: the functions computed by Turing machines, defined by a machine model, and the partial recursive functions, defined by closure under three schemes. This lesson proves that they coincide. One direction **arithmetizes** Turing machines: configurations are coded by integers, so that one step of a machine is a primitive recursive function, and the only non-primitive recursive part of a computation is the search for the number of steps. This gives Kleene's normal form theorem, and through it the universal function on which the course :ref{to="fundamentals/programs-as-numbers"} is built. The other direction is a **simulation**: each scheme is implemented by a machine that runs other machines as subroutines on separate tapes.
 
-- WHILE-computable $\iff$ partial recursive (:ref{#thm-while-partial-recursive});
-- partial recursive $\iff$ λ-definable (:ref{#thm-recursive-lambda-definable} and :ref{#thm-lambda-definable-recursive});
-- WHILE-computable $\implies$ URM-computable (:ref{#prop-while-urm}); the converse follows from the other implications below, and is also :ref{#ex-while-urm}.
-
-It remains to connect Turing machines to the other models. In this lesson we prove that every Turing-computable function is partial recursive, by **arithmetizing** the computations of Turing machines, and that every URM-computable function is Turing-computable, by simulation. Along the way we obtain Kleene's normal form theorem and a universal partial recursive function.
-
-:::theorem[Equivalence of the models]{#thm-equivalence-models}
-For a partial function $f : \nat^k \rightharpoonup \nat$, the following are equivalent:
-
-1. $f$ is Turing-computable;
-2. $f$ is URM-computable;
-3. $f$ is WHILE-computable;
-4. $f$ is partial recursive;
-5. $f$ is λ-definable.
+:::theorem{#thm-tm-pr}
+A partial function $f : \nat^k \rightharpoonup \nat$ is Turing-computable if and only if it is partial recursive.
 :::
 
-:::figure[The implications proved in this course. The cycle through (1), (4), (3) and (2) is completed in this lesson; the equivalence of (4) and (5) is proved in the lesson on λ-definability.]
-<svg class="fig" viewBox="0 0 660 260" width="660" role="img" aria-label="Implications between the five models of computation"><defs><marker id="ah-eqv" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,1 L9,5 L0,9 z" class="ink-fill"/></marker></defs><rect class="node" x="25.0" y="31.0" width="150" height="38" rx="8"/><text x="100" y="55" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(1) Turing machines</text><rect class="node" x="295.0" y="31.0" width="150" height="38" rx="8"/><text x="370" y="55" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(4) partial recursive</text><rect class="node" x="295.0" y="191.0" width="150" height="38" rx="8"/><text x="370" y="215" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(3) WHILE programs</text><rect class="node" x="25.0" y="191.0" width="150" height="38" rx="8"/><text x="100" y="215" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(2) register machines</text><rect class="node" x="520.0" y="31.0" width="120" height="38" rx="8"/><text x="580" y="55" text-anchor="middle" class="label" style="fill: currentColor; font-size: 13px">(5) λ-terms</text><line x1="177.0" y1="50.0" x2="292.0" y2="50.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="235" y="40" text-anchor="middle" class="label">arithmetization</text><line x1="370.0" y1="71.0" x2="370.0" y2="188.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="380" y="134" text-anchor="start" class="label">compilation</text><line x1="293.0" y1="210.0" x2="178.0" y2="210.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="235" y="200" text-anchor="middle" class="label">translation</text><line x1="100.0" y1="189.0" x2="100.0" y2="72.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="90" y="134" text-anchor="end" class="label">simulation</text><line x1="447.0" y1="42.0" x2="517.0" y2="42.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="482" y="32" text-anchor="middle" class="label">definability</text><line x1="518.0" y1="58.0" x2="448.0" y2="58.0" class="ink-stroke" stroke-width="1.4" marker-end="url(#ah-eqv)"/><text x="482" y="82" text-anchor="middle" class="label">normal order</text></svg>
-:::
-
-The two new proofs use the two techniques that recur in every comparison of models. A **simulation** represents the data of one model in another, here registers on tapes, and replaces each instruction by a block of instructions. An **arithmetization** codes the configurations of a machine by integers, so that one step of the machine becomes a primitive recursive function on codes; the only part of a computation that is not primitive recursive is the search for the number of steps. This idea, from Gödel's coding of formulas in 1931, gives Kleene's normal form theorem, and through it the universal function on which the course :ref{to="fundamentals/programs-as-numbers"} is built.
+Other models, such as register machines, WHILE programs and the λ-calculus, compute the same functions; the specialized course :ref{to="other-models/all-models"} proves it.
 
 ## Arithmetization of Turing machines
 
@@ -130,7 +114,7 @@ Consequently every partial recursive function $f$ can be written $f(\vec x) \sim
 :::proof{of=thm-kleene-normal-form-proof}
 Let $T_k(e, \vec x, s)$ state that $s$ codes the **whole computation**: $s = [c_0, \dots, c_t]$ with $c_0 = \mathrm{Init}(\vec x)$, $c_{i+1} = \mathrm{Next}(e, c_i)$ for $i < t$, $c_t$ halting and standard, and $c_i$ not halting for $i < t$. This is a conjunction of bounded quantifications over $i < \mathrm{lh}(s)$, hence primitive recursive. Such an $s$ is unique: $c_0$ is fixed, each $c_{i+1}$ is determined by $c_i$, and $t$ is the first index of a halting configuration. Let $U(s) = \mathrm{Out}((s)'_{\mathrm{lh}(s) - 1})$, the output read on the last configuration.
 
-If the machine $e$ halts on $\vec x$ in a standard configuration, $\mu s\, T_k(e, \vec x, s)$ is the code of its computation and $U$ returns the output. Otherwise no $s$ satisfies $T_k$, and the search diverges. The last statement follows once we know that every partial recursive function is Turing-computable. This is the chain of implications (4) ⇒ (3) ⇒ (2) ⇒ (1) of the last section, whose proof does not use the normal form theorem.
+If the machine $e$ halts on $\vec x$ in a standard configuration, $\mu s\, T_k(e, \vec x, s)$ is the code of its computation and $U$ returns the output. Otherwise no $s$ satisfies $T_k$, and the search diverges. The last statement follows once we know that every partial recursive function is Turing-computable, which is :ref{#prop-pr-tm} below; its proof does not use the normal form theorem.
 :::
 
 :::quiz[the normal form theorem]
@@ -147,37 +131,43 @@ Why does $s$ code the whole computation, rather than just the number of steps $t
   Termination depends only on whether the machine halts.
 :::
 
-## From register machines to Turing machines
+## From partial recursive functions to Turing machines
 
-:::proposition{#prop-urm-tm}
-Every URM-computable partial function is Turing-computable.
+Call a multi-tape machine **clean** if every halting computation ends with tape $1$ in a standard final configuration, holding only the output with the head on its first cell, and all other tapes blank. A clean machine can be used as a **subroutine**: if a larger machine has tapes $j_1, \ldots, j_r$ blank except for an input on tape $j_1$, written as for a machine input, it can run the subroutine on these tapes, with the other tapes and heads untouched, and resume with the output on tape $j_1$ and the tapes $j_2, \ldots, j_r$ blank again. This is the multi-tape analogue of the sequential composition of machines (:ref{#prop-tm-composition}), and it is proved in the same way, by renaming states and redirecting the halting transitions.
+
+:::proposition{#prop-pr-tm}
+Every partial recursive function is computed by a clean multi-tape Turing machine, hence by a single-tape Turing machine.
 :::
 
-:::proof{of=prop-urm-tm}
-Let $P = I_1, \dots, I_s$ compute $f : \nat^k \rightharpoonup \nat$, and let $\rho = \max(\rho(P), k)$. We build a multi-tape Turing machine $N$ with $\rho + 1$ tapes, following the conventions of :ref{#def-multitape}: tape $1$ holds the input and the output, all heads start on cell $0$, the other tapes are initially blank, and during the simulation tape $n + 1$, for $1 \leq n \leq \rho$, holds the content of $R_n$ in unary, as $\ulcorner R_n \urcorner$ starting at the head position. The index of the current instruction is stored in the finite control of $N$.
+:::proof{of=prop-pr-tm}
+By induction on the definition of $f$ (:ref{#def-partial-recursive}). We use three elementary multi-tape routines, each a simple loop over unary blocks: **copy** a block from one tape to the end of the content of another, separated by a blank; **erase** a block; and **compare** two blocks, by moving two heads along them simultaneously (:ref{#ex-two-tape-equality}).
 
-1. *Initialization.* $N$ reads the input $\ulcorner x_1 \urcorner \sqcup \cdots \sqcup \ulcorner x_k \urcorner$ on tape $1$ and copies the $n$-th block to tape $n + 1$; the other register tapes receive $\ulcorner 0 \urcorner$.
-2. *Simulation.* For each instruction, $N$ has a group of states:
-   - $Z(n)$: erase tape $n + 1$ and write a single $1$;
-   - $S(n)$: append a $1$ at the end of the block on tape $n + 1$, and return;
-   - $T(m, n)$: erase tape $n + 1$ and copy the block of tape $m + 1$ onto it;
-   - $J(m, n, q)$: scan the blocks of tapes $m + 1$ and $n + 1$ simultaneously from left to right; they have equal length iff both heads reach a blank at the same time. Return the heads, and enter the group of instruction $q$ or $i + 1$ accordingly.
+*Basic functions.* The zero function, the successor and the projections are computed by single-tape machines (:ref{#ex-tm-zero}, :ref{#prop-tm-successor}, :ref{#ex-tm-projection}), which can be made clean (:ref{#ex-tm-clean-halt}).
 
-   When the current index exceeds $s$, the simulation ends.
-3. *Output.* $N$ erases tape $1$, copies the block of tape $2$ (the register $R_1$) onto it, and halts with head $1$ on its first cell.
+*Composition.* Let $f(\vec x) \simeq h(g_1(\vec x), \ldots, g_m(\vec x))$, with clean machines $G_1, \ldots, G_m$ and $H$, using at most $r$ tapes each. The machine for $f$ has a block of $r$ work tapes for each subroutine. For $i = 1, \ldots, m$, it copies the input from tape $1$ to the first work tape of block $i$ and runs $G_i$ there; if some $g_i(\vec x)$ diverges, the machine runs forever, as it should, since $f(\vec x)$ then diverges. It then copies the outputs $g_1(\vec x), \ldots, g_m(\vec x)$, in this order, to the first tape of the block of $H$, erases the work tapes, runs $H$, erases tape $1$, copies the result to tape $1$ and erases the work tape of $H$.
 
-By induction on the number of steps of $P$, after the simulation of $j$ instructions, the tapes of $N$ represent the registers of $P$ after $j$ steps. Hence $N$ computes $f$. By :ref{#thm-multitape-simulation}, so does some single-tape machine.
+*Primitive recursion.* Let $f(\vec x, 0) \simeq g(\vec x)$ and $f(\vec x, y + 1) \simeq h(\vec x, y, f(\vec x, y))$. The machine keeps a counter $i$ on a tape, initially $0$, and a current value $v$ on another tape, initially the output of $g$ on $\vec x$, computed by a subroutine. While the counter differs from $y$, which it checks with the comparison routine, it runs $h$ on $\vec x, i, v$ (copied to a work tape), replaces $v$ by the result, and increments $i$. When $i = y$, it writes $v$ on tape $1$ as the output and erases everything else. By induction on $i$, after $i$ rounds the value tape holds $f(\vec x, i)$; if some value diverges, the machine runs forever.
+
+*Minimization.* Let $f(\vec x) \simeq \mu z\, [g(\vec x, z) = 0]$. The machine keeps a candidate $z$, initially $0$, runs $g$ on $\vec x, z$, and checks whether the output is $0$, a block of a single $1$. If it is, it writes $z$ as the output and erases everything else; otherwise it increments $z$ and repeats. If $g(\vec x, z')$ diverges for some $z'$ before the first zero, the machine runs forever at that round, in accordance with the definition of $\mu$ (:ref{#def-mu}).
+
+In each case the machine is clean. By :ref{#thm-multitape-simulation}, every multi-tape machine is simulated by a single-tape one.
+:::
+
+:::quiz[the simulation of the schemes]
+Why are the machines required to be clean?
+
+- [x] So that a machine can be used as a subroutine: its output is in a known place and its work tapes are blank afterwards, ready for the next call, as in the loop of the primitive recursion case.
+- [ ] Because unclean machines compute different functions.
+
+  A machine computes its function whatever it leaves on the other tapes; cleanliness is about reusing it.
+- [ ] To make the machine halt.
+
+  Cleanliness concerns the final configuration of the halting computations; it does not make a machine halt.
 :::
 
 ## Proof of the equivalence
 
-We can now complete the proof of :ref{#thm-equivalence-models}. The following implications are established:
-$$
-(1) \Longrightarrow (4) \Longrightarrow (3) \Longrightarrow (2) \Longrightarrow (1), \qquad (4) \Longleftrightarrow (5).
-$$
-Indeed, (1) ⇒ (4) is :ref{#prop-tm-partial-recursive}; (4) ⇒ (3) is :ref{#thm-while-partial-recursive}; (3) ⇒ (2) is :ref{#prop-while-urm}; (2) ⇒ (1) is :ref{#prop-urm-tm}; and (4) ⇔ (5) was proved in the previous lesson. All five classes coincide.
-
-From now on, we call these functions the **partial computable** functions, and their total members the **computable** functions.
+:ref{#thm-tm-pr} now follows: every Turing-computable function is partial recursive by :ref{#prop-tm-partial-recursive}, and every partial recursive function is Turing-computable by :ref{#prop-pr-tm}. From now on, we call these functions the **partial computable** functions, and their total members the **computable** functions.
 
 ## The universal function
 
@@ -188,7 +178,7 @@ The function $\Phi(e, \vec x) \simeq U(\mu s\, T_k(e, \vec x, s))$ is partial co
 :::
 
 :::proof{of=cor-universal-function}
-$\Phi$ is partial recursive, as it is obtained from primitive recursive functions by one minimization and one composition. By the equivalence, it is computed by some Turing machine. The second statement is :ref{#thm-kleene-normal-form-proof}.
+$\Phi$ is partial recursive, as it is obtained from primitive recursive functions by one minimization and one composition. By :ref{#prop-pr-tm}, it is computed by some Turing machine. The second statement is :ref{#thm-kleene-normal-form-proof}.
 :::
 
 Writing $\Phi_e(\vec x) \simeq \Phi(e, \vec x)$, the sequence $\Phi_0, \Phi_1, \Phi_2, \dots$ is an enumeration of all partial computable functions. Its study is the subject of the course on the fundamentals of computability, starting with the lesson :ref{to="fundamentals/programs-as-numbers"}.
@@ -217,7 +207,7 @@ Let $\mathrm{Conf}(e, x, t)$ be the uniform version of the iteration function, d
 
 ## Notes and references
 
-Turing sketched in an appendix to his 1936 paper that the λ-definable functions are computable by his machines, and proved the equivalence of the two notions in 1937; Kleene proved the equivalence of λ-definability with general recursiveness in 1936. The predicate $T$ of the normal form theorem is often called *Kleene's $T$-predicate*. The arithmetization of computations given here follows the treatment of register and Turing machines in Cutland's and Odifreddi's textbooks. Soare (2016, §§1.5.2–1.5.3) codes Turing configurations as finite sequences of symbols and derives the enumeration theorem and the universal machine; Monin and Patey (chapter "Church–Turing thesis", subsection "Computable functions are recursive") arithmetize register machines instead, with a single minimization over the computation time.
+Turing sketched in an appendix to his 1936 paper that the λ-definable functions are computable by his machines, and proved the equivalence of the two notions in 1937; Kleene proved the equivalence of λ-definability with general recursiveness in 1936. The predicate $T$ of the normal form theorem is often called *Kleene's $T$-predicate*. The arithmetization of computations given here follows the treatment of Turing machines in Cutland's and Odifreddi's textbooks; the simulation of the schemes by multi-tape machines is the standard one (see Odifreddi, Chapter I). Soare (2016, §§1.5.2–1.5.3) codes Turing configurations as finite sequences of symbols and derives the enumeration theorem and the universal machine; Monin and Patey (chapter "Church–Turing thesis", subsection "Computable functions are recursive") arithmetize register machines instead, with a single minimization over the computation time.
 
 - S. C. Kleene, *General recursive functions of natural numbers*, Mathematische Annalen 112 (1936), 727–742.
 - A. M. Turing, *Computability and λ-definability*, Journal of Symbolic Logic 2 (1937), 153–163.
@@ -277,25 +267,7 @@ A **non-deterministic** machine is defined as in :ref{#def-turing-machine}, exce
 :::solution
 For each quintuple $\theta = (q, a, q', b, D)$ of $\delta$, define $\mathrm{Next}_\theta(c)$ as $\mathrm{Next}$ in the lesson, with $q'$, $b$, $D$ given by $\theta$; it is primitive recursive. Let $\mathrm{Succ}(c, c')$ hold if, for some $\theta = (q, a, \dots) \in \delta$, the state of $c$ is $q$, its scanned symbol $\mathrm{hd}(r)$ is $a$, and $c' = \mathrm{Next}_\theta(c)$. This is a finite disjunction of primitive recursive predicates. Let $N(\vec x, s)$ state that $s = [c_0, \dots, c_t]$ with $c_0 = \mathrm{Init}(\vec x)$, $\mathrm{Succ}(c_i, c_{i+1})$ for all $i < t$, and $c_t$ halting and standard. It is primitive recursive, by bounded quantification over $i < \mathrm{lh}(s)$. Let $f'(\vec x) \simeq U(\mu s\, N(\vec x, s))$, with $U$ as in :ref{#thm-kleene-normal-form-proof}; $f'$ is partial recursive.
 
-Every $s$ with $N(\vec x, s)$ codes a computation of the machine on $\vec x$ ending in a standard configuration, and conversely each such computation is coded by some $s$, obtained by coding each successor with $\mathrm{Next}_\theta$. If $f(\vec x)\converge$, such a computation exists, the search terminates, and it finds the code of some such computation, whose output is $f(\vec x)$ by hypothesis: $f'(\vec x) = f(\vec x)$. If $f(\vec x)\diverge$, no $s$ satisfies $N(\vec x, s)$ and the search diverges. Hence $f = f'$ is partial recursive, and by :ref{#thm-equivalence-models} it is computed by an ordinary Turing machine. The search over codes of computations plays the role of the breadth-first simulation of the lesson :ref{to="models-of-computation/multitape-machines"}.
-:::
-::::
-
-::::exercise{#ex-urm-arithmetization difficulty=2 lessons="register-machines" objective="Arithmetize register machines directly, to show that URM-computable functions are partial recursive without Turing machines."}
-Let $P = I_1, \dots, I_s$ be a URM program computing $f : \nat^k \rightharpoonup \nat$, and $\rho = \max(\rho(P), k)$. Code the configuration $(i, r)$ by $\langle i, [r(1), \dots, r(\rho)] \rangle$. Show that the step function on codes is primitive recursive, and deduce that $f$ is partial recursive.
-
-:::solution
-Registers of index $> \rho$ contain $0$ initially and are never mentioned by $P$, so they stay $0$, and the code determines the configuration. For a code $c$, let $i = \pi_0(c)$ and $v = \pi_1(c)$; register $R_n$ is the entry $(v)'_{n-1}$. Define $\mathrm{Next}_P(c) = c$ if $i = 0$ or $i > s$, and otherwise by cases on $i \in \{1, \dots, s\}$, according to the instruction $I_i$:
-
-- $Z(n)$: $\langle i + 1, \mathrm{set}(v, n - 1, 0) \rangle$; $S(n)$: $\langle i + 1, \mathrm{set}(v, n - 1, (v)'_{n-1} + 1) \rangle$;
-- $T(m, n)$: $\langle i + 1, \mathrm{set}(v, n - 1, (v)'_{m-1}) \rangle$;
-- $J(m, n, q)$: $\langle q, v \rangle$ if $(v)'_{m-1} = (v)'_{n-1}$, and $\langle i + 1, v \rangle$ otherwise.
-
-This is a definition by finitely many cases from the primitive recursive operations of :ref{#prop-seq-operations}, so $\mathrm{Next}_P$ is primitive recursive, and by :ref{#def-urm-semantics} it maps the code of a configuration to the code of its successor. Let $\mathrm{Conf}(\vec x, 0) = \langle 1, [x_1, \dots, x_k, 0, \dots, 0] \rangle$ (with $\rho$ entries) and $\mathrm{Conf}(\vec x, t + 1) = \mathrm{Next}_P(\mathrm{Conf}(\vec x, t))$, a primitive recursion. Then
-$$
-f(\vec x) \simeq \Big(\pi_1\big(\mathrm{Conf}(\vec x, \mu t\, [\pi_0(\mathrm{Conf}(\vec x, t)) > s])\big)\Big)'_0 ,
-$$
-since the program halts exactly when the instruction index exceeds $s$, and the output is the content of $R_1$. This is the route followed by Monin and Patey; it gives (2) ⇒ (4) of :ref{#thm-equivalence-models} directly.
+Every $s$ with $N(\vec x, s)$ codes a computation of the machine on $\vec x$ ending in a standard configuration, and conversely each such computation is coded by some $s$, obtained by coding each successor with $\mathrm{Next}_\theta$. If $f(\vec x)\converge$, such a computation exists, the search terminates, and it finds the code of some such computation, whose output is $f(\vec x)$ by hypothesis: $f'(\vec x) = f(\vec x)$. If $f(\vec x)\diverge$, no $s$ satisfies $N(\vec x, s)$ and the search diverges. Hence $f = f'$ is partial recursive, and by :ref{#thm-tm-pr} it is computed by an ordinary Turing machine. The search over codes of computations plays the role of the breadth-first simulation of the lesson :ref{to="models-of-computation/multitape-machines"}.
 :::
 ::::
 :::::

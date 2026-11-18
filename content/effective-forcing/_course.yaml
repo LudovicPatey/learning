@@ -25,3 +25,19 @@ objectives:
   - Analyze computable Mathias forcing with these tools, and explain why its generic sets are high
   - Use the conventions for Mathias conditions (stem, reservoir, compatible strings, reservoirs in a class) and for forcing questions on which the later courses of the track rely
 lessons: [notions-of-forcing, generic-sets, forcing-relation, cohen-forcing, forcing-with-trees, sacks-forcing, forcing-question, compactness-merging, mathias-forcing]
+credits:
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Effective forcing\", including the forcing question."
+  - source: dzhafarov-mummert-2022
+    role: consulted
+    note: "Chapter 7."
+  - source: hirschfeldt-2014
+    role: consulted
+    note: "Section 2.3."
+  - source: downey-hirschfeldt-2010
+    role: consulted
+    note: "Section 2.24."
+  - source: soare-2016
+    role: consulted
+    note: "Chapters 6 and 12."

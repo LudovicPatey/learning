@@ -34,6 +34,7 @@ import type { Root as HRoot, Element as HElement, ElementContent, RootContent } 
 import { macros } from "./katex-macros.ts";
 import { contentDir, versionDir } from "./versions.ts";
 import { orderTracks, parseTracks, trackOfCourse, type Track } from "./tracks.ts";
+import { exerciseCreditText, parseCredits, parseExerciseCredits, parseSources, type Credit, type ExerciseCredit, type Source } from "./credits.ts";
 
 // ---------------------------------------------------------------- types
 
@@ -70,6 +71,10 @@ export type ExerciseMeta = {
   lessons: string[];
   /** Hash of the source of the exercise and its solution; endorsements record it. */
   hash: string;
+  /** The work the exercise comes from (content/<course>/_exercise-credits.yaml); none if written for the course. */
+  credit?: ExerciseCredit;
+  /** The sentence crediting the exercise, in Markdown. */
+  creditText: string;
 };
 
 /** Selects a released version of one course; other courses are read from their working copy. */
@@ -91,6 +96,8 @@ export type Course = {
   prerequisites: string[]; // course ids
   objectives: string[];
   authors: string[];
+  /** Works the course is based on (`credits:` in _course.yaml), main ones first. */
+  credits: Credit[];
   lessons: string[]; // slugs, in order
   /** The main track the course belongs to, or undefined for a specialized course. */
   track?: string;
@@ -138,6 +145,8 @@ type Catalog = {
   tracks: Track[];
   /** All exercises, by label, in course and lesson order. */
   exercises: Map<string, ExerciseMeta>;
+  /** Works credited by tracks, courses and exercises (content/sources.yaml), by id. */
+  sources: Map<string, Source>;
   /** Fingerprint of the content files this catalog was built from. */
   fingerprint: string;
 };
@@ -257,6 +266,7 @@ function readAreas(warnings: string[]): Area[] {
 function readCourse(
   courseId: string,
   warnings: string[],
+  sources: Map<string, Source>,
   dir = path.join(contentDir(), courseId),
   version?: string,
 ): { course: Course; lessons: LessonMeta[]; labels: Label[]; exercises: ExerciseMeta[] } | null {
@@ -277,8 +287,14 @@ function readCourse(
     prerequisites: (raw.prerequisites ?? []).map(String),
     objectives: (raw.objectives ?? []).map(String),
     authors: (raw.authors ?? []).map(String),
+    credits: parseCredits(raw.credits, `${courseId}/_course.yaml`, sources, warnings),
     lessons: slugs,
   };
+  if (status === "available" && course.credits.length === 0) warnings.push(`${courseId}/_course.yaml has no credits (add credits: with the works the course is based on)`);
+  const creditsFile = path.join(dir, "_exercise-credits.yaml");
+  const exerciseCredits = fs.existsSync(creditsFile)
+    ? parseExerciseCredits(YAML.parse(fs.readFileSync(creditsFile, "utf8")), `${courseId}/_exercise-credits.yaml`, sources, warnings)
+    : new Map<string, ExerciseCredit>();
 
   const lessons: LessonMeta[] = [];
   const labels: Label[] = [];
@@ -339,6 +355,14 @@ function readCourse(
       warnings.push(`${courseId}/${f} is not listed in ${courseId}/_course.yaml`);
     }
   }
+  const exLabels = new Set(exercises.map((e) => e.id));
+  for (const label of exerciseCredits.keys()) {
+    if (!exLabels.has(label)) warnings.push(`${courseId}/_exercise-credits.yaml credits unknown exercise #${label}`);
+  }
+  for (const e of exercises) {
+    e.credit = exerciseCredits.get(e.id);
+    e.creditText = exerciseCreditText(e.credit, sources);
+  }
   return { course, lessons, labels, exercises };
 }
 
@@ -377,6 +401,7 @@ function exerciseMeta(
     featured: parent?.name !== "exercises",
     lessons: [lesson.id, ...extra.filter((l) => l !== lesson.id)],
     hash: contentHash(lesson.content.slice(start, end)),
+    creditText: "",
   };
 }
 
@@ -388,14 +413,16 @@ function buildCatalog(sel?: VersionSel): Catalog {
   const labels = new Map<string, Label>();
   const exerciseList: ExerciseMeta[] = [];
   const root = contentDir();
+  const sourcesFile = path.join(root, "sources.yaml");
+  const sources = fs.existsSync(sourcesFile) ? parseSources(YAML.parse(fs.readFileSync(sourcesFile, "utf8")), warnings) : new Map<string, Source>();
   const dirs = fs.existsSync(root)
     ? fs.readdirSync(root, { withFileTypes: true }).filter((d) => d.isDirectory() && !d.name.startsWith("_") && !d.name.startsWith("."))
     : [];
   for (const d of dirs) {
     const res =
       sel && sel.course === d.name
-        ? readCourse(d.name, warnings, versionDir(d.name, sel.version), sel.version)
-        : readCourse(d.name, warnings);
+        ? readCourse(d.name, warnings, sources, versionDir(d.name, sel.version), sel.version)
+        : readCourse(d.name, warnings, sources);
     if (!res) continue;
     courses.push(res.course);
     for (const l of res.lessons) lessons.set(l.id, l);
@@ -420,7 +447,7 @@ function buildCatalog(sel?: VersionSel): Catalog {
   }
   const tracksFile = path.join(root, "tracks.yaml");
   const tracks = fs.existsSync(tracksFile)
-    ? parseTracks(YAML.parse(fs.readFileSync(tracksFile, "utf8")), ids, new Set(areas.map((a) => a.id)), warnings)
+    ? parseTracks(YAML.parse(fs.readFileSync(tracksFile, "utf8")), ids, new Set(areas.map((a) => a.id)), warnings, sources)
     : [];
   const trackOf = trackOfCourse(tracks);
   for (const c of courses) c.track = trackOf.get(c.id);
@@ -435,7 +462,7 @@ function buildCatalog(sel?: VersionSel): Catalog {
     ex.lessons = ex.lessons.filter((l) => lessons.has(l));
     exercises.set(ex.id, ex);
   }
-  return { areas, courses, lessons, labels, warnings, tracks: orderTracks(tracks), exercises, fingerprint: contentFingerprint(sel) };
+  return { areas, courses, lessons, labels, warnings, tracks: orderTracks(tracks), exercises, sources, fingerprint: contentFingerprint(sel) };
 }
 
 // Caching. Every cache is keyed by a fingerprint of the content files (paths,
@@ -752,6 +779,16 @@ function remarkEnvironments(ctx: Ctx) {
           data: { hProperties: { className: ["env-objective"] } },
           children: [span(["env-objective-label"], [text("Objective.")]), text(" "), ...inlineMarkdown(String(attrs.objective))],
         });
+      }
+      if (kind === "exercise" && id) {
+        const credit = ctx.catalog.exercises.get(String(id))?.creditText;
+        if (credit) {
+          node.children.splice(attrs.objective ? 2 : 1, 0, {
+            type: "paragraph",
+            data: { hProperties: { className: ["env-credit"] } },
+            children: [span(["env-credit-label"], [text("Credit.")]), text(" "), ...inlineMarkdown(credit)],
+          });
+        }
       }
       node.data = {
         hName: collapsible ? "details" : "section",

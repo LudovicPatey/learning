@@ -22,3 +22,16 @@ objectives:
   - Prove Martin's domination theorem and Jockusch's characterization of high sets by lists of computable sets
   - Show that maximal sets are high, and characterize the sets that are high or DNC
 lessons: [immune-sets, hypersimple-sets, computably-dominated, dnc-functions, arslanov, domination, high-or-dnc]
+credits:
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Immunity and function growth\"."
+  - source: soare-2016
+    role: consulted
+    note: "Sections 4.5 and 4.8."
+  - source: downey-hirschfeldt-2010
+    role: consulted
+    note: "Section 2.17."
+  - source: nies-2009
+    role: consulted
+    note: "Sections 1.5 and 4.1."

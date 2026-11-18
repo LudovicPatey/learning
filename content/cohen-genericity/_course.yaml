@@ -18,3 +18,13 @@ objectives:
   - Combine coding with genericity to prove the Posner–Robinson and Friedberg jump inversion theorems
   - Compute the jumps of n-generic sets and separate the notions of genericity
 lessons: [baire-category, weak-genericity, one-genericity, posner-robinson, n-genericity]
+credits:
+  - source: monin-patey
+    role: main
+    note: "Chapter \"Cohen forcing\"."
+  - source: downey-hirschfeldt-2010
+    role: consulted
+    note: "Sections 2.16 and 2.24."
+  - source: soare-2016
+    role: consulted
+    note: "Sections 6.3–6.4 and 14.1–14.2."

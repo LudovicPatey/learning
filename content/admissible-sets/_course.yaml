@@ -22,3 +22,13 @@ objectives:
   - Prove that the hyperarithmetic sets are the sets of numbers constructed before stage ω₁ᶜᵏ, and the Spector–Gandy theorem
   - Explain why ω₁ˣ is admissible for every x and state Sacks's converse
 lessons: [kripke-platek, constructible-hierarchy, hyp-in-l, spector-gandy]
+credits:
+  - source: chong-yu-2015
+    role: main
+    note: "Chapter 3."
+  - source: sacks-1990
+    role: consulted
+    note: "Chapter VII."
+  - source: barwise-1975
+    role: consulted
+    note: "Admissible sets and the constructible hierarchy."

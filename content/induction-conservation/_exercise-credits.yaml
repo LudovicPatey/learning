@@ -1,0 +1,46 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-strong-collection:
+  source: hajek-pudlak-1993
+  relation: adapted
+  where: "Lemma 2.29"
+ex-bounded-functions:
+  source: dzhafarov-mummert-2022
+  relation: adapted
+  where: "Proposition 6.2.4"
+ex-aca0-finite-axioms:
+  source: dzhafarov-mummert-2022
+  relation: from
+  where: "Exercise 5.13.14"
+ex-extendible-strings:
+  source: dzhafarov-mummert-2022
+  relation: adapted
+  where: "Exercise 6.7.1"
+ex-pi11-method:
+  source: hirschfeldt-2014
+  relation: result
+  where: "Proposition 7.10"
+ex-coh-conservation:
+  source: hirschfeldt-2014
+  relation: adapted
+  where: "Exercise 7.11"
+ex-majorize:
+  source: simpson-2009
+  relation: adapted
+  where: "Exercise IX.2.8"
+ex-strong-induction-pi:
+  source: dzhafarov-mummert-2022
+  relation: adapted
+  where: "Exercise 6.7.2"
+ex-fuf:
+  source: dzhafarov-mummert-2022
+  relation: adapted
+  where: "Proposition 6.5.4"
+ex-stcoh:
+  source: dzhafarov-mummert-2022
+  relation: adapted
+  where: "Proposition 6.5.6"

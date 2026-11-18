@@ -33,3 +33,10 @@ objectives:
   - Describe extensions by strongly definable types through gaps, and characterize these types by unique extension
   - Construct minimal types, and use them for minimal end extensions, indiscernibles and automorphism groups
 lessons: [trees-isigma1, low-basis-isigma1, arithmetized-completeness, end-extensions-from-consistency, definable-types, macdowell-specker, gaps, minimal-types, indiscernible-types]
+credits:
+  - source: wong-notes
+    role: main
+    note: "Lectures 7–11."
+  - source: hajek-pudlak-1993
+    role: consulted
+    note: "Chapter IV."

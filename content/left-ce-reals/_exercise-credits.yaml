@@ -1,0 +1,22 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Each entry names the published work an exercise comes from; relation is one of
+# from (an exercise of the work), adapted (adapted from an exercise or a proof),
+# result (proves a result of the work) or related (close to an exercise or result).
+# Exercises that are not listed were written for this course.
+
+ex-almost-ce:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Theorem 5.1.7"
+ex-measure-least-element:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Theorem 5.1.11"
+ex-dhn-sign:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Lemma 9.5.7"
+ex-solovay-sum-characterization:
+  source: downey-hirschfeldt-2010
+  relation: result
+  where: "Theorem 9.1.8"

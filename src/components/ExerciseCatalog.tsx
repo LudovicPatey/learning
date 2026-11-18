@@ -11,6 +11,10 @@ export type ExerciseEntry = {
   title?: string;
   objectiveHtml: string;
   objectiveText: string;
+  /** The sentence crediting the exercise, as HTML. */
+  creditHtml: string;
+  /** Whether the exercise comes from a published work. */
+  credited: boolean;
   difficulty?: number;
   featured: boolean;
   hash: string;
@@ -178,6 +182,9 @@ export function ExerciseCatalog({ entries, courses, tracks }: { entries: Exercis
                   ) : (
                     <div className="exercise-item-objective muted">No objective stated.</div>
                   )}
+                  <div className={`exercise-item-credit small${e.credited ? "" : " muted"}`}>
+                    <span className="exercise-item-credit-label">Credit.</span> <span dangerouslySetInnerHTML={{ __html: e.creditHtml }} />
+                  </div>
                   <div className="exercise-item-lessons small">
                     {e.lessons.length > 1 ? "Lessons: " : "Lesson: "}
                     {e.lessons.map((l, i) => (

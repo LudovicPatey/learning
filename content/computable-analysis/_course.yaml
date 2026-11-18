@@ -26,3 +26,19 @@ objectives:
   - Classify the maximum, the intermediate value theorem, the Brouwer fixed point theorem in dimension one and the monotone convergence theorem in the Weihrauch degrees
   - Compare these classifications with the reverse mathematics of the same theorems
 lessons: [type-two-computability, representations, real-functions, continuous-functions, computable-metric-spaces, closed-sets-and-choice, intermediate-value-theorem, maximum-and-limits]
+credits:
+  - source: weihrauch-2000
+    role: main
+    note: "Chapters 2–6."
+  - source: brattka-hertling-weihrauch-2008
+    role: main
+    note: "Order of the first lessons."
+  - source: brattka-gherardi-pauly-2021
+    role: main
+    note: "Weihrauch degrees."
+  - source: dzhafarov-mummert-2022
+    role: consulted
+    note: "Section 3.7."
+  - source: simpson-2009
+    role: consulted
+    note: "Sections II.4–II.6, III.2, IV.1–IV.2."

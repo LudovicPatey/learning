@@ -30,6 +30,8 @@ describe("releaseCourse", () => {
     expect(info).toEqual({ version: "1.0", date: "2026-01-02", notes: "First" });
     expect(fs.existsSync(path.join(root, "_versions/alpha/1.0/one.md"))).toBe(true);
     expect(fs.existsSync(path.join(root, "_versions/alpha/1.0/_course.yaml"))).toBe(true);
+    // the credits of the exercises are frozen with the text
+    expect(fs.existsSync(path.join(root, "_versions/alpha/1.0/_exercise-credits.yaml"))).toBe(true);
     expect(listVersions("alpha")).toEqual([info]);
     expect(latestVersion("alpha")?.version).toBe("1.0");
     expect(hasVersion("alpha", "1.0")).toBe(true);

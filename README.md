@@ -133,6 +133,28 @@ npm run check-content -- computability/fixed-point # also prints the rendered HT
 
 In development, the same warnings are shown at the top of the lesson page.
 
+## Credits
+
+The works the site is based on are listed in `content/sources.yaml`. Tracks and courses credit them under `credits:`:
+
+```yaml
+credits:
+  - source: soare-2016
+    role: main          # or consulted
+    note: "Chapters 3 and 6."
+```
+
+Exercises are credited in `content/<course>/_exercise-credits.yaml`, outside the lesson, so that the hash of an exercise (used by endorsements) does not change:
+
+```yaml
+ex-projection-complement:
+  source: soare-2016
+  relation: from        # from, adapted, result or related
+  where: "Exercise 4.1.10"
+```
+
+An exercise that is not listed is shown as "Written for this course". The page `/credits` lists all works and where they are used.
+
 ## Versions and citations
 
 The working copy of a course may change at any time. To publish a citable version:

@@ -1,0 +1,29 @@
+title: Computable structures
+area: structures
+level: Advanced
+order: 1
+prerequisites: [turing-degrees, arithmetic-hierarchy]
+summary: Presentations of countable structures and their degrees, Knight's theorem, decidable models of decidable theories, computable algebra, and the effective back-and-forth method with the first examples of computable categoricity.
+description: >
+  The two first questions of computable structure theory, on concrete examples:
+  which structures have computable copies, and whether two computable copies are
+  computably isomorphic. Presentations, atomic diagrams and the Turing degrees of
+  copies; Knight's theorem that a non-trivial structure has copies of every degree
+  above one of them; the effective completeness theorem and low models of
+  computable theories; a computable field without a splitting algorithm; the
+  effective back-and-forth method, computably categorical structures, and the
+  order ω, which is only Δ⁰₂-categorical.
+objectives:
+  - Work with ω-presentations, atomic diagrams, enumerations and pull-backs
+  - Prove Knight's theorem on the degrees of the copies of a non-trivial structure
+  - Build decidable models of complete decidable theories and low models of computable theories
+  - Make Cantor's back-and-forth argument effective, and recognize computably categorical structures
+  - Explain why the order ω is Δ⁰₂-categorical but not computably categorical
+lessons: [presentations, computable-models, back-and-forth]
+credits:
+  - source: montalban-2021
+    role: main
+    note: "Chapters I and III."
+  - source: ash-knight-2000
+    role: main
+    note: "Chapters 3 and 12."

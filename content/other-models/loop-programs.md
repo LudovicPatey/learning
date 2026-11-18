@@ -2,12 +2,12 @@
 title: LOOP programs
 summary: Structured programs with bounded loops, their semantics, and the theorem of Meyer and Ritchie. The LOOP-computable functions are exactly the primitive recursive functions.
 duration: 25
-prerequisites: [mu-recursion, register-machines]
+prerequisites: [models-of-computation/mu-recursion, register-machines]
 ---
 
 Register machines use jumps. Modern programming languages instead use **structured** control flow: sequences, conditionals and loops. We study two minimal structured languages, introduced by Meyer and Ritchie (1967): **LOOP**, whose only loop is a `for` loop executed a number of times fixed on entry, and **WHILE**, which adds a `while` loop. The distinction between the two loops corresponds exactly to the distinction between primitive recursion and minimization.
 
-This lesson defines both languages and studies LOOP; the next lesson treats WHILE. The characterization of LOOP is proved by **compilation** in each direction. From functions to programs, each scheme of definition is implemented by a small program, and the programs of the subfunctions are combined with fresh variables so that they do not interfere. From programs to functions, the whole state of the variables is coded by one integer with the sequence coding of the lesson :ref{to="models-of-computation/coding-sequences"}, so that the effect of a loop becomes an iteration of a single function, that is, a primitive recursion. The same method gives the characterization of WHILE in the lesson :ref{to="models-of-computation/while-programs"}, where a loop becomes a search for the number of iterations, and, applied to Turing machines, Kleene's normal form theorem in the lesson :ref{to="models-of-computation/equivalence-of-models"}.
+This lesson defines both languages and studies LOOP; the next lesson treats WHILE. The characterization of LOOP is proved by **compilation** in each direction. From functions to programs, each scheme of definition is implemented by a small program, and the programs of the subfunctions are combined with fresh variables so that they do not interfere. From programs to functions, the whole state of the variables is coded by one integer with the sequence coding of the lesson :ref{to="models-of-computation/coding-sequences"}, so that the effect of a loop becomes an iteration of a single function, that is, a primitive recursion. The same method gives the characterization of WHILE in the lesson :ref{to="other-models/while-programs"}, where a loop becomes a search for the number of iterations, and, applied to Turing machines, Kleene's normal form theorem in the lesson :ref{to="models-of-computation/equivalence-of-models"}.
 
 ## Syntax and semantics
 

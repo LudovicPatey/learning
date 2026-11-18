@@ -2,12 +2,12 @@
 title: The λ-calculus
 summary: λ-terms, free variables and substitution, α-equivalence, β-reduction, normal forms, the Church–Rosser theorem, and reduction strategies.
 duration: 35
-prerequisites: [what-is-an-algorithm]
+prerequisites: [models-of-computation/equivalence-of-models]
 ---
 
 Church's λ-calculus (1932–1936) takes a different view of computation. There are no machines and no numbers: the only objects are **functions**, and the only operations are forming a function by abstracting over a variable, and applying a function to an argument. Computation is the simplification of expressions by substituting arguments for variables. The λ-calculus is the theoretical basis of functional programming languages and of the proofs-as-programs correspondence in logic.
 
-In the λ-calculus, functions take functions as arguments and return functions. Numbers, booleans and data structures must therefore be **encoded** as functions; this is the subject of the next lesson. Here we study the calculus itself: terms, substitution, β-reduction, and the two results that make β-reduction usable as a model of computation. The **Church–Rosser theorem** says that the order in which redexes are contracted does not affect the final result; the **standardization theorem** says that one fixed order, normal order, finds this result whenever it exists. Head reduction, the tool used to show that a term has no normal form, is introduced in the lesson :ref{to="models-of-computation/lambda-definability"}.
+In the λ-calculus, functions take functions as arguments and return functions. Numbers, booleans and data structures must therefore be **encoded** as functions; this is the subject of the next lesson. Here we study the calculus itself: terms, substitution, β-reduction, and the two results that make β-reduction usable as a model of computation. The **Church–Rosser theorem** says that the order in which redexes are contracted does not affect the final result; the **standardization theorem** says that one fixed order, normal order, finds this result whenever it exists. Head reduction, the tool used to show that a term has no normal form, is introduced in the lesson :ref{to="other-models/lambda-definability"}.
 
 ## Terms
 
@@ -74,7 +74,7 @@ If $x \neq y$ and $x \notin \mathrm{FV}(L)$, then $M[N/x][L/y] = M[L/y][N[L/y]/x
 By induction on $M$, choosing bound variables of $M$ distinct from $x$, $y$ and from the free variables of $N$ and $L$ (renaming does not change the size). If $M = x$, both sides are $N[L/y]$. If $M = y$, the left side is $L$ and the right side is $L[N[L/y]/x] = L$, since $x \notin \mathrm{FV}(L)$. If $M$ is another variable, both sides are $M$. Applications follow directly from the induction hypothesis. If $M = \lambda z.\, M_1$, both sides push the substitutions inside the abstraction, and the induction hypothesis applies to $M_1$.
 :::
 
-The lemma says that two substitutions can be exchanged, provided the second one is also applied to the term substituted by the first. It is used whenever a reduction is combined with a substitution, as in the proof of the Church–Rosser theorem and in the study of head reduction in the lesson :ref{to="models-of-computation/lambda-definability"}.
+The lemma says that two substitutions can be exchanged, provided the second one is also applied to the term substituted by the first. It is used whenever a reduction is combined with a substitution, as in the proof of the Church–Rosser theorem and in the study of head reduction in the lesson :ref{to="other-models/lambda-definability"}.
 
 :::definition{#def-alpha}
 Two terms are **α-equivalent** if one is obtained from the other by renaming bound variables, that is, by replacing subterms $\lambda y.\, M$ by $\lambda z.\, M[z/y]$ with $z \notin \mathrm{FV}(M)$.
