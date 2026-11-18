@@ -194,3 +194,23 @@
   short: "Ravishankar 2025"
   kind: article
   citation: "K. Ravishankar, *Contrasting the halves of an Ahmad pair*, arXiv:2511.22901, 2025."
+- id: andrews-miller-2015
+  short: "Andrews–Miller 2015"
+  kind: article
+  citation: "U. Andrews and J. S. Miller, *Spectra of theories and structures*, Proceedings of the AMS 143 (2015), 1283–1298."
+- id: harrison-trainor-2025
+  short: "Harrison-Trainor 2025"
+  kind: article
+  citation: "M. Harrison-Trainor, *Unfriendly jump inversions* (first circulated as *Relative to any non-arithmetic set*), arXiv:2505.23613, 2025."
+- id: bazhenov-fokina-san-mauro-2020
+  short: "Bazhenov–Fokina–San Mauro 2020"
+  kind: article
+  citation: "N. Bazhenov, E. Fokina and L. San Mauro, *Learning families of algebraic structures from informant*, Information and Computation 275 (2020), 104590; arXiv:1905.01601."
+- id: bazhenov-et-al-2024-text
+  short: "Bazhenov–Fokina–Rossegger–Soskova–Vatev 2024"
+  kind: article
+  citation: "N. Bazhenov, E. Fokina, D. Rossegger, A. Soskova and S. Vatev, *Learning families of algebraic structures from text*, arXiv:2402.05744, 2024."
+- id: fokina-kotzing-san-mauro-2019
+  short: "Fokina–Kötzing–San Mauro 2019"
+  kind: article
+  citation: "E. Fokina, T. Kötzing and L. San Mauro, *Limit learning equivalence structures*, Proceedings of ALT 2019, PMLR 98 (2019), 383–403."

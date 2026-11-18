@@ -1,0 +1,33 @@
+title: Degree spectra
+area: structures
+level: Advanced
+order: 4
+prerequisites: [computable-categoricity]
+summary: The degree spectrum of a structure, the set of degrees of its copies; generic presentations; Richter's theorem; structures coding families of sets and the Slaman–Wehner theorem; spectra that are not possible (unions of cones, PA degrees) by the theorems of Knight and of Andrews and Miller; recent results on the non-arithmetic degrees and the low₅ problem.
+description: >
+  The fourth question of computable structure theory: which sets of Turing degrees
+  are degree spectra of structures? The course introduces generic presentations,
+  copies in which every computational property has a structural reason, and uses
+  them in both directions. Positively, structures coding countable families of
+  sets realize all cones and, by the theorem of Slaman and Wehner, the set of
+  non-computable degrees. Negatively, a spectrum is never a countable union of
+  cones unless it is one of them, and never the upward closure of an F_σ set
+  unless it is an enumeration cone, so the PA, DNC and random degrees are not
+  spectra. The course ends with the state of the question in 2026, including the
+  recent proof that the non-arithmetic degrees form a spectrum.
+objectives:
+  - Build generic presentations and prove that a set c.e. in a sufficiently generic copy is c.e. in every copy
+  - Prove Richter's theorem and apply it to linear orders
+  - Compute the spectra of structures coding families of sets, and prove the Slaman–Wehner theorem
+  - Prove that unions of cones and the PA, DNC and Martin-Löf random degrees are not spectra
+lessons: [generic-presentations, possible-spectra, impossible-spectra]
+credits:
+  - source: montalban-2021
+    role: main
+    note: "Chapters IV and V: generic presentations, Richter's theorem, the Slaman–Wehner family, impossible spectra; Chapter X for low structures."
+  - source: andrews-miller-2015
+    role: consulted
+    note: "Π⁰₁ classes in the copies of a structure; PA, DNC and random degrees are not spectra."
+  - source: harrison-trainor-2025
+    role: consulted
+    note: "The non-arithmetic degrees form a spectrum (stated)."

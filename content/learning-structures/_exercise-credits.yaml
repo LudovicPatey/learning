@@ -1,0 +1,15 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Exercises that are not listed were written for this course.
+
+ex-learn-p-groups:
+  source: bazhenov-fokina-san-mauro-2020
+  relation: result
+  where: "Proposition 4.4"
+ex-text-finite-classes:
+  source: bazhenov-et-al-2024-text
+  relation: related
+  where: "Section 7"
+ex-text-implies-informant:
+  source: bazhenov-et-al-2024-text
+  relation: result
+  where: "Remark 2"

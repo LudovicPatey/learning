@@ -1,0 +1,19 @@
+# Credits of the exercises of this course (see src/lib/credits.ts).
+# Exercises that are not listed were written for this course.
+
+ex-exact-pair-copies:
+  source: montalban-2021
+  relation: adapted
+  where: "Corollary IV.22"
+ex-family-union:
+  source: montalban-2021
+  relation: related
+  where: "Exercise V.27"
+ex-countable-upward-closure:
+  source: montalban-2021
+  relation: result
+  where: "Corollary V.19"
+ex-generic-onto:
+  source: montalban-2021
+  relation: result
+  where: "Section IV.3"

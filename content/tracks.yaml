@@ -91,7 +91,7 @@
     The complexity of countable structures: their presentations, the relations
     that are c.e. or computable in every copy, categoricity, degree spectra,
     and the infinitary formulas that explain them.
-  courses: [computable-structures, intrinsic-definability, computable-categoricity]
+  courses: [computable-structures, intrinsic-definability, computable-categoricity, degree-spectra]
   credits:
     - source: montalban-2021
       role: main

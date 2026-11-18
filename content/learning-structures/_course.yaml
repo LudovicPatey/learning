@@ -1,0 +1,30 @@
+title: Learning structures in the limit
+area: structures
+level: Advanced
+order: 20
+prerequisites: [computable-structures]
+summary: Algorithmic learning of isomorphism types; a family of structures is learnable from informant if and only if its members are singled out by infinitary Σ₂ sentences, and from text if and only if they are singled out by positive infinitary Σ₂ sentences; locking sequences; examples and separations.
+description: >
+  A research-level course on a recent meeting point of computable structure theory
+  and algorithmic learning theory. A learner reads more and more atomic facts
+  about a copy of an unknown structure from a known family and must eventually
+  name its isomorphism type. The course proves the characterizations of
+  learnability from informant (Bazhenov, Fokina, San Mauro, 2020) and from text
+  (Bazhenov, Fokina, Rossegger, Soskova, Vatev, 2024) by infinitary Σ₂ sentences,
+  with a direct proof by locking sequences, and describes the connections with
+  continuous embeddings and Borel equivalence relations.
+objectives:
+  - Prove the existence of locking sequences for a learner
+  - Prove that learnability from informant is equivalent to separation by infinitary Σ₂ sentences, and from text by positive infinitary Σ₂ sentences
+  - Decide learnability for families of linear orders, equivalence structures and abelian p-groups, and separate learning from text and from informant
+lessons: [learning-from-informant, learning-from-text]
+credits:
+  - source: bazhenov-fokina-san-mauro-2020
+    role: main
+    note: "The framework and the characterization of learnability from informant; examples."
+  - source: bazhenov-et-al-2024-text
+    role: main
+    note: "Learning from text, positive formulas, the characterization and the complete classes."
+  - source: fokina-kotzing-san-mauro-2019
+    role: consulted
+    note: "The definitions for equivalence structures and the separation of text and informant."

@@ -672,6 +672,48 @@ course 5 on the higher computability track (computable ordinals, hyperarithmetic
 - Σ-small classes and the copy-versus-diagonalize game (Montalbán I, X), Vaught's
   conjecture (Montalbán II, XII): research topics.
 
+**Exploration of the research literature (2026-11-18).** At the author's request ("there is
+much more to computable structure theory"), the recent literature was surveyed (arXiv,
+journal pages, surveys; 2015–2026). Directions found, and what the platform does with them:
+- **Degree spectra.** The non-arithmetic degrees form a spectrum (Harrison-Trainor,
+  arXiv:2505.23613, 2025, via *unfriendly jump inversions*; the question was open in
+  Montalbán 2021); non-Δ⁰ₙ (n ≥ 3) impossible (ACKLMM 2016); spectra of relations on a cone
+  (Harrison-Trainor, Memoirs AMS 2018) and a natural relation on (ω,<) of intermediate
+  spectrum (Damaj–Harrison-Trainor, arXiv:2412.01071); low₅ Boolean algebras still open.
+  → **Written:** course `degree-spectra` (course 4 of the track), with these results stated.
+- **Scott complexity.** Computable Scott sentences (Alvir–Csima–Harrison-Trainor, JSL 2025);
+  a computable structure with a Π_n Scott sentence and no computable Σ_{2n} one
+  (Harrison-Trainor 2025); Scott sentence complexities of linear orders (Gonzalez–
+  Rossegger); Scott analysis below the Vaught ordinal (Gonzalez–Rossegger–Turetsky,
+  arXiv:2606.15205, 2026); Scott rank and highness of index sets (Franklin–Rossegger–
+  Turetsky, arXiv:2606.15196, 2026). → To be included in `scott-analysis` (course 5), whose
+  objectives are unchanged.
+- **Degrees of categoricity.** Already covered in `computable-categoricity` (Csima–Ng
+  included); Π¹₁-completeness of computable categoricity (DKLLMT 2015) is cited there.
+- **Learning of structures** (Fokina–Kötzing–San Mauro 2019; Bazhenov–Fokina–San Mauro
+  2020; Bazhenov–Fokina–Rossegger–Soskova–Vatev 2024; Bazhenov–Cipriani–San Mauro 2023).
+  → **Written:** specialized course `learning-structures` (two lessons, both
+  characterizations proved).
+- **Punctual (primitive recursive) structures** (Kalimullin–Melnikov–Ng 2017; survey
+  Bazhenov–Downey–Kalimullin–Melnikov, BSL 2019; punctual degrees and punctual dimension,
+  Dorzhieva–Downey–Hammatt–Melnikov–Ng; punctual robustness of classes, Bazhenov–
+  Kalociński–Wrocławski, ICALP 2025). → Planned specialized course `punctual-structures`.
+  The basic papers (KMN 2017, BSL survey) could not be read in full text in this session;
+  the course needs them before it is written.
+- **Effective interpretability and universality** (computable functors, Harrison-Trainor–
+  Melnikov–Miller–Montalbán, JSL 2017; graphs to fields, Miller–Poonen–Schoutens–
+  Shlapentokh, JSL 2018; Turing computable embeddings, Knight–Miller–Vanden Boom 2007;
+  torsion-free abelian groups are Borel complete, Paolini–Shelah, Annals 2024). → Belongs
+  to `isomorphism-problem` (course 7).
+- **Computable metric and topological structures** (Polish spaces up to homeomorphism,
+  Harrison-Trainor–Melnikov–Ng 2020; computable Stone spaces; isometry degrees of ℓᵖ,
+  McNicholl–Stull; computable K-theory of C*-algebras, 2025; Downey–Melnikov's book of
+  2025). → Planned specialized course, after `computable-analysis`.
+- **Vaught's conjecture** (Montalbán's computability-theoretic equivalent, 2013) → in
+  `hyperarithmetic-structures` or a specialized course.
+Not covered: generic Muchnik reducibility and structures in generic extensions;
+computable structure theory of partial combinatory algebras (Fokina–Terwijn 2025).
+
 ## Enumeration degrees
 
 **Added on 2026-11-18** at the author's request. A **secondary** track, built on the

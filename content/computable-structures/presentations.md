@@ -88,7 +88,7 @@ by the minimality of the pair: the first tuple lists $g(k_s), g(k_s + 2), \ldots
 :::quiz[Knight's theorem]
 Why are the two tuples interleaved, $a_0 b_0 a_1 b_1 \ldots$, rather than listed one after the other?
 
-- [x] So that the decoder, who sees only the atomic diagram of the copy, knows where each tuple sits: the elements of even offset form one tuple and those of odd offset the other, and the minimality of the pair tells him when to stop comparing.
+- [x] So that the decoder, who sees only the atomic diagram of the copy, knows where each tuple sits: the elements of even offset form one tuple and those of odd offset the other, and the minimality of the pair says when to stop comparing.
 - [ ] Because the two tuples are not disjoint.
 
   They are chosen disjoint; the interleaving concerns their positions in the copy, not their elements.
