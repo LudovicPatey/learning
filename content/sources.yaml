@@ -178,3 +178,19 @@
   short: "Miller 2004"
   kind: article
   citation: "J. S. Miller, *Degrees of unsolvability of continuous functions*, Journal of Symbolic Logic 69 (2004), 555–584."
+- id: goh-kalimullin-miller-soskova-2022
+  short: "Goh–Kalimullin–Miller–Soskova 2022"
+  kind: article
+  citation: "J. L. Goh, I. Sh. Kalimullin, J. S. Miller and M. I. Soskova, *PA relative to an enumeration oracle*, Journal of Symbolic Logic, published online 2022, doi:10.1017/jsl.2022.55."
+- id: li-2024
+  short: "Li 2024"
+  kind: article
+  citation: "A. Li, *Introenumerability, autoreducibility, and randomness*, Journal of Symbolic Logic, published online 2023; arXiv:2402.08247."
+- id: kihara-ng-pauly
+  short: "Kihara–Ng–Pauly"
+  kind: article
+  citation: "T. Kihara, K. M. Ng and A. Pauly, *Enumeration degrees and non-metrizable topology*, arXiv:1904.04107, revised 2020."
+- id: ravishankar-2025
+  short: "Ravishankar 2025"
+  kind: article
+  citation: "K. Ravishankar, *Contrasting the halves of an Ahmad pair*, arXiv:2511.22901, 2025."

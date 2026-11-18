@@ -1,0 +1,28 @@
+title: Enumeration oracles
+area: computability
+level: Advanced
+order: 16
+prerequisites: [enumeration-definability]
+summary: Relativizing computability notions to an enumeration oracle; Π⁰₁ classes relative to an enumeration oracle, generic sets and strong quasi-minimal covers; the relation PA relative to an enumeration oracle, self-PA degrees, and the characterization of the continuous degrees as the PA bounded ones.
+description: >
+  Most notions of computability theory relativize to a Turing oracle. Relativizing
+  them to an enumeration oracle, which only gives positive information, tests which
+  of their properties depend on negative information. The course defines Π⁰₁
+  classes and generic sets relative to an enumeration oracle, proves that every
+  enumeration degree has a strong quasi-minimal cover, and studies the extension of
+  the relation "PA relative to": continuous degrees are never PA relative to
+  themselves, while some degrees are (Miller and Soskova), and the continuous
+  degrees are exactly the PA bounded ones (Goh, Kalimullin, Miller and Soskova).
+objectives:
+  - Define Σ⁰₁ and Π⁰₁ classes and genericity relative to an enumeration oracle
+  - Prove that every enumeration degree has a strong quasi-minimal cover
+  - Define the relation PA relative to an enumeration oracle and prove that total degrees are PA bounded
+  - Explain why no continuous degree is PA relative to itself, and state the classification of Goh, Kalimullin, Miller and Soskova
+lessons: [relative-classes, pa-relative-to-enumeration]
+credits:
+  - source: goh-kalimullin-miller-soskova-2022
+    role: main
+    note: "Definitions of relative classes and of PA relative to an enumeration oracle; the classification of degrees."
+  - source: soskova-2020
+    role: consulted
+    note: "Context: continuous degrees and the relation PA above."

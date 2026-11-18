@@ -16,7 +16,7 @@ objectives:
   - Characterize the degrees below 0′ₑ as the degrees of Σ⁰₂ sets and build Σ⁰₂ approximations
   - Define the skip and prove that A ≤ₑ B if and only if the skip of A is 1-reducible to that of B
   - Recognize cototal sets in graphs and in minimal subshifts
-lessons: [enumeration-jump, skip-and-cototality]
+lessons: [enumeration-jump, skip-and-cototality, ahmad-pairs]
 credits:
   - source: soskova-2020
     role: main
@@ -24,3 +24,6 @@ credits:
   - source: andrews-et-al-2019
     role: main
     note: "The skip operator and the cototal degrees."
+  - source: ravishankar-2025
+    role: consulted
+    note: "Ahmad pairs and the halves of a pair (lesson on Ahmad pairs)."

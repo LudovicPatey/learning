@@ -1,0 +1,29 @@
+title: Cototality, measure and topology
+area: computability
+level: Advanced
+order: 17
+prerequisites: [enumeration-jump]
+summary: Variants of cototality and their separations; every Σ⁰₂ degree is graph-cototal; maximal independent sets are universal for cototality; cototal sets form a null class and weakly 2-random sets are not cototal, while Ω is; classes of enumeration degrees as degrees of points of topological spaces.
+description: >
+  The cototal degrees, introduced to explain an example from symbolic dynamics,
+  have turned out to be one of the central classes of enumeration degrees. The
+  course studies them from three points of view: combinatorial (graph-cototal and
+  weakly cototal degrees, maximal independent sets, simple groups), measure-theoretic
+  (autoreducibility and the randomness of cototal sets, after Ang Li), and
+  topological (the zoo of Kihara, Ng and Pauly, in which classes of enumeration
+  degrees are the degrees of points of second-countable spaces).
+objectives:
+  - Prove that every Σ⁰₂ degree is graph-cototal and that complements of maximal independent sets are universal for cototality
+  - Prove that the cototal sets form a null class, that weakly 2-random sets are not cototal, and that Ω is cototal
+  - Identify graph-cototal degrees with the degrees of points of a power of the cofinite topology, and describe the zoo of Kihara, Ng and Pauly
+lessons: [variants-of-cototality, measure-and-cototality, topology-and-degrees]
+credits:
+  - source: andrews-et-al-2019
+    role: main
+    note: "Graph-cototal and weakly cototal degrees, maximal independent sets, Σ⁰₂ degrees."
+  - source: li-2024
+    role: main
+    note: "Autoreducibility, measure and randomness of cototal sets."
+  - source: kihara-ng-pauly
+    role: main
+    note: "The zoo of enumeration degrees of points of second-countable spaces."

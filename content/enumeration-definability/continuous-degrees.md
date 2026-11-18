@@ -106,3 +106,21 @@ The continuous degrees and :ref{#prop-continuous-embedding} are due to Miller (2
 - T. Kihara, K. M. Ng and A. Pauly, *Enumeration degrees and non-metrizable topology*, arXiv:1904.04107.
 - M. I. Soskova, *The theory of the enumeration degrees, definability, and automorphisms*, College Publications, 2020, Section 3.2.
 
+:::::exercises
+::::exercise{#ex-continuous-join difficulty=1 objective="Check that the continuous degrees are closed under join."}
+Show that the join of two continuous degrees is continuous.
+
+:::solution
+Let $\alpha$ and $\beta$ be points of the Hilbert cube, and let $\gamma$ interleave their coordinates: $\gamma(2i) = \alpha(i)$ and $\gamma(2i + 1) = \beta(i)$. Then $C_\gamma$ is, up to a computable permutation of the coordinates, $C_\alpha \oplus C_\beta$, so $\deg_e(C_\gamma) = \deg_e(C_\alpha) \vee \deg_e(C_\beta)$.
+:::
+::::
+
+::::exercise{#ex-lower-reals-semicomputable difficulty=1 objective="Relate the lower topology on the reals to the semi-computable sets of the lesson on Kalimullin pairs."}
+For a real $x$, show that the set $L = \{ q \in \mathbb Q : q < x \}$ (rationals coded by numbers) is semi-computable, and that it is a name of $x$ in the reals with the lower topology.
+
+:::solution
+$L$ is a left cut of the computable order of the rationals, so the selector $s(p, q) = \min(p, q)$ works (:ref{#ex-left-cuts}). In the lower topology, with the base of the intervals $(q, \infty)$, the point $x$ belongs to $(q, \infty)$ if and only if $q < x$, so the set of basic neighborhoods of $x$ is $L$.
+:::
+::::
+
+:::::

@@ -54,3 +54,5 @@ Jeandel (2015); the papers on the local structure cited in the survey.
 ## 7. History
 
 - 2026-11-18: course written (three lessons, merged into two the same day).
+- 2026-11-18: new lesson `ahmad-pairs` (Ahmad pairs, join-irreducibility and incomparability of the halves proved; the results of Ahmad–Lachlan, Kalimullin–Lempp–Ng–Yamaleev, Goh–Lempp–Ng–Soskova and Ravishankar (arXiv 2025) stated; the fragments of the theory). Credit to Ravishankar added.
+- 2026-11-18 (polishing): further exercises added where lessons had at most one (checked like proofs); two solutions rewritten for clarity.

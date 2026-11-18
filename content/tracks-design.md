@@ -721,6 +721,43 @@ of fragments of the theory (stated only), the local definability results of Ganc
 Soskova (stated only), Medvedev and Muchnik degrees (a possible specialized course on mass
 problems, already planned).
 
+**Exploration of the research literature (2026-11-18, at the author's request).** The area
+lives in research papers; the following directions were found and checked against the
+papers themselves (introductions and statements read in full text):
+- *Relativization to enumeration oracles*: Π⁰₁⟨A⟩ classes (Miller–Soskova), PA relative to
+  an enumeration oracle, ⟨self⟩-PA degrees, PA bounded = continuous, universal classes, low
+  for PA degrees, Kalimullin–Puzarenko classes (Goh, Kalimullin, Miller, Soskova, JSL 2022).
+- *Cototality and its variants*: graph-cototal ⊊ cototal ⊊ weakly cototal, Σ⁰₂ degrees are
+  graph-cototal, universality of maximal independent sets and antichains (Andrews et al. 2019;
+  McCarthy 2018); minimal subshifts and simple groups (Jeandel); density of the cototal
+  degrees (Miller–Soskova 2018).
+- *Measure and randomness*: cototal sets are autoreducible, hence null; weakly 2-random sets
+  are not cototal, Ω is; weakly 3-random sets have no cototal or introenumerable degree (Ang
+  Li, JSL 2023/arXiv 2024); introenumerability and hyper-cototality (Goh et al.).
+- *Topology*: the zoo of Kihara, Ng and Pauly (degrees of points of T₀, T₁, T₂, T₂.₅,
+  submetrizable and G_δ spaces; cototal = computably G_δ; every degree is a point of a
+  decidable T₂.₅ space); Jacobsen-Grocott's thesis (2024), which also covers the
+  hyperenumeration degrees.
+- *Local structure and fragments of the theory*: Ahmad pairs (Ahmad–Lachlan; no cupping,
+  Kalimullin–Lempp–Ng–Yamaleev; no triples, Goh–Lempp–Ng–Soskova; characterization of the
+  halves, Ravishankar, arXiv 2025), strong interval embeddings of distributive lattices and
+  decidability of the extension of embeddings problem (Lempp–Slaman–Soskova).
+- *Degree-invariant functions*: Martin's conjecture in the enumeration degrees (Nakid
+  Cordero, arXiv 2025).
+- Not yet covered: the ω-enumeration degrees and degree spectra of structures (Soskov and
+  his school), the enumeration degrees of structures (rank-one torsion-free abelian groups,
+  fields of finite transcendence degree), the hyperenumeration degrees, 1-genericity in the
+  local structure (Badillo–Harris–Soskova), α-enumeration degrees. Soskova's notes on the
+  enumeration degrees (2025), cited by Ravishankar, are not public.
+
+**Revision (2026-11-18).** The track grows from three to five courses:
+`enumeration-reducibility`, `enumeration-jump` (with a new lesson on Ahmad pairs and the
+two-quantifier theory), `enumeration-definability` (with a section on Martin's conjecture),
+and two new courses, `enumeration-oracles` (relativization, PA relative to an enumeration
+oracle) and `cototality` (variants, measure, topology). A sixth course on enumeration
+degrees and structures (ω-enumeration degrees, degree spectra, enumeration degrees of
+structures) is planned, to be designed with the computable structure theory track.
+
 **State of the literature (checked 2026-11-18).** Soskova's survey (revised January 2021)
 lists as open: rigidity of the enumeration degrees, definability of the skip and of the
 cototal degrees, decidability of the ∀∃-theory, existence of strong minimal pairs, the

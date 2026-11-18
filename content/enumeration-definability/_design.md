@@ -58,3 +58,5 @@ Slaman–Woodin (1997); Slaman–Soskova (2017); Miller (2004); Andrews–Igusa�
 
 - 2026-11-18: course written (three lessons).
 - **2026-11-18 (polishing pass).** `continuous-degrees` had no featured exercise: `ex-cantor-total` moved into the text. Exercises moved between the text and the further exercises keep their text, hence their hash and endorsements.
+- 2026-11-18: section on Martin's conjecture in the enumeration degrees (Nakid Cordero, arXiv 2025) added to `definability-and-automorphisms`.
+- 2026-11-18 (polishing): further exercises added where lessons had at most one (checked like proofs); two solutions rewritten for clarity.

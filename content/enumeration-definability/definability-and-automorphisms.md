@@ -1,7 +1,7 @@
 ---
 title: Definability and automorphisms
 summary: Robust minimal pairs are first-order definable in the partial order of the enumeration degrees; the jump (Kalimullin; Ganchev, Soskova) and the total degrees (Cai, Ganchev, Lempp, Miller, Soskova) are definable through them; consequences for automorphisms, which are determined by their action on the Turing degrees; the theory of the enumeration degrees and the open questions.
-duration: 25
+duration: 30
 prerequisites: [kalimullin-pairs]
 ---
 
@@ -99,6 +99,10 @@ where $\mathrm{RMP}(\mathbf a, \mathbf b)$ is the formula of the lesson with $\m
 :::
 ::::
 
+## Degree-invariant functions
+
+Martin's conjecture, stated under the axiom of determinacy, says that every degree-invariant function on the Turing degrees is constant or increasing on a cone, and that the increasing ones are well ordered, with the Turing jump as successor (course on the Turing degrees, notes on the jump). Slaman and Steel proved it for uniformly invariant functions. Nakid Cordero (preprint, 2025) studied the analogous question in the enumeration degrees. The range of behaviors is wider, even for uniformly invariant functions; his main result is that uniformly invariant functions are nevertheless locally as tame as possible: constant, increasing, or above the skip operator; and, unlike what Steel conjectured for the Turing degrees, some definable function on the enumeration degrees is not equivalent to a uniformly invariant one on any cone.
+
 ## Notes and references
 
 :ref{#thm-jump-definable} is Kalimullin (2003); :ref{#thm-jump-definable-gs} and the local case of the lemma are Ganchev and Soskova (2015); :ref{#thm-totality-definable} is Cai, Ganchev, Lempp, Miller and Soskova (2016). The consequences for automorphisms and the open questions are from Soskova's survey, Sections 1, 2.4 and 4.
@@ -109,6 +113,7 @@ where $\mathrm{RMP}(\mathbf a, \mathbf b)$ is the formula of the lesson with $\m
 - T. A. Slaman and W. H. Woodin, *Definability in the enumeration degrees*, Archive for Mathematical Logic 36 (1997), 255–267.
 - T. A. Slaman and M. I. Soskova, *The enumeration degrees: local and global structural interactions*, in *Foundations of Mathematics*, Contemporary Mathematics 690, American Mathematical Society, 2017, 31–67.
 - M. I. Soskova, *The theory of the enumeration degrees, definability, and automorphisms*, College Publications, 2020.
+- A. Nakid Cordero, *Martin's conjecture in the enumeration degrees*, arXiv:2510.19147, 2025.
 
 :::::exercises
 ::::exercise{#ex-low-definable difficulty=1 objective="Combine the definability of the jump with that of the least degree."}
@@ -118,4 +123,13 @@ Using :ref{#thm-jump-definable}, show that the degree $\mathbf 0'_e$ and the cla
 The least degree is definable, and so is the jump, as a definable function: $\mathbf y = \mathbf u'$ if and only if $\mathbf y$ is the greatest degree of the form described in :ref{#thm-jump-definable}, a first-order condition on $\mathbf u$ and $\mathbf y$. So $\mathbf 0'_e$ is defined as the jump of the least degree, and the class of degrees whose jump is $\mathbf 0'_e$ by the formula $\exists \mathbf y\, (\mathbf y = \mathbf a' \wedge \mathbf y = \mathbf 0'_e)$, with both equalities written with the definitions.
 :::
 ::::
+
+::::exercise{#ex-rmp-trivial difficulty=1 objective="Check the trivial robust minimal pairs in the formula RMP."}
+Show that $\mathrm{RMP}(\mathbf a, \mathbf b, \mathbf u)$ holds whenever $\mathbf a \leq \mathbf u$, for every $\mathbf b$, and that $\mathrm{RMP}$ is symmetric in $\mathbf a$ and $\mathbf b$.
+
+:::solution
+Let $\mathbf x \geq \mathbf u$. If $\mathbf a \leq \mathbf u$, then $\mathbf a \vee \mathbf x = \mathbf x$, and a common lower bound $\mathbf z$ of $\mathbf x$ and $\mathbf b \vee \mathbf x$ is below $\mathbf x$. Symmetry holds because the formula treats $\mathbf a \vee \mathbf u \vee \mathbf x$ and $\mathbf b \vee \mathbf u \vee \mathbf x$ in the same way. These are the trivial K-pairs of :ref{#ex-k-pairs}, item 1, relative to $\mathbf u$.
+:::
+::::
+
 :::::
