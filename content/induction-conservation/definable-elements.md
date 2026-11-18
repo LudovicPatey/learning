@@ -80,6 +80,31 @@ For $k = 1$ it is bounded; for $k \geq 2$, it is equivalent in $M$ to a $\Pi_{k-
 
 The only property of $M$ used is that every $\Sigma_n$ formula true in $M$ has a definable witness, given by the least number principle and collection in $M$; this is why $M$ is a model of $\mathrm{PA}$.
 
+:::quiz[definable elements]
+In item 2 of :ref{#lem-kn-elementary}, why does the proof take the least $p$ coding a witness, rather than any witness?
+
+- [x] Item 1 applies only to an element that is the unique solution of a formula; the least $p$ is uniquely defined, by $\chi(p, \bar b) \wedge \forall q < p\ \neg \chi(q, \bar b)$.
+- [ ] Because the least witness is standard.
+
+  It need not be standard; it is definable, which is what membership in $K$ requires.
+- [ ] To make $\chi$ bounded.
+
+  $\chi$ is bounded by $p$ by construction; minimality is needed for uniqueness.
+
+---
+
+Where is collection used in item 2?
+
+- [x] To show that $\chi$ and the formula "$\forall q < p\ \neg \chi(q, \bar b)$" are equivalent in $M$ to formulas of the right complexity, so that $p$ is defined by a $\Sigma_n$ formula.
+- [ ] To show that the least $p$ exists.
+
+  Existence of a least element comes from the least number principle, a form of induction.
+- [ ] To show that $0$ and $1$ are in $K$.
+
+  These are standard numbers, definable without collection.
+:::
+
+
 ::::exercise{#ex-k1-nonstandard difficulty=1 objective="Use the $\Sigma_1$-elementarity of $K_1(M)$ to relate its non-standard elements to the false $\Sigma_1$ sentences true in $M$."}
 Let $M$ be a model of $\mathrm{PA}$ in which some $\Sigma_1$ sentence false in $\nat$ is true. Show that $K_1(M)$ contains a non-standard element.
 

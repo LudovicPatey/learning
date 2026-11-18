@@ -155,3 +155,26 @@
   short: "Hájek–Pudlák 1993"
   kind: book
   citation: "P. Hájek and P. Pudlák, *Metamathematics of First-Order Arithmetic*, Perspectives in Mathematical Logic, Springer, 1993."
+
+# ---------------------------------------------------------------- enumeration degrees
+- id: soskova-2020
+  short: "Soskova 2020"
+  kind: survey
+  citation: "M. I. Soskova, *The theory of the enumeration degrees, definability, and automorphisms*, College Publications, London, 2020 (revised January 2021)."
+  url: "https://people.math.wisc.edu/~soskova/preprints/SurveyLSoskova.pdf"
+- id: cai-ganchev-lempp-miller-soskova-2016
+  short: "Cai–Ganchev–Lempp–Miller–Soskova 2016"
+  kind: article
+  citation: "M. Cai, H. A. Ganchev, S. Lempp, J. S. Miller and M. I. Soskova, *Defining totality in the enumeration degrees*, Journal of the American Mathematical Society 29 (2016), 1051–1067."
+- id: kalimullin-2003
+  short: "Kalimullin 2003"
+  kind: article
+  citation: "I. Sh. Kalimullin, *Definability of the jump operator in the enumeration degrees*, Journal of Mathematical Logic 3 (2003), 257–267."
+- id: andrews-et-al-2019
+  short: "Andrews et al. 2019"
+  kind: article
+  citation: "U. Andrews, H. A. Ganchev, R. Kuyper, S. Lempp, J. S. Miller, A. A. Soskova and M. I. Soskova, *On cototality and the skip operator in the enumeration degrees*, Transactions of the American Mathematical Society 372 (2019), 1631–1670."
+- id: miller-2004
+  short: "Miller 2004"
+  kind: article
+  citation: "J. S. Miller, *Degrees of unsolvability of continuous functions*, Journal of Symbolic Logic 69 (2004), 555–584."

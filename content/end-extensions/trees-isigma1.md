@@ -25,6 +25,31 @@ Let $T$ be a $\Delta_1$-definable binary tree of $M$. Then "$T$ contains a strin
 The strings of length $\ell$ are below $2^{\ell + 1}$, so the first property is a bounded existential quantifier in front of a $\Delta_1$ formula, which is $\Delta_1$ in $\mathrm B\Sigma_1$ by :ref{#lem-fo-collection-closure}; $M \models \mathrm B\Sigma_1$ by :ref{#thm-fo-parsons}. Unboundedness is a universal quantifier in front of it. The last statement holds because $\tau \restriction \ell' \in T$ for $\tau \in T$ (:ref{#lem-strings-model}).
 :::
 
+:::quiz[the complexity of trees in a model]
+Why is "$T$ contains a string of length $\ell$" $\Delta_1$ in $M$, and not only $\Sigma_1$?
+
+- [x] The strings of length $\ell$ are bounded by $2^{\ell + 1}$, so the existential quantifier is bounded, and $\mathrm B\Sigma_1$ makes a bounded quantifier in front of a $\Delta_1$ formula again $\Delta_1$.
+- [ ] Because $\ell$ is a standard number.
+
+  $\ell$ ranges over all elements of $M$, standard or not; the bound $2^{\ell + 1}$ is what matters.
+- [ ] Because $T$ is finite in $M$.
+
+  $T$ is a $\Delta_1$-definable set of $M$, in general unbounded; only its strings of a given length form a bounded set.
+
+---
+
+Why is "$T$ is unbounded" only $\Pi_1$?
+
+- [x] It quantifies over all lengths $\ell \in M$, an unbounded universal quantifier in front of the $\Delta_1$ formula of the first part.
+- [ ] Because $T$ may have no path.
+
+  The existence of a path is a different, more complex, statement; unboundedness concerns lengths only.
+- [ ] Because $\mathrm B\Sigma_1$ fails in $M$.
+
+  $M$ satisfies $\mathrm B\Sigma_1$; collection does not remove an unbounded quantifier.
+:::
+
+
 :::example{#ex-ee-trees}
 In $\nat$, the $\Delta_1$-definable binary trees are the computable ones (:ref{#thm-definable-arithmetic}), and unbounded means infinite. The tree of initial segments of $\{0,1\}$-valued diagonally non-computable functions, cut at the stage $\mathrm{len}(\sigma)$ of the computations, is computable and infinite, and has no computable path (:ref{#thm-dnc2-no-computable}). So an unbounded $\Delta_1$ tree need not have a $\Delta_1$-definable path.
 :::

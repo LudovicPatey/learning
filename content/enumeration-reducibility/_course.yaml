@@ -1,0 +1,23 @@
+title: Enumeration reducibility
+area: computability
+level: Advanced
+order: 13
+prerequisites: [turing-degrees]
+summary: Relative computability with positive information only; enumeration operators, total degrees and the embedding of the Turing degrees, Selman's theorem, and quasi-minimal degrees.
+description: >
+  A set A is enumeration reducible to B if every enumeration of B can be turned,
+  uniformly, into an enumeration of A. The course defines enumeration operators and
+  the enumeration degrees, embeds the Turing degrees as the total degrees, proves
+  Selman's theorem that an enumeration degree is determined by the total degrees
+  above it, and shows by Cohen genericity that the enumeration degrees contain
+  quasi-minimal degrees, which bound no nonzero total degree.
+objectives:
+  - Work with enumeration operators and their compactness
+  - Relate enumeration reducibility, c.e. in, and Turing reducibility, and identify the total degrees
+  - Prove Selman's theorem by forcing with finite enumerations
+  - Prove that the enumeration degree of a 1-generic set is quasi-minimal
+lessons: [enumeration-operators, selman-theorem, quasi-minimal-degrees]
+credits:
+  - source: soskova-2020
+    role: main
+    note: "Definitions, the embedding of the Turing degrees, Selman's theorem and quasi-minimality as the starting point of the theory."

@@ -671,3 +671,57 @@ course 5 on the higher computability track (computable ordinals, hyperarithmetic
   specialized course after the track.
 - Σ-small classes and the copy-versus-diagonalize game (Montalbán I, X), Vaught's
   conjecture (Montalbán II, XII): research topics.
+
+## Enumeration degrees
+
+**Added on 2026-11-18** at the author's request. A **secondary** track, built on the
+computability track (Turing degrees, the arithmetic hierarchy, 1-genericity): the
+enumeration degrees are a research area of their own, with a basis small enough for three
+courses, and they are used by computable structure theory (sets coded by structures,
+degree spectra) and computable analysis (continuous degrees, represented spaces).
+
+**Objective.** Relative computability when only positive information is available: the
+reducibility, the degree structure and its relation to the Turing degrees (total degrees),
+the jump and the local structure, and the definability results of the last twenty years.
+After the track, a student can read the current literature (Soskova's survey and the papers
+it cites).
+
+**Techniques.**
+- enumeration operators and their compactness;
+- forcing with finite enumerations (Selman's theorem) and Cohen genericity (quasi-minimal
+  degrees);
+- diagonalization for the jump; Σ⁰₂ approximations;
+- Kalimullin pairs: combinatorial characterization of a structural property;
+- topological arguments through represented spaces (continuous and cototal degrees).
+
+**Literature compared.** There is no recent textbook on the enumeration degrees. Cooper's
+*Computability Theory* (2004) has a chapter on them, and Odifreddi's *Classical Recursion
+Theory II* treats partial degrees; neither is available here, and neither covers the
+definability results. Soskova's survey (*The theory of the enumeration degrees,
+definability, and automorphisms*, 2020) gives the modern organization: theory, definability,
+automorphisms. The research papers are the sources of the third course.
+
+**Decision (2026-11-18).** Three courses, ordered by what each needs:
+1. `enumeration-reducibility`: operators, total degrees and the embedding of the Turing
+   degrees, Selman's theorem (the enumeration degrees are determined by the total degrees
+   above them), quasi-minimal degrees by genericity, and the absence of minimal degrees
+   (stated). This is the part every computability theorist uses.
+2. `enumeration-jump`: Cooper's jump and its properties, the local structure (Σ⁰₂ sets,
+   nontotal degrees below 0′ₑ, density and embeddings stated), the skip and the cototal
+   degrees, with their characterizations from symbolic dynamics and graph theory.
+3. `enumeration-definability`: Kalimullin pairs and semi-computable sets, the definability
+   of the jump and of the total degrees (stated, with the proof of the easy half of
+   Kalimullin's characterization), automorphisms and the theory, and the continuous degrees.
+Choice: the definability theorems are stated rather than proved; their proofs (Kalimullin;
+Cai, Ganchev, Lempp, Miller and Soskova) are research papers of 10–20 pages, and the track
+gives the tools and the easy halves, with full proofs where they fit in a lesson.
+
+**Excluded.** The ω-enumeration degrees (Soskov), the n-c.e.a. hierarchy, the decidability
+of fragments of the theory (stated only), the local definability results of Ganchev and
+Soskova (stated only), Medvedev and Muchnik degrees (a possible specialized course on mass
+problems, already planned).
+
+**State of the literature (checked 2026-11-18).** Soskova's survey (revised January 2021)
+lists as open: rigidity of the enumeration degrees, definability of the skip and of the
+cototal degrees, decidability of the ∀∃-theory, existence of strong minimal pairs, the
+biinterpretability conjecture for the local structure.

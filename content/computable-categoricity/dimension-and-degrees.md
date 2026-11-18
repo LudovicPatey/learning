@@ -61,6 +61,31 @@ The order $\omega$ has strong degree of categoricity $\mathbf 0'$.
 By :ref{#prop-omega-delta2}, $\mathbf 0'$ computes an isomorphism between any two computable copies. Let $K$ be the halting set, and compare the standard copy $(\nat; \leq)$ with $\omega_K$ of :ref{#lem-omega-x}. The only isomorphism $f : \omega_K \to (\nat; \leq)$ satisfies: $x$ and $y$ are adjacent in $\omega_K$ if and only if $f(y) = f(x) + 1$. So the successor relation of $\omega_K$ is computable in $f$, and $K \leq_T f$ by :ref{#lem-omega-x}. By the remark above, $\mathbf 0'$ is the strong degree of categoricity of $\omega$.
 :::
 
+:::quiz[the degree of categoricity of ω]
+In the proof of :ref{#prop-omega-degree}, why does every isomorphism between $\omega_K$ and the standard copy compute $K$?
+
+- [x] There is only one isomorphism, it preserves adjacency, and adjacency in the standard copy is computable; so the successor relation of $\omega_K$, which computes $K$, is computable from it.
+- [ ] Because $\omega_K$ is not computable.
+
+  $\omega_K$ is a computable copy; the complexity lies in its successor relation.
+- [ ] Because $\mathbf 0'$ computes the isomorphism.
+
+  That gives the upper bound; the lower bound is that every isomorphism computes $K$.
+
+---
+
+In :ref{#lem-omega-x}, why is the successor relation of $\omega_X$ computable in $X$?
+
+- [x] Elements are inserted only between the designated pairs $a_n$, $b_n$, at most once each, so two elements adjacent when both are placed stay adjacent unless they form a pair $a_n, b_n$ with $n \in X$.
+- [ ] Because $\omega_X$ is computable.
+
+  The order is computable, but adjacency is in general not; the lemma shows it is computable in $X$.
+- [ ] Because $X$ is c.e.
+
+  That makes the construction computable; computing adjacency needs the answers of $X$ for the pairs.
+:::
+
+
 ::::exercise{#ex-integers-degree difficulty=1 objective="Adapt the coding of the halting set into adjacencies to a structure with many automorphisms." lessons="computable-structures/back-and-forth"}
 Show that the order $\zeta = (\mathbb Z; \leq)$ of the integers has strong degree of categoricity $\mathbf 0'$. Unlike $\omega$, it has infinitely many automorphisms.
 

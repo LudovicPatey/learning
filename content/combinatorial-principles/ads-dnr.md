@@ -99,6 +99,14 @@ The strictness of the arrows and the non-implications are proved, or admitted wi
 
 Many more principles live in this region: the rainbow and polarized Ramsey theorems, the free set and thin set theorems, Hindman's theorem (which implies $\mathsf{ACA}_0$), the tree theorem, and principles from model theory such as the atomic model theorem (Hirschfeldt, Section 9.3). Dzhafarov and Mummert, Chapter 9, survey them, and the online Reverse Mathematics Zoo of Dzhafarov records the known relations.
 
+::::exercise{#ex-ads-not-dnr-low difficulty=1 objective="Check which of the principles of the course hold in the ω-model of a single low random sequence."}
+Let $\mathcal M$ be the ω-model of the proof of :ref{#cor-wwkl-not-wkl}, built from a low random sequence. Which of $\mathsf{WWKL}_0$, $\mathsf{DNR}$, $\mathsf{WKL}_0$, $\mathsf{COH}$ does it satisfy?
+
+:::solution
+It satisfies $\mathsf{WWKL}_0$ by :ref{#cor-wwkl-not-wkl}, hence $\mathsf{DNR}$ by :ref{#thm-wwkl-dnr}. It does not satisfy $\mathsf{WKL}_0$, by the same corollary. It does not satisfy $\mathsf{COH}$: all its members are low, and by :ref{#prop-coh-no-low} some computable sequence has no low cohesive set.
+:::
+::::
+
 ## Notes and references
 
 :ref{#thm-sads-preserves-dnc} and :ref{#cor-ads-not-dnr} are due to Hirschfeldt and Shore (2007), who proved them for $\mathsf{SCAC}$ and $\mathsf{CAC}$ (Hirschfeldt, Theorem 9.9 and Exercise 9.23; Dzhafarov–Mummert, Theorem 9.2.21, whose proof this lesson follows for linear orders). The separation of $\mathsf{SRT}^2_2$ from $\mathsf{RT}^2_2$ over $\mathsf{RCA}_0$ is due to Chong, Slaman and Yang (2014), with a non-standard model; Monin and Patey (2021) separated them in ω-models.
@@ -120,13 +128,6 @@ A precondition is a finite sequence $\beta$ increasing in the order of $\nat$ an
 :::
 ::::
 
-::::exercise{#ex-ads-not-dnr-low difficulty=1 objective="Check which of the principles of the course hold in the ω-model of a single low random sequence."}
-Let $\mathcal M$ be the ω-model of the proof of :ref{#cor-wwkl-not-wkl}, built from a low random sequence. Which of $\mathsf{WWKL}_0$, $\mathsf{DNR}$, $\mathsf{WKL}_0$, $\mathsf{COH}$ does it satisfy?
-
-:::solution
-It satisfies $\mathsf{WWKL}_0$ by :ref{#cor-wwkl-not-wkl}, hence $\mathsf{DNR}$ by :ref{#thm-wwkl-dnr}. It does not satisfy $\mathsf{WKL}_0$, by the same corollary. It does not satisfy $\mathsf{COH}$: all its members are low, and by :ref{#prop-coh-no-low} some computable sequence has no low cohesive set.
-:::
-::::
 
 ::::exercise{#ex-zoo-read difficulty=1 objective="Read implications and non-implications off the map of the course."}
 Using the map and the table, decide, for each pair, whether the first principle implies the second over $\mathsf{RCA}_0$: ($\mathsf{CAC}$, $\mathsf{COH}$), ($\mathsf{EM}$, $\mathsf{ADS}$), ($\mathsf{SRT}^2_2$, $\mathsf{SADS}$), ($\mathsf{WKL}_0$, $\mathsf{CAC}$), ($\mathsf{SCAC}$, $\mathsf{DNR}$).

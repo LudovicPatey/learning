@@ -124,6 +124,25 @@
     - source: hirschfeldt-2014
       role: consulted
       note: "Chapter 6."
+- id: enumeration
+  title: Enumeration degrees
+  kind: secondary
+  area: computability
+  description: >
+    Relative computability with positive information only: enumeration reducibility,
+    total and nontotal degrees, the enumeration jump and the skip, cototal and
+    continuous degrees, and the first-order definability of the jump and of totality.
+  courses: [enumeration-reducibility, enumeration-jump, enumeration-definability]
+  credits:
+    - source: soskova-2020
+      role: main
+      note: "The organization of the third course and the state of the art."
+    - source: cai-ganchev-lempp-miller-soskova-2016
+      role: consulted
+      note: "Definability of totality."
+    - source: andrews-et-al-2019
+      role: consulted
+      note: "The skip and the cototal degrees."
 - id: arithmetic
   title: Models of arithmetic
   kind: secondary

@@ -68,6 +68,31 @@ At stage $1$, $\mathcal P_0$ receives its first follower and the column $0$ of $
 
 The requirement $\mathcal P_0$ itself is met in this run, since the followers enter $C$ while $\Psi^H$ is the constant function $0$. What fails is the finite injury lemma: the strategy is never left undisturbed, and each initialization destroys the computation on which it acted, since that computation queried $\langle 0, g \rangle$ while this number was out of $H$. A verification by induction along the priority order, as in the Friedberg–Muchnik theorem, is impossible.
 
+:::quiz[the obstruction to finite injury]
+In the proof of :ref{#prop-hi-finite-injury}, why does each initialization of $\mathcal P_0$ destroy the computation on which it acted?
+
+- [x] The computation queried $\langle 0, g \rangle$ while this number was out of $H$, and $\mathcal G_0$ then enumerates it, below the restraint; the oracle changes on the use.
+- [ ] Because $\Psi^X$ is total.
+
+  Totality makes $\mathcal P_0$ act; the destruction comes from the change of the oracle below the use.
+- [ ] Because the follower is not fresh.
+
+  Followers are fresh; the problem is the coding of $\mathrm{Inf}$, which must fill the column.
+
+---
+
+Does the proposition show that the requirement $\mathcal P_0$ fails?
+
+- [x] No: in this run $\mathcal P_0$ is met, but its strategy is initialized infinitely often, so the finite injury lemma, on which the verification rests, fails.
+- [ ] Yes: $C$ is computable in $H$.
+
+  The run does not show this; the point is the failure of the method of verification.
+- [ ] Yes: $V$ is infinite.
+
+  $V$ is a c.e. set chosen to defeat the method; its being infinite is the cause of the injuries, not a failure of $\mathcal P_0$.
+:::
+
+
 ::::exercise{#ex-hi-v-every-stage difficulty=2 objective="See on the finite injury version why the timing of the coding strategy is what protects the diagonalization strategy."}
 In the finite injury version described before :ref{#prop-hi-finite-injury}, let $V = \nat$, with the enumeration $V_s = \{ 0, \dots, s - 1 \}$, and let $\Psi$ be any Turing functional. Show that the strategy for $\mathcal P_0$ is never initialized. Compare with the run of the proof of :ref{#prop-hi-finite-injury}.
 

@@ -45,6 +45,31 @@ So $\mathcal A^p \setminus \mathcal A^p_{\beta + 1} \subseteq \mathcal Z$, and $
 
 The proof is a **measure-theoretic stabilization**: a nondecreasing family of measures indexed by the countable ordinals increases strictly at only countably many indices, because pairwise disjoint open intervals of reals are countably many; the countable ordinals are not, so some index adds no measure. By :ref{#lem-stages-borel} and :ref{#cor-delta11-stage}, every $\Delta^1_1$ class is Borel; this is the effective half of Suslin's theorem that the classes both analytic and co-analytic are Borel.
 
+:::quiz[Lusin's theorem]
+In the proof of :ref{#thm-lusin}, why is the set $I_\sigma$ of stages at which $\lambda(\mathcal N^\sigma_\alpha)$ increases countable?
+
+- [x] The intervals of increase are pairwise disjoint open intervals of reals, and each contains a rational, so there are at most countably many.
+- [ ] Because there are countably many countable ordinals.
+
+  There are uncountably many countable ordinals; this is why some ordinal lies outside all the $I_\sigma$.
+- [ ] Because the measures are bounded by $1$.
+
+  Boundedness alone allows uncountably many small increases; disjointness and the rationals give countability.
+
+---
+
+Why does the descent in the tree $T^Y$ stop at a node of rank exactly $\beta$, rather than skip over $\beta$?
+
+- [x] The rank of a node is the supremum of the ranks of its successors plus one, so a node of rank greater than $\beta$ has a successor of rank at least $\beta$; the descent continues only while the rank is greater than $\beta$.
+- [ ] Because the ranks along a path decrease by one at each step.
+
+  Ranks can drop by more than one at a step; the supremum property is what prevents skipping $\beta$.
+- [ ] Because $T^Y$ is finite.
+
+  $T^Y$ is an infinite well-founded tree; the descent terminates because ranks strictly decrease.
+:::
+
+
 ## The measure of Δ¹₁ classes
 
 The measure of a $\Sigma^0_1$ class is a left-c.e. real, uniformly in an index (:ref{#prop-measure-effective}). The higher counterpart says that the measure of a $\Delta^1_1$ class is a hyperarithmetic real, uniformly in a pair of $\Pi^1_1$ definitions of the class and of its complement. We admit it, together with an approximation of $\Delta^1_1$ classes by open classes that extends the outer regularity of the measure. Both are proved by effective transfinite recursion along the Borel hierarchy (Sacks, Chapter IV).

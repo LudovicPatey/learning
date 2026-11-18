@@ -59,3 +59,4 @@ LOOP programs, Barendregt and Hindley–Seldin for the λ-calculus, Kleene 1936 
 - **2026-11-18.** Course created from six lessons of `models-of-computation` (labels
   unchanged) and the new lesson `all-models`. `register-machines` and `lambda-calculus`
   now require `models-of-computation/equivalence-of-models`.
+- **2026-11-18 (polishing pass).** `all-models` had no featured exercise: `ex-urm-arithmetization` moved into the text. Exercises moved between the text and the further exercises keep their text, hence their hash and endorsements.

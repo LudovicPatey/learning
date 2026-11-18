@@ -1,0 +1,35 @@
+title: Definability in the enumeration degrees
+area: computability
+level: Advanced
+order: 15
+prerequisites: [enumeration-jump]
+summary: Kalimullin pairs and semi-computable sets; the first-order definability of the enumeration jump and of the total degrees; automorphisms and the theory of the enumeration degrees; the continuous degrees and their characterization as the almost total degrees.
+description: >
+  Unlike the Turing jump, the enumeration jump and the total degrees have short
+  first-order definitions in the enumeration degrees, through Kalimullin pairs:
+  pairs of degrees that form a minimal pair robustly, relative to every degree
+  above them. The course proves the combinatorial side of Kalimullin's
+  characterization, gives the semi-computable sets of Jockusch as the main example,
+  states the definability theorems of Kalimullin, Ganchev and Soskova, and Cai,
+  Ganchev, Lempp, Miller and Soskova, derives their consequences for the
+  automorphisms of the enumeration degrees, and ends with Miller's continuous
+  degrees, the degrees of points of computable metric spaces.
+objectives:
+  - Prove that Kalimullin pairs are robust minimal pairs, and that semi-computable sets give Kalimullin pairs
+  - State the definitions of the jump and of the total degrees by Kalimullin pairs, and write them as first-order formulas
+  - Derive from the definability of totality that automorphisms of the enumeration degrees are determined by the Turing degrees
+  - Embed the points of the Hilbert cube into the enumeration degrees and identify the total and continuous degrees among them
+lessons: [kalimullin-pairs, definability-and-automorphisms, continuous-degrees]
+credits:
+  - source: soskova-2020
+    role: main
+    note: "Sections 3.1, 3.2 and 4: Kalimullin pairs, definability, continuous degrees and automorphisms."
+  - source: kalimullin-2003
+    role: main
+    note: "Kalimullin pairs and the definability of the jump."
+  - source: cai-ganchev-lempp-miller-soskova-2016
+    role: consulted
+    note: "Definability of the total degrees."
+  - source: miller-2004
+    role: consulted
+    note: "The continuous degrees."

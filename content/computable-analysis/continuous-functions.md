@@ -1,7 +1,7 @@
 ---
 title: Continuous functions on the unit interval
 summary: Names of continuous functions on the unit interval by rational rectangles; effective compactness of the unit interval gives a computable modulus of uniform continuity and a computable maximum value.
-duration: 30
+duration: 35
 prerequisites: [real-functions, pi01-classes/trees-and-classes]
 ---
 
@@ -94,6 +94,16 @@ Consequently, $f \in C[0, 1]$ is computable if and only if $q \mapsto f(q)$ is c
 
 In $\mathsf{RCA}_0$, a code of a continuous function gives neither a modulus of uniform continuity nor the existence of the maximum value: each of these statements is equivalent to $\mathsf{WKL}_0$ (Simpson, Theorem IV.2.3). The difference is the one noted after :ref{#lem-effective-heine-borel}: the algorithms of this lesson are proved correct with the Heine–Borel theorem.
 
+::::exercise{#ex-cover-semidecidable difficulty=1 objective="See that whether a computable sequence of rational intervals covers $[0, 1]$ is semi-decidable but not decidable."}
+A computable sequence $(J_n)$ of open intervals with rational endpoints is given by an index of a program listing it. Show that there is an algorithm which, given such an index, halts if and only if the sequence covers $[0, 1]$, but that no algorithm decides, given such an index, whether the sequence covers $[0, 1]$.
+
+:::solution
+*Semi-decision.* By the Heine–Borel theorem, the sequence covers $[0, 1]$ if and only if some initial segment $J_0, \dots, J_{n-1}$ does. For $n = 0, 1, 2, \dots$, compute $J_0, \dots, J_{n-1}$ and test whether they cover $[0, 1]$ with (1) of :ref{#lem-effective-heine-borel}; halt when the test succeeds. If the sequence does not cover $[0, 1]$, no initial segment does, and the search runs forever.
+
+*No decision.* For every $e$, let $J^e_0 = (-1, 1/2)$, $J^e_1 = (1/2, 2)$, and for $n \geq 0$, let $J^e_{n+2} = (1/4, 3/4)$ if $\Phi_e(e)$ converges in at most $n$ steps, and $J^e_{n+2} = (-1, 1/2)$ otherwise. The sequence $(J^e_n)$ is computable, and an index of it is computed from $e$ by the s-m-n theorem. If $\Phi_e(e)$ converges, some $J^e_n$ is $(1/4, 3/4)$, which contains $1/2$, and with $J^e_0$ and $J^e_1$ the sequence covers $[0, 1]$. Otherwise every $J^e_n$ is $(-1, 1/2)$ or $(1/2, 2)$, and the point $1/2$ is not covered. So $e \in \emptyset'$ if and only if $(J^e_n)$ covers $[0, 1]$, and an algorithm deciding covering would decide the halting problem.
+:::
+::::
+
 ## Notes and references
 
 Weihrauch, Section 6.1, represents $C[0, 1]$ by rectangles ("box properties", Definition 6.1.3) and compares this representation with others. The computable Heine–Borel theorem is his Theorem 5.2.7; the maximum and the modulus of continuity are Corollary 6.2.5 and Theorem 6.2.7. Pour-El and Richards (Chapter 0) define computable functions on compact intervals by sequential computability and a computable modulus. In reverse mathematics, the equivalences of $\mathsf{WKL}_0$ with uniform continuity, boundedness and the existence of suprema are Simpson, Theorem IV.2.3, and Dzhafarov–Mummert, Theorems 10.5.11–10.5.12.
@@ -104,15 +114,6 @@ Weihrauch, Section 6.1, represents $C[0, 1]$ by rectangles ("box properties", De
 - D. D. Dzhafarov and C. Mummert, *Reverse Mathematics: Problems, Reductions, and Proofs*, Springer, 2022, Section 10.5.
 
 :::::exercises
-::::exercise{#ex-cover-semidecidable difficulty=1 objective="See that whether a computable sequence of rational intervals covers $[0, 1]$ is semi-decidable but not decidable."}
-A computable sequence $(J_n)$ of open intervals with rational endpoints is given by an index of a program listing it. Show that there is an algorithm which, given such an index, halts if and only if the sequence covers $[0, 1]$, but that no algorithm decides, given such an index, whether the sequence covers $[0, 1]$.
-
-:::solution
-*Semi-decision.* By the Heine–Borel theorem, the sequence covers $[0, 1]$ if and only if some initial segment $J_0, \dots, J_{n-1}$ does. For $n = 0, 1, 2, \dots$, compute $J_0, \dots, J_{n-1}$ and test whether they cover $[0, 1]$ with (1) of :ref{#lem-effective-heine-borel}; halt when the test succeeds. If the sequence does not cover $[0, 1]$, no initial segment does, and the search runs forever.
-
-*No decision.* For every $e$, let $J^e_0 = (-1, 1/2)$, $J^e_1 = (1/2, 2)$, and for $n \geq 0$, let $J^e_{n+2} = (1/4, 3/4)$ if $\Phi_e(e)$ converges in at most $n$ steps, and $J^e_{n+2} = (-1, 1/2)$ otherwise. The sequence $(J^e_n)$ is computable, and an index of it is computed from $e$ by the s-m-n theorem. If $\Phi_e(e)$ converges, some $J^e_n$ is $(1/4, 3/4)$, which contains $1/2$, and with $J^e_0$ and $J^e_1$ the sequence covers $[0, 1]$. Otherwise every $J^e_n$ is $(-1, 1/2)$ or $(1/2, 2)$, and the point $1/2$ is not covered. So $e \in \emptyset'$ if and only if $(J^e_n)$ covers $[0, 1]$, and an algorithm deciding covering would decide the halting problem.
-:::
-::::
 
 ::::exercise{#ex-max-subinterval difficulty=1 objective="Adapt the computation of the maximum value to a subinterval with rational endpoints."}
 Show that, given a $\delta_\square$-name of $f \in C[0, 1]$ and rationals $0 \leq a < b \leq 1$, one computes a Cauchy name of $\max_{x \in [a, b]} f(x)$, uniformly in the name, $a$ and $b$.

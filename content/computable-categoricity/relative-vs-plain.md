@@ -25,6 +25,31 @@ Suppose that $\Phi$ is an existential Scott family over $\bar p$, and let $\math
 Conversely, let $Y$ witness categoricity on a cone, let $\mathcal A_0$ be a copy, and $Z = Y \oplus D(\mathcal A_0)$. For any copy $\mathcal B$, the set $X = Z \oplus D(\mathcal B)$ is above $Y$ and computes $\mathcal A_0$ and $\mathcal B$, so some isomorphism between them is computable in $Z \oplus D(\mathcal B)$. By the relativized form of :ref{#thm-rcc-scott}, $\mathcal A_0$, which is computable in $Z$, has an existential Scott family over some tuple, c.e. in $Z$.
 :::
 
+:::quiz[categoricity on a cone]
+In the first half of the proof of :ref{#thm-cc-cone}, why does $Y$ include the diagram of a copy $\mathcal A_0$?
+
+- [x] The relativized form of :ref{#prop-scott-rcc} applies to a structure computable in the oracle; the structure may have no computable copy, and $Y$ must compute one.
+- [ ] To make the Scott family existential.
+
+  The family is existential by hypothesis; $Y$ only needs to compute a copy and enumerate the family.
+- [ ] Because every copy computes $Y$.
+
+  Copies need not compute $Y$; the cone is above $Y$, and $Y$ is chosen to compute $\mathcal A_0$.
+
+---
+
+In the second half, why is the oracle $X = Z \oplus D(\mathcal B)$ used?
+
+- [x] It lies in the cone above $Y$ and computes both $\mathcal A_0$ and $\mathcal B$, so categoricity relative to $X$ gives an isomorphism computable in $Z \oplus D(\mathcal B)$, the hypothesis of the relativized :ref{#thm-rcc-scott}.
+- [ ] Because $\mathcal B$ is computable.
+
+  $\mathcal B$ is an arbitrary copy; the oracle is chosen to compute it.
+- [ ] To make $Z$ above $Y$.
+
+  $Z = Y \oplus D(\mathcal A_0)$ is above $Y$ by definition.
+:::
+
+
 So, on a cone, computable categoricity is a property of the isomorphism type alone, and it is decided by definability: are the orbits defined by existential formulas over finitely many parameters? The condition is also equivalent to the existence of a Scott sentence of a certain low complexity (Montalbán, Theorem VIII.8; see the course on Scott analysis).
 
 The theorem explains the classical results of the previous lesson. A proof that a natural structure is, or is not, computably categorical usually relativizes to every oracle, and then it proves the statement on a cone. For such structures, plain categoricity, relative categoricity and categoricity on a cone coincide, and the structural condition decides all three. A structure for which they differ must be built against the computable functions themselves, as in Goncharov's example below.
@@ -57,6 +82,14 @@ There is a computable structure that is computably categorical but not relativel
 
 We admit the theorem; Goncharov's proof codes a family of c.e. sets with special enumerations into a graph, by a finite injury construction (Montalbán, Theorem VIII.14). The structure is built by diagonalization against the computable functions; its categoricity is a property of the computable copies only, not of the isomorphism type, and its proof does not relativize. Its existence also shows that relative categoricity cannot be replaced by plain categoricity in :ref{#thm-rcc-scott}. The next lesson shows that this cannot happen for structures that are effective enough.
 
+::::exercise{#ex-cone-omega difficulty=1 objective="Apply the characterization on a cone to a structure that is not computably categorical."}
+Show that $\omega = (\nat; \leq)$ is not computably categorical on a cone, while $(\mathbb Q; <)$ is.
+
+:::solution
+By :ref{#ex-omega-no-scott}, $\omega$ has no existential Scott family over any tuple, so by :ref{#thm-cc-cone} it is not computably categorical on a cone. The order types of tuples form a Scott family of quantifier-free formulas for $(\mathbb Q; <)$ (:ref{#ex-scott-families}), so it is computably categorical on a cone; it is in fact relatively computably categorical, so $Y = \emptyset$ works.
+:::
+::::
+
 ## Notes and references
 
 :ref{#thm-cc-cone} is Montalbán, Theorem VIII.8, where a third equivalent condition, on Scott sentences, is added. :ref{#thm-goncharov-cc-not-rcc} is Goncharov (1977). The Π¹₁-completeness of computable categoricity is due to Downey, Kach, Lempp, Lewis-Pye, Montalbán and Turetsky (2015).
@@ -65,13 +98,6 @@ We admit the theorem; Goncharov's proof codes a family of c.e. sets with special
 - A. Montalbán, *Computable Structure Theory: Within the Arithmetic*, Sections VIII.3 and VIII.5.
 
 :::::exercises
-::::exercise{#ex-cone-omega difficulty=1 objective="Apply the characterization on a cone to a structure that is not computably categorical."}
-Show that $\omega = (\nat; \leq)$ is not computably categorical on a cone, while $(\mathbb Q; <)$ is.
-
-:::solution
-By :ref{#ex-omega-no-scott}, $\omega$ has no existential Scott family over any tuple, so by :ref{#thm-cc-cone} it is not computably categorical on a cone. The order types of tuples form a Scott family of quantifier-free formulas for $(\mathbb Q; <)$ (:ref{#ex-scott-families}), so it is computably categorical on a cone; it is in fact relatively computably categorical, so $Y = \emptyset$ works.
-:::
-::::
 
 ::::exercise{#ex-cone-linear-orders difficulty=1 objective="Read off categoricity on a cone from the proofs of the previous lesson." lessons="classical-examples"}
 Show that a countable linear order, computable or not, is computably categorical on a cone if and only if it has finitely many adjacent pairs.

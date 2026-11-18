@@ -88,6 +88,14 @@ Let $R$ be computable in $\mathcal A$ and invariant under the automorphisms fixi
 
 So a structure with a computable relation that is invariant over some parameters, but not relatively intrinsically computable, is not relatively computably categorical. The next lesson uses this to settle the classical examples.
 
+::::exercise{#ex-rcc-delta2-omega difficulty=2 objective="Use the theorem on ω and on an expansion of ω to see that the successor relation is what is missing." lessons="computable-structures/back-and-forth"}
+Show that $\omega = (\nat; \leq)$ is not relatively computably categorical, but that the expansion $(\nat; \leq, S)$ by the successor relation is. Deduce that the successor relation is not relatively intrinsically computable on $\omega$.
+
+:::solution
+By :ref{#ex-omega-no-scott}, $\omega$ has no existential Scott family over any tuple, so by :ref{#thm-rcc-scott} it is not relatively computably categorical. In $(\nat; \leq, S)$, the formulas $\varphi_n(x)$ saying "$x$ is reached by $n$ steps of $S$ from an element with no $S$-predecessor" are not existential, but with the parameter $p = 0$ the formulas of :ref{#ex-scott-families} for $(\nat; S)$ are, and they form a c.e. existential Scott family over $0$: the expansion is rigid, and each element satisfies exactly one formula. So $(\nat; \leq, S)$ is relatively computably categorical. If $S$ were relatively intrinsically computable on $\omega$, a copy $\mathcal B$ of $\omega$ would compute $S^{\mathcal B}$, hence the diagram of a copy of $(\nat; \leq, S)$, hence an isomorphism with the standard copy, uniformly from the image of $0$; so $\omega$ would be relatively computably categorical, which it is not.
+:::
+::::
+
 ## Notes and references
 
 :ref{#thm-rcc-scott} is due to Ash, Knight, Manasse and Slaman (1989, Theorem 4) and, independently, to Chisholm (1990); Goncharov (1975) had isolated the same syntactic condition for computable categoricity of structures with a decidable two-quantifier theory (see the lesson on relative and plain categoricity). Montalbán (Theorem VIII.4) proves the hard direction with a 2-generic enumeration, first forcing the functional to be an isomorphism; the proof given here replaces genericity by the diagonalization of :ref{#thm-akms-chisholm-1}, which only needs that no extension of $\bar p$ makes the functional err, totality being used only for the existence of formulas. Ash and Knight state the result as Theorem 10.14, for all levels of the hyperarithmetic hierarchy at once. The example of Cholak, Goncharov, Khoussainov and Shore is from their 1999 paper.
@@ -99,13 +107,6 @@ So a structure with a computable relation that is invariant over some parameters
 - C. J. Ash and J. F. Knight, *Computable Structures and the Hyperarithmetical Hierarchy*, Chapter 10.
 
 :::::exercises
-::::exercise{#ex-rcc-delta2-omega difficulty=2 objective="Use the theorem on ω and on an expansion of ω to see that the successor relation is what is missing." lessons="computable-structures/back-and-forth"}
-Show that $\omega = (\nat; \leq)$ is not relatively computably categorical, but that the expansion $(\nat; \leq, S)$ by the successor relation is. Deduce that the successor relation is not relatively intrinsically computable on $\omega$.
-
-:::solution
-By :ref{#ex-omega-no-scott}, $\omega$ has no existential Scott family over any tuple, so by :ref{#thm-rcc-scott} it is not relatively computably categorical. In $(\nat; \leq, S)$, the formulas $\varphi_n(x)$ saying "$x$ is reached by $n$ steps of $S$ from an element with no $S$-predecessor" are not existential, but with the parameter $p = 0$ the formulas of :ref{#ex-scott-families} for $(\nat; S)$ are, and they form a c.e. existential Scott family over $0$: the expansion is rigid, and each element satisfies exactly one formula. So $(\nat; \leq, S)$ is relatively computably categorical. If $S$ were relatively intrinsically computable on $\omega$, a copy $\mathcal B$ of $\omega$ would compute $S^{\mathcal B}$, hence the diagram of a copy of $(\nat; \leq, S)$, hence an isomorphism with the standard copy, uniformly from the image of $0$; so $\omega$ would be relatively computably categorical, which it is not.
-:::
-::::
 
 ::::exercise{#ex-rcc-equivalence-structure difficulty=2 objective="Apply the characterization to equivalence structures, where the parameters name the finitely many exceptional classes."}
 An equivalence structure is a set with an equivalence relation $E$. Let $\mathcal E$ be a computable equivalence structure with infinitely many classes of size $2$ and no other classes. Show that $\mathcal E$ is relatively computably categorical. Then let $\mathcal E'$ have infinitely many classes of each finite size $n \geq 1$ and no infinite class; show that $\mathcal E'$ has no existential Scott family over any tuple.

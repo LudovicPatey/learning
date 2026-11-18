@@ -114,3 +114,4 @@ details of the Russian papers checked against the bibliography of Ash–Knight.
 - 2026-11-18: course written (six lessons). The first draft had four lessons; the lessons
   on relative categoricity and on relative versus plain categoricity exceeded 45 minutes
   and were each split into two.
+- **2026-11-18 (polishing pass).** Polishing: featured exercises in the text of `relative-categoricity` (`ex-rcc-delta2-omega`), `relative-vs-plain` (`ex-cone-omega`) and `nurtazin-theorem` (`ex-nurtazin-dlo`); quizzes added to `relative-vs-plain` (categoricity on a cone) and `dimension-and-degrees` (the degree of categoricity of ω and the copies ω_X). Exercises moved between the text and the further exercises keep their text, hence their hash and endorsements.

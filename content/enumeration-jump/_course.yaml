@@ -1,0 +1,26 @@
+title: The enumeration jump
+area: computability
+level: Advanced
+order: 14
+prerequisites: [enumeration-reducibility, arithmetic-hierarchy, cohen-genericity]
+summary: Cooper's enumeration jump and its relation to the Turing jump; the degrees below 0′ₑ are those of the Σ⁰₂ sets; the skip operator and the cototal degrees, with their characterizations in graph theory and symbolic dynamics.
+description: >
+  The jump of a set A in the enumeration degrees is built from the uniform join K_A
+  of the sets enumeration reducible to A and its complement. The course proves the
+  basic properties of this jump, shows that it extends the Turing jump through the
+  total degrees and that its range is the set of total degrees above 0′ₑ, describes
+  the local structure below 0′ₑ through Σ⁰₂ approximations, and introduces the skip,
+  the complement of K_A, and the cototal degrees on which skip and jump agree.
+objectives:
+  - Prove the properties of the enumeration jump and relate it to the Turing jump
+  - Characterize the degrees below 0′ₑ as the degrees of Σ⁰₂ sets and build Σ⁰₂ approximations
+  - Define the skip and prove that A ≤ₑ B if and only if the skip of A is 1-reducible to that of B
+  - Recognize cototal sets in graphs and in minimal subshifts
+lessons: [enumeration-jump, skip-and-cototality]
+credits:
+  - source: soskova-2020
+    role: main
+    note: "Sections 3.1, 3.3 and 4.2: the jump, the skip, cototality and the local structure."
+  - source: andrews-et-al-2019
+    role: main
+    note: "The skip operator and the cototal degrees."

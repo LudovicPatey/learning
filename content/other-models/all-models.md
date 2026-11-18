@@ -1,7 +1,7 @@
 ---
 title: Equivalence of all the models
 summary: Five models of computation, Turing machines, register machines, WHILE programs, partial recursive functions and λ-terms, compute the same partial functions; the simulation of register machines by Turing machines closes the cycle of implications; a direct arithmetization of register machines.
-duration: 10
+duration: 15
 prerequisites: [while-programs, lambda-definability]
 ---
 
@@ -63,15 +63,6 @@ Why does the proof go around a cycle of implications rather than proving each eq
   They can, by coding the tape in registers; it is simply not needed for the theorem.
 :::
 
-## Notes and references
-
-The equivalences were established in 1936–1937 by Kleene (general recursiveness and λ-definability) and Turing (λ-definability and his machines); register machines are due to Shepherdson and Sturgis (1963), and the LOOP and WHILE languages to Meyer and Ritchie (1967). The cycle of simulations follows Cutland's textbook.
-
-- N. Cutland, *Computability: An Introduction to Recursive Function Theory*, Cambridge University Press, 1980.
-- J. C. Shepherdson and H. E. Sturgis, *Computability of recursive functions*, Journal of the ACM 10 (1963), 217–255.
-- A. M. Turing, *Computability and λ-definability*, Journal of Symbolic Logic 2 (1937), 153–163.
-
-:::::exercises
 ::::exercise{#ex-urm-arithmetization difficulty=2  objective="Arithmetize register machines directly, to show that URM-computable functions are partial recursive without Turing machines."}
 Let $P = I_1, \dots, I_s$ be a URM program computing $f : \nat^k \rightharpoonup \nat$, and $\rho = \max(\rho(P), k)$. Code the configuration $(i, r)$ by $\langle i, [r(1), \dots, r(\rho)] \rangle$. Show that the step function on codes is primitive recursive, and deduce that $f$ is partial recursive.
 
@@ -89,5 +80,12 @@ $$
 since the program halts exactly when the instruction index exceeds $s$, and the output is the content of $R_1$. This is the route followed by Monin and Patey; it gives (2) ⇒ (4) of :ref{#thm-equivalence-models} directly.
 :::
 ::::
-:::::
-:::::
+
+## Notes and references
+
+The equivalences were established in 1936–1937 by Kleene (general recursiveness and λ-definability) and Turing (λ-definability and his machines); register machines are due to Shepherdson and Sturgis (1963), and the LOOP and WHILE languages to Meyer and Ritchie (1967). The cycle of simulations follows Cutland's textbook.
+
+- N. Cutland, *Computability: An Introduction to Recursive Function Theory*, Cambridge University Press, 1980.
+- J. C. Shepherdson and H. E. Sturgis, *Computability of recursive functions*, Journal of the ACM 10 (1963), 217–255.
+- A. M. Turing, *Computability and λ-definability*, Journal of Symbolic Logic 2 (1937), 153–163.
+

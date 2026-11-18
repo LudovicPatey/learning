@@ -315,3 +315,4 @@ Lambalgen) and 9.3.13 (≤_K), which need higher complexity.
     replaces the repeated argument that O collapses ω₁ᶜᵏ).
   - Attributions corrected after Greenberg–Monin 2017 (Stern; Kechris); the lowness
     question for Π¹₁-randomness reported as solved.
+- **2026-11-18 (polishing pass).** `pi11-measure` had no quiz: quiz on the proof of Lusin's theorem added. Exercises moved between the text and the further exercises keep their text, hence their hash and endorsements.
