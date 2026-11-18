@@ -82,7 +82,7 @@ Together with :ref{#cor-wkl-not-rt22}, Seetapun's theorem shows that $\mathsf{RT
 - **Monin and Patey (2019)** extended strong cone avoidance up the arithmetic hierarchy: for every set $A$ and every set $C$ that is not $\Delta^0_n$, some infinite subset of $A$ or of $\overline A$ is a set $H$ such that $C$ is not $\Delta^0_n(H)$. In particular every set has an infinite subset, of itself or of its complement, that is not high.
 - **Wang (2014)** and **Cholak and Patey (2020)** studied weakenings of Ramsey's theorem that allow a homogeneous set to use $\ell$ colors instead of one, the **thin set theorems**. For colorings of $n$-tuples with arbitrarily many colors, strong cone avoidance holds exactly when $\ell$ is at least the $n$-th Catalan number.
 
-$\mathsf{RT}^2_2$ is the first and most studied of a large family of combinatorial principles, the **reverse mathematics zoo**, many of which lie strictly below $\mathsf{ACA}_0$ without being equivalent to any of the Big Five. The first-order strength of $\mathsf{RT}^2_2$, that is, which arithmetic statements it proves, is studied in the course on induction and conservation.
+$\mathsf{RT}^2_2$ is the first and most studied of a large family of combinatorial principles, the **reverse mathematics zoo**, many of which lie strictly below $\mathsf{ACA}_0$ without being equivalent to any of the Big Five; the course on combinatorial principles below Ramsey's theorem for pairs studies the main ones (:ref{to="combinatorial-principles/orders"}). The first-order strength of $\mathsf{RT}^2_2$, that is, which arithmetic statements it proves, is studied in the course on induction and conservation.
 
 ## Cohesiveness versus stability
 

@@ -1,0 +1,22 @@
+title: Arithmetical transfinite recursion
+area: reverse-math
+level: Advanced
+order: 6
+prerequisites: [big-five, hyperarithmetic]
+summary: Countable well-orderings and comparison maps, pseudohierarchies, Σ¹₁ separation, unique paths, the perfect set theorem, comparability of well-orderings and open determinacy, each equivalent to ATR₀.
+description: >
+  The system ATR₀ and its main equivalents, with complete proofs: the theory of
+  countable well-orderings in ACA₀ and the comparison of well-orderings in ATR₀;
+  the fact that well-foundedness is not Σ¹₁, and the method of pseudohierarchies
+  that it gives; the perfect set theorem for closed sets; Σ¹₁ separation and the
+  existence of the set of trees with a path among trees with at most one path;
+  Friedman's theorem that the comparability of well-orderings implies ATR₀; and
+  Steel's theorem that open and clopen determinacy are equivalent to ATR₀.
+objectives:
+  - Work with countable well-orderings, Kleene–Brouwer orderings and comparison maps in ACA₀ and ATR₀
+  - Use arithmetic transfinite induction and the uniqueness of hierarchies
+  - Prove that well-foundedness is not Σ¹₁ in ACA₀ and apply the method of pseudohierarchies
+  - Prove the perfect set theorem for closed sets in ATR₀ and its reversal through unique paths
+  - Prove the equivalence of ATR₀ with Σ¹₁ separation and with the comparability of well-orderings
+  - Prove the equivalence of ATR₀ with open and clopen determinacy
+lessons: [well-orderings, pseudohierarchies, sigma11-separation, unique-paths, comparability, open-determinacy]

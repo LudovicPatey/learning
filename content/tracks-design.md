@@ -143,9 +143,10 @@ incompressibility, effective null sets, and betting strategies — and their equ
 **Objective.** The strength of theorems of ordinary mathematics:
 - the axiom systems of second-order arithmetic and the Big Five;
 - the computability-theoretic analysis of combinatorial principles below ACA₀, with
-  Ramsey's theorem as the case study;
+  Ramsey's theorem as the case study, and the other principles of the zoo below it;
 - first-order strength (induction and collection, conservation);
-- the problem reducibilities that refine provability over RCA₀.
+- the problem reducibilities that refine provability over RCA₀;
+- the theory of countable well-orderings and the equivalents of ATR₀.
 
 **Techniques.**
 - Coding in RCA₀;
@@ -153,7 +154,10 @@ incompressibility, effective null sets, and betting strategies — and their equ
 - reversals;
 - Mathias forcing and cone avoidance;
 - non-standard models and conservation;
-- uniform (Weihrauch) reductions.
+- uniform (Weihrauch) reductions;
+- preservation of weakness properties (combinatorial principles);
+- arithmetic transfinite induction, ranking trees into well-orderings, and
+  pseudohierarchies (transfinite recursion).
 
 **Comparison.**
 - **Simpson** organizes the subject around the Big Five.
@@ -163,12 +167,36 @@ incompressibility, effective null sets, and betting strategies — and their equ
   induction and bounding as part of the core.
 - The track follows the last two: from 2026-11-12 it includes induction and conservation,
   and reducibilities, previously specialized.
+- **Enlarged on 2026-11-18** (from five to seven courses), after a comparison with the
+  three books. Two gaps remained:
+  - *Below RT²₂*, the track had Ramsey's theorem only, while Hirschfeldt (Chapter 9) and
+    Dzhafarov–Mummert (Chapter 9) give a chapter to the other principles, which are the
+    daily material of the research literature. New core course
+    `combinatorial-principles`: CAC and ADS with a computable order of type ω + ω* without
+    computable solutions, ADS → COH and the stable/cohesive decompositions, the
+    Erdős–Moser theorem (RT²₂ = EM + ADS, EM → BΣ⁰₂), DNR and WWKL₀ with their ω-models,
+    and ADS ⊬ DNR by preservation, with a map of the zoo. The hard separations stay in the
+    secondary track "Lowness and avoidance", to which the course points.
+  - *Above ACA₀*, ATR₀ and Π¹₁-CA₀ had a single survey lesson with all equivalents
+    admitted, while Simpson gives them Chapters V–VI and Dzhafarov–Mummert Sections 12.1
+    and 12.3. New core course `transfinite-recursion`: well-orderings and comparison maps,
+    pseudohierarchies and the perfect set theorem, Σ¹₁ separation, unique paths,
+    comparability (Friedman), open and clopen determinacy (Steel), all with proofs. It
+    builds on the higher computability track (hyperarithmetic sets) for motivation only.
+  The order is: second-order arithmetic, Big Five, Ramsey's theorem, induction and
+  conservation, reducibilities, combinatorial principles, transfinite recursion.
 
 **Excluded.**
 - The reverse mathematics of analysis, algebra and topology beyond the examples in the
   Big Five course (Simpson, Chapters III–VI). These are applications of the same
-  techniques; examples are given in the Big Five course.
-- β-models and the systems above Π¹₁-CA₀ (Simpson, Chapter VII).
+  techniques; examples are given in the Big Five course. A specialized course on
+  countable algebra (vector spaces, ideals, orderable groups, divisible groups) is a
+  possible addition.
+- Π¹₁-CA₀ beyond the survey of the Big Five course and the notes of the transfinite
+  recursion course (perfect kernels, Σ⁰₁ ∧ Π⁰₁ determinacy), β-models and the systems above
+  Π¹₁-CA₀ (Simpson, Chapter VII).
+- The atomic model theorem and the reverse mathematics of model theory (Hirschfeldt,
+  Section 9.3): planned for the computable structure theory track.
 
 ## Higher computability
 

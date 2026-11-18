@@ -25,7 +25,7 @@
   description: >
     The axioms needed to prove theorems of ordinary mathematics, measured over a
     weak base theory.
-  courses: [second-order-arithmetic, big-five, ramsey-theorem, induction-conservation, reducibilities]
+  courses: [second-order-arithmetic, big-five, ramsey-theorem, induction-conservation, reducibilities, combinatorial-principles, transfinite-recursion]
 - id: higher
   title: Higher computability
   area: higher

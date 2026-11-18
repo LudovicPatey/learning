@@ -116,7 +116,7 @@ In the direction ($\Leftarrow$), where is arithmetic comprehension used?
 
 ## A survey of equivalents
 
-The following equivalences are admitted here, with the references of Simpson's monograph. Most of them were announced by Friedman (1975, 1976); the others are due to Steel, to Simpson, and to Friedman, Simpson and Smith (1983). The base theory is $\mathsf{RCA}_0$ unless $\mathsf{ACA}_0$ is indicated.
+The following equivalences are admitted here, with the references of Simpson's monograph; those for $\mathsf{ATR}_0$ other than the Ulm resolutions are proved in the course on arithmetical transfinite recursion (:ref{to="transfinite-recursion/well-orderings"}). Most of them were announced by Friedman (1975, 1976); the others are due to Steel, to Simpson, and to Friedman, Simpson and Smith (1983). The base theory is $\mathsf{RCA}_0$ unless $\mathsf{ACA}_0$ is indicated.
 
 | System | Equivalent statement | Simpson |
 | --- | --- | --- |

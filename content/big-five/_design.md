@@ -267,3 +267,7 @@ or avoided; the Kleene–Brouwer ordering was left to computable-ordinals.
   further exercises; 25 new further exercises (section 10). Text references to exercises
   made into `:ref`. No solution needed correction. Durations unchanged (lessons 2, 4, 5
   remain at 50 minutes; their text was not shortened).
+- **2026-11-18: link to the new course.** The survey of equivalents in `atr0-pi11ca0`
+  now points to the core course `transfinite-recursion`, which proves the equivalents of
+  ATR₀ admitted here (except the Ulm resolutions). The lesson is unchanged otherwise; it
+  remains the overview of ATR₀ and Π¹₁-CA₀ for readers who stop at the Big Five.

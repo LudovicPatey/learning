@@ -1,0 +1,26 @@
+title: Combinatorial principles below Ramsey's theorem for pairs
+area: reverse-math
+level: Advanced
+order: 5.5
+prerequisites: [ramsey-theorem, induction-conservation, reducibilities, immunity-growth, randomness-degrees]
+summary: The chain–antichain and ascending–descending sequence principles, their stable and cohesive parts, the Erdős–Moser theorem, DNC functions and weak weak König's lemma, and the separations between them.
+description: >
+  The principles that lie strictly below Ramsey's theorem for pairs and are not
+  equivalent to any of the Big Five: the chain–antichain principle CAC and the
+  ascending–descending sequence principle ADS, with a computable order of type
+  ω + ω* without computable solutions; the theorem of Hirschfeldt and Shore that
+  ADS implies cohesiveness, and the decomposition of ADS and CAC into stable and
+  cohesive parts; the Erdős–Moser theorem, which with ADS gives back Ramsey's
+  theorem for pairs and implies Σ⁰₂ collection; the existence of DNC functions and
+  weak weak König's lemma, characterized in ω-models by randomness; and the
+  separation of ADS from DNR by preservation of the property of computing no DNC
+  function.
+objectives:
+  - State CAC, ADS, EM, DNR and WWKL in second-order arithmetic and place them below RT²₂ or WKL₀
+  - Build a computable linear order of type ω + ω* without computable solutions by a finite injury construction
+  - Prove that ADS implies COH, and decompose ADS and CAC into stable and cohesive parts
+  - Prove that RT²₂ is equivalent to EM + ADS and that EM implies Σ⁰₂ collection
+  - Characterize the ω-models of WWKL₀ by randomness and separate WWKL₀ from WKL₀
+  - Separate ADS from DNR by forcing with ascending sequences and preservation of a weakness property
+  - Measure disjunction by preserved hyperimmunities and compactness by constant-bound immunity, and read separations off both measures
+lessons: [orders, computable-orders, stable-cohesive, erdos-moser, dnr-wwkl, ads-dnr, disjunction-compactness]

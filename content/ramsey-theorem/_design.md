@@ -282,3 +282,7 @@ Erdős–Radó for the canonical Ramsey theorem (case n = 1 only). The other exe
   further exercises of cone-avoidance (it illustrates `thm-dj-cone-avoidance`). 32 new
   further exercises (section 11). References "see the exercises" replaced by `:ref`.
 - **2026-11-17: split of `cone-avoidance`.** The lesson read in about 45 minutes of open text and was stated at 50; its two theorems use different techniques. Mathias forcing and cone avoidance for COH form the new lesson `mathias-cohesiveness` (with `ex-coh-countable-cones`, `ex-mathias-extension`, `ex-coh-omega-model`); `cone-avoidance` (retitled "Strong cone avoidance for the pigeonhole principle") keeps the theorem of Dzhafarov and Jockusch and requires `mathias-cohesiveness`, so that the lessons of other courses that require `ramsey-theorem/cone-avoidance` still have both. `ex-pigeonhole-one-side` becomes its featured exercise. All labels unchanged. Durations recomputed by the open-text rule (AGENTS.md; `npm run durations`): quizzes, solutions, hints and further exercises are no longer counted.
+- **2026-11-18: link to the new course.** The paragraph on the reverse mathematics zoo in
+  `seetapun` now points to the core course `combinatorial-principles`, which treats CAC,
+  ADS, EM, DNR and WWKL₀; the item "other zoo principles beyond a mention" of the
+  exclusions is now covered there.
